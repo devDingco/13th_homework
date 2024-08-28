@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>내장객체실습</title> 
+    <script>
+
+        //내장객체 : 이미 만들어진것
+        function 인증번호요청기능() {
+            const 랜덤한숫자 = Math.random()
+            console.log(랜덤한숫자)
+
+            const 여섯자리숫자 = Math.floor(랜덤한숫자 * 1000000)//소수점아래로 지워라
+            console.log(여섯자리숫자)
+
+            const 인증번호 = String(여섯자리숫자).padStart(6,"0")//6자리로 만들기 없으면 0붙히기
+            // const 인증번호 = String(여섯자리숫자).padStart(6,"*")
+            console.log(인증번호)
+        }
+    </script>
+</head>
+<body>
+    <button onclick="인증번호요청기능()">인증번호요청</button>
+</body>
+</html>

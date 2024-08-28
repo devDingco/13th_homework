@@ -1,0 +1,418 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.backgroundAll {
+    width: 1920px;
+    height: 1208px;
+    background-color: #491449;
+
+}
+
+.headerIconBox {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 16px 0px;
+}
+
+.FristarrowBox {
+    width: 376px;
+    height: 48px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.arrowBox {
+    width: 120px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.searchHelpBox {
+    width: 1360px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchBox01 {
+    width: 920px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    background-color: #955c98;
+    padding: 8px 16px 8px 16px
+}
+
+.inputSearchBox {
+    border: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+    background: transparent;
+    padding-left: 8px;
+}
+
+.inputSearchBox::placeholder {
+    color: #EFE6EF;
+}
+
+.helpBox01 {
+    width: 163px;
+    height: 48px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.helpBox02 {
+    width: 111px;
+    height: 48px;
+    color: #FFFFFF;
+    font-weight: 400;
+    line-height: 24px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    gap: 6px;
+    border: 1px solid #713574;
+    border-radius: 8px;
+    padding: 8px 12px 8px 12px;
+}
+
+.추가 {
+    padding-top: 8px;
+}
+
+
+/* 중앙 */
+.centerBoxFrist {
+    display: flex;
+}
+
+.centerBox01 {
+    width: 1760px;
+    height: 1048px;
+    border-radius: 8px;
+    background-color: #D5BCE4;
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonAll {
+    width: 80px;
+    height: 1048px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentBox01 {
+    width: 40px;
+    height: 448px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.contentBox02 {
+    width: 40px;
+    height: 96px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.이미지박스여러개 {
+    width: 40px;
+    height: 384px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    gap: 16px;
+}
+
+.사이드바버튼 {
+    width: 40px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.사이드버튼글자 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #E4E4E4;
+}
+
+.box01 {
+    width: 400px;
+    height: 1048px;
+    border-radius: 8px;
+    background-color: #713574;
+}
+
+.box01Contents {
+    width: 360px;
+    height: 632px;
+    margin: 20px 20px 396px 20px;
+}
+
+.box01_01 {
+    width: 360px;
+    height: 32px;
+    color: #FFFFFF;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box01_01Img {
+    width: 56px;
+    height: 24px;
+}
+
+.box01Button {
+    width: 360px;
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    border: 0;
+    padding: 8px, 12px, 8px, 12px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #491449;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+
+.코드캠프13기Box {
+    width: 360px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin-top: 24px;
+    align-items: center;
+
+}
+
+.코드캠프13기img {
+    width: 157px;
+    height: 32px;
+}
+
+.코드캠프13기img span {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.수강중btn {
+    width: 66px;
+    height: 32px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight:  700;
+    line-height: 24px;
+    text-align: center;
+}
+
+.가입멤버없음{
+    width: 360px;
+    height: 104px;
+    padding: 8px;
+    text-align: center;
+}
+
+.가입멤버없음글 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #C9AAC9;
+}
+
+.가입하기Btn{
+    width: 126px;
+    height: 40px;
+    background-color: #491449;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-top: 8px;
+}
+
+.채널리스트 {
+    width: 360px;
+    height: 204px;
+    
+}
+
+.채널박스 {
+    width: 360px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap:8px
+}
+
+.채널글자{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.채널구체화 {
+    width: 360px;
+    height: 152px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.채널구체화2 {
+    width: 360px;
+    height: 32px;
+    color:  #D4D3D3;
+    padding: 4px 16px 4px 16px;
+}
+
+.차단멤버 {
+    width: 360px;
+    height: 40px;
+    padding: 4px 0px 4px 0px;
+    display: flex;
+    justify-content: row;
+}
+
+.차단멤버list {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.box02 {
+    width: 1360px;
+    height: 1048px;
+    display: flex;
+    flex-direction: row;
+}
+
+.joinMembershipContent {
+    width: 680px;
+    height: 1048px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 60px 40px 60px;
+}
+
+.codecamp제목 {
+    width: 560px;
+    height: 112px;
+    color: #491449;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 56px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.inputLabelBox {
+    width: 560px;
+    height: 548px;
+    
+}
+
+.inputLabel {
+    width: 448px;
+    height: 44px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.네임 {
+    width: 120px;
+    height: 44px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #333333;
+}
+
+.inputValue {
+    width: 320px;
+    height: 44px;
+    border-radius: 8px;
+    padding: 8px 12px 8px 12px;
+    outline: none;
+    border: 1px solid #c7c7c7;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+
+}
+
+.inputValue::placeholder {
+    color: #ABABAB;
+}
+
+
+
+.인증btn {
+    width: 136px;
+    height: 40px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.inputValue1 {
+    width: 320px;
+    height: 116px;
+}
+
+.inputValue1::placeholder {
+    color: #ABABAB;
+}
+
+.inputLabel01{
+    width: 448px;
+    height: 116px;
+    display: flex;
+    justify-content: center;
+}
+
+.inputLabel02 {
+    width: 448px;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+}
+.imgContent {
+    width: 680px;
+    height: 1048px;
+    box-shadow: 0px 0px 40px 0px #D389FF;
+    
+}
+
+
+

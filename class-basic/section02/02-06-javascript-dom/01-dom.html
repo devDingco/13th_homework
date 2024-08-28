@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>돔(Document => Html문서) 조작하기</title>
+    <script>
+        function 바꾸는기능() {
+            document.getElementById("여기바꿀래요").innerText = "반갑습니다"
+        }
+    </script>
+<body>
+    <div id="여기바꿀래요">안녕하세요</div> <!--보통 자바스크립트는 id를 잘씀-->
+    <button onclick="바꾸는기능()">바꾸자</button>
+</body>
+</html>

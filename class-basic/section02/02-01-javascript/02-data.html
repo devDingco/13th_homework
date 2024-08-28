@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>다양한 데이터 저장실습</title>
+    <script>
+        //1. 변수
+        let 나의이름 = "철수"
+        나의이름 = "영희"
+        // 아래로 내려가면서 같은 변수에 다른 값이 담김
+
+        console.log(나의이름)
+
+        const 친구이름 = "철수"
+        // 친구이름 = "영희"
+
+        console.log(친구이름)
+
+        //2. 변수의 계산
+        const 철수가가진돈 = 1000
+        const 영희가가진돈 = 5000
+        const 총합계 = 철수가가진돈 + 영희가가진돈
+        console.log(총합계)
+
+        const 철수가가진돈2 = "1000"
+        const 영희가가진돈2 = "5000"
+        const 총합계2 = 철수가가진돈2 + 영희가가진돈2
+        console.log(총합계2)
+
+        const 철수가가진돈3 = "1000"
+        const 영희가가진돈3 = 5000
+        const 총합계3 = 철수가가진돈3 + 영희가가진돈3
+        console.log(총합계3)
+
+
+        //3. 객체에 저장하기
+        const 학생증1 = {
+            이름: "철수", 
+            나이: 12,
+            학교: "다람쥐초등학교"
+
+        }
+
+        const 학생증2 = {
+            이름: "영희", 
+            나이: 11,
+            학교: "토끼초등학교"
+
+        }
+
+        const 학생증3 = {
+            이름: "맹구", 
+            나이: 13,
+            학교: "공룡초등학교"
+        }
+
+        console.log(학생증1.이름)
+        console.log(학생증1.나이)
+        console.log(학생증1.학교)
+
+
+        //4. 배열에 저장하기
+        const 사탕바구니 = ["포도맛사탕", "딸기맛사탕"]
+        const 학생증목록 = [학생증1, 학생증2]
+
+        사탕바구니.push("박하맛사탕")
+        console.log(사탕바구니)
+        
+        학생증목록.push(학생증3)
+        console.log(학생증목록)
+
+        console.log(학생증목록.length)
+        console.log(학생증목록[0])
+
+        const 마지막칸번호 = 학생증목록.length-1
+        console.log(학생증목록[2])
+        console.log(학생증목록[학생증목록.length -1 ])
+        console.log(학생증목록[마지막칸번호])
+
+        //5. 배열안의 객체에서 꺼내기
+        console.log(학생증목록[0].나이)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
