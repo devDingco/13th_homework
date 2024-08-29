@@ -88,6 +88,38 @@
     border: 1px solid blue;
 }
 
+.보여주기 {
+    width: 784px;
+    height: 1167px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex: 1 0 0;
+    border: 1px solid black;
+}
+
+.목록들 {
+    display: flex;
+    max-width: 784px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 24px;
+    align-self: stretch;
+    flex-wrap: wrap;
+
+}
+.게시글 {
+    display: flex;
+    min-width: 380px;
+    max-width: 380px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
+}
 .일기쓰기 {
     border-radius: 16px;
     display: flex;
@@ -100,7 +132,6 @@
     align-items: center;
     gap: 40px;
     border: 1px solid #777777;
-    margin-left: 760px;
 }
 
 .일기쓰기사진 {
@@ -118,10 +149,10 @@
     gap: 40px;
     
     align-self: stretch;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
-.기분선택 {
+.기분선택영역 {
     width: 312px;
     height: 108px;
     display: flex;
@@ -129,13 +160,135 @@
     align-items: flex-start;
     gap: 16px;
     align-self: stretch;
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
+}
+
+.질문 {
     font-family: "Pretendard Variable";
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: 24px; /* 120% */    
     letter-spacing: -0.2px;
+}
+
+.기분선택 {
+    width: 312px;
+    height: 68px;
+    display: flex;
+    max-width: 592px;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    gap: 6px;
+    align-self: stretch;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
+    font-size: 18px;
+
+    
+}
+
+.텍스트영역 {
+    width: 312px;
+    height: 256px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    /* border: 1px solid red; */
+}
+.제목영역 {
+    width: 312px;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+/* .제목입력란 {
+    width: 280px;
+    height: 24px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid #ababab;
+    border-radius: 8px;
+} */
+
+.제목텍스트 {
+    width: 280px;
+    height: 24px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid #ababab;
+    border-radius: 8px;
+    width: 280px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.내용영역 {
+    width: 312px;
+    height: 156px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+/* .내용입력란 {
+    width: 280px;
+    height: 128px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid #ababab;
+    border-radius: 8px;
+}    */
+
+.내용텍스트 {
+    width: 280px;
+    height: 128px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid #ababab;
+    border-radius: 8px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+}
+
+.버튼영역 {
+    width: 312px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    /* border: 1px solid gray; */
+}
+
+.버튼클릭 {
+    width: 312px;
+    height: 48px;
+    border-radius: 8px;
 }
 
 
@@ -163,7 +316,7 @@
     align-self: stretch;
     margin-left: 380px;
     margin-top: 20px;
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 .대표 {
     display: flex;
