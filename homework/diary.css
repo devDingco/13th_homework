@@ -1,0 +1,431 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.diarycontainer {
+    display: flex; /* Flexbox 사용 */
+    justify-content: center;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100wh; /* 전체 화면 높이 */
+}
+.whosisdiary{
+    height: 60px;
+    width: 1168px;
+    display: flex;
+    align-items: center;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.18px;
+    margin-bottom: 24px;
+}
+
+.bannerimgcontainer{
+    justify-content: center;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100wh; /* 전체 화면 높이 */
+    height: 240px;
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.bannerimg {
+    height: 240px;
+    width: 1168px;
+    align-self: stretch;
+    border-radius: 24px;
+    background: url('./img/banner.png');
+    margin-bottom: 24px;
+}
+.menucontainer {
+    width: 100wh;
+    height: 48px;
+    gap: 16px;
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-bottom: 42px;
+}
+.menubox {
+    width: 1168px;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    border-bottom: 2px #000;
+    padding: 12px 8px 12px 8px;
+}
+.menu_active {
+    display: flex;
+    padding: 12px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 4px solid #000;
+}
+.menu_inactive {
+    display: flex;
+    padding: 12px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.menu {
+    color: var(--Gray-Gray-400, #ABABAB);
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 100% */
+    letter-spacing: -0.24px;
+}
+
+.center_box{
+    width: 100wh;
+    display: flex;
+    justify-content: center;
+}
+
+.listcontainer {
+    width: 1168px;
+    height: 1167px;
+    position: relative; /* 자식 요소의 절대 위치 기준이 됨 */
+}
+
+.diarylistbox {
+    display: flex;         /* Flexbox 레이아웃 사용 */
+    flex-wrap: wrap;       /* 아이템이 박스 너비를 초과할 경우 다음 줄로 이동 */
+    gap: 24px;             /* 수평 및 수직 간격을 모두 24픽셀로 설정 */
+    width: auto;           /* 컨테이너 너비를 자동으로 설정 */
+    height: auto;
+/* 이 속성은 Flexbox 또는 Grid 컨테이너에 사용되는 것이므로 제거하거나 필요에 맞게 수정하세요 */
+}
+
+.writingboxcontainer {
+    width: 360px;
+    height: 604px;
+    position: absolute; /* 부모를 기준으로 절대 위치 설정 */
+    right: 0; /* 오른쪽에 정렬 */
+    top: 0; /* 필요에 따라 조정, 여기서는 상단에 맞춤 */
+
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF)
+}
+
+.writingboxtext {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 100% */
+    letter-spacing: -0.24px;
+    margin-bottom: 40px;
+}
+
+.howyoufeel {
+    color: #000;
+
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    letter-spacing: -0.2px;
+    margin-bottom: 16px;
+}
+
+.radiobox {
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    gap: 20px; /* 각 줄 사이의 간격 */
+    margin-bottom: 40px;
+}
+input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    border: initial;
+    width: 24px;
+    margin-right: -5px;
+    accent-color: #000000; /* 원하는 색상으로 변경 */
+}
+
+.firstline,
+.secondline {
+    display: flex; /* 가로로 정렬 */
+    gap: 10px; /* 각 라디오 버튼 사이의 간격 (필요에 따라 조정) */
+
+}
+
+.titletext {
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+    margin-bottom: 8px;
+}
+
+#writingtitle {
+    width: 312px;
+    height: 48px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    margin-bottom: 24px;
+}
+
+.contenttext {
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+    margin-bottom: 8px;
+}
+
+#writingcontent {
+    width: 312px;
+    height: 128px;
+
+    display: flex;
+    padding: 12px 16px;
+    align-items: flex-start; /* flex 컨테이너의 자식 요소를 상단에 정렬 */
+    gap: 10px;
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    margin-bottom: 40px;
+
+    box-sizing: border-box; /* padding이 width와 height에 포함되도록 설정 */
+}
+
+/* 플레이스홀더 텍스트 스타일 */
+#wiritingcontent::placeholder {
+    text-align: left; /* 플레이스홀더 텍스트 왼쪽 정렬 */
+}
+
+.submit {
+    width: 312px;
+    height: 48px;
+    background-color: #c7c7c7;
+    color: #F2F2F2;
+    border: none;
+    border-radius: 8px;
+
+
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+
+
+
+
+
+
+.diarybox{
+    width: 380px;
+    height: 373px;
+    padding-bottom: 16px;
+
+}
+.thumbnail_sad{
+    width: 380px;
+    height: 285px;
+    background-image: url("./img/sad.png");
+    background-size: cover;
+    margin-bottom: 16px;
+}
+.thumbnail_surprise{
+    width: 380px;
+    height: 285px;
+    background-image: url("./img/surprise.png");
+    background-size: cover;
+    margin-bottom: 16px;
+
+}
+.thumbnail_angry{
+    width: 380px;
+    height: 285px;
+    background-image: url("./img/angry.png");
+    background-size: cover;
+    margin-bottom: 16px;
+}
+.thumbnail_happy{
+    width: 380px;
+    height: 285px;
+    background-image: url("./img/happy.png");
+    background-size: cover;
+    margin-bottom: 16px;
+}
+.thumbnail_etc{
+    width: 380px;
+    height: 285px;
+    background-image: url("./img/etc.png");
+    background-size: cover;
+    margin-bottom: 16px;
+}
+.textbox {
+    width: 380px;
+    height: 56px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.date_title_container {
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.emotion_sad {
+    color: #28B4E1;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+.emotion_surprise {
+    color: #D59029;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+.emotion_angry {
+    color: var(--Gray-Gray-600, #777);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+.emotion_happy {
+    color: #EA5757;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+.emotion_etc {
+    color: #A229ED;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+.date {
+    color: var(--Gray-Gray-500, #919191);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: -0.14px;
+}
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    flex: 1 0 0;
+    overflow: hidden;
+    color: #000;
+
+    text-overflow: ellipsis;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+.footer {
+    margin-top: 40px;
+    display: flex;
+    padding: 24px 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background: var(--Gray-Gray-50, #F2F2F2);
+}
+.footercontainer {
+    widtH: 1168px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+.footerwhoisdiary {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 80% */
+    letter-spacing: -0.2px;
+}
+.representative {
+    align-self: stretch;
+    color: var(--Gray-Gray-700, #5F5F5F);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 114.286% */
+    letter-spacing: -0.14px;
+}
+.companyinfo{
+    align-self: stretch;
+    color: var(--Gray-Gray-500, #919191);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px; /* 114.286% */
+    letter-spacing: -0.14px;
+}

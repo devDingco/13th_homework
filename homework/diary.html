@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./diary.css">
+    <script src="./diary.js"></script>
+</head>
+<body>
+
+     <div class="diarycontainer">
+        <div class="whosisdiary">민지의다이어리</div>
+    </div>
+
+    <div class="bannerimgcontainer">
+        <div class="bannerimg"></div>
+    </div>
+
+    <div class="menucontainer">
+        <div class="menubox">
+            <div class="menu_active"><div class="menu">일기보관함</div></div>
+            <div class="menu_inactive"><div class="menu">사진보관함</div></div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="center_box">
+            <div class="listcontainer">
+                <!--일기 리스트-->
+                <div class="diarylistbox">
+                    <div class="diarybox">
+                        <div class="thumbnail_sad"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_sad">슬퍼요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diarybox">
+                        <div class="thumbnail_surprise"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_surprise">놀랐어요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diarybox">
+                        <div class="thumbnail_angry"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_angry">화나요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diarybox">
+                        <div class="thumbnail_happy"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_happy">행복해요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diarybox">
+                        <div class="thumbnail_etc"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_etc">슬퍼요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diarybox">
+                        <div class="thumbnail_happy"></div>
+                        <div class="textbox">
+                            <div class="date_title_container">
+                                <div class="emotion_happy">행복해요</div>
+                                <div class="date">2024. 03. 12</div>
+                            </div>
+                            <div class="date_title_container">
+                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                <!--일기 쓰는 곳-->
+                <div class="writingboxcontainer">
+                    <div class="writingboxtext">📍 일기 쓰기</div>
+                    <div class="howyoufeel">오늘은 기분이 어땟나요?</div>
+
+                    <div class="radiobox">
+                        <div class="firstline">
+                            <input type="radio"  name="emotion" id="happy" oninput="inputverify()">행복해요
+                            <input type="radio"  name="emotion" id="sad" oninput="inputverify()">슬퍼요
+                            <input type="radio"  name="emotion" id="surprise" oninput="inputverify()">놀랐어요
+                        </div>
+                        <div class="secondline">
+                            <input type="radio"  name="emotion" id="angry" oninput="inputverify()">화나요
+                            <input type="radio"  name="emotion" id="etc" oninput="inputverify()">기타
+                        </div>
+                    </div>
+
+                    <div class="titletext">제목</div>
+                    <input id="writingtitle" type="text" placeholder="제목을 입력해 주세요." oninput="inputverify()"/>
+
+                    <div class="contenttext">내용</div>
+                    <input id="writingcontent" type="text" placeholder="내용을 입력해주세요." oninput="inputverify()"/>
+
+                    <button class="submit" onclick="submit()">등록하기</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footercontainer">
+                <div class="footerwhoisdiary">민지의 다이어리</div>
+                <div class="representative">대표: (name)</div>
+                <div class="companyinfo">Copyright © 2024. {name} Co., Ltd.</div>
+        </div>
+    </div>
+    
+</body>
+</html>
