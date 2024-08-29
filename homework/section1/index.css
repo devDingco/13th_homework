@@ -10,13 +10,15 @@
 }
 
 .CSS_레이아웃{
-    width: 1920px;
+    width: 100vw;
     height: auto;
     min-height: 100%;
     padding-bottom: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    
 }
 
 
