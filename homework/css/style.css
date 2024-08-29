@@ -1,0 +1,19 @@
+*{
+    margin:0;
+    height:100vh;
+    background-color:#fff;
+}
+header{
+    display:flex;
+    justify-content:center;
+}
+header h1{
+    width:1920px;
+    height:164px;
+    background-color:#000;
+    /* text-align:center; */
+    color:#fff;
+    line-height: 164px;
+    border-radius:24px;
+    font-size:80px;
+}
