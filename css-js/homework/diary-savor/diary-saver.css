@@ -1,0 +1,15 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1920px;
+  height: 1805px;
+  gap: 40px;
+}
+.container {
+  width: 1168px;
+  align-items: center;
+}
