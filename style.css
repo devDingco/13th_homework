@@ -138,6 +138,9 @@ article {
 }
 .post-content {
     padding-left: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .daily {
