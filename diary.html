@@ -4,8 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>다이어리 과제 윤준수</title>
-    <link rel="stylesheet" href="./diary.css" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/diary.css" />
     <script src="./diary.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header class="container-layout"><h1>준수의 다이어리</h1></header>
+    <article class="container-layout banner"></article>
+    <nav class="container-layout">
+      <ul>
+        <li class="active">
+          <button>일기 보관함</button>
+        </li>
+        <li class="">
+          <button>사진 보관함</button>
+        </li>
+      </ul>
+    </nav>
+    <main class="container-layout">
+      <div class="main-content">
+        <ul>
+          <li>
+            <button>
+              <div class="img-wrap">
+                <img src="./public/imgs/angry.svg" alt="" />
+              </div>
+              <div class="info-container">
+                <div class="tag-wrap">
+                  <p class="feeling-tag">슬퍼요</p>
+                  <p class="date-tag">2024.08.29</p>
+                </div>
+                <h3 class="title">
+                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+                </h3>
+              </div>
+            </button>
+          </li>
+          <li>
+            <button>
+              <div class="img-wrap">
+                <img src="./public/imgs/angry.svg" alt="" />
+              </div>
+              <div class="info-container">
+                <div class="tag-wrap">
+                  <p class="feeling-tag">슬퍼요</p>
+                  <p class="date-tag">2024.08.29</p>
+                </div>
+                <h3 class="title">
+                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+                </h3>
+              </div>
+            </button>
+          </li>
+          <li>
+            <button>
+              <div class="img-wrap">
+                <img src="./public/imgs/angry.svg" alt="" />
+              </div>
+              <div class="info-container">
+                <div class="tag-wrap">
+                  <p class="feeling-tag">슬퍼요</p>
+                  <p class="date-tag">2024.08.29</p>
+                </div>
+                <h3 class="title">
+                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+                </h3>
+              </div>
+            </button>
+          </li>
+          <li>
+            <button>
+              <div class="img-wrap">
+                <img src="./public/imgs/angry.svg" alt="" />
+              </div>
+              <div class="info-container">
+                <div class="tag-wrap">
+                  <p class="feeling-tag">슬퍼요</p>
+                  <p class="date-tag">2024.08.29</p>
+                </div>
+                <h3 class="title">
+                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
+                </h3>
+              </div>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <aside>
+        <h2>📍 일기 쓰기</h2>
+        <form action="">
+          <h4>오늘 기분은 어땠나요?</h4>
+          <div class="feeling-radio-wrap">
+            <p>
+              <input id="happy" type="radio" name="feeling" />
+              <label for="happy">행복해요</label>
+            </p>
+            <p>
+              <input id="sad" type="radio" name="feeling" />
+              <label for="sad">슬퍼요</label>
+            </p>
+            <p>
+              <input id="surprised" type="radio" name="feeling" />
+              <label for="surprised">놀랐어요</label>
+            </p>
+            <p>
+              <input id="angry" type="radio" name="feeling" />
+              <label for="angry">화나요</label>
+            </p>
+            <p>
+              <input id="etc" type="radio" name="feeling" />
+              <label for="etc">기타</label>
+            </p>
+          </div>
+          <div class="content-wrap">
+            <p>
+              <label for="" class="label-sm">제목</label>
+              <input id="" type="text" placeholder="제목을 입력해 주세요." />
+            </p>
+            <p>
+              <label for="" class="label-sm">내용</label>
+              <textarea id="" placeholder="내용을 입력해 주세요."></textarea>
+            </p>
+          </div>
+          <button type="submint" disabled>등록하기</button>
+        </form>
+      </aside>
+    </main>
+    <footer>
+      <div class="container-layout">
+        <strong>준수의 다이어리</strong>
+        <p>대표: 윤준수</p>
+        <span>Copyright © 2024. {name} Co., Ltd.</span>
+      </div>
+    </footer>
+  </body>
 </html>
