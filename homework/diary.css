@@ -1,0 +1,19 @@
+.가장큰배경 {
+    width: 1920px;
+    height: 1805px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background-color: green;
+}
+
+.두번째큰배경 {
+    width: 1920px;
+    height: 1605px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    background-color: blue;
+}
