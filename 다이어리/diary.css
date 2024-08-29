@@ -1,0 +1,427 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  position: relative;
+}
+.layout {
+  display: flex;
+  width: 1920px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.header_layout {
+  display: flex;
+  padding: 0px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+}
+.header {
+  display: flex;
+  height: 60px;
+  min-width: 320px;
+  max-width: 1168px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+}
+.logo {
+  display: flex;
+  width: 120px;
+  height: 40px;
+  align-items: center;
+  gap: 10px;
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.18px;
+}
+.header_img_layout {
+  display: flex;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  display: flex;
+  padding: 0px 20px;
+  flex-direction: column;
+}
+.header_img {
+  height: 240px;
+  min-width: 320px;
+  max-width: 1168px;
+  align-self: stretch;
+  border-radius: 24px;
+}
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
+.navigation_menu {
+  display: flex;
+  min-width: 204px;
+  align-items: center;
+  gap: 16px;
+  flex: 1 0 0;
+}
+.diary_storage_menu {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 100% */
+  letter-spacing: -0.24px;
+  display: flex;
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.photo_storage_menu {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 100% */
+  letter-spacing: -0.24px;
+  display: flex;
+  padding: 12px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.main {
+  display: flex;
+  max-width: 1168px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  flex: 1 0 0;
+}
+.diary_entry_container {
+  display: flex;
+  max-width: 784px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.diary_entry {
+  display: flex;
+  min-width: 380px;
+  max-width: 380px;
+  padding-bottom: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
+  border-radius: 16px;
+  background: #fff;
+}
+.diary_cover {
+  display: flex;
+  height: 285px;
+  padding: 12px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 16px;
+}
+.diary_entry_summary {
+  display: flex;
+  padding: 0px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+.emotion_date_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.emotion {
+  color: #28b4e1;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+}
+.date {
+  color: var(--Gray-Gray-500, #919191);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.14px;
+}
+.diary_title_area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  overflow: hidden;
+  color: #000;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.18px;
+}
+.aside {
+  display: flex;
+  width: 360px;
+  min-width: 360px;
+  max-width: 760px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+.diary_entry_title {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 100% */
+  letter-spacing: -0.24px;
+  align-self: stretch;
+}
+.diary_entry_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  align-self: stretch;
+}
+.mood_selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+.mood_selector_title {
+  align-self: stretch;
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 120% */
+  letter-spacing: -0.2px;
+  width: 321px;
+  height: 24px;
+}
+.mood_checkbox_group {
+  display: flex;
+  flex-direction: row;
+  max-width: 592px;
+  align-items: center;
+  align-content: center;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.mood_checkbox {
+  width: 94px;
+  height: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.mood_options {
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  background-image: url("./image/unchecked.svg");
+}
+.mood_options:checked {
+  width: 24px;
+  height: 24px;
+  background-image: url("./image/checked.svg");
+}
+.mood_text {
+  color: var(--Gray-Gray-800, #333);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 111.111% */
+  letter-spacing: -0.18px;
+}
+.diary_textArea {
+  width: 312px;
+  height: 256px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+.diary_title_group {
+  width: 312px;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+.diary_title {
+  width: 312px;
+  height: 20px;
+  color: var(--Gray-Gray-800, #333);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  align-self: stretch;
+}
+.diary_title_window {
+  width: 312px;
+  height: 48px;
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  outline: none;
+}
+.diary_title_window::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.diary_contents_group {
+  width: 312px;
+  height: 156px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+.diary_contents {
+  width: 312px;
+  height: 20px;
+  color: var(--Gray-Gray-800, #333);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+  align-self: stretch;
+}
+.diary_contents_window {
+  display: flex;
+  height: 128px;
+  padding: 12px 16px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  outline: none;
+  overflow: hidden;
+  resize: none;
+}
+.diary_contents_window::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.register_button {
+  width: 312px;
+  height: 48px;
+  color: var(--Gray-Gray-50, #f2f2f2);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  display: flex;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--Gray-Gray-300, #c7c7c7);
+  border: none;
+}
+.footer_layout {
+  width: 1920px;
+  height: 160px;
+  display: flex;
+  padding: 24px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--Gray-Gray-50, #f2f2f2);
+}
+.footer {
+  width: 1168px;
+  height: 112px;
+  display: flex;
+  max-width: 1168px;
+  flex-direction: column;
+  align-items: start;
+  gap: 32px;
+}
+.footer_title {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 80% */
+  letter-spacing: -0.2px;
+}
+.footer_representative {
+  gap: 8px;
+  color: var(--Gray-Gray-700, #5f5f5f);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.footer_copyright {
+  color: var(--Gray-Gray-500, #919191);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: -0.14px;
+}
