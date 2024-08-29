@@ -23,55 +23,7 @@
     </nav>
     <main class="container-layout">
       <div class="main-content">
-        <ul>
-          <li>
-            <button>
-              <div class="img-wrap">
-                <img src="./public/imgs/angry.svg" alt="" />
-              </div>
-              <div class="info-container">
-                <div class="tag-wrap">
-                  <p class="feeling-tag">슬퍼요</p>
-                  <p class="date-tag">2024.08.29</p>
-                </div>
-                <h3 class="title">
-                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                </h3>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button>
-              <div class="img-wrap">
-                <img src="./public/imgs/angry.svg" alt="" />
-              </div>
-              <div class="info-container">
-                <div class="tag-wrap">
-                  <p class="feeling-tag">슬퍼요</p>
-                  <p class="date-tag">2024.08.29</p>
-                </div>
-                <h3 class="title">
-                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                </h3>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button>
-              <div class="img-wrap">
-                <img src="./public/imgs/angry.svg" alt="" />
-              </div>
-              <div class="info-container">
-                <div class="tag-wrap">
-                  <p class="feeling-tag">슬퍼요</p>
-                  <p class="date-tag">2024.08.29</p>
-                </div>
-                <h3 class="title">
-                  타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                </h3>
-              </div>
-            </button>
-          </li>
+        <ul id="diaryList">
           <li>
             <button>
               <div class="img-wrap">
@@ -92,11 +44,11 @@
       </div>
       <aside>
         <h2>📍 일기 쓰기</h2>
-        <form action="">
+        <form id="diaryForm" onsubmit="addDiary(event); false;">
           <h4>오늘 기분은 어땠나요?</h4>
           <div class="feeling-radio-wrap">
             <p>
-              <input id="happy" type="radio" name="feeling" />
+              <input id="happy" type="radio" name="feeling" checked />
               <label for="happy">행복해요</label>
             </p>
             <p>
@@ -118,15 +70,22 @@
           </div>
           <div class="content-wrap">
             <p>
-              <label for="" class="label-sm">제목</label>
-              <input id="" type="text" placeholder="제목을 입력해 주세요." />
+              <label for="title" class="label-sm">제목</label>
+              <input
+                id="title"
+                type="text"
+                placeholder="제목을 입력해 주세요." />
             </p>
             <p>
-              <label for="" class="label-sm">내용</label>
-              <textarea id="" placeholder="내용을 입력해 주세요."></textarea>
+              <label for="content" class="label-sm">내용</label>
+              <textarea
+                id="content"
+                placeholder="내용을 입력해 주세요."></textarea>
             </p>
           </div>
-          <button type="submint" disabled>등록하기</button>
+          <button type="submint" id="submitBtn" class="none" disabled>
+            등록하기
+          </button>
         </form>
       </aside>
     </main>

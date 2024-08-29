@@ -228,6 +228,15 @@ main aside form button {
   color: #f2f2f2;
 }
 
+main aside form button#submitBtn.none {
+  background: #c7c7c7;
+  color: #f2f2f2;
+}
+main aside form button#submitBtn.active {
+  background: #333;
+  color: #f2f2f2;
+}
+
 footer {
   width: 100%;
   padding: 24px 20px;
