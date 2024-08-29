@@ -2,17 +2,14 @@
 .가장큰배경 {
     display: flex;
     width: 1920px;
-    height: 1805px;
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    flex-shrink: 0; 
-    border: 1px solid orange
+    flex-shrink: 0;
+
 }
 
 .탑 {
-    width: 1920px;
-    height: 1605px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -85,7 +82,7 @@
     align-items: flex-start;
     gap: 24px;
     align-self: stretch;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .보여주기 {
@@ -108,7 +105,6 @@
     gap: 24px;
     align-self: stretch;
     flex-wrap: wrap;
-
 }
 .게시글 {
     display: flex;
@@ -316,7 +312,6 @@
     align-self: stretch;
     margin-left: 380px;
     margin-top: 20px;
-    border: 1px solid red;
 }
 .대표 {
     display: flex;
