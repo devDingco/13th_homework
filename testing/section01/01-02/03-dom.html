@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title> 자바스크립트 로드 실습 </title>
+    <script>
+        window.onload = () => {
+            const myName = prompt("이름을 입력하세요.")
+            console.log(myName);
+            document.getElementById("HTML_TITLE").innerText = myName;
+        }
+
+        const newProfile = () => {
+            document.getElementById("HTML_PROFILE").innerText = document.getElementById("HTML_INPUT").value;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div>
+            <b id="HTML_TITLE"></b>의 다이어리에 오신 것을 환영합니다.
+        </div>
+
+        <div id="HTML_PROFILE"></div>
+        <input type="text" id="HTML_INPUT" />
+        <button onclick="newProfile()">등록하기</button>
+    </div>
+</body>
+</html>
