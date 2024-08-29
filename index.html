@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치영의 일기장</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body class="noto-sans-kr">
+    <header>
+        <div class="top-title bar">
+            <p>
+                치영의 다이어리
+            </p>
+        </div>
+        <div class="main-banner bar">
+            <div class="main-banner-bg-img">
+        </div>
+    </header>
+    <main>
+        <div class="tab-view bar">
+            <button class="tab-view btn active">일기보관함</button>
+            <button class="tab-view btn" disabled>사진보관함</button>
+        </div>
+        <div class="flexcontainer">
+            <div class="flexchild-left"> 
+                <ul class="diary-listview flexlist">
+                    <li class="diary-listitem flexchild">
+                        <div class="diary-listitem-bg"></div>
+                        <div class="diary-listitem-status">
+                            <span>슬퍼요</span>
+                            <span>2019.03.21</span>
+                        </div>
+                        <div class="diary-listitem-summary">
+                            <p>타이틀영역입니다.한줄까지만노출됩니다</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flexchild-right">
+                <form class="diary-util">
+                    <p class="diary-util title">
+                        📍 일기 쓰기
+                    </p>
+                    <p class="diary-util subtitle">
+                        오늘 기분은 어땟나요?
+                    </p>
+                    <div class="diary-util flexlist">
+                        <label class="radio-option">
+                            <input class="radio-input" checked type="radio" name="emotion">
+                            <p class="radio-string">행복해요</p>
+                        </label>
+                        <label class="radio-option">
+                            <input class="radio-input" type="radio" name="emotion">
+                            <p class="radio-string">슬퍼요</p>
+                        </label>
+                        <label class="radio-option">
+                            <input class="radio-input" type="radio" name="emotion">
+                            <p class="radio-string">놀랐어요</p>
+                        </label>
+                        <label class="radio-option">
+                            <input class="radio-input" type="radio" name="emotion">
+                            <p class="radio-string">화나요</p>
+                        </label>
+                        <label class="radio-option">
+                            <input class="radio-input" type="radio" name="emotion">
+                            <p class="radio-input-string">기타</p>
+                        </label>
+                    </div>
+                    <label class="text-field">
+                        <p class="text-input-string">제목</p>
+                        <input class="text-input" type="text" name="title" placeholder="제목을 입력해 주세요.">
+                    </label>
+                    <label class="text-field">
+                        <p class="text-input-string">내용</p>
+                        <textarea class="text-input text-area" name="content" rows="5" cols="25" placeholder="내용을 입력해 주세요."></textarea>
+                    </label>
+                    <button class="submit btn">
+                        <p>
+                            등록하기
+                        </p>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <p class="footer title">치영의 다이어리</p>
+            <p class="footer subtitle">대표: jcy</p>
+            <p class="footer content">Copyright &copy 2024. jcy Co., Ltd.</p>
+        </div>
+    </footer>
+</body>
+</html>
