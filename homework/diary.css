@@ -1,20 +1,174 @@
+
 .가장큰배경 {
+    display: flex;
     width: 1920px;
     height: 1805px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    background-color: green;
+    flex-shrink: 0; 
+    border: 1px solid orange
 }
 
-.두번째큰배경 {
+.탑 {
     width: 1920px;
     height: 1605px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
     align-items: flex-start;
-    background-color: blue;
+    gap: 24px;
+    align-self: stretch;
+    
 }
 
+.헤더 {
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.나의다이어리 {
+    display: flex;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.제목 {
+    display: flex;
+    width: 120px;
+    height: 40px;
+    align-items: center;
+    gap: 10px;
+}
+
+.로고파트 {
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.메뉴 {
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.메뉴이름 {
+    display: flex;
+    width: 1150px;
+    align-items: center;
+    align-content: center;
+    gap: 16px;
+    flex: 1 0 0;
+}
+
+.메인화면 {
+    display: flex;
+    width: 1168px;
+    height: 1167px;
+    margin-left: 380px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    border: 1px solid blue;
+}
+
+.일기쓰기 {
+    border-radius: 16px;
+    display: flex;
+    width: 360px;
+    height: 604px;
+    min-width: 360px;
+    max-width: 760px;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    border: 1px solid #777777;
+    margin-left: 760px;
+}
+
+.일기쓰기사진 {
+    width: 312px;
+    height: 24px;
+    
+}
+
+.작성란 {
+    display: flex;
+    width: 312px;
+    height: 404px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    
+    align-self: stretch;
+    border: 1px solid green;
+}
+
+.기분선택 {
+    width: 312px;
+    height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    border: 1px solid pink;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */    
+    letter-spacing: -0.2px;
+}
+
+
+
+
+
+.하단배너 {
+    width: 1920px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background-color: #f2f2f2;
+}
+
+.하단배너꾸미기 {
+    display: flex;
+    max-width: 1168px;
+    height: 112px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    align-self: stretch;
+    margin-left: 380px;
+    margin-top: 20px;
+    /* border: 1px solid red; */
+}
+.대표 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
