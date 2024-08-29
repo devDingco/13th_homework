@@ -13,11 +13,10 @@
     width: 1920px;
     height: auto;
     min-height: 100%;
-    padding-bottom: 160px;
+    padding-bottom: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 24px;
 }
 
 
@@ -151,6 +150,13 @@
     flex-wrap: wrap;
     margin-bottom: 40px;
     gap: 20px;
+}
+
+.CSS_라디오인풋 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 }
 
 .CSS_제목 {
