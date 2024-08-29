@@ -191,30 +191,38 @@
     border-radius: 8px;
     outline: none;
     border: 0;
-    padding: 8px, 12px, 8px, 12px;
     font-size: 20px;
     font-weight: 600;
-    line-height: 24px;
     color: #491449;
     margin-top: 24px;
     margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
+.첫번째전체박스 {
+    width: 360px;
+    height: 488px;
+}
 
 .코드캠프13기Box {
     width: 360px;
     height: 40px;
     display: flex;
     justify-content: space-between;
-    align-content: center;
     margin-top: 24px;
     align-items: center;
-
 }
 
 .코드캠프13기img {
     width: 157px;
     height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .코드캠프13기img span {
@@ -242,6 +250,19 @@
     text-align: center;
 }
 
+.가입멤버있음 {
+    width: 360px;
+    height:40px;
+    padding: 0px 16px 0px 16px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0px;
+}
+
 .가입멤버없음글 {
     font-size: 14px;
     font-weight: 400;
@@ -260,6 +281,7 @@
     line-height: 24px;
     margin-top: 8px;
 }
+
 
 .채널리스트 {
     width: 360px;
@@ -337,18 +359,70 @@
     text-align: center;
     margin-bottom: 40px;
 }
+
 .inputLabelBox {
     width: 560px;
-    height: 548px;
-    
+    height: 660px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .inputLabel {
     width: 448px;
     height: 44px;
-    margin-bottom: 20px;
     display: flex;
+    flex-direction: row;
+    gap: 8px;
+
 }
+
+.인증번호버튼 {
+    width: 448px;
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputLabel001 {
+    width: 448px;
+    height: 44px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.인증btn01 {
+    width: 136px;
+    height: 40px;
+    border: 1px solid #491449;
+    border-radius: 8px;
+    padding: 8px 0px 8px 0px;
+    color: #491449;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+}
+
+.인증btn02 {
+    width: 136px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px 8px 12px;
+    color: #F2F2F2;
+    background-color: #C7C7C7;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+}
+
 
 .네임 {
     width: 120px;
@@ -357,6 +431,9 @@
     font-weight: 500;
     line-height: 24px;
     color: #333333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .inputValue {
@@ -365,7 +442,7 @@
     border-radius: 8px;
     padding: 8px 12px 8px 12px;
     outline: none;
-    border: 1px solid #c7c7c7;
+    border: 1px solid #C7C7C7;
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
@@ -376,22 +453,22 @@
     color: #ABABAB;
 }
 
-
-
-.인증btn {
-    width: 136px;
-    height: 40px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-}
-
-.inputValue1 {
+.inputValueMyself {
     width: 320px;
     height: 116px;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    padding: 8px 12px 8px 12px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: start;
+
 }
 
-.inputValue1::placeholder {
-    color: #ABABAB;
+.inputValueMyself::placeholder {
+    text-align: start;
+    color: #C7C7C7;
 }
 
 .inputLabel01{
@@ -401,12 +478,82 @@
     justify-content: center;
 }
 
-.inputLabel02 {
-    width: 448px;
-    height: 44px;
+.성별구분 {
+    width: 168px;
+    height: 40px;
     display: flex;
     flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333333;
 }
+
+.radiocho{
+    width: 64px;
+    height: 24px;
+    display: flex;
+    gap: 8px;
+    line-height: 29px;
+}
+
+.radiocho input {
+    width: 24px;
+    height: 24px;
+}
+
+.joinBox {
+    width: 560px;
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.가입체크박스 {
+    width: 448px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.가입체크박스 input {
+    width: 18px;
+    height: 18px;
+}
+
+.joinBoxBtn {
+    width: 448px;
+    height: 48px;
+    background-color: #C7C7C7;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    color: #F2F2F2;
+}
+
+.joinBoxBtn:hover{
+    width: 448px;
+    height: 48px;
+    background-color: #491449;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
 .imgContent {
     width: 680px;
     height: 1048px;
