@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>플렉스박스 실습</title>
+    <style>
+        body {
+            height: 100vh;
+        }
+        .CSS_부모 {
+            background-color: aqua;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            /* height: 500px; /*세로로 플렉스를 사용하려면 부모의 세로크기를 꼭 주어야 한다(세로를 % 로 줄경우 그 부모가 있어야하며 그 부모의 크기또한 있어야함)
+            height: 100vh; vh - veiwport height 화면 기준 세로를 의미  vw - veiwport width 화면 기준 너비를 의미 */
+
+            height: 100%;
+            /* % 가 안먹히는 이유: 부모의 크기가 있는지! 확인!, 부모를 기준으로 몇 %를 의미  */
+
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_부모">
+        <div>메뉴아이콘</div>
+        <div>알림아이콘</div>
+    </div>
+    
+</body>
+</html>
