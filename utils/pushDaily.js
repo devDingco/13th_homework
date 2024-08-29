@@ -43,7 +43,7 @@ const dailyArray = [
         moodEng: "surprise",
         mood: "놀랐어요",
         date: today,
-        title: "타이틀 영역입니다.",
+        title: "타이틀영역입니다.2131232132131231232131221312321312312",
         content: "컨텐츠 영역입니다.",
         img: `./img/surprise.png`,
     },
