@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+.real-entire {
+  width: 1920px;
+  height: 1805px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+}
+.entire {
+  width: 1168px;
+  height: 1805px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px 0px;
+  /* background-color: antiquewhite; */
+}
+.body {
+  height: 1605px;
+  display: flex;
+  gap: 24px 0px;
+  opacity: 0px;
+  /* background-color: darksalmon; */
+}
+
+.title-frame {
+  height: 60px;
+  gap: 10px 0px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+}
+.main-frame {
+  height: 1521px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: beige; */
+}
+.top-image {
+  height: 240px;
+}
+.main-content {
+  height: 1257px;
+  display: flex;
+  flex-direction: column;
+  gap: 42px 0px;
+  /* background-color: darkseagreen; */
+}
+.menu-area {
+  height: 48px;
+  display: flex;
+  gap: 0px 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.menu {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-bottom: 2px solid black;
+  padding: 12px 8px 12px 8px;
+}
+.menu:disabled {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 12px 8px 12px 8px;
+  color: #ababab;
+}
+.content-area {
+  width: 1168px;
+  height: 1167px;
+  display: flex;
+  gap: 0px 24px;
+  /* background-color: darksalmon; */
+}
+.left-area {
+  width: 784px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  /* background-color: rgb(165, 153, 136); */
+}
+/* #list-content-aria {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+} */
+.content-list {
+  width: 380px;
+  height: 373px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px 0px;
+  border-radius: 16px;
+  /* background-color: #d4d3d3; */
+}
+.content-img {
+  height: 285px;
+}
+.content-text-area {
+  width: 364;
+  display: flex;
+  flex-direction: column;
+  gap: 8px 0px;
+}
+.content-text-row {
+  display: flex;
+  justify-content: space-between;
+}
+.text-status {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.text-date {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #919191;
+}
+.text-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.right-area {
+  width: 360px;
+  /* background-color: crimson; */
+}
+.right-create-area {
+  height: 604px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #d4d3d3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.create-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.right-create-form {
+  height: 404px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px 0px;
+}
+.create-select-emotion {
+  height: 108px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px 0px;
+}
+.emotion-question {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.emotion-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.a-radio {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.a-radio input {
+  width: 20px;
+  height: 20px;
+}
+.a-radio label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333333;
+}
+.create-input-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px 0px;
+  height: 256px;
+}
+
+.input-text-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-text-area div {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+#input-box-title {
+  width: 312px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+}
+#input-box-content {
+  width: 312px;
+  height: 128px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+}
+#right-create-button:disabled {
+  width: 312px;
+  height: 56px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #c7c7c7;
+  color: #f2f2f2;
+  border: none;
+}
+#right-create-button {
+  width: 312px;
+  height: 56px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #3a84e4;
+  color: #f2f2f2;
+  border: none;
+}
+.footer-frame {
+  height: 160px;
+  width: 100%;
+  gap: 32px;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+}
+.footer-area {
+  width: 1168px;
+}
+.ceo-name {
+}
+.copyright {
+}
