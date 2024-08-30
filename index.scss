@@ -121,8 +121,10 @@ nav {
 section {
   display: flex;
   gap: 24px;
-  padding-bottom: 40px;
   align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 40px;
 
   .empty {
     text-align: center;
