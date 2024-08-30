@@ -75,8 +75,9 @@
 }
 
 .contents_left_item {
-    width: 784px;
-
+    /* width: 784px; */
+    width: 816px;
+    
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -84,26 +85,27 @@
 
 .diary {
     width: 380px;
-    height: 373px;
-
+    max-width: 412px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
+    padding-bottom: 16px;
 
-.diary_mood_img {
-    width: 380px;
-    height: 285px;
-
-    border-radius: 16px;
-
-    transition: filter, transform;
+    transition: filter, width, height;
     transition-duration: 0.5s;
 }
 
-.diary_mood_img:hover {
-    filter: blur(5px);
-    transform: scaleX(1.1) scaleY(1.1);
+.diary:hover {
+    width: 412px;
+    height: 396px;
+}
+
+.diary:hover .diary_mood_img {
+    filter: blur(3px);
+}
+
+.diary_mood_img {
+    border-radius: 16px;
 }
 
 .diary_title {
@@ -162,7 +164,6 @@
 
 /* 가운데 내용의 오른쪽 "일기 쓰기" 아이템 배치 */
 .contents_right_item {
-    width: 360px;
     height: 604px;
 
     padding: 24px;
