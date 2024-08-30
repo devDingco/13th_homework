@@ -1,18 +1,18 @@
 @font-face {
     font-family: "medium";
-    src: url(./font/Pretendard-Medium.otf) format("opentype");
+    src: url(../font/Pretendard-Medium.otf) format("opentype");
 }
 @font-face {
     font-family: "bold";
-    src: url(./font/Pretendard-Bold.otf) format("opentype");
+    src: url(../font/Pretendard-Bold.otf) format("opentype");
 }
 @font-face {
     font-family: "semibold";
-    src: url(./font/Pretendard-SemiBold.otf) format("opentype");
+    src: url(../font/Pretendard-SemiBold.otf) format("opentype");
 }
 @font-face {
     font-family: "extrabold";
-    src: url(./font/Pretendard-ExtraBold.otf) format("opentype");
+    src: url(../font/Pretendard-ExtraBold.otf) format("opentype");
 }
 @font-face {
     font-family: "Pretendard-Regular";
@@ -38,7 +38,6 @@ body {
 }
 main {
     width: 100dvw;
-    height: 90dvh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -99,10 +98,22 @@ article {
     gap: 20px;
 }
 .post-container {
-    width: 48%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    text-decoration: none;
+}
+.post-img {
+    width: 100%;
+    max-height: 300px
+    height: 100%;
+    transition: width 0.5s, height 0.5s, filter 0.5s;
+}
+.post-img:hover {
+    width: 110%;
+    height: 1;
+    filter: blur(4px);
 }
 .post-title {
     width: 100%;
@@ -141,12 +152,13 @@ article {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: black;
 }
 
 .daily {
     width: 30%;
     max-height: 55dvh;
-    height: 440px;
+    height: 460px;
     padding: 24px;
     display: flex;
     flex-direction: column;

@@ -1,0 +1,132 @@
+@font-face {
+    font-family: "medium";
+    src: url(../font/Pretendard-Medium.otf) format("opentype");
+}
+@font-face {
+    font-family: "bold";
+    src: url(../font/Pretendard-Bold.otf) format("opentype");
+}
+@font-face {
+    font-family: "semibold";
+    src: url(../font/Pretendard-SemiBold.otf) format("opentype");
+}
+@font-face {
+    font-family: "extrabold";
+    src: url(../font/Pretendard-ExtraBold.otf) format("opentype");
+}
+@font-face {
+    font-family: "Pretendard-Regular";
+    src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "medium", sans-serif;
+}
+body {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+main {
+    width: 100dvw;
+    height: 90dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-left: 10dvw;
+    padding-right: 10dvw;
+}
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.header-text-container {
+    display: flex;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    align-items: center;
+}
+.header-text {
+    font-family: "semibold", sans-serif;
+}
+article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.article-header {
+    padding-bottom: 12px;
+    font-family: "bold", sans-serif;
+    font-size: 24px;
+    border-bottom: 2px solid black;
+}
+.article-mood-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.article-mood {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.post-font-sad {
+    color: #28b4e1;
+    font-family: "semibold", sans-serif;
+}
+.post-font-surprise {
+    color: #d59029;
+    font-family: semibold, sans-serif;
+}
+.post-font-happy {
+    color: #ea5757;
+    font-family: semibold, sans-serif;
+}
+.post-font-etc {
+    color: #a229ed;
+    font-family: semibold, sans-serif;
+}
+.post-font-angry {
+    color: #777777;
+    font-family: semibold, sans-serif;
+}
+.post-date {
+    color: #919191;
+    font-family: semibold, sans-serif;
+}
+.post-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+.post-font {
+    color: rgba(145, 145, 145, 1);
+}
+.post-update {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+.update-button {
+    padding: 8px;
+    border: 1px solid rgba(212, 211, 211, 1);
+    border-radius: 8px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
