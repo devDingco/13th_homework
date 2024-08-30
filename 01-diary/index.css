@@ -1,0 +1,339 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    width: 1920px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.header_title {
+    width: 1168px;
+    height: 60px;
+
+    font-weight: 700;
+    font-size: 18px;
+
+    display: flex;
+    align-items: center;
+}
+
+.banner {
+    width: 1920px;
+    height: 240px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.banner_img {
+    width: 1168px;
+    height: 240px;
+}
+
+.body {
+    width: 1920px;
+    height: 1257px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 42px;
+}
+
+.navi {
+    width: 1920px;
+    height: 48px;
+    
+    display: flex;
+    justify-content: center;
+    padding: 0px 20px 0px 20px;
+}
+
+.navi_items {
+    width: 1168px;
+    height: 48px;
+
+    display: flex;
+    gap: 16px;
+}
+
+.navi_item {
+    width: 120px;
+    height: 48px;
+
+    color: #ABABAB;
+
+    font-weight: 700;
+    font-size: 24px;
+
+    padding: 12px 8px 12px 8px;
+}
+
+#navi_selected_item {
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+/* 가운데 일기와 일기 쓰기 컨텐츠 */
+.contents {
+    width: 1168px;
+    height: 1167px;
+
+    display: flex;
+    gap: 24px;
+}
+
+.contents_left_item {
+    width: 784px;
+    height: 1167px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.diary {
+    width: 380px;
+    height: 373px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.diary_mood_img {
+    width: 380px;
+    height: 285px;
+
+    border-radius: 16px;
+}
+
+.diary_title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.diary_sub_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.diary_mood_happy {
+    font-weight: 600;
+    font-size: 14px;
+    color: #EA5757;
+}
+
+.diary_mood_sad {
+    font-weight: 600;
+    font-size: 14px;
+    color: #28B4E1;
+}
+
+.diary_mood_surprised {
+    font-weight: 600;
+    font-size: 14px;
+    color: #D59029;
+}
+
+.diary_mood_angry {
+    font-weight: 600;
+    font-size: 14px;
+    color: #777777;
+}
+
+.diary_mood_other {
+    font-weight: 600;
+    font-size: 14px;
+    color: #A229ED;
+}
+
+
+
+.diary_date {
+    font-weight: 400;
+    font-size: 14px;
+    color: #919191;
+}
+
+.diary_main_title {
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
+}
+
+/* 가운데 내용의 오른쪽 "일기 쓰기" 아이템 배치 */
+.contents_right_item {
+    width: 360px;
+    height: 604px;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.write_title {
+    font-weight: 700;
+    font-size: 24px;
+
+    color: black;
+}
+
+.write_diary {
+    width: 312px;
+    height: 404px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.write_mood_select {
+    width: 312px;
+    height: 108px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.write_mood_select_title {
+    width: 312px;
+    height: 24px;
+
+    color: black;
+
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.write_mood_select_buttonList {
+    width: 316px;
+    height: 68px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.write_mood_select_button {
+    width: 94px;
+    height: 24px;
+
+    display: flex;
+    gap: 8px;
+}
+
+.write_mood_name {
+    font-weight: 500;
+    font-size: 18px;
+    color: #333333;
+}
+
+.diary_write_items {
+    width: 312px;
+    height: 256px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.diary_title_input {
+    width: 312px;
+    height: 76px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.diary_text_input {
+    width: 312px;
+    height: 156px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.diary_title_input_title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+}
+
+.diary_title_input_text {
+    width: 312px;
+    height: 48px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px
+}
+
+.diary_title_input_textarea {
+    width: 312px;
+    height: 128px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px
+}
+
+.diary_write_button {
+    background-color: #C7C7C7;
+    font-weight: 600;
+    font-size: 18px;
+    color: #F2F2F2;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px 8px 10px;
+}
+
+/* 바닥글 영역 */
+
+.footer {
+    width: 1920px;
+    height: 160px;
+
+    background-color: #F2F2F2;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 24px 20px 24px 20px;
+}
+
+.footer_information {
+    width: 1168px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.page_title {
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+}
+
+.exponent_title {
+    font-weight: 400;
+    font-size: 14px;
+    color: #5F5F5F;
+}
+
+.copyright_title {
+    font-weight: 300;
+    font-size: 14px;
+    color: #919191;
+}
