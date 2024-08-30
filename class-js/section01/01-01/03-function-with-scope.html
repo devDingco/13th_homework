@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>함수와 스코프 실습</title>
+    <script>
+
+        // 기본함수 만들기
+        function 더하기기능() {
+            const a = 1
+            const b = 2
+            const 결과 = a + b
+
+            console.log(결과)
+        }
+
+        더하기기능() // 기본함수 실행하기
+
+        // 함수 만들기 => 매개변수 받기
+        function 더하기기능2(a, b) {
+            const 결과 = a + b
+            console.log(결과)
+        }
+
+        더하기기능2(10,200) // 함수 실행하기 => 인자 전달
+
+        // 함수 연습하기 => 스코프
+        function 바깥에함수() {
+            const 바나나 = 10
+            console.log(바나나)
+
+            function 안쪽에함수() {
+                const 바나나 = 50 // 여기 주석처리하면 그 밖에 바나나 변수를 가져옴 그래서 값이 10이됨 이게 바로 <<스코프체인>>
+                console.log(바나나)
+            }
+            안쪽에함수()
+
+            console.log(바나나)
+            
+        }
+        바깥에함수()
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
