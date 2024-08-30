@@ -93,7 +93,9 @@ header {
   img {
     position: absolute;
     width: 100%;
-    bottom: -150%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
