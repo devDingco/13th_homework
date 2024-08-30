@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>일기보관함_메인</title>
+		<link href="./section01.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="background">
+			<div class="outerbox">
+				<div class="wrapper">
+					<div class="wrapper__header">민지의 다이어리</div>
+					<img class="banner" src="./Rectangle 1.svg" />
+					<div class="tab">
+						<div class="diarystore">일기보관함</div>
+						<div class="photostore">사진보관함</div>
+					</div>
+					<div class="wrapper__body">
+						<div class="wrapper__left__body">
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/sad.png" />
+								<span class="mood-feel" id="sad">슬퍼요</span>
+								<span class="mood-date">2024. 03. 12</span>
+								<div class="mood-title">
+									타이틀 영역입니다. 한줄까지만 노출됩니다.
+								</div>
+							</div>
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/sad.png" />
+								<span class="mood-feel" id="mad">화나요</span>
+								<span class="mood-date">2024. 03. 12</span>
+								<div class="mood-title">
+									타이틀 영역입니다. 한줄까지만 노출됩니다.
+								</div>
+							</div>
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/etc.png" />
+								<span class="mood-feel" id="etc">기타</span>
+								<dispanv class="mood-date">2024. 03. 12</dispanv>
+								<div class="mood-title">
+									타이틀 영역입니다. 한줄까지만 노출됩니다.
+								</div>
+							</div>
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/surprise.png" />
+								<span class="mood-feel" id="surprised">놀랐어요</span>
+								<span class="mood-date">2024. 03. 12</span>
+								<div class="mood-title">타이틀 영역입니다.</div>
+							</div>
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/happy.png" />
+								<span class="mood-feel" id="happy">행복해요</span>
+								<span class="mood-date">2024. 03. 12</span>
+								<div class="mood-title">타이틀 영역입니다.</div>
+							</div>
+							<div class="moodWrapper__item">
+								<img class="mood-thumbnail" src="./img/happy.png" />
+								<span class="mood-feel" id="happy">행복해요</span>
+								<span class="mood-date">2024. 03. 12</span>
+								<div class="mood-title">타이틀 영역입니다.</div>
+							</div>
+						</div>
+						<div class="wrapper__right__body">
+							<!-- <div class="moodWrapper__item"> -->
+							<div class="diary">📍 일기 쓰기</div>
+							<div class="diary-feel">
+								오늘 기분은 어땠나요?
+								<div class="selectbox">
+									<span class="diary-select">
+										<input type="radio" name="feel" id="happy" />
+										<label for="happy">행복해요</label>
+									</span>
+									<span class="diary-select">
+										<input type="radio" name="feel" id="sad" />
+										<label for="happy">슬퍼요</label>
+									</span>
+									<span class="diary-select">
+										<input type="radio" name="feel" id="surprised" />
+										<label for="happy">놀랐어요</label>
+									</span>
+									<span class="diary-select">
+										<input type="radio" name="feel" id="mad" />
+										<label for="happy">화나요</label>
+									</span>
+									<span class="diary-select">
+										<input type="radio" name="feel" id="etc" />
+										<label for="happy">기타</label>
+									</span>
+								</div>
+								<div class="diary-title">제목</div>
+								<input
+									type="text"
+									id="title"
+									placeholder="제목을 입력해주세요."
+								/>
+								<div class="diary-content">내용</div>
+								<input
+									type="text"
+									id="content"
+									placeholder="내용을 입력해주세요."
+								/>
+							</div>
+							<button class="diary-submit" disabled>
+								<img class="submit" src="./버튼 영역.svg" />
+							</button>
+							<!-- </div> -->
+						</div>
+					</div>
+					<img class="wrapper__footer" src="./Footer.svg" />
+				</div>
+			</div>
+		</div>
+		<script src="./section01.js"></script>
+	</body>
+</html>
