@@ -12,29 +12,31 @@
   box-sizing: border-box;
   font-family: 'RixXladywatermelonR';
 }
+#diaryName {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+}
 .container {
   padding: 20px 200px;
   overflow: scroll;
+  /* display: flex;
+  flex-direction: column;
+  gap: 30px; */
   /* width: 1920px;
-  height: 1805px; */
-  /* height: 100%; */
+  height: 1805px; */ /* height: 100%; */
   .header {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
     #mainHeaderImg {
       width: 100%;
       height: 180px;
       border-radius: 20px;
       border: none;
       object-fit: cover;
-    }
-    #diaryName {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 16px;
-      letter-spacing: -0.01em;
     }
   }
   .btnInfo {
@@ -178,5 +180,17 @@
         color: white;
       }
     }
+  }
+}
+.footer {
+  margin-top: 30px;
+  padding: 18px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #f2f2f2;
+  .footerInfo {
+    font-size: 14px;
+    color: #919191;
   }
 }
