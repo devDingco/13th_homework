@@ -70,29 +70,20 @@ const getToday = () => {
 }
 
 const reloadDiary = () => {
-    let diaryDOMList = []
-
-    for (let i = 0;i < diaryList.length; i = i + 1) {
-        const diary = diaryList[i]
-        const settings = getMoodSettings(diary.mood)
-        console.log(settings.img)
-
-        diaryDOMList.push(
-            `<div class="diary" id="diary_DOM">
-                <img class="diary_mood_img" src=${settings.img} alt=${settings.alt} onclick="diaryCardTapped(${diary.id})">
+    const diaryDOMList = diaryList.map(el => 
+        `<div class="diary" id="diary_DOM">
+            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt} onclick="diaryCardTapped(${el.id})">
                 <div class="diary_title">
                     <div class="diary_sub_title">
-                        <div class=${settings.attribute}>${diary.mood}</div>
-                        <div class="diary_date">${diary.date}</div>
+                        <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
+                        <div class="diary_date">${el.date}</div>
                     </div>
-                <div class="diary_main_title">${diary.title}</div>
+                 <div class="diary_main_title">${el.title}</div>
             </div>
         </div>`
-        )
-    }
+    ).join("")
 
-    const result = diaryDOMList.join("")
-    document.getElementById("diary_list").innerHTML = result
+    document.getElementById("diary_list").innerHTML = diaryDOMList
 }
 
 // "mood" 데이터에 따라, 이미지 주소 전달하기.

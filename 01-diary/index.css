@@ -39,7 +39,9 @@
 
 .navi {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 32px;
     padding: 0px 20px 0px 20px;
 }
 
@@ -67,6 +69,18 @@
     color: black;
     border-bottom: 2px solid black;
 }
+
+/* 기분에 따른 일기 필터링 */
+
+.mood_select_box {
+    width: 120px;
+    height: 32px;
+
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    padding: 4px;
+}
+
 
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
 .contents {
