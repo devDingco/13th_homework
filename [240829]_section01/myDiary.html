@@ -1,14 +1,106 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
- 
-  <title>나만의 일기장</title>
-  <link rel="stylesheet" href="./myDiary.css"/>
-  <script src = "myDiary.js"></script>
+  <head>
+    <title>나만의 일기장</title>
+    <link rel="stylesheet" href="./myDiary.css" />
+    <script src="myDiary.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <p id="diaryName">민정이의 다이어리</p>
+        <img id="mainHeaderImg" src="./images/gamsung.jpg" alt="메인헤더사진" />
+      </div>
+      <div class="btnInfo">
+        <button id="diaryKeepBtn" style="background-color: #c7ddf6">
+          일기보관함
+        </button>
+        <button id="photoKeepBtn">사진보관함</button>
+      </div>
 
-</head>
-<body>
-  
-  
-</body>
+      <div class="mainContent">
+        <div id="showImgContent">
+          <div id="card">
+            <p id="info">오늘의 기분을 담은 일기를 써보세요!</p>
+          </div>
+        </div>
+        <div id="addContent">
+          <p class="addTitle">⭐️ 일기 쓰기</p>
+          <p class="subTitle">오늘 기분은 어땠나요?</p>
+          <div class="feelingBtn">
+            <label for="happyBtn">
+              <input
+                type="radio"
+                name="feelingBtn"
+                id="happyBtn"
+                value="행복해요"
+                oninput="btnColorFunc()"
+              />
+              행복해요
+            </label>
+            <label for="sadBtn">
+              <input
+                type="radio"
+                name="feelingBtn"
+                id="sadBtn"
+                value="슬퍼요"
+                oninput="btnColorFunc()"
+              />
+              슬퍼요
+            </label>
+            <label for="surpriseBtn">
+              <input
+                type="radio"
+                name="feelingBtn"
+                id="surpriseBtn"
+                value="놀랐어요"
+                oninput="btnColorFunc()"
+              />
+              놀랐어요
+            </label>
+            <label for="madBtn">
+              <input
+                type="radio"
+                name="feelingBtn"
+                id="madBtn"
+                value="화나요"
+                oninput="btnColorFunc()"
+              />
+              화나요
+            </label>
+            <label for="etcBtn">
+              <input
+                type="radio"
+                name="feelingBtn"
+                id="etcBtn"
+                value="기타"
+                oninput="btnColorFunc()"
+              />
+              기타
+            </label>
+          </div>
+          <div class="titleContainer">
+            <p>제목</p>
+            <input
+              type="text"
+              placeholder="제목을 입력해주세요"
+              id="titleContent"
+              oninput="btnColorFunc()"
+            />
+          </div>
+          <div class="contentContainer">
+            <p>내용</p>
+            <textarea
+              rows="8"
+              id="contentContainer"
+              placeholder="내용을 입력해주세요"
+              oninput="btnColorFunc()"
+            ></textarea>
+          </div>
+          <button id="registerBtn" onclick="registerBtn()">등록하기</button>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
 </html>
