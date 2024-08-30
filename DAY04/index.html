@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>혜지의 다이어리</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="diarybox.css" />
+  </head>
+  <body>
+    <nav>
+      <div>
+        <span>혜지의 다이어리</span>
+      </div>
+    </nav>
+
+    <div class="상단사진">
+      <img src="./images/Rectangle1.png" alt="상단 이미지" />
+    </div>
+    <main>
+      <div class="일기헤더">
+        <div class="일기헤더글자들">
+          <div class="일기헤더글자_밑줄">
+            <span class="일기헤더글자_일보">일기보관함</span>
+          </div>
+          <div>
+            <span class="일기헤더글자_사보">사진보관함</span>
+          </div>
+        </div>
+      </div>
+      <div class="일기보관함상자">
+        <div class="일기리스트"></div>
+        <div class="일기쓰기">
+          <div class="일기쓰기타이틀">📍 일기 쓰기</div>
+          <div class="기분에답해상자">
+            <span>오늘 기분은 어땠나요?</span>
+            <div class="기분인풋상자">
+              <label
+                ><input type="radio" name="mood" value="행복해요" />
+                행복해요</label
+              >
+              <label
+                ><input type="radio" name="mood" value="슬퍼요" /> 슬퍼요</label
+              >
+              <label
+                ><input type="radio" name="mood" value="놀랐어요" />
+                놀랐어요</label
+              >
+              <label
+                ><input type="radio" name="mood" value="화나요" /> 화나요</label
+              >
+              <label
+                ><input type="radio" name="mood" value="기타" /> 기타</label
+              >
+            </div>
+          </div>
+          <div class="일기작성상자">
+            <div class="일기제목상자">
+              <span>제목</span>
+              <input
+                type="text"
+                id="diary-title"
+                placeholder="제목을 입력해주세요"
+              />
+            </div>
+            <div class="일기내용상자">
+              <span>내용</span>
+              <div class="일기내용인풋겉상자">
+                <input
+                  id="diary-content"
+                  type="text"
+                  placeholder="내용을 입력해주세요"
+                />
+              </div>
+            </div>
+          </div>
+          <button id="registerButton" class="일기등록하기버튼">등록하기</button>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="ft_box">
+        <div class="ft_box_name">혜지의 다이어리</div>
+        <div class="ft_box_대표">대표: 혜지</div>
+        <div class="ft_box_cpr">Copyright © 2024. 혜지 Co., Ltd.</div>
+      </div>
+    </footer>
+    <script src="diary.js"></script>
+  </body>
+</html>
