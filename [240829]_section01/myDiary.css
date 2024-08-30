@@ -1,0 +1,196 @@
+@font-face {
+  font-family: 'RixXladywatermelonR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/RixXladywatermelonR.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'RixXladywatermelonR';
+}
+#diaryName {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+}
+.container {
+  padding: 20px 200px;
+  overflow: scroll;
+  /* display: flex;
+  flex-direction: column;
+  gap: 30px; */
+  /* width: 1920px;
+  height: 1805px; */ /* height: 100%; */
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+    #mainHeaderImg {
+      width: 100%;
+      height: 180px;
+      border-radius: 20px;
+      border: none;
+      object-fit: cover;
+    }
+  }
+  .btnInfo {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    button {
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      padding: 5px 10px;
+      background-color: #ffffff;
+    }
+    button:hover {
+      color: rgb(62, 26, 244);
+      cursor: pointer;
+    }
+  }
+  .mainContent {
+    display: flex;
+    gap: 50px;
+    #showImgContent {
+      flex: 1;
+      flex-wrap: wrap;
+      gap: 14px;
+      width: 100%;
+      #card {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        #info {
+          display: flex;
+          justify-content: center;
+          color: #194d89;
+          width: 100%;
+          height: 100%;
+          font-size: 18px;
+          align-items: center;
+        }
+      }
+      .newCard {
+        max-width: 290px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+
+      .newCard img {
+        width: 100%; /* 이미지가 카드의 너비를 가득 채우도록 설정 */
+        height: auto;
+        border-radius: 13px;
+      }
+
+      .container1 {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .container1 p {
+        font-size: 13px;
+      }
+
+      .container1 .date {
+        color: #919191;
+      }
+
+      .container2 .title {
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+        overflow: hidden; /* 넘치는 부분은 숨김 */
+        text-overflow: ellipsis; /* 넘치는 부분에 ... 표시 */
+      }
+    }
+    #addContent {
+      display: flex;
+      flex-direction: column;
+      width: 380px;
+      height: 490px;
+      padding: 18px 15px;
+      gap: 12px;
+      border-radius: 13px;
+      border: 1px solid #d4d3d3;
+      opacity: 0px;
+
+      .addTitle {
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .subTitle {
+        font-size: 15px;
+      }
+      .feelingBtn {
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .titleContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 15px;
+        p {
+          font-size: 15px;
+        }
+        #titleContent {
+          border: 1px solid #d4d3d3;
+          border-radius: 8px;
+          padding: 8px 5px;
+          width: 100%;
+        }
+      }
+      .contentContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 20px;
+        p {
+          font-size: 15px;
+        }
+        #contentContainer {
+          width: 100%;
+          border: 1px solid #d4d3d3;
+          border-radius: 8px;
+          padding: 8px 5px;
+        }
+      }
+      #registerBtn {
+        background-color: #c7c7c7;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 10px;
+        color: white;
+      }
+    }
+  }
+}
+.footer {
+  margin-top: 30px;
+  padding: 18px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #f2f2f2;
+  .footerInfo {
+    font-size: 14px;
+    color: #919191;
+  }
+}
