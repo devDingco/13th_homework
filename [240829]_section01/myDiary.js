@@ -65,7 +65,29 @@ const showCardFunc = (diary) => {
     화나요: './images/화나요 (s).png',
     기타: './images/기타 (s).png',
   };
+
   const miniImg = miniTodayFeeling[diary.todayFeeling] || '';
+
+  let feelColor;
+  switch (diary.todayFeeling) {
+    case '행복해요':
+      feelColor = '#EA5757';
+      break;
+    case '슬퍼요':
+      feelColor = '#28B4E1'; // 슬퍼요일 때 파란색
+      break;
+    case '놀랐어요':
+      feelColor = '#D59029'; // 놀랐어요일 때 주황색
+      break;
+    case '화나요':
+      feelColor = '#777777'; // 화나요일 때 보라색
+      break;
+    case '기타':
+      feelColor = '#A229ED'; // 기타일 때 회색
+      break;
+    default:
+      feelColor = 'black';
+  }
 
   // let
   console.log(miniImg);
@@ -76,7 +98,7 @@ const showCardFunc = (diary) => {
       <img src="${diary.img}" alt="${diary.todayFeeling}" />
     </div>
     <div class="container1">
-      <p class="feel">${diary.todayFeeling}</p>
+      <p class="feel" style = "color : ${feelColor}">${diary.todayFeeling}</p>
       <p class="date">${diary.date}</p>
     </div>
     <div class="container2">
