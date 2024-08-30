@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #222;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100%;
+    background-color: #FCFCFC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.header__text {
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin: 24px 0px;
+}
+
+.container__nav {
+    height: 60px;
+    width: 1148px;
+    gap: 10px;
+    margin: 24px 0px 42px 0px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav__tap {
+    width: 120px;
+    height: 48px;
+    padding: 12px 8px;
+    font-size: 24px;
+    color: #bbb;
+    border-bottom: 2px solid #222;
+}
+
+.container__content {
+    width: 1168px;
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.content__left__card {
+    width: 800px;
+    height: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+.wrapper__card {
+    width: 380px;
+    height: 380px;
+    background-color: #FFF;
+    border-radius: 16px;
+    box-shadow: 0px 4px 12px 0px #eee;
+}
+
+.card__topic {
+    height: 64px;
+    padding: 0px 16px;
+    margin: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card__status {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.card__sad, .card__surprise, .card__angry, .card__happy, .card__etc, .card__date {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.card__sad {
+    color: #28B4E1;
+}
+
+.card__surprise {
+    color: #D59029;
+}
+
+.card__angry {
+    color: #767676;
+}
+
+.card__happy {
+    color: #EA5757;
+}
+
+.card__think {
+    color: #A229ED;
+}
+
+.card__date {
+    color: #bbb;
+}
+
+.card__title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.content__right__diary {
+    width: 360px;
+    height: 100%;
+    padding: 24px;
+    box-shadow: 0px 4px 12px 0px #eee;
+    border-radius: 16px;
+    background-color: #FFF;
+}
+
+.diary__title {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.diary__question {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.diary__radio {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+input {
+    margin-right: 8px;
+}
+
+.diary__subject, .diary__context {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.diary__subInput, .diary__conInput {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 8px;
+    margin-bottom: 24px;
+}
+
+.diary__conInput {
+    height: 128px;
+    margin-bottom: 40px;
+}
+
+.diary__button {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #C7C7C7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f2f2f2;
+    font-size: 20px;
+}
+
+.container__footer {
+    width: 100%;
+    height: 160px;
+    background-color: #f2f2f2;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper__footer {
+    width: 1148px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer__text {
+    font-size: 20px;
+}
+
+.footer__name, .footer__copy {
+    color: #767676
+}
