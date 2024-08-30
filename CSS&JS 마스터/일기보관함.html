@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Document</title>
+        <link rel="stylesheet" href="./일기보관함.css">
+        <script src="./일기보관함.js"></script>
+    </head>
+    <body>
+        <main>
+            <div class="main_header"> <!-- 메인 헤더-->
+                <div class="main_header_logo">
+                    <div class="main_header_log_text"">
+                        민지의 다이어리
+                    </div>
+                </div>
+            </div>
+            <div class="main_body">
+                <div class="main_body_banner">
+                    <img src="./assets/image.png" alt="">
+                </div>
+                <div class="main_body_storage"> <!-- 스토리지헤더 + 스토리지바디-->
+                    <div class="storage_header">
+                        <div class="nav_box">
+                            <div class="nav_box_text">일기보관함</div>
+                        </div>
+                        <div class="nav_box">
+                            <div class="nav_box_text">사진보관함</div>
+                        </div>
+                    </div>
+                    <div class="storage_body"> <!-- 스토리지 + 인풋박스-->
+                        <div id="storage_leftBody"><!--js로카드 추가--></div>
+                        <div class="storage_rightBody"> <!-- 라디오버튼 + 텍스트박스 + 버튼 -->
+                            <div class="storage_rightBody_header">
+                                📍 일기 쓰기
+                            </div>
+                            <div class="storage_rightBody_inputBox"> <!--라디오 버튼 + 텍스트 박스-->
+                                <div class="emotion_radioBox"> <!-- 라디오버튼 -->
+                                    <div class="radioBox_header">오늘 기분은 어땟나요?</div>
+                                    <div class="radioBox_body">
+                                        <div class="radioButton">
+                                            <input type="radio" name="emotion" id="happpy" value="happy"><label for="happpy">행복해요.</label>
+                                        </div>
+                                        <div class="radioButton">
+                                            <input type="radio" name="emotion" id="sad" value="sad"><label for="sad">슬퍼요.</label>
+                                        </div>
+                                        <div class="radioButton">
+                                            <input type="radio" name="emotion" id="surprised" value="surprised"><label for="surprised">놀랐어요.</label>
+                                        </div>
+                                        <div class="radioButton">
+                                            <input type="radio" name="emotion" id="angry" value="angry"><label for="angry">화나요.</label>
+                                        </div>
+                                        <div class="radioButton">
+                                            <input type="radio" name="emotion" id="etc" value="etc"><label for="etc">기타</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="textBox"> <!--텍스트 박스-->
+                                    <div class="titleBox">
+                                        <label for="titleBox_input">제목</label>
+                                        <input type="text" id="titleBox_input" placeholder="제목을 입력해주세요.">
+                                    </div>
+                                    <div class="contentBox">
+                                        <label for="contentBox_textarea">내용</label>
+                                        <textarea name="contentBox_input" id="contentBox_textarea" placeholder="내용을 입력해 주세요."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="registerButton" onclick="clickButton()">등록하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer_textBox">
+                민지의 다이어리
+                <div class="representative">대표 : {name}</div>
+                <div class="copyright">Copyright © 2024. {name} Co., Ltd.</div>
+            </div>
+        </footer>
+    </body>
+</html>
