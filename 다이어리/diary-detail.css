@@ -10,11 +10,11 @@
   height: 1080px;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   margin: 0 auto;
 }
 
 .layout {
+  width: 1168px;
   height: auto;
   display: flex;
   padding: 0 20px;
