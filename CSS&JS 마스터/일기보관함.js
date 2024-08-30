@@ -13,7 +13,9 @@ const clickButton = () => {
     diaryCardArr.push(diaryCardObject);
     console.log("다이어리배열", diaryCardArr);
     const newDiary = diaryCardArr[diaryCardArr.length - 1];
-    const newCard = createDiaryCard(newDiary.emotionText, newDiary.Date, newDiary.title, newDiary.textarea, diaryCardObject.image);
+    console.log("뉴다이어리", newDiary);
+    const newCard = createDiaryCard(newDiary.emotionText, newDiary.date, newDiary.title, newDiary.textarea, diaryCardObject.image);
+    console.log("뉴카드", newCard);
     const diaryContainer = document.getElementById("storage_leftBody");
     diaryContainer.appendChild(newCard);
 }
@@ -23,7 +25,7 @@ const createDate = () => {
     const getYear = date.getFullYear();
     const getMonth = date.getMonth() + 1;
     const getDate = date.getDate();
-    const writeDate = `${getYear}. ${getMonth}. ${getDate}`;
+    const writeDate = getYear+'. '+getMonth+'. '+getDate;
 
     return writeDate;
 }
