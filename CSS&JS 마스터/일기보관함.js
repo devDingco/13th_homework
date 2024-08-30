@@ -1,10 +1,19 @@
-const clickButton = () => {
-    const radioEmotion = document.querySelector("input[name='emotion']:checked").value;
-    const inputTitle = document.getElementById("titleBox_input").value;
-    const textareaText = document.getElementById("contentBox_textarea").value;
-    const emotionImage = getImage(radioEmotion);
+const diaryCardObject = {};
+let diaryCardArr = [];
 
-    const newCard = createDiaryCard(radioEmotion, createDate(), inputTitle, textareaText, emotionImage);
+
+
+const clickButton = () => {
+    diaryCardObject.emotionText = document.querySelector("input[name='emotion']:checked").value;
+    diaryCardObject.title = document.getElementById("titleBox_input").value;
+    diaryCardObject.textarea = document.getElementById("contentBox_textarea").value;
+    diaryCardObject.image = getImage(diaryCardObject.emotionText);
+    diaryCardObject.date = createDate();
+    console.log("다이어리오브젝트", diaryCardObject);
+    diaryCardArr.push(diaryCardObject);
+    console.log("다이어리배열", diaryCardArr);
+    const newDiary = diaryCardArr[diaryCardArr.length - 1];
+    const newCard = createDiaryCard(newDiary.emotionText, newDiary.Date, newDiary.title, newDiary.textarea, diaryCardObject.image);
     const diaryContainer = document.getElementById("storage_leftBody");
     diaryContainer.appendChild(newCard);
 }
@@ -19,10 +28,10 @@ const createDate = () => {
     return writeDate;
 }
 
-const getImage = (emotion) => {
+const getImage = (emotionText) => {
     let imageSrc;
 
-    switch(emotion) {
+    switch(emotionText) {
         case "happy":
             imageSrc = "./assets/행복해요 (m).png";
             break;
