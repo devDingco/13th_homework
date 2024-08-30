@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>v패딩과 마진 실습</title>
+    <style>
+        /* 전체설정을 해놓고 시작 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* padding 연습 */
+        .CSS_네모상자1 {
+            width: 300px;
+            height: 300px;
+            background-color: skyblue;
+            padding-top: 30px;
+            padding-left: 20px;
+            
+            /* 패딩사용시 상자가 커지기 떄문에 테두리박스로 고정 */
+            /* box-sizing: border-box; */
+            /* 전체 설정으로 해둠 */
+            /* 기본이 내용박스(content-box), 지정 안해도 기본값임 */
+            /* 변화가 없으므로 테두리박스(border-box)로 수정 */
+            border: 10px solid blue;
+        }
+
+        /* margin 연습 */
+        .CSS_네모상자2 {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+
+        }
+
+        .CSS_인풋창 {
+            margin-top: 30px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- padding 부분 -->
+    <div class="CSS_네모상자1">
+        <input type="text" />
+    </div>
+
+    <!-- margin 부분 -->
+    <div class="CSS_네모상자2">
+        <input type="text" class="CSS_인풋창"/>
+    </div>
+</body>
+</html>
