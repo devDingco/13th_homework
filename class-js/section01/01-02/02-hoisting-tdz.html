@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>호이스팅과 TDZ 실습</title>
+    <script>
+        // 1. 호이스팅과 TDZ
+        // console.log(내가만든요즘변수)
+        // const 내가만든요즘변수 = "밍서"
+
+        // console.log(내가만든요즘변수2)
+        // let 내가만든요즘변수2 = "밍서"
+
+        // 2. 함수 덮어쓰기 문제
+        function 내가만든함수() {
+            console.log("함수를 실행합니다.")
+        }
+
+        function 내가만든함수() {
+            console.log("함수를 덮어씁니다.")
+        }
+
+        
+        내가만든함수()
+
+        // 3.함수를 만드는 3가지 방법
+        // 3-1) 함수선언식
+        function 내가만든선언식() {
+
+        }
+        function 내가만든선언식() {
+
+        }  
+
+        // 3-2) 함수표현식
+        const 내가만든표현식 = function(){
+        }
+        // 4. 덮어쓰기 확인
+        // const 내가만든표현식 = function(){
+        // }
+        
+
+
+
+        // 3-3) 화살표함수
+        const 내가만든화살표함수 = () => {
+        }
+        // const 내가만든화살표함수 = () => {
+        // }
+
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
