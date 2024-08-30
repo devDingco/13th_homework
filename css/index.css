@@ -212,6 +212,7 @@ a {
   width: 1.875rem; /* 30px */
   height: 1.875rem; /* 30px */
   position: relative;
+  z-index: 1;
 }
 
 /* 일기등록 상자 */
