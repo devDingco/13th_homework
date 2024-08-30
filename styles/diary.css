@@ -64,6 +64,15 @@ main {
 main .main-content {
   width: 100%;
 }
+main .main-content ul .add-list-alert {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #919191;
+  font-weight: 500;
+}
 main .main-content ul {
   width: 100%;
   display: grid;
@@ -102,6 +111,21 @@ main .main-content ul > li .info-container .tag-wrap {
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
+}
+main .main-content ul > li .info-container .tag-wrap .angry {
+  color: #777777;
+}
+main .main-content ul > li .info-container .tag-wrap .sad {
+  color: #28b4e1;
+}
+main .main-content ul > li .info-container .tag-wrap .happy {
+  color: #ea5757;
+}
+main .main-content ul > li .info-container .tag-wrap .etc {
+  color: #a229ed;
+}
+main .main-content ul > li .info-container .tag-wrap .surprised {
+  color: #d59029;
 }
 
 main .main-content ul > li .info-container .tag-wrap .date-tag {

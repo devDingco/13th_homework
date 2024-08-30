@@ -1,8 +1,9 @@
 const submitButton = document.getElementById('submitBtn');
-const diaryList = document.getElementById('diaryList');
+const diaryListEl = document.getElementById('diaryList');
 
 let feeling;
 let diaryListArray = [];
+
 const feelingText = {
   angry: '화나요',
   etc: '기타',
@@ -10,6 +11,7 @@ const feelingText = {
   sad: '슬퍼요',
   surprised: '놀랐어요',
 };
+
 const submitButtonStyleChange = (buttonState) => {
   if (buttonState === 'on') {
     submitButton.classList.remove('none');
@@ -67,24 +69,21 @@ const addDiary = (e) => {
     content,
     createdAt: dateForm,
   });
-
+  const firstDiary = document.querySelector('.add-list-alert');
   const addList = document.createElement('li');
-  diaryList.append(addList);
+  firstDiary ? (diaryListEl.innerHTML = '') : null;
+  diaryListEl.append(addList);
 
   addList.innerHTML = `
   <button id="${
     diaryListArray.length - 1
   }" onclick="diaryListInfo(event); return false;" >
     <div class="img-wrap">
-      <img src="./public/imgs/${
-        diaryListArray[diaryListArray.length - 1].feeling
-      }.svg" alt="${diaryListArray[diaryListArray.length - 1].feeling}이미지" />
+      <img src="./public/imgs/${feeling}.svg" alt="${feeling}이미지" />
     </div>
     <div class="info-container">
       <div class="tag-wrap">
-        <p class="feeling-tag">${
-          feelingText[diaryListArray[diaryListArray.length - 1].feeling]
-        }</p>
+        <p class="feeling-tag ${feeling}">${feelingText[feeling]}</p>
         <p class="date-tag">${dateForm}</p>
       </div>
       <h3 class="title">
