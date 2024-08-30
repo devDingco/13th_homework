@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>트랜지션 실습</title>
+    <style>
+        .CSS_네모상자 {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+
+            white-space: pre; /* 줄바꿈 인식 */
+
+            transition: width 0.5s, height 0.5s, background-color 0.5s;
+        }
+        /* 마우스를 올렸을 때 */
+        .CSS_네모상자:hover {
+            width: 500px;
+            height: 500px;
+            filter: blur(5px); /* 번짐효과 */
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_네모상자">
+        안녕하세요.
+        반갑습니다.
+    </div>
+</body>
+</html>
