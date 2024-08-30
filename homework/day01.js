@@ -1,3 +1,4 @@
+
 function 회원가입() {
 
     // 회원가입에 필요한 정보들 담아두기
@@ -108,32 +109,39 @@ function randomBtn(){
 
 
 
-    //인증번호 요청 버튼 누르고나서 타이머 같이 띄우기
+    // ** 인증번호 요청 버튼 누르고나서 타이머 같이 띄우기
     let 시간 = 179 // ? 179인이유 // 백에서 넘어오는 시간을 계산해서 (1초 걸린다가정) 179초로 넘김 // 화면에 3:00쓰임 1초 늦게시작
 
     클리어하기 = setInterval(function(){
 
-                if( 시간 >= 0){ //00:00
+                if( 시간 > 0){ //00:00까지
 
                     const 분 = String(Math.floor(시간 / 60)).padStart(2,"0"); //몫이 분
                     const 초 = String(시간 % 60).padStart(2,"0"); //나머지가 초
 
                     document.getElementById("타이머").innerText = `${분} : ${초}`
-
-
                     시간 = 시간 -1 
+                
+                
+                }else{//00:01까지 돌고 00:00이 되었을때 else로 넘어옴
 
-                }else{
                     document.getElementById("인증btn02").disabled = true
-
+                    document.getElementById("타이머").innerText = "시간초과"
+                    //00:01 다음으로 시간초과가 뜨게만듦 : 굳이 00:00나올 필요 없음
                 }
 
-            
+                
     },1000)
+}
 
 
-    document.getElementById("인증btn02").style = "background-color : #C7C7C7"
+function 인증완료(){
     document.getElementById("인증btn02").innerText = "인증완료"
+    document.getElementById("인증btn02").disabled = true
+
+    const 타이머삭제 = document.getElementById("타이머")
+    타이머삭제.style.display = 'none'
+
 
 
 
