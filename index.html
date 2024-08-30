@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>main</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
+    />
+  </head>
+  <body>
+    <!-- <div class="loaderBox"><div class="loader"></div></div> -->
+
+    <header>
+      <h1><span class="userName"></span>의 다이어리</h1>
+    </header>
+
+    <div class="headerBanner">
+      <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
+    </div>
+
+    <nav>
+      <ul>
+        <li class="active">일기보관함</li>
+        <li>사진보관함</li>
+      </ul>
+    </nav>
+
+    <section>
+      <article class="diaryList">
+        <!-- <ul>
+          <li>
+            <figure>
+              <img src="./img/mood_1.png" alt="오늘의 기분" />
+              <figcaption>
+                <div class="infoTop">
+                  <span class="moodText moodTextType1">슬퍼요</span>
+                  <span class="diaryDate">2024.01.01</span>
+                </div>
+                타이틀 영업입니다. 글자 넘침시 처리가 추가적인 처리가
+                필요합니다.
+              </figcaption>
+            </figure>
+          </li>
+        </ul> -->
+      </article>
+      <article class="diaryWrite">
+        <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+        <div>
+          <div class="moodTypeRadio">
+            <span>오늘 기분은 어땠나요?</span>
+            <div class="radioWrap">
+              <label
+                ><input
+                  type="radio"
+                  name="moodType"
+                  value="행복해요"
+                  checked
+                />행복해요</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="moodType"
+                  value="슬퍼요"
+                />슬퍼요</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="moodType"
+                  value="놀랐어요"
+                />놀랐어요</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="moodType"
+                  value="화나요"
+                />화나요</label
+              >
+              <label
+                ><input type="radio" name="moodType" value="기타" />기타</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="diaryContent">
+          <label>
+            <span>제목</span>
+            <input
+              class="diaryTitle"
+              type="text"
+              placeholder="제목을 입력해 주세요."
+              oninput="textCheck()"
+            />
+          </label>
+          <label>
+            <span>내용</span>
+            <textarea
+              class="diaryDesc"
+              placeholder="내용을 입력해 주세요."
+              oninput="textCheck()"
+            ></textarea>
+          </label>
+        </div>
+
+        <button class="diaryWriteBtn" onclick="diarySave()" disabled>
+          등록하기
+        </button>
+      </article>
+    </section>
+
+    <footer>
+      <div class="footerInner">
+        <h2><span class="userName"></span>의 다이어리</h2>
+        <p><span class="userName"></span>의 일상을 기록하는 공간입니다.</p>
+        <p>© 2024. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
