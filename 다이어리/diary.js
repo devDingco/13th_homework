@@ -1,6 +1,6 @@
 const registerButton = document.querySelector("button");
-const diaryContents = document.getElementById("diaryContents");
-let createDiaryTag = [];
+const diaryContent = document.getElementById("diaryContent");
+const localStorageLength = localStorage.length;
 
 const registerDiary = () => {
   const date = new Date();
@@ -28,58 +28,66 @@ const registerDiary = () => {
 
   const diaryTitle =
     document.getElementsByClassName("diary_title_window")[0].value;
-  const diaryContents = document.getElementsByClassName(
+  const diaryContent = document.getElementsByClassName(
     "diary_contents_window"
   )[0].value;
 
   const coverName = findCheckedMood[0].id.split(`_`)[1];
   const fontColor = `${coverName}_emotion_font_color`;
 
-  createHtml(
-    coverName,
-    registrationDate,
-    fontColor,
-    checkedMood,
-    diaryTitle,
-    diaryContents
-  );
+  const uuid = String(Math.floor(Math.random() * 1000000)).padStart(6, 0);
+
+  let diaryEntry = {
+    id: uuid,
+    color: fontColor,
+    mood: checkedMood,
+    title: diaryTitle,
+    imageName: coverName,
+    content: diaryContent,
+    date: registrationDate,
+  };
+
+  localStorage.setItem(uuid, JSON.stringify(diaryEntry));
+  createHtml(diaryEntry);
 };
 
-const createHtml = (coverName, date, color, mood, title, diaryContents) => {
+const createHtml = (diaryEntry) => {
   const diaryCard = `
-    <div class="diary_entry">
-      <img
-        class="diary_cover"
-        src="./image/${coverName}.png"
-        width="774px"
-      />
-      <div class="diary_entry_summary">
-        <div class="emotion_date_info">
-          <div class="${color}">${mood}</div>
-          <div class="date">${date}</div>
-        </div>
-        <div class="diary_title_area">
-          ${title}
-        </div>
+    <a href="./diary-detail.html?id=${diaryEntry.id}" class="diary_detail">
+      <div class="diary_entry">
+          <img
+            class="diary_cover"
+            src="./image/${diaryEntry.imageName}.png"
+            width="774px"
+          />
+          <div class="diary_entry_summary">
+            <div class="emotion_date_info">
+              <div class="${diaryEntry.color}">${diaryEntry.mood}</div>
+              <div class="date">${diaryEntry.date}</div>
+            </div>
+            <div class="diary_title_area">
+              ${diaryEntry.title}
+            </div>
+          </div>
       </div>
-    </div>`;
+    </a>
+    `;
 
-  // if(document.getElementById('diary_entry_container').length){
+    const diaryEntryContainer = document.querySelectorAll('#diary_entry_container')
 
-  // }
+    if(diaryEntryContainer[diaryEntryContainer.length-1].children.length == 2){
+      const diaryEntryContainer = document.createElement("div");
+      diaryEntryContainer.className = "diary_entry_container";
+      diaryEntryContainer.id = "diary_entry_container";
+      diaryEntryContainer.innerHTML = diaryCard;
+      const article = document.getElementById("article");
+    
+      return article.appendChild(diaryEntryContainer);
+    }else {
+      return diaryEntryContainer[diaryEntryContainer.length-1].innerHTML += diaryCard
+    }
 
-  const test = document.querySelectorAll('.diary_entry_container')
 
-  console.log(test[test.length-1].childElementCount)
-
-  const diaryEntryContainer = document.createElement('div')
-  diaryEntryContainer.className = 'diary_entry_container'
-  diaryEntryContainer.id = 'diary_entry_container'
-  diaryEntryContainer.innerHTML = diaryCard
-
-  const article = document.getElementById("article");
-
-  return article.append(diaryEntryContainer);
 };
 
 registerButton.addEventListener("click", registerDiary);
