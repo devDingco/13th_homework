@@ -1,0 +1,243 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable";
+}
+
+.body{
+    height: 100%;
+}
+
+.CSS_레이아웃{
+    width: 100vw;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.CSS_배너제목 {
+    width: 1168px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 88.889% */
+    letter-spacing: -0.18px;
+    margin: 24px 0;
+}
+
+.CSS_보관함리스트 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 1168px;
+    height: 48px;
+    margin-bottom: 42px;
+    margin-top: 24px;
+}
+
+.CSS_보관함리스트_메뉴 {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    padding: 12px 8px;
+    border-bottom: 1px solid #000;
+    border-width: 0 0 3px 0;
+    margin-right: 16px;
+}
+
+.CSS_메인 {
+    display: flex;
+    flex-direction: row;
+    width: 1168px;
+    /* height: 1167px; */
+    margin-bottom: 40px;
+}
+
+.CSS_메인왼쪽 {
+    /* width: 784px; */
+    /* height: 1167px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 24px;
+    gap: 24px;
+}
+
+.CSS_메인왼쪽_카드 {
+    width: 380px;
+    height: 373px;
+    display: flex;
+    flex-direction: column;
+}
+
+.CSS_메인왼쪽_카드_디테일 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 8px;
+    margin-top: 16px;
+}
+
+.CSS_메인왼쪽_카드_디테일_기분 {
+    color: #28B4E1;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+
+.CSS_메인왼쪽_카드_디테일_날짜{
+    color: var(--Gray-Gray-500, #919191);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: -0.14px;
+}
+
+.CSS_메인왼쪽_카드_디테일_멘트 {
+    width: 364px;
+    height: 24px;
+    padding: 0 8px;
+    color: #000;
+    text-overflow: ellipsis;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+.CSS_메인오른쪽 {
+    width: 360px;
+    height: 604px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    /* margin: 0 0 0 24px; */
+}
+
+.CSS_메인오른쪽_중간 {
+    margin: 40px 0;
+}   
+
+.CSS_오늘기분 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: #000;
+    margin-bottom: 16px;
+}
+
+.CSS_라디오모음 {
+    width: 312px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.CSS_라디오인풋 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.CSS_제목 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.14px;
+}
+
+.CSS_내용 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.14px;
+}
+
+.CSS_제목인풋 {
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    width: 100%;
+}
+
+.CSS_내용인풋 {
+    width: 100%;
+    height: 128px;
+    padding: 12px 16px;
+    align-items: flex-start;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+}
+
+.CSS_등록하기 {
+    border-radius: 8px;
+    background-color: #c7c7c7;
+    width: 312px;
+    height: 48px;
+    padding: 8px 10px;
+    flex: 1 0 0;
+    border: none;
+}
+
+.CSS_푸터 {
+    top: 160px;
+    width: 100%;
+    height: 160px;
+    position: relative;  
+    transform: translateY(-100%);
+    background: var(--Gray-Gray-50, #F2F2F2);
+    display: flex;
+    justify-content: center;
+}   
+
+.CSS_푸터글상자 {
+    width: 1168px;
+    height: 160px;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.CSS_footertitle {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.2px;
+}
+
+.CSS_footerpresent {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.CSS_footercopy {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 16px;
+    letter-spacing: -0.14px;
+}
