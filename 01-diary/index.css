@@ -31,7 +31,6 @@
 }
 
 .body {
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,7 +38,6 @@
 }
 
 .navi {
-    
     display: flex;
     justify-content: center;
     padding: 0px 20px 0px 20px;
@@ -163,6 +161,9 @@
 
     padding: 24px;
 
+    border: 1px solid #D4D3D3;
+    border-radius: 16px;
+
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -217,6 +218,7 @@
     height: 24px;
 
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
