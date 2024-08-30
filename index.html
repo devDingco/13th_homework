@@ -26,21 +26,25 @@
         </div>
         <div class="flexcontainer">
             <div class="flexchild-left"> 
-                <ul class="diary-listview flexlist">
-                    <li class="diary-listitem flexchild">
-                        <div class="diary-listitem-bg"></div>
-                        <div class="diary-listitem-status">
-                            <span>슬퍼요</span>
-                            <span>2019.03.21</span>
-                        </div>
-                        <div class="diary-listitem-summary">
-                            <p>타이틀영역입니다.한줄까지만노출됩니다</p>
-                        </div>
-                    </li>
+                <ul class="diary-listview flexlist" id="diarylist">
+                    <template id="list-item-template">
+                        <li class="diary-listitem flexchild">
+                            <div class="list-item-border">
+                                <div class="diary-listitem-bg"></div>
+                                <div class="diary-listitem-status">
+                                    <span id="add-emo">슬퍼요</span>
+                                    <span id="add-date">2019.03.21</span>
+                                </div>
+                                <div class="diary-listitem-summary">
+                                    <p id="add-title">타이틀영역입니다.한줄까지만노출됩니다</p>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
                 </ul>
             </div>
             <div class="flexchild-right">
-                <form class="diary-util">
+                <form class="diary-util" id="adding-form">
                     <p class="diary-util title">
                         📍 일기 쓰기
                     </p>
@@ -49,35 +53,35 @@
                     </p>
                     <div class="diary-util flexlist">
                         <label class="radio-option">
-                            <input class="radio-input" checked type="radio" name="emotion">
+                            <input class="radio-input" checked type="radio" name="emotion" value="happy">
                             <p class="radio-string">행복해요</p>
                         </label>
                         <label class="radio-option">
-                            <input class="radio-input" type="radio" name="emotion">
+                            <input class="radio-input" type="radio" name="emotion" value="sad">
                             <p class="radio-string">슬퍼요</p>
                         </label>
                         <label class="radio-option">
-                            <input class="radio-input" type="radio" name="emotion">
+                            <input class="radio-input" type="radio" name="emotion" value="surprised">
                             <p class="radio-string">놀랐어요</p>
                         </label>
                         <label class="radio-option">
-                            <input class="radio-input" type="radio" name="emotion">
+                            <input class="radio-input" type="radio" name="emotion" value="angry">
                             <p class="radio-string">화나요</p>
                         </label>
                         <label class="radio-option">
-                            <input class="radio-input" type="radio" name="emotion">
+                            <input class="radio-input" type="radio" name="emotion" value="other">
                             <p class="radio-input-string">기타</p>
                         </label>
                     </div>
                     <label class="text-field">
-                        <p class="text-input-string">제목</p>
+                        <p class="text-input-string" id="input-title">제목</p>
                         <input class="text-input" type="text" name="title" placeholder="제목을 입력해 주세요.">
                     </label>
                     <label class="text-field">
-                        <p class="text-input-string">내용</p>
+                        <p class="text-input-string" id="input-content">내용</p>
                         <textarea class="text-input text-area" name="content" rows="5" cols="25" placeholder="내용을 입력해 주세요."></textarea>
                     </label>
-                    <button class="submit btn">
+                    <button class="submit btn" form="adding-form">
                         <p>
                             등록하기
                         </p>
