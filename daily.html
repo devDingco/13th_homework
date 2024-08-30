@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>daily</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header-text-container">
+                    <div class="header-text">민지의 다이어리</div>
+                </div>
+                <img src="./img/Rectangle1.png" alt="img" class="header-img" />
+            </header>
+            <article>
+                <div class="article-header">
+                    <div>일기 보관함</div>
+                    <div class="article-header-text">사진 보관함</div>
+                </div>
+                <div class="article-main">
+                    <div id="post" class="post">
+                        <div class="post-container">
+                            <img
+                                src="./img/happy.png"
+                                alt="1"
+                                id="0"
+                                onclick="onClickDailyInfor(event)"
+                            />
+                            <div class="post-title">
+                                <div class="post-font-happy">행복해요</div>
+                                <div class="post-date">2024.03.12</div>
+                            </div>
+                            <div class="post-content">타이틀 영역입니다.</div>
+                        </div>
+                        <div class="post-container">
+                            <img
+                                src="./img/sad.png"
+                                alt="1"
+                                id="1"
+                                onclick="onClickDailyInfor(event)"
+                            />
+                            <div class="post-title">
+                                <div class="post-font-sad">슬퍼요</div>
+                                <div class="post-date">2024.03.12</div>
+                            </div>
+                            <div class="post-content">타이틀 영역입니다.</div>
+                        </div>
+                        <div class="post-container">
+                            <img
+                                src="./img/surprise.png"
+                                alt="1"
+                                id="2"
+                                onclick="onClickDailyInfor(event)"
+                            />
+                            <div class="post-title">
+                                <div class="post-font-surprise">놀랐어요</div>
+                                <div class="post-date">2024.03.12</div>
+                            </div>
+                            <div class="post-content">
+                                타이틀
+                                영역입니다.2131232132131231232131221312321312312
+                            </div>
+                        </div>
+                        <div class="post-container">
+                            <img
+                                src="./img/etc.png"
+                                alt="1"
+                                id="3"
+                                onclick="onClickDailyInfor(event)"
+                            />
+                            <div class="post-title">
+                                <div class="post-font-etc">기타</div>
+                                <div class="post-date">2024.03.12</div>
+                            </div>
+                            <div class="post-content">타이틀 영역입니다.</div>
+                        </div>
+                        <div class="post-container">
+                            <img
+                                src="./img/angry.png"
+                                alt="1"
+                                id="4"
+                                onclick="onClickDailyInfor(event)"
+                            />
+                            <div class="post-title">
+                                <div class="post-font-angry">화나요</div>
+                                <div class="post-date">2024.03.12</div>
+                            </div>
+                            <div class="post-content">타이틀 영역입니다.</div>
+                        </div>
+                    </div>
+                    <div class="daily">
+                        <div class="daily-header">📍 일기 쓰기</div>
+                        <div class="daily-checkcontainer">
+                            <div>오늘 기분은 어땟나요?</div>
+                            <div class="daily-inputlist">
+                                <div class="daily-input">
+                                    <input
+                                        type="radio"
+                                        oninput="onInputButtonChange()"
+                                        name="radio"
+                                        class="input-radio"
+                                        id="happy"
+                                    />
+                                    <label for="">행복해요</label>
+                                </div>
+                                <div class="daily-input">
+                                    <input
+                                        type="radio"
+                                        oninput="onInputButtonChange()"
+                                        name="radio"
+                                        class="input-radio"
+                                        id="sad"
+                                    />
+                                    <label for="">슬퍼요</label>
+                                </div>
+                                <div class="daily-input">
+                                    <input
+                                        type="radio"
+                                        oninput="onInputButtonChange()"
+                                        name="radio"
+                                        class="input-radio"
+                                        id="surprise"
+                                    />
+                                    <label for="">놀랐어요</label>
+                                </div>
+                                <div class="daily-input">
+                                    <input
+                                        type="radio"
+                                        oninput="onInputButtonChange()"
+                                        name="radio"
+                                        class="input-radio"
+                                        id="angry"
+                                    />
+                                    <label for="">화나요</label>
+                                </div>
+                                <div class="daily-input">
+                                    <input
+                                        type="radio"
+                                        oninput="onInputButtonChange()"
+                                        name="radio"
+                                        class="input-radio"
+                                        id="etc"
+                                    />
+                                    <label for="">기타</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="daily-form">
+                            <div class="daily-form-input">
+                                <div class="daily-title">
+                                    <div>제목</div>
+                                    <input
+                                        type="text"
+                                        id="titleId"
+                                        class="input-title"
+                                        placeholder="제목을 입력해 주세요."
+                                        oninput="onInputButtonChange()"
+                                    />
+                                </div>
+                                <div class="daily-title">
+                                    <div>내용</div>
+                                    <textarea
+                                        id="contentId"
+                                        class="input-title input-content"
+                                        placeholder="내용을 입력해주세요"
+                                        oninput="onInputButtonChange()"
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <button
+                                id="submitButton"
+                                class="submit-button"
+                                onclick="pushDaily()"
+                                disabled
+                            >
+                                등록하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <div class="footer-1">민지의 다이어리</div>
+            <div class="footer-2">대표 : 민지</div>
+            <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
+        </footer>
+    </body>
+    <script src="./utils/pushDaily.js"></script>
+    <script src="./utils/onClickDailyInfor.js"></script>
+    <script src="./utils/onInputButtonChange.js"></script>
+</html>
