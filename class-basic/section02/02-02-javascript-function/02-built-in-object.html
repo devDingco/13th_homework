@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>내장객체실습</title>
+    <script>
+        //1. 수학객체
+        const 수학객체 = {
+            max: function(){
+                console.log("최대값을 구합니다.")
+            },
+            random: function(){
+                return 5
+            },
+            round: function(반올림할값){
+                console.log("반올림할 대상: " + 반올림할값)
+
+            }
+        }
+
+        수학객체.max()
+        수학객체.round(1.5)
+        const 내가만든랜덤숫자 = 수학객체.random()
+        console.log(내가만든랜덤숫자)
+
+        Math.round()
+        const 나의랜덤숫자 = Math.random()//0~1사이의값
+        console.log(나의랜덤숫자)
+
+        
+        //2. 날짜객체
+        const 나의날짜 = new Date(); // 오늘날짜의기능이 담긴
+        console.log(나의날짜.getFullYear());
+        console.log(나의날짜.getMonth() + 1); //0-11
+        console.log(나의날짜.getDate());
+
+        console.log(나의날짜.getFullYear() + "-" + (나의날짜.getMonth() + 1) + "-" + 나의날짜.getDate())
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

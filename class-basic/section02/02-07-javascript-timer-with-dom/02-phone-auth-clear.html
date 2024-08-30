@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <script>
+// <script src = "철수.js">
+
+        let 철수의상자
+
+        function 인증번호요청기능() {
+            clearInterval(철수의상자)
+
+            // const 랜덤한숫자 = Math.random()
+            // const 여섯자리숫자 = Math.floor(랜덤한숫자 * 1000000)
+            // const 인증번호 = String(여섯자리숫자).padStart(6,"0")
+
+            const 인증번호 = String(Math.floor(Math.random()*1000000)).padStart(6,"0")
+            
+            document.getElementById("나타냄").innerText = 인증번호
+
+            let 인증시간 = 179
+            철수의상자 = setInterval(function(){
+
+                        const 분 = String(Math.floor(인증시간 / 60)).padStart(2,"0")
+                        const 초 = String(인증시간 % 60).padStart(2,"0")
+                        document.getElementById("인증번호치는시간").innerText = 
+                        `${분} : ${초}`
+
+                        인증시간 = 인증시간 -1 
+            },1000)//1초에 한번씩반복
+
+           
+            // setTimeout -> clearTimeout
+
+            // document.getElementById("버튼").disabled = true
+            // document.getElementById("버튼").style = "color :red"
+        }
+        //1. setInterval 누를 때마다 실행댐 : 막기
+        //2. 누를때마다 초기화하기
+
+    </script>
+</head>
+<body>
+    <div id="나타냄">000000</div> 
+    <button id="버튼" onclick="인증번호요청기능()">인증번호요청하기</button>
+    <div id="인증번호치는시간">03:00</div> 
+
+
+</body>
+</html>

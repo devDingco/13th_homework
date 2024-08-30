@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <script>
+        function 가입자보여주는기능(가입자이름받는곳){
+            alert("가입하신 이름은: " + 가입자이름받는곳 + "입니다!")
+        }
+
+        function 가입하는기능(){
+            const 가입자명 = docment.getElementById("이름입력창").value
+
+            // document.getElementById("가입자보여주는곳").innerText = 가입자명
+            document.getElementById("가입자보여주는곳").innerHTML = `
+            <div onclick="가입자보여주는기능('${가입자명}')">${가입자명}</div>`
+        }
+    </script>
+</head>
+<body>
+    <div id="가입자보여주는곳"></div>
+
+    이름을 입력하세요 : <input type="text" id="이름입력창" />
+    <button onclick="가입하는기능()">회원가입</button>
+
+    <!-- <button onclick="기능('문자열')">클릭</button>
+</body> -->
+</html>
