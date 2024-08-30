@@ -96,6 +96,14 @@
     height: 285px;
 
     border-radius: 16px;
+
+    transition: filter, transform;
+    transition-duration: 0.5s;
+}
+
+.diary_mood_img:hover {
+    filter: blur(5px);
+    transform: scaleX(1.1) scaleY(1.1);
 }
 
 .diary_title {
@@ -139,8 +147,6 @@
     font-size: 14px;
     color: #A229ED;
 }
-
-
 
 .diary_date {
     font-weight: 400;
