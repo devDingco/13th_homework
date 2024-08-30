@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 2px solid aqua;
+  display: flex;
+  flex-direction: column;
+  width: 1920px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+#header-name {
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.title-list {
+  display: flex;
+  width: 1168px;
+  gap: 40px;
+  /* border: 2px solid crimson; */
+  margin-top: 25px;
+  margin-bottom: 40px;
+}
+
+#dairy-title {
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  border-bottom: 2px solid #000;
+}
+
+#gallery-title {
+  color: var(--Gray-Gray-400, #ABABAB);
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.body {
+  display: flex;
+  gap: 24px;
+  /* border: 2px solid yellowgreen; */
+  margin-bottom: 40px;
+}
+
+#dairy-list {
+  /* border: 2px solid pink; */
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* .dairy-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  border: 2px solid blue;
+} */
+
+.dairy {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 375px;
+  /* border: 2px solid blue; */
+  gap: 16px;
+}
+
+.mood-img {
+  width: 380px;
+  height: 285px;
+}
+
+.daiary-summary-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid black;
+}
+
+.daiary-summary {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+}
+
+#dairy-generator {
+  width: 360px;
+  height: 605px;
+  border: 2px solid black;
+}
+
+.footer {
+  width: 100%;
+  background: var(--Gray-Gray-50, #F2F2F2);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-wrapper {
+  display: flex;
+  width: 1168px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
