@@ -151,6 +151,12 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 16px;
+  transition: width 0.5s, height 0.5px;
+}
+.diary_cover:hover {
+  width: 110%;
+  height: 110%;
+  filter: blur(5px)
 }
 .diary_entry_summary {
   display: flex;
@@ -167,11 +173,10 @@
   align-self: stretch;
 }
 .emotion {
-  color: #28b4e1;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
 }
 .sad_emotion_font_color {
