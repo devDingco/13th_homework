@@ -73,21 +73,42 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-    const diaryEntryContainer = document.querySelectorAll('#diary_entry_container')
+  const diaryEntryContainer = document.querySelectorAll(
+    "#diary_entry_container"
+  );
+  const article = document.getElementById("article");
 
-    if(diaryEntryContainer[diaryEntryContainer.length-1].children.length == 2){
-      const diaryEntryContainer = document.createElement("div");
-      diaryEntryContainer.className = "diary_entry_container";
-      diaryEntryContainer.id = "diary_entry_container";
-      diaryEntryContainer.innerHTML = diaryCard;
-      const article = document.getElementById("article");
-    
-      return article.appendChild(diaryEntryContainer);
-    }else {
-      return diaryEntryContainer[diaryEntryContainer.length-1].innerHTML += diaryCard
-    }
+  if (
+    article.children.length == 0 ||
+    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 2
+  ) {
+    const diaryEntryContainer = document.createElement("div");
+    diaryEntryContainer.className = "diary_entry_container";
+    diaryEntryContainer.id = "diary_entry_container";
+    diaryEntryContainer.innerHTML = diaryCard;
 
-
+    return article.appendChild(diaryEntryContainer);
+  } else {
+    return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
+      diaryCard);
+  }
 };
+
+if(localStorageLength > 0){
+  for (let i = 0; i < localStorageLength; i++) {
+    let key = localStorage.key(i);
+    const record = JSON.parse(localStorage.getItem(key))
+    const recordList = {
+      id: record.id,
+      mood: record.mood,
+      date: record.date,
+      color: record.color,
+      title: record.title,
+      content: record.content,
+      imageName: record.imageName
+    }
+    createHtml(recordList)
+  }
+}
 
 registerButton.addEventListener("click", registerDiary);
