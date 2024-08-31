@@ -1,7 +1,8 @@
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
-let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
+
 let diaryEntry = {};
+let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const createHtml = (diaryEntry) => {
   const diaryCard = `
@@ -25,9 +26,7 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  const diaryEntryContainer = document.querySelectorAll(
-    "#diary_entry_container"
-  );
+  const diaryEntryContainer = document.querySelectorAll("#diary_entry_container");
   const article = document.getElementById("article");
 
   if (
@@ -62,12 +61,16 @@ const getDate = (diaryEntry) => {
   saveDiaryEntry(diaryEntry)
 }
 
-const getImageNameAndFontColor = (checkedMoodId) => { 
-  const coverName = checkedMoodId.split(`_`)[1];
+const getFontColor = (diaryEntry, coverName) => {
   const fontColor = `${coverName}_emotion_font_color`;
-  diaryEntry.imageName = coverName
   diaryEntry.color = fontColor
-  getDate(diaryEntry)
+  getDate(checkedMoodId)
+}
+
+const getImageName = (diaryEntry) => { 
+  const coverName = checkedMoodId.split(`_`)[1];
+  diaryEntry.imageName = coverName
+  getFontColor(diaryEntry, coverName)
 }
 
 const getMood = (diaryEntry) => {
@@ -82,7 +85,7 @@ const getMood = (diaryEntry) => {
     }
   });
   diaryEntry.mood = checkedMood
-  getImageNameAndFontColor(checkedMoodId)
+  getImageName(diaryEntry)
 }
 
 const getId = (diaryEntry) => {
@@ -91,19 +94,20 @@ const getId = (diaryEntry) => {
   getMood(diaryEntry)
 }
 
-const getTitleAndContent = (diaryEntry) => {
-  const diaryTitle =
-  document.getElementsByClassName("diary_title_window")[0].value;
-const diaryContent = document.getElementsByClassName(
-  "diary_contents_window"
-)[0].value;
+const getTitle = (diaryEntry) => {
+  const diaryTitle = document.getElementsByClassName("diary_title_window")[0].value;
   diaryEntry.title = diaryTitle
-  diaryEntry.content = diaryContent
   getId(diaryEntry)
 }
 
+const getContent = (diaryEntry) => {
+  const diaryContent = document.getElementsByClassName("diary_contents_window")[0].value;
+  diaryEntry.content = diaryContent
+  getTitle(diaryEntry)
+}
+
 const registerDiary = () => {
-  getTitleAndContent(diaryEntry)
+  getContent(diaryEntry)
 };
 
 storedDiaryList.map(diary => {
