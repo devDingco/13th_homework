@@ -1,6 +1,6 @@
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
-const localStorageLength = localStorage.length;
+let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const registerDiary = () => {
   const date = new Date();
@@ -18,9 +18,6 @@ const registerDiary = () => {
       checkedMoodId = mood.id;
     }
   });
-
-  console.log(`checkedMoodId: ${checkedMoodId}`);
-  console.log(`checkedMood: ${checkedMood}`);
 
   const diaryTitle =
     document.getElementsByClassName("diary_title_window")[0].value;
@@ -40,9 +37,9 @@ const registerDiary = () => {
     content: diaryContent,
     date: registrationDate,
   };
-  console.log(diaryEntry);
 
-  localStorage.setItem(uuid, JSON.stringify(diaryEntry));
+  storedDiaryList.push({ id: uuid, data: diaryEntry });
+  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   createHtml(diaryEntry);
 };
 
@@ -89,21 +86,17 @@ const createHtml = (diaryEntry) => {
   }
 };
 
-if (localStorageLength > 0) {
-  for (let i = 0; i < localStorageLength; i++) {
-    let key = localStorage.key(i);
-    const record = JSON.parse(localStorage.getItem(key));
-    const recordList = {
-      id: record.id,
-      mood: record.mood,
-      date: record.date,
-      color: record.color,
-      title: record.title,
-      content: record.content,
-      imageName: record.imageName,
-    };
-    createHtml(recordList);
-  }
-}
+storedDiaryList.forEach((diary) => {
+  const storedDiary = {
+    id: diary.data.id,
+    mood: diary.data.mood,
+    date: diary.data.date,
+    color: diary.data.color,
+    title: diary.data.title,
+    content: diary.data.content,
+    imageName: diary.data.imageName,
+  };
+  createHtml(storedDiary);
+});
 
 registerButton.addEventListener("click", registerDiary);

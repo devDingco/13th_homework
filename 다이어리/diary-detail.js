@@ -1,9 +1,10 @@
 const queryString = location.search;
 const part = new URLSearchParams(queryString);
 const id = part.get("id");
-const diaryDetailContent = JSON.parse(localStorage.getItem(id));
+const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
+const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0].data;
 
-const diaryDetailContentList = {
+const diary = {
   id: diaryDetailContent.id,
   mood: diaryDetailContent.mood,
   date: diaryDetailContent.date,
@@ -13,24 +14,24 @@ const diaryDetailContentList = {
   imageName: diaryDetailContent.imageName,
 };
 
-const createHtml = (diaryEntry) => {
+const createHtml = (diary) => {
   const diaryDetailCard = `
     <div class="title_frame">
-      <div class="title">${diaryEntry.title}</div>
+      <div class="title">${diary.title}</div>
       <div class="emotion_date_frame">
         <div class="emotion">
-          <img src="./image/${diaryEntry.imageName}_s.png" width="32px" />
-          <div class="mood_text">${diaryEntry.mood}</div>
+          <img src="./image/${diary.imageName}_s.png" width="32px" />
+          <div class=${diary.color}>${diary.mood}</div>
         </div>
         <div class="date_frame">
-          <div class="date">${diaryEntry.mood}</div>
+          <div class="date">${diary.date}</div>
           <div class="write">작성</div>
         </div>
       </div>
     </div>
     <div class="content_frame">
       <div class="content_label">내용</div>
-      <div class="content">${diaryEntry.content}</div>
+      <div class="content">${diary.content}</div>
     </div>
     <div class="modification_frame">
       <button class="modification_Btn">수정</button>
@@ -43,4 +44,4 @@ const createHtml = (diaryEntry) => {
   return main.appendChild(mainFrame);
 };
 
-createHtml(diaryDetailContentList);
+createHtml(diary);
