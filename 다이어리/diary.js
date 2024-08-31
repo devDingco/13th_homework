@@ -9,22 +9,18 @@ const registerDiary = () => {
   const day = String(date.getDate()).padStart(2, 0);
   const registrationDate = `${year}. ${month}. ${day}`;
 
-  const checkedEtc = document.getElementById("check_etc");
-  const checkedSad = document.getElementById("check_sad");
-  const checkedUpset = document.getElementById("check_upset");
-  const checkedHappy = document.getElementById("check_happy");
-  const checkedSurprise = document.getElementById("check_surprise");
+  const getMood = document.getElementsByName("mood");
+  let checkedMoodId;
+  let checkedMood;
+  getMood.forEach((mood) => {
+    if (mood.checked) {
+      checkedMood = mood.nextElementSibling.innerText;
+      checkedMoodId = mood.id;
+    }
+  });
 
-  const moodCheckList = [
-    checkedHappy,
-    checkedSad,
-    checkedSurprise,
-    checkedUpset,
-    checkedEtc,
-  ];
-
-  const findCheckedMood = moodCheckList.filter((mood) => mood.checked);
-  const checkedMood = findCheckedMood[0].nextElementSibling.innerText;
+  console.log(`checkedMoodId: ${checkedMoodId}`);
+  console.log(`checkedMood: ${checkedMood}`);
 
   const diaryTitle =
     document.getElementsByClassName("diary_title_window")[0].value;
@@ -32,11 +28,9 @@ const registerDiary = () => {
     "diary_contents_window"
   )[0].value;
 
-  const coverName = findCheckedMood[0].id.split(`_`)[1];
+  const coverName = checkedMoodId.split(`_`)[1];
   const fontColor = `${coverName}_emotion_font_color`;
-
   const uuid = String(Math.floor(Math.random() * 1000000)).padStart(6, 0);
-
   let diaryEntry = {
     id: uuid,
     color: fontColor,
@@ -46,6 +40,7 @@ const registerDiary = () => {
     content: diaryContent,
     date: registrationDate,
   };
+  console.log(diaryEntry);
 
   localStorage.setItem(uuid, JSON.stringify(diaryEntry));
   createHtml(diaryEntry);
@@ -94,10 +89,10 @@ const createHtml = (diaryEntry) => {
   }
 };
 
-if(localStorageLength > 0){
+if (localStorageLength > 0) {
   for (let i = 0; i < localStorageLength; i++) {
     let key = localStorage.key(i);
-    const record = JSON.parse(localStorage.getItem(key))
+    const record = JSON.parse(localStorage.getItem(key));
     const recordList = {
       id: record.id,
       mood: record.mood,
@@ -105,9 +100,9 @@ if(localStorageLength > 0){
       color: record.color,
       title: record.title,
       content: record.content,
-      imageName: record.imageName
-    }
-    createHtml(recordList)
+      imageName: record.imageName,
+    };
+    createHtml(recordList);
   }
 }
 
