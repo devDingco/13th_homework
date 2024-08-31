@@ -143,3 +143,15 @@ button:hover {
   background-color: none;
   border: none;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: normal;
+  font-style: normal;
+  background-color: transparent;
+}
+
+a:visited {
+  color: inherit;
+}
