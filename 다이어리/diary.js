@@ -47,7 +47,7 @@ const createHtml = (diaryEntry) => {
 };
 
 const saveDiaryEntry = (diaryEntry) => {
-  storedDiaryList.push(diaryEntry);
+  storedDiaryList.push({...diaryEntry});
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   createHtml(diaryEntry);
 }
