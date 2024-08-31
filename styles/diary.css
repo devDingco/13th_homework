@@ -89,6 +89,10 @@ main .main-content ul {
   gap: 24px;
   row-gap: 24px;
 }
+main .main-content ul > li:hover {
+  transform: scale(105%);
+  transition: all 0.5s;
+}
 
 main .main-content ul > li > button {
   display: flex;
@@ -102,6 +106,9 @@ main .main-content ul > li .img-wrap {
 }
 main .main-content ul > li .img-wrap > img {
   width: 100%;
+}
+main .main-content ul > li .img-wrap > img:hover {
+  filter: blur(1px);
 }
 
 main .main-content ul > li .info-container {

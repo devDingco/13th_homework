@@ -233,6 +233,10 @@ textarea {
 #edit > form .buttons-container > #cancelBtn {
   border: 1px solid #000;
 }
+#edit > form .buttons-container > #cancelBtn:hover {
+  transform: rotateZ(7deg);
+  transition: 0.5s;
+}
 
 #edit > form .buttons-container > #submitBtn.none {
   background: #c7c7c7;
@@ -241,4 +245,8 @@ textarea {
 #edit > form .buttons-container > #submitBtn.active {
   background-color: #000;
   color: #fff;
+}
+#edit > form .buttons-container > #submitBtn.active:hover {
+  transform: rotateZ(7deg);
+  transition: 0.5s;
 }
