@@ -154,8 +154,7 @@
   transition: width 0.5s, height 0.5px;
 }
 .diary_cover:hover {
-  width: 110%;
-  height: 110%;
+  transform: scale(110%);
   filter: blur(5px)
 }
 .diary_entry_summary {
