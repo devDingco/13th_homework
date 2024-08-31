@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>일기장 상세 페이지</title>
+  <link rel="stylesheet" href="./detail.css">
+  <script src="./detail.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 웹페이지 최상단부 -->
+    <div id="header">
+      <div id="header-name">진태의 다이어리</div>
+    </div>
+
+    <!-- 웹페이지 중앙부 -->
+    <div id="body">
+      <!-- 타이틀부 -->
+      <div id="section-header">
+        <div id="title"></div>
+        <div id="mood-and-date">
+          <div id="mood"></div>
+          <div id="date"></div>
+        </div>
+      </div>
+
+      <!-- 내용부 -->
+      <div id="section-body">
+        <div class="section-title">내용</div>
+        <div id="section-main"></div>
+      </div>
+      
+      <!-- 버튼부 -->
+      <div id="section-footer">
+        <div class="delete-btn-area">
+          <button onclick="onClickDeleteButton()" id="delete-btn">삭제</button>
+        </div>
+        <div class="modify-btn-area">
+          <button onclick="onClickModifyButton()" id="modify-btn">수정</button>
+        </div>
+      </div>
+  </div>
+</body>
+</html>
