@@ -106,7 +106,7 @@ const registerDiary = () => {
   getTitleAndContent(diaryEntry)
 };
 
-storedDiaryList.forEach((diary) => {
+storedDiaryList.map(diary => {
   const storedDiary = {
     id: diary.id,
     mood: diary.mood,
@@ -117,6 +117,6 @@ storedDiaryList.forEach((diary) => {
     imageName: diary.imageName,
   };
   createHtml(storedDiary);
-});
+})
 
 registerButton.addEventListener("click", registerDiary);
