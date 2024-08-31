@@ -110,7 +110,11 @@
                 <div class="article-header">
                     <div>일기 보관함</div>
                     <div class="article-header-text">사진 보관함</div>
-                    <select name="" id="">
+                    <select
+                        name=""
+                        id="select-post"
+                        onchange="onChangeSelected(event)"
+                    >
                         <option disabled selected>v 전체</option>
                         <option value="happy">행복해요</option>
                         <option value="sad">슬퍼요</option>
@@ -223,4 +227,5 @@
     <script src="./utils/pushDaily.js"></script>
     <script src="./utils/onClickDailyInfor.js"></script>
     <script src="./utils/onInputButtonChange.js"></script>
+    <script src="./utils/onChangeSelected.js"></script>
 </html>
