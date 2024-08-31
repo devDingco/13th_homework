@@ -82,7 +82,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   display: flex;
   padding: 12px 8px;
@@ -95,7 +95,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   display: flex;
   padding: 12px 8px;
@@ -199,7 +199,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 171.429% */
+  line-height: 24px;
   letter-spacing: -0.14px;
 }
 .diary_title_area {
@@ -213,7 +213,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
   letter-spacing: -0.18px;
 }
 .aside {
@@ -234,7 +234,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   align-self: stretch;
 }
@@ -258,7 +258,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px; /* 120% */
+  line-height: 24px;
   letter-spacing: -0.2px;
   width: 321px;
   height: 24px;
@@ -295,7 +295,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 111.111% */
+  line-height: 20px;
   letter-spacing: -0.18px;
 }
 .diary_textArea {
@@ -323,7 +323,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
   align-self: stretch;
 }
@@ -345,7 +345,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
   letter-spacing: -0.16px;
 }
 .diary_contents_group {
@@ -364,7 +364,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
   align-self: stretch;
 }
@@ -387,7 +387,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
   letter-spacing: -0.16px;
 }
 .register_button {
@@ -431,7 +431,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px; /* 80% */
+  line-height: 16px;
   letter-spacing: -0.2px;
 }
 .footer_representative {
