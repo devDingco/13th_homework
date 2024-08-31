@@ -2,7 +2,7 @@ const queryString = location.search;
 const part = new URLSearchParams(queryString);
 const id = part.get("id");
 const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
-const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0].data;
+const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0];
 
 const diary = {
   id: diaryDetailContent.id,

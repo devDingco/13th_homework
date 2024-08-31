@@ -38,7 +38,7 @@ const registerDiary = () => {
     date: registrationDate,
   };
 
-  storedDiaryList.push({ id: uuid, data: diaryEntry });
+  storedDiaryList.push(diaryEntry);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   createHtml(diaryEntry);
 };
@@ -88,13 +88,13 @@ const createHtml = (diaryEntry) => {
 
 storedDiaryList.forEach((diary) => {
   const storedDiary = {
-    id: diary.data.id,
-    mood: diary.data.mood,
-    date: diary.data.date,
-    color: diary.data.color,
-    title: diary.data.title,
-    content: diary.data.content,
-    imageName: diary.data.imageName,
+    id: diary.id,
+    mood: diary.mood,
+    date: diary.date,
+    color: diary.color,
+    title: diary.title,
+    content: diary.content,
+    imageName: diary.imageName,
   };
   createHtml(storedDiary);
 });
