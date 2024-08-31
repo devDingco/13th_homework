@@ -1,47 +1,7 @@
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
-
-const registerDiary = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, 0);
-  const day = String(date.getDate()).padStart(2, 0);
-  const registrationDate = `${year}. ${month}. ${day}`;
-
-  const getMood = document.getElementsByName("mood");
-  let checkedMoodId;
-  let checkedMood;
-  getMood.forEach((mood) => {
-    if (mood.checked) {
-      checkedMood = mood.nextElementSibling.innerText;
-      checkedMoodId = mood.id;
-    }
-  });
-
-  const diaryTitle =
-    document.getElementsByClassName("diary_title_window")[0].value;
-  const diaryContent = document.getElementsByClassName(
-    "diary_contents_window"
-  )[0].value;
-
-  const coverName = checkedMoodId.split(`_`)[1];
-  const fontColor = `${coverName}_emotion_font_color`;
-  const uuid = String(Math.floor(Math.random() * 1000000)).padStart(6, 0);
-  let diaryEntry = {
-    id: uuid,
-    color: fontColor,
-    mood: checkedMood,
-    title: diaryTitle,
-    imageName: coverName,
-    content: diaryContent,
-    date: registrationDate,
-  };
-
-  storedDiaryList.push(diaryEntry);
-  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  createHtml(diaryEntry);
-};
+let diaryEntry = {};
 
 const createHtml = (diaryEntry) => {
   const diaryCard = `
@@ -84,6 +44,66 @@ const createHtml = (diaryEntry) => {
     return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
       diaryCard);
   }
+};
+
+const saveDiaryEntry = (diaryEntry) => {
+  storedDiaryList.push(diaryEntry);
+  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
+  createHtml(diaryEntry);
+}
+
+const getDate = (diaryEntry) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, 0);
+  const day = String(date.getDate()).padStart(2, 0);
+  const registrationDate = `${year}. ${month}. ${day}`;
+  diaryEntry.date = registrationDate
+  saveDiaryEntry(diaryEntry)
+}
+
+const getImageNameAndFontColor = (checkedMoodId) => { 
+  const coverName = checkedMoodId.split(`_`)[1];
+  const fontColor = `${coverName}_emotion_font_color`;
+  diaryEntry.imageName = coverName
+  diaryEntry.color = fontColor
+  getDate(diaryEntry)
+}
+
+const getMood = (diaryEntry) => {
+  let checkedMood;
+  let checkedMoodId;
+  const getMood = document.getElementsByName("mood");
+
+  getMood.forEach((mood) => {
+    if (mood.checked) {
+      checkedMood = mood.nextElementSibling.innerText;
+      checkedMoodId = mood.id;
+    }
+  });
+  diaryEntry.mood = checkedMood
+  getImageNameAndFontColor(checkedMoodId)
+}
+
+const getId = (diaryEntry) => {
+  const uuid = String(Math.floor(Math.random() * 1000000)).padStart(6, 0);
+  diaryEntry.id = uuid;
+  getMood(diaryEntry)
+}
+
+const getTitleAndContent = (diaryEntry) => {
+  const diaryTitle =
+  document.getElementsByClassName("diary_title_window")[0].value;
+const diaryContent = document.getElementsByClassName(
+  "diary_contents_window"
+)[0].value;
+  diaryEntry.title = diaryTitle
+  diaryEntry.content = diaryContent
+  getId(diaryEntry)
+}
+
+const registerDiary = () => {
+  getTitleAndContent(diaryEntry)
 };
 
 storedDiaryList.forEach((diary) => {
