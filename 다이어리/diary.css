@@ -118,6 +118,7 @@
   align-items: center;
   align-self: stretch;
   position: relative;
+  height: 35px;
 }
 .emotion_dropdown_layout {
   display: flex;
@@ -183,7 +184,7 @@ ul li {
   line-height: 24px;
   letter-spacing: -0.16px;
 }
-.dropdown_name:hover > ul {
+.dropdown_name:hover > #mood_list {
   display: block;
   display: flex;
   min-width: 120px;
@@ -193,10 +194,14 @@ ul li {
   left: 0px;
   top: 32.5px;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
   border: none;
-  background: var(--Gray-Gray-100, #E4E4E4);
   z-index: 100;
+}
+.etc {
+  border-radius: 0 0 8px 8px;
+}
+.dropdown_name > ul:hover {
+  border-radius: 8px;
 }
 .dropdown_name:hover {
   border: 1px solid var(--Gray-Gray-300, #C7C7C7);
