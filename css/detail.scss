@@ -1,0 +1,55 @@
+.detailWrap {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 50px;
+
+  h2 {
+    border-bottom: 2px solid #000;
+    padding-bottom: 12px;
+  }
+  .detailInfo {
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .moodType {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 20px;
+      font-weight: 600;
+
+      .moodTypeImg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .detailDate {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--font-size-1);
+      color: var(--font-color-7);
+    }
+  }
+
+  .buttonWrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .whiteBtn {
+    background-color: #fff;
+    color: var(--font-color-8);
+    font-weight: 500;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color-1);
+    border-radius: 8px;
+  }
+}

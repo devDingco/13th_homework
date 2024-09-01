@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,33 @@
     <header></header>
     <div class="headerBanner"></div>
     <nav></nav>
+    <div class="detailWrap">
+      <div class="detailHeader">
+        <h2 class="detailTitle"><!--이것은 타이틀 입니다.--></h2>
+        <div class="detailInfo">
+          <span class="moodType"
+            ><img class="moodTypeImg" src="https://picsum.photos/24/24​" /><span
+              class="moodTypeText"
+              ><!-- 슬퍼요--></span
+            ></span
+          >
+          <span class="detailDate"
+            ><span><!-- 작성한 날짜 --></span>작성</span
+          >
+        </div>
+      </div>
+      <p class="detailContent">
+        <!-- 이것에 내용이 노출됩니다. -->
+      </p>
+      <div class="buttonWrap">
+        <!-- <button class="whiteBtn">목록</button> -->
+        <button class="whiteBtn editBtn" onclick="editBtn()">수정</button>
+        <button class="whiteBtn" onclick="deleteBtn()">삭제</button>
+      </div>
+    </div>
+
     <footer></footer>
     <script src="./js/index.js"></script>
+    <script src="./js/detail.js"></script>
   </body>
 </html>
