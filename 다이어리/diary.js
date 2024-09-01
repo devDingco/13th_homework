@@ -5,14 +5,6 @@ const diaryContent = document.getElementById("diaryContent");
 let diaryEntry = {};
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
-let filterMood = {
-  etcDiaries: [],
-  sadDiaries: [],
-  upsetDiaries: [],
-  happyDiaries: [],
-  surpriseDiaries: [],
-};
-
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`);
   const text = document.getElementsByClassName("diary_title_window")[0];
@@ -161,14 +153,6 @@ storedDiaryList.map((diary) => {
 });
 
 const listDiariesByMood = (filteredDiaries) => {
-  const filteredDiariesMood = filteredDiaries[0].imageName;
-  for (const key in filterMood) {
-    if (key.includes(filteredDiariesMood)) {
-      const arr = filterMood[key];
-      arr.push(filteredDiaries);
-    }
-  }
-
   const article = document.getElementById("article");
   article.innerHTML = "";
   filteredDiaries.map((diary) => createHtml(diary));
