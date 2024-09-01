@@ -6,7 +6,7 @@
     <title>치영의 일기장</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/index.js" defer></script>
 </head>
 <body class="noto-sans-kr">
     <header>
@@ -18,29 +18,41 @@
         <div class="main-banner bar">
             <div class="main-banner-bg-img">
         </div>
+        <template id="list-item-template">
+            <li class="diary-listitem flexchild">
+                <a id="edit-page-anchor" class="anchor-nodeco">
+                    <div class="list-item-border">
+                        <div class="diary-listitem-bg"></div>
+                        <div class="diary-listitem-status">
+                            <span id="add-emo">슬퍼요</span>
+                            <span id="add-date">2019.03.21</span>
+                        </div>
+                        <div class="diary-listitem-summary">
+                            <p id="add-title">타이틀영역입니다.한줄까지만노출됩니다</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </template>
     </header>
     <main>
         <div class="tab-view bar">
             <button class="tab-view btn active">일기보관함</button>
             <button class="tab-view btn" disabled>사진보관함</button>
         </div>
+        <div class="bar tab-view">
+            <select id="dropdownEmotionFilter">
+                <option>전체</option>
+                <option>행복해요</option>
+                <option>슬퍼요</option>
+                <option>놀랐어요</option>
+                <option>화나요</option>
+                <option>기타</option>
+            </select>
+        </div>
         <div class="flexcontainer">
             <div class="flexchild-left"> 
                 <ul class="diary-listview flexlist" id="diarylist">
-                    <template id="list-item-template">
-                        <li class="diary-listitem flexchild">
-                            <div class="list-item-border">
-                                <div class="diary-listitem-bg"></div>
-                                <div class="diary-listitem-status">
-                                    <span id="add-emo">슬퍼요</span>
-                                    <span id="add-date">2019.03.21</span>
-                                </div>
-                                <div class="diary-listitem-summary">
-                                    <p id="add-title">타이틀영역입니다.한줄까지만노출됩니다</p>
-                                </div>
-                            </div>
-                        </li>
-                    </template>
                 </ul>
             </div>
             <div class="flexchild-right">

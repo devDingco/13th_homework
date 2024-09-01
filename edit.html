@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 수정하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/edit.css">
+    <script src="js/edit.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="edit-header">
+            <p class="title"></p>
+        </div>
+        <div class="edit-body">
+            <form id="edit-form">
+                <div class="edit-emotion">
+                    <label>
+                        <input id="happy" type="radio" name="emotion" value="happy">
+                        <p>행복해요</p>
+                    </label>
+                    <label>
+                        <input id="sad" type="radio" name="emotion" value="sad">
+                        <p>슬퍼요</p>
+                    </label>
+                    <label>
+                        <input id="surprised" type="radio" name="emotion" value="surprised">
+                        <p>놀랐어요</p>
+                    </label>
+                    <label>
+                        <input id="angry" type="radio" name="emotion" value="angry">
+                        <p>화나요</p>
+                    </label>
+                    <label>
+                        <input id="other" type="radio" name="emotion" value="other">
+                        <p>기타</p>
+                    </label>
+                </div>
+                <label>
+                    <p class="edit-title">제목</p>
+                    <input class="edit-title" type="text">
+                </label>
+                <label>
+                    <p class="edit-content">내용</p>
+                    <textarea class="edit-content"></textarea>
+                </label>
+            </form>
+        </div>
+        <div class="edit-footer">
+            <button id="edit-button" form="edit-form">
+                수정
+            </button>
+            <button id="cancel-button">
+                취소
+            </button>
+        </div>
+    </main>
+</body>
+</html>
