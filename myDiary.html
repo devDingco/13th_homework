@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[30.이하성] css-js myDiary</title>
+    <title>[이하성] CSS&JS myDiary</title>
     <link href="./myDiary.css" rel="stylesheet">
     <script src="./myDiary.js" defer> </script>
 </head>
@@ -13,73 +13,36 @@
             <div class="header__text"> <b class="header__text" id="header__login"> {name} </b>의 다이어리에 오신 것을 환영합니다. </div>
             <img src="./asset/header__banner.png">
         </div>
+
         <div class="container__nav">
-            <div class="nav__tap">일기보관함</div>
-            <div class="nav__tap">사진보관함</div>
+            <div class="nav__tap">
+                <div class="tap__active">일기보관함</div>
+                <div class="tap__disabled">사진보관함</div>
+            </div>
+            <div class="nav__filter">
+                <select class="nav__filter" onchange="activeFilter(event)">
+                    <option name="filter" value="all">전체</option>
+                    <option name="filter" value="happy">행복해요</option>
+                    <option name="filter" value="sad">슬퍼요</option>
+                    <option name="filter" value="surprise">놀랐어요</option>
+                    <option name="filter" value="angry">화나요</option>
+                    <option name="filter" value="etc">기타</option>
+                </select>
+            </div>
         </div>
 
         <div class="container__content">
             <div class="content__left__card">
                 <div class="wrapper__card">
                     <div class="card__img">
-                        <img src="./asset/card__sad.png">
+                        <img src="./asset/card__happy.png">
                     </div>
-                    <div class="card__topic">
-                        <div class="card__status">
-                            <div class="card__sad">슬퍼요</div>
-                            <div class="card__date">2024. 03. 12</div>
-                        </div>
-                        <div class="card__title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                    </div>
-                </div>
-                <div class="wrapper__card">
-                    <img src="asset/card__surprise.png">
-                    <div class="card__topic">
-                        <div class="card__status">
-                            <div class="card__surprise">놀랐어요</div>
-                            <div class="card__date">2024. 03. 12</div>
-                        </div>
-                        <div class="card__title">타이틀 영역입니다.</div>
-                    </div>
-                </div>
-                <div class="wrapper__card">
-                    <img src="asset/card__angry.png">
-                    <div class="card__topic">
-                        <div class="card__status">
-                            <div class="card__angry">화나요</div>
-                            <div class="card__date">2024. 03. 12</div>
-                        </div>
-                        <div class="card__title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                    </div>
-                </div>
-                <div class="wrapper__card">
-                    <img src="asset/card__happy.png">
                     <div class="card__topic">
                         <div class="card__status">
                             <div class="card__happy">행복해요</div>
                             <div class="card__date">2024. 03. 12</div>
                         </div>
-                        <div class="card__title">타이틀 영역입니다.</div>
-                    </div>
-                </div>
-                <div class="wrapper__card">
-                    <img src="asset/card__etc.png">
-                    <div class="card__topic">
-                        <div class="card__status">
-                            <div class="card__etc">기타</div>
-                            <div class="card__date">2024. 03. 12</div>
-                        </div>
                         <div class="card__title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                    </div>
-                </div>
-                <div class="wrapper__card">
-                    <img src="asset/card__happy.png">
-                    <div class="card__topic">
-                        <div class="card__status">
-                            <div class="card__happy">행복해요</div>
-                            <div class="card__date">2024. 03. 12</div>
-                        </div>
-                        <div class="card__title">타이틀 영역입니다.</div>
                     </div>
                 </div>
             </div>
@@ -108,8 +71,8 @@
         <div class="container__footer">
             <div class="wrapper__footer">
                 <div class="footer__text"> <b class="footer__text" id="footer__login"> {name} </b>의 다이어리 </div>
-                <div class="footer__name"> 대표 : {name} </div>
-                <div class="footer__copy"> Copyright © 2024. {name} Co., Ltd. </div>
+                <!-- <div class="footer__name"> 대표 : {name} </div> -->
+                <div class="footer__copy"> Copyright © 2024. {name} </div>
             </div>
         </div>
     </div>

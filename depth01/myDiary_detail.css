@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #222;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FCFCFC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container__header {
+    width: 1168px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 64px;
+}
+
+.header__text {
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin: 24px 0px;
+}
+
+.container__content {
+    width: 1168px;
+    height: 100%;
+}
+
+.content__title {
+    width: 100%;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid #222;
+}
+
+.content__status {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.content__mood {
+    display: flex;
+    align-items: center;
+}
+
+.mood__text {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 96px;
+    margin: 0px 8px;
+    color: #EA5757;
+}
+
+.content__post {
+    display: flex;
+}
+
+.post__date, .post__text {
+    color: #bbb;
+    margin-right: 8px;
+}
+
+.content__context {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.context__head {
+    width: 1152px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.context__title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.context__edit {
+    width: 96px;
+    height: 32px;
+    background-color: #FCFCFC;
+    border: 2px solid #FFBE98;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.context__text {
+    width: 1152px;
+    height: 300px;
+    border-radius: 8px;
+    background-color: #F2F2F2;
+    font-size: 18px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
