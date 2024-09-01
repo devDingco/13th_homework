@@ -27,7 +27,7 @@
   width: 100%;
   height: auto;
   display: flex;
-  padding: 0 20px;
+  padding: 0 2px;
   align-self: stretch;
   align-items: center;
   color: #000000;
@@ -78,10 +78,16 @@
   align-self: stretch;
 }
 
+.diary_edit {
+  text-decoration: none;
+  width: 100%
+}
+
 .title_frame {
   display: flex;
   height: auto;
   max-width: 1168px;
+  min-width: 380px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -178,6 +184,8 @@
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .content_label {
