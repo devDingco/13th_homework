@@ -1,0 +1,206 @@
+:root {
+  --font-color-black: #000000;
+  --font-color-1: #28b4e1;
+  --font-color-2: #d59029;
+  --font-color-3: #777777;
+  --font-color-4: #ea5757;
+  --font-color-5: #a229ed;
+  --font-color-6: #ababab;
+  --font-color-7: #919191;
+
+  --bg-color-1: #f2f2f2;
+  --bg-color-2: #c7c7c7;
+
+  --border-color-1: #d4d3d3;
+  --border-color-2: #c7c7c7;
+
+  --font-size-1: 14px;
+  --font-size-2: 18px;
+  --font-size-3: 20px;
+  --font-size-4: 24px;
+
+  --font-family: "Pretendard", -apple-system, BlinkMacSystemFont,
+    "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+
+  --width: 1168px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.loaderBox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side, #000 90%, #0000) 0 /
+    calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: l1 1s steps(4) infinite;
+}
+@keyframes l1 {
+  to {
+    clip-path: inset(0 -34% 0 0);
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-1);
+  color: var(--font-color-black);
+}
+
+header,
+section,
+.footerInner,
+nav,
+.headerBanner {
+  max-width: var(--width);
+  margin: 0 auto;
+}
+
+header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  h1 {
+    font-weight: 700;
+    font-size: var(--font-size-2);
+  }
+
+  .toggleSwitch {
+    input {
+      appearance: none;
+      position: relative;
+    }
+  }
+}
+
+.headerBanner {
+  overflow: hidden;
+  height: 240px;
+  border-radius: 24px;
+  position: relative;
+
+  img {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+  padding: 24px 0 42px;
+
+  ul.navMenu {
+    display: flex;
+    gap: 16px;
+
+    li {
+      cursor: pointer;
+      font-size: var(--font-size-4);
+      padding: 8px 12px;
+
+      &.active {
+        font-weight: bold;
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
+
+  .navBottom {
+    display: flex;
+    justify-content: space-between;
+
+    .filterSearchBox {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      .diaryFilter {
+        width: 120px;
+        height: 48px;
+        border: 1px solid var(--border-color-2);
+        padding: 16px 12px;
+        border-radius: 8px;
+        background-image: url("../img/down_fill_light_m.svg");
+        background-repeat: no-repeat;
+        background-position: 90% center;
+
+        -o-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      .searchBox {
+        width: 320px;
+        height: 48px;
+        border-radius: 48px;
+        background-image: url("../img/search_outline_light_m.svg");
+        background-position: 12px center;
+        background-repeat: no-repeat;
+        border: 1px solid var(--border-color-2);
+        padding: 12px 48px;
+
+        &::placeholder {
+          color: var(--font-color-6);
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .diaryWritePopBtn {
+      width: 110px;
+      height: 48px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 8px;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--font-size-2);
+      line-height: 24px;
+    }
+  }
+}
+
+footer {
+  background-color: var(--bg-color-1);
+  padding: 24px 0;
+  .footerInner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+}

@@ -4,7 +4,8 @@
     <title>main</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/main.css" />
     <link
       rel="stylesheet"
       as="style"
@@ -14,20 +15,44 @@
   </head>
   <body>
     <!-- <div class="loaderBox"><div class="loader"></div></div> -->
-
     <header>
-      <h1><span class="userName"></span>의 다이어리</h1>
+      <!-- <h1><span class="userName"></span>의 다이어리</h1> -->
+      <!-- <fieldset class="toggleSwitch">
+        <label>
+          <input role="switch" type="checkbox" />
+          <span>다크모드</span>
+        </label>
+      </fieldset> -->
     </header>
-
     <div class="headerBanner">
-      <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
+      <!-- <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /> -->
     </div>
-
     <nav>
-      <ul>
+      <!-- <ul class="navMenu">
         <li class="active">일기보관함</li>
         <li>사진보관함</li>
-      </ul>
+      </ul> -->
+
+      <div class="navBottom">
+        <div class="filterSearchBox">
+          <select name="moodFilter" class="diaryFilter" onchange="moodFilter()">
+            <option value="전체">전체</option>
+            <option value="행복해요">행복해요</option>
+            <option value="슬퍼요">슬퍼요</option>
+            <option value="놀랐어요">놀랐어요</option>
+            <option value="화나요">화나요</option>
+          </select>
+          <!-- <input
+            class="searchBox"
+            type="search"
+            placeholder="검색어를 입력해 주세요."
+          /> -->
+        </div>
+        <!-- <button class="diaryWritePopBtn">
+          <img src="./img/plus_outline_light_m.svg" alt="plus" />
+          일기쓰기
+        </button> -->
+      </div>
     </nav>
 
     <section>
@@ -117,13 +142,14 @@
     </section>
 
     <footer>
-      <div class="footerInner">
+      <!-- <div class="footerInner">
         <h2><span class="userName"></span>의 다이어리</h2>
         <p><span class="userName"></span>의 일상을 기록하는 공간입니다.</p>
         <p>© 2024. All rights reserved.</p>
-      </div>
+      </div> -->
     </footer>
 
-    <script src="./index.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>

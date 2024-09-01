@@ -1,0 +1,202 @@
+section {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 40px;
+
+  .empty {
+    text-align: center;
+    padding: 20vh;
+    color: var(--font-color-6);
+    font-size: var(--font-size-3);
+  }
+
+  .diaryList {
+    width: 784px;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      li {
+        width: 380px;
+
+        &:hover {
+          transform: scale(1.02);
+          img {
+            filter: blur(1px);
+          }
+        }
+
+        figure {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding-bottom: 16px;
+
+          figcaption {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 8px;
+
+            h3 {
+              font-weight: 600;
+              font-size: var(--font-size-2);
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              word-break: break-all;
+              width: 100%;
+            }
+          }
+
+          .infoTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+
+            .moodText {
+              font-weight: 600;
+              font-size: var(--font-size-1);
+
+              &.moodTextType1 {
+                color: var(--font-color-1);
+              }
+              &.moodTextType2 {
+                color: var(--font-color-2);
+              }
+              &.moodTextType3 {
+                color: var(--font-color-3);
+              }
+              &.moodTextType4 {
+                color: var(--font-color-4);
+              }
+              &.moodTextType5 {
+                color: var(--font-color-5);
+              }
+            }
+
+            .diaryDate {
+              font-size: var(--font-size-1);
+              color: var(--font-color-7);
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.diaryWrite {
+  width: 360px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color-1);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  h3 {
+    font-size: var(--font-size-4);
+    font-weight: 700;
+  }
+
+  .moodTypeRadio {
+    font-size: var(--font-size-2);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .radioWrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      label {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      input {
+        -webkit-appearance: none; // 웹킷 브라우저에서 기본 스타일 제거
+        -moz-appearance: none; // 모질라 브라우저에서 기본 스타일 제거
+        appearance: none; // 기본 브라우저에서 기본 스타일 제거
+        width: 18px;
+        height: 18px;
+        box-shadow: 0 0 0 2px #777; // 라인
+        border-radius: 50%;
+        outline: none; // focus 시에 나타나는 기본 스타일 제거
+        cursor: pointer;
+        &:checked {
+          background-color: #111; // 체크 시 내부 원 색상
+          border: 3px solid #fff; // 라인이 아닌, 라인과 원 사이 색상
+          box-shadow: 0 0 0 2px #000; // 라인
+        }
+      }
+    }
+
+    span {
+      display: block;
+      font-size: var(--font-size-3);
+    }
+  }
+
+  .diaryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        font-weight: 500;
+        font-size: var(--font-size-1);
+      }
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-color-1);
+      padding: 12px 16px;
+      border-radius: 8px;
+
+      &::placeholder {
+        color: var(--font-color-6);
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+
+    input {
+      height: 48px;
+    }
+
+    textarea {
+      height: 128px;
+    }
+  }
+
+  .diaryWriteBtn {
+    height: 48px;
+    border-radius: 8px;
+    background-color: var(--bg-color-2);
+    color: #fff;
+    border: none;
+    font-size: var(--font-size-2);
+    font-weight: 600;
+
+    &.active {
+      background-color: --font-color-black;
+    }
+  }
+}
