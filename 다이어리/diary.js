@@ -10,20 +10,22 @@ let filterMood = {
   sadDiaries: [],
   surpriseDiaries: [],
   upsetDiaries: [],
-  etcDiaries: []
-}
+  etcDiaries: [],
+};
 
 const clearDiaryInputs = (checkedMoodId) => {
-  const check = document.getElementById(`${checkedMoodId}`)
-  const text = document.getElementsByClassName('diary_title_window')[0]
-  const textarea = document.getElementsByClassName('diary_contents_window')[0]
-  check.checked = false
-  text.value = null
-  textarea.value = null
-}
+  const check = document.getElementById(`${checkedMoodId}`);
+  const text = document.getElementsByClassName("diary_title_window")[0];
+  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  check.checked = false;
+  text.value = null;
+  textarea.value = null;
+};
 
 const appendDiaryEntry = (diaryCard) => {
-  const diaryEntryContainer = document.querySelectorAll("#diary_entry_container");
+  const diaryEntryContainer = document.querySelectorAll(
+    "#diary_entry_container"
+  );
   const article = document.getElementById("article");
 
   if (
@@ -40,7 +42,7 @@ const appendDiaryEntry = (diaryCard) => {
     return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
       diaryCard);
   }
-}
+};
 
 const createHtml = (diaryEntry) => {
   const diaryCard = `
@@ -64,7 +66,7 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  appendDiaryEntry(diaryCard)
+  appendDiaryEntry(diaryCard);
 };
 
 const saveDiaryEntry = (diaryEntry) => {
@@ -99,7 +101,7 @@ const getMood = (diaryEntry) => {
   let checkedMood;
   let checkedMoodId;
   const getMood = document.getElementsByName("mood");
-  
+
   getMood.forEach((mood) => {
     if (mood.checked) {
       checkedMood = mood.nextElementSibling.innerText;
@@ -109,7 +111,7 @@ const getMood = (diaryEntry) => {
 
   diaryEntry.mood = checkedMood;
   getImageName(diaryEntry, checkedMoodId);
-  clearDiaryInputs(checkedMoodId)
+  clearDiaryInputs(checkedMoodId);
 };
 
 const getId = (diaryEntry) => {
@@ -134,7 +136,15 @@ const getContent = (diaryEntry) => {
 };
 
 const registerDiary = () => {
-  getContent(diaryEntry);
+  const text = document.getElementsByClassName("diary_title_window")[0];
+  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  const getMood = document.getElementsByName("mood");
+  const mood = [...getMood].filter((e) => e.checked == true);
+  if (text.value == "" || textarea.value == "" || mood.length == 0) {
+    alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
+  } else {
+    getContent(diaryEntry);
+  }
 };
 
 storedDiaryList.map((diary) => {
@@ -153,14 +163,14 @@ storedDiaryList.map((diary) => {
 const listDiariesByMood = (filteredDiaries) => {
   const filteredDiariesMood = filteredDiaries[0].imageName;
   for (const key in filterMood) {
-    if(key.includes(filteredDiariesMood)){
-      const arr = filterMood[key]
-      arr.push(filteredDiaries)
+    if (key.includes(filteredDiariesMood)) {
+      const arr = filterMood[key];
+      arr.push(filteredDiaries);
     }
   }
 
   const article = document.getElementById("article");
-  article.innerHTML = ''
+  article.innerHTML = "";
   filteredDiaries.map((diary) => createHtml(diary));
 };
 
@@ -169,8 +179,10 @@ const getDiariesByMood = (selectedMood) => {
     (diary) => diary.mood == selectedMood
   );
 
-  if(filteredDiaries.length == 0){
-    return alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
+  if (filteredDiaries.length == 0) {
+    return alert(
+      "선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요."
+    );
   }
 
   listDiariesByMood(filteredDiaries);
