@@ -170,7 +170,7 @@
   background: var(--Gray-W, #FFF);
 }
 
-.title_edit_input {
+#title_edit_input {
   color: var(--Gray-B, #000);
   font-size: 16px;
   font-style: normal;
@@ -182,7 +182,7 @@
   outline: none;
 }
 
-.title_edit_input::placeholder {
+#title_edit_input::placeholder {
   color: var(--Gray-Gray-400, #ababab);
   font-size: 16px;
   font-style: normal;
@@ -221,7 +221,7 @@
   background: var(--Gray-W, #FFF);
 }
 
-.content_edit_input {
+#content_edit_input {
   flex: 1 0 0;
   color: var(--Gray-B, #000);
   font-size: 16px;
@@ -236,7 +236,7 @@
   align-self: stretch;
 }
 
-.content_edit_input::placeholder {
+#content_edit_input::placeholder {
   color: var(--Gray-Gray-400, #ababab);
   font-size: 16px;
   font-style: normal;
@@ -251,6 +251,10 @@
   align-items: flex-end;
   gap: 16px;
   align-self: stretch;
+}
+
+.button_layout > a {
+  text-decoration: none;
 }
 
 .button {
