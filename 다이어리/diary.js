@@ -2,6 +2,9 @@ const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+let diaryEntry = {};
+let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
+
 let filterMood = {
   happyDiaries: [],
   sadDiaries: [],
@@ -9,9 +12,6 @@ let filterMood = {
   upsetDiaries: [],
   etcDiaries: []
 }
-let diaryEntry = {};
-
-let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`)
@@ -172,7 +172,7 @@ const getDiariesByMood = (selectedMood) => {
   if(filteredDiaries.length == 0){
     return alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
   }
-  
+
   listDiariesByMood(filteredDiaries);
 };
 
