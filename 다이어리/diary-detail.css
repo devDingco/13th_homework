@@ -43,6 +43,10 @@
   align-self: stretch;
 }
 
+.header_frame > a {
+  text-decoration: none;
+}
+
 .logo {
   display: flex;
   width: 130px;
