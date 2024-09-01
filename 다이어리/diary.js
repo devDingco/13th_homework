@@ -168,6 +168,11 @@ const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter(
     (diary) => diary.mood == selectedMood
   );
+
+  if(filteredDiaries.length == 0){
+    return alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
+  }
+  
   listDiariesByMood(filteredDiaries);
 };
 
