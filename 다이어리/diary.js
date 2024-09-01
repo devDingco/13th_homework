@@ -13,6 +13,15 @@ let diaryEntry = {};
 
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
+const clearDiaryInputs = (checkedMoodId) => {
+  const check = document.getElementById(`${checkedMoodId}`)
+  const text = document.getElementsByClassName('diary_title_window')[0]
+  const textarea = document.getElementsByClassName('diary_contents_window')[0]
+  check.checked = false
+  text.value = null
+  textarea.value = null
+}
+
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll("#diary_entry_container");
   const article = document.getElementById("article");
@@ -90,15 +99,17 @@ const getMood = (diaryEntry) => {
   let checkedMood;
   let checkedMoodId;
   const getMood = document.getElementsByName("mood");
-
+  
   getMood.forEach((mood) => {
     if (mood.checked) {
       checkedMood = mood.nextElementSibling.innerText;
       checkedMoodId = mood.id;
     }
   });
+
   diaryEntry.mood = checkedMood;
   getImageName(diaryEntry, checkedMoodId);
+  clearDiaryInputs(checkedMoodId)
 };
 
 const getId = (diaryEntry) => {
@@ -139,17 +150,12 @@ storedDiaryList.map((diary) => {
   createHtml(storedDiary);
 });
 
-const test = () => {
-
-}
-
 const listDiariesByMood = (filteredDiaries) => {
   const filteredDiariesMood = filteredDiaries[0].imageName;
   for (const key in filterMood) {
     if(key.includes(filteredDiariesMood)){
       const arr = filterMood[key]
       arr.push(filteredDiaries)
-      console.log(arr)
     }
   }
 
