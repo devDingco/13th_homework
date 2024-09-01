@@ -1,7 +1,16 @@
+const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+let filterMood = {
+  happyDiaries: [],
+  sadDiaries: [],
+  surpriseDiaries: [],
+  upsetDiaries: [],
+  etcDiaries: []
+}
 let diaryEntry = {};
+
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const createHtml = (diaryEntry) => {
@@ -46,10 +55,10 @@ const createHtml = (diaryEntry) => {
 };
 
 const saveDiaryEntry = (diaryEntry) => {
-  storedDiaryList.push({...diaryEntry});
+  storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   createHtml(diaryEntry);
-}
+};
 
 const getDate = (diaryEntry) => {
   const date = new Date();
@@ -57,21 +66,21 @@ const getDate = (diaryEntry) => {
   const month = String(date.getMonth() + 1).padStart(2, 0);
   const day = String(date.getDate()).padStart(2, 0);
   const registrationDate = `${year}. ${month}. ${day}`;
-  diaryEntry.date = registrationDate
-  saveDiaryEntry(diaryEntry)
-}
+  diaryEntry.date = registrationDate;
+  saveDiaryEntry(diaryEntry);
+};
 
 const getFontColor = (diaryEntry, coverName) => {
   const fontColor = `${coverName}_emotion_font_color`;
-  diaryEntry.color = fontColor
-  getDate(checkedMoodId)
-}
+  diaryEntry.color = fontColor;
+  getDate(checkedMoodId);
+};
 
-const getImageName = (diaryEntry) => { 
+const getImageName = (diaryEntry) => {
   const coverName = checkedMoodId.split(`_`)[1];
-  diaryEntry.imageName = coverName
-  getFontColor(diaryEntry, coverName)
-}
+  diaryEntry.imageName = coverName;
+  getFontColor(diaryEntry, coverName);
+};
 
 const getMood = (diaryEntry) => {
   let checkedMood;
@@ -84,33 +93,36 @@ const getMood = (diaryEntry) => {
       checkedMoodId = mood.id;
     }
   });
-  diaryEntry.mood = checkedMood
-  getImageName(diaryEntry)
-}
+  diaryEntry.mood = checkedMood;
+  getImageName(diaryEntry);
+};
 
 const getId = (diaryEntry) => {
   const uuid = String(Math.floor(Math.random() * 1000000)).padStart(6, 0);
   diaryEntry.id = uuid;
-  getMood(diaryEntry)
-}
-
-const getTitle = (diaryEntry) => {
-  const diaryTitle = document.getElementsByClassName("diary_title_window")[0].value;
-  diaryEntry.title = diaryTitle
-  getId(diaryEntry)
-}
-
-const getContent = (diaryEntry) => {
-  const diaryContent = document.getElementsByClassName("diary_contents_window")[0].value;
-  diaryEntry.content = diaryContent
-  getTitle(diaryEntry)
-}
-
-const registerDiary = () => {
-  getContent(diaryEntry)
+  getMood(diaryEntry);
 };
 
-storedDiaryList.map(diary => {
+const getTitle = (diaryEntry) => {
+  const diaryTitle =
+    document.getElementsByClassName("diary_title_window")[0].value;
+  diaryEntry.title = diaryTitle;
+  getId(diaryEntry);
+};
+
+const getContent = (diaryEntry) => {
+  const diaryContent = document.getElementsByClassName(
+    "diary_contents_window"
+  )[0].value;
+  diaryEntry.content = diaryContent;
+  getTitle(diaryEntry);
+};
+
+const registerDiary = () => {
+  getContent(diaryEntry);
+};
+
+storedDiaryList.map((diary) => {
   const storedDiary = {
     id: diary.id,
     mood: diary.mood,
@@ -121,6 +133,30 @@ storedDiaryList.map(diary => {
     imageName: diary.imageName,
   };
   createHtml(storedDiary);
-})
+});
 
+const listDiariesByMood = (filteredDiaries) => {
+  const filteredDiariesMood = filteredDiaries[0].imageName;
+  for (const key in filterMood) {
+    if(key.includes(filteredDiariesMood)){
+      const arr = filterMood[key]
+      arr.push(filteredDiaries)
+    }
+  }
+  filteredDiaries.map((diary) => createHtml(diary));
+};
+
+const getDiariesByMood = (selectedMood) => {
+  const filteredDiaries = storedDiaryList.filter(
+    (diary) => diary.mood == selectedMood
+  );
+  listDiariesByMood(filteredDiaries);
+};
+
+const onClickMood = (e) => {
+  const selectedMood = e.target.innerText;
+  getDiariesByMood(selectedMood);
+};
+
+moodList.addEventListener("click", onClickMood);
 registerButton.addEventListener("click", registerDiary);
