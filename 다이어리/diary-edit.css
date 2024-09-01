@@ -166,8 +166,8 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
 }
 
 #title_edit_input {
@@ -217,8 +217,8 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
 }
 
 #content_edit_input {
@@ -271,8 +271,8 @@
 #cancel_button {
   border-radius: 8px;
   border: 1px solid var(--Gray-B, #000);
-  background: var(--Gray-W, #FFF);
-  color: var(--Gray-Gray-900, #1C1C1C);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-900, #1c1c1c);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -283,10 +283,15 @@
 #edit_button {
   border-radius: 8px;
   background: var(--Gray-B, #000);
-  color: var(--Gray-Gray-50, #F2F2F2);
+  color: var(--Gray-Gray-50, #f2f2f2);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: -0.18px;
+  transition: transform 1s, background-color 1s;
+}
+
+#edit_button:hover {
+  transform: rotateY(180deg);
 }
