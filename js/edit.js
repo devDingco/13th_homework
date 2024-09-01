@@ -25,8 +25,8 @@ const diaryModifySave = () => {
   console.log(moodTypeValue);
   const diaryTitle = document.querySelector(".diaryTitle").value;
   console.log(diaryTitle);
-  const diaryDesc = document.querySelector(".diaryDesc").value;
-  console.log(diaryDesc);
+  // const diaryDesc = document.querySelector(".diaryDesc").value;
+  // console.log(diaryDesc);
 
   console.log(editor.getContents());
   const diary = {
@@ -34,7 +34,8 @@ const diaryModifySave = () => {
     writeDate: diaryArr[diaryId].writeDate,
     modifyDate: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
     title: diaryTitle,
-    content: editor.getContents()
+    content: editor.getContents(),
+    id: diaryId,
   };
 
   diaryArr[diaryId] = diary;
@@ -42,6 +43,7 @@ const diaryModifySave = () => {
   localStorage.setItem("diaryArray", JSON.stringify(diaryArr));
 
   alert("수정이 완료되었습니다.");
+  location.href = "./detail.html?diaryId=" + diaryId;
 
 }
 
