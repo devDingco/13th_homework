@@ -139,14 +139,22 @@ storedDiaryList.map((diary) => {
   createHtml(storedDiary);
 });
 
+const test = () => {
+
+}
+
 const listDiariesByMood = (filteredDiaries) => {
   const filteredDiariesMood = filteredDiaries[0].imageName;
   for (const key in filterMood) {
     if(key.includes(filteredDiariesMood)){
       const arr = filterMood[key]
       arr.push(filteredDiaries)
+      console.log(arr)
     }
   }
+
+  const article = document.getElementById("article");
+  article.innerHTML = ''
   filteredDiaries.map((diary) => createHtml(diary));
 };
 

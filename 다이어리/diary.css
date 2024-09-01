@@ -229,15 +229,15 @@ ul li {
 .diary_entry_container {
   display: flex;
   max-width: 784px;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
   gap: 24px;
   align-self: stretch;
   flex-wrap: wrap;
 }
 .diary_detail {
   text-decoration: none;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
 }
 .diary_entry {
   display: flex;
