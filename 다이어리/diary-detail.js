@@ -16,7 +16,6 @@ const diary = {
 
 const createHtml = (diary) => {
   const diaryDetailCard = `
-    <a href="./diary-edit.html?id=${diary.id}" class="diary_edit">
       <div class="title_frame">
         <div class="title">${diary.title}</div>
         <div class="emotion_date_frame">
@@ -34,10 +33,9 @@ const createHtml = (diary) => {
         <div class="content_label">내용</div>
         <div class="content">${diary.content}</div>
       </div>
-      <div class="modification_frame">
+      <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
-      </div>
-    </a>
+      </a>
   `;
 
   const mainFrame = document.getElementById("main_frame");

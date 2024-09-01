@@ -78,11 +78,6 @@
   align-self: stretch;
 }
 
-.diary_edit {
-  text-decoration: none;
-  width: 100%
-}
-
 .title_frame {
   display: flex;
   height: auto;
@@ -184,8 +179,6 @@
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
-  padding-top: 24px;
-  padding-bottom: 24px;
 }
 
 .content_label {
@@ -216,6 +209,7 @@
   align-items: center;
   gap: 16px;
   align-self: stretch;
+  text-decoration: none;
 }
 
 .modification_Btn {
