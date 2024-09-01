@@ -192,9 +192,14 @@ header {
     letter-spacing: -1px;
     color: #1c1c1c; 
     background-color: #ffffff;
+    transition: 0.01s;
 }
 
-.main_button button:hover{
+.main_button button:hover {
     background-color: #000000;
     color: #f2f2f2;
+}
+
+.main_button button:active {
+    transform: rotateZ(30deg);
 }
