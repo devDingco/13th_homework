@@ -22,7 +22,7 @@ const diaryListSet = (arr) => {
     const moodType = diary.moodType;
     const moodTypeInfo = moodTypeSet[moodType];
     return `<li>
-      <a href="./detail.html?diaryId=${index}">
+      <a href="./detail.html?diaryId=${diary.id}">
       <figure>
         <img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" />
         <figcaption>
@@ -43,9 +43,10 @@ diaryListSet(diaryArr);
 
 // 일기 내용 작성 확인에 따른 저장 버튼 활성화 함수
 const textCheck = (e) => {
-  const diaryTitle = document.querySelector(".diaryTitle");
-  const diaryDesc = document.querySelector(".diaryDesc");
-  if (diaryTitle.value.length > 0 && diaryDesc.value.length > 0) {
+  const diaryTitle = document.querySelector(".diaryTitle").value;
+  // const diaryDesc = document.querySelector(".diaryDesc").value;
+  const diaryDesc = editor.getText();
+  if (diaryTitle.length > 0 && diaryDesc.length > 0) {
     const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
     diaryWriteBtn.classList.add("active");
     diaryWriteBtn.disabled = false;
@@ -59,25 +60,34 @@ const textCheck = (e) => {
 // 일기 저장 함수
 const diarySave = () => {
 
-
   const moodTypeValue = document.querySelector("input[name='moodType']:checked").value;
   console.log(moodTypeValue);
   const diaryTitle = document.querySelector(".diaryTitle").value;
   console.log(diaryTitle);
-  const diaryDesc = document.querySelector(".diaryDesc").value;
+  const diaryDesc = editor.getContents();
+  // const diaryDesc = document.querySelector(".diaryDesc").value;
   console.log(diaryDesc);
+
+  const setId = diaryArr.length;
 
   const diary = {
     moodType: moodTypeValue,
     writeDate: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
     title: diaryTitle,
-    content: diaryDesc
+    content: diaryDesc,
+    id: setId
   };
 
   diaryArr.push(diary);
   localStorage.setItem("diaryArray", JSON.stringify(diaryArr));
 
   diaryListSet(diaryArr);
+
+  // 입력창 초기화
+  document.querySelector(".diaryTitle").value = "";
+  editor.setContents("");
+  document.querySelector("input[name='moodType']:checked").checked = false;
+  document.querySelector(".diaryWriteBtn").classList.remove("active");
 
 }
 

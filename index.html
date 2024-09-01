@@ -12,6 +12,11 @@
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
     />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- <div class="loaderBox"><div class="loader"></div></div> -->
@@ -42,11 +47,13 @@
             <option value="놀랐어요">놀랐어요</option>
             <option value="화나요">화나요</option>
           </select>
-          <!-- <input
-            class="searchBox"
-            type="search"
-            placeholder="검색어를 입력해 주세요."
-          /> -->
+          <!-- <div class="searchBox">
+            <select>
+              <option value="제목">제목</option>
+              <option value="내용">내용</option>
+            </select>
+            <input type="search" placeholder="검색어를 입력해 주세요." />
+          </div> -->
         </div>
         <!-- <button class="diaryWritePopBtn">
           <img src="./img/plus_outline_light_m.svg" alt="plus" />
@@ -74,7 +81,7 @@
         </ul> -->
       </article>
       <article class="diaryWrite">
-        <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+        <!-- <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
         <div>
           <div class="moodTypeRadio">
             <span>오늘 기분은 어땠나요?</span>
@@ -137,7 +144,7 @@
 
         <button class="diaryWriteBtn" onclick="diarySave()" disabled>
           등록하기
-        </button>
+        </button> -->
       </article>
     </section>
 
@@ -148,6 +155,9 @@
         <p>© 2024. All rights reserved.</p>
       </div> -->
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
 
     <script src="./js/index.js"></script>
     <script src="./js/main.js"></script>
