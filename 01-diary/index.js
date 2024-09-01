@@ -1,11 +1,10 @@
 let diaryList = []
-let test = []
+let filteredList = []
 
 let inputTitle
 let inputText
 let selectedMood
 
-// HTML 문서가 모두 그려진 이후에 함수를 실행함.
 window.onload = () => {
     fetchDiaryFromLocalStorage()
 }
@@ -21,7 +20,7 @@ const fetchDiaryFromLocalStorage = () => {
     }
 
     if (diaryList.length !== 0) {
-        reloadDiary()
+        reloadDiary(diaryList)
     }
 }
 
@@ -78,7 +77,7 @@ const createDiary = () => {
     convertToJSON(createdDiary)
     console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
-    reloadDiary()
+    reloadDiary(diaryList)
 }
 
 const convertToJSON = (data) => {
@@ -87,8 +86,6 @@ const convertToJSON = (data) => {
     localStorage.setItem(data.id, convertedData)
     console.log(localStorage.length)
 }
-
-
 
 const parseJSON = (data) => {
     const convertedData = JSON.parse(data)
@@ -104,23 +101,6 @@ const getToday = () => {
     const convertedDate = String(date.getDate()).padStart(2, "0")
 
     return `${year}.${convertedMonth}.${convertedDate}`
-}
-
-const reloadDiary = () => {
-    const diaryDOMList = diaryList.map(el => 
-        `<div class="diary" id="diary_DOM">
-            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt} onclick="diaryCardTapped(${el.id})">
-                <div class="diary_title">
-                    <div class="diary_sub_title">
-                        <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
-                        <div class="diary_date">${el.date}</div>
-                    </div>
-                 <div class="diary_main_title">${el.title}</div>
-            </div>
-        </div>`
-    ).join("")
-
-    document.getElementById("diary_list").innerHTML = diaryDOMList
 }
 
 // "mood" 데이터에 따라, 이미지 주소 전달하기.
@@ -159,6 +139,35 @@ const getMoodSettings = (mood) => {
             }
         default:
             break
+    }
+}
+
+const reloadDiary = (reload_diaryList) => {
+    const diaryDOMList = reload_diaryList.map(el => 
+        `<div class="diary" id="diary_DOM">
+            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt} onclick="diaryCardTapped(${el.id})">
+                <div class="diary_title">
+                    <div class="diary_sub_title">
+                        <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
+                        <div class="diary_date">${el.date}</div>
+                    </div>
+                 <div class="diary_main_title">${el.title}</div>
+            </div>
+        </div>`
+    ).join("")
+
+    document.getElementById("diary_list").innerHTML = diaryDOMList
+}
+
+const filterDiary = () => {
+    const selectedMood = document.getElementById("mood_select").value
+
+    if (selectedMood === "전체") {
+        reloadDiary(diaryList)
+    } else {
+        filteredList = diaryList.filter(el => (el.mood === selectedMood))
+        reloadDiary(filteredList)
+        console.log(filteredList)
     }
 }
 

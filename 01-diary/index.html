@@ -19,13 +19,13 @@
 
             <div class="filter_item">
                 <div class="">
-                    <select id="mood_select", class ="mood_select_box">
-                        <option value="" disabled selected>전체</option>
-                        <option value="">행복해요</option>
-                        <option value="">슬퍼요</option>
-                        <option value="">놀랐어요</option>
-                        <option value="">화나요</option>
-                        <option value="">기타</option>
+                    <select id="mood_select", class ="mood_select_box" onchange="filterDiary()">
+                        <option value="전체" selected>전체</option>
+                        <option value="행복해요">행복해요</option>
+                        <option value="슬퍼요">슬퍼요</option>
+                        <option value="놀랐어요">놀랐어요</option>
+                        <option value="화나요">화나요</option>
+                        <option value="기타">기타</option>
                     </select>
                 </div>
             </div>
