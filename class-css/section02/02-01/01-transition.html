@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>트랜지션 실습</title>
+    <style>
+        .CSS_네모상자 {
+            width:300px;
+            height:300px;
+            background:yellow;
+            white-space:pre; /* 줄바꿈 인식하도록 도와줌 */
+
+            transition:
+            
+                width 0.5s, 
+                height 0.5s,
+                background-color 0.5s;
+        }
+        .CSS_네모상자:hover{
+            width:400px;
+            height:400px;
+            background-color:blue;
+            filter:blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_네모상자">
+        안녕하세요 저는 철수입니다.
+        나이는 12살이고,
+        다람쥐초등학교에 다닙니다.
+    </div>
+</body>
+</html>

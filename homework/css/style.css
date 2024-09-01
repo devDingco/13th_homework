@@ -1,6 +1,8 @@
 *{
     margin:0;
     /* height:100vh; */
+    text-decoration: none;
+    color:#000;
     background-color:#fff;
 }
 header{
@@ -27,7 +29,6 @@ header h1{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    margin-top:80px;
 }
 .content .name{
     width:1168px;
@@ -81,8 +82,27 @@ header h1{
     color:#ababab;
 }
 
-.content .content_box{
+.content .diary_select_bg{
+    width:1920px;
+    height:32px;
+    padding:0 20px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+.content .diary_select_bg .diary_select{
     width:1168px;
+}
+
+.diary{
+    width:1168px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+.content .content_box{
+    width:784px;
     display:flex;
     /* justify-content:center; */
     flex-wrap:wrap;
@@ -92,6 +112,9 @@ header h1{
 .content_box .emotion p{
     font-size:14px;
     font-weight:400;
+}
+.content_box .emotion p:last-child{
+    color:#919191;
 }
 .content_box .content_title{
     font-size:18px;
@@ -104,37 +127,48 @@ header h1{
     /* padding:0 0 16px 0; */
     /* background:#000; */
 }
-.content .content_box .content1 .content_bg{
+.content .content_box .content_trans{
+    /* background-size:cover; */
+    transition:transform 0.5s, filter 0.5s;
+}
+.content .content_box .content_trans:hover{
+    transform:scale(1.1);
+    /* filter:blur(5px); */
+}
+.content .content_box .content_trans:hover .content_box_bg{
+    filter:blur(5px);
+}
+.content .content_box .content1 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
     background-image:url(../img/Frame\ 47.png);
 }
-.content .content_box .content2 .content_bg{
+.content .content_box .content2 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
     background-image:url(../img/Frame\ 46.png);
 }
-.content .content_box .content3 .content_bg{
+.content .content_box .content3 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
     background-image:url(../img/Frame\ 48.png);
 }
-.content .content_box .content4 .content_bg{
+.content .content_box .content4 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
     background-image:url(../img/Frame\ 49.png);
 }
-.content .content_box .content5 .content_bg{
+.content .content_box .content5 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
     background-image:url(../img/Frame\ 25.png);
 }
-.content .content_box .content6 .content_bg{
+.content .content_box .content6 .content_box_bg{
     width:380px;
     height:285px;
     border-radius:16px;
@@ -151,13 +185,17 @@ header h1{
     padding:8px 0 8px 0;
 }
 
+.write_bg{
+    width:360px;
+}
 .write{
     border:1px solid #D4D3D3;
     border-radius:16px;
     padding:24px;
-    position:absolute;
+    height:604px;
+    /* position:absolute;
     top:0;
-    right:0;
+    right:0; */
 }
 .write .em_title p{
     font-size:20px;
