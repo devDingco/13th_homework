@@ -6,20 +6,20 @@ let diaryEntry = {};
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 let filterMood = {
-  happyDiaries: [],
-  sadDiaries: [],
-  surpriseDiaries: [],
-  upsetDiaries: [],
   etcDiaries: [],
+  sadDiaries: [],
+  upsetDiaries: [],
+  happyDiaries: [],
+  surpriseDiaries: [],
 };
 
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`);
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
-  check.checked = false;
   text.value = null;
   textarea.value = null;
+  check.checked = false;
 };
 
 const appendDiaryEntry = (diaryCard) => {

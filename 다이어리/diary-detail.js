@@ -6,8 +6,8 @@ const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0];
 
 const diary = {
   id: diaryDetailContent.id,
-  mood: diaryDetailContent.mood,
   date: diaryDetailContent.date,
+  mood: diaryDetailContent.mood,
   color: diaryDetailContent.color,
   title: diaryDetailContent.title,
   content: diaryDetailContent.content,
