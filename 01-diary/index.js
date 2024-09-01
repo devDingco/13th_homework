@@ -1,8 +1,29 @@
 let diaryList = []
+let test = []
 
 let inputTitle
 let inputText
 let selectedMood
+
+// HTML 문서가 모두 그려진 이후에 함수를 실행함.
+window.onload = () => {
+    fetchDiaryFromLocalStorage()
+}
+
+const fetchDiaryFromLocalStorage = () => {
+    const numberOfDiary = localStorage.length
+
+    for (let i = 0; i < numberOfDiary; i++) {
+        const data = localStorage.getItem(i)
+        console.log(`fetchDiaryFromLocalStorage: "로컬 스토리지"에서 데이터를 가져왔습니다. ${data}`)
+        diaryList.push(parseJSON(data))
+        console.log(`fetchDiaryFromLocalStorage: 현재 테스트 배열의 목록 ${diaryList}, 배열의 수 ${numberOfDiary}`)
+    }
+
+    if (diaryList.length !== 0) {
+        reloadDiary()
+    }
+}
 
 const validateInputText = () => {
     console.log("입력된 텍스트를 검증합니다.")
@@ -40,12 +61,12 @@ const activateWriteButton = () => {
 }
 
 const writeButtonPressed = () => {
-    console.log("일기 작성 버튼을 눌렀습니다.")
+    console.log("writeButtonPressed: 일기 작성 버튼을 눌렀습니다.")
     createDiary()
 }
 
 const createDiary = () => {
-    console.log("일기를 작성합니다.")
+    console.log("createDiary: 일기를 작성합니다.")
     diaryList.push({
         id: diaryList.length,
         date: getToday(),
@@ -53,9 +74,26 @@ const createDiary = () => {
         title: inputTitle,
         text: inputText
     })
-    console.log(`생성된 일기의 제목은 "${diaryList[diaryList.length - 1].text}" 입니다.`)
+    const createdDiary = diaryList[diaryList.length -1]
+    convertToJSON(createdDiary)
+    console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
     reloadDiary()
+}
+
+const convertToJSON = (data) => {
+    const convertedData = JSON.stringify(data)
+    console.log(`convertToJSON: ${convertedData} 객체를 JSON 데이터로 변환했습니다.`)
+    localStorage.setItem(data.id, convertedData)
+    console.log(localStorage.length)
+}
+
+
+
+const parseJSON = (data) => {
+    const convertedData = JSON.parse(data)
+    console.log(`parseJSON: 변환된 데이터 ${convertedData} 입니다.`)
+    return convertedData
 }
 
 const getToday = () => {
@@ -125,7 +163,7 @@ const getMoodSettings = (mood) => {
 }
 
 const diaryCardTapped = (id) => {
-    console.log("다이어리 카드를 탭했습니다.", id)
+    console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
     alert(`
     다이어리 상세보기
