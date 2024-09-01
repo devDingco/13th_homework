@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>다이어리 보관함📔</title>
+  <link rel="stylesheet" href="./css/index.css" />
+  <script src="./js/index.js"></script>
+</head>
+
+<body>
+  <div class="레이아웃">
+    <!-- 헤더 -->
+    <div class="헤더">
+      <div>민서의 다이어리</div>
+    </div>
+    <!-- 배너 -->
+    <!-- <div class="배너"></div> -->
+    <img class="배너" src="./images/배너.png" />
+    <!-- 탭 -->
+    <div class="탭_박스">
+      <div class="선택_탭">일기보관함</div>
+      <div class="비선택_탭">사진보관함</div>
+    </div>
+    <!-- <div class="필터_박스"> -->
+    <div class="필터_박스">
+      <select class="필터" onchange="필터링기능(event)">
+        <option selected value="전체선택">전체</option>
+        <option value="행복선택">행복해요</option>
+        <option value="슬픔선택">슬퍼요</option>
+        <option value="놀람선택">놀랐어요</option>
+        <option value="화남선택">화나요</option>
+        <option value="기타선택">기타</option>
+      </select>
+    </div>
+    <!-- 메인 -->
+    <div class="메인_공간">
+      <div id="일기추가할공간" class="일기_두개씩_보여주는_공간"></div>
+
+      <!-- 일기 쓰는 곳 -->
+      <div class="일기_쓰기_공간">
+        <div class="일기_제목">📍 일기 쓰기</div>
+        <div class="일기_작성_폼">
+          <div class="기분_어땟나요">오늘 기분은 어땟나요?</div>
+          <div class="기분_선택_라디오_영역">
+            <input class="기분_영역" type="radio" value="행복해요" name="기분" />
+            <div class="기분_텍스트">행복해요</div>
+            <input class="기분_영역" type="radio" value="슬퍼요" name="기분" />
+            <div class="기분_텍스트">슬퍼요</div>
+            <input class="기분_영역" type="radio" value="놀랐어요" name="기분" />
+            <div class="기분_텍스트">놀랐어요</div>
+            <input class="기분_영역" type="radio" value="화나요" name="기분" />
+            <div class="기분_텍스트">화나요</div>
+            <input class="기분_영역" type="radio" value="기타" name="기분" />
+            <div class="기분_텍스트">기타</div>
+          </div>
+          <div class="텍스트_입력_영역">
+            <div class="제목_타이틀">제목</div>
+            <input id="제목인풋" class="제목_인풋" placeholder="제목을 입력해 주세요" />
+            <div class="내용_영역">
+              <div class="내용_타이틀">내용</div>
+              <textarea id="내용인풋" class="내용_인풋" placeholder="내용을 입력해 주세요"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="버튼_영역">
+          <button class="등록하기_버튼" onclick="일기등록기능()">
+            등록하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  <!-- 푸터 -->
+  <div class="푸터">
+    <div class="푸터_컨테이너">
+      <div class="푸터_타이틀">
+        민서의 다이어리
+      </div>
+      <div class="푸터_전화번호_">
+        대표 : {name}
+      </div>
+      <div class="푸터_하단">
+        Copyright © 2024. {name} Co., Ltd.
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
