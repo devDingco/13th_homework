@@ -13,6 +13,26 @@ let diaryEntry = {};
 
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
+const appendDiaryEntry = (diaryCard) => {
+  const diaryEntryContainer = document.querySelectorAll("#diary_entry_container");
+  const article = document.getElementById("article");
+
+  if (
+    article.children.length == 0 ||
+    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 2
+  ) {
+    const diaryEntryContainer = document.createElement("div");
+    diaryEntryContainer.className = "diary_entry_container";
+    diaryEntryContainer.id = "diary_entry_container";
+    diaryEntryContainer.innerHTML = diaryCard;
+
+    return article.appendChild(diaryEntryContainer);
+  } else {
+    return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
+      diaryCard);
+  }
+}
+
 const createHtml = (diaryEntry) => {
   const diaryCard = `
     <a href="./diary-detail.html?id=${diaryEntry.id}" class="diary_detail">
@@ -35,23 +55,7 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  const diaryEntryContainer = document.querySelectorAll("#diary_entry_container");
-  const article = document.getElementById("article");
-
-  if (
-    article.children.length == 0 ||
-    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 2
-  ) {
-    const diaryEntryContainer = document.createElement("div");
-    diaryEntryContainer.className = "diary_entry_container";
-    diaryEntryContainer.id = "diary_entry_container";
-    diaryEntryContainer.innerHTML = diaryCard;
-
-    return article.appendChild(diaryEntryContainer);
-  } else {
-    return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
-      diaryCard);
-  }
+  appendDiaryEntry(diaryCard)
 };
 
 const saveDiaryEntry = (diaryEntry) => {
@@ -73,10 +77,10 @@ const getDate = (diaryEntry) => {
 const getFontColor = (diaryEntry, coverName) => {
   const fontColor = `${coverName}_emotion_font_color`;
   diaryEntry.color = fontColor;
-  getDate(checkedMoodId);
+  getDate(diaryEntry);
 };
 
-const getImageName = (diaryEntry) => {
+const getImageName = (diaryEntry, checkedMoodId) => {
   const coverName = checkedMoodId.split(`_`)[1];
   diaryEntry.imageName = coverName;
   getFontColor(diaryEntry, coverName);
@@ -94,7 +98,7 @@ const getMood = (diaryEntry) => {
     }
   });
   diaryEntry.mood = checkedMood;
-  getImageName(diaryEntry);
+  getImageName(diaryEntry, checkedMoodId);
 };
 
 const getId = (diaryEntry) => {
