@@ -16,26 +16,28 @@ const diary = {
 
 const createHtml = (diary) => {
   const diaryDetailCard = `
-    <div class="title_frame">
-      <div class="title">${diary.title}</div>
-      <div class="emotion_date_frame">
-        <div class="emotion">
-          <img src="./image/${diary.imageName}_s.png" width="32px" />
-          <div class=${diary.color}>${diary.mood}</div>
-        </div>
-        <div class="date_frame">
-          <div class="date">${diary.date}</div>
-          <div class="write">작성</div>
+    <a href="./diary-edit.html?id=${diary.id}" class="diary_edit">
+      <div class="title_frame">
+        <div class="title">${diary.title}</div>
+        <div class="emotion_date_frame">
+          <div class="emotion">
+            <img src="./image/${diary.imageName}_s.png" width="32px" />
+            <div class=${diary.color}>${diary.mood}</div>
+          </div>
+          <div class="date_frame">
+            <div class="date">${diary.date}</div>
+            <div class="write">작성</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="content_frame">
-      <div class="content_label">내용</div>
-      <div class="content">${diary.content}</div>
-    </div>
-    <div class="modification_frame">
-      <button class="modification_Btn">수정</button>
-    </div>
+      <div class="content_frame">
+        <div class="content_label">내용</div>
+        <div class="content">${diary.content}</div>
+      </div>
+      <div class="modification_frame">
+        <button class="modification_Btn">수정</button>
+      </div>
+    </a>
   `;
 
   const mainFrame = document.getElementById("main_frame");
