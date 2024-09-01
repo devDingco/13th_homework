@@ -1,0 +1,33 @@
+.editWrap .diaryWrite {
+  border: none;
+  width: 100%;
+  gap: 24px;
+  padding: 0 0 50px;
+
+  .buttonBox {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    button {
+      width: 104px;
+      height: 48px;
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+
+      &.whiteBtn {
+        background-color: #fff;
+        color: var(--font-color-8);
+        border: 1px solid #000;
+      }
+
+      &.blackBtn {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
+}
