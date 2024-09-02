@@ -41,11 +41,9 @@ const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
     appendDiaryEntry(diaryCard);
   } else if (currentFilteredMood == diaryEntry.mood) {
     appendDiaryEntry(diaryCard);
-    currentFilteredMood = "";
   } else {
     window.location.href = "./diary.html";
     appendDiaryEntry(diaryCard);
-    currentFilteredMood = "";
   }
 };
 
@@ -53,11 +51,18 @@ const createHtml = (diaryEntry) => {
   const diaryCard = `
     <a href="./diary-detail.html?id=${diaryEntry.id}" class="diary_detail">
       <div class="diary_entry">
-          <img
-            class="diary_cover"
-            src="./image/${diaryEntry.imageName}.png"
-            width="774px"
-          />
+          <div>
+            <img
+              class="diary_cover"
+              src="./image/${diaryEntry.imageName}.png"
+              width="774px"
+            />
+            <img
+              class="delete_button"
+              src="./image/delete_button.png"
+              width:"24px"
+            />
+          </div>
           <div class="diary_entry_summary">
             <div class="emotion_date_info">
               <div class="${diaryEntry.color}">${diaryEntry.mood}</div>

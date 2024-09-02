@@ -261,6 +261,12 @@ ul li {
   border-radius: 16px;
   transition: width 0.5s, height 0.5px;
 }
+.delete_button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+}
 .diary_cover:hover {
   transform: scale(110%);
   filter: blur(5px)
