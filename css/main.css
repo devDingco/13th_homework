@@ -1,3 +1,135 @@
+.navBottom {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  padding: 32px 0 42px;
+  transition: 0.5s;
+}
+.navBottom.stickyAddStyle {
+  padding: 10px 0;
+}
+.navBottom.stickyAddStyle .filterSearchBox {
+  filter: invert(1);
+}
+
+.filterSearchBox {
+  width: var(--width);
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.filterSearchBox .selectBox {
+  width: 120px;
+  height: 48px;
+  border: 1px solid var(--border-color-2);
+  border-radius: 8px;
+  background-color: #fff;
+  background-image: url("../img/down_fill_light_m.svg");
+  background-repeat: no-repeat;
+  background-position: 90% center;
+  font-size: var(--font-size-1);
+  position: relative;
+}
+.filterSearchBox .selectBox .filterPopBtn {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  padding: 12px 16px;
+}
+.filterSearchBox .selectBox .filterList {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  border: 1px solid var(--border-color-2);
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  display: none;
+}
+.filterSearchBox .selectBox .filterList.show {
+  display: flex;
+  flex-direction: column;
+}
+.filterSearchBox .selectBox .filterList li {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+.filterSearchBox .selectBox .filterList li:hover {
+  background-color: var(--bg-color-3);
+  color: var(--font-color-9);
+}
+.filterSearchBox .selectBox .filterList li.active {
+  background-color: var(--bg-color-3);
+  color: var(--font-color-9);
+  background-image: url("../img/check_outline_light_xs.svg");
+  background-repeat: no-repeat;
+  background-position: 90% center;
+}
+.filterSearchBox .searchBox {
+  width: 340px;
+  height: 48px;
+  border-radius: 48px;
+  background-color: #fff;
+  background-image: url("../img/search_outline_light_m.svg");
+  background-position: 12px center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--border-color-2);
+  padding: 0px 20px 0px 40px;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+.filterSearchBox .searchBox .selectBox {
+  width: 110px;
+  border: none;
+  flex-shrink: 0;
+  height: 100%;
+}
+.filterSearchBox .searchBox .searchPopBtn {
+  height: 100%;
+}
+.filterSearchBox .searchBox input[type=search] {
+  border: none;
+  width: 100%;
+}
+.filterSearchBox .searchBox input[type=search]::-moz-placeholder {
+  color: var(--font-color-6);
+  font-size: var(--font-size-1);
+  font-weight: 500;
+}
+.filterSearchBox .searchBox input[type=search]::placeholder {
+  color: var(--font-color-6);
+  font-size: var(--font-size-1);
+  font-weight: 500;
+}
+.filterSearchBox .searchBox input[type=search]:focus {
+  outline: none;
+}
+
+.diaryWritePopBtn {
+  width: 110px;
+  height: 48px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-2);
+  line-height: 24px;
+}
+
 section {
   display: flex;
   gap: 24px;
@@ -22,12 +154,18 @@ section .diaryList ul {
 }
 section .diaryList ul li {
   width: 380px;
+  position: relative;
 }
 section .diaryList ul li:hover {
   transform: scale(1.02);
 }
-section .diaryList ul li:hover img {
-  filter: blur(1px);
+section .diaryList ul li .closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  border: none;
+  background: none;
 }
 section .diaryList ul li figure {
   display: flex;
@@ -79,4 +217,4 @@ section .diaryList ul li figure .infoTop .diaryDate {
   font-size: var(--font-size-1);
   color: var(--font-color-7);
   font-weight: 400;
-} /*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
