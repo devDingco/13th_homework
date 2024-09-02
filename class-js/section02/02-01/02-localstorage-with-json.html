@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>로컬스토리지와 JSON 실습</title>
+    <script>
+
+        const JS_과일담기기능 = () => {
+            const 과일담는통 = {
+                사과: 3,
+                바나나: 2,
+                딸기: 10
+            }
+            const 과일담는통2 = {
+                사과: 3,
+                바나나: 2,
+                딸기: 10
+            }
+
+            // localStorage.setItem("과일바구니", 과일담는통) 바로 넣게되면 이상하게 저장이된다 
+            localStorage.setItem("과일바구니", JSON.stringify(과일담는통))
+            localStorage.setItem("과일바구니2", JSON.stringify(과일담는통2))
+          }
+        const JS_과일꺼내기기능 = () => {
+            const 과일꺼낸통 = localStorage.getItem("과일바구니")
+            const 최종과일 = JSON.parse(과일꺼낸통)
+            console.log(최종과일)
+            
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="JS_과일담기기능()">과일 담기</button>
+    <button onclick="JS_과일꺼내기기능()">과일 꺼내기</button>
+    
+</body>
+</html>

@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+.diarycontainer {
+    display: flex; /* Flexbox 사용 */
+    justify-content: center;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100wh; /* 전체 화면 높이 */
+}
+.whoesdiary{
+    height: 60px;
+    width: 1168px;
+    display: flex;
+    align-items: center;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.18px;
+    margin-bottom: 64px;
+}
+
+.diarycontainer {
+    display: flex; /* Flexbox 사용 */
+    justify-content: center;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100wh; /* 전체 화면 높이 */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    justify-content: center;
+    justify-content: center;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100wh; /* 전체 화면 높이 */
+}
+.titlecontainer{
+    height: 36px;
+    width: 1168px;
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.18px;
+    border-bottom: 2px solid #000;
+}
+.emotioncontainer {
+    display: flex;
+    flex-direction: row;
+}
+.icon_emtion_box {
+    width:1168px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.emotion {
+    color: #EA5757;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    letter-spacing: -0.2px;
+}
+.date {
+    color: var(--Gray-Gray-500, #919191);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+
+.contentcontainer {
+    width:1168px;
+}
+.content {
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.16px;
+    
+}
+.buttoncontainer {
+    width:1168px;
+    display: flex;
+    justify-content: flex-end;
+}
+.editbutton{
+    width:51px;
+    height: 40px;
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+}
+.savebutton {
+    display: none;
+}
+.hidden {
+    display: none;
+}

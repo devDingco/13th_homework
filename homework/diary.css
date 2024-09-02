@@ -9,7 +9,7 @@
     align-items: center; /* 수직 중앙 정렬 */
     width: 100wh; /* 전체 화면 높이 */
 }
-.whosisdiary{
+.whoesdiary{
     height: 60px;
     width: 1168px;
     display: flex;
@@ -47,7 +47,7 @@
     margin-bottom: 24px;
 }
 .menucontainer {
-    width: 100wh;
+    width: 100vw;
     height: 48px;
     gap: 16px;
     display: flex;
@@ -55,9 +55,30 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+
+}
+.selectcontainer {
+    width: 100vw;
+    height: 48px;
+    gap: 16px;
+    display: flex;
+    padding: 0px 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 42px;
 }
+.selectbox {
+    width:1168px;
+    height: 32px;
+}
+select {
+    width:120px;
+    height: 32px;
+    border-radius: 8px;
+}
+
 .menubox {
     width: 1168px;
     display: flex;
@@ -92,14 +113,14 @@
 }
 
 .center_box{
-    width: 100wh;
+    height: auto;
+    width: 100vw;
     display: flex;
     justify-content: center;
 }
 
 .listcontainer {
     width: 1168px;
-    height: 1167px;
     position: relative; /* 자식 요소의 절대 위치 기준이 됨 */
 }
 
@@ -109,7 +130,6 @@
     gap: 24px;             /* 수평 및 수직 간격을 모두 24픽셀로 설정 */
     width: auto;           /* 컨테이너 너비를 자동으로 설정 */
     height: auto;
-/* 이 속성은 Flexbox 또는 Grid 컨테이너에 사용되는 것이므로 제거하거나 필요에 맞게 수정하세요 */
 }
 
 .writingboxcontainer {
@@ -262,6 +282,18 @@ input[type="radio" i] {
     padding-bottom: 16px;
 
 }
+.diarybox:hover {
+    /* width:calc(380px * 1.1); */
+    transform:scale(1.1);
+    border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
+    transition-duration: 0.5s;
+}
+.diarybox > [class^="thumbnail_"]:hover {
+    filter: blur(5px); /* 블러 효과 */
+    transition-duration: 0.5s;
+  }
 .thumbnail_sad{
     width: 380px;
     height: 285px;
@@ -269,6 +301,7 @@ input[type="radio" i] {
     background-size: cover;
     margin-bottom: 16px;
 }
+
 .thumbnail_surprise{
     width: 380px;
     height: 285px;
@@ -387,20 +420,18 @@ input[type="radio" i] {
     display: flex;
     padding: 24px 20px;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
-    align-self: stretch;
     background: var(--Gray-Gray-50, #F2F2F2);
 }
 .footercontainer {
-    widtH: 1168px;
     height: 112px;
     display: flex;
     flex-direction: column;
     gap: 32px;
     flex-wrap: wrap;
 }
-.footerwhoisdiary {
+.footerwhosediary {
     color: #000;
     font-family: "Pretendard Variable";
     font-size: 20px;
@@ -408,6 +439,7 @@ input[type="radio" i] {
     font-weight: 700;
     line-height: 16px; /* 80% */
     letter-spacing: -0.2px;
+    flex-direction: column;
 }
 .representative {
     align-self: stretch;

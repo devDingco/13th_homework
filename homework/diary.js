@@ -1,60 +1,69 @@
-const diarylist = [];
+const getDiaryList = () => {
+    const jsondiary = localStorage.getItem("diarylist")
+    return JSON.parse(jsondiary) || []
+}
 
 
 const submit = () => {
     if (inputverify()) {
        
-        const happychecked = document.getElementById("happy").checked;
-        const sadchecked = document.getElementById("sad").checked;
-        const surprisechecked = document.getElementById("surprise").checked;
-        const angrychecked = document.getElementById("angry").checked;
-        const etcchecked = document.getElementById("etc").checked;
-
         const title = document.getElementById("writingtitle").value;
         const content = document.getElementById("writingcontent").value;
 
-       
-        let emotion;
-        if (happychecked) emotion = "happy";
-        if (sadchecked) emotion = "sad";
-        if (surprisechecked) emotion = "surprise";
-        if (angrychecked) emotion = "angry";
-        if (etcchecked) emotion = "etc";
+        //----------설명----------------
+        //name으로 그룹화된 모든 라디오버튼 선택하는 것
+        //checked된 라디오는 NodeList로 반환되는데 궁금하면 아래 주석처리된 콜솔로 찍어보면
+        //배열처럼 저장되는 것을 알 수 있다
+        //체크된 감정이 radioButons[0]에 저장이 되면 반환하고 아니면 null처리
+        const radioButtons = document.querySelectorAll('input[name="emotion"]:checked')
+        // console.log(radioButtons)
+        const chekcedRadio = radioButtons.length > 0 ? radioButtons[0].id : null;
 
         // 객체
         const diaryEntry = {
             title: title,
             content: content,
-            emotion: emotion,
+            emotion: chekcedRadio,
             date: new Date().toLocaleDateString()
         };
 
+        const diarylist = getDiaryList()
         // 배열에 객체 추가
-        diarylist.push(diaryEntry);
+        diarylist.push(diaryEntry)
+        localStorage.setItem("diarylist", JSON.stringify(diarylist))
+        console.log(diarylist)
+        console.log(diaryEntry)
 
-       
-        renderDiaryEntries();
+    
 
+        renderDiaryEntries()
         
-        document.getElementById("writingtitle").value = "";
-        document.getElementById("writingcontent").value = "";
-        document.getElementById("happy").checked = false;
-        document.getElementById("sad").checked = false;
-        document.getElementById("surprise").checked = false;
-        document.getElementById("angry").checked = false;
-        document.getElementById("etc").checked = false;
-    } else {
-        alert("내용을 전부 채워주세요.");
-    }
+        
+            document.getElementById("writingtitle").value = "";
+            document.getElementById("writingcontent").value = "";
+            document.getElementById("happy").checked = false;
+            document.getElementById("sad").checked = false;
+            document.getElementById("surprise").checked = false;
+            document.getElementById("angry").checked = false;
+            document.getElementById("etc").checked = false;
+        } else {
+            alert("내용을 전부 채워주세요.");
+            }
 };
+
+
 
 //------------------인풋검증기능----------------------
 const inputverify = () => {
-    const happychecked = document.getElementById("happy").checked;
-    const sadchecked = document.getElementById("sad").checked;
-    const surprisechecked = document.getElementById("surprise").checked;
-    const angrychecked = document.getElementById("angry").checked;
-    const etcchecked = document.getElementById("etc").checked;
+
+    const radioButtons = document.querySelectorAll('input[type="radio"]')
+    let checkedEmotion = false
+
+    radioButtons.forEach((radio) => {
+        if(radio.checked) {
+            checkedEmotion = true
+        }
+    }) 
 
     const title = document.getElementById("writingtitle").value;
     const content = document.getElementById("writingcontent").value;
@@ -62,66 +71,51 @@ const inputverify = () => {
  
     const writedtitle = title !== "";
     const wiredcontent = content !== "";
-   
-    const checkedemotion = happychecked || sadchecked || surprisechecked || angrychecked || etcchecked;
 
-    return writedtitle && wiredcontent && checkedemotion;
+    return writedtitle && wiredcontent && checkedEmotion;
 };
+
 
 //------------------다이어리 항목 렌더링----------------------
 const renderDiaryEntries = () => {
     const diarylistbox = document.querySelector(".diarylistbox");
-    diarylistbox.innerHTML = ""; 
+    const jsondiary = localStorage.getItem("diarylist");
+    const diarylist = JSON.parse(jsondiary) || [];
+    const diaryHTML = diarylist.map((entry,index) => `
+        <div class="diarybox">
+            <a href="./diary-detail.html?number=${index}">
+            <div class="thumbnail_${entry.emotion}"></div>
+            <div class="textbox">
+                <div class="date_title_container">
+                    <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
+                    <div class="date">${entry.date}</div>
+                </div>
+                <div class="date_title_container">
+                    <div class="title">${entry.title}</div>
+                </div>
+            </div>
+            </a>
+        </div>
+    `).join('');
 
-    diarylist.forEach((entry) => {
-        const diarybox = document.createElement("div");
-        diarybox.className = "diarybox";
-        
+    diarylistbox.innerHTML = diaryHTML;
 
-        const thumbnail = document.createElement("div");
-        thumbnail.className = `thumbnail_${entry.emotion}`;
-        diarybox.appendChild(thumbnail);
 
-        const textbox = document.createElement("div");
-        textbox.className = "textbox";
-        diarybox.appendChild(textbox);
 
-        const dateTitleContainer1 = document.createElement("div");
-        dateTitleContainer1.className = "date_title_container";
-        textbox.appendChild(dateTitleContainer1);
-
-        const emotionDiv = document.createElement("div");
-        emotionDiv.className = `emotion_${entry.emotion}`;
-        emotionDiv.textContent = getEmotionText(entry.emotion);
-        dateTitleContainer1.appendChild(emotionDiv);
-
-        const dateDiv = document.createElement("div");
-        dateDiv.className = "date";
-        dateDiv.textContent = entry.date;
-        dateTitleContainer1.appendChild(dateDiv);
-
-        const dateTitleContainer2 = document.createElement("div");
-        dateTitleContainer2.className = "date_title_container";
-        textbox.appendChild(dateTitleContainer2);
-
-        const titleDiv = document.createElement("div");
-        titleDiv.className = "title";
-        titleDiv.textContent = entry.title;
-        dateTitleContainer2.appendChild(titleDiv);
-
-        diarylistbox.appendChild(diarybox);
-
-        
-        diarybox.addEventListener("click", () => {
-            alert(
-`제목: ${entry.title}
-내용: ${entry.content}
-감정: ${getEmotionText(entry.emotion)}
-날짜: ${entry.date}`
-            );
-        });
-    });
+    // 다이어리 내용 알람뜨던거
+    // diarylistbox.querySelectorAll('.diarybox').forEach((diarybox, index) => {
+    //     diarybox.addEventListener("click", () => {
+    //         const entry = diarylist[index];
+    //         alert(
+    //             `제목: ${entry.title}
+    //             내용: ${entry.content}
+    //             감정: ${getEmotionText(entry.emotion)}
+    //             날짜: ${entry.date}`
+    //         );
+    //     });
+    // });
 };
+
 
 
 const getEmotionText = (emotion) => {
@@ -141,3 +135,6 @@ const getEmotionText = (emotion) => {
     }
 
 };
+
+// 페이지 로드 시 다이어리 항목 렌더링
+document.addEventListener("DOMContentLoaded", renderDiaryEntries);

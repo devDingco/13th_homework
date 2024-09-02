@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./diary-detail.css">
+    <script src="./diary-detail.js" defer></script>
+</head>
+<body>
+    <div class="diarycontainer">
+        <div class="whoesdiary">
+            민지의 다이어리
+        </div>
+    </div>  
+
+    <div class="container">
+        <div class="titlecontainer">
+            <div class="titlebox" id="diary-title">
+                이것은 타이틀 입니다
+            </div>
+            <input type="text" id="diary-title-input" style="display: none;" /> 
+        </div>
+
+        <div class="emotioncontainer">
+            <div class="icon_emtion_box">
+                <div class="emotion" id="diary-emotion"></div> 
+                <div id="emotion-buttons" style="display: none;">
+                    <input type="radio" id="happy" name="emotion" value="happy">
+                    <label for="happy">행복해요</label>
+                    <input type="radio" id="sad" name="emotion" value="sad">
+                    <label for="sad">슬퍼요</label>
+                    <input type="radio" id="surprise" name="emotion" value="surprise">
+                    <label for="surprise">놀랐어요</label>
+                    <input type="radio" id="angry" name="emotion" value="angry">
+                    <label for="angry">화나요</label>
+                    <input type="radio" id="etc" name="emotion" value="etc">
+                    <label for="etc">기타</label>
+                </div>
+                <div class="date" id="diary-date"></div>
+            </div>
+        </div>
+
+        <div class="contentcontainer">
+            <div class="content" id="diary-content"></div>
+            <textarea id="diary-content-input" style="display: none;"></textarea>
+        </div>
+
+        <div class="buttoncontainer">
+            <button class="editbutton" onclick="toggleEditMode()">수정</button>
+            <button class="savebutton" onclick="saveChanges()" style="display: none;">저장</button>
+        </div>
+    </div>
+</body>
+</html>
