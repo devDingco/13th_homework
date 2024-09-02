@@ -260,7 +260,7 @@
   width: 1130px;
 }
 
-.comment_input{
+#comment_input{
   display: flex;
   padding: 12px 16px;
   align-items: center;

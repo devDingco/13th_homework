@@ -51,4 +51,26 @@ const handleSaveChanges = () => {
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
 };
 
+const createCommentHtml = (commentEntries) => {
+  const commentCard = `
+    <div class="comments_container">
+      <div class="comment_content">${commentEntries.commentValue}</div>
+      <div class="comment_date">${commentEntries.date}</div>
+      <div class="comment_divider"></div>
+    </div>
+  `
+  const commentBox = document.createElement("div");
+  commentBox.innerHTML = commentCard;
+  const commentsContainerBox = document.getElementById("comments_container_box");
+  return commentsContainerBox.appendChild(commentBox);
+}
+
+diaryEntries = diaryDetailContentList
+  diaryDetailContentList.map((e, i) => {
+    if(e.id == id) index = i
+  })
+diaryDetailContentList[index].commentList.map((comment) => {
+  createCommentHtml(comment);
+})
+
 editBtn.addEventListener("click", handleSaveChanges);
