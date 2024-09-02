@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    width: 1920px;
+    height: 1605px;
+    gap: 24px;
+    margin-top: 100px;
+    padding-left: 376px;
+    padding-right: 376px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    gap: 10px
+}
+
+.header_text {
+    width: 100%;
+    height: 40px;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16px;
+    letter-spacing: -1px;
+    color: #000000;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px;
+    padding-bottom: 16px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    height: 64px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_header {
+    width: 100%;
+    height: 64px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_header_text {
+    width: 100%;
+    height: 24px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #000000;
+}
+
+.main_header_radio {
+    width: 100%;
+    height: 24px;
+    gap: 20px;
+    display: flex;
+}
+
+.radioButton {
+    border-radius: 8px;
+    gap: 8px;
+    display: flex;
+}
+
+.radioButton input {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.radioButton label {
+    height: 20px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333333;
+    display: block;
+}
+
+.main_body_title {
+    width: 100%;
+    height: 76px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_body_title label {
+    width: 100%;
+    height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333333;
+}
+
+.main_body_title input {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+    padding: 12px 16px;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #000000;
+}
+
+.main_body_content {
+    width: 100%;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_body_content label {
+    width: 100%;
+    height: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1px;
+    color: #333333;
+}
+
+.main_body_content input {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+    padding: 12px 16px;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #000000;
+}
+
+.main_body_content textarea {
+    width: 100%;
+    height: 128px;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+    padding: 12px 16px;
+    gap: 10px;
+    background-color: #ffffff;
+    resize: none;
+}
+
+.main_button {
+    width: 100%;
+    height: 48px;
+    gap: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.main_button button {
+    display: block;
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    padding: 8px 10px;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #1c1c1c; 
+    background-color: #ffffff;
+    transition: 0.01s;
+}
+
+.main_button button:hover {
+    background-color: #000000;
+    color: #f2f2f2;
+}
+
+.main_button button:active {
+    transform: rotateZ(30deg);
+}

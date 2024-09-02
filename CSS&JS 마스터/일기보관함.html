@@ -27,6 +27,14 @@
                             <div class="nav_box_text">사진보관함</div>
                         </div>
                     </div>
+                    <select onchange="filtering(event)">
+                        <option value="selectAll">전체</option>
+                        <option value="selectHappy">행복해요</option>
+                        <option value="selectSad">슬퍼요</option>
+                        <option value="selectSurprised">놀랐어요</option>
+                        <option value="selectAngry">화나요</option>
+                        <option value="selectEtc">기타</option>
+                    </select>
                     <div class="storage_body"> <!-- 스토리지 + 인풋박스-->
                         <div id="storage_leftBody"><!--js로카드 추가--></div>
                         <div class="storage_rightBody"> <!-- 라디오버튼 + 텍스트박스 + 버튼 -->
@@ -38,23 +46,23 @@
                                     <div class="radioBox_header">오늘 기분은 어땟나요?</div>
                                     <div class="radioBox_body">
                                         <div class="radioButton">
-                                            <input type="radio" name="emotion" id="happpy" value="happy"><label for="happpy">행복해요.</label>
+                                            <input type="radio" name="emotion" id="happpy" value="행복해요"><label for="happpy">행복해요.</label>
                                         </div>
                                         <div class="radioButton">
-                                            <input type="radio" name="emotion" id="sad" value="sad"><label for="sad">슬퍼요.</label>
+                                            <input type="radio" name="emotion" id="sad" value="슬퍼요"><label for="sad">슬퍼요.</label>
                                         </div>
                                         <div class="radioButton">
-                                            <input type="radio" name="emotion" id="surprised" value="surprised"><label for="surprised">놀랐어요.</label>
+                                            <input type="radio" name="emotion" id="surprised" value="놀랐어요"><label for="surprised">놀랐어요.</label>
                                         </div>
                                         <div class="radioButton">
-                                            <input type="radio" name="emotion" id="angry" value="angry"><label for="angry">화나요.</label>
+                                            <input type="radio" name="emotion" id="angry" value="화나요"><label for="angry">화나요.</label>
                                         </div>
                                         <div class="radioButton">
-                                            <input type="radio" name="emotion" id="etc" value="etc"><label for="etc">기타</label>
+                                            <input type="radio" name="emotion" id="etc" value="기타"><label for="etc">기타</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="textBox"> <!--텍스트 박스-->
+                                <div class="textBox">
                                     <div class="titleBox">
                                         <label for="titleBox_input">제목</label>
                                         <input type="text" id="titleBox_input" placeholder="제목을 입력해주세요.">
