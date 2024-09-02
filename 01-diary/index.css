@@ -108,8 +108,9 @@
 }
 
 .diary {
-    position: relative;
     width: 380px;
+    height: 373px;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 16px;

@@ -73,7 +73,8 @@ const createDiary = () => {
         date: getToday(),
         mood: selectedMood,
         title: inputTitle,
-        text: inputText
+        text: inputText,
+        reminiscenceList: []
     })
     const createdDiary = diaryList[diaryList.length -1]
     convertToJSON(createdDiary)
