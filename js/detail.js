@@ -59,6 +59,12 @@ const commentAdd = () => {
   const pageId = queryStringGet(); // 현재 페이지의 id값
   const commentArr = commentDataGet(); // 댓글 데이터 가져오기
   const commentInput = document.querySelector('#commentInput');
+
+  if (commentInput.value === '') {
+    alert('회고를 입력해주세요.');
+    return;
+  }
+
   const commentDate = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
   commentArr.push({ commentId: commentArr.length + 1, writeData: commentDate, content: commentInput.value });
   const diaryArrAddComment = diaryArr.map((diary) => {
@@ -69,7 +75,23 @@ const commentAdd = () => {
   });
   localStorage.setItem('diaryArray', JSON.stringify(diaryArrAddComment));
   commentRender();
+  commentInput.value = '';
 }
+
+// 회고 엔터키 입력 시 댓글 등록 함수 호출
+const commentAddEnter = (event) => {
+  if (event.key === 'Enter') {
+    const commentInput = document.querySelector('#commentInput');
+    if (commentInput.value === '') {
+      alert('회고를 입력해주세요.');
+      return;
+    }
+    commentAdd();
+    commentInput.value = '';
+  }
+}
+
+
 
 // 댓글 렌더링 함수
 const commentRender = () => {
