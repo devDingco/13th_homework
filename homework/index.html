@@ -10,7 +10,7 @@
     <!-- 웹페이지 최상단부 -->
     <div class="header">
       <div id="header-name">진태의 다이어리</div>
-      <img src="./asset/Rectangle 1.jpg" alt="">
+      <img src="./asset/Rectangle 1.jpg" alt="" />
     </div>
 
     <!-- 웹페이지 상단부 -->
@@ -19,27 +19,27 @@
         <div id="dairy-title">일기보관함</div>
         <div id="gallery-title">사진보관함</div>
       </div>
-      <div class="mood-selection-wrapper">
-        <select class="mood-selection">
-          <option selected="true" disabled="true" value="all">전체</option>
-          <option value="happy">행복해요</option>
-          <option value="sad">슬퍼요</option>
-          <option value="surprised">놀랐어요</option>
-          <option value="upset">화나요</option>
-          <option value="etc">기타</option>
-        </select>
-      </div>
+    </div>
+    <div class="mood-selection-wrapper">
+      <select id="mood-selection">
+        <option selected="true" disabled="true" value="all">전체</option>
+        <option value="happy">행복해요</option>
+        <option value="sad">슬퍼요</option>
+        <option value="surprised">놀랐어요</option>
+        <option value="upset">화나요</option>
+        <option value="etc">기타</option>
+      </select>
     </div>
 
     <!-- 웹페이지 중앙부 -->
-    <div class="body">
+    <div class="main">
       <div id="dairy-list">
-
-        <div onclick="onClickDairy()" class="dairy">
-          <a href="/homework/detail.html">
+        <a href="/homework/detail.html">
+          <div class="dairy">
             <!-- mood 사진 -->
             <div class="mood-img">
-              <img src="./asset/행복해요.jpg" alt="행복한기분">
+              <img id="mood-face-img" src="./asset/행복해요.jpg" alt="행복한기분" />
+              <img onclick="onClickDeleteButton(event)" id="dairy-delete-btn" src="./asset/close icon.jpg" />
             </div>
             <!-- 텍스트상자 -->
             <div class="daiary-summary-wrapper">
@@ -51,9 +51,8 @@
               <!-- 나의 타이틀 -->
               <div class="my-title">나의 타이틀 한 줄 입니다.</div>
             </div>
-          </a>
-        </div>
-
+          </div>
+        </a>
       </div>
 
       <!-- 다이어리 생성기 -->
@@ -80,25 +79,27 @@
               </div>
             </div>
           </div>
-          
           <!-- 텍스트 영역 -->
           <div id="mood-text-area">
             <div class="mood-textbox">
               <div class="mood-textbox-heading">제목</div>
-              <input class="mood-textbox-input" type="text" placeholder="제목을 입력해 주세요.">
+              <input class="mood-textbox-input" type="text" placeholder="제목을 입력해 주세요." />
             </div>
             <div class="mood-textbox">
               <div class="mood-textbox-heading">내용</div>
-              <input class="mood-textbox-input" type="text" placeholder="내용을 입력해 주세요.">
+              <input class="mood-textbox-input" type="text" placeholder="내용을 입력해 주세요." />
             </div>
           </div>
         </div>
-
         <!-- 버튼 영역 -->
         <div id="generator-footer">
           <button onclick="onClickButton()" id="gen-dairy-btn">등록하기</button>
         </div>
       </div>
+    </div>
+    <!-- 플로팅 버튼 영역 -->
+    <div id="topScroller-area">
+      <img onclick="onClickTopScroller()" id="topScroller" src="./asset/topscroll fabvicon.jpg" alt="">
     </div>
 
     <!-- 웹페이지 하단부 -->

@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   width: 1920px;
-  /* margin: 0 auto; */
   align-items: center;
 }
 
@@ -29,7 +28,8 @@
   margin-bottom: 24px;
 }
 
-#body {
+#main {
+  border: 2px solid yellowgreen;
   display: flex;
   max-width: 1168px;
   padding-bottom: 16px;
@@ -120,8 +120,8 @@
 
 #modify-btn,
 #delete-btn {
-  width: 75px;
-  height: 50px;
+  width: 50px;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #D4D3D3);
   background: var(--Gray-W, #FFF);
@@ -141,7 +141,6 @@
   transform: rotate(5deg);
 }
 
-#delete-btn,
 #cancel-modify-btn {
   background-color: #000;
   color: white
@@ -245,4 +244,59 @@
 
 #section-content-textarea {
   height: 10vh;
+}
+
+#회고영역 {
+  /* border: 2px solid black; */
+  width: 100%;
+  
+  display: flex;
+  gap: 1.2em;
+  flex-direction: column;
+}
+
+#회고영역_타이틀 {
+  padding: 0 5px;
+}
+
+#회고입력부 {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid tomato;
+}
+
+#회고입력부 input#회고입력창 {
+  width: 1100px;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+#회고입력부 button#회고입력창입력버튼 {
+  width: 50px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+}
+
+#회고리스트 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+#회고리스트 div.회고인스턴스 {
+  display: flex;
+  gap: 1em;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  border-bottom: 2px solid #E4E4E4;
+  padding-bottom: 1.2em;
+}
+
+#회고리스트 div.회고인스턴스 .회고작성일자 {
+  color: #777;
 }

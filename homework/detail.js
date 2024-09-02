@@ -2,12 +2,66 @@
 const urlSearchParams = new URLSearchParams(location.search);
 const paramsObj = Object.fromEntries(urlSearchParams.entries());
 const { idx } = paramsObj;
+
+// 댓글 목록 가져오기
+const replyTable = JSON.parse(localStorage.getItem('replyTable')) ?? {};
+const replyList = replyTable[idx] ?? [];
+replyTable[idx] = replyList;
+console.log('🚀 ~ replyTable:', replyTable);
+console.log('🚀 ~ replyList:', replyList);
+
+// 일기 목록 가져오기
 const daiaryList = JSON.parse(localStorage.getItem('dairyList'));
 const el = daiaryList[idx];
 let { myTitle, myMood, createdAt, myContent } = el;
 
 window.onload = () => {
   initialRendering();
+  renderReplyList();
+  goToReplyListSmoothly();
+};
+
+const goToReplyListSmoothly = () => {
+  const target = document.getElementById('회고리스트');
+
+  // 특정 요소의 위치를 가져오기
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+  // 부드럽게 스크롤
+  window.scrollTo({
+    top: targetPosition,
+    behavior: 'smooth',
+  });
+};
+
+const renderReplyList = () => {
+  let tags = '';
+  replyList.map((el) => {
+    tags += `
+      <div class="회고인스턴스">
+      ${el}
+      <div class="회고작성일자">[${new Date().toLocaleDateString()}]</div>
+      </div>
+    `;
+  });
+
+  document.getElementById('회고리스트').innerHTML = tags;
+};
+
+// 댓글 입력시, 댓글 Arr에 저장하고, localStorage를 업데이트
+const onClickInputButton = () => {
+  const inputValue = document.getElementById('회고입력창').value;
+
+  replyList.push(inputValue);
+  // console.log('🚀 ~ replyTable:', replyTable);
+
+  localStorage.setItem('replyTable', JSON.stringify(replyTable));
+
+  // 회고리스트에 렌더링
+  renderReplyList();
+
+  // input창 초기화
+  inputValue = '';
 };
 
 const initBodyRendering = () => {
