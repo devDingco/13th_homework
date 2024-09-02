@@ -22,15 +22,16 @@ const diaryListSet = (arr) => {
     const moodType = diary.moodType;
     const moodTypeInfo = moodTypeSet[moodType];
     const diaryId = diary.id;
+    const moodColorNum = moodTypeInfo.colorNum;
     // console.log(diaryId);
     return `<li>
     <a href="./detail.html?diaryId=${diaryId}&#commentListWrap">
     <button class="closeBtn" onclick="deleteBtn(event,${diaryId})"><img src="../img/close_outline_light_m.svg" alt="일기 삭제 버튼"></button>
       <figure>
-        <img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" />
+        <div class="imgBox_${moodColorNum}"><img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" /></div>
         <figcaption>
           <div class="infoTop">
-            <span class="moodText moodTextType${moodTypeInfo.colorNum}">${moodType}</span>
+            <span class="moodText moodTextType${moodColorNum}">${moodType}</span>
             <span class="diaryDate">${diary.writeDate}</span>
           </div>
           <h3>${diary.title}</h3>
