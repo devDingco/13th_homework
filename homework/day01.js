@@ -4,8 +4,8 @@ function 회원가입() {
     // 회원가입에 필요한 정보들 담아두기
     const 이름    = document.getElementById("이름").value
     const 이메일  = document.getElementById("이메일").value
-    const 비밀번호 = document.getElementById("비밀번호").value
     const 전화번호 = document.getElementById("전화번호").value
+    const 비밀번호 = document.getElementById("비밀번호").value
     const 자기소개 = document.getElementById("자기소개").value
     const 남자 = document.getElementById("남자").checked
     const 여자 = document.getElementById("여자").checked
@@ -15,15 +15,10 @@ function 회원가입() {
     const joinBoxBtn = document.getElementById("joinBoxBtn")
     const 나의날짜 = new Date();
 
-    // console.log(이름)
-    // console.log(이메일)
-    // console.log(비밀번호)
-    // console.log(전화번호)
-    // console.log(자기소개)
-    //  console.log(남자)
-    //  console.log(여자)
-    //  console.log(동의)
-
+   // 전화번호 가운데 - 를 쪼개서 번호를 ****로 보이게 하기
+   const 전화번호쪼개기 = "";
+   전화번호쪼개기 = 전화번호쪼개기 + 전화번호;
+   전화번호쪼개기.split()
 
 
 

@@ -6,14 +6,10 @@
 }
 
 
-.전체화면 {
-    width: 1920px;
-    height: 1805px;
-}
 
 .상단박스{
     width: 100%;
-    height: 1605px;
+    /* height: 1605px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,14 +48,21 @@
     display: flex;
     justify-content: center;
 }
+.contentBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
 
 .contentBox02{
-    width: 100%;
-    height: 1257px;
+    width: 1168px;
+    /* height: 1257px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 42px;
+
 }
 
 .일기사진보관{
@@ -81,6 +84,47 @@
     color: #000000;
 } */
 
+.dropdownBoxHeader{
+    width: 100%;
+}
+
+.dropdownBox{
+    position: relative;
+    display: inline-block;
+}
+
+.dropBoxBtn{
+    cursor: pointer;
+    width: 120px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #E4E4E4;
+    border: 1px solid #C7C7C7;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 31px;
+    color: #1C1C1C;
+    text-align: left;
+}
+
+.dropBoxBtnCho {
+    /* display: none; */
+    /* 앞에 동그란 점 */
+    width: 100%;
+    position: absolute;
+    background-color: #E4E4E4;
+
+}
+
+.dropBoxBtnCho li {
+    list-style: none;
+
+}
+.dropBoxBtnCho a{
+    text-decoration: none;
+}
+
+
 .아이콘박스{
     width: 1168px;
     height: 1167px;
@@ -95,7 +139,9 @@
     height: 1167px;
     display: flex;
     flex-wrap: wrap;
+    align-content:flex-start;
     gap: 24px;
+    /* overflow: hidden; */
 }
 
 .iconBoxFImg{
@@ -104,14 +150,39 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    transition:
+        transform 0.5s;
 }
+
+.iconBoxFImg:hover{
+    width: 380px;
+    height: 373px;
+    display: flex;
+    flex-direction: column;
+    transform: scale(1.1);
+    gap: 16px;
+}
+
 
 .iconBoxFImg img{
     width: 380px;
     height: 285px;
     border-radius: 16px;
     display: block;
+    transition:
+        filter 0.5s;
 }
+
+.iconBoxFImg img:hover{
+    width: 380px;
+    height: 285px;
+    border-radius: 16px;
+    display: block;
+    filter: blur(5px);
+
+}
+
+
 
 .iconBoxF두번째{
     width: 380px;
@@ -201,6 +272,10 @@
     gap: 20px;
 }
 
+.오늘기분Radio{
+    height: 24px;
+    text-align: center;
+}
 
 .제목내용{
     width: 312px;
@@ -284,7 +359,6 @@
 
 /*하단*/
 .footerBox{
-    width: 100%;
     height: 160px;
     display: flex;
     justify-content: center;
@@ -295,5 +369,6 @@
 .footerBox02{
     width: 1168px;
     height: 112px;
+    background-color: pink;
 }
 
