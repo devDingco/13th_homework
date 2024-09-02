@@ -23,8 +23,25 @@
                         <div class="iconBtn">일기보관함</div>
                         <div class="iconBtn">사진보관함</div>
                     </div>
-                    <div class="아이콘박스">
-                        <div class="iconBoxF">
+                    <div class="dropdownBoxHeader">
+                        <div class="dropdownBox">
+                            <button class="dropBoxBtn">
+                                전체
+                            </button>
+                                <div class="dropBoxBtnCho">
+                                    <li><a href="">행복해요</a></li>
+                                    <li><a href="">슬퍼요</a></li>
+                                    <li><a href="">놀랐어요</a></li>
+                                    <li><a href="">화나요</a></li>
+                                    <li><a href="">기타</a></li>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div id="아이콘박스id" class="아이콘박스">
+                        <div id="iconBoxFId" class="iconBoxF">
                             <div id="iconBoxFImgID" class="iconBoxFImg">
                                 <img src="./img/day04img/슬퍼요 (m).png" alt="">
                                 <div class="iconBoxF두번째">
@@ -48,8 +65,8 @@
                             <div class="iconBoxFImg">
                                 <img src="./img/day04img/화나요 (m).png" alt="">
                                 <div class="iconBoxF두번째">
+                                    <div class="F001">슬퍼요</div>
                                     <div class="iconBoxF세번째">
-                                        <div class="F001">슬퍼요</div>
                                         <div>2024.03.12</div>
                                     </div>
                                     <div class="iconBoxF네번째">타이틀 영역 입니다.</div>
@@ -94,23 +111,23 @@
                                     <div class="오늘기분Box">오늘기분이어땟나요?</div>
                                     <div class="오늘기분Radio">
                                         <div>
-                                            <input id="행복해요체크" type="radio" name="radioCheck">
+                                            <input id="행복해요체크" type="radio" name="radioCheck" value="행복해요">
                                             <label>행복해요</label>
                                         </div>
                                         <div>
-                                            <input id="슬퍼요체크" type="radio"  name="radioCheck">
+                                            <input id="슬퍼요체크" type="radio"  name="radioCheck" value="슬퍼요">
                                             <label>슬퍼요</label>
                                         </div>
                                         <div>
-                                            <input id="놀랐어요체크" type="radio" name="radioCheck">
+                                            <input id="놀랐어요체크" type="radio" name="radioCheck" value="놀랐어요">
                                             <label>놀랐어요</label>
                                         </div>
                                         <div>
-                                            <input id="화나요체크" type="radio" name="radioCheck">
+                                            <input id="화나요체크" type="radio" name="radioCheck" value="화나요">
                                             <label>화나요</label>
                                         </div>
                                         <div>
-                                            <input id="기타체크" type="radio" name="radioCheck">
+                                            <input id="기타체크" type="radio" name="radioCheck" value="기타">
                                             <label>기타</label>
                                         </div>
                                     </div>
@@ -119,19 +136,22 @@
                                 <div class="제목내용">
                                     <div class="제목내용Frsit">
                                         <div id="제목란" class="제목">제목</div>
-                                        <input class="제목입력input" placeholder="제목을 입력해 주세요">
+                                        <input id="제목입력inputId" onchange="인풋검사하기()" class="제목입력input" placeholder="제목을 입력해 주세요">
                                     </div>
                                     <div class="제목내용Second">
                                         <div id="내용란" class="내용">내용</div>
-                                        <textarea class="내용입력input" placeholder="내용을 입력해 주세요"></textarea>
+                                        <textarea id="내용입력inputId" onchange="인풋검사하기()" class="내용입력input" placeholder="내용을 입력해 주세요"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <button class="iconBoxSBtn" onclick="등록하기버튼()">등록하기</button>
                         </div>
                     </div>
+
+
+
+                    
                 </div>
-                
             </div>
         </div>
         <!-- Header -->
