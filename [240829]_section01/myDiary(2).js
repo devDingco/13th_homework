@@ -1,5 +1,10 @@
-let diaryList = []; //일기를 담을 배열
-const registerBtn = () => {
+let diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
+
+window.onload = () => {
+  renderDiaries();
+};
+
+const registerDiary = () => {
   const selectedFeeling = document.querySelector(
     'input[name="feelingBtn"]:checked'
   );
@@ -7,17 +12,15 @@ const registerBtn = () => {
   const diaryContent = document.getElementById('contentContainer');
   const info = document.getElementById('info');
 
-  if (!selectedFeeling || !diaryTitle || !diaryContent) {
+  if (!selectedFeeling || !diaryTitle.value || !diaryContent.value) {
     alert('모든 필드를 입력해주세요.');
-    return; // 필드가 비어있으면 함수 종료
+    return;
   }
 
   const todayDate = new Date();
   let year = todayDate.getFullYear();
   let month = String(todayDate.getMonth() + 1).padStart(2, '0');
   let day = String(todayDate.getDate()).padStart(2, '0');
-
-  let selectedImg;
 
   const imgFeeling = {
     행복해요: './images/happy_m.png',
@@ -27,16 +30,16 @@ const registerBtn = () => {
     기타: './images/기타 (m).png',
   };
 
-  selectedImg = imgFeeling[selectedFeeling.value]; // 선택된 버튼의 value를 사용하여 이미지 경로 가져오기
-
   const contentList = {
     title: diaryTitle.value,
     content: diaryContent.value,
     date: `${year}.${month}.${day}`,
     todayFeeling: selectedFeeling.value,
-    img: selectedImg,
+    img: imgFeeling[selectedFeeling.value],
   };
-  diaryList.push(contentList); // diaryList에 추가
+
+  diaryList.push(contentList);
+  localStorage.setItem('diaries', JSON.stringify(diaryList));
 
   alert('일기가 등록되었습니다!');
 
@@ -44,29 +47,32 @@ const registerBtn = () => {
   diaryContent.value = '';
   selectedFeeling.checked = false;
 
-  if (contentList) {
-    info.style.display = 'none';
-  }
-
-  // 새로운 일기를 카드로 보여주기
-  showCardFunc(contentList);
+  renderDiaries();
   btnColorFunc();
 };
 
-//카드에 추가되어서 div 추가 및 alert
-const showCardFunc = (diary) => {
+const renderDiaries = () => {
+  const cardContainer = document.getElementById('card');
+  cardContainer.innerHTML = '';
+  diaryList.forEach((diary, index) => showCardFunc(diary, index));
+};
+
+const filterDiaries = () => {
   const filterContent = document.getElementById('filterBtn').value;
+  const filteredDiaries =
+    filterContent === '전체'
+      ? diaryList
+      : diaryList.filter((diary) => diary.todayFeeling === filterContent);
+
+  const cardContainer = document.getElementById('card');
+  cardContainer.innerHTML = '';
+  filteredDiaries.forEach((diary, index) => showCardFunc(diary, index));
+};
+
+// Function to display a diary card
+const showCardFunc = (diary, index) => {
   const cardContainer = document.getElementById('card');
   const newContentCard = document.createElement('div');
-  const miniTodayFeeling = {
-    행복해요: './images/행복해요 (s).png',
-    슬퍼요: './images/슬퍼요 (s).png',
-    놀랐어요: './images/놀랐어요 (s).png',
-    화나요: './images/화나요 (s).png',
-    기타: './images/기타 (s).png',
-  };
-
-  // const miniImg = miniTodayFeeling[diary.todayFeeling] || '';
 
   let feelColor;
   switch (diary.todayFeeling) {
@@ -74,23 +80,20 @@ const showCardFunc = (diary) => {
       feelColor = '#EA5757';
       break;
     case '슬퍼요':
-      feelColor = '#28B4E1'; // 슬퍼요일 때 파란색
+      feelColor = '#28B4E1';
       break;
     case '놀랐어요':
-      feelColor = '#D59029'; // 놀랐어요일 때 주황색
+      feelColor = '#D59029';
       break;
     case '화나요':
-      feelColor = '#777777'; // 화나요일 때 보라색
+      feelColor = '#777777';
       break;
     case '기타':
-      feelColor = '#A229ED'; // 기타일 때 회색
+      feelColor = '#A229ED';
       break;
     default:
       feelColor = 'black';
   }
-
-  // let
-  // console.log(miniImg);
 
   newContentCard.className = 'newCard';
   newContentCard.innerHTML = `
@@ -98,36 +101,18 @@ const showCardFunc = (diary) => {
       <img src="${diary.img}" alt="${diary.todayFeeling}" />
     </div>
     <div class="container1">
-      <p class="feel" style = "color : ${feelColor}">${diary.todayFeeling}</p>
+      <p class="feel" style="color: ${feelColor}">${diary.todayFeeling}</p>
       <p class="date">${diary.date}</p>
     </div>
     <div class="container2">
       <p class="title">${diary.title}</p>
     </div>
-  
   `;
 
-  cardContainer.appendChild(newContentCard); // 카드 추가
+  cardContainer.prepend(newContentCard); //appenChild는 맨뒤로 추가, prepand는 그 반대(최신순)
 
-  switch (diary.todayFeeling) {
-    case filterContent === '행복해요':
-      newContentCard.filter((diary) => diary.todayFeeling === '행복해요');
-  }
-
-  // <img src = "${miniImg}"/> alert뜰때 미니 버전 뜨는거 한번 해보기
-  const miniImg = document.createElement('div');
-  miniImg.innerHTML = `
-  <img src = "${miniTodayFeeling.행복해요}"/>
-  `;
-
-  // 어차피 alert없애고 페이지 새로 만들어서 상세페이지 보이게 하니까 그냥 넘어가
   newContentCard.addEventListener('click', function () {
-    alert(`
-      제목 : ${diary.title}
-      내용 : ${diary.content}
-      오늘의 기분 : ${diary.todayFeeling}
-      작성일 : ${diary.date}
-      `);
+    window.location.href = `./detail.html?number=${index}`; // 상세 페이지로 이동하고 쿼리스트링에 인덱스를 추가
   });
 };
 
@@ -137,7 +122,6 @@ const btnColorFunc = () => {
   );
   const diaryTitle = document.getElementById('titleContent');
   const diaryContent = document.getElementById('contentContainer');
-
   const registerBtn = document.getElementById('registerBtn');
 
   if (diaryContent.value && diaryTitle.value && selectedFeeling) {
