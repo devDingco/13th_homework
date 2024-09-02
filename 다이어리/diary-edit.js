@@ -48,7 +48,6 @@ const handleSaveChanges = () => {
   obj.content = updatedContent.value;
 
   diaryDetailContentList.splice(index, 1, obj);
-  localStorage.removeItem("diaryList");
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
 };
 
