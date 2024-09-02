@@ -67,6 +67,7 @@ const createHtml = (diaryEntry) => {
             />
             <div id="delete_button" onclick="deleteDiaryEntry(event)">
             <img
+              class="${diaryEntry.id}"
               src="./image/delete_button.png"
               width:"24px"
             />
@@ -208,7 +209,7 @@ const onClickMood = (e) => {
 const deleteDiaryEntry = (event) => {
   event.preventDefault();
   let index;
-  const id = event.target.parentNode.parentNode.parentNode.parentNode.search.slice(-6);
+  const id = event.target.className
   const diaryList = JSON.parse(localStorage.getItem("diaryList"))
   diaryList.map((e, i) => {
     if(e.id == id) index = i;
