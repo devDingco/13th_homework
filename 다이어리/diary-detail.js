@@ -33,9 +33,12 @@ const createHtml = (diary) => {
         <div class="content_label">내용</div>
         <div class="content">${diary.content}</div>
       </div>
+      <div class="diary_action_container">
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
       </a>
+        <button class="modification_Btn">삭제</button>
+      </div>
   `;
 
   const mainFrame = document.getElementById("main_frame");
