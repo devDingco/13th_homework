@@ -5,37 +5,11 @@ const diaryArray = [
   //   writeDate: "2021-07-01",
   //   title: "타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다.",
   //   content: "내용 영역입니다."
+  //   id: 1,
+  //   comment:[
+  //     { commentId: 1, content: "댓글내용" },
+  //   ]
   // },
-  // {
-  //   moodType: "놀랐어요",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  // },
-  // {
-  //   moodType: "화나요",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  // },
-  // {
-  //   moodType: "행복해요",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  // },
-  // {
-  //   moodType: "기타",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  // },
-  // {
-  //   moodType: "행복해요",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  // }
 ];
 
 const moodTypeSet = {
@@ -227,22 +201,64 @@ const nameSet = () => {
 nameSet();
 
 
-const editor = SUNEDITOR.create(
-  document.getElementById('editArea'), {
-  mode: 'classic',
-  placeholder: '내용을 입력해주세요.',
-  buttonList: [
-    // ['undo', 'redo'],
-    ['font', 'fontSize', 'formatBlock'],
-    ['blockquote', 'bold', 'underline', 'italic', 'strike'],
-    ['fontColor', 'hiliteColor', 'textStyle'],
-  ],
-  lang: SUNEDITOR_LANG['ko'],
-});
 
-editor.placeholder = "내용을 입력해주세요";
-editor.onInput = () => {
-  console.log("sdfdsf");
-  textCheck();
+
+// 셀렉트 박스 클릭시 필터 항목들 보이도록 처리 함수
+const optionShow = (event) => {
+  const eventTarget = event.target; // 클릭한 요소
+  console.log(eventTarget);
+  eventTarget.parentNode.querySelector(".filterList").classList.toggle("show");
 }
 
+
+
+// 필터 항목 클릭시 선택된 값으로 변경 함수
+const optionSelect = (event, type) => {
+  const optionTarget = event.target;
+  const optionValue = optionTarget.innerText;
+
+  const selectButton = optionTarget.parentNode.parentNode.querySelector("button")
+  selectButton.innerText = optionValue;
+
+  const listLi = optionTarget.parentNode.querySelectorAll("li")
+  Array.from(listLi).map((li) => {
+    if (li === optionTarget) {
+      li.classList.add("active");
+    } else {
+      li.classList.remove("active");
+    }
+  })
+
+  optionTarget.parentNode.classList.remove("show");
+
+  // 옵션선택과 타입에 따른 노출 처리 함수 호출
+  if (type === 'moodFilter') {
+    moodFilter(optionValue)
+    // diaryListSet(diaryArr);
+  }
+}
+
+
+// 게시글 삭제 함수
+const deleteBtn = (event, id) => {
+  event.preventDefault(); // 이벤트 전파 중지
+
+  // id : 삭제할 게시글의 id값
+  const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== id);
+  console.log(diaryDelArr);
+
+  const prompt = confirm('정말 삭제하시겠습니까?');
+  if (prompt) {
+    const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== id);
+    localStorage.setItem('diaryArray', JSON.stringify(diaryDelArr));
+    alert('삭제가 완료되었습니다.');
+    location.href = './index.html';
+  }
+}
+
+
+// 스크롤 상단으로 이동 함수
+const scrollTopAction = () => {
+  const windowScrollTop = window.scrollY;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
