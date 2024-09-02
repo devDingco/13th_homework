@@ -21,51 +21,51 @@
           <button>사진 보관함</button>
         </li>
       </ul>
-      <div class="selectWrap" id="cusotmSelect">
-        <button id="selectBtn">
-          <p id="selectedValue">전체</p>
-          <img src="./public/icons/down_fill_light_m.svg" alt="" />
-        </button>
-        <ul id="optionList" class="hidden">
-          <li class="option">
-            <button id="all_option" class="selected" value="all">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>전체</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="happy_option" value="happy">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>행복해요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="sad_option" value="sad">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>슬퍼요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="surprised_option" value="surprised">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>놀랐어요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="angry_option" value="angry">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>화나요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="etc_option" value="etc">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>기타</p>
-            </button>
-          </li>
-        </ul>
-      </div>
     </nav>
+    <div class="selectWrap none" id="customSelect">
+      <button id="selectBtn">
+        <p id="selectedValue">전체</p>
+        <span></span>
+      </button>
+      <ul id="optionList" class="hidden">
+        <li class="option">
+          <button id="all_option" class="selected" value="all">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>전체</p>
+          </button>
+        </li>
+        <li class="option">
+          <button id="happy_option" value="happy">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>행복해요</p>
+          </button>
+        </li>
+        <li class="option">
+          <button id="sad_option" value="sad">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>슬퍼요</p>
+          </button>
+        </li>
+        <li class="option">
+          <button id="surprised_option" value="surprised">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>놀랐어요</p>
+          </button>
+        </li>
+        <li class="option">
+          <button id="angry_option" value="angry">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>화나요</p>
+          </button>
+        </li>
+        <li class="option">
+          <button id="etc_option" value="etc">
+            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+            <p>기타</p>
+          </button>
+        </li>
+      </ul>
+    </div>
     <main class="container-layout">
       <div class="main-content">
         <ul id="diaryList">
@@ -117,7 +117,7 @@
             등록하기
           </button>
         </form>
-        <button id="upFloatingButton" class="none">
+        <button id="upFloatingButton" class="">
           <img src="./public/icons/up_outline_light_xl.svg" alt="" />
         </button>
       </aside>

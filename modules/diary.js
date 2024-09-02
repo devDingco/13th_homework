@@ -1,6 +1,6 @@
 const submitButton = document.getElementById('submitBtn');
 const diaryListEl = document.getElementById('diaryList');
-const customSelectEl = document.getElementById('cusotmSelect');
+const customSelectEl = document.getElementById('customSelect');
 const alertDiary = document.getElementById('add-list-alert');
 const scrollFloatingButton = document.getElementById('upFloatingButton');
 const deleteButtonEl = document.getElementById('deleteButton');
@@ -219,8 +219,10 @@ window.addEventListener('scroll', () => {
   const scrollPosition = window.scrollY;
   if (scrollPosition) {
     classNameChange(scrollFloatingButton, 'none', 'active');
+    classNameChange(customSelectEl, 'none', 'active');
   } else {
     classNameChange(scrollFloatingButton, 'active', 'none');
+    classNameChange(customSelectEl, 'active', 'none');
   }
 });
 

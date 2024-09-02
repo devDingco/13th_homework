@@ -1,4 +1,5 @@
 .container-layout {
+  position: relative;
   max-width: 1168px;
   margin: 0 auto;
 }
@@ -26,6 +27,11 @@ article.banner {
   overflow: hidden;
   margin: 1.5rem auto;
   background-color: skyblue;
+}
+
+nav {
+  position: relative;
+  height: auto;
 }
 
 nav ul.nav_list {
@@ -312,8 +318,12 @@ footer span {
   line-height: 16px;
 }
 
-.selectWrap {
-  position: relative;
+#customSelect {
+  position: sticky;
+  z-index: 98;
+  top: 0;
+  left: 50%;
+  transform: translateX(-488%);
   width: fit-content;
 }
 
@@ -326,7 +336,24 @@ footer span {
   padding: 4px;
   border-radius: 8px;
   border: 1px solid #c7c7c7;
-  background: #fff;
+}
+
+#customSelect > #selectBtn > span {
+  width: 24px;
+  height: 24px;
+}
+#customSelect.none > #selectBtn {
+  background-color: #fff;
+}
+#customSelect.none > #selectBtn > span {
+  background: url('../public/icons/down_fill_light_m.svg') no-repeat center;
+}
+#customSelect.active > #selectBtn > span {
+  background: url('../public/icons/down_fill_dark_m.svg') no-repeat center;
+}
+#customSelect.active > #selectBtn {
+  background-color: black;
+  color: #fff;
 }
 
 #optionList {

@@ -182,7 +182,6 @@ const onSubmitComment = (e) => {
   classNameChange(commentSubmitBtnEl, 'active', 'none');
   loadData();
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
-  window.scrollTo({ bottom: 0 });
 };
 
 function dateFormatter() {

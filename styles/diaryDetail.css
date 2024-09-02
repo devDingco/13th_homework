@@ -145,8 +145,6 @@ main #view.view #contentViewContainer p {
   align-self: flex-end;
 }
 
-.comments_container {
-}
 .comments_container h4 {
   color: #000;
   font-size: 18px;
