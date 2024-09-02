@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>트랜지션 실습</title>
+    <style>
+        .CSS_네모상자 {
+            width: 300px;
+            height: 300px;
+            background-color: salmon;
+            white-space: pre; /* 줄바꿈 인식하도록 도와주기 */
+
+            /* 처음모습에서 마지막 모습까지 부드럽게 변하기*/
+            transition: 
+                width 0.5s, 
+                height 0.5s,
+                background-color 0.5s,
+        }
+        .CSS_네모상자:hover {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            filter: blur(5px); /*번짐효과*/
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_네모상자">
+        안녕하세요 저는 민서입니다.
+        나이는 25살이고,
+        코드캠프에 다닙니다.
+    </div>
+</body>
+</html>
