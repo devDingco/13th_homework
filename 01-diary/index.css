@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 42px;
+    gap: 32px;
 }
 
 .navi {
@@ -42,6 +42,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 32px;
+
     padding: 0px 20px 0px 20px;
 }
 
@@ -72,8 +73,16 @@
 
 /* 기분에 따른 일기 필터링 */
 
+.contents_container {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+}
+
 .filter_item {
     position: sticky;
+    top: 10px;
+    z-index: 10;
 }
 
 .mood_select_box {
@@ -106,14 +115,14 @@
     gap: 16px;
     padding-bottom: 16px;
 
-    transition: filter, width, height;
+    border-radius: 16px;
+    transition: filter;
     transition-duration: 0.5s;
 }
 
 .diary:hover {
-    /* width: 412px; */
-    width: 400px;
-    height: 396px;
+    transform: scale(1.1);
+    box-shadow: 0px 2px 30px 0px #00000029;
 }
 
 .diary:hover .diary_mood_img {
@@ -148,6 +157,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    padding: 0px 8px 0px 8px;
 }
 
 .diary_sub_title {
