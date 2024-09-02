@@ -1,9 +1,11 @@
 let diaryList = []
-let filteredList = []
+let filteredDiaryList = []
 
 let inputTitle
 let inputText
 let selectedMood
+
+let isFiltered = false
 
 window.onload = () => {
     fetchDiaryFromLocalStorage()
@@ -77,7 +79,7 @@ const createDiary = () => {
     convertToJSON(createdDiary)
     console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
-    reloadDiary(diaryList)
+    filterDiary()
 }
 
 const convertToJSON = (data) => {
@@ -163,11 +165,12 @@ const filterDiary = () => {
     const selectedMood = document.getElementById("mood_select").value
 
     if (selectedMood === "전체") {
+        isFiltered = false
         reloadDiary(diaryList)
     } else {
-        filteredList = diaryList.filter(el => (el.mood === selectedMood))
-        reloadDiary(filteredList)
-        console.log(filteredList)
+        filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
+        isFiltered = true
+        reloadDiary(filteredDiaryList)
     }
 }
 
