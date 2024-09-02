@@ -2,6 +2,10 @@ const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+let diaryEntry = {};
+let currentFilteredMood = "";
+let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
+
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const filterCheckbox = document.getElementById("filterCheckbox");
@@ -9,10 +13,6 @@ window.addEventListener("scroll", () => {
   scroll > 0 ? filterCheckbox.style = "background-color: #1C1C1C; color: #FFF" : filterCheckbox.style = "background-color: #FFF";
 
 })
-
-let diaryEntry = {};
-let currentFilteredMood = "";
-let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`);
@@ -204,6 +204,21 @@ const onClickMood = (e) => {
   currentFilteredMood = selectedMood;
   getDiariesByMood(selectedMood);
 };
+
+const deleteDiaryEntry = (event) => {
+  event.preventDefault();
+  let index;
+  const id = event.target.parentNode.parentNode.parentNode.parentNode.search.slice(-6);
+  const diaryList = JSON.parse(localStorage.getItem("diaryList"))
+  diaryList.map((e, i) => {
+    if(e.id == id) index = i;
+  })
+  storedDiaryList.splice(index, 1)
+  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList))
+  const article = document.getElementById("article");
+  article.innerHTML = "";
+  storedDiaryList.map((diary) => createHtml(diary));
+}
 
 const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
