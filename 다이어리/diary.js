@@ -3,6 +3,7 @@ const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
 let diaryEntry = {};
+let currentFilteredMood = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 const clearDiaryInputs = (checkedMoodId) => {
@@ -18,7 +19,6 @@ const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
     "#diary_entry_container"
   );
-  const article = document.getElementById("article");
 
   if (
     article.children.length == 0 ||
@@ -33,6 +33,19 @@ const appendDiaryEntry = (diaryCard) => {
   } else {
     return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
       diaryCard);
+  }
+};
+
+const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
+  if (currentFilteredMood == "") {
+    appendDiaryEntry(diaryCard);
+  } else if (currentFilteredMood == diaryEntry.mood) {
+    appendDiaryEntry(diaryCard);
+    currentFilteredMood = "";
+  } else {
+    window.location.href = "./diary.html";
+    appendDiaryEntry(diaryCard);
+    currentFilteredMood = "";
   }
 };
 
@@ -58,7 +71,7 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  appendDiaryEntry(diaryCard);
+  handleDiaryEntryBasedOnMood(diaryCard, diaryEntry);
 };
 
 const saveDiaryEntry = (diaryEntry) => {
@@ -174,6 +187,7 @@ const getDiariesByMood = (selectedMood) => {
 
 const onClickMood = (e) => {
   const selectedMood = e.target.innerText;
+  currentFilteredMood = selectedMood;
   getDiariesByMood(selectedMood);
 };
 
