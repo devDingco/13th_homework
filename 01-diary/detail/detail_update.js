@@ -5,7 +5,6 @@ window.onload = () => {
     render()
 }
 
-
 const fetchDetailDataFromLocalStorage = () => {
     const queryString = location.search
     const parameters = new URLSearchParams(queryString)
@@ -17,10 +16,30 @@ const fetchDetailDataFromLocalStorage = () => {
     diary = JSON.parse(jsonData)
 }
 
+const selectMoodCheck = () => {
+    const radioList = document.getElementsByName("select_mood_radio_list")
+    radioList.forEach(el => {
+        if (el.value === diary.mood) {
+            el.checked = true
+        }
+    })
+}
+
+const inputMoodCheck = () => {
+    const radioList = document.getElementsByName("select_mood_radio_list")
+    radioList.forEach(el => {
+        if (el.checked) {
+            diary.mood = el.value
+        }
+    })
+}
+
 const render = () => {
     document.getElementById("update_contents_title").innerText = diary.title
     document.getElementById("update_contents_text").innerText = diary.text
+    selectMoodCheck()
 }
+
 
 const updateDiary = () => {
     const title = document.getElementById("update_contents_title").value

@@ -11,6 +11,10 @@
 
 }
 
+.home_link {
+    text-decoration: none;
+}
+
 .header_title {
     width: 1168px;
     height: 40px;
