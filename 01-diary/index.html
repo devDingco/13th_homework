@@ -16,6 +16,19 @@
                 <div id="navi_selected_item" class="navi_item">일기보관함</div>
                 <div class="navi_item">사진보관함</div>
             </div>
+
+            <div class="filter_item">
+                <div class="">
+                    <select id="mood_select", class ="mood_select_box" onchange="filterDiary()">
+                        <option value="전체" selected>전체</option>
+                        <option value="행복해요">행복해요</option>
+                        <option value="슬퍼요">슬퍼요</option>
+                        <option value="놀랐어요">놀랐어요</option>
+                        <option value="화나요">화나요</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="contents">
             <div class="contents_left_item" id="diary_list">
@@ -76,7 +89,7 @@
                             <div class="diary_mood_happy">기뻐요</div>
                             <div class="diary_date">2024.08.30</div>
                         </div>
-                        <div class="diary_main_title">다</div>
+                        <div class="diary_main_title">으악</div>
                     </div>
                 </div>
             </div>

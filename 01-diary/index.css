@@ -5,9 +5,6 @@
 }
 
 .header {
-    width: 1920px;
-    height: 60px;
-
     display: flex;
     justify-content: center;
 }
@@ -24,9 +21,6 @@
 }
 
 .banner {
-    width: 1920px;
-    height: 240px;
-
     display: flex;
     justify-content: center;
 }
@@ -37,9 +31,6 @@
 }
 
 .body {
-    width: 1920px;
-    height: 1257px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,11 +38,10 @@
 }
 
 .navi {
-    width: 1920px;
-    height: 48px;
-    
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 32px;
     padding: 0px 20px 0px 20px;
 }
 
@@ -80,19 +70,28 @@
     border-bottom: 2px solid black;
 }
 
+/* 기분에 따른 일기 필터링 */
+
+.mood_select_box {
+    width: 120px;
+    height: 32px;
+
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
 .contents {
-    width: 1168px;
-    height: 1167px;
-
     display: flex;
     gap: 24px;
 }
 
 .contents_left_item {
-    width: 784px;
-    height: 1167px;
-
+    /* width: 784px; */
+    width: 816px;
+    
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -100,17 +99,26 @@
 
 .diary {
     width: 380px;
-    height: 373px;
-
+    max-width: 412px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    padding-bottom: 16px;
+
+    transition: filter, width, height;
+    transition-duration: 0.5s;
+}
+
+.diary:hover {
+    width: 412px;
+    height: 396px;
+}
+
+.diary:hover .diary_mood_img {
+    filter: blur(3px);
 }
 
 .diary_mood_img {
-    width: 380px;
-    height: 285px;
-
     border-radius: 16px;
 }
 
@@ -156,8 +164,6 @@
     color: #A229ED;
 }
 
-
-
 .diary_date {
     font-weight: 400;
     font-size: 14px;
@@ -172,10 +178,12 @@
 
 /* 가운데 내용의 오른쪽 "일기 쓰기" 아이템 배치 */
 .contents_right_item {
-    width: 360px;
     height: 604px;
 
     padding: 24px;
+
+    border: 1px solid #D4D3D3;
+    border-radius: 16px;
 
     display: flex;
     flex-direction: column;
@@ -231,6 +239,7 @@
     height: 24px;
 
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
@@ -301,9 +310,6 @@
 /* 바닥글 영역 */
 
 .footer {
-    width: 1920px;
-    height: 160px;
-
     background-color: #F2F2F2;
 
     display: flex;

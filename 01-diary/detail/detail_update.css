@@ -1,0 +1,135 @@
+.root_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+
+    padding: 0px 20px 0px 20px;
+}
+
+.header_title {
+    width: 1168px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.section_container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.update_contents_container {
+    width: 1168px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.update_main_contents_title {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+}
+
+.update_select_mood_container {
+    width: 592px;
+    display: flex;
+    gap: 20px;
+}
+
+.select_mood {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.select_mood_radio {
+    width: 24px;
+    height: 24px;
+}
+
+.select_mood_label {
+    font-weight: 500;
+    font-size: 18px;
+    color: #333333;
+}
+
+.update_contents_title_container {
+    width: 1168px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.update_contents_title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+}
+
+#update_title_input {
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px;
+}
+
+.update_contents_text_container {
+    width: 1168px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#update_contents_title {
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+
+    padding: 12px 16px 12px 16px;
+}
+
+#update_contents_text {
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+
+    padding: 12px 16px 12px 16px;
+}
+
+.main_contents_button_container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    width: 104px;
+    height: 48px;
+
+    border: 1px solid black;
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: #1C1C1C;
+
+    background-color: white;
+}
+
+#update_button {
+    color: white;
+    background-color: #1C1C1C;
+}
+
+#update_button:active {
+    transform: rotate(30deg);
+}

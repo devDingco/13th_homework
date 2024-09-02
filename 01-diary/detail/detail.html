@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>상세 페이지</title>
+    <link rel="stylesheet" href="./detail.css">
+    <script src="./detail.js"></script>
+</head>
+<body>
+    <div class="root_container">
+        <header class="header_container">
+            <div class="header_title">민지의 다이어리</div>
+        </header>
+        <section class="section_container">
+            <div class="main_contents_container">
+                <div class="main_contents_title_container">
+                    <div id="detail_diary_title" class="main_contents_title">이것은 타이틀입니다.</div>
+                    </div>
+                    <div class="main_contents_title_contents">
+                        <div class="main_contents_mood_container">
+                            <div class="main_contents_mood_img"></div>
+                            <div id="detail_diary_mood" class="main_contents_mood">행복해요</div>
+                        </div>
+                        <div class="main_contents_date_container">
+                            <div id="detail_diary_date" class="main_contents_date">2024. 07. 12</div>
+                            <div class="main_contents_date">작성</div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="main_contents_text_container">
+                    <div class="main_contents_text_title">내용</div>
+                    <div id="detail_diary_text" class="main_contents_text">작성한 내용입니다.</div>
+                </div>
+                <div class="main_contents_button_container">
+                    <button class="update_button" onclick="updateButtonPressed()">수정</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
