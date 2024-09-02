@@ -1,0 +1,276 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 1920px;
+	height: 100%;
+}
+
+.wrapper__header {
+	width: 1168px;
+	height: 60px;
+	padding: 0px 20px 0px 20px;
+	gap: 10px;
+	font-family: Pretendard Variable;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 16px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.banner {
+	width: 1168px;
+	height: 240px;
+	border-radius: 24px 0px 0px 0px;
+	opacity: 0px;
+}
+
+.tab {
+	width: 1168px;
+	height: 48px;
+	gap: 16px;
+	margin: 24px 0px;
+	display: flex;
+	flex-direction: row;
+}
+
+.diarystore {
+	border-bottom: 2px solid black;
+	width: 119px;
+	height: 48px;
+	padding: 12px 8px 12px 8px;
+	gap: 10px;
+	font-family: Pretendard Variable;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+	text-align: left;
+}
+
+.photostore {
+	width: 119px;
+	height: 48px;
+	padding: 12px 8px 12px 8px;
+	gap: 10px;
+	border: 0px 0px 2px 0px;
+	font-family: Pretendard Variable;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	color: #ababab;
+}
+
+.wrapper__body {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+}
+
+.wrapper__left__body {
+	width: 784px;
+	height: 100%;
+	gap: 24px;
+	opacity: 0px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.moodWrapper__item {
+	width: 380px;
+	height: 373px;
+	padding: 0px 0px 16px 0px;
+	gap: 16px;
+	border-radius: 16px 0px 0px 0px;
+}
+
+.mood-feel {
+	display: inline-block;
+	padding-left: 4px;
+	width: 49%;
+	text-align: left;
+}
+
+.mood-date {
+	display: inline-block;
+	padding-right: 4px;
+	width: 49%;
+	text-align: right;
+}
+
+.mood-thumbnail {
+	width: 380px;
+	height: 285px;
+	padding: 12px 0px 0px 0px;
+	gap: 10px;
+	border-radius: 16px 0px 0px 0px;
+}
+
+.mood-date {
+	margin: auto;
+}
+
+.mood-feel {
+	font-family: Pretendard Variable;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+	text-align: left;
+}
+
+#sad {
+	color: #28b4e1;
+}
+
+#happy {
+	color: #ea5757;
+}
+
+#surprised {
+	color: #d59029;
+}
+
+#mad {
+	color: #777777;
+}
+
+#etc {
+	color: #a229ed;
+}
+
+.wrapper__right__body {
+	width: 360px;
+    height: fit-content;
+	padding: 24px 24px 0px 24px;
+	gap: 20px; /* Adjusted for spacing between elements */
+	border-radius: 16px;
+	border: 1px solid #d4d3d3;
+	display: flex;
+	flex-direction: column; /* Set column layout */
+}
+
+.diary {
+	width: 312px;
+	height: 24px;
+	font-family: Pretendard Variable;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+	text-align: left;
+}
+
+.selectbox {
+	width: 312px;
+	height: 68px;
+	gap: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#title,
+#content {
+	border: 1px solid #d4d3d3;
+	width: 312px;
+	padding: 12px 16px;
+	gap: 10px;
+	border-radius: 8px;
+	margin-bottom: 16px; /* Add space below each input */
+}
+
+#title {
+	height: 48px;
+}
+
+#content {
+	height: 128px;
+}
+
+.diary-feel {
+	display: flex;
+	flex-direction: column;
+	font-family: Pretendard Variable;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	width: 312px;
+	height: 108px;
+	gap: 16px;
+}
+
+.diary-select {
+	display: flex;
+	flex-direction: row;
+	font-family: Pretendard Variable;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	color: #333333;
+	gap: 8px;
+}
+
+.diary-title {
+	color: #333333;
+	font-family: Pretendard Variable;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	margin-bottom: 8px; /* Space below labels */
+}
+
+.diary-content {
+    width: 312px;
+	height: 128px;
+	color: #333333;
+	font-family: Pretendard Variable;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+	text-align: left;
+	margin-bottom: 8px; /* Space below labels */
+}
+
+.diary-submit {
+	display: flex;
+	justify-content: center; /* Center the button horizontally */
+	align-items: center;
+	border: none;
+	width: 312px;
+	height: 48px;
+	padding: 8px 10px;
+	gap: 10px;
+	border-radius: 8px;
+	background-color: #f0f0f0; /* Set a background color */
+	cursor: pointer; /* Change cursor on hover */
+	margin: 250px 0px 24px 0px;
+
+}
+
+.submit {
+	width: 312px;
+	height: 48px;
+}
