@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./javascript/main.js" ></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="header">
+            <div>민지의 다이어리</div>
+        </div>
+        <img class="banner" src="./assets/main.png" alt="Banner">
+
+        <div class="category">
+            <div class="click">일기보관함</div>
+            <div class="nonclick">사진보관함</div>
+        </div>
+
+        <section class="filter">
+          <select id="mood_filter">
+            <option value="전체">전체</option>
+            <option value="행복">행복해요</option>
+            <option value="슬픔">슬퍼요</option>
+            <option value="놀람">놀랐어요</option>
+            <option value="화남">화나요</option>
+            <option value="기타">기타</option>
+          </select>
+      </section>
+
+        <div class="main">
+            <div id="show_diary_html" class="show_diary_css"></div>
+
+            <div class="register">
+                <div class="register_title">📍일기 쓰기</div>
+                <div class="register_contentbox">
+                    <div class="register_content">오늘 기분은 어땠나요?</div>
+                    <div class="radio_group">
+                        <div class="radio_button">
+                            <input type="radio" name="select_feeling" value="happy" checked>
+                            <div>행복해요</div>
+                        </div>
+                        <div class="radio_button">
+                            <input type="radio" name="select_feeling" value="sad">
+                            <div>슬퍼요</div>
+                        </div>
+                        <div class="radio_button">
+                            <input type="radio" name="select_feeling" value="surprise">
+                            <div>놀랐어요</div>
+                        </div>
+                        <div class="radio_button">
+                            <input type="radio" name="select_feeling" value="angry">
+                            <div>화나요</div>
+                        </div>
+                        <div class="radio_button">
+                            <input type="radio" name="select_feeling" value="etc">
+                            <div>기타</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diary_box">
+                    <div class="write_diary">
+                        <div>제목</div>
+                        <input type="text" id="html_title" placeholder="제목을 입력해 주세요.">
+                    </div>
+                    <div class="write_diary">
+                        <div>내용</div>
+                        <textarea id="html_content" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button class="diary_button" onclick="JS_write()">등록하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_layout">
+        <div class="footer">
+            <div class="footer_title">민지의 다이어리</div>
+            <div class="footer_boss">대표 : {name}</div>
+            <div class="footer_co">Copyright © 2024.{name} Co., Ltd.</div>
+        </div>
+    </div>
+</body>
+</html>
