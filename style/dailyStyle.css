@@ -30,7 +30,6 @@
 }
 body {
     width: 100dvw;
-    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -44,6 +43,7 @@ main {
     gap: 24px;
     padding-left: 10dvw;
     padding-right: 10dvw;
+    overflow: scroll;
 }
 header {
     width: 100%;
@@ -80,6 +80,9 @@ article {
     align-items: center;
     gap: 16px;
     flex: 1 0 0;
+    position: sticky;
+    top: 12px;
+    z-index: 20;
 }
 .article-header-text {
     color: rgba(171, 171, 171, 1);
@@ -88,11 +91,10 @@ article {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 .post {
     width: 60%;
-    height: 70dvh;
-    overflow: scroll;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -103,10 +105,11 @@ article {
     flex-direction: column;
     gap: 12px;
     text-decoration: none;
+    position: relative;
 }
 .post-img {
     width: 100%;
-    max-height: 300px
+    max-height: 300px;
     height: 100%;
     transition: width 0.5s, height 0.5s, filter 0.5s;
 }
@@ -149,10 +152,25 @@ article {
 }
 .post-content {
     padding-left: 4px;
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
     color: black;
+}
+.post-delete {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 12px;
+    right: 12px;
+    border-radius: 100%;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 .daily {
@@ -231,11 +249,21 @@ input,
 textarea {
     outline: none;
 }
+.floating-button {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    border-radius: 100%;
+    border: 1px solid #c1c1c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 footer {
-    position: fixed;
-    bottom: 0;
     width: 100dvw;
-    height: 8dvh;
     background-color: rgba(242, 242, 242, 1);
     padding-left: 10dvw;
     padding-right: 10dvw;

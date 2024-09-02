@@ -11,25 +11,39 @@
 
                 const dailyArray = JSON.parse(
                     localStorage.getItem("dailyArray")
-                );
+                ).filter((daily) => Number(daily.id) === Number(queryId));
+
                 const mainElement = document.getElementsByTagName("main")[0];
                 const articleElement = document.createElement("article");
-                articleElement.innerHTML = `<div class="article-header">${dailyArray[queryId].title}</div>
+                articleElement.innerHTML = `<div class="article-header">${dailyArray[0].title}</div>
                 <div class="article-mood-container">
                     <div class="article-mood">
-                        <img src="../${dailyArray[queryId].img}" alt="1" class="post-img" />
-                        <div class="post-font-${dailyArray[queryId].moodEng}">${dailyArray[queryId].mood}</div>
+                        <img src="../${dailyArray[0].img}" alt="1" class="post-img" />
+                        <div class="post-font-${dailyArray[0].moodEng}">${dailyArray[0].mood}</div>
                     </div>
-                    <div class="post-font">${dailyArray[queryId].date} 작성</div>
+                    <div class="post-font">${dailyArray[0].date} 작성</div>
                 </div>
                 <div>
-                ${dailyArray[queryId].content}
+                ${dailyArray[0].content}
                 </div>
                 <div class="post-update">
-                    <a href="./dailyUpdate.html?id=${queryId}" class="update-button">수정</a>    
+                    <a href="./dailyUpdate.html?id=${dailyArray[0].id}" class="update-button">수정</a>
+                    <a class="update-button" onclick="onClickDeletePost()">삭제</a>
                 </div>
                 `;
                 mainElement.appendChild(articleElement);
+
+                const sectionElement = document.getElementById("section-list");
+
+                dailyArray[0].comments.map((comment) => {
+                    const divElement = document.createElement("div");
+                    divElement.innerHTML = `
+            <div class="section-comment">
+                <div>${comment}</div>
+                <div class="section-date">[2024.09.24]</div>
+            </div>`;
+                    sectionElement.appendChild(divElement);
+                });
             };
         </script>
     </head>
@@ -41,5 +55,19 @@
                 </div>
             </header>
         </main>
+        <section>
+            <div class="section-title">회고</div>
+            <form class="section-input" onsubmit="onSubmitComment(event)">
+                <input
+                    type="text"
+                    placeholder="회고를 남겨보세요"
+                    class="section-input1"
+                />
+                <button class="section-button">입력</button>
+            </form>
+            <div class="section-list" id="section-list"></div>
+        </section>
     </body>
+    <script src="./utils/onSubmitComment.js"></script>
+    <script src="./utils/onClickDeletePost.js"></script>
 </html>
