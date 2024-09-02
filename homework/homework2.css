@@ -64,13 +64,16 @@ main {
   align-items: center;
   margin-top: 10px;
 }
-.contents-area {
+
+.contents {
   width: 1168px;
   height: auto;
-  /* background-color: brown; */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  /* background-color: aliceblue; */
 }
+
 .navigate {
   /* background-color: beige; */
   width: 100%;
@@ -81,7 +84,6 @@ main {
   padding: 15px;
 }
 .diary {
-  border-bottom: 2px solid black;
   width: 119px;
   height: 38px;
   padding: 12px 8px;
@@ -93,7 +95,7 @@ main {
   align-items: center;
 }
 .photo {
-  -webkit-animation-direction: 119px;
+  width: 119px;
   height: 48px;
   padding: 12px 8px;
   font-size: 20px;
@@ -103,14 +105,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-.contents {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* background-color: aliceblue; */
-}
 .album-area {
   height: auto; /* height 나중에 수정*/
   width: 100%;
@@ -118,7 +112,13 @@ main {
   display: flex;
   justify-content: space-between;
 }
-.library {
+
+#filterBox {
+  width: 100%;
+  height: 40px;
+}
+
+#library {
   width: 784px;
   height: auto;
   /* background-color: bisque; */
@@ -136,6 +136,10 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  text-decoration: none;
+
+  color: #000;
 }
 .thumbnail {
   width: 380px;
@@ -207,7 +211,7 @@ main {
   line-height: 24px;
 }
 .feeling-choose {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   display: flex;
@@ -237,7 +241,7 @@ main {
   color: #333333;
 }
 .text-area-title input {
-  width: 312px;
+  width: 290px;
   height: 48px;
   border-radius: 8px;
   border: 1px solid #d4d3d3;
@@ -256,12 +260,13 @@ main {
   color: #333333;
 }
 .text-area-text textarea {
-  width: 312px;
+  width: 290px;
   height: 128px;
   border-radius: 8px;
   border: 1px solid #d4d3d3;
   padding: 12px 16px;
   resize: none;
+  outline: none;
 }
 .button-area {
   width: 100%;
@@ -282,6 +287,27 @@ main {
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+}
+
+.photo-area {
+  height: auto; /* height 나중에 수정*/
+  width: 100%;
+  background-color: aquamarine;
+}
+
+.tab__item {
+  cursor: pointer;
+}
+
+.tab__item.active {
+  display: inline-block;
+  border-bottom: 2px solid black;
+}
+.tab__content {
+  display: none;
+}
+.tab__content.active {
+  display: block;
 }
 
 /* 푸터 */
@@ -311,4 +337,57 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+/*일기 상세보기*/
+
+.diary-wrap {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.diary-container {
+  width: 1168px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-container > h1 {
+  font-size: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px 0px;
+}
+
+.diary-container > h2 {
+  font-size: 18px;
+}
+
+.diary-content {
+  padding: 10px 0px;
+}
+
+.edit-button {
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;
+  margin-top: 10px;
+  width: 44px;
+  height: 30px;
+
+  align-self: flex-end;
+}
+
+.disable {
+  display: none !important;
 }
