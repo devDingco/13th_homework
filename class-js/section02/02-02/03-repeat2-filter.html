@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>필터실습</title>
+    <script>
+        const JS_필터링기능 = (event) => {
+            const 선택한내용 = event.target.value //기쁨선택 행복선택 등등 선택한 내용이들어옴
+            console.log(선택한내용)
+
+            let 일기목록 = [
+                {상태: "기쁨"},
+                {상태: "행복"},
+                {상태: "슬픔"},
+                {상태: "기쁨"}
+            ]
+
+
+            switch(선택한내용) {
+                case "기쁨선택": {
+                    일기목록 =  일기목록.filter(el => el.상태 === "기쁨")
+                    break
+                }
+                case "행복선택": {
+                    일기목록 =  일기목록.filter(el => el.상태 === "행복")
+                    break
+                }
+                case "슬픔선택": {
+                    일기목록 =  일기목록.filter(el => el.상태 === "슬픔")
+                    break
+                }
+            }
+           일기목록 =  일기목록.filter(el => el.상태 === "기쁨")
+           console.log(일기목록)
+        }
+    </script>
+</head>
+<body>
+    <select onchange="JS_필터링기능(event)">
+        <option>선택하세요</option>
+        <option value="기쁨선택">기쁨</option>
+        <option value="행복선택">행복</option>
+        <option value="슬픔선택">슬픔</option>
+    </select>
+</body>
+</html>
