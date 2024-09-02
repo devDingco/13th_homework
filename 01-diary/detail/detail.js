@@ -1,4 +1,6 @@
 let diary
+let reminiscenceList = []
+let reminiscenceText = ""
 
 
 window.onload = () => {
@@ -34,4 +36,38 @@ const deleteButtonPressed = () => {
     localStorage.removeItem(id)
     location.href = "../index.html"
     alert(`일기를 삭제했습니다.`)
+}
+
+const inputTextCheck = () => {
+    reminiscenceText = document.getElementById("reminiscence_input_text").value
+}
+
+const inputButtonTapped = () => {
+    const reminiscence = { text: reminiscenceText }
+    reminiscenceList.push(reminiscence)
+    renderReminiscenceList()
+    document.getElementById("reminiscence_input_text").value = null
+    alert(`댓글을 등록했습니다.`)
+}
+
+const renderReminiscenceList = () => {
+    const reminiscenceDOMList = reminiscenceList.map(el => `
+        <div class="reminiscence_list_container_items">
+            <div class="reminiscence_list_item_text">${el.text}</div>
+            <div class="reminiscence_list_item_date">[${getToday()}]</div>
+         </div>
+         <div class="break_line"></div>`
+    ).join("")
+    
+    document.getElementById("reminiscence_list").innerHTML = reminiscenceDOMList
+}
+
+const getToday = () => {
+    const date = new Date()
+
+    const year = date.getFullYear()
+    const convertedMonth = String(date.getMonth() + 1).padStart(2, "0")
+    const convertedDate = String(date.getDate()).padStart(2, "0")
+
+    return `${year}.${convertedMonth}.${convertedDate}`
 }
