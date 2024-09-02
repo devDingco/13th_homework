@@ -1,0 +1,93 @@
+section {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 40px;
+
+  .empty {
+    text-align: center;
+    padding: 20vh;
+    color: var(--font-color-6);
+    font-size: var(--font-size-3);
+  }
+
+  .diaryList {
+    width: 784px;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      li {
+        width: 380px;
+
+        &:hover {
+          transform: scale(1.02);
+          img {
+            filter: blur(1px);
+          }
+        }
+
+        figure {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding-bottom: 16px;
+
+          figcaption {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 8px;
+
+            h3 {
+              font-weight: 600;
+              font-size: var(--font-size-2);
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              word-break: break-all;
+              width: 100%;
+            }
+          }
+
+          .infoTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+
+            .moodText {
+              font-weight: 600;
+              font-size: var(--font-size-1);
+
+              &.moodTextType1 {
+                color: var(--font-color-1);
+              }
+              &.moodTextType2 {
+                color: var(--font-color-2);
+              }
+              &.moodTextType3 {
+                color: var(--font-color-3);
+              }
+              &.moodTextType4 {
+                color: var(--font-color-4);
+              }
+              &.moodTextType5 {
+                color: var(--font-color-5);
+              }
+            }
+
+            .diaryDate {
+              font-size: var(--font-size-1);
+              color: var(--font-color-7);
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
