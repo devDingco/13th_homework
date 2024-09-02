@@ -169,10 +169,27 @@ section {
 
         &:hover {
           transform: scale(1.02);
+          box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
 
-          // img {
-          //   filter: blur(2px);
-          // }
+          figcaption {
+            padding: 0 16px;
+          }
+
+          img {
+            animation: vibration 0.5s infinite;
+            @keyframes vibration {
+              0% {
+                transform: rotate(0deg);
+              }
+              50% {
+                transform: rotate(8deg);
+              }
+              100% {
+                transform: rotate(0deg);
+              }
+            }
+          }
         }
 
         .closeBtn {
@@ -189,6 +206,31 @@ section {
           flex-direction: column;
           gap: 16px;
           padding-bottom: 16px;
+
+          div {
+            border-radius: 20px;
+            overflow: hidden;
+
+            img {
+              display: block;
+            }
+          }
+
+          .imgBox_1 {
+            background-color: var(--mood-color-1);
+          }
+          .imgBox_2 {
+            background-color: var(--mood-color-2);
+          }
+          .imgBox_3 {
+            background-color: var(--mood-color-3);
+          }
+          .imgBox_4 {
+            background-color: var(--mood-color-4);
+          }
+          .imgBox_5 {
+            background-color: var(--mood-color-5);
+          }
 
           figcaption {
             display: flex;
