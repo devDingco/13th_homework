@@ -81,7 +81,6 @@
     padding: 4px;
 }
 
-
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
 .contents {
     display: flex;
@@ -98,6 +97,7 @@
 }
 
 .diary {
+    position: relative;
     width: 380px;
     max-width: 412px;
     display: flex;
@@ -120,6 +120,26 @@
 
 .diary_mood_img {
     border-radius: 16px;
+}
+
+.diary_delete_button {
+    width: 24px;
+    height: 24px;
+
+    border: none;
+    border-radius: 100%;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    box-shadow: 0px 0px 8px 0px #0000001A;
 }
 
 .diary_title {

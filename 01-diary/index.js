@@ -148,6 +148,7 @@ const reloadDiary = (reload_diaryList) => {
     const diaryDOMList = reload_diaryList.map(el => 
         `<div class="diary" id="diary_DOM">
             <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt} onclick="diaryCardTapped(${el.id})">
+            <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped()"></button>
                 <div class="diary_title">
                     <div class="diary_sub_title">
                         <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
@@ -178,5 +179,9 @@ const diaryCardTapped = (id) => {
     console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
     location.href = `./detail/detail.html?diaryID=${id}`
+}
+
+const deleteButtonTapped = () => {
+    console.log(`deleteButtonTapped: X(삭제) 버튼을 눌렀습니다.`)
 }
 
