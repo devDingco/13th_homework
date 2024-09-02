@@ -174,11 +174,6 @@ const filterDiary = () => {
 const diaryCardTapped = (id) => {
     console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
-    alert(`
-    다이어리 상세보기
-    제목: ${diary.title}
-    날짜: ${diary.date}
-    기분: ${diary.mood}
-    내용: ${diary.text}`)
+    location.href = `./detail/detail.html?diaryID=${id}`
 }
 
