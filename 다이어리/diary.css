@@ -122,7 +122,7 @@
   align-self: stretch;
   position: relative;
   height: 80px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .emotion_dropdown_layout {
   display: flex;
@@ -140,11 +140,11 @@
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
-  background: var(--Gray-W, #FFF);
+  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
+  background: var(--Gray-W, #fff);
 }
 ul li {
-	list-style: none;
+  list-style: none;
 }
 .dropdown_name_none_hover {
   text-decoration: none;
@@ -152,13 +152,13 @@ ul li {
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  color: var(--Gray-Gray-900, #1C1C1C);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.16px;
 }
+
 .dropdown_name_hover {
   display: none;
 }
@@ -180,7 +180,7 @@ ul li {
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  background: var(--Gray-Gray-100, #E4E4E4);
+  background: var(--Gray-Gray-100, #e4e4e4);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -207,12 +207,12 @@ ul li {
   border-radius: 8px;
 }
 .dropdown_name:hover {
-  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
-  background: var(--Gray-Gray-100, #E4E4E4);
+  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
+  background: var(--Gray-Gray-100, #e4e4e4);
   border-radius: 8px 8px 0 0;
   border: none;
 }
-.dropdown_name > ul > li:hover{
+.dropdown_name > ul > li:hover {
   background-color: #f2f2f2;
 }
 .main {
@@ -221,6 +221,7 @@ ul li {
   align-items: flex-start;
   gap: 24px;
   align-self: stretch;
+  overflow: scroll;
 }
 .article {
   display: flex;
@@ -272,7 +273,7 @@ ul li {
 }
 .diary_cover:hover {
   transform: scale(110%);
-  filter: blur(5px)
+  filter: blur(5px);
 }
 .diary_entry_summary {
   display: flex;
@@ -299,16 +300,16 @@ ul li {
   color: #28b4e1;
 }
 .surprise_emotion_font_color {
-  color: #D59029;
+  color: #d59029;
 }
 .upset_emotion_font_color {
   color: #777777;
 }
 .happy_emotion_font_color {
-  color: #EA5757;
+  color: #ea5757;
 }
 .etc_emotion_font_color {
-  color: #A229ED;
+  color: #a229ed;
 }
 .date {
   color: var(--Gray-Gray-500, #919191);

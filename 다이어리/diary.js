@@ -2,6 +2,14 @@ const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+  const filterCheckbox = document.getElementById("filterCheckbox");
+
+  scroll > 0 ? filterCheckbox.style = "background-color: #1C1C1C; color: #FFF" : filterCheckbox.style = "background-color: #FFF";
+
+})
+
 let diaryEntry = {};
 let currentFilteredMood = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
@@ -57,11 +65,12 @@ const createHtml = (diaryEntry) => {
               src="./image/${diaryEntry.imageName}.png"
               width="774px"
             />
+            <div id="delete_button" onclick="deleteDiaryEntry(event)">
             <img
-              class="delete_button"
               src="./image/delete_button.png"
               width:"24px"
             />
+            </div>
           </div>
           <div class="diary_entry_summary">
             <div class="emotion_date_info">
