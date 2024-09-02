@@ -2,6 +2,8 @@ const submitButton = document.getElementById('submitBtn');
 const diaryListEl = document.getElementById('diaryList');
 const customSelectEl = document.getElementById('cusotmSelect');
 const alertDiary = document.getElementById('add-list-alert');
+const scrollFloatingButton = document.getElementById('upFloatingButton');
+const deleteButtonEl = document.getElementById('deleteButton');
 
 let feeling = '';
 let customSelect = 'all';
@@ -29,26 +31,7 @@ const renderLocalStorageData = () => {
       const addList = document.createElement('li');
 
       diaryListEl.append(addList);
-      addList.innerHTML = `
-        <a id="${diary.id}" href="./diaryDetail.html?id=${diary.id}" >
-          <div class="img-wrap">
-            <img src="./public/imgs/${diary.feeling}.svg" alt="${
-        diary.feeling
-      }이미지" />
-          </div>
-          <div class="info-container">
-            <div class="tag-wrap">
-              <p class="feeling-tag ${diary.feeling}">${
-        feelingText[diary.feeling]
-      }</p>
-              <p class="date-tag">${dateFormatter()}</p>
-            </div>
-            <h3 class="title">
-              ${diary.title}
-            </h3>
-          </div>
-        </a>
-      `;
+      addList.innerHTML = diaryCard(diary);
     });
   }
 };
@@ -100,6 +83,7 @@ const onAddDiary = (e) => {
     title,
     content,
     createdAt: dateFormatter(),
+    comments: [],
   };
 
   diaryListArray.push(newDiaryData);
@@ -111,26 +95,7 @@ const onAddDiary = (e) => {
   }
   diaryListEl.append(addList);
 
-  addList.innerHTML = `
-    <a id="${newDiaryData.id}" href="./diaryDetail.html?id=${newDiaryData.id}" >
-      <div class="img-wrap">
-        <img src="./public/imgs/${newDiaryData.feeling}.svg" alt="${
-    newDiaryData.feeling
-  }이미지" />
-      </div>
-      <div class="info-container">
-        <div class="tag-wrap">
-          <p class="feeling-tag ${newDiaryData.feeling}">${
-    feelingText[newDiaryData.feeling]
-  }</p>
-          <p class="date-tag">${dateFormatter()}</p>
-        </div>
-        <h3 class="title">
-          ${newDiaryData.title}
-        </h3>
-      </div>
-    </a>
-  `;
+  addList.innerHTML = diaryCard(newDiaryData);
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
   document.getElementById('title').value = '';
   document.getElementById('content').value = '';
@@ -138,17 +103,16 @@ const onAddDiary = (e) => {
   submitButtonStyleChange('off');
 };
 
-// const diaryListInfo = (event) => {
-//   const diaryId = event.currentTarget.id;
-//   diaryListArray.forEach((diaryList) => diaryList === diaryId);
-//   console.log(diaryId);
+const onDeleteButtonClick = (e) => {
+  e.preventDefault();
+  console.log(e.target.classList);
 
-//   alert(`
-//     기분 상태: ${feelingText[diaryListArray[diaryListArray.length - 1].feeling]}
-//     제목: ${diaryListArray[index].title}
-//     내용: ${diaryListArray[index].content}
-//     `);
-// };
+  diaryListArray = diaryListArray.filter(
+    (diary) => diary.id !== e.target.classList[0],
+  );
+  localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
+  renderLocalStorageData();
+};
 
 const onOptionChecked = (e) => {
   customSelect = e ? e.currentTarget.value : 'all';
@@ -168,10 +132,11 @@ const onOptionChecked = (e) => {
   diaryListEl.innerHTML = '';
   isList = false;
 
-  const addList = document.createElement('li');
   diaryListArray.forEach((diaryData) => {
     if (diaryData.feeling === customSelect) {
+      const addList = document.createElement('li');
       isList = true;
+      console.log(diaryData.title);
       diaryListEl.append(addList);
       addList.innerHTML = `
     <a id="${diaryData.id}" href="./diaryDetail.html?id=${diaryData.id}" >
@@ -221,6 +186,47 @@ function classNameChange(element, remove, add) {
   element.classList.remove(remove);
   element.classList.add(add);
 }
+
+function diaryCard(dataFrom) {
+  return `
+      <a id="${dataFrom.id}" class="diary_card" 
+      href="./diaryDetail.html?id=${dataFrom.id}#commentscontainer" >
+      <div class="img-wrap">
+        <img src="./public/imgs/${dataFrom.feeling}.svg" alt="${
+    dataFrom.feeling
+  }이미지" />
+      </div>
+      <div class="info-container">
+        <div class="tag-wrap">
+          <p class="feeling-tag ${dataFrom.feeling}">${
+    feelingText[dataFrom.feeling]
+  }</p>
+          <p class="date-tag">${dateFormatter()}</p>
+        </div>
+        <h3 class="title">
+          ${dataFrom.title}
+        </h3>
+      </div>
+      <button id="deleteButton"  onclick="onDeleteButtonClick(event)" >
+        <img src="./public/icons/close_outline_light_s.svg" class="${
+          dataFrom.id
+        }" />
+      </button>
+    </a>`;
+}
+
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+  if (scrollPosition) {
+    classNameChange(scrollFloatingButton, 'none', 'active');
+  } else {
+    classNameChange(scrollFloatingButton, 'active', 'none');
+  }
+});
+
+scrollFloatingButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 customSelectEl.addEventListener('mouseenter', () => {
   document.getElementById('optionList').classList.remove('hidden');
