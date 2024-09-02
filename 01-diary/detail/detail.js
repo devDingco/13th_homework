@@ -29,6 +29,9 @@ const updateButtonPressed = () => {
     location.href = `./detail_update.html?diaryID=${id}`
 }
 
-const inputTextRender = () => {
-    
+const deleteButtonPressed = () => {
+    const id = diary.id
+    localStorage.removeItem(id)
+    location.href = "../index.html"
+    alert(`일기를 삭제했습니다.`)
 }

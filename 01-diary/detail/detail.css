@@ -120,9 +120,10 @@
 .main_contents_button_container {
     display: flex;
     justify-content: flex-end;
+    gap: 16px;
 }
 
-.update_button {
+.button_list {
     width: 51px;
     height: 40px;
     border: 1px solid #D4D3D3;

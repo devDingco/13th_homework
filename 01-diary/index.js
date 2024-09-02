@@ -80,6 +80,7 @@ const createDiary = () => {
     console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
     filterDiary()
+    alert(`일기가 추가되었습니다.`)
 }
 
 const convertToJSON = (data) => {
