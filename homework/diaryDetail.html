@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework2</title>
+    <link rel="stylesheet" href="./homework2.css" />
+    <script src="./homework2.js" defer></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- 헤더 -->
+      <header>
+        <div class="header-content">민지의 다이어리</div>
+      </header>
+      <main>
+        <div class="diary-wrap">
+          <div class="diary-container">
+            <h1>이것은 타이틀 입니다.</h1>
+            <div class="user-info">
+              <span class="username">행복해요</span>
+              <span class="date">2024.02.12 작성</span>
+            </div>
+            <h2>내용</h2>
+            <div class="diary-content">
+              여기에는 다이어리의 본문 내용이 들어갑니다. 반복적으로 내용을 입력하고 있습니다.
+            </div>
+            <button class="edit-button" onclick="editClick()">수정</button>
+          </div>
+        </div>
+        <div class="diary-wrap disable">
+          <div class="diary-container">
+            <input type="text" />
+            <div class="feeling-choose">
+              <input type="radio" name="feeling" id="happy" /> <label for="happy">행복해요</label>
+              <input type="radio" name="feeling" id="sad" /> <label for="sad">슬퍼요</label>
+              <input type="radio" name="feeling" id="surprise" /> <label for="surprise">놀랐어요</label>
+              <input type="radio" name="feeling" id="mad" /> <label for="mad">화나요</label>
+              <input type="radio" name="feeling" id="etc" /> <label for="etc">기타</label>
+            </div>
+            <h2>내용</h2>
+            <textarea placeholder="내용을 입력해 주세요." id="body"></textarea>
+            <button class="edit-button" onclick="saveClick()">저장</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <div class="footer">
+        <div class="footer-contents">
+          <div class="footer-content-1">민지의 다이어리</div>
+          <div class="footer-content-2">대표 : (name)</div>
+          <div class="footer-content-3">Copyright 2024(name)Co.Ltd</div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
