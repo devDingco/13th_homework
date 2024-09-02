@@ -72,6 +72,10 @@
 
 /* 기분에 따른 일기 필터링 */
 
+.filter_item {
+    position: sticky;
+}
+
 .mood_select_box {
     width: 120px;
     height: 32px;
@@ -88,9 +92,7 @@
 }
 
 .contents_left_item {
-    /* width: 784px; */
-    width: 816px;
-    
+    width: 784px;    
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -99,7 +101,6 @@
 .diary {
     position: relative;
     width: 380px;
-    max-width: 412px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -110,7 +111,8 @@
 }
 
 .diary:hover {
-    width: 412px;
+    /* width: 412px; */
+    width: 400px;
     height: 396px;
 }
 
