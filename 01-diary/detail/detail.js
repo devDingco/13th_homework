@@ -6,6 +6,7 @@ let reminiscenceText = ""
 window.onload = () => {
     fetchDetailDataFromLocalStorage()
     render()
+    scroll하기()
 }
 
 const fetchDetailDataFromLocalStorage = () => {
@@ -70,4 +71,12 @@ const getToday = () => {
     const convertedDate = String(date.getDate()).padStart(2, "0")
 
     return `${year}.${convertedMonth}.${convertedDate}`
+}
+
+
+
+const scroll하기 = () => {
+    const y = document.getElementById("reminiscence_input_text").offsetTop
+    // console.log(y)
+    window.scrollTo({top: y, behavior: "smooth"})
 }
