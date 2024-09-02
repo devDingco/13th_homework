@@ -1,10 +1,16 @@
-const diaryCardArr = localStorage.getItem("다이어리카드배열") === null ? [] : JSON.parse(localStorage.getItem("다이어리카드배열"));
-//나중에 함수만들고, 함수실행후 리턴값으로 깔끔하게 만들기.
+let diaryLocalStorage = localStorage.getItem("다이어리카드배열");
+
+if (diaryLocalStorage === null) {
+    diaryLocalStorage = [];
+} else {
+    diaryLocalStorage = JSON.parse(localStorage.getItem("다이어리카드배열"));
+}
+
+const diaryCardArr = diaryLocalStorage;
 
 window.onload = () => {
     if (diaryCardArr.length > 0) {
         diaryCardRendering(diaryCardArr);
-        console.log("onload가 작동했습니다.");
     }
 }
 
@@ -30,9 +36,16 @@ const clickButton = () => {
     const dairyCardJson = JSON.stringify(diaryCardArr);
     localStorage.setItem("다이어리카드배열", dairyCardJson);
     
-    const newDiary = diaryCardArr[diaryCardArr.length - 1];
-    const newCard = createDiaryCard(newDiary.emotionText, newDiary.date, newDiary.title, diaryCardObject.image);
-    
+    const diaryCardIndex = diaryCardArr.length - 1; 
+    const newDiary = diaryCardArr[diaryCardIndex];
+    const newCard = createDiaryCard(
+        newDiary.emotionText, 
+        newDiary.date, 
+        newDiary.title, 
+        diaryCardObject.image, 
+        diaryCardIndex
+    );
+
     const diaryContainer = document.getElementById("storage_leftBody");
     diaryContainer.appendChild(newCard);
 }
@@ -70,12 +83,14 @@ const getImage = (emotionText) => {
     return imageSrc;
 }
 
-const createDiaryCard = (emotion, date, title, image) => {
+const createDiaryCard = (emotion, date, title, image, index) => {
     const card = document.createElement("div");
     card.className = "diaryCard";
 
     card.innerHTML = `
-        <img src="${image}" alt="" id="diaryCard_image">
+        <a href="./일기상세페이지.html?diaryCardIndex=${index}">
+            <img src="${image}" alt="" id="diaryCard_image">
+        </a>
         <div class="diaryCard_content">
             <div class="diaryCard_content_header">
                 <div id="content_header_emotion">${emotion}</div>
