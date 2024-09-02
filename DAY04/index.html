@@ -10,10 +10,9 @@
   <body>
     <nav>
       <div>
-        <span>혜지의 다이어리</span>
+        <a href="./index.html"><span>🐨의 다이어리</span></a>
       </div>
     </nav>
-
     <div class="상단사진">
       <img src="./images/Rectangle1.png" alt="상단 이미지" />
     </div>
@@ -28,8 +27,21 @@
           </div>
         </div>
       </div>
+      <!-- 감정 필터 -->
+      <div class="감정필터상자">
+        <select class="감정필터" id="감정필터" onchange="필터링기능(event)">
+          <option>전체</option>
+          <option value="행복해요">행복해요</option>
+          <option value="슬퍼요">슬퍼요</option>
+          <option value="놀랐어요">놀랐어요</option>
+          <option value="화나요">화나요</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
       <div class="일기보관함상자">
+        <!-- 작성한 일기 카드 -->
         <div class="일기리스트"></div>
+        <!-- 일기 작성 칸 -->
         <div class="일기쓰기">
           <div class="일기쓰기타이틀">📍 일기 쓰기</div>
           <div class="기분에답해상자">
@@ -66,25 +78,26 @@
             <div class="일기내용상자">
               <span>내용</span>
               <div class="일기내용인풋겉상자">
-                <input
+                <textarea
                   id="diary-content"
                   type="text"
                   placeholder="내용을 입력해주세요"
-                />
+                ></textarea>
               </div>
             </div>
           </div>
+          <!-- 등록하기 버튼 -->
           <button id="registerButton" class="일기등록하기버튼">등록하기</button>
         </div>
       </div>
     </main>
     <footer>
       <div class="ft_box">
-        <div class="ft_box_name">혜지의 다이어리</div>
-        <div class="ft_box_대표">대표: 혜지</div>
-        <div class="ft_box_cpr">Copyright © 2024. 혜지 Co., Ltd.</div>
+        <div class="ft_box_name">🐨의 다이어리</div>
+        <div class="ft_box_대표">대표: 🐨</div>
+        <div class="ft_box_cpr">Copyright © 2024. 🐨 Co., Ltd.</div>
       </div>
     </footer>
-    <script src="diary.js"></script>
+    <script src="./diary.js"></script>
   </body>
 </html>

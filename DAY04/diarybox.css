@@ -10,6 +10,9 @@ main {
   align-items: center;
   gap: 42px;
 }
+a {
+  text-decoration-line: none;
+}
 .일기헤더 {
   display: flex;
   justify-content: center;
@@ -52,6 +55,25 @@ main {
   line-height: 24px; /* 100% */
   letter-spacing: -0.24px;
 }
+.감정필터상자 {
+  display: flex;
+  width: 1168px;
+  min-width: 320px;
+  max-width: 1168px;
+  gap: 16px 8px;
+  flex-wrap: wrap;
+}
+.감정필터 {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
+  background: var(--Gray-W, #fff);
+  display: flex;
+  min-width: 120px;
+  padding: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
 .일기보관함상자 {
   display: flex;
   width: 1168px;
@@ -66,6 +88,7 @@ main {
   gap: 24px;
   width: 100%;
   max-width: 784px;
+  position: relative;
 }
 .등록한일기 {
   display: flex;
@@ -78,11 +101,21 @@ main {
   gap: 16px;
   border-radius: 16px;
   background: #fff;
-  cursor: pointer;
-  transition: transform 0.2s;
+
+  position: relative;
+  z-index: 1;
+  transition: all transform 0.5s;
 }
-.등록한일기:hover {
-  transform: translateY(-5px);
+
+.등록한일기.filled:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+}
+.등록한일기.빈셀:hover {
+  transform: none;
+  box-shadow: none;
 }
 .감정표현사진 {
   background: url("./images/슬퍼요 (m).png") lightgray 50% / cover no-repeat;
@@ -90,10 +123,14 @@ main {
   height: 285px;
   padding: 12px;
   align-items: center;
-  gap: 10px;
   align-self: stretch;
   border-radius: 16px;
   flex-grow: 1;
+  transition: transfrom 0.5s;
+}
+
+.등록한일기.filled:hover .감정표현사진 {
+  filter: blur(3px);
 }
 .등록한일기핵심포인트 {
   display: flex;
@@ -246,11 +283,14 @@ main {
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
-  color: var(--Gray-Gray-400, #ababab);
+
   font-size: 16px;
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
+}
+.일기제목상자 input::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
 }
 .일기내용상자 {
   display: flex;
@@ -276,16 +316,21 @@ main {
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
 }
-.일기내용인풋겉상자 input {
+.일기내용인풋겉상자 textarea {
   height: 24px;
   width: 100%;
-  color: var(--Gray-Gray-400, #ababab);
+  height: 100%;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: -0.16px;
   border: none;
+  resize: none; /* 사용자가 크기를 조절하지 못하게 함 */
+}
+.일기내용인풋겉상자 textarea::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
 }
 .일기등록하기버튼 {
   height: 48px;
