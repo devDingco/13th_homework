@@ -90,6 +90,13 @@
     gap: 8px;
 }
 
+#update_contents_title {
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+
+    padding: 12px 16px 12px 16px;
+}
+
 #update_contents_text {
     border: 1px solid #D4D3D3;
     border-radius: 8px;
