@@ -18,7 +18,7 @@
         <button id="photoKeepBtn">사진보관함</button>
       </div>
       <div class="filter">
-        <select id="filterBtn" onclick="showFilterText()">
+        <select id="filterBtn" onclick="filterDiaries()">
           <option value="전체">전체</option>
           <option value="행복해요">행복해요</option>
           <option value="슬퍼요">슬퍼요</option>
@@ -31,7 +31,7 @@
       <div class="mainContent">
         <div id="showImgContent">
           <div id="card">
-            <p id="info">오늘의 기분을 담은 일기를 써보세요!</p>
+            <!-- <p id="info">오늘의 기분을 담은 일기를 써보세요!</p> -->
           </div>
         </div>
         <div id="addContent">
@@ -107,7 +107,7 @@
               oninput="btnColorFunc()"
             ></textarea>
           </div>
-          <button id="registerBtn" onclick="registerBtn()">등록하기</button>
+          <button id="registerBtn" onclick="registerDiary()">등록하기</button>
         </div>
       </div>
       <div class="footer">

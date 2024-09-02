@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'RixXladywatermelonR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/RixXladywatermelonR.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'RixXladywatermelonR';
+}
+.container {
+  padding: 20px 200px;
+  overflow: scroll;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+    #diaryName {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 16px;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+  }
+
+  #diaryDetail {
+    .detailTitle {
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 2px solid #666;
+      font-size: 20px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+    }
+    .detailInfo {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .feels {
+        display: flex;
+        gap: 6px;
+        font-size: 16px;
+        align-items: center;
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+      .date {
+        color: #919191;
+        font-size: 14px;
+      }
+    }
+    .detailContent {
+      margin-bottom: 20px;
+      line-height: 20px;
+    }
+    .btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      button {
+        padding: 3px 8px;
+        border-radius: 3px;
+        border: 1px solid #919191;
+      }
+      button:hover {
+        background-color: #f4bdbd;
+        cursor: pointer;
+      }
+    }
+  }
+}

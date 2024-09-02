@@ -204,3 +204,24 @@
     justify-content: space-between;
   }
 }
+
+.newCard {
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.newCard:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+#registerBtn {
+  transition: transform 0.5s;
+}
+
+#registerBtn:active {
+  transform: rotate(-1deg);
+}
+
+.filter {
+  margin-bottom: 30px;
+}
