@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  margin: 100px;
+}
+
+.CSS_헤더 {
+  padding: 0;
+}
+
+.CSS_일기제목 {
+  font-size: 22px;
+  font-weight: 700;
+
+}
+
+#HTML_상세보기 {
+  margin-top: 64px;
+  width: 100%;
+}
+
+.line {
+  border: 1px solid black;
+  margin: 10px 0 20px 0;
+}
+
+.이미지와기분상태 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.감정이미지 {
+  width: 40px;
+  height: 32px;
+}
+.이미지기분이랑날짜 {
+  display: flex;
+
+  padding-bottom: 12px;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+.기분 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.날짜 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #919191;
+  font-size: 14px;
+}
+
+.내용박스부분섹션 {
+  margin: 24px 0;
+}
+
+.내용이라고하는부분 {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.내용이담기는부분 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.수정하기버튼담긴섹션 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.수정하기버튼 {
+  width: auto;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #D4D3D3;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
