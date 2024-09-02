@@ -24,7 +24,7 @@ const headerBox = () => {
   const headerElement = document.querySelector("header");
   if (!headerElement) return
   headerElement.innerHTML = `
-      <h1><span class="userName"></span>의 다이어리</h1>
+      <h1><a href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
       <!-- <fieldset class="toggleSwitch">
         <label>
           <input role="switch" type="checkbox" />
@@ -262,3 +262,18 @@ const scrollTopAction = () => {
   const windowScrollTop = window.scrollY;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// 스크롤 버튼 렌더링 함수
+
+const scrollBtnRender = () => {
+  const scrollBtn = document.querySelector('.scrollBox');
+  if (!scrollBtn) return
+  scrollBtn.innerHTML = `
+   <button class="scrollUpBtn" onclick="scrollTopAction()">
+        <img src="./img/up_outline_light_xl.svg" alt="scrollUp" />
+        <span class="blind">맨위로 이동</span>
+   </button>
+  `
+}
+
+scrollBtnRender();
