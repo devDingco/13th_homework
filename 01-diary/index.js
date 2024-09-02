@@ -195,3 +195,16 @@ const deleteButtonTapped = (event, id) => {
     alert(`일기가 삭제되었습니다.`)
 }
 
+const topScrollFloatingButtonTapped = () => {
+    window.scrollTo({top:0})
+}
+
+window.addEventListener("scroll", () => {
+    const y = window.scrollY
+
+    if (y > 0) {
+        document.getElementById("mood_select").style = "background-color: black; color: white;"
+    } else {
+        document.getElementById("mood_select").style = "background-color: white; color: black;"
+    }
+})

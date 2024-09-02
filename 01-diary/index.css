@@ -329,6 +329,19 @@
     padding: 8px 10px 8px 10px;
 }
 
+.top_scroll_floating_button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #F2F2F2;
+    border-radius: 100%;
+
+    background-color: #FFFFFFE5;
+    
+    position: fixed;
+    bottom: 152px;
+    right: 376px;
+}
+
 /* 바닥글 영역 */
 
 .footer {
@@ -365,3 +378,4 @@
     font-size: 14px;
     color: #919191;
 }
+
