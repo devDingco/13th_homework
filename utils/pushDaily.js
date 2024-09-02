@@ -18,55 +18,6 @@ const month =
 const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
 const today = `${year}.${month}.${day}`;
 
-// push된 객체를 담는 array
-const dailyArray = [
-    {
-        id: 0,
-        moodEng: "happy",
-        mood: "행복해요",
-        date: today,
-        title: "타이틀 영역입니다.",
-        content: "컨텐츠 영역입니다.",
-        img: `./img/happy.png`,
-    },
-    {
-        id: 1,
-        moodEng: "sad",
-        mood: "슬퍼요",
-        date: today,
-        title: "타이틀 영역입니다.",
-        content: "컨텐츠 영역입니다.",
-        img: `./img/sad.png`,
-    },
-    {
-        id: 2,
-        moodEng: "surprise",
-        mood: "놀랐어요",
-        date: today,
-        title: "타이틀영역입니다.2131232132131231232131221312321312312",
-        content: "컨텐츠 영역입니다.",
-        img: `./img/surprise.png`,
-    },
-    {
-        id: 3,
-        moodEng: "etc",
-        mood: "기타",
-        date: today,
-        title: "타이틀 영역입니다.",
-        content: "컨텐츠 영역입니다.",
-        img: `./img/etc.png`,
-    },
-    {
-        id: 4,
-        moodEng: "angry",
-        mood: "화나요",
-        date: today,
-        title: "타이틀 영역입니다.",
-        content: "컨텐츠 영역입니다.",
-        img: `./img/angry.png`,
-    },
-];
-
 // map을 이용하여 미리 값을 할당할 수 있는 postObject
 const postObject = idList.map((id) => ({
     id: 0,
@@ -81,6 +32,7 @@ const postObject = idList.map((id) => ({
 function pushDaily() {
     const titleElement = document.getElementById("titleId");
     const contentElement = document.getElementById("contentId");
+    const dailyArray = JSON.parse(localStorage.getItem("dailyArray"));
 
     // input 태그 내에 name="radio"인 것을 찾은 이후 checked 속성을 이용하여 checked 된 element
     const selectedRadioElement = document.querySelector(
@@ -104,10 +56,11 @@ function pushDaily() {
     // 이후 부모 element를 추출해서 자식들 중 제일 뒤에 append
     const parentElement = document.getElementById("post");
 
-    const postContainer = document.createElement("div");
+    const postContainer = document.createElement("a");
+    postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
     postContainer.className = "post-container";
     postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id} onclick="onClickDailyInfor(event)" />
+        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
         <div class="post-title">
             <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
             <div class="post-date">${resultObject.date}</div>
@@ -119,4 +72,5 @@ function pushDaily() {
 
     // 부모 element append 한 이후 dailyArray에 push
     dailyArray.push(resultObject);
+    localStorage.setItem("dailyArray", JSON.stringify(dailyArray));
 }

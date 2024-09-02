@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>dailyUpdates</title>
+        <link rel="stylesheet" href="./style/dailyUpdateStyle.css" />
+        <script>
+            window.onload = () => {
+                const queryString = location.search;
+                const queryId = new URLSearchParams(queryString).get("id");
+
+                const dailyArray = JSON.parse(
+                    localStorage.getItem("dailyArray")
+                );
+
+                const mainElement = document.getElementsByTagName("main")[0];
+                const articleElement = document.createElement("article");
+
+                articleElement.innerHTML = `<div class="daily-checkcontainer">
+    <div class="today-mood">오늘 기분은 어땟나요?</div>
+    <div class="daily-inputlist">
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="happy"
+                ${dailyArray[queryId].moodEng == "happy" ? "checked" : null}
+            />
+            <label for="">행복해요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="sad"
+                ${dailyArray[queryId].moodEng == "sad" ? "checked" : null}
+            />
+            <label for="">슬퍼요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="surprise"
+                ${dailyArray[queryId].moodEng == "surprise" ? "checked" : null}
+            />
+            <label for="">놀랐어요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="angry"
+                ${dailyArray[queryId].moodEng == "angry" ? "checked" : null}
+            />
+            <label for="">화나요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="etc"
+                ${dailyArray[queryId].moodEng == "etc" ? "checked" : null}
+            />
+            <label for="">기타</label>
+        </div>
+    </div>
+</div>
+<div class="daily-form">
+    <div class="daily-form-input">
+        <div class="daily-title">
+            <div>제목</div>
+            <input
+                type="text"
+                id="titleId"
+                class="input-title"
+                value="${dailyArray[queryId].title}"
+            />
+        </div>
+        <div class="daily-title">
+            <div>내용</div>
+            <textarea
+                id="contentId"
+                class="input-title input-content"
+                
+            >${dailyArray[queryId].content}</textarea>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="delete-button" onclick="onBack()">취소</button>
+        <button class="update-button" onclick="onUpdatePost()">수정 하기</button>
+    </div>
+</div>`;
+
+                mainElement.appendChild(articleElement);
+            };
+        </script>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header-text-container">
+                    <div class="header-text">민지의 다이어리</div>
+                </div>
+            </header>
+        </main>
+    </body>
+    <script src="./utils/onBack.js"></script>
+    <script src="./utils/onUpdatePost.js"></script>
+</html>

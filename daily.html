@@ -2,7 +2,101 @@
 <html lang="ko">
     <head>
         <title>daily</title>
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./style/dailyStyle.css" />
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                const initialDailyArray = [
+                    {
+                        id: 0,
+                        moodEng: "happy",
+                        mood: "행복해요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/happy.png`,
+                    },
+                    {
+                        id: 1,
+                        moodEng: "sad",
+                        mood: "슬퍼요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/sad.png`,
+                    },
+                    {
+                        id: 2,
+                        moodEng: "surprise",
+                        mood: "놀랐어요",
+                        date: today,
+                        title: "타이틀영역입니다.2131232132131231232131221312321312312",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/surprise.png`,
+                    },
+                    {
+                        id: 3,
+                        moodEng: "etc",
+                        mood: "기타",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/etc.png`,
+                    },
+                    {
+                        id: 4,
+                        moodEng: "angry",
+                        mood: "화나요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/angry.png`,
+                    },
+                ];
+                const dailyArray = JSON.parse(
+                    localStorage.getItem("dailyArray")
+                );
+
+                const parentElement = document.getElementById("post");
+
+                if (!dailyArray) {
+                    localStorage.setItem(
+                        "dailyArray",
+                        JSON.stringify(initialDailyArray)
+                    );
+                    initialDailyArray.map((resultObject, index) => {
+                        const postContainer = document.createElement("a");
+                        postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
+                        postContainer.className = "post-container";
+                        postContainer.innerHTML = `
+        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+        <div class="post-title">
+            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+            <div class="post-date">${resultObject.date}</div>
+        </div>
+        <div class="post-content">${resultObject.title}</div>
+    `;
+
+                        parentElement.appendChild(postContainer);
+                    });
+                } else {
+                    dailyArray.map((resultObject, index) => {
+                        const postContainer = document.createElement("a");
+                        postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
+                        postContainer.className = "post-container";
+                        postContainer.innerHTML = `
+        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+        <div class="post-title">
+            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+            <div class="post-date">${resultObject.date}</div>
+        </div>
+        <div class="post-content">${resultObject.title}</div>
+    `;
+
+                        parentElement.appendChild(postContainer);
+                    });
+                }
+            });
+        </script>
     </head>
     <body>
         <main>
@@ -16,78 +110,21 @@
                 <div class="article-header">
                     <div>일기 보관함</div>
                     <div class="article-header-text">사진 보관함</div>
+                    <select
+                        name=""
+                        id="select-post"
+                        onchange="onChangeSelected(event)"
+                    >
+                        <option disabled selected>v 전체</option>
+                        <option value="happy">행복해요</option>
+                        <option value="sad">슬퍼요</option>
+                        <option value="surprise">놀랐어요</option>
+                        <option value="angry">화나요</option>
+                        <option value="etc">기타</option>
+                    </select>
                 </div>
                 <div class="article-main">
-                    <div id="post" class="post">
-                        <div class="post-container">
-                            <img
-                                src="./img/happy.png"
-                                alt="1"
-                                id="0"
-                                onclick="onClickDailyInfor(event)"
-                            />
-                            <div class="post-title">
-                                <div class="post-font-happy">행복해요</div>
-                                <div class="post-date">2024.03.12</div>
-                            </div>
-                            <div class="post-content">타이틀 영역입니다.</div>
-                        </div>
-                        <div class="post-container">
-                            <img
-                                src="./img/sad.png"
-                                alt="1"
-                                id="1"
-                                onclick="onClickDailyInfor(event)"
-                            />
-                            <div class="post-title">
-                                <div class="post-font-sad">슬퍼요</div>
-                                <div class="post-date">2024.03.12</div>
-                            </div>
-                            <div class="post-content">타이틀 영역입니다.</div>
-                        </div>
-                        <div class="post-container">
-                            <img
-                                src="./img/surprise.png"
-                                alt="1"
-                                id="2"
-                                onclick="onClickDailyInfor(event)"
-                            />
-                            <div class="post-title">
-                                <div class="post-font-surprise">놀랐어요</div>
-                                <div class="post-date">2024.03.12</div>
-                            </div>
-                            <div class="post-content">
-                                타이틀
-                                영역입니다.2131232132131231232131221312321312312
-                            </div>
-                        </div>
-                        <div class="post-container">
-                            <img
-                                src="./img/etc.png"
-                                alt="1"
-                                id="3"
-                                onclick="onClickDailyInfor(event)"
-                            />
-                            <div class="post-title">
-                                <div class="post-font-etc">기타</div>
-                                <div class="post-date">2024.03.12</div>
-                            </div>
-                            <div class="post-content">타이틀 영역입니다.</div>
-                        </div>
-                        <div class="post-container">
-                            <img
-                                src="./img/angry.png"
-                                alt="1"
-                                id="4"
-                                onclick="onClickDailyInfor(event)"
-                            />
-                            <div class="post-title">
-                                <div class="post-font-angry">화나요</div>
-                                <div class="post-date">2024.03.12</div>
-                            </div>
-                            <div class="post-content">타이틀 영역입니다.</div>
-                        </div>
-                    </div>
+                    <div id="post" class="post"></div>
                     <div class="daily">
                         <div class="daily-header">📍 일기 쓰기</div>
                         <div class="daily-checkcontainer">
@@ -186,7 +223,9 @@
             <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
         </footer>
     </body>
+
     <script src="./utils/pushDaily.js"></script>
     <script src="./utils/onClickDailyInfor.js"></script>
     <script src="./utils/onInputButtonChange.js"></script>
+    <script src="./utils/onChangeSelected.js"></script>
 </html>
