@@ -32,10 +32,11 @@
   align-items: center;
   gap: 10px;
   align-self: stretch;
+  padding-left: 23px;
 }
 .logo {
   display: flex;
-  width: 120px;
+  width: 130px;
   height: 40px;
   align-items: center;
   gap: 10px;
@@ -48,12 +49,11 @@
 }
 .header_img_layout {
   display: flex;
-  padding: 0px 20px;
+  padding: 0px 20px 24px 20px;
   align-items: center;
   gap: 10px;
   align-self: stretch;
   display: flex;
-  padding: 0px 20px;
   flex-direction: column;
 }
 .header_img {
@@ -63,12 +63,20 @@
   align-self: stretch;
   border-radius: 24px;
 }
+.navigation_layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
 .navigation {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
   align-self: stretch;
+  padding-left: 12px;
 }
 .navigation_menu {
   display: flex;
@@ -82,7 +90,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   display: flex;
   padding: 12px 8px;
@@ -95,7 +103,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   display: flex;
   padding: 12px 8px;
@@ -103,9 +111,109 @@
   align-items: center;
   gap: 10px;
 }
+.sub_navigation {
+  display: flex;
+  padding: 0px 20px;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  position: relative;
+  height: 35px;
+}
+.emotion_dropdown_layout {
+  display: flex;
+  min-width: 320px;
+  max-width: 1168px;
+  gap: 16px 8px;
+  align-self: stretch;
+  flex-wrap: wrap;
+
+}
+.dropdown_name {
+  display: flex;
+  min-width: 120px;
+  padding: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+  background: var(--Gray-W, #FFF);
+}
+ul li {
+	list-style: none;
+}
+.dropdown_name_none_hover {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  color: var(--Gray-Gray-900, #1C1C1C);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+.dropdown_name_hover {
+  display: none;
+}
+.dropdown_name > ul > li > a {
+  text-decoration: none;
+  color: black;
+}
+.dropdown_name > ul {
+  display: none;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+.dropdown_name > ul > li {
+  display: flex;
+  padding: 4px 12px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background: var(--Gray-Gray-100, #E4E4E4);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+.dropdown_name:hover > #mood_list {
+  display: block;
+  display: flex;
+  min-width: 120px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  left: 0px;
+  top: 32.5px;
+  border-radius: 8px;
+  border: none;
+  z-index: 100;
+}
+.etc {
+  border-radius: 0 0 8px 8px;
+}
+.dropdown_name > ul:hover {
+  border-radius: 8px;
+}
+.dropdown_name:hover {
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+  background: var(--Gray-Gray-100, #E4E4E4);
+  border-radius: 8px 8px 0 0;
+  border: none;
+}
+.dropdown_name > ul > li:hover{
+  background-color: #f2f2f2;
+}
 .main {
   display: flex;
-  max-width: 1168px;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
@@ -121,12 +229,15 @@
 .diary_entry_container {
   display: flex;
   max-width: 784px;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
   gap: 24px;
   align-self: stretch;
   flex-wrap: wrap;
+}
+.diary_detail {
+  text-decoration: none;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
 }
 .diary_entry {
   display: flex;
@@ -148,6 +259,11 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 16px;
+  transition: width 0.5s, height 0.5px;
+}
+.diary_cover:hover {
+  transform: scale(110%);
+  filter: blur(5px)
 }
 .diary_entry_summary {
   display: flex;
@@ -164,11 +280,10 @@
   align-self: stretch;
 }
 .emotion {
-  color: #28b4e1;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
 }
 .sad_emotion_font_color {
@@ -191,7 +306,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 171.429% */
+  line-height: 24px;
   letter-spacing: -0.14px;
 }
 .diary_title_area {
@@ -205,7 +320,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
   letter-spacing: -0.18px;
 }
 .aside {
@@ -226,7 +341,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 24px;
   letter-spacing: -0.24px;
   align-self: stretch;
 }
@@ -250,7 +365,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px; /* 120% */
+  line-height: 24px;
   letter-spacing: -0.2px;
   width: 321px;
   height: 24px;
@@ -287,7 +402,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 111.111% */
+  line-height: 20px;
   letter-spacing: -0.18px;
 }
 .diary_textArea {
@@ -315,7 +430,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
   align-self: stretch;
 }
@@ -337,7 +452,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
   letter-spacing: -0.16px;
 }
 .diary_contents_group {
@@ -356,7 +471,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: -0.14px;
   align-self: stretch;
 }
@@ -379,7 +494,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
   letter-spacing: -0.16px;
 }
 .register_button {
@@ -423,7 +538,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px; /* 80% */
+  line-height: 16px;
   letter-spacing: -0.2px;
 }
 .footer_representative {

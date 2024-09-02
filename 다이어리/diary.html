@@ -9,7 +9,7 @@
       <div class="header_layout">
         <div>
           <div class="header">
-            <div class="logo">민지의 다이어리</div>
+            <div class="logo">예슬이의 다이어리</div>
           </div>
           <div class="header_img_layout">
             <img
@@ -19,117 +19,34 @@
               class="header_img"
             />
           </div>
-          <div class="navigation">
-            <div class="navigation_menu">
-              <div class="diary_storage_menu">일기보관함</div>
-              <div class="photo_storage_menu">사진보관함</div>
+          <div class="navigation_layout">
+            <div class="navigation">
+              <div class="navigation_menu">
+                <div class="diary_storage_menu">일기보관함</div>
+                <div class="photo_storage_menu">사진보관함</div>
+              </div>
+            </div>
+            <div class="sub_navigation">
+              <div class="emotion_dropdown_layout">
+                <div class="dropdown_name">
+                  <div class="dropdown_name_none_hover">
+                    전체
+                    <img src="./image/dropdown_arrow.svg" width="24px" />
+                  </div>
+                  <div class="dropdown_name_hover">????</div>
+                  <ul id="mood_list">
+                    <li><a href="#">행복해요</a></li>
+                    <li><a href="#">슬퍼요</a></li>
+                    <li><a href="#">놀랐어요</a></li>
+                    <li><a href="#">화나요</a></li>
+                    <li class="etc"><a href="#">기타</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div class="main">
-            <div class="article" id="article">
-              <div class="diary_entry_container" id="diary_entry_container">
-                <div class="diary_entry">
-                  <img
-                    class="diary_cover"
-                    src="./image/sad.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">슬퍼요</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-                <div class="diary_entry">
-                  <img
-                    class="diary_cover"
-                    src="./image/surprise.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">놀랐어요</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="diary_entry_container">
-                <div class="diary_entry" id="diaryContents">
-                  <img
-                    class="diary_cover"
-                    src="./image/upset.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">화나요</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-                <div class="diary_entry">
-                  <img
-                    class="diary_cover"
-                    src="./image/happy.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">행복해요</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="diary_entry_container">
-                <div class="diary_entry">
-                  <img
-                    class="diary_cover"
-                    src="./image/etc.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">기타</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-                <div class="diary_entry">
-                  <img
-                    class="diary_cover"
-                    src="./image/happy.png"
-                    width="774px"
-                  />
-                  <div class="diary_entry_summary">
-                    <div class="emotion_date_info">
-                      <div class="emotion">행복해요</div>
-                      <div class="date">2024. 03. 12</div>
-                    </div>
-                    <div class="diary_title_area">
-                      타이틀 영역 입니다. 한줄까지만 노출 됩니다.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="article" id="article"></div>
             <div class="aside">
               <div class="diary_entry_title">📍 일기 쓰기</div>
               <div class="diary_entry_form">
@@ -142,8 +59,9 @@
                         id="check_happy"
                         class="mood_options"
                         name="mood"
-                      />
-                      <div for="check_happy" class="mood_text">행복해요</div>
+                      /><label for="check_happy" class="mood_text"
+                        >행복해요</label
+                      >
                     </div>
                     <div class="mood_checkbox">
                       <input
@@ -208,10 +126,10 @@
         </div>
         <div class="footer_layout">
           <div class="footer">
-            <div class="footer_title">민지의 다이어리</div>
-            <div class="footer_representative">대표 : {name}</div>
+            <div class="footer_title">예슬이의 다이어리</div>
+            <div class="footer_representative">대표 : 강예슬</div>
             <div class="footer_copyright">
-              Copyright © 2024. {name} Co., Ltd.
+              Copyright © 2024. 강예슬 Co., Ltd.
             </div>
           </div>
         </div>

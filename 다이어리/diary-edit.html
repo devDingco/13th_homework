@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>diary-detail</title>
+    <link rel="stylesheet" href="./diary-edit.css" />
+  </head>
+  <body>
+    <div class="layout-wrapper">
+      <div class="layout">
+        <div class="header">
+          <div class="header_frame">
+            <a href="./diary.html">
+              <div class="logo">예슬이의 다이어리</div>
+            </a>
+          </div>
+        </div>
+        <div class="main" id="main">
+          <div class="main_frame" id="main_frame">
+            <div class="mood_select_layout">
+              <div class="mood_select_title_frame">
+                <div class="mood_select_title">오늘 기분은 어땠나요?</div>
+                <div class="mood_checkbox_group">
+                  <div class="mood_checkbox">
+                    <input
+                      type="radio"
+                      id="check_happy"
+                      class="mood_options"
+                      name="mood"
+                    /><label for="check_happy" class="mood_text">행복해요</label>
+                  </div>
+                  <div class="mood_checkbox">
+                    <input
+                      type="radio"
+                      id="check_sad"
+                      class="mood_options"
+                      name="mood"
+                    /><label for="check_sad" class="mood_text">슬퍼요</label>
+                  </div>
+                  <div class="mood_checkbox">
+                    <input
+                      type="radio"
+                      id="check_surprise"
+                      class="mood_options"
+                      name="mood"
+                    /><label for="check_surprise" class="mood_text"
+                      >놀랐어요</label
+                    >
+                  </div>
+                  <div class="mood_checkbox">
+                    <input
+                      type="radio"
+                      id="check_upset"
+                      class="mood_options"
+                      name="mood"
+                    /><label for="check_upset" class="mood_text"
+                      >화나요</label
+                    >
+                  </div>
+                  <div class="mood_checkbox">
+                    <input
+                      type="radio"
+                      id="check_etc"
+                      class="mood_options"
+                      name="mood"
+                    /><label for="check_etc">기타</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="title_layout">
+              <div class="title">제목</div>
+              <div class="title_edit_layout">
+                <input type="text" id="title_edit_input" placeholder="제목을 입력해 주세요.">
+              </div>
+            </div>
+            <div class="content_layout">
+              <div class="content_title">내용</div>
+              <div class="content_edit_layout">
+                <textarea
+                  id="content_edit_input"
+                  type="text"
+                  placeholder="내용을 입력해 주세요."
+                ></textarea>
+              </div>
+            </div>
+            <div class="button_layout">
+              <a href="" id="cancel">
+                <button class="button" id="cancel_button">취소</button>
+              </a>
+              <a href="" id="edit">
+                <button class="button" id="edit_button">수정 하기</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./diary-edit.js"></script>
+</html>
