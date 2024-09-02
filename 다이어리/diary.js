@@ -205,5 +205,9 @@ const onClickMood = (e) => {
   getDiariesByMood(selectedMood);
 };
 
+const upScroll = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 moodList.addEventListener("click", onClickMood);
 registerButton.addEventListener("click", registerDiary);
