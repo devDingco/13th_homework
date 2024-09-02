@@ -3,7 +3,7 @@
 <head>
     <title>다이어리</title>
     <link rel="stylesheet" href="./diary.css" />
-    <!-- <script src="./diary.js"></script> -->
+    <script src="./assets/"></script>
 </head>
 <body>
     <div class="가장큰배경" id="CSS_가장큰배경">
@@ -20,13 +20,34 @@
         
     
         <div class="메뉴">
-            <div class="메뉴이름">
+            <!-- <div class="메뉴이름">
                 <img src="./assets/일기보관함.png" />
                 <img src="./assets/사진보관함.png" />
+            </div> -->
+
+            <div class="tabs">
+                <button class="tablink" onclick="openTab(event, 'tab1')">Tab 1</button>
+                <button class="tablink" onclick="openTab(event, 'tab2')">Tab 2</button>
+                <button class="tablink" onclick="openTab(event, 'tab3')">Tab 3</button>
+              
+                <div id="tab1" class="tabcontent">
+                  <h2>Tab 1 Content</h2>
+                  <p>This is the content of Tab 1.</p>
+                </div>
+              
+                <div id="tab2" class="tabcontent">
+                  <h2>Tab 2 Content</h2>
+                  <p>This is the content of Tab 2.</p>
+                </div>
+                
+                <div id="tab3" class="tabcontent">
+                  <h2>Tab 3 Content</h2>
+                  <p>This is the content of Tab 3.</p>
+                </div>
             </div>
         </div>
 
-        <div class="메인화면">
+        <!-- <div class="메인화면">
             <div class="보여주기">
                 <div class="목록들">
                     <div class="게시글">
@@ -71,7 +92,7 @@
                     <button class="버튼클릭">등록하기</button>
                 </div>
             </div>
-        </div>
+        </div> -->
         
 
 

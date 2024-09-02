@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>로컬스토리지와 세션스토리지 실습</title>
+    <script>
+        // 1. 변수에 저장하기: 새로고침하거나 껐다키면 지워짐
+        // let 사과바구니 = 0
+        // const JS_사과1개담기기능 = () => {
+        //     사과바구니 = 1
+        // }
+
+        // const JS_사과2개담기기능 = () => {
+        //     사과바구니 = 2
+        // }
+
+        // const JS_사과3개담기기능 = () => {
+        //     사과바구니 = 3
+        // }
+
+        // const JS_사과불러오기기능 = () => {
+        //     alert(`사과바구니에 사과가 ${사과바구니}개 있습니다`)
+        // }
+
+        // 2. 세션스토리지에 저장하기 => 새로고침해도 남아있지만 껐다키면 사라짐 
+        // const JS_사과1개담기기능 = () => {
+        //     sessionStorage.setItem("사과바구니", 1)
+        // }
+
+        // const JS_사과2개담기기능 = () => {
+        //     sessionStorage.setItem("사과바구니", 2)
+
+        // }
+
+        // const JS_사과3개담기기능 = () => {
+        //     sessionStorage.setItem("사과바구니", 3)
+
+        // }
+
+        // const JS_사과불러오기기능 = () => {
+        //     const 사과바구니 = sessionStorage.getItem("사과바구니")
+        //     alert(`사과바구니에 사과가 ${사과바구니}개 있습니다`)
+        // }
+
+        // 3. 로컬스토리지에 저장하기 => 새로고침하거나 껐다켜도 데이터는 남아있음
+        const JS_사과1개담기기능 = () => {
+            localStorage.setItem("사과바구니", 1)
+        }
+
+        const JS_사과2개담기기능 = () => {
+            localStorage.setItem("사과바구니", 2)
+
+        }
+
+        const JS_사과3개담기기능 = () => {
+            localStorage.setItem("사과바구니", 3)
+
+        }
+
+        const JS_사과불러오기기능 = () => {
+            const 사과바구니 = localStorage.getItem("사과바구니")
+            alert(`사과바구니에 사과가 ${사과바구니}개 있습니다`)
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_사과1개담기기능()">사과 1개담기</button><br />
+    <button onclick="JS_사과2개담기기능()">사과 2개담기</button><br />
+    <button onclick="JS_사과3개담기기능()">사과 3개담기</button><br />
+    <button onclick="JS_사과불러오기기능()">사과 불러오기</button>
+
+</body>
+</html>
