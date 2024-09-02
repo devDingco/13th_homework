@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일기 상세 보기</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./detailPage.css">
+</head>
+<body>
+  <div class="CSS_헤더">
+    <div>민지의 다이어리</div>
+  </div>
+
+  <div id="HTML_상세보기">
+    <div>
+      <h1 id="HTML_제목" class="CSS_일기제목"></h1>
+      <div class="line"></div>    
+
+      <div class="이미지기분이랑날짜">
+        <div class="이미지와기분상태">
+          <img id="HTML_이미지" class="감정이미지" alt="일기 이미지"/>
+          <p id="HTML_기분" class="기분"></p> <!-- 기분 표시 -->
+        </div>   
+        <div class="날짜">
+          <p id="HTML_날짜"></p>
+          <div>작성</div>        
+        </div>              
+      </div>
+
+
+    </div>
+
+    <div class="내용박스부분섹션">
+      <div class="내용이라고하는부분">내용</div>
+      <p id="HTML_내용" class="내용이담기는부분"></p>      
+    </div>
+
+    <div class="수정하기버튼담긴섹션">
+      <a href="#" class="수정하기버튼">수정</a>      
+    </div>
+
+
+  </div>
+  <script>
+    // 로컬 스토리지에서 현재 일기 정보 가져오기
+    const 일기 = localStorage.getItem('currentDiary');
+    
+    if (일기) {
+      // JSON 문자열을 JavaScript 객체로 변환
+      const 일기JSON = JSON.parse(일기);
+
+      // HTML 요소에 데이터 삽입
+      document.getElementById('HTML_제목').textContent = 일기JSON.제목 || '제목 없음';
+      document.getElementById('HTML_날짜').textContent = 일기JSON.날짜 || '날짜 없음';
+      document.getElementById('HTML_내용').textContent = 일기JSON.내용 || '내용 없음';
+      document.getElementById('HTML_이미지').src = 일기JSON.기분이미지 || '이미지 없음'; 
+      document.getElementById('HTML_기분').textContent = 일기JSON.기분 || '기분 정보 없음';
+    } else {
+      // 일기 데이터가 없을 경우
+      document.getElementById('HTML_제목').textContent = '일기 정보가 없습니다.';
+    }
+  </script>
+</body>
+</html>
+
