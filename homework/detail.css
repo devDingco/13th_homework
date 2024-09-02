@@ -1,0 +1,248 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 2px solid aqua;
+  display: flex;
+  flex-direction: column;
+  width: 1920px;
+  /* margin: 0 auto; */
+  align-items: center;
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+  margin-bottom: 40px;
+}
+
+#header-name {
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+#body {
+  display: flex;
+  max-width: 1168px;
+  padding-bottom: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+#section-header {
+  border: 2px solid pink;
+  display: flex;
+  width: 1168px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+#title {
+  border: 2px solid blue;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+#mood-and-date {
+  width: 100%;
+  border: 2px solid aqua;
+  display: flex;
+  justify-content: space-between;
+}
+
+#mood {
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+}
+
+#mood-img {
+  width: 32px;
+  height: 32px;
+}
+
+#date {
+  border: 2px solid black;
+  color: var(--Gray-Gray-500, #919191);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+#section-body {
+  width: 100%;
+  border: 2px solid pink;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+#section-footer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  border: 2px solid pink;
+  gap: 12px;
+}
+
+.section-title {
+  width: 100%;
+  border: 2px solid gray;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.section-content {
+  width: 100%;
+  border: 2px solid crimson;
+}
+
+#modify-btn,
+#delete-btn {
+  width: 75px;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+}
+
+#cancel-modify-btn,
+#complete-modify-btn {
+  width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+}
+
+#complete-modify-btn:hover {
+  transition: transform 0.3s;
+  transform: rotate(5deg);
+}
+
+#delete-btn,
+#cancel-modify-btn {
+  background-color: #000;
+  color: white
+}
+
+.mood-행복해요 {
+  color: #EA5757;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.mood-슬퍼요 {
+  color: #28B4E1;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.mood-놀랐어요 {
+  color: #D59029;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.mood-화나요 {
+  color: var(--Gray-Gray-600, #777);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.mood-기타 {
+  color: #A229ED;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* 수정 클릭 시, 기분 선택하는 라디오인풋 */
+#generator-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+#mood-question-title {
+  border: 2px solid pink;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+#mood-radio-area {
+  border: 2px solid pink;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.mood-radio-instance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mood-radio-instance > input {
+  accent-color: #000;
+  width: 20px;
+  height: 20px;
+  align-content: center;
+}
+
+.mood-radio-instance > label {
+  color: var(--Gray-Gray-800, #333);
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* 수정 클릭 시, 제목과 내용을 수정하는 textarea  */
+#section-title-textarea, 
+#section-content-textarea {
+  width: 100%;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+}
+
+#section-content-textarea {
+  height: 10vh;
+}
