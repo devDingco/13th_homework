@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/diaryDetail.css" />
+    <script src="./modules/diaryDetail.js" defer></script>
+  </head>
+  <body>
+    <header class="container-layout"><h1>준수의 다이어리</h1></header>
+    <main class="container-layout">
+      <div id="view" class="view">
+        <h3 id="titleView"></h3>
+        <div class="infoContainer">
+          <div id="feelingViewContainer">
+            <div id="feeling_circle"></div>
+            <p id="feeling_text"></p>
+          </div>
+          <p id="createdAtDate"></p>
+        </div>
+        <div id="contentViewContainer">
+          <h4>내용</h4>
+          <p id="contentText"></p>
+        </div>
+        <button id="detailEdit">수정</button>
+      </div>
+      <div id="edit" class="none">
+        <h3>오늘 기분은 어땠나요?</h3>
+        <form>
+          <div class="feeling-radio-wrap">
+            <p>
+              <input id="happy" type="radio" name="feeling" checked />
+              <label for="happy">행복해요</label>
+            </p>
+            <p>
+              <input id="sad" type="radio" name="feeling" />
+              <label for="sad">슬퍼요</label>
+            </p>
+            <p>
+              <input id="surprised" type="radio" name="feeling" />
+              <label for="surprised">놀랐어요</label>
+            </p>
+            <p>
+              <input id="angry" type="radio" name="feeling" />
+              <label for="angry">화나요</label>
+            </p>
+            <p>
+              <input id="etc" type="radio" name="feeling" />
+              <label for="etc">기타</label>
+            </p>
+          </div>
+          <div class="content-wrap">
+            <p>
+              <label for="title" class="label-sm">제목</label>
+              <input
+                id="editTitleInput"
+                type="text"
+                placeholder="제목을 입력해 주세요." />
+            </p>
+            <p>
+              <label for="content" class="label-sm">내용</label>
+              <textarea
+                id="editContentInput"
+                placeholder="내용을 입력해 주세요."></textarea>
+            </p>
+          </div>
+          <div class="buttons-container">
+            <button type="button" id="cancelBtn">취소</button>
+            <button type="button" id="submitBtn" class="none" disabled>
+              수정완료
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

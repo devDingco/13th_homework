@@ -1,0 +1,252 @@
+.container-layout {
+  max-width: 1168px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  gap: 10px;
+  color: #000;
+}
+
+header h1 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+main {
+  padding-top: 64px;
+}
+
+main #view.view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+main #view.none {
+  display: none;
+}
+
+main #view.view #titleView {
+  width: 100%;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #000;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.infoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main #view.view #feelingViewContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main #view.view #feelingViewContainer #feeling_circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  border: 5px solid #fff;
+}
+
+main #view.view #feelingViewContainer #feeling_text {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+main #view.view #feelingViewContainer #feeling_circle.angry {
+  background-color: #777777;
+}
+main #view.view #feelingViewContainer #feeling_circle.sad {
+  background-color: #28b4e1;
+}
+main #view.view #feelingViewContainer #feeling_circle.happy {
+  background-color: #ea5757;
+}
+main #view.view #feelingViewContainer #feeling_circle.etc {
+  background-color: #a229ed;
+}
+main #view.view #feelingViewContainer #feeling_circle.surprised {
+  background-color: #d59029;
+}
+
+main #view.view #feelingViewContainer #feeling_text.angry {
+  color: #777777;
+}
+main #view.view #feelingViewContainer #feeling_text.sad {
+  color: #28b4e1;
+}
+main #view.view #feelingViewContainer #feeling_text.happy {
+  color: #ea5757;
+}
+main #view.view #feelingViewContainer #feeling_text.etc {
+  color: #a229ed;
+}
+main #view.view #feelingViewContainer #feeling_text.surprised {
+  color: #d59029;
+}
+
+main #view.view #contentViewContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+}
+main #view.view #contentViewContainer h4 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+main #view.view #contentViewContainer p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+#view button {
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  align-self: flex-end;
+}
+#edit.edit {
+  display: block;
+}
+
+#edit.none {
+  display: none;
+}
+
+#edit h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  padding-bottom: 16px;
+}
+#edit > form {
+  display: flex;
+  max-width: 1168px;
+  width: 100%;
+  padding-bottom: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 24px;
+  align-self: stretch;
+}
+
+#edit > form .feeling-radio-wrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  gap: 20px;
+}
+#edit > form .feeling-radio-wrap > p {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+}
+#edit > form .feeling-radio-wrap > p > label {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+#edit > form input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: url(../public/icons/radio_outline_light_m.svg) no-repeat center;
+}
+
+#edit > form .label-sm {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+#edit > form input[type='radio']:checked {
+  background: url(../public/icons/radio_fill_light_m.svg) no-repeat center;
+}
+
+#edit > form .content-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+#edit > form input[type='text'],
+textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+#edit > form .content-wrap > label {
+  display: block;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+#edit > form textarea {
+  height: 128px;
+  resize: none;
+}
+
+#edit > form > .buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+#edit > form > .buttons-container > button {
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+#edit > form .buttons-container > #cancelBtn {
+  border: 1px solid #000;
+}
+#edit > form .buttons-container > #cancelBtn:hover {
+  transform: rotateZ(7deg);
+  transition: 0.5s;
+}
+
+#edit > form .buttons-container > #submitBtn.none {
+  background: #c7c7c7;
+  color: #f2f2f2;
+}
+#edit > form .buttons-container > #submitBtn.active {
+  background-color: #000;
+  color: #fff;
+}
+#edit > form .buttons-container > #submitBtn.active:hover {
+  transform: rotateZ(7deg);
+  transition: 0.5s;
+}

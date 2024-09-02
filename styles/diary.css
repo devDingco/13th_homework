@@ -28,14 +28,14 @@ article.banner {
   background-color: skyblue;
 }
 
-nav ul {
+nav ul.nav_list {
   display: flex;
   min-width: 204px;
   align-items: center;
   gap: 16px;
 }
 
-nav ul li button {
+nav > ul.nav_list > button {
   display: flex;
   padding: 12px 8px;
   justify-content: center;
@@ -46,7 +46,7 @@ nav ul li button {
   font-weight: 500;
   color: #ababab;
 }
-nav ul li.active button {
+nav ul.nav_list li.active > button {
   border-bottom: 2px solid #000;
   font-weight: 700;
   color: #000;
@@ -64,7 +64,7 @@ main {
 main .main-content {
   width: 100%;
 }
-main .main-content ul .add-list-alert {
+main .main-content ul #add-list-alert {
   width: 200%;
   height: 100%;
   display: flex;
@@ -73,12 +73,25 @@ main .main-content ul .add-list-alert {
   color: #919191;
   font-weight: 500;
 }
+
+main .main-content ul #add-list-alert.active {
+  display: flex;
+}
+
+main .main-content ul #add-list-alert.none {
+  display: none;
+}
+
 main .main-content ul {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   row-gap: 24px;
+}
+main .main-content ul > li:hover {
+  transform: scale(105%);
+  transition: all 0.5s;
 }
 
 main .main-content ul > li > button {
@@ -93,6 +106,9 @@ main .main-content ul > li .img-wrap {
 }
 main .main-content ul > li .img-wrap > img {
   width: 100%;
+}
+main .main-content ul > li .img-wrap > img:hover {
+  filter: blur(1px);
 }
 
 main .main-content ul > li .info-container {
@@ -294,4 +310,58 @@ footer span {
   font-style: normal;
   font-weight: 300;
   line-height: 16px;
+}
+
+.selectWrap {
+  position: relative;
+  width: fit-content;
+}
+
+#selectBtn {
+  min-width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #c7c7c7;
+  background: #fff;
+}
+#optionList {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  border: 1px solid #c7c7c7;
+}
+
+#optionList.hidden {
+  display: none;
+}
+
+#optionList > .option {
+  padding: 4px 12px;
+}
+
+#optionList > .option > button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+#optionList > .option > button > img {
+  display: none;
+}
+#optionList > .option > .selected > img {
+  display: block;
+}
+
+#optionList > .option > button {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
 }
