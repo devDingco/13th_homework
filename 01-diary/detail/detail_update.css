@@ -7,6 +7,10 @@
     padding: 0px 20px 0px 20px;
 }
 
+.home_link {
+    text-decoration: none;
+}
+
 .header_title {
     width: 1168px;
     height: 40px;
@@ -108,6 +112,9 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+
+    border-bottom: 1px solid black;
+    padding-bottom: 16px;
 }
 
 .button {
@@ -132,4 +139,92 @@
 
 #update_button:active {
     transform: rotate(30deg);
+}
+
+.reminiscence_container {
+    width: 1168px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reminiscence_container_items {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.reminiscence_title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 18px;
+    color: black;
+}
+
+.reminiscence_input_container {
+    height: 48px;
+    display: flex;
+    gap: 10px;
+}
+
+.reminiscence_text {
+    width: 1101px;
+    background-color: #F2F2F2;
+    color: #ABABAB;
+
+    font-weight: 500;
+    font-size: 16px;
+
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    padding: 12px 16px 12px 16px;
+}
+
+.reminiscence_text::placeholder {
+    color: #ABABAB;
+}
+
+.reminiscence_input_button {
+    width: 51px;
+    height: 100%;
+    background-color: #C7C7C7;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+}
+
+.reminiscence_list_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reminiscence_list_container_items {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+}
+
+.reminiscence_list_item_text {
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+
+.reminiscence_list_item_date {
+    font-weight: 400;
+    font-size: 16px;
+    color: #777777;
+}
+
+.break_line {
+    width: 100%;
+    height: 1px;
+    border: 1px solid #E4E4E4;
 }

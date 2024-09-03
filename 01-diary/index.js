@@ -1,9 +1,11 @@
 let diaryList = []
-let filteredList = []
+let filteredDiaryList = []
 
 let inputTitle
 let inputText
 let selectedMood
+
+let isFiltered = false
 
 window.onload = () => {
     fetchDiaryFromLocalStorage()
@@ -71,13 +73,15 @@ const createDiary = () => {
         date: getToday(),
         mood: selectedMood,
         title: inputTitle,
-        text: inputText
+        text: inputText,
+        reminiscenceList: []
     })
     const createdDiary = diaryList[diaryList.length -1]
     convertToJSON(createdDiary)
     console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
-    reloadDiary(diaryList)
+    filterDiary()
+    alert(`일기가 추가되었습니다.`)
 }
 
 const convertToJSON = (data) => {
@@ -144,8 +148,9 @@ const getMoodSettings = (mood) => {
 
 const reloadDiary = (reload_diaryList) => {
     const diaryDOMList = reload_diaryList.map(el => 
-        `<div class="diary" id="diary_DOM">
-            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt} onclick="diaryCardTapped(${el.id})">
+        `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
+            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
+            <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
                 <div class="diary_title">
                     <div class="diary_sub_title">
                         <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
@@ -163,11 +168,12 @@ const filterDiary = () => {
     const selectedMood = document.getElementById("mood_select").value
 
     if (selectedMood === "전체") {
+        isFiltered = false
         reloadDiary(diaryList)
     } else {
-        filteredList = diaryList.filter(el => (el.mood === selectedMood))
-        reloadDiary(filteredList)
-        console.log(filteredList)
+        filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
+        isFiltered = true
+        reloadDiary(filteredDiaryList)
     }
 }
 
@@ -177,3 +183,29 @@ const diaryCardTapped = (id) => {
     location.href = `./detail/detail.html?diaryID=${id}`
 }
 
+const removeDiary = (id) => {
+    localStorage.removeItem(id)
+    diaryList = []
+    fetchDiaryFromLocalStorage()
+}
+
+const deleteButtonTapped = (event, id) => {
+    event.stopPropagation()
+    removeDiary(id)
+    reloadDiary(diaryList)
+    alert(`일기가 삭제되었습니다.`)
+}
+
+const topScrollFloatingButtonTapped = () => {
+    window.scrollTo({top:0})
+}
+
+window.addEventListener("scroll", () => {
+    const y = window.scrollY
+
+    if (y > 0) {
+        document.getElementById("mood_select").style = "background-color: black; color: white;"
+    } else {
+        document.getElementById("mood_select").style = "background-color: white; color: black;"
+    }
+})

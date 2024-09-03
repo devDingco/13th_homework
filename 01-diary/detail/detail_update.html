@@ -8,26 +8,26 @@
 <body>
     <div class="root_container">
         <header class="header_container">
-            <div class="header_title">민지의 다이어리</div>
+            <a class="home_link" href="../index.html"><div class="header_title">민지의 다이어리</div></a>
         </header>
         <section class="section_container">
             <div class="update_contents_container">
                 <div id="update_diary_title" class="update_main_contents_title">이것은 타이틀입니다.</div>
                 <div class="update_select_mood_container">
                     <div class="select_mood">
-                        <input type="radio" class="select_mood_radio" id="select_mood_happy" name="select_mood_radio_list"><label for="select_mood_happy" id="select_mood_title" class="select_mood_label">행복해요</label>
+                        <input type="radio" class="select_mood_radio" id="select_mood_happy" name="select_mood_radio_list" value="행복해요" oninput="inputMoodCheck()"><label for="select_mood_happy" id="select_mood_title" class="select_mood_label">행복해요</label>
                     </div>
                     <div class="select_mood">
-                        <input type="radio" class="select_mood_radio" id="select_mood_sad" name="select_mood_radio_list"><label for="select_mood_sad" id="select_mood_title" class="select_mood_label">슬퍼요</label>
+                        <input type="radio" class="select_mood_radio" id="select_mood_sad" name="select_mood_radio_list" value="슬퍼요" oninput="inputMoodCheck()"><label for="select_mood_sad" id="select_mood_title" class="select_mood_label">슬퍼요</label>
                     </div>
                     <div class="select_mood">
-                        <input type="radio" class="select_mood_radio" id="select_mood_surprised" name="select_mood_radio_list"><label for="select_mood_surprised" id="select_mood_title" class="select_mood_label">놀랐어요</label>
+                        <input type="radio" class="select_mood_radio" id="select_mood_surprised" name="select_mood_radio_list" value="놀랐어요" oninput="inputMoodCheck()"><label for="select_mood_surprised" id="select_mood_title" class="select_mood_label">놀랐어요</label>
                     </div>
                     <div class="select_mood">
-                        <input type="radio" class="select_mood_radio" id="select_mood_angry" name="select_mood_radio_list"><label for="select_mood_angry" id="select_mood_title" class="select_mood_label">화나요</label>
+                        <input type="radio" class="select_mood_radio" id="select_mood_angry" name="select_mood_radio_list" value="화나요" oninput="inputMoodCheck()"><label for="select_mood_angry" id="select_mood_title" class="select_mood_label">화나요</label>
                     </div>
                     <div class="select_mood">
-                        <input type="radio" class="select_mood_radio" id="select_mood_other" name="select_mood_radio_list"><label for="select_mood_other" id="select_mood_title" class="select_mood_label">기타</label>
+                        <input type="radio" class="select_mood_radio" id="select_mood_other" name="select_mood_radio_list" value="기타" oninput="inputMoodCheck()"><label for="select_mood_other" id="select_mood_title" class="select_mood_label">기타</label>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,19 @@
                 <button id="cancel_buttion" class="button" onclick="cancelButtonPressed()">취소</button>
                 <button id="update_button" class="button" onclick="updateButtonPressed()">수정하기</button>
             </div>
+            <div class="reminiscence_container">
+                <div class="reminiscence_container_items">
+                    <div class="reminiscence_title">회고</div>
+                    <div class="reminiscence_input_container">
+                        <input disabled id="reminiscence_input_text" type="text" class="reminiscence_text" placeholder="수정중일땐 회고를 작성할 수 없어요." oninput="" >
+                        <button disabled class="reminiscence_input_button" onclick="inputButtonTapped()">입력</button>
+                    </div>
+                </div>
+                <div id="reminiscence_list" class="reminiscence_list_container">
+                </div>
         </section>
+       
+        </div>
     </div>
 </body>
 </html>
