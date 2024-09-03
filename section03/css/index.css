@@ -45,13 +45,13 @@
 
 .filter-emotion {
   width: 120px;
-  height: 32px;
+  height: 40px;
   border-radius: var(--radius-sm);
   border-color: var(--gray-300);
   color: var(--gray-900);
   font-size: 16px;
   font-weight: var(--weight-medium);
-  padding: 4px;
+  padding: var(--gap-xxs) var(--gap-xs);
   appearance: none;
   background-image: url('../assets/images/icon_arrow_down.svg');
   background-repeat: no-repeat;
