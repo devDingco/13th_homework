@@ -56,7 +56,7 @@
 }
 
 .contentBox02{
-    width: 1168px;
+    /* width: 1168px; */
     /* height: 1257px; */
     display: flex;
     flex-direction: column;
@@ -139,7 +139,6 @@
     height: 1167px;
     display: flex;
     flex-wrap: wrap;
-    align-content:flex-start;
     gap: 24px;
     /* overflow: hidden; */
 }
