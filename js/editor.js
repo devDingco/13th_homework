@@ -1,4 +1,4 @@
-// 에디터 생성 함수
+// ! 글쓰기용 에디터 생성 함수
 const editor = SUNEDITOR.create(
   document.getElementById('editArea'), {
   mode: 'classic',
@@ -13,7 +13,8 @@ const editor = SUNEDITOR.create(
 });
 editor.placeholder = "내용을 입력해주세요";
 editor.onInput = () => {
-  textCheck();
+  const locationCheck = location.href.includes("edit.html");
+  !locationCheck ? textCheck() : "";
 }
 
-console.log("d");
+
