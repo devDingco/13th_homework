@@ -60,7 +60,6 @@ a {
   width: 1168px;
   min-width: 320px;
   max-width: 1168px;
-  gap: 16px 8px;
   flex-wrap: wrap;
 }
 .감정필터 {
@@ -72,7 +71,12 @@ a {
   padding: 4px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
 }
 .일기보관함상자 {
   display: flex;
@@ -89,6 +93,7 @@ a {
   width: 100%;
   max-width: 784px;
   position: relative;
+  overflow: scroll;
 }
 .등록한일기 {
   display: flex;
@@ -111,11 +116,22 @@ a {
   transform: scale(1.1);
   z-index: 2;
   box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
 }
 .등록한일기.빈셀:hover {
   transform: none;
   box-shadow: none;
+}
+.삭제버튼 {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+#위로올리기 img {
+  position: relative;
+  z-index: 2;
+  top: 523px;
+  left: 318px;
 }
 .감정표현사진 {
   background: url("./images/슬퍼요 (m).png") lightgray 50% / cover no-repeat;
@@ -181,6 +197,10 @@ a {
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.18px;
 }
+.일기쓰기상자 {
+  display: flex;
+  flex-direction: column;
+}
 .일기쓰기 {
   display: flex;
   width: 360px;
@@ -192,7 +212,6 @@ a {
   gap: 40px;
   border-radius: 16px;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
 }
 .일기쓰기타이틀 {
   color: #000;
@@ -346,7 +365,6 @@ a {
   border: none;
   cursor: pointer;
 }
-
 /* 기분별 글자색 */
 .일기기분.행복해요 {
   color: #ea5757;
