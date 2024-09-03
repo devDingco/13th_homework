@@ -1,8 +1,19 @@
 const getDiaryList = () => {
-    const jsondiary = localStorage.getItem("diarylist")
-    return JSON.parse(jsondiary) || []
+    const jsondiary = localStorage.getItem("diarylist");
+    return JSON.parse(jsondiary) || [];
 }
 
+const removeDiaryEntry = (index) => {
+    const diarylist = getDiaryList();
+
+    if (index >= 0 && index < diarylist.length) {
+        diarylist.splice(index, 1);
+        localStorage.setItem("diarylist", JSON.stringify(diarylist));
+
+        // 다이어리 항목 다시 렌더링
+        renderDiaryEntries();
+    }
+};
 
 const submit = () => {
     if (inputverify()) {
@@ -16,7 +27,7 @@ const submit = () => {
         //배열처럼 저장되는 것을 알 수 있다
         //체크된 감정이 radioButons[0]에 저장이 되면 반환하고 아니면 null처리
         const radioButtons = document.querySelectorAll('input[name="emotion"]:checked')
-        // console.log(radioButtons)
+        console.log(radioButtons)
         const chekcedRadio = radioButtons.length > 0 ? radioButtons[0].id : null;
 
         // 객체
@@ -53,7 +64,7 @@ const submit = () => {
 
 
 
-//------------------인풋검증기능----------------------
+// 인풋검증기능 함수
 const inputverify = () => {
 
     const radioButtons = document.querySelectorAll('input[type="radio"]')
@@ -76,14 +87,15 @@ const inputverify = () => {
 };
 
 
-//------------------다이어리 항목 렌더링----------------------
+// 다이어리 항목 랜더링 함수
 const renderDiaryEntries = () => {
     const diarylistbox = document.querySelector(".diarylistbox");
     const jsondiary = localStorage.getItem("diarylist");
     const diarylist = JSON.parse(jsondiary) || [];
     const diaryHTML = diarylist.map((entry,index) => `
         <div class="diarybox">
-            <a href="./diary-detail.html?number=${index}">
+            <div class="xbutton" onClick="removeDiaryEntry(${index})"></div>
+            <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
             <div class="thumbnail_${entry.emotion}"></div>
             <div class="textbox">
                 <div class="date_title_container">
@@ -100,20 +112,6 @@ const renderDiaryEntries = () => {
 
     diarylistbox.innerHTML = diaryHTML;
 
-
-
-    // 다이어리 내용 알람뜨던거
-    // diarylistbox.querySelectorAll('.diarybox').forEach((diarybox, index) => {
-    //     diarybox.addEventListener("click", () => {
-    //         const entry = diarylist[index];
-    //         alert(
-    //             `제목: ${entry.title}
-    //             내용: ${entry.content}
-    //             감정: ${getEmotionText(entry.emotion)}
-    //             날짜: ${entry.date}`
-    //         );
-    //     });
-    // });
 };
 
 
@@ -135,6 +133,22 @@ const getEmotionText = (emotion) => {
     }
 
 };
+window.addEventListener("scroll", () => {
+    const scrollpoint = window.scrollY;
+    if(scrollpoint > 0) {
+        document.getElementById("selectbox").style= "background-color: #000; color: #fff"
+    } else {
+        document.getElementById("selectbox").style= "background-color: none; color: none"
+    }
+});
+
+const floating = () => {
+    window.scrollTo({top:0, behavior:"smooth"});
+};
+
+
+
+
 
 // 페이지 로드 시 다이어리 항목 렌더링
 document.addEventListener("DOMContentLoaded", renderDiaryEntries);

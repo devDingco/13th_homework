@@ -28,7 +28,7 @@
 .bannerimgcontainer{
     justify-content: center;
     align-items: center; /* 수직 중앙 정렬 */
-    width: 100wh; /* 전체 화면 높이 */
+    width: 100vw; /* 전체 화면 높이 */
     height: 240px;
     display: flex;
     padding: 0px 20px;
@@ -68,6 +68,10 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 42px;
+    position: sticky;
+    top: 0; /* 스크롤 시 상단에 고정되도록 설정 */
+    background-color: white; /* 배경 색상을 설정하여 내용이 가려지지 않도록 함 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
 }
 .selectbox {
     width:1168px;
@@ -280,18 +284,19 @@ input[type="radio" i] {
     width: 380px;
     height: 373px;
     padding-bottom: 16px;
+    position: relative; /* 부모 요소의 위치 기준 */
+    overflow: visible; /* 부모 요소가 자식을 숨기지 않도록 설정 */
 
 }
 .diarybox:hover {
-    /* width:calc(380px * 1.1); */
     transform:scale(1.1);
     border-radius: 16px;
     background: #FFF;
     box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
     transition-duration: 0.5s;
 }
-.diarybox > [class^="thumbnail_"]:hover {
-    filter: blur(5px); /* 블러 효과 */
+.diarybox [class^="thumbnail_"]:hover {
+    filter: blur(5px);
     transition-duration: 0.5s;
   }
 .thumbnail_sad{
@@ -401,7 +406,6 @@ input[type="radio" i] {
 .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
     flex: 1 0 0;
     overflow: hidden;
     color: #000;
@@ -420,7 +424,7 @@ input[type="radio" i] {
     display: flex;
     padding: 24px 20px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     background: var(--Gray-Gray-50, #F2F2F2);
 }
@@ -432,6 +436,7 @@ input[type="radio" i] {
     flex-wrap: wrap;
 }
 .footerwhosediary {
+    width: 1168px;
     color: #000;
     font-family: "Pretendard Variable";
     font-size: 20px;
@@ -460,4 +465,39 @@ input[type="radio" i] {
     font-weight: 300;
     line-height: 16px; /* 114.286% */
     letter-spacing: -0.14px;
+}
+
+
+.xbutton {
+    background-image: url('./img/close.png');
+    background-size: 24px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    position: absolute; /* 부모 요소(diariybox) 기준으로 위치 지정 */
+    top: 12px;
+    right: 12px;
+    cursor: pointer; /* 마우스를 올리면 손가락 모양으로 변경 */
+    z-index: 10; /* 다른 요소 위에 표시되도록 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible; /* 항상 보이도록 설정 */
+    transition: opacity 0.5s; /* 호버 시 애니메이션 효과 추가 */
+}
+.diarybox:hover .xbutton {
+    z-index: 15; /* 호버 상태에서 버튼이 항상 위에 있게 설정 */
+}
+.diarybox [class^="thumbnail_"]:hover {
+    filter: blur(5px); /* 블러 효과 */
+    transition-duration: 0.5s;
+}
+
+.floating {
+    background-image: url('./img/up_outline_light_xl.png');
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 152px;
+    right: 600px;
 }
