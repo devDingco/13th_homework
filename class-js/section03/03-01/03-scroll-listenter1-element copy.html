@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>윈도우 스크롤리스너 실습</title>
+
+  <style>
+    .CSS_네모박스 {
+      width: 1000px;
+      height: 500px;
+      overflow: scroll;
+    }
+  </style>
+
+  <script>
+    // 스크립트태그를 바디 밑쪽으로 내리거나, window.onload 안에 넣어주면 오류 안남
+    window.onload = () => {
+      document.getElementById("HTML_네모박스").addEventListener("scroll", () => {
+        const 스크롤내려간길이 = document.getElementById("HTML_네모박스").scrollTop
+        console.log(`스크롤이 ${스크롤내려간길이}만큼 내려갔어요!`)
+
+        // 스크롤이 조금이라도 내려갔으면
+        if (스크롤내려간길이 > 0) {
+          document.getElementById("HTML_이미지상자").style = "border: 20px solid red"
+        }
+        else {
+          document.getElementById("HTML_이미지상자").style = "boder: none"
+        }
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="HTML_네모박스" class="CSS_네모박스">
+    <img id="HTML_이미지상자" src="./00-dog.jpg" width="1000px" />
+  </div>
+</body>
+
+</html>

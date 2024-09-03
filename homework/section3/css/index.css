@@ -92,12 +92,16 @@ body {
   display: flex;
   width: 100%;
   gap: 24px;
+  margin-bottom: 24px
 }
 
 .일기_두개씩_보여주는_공간 {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  min-width: 800px;
+  max-height: 800px;
+  overflow-Y: scroll;
 }
 
 .일기_항목 {
@@ -115,7 +119,7 @@ body {
 }
 
 .일기_사진:hover {
-  filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 
 .감정_사진 {
@@ -124,6 +128,12 @@ body {
   border-radius: 16px;
 }
 
+.삭제_버튼 {
+  position: relative;
+  top: -285px;
+  left: 340px;
+
+}
 
 .일기_내용 {
   width: 100%;
@@ -410,4 +420,10 @@ body {
   line-height: 16px;
   /* 114.286% */
   letter-spacing: -0.14px;
+}
+
+.탑스크롤_버튼 {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
 }

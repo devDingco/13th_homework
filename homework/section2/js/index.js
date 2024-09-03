@@ -4,6 +4,7 @@ const 감정사진 = ["./images/행복해요.png", "./images/슬퍼요.png", "./
 const 감정색깔 = ["color: #EA5757", "color: #28B4E1", "color: #D59029", "color:#777777", "color:#A229ED"]
 
 window.onload = () => {
+  // 필터링있으면 필터링, 아니면 전체 뜨게 하면 될듯?
   일기DOM만들기("일기항목");
   const 일기목록_로컬스토리지 = localStorage.getItem("일기항목");
   const 일기목록_변환 = JSON.parse(일기목록_로컬스토리지)
@@ -122,7 +123,7 @@ const 일기DOM만들기 = (일기유형) => {
 
   let 일기목록만들기 = 일기목록_변환.map(
     (일기, index) =>
-      `<a class="일기_항목" href="./detail.html?diary=${index}">
+      `<a onclick="일기클릭기능()" class="일기_항목" href="./detail.html?diary=${index}">
             <div class="일기_사진">
                 <div class="감정_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
             </div>
