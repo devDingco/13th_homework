@@ -86,7 +86,8 @@
 }
 
 .filter_item {
-    width: 1186px;
+    /* width: 1186px; */
+    width: 100%;
     position: sticky;
     top: 10px;
     z-index: 10;
@@ -368,8 +369,8 @@
     background-color: #FFFFFFE5;
     
     position: fixed;
-    bottom: 152px;
-    right: 376px;
+    bottom: 10px;
+    left: 90%;
 }
 
 /* 바닥글 영역 */

@@ -165,7 +165,8 @@ const reloadDiary = (reload_diaryList) => {
 }
 
 const filterDiary = () => {
-    const selectedMood = document.getElementById("mood_select").value
+    const selectedMood = document.getElementById("mood_select_desktop").value 
+                        || document.getElementById("mood_select_mobile").value
 
     if (selectedMood === "전체") {
         isFiltered = false
@@ -216,6 +217,7 @@ window.addEventListener("scroll", () => {
 
 const observingWindowWidth = () => {
     const windowWidth = window.innerWidth
+    console.log(windowWidth)
 
     if (windowWidth < 779) {
         document.getElementById("filter_item_mobile").style = "display: block;"

@@ -4,6 +4,15 @@
 
         padding: 0;
     }
+
+    .navi {
+        width: 100%;
+    }
+
+    .navi_items {
+        width: 100%;
+    }
+
     .contents {
         flex-direction: column;
     }
