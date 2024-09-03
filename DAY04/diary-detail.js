@@ -76,6 +76,7 @@ function 보기모드로전환() {
     </div>
     <div class="버튼상자">
       <button id="수정버튼">수정</button>
+      <button id='삭제버튼'>삭제</button>
     </div>
   `;
 
@@ -192,6 +193,10 @@ function 수정모드활성화() {
   const 댓글등록버튼 = document.querySelector(".입력상자 button");
   if (댓글입력) 댓글입력.disabled = true;
   if (댓글등록버튼) 댓글등록버튼.disabled = true;
+  댓글입력.style = "background-color: #F2F2F2; border: none; color: #ABABAB;";
+  댓글등록버튼.style =
+    "background-color: #C7C7C7; border: none; color:#F2F2F2;";
+  댓글입력.placeholder = "수정중일댄 회고를 작성할 수 없어요.";
 }
 
 // 수정 모드에서 일기 데이터를 표시하는 함수

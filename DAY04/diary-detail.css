@@ -112,7 +112,7 @@ main {
   align-items: center;
   align-self: stretch;
 }
-.선택된기분 {
+#선택된기분 {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -129,7 +129,7 @@ main {
   align-items: center;
   gap: 8px;
 }
-.작성일자 {
+#작성일자 {
   color: var(--Gray-Gray-500, #919191);
   font-size: 14px;
   font-weight: 400;
@@ -175,7 +175,7 @@ main {
   gap: 16px;
   align-self: stretch;
 }
-.수정버튼 {
+#수정버튼 {
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
@@ -187,7 +187,7 @@ main {
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.18px;
 }
-.수정버튼:hover {
+#수정버튼:hover {
   cursor: pointer;
 }
 .취소버튼 {
@@ -236,7 +236,7 @@ main {
     color: #a229ed;
   }
 }
-.삭제버튼 {
+#삭제버튼 {
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
@@ -248,7 +248,7 @@ main {
   line-height: 24px; /* 133.333% */
   letter-spacing: -0.18px;
 }
-.삭제버튼:hover {
+#삭제버튼:hover {
   cursor: pointer;
 }
 .수정완료버튼:active {
@@ -305,7 +305,7 @@ main {
   background: var(--Gray-B, #000);
 }
 /* 보기 모드 스타일 */
-.view-mode .일기제목 {
+.view-mode #일기제목 {
   display: flex;
   max-width: 1168px;
   padding-bottom: 12px;
@@ -319,7 +319,7 @@ main {
   letter-spacing: -0.22px;
 }
 
-.view-mode .일기내용 {
+.view-mode #일기내용 {
   color: #333;
   font-size: 16px;
   font-weight: 500;
@@ -365,6 +365,9 @@ main {
   display: flex;
   gap: 20px;
 }
+.댓글목록컨테이너 {
+  padding-top: 4px;
+}
 .댓글항목 {
   display: flex;
   max-width: 1168px;
@@ -374,6 +377,11 @@ main {
   border-bottom: 1px solid #e4e4e4;
   padding: 12px 0;
 }
+.댓글항목:last-child,
+.댓글항목.마지막댓글 {
+  border-bottom: none;
+}
+
 .댓글내용 {
   color: #000;
   font-size: 16px;
