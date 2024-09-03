@@ -23,7 +23,7 @@
   color: var(--gray-400);
 
   padding: var(--gap-sm) var(--gap-xs);
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: var(--weight-medium);
 }
 
@@ -79,7 +79,7 @@
   width: 100%;
   text-align: center;
   align-self: center;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 1.5em;
 }
 
@@ -125,7 +125,7 @@
 
 .panel-info > div {
   padding-bottom: var(--gap-xxs);
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 .date {
@@ -134,7 +134,7 @@
 }
 
 .panel-title {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: var(--weight-bold);
   max-height: 24px;
   overflow: hidden;
@@ -150,68 +150,8 @@
 }
 
 .side-title {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: var(--weight-bold);
-}
-
-.form-area {
-  padding: var(--gap-xxl) 0;
-}
-
-.form-title {
-  font-size: 20px;
-  font-weight: var(--weight-semi-bold);
-}
-
-.emotions {
-  padding: var(--gap-sm) 0 var(--gap-xxl);
-  gap: var(--gap-md);
-  flex-wrap: wrap;
-}
-
-.emotions input[type='radio'] {
-  width: 20px;
-  height: 20px;
-  margin-right: var(--gap-xxs);
-  appearance: none;
-  border: 2px solid var(--gray-600);
-  border-radius: 50%;
-}
-
-.emotions input[type='radio']:checked {
-  border: none;
-  box-shadow: inset 0 0 0 2px var(--gray-b), inset 0 0 0 5px var(--gray-w), inset 0 0 0 10px var(--gray-b);
-}
-
-.input-title-area {
-  padding-bottom: var(--gap-lg);
-}
-
-.input-title-area > label,
-.input-content-area > label {
-  color: var(--gray-800);
-  font-size: 14px;
-  font-weight: var(--weight-medium);
-}
-
-#input-title,
-#input-content {
-  display: block;
-  width: 100%;
-  color: var(--gray-400);
-  font-size: 16px;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  padding: var(--gap-xs) var(--gap-sm);
-  margin-top: var(--gap-sm);
-}
-
-#input-title {
-  height: 48px;
-}
-
-#input-content {
-  min-height: 128px;
 }
 
 .button-register {
