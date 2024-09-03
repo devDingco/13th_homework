@@ -10,12 +10,12 @@
   </head>
   <body>
     <div class="app">
-      <div class="app-insede">
-        <header class="header">
-          <h1 class="header-title">
-            <a href="">다인의 다이어리</a>
-          </h1>
-        </header>
+      <header class="header">
+        <h1 class="header-title">
+          <a href="">다인의 다이어리</a>
+        </h1>
+      </header>
+      <div class="app-inside">
         <section class="container">
           <div class="edit">
             <form class="register">
@@ -60,6 +60,27 @@
                 </div>
               </fieldset>
             </form>
+          </div>
+          <div class="review" id="review">
+            <form>
+              <legend>회고</legend>
+              <fieldset>
+                <div class="review-area flexbox">
+                  <input type="text" class="input-review" placeholder="수정중일 땐 회고를 작성할 수 없어요." disabled />
+                  <button class="button-add-review" disabled>입력</button>
+                </div>
+              </fieldset>
+            </form>
+            <ul class="review-list">
+              <li class="review-item flexbox">
+                <p class="review-item-content">리뷰내용</p>
+                <span class="review-date">[2024. 09. 24]</span>
+              </li>
+              <li class="review-item flexbox">
+                <p class="review-item-content">리뷰내용</p>
+                <span class="review-date">[2024. 09. 24]</span>
+              </li>
+            </ul>
           </div>
         </section>
       </div>
