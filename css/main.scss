@@ -5,11 +5,12 @@
   top: 0;
   z-index: 20;
   backdrop-filter: blur(5px);
-  padding: 32px 0 42px;
+  padding: 2rem 0 2.625rem;
   transition: 0.5s;
 
   &.stickyAddStyle {
-    padding: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     .filterSearchBox {
       filter: invert(1);
     }
@@ -17,7 +18,7 @@
 }
 
 .filterSearchBox {
-  width: var(--width);
+  width: var(--max-width);
   margin: 0 auto;
   display: flex;
   gap: 8px;
@@ -25,7 +26,7 @@
   flex-wrap: wrap;
 
   .selectBox {
-    width: 120px;
+    width: 7.5rem;
     height: 48px;
     border: 1px solid var(--border-color-2);
     border-radius: 8px;
@@ -86,7 +87,7 @@
   }
 
   .searchBox {
-    width: 340px;
+    width: 21.25rem;
     height: 48px;
     border-radius: 48px;
     background-color: #fff;
@@ -100,7 +101,7 @@
     justify-content: flex-start;
 
     .selectBox {
-      width: 110px;
+      width: 6.875rem;
       border: none;
       flex-shrink: 0;
       height: 100%;
@@ -143,12 +144,12 @@
 section {
   display: flex;
   gap: 24px;
-  align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: space-around;
+  align-items: flex-start;
   padding-bottom: 40px;
 
   .empty {
+    width: 784px;
     text-align: center;
     padding: 20vh;
     color: var(--font-color-6);
@@ -157,15 +158,20 @@ section {
 
   .diaryList {
     width: 784px;
+    // max-width: 49rem;
+    // overflow: hidden;
+
     ul {
       display: flex;
       flex-wrap: wrap;
-      // justify-content: center;
-      gap: 24px;
+      gap: 1.5rem;
 
       li {
-        width: 380px;
         position: relative;
+
+        a {
+          display: block;
+        }
 
         &:hover {
           transform: scale(1.02);
@@ -194,8 +200,8 @@ section {
 
         .closeBtn {
           position: absolute;
-          top: 12px;
-          right: 12px;
+          top: 5px;
+          right: 5px;
           z-index: 10;
           border: none;
           background: none;
@@ -207,12 +213,13 @@ section {
           gap: 16px;
           padding-bottom: 16px;
 
-          div {
+          .imgBox {
             border-radius: 20px;
             overflow: hidden;
 
             img {
               display: block;
+              width: 100%;
             }
           }
 
