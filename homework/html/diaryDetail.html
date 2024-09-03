@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework2</title>
-    <link rel="stylesheet" href="./homework2.css" />
-    <script src="./homework2.js" defer></script>
+    <link rel="stylesheet" href="../css/diaryDetail.css" />
+    <script src="../homework2.js" defer></script>
   </head>
 
   <body>
     <div class="wrapper">
       <!-- 헤더 -->
       <header>
-        <div class="header-content">민지의 다이어리</div>
+        <a class="header-content" href="/html/homework2.html">민지의 다이어리</a>
       </header>
       <main>
         <div class="diary-wrap">
@@ -41,21 +41,20 @@
             </div>
             <h2>내용</h2>
             <textarea placeholder="내용을 입력해 주세요." id="body"></textarea>
-            <button class="edit-button" onclick="saveClick()">저장</button>
+            <button class="edit-button" onclick="saveClick()">수정</button>
+          </div>
+        </div>
+        <div class="comment-all-area">
+          <div class="comment-area">
+            <h2>회고</h2>
+            <div class="input-area">
+              <input type="text" placeholder="회고를 남겨보세요." />
+              <button onclick="addComment()">입력</button>
+            </div>
+            <div class="comment"></div>
           </div>
         </div>
       </main>
     </div>
-
-    <!-- 푸터 -->
-    <footer>
-      <div class="footer">
-        <div class="footer-contents">
-          <div class="footer-content-1">민지의 다이어리</div>
-          <div class="footer-content-2">대표 : (name)</div>
-          <div class="footer-content-3">Copyright 2024(name)Co.Ltd</div>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
