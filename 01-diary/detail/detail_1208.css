@@ -1,0 +1,34 @@
+@media (max-width: 1208px) {
+    .header_container {
+        /* width: 100%; */
+        align-items: flex-start;
+    }
+
+    .header_title {
+        width: 100%;
+    }
+
+    .main_contents_container {
+        width: 100%;
+    }
+
+    .main_contents_article {
+        width: 100%;
+    }
+
+    .main_contents_title {
+        width: 100%;
+    }
+
+    .reminiscence_container {
+        width: 100%;
+    }
+
+    .reminiscence_text {
+        width: 95%;
+    }
+
+    .break_line {
+        width: 100%;
+    }
+}

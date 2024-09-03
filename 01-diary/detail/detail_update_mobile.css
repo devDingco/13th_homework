@@ -1,0 +1,37 @@
+@media (max-width: 779px) {
+    .header_container {
+        width: 100%;
+    }
+
+    .section_container {
+        width: 100%;
+    }
+
+    .update_contents_container {
+        width: 100%;
+    }
+
+    .update_select_mood_container {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1rf;
+    }
+
+
+    .update_contents_title_container {
+        width: 100%;
+    }
+
+    .update_contents_text_container {
+        width: 100%;
+    }
+
+    .reminiscence_container {
+        width: 100%;
+    }
+
+    .reminiscence_text {
+        width: 95%;
+    }
+}

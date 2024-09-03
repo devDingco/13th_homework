@@ -5,21 +5,18 @@
 }
 
 .root_container {
-    width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 64px;
-
     padding: 0px 20px 0px 20px;
 }
 
 .header_container {
-    width: 1200px;
     height: 60px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-
     gap: 10px;
 }
 
@@ -28,22 +25,23 @@
 }
 
 .header_title {
-    width: 100%;
+    width: 1168px;
     height: 40px;
     font-weight: 700;
     font-size: 18px;
     color: black;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
 
     gap: 10px;
 }
 
 .detail_section_container {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 16px;
 }
 
@@ -71,7 +69,6 @@
 }
 
 .main_contents_title {
-    width: 100%;
     font-weight: 700;
     font-size: 22px;
     border-bottom: 2px solid black;
@@ -197,7 +194,6 @@
 
 .reminiscence_input_button {
     width: 51px;
-    height: 100%;
     background-color: black;
 
     font-weight: 600;
