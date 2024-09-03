@@ -17,7 +17,7 @@ html {
 }
 
 .layout {
-  width: 61%;
+  width: 70%;
   height: auto;
   display: flex;
   padding: 0 1.25rem;
@@ -325,4 +325,16 @@ html {
   width: 73rem;
   height: 0.063rem;
   background: var(--Gray-Gray-100, #e4e4e4);
+}
+
+@media (max-width: 48.688rem) {
+  .layout {
+    width: 90%;
+    height: auto;
+    display: flex;
+    padding: 0 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+  }
 }
