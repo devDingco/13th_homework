@@ -9,71 +9,98 @@
     <script src="./modules/diaryDetail.js" defer></script>
   </head>
   <body>
-    <header class="container-layout"><h1>준수의 다이어리</h1></header>
-    <main class="container-layout">
-      <div id="view" class="view">
-        <h3 id="titleView"></h3>
-        <div class="infoContainer">
-          <div id="feelingViewContainer">
-            <div id="feeling_circle"></div>
-            <p id="feeling_text"></p>
+    <div class="scroll-behavior">
+      <header class="container-layout"><h1>준수의 다이어리</h1></header>
+      <main class="container-layout">
+        <div id="view" class="view">
+          <h3 id="titleView"></h3>
+          <div class="infoContainer">
+            <div id="feelingViewContainer">
+              <div id="feeling_circle"></div>
+              <p id="feeling_text"></p>
+            </div>
+            <p id="createdAtDate"></p>
           </div>
-          <p id="createdAtDate"></p>
+          <div id="contentViewContainer">
+            <h4>내용</h4>
+            <p id="contentText"></p>
+          </div>
+          <div class="buttons_container">
+            <button id="detailEdit">수정</button>
+            <button id="detailDelete">삭제</button>
+          </div>
         </div>
-        <div id="contentViewContainer">
-          <h4>내용</h4>
-          <p id="contentText"></p>
+        <div id="edit" class="none">
+          <h3>오늘 기분은 어땠나요?</h3>
+          <form>
+            <div class="feeling-radio-wrap">
+              <p>
+                <input id="happy" type="radio" name="feeling" checked />
+                <label for="happy">행복해요</label>
+              </p>
+              <p>
+                <input id="sad" type="radio" name="feeling" />
+                <label for="sad">슬퍼요</label>
+              </p>
+              <p>
+                <input id="surprised" type="radio" name="feeling" />
+                <label for="surprised">놀랐어요</label>
+              </p>
+              <p>
+                <input id="angry" type="radio" name="feeling" />
+                <label for="angry">화나요</label>
+              </p>
+              <p>
+                <input id="etc" type="radio" name="feeling" />
+                <label for="etc">기타</label>
+              </p>
+            </div>
+            <div class="content-wrap">
+              <p>
+                <label for="title" class="label-sm">제목</label>
+                <input
+                  id="editTitleInput"
+                  type="text"
+                  placeholder="제목을 입력해 주세요." />
+              </p>
+              <p>
+                <label for="content" class="label-sm">내용</label>
+                <textarea
+                  id="editContentInput"
+                  placeholder="내용을 입력해 주세요."></textarea>
+              </p>
+            </div>
+            <div class="buttons-container">
+              <button type="button" id="cancelBtn">취소</button>
+              <button type="button" id="submitBtn" class="none" disabled>
+                수정완료
+              </button>
+            </div>
+          </form>
         </div>
-        <button id="detailEdit">수정</button>
-      </div>
-      <div id="edit" class="none">
-        <h3>오늘 기분은 어땠나요?</h3>
-        <form>
-          <div class="feeling-radio-wrap">
-            <p>
-              <input id="happy" type="radio" name="feeling" checked />
-              <label for="happy">행복해요</label>
-            </p>
-            <p>
-              <input id="sad" type="radio" name="feeling" />
-              <label for="sad">슬퍼요</label>
-            </p>
-            <p>
-              <input id="surprised" type="radio" name="feeling" />
-              <label for="surprised">놀랐어요</label>
-            </p>
-            <p>
-              <input id="angry" type="radio" name="feeling" />
-              <label for="angry">화나요</label>
-            </p>
-            <p>
-              <input id="etc" type="radio" name="feeling" />
-              <label for="etc">기타</label>
-            </p>
-          </div>
-          <div class="content-wrap">
-            <p>
-              <label for="title" class="label-sm">제목</label>
-              <input
-                id="editTitleInput"
-                type="text"
-                placeholder="제목을 입력해 주세요." />
-            </p>
-            <p>
-              <label for="content" class="label-sm">내용</label>
-              <textarea
-                id="editContentInput"
-                placeholder="내용을 입력해 주세요."></textarea>
-            </p>
-          </div>
-          <div class="buttons-container">
-            <button type="button" id="cancelBtn">취소</button>
-            <button type="button" id="submitBtn" class="none" disabled>
-              수정완료
+        <div class="comments_container" id="commentscontainer">
+          <h4>회고</h4>
+          <form onsubmit="onSubmitComment(event); return false;">
+            <input
+              type="text"
+              id="comment"
+              class="noEditing"
+              placeholder="회고를 남겨보세요." />
+            <button type="submit" id="commentSubmitBtn" class="none" disabled>
+              입력
             </button>
+          </form>
+          <div class="container_wrapper">
+            <ul id="comments">
+              <li>
+                <p>3년이 지나고 보니 이때가 그립다.</p>
+                <p>[2024.09.24]</p>
+              </li>
+            </ul>
           </div>
-        </form>
-      </div>
-    </main>
+        </div>
+      </main>
+      <div id="testid"></div>
+    </div>
   </body>
 </html>
