@@ -1,10 +1,7 @@
 let diaryList;
 
 const showDiary = () => {
-  const diaryListString =
-    localStorage.getItem('myDiaryList') !== null
-      ? localStorage.getItem('myDiaryList')
-      : '[]';
+  const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
 
   if (diaryList.length !== 0) {
@@ -13,35 +10,15 @@ const showDiary = () => {
     <li class="panel-item">
       <a href="./diary-detail.html?pageNumber=${index}">
         <div class="emotion-card">
-        ${
-          el.emotion === 'happy'
-            ? '<img src="./assets/images/image_emotion_happy.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'sad'
-            ? '<img src="./assets/images/image_emotion_sad.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'surprising'
-            ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'angry'
-            ? '<img src="./assets/images/image_emotion_angry.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'etc'
-            ? '<img src="./assets/images/image_emotion_etc.png" alt="" />'
-            : ''
-        }
+        ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
+        ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
+        ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
+        ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
+        ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
         </div>
         <div class="panel-info">
           <div class="flexbox justify-between">
-            <span class="badge-emoticon sad">
+            <span class="badge-emoticon ${el.emotion}">
             ${el.emotion === 'happy' ? '행복해요' : ''}
               ${el.emotion === 'sad' ? '슬퍼요' : ''}
               ${el.emotion === 'surprising' ? '놀랐어요' : ''}
@@ -115,23 +92,9 @@ const saveDiary = () => {
 
 const filterEmotion = (event) => {
   const target = event.target.value;
-  const convertedTarget =
-    target === '행복해요'
-      ? 'happy'
-      : target === '슬퍼요'
-      ? 'sad'
-      : target === '화나요'
-      ? 'angry'
-      : target === '놀랐어요'
-      ? 'surprising'
-      : target === '기타'
-      ? 'etc'
-      : '';
+  const convertedTarget = target === '행복해요' ? 'happy' : target === '슬퍼요' ? 'sad' : target === '화나요' ? 'angry' : target === '놀랐어요' ? 'surprising' : target === '기타' ? 'etc' : '';
 
-  const diaryListString =
-    localStorage.getItem('myDiaryList') !== null
-      ? localStorage.getItem('myDiaryList')
-      : '[]';
+  const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
 
   const filteredList = diaryList.filter((el) => el.emotion == convertedTarget);
@@ -141,35 +104,15 @@ const filterEmotion = (event) => {
   <li class="panel-item">
       <a href="./diary-detail.html?pageNumber=${index}">
         <div class="emotion-card">
-        ${
-          el.emotion === 'happy'
-            ? '<img src="./assets/images/image_emotion_happy.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'sad'
-            ? '<img src="./assets/images/image_emotion_sad.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'surprising'
-            ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'angry'
-            ? '<img src="./assets/images/image_emotion_angry.png" alt="" />'
-            : ''
-        }
-        ${
-          el.emotion === 'etc'
-            ? '<img src="./assets/images/image_emotion_etc.png" alt="" />'
-            : ''
-        }
+        ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
+        ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
+        ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
+        ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
+        ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
         </div>
         <div class="panel-info">
           <div class="flexbox justify-between">
-            <span class="badge-emoticon sad">
+            <span class="badge-emoticon ${el.emotion}">
             ${el.emotion === 'happy' ? '행복해요' : ''}
               ${el.emotion === 'sad' ? '슬퍼요' : ''}
               ${el.emotion === 'surprising' ? '놀랐어요' : ''}

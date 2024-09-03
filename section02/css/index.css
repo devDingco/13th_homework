@@ -1,125 +1,6 @@
-@import './reset.css';
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-
-/* Typography */
-:root {
-  font-family: 'Pretendard Variable', Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-}
-
-/* Variables */
-
-:root {
-  --gray-w: #fff;
-  --gray-50: #f2f2f2;
-  --gray-200: #d4d3d3;
-  --gray-300: #c7c7c7;
-  --gray-400: #ababab;
-  --gray-500: #919191;
-  --gray-600: #777777;
-  --gray-700: #5f5f5f;
-  --gray-800: #333333;
-  --gray-900: #1c1c1c;
-  --gray-b: #000;
-  --accent-red: #ea5757;
-  --accent-blue: #28b4e1;
-  --accent-purple: #a229ed;
-  --accent-yellow: #d59029;
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --gap-xxs: 8px;
-  --gap-xs: 12px;
-  --gap-sm: 16px;
-  --gap-md: 20px;
-  --gap-lg: 24px;
-  --gap-xl: 32px;
-  --gap-xxl: 40px;
-  --weight-this: 100;
-  --weight-extra-light: 200;
-  --weight-light: 300;
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semi-bold: 600;
-  --weight-bold: 700;
-  --weight-extra-bold: 800;
-  --weight-black: 900;
-}
-
-/* Layouts */
-
-.app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.app-insede {
-  min-width: 1168px;
-  padding: var(--gap-sm);
-}
-
-.header {
-  padding: 22px 0;
-}
-
-.container {
-  padding: var(--gap-lg) 0 var(--gap-xxl);
-}
-
-.container-cover {
-  width: 100%;
-}
-
-.menu {
-  padding-top: var(--gap-lg);
-  padding-bottom: var(--gap-xxl);
-}
-
-.block-box {
-  width: 100%;
-}
-
-.panel-list {
-  min-width: 784px;
-  flex-wrap: wrap;
-}
-
-.side-panel {
-  min-width: 360px;
-}
-
-.footer {
-  width: 100%;
-}
-
-/* Commons */
-
-.flexbox {
-  display: flex;
-}
-
-.flexbox.col {
-  flex-direction: column;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.align-center {
-  align-items: center;
-}
+@import './common.css';
 
 /* Components */
-
-.header-title {
-  font-size: 18px;
-  font-weight: var(--weight-bold);
-}
 
 .container-cover {
   height: 240px;
@@ -209,10 +90,6 @@
   height: 100%;
 }
 
-.emotion-card img {
-  aspect-ratio: 760px / 570px;
-}
-
 .panel-info {
   padding: var(--gap-sm) var(--gap-xxs);
 }
@@ -220,25 +97,6 @@
 .panel-info > div {
   padding-bottom: var(--gap-xxs);
   font-size: 14px;
-}
-
-.badge-emoticon {
-  font-weight: var(--weight-semi-bold);
-}
-.badge-emoticon.happy {
-  color: var(--accent-red);
-}
-.badge-emoticon.angry {
-  color: var(--gray-600);
-}
-.badge-emoticon.surprising {
-  color: var(--accent-yellow);
-}
-.badge-emoticon.sad {
-  color: var(--accent-blue);
-}
-.badge-emoticon.etc {
-  color: var(--accent-purple);
 }
 
 .date {
@@ -293,8 +151,7 @@
 
 .emotions input[type='radio']:checked {
   border: none;
-  box-shadow: inset 0 0 0 2px var(--gray-b), inset 0 0 0 5px var(--gray-w),
-    inset 0 0 0 10px var(--gray-b);
+  box-shadow: inset 0 0 0 2px var(--gray-b), inset 0 0 0 5px var(--gray-w), inset 0 0 0 10px var(--gray-b);
 }
 
 .input-title-area {
@@ -343,40 +200,4 @@
   color: var(--gray-50);
   background-color: var(--gray-300);
   cursor: not-allowed;
-}
-
-.footer {
-  width: 100%;
-  background-color: var(--gray-50);
-  display: flex;
-  justify-content: center;
-}
-
-.footer-inside {
-  flex-grow: 1;
-  max-width: 1168px;
-  padding: var(--gap-lg) var(--gap-sm);
-  gap: var(--gap-xl);
-  font-size: 14px;
-}
-
-.footer-title {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.footer-info {
-  color: var(--gray-700);
-  font-weight: var(--weight-regular);
-}
-
-.footer-copy {
-  color: var(--gray-500);
-  font-weight: var(--weight-light);
-}
-
-@media (max-width: 1000px) {
-  .panel-item {
-    width: 100%;
-  }
 }

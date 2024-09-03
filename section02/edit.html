@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/edit.css" />
+    <script src="./javascript/edit.js"></script>
+    <title>일기보관함</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="app-insede">
+        <header class="header">
+          <h1 class="header-title">
+            <a href="">다인의 다이어리</a>
+          </h1>
+        </header>
+        <section class="container">
+          <div class="detail">
+            <div class="detail-title">
+              <h2>타이틀</h2>
+            </div>
+            <div class="detail-info flexbox">
+              <div class="detail-emotion flexbox">
+                <div class="emotion-thumbnail">
+                  <img src="" />
+                </div>
+                <div class="emotion-name">
+                  <span>행복해요</span>
+                </div>
+              </div>
+              <div class="detail-date">
+                <span>2024. 07. 12 작성</span>
+              </div>
+            </div>
+            <div class="detail-content">
+              <h3>내용</h3>
+              <p>일기내용</p>
+            </div>
+            <div class="actions flexbox">
+              <a class="button-edit" href="./diary-edit.html">수정</a>
+              <button class="button-delete">삭제</button>
+            </div>
+          </div>
+          <div class="review">
+            <form>
+              <legend>회고</legend>
+              <fieldset>
+                <div class="review-area">
+                  <input type="text" class="input-review" />
+                  <button class="button-add-review">입력</button>
+                </div>
+              </fieldset>
+            </form>
+            <ul class="review-list">
+              <li class="review-item flexbox">
+                <p class="review-item-content">리뷰내용</p>
+                <span class="review-date">[2024. 09. 24]</span>
+              </li>
+              <li class="review-item flexbox">
+                <p class="review-item-content">리뷰내용</p>
+                <span class="review-date">[2024. 09. 24]</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-inside flexbox col">
+          <h2 class="footer-title">다인의 다이어리</h2>
+          <p class="footer-info">대표 : 민다인</p>
+          <p class="footer-copy">Copyright &copy; 2024. Dain Co., Ltd.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
