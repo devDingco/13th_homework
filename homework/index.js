@@ -6,6 +6,41 @@ window.onload = () => {
   renderDiaryInstance();
 };
 
+// window 스크롤 감지시, 필터 배경색 변경하기
+window.addEventListener('scroll', () => {
+  const scrollDepth = window.scrollY;
+  if (scrollDepth > 0) {
+    document.getElementById('mood-selection').style =
+      'background-color: black; color: white;';
+    document
+      .querySelectorAll('#mood-selection option')
+      .forEach((el) => (el.style = 'background-color: black; color: white;'));
+  } else {
+    document.getElementById('mood-selection').style = '';
+    document
+      .querySelectorAll('#mood-selection option')
+      .forEach((el) => (el.style = ''));
+  }
+});
+
+const onClickTopScroller = () => {
+  // 플로팅 버튼 클릭시 ViewPort의 최상단으로 이동
+  console.log(
+    '🚀 ~ onClickTopScroller ~ onClickTopScroller:',
+    onClickTopScroller
+  );
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const onClickDeleteButton = (e, idx) => {
+  e.preventDefault();
+  alert('삭제되었습니다.');
+  dairyList.splice(idx, 1);
+  localStorage.setItem('dairyList', JSON.stringify(dairyList));
+  renderDiaryInstance();
+};
+
 const onClickButton = () => {
   // mood, 제목, 내용 가져오기
   const myMood = document.querySelector('input[name="mood"]:checked');
@@ -42,10 +77,11 @@ const renderDiaryInstance = () => {
   console.log(elementArr);
   const resRendering = elementArr.map(
     (el, idx) => `
-      <div onclick="onClickDairy()" class="dairy">
+      <div class="dairy">
         <a href="./detail.html?idx=${idx}">
           <div class="mood-img">
-            <img src="./asset/${el.myMood}.jpg" alt="${el.myMood}}">
+            <img id="mood-face-img" src="./asset/${el.myMood}.jpg" alt="${el.myMood}}">
+            <img onclick="onClickDeleteButton(event, ${idx})" id="dairy-delete-btn" src="./asset/close icon.jpg" />
           </div>
           <div class="daiary-summary-wrapper">
             <div class="daiary-summary">

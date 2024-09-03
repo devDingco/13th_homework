@@ -14,7 +14,6 @@ a {
   display: flex;
   flex-direction: column;
   width: 1920px;
-  /* margin: 0 auto; */
   align-items: center;
 }
 
@@ -38,6 +37,8 @@ a {
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
+  margin-bottom: 40px;
+
 }
 
 .title-list {
@@ -55,6 +56,15 @@ a {
   width: 1168px;
   border: 2px solid crimson;
   margin-bottom: 40px;
+  position: sticky;
+  top: 5px;
+  z-index: 10;
+}
+
+select#mood-selection {
+  border-radius: 10px;
+  width: 80px;
+  height: 35px;
 }
 
 #mood-radio {
@@ -80,16 +90,35 @@ a {
   font-weight: 500;
 }
 
-.body {
+.main {
   display: flex;
   gap: 24px;
   border: 2px solid yellowgreen;
+  width: 1200px;
+  /* height: 1190px; */
+  margin-bottom: 40px;
+  position: relative;
+}
+
+#topScroller-area {
+  display: flex;
+  justify-content: flex-end;
+  border: 2px solid black;
+  width: 1200px;
+  right: 10px;
+  bottom: 10px;
   margin-bottom: 40px;
 }
 
+#topScroller {
+  border-radius: 100%;
+  border: 2px solid #000;
+}
+
 #dairy-list {
+  /* overflow: scroll; */
   border: 2px solid pink;
-  width: 800px;
+  width: 810px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -97,16 +126,26 @@ a {
 }
 
 .dairy {
+  border: 2px solid blue;
   display: flex;
   flex-direction: column;
   width: 380px;
   height: 375px;
-  /* border: 2px solid blue; */
   gap: 16px;
   transition: transform 0.5s;
+  position: relative;
 }
 
-.dairy img {
+#dairy-delete-btn {
+  border: 2px solid black;
+  width: 24px;
+  
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.dairy #mood-face-img {
   transition: filter 0.5s;
 }
 
@@ -114,8 +153,9 @@ a {
   transform: scale(1.1);
 }
 
-.dairy:hover img {
+.dairy:hover #mood-face-img {
   filter: blur(5px);
+  cursor: default;
 }
 
 .mood-img {
@@ -322,6 +362,10 @@ a {
   border: 2px solid skyblue;
   background-color: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+div#topScroller-area {
+  position: sticky;
 }
 
 .footer {
