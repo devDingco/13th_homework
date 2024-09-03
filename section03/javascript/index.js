@@ -31,7 +31,7 @@ const renderData = (array) => {
       </div>
 
       <div class="panel-delete">
-        <button class="button-item-delete">
+        <button class="button-item-delete" onclick="deleteItem(event, ${index})">
           <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
         </button>
       </div>
@@ -62,7 +62,6 @@ const showDiary = () => {
 
   if (diaryList.length !== 0) {
     const diaryHTML = renderData(diaryList);
-
     const diaries = diaryHTML.join('');
     document.querySelector('.panel-list').innerHTML = diaries;
   } else {
@@ -104,11 +103,11 @@ const saveDiary = () => {
     emotion,
   };
 
-  let previousData = JSON.parse(localStorage.getItem('myDiaryList')) || [];
+  let previousData = JSON.parse(window.localStorage.getItem('myDiaryList')) ?? [];
 
   diaryList = [...previousData, data];
 
-  localStorage.setItem('myDiaryList', JSON.stringify(diaryList));
+  window.localStorage.setItem('myDiaryList', JSON.stringify(diaryList));
 
   showDiary();
 };
@@ -117,7 +116,7 @@ const filterEmotion = (event) => {
   const target = event.target.value;
   const convertedTarget = target === '행복해요' ? 'happy' : target === '슬퍼요' ? 'sad' : target === '화나요' ? 'angry' : target === '놀랐어요' ? 'surprising' : target === '기타' ? 'etc' : '';
 
-  const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
+  const diaryListString = window.localStorage.getItem('myDiaryList') !== null ? window.localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
 
   const filteredList = diaryList.filter((el) => el.emotion == convertedTarget);
@@ -125,4 +124,18 @@ const filterEmotion = (event) => {
   const filteredListHTML = renderData(filteredList);
 
   document.querySelector('.panel-list').innerHTML = filteredListHTML.join('');
+};
+
+const deleteItem = (event, itemIndex) => {
+  event.preventDefault();
+
+  const diaryListString = window.localStorage.getItem('myDiaryList') !== null ? window.localStorage.getItem('myDiaryList') : '[]';
+  const diaryList = JSON.parse(diaryListString);
+  const filteredList = diaryList.filter((_, index) => index !== itemIndex);
+
+  window.localStorage.setItem('myDiaryList', JSON.stringify(filteredList));
+
+  alert('일기가 삭제되었습니다.');
+
+  showDiary();
 };
