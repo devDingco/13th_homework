@@ -1,6 +1,6 @@
 @media (max-width: 779px) {
     .filter_item {
-        order: 3;
+        order: 2;
 
         padding: 0;
     }
@@ -14,11 +14,17 @@
     }
 
     .contents {
-        flex-direction: column;
+        display: contents;
+        
+    }
+
+    .contents_container {
+        /* display: contents; */
+        padding: 0px 20px 0px 20px;
     }
 
     .contents_left_item {
-        order: 4;
+        order: 3;
 
         width: 100%;
 
