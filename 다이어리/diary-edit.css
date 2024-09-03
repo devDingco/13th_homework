@@ -7,14 +7,13 @@
 .layout-wrapper {
   background: #fff;
   max-width: 1920px;
-  height: 1080px;
   display: flex;
   justify-content: center;
   margin: 0 auto;
 }
 
 .layout {
-  width: 1168px;
+  width: 61%;
   height: auto;
   display: flex;
   padding: 0 20px;
@@ -24,7 +23,6 @@
 }
 
 .header {
-  width: 100%;
   height: auto;
   display: flex;
   padding: 0 2px;
@@ -36,8 +34,6 @@
 .header_frame {
   display: flex;
   height: 60px;
-  min-width: 320px;
-  max-width: 1168px;
   align-items: center;
   gap: 10px;
   align-self: stretch;
@@ -49,8 +45,6 @@
 
 .logo {
   display: flex;
-  width: 130px;
-  height: 40px;
   align-items: center;
   gap: 10px;
   color: #000;
@@ -74,7 +68,6 @@
 
 .main_frame {
   display: flex;
-  max-width: 1168px;
   height: auto;
   padding-bottom: 16px;
   flex-direction: column;
@@ -94,7 +87,6 @@
 .mood_select_title_frame {
   display: flex;
   height: auto;
-  max-width: 1168px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -103,7 +95,6 @@
 
 .mood_select_title {
   display: flex;
-  max-width: 1168px;
   padding-bottom: 12px;
   align-items: center;
   gap: 10px;
@@ -118,7 +109,6 @@
 
 .mood_checkbox_group {
   display: flex;
-  max-width: 592px;
   align-items: center;
   align-content: center;
   gap: 20px;
@@ -305,9 +295,13 @@
   text-decoration: none;
 }
 
+.comment_header_container {
+  width: 100%;
+}
+
 .comment_container {
   display: flex;
-  max-width: 1168px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -327,7 +321,6 @@
   align-items: center;
   gap: 16px;
   padding-bottom: 4px;
-  width: 1130px;
 }
 
 .comment_input {
