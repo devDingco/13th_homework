@@ -93,8 +93,10 @@ a {
   width: 100%;
   max-width: 784px;
   position: relative;
-  overflow: scroll;
+  overflow: visible; /* hidden에서 visible로 변경 */
+  padding: 12px; /* 여백 추가 */
 }
+
 .등록한일기 {
   display: flex;
   height: 357px;
@@ -106,16 +108,25 @@ a {
   gap: 16px;
   border-radius: 16px;
   background: #fff;
-
   position: relative;
   z-index: 1;
-  transition: all transform 0.5s;
+  transition: all 0.5s ease; /* 부드러운 전환 효과 5초 */
+  transform-origin: center center; /* 중앙을 기준으로 확대 */
 }
 
 .등록한일기.filled:hover {
   transform: scale(1.1);
   z-index: 2;
-  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 사이의 간격 조정 */
+.등록한일기:nth-child(odd) {
+  justify-self: end; /* 홀수 번째 카드를 오른쪽으로 */
+}
+
+.등록한일기:nth-child(even) {
+  justify-self: start; /* 짝수 번째 카드를 왼쪽으로 */
 }
 .등록한일기.빈셀:hover {
   transform: none;
