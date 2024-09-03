@@ -6,12 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/diaryDetail.css" />
+    <link rel="stylesheet" href="./styles/detail_mobile.css" />
     <script src="./modules/diaryDetail.js" defer></script>
   </head>
   <body>
-    <div class="scroll-behavior">
-      <header class="container-layout"><h1>준수의 다이어리</h1></header>
-      <main class="container-layout">
+    <div class="container-layout">
+      <header><h1>준수의 다이어리</h1></header>
+      <main>
         <div id="view" class="view">
           <h3 id="titleView"></h3>
           <div class="infoContainer">
@@ -32,7 +33,7 @@
         </div>
         <div id="edit" class="none">
           <h3>오늘 기분은 어땠나요?</h3>
-          <form>
+          <form onsubmit="onEditDiary(); return false;">
             <div class="feeling-radio-wrap">
               <p>
                 <input id="happy" type="radio" name="feeling" checked />
@@ -100,7 +101,9 @@
           </div>
         </div>
       </main>
-      <div id="testid"></div>
     </div>
+    <button id="upFloatingButton" class="">
+      <img src="./public/icons/up_outline_light_xl.svg" alt="" />
+    </button>
   </body>
 </html>

@@ -3,6 +3,7 @@ const queryData = new URLSearchParams(queryString);
 
 const viewEl = document.getElementById('view');
 const editEl = document.getElementById('edit');
+const scrollFloatingButton = document.getElementById('upFloatingButton');
 
 const titleViewEl = document.getElementById('titleView');
 const feelingTextEl = document.getElementById('feeling_text');
@@ -38,6 +39,8 @@ const feelingText = {
 const loadData = () => {
   queryId = queryData.get('id');
 
+  editTitleInputEl.value = `${diaryDetail.title}`;
+  editContentInputEl.value = `${diaryDetail.content}`;
   titleViewEl.innerText = `${diaryDetail.title}`;
   feelingTextEl.innerText = `${feelingText[diaryDetail.feeling]}`;
   createdAtEl.innerText = `${diaryDetail.createdAt} 작성`;
@@ -65,6 +68,7 @@ const loadData = () => {
       </li>`;
   });
 };
+
 loadData();
 
 let changedFeeling;
@@ -100,7 +104,7 @@ const onChangeInputValidation = () => {
       (submitButton.disabled = true));
 };
 
-const onEditDiary = (e) => {
+const onEditDiary = async () => {
   // e.preventDefault();
 
   const titleValue = document.getElementById('editTitleInput').value;
@@ -121,7 +125,7 @@ const onEditDiary = (e) => {
     feeling: changedFeeling,
     createdAt: diaryDetail.createdAt,
     isEdit: dateFormatter(),
-    comments: [],
+    comments: diaryDetail.comments,
   });
 
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
@@ -132,6 +136,8 @@ const onEditDiary = (e) => {
   classNameChange(editEl, 'edit', 'none');
   commentInputElement.disabled = false;
   commentInputElement.placeholder = '회고를 남겨보세요.';
+
+  diaryDetail = diaryListArray.find((diaryData) => diaryData.id === queryId);
   loadData();
 };
 
@@ -197,6 +203,10 @@ function dateFormatter() {
 submitButton.addEventListener('click', onEditDiary);
 cancelButton.addEventListener('click', onCancleEdit);
 deleteButtonEl.addEventListener('click', onDeleteDiaryClick);
+
+scrollFloatingButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 document
   .querySelectorAll("#edit input[type='text'], #edit textarea")

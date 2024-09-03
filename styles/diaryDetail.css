@@ -1,6 +1,4 @@
-.scroll-behavior {
-  height: 100vh;
-  overflow-y: scroll;
+html {
   scroll-behavior: smooth;
 }
 
@@ -133,7 +131,7 @@ main #view.view #contentViewContainer p {
   align-items: center;
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   /* box-sizing: content-box; */
 }
 #view .buttons_container button {
@@ -145,6 +143,9 @@ main #view.view #contentViewContainer p {
   align-self: flex-end;
 }
 
+.comments_container {
+  border-top: 2px solid black;
+}
 .comments_container h4 {
   color: #000;
   font-size: 18px;
@@ -336,4 +337,10 @@ textarea {
 #edit > form .buttons-container > #submitBtn.active:hover {
   transform: rotateZ(7deg);
   transition: 0.5s;
+}
+
+#upFloatingButton {
+  position: fixed;
+  bottom: 20px;
+  left: 90vw;
 }

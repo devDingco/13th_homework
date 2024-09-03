@@ -2,6 +2,8 @@
   position: relative;
   max-width: 1168px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -17,7 +19,7 @@ header h1 {
   font-weight: 700;
 }
 
-article.banner {
+article .banner {
   height: 240px;
   min-width: 320px;
   max-width: 1168px;
@@ -318,12 +320,17 @@ footer span {
   line-height: 16px;
 }
 
+main > .selectWrap {
+  display: none;
+}
+.selectWrap {
+  margin-top: 32px;
+}
 #customSelect {
   position: sticky;
   z-index: 98;
-  top: 0;
-  left: 50%;
-  transform: translateX(-488%);
+  top: 10px;
+  left: 0;
   width: fit-content;
 }
 
@@ -332,7 +339,6 @@ footer span {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 32px;
   padding: 4px;
   border-radius: 8px;
   border: 1px solid #c7c7c7;
@@ -342,15 +348,19 @@ footer span {
   width: 24px;
   height: 24px;
 }
+
 #customSelect.none > #selectBtn {
   background-color: #fff;
 }
+
 #customSelect.none > #selectBtn > span {
   background: url('../public/icons/down_fill_light_m.svg') no-repeat center;
 }
+
 #customSelect.active > #selectBtn > span {
   background: url('../public/icons/down_fill_dark_m.svg') no-repeat center;
 }
+
 #customSelect.active > #selectBtn {
   background-color: black;
   color: #fff;
@@ -393,6 +403,12 @@ footer span {
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+}
+
+#upFloatingButton {
+  position: fixed;
+  bottom: 20px;
+  left: 90vw;
 }
 
 #upFloatingButton.active {
