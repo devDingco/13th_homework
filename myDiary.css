@@ -4,7 +4,14 @@
     padding: 0;
     color: #222;
     font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Pretendard-Regular';
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
 
 a {
@@ -29,26 +36,25 @@ a {
 }
 
 .container__nav {
-    height: 112px;
-    width: 1148px;
+    width: 100vw;
+    height: 150px;
+    background-color: #FCFCFC;
     gap: 10px;
     margin: 24px 0px 42px 0px;
-    justify-content: flex-start;
-}
-
-.nav__tap {
     display: flex;
-    flex-direction: row;
-    margin-bottom: 32px;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    box-shadow: 0px 5px 0px 0px #fff;
 }
 
-.nav__filter {
-    width: 120px;
-    height: 32px;
-    background-color: #fff;
-    border-radius: 8px;
-    font-size: 20px;
-    padding: 2px 4px;
+.nav__tap__bar {
+    display: flex;
+    margin-bottom: 32px;
+    width: 1168px;
+    justify-content: flex-start;
 }
 
 .tap__active, .tap__disabled {
@@ -65,15 +71,31 @@ a {
     border: none;
 }
 
-.container__content {
+.nav__filter__bar {
+    display: flex;
+    align-items: center;
+    width: 1168px;
+    justify-content: flex-start;
+}
+
+.nav__filter {
+    width: 120px;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 2px 4px;
+}
+
+.container__body {
     width: 1168px;
     display: flex;
     gap: 24px;
     margin-bottom: 40px;
 }
 
-.content__left__card {
-    width: 800px;
+.body__left__card {
+    width: 820px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -86,6 +108,7 @@ a {
     background-color: #FFF;
     border-radius: 16px;
     box-shadow: 0px 4px 12px 0px #eee;
+    position: relative;
 }
 
 .wrapper__card:hover {
@@ -98,6 +121,17 @@ a {
     filter: grayscale(100%) blur(2px);
     transition: 0.5s;
     transition-timing-function: ease-in;
+    z-index: -1;
+}
+
+.card__delete {
+    width: 40px;
+    height: 40px;
+    background-image: url(./asset/close_outline_light_m.png);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 1;
 }
 
 .card__topic {
@@ -115,7 +149,7 @@ a {
     margin-bottom: 8px;
 }
 
-.card__sad, .card__surprise, .card__angry, .card__happy, .card__etc, .card__date {
+.card__mood, .card__sad, .card__surprise, .card__angry, .card__happy, .card__etc, .card__date {
     font-size: 14px;
     font-weight: 200;
 }
@@ -129,14 +163,14 @@ a {
 }
 
 .card__angry {
-    color: #767676;
+    color: #222;
 }
 
 .card__happy {
     color: #EA5757;
 }
 
-.card__think {
+.card__etc {
     color: #A229ED;
 }
 
@@ -149,7 +183,7 @@ a {
     font-weight: 600;
 }
 
-.content__right__diary {
+.body__right__diary {
     width: 360px;
     height: 100%;
     padding: 24px;
@@ -158,7 +192,7 @@ a {
     background-color: #FFF;
 }
 
-.diary__title {
+.diary__subject {
     font-size: 24px;
     margin-bottom: 40px;
 }
@@ -176,12 +210,12 @@ a {
     margin-bottom: 40px;
 }
 
-.diary__subject, .diary__context {
+.diary__title, .diary__content {
     font-size: 20px;
     margin-bottom: 8px;
 }
 
-.diary__subInput, .diary__conInput {
+.diary__titleInput, .diary__contentInput {
     width: 100%;
     height: 48px;
     border: 1px solid #eee;
@@ -190,7 +224,7 @@ a {
     margin-bottom: 24px;
 }
 
-.diary__conInput {
+.diary__contentInput {
     height: 128px;
     margin-bottom: 40px;
 }
@@ -213,6 +247,21 @@ a {
     color: #fff;
     font-weight: 600;
     transition: 0.5s;
+}
+
+.container__floating {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    background-image: url(./asset/up_outline_light_xl.png);
+    border-radius: 100%;
+    box-shadow: 0px 1px 6px 0px #767676;
+    right: 2%;
+    bottom: 2%;
+}
+
+.container__floating:hover {
+    background-color: #ff7700;
 }
 
 .container__footer {
