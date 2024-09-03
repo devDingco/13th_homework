@@ -8,7 +8,7 @@ const showDiary = () => {
     const diaryHTML = diaryList.map(
       (el, index) => `
     <li class="panel-item">
-      <a href="./diary-detail.html?pageNumber=${index}">
+      <a href="./detail.html?number=${index}">
         <div class="emotion-card">
         ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
         ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
@@ -102,7 +102,7 @@ const filterEmotion = (event) => {
   const filteredListHTML = filteredList.map(
     (el, index) => `
   <li class="panel-item">
-      <a href="./diary-detail.html?pageNumber=${index}">
+      <a href="./detail.html?number=${index}">
         <div class="emotion-card">
         ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
         ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
