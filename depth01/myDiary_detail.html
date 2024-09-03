@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[이하성] CSS&JS myDiary</title>
     <link href="./myDiary_detail.css" rel="stylesheet">
+    <script src="./myDiary_detail.js" defer> </script>
 </head>
 <body>
     <div class="container">
@@ -29,7 +30,10 @@
             <div class="content__context">
                 <div class="context__head">
                     <div class="context__title">내용</div>
-                    <div class="context__edit">수정</div>
+                    <div class="context__btn">
+                        <div class="context__edit">수정</div>
+                        <div class="context__delete">삭제</div>
+                    </div>
                 </div>
                 <div class="context__text">
                     내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
@@ -42,6 +46,18 @@
                     내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
                     내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
                 </div>
+            </div>
+        </div>
+
+        <div class="container__comment">
+            <div class="comment__title">회고</div>
+            <div class="comment__field">
+                <input class="comment__input" type="text" placeholder="회고를 남겨보세요."/>
+                <div class="comment__btn">입력</div>
+            </div>
+            <div class="comment__list">
+                <div class="comment__text">3년이 지나고 다시 보니 이 때가 그립더라.</div>
+                <div class="comment__date">2024. 09. 24 작성</div>
             </div>
         </div>
     </div>

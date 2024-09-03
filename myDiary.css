@@ -29,17 +29,29 @@ a {
 }
 
 .container__nav {
-    height: 112px;
-    width: 1148px;
+    height: 126px;
+    width: 1200px;
+    padding: 0px 26px;
+    background-color: #FCFCFC;
+    border-radius: 16px;
     gap: 10px;
     margin: 24px 0px 42px 0px;
     justify-content: flex-start;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
 }
 
-.nav__tap {
+.nav__tap__bar {
     display: flex;
     flex-direction: row;
     margin-bottom: 32px;
+}
+
+.nav__filter__bar {
+    display: flex;
+    align-items: center;
+    background-color: #FCFCFC;
 }
 
 .nav__filter {
@@ -73,7 +85,7 @@ a {
 }
 
 .content__left__card {
-    width: 800px;
+    width: 820px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -86,6 +98,7 @@ a {
     background-color: #FFF;
     border-radius: 16px;
     box-shadow: 0px 4px 12px 0px #eee;
+    position: relative;
 }
 
 .wrapper__card:hover {
@@ -98,6 +111,17 @@ a {
     filter: grayscale(100%) blur(2px);
     transition: 0.5s;
     transition-timing-function: ease-in;
+    z-index: -1;
+}
+
+.card__delete {
+    width: 40px;
+    height: 40px;
+    background-image: url(./asset/close_outline_light_m.png);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 1;
 }
 
 .card__topic {
@@ -213,6 +237,17 @@ a {
     color: #fff;
     font-weight: 600;
     transition: 0.5s;
+}
+
+.container__floating {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    background-image: url(./asset/up_outline_light_xl.png);
+    border-radius: 100%;
+    box-shadow: 0px 1px 6px 0px #767676;
+    right: 2%;
+    bottom: 2%;
 }
 
 .container__footer {

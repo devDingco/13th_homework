@@ -33,7 +33,6 @@
 
 .container__content {
     width: 1168px;
-    height: 100%;
 }
 
 .content__title {
@@ -66,7 +65,7 @@
     font-weight: 600;
     line-height: 96px;
     margin: 0px 8px;
-    color: #EA5757;
+    color: #767676;
 }
 
 .content__post {
@@ -74,6 +73,7 @@
 }
 
 .post__date, .post__text {
+    font-size: 18px;
     color: #bbb;
     margin-right: 8px;
 }
@@ -83,6 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-bottom: 2px solid #222;
 }
 
 .context__head {
@@ -99,11 +100,17 @@
     font-weight: 600;
 }
 
-.context__edit {
+.context__btn {
+    display: flex;
+    gap: 16px;
+}
+
+.context__edit, .context__delete {
     width: 96px;
-    height: 32px;
+    height: 40px;
+    color: #222;
     background-color: #FCFCFC;
-    border: 2px solid #FFBE98;
+    border: 2px solid #bbb;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -111,12 +118,90 @@
     font-size: 18px;
 }
 
+.context__edit {
+    background-color: #FCFCFC;
+    color: #FFBE98;
+    border: 2px solid #FFBE98;
+}
+
+.context__edit:hover {
+    background-color: #FFBE98;
+    color: #fff;
+    border: 2px solid #FCFCFC;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.context__delete:hover {
+    background-color: #767676;
+    color: #fff;
+    border: 2px solid #FCFCFC;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
 .context__text {
     width: 1152px;
     height: 300px;
     border-radius: 8px;
     background-color: #F2F2F2;
-    font-size: 18px;
+    font-size: 20px;
     padding: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+}
+
+.container__comment {
+    width: 1148px;
+}
+
+.comment__title {
+    margin-top: 24px;
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.comment__field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment__input {
+    width: 1000px;
+    height: 48px;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 20px;
+}
+
+.comment__btn {
+    width: 100px;
+    height: 48px;
+    background-color: #222;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.comment__list {
+    width: 1148px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ddd;
+}
+
+.comment__text {
+    font-size: 20px;
+}
+
+.comment__date {
+    font-size: 18px;
+    color: #bbb;
 }

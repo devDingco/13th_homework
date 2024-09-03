@@ -107,6 +107,7 @@ function makeDiaryList(diary) {
 `
 <div class="wrapper__card">
     <a href="./depth01/myDiary_detail.html?page=${el.index}">
+        <div class="card__delete"></div>
         <div class="card__img">
             <img src="./asset/card__${el.mood}.png">
         </div>
@@ -169,5 +170,18 @@ function activeFilter (event) {
         }
     }
 }
+
+window.addEventListener('scroll', () => {
+    window.scrollY > 400 ?
+    document.querySelector(".nav__filter").style = "background-color: #222; color: #fff; transition: 0.2s;" :
+    document.querySelector(".nav__filter").style = "background-color: #fff; color: #222; transition: 0.2s;"
+})
+
+document.querySelector(".container__floating").addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+})
+
+document.querySelector(".card__delete")
+console.log ( document.querySelector(".card__delete") )
 
 document.getElementById("diaryButton").addEventListener('click', makeDiaryData);

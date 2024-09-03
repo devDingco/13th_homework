@@ -15,11 +15,11 @@
         </div>
 
         <div class="container__nav">
-            <div class="nav__tap">
+            <div class="nav__tap__bar">
                 <div class="tap__active">일기보관함</div>
                 <div class="tap__disabled">사진보관함</div>
             </div>
-            <div class="nav__filter">
+            <div class="nav__filter__bar">
                 <select class="nav__filter" onchange="activeFilter(event)">
                     <option name="filter" value="all">전체</option>
                     <option name="filter" value="happy">행복해요</option>
@@ -34,6 +34,7 @@
         <div class="container__content">
             <div class="content__left__card">
                 <div class="wrapper__card">
+                    <div class="card__delete"></div>
                     <div class="card__img">
                         <img src="./asset/card__happy.png">
                     </div>
@@ -67,6 +68,8 @@
                 <div class="diary__button" id="diaryButton">등록하기</div>
             </div>
         </div>
+
+        <div class="container__floating"></div>
 
         <div class="container__footer">
             <div class="wrapper__footer">
