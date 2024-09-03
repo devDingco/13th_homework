@@ -3,6 +3,9 @@ const part = new URLSearchParams(queryString);
 const id = part.get("id");
 const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
 const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0];
+let diaryEntries = [];
+let commentEntries;
+let index;
 
 const diary = {
   id: diaryDetailContent.id,
@@ -33,9 +36,12 @@ const createHtml = (diary) => {
         <div class="content_label">내용</div>
         <div class="content">${diary.content}</div>
       </div>
+      <div class="diary_action_container">
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
       </a>
+        <button class="modification_Btn">삭제</button>
+      </div>
   `;
 
   const mainFrame = document.getElementById("main_frame");
@@ -44,4 +50,48 @@ const createHtml = (diary) => {
   return main.appendChild(mainFrame);
 };
 
+const createCommentHtml = (commentEntries) => {
+  const commentCard = `
+    <div class="comments_container">
+      <div class="comment_content">${commentEntries.commentValue}</div>
+      <div class="comment_date">${commentEntries.date}</div>
+      <div class="comment_divider"></div>
+    </div>
+  `
+  const commentBox = document.createElement("div");
+  commentBox.innerHTML = commentCard;
+  const commentsContainerBox = document.getElementById("comments_container_box");
+  return commentsContainerBox.appendChild(commentBox);
+}
+
+const addComment = (date) => {
+  const comment = document.getElementById("comment_input")
+  const commentValue = comment.value
+  commentEntries = {commentValue, date}
+  diaryEntries[index].commentList.push({ ...commentEntries })
+  diaryDetailContentList.splice(index, 1, diaryEntries[index])
+  localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
+  comment.value = null;
+  createCommentHtml(commentEntries)
+}
+
+const setupCommentInput = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, 0);
+  const day = String(date.getDate()).padStart(2, 0);
+  const commentRegistrationDate = `[${year}. ${month}. ${day}]`;
+  addComment(commentRegistrationDate)
+};
+
+diaryEntries = diaryDetailContentList
+  diaryDetailContentList.map((e, i) => {
+    if(e.id == id) index = i
+  })
+diaryDetailContentList[index].commentList.map((comment) => {
+  createCommentHtml(comment);
+})
+
 createHtml(diary);
+
+

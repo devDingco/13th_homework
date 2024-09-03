@@ -6,6 +6,15 @@ let diaryEntry = {};
 let currentFilteredMood = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+  const filterCheckbox = document.getElementById("filterCheckbox");
+
+  scroll > 0
+    ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
+    : (filterCheckbox.style = "background-color: #FFF");
+});
+
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`);
   const text = document.getElementsByClassName("diary_title_window")[0];
@@ -41,23 +50,30 @@ const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
     appendDiaryEntry(diaryCard);
   } else if (currentFilteredMood == diaryEntry.mood) {
     appendDiaryEntry(diaryCard);
-    currentFilteredMood = "";
   } else {
     window.location.href = "./diary.html";
     appendDiaryEntry(diaryCard);
-    currentFilteredMood = "";
   }
 };
 
 const createHtml = (diaryEntry) => {
   const diaryCard = `
-    <a href="./diary-detail.html?id=${diaryEntry.id}" class="diary_detail">
+    <a href="./diary-detail.html?id=${diaryEntry.id}#comments_container_box" class="diary_detail">
       <div class="diary_entry">
-          <img
-            class="diary_cover"
-            src="./image/${diaryEntry.imageName}.png"
-            width="774px"
-          />
+          <div>
+            <img
+              class="diary_cover"
+              src="./image/${diaryEntry.imageName}.png"
+              width="774px"
+            />
+            <div id="delete_button" onclick="deleteDiaryEntry(event)">
+            <img
+              class="${diaryEntry.id}"
+              src="./image/delete_button.png"
+              width:"24px"
+            />
+            </div>
+          </div>
           <div class="diary_entry_summary">
             <div class="emotion_date_info">
               <div class="${diaryEntry.color}">${diaryEntry.mood}</div>
@@ -148,6 +164,7 @@ const registerDiary = () => {
   if (text.value == "" || textarea.value == "" || mood.length == 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
+    diaryEntry.commentList = [];
     getContent(diaryEntry);
   }
 };
@@ -165,10 +182,10 @@ storedDiaryList.map((diary) => {
   createHtml(storedDiary);
 });
 
-const listDiariesByMood = (filteredDiaries) => {
+const updateDiaryList = (diaryList) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
-  filteredDiaries.map((diary) => createHtml(diary));
+  diaryList.map((diary) => createHtml(diary));
 };
 
 const getDiariesByMood = (selectedMood) => {
@@ -182,13 +199,30 @@ const getDiariesByMood = (selectedMood) => {
     );
   }
 
-  listDiariesByMood(filteredDiaries);
+  updateDiaryList(filteredDiaries);
 };
 
 const onClickMood = (e) => {
   const selectedMood = e.target.innerText;
   currentFilteredMood = selectedMood;
   getDiariesByMood(selectedMood);
+};
+
+const deleteDiaryEntry = (event) => {
+  event.preventDefault();
+  let index;
+  const id = event.target.className;
+  const diaryList = JSON.parse(localStorage.getItem("diaryList"));
+  diaryList.map((e, i) => {
+    if (e.id == id) index = i;
+  });
+  storedDiaryList.splice(index, 1);
+  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
+  updateDiaryList(storedDiaryList)
+};
+
+const upScroll = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 moodList.addEventListener("click", onClickMood);
