@@ -41,8 +41,10 @@ function onUpdatePost() {
     resultObject.title = titleElement.value;
     resultObject.mood = selectedRadioSiblingElement.innerText;
 
-    dailyArray[queryId] = resultObject;
-    localStorage.setItem("dailyArray", JSON.stringify(dailyArray));
+    const changeArray = dailyArray.map((daily) =>
+        daily.id === Number(queryId) ? resultObject : daily
+    );
+    localStorage.setItem("dailyArray", JSON.stringify(changeArray));
 
     history.back();
 }

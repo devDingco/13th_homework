@@ -14,6 +14,7 @@
                         title: "타이틀 영역입니다.",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/happy.png`,
+                        comments: [],
                     },
                     {
                         id: 1,
@@ -23,6 +24,7 @@
                         title: "타이틀 영역입니다.",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/sad.png`,
+                        comments: [],
                     },
                     {
                         id: 2,
@@ -32,6 +34,7 @@
                         title: "타이틀영역입니다.2131232132131231232131221312321312312",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/surprise.png`,
+                        comments: [],
                     },
                     {
                         id: 3,
@@ -41,6 +44,7 @@
                         title: "타이틀 영역입니다.",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/etc.png`,
+                        comments: [],
                     },
                     {
                         id: 4,
@@ -50,6 +54,7 @@
                         title: "타이틀 영역입니다.",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/angry.png`,
+                        comments: [],
                     },
                 ];
                 const dailyArray = JSON.parse(
@@ -67,6 +72,7 @@
                         const postContainer = document.createElement("a");
                         postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
                         postContainer.className = "post-container";
+                        postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
         <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
         <div class="post-title">
@@ -74,15 +80,18 @@
             <div class="post-date">${resultObject.date}</div>
         </div>
         <div class="post-content">${resultObject.title}</div>
+        <button class="post-delete" onclick="onClickDelete(event)">X</button>
     `;
 
                         parentElement.appendChild(postContainer);
                     });
+                    localStorage.setItem("idx", 5);
                 } else {
                     dailyArray.map((resultObject, index) => {
                         const postContainer = document.createElement("a");
                         postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
                         postContainer.className = "post-container";
+                        postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
         <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
         <div class="post-title">
@@ -90,10 +99,12 @@
             <div class="post-date">${resultObject.date}</div>
         </div>
         <div class="post-content">${resultObject.title}</div>
+        <button class="post-delete" onclick="onClickDelete(event)">X</button>
     `;
 
                         parentElement.appendChild(postContainer);
                     });
+                    localStorage.setItem("idx", dailyArray.length);
                 }
             });
         </script>
@@ -115,7 +126,7 @@
                         id="select-post"
                         onchange="onChangeSelected(event)"
                     >
-                        <option disabled selected>v 전체</option>
+                        <option disabled selected>전체</option>
                         <option value="happy">행복해요</option>
                         <option value="sad">슬퍼요</option>
                         <option value="surprise">놀랐어요</option>
@@ -214,6 +225,20 @@
                             </button>
                         </div>
                     </div>
+                    <div class="floating-button" onclick="onClickUp()">
+                        <svg
+                            width="19"
+                            height="10"
+                            viewBox="0 0 19 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M9.10145 2.61068L2.0598 9.65232C1.82029 9.89183 1.53687 10.0076 1.20953 9.99961C0.882202 9.99163 0.598779 9.86788 0.359268 9.62837C0.119756 9.38886 0 9.10544 0 8.7781C0 8.45077 0.119756 8.16735 0.359268 7.92784L7.73623 0.574828C7.92784 0.383219 8.1434 0.239511 8.38291 0.143707C8.62242 0.0479021 8.86193 0 9.10145 0C9.34096 0 9.58047 0.0479021 9.81998 0.143707C10.0595 0.239511 10.2751 0.383219 10.4667 0.574828L17.8436 7.95179C18.0831 8.1913 18.1989 8.47073 18.1909 8.79008C18.1829 9.10943 18.0592 9.38886 17.8197 9.62837C17.5802 9.86788 17.2967 9.98764 16.9694 9.98764C16.6421 9.98764 16.3587 9.86788 16.1191 9.62837L9.10145 2.61068Z"
+                                fill="#5F6368"
+                            />
+                        </svg>
+                    </div>
                 </div>
             </article>
         </main>
@@ -228,4 +253,7 @@
     <script src="./utils/onClickDailyInfor.js"></script>
     <script src="./utils/onInputButtonChange.js"></script>
     <script src="./utils/onChangeSelected.js"></script>
+    <script src="./utils/onClickDelete.js"></script>
+    <script src="./utils/onClickUp.js"></script>
+    <script src="./utils/isScroll.js"></script>
 </html>

@@ -46,12 +46,14 @@ function pushDaily() {
     const resultObject = postObject.find(
         (post) => post.moodEng == selectedRadioElement.id
     );
+    let index = localStorage.getItem("idx");
 
     // 이후 mood, title, content, 고유의 key인 id 할당
     resultObject.mood = selectedRadioSiblingElement.innerText;
     resultObject.title = titleElement.value;
     resultObject.content = contentElement.value;
-    resultObject.id = dailyArray.length;
+    resultObject.id = index++;
+    resultObject.comments = [];
 
     // 이후 부모 element를 추출해서 자식들 중 제일 뒤에 append
     const parentElement = document.getElementById("post");
@@ -59,6 +61,7 @@ function pushDaily() {
     const postContainer = document.createElement("a");
     postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
     postContainer.className = "post-container";
+    postContainer.id = `${resultObject.id}`;
     postContainer.innerHTML = `
         <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
         <div class="post-title">
@@ -66,6 +69,7 @@ function pushDaily() {
             <div class="post-date">${resultObject.date}</div>
         </div>
         <div class="post-content">${resultObject.title}</div>
+        <button class="post-delete" onclick="onClickDelete(event)">X</button>
     `;
 
     parentElement.appendChild(postContainer);
@@ -73,4 +77,5 @@ function pushDaily() {
     // 부모 element append 한 이후 dailyArray에 push
     dailyArray.push(resultObject);
     localStorage.setItem("dailyArray", JSON.stringify(dailyArray));
+    localStorage.setItem("idx", index);
 }

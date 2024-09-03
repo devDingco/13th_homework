@@ -10,7 +10,7 @@
 
                 const dailyArray = JSON.parse(
                     localStorage.getItem("dailyArray")
-                );
+                ).filter((daily) => Number(daily.id) === Number(queryId));
 
                 const mainElement = document.getElementsByTagName("main")[0];
                 const articleElement = document.createElement("article");
@@ -24,7 +24,7 @@
                 name="radio"
                 class="input-radio"
                 id="happy"
-                ${dailyArray[queryId].moodEng == "happy" ? "checked" : null}
+                ${dailyArray[0].moodEng == "happy" ? "checked" : null}
             />
             <label for="">행복해요</label>
         </div>
@@ -34,7 +34,7 @@
                 name="radio"
                 class="input-radio"
                 id="sad"
-                ${dailyArray[queryId].moodEng == "sad" ? "checked" : null}
+                ${dailyArray[0].moodEng == "sad" ? "checked" : null}
             />
             <label for="">슬퍼요</label>
         </div>
@@ -44,7 +44,7 @@
                 name="radio"
                 class="input-radio"
                 id="surprise"
-                ${dailyArray[queryId].moodEng == "surprise" ? "checked" : null}
+                ${dailyArray[0].moodEng == "surprise" ? "checked" : null}
             />
             <label for="">놀랐어요</label>
         </div>
@@ -54,7 +54,7 @@
                 name="radio"
                 class="input-radio"
                 id="angry"
-                ${dailyArray[queryId].moodEng == "angry" ? "checked" : null}
+                ${dailyArray[0].moodEng == "angry" ? "checked" : null}
             />
             <label for="">화나요</label>
         </div>
@@ -64,7 +64,7 @@
                 name="radio"
                 class="input-radio"
                 id="etc"
-                ${dailyArray[queryId].moodEng == "etc" ? "checked" : null}
+                ${dailyArray[0].moodEng == "etc" ? "checked" : null}
             />
             <label for="">기타</label>
         </div>
@@ -78,7 +78,7 @@
                 type="text"
                 id="titleId"
                 class="input-title"
-                value="${dailyArray[queryId].title}"
+                value="${dailyArray[0].title}"
             />
         </div>
         <div class="daily-title">
@@ -87,7 +87,7 @@
                 id="contentId"
                 class="input-title input-content"
                 
-            >${dailyArray[queryId].content}</textarea>
+            >${dailyArray[0].content}</textarea>
         </div>
     </div>
     <div class="button-container">
