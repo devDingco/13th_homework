@@ -7,9 +7,17 @@
   --font-color-6: #ababab;
   --font-color-7: #919191;
   --font-color-8: #1c1c1c;
+  --font-color-9: #299c00;
 
   --bg-color-1: #f2f2f2;
   --bg-color-2: #c7c7c7;
+  --bg-color-3: rgba(58, 181, 15, 0.05);
+
+  --mood-color-1: #e4fdff;
+  --mood-color-2: #fff9e4;
+  --mood-color-3: #e0e0e0;
+  --mood-color-4: #ffe4e5;
+  --mood-color-5: #ead2f9;
 
   --border-color-1: #d4d3d3;
   --border-color-2: #c7c7c7;
@@ -42,6 +50,33 @@ ul {
 
 button {
   cursor: pointer;
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.scrollBox {
+  width: var(--width);
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  bottom: 10%;
+  z-index: 20;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: flex-end;
+}
+.scrollUpBtn {
+  background: none;
+  border: none;
 }
 
 .loaderBox {
@@ -79,6 +114,7 @@ body {
   height: auto;
   min-height: 100%;
   padding-bottom: var(--footerHeight);
+  scroll-behavior: smooth;
 }
 
 header,
@@ -129,7 +165,7 @@ nav {
   display: flex;
   gap: 32px;
   flex-direction: column;
-  padding: 24px 0 42px;
+  padding-top: 24px;
 
   ul.navMenu {
     display: flex;
@@ -144,98 +180,6 @@ nav {
         font-weight: bold;
         border-bottom: 2px solid #000;
       }
-    }
-  }
-
-  .navBottom {
-    display: flex;
-    justify-content: space-between;
-
-    .filterSearchBox {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-
-      .diaryFilter {
-        width: 120px;
-        height: 48px;
-        border: 1px solid var(--border-color-2);
-        padding: 16px 12px;
-        border-radius: 8px;
-        background-image: url("../img/down_fill_light_m.svg");
-        background-repeat: no-repeat;
-        background-position: 90% center;
-
-        -o-appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-      }
-
-      .searchBox {
-        width: 320px;
-        height: 48px;
-        border-radius: 48px;
-        background-image: url("../img/search_outline_light_m.svg");
-        background-position: 12px center;
-        background-repeat: no-repeat;
-        border: 1px solid var(--border-color-2);
-        padding: 0px 20px 0px 48px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        overflow: hidden;
-
-        select {
-          width: 100px;
-          border: none;
-          padding-left: 5px;
-          padding-right: 24px;
-          border-radius: 8px;
-          background-image: url("../img/down_fill_light_m.svg");
-          background-repeat: no-repeat;
-          background-position: 90% center;
-          font-size: var(--font-size-1);
-
-          -o-appearance: none;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        input[type="search"] {
-          border: none;
-          width: 100%;
-          height: 100%;
-
-          &::placeholder {
-            color: var(--font-color-6);
-            font-size: var(--font-size-1);
-            font-weight: 500;
-          }
-          &:focus {
-            outline: none;
-          }
-        }
-      }
-    }
-
-    .diaryWritePopBtn {
-      width: 110px;
-      height: 48px;
-      background-color: #000;
-      color: #fff;
-      border-radius: 8px;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: var(--font-size-2);
-      line-height: 24px;
     }
   }
 }

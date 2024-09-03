@@ -32,9 +32,33 @@
       <div class="buttonWrap">
         <!-- <button class="whiteBtn">목록</button> -->
         <button class="whiteBtn editBtn" onclick="editBtn()">수정</button>
-        <button class="whiteBtn" onclick="deleteBtn()">삭제</button>
+        <button class="whiteBtn" onclick="deleteBtn(event,queryStringGet())">
+          삭제
+        </button>
+      </div>
+      <div class="commentWrap">
+        <label for="commentInput">
+          회고
+          <div class="commentInputWrap">
+            <input
+              id="commentInput"
+              type="text"
+              placeholder="회고를 남겨보세요."
+              onkeypress="commentAddEnter(event)"
+            />
+            <button class="blackBtn" onclick="commentAdd()">입력</button>
+          </div>
+        </label>
+        <div id="commentListWrap" class="commentList"></div>
+        <!-- <ul>
+          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+        </ul> -->
       </div>
     </div>
+
+    <div class="scrollBox"></div>
 
     <footer></footer>
     <script src="./js/index.js"></script>

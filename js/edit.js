@@ -2,8 +2,9 @@
 
 // 수정 상세페이지 내용 셋팅용
 const diaryEditData = () => {
-  const diaryId = queryStringGet();
-  const diary = diaryArr[diaryId];
+  const diaryQueryId = queryStringGet();
+  const diary = diaryArr.find((diary) => diary.id === diaryQueryId); // 수정할 일기 데이터를 아이디 값으로 찾아옴
+  // console.log(diary);
 
   const moodTypeRadio = document.querySelectorAll('input[name="moodType"]');
   const diaryTitle = document.querySelector('.diaryTitle');
