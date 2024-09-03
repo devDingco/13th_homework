@@ -42,11 +42,11 @@ const renderData = (array) => {
       ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
       </div>
 
-    <div class="panel-delete">
-    <button class="button-item-delete">
-      <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
-    </button>
-  </div>
+      <div class="panel-delete">
+        <button class="button-item-delete">
+          <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
+        </button>
+      </div>
       <div class="panel-info">
         <div class="flexbox justify-between">
           <span class="badge-emoticon ${el.emotion}">
@@ -71,8 +71,6 @@ const renderData = (array) => {
 const showDiary = () => {
   const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
-
-  const diaryHTML = renderData(diaryList);
 
   if (diaryList.length !== 0) {
     const diaryHTML = renderData(diaryList);
