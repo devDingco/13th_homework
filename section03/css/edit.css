@@ -1,5 +1,13 @@
 @import './common.css';
 
+.edit {
+  padding-bottom: var(--gap-sm);
+}
+
+.edit .form-area {
+  padding: 0 0 var(--gap-sm) 0;
+}
+
 .actions {
   gap: var(--gap-sm);
 }
