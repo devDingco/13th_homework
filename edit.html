@@ -10,6 +10,12 @@
 </head>
 <body>
     <main>
+        <template id="comment-template">
+            <li class="comment-item">
+                <span class="comment-content">comment1</span>
+                <span class="comment-date">2014.12.02</span>
+            </li>
+        </template>
         <div class="edit-header">
             <p class="title"></p>
         </div>
@@ -51,10 +57,25 @@
             <button id="edit-button" form="edit-form">
                 수정
             </button>
+            <button id="delete-button">
+                삭제
+            </button>
             <button id="cancel-button">
                 취소
             </button>
         </div>
+        <hr class="border">
+        <section class="comment-section">
+            <ul class="comment-list">
+            </ul>
+            <label class="sticky-input">
+                <form id="comment-form">
+                    <input class="edit-title" type="text" name="title" placeholder="댓글을 등록할 수 있어요.">
+                    <button form="comment-form" class="comment-btn">댓글등록</button>
+                </form>
+            </label>
+       </section>
     </main>
+
 </body>
 </html>

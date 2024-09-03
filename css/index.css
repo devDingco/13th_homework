@@ -2,6 +2,7 @@
     --gray : rgba(0, 0, 0, 0.384);
     --lightgray : rgba(155, 149, 149, 0.719);
     --subtlegray: rgba(240, 240, 240, 0.89);
+    --reverselightgray: rgba(calc(255 - 155), calc(255 - 149), calc(255 - 149), calc(1 - 0.719));
 }
 
 *,
@@ -390,5 +391,33 @@ li.diary-listitem.flexchild::marker {
 
 a.anchor-nodeco {
     all: unset;
+    cursor: grab;
+}
+
+i.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+i.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+div.scroll-up-btn {
+    position: fixed;
+    right: 10vw;
+    bottom: 10vh;
+    
+}
+
+div.scroll-up-btn > i {
+    margin-inline-start: 2.5rem;
+}
+
+div.scroll-up-btn > p {
+    color: var(--lightgray);
     cursor: grab;
 }

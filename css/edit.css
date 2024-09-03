@@ -81,3 +81,44 @@ div.edit-footer
     display: flex;
     justify-content: space-between;
 }
+
+hr.border
+{
+    margin-block: 2rem;
+}
+
+li.comment-item
+{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    border-bottom : 0.1rem solid lightgray;
+}
+
+span.comment-date
+{
+    color: lightgray;
+}
+
+form#comment-form
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+input.edit-title:focus
+{
+    outline: 0.1rem solid orange;
+}
+
+input:focus
+{
+    outline: none;
+}
+
+button[form="comment-form"]
+{
+    font-size: 0.5rem;
+    text-wrap: nowrap;
+}

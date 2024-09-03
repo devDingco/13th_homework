@@ -24,7 +24,7 @@ const translationMap = {
 });
 
 JSON.parse(localStorage.getItem("diaryArray")).forEach(element => {
-    addDiaryUI(element);
+    if (element !== null) addDiaryUI(element);
 });
 
 document.querySelector("#adding-form").addEventListener(
@@ -117,3 +117,17 @@ document.querySelector("select#dropdownEmotionFilter").addEventListener("change"
     }
 });
 
+const diaryListHTML = document.querySelector("ul#diarylist");
+diaryListHTML.addEventListener("scroll", (e) => {
+    if (diaryListHTML.scrollTop > 0) {
+        console.log("dfa")
+        document.querySelector("select#dropdownEmotionFilter").style = "background: var(--reverselightgray)"
+    } else {
+        document.querySelector("select#dropdownEmotionFilter").style = "background: var(--lightgray)"
+    }
+});
+
+const scrollTopButtonHTML = document.querySelector("div.scroll-up-btn");
+scrollTopButtonHTML.addEventListener("click", (e) => {
+    diaryListHTML.scrollTo({top: 0, behavior: "smooth"});
+});
