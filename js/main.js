@@ -1,5 +1,5 @@
 
-// 다이어리 리스트 노출 함수
+// !다이어리 리스트 노출 함수
 const diaryListSet = (arr) => {
   const diaryElement = document.querySelector(".diaryList");
 
@@ -28,7 +28,7 @@ const diaryListSet = (arr) => {
     <a href="./detail.html?diaryId=${diaryId}&#commentListWrap">
     <button class="closeBtn" onclick="deleteBtn(event,${diaryId})"><img src="../img/close_outline_light_m.svg" alt="일기 삭제 버튼"></button>
       <figure>
-        <div class="imgBox_${moodColorNum}"><img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" /></div>
+        <div class="imgBox imgBox_${moodColorNum}"><img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" /></div>
         <figcaption>
           <div class="infoTop">
             <span class="moodText moodTextType${moodColorNum}">${moodType}</span>
@@ -42,26 +42,25 @@ const diaryListSet = (arr) => {
     `;
   }).join("");
 }
-
 diaryListSet(diaryArr);
 
-// 일기 내용 작성 확인에 따른 저장 버튼 활성화 함수
-const textCheck = (e) => {
-  const diaryTitle = document.querySelector(".diaryTitle").value;
-  // const diaryDesc = document.querySelector(".diaryDesc").value;
-  const diaryDesc = editor.getText();
-  if (diaryTitle.length > 0 && diaryDesc.length > 0) {
-    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
-    diaryWriteBtn.classList.add("active");
-    diaryWriteBtn.disabled = false;
-  } else {
-    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
-    diaryWriteBtn.classList.remove("active");
-    diaryWriteBtn.disabled = true;
-  }
-}
+// // !일기 내용 작성 확인에 따른 저장 버튼 활성화 함수
+// const textCheck = (e) => {
+//   const diaryTitle = document.querySelector(".diaryTitle").value;
+//   // const diaryDesc = document.querySelector(".diaryDesc").value;
+//   const diaryDesc = editor.getText();
+//   if (diaryTitle.length > 0 && diaryDesc.length > 0) {
+//     const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
+//     diaryWriteBtn.classList.add("active");
+//     diaryWriteBtn.disabled = false;
+//   } else {
+//     const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
+//     diaryWriteBtn.classList.remove("active");
+//     diaryWriteBtn.disabled = true;
+//   }
+// }
 
-// 일기 저장 함수
+// !일기 저장 함수
 const diarySave = () => {
 
   const moodTypeValue = document.querySelector("input[name='moodType']:checked").value;
@@ -95,9 +94,7 @@ const diarySave = () => {
 
 }
 
-
-
-// 일기 필터에 따른 노출 처리 함수
+// !일기 필터에 따른 노출 처리 함수
 const moodFilter = (optionValue) => {
   // // select option 값 가져오기
   // const moodType = document.querySelector(".diaryFilter option:checked").value;
@@ -117,7 +114,7 @@ const moodFilter = (optionValue) => {
 }
 
 
-// 검색 필터 옵션 선택에 따른 처리 함수
+// !검색 필터 옵션 선택에 따른 처리 함수
 const searchFilter = (event) => {
   const searchType = event.target.parentNode.querySelector(".searchFilter li.active").dataset.value; // 검색 옵션 값
   const searchValue = event.target.value; // 검색어 값
@@ -147,7 +144,7 @@ const searchFilter = (event) => {
 }
 
 
-// 스크롤시 필터 고정 관련 스타일 추가 함수
+// !스크롤시 필터 고정 관련 스타일 추가 함수
 const stickyAddStyle = () => {
   const scrollY = window.scrollY;
   const stickyEl = document.querySelector('.navBottom')
@@ -160,5 +157,4 @@ const stickyAddStyle = () => {
   }
 
 }
-
 window.addEventListener('scroll', stickyAddStyle);
