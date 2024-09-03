@@ -45,7 +45,10 @@ const JS_삭제버튼추가 = () => {
         삭제버튼.style.cursor = "pointer";
 
         삭제버튼.addEventListener("click", () => {
-            이미지요소.remove();
+          이미지요소.remove();
+          event.stopPropagation();
+
+          alert("삭제되었습니다!")
            
         });
 
@@ -54,9 +57,7 @@ const JS_삭제버튼추가 = () => {
         이미지요소.appendChild(삭제버튼);
         
     });
-    event.stopPropagation();
-
-    alert("삭제되었습니다!")
+   
 };
 
   const JS_일기그리기기능 = () => {
