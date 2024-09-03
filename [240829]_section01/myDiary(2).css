@@ -224,4 +224,31 @@
 
 .filter {
   margin-bottom: 30px;
+  position: sticky;
+  top: 60px;
+}
+
+.container0 {
+  position: relative;
+}
+/* 삭제 아이콘 스타일 추가 */
+.delete-icon {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+  color: black;
+  font-size: 18px;
+  z-index: 10;
+}
+
+/* 플로팅 버튼 스타일 추가 */
+.floating-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  background-color: #3a3838;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
 }
