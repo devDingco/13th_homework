@@ -94,7 +94,6 @@ a {
   max-width: 784px;
   position: relative;
   overflow: visible; /* hidden에서 visible로 변경 */
-  padding: 12px; /* 여백 추가 */
 }
 
 .등록한일기 {
