@@ -43,7 +43,19 @@
                 <button id="cancel_buttion" class="button" onclick="cancelButtonPressed()">취소</button>
                 <button id="update_button" class="button" onclick="updateButtonPressed()">수정하기</button>
             </div>
+            <div class="reminiscence_container">
+                <div class="reminiscence_container_items">
+                    <div class="reminiscence_title">회고</div>
+                    <div class="reminiscence_input_container">
+                        <input disabled id="reminiscence_input_text" type="text" class="reminiscence_text" placeholder="수정중일땐 회고를 작성할 수 없어요." oninput="" >
+                        <button disabled class="reminiscence_input_button" onclick="inputButtonTapped()">입력</button>
+                    </div>
+                </div>
+                <div id="reminiscence_list" class="reminiscence_list_container">
+                </div>
         </section>
+       
+        </div>
     </div>
 </body>
 </html>

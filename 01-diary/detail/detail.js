@@ -52,8 +52,6 @@ const deleteButtonPressed = () => {
     alert(`일기를 삭제했습니다.`)
 }
 
-
-
 const inputButtonTapped = () => {
     const reminiscence = { text: reminiscenceText }
     reminiscenceList.push(reminiscence)
