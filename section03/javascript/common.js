@@ -1,3 +1,5 @@
+let initialScroll = 0;
+
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -12,10 +14,9 @@ window.addEventListener('scroll', () => {
 
   filterElem.classList.add('scrolled');
 
-  const scrolledHeight = window.scrollY;
-  const scrollBar = document.documentElement.clientHeight;
+  const currentScroll = window.scrollY;
 
-  if (scrolledHeight === 0) {
+  if (currentScroll === 0 || initialScroll > currentScroll) {
     filterElem.style = `
         background-color: var(--gray-w);
         color: var(--gray-b);
@@ -23,4 +24,6 @@ window.addEventListener('scroll', () => {
 
     filterElem.classList.remove('scrolled');
   }
+
+  initialScroll = currentScroll;
 });
