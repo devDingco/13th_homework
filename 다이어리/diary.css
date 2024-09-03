@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   max-width: 100%;
-  position: relative;
 }
 .layout {
   display: flex;
@@ -12,8 +11,6 @@
   align-items: center;
   background-color: #fff;
   position: absolute;
-  top: 50%;
-  left: 50%;
 }
 .header_layout {
   display: flex;
@@ -194,8 +191,8 @@ ul li {
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  left: 0rem;
-  top: 2.031rem;
+  left: 1.24rem;
+  top: 3.2rem;
   border-radius: 0.5rem;
   border: none;
   z-index: 100;
@@ -252,10 +249,12 @@ ul li {
   border-radius: 1rem;
   background: #fff;
 }
+.diary_entry_inner {
+  position: relative;
+}
 .diary_cover {
   display: flex;
   height: 17.813rem;
-  padding: 0.75rem;
   align-items: center;
   gap: 0.625rem;
   align-self: stretch;
@@ -566,7 +565,7 @@ ul li {
   position: fixed;
   z-index: 100;
   right: 220px;
-  bottom: 30px
+  bottom: 30px;
 }
 @media (max-width: 48.688rem) {
   .layoutWrapper {
