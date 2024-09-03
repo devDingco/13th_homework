@@ -18,7 +18,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
 nav div {
@@ -40,9 +39,16 @@ nav div span {
 }
 main {
   display: flex;
-  justify-content: center;
-  gap: 24px;
   align-self: stretch;
+  justify-content: center;
+}
+.총상자 {
+  width: 1168px;
+  min-width: 320px;
+  max-width: 1168px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .전체상자 {
   display: flex;
@@ -52,6 +58,7 @@ main {
   align-items: center;
   gap: 24px;
   align-self: stretch;
+  border-bottom: 1px solid var(--Gray-B, #000);
 }
 .기분인풋상자 {
   display: flex;
@@ -229,15 +236,74 @@ main {
     color: #a229ed;
   }
 }
+.삭제버튼 {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
 
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.18px;
+}
+.삭제버튼:hover {
+  cursor: pointer;
+}
 .수정완료버튼:active {
   transform: rotate(-5deg) scale(0.95); /* 클릭 시 기울어짐 및 약간의 축소 효과 */
 }
-
 .수정완료버튼:hover {
   cursor: pointer;
 }
+.회고상자 {
+  width: 1198px;
+  height: 202px;
+  flex-shrink: 0;
+}
+.회고입력까지상자 {
+  display: flex;
+  max-width: 1168px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  align-self: stretch;
+}
+.회고글씨 {
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.18px;
+}
+.입력상자 {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+.입력상자 input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+.입력상자 button {
+  color: var(--Gray-W, #fff);
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.18px;
 
+  height: 48px;
+  width: 51px;
+  padding: 8px 10px;
+
+  border-radius: 8px;
+  background: var(--Gray-B, #000);
+}
 /* 보기 모드 스타일 */
 .view-mode .일기제목 {
   display: flex;
@@ -299,7 +365,29 @@ main {
   display: flex;
   gap: 20px;
 }
-
+.댓글항목 {
+  display: flex;
+  max-width: 1168px;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 12px 0;
+}
+.댓글내용 {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
+.댓글날짜 {
+  color: var(--Gray-Gray-600, #777);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.16px;
+}
 /* 기분별 글자색 스타일을 별도로 분리 */
 .일기기분.행복해요 {
   color: #ea5757;
