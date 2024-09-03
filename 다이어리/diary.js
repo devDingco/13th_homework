@@ -182,10 +182,10 @@ storedDiaryList.map((diary) => {
   createHtml(storedDiary);
 });
 
-const listDiariesByMood = (filteredDiaries) => {
+const updateDiaryList = (diaryList) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
-  filteredDiaries.map((diary) => createHtml(diary));
+  diaryList.map((diary) => createHtml(diary));
 };
 
 const getDiariesByMood = (selectedMood) => {
@@ -199,7 +199,7 @@ const getDiariesByMood = (selectedMood) => {
     );
   }
 
-  listDiariesByMood(filteredDiaries);
+  updateDiaryList(filteredDiaries);
 };
 
 const onClickMood = (e) => {
@@ -218,9 +218,7 @@ const deleteDiaryEntry = (event) => {
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  const article = document.getElementById("article");
-  article.innerHTML = "";
-  storedDiaryList.map((diary) => createHtml(diary));
+  updateDiaryList(storedDiaryList)
 };
 
 const upScroll = () => {
