@@ -71,7 +71,7 @@ const renderReminiscenceList = () => {
     const reminiscenceDOMList = reminiscenceList.map(el => `
         <div class="reminiscence_list_container_items">
             <div class="reminiscence_list_item_text">${el.text}</div>
-            <div class="reminiscence_list_item_date">[${el.date}]</div>
+            <div class="reminiscence_list_item_date">[${diary.date}]</div>
          </div>
          <div class="break_line"></div>`
     ).join("")
