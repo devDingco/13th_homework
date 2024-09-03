@@ -120,6 +120,18 @@
   align-items: center;
 }
 
+body {
+  position: relative;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .header-title {
   font-size: 1.8rem;
   font-weight: var(--weight-bold);
@@ -146,7 +158,7 @@
 
 .scroll-up {
   position: fixed;
-  right: 1px;
+  right: 10px;
   bottom: 32px;
 }
 
