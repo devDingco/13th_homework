@@ -1,6 +1,6 @@
 .editWrap .diaryWrite {
   border: none;
-  width: 100%;
+  max-width: 100%;
   gap: 24px;
   padding: 50px 0;
 }
@@ -26,4 +26,33 @@
 .editWrap .diaryWrite .buttonBox button.blackBtn {
   background-color: #000;
   color: #fff;
+}
+
+.whiteBtn {
+  background-color: #fff;
+  color: var(--font-color-8);
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color-1);
+  border-radius: 8px;
+}
+
+.blackBtn {
+  background-color: var(--font-color-8);
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color-1);
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.grayBtn {
+  background-color: #c7c7c7;
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color-1);
+  border-radius: 8px;
+  white-space: nowrap;
 }/*# sourceMappingURL=edit.css.map */
