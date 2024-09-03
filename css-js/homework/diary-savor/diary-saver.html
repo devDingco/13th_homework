@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Diary Saver</title>
     <link rel="stylesheet" href="./diary-saver.css" />
   </head>
@@ -12,64 +10,94 @@
         <p>00의 다이어리</p>
       </div>
       <div class="banner"><img src="./assets/Rectangle 1.png" /></div>
-      <div class="content">
-        <div class="menu">
-          <button>일기보관함</button>
-          <button>사진보관함</button>
+      <div id="content" class="content">
+        <div class="menubar">
+          <div class="menu">
+            <button>일기보관함</button>
+            <button>사진보관함</button>
+          </div>
+          <div class="tool-bar">
+            <div class="dropdown-tool-bar">
+              <select name="emotions" id="emotions" class="emotions">
+                <option selected disabled>전체</option>
+                <option value="happy">행복해요</option>
+                <option value="sad">슬퍼요</option>
+                <option value="suprise">놀랐어요</option>
+                <option value="angry">화나요</option>
+                <option value="etc">기타</option>
+              </select>
+            </div>
+            <div></div>
+          </div>
         </div>
         <div class="main-container">
           <div class="board">
-            <div id="board-post-line" class="board-post-line">
-          </div>
-          <div class="sidebar">
-            <p class="sidebar-title">📍 일기쓰기</p>
-            <div class="ask-emotion">
-              <p>오늘 기분은 어땠나요?</p>
-              <div class="radio-emotion">
-                <div class="radio-emotion-element">
-                  <input id="happy" name="side-emotion" type="radio" value="happy" checked oninput="sidebarEmpty()" />
-                  <label for="happy">행복해요</label>
-                </div>
-                <div class="radio-emotion-element">
-                  <input id="sad" name="side-emotion" type="radio" value="sad" oninput="sidebarEmpty()" />
-                  <label for="sad">슬퍼요</label>
-                </div>
-                <div class="radio-emotion-element">
-                  <input id="suprise" name="side-emotion" type="radio" value="suprise" oninput="sidebarEmpty()" />
-                  <label for="suprise">놀랐어요</label>
-                </div>
-                <div class="radio-emotion-element">
-                  <input id="angry" name="side-emotion" type="radio" value="angry" oninput="sidebarEmpty()" />
-                  <label for="angry">화나요</label>
-                </div>
-                <div class="radio-emotion-element">
-                  <input id="etc" name="side-emotion" type="radio" value="etc" oninput="sidebarEmpty()" />
-                  <label for="etc">기타</label>
+            <div id="board-post-line" class="board-post-line"></div>
+            <div class="sidebar">
+              <p class="sidebar-title">📍 일기쓰기</p>
+              <div class="ask-emotion">
+                <p>오늘 기분은 어땠나요?</p>
+                <div class="radio-emotion">
+                  <div class="radio-emotion-element">
+                    <input id="happy" name="side-emotion" type="radio" value="happy" checked oninput="sidebarEmpty()" />
+                    <label for="happy">행복해요</label>
+                  </div>
+                  <div class="radio-emotion-element">
+                    <input id="sad" name="side-emotion" type="radio" value="sad" oninput="sidebarEmpty()" />
+                    <label for="sad">슬퍼요</label>
+                  </div>
+                  <div class="radio-emotion-element">
+                    <input id="suprise" name="side-emotion" type="radio" value="suprise" oninput="sidebarEmpty()" />
+                    <label for="suprise">놀랐어요</label>
+                  </div>
+                  <div class="radio-emotion-element">
+                    <input id="angry" name="side-emotion" type="radio" value="angry" oninput="sidebarEmpty()" />
+                    <label for="angry">화나요</label>
+                  </div>
+                  <div class="radio-emotion-element">
+                    <input id="etc" name="side-emotion" type="radio" value="etc" oninput="sidebarEmpty()" />
+                    <label for="etc">기타</label>
+                  </div>
                 </div>
               </div>
+              <div class="side-editor">
+                <div class="side-title">
+                  <p>제목</p>
+                  <input id="side-title" type="text" placeholder="제목을 입력해주세요" oninput="sidebarEmpty()" />
+                </div>
+                <div class="side-content">
+                  <p>내용</p>
+                  <textarea id="side-content" placeholder="내용을 입력해주세요" oninput="sidebarEmpty()"></textarea>
+                </div>
+              </div>
+              <button id="side-submit-btn" class="side-push-button" disabled onclick="checkSideSubmit()">
+                등록하기
+              </button>
             </div>
-            <div class="side-editor">
-              <div class="side-title">
-                <p>제목</p>
-                <input id="side-title" type="text" placeholder="제목을 입력해주세요" oninput="sidebarEmpty()" />
-              </div>
-              <div class="side-content">
-                <p>내용</p>
-                <textarea id="side-content" placeholder="내용을 입력해주세요" oninput="sidebarEmpty()"></textarea>
-              </div>
-            </div>
-            <button id="side-submit-btn" class="side-push-button" disabled onclick="checkSideSubmit()">등록하기</button>
           </div>
+        </div>
+        <div id="scroll-top" class="scroll-top">
+          <button onclick="scrollToTop()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white" fill-opacity="0.9" />
+              <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#F2F2F2" />
+              <path
+                d="M20.1014 17.6107L13.0598 24.6523C12.8203 24.8918 12.5369 25.0076 12.2095 24.9996C11.8822 24.9916 11.5988 24.8679 11.3593 24.6284C11.1198 24.3889 11 24.1054 11 23.7781C11 23.4508 11.1198 23.1673 11.3593 22.9278L18.7362 15.5748C18.9278 15.3832 19.1434 15.2395 19.3829 15.1437C19.6224 15.0479 19.8619 15 20.1014 15C20.341 15 20.5805 15.0479 20.82 15.1437C21.0595 15.2395 21.2751 15.3832 21.4667 15.5748L28.8436 22.9518C29.0831 23.1913 29.1989 23.4707 29.1909 23.7901C29.1829 24.1094 29.0592 24.3889 28.8197 24.6284C28.5802 24.8679 28.2967 24.9876 27.9694 24.9876C27.6421 24.9876 27.3587 24.8679 27.1191 24.6284L20.1014 17.6107Z"
+                fill="#5F6368"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
-    </div>
+
     <div class="footer">
       <div class="user-info">
         <p class="diary-title">00의 다이어리</p>
         <p class="owner">대표: 00</p>
         <p class="copyright">copyright@2024.00 Co., Ltd.</p>
       </div>
+    </div>
     <script src="./diary-saver.js"></script>
   </body>
 </html>
