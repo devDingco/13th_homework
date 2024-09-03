@@ -14,7 +14,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
 }
 .header_layout {
   display: flex;
@@ -563,13 +562,11 @@ ul li {
   font-weight: 300;
   letter-spacing: -0.009rem;
 }
-.topScrollBox {
-  position: sticky;
-  width: 70rem;
-}
 .topScroll {
-  top: 0;
-  right: -68.125rem;
+  position: fixed;
+  z-index: 100;
+  right: 220px;
+  bottom: 30px
 }
 @media (max-width: 48.688rem) {
   .layoutWrapper {
