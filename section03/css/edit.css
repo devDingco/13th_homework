@@ -1,1 +1,24 @@
 @import './common.css';
+
+.actions {
+  gap: var(--gap-sm);
+}
+
+.actions button {
+  width: 104px;
+  height: 48px;
+  font-size: 1.8rem;
+  border: 1px solid var(--gray-b);
+  border-radius: var(--radius-sm);
+  font-weight: var(--weight-semi-bold);
+}
+
+.button-cancel {
+  color: var(--gray-b);
+  background-color: var(--gray-w);
+}
+
+.button-edit {
+  color: var(--gray-50);
+  background-color: var(--gray-b);
+}
