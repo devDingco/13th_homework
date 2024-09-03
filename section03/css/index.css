@@ -74,6 +74,7 @@
   width: 48.4%;
   transition: all 0.5s ease-out;
   border-radius: var(--radius-md);
+  position: relative;
 }
 
 .panel-item:hover {
@@ -83,6 +84,21 @@
 
 .panel-item:hover .emotion-card {
   filter: blur(2px);
+}
+
+.panel-delete {
+  position: absolute;
+  top: var(--gap-xs);
+  right: var(--gap-xs);
+}
+
+.button-item-delete {
+  width: 24px;
+  height: 24px;
+  background-color: var(--gray-w);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 .emotion-card {

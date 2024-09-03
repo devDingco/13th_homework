@@ -16,6 +16,12 @@ const showDiary = () => {
         ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
         ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
         </div>
+
+      <div class="panel-delete">
+      <button class="button-item-delete">
+        <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
+      </button>
+    </div>
         <div class="panel-info">
           <div class="flexbox justify-between">
             <span class="badge-emoticon ${el.emotion}">
@@ -110,6 +116,12 @@ const filterEmotion = (event) => {
         ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
         ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
         </div>
+
+      <div class="panel-delete">
+      <button class="button-item-delete">
+        <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
+      </button>
+    </div>
         <div class="panel-info">
           <div class="flexbox justify-between">
             <span class="badge-emoticon ${el.emotion}">

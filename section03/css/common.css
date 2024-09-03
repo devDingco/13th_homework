@@ -140,7 +140,7 @@
 }
 
 .scroll-up {
-  position: absolute;
+  position: fixed;
   right: 10px;
   bottom: 32px;
 }
