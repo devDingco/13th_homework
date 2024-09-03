@@ -4,7 +4,14 @@
     padding: 0;
     color: #222;
     font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Pretendard-Regular';
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
 
 .container {
@@ -31,11 +38,11 @@
     margin: 24px 0px;
 }
 
-.container__content {
+.container__body {
     width: 1168px;
 }
 
-.content__title {
+.body__title {
     width: 100%;
     height: 60px;
     font-size: 24px;
@@ -46,16 +53,17 @@
     border-bottom: 2px solid #222;
 }
 
-.content__status {
+.body__status {
     width: 100%;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 8px;
     margin-bottom: 16px;
 }
 
-.content__mood {
+.status__mood {
     display: flex;
     align-items: center;
 }
@@ -68,17 +76,17 @@
     color: #767676;
 }
 
-.content__post {
+.status__post {
     display: flex;
+    gap: 8px;
 }
 
 .post__date, .post__text {
     font-size: 18px;
     color: #bbb;
-    margin-right: 8px;
 }
 
-.content__context {
+.body__content {
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -86,7 +94,7 @@
     border-bottom: 2px solid #222;
 }
 
-.context__head {
+.content__title {
     width: 1152px;
     height: 60px;
     display: flex;
@@ -95,17 +103,17 @@
     margin-bottom: 16px;
 }
 
-.context__title {
+.title__text {
     font-size: 24px;
     font-weight: 600;
 }
 
-.context__btn {
+.title__btn {
     display: flex;
     gap: 16px;
 }
 
-.context__edit, .context__delete {
+.btn__edit, .btn__delete {
     width: 96px;
     height: 40px;
     color: #222;
@@ -118,13 +126,13 @@
     font-size: 18px;
 }
 
-.context__edit {
+.btn__edit {
     background-color: #FCFCFC;
     color: #FFBE98;
     border: 2px solid #FFBE98;
 }
 
-.context__edit:hover {
+.btn__edit:hover {
     background-color: #FFBE98;
     color: #fff;
     border: 2px solid #FCFCFC;
@@ -132,7 +140,7 @@
     transition: 0.2s;
 }
 
-.context__delete:hover {
+.btn__delete:hover {
     background-color: #767676;
     color: #fff;
     border: 2px solid #FCFCFC;
@@ -140,7 +148,7 @@
     transition: 0.2s;
 }
 
-.context__text {
+.content__text {
     width: 1152px;
     height: 300px;
     border-radius: 8px;
@@ -161,12 +169,12 @@
     font-weight: 600;
 }
 
-.comment__field {
+.comment__input {
     display: flex;
     justify-content: space-between;
 }
 
-.comment__input {
+.input__text {
     width: 1000px;
     height: 48px;
     border: 2px solid #bbb;
@@ -175,11 +183,12 @@
     font-size: 20px;
 }
 
-.comment__btn {
+.input__btn {
     width: 100px;
     height: 48px;
-    background-color: #222;
-    color: #fff;
+    background-color: #fcfcfc;
+    color: #222;
+    border: 2px solid #bbb;
     font-size: 20px;
     border-radius: 8px;
     padding: 4px;
@@ -187,6 +196,14 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
+}
+
+.input__btn:hover {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .comment__list {
@@ -197,11 +214,11 @@
     border-bottom: 2px solid #ddd;
 }
 
-.comment__text {
+.list__text {
     font-size: 20px;
 }
 
-.comment__date {
+.list__date {
     font-size: 18px;
     color: #bbb;
 }
