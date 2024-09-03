@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/detail.css" />
+    <link rel="stylesheet" href="./css/comment.css" />
+    <link rel="stylesheet" href="./css/media.css" />
     <title>Document</title>
   </head>
   <body>
-    <header></header>
+    <!-- <header></header>
     <div class="headerBanner"></div>
-    <nav></nav>
+    <nav></nav> -->
+    <h3 class="detailHeaderTop">일기 상세</h3>
     <div class="detailWrap">
       <div class="detailHeader">
         <h2 class="detailTitle"><!--이것은 타이틀 입니다.--></h2>
@@ -36,26 +39,27 @@
           삭제
         </button>
       </div>
-      <div class="commentWrap">
-        <label for="commentInput">
-          회고
-          <div class="commentInputWrap">
-            <input
-              id="commentInput"
-              type="text"
-              placeholder="회고를 남겨보세요."
-              onkeypress="commentAddEnter(event)"
-            />
-            <button class="blackBtn" onclick="commentAdd()">입력</button>
-          </div>
-        </label>
-        <div id="commentListWrap" class="commentList"></div>
-        <!-- <ul>
-          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
-          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
-          <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
-        </ul> -->
-      </div>
+    </div>
+
+    <div class="commentWrap">
+      <label for="commentInput">
+        회고
+        <div class="commentInputWrap">
+          <input
+            id="commentInput"
+            type="text"
+            placeholder="회고를 남겨보세요."
+            onkeypress="commentAddEnter(event)"
+          />
+          <button class="blackBtn" onclick="commentAdd()">입력</button>
+        </div>
+      </label>
+      <div id="commentListWrap" class="commentList"></div>
+      <!-- <ul>
+        <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+        <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+        <li>ㄴㅇㄹㅇㄴ<span class="commentDate">2024.01.01</span></li>
+      </ul> -->
     </div>
 
     <div class="scrollBox"></div>
@@ -63,5 +67,6 @@
     <footer></footer>
     <script src="./js/index.js"></script>
     <script src="./js/detail.js"></script>
+    <script src="./js/comment.js"></script>
   </body>
 </html>
