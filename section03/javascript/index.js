@@ -1,46 +1,81 @@
 let diaryList;
+let initialScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const filterElem = document.querySelector('.filter-emotion');
+
+  filterElem.style = `
+        background-color: var(--gray-b);
+        color: var(--gray-w);
+    `;
+
+  filterElem.classList.add('scrolled');
+
+  const currentScroll = window.scrollY;
+
+  if (currentScroll === 0 || initialScroll > currentScroll) {
+    filterElem.style = `
+        background-color: var(--gray-w);
+        color: var(--gray-b);
+    `;
+
+    filterElem.classList.remove('scrolled');
+  }
+
+  initialScroll = currentScroll;
+});
+
+window.onload = () => {
+  showDiary();
+};
+
+const renderData = (array) => {
+  return array.map(
+    (el, index) => `
+  <li class="panel-item">
+    <a href="./detail.html?number=${index}">
+      <div class="emotion-card">
+      ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
+      ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
+      ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
+      ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
+      ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
+      </div>
+
+    <div class="panel-delete">
+    <button class="button-item-delete">
+      <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
+    </button>
+  </div>
+      <div class="panel-info">
+        <div class="flexbox justify-between">
+          <span class="badge-emoticon ${el.emotion}">
+          ${el.emotion === 'happy' ? '행복해요' : ''}
+            ${el.emotion === 'sad' ? '슬퍼요' : ''}
+            ${el.emotion === 'surprising' ? '놀랐어요' : ''}
+            ${el.emotion === 'angry' ? '화나요' : ''}
+            ${el.emotion === 'etc' ? '기타' : ''}
+            </span>
+          <span class="date">${el.createdAt}</span>
+        </div>
+        <h3 class="panel-title">
+          ${el.title}
+        </h3>
+      </div>
+    </a>
+  </li>
+`
+  );
+};
 
 const showDiary = () => {
   const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
 
-  if (diaryList.length !== 0) {
-    const diaryHTML = diaryList.map(
-      (el, index) => `
-    <li class="panel-item">
-      <a href="./detail.html?number=${index}">
-        <div class="emotion-card">
-        ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
-        ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
-        ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
-        ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
-        ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
-        </div>
+  const diaryHTML = renderData(diaryList);
 
-      <div class="panel-delete">
-      <button class="button-item-delete">
-        <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
-      </button>
-    </div>
-        <div class="panel-info">
-          <div class="flexbox justify-between">
-            <span class="badge-emoticon ${el.emotion}">
-            ${el.emotion === 'happy' ? '행복해요' : ''}
-              ${el.emotion === 'sad' ? '슬퍼요' : ''}
-              ${el.emotion === 'surprising' ? '놀랐어요' : ''}
-              ${el.emotion === 'angry' ? '화나요' : ''}
-              ${el.emotion === 'etc' ? '기타' : ''}
-              </span>
-            <span class="date">${el.createdAt}</span>
-          </div>
-          <h3 class="panel-title">
-            ${el.title}
-          </h3>
-        </div>
-      </a>
-    </li>
-`
-    );
+  if (diaryList.length !== 0) {
+    const diaryHTML = renderData(diaryList);
 
     const diaries = diaryHTML.join('');
     document.querySelector('.panel-list').innerHTML = diaries;
@@ -51,10 +86,6 @@ const showDiary = () => {
 
     document.querySelector('.panel-list').innerHTML = diaryHTML;
   }
-};
-
-window.onload = () => {
-  showDiary();
 };
 
 const saveDiary = () => {
@@ -105,68 +136,7 @@ const filterEmotion = (event) => {
 
   const filteredList = diaryList.filter((el) => el.emotion == convertedTarget);
 
-  const filteredListHTML = filteredList.map(
-    (el, index) => `
-  <li class="panel-item">
-      <a href="./detail.html?number=${index}">
-        <div class="emotion-card">
-        ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
-        ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
-        ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
-        ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
-        ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
-        </div>
-
-      <div class="panel-delete">
-      <button class="button-item-delete">
-        <img src="./assets/images/icon_delete.svg" alt="일기 삭제하기" />
-      </button>
-    </div>
-        <div class="panel-info">
-          <div class="flexbox justify-between">
-            <span class="badge-emoticon ${el.emotion}">
-            ${el.emotion === 'happy' ? '행복해요' : ''}
-              ${el.emotion === 'sad' ? '슬퍼요' : ''}
-              ${el.emotion === 'surprising' ? '놀랐어요' : ''}
-              ${el.emotion === 'angry' ? '화나요' : ''}
-              ${el.emotion === 'etc' ? '기타' : ''}
-              </span>
-            <span class="date">${el.createdAt}</span>
-          </div>
-          <h3 class="panel-title">
-            ${el.title}
-          </h3>
-        </div>
-      </a>
-    </li> 
-  `
-  );
+  const filteredListHTML = renderData(filteredList);
 
   document.querySelector('.panel-list').innerHTML = filteredListHTML.join('');
 };
-
-let initialScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const filterElem = document.querySelector('.filter-emotion');
-
-  filterElem.style = `
-        background-color: var(--gray-b);
-        color: var(--gray-w);
-    `;
-
-  filterElem.classList.add('scrolled');
-
-  const currentScroll = window.scrollY;
-
-  if (currentScroll === 0 || initialScroll > currentScroll) {
-    filterElem.style = `
-        background-color: var(--gray-w);
-        color: var(--gray-b);
-    `;
-
-    filterElem.classList.remove('scrolled');
-  }
-
-  initialScroll = currentScroll;
-});
