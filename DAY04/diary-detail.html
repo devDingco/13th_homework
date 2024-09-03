@@ -15,27 +15,41 @@
     </nav>
     <!-- 작성한 일기 보여지는 공간 -->
     <main>
-      <div class="전체상자">
-        <div class="제목과기분과날짜담는상자">
-          <!-- 일기 제목 불러오기-->
-          <div id="일기제목"></div>
-          <div class="기분과날짜담는상자">
-            <!-- 기분상태 불러오기-->
-            <div id="선택된기분" class="일기기분"></div>
-            <div class="작성일자와작성담는상자">
-              <!-- 작성한 날짜 -->
-              <span id="작성일자"></span>
-              <span class="작성">작성</span>
+      <div class="총상자">
+        <div class="전체상자">
+          <div class="제목과기분과날짜담는상자">
+            <!-- 일기 제목 불러오기-->
+            <div id="일기제목"></div>
+            <div class="기분과날짜담는상자">
+              <!-- 기분상태 불러오기-->
+              <div id="선택된기분" class="일기기분"></div>
+              <div class="작성일자와작성담는상자">
+                <!-- 작성한 날짜 -->
+                <span id="작성일자"></span>
+                <span class="작성">작성</span>
+              </div>
             </div>
           </div>
+          <div class="내용상자">
+            <span>내용</span>
+            <!-- 작성한 내용 불러오기 -->
+            <div id="일기내용"></div>
+          </div>
+          <div class="버튼상자">
+            <button id="수정버튼">수정</button>
+          </div>
         </div>
-        <div class="내용상자">
-          <span>내용</span>
-          <!-- 작성한 내용 불러오기 -->
-          <div id="일기내용"></div>
-        </div>
-        <div class="버튼상자">
-          <button id="수정버튼">수정</button>
+        <div class="회고상자">
+          <div class="회고입력까지상자">
+            <div class="회고글씨">회고</div>
+            <div class="입력상자">
+              <input type="text" placeholder="회고를 남겨보세요." /><button>
+                입력
+              </button>
+            </div>
+          </div>
+          <div class="댓글목록컨테이너"></div>
+          <!-- 여기에 댓글이 추가된다 -->
         </div>
       </div>
     </main>

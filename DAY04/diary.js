@@ -1,7 +1,9 @@
-// 일기 데이터를 저장할 배열
-let 일기목록 = [];
+// 전역 변수 선언
+let 일기목록 = []; // 모든 일기를 저장할 배열
+let 현재필터 = "전체"; // 현재 선택된 필터
+const 페이지당아이템수 = 6; // 한 페이지에 표시할 일기 수
 
-// DOM 요소들을 선택
+// DOM 요소 선택
 const 일기리스트 = document.querySelector(".일기리스트");
 const 기분버튼들 = document.querySelectorAll(
   ".기분인풋상자 input[type='radio']"
@@ -10,14 +12,8 @@ const 제목입력 = document.getElementById("diary-title");
 const 내용입력 = document.getElementById("diary-content");
 const 등록버튼 = document.querySelector(".일기등록하기버튼");
 
-const 페이지당아이템수 = 6; // 한 페이지에 표시할 일기 수
-let 현재페이지 = 1;
-
 // 현재 선택된 기분을 저장할 변수
 let 선택된기분 = "";
-
-// 현재 선택된 필터를 저장할 변수
-let 현재필터 = "전체";
 
 // 로컬 스토리지에서 일기 데이터를 불러오는 함수
 function 로컬스토리지에서불러오기() {
@@ -83,18 +79,11 @@ function 일기등록하기() {
 
   일기목록.push(새일기);
   로컬스토리지에저장하기(); // 새 일기를 로컬 스토리지에 저장
-  현재페이지 = Math.ceil(일기목록.length / 페이지당아이템수);
   일기목록갱신하기();
   입력필드초기화();
 
   console.log("일기가 등록되었습니다.");
   console.log("현재 일기 목록:", 일기목록);
-}
-
-// 필터링 함수
-function 필터링기능(event) {
-  현재필터 = event.target.value;
-  일기목록갱신하기();
 }
 
 // 일기 목록 갱신 함수
@@ -121,12 +110,8 @@ function 일기목록갱신하기() {
     일기리스트.appendChild(안내메시지);
   } else {
     // 일기 요소들을 생성하고 DOM에 추가
-    필터링된일기목록.forEach((일기) => {
-      // 원본 인덱스 찾기
-      const 원본인덱스 = 최신일기목록.findIndex(
-        (원본일기) => 원본일기 === 일기
-      );
-      const 일기요소 = 일기요소만들기(일기, 원본인덱스);
+    필터링된일기목록.forEach((일기, 인덱스) => {
+      const 일기요소 = 일기요소만들기(일기, 인덱스);
       일기리스트.appendChild(일기요소);
     });
 
@@ -146,6 +131,7 @@ function 일기요소만들기(일기, 원본인덱스) {
   일기요소.className = `등록한일기 filled`;
 
   일기요소.innerHTML = `
+    <div class="삭제버튼"><img src="./images/icons/Close outline light.png" /></div>
     <div class="등록한일기">
       <div class="감정표현사진" style="background-image: url('${일기.이미지}')"></div>
       <div class="등록한일기핵심포인트">
@@ -161,7 +147,20 @@ function 일기요소만들기(일기, 원본인덱스) {
   // 원본 인덱스를 데이터 속성으로 저장
   일기요소.dataset.originalIndex = 원본인덱스;
 
-  일기요소.addEventListener("click", () => 일기상세보기(원본인덱스));
+  // 일기 상세보기 이벤트 리스너
+  일기요소.addEventListener("click", (e) => {
+    if (!e.target.closest(".삭제버튼")) {
+      일기상세보기(원본인덱스);
+    }
+  });
+
+  // 삭제 버튼 이벤트 리스너
+  const 삭제버튼 = 일기요소.querySelector(".삭제버튼");
+  삭제버튼.addEventListener("click", (e) => {
+    e.stopPropagation(); // 이벤트 버블링 방지
+    일기삭제하기(원본인덱스);
+  });
+
   return 일기요소;
 }
 
@@ -201,6 +200,54 @@ function 입력필드초기화() {
   console.log("입력 필드가 초기화되었습니다.");
 }
 
+// 일기 삭제 함수
+function 일기삭제하기(원본인덱스) {
+  if (confirm("정말로 이 일기를 삭제하시겠습니까?")) {
+    일기목록.splice(원본인덱스, 1);
+    localStorage.setItem("일기목록", JSON.stringify(일기목록));
+    일기목록갱신하기();
+  }
+}
+
+// 스크롤 이벤트 처리 함수
+function 스크롤이벤트처리() {
+  const 감정필터상자 = document.querySelector(".감정필터");
+  const 위로올리기버튼 = document.getElementById("위로올리기");
+
+  window.addEventListener("scroll", function () {
+    // 스크롤 위치에 따른 필터 배경색 변경
+    if (window.scrollY > 100) {
+      // 100px 이상 스크롤 시
+      감정필터.style.backgroundColor = "#000000";
+      감정필터.style.color = "#ffffff";
+    } else {
+      감정필터.style.backgroundColor = "";
+      감정필터.style.color = "";
+    }
+
+    // 스크롤 위치에 따른 위로 올리기 버튼 표시/숨김
+    if (window.scrollY > 300) {
+      // 300px 이상 스크롤 시
+      위로올리기버튼.style.display = "block";
+    } else {
+      위로올리기버튼.style.display = "none";
+    }
+  });
+
+  // 필터 상자 고정
+  감정필터상자.style.position = "sticky";
+  감정필터상자.style.top = "0";
+  감정필터상자.style.zIndex = "100";
+}
+
+// 위로 올리기 함수
+function 위로올리기() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
 // 등록 버튼에 이벤트 리스너 추가
 등록버튼.addEventListener("click", () => {
   일기등록하기();
@@ -221,4 +268,8 @@ document.addEventListener("DOMContentLoaded", function () {
   로컬스토리지에서불러오기();
   일기목록갱신하기();
   입력필드확인(); // 초기 버튼 상태 설정
+  스크롤이벤트처리(); // 스크롤 이벤트 처리 추가
+
+  // 위로 올리기 버튼에 이벤트 리스너 추가
+  document.getElementById("위로올리기").addEventListener("click", 위로올리기);
 });

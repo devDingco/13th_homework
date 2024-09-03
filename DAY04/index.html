@@ -42,52 +42,65 @@
         <!-- 작성한 일기 카드 -->
         <div class="일기리스트"></div>
         <!-- 일기 작성 칸 -->
-        <div class="일기쓰기">
-          <div class="일기쓰기타이틀">📍 일기 쓰기</div>
-          <div class="기분에답해상자">
-            <span>오늘 기분은 어땠나요?</span>
-            <div class="기분인풋상자">
-              <label
-                ><input type="radio" name="mood" value="행복해요" />
-                행복해요</label
-              >
-              <label
-                ><input type="radio" name="mood" value="슬퍼요" /> 슬퍼요</label
-              >
-              <label
-                ><input type="radio" name="mood" value="놀랐어요" />
-                놀랐어요</label
-              >
-              <label
-                ><input type="radio" name="mood" value="화나요" /> 화나요</label
-              >
-              <label
-                ><input type="radio" name="mood" value="기타" /> 기타</label
-              >
-            </div>
-          </div>
-          <div class="일기작성상자">
-            <div class="일기제목상자">
-              <span>제목</span>
-              <input
-                type="text"
-                id="diary-title"
-                placeholder="제목을 입력해주세요"
-              />
-            </div>
-            <div class="일기내용상자">
-              <span>내용</span>
-              <div class="일기내용인풋겉상자">
-                <textarea
-                  id="diary-content"
-                  type="text"
-                  placeholder="내용을 입력해주세요"
-                ></textarea>
+        <div class="일기쓰기상자">
+          <div class="일기쓰기">
+            <div class="일기쓰기타이틀">📍 일기 쓰기</div>
+            <div class="기분에답해상자">
+              <span>오늘 기분은 어땠나요?</span>
+              <div class="기분인풋상자">
+                <label
+                  ><input type="radio" name="mood" value="행복해요" />
+                  행복해요</label
+                >
+                <label
+                  ><input type="radio" name="mood" value="슬퍼요" />
+                  슬퍼요</label
+                >
+                <label
+                  ><input type="radio" name="mood" value="놀랐어요" />
+                  놀랐어요</label
+                >
+                <label
+                  ><input type="radio" name="mood" value="화나요" />
+                  화나요</label
+                >
+                <label
+                  ><input type="radio" name="mood" value="기타" /> 기타</label
+                >
               </div>
             </div>
+            <div class="일기작성상자">
+              <div class="일기제목상자">
+                <span>제목</span>
+                <input
+                  type="text"
+                  id="diary-title"
+                  placeholder="제목을 입력해주세요"
+                />
+              </div>
+              <div class="일기내용상자">
+                <span>내용</span>
+                <div class="일기내용인풋겉상자">
+                  <textarea
+                    id="diary-content"
+                    type="text"
+                    placeholder="내용을 입력해주세요"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <!-- 등록하기 버튼 -->
+            <button id="registerButton" class="일기등록하기버튼">
+              등록하기
+            </button>
           </div>
-          <!-- 등록하기 버튼 -->
-          <button id="registerButton" class="일기등록하기버튼">등록하기</button>
+          <div id="위로올리기" onclick="위로올리기()">
+            <img
+              src="./images/icons/Up outline light xl.png"
+              width="40px"
+              height="40px"
+            />
+          </div>
         </div>
       </div>
     </main>
