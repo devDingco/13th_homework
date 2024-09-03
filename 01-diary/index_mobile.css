@@ -20,7 +20,7 @@
 
     .contents_container {
         /* display: contents; */
-        padding: 0px 20px 0px 20px;
+        padding: 0px 1.25rem 0px 1.25rem;
     }
 
     .contents_left_item {
@@ -62,7 +62,7 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        column-gap: 20px;
+        column-gap: 1.25rem;
     }
 
     .diary_write_items {
