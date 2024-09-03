@@ -25,7 +25,7 @@
     </div>
     <div class="selectcontainer">
         <div class="selectbox">        
-            <select>
+            <select id="selectbox">
             <option>전체</option>
             <option>행복해요</option>
             <option>슬퍼요</option>
@@ -41,83 +41,9 @@
             <div class="listcontainer">
                 <!--일기 리스트-->
                 <div class="diarylistbox">
-                    <div class="diarybox">
-                        <div class="thumbnail_sad"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_sad">슬퍼요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
+                   
 
-                    <div class="diarybox">
-                        <div class="thumbnail_surprise"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_surprise">놀랐어요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="diarybox">
-                        <div class="thumbnail_angry"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_angry">화나요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="diarybox">
-                        <div class="thumbnail_happy"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_happy">행복해요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="diarybox">
-                        <div class="thumbnail_etc"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_etc">슬퍼요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="diarybox">
-                        <div class="thumbnail_happy"></div>
-                        <div class="textbox">
-                            <div class="date_title_container">
-                                <div class="emotion_happy">행복해요</div>
-                                <div class="date">2024. 03. 12</div>
-                            </div>
-                            <div class="date_title_container">
-                                <div class="title">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    <!--일기 리스트 들어가는 곳-->
 
                 </div>
 
@@ -145,10 +71,12 @@
                     <input id="writingtitle" type="text" placeholder="제목을 입력해 주세요." oninput="inputverify()"/>
 
                     <div class="contenttext">내용</div>
-                    <input id="writingcontent" type="text" placeholder="내용을 입력해주세요." oninput="inputverify()"/>
+                    <textarea id="writingcontent" type="text" placeholder="내용을 입력해주세요." oninput="inputverify()" style="resize:none;"></textarea>
 
                     <button class="submit" onclick="submit()">등록하기</button>
                 </div>
+
+                <div class="floating" id="floating" onclick="floating()"></div>
             </div>
             
         </div>

@@ -14,42 +14,93 @@
         </div>
     </div>  
 
+    <div id="editmode" style="display: none;">
+        <div class="editmode_titleboxcontainer">
+            <div class="editmode_titlebox">
+                <div id="howyoufeel">오늘의 기분은 어땟나요?</div>
+            </div>
+
+            <div id="emotion-buttons">
+                <input type="radio" id="happy" name="emotion" value="happy">
+                <label for="happy">행복해요</label>
+                <input type="radio" id="sad" name="emotion" value="sad">
+                <label for="sad">슬퍼요</label>
+                <input type="radio" id="surprise" name="emotion" value="surprise">
+                <label for="surprise">놀랐어요</label>
+                <input type="radio" id="angry" name="emotion" value="angry">
+                <label for="angry">화나요</label>
+                <input type="radio" id="etc" name="emotion" value="etc">
+                <label for="etc">기타</label>
+            </div>
+        </div>
+        
+        <div class="editmode_inputcontainer">
+            <div class="editmode_title">제목</div>
+            <input type="text" id="diary-title-input" /> 
+        </div>
+        <div class="editmode_inputcontainer">
+            <div class="editmode_title">내용</div>
+            <textarea id="diary-content-input" ></textarea>
+        </div>
+
+
+
+        <div class="editmode_button">
+            <button class="cancelbutton" onclick="cancelEditMode()">취소</button>
+            <button class="savebutton" onclick="saveChanges()">수정하기</button>
+        </div>
+
+
+
+    </div>
+
     <div class="container">
         <div class="titlecontainer">
             <div class="titlebox" id="diary-title">
-                이것은 타이틀 입니다
             </div>
-            <input type="text" id="diary-title-input" style="display: none;" /> 
         </div>
 
         <div class="emotioncontainer">
             <div class="icon_emtion_box">
                 <div class="emotion" id="diary-emotion"></div> 
-                <div id="emotion-buttons" style="display: none;">
-                    <input type="radio" id="happy" name="emotion" value="happy">
-                    <label for="happy">행복해요</label>
-                    <input type="radio" id="sad" name="emotion" value="sad">
-                    <label for="sad">슬퍼요</label>
-                    <input type="radio" id="surprise" name="emotion" value="surprise">
-                    <label for="surprise">놀랐어요</label>
-                    <input type="radio" id="angry" name="emotion" value="angry">
-                    <label for="angry">화나요</label>
-                    <input type="radio" id="etc" name="emotion" value="etc">
-                    <label for="etc">기타</label>
-                </div>
                 <div class="date" id="diary-date"></div>
             </div>
         </div>
 
         <div class="contentcontainer">
+            <div class="title_content">
+                <div class="title_title">내용</div>
+            </div>
             <div class="content" id="diary-content"></div>
             <textarea id="diary-content-input" style="display: none;"></textarea>
         </div>
 
         <div class="buttoncontainer">
-            <button class="editbutton" onclick="toggleEditMode()">수정</button>
-            <button class="savebutton" onclick="saveChanges()" style="display: none;">저장</button>
+            <button class="editbutton" onclick="toggleEditMode()" style="margin-right: 16px;">수정</button>
+            <button class="editbutton" onclick="removeDiaryEntry()" >삭제</button>
         </div>
+
+        <div class="contentcontainer">
+            <div class="title_content">
+                <div class="title_title">회고</div>
+            </div>
+            <div class="retrospectContainer">
+                <input type="text" class="retrospectInput" placeholder="회고를 남겨보세요."/>
+                <button class="retrospectButton">입력</button>
+            </div>
+
+            <!--댓글 달리는 부분-->
+            <div class="commentContainer">
+                <div class="comment">3년이 지나고 다시 보니 이때가 그립다</div>
+                <div class="comment_date">2024.09.24</div>
+            </div>
+            <div class="commentContainer">
+                <div class="comment">3년이 지나고 다시 보니 이때가 그립다</div>
+                <div class="comment_date">2024.09.24</div>
+            </div>
+
+        </div>
+
     </div>
 </body>
 </html>

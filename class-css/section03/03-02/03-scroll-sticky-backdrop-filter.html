@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>스티키스크롤 실습</title>
+    <style>
+        /* 1. 스크롤 영역 */
+        .CSS_네모박스 {
+            width: 200px;
+            height: 300px;
+            border: 1px solid blue;
+            
+            overflow: scroll; 
+            /* overflow: hidden; */
+        }
+        .CSS_알맹이 {
+            width: 150px;
+            height: 180px;
+            background-color: skyblue;
+            margin: 10px;
+        }
+
+        /* 2. 헤더영역 */
+        .CSS_제목박스 {
+            position: sticky;
+            top: 10px;
+            width: 100%;
+            height: 50px;
+            /* background-color: yellow; */
+            /* filter: blur(10px); 해당 CSS가 뿌옇게 변함 */
+            backdrop-filter: blur(10px); /* 색이 없어져야 비치는 모습이 보인다  */
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_네모박스">
+        <div class="CSS_제목박스">민지의 다이어리</div>
+        <div class="CSS_알맹이"></div>
+        <div class="CSS_알맹이"></div>
+        <div class="CSS_알맹이"></div>
+        <div class="CSS_알맹이"></div>
+        <div class="CSS_알맹이"></div>
+        <div class="CSS_알맹이"></div>
+    </div>
+</body>
+</html>
