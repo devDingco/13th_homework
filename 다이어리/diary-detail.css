@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .layout-wrapper {
   background: #fff;
   max-width: 1920px;

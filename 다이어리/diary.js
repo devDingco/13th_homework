@@ -10,9 +10,10 @@ window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const filterCheckbox = document.getElementById("filterCheckbox");
 
-  scroll > 0 ? filterCheckbox.style = "background-color: #1C1C1C; color: #FFF" : filterCheckbox.style = "background-color: #FFF";
-
-})
+  scroll > 0
+    ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
+    : (filterCheckbox.style = "background-color: #FFF");
+});
 
 const clearDiaryInputs = (checkedMoodId) => {
   const check = document.getElementById(`${checkedMoodId}`);
@@ -57,7 +58,7 @@ const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
 
 const createHtml = (diaryEntry) => {
   const diaryCard = `
-    <a href="./diary-detail.html?id=${diaryEntry.id}" class="diary_detail">
+    <a href="./diary-detail.html?id=${diaryEntry.id}#comments_container_box" class="diary_detail">
       <div class="diary_entry">
           <div>
             <img
@@ -163,6 +164,7 @@ const registerDiary = () => {
   if (text.value == "" || textarea.value == "" || mood.length == 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
+    diaryEntry.commentList = [];
     getContent(diaryEntry);
   }
 };
@@ -209,21 +211,21 @@ const onClickMood = (e) => {
 const deleteDiaryEntry = (event) => {
   event.preventDefault();
   let index;
-  const id = event.target.className
-  const diaryList = JSON.parse(localStorage.getItem("diaryList"))
+  const id = event.target.className;
+  const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    if(e.id == id) index = i;
-  })
-  storedDiaryList.splice(index, 1)
-  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList))
+    if (e.id == id) index = i;
+  });
+  storedDiaryList.splice(index, 1);
+  localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   const article = document.getElementById("article");
   article.innerHTML = "";
   storedDiaryList.map((diary) => createHtml(diary));
-}
+};
 
 const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
+};
 
 moodList.addEventListener("click", onClickMood);
 registerButton.addEventListener("click", registerDiary);
