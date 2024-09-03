@@ -21,7 +21,7 @@ const renderData = (array) => {
   return array.map(
     (el, index) => `
   <li class="panel-item">
-    <a href="./detail.html?number=${index}">
+    <a href="./detail.html?number=${index}#review">
       <div class="emotion-card">
       ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
       ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
