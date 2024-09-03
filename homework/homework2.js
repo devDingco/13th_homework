@@ -41,15 +41,15 @@ function tab() {
 function getImageUrl(emotion) {
   switch (emotion) {
     case "happy":
-      return "./assets/Frame-happy.png";
+      return "../assets/Frame-happy.png";
     case "sad":
-      return "./assets/Frame-sad.png";
+      return "../assets/Frame-sad.png";
     case "surprise":
-      return "./assets/Frame-sur.png";
+      return "../assets/Frame-sur.png";
     case "mad":
-      return "./assets/Frame-mad.png";
+      return "../assets/Frame-mad.png";
     case "etc":
-      return "./assets/Frame-etc.png";
+      return "../assets/Frame-etc.png";
   }
 }
 
@@ -91,6 +91,7 @@ function LoadItem(event) {
         item.date
       }&body=${item.body}" }>
         <img class="thumbnail" src=${getImageUrl(item.emotion)} />
+        <div onclick="deleteDiary(event)"  style="position:relative; top:-285px; right: -170px; background-color:#ffffff;width: 24px;height:24px;  border-radius:50%; text-align:center;font-size :20px">x</div>
         <div class="album-text">
             <div class="album-text-up">
                 <div class="feeling" style="color:${emotion_color[item.emotion]}">${emotion_kor[item.emotion]}</div>
@@ -109,7 +110,6 @@ function addItem() {
   // 1. 데이터 가져오기
   const title = document.getElementById("title").value;
   const body = document.getElementById("body").value;
-
   const emotionList = document.getElementsByName("feeling");
 
   let selEmotion = "";
@@ -150,9 +150,13 @@ function addItem() {
 
 function resetFormData() {
   // 일기 폼 초기화
+  const el = document.querySelectorAll("input[type=text],textarea");
+  for (let i = 0; i < el.length; i++) {
+    el[i].value = "";
+  }
 }
 
-function LoadDeatail() {
+function LoadDetail() {
   if (!location.pathname.includes("diaryDetail")) return;
 
   const urlParams = new URLSearchParams(location.search);
@@ -173,7 +177,9 @@ function editClick() {
   document.getElementsByClassName("diary-wrap")[1].setAttribute("class", "diary-wrap");
 }
 
+// 일기를 저장하고, 이후 해당 일기의 상세 페이지로 리디렉션
 function saveClick() {
+  // 현재 페이지의 URL에서 쿼리 스트링(예: ?date=123456789)을 파싱하여 URL 파라미터를 가져옴.
   const urlParams = new URLSearchParams(location.search);
 
   const title = document.getElementsByTagName("input")[0].value;
@@ -183,6 +189,7 @@ function saveClick() {
 
   let selEmotion = "";
 
+  //반복문을 통해 각 감정 라디오 버튼을 확인하여, 선택된 감정의 id를 selEmotion에 저장
   emotionList.forEach((emotion) => {
     if (emotion.checked) {
       selEmotion = emotion.id;
@@ -213,4 +220,79 @@ function saveClick() {
 }
 
 LoadItem();
-LoadDeatail();
+LoadDetail();
+
+// 버튼 누르면 맨 위로 올리기
+const scrollUp = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+// 스크롤 내려가면 필터 색 바꾸기
+const isScroll = () => {
+  window.addEventListener("scroll", () => {
+    const scrollHeight = window.scrollY;
+
+    if (scrollHeight > 0) {
+      document.getElementById("emotionFilter").style = "background-color:#000000; color:#ffffff";
+    } else {
+      document.getElementById("emotionFilter").style = "";
+    }
+  });
+};
+isScroll();
+
+// 일기 삭제 기능
+const deleteDiary = (event) => {
+  event.preventDefault();
+
+  // 삭제할 일기 항목의 상위 요소인 `.one-album` 찾기
+  const album = event.target.closest(".one-album");
+
+  // URL에서 일기 날짜를 가져와서 고유 식별자로 사용
+  const diaryDate = parseInt(new URL(album.href).searchParams.get("date"));
+
+  // 일기 목록에서 해당 날짜를 가진 항목을 필터링하여 제거
+  diaryList = diaryList.filter((item) => item.date !== diaryDate);
+
+  // 로컬 스토리지에 업데이트된 일기 목록을 저장
+  localStorage.setItem("diaryList", JSON.stringify(diaryList));
+
+  // UI에서 삭제된 항목을 제거
+  album.remove();
+};
+
+// 상세페이지 > 댓글
+// 페이지 로드 시 기존 댓글을 로컬 스토리지에서 가져와서 화면에 표시
+function loadComments() {
+  const comments = JSON.parse(localStorage.getItem("comments")) || [];
+  const commentArea = document.querySelector(".comment");
+
+  commentArea.innerHTML = comments.map((comment) => `<div>${comment}</div>`).join("");
+}
+
+// 댓글 추가 기능
+
+function addComment() {
+  const inputField = document.querySelector(".input-area input");
+  const commentText = inputField.value;
+  console.log("22", commentText);
+
+  if (commentText === "") {
+    alert("댓글을 입력해 주세요.");
+    return;
+  }
+
+  let comments = JSON.parse(localStorage.getItem("comments")) || [];
+
+  comments.push(commentText);
+
+  localStorage.setItem("comments", JSON.stringify(comments));
+
+  const commentArea = document.querySelector(".comment");
+  commentArea.innerHTML += `<div>${commentText}</div>`;
+
+  resetFormData();
+}
+
+// 페이지 로드 시 댓글 로드
+loadComments();

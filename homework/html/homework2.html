@@ -4,20 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework2</title>
-    <link rel="stylesheet" href="./homework2.css" />
-    <script src="./homework2.js" defer></script>
+    <link rel="stylesheet" href="../css/homework2.css" />
+    <script src="../homework2.js" defer></script>
   </head>
 
   <body>
+    <div class="scroll-up">
+      <img src="../assets/topscroll fab.png" alt="top" onclick="scrollUp()" />
+    </div>
     <div class="wrapper">
       <!-- 헤더 -->
       <header>
-        <div class="header-content">민지의 다이어리</div>
+        <a class="header-content">민지의 다이어리</a>
       </header>
       <main>
         <!-- 배너 -->
         <div class="banner-area">
-          <img src="./assets/banner.png" alt="banner" />
+          <img src="../assets/banner.png" alt="banner" />
         </div>
 
         <!-- 메인 컨탠츠 -->
@@ -39,8 +42,8 @@
                 <!-- 일기 아이템들 -->
                 <div class="album-wrap">
                   <div id="filterBox">
-                    <select name="emotionFilter" id="emotionFilter" onchange="LoadItem(event)">
-                      <option value="all">선택하세요</option>
+                    <select class="filter" name="emotionFilter" id="emotionFilter" onchange="LoadItem(event)">
+                      <option value="all">전체</option>
                       <option value="happy">행복해요</option>
                       <option value="sad">슬퍼요</option>
                       <option value="surprise">놀랐어요</option>
