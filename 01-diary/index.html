@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일기 보관함</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index_1208.css">
+    <link rel="stylesheet" href="./index_mobile.css">
     <script src="./index.js"></script>
 </head>
 <body>
@@ -18,9 +21,9 @@
             </div>
         </div>
         <div class="contents_container">
-            <div class="filter_item">
+            <div id="filter_item_desktop" class="filter_item">
                 <div class="">
-                    <select id="mood_select", class="mood_select_box" onchange="filterDiary()">
+                    <select id="mood_select_desktop", class="mood_select_box" onchange="filterDiary()">
                         <option value="전체" selected>전체</option>
                         <option value="행복해요">행복해요</option>
                         <option value="슬퍼요">슬퍼요</option>
@@ -30,7 +33,7 @@
                     </select>
                 </div>
             </div>
-            <div class="contents">
+            <div id="HTML_contents" class="contents">
                 <div class="contents_left_item" id="diary_list">
                     <div class="diary" id="diary_DOM">
                         <img class="diary_mood_img" src="./assets/mood_sad.png" alt="슬픈 얼굴 사진입니다." onclick="diaryCardTapped()">
@@ -94,6 +97,18 @@
                         </div>
                     </div>
                 </div>
+                <div id="filter_item_mobile" class="filter_item">
+                    <div class="">
+                        <select id="mood_select_mobile", class="mood_select_box" onchange="filterDiary()">
+                            <option value="전체" selected>전체</option>
+                            <option value="행복해요">행복해요</option>
+                            <option value="슬퍼요">슬퍼요</option>
+                            <option value="놀랐어요">놀랐어요</option>
+                            <option value="화나요">화나요</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="contents_right_item">
                         <div class="write_title">📍 일기 쓰기</div>
                         <div class="write_diary">
@@ -135,11 +150,10 @@
                         </div>
                         <button class="diary_write_button" id="writeButton" disabled onclick="writeButtonPressed()">등록하기</button>
                         <button class="top_scroll_floating_button" id="top_scroll_button" onclick="topScrollFloatingButtonTapped()"><img src="./assets/top_scroll.png"></button>
-                </div>
+                    </div>
             </div>
         </div>
-        </div>
-        
+    </div>
     <div class="footer">
         <div class="footer_information">
             <div class="page_title">민지의 다이어리</div>

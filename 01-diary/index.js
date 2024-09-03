@@ -204,8 +204,24 @@ window.addEventListener("scroll", () => {
     const y = window.scrollY
 
     if (y > 0) {
-        document.getElementById("mood_select").style = "background-color: black; color: white;"
+        document.getElementById("mood_select_desktop").style = "background-color: black; color: white;"
+        document.getElementById("mood_select_mobile").style = "background-color: black; color: white;"
     } else {
-        document.getElementById("mood_select").style = "background-color: white; color: black;"
+        document.getElementById("mood_select_desktop").style = "background-color: white; color: black;"
+        document.getElementById("mood_select_mobile").style = "background-color: white; color: black;"
     }
+
+    observingWindowWidth()
 })
+
+const observingWindowWidth = () => {
+    const windowWidth = window.innerWidth
+
+    if (windowWidth < 779) {
+        document.getElementById("filter_item_mobile").style = "display: block;"
+        document.getElementById("filter_item_desktop").style = "display: none;"
+    } else {
+        document.getElementById("filter_item_mobile").style = "display: none;"
+        document.getElementById("filter_item_desktop").style = "display: block;"
+    }
+}
