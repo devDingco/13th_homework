@@ -1,6 +1,6 @@
 
 
-// 수정 상세페이지 내용 셋팅용
+// !수정 상세페이지 내용 셋팅용
 const diaryEditData = () => {
   const diaryQueryId = queryStringGet();
   const diary = diaryArr.find((diary) => diary.id === diaryQueryId); // 수정할 일기 데이터를 아이디 값으로 찾아옴
@@ -19,30 +19,30 @@ const diaryEditData = () => {
 }
 diaryEditData();
 
-// 일기 수정하기 함수
+// !일기 수정하기 함수
 const diaryModifySave = () => {
   const diaryId = queryStringGet();
   const moodTypeValue = document.querySelector("input[name='moodType']:checked").value;
   console.log(moodTypeValue);
   const diaryTitle = document.querySelector(".diaryTitle").value;
   console.log(diaryTitle);
-  // const diaryDesc = document.querySelector(".diaryDesc").value;
-  // console.log(diaryDesc);
 
-  console.log(editor.getContents());
-  const diary = {
-    moodType: moodTypeValue,
-    writeDate: diaryArr[diaryId].writeDate,
-    modifyDate: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
-    title: diaryTitle,
-    content: editor.getContents(),
-    id: diaryId,
-  };
+  const diaryDataFind = diaryArr.filter((diary) => diary.id === diaryId)[0];
 
-  diaryArr[diaryId] = diary;
-  // console.log(diary);
-  localStorage.setItem("diaryArray", JSON.stringify(diaryArr));
+  diaryDataFind.moodType = moodTypeValue;
+  diaryDataFind.title = diaryTitle;
+  diaryDataFind.content = editor.getContents();
+  diaryDataFind.modifyDate = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
 
+  const newDiaryArr = diaryArr.map((diary) => {
+    if (diary.id === diaryId) {
+      return diaryDataFind;
+    }
+    return diary;
+  });
+  console.log("수정한 데이터 확인", newDiaryArr);
+
+  localStorage.setItem("diaryArray", JSON.stringify(newDiaryArr));
   alert("수정이 완료되었습니다.");
   location.href = "./detail.html?diaryId=" + diaryId;
 
