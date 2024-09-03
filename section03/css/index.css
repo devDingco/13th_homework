@@ -36,6 +36,13 @@
   font-weight: bold;
 }
 
+.filter {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+}
+
 .filter-emotion {
   width: 120px;
   height: 32px;
@@ -49,6 +56,10 @@
   background-image: url('../assets/images/icon_arrow_down.svg');
   background-repeat: no-repeat;
   background-position: right 12px center;
+}
+
+.filter-emotion.scrolled {
+  background-image: url('../assets/images/icon_arrow_down_scrolled.svg');
 }
 
 .main-content {
