@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/index.css" />
+    <script src="./javascript/common.js"></script>
     <script src="./javascript/index.js"></script>
     <title>일기보관함</title>
   </head>
@@ -30,7 +31,7 @@
             </ul>
           </nav>
           <div class="content">
-            <div class="block-box">
+            <div class="block-box filter">
               <select class="filter-emotion" onchange="filterEmotion(event)">
                 <option selected disabled>전체</option>
                 <option>행복해요</option>
@@ -88,7 +89,7 @@
               </aside>
             </div>
             <div class="scroll-up">
-              <button class="button-scroll-up"><img src="./assets/images/icon_scroll_up.svg" alt="맨 위로 이동하기" /></button>
+              <button class="button-scroll-up" onclick="scrollToTop()"><img src="./assets/images/icon_scroll_up.svg" alt="맨 위로 이동하기" /></button>
             </div>
           </div>
         </section>
