@@ -59,6 +59,8 @@
 }
 
 .filter-emotion.scrolled {
+  color: var(--gray-w);
+  background-color: var(--gray-b);
   background-image: url('../assets/images/icon_arrow_down_scrolled.svg');
 }
 
