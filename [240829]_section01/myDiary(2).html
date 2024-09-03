@@ -3,7 +3,6 @@
   <head>
     <title>나만의 일기장</title>
     <link rel="stylesheet" href="./myDiary(2).css" />
-    <script src="myDiary(2).js"></script>
   </head>
   <body>
     <div class="container">
@@ -18,7 +17,7 @@
         <button id="photoKeepBtn">사진보관함</button>
       </div>
       <div class="filter">
-        <select id="filterBtn" onclick="filterDiaries()">
+        <select id="filterBtn" onchange="filterDiaries(event)">
           <option value="전체">전체</option>
           <option value="행복해요">행복해요</option>
           <option value="슬퍼요">슬퍼요</option>
@@ -30,9 +29,8 @@
 
       <div class="mainContent">
         <div id="showImgContent">
-          <div id="card">
-            <!-- <p id="info">오늘의 기분을 담은 일기를 써보세요!</p> -->
-          </div>
+          <div id="card"></div>
+          <p id="info">오늘의 기분을 담은 일기를 써보세요!</p>
         </div>
         <div id="addContent">
           <p class="addTitle">⭐️ 일기 쓰기</p>
@@ -116,5 +114,9 @@
         <div class="footerInfo">Copyright©2024.MJCo.,Ltd.</div>
       </div>
     </div>
+    <div class="floating-btn" onclick="scrollToTop()">
+      <img src="./images/arrow_down.png" style="transform: rotate(180deg)" />
+    </div>
+    <script src="myDiary(2).js"></script>
   </body>
 </html>
