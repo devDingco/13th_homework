@@ -71,7 +71,21 @@ const footerBox = () => {
 }
 footerBox();
 
-// 로컬에 저장된 일기 데이터 가져오기 함수
+// 상세페이지 상단 헤더 렌더링 함수
+const detailHeaderTop = () => {
+  const detailHeaderElement = document.querySelector(".detailHeaderTop");
+  if (!detailHeaderElement) return
+  const title = detailHeaderElement.innerText;
+  detailHeaderElement.innerHTML = `
+   <a href="javascript:window.history.back()">
+   <img src="./img/back_outline_light_m.svg" alt="왼쪽화살표" />
+   </a>${title}
+  `
+}
+detailHeaderTop();
+
+
+// !로컬에 저장된 일기 데이터 가져오기 함수
 const diaryArrGet = () => {
   if (!localStorage.getItem("diaryArray")) {
     // 로컬스토리지에 diaryArray가 없을 경우 위에 선언한 diaryArray를 저장
@@ -85,7 +99,7 @@ const diaryArrGet = () => {
 
 const diaryArr = diaryArrGet();
 
-// 일기 쓰기 컴포넌트 불러오기
+// !일기 쓰기 컴포넌트 불러오기
 const diaryWriteBox = () => {
   const diaryWriteElement = document.querySelector(".diaryWrite");
   if (!diaryWriteElement) {
@@ -101,8 +115,8 @@ const diaryWriteBox = () => {
         등록하기
       </button>`
     : `<div class="buttonBox">
-        <button class="whiteBtn" onclick="location.href='index.html'">취소</button></button>
-        <button class="diaryModifyBtn blackBtn" onclick="diaryModifySave()">수정 하기</button>
+        <button class="whiteBtn" onclick="history.back()">취소</button></button>
+        <button class="diaryModifyBtn blackBtn" onclick="diaryModifySave()">수정</button>
        </div>`
 
   let checked = !diaryModifyElement ? "checked" : "";
@@ -184,7 +198,7 @@ const queryStringGet = () => {
 }
 
 
-// 이름 설정
+// !이름 설정
 const nameSet = () => {
   let userName;
   if (!localStorage.getItem("userName")) {
@@ -203,7 +217,7 @@ nameSet();
 
 
 
-// 셀렉트 박스 클릭시 필터 항목들 보이도록 처리 함수
+// !셀렉트 박스 클릭시 필터 항목들 보이도록 처리 함수
 const optionShow = (event) => {
   const eventTarget = event.target; // 클릭한 요소
   console.log(eventTarget);
@@ -212,7 +226,7 @@ const optionShow = (event) => {
 
 
 
-// 필터 항목 클릭시 선택된 값으로 변경 함수
+// !필터 항목 클릭시 선택된 값으로 변경 함수
 const optionSelect = (event, type) => {
   const optionTarget = event.target;
   const optionValue = optionTarget.innerText;
@@ -239,7 +253,7 @@ const optionSelect = (event, type) => {
 }
 
 
-// 게시글 삭제 함수
+// !게시글 삭제 함수
 const deleteBtn = (event, id) => {
   event.preventDefault(); // 이벤트 전파 중지
 
@@ -257,14 +271,13 @@ const deleteBtn = (event, id) => {
 }
 
 
-// 스크롤 상단으로 이동 함수
+// !스크롤 상단으로 이동 함수
 const scrollTopAction = () => {
   const windowScrollTop = window.scrollY;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 스크롤 버튼 렌더링 함수
-
+// !스크롤 버튼 렌더링 함수
 const scrollBtnRender = () => {
   const scrollBtn = document.querySelector('.scrollBox');
   if (!scrollBtn) return
@@ -277,3 +290,22 @@ const scrollBtnRender = () => {
 }
 
 scrollBtnRender();
+
+
+
+
+// !일기 내용 작성 확인에 따른 저장 버튼 활성화 함수
+const textCheck = (e) => {
+  const diaryTitle = document.querySelector(".diaryTitle").value;
+  // const diaryDesc = document.querySelector(".diaryDesc").value;
+  const diaryDesc = editor.getText();
+  if (diaryTitle.length > 0 && diaryDesc.length > 0) {
+    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
+    diaryWriteBtn.classList.add("active");
+    diaryWriteBtn.disabled = false;
+  } else {
+    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
+    diaryWriteBtn.classList.remove("active");
+    diaryWriteBtn.disabled = true;
+  }
+}
