@@ -33,3 +33,10 @@ const editBtn = () => {
   location.href = `./edit.html?diaryId=${pageId}`;
 }
 
+
+const textCopy = () => {
+  const pageId = queryStringGet();
+  const diaryContent = diaryArr.filter((diary, index) => diary.id === pageId)[0].content.replace(/<[^>]*>?/g, '');
+  navigator.clipboard.writeText(diaryContent);
+  alert('일기 내용이 복사되었습니다.');
+}
