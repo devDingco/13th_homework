@@ -45,10 +45,6 @@
     width: 100%;
     padding: 0;
   }
-  .navBottom .filterSearchBox {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
   .navBottom .filterSearchBox .selectBox,
   .navBottom .filterSearchBox .searchBox {
     width: auto;
@@ -117,5 +113,39 @@
   .commentWrap {
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .headerBanner img {
+    transform: none;
+  }
+  .navBottom .filterSearchBox {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .navBottom .filterSearchBox .searchBox {
+    width: 100%;
+    height: 0;
+    transition: height 0.5s;
+    display: none;
+  }
+  .navBottom .filterSearchBox .searchBox.active {
+    display: flex;
+    height: 48px;
+    transition: height 0.5s;
+  }
+  .navBottom .filterSearchBox .searchMobilePopBtn {
+    width: 48px;
+    height: 48px;
+    display: block;
+    background-color: #fff;
+    background-image: url("../img/search_outline_light_m.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid var(--border-color-2);
+    border-radius: 8px;
+  }
+  .navBottom .filterSearchBox .searchMobilePopBtn.active {
+    background-color: var(--bg-color-1);
   }
 }/*# sourceMappingURL=media.css.map */
