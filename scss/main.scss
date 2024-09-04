@@ -1,4 +1,5 @@
 .navBottom {
+  width: var(--max-width);
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -11,6 +12,7 @@
   &.stickyAddStyle {
     padding-top: 10px;
     padding-bottom: 10px;
+
     .filterSearchBox {
       filter: invert(1);
     }
@@ -18,8 +20,7 @@
 }
 
 .filterSearchBox {
-  width: var(--max-width);
-  margin: 0 auto;
+  // margin: 0 auto;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -40,6 +41,7 @@
     .filterPopBtn {
       width: 100%;
       height: 100%;
+      min-width: 6.5625rem;
       display: block;
       text-align: left;
       border: none;
@@ -86,6 +88,10 @@
     }
   }
 
+  .searchMobilePopBtn {
+    display: none;
+  }
+
   .searchBox {
     width: 21.25rem;
     height: 48px;
@@ -106,10 +112,6 @@
       flex-shrink: 0;
       height: 100%;
     }
-
-    // .searchPopBtn {
-    //   height: 100%;
-    // }
 
     input[type="search"] {
       border: none;
@@ -139,6 +141,7 @@
   align-items: center;
   font-size: var(--font-size-2);
   line-height: 24px;
+  align-self: flex-end;
 }
 
 section {
