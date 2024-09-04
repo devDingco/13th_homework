@@ -26,14 +26,49 @@ const 등록하기버튼 = () => {
 
     기분버튼목록.forEach( num => {
         if(num.checked === true){
-            체크된값 = num.value
             //일기목록에 true로 체크된값 넣어주기
-            일기목록.push({
-                기분    : 체크된값,
-                제목    : 제목입력값,
-                내용    : 내용입력값,
-                작성날짜 : 작성날짜값
+            체크된값 = num.value
+            let 기분이미지 = ""
+            let myFontColor =""
+                switch(체크된값){
+                    case "행복해요": {
+                        기분이미지 = `<img src="./CSS&JS 마스터/행복해요 (m).png" width="32px">`
+                        myFontColor = `#EA5757`
+                        break;
+                    }
+                    case "슬퍼요": {
+                        기분이미지 = `<img src="./CSS&JS 마스터/슬퍼요 (m).png" width="32px">`
+                        myFontColor = `#28B4E1`
+                        break;
+                    }
+                    case "놀랐어요": {
+                        기분이미지 = `<img src="./CSS&JS 마스터/놀랐어요 (m).png" width="32px">`
+                        myFontColor = `#D59029`
+                        break;
+                    }
+                    case "화나요": {
+                        기분이미지 = `<img src="./CSS&JS 마스터/화나요 (m).png" width="32px">`
+                        myFontColor = `#777777`
+                        break;
+                    }
+                    case "기타": {
+                        기분이미지 = `<img src="./CSS&JS 마스터/기타 (m).png" width="32px">`
+                        myFontColor = `#A229ED`
+                        break;
+                    }
+                }
+                const id = String(Math.floor(Math.random() * 1000000)).padStart(6 ,"0")
+                console.log(id)
+                일기목록.push({
+                    idV : id,
+                    기분    : 체크된값,
+                    제목    : 제목입력값,
+                    내용    : 내용입력값,
+                    작성날짜 : 작성날짜값,
+                    기분나타냄 : 기분이미지,
+                    기분색 : myFontColor
             })
+            console.log(일기목록)
 
             // console.log(일기목록)
            
@@ -52,18 +87,26 @@ const 등록하기버튼 = () => {
     })
 }
 
+const 인풋검사하기 = () => {
+    제목입력값 = document.getElementById("제목입력inputId").value 
+    // console.log(제목입력값);
+
+    내용입력값 = document.getElementById("내용입력inputId").value
+    // console.log(내용입력값);
+}
 
 // 일기 목록을 눌렀을 때 실행되는 부분
 // detailListData : 로컬스토리지에서 가져온 데이터 (일기객체_일기객체데이터가 필요한곳에 map)
 const DiaryPlus = (localData) => {
+
     // 일기 목록을 뿌려주는 곳 잡아오기
-    const localDataArr = localData.map((el , index) => `
-                        <a href="./day05_일기상세페이지.html?index=${index}">
+    const localDataArr = localData.map(el  => `
+                        <a href="./day05_일기상세페이지.html?idV=${el.idV}">
                             <div id="iconBoxFImgID" class="iconBoxFImg">
-                                <img src="./img/day04img/슬퍼요 (m).png" alt="">
+                                ${el.기분나타냄}
                                 <div class="iconBoxF두번째">
                                     <div class="iconBoxF세번째">
-                                        <div>${el.기분}</div>
+                                        <div style="color:${el.기분색}">${el.기분}</div>
                                         <div>${el.작성날짜}</div>
                                     </div>
                                     <div class="iconBoxF네번째">${el.제목}</div>
@@ -76,19 +119,66 @@ const DiaryPlus = (localData) => {
     // console.log(localDataArr.join(""))
     // 콘솔로 찍었을 때 데이터요소가 추가된 html이 배열로 같이 찍힘
     // join 배열의 모든 요소를 연결해 하나의 문자열로 만듦 : 정,아,영 -> 배열을 그냥 html찍으면 ',' 도 같이 찍힘
+    console.log(일기목록)
 
     let diaryPlusList = document.getElementById("iconBoxFId") 
     diaryPlusList.innerHTML = localDataArr
+
    
 }
-const 인풋검사하기 = () => {
-    제목입력값 = document.getElementById("제목입력inputId").value
-    // console.log(제목입력값);
 
-    내용입력값 = document.getElementById("내용입력inputId").value
-    // console.log(내용입력값);
+
+
+// 전체화면 기분상태를 필터링하는곳
+const navFilter = (event) => {
+    const navOption = event.target.value
+
+    const detailListData01 = localStorage.getItem("detailList") ?? "[]"
+    const detailListData02 =  JSON.parse(detailListData01)
+
+    let navFilterPrint;
+    switch(navOption){
+        case "행복해요" : {
+            navFilterPrint = detailListData02.filter(el => el.기분 === "행복해요")
+            break;
+        }
+        case "슬퍼요" : {
+            navFilterPrint = detailListData02.filter(el => el.기분 === "슬퍼요")
+            break;
+        }
+        case "놀랐어요" : {
+            navFilterPrint = detailListData02.filter(el => el.기분 === "놀랐어요")
+            break;
+        }
+        case "화나요" : {
+            navFilterPrint = detailListData02.filter(el => el.기분 === "화나요")
+            break;
+        }
+        case "기타" : {
+            navFilterPrint = detailListData02.filter(el => el.기분 === "기타")
+            break;
+        }
+
+    }
+
+    console.log(navFilterPrint)
+    const diaryFilterList = navFilterPrint.map(el => ` 
+                        <a href="./day05_일기상세페이지.html?idV=${el.idV}">
+                            <div id="iconBoxFImgID" class="iconBoxFImg">
+                                ${el.기분나타냄}
+                                <div class="iconBoxF두번째">
+                                    <div class="iconBoxF세번째">
+                                        <div style="color:${el.기분색}">${el.기분}</div>
+                                        <div>${el.작성날짜}</div>
+                                    </div>
+                                    <div class="iconBoxF네번째">${el.제목}</div>
+                                </div>
+                            </div>
+                        </a>
+    `).join("")
+
+    document.getElementById("iconBoxFId").innerHTML = diaryFilterList
 }
-
 
 
 // 일기쓰기객체(배열에 넣었음) 인덱스 값으로 해당 클릭하는 일기목록으로 알맞게 내용 넣어주기 - 위에 객체로 덩어리만들어서 innerHtml할때 그냥 다 넣어서 처음부터 만들어줌

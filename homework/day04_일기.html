@@ -23,26 +23,21 @@
                         <div class="iconBtn">일기보관함</div>
                         <div class="iconBtn">사진보관함</div>
                     </div>
-                    <div class="dropdownBoxHeader">
-                        <div class="dropdownBox">
-                            <button class="dropBoxBtn">
-                                전체
-                            </button>
-                                <div class="dropBoxBtnCho">
-                                    <li><a href="">행복해요</a></li>
-                                    <li><a href="">슬퍼요</a></li>
-                                    <li><a href="">놀랐어요</a></li>
-                                    <li><a href="">화나요</a></li>
-                                    <li><a href="">기타</a></li>
-                                </div>
-                        </div>
-                    </div>
-                    
-                    
 
+                    <!-- 드롭다운만들기 -->
+                    <nav class="navBox">
+                        <select onchange="navFilter(event)">
+                            <option>전체</option>
+                            <option>행복해요</option>
+                            <option>슬퍼요</option>
+                            <option>놀랐어요</option>
+                            <option>화나요</option>
+                            <option>기타</option>
+                        </select>
+                    </nav>
                     <div id="아이콘박스id" class="아이콘박스">
                         <div id="iconBoxFId" class="iconBoxF">
-                            <a href="./day05_일기상세페이지.html">
+                            <!-- <a href="./day05_일기상세페이지.html">
                                 <div id="iconBoxFImgID" class="iconBoxFImg">
                                     <img src="./img/day04img/슬퍼요 (m).png" alt="">
                                     <div class="iconBoxF두번째">
@@ -103,9 +98,8 @@
                                     </div>
                                     <div class="iconBoxF네번째">타이틀 영역 입니다.</div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-
                         <div class="iconBoxS">
                             <div class="iconBoxS001">📍일기쓰기</div>
                             <div class="iconBoxS002">

@@ -5,8 +5,6 @@
     padding: 0;
 }
 
-
-
 .상단박스{
     width: 100%;
     /* height: 1605px; */
@@ -61,7 +59,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 42px;
+    gap: 25px;
 
 }
 
@@ -84,65 +82,30 @@
     color: #000000;
 } */
 
-.dropdownBoxHeader{
-    width: 100%;
-}
-
-.dropdownBox{
-    position: relative;
-    display: inline-block;
-}
-
-.dropBoxBtn{
-    cursor: pointer;
-    width: 120px;
-    height: 32px;
-    border-radius: 8px;
-    background-color: #E4E4E4;
-    border: 1px solid #C7C7C7;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 31px;
-    color: #1C1C1C;
-    text-align: left;
-}
-
-.dropBoxBtnCho {
-    /* display: none; */
-    /* 앞에 동그란 점 */
-    width: 100%;
-    position: absolute;
-    background-color: #E4E4E4;
-
-}
-
-.dropBoxBtnCho li {
-    list-style: none;
-
-}
-.dropBoxBtnCho a{
-    text-decoration: none;
+.navBox{
+    width: 1168px;
 }
 
 
 .아이콘박스{
     width: 1168px;
-    height: 1167px;
+    /* height: 1167px; */
     display: flex;
-    justify-content: center;
     gap: 24px;
 
 }
 
 .iconBoxF{
     width: 784px;
-    height: 1167px;
+    /* height: 1167px; */
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
     /* overflow: hidden; */
 }
-
+a{
+    text-decoration: none;
+}
 .iconBoxFImg{
     width: 380px;
     height: 373px;
@@ -182,7 +145,6 @@
 }
 
 
-
 .iconBoxF두번째{
     width: 380px;
     height: 56px;
@@ -199,6 +161,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+
 
 }
 
@@ -214,6 +179,7 @@
     display: flex;
     font-size: 18px;
     font-weight: 700;
+    color: #000000;
 
     
 }
@@ -368,6 +334,6 @@
 .footerBox02{
     width: 1168px;
     height: 112px;
-    background-color: pink;
+    /* background-color: pink; */
 }
 

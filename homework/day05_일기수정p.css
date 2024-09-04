@@ -1,8 +1,9 @@
-* {
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 
 .전체화면 {
     display: flex;
@@ -30,86 +31,82 @@
     
 }
 
-/*section*/
-
-.일기내용Box {
+.contentBox {
     width: 1168px;
-    height: 321px;
-    margin-top: 64px;
+    height: 432px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap:24px
 }
 
-.titleBox{
+.editBox01 {
     width: 100%;
-    height: 84px;
+    height: 64px;
     display: flex;
     flex-direction: column;
+    gap: 16px;
+}
+
+.myEmoInput{
+    display: flex;
+    gap: 20px;
+}
+
+.editBox02 {
+    width: 100%;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.editBox02 input {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px 12px 16px;
+}
+
+.editBox03 {
+    width: 100%;
+    height: 156px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.editBox03 textarea {
+    width: 100%;
+    height: 128px;
+    padding: 12px 16px 12px 16px;
+}
+
+.editBox04 {
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 16px;
 }
 
-.titlePrint {
-    width: 100%;
-    height: 36px;
-    font-size: 22px;
-    font-weight: 700;
-    border-bottom: 1px solid black;
-
-}
-
-.wirtePrint{
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-}
-
-
-.detailBox {
-    width: 100%;
-
-}
-
-.detailBox div{
-    margin-bottom: 13px;
-}
-
-
-.myEmotion {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.myEmotionPrint{
-    height: 32px;
-}
-
-.myEmotionPrint span {
-    font-size: 20px;
-    font-weight: 600;
-    color: #EA5757;
-}
-
-.writeDayPrint{
-    height: 20px;
-}
-
-.detailBoxBtn {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    justify-content:flex-end;
-    gap: 16px;
-}
-
-.detailBoxBtn button {
+.editBox04 button {
     width: 104px;
     height: 48px;
+    background-color: #FFFFFF;
+    color: #000000;
     border: 1px solid #000000;
     border-radius: 8px;
-    padding: 8px 10px 8px 10px;
-   
+    font-size: 18px;
+    font-weight: 600;
 }
 
+.editBox04 button:hover {
+    color: #F2F2F2;
+    background-color: #000000;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 500;
+}
