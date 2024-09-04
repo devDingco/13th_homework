@@ -5,13 +5,15 @@
 }
 
 body {
-  padding: 0 20px;
+  font-size: 16px;
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 4rem;
 }
+
 a {
-  text-decoration-line: none;
+  text-decoration: none;
 }
 
 nav {
@@ -22,381 +24,315 @@ nav {
 
 nav div {
   display: flex;
-  height: 60px;
-  width: 1168px;
-  min-width: 320px;
-  max-width: 1168px;
+  height: 3.75rem;
+  width: 100%;
+  max-width: 73rem;
   align-items: center;
 }
 
 nav div span {
   color: #000;
-  font-size: 18px;
-  font-style: normal;
+  font-size: 1.125rem;
   font-weight: 700;
-  line-height: 16px; /* 88.889% */
-  letter-spacing: -0.18px;
+  line-height: 1;
+  letter-spacing: -0.01125rem;
 }
+
 main {
   display: flex;
-  align-self: stretch;
   justify-content: center;
+  width: 100%;
 }
+
 .총상자 {
-  width: 1168px;
-  min-width: 320px;
-  max-width: 1168px;
+  width: 100%;
+  max-width: 73rem;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
+  position: relative;
 }
+
 .전체상자 {
   display: flex;
-  width: 1168px;
-  padding-bottom: 16px;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  align-self: stretch;
-  border-bottom: 1px solid var(--Gray-B, #000);
-}
-.기분인풋상자 {
-  display: flex;
-  max-width: 592px;
-  align-items: center;
-  align-content: center;
-  align-self: stretch;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid #000;
 }
 .제목과기분과날짜담는상자 {
   display: flex;
-  max-width: 1168px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  align-self: stretch;
+  gap: 1rem;
 }
-.제목입력상자 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
+
+.제목과기분과날짜담는상자,
+.내용상자,
+.버튼상자 {
+  width: 100%;
 }
-.제목입력상자 label {
-  color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
-}
-.내용상자 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-}
-.내용상자 label {
-  color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
-}
+
 .기분과날짜담는상자 {
   display: flex;
-  max-width: 1168px;
   justify-content: space-between;
   align-items: center;
-  align-self: stretch;
 }
-#선택된기분 {
+
+#일기제목 {
+  width: 100%;
+  padding-bottom: 0.75rem;
+  border-bottom: 0.125rem solid #000;
+  color: #000;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: -0.01375rem;
+}
+
+.일기기분 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
+
 .현재기분 {
-  font-size: 20px;
-  font-style: normal;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 24px; /* 120% */
-  letter-spacing: -0.2px;
+  line-height: 1.5rem;
+  letter-spacing: -0.0125rem;
 }
+
 .작성일자와작성담는상자 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
-#작성일자 {
-  color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
-}
+
+#작성일자,
 .작성 {
-  color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
+  color: #919191;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.00875rem;
 }
-.내용상자 {
-  display: flex;
-  max-width: 1168px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  align-self: stretch;
-}
+
 .내용상자 span {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 20px; /* 125% */
-  letter-spacing: -0.16px;
+  line-height: 1.25rem;
+  letter-spacing: -0.01rem;
 }
-.일기내용 {
-  color: var(--Gray-Gray-800, #333);
-  font-family: "Pretendard Variable";
-  font-size: 16px;
-  font-style: normal;
+
+#일기내용 {
+  color: #333;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 20px; /* 125% */
-  letter-spacing: -0.16px;
+  line-height: 1.25rem;
+  letter-spacing: -0.01rem;
+  margin-top: 0.75rem;
 }
+
 .버튼상자 {
   display: flex;
-  max-width: 1168px;
   justify-content: flex-end;
-  align-items: center;
-  gap: 16px;
-  align-self: stretch;
+  gap: 1rem;
 }
-#수정버튼 {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
 
-  color: var(--Gray-Gray-900, #1c1c1c);
-  font-size: 18px;
+button {
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
   font-weight: 500;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
-}
-#수정버튼:hover {
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
   cursor: pointer;
 }
-.취소버튼 {
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: var(--Gray-W, #fff);
 
-  color: var(--Gray-Gray-900, #1c1c1c);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
-}
-.취소버튼:hover {
-  cursor: pointer;
-}
-.수정완료버튼 {
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: var(--Gray-B, #000);
-
-  color: var(--Gray-Gray-50, #f2f2f2);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
-  /* 기분별 글자색 */
-  .일기기분.행복해요 {
-    color: #ea5757;
-  }
-  .일기기분.슬퍼요 {
-    color: #28b4e1;
-  }
-  .일기기분.놀랐어요 {
-    color: #d59029;
-  }
-  .일기기분.화나요 {
-    color: #777;
-  }
-  .일기기분.기타 {
-    color: #a229ed;
-  }
-}
+#수정버튼,
 #삭제버튼 {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  border: 0.0625rem solid #d4d3d3;
+  background: #fff;
+  color: #1c1c1c;
+}
 
-  color: var(--Gray-Gray-900, #1c1c1c);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
+.취소버튼 {
+  border: 0.0625rem solid #000;
+  background: #fff;
+  color: #1c1c1c;
 }
-#삭제버튼:hover {
-  cursor: pointer;
+
+.수정완료버튼 {
+  background: #000;
+  color: #f2f2f2;
+  border: none;
 }
-.수정완료버튼:active {
-  transform: rotate(-5deg) scale(0.95); /* 클릭 시 기울어짐 및 약간의 축소 효과 */
-}
-.수정완료버튼:hover {
-  cursor: pointer;
-}
+
 .회고상자 {
-  width: 1198px;
-  height: 202px;
-  flex-shrink: 0;
+  width: 100%;
 }
+
 .회고입력까지상자 {
   display: flex;
-  max-width: 1168px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 13px;
-  align-self: stretch;
+  gap: 0.8125rem;
 }
+
 .회고글씨 {
   color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
+  font-size: 1.125rem;
   font-weight: 600;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
 }
+
 .입력상자 {
   display: flex;
-  width: 100%;
-  gap: 16px;
+  gap: 1rem;
 }
+
 .입력상자 input {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  background: #fff;
+  font-size: 1rem;
 }
+
 .입력상자 button {
-  color: var(--Gray-W, #fff);
+  padding: 0.5rem 0.625rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+
   font-weight: 600;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
-
-  height: 48px;
-  width: 51px;
-  padding: 8px 10px;
-
-  border-radius: 8px;
-  background: var(--Gray-B, #000);
-}
-/* 보기 모드 스타일 */
-.view-mode #일기제목 {
-  display: flex;
-  max-width: 1168px;
-  padding-bottom: 12px;
-  align-items: center;
-  align-self: stretch;
-  border-bottom: 2px solid #000;
-  color: #000;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.22px;
+  font-size: 1rem;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.01rem;
 }
 
-.view-mode #일기내용 {
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: -0.16px;
-}
-
-/* 수정 모드 스타일 */
-.edit-mode .일기제목 {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #d4d3d3;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.edit-mode .일기내용 {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #d4d3d3;
-  border-radius: 8px;
-  min-height: 128px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.오늘기분물어보기 {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-}
-#오늘기분질문 {
-  color: black;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24px;
-  word-wrap: break-word;
-}
-
-.기분선택상자 {
-  display: flex;
-  gap: 20px;
-}
 .댓글목록컨테이너 {
-  padding-top: 4px;
+  margin-top: 0.25rem;
 }
+
 .댓글항목 {
   display: flex;
-  max-width: 1168px;
-  align-items: flex-start;
-  gap: 12px;
-  align-self: stretch;
-  border-bottom: 1px solid #e4e4e4;
-  padding: 12px 0;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 0.0625rem solid #e4e4e4;
 }
-.댓글항목:last-child,
-.댓글항목.마지막댓글 {
+
+.댓글항목:last-child {
   border-bottom: none;
 }
 
 .댓글내용 {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 24px; /* 150% */
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01rem;
 }
+
 .댓글날짜 {
-  color: var(--Gray-Gray-600, #777);
-  font-size: 16px;
+  color: #777;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 24px; /* 150% */
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01rem;
 }
-/* 기분별 글자색 스타일을 별도로 분리 */
+
+#위로올리기 {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  display: none;
+
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#위로올리기 img {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+/* 수정모드 */
+.edit-mode .오늘기분물어보기 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.edit-mode .기분선택상자 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.edit-mode #오늘기분질문 {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem; /* 125% */
+  letter-spacing: -0.01rem;
+}
+.edit-mode .제목입력상자,
+.edit-mode .내용상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.edit-mode label {
+  color: var(--Gray-Gray-800, #333);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem; /* 133.333% */
+  letter-spacing: -0.0075rem;
+}
+.edit-mode .일기제목,
+.edit-mode .일기내용 {
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+
+  color: var(--Gray-B, #000);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5rem; /* 171.429% */
+  letter-spacing: -0.0875rem;
+
+  padding: 0.5rem 1rem;
+  align-items: center;
+  align-self: stretch;
+}
+.edit-mode .일기내용 {
+  max-height: 7rem;
+  overflow: scroll;
+}
+.edit-mode .버튼상자 {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.edit-mode .취소버튼,
+.edit-mode .수정완료버튼 {
+  width: 6.5rem;
+  height: 2.5rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.1px;
+}
+
 .일기기분.행복해요 {
   color: #ea5757;
 }
@@ -411,4 +347,29 @@ main {
 }
 .일기기분.기타 {
   color: #a229ed;
+}
+
+@media (max-width: 48.75rem) {
+  body {
+    gap: 2rem;
+  }
+  .입력상자 input {
+    width: 100%;
+    height: 2.5rem;
+    font-size: 0.875rem;
+  }
+  .댓글내용 {
+    color: #000;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1rem; /* 114.286% */
+    letter-spacing: -0.0875rem;
+  }
+  .댓글날짜 {
+    color: var(--Gray-Gray-600, #777);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem; /* 133.333% */
+    letter-spacing: -0.075rem;
+  }
 }

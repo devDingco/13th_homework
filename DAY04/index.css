@@ -1,5 +1,5 @@
 * {
-  padding: 0 20px;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
@@ -12,10 +12,8 @@ body {
 
 nav {
   display: flex;
-  padding: 0px 20px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
 a {
@@ -42,13 +40,13 @@ nav div span {
 .상단사진 {
   display: flex;
   justify-content: center;
-  gap: 10px;
 }
 
 .상단사진 img {
+  padding: 0;
   height: 240px;
-  min-width: 320px;
-  max-width: 1168px;
+  min-width: 20rem;
+  max-width: 73rem;
 }
 
 footer {
@@ -96,4 +94,13 @@ footer {
   font-weight: 300;
   line-height: 16px; /* 114.286% */
   letter-spacing: -0.14px;
+}
+
+@media (max-width: 780px) {
+  nav {
+    padding: 0 1.25rem;
+  }
+  .상단사진 {
+    padding: 0 1.25rem;
+  }
 }
