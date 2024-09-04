@@ -53,13 +53,26 @@
 .emotioncontainer {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
-.icon_emtion_box {
+.icon_emotion_date_box {
     width:1168px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     
+}
+.emotion_icon_box {
+    width: 109px;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.icon {
+    margin-right:8px;
+    width: 32px;
+    height: 32px;
 }
 .emotion {
     color: #EA5757;

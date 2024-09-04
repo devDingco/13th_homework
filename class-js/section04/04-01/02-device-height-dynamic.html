@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>디바이스 높이 감지 실습</title>
+
+    <style>
+        * {
+            margin: 0;
+        }
+        .CSS_푸터 {
+            height: 100px;
+            background-color: lightgrey;
+        }
+        .CSS_플로팅버튼 {
+            position: fixed;
+            bottom: 10px;
+            left: 90%;
+        }
+    </style>
+
+    <script>
+        window.addEventListener("scroll", () => {
+            const 화면위에서푸터위까지길이 = document.getElementById("HTML_푸터").getBoundingClientRect().top
+            console.log(`화면위에서푸터위까지길이: ${화면위에서푸터위까지길이}`)
+
+            const 보이는화면길이 = window.innerHeight //window.outerHeight - 메뉴, 주소창 등 포함
+            console.log(`보이는화면길이: ${보이는화면길이}`)
+
+            if(보이는화면길이 >= 화면위에서푸터위까지길이) {
+                document.getElementById("HTML_플로팅버튼").style = `
+                    position: relative;
+                    bottom: 50px;
+                    left: 90%;
+                `
+            }else {
+                document.getElementById("HTML_플로팅버튼").style = `
+                    position: fixed;
+                    bottom: 10px;
+                    left: 90%;
+                `
+            }
+        })
+    </script>
+</head>
+<body>
+    <img src="./00-dog.jpg" width="100%"/>
+    <button id="HTML_플로팅버튼" class="CSS_플로팅버튼"> ^ </button>
+    <div id="HTML_푸터" class="CSS_푸터">푸터</div>
+</body>
+</html>

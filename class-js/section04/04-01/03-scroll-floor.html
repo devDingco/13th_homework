@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>스크롤바닥 감지 실습</title>
+    <script>
+        window.addEventListener("scroll", () => {
+            const 스크롤내려간길이 = window.scrollY
+            const 스크롤바길이 = document.documentElement.clientHeight
+            const 스크롤전체길이 = document.documentElement.scrollHeight
+
+            if (스크롤내려간길이 + 스크롤바길이 === 스크롤전체길이) {
+                alert("스크롤이 바닥에 닿았습니다.")
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <img src="./00-dog.jpg" width="100%" />
+</body>
+
+</html>

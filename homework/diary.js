@@ -35,7 +35,7 @@ const submit = () => {
             title: title,
             content: content,
             emotion: chekcedRadio,
-            date: new Date().toLocaleDateString()
+            date: new Date().toLocaleDateString(),
         };
 
         const diarylist = getDiaryList()
@@ -85,6 +85,44 @@ const inputverify = () => {
 
     return writedtitle && wiredcontent && checkedEmotion;
 };
+
+const handleSelectChange = () => {
+    const selectBox = document.getElementById('selectbox');
+    const selectedEmotion = selectBox.value;
+    renderSelectBox(selectedEmotion); 
+  };
+  
+  const renderSelectBox = (emt) => {
+    const diarylistbox = document.querySelector(".diarylistbox");
+    const jsondiary = localStorage.getItem("diarylist");
+    const diarylist = JSON.parse(jsondiary) || [];
+  
+    // 셀렉트박스에서 전체가 선택되었을 때 모든 일기를 보여줌
+    const filteredDiaryList = emt ==='all' ? diarylist : diarylist.filter(entry => entry.emotion === emt)
+  
+    // 필터링된 일기 데이터를 기반으로 HTML 생성
+    const diaryHTML = filteredDiaryList.map((entry, index) => `
+      <div class="diarybox">
+        <div class="xbutton" onClick="removeDiaryEntry(${index})"></div>
+        <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
+          <div class="thumbnail_${entry.emotion}"></div>
+          <div class="textbox">
+            <div class="date_title_container">
+              <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
+              <div class="date">${entry.date}</div>
+            </div>
+            <div class="date_title_container">
+              <div class="title">${entry.title}</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    `).join('');
+  
+    diarylistbox.innerHTML = diaryHTML;
+  };
+  
+  
 
 
 // 다이어리 항목 랜더링 함수
@@ -146,6 +184,27 @@ const floating = () => {
     window.scrollTo({top:0, behavior:"smooth"});
 };
 
+window.addEventListener('scroll', () => {
+    const toptofooter = document.getElementById('footer').getBoundingClientRect().top;
+    const browserlength = window.innerHeight;
+    console.log(toptofooter)
+
+    if(browserlength >= toptofooter){
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 170px;
+            left: 78%;
+        `
+    }else{
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 10px;
+            left: 78%;
+
+                `
+    }
+    
+})
 
 
 
