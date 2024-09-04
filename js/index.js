@@ -127,7 +127,6 @@ diaryListHTML.addEventListener("scroll", (e) => {
     }
 });
 
-const scrollTopButtonHTML = document.querySelector("div.scroll-up-btn");
-scrollTopButtonHTML.addEventListener("click", (e) => {
+document.querySelector("div.scroll-up-btn").addEventListener("click", (e) => {
     diaryListHTML.scrollTo({top: 0, behavior: "smooth"});
 });
