@@ -51,13 +51,17 @@ const renderReminiscenceList = () => {
 const updateDiary = () => {
     const title = document.getElementById("update_contents_title").value
     const text = document.getElementById("update_contents_text").value
+    
+    const diaryList = fetchDiaryListFromLocalStorage()
+    diaryList.forEach(el => {
+        if (Number(el.id) === Number(diary.id)) {
+            el.title = title
+            el.text = text
+            el.mood = diary.mood
+        }
+    })
 
-    console.log(title)
-    diary.title = title
-    diary.text = text
-
-    const jsonData = JSON.stringify(diary)
-    localStorage.setItem(diary.id, jsonData)
+    updateDiaryListFromLocalStorage(diaryList)
 }
 
 // Tap or Press Event
