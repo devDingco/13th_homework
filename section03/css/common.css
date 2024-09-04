@@ -104,6 +104,10 @@
 
 /* Commons */
 
+:root {
+  scroll-behavior: smooth;
+}
+
 .flexbox {
   display: flex;
 }
