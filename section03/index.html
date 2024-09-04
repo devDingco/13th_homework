@@ -30,18 +30,18 @@
               </li>
             </ul>
           </nav>
-          <div class="content">
-            <div class="block-box filter">
-              <select class="filter-emotion" onchange="filterEmotion(event)">
-                <option selected disabled>전체</option>
-                <option>행복해요</option>
-                <option>슬퍼요</option>
-                <option>놀랐어요</option>
-                <option>화나요</option>
-                <option>기타</option>
-              </select>
-            </div>
+          <main class="main">
             <div class="flexbox main-content">
+              <div class="filter">
+                <select class="filter-emotion" onchange="filterEmotion(event)">
+                  <option selected disabled>전체</option>
+                  <option>행복해요</option>
+                  <option>슬퍼요</option>
+                  <option>놀랐어요</option>
+                  <option>화나요</option>
+                  <option>기타</option>
+                </select>
+              </div>
               <ul class="panel-list flexbox"></ul>
               <aside class="side-panel">
                 <h2 class="side-title">📍 일기 쓰기</h2>
@@ -87,7 +87,7 @@
                 </form>
               </aside>
             </div>
-          </div>
+          </main>
         </section>
       </div>
 
