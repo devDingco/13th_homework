@@ -53,6 +53,9 @@
 .detail-content p {
   font-weight: var(--weight-medium);
   margin-top: var(--gap-xs);
+  line-height: 3rem;
+  word-break: break-all;
+  white-space: wrap;
 }
 
 .actions {
