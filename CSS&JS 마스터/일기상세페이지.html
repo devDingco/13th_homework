@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <title>일기상세페이지</title>
-    <link rel="stylesheet" href="./일기상세페이지.css">
-    <script src="./일기상세페이지.js"></script>
-</head>
-<body>
-    <header>
-        <div class="header_text">민지의 다이어리</div>
-    </header>
-    <main>
-        <div class="main_header">
-            <div id="main_header_text"></div>
-            <div class="main_header_detail">
-                <div class="detail_emotion">
-                    <img src="" alt="" id="emotionImage">
-                    <div id="emotion_text"></div>
+    <head>
+        <title>일기상세페이지</title>
+        <link rel="stylesheet" href="./일기상세페이지.css">
+        <script src="./일기상세페이지.js"></script>
+    </head>
+    <body>
+        <div class="layout">
+            <header>
+                <div class="header_text">민지의 다이어리</div>
+            </header>
+            <main>
+                <div class="main_header">
+                    <div id="main_header_text"></div>
+                    <div class="main_header_detail">
+                        <div class="detail_emotion">
+                            <img src="" alt="" id="emotionImage">
+                            <div id="emotion_text"></div>
+                        </div>
+                        <div id="detail_date"></div>
+                    </div>
                 </div>
-                <div id="detail_date"></div>
+                <div class="main_body">
+                    <div class="body_title">내용</div>
+                    <div id="body_content"></div>
+                </div>
+                <div class="ButtonBox">
+                    <button onclick="modify()">수정</button>
+                    <button onclick="deleteButton()">삭제</button>
+                </div>
+            </main>
+            <div class="remembranceBox">
+                <div class="inputBox">
+                    <div class="inputTitle">회고</div>
+                    <div class="inputTextBox">
+                        <input type="text" id="inputText" placeholder="회고를 남겨보세요."> 
+                        <button class="inputButton" onclick="addText()">입력</button>
+                    </div>
+                </div>
+                <div id="remembranceTextBox">
+                    <!--회고텍스트넣을자리-->
+                </div>
             </div>
         </div>
-        <div class="main_body">
-            <div class="body_title">
-                <h2>내용</h2>
-            </div>
-            <div id="body_content"></div>
-        </div>
-        <div class="modifyButton">
-            <button onclick="modify()">수정</button>
-        </div>
-    </main>
-</body>
+    </body>
 </html>
