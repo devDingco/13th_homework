@@ -11,14 +11,16 @@
   align-items: center;
   background-color: #fff;
   position: absolute;
+  margin: 0 auto;
 }
 .header_layout {
+  width: 100%;
   display: flex;
   padding: 0 1.25rem;
   flex-direction: column;
   align-items: center;
   gap: 0.625rem;
-  align-self: stretch;
+  justify-content: center;
 }
 .header {
   display: flex;
@@ -44,21 +46,19 @@
   letter-spacing: -0.011rem;
 }
 .header_img_layout {
-  display: flex;
   padding: 0 1.25rem 1.5rem 1.25rem;
-  align-items: center;
-  gap: 0.625rem;
-  align-self: stretch;
   display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 .header_img {
   height: 15rem;
   min-width: 20rem;
   max-width: 73rem;
-  align-self: stretch;
+  /* width: 100%; */
   border-radius: 1.5rem;
   background-image: url("./image/header_img.png");
+  background-repeat: no-repeat;
 }
 .navigation_layout {
   display: flex;
@@ -218,7 +218,6 @@ ul li {
   align-items: flex-start;
   gap: 1.5rem;
   align-self: stretch;
-  overflow: scroll;
 }
 .article {
   display: flex;
@@ -567,19 +566,18 @@ ul li {
   right: 220px;
   bottom: 30px;
 }
-@media (max-width: 48.688rem) {
+@media (max-width: 50rem) {
+  .layout {
+    width: 100%;
+  }
   .layoutWrapper {
     flex-direction: column;
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .main {
     display: contents;
-  }
-  .header_img {
-    width: 20rem;
-    height: 15rem;
-    border-radius: 1.5rem;
-    background-image: url("./image/mobile_banner.png");
   }
   .aside {
     order: 1;
@@ -588,9 +586,32 @@ ul li {
     order: 3;
   }
   .diary_cover {
+    width: 100%;
     object-fit: cover;
   }
   .navigation_layout {
     order: 2;
+  }
+  .topScroll {
+    position: fixed;
+    z-index: 100;
+    right: 30px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 30rem) {
+  .header_img_layout {
+    padding: 0 1.25rem 1.5rem 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header_img {
+    width: 100%;
+    height: 15rem;
+    border-radius: 1.5rem;
+    background-image: url("./image/mobile_banner.png");
+    background-repeat: no-repeat;
   }
 }

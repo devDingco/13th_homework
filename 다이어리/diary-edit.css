@@ -369,6 +369,7 @@
   align-self: stretch;
   flex-wrap: wrap;
   padding-top: 0.75rem;
+  justify-content: space-between;
 }
 .comment_content {
   color: #000;
