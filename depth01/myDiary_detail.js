@@ -1,6 +1,8 @@
 const getDiary = JSON.parse(localStorage.getItem("diaryData"))
 const indexNum = window.location.search.substring(6)
+
 const currentDiary = getDiary[indexNum]
+
 
 const diaryMood = currentDiary.mood
 const diaryDate = currentDiary.date
@@ -9,10 +11,8 @@ const diaryContent = currentDiary.content
 
 const time = new Date().toISOString().split("T")[0].replace(/-/g, ". ")
 
-window.onload = () => {
-    makeDiaryDetail();
-    makeDiaryComment(getDiary)
-}
+makeDiaryDetail();
+makeDiaryComment(getDiary)
 
 function makeDiaryDetail() {
     const moodIndex = {
@@ -144,6 +144,11 @@ function submitEdit () {
     let editDate = time
     let editTitle = document.querySelector(".title__input").value
     let editContent = document.querySelector(".content__input").value
+
+    const getDiary = JSON.parse(localStorage.getItem("diaryData"))
+    const indexNum = window.location.search.substring(6)
+
+    const currentDiary = getDiary[indexNum]
 
     currentDiary.mood = editMood
     currentDiary.date = editDate

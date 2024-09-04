@@ -7,6 +7,10 @@
     font-family: 'Pretendard-Regular';
 }
 
+html {
+    font-size: 10px;
+}
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -27,43 +31,86 @@ a {
     align-items: center;
 }
 
+.container__header {
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        display: block;
+        padding: 2rem;
+        margin-bottom: 0rem;
+    }
+}
+
+.header__img {
+    @media (max-width: 375px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 1.6rem;
+    }
+}
+
 .header__text {
-    height: 60px;
-    font-size: 24px;
+    height: 6rem;
+    font-size: 2.4rem;
     display: flex;
     align-items: center;
-    margin: 24px 0px;
+    margin: 2.4rem 0rem;
+
+    @media (max-width: 375px) {
+        font-size: 1.8rem;
+    }
 }
 
 .container__nav {
     width: 100vw;
-    height: 150px;
+    height: 15rem;
     background-color: #FCFCFC;
-    gap: 10px;
-    margin: 24px 0px 42px 0px;
+    gap: 1rem;
+    margin: 2.4rem 0rem 4.2rem 0rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: sticky;
-    top: 0px;
+    top: 0rem;
     z-index: 2;
-    box-shadow: 0px 5px 0px 0px #fff;
+    box-shadow: 0rem 0.5rem 0rem 0rem #fff;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        display: block;
+        padding: 2rem;
+        position: static;
+    }
 }
 
 .nav__tap__bar {
     display: flex;
-    margin-bottom: 32px;
-    width: 1168px;
+    margin-bottom: 3.2rem;
+    width: 116.8rem;
     justify-content: flex-start;
+    gap: 1rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        order: 1;
+    }
 }
 
 .tap__active, .tap__disabled {
-    width: 120px;
-    height: 48px;
-    padding: 12px 8px;
-    font-size: 24px;
+    width: 12rem;
+    height: 4.8rem;
+    padding: 1.2rem 0.8rem;
+    font-size: 2.4rem;
     color: #222;
-    border-bottom: 2px solid #222;
+    border-bottom: 0.2rem solid #222;
+
+    @media (max-width: 375px) {
+        font-size: 2rem;
+        width: 11rem;
+    }
 }
 
 .tap__disabled {
@@ -74,47 +121,85 @@ a {
 .nav__filter__bar {
     display: flex;
     align-items: center;
-    width: 1168px;
+    width: 116.8rem;
     justify-content: flex-start;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        order: 3;
+        margin: 2rem 0rem;
+    }
 }
 
 .nav__filter {
-    width: 120px;
-    height: 32px;
+    width: 12rem;
+    height: 3.2rem;
     background-color: #fff;
-    border-radius: 8px;
-    font-size: 20px;
-    padding: 2px 4px;
+    border-radius: 0.8rem;
+    font-size: 2rem;
+    padding: 0.2rem 0.4rem;
 }
 
 .container__body {
-    width: 1168px;
+    width: 116.8rem;
     display: flex;
-    gap: 24px;
-    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+    margin-bottom: 4rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        flex-direction: column;
+        padding: 2rem;
+    }
 }
 
 .body__left__card {
-    width: 820px;
+    width: 78.4rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 2.4rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        order: 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .wrapper__card {
-    width: 380px;
-    height: 380px;
+    width: 38rem;
+    height: 38rem;
     background-color: #FFF;
-    border-radius: 16px;
-    box-shadow: 0px 4px 12px 0px #eee;
+    border-radius: 1.6rem;
+    box-shadow: 0rem 0.4rem 1.2rem 0rem #eee;
     position: relative;
+
+    @media (max-width: 375px) {
+        max-width: 15rem;
+        height: 100%;
+    }
+    @media (max-width: 360px) {
+        max-width: 14.4rem;
+    }
 }
 
 .wrapper__card:hover {
     transform: scale(110%);
     transition: 0.5s;
     transition-timing-function: ease-out;
+}
+
+.card__img {
+    @media (max-width: 375px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 1.6rem;
+    }
 }
 
 .card__img:hover {
@@ -125,33 +210,41 @@ a {
 }
 
 .card__delete {
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     background-image: url(./asset/icon/close_outline_light_m.png);
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0.4rem;
+    right: 0.4rem;
     z-index: 1;
 }
 
 .card__topic {
-    height: 64px;
-    padding: 0px 16px;
-    margin: 16px 8px;
+    height: 6.4rem;
+    padding: 0rem 1.6rem;
+    margin: 1.6rem 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 375px) {
+        margin: 1.6rem 0rem;        
+    }
 }
 
 .card__status {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 0.8rem;
 }
 
 .card__mood, .card__sad, .card__surprise, .card__angry, .card__happy, .card__etc, .card__date {
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 200;
+
+    @media (max-width: 375px) {
+        font-size: 1.2rem;
+    }
 }
 
 .card__sad {
@@ -179,67 +272,84 @@ a {
 }
 
 .card__title {
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
+
+    @media (max-width: 375px) {
+        font-size: 1.6rem;
+        overflow: hidden;
+    }
 }
 
 .body__right__diary {
-    width: 360px;
+    width: 36rem;
     height: 100%;
-    padding: 24px;
-    box-shadow: 0px 4px 12px 0px #eee;
-    border-radius: 16px;
+    padding: 2.4rem;
+    box-shadow: 0rem 0.4rem 1.2rem 0rem #eee;
+    border-radius: 1.6rem;
     background-color: #FFF;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        order: 2;
+    }
 }
 
 .diary__subject {
-    font-size: 24px;
-    margin-bottom: 40px;
+    font-size: 2.4rem;
+    margin-bottom: 4rem;
 }
 
 .diary__question {
-    font-size: 20px;
-    margin-bottom: 16px;
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
+    font-weight: 600;
 }
 
 .diary__radio {
     display: flex;
     flex-wrap: wrap;
-    font-size: 20px;
-    gap: 20px;
-    margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: 200;
+    gap: 2rem;
+    margin-bottom: 4rem;
+
+    @media (max-width: 375px) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
 }
 
 .diary__title, .diary__content {
-    font-size: 20px;
-    margin-bottom: 8px;
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
 }
 
 .diary__titleInput, .diary__contentInput {
     width: 100%;
-    height: 48px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 12px 8px;
-    margin-bottom: 24px;
+    height: 4.8rem;
+    border: 0.1rem solid #eee;
+    border-radius: 0.8rem;
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 2.4rem;
 }
 
 .diary__contentInput {
-    height: 128px;
-    margin-bottom: 40px;
+    height: 12.8rem;
+    margin-bottom: 4rem;
 }
 
 .diary__button {
     width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    padding: 8px;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    padding: 0.8rem;
     background-color: #F2F2F2;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #bbb;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .diary__button:hover {
@@ -250,14 +360,19 @@ a {
 }
 
 .container__floating {
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     position: fixed;
     background-image: url(./asset/icon/up_outline_light_xl.png);
     border-radius: 100%;
-    box-shadow: 0px 1px 6px 0px #767676;
+    box-shadow: 0rem 0.1rem 0.6rem 0rem #767676;
     right: 2%;
     bottom: 2%;
+
+    @media (max-width: 375px) {
+        right: 4%;
+        bottom: 2%;
+    }
 }
 
 .container__floating:hover {
@@ -266,23 +381,27 @@ a {
 
 .container__footer {
     width: 100%;
-    height: 160px;
+    height: 16rem;
     background-color: #F2F2F2;
-    padding: 24px;
+    padding: 2.4rem;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 }
 
 .wrapper__footer {
-    width: 1148px;
-    height: 112px;
+    width: 114.8rem;
+    height: 11.2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .footer__text {
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .footer__name, .footer__copy {

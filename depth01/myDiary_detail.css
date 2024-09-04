@@ -7,11 +7,21 @@
     font-family: 'Pretendard-Regular';
 }
 
+html {
+    font-size: 10px;
+}
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .container {
@@ -24,43 +34,59 @@
 }
 
 .container__header {
-    width: 1168px;
+    width: 116.8rem;
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 64px;
+    margin-bottom: 6.4rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        display: block;
+        padding: 2rem;
+        margin-bottom: 0rem;
+    }
+}
+
+.header__arrow {
+    margin: 0.8rem;
 }
 
 .header__text {
-    height: 60px;
-    font-size: 24px;
+    height: 6rem;
+    font-size: 2.4rem;
     display: flex;
     align-items: center;
-    margin: 24px 0px;
+    margin: 2rem 0rem 2.4rem 0rem;
 }
 
 .container__body {
-    width: 1168px;
+    width: 116.8rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        padding: 2rem;
+    }
 }
 
 .body__title {
     width: 100%;
-    height: 60px;
-    font-size: 24px;
+    height: 6rem;
+    font-size: 2.4rem;
     font-weight: 600;
-    line-height: 60px;
+    line-height: 6rem;
     display: flex;
     justify-content: flex-start;
-    border-bottom: 2px solid #222;
+    border-bottom: 0.2rem solid #222;
 }
 
 .body__status {
     width: 100%;
-    height: 96px;
+    height: 9.6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 8px;
-    margin-bottom: 16px;
+    padding-right: 0.8rem;
+    margin-bottom: 1.6rem;
 }
 
 .status__mood {
@@ -69,73 +95,94 @@
 }
 
 .mood__text {
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 600;
-    line-height: 96px;
-    margin: 0px 8px;
+    line-height: 9.6rem;
+    margin: 0rem 0.8rem;
     color: #767676;
+
+    @media (max-width: 375px) {
+        font-size: 2rem;
+    }
 }
 
 .status__post {
     display: flex;
-    gap: 8px;
+    gap: 0.8rem;
 }
 
 .post__date, .post__text {
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #bbb;
+
+    @media (max-width: 375px) {
+        font-size: 1.6rem;
+    }
 }
 
 .body__content {
-    height: 400px;
+    height: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 2px solid #222;
+    border-bottom: 0.2rem solid #222;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        display: block;
+    }
 }
 
 .content__title {
-    width: 1152px;
-    height: 60px;
+    width: 115.2rem;
+    height: 6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 1.6rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 }
 
 .title__text {
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 600;
 }
 
 .title__button {
     display: flex;
-    gap: 16px;
+    gap: 1.6rem;
 }
 
 .btn__edit, .btn__delete {
-    width: 96px;
-    height: 40px;
+    width: 9.6rem;
+    height: 4rem;
     color: #222;
     background-color: #FCFCFC;
-    border: 2px solid #bbb;
-    border-radius: 8px;
+    border: 0.2rem solid #bbb;
+    border-radius: 0.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 1.8rem;
+
+    @media (max-width: 375px) {
+        font-size: 1.6rem;
+    }
 }
 
 .btn__edit {
     background-color: #FCFCFC;
     color: #FFBE98;
-    border: 2px solid #FFBE98;
+    border: 0.2rem solid #FFBE98;
 }
 
 .btn__delete:hover {
     background-color: #767676;
     color: #fff;
-    border: 2px solid #FCFCFC;
+    border: 0.2rem solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
 }
@@ -143,69 +190,86 @@
 .btn__edit:hover {
     background-color: #FFBE98;
     color: #fff;
-    border: 2px solid #FCFCFC;
+    border: 0.2rem solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
     transform: rotate(3deg);
 }
 
 .content__text {
-    width: 1152px;
-    height: 300px;
-    border-radius: 8px;
+    width: 115.2rem;
+    height: 30rem;
+    border-radius: 0.8rem;
     background-color: #F2F2F2;
-    font-size: 20px;
-    padding: 16px;
-    margin-bottom: 32px;
+    font-size: 2rem;
+    padding: 1.6rem;
+    margin-bottom: 3.2rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        font-size: 1.6rem;
+    }
 }
 
 .container__edit {
-    width: 1148px;
+    width: 114.8rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        padding: 2rem;
+    }
 }
 
 .edit__question {
-    font-size: 24px;
-    margin-bottom: 16px;
+    font-size: 2.4rem;
+    margin-bottom: 1.6rem;
 }
 
 .edit__radio {
-    height: 30px;
+    height: 3rem;
     display: flex;
-    gap: 20px;
-    margin-bottom: 24px;
+    gap: 2rem;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        height: 24rem;
+    }
 }
 
 label {
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 2rem;
+    line-height: 3rem;
 }
 
 .title__text2, .content__text2 {
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 2.4rem;
+    margin-bottom: 0.8rem;
 }
 
 .title__input, .content__input {
     width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    padding: 12px 16px;
-    margin-bottom: 24px;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #ddd;
+    padding: 1.2rem 1.6rem;
+    margin-bottom: 2.4rem;
 }
 
 .edit__button {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 1.6rem;
 }
 
 .btn__cancel, .btn__submit {
-    width: 116px;
-    height: 48px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 20px;
+    width: 11.6rem;
+    height: 4.8rem;
+    border: 0.2rem solid #ddd;
+    border-radius: 0.8rem;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -214,7 +278,7 @@ label {
 .btn__cancel:hover {
     background-color: #767676;
     color: #fff;
-    border: 2px solid #FCFCFC;
+    border: 0.2rem solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
 }
@@ -222,7 +286,7 @@ label {
 .btn__submit:hover {
     background-color: #FFBE98;
     color: #fff;
-    border: 2px solid #FCFCFC;
+    border: 0.2rem solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
     transform: rotate(3deg);
@@ -230,47 +294,66 @@ label {
 
 
 .content__input {
-    height: 128px;
+    height: 12.8rem;
 }
 
 .container__comment {
-    width: 1148px;
+    width: 114.8rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+        padding: 2rem;
+    }
 }
 
 .comment__title {
-    margin-top: 24px;
-    font-size: 24px;
-    margin-bottom: 16px;
+    margin-top: 2.4rem;
+    font-size: 2.4rem;
+    margin-bottom: 1.6rem;
     font-weight: 600;
 }
 
 .comment__input {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 1.6rem;
+
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 }
 
 .input__text {
-    width: 1000px;
-    height: 48px;
-    border: 2px solid #bbb;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 20px;
+    width: 100rem;
+    height: 4.8rem;
+    border: 0.2rem solid #bbb;
+    border-radius: 0.8rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 2rem;
+
+    @media (max-width: 375px) {
+        width: 23.5rem;
+        font-size: 1.8rem;
+    }
 }
 
 .btn__input {
-    width: 116px;
-    height: 48px;
+    width: 11.6rem;
+    height: 4.8rem;
     background-color: #fcfcfc;
     color: #222;
-    border: 2px solid #bbb;
-    font-size: 20px;
-    border-radius: 8px;
-    padding: 4px;
+    border: 0.2rem solid #bbb;
+    font-size: 2rem;
+    border-radius: 0.8rem;
+    padding: 0.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 375px) {
+        width: 8rem;
+        font-size: 1.8rem;
+    }
 }
 
 .btn__input:hover {
@@ -282,23 +365,35 @@ label {
 }
 
 .comment__list {
-    width: 1148px;
+    width: 114.8rem;
     height: 100%;
+
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 }
 
 .list__section {
-    height: 60px;
-    border-bottom: 2px solid #ddd;
+    height: 6rem;
+    border-bottom: 0.2rem solid #ddd;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .list__text {
-    font-size: 20px;
+    font-size: 2rem;
+
+    @media (max-width: 375px) {
+        font-size: 1.6rem;
+    }
 }
 
 .list__date {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #bbb;
+
+    @media (max-width: 375px) {
+        font-size: 1.4rem;
+    }
 }

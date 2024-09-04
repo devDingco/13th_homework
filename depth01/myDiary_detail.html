@@ -10,7 +10,13 @@
 <body>
     <div class="container">
         <div class="container__header">
-            <div class="header__text"> <b class="header__text" id="header__login"> {name} </b>의 다이어리 </div>
+            <a href="../myDiary.html">
+                <div class="header__arrow">
+                    <img src="../asset/icon/leftenable_outline_light_m.png" />
+                </div>
+                <div class="header__text">일기 보기</div>
+                <div class="header__text">일기 수정</div>
+            </a>
         </div>
 
         <div class="container__body">
@@ -52,11 +58,21 @@
         <div class="container__edit" hidden>
             <div class="edit__question">오늘 기분은 어땠나요?</div>
             <div class="edit__radio">
-                <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
-                <input type="radio" name="mood" value="sad" id="radioSad"/> <label for="radioSad"> 슬퍼요 </label>
-                <input type="radio" name="mood" value="surprise" id="radioSurprise"/> <label for="radioSurprise"> 놀랐어요 </label>
-                <input type="radio" name="mood" value="angry" id="radioAngry"/> <label for="radioAngry"> 화나요 </label>
-                <input type="radio" name="mood" value="etc" id="radioEtc"/> <label for="radioEtc"> 기타 </label>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="sad" id="radioSad"/> <label for="radioSad"> 슬퍼요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="surprise" id="radioSurprise"/> <label for="radioSurprise"> 놀랐어요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="angry" id="radioAngry"/> <label for="radioAngry"> 화나요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="etc" id="radioEtc"/> <label for="radioEtc"> 기타 </label>
+                </div>
             </div>
             <div class="edit__title">
                 <div class="title__text2">제목</div>
