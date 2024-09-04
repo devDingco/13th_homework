@@ -31,7 +31,7 @@ const appendDiaryEntry = (diaryCard) => {
 
   if (
     article.children.length == 0 ||
-    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 2
+    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 4
   ) {
     const diaryEntryContainer = document.createElement("div");
     diaryEntryContainer.className = "diary_entry_container";
@@ -64,13 +64,11 @@ const createHtml = (diaryEntry) => {
             <img
               class="diary_cover"
               src="./image/${diaryEntry.imageName}.png"
-              width="774px"
             />
             <div id="delete_button" onclick="deleteDiaryEntry(event)">
             <img
               class="${diaryEntry.id}"
               src="./image/delete_button.png"
-              width:"24px"
             />
             </div>
           </div>
@@ -218,12 +216,27 @@ const deleteDiaryEntry = (event) => {
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  updateDiaryList(storedDiaryList)
+  updateDiaryList(storedDiaryList);
 };
 
 const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
+const triggerDiaryWriteModal = () => {
+  document.getElementById("aside_layout").style = "display: flex;";
+};
+
+const modalClose = () => {
+  document.getElementById("aside_layout").style = "display: none;";
+}
+
+const showDiaryCancelConfirmationModal = () => {
+  modalClose()
+}
+
+const showDiaryRegistrationModal = () => {
+  registerDiary();
+}
+
 moodList.addEventListener("click", onClickMood);
-registerButton.addEventListener("click", registerDiary);
