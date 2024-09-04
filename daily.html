@@ -2,8 +2,32 @@
 <html lang="ko">
     <head>
         <title>daily</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./style/dailyStyle.css" />
         <script>
+            window.onload = function () {
+                const images = document.querySelectorAll("img.post-img");
+
+                if (window.innerWidth < 400) {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(
+                            /(\/img\/[a-zA-Z]+)(\.png)$/,
+                            "$1-1$2"
+                        );
+
+                        img.src = url.href;
+                    });
+                } else {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(/-1\.png$/, ".png");
+                        img.src = url.href;
+                    });
+                }
+            };
             document.addEventListener("DOMContentLoaded", (event) => {
                 const initialDailyArray = [
                     {
@@ -107,6 +131,30 @@
                     localStorage.setItem("idx", dailyArray.length);
                 }
             });
+
+            addEventListener("resize", () => {
+                const images = document.querySelectorAll("img.post-img");
+
+                if (window.innerWidth < 400) {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(
+                            /(\/img\/[a-zA-Z]+)(\.png)$/,
+                            "$1-1$2"
+                        );
+
+                        img.src = url.href;
+                    });
+                } else {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(/-1\.png$/, ".png");
+                        img.src = url.href;
+                    });
+                }
+            });
         </script>
     </head>
     <body>
@@ -119,11 +167,14 @@
             </header>
             <article>
                 <div class="article-header">
-                    <div>일기 보관함</div>
-                    <div class="article-header-text">사진 보관함</div>
+                    <div class="article-header-font">일기 보관함</div>
+                    <div class="article-header-text article-header-font">
+                        사진 보관함
+                    </div>
                     <select
                         name=""
                         id="select-post"
+                        class="select-post"
                         onchange="onChangeSelected(event)"
                     >
                         <option disabled selected>전체</option>
@@ -243,9 +294,11 @@
             </article>
         </main>
         <footer>
-            <div class="footer-1">민지의 다이어리</div>
-            <div class="footer-2">대표 : 민지</div>
-            <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
+            <div class="footer_container">
+                <div class="footer-1">민지의 다이어리</div>
+                <div class="footer-2">대표 : 민지</div>
+                <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
+            </div>
         </footer>
     </body>
 
