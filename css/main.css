@@ -96,9 +96,6 @@
   flex-shrink: 0;
   height: 100%;
 }
-.filterSearchBox .searchBox .searchPopBtn {
-  height: 100%;
-}
 .filterSearchBox .searchBox input[type=search] {
   border: none;
   width: 100%;
