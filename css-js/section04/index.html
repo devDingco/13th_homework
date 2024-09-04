@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다이어리 만들기</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./javascript/index.js"></script>
+  </head>
+  <body>
+    <div class="CSS_레이아웃">
+      <!--헤더-->
+      <div class="CSS_헤더">
+        <div>민지의 다이어리</div>
+      </div>
+      <img class="CSS_배너이미지" src="./assets/images/banner.png" />
+
+      <div class="content-area">
+        <!--내비게이션-->
+        <div class="CSS_탭">
+          <div class="CSS_클릭된탭">일기보관함</div>
+          <div class="CSS_클릭되지않은탭">사진보관함</div>
+        </div>
+        <!--필터-->
+        <div class="CSS_필터_영역_배경">
+          <select class="CSS_필터" onchange="JS_필터링기능(event)">
+            <option selected>전체</option>
+            <option value="HTML_행복선택">행복해요</option>
+            <option value="HTML_슬픔선택">슬퍼요</option>
+            <option value="HTML_놀람선택">놀랐어요</option>
+            <option value="HTML_화남선택">화나요</option>
+            <option value="HTML_기타선택">기타</option>
+          </select>
+        </div>
+
+        <div class="CSS_메인">
+          <!--일기 보여주는 곳-->
+
+          <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
+
+          <!--등록 상자-->
+          <div class="CSS_등록상자">
+            <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+            <div class="CSS_등록상자_내용_영역">
+              <div class="CSS_등록상자_내용">오늘 기분은 어땠나요?</div>
+              <div class="CSS_라디오그룹">
+                <div class="CSS_라디오버튼">
+                  <input
+                    type="radio"
+                    name="HTML_기분선택버튼"
+                    value="행복"
+                    checked
+                  />
+                  <div>행복해요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                  <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                  <div>슬퍼요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                  <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                  <div>놀랐어요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                  <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                  <div>화나요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                  <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                  <div>기타</div>
+                </div>
+              </div>
+              <div class="CSS_일기입력상자">
+                <div class="CSS_일기쓰기">
+                  <div>제목</div>
+                  <input
+                    type="text"
+                    id="HTML_제목입력창"
+                    placeholder="제목을 입력해 주세요."
+                  />
+                </div>
+                <div class="CSS_일기쓰기">
+                  <div>내용</div>
+                  <textarea
+                    id="HTML_내용입력창"
+                    rows="5"
+                    placeholder="내용을 입력해 주세요."
+                  ></textarea>
+                </div>
+              </div>
+              <div>
+                <button class="CSS_일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
+                  등록하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--플로팅버튼-->
+    <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
+      <img
+        class="CSS_플로팅이미지"
+        src="./assets/images/floatingButton.png"
+        onclick="JS_스크롤위로기능()"
+      />
+    </button>
+
+    <!--푸터-->
+    <div id="HTML_푸터" class="CSS_푸터_영역">
+      <div class="CSS_푸터">
+        <div class="CSS_푸터_제목">민지의 다이어리</div>
+        <p class="CSS_푸터_대표">대표 : {name}</p>
+        <p class="CSS_푸터_Copyright">Copyright © 2024.{name} Co., Ltd.</p>
+      </div>
+    </div>
+  </body>
+</html>
