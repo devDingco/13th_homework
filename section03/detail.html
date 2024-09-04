@@ -28,8 +28,8 @@
             </div>
             <div class="detail-content"></div>
             <div class="actions flexbox">
-              <a class="button-edit" href="./edit?number.html">수정</a>
-              <button class="button-delete">삭제</button>
+              <a class="button-edit" onclick="goToEdit()">수정</a>
+              <button class="button-delete" onclick="deleteItem()">삭제</button>
             </div>
           </div>
           <div class="review" id="review">
@@ -54,6 +54,10 @@
             </ul>
           </div>
         </section>
+      </div>
+
+      <div class="scroll-up">
+        <button class="button-scroll-up" onclick="scrollToTop()"><img src="./assets/images/icon_scroll_up.svg" alt="맨 위로 이동하기" /></button>
       </div>
     </div>
   </body>

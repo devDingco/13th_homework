@@ -1,7 +1,8 @@
+const queryString = window.location.search;
+const parameters = new URLSearchParams(queryString);
+const itemNumber = parameters.get('number');
+
 window.onload = () => {
-  const queryString = window.location.search;
-  const parameters = new URLSearchParams(queryString);
-  const itemNumber = parameters.get('number');
   const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
 
@@ -39,4 +40,25 @@ window.onload = () => {
   document.querySelector('.emotion-thumbnail').innerHTML = `<img src="${emotionImage}" alt="" />`;
   document.querySelector('.detail-date').innerHTML = `${diaryDetail.createdAt} 작성</span>`;
   document.querySelector('.detail-content').innerHTML = `<h3>내용</h3><p>${diaryDetail.content}</p>`;
+};
+
+const goToEdit = () => {
+  window.location.href = `./edit.html?number=${itemNumber}`;
+};
+
+const deleteItem = () => {
+  const diaryListString = window.localStorage.getItem('myDiaryList') !== null ? window.localStorage.getItem('myDiaryList') : '[]';
+  const diaryList = JSON.parse(diaryListString);
+  if (itemNumber !== null) {
+    const filteredList = diaryList.filter((_, index) => index !== parseInt(itemNumber));
+
+    console.log(typeof itemNumber);
+    console.log(filteredList);
+
+    window.localStorage.setItem('myDiaryList', JSON.stringify(filteredList));
+
+    alert('일기가 삭제되었습니다.');
+
+    location.replace('./index.html');
+  }
 };
