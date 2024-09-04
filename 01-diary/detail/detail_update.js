@@ -38,7 +38,7 @@ const inputMoodCheck = () => {
 }
 
 const render = () => {
-    document.getElementById("update_contents_title").innerText = diary.title
+    document.getElementById("update_contents_title").value = diary.title
     document.getElementById("update_contents_text").innerText = diary.text
     selectMoodCheck()
     renderReminiscenceList()
@@ -48,6 +48,7 @@ const updateDiary = () => {
     const title = document.getElementById("update_contents_title").value
     const text = document.getElementById("update_contents_text").value
 
+    console.log(title)
     diary.title = title
     diary.text = text
 
