@@ -40,7 +40,7 @@ const createHtml = (diary) => {
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
       </a>
-        <button class="modification_Btn">삭제</button>
+        <button class="modification_Btn" onclick="deleteDiary()">삭제</button>
       </div>
   `;
 
@@ -91,6 +91,14 @@ diaryEntries = diaryDetailContentList
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);
 })
+
+const deleteDiary = () => {
+  console.log(index)
+  diaryDetailContentList.splice(index, 1);
+  localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
+  alert("삭제 되었습니다.")
+  window.location.href = "./diary.html";
+};
 
 createHtml(diary);
 
