@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/media.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
     <link
       rel="stylesheet"
       as="style"
@@ -48,7 +54,6 @@
             <button class="filterPopBtn" onclick="optionShow(event)">
               전체
             </button>
-            <!-- onchange="moodFilter()" -->
             <ul class="diaryFilter filterList" name="moodFilter">
               <li
                 class="active"
@@ -83,6 +88,7 @@
               </li>
             </ul>
           </div>
+          <button class="searchMobilePopBtn" onclick="searchShow()"></button>
           <div class="searchBox">
             <div class="selectBox">
               <button
@@ -121,7 +127,9 @@
             />
           </div>
         </div>
-        <!-- <button class="diaryWritePopBtn">
+        <!-- 
+          나중에 추가할 기능 삭제 X
+        <button class="diaryWritePopBtn" onclick="diaryWritePop()">
           <img src="./img/plus_outline_light_m.svg" alt="plus" />
           일기쓰기
         </button> -->
@@ -143,72 +151,7 @@
           </li>
         </ul> -->
       </article>
-      <article class="diaryWrite">
-        <!-- <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
-        <div>
-          <div class="moodTypeRadio">
-            <span>오늘 기분은 어땠나요?</span>
-            <div class="radioWrap">
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="행복해요"
-                  checked
-                />행복해요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="슬퍼요"
-                />슬퍼요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="놀랐어요"
-                />놀랐어요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="화나요"
-                />화나요</label
-              >
-              <label
-                ><input type="radio" name="moodType" value="기타" />기타</label
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="diaryContent">
-          <label>
-            <span>제목</span>
-            <input
-              class="diaryTitle"
-              type="text"
-              placeholder="제목을 입력해 주세요."
-              oninput="textCheck()"
-            />
-          </label>
-          <label>
-            <span>내용</span>
-            <textarea
-              class="diaryDesc"
-              placeholder="내용을 입력해 주세요."
-              oninput="textCheck()"
-            ></textarea>
-          </label>
-        </div>
-
-        <button class="diaryWriteBtn" onclick="diarySave()" disabled>
-          등록하기
-        </button> -->
-      </article>
+      <article class="diaryWrite"></article>
     </section>
 
     <div class="scrollBox">
@@ -228,6 +171,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
     <script src="./js/index.js"></script>
     <script src="./js/main.js"></script>
