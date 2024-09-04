@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   max-width: 100%;
+  /* width: 100%; */
 }
 .layout {
   display: flex;
@@ -10,11 +11,11 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  position: absolute;
   margin: 0 auto;
+  flex-direction: column;
 }
 .header_layout {
-  width: 100%;
+  width: 73rem;
   display: flex;
   padding: 0 1.25rem;
   flex-direction: column;
@@ -50,12 +51,11 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 .header_img {
   height: 15rem;
-  min-width: 20rem;
-  max-width: 73rem;
-  /* width: 100%; */
+  width: 100%;
   border-radius: 1.5rem;
   background-image: url("./image/header_img.png");
   background-repeat: no-repeat;
@@ -213,6 +213,7 @@ ul li {
   background-color: #f2f2f2;
 }
 .main {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -519,7 +520,7 @@ ul li {
   border: none;
 }
 .footer_layout {
-  width: 120rem;
+  width: 100%;
   height: 10rem;
   display: flex;
   padding: 1.5rem 1.25rem;
@@ -530,7 +531,7 @@ ul li {
   background: var(--Gray-Gray-50, #f2f2f2);
 }
 .footer {
-  width: 73rem;
+  width: 100%;
   height: 7rem;
   display: flex;
   max-width: 73rem;
@@ -561,10 +562,16 @@ ul li {
   letter-spacing: -0.009rem;
 }
 .topScroll {
-  position: fixed;
-  z-index: 100;
-  right: 220px;
-  bottom: 30px;
+  width: 3.125rem;
+  position: sticky;
+  top: calc(100% - 1rem);
+  border: none;
+}
+.topScroll > img {
+  width: 3.125rem;
+  position: absolute;
+  right: 4.5rem;
+  bottom: 0.313rem;
 }
 @media (max-width: 50rem) {
   .layout {
@@ -592,20 +599,20 @@ ul li {
   .navigation_layout {
     order: 2;
   }
-  .topScroll {
-    position: fixed;
-    z-index: 100;
-    right: 30px;
-    bottom: 30px;
-  }
+  .topScroll > img {
+  width: 3.125rem;
+  position: absolute;
+  left: 9.375rem;
+  bottom: 0.313rem;
 }
-
+}
 @media (max-width: 30rem) {
   .header_img_layout {
     padding: 0 1.25rem 1.5rem 1.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
   .header_img {
     width: 100%;

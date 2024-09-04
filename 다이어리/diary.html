@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>diary</title>
     <link rel="stylesheet" href="./diary.css" />
   </head>
@@ -117,18 +117,18 @@
                 <button class="register_button">등록하기</button>
               </div>
             </div>
+            <button onclick="upScroll()" class="topScroll">
+              <img src="./image/topscroll.png" id="upScroll" />
+            </button>
           </div>
         </div>
-        <div onclick="upScroll()">
-          <img src="./image/topscroll.png" width="40px" class="topScroll" />
-        </div>
-        <div class="footer_layout">
-          <div class="footer">
-            <div class="footer_title">예슬이의 다이어리</div>
-            <div class="footer_representative">대표 : 강예슬</div>
-            <div class="footer_copyright">
-              Copyright © 2024. 강예슬 Co., Ltd.
-            </div>
+      </div>
+      <div class="footer_layout">
+        <div class="footer">
+          <div class="footer_title" id="footer">예슬이의 다이어리</div>
+          <div class="footer_representative">대표 : 강예슬</div>
+          <div class="footer_copyright">
+            Copyright © 2024. 강예슬 Co., Ltd.
           </div>
         </div>
       </div>
