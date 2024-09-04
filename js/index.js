@@ -290,22 +290,3 @@ const scrollBtnRender = () => {
 }
 
 scrollBtnRender();
-
-
-
-
-// !일기 내용 작성 확인에 따른 저장 버튼 활성화 함수
-const textCheck = (e) => {
-  const diaryTitle = document.querySelector(".diaryTitle").value;
-  // const diaryDesc = document.querySelector(".diaryDesc").value;
-  const diaryDesc = editor.getText();
-  if (diaryTitle.length > 0 && diaryDesc.length > 0) {
-    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
-    diaryWriteBtn.classList.add("active");
-    diaryWriteBtn.disabled = false;
-  } else {
-    const diaryWriteBtn = document.querySelector(".diaryWriteBtn");
-    diaryWriteBtn.classList.remove("active");
-    diaryWriteBtn.disabled = true;
-  }
-}
