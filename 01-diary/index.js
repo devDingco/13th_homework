@@ -1,5 +1,3 @@
-const diaryListKey = "diaryList"
-
 let diaryList = []
 let filteredDiaryList = []
 
@@ -10,7 +8,8 @@ let selectedMood
 let isFiltered = false
 
 window.onload = () => {
-    fetchDiaryFromLocalStorage()
+    diaryList = fetchDiaryListFromLocalStorage()
+    console.log(diaryList)
     reloadData(diaryList)
 }
 
@@ -50,41 +49,6 @@ const activateWriteButton = () => {
     }
 }
 
-// [Local Storage]
-const createDiaryListFromLocalStorage = () => {
-    if (localStorage.getItem(diaryListKey) === null ) {
-        const diaryList = []
-        const jsonData = convertToJSON(diaryList)
-        localStorage.setItem(diaryListKey, jsonData)
-        console.log("빈 다이어리 리스트를 생성했습니다.")
-    }
-}
-
-const updateDiaryListFromLocalStorage = () => {
-    const jsonData = convertToJSON(diaryList)
-    localStorage.setItem(diaryListKey, jsonData)
-    reloadData(diaryList)
-}
-
-const fetchDiaryFromLocalStorage = () => {
-    createDiaryListFromLocalStorage()
-
-    const jsonData = localStorage.getItem(diaryListKey)
-    const objects = parseJSON(jsonData)
-    diaryList = objects
-}
-
-const convertToJSON = (data) => {
-    const convertedData = JSON.stringify(data)
-    return convertedData
-}
-
-const parseJSON = (data) => {
-    const convertedData = JSON.parse(data)
-    console.log(`parseJSON: 변환된 데이터 ${convertedData} 입니다.`)
-    return convertedData
-}
-
 // [Data CRUD]
 const createDiary = () => {
     console.log("createDiary: 일기를 작성합니다.")
@@ -97,7 +61,8 @@ const createDiary = () => {
         reminiscenceList: []
     })
 
-    updateDiaryListFromLocalStorage()
+    updateDiaryListFromLocalStorage(diaryList)
+    reloadData(diaryList)
     alert(`일기가 추가되었습니다.`)
 }
 
@@ -105,7 +70,8 @@ const removeDiary = (id) => {
     const updateDiaryList = diaryList.filter(el => Number(el.id) !== Number(id))
     console.log(`다이어리가 삭제 됩니다. ${updateDiaryList}`)
     diaryList = updateDiaryList
-    updateDiaryListFromLocalStorage()
+    updateDiaryListFromLocalStorage(diaryList)
+    reloadData(diaryList)
 }
 
 const filterDiary = () => {
@@ -130,16 +96,6 @@ const getID = () => {
         const newID = Number(lastID) + 1
         return newID
     }
-}
-
-const getToday = () => {
-    const date = new Date()
-
-    const year = date.getFullYear()
-    const convertedMonth = String(date.getMonth() + 1).padStart(2, "0")
-    const convertedDate = String(date.getDate()).padStart(2, "0")
-
-    return `${year}. ${convertedMonth}. ${convertedDate}`
 }
 
 const getMoodSettings = (mood) => {

@@ -1,27 +1,38 @@
+// Variables
 let diary
-let reminiscenceList = []
 let reminiscenceText = ""
 
-
+// view Will Load
 window.onload = () => {
-    fetchDetailDataFromLocalStorage()
+    const id = getParameters()
+    diary = getDetailData(id)
+    console.log(diary)
     render()
     scrollPositionSetting()
 }
 
-const fetchDetailDataFromLocalStorage = () => {
-    const queryString = location.search
-    const parameters = new URLSearchParams(queryString)
-
-    const diaryID = parameters.get("diaryID")
-    console.log(`상세보기 할 ID는 ${diaryID} 입니다.`)
-
-    const jsonData = localStorage.getItem(diaryID)
-    diary = JSON.parse(jsonData)
-    reminiscenceList = diary.reminiscenceList
-    console.log(reminiscenceList)
+// Input Data Validate
+const inputTextCheck = () => {
+    reminiscenceText = document.getElementById("reminiscence_input_text").value
 }
 
+// [Data CRUD]
+const createReminiscence = (id) => {
+    diary.reminiscenceList.push({text: reminiscenceText})
+    console.log(diary.reminiscenceList[0])
+    
+    const diaryList = fetchDiaryListFromLocalStorage()
+    diaryList.forEach(el => {
+        if (Number(el.id) === Number(id)) {
+            el.reminiscenceList = diary.reminiscenceList
+        }
+    })
+
+    updateDiaryListFromLocalStorage(diaryList)
+    renderReminiscenceList()
+}
+
+// Rendering
 const render = () => {
     document.getElementById("detail_diary_title").innerText = diary.title
     document.getElementById("detail_diary_mood").innerText = diary.mood
@@ -30,16 +41,19 @@ const render = () => {
     renderReminiscenceList()
 }
 
-const inputTextCheck = () => {
-    reminiscenceText = document.getElementById("reminiscence_input_text").value
+const renderReminiscenceList = () => {
+    const reminiscenceDOMList = diary.reminiscenceList.map(el => `
+        <div class="reminiscence_list_container_items">
+            <div class="reminiscence_list_item_text">${el.text}</div>
+            <div class="reminiscence_list_item_date">[${getToday()}]</div>
+         </div>
+         <div class="break_line"></div>`
+    ).join("")
+    
+    document.getElementById("reminiscence_list").innerHTML = reminiscenceDOMList
 }
 
-const createReminiscence = () => {
-    diary.reminiscenceList.push({text: reminiscenceText})
-    const jsonData = JSON.stringify(diary)
-    localStorage.setItem(diary.id, jsonData)
-}
-
+// Tap or Press Event
 const updateButtonPressed = () => {
     const id = diary.id
     location.href = `./detail_update.html?diaryID=${id}`
@@ -53,36 +67,13 @@ const deleteButtonPressed = () => {
 }
 
 const inputButtonTapped = () => {
-    const reminiscence = { text: reminiscenceText }
-    reminiscenceList.push(reminiscence)
-    renderReminiscenceList()
+    const id = getParameters()
     document.getElementById("reminiscence_input_text").value = null
-    createReminiscence()
+    createReminiscence(id)
     alert(`댓글을 등록했습니다.`)
 }
 
-const renderReminiscenceList = () => {
-    const reminiscenceDOMList = reminiscenceList.map(el => `
-        <div class="reminiscence_list_container_items">
-            <div class="reminiscence_list_item_text">${el.text}</div>
-            <div class="reminiscence_list_item_date">[${getToday()}]</div>
-         </div>
-         <div class="break_line"></div>`
-    ).join("")
-    
-    document.getElementById("reminiscence_list").innerHTML = reminiscenceDOMList
-}
-
-const getToday = () => {
-    const date = new Date()
-
-    const year = date.getFullYear()
-    const convertedMonth = String(date.getMonth() + 1).padStart(2, "0")
-    const convertedDate = String(date.getDate()).padStart(2, "0")
-
-    return `${year}.${convertedMonth}.${convertedDate}`
-}
-
+// Other
 const scrollPositionSetting = () => {
     const y = document.getElementById("reminiscence_input_text").offsetTop
     window.scrollTo({top: y, behavior: "smooth"})
