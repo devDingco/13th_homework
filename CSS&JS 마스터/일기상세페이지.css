@@ -268,3 +268,10 @@ main {
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 10px;
 }
+
+@media (max-width: 1200px) {
+    .layout {
+        width: 100%;
+        padding: 0 25px;
+    }
+}

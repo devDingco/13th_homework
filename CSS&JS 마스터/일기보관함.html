@@ -32,39 +32,35 @@
                     <!--일기들어갈곳-->
                 </div>
                 <div class="storage_rightBody"> <!-- 라디오버튼 + 텍스트박스 + 버튼 -->
-                    <div class="storage_rightBody_header">
-                        📍 일기 쓰기
-                    </div>
-                    <div class="storage_rightBody_inputBox"> <!--라디오 버튼 + 텍스트 박스-->
-                        <div class="emotion_radioBox"> <!-- 라디오버튼 -->
-                            <div class="radioBox_header">오늘 기분은 어땟나요?</div>
-                            <div class="radioBox_body">
-                                <div class="radioButton">
-                                    <input type="radio" name="emotion" id="happpy" value="행복해요"><label for="happpy">행복해요</label>
-                                </div>
-                                <div class="radioButton">
-                                    <input type="radio" name="emotion" id="sad" value="슬퍼요"><label for="sad">슬퍼요</label>
-                                </div>
-                                <div class="radioButton">
-                                    <input type="radio" name="emotion" id="surprised" value="놀랐어요"><label for="surprised">놀랐어요</label>
-                                </div>
-                                <div class="radioButton">
-                                    <input type="radio" name="emotion" id="angry" value="화나요"><label for="angry">화나요</label>
-                                </div>
-                                <div class="radioButton">
-                                    <input type="radio" name="emotion" id="etc" value="기타"><label for="etc">기타</label>
-                                </div>
+                    <div class="storage_rightBody_header">📍 일기 쓰기</div>
+                    <div class="storage_rightBody_inputBox"> 
+                        <div class="radioBox_header">오늘 기분은 어땟나요?</div>
+                        <div class="radioBox_body">
+                            <div class="radioButton">
+                                <input type="radio" name="emotion" id="happpy" value="행복해요"><label for="happpy">행복해요</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" name="emotion" id="sad" value="슬퍼요"><label for="sad">슬퍼요</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" name="emotion" id="surprised" value="놀랐어요"><label for="surprised">놀랐어요</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" name="emotion" id="angry" value="화나요"><label for="angry">화나요</label>
+                            </div>
+                            <div class="radioButton">
+                                <input type="radio" name="emotion" id="etc" value="기타"><label for="etc">기타</label>
                             </div>
                         </div>
-                        <div class="textBox">
-                            <div class="titleBox">
-                                <label for="titleBox_input">제목</label>
-                                <input type="text" id="titleBox_input" placeholder="제목을 입력해주세요.">
-                            </div>
-                            <div class="contentBox">
-                                <label for="contentBox_textarea">내용</label>
-                                <textarea name="contentBox_input" id="contentBox_textarea" placeholder="내용을 입력해 주세요."></textarea>
-                            </div>
+                    </div>
+                    <div class="textBox">
+                        <div class="titleBox">
+                            <label for="titleBox_input">제목</label>
+                            <input type="text" id="titleBox_input" placeholder="제목을 입력해주세요.">
+                        </div>
+                        <div class="contentBox">
+                            <label for="contentBox_textarea">내용</label>
+                            <textarea name="contentBox_input" id="contentBox_textarea" placeholder="내용을 입력해 주세요."></textarea>
                         </div>
                     </div>
                     <button class="registerButton" onclick="clickButton()">등록하기</button>
@@ -84,3 +80,35 @@
 </html>
 
 
+ <!-- <div class="storage_rightBody_inputBox"> 
+    <div class="emotion_radioBox"> 
+        <div class="radioBox_header">오늘 기분은 어땟나요?</div>
+        <div class="radioBox_body">
+            <div class="radioButton">
+                <input type="radio" name="emotion" id="happpy" value="행복해요"><label for="happpy">행복해요</label>
+            </div>
+            <div class="radioButton">
+                <input type="radio" name="emotion" id="sad" value="슬퍼요"><label for="sad">슬퍼요</label>
+            </div>
+            <div class="radioButton">
+                <input type="radio" name="emotion" id="surprised" value="놀랐어요"><label for="surprised">놀랐어요</label>
+            </div>
+            <div class="radioButton">
+                <input type="radio" name="emotion" id="angry" value="화나요"><label for="angry">화나요</label>
+            </div>
+            <div class="radioButton">
+                <input type="radio" name="emotion" id="etc" value="기타"><label for="etc">기타</label>
+            </div>
+        </div>
+    </div>
+    <div class="textBox">
+        <div class="titleBox">
+            <label for="titleBox_input">제목</label>
+            <input type="text" id="titleBox_input" placeholder="제목을 입력해주세요.">
+        </div>
+        <div class="contentBox">
+            <label for="contentBox_textarea">내용</label>
+            <textarea name="contentBox_input" id="contentBox_textarea" placeholder="내용을 입력해 주세요."></textarea>
+        </div>
+    </div>
+</div> -->

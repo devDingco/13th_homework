@@ -24,6 +24,7 @@ const deleteButton = () => {
     const updatedDiaryCardJson = JSON.stringify(diaryCardList);
     localStorage.setItem("다이어리카드배열", updatedDiaryCardJson);
     window.location.href = "일기보관함.html";
+    alert("삭제 되었습니다.");
 }
 
 const createDate = () => {
