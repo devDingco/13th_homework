@@ -55,8 +55,8 @@
                 </div>
 
                 <div class="actions flexbox justify-center">
-                  <button class="button-cancel">취소</button>
-                  <button class="button-edit" onclick="clickHandler()">수정하기</button>
+                  <button class="button-cancel" type="button" onclick="goToBack()">취소</button>
+                  <button class="button-edit" type="button" onclick="clickHandler()">수정하기</button>
                 </div>
               </fieldset>
             </form>
@@ -83,6 +83,10 @@
             </ul>
           </div>
         </section>
+      </div>
+
+      <div class="scroll-up">
+        <button class="button-scroll-up" onclick="scrollToTop()"><img src="./assets/images/icon_scroll_up.svg" alt="맨 위로 이동하기" /></button>
       </div>
     </div>
   </body>
