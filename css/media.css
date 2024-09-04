@@ -1,15 +1,4 @@
 @media (max-width: 900px) {
-  section .empty {
-    width: 100%;
-    padding: 0;
-    min-height: 20vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-  }
   section {
     padding: 40px 0;
   }
@@ -20,14 +9,6 @@
   section .diaryList ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-  .diaryWrite {
-    order: -1;
-    max-width: 100%;
-    width: 100%;
-  }
-  section .diaryList ul li:hover img {
-    animation: none;
   }
   section .diaryList ul li figure .imgBox {
     height: 17.8125rem;
@@ -41,6 +22,25 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  section .diaryList ul li:hover img {
+    animation: none;
+  }
+  section .empty {
+    width: 100%;
+    padding: 0;
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+  }
+  .diaryWrite {
+    order: -1;
+    max-width: 100%;
+    width: 100%;
+  }
   .navBottom {
     width: 100%;
     padding: 0;
@@ -49,8 +49,8 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
   }
-  .filterSearchBox .selectBox,
-  .filterSearchBox .searchBox {
+  .navBottom .filterSearchBox .selectBox,
+  .navBottom .filterSearchBox .searchBox {
     width: auto;
   }
   .headerBanner {
@@ -74,21 +74,21 @@
     padding-bottom: 1rem;
     border-radius: 0;
   }
+  .detailWrap h2 {
+    font-size: 1rem;
+  }
   .detailWrap .buttonWrap {
     gap: 0.375rem;
+  }
+  .detailWrap .detailInfo .moodType {
+    font-size: 0.875rem;
   }
   .detailWrap .detailInfo .moodType .moodTypeImg {
     width: 1.5rem;
     height: 1.5rem;
   }
-  .detailWrap .detailInfo .moodType {
-    font-size: 0.875rem;
-  }
   .detailWrap .detailInfo .detailDate {
     font-size: 0.75rem;
-  }
-  .detailWrap h2 {
-    font-size: 1rem;
   }
   .scrollBox {
     width: 100%;
@@ -96,12 +96,9 @@
     bottom: 40px;
   }
   .editWrap .diaryWrite .diaryContent input,
-  .editWrap .diaryWrite .buttonBox button {
+  .editWrap .diaryWrite .buttonBox button,
+  .commentWrap .commentInputWrap #commentInput {
     height: 40px;
-  }
-  .editWrap .diaryWrite .moodTypeRadio .radioWrap {
-    font-size: 14px;
-    flex-direction: column;
   }
   article.diaryWrite .moodTypeRadio {
     font-size: 20px;
@@ -109,6 +106,10 @@
   article.diaryWrite .moodTypeRadio > span {
     font-weight: 600;
     font-size: 20px;
+  }
+  article.diaryWrite .moodTypeRadio .radioWrap {
+    font-size: 14px;
+    flex-direction: column;
   }
   .diaryWrite .diaryContent label span {
     font-size: 12px;
