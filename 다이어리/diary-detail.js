@@ -93,7 +93,6 @@ diaryDetailContentList[index].commentList.map((comment) => {
 })
 
 const deleteDiary = () => {
-  console.log(index)
   diaryDetailContentList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
   alert("삭제 되었습니다.")
