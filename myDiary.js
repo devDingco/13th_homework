@@ -11,23 +11,8 @@ window.onload = () => {
     makeDiaryCard(diaryLocal)
 }
 
-const moodIndex = {
-    happy: "행복해요",
-    sad: "슬퍼요",
-    surprise: "놀랐어요",
-    angry: "화나요",
-    etc: "기타"
-};
-
-const getDate = new Date();
-const getYear = getDate.getFullYear().toString();
-const getMonth = (getDate.getMonth() +1).toString().padStart(2, "0");
-const getDay = getDate.getDate().toString().padStart(2, "0");
-
 function makeDiaryData () {
     const mood = document.getElementsByName("mood")
-    const diaryTitle = document.getElementById("diaryTitle").value
-    const diaryContent = document.getElementById("diaryContent").value
 
     let diaryMood;
     for ( i=0 ; i < mood.length ; i++ ) {
@@ -36,13 +21,22 @@ function makeDiaryData () {
         }
     };
 
+    const getDate = new Date();
+    const getYear = getDate.getFullYear().toString();
+    const getMonth = (getDate.getMonth() +1).toString().padStart(2, "0");
+    const getDay = getDate.getDate().toString().padStart(2, "0");
+    
     const diaryDate = `${getYear}. ${getMonth}. ${getDay}`
+
+    const diaryTitle = document.getElementById("diaryTitle").value
+    const diaryContent = document.getElementById("diaryContent").value
 
     let tempDiary = {
         mood: diaryMood,
         date: diaryDate,
         title: diaryTitle,
         content: diaryContent,
+        comment: []
     }
 
     if ( diaryMood !== undefined && diaryTitle !== "" && diaryContent !== "" ) {
@@ -99,6 +93,14 @@ function makeDiaryData () {
 // };
 
 function makeDiaryCard(diary) {
+    const moodIndex = {
+        happy: "행복해요",
+        sad: "슬퍼요",
+        surprise: "놀랐어요",
+        angry: "화나요",
+        etc: "기타"
+    };
+
     if ( diary !== null ) {
         const diaryCard = document.querySelector(".body__left__card")
         diaryCard.innerHTML = diary.map( (el, index) =>
@@ -128,42 +130,42 @@ function makeDiaryCard(diary) {
 function activeFilter (event) {
     const filterMood = event.target.value;
 
-    const filterDiary = JSON.parse(localStorage.getItem("diaryData"))
+    let filterDiary = JSON.parse(localStorage.getItem("diaryData"))
 
     switch (filterMood) {
         case "all": {
             filterDiary = filterDiary.filter( el => el.mood )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         case "happy": {
             filterDiary = filterDiary.filter( el => el.mood === "happy" )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         case "sad": {
             filterDiary = filterDiary.filter( el => el.mood === "sad" )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         case "surprise": {
             filterDiary = filterDiary.filter( el => el.mood === "surprise" )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         case "angry": {
             filterDiary = filterDiary.filter( el => el.mood === "angry" )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         case "etc": {
             filterDiary = filterDiary.filter( el => el.mood === "etc" )
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
             break
         }
         default: {
             filterDiary = JSON.parse(localStorage.getItem("diaryData"))
-            makeDiaryList(filterDiary)
+            makeDiaryCard(filterDiary)
         }
     }
 }
@@ -178,6 +180,6 @@ document.querySelector(".container__floating").addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
 })
 
-console.log ( document.querySelector(".card__delete") )
+// console.log ( document.querySelector(".card__delete") )
 
 document.getElementById("diaryButton").addEventListener('click', makeDiaryData);

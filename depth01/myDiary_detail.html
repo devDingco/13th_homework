@@ -30,9 +30,9 @@
             <div class="body__content">
                 <div class="content__title">
                     <div class="title__text">내용</div>
-                    <div class="title__btn">
-                        <div class="btn__edit">수정</div>
+                    <div class="title__button">
                         <div class="btn__delete">삭제</div>
+                        <div class="btn__edit">수정</div>
                     </div>
                 </div>
                 <div class="content__text">
@@ -49,15 +49,40 @@
             </div>
         </div>
 
+        <div class="container__edit" hidden>
+            <div class="edit__question">오늘 기분은 어땠나요?</div>
+            <div class="edit__radio">
+                <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
+                <input type="radio" name="mood" value="sad" id="radioSad"/> <label for="radioSad"> 슬퍼요 </label>
+                <input type="radio" name="mood" value="surprise" id="radioSurprise"/> <label for="radioSurprise"> 놀랐어요 </label>
+                <input type="radio" name="mood" value="angry" id="radioAngry"/> <label for="radioAngry"> 화나요 </label>
+                <input type="radio" name="mood" value="etc" id="radioEtc"/> <label for="radioEtc"> 기타 </label>
+            </div>
+            <div class="edit__title">
+                <div class="title__text2">제목</div>
+                <input class="title__input" placeholder="제목입니다."/>
+            </div>
+            <div class="edit__content">
+                <div class="content__text2">내용</div>
+                <input class="content__input" placeholder="내용입니다." />
+            </div>
+            <div class="edit__button">
+                <div class="btn__cancel">취소</div>
+                <div class="btn__submit">수정하기</div>
+            </div>
+        </div>
+
         <div class="container__comment">
             <div class="comment__title">회고</div>
             <div class="comment__input">
                 <input class="input__text" type="text" placeholder="회고를 남겨보세요."/>
-                <div class="input__btn">입력</div>
+                <div class="btn__input">입력</div>
             </div>
             <div class="comment__list">
-                <div class="list__text">3년이 지나고 다시 보니 이 때가 그립더라.</div>
-                <div class="list__date">2024. 09. 24 작성</div>
+                <div class="list__section">
+                    <div class="list__text">테스트 댓글입니다.</div>
+                    <div class="list__date">2024. 09. 24 작성</div>
+                </div>
             </div>
         </div>
     </div>

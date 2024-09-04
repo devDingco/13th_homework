@@ -127,7 +127,7 @@ a {
 .card__delete {
     width: 40px;
     height: 40px;
-    background-image: url(./asset/close_outline_light_m.png);
+    background-image: url(./asset/icon/close_outline_light_m.png);
     position: absolute;
     top: 4px;
     right: 4px;
@@ -253,7 +253,7 @@ a {
     width: 40px;
     height: 40px;
     position: fixed;
-    background-image: url(./asset/up_outline_light_xl.png);
+    background-image: url(./asset/icon/up_outline_light_xl.png);
     border-radius: 100%;
     box-shadow: 0px 1px 6px 0px #767676;
     right: 2%;
