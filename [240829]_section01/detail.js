@@ -57,6 +57,7 @@ const renderDiaryDetail = (diary) => {
     <div class="firstBtn">
       <button class="prevBtn btn" onclick="prev()">이전</button>
       <button class="changeBtn btn" onclick="editDiary()">수정</button>
+      <button class ="deleteBtn btn" onclick="deleteFunc()">삭제</button>
     </div>
    <hr />
     <div class="commentsSection">
@@ -79,6 +80,16 @@ const renderDiaryDetail = (diary) => {
   commentsSection.scrollIntoView({ behavior: 'smooth' });
 
   renderComments();
+};
+
+const deleteFunc = () => {
+  const diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
+  console.log(diaryList);
+  if (confirm('해당 일기를 삭제하시겠습니까?')) {
+    diaryList.splice(diaryIndex, 1); //해당 일기 삭제
+    localStorage.setItem('diaries', JSON.stringify(diaryList));
+    window.location.href = `./myDiary(2).html`;
+  }
 };
 
 const editDiary = () => {
@@ -126,10 +137,14 @@ const editDiary = () => {
       <textarea rows="8" id="contentContainer">${diary.content}</textarea>
     </div>
     <div class="btns">
-      <button class="prevBtn edit" onclick="prev()">이전</button>
+      <button class="cancel edit" onclick="cancelFunc()">취소</button>
       <button class="saveBtn edit" onclick="saveDiary()">수정하기</button>
     </div>
   `;
+};
+
+const cancelFunc = () => {
+  window.location.href = `./detail.html?number=${diaryIndex}`;
 };
 
 const saveDiary = () => {
@@ -160,10 +175,11 @@ const addComment = () => {
 
   if (commentText) {
     let commentList = JSON.parse(localStorage.getItem('comments')) || [];
+    const todayDate = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
     const newComment = {
       diaryIndex,
       text: commentText,
-      date: new Date().toLocaleString(),
+      date: todayDate,
     };
 
     commentList.push(newComment);
@@ -188,16 +204,13 @@ const renderComments = () => {
   filteredComments.forEach((comment) => {
     const commentItem = document.createElement('li');
 
-    // Date 객체로 변환 후, 날짜만 추출
-    console.log(comment.date);
-
     // comment.text와 commentDate의 색상을 다르게 설정
     commentItem.innerHTML = `
       <span style="color: black; font-size : 16px;">${comment.text}</span>
       <span style="color: gray; font-size : 16px;"> [${comment.date}]</span>
     `;
 
-    commentListElement.appendChild(commentItem);
+    commentListElement.prepend(commentItem);
   });
 };
 
@@ -213,3 +226,38 @@ if (diaryIndex !== null) {
 } else {
   alert('잘못된 접근입니다.');
 }
+
+const addPrevContent = () => {
+  const diaryName = document.querySelector('#diaryName');
+  const prevBtn = document.createElement('div');
+  prevBtn.className = 'prevBack';
+
+  if (window.innerWidth <= 1200) {
+    diaryName.textContent = '';
+    diaryName.appendChild(prevBtn);
+    diaryName.innerHTML = `
+    <div class = "prevBack">
+      <div>
+        <button onclick = "prev()"><</button>
+      </div>
+      <div>일기 상세</div>
+    </div>
+    `;
+  } else {
+    diaryName.textContent = '민정이의 다이어리';
+  }
+};
+
+window.addEventListener('resize', addPrevContent);
+window.addEventListener('DOMContentLoaded', addPrevContent);
+
+const disappearBtn = () => {
+  const float = document.querySelector('.floating-btn');
+
+  if (window.scrollY === 0) {
+    float.style.display = 'none';
+  } else {
+    float.style.display = 'block';
+  }
+};
+window.addEventListener('scroll', disappearBtn);

@@ -180,3 +180,37 @@ const btnColorFunc = () => {
     registerBtn.style.backgroundColor = '';
   }
 };
+
+//모바일 환경되면 filter를 가운데로 이동
+function relocateFilter() {
+  const filter = document.querySelector('.filter');
+  const showImgContent = document.querySelector('#showImgContent');
+  const addContent = document.querySelector('#addContent');
+
+  if (window.innerWidth <= 1200) {
+    if (filter.nextElementSibling !== addContent) {
+      showImgContent.parentNode.insertBefore(filter, addContent);
+    }
+  } else {
+    const container = document.querySelector('.container');
+    if (filter.nextElementSibling !== showImgContent) {
+      container.insertBefore(filter, document.querySelector('.mainContent'));
+    }
+  }
+}
+
+// 초기 실행 및 윈도우 크기 변경 시 이벤트 등록
+window.addEventListener('resize', relocateFilter);
+window.addEventListener('DOMContentLoaded', relocateFilter);
+
+//플로팅 버튼 맨 위일땐 사라지게 하기
+const disappearBtn = () => {
+  const float = document.querySelector('.floating-btn');
+
+  if (window.scrollY === 0) {
+    float.style.display = 'none';
+  } else {
+    float.style.display = 'block';
+  }
+};
+window.addEventListener('scroll', disappearBtn);
