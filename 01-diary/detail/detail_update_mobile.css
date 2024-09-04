@@ -3,6 +3,10 @@
         width: 100%;
     }
 
+    .header_title {
+        width: 100%;
+    }
+
     .section_container {
         width: 100%;
     }
@@ -32,6 +36,6 @@
     }
 
     .reminiscence_text {
-        width: 95%;
+        width: 90%;
     }
 }
