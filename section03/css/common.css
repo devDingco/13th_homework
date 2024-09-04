@@ -350,12 +350,6 @@ body {
   font-weight: var(--weight-light);
 }
 
-@media (max-width: 1000px) {
-  .panel-item {
-    width: 100%;
-  }
-}
-
 @media (max-width: 900px) {
   .app {
     justify-content: flex-start;
