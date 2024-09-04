@@ -23,8 +23,10 @@ const moodTypeSet = {
 const headerBox = () => {
   const headerElement = document.querySelector("header");
   if (!headerElement) return
+  const name = localStorage.getItem("userName");
+  // <h1 class="glitch-wrapper"><a class="glitch" data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
   headerElement.innerHTML = `
-      <h1><a href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
+      <h1><a data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
       <!-- <fieldset class="toggleSwitch">
         <label>
           <input role="switch" type="checkbox" />
@@ -39,8 +41,15 @@ const headerBanner = () => {
   const headerBanner = document.querySelector(".headerBanner");
   if (!headerBanner) return
   headerBanner.innerHTML = `
-  <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
-  `;
+  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="0"
+    centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+    <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
+    <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
+  </swiper-container>
+  `
+  // `
+  // <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
+  // `;
 }
 headerBanner();
 
@@ -99,12 +108,36 @@ const diaryArrGet = () => {
 
 const diaryArr = diaryArrGet();
 
+
+
+
+// !일기 쓰기의 기분 선택 라디오 랜더링 함수
+const diaryMoodTypeRender = () => {
+  const moodRadio = Object.keys(moodTypeSet).map((key) => {
+    return `<label>
+     <input
+        type="radio"
+        name="moodType"
+        value="${key}"
+        oninput='textCheck()'
+      />${key}
+     </label>
+    `
+  }).join("");
+  return `<div class="moodTypeRadio">
+  <span>오늘 기분은 어땠나요?</span>
+  <div class="radioWrap">${moodRadio}</div>
+  </div>`
+}
+
 // !일기 쓰기 컴포넌트 불러오기
 const diaryWriteBox = () => {
   const diaryWriteElement = document.querySelector(".diaryWrite");
   if (!diaryWriteElement) {
     return;
   }
+
+  // ~일기 수정하기와 일기쓰기 구분
   const diaryModifyElement = document.querySelector(".editWrap .diaryWrite");
   const diaryWrite = !diaryModifyElement ? diaryWriteElement : diaryModifyElement;
   let title = !diaryModifyElement
@@ -123,46 +156,7 @@ const diaryWriteBox = () => {
   let textCheck = !diaryModifyElement ? "oninput='textCheck()'" : "";
   diaryWrite.innerHTML = `
         ${title}
-        <div>
-          <div class="moodTypeRadio">
-            <span>오늘 기분은 어땠나요?</span>
-            <div class="radioWrap">
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="행복해요"
-                  ${checked}
-                />행복해요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="슬퍼요"
-                />슬퍼요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="놀랐어요"
-                />놀랐어요</label
-              >
-              <label
-                ><input
-                  type="radio"
-                  name="moodType"
-                  value="화나요"
-                />화나요</label
-              >
-              <label
-                ><input type="radio" name="moodType" value="기타" />기타</label
-              >
-            </div>
-          </div>
-        </div>
-
+        ${diaryMoodTypeRender()}
         <div class="diaryContent">
           <label>
             <span>제목</span>
@@ -178,19 +172,16 @@ const diaryWriteBox = () => {
             <textarea
               id="editArea"
               class="diaryDesc"
-              placeholder="내용을 입력해 주세요."
-              ${textCheck}
             ></textarea>
           </label>
         </div>
-
       ${button}
  `;
 
 }
 diaryWriteBox();
 
-// 쿼리에서 diaryId 가져오는 함수
+// !쿼리에서 diaryId 가져오는 함수
 const queryStringGet = () => {
   const urlParams = new URLSearchParams(location.search);
   const id = urlParams.get('diaryId');
@@ -288,5 +279,64 @@ const scrollBtnRender = () => {
    </button>
   `
 }
-
 scrollBtnRender();
+
+
+
+
+//! 팝업 렌더링 함수
+const popupRender = (content) => {
+
+  const popupElement = document.createElement("div");
+  document.body.appendChild(popupElement);
+  popupElement.classList.add("popup");
+  popupElement.addEventListener("click", (event) => {
+    if (event.target === popupElement || event.target.classList.contains('popupClose')) {
+      // popupInner 바깥쪽을 클릭하거나 팝업 닫기 클래스 버튼 클릭시에만 팝업창 닫기
+      popupElement.remove();
+    }
+  });
+
+  popupElement.innerHTML = `
+    <div class="popupInner">
+    ${content}
+    </div>
+  `;
+}
+
+
+
+// !일기 쓰기 클릭시 팝업창 렌더링 함수
+const diaryWritePop = () => {
+  const content = `
+  <div class="diaryWrite">
+        <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+        ${diaryMoodTypeRender()}
+        <div class="diaryContent">
+          <label>
+            <span>제목</span>
+            <input
+              class="diaryTitle"
+              type="text"
+              placeholder="제목을 입력해 주세요."
+              oninput='textCheck()'
+            />
+          </label>
+          <label>
+            <span>내용</span>
+            <textarea
+              id="editArea"
+              class="diaryDesc"
+            ></textarea>
+          </label>
+        </div>
+        <button>닫기</button>
+        <button class="diaryWriteBtn" onclick="diarySave()" disabled>
+          등록하기
+        </button>
+    </div>
+  `
+  popupRender(content)
+}
+
+
