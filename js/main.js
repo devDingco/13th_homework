@@ -148,7 +148,7 @@ const searchFilter = (event) => {
 const stickyAddStyle = () => {
   const scrollY = window.scrollY;
   const stickyEl = document.querySelector('.navBottom')
-  const elTop = stickyEl.offsetTop - 10;
+  const elTop = stickyEl.offsetTop - 20;
   // console.log(scrollY, elTop);
   if (scrollY >= elTop) {
     stickyEl.classList.add('stickyAddStyle');
@@ -158,3 +158,14 @@ const stickyAddStyle = () => {
 
 }
 window.addEventListener('scroll', stickyAddStyle);
+
+
+// !모바일 검색버튼 클릭시 검색창 노출 처리용 함수
+const searchShow = () => {
+  const searchBox = document.querySelector('.searchBox');
+  const searchMobilePopBtn = document.querySelector('.searchMobilePopBtn');
+
+  searchBox.classList.toggle('active');
+  searchMobilePopBtn.classList.toggle('active');
+
+}
