@@ -34,24 +34,25 @@
 .header_frame {
   display: flex;
   height: 3.75rem;
-  align-items: center;
-  gap: 0.625rem;
-  align-self: stretch;
 }
 
 .header_frame > a {
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px
 }
 
 .logo {
   display: flex;
+  width: 8.125rem;
+  height: 2.5rem;
   align-items: center;
-  gap: 0.625rem;
   color: #000;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 1rem;
   letter-spacing: -0.011rem;
 }
 
@@ -109,11 +110,9 @@
 
 .mood_checkbox_group {
   display: flex;
-  align-items: center;
-  align-content: center;
+  flex-direction: column;
+  align-items: start;
   gap: 1.25rem;
-  align-self: stretch;
-  flex-wrap: wrap;
 }
 
 .mood_checkbox {
