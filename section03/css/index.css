@@ -161,6 +161,7 @@
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-md);
   background-color: var(--gray-w);
+  align-self: self-start;
 }
 
 .side-title {
