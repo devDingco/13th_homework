@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>일기 상세보기</title>
+    <link rel="stylesheet" href="./diary-detail.css" />
+  </head>
+  <body>
+    <div class="detail-container">
+      <div class="detail-header" onclick="goMain()">
+        <p>수연이의 다이어리</p>
+      </div>
+      <div class="detail-main-container">
+        <div class="detail-content-top">
+          <p id="detail-content-title" class="detail-content-title"></p>
+          <div class="detail-title">
+            <div class="detail-menu">
+              <img id="detail-menu-img" />
+              <p id="detail-menu-emotion" class="detail-menu-emotion"></p>
+            </div>
+            <div class="detail-menu detail-info">
+              <p id="detail-menu-date"></p>
+              <p>작성</p>
+            </div>
+          </div>
+        </div>
+        <div class="detail-content">
+          <p>내용</p>
+          <p id="detail-content">content</p>
+        </div>
+        <div class="detail-btn">
+          <button onclick="moveEdit()">수정</button>
+          <button id="delete-card">삭제</button>
+        </div>
+        <div id="diary-comment">
+          <p>회고</p>
+          <div>
+            <input id="comment" />
+            <button onclick="diaryComment()">입력</button>
+          </div>
+          <div id="comment-list"></div>
+        </div>
+      </div>
+    </div>
+    <script src="./diary-detail.js"></script>
+  </body>
+</html>
