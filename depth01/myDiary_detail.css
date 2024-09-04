@@ -146,6 +146,7 @@
     border: 2px solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
+    transform: rotate(3deg);
 }
 
 .content__text {
@@ -224,6 +225,7 @@ label {
     border: 2px solid #FCFCFC;
     font-weight: 600;
     transition: 0.2s;
+    transform: rotate(3deg);
 }
 
 
