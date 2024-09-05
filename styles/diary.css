@@ -1,3 +1,11 @@
+body {
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
+  padding-bottom: 165px;
+  overflow: auto;
+}
+
 .container-layout {
   position: relative;
   max-width: 1168px;
@@ -13,6 +21,7 @@ header {
   gap: 10px;
   color: #000;
 }
+
 header h1 {
   font-size: 18px;
   font-style: normal;
@@ -66,12 +75,14 @@ main {
   max-width: 1168px;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
+  /* gap: 24px; */
+  position: static;
 }
 
 main .main-content {
   width: 100%;
 }
+
 main .main-content ul #add-list-alert {
   width: 200%;
   height: 100%;
@@ -93,7 +104,7 @@ main .main-content ul #add-list-alert.none {
 main .main-content ul {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   row-gap: 24px;
 }
@@ -169,7 +180,7 @@ main .main-content ul > li h3 {
   overflow: hidden;
   margin: 8px 0 16px 0;
 }
-
+/* 
 main aside {
   display: flex;
   width: 360px;
@@ -283,13 +294,15 @@ main aside form button#submitBtn.none {
 main aside form button#submitBtn.active {
   background: #333;
   color: #f2f2f2;
-}
+} */
 
 footer {
   width: 100%;
   padding: 24px 20px;
   background-color: #f2f2f2;
   margin-top: 30px;
+  position: absolute;
+  bottom: 0;
 }
 
 footer .container-layout {
@@ -320,17 +333,7 @@ footer span {
   line-height: 16px;
 }
 
-main > .selectWrap {
-  display: none;
-}
-.selectWrap {
-  margin-top: 32px;
-}
 #customSelect {
-  position: sticky;
-  z-index: 98;
-  top: 10px;
-  left: 0;
   width: fit-content;
 }
 
@@ -394,6 +397,7 @@ main > .selectWrap {
 #optionList > .option > button > img {
   display: none;
 }
+
 #optionList > .option > .selected > img {
   display: block;
 }
@@ -406,9 +410,15 @@ main > .selectWrap {
 }
 
 #upFloatingButton {
-  position: fixed;
-  bottom: 20px;
-  left: 90vw;
+  /* position: fixed; */
+  position: sticky;
+  top: calc(100% - 50px);
+  width: 0px;
+}
+#upFloatingButton img {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
 }
 
 #upFloatingButton.active {
@@ -417,9 +427,11 @@ main > .selectWrap {
   bottom: 30px;
   right: 20%;
 }
+
 #upFloatingButton.none {
   display: none;
 }
+
 .diary_card {
   position: relative;
 }
@@ -432,4 +444,253 @@ main > .selectWrap {
 .diary_card #deleteButton:hover {
   transform: scale(120%);
   transition: transform 0.5s;
+}
+
+.buttons_wrap {
+  position: sticky;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+
+  z-index: 98;
+  top: 10px;
+  left: 0;
+}
+
+.writing_button {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 0.5rem;
+
+  background-color: black;
+  color: white;
+}
+
+#modal_depth1 {
+  position: fixed;
+  display: none;
+
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+  z-index: 998;
+  background-color: #00000080;
+}
+
+#modal_depth1.none {
+  display: none;
+}
+
+#modal_main_add {
+  position: fixed;
+  display: none;
+
+  width: fit-content;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.add_buttons_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#modal_main_add #addModal {
+  display: flex;
+  min-width: 360px;
+  max-width: 760px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+#modal_main_add h2 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  width: 100%;
+  align-self: flex-start;
+}
+#modal_main_add form {
+  width: 100%;
+}
+
+#modal_main_add form h4 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+#modal_main_add form .feeling-radio-wrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  gap: 20px;
+}
+
+#modal_main_add form .feeling-radio-wrap > p {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+#modal_main_add input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: url(../public/icons/radio_outline_light_m.svg) no-repeat center;
+}
+
+#modal_main_add form .label-sm {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+#modal_main_add input[type='radio']:checked {
+  background: url(../public/icons/radio_fill_light_m.svg) no-repeat center;
+}
+
+#modal_main_add form .content-wrap {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+#modal_main_add form input[type='text'],
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+}
+
+#modal_main_add form textarea {
+  resize: none;
+  height: 128px;
+}
+
+#modal_main_add form button {
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 0.5rem;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal_close_button {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+#modal_main_add form button#submitBtn.none {
+  background: #c7c7c7;
+  color: #f2f2f2;
+}
+
+#modal_main_add form button#submitBtn.active {
+  background: #333;
+  color: #f2f2f2;
+}
+
+#modal_depth2 {
+  position: fixed;
+  display: none;
+
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  background-color: #00000080;
+}
+
+#added_modal,
+#cancel_prompt_modal,
+#modal_remove_list {
+  position: fixed;
+  display: none;
+
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 480px;
+  max-width: 760px;
+  width: 100%;
+
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  border-radius: 16px;
+
+  background-color: white;
+}
+
+#added_modal h4,
+#cancel_prompt_modal h4,
+#modal_remove_list h4 {
+  font-size: 24px;
+  font-weight: 700;
+}
+#added_modal button,
+#modal_remove_list button,
+#cancel_prompt_modal button {
+  min-width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 2.5rem;
+  background-color: black;
+  color: white;
+}
+
+.buttons_box {
+  display: flex;
+  gap: 1rem;
+}
+.buttons_box .first_button {
+  background-color: white !important;
+  border: 1px solid black !important;
+  color: black !important;
 }

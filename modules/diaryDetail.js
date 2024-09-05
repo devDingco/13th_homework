@@ -226,3 +226,25 @@ detailEditButton.addEventListener('click', () => {
   commentInputElement.disabled = true;
   commentInputElement.placeholder = '수정중일땐 회고를 작성할 수 없어요.';
 });
+const copyText = document.querySelector('.copy_text');
+const copyBtn = document.getElementById('detailClipboad');
+
+copyBtn.addEventListener('click', () => {
+  copyText.style.display = 'block';
+  const animation = `
+    @keyframes toastAnimation {
+      from {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  `;
+  setTimeout(() => {
+    copyText.style.display = 'none';
+  }, 1000);
+});

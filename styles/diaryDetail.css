@@ -344,3 +344,32 @@ textarea {
   bottom: 20px;
   left: 90vw;
 }
+
+.copy_text {
+  /* display: none; */
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  line-height: 30px;
+  width: 300px;
+  height: 30px;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  animation: toastAnimation 1s;
+  opacity: 0;
+}
+
+@keyframes toastAnimation {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
