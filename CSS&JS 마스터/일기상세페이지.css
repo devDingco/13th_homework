@@ -5,31 +5,80 @@
 }
 
 body {
-    width: 1920px;
-    height: 1605px;
-    gap: 24px;
-    margin-top: 100px;
-    padding-left: 376px;
-    padding-right: 376px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout{
+    width: 1168px;
+    margin: 0 20px 40px;
 }
 
 header {
     width: 100%;
     height: 60px;
-    gap: 10px
+    font-size: 18px;
+    gap: 10px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
 }
 
 .header_text {
-    width: 100%;
+    width: 120px;
     height: 40px;
     gap: 10px;
     font-weight: 700;
     font-size: 18px;
     line-height: 16px;
     letter-spacing: -1px;
+}
+
+.radioBox {
+    width: 100%;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    display: none;
+}
+
+.radioBox_header {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1px;
     color: #000000;
+}
+
+.radioBox_body {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+}
+
+.radioButton {
+    border-radius: 8px;
+    gap: 8px;
+    display: flex;
+}
+
+.radioButton input {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.radioButton label {
+    height: 20px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #333333;
+    display: block;
 }
 
 main {
@@ -89,7 +138,7 @@ main {
     height: 24px;
     font-weight: 600;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 32px;
     letter-spacing: -1px;
     color: #ea5757;
 }
@@ -114,6 +163,14 @@ main {
     flex-direction: column;
 }
 
+.body_title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -1px;
+}
+
+
 #body_content {
     width: 100%;
     height: 100%;
@@ -124,7 +181,7 @@ main {
     color: #333333;
 }
 
-.modifyButton {
+.ButtonBox {
     width: 100%;
     height: 40px;
     gap: 16px;
@@ -132,7 +189,7 @@ main {
     justify-content: end;
 }
 
-.modifyButton button{
+.ButtonBox button{
     height: 40px;
     border-radius: 8px;
     border: 1px solid #d4d3d3;
@@ -144,4 +201,77 @@ main {
     line-height: 24px;
     letter-spacing: -1px;
     color: #1c1c1c;
+}
+
+.ButtonBox button:hover {
+    background-color: black;
+    color: white;
+}
+
+.remembranceBox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.inputBox {
+    width: 100%;
+    gap: 13px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputTitle {
+    width: 100%;
+    height: 24px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1px;
+}
+
+.inputTextBox {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+}
+
+#inputText {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+    padding: 12px 16px;
+}
+
+.inputButton {
+    width: 52px;
+    height: 48px;
+    border-radius: 8px;
+    line-height: 48px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#remembranceTextBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.remembranceText {
+    width: 100%;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 1200px) {
+    .layout {
+        width: 100%;
+        padding: 0 25px;
+    }
 }

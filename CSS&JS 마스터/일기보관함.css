@@ -7,127 +7,78 @@
 body {
     display: flex;
     flex-direction: column;
-}
-
-main {
-    width: 1920px;
-    gap: 24px;
-    margin-top: 100px;
-    padding-left: 376px;
-    padding-right: 376px;
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.main_header {
+.layout {
+    max-width: 1168px;
+    margin: 0 20px 40px;
+}
+
+.header {
     width: 100%;
     height: 60px;
-    gap: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.main_header_logo {
-    width: 120px;
-    height: 40px;
-    gap: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.main_header_log_text {
-    font-weight: 700;
     font-size: 18px;
-    line-height: 16px;
-    letter-spacing: -1px;
-    color: #000000;
-}
-
-.main_body {
-    width: 100%;
-    gap: 24px;
-    display: flex;
-    flex-direction: column;
-}
-
-.main_body_banner {
-    width: 100%;
-    height: 240px;
-    border-radius: 24px;
-    color: #d9d9d9;
-}
-
-.main_body_storage {
-    width: 100%;
-    height: 1257px;
-    gap: 42px;
-    display: flex;
-    flex-direction: column;
-}
-
-.storage_header {
-    width: 100%;
-    height: 48px;
-    gap: 16px;
-    display: flex;
-}
-
-.nav_box {
-    width: 119px;
-    height: 48px;
-    border-top: 0px;
-    border-right: 0px;
-    border-bottom: 2px;
-    border-left: 0px;
-    border-bottom: 2px solid #000000;
-    padding: 12px 8px;
-    gap: 10px;
-}
-
-.nav_box_text {
-    width: 103px;
-    height: 24px;
     font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
-    letter-spacing: -1px;
-    color: #000000;
+    line-height: 16px;
+    padding: 20px;
 }
 
-select {
-    display: block;
-    width: 120px;
-    height: 32px;
-    border-radius: 8px;
-    border: 1px solid #c7c7c7;
-    background-color: #ffffff;
-    gap: 10px;
-}
-
-.storage_body {
-    width: 100%;
-    height: auto;
-    gap: 24px;
+.main {
     display: flex;
+    width: 100%;
+    gap: 24px;
 }
 
-#storage_leftBody{
+.bannerImage {
     width: 100%;
-    height: 100%;
-    gap: 24px;
+}
+
+.tap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 42px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.clikedTap {
+    border-bottom: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    color: #000;
+}
+
+.noneClickedTap {
+    color: #ababab;
+}
+
+#storage_leftBody {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    gap: 24px;
 }
 
 .diaryCard {
     width: 380px;
-    height: 373px;
     border-radius: 16px;
     padding-bottom: 16px;
     gap: 16px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.diaryCard a {
+    position: relative;
 }
 
 #diaryCard_image {
@@ -135,7 +86,6 @@ select {
     height: 100%;
     border-radius: 16px;
     padding: 12px;
-    gap: 10px;
 }
 
 #diaryCard_image:hover {
@@ -147,9 +97,8 @@ select {
 
 
 .diaryCard_content {
-    width: 380px;
-    height: 56px;
-    padding: 0px 8px;
+    width: 100%;
+    padding: 0px 14px;
     gap: 8px;
     display: flex;
     flex-direction: column;
@@ -157,7 +106,7 @@ select {
 }
 
 .diaryCard_content_header {
-    width: 364px;
+    width: 100%;
     height: 24px;
     display: flex;
     flex-direction: row;
@@ -174,7 +123,7 @@ select {
 }
 
 #content_header_date {
-    width: 77px;
+    width: 60px;
     height: 24px;
     font-weight: 400;
     font-size: 14px;
@@ -183,14 +132,16 @@ select {
     color: #919191;
 }
 
-#dairyCard_content_title {
-    width: 364px;
+#diaryCard_content_title {
+    width: 100%;
     height: 24px;
     font-weight: 700;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -1px;
     color: #000000;
+    display: flex;
+    justify-content: start;
 }
 
 .storage_rightBody {
@@ -203,37 +154,27 @@ select {
     border: 1px solid #d4d3d3;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
-.storage_rightBody_header{
-    width: 312px;
-    height: 24px;
-    font-weight: 700;
-    font-size: 24px;
+.storage_rightBody_header {
+    width: 100%;
+    font-weight: 600;
+    font-size: 20px;
     line-height: 24px;
     letter-spacing: -1px;
     color: #000000;
 }
 
 .storage_rightBody_inputBox {
-    width: 312px;
-    height: 404px;
-    gap: 40px;
-    display: flex;
-    flex-direction: column;
-}
-
-.emotion_radioBox {
-    width: 312px;
-    height: 108px;
-    gap: 16px;
+    width: 100%;
+    gap: 18px;
     display: flex;
     flex-direction: column;
 }
 
 .radioBox_header {
-    width: 312px;
-    height: 24px;
+    width: 100%;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
@@ -242,8 +183,7 @@ select {
 }
 
 .radioBox_body {
-    width: 312px;
-    height: 68px;
+    width: 100%;
     gap: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -272,23 +212,21 @@ select {
 }
 
 .textBox {
-    width: 312px;
-    height: 256px;
+    width: 100%;
     gap: 24px;
     display: flex;
     flex-direction: column;
 }
 
 .titleBox {
-    width: 312px;
-    height: 76px;
+    width: 100%;
     gap: 8px;
     display: flex;
     flex-direction: column;
 }
 
 .titleBox label {
-    width: 312px;
+    width: 100%;
     height: 20px;
     font-weight: 500;
     font-size: 14px;
@@ -299,7 +237,7 @@ select {
 }
 
 .titleBox input {
-    width: 312px;
+    width: 100%;
     height: 48px;
     border-radius: 8px;
     padding: 12px 16px;
@@ -309,15 +247,14 @@ select {
 }
 
 .contentBox {
-    width: 312px;
-    height: 156px;
+    width: 100%;
     gap: 8px;
     display: flex;
     flex-direction: column;
 }
 
 .contentBox label {
-    width: 312px;
+    width: 100%;
     height: 20px;
     font-weight: 500;
     font-size: 14px;
@@ -328,7 +265,7 @@ select {
 }
 
 .contentBox textarea {
-    width: 312px;
+    width: 100%;
     height: 128px;
     border-radius: 8px;
     padding: 12px 16px;
@@ -339,9 +276,8 @@ select {
 }
 
 .storage_rightBody button {
-    width: 312px;
+    width: 100%;
     height: 48px;
-    gap: 16px;
     border-radius: 8px;
     padding: 8px 10px;
     gap: 10px;
@@ -354,51 +290,103 @@ select {
     letter-spacing: -1px;
 }
 
-footer {
-    display: block;
-    width: 1920px;
-    height: 160px;
-    border-top: 1px;
-    padding: 24px 20px;
-    gap: 10px;
-    background-color: #f2f2f2;
+.footer {
+    width: 100%;
     display: flex;
+    padding: 24px 20px;
     justify-content: center;
-    align-items: center;
+    background-color: #f2f2f2;
 }
 
-.footer_textBox {
-    width: 1168px;
-    height: 112px;
-    gap: 32px;
+.footerBox {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 16px;
-    letter-spacing: -1%;
-    color: #000000;
+    gap: 32px;
 }
 
-.representative {
-    gap: 8px;
-    font-weight: 400;
-    font-size: 14px;
+.footerBox_title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
     line-height: 16px;
-    letter-spacing: -1px;
+}
+
+.footerBox_representative {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
     color: #5f5f5f;
 }
 
-.copyright {
-    width: 1168px;
-    height: 16px;
-    font-weight: 300;
+.footerBox_copyright {
+    width: 100%;
     font-size: 14px;
+    font-weight: 400;
     line-height: 16px;
-    letter-spacing: -1px;
     color: #919191;
 }
 
 a {
     text-decoration-line: none;
+}
+
+#deleteButton {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 8px 0px #0000001A;
+    position: absolute;
+    top: 15px; right: 15px;
+    cursor: pointer;
+}
+
+.select_box {
+    width: 100%;
+    width: 100%;
+    height: 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    margin-bottom: 32px;
+}
+
+.select_box select {
+    border-radius: 8px;
+    border: 1px solid #c7c7c7;
+    padding: 4px;
+    gap: 10px;
+}
+
+#floatingButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border: 1px solid #f2f2f2;
+    position: sticky;
+    left: 97%;
+    bottom: 50px;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .main {
+        flex-wrap: wrap;
+    }
+    #storage_leftBody {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        order: 2;
+        place-items: center center;
+        gap: 0px;
+    }
+    .diaryCard {
+        width: 100%;
+    }
+    .storage_rightBody {
+        order: 1;
+        width: 100%;
+    }
 }

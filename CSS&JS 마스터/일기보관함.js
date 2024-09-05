@@ -31,10 +31,11 @@ const clickButton = () => {
     diaryCardObject.textarea = document.getElementById("contentBox_textarea").value;
     diaryCardObject.image = getImage(diaryCardObject.emotionText);
     diaryCardObject.date = createDate();
+    diaryCardObject.remembrance = [];
     
     diaryCardArr.push(diaryCardObject);
-    const dairyCardJson = JSON.stringify(diaryCardArr);
-    localStorage.setItem("다이어리카드배열", dairyCardJson);
+    const diaryCardJson = JSON.stringify(diaryCardArr);
+    localStorage.setItem("다이어리카드배열", diaryCardJson);
     
     const diaryCardIndex = diaryCardArr.length - 1; 
     const newDiary = diaryCardArr[diaryCardIndex];
@@ -50,6 +51,7 @@ const clickButton = () => {
     diaryContainer.appendChild(newCard);
 }
 
+//날짜 함수
 const createDate = () => {
     const date = new Date();
     const getYear = date.getFullYear();
@@ -90,6 +92,11 @@ const createDiaryCard = (emotion, date, title, image, index) => {
     card.innerHTML = `
         <a href="./일기상세페이지.html?diaryCardIndex=${index}">
             <img src="${image}" alt="" id="diaryCard_image">
+            <img src="./assets/close_outline_light_m.svg" 
+                alt="" 
+                id="deleteButton" 
+                onclick="deleteDiaryCard(event, ${index})"
+            >
         </a>
         <div class="diaryCard_content">
             <div class="diaryCard_content_header">
@@ -97,7 +104,9 @@ const createDiaryCard = (emotion, date, title, image, index) => {
                 <div id="content_header_date">${date}</div>
             </div>
             <div id="diaryCard_content_title">
-                ${title}
+                <div id="diarCard_title">
+                    ${title}
+                </div>    
             </div>
         </div>
     `;
@@ -110,6 +119,11 @@ const diaryCardRendering = (diaryCardList) => {
         <div class="diaryCard">
             <a href="./일기상세페이지.html?diaryCardIndex=${index}">
                 <img src="${el.image}" alt="" id="diaryCard_image">
+                <img src="./assets/close_outline_light_m.svg" 
+                alt="" 
+                id="deleteButton" 
+                onclick="deleteDiaryCard(event, ${index})"
+            >
             </a>
             <div class="diaryCard_content">
                 <div class="diaryCard_content_header">
@@ -117,7 +131,9 @@ const diaryCardRendering = (diaryCardList) => {
                     <div id="content_header_date">${el.date}</div>
                 </div>
                 <div id="diaryCard_content_title">
+                    <div id="diarCard_title">
                     ${el.title}
+                    </div>    
                 </div>
             </div>
         </div>
@@ -139,26 +155,46 @@ const filtering = (event) => {
             break;
         }
         case "selectHappy": {
-            filterArr = diaryCardArr.filter(el => el.emotionText === "happy");
+            filterArr = diaryCardArr.filter(el => el.emotionText === "행복해요");
             break;
         }
         case "selectSad": {
-            filterArr = diaryCardArr.filter(el => el.emotionText === "sad");
+            filterArr = diaryCardArr.filter(el => el.emotionText === "슬퍼요");
             break;
         }
         case "selectSurprised": {
-            filterArr = diaryCardArr.filter(el => el.emotionText === "surprised");
+            filterArr = diaryCardArr.filter(el => el.emotionText === "놀랐어요");
             break;
         }
         case "selectAngry": {
-            filterArr = diaryCardArr.filter(el => el.emotionText === "angry");
+            filterArr = diaryCardArr.filter(el => el.emotionText === "화나요");
             break;
         }
         case "selectEtc": {
-            filterArr = diaryCardArr.filter(el => el.emotionText === "etc");
+            filterArr = diaryCardArr.filter(el => el.emotionText === "기타");
             break;
         }
         
     }
     diaryCardRendering(filterArr);
+}
+
+window.onscroll = () => {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 0) {
+        document.getElementById("selectFilter").style = "background-color: black; color: white;"
+    }
+};
+
+const upToButton = () => {
+    window.scrollTo({ top: 0, behavior: "smooth"});
+}
+
+const deleteDiaryCard = (event, index) => {
+    event.preventDefault();
+    const editDiaryCard = JSON.parse(localStorage.getItem("다이어리카드배열"));
+    editDiaryCard.splice(index, 1);
+    localStorage.setItem("다이어리카드배열", JSON.stringify(editDiaryCard));
+    diaryCardRendering(editDiaryCard);
 }

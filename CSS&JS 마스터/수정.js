@@ -4,6 +4,18 @@ const diaryCardNumber = Number(params.get("diaryCardIndex"));
 const diaryCardList = JSON.parse(localStorage.getItem("다이어리카드배열"));
 const diaryCard = diaryCardList[diaryCardNumber];
 
+const rendering = (diaryCardRemembrance) => {
+    const remembranceArr = diaryCardRemembrance.map((el) =>`
+        <div class="remembranceText">${el.text} ${el.date}</div>
+    `);
+
+    const remembranceHtml = remembranceArr.join('');
+    const remembranceContainer = document.getElementById("remembranceTextBox");
+
+    remembranceContainer.innerHTML = remembranceHtml;
+}
+
+
 window.onload = () => {
     document.getElementById("titleBox").value = diaryCard.title;
     document.getElementById("contentBox").innerText= diaryCard.textarea;
@@ -26,6 +38,7 @@ window.onload = () => {
             document.getElementById("etc").checked = true;
             break;
     }
+    rendering(diaryCard.remembrance);
 }
 
 const modify = () => {
