@@ -255,13 +255,31 @@ footer .footerInner {
 }
 
 .diaryWrite {
-  max-width: 22.5rem;
   border-radius: 16px;
-  border: 1px solid var(--border-color-1);
-  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+.diaryWrite .diaryWriteInner {
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+.diaryWrite .buttonWrap {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.diaryWrite .buttonWrap button {
+  width: 104px;
+  height: 48px;
+  border-radius: 8px;
+  font-size: var(--font-size-2);
+}
+.diaryWrite .buttonWrap button.popupClose {
+  background-color: #fff;
 }
 .diaryWrite h3 {
   font-size: var(--font-size-4);
@@ -339,7 +357,7 @@ footer .footerInner {
   height: 48px;
 }
 .diaryWrite .diaryContent textarea {
-  height: 128px;
+  height: 200px;
 }
 .diaryWrite .diaryWriteBtn {
   height: 48px;
@@ -384,6 +402,43 @@ footer .footerInner {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.popup.alert .popupInner {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.popup.alert .popupInner h3 {
+  font-size: var(--font-size-4);
+  font-weight: 700;
+}
+.popup.alert .popupInner p {
+  font-size: var(--font-size-3);
+}
+.popup.alert .popupInner .buttonWrap {
+  display: flex;
+  gap: 16px;
+  padding-top: 24px;
+}
+.popup.alert .popupInner button {
+  width: 104px;
+  height: 48px;
+  border-radius: 8px;
+  font-size: var(--font-size-2);
+}
+.popup.alert .popupInner .oneBtn {
+  width: 100%;
+  margin-top: 24px;
+}
+.popup.alert .popupInner .whiteBtn {
+  background-color: #fff;
+}
+.popup.alert .popupInner .blackBtn {
+  background-color: #000;
+  color: #fff;
+  border: none;
 }
 .popup .popupInner {
   background-color: #fff;
