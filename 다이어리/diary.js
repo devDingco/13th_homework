@@ -231,6 +231,7 @@ const upScroll = () => {
 
 const triggerModal = (modal) => {
   upScroll();
+  document.body.style.cssText = "overflow-y: hidden;"
   document.getElementById(modal).style = "display: flex;";
   if (modal == "diary_registration_modal") {
     registerDiary();
