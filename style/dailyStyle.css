@@ -42,11 +42,10 @@ body {
 }
 main {
     width: 100vw;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
     gap: 1.5rem;
     flex-grow: 1;
 }
@@ -413,12 +412,13 @@ footer {
     cursor: pointer;
 }
 @media (max-width: 375px) {
-    * {
-        padding: 4px;
-    }
     main {
         width: 100%;
         align-items: none;
+        padding: 4px;
+    }
+    article {
+        gap: 1rem;
     }
     .header-text-container {
         width: 100%;
@@ -427,12 +427,19 @@ footer {
         width: 100%;
     }
     .article-header {
+        flex-direction: column;
+        align-items: end;
+        gap: 4px;
         width: 100%;
     }
     .article-main {
         width: 100%;
         flex-direction: column;
-        height: 0;
+    }
+
+    .article-daily {
+        width: 120px;
+        order: 2;
     }
 
     .daily {
@@ -442,13 +449,17 @@ footer {
     }
     .post {
         order: 2;
+        justify-content: center;
     }
+
     .floating-button {
         display: none;
     }
     .post-container {
         height: 24rem;
         font-size: 0.75rem;
+        width: 150px;
+        max-width: 150px;
     }
     footer {
         display: none;

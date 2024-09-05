@@ -296,4 +296,8 @@ footer {
     .header-mobile {
         display: flex;
     }
+    footer {
+        width: 90dvw;
+        height: 44px;
+    }
 }
