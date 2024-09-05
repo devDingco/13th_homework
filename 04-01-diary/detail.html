@@ -4,27 +4,47 @@
     <title>Detail</title>
     <link rel="stylesheet" href="./css/detail.css">
     <script src="./javascript/detail.js"></script>
+    </head>
     <body>
-        <div class="layout">
-            <div class="header">
-                <div>민지의 다이어리</div>
+        <div class="header">
+            <div>민지의 다이어리</div>
+        </div>
+
+
+        <div class="diary_layout">
+            <div class="diary_title">
+                <span id="title_details"></span>
+
+                <div class="diary_info">
+                    <div class="diary_feeling">
+                        <img id="mood_image" />
+                        <div id="show_mood"></div>
+                    </div>
+                    <div class="date">
+                        <div id="show_date"></div>
+                        작성
+                    </div>
+                </div>
             </div>
 
 
-            <article class="diary_layout">
-                <h2 class="diary_title">이것은 타이틀 입니다.</h2>
-                <div class="diary_feeling">
-                    <span class="emoji">😊</span>
-                    <span class="status">행복해요</span>
-                    <span class="date">2024. 07. 12 작성</span>
+            <div class="diary_content">
+                <span>내용</span>
+                <span id="content_details" class="show_content"></span>
+            </div>
+
+            <div class="edit_button">
+                <button class="edit" onclick="JS_edit()">수정</button>
+                <button class="edit" onclick="JS_delete()">삭제</button>
+            </div>
+        </div>
+        <div class="recollect">
+            <div class="recollect_title">회고</div>
+                <div class="comment">
+                    <input class="comment_regist" type="text" id="type_comment" placeholder="회고를 남겨보세요.">
+                    <button class="comment_button" onclick="JS_regist()">입력</button>
                 </div>
-                <div class="diary_content">
-                    <p>내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다</p>
-                </div>
-                <div class="edit_button">
-                <button class="edit">수정</button>
-                </div>
-            </article>
+                <div id="show_comment"></div>
         </div>
     </body>
 </html>

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diary</title>
     <link rel="stylesheet" href="./css/main.css">
     <script src="./javascript/main.js" ></script>
@@ -19,20 +17,21 @@
             <div class="nonclick">사진보관함</div>
         </div>
 
-        <section class="filter">
-          <select id="mood_filter">
-            <option value="전체">전체</option>
-            <option value="행복">행복해요</option>
-            <option value="슬픔">슬퍼요</option>
-            <option value="놀람">놀랐어요</option>
-            <option value="화남">화나요</option>
-            <option value="기타">기타</option>
+        
+          <select class="filter" onchange="JS_filtering(event)">
+            <option selected>전체</option>
+            <option value="happy">행복해요</option>
+            <option value="sad">슬퍼요</option>
+            <option value="surprise">놀랐어요</option>
+            <option value="angry">화나요</option>
+            <option value="etc">기타</option>
           </select>
-      </section>
+        
 
         <div class="main">
             <div id="show_diary_html" class="show_diary_css"></div>
 
+            <!-- <div class="right_side"> -->
             <div class="register">
                 <div class="register_title">📍일기 쓰기</div>
                 <div class="register_contentbox">
@@ -74,6 +73,10 @@
                     <button class="diary_button" onclick="JS_write()">등록하기</button>
                 </div>
             </div>
+            <button class="up_scroll" id="floating_button">
+                <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
+            </button>
+        <!-- </div> -->
         </div>
     </div>
 
