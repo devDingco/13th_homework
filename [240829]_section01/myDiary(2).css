@@ -20,12 +20,10 @@
 }
 .container {
   padding: 20px 200px;
+  /* max-width: 1480px; */
+  /* justify-content: center; */
   overflow: scroll;
-  /* display: flex;
-  flex-direction: column;
-  gap: 30px; */
-  /* width: 1920px;
-  height: 1805px; */ /* height: 100%; */
+
   .header {
     display: flex;
     flex-direction: column;
@@ -42,7 +40,7 @@
   .btnInfo {
     display: flex;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     button {
       border: none;
       border-radius: 8px;
@@ -58,18 +56,21 @@
       cursor: pointer;
     }
   }
+  @media (min-width: 1201px) {
+    .mainContent {
+      display: flex;
+      gap: 80px;
+    }
+  }
   .mainContent {
-    display: flex;
-    gap: 50px;
     #showImgContent {
-      flex: 1;
-      flex-wrap: wrap;
-      gap: 14px;
       width: 100%;
+      flex: 1;
       #card {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        gap: 0.6rem;
 
         #info {
           display: flex;
@@ -82,10 +83,12 @@
         }
       }
       .newCard {
-        max-width: 290px;
+        max-width: 100%;
+        width: 390px;
         display: flex;
+        flex-wrap: wrap;
         flex-direction: column;
-        gap: 5px;
+        gap: 20px;
         margin-bottom: 20px;
         cursor: pointer;
       }
@@ -120,8 +123,8 @@
     #addContent {
       display: flex;
       flex-direction: column;
-      width: 380px;
-      height: 490px;
+
+      height: 500px;
       padding: 18px 15px;
       gap: 12px;
       border-radius: 13px;
@@ -136,10 +139,12 @@
         font-size: 15px;
       }
       .feelingBtn {
-        flex-wrap: wrap;
-        display: flex;
-        justify-content: space-around;
-        gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        place-content: end center;
+        row-gap: 10px;
+        column-gap: 10px;
+
         margin-bottom: 15px;
       }
       .titleContainer {
@@ -170,6 +175,9 @@
           border: 1px solid #d4d3d3;
           border-radius: 8px;
           padding: 8px 5px;
+          resize: none;
+          overflow: auto;
+          height: 150px;
         }
       }
       #registerBtn {
@@ -196,6 +204,9 @@
 }
 
 .filter {
+  margin-bottom: 30px;
+  position: sticky;
+  top: 60px;
   #filterBtn {
     border: 1px solid #c7c7c7;
     border-radius: 4px;
@@ -222,12 +233,6 @@
   transform: rotate(-1deg);
 }
 
-.filter {
-  margin-bottom: 30px;
-  position: sticky;
-  top: 60px;
-}
-
 .container0 {
   position: relative;
 }
@@ -252,3 +257,102 @@
   border-radius: 100%;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1490px) {
+  #showImgContent {
+    width: 100%;
+  }
+
+  .newCard {
+    flex-basis: calc(50% - 10px); /* 50% 너비로 설정, 10px은 간격 조정 */
+    max-width: calc(50% - 10px);
+    /* max-width: 290px; */
+  }
+  #addContent .feelingBtn {
+    grid-template-columns: repeat(2, 1fr);
+    place-content: end center;
+  }
+}
+/* 모바일 환경 */
+/* 1200px 이하에서 레이아웃 변경 */
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 10px;
+    overflow: scroll;
+  }
+
+  .mainContent {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  #addContent {
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+  .newCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-content: end center;
+  }
+
+  .newCard:hover {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* 모바일 환경 */
+/* 1200px 이하에서 레이아웃 변경 */
+
+/* 아래는 order로 할 수 있다는 것 
+굳이 column-reverse안써도됌 */
+/*
+@media (max-width: 1200px) {
+  .container {
+    padding: 10px;
+    overflow: scroll;
+  }
+
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+
+  #addContent {
+    margin-bottom: 20px;
+    max-width: 100%;
+    order: 1;
+  }
+
+  .filter {
+    order: 2;
+  }
+
+
+  #showImgContent {
+    order: 3;
+  }
+
+  .newCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-content: end center;
+  }
+
+  .newCard:hover {
+    transform: none;
+    opacity: 1;
+  }
+
+  .subContent {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+*/
