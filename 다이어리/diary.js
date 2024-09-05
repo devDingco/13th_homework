@@ -16,13 +16,13 @@ window.addEventListener("scroll", () => {
     : (filterCheckbox.style = "background-color: #FFF");
 });
 
-const clearDiaryInputs = (checkedMoodId) => {
-  const check = document.getElementById(`${checkedMoodId}`);
+const clearDiaryInputs = () => {
+  const getMood = document.getElementsByName("mood");
+  const mood = [...getMood].map((e) => e.checked = false);
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   text.value = null;
   textarea.value = null;
-  check.checked = false;
 };
 
 const appendDiaryEntry = (diaryCard) => {
@@ -131,7 +131,7 @@ const getMood = (diaryEntry) => {
 
   diaryEntry.mood = checkedMood;
   getImageName(diaryEntry, checkedMoodId);
-  clearDiaryInputs(checkedMoodId);
+  clearDiaryInputs();
 };
 
 const getId = (diaryEntry) => {
@@ -163,7 +163,7 @@ const registerDiary = () => {
   if (text.value == "" || textarea.value == "" || mood.length == 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
-    triggerModal('diary_registration_modal')
+    triggerModal("diary_registration_modal");
   }
 };
 
@@ -230,7 +230,7 @@ const upScroll = () => {
 
 const triggerModal = (modal) => {
   upScroll();
-  document.body.style.cssText = "overflow-y: hidden;"
+  document.body.style.cssText = "overflow-y: hidden;";
   document.getElementById(modal).style = "display: flex;";
   if (modal == "diary_registration_modal") {
     diaryEntry.commentList = [];
@@ -241,10 +241,13 @@ const triggerModal = (modal) => {
 const closeAllModals = (modal) => {
   document.getElementById(modal).style = "display: none;";
   document.getElementById("aside_layout").style = "display: none;";
+  document.body.style.cssText = "overflow-y: none;";
+  clearDiaryInputs();
 };
 
 const closeSingleModal = (modal) => {
   document.getElementById(modal).style = "display: none;";
+  document.body.style.cssText = "overflow-y: none;";
 };
 
 window.addEventListener("click", (event) => {
@@ -257,6 +260,16 @@ window.addEventListener("click", (event) => {
     }
   }
 });
+
+const promptExitOnEsc = () => {
+  const text = document.getElementsByClassName("diary_title_window")[0];
+  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  const getMood = document.getElementsByName("mood");
+  const mood = [...getMood].filter((e) => e.checked == true);
+  if (text.value == "" || textarea.value == "" || mood.length == 0) {
+    triggerModal("diary_cancel_modal");
+  }
+};
 
 window.addEventListener("keydown", (event) => {
   if (event.key == "Escape") {
@@ -276,7 +289,7 @@ window.addEventListener("keydown", (event) => {
       else if (diaryRegistrationModal)
         closeAllModals("diary_registration_modal");
       else {
-        closeSingleModal("aside_layout");
+        promptExitOnEsc();
       }
     }
     if (confirmDeleteDiaryModal) {
