@@ -140,12 +140,24 @@
                         </div> <!-- write_diary_contents_items -->
                     </div>  <!-- write_diary_contents -->
                     <div class="write_diary_footer_items">
-                        <button class="write_diary_cancel_button" id="HTML_diary_write_cancel_button" onclick="cancelButtonPressed()">닫기</button>
+                        <button class="write_diary_closed_button" id="HTML_write_diary_closed_button" onclick="closedButtonPressed()">닫기</button>
                         <button class="write_diary_button" id="HTML_diary_write_button" disabled onclick="writeButtonPressed()">등록하기</button>
-                    </div> 
+                    </div>
+                    <div id="HTML_write_diary_cancel_modal_bg" class="write_diary_cancel_modal_bg">
+                        <div class="write_diary_cancel_modal_container">
+                            <div class="write_diary_cancel_modal_title_items">
+                                <div class="write_diary_cancel_title">일기 등록 취소</div>
+                                <div class="write_diary_cancel_text">일기 등록을 취소하시겠어요?</div>
+                            </div> <!-- write_diary_cancel_title_items -->
+                            <div class="write_diary_cancel_modal_button_items">
+                                <button class="write_diary_continue_button" onclick="continueButtonPressed()">계속 작성</button>
+                                <button class="write_diary_cancel_button" onclick="cancelButtonPressed()">등록 취소</button>
+                            </div> <!-- write_diary_cancel_button_items -->
+                        </div> <!-- write_diary_cancel_container -->
+                    </div>
                 </div><!-- write_diary_footer_items -->
-                </div><!-- HTML_write_diary_modal_container -->
-                </div> 
+                </div> <!-- HTML_write_diary_modal_container -->
+                </div>
                 <button class="top_scroll_floating_button" id="top_scroll_button" onclick="topScrollFloatingButtonTapped()"><img src="./assets/top_scroll.png"></button>
             </div>
     </div>    

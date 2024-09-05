@@ -168,8 +168,19 @@ const deleteButtonTapped = (event, id) => {
     alert(`일기가 삭제되었습니다.`)
 }
 
+const continueButtonPressed = () => {
+    console.log("continueButtonPressed: 일기 등록 닫기 버튼을 눌렀습니다.")
+}
+
+const closedButtonPressed = () => {
+    console.log("closedButtonPressed: 일기 등록 닫기 버튼을 눌렀습니다.")
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: block;"
+    // document.getElementById("HTML_write_diary_modal_bg").style = "z-index: 4;"
+}
+
 const cancelButtonPressed = () => {
     console.log("cancelButtonPressed: 일기 등록 닫기 버튼을 눌렀습니다.")
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
 }
 
