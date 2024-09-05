@@ -66,17 +66,20 @@
           수정 하기
         </button>
       </div>
+
+      <!--회고-->
+      <span class="CSS_수정구분선"></span>
+      <div class="CSS_회고제목">회고</div>
+      <div class="CSS_회고입력영역">
+        <input
+          disabled
+          placeholder="수정중일땐 회고를 작성할 수 없어요."
+          class="CSS_회고수정입력부분"
+          id="HTML_회고입력부분"
+        />
+        <button disabled class="CSS_회고수정입력버튼">입력</button>
+      </div>
+      <div id="HTML_회고목록영역"></div>
     </div>
-    <div id="HTML_댓글영역" class="CSS_댓글영역">
-			<h3>댓글</h3>
-			<input
-				type="text"
-				id="HTML_댓글입력창"
-				placeholder="수정중일땐 회고를 작성할 수 없어요."
-        disabled
-			/>
-			<button onclick="JS_댓글등록기능()" disabled>등록</button>
-			<div id="HTML_댓글리스트" class="CSS_댓글리스트"></div>
-		</div>
   </body>
 </html>

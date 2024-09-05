@@ -130,3 +130,57 @@ body {
 .CSS_수정하기버튼:hover {
   transform: skew(-10deg, 0deg);
 }
+
+/* 회고 */
+.CSS_수정구분선 {
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+
+.CSS_회고제목 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.CSS_회고입력영역 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.CSS_회고수정입력부분 {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+
+  border: 1px solid #d4d3d3;
+  width: 95%;
+  padding: 12px 16px;
+  height: 48px;
+}
+
+.CSS_회고수정입력버튼 {
+  border: 0px;
+  border-radius: 8px;
+  background-color: #c7c7c7;
+  width: 5%;
+  height: 48px;
+}
+
+.CSS_회고목록 {
+  display: flex;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 12px;
+}
+
+.CSS_회고목록_날짜영역 {
+  font-size: 16px;
+  color: #777;
+  padding-left: 12px;
+}
+
+.CSS_회고목록_마지막 {
+  display: flex;
+  padding: 12px;
+}
