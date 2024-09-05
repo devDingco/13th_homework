@@ -106,9 +106,11 @@ const deleteDiary = () => {
 };
 
 const handleContentCopy = () => {
+  const copyToast = document.getElementById("copy_toast");
   const copyContent = document.getElementById('copyContent').innerText;
-  navigator.clipboard.writeText(copyContent)
-  alert('복사 완료');
+  navigator.clipboard.writeText(copyContent);
+  copyToast.style = "display: block"
+  
 }
 
 createHtml(diary);

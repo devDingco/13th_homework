@@ -327,6 +327,42 @@ html {
   background: var(--Gray-Gray-100, #e4e4e4);
 }
 
+.copy_toast {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.copy_toast > div {
+  display: none;
+  border-radius: 0.5rem;
+  background: var(--Gray-Gray-100, #e4e4e4);
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.7rem;
+  width: 15rem;
+  animation-name: animation;
+  animation-duration: 3s;
+  animation-fill-mode: none;
+  opacity: 0%;
+}
+
+@keyframes animation {
+        from {
+          opacity: 0%;
+        }
+        50% {
+          opacity: 100%;
+        }
+        to {
+          opacity: 0%;
+        }
+      }
+
 @media (max-width: 48.688rem) {
   .layout {
     width: 90%;
