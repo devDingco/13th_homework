@@ -48,6 +48,7 @@
 .main-content {
   position: relative;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--gap-lg);
 }
 
@@ -74,6 +75,27 @@
   background-position: right 12px center;
 }
 
+.show-modal-add {
+  width: 110px;
+  height: 48px;
+  color: var(--gray-w);
+  background-color: var(--gray-b);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  padding: var(--gap-xs) 10px;
+  flex-shrink: 0;
+}
+
+.button-text {
+  font-size: 1.8rem;
+  font-weight: var(--weight-semi-bold);
+}
+
+.icon-plus {
+  margin-right: var(--gap-xxs);
+}
+
 .filter-emotion.scrolled {
   color: var(--gray-w);
   border-color: var(--gray-b);
@@ -96,7 +118,7 @@
 }
 
 .panel-item {
-  flex-basis: 380px;
+  flex-basis: 274px;
   transition: all 0.5s ease-out;
   border-radius: var(--radius-md);
   background-color: var(--gray-w);

@@ -32,18 +32,25 @@
           </nav>
           <main class="main">
             <div class="flexbox main-content">
-              <div class="filter">
-                <select class="filter-emotion" onchange="filterEmotion(event)">
-                  <option selected disabled>전체</option>
-                  <option>행복해요</option>
-                  <option>슬퍼요</option>
-                  <option>놀랐어요</option>
-                  <option>화나요</option>
-                  <option>기타</option>
-                </select>
+              <div class="flexbox">
+                <div class="filter">
+                  <select class="filter-emotion" onchange="filterEmotion(event)">
+                    <option selected disabled>전체</option>
+                    <option>행복해요</option>
+                    <option>슬퍼요</option>
+                    <option>놀랐어요</option>
+                    <option>화나요</option>
+                    <option>기타</option>
+                  </select>
+                </div>
+                <button class="show-modal-add">
+                  <img src="./assets/images/icon_plus.svg" alt="" class="icon-plus" />
+                  <span class="button-text">일기쓰기</span>
+                </button>
               </div>
+
               <ul class="panel-list flexbox"></ul>
-              <aside class="side-panel">
+              <!-- <aside class="side-panel">
                 <h2 class="side-title">📍 일기 쓰기</h2>
                 <form class="register">
                   <fieldset>
@@ -85,7 +92,7 @@
                     </div>
                   </fieldset>
                 </form>
-              </aside>
+              </aside> -->
             </div>
           </main>
         </section>
