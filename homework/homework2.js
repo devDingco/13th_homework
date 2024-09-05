@@ -32,8 +32,8 @@ function tab() {
       // active 클래스가 추가된다.
       tabItem[index].classList.add("active");
       tabContent[index].classList.add("active");
-      console.log("item:", tabItem[index]);
-      console.log("content:", tabContent);
+      // console.log("item:", tabItem[index]);
+      // console.log("content:", tabContent);
     });
   });
 }
@@ -91,7 +91,7 @@ function LoadItem(event) {
         item.date
       }&body=${item.body}" }>
         <img class="thumbnail" src=${getImageUrl(item.emotion)} />
-        <div onclick="deleteDiary(event)"  style="position:relative; top:-285px; right: -170px; background-color:#ffffff;width: 24px;height:24px;  border-radius:50%; text-align:center;font-size :20px">x</div>
+        <div onclick="deleteDiary(event)" class="delete-btn">x</div>
         <div class="album-text">
             <div class="album-text-up">
                 <div class="feeling" style="color:${emotion_color[item.emotion]}">${emotion_kor[item.emotion]}</div>
@@ -246,7 +246,7 @@ const deleteDiary = (event) => {
   event.preventDefault();
 
   // 삭제할 일기 항목의 상위 요소인 `.one-album` 찾기
-  const album = event.target.closest(".one-album");
+  let album = event.target.closest(".one-album") == null ? location : event.target.closest(".one-album");
 
   // URL에서 일기 날짜를 가져와서 고유 식별자로 사용
   const diaryDate = parseInt(new URL(album.href).searchParams.get("date"));
@@ -258,7 +258,11 @@ const deleteDiary = (event) => {
   localStorage.setItem("diaryList", JSON.stringify(diaryList));
 
   // UI에서 삭제된 항목을 제거
-  album.remove();
+  if (document.querySelectorAll(".one-album").length == 0) {
+    window.location.href = "./homework2.html";
+  } else {
+    album.remove();
+  }
 };
 
 // 상세페이지 > 댓글
@@ -267,7 +271,7 @@ function loadComments() {
   const comments = JSON.parse(localStorage.getItem("comments")) || [];
   const commentArea = document.querySelector(".comment");
 
-  commentArea.innerHTML = comments.map((comment) => `<div>${comment}</div>`).join("");
+  commentArea.innerHTML = comments?.map((comment) => `<div>${comment}</div>`).join("");
 }
 
 // 댓글 추가 기능
@@ -293,6 +297,34 @@ function addComment() {
 
   resetFormData();
 }
+
+// 플로팅버튼
+function stopScroll() {
+  window.addEventListener("scroll", () => {
+    const 화면위에서부터푸터위까지길이 = document.getElementById("footer-id").getBoundingClientRect().top;
+    console.log(`화면위에서부터푸터위까지길이: ${화면위에서부터푸터위까지길이}`);
+
+    const 보이는화면길이 = window.innerHeight; //window.outerHeight 메뉴, 주소창 등 포함
+    console.log(`보이는화면길이:${보이는화면길이}`);
+
+    if (보이는화면길이 >= 화면위에서부터푸터위까지길이) {
+      document.getElementById("scroll-id").style = `
+              position: fixed;
+              bottom: 270px;
+              left: 75%;
+              // background-color : green;
+              `;
+    } else {
+      document.getElementById("scroll-id").style = `
+              position: fixed;
+              bottom: 50px;
+              left: 75%;
+              // background-color : red;
+            `;
+    }
+  });
+}
+stopScroll();
 
 // 페이지 로드 시 댓글 로드
 loadComments();
