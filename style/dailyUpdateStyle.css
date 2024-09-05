@@ -33,18 +33,16 @@ body {
     height: 100dvh;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 24px;
 }
 main {
-    width: 100dvw;
+    width: 73rem;
     height: 90dvh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 64px;
-    padding-left: 10dvw;
-    padding-right: 10dvw;
+    gap: 24px;
 }
 header {
     width: 100%;
@@ -64,8 +62,17 @@ article {
     max-width: 1168px;
     align-items: center;
 }
+.mobile-text {
+    font-family: "bold", sans-serif;
+}
 .header-text {
     font-family: "semibold", sans-serif;
+}
+.header-mobile {
+    display: flex;
+    font-family: "bold", sans-serif;
+    align-items: center;
+    font-size: 1.3rem;
 }
 .today-mood {
     font-size: 20px;
@@ -153,4 +160,30 @@ textarea {
 .update-button {
     background-color: black;
     color: white;
+}
+@media (min-width: 380px) {
+    .header-text-container {
+        display: flex;
+    }
+    .header-mobile {
+        display: none;
+    }
+}
+@media (max-width: 375px) {
+    * {
+        padding: 4px;
+    }
+    main,
+    section {
+        width: 100%;
+    }
+    .header-text-container {
+        display: none;
+    }
+    .header-mobile {
+        display: flex;
+    }
+    .daily-inputlist {
+        flex-direction: column;
+    }
 }
