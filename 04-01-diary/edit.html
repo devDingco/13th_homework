@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Edit</title>
+    <link rel="stylesheet" href="./css/edit.css">
+    
+</head>
+<body>
+    <div class="header">
+        <div>민지의 다이어리</div>
+    </div>
+
+    <div class="edit_diary">
+        <div class="select_mood">
+            <div class="select_mood_title">오늘 기분은 어땠나요?</div>
+            <div class="radio_group">
+                <div class="radio_button">
+                    <input type="radio" name="select_mood_button" value="happy" checked />
+                    <div>행복해요</div>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="select_mood_button" value="sad" />
+                    <div>슬퍼요</div>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="select_mood_button" value="surprise" />
+                    <div>놀랐어요</div>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="select_mood_button" value="angry" />
+                    <div>화나요</div>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="select_mood_button" value="etc" />
+                    <div>기타</div>
+                </div>
+            </div>
+        </div>
+    
+
+
+        <div class="edit_part">
+            <div class="editing">
+                <label class="input_label" for="edit_title">제목</label>
+                <input type="text" id="edit_title">
+            </div>
+            <div class="editing">
+                <label class="input_label" for="edit_content">내용</label>
+                <input type="text" id="edit_content">
+            </div>
+        </div>
+
+        <div class="edit_button">
+            <button class="cancle" onclick="JS_cancle()">취소</button>
+            <button class="edit" onclick="JS_edit()">수정 하기</button>
+        </div>
+    </div>
+
+    <div class="recollect">
+        <div class="recollect_title">회고</div>
+            <div class="comment">
+                <input class="comment_regist" type="text" id="type_comment" placeholder="수정 중일 때는 회고를 작성할 수 없어요.">
+                <button class="comment_button">입력</button>
+            </div>
+            <div id="show_comment"></div>
+    </div>
+    <script src="./javascript/edit.js" ></script>
+</body>
+</html>
