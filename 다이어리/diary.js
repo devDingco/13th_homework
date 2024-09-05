@@ -2,6 +2,7 @@ const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+let deleteId;
 let diaryEntry = {};
 let currentFilteredMood = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
@@ -65,7 +66,7 @@ const createHtml = (diaryEntry) => {
               class="diary_cover"
               src="./image/${diaryEntry.imageName}.png"
             />
-            <div id="delete_button" onclick="deleteDiaryEntry(event)">
+            <div id="delete_button" onclick="confirmDeleteDiary(event)">
             <img
               class="${diaryEntry.id}"
               src="./image/delete_button.png"
@@ -206,17 +207,22 @@ const onClickMood = (e) => {
   getDiariesByMood(selectedMood);
 };
 
-const deleteDiaryEntry = (event) => {
-  event.preventDefault();
+const deleteDiaryEntry = () => {
   let index;
-  const id = event.target.className;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    if (e.id == id) index = i;
+    if (e.id == deleteId) index = i;
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   updateDiaryList(storedDiaryList);
+  closeSingleModal("confirm_delete_diary_modal")
+};
+
+const confirmDeleteDiary = (event) => {
+  event.preventDefault();
+  deleteId = event.target.className;
+  triggerModal("confirm_delete_diary_modal");
 };
 
 const upScroll = () => {
@@ -239,30 +245,41 @@ const closeSingleModal = (modal) => {
   document.getElementById(modal).style = "display: none;";
 };
 
-
-window.addEventListener('click', (event) => {
+window.addEventListener("click", (event) => {
   const className = event.target.className;
-  if(className == "aside_layout" || className == "confirm_modal_layout"){
-    if(event.target.id != "diary_cancel_modal"){
-      closeModal(event.target.id)
-    }else {
-      continueWriting(event.target.id)
+  if (className == "aside_layout" || className == "confirm_modal_layout") {
+    if (event.target.id != "diary_cancel_modal") {
+      closeModal(event.target.id);
+    } else {
+      continueWriting(event.target.id);
     }
   }
-})
+});
 
 window.addEventListener("keydown", (event) => {
-  if(event.key == "Escape") {
-    const diaryWritingModal =  document.getElementById("aside_layout").style.display == "flex"
-    const diaryCancelModal = document.getElementById("diary_cancel_modal").style.display == "flex"
-    const diaryRegistrationModal = document.getElementById("diary_registration_modal").style.display == "flex"
-  
-    if(diaryWritingModal){
-      if(diaryCancelModal) closeSingleModal("diary_cancel_modal")
-      else if(diaryRegistrationModal) closeAllModals("diary_registration_modal")
-      else{closeSingleModal("aside_layout")}
+  if (event.key == "Escape") {
+    const diaryWritingModal =
+      document.getElementById("aside_layout").style.display == "flex";
+    const diaryCancelModal =
+      document.getElementById("diary_cancel_modal").style.display == "flex";
+    const diaryRegistrationModal =
+      document.getElementById("diary_registration_modal").style.display ==
+      "flex";
+    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
+    "flex";
+
+    if (diaryWritingModal) {
+      if (diaryCancelModal) closeSingleModal("diary_cancel_modal");
+      else if (diaryRegistrationModal)
+        closeAllModals("diary_registration_modal");
+      else {
+        closeSingleModal("aside_layout");
+      }
+    }
+    if(confirmDeleteDiaryModal){
+      closeSingleModal("confirm_delete_diary_modal")
     }
   }
-})
+});
 
 moodList.addEventListener("click", onClickMood);
