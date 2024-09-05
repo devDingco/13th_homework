@@ -218,7 +218,13 @@ function diaryCard(dataFrom) {
 //
 //
 let removeListID;
+let modalDepth;
+
 const modalOn = (depth, content, event) => {
+  modalDepth = depth;
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
   if (content === 'modal_remove_list') {
     event.stopPropagation();
     event.preventDefault();
@@ -229,7 +235,6 @@ const modalOn = (depth, content, event) => {
 
   if (content === 'added_modal') {
     event.preventDefault();
-    // eventState = event
   }
   if (content === 'modal_remove_list') {
   }
@@ -243,9 +248,12 @@ const modalClose = (isOne, closeModal1, closeModal2, nextFnc) => {
     ? ((document.getElementById(closeModal1).style.display = 'none'),
       (document.getElementById(closeModal2).style.display = 'none'),
       (modalBack1.style.display = 'none'),
-      (modalBack2.style.display = 'none'))
+      (modalBack2.style.display = 'none'),
+      (document.body.style.overflow = 'auto'))
     : ((document.getElementById(closeModal1).style.display = 'none'),
-      (modalBack1.style.display = 'none'),
+      closeModal1 === 'cancel_prompt_modal'
+        ? (modalBack2.style.display = 'none')
+        : (modalBack1.style.display = 'none'),
       (modalBack2.style.display = 'none'));
   if (nextFnc === 'DELETE') {
     console.log(removeListID);
@@ -253,10 +261,29 @@ const modalClose = (isOne, closeModal1, closeModal2, nextFnc) => {
   }
 };
 
-//
-//
-//
-//
+document.getElementById('modal_depth1').addEventListener('click', () => {
+  document.getElementById('modal_depth1').style.display = 'none';
+  document
+    .querySelectorAll('.depth1')
+    .forEach((el) => (el.style.display = 'none'));
+});
+
+document.getElementById('modal_depth2').addEventListener('click', () => {
+  document.getElementById('modal_depth2').style.display = 'none';
+  document
+    .querySelectorAll('.depth2')
+    .forEach((el) => (el.style.display = 'none'));
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById(`modal_depth${modalDepth}`).style.display = 'none';
+    document
+      .querySelectorAll(`.depth${modalDepth}`)
+      .forEach((el) => (el.style.display = 'none'));
+    modalDepth -= 1;
+  }
+});
 
 scrollFloatingButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
