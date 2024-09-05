@@ -31,11 +31,20 @@ header {
 main {
     width: 100vw;
     height: 78rem;
+
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 footer {
     width: 100vw;
     height: 7rem;
+    @media (max-width: 1000px) {
+        position: fixed;
+        bottom: 0;
+    }
 }
 
 .noto-sans-kr {
@@ -159,6 +168,9 @@ div.footer > p.content
 div.flexcontainer {
     display: flex;
     flex-wrap: nowrap;
+    @media (max-width: 1000px) {
+        flex-direction: column-reverse;
+    }
 }
 
 div.flexcontainer > div.flexchild-left {
@@ -169,6 +181,12 @@ div.flexcontainer > div.flexchild-left {
     display: flex;
     flex-wrap: wrap;
     /* background: yellow; */
+    @media (max-width: 1000px) {
+        width: 100%;
+        margin: auto;
+        padding-left: 0;
+        height: fit-content;
+    }
 }
 
 div.flexcontainer > div.flexchild-right {
@@ -177,6 +195,11 @@ div.flexcontainer > div.flexchild-right {
     padding-right: 15vw;
     /* border: 1px solid red; */
     /* background: yellowgreen; */
+    @media (max-width: 1000px) {
+        width: 70vw;
+        margin: auto;
+        height: fit-content;
+    }
 }
 
 form.diary-util {
@@ -192,6 +215,13 @@ form.diary-util {
     top: 3rem;
     /* height: 55rem; */
     right: 0;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 6rem;
+        anchor-name: --form-anchor;
+    }
 }
 
 form.diary-util > p.title
@@ -204,6 +234,10 @@ form.diary-util > p.title
     margin-bottom: 3rem;
     margin-left: 2rem;
     margin-top: 1rem;
+    @media (max-width: 1000px) {
+        width: 50vw;
+        margin: auto;
+    }
 }
 
 
@@ -216,6 +250,10 @@ form.diary-util > p.subtitle, p.text-input-string
     /* background: skyblue; */
     margin-bottom: 2rem;
     margin-left: 2rem;
+    @media (max-width: 1000px) {
+        width: 50vw;
+        margin: auto;
+    }
 }
 
 form.diary-util > div.flexlist, input.text-input, button.submit
@@ -227,6 +265,10 @@ form.diary-util > div.flexlist, input.text-input, button.submit
     margin-bottom: 3rem;
     font-weight: 700;
     font-size: min(3rem, 3vmin);
+    @media (max-width: 1000px) {
+        width: 50vw;
+        margin: auto;
+    }
 }
 
 input.text-input
@@ -243,6 +285,11 @@ textarea.text-input
     border: 0.15rem solid var(--lightgray);
     border-radius: 1rem;
     margin-bottom: 1.5rem;
+    @media (max-width: 1000px) {
+        width: 50vw;
+        margin: auto;
+        margin-bottom: 1rem;
+    }
 }
 
 button.submit
@@ -253,12 +300,19 @@ button.submit
     background: var(--gray);
     border: 1rem solid transparent;
     border-radius: 1rem;
+    @media (max-width: 1000px) {
+        width: 50vw;
+        height: 3rem;
+        margin: auto;
+    }
 }
 
 button.submit > p
 {
     margin: auto;
     color: white;
+    line-height: 1rem;
+    font-size: 1rem;
 }
 
 div.diary-util > label.radio-option
@@ -323,7 +377,8 @@ li.flexchild
 {
     width: 20rem;
     height: 27rem;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
     transition-duration: 0.5s;
     /* border: 1px green solid; */
     /* position: sticky; */
@@ -331,8 +386,23 @@ li.flexchild
 
 select, option
 {
-    font-size: max(1.5rem, 1.5vmax);
+    font-size: max(0.75rem, 0.75vmax);
     background: var(--lightgray);
+    width: 5rem;
+    border-radius: 1rem;
+    @media (max-width: 1000px) {
+        font-size: max(1rem, 1vmax);
+    }
+}
+
+div.selection-tabview
+{
+    @media (max-width: 1024px) {
+        z-index: 10;
+        position: absolute;
+        margin-left: 6vw;
+        top: anchor(--form-anchor bottom);
+    }
 }
 
 li.flexchild > div.list-item-border
@@ -355,6 +425,16 @@ ul.flexlist
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
+    @media (max-width: 1000px) {
+        margin: auto;
+        width: 70vw;
+        height: fit-content;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        overflow-x: auto;
+        margin-bottom: 7rem;
+    }
 }
 
 div.diary-listitem-bg
