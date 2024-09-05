@@ -198,6 +198,22 @@ html {
   align-self: stretch;
 }
 
+.copy_content_btn_layout {
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  color: var(--Gray-Gray-900, #1C1C1C);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.copy_content_btn_layout > button {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: none;
+}
+
 .diary_action_container {
   display: flex;
   justify-content: flex-end;
