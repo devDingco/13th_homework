@@ -383,8 +383,6 @@ html {
 .confirm_delete_diary_modal {
   display: flex;
   width: 30rem;
-  min-width: 30rem;
-  max-width: 47.5rem;
   padding: 1.5rem;
   flex-direction: column;
   align-items: center;
@@ -480,5 +478,8 @@ html {
     flex-direction: column;
     align-items: flex-start;
     gap: 4rem;
+  }
+  .confirm_delete_diary_modal {
+    width: 20rem;
   }
 }
