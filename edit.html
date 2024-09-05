@@ -10,7 +10,7 @@
   <body>
     <!--헤더-->
     <div class="CSS_헤더">
-      <div>민지의 다이어리</div>
+      <div><a href="javascript:history.back()">❮ 일기 수정</a></div>
     </div>
 
     <!--일기 수정하는 영역-->
@@ -63,9 +63,31 @@
           class="CSS_버튼 CSS_수정하기버튼"
           onclick="JS_수정완료하기기능()"
         >
-          수정 하기
+          수정
         </button>
       </div>
+
+      <!--회고-->
+      <span class="CSS_수정구분선"></span>
+      <div class="CSS_회고제목">회고</div>
+      <div class="CSS_회고입력영역">
+        <input
+          disabled
+          placeholder="수정중일땐 회고를 작성할 수 없어요."
+          class="CSS_회고수정입력부분"
+          id="HTML_회고입력부분"
+        />
+        <button disabled class="CSS_회고수정입력버튼">입력</button>
+      </div>
+      <!--플로팅버튼-->
+      <div id="HTML_회고목록영역"></div>
+      <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
+        <img
+          class="CSS_플로팅이미지"
+          src="./assets/images/floatingButton.png"
+          onclick="JS_스크롤위로기능()"
+        />
+      </button>
     </div>
   </body>
 </html>
