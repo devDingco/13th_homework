@@ -7,6 +7,6 @@ function onClickDeletePost() {
         (daily) => daily.id != Number(queryId)
     );
     localStorage.setItem("dailyArray", JSON.stringify(deleteArray));
-    alert("삭제 되었습니다.");
+
     history.back();
 }
