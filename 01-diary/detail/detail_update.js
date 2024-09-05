@@ -1,24 +1,14 @@
+// Variables
 let diary
-let reminiscenceList = []
 
+// viewWillLoad
 window.onload = () => {
-    fetchDetailDataFromLocalStorage()
+    const id = getParameters()
+    diary = getDetailData(id)
     render()
 }
 
-const fetchDetailDataFromLocalStorage = () => {
-    const queryString = location.search
-    const parameters = new URLSearchParams(queryString)
-
-    const diaryID = parameters.get("diaryID")
-    console.log(`상세보기 할 ID는 ${diaryID} 입니다.`)
-
-    const jsonData = localStorage.getItem(diaryID)
-    diary = JSON.parse(jsonData)
-    reminiscenceList = diary.reminiscenceList
-    console.log(`${reminiscenceList}`)
-}
-
+// Input Data Validate
 const selectMoodCheck = () => {
     const radioList = document.getElementsByName("select_mood_radio_list")
     radioList.forEach(el => {
@@ -37,24 +27,44 @@ const inputMoodCheck = () => {
     })
 }
 
+// Rendering
 const render = () => {
-    document.getElementById("update_contents_title").innerText = diary.title
+    document.getElementById("update_contents_title").value = diary.title
     document.getElementById("update_contents_text").innerText = diary.text
     selectMoodCheck()
     renderReminiscenceList()
 }
 
+const renderReminiscenceList = () => {
+    const reminiscenceDOMList = diary.reminiscenceList.map(el => `
+        <div class="reminiscence_list_container_items">
+            <div class="reminiscence_list_item_text">${el.text}</div>
+            <div class="reminiscence_list_item_date">[${diary.date}]</div>
+         </div>
+         <div class="break_line"></div>`
+    ).join("")
+    
+    document.getElementById("reminiscence_list").innerHTML = reminiscenceDOMList
+}
+
+// Data CRUD
 const updateDiary = () => {
     const title = document.getElementById("update_contents_title").value
     const text = document.getElementById("update_contents_text").value
+    
+    const diaryList = fetchDiaryListFromLocalStorage()
+    diaryList.forEach(el => {
+        if (Number(el.id) === Number(diary.id)) {
+            el.title = title
+            el.text = text
+            el.mood = diary.mood
+        }
+    })
 
-    diary.title = title
-    diary.text = text
-
-    const jsonData = JSON.stringify(diary)
-    localStorage.setItem(diary.id, jsonData)
+    updateDiaryListFromLocalStorage(diaryList)
 }
 
+// Tap or Press Event
 const cancelButtonPressed = () => {
     const queryString = location.search
     const parameters = new URLSearchParams(queryString)
@@ -67,14 +77,3 @@ const updateButtonPressed = () => {
     location.href = `./detail.html?diaryID=${diary.id}`
 }
 
-const renderReminiscenceList = () => {
-    const reminiscenceDOMList = reminiscenceList.map(el => `
-        <div class="reminiscence_list_container_items">
-            <div class="reminiscence_list_item_text">${el.text}</div>
-            <div class="reminiscence_list_item_date">[${diary.date}]</div>
-         </div>
-         <div class="break_line"></div>`
-    ).join("")
-    
-    document.getElementById("reminiscence_list").innerHTML = reminiscenceDOMList
-}

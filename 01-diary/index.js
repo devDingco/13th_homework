@@ -8,24 +8,12 @@ let selectedMood
 let isFiltered = false
 
 window.onload = () => {
-    fetchDiaryFromLocalStorage()
+    diaryList = fetchDiaryListFromLocalStorage()
+    console.log(diaryList)
+    reloadData(diaryList)
 }
 
-const fetchDiaryFromLocalStorage = () => {
-    const numberOfDiary = localStorage.length
-
-    for (let i = 0; i < numberOfDiary; i++) {
-        const data = localStorage.getItem(i)
-        console.log(`fetchDiaryFromLocalStorage: "로컬 스토리지"에서 데이터를 가져왔습니다. ${data}`)
-        diaryList.push(parseJSON(data))
-        console.log(`fetchDiaryFromLocalStorage: 현재 테스트 배열의 목록 ${diaryList}, 배열의 수 ${numberOfDiary}`)
-    }
-
-    if (diaryList.length !== 0) {
-        reloadDiary(diaryList)
-    }
-}
-
+// [Input Data Validate]
 const validateInputText = () => {
     console.log("입력된 텍스트를 검증합니다.")
     inputTitle = document.getElementById("input_diary_title").value
@@ -61,55 +49,57 @@ const activateWriteButton = () => {
     }
 }
 
-const writeButtonPressed = () => {
-    console.log("writeButtonPressed: 일기 작성 버튼을 눌렀습니다.")
-    createDiary()
-}
-
+// [Data CRUD]
 const createDiary = () => {
     console.log("createDiary: 일기를 작성합니다.")
     diaryList.push({
-        id: diaryList.length,
+        id: getID(),
         date: getToday(),
         mood: selectedMood,
         title: inputTitle,
         text: inputText,
         reminiscenceList: []
     })
-    const createdDiary = diaryList[diaryList.length -1]
-    convertToJSON(createdDiary)
-    console.log(`createDiary: 생성된 일기의 제목은 "${createdDiary.text}" 입니다.`)
 
-    filterDiary()
+    updateDiaryListFromLocalStorage(diaryList)
+    reloadData(diaryList)
     alert(`일기가 추가되었습니다.`)
 }
 
-const convertToJSON = (data) => {
-    const convertedData = JSON.stringify(data)
-    console.log(`convertToJSON: ${convertedData} 객체를 JSON 데이터로 변환했습니다.`)
-    localStorage.setItem(data.id, convertedData)
-    console.log(localStorage.length)
+const removeDiary = (id) => {
+    const updateDiaryList = diaryList.filter(el => Number(el.id) !== Number(id))
+    console.log(`다이어리가 삭제 됩니다. ${updateDiaryList}`)
+    diaryList = updateDiaryList
+    updateDiaryListFromLocalStorage(diaryList)
+    reloadData(diaryList)
 }
 
-const parseJSON = (data) => {
-    const convertedData = JSON.parse(data)
-    console.log(`parseJSON: 변환된 데이터 ${convertedData} 입니다.`)
-    return convertedData
+const filterDiary = () => {
+    const selectedMood = document.getElementById("mood_select").value 
+
+    if (selectedMood === "전체") {
+        isFiltered = false
+        reloadData(diaryList)
+    } else {
+        filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
+        isFiltered = true
+        reloadData(filteredDiaryList)
+    }
 }
 
-const getToday = () => {
-    const date = new Date()
-
-    const year = date.getFullYear()
-    const convertedMonth = String(date.getMonth() + 1).padStart(2, "0")
-    const convertedDate = String(date.getDate()).padStart(2, "0")
-
-    return `${year}.${convertedMonth}.${convertedDate}`
+// [Data Settings]
+const getID = () => {
+    if (diaryList.length === 0) {
+        return "1"
+    } else {
+        const lastID = diaryList[diaryList.length - 1].id
+        const newID = Number(lastID) + 1
+        return newID
+    }
 }
 
-// "mood" 데이터에 따라, 이미지 주소 전달하기.
 const getMoodSettings = (mood) => {
-    console.log(`이미지 주소를 위해, 전달받은 "${mood}" 데이터입니다.`)
+    // "mood" 데이터에 따라, 이미지 주소 전달하기.
     switch (mood) {
         case "행복해요":
             return {
@@ -146,7 +136,8 @@ const getMoodSettings = (mood) => {
     }
 }
 
-const reloadDiary = (reload_diaryList) => {
+// [Rendering]
+const reloadData = (reload_diaryList) => {
     const diaryDOMList = reload_diaryList.map(el => 
         `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
             <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
@@ -164,42 +155,29 @@ const reloadDiary = (reload_diaryList) => {
     document.getElementById("diary_list").innerHTML = diaryDOMList
 }
 
-const filterDiary = () => {
-    const selectedMood = document.getElementById("mood_select").value
-
-    if (selectedMood === "전체") {
-        isFiltered = false
-        reloadDiary(diaryList)
-    } else {
-        filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
-        isFiltered = true
-        reloadDiary(filteredDiaryList)
-    }
-}
-
+//  [Tap or Press Event]
 const diaryCardTapped = (id) => {
     console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
     location.href = `./detail/detail.html?diaryID=${id}`
 }
 
-const removeDiary = (id) => {
-    localStorage.removeItem(id)
-    diaryList = []
-    fetchDiaryFromLocalStorage()
-}
-
 const deleteButtonTapped = (event, id) => {
     event.stopPropagation()
     removeDiary(id)
-    reloadDiary(diaryList)
     alert(`일기가 삭제되었습니다.`)
+}
+
+const writeButtonPressed = () => {
+    console.log("writeButtonPressed: 일기 작성 버튼을 눌렀습니다.")
+    createDiary()
 }
 
 const topScrollFloatingButtonTapped = () => {
     window.scrollTo({top:0})
 }
 
+// [Other]
 window.addEventListener("scroll", () => {
     const y = window.scrollY
 

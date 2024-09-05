@@ -1,0 +1,76 @@
+@media (max-width: 779px) {
+    .filter_item {
+        order: 2;
+
+        padding: 0;
+    }
+
+    .navi {
+        width: 100%;
+    }
+
+    .navi_items {
+        width: 100%;
+    }
+
+    .contents {
+        display: contents;
+        
+    }
+
+    .contents_container {
+        /* display: contents; */
+        padding: 0px 1.25rem 0px 1.25rem;
+    }
+
+    .contents_left_item {
+        order: 3;
+
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .diary {
+        width: 100%;
+    }
+
+    .diary_mood_img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+    
+    .contents_right_item {
+        order: 1;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .write_diary {
+        height: 100%;
+    }
+
+    .write_mood_select {
+        height: 100%;
+    }
+
+    .write_mood_select_buttonList {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 1.25rem;
+    }
+
+    .diary_write_items {
+        width: 100%;
+    }
+
+    .top_scroll_floating_button {
+        order: 4;
+    }
+}

@@ -1,74 +1,80 @@
 * {
     box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+    margin: 0rem;
+    padding: 0rem;
 }
 
 .header {
+    width: 100%;
     display: flex;
     justify-content: center;
+
+    padding: 0rem 1.25rem 0rem 1.25rem;
 }
 
 .header_title {
-    width: 1168px;
-    height: 60px;
+    width: 73rem;
+    height: 3.75rem;
 
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
 
     display: flex;
     align-items: center;
 }
 
 .banner {
+    width: 100%;
     display: flex;
     justify-content: center;
+
+    padding: 0rem 1.25rem 0rem 1.25rem;
 }
 
 .banner_img {
-    width: 1168px;
-    height: 240px;
+    width: 73rem;
+    height: 15rem;
 }
 
 .body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 2rem;
 }
 
 .navi {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 32px;
+    gap: 2rem;
 
-    padding: 0px 20px 0px 20px;
+    padding: 0rem 1.25rem 0rem 1.25rem;
 }
 
 .navi_items {
-    width: 1168px;
-    height: 48px;
+    width: 73rem;
+    height: 3rem;
 
     display: flex;
-    gap: 16px;
+    gap: 1rem;
 }
 
 .navi_item {
     width: 120px;
-    height: 48px;
+    height: 3rem;
 
     color: #ABABAB;
 
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.5rem;
 
-    padding: 12px 8px 12px 8px;
+    padding: 0.75rem 0.5rem 0.75rem 0.5rem;
 }
 
 #navi_selected_item {
     color: black;
-    border-bottom: 2px solid black;
+    border-bottom: 0.125rem solid black;
 }
 
 /* 기분에 따른 일기 필터링 */
@@ -76,67 +82,72 @@
 .contents_container {
     display: flex;
     flex-direction: column;
-    gap: 42px;
+    gap: 2.625rem;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
 }
 
 .filter_item {
+    width: 100%;
     position: sticky;
-    top: 10px;
+    top: 0.625rem;
     z-index: 10;
+    /* padding: 0rem 1.25rem 0rem 1.25rem; */
 }
 
 .mood_select_box {
-    width: 120px;
-    height: 32px;
+    width: 7.5rem;
+    height: 2rem;
 
     border: 1px solid #C7C7C7;
-    border-radius: 8px;
-    padding: 4px;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
 }
 
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
 .contents {
     display: flex;
-    gap: 24px;
+    gap: 1.5rem;
+    /* padding: 0rem 1.25rem 0rem 1.25rem; */
 }
 
 .contents_left_item {
-    width: 784px;    
+    width: 49rem;    
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .diary {
-    width: 380px;
-    height: 373px;
+    width: 23.75rem;
+    height: 23.313rem;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-bottom: 16px;
+    gap: 1rem;
+    padding-bottom: 1rem;
 
-    border-radius: 16px;
+    border-radius: 1rem;
     transition: filter;
     transition-duration: 0.5s;
 }
 
 .diary:hover {
     transform: scale(1.1);
-    box-shadow: 0px 2px 30px 0px #00000029;
+    box-shadow: 0rem 0.125rem 1.875rem 0rem #00000029;
 }
 
 .diary:hover .diary_mood_img {
-    filter: blur(3px);
+    filter: blur(0.188rem);
 }
 
 .diary_mood_img {
-    border-radius: 16px;
+    border-radius: 1rem;
 }
 
 .diary_delete_button {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 
     border: none;
     border-radius: 100%;
@@ -148,21 +159,23 @@
     
 
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 0.75rem;
+    right: 0.75rem;
 
-    box-shadow: 0px 0px 8px 0px #0000001A;
+    box-shadow: 0rem 0rem 0.5rem 0em #0000001A;
 }
 
 .diary_title {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 
-    padding: 0px 8px 0px 8px;
+    padding: 0rem 0.5rem 0rem 0.5rem;
 }
 
 .diary_sub_title {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -170,224 +183,228 @@
 
 .diary_mood_happy {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #EA5757;
 }
 
 .diary_mood_sad {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #28B4E1;
 }
 
 .diary_mood_surprised {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #D59029;
 }
 
 .diary_mood_angry {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #777777;
 }
 
 .diary_mood_other {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #A229ED;
 }
 
 .diary_date {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #919191;
 }
 
 .diary_main_title {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: black;
 }
 
 /* 가운데 내용의 오른쪽 "일기 쓰기" 아이템 배치 */
 .contents_right_item {
-    height: 604px;
+    width: 22.5rem;
+    height: 37.75rem;
+    padding: 1.5rem;
 
-    padding: 24px;
-
-    border: 1px solid #D4D3D3;
-    border-radius: 16px;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 1rem;
 
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 2.5rem;
 }
 
 .write_title {
+    width: 100%;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.5rem;
 
     color: black;
 }
 
 .write_diary {
-    width: 312px;
-    height: 404px;
+    width: 100%;
+    height: 25.25rem;
 
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 2.5rem;
 }
 
 .write_mood_select {
-    width: 312px;
-    height: 108px;
+    width: 100%;
+    height: 6.75rem;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
 }
 
 .write_mood_select_title {
-    width: 312px;
-    height: 24px;
+    width: 100%;
+    height: 1.5rem;
 
     color: black;
 
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .write_mood_select_buttonList {
-    width: 316px;
-    height: 68px;
+    width: 19.75rem;
+    height: 4.25rem;
 
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .write_mood_select_button {
-    width: 94px;
-    height: 24px;
+    width: 5.875rem;
+    height: 1.5rem;
 
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .write_mood_name {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #333333;
 }
 
 .diary_write_items {
-    width: 312px;
-    height: 256px;
+    width: 19.5rem;
+    height: 16rem;
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .diary_title_input {
-    width: 312px;
-    height: 76px;
+    width: 100%;
+    height: 4.75rem;
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .diary_text_input {
-    width: 312px;
-    height: 156px;
+    width: 100%;
+    height: 9.75rem;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .diary_title_input_title {
+    width: 100%;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #333333;
 }
 
 .diary_title_input_text {
-    width: 312px;
-    height: 48px;
-    border: 1px solid #D4D3D3;
-    border-radius: 8px;
-    padding: 12px 16px 12px 16px
+    width: 100%;
+    height: 3rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem 0.75rem 1rem;
 }
 
 .diary_title_input_textarea {
-    width: 312px;
-    height: 128px;
-    border: 1px solid #D4D3D3;
-    border-radius: 8px;
-    padding: 12px 16px 12px 16px
+    width: 100%;
+    height: 8rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem 0.75rem 1rem;
 }
 
 .diary_write_button {
     background-color: #C7C7C7;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #F2F2F2;
     border: none;
-    border-radius: 8px;
-    padding: 8px 10px 8px 10px;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.625rem 0.5rem 0.625rem;
 }
 
 .top_scroll_floating_button {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #F2F2F2;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.063rem solid #F2F2F2;
     border-radius: 100%;
 
     background-color: #FFFFFFE5;
     
-    position: fixed;
-    bottom: 152px;
-    right: 376px;
+    position: sticky;
+    
+    bottom: 20px;
+    left: 100%;
 }
 
 /* 바닥글 영역 */
 
 .footer {
+    margin-top: 1.5rem;
     background-color: #F2F2F2;
 
     display: flex;
     justify-content: center;
 
-    padding: 24px 20px 24px 20px;
+    padding: 1.5rem 1.25rem 1.5rem 1.25rem;
 }
 
 .footer_information {
-    width: 1168px;
-    height: 112px;
+    width: 73rem;
+    height: 7rem;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 2rem;
 }
 
 .page_title {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: black;
 }
 
 .exponent_title {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #5F5F5F;
 }
 
 .copyright_title {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #919191;
 }
 
