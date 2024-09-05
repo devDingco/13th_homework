@@ -50,6 +50,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   gap: var(--gap-lg);
+  min-width: 320px;
 }
 
 .filter {
@@ -107,6 +108,7 @@
   gap: var(--gap-lg);
   flex-basis: 0;
   flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .panel-list .no-content {
@@ -206,31 +208,4 @@
   color: var(--gray-50);
   background-color: var(--gray-300);
   cursor: not-allowed;
-}
-
-@media (max-width: 1190px) {
-  .panel-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 360px) {
-  .panel-list {
-    min-width: 320px;
-    max-width: 100%;
-  }
-
-  .panel-item {
-    max-width: 148px;
-  }
-
-  .emotion-card {
-    height: 285px;
-  }
-
-  .emotion-card img {
-    object-fit: cover;
-    height: 100%;
-  }
 }

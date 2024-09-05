@@ -245,7 +245,7 @@ body {
 }
 
 .review legend {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: var(--weight-semi-bold);
 }
 
@@ -264,7 +264,7 @@ body {
   border-radius: var(--radius-sm);
   border: 1px solid var(--gray-200);
   background-color: var(--gray-w);
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: var(--weight-medium);
 }
 
@@ -280,7 +280,7 @@ body {
   color: var(--gray-w);
   background-color: var(--gray-b);
   border-radius: var(--radius-sm);
-  font-size: 18px;
+  font-size: 1.6rem;
   font-weight: var(--weight-semi-bold);
 }
 
@@ -294,7 +294,8 @@ body {
 .review-item {
   width: 100%;
   gap: var(--gap-xs);
-  font-size: 16px;
+  align-items: center;
+  font-size: 1.6rem;
   padding-bottom: var(--gap-xs);
   padding-top: var(--gap-xs);
   border-bottom: 1px solid var(--gray-100);
@@ -315,6 +316,7 @@ body {
 .review-date {
   color: var(--gray-600);
   font-weight: var(--weight-regular);
+  font-size: 1.6rem;
 }
 
 .footer {
@@ -362,6 +364,10 @@ body {
     max-width: 100%;
   }
 
+  .panel-item {
+    min-width: 150px;
+  }
+
   .panel-list {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
@@ -370,5 +376,29 @@ body {
   .side-panel {
     flex-basis: 100%;
     max-width: 100% !important;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    font-size: 8px;
+  }
+
+  .panel-list {
+    min-width: 320px;
+    max-width: 100%;
+  }
+
+  .panel-item {
+    max-width: 148px;
+  }
+
+  .emotion-card {
+    height: 285px;
+  }
+
+  .emotion-card img {
+    object-fit: cover;
+    height: 100%;
   }
 }
