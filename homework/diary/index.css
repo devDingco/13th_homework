@@ -10,13 +10,14 @@
 }
 
 .CSS_레이아웃 {
-    width: 100vw;
+    /* width: 1168px; */
+    width: 100%;
     height: auto;
     min-height: 100%;
     padding-bottom: 40px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
 }
 
@@ -41,6 +42,26 @@
     height: 48px;
     margin-bottom: 32px;
     margin-top: 24px;
+}
+
+.CSS_행복 {
+    color: #ea5757;
+}
+
+.CSS_슬픔 {
+    color: #28b4e1;
+}
+
+.CSS_놀람 {
+    color: #d59029;
+}
+
+.CSS_화남 {
+    color: #777;
+}
+
+.CSS_기타 {
+    color: #a229ed;
 }
 
 .CSS_감정선택상자 {
@@ -80,7 +101,6 @@
 
 .CSS_메인왼쪽 {
     width: 784px;
-    /* height: 1167px; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -95,11 +115,18 @@
     flex-direction: column;
 }
 
-.CSS_메인왼쪽_카드 img {
+.CSS_일기사진 {
+    height: 285px;
+    width: auto;
+}
+
+.CSS_기분이미지 {
+    width: 100%;
+    height: 100%;
     transition: 0.5s;
 }
 
-.CSS_메인왼쪽_카드 img:hover {
+.CSS_기분이미지:hover {
     cursor: pointer;
     filter: blur(3px);
     width: 110%;
@@ -277,4 +304,37 @@
     font-weight: 300;
     line-height: 16px;
     letter-spacing: -0.14px;
+}
+
+/* DETAIL */
+.CSS_디테일제목 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    padding: 20px 0;
+}
+
+.CSS_수정버튼상자 {
+    width: 1168px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.CSS_수정버튼 {
+    width: 51px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    gap: 10px;
+}
+
+.CSS_감정날짜상자 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CSS_감정상자 {
 }
