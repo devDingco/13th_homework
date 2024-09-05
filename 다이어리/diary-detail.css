@@ -352,9 +352,9 @@ html {
 .copy_toast > div {
   display: none;
   border-radius: 0.5rem;
-  background: var(--Gray-Gray-100, #e4e4e4);
   border: none;
-  color: #000;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-W, #fff);
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -362,7 +362,7 @@ html {
   padding: 0.7rem;
   width: 15rem;
   animation-name: animation;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-fill-mode: none;
   opacity: 0%;
 }

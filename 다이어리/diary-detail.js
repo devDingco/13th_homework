@@ -63,23 +63,25 @@ const createCommentHtml = (commentEntries) => {
       <div class="comment_date">${commentEntries.date}</div>
       <div class="comment_divider"></div>
     </div>
-  `
+  `;
   const commentBox = document.createElement("div");
   commentBox.innerHTML = commentCard;
-  const commentsContainerBox = document.getElementById("comments_container_box");
+  const commentsContainerBox = document.getElementById(
+    "comments_container_box"
+  );
   return commentsContainerBox.appendChild(commentBox);
-}
+};
 
 const addComment = (date) => {
-  const comment = document.getElementById("comment_input")
-  const commentValue = comment.value
-  commentEntries = {commentValue, date}
-  diaryEntries[index].commentList.push({ ...commentEntries })
-  diaryDetailContentList.splice(index, 1, diaryEntries[index])
+  const comment = document.getElementById("comment_input");
+  const commentValue = comment.value;
+  commentEntries = { commentValue, date };
+  diaryEntries[index].commentList.push({ ...commentEntries });
+  diaryDetailContentList.splice(index, 1, diaryEntries[index]);
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
   comment.value = null;
-  createCommentHtml(commentEntries)
-}
+  createCommentHtml(commentEntries);
+};
 
 const setupCommentInput = () => {
   const date = new Date();
@@ -87,30 +89,32 @@ const setupCommentInput = () => {
   const month = String(date.getMonth() + 1).padStart(2, 0);
   const day = String(date.getDate()).padStart(2, 0);
   const commentRegistrationDate = `[${year}. ${month}. ${day}]`;
-  addComment(commentRegistrationDate)
+  addComment(commentRegistrationDate);
 };
 
-diaryEntries = diaryDetailContentList
-  diaryDetailContentList.map((e, i) => {
-    if(e.id == id) index = i
-  })
+diaryEntries = diaryDetailContentList;
+diaryDetailContentList.map((e, i) => {
+  if (e.id == id) index = i;
+});
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);
-})
+});
 
 const deleteDiary = () => {
   diaryDetailContentList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
-  alert("삭제 되었습니다.")
+  alert("삭제 되었습니다.");
   window.location.href = "./diary.html";
 };
 
 const handleContentCopy = () => {
   const copyToast = document.getElementById("copy_toast");
-  const copyContent = document.getElementById('copyContent').innerText;
+  const copyContent = document.getElementById("copyContent").innerText;
   navigator.clipboard.writeText(copyContent);
-  copyToast.style = "display: block"
-  
-}
+  copyToast.style = "display: block";
+  setTimeout(() => {
+    copyToast.style = "display: none";
+  }, 2000);
+};
 
 createHtml(diary);
