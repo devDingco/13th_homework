@@ -29,11 +29,17 @@ window.onload = () => {
   document.getElementById("날짜").innerText = 선택_일기.날짜
   document.getElementById("내용").innerText = 선택_일기.내용
 }
-
 const 수정버튼기능 = () => {
   수정화면();
 
   // 초기 내용 가져와서 인풋에 넣어주기
+  // 감정 라디오버튼 가져와
+  document.getElementsByName("기분").forEach(el => {
+    console.log(el)
+    if (el.value === 선택_일기.감정) el.checked = true;
+  }
+  )
+  선택_일기.감정
   document.getElementById("제목인풋").value = 선택_일기.제목;
   document.getElementById("내용인풋").value = 선택_일기.내용;
 }
@@ -49,6 +55,14 @@ const 수정하기버튼기능 = () => {
   console.log("선택일기", 선택_일기);
 
   초기화면();
+  // 선택_일기.기분 = 
+  let 수정된_감정 = document.getElementsByName("감정").forEach((el) => {
+    if (el.checked) 수정된_감정 = el.value;
+  })
+  let 수정된_감정색깔;
+  let 수정된_감정이미지;
+
+  선택_일기.감정 = 수정된_기분
 
   선택_일기.제목 = document.getElementById("제목인풋").value;
   선택_일기.내용 = document.getElementById("내용인풋").value;

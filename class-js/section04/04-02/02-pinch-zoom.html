@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>핀치줌 실습</title>
+  <script>
+    const JS_사진원본보기기능 = () => {
+      document.body.style = "background-color: black"
+      document.getElementById("HTML_이미지").style = "width: 100%"
+      document.getElementsByName("viewport")[0].content = `
+        width=device-width,
+        initial-scale=1.0,
+        minimum-scale=1.0,
+        maximum-scale=3.0, 
+        user-scalable=yes
+      `
+
+    }
+  </script>
+</head>
+
+<body>
+  <img id="HTML_이미지" src="./00-dog.jpg" width="200px" onclick="JS_사진원본보기기능()" />
+</body>
+
+</html>
