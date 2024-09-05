@@ -215,16 +215,34 @@ function diaryCard(dataFrom) {
     </a>`;
 }
 
-window.addEventListener('scroll', () => {
-  const scrollPosition = window.scrollY;
-  if (scrollPosition) {
-    classNameChange(scrollFloatingButton, 'none', 'active');
-    classNameChange(customSelectEl, 'none', 'active');
-  } else {
-    classNameChange(scrollFloatingButton, 'active', 'none');
-    classNameChange(customSelectEl, 'active', 'none');
-  }
-});
+// window.addEventListener('scroll', () => {
+//   const footerLocation = document
+//     .getElementById('footerMain')
+//     .getBoundingClientRect().top;
+//   const viewLength = window.innerHeight;
+
+//   if (viewLength >= footerLocation) {
+//     document.getElementById('upFloatingButton').style = `
+//           position: relative;
+//           bottom: 20px;
+//           left: 90vw;
+//           `;
+//   } else {
+//     document.getElementById('upFloatingButton').style = `
+//             position: fixed;
+//             bottom: 20px;
+//             left: 90vw;
+//           `;
+//   }
+//   // const scrollPosition = window.scrollY;
+//   // if (scrollPosition) {
+//   //   classNameChange(scrollFloatingButton, 'none', 'active');
+//   //   classNameChange(customSelectEl, 'none', 'active');
+//   // } else {
+//   //   classNameChange(scrollFloatingButton, 'active', 'none');
+//   //   classNameChange(customSelectEl, 'active', 'none');
+//   // }
+// });
 
 scrollFloatingButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });

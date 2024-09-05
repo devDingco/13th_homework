@@ -1,0 +1,39 @@
+@media (max-width: 779px) {
+  .container-layout {
+    padding: 0 20px;
+  }
+  nav {
+    margin-bottom: 32px;
+  }
+  main {
+    display: contents;
+  }
+
+  main aside {
+    order: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  main .main-content {
+    order: 3;
+  }
+
+  main .main-content ul > li .img-wrap {
+    height: 285px;
+  }
+
+  main .main-content ul > li .img-wrap > img {
+    height: 100%;
+    object-fit: cover;
+  }
+  .container-layout > .selectWrap {
+    order: 2;
+    margin-bottom: 32px;
+  }
+
+  main > .selectWrap {
+    display: block;
+    order: 2;
+  }
+}

@@ -1,0 +1,13 @@
+@media (max-width: 779px) {
+  .container-layout {
+    padding: 0 20px 40px;
+  }
+  #edit > form .feeling-radio-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #edit > form .feeling-radio-wrap > p {
+    width: 100%;
+  }
+}

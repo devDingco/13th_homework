@@ -6,123 +6,128 @@
     <title>다이어리 과제 윤준수</title>
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/diary.css" />
+    <link rel="stylesheet" href="./styles/diary_mobile.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script src="./modules/diary.js" defer></script>
   </head>
   <body>
-    <header class="container-layout"><h1>준수의 다이어리</h1></header>
-    <article class="container-layout banner"></article>
-    <nav class="container-layout">
-      <ul class="nav_list">
-        <li class="active">
-          <button>일기 보관함</button>
-        </li>
-        <li class="">
-          <button>사진 보관함</button>
-        </li>
-      </ul>
-    </nav>
-    <div class="selectWrap none" id="customSelect">
-      <button id="selectBtn">
-        <p id="selectedValue">전체</p>
-        <span></span>
-      </button>
-      <ul id="optionList" class="hidden">
-        <li class="option">
-          <button id="all_option" class="selected" value="all">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>전체</p>
-          </button>
-        </li>
-        <li class="option">
-          <button id="happy_option" value="happy">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>행복해요</p>
-          </button>
-        </li>
-        <li class="option">
-          <button id="sad_option" value="sad">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>슬퍼요</p>
-          </button>
-        </li>
-        <li class="option">
-          <button id="surprised_option" value="surprised">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>놀랐어요</p>
-          </button>
-        </li>
-        <li class="option">
-          <button id="angry_option" value="angry">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>화나요</p>
-          </button>
-        </li>
-        <li class="option">
-          <button id="etc_option" value="etc">
-            <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-            <p>기타</p>
-          </button>
-        </li>
-      </ul>
-    </div>
-    <main class="container-layout">
-      <div class="main-content">
-        <ul id="diaryList">
-          <li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>
+    <div class="container-layout">
+      <header class="t"><h1>준수의 다이어리</h1></header>
+      <article class="">
+        <div class="banner"></div>
+      </article>
+      <nav class="">
+        <ul class="nav_list">
+          <li class="active">
+            <button>일기 보관함</button>
+          </li>
+          <li class="">
+            <button>사진 보관함</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="selectWrap none" id="customSelect">
+        <button id="selectBtn">
+          <p id="selectedValue">전체</p>
+          <span></span>
+        </button>
+        <ul id="optionList" class="hidden">
+          <li class="option">
+            <button id="all_option" class="selected" value="all">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>전체</p>
+            </button>
+          </li>
+          <li class="option">
+            <button id="happy_option" value="happy">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>행복해요</p>
+            </button>
+          </li>
+          <li class="option">
+            <button id="sad_option" value="sad">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>슬퍼요</p>
+            </button>
+          </li>
+          <li class="option">
+            <button id="surprised_option" value="surprised">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>놀랐어요</p>
+            </button>
+          </li>
+          <li class="option">
+            <button id="angry_option" value="angry">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>화나요</p>
+            </button>
+          </li>
+          <li class="option">
+            <button id="etc_option" value="etc">
+              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+              <p>기타</p>
+            </button>
+          </li>
         </ul>
       </div>
-      <aside>
-        <h2>📍 일기 쓰기</h2>
-        <form id="diaryForm" onsubmit="onAddDiary(event); false;">
-          <h4>오늘 기분은 어땠나요?</h4>
-          <div class="feeling-radio-wrap">
-            <p>
-              <input id="happy" type="radio" name="feeling" checked />
-              <label for="happy">행복해요</label>
-            </p>
-            <p>
-              <input id="sad" type="radio" name="feeling" />
-              <label for="sad">슬퍼요</label>
-            </p>
-            <p>
-              <input id="surprised" type="radio" name="feeling" />
-              <label for="surprised">놀랐어요</label>
-            </p>
-            <p>
-              <input id="angry" type="radio" name="feeling" />
-              <label for="angry">화나요</label>
-            </p>
-            <p>
-              <input id="etc" type="radio" name="feeling" />
-              <label for="etc">기타</label>
-            </p>
-          </div>
-          <div class="content-wrap">
-            <p>
-              <label for="title" class="label-sm">제목</label>
-              <input
-                id="title"
-                type="text"
-                placeholder="제목을 입력해 주세요." />
-            </p>
-            <p>
-              <label for="content" class="label-sm">내용</label>
-              <textarea
-                id="content"
-                placeholder="내용을 입력해 주세요."></textarea>
-            </p>
-          </div>
-          <button type="submint" id="submitBtn" class="none" disabled>
-            등록하기
-          </button>
-        </form>
-        <button id="upFloatingButton" class="">
-          <img src="./public/icons/up_outline_light_xl.svg" alt="" />
-        </button>
-      </aside>
-    </main>
-    <footer>
+      <main class="">
+        <div class="main-content">
+          <ul id="diaryList">
+            <li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>
+          </ul>
+        </div>
+        <aside>
+          <h2>📍 일기 쓰기</h2>
+          <form id="diaryForm" onsubmit="onAddDiary(event); false;">
+            <h4>오늘 기분은 어땠나요?</h4>
+            <div class="feeling-radio-wrap">
+              <p>
+                <input id="happy" type="radio" name="feeling" checked />
+                <label for="happy">행복해요</label>
+              </p>
+              <p>
+                <input id="sad" type="radio" name="feeling" />
+                <label for="sad">슬퍼요</label>
+              </p>
+              <p>
+                <input id="surprised" type="radio" name="feeling" />
+                <label for="surprised">놀랐어요</label>
+              </p>
+              <p>
+                <input id="angry" type="radio" name="feeling" />
+                <label for="angry">화나요</label>
+              </p>
+              <p>
+                <input id="etc" type="radio" name="feeling" />
+                <label for="etc">기타</label>
+              </p>
+            </div>
+            <div class="content-wrap">
+              <p>
+                <label for="title" class="label-sm">제목</label>
+                <input
+                  id="title"
+                  type="text"
+                  placeholder="제목을 입력해 주세요." />
+              </p>
+              <p>
+                <label for="content" class="label-sm">내용</label>
+                <textarea
+                  id="content"
+                  placeholder="내용을 입력해 주세요."></textarea>
+              </p>
+            </div>
+            <button type="submint" id="submitBtn" class="none" disabled>
+              등록하기
+            </button>
+          </form>
+        </aside>
+      </main>
+    </div>
+    <button id="upFloatingButton" class="">
+      <img src="./public/icons/up_outline_light_xl.svg" alt="" />
+    </button>
+    <footer id="footerMain">
       <div class="container-layout">
         <strong>준수의 다이어리</strong>
         <p>대표: 윤준수</p>
