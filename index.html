@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>다이어리 만들기</title>
     <link rel="stylesheet" href="./css/index.css" />
-    
+    <script src="./javascript/index.js"></script>
   </head>
   <body>
     <div class="CSS_레이아웃">
@@ -21,25 +21,30 @@
         <div class="CSS_클릭되지않은탭">사진보관함</div>
       </div>
 
-      <!--필터-->
-      <select class="CSS_필터" onchange="JS_필터링기능(event)">
-        <option selected>전체</option>
-        <option value="HTML_행복선택">행복해요</option>
-        <option value="HTML_슬픔선택">슬퍼요</option>
-        <option value="HTML_놀람선택">놀랐어요</option>
-        <option value="HTML_화남선택">화나요</option>
-        <option value="HTML_기타선택">기타</option>
-      </select>
+
 
       <div class="CSS_메인">
+
+      <div class="CSS_필터_영역_배경">
+        <select class="CSS_필터" onchange="JS_필터링기능(event)">
+          <option selected>전체</option>
+          <option value="HTML_행복선택">행복해요</option>
+          <option value="HTML_슬픔선택">슬퍼요</option>
+          <option value="HTML_놀람선택">놀랐어요</option>
+          <option value="HTML_화남선택">화나요</option>
+          <option value="HTML_기타선택">기타</option>
+        </select>
+      </div>
+
+
+      <div class="CSS_메인상자">
         <!--일기 보여주는 곳-->
         <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
+      <!--필터-->
 
         <!--등록 상자-->
         <div class="CSS_등록상자">
           <div class="CSS_등록상자_제목">📍일기 쓰기</div>
-          <div class="CSS_등록상자_내용_영역">
-            <div class="CSS_등록상자_내용">오늘 기분은 어땠나요?</div>
             <div class="CSS_라디오그룹">
               <div class="CSS_라디오버튼">
                 <input
@@ -67,35 +72,44 @@
                 <div>기타</div>
               </div>
             </div>
-          </div>
-          <div class="CSS_일기입력상자">
-            <div class="CSS_일기쓰기">
-              <div>제목</div>
-              <input
-                type="text"
-                id="HTML_제목입력창"
-                placeholder="제목을 입력해 주세요."
-              />
+            <div class="CSS_일기입력상자">
+              <div class="CSS_일기쓰기">
+                <div>제목</div>
+                <input
+                  type="text"
+                  id="HTML_제목입력창"
+                  placeholder="제목을 입력해 주세요."
+                />
+              </div>
+              <div class="CSS_일기쓰기">
+                <div>내용</div>
+                <textarea
+                  id="HTML_내용입력창"
+                  rows="5"
+                  placeholder="내용을 입력해 주세요."
+                ></textarea>
+              </div>
             </div>
-            <div class="CSS_일기쓰기">
-              <div>내용</div>
-              <textarea
-                id="HTML_내용입력창"
-                rows="5"
-                placeholder="내용을 입력해 주세요."
-              ></textarea>
+            <div>
+              <button class="CSS_일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
+                등록하기
+              </button>
             </div>
-          </div>
-          <div>
-            <button class="CSS_일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
-              등록하기
-            </button>
           </div>
         </div>
-        <div class="플로팅버튼" onclick="window.scrollTo(0,0)">
-          <div>🔼</div>
-        </div>
+        
+
+
       </div>
+    </div>
+      <!--플로팅버튼-->
+      <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
+        <img
+          class="CSS_플로팅이미지"
+          src="./assets/images/floatingButton.png"
+          onclick="JS_스크롤위로기능()"
+        />
+      </button>
     </div>
 
     <!--푸터-->
@@ -106,6 +120,5 @@
         <p class="CSS_푸터_Copyright">Copyright © 2024.{name} Co., Ltd.</p>
       </div>
     </div>
-    <script src="./javascript/index.js"></script>
   </body>
 </html>

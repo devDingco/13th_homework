@@ -18,22 +18,29 @@ a {
 }
 
 .CSS_레이아웃 {
-  margin: 0 20px 40px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 1.25rem 2.5rem; /* 0 20px 40px */
 }
 
 .CSS_헤더 {
   width: 100%;
-  height: 60px;
-  font-size: 18px;
+  height: 3.75rem; /* 60px */
+  font-size: 1.125rem; /* 18px */
   font-weight: 700;
-  line-height: 16px;
-  padding: 20px;
+  line-height: 1rem; /* 16px */
+  padding: 1.25rem; /* 20px */
+}
+
+.CSS_배너이미지 {
+  width: 100%;
 }
 
 .CSS_메인 {
   display: flex;
-  width: 100%;
-  gap: 24px;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 /* 배너 이미지 */
@@ -46,20 +53,20 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16px;
-  margin-top: 24px;
-  margin-bottom: 42px;
-  font-size: 24px;
+  gap: 1rem; /* 16px */
+  margin-top: 1.5rem; /* 24px */
+  margin-bottom: 2.625rem; /* 42px */
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px */
 }
 
 .CSS_클릭된탭 {
-  border-bottom: 2px solid #000;
+  border-bottom: 0.125rem solid #000; /* 2px */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 8px;
+  padding: 0.75rem 0.5rem; /* 12px 8px */
   color: #000;
 }
 
@@ -68,50 +75,70 @@ a {
 }
 
 /* 필터 */
-.CSS_필터 {
-  min-width: 120px;
-  padding: 4px;
-  border-radius: 8px;
-  border: 1px solid #c7c7c7;
-  height: 32px;
-  margin-bottom: 42px;
+.CSS_필터_영역_배경 {
+  display: flex;
+  width: 100%;
+  height: 2rem; /* 32px */
+  margin: 0;
   position: sticky;
-  top: 10px;
+  top: 0;
+  backdrop-filter: blur(0.625rem); /* 10px */
+  margin-bottom: 2rem; /* 32px */
   z-index: 1;
 }
 
+.CSS_필터 {
+  display: flex;
+  min-width: 7.5rem; /* 120px */
+  padding: 0.25rem; /* 4px */
+  border-radius: 0.5rem; /* 8px */
+  border: 0.0625rem solid #c7c7c7; /* 1px */
+  height: 2rem; /* 32px */
+  margin-bottom: 2.625rem; /* 42px */
+}
+
+.CSS_색상반전 {
+  filter: invert(1); /* 색상 반전 */
+}
+.CSS_메인상자 {
+  display: flex;
+}
 /* 일기 보여주는 곳 */
 .CSS_일기보여주는곳 {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 1.5rem; /* 24px */
+  /* order: 3; */
 }
 
 .CSS_일기 {
-  max-width: 380px;
+  max-width: 23.75rem; /* 380px */
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
+  border-radius: 1rem; /* 16px */
+}
+
+.CSS_일기:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0.125rem 1.875rem 0px rgba(0, 0, 0, 0.16); /* 0px 2px 30px */
+  transition: 0.5s;
+}
+
+.CSS_일기:hover .CSS_일기사진 {
+  filter: blur(0.1875rem); /* 3px */
 }
 
 .CSS_일기사진 {
-  height: 285px;
+  height: 17.8125rem; /* 285px */
   width: auto;
-  position: relative;
 }
 
-.삭제하기버튼 {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border-radius: 50%;
+.CSS_일기정보 {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10px;
+  flex-direction: column;
+  padding: 0 0.5rem 1rem; /* 0 8px 16px */
+  padding-top: 2rem; /* 32px, 간격 줄이기 */
 }
 
 .CSS_기분이미지 {
@@ -122,20 +149,20 @@ a {
 .CSS_일기내용 {
   width: 100%;
   display: flex;
-  gap: 16px;
+  gap: 1rem; /* 16px */
   align-items: center;
   justify-content: space-between;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   color: #777;
 }
 
 .CSS_기분 {
   width: 100%;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: 600;
-  line-height: 20px;
+  line-height: 1.25rem; /* 20px */
 }
 
 .CSS_행복 {
@@ -159,69 +186,85 @@ a {
 }
 
 .CSS_날짜 {
-  font-size: 14px;
+  font-size: clamp(
+    0.75rem,
+    2.5vw,
+    1rem
+  ); /* 최소 12px, 최대 16px 사이에서 폰트 크기 조정 */
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px */
   color: #919191;
   text-align: right;
   width: 100%;
+  white-space: nowrap; /* 텍스트가 한 줄에 유지되도록 설정 */
 }
 
 .CSS_일기제목 {
   width: 100%;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px */
+  overflow: hidden;
 }
 
-/* 일기등록 상자*/
+.CSS_삭제버튼 {
+  top: 2.5rem; /* 40px */
+  width: 1.875rem; /* 30px */
+  height: 1.875rem; /* 30px */
+  position: relative;
+  z-index: 1;
+}
+
+/* 일기등록 상자 */
 .CSS_등록상자 {
-  min-width: 360px;
+  max-width: 350px;
+  min-width: 22.5rem; /* 360px */
   height: fit-content;
-  border-radius: 16px;
+  border-radius: 1rem; /* 16px */
   background-color: #fff;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3; /* 1px */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 24px;
-  gap: 40px;
+  padding: 1.5rem; /* 24px */
+  gap: 2.5rem; /* 40px */
   text-align: left;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px */
   color: #000;
+  margin-top: 35px;
 }
 
 .CSS_등록상자_제목 {
   width: 100%;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
 }
 
 .CSS_등록상자_내용 {
   width: 100%;
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 600;
 }
 
 .CSS_등록상자_내용_영역 {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem; /* 16px */
 }
 
 .CSS_라디오그룹 {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  font-size: 18px;
+  gap: 1.25rem; /* 20px */
+  font-size: 1.125rem; /* 18px */
   font-weight: 500;
-  line-height: 20px;
+  line-height: 1.25rem; /* 20px */
   color: #333;
 }
 
 .CSS_라디오버튼 {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
   justify-content: center;
   align-items: center;
 }
@@ -229,17 +272,17 @@ a {
 .CSS_일기입력상자 {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem; /* 24px */
 }
 
 .CSS_일기쓰기 {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem; /* 8px */
   width: 100%;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: 500;
-  line-height: 20px;
+  line-height: 1.25rem; /* 20px */
   color: #333;
 }
 
@@ -247,14 +290,14 @@ a {
 #HTML_내용입력창 {
   appearance: none;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* 8px */
   background-color: #fff;
-  border: 1px solid #d4d3d3;
-  padding: 12px 16px;
+  border: 0.0625rem solid #d4d3d3; /* 1px */
+  padding: 0.75rem 1rem; /* 12px 16px */
   text-align: left;
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px */
 }
 
 #HTML_제목입력창::placeholder,
@@ -264,43 +307,26 @@ a {
 
 .CSS_일기쓰기_등록버튼 {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* 8px */
   background-color: #c7c7c7;
-  height: 48px;
+  height: 3rem; /* 48px */
   display: flex;
   align-items: center;
   border: 0px;
   justify-content: center;
-  padding: 8px 10px;
+  padding: 0.5rem 0.625rem; /* 8px 10px */
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px */
   color: #f2f2f2;
 }
-
-/* 플로팅 영역 */
-.플로팅버튼 {
-  width: 40px;
-  height: 40px;
-  border: 1px solid lightgrey;
-  border-radius: 40%;
-  position : fixed;
-  transform : translateY(-100%);
-  bottom: 20px;
-  right: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 
 /* 푸터 영역 */
 .CSS_푸터_영역 {
   width: 100%;
   display: flex;
-  padding: 24px 20px;
+  padding: 1.5rem 1.25rem; /* 24px 20px */
   justify-content: center;
   background-color: #f2f2f2;
 }
@@ -309,28 +335,121 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem; /* 32px */
 }
 
 .CSS_푸터_제목 {
   width: 100%;
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 700;
-  line-height: 16px;
+  line-height: 1rem; /* 16px */
 }
 
 .CSS_푸터_대표 {
   width: 100%;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: 400;
-  line-height: 16px;
+  line-height: 1rem; /* 16px */
   color: #5f5f5f;
 }
 
 .CSS_푸터_Copyright {
   width: 100%;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: 400;
-  line-height: 16px;
+  line-height: 1rem; /* 16px */
   color: #919191;
+}
+
+/* 플로팅 버튼 */
+.CSS_플로팅버튼 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 2.5rem; /* 40px */
+  right: 1.25rem; /* 20px */
+}
+
+.CSS_플로팅이미지 {
+  width: 2.5rem; /* 40px */
+}
+
+@media (max-width: 779px) {
+  /* 360px */
+
+  .CSS_레이아웃 {
+    width: 95%;
+    display: flex;
+    justify-content: column;
+    align-items: center;
+  }
+
+  .CSS_헤더 {
+    padding-left: 0;
+  }
+
+  .CSS_배너이미지 {
+    width: 100%;
+    height: 15rem; /* 240px */
+  }
+
+  .CSS_탭 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .CSS_메인 {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .CSS_기분이미지 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem; /* 16px */
+  }
+
+  .CSS_등록상자 {
+    order: 1;
+  }
+
+  .CSS_라디오그룹 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: start start;
+  }
+
+  .CSS_필터_영역_배경 {
+    order: 2;
+  }
+  .CSS_메인상자 {
+    flex-direction: column;
+  }
+  .CSS_일기보여주는곳 {
+    order: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .CSS_메인상자 {
+    display: contents;
+  }
+
+  .CSS_일기내용 {
+    gap: 0;
+  }
+
+  .CSS_일기제목 {
+    padding-top: 0.625rem; /* 10px */
+  }
+
+  .CSS_일기정보 {
+    padding-top: 2.5rem; /* 40px */
+  }
+
+  .CSS_기분 {
+    width: 100%;
+  }
 }
