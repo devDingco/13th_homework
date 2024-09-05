@@ -137,19 +137,18 @@
 .contents {
     display: flex;
     gap: 1.5rem;
-    /* padding: 0rem 1.25rem 0rem 1.25rem; */
 }
 
 .contents_left_item {
-    width: 49rem;    
-    display: flex;
-    flex-wrap: wrap;
+    width: 73rem;   
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1.5rem;
 }
 
 .diary {
-    width: 23.75rem;
-    height: 23.313rem;
+    width: 17.125rem;
+    /* height: 23.313rem; */
     position: relative;
     display: flex;
     flex-direction: column;
