@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기수정페이지</title>
+    <link rel="stylesheet" href="./css/edit.css" />
+    <script src="./javascript/edit.js"></script>
+  </head>
+  <body>
+    <!--헤더-->
+    <div class="CSS_헤더">
+      <div>민지의 다이어리</div>
+    </div>
+
+    <!--일기 수정하는 영역-->
+    <div class="CSS_일기수정하는곳">
+      <!--기분 선택-->
+      <div class="CSS_기분선택">
+        <div class="CSS_기분선택_타이틀">오늘 기분은 어땠나요?</div>
+        <div class="CSS_라디오그룹">
+          <div class="CSS_라디오버튼">
+            <input type="radio" name="HTML_기분선택버튼" value="행복" checked />
+            <div>행복해요</div>
+          </div>
+          <div class="CSS_라디오버튼">
+            <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+            <div>슬퍼요</div>
+          </div>
+          <div class="CSS_라디오버튼">
+            <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+            <div>놀랐어요</div>
+          </div>
+          <div class="CSS_라디오버튼">
+            <input type="radio" name="HTML_기분선택버튼" value="화남" />
+            <div>화나요</div>
+          </div>
+          <div class="CSS_라디오버튼">
+            <input type="radio" name="HTML_기분선택버튼" value="기타" />
+            <div>기타</div>
+          </div>
+        </div>
+      </div>
+
+      <!--일기 수정-->
+      <div class="CSS_일기수정_영역">
+        <div class="CSS_수정입력">
+          <label class="CSS_인풋라벨" for="HTML_일기수정제목입력창">제목</label>
+          <input type="text" id="HTML_일기수정제목입력창" />
+        </div>
+        <div class="CSS_수정입력">
+          <label class="CSS_인풋라벨" for="HTML_일기수정내용입력창">내용</label>
+          <textarea id="HTML_일기수정내용입력창" rows="5"></textarea>
+        </div>
+      </div>
+
+      <!--수정 버튼-->
+      <div class="CSS_수정버튼_영역">
+        <button class="CSS_버튼 CSS_취소버튼" onclick="JS_수정취소기능()">
+          취소
+        </button>
+        <button
+          class="CSS_버튼 CSS_수정하기버튼"
+          onclick="JS_수정완료하기기능()"
+        >
+          수정 하기
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
