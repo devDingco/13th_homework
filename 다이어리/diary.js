@@ -223,20 +223,20 @@ const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-const triggerDiaryWriteModal = () => {
-  document.getElementById("aside_layout").style = "display: flex;";
+const triggerModal = (modal) => {
+  document.getElementById(modal).style = "display: flex;";
+  if (modal == "diary_registration_modal") {
+    registerDiary();
+  }
 };
 
-const modalClose = () => {
+const closeModal = (modal) => {
+  document.getElementById(modal).style = "display: none;";
   document.getElementById("aside_layout").style = "display: none;";
-}
+};
 
-const showDiaryCancelConfirmationModal = () => {
-  modalClose()
-}
-
-const showDiaryRegistrationModal = () => {
-  registerDiary();
-}
+const continueWriting = () => {
+  document.getElementById("diary_cancel_modal").style = "display: none;";
+};
 
 moodList.addEventListener("click", onClickMood);

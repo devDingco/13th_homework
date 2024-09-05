@@ -37,7 +37,12 @@
                     <li class="etc"><a href="#">기타</a></li>
                   </ul>
                 </div>
-                <button class="btn_register_diary" onclick="triggerDiaryWriteModal()">+ 일기추가</button>
+                <button
+                  class="btn_register_diary"
+                  onclick="triggerModal('aside_layout')"
+                >
+                  + 일기추가
+                </button>
               </div>
             </div>
           </div>
@@ -66,7 +71,9 @@
                           id="check_sad"
                           class="mood_options"
                           name="mood"
-                        /><label for="check_sad" class="mood_text">슬퍼요</label>
+                        /><label for="check_sad" class="mood_text"
+                          >슬퍼요</label
+                        >
                       </div>
                       <div class="mood_checkbox">
                         <input
@@ -118,8 +125,18 @@
                   </div>
                 </div>
                 <div class="modal_button">
-                  <button class="close_button" onclick="showDiaryCancelConfirmationModal()">닫기</button>
-                  <button class="register_button" onclick="showDiaryRegistrationModal()">등록하기</button>
+                  <button
+                    class="close_button"
+                    onclick="triggerModal('diary_cancel_modal')"
+                  >
+                    닫기
+                  </button>
+                  <button
+                    class="register_button"
+                    onclick="triggerModal('diary_registration_modal')"
+                  >
+                    등록하기
+                  </button>
                 </div>
               </div>
             </div>
@@ -133,9 +150,31 @@
         <div class="footer">
           <div class="footer_title" id="footer">예슬이의 다이어리</div>
           <div class="footer_representative">대표 : 강예슬</div>
-          <div class="footer_copyright">
-            Copyright © 2024. 강예슬 Co., Ltd.
-          </div>
+          <div class="footer_copyright">Copyright © 2024. 강예슬 Co., Ltd.</div>
+        </div>
+      </div>
+    </div>
+    <div class="confirm_modal_layout" id="diary_registration_modal">
+      <div class="confirm_modal">
+        <div class="modal_title">일기 등록 완료</div>
+        <div class="modal_content">등록이 완료 되었습니다.</div>
+        <button onclick="closeModal('diary_registration_modal')">확인</button>
+      </div>
+    </div>
+    <div class="confirm_modal_layout" id="diary_cancel_modal">
+      <div class="confirm_modal">
+        <div class="modal_title">일기 등록 취소</div>
+        <div class="modal_content">일기 등록을 취소 하시겠어요?</div>
+        <div class="modal_button_group">
+          <button class="continue_writing_btn" onclick="continueWriting()">
+            계속 작성
+          </button>
+          <button
+            class="cancel_registration_btn"
+            onclick="closeModal('diary_cancel_modal')"
+          >
+            등록 취소
+          </button>
         </div>
       </div>
     </div>
