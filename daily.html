@@ -55,7 +55,7 @@
                         moodEng: "surprise",
                         mood: "놀랐어요",
                         date: today,
-                        title: "타이틀영역입니다.2131232132131231232131221312321312312",
+                        title: "타이틀영역입니다.",
                         content: "컨텐츠 영역입니다.",
                         img: `./img/surprise.png`,
                         comments: [],
@@ -167,115 +167,33 @@
             </header>
             <article>
                 <div class="article-header">
-                    <div class="article-header-font">일기 보관함</div>
-                    <div class="article-header-text article-header-font">
-                        사진 보관함
+                    <div class="article-header-container">
+                        <div class="article-header-font">일기 보관함</div>
+                        <div class="article-header-text article-header-font">
+                            사진 보관함
+                        </div>
+                        <select
+                            name=""
+                            id="select-post"
+                            class="select-post"
+                            onchange="onChangeSelected(event)"
+                        >
+                            <option disabled selected>전체</option>
+                            <option value="happy">행복해요</option>
+                            <option value="sad">슬퍼요</option>
+                            <option value="surprise">놀랐어요</option>
+                            <option value="angry">화나요</option>
+                            <option value="etc">기타</option>
+                        </select>
                     </div>
-                    <select
-                        name=""
-                        id="select-post"
-                        class="select-post"
-                        onchange="onChangeSelected(event)"
-                    >
-                        <option disabled selected>전체</option>
-                        <option value="happy">행복해요</option>
-                        <option value="sad">슬퍼요</option>
-                        <option value="surprise">놀랐어요</option>
-                        <option value="angry">화나요</option>
-                        <option value="etc">기타</option>
-                    </select>
+                    <div class="article-daily" onclick="onClickModal()">
+                        <div class="">+</div>
+                        <div class="">일기 쓰기</div>
+                    </div>
                 </div>
                 <div class="article-main">
                     <div id="post" class="post"></div>
-                    <div class="daily">
-                        <div class="daily-header">📍 일기 쓰기</div>
-                        <div class="daily-checkcontainer">
-                            <div>오늘 기분은 어땟나요?</div>
-                            <div class="daily-inputlist">
-                                <div class="daily-input">
-                                    <input
-                                        type="radio"
-                                        oninput="onInputButtonChange()"
-                                        name="radio"
-                                        class="input-radio"
-                                        id="happy"
-                                    />
-                                    <label for="">행복해요</label>
-                                </div>
-                                <div class="daily-input">
-                                    <input
-                                        type="radio"
-                                        oninput="onInputButtonChange()"
-                                        name="radio"
-                                        class="input-radio"
-                                        id="sad"
-                                    />
-                                    <label for="">슬퍼요</label>
-                                </div>
-                                <div class="daily-input">
-                                    <input
-                                        type="radio"
-                                        oninput="onInputButtonChange()"
-                                        name="radio"
-                                        class="input-radio"
-                                        id="surprise"
-                                    />
-                                    <label for="">놀랐어요</label>
-                                </div>
-                                <div class="daily-input">
-                                    <input
-                                        type="radio"
-                                        oninput="onInputButtonChange()"
-                                        name="radio"
-                                        class="input-radio"
-                                        id="angry"
-                                    />
-                                    <label for="">화나요</label>
-                                </div>
-                                <div class="daily-input">
-                                    <input
-                                        type="radio"
-                                        oninput="onInputButtonChange()"
-                                        name="radio"
-                                        class="input-radio"
-                                        id="etc"
-                                    />
-                                    <label for="">기타</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="daily-form">
-                            <div class="daily-form-input">
-                                <div class="daily-title">
-                                    <div>제목</div>
-                                    <input
-                                        type="text"
-                                        id="titleId"
-                                        class="input-title"
-                                        placeholder="제목을 입력해 주세요."
-                                        oninput="onInputButtonChange()"
-                                    />
-                                </div>
-                                <div class="daily-title">
-                                    <div>내용</div>
-                                    <textarea
-                                        id="contentId"
-                                        class="input-title input-content"
-                                        placeholder="내용을 입력해주세요"
-                                        oninput="onInputButtonChange()"
-                                    ></textarea>
-                                </div>
-                            </div>
-                            <button
-                                id="submitButton"
-                                class="submit-button"
-                                onclick="pushDaily()"
-                                disabled
-                            >
-                                등록하기
-                            </button>
-                        </div>
-                    </div>
+
                     <div class="floating-button" onclick="onClickUp()">
                         <svg
                             width="19"
@@ -300,6 +218,135 @@
                 <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
             </div>
         </footer>
+        <div id="modal" class="modal">
+            <div class="modal_container">
+                <div class="daily-header">읽기 쓰기</div>
+                <div class="daily-checkcontainer">
+                    <div>오늘 기분은 어땟나요?</div>
+                    <div class="daily-inputlist">
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                oninput="onInputButtonChange()"
+                                name="radio"
+                                class="input-radio"
+                                id="happy"
+                            />
+                            <label for="">행복해요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                oninput="onInputButtonChange()"
+                                name="radio"
+                                class="input-radio"
+                                id="sad"
+                            />
+                            <label for="">슬퍼요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                oninput="onInputButtonChange()"
+                                name="radio"
+                                class="input-radio"
+                                id="surprise"
+                            />
+                            <label for="">놀랐어요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                oninput="onInputButtonChange()"
+                                name="radio"
+                                class="input-radio"
+                                id="angry"
+                            />
+                            <label for="">화나요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                oninput="onInputButtonChange()"
+                                name="radio"
+                                class="input-radio"
+                                id="etc"
+                            />
+                            <label for="">기타</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-form">
+                    <div class="daily-form-input">
+                        <div class="daily-title">
+                            <div>제목</div>
+                            <input
+                                type="text"
+                                id="titleId"
+                                class="input-title"
+                                placeholder="제목을 입력해 주세요."
+                                oninput="onInputButtonChange()"
+                            />
+                        </div>
+                        <div class="daily-title">
+                            <div>내용</div>
+                            <textarea
+                                id="contentId"
+                                class="input-title input-content"
+                                placeholder="내용을 입력해주세요"
+                                oninput="onInputButtonChange()"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-button-container">
+                        <button
+                            class="submit-delete-button"
+                            onclick="onClickModalFail()"
+                        >
+                            삭제
+                        </button>
+                        <button
+                            id="submitButton"
+                            class="submit-button"
+                            onclick="onClickModalSuccess()"
+                            disabled
+                        >
+                            등록하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal_success_container" class="modal_success_container">
+            <div class="modal_success">
+                <div class="daily-header">일기 등록 완료</div>
+                <div>등록이 완료되었습니다.</div>
+                <button class="modal_success_button" onclick="pushDaily()">
+                    확인
+                </button>
+            </div>
+        </div>
+        <div id="modal_fail_container" class="modal_fail_container">
+            <div class="modal_success">
+                <div class="daily-header">일기 등록 취소</div>
+                <div>일기 등록을 취소하시겠어요?</div>
+                <div class="modal_fail_button_container">
+                    <button
+                        class="modal_fail_button1"
+                        onclick="onClickContinueWriting()"
+                    >
+                        계속 작성
+                    </button>
+                    <button
+                        class="modal_fail_button2"
+                        onclick="onClickCancelRegister()"
+                    >
+                        등록 취소
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal_fail"></div> -->
     </body>
 
     <script src="./utils/pushDaily.js"></script>
@@ -309,4 +356,10 @@
     <script src="./utils/onClickDelete.js"></script>
     <script src="./utils/onClickUp.js"></script>
     <script src="./utils/isScroll.js"></script>
+    <script src="./utils/onClickModal.js"></script>
+    <script src="./utils/onClickModalSuccess.js"></script>
+    <script src="./utils/onClickModalFail.js"></script>
+    <script src="./utils/onClickContinueWriting.js"></script>
+    <script src="./utils/onClickCancelRegister.js"></script>
+    <script src="./utils/onClickModalBlank.js"></script>
 </html>

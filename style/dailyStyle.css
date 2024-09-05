@@ -33,6 +33,7 @@ html {
 }
 body {
     width: 100dvw;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -41,13 +42,13 @@ body {
 }
 main {
     width: 100vw;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
     flex-grow: 1;
-    min-height: auto;
 }
 header {
     display: flex;
@@ -80,12 +81,16 @@ article {
 }
 .article-header {
     display: flex;
+    justify-content: space-between;
+    width: 73rem;
+}
+.article-header-container {
+    display: flex;
     align-items: center;
     gap: 1rem;
-    width: 73rem;
     position: sticky;
     top: 20px;
-    z-index: 20;
+    z-index: 2;
 }
 .article-header-text {
     color: rgba(171, 171, 171, 1);
@@ -96,6 +101,16 @@ article {
 }
 .article-header-font {
     font-size: 1rem;
+}
+.article-daily {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: black;
+    color: white;
+    padding: 10px 8px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 .article-main {
     width: 73rem;
@@ -111,10 +126,11 @@ article {
 }
 
 .post-container {
-    width: 47%;
+    max-width: 18dvw;
+    width: 270px;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
     text-decoration: none;
     position: relative;
 }
@@ -124,11 +140,11 @@ article {
     height: 100%;
     transition: width 0.5s, height 0.5s, filter 0.5s;
 }
-.post-img:hover {
+/* .post-img:hover {
     width: 110%;
     height: 110%;
     filter: blur(4px);
-}
+} */
 .post-title {
     width: 100%;
     display: flex;
@@ -187,7 +203,7 @@ article {
     width: 60rem;
     height: 28.75rem;
     padding: 1.5rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 1.25rem;
     border-radius: 16px;
@@ -250,11 +266,23 @@ article {
     resize: none;
 }
 .submit-button {
-    padding: 0.75rem 0.625rem;
+    width: 6rem;
+    height: 2.5rem;
     border: none;
     border-radius: 8px;
     background-color: #c7c7c7;
     color: white;
+    cursor: pointer;
+}
+.submit-delete-button {
+    width: 6rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
 }
 input,
 textarea {
@@ -298,6 +326,91 @@ footer {
 .footer-3 {
     font-size: 1rem;
     color: rgba(145, 145, 145, 1);
+}
+.modal {
+    width: 100dvw;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 3;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal_container {
+    width: 40rem;
+    z-index: 4;
+    background-color: white;
+    border-radius: 24px;
+    padding: 24px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.modal-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.modal_success_container,
+.modal_fail_container {
+    width: 100dvw;
+    height: 100dvh;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+.modal_success {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    border-radius: 24px;
+    padding: 24px;
+    gap: 40px;
+    z-index: 5;
+    background-color: white;
+    align-items: center;
+}
+.modal_success_button {
+    width: 100%;
+    background-color: black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    color: white;
+    cursor: pointer;
+}
+.modal_fail_button_container {
+    display: flex;
+    gap: 20px;
+}
+.modal_fail_button1 {
+    width: 6.5rem;
+    height: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    color: black;
+    cursor: pointer;
+}
+.modal_fail_button2 {
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 6.5rem;
+    height: 3rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
 }
 @media (max-width: 375px) {
     * {
