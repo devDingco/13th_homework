@@ -163,8 +163,7 @@ const registerDiary = () => {
   if (text.value == "" || textarea.value == "" || mood.length == 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
-    diaryEntry.commentList = [];
-    getContent(diaryEntry);
+    triggerModal('diary_registration_modal')
   }
 };
 
@@ -234,7 +233,8 @@ const triggerModal = (modal) => {
   document.body.style.cssText = "overflow-y: hidden;"
   document.getElementById(modal).style = "display: flex;";
   if (modal == "diary_registration_modal") {
-    registerDiary();
+    diaryEntry.commentList = [];
+    getContent(diaryEntry);
   }
 };
 
