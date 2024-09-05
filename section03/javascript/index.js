@@ -17,10 +17,6 @@ window.onload = () => {
   showDiary();
 };
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 const renderData = (array) => {
   return array.map(
     (el, index) => `
