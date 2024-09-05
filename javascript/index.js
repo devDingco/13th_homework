@@ -308,3 +308,9 @@ const JS_등록완료모달끄기기능 = () => {
 const JS_취소모달끄기기능 = () => {
   document.getElementById("HTML_취소모달그룹").style = "display: none";
 }
+
+// 삭제묻는창띄우는기능
+const JS_삭제할지다시묻기기능 = () => {
+
+}
+
