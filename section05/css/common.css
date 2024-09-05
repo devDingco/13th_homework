@@ -24,6 +24,7 @@
   --gray-800: #333333;
   --gray-900: #1c1c1c;
   --gray-b: #000;
+  --gray-b-opacity-50: rgba(0, 0, 0, 0.5);
   --accent-red: #ea5757;
   --accent-blue: #28b4e1;
   --accent-purple: #a229ed;
