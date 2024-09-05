@@ -23,7 +23,7 @@
         </div>
         <div class="contents_container">
             <div id="filter_item" class="filter_item">
-                <div class="">
+                <div class="www">
                     <select id="mood_select", class="mood_select_box" onchange="filterDiary()">
                         <option value="전체" selected>전체</option>
                         <option value="행복해요">행복해요</option>
@@ -32,8 +32,12 @@
                         <option value="화나요">화나요</option>
                         <option value="기타">기타</option>
                     </select>
+                    <div class="write_diary_items">
+                        <button class="wirte_diary_button" onclick="writeButtonPressed()"><img class="write_diary_image" src="./assets/add.png">일기쓰기</button>
+                    </div>
                 </div>
             </div>
+
             <div id="HTML_contents" class="contents">
                 <div class="contents_left_item" id="diary_list">
                     <div class="diary" id="diary_DOM">

@@ -104,6 +104,35 @@
     padding: 0.25rem;
 }
 
+.www {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wirte_diary_button {
+    width: 6.875rem;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 0.5rem;
+
+    background-color: black;
+    color: #FFFFFF;
+
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.write_diary_image {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: black;
+}
+
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
 .contents {
     display: flex;
