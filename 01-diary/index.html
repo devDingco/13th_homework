@@ -141,11 +141,24 @@
                     </div>  <!-- write_diary_contents -->
                     <div class="write_diary_footer_items">
                         <button class="write_diary_closed_button" id="HTML_write_diary_closed_button" onclick="closedButtonPressed()">닫기</button>
-                        <button class="write_diary_button" id="HTML_diary_write_button" disabled onclick="writeButtonPressed()">등록하기</button>
+                        <button class="write_diary_button" id="HTML_diary_write_button" disabled onclick="makeButtonPressed()">등록하기</button>
                     </div>
-                    <div id="HTML_write_diary_cancel_modal_bg" class="write_diary_cancel_modal_bg">
-                        <div class="write_diary_cancel_modal_container">
-                            <div class="write_diary_cancel_modal_title_items">
+                    <!-- 일기 "등록하기" 누를 경우 모달 -->
+                    <div id="HTML_write_diary_success_modal_bg" class="write_diary_select_modal_bg">
+                        <div id="write_diary_suceess_modal_container" class="write_diary_select_modal_container">
+                            <div class="write_diary_modal_title_items">
+                                <div class="write_diary_cancel_title">일기 등록 완료</div>
+                                <div class="write_diary_cancel_text">등록이 완료 되었습니다.</div>
+                            </div> <!-- write_diary_cancel_title_items -->
+                            <div class="write_diary_cancel_modal_button_items">
+                                <button class="write_diary_ok_button" onclick="okButtonPressed()">확인</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 일기 "닫기" 누를 경우 모달 -->
+                    <div id="HTML_write_diary_cancel_modal_bg" class="write_diary_select_modal_bg">
+                        <div class="write_diary_select_modal_container">
+                            <div class="write_diary_modal_title_items">
                                 <div class="write_diary_cancel_title">일기 등록 취소</div>
                                 <div class="write_diary_cancel_text">일기 등록을 취소하시겠어요?</div>
                             </div> <!-- write_diary_cancel_title_items -->
@@ -154,7 +167,7 @@
                                 <button class="write_diary_cancel_button" onclick="cancelButtonPressed()">등록 취소</button>
                             </div> <!-- write_diary_cancel_button_items -->
                         </div> <!-- write_diary_cancel_container -->
-                    </div>
+                    </div> <!-- write_diary_cancel_modal_bg -->
                 </div><!-- write_diary_footer_items -->
                 </div> <!-- HTML_write_diary_modal_container -->
                 </div>
