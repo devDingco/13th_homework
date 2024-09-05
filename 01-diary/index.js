@@ -168,9 +168,14 @@ const deleteButtonTapped = (event, id) => {
     alert(`일기가 삭제되었습니다.`)
 }
 
+const cancelButtonPressed = () => {
+    console.log("cancelButtonPressed: 일기 등록 닫기 버튼을 눌렀습니다.")
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+}
+
 const writeButtonPressed = () => {
     console.log("writeButtonPressed: 일기 작성 버튼을 눌렀습니다.")
-    createDiary()
+    presentModal()
 }
 
 const topScrollFloatingButtonTapped = () => {
@@ -187,3 +192,7 @@ window.addEventListener("scroll", () => {
         document.getElementById("mood_select").style = "background-color: white; color: black;"
     }
 })
+
+const presentModal = () => {
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
+}

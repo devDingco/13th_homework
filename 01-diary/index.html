@@ -37,7 +37,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="HTML_contents" class="contents">
                 <div class="contents_left_item" id="diary_list">
                     <div class="diary" id="diary_DOM">
@@ -102,51 +101,53 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="contents_right_item">
-                        <div class="write_title">📍 일기 쓰기</div>
-                        <div class="write_diary">
-                            <div class="write_mood_select">
-                                <div class="write_mood_select_title">오늘 기분은 어땟나요?</div>
-                                <div class="write_mood_select_buttonList">
-                                    <div class="write_mood_select_button">
-                                        <input type="radio" id="mood_happy_radio" name="mood_radio" value="행복해요" oninput="validateInputText()">
-                                        <label for="mood_happy_radio" class="write_mood_name">행복해요</label>
-                                    </div>
-                                    <div class="write_mood_select_button">
-                                        <input type="radio" id="mood_sad_radio" name="mood_radio" value="슬퍼요" oninput="validateInputText()">
-                                        <label for="mood_sad_radio" class="write_mood_name">슬퍼요</label>
-                                    </div>
-                                    <div class="write_mood_select_button">
-                                        <input type="radio" id="mood_surprised_radio" name="mood_radio" value="놀랐어요" oninput="validateInputText()">
-                                        <label for="mood_surprised_radio" class="write_mood_name">놀랐어요</label>
-                                    </div>
-                                    <div class="write_mood_select_button">
-                                        <input type="radio" id="mood_angry_radio" name="mood_radio" value="화나요" oninput="validateInputText()">
-                                        <label for="mood_angry_radio" class="write_mood_name">화나요</label>
-                                    </div>
-                                    <div class="write_mood_select_button">
-                                        <input type="radio" id="mood_other_radio" name="mood_radio" value="기타" oninput="validateInputText()">
-                                        <label for="mood_other_radio" class="write_mood_name">기타</label>
-                                    </div>
+                <div id="HTML_write_diary_modal_bg" class="write_diary_modal_bg">
+                    <div id="HTML_write_diary_modal_container" class="write_diary_modal_container">
+                        <div class="write_diary_title">일기 쓰기</div>
+                        <div class="write_diary_mood_items">
+                            <div class="write_diary_mood_title">오늘 기분은 어땠나요?</div>
+                            <div class="write_diary_mood_buttonList">
+                                <div class="write_mood_select_button">
+                                    <input type="radio" id="mood_happy_radio" name="mood_radio" value="행복해요" oninput="validateInputText()">
+                                    <label for="mood_happy_radio" class="write_mood_name">행복해요</label>
                                 </div>
-                            </div>
-                            <div class="diary_write_items">
-                                <div class="diary_title_input">
-                                    <div class="diary_title_input_title">제목</div>
-                                    <input type="text" class="diary_title_input_text" placeholder="제목을 입력해주세요." id="input_diary_title" oninput="validateInputText()">
+                                <div class="write_mood_select_button">
+                                    <input type="radio" id="mood_sad_radio" name="mood_radio" value="슬퍼요" oninput="validateInputText()">
+                                    <label for="mood_sad_radio" class="write_mood_name">슬퍼요</label>
                                 </div>
-                                <div class="diary_text_input">
-                                    <div class="diary_title_input_title">내용</div>
-                                    <textarea placeholder="내용을 입력해주세요." class="diary_title_input_textarea" id="input_diary_text" oninput="validateInputText()"></textarea>
+                                <div class="write_mood_select_button">
+                                    <input type="radio" id="mood_surprised_radio" name="mood_radio" value="놀랐어요" oninput="validateInputText()">
+                                    <label for="mood_surprised_radio" class="write_mood_name">놀랐어요</label>
                                 </div>
-                            </div>
-                            </div>
-                                <button class="diary_write_button" id="writeButton" disabled onclick="writeButtonPressed()">등록하기</button>
-                    </div> -->
-            </div> 
+                                <div class="write_mood_select_button">
+                                    <input type="radio" id="mood_angry_radio" name="mood_radio" value="화나요" oninput="validateInputText()">
+                                    <label for="mood_angry_radio" class="write_mood_name">화나요</label>
+                                </div>
+                                <div class="write_mood_select_button">
+                                    <input type="radio" id="mood_other_radio" name="mood_radio" value="기타" oninput="validateInputText()">
+                                    <label for="mood_other_radio" class="write_mood_name">기타</label>
+                                </div>
+                            </div> <!-- write_diary_mood_buttonList -->
+                     </div> <!-- write_diary_mood_items -->
+                     <div class="write_diary_contents">
+                        <div class="write_diary_contents_items">
+                            <div class="write_diary_contents_title">제목</div>
+                            <input type="text" class="write_diary_title_input" placeholder="제목을 입력해주세요." id="input_diary_title" oninput="validateInputText()">
+                        </div> <!-- write_diary_contents_items -->
+                        <div class="write_diary_contents_items">
+                            <div class="write_diary_contents_title">내용</div>
+                            <textarea placeholder="내용을 입력해주세요." class="write_diary_text_input" id="input_diary_text" oninput="validateInputText()"></textarea>
+                        </div> <!-- write_diary_contents_items -->
+                    </div>  <!-- write_diary_contents -->
+                    <div class="write_diary_footer_items">
+                        <button class="write_diary_cancel_button" id="HTML_diary_write_cancel_button" onclick="cancelButtonPressed()">닫기</button>
+                        <button class="write_diary_button" id="HTML_diary_write_button" disabled onclick="writeButtonPressed()">등록하기</button>
+                    </div> 
+                </div><!-- write_diary_footer_items -->
+                </div><!-- HTML_write_diary_modal_container -->
+                </div> 
                 <button class="top_scroll_floating_button" id="top_scroll_button" onclick="topScrollFloatingButtonTapped()"><img src="./assets/top_scroll.png"></button>
-            
-        </div>
+            </div>
     </div>    
     <div id="HTML_footer" class="footer">
         <div class="footer_information">
