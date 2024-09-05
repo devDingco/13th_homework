@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./test.css" />
+</head>
+    <body>
+        <div class="배경">
+            <div class="CSS_등록상자" id="HTML_등록상자" >
+                <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+                <div class="CSS_등록상자_내용_영역">
+                    <div class="CSS_등록상자_내용">오늘 기분은 어땠나요?</div>
+                    <div class="CSS_라디오그룹">
+                        <div class="CSS_라디오버튼">
+                        <input type="radio" name="HTML_기분선택버튼" value="행복" checked />
+                        <div class="CSS_라디오리스트">행복해요</div>
+                        </div>
+                        <div class="CSS_라디오버튼">
+                        <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                        <div class="CSS_라디오리스트">슬퍼요</div>
+                        </div>
+                        <div class="CSS_라디오버튼">
+                        <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                        <div class="CSS_라디오리스트">놀랐어요</div>
+                        </div>
+                        <div class="CSS_라디오버튼">
+                        <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                        <div class="CSS_라디오리스트">화나요</div>
+                        </div>
+                        <div class="CSS_라디오버튼">
+                        <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                        <div class="CSS_라디오리스트">기타</div>
+                        </div>
+                    </div>
+                    <div class="CSS_일기입력상자">
+                        <div class="CSS_일기쓰기">
+                        <label for="HTML_제목입력창" class="CSS_인풋라벨">제목</label>
+                        <input
+                            type="text"
+                            id="HTML_제목입력창"
+                            placeholder="제목을 입력해 주세요."
+                        />
+                        </div>
+                        <div class="CSS_일기쓰기">
+                        <label for="HTML_내용입력창" class="CSS_인풋라벨">내용</label>
+                        <textarea
+                            id="HTML_내용입력창"
+                            rows="5"
+                            placeholder="내용을 입력해 주세요."
+                        ></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="CSS_일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
+                        등록하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>
