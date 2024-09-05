@@ -11,10 +11,12 @@
     <div class="container">
         <div class="container__header">
             <div class="header__text"> <b class="header__text" id="header__login"> {name} </b>의 다이어리에 오신 것을 환영합니다. </div>
-            <img src="./asset/header__banner.png">
+            <div class="header__img">
+                <img src="./asset/header__banner.png">
+            </div>
         </div>
 
-        <div class="container__nav">
+        <!-- <div class="container__nav">
             <div class="nav__tap__bar">
                 <div class="tap__active">일기보관함</div>
                 <div class="tap__disabled">사진보관함</div>
@@ -29,9 +31,24 @@
                     <option name="filter" value="etc">기타</option>
                 </select>
             </div>
-        </div>
+        </div> -->
 
         <div class="container__body">
+            <div class="nav__tap__bar">
+                <div class="tap__active">일기보관함</div>
+                <div class="tap__disabled">사진보관함</div>
+            </div>
+            <div class="nav__filter__bar">
+                <select class="nav__filter" onchange="activeFilter(event)">
+                    <option name="filter" value="all">전체</option>
+                    <option name="filter" value="happy">행복해요</option>
+                    <option name="filter" value="sad">슬퍼요</option>
+                    <option name="filter" value="surprise">놀랐어요</option>
+                    <option name="filter" value="angry">화나요</option>
+                    <option name="filter" value="etc">기타</option>
+                </select>
+            </div>
+
             <div class="body__left__card">
                 <div class="wrapper__card">
                     <div class="card__delete"></div>
@@ -51,13 +68,23 @@
                 <div class="diary__subject">📍 일기 쓰기</div>
                 <div class="diary__question">오늘 기분은 어땠나요?</div>
 
-                <ul class="diary__radio">
-                    <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
-                    <input type="radio" name="mood" value="sad" id="radioSad"/> <label for="radioSad"> 슬퍼요 </label>
-                    <input type="radio" name="mood" value="surprise" id="radioSurprise"/> <label for="radioSurprise"> 놀랐어요 </label>
-                    <input type="radio" name="mood" value="angry" id="radioAngry"/> <label for="radioAngry"> 화나요 </label>
-                    <input type="radio" name="mood" value="etc" id="radioEtc"/> <label for="radioEtc"> 기타 </label>
-                </ul>
+                <div class="diary__radio">
+                    <div class="radio_wrapper">
+                        <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
+                    </div>
+                    <div class="radio_wrapper">
+                        <input type="radio" name="mood" value="sad" id="radioSad"/> <label for="radioSad"> 슬퍼요 </label>
+                    </div>
+                    <div class="radio_wrapper">
+                        <input type="radio" name="mood" value="surprise" id="radioSurprise"/> <label for="radioSurprise"> 놀랐어요 </label>
+                    </div>
+                    <div class="radio_wrapper">
+                        <input type="radio" name="mood" value="angry" id="radioAngry"/> <label for="radioAngry"> 화나요 </label>
+                    </div>
+                    <div class="radio_wrapper">
+                        <input type="radio" name="mood" value="etc" id="radioEtc"/> <label for="radioEtc"> 기타 </label>
+                    </div>
+                </div>
 
                 <div class="diary__title">제목</div>
                 <input class="diary__titleInput" id="diaryTitle" type="text" placeholder="제목을 입력해 주세요." />
