@@ -122,3 +122,34 @@ button[form="comment-form"]
     font-size: 0.5rem;
     text-wrap: nowrap;
 }
+
+button.copy-btn
+{
+    width: 8ch;
+    position: relative;
+    left: calc(100% - 8ch);
+}
+
+button.toast-close-btn
+{
+    display: inline-block;
+}
+
+footer {
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div#toast-message {
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    opacity: 50%;
+    background: lightblue;
+    display: flex;
+    justify-content: space-between;
+
+}

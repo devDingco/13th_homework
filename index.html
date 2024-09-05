@@ -9,6 +9,7 @@
         <script type="text/javascript" src="js/index.js" defer></script>
     </head>
     <body class="noto-sans-kr">
+        <div class="curtain"></div>
         <header>
             <div class="top-title bar">
                 <p>치영의 다이어리</p>
@@ -31,27 +32,28 @@
                     <option>화나요</option>
                     <option>기타</option>
                 </select>
+                <button id="write-btn">작성하기</button>
             </div>
             <div class="flexcontainer">
                 <div class="flexchild-left"> 
-                    <ul class="diary-listview flexlist" id="diarylist">
-                        <template id="list-item-template">
-                            <li class="diary-listitem flexchild">
-                                <a id="edit-page-anchor" class="anchor-nodeco">
-                                    <div class="list-item-border">
-                                        <div class="diary-listitem-bg"></div>
-                                        <div class="diary-listitem-status">
-                                            <span id="add-emo">슬퍼요</span>
-                                            <span id="add-date">2019.03.21</span>
-                                        </div>
-                                        <div class="diary-listitem-summary">
-                                            <p id="add-title">타이틀영역입니다.한줄까지만노출됩니다</p>
-                                        </div>
+                    <ul class="diary-listview flexlist" id="diarylist"></ul>
+                    <template id="list-item-template">
+                        <li class="diary-listitem flexchild">
+                            <button class="listitem-close-btn">x</button>
+                            <a id="edit-page-anchor" class="anchor-nodeco">
+                                <div class="list-item-border">
+                                    <div class="diary-listitem-bg"></div>
+                                    <div class="diary-listitem-status">
+                                        <span id="add-emo">슬퍼요</span>
+                                        <span id="add-date">2019.03.21</span>
                                     </div>
-                                </a>
-                            </li>
-                        </template>
-                    </ul>
+                                    <div class="diary-listitem-summary">
+                                        <p id="add-title">타이틀영역입니다.한줄까지만노출됩니다</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </template>
                 </div>
                 <div class="flexchild-right">
                     <form class="diary-util" id="adding-form">

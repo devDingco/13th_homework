@@ -97,3 +97,20 @@ document.querySelector("form#comment-form").addEventListener("submit", e => {
     addCommentUI(objAdded);
     e.target.querySelector("input.edit-title").value="";
 });
+
+document.querySelector("#copy-btn").addEventListener("click", () => {
+    navigator.clipboard.writeText(document.querySelector("textarea.edit-content").value);
+    showToast("클립보드에 복사되었습니다.");
+});
+
+function showToast(str) {
+    if ('content' in document.createElement('template')) {
+        const templateHTML = document.querySelector("template#toast-template");
+        const templClone = templateHTML.content.cloneNode(true);
+        templClone.querySelector("p#toast-p").innerText = str;
+        templClone.querySelector("button#toast-close-btn").addEventListener("click", e => {
+            e.target.parentElement.remove();
+        });
+        document.querySelector("footer").prepend(templClone);
+    }
+};

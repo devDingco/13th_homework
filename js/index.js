@@ -87,6 +87,27 @@ function addDiaryUI(listobj) {
         templClone.querySelector("span#add-date").innerText = dateString;
         templClone.querySelector("div.diary-listitem-bg").style.backgroundImage = `url(${assetMap[emotion]})`;
         templClone.querySelector("a.anchor-nodeco").href = `/edit.html?p=${listobj["index"]}`;
+        const closeBtn = templClone.querySelector("button.listitem-close-btn");
+        closeBtn.name = `${listobj.index}`;
+        closeBtn.value = `${emotion}`;
+        closeBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const removeIdx = Number(closeBtn.name);
+            const array = JSON.parse(localStorage.getItem("diaryArray"));
+            array[removeIdx] = null;
+            localStorage.setItem("diaryArray", JSON.stringify(array));
+            const removeEmotion = closeBtn.value;
+            const oldSet = new Set(JSON.parse(localStorage.getItem(removeEmotion)));
+            oldSet.delete(removeIdx);
+            localStorage.setItem(removeEmotion, JSON.stringify([...oldSet]));
+            while (diaryList.hasChildNodes()) {
+                diaryList.removeChild(diaryList.lastChild);
+            }
+            array.forEach(element => {
+                if (element !== null) addDiaryUI(element);
+            });
+        });
         diaryList.prepend(templClone);
     }
 }
@@ -130,3 +151,27 @@ diaryListHTML.addEventListener("scroll", (e) => {
 document.querySelector("div.scroll-up-btn").addEventListener("click", (e) => {
     diaryListHTML.scrollTo({top: 0, behavior: "smooth"});
 });
+
+const shutModal = (e) => {
+    document.querySelector("div.curtain").style = "display: none; z-index: -1; position: static";
+    document.querySelector("div.flexchild-right").style = "display:none;";
+    window.removeEventListener("keydown", escListener);
+};
+
+const escListener = (e) => {
+    if (e.key === "Escape") {
+        shutModal();
+    }
+};
+
+document.querySelector("button#write-btn").addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        diaryListHTML.scrollTo({top:0, behavior: "smooth"});
+        document.querySelector("div.flexchild-right").style = "display:block;";
+        document.querySelector("div.curtain").style = "position: absolute; display: block; width: 100vw; height: 100vh; z-index: 5; opacity: 50%; background: black;";
+        window.addEventListener("keydown", escListener);
+    }
+);
+
+document.querySelector("div.curtain").addEventListener("click", shutModal);
