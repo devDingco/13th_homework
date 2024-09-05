@@ -27,6 +27,9 @@
   background-color: #000;
   color: #fff;
 }
+.editWrap .diaryWrite textarea {
+  height: 400px;
+}
 
 .whiteBtn {
   background-color: #fff;

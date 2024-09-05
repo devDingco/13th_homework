@@ -140,18 +140,18 @@ section {
   padding-bottom: 40px;
 }
 section .empty {
-  width: 784px;
+  width: 100%;
   text-align: center;
   padding: 20vh;
   color: var(--font-color-6);
   font-size: var(--font-size-3);
 }
 section .diaryList {
-  width: 784px;
+  width: 100%;
 }
 section .diaryList ul {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 section .diaryList ul li {
