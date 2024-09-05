@@ -1,49 +1,96 @@
 <!DOCTYPE html>
-<input lang="ko">
+<html lang="ko">
 <head>
     <title>일기보관함_메인</title>
     <style>
-        h1 {
+        .title {
             font-size: 10px;
         }
+
+        .wrapper__top {
+            width: 1168px;
+            height: 240;
+            /* display: flex;
+            justify-content: center; */
+
+        }
         
-        .wrapper {
-            width: 380px;
-            height: 285;
+        .wrapper__header {
+            width: 1,920px;
+            height: 48px;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            padding-left: 5px;
+            gap: 15px;
         }
+        
+        .wrapper__left__body {
+            width: 784px;
+            height: 1,167px;
+        }
+
+/* 오른쪽 일기쓰기 부분 */
+        .title__left__body {
+            font-size: 20px;
+            padding: 10px 0px;
+        }
+         
+        .wrapper__right__body {
+            width: 360px;
+            height: 604px;
+            border: 1px solid #d4d3d3;
+            padding-left: 10px;
+        }
+
+        /* .button {
+
+        } */
 
     </style>
 
 </head>
 <body>
-    <h1>민지의 다이어리</h1>
-    </div>
-    <!-- <div class="title">민지의 다이어리</div> -->
-    <!-- <div class="wrapper__header"></div> -->
-    <img src="./09-02/Rectangle 1.png">
-    <div class="wrapper__rigth"></div>
-        <div class="text">일기보관함</div>
-        <div class="wrapper__subtitle">사진보관함</div>
-        <!-- <div class="wrapper">
-            <div class="wrapper__left"> -->
-    <img src="./09-02/Frame 47.png">
-            
-    <img src="./09-02/assets/Frame 46.png" class="img">
-                
-            <!-- <div class="wrapper__right"> -->
+        <div class="title">민지의 다이어리</div>
+        <div class="wrapper__top"></div>
+            <img src="./assets/img/banner.png" />
+                <div class="wrapper__header">
+                    <div class="wrapper__left__header__title">일기보관함</div>
+                    <div class="wrapper__right__header__setting">사진보관함</div>
+                </div>
+            <div class="wrapper">       
+                <div class="wrapper__left__body"></div>
+                    <img src="./assets/img/sad.png" />
+                        <div class="emotion">슬퍼요</div>
+                        <div class="date">2024.03.12</div>
+                    <img src="./assets/img/surprise.png" />
+                    <img src="./assets/img/angry.png" />
+                    <img src="./assets/img/happy.png" />
+                    <img src="./assets/img/etc.png" />
+                    <img src="./assets/img/happy.png" alt="행복해요"/>
+                    
+                            
+                <div class="wrapper__right__body">
+                        <!-- 인프런 싸이월드 1탄만들기 영상 끝에 이모티콘 넣기 참고해서 넣기 -->
+                    <div class="title__right__body">일기 쓰기</div>
+                    <div class="subtitle">오늘 기분은 어땠나요?</div>
+                        <input type="radio" id="banner1" name="banner">행복해요
+                        <input type="radio" id="banner1" name="banner">슬퍼요
+                        <input type="radio" id="banner1" name="banner">놀랐어요
+                        <input type="radio" id="banner1" name="banner">화나요
+                        <input type="radio" id="banner1" name="banner">기타
 
-            <div class="title">일기 쓰기</div>
-            <div class="subtitle">오늘 기분은 어땠나요?</div>
-            <input type="radio" id="banner1" name="banner">행복해요
-            <input type="radio" id="banner1" name="banner">슬퍼요
-            <input type="radio" id="banner1" name="banner">놀랐어요
-            <input type="radio" id="banner1" name="banner">화나요
-            <input type="radio" id="banner1" name="banner">기타
-            <input type="text" placeholder="제목을 입력해 주세요.">
-            <div class="wrapper__footer"></div>
+                    <div class="text">제목</div>
+                    <input type="text" placeholder="제목을 입력해 주세요.">
+                    <div class="text">내용</div>
+                    <input type="text" placeholder="내용을 입력해 주세요.">
+                    <br>
+                    <br>
+                    <button class="">등록하기</button>               
+
+                    <div class="wrapper__footer">
+                        
+                </div>
+            </div>
         
    
 </body>
