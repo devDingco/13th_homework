@@ -216,7 +216,7 @@ const deleteDiaryEntry = () => {
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   updateDiaryList(storedDiaryList);
-  closeSingleModal("confirm_delete_diary_modal")
+  closeSingleModal("confirm_delete_diary_modal");
 };
 
 const confirmDeleteDiary = (event) => {
@@ -230,6 +230,7 @@ const upScroll = () => {
 };
 
 const triggerModal = (modal) => {
+  upScroll();
   document.getElementById(modal).style = "display: flex;";
   if (modal == "diary_registration_modal") {
     registerDiary();
@@ -265,8 +266,9 @@ window.addEventListener("keydown", (event) => {
     const diaryRegistrationModal =
       document.getElementById("diary_registration_modal").style.display ==
       "flex";
-    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
-    "flex";
+    const confirmDeleteDiaryModal =
+      document.getElementById("confirm_delete_diary_modal").style.display ==
+      "flex";
 
     if (diaryWritingModal) {
       if (diaryCancelModal) closeSingleModal("diary_cancel_modal");
@@ -276,8 +278,8 @@ window.addEventListener("keydown", (event) => {
         closeSingleModal("aside_layout");
       }
     }
-    if(confirmDeleteDiaryModal){
-      closeSingleModal("confirm_delete_diary_modal")
+    if (confirmDeleteDiaryModal) {
+      closeSingleModal("confirm_delete_diary_modal");
     }
   }
 });
