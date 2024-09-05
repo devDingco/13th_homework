@@ -239,4 +239,15 @@ const continueWriting = () => {
   document.getElementById("diary_cancel_modal").style = "display: none;";
 };
 
+window.addEventListener('click', (event) => {
+  const className = event.target.className;
+  if(className == "aside_layout" || className == "confirm_modal_layout"){
+    if(event.target.id != "diary_cancel_modal"){
+      closeModal(event.target.id)
+    }else {
+      continueWriting(event.target.id)
+    }
+  }
+})
+
 moodList.addEventListener("click", onClickMood);
