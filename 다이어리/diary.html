@@ -158,7 +158,7 @@
       <div class="confirm_modal">
         <div class="modal_title">일기 등록 완료</div>
         <div class="modal_content">등록이 완료 되었습니다.</div>
-        <button onclick="closeModal('diary_registration_modal')">확인</button>
+        <button onclick="closeAllModals('diary_registration_modal')">확인</button>
       </div>
     </div>
     <div class="confirm_modal_layout" id="diary_cancel_modal">
@@ -166,12 +166,12 @@
         <div class="modal_title">일기 등록 취소</div>
         <div class="modal_content">일기 등록을 취소 하시겠어요?</div>
         <div class="modal_button_group">
-          <button class="continue_writing_btn" onclick="continueWriting()">
+          <button class="continue_writing_btn" onclick="closeSingleModal('diary_cancel_modal')">
             계속 작성
           </button>
           <button
             class="cancel_registration_btn"
-            onclick="closeModal('diary_cancel_modal')"
+            onclick="closeAllModals('diary_cancel_modal')"
           >
             등록 취소
           </button>

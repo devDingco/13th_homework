@@ -230,14 +230,15 @@ const triggerModal = (modal) => {
   }
 };
 
-const closeModal = (modal) => {
+const closeAllModals = (modal) => {
   document.getElementById(modal).style = "display: none;";
   document.getElementById("aside_layout").style = "display: none;";
 };
 
-const continueWriting = () => {
-  document.getElementById("diary_cancel_modal").style = "display: none;";
+const closeSingleModal = (modal) => {
+  document.getElementById(modal).style = "display: none;";
 };
+
 
 window.addEventListener('click', (event) => {
   const className = event.target.className;
@@ -246,6 +247,20 @@ window.addEventListener('click', (event) => {
       closeModal(event.target.id)
     }else {
       continueWriting(event.target.id)
+    }
+  }
+})
+
+window.addEventListener("keydown", (event) => {
+  if(event.key == "Escape") {
+    const diaryWritingModal =  document.getElementById("aside_layout").style.display == "flex"
+    const diaryCancelModal = document.getElementById("diary_cancel_modal").style.display == "flex"
+    const diaryRegistrationModal = document.getElementById("diary_registration_modal").style.display == "flex"
+  
+    if(diaryWritingModal){
+      if(diaryCancelModal) closeSingleModal("diary_cancel_modal")
+      else if(diaryRegistrationModal) closeAllModals("diary_registration_modal")
+      else{closeSingleModal("aside_layout")}
     }
   }
 })
