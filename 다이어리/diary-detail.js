@@ -46,7 +46,7 @@ const createHtml = (diary) => {
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
       </a>
-        <button class="modification_Btn" onclick="deleteDiary()">삭제</button>
+        <button class="modification_Btn" onclick="confirmDeleteDiary(event)">삭제</button>
       </div>
   `;
 
@@ -116,5 +116,29 @@ const handleContentCopy = () => {
     copyToast.style = "display: none";
   }, 2000);
 };
+
+const closeSingleModal = (modal) => {
+  document.getElementById(modal).style = "display: none;";
+};
+
+const triggerModal = (modal) => {
+  document.getElementById(modal).style = "display: flex;";
+};
+
+const confirmDeleteDiary = (event) => {
+  event.preventDefault();
+  deleteId = event.target.className;
+  triggerModal("confirm_delete_diary_modal");
+};
+
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Escape") {
+    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
+    "flex";
+    if(confirmDeleteDiaryModal){
+      closeSingleModal("confirm_delete_diary_modal")
+    }
+  }
+});
 
 createHtml(diary);
