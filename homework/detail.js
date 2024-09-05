@@ -3,22 +3,29 @@ const urlSearchParams = new URLSearchParams(location.search);
 const paramsObj = Object.fromEntries(urlSearchParams.entries());
 const { idx } = paramsObj;
 
-// 댓글 목록 가져오기
-const replyTable = JSON.parse(localStorage.getItem('replyTable')) ?? {};
-const replyList = replyTable[idx] ?? [];
-replyTable[idx] = replyList;
-console.log('🚀 ~ replyTable:', replyTable);
-console.log('🚀 ~ replyList:', replyList);
-
 // 일기 목록 가져오기
 const daiaryList = JSON.parse(localStorage.getItem('dairyList'));
 const el = daiaryList[idx];
-let { myTitle, myMood, createdAt, myContent } = el;
+let { myTitle, myMood, createdAt, myContent, comments } = el;
 
 window.onload = () => {
   initialRendering();
   renderReplyList();
   goToReplyListSmoothly();
+};
+
+const initialRendering = () => {
+  // 상세페이지에 data 그리기
+  document.getElementById('title').innerText = myTitle;
+  document.getElementById('date').innerHTML = createdAt + ' 작성';
+  document.getElementById('section-main').innerText = myContent;
+  // TODO: myMood에 맞는 img 필요함
+  document.getElementById('mood').innerHTML = `
+  <div id="mood-img">
+    <img src="./asset/상세/행복해요.jpg" alt="">
+  </div>
+  <div class="mood-${myMood}">${myMood}</div>
+`;
 };
 
 const goToReplyListSmoothly = () => {
@@ -36,7 +43,7 @@ const goToReplyListSmoothly = () => {
 
 const renderReplyList = () => {
   let tags = '';
-  replyList.map((el) => {
+  comments.map((el) => {
     tags += `
       <div class="회고인스턴스">
       ${el}
@@ -50,64 +57,57 @@ const renderReplyList = () => {
 
 // 댓글 입력시, 댓글 Arr에 저장하고, localStorage를 업데이트
 const onClickInputButton = () => {
-  const inputValue = document.getElementById('회고입력창').value;
-
-  replyList.push(inputValue);
-  // console.log('🚀 ~ replyTable:', replyTable);
-
-  localStorage.setItem('replyTable', JSON.stringify(replyTable));
-
+  let inputValue = document.getElementById('회고입력창').value;
+  console.log('🚀 ~ onClickInputButton ~ inputValue:', inputValue);
+  comments.push(inputValue);
+  localStorage.setItem('dairyList', JSON.stringify(daiaryList));
   // 회고리스트에 렌더링
   renderReplyList();
-
   // input창 초기화
-  inputValue = '';
+  document.getElementById('회고입력창').value = '';
+  console.log('🚀 ~ onClickInputButton ~ inputValue:', inputValue);
 };
 
-const initBodyRendering = () => {
+const renderMain = () => {
   // 원본 body 영역 리렌더링
-  document.getElementById('body').innerHTML = `
-    <div id="section-header">
-      <div id="title"></div>
-      <div id="mood-and-date">
-        <div id="mood"></div>
-        <div id="date"></div>
+  document.getElementById('main').innerHTML = `
+      <div id="section-header">
+        <div id="title"></div>
+        <div id="mood-and-date">
+          <div id="mood"></div>
+          <div id="date"></div>
+        </div>
       </div>
-    </div>
-    <div id="section-body">
-      <div class="section-title">내용</div>
-      <div id="section-main"></div>
-    </div>
-    <div id="section-footer">
-      <div class="delete-btn-area">
-        <button onclick="onClickDeleteButton()" id="delete-btn">삭제</button>
+      <div id="section-body">
+        <div class="section-title">내용</div>
+        <div id="section-main"></div>
       </div>
-      <div class="modify-btn-area">
-        <button onclick="onClickModifyButton()" id="modify-btn">수정</button>
+      <div id="section-footer">
+        <div class="delete-btn-area">
+          <button onclick="onClickDeleteButton()" id="delete-btn">삭제</button>
+        </div>
+        <div class="modify-btn-area">
+          <button onclick="onClickModifyButton()" id="modify-btn">수정</button>
+        </div>
+      </div>
+      <div id="회고영역">
+        <div id="회고영역_타이틀">회고</div>
+        <div id="회고입력부">
+          <input id="회고입력창" type="text" placeholder="회고를 남겨보세요.">
+          <button id="회고입력창입력버튼" onclick="onClickInputButton()">입력</button>
+        </div>
+        <div id="회고리스트">
+        </div>
       </div>
     </div>
   `;
-};
-
-const initialRendering = () => {
-  // 상세페이지에 data 그리기
-  document.getElementById('title').innerText = myTitle;
-  document.getElementById('date').innerHTML = createdAt + ' 작성';
-  document.getElementById('section-main').innerText = myContent;
-  // TODO: myMood에 맞는 img 필요함
-  document.getElementById('mood').innerHTML = `
-  <div id="mood-img">
-    <img src="./asset/상세/행복해요.jpg" alt="">
-  </div>
-  <div class="mood-${myMood}">${myMood}</div>
-`;
 };
 
 const onClickDeleteButton = () => {};
 
 const onClickCancelModifyButton = () => {
   // 원본 body 영역 리렌더링
-  initBodyRendering();
+  renderMain();
   initialRendering();
 };
 
@@ -131,11 +131,12 @@ const onClickCompleteModifyButton = () => {
     myMood: myMood,
     createdAt: createdAt,
     myContent: myContent,
+    comments: comments,
   };
   localStorage.setItem('dairyList', JSON.stringify(dairyList));
 
   // 갱신된 data와 함께 리렌더링
-  initBodyRendering();
+  renderMain();
   initialRendering();
 };
 

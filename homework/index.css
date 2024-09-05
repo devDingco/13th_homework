@@ -10,17 +10,21 @@ a {
 }
 
 .container {
+  max-width: 1168px;
+  margin: 0 auto;
   border: 2px solid aqua;
+  
   display: flex;
   flex-direction: column;
-  width: 1920px;
   align-items: center;
 }
 
 .header {
+  border: 2px solid black;
+  max-width: 100%;
+
   display: flex;
   flex-direction: column;
-  width: 1168px;
 }
 
 #header-name {
@@ -33,44 +37,44 @@ a {
 }
 
 .nav {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
-  margin-bottom: 40px;
-
+  margin-bottom: 2.5rem;
 }
 
 .title-list {
+  border: 2px solid crimson;
+  /* width: 100%; */
+
   display: flex;
   align-items: flex-start;
-  width: 1168px;
   gap: 40px;
-  border: 2px solid crimson;
   margin-top: 25px;
 }
 
 .mood-selection-wrapper {
+  /* max-width: 1168px; */
+  width: 100%;
+  border: 2px solid crimson;
+  
   display: flex;
   align-items: flex-start;
-  width: 1168px;
-  border: 2px solid crimson;
   margin-bottom: 40px;
+  
   position: sticky;
+  left: 0;
   top: 5px;
   z-index: 10;
 }
 
 select#mood-selection {
   border-radius: 10px;
-  width: 80px;
-  height: 35px;
-}
-
-#mood-radio {
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
-  background: var(--Gray-W, #FFF);
+  width: 5rem;
+  height: 2rem;
 }
 
 #dairy-title {
@@ -91,63 +95,68 @@ select#mood-selection {
 }
 
 .main {
+  border: 2px solid yellowgreen;
+  width: 100%;
+  
   display: flex;
   gap: 24px;
-  border: 2px solid yellowgreen;
-  width: 1200px;
-  /* height: 1190px; */
-  margin-bottom: 40px;
   position: relative;
+  margin-bottom: 40px;
 }
 
 #topScroller-area {
-  display: flex;
-  justify-content: flex-end;
   border: 2px solid black;
-  width: 1200px;
-  right: 10px;
-  bottom: 10px;
-  margin-bottom: 40px;
+  
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
 }
 
 #topScroller {
-  border-radius: 100%;
   border: 2px solid #000;
+  border-radius: 100%;
 }
 
 #dairy-list {
-  /* overflow: scroll; */
   border: 2px solid pink;
-  width: 810px;
-  display: flex;
-  flex-direction: row;
+  width: 100%;
+  
+  /* display: flex;
   flex-wrap: wrap;
+  gap: 24px; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
 .dairy {
   border: 2px solid blue;
+  /* width: 24rem; */
+  /* width: calc(50% - 12px); */
   display: flex;
   flex-direction: column;
-  width: 380px;
-  height: 375px;
-  gap: 16px;
+  gap: 1rem;
+
   transition: transform 0.5s;
   position: relative;
 }
 
 #dairy-delete-btn {
   border: 2px solid black;
-  width: 24px;
+  width: 1.5rem;
   
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 6px;
+  right: 6px;
 }
 
 .dairy #mood-face-img {
   transition: filter 0.5s;
-}
+
+  width: 100%;
+  object-fit: cover;
+  }
 
 .dairy:hover {
   transform: scale(1.1);
@@ -156,22 +165,24 @@ select#mood-selection {
 .dairy:hover #mood-face-img {
   filter: blur(5px);
   cursor: default;
-}
+  }
 
 .mood-img {
-  width: 380px;
-  height: 285px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .daiary-summary-wrapper {
+  border: 2px solid black;
+  
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border: 2px solid black;
 }
 
 .daiary-summary {
   border: 1px solid red;
+
   display: flex;
   justify-content: space-between;
 }
@@ -201,7 +212,7 @@ select#mood-selection {
 }
 
 .mood-화나요 {
-  color: var(--Gray-Gray-600, #777);
+  color: #777;
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -217,7 +228,7 @@ select#mood-selection {
 }
 
 .created-at {
-  color: var(--Gray-Gray-500, #919191);
+  color: #919191;
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -232,48 +243,53 @@ select#mood-selection {
 }
 
 #dairy-generator {
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  
+  width: 360px;
   height: fit-content;
+  padding: 24px;
+
   display: flex;
   flex-direction: column;
-  padding: 24px;
   align-items: center;
-  width: 360px;
   gap: 40px;
   border-radius: 16px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
+  background: #FFF;
 }
 
 #generator-header {
+  border: 2px solid black;
   width: 100%;
-  height: 24px;
+  height: 1.5rem;
   color: #000;
+
   font-family: "Pretendard Variable";
   font-size: 24px;
-  line-height: 24px;
+  line-height: 100%;
   font-style: normal;
   font-weight: 700;
-  border: 2px solid black;
 }
 
 #generator-body {
-  display: flex;
   width: 100%;
+  display: flex;
   flex-direction: column;
 }
 
 #mood-question-title {
   border: 2px solid pink;
+
   color: #000;
   font-family: "Pretendard Variable";
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 100%;
 }
 
 #mood-radio-area {
   border: 2px solid pink;
+
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -288,8 +304,8 @@ select#mood-selection {
 
 .mood-radio-instance > input {
   accent-color: #000;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   align-content: center;
 }
 
@@ -299,7 +315,7 @@ select#mood-selection {
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 100%;
 }
 
 #mood-text-area {
@@ -326,7 +342,7 @@ select#mood-selection {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 100%;
 }
 
 .mood-textbox-input {
@@ -355,7 +371,7 @@ select#mood-selection {
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 100%;
 }
 
 #gen-dairy-btn:hover {
@@ -364,24 +380,48 @@ select#mood-selection {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-div#topScroller-area {
-  position: sticky;
+@media (max-width: 779px) {
+  /* .diary {
+    width: calc(50% - 12px);
+  } */
+  .mood-img{
+    height: 285px;
+  }
+  #mood-face-img{
+    height: 285px;
+    object-fit: cover;
+  }
+  .main {
+    min-width: 50%;
+    display: contents;
+  }
+  #dairy-generator {
+    width: 100%;
+    order: 1;
+  }
+  .mood-selection-wrapper {
+    order: 2;
+  }
+  #dairy-list {
+    order: 3;
+  }
 }
 
 .footer {
   width: 100%;
-  background: var(--Gray-Gray-50, #F2F2F2);
   padding: 24px 0;
+  background:#F2F2F2;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.detail-wrapper {
+.footer-detail-wrapper {
+  max-width: 1168px;
+  width: 100%;
   display: flex;
-  width: 1168px;
   flex-direction: column;
-  align-items: flex-start;
   gap: 32px;
 }

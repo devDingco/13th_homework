@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일기장 목록 페이지</title>
   <link rel="stylesheet" href="./index.css">
   <script src="./index.js"></script>
@@ -20,6 +21,7 @@
         <div id="gallery-title">사진보관함</div>
       </div>
     </div>
+
     <div class="mood-selection-wrapper">
       <select id="mood-selection">
         <option selected="true" disabled="true" value="all">전체</option>
@@ -39,8 +41,8 @@
             <!-- mood 사진 -->
             <div class="mood-img">
               <img id="mood-face-img" src="./asset/행복해요.jpg" alt="행복한기분" />
-              <img onclick="onClickDeleteButton(event)" id="dairy-delete-btn" src="./asset/close icon.jpg" />
             </div>
+            <img onclick="onClickDeleteButton(event)" id="dairy-delete-btn" src="./asset/close icon.jpg" />
             <!-- 텍스트상자 -->
             <div class="daiary-summary-wrapper">
               <!-- 기분설명 및 날짜 -->
@@ -59,24 +61,22 @@
       <div id="dairy-generator">
         <div id="generator-header">📍일기쓰기</div>
         <div id="generator-body">
-          <div id="mood-radio">
-            <div id="mood-question-title">오늘 기분은 어땟나요?</div>
-            <div id="mood-radio-area">
-              <div class="mood-radio-instance">
-                <input type="radio" name="mood" id="행복해요"><label for="행복해요">행복해요</label>
-              </div>
-              <div class="mood-radio-instance">
-                <input type="radio" name="mood" id="슬퍼요"><label for="슬퍼요">슬퍼요</label>
-              </div>
-              <div class="mood-radio-instance">
-                <input type="radio" name="mood" id="놀랐어요"><label for="놀랐어요">놀랐어요</label>
-              </div>
-              <div class="mood-radio-instance">
-                <input type="radio" name="mood" id="화나요"><label for="화나요">화나요</label>
-              </div>
-              <div class="mood-radio-instance">
-                <input type="radio" name="mood" id="기타"><label for="기타">기타</label>
-              </div>
+          <div id="mood-question-title">오늘 기분은 어땟나요?</div>
+          <div id="mood-radio-area">
+            <div class="mood-radio-instance">
+              <input type="radio" name="mood" id="행복해요"><label for="행복해요">행복해요</label>
+            </div>
+            <div class="mood-radio-instance">
+              <input type="radio" name="mood" id="슬퍼요"><label for="슬퍼요">슬퍼요</label>
+            </div>
+            <div class="mood-radio-instance">
+              <input type="radio" name="mood" id="놀랐어요"><label for="놀랐어요">놀랐어요</label>
+            </div>
+            <div class="mood-radio-instance">
+              <input type="radio" name="mood" id="화나요"><label for="화나요">화나요</label>
+            </div>
+            <div class="mood-radio-instance">
+              <input type="radio" name="mood" id="기타"><label for="기타">기타</label>
             </div>
           </div>
           <!-- 텍스트 영역 -->
@@ -97,18 +97,18 @@
         </div>
       </div>
     </div>
+
     <!-- 플로팅 버튼 영역 -->
     <div id="topScroller-area">
       <img onclick="onClickTopScroller()" id="topScroller" src="./asset/topscroll fabvicon.jpg" alt="">
     </div>
-
-    <!-- 웹페이지 하단부 -->
-    <div class="footer">
-      <div class="detail-wrapper">
-        <div id="다이어리주인장">박진태</div>
-        <div id="대표">대표: {name}</div>
-        <div id="저작권">Copyright © 2024. {name} Co., Ltd.</div>
-      </div>
+  </div>
+  <!-- 웹페이지 하단부 -->
+  <div class="footer">
+    <div class="footer-detail-wrapper">
+      <div id="다이어리주인장">박진태</div>
+      <div id="대표">대표: {name}</div>
+      <div id="저작권">Copyright © 2024. {name} Co., Ltd.</div>
     </div>
   </div>
 </body>

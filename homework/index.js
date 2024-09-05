@@ -25,11 +25,6 @@ window.addEventListener('scroll', () => {
 
 const onClickTopScroller = () => {
   // 플로팅 버튼 클릭시 ViewPort의 최상단으로 이동
-  console.log(
-    '🚀 ~ onClickTopScroller ~ onClickTopScroller:',
-    onClickTopScroller
-  );
-
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -58,6 +53,7 @@ const onClickButton = () => {
     myMood: myMood.id,
     createdAt: new Date().toLocaleDateString(),
     myContent: myContent.value,
+    comments: [],
   };
   // dairyList에 추가
   dairyList.push(dairy);
@@ -74,7 +70,12 @@ const onClickButton = () => {
 
 const renderDiaryInstance = () => {
   const elementArr = JSON.parse(localStorage.getItem('dairyList'));
-  console.log(elementArr);
+
+  if (!elementArr) {
+    console.log('🚀 ~ renderDiaryInstance ~ elementArr:', elementArr);
+    return;
+  }
+
   const resRendering = elementArr.map(
     (el, idx) => `
       <div class="dairy">

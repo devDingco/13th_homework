@@ -6,16 +6,19 @@
 
 .container {
   border: 2px solid aqua;
+  max-width: 1920px;
+
   display: flex;
   flex-direction: column;
-  width: 1920px;
   align-items: center;
 }
 
 #header {
+  border: 2px solid black;
+  width: 80%;
+
   display: flex;
   flex-direction: column;
-  width: 1168px;
   margin-bottom: 40px;
 }
 
@@ -31,7 +34,7 @@
 #main {
   border: 2px solid yellowgreen;
   display: flex;
-  max-width: 1168px;
+  width: 80%;
   padding-bottom: 16px;
   flex-direction: column;
   align-items: flex-start;
@@ -41,7 +44,7 @@
 #section-header {
   border: 2px solid pink;
   display: flex;
-  width: 1168px;
+  /* width: 1168px; */
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -114,8 +117,8 @@
 }
 
 .section-content {
-  width: 100%;
   border: 2px solid crimson;
+  width: 100%;
 }
 
 #modify-btn,
@@ -299,4 +302,10 @@
 
 #회고리스트 div.회고인스턴스 .회고작성일자 {
   color: #777;
+}
+
+@media (max-width: 779px) {
+  .container {
+    min-width: 50%;
+  }
 }
