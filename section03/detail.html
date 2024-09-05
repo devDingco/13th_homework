@@ -4,45 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/detail.css" />
+    <script src="./javascript/common.js"></script>
     <script src="./javascript/detail.js"></script>
     <title>일기보관함</title>
   </head>
   <body>
     <div class="app">
-      <div class="app-insede">
-        <header class="header">
-          <h1 class="header-title">
-            <a href="">다인의 다이어리</a>
-          </h1>
-        </header>
+      <header class="header">
+        <h1 class="header-title">
+          <a href="./index.html">다인의 다이어리</a>
+        </h1>
+      </header>
+      <div class="app-inside">
         <section class="container">
           <div class="detail">
-            <div class="detail-title">
-              <h2>타이틀</h2>
-            </div>
+            <div class="detail-title"></div>
             <div class="detail-info flexbox">
               <div class="detail-emotion flexbox">
-                <div class="emotion-thumbnail">
-                  <img src="./assets/images/icon_emoticon_happy.png" alt="" />
-                </div>
-                <div class="badge-emoticon happy">
-                  <span>행복해요</span>
-                </div>
+                <div class="emotion-thumbnail"></div>
+                <div class="badge-emoticon happy"></div>
               </div>
-              <div class="detail-date">
-                <span>2024. 07. 12 작성</span>
-              </div>
+              <div class="detail-date"></div>
             </div>
-            <div class="detail-content">
-              <h3>내용</h3>
-              <p>일기내용</p>
-            </div>
+            <div class="detail-content"></div>
             <div class="actions flexbox">
-              <a class="button-edit" href="./edit?number.html">수정</a>
-              <button class="button-delete">삭제</button>
+              <a class="button-edit" onclick="goToEdit()">수정</a>
+              <button class="button-delete" onclick="deleteItem()">삭제</button>
             </div>
           </div>
-          <div class="review">
+          <div class="review" id="review">
             <form>
               <legend>회고</legend>
               <fieldset>
@@ -64,6 +54,10 @@
             </ul>
           </div>
         </section>
+      </div>
+
+      <div class="scroll-up">
+        <button class="button-scroll-up" onclick="scrollToTop()"><img src="./assets/images/icon_scroll_up.svg" alt="맨 위로 이동하기" /></button>
       </div>
     </div>
   </body>
