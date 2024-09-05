@@ -34,7 +34,13 @@ const createHtml = (diary) => {
       </div>
       <div class="content_frame">
         <div class="content_label">내용</div>
-        <div class="content">${diary.content}</div>
+        <div class="content" id="copyContent">${diary.content}</div>
+      </div>
+      <div class="copy_content_btn_layout">
+        <button onclick="handleContentCopy()">
+          <img src="./image/content_copy.svg" />
+          <div>내용 복사</div>
+        </button>
       </div>
       <div class="diary_action_container">
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
@@ -99,6 +105,10 @@ const deleteDiary = () => {
   window.location.href = "./diary.html";
 };
 
+const handleContentCopy = () => {
+  const copyContent = document.getElementById('copyContent').innerText;
+  navigator.clipboard.writeText(copyContent)
+  alert('복사 완료');
+}
+
 createHtml(diary);
-
-
