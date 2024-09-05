@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상세페이지</title>
+  <link rel="stylesheet" href="./css/detail.css" />
+  <script src="./js/detail.js"></script>
+</head>
+
+<body>
+  <div class="레이아웃">
+    <div class="헤더">
+      <div>민서의 다이어리</div>
+    </div>
+    <div class="메인">
+      <div id="초기_화면" class="바뀌는_부분">
+        <div class="타이틀_영역">
+          <div id="타이틀" class="타이틀"></div>
+          <div class="감정_날짜">
+            <div class="감정_사진_영역">
+              <img id="감정_미니사진" class="감정_미니사진" />
+              <div id="감정" class="감정"></div>
+            </div>
+            <div id="날짜" class="날짜"></div>
+          </div>
+        </div>
+        <div class="내용_영역">
+          <div class="내용_레이블">내용</div>
+          <div id="내용" class="내용"></div>
+        </div>
+        <div class="버튼_영역">
+          <button onclick="수정버튼기능()" class="버튼">수정</button>
+          <button onclick="삭제버튼기능()" class="버튼">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="회고_영역">
+      <div class="입력_영역">
+        <div class="회고_레이블">회고</div>
+        <div class="회고_인풋_영역">
+          <input id="회고인풋" class="회고_인풋" type="text" placeholder="회고를 남겨보세요." />
+          <button onclick="회고입력기능()" class="회고_입력_버튼">입력</button>
+        </div>
+      </div>
+      <div id="회고넣어줄부분" class="보기_영역">
+        <!-- 회고 보여주는 부분 -->
+        <!-- <div class="회고_댓글_영역">
+          <div class="회고_댓글"></div>
+          <div class="회고_날짜"></div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

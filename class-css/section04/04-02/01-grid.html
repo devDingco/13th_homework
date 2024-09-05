@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>그리드 실습</title>
+  <style>
+    .CSS_상자그룹 {
+      display: grid;
+      /* grid-template-columns: 1fr 1fr 1fr; => 1 : 1 : 1 비율 */
+      grid-template-columns: 300px 300px 300px;
+      grid-template-rows: 400px 400px 400px;
+      background-color: skyblue;
+
+      column-gap: 50px;
+      row-gap: 50px;
+      /* 상자그룹 전체껍데기 정렬 => 상하:좌우 */
+      place-content: end center;
+      /* 상자아이템 각각 정렬 => 상하:좌우 */
+      place-items: center center;
+
+      width: 1600px;
+      height: 1600px;
+    }
+
+    .CSS_상자 {
+      width: 250px;
+      height: 300px;
+      border: 5px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="CSS_상자그룹">
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+    <img class="CSS_상자" src="./00-dog.jpg" />
+  </div>
+</body>
+
+</html>
