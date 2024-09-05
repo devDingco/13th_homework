@@ -22,21 +22,22 @@
   --border-color-1: #d4d3d3;
   --border-color-2: #c7c7c7;
 
-  --font-size-1: 14px;
-  --font-size-2: 18px;
-  --font-size-3: 20px;
-  --font-size-4: 24px;
+  --font-size-1: 0.875rem;
+  --font-size-2: 1.125rem;
+  --font-size-3: 1.25rem;
+  --font-size-4: 1.5rem;
 
   --font-family: "Pretendard", -apple-system, BlinkMacSystemFont,
     "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
 
-  --width: 1168px;
+  --max-width: 73rem; // 1168px
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  letter-spacing: -0.0313rem;
 }
 
 a {
@@ -52,6 +53,10 @@ button {
   cursor: pointer;
 }
 
+img {
+  vertical-align: top;
+}
+
 .blind {
   position: absolute;
   width: 1px;
@@ -64,7 +69,7 @@ button {
 }
 
 .scrollBox {
-  width: var(--width);
+  width: var(--max-width);
   margin: 0 auto;
   position: fixed;
   left: 50%;
@@ -104,17 +109,21 @@ button {
     clip-path: inset(0 -34% 0 0);
   }
 }
-
+html {
+  font-size: 16px;
+}
 html,
+body {
+  color: #000;
+  letter-spacing: -0.1px;
+  padding-bottom: var(--footerHeight);
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-1);
-  color: #000;
-  letter-spacing: -0.1px;
-  height: auto;
-  min-height: 100%;
-  padding-bottom: var(--footerHeight);
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 header,
@@ -124,7 +133,7 @@ nav,
 .headerBanner,
 .detailWrap,
 .editWrap {
-  max-width: var(--width);
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
@@ -146,6 +155,68 @@ header {
   }
 }
 
+.glitch-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #000000;
+}
+
+.glitch {
+  position: relative;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 3px;
+  z-index: 1;
+}
+
+.glitch:before,
+.glitch:after {
+  display: block;
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.glitch:before {
+  animation: glitch-it 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: #00ffff;
+  z-index: -1;
+}
+
+.glitch:after {
+  animation: glitch-it 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both
+    infinite;
+  color: #ff00ff;
+  z-index: -2;
+}
+
+@keyframes glitch-it {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+
 .headerBanner {
   overflow: hidden;
   height: 240px;
@@ -153,11 +224,12 @@ header {
   position: relative;
 
   img {
-    position: absolute;
+    //   position: absolute;
     width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
   }
 }
 
@@ -196,7 +268,7 @@ footer {
 }
 
 .diaryWrite {
-  width: 360px;
+  max-width: 22.5rem;
   border-radius: 16px;
   border: 1px solid var(--border-color-1);
   padding: 24px;
@@ -308,4 +380,37 @@ footer {
   color: var(--font-color-6);
   font-size: 16px;
   font-weight: 500;
+}
+
+#suneditor_editArea {
+  width: 100% !important;
+}
+
+.detailHeaderTop {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+//! 팝업 스타일
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .popupInner {
+    background-color: #fff;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
 }
