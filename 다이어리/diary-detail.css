@@ -10,28 +10,26 @@ html {
 
 .layout-wrapper {
   background: #fff;
-  max-width: 1920px;
-  height: 1080px;
+  max-width: 120rem;
   display: flex;
   justify-content: center;
   margin: 0 auto;
 }
 
 .layout {
-  width: 1168px;
+  width: 70%;
   height: auto;
   display: flex;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 64px;
+  gap: 4rem;
 }
 
 .header {
-  width: 100%;
   height: auto;
   display: flex;
-  padding: 0 2px;
+  padding: 0 0.125rem;
   align-self: stretch;
   align-items: center;
   color: #000000;
@@ -39,84 +37,75 @@ html {
 
 .header_frame {
   display: flex;
-  height: 60px;
-  min-width: 320px;
-  max-width: 1168px;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
+  height: 3.75rem;
 }
 
 .header_frame > a {
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px
 }
 
 .logo {
   display: flex;
-  width: 130px;
-  height: 40px;
+  width: 8.125rem;
+  height: 2.5rem;
   align-items: center;
-  gap: 10px;
   color: #000;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px;
-  letter-spacing: -0.18px;
+  letter-spacing: -0.011rem;
 }
 
 .main {
-  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 1.5rem;
   align-self: stretch;
-  border-bottom: 1px solid var(--Gray-B, #000);
+  border-bottom: 0.063rem solid var(--Gray-B, #000);
 }
 
 .main_frame {
   display: flex;
-  max-width: 1168px;
   height: auto;
-  padding-bottom: 16px;
+  padding-bottom: 1rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
   align-self: stretch;
 }
 
 .title_frame {
   display: flex;
   height: auto;
-  max-width: 1168px;
-  min-width: 380px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem;
   align-self: stretch;
 }
 
 .title {
   display: flex;
-  max-width: 1168px;
-  padding-bottom: 12px;
+  padding-bottom: 0.75rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
-  border-bottom: 2px solid #000;
+  border-bottom: 0.125rem solid #000;
   color: #000;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.22px;
+  line-height: 1.5rem;
+  letter-spacing: -0.014rem;
 }
 
 .emotion_date_frame {
   display: flex;
-  max-width: 1168px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -125,15 +114,15 @@ html {
 .emotion {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .mood_text {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.2px;
+  line-height: 1.5rem;
+  letter-spacing: -0.013rem;
 }
 
 .sad_emotion_font_color {
@@ -159,78 +148,76 @@ html {
 .date_frame {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .date {
   color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.009rem;
 }
 
 .write {
   color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.009rem;
 }
 
 .content_frame {
   display: flex;
-  max-width: 1168px;
   height: auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 0.75rem;
   align-self: stretch;
 }
 
 .content_label {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
-  letter-spacing: -0.16px;
+  line-height: 1.25rem;
+  letter-spacing: -0.1rem;
   align-self: stretch;
 }
 
 .content {
   color: var(--Gray-Gray-800, #333);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: -0.16px;
+  line-height: 1.25rem;
+  letter-spacing: -0.1rem;
   align-self: stretch;
 }
 
 .diary_action_container {
   display: flex;
-  max-width: 1168px;
   justify-content: flex-end;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
   align-self: stretch;
 }
 
 .modification_Btn {
   display: flex;
-  padding: 8px 10px;
+  padding: 0.5rem 0.625rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
-  color: var(--Gray-Gray-900, #1C1C1C);
-  font-size: 18px;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
 }
@@ -239,97 +226,115 @@ html {
   text-decoration: none;
 }
 
+.comment_header_container {
+  width: 100%;
+}
+
 .comment_container {
   display: flex;
-  max-width: 1168px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem;
   align-self: stretch;
 }
 
 .comment_title {
   color: #000;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
-  padding-left: 3px;
-  padding-bottom: 13px;
+  padding-left: 0.188rem;
+  padding-bottom: 0.813rem;
 }
 
 .comment_input_container {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding-bottom: 4px;
-  width: 1130px;
+  gap: 1rem;
+  padding-bottom: 0.25rem;
+  width: 100%;
 }
 
-#comment_input{
+#comment_input {
   display: flex;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   flex: 1 0 0;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  width: 100%;
 }
 
 .comment_input::placeholder {
-  color: var(--Gray-Gray-400, #ABABAB);
-  font-size: 16px;
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 
 .comment_input_button {
   display: flex;
-  height: 48px;
-  padding: 8px 10px;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
   background: var(--Gray-B, #000);
-  color: var(--Gray-W, #FFF);
-  font-size: 18px;
+  color: var(--Gray-W, #fff);
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.18px;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
 }
 
 .comments_container {
   display: flex;
   align-items: center;
   align-content: center;
-  gap: 8px 12px;
+  gap: 0.5rem 0.75rem;
   align-self: stretch;
   flex-wrap: wrap;
-  padding-top: 12px;
+  padding-top: 0.75rem;
+  justify-content: space-between;
 }
 .comment_content {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 .comment_date {
   color: var(--Gray-Gray-600, #777);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 
 .comment_divider {
-  width: 1168px;
-  height: 1px;
-  background: var(--Gray-Gray-100, #E4E4E4);
+  width: 73rem;
+  height: 0.063rem;
+  background: var(--Gray-Gray-100, #e4e4e4);
+}
+
+@media (max-width: 48.688rem) {
+  .layout {
+    width: 90%;
+    height: auto;
+    display: flex;
+    padding: 0 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+  }
 }

@@ -60,7 +60,7 @@ const createHtml = (diaryEntry) => {
   const diaryCard = `
     <a href="./diary-detail.html?id=${diaryEntry.id}#comments_container_box" class="diary_detail">
       <div class="diary_entry">
-          <div>
+          <div class="diary_entry_inner">
             <img
               class="diary_cover"
               src="./image/${diaryEntry.imageName}.png"

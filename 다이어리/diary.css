@@ -3,74 +3,71 @@
   margin: 0;
   padding: 0;
   max-width: 100%;
-  position: relative;
+  /* width: 100%; */
 }
 .layout {
   display: flex;
-  width: 1920px;
+  width: 120rem;
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
+  margin: 0 auto;
+  flex-direction: column;
 }
 .header_layout {
+  width: 73rem;
   display: flex;
-  padding: 0px 20px;
+  padding: 0 1.25rem;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  align-self: stretch;
+  gap: 0.625rem;
+  justify-content: center;
 }
 .header {
   display: flex;
-  height: 60px;
-  min-width: 320px;
-  max-width: 1168px;
+  height: 3.75rem;
+  min-width: 20rem;
+  max-width: 73rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
-  padding-left: 23px;
+  padding-left: 1.438rem;
 }
 .logo {
   display: flex;
-  width: 130px;
-  height: 40px;
+  width: 8.125rem;
+  height: 2.5rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   color: #000;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px;
-  letter-spacing: -0.18px;
+  line-height: 1rem;
+  letter-spacing: -0.011rem;
 }
 .header_img_layout {
+  padding: 0 1.25rem 1.5rem 1.25rem;
   display: flex;
-  padding: 0px 20px 24px 20px;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 .header_img {
-  height: 240px;
-  min-width: 320px;
-  max-width: 1168px;
-  align-self: stretch;
-  border-radius: 24px;
+  height: 15rem;
+  width: 100%;
+  border-radius: 1.5rem;
+  background-image: url("./image/header_img.png");
+  background-repeat: no-repeat;
 }
 .navigation_layout {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
+  gap: 2rem;
   align-self: stretch;
   position: sticky;
-  top: 0px;
+  top: 0rem;
   z-index: 100;
 }
 .navigation {
@@ -78,69 +75,69 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  padding-left: 12px;
-  padding-bottom: 32px;
+  padding-left: 0.75rem;
+  padding-bottom: 2rem;
 }
 .navigation_menu {
   display: flex;
-  min-width: 204px;
+  min-width: 12.75rem;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
   flex: 1 0 0;
 }
 .diary_storage_menu {
   color: #000;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.24px;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
   display: flex;
-  padding: 12px 8px;
+  padding: 0.75rem 0.5rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 .photo_storage_menu {
   color: var(--Gray-Gray-400, #ababab);
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.24px;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
   display: flex;
-  padding: 12px 8px;
+  padding: 0.75rem 0.5rem;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 .sub_navigation {
   display: flex;
-  padding: 20px 20px;
+  padding: 1.25rem;
   flex-direction: column;
   align-items: center;
   align-self: stretch;
   position: relative;
-  height: 80px;
+  height: 5rem;
   background-color: #fff;
 }
 .emotion_dropdown_layout {
   display: flex;
-  min-width: 320px;
-  max-width: 1168px;
-  gap: 16px 8px;
+  min-width: 20rem;
+  max-width: 73rem;
+  gap: 1rem 0.5rem;
   align-self: stretch;
   flex-wrap: wrap;
 }
 .dropdown_name {
   display: flex;
-  min-width: 120px;
-  padding: 4px;
+  min-width: 7.5rem;
+  padding: 0.25rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-300, #c7c7c7);
   background: var(--Gray-W, #fff);
 }
 ul li {
@@ -152,11 +149,11 @@ ul li {
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 
 .dropdown_name_hover {
@@ -168,72 +165,72 @@ ul li {
 }
 .dropdown_name > ul {
   display: none;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 .dropdown_name > ul > li {
   display: flex;
-  padding: 4px 12px;
+  padding: 0.25rem 0.75rem;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
   background: var(--Gray-Gray-100, #e4e4e4);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 .dropdown_name:hover > #mood_list {
   display: block;
   display: flex;
-  min-width: 120px;
+  min-width: 7.5rem;
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  left: 0px;
-  top: 32.5px;
-  border-radius: 8px;
+  left: 1.24rem;
+  top: 3.2rem;
+  border-radius: 0.5rem;
   border: none;
   z-index: 100;
 }
 .etc {
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 .dropdown_name > ul:hover {
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 .dropdown_name:hover {
-  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
+  border: 0.063rem solid var(--Gray-Gray-300, #c7c7c7);
   background: var(--Gray-Gray-100, #e4e4e4);
-  border-radius: 8px 8px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
   border: none;
 }
 .dropdown_name > ul > li:hover {
   background-color: #f2f2f2;
 }
 .main {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
   align-self: stretch;
-  overflow: scroll;
+  margin-left: 2rem;
 }
 .article {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  flex: 1 0 0;
+  gap: 1.5rem;
 }
 .diary_entry_container {
-  display: flex;
-  max-width: 784px;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
   align-self: stretch;
   flex-wrap: wrap;
 }
@@ -245,42 +242,42 @@ ul li {
 }
 .diary_entry {
   display: flex;
-  min-width: 380px;
-  max-width: 380px;
-  padding-bottom: 16px;
+  max-width: 23.75rem;
+  padding-bottom: 1rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  flex: 1 0 0;
-  border-radius: 16px;
+  gap: 1rem;
+  border-radius: 1rem;
   background: #fff;
+}
+.diary_entry_inner {
+  position: relative;
 }
 .diary_cover {
   display: flex;
-  height: 285px;
-  padding: 12px;
+  height: 17.813rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
-  border-radius: 16px;
-  transition: width 0.5s, height 0.5px;
+  border-radius: 1rem;
+  transition: width 0.5s, height 0.031rem;
 }
 #delete_button {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 0.75rem;
+  right: 0.75rem;
   cursor: pointer;
 }
 .diary_cover:hover {
   transform: scale(110%);
-  filter: blur(5px);
+  filter: blur(0.313rem);
 }
 .diary_entry_summary {
   display: flex;
-  padding: 0px 8px;
+  padding: 0rem 0.5rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   align-self: stretch;
 }
 .emotion_date_info {
@@ -290,11 +287,11 @@ ul li {
   align-self: stretch;
 }
 .emotion {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.009rem;
 }
 .sad_emotion_font_color {
   color: #28b4e1;
@@ -313,187 +310,187 @@ ul li {
 }
 .date {
   color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.14px;
+  line-height: 1.5rem;
+  letter-spacing: -0.009rem;
 }
 .diary_title_area {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
   overflow: hidden;
   color: #000;
   text-overflow: ellipsis;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.18px;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
 }
 .aside {
   display: flex;
-  width: 360px;
-  min-width: 360px;
-  max-width: 760px;
-  padding: 24px;
+  width: 22.5rem;
+  min-width: 22.5rem;
+  max-width: 47.5rem;
+  padding: 1.5rem 0 1.5rem 1.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  border-radius: 16px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  gap: 2.5rem;
+  border-radius: 1rem;
+  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
 }
 .diary_entry_title {
   color: #000;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -0.24px;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
   align-self: stretch;
 }
 .diary_entry_form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
+  gap: 2.5rem;
   align-self: stretch;
 }
 .mood_selector {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem;
   align-self: stretch;
 }
 .mood_selector_title {
   align-self: stretch;
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.2px;
-  width: 321px;
-  height: 24px;
+  line-height: 1.5rem;
+  letter-spacing: -0.013rem;
+  width: 20.063rem;
+  height: 1.5rem;
 }
 .mood_checkbox_group {
   display: flex;
   flex-direction: row;
-  max-width: 592px;
+  max-width: 37rem;
   align-items: center;
   align-content: center;
   align-self: stretch;
   flex-wrap: wrap;
 }
 .mood_checkbox {
-  width: 94px;
-  height: 24px;
-  margin-bottom: 20px;
+  width: 5.875rem;
+  height: 1.5rem;
+  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
 }
 .mood_options {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   appearance: none;
   background-image: url("./image/unchecked.svg");
 }
 .mood_options:checked {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   background-image: url("./image/checked.svg");
 }
 .mood_text {
   color: var(--Gray-Gray-800, #333);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: -0.18px;
+  line-height: 1.25rem;
+  letter-spacing: -0.011rem;
 }
 .diary_textArea {
-  width: 312px;
-  height: 256px;
+  width: 19.5rem;
+  height: 16rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
   align-self: stretch;
 }
 .diary_title_group {
-  width: 312px;
-  height: 76px;
+  width: 19.5rem;
+  height: 4.75rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   align-self: stretch;
 }
 .diary_title {
-  width: 312px;
-  height: 20px;
+  width: 19.5rem;
+  height: 1.25rem;
   color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.009rem;
   align-self: stretch;
 }
 .diary_title_window {
-  width: 312px;
-  height: 48px;
+  width: 19.5rem;
+  height: 3rem;
   display: flex;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
   outline: none;
 }
 .diary_title_window::placeholder {
   color: var(--Gray-Gray-400, #ababab);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 .diary_contents_group {
-  width: 312px;
-  height: 156px;
+  width: 19.5rem;
+  height: 9.75rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   align-self: stretch;
 }
 .diary_contents {
-  width: 312px;
-  height: 20px;
+  width: 19.5rem;
+  height: 1.25rem;
   color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.009rem;
   align-self: stretch;
 }
 .diary_contents_window {
   display: flex;
-  height: 128px;
-  padding: 12px 16px;
+  height: 8rem;
+  padding: 0.75rem 1rem;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
   outline: none;
   overflow: hidden;
@@ -501,75 +498,128 @@ ul li {
 }
 .diary_contents_window::placeholder {
   color: var(--Gray-Gray-400, #ababab);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.1rem;
 }
 .register_button {
-  width: 312px;
-  height: 48px;
+  width: 19.5rem;
+  height: 3rem;
   color: var(--Gray-Gray-50, #f2f2f2);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
   display: flex;
-  padding: 8px 10px;
+  padding: 0.5rem 0.625rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background: var(--Gray-Gray-300, #c7c7c7);
   border: none;
 }
 .footer_layout {
-  width: 1920px;
-  height: 160px;
+  width: 100%;
+  height: 10rem;
   display: flex;
-  padding: 24px 20px;
+  padding: 1.5rem 1.25rem;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
   background: var(--Gray-Gray-50, #f2f2f2);
 }
 .footer {
-  width: 1168px;
-  height: 112px;
+  width: 100%;
+  height: 7rem;
   display: flex;
-  max-width: 1168px;
+  max-width: 73rem;
   flex-direction: column;
   align-items: start;
-  gap: 32px;
+  gap: 2rem;
 }
 .footer_title {
   color: #000;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px;
-  letter-spacing: -0.2px;
+  line-height: 1rem;
+  letter-spacing: -0.013rem;
 }
 .footer_representative {
-  gap: 8px;
+  gap: 0.5rem;
   color: var(--Gray-Gray-700, #5f5f5f);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
 }
 .footer_copyright {
   color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
-  letter-spacing: -0.14px;
-}
-.topScrollBox {
-  position: sticky;
-  width: 1120px;
+  letter-spacing: -0.009rem;
 }
 .topScroll {
-  top: 0;
-  right: -1090px;
+  width: 3.125rem;
+  position: sticky;
+  top: calc(100% - 1rem);
+  border: none;
+}
+.topScroll > img {
+  width: 3.125rem;
+  position: absolute;
+  right: 4.5rem;
+  bottom: 0.313rem;
+}
+@media (max-width: 50rem) {
+  .layout {
+    width: 100%;
+  }
+  .layoutWrapper {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main {
+    display: contents;
+  }
+  .aside {
+    order: 1;
+  }
+  .article {
+    order: 3;
+  }
+  .diary_cover {
+    width: 100%;
+    object-fit: cover;
+  }
+  .navigation_layout {
+    order: 2;
+  }
+  .topScroll > img {
+  width: 3.125rem;
+  position: absolute;
+  left: 9.375rem;
+  bottom: 0.313rem;
+}
+}
+@media (max-width: 30rem) {
+  .header_img_layout {
+    padding: 0 1.25rem 1.5rem 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .header_img {
+    width: 100%;
+    height: 15rem;
+    border-radius: 1.5rem;
+    background-image: url("./image/mobile_banner.png");
+    background-repeat: no-repeat;
+  }
 }
