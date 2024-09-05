@@ -270,11 +270,26 @@ footer {
 .diaryWrite {
   max-width: 22.5rem;
   border-radius: 16px;
-  border: 1px solid var(--border-color-1);
-  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  .buttonWrap {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+
+    button {
+      width: 104px;
+      height: 48px;
+      border-radius: 8px;
+      font-size: var(--font-size-2);
+
+      &.popupClose {
+        background-color: #fff;
+      }
+    }
+  }
 
   h3 {
     font-size: var(--font-size-4);

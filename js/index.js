@@ -27,12 +27,12 @@ const headerBox = () => {
   // <h1 class="glitch-wrapper"><a class="glitch" data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
   headerElement.innerHTML = `
       <h1><a data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
-      <!-- <fieldset class="toggleSwitch">
+      <fieldset class="toggleSwitch">
         <label>
           <input role="switch" type="checkbox" />
           <span>다크모드</span>
         </label>
-      </fieldset> -->
+      </fieldset>
   `
 }
 headerBox();
@@ -47,9 +47,6 @@ const headerBanner = () => {
     <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
   </swiper-container>
   `
-  // `
-  // <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
-  // `;
 }
 headerBanner();
 
@@ -152,7 +149,6 @@ const diaryWriteBox = () => {
         <button class="diaryModifyBtn blackBtn" onclick="diaryModifySave()">수정</button>
        </div>`
 
-  let checked = !diaryModifyElement ? "checked" : "";
   let textCheck = !diaryModifyElement ? "oninput='textCheck()'" : "";
   diaryWrite.innerHTML = `
         ${title}
@@ -297,11 +293,7 @@ const popupRender = (content) => {
     }
   });
 
-  popupElement.innerHTML = `
-    <div class="popupInner">
-    ${content}
-    </div>
-  `;
+  popupElement.innerHTML = `<div class="popupInner">${content}</div>`;
 }
 
 
@@ -324,19 +316,20 @@ const diaryWritePop = () => {
           </label>
           <label>
             <span>내용</span>
-            <textarea
-              id="editArea"
-              class="diaryDesc"
-            ></textarea>
+            <textarea id="editArea"></textarea>
           </label>
         </div>
-        <button>닫기</button>
-        <button class="diaryWriteBtn" onclick="diarySave()" disabled>
-          등록하기
-        </button>
+        <div class="buttonWrap">
+          <button class="popupClose">닫기</button>
+          <button class="diaryWriteBtn" onclick="diarySave()" disabled>
+            등록하기
+          </button>
+        </div>
     </div>
   `
-  popupRender(content)
+
+  popupRender(content) // 팝업창 렌더링 함수 호출
+  editor() // 에디터 함수 호출
 }
 
 
