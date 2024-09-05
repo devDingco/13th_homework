@@ -346,7 +346,10 @@ html {
 .copy_toast {
   width: 100%;
   display: flex;
+  position: fixed;
   justify-content: center;
+  bottom: 3rem;
+  left: 0;
 }
 
 .copy_toast > div {

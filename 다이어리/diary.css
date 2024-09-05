@@ -651,6 +651,9 @@ ul li {
   .confirm_modal {
     max-width: 20rem;
   }
+  .confirm_delete_diary_modal {
+    max-width: 20rem;
+  }
 }
 @media (max-width: 30rem) {
   .header_img_layout {
@@ -785,8 +788,6 @@ ul li {
 .confirm_delete_diary_modal {
   display: flex;
   width: 30rem;
-  min-width: 30rem;
-  max-width: 47.5rem;
   padding: 1.5rem;
   flex-direction: column;
   align-items: center;
