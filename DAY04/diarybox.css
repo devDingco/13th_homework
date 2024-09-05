@@ -1,158 +1,154 @@
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 42px;
+  gap: 2.625rem;
+  padding: 0 1.25rem;
 }
+
 a {
-  text-decoration-line: none;
+  text-decoration: none;
 }
+
+.일기헤더,
+.감정필터상자,
+.일기보관함상자 {
+  width: 100%;
+  max-width: 73rem;
+}
+
 .일기헤더 {
   display: flex;
-  justify-content: center;
-  gap: 32px;
+  justify-content: flex-start;
 }
+
 .일기헤더글자들 {
   display: flex;
-  width: 1168px;
-  height: 48px;
-  min-width: 320px;
-  max-width: 1168px;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding: 1rem 0;
 }
+
 .일기헤더글자들 div {
-  display: flex;
-  padding: 12px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  flex-shrink: 0;
+  padding: 0.75rem 0.5rem;
 }
-.일기헤더글자_밑줄 {
-  border-bottom: 2px solid #000;
-}
-.일기헤더글자_일보 {
-  color: #000;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 100% */
-  letter-spacing: -0.24px;
-}
+
+.일기헤더글자_일보,
 .일기헤더글자_사보 {
-  color: var(--Gray-Gray-400, #ababab);
-  font-family: "Pretendard Variable";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 100% */
-  letter-spacing: -0.24px;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
+
+.일기헤더글자_밑줄 {
+  border-bottom: 0.125rem solid #000;
+}
+
+.일기헤더글자_사보 {
+  color: #ababab;
+}
+
 .감정필터상자 {
   display: flex;
-  width: 1168px;
-  min-width: 320px;
-  max-width: 1168px;
   flex-wrap: wrap;
 }
+
 .감정필터 {
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-300, #c7c7c7);
-  background: var(--Gray-W, #fff);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #c7c7c7;
+  background: #fff;
   display: flex;
-  min-width: 120px;
-  padding: 4px;
+  min-width: 7.5rem;
+  padding: 0.25rem;
   flex-direction: column;
   align-items: flex-start;
-
-  color: var(--Gray-Gray-900, #1c1c1c);
-  font-size: 16px;
+  color: #1c1c1c;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 24px; /* 150% */
-  letter-spacing: -0.16px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01rem;
 }
+
 .일기보관함상자 {
   display: flex;
-  width: 1168px;
-  max-width: 1168px;
   justify-content: center;
-  gap: 24px;
-  height: 1167px;
+  gap: 1.5rem;
+  height: auto;
 }
+
 .일기리스트 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 1.5rem;
   width: 100%;
-  max-width: 784px;
-  position: relative;
-  overflow: scroll;
+  max-width: 49rem;
+  max-height: 72.9375rem;
+  overflow-y: auto;
 }
-.등록한일기 {
-  display: flex;
-  height: 357px;
-  width: 380px;
-  min-width: 380px;
-  max-width: 380px;
-  padding-bottom: 16px;
-  flex-direction: column;
-  gap: 16px;
-  border-radius: 16px;
-  background: #fff;
 
+.등록한일기 {
+  height: 22.3125rem;
+  width: 23.75rem;
+  min-width: 23.75rem;
+  max-width: 23.75rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
   position: relative;
   z-index: 1;
-  transition: all transform 0.5s;
+  transition: all 0.5s ease;
+  transform-origin: center center;
 }
 
 .등록한일기.filled:hover {
   transform: scale(1.1);
-  z-index: 2;
-  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.16);
-}
-.등록한일기.빈셀:hover {
-  transform: none;
-  box-shadow: none;
-}
-.삭제버튼 {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-}
-#위로올리기 img {
-  position: relative;
-  z-index: 2;
-  top: 523px;
-  left: 318px;
-}
-.감정표현사진 {
-  background: url("./images/슬퍼요 (m).png") lightgray 50% / cover no-repeat;
-  display: flex;
-  height: 285px;
-  padding: 12px;
-  align-items: center;
-  align-self: stretch;
-  border-radius: 16px;
-  flex-grow: 1;
-  transition: transfrom 0.5s;
+  z-index: 10;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
 }
 
 .등록한일기.filled:hover .감정표현사진 {
-  filter: blur(3px);
+  filter: blur(0.1875rem);
 }
+
+.삭제버튼 {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+}
+
+.감정표현사진 {
+  background: url("./images/슬퍼요 (m).png") lightgray 50% / cover no-repeat;
+  display: flex;
+  height: 17.8125rem;
+  padding: 0.75rem;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 1rem;
+  flex-grow: 1;
+  transition: transform 0.5s;
+}
+
 .등록한일기핵심포인트 {
   display: flex;
-  padding: 0px 8px;
+  padding: 0 0.5rem;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .등록한일기핵심포인트_1 {
@@ -161,106 +157,92 @@ a {
   align-items: center;
   align-self: stretch;
 }
+
 .일기기분 {
-  font-size: 14px;
-  font-style: normal;
+  font-size: 0.875rem;
   font-weight: 600;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.00875rem;
 }
+
 .일기작성일 {
-  color: var(--Gray-Gray-500, #919191);
-  font-size: 14px;
-  font-style: normal;
+  color: #919191;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 24px; /* 171.429% */
-  letter-spacing: -0.14px;
+  line-height: 1.5rem;
+  letter-spacing: -0.00875rem;
 }
-.등록한일기핵심포인트 p {
-  color: #000;
-  text-overflow: ellipsis;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
-}
+
 .일기제목타이틀 {
   overflow: hidden;
   color: #000;
   text-overflow: ellipsis;
-  white-space: nowrap; /* 추가: 줄 바꿈 방지 */
+  white-space: nowrap;
   max-width: 100%;
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
+  font-size: 1.125rem;
   font-weight: 700;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
 }
+
 .일기쓰기상자 {
   display: flex;
   flex-direction: column;
 }
+
 .일기쓰기 {
   display: flex;
-  width: 360px;
-  height: 604px;
-  min-width: 360px;
-  max-width: 760px;
-  padding: 24px;
   flex-direction: column;
-  gap: 40px;
-  border-radius: 16px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  width: 22.5rem;
+  min-width: 17rem;
+  height: 37.75rem;
+  padding: 1.5rem;
+  gap: 2.5rem;
+  border-radius: 1rem;
+  border: 0.0625rem solid #d4d3d3;
 }
+
 .일기쓰기타이틀 {
   color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 24px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 24px; /* 100% */
-  letter-spacing: -0.24px;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
 }
+
 .기분에답해상자 {
   display: flex;
-  max-width: 592px;
+  max-width: 37rem;
   align-items: center;
   align-content: center;
-  gap: 20px;
+  gap: 1.25rem;
   align-self: stretch;
   flex-wrap: wrap;
 }
-.기분에답해상자 span {
-  color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 120% */
-  letter-spacing: -0.2px;
-}
+
+.기분에답해상자 span,
 .기분물어보기 {
   color: #000;
-  font-size: 20px;
-  font-style: normal;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 24px; /* 120% */
-  letter-spacing: -0.2px;
+  line-height: 1.5rem;
+  letter-spacing: -0.0125rem;
 }
+
 .기분인풋상자 {
   display: flex;
-  max-width: 592px;
+  max-width: 37rem;
   align-items: center;
   align-content: center;
-  gap: 20px;
+  gap: 1.25rem;
   align-self: stretch;
   flex-wrap: wrap;
 }
+
 .기분인풋상자 div {
   cursor: pointer;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 1.25rem;
   background-color: #f0f0f0;
   transition: background-color 0.3s;
 }
@@ -269,103 +251,87 @@ a {
   background-color: #28b4e1;
   color: white;
 }
+
 .기분인풋상자 label {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
   cursor: pointer;
 }
+
 .일기작성상자 {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 }
-.일기제목상자 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-}
-.일기제목상자 span {
-  color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
-}
-.일기제목상자 input {
-  display: flex;
-  padding: 12px 16px;
-  align-items: center;
-  align-self: stretch;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
 
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
-  letter-spacing: -0.16px;
-}
-.일기제목상자 input::placeholder {
-  color: var(--Gray-Gray-400, #ababab);
-}
+.일기제목상자,
 .일기내용상자 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   align-self: stretch;
 }
+
+.일기제목상자 span,
 .일기내용상자 span {
-  color: var(--Gray-Gray-800, #333);
-  font-size: 14px;
+  color: #333;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.14px;
+  line-height: 1.25rem;
+  letter-spacing: -0.00875rem;
 }
+
+.일기제목상자 input,
 .일기내용인풋겉상자 {
   display: flex;
-  width: 100%;
-  height: 128px;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
+  align-items: center;
   align-self: stretch;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  background: #fff;
 }
+
+.일기제목상자 input,
 .일기내용인풋겉상자 textarea {
-  height: 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.01rem;
+}
+
+.일기제목상자 input::placeholder,
+.일기내용인풋겉상자 textarea::placeholder {
+  color: #ababab;
+}
+
+.일기내용인풋겉상자 {
+  height: 8rem;
+}
+
+.일기내용인풋겉상자 textarea {
   width: 100%;
   height: 100%;
-
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
-  letter-spacing: -0.16px;
   border: none;
-  resize: none; /* 사용자가 크기를 조절하지 못하게 함 */
+  resize: none;
 }
-.일기내용인풋겉상자 textarea::placeholder {
-  color: var(--Gray-Gray-400, #ababab);
-}
+
 .일기등록하기버튼 {
-  height: 48px;
+  height: 3rem;
   width: 100%;
-  border-radius: 8px;
-  background: var(--Gray-Gray-300, #c7c7c7);
-  color: var(--Gray-Gray-50, #f2f2f2);
-  font-size: 18px;
-  font-style: normal;
+  border-radius: 0.5rem;
+  background: #c7c7c7;
+  color: #f2f2f2;
+  font-size: 1.125rem;
   font-weight: 600;
-  line-height: 24px; /* 133.333% */
-  letter-spacing: -0.18px;
+  line-height: 1.5rem;
+  letter-spacing: -0.01125rem;
   border: none;
   cursor: pointer;
 }
-/* 기분별 글자색 */
+
 .일기기분.행복해요 {
   color: #ea5757;
 }
@@ -376,8 +342,70 @@ a {
   color: #d59029;
 }
 .일기기분.화나요 {
-  color: var(--Gray-Gray-600, #777);
+  color: #777;
 }
 .일기기분.기타 {
   color: #a229ed;
+}
+
+#위로올리기 {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  display: none; /* JavaScript에서 제어할 예정 */
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#위로올리기 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 48.75rem) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+  .일기쓰기상자 {
+    order: -1;
+  }
+  .일기쓰기 {
+    width: 100%;
+  }
+
+  .감정필터상자 {
+    order: 3;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 1rem;
+  }
+
+  .일기보관함상자 {
+    order: 4;
+    flex-direction: column;
+  }
+
+  .일기리스트 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-height: none;
+  }
+
+  .등록한일기 {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    height: auto;
+  }
+
+  .감정표현사진 {
+    height: 15rem;
+  }
 }
