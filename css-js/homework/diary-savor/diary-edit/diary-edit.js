@@ -24,8 +24,8 @@ window.addEventListener("load", function () {
       const newDiaryElement = document.createElement("div");
       newDiaryElement.className = "comment-element";
       newDiaryElement.innerHTML = `
-                    <p>${comments[i].comment}</p>
-                    <p>[${comments[i].date}]</p>
+                    <p class="comment-ele-text">${comments[i].comment}</p>
+                    <p class="comment-ele-date">[${comments[i].date}]</p>
                     <hr />
                 `;
 

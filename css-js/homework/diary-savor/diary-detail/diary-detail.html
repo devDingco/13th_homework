@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>일기 상세보기</title>
     <link rel="stylesheet" href="./diary-detail.css" />
   </head>
@@ -8,6 +9,15 @@
     <div class="detail-container">
       <div class="detail-header" onclick="goMain()">
         <p>수연이의 다이어리</p>
+      </div>
+      <div class="mobile-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="20" viewBox="0 0 11 20" fill="none">
+          <path
+            d="M2.725 9.99962L10.075 17.3496C10.325 17.5996 10.4458 17.8913 10.4375 18.2246C10.4292 18.558 10.3 18.8496 10.05 19.0996C9.8 19.3496 9.50833 19.4746 9.175 19.4746C8.84167 19.4746 8.55 19.3496 8.3 19.0996L0.6 11.4246C0.4 11.2246 0.25 10.9996 0.15 10.7496C0.05 10.4996 0 10.2496 0 9.99962C0 9.74962 0.05 9.49962 0.15 9.24962C0.25 8.99962 0.4 8.77462 0.6 8.57462L8.3 0.874622C8.55 0.624622 8.84583 0.503789 9.1875 0.512122C9.52917 0.520455 9.825 0.649622 10.075 0.899622C10.325 1.14962 10.45 1.44129 10.45 1.77462C10.45 2.10796 10.325 2.39962 10.075 2.64962L2.725 9.99962Z"
+            fill="#333333"
+          />
+        </svg>
+        <p>일기 상세</p>
       </div>
       <div class="detail-main-container">
         <div class="detail-content-top">
@@ -27,6 +37,15 @@
           <p>내용</p>
           <p id="detail-content">content</p>
         </div>
+        <button class="detail-copy-write" onclick="contentClipboard()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 18C8.45 18 7.97917 17.8042 7.5875 17.4125C7.19583 17.0208 7 16.55 7 16V4C7 3.45 7.19583 2.97917 7.5875 2.5875C7.97917 2.19583 8.45 2 9 2H18C18.55 2 19.0208 2.19583 19.4125 2.5875C19.8042 2.97917 20 3.45 20 4V16C20 16.55 19.8042 17.0208 19.4125 17.4125C19.0208 17.8042 18.55 18 18 18H9ZM9 16H18V4H9V16ZM5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V7C3 6.71667 3.09583 6.47917 3.2875 6.2875C3.47917 6.09583 3.71667 6 4 6C4.28333 6 4.52083 6.09583 4.7125 6.2875C4.90417 6.47917 5 6.71667 5 7V20H15C15.2833 20 15.5208 20.0958 15.7125 20.2875C15.9042 20.4792 16 20.7167 16 21C16 21.2833 15.9042 21.5208 15.7125 21.7125C15.5208 21.9042 15.2833 22 15 22H5Z"
+              fill="#5F6368"
+            />
+          </svg>
+          <p>내용 복사</p>
+        </button>
         <div class="detail-btn">
           <button onclick="moveEdit()">수정</button>
           <button id="delete-card">삭제</button>
@@ -39,6 +58,12 @@
           </div>
           <div id="comment-list"></div>
         </div>
+      </div>
+      <!-- 모달 영역 -->
+
+      <!-- 토스트 영역 -->
+      <div id="toast-message" class="toast-messge">
+        <p id="toast-text">내용이 복사되었습니다.</p>
       </div>
     </div>
     <script src="./diary-detail.js"></script>

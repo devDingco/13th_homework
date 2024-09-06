@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>일기 상세보기</title>
     <link rel="stylesheet" href="./diary-edit.css" />
   </head>
@@ -8,6 +9,10 @@
     <div class="detail-container">
       <div class="detail-header">
         <p>수연이의 다이어리</p>
+        <div class="header-dark-menu">
+          <p>다크모드</p>
+          <button></button>
+        </div>
       </div>
       <div class="mobile-header">
         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="20" viewBox="0 0 11 20" fill="none">
@@ -21,38 +26,40 @@
       <div class="detail-main-container">
         <div class="detail-edit-area">
           <div class="detail-content-top">
-            <p>오늘 기분은 어땠나요?</p>
-            <div class="radio-emotion">
-              <div class="radio-emotion-element">
-                <input id="happy" name="edit-emotion" type="radio" value="happy" />
-                <label for="happy">행복해요</label>
-              </div>
-              <div class="radio-emotion-element">
-                <input id="sad" name="edit-emotion" type="radio" value="sad" />
-                <label for="sad">슬퍼요</label>
-              </div>
-              <div class="radio-emotion-element">
-                <input id="suprise" name="edit-emotion" type="radio" value="suprise" />
-                <label for="suprise">놀랐어요</label>
-              </div>
-              <div class="radio-emotion-element">
-                <input id="angry" name="edit-emotion" type="radio" value="angry" />
-                <label for="angry">화나요</label>
-              </div>
-              <div class="radio-emotion-element">
-                <input id="etc" name="edit-emotion" type="radio" value="etc" />
-                <label for="etc">기타</label>
+            <div class="detail-content-info">
+              <p>오늘 기분은 어땠나요?</p>
+              <div class="radio-emotion">
+                <div class="radio-emotion-element">
+                  <input id="happy" name="edit-emotion" type="radio" value="happy" />
+                  <label for="happy">행복해요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="sad" name="edit-emotion" type="radio" value="sad" />
+                  <label for="sad">슬퍼요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="suprise" name="edit-emotion" type="radio" value="suprise" />
+                  <label for="suprise">놀랐어요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="angry" name="edit-emotion" type="radio" value="angry" />
+                  <label for="angry">화나요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="etc" name="edit-emotion" type="radio" value="etc" />
+                  <label for="etc">기타</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="detail-content">
-            <div>
-              <p>제목</p>
-              <input id="detail-content-title" />
-            </div>
-            <div>
-              <p>내용</p>
-              <textarea id="detail-content"></textarea>
+            <div class="detail-content-area">
+              <div class="detail-content">
+                <p>제목</p>
+                <input id="detail-content-title" />
+              </div>
+              <div class="detail-content">
+                <p>내용</p>
+                <textarea id="detail-content"></textarea>
+              </div>
             </div>
           </div>
           <div class="detail-edit-btn">
@@ -61,22 +68,14 @@
           </div>
         </div>
         <div id="diary-comment" class="diary-comment">
-          <div>
+          <div class="diary-comment-list">
             <p>회고</p>
-            <div>
-              <input placeholder="수정중일땐 회고를 작성할 수 없어요." />
+            <div class="diary-comment-input">
+              <input disabled placeholder="수정중일땐 회고를 작성할 수 없어요." />
               <button disabled>입력</button>
             </div>
           </div>
-          <div id="comment-list">
-            <!-- const newDiaryElement = document.createElement("div");
-                  newDiaryElement.className = "comment-element";
-                  newDiaryElement.innerHTML = `
-                    <p>${comments[i].comment}</p>
-                    <p>[${comments[i].date}]</p>
-                    <hr />
-                `; -->
-          </div>
+          <div id="comment-list" class="comment-list"></div>
         </div>
       </div>
     </div>
