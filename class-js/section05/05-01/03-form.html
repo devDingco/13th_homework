@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>폼 실습</title>
+
+    <script>
+        const JS_글등록기능 = () => {
+            alert("게시글 등록이 완료되었습니다.")
+        }
+    </script>
+</head>
+<body>
+    <form action="#" onsubmit="JS_글등록기능()">
+        제목: <input type="text"/> <br/>
+        내용: <input type="text"/> <br/>
+        <button>등록하기</button>
+    </form>
+
+    <!-- 
+    버튼의 디폴트 타입이 submit임 그래서 form으로 감싸면 onsubmit에 걸린 기능이 실행되게 됨
+    그럼에도 버튼에 onclick을 걸게되면 두번 기능이 실행되게 되는 것
+    버튼에 다른 기능을 넣고싶다면 버튼 타입을 button으로 설정해서 감싸주어야함
+
+    <button type="submit"></button>
+    <button type="button"></button>
+    <button type="reset"></button>  form 안에 인풋창 다 비우기 
+    -->
+    
+
+    <!--
+    나중에 배우겠지만 <form onsubmit="JS_글등록기능()"> 에 action 속성을 넣으면
+    어디론가 보낸다는 뜻이 됨 (보내지 않을 때는 #을 넣어주면됨 )
+    -->
+
+
+</body>
+</html>
+
+

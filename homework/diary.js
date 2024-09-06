@@ -18,8 +18,8 @@ const removeDiaryEntry = (index) => {
 const submit = () => {
     if (inputverify()) {
        
-        const title = document.getElementById("writingtitle").value;
-        const content = document.getElementById("writingcontent").value;
+        const title = document.getElementById("titleInputModal").value;
+        const content = document.getElementById("titleTextareaModal").value;
 
         //----------설명----------------
         //name으로 그룹화된 모든 라디오버튼 선택하는 것
@@ -45,21 +45,23 @@ const submit = () => {
         console.log(diarylist)
         console.log(diaryEntry)
 
-    
 
-        renderDiaryEntries()
-        
-        
-            document.getElementById("writingtitle").value = "";
-            document.getElementById("writingcontent").value = "";
+        openModal('completionModalContainer')
+        renderDiaryEntries();
+
+                    //초기화 함수
+            document.getElementById("titleInputModal").value = "";
+            document.getElementById("titleTextareaModal").value = "";
             document.getElementById("happy").checked = false;
             document.getElementById("sad").checked = false;
             document.getElementById("surprise").checked = false;
             document.getElementById("angry").checked = false;
             document.getElementById("etc").checked = false;
+
+
         } else {
             alert("내용을 전부 채워주세요.");
-            }
+    }
 };
 
 
@@ -76,8 +78,8 @@ const inputverify = () => {
         }
     }) 
 
-    const title = document.getElementById("writingtitle").value;
-    const content = document.getElementById("writingcontent").value;
+    const title = document.getElementById("titleInputModal").value;
+    const content = document.getElementById("titleTextareaModal").value;
 
  
     const writedtitle = title !== "";
@@ -177,7 +179,7 @@ window.addEventListener("scroll", () => {
         document.getElementById("selectbox").style= "background-color: #000; color: #fff"
     } else {
         document.getElementById("selectbox").style= "background-color: none; color: none"
-    }
+    };
 });
 
 const floating = () => {
@@ -187,7 +189,7 @@ const floating = () => {
 window.addEventListener('scroll', () => {
     const toptofooter = document.getElementById('footer').getBoundingClientRect().top;
     const browserlength = window.innerHeight;
-    console.log(toptofooter)
+    console.log(toptofooter);
 
     if(browserlength >= toptofooter){
         document.getElementById("floating").style = `
@@ -202,11 +204,27 @@ window.addEventListener('scroll', () => {
             left: 78%;
 
                 `
-    }
+    };
     
 })
 
+//------------------------모달 관련 스크립트-------------------------
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+}
 
+function closeModal(modalIds) {
+    // 여러 ID를 콤마로 분리
+    const idsArray = modalIds.split(',');
+
+    idsArray.forEach(modalId => {
+        const modal = document.getElementById(modalId.trim());
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
 
 
 // 페이지 로드 시 다이어리 항목 렌더링

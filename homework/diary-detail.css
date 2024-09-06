@@ -305,10 +305,10 @@ label {
     background: var(--Gray-B, #000);
     color:#fff;
 }
+
 .commentContainer{
     display: flex;
     width: 1168px;
-    height: 24px;
     margin-bottom: 24px;
 }
 .comment {
@@ -329,4 +329,111 @@ label {
     font-weight: 400;
     line-height: 24px; /* 150% */
     letter-spacing: -0.16px;
+}
+
+.copyButtonContainer{
+    width: 1168px;
+    height: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+.copyButton {
+    width: 92px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+.copyButtonText {
+    line-height: 24px;
+}
+.copyIcon {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: #fff;
+}
+
+.toast {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    left: calc(50% - 760px /2);
+    width: 760px;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.90);
+    color: #FFF;
+
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+    text-align: center;
+  }
+  .toast.show {
+    display: block; /* show 클래스 추가 시 표시 */
+}
+.floatingbox {
+    width: 1168px;
+}
+.floating {
+    background-image: url('./img/up_outline_light_xl.png'); /* 이미지 경로 */
+    width: 2.5rem;
+    height: 2.5rem;
+    position: fixed; /* 항상 고정된 자리에 위치 */
+    bottom: 2rem; /* 하단에서 1rem (16px) 위로 */
+    right: 28rem; /* 우측에서 1rem (16px) 왼쪽으로 */
+    z-index: 1000; /* 다른 요소보다 앞에 나오도록 설정 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+  }
+
+@media (max-width: 360px) {
+    body {
+        margin: 0;
+        padding: 20px;
+    }
+    .comment {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #commentbox {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* 요소 간의 간격 */
+        
+    }
+
+    .commentContainer {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        margin: 0;
+        border-bottom: 1px solid #e4e4e4;
+        width: 302px;
+    }
+
+    .comment {
+        width: 209px;
+        font-size: 14px;
+        word-break: break-word; /* 긴 단어가 넘치지 않도록 줄바꿈 */
+        white-space: normal; /* 텍스트가 정상적으로 줄바꿈 되도록 설정 */
+    }
+
+    .comment_date {
+        font-size: 12px;
+        color: #777;
+    }
+    
+    .contentcontainer {
+        width: 320px;
+    }
+    .container{
+        width: 320px;
+    }
 }

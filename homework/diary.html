@@ -35,13 +35,18 @@
 
                     <div class="selectcontainer">
                         <div class="selectbox">        
-                            <select id="selectbox" onchange="handleSelectChange()">
+                            <select id="selectbox" onchange="handleSelectChange('modalcontainer')">
                                 <option value="all">전체</option>
                                 <option value="happy">행복해요</option>
                                 <option value="sad">슬퍼요</option>
                                 <option value="surprise">놀랐어요</option>
                                 <option value="etc">기타</option>
                             </select>
+
+                            <div class="writebutton" onclick="openModal('modalcontainer')">
+                                <div><img src="./img/plus_outline_light_m.png"/></div>
+                                <div class="witerbuttontext">일기쓰기</div>
+                            </div>
                         </div>
                   </div>
 
@@ -52,7 +57,7 @@
                     </div>
 
                     <!--일기 쓰는 곳-->
-                    <div class="writingboxcontainer">
+                    <!-- <div class="writingboxcontainer">
                         <div class="writingboxtext">📍 일기 쓰기</div> 
                         <div class="howyoufeel">오늘은 기분이 어땟나요?</div>
 
@@ -73,11 +78,71 @@
                         <textarea id="writingcontent" type="text" placeholder="내용을 입력해주세요." oninput="inputverify()" style="resize:none;"></textarea>
 
                         <button class="submit" onclick="submit()">등록하기</button>
-                    </div>
+                    </div> -->
 
                     <div class="floating" id="floating" onclick="floating()"></div>
                 </div>
                 
+            </div>
+
+            <!-- 모달 관련 HTML -->
+            <div id="modalcontainer" class="modalcontainer">
+                <div class="modalbackground" onclick="closeModal('modalcontainer')"></div>
+                <div class="modal">
+                    <div class="text1">일기 쓰기</div>
+
+                    <div>
+                        <div class="text2">
+                            오늘의 기분은 어땟나요?
+                        </div>
+                        <div class="radioboxInModal">
+                            <div class="inputcontainer"><input type="radio"  name="emotion" id="happy" oninput="inputverify()"><div>행복해요</div></div> 
+                            <div class="inputcontainer"><input type="radio"  name="emotion" id="sad" oninput="inputverify()"><div>슬퍼요</div></div>
+                            <div class="inputcontainer"><input type="radio"  name="emotion" id="surprise" oninput="inputverify()"><div>놀랐어요</div></div>
+                            <div class="inputcontainer"><input type="radio"  name="emotion" id="angry" oninput="inputverify()"><div>화나요</div></div>
+                            <div class="inputcontainer"><input type="radio"  name="emotion" id="etc" oninput="inputverify()"><div>기타</div></div>
+                        </div>
+                    </div>
+
+                    <div class="modalTitleContainer">
+                        <div class="titleInModal">제목</div>
+                        <input id="titleInputModal" class="titleInputModal" type="text" placeholder="제목을 입력해 주세요."/>
+             
+                        <div class="titleInModal">내용</div>
+                        <textarea id="titleTextareaModal" class="titleTextareaModal" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+
+                    <div class="modalButtonContainer">
+                        <button class="closeButton" onclick="openModal('closeModalContainer')"><div class="closeButtonText">닫기</div></button>
+                        <button class="confirmButton" type="button" onclick="submit()"><div class="confirmButtonText">등록하기</div></button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--등록 완료 모달-->
+            <div id="completionModalContainer" class="completionModalContainer">
+                <div class="completeModalbackground" onclick="closeModal('completionModalContainer')">
+                    <div class="completionModal">
+                        <div class="text3">일기 등록 완료</div>
+                        <div class="text4">등록이 완료 되었습니다.</div>
+                        <button class="completionModalButton"  onclick="closeModal('completionModalContainer,modalcontainer')"><div class="completionModalText">확인</div></button>
+                    </div>
+                </div>
+            </div>
+
+            <!--닫기 버튼 모달-->
+            <div id="closeModalContainer" class="closeModalContainer">
+                <div class="closeModalbackground" onclick="closeModal('closeModalContainer')">
+                    <div class="closeModal" onclick="event.stopPropagation()">
+                        <div class="text5">일기 등록 완료</div>
+                        <div class="text6">등록이 완료 되었습니다.</div>
+                        <div class="modalButtonContainer">
+                            <button class="keepWriteButton" type="button" onclick="closeModal('closeModalContainer')"><div class="keepWriteText">계속 작성</div></button>
+                            <button class="cancellationButton" type="button"  onclick="closeModal('modalcontainer,closeModalContainer')"><div class="cancellationButtonText">등록 취소</div></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         
         </div>

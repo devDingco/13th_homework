@@ -49,57 +49,64 @@
     </div>
 
     <div class="main">
-            <div class="container">
-                <div class="titlecontainer">
-                    <div class="titlebox" id="diary-title">
-                    </div>
-                </div>
-        
-                <div class="emotioncontainer">
-                    <div class="icon_emotion_date_box">
-                        <div class="emotion_icon_box">
-                            <div class="emotionIcon"></div>
-                            <div class="emotion" id="diary-emotion"></div> 
-                        </div>
-                        <div class="date" id="diary-date"></div>
-                    </div>
-                </div>
-        
-                <div class="contentcontainer">
-                    <div class="title_content">
-                        <div class="title_title">내용</div>
-                    </div>
-                    <div class="content" id="diary-content"></div>
-                    <textarea id="diary-content-input" style="display: none;"></textarea>
-                </div>
-        
-                <div class="buttoncontainer">
-                    <button class="editbutton" onclick="toggleEditMode()" style="margin-right: 16px;">수정</button>
-                    <button class="editbutton" onclick="removeDiaryEntry()" >삭제</button>
-                </div>
-        
-                <div class="contentcontainer">
-                    <div class="title_content">
-                        <div class="title_title">회고</div>
-                    </div>
-                    <div class="retrospectContainer">
-                        <input type="text" class="retrospectInput" placeholder="회고를 남겨보세요."/>
-                        <button class="retrospectButton" onclick="retrospectButton()">입력</button>
-                    </div>
-        
+        <div class="container">
+            <div class="titlecontainer">
+                <div class="titlebox" id="diary-title">
                 </div>
             </div>
+    
+            <div class="emotioncontainer">
+                <div class="icon_emotion_date_box">
+                    <div class="emotion_icon_box">
+                        <div class="emotionIcon"></div>
+                        <div class="emotion" id="diary-emotion"></div> 
+                    </div>
+                    <div class="date" id="diary-date"></div>
+                </div>
+            </div>
+    
+            <div class="contentcontainer">
+                <div class="title_content">
+                    <div class="title_title">내용</div>
+                </div>
+                <div class="content" id="diary-content"></div>
+                <textarea id="diary-content-input" style="display: none;"></textarea>
+            </div>
+
+            <div class="copyButtonContainer">
+                <div class="copyButton">
+                    <button id="copyButton" class="copyIcon"><img class="copyIcon" src="./img/copy_outline_light_m.png"/></button>
+                    <div class="copyButtonText">내용 복사</div>
+                </div>
+            </div>
+    
+            <div class="buttoncontainer">
+                <button class="editbutton" onclick="toggleEditMode()" style="margin-right: 16px;">수정</button>
+                <button class="editbutton" onclick="removeDiaryEntry()" >삭제</button>
+            </div>
+    
+            <div class="contentcontainer">
+                <div class="title_content">
+                    <div class="title_title">회고</div>
+                </div>
+                <div class="retrospectContainer">
+                    <input type="text" class="retrospectInput" placeholder="회고를 남겨보세요."/>
+                    <button class="retrospectButton" onclick="retrospectButton()">입력</button>
+                </div>
+    
+            </div>
+
             <!--댓글 달리는 부분-->
             <div id="commentbox">
-                <div class="commentContainer">
-                    <div class="comment">3년이 지나고 다시 보니 이때가 그립다</div>
-                    <div class="comment_date">2024.09.24</div>
-                </div>
-                <div class="commentContainer">
-                    <div class="comment">3년이 지나고 다시 보니 이때가 그립다</div>
-                    <div class="comment_date">2024.09.24</div>
-                </div>
+
             </div>
+
+            <div class="floating" id="floating" onclick="floating()"></div>
+        </div>
+   
+           
+         <div id="toast" class="toast">내용이 복사되었습니다</div>
+
     </div>
 
    

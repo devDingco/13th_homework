@@ -194,6 +194,53 @@ const retrospectButton = () => {
     }
 
   };
+
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+}
+
+function closeModal(modalIds) {
+    // 여러 ID를 콤마로 분리
+    const idsArray = modalIds.split(',');
+
+    // 각 ID에 대해 모달 닫기 동작 수행
+    idsArray.forEach(modalId => {
+        const modal = document.getElementById(modalId.trim());
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+const copyButton = document.getElementById('copyButton');
+const toast = document.getElementById('toast');
+const text = document.getElementById('diary-content');
+
+// 복사 버튼 클릭 이벤트
+copyButton.addEventListener('click', function() {
+  navigator.clipboard.writeText(text.textContent).then(function() {
+    // 복사 성공 시 토스트 메시지 표시
+    showToast();
+  }, function(err) {
+    // 복사 실패 시 처리
+    console.error('복사 실패:', err);
+  });
+});
+
+// 토스트 메시지 표시 함수
+function showToast() {
+  toast.classList.add('show');
+  setTimeout(function() {
+    toast.classList.remove('show');
+  }, 2000); 
+}
+
+// 플로팅 함수
+const floating = () => {
+    window.scrollTo({top:0, behavior:"smooth"});
+};
+
   
   
 
