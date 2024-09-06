@@ -49,7 +49,7 @@ diaryListSet(diaryArr);
 
 
 
-// !일기 쓰기 취소 팝업창 렌더링 함수
+// !일기 등록 취소 팝업창 렌더링 함수
 const writeCancelPop = () => popupRender("writeCancelPop",
   `<h3>일기 등록 취소</h3>
   <p>일기 등록을 취소하시겠습니까?</p>
@@ -61,8 +61,9 @@ const writeCancelPop = () => popupRender("writeCancelPop",
 );
 
 
-// !일기 쓰기 클릭시 일기 쓰기 팝업창 렌더링 함수
+// !일기 등록하기 클릭시 일기 쓰기 팝업창 렌더링 함수
 const diaryWritePop = () => {
+  // 팝업 창 렌더링 처리
   popupRender("diaryWritePop",
     `<div class="diaryWrite">
     <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
@@ -97,6 +98,14 @@ const diaryWritePop = () => {
     console.log(core.getContents());
     location.href.includes("index.html") && diaryWriteInputCheck()
   }
+
+  // 팝업창 렌더링 후 ESC를 누르면 모달이 닫히도록 처리
+  document.addEventListener('keydown', (event) => {
+    if (event.key === "Escape") {
+      popupClose('.diaryWritePop');
+    }
+  })
+
 }
 
 
