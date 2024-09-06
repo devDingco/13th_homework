@@ -56,21 +56,40 @@
       cursor: pointer;
     }
   }
+  #writeNote {
+    border-radius: 4px;
+    padding: 8px;
+    border: none;
+    background-color: #161616;
+    color: white;
+    cursor: pointer;
+  }
+
   @media (min-width: 1201px) {
     .mainContent {
       display: flex;
-      gap: 80px;
+      flex-direction: column;
+    }
+    .headerInfo {
+      display: flex;
+      justify-content: space-between;
+    }
+    #card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      flex-wrap: wrap;
+      gap: 0.7rem;
     }
   }
+
   .mainContent {
     #showImgContent {
       width: 100%;
       flex: 1;
       #card {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 0.6rem;
+        /* display: flex;
+        
+        justify-content: space-between; */
 
         #info {
           display: flex;
@@ -84,7 +103,7 @@
       }
       .newCard {
         max-width: 100%;
-        width: 390px;
+        /* width: 390px; */
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -120,76 +139,154 @@
         text-overflow: ellipsis; /* 넘치는 부분에 ... 표시 */
       }
     }
-    #addContent {
-      display: flex;
-      flex-direction: column;
-
-      height: 500px;
-      padding: 18px 15px;
-      gap: 12px;
-      border-radius: 13px;
-      border: 1px solid #d4d3d3;
-      opacity: 0px;
-
-      .addTitle {
-        font-size: 18px;
-        font-weight: 500;
-      }
-      .subTitle {
-        font-size: 15px;
-      }
-      .feelingBtn {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        place-content: end center;
-        row-gap: 10px;
-        column-gap: 10px;
-
-        margin-bottom: 15px;
-      }
-      .titleContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        margin-bottom: 15px;
-        p {
-          font-size: 15px;
-        }
-        #titleContent {
-          border: 1px solid #d4d3d3;
-          border-radius: 8px;
-          padding: 8px 5px;
-          width: 100%;
-        }
-      }
-      .contentContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        margin-bottom: 20px;
-        p {
-          font-size: 15px;
-        }
-        #contentContainer {
-          width: 100%;
-          border: 1px solid #d4d3d3;
-          border-radius: 8px;
-          padding: 8px 5px;
-          resize: none;
-          overflow: auto;
-          height: 150px;
-        }
-      }
-      #registerBtn {
-        background-color: #c7c7c7;
-        border: none;
-        border-radius: 8px;
-        padding: 8px 10px;
-        color: white;
-      }
-    }
   }
 }
+.closeModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+}
+
+.closeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 350px;
+  left: calc(50% - 350px / 2);
+  height: 150px;
+  top: calc(50% - 150px / 2);
+  padding: 18px 15px;
+  border-radius: 24px;
+  border: 1px solid #d4d3d3;
+  background-color: #f2f2f2;
+}
+.title {
+  margin: 10px 0;
+  font-weight: 600;
+}
+.completeModal {
+  margin-bottom: 0.9rem;
+  color: #484444;
+}
+.closeBtn {
+  width: 100%;
+  color: white;
+  background-color: black;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#writeModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.background {
+  width: 100vw; /* 화면 전체 너비 */
+  height: 100vh; /* 화면 전체 높이 */
+  background-color: rgba(120, 116, 116, 0.5);
+  opacity: 90%;
+}
+.background1 {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(120, 116, 116, 0.5);
+  opacity: 0.9;
+}
+#addContent {
+  background-color: #f2f2f2;
+  z-index: 50;
+  position: absolute;
+  width: 540px;
+  left: calc(50% - 540px / 2);
+
+  display: flex;
+  flex-direction: column;
+
+  height: 450px;
+  top: calc(50% - 450px / 2);
+  padding: 18px 15px;
+  border-radius: 24px;
+  border: 1px solid #d4d3d3;
+}
+
+.addTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.subTitle {
+  font-size: 15px;
+  margin-bottom: 0.7rem;
+}
+.feelingBtn {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  place-content: end center;
+
+  margin-bottom: 1rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 1rem;
+  p {
+    font-size: 13px;
+  }
+  #titleContent {
+    border: 1px solid #d4d3d3;
+    border-radius: 0.7rem;
+    padding: 8px;
+    width: 100%;
+  }
+}
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 1rem;
+  p {
+    font-size: 13px;
+  }
+  #contentContainer {
+    width: 100%;
+    border: 1px solid #d4d3d3;
+    border-radius: 0.7rem;
+    padding: 8px;
+    resize: none;
+    overflow: auto;
+    height: 150px;
+  }
+}
+.btns {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  button {
+    border-radius: 0.7rem;
+    padding: 10px 20px;
+  }
+}
+#registerBtn {
+  background-color: #c7c7c7;
+  color: white;
+  border: none;
+}
+#cancelBtn {
+  background-color: #ffffff;
+  color: #000;
+  border: 1px solid #000;
+  margin-right: 10px;
+}
+
 .footer {
   margin-top: 30px;
   padding: 18px 15px;
@@ -205,14 +302,12 @@
 
 .filter {
   margin-bottom: 30px;
-  position: sticky;
-  top: 60px;
+  /* position: sticky;
+  top: 60px; */
   #filterBtn {
     border: 1px solid #c7c7c7;
     border-radius: 4px;
     padding: 5px;
-    display: flex;
-    justify-content: space-between;
   }
 }
 
@@ -221,7 +316,7 @@
 }
 
 .newCard:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
   opacity: 0.8;
 }
 
@@ -268,10 +363,6 @@
     max-width: calc(50% - 10px);
     /* max-width: 290px; */
   }
-  #addContent .feelingBtn {
-    grid-template-columns: repeat(2, 1fr);
-    place-content: end center;
-  }
 }
 /* 모바일 환경 */
 /* 1200px 이하에서 레이아웃 변경 */
@@ -291,6 +382,11 @@
   #addContent {
     margin-bottom: 20px;
     max-width: 100%;
+  }
+  #card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
   }
   .newCard {
     display: grid;
