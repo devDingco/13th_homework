@@ -70,6 +70,7 @@ const updateButtonPressed = () => {
 
 const deleteButtonPressed = () => {
     document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: block;"
+    document.body.style.overflow = "hidden"
     window.scrollTo({top:0, behavior: "smooth"})
 }
 
@@ -92,6 +93,7 @@ const textCopyButtonPressed = () => {
 
 const deleteCancelButtonPressed = () => {
     document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: none;"
+    document.body.style.overflow = "auto"
 }
 
 const deleteOkButtonPressed = () => {

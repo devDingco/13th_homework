@@ -212,12 +212,14 @@ const topScrollFloatingButtonTapped = () => {
 const presentModal = () => {
     window.scrollTo({top:0, behavior: "smooth"})
     document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
+    document.body.style.overflow = "hidden"
 }
 
 const dismiss = () => {
     document.getElementById("HTML_write_diary_success_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+    document.body.style.overflow = "auto"
 }
 
 // Event Listener
