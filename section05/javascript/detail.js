@@ -68,3 +68,12 @@ const deleteItem = () => {
     location.replace('./index.html');
   }
 };
+
+const copyContent = () => {
+  const pattern = /<[^>]*>?/g;
+  const content = document.querySelector('.detail-content-text').innerHTML.replace(pattern, '');
+
+  console.log(content);
+
+  navigator.clipboard.writeText(content);
+};
