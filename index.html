@@ -1,124 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="kr">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>다이어리 만들기</title>
     <link rel="stylesheet" href="./css/index.css" />
-    <script src="./javascript/index.js"></script>
-  </head>
-  <body>
-    <div class="CSS_레이아웃">
-      <!--헤더-->
-      <div class="CSS_헤더">
-        <div>민지의 다이어리</div>
-      </div>
-      <img class="CSS_배너이미지" src="./assets/images/banner.png" />
-
-      <!--내비게이션-->
-      <div class="CSS_탭">
-        <div class="CSS_클릭된탭">일기보관함</div>
-        <div class="CSS_클릭되지않은탭">사진보관함</div>
-      </div>
-
-
-
-      <div class="CSS_메인">
-
-      <div class="CSS_필터_영역_배경">
-        <select class="CSS_필터" onchange="JS_필터링기능(event)">
-          <option selected>전체</option>
-          <option value="HTML_행복선택">행복해요</option>
-          <option value="HTML_슬픔선택">슬퍼요</option>
-          <option value="HTML_놀람선택">놀랐어요</option>
-          <option value="HTML_화남선택">화나요</option>
-          <option value="HTML_기타선택">기타</option>
-        </select>
-      </div>
-
-
-      <div class="CSS_메인상자">
-        <!--일기 보여주는 곳-->
-        <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
-      <!--필터-->
-
-        <!--등록 상자-->
+    <script src="./javascript/index.js" defer></script>
+</head>
+<body>
+    <!-- 모달 그룹 -->
+    <div id="HTML_모달그룹" class="CSS_모달그룹">
+        <div class="CSS_모달배경" onclick="JS_모달닫기기능()"></div>
         <div class="CSS_등록상자">
-          <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+            <div class="CSS_등록상자_제목">📍일기 쓰기</div>
             <div class="CSS_라디오그룹">
-              <div class="CSS_라디오버튼">
-                <input
-                  type="radio"
-                  name="HTML_기분선택버튼"
-                  value="행복"
-                  checked
-                />
-                <div>행복해요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
-                <div>슬퍼요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                <input type="radio" name="HTML_기분선택버튼" value="놀람" />
-                <div>놀랐어요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                <input type="radio" name="HTML_기분선택버튼" value="화남" />
-                <div>화나요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                <input type="radio" name="HTML_기분선택버튼" value="기타" />
-                <div>기타</div>
-              </div>
+                <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="행복" checked />
+                    <div>행복해요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                    <div>슬퍼요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                    <div>놀랐어요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                    <div>화나요</div>
+                </div>
+                <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                    <div>기타</div>
+                </div>
             </div>
             <div class="CSS_일기입력상자">
-              <div class="CSS_일기쓰기">
-                <div>제목</div>
-                <input
-                  type="text"
-                  id="HTML_제목입력창"
-                  placeholder="제목을 입력해 주세요."
-                />
-              </div>
-              <div class="CSS_일기쓰기">
-                <div>내용</div>
-                <textarea
-                  id="HTML_내용입력창"
-                  rows="5"
-                  placeholder="내용을 입력해 주세요."
-                ></textarea>
-              </div>
+                <div class="CSS_일기쓰기">
+                    <div>제목</div>
+                    <input type="text" id="HTML_제목입력창" placeholder="제목을 입력해 주세요." />
+                </div>
+                <div class="CSS_일기쓰기">
+                    <div>내용</div>
+                    <textarea id="HTML_내용입력창" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+                </div>
             </div>
-            <div>
-              <button class="CSS_일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
-                등록하기
-              </button>
+            <div class="CSS_일기쓰기버튼모음">
+                <button class="CSS_일기쓰기_등록버튼" onclick="JS_모달열기기능('HTML_등록완료모달그룹'); JS_글쓰기기능();">등록하기</button>
+                <button class="CSS_일기쓰기_닫기버튼" onclick="JS_모달열기기능('HTML_취소모달그룹')">닫기</button>
             </div>
+        </div>
+    </div>
+
+    <!-- 등록완료모달그룹 -->
+    <div id="HTML_등록완료모달그룹" class="CSS_모달그룹">
+      <div  class="CSS_모달배경"  onclick="JS_모달닫기기능('HTML_등록완료모달그룹')">
+      </div>
+      <div class="CSS_일기등록완료모달">
+        <div class="CSS_모달안내말">
+          <div class="CSS_모달안내말_상단">일기 등록 완료</div>
+          <div class="CSS_모달안내말_하단">등록이 완료 되었습니다.</div>
+          <button class="일기등록모달확인버튼" onclick="JS_모달다끄기기능(); JS_등록완료모달끄기기능();">확인</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- 취소모달그룹 -->
+    <div id="HTML_취소모달그룹" class="CSS_모달그룹">
+      <div  class="CSS_모달배경"  onclick="JS_모달닫기기능('HTML_취소모달그룹')">
+      </div>
+        <div class="CSS_일기등록완료모달">
+          <div class="CSS_모달안내말">
+            <div class="CSS_모달안내말_상단">일기 등록 취소</div>
+            <div class="CSS_모달안내말_하단">일기 등록을 취소 하시겠어요?</div>
+          </div>
+          <div class="CSS_계속취소버튼그룹">
+            <button class="CSS_일기등록모달계속버튼" onclick="JS_취소모달끄기기능()">계속 작성</button>
+            <button class="CSS_일기등록모달취소버튼" onclick="JS_모달다끄기기능(); JS_취소모달끄기기능();">등록 취소</button>      
           </div>
         </div>
-        
-
-
-      </div>
-    </div>
-      <!--플로팅버튼-->
-      <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
-        <img
-          class="CSS_플로팅이미지"
-          src="./assets/images/floatingButton.png"
-          onclick="JS_스크롤위로기능()"
-        />
-      </button>
     </div>
 
-    <!--푸터-->
-    <div id="HTML_푸터" class="CSS_푸터_영역">
-      <div class="CSS_푸터">
-        <div class="CSS_푸터_제목">민지의 다이어리</div>
-        <p class="CSS_푸터_대표">대표 : {name}</p>
-        <p class="CSS_푸터_Copyright">Copyright © 2024.{name} Co., Ltd.</p>
-      </div>
+    <!-- 삭제버튼 누를시에 재 확인 물어보는 모달그룹  -->
+
+
+
+    <!-- 페이지 내용 -->
+    <div class="CSS_레이아웃">
+        <!-- 헤더 -->
+        <div class="CSS_헤더">
+            <div>민지의 다이어리</div>
+        </div>
+        <img class="CSS_배너이미지" src="./assets/images/banner.png" />
+
+        <!-- 내비게이션 -->
+        <div class="CSS_탭">
+            <div class="CSS_클릭된탭">일기보관함</div>
+            <div class="CSS_클릭되지않은탭">사진보관함</div>
+        </div>
+
+        <div class="CSS_메인">
+            <div class="CSS_필터랑모달묶은그룹">
+                <div class="CSS_필터_영역_배경">
+                    <select class="CSS_필터" onchange="JS_필터링기능(event)">
+                        <option selected>전체</option>
+                        <option value="HTML_행복선택">행복해요</option>
+                        <option value="HTML_슬픔선택">슬퍼요</option>
+                        <option value="HTML_놀람선택">놀랐어요</option>
+                        <option value="HTML_화남선택">화나요</option>
+                        <option value="HTML_기타선택">기타</option>
+                    </select>
+                </div>
+                <button class="CSS_일기쓰기모달버튼" onclick="JS_모달열기기능('HTML_모달그룹')">+ 일기쓰기</button>
+            </div>
+
+            <div class="CSS_메인상자">
+                <!-- 일기 보여주는 곳 -->
+                <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
+
+                <!-- 등록 상자 -->
+                <!-- 여기에 필요한 추가 콘텐츠를 추가하세요 -->
+            </div>
+        </div>
+
+        <!-- 플로팅 버튼 -->
+        <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
+            <img class="CSS_플로팅이미지" src="./assets/images/floatingButton.png" onclick="JS_스크롤위로기능()" />
+        </button>
+
+        <!-- 푸터 -->
+        <div id="HTML_푸터" class="CSS_푸터_영역">
+            <div class="CSS_푸터">
+                <div class="CSS_푸터_제목">민지의 다이어리</div>
+                <p class="CSS_푸터_대표">대표 : {name}</p>
+                <p class="CSS_푸터_Copyright">Copyright © 2024. {name} Co., Ltd.</p>
+            </div>
+        </div>
     </div>
-  </body>
+</body>
 </html>
