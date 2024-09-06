@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable";
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    margin: 0 20px 40px;
+  }
+  
+  /* 헤더 */
+  .header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .diaryEdit_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+  
+  /* 기분 선택 */
+  .CSS_기분선택 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .CSS_기분선택_타이틀 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #000;
+  }
+  
+  .CSS_라디오그룹 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+  }
+  
+  .CSS_라디오버튼 {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 일기 인풋 */
+  .edit_wrapper {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .edit_content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .edit_label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+  }
+  
+  #edit_diaryTitle,
+  #edit_diaryText {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+  }
+  
+  /* 수정 버튼 영역 */
+  .button_wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .button {
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    cursor: pointer;
+  }
+  
+  .cancelBtn {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #1c1c1c;
+  }
+  
+  .editBtn {
+    background-color: #000;
+    color: #f2f2f2;
+  }
+  
+  .editBtn:hover {
+    transform: skew(-10deg, 0deg);
+  }
