@@ -44,10 +44,11 @@ const JS_삭제버튼추가 = () => {
         삭제버튼.style.fontSize = "16px";
         삭제버튼.style.cursor = "pointer";
 
-        삭제버튼.addEventListener("click", () => {
+        삭제버튼.addEventListener("click", (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            
           이미지요소.remove();
-          event.stopPropagation();
-
           alert("삭제되었습니다!")
            
         });
@@ -61,41 +62,40 @@ const JS_삭제버튼추가 = () => {
 };
 
   const JS_일기그리기기능 = () => {
-    // 1. 스토리지에 저장된 일기목록 가져오기
-    const 스토리지에저장된일기목록 =
-      window.localStorage.getItem("민지의일기목록") ?? "[]";
-    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+    // 1. 스토리지에 저장된 diaryList 가져오기
+    const storageList = window.localStorage.getItem("민지의일기목록") ?? "[]";
+    const diaryList = JSON.parse(storageList);
   
-    // 2. 일기목록 화면에 새롭게 전체 그리기
-    const HTML_새로운일기도화지 = 일기목록
+    // 2. diaryList 화면에 새롭게 전체 그리기
+    const HTML_새로운일기도화지 = diaryList
       .map(
         (el, index) => `
-          <a href="./detail.html?number=${index}">
+          <a href="/homework/section04/04-detail.html?number=${index}">
             <div class="CSS_일기">
                 <div class="CSS_일기사진">
                   ${
                     el.기분 === "행복"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/happiness.png" alt="행복" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/happiness.png" alt="행복" />'
                       : ""
                   }
                   ${
                     el.기분 === "슬픔"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/sadness.png" alt="슬픔" />'
                       : ""
                   }
                   ${
                     el.기분 === "놀람"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/surprise.png" alt="놀람" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/surprise.png" alt="놀람" />'
                       : ""
                   }
                   ${
                     el.기분 === "화남"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/angry.png" alt="화남" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/angry.png" alt="화남" />'
                       : ""
                   }
                   ${
                     el.기분 === "기타"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/um.png" alt="기타" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/um.png" alt="기타" />'
                       : ""
                   }
                 </div>
@@ -125,9 +125,9 @@ const JS_삭제버튼추가 = () => {
                       ? `<div class="CSS_기분 CSS_기타">기타</div>`
                       : ""
                   }
-                  <div class="CSS_날짜">${el.작성일}</div>
+                  <div class="CSS_날짜">${el.content}</div>
                 </div>
-                <div class="CSS_일기제목"> ${el.제목}</div>
+                <div class="CSS_일기제목"> ${el.title}</div>
             </div>
           </a>
     `
@@ -141,7 +141,7 @@ const JS_삭제버튼추가 = () => {
 
 
   
-  const 일기목록 = [];
+  const diaryList = [];
   
   const JS_글쓰기기능 = () => {
     // 0. 현재 날짜 가져오기
@@ -165,66 +165,72 @@ const JS_삭제버튼추가 = () => {
     });
   
     // 2. 일기목록에 일기 추가하기
-    const 일기담는통 = {
-      제목: 제목담는통,
-      내용: 내용담는통,
+    const diaryContain = {
+      title: 제목담는통,
+      content: 내용담는통,
       기분: 기분담는통,
-      작성일: 날짜담는통,
+      writing: 날짜담는통,
     };
   
-    const 스토리지에저장된일기목록 =
-      window.localStorage.getItem("민지의일기목록") ?? "[]";
-    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-    일기목록.push(일기담는통);
-    window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
-  
+    const storageList = window.localStorage.getItem("민지의일기목록") ?? "[]";
+    const diaryList = JSON.parse(storageList);
+
+    diaryList.push(diaryContain);
+    window.localStorage.setItem("민지의일기목록", JSON.stringify(diaryList));
+    
+    const diaryNumber = diaryList.length - 1;
+
+    window.location.href = `/homework/section04/04-detail.html?number=${diaryNumber}`;
+
     JS_일기그리기기능();
+
+   
   };
   
   const JS_글보기기능 = (일기번호받는통) => {
-    const 일기담는통 = 일기목록[일기번호받는통];
-    const 제목담는통 = 일기담는통.제목;
-    const 내용담는통 = 일기담는통.내용;
+    const diaryContain = diaryList[일기번호받는통];
+    const 제목담는통 = diaryContain.title;
+    const 내용담는통 = diaryContain.content;
   
     alert(`
-      제목: ${제목담는통}
-      내용: ${내용담는통}       
+      title: ${제목담는통}
+      content: ${내용담는통}       
     `);
   
-    location.href = `./detail.html?일기번호=${일기번호받는통}`;
+    window.location.href = `/homework/section04/04-detail.html?diaryNumber=${일기번호받는통}`;
   };
   
   const JS_필터링기능 = (event) => {
     const 선택한내용 = event.target.value;
   
-    const 스토리지에저장된일기목록 =
-      window.localStorage.getItem("민지의일기목록") ?? "[]";
-    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+    const storageList = window.localStorage.getItem("민지의일기목록") ?? "[]";
+    const diaryList = JSON.parse(storageList);
+
     let 필터링된일기목록;
   
     switch (선택한내용) {
       case "HTML_행복선택": {
-        필터링된일기목록 = 일기목록.filter((el) => el.기분 === "행복");
+        필터링된일기목록 = diaryList.filter((el) => el.기분 === "행복");
         break;
       }
       case "HTML_슬픔선택": {
-        필터링된일기목록 = 일기목록.filter((el) => el.기분 === "슬픔");
+        필터링된일기목록 = diaryList.filter((el) => el.기분 === "슬픔");
         break;
       }
       case "HTML_놀람선택": {
-        필터링된일기목록 = 일기목록.filter((el) => el.기분 === "놀람");
+        필터링된일기목록 = diaryList.filter((el) => el.기분 === "놀람");
         break;
       }
       case "HTML_화남선택": {
-        필터링된일기목록 = 일기목록.filter((el) => el.기분 === "화남");
+        필터링된일기목록 = diaryList.filter((el) => el.기분 === "화남");
         break;
       }
       case "HTML_기타선택": {
-        필터링된일기목록 = 일기목록.filter((el) => el.기분 === "기타");
+        필터링된일기목록 = diaryList.filter((el) => el.기분 === "기타");
         break;
       }
       default: {
-        필터링된일기목록 = 일기목록;
+        필터링된일기목록 = diaryList;
         break;
       }
     }
@@ -232,32 +238,32 @@ const JS_삭제버튼추가 = () => {
     const HTML_새로운일기도화지 = 필터링된일기목록
       .map(
         (el, index) => `
-          <a href="./detail.html?number=${index}">
+          <a href="/homework/section04/04-detail.html?number=${index}">
             <div class="CSS_일기">
                 <div class="CSS_일기사진">
                   ${
                     el.기분 === "행복"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/happiness.png" alt="행복" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/happiness.png" alt="행복" />'
                       : ""
                   }
                   ${
                     el.기분 === "슬픔"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/sadness.png" alt="슬픔" />'
                       : ""
                   }
                   ${
                     el.기분 === "놀람"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/surprise.png" alt="놀람" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/surprise.png" alt="놀람" />'
                       : ""
                   }
                   ${
                     el.기분 === "화남"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/angry.png" alt="화남" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/angry.png" alt="화남" />'
                       : ""
                   }
                   ${
                     el.기분 === "기타"
-                      ? '<img class="CSS_기분이미지" src="./assets/images/um.png" alt="기타" />'
+                      ? '<img class="CSS_기분이미지" src="/homework/assets/images/um.png" alt="기타" />'
                       : ""
                   }
                 </div>
@@ -287,9 +293,9 @@ const JS_삭제버튼추가 = () => {
                       ? `<div class="CSS_기분 CSS_기타">기타</div>`
                       : ""
                   }
-                  <div class="CSS_날짜">${el.작성일}</div>
+                  <div class="CSS_날짜">${el.writing}</div>
                 </div>
-                <div class="CSS_일기제목"> ${el.제목}</div>
+                <div class="CSS_일기제목"> ${el.title}</div>
             </div>
           </a>
         `
