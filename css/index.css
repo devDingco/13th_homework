@@ -32,7 +32,7 @@ main {
     width: 100vw;
     height: 78rem;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         display: flex;
         flex-direction: column;
     }
@@ -41,7 +41,7 @@ main {
 footer {
     width: 100vw;
     height: 7rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         position: fixed;
         bottom: 0;
     }
@@ -168,38 +168,59 @@ div.footer > p.content
 div.flexcontainer {
     display: flex;
     flex-wrap: nowrap;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         flex-direction: column-reverse;
     }
 }
 
 div.flexcontainer > div.flexchild-left {
-    width: 60vw;
+    width: max(60vw, 100%);
+    padding-right: 15vw;
     height: 73rem;
     padding-left: 15vw;
     /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
     /* background: yellow; */
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 100%;
         margin: auto;
         padding-left: 0;
         height: fit-content;
+        anchor-name: --list-anchor;
     }
 }
 
+div.curtain {
+    display: none;
+}
+
 div.flexcontainer > div.flexchild-right {
-    width: 40vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    background-color: white;
+    border: 1px red solid;
+    border-radius: 1rem;
+    box-shadow: 1rem 1rem 30rem black;
+    width : 30vw;
+    padding: 1rem;
+    padding-bottom: 4rem;
+    display: none;
+
+
+    /* width: 40vw;
     height: 73rem;
     padding-right: 15vw;
     /* border: 1px solid red; */
     /* background: yellowgreen; */
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 70vw;
         margin: auto;
         height: fit-content;
-    }
+    } */
 }
 
 form.diary-util {
@@ -216,11 +237,10 @@ form.diary-util {
     /* height: 55rem; */
     right: 0;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 100%;
         height: fit-content;
         margin-bottom: 6rem;
-        anchor-name: --form-anchor;
     }
 }
 
@@ -234,7 +254,7 @@ form.diary-util > p.title
     margin-bottom: 3rem;
     margin-left: 2rem;
     margin-top: 1rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 50vw;
         margin: auto;
     }
@@ -250,7 +270,7 @@ form.diary-util > p.subtitle, p.text-input-string
     /* background: skyblue; */
     margin-bottom: 2rem;
     margin-left: 2rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 50vw;
         margin: auto;
     }
@@ -265,7 +285,7 @@ form.diary-util > div.flexlist, input.text-input, button.submit
     margin-bottom: 3rem;
     font-weight: 700;
     font-size: min(3rem, 3vmin);
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 50vw;
         margin: auto;
     }
@@ -285,7 +305,7 @@ textarea.text-input
     border: 0.15rem solid var(--lightgray);
     border-radius: 1rem;
     margin-bottom: 1.5rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 50vw;
         margin: auto;
         margin-bottom: 1rem;
@@ -300,7 +320,7 @@ button.submit
     background: var(--gray);
     border: 1rem solid transparent;
     border-radius: 1rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         width: 50vw;
         height: 3rem;
         margin: auto;
@@ -375,6 +395,7 @@ textarea
 
 li.flexchild
 {
+    position: relative;
     width: 20rem;
     height: 27rem;
     padding-top: 1rem;
@@ -384,24 +405,60 @@ li.flexchild
     /* position: sticky; */
 }
 
+li.flexchild > button.listitem-close-btn
+{
+    font-size: 1.5rem;
+    line-height: 0.8rem;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 50%;
+    height: 2ch;
+    width: 2ch;
+    color: gray;
+    border: none;
+    position: relative;
+    z-index: 2;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100%);
+}
+
 select, option
 {
     font-size: max(0.75rem, 0.75vmax);
     background: var(--lightgray);
     width: 5rem;
     border-radius: 1rem;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         font-size: max(1rem, 1vmax);
     }
 }
 
 div.selection-tabview
 {
+    display: flex;
+    justify-content: space-between;
     @media (max-width: 1024px) {
         z-index: 10;
         position: absolute;
         margin-left: 6vw;
-        top: anchor(--form-anchor bottom);
+        bottom: anchor(--list-anchor top);
+    }
+}
+
+button#write-btn
+{
+    background-color: black;
+    color: white;
+    font-size: max(0.75rem, 0.75vmax);
+    border-radius: 1rem;
+    width: 5rem;
+    @media (max-width: 1024px) {
+        z-index: 10;
+        position: absolute;
+        margin-right: 6vw;
+        bottom: anchor(--list-anchor top);
+        font-size: max(1rem, 1vmax);
     }
 }
 
@@ -425,7 +482,7 @@ ul.flexlist
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    @media (max-width: 1000px) {
+    @media (max-width: 1024px) {
         margin: auto;
         width: 70vw;
         height: fit-content;
@@ -472,6 +529,10 @@ li.diary-listitem.flexchild::marker {
 a.anchor-nodeco {
     all: unset;
     cursor: grab;
+    position: absolute;
+    width: 90%;
+    top: 0;
+    z-index: 1;
 }
 
 i.arrow {
