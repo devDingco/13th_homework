@@ -351,6 +351,44 @@ body {
   font-weight: var(--weight-light);
 }
 
+@keyframes opacity {
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 2s ease;
+}
+
+.toast-message {
+  width: 100%;
+  max-width: 760px;
+  min-width: 320px;
+  height: 56px;
+  line-height: 56px;
+  color: white;
+  background-color: black;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  opacity: 0%;
+}
+
+.toast-message.clicked {
+  animation-name: opacity;
+  animation-duration: 2s;
+}
+
 @media (max-width: 900px) {
   .app {
     justify-content: flex-start;

@@ -58,9 +58,6 @@ const deleteItem = () => {
   if (itemNumber !== null) {
     const filteredList = diaryList.filter((_, index) => index !== parseInt(itemNumber));
 
-    console.log(typeof itemNumber);
-    console.log(filteredList);
-
     window.localStorage.setItem('myDiaryList', JSON.stringify(filteredList));
 
     alert('일기가 삭제되었습니다.');
@@ -75,4 +72,6 @@ const copyContent = () => {
   const content = document.querySelector('.detail-content-text').innerHTML.replace(pattern, '').replace(space, '');
 
   navigator.clipboard.writeText(content);
+
+  document.querySelector('.toast-message').classList.add('clicked');
 };
