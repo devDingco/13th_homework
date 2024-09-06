@@ -4,14 +4,21 @@ const paramsObj = Object.fromEntries(urlSearchParams.entries());
 const { idx } = paramsObj;
 
 // 일기 목록 가져오기
-const daiaryList = JSON.parse(localStorage.getItem('dairyList'));
-const el = daiaryList[idx];
+const diaryList = JSON.parse(localStorage.getItem('diaryList'));
+console.log('🚀 ~ diaryList:', diaryList);
+const el = diaryList[idx];
 let { myTitle, myMood, createdAt, myContent, comments } = el;
 
 window.onload = () => {
   initialRendering();
   renderReplyList();
   goToReplyListSmoothly();
+};
+
+const onClickCopy = () => {
+  const text = document.getElementById('section-main').innerText;
+  navigator.clipboard.writeText(text);
+  alert('복사되었습니다!');
 };
 
 const initialRendering = () => {
@@ -60,7 +67,7 @@ const onClickInputButton = () => {
   let inputValue = document.getElementById('회고입력창').value;
   console.log('🚀 ~ onClickInputButton ~ inputValue:', inputValue);
   comments.push(inputValue);
-  localStorage.setItem('dairyList', JSON.stringify(daiaryList));
+  localStorage.setItem('dairyList', JSON.stringify(diaryList));
   // 회고리스트에 렌더링
   renderReplyList();
   // input창 초기화
@@ -82,9 +89,17 @@ const renderMain = () => {
         <div class="section-title">내용</div>
         <div id="section-main"></div>
       </div>
+      <div class="CSS_내용복사영역" onclick="onClickCopy()">
+        <div id="CSS_내용복사아이콘">
+          <img src="./asset/content_copy_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 1.jpg" alt="">
+        </div>
+        <div id="CSS_내용복사문구">
+          <p>내용복사</p>
+        </div>
+      </div>
       <div id="section-footer">
         <div class="delete-btn-area">
-          <button onclick="onClickDeleteButton()" id="delete-btn">삭제</button>
+          <button onclick="JS_모달열기기능('CSS_삭제확인모달그룹')" id="delete-btn">삭제</button>
         </div>
         <div class="modify-btn-area">
           <button onclick="onClickModifyButton()" id="modify-btn">수정</button>
@@ -103,7 +118,20 @@ const renderMain = () => {
   `;
 };
 
-const onClickDeleteButton = () => {};
+const JS_모달열기기능 = (모달종류) => {
+  document.getElementById(모달종류).style = 'display: block;';
+};
+
+const JS_모달닫기기능 = (모달종류) => {
+  document.getElementById(모달종류).style = 'display: none;';
+};
+
+const onClickDeleteButton = () => {
+  alert('삭제되었습니다.');
+  diaryList.splice(idx, 1);
+  localStorage.setItem('diaryList', JSON.stringify(diaryList));
+  window.history.back();
+};
 
 const onClickCancelModifyButton = () => {
   // 원본 body 영역 리렌더링

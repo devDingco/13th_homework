@@ -22,42 +22,28 @@
       </div>
     </div>
 
-    <div class="mood-selection-wrapper">
-      <select id="mood-selection">
-        <option selected="true" disabled="true" value="all">전체</option>
-        <option value="happy">행복해요</option>
-        <option value="sad">슬퍼요</option>
-        <option value="surprised">놀랐어요</option>
-        <option value="upset">화나요</option>
-        <option value="etc">기타</option>
-      </select>
+    <div class="CSS_필터와일기등록버튼">
+      <!-- 기분 선택필터 -->
+      <div class="mood-selection-wrapper">
+        <select id="mood-selection">
+          <option selected="true" disabled="true" value="all">전체</option>
+          <option value="happy">행복해요</option>
+          <option value="sad">슬퍼요</option>
+          <option value="surprised">놀랐어요</option>
+          <option value="upset">화나요</option>
+          <option value="etc">기타</option>
+        </select>
+      </div>
+  
+      <!-- 일기쓰기버튼 -->
+      <div id="HTML_일기등록버튼" onclick="JS_모달열기기능('div__dairy_generator_modal__group')">
+        <div id="HTML_일기등록버튼문구">일기등록</div>
+      </div>
     </div>
 
-    <!-- 웹페이지 중앙부 -->
-    <div class="main">
-      <div id="dairy-list">
-        <a href="/homework/detail.html">
-          <div class="dairy">
-            <!-- mood 사진 -->
-            <div class="mood-img">
-              <img id="mood-face-img" src="./asset/행복해요.jpg" alt="행복한기분" />
-            </div>
-            <img onclick="onClickDeleteButton(event)" id="dairy-delete-btn" src="./asset/close icon.jpg" />
-            <!-- 텍스트상자 -->
-            <div class="daiary-summary-wrapper">
-              <!-- 기분설명 및 날짜 -->
-              <div class="daiary-summary">
-                <div class="mood-행복해요">행복해요</div>
-                <div class="created-at">2024.03.12</div>
-              </div>
-              <!-- 나의 타이틀 -->
-              <div class="my-title">나의 타이틀 한 줄 입니다.</div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 다이어리 생성기 -->
+    <!-- 다이어리 생성기 모달 -->
+    <div id="div__dairy_generator_modal__group">
+      <div id="div__modal_background" onclick="JS_모달닫기기능('div__dairy_generator_modal__group')"></div>
       <div id="dairy-generator">
         <div id="generator-header">📍일기쓰기</div>
         <div id="generator-body">
@@ -83,21 +69,64 @@
           <div id="mood-text-area">
             <div class="mood-textbox">
               <div class="mood-textbox-heading">제목</div>
-              <input class="mood-textbox-input" type="text" placeholder="제목을 입력해 주세요." />
+              <input oninput="JS_등록하기버튼토글()" class="mood-textbox-input" type="text" placeholder="제목을 입력해 주세요." />
             </div>
             <div class="mood-textbox">
               <div class="mood-textbox-heading">내용</div>
-              <input class="mood-textbox-input" type="text" placeholder="내용을 입력해 주세요." />
+              <input oninput="JS_등록하기버튼토글()" class="mood-textbox-input" type="text" placeholder="내용을 입력해 주세요." />
             </div>
           </div>
         </div>
         <!-- 버튼 영역 -->
         <div id="generator-footer">
-          <button onclick="onClickButton()" id="gen-dairy-btn">등록하기</button>
+          <button id="button__gen_dairy__close_btn" onclick="JS_모달닫기기능('div__dairy_generator_modal__group')">닫기</button>
+          <button id="button_gen_dairy__register_btn" disabled  onclick="onClickButton(event);">등록하기</button>
         </div>
       </div>
     </div>
 
+    <!-- 다이어리 등록완료 모달 -->
+    <div id="CSS_등록완료모달그룹">
+      <div id="CSS_등록완료모달배경" onclick="JS_모달모두닫기기능(['CSS_등록완료모달그룹', 'div__dairy_generator_modal__group'])"></div>
+      <div id="CSS_등록완료모달">
+        <div id="CSS_등록완료모달_헤더">
+          <h1>일기 등록 완료</h1>
+          <p>등록이 완료 되었습니다.</p>
+        </div>
+        <div id="CSS_등록완료모달_푸터">
+          <div id="CSS_등록완료모달확인_버튼영역">
+            <button onclick=" JS_모달모두닫기기능(['CSS_등록완료모달그룹', 'div__dairy_generator_modal__group'])">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 웹페이지 중앙부 -->
+    <div class="main">
+      <div id="dairy-list">
+        <a href="/homework/detail.html">
+          <div class="dairy">
+            <!-- mood 사진 -->
+            <div class="mood-img">
+              <img id="mood-face-img" src="./asset/행복해요.jpg" alt="행복한기분" />
+            </div>
+            <img onclick="onClickDeleteButton(event)" id="dairy-delete-btn" src="./asset/close icon.jpg" />
+            <!-- 텍스트상자 -->
+            <div class="daiary-summary-wrapper">
+              <!-- 기분설명 및 날짜 -->
+              <div class="daiary-summary">
+                <div class="mood-행복해요">행복해요</div>
+                <div class="created-at">2024.03.12</div>
+              </div>
+              <!-- 나의 타이틀 -->
+              <div class="my-title">나의 타이틀 한 줄 입니다.</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    
     <!-- 플로팅 버튼 영역 -->
     <div id="topScroller-area">
       <img onclick="onClickTopScroller()" id="topScroller" src="./asset/topscroll fabvicon.jpg" alt="">
@@ -111,5 +140,7 @@
       <div id="저작권">Copyright © 2024. {name} Co., Ltd.</div>
     </div>
   </div>
+
+  
 </body>
 </html>

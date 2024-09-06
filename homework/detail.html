@@ -11,9 +11,25 @@
     <div id="header">
       <div id="header-name">진태의 다이어리</div>
     </div>
-
     <!-- 웹페이지 중앙부 -->
     <div id="main">
+      <!-- 삭제확인모달 -->
+      <div id="CSS_삭제확인모달그룹">
+        <div id="CSS_삭제확인모달배경" onclick="JS_모달닫기기능('CSS_삭제확인모달그룹')"></div>
+        <div id="CSS_삭제확인모달">
+          <div id="CSS_삭제확인모달_헤더">
+            <h1>일기 삭제 확인</h1>
+            <p>삭제 하시겠습니까?</p>
+          </div>
+          <div id="CSS_삭제확인모달_푸터">
+            <div id="CSS_삭제확인모달확인_버튼영역">
+              <button id="CSS_모달삭제버튼" onclick="JS_모달닫기기능('CSS_삭제확인모달그룹'); onClickDeleteButton()">삭제</button>
+              <button id="CSS_모달취소버튼" onclick="JS_모달닫기기능('CSS_삭제확인모달그룹')">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <!-- 타이틀부 -->
       <div id="section-header">
         <div id="title"></div>
@@ -27,10 +43,18 @@
         <div class="section-title">내용</div>
         <div id="section-main"></div>
       </div>
+      <div class="CSS_내용복사영역" onclick="onClickCopy()">
+        <div id="CSS_내용복사아이콘">
+          <img src="./asset/content_copy_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 1.jpg" alt="">
+        </div>
+        <div id="CSS_내용복사문구">
+          <p>내용복사</p>
+        </div>
+      </div>
       <!-- 버튼부 -->
       <div id="section-footer">
         <div class="delete-btn-area">
-          <button onclick="onClickDeleteButton()" id="delete-btn">삭제</button>
+          <button onclick="JS_모달열기기능('CSS_삭제확인모달그룹')" id="delete-btn">삭제</button>
         </div>
         <div class="modify-btn-area">
           <button onclick="onClickModifyButton()" id="modify-btn">수정</button>
