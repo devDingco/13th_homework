@@ -296,8 +296,8 @@ const popupRender = (popupName, content, type) => {
   // content : 팝업창 내용
   // type : 팝업창 타입 "alert" 지정시 alert용 스타일 적용
 
-  // 팝업창 띄워질 때 body 스크롤 막기
-  bodyScrollYOff('hidden');
+  window.scrollTo({ top: 0 }); // 팝업창 띄워질 때 스크롤 상단으로 이동
+  bodyScrollYOff('hidden');  // 팝업창 띄워질 때 body 스크롤 막기
 
   const popupElement = document.createElement("div");
   document.body.appendChild(popupElement);
