@@ -93,13 +93,20 @@ article {
 }
 .article-header-text {
     color: rgba(171, 171, 171, 1);
+    cursor: pointer;
 }
-.select-post {
+.select-post,
+.select-post1 {
     width: 7.5rem;
     height: 2rem;
 }
+.select-post1 {
+    display: none;
+}
+
 .article-header-font {
     font-size: 1rem;
+    cursor: pointer;
 }
 .article-daily {
     display: flex;
@@ -114,14 +121,28 @@ article {
 .article-main {
     width: 73rem;
     display: flex;
+
     justify-content: space-between;
     position: relative;
+}
+.article-picture-component {
+    width: 73rem;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .post {
     display: flex;
     flex-wrap: wrap;
     gap: 1.25rem;
+}
+.dog-img {
+    object-fit: cover;
+    border-radius: 24px;
+    width: 640px;
+    aspect-ratio: 1/1;
 }
 
 .post-container {
@@ -441,6 +462,10 @@ footer {
         width: 120px;
         order: 2;
     }
+    .dog-img {
+        min-width: 360px;
+        width: 100%;
+    }
 
     .daily {
         order: 1;
@@ -460,6 +485,9 @@ footer {
         font-size: 0.75rem;
         width: 150px;
         max-width: 150px;
+    }
+    .article-picture-component {
+        width: 100%;
     }
     footer {
         display: none;

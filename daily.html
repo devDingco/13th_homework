@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./style/dailyStyle.css" />
         <script>
-            window.onload = function () {
+            window.onload = async function () {
                 const images = document.querySelectorAll("img.post-img");
 
                 if (window.innerWidth < 400) {
@@ -27,7 +27,22 @@
                         img.src = url.href;
                     });
                 }
+
+                const res = await fetch(
+                    "https://dog.ceo/api/breeds/image/random/10"
+                ).then((res) => res.json());
+
+                document.getElementById("article-picture-component").innerHTML =
+                    res.message
+                        .map(
+                            (img, idx) => `
+                    <div>
+                        <img src=${img} class="dog-img" id="dog-img" />
+                    </div>`
+                        )
+                        .join("");
             };
+
             document.addEventListener("DOMContentLoaded", (event) => {
                 const initialDailyArray = [
                     {
@@ -168,8 +183,18 @@
             <article>
                 <div class="article-header">
                     <div class="article-header-container">
-                        <div class="article-header-font">일기 보관함</div>
-                        <div class="article-header-text article-header-font">
+                        <div
+                            class="article-header-font"
+                            onclick="onClickChangePost(event)"
+                            id="article-daily"
+                        >
+                            일기 보관함
+                        </div>
+                        <div
+                            class="article-header-text"
+                            id="article-picture"
+                            onclick="onClickChangePost(event)"
+                        >
                             사진 보관함
                         </div>
                         <select
@@ -185,13 +210,23 @@
                             <option value="angry">화나요</option>
                             <option value="etc">기타</option>
                         </select>
+                        <select
+                            name=""
+                            id="select-post1"
+                            class="select-post1"
+                            onchange="onChangeRatio(event)"
+                        >
+                            <option value="default">기본</option>
+                            <option value="row">가로형</option>
+                            <option value="col">세로형</option>
+                        </select>
                     </div>
                     <div class="article-daily" onclick="onClickModal()">
                         <div class="">+</div>
                         <div class="">일기 쓰기</div>
                     </div>
                 </div>
-                <div class="article-main">
+                <div id="article-main" class="article-main">
                     <div id="post" class="post"></div>
                     <div class="floating-button" onclick="onClickUp()">
                         <svg
@@ -208,6 +243,10 @@
                         </svg>
                     </div>
                 </div>
+                <div
+                    id="article-picture-component"
+                    class="article-picture-component"
+                ></div>
             </article>
         </main>
         <footer>
@@ -362,4 +401,6 @@
     <script src="./utils/onClickCancelRegister.js"></script>
     <script src="./utils/onClickModalBlank.js"></script>
     <script src="./utils/onKeydownEsc.js"></script>
+    <script src="./utils/onClickChangePost.js"></script>
+    <script src="./utils/onChangeRatio.js"></script>
 </html>
