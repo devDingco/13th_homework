@@ -12,7 +12,7 @@ const diaryContent = currentDiary.content
 const time = new Date().toISOString().split("T")[0].replace(/-/g, ". ")
 
 makeDiaryDetail();
-makeDiaryComment(getDiary)
+makeDiaryComment()
 
 function makeDiaryDetail() {
     const moodIndex = {
@@ -27,7 +27,7 @@ function makeDiaryDetail() {
         const diaryDetail = document.querySelector(".container__body")
         diaryDetail.innerHTML =
 `
-<div class="container__content">
+<div class="container__body">
             <div class="body__title">${diaryTitle}</div>
             <div class="body__status">
                 <div class="status__mood">
@@ -54,8 +54,8 @@ function makeDiaryDetail() {
         </div>
 `
 
-        document.querySelector(".btn__edit").addEventListener('click', editDiary)
         document.querySelector(".btn__delete").addEventListener('click', deleteDiary)
+        document.querySelector(".btn__edit").addEventListener('click', editDiary)
 
         switch(diaryMood) {
             case "happy": {
@@ -95,6 +95,7 @@ function editDiary () {
     document.querySelector(".container__body").hidden = true
     document.querySelector(".container__comment").hidden = true
     document.querySelector(".container__edit").hidden = false
+    document.querySelector(".header__text").innerText = "일기 수정"
     
     switch(currentDiary.mood) {
         case "happy": {
@@ -171,13 +172,22 @@ function submitComment () {
     let diaryWithComment = getDiary
     diaryWithComment[indexNum].comment.push(diaryComment)
 
+    console.log ( diaryWithComment )
+    console.log ( typeof( diaryWithComment ) )
+
+    console.log ( diaryWithComment[indexNum] )
+    console.log ( typeof( diaryWithComment[indexNum] ) )
+
+    console.log ( diaryWithComment[indexNum].comment )
+    console.log ( typeof( diaryWithComment[indexNum].comment ) )
+
     localStorage.setItem("diaryData", JSON.stringify(diaryWithComment))
     document.querySelector(".input__text").value = ""
 
     makeDiaryComment(diaryWithComment)
 };
 
-function makeDiaryComment (diary) {
+function makeDiaryComment () {
     if ( currentDiary.comment[0] !== undefined ) {
         const currentDiaryComment = currentDiary.comment
 
