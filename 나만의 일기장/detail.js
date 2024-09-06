@@ -54,6 +54,7 @@ const renderDiaryDetail = (diary) => {
     </div>
     <h4>내용</h4>
     <div class="detailContent">${diary.content}</div>
+    <div class = "clipContainer"><button id = "clipboard" onclick = "clipboard()"><img class = "copyImg" src = "./images/copy_icon.png"/>내용 복사</button></div>
     <div class="firstBtn">
       <button class="prevBtn btn" onclick="prev()">이전</button>
       <button class="changeBtn btn" onclick="editDiary()">수정</button>
@@ -82,13 +83,41 @@ const renderDiaryDetail = (diary) => {
   renderComments();
 };
 
+//toast
+const copy = document.getElementById('clipboard');
+const toastMsg = document.createElement('div');
+toastMsg.className = 'toastMessage';
+toastMsg.innerText = '내용이 복사되었습니다.';
+document.body.appendChild(toastMsg);
+function toastOn() {
+  toastMsg.classList.add('active');
+  setTimeout(function () {
+    toastMsg.classList.remove('active');
+  }, 1000);
+}
+window.onload = () => {
+  const copy = document.getElementById('clipboard');
+  if (copy) {
+    copy.addEventListener('click', function () {
+      // console.log('toast 제대로');
+      toastOn();
+    });
+  }
+};
+
+//클립보드 복사
+const clipboard = () => {
+  const copyContent = document.querySelector('.detailContent').innerText;
+  navigator.clipboard.writeText(copyContent);
+};
+
 const deleteFunc = () => {
   const diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
   console.log(diaryList);
   if (confirm('해당 일기를 삭제하시겠습니까?')) {
     diaryList.splice(diaryIndex, 1); //해당 일기 삭제
     localStorage.setItem('diaries', JSON.stringify(diaryList));
-    window.location.href = `./myDiary(2).html`;
+    window.location.href = `./myDiary.html`;
   }
 };
 

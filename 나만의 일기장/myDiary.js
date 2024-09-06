@@ -54,7 +54,7 @@ const registerDiary = () => {
   diaryList.push(contentList);
   localStorage.setItem('diaries', JSON.stringify(diaryList));
 
-  alert('일기가 등록되었습니다!');
+  // alert('일기가 등록되었습니다!');
 
   diaryTitle.value = '';
   diaryContent.value = '';
@@ -182,26 +182,26 @@ const btnColorFunc = () => {
 };
 
 //모바일 환경되면 filter를 가운데로 이동
-function relocateFilter() {
-  const filter = document.querySelector('.filter');
-  const showImgContent = document.querySelector('#showImgContent');
-  const addContent = document.querySelector('#addContent');
+// function relocateFilter() {
+//   const filter = document.querySelector('.filter');
+//   const showImgContent = document.querySelector('#showImgContent');
+//   const addContent = document.querySelector('#addContent');
 
-  if (window.innerWidth <= 1200) {
-    if (filter.nextElementSibling !== addContent) {
-      showImgContent.parentNode.insertBefore(filter, addContent);
-    }
-  } else {
-    const container = document.querySelector('.container');
-    if (filter.nextElementSibling !== showImgContent) {
-      container.insertBefore(filter, document.querySelector('.mainContent'));
-    }
-  }
-}
+//   if (window.innerWidth <= 1200) {
+//     if (filter.nextElementSibling !== addContent) {
+//       showImgContent.parentNode.insertBefore(filter, addContent);
+//     }
+//   } else {
+//     const container = document.querySelector('.container');
+//     if (filter.nextElementSibling !== showImgContent) {
+//       container.insertBefore(filter, document.querySelector('.mainContent'));
+//     }
+//   }
+// }
 
 // 초기 실행 및 윈도우 크기 변경 시 이벤트 등록
-window.addEventListener('resize', relocateFilter);
-window.addEventListener('DOMContentLoaded', relocateFilter);
+// window.addEventListener('resize', relocateFilter);
+// window.addEventListener('DOMContentLoaded', relocateFilter);
 
 //플로팅 버튼 맨 위일땐 사라지게 하기
 const disappearBtn = () => {
@@ -214,3 +214,29 @@ const disappearBtn = () => {
   }
 };
 window.addEventListener('scroll', disappearBtn);
+
+// register하면서 이중모달도 열리게 하기
+const handleSubmit = (event) => {
+  console.log('함수');
+  event.preventDefault();
+  registerDiary();
+  openModal('complete');
+};
+
+//이중모달에서 확인버튼 나오면 뒤에것도 한번에 없애기
+const handleClose = (event) => {
+  console.log('두번째');
+  event.preventDefault();
+  closeModal('complete');
+  closeModal('writeModal');
+};
+
+//일기쓰기 모달
+const openModal = (kind) => {
+  // console.log('함수');
+  document.getElementById(kind).style.display = 'block';
+};
+
+const closeModal = (kind) => {
+  document.getElementById(kind).style.display = 'none';
+};
