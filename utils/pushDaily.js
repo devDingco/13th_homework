@@ -78,4 +78,17 @@ function pushDaily() {
     dailyArray.push(resultObject);
     localStorage.setItem("dailyArray", JSON.stringify(dailyArray));
     localStorage.setItem("idx", index);
+
+    const modalElement = document.getElementById("modal");
+    const modalSuccessElement = document.getElementById(
+        "modal_success_container"
+    );
+    const bodyElement = document.querySelector("body");
+
+    titleElement.innerText = "";
+    contentElement.innerText = "";
+
+    modalElement.style.display = "none";
+    modalSuccessElement.style.display = "none";
+    bodyElement.style.overflow = "auto";
 }

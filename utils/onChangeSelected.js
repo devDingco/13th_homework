@@ -1,7 +1,6 @@
 function onChangeSelected(event) {
     // event.target.value
     const dailyArray = JSON.parse(localStorage.getItem("dailyArray"));
-    console.log(dailyArray);
 
     const parentElement = document.getElementById("post");
     parentElement.innerHTML = "";
