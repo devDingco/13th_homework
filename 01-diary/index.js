@@ -213,6 +213,16 @@ const presentModal = () => {
     window.scrollTo({top:0, behavior: "smooth"})
     document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
     document.body.style.overflow = "hidden"
+
+    document.getElementById("HTML_write_diary_modal_container").addEventListener("click", (el) => {
+        console.log("HTML_write_diary_modal_container")
+        el.stopPropagation()
+    })
+
+    document.getElementById("HTML_write_diary_cancel_modal_bg").addEventListener("click", (el) => {
+        console.log("HTML_write_diary_cancel_modal_bg")
+        el.stopPropagation()
+    })
 }
 
 const dismiss = () => {

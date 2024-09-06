@@ -72,6 +72,10 @@ const deleteButtonPressed = () => {
     document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: block;"
     document.body.style.overflow = "hidden"
     window.scrollTo({top:0, behavior: "smooth"})
+
+    document.getElementById("HTML_write_diary_delete_select_modal_container").addEventListener("click", (el) => {
+        el.stopPropagation()
+    })
 }
 
 const inputButtonTapped = () => {
@@ -88,16 +92,14 @@ const textCopyButtonPressed = () => {
     window.setTimeout(() => {
         document.getElementById("HTML_toast_message_container").style = "display: none;"
     }, 2000)
-    
 }
 
 const deleteCancelButtonPressed = () => {
-    document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: none;"
-    document.body.style.overflow = "auto"
+    dismiss()
 }
 
 const deleteOkButtonPressed = () => {
-    console.log(`delete_ok: 일기를 삭제했습니다.`)
+    deleteDiary()
     location.href = "../index.html"
 }
 
@@ -105,4 +107,9 @@ const deleteOkButtonPressed = () => {
 const scrollPositionSetting = () => {
     const y = document.getElementById("reminiscence_input_text").offsetTop
     window.scrollTo({top: y, behavior: "smooth"})
+}
+
+const dismiss = () => {
+    document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: none;"
+    document.body.style.overflow = "auto"
 }
