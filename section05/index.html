@@ -52,7 +52,7 @@
               </div>
               <div class="flexbox modal-actions">
                 <button type="button" class="button-cancel" onclick="showModal('#app-modal-cancel')">닫기</button>
-                <button type="button" class="button-register" type="button" onclick="saveDiary()">등록하기</button>
+                <button type="button" class="button-register" type="button" onclick="showModal('#app-modal-ok')">등록하기</button>
               </div>
             </fieldset>
           </form>
@@ -61,12 +61,23 @@
 
       <div class="app-modal" id="app-modal-cancel">
         <div class="modal-floor" onclick="closeModal('#app-modal-cancel', 'nested')"></div>
-        <div class="modal-add-cancel">
+        <div class="modal-add-cancel modal-nested">
           <h2>일기 등록 취소</h2>
           <p>일기 등록을 취소하시겠어요?</p>
           <div class="flexbox modal-actions">
             <button type="button" class="button-keep" onclick="closeModal('#app-modal-cancel', 'nested')">계속 작성</button>
             <button type="button" class="button-add-cancel" onclick="closeModal('.app-modal')">등록 취소</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-modal" id="app-modal-ok">
+        <div class="modal-floor" onclick="closeModal('#app-modal-ok', 'nested')"></div>
+        <div class="modal-add-cancel modal-nested">
+          <h2>일기 등록 완료</h2>
+          <p>등록이 완료되었습니다.</p>
+          <div class="flexbox modal-actions">
+            <button type="button" class="button-ok" onclick="closeModal('#app-modal-ok', 'nested')">확인</button>
           </div>
         </div>
       </div>
