@@ -192,6 +192,7 @@ const JS_필터링기능 = (event) => {
         <a href="./detail.html?number=${index}">
           <div class="CSS_일기">
             <div class="CSS_일기사진">
+            <div>
               <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
               ${
                 el.기분 === "행복"
@@ -218,6 +219,8 @@ const JS_필터링기능 = (event) => {
                   ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
                   : ""
               }
+            </div>
+
             </div>
             <div class="CSS_일기정보">
               <div class="CSS_일기내용">
@@ -280,6 +283,28 @@ function JS_일기삭제기능(event, 일기번호) {
   // 3. 삭제된 일기목록 다시 저장하기
   window.localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
   alert("삭제되었습니다.");
+  // 이부분 얼랏을 지우고 모달 만들어 두고 나오는 식으로 해보기
   // 4. 삭제된 일기목록 화면에 다시 그리기
   JS_일기그리기기능();
+}
+
+
+// 모달 담당하는 함수들
+const JS_모달열기기능 = (모달종류) => {
+  document.getElementById(모달종류).style = "display: block";
+};
+const JS_모달닫기기능 = (모달종류) => {
+  document.getElementById(모달종류).style = "display: none";
+};
+
+const JS_모달다끄기기능 = () => {
+  document.getElementById("HTML_모달그룹").style = "display: none";
+}
+
+const JS_등록완료모달끄기기능 = () => {
+  document.getElementById("HTML_등록완료모달그룹").style = "display: none";
+}
+
+const JS_취소모달끄기기능 = () => {
+  document.getElementById("HTML_취소모달그룹").style = "display: none";
 }
