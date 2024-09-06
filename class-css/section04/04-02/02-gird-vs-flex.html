@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>그리드와 플렉스 비교</title>
+
+    <style>
+        .CSS_결제수단그룹1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 400px;
+            background-color: lightgrey;
+        }
+        .CSS_결제수단버튼1 {
+            width: 100px;
+            background-color: skyblue;
+        }
+
+        /* 그리드사용예시 */
+        .CSS_결제수단그룹2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            place-items: center;
+            width: 400px;
+            background-color: lightgrey;
+        }
+        .CSS_결제수단버튼2 {
+            width: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_결제수단그룹1">
+        <div class="CSS_결제수단버튼1">신용카드</div>
+        <div class="CSS_결제수단버튼1">계좌이체</div>
+        <div class="CSS_결제수단버튼1">핸드폰결제</div>
+        <div class="CSS_결제수단버튼1">무통장입금</div>
+        <div class="CSS_결제수단버튼1">포인트결제</div>
+    </div>
+
+    <br/><br/>
+
+    <div class="CSS_결제수단그룹2">
+        <div class="CSS_결제수단버튼2">신용카드</div>
+        <div class="CSS_결제수단버튼2">계좌이체</div>
+        <div class="CSS_결제수단버튼2">핸드폰결제</div>
+        <div class="CSS_결제수단버튼2">무통장입금</div>
+        <div class="CSS_결제수단버튼2">포인트결제</div>
+    </div>
+</body>
+</html>

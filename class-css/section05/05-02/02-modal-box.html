@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>모달 실습</title>
+    <style>
+        .CSS_모달그룹 {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .CSS_모달배경 {
+            width: 100vw;
+            height: 100vh;
+            background-color: lightgrey;
+            opacity: 70%;
+        }
+        .CSS_모달 {
+            position: absolute;
+            top: calc(50% - 500px/2); /*어디서 그리기 시작하는 포인트가 핵심*/
+            left: calc(50% - 400px/2);
+            width: 400px;
+            height: 500px;
+            background-color: skyblue;
+
+        }
+    </style>
+    <script>
+       const JS_모달열기기능 = () => {
+            document.getElementById('HTML_모달그룹').style = "display: block;"
+        }
+        const JS_모달닫기기능 = () => {
+            document.getElementById('HTML_모달그룹').style = "display: none;"
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_모달열기기능()">모달 열기</button>
+    
+     <!-- 모달 -->
+      <div id="HTML_모달그룹" class="CSS_모달그룹">
+        <div class="CSS_모달배경" onclick="JS_모달닫기기능()"></div> <!--배경을 클릭하면 모달이 닫힘-->
+        <div class="CSS_모달">
+            <!--모달 내용 작성-->
+        </div>
+      </div>
+</body>
+</html>

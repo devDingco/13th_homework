@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>키보드와 입력창 실습</title>
+    <script>
+        const JS_글등록기능 = () => {
+            alert('게시글 등록이 완료되었습니다.')
+        }
+
+        window.addEventListener('keydown', (event) => {
+            if(event.key === 'Enter') {
+                if(document.activeElement.id === "HTML_제목" || document.activeElement.id === "HTML_내용" ) {
+                    JS_글등록기능()
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    제목: <input id="HTML_제목" type="text" /> <br />
+    내용: <input id="HTML_내용" type="text"/> <br />
+    <button onclick="JS_글등록기능()">등록하기</button>
+</body>
+</html>

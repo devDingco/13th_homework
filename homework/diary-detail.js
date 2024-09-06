@@ -13,7 +13,7 @@ const getEmotionText = (emotion) => {
         default: return "";
     }
 };
-
+// 삭제 버튼 함수
 const removeDiaryEntry = () => {
     const index = getQueryParameter('number');
     const jsonDiary = localStorage.getItem("diarylist");
@@ -31,6 +31,7 @@ const loadDiaryEntry = () => {
     const index = getQueryParameter('number');
     const jsonDiary = localStorage.getItem("diarylist");
     const diaryList = JSON.parse(jsonDiary) || [];
+    const icon = document.querySelector(".emotionIcon");
 
     if (index !== null && diaryList[index]) {
         const entry = diaryList[index];
@@ -38,6 +39,9 @@ const loadDiaryEntry = () => {
         document.getElementById('diary-date').textContent = `${entry.date} 작성`;
         document.getElementById('diary-emotion').textContent = getEmotionText(entry.emotion);
         document.getElementById('diary-content').textContent = entry.content;
+        icon.innerHTML = `<img class="icon" src='./img/${entry.emotion}-small.png'/>`
+
+   
 
         const emotionInputs = document.querySelectorAll('input[name="emotion"]');
         emotionInputs.forEach(input => {
@@ -50,10 +54,34 @@ const loadDiaryEntry = () => {
     }
 };
 
+// 댓글 목록을 로드하고 렌더링하는 함수
+const loadComments = () => {
+    const index = getQueryParameter('number');
+    const jsonDiary = localStorage.getItem("diarylist");
+    const diaryList = JSON.parse(jsonDiary) || [];
+
+    if (index !== null && diaryList[index] && Array.isArray(diaryList[index].retrospect)) {
+        const commentList = diaryList[index].retrospect;
+
+        const htmlCommentList = commentList.map((comment) => {
+            return `
+                <div class="commentContainer">
+                    <div class="comment">${comment}</div>
+                    <div class="comment_date">2024.09.24</div>
+                </div>
+            `;
+        }).join('');
+
+        const commentListContainer = document.getElementById("commentbox");
+        commentListContainer.innerHTML = htmlCommentList;
+    }
+};
+
 // 페이지를 초기화하고 다이어리 항목을 불러오는 함수
 const initializePage = () => {
     document.querySelector(".editmode_button").style.display = "none";
     loadDiaryEntry();
+    loadComments(); // 페이지 로드 시 댓글 로드
 };
 
 // 보기 모드와 수정 모드를 전환하는 함수
@@ -77,8 +105,6 @@ const toggleEditMode = () => {
 
     document.getElementById("diary-title-input").value = document.getElementById("diary-title").textContent;
     document.getElementById("diary-content-input").value = document.getElementById("diary-content").textContent;
-
-    // 수정 모드에서 테두리를 제거
     document.querySelector(".titlecontainer").style.border = "none";
 };
 
@@ -118,19 +144,105 @@ const saveChanges = () => {
 const cancelEditMode = () => {
     const elementsToToggle = [
         { element: document.getElementById("editmode"), display: "none" },
-        { element: document.getElementById("diary-title"), display: "block" },
+        { element: document.getElementById("content"), display: "block" },
         { element: document.getElementById("diary-content"), display: "block" },
         { element: document.getElementById("diary-title-input"), display: "none" },
         { element: document.getElementById("diary-content-input"), display: "none" },
         { element: document.querySelector(".editbutton"), display: "inline-block" },
         { element: document.querySelector(".savebutton"), display: "none" },
-        { element: document.querySelector(".cancelbutton"), display: "none" }, // 취소 버튼을 숨기도록 추가
+        { element: document.querySelector(".cancelbutton"), display: "none" },
         { element: document.getElementById("diary-emotion"), display: "block" },
         { element: document.getElementById("diary-date"), display: "block" },
     ];
     elementsToToggle.forEach(({ element, display }) => element.style.display = display);
     document.querySelector(".titlecontainer").style.borderBottom = "2px solid #000";
 };
+
+
+const retrospectButton = () => {
+    const inputValue = document.querySelector(".retrospectInput").value;
+    console.log(inputValue);
+  
+    const index = getQueryParameter('number');
+    const jsonDiary = localStorage.getItem("diarylist");
+    const diaryList = JSON.parse(jsonDiary) || [];
+    if(diaryList[index]) {
+        if(!Array.isArray(diaryList[index].retrospect)) {
+            diaryList[index].retrospect = [];
+        }
+        diaryList[index].retrospect.push(inputValue) 
+        localStorage.setItem("diarylist", JSON.stringify(diaryList));
+        document.querySelector(".retrospectInput").value = "";
+
+        const commentlist = diaryList[index].retrospect
+        console.log(commentlist)
+        const retrospectInput= document.getElementById(".retrospectInput")
+        const htmlCommentList = commentlist.map((comment) => {
+            return `
+              <div class="commentContainer">
+                <div class="comment">${comment}</div>
+                <div class="comment_date">2024.09.24</div>
+              </div>
+            `
+          }).join(''); // 배열을 문자열로 합칩니다.
+      
+          // 댓글을 렌더링할 요소를 선택합니다.
+          const commentListContainer = document.getElementById("commentbox");
+          commentListContainer.innerHTML = htmlCommentList;
+    } else {
+        
+    }
+
+  };
+
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+}
+
+function closeModal(modalIds) {
+    // 여러 ID를 콤마로 분리
+    const idsArray = modalIds.split(',');
+
+    // 각 ID에 대해 모달 닫기 동작 수행
+    idsArray.forEach(modalId => {
+        const modal = document.getElementById(modalId.trim());
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+const copyButton = document.getElementById('copyButton');
+const toast = document.getElementById('toast');
+const text = document.getElementById('diary-content');
+
+// 복사 버튼 클릭 이벤트
+copyButton.addEventListener('click', function() {
+  navigator.clipboard.writeText(text.textContent).then(function() {
+    // 복사 성공 시 토스트 메시지 표시
+    showToast();
+  }, function(err) {
+    // 복사 실패 시 처리
+    console.error('복사 실패:', err);
+  });
+});
+
+// 토스트 메시지 표시 함수
+function showToast() {
+  toast.classList.add('show');
+  setTimeout(function() {
+    toast.classList.remove('show');
+  }, 2000); 
+}
+
+// 플로팅 함수
+const floating = () => {
+    window.scrollTo({top:0, behavior:"smooth"});
+};
+
+  
+  
 
 // 페이지 로드 시 다이어리 항목을 불러옴
 document.addEventListener("DOMContentLoaded", initializePage);

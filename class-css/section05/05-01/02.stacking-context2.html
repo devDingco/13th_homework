@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>z-index 실습</title>
+
+    <style>
+        .CSS_종이놓는바닥{
+            margin: 100px;
+            padding: 100px;
+            width: 1000px;
+            height: 1000px;
+            background-color: lightgrey;
+
+            position: absolute; /* 쌓임맥락 기준으로 부모(컨테이닝블록)는 상위태그 아님, ㅅ상위태그들 중 샇임맥락에 포함된 태그 */
+        }
+        .CSS_종이그룹{
+            width: 500px;
+            height: 500px;
+            background-color: skyblue;
+        }
+        .CSS_빨간종이 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+
+            z-index: 999;
+            position: absolute; /*포지션을 주어 쌓임맥락에 포함시키면, z-index 사용가능해짐*/
+            top: 0;
+            left: 0;
+        }
+        .CSS_노란종이 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+
+            position: absolute;
+            top: 25px;
+            left: 25px;
+
+            z-index: 1;  /*포지션이 있는 애들만 가능*/
+        }
+        .CSS_파란종이 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_종이놓는바닥">
+        <div class="CSS_종이그룹">
+            <div class="CSS_빨간종이"></div>
+            <div class="CSS_노란종이"></div>
+            <div class="CSS_파란종이"></div>
+        </div>
+    </div>
+</body>
+</html>

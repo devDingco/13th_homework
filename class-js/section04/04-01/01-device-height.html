@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>디바이스 높이 감지 실습</title>
+
+    <style>
+        * {
+            margin: 0;
+        }
+        .CSS_푸터 {
+            height: 100px;
+            background-color: lightgrey;
+        }
+        .CSS_플로팅버튼 {
+            position: fixed;
+            bottom: 10px;
+            left: 90%;
+        }
+    </style>
+
+    <script>
+        window.addEventListener("scroll", () => {
+            const 현재스크롤높이 = window.scrollY
+            console.log(현재스크롤높이)
+
+            if(현재스크롤높이 >= 408) { //콘솔로 푸터가 보이는 지점을 찍은후 그 값을 넣어줌(하지만 사용자의 화면크기마다 달라지게 됨)
+                document.getElementById("HTML_플로팅버튼").style = `
+                    position: relative;
+                    bottom: 50px;
+                    left: 90%;
+                `
+            }else {
+                document.getElementById("HTML_플로팅버튼").style = `
+                    position: fixed;
+                    bottom: 10px;
+                    left: 90%;
+                `
+            }
+        })
+    </script>
+</head>
+<body>
+    <img src="./00-dog.jpg" width="100%"/>
+    <button id="HTML_플로팅버튼" class="CSS_플로팅버튼"> ^ </button>
+    <div class="CSS_푸터">푸터</div>
+</body>
+</html>

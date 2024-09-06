@@ -18,8 +18,8 @@ const removeDiaryEntry = (index) => {
 const submit = () => {
     if (inputverify()) {
        
-        const title = document.getElementById("writingtitle").value;
-        const content = document.getElementById("writingcontent").value;
+        const title = document.getElementById("titleInputModal").value;
+        const content = document.getElementById("titleTextareaModal").value;
 
         //----------설명----------------
         //name으로 그룹화된 모든 라디오버튼 선택하는 것
@@ -35,7 +35,7 @@ const submit = () => {
             title: title,
             content: content,
             emotion: chekcedRadio,
-            date: new Date().toLocaleDateString()
+            date: new Date().toLocaleDateString(),
         };
 
         const diarylist = getDiaryList()
@@ -45,21 +45,23 @@ const submit = () => {
         console.log(diarylist)
         console.log(diaryEntry)
 
-    
 
-        renderDiaryEntries()
-        
-        
-            document.getElementById("writingtitle").value = "";
-            document.getElementById("writingcontent").value = "";
+        openModal('completionModalContainer')
+        renderDiaryEntries();
+
+                    //초기화 함수
+            document.getElementById("titleInputModal").value = "";
+            document.getElementById("titleTextareaModal").value = "";
             document.getElementById("happy").checked = false;
             document.getElementById("sad").checked = false;
             document.getElementById("surprise").checked = false;
             document.getElementById("angry").checked = false;
             document.getElementById("etc").checked = false;
+
+
         } else {
             alert("내용을 전부 채워주세요.");
-            }
+    }
 };
 
 
@@ -76,8 +78,8 @@ const inputverify = () => {
         }
     }) 
 
-    const title = document.getElementById("writingtitle").value;
-    const content = document.getElementById("writingcontent").value;
+    const title = document.getElementById("titleInputModal").value;
+    const content = document.getElementById("titleTextareaModal").value;
 
  
     const writedtitle = title !== "";
@@ -85,6 +87,44 @@ const inputverify = () => {
 
     return writedtitle && wiredcontent && checkedEmotion;
 };
+
+const handleSelectChange = () => {
+    const selectBox = document.getElementById('selectbox');
+    const selectedEmotion = selectBox.value;
+    renderSelectBox(selectedEmotion); 
+  };
+  
+  const renderSelectBox = (emt) => {
+    const diarylistbox = document.querySelector(".diarylistbox");
+    const jsondiary = localStorage.getItem("diarylist");
+    const diarylist = JSON.parse(jsondiary) || [];
+  
+    // 셀렉트박스에서 전체가 선택되었을 때 모든 일기를 보여줌
+    const filteredDiaryList = emt ==='all' ? diarylist : diarylist.filter(entry => entry.emotion === emt)
+  
+    // 필터링된 일기 데이터를 기반으로 HTML 생성
+    const diaryHTML = filteredDiaryList.map((entry, index) => `
+      <div class="diarybox">
+        <div class="xbutton" onClick="removeDiaryEntry(${index})"></div>
+        <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
+          <div class="thumbnail_${entry.emotion}"></div>
+          <div class="textbox">
+            <div class="date_title_container">
+              <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
+              <div class="date">${entry.date}</div>
+            </div>
+            <div class="date_title_container">
+              <div class="title">${entry.title}</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    `).join('');
+  
+    diarylistbox.innerHTML = diaryHTML;
+  };
+  
+  
 
 
 // 다이어리 항목 랜더링 함수
@@ -139,15 +179,52 @@ window.addEventListener("scroll", () => {
         document.getElementById("selectbox").style= "background-color: #000; color: #fff"
     } else {
         document.getElementById("selectbox").style= "background-color: none; color: none"
-    }
+    };
 });
 
 const floating = () => {
     window.scrollTo({top:0, behavior:"smooth"});
 };
 
+window.addEventListener('scroll', () => {
+    const toptofooter = document.getElementById('footer').getBoundingClientRect().top;
+    const browserlength = window.innerHeight;
+    console.log(toptofooter);
 
+    if(browserlength >= toptofooter){
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 170px;
+            left: 78%;
+        `
+    }else{
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 10px;
+            left: 78%;
 
+                `
+    };
+    
+})
+
+//------------------------모달 관련 스크립트-------------------------
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+}
+
+function closeModal(modalIds) {
+    // 여러 ID를 콤마로 분리
+    const idsArray = modalIds.split(',');
+
+    idsArray.forEach(modalId => {
+        const modal = document.getElementById(modalId.trim());
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
 
 
 // 페이지 로드 시 다이어리 항목 렌더링
