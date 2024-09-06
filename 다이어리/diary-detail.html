@@ -29,6 +29,19 @@
             <div id="comments_container_box"></div>
           </div>
         </div>
+        <div class="copy_toast">
+          <div id="copy_toast">클립보드에 복사되었습니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="confirm_delete_diary_modal_layout" id="confirm_delete_diary_modal">
+      <div class="confirm_delete_diary_modal">
+        <div class="delete_diary_modal_title">일기 삭제</div>
+        <div class="delete_diary_modal_content">일기를 삭제 하시겠어요?</div>
+        <div class="delete_diary_modal_button_group">
+          <button class="delete_diary_cancel_btn" onclick="closeSingleModal('confirm_delete_diary_modal')">취소</button>
+          <button class="delete_diary_btn" onclick="deleteDiary()">삭제</button>
+        </div>
       </div>
     </div>
   </body>

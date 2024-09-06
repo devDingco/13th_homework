@@ -41,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px
+  gap: 0.5rem
 }
 
 .logo {
@@ -110,7 +110,6 @@
 
 .mood_checkbox_group {
   display: flex;
-  flex-direction: column;
   align-items: start;
   gap: 1.25rem;
 }
@@ -402,5 +401,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 4rem;
+  }
+  .mood_checkbox_group {
+    flex-direction: column;
   }
 }

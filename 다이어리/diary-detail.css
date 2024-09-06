@@ -45,7 +45,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px
+  gap: 0.5rem
 }
 
 .logo {
@@ -198,6 +198,22 @@ html {
   align-self: stretch;
 }
 
+.copy_content_btn_layout {
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  color: var(--Gray-Gray-900, #1C1C1C);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.copy_content_btn_layout > button {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: none;
+}
+
 .diary_action_container {
   display: flex;
   justify-content: flex-end;
@@ -327,6 +343,135 @@ html {
   background: var(--Gray-Gray-100, #e4e4e4);
 }
 
+.copy_toast {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  bottom: 3rem;
+  left: 0;
+}
+
+.copy_toast > div {
+  display: none;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-W, #fff);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.7rem;
+  width: 15rem;
+  animation-name: animation;
+  animation-duration: 2s;
+  animation-fill-mode: none;
+  opacity: 0%;
+}
+
+.confirm_delete_diary_modal_layout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.confirm_delete_diary_modal {
+  display: flex;
+  width: 30rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  color: #000;
+  text-align: center;
+}
+
+.delete_diary_modal_title {
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
+}
+
+.delete_diary_modal_content {
+  color: var(--Gray-Gray-800, #333);
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.013rem;
+}
+
+.delete_diary_modal_button_group {
+  display: flex;
+  gap: 1.313rem;
+}
+
+.delete_diary_cancel_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-B, #000);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
+
+.delete_diary_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-Gray-50, #f2f2f2);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
+
+@keyframes animation {
+        from {
+          opacity: 0%;
+        }
+        50% {
+          opacity: 100%;
+        }
+        to {
+          opacity: 0%;
+        }
+      }
+
 @media (max-width: 48.688rem) {
   .layout {
     width: 90%;
@@ -336,5 +481,8 @@ html {
     flex-direction: column;
     align-items: flex-start;
     gap: 4rem;
+  }
+  .confirm_delete_diary_modal {
+    width: 20rem;
   }
 }

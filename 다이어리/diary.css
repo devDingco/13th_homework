@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   max-width: 100%;
-  /* width: 100%; */
 }
 .layout {
   display: flex;
@@ -128,8 +127,10 @@
   gap: 1rem 0.5rem;
   align-self: stretch;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .dropdown_name {
+  height: 2rem;
   display: flex;
   min-width: 7.5rem;
   padding: 0.25rem;
@@ -212,6 +213,18 @@ ul li {
 .dropdown_name > ul > li:hover {
   background-color: #f2f2f2;
 }
+.btn_register_diary {
+  width: 6.875rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-W, #fff);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
 .main {
   width: 100%;
   display: flex;
@@ -226,10 +239,11 @@ ul li {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  padding-top: 2.625rem;
 }
 .diary_entry_container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1.5rem;
   align-self: stretch;
   flex-wrap: wrap;
@@ -254,8 +268,8 @@ ul li {
   position: relative;
 }
 .diary_cover {
+  width: 100%;
   display: flex;
-  height: 17.813rem;
   align-items: center;
   gap: 0.625rem;
   align-self: stretch;
@@ -321,7 +335,6 @@ ul li {
   align-items: center;
   gap: 0.625rem;
   align-self: stretch;
-  overflow: hidden;
   color: #000;
   text-overflow: ellipsis;
   font-size: 1.125rem;
@@ -330,18 +343,29 @@ ul li {
   line-height: 1.5rem;
   letter-spacing: -0.011rem;
 }
+#aside_layout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
 .aside {
   display: flex;
-  width: 22.5rem;
   min-width: 22.5rem;
   max-width: 47.5rem;
-  padding: 1.5rem 0 1.5rem 1.5rem;
+  padding: 1.5rem 0;
   flex-direction: column;
-  align-items: center;
   gap: 2.5rem;
   border-radius: 1rem;
   border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
+  padding: 1.5rem;
 }
 .diary_entry_title {
   color: #000;
@@ -350,21 +374,19 @@ ul li {
   font-weight: 700;
   line-height: 1.5rem;
   letter-spacing: -0.015rem;
-  align-self: stretch;
 }
 .diary_entry_form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
   gap: 2.5rem;
-  align-self: stretch;
+  width: 100%;
 }
 .mood_selector {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-  align-self: stretch;
 }
 .mood_selector_title {
   align-self: stretch;
@@ -379,19 +401,15 @@ ul li {
 }
 .mood_checkbox_group {
   display: flex;
-  flex-direction: row;
-  max-width: 37rem;
-  align-items: center;
-  align-content: center;
-  align-self: stretch;
-  flex-wrap: wrap;
+  align-items: start;
+  width: 100%;
 }
 .mood_checkbox {
-  width: 5.875rem;
-  height: 1.5rem;
-  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
+  gap: 0.125rem;
+  margin-right: 1.25rem;
+  width: 5.875rem;
 }
 .mood_options {
   width: 1.5rem;
@@ -409,11 +427,9 @@ ul li {
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25rem;
-  letter-spacing: -0.011rem;
 }
 .diary_textArea {
-  width: 19.5rem;
+  width: 100%;
   height: 16rem;
   display: flex;
   flex-direction: column;
@@ -422,7 +438,6 @@ ul li {
   align-self: stretch;
 }
 .diary_title_group {
-  width: 19.5rem;
   height: 4.75rem;
   display: flex;
   flex-direction: column;
@@ -431,7 +446,6 @@ ul li {
   align-self: stretch;
 }
 .diary_title {
-  width: 19.5rem;
   height: 1.25rem;
   color: var(--Gray-Gray-800, #333);
   font-size: 0.875rem;
@@ -442,7 +456,6 @@ ul li {
   align-self: stretch;
 }
 .diary_title_window {
-  width: 19.5rem;
   height: 3rem;
   display: flex;
   padding: 0.75rem 1rem;
@@ -463,7 +476,6 @@ ul li {
   letter-spacing: -0.1rem;
 }
 .diary_contents_group {
-  width: 19.5rem;
   height: 9.75rem;
   display: flex;
   flex-direction: column;
@@ -472,7 +484,6 @@ ul li {
   align-self: stretch;
 }
 .diary_contents {
-  width: 19.5rem;
   height: 1.25rem;
   color: var(--Gray-Gray-800, #333);
   font-size: 0.875rem;
@@ -504,10 +515,16 @@ ul li {
   line-height: 1.5rem;
   letter-spacing: -0.1rem;
 }
-.register_button {
-  width: 19.5rem;
+.modal_button {
+  width: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.modal_button > button {
+  width: 6.5rem;
   height: 3rem;
-  color: var(--Gray-Gray-50, #f2f2f2);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
@@ -517,6 +534,14 @@ ul li {
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
+}
+.close_button {
+  border: 0.063rem solid var(--Gray-B, #000);
+  color: var(--Gray-Gray-900, #1c1c1c);
+  background: var(--Gray-W, #fff);
+}
+.register_button {
+  color: var(--Gray-Gray-50, #f2f2f2);
   background: var(--Gray-Gray-300, #c7c7c7);
   border: none;
 }
@@ -589,23 +614,46 @@ ul li {
   }
   .aside {
     order: 1;
+    height: 30rem;
+    overflow-y: scroll;
   }
   .article {
     order: 3;
   }
   .diary_cover {
-    width: 100%;
+    width: 9.25rem;
+    height: 17.813rem;
     object-fit: cover;
   }
   .navigation_layout {
     order: 2;
   }
   .topScroll > img {
-  width: 3.125rem;
-  position: absolute;
-  left: 9.375rem;
-  bottom: 0.313rem;
-}
+    width: 3.125rem;
+    position: absolute;
+    left: 9.375rem;
+    bottom: 0.313rem;
+  }
+  .mood_checkbox_group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.75rem;
+  }
+  .diary_entry_container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+  }
+  .confirm_modal {
+    max-width: 20rem;
+  }
+  .confirm_delete_diary_modal {
+    max-width: 20rem;
+  }
 }
 @media (max-width: 30rem) {
   .header_img_layout {
@@ -622,4 +670,189 @@ ul li {
     background-image: url("./image/mobile_banner.png");
     background-repeat: no-repeat;
   }
+}
+.confirm_modal_layout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.confirm_modal {
+  display: flex;
+  width: 30rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  color: #000;
+  text-align: center;
+}
+.modal_title {
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
+}
+.modal_content {
+  color: var(--Gray-Gray-800, #333);
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.013rem;
+}
+.modal_button_group {
+  display: flex;
+  gap: 1.313rem;
+}
+.continue_writing_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-B, #000);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
+.cancel_registration_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-Gray-50, #f2f2f2);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
+#diary_registration_modal > div > button {
+  display: flex;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1 0 0;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-W, #fff);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+  width: 100%;
+}
+.confirm_delete_diary_modal_layout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.confirm_delete_diary_modal {
+  display: flex;
+  width: 30rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  color: #000;
+  text-align: center;
+}
+.delete_diary_modal_title {
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: -0.015rem;
+}
+.delete_diary_modal_content {
+  color: var(--Gray-Gray-800, #333);
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.013rem;
+}
+.delete_diary_modal_button_group {
+  display: flex;
+  gap: 1.313rem;
+}
+.delete_diary_cancel_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-B, #000);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-900, #1c1c1c);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
+}
+.delete_diary_btn {
+  display: flex;
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+  color: var(--Gray-Gray-50, #f2f2f2);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.011rem;
 }

@@ -34,13 +34,19 @@ const createHtml = (diary) => {
       </div>
       <div class="content_frame">
         <div class="content_label">내용</div>
-        <div class="content">${diary.content}</div>
+        <div class="content" id="copyContent">${diary.content}</div>
+      </div>
+      <div class="copy_content_btn_layout">
+        <button onclick="handleContentCopy()">
+          <img src="./image/content_copy.svg" />
+          <div>내용 복사</div>
+        </button>
       </div>
       <div class="diary_action_container">
       <a href="./diary-edit.html?id=${diary.id}" class="modification_frame">
         <button class="modification_Btn">수정</button>
       </a>
-        <button class="modification_Btn" onclick="deleteDiary()">삭제</button>
+        <button class="modification_Btn" onclick="confirmDeleteDiary(event)">삭제</button>
       </div>
   `;
 
@@ -57,23 +63,25 @@ const createCommentHtml = (commentEntries) => {
       <div class="comment_date">${commentEntries.date}</div>
       <div class="comment_divider"></div>
     </div>
-  `
+  `;
   const commentBox = document.createElement("div");
   commentBox.innerHTML = commentCard;
-  const commentsContainerBox = document.getElementById("comments_container_box");
+  const commentsContainerBox = document.getElementById(
+    "comments_container_box"
+  );
   return commentsContainerBox.appendChild(commentBox);
-}
+};
 
 const addComment = (date) => {
-  const comment = document.getElementById("comment_input")
-  const commentValue = comment.value
-  commentEntries = {commentValue, date}
-  diaryEntries[index].commentList.push({ ...commentEntries })
-  diaryDetailContentList.splice(index, 1, diaryEntries[index])
+  const comment = document.getElementById("comment_input");
+  const commentValue = comment.value;
+  commentEntries = { commentValue, date };
+  diaryEntries[index].commentList.push({ ...commentEntries });
+  diaryDetailContentList.splice(index, 1, diaryEntries[index]);
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
   comment.value = null;
-  createCommentHtml(commentEntries)
-}
+  createCommentHtml(commentEntries);
+};
 
 const setupCommentInput = () => {
   const date = new Date();
@@ -81,25 +89,56 @@ const setupCommentInput = () => {
   const month = String(date.getMonth() + 1).padStart(2, 0);
   const day = String(date.getDate()).padStart(2, 0);
   const commentRegistrationDate = `[${year}. ${month}. ${day}]`;
-  addComment(commentRegistrationDate)
+  addComment(commentRegistrationDate);
 };
 
-diaryEntries = diaryDetailContentList
-  diaryDetailContentList.map((e, i) => {
-    if(e.id == id) index = i
-  })
+diaryEntries = diaryDetailContentList;
+diaryDetailContentList.map((e, i) => {
+  if (e.id == id) index = i;
+});
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);
-})
+});
 
 const deleteDiary = () => {
-  console.log(index)
   diaryDetailContentList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
-  alert("삭제 되었습니다.")
+  alert("삭제 되었습니다.");
   window.location.href = "./diary.html";
 };
 
+const handleContentCopy = () => {
+  const copyToast = document.getElementById("copy_toast");
+  const copyContent = document.getElementById("copyContent").innerText;
+  navigator.clipboard.writeText(copyContent);
+  copyToast.style = "display: block";
+  setTimeout(() => {
+    copyToast.style = "display: none";
+  }, 2000);
+};
+
+const closeSingleModal = (modal) => {
+  document.getElementById(modal).style = "display: none;";
+};
+
+const triggerModal = (modal) => {
+  document.getElementById(modal).style = "display: flex;";
+};
+
+const confirmDeleteDiary = (event) => {
+  event.preventDefault();
+  deleteId = event.target.className;
+  triggerModal("confirm_delete_diary_modal");
+};
+
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Escape") {
+    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
+    "flex";
+    if(confirmDeleteDiaryModal){
+      closeSingleModal("confirm_delete_diary_modal")
+    }
+  }
+});
+
 createHtml(diary);
-
-

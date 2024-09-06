@@ -2,6 +2,7 @@ const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
 
+let deleteId;
 let diaryEntry = {};
 let currentFilteredMood = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
@@ -15,13 +16,13 @@ window.addEventListener("scroll", () => {
     : (filterCheckbox.style = "background-color: #FFF");
 });
 
-const clearDiaryInputs = (checkedMoodId) => {
-  const check = document.getElementById(`${checkedMoodId}`);
+const clearDiaryInputs = () => {
+  const getMood = document.getElementsByName("mood");
+  const mood = [...getMood].map((e) => e.checked = false);
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   text.value = null;
   textarea.value = null;
-  check.checked = false;
 };
 
 const appendDiaryEntry = (diaryCard) => {
@@ -31,7 +32,7 @@ const appendDiaryEntry = (diaryCard) => {
 
   if (
     article.children.length == 0 ||
-    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 2
+    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 4
   ) {
     const diaryEntryContainer = document.createElement("div");
     diaryEntryContainer.className = "diary_entry_container";
@@ -64,13 +65,11 @@ const createHtml = (diaryEntry) => {
             <img
               class="diary_cover"
               src="./image/${diaryEntry.imageName}.png"
-              width="774px"
             />
-            <div id="delete_button" onclick="deleteDiaryEntry(event)">
+            <div id="delete_button" onclick="confirmDeleteDiary(event)">
             <img
               class="${diaryEntry.id}"
               src="./image/delete_button.png"
-              width:"24px"
             />
             </div>
           </div>
@@ -132,7 +131,7 @@ const getMood = (diaryEntry) => {
 
   diaryEntry.mood = checkedMood;
   getImageName(diaryEntry, checkedMoodId);
-  clearDiaryInputs(checkedMoodId);
+  clearDiaryInputs();
 };
 
 const getId = (diaryEntry) => {
@@ -164,8 +163,7 @@ const registerDiary = () => {
   if (text.value == "" || textarea.value == "" || mood.length == 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
-    diaryEntry.commentList = [];
-    getContent(diaryEntry);
+    triggerModal("diary_registration_modal");
   }
 };
 
@@ -208,22 +206,96 @@ const onClickMood = (e) => {
   getDiariesByMood(selectedMood);
 };
 
-const deleteDiaryEntry = (event) => {
-  event.preventDefault();
+const deleteDiaryEntry = () => {
   let index;
-  const id = event.target.className;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    if (e.id == id) index = i;
+    if (e.id == deleteId) index = i;
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  updateDiaryList(storedDiaryList)
+  updateDiaryList(storedDiaryList);
+  closeSingleModal("confirm_delete_diary_modal");
+};
+
+const confirmDeleteDiary = (event) => {
+  event.preventDefault();
+  deleteId = event.target.className;
+  triggerModal("confirm_delete_diary_modal");
 };
 
 const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
+const triggerModal = (modal) => {
+  upScroll();
+  document.body.style.cssText = "overflow-y: hidden;";
+  document.getElementById(modal).style = "display: flex;";
+  if (modal == "diary_registration_modal") {
+    diaryEntry.commentList = [];
+    getContent(diaryEntry);
+  }
+};
+
+const closeAllModals = (modal) => {
+  document.getElementById(modal).style = "display: none;";
+  document.getElementById("aside_layout").style = "display: none;";
+  document.body.style.cssText = "overflow-y: none;";
+  clearDiaryInputs();
+};
+
+const closeSingleModal = (modal) => {
+  document.getElementById(modal).style = "display: none;";
+  document.body.style.cssText = "overflow-y: none;";
+};
+
+window.addEventListener("click", (event) => {
+  const className = event.target.className;
+  if (className == "aside_layout" || className == "confirm_modal_layout") {
+    if (event.target.id != "diary_cancel_modal") {
+      closeModal(event.target.id);
+    } else {
+      continueWriting(event.target.id);
+    }
+  }
+});
+
+const promptExitOnEsc = () => {
+  const text = document.getElementsByClassName("diary_title_window")[0];
+  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  const getMood = document.getElementsByName("mood");
+  const mood = [...getMood].filter((e) => e.checked == true);
+  if (text.value == "" || textarea.value == "" || mood.length == 0) {
+    triggerModal("diary_cancel_modal");
+  }
+};
+
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Escape") {
+    const diaryWritingModal =
+      document.getElementById("aside_layout").style.display == "flex";
+    const diaryCancelModal =
+      document.getElementById("diary_cancel_modal").style.display == "flex";
+    const diaryRegistrationModal =
+      document.getElementById("diary_registration_modal").style.display ==
+      "flex";
+    const confirmDeleteDiaryModal =
+      document.getElementById("confirm_delete_diary_modal").style.display ==
+      "flex";
+
+    if (diaryWritingModal) {
+      if (diaryCancelModal) closeSingleModal("diary_cancel_modal");
+      else if (diaryRegistrationModal)
+        closeAllModals("diary_registration_modal");
+      else {
+        promptExitOnEsc();
+      }
+    }
+    if (confirmDeleteDiaryModal) {
+      closeSingleModal("confirm_delete_diary_modal");
+    }
+  }
+});
+
 moodList.addEventListener("click", onClickMood);
-registerButton.addEventListener("click", registerDiary);
