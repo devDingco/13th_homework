@@ -45,6 +45,12 @@ function makeDiaryData () {
         }
         document.getElementById("diaryTitle").value = ""
         document.getElementById("diaryContent").value = ""
+    } else if ( modalDiary !== null ) {
+        for ( i=0 ; i < mood.length ; i++ ) {
+            mood[i].checked = false;
+        }
+        document.querySelector(".title__input").value = ""
+        document.querySelector(".content__input").value = ""
     } else {
         alert("일기를 마저 작성해 주세요!!")
     }
@@ -178,13 +184,92 @@ function deleteDiary(index) {
 }
 
 window.addEventListener('scroll', () => {
-    window.scrollY > 400 ?
-    document.querySelector(".nav__filter").style = "background-color: #222; color: #fff; transition: 0.2s;" :
-    document.querySelector(".nav__filter").style = "background-color: #fff; color: #222; transition: 0.2s;"
+    if ( window.scrollY < 400 ) {
+        document.querySelector(".filter__bar").style = "background-color: #fff; color: #222; transition: 0.2s;"
+        document.querySelector(".container__sticky").style = "display: none;"
+    } else {
+        document.querySelector(".filter__bar").style = "background-color: #222; color: #fff; transition: 0.2s;"
+        document.querySelector(".container__sticky").style = "display: block;"
+    }
 })
 
 document.querySelector(".container__floating").addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
 })
 
-document.getElementById("diaryButton").addEventListener('click', makeDiaryData);
+// 새로운 모달 호출
+function newDiary() {
+    document.querySelector(".container__modal__bg").style = "display: flex;"
+    document.querySelector(".container__modal").style = "display: flex;"
+}
+
+// 1층 모달에서 [ 닫기 ]: 2층모달 확인창 띄움
+function exitNew() {
+    document.querySelector(".container__modal__bg").style = "display: flex;"
+    document.querySelector(".container__modal").style = "display: flex; filter: blur(2px) brightness(50%);"
+    document.querySelector(".modal__cancel").style = "display: flex;"
+}
+
+//1층 모달에서 [ 등록하기 ]: 새 일기 등록
+function submitNew() {
+    const radioValue = document.querySelector('input[name="mood"]:checked')
+    const modalTitle = document.querySelector('.title__input').value
+    const modalContent = document.querySelector('.content__input').value
+
+    console.log(radioValue, modalTitle, modalContent)
+
+
+
+    // let radioValue;
+    // radioBtn.forEach( el => {
+    //     if (el.checked) { radioValue = el.value }
+    // })
+
+
+    // let mood
+    // for ( i=0 ; i < radio.length ; i++) {
+    //     if (radio[i].checked) {
+    //         mood = radio[i].value
+    //     }
+    // }
+
+    // const title = document.querySelector(".title__input").value
+    // const content = document.querySelector(".content__input").value
+
+    // let modalDiary = {
+    //     mood,
+    //     title,
+    //     content
+    // }
+
+    // document.querySelector(".modal__submit").style = "display: flex;"
+    // makeDiaryData(modalDiary)
+}
+
+// 2층 모달에서 [ 등록 취소 ]: 모달 전부 종료
+function cancelNew() {
+    document.querySelector(".container__modal__bg").style = "display: none;"
+    document.querySelector(".container__modal").style = "display: none; filter: blur(0px) brightness(100%);"
+    document.querySelector(".modal__cancel").style = "display: none;"
+}
+
+// 2층 모달에서 [ 계속 작성 ]: 1층 모달로 돌아감
+function continueNew() {
+    document.querySelector(".container__modal").style = "display: flex; filter: blur(0px) brightness(100%);"
+    document.querySelector(".modal__cancel").style = "display: none;"
+}
+
+// 2층 모달에서 [ 확인 ]: 모달 전부 종료
+function confirmNew() {
+    document.querySelector(".container__modal__bg").style = "display: none;"
+    document.querySelector(".container__modal").style = "display: none;"
+    document.querySelector(".modal__submit").style = "display: none;"
+}
+
+document.querySelector(".tap__new").addEventListener('click', newDiary)
+document.querySelector(".btn__exit").addEventListener('click', exitNew)
+document.querySelector(".btn__submit").addEventListener('click', submitNew)
+document.querySelector(".btn__continue").addEventListener('click', continueNew)
+document.querySelector(".btn__cancel").addEventListener('click', cancelNew)
+document.querySelector(".btn__confirm").addEventListener('click', confirmNew)
+document.querySelector(".diary__button").addEventListener('click', makeDiaryData)

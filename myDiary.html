@@ -32,14 +32,22 @@
                 </select>
             </div>
         </div> -->
+        <div class="container__sticky"></div>
 
         <div class="container__body">
-            <div class="nav__tap__bar">
-                <div class="tap__active">일기보관함</div>
-                <div class="tap__disabled">사진보관함</div>
+            <div class="nav__tap">
+                <div class="tap__bar">
+                    <div class="tap__active">일기보관함</div>
+                    <div class="tap__disabled">사진보관함</div>
+                </div>
+                <div class="tap__new">
+                    <img src="./asset/icon/plus_outline_light_m.png" width="24px" height="24px"/>
+                    <div class="new__text">일기쓰기</div>
+                </div>
             </div>
-            <div class="nav__filter__bar">
-                <select class="nav__filter" onchange="activeFilter(event)">
+
+            <div class="nav__filter">
+                <select class="filter__bar" onchange="activeFilter(event)">
                     <option name="filter" value="all">전체</option>
                     <option name="filter" value="happy">행복해요</option>
                     <option name="filter" value="sad">슬퍼요</option>
@@ -64,12 +72,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="body__right__diary">
                 <div class="diary__subject">📍 일기 쓰기</div>
                 <div class="diary__question">오늘 기분은 어땠나요?</div>
 
                 <div class="diary__radio">
-                    <div class="radio_wrapper">
+                    <div class="radio__wrapper">
                         <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
                     </div>
                     <div class="radio_wrapper">
@@ -92,8 +101,57 @@
                 <div class="diary__content">내용</div>
                 <input class="diary__contentInput" id="diaryContent" type="text" placeholder="내용을 입력해 주세요." />
 
-                <div class="diary__button" id="diaryButton">등록하기</div>
+                <div class="diary__button">등록하기</div>
             </div>
+        </div>
+
+        <div class="container__modal__bg"></div>
+        <div class="container__modal">
+            <div class="modal__header">일기 쓰기</div>
+            <div class="modal__question">오늘 기분은 어땠나요?</div>
+            <div class="modal__radio">
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="happy" id="radioHappy2"/> <label for="radioHappy2"> 행복해요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="sad" id="radioSad2"/> <label for="radioSad2"> 슬퍼요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="surprise" id="radioSurprise2"/> <label for="radioSurprise2"> 놀랐어요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="angry" id="radioAngry2"/> <label for="radioAngry2"> 화나요 </label>
+                </div>
+                <div class="radio__wrapper">
+                    <input type="radio" name="mood" value="etc" id="radioEtc2"/> <label for="radioEtc2"> 기타 </label>
+                </div>
+            </div>
+            <div class="modal__title">
+                <div class="title__text">제목</div>
+                <input class="title__input" placeholder="제목입니다."/>
+            </div>
+            <div class="modal__content">
+                <div class="content__text">내용</div>
+                <input class="content__input" type="text" placeholder="내용입니다." />
+            </div>
+            <div class="modal__button">
+                <div class="btn__exit">닫기</div>
+                <div class="btn__submit">등록하기</div>
+            </div>
+        </div>
+
+        <div class="modal__cancel">
+            <div class="cancel__title">일기 등록 취소</div>
+            <div class="cancel__desc">일기 등록을 취소 하시겠어요?</div>
+            <div class="modal__button">
+                <div class="btn__cancel">등록 취소</div>
+                <div class="btn__continue">계속 작성</div>
+            </div>
+        </div>
+        <div class="modal__submit">
+            <div class="submit__title">일기 등록 완료</div>
+            <div class="submit__desc">등록이 완료 되었습니다.</div>
+            <div class="btn__confirm">확인</div>
         </div>
 
         <div class="container__floating"></div>
