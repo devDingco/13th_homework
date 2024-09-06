@@ -27,7 +27,7 @@ const sidebarEmpty = function () {
 };
 
 // sidebar에서 등록하기 버튼 클릭 함수
-const checkSideSubmit = function () {
+const checkSideSubmit = () => {
   const sideTitle = document.getElementById("side-title").value;
   const sideContent = document.getElementById("side-content").value;
   const emotionButtons = document.querySelectorAll('input[name="side-emotion"]');
@@ -44,39 +44,39 @@ const checkSideSubmit = function () {
   // detail에서 이미지
   let smallPreviewImg = "";
 
-  console.log(realEmotion);
+  const todayTime = new Date();
 
   const cunnectImgUrl = () => {
     switch (realEmotion) {
       case "happy":
-        previewImg = "./assets/행복해요 (m).png";
+        previewImg = "../assets/행복해요 (m).png";
         emotionColor = "#EA5757";
         emotionKorean = "행복해요";
-        smallPreviewImg = "./assets/행복해요 (s).png";
+        smallPreviewImg = "../assets/행복해요 (s).png";
         break;
       case "sad":
-        previewImg = "./assets/슬퍼요 (m).png";
+        previewImg = "../assets/슬퍼요 (m).png";
         emotionColor = "#28B4E1";
         emotionKorean = "슬퍼요";
-        smallPreviewImg = "./assets/슬퍼요 (s).png";
+        smallPreviewImg = "../assets/슬퍼요 (s).png";
         break;
       case "suprise":
-        previewImg = "./assets/놀랐어요 (m).png";
+        previewImg = "../assets/놀랐어요 (m).png";
         emotionColor = "#D59029";
         emotionKorean = "놀랐어요";
-        smallPreviewImg = "./assets/놀랐어요 (s).png";
+        smallPreviewImg = "../assets/놀랐어요 (s).png";
         break;
       case "angry":
-        previewImg = "./assets/화나요 (m).png";
+        previewImg = "../assets/화나요 (m).png";
         emotionColor = "var(--Gray-Gray-600, #777);";
         emotionKorean = "화나요";
-        smallPreviewImg = "./assets/화나요 (s).png";
+        smallPreviewImg = "../assets/화나요 (s).png";
         break;
       case "etc":
-        previewImg = "./assets/기타 (m).png";
+        previewImg = "../assets/기타 (m).png";
         emotionColor = "#A229ED";
         emotionKorean = "기타";
-        smallPreviewImg = "./assets/기타 (s).png";
+        smallPreviewImg = "../assets/기타 (s).png";
         break;
     }
   };
@@ -86,13 +86,16 @@ const checkSideSubmit = function () {
 
   // 새 일기 객체
   const newDiary = {
+    indexTime: todayTime,
     emotion: emotionKorean,
+    emotionCheck: realEmotion,
     title: sideTitle,
     content: sideContent,
     date: todayDate,
     preview: previewImg,
     emotionColor: emotionColor,
     smailPreview: smallPreviewImg,
+    comment: {},
   };
 
   posts.push(newDiary);
@@ -112,7 +115,7 @@ const checkSideSubmit = function () {
   sideSubmitBtn.style.backgroundColor = "#c7c7c7";
 };
 
-const addNewDiary = function () {
+const addNewDiary = () => {
   const diaryPost = document.getElementById("board-post-line");
   // 현재 있는 요소의 내용 초기화 -> 아래에서 생성한 기존 요소는 존재
   diaryPost.innerHTML = "";
@@ -122,10 +125,10 @@ const addNewDiary = function () {
     const newDiaryElement = document.createElement("a");
     newDiaryElement.className = "post";
     newDiaryElement.innerHTML = `
-                <a href="./diary-detail.html?index=${i}#diary-comment">
+                <a href="../diary-detail/diary-detail.html?index=${i}#diary-comment">
                   <div class="emotion-img" style="background-image: url('${post.preview}')">
                     <div class="delete-card-board">
-                      <img src="./assets/close icon.png"/>
+                      <img src="../assets/close icon.png"/>
                     </div>
                   </div>
                   <div class="post-preview">
@@ -143,23 +146,26 @@ const addNewDiary = function () {
   });
 };
 
+let diaryList = {};
+
 // 데이터 불러오기
 const loadDiary = () => {
   if (localStorage.length !== 0) {
     for (let i = 0; i < localStorage.length; i++) {
       const diaryLists = localStorage.getItem(`${i}`);
-      const diaryList = JSON.parse(diaryLists);
-      console.log(diaryList);
+      diaryList = JSON.parse(diaryLists);
+      console.log(`diaryList: ${diaryList}`);
 
       const diaryPost = document.getElementById("board-post-line");
 
       const newDiaryElement = document.createElement("a");
       newDiaryElement.className = "post";
       newDiaryElement.innerHTML = `
-                <a href="./diary-detail.html?index=${i}#diary-comment">
-                  <div class="emotion-img" style="background-image: url('${diaryList.preview}')">
-                    <div class="delete-card-board">
-                      <img src="./assets/close icon.png"/>
+                <a href="../diary-detail/diary-detail.html?index=${i}#diary-comment">
+                  <div class="emotion-img">
+                    <img class="emotion-preview-img" src='${diaryList.preview}' />
+                    <div id="delete-card-board" class="delete-card-board" onclick="deleteCard(event, ${i})">
+                      <img src="../assets/close icon.png"/>
                     </div>
                   </div>
                   <div class="post-preview">
@@ -181,13 +187,72 @@ const loadDiary = () => {
 // 페이지가 로드될 때 addNewDiary를 호출하여 로컬 스토리지에 저장된 데이터를 렌더링
 window.onload = loadDiary;
 
+// filter 기능으로 게시글 감정에 따라 분리
+const filtering = () => {
+  const options = document.getElementsByName("emotions");
+  console.log(options[0].length);
+  console.log(posts);
+
+  for (let i = 0; i < options[0].length; i++) {
+    switch (options[0][i].value) {
+      case "happy": {
+        posts = posts.filter((selectOption) => selectOption.emotionCheck === options[0][i].value);
+        addNewDiary();
+        console.log(posts);
+        break;
+      }
+      case "sad": {
+        posts = posts.filter((selectOption) => selectOption.emotionCheck === options[0][i].value);
+        addNewDiary();
+        break;
+      }
+      case "suprise": {
+        posts = posts.filter((selectOption) => selectOption.emotionCheck === options[0][i].value);
+        addNewDiary();
+        break;
+      }
+      case "angry": {
+        posts = posts.filter((selectOption) => selectOption.emotionCheck === options[0][i].value);
+        addNewDiary();
+        break;
+      }
+      case "etc": {
+        posts = posts.filter((selectOption) => selectOption.emotionCheck === options[0][i].value);
+        addNewDiary();
+        break;
+      }
+      default: {
+        addNewDiary();
+      }
+    }
+  }
+};
+
 // 페이지 스크롤 기능
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
+// 페이지 스크롤 고정
+window.addEventListener("scroll", () => {
+  const topFooter = document.getElementById("footer").getBoundingClientRect().top;
+  const screenHeight = window.innerHeight;
+
+  if (screenHeight > topFooter) {
+    document.getElementById("scroll-top-btn").style = `
+    position: relative;
+    bottom: 10px;
+    left: 96%`;
+  } else {
+    document.getElementById("scroll-top-btn").style = `
+    position: fixed;
+    bottom: 40px;
+    left: 83%`;
+  }
+});
+
 // 스크롤 시 필터 색상 변경
-window.addEventListener("load", function () {
+window.addEventListener("load", () => {
   window.addEventListener("scroll", () => {
     const moveScroll = window.scrollY;
 
@@ -198,3 +263,22 @@ window.addEventListener("load", function () {
     }
   });
 });
+
+// 삭제 버튼 클릭 시 카드 삭제
+const deleteCard = (event, i) => {
+  event.preventDefault();
+
+  const index = JSON.parse(localStorage.getItem(i)).indexTime;
+  console.log(index);
+  console.log(posts[i].indexTime);
+
+  let newPosts = posts.filter((post) => post.indexTime !== index);
+
+  localStorage.clear();
+
+  for (let i = 0; i < newPosts.length; i++) {
+    localStorage.setItem(`${i}`, JSON.stringify(newPosts[i]));
+  }
+
+  window.location.reload();
+};

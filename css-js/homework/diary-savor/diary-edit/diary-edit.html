@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기 상세보기</title>
+    <link rel="stylesheet" href="./diary-edit.css" />
+  </head>
+  <body>
+    <div class="detail-container">
+      <div class="detail-header">
+        <p>수연이의 다이어리</p>
+        <div class="header-dark-menu">
+          <p>다크모드</p>
+          <button></button>
+        </div>
+      </div>
+      <div class="mobile-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="20" viewBox="0 0 11 20" fill="none">
+          <path
+            d="M2.725 9.99962L10.075 17.3496C10.325 17.5996 10.4458 17.8913 10.4375 18.2246C10.4292 18.558 10.3 18.8496 10.05 19.0996C9.8 19.3496 9.50833 19.4746 9.175 19.4746C8.84167 19.4746 8.55 19.3496 8.3 19.0996L0.6 11.4246C0.4 11.2246 0.25 10.9996 0.15 10.7496C0.05 10.4996 0 10.2496 0 9.99962C0 9.74962 0.05 9.49962 0.15 9.24962C0.25 8.99962 0.4 8.77462 0.6 8.57462L8.3 0.874622C8.55 0.624622 8.84583 0.503789 9.1875 0.512122C9.52917 0.520455 9.825 0.649622 10.075 0.899622C10.325 1.14962 10.45 1.44129 10.45 1.77462C10.45 2.10796 10.325 2.39962 10.075 2.64962L2.725 9.99962Z"
+            fill="#333333"
+          />
+        </svg>
+        <p>일기 수정</p>
+      </div>
+      <div class="detail-main-container">
+        <div class="detail-edit-area">
+          <div class="detail-content-top">
+            <div class="detail-content-info">
+              <p>오늘 기분은 어땠나요?</p>
+              <div class="radio-emotion">
+                <div class="radio-emotion-element">
+                  <input id="happy" name="edit-emotion" type="radio" value="happy" />
+                  <label for="happy">행복해요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="sad" name="edit-emotion" type="radio" value="sad" />
+                  <label for="sad">슬퍼요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="suprise" name="edit-emotion" type="radio" value="suprise" />
+                  <label for="suprise">놀랐어요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="angry" name="edit-emotion" type="radio" value="angry" />
+                  <label for="angry">화나요</label>
+                </div>
+                <div class="radio-emotion-element">
+                  <input id="etc" name="edit-emotion" type="radio" value="etc" />
+                  <label for="etc">기타</label>
+                </div>
+              </div>
+            </div>
+            <div class="detail-content-area">
+              <div class="detail-content">
+                <p>제목</p>
+                <input id="detail-content-title" />
+              </div>
+              <div class="detail-content">
+                <p>내용</p>
+                <textarea id="detail-content"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="detail-edit-btn">
+            <button onclick="back()">취소</button>
+            <button onclick="editInfo()">수정하기</button>
+          </div>
+        </div>
+        <div id="diary-comment" class="diary-comment">
+          <div class="diary-comment-list">
+            <p>회고</p>
+            <div class="diary-comment-input">
+              <input disabled placeholder="수정중일땐 회고를 작성할 수 없어요." />
+              <button disabled>입력</button>
+            </div>
+          </div>
+          <div id="comment-list" class="comment-list"></div>
+        </div>
+      </div>
+    </div>
+    <script src="./diary-edit.js"></script>
+  </body>
+</html>
