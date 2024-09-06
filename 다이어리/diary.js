@@ -18,7 +18,7 @@ window.addEventListener("scroll", () => {
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].map((e) => e.checked = false);
+  const mood = [...getMood].map((e) => (e.checked = false));
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   text.value = null;
@@ -268,6 +268,45 @@ const promptExitOnEsc = () => {
   const mood = [...getMood].filter((e) => e.checked == true);
   if (text.value === "" || textarea.value === "" || mood.length === 0) {
     triggerModal("diary_cancel_modal");
+  }
+};
+
+const fetchAndDisplayPhotos = () => {
+  fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
+    result.json().then((object) => {
+      const dogImages = object.message;
+
+      document.getElementById("photo_gallery").innerHTML = dogImages.map((dogImage) => `
+          <img src="${dogImage}" width="300px;" />
+        `).join("");
+    });
+  });
+}
+
+const toggleDiaryPhotoView = (viewType) => {
+  const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
+  const photoStorageMenuStyle = document.getElementById("photo_storage_menu");
+  const noneStyle = "color: var(--Gray-Gray-400, #ABABAB); border: none";
+  const blockStyle = "color: #000; border-bottom: 2px solid black;";
+  const diaryStorage = document.getElementById("diary_storage");
+  const photoStorage = document.getElementById("photo_storage");
+
+  switch (viewType) {
+    case "diaryStorage": {
+      diaryStorageMenuStyle.style = blockStyle;
+      photoStorageMenuStyle.style = noneStyle;
+      diaryStorage.style = "display: block";
+      photoStorage.style = "display: none";
+      break;
+    }
+    case "photoStorage": {
+      diaryStorageMenuStyle.style = noneStyle;
+      photoStorageMenuStyle.style = blockStyle;
+      diaryStorage.style = "display: none";
+      photoStorage.style = "display: block";
+      fetchAndDisplayPhotos();
+      break;
+    }
   }
 };
 
