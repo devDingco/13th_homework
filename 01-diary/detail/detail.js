@@ -32,6 +32,15 @@ const createReminiscence = (id) => {
     renderReminiscenceList()
 }
 
+const deleteDiary = () => {
+    const id = diary.id
+    localStorage.removeItem(id)
+    
+    const diaryList = fetchDiaryListFromLocalStorage()
+    const filteredData = diaryList.filter(el => (Number(el.id) !== Number(id)))
+    updateDiaryListFromLocalStorage(filteredData)
+}
+
 // Rendering
 const render = () => {
     document.getElementById("detail_diary_title").innerText = diary.title
@@ -60,15 +69,7 @@ const updateButtonPressed = () => {
 }
 
 const deleteButtonPressed = () => {
-    const id = diary.id
-    localStorage.removeItem(id)
-    
-    const diaryList = fetchDiaryListFromLocalStorage()
-    const filteredData = diaryList.filter(el => (Number(el.id) !== Number(id)))
-    updateDiaryListFromLocalStorage(filteredData)
-
-    location.href = "../index.html"
-    alert(`일기를 삭제했습니다.`)
+    document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: block;"
 }
 
 const inputButtonTapped = () => {
@@ -86,6 +87,15 @@ const textCopyButtonPressed = () => {
         document.getElementById("HTML_toast_message_container").style = "display: none;"
     }, 2000)
     
+}
+
+const deleteCancelButtonPressed = () => {
+    document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: none;"
+}
+
+const deleteOkButtonPressed = () => {
+    console.log(`delete_ok: 일기를 삭제했습니다.`)
+    location.href = "../index.html"
 }
 
 // Other

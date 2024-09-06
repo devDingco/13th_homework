@@ -155,17 +155,13 @@
     background-color: white;
     color: #1C1C1C;
 
-    border: 1px solid #D4D3D3;
+    border: none;
     border-radius: 0.5rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-}
-
-.main_contents_text_copy_button:active {
-
 }
 
 .main_contents_button_container {
@@ -299,10 +295,90 @@
 @keyframes toastAnimation {
     from {
         /* 투명도 */
-        opacity: 10%;
+        opacity: 100%;
     }
 
      to {
-        opacity: 100%;
+        opacity: 0%;
      }
+}
+
+.write_diary_delete_select_modal_bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000080;
+
+    display: none;
+    z-index: 1;
+}
+
+.write_diary_delete_select_modal_container {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    gap: 2.5rem;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+
+    position: absolute;
+    top: calc(50% - 15rem/2);
+    left: calc(50% - 30rem/2);
+    z-index: 2;
+}
+
+.write_diary_modal_title_items {
+    width: 27rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.write_diary_delete_select_modal_title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+
+    color: #000000;
+}
+
+.write_diary_delete_select_modal_text {
+    font-weight: 500;
+    font-size: 1.25rem;
+    text-align: center;
+
+    color: #333333;
+}
+
+.write_diary_delete_modal_button_items {
+    display: flex;
+    justify-content: center;
+    gap: .625rem;
+}
+
+
+.write_diary_delete_ok_button {
+    background-color: #FFFFFF;
+    border: 0.0625rem solid #000000;
+    border-radius: 0.5rem;
+
+    padding: 0.5rem 0.625rem 0.5rem 0.625rem;
+
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.write_diary_delete_cancel_button {
+    border-radius: 0.5rem;
+    background-color: #000000;
+    color: #F2F2F2;
+
+    padding: 0.5rem 0.625rem 0.5rem 0.625rem;
+
+    font-weight: 600;
+    font-size: 1.125rem;
 }
