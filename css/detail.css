@@ -81,4 +81,32 @@
 .copyBtn img {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.fadeOutAlert {
+  position: fixed;
+  left: calc(50% - 40vw);
+  bottom: 2.5rem;
+  width: 80vw;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-size: var(--font-size-2);
+}
+.fadeOutAlert.fadeOut {
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }/*# sourceMappingURL=detail.css.map */

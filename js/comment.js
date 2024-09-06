@@ -62,6 +62,10 @@ const commentRender = () => {
   const commentList = document.querySelector('.commentList');
   commentList.innerHTML = '<ul></ul>';
   const commentArr = commentDataGet();
+  if (commentArr.length === 0) {
+    commentList.innerHTML = '<p class="empty">등록된 댓글이 없습니다.</p>';
+    return;
+  }
   commentArr.map((comment) => {
     const commentLi = document.createElement('li');
     commentLi.innerHTML = `${comment.content} <span class="commentDate">${comment.writeData}</span>`;

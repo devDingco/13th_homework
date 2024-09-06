@@ -152,7 +152,7 @@ section {
   padding-bottom: 40px;
 
   .empty {
-    width: 784px;
+    width: 100%;
     text-align: center;
     padding: 20vh;
     color: var(--font-color-6);
@@ -160,13 +160,11 @@ section {
   }
 
   .diaryList {
-    width: 784px;
-    // max-width: 49rem;
-    // overflow: hidden;
+    width: 100%;
 
     ul {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
 
       li {

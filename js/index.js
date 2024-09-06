@@ -1,16 +1,76 @@
-
+// 기본 노출 값 셋팅용 데이터
 const diaryArray = [
-  // {
-  //   moodType: "슬퍼요",
-  //   writeDate: "2021-07-01",
-  //   title: "타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다. 타이틀 영역입니다.",
-  //   content: "내용 영역입니다."
-  //   id: 1,
-  //   comment:[
-  //     { commentId: 1, content: "댓글내용" },
-  //   ]
-  // },
-];
+  {
+    "moodType": "놀랐어요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "id": 1
+  },
+  {
+    "moodType": "놀랐어요",
+    "writeDate": "2024.09.05",
+    "title": "d",
+    "content": "<p>d</p>",
+    "id": 2
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "fsdf",
+    "content": "<p>sfsdff</p>",
+    "id": 3,
+    "comment": []
+  },
+  {
+    "moodType": "행복해요",
+    "writeDate": "2024.09.05",
+    "title": "ㄴㄹㅇ",
+    "content": "<p>ㄴㄹㄴㅇㄹㄴㅇㄹ</p>",
+    "id": 4
+  },
+  {
+    "moodType": "슬퍼요",
+    "writeDate": "2024.09.05",
+    "title": "ㄴㄹㄴㅇㄹ",
+    "content": "<p>ㄴㅇㄹㄴㅇㄹㅇ</p>",
+    "id": 5
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "ㄴㅇㄹ",
+    "content": "<p>ㄴㅇㄹㄴㅇㄹㅇㄹ</p>",
+    "id": 6
+  },
+  {
+    "moodType": "행복해요",
+    "writeDate": "2024.09.05",
+    "title": "ㅓㅘㅓㅘㅓㅏㅓㅘ",
+    "content": "<p>ㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㄴㄹㄴㅇㄹ</p>",
+    "id": 7
+  },
+  {
+    "moodType": "기타",
+    "writeDate": "2024.09.05",
+    "title": "허ㅗㅗ허ㅗ허호ㅓ",
+    "content": "<p>허호ㅓ허ㅗ</p>",
+    "id": 8
+  },
+  {
+    "moodType": "행복해요",
+    "writeDate": "2024.09.05",
+    "title": "sadas",
+    "content": "<p>fdssfsdf</p>",
+    "id": 9
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 10
+  }
+]; //[{ "moodType": "놀랐어요", "writeDate": "2024.09.05", "title": "sdf", "id": 1 }]
 
 const moodTypeSet = {
   슬퍼요: { imgSrc: "./img/mood_1.png", colorNum: 1, imgSrcS: "./img/슬퍼요(s).png" },
@@ -27,13 +87,13 @@ const headerBox = () => {
   // <h1 class="glitch-wrapper"><a class="glitch" data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
   headerElement.innerHTML = `
       <h1><a data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
-      <!-- <fieldset class="toggleSwitch">
-        <label>
-          <input role="switch" type="checkbox" />
-          <span>다크모드</span>
-        </label>
-      </fieldset> -->
   `
+  //   <fieldset class="toggleSwitch">
+  //   <label>
+  //     <input role="switch" type="checkbox" />
+  //     <span>다크모드</span>
+  //   </label>
+  // </fieldset>
 }
 headerBox();
 
@@ -47,9 +107,6 @@ const headerBanner = () => {
     <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
   </swiper-container>
   `
-  // `
-  // <img src="./img/mainBanner.jpeg" alt="메인이미지입니다." />
-  // `;
 }
 headerBanner();
 
@@ -119,7 +176,7 @@ const diaryMoodTypeRender = () => {
         type="radio"
         name="moodType"
         value="${key}"
-        oninput='textCheck()'
+        oninput='diaryWriteInputCheck()'
       />${key}
      </label>
     `
@@ -129,57 +186,6 @@ const diaryMoodTypeRender = () => {
   <div class="radioWrap">${moodRadio}</div>
   </div>`
 }
-
-// !일기 쓰기 컴포넌트 불러오기
-const diaryWriteBox = () => {
-  const diaryWriteElement = document.querySelector(".diaryWrite");
-  if (!diaryWriteElement) {
-    return;
-  }
-
-  // ~일기 수정하기와 일기쓰기 구분
-  const diaryModifyElement = document.querySelector(".editWrap .diaryWrite");
-  const diaryWrite = !diaryModifyElement ? diaryWriteElement : diaryModifyElement;
-  let title = !diaryModifyElement
-    ? `<h3>📍<span class="userName"></span>의 일기 쓰기</h3>`
-    : ""
-  let button = !diaryModifyElement
-    ? `<button class="diaryWriteBtn" onclick="diarySave()" disabled>
-        등록하기
-      </button>`
-    : `<div class="buttonBox">
-        <button class="whiteBtn" onclick="history.back()">취소</button></button>
-        <button class="diaryModifyBtn blackBtn" onclick="diaryModifySave()">수정</button>
-       </div>`
-
-  let checked = !diaryModifyElement ? "checked" : "";
-  let textCheck = !diaryModifyElement ? "oninput='textCheck()'" : "";
-  diaryWrite.innerHTML = `
-        ${title}
-        ${diaryMoodTypeRender()}
-        <div class="diaryContent">
-          <label>
-            <span>제목</span>
-            <input
-              class="diaryTitle"
-              type="text"
-              placeholder="제목을 입력해 주세요."
-              ${textCheck}
-            />
-          </label>
-          <label>
-            <span>내용</span>
-            <textarea
-              id="editArea"
-              class="diaryDesc"
-            ></textarea>
-          </label>
-        </div>
-      ${button}
- `;
-
-}
-diaryWriteBox();
 
 // !쿼리에서 diaryId 가져오는 함수
 const queryStringGet = () => {
@@ -202,6 +208,7 @@ const nameSet = () => {
   nameElement.forEach((element) => {
     element.innerText = userName;
   });
+  return userName;
 }
 nameSet();
 
@@ -244,22 +251,6 @@ const optionSelect = (event, type) => {
 }
 
 
-// !게시글 삭제 함수
-const deleteBtn = (event, id) => {
-  event.preventDefault(); // 이벤트 전파 중지
-
-  // id : 삭제할 게시글의 id값
-  const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== id);
-  console.log(diaryDelArr);
-
-  const prompt = confirm('정말 삭제하시겠습니까?');
-  if (prompt) {
-    const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== id);
-    localStorage.setItem('diaryArray', JSON.stringify(diaryDelArr));
-    alert('삭제가 완료되었습니다.');
-    location.href = './index.html';
-  }
-}
 
 
 // !스크롤 상단으로 이동 함수
@@ -283,60 +274,84 @@ scrollBtnRender();
 
 
 
+//! body 스크롤 막기 및 막은것 풀기 함수
+const bodyScrollYOff = (action) => {
+  const bodyStyle = document.querySelector('body').style;
+  bodyStyle.overflowY = action;
+}
 
-//! 팝업 렌더링 함수
-const popupRender = (content) => {
+
+
+// !팝업창 닫기 함수
+const popupClose = (popupName) => {
+  const popupElement = document.querySelector(popupName);
+  popupElement.remove();
+  bodyScrollYOff('auto');
+}
+
+
+//! 팝업 렌더링 함수 
+const popupRender = (popupName, content, type) => {
+  // popupName : 팝업창 지정할 클래스명 
+  // content : 팝업창 내용
+  // type : 팝업창 타입 "alert" 지정시 alert용 스타일 적용
+
+  // 팝업창 띄워질 때 body 스크롤 막기
+  bodyScrollYOff('hidden');
 
   const popupElement = document.createElement("div");
   document.body.appendChild(popupElement);
-  popupElement.classList.add("popup");
-  popupElement.addEventListener("click", (event) => {
-    if (event.target === popupElement || event.target.classList.contains('popupClose')) {
-      // popupInner 바깥쪽을 클릭하거나 팝업 닫기 클래스 버튼 클릭시에만 팝업창 닫기
+  popupElement.classList.add('popup', popupName);
+  if (type === "alert") popupElement.classList.add('alert');
+  popupElement.innerHTML = `<div class="popupInner">${content}</div>`;
+
+  // 팝업창 바깥 영역 클릭시 팝업창 닫기용
+  popupElement.addEventListener('click', (event) => {
+    if (event.target.classList.contains(popupName)) {
+
       popupElement.remove();
+
+      // 일기 등록 완료 팝업의 뒷배경인 경우 다이어리 쓰기 팝업창 같이 닫기
+      if (popupName === "saveCompletePop") document.querySelector(".diaryWritePop").remove();
+
+      bodyScrollYOff('auto');
     }
-  });
-
-  popupElement.innerHTML = `
-    <div class="popupInner">
-    ${content}
-    </div>
-  `;
+  })
 }
 
 
 
-// !일기 쓰기 클릭시 팝업창 렌더링 함수
-const diaryWritePop = () => {
-  const content = `
-  <div class="diaryWrite">
-        <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
-        ${diaryMoodTypeRender()}
-        <div class="diaryContent">
-          <label>
-            <span>제목</span>
-            <input
-              class="diaryTitle"
-              type="text"
-              placeholder="제목을 입력해 주세요."
-              oninput='textCheck()'
-            />
-          </label>
-          <label>
-            <span>내용</span>
-            <textarea
-              id="editArea"
-              class="diaryDesc"
-            ></textarea>
-          </label>
-        </div>
-        <button>닫기</button>
-        <button class="diaryWriteBtn" onclick="diarySave()" disabled>
-          등록하기
-        </button>
-    </div>
-  `
-  popupRender(content)
+
+
+// !게시글 삭제 함수
+const diaryDelete = (diaryId) => {
+  // id : 삭제할 게시글의 id값
+  // 삭제할 게시글의 id값을 받아와서 해당 게시글을 제외한 나머지 게시글들을 배열로 저장
+  const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== diaryId);
+  localStorage.setItem('diaryArray', JSON.stringify(diaryDelArr));
+  // 현재 상세페이지에서 삭제할 경우 index.html로 이동, 리스트페이지에서 삭제할 경우 리스트 재렌더링
+  location.href.includes('detail.html') ? location.href = './index.html' : diaryListSet(diaryDelArr);
 }
+
+
+// !게시글 삭제 팝업창 함수 호출
+const diaryDeletePop = (event, diaryId) => {
+  event.preventDefault();
+  // id : 삭제할 게시글의 id값
+  popupRender("diaryDeletePop",
+    `<h2>일기 삭제</h2>
+    <p>일기를 삭제하시겠습니까?</p>
+    <div class="buttonWrap">
+    <button class="whiteBtn" onclick="popupClose('.diaryDeletePop')">취소</button>
+    <button class="blackBtn" onclick="diaryDelete(${diaryId}); popupClose('.diaryDeletePop');">삭제</button>
+    </div>`
+    , "alert");
+}
+
+
+
+
+
+
 
 
