@@ -26,57 +26,64 @@
           </li>
         </ul>
       </nav>
-      <div class="selectWrap none" id="customSelect">
-        <button id="selectBtn">
-          <p id="selectedValue">전체</p>
-          <span></span>
+      <div class="buttons_wrap">
+        <div class="selectWrap none" id="customSelect">
+          <button id="selectBtn">
+            <p id="selectedValue">전체</p>
+            <span></span>
+          </button>
+          <ul id="optionList" class="hidden">
+            <li class="option">
+              <button id="all_option" class="selected" value="all">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>전체</p>
+              </button>
+            </li>
+            <li class="option">
+              <button id="happy_option" value="happy">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>행복해요</p>
+              </button>
+            </li>
+            <li class="option">
+              <button id="sad_option" value="sad">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>슬퍼요</p>
+              </button>
+            </li>
+            <li class="option">
+              <button id="surprised_option" value="surprised">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>놀랐어요</p>
+              </button>
+            </li>
+            <li class="option">
+              <button id="angry_option" value="angry">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>화나요</p>
+              </button>
+            </li>
+            <li class="option">
+              <button id="etc_option" value="etc">
+                <img src="./public/icons/check_outline_light_xs.svg" alt="" />
+                <p>기타</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <button class="writing_button" onclick="modalOn(1, 'modal_main_add')">
+          <img src="./public/icons/plus_outline_light_m.svg" />
+          <p>일기 쓰기</p>
         </button>
-        <ul id="optionList" class="hidden">
-          <li class="option">
-            <button id="all_option" class="selected" value="all">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>전체</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="happy_option" value="happy">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>행복해요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="sad_option" value="sad">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>슬퍼요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="surprised_option" value="surprised">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>놀랐어요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="angry_option" value="angry">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>화나요</p>
-            </button>
-          </li>
-          <li class="option">
-            <button id="etc_option" value="etc">
-              <img src="./public/icons/check_outline_light_xs.svg" alt="" />
-              <p>기타</p>
-            </button>
-          </li>
-        </ul>
       </div>
-      <main class="">
+
+      <main>
         <div class="main-content">
           <ul id="diaryList">
             <li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>
           </ul>
         </div>
-        <aside>
+        <!-- <aside>
           <h2>📍 일기 쓰기</h2>
           <form id="diaryForm" onsubmit="onAddDiary(event); false;">
             <h4>오늘 기분은 어땠나요?</h4>
@@ -121,12 +128,13 @@
               등록하기
             </button>
           </form>
-        </aside>
+        </aside> -->
+        <button id="upFloatingButton" class="">
+          <img src="./public/icons/up_outline_light_xl.svg" alt="" />
+        </button>
       </main>
     </div>
-    <button id="upFloatingButton" class="">
-      <img src="./public/icons/up_outline_light_xl.svg" alt="" />
-    </button>
+
     <footer id="footerMain">
       <div class="container-layout">
         <strong>준수의 다이어리</strong>
@@ -134,5 +142,114 @@
         <span>Copyright © 2024. {name} Co., Ltd.</span>
       </div>
     </footer>
+
+    <div id="modal_depth1"></div>
+    <div id="modal_depth2"></div>
+
+    <div id="modal_main_add" class="depth1">
+      <div id="addModal" class="active">
+        <h2>📍 일기 쓰기</h2>
+        <!-- <form id="diaryForm" onsubmit="onAddDiary(event); false;"> -->
+        <form id="diaryForm" onsubmit="modalOn(2,'added_modal',event); false;">
+          <h4>오늘 기분은 어땠나요?</h4>
+          <div class="feeling-radio-wrap">
+            <p>
+              <input id="happy" type="radio" name="feeling" checked />
+              <label for="happy">행복해요</label>
+            </p>
+            <p>
+              <input id="sad" type="radio" name="feeling" />
+              <label for="sad">슬퍼요</label>
+            </p>
+            <p>
+              <input id="surprised" type="radio" name="feeling" />
+              <label for="surprised">놀랐어요</label>
+            </p>
+            <p>
+              <input id="angry" type="radio" name="feeling" />
+              <label for="angry">화나요</label>
+            </p>
+            <p>
+              <input id="etc" type="radio" name="feeling" />
+              <label for="etc">기타</label>
+            </p>
+          </div>
+          <div class="content-wrap">
+            <p>
+              <label for="title" class="label-sm">제목</label>
+              <input
+                id="title"
+                type="text"
+                placeholder="제목을 입력해 주세요." />
+            </p>
+            <p>
+              <label for="content" class="label-sm">내용</label>
+              <textarea
+                id="content"
+                placeholder="내용을 입력해 주세요."></textarea>
+            </p>
+          </div>
+          <div class="add_buttons_wrap">
+            <button
+              type="button"
+              class="modal_close_button"
+              onclick="modalOn(2, 'cancel_prompt_modal')">
+              닫기
+            </button>
+            <button type="submit" id="submitBtn" class="none" disabled>
+              등록하기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal_remove_list" class="depth1">
+      <h4>일기 삭제</h4>
+      <p>일기를 삭제 하시겠어요??</p>
+      <div class="buttons_box">
+        <button
+          class="close_modal_button first_button"
+          onclick="modalClose(true, 'modal_remove_list')">
+          취소
+        </button>
+        <button
+          class="close_modal_button"
+          onclick="modalClose(true ,'modal_remove_list', '_' ,'DELETE' )">
+          삭제
+        </button>
+      </div>
+    </div>
+
+    <!-- <div id="modal_depth2_main_added"> -->
+    <div id="added_modal" class="depth2">
+      <h4>일기 등록 완료</h4>
+      <p>등록이 완료 되었습니다.</p>
+      <button
+        class="close_modal_button"
+        onclick="modalClose(false, 'modal_main_add', 'added_modal'); onAddDiary(event)">
+        확인
+      </button>
+    </div>
+
+    <div id="cancel_prompt_modal" class="depth2">
+      <h4>일기 등록 취소</h4>
+      <p>일기 등록을 취소하시겠어요?</p>
+      <div class="buttons_box">
+        <button
+          class="close_modal_button first_button"
+          onclick="modalClose(true,'cancel_prompt_modal')">
+          계속 작성
+        </button>
+        <button
+          class="close_modal_button"
+          onclick="modalClose(false,'cancel_prompt_modal', 'modal_main_add')">
+          등록 취소
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!--  -->
+    <!--  -->
   </body>
 </html>

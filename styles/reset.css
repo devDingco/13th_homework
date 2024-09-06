@@ -141,7 +141,7 @@ button {
 }
 button:hover {
   background-color: none;
-  border: none;
+  /* border: none; */
 }
 
 a {

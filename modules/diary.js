@@ -103,13 +103,11 @@ const onAddDiary = (e) => {
   submitButtonStyleChange('off');
 };
 
-const onDeleteButtonClick = (e) => {
-  e.preventDefault();
-  console.log(e.target.classList);
+const onDeleteButtonClick = (removeId) => {
+  // e.preventDefault();
+  // console.log(e.target.classList[0]);
 
-  diaryListArray = diaryListArray.filter(
-    (diary) => diary.id !== e.target.classList[0],
-  );
+  diaryListArray = diaryListArray.filter((diary) => diary.id !== removeId);
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
   renderLocalStorageData();
 };
@@ -207,7 +205,7 @@ function diaryCard(dataFrom) {
           ${dataFrom.title}
         </h3>
       </div>
-      <button id="deleteButton"  onclick="onDeleteButtonClick(event)" >
+      <button id="deleteButton" onclick="modalOn(1, 'modal_remove_list', event)" >
         <img src="./public/icons/close_outline_light_s.svg" class="${
           dataFrom.id
         }" />
@@ -215,34 +213,77 @@ function diaryCard(dataFrom) {
     </a>`;
 }
 
-// window.addEventListener('scroll', () => {
-//   const footerLocation = document
-//     .getElementById('footerMain')
-//     .getBoundingClientRect().top;
-//   const viewLength = window.innerHeight;
+//
+//
+//
+//
+let removeListID;
+let modalDepth;
 
-//   if (viewLength >= footerLocation) {
-//     document.getElementById('upFloatingButton').style = `
-//           position: relative;
-//           bottom: 20px;
-//           left: 90vw;
-//           `;
-//   } else {
-//     document.getElementById('upFloatingButton').style = `
-//             position: fixed;
-//             bottom: 20px;
-//             left: 90vw;
-//           `;
-//   }
-//   // const scrollPosition = window.scrollY;
-//   // if (scrollPosition) {
-//   //   classNameChange(scrollFloatingButton, 'none', 'active');
-//   //   classNameChange(customSelectEl, 'none', 'active');
-//   // } else {
-//   //   classNameChange(scrollFloatingButton, 'active', 'none');
-//   //   classNameChange(customSelectEl, 'active', 'none');
-//   // }
-// });
+const modalOn = (depth, content, event) => {
+  modalDepth = depth;
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
+  if (content === 'modal_remove_list') {
+    event.stopPropagation();
+    event.preventDefault();
+    removeListID = event.target.classList[0];
+  }
+  document.getElementById(`modal_depth${depth}`).style.display = 'flex';
+  document.getElementById(content).style.display = 'flex';
+
+  if (content === 'added_modal') {
+    event.preventDefault();
+  }
+  if (content === 'modal_remove_list') {
+  }
+};
+
+const modalClose = (isOne, closeModal1, closeModal2, nextFnc) => {
+  const modalBack1 = document.getElementById('modal_depth1');
+  const modalBack2 = document.getElementById('modal_depth2');
+
+  !isOne
+    ? ((document.getElementById(closeModal1).style.display = 'none'),
+      (document.getElementById(closeModal2).style.display = 'none'),
+      (modalBack1.style.display = 'none'),
+      (modalBack2.style.display = 'none'),
+      (document.body.style.overflow = 'auto'))
+    : ((document.getElementById(closeModal1).style.display = 'none'),
+      closeModal1 === 'cancel_prompt_modal'
+        ? (modalBack2.style.display = 'none')
+        : (modalBack1.style.display = 'none'),
+      (modalBack2.style.display = 'none'));
+  if (nextFnc === 'DELETE') {
+    console.log(removeListID);
+    onDeleteButtonClick(removeListID);
+  }
+};
+
+document.getElementById('modal_depth1').addEventListener('click', () => {
+  document.getElementById('modal_depth1').style.display = 'none';
+  document
+    .querySelectorAll('.depth1')
+    .forEach((el) => (el.style.display = 'none'));
+});
+
+document.getElementById('modal_depth2').addEventListener('click', () => {
+  document.getElementById('modal_depth2').style.display = 'none';
+  document
+    .querySelectorAll('.depth2')
+    .forEach((el) => (el.style.display = 'none'));
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById(`modal_depth${modalDepth}`).style.display = 'none';
+    document
+      .querySelectorAll(`.depth${modalDepth}`)
+      .forEach((el) => (el.style.display = 'none'));
+    modalDepth -= 1;
+  }
+});
 
 scrollFloatingButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });

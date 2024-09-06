@@ -202,7 +202,7 @@ function dateFormatter() {
 
 submitButton.addEventListener('click', onEditDiary);
 cancelButton.addEventListener('click', onCancleEdit);
-deleteButtonEl.addEventListener('click', onDeleteDiaryClick);
+// deleteButtonEl.addEventListener('click', onDeleteDiaryClick);
 
 scrollFloatingButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -226,3 +226,35 @@ detailEditButton.addEventListener('click', () => {
   commentInputElement.disabled = true;
   commentInputElement.placeholder = '수정중일땐 회고를 작성할 수 없어요.';
 });
+
+const copyBtn = document.getElementById('detailClipboad');
+
+copyBtn.addEventListener('click', () => {
+  const copyText = document.querySelector('.copy_text');
+  copyText.style.display = 'block';
+  const text = document.getElementById('contentText').innerText;
+  navigator.clipboard.writeText(text);
+
+  setTimeout(() => {
+    copyText.style.display = 'none';
+  }, 1000);
+});
+
+const modalOn = (content) => {
+  // document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
+  document.getElementById('modal_depth1').style.display = 'flex';
+  document.getElementById(content).style.display = 'flex';
+};
+
+const modalClose = (closeModal1, nextFnc) => {
+  console.log('close');
+  const modalBack1 = document.getElementById('modal_depth1');
+  document.getElementById(closeModal1).style.display = 'none';
+  modalBack1.style.display = 'none';
+
+  if (nextFnc === 'DELETE') {
+    onDeleteDiaryClick();
+  }
+};

@@ -27,8 +27,12 @@
             <p id="contentText"></p>
           </div>
           <div class="buttons_container">
+            <button id="detailClipboad">내용 복사</button>
+
             <button id="detailEdit">수정</button>
-            <button id="detailDelete">삭제</button>
+            <button id="detailDelete" onclick="modalOn('modal_remove_list')">
+              삭제
+            </button>
           </div>
         </div>
         <div id="edit" class="none">
@@ -105,5 +109,26 @@
     <button id="upFloatingButton" class="">
       <img src="./public/icons/up_outline_light_xl.svg" alt="" />
     </button>
+
+    <div id="modal_depth1"></div>
+
+    <div id="modal_remove_list" class="depth1">
+      <h4>일기 삭제</h4>
+      <p>일기를 삭제 하시겠어요??</p>
+      <div class="buttons_box">
+        <button
+          class="close_modal_button first_button"
+          onclick="modalClose('modal_remove_list')">
+          취소
+        </button>
+        <button
+          class="close_modal_button"
+          onclick="modalClose('modal_remove_list','DELETE' )">
+          삭제
+        </button>
+      </div>
+    </div>
+
+    <div class="copy_text">복사되었습니다.</div>
   </body>
 </html>
