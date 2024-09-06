@@ -1,6 +1,7 @@
 const submitButton = document.getElementById('submitBtn');
 const diaryListEl = document.getElementById('diaryList');
-const customSelectEl = document.getElementById('customSelect');
+const diaryCustomSelectEl = document.getElementById('customSelect_diary');
+const photoCustomSelectEl = document.getElementById('customSelect_photo');
 const alertDiary = document.getElementById('add-list-alert');
 const scrollFloatingButton = document.getElementById('upFloatingButton');
 const deleteButtonEl = document.getElementById('deleteButton');
@@ -17,6 +18,12 @@ const feelingText = {
   sad: '슬퍼요',
   surprised: '놀랐어요',
   all: '전체',
+};
+
+const photoSelect = {
+  default: '기본형',
+  width: '가로형',
+  height: '세로형',
 };
 
 const renderLocalStorageData = () => {
@@ -104,72 +111,82 @@ const onAddDiary = (e) => {
 };
 
 const onDeleteButtonClick = (removeId) => {
-  // e.preventDefault();
-  // console.log(e.target.classList[0]);
-
   diaryListArray = diaryListArray.filter((diary) => diary.id !== removeId);
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
   renderLocalStorageData();
 };
-
+//
+//
+//
+//
 const onOptionChecked = (e) => {
-  customSelect = e ? e.currentTarget.value : 'all';
-  console.log(customSelect);
-  document.getElementById('selectedValue');
+  e.preventDefault();
+  type = e.target.name;
+  if (type === 'photo') {
+    customSelect = e ? e.currentTarget.value : 'default';
+  } else if (type === 'diary') {
+    customSelect = e ? e.currentTarget.value : 'all';
+  }
 
+  document.getElementById(`selectedValue_${type}`);
   document
-    .querySelectorAll('#optionList .option > button')
+    .querySelectorAll(`#optionList_${type} .option > button`)
     .forEach((option) => {
       option.classList.remove('selected');
     });
   document.getElementById(`${customSelect}_option`).classList.add('selected');
-  document.getElementById(
-    'selectedValue',
-  ).innerText = `${feelingText[customSelect]}`;
+  document.getElementById(`selectedValue_${type}`).innerText = `${
+    type === 'diary' ? feelingText[customSelect] : photoSelect[customSelect]
+  }`;
+  console.log(customSelect);
 
-  diaryListEl.innerHTML = '';
-  isList = false;
+  if (type === 'diary') {
+    diaryListEl.innerHTML = '';
+    isList = false;
+    diaryListArray.forEach((diaryData) => {
+      if (diaryData.feeling === customSelect) {
+        const addList = document.createElement('li');
+        isList = true;
+        console.log(diaryData.title);
+        diaryListEl.append(addList);
 
-  diaryListArray.forEach((diaryData) => {
-    if (diaryData.feeling === customSelect) {
-      const addList = document.createElement('li');
-      isList = true;
-      console.log(diaryData.title);
-      diaryListEl.append(addList);
-      addList.innerHTML = `
-    <a id="${diaryData.id}" href="./diaryDetail.html?id=${diaryData.id}" >
-      <div class="img-wrap">
-        <img src="./public/imgs/${diaryData.feeling}.svg" alt="${
-        diaryData.feeling
-      }이미지" />
-      </div>
-      <div class="info-container">
-        <div class="tag-wrap">
-          <p class="feeling-tag ${diaryData.feeling}">${
-        feelingText[diaryData.feeling]
-      }</p>
-          <p class="date-tag">${dateFormatter()}</p>
-        </div>
-        <h3 class="title">
-          ${diaryData.title}
-        </h3>
-      </div>
-    </a>
-  `;
-    } else if (customSelect === 'all') {
-      isList = true;
-      renderLocalStorageData();
+        addList.innerHTML = diaryCard(diaryData);
+      } else if (customSelect === 'all') {
+        isList = true;
+        renderLocalStorageData();
+      }
+    });
+  } else if (type === 'photo') {
+    switch (customSelect) {
+      case 'default':
+        document.querySelectorAll('.dog_photo_box').forEach((dogEl) => {
+          dogEl.style = 'aspect-ratio: 1/1';
+        });
+        break;
+      case 'width':
+        document.querySelectorAll('.dog_photo_box').forEach((dogEl) => {
+          dogEl.style = 'aspect-ratio: 16/9';
+        });
+        break;
+      case 'height':
+        document.querySelectorAll('.dog_photo_box').forEach((dogEl) => {
+          dogEl.style = 'aspect-ratio: 3/4';
+        });
+        break;
     }
-  });
-
-  document.getElementById('optionList').classList.add('hidden');
-  if (!isList) {
-    diaryListEl.innerHTML =
-      '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
   }
-  console.log(isList);
-};
+  document.getElementById(`optionList_${type}`).classList.add('hidden');
 
+  // if (!isList) {
+  //   diaryListEl.innerHTML =
+  //     '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
+  // }
+};
+//
+//
+//
+//
+//
 function dateFormatter() {
   const today = new Date();
   const year = today.getFullYear();
@@ -213,10 +230,6 @@ function diaryCard(dataFrom) {
     </a>`;
 }
 
-//
-//
-//
-//
 let removeListID;
 let modalDepth;
 
@@ -289,12 +302,20 @@ scrollFloatingButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-customSelectEl.addEventListener('mouseenter', () => {
-  document.getElementById('optionList').classList.remove('hidden');
+diaryCustomSelectEl.addEventListener('mouseenter', () => {
+  document.getElementById('optionList_diary').classList.remove('hidden');
 });
 
-customSelectEl.addEventListener('mouseleave', () => {
-  document.getElementById('optionList').classList.add('hidden');
+diaryCustomSelectEl.addEventListener('mouseleave', () => {
+  document.getElementById('optionList_diary').classList.add('hidden');
+});
+
+photoCustomSelectEl.addEventListener('mouseenter', () => {
+  document.getElementById('optionList_photo').classList.remove('hidden');
+});
+
+photoCustomSelectEl.addEventListener('mouseleave', () => {
+  document.getElementById('optionList_photo').classList.add('hidden');
 });
 
 document.querySelectorAll('.option > button').forEach((buttonEl) => {
@@ -312,3 +333,62 @@ document
   .forEach((radioBtn) => {
     radioBtn.addEventListener('change', onChangeInputValidation);
   });
+
+const onNavigationClick = (type) => {
+  const diary_main = document.getElementById('diaryList');
+  const photo_main = document.getElementById('photoList');
+  const diary_nav = document.getElementById('diary_navigate');
+  const photo_nav = document.getElementById('photo_navigate');
+  const diary_filter = document.getElementById('customSelect_diary');
+  const photo_filter = document.getElementById('customSelect_photo');
+
+  switch (type) {
+    case 'diary':
+      diary_main.style.display = 'grid';
+      photo_main.style.display = 'none';
+      classNameChange(diary_nav, 'none', 'active');
+      classNameChange(photo_nav, 'active', 'none');
+      diary_filter.style.display = 'block';
+      photo_filter.style.display = 'none';
+
+      break;
+    case 'photo':
+      diary_main.style.display = 'none';
+      photo_main.style.display = 'flex';
+      classNameChange(photo_nav, 'none', 'active');
+      classNameChange(diary_nav, 'active', 'none');
+      diary_filter.style.display = 'none';
+      photo_filter.style.display = 'block';
+      dogImageApi();
+      break;
+  }
+  // classNameChange();
+  // classNameChange();
+};
+
+async function dogImageApi() {
+  const photo_main = document.getElementById('photoList');
+  photo_main.innerHTML = '';
+  for (let i = 0; i < 10; i++) {
+    photo_main.innerHTML += `
+    <li class="dog_photo_box">
+      <div class="skeleton_stick"></div>
+      <img />
+    </li>
+    `;
+  }
+  document.querySelectorAll('.skeleton_stick').forEach((el) => {
+    el.innerHTML = el.style.animation = 'skeleton_ui 0.5s linear infinite';
+  });
+  fetch('https://dog.ceo/api/breeds/image/random/10').then((res) => {
+    res.json().then((data) => {
+      const dogImageList = data.message;
+      const dogImageSkeletons = document.querySelectorAll('.dog_photo_box img');
+      const skeletonStick = document.querySelectorAll('.skeleton_stick');
+      for (let i = 0; i < dogImageList.length; i++) {
+        dogImageSkeletons[i].src = dogImageList[i];
+        skeletonStick[i].style.animation = 'fade';
+      }
+    });
+  });
+}
