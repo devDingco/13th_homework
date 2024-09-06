@@ -1,0 +1,28 @@
+.CSS_메인 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.CSS_일기보여주는곳 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+  width: 100%;
+  order: 2;
+}
+
+.CSS_일기사진 {
+  width: 100%;
+}
+
+.CSS_일기 {
+  max-width: none;
+}
+
+.CSS_등록상자 {
+  max-width: none;
+  width: 100%;
+  order: 1;
+}
