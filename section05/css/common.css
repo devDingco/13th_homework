@@ -8,6 +8,7 @@
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   color: var(--gray-b);
   font-size: 10px;
+  font-weight: var(--weight-light);
 }
 
 /* Variables */
