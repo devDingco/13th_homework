@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>내위치 실습</title>
+  <script>
+    const 음식점목록 = [
+      { 이름: "철수네삼겹살", 위도: 37.182317, 경도: 127.3819273 },
+      { 이름: "영희네초밥", 위도: 37.2831927, 경도: 127.1162738 },
+
+    ]
+
+    const JS_내근처맛집보는기능 = () => {
+      navigator.geolocation.getCurrentPosition((받아온위치) => {
+        const 내위도 = 받아온위치.coords.latitude
+        const 내경도 = 받아온위치.coords.longitude
+        alert(`당신의 위치는 ${내위도}, ${내경도} 이군요!!`)
+
+        음식점목록.forEach(el => {
+          const 위도가까운지 = Math.abs(내위도 - el.위도) <= 0.5 ? true : false
+          const 경도가까운지 = Math.abs(내경도 - el.경도) <= 0.5 ? true : false
+
+          if (위도가까운지 && 경도가까운지) {
+            alert(`${el.이름}이 근처에 있어요!`)
+          }
+        })
+
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <button onclick="JS_내근처맛집보는기능()">내근처 맛집보기</button>
+</body>
+
+</html>

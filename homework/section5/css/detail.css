@@ -37,6 +37,7 @@ body {
   padding-bottom: 16px;
   flex-direction: column;
   align-items: flex-start;
+  border-bottom: 1px solid var(--Gray-B, #000);
   gap: 24px;
 }
 
@@ -47,158 +48,117 @@ body {
   width: 100%;
 }
 
-/* 수정화면 */
-
-.수정_기분_선택_영역 {
+.타이틀_영역 {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  align-self: stretch;
 }
 
-.기분_레이블 {
-  color: #000;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24px;
-  /* 120% */
-}
 
-.기분_선택_라디오_영역 {
+.타이틀 {
   display: flex;
-  max-width: 592px;
-  align-items: center;
-  align-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-
-  color: var(--Gray-Gray-800, #333);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 20px;
-  /* 111.111% */
-}
-
-@media (max-width: 48.686rem) {
-  .기분_선택_라디오_영역 {
-    flex-direction: column;
-  }
-
-  .라디오버튼 {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: left;
-  }
-}
-
-.라디오버튼 {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.기분_영역 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.수정_제목_영역 {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  padding-bottom: 12px;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  color: #000;
+
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  /* 109.091% */
 }
 
-.레이블 {
-  color: #333;
+.감정_사진_영역 {
+  display: flex;
+}
+
+.감정_미니사진 {
+  width: 32px;
+  height: 32px;
+}
+
+.감정_날짜 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.감정_영역 {
+  display: flex;
+}
+
+.감정 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #EA5757;
+}
+
+.날짜 {
+  color: var(--Gray-Gray-500, #919191);
   font-size: 14px;
-  font-weight: 500;
+
+  font-weight: 400;
   line-height: 20px;
   /* 142.857% */
+  color: #919191;
+
 }
 
-.제목_인풋 {
-  width: 100%;
+.내용_영역 {
   display: flex;
-  padding: 12px 16px;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
-}
-
-.수정_내용_영역 {
   width: 100%;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 12px;
+}
+
+.내용_레이블 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  /* 125% */
+}
+
+.내용 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  /* 125% */
+}
+
+.내용_복사_영역 {
+  display: flex;
+  max-width: 1168px;
+  justify-content: flex-end;
+  align-items: center;
   gap: 8px;
+  align-self: stretch;
 }
 
-.내용_인풋 {
-  width: 100%;
+.버튼_영역 {
   display: flex;
-  height: 128px;
-  padding: 12px 16px;
-  align-items: flex-start;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px
+}
+
+.버튼 {
+  display: flex;
+  padding: 8px 10px;
+  justify-content: center;
   gap: 10px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #D4D3D3);
   background: var(--Gray-W, #FFF);
-}
-
-.수정_버튼_영역 {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 16px;
-}
-
-.취소_버튼 {
-  display: flex;
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: var(--Gray-W, #FFF);
-
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.수정하기_버튼 {
-  display: flex;
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: var(--Gray-B, #000);
-
-  color: var(--Gray-Gray-50, #F2F2F2);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-
-  transition: translate 0.5s;
-}
-
-.수정하기_버튼:active {
-  transform: rotate(30deg);
 }
 
 .회고_영역 {
@@ -241,12 +201,11 @@ body {
   flex: 1 0 0;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  border-radius: 8px;
-  background: var(--Gray-Gray-50, #F2F2F2);
+  background: var(--Gray-W, #FFF);
 }
 
 .회고_입력_버튼 {
-  color: var(--Gray-Gray-50, #F2F2F2);
+  color: white;
   display: flex;
   height: 48px;
   padding: 8px 10px;
@@ -255,7 +214,7 @@ body {
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  background: var(--Gray-Gray-300, #C7C7C7)
+  background: var(--Gray-B, #000);
 }
 
 .보기_영역 {
@@ -287,4 +246,25 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+}
+
+.토스트_감싸기 {
+  display: none;
+}
+
+.토스트 {
+  display: flex;
+  width: 760px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: white;
+
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.90);
+
+  position: fixed;
+  left: calc(50% - 760px/2);
+  bottom: 20px
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>z-index 실습</title>
+  <style>
+    .CSS_빨간종이 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      /* 포지션을 주어 쌓임맥락에 포함시키면, 이제는 z-index 먹힘! */
+      position: absolute;
+
+      /* 이것만 있다고 올라가는거 아님! */
+      z-index: 999
+    }
+
+    .CSS_노란종이 {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+
+      position: absolute;
+      top: 25px;
+      left: 25px;
+
+      z-index: 1;
+    }
+
+    .CSS_파란종이 {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="CSS_빨간종이"></div>
+  <div class="CSS_노란종이"></div>
+  <div class="CSS_파란종이"></div>
+</body>
+
+</html>
