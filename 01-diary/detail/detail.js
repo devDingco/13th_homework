@@ -70,6 +70,7 @@ const updateButtonPressed = () => {
 
 const deleteButtonPressed = () => {
     document.getElementById("HTML_write_diary_delete_select_modal_bg").style = "display: block;"
+    window.scrollTo({top:0, behavior: "smooth"})
 }
 
 const inputButtonTapped = () => {

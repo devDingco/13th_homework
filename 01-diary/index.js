@@ -199,7 +199,7 @@ const makeButtonPressed = () => {
     document.getElementById("HTML_write_diary_success_modal_bg").style = "display: block;"
 }
 
-const okButtonPressed = detailModal => {
+const okButtonPressed = () => {
     dismiss()
     resetInputData()
 }
@@ -210,6 +210,7 @@ const topScrollFloatingButtonTapped = () => {
 
 // [Other]
 const presentModal = () => {
+    window.scrollTo({top:0, behavior: "smooth"})
     document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
 }
 
