@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>로컬스트리지와 제이슨 실습</title>
+    <script>
+        const JS_과일담기기능 = () => {
+            const 과일담는통 = {
+                사과: 3,
+                바나나: 2,
+                딸기: 10
+            }
+            // localStorage.setItem("과일바구니", 과일담는통) => 그냥 넣으면 이상하게 저장됨
+
+            localStorage.setItem("과일바구니", JSON.stringify(과일담는통))
+        }
+        const JS_과일꺼내기기능 = () => {
+            const 과일꺼낸통 = localStorage.getItem("과일바구니")
+            const 최종과일 =  JSON.parse(과일꺼낸통)
+            console.log(최종과일)
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_과일담기기능()">과일 담기</button>
+    <button onclick="JS_과일꺼내기기능()">과일 꺼내기</button>
+</body>
+</html>

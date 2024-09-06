@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>자바스크립트 로드 실습</title>
+    <script>
+        // const 나의이름 = prompt("이름을 입력하세요.")
+        // console.log(나의이름)
+        // document.getElementById("HTML_제목입력하는곳").innerText = 나의이름
+
+        window.onload = () => {
+            const 나의이름 = prompt("이름을 입력하세요.")
+            console.log(나의이름)
+            document.getElementById("HTML_제목입력하는곳").innerText = 나의이름
+        }
+        
+        const 프로필등록기능 = () => {
+            document.getElementById("HTML_프로필보여주는곳").innerText = "철수"
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <b id="HTML_제목입력하는곳"></b>의 다이어리에 오신 것을 환영합니다.
+    </div>
+    <div id="HTML_프로필보여주는곳"></div>
+    <input type="text">
+    <button onclick="프로필등록기능">등록하기</button>
+</body>
+</html>
