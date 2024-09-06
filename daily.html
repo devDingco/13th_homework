@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./style/dailyStyle.css" />
         <script>
-            window.onload = async function () {
+            window.onload = function () {
                 const images = document.querySelectorAll("img.post-img");
 
                 if (window.innerWidth < 400) {
@@ -27,20 +27,6 @@
                         img.src = url.href;
                     });
                 }
-
-                const res = await fetch(
-                    "https://dog.ceo/api/breeds/image/random/10"
-                ).then((res) => res.json());
-
-                document.getElementById("article-picture-component").innerHTML =
-                    res.message
-                        .map(
-                            (img, idx) => `
-                    <div>
-                        <img src=${img} class="dog-img" id="dog-img" />
-                    </div>`
-                        )
-                        .join("");
             };
 
             document.addEventListener("DOMContentLoaded", (event) => {
@@ -113,14 +99,14 @@
                         postContainer.className = "post-container";
                         postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-        <div class="post-title">
-            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-            <div class="post-date">${resultObject.date}</div>
-        </div>
-        <div class="post-content">${resultObject.title}</div>
-        <button class="post-delete" onclick="onClickDelete(event)">X</button>
-    `;
+                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+                <div class="post-title">
+                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+                    <div class="post-date">${resultObject.date}</div>
+                </div>
+                <div class="post-content">${resultObject.title}</div>
+                <button class="post-delete" onclick="onClickDelete(event)">X</button>
+            `;
 
                         parentElement.appendChild(postContainer);
                     });
@@ -132,14 +118,14 @@
                         postContainer.className = "post-container";
                         postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-        <div class="post-title">
-            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-            <div class="post-date">${resultObject.date}</div>
-        </div>
-        <div class="post-content">${resultObject.title}</div>
-        <button class="post-delete" onclick="onClickDelete(event)">X</button>
-    `;
+                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+                <div class="post-title">
+                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+                    <div class="post-date">${resultObject.date}</div>
+                </div>
+                <div class="post-content">${resultObject.title}</div>
+                <button class="post-delete" onclick="onClickDelete(event)">X</button>
+            `;
 
                         parentElement.appendChild(postContainer);
                     });
@@ -246,7 +232,13 @@
                 <div
                     id="article-picture-component"
                     class="article-picture-component"
-                ></div>
+                >
+                    <div>
+                        <div class="dog-img-before">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
             </article>
         </main>
         <footer>

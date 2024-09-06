@@ -1,4 +1,4 @@
-function onClickChangePost(event) {
+async function onClickChangePost(event) {
     const dailyElement = document.getElementById("article-daily");
     const pictureElement = document.getElementById("article-picture");
     const dailyComponent = document.getElementById("article-main");
@@ -22,5 +22,21 @@ function onClickChangePost(event) {
         dailyElement.style.color = "rgba(171, 171, 171, 1)";
         selectElement.style.display = "none";
         selectElement1.style.display = "block";
+
+        await fetch("https://dog.ceo/api/breeds/image/random/10")
+            .then((res) => res.json())
+            .then(
+                (res) =>
+                    (document.getElementById(
+                        "article-picture-component"
+                    ).innerHTML = res.message
+                        .map(
+                            (img) => `
+                            <div>
+                                <img src=${img} class="dog-img" id="dog-img" />
+                            </div>`
+                        )
+                        .join(""))
+            );
     }
 }
