@@ -28,7 +28,11 @@ const showModal = (target) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   document.querySelector('.app').style = 'overflow-y: hidden; max-height: 100vh;';
 };
-const closeModal = (target) => {
-  document.querySelector(target).style = 'display: none;';
-  document.querySelector('.app').style = 'overflow-y: auto; max-height: unset;';
+const closeModal = (target, status = 'layered') => {
+  if (status === 'nested') {
+    document.querySelector(target).style = 'display: none;';
+  } else {
+    document.querySelector(target).style = 'display: none;';
+    document.querySelector('.app').style = 'overflow-y: auto; max-height: unset;';
+  }
 };

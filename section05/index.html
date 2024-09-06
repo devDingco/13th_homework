@@ -57,16 +57,16 @@
             </fieldset>
           </form>
         </div>
+      </div>
 
-        <div class="app-modal" id="app-modal-cancel">
-          <div class="modal-floor" onclick="closeModal('#app-modal-cancel')"></div>
-          <div class="modal-add-cancel">
-            <h2>일기 등록 취소</h2>
-            <p>일기 등록을 취소하시겠어요?</p>
-            <div class="flexbox modal-actions">
-              <button type="button" class="button-keep" onclick="closeModal('#app-modal-cancel')">계속 작성</button>
-              <button type="button" class="button-add-cancel" onclick="closeModal('.modal')">등록 취소</button>
-            </div>
+      <div class="app-modal" id="app-modal-cancel">
+        <div class="modal-floor" onclick="closeModal('#app-modal-cancel', 'nested')"></div>
+        <div class="modal-add-cancel">
+          <h2>일기 등록 취소</h2>
+          <p>일기 등록을 취소하시겠어요?</p>
+          <div class="flexbox modal-actions">
+            <button type="button" class="button-keep" onclick="closeModal('#app-modal-cancel', 'nested')">계속 작성</button>
+            <button type="button" class="button-add-cancel" onclick="closeModal('.modal')">등록 취소</button>
           </div>
         </div>
       </div>
