@@ -1,0 +1,195 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard Variable";
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  margin: 0 1.25rem 2.5rem;
+}
+
+/* 헤더 */
+.CSS_헤더 {
+  width: 100%;
+  height: 3.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.CSS_일기수정하는곳 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* 기분 선택 */
+.CSS_기분선택 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.CSS_기분선택_타이틀 {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.CSS_라디오그룹 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: #333;
+}
+
+.CSS_라디오버튼 {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 일기 인풋 */
+.CSS_일기수정_영역 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.CSS_수정입력 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.CSS_인풋라벨 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: #333;
+}
+
+#HTML_일기수정제목입력창,
+#HTML_일기수정내용입력창 {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+}
+
+/* 수정 버튼 영역 */
+.CSS_수정버튼_영역 {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.CSS_버튼 {
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.CSS_취소버튼 {
+  border: 0.0625rem solid #000;
+  background-color: #fff;
+  color: #1c1c1c;
+}
+
+.CSS_수정하기버튼 {
+  background-color: #000;
+  color: #f2f2f2;
+}
+
+.CSS_수정하기버튼:hover {
+  transform: skew(-10deg, 0deg);
+}
+
+/* 회고 */
+.CSS_수정구분선 {
+  width: 100%;
+  border-bottom: 0.0625rem solid #000;
+}
+
+.CSS_회고제목 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.CSS_회고입력영역 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.CSS_회고수정입력부분 {
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+
+  border: 0.0625rem solid #d4d3d3;
+  width: 95%;
+  padding: 0.75rem 1rem;
+  height: 3rem;
+}
+
+.CSS_회고수정입력버튼 {
+  border: 0rem;
+  border-radius: 0.5rem;
+  background-color: #c7c7c7;
+  width: 4rem;
+  height: 3rem;
+}
+
+.CSS_회고목록 {
+  display: flex;
+  border-bottom: 0.0625rem solid #e4e4e4;
+  padding: 0.75rem;
+}
+
+.CSS_회고목록_날짜영역 {
+  font-size: 1rem;
+  color: #777;
+  padding-left: 0.75rem;
+}
+
+.CSS_회고목록_마지막 {
+  display: flex;
+  padding: 0.75rem;
+}
+@media (max-width: 48.7rem) {
+  html {
+    font-size: 12.8px;
+  }
+  .CSS_라디오그룹 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
