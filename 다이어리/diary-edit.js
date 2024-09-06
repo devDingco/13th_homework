@@ -7,7 +7,7 @@ const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
 let [obj, index] = [];
 
 diaryDetailContentList.map((e, i) => {
-  if (e.id == id) [obj, index] = [e, i];
+  if (e.id === id) [obj, index] = [e, i];
 });
 
 const title = document.getElementById("title_edit_input");
@@ -67,7 +67,7 @@ const createCommentHtml = (commentEntries) => {
 
 diaryEntries = diaryDetailContentList
   diaryDetailContentList.map((e, i) => {
-    if(e.id == id) index = i
+    if(e.id === id) index = i
   })
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);

@@ -2,7 +2,7 @@ const queryString = location.search;
 const part = new URLSearchParams(queryString);
 const id = part.get("id");
 const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
-const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0];
+const diaryDetailContent = diaryDetailContentList.filter((e) => e.id === id)[0];
 let diaryEntries = [];
 let commentEntries;
 let index;
@@ -94,7 +94,7 @@ const setupCommentInput = () => {
 
 diaryEntries = diaryDetailContentList;
 diaryDetailContentList.map((e, i) => {
-  if (e.id == id) index = i;
+  if (e.id === id) index = i;
 });
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);
@@ -132,8 +132,8 @@ const confirmDeleteDiary = (event) => {
 };
 
 window.addEventListener("keydown", (event) => {
-  if (event.key == "Escape") {
-    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
+  if (event.key === "Escape") {
+    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ===
     "flex";
     if(confirmDeleteDiaryModal){
       closeSingleModal("confirm_delete_diary_modal")

@@ -31,8 +31,8 @@ const appendDiaryEntry = (diaryCard) => {
   );
 
   if (
-    article.children.length == 0 ||
-    diaryEntryContainer[diaryEntryContainer.length - 1].children.length == 4
+    article.children.length === 0 ||
+    diaryEntryContainer[diaryEntryContainer.length - 1].children.length === 4
   ) {
     const diaryEntryContainer = document.createElement("div");
     diaryEntryContainer.className = "diary_entry_container";
@@ -47,9 +47,9 @@ const appendDiaryEntry = (diaryCard) => {
 };
 
 const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
-  if (currentFilteredMood == "") {
+  if (currentFilteredMood === "") {
     appendDiaryEntry(diaryCard);
-  } else if (currentFilteredMood == diaryEntry.mood) {
+  } else if (currentFilteredMood === diaryEntry.mood) {
     appendDiaryEntry(diaryCard);
   } else {
     window.location.href = "./diary.html";
@@ -159,8 +159,8 @@ const registerDiary = () => {
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].filter((e) => e.checked == true);
-  if (text.value == "" || textarea.value == "" || mood.length == 0) {
+  const mood = [...getMood].filter((e) => e.checked === true);
+  if (text.value === "" || textarea.value === "" || mood.length === 0) {
     alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
   } else {
     triggerModal("diary_registration_modal");
@@ -188,10 +188,10 @@ const updateDiaryList = (diaryList) => {
 
 const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter(
-    (diary) => diary.mood == selectedMood
+    (diary) => diary.mood === selectedMood
   );
 
-  if (filteredDiaries.length == 0) {
+  if (filteredDiaries.length === 0) {
     return alert(
       "선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요."
     );
@@ -210,7 +210,7 @@ const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    if (e.id == deleteId) index = i;
+    if (e.id === deleteId) index = i;
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
@@ -232,7 +232,7 @@ const triggerModal = (modal) => {
   upScroll();
   document.body.style.cssText = "overflow-y: hidden;";
   document.getElementById(modal).style = "display: flex;";
-  if (modal == "diary_registration_modal") {
+  if (modal === "diary_registration_modal") {
     diaryEntry.commentList = [];
     getContent(diaryEntry);
   }
@@ -252,7 +252,7 @@ const closeSingleModal = (modal) => {
 
 window.addEventListener("click", (event) => {
   const className = event.target.className;
-  if (className == "aside_layout" || className == "confirm_modal_layout") {
+  if (className === "aside_layout" || className == "confirm_modal_layout") {
     if (event.target.id != "diary_cancel_modal") {
       closeModal(event.target.id);
     } else {
@@ -266,22 +266,22 @@ const promptExitOnEsc = () => {
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
   const mood = [...getMood].filter((e) => e.checked == true);
-  if (text.value == "" || textarea.value == "" || mood.length == 0) {
+  if (text.value === "" || textarea.value === "" || mood.length === 0) {
     triggerModal("diary_cancel_modal");
   }
 };
 
 window.addEventListener("keydown", (event) => {
-  if (event.key == "Escape") {
+  if (event.key === "Escape") {
     const diaryWritingModal =
-      document.getElementById("aside_layout").style.display == "flex";
+      document.getElementById("aside_layout").style.display === "flex";
     const diaryCancelModal =
-      document.getElementById("diary_cancel_modal").style.display == "flex";
+      document.getElementById("diary_cancel_modal").style.display === "flex";
     const diaryRegistrationModal =
-      document.getElementById("diary_registration_modal").style.display ==
+      document.getElementById("diary_registration_modal").style.display ===
       "flex";
     const confirmDeleteDiaryModal =
-      document.getElementById("confirm_delete_diary_modal").style.display ==
+      document.getElementById("confirm_delete_diary_modal").style.display ===
       "flex";
 
     if (diaryWritingModal) {
