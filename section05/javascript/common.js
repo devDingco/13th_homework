@@ -36,3 +36,10 @@ const closeModal = (target, status = 'layered') => {
     document.querySelector('.app').style = 'overflow-y: auto; max-height: unset;';
   }
 };
+
+window.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key === 'Escape') {
+    closeModal('.app-modal');
+  }
+});
