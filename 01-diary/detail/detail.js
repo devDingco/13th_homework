@@ -16,7 +16,7 @@ const inputTextCheck = () => {
     reminiscenceText = document.getElementById("reminiscence_input_text").value
 }
 
-// [Data CRUD]
+// Data CRUD
 const createReminiscence = (id) => {
     diary.reminiscenceList.push({text: reminiscenceText})
     console.log(diary.reminiscenceList[0])
@@ -62,6 +62,11 @@ const updateButtonPressed = () => {
 const deleteButtonPressed = () => {
     const id = diary.id
     localStorage.removeItem(id)
+    
+    const diaryList = fetchDiaryListFromLocalStorage()
+    const filteredData = diaryList.filter(el => (Number(el.id) !== Number(id)))
+    updateDiaryListFromLocalStorage(filteredData)
+
     location.href = "../index.html"
     alert(`일기를 삭제했습니다.`)
 }
@@ -71,6 +76,16 @@ const inputButtonTapped = () => {
     document.getElementById("reminiscence_input_text").value = null
     createReminiscence(id)
     alert(`댓글을 등록했습니다.`)
+}
+
+const textCopyButtonPressed = () => {
+    const copyText = document.getElementById("detail_diary_text").innerText
+    navigator.clipboard.writeText(copyText)
+    document.getElementById("HTML_toast_message_container").style = "display: flex;"
+    window.setTimeout(() => {
+        document.getElementById("HTML_toast_message_container").style = "display: none;"
+    }, 2000)
+    
 }
 
 // Other

@@ -37,6 +37,10 @@
                 <div class="main_contents_text_container">
                     <div class="main_contents_text_title">내용</div>
                     <div id="detail_diary_text" class="main_contents_text">작성한 내용입니다.</div>
+                    <div class="main_contents_text_copy_items">
+                        <button class="main_contents_text_copy_button" onclick="textCopyButtonPressed()"><img src="../assets/copy.png">내용 복사</button>
+                    </div>
+                    
                 </div>
                 <div class="main_contents_button_container">
                     <button class="button_list" onclick="updateButtonPressed()">수정</button>
@@ -56,6 +60,8 @@
             </div>
         </section>
     </div>
+    <div id="HTML_toast_message_container" class="toast_message_container">
+        <div id="HTML_toast_message" class="toast_message">내용이 복사되었습니다.</div>
+    </div>
 </body>
-
 </html>

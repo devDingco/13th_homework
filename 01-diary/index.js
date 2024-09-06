@@ -28,23 +28,23 @@ const checkedInputMood = () => {
     moodList.forEach(el => {
         if (el.checked) {
             selectedMood = el.value
-            console.log(`선택된 기분은 "${selectedMood}" 입니다.`)
         }
     })
 }
 
 const activateWriteButton = () => {
-    if (inputTitle !== "" && inputText !== "" && selectedMood !== "") {
+    if (inputTitle !== "" && inputText !== "" && selectedMood !== undefined) {
         console.log("등록 버튼이 활성화 됩니다.")
-        document.getElementById("writeButton").disabled = false
-        document.getElementById("writeButton").style = "background-color: black; color: white"
+        console.log(selectedMood)
+        document.getElementById("HTML_diary_write_button").disabled = false
+        document.getElementById("HTML_diary_write_button").style = "background-color: black; color: white"
         return
     }
 
-    if (inputTitle === "" || inputText === "" || selectedMood === "") {
+    if (inputTitle === "" || inputText === "" || selectedMood === undefined) {
         console.log("등록 버튼이 비활성화 됩니다.")
-        document.getElementById("writeButton").disabled = true
-        document.getElementById("writeButton").style = "background-color: #C7C7C7; color: #F2F2F2"  
+        document.getElementById("HTML_diary_write_button").disabled = true
+        document.getElementById("HTML_diary_write_button").style = "background-color: #C7C7C7; color: #F2F2F2"  
         return
     }
 }
@@ -63,7 +63,6 @@ const createDiary = () => {
 
     updateDiaryListFromLocalStorage(diaryList)
     reloadData(diaryList)
-    alert(`일기가 추가되었습니다.`)
 }
 
 const removeDiary = (id) => {
@@ -85,6 +84,16 @@ const filterDiary = () => {
         isFiltered = true
         reloadData(filteredDiaryList)
     }
+}
+
+const resetInputData = () => {
+    document.getElementById("input_diary_title").value = null
+    document.getElementById("input_diary_text").value = null
+
+    const moodList = document.getElementsByName("mood_radio")
+    moodList.forEach(el => {
+        el.checked = false
+    })
 }
 
 // [Data Settings]
@@ -168,9 +177,31 @@ const deleteButtonTapped = (event, id) => {
     alert(`일기가 삭제되었습니다.`)
 }
 
+const continueButtonPressed = () => {
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
+}
+
+const closedButtonPressed = () => {
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: block;"
+}
+
+const cancelButtonPressed = () => {
+    dismiss()
+    resetInputData()
+}
+
 const writeButtonPressed = () => {
-    console.log("writeButtonPressed: 일기 작성 버튼을 눌렀습니다.")
+    presentModal()
+}
+
+const makeButtonPressed = () => {
     createDiary()
+    document.getElementById("HTML_write_diary_success_modal_bg").style = "display: block;"
+}
+
+const okButtonPressed = detailModal => {
+    dismiss()
+    resetInputData()
 }
 
 const topScrollFloatingButtonTapped = () => {
@@ -178,6 +209,17 @@ const topScrollFloatingButtonTapped = () => {
 }
 
 // [Other]
+const presentModal = () => {
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
+}
+
+const dismiss = () => {
+    document.getElementById("HTML_write_diary_success_modal_bg").style = "display: none;"
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+}
+
+// Event Listener
 window.addEventListener("scroll", () => {
     const y = window.scrollY
 
@@ -187,3 +229,10 @@ window.addEventListener("scroll", () => {
         document.getElementById("mood_select").style = "background-color: white; color: black;"
     }
 })
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        dismiss()
+    }
+})
+
