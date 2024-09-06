@@ -22,3 +22,10 @@ window.addEventListener('scroll', () => {
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+const showModal = (target) => {
+  document.querySelector(target).style = 'display: block;';
+};
+const closeModal = (target) => {
+  document.querySelector(target).style = 'display: none;';
+};
