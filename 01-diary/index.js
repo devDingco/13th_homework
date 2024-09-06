@@ -186,10 +186,7 @@ const closedButtonPressed = () => {
 }
 
 const cancelButtonPressed = () => {
-    console.log("cancelButtonPressed: 일기 등록 닫기 버튼을 눌렀습니다.")
-    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
-    document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
-
+    dismiss()
     resetInputData()
 }
 
@@ -202,9 +199,8 @@ const makeButtonPressed = () => {
     document.getElementById("HTML_write_diary_success_modal_bg").style = "display: block;"
 }
 
-const okButtonPressed = () => {
-    document.getElementById("HTML_write_diary_success_modal_bg").style = "display: none;"
-    document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+const okButtonPressed = detailModal => {
+    dismiss()
     resetInputData()
 }
 
@@ -213,6 +209,17 @@ const topScrollFloatingButtonTapped = () => {
 }
 
 // [Other]
+const presentModal = () => {
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
+}
+
+const dismiss = () => {
+    document.getElementById("HTML_write_diary_success_modal_bg").style = "display: none;"
+    document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
+    document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+}
+
+// Event Listener
 window.addEventListener("scroll", () => {
     const y = window.scrollY
 
@@ -223,6 +230,9 @@ window.addEventListener("scroll", () => {
     }
 })
 
-const presentModal = () => {
-    document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
-}
+window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        dismiss()
+    }
+})
+

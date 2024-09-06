@@ -78,6 +78,16 @@ const inputButtonTapped = () => {
     alert(`댓글을 등록했습니다.`)
 }
 
+const textCopyButtonPressed = () => {
+    const copyText = document.getElementById("detail_diary_text").innerText
+    navigator.clipboard.writeText(copyText)
+    document.getElementById("HTML_toast_message_container").style = "display: flex;"
+    window.setTimeout(() => {
+        document.getElementById("HTML_toast_message_container").style = "display: none;"
+    }, 2000)
+    
+}
+
 // Other
 const scrollPositionSetting = () => {
     const y = document.getElementById("reminiscence_input_text").offsetTop
