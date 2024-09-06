@@ -9,6 +9,72 @@
   </head>
 
   <body>
+    <div id="open-write-modal-id" class="write-modal-group">
+      <div class="write-modal-background"></div>
+      <div class="write-modal-content">
+        <div class="write-cover">
+          <div class="write-title-area">
+            <div class="write-title">📍 일기 쓰기</div>
+          </div>
+          <div class="hows-feeling-area">
+            <div class="feeling-title-area">
+              <div class="feeling-title">오늘 기분은 어땠나요?</div>
+            </div>
+            <div class="feeling-choose">
+              <input type="radio" name="feeling" id="happy" checked /> <label for="happy">행복해요</label>
+              <input type="radio" name="feeling" id="sad" /> <label for="sad">슬퍼요</label>
+              <input type="radio" name="feeling" id="surprise" /> <label for="surprise">놀랐어요</label>
+              <input type="radio" name="feeling" id="mad" /> <label for="mad">화나요</label>
+              <input type="radio" name="feeling" id="etc" /> <label for="etc">기타</label>
+            </div>
+          </div>
+          <div class="text-area">
+            <div class="text-area-title">
+              <div>제목</div>
+              <input type="text" placeholder="제목을 입력해 주세요." id="title" />
+            </div>
+            <div class="text-area-text">
+              <div>내용</div>
+              <textarea placeholder="내용을 입력해 주세요." id="body"></textarea>
+            </div>
+          </div>
+          <div class="button-area">
+            <button onclick="checkCloseModal()">닫기</button>
+            <button onclick="openCompleteModal()">등록하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="open-completeWrite-modal-id" class="completeWrite-modal-group">
+      <div id="open-complete-modal" class="write-complete-modal-background" onclick="closeWriteModal()"></div>
+      <div class="write-complete-modal">
+        <div class="completeModal-title">일기 등록 완료</div>
+        <div class="comepleteModal-sub-title">등록이 완료 되었습니다.</div>
+        <button onclick="addItem();closeWriteModal()">확인</button>
+      </div>
+    </div>
+    <div id="close-writeModal-id" class="close-writeModal-group">
+      <div class="close-writeModal-background" onclick="closeWriteModal()"></div>
+      <div class="close-witeModal">
+        <div class="close-writeModal-title">일기 등록 취소</div>
+        <div class="close-writeModal-sub-title">일기 등록을 취소 하시겠어요?</div>
+        <div class="close-writeModal-btns">
+          <button class="close-btn-continue" onclick="closeCloseModal()">계속 작성</button>
+          <button class="close-btn-exit" onclick="closeWriteModal()">등록 취소</button>
+        </div>
+      </div>
+    </div>
+    <div id="delete-content-modal-id" class="delete-modal-group">
+      <div class="delete-content-modal-background"></div>
+      <div class="delete-content-modal">
+        <div class="delete-modal-title"></div>
+        <div class="delete-modal-sub-title"></div>
+        <div class="delete-modal-btns">
+          <button class="close-deleteModal">취소</button>
+          <button class="confirm-deleteModal" onclick="deleteDiary(event)">삭제</button>
+        </div>
+      </div>
+    </div>
     <div class="scroll-up">
       <img id="scroll-id" src="../assets/topscroll fab.png" alt="top" onclick="scrollUp()" />
     </div>
@@ -28,11 +94,16 @@
           <div class="contents">
             <!-- 탭 버튼 -->
             <div class="navigate">
-              <div class="tab__item active">
-                <div class="diary" id="tab1" onclick="tab()">일기보관함</div>
+              <div class="tabs">
+                <div class="tab__item active">
+                  <div class="diary" id="tab1" onclick="tab()">일기보관함</div>
+                </div>
+                <div class="tab__item">
+                  <div class="photo" id="tab2" onclick="tab()">사진보관함</div>
+                </div>
               </div>
-              <div class="tab__item">
-                <div class="photo" id="tab2" onclick="tab()">사진보관함</div>
+              <div class="open-write-modal">
+                <button onclick="openWriteModal()">+ 일기쓰기</button>
               </div>
             </div>
 
@@ -54,38 +125,6 @@
                   <div id="library"></div>
                 </div>
                 <!-- 일기 작성 폼 -->
-                <div class="write-area">
-                  <div class="write-cover">
-                    <div class="write-title-area">
-                      <div class="write-title">📍 일기 쓰기</div>
-                    </div>
-                    <div class="hows-feeling-area">
-                      <div class="feeling-title-area">
-                        <div class="feeling-title">오늘 기분은 어땠나요?</div>
-                      </div>
-                      <div class="feeling-choose">
-                        <input type="radio" name="feeling" id="happy" checked /> <label for="happy">행복해요</label>
-                        <input type="radio" name="feeling" id="sad" /> <label for="sad">슬퍼요</label>
-                        <input type="radio" name="feeling" id="surprise" /> <label for="surprise">놀랐어요</label>
-                        <input type="radio" name="feeling" id="mad" /> <label for="mad">화나요</label>
-                        <input type="radio" name="feeling" id="etc" /> <label for="etc">기타</label>
-                      </div>
-                    </div>
-                    <div class="text-area">
-                      <div class="text-area-title">
-                        <div>제목</div>
-                        <input type="text" placeholder="제목을 입력해 주세요." id="title" />
-                      </div>
-                      <div class="text-area-text">
-                        <div>내용</div>
-                        <textarea placeholder="내용을 입력해 주세요." id="body"></textarea>
-                      </div>
-                    </div>
-                    <div class="button-area">
-                      <button onclick="addItem()">등록하기</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 

@@ -1,5 +1,41 @@
 let diaryList = [];
 
+// 모달
+const openWriteModal = () => {
+  document.getElementById("open-write-modal-id").style = "display:block";
+  document.getElementById("open-complete-modal").style = "display:none";
+  document.body.classList.add("stop-scroll");
+};
+const closeWriteModal = () => {
+  document.getElementById("open-write-modal-id").style = "display:none";
+  document.getElementById("close-writeModal-id").style = "display:none";
+  document.body.classList.remove("stop-scroll");
+};
+const openCompleteModal = () => {
+  const title = document.getElementById("title").value;
+  const body = document.getElementById("body").value;
+  if (!title) {
+    window.alert("제목을 입력하세요.");
+    return;
+  }
+  if (!body) {
+    window.alert("내용을 입력하세요.");
+    return;
+  }
+  document.getElementById("open-complete-modal").style = "display:block";
+  document.getElementById("open-completeWrite-modal-id").style = "display:block";
+};
+const checkCloseModal = () => {
+  document.getElementById("close-writeModal-id").style = "display:block";
+};
+const closeCloseModal = () => {
+  document.getElementById("close-writeModal-id").style = "display:none";
+};
+const openDeleteModal = (event) => {
+  event.preventDefault();
+  document.getElementById("delete-content-modal-id").style = "display:block";
+};
+
 // 내비게이션(탭) 함수
 function tab() {
   // 1. 탭 버튼과 탭 내용 부분들을 querySelectorAll을 사용해 변수에 담는다.
@@ -91,7 +127,7 @@ function LoadItem(event) {
         item.date
       }&body=${item.body}" }>
         <img class="thumbnail" src=${getImageUrl(item.emotion)} />
-        <div onclick="deleteDiary(event)" class="delete-btn">x</div>
+        <div onclick="openDeleteModal(event)" class="delete-btn">x</div>
         <div class="album-text">
             <div class="album-text-up">
                 <div class="feeling" style="color:${emotion_color[item.emotion]}">${emotion_kor[item.emotion]}</div>
@@ -120,19 +156,6 @@ function addItem() {
     }
   });
 
-  if (!title) {
-    window.alert("제목을 입력하세요.");
-    return;
-  }
-  if (!body) {
-    window.alert("내용을 입력하세요.");
-    return;
-  }
-  if (!selEmotion) {
-    window.alert("감정을 선택하세요.");
-    return;
-  }
-
   // 2. 일기 데이터 넣기  -> 로컬 스토리지에 넣기
 
   diaryList.push({
@@ -143,7 +166,8 @@ function addItem() {
   });
 
   localStorage.setItem("diaryList", JSON.stringify(diaryList));
-
+  document.getElementById("open-write-modal-id").style = "display:none";
+  document.getElementById("open-completeWrite-modal-id").style = "display:none";
   LoadItem();
   resetFormData();
 }
@@ -302,10 +326,10 @@ function addComment() {
 function stopScroll() {
   window.addEventListener("scroll", () => {
     const 화면위에서부터푸터위까지길이 = document.getElementById("footer-id").getBoundingClientRect().top;
-    console.log(`화면위에서부터푸터위까지길이: ${화면위에서부터푸터위까지길이}`);
+    // console.log(`화면위에서부터푸터위까지길이: ${화면위에서부터푸터위까지길이}`);
 
     const 보이는화면길이 = window.innerHeight; //window.outerHeight 메뉴, 주소창 등 포함
-    console.log(`보이는화면길이:${보이는화면길이}`);
+    // console.log(`보이는화면길이:${보이는화면길이}`);
 
     if (보이는화면길이 >= 화면위에서부터푸터위까지길이) {
       document.getElementById("scroll-id").style = `
