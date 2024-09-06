@@ -32,7 +32,7 @@ const closeModal = (target, status = 'layered') => {
   if (status === 'nested') {
     document.querySelector(target).style = 'display: none;';
   } else {
-    document.querySelector(target).style = 'display: none;';
+    document.querySelectorAll(target).forEach((element) => (element.style = 'display: none;'));
     document.querySelector('.app').style = 'overflow-y: auto; max-height: unset;';
   }
 };
