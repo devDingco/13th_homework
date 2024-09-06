@@ -71,9 +71,8 @@ const deleteItem = () => {
 
 const copyContent = () => {
   const pattern = /<[^>]*>?/g;
-  const content = document.querySelector('.detail-content-text').innerHTML.replace(pattern, '');
-
-  console.log(content);
+  const space = /\s/g;
+  const content = document.querySelector('.detail-content-text').innerHTML.replace(pattern, '').replace(space, '');
 
   navigator.clipboard.writeText(content);
 };
