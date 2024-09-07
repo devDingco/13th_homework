@@ -1,10 +1,12 @@
 const moodList = document.getElementById("mood_list");
 const registerButton = document.querySelector("button");
 const diaryContent = document.getElementById("diaryContent");
+const photoFilterList = document.getElementById("photo_filter_list");
 
 let deleteId;
 let diaryEntry = {};
 let currentFilteredMood = "";
+let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
 window.addEventListener("scroll", () => {
@@ -206,6 +208,30 @@ const onClickMood = (e) => {
   getDiariesByMood(selectedMood);
 };
 
+const getPhotoByType = (selectedPhotoType) => {
+  const dogImages = document.querySelectorAll(".dogImage")
+  switch (selectedPhotoType) {
+    case "가로형": {
+      [...dogImages].map(dogImage => {
+        dogImage.style = "aspect-ratio:  4 / 3;"
+      })
+      break;
+    }
+    case "세로형": {
+      [...dogImages].map(dogImage => {
+        dogImage.style = "aspect-ratio:  3 / 4;"
+      })
+      break;
+    }
+  }
+}
+
+const onClickPhoto = (e) => {
+  const selectedPhotoType = e.target.innerText;
+  currentFilteredPhoto = selectedPhotoType;
+  getPhotoByType(selectedPhotoType);
+};
+
 const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
@@ -292,7 +318,7 @@ const showLoadingSkeleton = () => {
   photoGallery.innerHTML = ""
   for (let i = 0; i < 10; i++) {
     photoGallery.innerHTML += `
-      <div id="skeletonBox">
+      <div>
         <img src"#" class="dogImage">
         <div id="skeleton"></div>
         </img>
@@ -357,3 +383,4 @@ window.addEventListener("keydown", (event) => {
 });
 
 moodList.addEventListener("click", onClickMood);
+photoFilterList.addEventListener("click", onClickPhoto);
