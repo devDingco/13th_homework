@@ -77,8 +77,7 @@ const addComment = (date) => {
   const commentValue = comment.value;
   commentEntries = { commentValue, date };
   diaryEntries[index].commentList.push({ ...commentEntries });
-  diaryDetailContentList.splice(index, 1, diaryEntries[index]);
-  localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
+  localStorage.setItem("diaryList", JSON.stringify(diaryEntries));
   comment.value = null;
   createCommentHtml(commentEntries);
 };
