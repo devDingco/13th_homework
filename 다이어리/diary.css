@@ -130,6 +130,31 @@
 }
 #photo_gallery > img {
   border-radius: 1.5rem;
+  width: 30rem;
+  height: 30rem;
+}
+#skeletonBox {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1.5rem;;
+  background-color: lightblue;
+}
+#skeleton {
+  width: 100px;
+  height: 800px;
+  background-color: azure;
+  filter: blur(70px);
+  animation-name: animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes animation {
+  from {
+    transform: translate(-400px, -400px) rotateZ(30deg);
+  }
+  to {
+    transform: translate(700px, 200px) rotateZ(30deg);
+  }
 }
 .sub_navigation {
   display: flex;

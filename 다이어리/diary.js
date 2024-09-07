@@ -18,7 +18,7 @@ window.addEventListener("scroll", () => {
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].map((e) => (e.checked = false));
+  [...getMood].map((e) => (e.checked = false));
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   text.value = null;
@@ -254,9 +254,9 @@ window.addEventListener("click", (event) => {
   const className = event.target.className;
   if (className === "aside_layout" || className == "confirm_modal_layout") {
     if (event.target.id != "diary_cancel_modal") {
-      closeModal(event.target.id);
+      closeAllModals(event.target.id);
     } else {
-      continueWriting(event.target.id);
+      closeSingleModal(event.target.id);
     }
   }
 });
@@ -265,9 +265,11 @@ const promptExitOnEsc = () => {
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].filter((e) => e.checked == true);
-  if (text.value === "" || textarea.value === "" || mood.length === 0) {
+  const mood = [...getMood].filter((e) => e.checked);
+  if (text.value || textarea.value || mood.length) {
     triggerModal("diary_cancel_modal");
+  }else {
+    closeSingleModal("aside_layout");
   }
 };
 
@@ -275,12 +277,28 @@ const fetchAndDisplayPhotos = () => {
   fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
     result.json().then((object) => {
       const dogImages = object.message;
-
-      document.getElementById("photo_gallery").innerHTML = dogImages.map((dogImage) => `
-          <img src="${dogImage}" width="300px;" />
-        `).join("");
+      document.getElementById("photo_gallery").innerHTML = dogImages
+        .map(
+          (dogImage) => `
+          <img src="${dogImage}" />
+        `
+        )
+        .join("");
     });
   });
+};
+
+const showLoadingSkeleton = () => {
+  const skeletonBox = document.getElementById("photo_gallery");
+  skeletonBox.innerHTML = ""
+  for (let i = 0; i < 10; i++) {
+    skeletonBox.innerHTML += `
+      <div id="skeletonBox">
+        <img src"#" id="skeleton" />
+      </div>
+    `
+  }
+  fetchAndDisplayPhotos(skeletonBox)
 }
 
 const toggleDiaryPhotoView = (viewType) => {
@@ -304,7 +322,7 @@ const toggleDiaryPhotoView = (viewType) => {
       photoStorageMenuStyle.style = blockStyle;
       diaryStorage.style = "display: none";
       photoStorage.style = "display: block";
-      fetchAndDisplayPhotos();
+      showLoadingSkeleton();
       break;
     }
   }
