@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./메인페이지.css" />
+    <script src="./메인페이지.js"></script>
+  </head>
+  <body>
+    <!--모달그룹-->
+    <div id="modal_group">
+      <div class="modal_background"></div>
+      <div class="modal_form" id="modal_form">
+        <div class="form_header">일기 쓰기</div>
+        <div class="form_radioBox">
+          <div class="radioBox_header">오늘 기분은 어땟나요?</div>
+          <div class="radioBox_body">
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="happpy"
+                value="행복해요"
+              /><label for="happpy">행복해요</label>
+            </div>
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="sad"
+                value="슬퍼요"
+              /><label for="sad">슬퍼요</label>
+            </div>
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="surprised"
+                value="놀랐어요"
+              /><label for="surprised">놀랐어요</label>
+            </div>
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="angry"
+                value="화나요"
+              /><label for="angry">화나요</label>
+            </div>
+            <div class="radioButton">
+              <input type="radio" name="emotion" id="etc" value="기타" /><label
+                for="etc"
+                >기타</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="textBox">
+          <div class="titleBox">
+            <label for="titleBox_input">제목</label>
+            <input
+              type="text"
+              id="titleBox_input"
+              placeholder="제목을 입력해주세요."
+            />
+          </div>
+          <div class="contentBox">
+            <label for="contentBox_textarea">내용</label>
+            <textarea
+              name="contentBox_input"
+              id="contentBox_textarea"
+              placeholder="내용을 입력해 주세요."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal_buttonBox">
+          <button class="cancelButton" onclick="checkClose()">닫기</button>
+          <button class="registerButton" onclick="registerButton()">
+            등록하기
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="modal_group2">
+      <div class="modal_background"></div>
+      <div id="modal_register">
+        <div class="register_header_box">
+          <div class="register_header">일기 등록 완료</div>
+          <div class="register_content">등록이 완료 되었습니다.</div>
+        </div>
+        <button onclick="closeModal()">확인</button>
+      </div>
+    </div>
+    <div id="modal_group3">
+      <div class="modal_background"></div>
+      <div id="modal_cancel">
+        <div class="cancel_header_box">
+          <div class="cancel_header">일기 등록 취소</div>
+          <div class="cancel_content">일기 등록을 취소 하시겠어요?</div>
+        </div>
+        <div class="cancel_button_box">
+          <button class="writeButton" onclick="continueWrite()">
+            계속작성
+          </button>
+          <button class="realCancelButton" onclick="realCancelButton()">
+            등록취소
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="modal_group4">
+      <div class="modal_background"></div>
+      <div class="modal_delete_diary">
+        <div class="delete_hedeader_box">
+          <div class="delete_header">일기삭제</div>
+          <div class="delete_content">일기를 삭제 하시겠어요?</div>
+        </div>
+        <div class="delete_button_box">
+          <button id="delete_cancel_button" onclick="deleteDiaryCancel()">
+            취소
+          </button>
+          <button id="delete_button" onclick="realDeleteDiary()">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="layout">
+      <div class="header">
+        <div>민지의다이어리</div>
+      </div>
+      <img class="bannerImage" src="./assets/banner.png" alt="" />
+
+      <!--네비게이션-->
+      <div class="tap">
+        <div id="diaryNav" onclick="diaryNavClick()">일기보관함</div>
+        <div id="photoNav" onclick="photoNavClick()">사진보관함</div>
+      </div>
+      <div id="filter_formButton_box">
+        <div class="diary_select">
+          <select onchange="diaryFiltering(event)" id="diaryFilter">
+            <option value="selectAll">전체</option>
+            <option value="selectHappy">행복해요</option>
+            <option value="selectSad">슬퍼요</option>
+            <option value="selectSurprised">놀랐어요</option>
+            <option value="selectAngry">화나요</option>
+            <option value="selectEtc">기타</option>
+          </select>
+        </div>
+        <button class="formButton">
+          <img src="./assets/plus_outline_light_m.svg" alt="" />
+          <div class="formButton_text" onclick="openModal()">일기쓰기</div>
+        </button>
+      </div>
+      <div id="photo_select">
+        <select onchange="photoFiltering(event)" id="photoFilter">
+          <option value="selectBase">기본형</option>
+          <option value="selectWidth">가로형</option>
+          <option value="selectHeight">세로형</option>
+        </select>
+      </div>
+      <div class="main" id="main"></div>
+      <img
+        class="floatingButton"
+        src="./assets/up_outline_light_xl.svg"
+        alt=""
+        onclick="upToButton()"
+      />
+    </div>
+    <!--푸터-->
+    <div class="footer">
+      <div class="footerBox">
+        <div class="footerBox_title">민지의 다이어리</div>
+        <div class="footerBox_representative">대표 : {name}</div>
+        <div class="footerBox_copyright">Copyright © 2024.{name} Co., Ltd.</div>
+      </div>
+    </div>
+  </body>
+</html>
