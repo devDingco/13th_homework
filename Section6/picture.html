@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사진보관함</title>
+    <link rel="stylesheet" href="./css/picture.css" />
+    <script src="./javascript/picture.js"></script>
+
+
+    <script>
+      const JS_강아지사진 = () => {
+      fetch("https://dog.ceo/api/breeds/image/random/4").then((받아온결과) => {
+      받아온결과.json().then((객체로변한결과) => {
+          console.log("결과:", 객체로변한결과)
+          const 상자 = 객체로변한결과.message
+          document.getElementById("HTML_이미지").innerHTML = 상자.map(el =>`
+          <img src="${el}" width:"30px" />
+          `)
+      })
+  })
+}
+    </script>
+</head>
+<body>
+    <div class="CSS_레이아웃">
+        <!--헤더-->
+        <div class="CSS_타이틀">민지의 다이어리</div>
+        <img class="CSS_배너이미지" src="./assets/images/banner.png" />
+  
+        <!--내비게이션-->
+        <div class="CSS_탭_영역">
+          <div class="CSS_탭 CSS_클릭되지않은탭" onclick="location.href='index.html'">일기보관함</div>
+          <div class="CSS_탭 CSS_클릭된탭">사진보관함</div>
+        </div>
+  
+        <!--필터-->
+        <div class="CSS_필터_영역_배경">
+          <select class="CSS_필터" onchange="JS_필터링기능(event)">
+            <option selected>기본</option>
+            <option value="가로형">가로형</option>
+            <option value="세로형">세로형</option>
+          </select>
+        </div>
+        <script>JS_강아지사진();</script>
+        <div class="CSS_메인", id="HTML_메인">
+            <div class="CSS_이미지영역">
+                <div id="HTML_이미지" class="CSS_이미지"></div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

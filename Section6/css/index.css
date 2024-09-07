@@ -1,0 +1,383 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  appearance: none;
+  text-decoration: none;
+}
+
+.CSS_레이아웃 {
+  margin: 0 2rem 4rem;
+}
+
+.CSS_타이틀 {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.CSS_배너이미지 {
+  width: 100%;
+}
+
+.CSS_메인 {
+  display: flex;
+  width: 100%;
+  gap: 2.4rem;
+}
+
+.CSS_탭_영역 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+  margin-bottom: 4.2rem;
+}
+
+.CSS_탭 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 2.4rem;
+}
+
+.CSS_클릭된탭 {
+  border-bottom: 0.2rem solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0.8rem;
+  color: #000;
+}
+
+.CSS_클릭되지않은탭 {
+  color: #ababab;
+}
+
+/* 필터 */
+.CSS_필터_영역_배경 {
+  display: flex;
+  gap: 1.6rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(1rem);
+  margin-bottom: 3.2rem;
+  z-index: 1;
+}
+
+.CSS_필터 {
+  min-width: 12rem;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #c7c7c7;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.CSS_색상반전 {
+  filter: invert(1);
+}
+
+.CSS_일기쓰기버튼 {
+  border-radius: 0.8rem;
+  background-color: #000;
+  width: 100%;
+  height: 4.8rem;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.CSS_일기쓰기버튼_텍스트 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* 일기 보여주는 곳*/
+.CSS_일기보여주는곳 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+}
+
+.CSS_일기 {
+  max-width: 38rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  border-radius: 1.6rem;
+}
+
+.CSS_일기:hover {
+  transform: scale(1.1);
+  box-shadow: 0rem 0.2rem 3rem 0rem rgba(0, 0, 0, 0.16);
+  transition: 0.5s;
+}
+
+.CSS_일기:hover .CSS_일기사진 {
+  filter: blur(0.3rem);
+}
+
+.CSS_일기사진 {
+  height: 28.5rem;
+  width: auto;
+}
+
+.CSS_일기정보 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.8rem 1.6rem;
+}
+
+.CSS_기분이미지 {
+  height: 100%;
+  width: 100%;
+}
+
+.CSS_일기내용 {
+  width: 100%;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1.4rem;
+  color: #777;
+}
+
+.CSS_기분 {
+  width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.CSS_행복 {
+  color: #ea5757;
+}
+
+.CSS_슬픔 {
+  color: #28b4e1;
+}
+
+.CSS_놀람 {
+  color: #d59029;
+}
+
+.CSS_화남 {
+  color: #777;
+}
+
+.CSS_기타 {
+  color: #a229ed;
+}
+
+.CSS_날짜 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  color: #919191;
+  text-align: right;
+  width: 100%;
+}
+
+.CSS_일기제목 {
+  width: 100%;
+  height: 1.8rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.CSS_삭제버튼 {
+  width: 100%;
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* 일기쓰기 모달 */
+.CSS_등록상자 {
+  border-radius: 1.6rem;
+  background-color: #fff;
+  padding: 2.4rem;
+  text-align: left;
+  font-size: 2.4rem;
+  color: #000;
+}
+
+.CSS_등록상자_내부 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+  height: 100%;
+}
+
+.CSS_등록상자_제목 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.CSS_등록상자_기분 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.CSS_등록상자_기분_타이틀 {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.CSS_일기입력상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  width: 100%;
+}
+
+.CSS_일기쓰기 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.CSS_plus부분 {
+  width: 2.4rem;
+}
+
+.CSS_인풋라벨 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.CSS_라디오그룹 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  color: #333;
+}
+
+.CSS_라디오버튼 {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.CSS_라디오버튼 > div {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2rem;
+}
+
+.CSS_일기쓰기_등록버튼 {
+  width: 100%;
+  border-radius: 0.8rem;
+  background-color: #c7c7c7;
+  height: 4.8rem;
+  display: flex;
+  align-items: center;
+  border: 0rem;
+  justify-content: center;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+  font-size: 1.8rem;
+  color: #f2f2f2;
+}
+
+#HTML_제목입력창,
+#HTML_내용입력창 {
+  width: 100%;
+  border-radius: 0.8rem;
+  background-color: #fff;
+  border: 0.1rem solid #d4d3d3;
+  padding: 1.2rem 1.6rem;
+  text-align: left;
+  font-size: 1.6rem;
+}
+
+/* 푸터 영역 */
+.CSS_푸터_영역 {
+  width: 100%;
+  display: flex;
+  padding: 2.4rem 2rem;
+  justify-content: center;
+  background-color: #f2f2f2;
+}
+
+.CSS_푸터 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.CSS_푸터_제목 {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+}
+
+.CSS_푸터_대표 {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: #5f5f5f;
+}
+
+.CSS_푸터_Copyright {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: #919191;
+}
+
+/* 플로팅 버튼 */
+.CSS_플로팅버튼 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 4rem;
+  right: 2rem;
+}
+
+.CSS_플로팅이미지 {
+  width: 4rem;
+}

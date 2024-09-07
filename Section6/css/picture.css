@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+}
+  
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CSS_배너이미지 {
+    width: 100%;
+}
+
+/* 탭 */
+
+.CSS_탭_영역 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.6rem;
+    margin-top: 2.4rem;
+    margin-bottom: 4.2rem;
+}
+  
+.CSS_탭 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.4rem;
+}
+
+.CSS_클릭된탭 {
+    border-bottom: 0.2rem solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 0.8rem;
+    color: #000;
+}
+  
+.CSS_클릭되지않은탭 {
+    color: #ababab;
+}
+  
+
+/* 필터 */
+.CSS_필터_영역_배경 {
+    width: 100%;
+    height: 3.2rem;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(1rem);
+    margin-bottom: 3.2rem;
+}
+  
+.CSS_필터 {
+    min-width: 12rem;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #c7c7c7;
+    height: 3.2rem;
+    margin-bottom: 4.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+}
+
+.CSS_메인 {
+    display: flex;
+    width: 100%;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.CSS_레이아웃 {
+    margin: 0 2rem 4rem;
+}
+
+.CSS_타이틀 {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.CSS_이미지영역 {
+    width: 64rem;
+    display: flex;
+    gap: 2.4rem;
+    
+}
+ 
+.CSS_이미지 {
+    width: 300px;
+    
+    object-fit: contain;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1 / 1;
+
+}
