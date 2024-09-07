@@ -274,31 +274,32 @@ const promptExitOnEsc = () => {
 };
 
 const fetchAndDisplayPhotos = () => {
+  const dogImage = document.querySelectorAll(".dogImage")
   fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
     result.json().then((object) => {
+      const skeleton = document.querySelectorAll("#skeleton")
       const dogImages = object.message;
-      document.getElementById("photo_gallery").innerHTML = dogImages
-        .map(
-          (dogImage) => `
-          <img src="${dogImage}" />
-        `
-        )
-        .join("");
-    });
+      dogImages.map((e, i) => {
+        skeleton[i].style = "display: none"
+        dogImage[i].src = e
+      })
+    })
   });
 };
 
 const showLoadingSkeleton = () => {
-  const skeletonBox = document.getElementById("photo_gallery");
-  skeletonBox.innerHTML = ""
+  const photoGallery = document.getElementById("photo_gallery");
+  photoGallery.innerHTML = ""
   for (let i = 0; i < 10; i++) {
-    skeletonBox.innerHTML += `
+    photoGallery.innerHTML += `
       <div id="skeletonBox">
-        <img src"#" id="skeleton" />
+        <img src"#" class="dogImage">
+        <div id="skeleton"></div>
+        </img>
       </div>
     `
   }
-  fetchAndDisplayPhotos(skeletonBox)
+  fetchAndDisplayPhotos()
 }
 
 const toggleDiaryPhotoView = (viewType) => {

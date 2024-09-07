@@ -136,21 +136,27 @@
 #skeletonBox {
   width: 30rem;
   height: 30rem;
-  border-radius: 1.5rem;;
-  background-color: lightblue;
+  border-radius: 1.5rem;
 }
 #skeleton {
   width: 100px;
   height: 800px;
-  background-color: azure;
+  background-color: white;
   filter: blur(70px);
   animation-name: animation;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
+.dogImage{
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1.5rem;;
+  object-fit: cover;
+  background-color: lightblue;
+}
 @keyframes animation {
   from {
-    transform: translate(-400px, -400px) rotateZ(30deg);
+    transform: translate(100px, -800px) rotateZ(30deg);
   }
   to {
     transform: translate(700px, 200px) rotateZ(30deg);
