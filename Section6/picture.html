@@ -10,12 +10,12 @@
 
     <script>
       const JS_강아지사진 = () => {
-      fetch("https://dog.ceo/api/breeds/image/random/4").then((받아온결과) => {
+      fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) => {
       받아온결과.json().then((객체로변한결과) => {
           console.log("결과:", 객체로변한결과)
           const 상자 = 객체로변한결과.message
           document.getElementById("HTML_이미지").innerHTML = 상자.map(el =>`
-          <img src="${el}" style = "width: 640px; height:640px; border-radius: 24px; : align-items: center;" />
+          <img src="${el}" style = "width: 640px; height:640px; border-radius: 24px; align-items: center;" />
           `)
       })
   })
