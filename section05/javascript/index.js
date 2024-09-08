@@ -23,11 +23,31 @@ const renderData = (array) => {
   <li class="panel-item">
     <a href="./detail.html?number=${index}#review">
       <div class="emotion-card">
-      ${el.emotion === 'happy' ? '<img src="./assets/images/image_emotion_happy.png" alt="" />' : ''}
-      ${el.emotion === 'sad' ? '<img src="./assets/images/image_emotion_sad.png" alt="" />' : ''}
-      ${el.emotion === 'surprising' ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />' : ''}
-      ${el.emotion === 'angry' ? '<img src="./assets/images/image_emotion_angry.png" alt="" />' : ''}
-      ${el.emotion === 'etc' ? '<img src="./assets/images/image_emotion_etc.png" alt="" />' : ''}
+      ${
+        el.emotion === 'happy'
+          ? '<img src="./assets/images/image_emotion_happy.png" alt="" />'
+          : ''
+      }
+      ${
+        el.emotion === 'sad'
+          ? '<img src="./assets/images/image_emotion_sad.png" alt="" />'
+          : ''
+      }
+      ${
+        el.emotion === 'surprising'
+          ? '<img src="./assets/images/image_emotion_surprising.png" alt="" />'
+          : ''
+      }
+      ${
+        el.emotion === 'angry'
+          ? '<img src="./assets/images/image_emotion_angry.png" alt="" />'
+          : ''
+      }
+      ${
+        el.emotion === 'etc'
+          ? '<img src="./assets/images/image_emotion_etc.png" alt="" />'
+          : ''
+      }
       </div>
 
       <div class="panel-delete">
@@ -57,7 +77,10 @@ const renderData = (array) => {
 };
 
 const showDiary = () => {
-  const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
+  const diaryListString =
+    localStorage.getItem('myDiaryList') !== null
+      ? localStorage.getItem('myDiaryList')
+      : '[]';
   const diaryList = JSON.parse(diaryListString);
 
   if (diaryList.length !== 0) {
@@ -103,7 +126,8 @@ const saveDiary = () => {
     emotion,
   };
 
-  let previousData = JSON.parse(window.localStorage.getItem('myDiaryList')) ?? [];
+  let previousData =
+    JSON.parse(window.localStorage.getItem('myDiaryList')) ?? [];
 
   diaryList = [...previousData, data];
 
@@ -114,9 +138,23 @@ const saveDiary = () => {
 
 const filterEmotion = (event) => {
   const target = event.target.value;
-  const convertedTarget = target === '행복해요' ? 'happy' : target === '슬퍼요' ? 'sad' : target === '화나요' ? 'angry' : target === '놀랐어요' ? 'surprising' : target === '기타' ? 'etc' : '';
+  const convertedTarget =
+    target === '행복해요'
+      ? 'happy'
+      : target === '슬퍼요'
+      ? 'sad'
+      : target === '화나요'
+      ? 'angry'
+      : target === '놀랐어요'
+      ? 'surprising'
+      : target === '기타'
+      ? 'etc'
+      : '';
 
-  const diaryListString = window.localStorage.getItem('myDiaryList') !== null ? window.localStorage.getItem('myDiaryList') : '[]';
+  const diaryListString =
+    window.localStorage.getItem('myDiaryList') !== null
+      ? window.localStorage.getItem('myDiaryList')
+      : '[]';
   const diaryList = JSON.parse(diaryListString);
 
   const filteredList = diaryList.filter((el) => el.emotion == convertedTarget);
@@ -129,7 +167,10 @@ const filterEmotion = (event) => {
 const deleteItem = (event, itemIndex) => {
   event.preventDefault();
 
-  const diaryListString = window.localStorage.getItem('myDiaryList') !== null ? window.localStorage.getItem('myDiaryList') : '[]';
+  const diaryListString =
+    window.localStorage.getItem('myDiaryList') !== null
+      ? window.localStorage.getItem('myDiaryList')
+      : '[]';
   const diaryList = JSON.parse(diaryListString);
   const filteredList = diaryList.filter((_, index) => index !== itemIndex);
 
@@ -138,4 +179,26 @@ const deleteItem = (event, itemIndex) => {
   alert('일기가 삭제되었습니다.');
 
   showDiary();
+};
+
+const toggleMenu = () => {
+  const menu = document.querySelectorAll('.menu-list li');
+  const content = document.querySelectorAll('.content');
+
+  menu.forEach((item, index) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      menu.forEach((menu) => {
+        menu.classList.remove('active');
+      });
+
+      content.forEach((content) => {
+        content.classList.remove('active');
+      });
+
+      menu[index].classList.add('active');
+      content[index].classList.add('active');
+    });
+  });
 };
