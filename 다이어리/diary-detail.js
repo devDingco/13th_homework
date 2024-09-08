@@ -123,23 +123,13 @@ const closeSingleModal = (modal) => {
 
 const triggerModal = (modal) => {
   document.getElementById(modal).style = "display: flex;";
+  document.getElementById("deleteDiaryBtn").focus();
 };
 
 const confirmDeleteDiary = (event) => {
   event.preventDefault();
   deleteId = event.target.className;
-  triggerModal("confirm_delete_diary_modal");
+  triggerModal("confirm_delete_diary_modal_detail_page");
 };
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    const confirmDeleteDiaryModal =
-      document.getElementById("confirm_delete_diary_modal").style.display ===
-      "flex";
-    confirmDeleteDiaryModal
-      ? closeSingleModal("confirm_delete_diary_modal")
-      : undefined;
-  }
-});
 
 createHtml(diary);

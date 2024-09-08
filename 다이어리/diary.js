@@ -359,42 +359,5 @@ const toggleDiaryPhotoView = (viewType) => {
   }
 };
 
-const onKeyPress = (event) => {
-  console.log(event.target.offsetParent.id);
-  const modalParentId = event.target.offsetParent.id;
-  const ENTER_KEY_CODE = event.keyCode === 13;
-  const ESCAPE_KEY_CODE = event.keyCode === 27;
-  switch (modalParentId) {
-    case "aside_layout": {
-      ENTER_KEY_CODE
-        ? registerDiary(event)
-        : ESCAPE_KEY_CODE
-        ? triggerModal("diary_cancel_modal")
-        : undefined;
-      break;
-    }
-    case "diary_registration_modal": {
-      ENTER_KEY_CODE || ESCAPE_KEY_CODE
-        ? closeAllModals("diary_registration_modal")
-        : undefined;
-      break;
-    }
-    case "diary_cancel_modal": {
-      ENTER_KEY_CODE
-        ? closeAllModals("diary_cancel_modal")
-        : ESCAPE_KEY_CODE
-        ? closeSingleModal("diary_cancel_modal")
-        : undefined;
-      break;
-    }
-    case "confirm_delete_diary_modal": {
-      ENTER_KEY_CODE || ESCAPE_KEY_CODE
-        ? closeAllModals("confirm_delete_diary_modal")
-        : undefined;
-      break;
-    }
-  }
-};
-
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);
