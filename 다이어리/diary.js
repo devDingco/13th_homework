@@ -210,22 +210,22 @@ const onClickMood = (e) => {
 };
 
 const getPhotoByType = (selectedPhotoType) => {
-  const dogImages = document.querySelectorAll(".dogImage")
+  const dogImages = document.querySelectorAll(".dogImage");
   switch (selectedPhotoType) {
     case "가로형": {
-      [...dogImages].map(dogImage => {
-        dogImage.style = "aspect-ratio:  4 / 3;"
-      })
+      [...dogImages].map((dogImage) => {
+        dogImage.style = "aspect-ratio:  4 / 3;";
+      });
       break;
     }
     case "세로형": {
-      [...dogImages].map(dogImage => {
-        dogImage.style = "aspect-ratio:  3 / 4;"
-      })
+      [...dogImages].map((dogImage) => {
+        dogImage.style = "aspect-ratio:  3 / 4;";
+      });
       break;
     }
   }
-}
+};
 
 const onClickPhoto = (e) => {
   const selectedPhotoType = e.target.innerText;
@@ -255,14 +255,28 @@ const upScroll = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
+const focusActiveModal = (modal) => {
+  switch (modal) {
+    case "aside_layout":
+      document.getElementById("check_happy").focus();
+      break;
+    case "diary_cancel_modal":
+      document.getElementById("cancelRegistrationBtn").focus();
+      break;
+    case "diary_registration_modal": {
+      diaryEntry.commentList = [];
+      getContent(diaryEntry);
+      document.getElementById("confirmRegistration").focus();
+      break;
+    }
+  }
+};
+
 const triggerModal = (modal) => {
   upScroll();
   document.body.style.cssText = "overflow-y: hidden;";
   document.getElementById(modal).style = "display: flex;";
-  if (modal === "diary_registration_modal") {
-    diaryEntry.commentList = [];
-    getContent(diaryEntry);
-  }
+  focusActiveModal(modal);
 };
 
 const closeAllModals = (modal) => {
@@ -295,28 +309,28 @@ const promptExitOnEsc = () => {
   const mood = [...getMood].filter((e) => e.checked);
   if (text.value || textarea.value || mood.length) {
     triggerModal("diary_cancel_modal");
-  }else {
+  } else {
     closeSingleModal("aside_layout");
   }
 };
 
 const fetchAndDisplayPhotos = () => {
-  const dogImage = document.querySelectorAll(".dogImage")
+  const dogImage = document.querySelectorAll(".dogImage");
   fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
     result.json().then((object) => {
-      const skeleton = document.querySelectorAll("#skeleton")
+      const skeleton = document.querySelectorAll("#skeleton");
       const dogImages = object.message;
       dogImages.map((e, i) => {
-        skeleton[i].style = "display: none"
-        dogImage[i].src = e
-      })
-    })
+        skeleton[i].style = "display: none";
+        dogImage[i].src = e;
+      });
+    });
   });
 };
 
 const showLoadingSkeleton = () => {
   const photoGallery = document.getElementById("photo_gallery");
-  photoGallery.innerHTML = ""
+  photoGallery.innerHTML = "";
   for (let i = 0; i < 10; i++) {
     photoGallery.innerHTML += `
       <div>
@@ -324,10 +338,10 @@ const showLoadingSkeleton = () => {
         <div id="skeleton"></div>
         </img>
       </div>
-    `
+    `;
   }
-  fetchAndDisplayPhotos()
-}
+  fetchAndDisplayPhotos();
+};
 
 const toggleDiaryPhotoView = (viewType) => {
   const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
@@ -339,53 +353,50 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
-      diaryStorageMenuStyle.style = blockStyle;
-      photoStorageMenuStyle.style = noneStyle;
-      diaryStorage.style = "display: block";
       photoStorage.style = "display: none";
+      diaryStorage.style = "display: block";
+      photoStorageMenuStyle.style = noneStyle;
+      diaryStorageMenuStyle.style = blockStyle;
       break;
     }
     case "photoStorage": {
-      diaryStorageMenuStyle.style = noneStyle;
-      photoStorageMenuStyle.style = blockStyle;
       diaryStorage.style = "display: none";
       photoStorage.style = "display: block";
+      diaryStorageMenuStyle.style = noneStyle;
+      photoStorageMenuStyle.style = blockStyle;
       showLoadingSkeleton();
       break;
     }
   }
 };
 
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    const diaryWritingModal =
-      document.getElementById("aside_layout").style.display === "flex";
-    const diaryCancelModal =
-      document.getElementById("diary_cancel_modal").style.display === "flex";
-    const diaryRegistrationModal =
-      document.getElementById("diary_registration_modal").style.display ===
-      "flex";
-    const confirmDeleteDiaryModal =
-      document.getElementById("confirm_delete_diary_modal").style.display ===
-      "flex";
-
-    if (diaryWritingModal) {
-      if (diaryCancelModal) closeSingleModal("diary_cancel_modal");
-      else if (diaryRegistrationModal)
-        closeAllModals("diary_registration_modal");
-      else {
-        promptExitOnEsc();
-      }
+const onKeyPress = (event) => {
+  const modalParentId = event.target.offsetParent.id;
+  switch (modalParentId) {
+    case "aside_layout": {
+      event.keyCode === 13
+        ? registerDiary(event)
+        : event.keyCode === 27
+        ? triggerModal("diary_cancel_modal")
+        : undefined;
+      break;
     }
-    if (confirmDeleteDiaryModal) {
-      closeSingleModal("confirm_delete_diary_modal");
+    case "diary_registration_modal": {
+      event.keyCode === 13 || event.keyCode === 27
+        ? closeAllModals("diary_registration_modal")
+        : undefined;
+      break;
+    }
+    case "diary_cancel_modal": {
+      event.keyCode === 13
+        ? closeAllModals("diary_cancel_modal")
+        : event.keyCode === 27
+        ? closeSingleModal("diary_cancel_modal")
+        : undefined;
+      break;
     }
   }
-});
-
-const onKeyEvent = (event) =>{
-  event.keyCode === 13 ? registerDiary(event) : undefined;
-}
+};
 
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);

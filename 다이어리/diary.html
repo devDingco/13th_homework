@@ -72,7 +72,7 @@
             <div class="main">
               <div class="article" id="article"></div>
               <div id="aside_layout" class="aside_layout">
-                <form action="#" onsubmit="registerDiary(event)">
+                <form action="#" onsubmit="registerDiary(event)" name="form">
                   <div class="aside">
                     <div class="diary_entry_title">📍 일기 쓰기</div>
                     <div class="diary_entry_form">
@@ -85,6 +85,7 @@
                               id="check_happy"
                               class="mood_options"
                               name="mood"
+                              onkeydown="onKeyPress(event)"
                             /><label for="check_happy" class="mood_text"
                               >행복해요</label
                             >
@@ -95,6 +96,7 @@
                               id="check_sad"
                               class="mood_options"
                               name="mood"
+                              onkeydown="onKeyPress(event)"
                             /><label for="check_sad" class="mood_text"
                               >슬퍼요</label
                             >
@@ -105,6 +107,7 @@
                               id="check_surprise"
                               class="mood_options"
                               name="mood"
+                              onkeydown="onKeyPress(event)"
                             /><label for="check_surprise" class="mood_text"
                               >놀랐어요</label
                             >
@@ -115,6 +118,7 @@
                               id="check_upset"
                               class="mood_options"
                               name="mood"
+                              onkeydown="onKeyPress(event)"
                             /><label for="check_upset" class="mood_text"
                               >화나요</label
                             >
@@ -125,6 +129,7 @@
                               id="check_etc"
                               class="mood_options"
                               name="mood"
+                              onkeydown="onKeyPress(event)"
                             /><label for="check_etc">기타</label>
                           </div>
                         </div>
@@ -136,6 +141,7 @@
                             class="diary_title_window"
                             type="text"
                             placeholder="제목을 입력해 주세요."
+                            onkeydown="onKeyPress(event)"
                           />
                         </div>
                         <div class="diary_contents_group">
@@ -144,7 +150,7 @@
                             class="diary_contents_window"
                             type="text"
                             placeholder="내용을 입력해 주세요."
-                            onkeydown="onKeyEvent(event)"
+                            onkeydown="onKeyPress(event)"
                           ></textarea>
                         </div>
                       </div>
@@ -187,7 +193,7 @@
       <div class="confirm_modal">
         <div class="modal_title">일기 등록 완료</div>
         <div class="modal_content">등록이 완료 되었습니다.</div>
-        <button onclick="closeAllModals('diary_registration_modal')">확인</button>
+        <button onclick="closeAllModals('diary_registration_modal')" id="confirmRegistration" onkeydown="onKeyPress(event)">확인</button>
       </div>
     </div>
     <div class="confirm_modal_layout" id="diary_cancel_modal">
@@ -201,6 +207,8 @@
           <button
             class="cancel_registration_btn"
             onclick="closeAllModals('diary_cancel_modal')"
+            id="cancelRegistrationBtn"
+            onkeydown="onKeyPress(event)"
           >
             등록 취소
           </button>
