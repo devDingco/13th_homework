@@ -12,7 +12,13 @@ const diaryContent = currentDiary.content
 const time = new Date().toISOString().split("T")[0].replace(/-/g, ". ")
 
 makeDiaryDetail();
-makeDiaryComment()
+makeDiaryComment();
+moveToComment();
+
+function moveToComment() {
+    const commentSection = document.querySelector(".comment__list").getBoundingClientRect().top
+    window.scrollTo({ top: commentSection, behavior: "smooth" })
+}
 
 function makeDiaryDetail() {
     const moodIndex = {
@@ -43,18 +49,24 @@ function makeDiaryDetail() {
             </div>
             <div class="body__content">
                 <div class="content__title">
-                    <div class="title__text">내용</div>
+                    <div class="title__text"></div>
                     <div class="title__button">
                         <div class="btn__delete">삭제</div>
                         <div class="btn__edit">수정</div>
                     </div>
                 </div>
-                <div class="content__text">${diaryContent}</div>
+                <div class="content__text"> ${diaryContent}</div>
+                <div class="content__copy">
+                    <div class="copy__icon">
+                        <img src="../asset/icon/copy_outline_light_xs.png" />
+                    </div>
+                    <div class="copy__text">내용 복사</div>
+                </div>
             </div>
         </div>
 `
 
-        document.querySelector(".btn__delete").addEventListener('click', deleteDiary)
+        document.querySelector(".btn__delete").addEventListener('click', deleteModal)
         document.querySelector(".btn__edit").addEventListener('click', editDiary)
 
         switch(diaryMood) {
@@ -83,6 +95,27 @@ function makeDiaryDetail() {
         console.log( "받아올 데이터가 없어요!!" )
     };
 };
+
+function copyContent () {
+    document.querySelector(".container__toast").style = "display: none;"
+    const diaryContent = document.querySelector(".content__text").innerText
+    navigator.clipboard.writeText(diaryContent)
+    document.querySelector(".container__toast").style = "display: flex;"
+}
+
+function deleteModal () {
+    document.querySelector(".container__modal").style = "width: 100%; height: 100%;"
+    document.querySelector(".modal__bg").style = "display: flex;"
+    document.querySelector(".modal__delete").style = "display: flex;"
+    document.querySelector("body").classList.add("stop-scrolling")
+}
+
+function cancelModal () {
+    document.querySelector(".container__modal").style = "width: 0%; height: 0%;"
+    document.querySelector(".modal__bg").style = "display: none;"
+    document.querySelector(".modal__delete").style = "display: none;"
+    document.querySelector("body").classList.remove("stop-scrolling")
+}
 
 function deleteDiary () {
     getDiary.splice(indexNum, 1)
@@ -172,15 +205,6 @@ function submitComment () {
     let diaryWithComment = getDiary
     diaryWithComment[indexNum].comment.push(diaryComment)
 
-    console.log ( diaryWithComment )
-    console.log ( typeof( diaryWithComment ) )
-
-    console.log ( diaryWithComment[indexNum] )
-    console.log ( typeof( diaryWithComment[indexNum] ) )
-
-    console.log ( diaryWithComment[indexNum].comment )
-    console.log ( typeof( diaryWithComment[indexNum].comment ) )
-
     localStorage.setItem("diaryData", JSON.stringify(diaryWithComment))
     document.querySelector(".input__text").value = ""
 
@@ -209,6 +233,13 @@ function makeDiaryComment () {
     }
 };
 
+// document.querySelector(".btn__delete").addEventListener('click', deleteDiary)
+// document.querySelector(".btn__edit").addEventListener('click', editDiary)
 document.querySelector(".btn__cancel").addEventListener('click', cancelEdit)
 document.querySelector(".btn__submit").addEventListener('click', submitEdit)
+
+document.querySelector(".btn__cancel2").addEventListener('click', cancelModal)
+document.querySelector(".btn__delete2").addEventListener('click', deleteDiary)
+
+document.querySelector(".content__copy").addEventListener('click', copyContent)
 document.querySelector(".btn__input").addEventListener('click', submitComment)
