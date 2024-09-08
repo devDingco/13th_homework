@@ -1,6 +1,5 @@
 const onKeyPress = (event) => {
   const modalParentId = event.target.offsetParent.id;
-  console.log(modalParentId);
   const ENTER_KEY_CODE = event.keyCode === 13;
   const ESCAPE_KEY_CODE = event.keyCode === 27;
   switch (modalParentId) {
