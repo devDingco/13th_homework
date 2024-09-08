@@ -163,11 +163,11 @@ const registerDiary = (event) => {
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
   const mood = [...getMood].filter((e) => e.checked === true);
-  if (text.value === "" || textarea.value === "" || mood.length === 0) {
-    alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.");
-  } else {
-    triggerModal("diary_registration_modal");
-  }
+  const isAllFieldsFilled =
+    text.value === "" || textarea.value === "" || mood.length === 0;
+  isAllFieldsFilled
+    ? alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.")
+    : triggerModal("diary_registration_modal");
 };
 
 storedDiaryList.map((diary) => {
@@ -193,13 +193,9 @@ const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter(
     (diary) => diary.mood === selectedMood
   );
-
-  if (filteredDiaries.length === 0) {
-    return alert(
-      "선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요."
-    );
-  }
-
+  filteredDiaries.length === 0
+    ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
+    : undefined;
   updateDiaryList(filteredDiaries);
 };
 
@@ -237,7 +233,7 @@ const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    if (e.id === deleteId) index = i;
+    e.id === deleteId ? (index = i) : undefined;
   });
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
@@ -294,11 +290,9 @@ const closeSingleModal = (modal) => {
 window.addEventListener("click", (event) => {
   const className = event.target.className;
   if (className === "aside_layout" || className == "confirm_modal_layout") {
-    if (event.target.id != "diary_cancel_modal") {
-      closeAllModals(event.target.id);
-    } else {
-      closeSingleModal(event.target.id);
-    }
+    event.target.id != "diary_cancel_modal"
+      ? closeAllModals(event.target.id)
+      : closeSingleModal(event.target.id);
   }
 });
 
@@ -307,11 +301,9 @@ const promptExitOnEsc = () => {
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
   const mood = [...getMood].filter((e) => e.checked);
-  if (text.value || textarea.value || mood.length) {
-    triggerModal("diary_cancel_modal");
-  } else {
-    closeSingleModal("aside_layout");
-  }
+  text.value || textarea.value || mood.length
+    ? triggerModal("diary_cancel_modal")
+    : closeSingleModal("aside_layout");
 };
 
 const fetchAndDisplayPhotos = () => {
