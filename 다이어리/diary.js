@@ -157,7 +157,8 @@ const getContent = (diaryEntry) => {
   getTitle(diaryEntry);
 };
 
-const registerDiary = () => {
+const registerDiary = (event) => {
+  event.preventDefault();
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   const getMood = document.getElementsByName("mood");
@@ -381,6 +382,10 @@ window.addEventListener("keydown", (event) => {
     }
   }
 });
+
+const onKeyEvent = (event) =>{
+  event.keyCode === 13 ? registerDiary(event) : undefined;
+}
 
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);
