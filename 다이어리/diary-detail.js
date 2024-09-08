@@ -93,7 +93,7 @@ const setupCommentInput = () => {
 
 diaryEntries = diaryDetailContentList;
 diaryDetailContentList.map((e, i) => {
-  if (e.id === id) index = i;
+  e.id === id ? (index = i) : undefined;
 });
 diaryDetailContentList[index].commentList.map((comment) => {
   createCommentHtml(comment);
@@ -132,11 +132,12 @@ const confirmDeleteDiary = (event) => {
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ===
-    "flex";
-    if(confirmDeleteDiaryModal){
-      closeSingleModal("confirm_delete_diary_modal")
-    }
+    const confirmDeleteDiaryModal =
+      document.getElementById("confirm_delete_diary_modal").style.display ===
+      "flex";
+    confirmDeleteDiaryModal
+      ? closeSingleModal("confirm_delete_diary_modal")
+      : undefined;
   }
 });
 
