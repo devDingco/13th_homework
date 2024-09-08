@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+    <script src="./javascript/common.js"></script>
+    <script src="./javascript/index.js"></script>
+    <title>일기보관함</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="app-modal" id="app-modal-add">
+        <div class="modal-floor" onclick="closeModal('.app-modal')"></div>
+        <div class="modal-add-item">
+          <h2 class="side-title">일기 쓰기</h2>
+          <form class="register">
+            <fieldset>
+              <div class="form-area">
+                <h3 class="form-title">오늘 기분은 어땠나요?</h3>
+                <div class="emotions flexbox">
+                  <div class="emotion flexbox align-center">
+                    <input type="radio" id="happy" name="emotion" />
+                    <label for="happy" class="emotion-label emotion-happy"
+                      >행복해요</label
+                    >
+                  </div>
+                  <div class="emotion flexbox align-center">
+                    <input type="radio" id="sad" name="emotion" />
+                    <label for="sad" class="emotion-label emotion-sad"
+                      >슬퍼요</label
+                    >
+                  </div>
+                  <div class="emotion flexbox align-center">
+                    <input type="radio" id="surprising" name="emotion" />
+                    <label
+                      for="surprising"
+                      class="emotion-label emotion-surprising"
+                      >놀랐어요</label
+                    >
+                  </div>
+                  <div class="emotion flexbox align-center">
+                    <input type="radio" id="angry" name="emotion" />
+                    <label for="angry" class="emotion-label emotion-angry"
+                      >화나요</label
+                    >
+                  </div>
+                  <div class="emotion flexbox align-center">
+                    <input type="radio" id="etc" name="emotion" />
+                    <label for="etc" class="emotion-label emotion-etc"
+                      >기타</label
+                    >
+                  </div>
+                </div>
+                <div class="input-title-area">
+                  <label for="input-title">제목</label>
+                  <input
+                    type="text"
+                    id="input-title"
+                    placeholder="제목을 입력해 주세요."
+                  />
+                </div>
+                <div class="input-content-area">
+                  <label for="input-content">내용</label>
+                  <textarea
+                    id="input-content"
+                    placeholder="내용을 입력해 주세요."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="flexbox modal-actions">
+                <button
+                  type="button"
+                  class="button-cancel"
+                  onclick="showModal('#app-modal-cancel')"
+                >
+                  닫기
+                </button>
+                <button
+                  type="button"
+                  class="button-register"
+                  type="button"
+                  onclick="showModal('#app-modal-ok')"
+                >
+                  등록하기
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="app-modal" id="app-modal-cancel">
+        <div
+          class="modal-floor"
+          onclick="closeModal('#app-modal-cancel', 'nested')"
+        ></div>
+        <div class="modal-add-cancel modal-nested">
+          <h2>일기 등록 취소</h2>
+          <p>일기 등록을 취소하시겠어요?</p>
+          <div class="flexbox modal-actions">
+            <button
+              type="button"
+              class="button-keep"
+              onclick="closeModal('#app-modal-cancel', 'nested')"
+            >
+              계속 작성
+            </button>
+            <button
+              type="button"
+              class="button-add-cancel"
+              onclick="closeModal('.app-modal')"
+            >
+              등록 취소
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-modal" id="app-modal-ok">
+        <div
+          class="modal-floor"
+          onclick="closeModal('#app-modal-ok', 'nested')"
+        ></div>
+        <div class="modal-add-cancel modal-nested">
+          <h2>일기 등록 완료</h2>
+          <p>등록이 완료되었습니다.</p>
+          <div class="flexbox modal-actions">
+            <button
+              type="button"
+              class="button-ok"
+              onclick="closeModal('#app-modal-ok', 'nested')"
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+      <header class="header">
+        <h1 class="header-title">
+          <a href="./index.html">다인의 다이어리</a>
+        </h1>
+      </header>
+      <div class="app-inside">
+        <section class="container">
+          <div class="container-cover flexbox">
+            <img src="./assets/images/image_cover.jpeg" alt="" />
+          </div>
+          <nav class="menu">
+            <ul class="menu-list flexbox">
+              <li class="active">
+                <button type="button" onclick="toggleMenu()">일기보관함</button>
+              </li>
+              <li>
+                <button type="button" onclick="toggleMenu()">사진보관함</button>
+              </li>
+            </ul>
+          </nav>
+          <main class="main">
+            <div class="content active">
+              <div class="flexbox main-content">
+                <div class="flexbox justify-between align-center">
+                  <div class="filter">
+                    <select
+                      class="filter-emotion"
+                      onchange="filterEmotion(event)"
+                    >
+                      <option selected disabled>전체</option>
+                      <option>행복해요</option>
+                      <option>슬퍼요</option>
+                      <option>놀랐어요</option>
+                      <option>화나요</option>
+                      <option>기타</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    class="show-modal-add"
+                    onclick="showModal('#app-modal-add')"
+                  >
+                    <img
+                      src="./assets/images/icon_plus.svg"
+                      alt=""
+                      class="icon-plus"
+                    />
+                    <span class="button-text">일기쓰기</span>
+                  </button>
+                </div>
+
+                <ul class="panel-list flexbox"></ul>
+                <!-- <aside class="side-panel">
+                  <h2 class="side-title">📍 일기 쓰기</h2>
+                  <form class="register">
+                    <fieldset>
+                      <div class="form-area">
+                        <h3 class="form-title">오늘 기분은 어땠나요?</h3>
+                        <div class="emotions flexbox">
+                          <div class="emotion flexbox align-center">
+                            <input type="radio" id="happy" name="emotion" />
+                            <label for="happy" class="emotion-label emotion-happy">행복해요</label>
+                          </div>
+                          <div class="emotion flexbox align-center">
+                            <input type="radio" id="sad" name="emotion" />
+                            <label for="sad" class="emotion-label emotion-sad">슬퍼요</label>
+                          </div>
+                          <div class="emotion flexbox align-center">
+                            <input type="radio" id="surprising" name="emotion" />
+                            <label for="surprising" class="emotion-label emotion-surprising">놀랐어요</label>
+                          </div>
+                          <div class="emotion flexbox align-center">
+                            <input type="radio" id="angry" name="emotion" />
+                            <label for="angry" class="emotion-label emotion-angry">화나요</label>
+                          </div>
+                          <div class="emotion flexbox align-center">
+                            <input type="radio" id="etc" name="emotion" />
+                            <label for="etc" class="emotion-label emotion-etc">기타</label>
+                          </div>
+                        </div>
+                        <div class="input-title-area">
+                          <label for="input-title">제목</label>
+                          <input type="text" id="input-title" placeholder="제목을 입력해 주세요." />
+                        </div>
+                        <div class="input-content-area">
+                          <label for="input-content">내용</label>
+                          <textarea id="input-content" placeholder="내용을 입력해 주세요."></textarea>
+                        </div>
+                      </div>
+                      <div>
+                        <button class="button-register" type="button" onclick="saveDiary()">등록하기</button>
+                      </div>
+                    </fieldset>
+                  </form>
+                </aside> -->
+              </div>
+            </div>
+            <div class="content">사진보관함입니당</div>
+          </main>
+        </section>
+      </div>
+
+      <div class="scroll-up">
+        <button class="button-scroll-up" onclick="scrollToTop()">
+          <img
+            src="./assets/images/icon_scroll_up.svg"
+            alt="맨 위로 이동하기"
+          />
+        </button>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-inside flexbox col">
+          <h2 class="footer-title">다인의 다이어리</h2>
+          <p class="footer-copy">Copyright &copy; 2024. Dain</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
