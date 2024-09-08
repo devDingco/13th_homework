@@ -95,7 +95,8 @@ diaryEntries = diaryDetailContentList;
 diaryDetailContentList.map((e, i) => {
   e.id === id ? (index = i) : undefined;
 });
-diaryDetailContentList[index].commentList.map((comment) => {
+const currentDiaryComments = diaryDetailContentList[index].commentList;
+currentDiaryComments.map((comment) => {
   createCommentHtml(comment);
 });
 

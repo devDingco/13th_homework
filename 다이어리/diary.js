@@ -20,21 +20,23 @@ window.addEventListener("scroll", () => {
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
-  [...getMood].map((e) => (e.checked = false));
   const text = document.getElementsByClassName("diary_title_window")[0];
   const textarea = document.getElementsByClassName("diary_contents_window")[0];
   text.value = null;
   textarea.value = null;
+  [...getMood].map((e) => (e.checked = false));
 };
 
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
     "#diary_entry_container"
   );
+  const lastDiaryEntryContainer =
+    diaryEntryContainer[diaryEntryContainer.length - 1];
 
   if (
     article.children.length === 0 ||
-    diaryEntryContainer[diaryEntryContainer.length - 1].children.length === 4
+    lastDiaryEntryContainer.children.length === 4
   ) {
     const diaryEntryContainer = document.createElement("div");
     diaryEntryContainer.className = "diary_entry_container";
@@ -43,19 +45,19 @@ const appendDiaryEntry = (diaryCard) => {
 
     return article.appendChild(diaryEntryContainer);
   } else {
-    return (diaryEntryContainer[diaryEntryContainer.length - 1].innerHTML +=
-      diaryCard);
+    return (lastDiaryEntryContainer.innerHTML += diaryCard);
   }
 };
 
 const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
+  const diaryCardHtml = appendDiaryEntry(diaryCard);
   if (currentFilteredMood === "") {
-    appendDiaryEntry(diaryCard);
+    diaryCardHtml;
   } else if (currentFilteredMood === diaryEntry.mood) {
-    appendDiaryEntry(diaryCard);
+    diaryCardHtml;
   } else {
     window.location.href = "./diary.html";
-    appendDiaryEntry(diaryCard);
+    diaryCardHtml;
   }
 };
 
@@ -289,10 +291,11 @@ const closeSingleModal = (modal) => {
 
 window.addEventListener("click", (event) => {
   const className = event.target.className;
+  const id = event.target.id;
   if (className === "aside_layout" || className == "confirm_modal_layout") {
     event.target.id != "diary_cancel_modal"
-      ? closeAllModals(event.target.id)
-      : closeSingleModal(event.target.id);
+      ? closeAllModals(id)
+      : closeSingleModal(id);
   }
 });
 
@@ -354,25 +357,27 @@ const toggleDiaryPhotoView = (viewType) => {
 
 const onKeyPress = (event) => {
   const modalParentId = event.target.offsetParent.id;
+  const ENTER_KEY_CODE = event.keyCode === 13;
+  const ESCAPE_KEY_CODE = event.keyCode === 27;
   switch (modalParentId) {
     case "aside_layout": {
-      event.keyCode === 13
+      ENTER_KEY_CODE
         ? registerDiary(event)
-        : event.keyCode === 27
+        : ESCAPE_KEY_CODE
         ? triggerModal("diary_cancel_modal")
         : undefined;
       break;
     }
     case "diary_registration_modal": {
-      event.keyCode === 13 || event.keyCode === 27
+      ENTER_KEY_CODE || ESCAPE_KEY_CODE
         ? closeAllModals("diary_registration_modal")
         : undefined;
       break;
     }
     case "diary_cancel_modal": {
-      event.keyCode === 13
+      ENTER_KEY_CODE
         ? closeAllModals("diary_cancel_modal")
-        : event.keyCode === 27
+        : ESCAPE_KEY_CODE
         ? closeSingleModal("diary_cancel_modal")
         : undefined;
       break;
