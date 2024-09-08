@@ -2,19 +2,58 @@ let diaryList;
 let initialScroll = 0;
 
 window.addEventListener('scroll', () => {
-  const filterElem = document.querySelector('.filter-emotion');
+  const filterElem = document.querySelectorAll('.filter select');
   const currentScroll = window.scrollY;
 
   if (currentScroll === 0 || initialScroll > currentScroll) {
-    filterElem.classList.remove('scrolled');
+    filterElem.forEach((el) => {
+      el.classList.remove('scrolled');
+    });
   } else {
-    filterElem.classList.add('scrolled');
+    filterElem.forEach((el) => {
+      el.classList.add('scrolled');
+    });
   }
   initialScroll = currentScroll;
 });
 
 window.onload = () => {
   showDiary();
+  renderPhotos();
+};
+
+const renderPhotos = () => {
+  const END_POINT = 'https://dog.ceo/api/breeds/image/random/10';
+
+  const skeletonElem = Array.from({ length: 10 }).map(
+    (_) => `<div class="skeleton-area">
+    <div class="skeleton photo"></div>
+  </div>`
+  );
+
+  document.querySelector('.photo-list').innerHTML = skeletonElem;
+
+  setTimeout(() => {
+    fetch(END_POINT).then((response) => {
+      response.json().then((result) => {
+        const imageElem = result.message.map(
+          (item, index) => `
+              <li>
+                    <a href="">
+                    <img
+                        src='${item}'
+                        class="photo-item"
+                        alt='강아지 사진 ${index + 1}'
+                    />
+                    </a>
+                </li>
+            `
+        );
+
+        document.querySelector('.photo-list').innerHTML = imageElem.join('');
+      });
+    });
+  }, 3000);
 };
 
 const renderData = (array) => {
