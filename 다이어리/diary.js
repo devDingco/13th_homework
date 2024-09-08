@@ -172,18 +172,20 @@ const registerDiary = (event) => {
     : triggerModal("diary_registration_modal");
 };
 
-storedDiaryList.map((diary) => {
-  const storedDiary = {
-    id: diary.id,
-    mood: diary.mood,
-    date: diary.date,
-    color: diary.color,
-    title: diary.title,
-    content: diary.content,
-    imageName: diary.imageName,
-  };
-  createHtml(storedDiary);
-});
+const renderInitialDiaryEntries = () => {
+  storedDiaryList.map((diary) => {
+    const storedDiary = {
+      id: diary.id,
+      mood: diary.mood,
+      date: diary.date,
+      color: diary.color,
+      title: diary.title,
+      content: diary.content,
+      imageName: diary.imageName,
+    };
+    createHtml(storedDiary);
+  });
+}
 
 const updateDiaryList = (diaryList) => {
   const article = document.getElementById("article");
@@ -197,8 +199,7 @@ const getDiariesByMood = (selectedMood) => {
   );
   filteredDiaries.length === 0
     ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
-    : undefined;
-  updateDiaryList(filteredDiaries);
+    : updateDiaryList(filteredDiaries);
 };
 
 const onClickMood = (e) => {
@@ -342,6 +343,7 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
+      renderInitialDiaryEntries()
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -359,5 +361,6 @@ const toggleDiaryPhotoView = (viewType) => {
   }
 };
 
+renderInitialDiaryEntries();
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);
