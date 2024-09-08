@@ -17,8 +17,18 @@
           </div>
           <div class="navigation">
             <div class="navigation_menu">
-              <div id="diary_storage_menu" onclick="toggleDiaryPhotoView('diaryStorage')">일기보관함</div>
-              <div id="photo_storage_menu" onclick="toggleDiaryPhotoView('photoStorage')">사진보관함</div>
+              <div
+                id="diary_storage_menu"
+                onclick="toggleDiaryPhotoView('diaryStorage')"
+              >
+                일기보관함
+              </div>
+              <div
+                id="photo_storage_menu"
+                onclick="toggleDiaryPhotoView('photoStorage')"
+              >
+                사진보관함
+              </div>
             </div>
           </div>
           <div id="photo_storage">
@@ -39,8 +49,7 @@
               </div>
             </div>
             <div>
-              <div id="photo_gallery">
-              </div>
+              <div id="photo_gallery"></div>
             </div>
           </div>
           <div id="diary_storage">
@@ -77,7 +86,9 @@
                     <div class="diary_entry_title">📍 일기 쓰기</div>
                     <div class="diary_entry_form">
                       <div class="mood_selector">
-                        <div class="mood_selector_title">오늘 기분 어땠나요?</div>
+                        <div class="mood_selector_title">
+                          오늘 기분 어땠나요?
+                        </div>
                         <div class="mood_checkbox_group">
                           <div class="mood_checkbox">
                             <input
@@ -145,7 +156,9 @@
                           />
                         </div>
                         <div class="diary_contents_group">
-                          <div class="diary_contents" id="diary_contents">내용</div>
+                          <div class="diary_contents" id="diary_contents">
+                            내용
+                          </div>
                           <textarea
                             class="diary_contents_window"
                             type="text"
@@ -163,10 +176,7 @@
                       >
                         닫기
                       </button>
-                      <button
-                        class="register_button"
-                        type="submit"
-                      >
+                      <button class="register_button" type="submit">
                         등록하기
                       </button>
                     </div>
@@ -188,12 +198,18 @@
         </div>
       </div>
     </div>
-    
+
     <div class="confirm_modal_layout" id="diary_registration_modal">
       <div class="confirm_modal">
         <div class="modal_title">일기 등록 완료</div>
         <div class="modal_content">등록이 완료 되었습니다.</div>
-        <button onclick="closeAllModals('diary_registration_modal')" id="confirmRegistration" onkeydown="onKeyPress(event)">확인</button>
+        <button
+          onclick="closeAllModals('diary_registration_modal')"
+          id="confirmRegistration"
+          onkeydown="onKeyPress(event)"
+        >
+          확인
+        </button>
       </div>
     </div>
     <div class="confirm_modal_layout" id="diary_cancel_modal">
@@ -201,7 +217,10 @@
         <div class="modal_title">일기 등록 취소</div>
         <div class="modal_content">일기 등록을 취소 하시겠어요?</div>
         <div class="modal_button_group">
-          <button class="continue_writing_btn" onclick="closeSingleModal('diary_cancel_modal')">
+          <button
+            class="continue_writing_btn"
+            onclick="closeSingleModal('diary_cancel_modal')"
+          >
             계속 작성
           </button>
           <button
@@ -215,13 +234,28 @@
         </div>
       </div>
     </div>
-    <div class="confirm_delete_diary_modal_layout" id="confirm_delete_diary_modal">
+    <div
+      class="confirm_delete_diary_modal_layout"
+      id="confirm_delete_diary_modal"
+    >
       <div class="confirm_delete_diary_modal">
         <div class="delete_diary_modal_title">일기 삭제</div>
         <div class="delete_diary_modal_content">일기를 삭제 하시겠어요?</div>
         <div class="delete_diary_modal_button_group">
-          <button class="delete_diary_cancel_btn" onclick="closeSingleModal('confirm_delete_diary_modal')">취소</button>
-          <button class="delete_diary_btn" onclick="deleteDiaryEntry()">삭제</button>
+          <button
+            class="delete_diary_cancel_btn"
+            onclick="closeSingleModal('confirm_delete_diary_modal')"
+          >
+            취소
+          </button>
+          <button
+            id="deleteDiaryBtn"
+            class="delete_diary_btn"
+            onclick="deleteDiaryEntry()"
+            onkeydown="onKeyPress(event)"
+          >
+            삭제
+          </button>
         </div>
       </div>
     </div>

@@ -267,6 +267,10 @@ const focusActiveModal = (modal) => {
       document.getElementById("confirmRegistration").focus();
       break;
     }
+    case "confirm_delete_diary_modal": {
+      document.getElementById("deleteDiaryBtn").focus();
+      break;
+    }
   }
 };
 
@@ -356,6 +360,7 @@ const toggleDiaryPhotoView = (viewType) => {
 };
 
 const onKeyPress = (event) => {
+  console.log(event.target.offsetParent.id);
   const modalParentId = event.target.offsetParent.id;
   const ENTER_KEY_CODE = event.keyCode === 13;
   const ESCAPE_KEY_CODE = event.keyCode === 27;
@@ -379,6 +384,12 @@ const onKeyPress = (event) => {
         ? closeAllModals("diary_cancel_modal")
         : ESCAPE_KEY_CODE
         ? closeSingleModal("diary_cancel_modal")
+        : undefined;
+      break;
+    }
+    case "confirm_delete_diary_modal": {
+      ENTER_KEY_CODE || ESCAPE_KEY_CODE
+        ? closeAllModals("confirm_delete_diary_modal")
         : undefined;
       break;
     }
