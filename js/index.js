@@ -134,7 +134,18 @@ document.querySelector("select#dropdownEmotionFilter").addEventListener("change"
     if ('content' in document.createElement('template')) {
         const diaryList = document.querySelector("ul#diarylist");
         while (diaryList.hasChildNodes()) diaryList.removeChild(diaryList.lastChild);
-        list.filter((e) => predicate(e.index, filterset)).forEach(e => addDiaryUI(e));
+        list.filter((e) => e !== null && predicate(e.index, filterset)).forEach(e => addDiaryUI(e));
+    }
+});
+
+document.querySelector("select#dropdownImageAspect").addEventListener("change", (e) => {
+    e.preventDefault();
+    const selection = e.target.querySelector(":checked").value;
+    const imgArray = document.querySelectorAll("img.dog-image");
+    switch (selection) {
+        case "기본형": imgArray.forEach(e => e.style = "aspect-ratio: 1 / 1;"); break;
+        case "가로형": imgArray.forEach(e => e.style = "aspect-ratio: 4 / 3;"); break;
+        case "세로형": imgArray.forEach(e => e.style = "aspect-ratio: 3 / 4;"); break;
     }
 });
 
@@ -175,3 +186,52 @@ document.querySelector("button#write-btn").addEventListener("click", (e) => {
 );
 
 document.querySelector("div.curtain").addEventListener("click", shutModal);
+
+document.querySelector("div.container-picker-tab").addEventListener("click", e => {
+    const toInactive = e.target.previousElementSibling ?? e.target.nextElementSibling;
+    const toActive = e.target;
+    toInactive.classList.remove("active");
+    toInactive.classList.add("inactive");
+    toActive.classList.remove("inactive");
+    toActive.classList.add("active");
+    
+    switch (toActive.id) {
+        case "diary-tab": {
+            document.querySelector("main > section.diary-view").classList.remove("hidden");
+            document.querySelector("main > section.photo-view").classList.add("hidden");
+            break;
+        }
+        case "photo-tab": {
+            document.querySelector("main > section.diary-view").classList.add("hidden");
+            document.querySelector("main > section.photo-view").classList.remove("hidden");
+            break;
+        }
+    }
+});
+
+document.querySelector("button#photo-tab").addEventListener("click", e => {
+    const templateHTML = document.querySelector("template.dog-image-template");
+    const imageList = document.querySelector("ul.image-scroll-zone");
+    let templClone;
+    [...Array(10)].forEach(i => {
+        fetch("https://dog.ceo/api/breeds/image/random")
+            .then(res => {
+                res.json()
+                    .then(json => {
+                        templClone = templateHTML.content.cloneNode(true);
+                        templClone.querySelector("img.dog-image").src = json["message"];
+                        imageList.append(templClone);
+                    })
+                    .catch(reason => {
+                        console.error(reason);
+                        console.log("json error");
+                    });
+            })
+            .catch(reason => {
+                console.error(reason);
+                console.log("fetch error");
+            })
+            .finally(() => {
+            });
+    });
+}, {once : true});
