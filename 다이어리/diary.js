@@ -296,16 +296,6 @@ window.addEventListener("click", (event) => {
   }
 });
 
-const promptExitOnEsc = () => {
-  const text = document.getElementsByClassName("diary_title_window")[0];
-  const textarea = document.getElementsByClassName("diary_contents_window")[0];
-  const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].filter((e) => e.checked);
-  text.value || textarea.value || mood.length
-    ? triggerModal("diary_cancel_modal")
-    : closeSingleModal("aside_layout");
-};
-
 const fetchAndDisplayPhotos = () => {
   const dogImage = document.querySelectorAll(".dogImage");
   fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
