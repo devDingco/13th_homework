@@ -116,10 +116,13 @@ const navMenu = () => {
   if (!navElement) return
   const navMenu = document.createElement("ul");
   navMenu.classList.add("navMenu");
-  navMenu.innerHTML = `
-    <li class="active"><a href="./index.html">일기보관함</a></li>
-    <li>사진보관함</li>
-  `;
+  const nevList = { "일기보관함": "index.html", "사진보관함": "gallery.html" }
+  Object.keys(nevList).map((key) => {
+    const li = document.createElement("li");
+    location.href.includes(nevList[key]) ? li.classList.add("active") : li.classList.remove("active");
+    li.innerHTML = `<a href="${nevList[key]}">${key}</a>`;
+    navMenu.appendChild(li);
+  })
   navElement.prepend(navMenu);
 }
 navMenu();
@@ -243,11 +246,19 @@ const optionSelect = (event, type) => {
 
   optionTarget.parentNode.classList.remove("show");
 
-  // 옵션선택과 타입에 따른 노출 처리 함수 호출
+  // const typeFilterList = {
+  //   moodFilter: moodFilter(optionValue),
+  //   galleryFilter: galleryFilter(optionValue)
+  // }
+
+  // return typeFilterList[type]
+
   if (type === 'moodFilter') {
     moodFilter(optionValue)
-    // diaryListSet(diaryArr);
+  } else if (type === 'galleryFilter') {
+    galleryFilter(optionValue)
   }
+
 }
 
 
@@ -296,8 +307,8 @@ const popupRender = (popupName, content, type) => {
   // content : 팝업창 내용
   // type : 팝업창 타입 "alert" 지정시 alert용 스타일 적용
 
-  // 팝업창 띄워질 때 body 스크롤 막기
-  bodyScrollYOff('hidden');
+  window.scrollTo({ top: 0 }); // 팝업창 띄워질 때 스크롤 상단으로 이동
+  bodyScrollYOff('hidden');  // 팝업창 띄워질 때 body 스크롤 막기
 
   const popupElement = document.createElement("div");
   document.body.appendChild(popupElement);
@@ -351,7 +362,31 @@ const diaryDeletePop = (event, diaryId) => {
 
 
 
+// 선택형 셀렉트 형태 박스 렌더링 함수 
+const selectRender = (selector, option) => {
+  // option : 셀렉트 박스에 들어갈 옵션 객체
+  // 예시 : { 전체: "전체", 행복해요: "행복해요", 슬퍼요: "슬퍼요", 놀랐어요: "놀랐어요", 화나요: "화나요" }
+  const selectBox = document.querySelector(selector);
+  if (!selectBox) return
 
+  document.querySelector('head').innerHTML += `<link rel="stylesheet" href="./css/select.css" />`
+  selectBox.classList.add("selectBox");
 
+  const selectButton = document.createElement("button");
+  selectButton.classList.add("filterPopBtn");
+  selectButton.innerText = option[Object.keys(option)[0]];
+  selectButton.onclick = (event) => optionShow(event)
+  selectBox.appendChild(selectButton);
 
+  const selectUl = document.createElement("ul");
+  selectUl.classList.add("filterList");
+  selectBox.appendChild(selectUl);
 
+  const selectOption = Object.keys(option).map((key) => {
+    return `<li data-value="${key}" onclick="optionSelect(event, 'galleryFilter')">${option[key]}</li>`
+  }).join("");
+
+  selectUl.innerHTML = selectOption;
+}
+
+selectRender('.ratioViewType', { 기본형: "기본형", 가로형: "가로형", 세로형: "세로형" });
