@@ -9,14 +9,14 @@ let currentFilteredMood = "";
 let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
-window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-  const filterCheckbox = document.getElementById("filterCheckbox");
+// window.addEventListener("scroll", () => {
+//   const scroll = window.scrollY;
+//   const filterCheckbox = document.getElementById("filterCheckbox");
 
-  scroll > 0
-    ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
-    : (filterCheckbox.style = "background-color: #FFF");
-});
+//   scroll > 0
+//     ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
+//     : (filterCheckbox.style = "background-color: #FFF");
+// });
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
@@ -351,6 +351,42 @@ const showLoadingSkeleton = () => {
   }
   fetchAndDisplayPhotos();
 };
+
+const showMoreDogsImage = () => {
+  fetch("https://dog.ceo/api/breeds/image/random").then((result) => {
+    result.json().then((object) => {
+      const dog = object.message;
+      const box = document.getElementById("photo_gallery").innerHTML;
+      document.getElementById("photo_gallery").innerHTML =
+        box + `<img src="${dog}" class="dogImage" />`
+    });
+  });
+};
+
+let photoTimer = null;
+window.addEventListener("scroll", () => {
+  const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+  if(scrollPercent < 0.9) return;
+  if (photoTimer !== null) return;
+
+  showMoreDogsImage()
+
+  photoTimer = setTimeout(() => {
+    photoTimer = null;
+
+    const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+
+    if(scrollPercent === 1) {
+      showMoreDogsImage()
+    }
+  }, 1000);
+});
 
 const toggleDiaryPhotoView = (viewType) => {
   const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
