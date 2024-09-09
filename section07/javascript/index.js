@@ -111,6 +111,20 @@ const renderData = (array) => {
   );
 };
 
+const searchItem = (event) => {
+  const value = event.target.value;
+
+  const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
+  const diaryList = JSON.parse(diaryListString);
+
+  clearTimeout(timer);
+
+  timer = setTimeout(() => {
+    const result = diaryList.filter((el) => el.title.includes(value));
+    document.querySelector('.panel-list').innerHTML = renderData(result).join('');
+  }, 1000);
+};
+
 const showDiary = () => {
   const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
   const diaryList = JSON.parse(diaryListString);
