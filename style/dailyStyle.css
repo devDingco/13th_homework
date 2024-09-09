@@ -592,7 +592,7 @@ footer {
     }
     .article-header {
         flex-direction: column;
-        align-items: end;
+
         gap: 4px;
         width: 100%;
     }
@@ -600,10 +600,15 @@ footer {
         width: 100%;
         flex-direction: column;
     }
-
+    .article-select {
+        position: relative;
+    }
     .article-daily {
-        width: 120px;
         order: 2;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 40px;
     }
     .dog-img {
         min-width: 360px;
@@ -634,6 +639,25 @@ footer {
     }
     footer {
         display: none;
+    }
+    .article-select {
+        width: 100%;
+    }
+    .article-header-left {
+        flex-direction: column;
+    }
+    .article-search {
+        order: 1;
+    }
+    .select-post,
+    .select-post1 {
+        order: 2;
+        position: relative;
+        bottom: 0;
+        left: -120px;
+    }
+    .search-input {
+        width: 300px;
     }
 }
 @keyframes skeleton {
