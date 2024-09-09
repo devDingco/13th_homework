@@ -369,6 +369,7 @@ const onNavigationClick = (type) => {
 async function dogImageApi() {
   const photo_main = document.getElementById('photoList');
   photo_main.innerHTML = '';
+
   for (let i = 0; i < 10; i++) {
     photo_main.innerHTML += `
     <li class="dog_photo_box">
@@ -377,17 +378,20 @@ async function dogImageApi() {
     </li>
     `;
   }
+
   document.querySelectorAll('.skeleton_stick').forEach((el) => {
     el.innerHTML = el.style.animation = 'skeleton_ui 0.5s linear infinite';
   });
+
+  const dogImageSkeletons = document.querySelectorAll('.dog_photo_box img');
+  const skeletonStick = document.querySelectorAll('.skeleton_stick');
   fetch('https://dog.ceo/api/breeds/image/random/10').then((res) => {
     res.json().then((data) => {
       const dogImageList = data.message;
-      const dogImageSkeletons = document.querySelectorAll('.dog_photo_box img');
-      const skeletonStick = document.querySelectorAll('.skeleton_stick');
+
       for (let i = 0; i < dogImageList.length; i++) {
         dogImageSkeletons[i].src = dogImageList[i];
-        skeletonStick[i].style.animation = 'fade';
+        skeletonStick[i].style.display = 'none';
       }
     });
   });
