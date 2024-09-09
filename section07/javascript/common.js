@@ -19,6 +19,13 @@ window.addEventListener('scroll', () => {
   document.querySelector('.header').style = 'backdrop-filter: blur(50px)';
 });
 
+window.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key === 'Escape') {
+    closeModal('.app-modal');
+  }
+});
+
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -37,9 +44,12 @@ const closeModal = (target, status = 'layered') => {
   }
 };
 
-window.addEventListener('keydown', (event) => {
-  const key = event.key;
-  if (key === 'Escape') {
-    closeModal('.app-modal');
+const toggleDark = (event) => {
+  const isChecked = event.target.checked;
+
+  if (isChecked) {
+    document.documentElement.setAttribute('isDarked', 'dark');
+  } else {
+    document.documentElement.removeAttribute('isDarked', 'dark');
   }
-});
+};

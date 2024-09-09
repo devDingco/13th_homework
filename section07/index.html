@@ -14,7 +14,13 @@
       <div class="app-modal" id="app-modal-add">
         <div class="modal-floor" onclick="closeModal('.app-modal')"></div>
         <div class="modal-add-item">
-          <h2 class="side-title">일기 쓰기</h2>
+          <div class="flexbox justify-between">
+            <h2 class="side-title">일기 쓰기</h2>
+            <div class="button-toggle">
+              <label for="icon-toggle">다크모드</label>
+              <input type="checkbox" class="icon-toggle" id="icon-toggle" onclick="toggleDark(event)"/>
+            </div>
+          </div>
           <form class="register">
             <fieldset>
               <div class="form-area">
