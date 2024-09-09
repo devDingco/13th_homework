@@ -18,7 +18,12 @@
   filter: invert(1);
 }
 
+[lightStatus=off] .navBottom.stickyAddStyle .filterSearchBox {
+  filter: invert(0);
+}
+
 .filterSearchBox {
+  width: 100%;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -27,10 +32,10 @@
 .filterSearchBox .selectBox {
   width: 7.5rem;
   height: 48px;
-  border: 1px solid var(--border-color-2);
+  border: 1px solid var(--input-border-color);
   border-radius: 8px;
-  background-color: #fff;
-  background-image: url("../img/down_fill_light_m.svg");
+  background-color: var(--input-bg-color);
+  background-image: var(--down-fill-bg);
   background-repeat: no-repeat;
   background-position: 90% center;
   font-size: var(--font-size-1);
@@ -45,15 +50,16 @@
   border: none;
   background-color: transparent;
   padding: 12px 16px;
+  color: var(--input-font-color);
 }
 .filterSearchBox .selectBox .filterList {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
   z-index: 10;
-  border: 1px solid var(--border-color-2);
+  border: 1px solid var(--input-border-color);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--input-bg-color);
   width: 100%;
   display: none;
 }
@@ -67,27 +73,24 @@
 }
 .filterSearchBox .selectBox .filterList li:hover {
   background-color: var(--bg-color-3);
-  color: var(--font-color-9);
+  color: var(--input-active-color);
 }
 .filterSearchBox .selectBox .filterList li.active {
   background-color: var(--bg-color-3);
-  color: var(--font-color-9);
-  background-image: url("../img/check_outline_light_xs.svg");
+  color: var(--input-active-color);
+  background-image: var(--input-active-bg);
   background-repeat: no-repeat;
   background-position: 90% center;
-}
-.filterSearchBox .searchMobilePopBtn {
-  display: none;
 }
 .filterSearchBox .searchBox {
   width: 21.25rem;
   height: 48px;
   border-radius: 48px;
-  background-color: #fff;
+  background-color: var(--input-bg-color);
   background-image: url("../img/search_outline_light_m.svg");
   background-position: 12px center;
   background-repeat: no-repeat;
-  border: 1px solid var(--border-color-2);
+  border: 1px solid var(--input-border-color);
   padding: 0px 20px 0px 40px;
   display: flex;
   align-items: baseline;
@@ -102,14 +105,16 @@
 .filterSearchBox .searchBox input[type=search] {
   border: none;
   width: 100%;
+  background-color: transparent;
+  color: var(--basic-font-color);
 }
 .filterSearchBox .searchBox input[type=search]::-moz-placeholder {
-  color: var(--font-color-6);
+  color: var(--input-placeholder-color);
   font-size: var(--font-size-1);
   font-weight: 500;
 }
 .filterSearchBox .searchBox input[type=search]::placeholder {
-  color: var(--font-color-6);
+  color: var(--input-placeholder-color);
   font-size: var(--font-size-1);
   font-weight: 500;
 }
@@ -120,16 +125,20 @@
 .diaryWritePopBtn {
   width: 110px;
   height: 48px;
-  background-color: #000;
-  color: #fff;
+  background-image: var(--plus-icon);
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  padding: 10px;
+  background-color: var(--button-black-btn-bg);
+  color: var(--button-black-btn-color);
   border-radius: 8px;
   border: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   font-size: var(--font-size-2);
   line-height: 24px;
-  align-self: flex-end;
+  margin-left: auto;
 }
 
 section {
@@ -156,6 +165,8 @@ section .diaryList ul {
 }
 section .diaryList ul li {
   position: relative;
+  border: 1px solid var(--list-border-color);
+  border-radius: 20px;
 }
 section .diaryList ul li a {
   display: block;
