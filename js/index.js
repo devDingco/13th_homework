@@ -243,11 +243,19 @@ const optionSelect = (event, type) => {
 
   optionTarget.parentNode.classList.remove("show");
 
-  // 옵션선택과 타입에 따른 노출 처리 함수 호출
+  // const typeFilterList = {
+  //   moodFilter: moodFilter(optionValue),
+  //   galleryFilter: galleryFilter(optionValue)
+  // }
+
+  // return typeFilterList[type]
+
   if (type === 'moodFilter') {
     moodFilter(optionValue)
-    // diaryListSet(diaryArr);
+  } else if (type === 'galleryFilter') {
+    galleryFilter(optionValue)
   }
+
 }
 
 
@@ -351,7 +359,29 @@ const diaryDeletePop = (event, diaryId) => {
 
 
 
+// 선택형 셀렉트 형태 박스 렌더링 함수 
+const selectRender = (selector, option) => {
+  document.querySelector('head').innerHTML += `<link rel="stylesheet" href="./css/select.css" />`
+  // option : 셀렉트 박스에 들어갈 옵션 객체
+  // 예시 : { 전체: "전체", 행복해요: "행복해요", 슬퍼요: "슬퍼요", 놀랐어요: "놀랐어요", 화나요: "화나요" }
+  const selectBox = document.querySelector(selector);
+  selectBox.classList.add("selectBox");
 
+  const selectButton = document.createElement("button");
+  selectButton.classList.add("filterPopBtn");
+  selectButton.innerText = option[Object.keys(option)[0]];
+  selectButton.onclick = (event) => optionShow(event)
+  selectBox.appendChild(selectButton);
 
+  const selectUl = document.createElement("ul");
+  selectUl.classList.add("filterList");
+  selectBox.appendChild(selectUl);
 
+  const selectOption = Object.keys(option).map((key) => {
+    return `<li data-value="${key}" onclick="optionSelect(event, 'galleryFilter')">${option[key]}</li>`
+  }).join("");
 
+  selectUl.innerHTML = selectOption;
+}
+
+selectRender('.ratioViewType', { 기본형: "기본형", 가로형: "가로형", 세로형: "세로형" });
