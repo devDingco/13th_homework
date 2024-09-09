@@ -54,11 +54,11 @@ const renderDiaryDetail = (diary) => {
     </div>
     <h4>내용</h4>
     <div class="detailContent">${diary.content}</div>
-    <div class = "clipContainer"><button id = "clipboard" onclick = "clipboard()"><img class = "copyImg" src = "./images/copy_icon.png"/>내용 복사</button></div>
+    <div id = "clipContainer"><button id = "clipboard" onclick = "clipboard()"><img class = "copyImg" src = "./images/copy_icon.png"/>내용 복사</button></div>
     <div class="firstBtn">
       <button class="prevBtn btn" onclick="prev()">이전</button>
       <button class="changeBtn btn" onclick="editDiary()">수정</button>
-      <button class ="deleteBtn btn" onclick="deleteFunc()">삭제</button>
+      <button class ="deleteBtn btn" onclick="openModal('delete')">삭제</button>
     </div>
    <hr />
     <div class="commentsSection">
@@ -84,26 +84,17 @@ const renderDiaryDetail = (diary) => {
 };
 
 //toast
-const copy = document.getElementById('clipboard');
+
 const toastMsg = document.createElement('div');
 toastMsg.className = 'toastMessage';
-toastMsg.innerText = '내용이 복사되었습니다.';
 document.body.appendChild(toastMsg);
+
 function toastOn() {
   toastMsg.classList.add('active');
   setTimeout(function () {
     toastMsg.classList.remove('active');
-  }, 1000);
+  }, 1300);
 }
-window.onload = () => {
-  const copy = document.getElementById('clipboard');
-  if (copy) {
-    copy.addEventListener('click', function () {
-      // console.log('toast 제대로');
-      toastOn();
-    });
-  }
-};
 
 //클립보드 복사
 const clipboard = () => {
@@ -111,14 +102,28 @@ const clipboard = () => {
   navigator.clipboard.writeText(copyContent);
 };
 
+window.onload = () => {
+  const copy = document.getElementById('clipboard');
+  if (copy) {
+    copy.addEventListener('click', function () {
+      toastMsg.innerText = '내용 복사';
+      // console.log('toast 제대로');
+      toastOn();
+    });
+  }
+};
+
 const deleteFunc = () => {
   const diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
-  console.log(diaryList);
-  if (confirm('해당 일기를 삭제하시겠습니까?')) {
-    diaryList.splice(diaryIndex, 1); //해당 일기 삭제
-    localStorage.setItem('diaries', JSON.stringify(diaryList));
+  diaryList.splice(diaryIndex, 1); //해당 일기 삭제
+  localStorage.setItem('diaries', JSON.stringify(diaryList));
+
+  toastMsg.innerText = '삭제 완료';
+  closeModal('delete');
+  toastOn();
+  setTimeout(() => {
     window.location.href = `./myDiary.html`;
-  }
+  }, 1200);
 };
 
 const editDiary = () => {
@@ -290,3 +295,18 @@ const disappearBtn = () => {
   }
 };
 window.addEventListener('scroll', disappearBtn);
+
+// 모달열기
+const openModal = (kind) => {
+  // console.log('함수');
+  document.getElementById(kind).style.display = 'block';
+
+  document.body.style.overflow = 'hidden';
+};
+
+//모달 닫기
+const closeModal = (kind) => {
+  document.getElementById(kind).style.display = 'none';
+
+  document.body.style.overflow = 'auto';
+};

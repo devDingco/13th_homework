@@ -89,7 +89,7 @@
   }
 }
 
-.clipContainer {
+#clipContainer {
   display: flex;
   justify-content: end;
   margin-bottom: 10px;
@@ -110,7 +110,7 @@
   opacity: 0;
   position: fixed;
   bottom: -100px;
-  width: 500px;
+  width: auto;
   text-align: center;
   left: 50%;
   transform: translate(-50%, 0);
@@ -263,9 +263,73 @@
   border-radius: 100%;
   cursor: pointer;
 }
+
+.deleteModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.closeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 350px;
+  left: calc(50% - 350px / 2);
+  height: 150px;
+  top: calc(50% - 150px / 2);
+  padding: 18px 15px;
+  border-radius: 24px;
+  border: 1px solid #d4d3d3;
+  background-color: #f2f2f2;
+
+  z-index: 400;
+}
+
+.title {
+  margin: 10px 0;
+  font-weight: 600;
+}
+.completeModal {
+  margin-bottom: 0.9rem;
+  color: #484444;
+}
+.closeBtn {
+  width: 100%;
+  color: white;
+  background-color: black;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 0.3.3rem;
+  text-wrap: nowrap;
+  border: 1px solid #666;
+  cursor: pointer;
+}
+
+.background1 {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(120, 116, 116, 0.5);
+  opacity: 0.9;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  gap: 10px;
+  button {
+    border-radius: 0.7rem;
+    padding: 10px 20px;
+  }
+}
+
 @media (max-width: 1200px) {
   .container {
-    padding: 30px;
+    padding: 20px;
   }
 
   .prevBack {

@@ -12,6 +12,17 @@ window.addEventListener('scroll', () => {
   filter.style.color = isScrolled ? 'white' : 'black';
 });
 
+//toast 메시지
+const toastMsg = document.createElement('div');
+toastMsg.className = 'toastMessage';
+document.body.appendChild(toastMsg);
+function toastOn() {
+  toastMsg.classList.add('active');
+  setTimeout(function () {
+    toastMsg.classList.remove('active');
+  }, 1300);
+}
+
 // 플로팅 버튼 클릭 시 맨 위로 스크롤
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,7 +85,6 @@ const renderDiaries = () => {
   const info = document.getElementById('info');
   if (diaryList.length === 0) {
     info.style.display = 'block';
-    // info.innerHTML = '오늘의 기분을 담은 일기를 써보세요!';
   } else {
     info.style.display = 'none';
   }
@@ -149,11 +159,17 @@ const showCardFunc = (diary, index) => {
 
   deleteIcon.onclick = (e) => {
     e.stopPropagation();
-    if (confirm('일기를 삭제하시겠습니까?')) {
-      diaryList.splice(index, 1);
-      localStorage.setItem('diaries', JSON.stringify(diaryList));
+    openModal('delete');
+    const deleteBtn = document.getElementById('deleteBtn');
+
+    deleteBtn.onclick = () => {
+      toastMsg.innerText = '삭제 완료';
+      diaryList.splice(index, 1); //diaryList에서 해당 항목 삭제
+      localStorage.setItem('diaries', JSON.stringify(diaryList)); //스토리지 업데이트
       renderDiaries();
-    }
+      closeModal('delete');
+      toastOn();
+    };
   };
   // deleteIcon을 newContentCard의 container0에 추가
   newContentCard.querySelector('.container0').appendChild(deleteIcon);
@@ -217,7 +233,7 @@ window.addEventListener('scroll', disappearBtn);
 
 // register하면서 이중모달도 열리게 하기
 const handleSubmit = (event) => {
-  console.log('함수');
+  // console.log('함수');
   event.preventDefault();
   registerDiary();
   openModal('complete');
@@ -225,9 +241,18 @@ const handleSubmit = (event) => {
 
 //이중모달에서 확인버튼 나오면 뒤에것도 한번에 없애기
 const handleClose = (event) => {
-  console.log('두번째');
+  // console.log('두번째');
   event.preventDefault();
   closeModal('complete');
+  closeModal('writeModal');
+};
+
+//일기 등록 취소 중첩모달
+const handleCancel = (event) => {
+  event.preventDefault();
+  document.getElementById('addContent').reset();
+  btnColorFunc();
+  closeModal('cancel');
   closeModal('writeModal');
 };
 
@@ -235,8 +260,14 @@ const handleClose = (event) => {
 const openModal = (kind) => {
   // console.log('함수');
   document.getElementById(kind).style.display = 'block';
+
+  // 뒷배경 스크롤 막기
+  document.body.style.overflow = 'hidden';
 };
 
 const closeModal = (kind) => {
   document.getElementById(kind).style.display = 'none';
+
+  //스크롤 다시 활성화
+  document.body.style.overflow = 'auto';
 };
