@@ -16,6 +16,21 @@ window.addEventListener('scroll', () => {
     });
   }
   initialScroll = currentScroll;
+
+  const scrollPercent = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  if (scrollPercent < 0.7) return;
+  if (timer !== null) return;
+
+  renderPhotos();
+
+  timer = setTimeout(() => {
+    timer = null;
+
+    const lastScrollPercent = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+    if (lastScrollPercent === 1) renderPhotos();
+  }, 1000);
 });
 
 window.onload = () => {
@@ -56,23 +71,6 @@ const renderPhotos = () => {
     });
   }, 3000);
 };
-
-window.addEventListener('scroll', () => {
-  const scrollPercent = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-
-  if (scrollPercent < 0.7) return;
-  if (timer !== null) return;
-
-  renderPhotos();
-
-  timer = setTimeout(() => {
-    timer = null;
-
-    const lastScrollPercent = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-
-    if (lastScrollPercent === 1) renderPhotos();
-  }, 1000);
-});
 
 const renderData = (array) => {
   return array.map(
