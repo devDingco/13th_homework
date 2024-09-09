@@ -297,7 +297,7 @@ const closeSingleModal = (modal) => {
 window.addEventListener("click", (event) => {
   const className = event.target.className;
   const id = event.target.id;
-  if (className === "aside_layout" || className == "confirm_modal_layout") {
+  if (className === "aside_layout" || className === "confirm_modal_layout") {
     event.target.id != "diary_cancel_modal"
       ? closeAllModals(id)
       : closeSingleModal(id);
@@ -343,6 +343,7 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
+      document.getElementById("article").innerHTML =""
       renderInitialDiaryEntries()
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
