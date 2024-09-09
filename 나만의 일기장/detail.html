@@ -11,6 +11,27 @@
       </div>
       <div id="diaryDetail"></div>
     </div>
+
+    <div id="delete" class="deleteModal">
+      <div class="background1" onclick="closeModal('delete')"></div>
+      <div class="closeContainer">
+        <div class="title">일기 삭제</div>
+        <div class="completeModal">일기를 삭제하시겠습니까?</div>
+        <div class="btns">
+          <button
+            class="closeBtn"
+            onclick="closeModal('delete')"
+            style="color: black; background-color: white"
+          >
+            취소
+          </button>
+          <button id="deleteBtn" class="closeBtn" onclick="deleteFunc()">
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="floating-btn" onclick="scrollToTop()">
       <img src="./images/arrow_down.png" style="transform: rotate(180deg)" />
     </div>

@@ -12,6 +12,9 @@
   box-sizing: border-box;
   font-family: 'RixXladywatermelonR';
 }
+button {
+  cursor: pointer;
+}
 #diaryName {
   font-weight: 700;
   font-size: 18px;
@@ -20,8 +23,7 @@
 }
 .container {
   padding: 20px 200px;
-  /* max-width: 1480px; */
-  /* justify-content: center; */
+
   overflow: scroll;
 
   .header {
@@ -141,12 +143,28 @@
     }
   }
 }
+.deleteModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
 .closeModal {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 300;
+}
+
+.cancelModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .closeContainer {
@@ -162,6 +180,8 @@
   border-radius: 24px;
   border: 1px solid #d4d3d3;
   background-color: #f2f2f2;
+
+  z-index: 400;
 }
 .title {
   margin: 10px 0;
@@ -177,7 +197,10 @@
   background-color: black;
   padding: 8px 10px;
   border: none;
-  border-radius: 0.3rem;
+  border-radius: 0.4rem;
+  text-wrap: nowrap;
+  border: 1px solid #666;
+  cursor: pointer;
 }
 
 #writeModal {
@@ -270,6 +293,7 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+  gap: 10px;
   button {
     border-radius: 0.7rem;
     padding: 10px 20px;
@@ -285,6 +309,28 @@
   color: #000;
   border: 1px solid #000;
   margin-right: 10px;
+}
+
+.toastMessage {
+  opacity: 0;
+  position: fixed;
+  bottom: -100px;
+  width: auto;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 10px 50px;
+  background: black;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #fff;
+  box-shadow: 3px 4px 11px 0px #00000040;
+  transition: all 0.5s;
+}
+/*토스트 메시지 활성화 되었을 때*/
+.toastMessage.active {
+  opacity: 100%;
+  bottom: 50px;
 }
 
 .footer {
@@ -361,7 +407,6 @@
   .newCard {
     flex-basis: calc(50% - 10px); /* 50% 너비로 설정, 10px은 간격 조정 */
     max-width: calc(50% - 10px);
-    /* max-width: 290px; */
   }
 }
 /* 모바일 환경 */
@@ -369,14 +414,21 @@
 
 @media (max-width: 1200px) {
   .container {
-    padding: 10px;
+    padding: 20px;
     overflow: scroll;
+  }
+  .filter {
+    margin-bottom: 10px;
   }
 
   .mainContent {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 20px;
+  }
+  .writeDiary {
+    display: flex;
+    justify-content: end;
   }
 
   #addContent {
@@ -397,6 +449,31 @@
   .newCard:hover {
     transform: none;
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  #addContent {
+    width: 80%; /* 화면 너비의 80% */
+    max-width: 450px;
+    height: auto;
+    left: calc(50% - 40%); /* 너비 80%의 절반을 빼서 중앙 정렬 */
+    top: 20%; /* 화면 상단에서 20%만큼 떨어지게  */
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  #addContent {
+    width: 350px;
+    height: 400px;
+    left: calc(50% - 350px / 2); /* 너비 90%의 절반을 뺀 값으로 중앙 정렬 */
+    top: calc(50% - 200px);
+  }
+  .feelingBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 }
 

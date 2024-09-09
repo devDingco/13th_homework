@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>사진 보관함</title>
+    <link rel="stylesheet" href="./photo.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <p id="diaryName">민정이의 다이어리</p>
+        <img id="mainHeaderImg" src="./images/gamsung.jpg" alt="메인헤더사진" />
+      </div>
+      <div class="btnInfo">
+        <a href="./myDiary.html">
+          <button id="diaryKeepBtn" style="color: #535151">일기보관함</button>
+        </a>
+        <a href="./photo.html">
+          <button id="photoKeepBtn" style="background-color: #c7ddf6">
+            사진보관함
+          </button>
+        </a>
+      </div>
+      <div id="selectContainer">
+        <select id="selectPhoto" onchange="filteredPhoto(event)">
+          <option id="basic" selected value="기본">기본</option>
+          <option id="horizontal" value="가로형">가로형</option>
+          <option id="vertical" value="세로형">세로형</option>
+        </select>
+      </div>
+      <div id="photoList"></div>
+    </div>
+    <div class="floating-btn" onclick="scrollToTop()">
+      <img src="./images/arrow_down.png" style="transform: rotate(180deg)" />
+    </div>
+    <script src="./photo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+@font-face {
+  font-family: 'RixXladywatermelonR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/RixXladywatermelonR.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'RixXladywatermelonR';
+}
+button {
+  cursor: pointer;
+}
+#diaryName {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: -0.01em;
+}
+.container {
+  padding: 20px 200px;
+
+  overflow: scroll;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+    #mainHeaderImg {
+      width: 100%;
+      height: 180px;
+      border-radius: 20px;
+      border: none;
+      object-fit: cover;
+    }
+  }
+  .btnInfo {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 30px;
+    button {
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      padding: 5px 10px;
+      background-color: #ffffff;
+    }
+    button:hover {
+      color: rgb(62, 26, 244);
+      cursor: pointer;
+    }
+  }
+}
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+.photo {
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+#selectContainer {
+  margin-bottom: 20px;
+  select {
+    width: 80px;
+    border: 1px solid #565252;
+    border-radius: 3px;
+    padding: 3px;
+  }
+}
+
+/* 플로팅 버튼 스타일 추가 */
+.floating-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  background-color: #3a3838;
+  padding: 5px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+/* 스켈레톤 부분 */
+.skeleton-box {
+  width: 440px;
+  height: 440px;
+  background-color: lightgray;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  .stick {
+    width: 8.3rem;
+    height: 1000px;
+    background-color: white;
+    filter: blur(6.6rem);
+
+    animation: skelton 1.2s infinite;
+  }
+}
+
+@keyframes skelton {
+  from {
+    transform: translate(-400px, -400px) rotateZ(30deg);
+  }
+  to {
+    transform: translate(700px, 400px) rotateZ(30deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 20px;
+    overflow: scroll;
+  }
+}

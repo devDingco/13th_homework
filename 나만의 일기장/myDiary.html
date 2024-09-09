@@ -11,10 +11,14 @@
         <img id="mainHeaderImg" src="./images/gamsung.jpg" alt="메인헤더사진" />
       </div>
       <div class="btnInfo">
-        <button id="diaryKeepBtn" style="background-color: #c7ddf6">
-          일기보관함
-        </button>
-        <button id="photoKeepBtn">사진보관함</button>
+        <a href="./myDiary.html">
+          <button id="diaryKeepBtn" style="background-color: #c7ddf6">
+            일기보관함
+          </button>
+        </a>
+        <a href="./photo.html">
+          <button id="photoKeepBtn" style="color: #535151">사진보관함</button>
+        </a>
       </div>
 
       <div class="mainContent">
@@ -122,11 +126,7 @@
           ></textarea>
         </div>
         <div class="btns">
-          <button
-            type="reset"
-            id="cancelBtn"
-            onclick="closeModal('writeModal')"
-          >
+          <button type="button" id="cancelBtn" onclick="openModal('cancel')">
             취소
           </button>
           <button id="registerBtn">등록하기</button>
@@ -141,6 +141,47 @@
         <div class="title">일기 등록 완료</div>
         <div class="completeModal">등록이 완료 되었습니다.</div>
         <button class="closeBtn" onclick="handleClose(event)">완료</button>
+      </div>
+    </div>
+
+    <!-- 일기 삭제 모달 -->
+    <div id="delete" class="deleteModal">
+      <div class="background1" onclick="closeModal('delete')"></div>
+      <div class="closeContainer">
+        <div class="title">일기 삭제</div>
+        <div class="completeModal">일기를 삭제하시겠습니까?</div>
+        <div class="btns">
+          <button
+            class="closeBtn"
+            onclick="closeModal('delete')"
+            style="color: black; background-color: white"
+          >
+            취소
+          </button>
+          <button id="deleteBtn" class="closeBtn" onclick="deleteFunc()">
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cancel" class="cancelModal">
+      <div class="background1" onclick="closeModal('cancel')"></div>
+      <div class="closeContainer">
+        <div class="title">일기 등록 취소</div>
+        <div class="completeModal">일기 등록을 취소 하시겠어요?</div>
+        <div class="btns">
+          <button
+            class="closeBtn"
+            onclick="closeModal('cancel')"
+            style="color: black; background-color: white"
+          >
+            계속 작성
+          </button>
+          <button class="closeBtn" onclick="handleCancel(event)">
+            등록 취소
+          </button>
+        </div>
       </div>
     </div>
 
