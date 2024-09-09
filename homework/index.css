@@ -77,7 +77,8 @@ select#mood-selection {
   height: 2rem;
 }
 
-#dairy-title {
+#dairy-title,
+#gallery-title {
   color: #000;
   font-family: "Pretendard Variable";
   font-size: 24px;
@@ -86,13 +87,13 @@ select#mood-selection {
   border-bottom: 2px solid #000;
 }
 
-#gallery-title {
+/* #gallery-title {
   color: var(--Gray-Gray-400, #ABABAB);
   font-family: "Pretendard Variable";
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
-}
+} */
 
 .CSS_필터와일기등록버튼 {
   border: 2px solid blue;
@@ -511,7 +512,7 @@ select#mood-selection {
   width: 100%;
   padding: 24px 0;
   background:#F2F2F2;
-
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
