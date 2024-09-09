@@ -606,9 +606,9 @@ textarea {
   gap: 1rem;
 }
 .buttons_box .first_button {
-  background-color: white !important;
-  border: 1px solid black !important;
-  color: black !important;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 #photoList {
@@ -686,6 +686,25 @@ textarea {
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+}
+
+#added_modal,
+#cancel_prompt_modal {
+  background-color: var(--var-bg-color);
+  color: var(--var-text-color);
+}
+#added_modal button,
+#cancel_prompt_modal button {
+  width: 100%;
+  background-color: var(--var-active-button-bg);
+  color: var(--var-active-button-text);
+  border: 1px solid var(--var-active-button-border);
+}
+
+#cancel_prompt_modal button.first_button {
+  background-color: var(--var-close-button-bg);
+  color: var(--var-close-button-text);
+  border: 1px solid var(--var-close-button-border);
 }
 
 @keyframes skeleton_ui {
