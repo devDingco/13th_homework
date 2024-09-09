@@ -115,10 +115,7 @@ const onDeleteButtonClick = (removeId) => {
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
   renderLocalStorageData();
 };
-//
-//
-//
-//
+
 const onOptionChecked = (e) => {
   e.preventDefault();
   type = e.target.name;
@@ -398,3 +395,27 @@ async function dogImageApi() {
     });
   });
 }
+
+let timer;
+const searchFnc = (event) => {
+  clearTimeout(timer);
+
+  timer = setTimeout(() => {
+    const searchValue = event.target.value;
+
+    const searchDiary = diaryListArray.filter((diary) =>
+      diary.title.includes(searchValue),
+    );
+    console.log(searchDiary);
+    diaryListEl.innerHTML = '';
+
+    searchDiary.forEach((diaryData) => {
+      const addList = document.createElement('li');
+      isList = true;
+      console.log(diaryData.title);
+      diaryListEl.append(addList);
+
+      addList.innerHTML = diaryCard(diaryData);
+    });
+  }, 500);
+};
