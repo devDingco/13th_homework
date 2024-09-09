@@ -9,17 +9,17 @@
 
 
     <script>
-      const JS_강아지사진 = () => {
-      fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) => {
-      받아온결과.json().then((객체로변한결과) => {
-          console.log("결과:", 객체로변한결과)
-          const 상자 = 객체로변한결과.message
-          document.getElementById("HTML_이미지").innerHTML = 상자.map(el =>`
-          <img src="${el}" style = "width: 640px; height:640px; border-radius: 24px; align-items: center;" />
-          `)
-      })
-  })
-}
+      // const JS_강아지사진 = () => {
+      // fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) => {
+      //       받아온결과.json().then((객체로변한결과) => {
+      //           console.log("결과:", 객체로변한결과)
+      //           const 상자 = 객체로변한결과.message
+      //           document.getElementById("HTML_이미지").innerHTML = 상자.map(el =>`
+      //           <img src="${el}"  />
+      //           `)
+      //       })
+      //   })
+      // }
     </script>
 </head>
 <body>
@@ -42,10 +42,11 @@
             <option value="세로형">세로형</option>
           </select>
         </div>
-        <script>JS_강아지사진();</script>
         <div class="CSS_메인", id="HTML_메인">
-            <div class="CSS_이미지영역">
-                <div id="HTML_이미지" class="CSS_이미지"></div>
+            <div class="CSS_이미지영역" id="HTML_이미지영역">
+                <div id="HTML_이미지" class="CSS_이미지">
+                  <script>JS_강아지사진();</script>
+                </div>
             </div>
         </div>
     </div>    
