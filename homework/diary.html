@@ -19,8 +19,8 @@
 
     <div class="menucontainer">
         <div class="menubox">
-            <div class="menu_active"><div class="menu">일기보관함</div></div>
-            <div class="menu_inactive"><div class="menu">사진보관함</div></div>
+            <div id="diaryStorage" class="menu_active" onclick="changePage('일기보관함')"><div class="menu">일기보관함</div></div>
+            <div id="photoStorage" class="menu_inactive" onclick="changePage('사진보관함')"><div class="menu">사진보관함</div></div>
         </div>
     </div>
 
@@ -28,7 +28,7 @@
 
 
       
-        <div class="content">
+        <div class="content" id="content">
             
             <div class="center_box">
                 <div class="listcontainer">
@@ -111,11 +111,13 @@
                         <div class="titleInModal">내용</div>
                         <textarea id="titleTextareaModal" class="titleTextareaModal" placeholder="내용을 입력해 주세요."></textarea>
                     </div>
-
-                    <div class="modalButtonContainer">
-                        <button class="closeButton" onclick="openModal('closeModalContainer')"><div class="closeButtonText">닫기</div></button>
-                        <button class="confirmButton" type="button" onclick="submit()"><div class="confirmButtonText">등록하기</div></button>
+                    <div style="width: 592px">
+                        <div class="modalButtonContainer" style="justify-content: center;">
+                            <button class="closeButton" onclick="openModal('closeModalContainer')"><div class="closeButtonText">닫기</div></button>
+                            <button class="confirmButton" type="button" onclick="submit()"><div class="confirmButtonText">등록하기</div></button>
+                        </div>
                     </div>
+
 
                 </div>
             </div>
@@ -144,17 +146,57 @@
                     </div>
                 </div>
             </div>
+
+            <!--삭제 모달-->
+            <div id="deleteModalContainer" class="deleteModalContainer">
+                <!-- <div class="deleteModalbackground" onclick="closeModal('deleteModalContainer')">
+                    <div class="deleteModal" onclick="event.stopPropagation()">
+                        <div class="text3">일기 삭제</div>
+                        <div class="text4">일기를 삭제 하시겠어요?</div>
+                        <div class="modalButtonContainer">
+                            <button class="closeButton" type="button" onclick="closeModal('deleteModalContainer')"><div class="closeButtonText">취소</div></button>
+                            <button class="confirmButton" type="button"  onclick="removeDiaryEntry('modalcontainer,closeModalContainer')"><div class="confirmButtonText">삭제</div></button>
+                        </div>
+                    </div> 
+                </div> -->
+            </div>
         
         </div>
 
-        
-    <div class="footer" id="footer">
-        <div class="footercontainer">
-            <div class="footerwhosediary">민지의 다이어리</div>
-            <div class="representative">대표: (name)</div>
-            <div class="companyinfo">Copyright © 2024. {name} Co., Ltd.</div>
+        <!-------------사진 보관함 관련-------------->
+        <div class="photoStorageContent" id="photoStorageContent">
+            
+            <div class="center_box">
+                <div class="listcontainer">
+                    
+
+                    <div class="selectcontainer2">
+                        <div class="selectbox2">        
+                            <select id="selectbox2" onchange="photoStorageSelectChange('modalcontainer')">
+                                <option value="basic">기본</option>
+                                <option value="horizontal">가로형</option>
+                                <option value="vertical">세로형</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="photoContainer"></div>
+                </div>
+            </div>
+
         </div>
-    </div>    
+        <!------------------------------------->
+
+
+
+
+        <div class="footer" id="footer">
+            <div class="footercontainer">
+                <div class="footerwhosediary">민지의 다이어리</div>
+                <div class="representative">대표: (name)</div>
+                <div class="companyinfo">Copyright © 2024. {name} Co., Ltd.</div>
+            </div>
+        </div>    
 
 </body>
 </html>

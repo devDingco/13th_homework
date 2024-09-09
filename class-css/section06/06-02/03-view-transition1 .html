@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>페이지전환효과 실습</title>
+    <style>
+        .CSS_상자 {
+            background-color: skyblue;
+            width: 1000px;
+            height: 200px;
+            margin: 10px;
+        }
+
+        @view-transition {
+            navigation: auto;
+        }
+
+        
+        /* 다음페이지 -> 현재페이지 이동 즉 이동했던페이지에서 뒤로가기 했을때 효과*/
+        @keyframes 이전페이지애니메이션 {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        ::view-transition-old(root) {
+            animation-name: 이전페이지애니메이션;
+            animation-duration: 0.4s;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="./03-view-transition2-detail.html">페이지 이동하기</a>
+    <div class="CSS_상자"></div>
+    <div class="CSS_상자"></div>
+    <div class="CSS_상자"></div>
+    <div class="CSS_상자"></div>
+</body>
+</html>

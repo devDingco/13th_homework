@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>페이지복사 실습</title>
+
+    <style>
+        .CSS_배너 {
+            height: 100px;
+            background-color: skyblue;
+        }
+        .CSS_내비게이션 {
+            height: 50px;
+            background-color: yellow;
+        }
+        #HTML_일기보여주는곳 {
+         display: block;
+        }
+        #HTML_강아지보여주는곳 {
+            display: none;
+        }
+    </style>
+
+    <script>
+        const JS_메뉴이동 = (내가클릭한거) => {
+            switch(내가클릭한거) {
+                case "일기클릭": {
+                    document.getElementById('HTML_일기보여주는곳').style = "display: block"
+                    document.getElementById('HTML_강아지보여주는곳').style = "display: none"
+                    break
+                }
+                case "강아지클릭": {
+                    document.getElementById('HTML_일기보여주는곳').style = "display: none"
+                    document.getElementById('HTML_강아지보여주는곳').style = "display: block"
+                    break
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="CSS_배너">배너이미지입니다.</div>
+    <div class="CSS_내비게이션">
+        <button onclick="JS_메뉴이동('일기클릭')">일기</button>
+        <button onclick="JS_메뉴이동('강아지클릭')">강아지</button>
+    </div>
+
+
+    <!--일기메뉴-->
+    <div id="HTML_일기보여주는곳">
+        일기목록 화면입니다.
+        <div>일기1</div>
+        <div>일기2</div>
+        <div>...</div>
+    </div>
+
+
+    <!--강아지메뉴-->
+    <div id="HTML_강아지보여주는곳">
+        강아지목록 화면입니다.
+        <div>강아지1</div>
+        <div>강아지2</div>
+        <div>...</div>
+    </div>
+</body>
+</html>

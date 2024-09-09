@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>문장API 실습</title>
+
+    <script>
+        const JS_문장불러오는기능 = () => {
+            fetch('https://dog.ceo/api/breeds/image/random/3')
+            .then((받아온결과) => {
+                받아온결과.json()
+                .then((객체로변경한결과) => {
+                    console.log("결과", 객체로변경한결과);
+
+                    // alert(객체로변경한결과.message);
+
+                    const 철수의이미지 = 객체로변경한결과.message ;//변수에 담아서도 사용가능 
+                    console.log(철수의이미지) //배열로들어옴
+                    document.getElementById('HTML_강아지보여주는곳').innerHTML = 철수의이미지.map((el) =>`
+                    <img src="${el}" width:"300px"/>
+                    `).join("")
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_문장불러오는기능()">문장 불러오기</button>
+
+    <div id="HTML_강아지보여주는곳"></div>
+</body>
+</html>

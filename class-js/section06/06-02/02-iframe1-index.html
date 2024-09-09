@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>페이지복사 실습</title>
+
+    <style>
+        .CSS_배너 {
+            height: 100px;
+            background-color: skyblue;
+        }
+        .CSS_내비게이션 {
+            height: 50px;
+            background-color: yellow;
+        }
+        iframe {
+            border: none;
+            
+        }
+    </style>
+
+    <script>
+        const JS_메뉴이동 = (내가클릭한거) => {
+            switch(내가클릭한거) {
+                case "일기클릭": {
+                    document.getElementById("HTML_아이프레임").src = "./02-iframe2-diray.html"
+                    break
+                }
+                case "강아지클릭": {
+                    document.getElementById("HTML_아이프레임").src = "./02-iframe3-dog.html"
+                    break
+                }
+                case "코드캠프클릭": {
+                    document.getElementById("HTML_아이프레임").src = "https://codebootcamp.co.kr"
+                    break
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="CSS_배너">배너이미지입니다.</div>
+    <div class="CSS_내비게이션">
+        <button onclick="JS_메뉴이동('일기클릭')">일기</button>
+        <button onclick="JS_메뉴이동('강아지클릭')">강아지</button>
+    </div>
+
+    <iframe id="HTML_아이프레임" src="./02-iframe2-diray.html"></iframe>
+    <button onclick="JS_메뉴이동('코드캠프클릭')">코드캠프</button>
+</body>
+</html>
