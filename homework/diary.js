@@ -9,7 +9,7 @@ const removeDiaryEntry = (index) => {
     if (index >= 0 && index < diarylist.length) {
         diarylist.splice(index, 1);
         localStorage.setItem("diarylist", JSON.stringify(diarylist));
-
+        closeModal('deleteModalContainer')
         // 다이어리 항목 다시 렌더링
         renderDiaryEntries();
     }
@@ -105,7 +105,7 @@ const handleSelectChange = () => {
     // 필터링된 일기 데이터를 기반으로 HTML 생성
     const diaryHTML = filteredDiaryList.map((entry, index) => `
       <div class="diarybox">
-        <div class="xbutton" onClick="removeDiaryEntry(${index})"></div>
+        <div class="xbutton" onClick="openModal('deleteModalContainer')"></div>
         <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
           <div class="thumbnail_${entry.emotion}"></div>
           <div class="textbox">
@@ -122,19 +122,19 @@ const handleSelectChange = () => {
     `).join('');
   
     diarylistbox.innerHTML = diaryHTML;
-  };
+};
   
   
 
 
-// 다이어리 항목 랜더링 함수
+// 다이어리 항목 랜더링 함수 
 const renderDiaryEntries = () => {
     const diarylistbox = document.querySelector(".diarylistbox");
     const jsondiary = localStorage.getItem("diarylist");
     const diarylist = JSON.parse(jsondiary) || [];
     const diaryHTML = diarylist.map((entry,index) => `
         <div class="diarybox">
-            <div class="xbutton" onClick="removeDiaryEntry(${index})"></div>
+            <div class="xbutton" onClick="deleteButton(${index})"></div>
             <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
             <div class="thumbnail_${entry.emotion}"></div>
             <div class="textbox">
@@ -151,8 +151,25 @@ const renderDiaryEntries = () => {
     `).join('');
 
     diarylistbox.innerHTML = diaryHTML;
-
 };
+
+const deleteButton = (index) => {
+    openModal('deleteModalContainer')
+    document.getElementById('deleteModalContainer').innerHTML = `
+        <div class="deleteModalbackground" onclick="closeModal('deleteModalContainer')">
+            <div class="deleteModal" onclick="event.stopPropagation()">
+                <div class="text3">일기 삭제</div>
+                <div class="text4">일기를 삭제 하시겠어요?</div>
+                <div class="modalButtonContainer">
+                    <button class="closeButton" type="button" onclick="closeModal('deleteModalContainer')"><div class="closeButtonText">취소</div></button>
+                    <button class="confirmButton" type="button"  onclick="removeDiaryEntry(${index})"><div class="confirmButtonText">삭제</div></button>
+                </div>
+            </div> 
+        </div>
+    `
+}
+
+
 
 
 
@@ -212,10 +229,11 @@ window.addEventListener('scroll', () => {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'
+
 }
 
 function closeModal(modalIds) {
-    // 여러 ID를 콤마로 분리
     const idsArray = modalIds.split(',');
 
     idsArray.forEach(modalId => {
@@ -224,8 +242,102 @@ function closeModal(modalIds) {
             modal.style.display = 'none';
         }
     });
+    document.body.style.overflow = 'auto';
 }
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal('modalcontainer,closeModalContainer'); 
+    }
+});
 
 
 // 페이지 로드 시 다이어리 항목 렌더링
 document.addEventListener("DOMContentLoaded", renderDiaryEntries);
+
+
+
+
+//------------------강아지 사진 페이지 관련 스크립트-----------------------------
+
+const changePage = (click) => {
+    switch(click) {
+        case "일기보관함": {
+            document.getElementById('photoStorage').className = "menu_inactive";
+            document.getElementById('diaryStorage').className = "menu_active";
+            document.getElementById('content').style.display = "block";
+            document.getElementById('photoStorageContent').style.display = 'none'
+            break;
+        }
+        case "사진보관함": {
+            document.getElementById('photoStorage').className = "menu_active";
+            document.getElementById('diaryStorage').className = "menu_inactive";
+            document.getElementById('content').style.display = "none"; 
+            document.getElementById('photoStorageContent').style.display = 'block' 
+            break;
+
+        }
+    }
+}
+
+
+const photoStorageSelectChange = () => {
+    const selectBox2 = document.getElementById('selectbox2');
+    const selectedPhotoSize = selectBox2.value;
+    photoStorageRender(selectedPhotoSize); 
+};
+
+
+const photoStorageRender = (size) => {
+    loadImages(size);
+};
+
+// 스켈레톤을 숨기는 함수
+const hideSkeleton = (imageElement) => {
+    const imageBox = imageElement.closest('.imageBox');
+    const skeleton = imageBox.querySelector('.skeleton');
+    if (skeleton) {
+        skeleton.style.display = 'none';
+    }
+};
+
+// API에서 이미지를 불러옴
+const loadImages = (size) => {
+    fetch('https://dog.ceo/api/breeds/image/random/10')
+        .then((response) => response.json())
+        .then((result) => {
+            const photoContainer = document.getElementById('photoContainer');
+            const images = result.message; 
+            
+            let aspectRatio;
+            switch (size) {
+                case "horizontal":
+                    aspectRatio = "4 / 3"; 
+                    break;
+                case "vertical":
+                    aspectRatio = "3 / 4";
+                    break;
+                case "basic":
+                default:
+                    aspectRatio = "1 / 1";
+                    break;
+            }
+
+            photoContainer.innerHTML = images.map((url) => `
+                <div class="imageBox" style="aspect-ratio: ${aspectRatio};">
+                    <div class="skeleton">
+                        <div class="skeleton-animation"></div>
+                    </div>
+                    <img src="${url}" onload="hideSkeleton(this)" />
+                </div>
+            `).join('');
+        })
+        .catch((error) => {
+            console.error("API 호출 오류:", error);
+        });
+};
+
+
+window.onload = () => {
+    loadImages('basic'); 
+};

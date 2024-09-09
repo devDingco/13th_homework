@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>문장API 실습</title>
+
+    <script>
+        const JS_문장불러오는기능 = () => {
+            fetch('https://koreanjson.com/posts/1')
+            .then((받아온결과) => {
+                받아온결과.json()
+                .then((객체로변경한결과) => {
+                    console.log("결과", 객체로변경한결과);
+                    alert(객체로변경한결과.title);
+                    alert(객체로변경한결과.content);
+
+                    const 철수의상자 = 객체로변경한결과.title ;//변수에 담아서도 사용가능 
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_문장불러오는기능()">문장 불러오기</button>
+</body>
+</html>
