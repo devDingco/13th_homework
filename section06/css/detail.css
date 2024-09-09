@@ -1,0 +1,93 @@
+@import './common.css';
+
+.detail {
+  width: 100%;
+}
+
+.detail-title {
+  padding-bottom: 12px;
+  border-bottom: 2px solid currentColor;
+}
+
+.detail-title h2 {
+  font-size: 2.2rem;
+  font-weight: var(--weight-bold);
+}
+
+.detail-info {
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--gap-sm);
+  padding-bottom: var(--gap-lg);
+}
+
+.detail-emotion {
+  align-items: center;
+  gap: var(--gap-xxs);
+}
+
+.emotion-thumbnail {
+  width: 32px;
+  height: 32px;
+}
+
+.detail-emotion .badge-emoticon {
+  font-size: 2rem;
+}
+
+.detail-date {
+  font-size: 1.4rem;
+  font-weight: var(--weight-regular);
+  color: var(--gray-500);
+}
+
+.detail-content {
+  font-size: 1.6rem;
+  padding-bottom: var(--gap-lg);
+}
+
+.detail-content h3 {
+  font-weight: var(--weight-semi-bold);
+}
+
+.detail-content-text p {
+  font-weight: var(--weight-medium);
+  margin-top: var(--gap-xs);
+  line-height: 2.5rem;
+  word-break: break-all;
+  white-space: wrap;
+}
+
+.button-copy {
+  display: flex;
+  gap: var(--gap-xxs);
+  padding: var(--gap-xxs);
+  align-items: center;
+  margin-left: auto;
+  min-width: 65px;
+  height: 24px;
+  font-size: 1.6rem;
+  font-weight: var(--weight-regular);
+  background-color: var(--gray-w);
+  border: none;
+}
+
+.actions {
+  padding-bottom: var(--gap-sm);
+  justify-content: flex-end;
+  gap: var(--gap-sm);
+}
+
+.button-edit,
+.button-delete {
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-200);
+  text-align: center;
+  color: var(--gray-900);
+  background-color: var(--gray-w);
+  font-size: 1.6rem;
+  font-weight: var(--weight-medium);
+}
