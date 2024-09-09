@@ -440,6 +440,36 @@
   background: var(--Gray-W, #fff);
   padding: 1.5rem;
 }
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+}
+.dark_mode_box {
+  display: flex;
+}
+.dark_mode_toggle {
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightblue;
+}
+.dark_mode_toggle::after {
+  display: block;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 3px;
+  transition: margin-left 0.3s;
+}
+.dark_mode_toggle:checked {
+  background-color: rgb(93, 192, 224);
+}
+.dark_mode_toggle:checked::after {
+  margin-left: 18px;
+}
 .diary_entry_title {
   color: #000;
   font-size: 1.5rem;

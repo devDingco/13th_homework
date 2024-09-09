@@ -146,7 +146,13 @@
               <div id="aside_layout" class="aside_layout">
                 <form action="#" onsubmit="registerDiary(event)" name="form">
                   <div class="aside">
-                    <div class="diary_entry_title">📍 일기 쓰기</div>
+                    <div class="modal_header">
+                      <div class="diary_entry_title">📍 일기 쓰기</div>
+                      <div class="dark_mode_box">
+                        <input type="checkbox" class="dark_mode_toggle" onclick="darkModeToggle(event)" />
+                      </div>
+                    </div>
+                    
                     <div class="diary_entry_form">
                       <div class="mood_selector">
                         <div class="mood_selector_title">
