@@ -17,6 +17,9 @@
 
     .contents_left_item {
         width: 100%;
+
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
     }
 
     .diary_mood_img {

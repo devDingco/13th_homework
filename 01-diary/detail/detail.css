@@ -287,7 +287,7 @@
     font-size: 16px;
 
     animation-name: toastAnimation;
-    animation-duration: 2s;
+    animation-duration: 3.5s;
 
     animation-iteration-count: 1;
 }
@@ -332,7 +332,7 @@
 }
 
 .write_diary_modal_title_items {
-    width: 27rem;
+    /* width: 27rem; */
     display: flex;
     flex-direction: column;
     gap: 1rem;

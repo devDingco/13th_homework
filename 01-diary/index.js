@@ -183,13 +183,16 @@ const continueButtonPressed = () => {
 
 const closedButtonPressed = () => {
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: block;"
+    // document.getElementById("HTML_write_diary_modal_container").style = "overflow: hidden;"
 }
 
+// [일기 작성 취소] 버튼 클릭 시 동작
 const cancelButtonPressed = () => {
     dismiss()
     resetInputData()
 }
 
+// [일기 쓰기] 버튼 클릭 시 동작
 const writeButtonPressed = () => {
     presentModal()
 }
