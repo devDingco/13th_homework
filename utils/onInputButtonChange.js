@@ -12,7 +12,7 @@ function onInputButtonChange() {
 
     if (titleElement.value && contentElement.value && selectedRadioElement) {
         submitButtonElement.disabled = false;
-        submitButtonElement.style.backgroundColor = "black";
+        submitButtonElement.style.backgroundColor = "--var(default)";
         submitButtonElement.style.cursor = "pointer";
     } else {
         submitButtonElement.disabled = true;
