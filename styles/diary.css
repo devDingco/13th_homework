@@ -98,6 +98,7 @@ main .main-content ul#photoList {
   flex-direction: column;
   align-items: center;
   row-gap: 2.5rem;
+  padding-bottom: 3rem;
 }
 main .main-content ul#diaryList {
   width: 100%;
@@ -708,6 +709,7 @@ textarea {
 }
 
 .search_wrapper {
+  background-color: white;
   display: flex;
   align-items: center;
   border: 1px solid #c7c7c7;

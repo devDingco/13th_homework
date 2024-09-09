@@ -396,11 +396,11 @@ async function dogImageApi() {
   });
 }
 
-let timer;
+let searchTimer;
 const searchFnc = (event) => {
-  clearTimeout(timer);
+  clearTimeout(searchTimer);
 
-  timer = setTimeout(() => {
+  searchTimer = setTimeout(() => {
     const searchValue = event.target.value;
 
     const searchDiary = diaryListArray.filter((diary) =>
@@ -419,3 +419,27 @@ const searchFnc = (event) => {
     });
   }, 500);
 };
+
+let infinityTimer = null;
+window.addEventListener('scroll', () => {
+  const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+  if (scrollPercent < 0.9) return;
+  if (infinityTimer !== null) return;
+  // });
+  console.log('불러옵니다');
+  dogImageApi();
+
+  infinityTimer = setTimeout(() => {
+    clearTimeout(infinityTimer);
+    infinityTimer = null;
+
+    const scrollPercent =
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
+    if (scrollPercent === 1) dogImageApi();
+  }, 5000);
+});
