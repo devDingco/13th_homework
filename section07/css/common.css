@@ -50,6 +50,41 @@
   --weight-bold: 700;
   --weight-extra-bold: 800;
   --weight-black: 900;
+
+  --color: var(--gray-800);
+  --bg-color: var(--gray-w);
+  --nested-bg-color: var(--gray-900);
+  --nested-border-color: var(--gray-800);
+  --check-color: var(--gray-b);
+  --input-bg-color: var(--gray-w);
+  --input-border-color: var(--gray-200);
+  --input-placeholder: var(--gray-400);
+  --button-color: var(--gray-w);
+  --button-bg-color: var(--gray-b);
+  --button-disabled-color: var(--gray-50);
+  --button-disabled-bg-color: var(--gray-300);
+  --button-border-color: var(--gray-b);
+  --button-sub-color: var(--gray-900);
+  --radio-border-color: var(--gray-600);
+}
+
+/* 다크모드  */
+
+[isDarked='dark'] {
+  --color: var(--gray-300);
+  --bg-color: var(--gray-900);
+  --check-color: var(--gray-w);
+  --input-bg-color: var(--gray-b);
+  --input-border-color: var(--gray-800);
+  --input-placeholder: var(--gray-600);
+  --button-color: var(--gray-b);
+  --button-bg-color: var(--gray-50);
+  --button-disabled-color: var(--gray-600);
+  --button-disabled-bg-color: var(--gray-800);
+  --button-border-color: var(--gray-700);
+  --button-sub-color: var(--gray-w);
+  --button-sub-bg-color: var(--gray-900);
+  --radio-border-color: var(--gray-w);
 }
 
 /* Layouts */
@@ -319,6 +354,45 @@ body {
 .filter label {
   font-size: 1.6rem;
   color: var(--gray-700);
+}
+
+.button-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xxs);
+}
+
+.icon-toggle {
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  background-color: var(--gray-100);
+  border-radius: var(--radius-lg);
+  padding: 2px 0;
+}
+
+.icon-toggle:checked {
+  background-color: #3ad84a;
+}
+
+.icon-toggle::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--gray-w);
+  display: inline-block;
+  margin-left: 2px;
+  transition: margin 0.3s;
+}
+
+.icon-toggle:checked::after {
+  margin-left: 18px;
+}
+
+.button-toggle label {
+  font-size: 1.6rem;
+  font-weight: var(--weight-regular);
 }
 
 .review {

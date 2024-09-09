@@ -4,7 +4,9 @@
   position: absolute;
   inset: 0;
   z-index: 9999;
+  color: var(--color);
 }
+
 .modal-floor {
   width: 100vw;
   height: 100%;
@@ -21,7 +23,7 @@
   width: 100%;
   max-width: 640px;
   min-height: 500px;
-  background-color: var(--gray-w);
+  background-color: var(--bg-color);
   border-radius: var(--radius-sm);
   padding: var(--gap-lg);
 }
@@ -35,7 +37,7 @@
   max-width: 480px;
   min-height: 200px;
   text-align: center;
-  background-color: var(--gray-w);
+  background-color: var(--nested-border-color);
   border-radius: var(--radius-sm);
   padding: var(--gap-lg);
 }
@@ -50,6 +52,30 @@
   margin-top: var(--gap-sm);
 }
 
+.app-modal label {
+  color: var(--color);
+}
+
+.app-modal input[type='radio'] {
+  border-color: var(--radio-border-color);
+}
+
+.app-modal input[type='radio']:checked {
+  box-shadow: inset 0 0 0 2px var(--check-color), inset 0 0 0 5px var(--bg-color), inset 0 0 0 10px var(--check-color);
+}
+
+.app-modal input[type='text'],
+.app-modal textarea {
+  accent-color: var(--check-color);
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color) !important;
+}
+
+.app-modal input::placeholder,
+.app-modal textarea::placeholder {
+  color: var(--input-color);
+}
+
 .modal-actions {
   justify-content: center;
   align-items: center;
@@ -60,10 +86,17 @@
 .modal-actions button {
   width: 104px;
   height: 48px;
-  border: 1px solid var(--gray-b);
   border-radius: var(--radius-sm);
-  color: var(--gray-b);
-  background-color: var(--gray-w);
+  color: var(--button-sub-color);
+  background-color: var(--button-sub-bg-color);
+  font-size: 1.8rem;
+  font-weight: var(--weight-semi-bold);
+}
+
+.modal-actions button:disabled {
+  color: var(--button-disabled-color);
+  background-color: var(--button-disabled-bg-color);
+  border-color: var(--button-border-color);
   font-size: 1.8rem;
   font-weight: var(--weight-semi-bold);
 }
@@ -74,7 +107,8 @@
 
 .modal-actions button:only-child,
 .modal-actions button:nth-child(2) {
-  filter: invert();
+  color: var(--button-color);
+  background-color: var(--button-bg-color);
 }
 
 @media (max-width: 360px) {
