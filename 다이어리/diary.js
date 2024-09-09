@@ -381,6 +381,31 @@ const toggleDiaryPhotoView = (viewType) => {
   }
 };
 
+let timer;
+const onSearch = (event) => {
+  clearTimeout(timer)
+
+  timer = setTimeout(() => {
+    const searchQuery = event.target.value
+    const searchResults = storedDiaryList.filter(e => e.title.includes(searchQuery))
+    console.log(searchResults)
+    document.getElementById("article").innerHTML = "";
+    searchResults.map((diary) => {
+      const storedDiary = {
+        id: diary.id,
+        mood: diary.mood,
+        date: diary.date,
+        color: diary.color,
+        title: diary.title,
+        content: diary.content,
+        imageName: diary.imageName,
+      };
+      createHtml(storedDiary);
+    });
+  }, 1000);
+
+}
+
 renderInitialDiaryEntries();
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);
