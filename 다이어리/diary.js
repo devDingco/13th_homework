@@ -439,8 +439,14 @@ const onSearch = (event) => {
       createHtml(storedDiary);
     });
   }, 1000);
-
 }
+
+const darkModeToggle = (event) => {
+  const mode = document.documentElement;
+  event.target.checked
+    ? (mode.setAttribute("mode", "dark"))
+    : (mode.setAttribute("mode", "light"));
+};
 
 renderInitialDiaryEntries();
 moodList.addEventListener("click", onClickMood);

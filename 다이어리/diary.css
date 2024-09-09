@@ -436,8 +436,8 @@
   flex-direction: column;
   gap: 2.5rem;
   border-radius: 1rem;
-  border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  border: 0.063rem solid var(--basicModalBorderColor);
+  background-color: var(--basicBackgroundColor);
   padding: 1.5rem;
 }
 .modal_header {
@@ -470,8 +470,30 @@
 .dark_mode_toggle:checked::after {
   margin-left: 18px;
 }
+:root {
+  --basicModalBorderColor: #d4d3d3;
+  --basicBackgroundColor: #FFF;
+  --basicColor: #000;
+  --basicInputBackgroundColor: #FFF;
+  --basicInputBorderColor: #D4D3D3;
+  --basicConfirmModalBackgroundColor: #FFF;
+  --basicConfirmModalColor: #000;
+  --basicConfirmModalButton: #000;
+  --basicConfirmModalButtonColor: #fff;
+}
+[mode="dark"] {
+  --basicModalBorderColor: #333;
+  --basicBackgroundColor: #1C1C1C;
+  --basicColor: #FFF;
+  --basicInputBackgroundColor: #000;
+  --basicInputBorderColor: #333;
+  --basicConfirmModalBackgroundColor: #1e1e1e;
+  --basicConfirmModalColor: #FFF;
+  --basicConfirmModalButton: #FFF;
+  --basicConfirmModalButtonColor: #000;
+}
 .diary_entry_title {
-  color: #000;
+  color: var(--basicColor);
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
@@ -493,7 +515,7 @@
 }
 .mood_selector_title {
   align-self: stretch;
-  color: #000;
+  color: var(--basicColor);
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
@@ -526,7 +548,7 @@
   background-image: url("./image/checked.svg");
 }
 .mood_text {
-  color: var(--Gray-Gray-800, #333);
+  color: var(--basicColor);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
@@ -550,7 +572,7 @@
 }
 .diary_title {
   height: 1.25rem;
-  color: var(--Gray-Gray-800, #333);
+  color: var(--basicColor);
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
@@ -567,7 +589,7 @@
   align-self: stretch;
   border-radius: 0.5rem;
   border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  background-color: var(--basicInputBackgroundColor);
   outline: none;
 }
 .diary_title_window::placeholder {
@@ -588,7 +610,7 @@
 }
 .diary_contents {
   height: 1.25rem;
-  color: var(--Gray-Gray-800, #333);
+  color: var(--basicColor);
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
@@ -603,9 +625,9 @@
   align-items: flex-start;
   gap: 0.625rem;
   align-self: stretch;
-  border-radius: 0.5rem;
   border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  border-radius: 0.5rem;
+  background-color: var(--basicInputBackgroundColor);
   outline: none;
   overflow: hidden;
   resize: none;
@@ -794,12 +816,11 @@
   align-items: center;
   gap: 2.5rem;
   border-radius: 1.5rem;
-  background: #fff;
-  color: #000;
+  background-color: var(--basicConfirmModalBackgroundColor);
   text-align: center;
 }
 .modal_title {
-  color: #000;
+  color: var(--basicConfirmModalColor);
   text-align: center;
   font-size: 1.5rem;
   font-style: normal;
@@ -808,7 +829,7 @@
   letter-spacing: -0.015rem;
 }
 .modal_content {
-  color: var(--Gray-Gray-800, #333);
+  color: var(--basicConfirmModalColor);
   text-align: center;
   font-size: 1.25rem;
   font-style: normal;
@@ -867,8 +888,8 @@
   gap: 0.625rem;
   flex: 1 0 0;
   border-radius: 0.5rem;
-  background: var(--Gray-B, #000);
-  color: var(--Gray-W, #fff);
+  background: var(--basicConfirmModalButton);
+  color: var(--basicConfirmModalButtonColor);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
