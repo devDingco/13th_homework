@@ -14,18 +14,15 @@ const dogImgArr = async () => {
   return imgData;
 }
 
-// 강아지 사진 리스트 렌더링 함수
-const galleryListRender = async () => {
-  const imgArr = await dogImgArr();
-  const galleryListWrap = document.querySelector('.galleryListWrap');
-  const skeletonBox = `<div class="skeleton_loading"></div>`
-  const galleryUl = document.createElement('ul');
-  galleryListWrap.appendChild(galleryUl);
-  galleryUl.innerHTML = imgArr.map(img => `<li>${skeletonBox}<img src="${img}" alt="dog"></li>`).join('')
 
+const galleryList = async () => {
+  const galleryUl = document.querySelector('.galleryListWrap').querySelector('ul');
+  const imgArr = await dogImgArr();
+  const skeletonBox = `<div class="skeleton_loading"></div>`
+  galleryUl.innerHTML += imgArr.map(img => `<li>${skeletonBox}<img src="${img}" alt="dog"></li>`).join('')
   // 이미지 로딩 완료 후 스켈레톤 숨기기 함수
   const imgList = document.querySelectorAll('.galleryListWrap img');
-  console.log(imgList);
+  // console.log(imgList);
   imgList.forEach(img => {
     img.addEventListener('load', () => {
       setTimeout(() => {
@@ -33,9 +30,20 @@ const galleryListRender = async () => {
       }, 1000)
     })
   })
+}
 
+
+// 강아지 사진 리스트 렌더링 함수
+const galleryListRender = () => {
+  // const imgArr = await dogImgArr();
+  const galleryListWrap = document.querySelector('.galleryListWrap');
+  const galleryUl = document.createElement('ul');
+  galleryListWrap.appendChild(galleryUl);
+  galleryList();
 }
 galleryListRender();
+
+
 
 // 갤러리 필터 선택에 따른 노출 변경 처리 함수
 const galleryFilter = (optionValue) => {
@@ -49,4 +57,28 @@ const galleryFilter = (optionValue) => {
 }
 
 
+const scrollPercent = () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  const scrollPercent = Math.round((scrollTop / (scrollHeight - clientHeight)) * 100);
+  return scrollPercent;
+}
+
+
+let galleryLoadTimer = null;
+window.addEventListener('scroll', () => {
+  console.log(scrollPercent());
+
+  if (scrollPercent() < 70) return;
+  if (galleryLoadTimer !== null) return;
+
+  if (scrollPercent() >= 90) {
+    galleryList();
+
+    galleryLoadTimer = setTimeout(() => {
+      galleryLoadTimer = null;
+      if (scrollPercent() === 100) galleryList();
+    }, 1000)
+  }
+
+})
 
