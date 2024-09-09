@@ -116,10 +116,13 @@ const navMenu = () => {
   if (!navElement) return
   const navMenu = document.createElement("ul");
   navMenu.classList.add("navMenu");
-  navMenu.innerHTML = `
-    <li class="active"><a href="./index.html">일기보관함</a></li>
-    <li>사진보관함</li>
-  `;
+  const nevList = { "일기보관함": "index.html", "사진보관함": "gallery.html" }
+  Object.keys(nevList).map((key) => {
+    const li = document.createElement("li");
+    location.href.includes(nevList[key]) ? li.classList.add("active") : li.classList.remove("active");
+    li.innerHTML = `<a href="${nevList[key]}">${key}</a>`;
+    navMenu.appendChild(li);
+  })
   navElement.prepend(navMenu);
 }
 navMenu();
@@ -361,10 +364,12 @@ const diaryDeletePop = (event, diaryId) => {
 
 // 선택형 셀렉트 형태 박스 렌더링 함수 
 const selectRender = (selector, option) => {
-  document.querySelector('head').innerHTML += `<link rel="stylesheet" href="./css/select.css" />`
   // option : 셀렉트 박스에 들어갈 옵션 객체
   // 예시 : { 전체: "전체", 행복해요: "행복해요", 슬퍼요: "슬퍼요", 놀랐어요: "놀랐어요", 화나요: "화나요" }
   const selectBox = document.querySelector(selector);
+  if (!selectBox) return
+
+  document.querySelector('head').innerHTML += `<link rel="stylesheet" href="./css/select.css" />`
   selectBox.classList.add("selectBox");
 
   const selectButton = document.createElement("button");
