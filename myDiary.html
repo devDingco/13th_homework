@@ -30,14 +30,43 @@
             </div>
 
             <div class="nav__filter">
-                <select class="filter__bar" onchange="activeFilter(event)">
-                    <option name="filter" value="all">전체</option>
-                    <option name="filter" value="happy">행복해요</option>
-                    <option name="filter" value="sad">슬퍼요</option>
-                    <option name="filter" value="surprise">놀랐어요</option>
-                    <option name="filter" value="angry">화나요</option>
-                    <option name="filter" value="etc">기타</option>
-                </select>
+                <div class="filter__bar">
+                    <div class="filter__inner">
+                        <input class="inner__text" type="checkbox" />
+                        <img class="inner__icon" src="./asset/icon/down_fill_light_m.png" />
+                    </div>
+                    <ul class="filter__menu">
+                        <li>
+                            <input id="all" type="radio" name="filter" />
+                            <label for="all">전체</label>
+                        </li>
+                        <li>
+                            <input id="happy" type="radio" name="filter"/>
+                            <label for="happy">행복해요</label>
+                        </li>
+                        <li>
+                            <input id="sad" type="radio" name="filter"/>
+                            <label for="sad">슬퍼요</label>
+                        </li>
+                        <li>
+                            <input id="surprise" type="radio" name="filter"/>
+                            <label for="surprise">놀랐어요</label>
+                        </li>
+                        <li>
+                            <input id="angry" type="radio" name="filter"/>
+                            <label for="angry">화나요</label>
+                        </li>
+                        <li>
+                            <input id="etc" type="radio" name="filter"/>
+                            <label for="etc">기타</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="search__bar">
+                    <img class="search__icon" src="./asset/icon/search_outline_light_m.png" />
+                    <input class="search__input" type="text" placeholder="검색어를 입력해 주세요." />
+                </div>
             </div>
 
             <div class="body__left__card">
@@ -175,4 +204,17 @@
         </div>
     </div>
 </body>
+
+<grave>
+    <!--
+    <select class="filter__bar" onchange="activeFilter(event)">
+        <option name="filter" value="all">전체</option>
+        <option name="filter" value="happy">행복해요</option>
+        <option name="filter" value="sad">슬퍼요</option>
+        <option name="filter" value="surprise">놀랐어요</option>
+        <option name="filter" value="angry">화나요</option>
+        <option name="filter" value="etc">기타</option>
+    </select>
+    -->
+</grave>
 </html>
