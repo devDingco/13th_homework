@@ -183,7 +183,6 @@ const continueButtonPressed = () => {
 
 const closedButtonPressed = () => {
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: block;"
-    // document.getElementById("HTML_write_diary_modal_container").style = "overflow: hidden;"
 }
 
 // [일기 작성 취소] 버튼 클릭 시 동작
@@ -205,6 +204,24 @@ const makeButtonPressed = () => {
 const okButtonPressed = () => {
     dismiss()
     resetInputData()
+}
+
+const presentNaviMenu = (naviItem) => {
+    switch (naviItem) {
+        case "diary": {
+            document.getElementById("diary_list").style = "display: grid;"
+            document.getElementById("HTML_contents_photos_container").style = "display: none;"
+            break
+        }
+
+        case "photos": {
+            document.getElementById("diary_list").style = "display: none;"
+            document.getElementById("HTML_contents_photos_container").style = "display: block;"
+            fetchDogsFromAPI()
+            break
+        }
+    }
+
 }
 
 const topScrollFloatingButtonTapped = () => {
@@ -252,3 +269,23 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
+// API
+
+const fetchDogsFromAPI = () => {
+    const api = "https://dog.ceo/api/breeds/image/random/10"
+
+    fetch(api)
+        .then(result => result.json())
+        .then(data => {
+            const images = data.message
+
+            images.forEach(img => {
+                console.log(img);
+                const oldDOMList = document.getElementById("HTML_contents_photos_group").innerHTML
+                document.getElementById("HTML_contents_photos_group").innerHTML = oldDOMList + `
+                    <img class ="contents_photos_item" src="${img}">`
+            })
+    })
+
+
+}

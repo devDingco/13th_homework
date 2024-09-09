@@ -75,6 +75,12 @@
         object-fit: cover;
     }
 
+    /* 일기 보관함 */
+
+    .contents_photos_item {
+        width: 100%;
+    }
+
     .write_diary {
         height: 100%;
     }

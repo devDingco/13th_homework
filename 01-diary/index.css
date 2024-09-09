@@ -80,15 +80,17 @@
 /* 기분에 따른 일기 필터링 */
 
 .contents_container {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2.625rem;
     padding-right: 1.25rem;
     padding-left: 1.25rem;
 }
 
 .filter_item {
-    width: 100%;
+    width: 73rem;
     position: sticky;
     top: 0.625rem;
     z-index: 1;
@@ -108,7 +110,7 @@
     justify-content: space-between;
 }
 
-.wirte_diary_button {
+.contents_write_diary_button {
     width: 6.875rem;
     height: 3rem;
 
@@ -149,7 +151,6 @@
 
 .diary {
     width: 17.125rem;
-    /* height: 23.313rem; */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -263,6 +264,27 @@
     background-color: #00000080;
 
     z-index: 2;
+}
+
+/* 사진 보관함 */
+
+.contents_photos_container {
+    display: none;
+    
+}
+
+.contents_photos_group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.contents_photos_item {
+    width: 40rem;
+    border-radius: 1.5rem;
+
+    object-fit: cover;
 }
 
 /* 일기쓰기 버튼 클릭 시 생성되는 모달 */
