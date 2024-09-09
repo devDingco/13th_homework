@@ -1,0 +1,43 @@
+.viewTypeWrap {
+  max-width: var(--max-width);
+  margin: 32px auto 42px;
+}
+
+.galleryListWrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.galleryListWrap ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* 40px */
+  align-items: center;
+}
+
+.galleryListWrap ul li {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.galleryListWrap img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.galleryListWrap.ratio-1-1 li img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.galleryListWrap.ratio-4-3 li img {
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.galleryListWrap.ratio-3-4 li img {
+  height: 640px;
+  aspect-ratio: 3/4;
+}/*# sourceMappingURL=gallery.css.map */
