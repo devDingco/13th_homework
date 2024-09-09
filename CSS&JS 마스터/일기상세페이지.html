@@ -1,47 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <title>일기상세페이지</title>
-        <link rel="stylesheet" href="./일기상세페이지.css">
-        <script src="./일기상세페이지.js"></script>
-    </head>
-    <body>
-        <div class="layout">
-            <header>
-                <div class="header_text">민지의 다이어리</div>
-            </header>
-            <main>
-                <div class="main_header">
-                    <div id="main_header_text"></div>
-                    <div class="main_header_detail">
-                        <div class="detail_emotion">
-                            <img src="" alt="" id="emotionImage">
-                            <div id="emotion_text"></div>
-                        </div>
-                        <div id="detail_date"></div>
-                    </div>
-                </div>
-                <div class="main_body">
-                    <div class="body_title">내용</div>
-                    <div id="body_content"></div>
-                </div>
-                <div class="ButtonBox">
-                    <button onclick="modify()">수정</button>
-                    <button onclick="deleteButton()">삭제</button>
-                </div>
-            </main>
-            <div class="remembranceBox">
-                <div class="inputBox">
-                    <div class="inputTitle">회고</div>
-                    <div class="inputTextBox">
-                        <input type="text" id="inputText" placeholder="회고를 남겨보세요."> 
-                        <button class="inputButton" onclick="addText()">입력</button>
-                    </div>
-                </div>
-                <div id="remembranceTextBox">
-                    <!--회고텍스트넣을자리-->
-                </div>
-            </div>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기상세페이지</title>
+    <link rel="stylesheet" href="./일기상세페이지.css" />
+    <script src="./일기상세페이지.js"></script>
+  </head>
+  <body>
+    <div id="modal_group4">
+      <div class="modal_background"></div>
+      <div class="modal_delete_diary">
+        <div class="delete_hedeader_box">
+          <div class="delete_header">일기삭제</div>
+          <div class="delete_content">일기를 삭제 하시겠어요?</div>
         </div>
-    </body>
+        <div class="delete_button_box">
+          <button id="delete_cancel_button" onclick="deleteDiaryCancel()">
+            취소
+          </button>
+          <button id="delete_button" onclick="realDeleteDiary()">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="layout" id="layout">
+      <!-- <header>
+        <div class="header_text">민지의 다이어리</div>
+      </header>
+      <main>
+        <div class="main_header">
+          <div id="main_header_text"></div>
+          <div class="main_header_detail">
+            <div class="detail_emotion">
+              <img src="" alt="" id="emotionImage" />
+              <div id="emotion_text"></div>
+            </div>
+            <div id="detail_date"></div>
+          </div>
+        </div>
+        <div class="main_body">
+          <div class="body_title">내용</div>
+          <div id="body_content"></div>
+        </div>
+        <div class="copyBox">
+          <img src="./assets/copy_outline_light_m.svg" onclick="copy()" />
+          <div class="copyText">내용복사</div>
+        </div>
+        <div class="ButtonBox">
+          <button onclick="modify()">수정</button>
+          <button onclick="deleteButton()">삭제</button>
+        </div>
+      </main>
+      <div class="remembranceBox">
+        <div class="inputBox">
+          <div class="inputTitle">회고</div>
+          <div class="inputTextBox">
+            <input
+              type="text"
+              id="inputText"
+              placeholder="회고를 남겨보세요."
+            />
+            <button class="inputButton" onclick="addText()">입력</button>
+          </div>
+        </div>
+        <div id="remembranceTextBox">
+          
+        </div>
+      </div> -->
+      <div id="copyCheckBox">내용이 복사되었습니다.</div>
+    </div>
+  </body>
 </html>

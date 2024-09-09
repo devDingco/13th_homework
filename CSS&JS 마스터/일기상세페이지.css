@@ -1,277 +1,414 @@
 * {
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.layout{
-    width: 1168px;
-    margin: 0 20px 40px;
+.layout {
+  width: 1168px;
+  margin: 0 20px 40px;
 }
 
 header {
-    width: 100%;
-    height: 60px;
-    font-size: 18px;
-    gap: 10px;
-    margin-bottom: 64px;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+  gap: 10px;
+  margin-bottom: 64px;
+  display: flex;
+  align-items: center;
 }
 
 .header_text {
-    width: 120px;
-    height: 40px;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 16px;
-    letter-spacing: -1px;
+  width: 120px;
+  height: 40px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: -1px;
 }
 
 .radioBox {
-    width: 100%;
-    gap: 16px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    display: none;
+  width: 100%;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  display: none;
 }
 
 .radioBox_header {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -1px;
-    color: #000000;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #000000;
 }
 
 .radioBox_body {
-    width: 100%;
-    gap: 20px;
-    display: flex;
+  width: 100%;
+  gap: 20px;
+  display: flex;
 }
 
 .radioButton {
-    border-radius: 8px;
-    gap: 8px;
-    display: flex;
+  border-radius: 8px;
+  gap: 8px;
+  display: flex;
 }
 
 .radioButton input {
-    width: 24px;
-    height: 24px;
-    display: block;
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .radioButton label {
-    height: 20px;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -1px;
-    color: #333333;
-    display: block;
+  height: 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #333333;
+  display: block;
 }
 
 main {
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px;
-    padding-bottom: 16px;
-    gap: 24px;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px;
+  padding-bottom: 16px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main_header {
-    width: 100%;
-    height: 84px;
-    gap: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  height: 84px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #main_header_text {
-    width: 100%;
-    border-bottom: 2px solid #000000;
-    padding-bottom: 12px;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 24px;
-    letter-spacing: -1px;
-    color: #000000;
+  width: 100%;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 12px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #000000;
 }
 
 .main_header_detail {
-    width: 100%;
-    height: 20px;
-    gap: 8px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  height: 20px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .detail_emotion {
-   width: 100%;
-   height: 32px;
-   gap: 8px; 
-   display: flex;
+  width: 100%;
+  height: 32px;
+  gap: 8px;
+  display: flex;
 }
 
 .detail_emotion img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 #emotion_text {
-    width: 100%;
-    height: 24px;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 32px;
-    letter-spacing: -1px;
-    color: #ea5757;
+  width: 100%;
+  height: 24px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -1px;
+  color: #ea5757;
 }
 
 #detail_date {
-    width: 107px;
-    height: 20px;
-    gap: 8px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -1px;
-    color: #919191;
+  width: 107px;
+  height: 20px;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -1px;
+  color: #919191;
 }
 
 .main_body {
-    width: 100%;
-    height: 133px;
-    border-bottom: 1px;
-    gap: 12px;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 133px;
+  border-bottom: 1px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .body_title {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -1px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -1px;
 }
 
-
 #body_content {
-    width: 100%;
-    height: 100%;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: -1px;
-    color: #333333;
+  max-width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -1px;
+  color: #333333;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.copyBox {
+  width: 100%;
+  gap: 8px;
+  display: flex;
+  justify-content: end;
+}
+
+.copyBox img {
+  width: 24px;
+  height: 24px;
+}
+
+.copyText {
+  height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #1c1c1c;
 }
 
 .ButtonBox {
-    width: 100%;
-    height: 40px;
-    gap: 16px;
-    display: flex;
-    justify-content: end;
+  width: 100%;
+  height: 40px;
+  gap: 16px;
+  display: flex;
+  justify-content: end;
 }
 
-.ButtonBox button{
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid #d4d3d3;
-    padding: 8px 10px;
-    gap: 10px;
-    background-color: #ffffff;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -1px;
-    color: #1c1c1c;
+.ButtonBox button {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 8px 10px;
+  gap: 10px;
+  background-color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #1c1c1c;
 }
 
 .ButtonBox button:hover {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
-.remembranceBox{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.remembranceBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .inputBox {
-    width: 100%;
-    gap: 13px;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  gap: 13px;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputTitle {
-    width: 100%;
-    height: 24px;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -1px;
+  width: 100%;
+  height: 24px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -1px;
 }
 
 .inputTextBox {
-    width: 100%;
-    display: flex;
-    gap: 16px;
+  width: 100%;
+  display: flex;
+  gap: 16px;
 }
 
 #inputText {
-    width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #d4d3d3;
-    padding: 12px 16px;
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
 }
 
 .inputButton {
-    width: 52px;
-    height: 48px;
-    border-radius: 8px;
-    line-height: 48px;
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    cursor: pointer;
+  width: 52px;
+  height: 48px;
+  border-radius: 8px;
+  line-height: 48px;
+  background-color: #000000;
+  color: white;
+  text-align: center;
+  cursor: pointer;
 }
 
 #remembranceTextBox {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .remembranceText {
-    width: 100%;
-    border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 10px;
+  width: 100%;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 10px;
+}
+
+#copyCheckBox {
+  width: 760px;
+  height: 56px;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 10px;
+  background-color: #000000;
+  opacity: 90%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  color: #ffffff;
+  position: absolute;
+  bottom: 0px;
+  left: calc(50% - 380px);
+  text-align: center;
+  display: none;
+}
+
+#modal_group4 {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+}
+
+.modal_background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000080;
+}
+
+.modal_delete_diary {
+  width: 480px;
+  height: 200px;
+  border-radius: 24px;
+  padding: 24px;
+  gap: 40px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: calc(50vw - 240px);
+  top: calc(50vh - 100px);
+}
+
+.delete_header {
+  width: 100%;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  text-align: center;
+  color: #000000;
+}
+
+.delete_content {
+  width: 100%;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.delete_button_box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 21px;
+  text-align: center;
+}
+
+#delete_cancel_button {
+  width: 104px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  padding: 8px 10px;
+  gap: 10px;
+  background-color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: -1px;
+  color: #1c1c1c;
+}
+
+#delete_cancel_button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#delete_button {
+  width: 104px;
+  height: 48px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  gap: 10px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  color: #1c1c1c;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: -1px;
+}
+
+#delete_button:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 @media (max-width: 1200px) {
-    .layout {
-        width: 100%;
-        padding: 0 25px;
-    }
+  .layout {
+    width: 100%;
+    padding: 0 25px;
+  }
 }
