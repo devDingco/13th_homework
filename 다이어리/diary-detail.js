@@ -2,7 +2,7 @@ const queryString = location.search;
 const part = new URLSearchParams(queryString);
 const id = part.get("id");
 const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
-const diaryDetailContent = diaryDetailContentList.filter((e) => e.id == id)[0];
+const diaryDetailContent = diaryDetailContentList.filter((e) => e.id === id)[0];
 let diaryEntries = [];
 let commentEntries;
 let index;
@@ -77,8 +77,7 @@ const addComment = (date) => {
   const commentValue = comment.value;
   commentEntries = { commentValue, date };
   diaryEntries[index].commentList.push({ ...commentEntries });
-  diaryDetailContentList.splice(index, 1, diaryEntries[index]);
-  localStorage.setItem("diaryList", JSON.stringify(diaryDetailContentList));
+  localStorage.setItem("diaryList", JSON.stringify(diaryEntries));
   comment.value = null;
   createCommentHtml(commentEntries);
 };
@@ -94,9 +93,10 @@ const setupCommentInput = () => {
 
 diaryEntries = diaryDetailContentList;
 diaryDetailContentList.map((e, i) => {
-  if (e.id == id) index = i;
+  e.id === id ? (index = i) : undefined;
 });
-diaryDetailContentList[index].commentList.map((comment) => {
+const currentDiaryComments = diaryDetailContentList[index].commentList;
+currentDiaryComments.map((comment) => {
   createCommentHtml(comment);
 });
 
@@ -123,22 +123,13 @@ const closeSingleModal = (modal) => {
 
 const triggerModal = (modal) => {
   document.getElementById(modal).style = "display: flex;";
+  document.getElementById("deleteDiaryBtn").focus();
 };
 
 const confirmDeleteDiary = (event) => {
   event.preventDefault();
   deleteId = event.target.className;
-  triggerModal("confirm_delete_diary_modal");
+  triggerModal("confirm_delete_diary_modal_detail_page");
 };
-
-window.addEventListener("keydown", (event) => {
-  if (event.key == "Escape") {
-    const confirmDeleteDiaryModal = document.getElementById("confirm_delete_diary_modal").style.display ==
-    "flex";
-    if(confirmDeleteDiaryModal){
-      closeSingleModal("confirm_delete_diary_modal")
-    }
-  }
-});
 
 createHtml(diary);

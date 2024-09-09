@@ -7,7 +7,7 @@ const diaryDetailContentList = JSON.parse(localStorage.getItem("diaryList"));
 let [obj, index] = [];
 
 diaryDetailContentList.map((e, i) => {
-  if (e.id == id) [obj, index] = [e, i];
+  e.id === id ? ([obj, index] = [e, i]) : undefined;
 });
 
 const title = document.getElementById("title_edit_input");
@@ -58,19 +58,22 @@ const createCommentHtml = (commentEntries) => {
       <div class="comment_date">${commentEntries.date}</div>
       <div class="comment_divider"></div>
     </div>
-  `
+  `;
   const commentBox = document.createElement("div");
   commentBox.innerHTML = commentCard;
-  const commentsContainerBox = document.getElementById("comments_container_box");
+  const commentsContainerBox = document.getElementById(
+    "comments_container_box"
+  );
   return commentsContainerBox.appendChild(commentBox);
-}
+};
 
-diaryEntries = diaryDetailContentList
-  diaryDetailContentList.map((e, i) => {
-    if(e.id == id) index = i
-  })
-diaryDetailContentList[index].commentList.map((comment) => {
+diaryEntries = diaryDetailContentList;
+diaryDetailContentList.map((e, i) => {
+  e.id === id ? (index = i) : undefined;
+});
+const currentDiaryComments = diaryDetailContentList[index].commentList;
+currentDiaryComments.map((comment) => {
   createCommentHtml(comment);
-})
+});
 
 editBtn.addEventListener("click", handleSaveChanges);
