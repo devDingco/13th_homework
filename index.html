@@ -73,7 +73,6 @@
               </li>
             </ul>
           </div>
-          <button class="searchMobilePopBtn" onclick="searchShow()"></button>
           <div class="searchBox">
             <div class="selectBox">
               <button
@@ -108,15 +107,14 @@
               class="searchInput"
               type="search"
               placeholder="검색어를 입력해 주세요."
-              onkeypress="searchFilter(event)"
+              oninput="searchFilterTimer(event)"
+              onkeyup="searchFilterEnter(event)"
             />
           </div>
+          <button class="diaryWritePopBtn" onclick="diaryWritePop()">
+            일기쓰기
+          </button>
         </div>
-
-        <button class="diaryWritePopBtn" onclick="diaryWritePop()">
-          <img src="./img/plus_outline_light_m.svg" alt="plus" />
-          일기쓰기
-        </button>
       </div>
       <article class="diaryList"></article>
       <!-- <article class="diaryWrite"></article> -->
