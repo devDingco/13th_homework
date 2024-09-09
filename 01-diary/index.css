@@ -110,6 +110,30 @@
     justify-content: space-between;
 }
 
+.left_sub_menu_container {
+    display: flex;
+    gap: 1rem;
+}
+
+/* 서치 바 영역 */
+.search_bar_container {
+    width: 20rem;
+
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    border-radius: 6.25rem;
+    border: .0625rem solid #C7C7C7;
+    padding: .75rem 1rem .75rem 1rem;
+}
+
+.search_bar_text {
+    width: 100%;
+    border: none;
+}
+
+/* 일기 쓰기 버튼 */
 .contents_write_diary_button {
     width: 6.875rem;
     height: 3rem;
@@ -273,74 +297,64 @@
 }
 
 /* 사진 보관함 드랍 박스 */
-.contents_photos_filter_title_container {
-    width: 7.5rem;
-    display: flex;
-    justify-content: space-between;   
-    align-items: center;
-    gap: .625rem;
-    
-    border: .0625rem solid #C7C7C7;
-    border-radius: .5rem;
-    margin-bottom: 0.5rem;
-}
-
-.contents_photos_filter_dropbox_menu {
-    width: 7.5rem;
-    display: none;
-    color: #000000;
-    overflow: hidden;
-
-    border: .0625rem solid #C7C7C7;
-    border-radius: .5rem;
-
-    background-color: #FFFFFF;
-}
-
-.photos_filter_label {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.contents_photos_filter_dropbox_menu input{
+.CSS_dropdown_title {
     appearance: none;
-    accent-color: #FFFFFF;
-}
-
-.contents_photos_filter_dropbox_menu label {
-    width: 100%;
-    height: 2rem;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 7.5rem;
+    height: 3rem;
+    border: .0625rem solid #C7C7C7;
+    border-radius: .5rem;
+    margin-bottom: .5rem;
+    padding: .75rem .625rem .75rem .625rem;
+    line-height: 1.5rem;
 
     font-weight: 500;
     font-size: 1rem;
-    color: black;
-    line-height: 2rem;
-
-    padding: .75rem;
-
-    background-color: #FFFFFF;
+    --dropdown_title: "전체"
 }
 
-.contents_photos_filter_item_group:checked {
+.CSS_dropdown_menu {
+    /* 처음에는 보이지 않도록 구성하고, 드롭박스를 눌렀을 때 보여주도록 함. */
+    display: none;
+    width: 7.5rem;
+    border: .0625rem solid #C7C7C7;
+    border-radius: .5rem;
+    /* 모서리 영역의 넘치는 부분을 숨김 처리한다. */
+    overflow: hidden;
+
+    font-weight: 400;
+    font-size: 1rem;
+    color: #5F5F5F;
+}
+
+.CSS_dropdown_title::after {
+    content: var(--dropdown_title);
+}
+
+.CSS_dropdown_title:checked {
     background-color: yellow;
 }
 
-.contents_photos_filter_item_group {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    gap: .5rem;
-    background-color: #FFFFFF;
+.CSS_dropdown_title:checked + .CSS_dropdown_menu {
+    display: block;
 }
 
-.check_img {
-    width: 1rem;
-    height: 1rem;
+.CSS_dropdown_menu input {
+    display: none;
+}
+
+.CSS_dropdown_menu label {
+    display: flex;
+    justify-content: space-between;
+    height: 2.5rem;
+    padding: .625rem;
+}
+
+.CSS_dropdown_menu label:hover {
+    height: 2.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #299C00;
+    background-color: #3AB50F0D;
 }
 
 /* 사진 보관함 */

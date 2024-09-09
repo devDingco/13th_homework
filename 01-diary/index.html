@@ -30,19 +30,58 @@
             <!-- 일기 필터 아이템 및 일기 쓰기 버튼 -->
             <div id="filter_item" class="filter_item">
                 <div id="diary_filter_dropbox" class="contents_diary_filter_dropbox">
-                    <select id="mood_select", class="select_filter_dropbox" onchange="filterDiary()">
+                    <!-- <select id="mood_select", class="select_filter_dropbox" onchange="filterDiary()">
                         <option value="전체" selected>전체</option>
                         <option value="행복해요">행복해요</option>
                         <option value="슬퍼요">슬퍼요</option>
                         <option value="놀랐어요">놀랐어요</option>
                         <option value="화나요">화나요</option>
                         <option value="기타">기타</option>
-                    </select>
+                    </select> -->
+                    
+                    <!-- 일기 필터 드롭박스 -->
+                <div class="left_sub_menu_container">
+                    <div>
+                        <input type="checkbox" class="CSS_dropdown_title" id="HTML_dropdown_title">
+                        <ul class="CSS_dropdown_menu">
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="all" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_all">전체<img src="./assets/check.png" class="check_img"></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="happy" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_happy">행복해요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="sad" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_sad">슬퍼요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="surprised" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_surprised">놀랐어요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="angry" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_angry">화나요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="mood_filter_dropdown_group" id="other" onclick="JS_select_dropbox_menu(event)">
+                            <label for="dropbox_other">기타</label>
+                        </li>
+                        </ul>
+                    </div>
+                    <div class="search_bar_container">
+                        <img src="./assets/search.png"><input type="text" class="search_bar_text" placeholder="검색어를 입력해주세요.">
+                    </div>
+                </div>
+                    
+                    
                     <div class="write_diary_items">
                         <button class="contents_write_diary_button" onclick="writeButtonPressed()"><img class="write_diary_image" src="./assets/add.png">일기쓰기</button>
                     </div>
                 </div>
 
+                <!-- 사진 비율에 따른 필터링 드롭 박스 -->
                 <div class="contents_photos_filter_dropbox" id="photos_filter_dropbox" onchange="filterPhotos(event)">
                     <select id="photos_ratio_select_box" class="select_filter_dropbox">
                         <option value="기본형" selected>기본형</option>
@@ -50,28 +89,6 @@
                         <option value="세로형">세로형</option>
                     </select>
                 </div>
-
-                <!-- 사진 보관함 필터 드롭박스 -->
-                <!-- <div class="contents_photos_filter_title_container">
-                    <input type="checkbox" class="contents_photos_filter_dropbox" id="photos_filter_dropbox" onclick="selectPhotosFilterDropBox(event)">
-                    <label for="photos_filter_dropbox" class="photos_filter_label">
-                        <img src="./assets/arrow_down.png">
-                    </label>
-                </div>
-                <ul class="contents_photos_filter_dropbox_menu" id="photos_filter_dropbox_menu">
-                    <li class="contents_photos_filter_item_group">
-                        <input type="radio" name="photos_filter_item" id="photos_filter_default" value="기본형" onclick="selectPhotosFilterMenu(event)">
-                        <label for="photos_filter_default">기본형<img src="./assets/check.png" class="check_img"></label>
-                    </li>
-                    <li class="contents_photos_filter_item_group">
-                        <input type="radio" name="photos_filter_item" id="photos_filter_vertical" value="세로형" onclick="selectPhotosFilterMenu(event)">
-                        <label for="photos_filter_vertical">세로형<img src="./assets/check.png" class="check_img"></label>
-                    </li>
-                    <li class="contents_photos_filter_item_group">
-                        <input type="radio" name="photos_filter_item" id="photos_filter_horizontal" value="가로형" onclick="selectPhotosFilterMenu(event)">
-                        <label for="photos_filter_horizontal">가로형<img src="./assets/check.png" class="check_img"></label>
-                    </li>
-                </ul> -->
             </div>
 
             <!-- 메인 컨텐츠 -->
@@ -146,7 +163,6 @@
                         <div id="skeleton_box">
                             <div id="skeleton_bar"></div>
                         </div>
-                        
                             <!-- fetch Dogs Image -->
                     </div>
                 </div>
