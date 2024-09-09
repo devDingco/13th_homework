@@ -1,0 +1,41 @@
+.드롭다운_제목 {
+  /* 원래 모습 안보이게 */
+  appearance: none;
+  display: flex;
+  min-width: 120px;
+  padding: 12px 10px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+  background: var(--Gray-W, #FFF);
+
+  /* 다이렉트로 쉽게 바꿀 수 없음 style.cssText 로 바꿔주기! */
+  --필터선택변수: "전체"
+}
+
+.드롭다운_제목::after {
+  content: var(--필터선택변수);
+}
+
+.드롭다운_제목:checked+.드롭다운_메뉴 {
+  display: block;
+}
+
+.드롭다운_메뉴 {
+  display: none;
+  width: 120px;
+  border: 2px solid lightseagreen;
+  border-radius: 10px;
+  /* 넘치는 모서리영역 숨겨주기 */
+  overflow: hidden;
+}
+
+.드롭다운_메뉴 input {
+  display: none;
+}
+
+.드롭다운_메뉴 label {
+  display: block;
+  height: 40px;
+  padding: 10px;
+}
