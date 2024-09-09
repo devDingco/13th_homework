@@ -242,6 +242,85 @@ body {
   min-height: 128px;
 }
 
+.filter {
+  position: sticky;
+  top: 80px;
+  left: 0px;
+  z-index: 99;
+}
+
+.dropdown-title {
+  appearance: none;
+  width: 120px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-300);
+  background-image: url('../assets/images/icon_dropdown_down.svg');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  color: var(--gray-900);
+  font-size: 16px;
+  font-weight: var(--weight-medium);
+  padding: 0 var(--gap-xs);
+  --dropdown-title: '전체';
+}
+
+.filter.size .dropdown-title {
+  --dropdown-title: '기본';
+}
+
+.dropdown-title::after {
+  content: var(--dropdown-title);
+}
+
+.dropdown-title:checked {
+  background-image: url('../assets/images/icon_dropdown_up.svg');
+}
+
+.dropdown-title:checked + .dropdown-list {
+  display: block;
+}
+
+.filter ul {
+  display: none;
+  width: 100%;
+  max-width: 120px;
+  background-color: var(--gray-w);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: absolute;
+  top: 56px;
+}
+
+.filter ul li {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 var(--gap-xs);
+}
+
+.filter input[type='radio'] {
+  display: none;
+}
+
+.dropdown-list li:has(input[type='radio']:checked) {
+  background-color: #3bb50f05;
+  background-image: url('../assets/images/icon_check.svg');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.dropdown-list li:has(input[type='radio']:checked) > label {
+  color: #299c00;
+  font-weight: var(--weight-bold);
+}
+
+.filter label {
+  font-size: 1.6rem;
+  color: var(--gray-700);
+}
+
 .review {
   padding: var(--gap-lg) 0;
   border-top: 1px solid var(--gray-b);
@@ -441,5 +520,6 @@ body {
   .emotion-card img {
     object-fit: cover;
     height: 100%;
+    max-width: 100% !important;
   }
 }
