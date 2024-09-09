@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>다이어리 과제 윤준수</title>
     <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/diary.css" />
     <link rel="stylesheet" href="./styles/diary_mobile.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
@@ -148,7 +149,17 @@
 
     <div id="modal_main_add" class="depth1">
       <div id="addModal" class="active">
-        <h2>📍 일기 쓰기</h2>
+        <div class="modal_head">
+          <h2>📍 일기 쓰기</h2>
+          <div class="theme_box">
+            <label for="theme_toggle">다크모드</label>
+            <input
+              type="checkbox"
+              id="theme_toggle"
+              class="toggle_style"
+              onclick="onThemeToggle(event)" />
+          </div>
+        </div>
         <!-- <form id="diaryForm" onsubmit="onAddDiary(event); false;"> -->
         <form id="diaryForm" onsubmit="modalOn(2,'added_modal',event); false;">
           <h4>오늘 기분은 어땠나요?</h4>

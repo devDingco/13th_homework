@@ -182,11 +182,13 @@ const onOptionChecked = (e) => {
   //     '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
   // }
 };
-//
-//
-//
-//
-//
+
+function onThemeToggle(event) {
+  event.target.checked
+    ? document.documentElement.setAttribute('theme', 'dark')
+    : document.documentElement.setAttribute('theme', 'light');
+}
+
 function dateFormatter() {
   const today = new Date();
   const year = today.getFullYear();
