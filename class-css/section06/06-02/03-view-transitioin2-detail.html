@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>페이지전환효과 실습</title>
+  <style>
+    .CSS_상자 {
+      width: 200px;
+      height: 200px;
+      background-color: lightseagreen;
+    }
+
+    @view-transition {
+      navigation: auto;
+    }
+
+    @keyframes 이전페이지애니메이션 {
+      from {
+        transform: translateX(0%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes 다음페이지애니메이션 {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      90% {
+        opacity: 50%;
+        ;
+      }
+
+      to {
+        transform: translateX(0%);
+        opacity: 1;
+      }
+    }
+
+    ::view-transition-old(root) {
+      animation-name: 이전페이지애니메이션;
+      animation-duration: 3s;
+    }
+
+    ::view-transition-new(root) {
+      animation-name: 다음페이지애니메이션;
+      animation-duration: 1.5s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="CSS_상자"></div>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <div class="CSS_상자"></div>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+  <p>안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ 안녕하세요 저는 김밍서입니다. 만나서 반갑습니다 ㅋㅎ </p>
+
+
+
+</body>
+
+</html>
