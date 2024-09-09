@@ -28,6 +28,7 @@
                     });
                 }
             };
+
             document.addEventListener("DOMContentLoaded", (event) => {
                 const initialDailyArray = [
                     {
@@ -98,14 +99,14 @@
                         postContainer.className = "post-container";
                         postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-        <div class="post-title">
-            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-            <div class="post-date">${resultObject.date}</div>
-        </div>
-        <div class="post-content">${resultObject.title}</div>
-        <button class="post-delete" onclick="onClickDelete(event)">X</button>
-    `;
+                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+                <div class="post-title">
+                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+                    <div class="post-date">${resultObject.date}</div>
+                </div>
+                <div class="post-content">${resultObject.title}</div>
+                <button class="post-delete" onclick="onClickDelete(event)">X</button>
+            `;
 
                         parentElement.appendChild(postContainer);
                     });
@@ -117,14 +118,14 @@
                         postContainer.className = "post-container";
                         postContainer.id = `${resultObject.id}`;
                         postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-        <div class="post-title">
-            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-            <div class="post-date">${resultObject.date}</div>
-        </div>
-        <div class="post-content">${resultObject.title}</div>
-        <button class="post-delete" onclick="onClickDelete(event)">X</button>
-    `;
+                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
+                <div class="post-title">
+                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
+                    <div class="post-date">${resultObject.date}</div>
+                </div>
+                <div class="post-content">${resultObject.title}</div>
+                <button class="post-delete" onclick="onClickDelete(event)">X</button>
+            `;
 
                         parentElement.appendChild(postContainer);
                     });
@@ -168,8 +169,18 @@
             <article>
                 <div class="article-header">
                     <div class="article-header-container">
-                        <div class="article-header-font">일기 보관함</div>
-                        <div class="article-header-text article-header-font">
+                        <div
+                            class="article-header-font"
+                            onclick="onClickChangePost(event)"
+                            id="article-daily"
+                        >
+                            일기 보관함
+                        </div>
+                        <div
+                            class="article-header-text"
+                            id="article-picture"
+                            onclick="onClickChangePost(event)"
+                        >
                             사진 보관함
                         </div>
                         <select
@@ -185,13 +196,23 @@
                             <option value="angry">화나요</option>
                             <option value="etc">기타</option>
                         </select>
+                        <select
+                            name=""
+                            id="select-post1"
+                            class="select-post1"
+                            onchange="onChangeRatio(event)"
+                        >
+                            <option value="default">기본</option>
+                            <option value="row">가로형</option>
+                            <option value="col">세로형</option>
+                        </select>
                     </div>
                     <div class="article-daily" onclick="onClickModal()">
                         <div class="">+</div>
                         <div class="">일기 쓰기</div>
                     </div>
                 </div>
-                <div class="article-main">
+                <div id="article-main" class="article-main">
                     <div id="post" class="post"></div>
                     <div class="floating-button" onclick="onClickUp()">
                         <svg
@@ -206,6 +227,16 @@
                                 fill="#5F6368"
                             />
                         </svg>
+                    </div>
+                </div>
+                <div
+                    id="article-picture-component"
+                    class="article-picture-component"
+                >
+                    <div>
+                        <div class="dog-img-before">
+                            <div class="line"></div>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -362,4 +393,6 @@
     <script src="./utils/onClickCancelRegister.js"></script>
     <script src="./utils/onClickModalBlank.js"></script>
     <script src="./utils/onKeydownEsc.js"></script>
+    <script src="./utils/onClickChangePost.js"></script>
+    <script src="./utils/onChangeRatio.js"></script>
 </html>
