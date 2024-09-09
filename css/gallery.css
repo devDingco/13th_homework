@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem; /* 40px */
-  align-items: center;
 }
 
 .galleryListWrap ul li {
@@ -40,6 +39,10 @@
 .galleryListWrap.ratio-3-4 li img {
   height: 640px;
   aspect-ratio: 3/4;
+}
+
+.galleryListWrap.ratio-3-4 ul {
+  align-items: center;
 }
 
 .skeleton_loading {
