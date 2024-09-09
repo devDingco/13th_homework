@@ -37,9 +37,13 @@ window.addEventListener("keyup", () => {
 
 
 const JS_토글기능 = (event) => {
-    if(event.target.checked === true) {
-      document.body.className = "CSS_불끄기"
-  } else {
-      document.body.className = "CSS_불켜기"
+    if(event.target.checked) {
+      console.log(event.target.checked)
+      document.documentElement.setAttribute('집에불켜놨는지', "꺼놨음");
+    } else {
+      document.documentElement.setAttribute('집에불켜놨는지', "켜놨음");
   }
 }
+
+
+

@@ -76,89 +76,90 @@
         <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
 
         <!-- 등록모달 -->
+        
         <div id="HTML_등록모달그룹" class="CSS_공통모달그룹">
           <div
             class="CSS_공통모달배경"
             onclick="JS_모달닫기기능('HTML_등록모달그룹')"
           ></div>
-          <div class="CSS_불켜기">
-            <div class="CSS_등록상자">
-              <div class="CSS_등록상자_내부">
-                <div class="CSS_등록상자_제목">📍일기 쓰기
-                    <input type="checkbox" class="CSS_토글" onclick="JS_토글기능(event)" />
+          <div class="CSS_등록상자" >
+            
+            <div class="CSS_등록상자_내부" id="room">
+              
+              <div class="CSS_등록상자_제목">📍일기 쓰기
+                  <input type="checkbox" id="HTML_토글" class="CSS_토글" onclick="JS_토글기능(event)" />
+              </div>
+              <div class="  ">
+                <div class="CSS_등록상자_기분_타이틀">
+                  오늘 기분은 어땠나요?
                 </div>
-                <div class="CSS_등록상자_기분">
-                  <div class="CSS_등록상자_기분_타이틀">
-                    오늘 기분은 어땠나요?
-                  </div>
-                  <div class="CSS_라디오그룹">
-                    <div class="CSS_라디오버튼">
-                      <input
-                        type="radio"
-                        name="HTML_기분선택버튼"
-                        value="행복"
-                        checked
-                      />
-                      <div>행복해요</div>
-                    </div>
-                    <div class="CSS_라디오버튼">
-                      <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
-                      <div>슬퍼요</div>
-                    </div>
-                    <div class="CSS_라디오버튼">
-                      <input type="radio" name="HTML_기분선택버튼" value="놀람" />
-                      <div>놀랐어요</div>
-                    </div>
-                    <div class="CSS_라디오버튼">
-                      <input type="radio" name="HTML_기분선택버튼" value="화남" />
-                      <div>화나요</div>
-                    </div>
-                    <div class="CSS_라디오버튼">
-                      <input type="radio" name="HTML_기분선택버튼" value="기타" />
-                      <div>기타</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="CSS_일기입력상자">
-                  <div class="CSS_일기쓰기">
-                    <div class="CSS_인풋라벨">제목</div>
+                <div class="CSS_라디오그룹">
+                  <div class="CSS_라디오버튼">
                     <input
-                      type="text"
-                      id="HTML_제목입력창"
-                      placeholder="제목을 입력해 주세요."
+                      type="radio"
+                      name="HTML_기분선택버튼"
+                      value="행복"
+                      checked
                     />
+                    <div>행복해요</div>
                   </div>
-                  <div class="CSS_일기쓰기">
-                    <div class="CSS_인풋라벨">내용</div>
-                    <textarea
-                      id="HTML_내용입력창"
-                      rows="5"
-                      placeholder="내용을 입력해 주세요."
-                    ></textarea>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                    <div>슬퍼요</div>
                   </div>
-                </div>
-                <div class="CSS_모달버튼부분">
-                  <button
-                    type="button"
-                    class="CSS_모달_버튼 CSS_모달_닫기버튼"
-                    onclick="JS_모달열기기능('HTML_등록취소모달그룹')"
-                  >
-                    닫기
-                  </button>
-                  <button
-                    type="button"
-                    id="HTML_등록하기버튼"
-                    class="CSS_모달_버튼 CSS_모달_등록하기버튼"
-                    onclick="JS_모달열기기능('HTML_등록완료모달그룹');JS_글쓰기기능();"
-                    disabled
-                  >
-                    등록하기
-                  </button>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                    <div>놀랐어요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                    <div>화나요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                    <div>기타</div>
+                  </div>
                 </div>
               </div>
+              <div class="CSS_일기입력상자">
+                <div class="CSS_일기쓰기">
+                  <div class="CSS_인풋라벨">제목</div>
+                  <input
+                    type="text"
+                    id="HTML_제목입력창"
+                    placeholder="제목을 입력해 주세요."
+                  />
+                </div>
+                <div class="CSS_일기쓰기">
+                  <div class="CSS_인풋라벨">내용</div>
+                  <textarea
+                    id="HTML_내용입력창"
+                    rows="5"
+                    placeholder="내용을 입력해 주세요."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="CSS_모달버튼부분">
+                <button
+                  type="button"
+                  class="CSS_모달_버튼 CSS_모달_닫기버튼"
+                  onclick="JS_모달열기기능('HTML_등록취소모달그룹')"
+                >
+                  닫기
+                </button>
+                <button
+                  type="button"
+                  id="HTML_등록하기버튼"
+                  class="CSS_모달_버튼 CSS_모달_등록하기버튼"
+                  onclick="JS_모달열기기능('HTML_등록완료모달그룹');JS_글쓰기기능();"
+                  disabled
+                >
+                  등록하기
+                </button>
+              </div>
             </div>
-          </div>  
-        </div>
+          </div>
+      </div>
 
         <!-- 등록완료모달 -->
         <div id="HTML_등록완료모달그룹" class="CSS_공통모달그룹">

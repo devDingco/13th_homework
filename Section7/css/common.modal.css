@@ -22,6 +22,7 @@
   width: 640px;
   height: 560px;
   background-color: white;
+  border-radius: 24px;
 }
 
 /* 등록완료상자 */
@@ -180,7 +181,7 @@
   margin-left: 18px;
 }
 
-.CSS_불켜기 {
+/* .CSS_불켜기 {
   color: black;
   background-color: white;
 }
@@ -188,4 +189,87 @@
 .CSS_불끄기 {
   color: white;
   background-color: black;
+} */
+
+:root {
+  --기본글자색: black;
+  --기본배경색: white;
+  --기본테두리색: black;
+  --버튼글자색: white;
+  --버튼배경색: white;
+}
+
+
+/* 2. 불꺼진방 */
+[집에불켜놨는지="꺼놨음"] {
+  --기본글자색: white;
+  --기본배경색: black;
+  --기본테두리색: white;
+  --버튼글자색: black;
+  --버튼배경색: black;
+}
+
+/* .CSS_일기쓰기 > input {
+  상현님 인풋에 들어가는건 이런식으로! 인풋도 까만색으로 바뀌어야하는거니까 
+} */
+
+.CSS_등록상자_제목 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_등록상자_내부 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_등록상자_기분 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_등록상자_기분_타이틀 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_라디오버튼 > input {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_라디오그룹 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_인풋라벨 > input{
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_등록완료상자, .CSS_등록완료제목, .CSS_등록완료내용 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_모달_등록완료버튼 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_모달버튼부분 {
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
+}
+
+.CSS_모달_등록하기버튼 {
+  background-color: var(--버튼배경색);
+  color: var(--버튼글자색);
+}
+
+.CSS_모달_닫기버튼 {
+  background-color: var(--버튼테두리색);  
+  color: var(--기본글자색);
+  border: var(--기본테두리색);
 }
