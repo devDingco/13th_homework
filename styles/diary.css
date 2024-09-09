@@ -63,7 +63,13 @@ nav > ul.nav_list > button {
   font-weight: 500;
   color: #ababab;
 }
-nav ul.nav_list li.active > button {
+nav > ul.nav_list > button.nav {
+  font-weight: 500;
+  color: #ababab;
+  border-bottom: none;
+}
+
+nav ul.nav_list li > button.active {
   border-bottom: 2px solid #000;
   font-weight: 700;
   color: #000;
@@ -73,6 +79,7 @@ main {
   padding-top: 42px;
   display: flex;
   max-width: 1168px;
+  min-height: 587px;
   justify-content: center;
   align-items: flex-start;
   /* gap: 24px; */
@@ -81,6 +88,24 @@ main {
 
 main .main-content {
   width: 100%;
+}
+
+main .none {
+  display: none;
+}
+
+main .main-content ul#photoList {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2.5rem;
+}
+main .main-content ul#diaryList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  row-gap: 24px;
 }
 
 main .main-content ul #add-list-alert {
@@ -93,49 +118,34 @@ main .main-content ul #add-list-alert {
   font-weight: 500;
 }
 
-main .main-content ul #add-list-alert.active {
-  display: flex;
-}
-
-main .main-content ul #add-list-alert.none {
-  display: none;
-}
-
-main .main-content ul {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  row-gap: 24px;
-}
-main .main-content ul > li:hover {
+main .main-content ul#diaryList > li:hover {
   transform: scale(105%);
   transition: all 0.5s;
 }
 
-main .main-content ul > li > button {
+main .main-content ul#diaryList > li > button {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 }
-main .main-content ul > li .img-wrap {
+main .main-content ul#diaryList > li .img-wrap {
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
 }
-main .main-content ul > li .img-wrap > img {
+main .main-content ul#diaryList > li .img-wrap > img {
   width: 100%;
 }
-main .main-content ul > li .img-wrap > img:hover {
+main .main-content ul#diaryList > li .img-wrap > img:hover {
   filter: blur(1px);
 }
 
-main .main-content ul > li .info-container {
+main .main-content ul#diaryList > li .info-container {
   padding: 0 8px;
   width: 100%;
 }
 
-main .main-content ul > li .info-container .tag-wrap {
+main .main-content ul#diaryList > li .info-container .tag-wrap {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -147,30 +157,30 @@ main .main-content ul > li .info-container .tag-wrap {
   font-weight: 600;
   line-height: 20px;
 }
-main .main-content ul > li .info-container .tag-wrap .angry {
+main .main-content ul#diaryList > li .info-container .tag-wrap .angry {
   color: #777777;
 }
-main .main-content ul > li .info-container .tag-wrap .sad {
+main .main-content ul#diaryList > li .info-container .tag-wrap .sad {
   color: #28b4e1;
 }
-main .main-content ul > li .info-container .tag-wrap .happy {
+main .main-content ul#diaryList > li .info-container .tag-wrap .happy {
   color: #ea5757;
 }
-main .main-content ul > li .info-container .tag-wrap .etc {
+main .main-content ul#diaryList > li .info-container .tag-wrap .etc {
   color: #a229ed;
 }
-main .main-content ul > li .info-container .tag-wrap .surprised {
+main .main-content ul#diaryList > li .info-container .tag-wrap .surprised {
   color: #d59029;
 }
 
-main .main-content ul > li .info-container .tag-wrap .date-tag {
+main .main-content ul#diaryList > li .info-container .tag-wrap .date-tag {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
 }
 
-main .main-content ul > li h3 {
+main .main-content ul#diaryList > li h3 {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -180,121 +190,6 @@ main .main-content ul > li h3 {
   overflow: hidden;
   margin: 8px 0 16px 0;
 }
-/* 
-main aside {
-  display: flex;
-  width: 360px;
-  min-width: 360px;
-  max-width: 760px;
-  padding: 24px;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  border-radius: 16px;
-  border: 1px solid #d4d3d3;
-  background: #fff;
-}
-main aside > h2 {
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  width: 100%;
-}
-main aside form {
-  width: 100%;
-}
-
-main aside form h4 {
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  margin-bottom: 16px;
-}
-
-main aside form .feeling-radio-wrap {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
-  gap: 20px;
-}
-
-main aside form .feeling-radio-wrap > p {
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-}
-
-main aside input[type='radio'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  background: url(../public/icons/radio_outline_light_m.svg) no-repeat center;
-}
-
-main aside form .label-sm {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-main aside input[type='radio']:checked {
-  background: url(../public/icons/radio_fill_light_m.svg) no-repeat center;
-}
-
-main aside form .content-wrap {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-}
-
-main aside form input[type='text'],
-textarea {
-  width: 100%;
-  padding: 12px 16px;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid #d4d3d3;
-}
-
-main aside form textarea {
-  resize: none;
-  height: 128px;
-}
-
-main aside form button {
-  width: 100%;
-  height: 48px;
-  padding: 8px 10px;
-  gap: 10px;
-  border-radius: 8px;
-  margin-top: 40px;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  background: #c7c7c7;
-  color: #f2f2f2;
-}
-
-main aside form button#submitBtn.none {
-  background: #c7c7c7;
-  color: #f2f2f2;
-}
-main aside form button#submitBtn.active {
-  background: #333;
-  color: #f2f2f2;
-} */
 
 footer {
   width: 100%;
@@ -333,11 +228,14 @@ footer span {
   line-height: 16px;
 }
 
-#customSelect {
+.select_wrap {
   width: fit-content;
 }
+.select_wrap.none {
+  display: none;
+}
 
-#selectBtn {
+.selectBtn {
   min-width: 120px;
   display: flex;
   justify-content: space-between;
@@ -347,29 +245,29 @@ footer span {
   border: 1px solid #c7c7c7;
 }
 
-#customSelect > #selectBtn > span {
+.select_wrap > .selectBtn > span {
   width: 24px;
   height: 24px;
 }
 
-#customSelect.none > #selectBtn {
+.select_wrap.none > .selectBtn {
   background-color: #fff;
 }
 
-#customSelect.none > #selectBtn > span {
+.select_wrap.none > .selectBtn > span {
   background: url('../public/icons/down_fill_light_m.svg') no-repeat center;
 }
 
-#customSelect.active > #selectBtn > span {
+.select_wrap.active > .selectBtn > span {
   background: url('../public/icons/down_fill_dark_m.svg') no-repeat center;
 }
 
-#customSelect.active > #selectBtn {
+.select_wrap.active > .selectBtn {
   background-color: black;
   color: #fff;
 }
 
-#optionList {
+.optionList {
   position: absolute;
   z-index: 99;
   top: 0;
@@ -381,28 +279,28 @@ footer span {
   border: 1px solid #c7c7c7;
 }
 
-#optionList.hidden {
+.optionList.hidden {
   display: none;
 }
 
-#optionList > .option {
+.optionList > .option {
   padding: 4px 12px;
 }
 
-#optionList > .option > button {
+.optionList > .option > button {
   display: flex;
   align-items: center;
   width: 100%;
 }
-#optionList > .option > button > img {
+.optionList > .option > button > img {
   display: none;
 }
 
-#optionList > .option > .selected > img {
+.optionList > .option > .selected > img {
   display: block;
 }
 
-#optionList > .option > button {
+.optionList > .option > button {
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -695,4 +593,40 @@ textarea {
   background-color: white !important;
   border: 1px solid black !important;
   color: black !important;
+}
+
+#photoList {
+}
+#photoList .dog_photo_box {
+  /* width: 640px;
+  height: 640px; */
+  position: relative;
+  max-width: 30rem;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background-color: #ccc;
+}
+#photoList .dog_photo_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#photoList .skeleton_stick {
+  position: absolute;
+  width: 100px;
+  height: 1000px;
+  background-color: #fff;
+  filter: blur(100px);
+  animation: skeleton_ui 0.5s linear infinite;
+}
+
+@keyframes skeleton_ui {
+  from {
+    transform: translate(-400px, -400px);
+  }
+  to {
+    transform: translate(700px, 200px);
+  }
 }

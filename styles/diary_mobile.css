@@ -2,10 +2,12 @@
   .container-layout {
     padding: 0 20px;
   }
-  main .main-content ul {
+  main .main-content ul#diaryList {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 779px) {
   .container-layout {
     padding: 0 20px;
@@ -19,7 +21,8 @@
     display: contents;
     margin-right: 0;
   }
-  main .main-content ul {
+  main .main-content ul#diaryList {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
   main aside {
@@ -60,7 +63,7 @@
 }
 
 @media (max-width: 349px) {
-  main .main-content ul {
+  main .main-content ul#diaryList {
     grid-template-columns: 1fr;
   }
 }
