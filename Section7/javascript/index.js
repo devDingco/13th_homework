@@ -445,3 +445,17 @@ const JS_강아지사진그리기기능 = () => {
     });
   });
 };
+
+
+const JS_검색기능 = (event) => {
+  const 내가검색한단어 = event.target.value
+
+  const 스토리지에저장된일기목록 =
+    window.localStorage.getItem("민지의일기목록") ?? "[]";
+  const 일기담는통 = 일기목록[일기번호받는통];
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+  일기목록.push(일기담는통);
+
+  window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
+  console.log(일기목록)
+}

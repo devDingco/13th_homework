@@ -485,3 +485,26 @@ a {
     transform: translate(700px, 200px) rotate(30deg);
   }
 }
+
+
+
+.CSS_검색 {
+  width: 320px;
+  height: 48px;
+  border: 1px solid black;
+  border-radius: 100px;
+  display: flex;
+  justify-content: left;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  padding-left: 30px;
+  margin-right: 250px;
+  background-image: url(../assets/images/search.png);
+  background-position: 5px center;
+  background-repeat: no-repeat;
+}
+
+
+
+

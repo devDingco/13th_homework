@@ -39,9 +39,9 @@ window.addEventListener("keyup", () => {
 const JS_토글기능 = (event) => {
     if(event.target.checked) {
       console.log(event.target.checked)
-      document.documentElement.setAttribute('집에불켜놨는지', "꺼놨음");
+      document.documentElement.setAttribute('불켜놨는지', "꺼놨음");
     } else {
-      document.documentElement.setAttribute('집에불켜놨는지', "켜놨음");
+      document.documentElement.setAttribute('불켜놨는지', "켜놨음");
   }
 }
 
