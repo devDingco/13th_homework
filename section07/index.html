@@ -104,16 +104,39 @@
           <main class="main">
             <div class="content active">
               <div class="flexbox main-content">
-                <div class="flexbox justify-between align-center">
+                <div class="controls flexbox justify-between align-center">
                   <div class="filter">
-                    <select class="filter-emotion" onchange="filterEmotion(event)">
-                      <option selected disabled>전체</option>
-                      <option>행복해요</option>
-                      <option>슬퍼요</option>
-                      <option>놀랐어요</option>
-                      <option>화나요</option>
-                      <option>기타</option>
-                    </select>
+                    <input type="checkbox" class="dropdown-title" />
+                    <ul class="filter-emotion dropdown-list" onchange="filterEmotion(event)">
+                      <li>
+                        <input type="radio" id="filter-all" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-all" class="dropdown-label">전체</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="filter-happy" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-happy">행복해요</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="filter-sad" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-sad">슬퍼요</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="filter-surprising" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-surprising">놀랐어요</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="filter-angry" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-angry">화나요</label>
+                      </li>
+                      <li>
+                        <input type="radio" id="filter-etc" name="filter-group" onclick="isChecked(event)" />
+                        <label for="filter-etc">기타</label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search">
+                    <img src="./assets/images/icon_search.svg" alt="검색 아이콘" class="search-icon" />
+                    <input type="text" class="search-bar" placeholder="검색어를 입력해 주세요." />
                   </div>
                   <button type="button" class="show-modal-add" onclick="showModal('#app-modal-add')">
                     <img src="./assets/images/icon_plus.svg" alt="" class="icon-plus" />
@@ -169,11 +192,22 @@
             </div>
             <div class="content">
               <div class="main-content">
-                <div class="filter">
-                  <select class="filter-size">
-                    <option selected disabled>기본</option>
-                    <option>가로형</option>
-                    <option>세로형</option>
+                <div class="filter size">
+                  <input type="checkbox" class="dropdown-title" />
+                  <ul class="filter-size dropdown-list" onchange="filterEmotion(event)">
+                    <li>
+                      <input type="radio" id="filter-basic" name="filter-group" onclick="isChecked(event)" />
+                      <label for="filter-basic" class="dropdown-label">기본</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="filter-horizontal" name="filter-group" onclick="isChecked(event)" />
+                      <label for="filter-horizontal">가로형</label>
+                    </li>
+                    <li>
+                      <input type="radio" id="filter-vertical" name="filter-group" onclick="isChecked(event)" />
+                      <label for="filter-vertical">세로형</label>
+                    </li>
+                  </ul>
                   </select>
                 </div>
                 <ul class="photo-list"></ul>
