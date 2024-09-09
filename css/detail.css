@@ -111,6 +111,28 @@ a {
   line-height: 1.25rem; /* 20px */
 }
 
+/* 일기내용 복사 */
+.CSS_일기내용_복사 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.CSS_일기내용_복사 img {
+  width: 24px;
+  height: 24px;
+}
+
+.CSS_일기내용_복사 button {
+  font-size: 16px;
+  line-height: 24px;
+  border: none;
+  background-color: white;
+  color: #1C1C1C;
+  cursor: pointer;
+}
+
 /* 수정 버튼 */
 .CSS_수정버튼_영역 {
   display: flex;
@@ -208,6 +230,41 @@ a {
 
 .CSS_플로팅이미지 {
   width: 2.5rem; /* 40px */
+}
+
+.CSS_복사메세지_부모요소 {
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 950px;
+  width: 100%;
+}
+
+.CSS_복사메세지 {
+  width: 700px;
+  padding: 16px;
+  text-align: center;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  background-color: #000;
+  border-radius: 8px;
+  animation-name: 복사토스트;
+  animation-duration: 2s;
+}
+
+@keyframes 복사토스트 {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
 }
 
 @media (max-width: 360px) {

@@ -66,6 +66,19 @@ window.onload = () => {
   }
 };
 
+const JS_일기내용복사기능 = () => {
+  const 일기내용 = document.getElementById("HTML_일기상세내용보여주는곳").innerText
+  navigator.clipboard.writeText(일기내용);
+
+  const 복사토스트 = document.querySelector(".CSS_복사메세지_부모요소")
+
+  복사토스트.style.display = "flex";
+
+  setTimeout(function () {
+    복사토스트.style.display = "none";
+  }, 2000);     
+}
+
 const JS_수정하러가기기능 = () => {
   // 1. 주소에서 일기번호 가져오기
   const 쿼리스트링 = window.location.search;
