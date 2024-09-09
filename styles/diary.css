@@ -273,8 +273,8 @@ footer span {
   display: flex;
   flex-direction: column;
   width: 120px;
-  background-color: #e4e4e4;
   border-radius: 8px;
+  background-color: white;
   border: 1px solid #c7c7c7;
 }
 
@@ -282,19 +282,19 @@ footer span {
   display: none;
 }
 
-.optionList > .option {
-  padding: 4px 12px;
-}
-
 .optionList > .option > button {
+  width: 100%;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  padding: 4px 12px;
 }
 .optionList > .option > button > img {
   display: none;
 }
-
+.optionList > .option > .selected {
+  background: #3ab50f0d;
+}
 .optionList > .option > .selected > img {
   display: block;
 }
