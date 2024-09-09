@@ -1,15 +1,18 @@
 const fetchDogsFromAPI = () => {
+    document.getElementById("skeleton_box").style = "display: block;"
     const api = "https://dog.ceo/api/breeds/image/random/10"
 
     fetch(api)
     .then(result => result.json())
     .then(data => { 
-        const dogImages = data.message 
+        const dogImages = data.message
+
         const imageDOMList = dogImages.map(el =>
             `<img class="contents_photos_item" src="${el}">`
         ).join("")
 
         document.getElementById("HTML_contents_photos_group").innerHTML = imageDOMList
+        document.getElementById("skeleton_box").style = "display: none;"
     })
 
     settings()

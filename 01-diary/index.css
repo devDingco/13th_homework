@@ -285,27 +285,6 @@
     margin-bottom: 0.5rem;
 }
 
-/* .contents_photos_filter_dropbox {
-    appearance: none;
-    width: 7.5rem;
-    height: 3rem;
-    overflow: hidden;
-    border-radius: .75rem;
-
-    background-color: #FFFFFF;
-    color: #1C1C1C;
-
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 3rem;
-    padding-left: 8px;
-    --dropdown_title: "기본형"
-} */
-
-/* .contents_photos_filter_dropbox::after {
-    content: var(--dropdown_title);
-} */
-
 .contents_photos_filter_dropbox_menu {
     width: 7.5rem;
     display: none;
@@ -383,6 +362,35 @@
 
     object-fit: cover;
     aspect-ratio: 1/1;
+
+    background-color: #F2F2F2;
+}
+
+#skeleton_box {
+    width: 40rem;
+    border-radius: 1.5rem;
+    aspect-ratio: 1/1;
+    background-color: #F2F2F2;
+}
+
+#skeleton_bar {
+    width: 6.25rem;
+    height: 62.5rem;
+    background-color: white;
+    filter: blur(4.375rem);
+
+    animation-name: skeletonAnimation;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes skeletonAnimation {
+    from {
+        transform: translate(-400px, -400px) rotate(30deg);
+    }
+    to {
+        transform: translate(700px, 200px) rotate(30deg);
+    }
 }
 
 /* 일기쓰기 버튼 클릭 시 생성되는 모달 */
