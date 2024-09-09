@@ -36,13 +36,33 @@
               <div class="sub_navigation">
                 <div class="emotion_dropdown_layout">
                   <div class="dropdown_name" id="filterCheckbox">
-                    <div class="dropdown_name_none_hover">
-                      기본형
-                      <img src="./image/dropdown_arrow.svg" width="24px" />
+                    <div class="dropdown_text">
+                      <input type="checkbox" id="photo_dropdown" />
+                      <img
+                        src="./image/dropdown_arrow.svg"
+                        width="24px"
+                        class="dropdown_img"
+                      />
                     </div>
-                    <ul id="photo_filter_list">
-                      <li>가로형</li>
-                      <li>세로형</li>
+                    <ul class="dropdown" id="photo_filter_list">
+                      <li>
+                        <div onclick="setDropdownLabel('기본형')">
+                          기본형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div onclick="setDropdownLabel('가로형')">
+                          가로형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div onclick="setDropdownLabel('세로형')">
+                          세로형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -57,16 +77,51 @@
               <div class="sub_navigation">
                 <div class="emotion_dropdown_layout">
                   <div class="dropdown_name" id="filterCheckbox">
-                    <div class="dropdown_name_none_hover">
-                      전체
-                      <img src="./image/dropdown_arrow.svg" width="24px" />
+                    <div class="dropdown_text">
+                      <input type="checkbox" id="mood_dropdown" />
+                      <img
+                        src="./image/dropdown_arrow.svg"
+                        width="24px"
+                        class="dropdown_img"
+                      />
                     </div>
-                    <ul id="mood_list">
-                      <li>행복해요</li>
-                      <li>슬퍼요</li>
-                      <li>놀랐어요</li>
-                      <li>화나요</li>
-                      <li class="etc">기타</li>
+                    <ul class="dropdown" id="mood_list">
+                      <li>
+                        <div>
+                          전체
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          행복해요
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          슬퍼요
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          놀랐어요
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          화나요
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          기타
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
                     </ul>
                   </div>
                   <button

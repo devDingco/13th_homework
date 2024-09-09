@@ -185,32 +185,51 @@ const renderInitialDiaryEntries = () => {
     };
     createHtml(storedDiary);
   });
-}
+};
 
-const updateDiaryList = (diaryList) => {
+const setDropdownLabel = (selectedMood) => {
+  let dropdownName;
+  selectedMood.includes("형") ? dropdownName = "photo_dropdown" : dropdownName = "mood_dropdown"
+  const dropdownLabel = document.getElementById(dropdownName);
+  dropdownLabel.style.cssText = `--boxText: "${selectedMood}"`;
+};
+
+const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   diaryList.map((diary) => createHtml(diary));
+  setDropdownLabel(selectedMood);
 };
 
 const getDiariesByMood = (selectedMood) => {
-  const filteredDiaries = storedDiaryList.filter(
-    (diary) => diary.mood === selectedMood
+  const filteredDiaries = storedDiaryList.filter((diary) =>
+    diary.mood.includes(selectedMood)
   );
-  filteredDiaries.length === 0
-    ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
-    : updateDiaryList(filteredDiaries);
+  if (selectedMood === "전체") {
+    document.getElementById("article").innerHTML = "";
+    renderInitialDiaryEntries();
+  } else {
+    filteredDiaries.length === 0
+      ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
+      : updateDiaryList(filteredDiaries, selectedMood);
+  }
 };
 
-const onClickMood = (e) => {
-  const selectedMood = e.target.innerText;
+const onClickMood = (event) => {
+  const selectedMood = event.target.closest("li").innerText;
   currentFilteredMood = selectedMood;
-  getDiariesByMood(selectedMood);
+  getDiariesByMood(currentFilteredMood);
 };
 
 const getPhotoByType = (selectedPhotoType) => {
   const dogImages = document.querySelectorAll(".dogImage");
   switch (selectedPhotoType) {
+    case "기본형": {
+      [...dogImages].map((dogImage) => {
+        dogImage.style = "aspect-ratio:  1 / 1;";
+      });
+      break;
+    }
     case "가로형": {
       [...dogImages].map((dogImage) => {
         dogImage.style = "aspect-ratio:  4 / 3;";
@@ -343,8 +362,8 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
-      document.getElementById("article").innerHTML =""
-      renderInitialDiaryEntries()
+      document.getElementById("article").innerHTML = "";
+      renderInitialDiaryEntries();
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
