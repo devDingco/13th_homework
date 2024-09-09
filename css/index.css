@@ -28,6 +28,9 @@
   --max-width: 73rem;
 }
 
+@view-transition {
+  navigation: auto;
+}
 * {
   margin: 0;
   padding: 0;
