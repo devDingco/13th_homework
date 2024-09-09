@@ -9,7 +9,7 @@ window.onload = () => {
 window.onscroll = function () {
   const selectElement = document.querySelector(".CSS_필터");
   // 1. 스크롤 얼마나 내려갔는지 확인하기
-  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
     // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
     selectElement.classList.add("CSS_색상반전");
   } else {
@@ -30,7 +30,7 @@ const JS_일기그리기기능 = () => {
         <a href="./detail.html?number=${index}">
           <div class="CSS_일기">
             <div class="CSS_일기사진">
-            <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
+            <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
               ${
                 el.기분 === "행복"
                   ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
@@ -98,7 +98,26 @@ const JS_일기그리기기능 = () => {
     HTML_새로운일기도화지;
 };
 
+
+
 const 일기목록 = [];
+
+// 글쓰기기능 전에 input값이랑 textarea값 모두 체크 되었는지 확인하는 함수
+window.addEventListener("keyup", () => {
+  const 제목입력창값 = document.getElementById("HTML_제목입력창").value
+  const 내용입력창값 = document.getElementById("HTML_내용입력창").value
+  const 등록하기버튼 = document.querySelector(".CSS_일기쓰기_등록버튼")
+
+  if(제목입력창값 === "" || 내용입력창값 === "") {
+    등록하기버튼.disabled = true;
+    등록하기버튼.style.backgroundColor = "";
+    등록하기버튼.style.color = "";
+  } else if (제목입력창값 !== "" && 내용입력창값 !== ""){
+    등록하기버튼.disabled = false;
+    등록하기버튼.style.backgroundColor = "black";
+    등록하기버튼.style.color = "white";
+  }
+})
 
 const JS_글쓰기기능 = () => {
   // 0. 현재 날짜 가져오기
@@ -193,7 +212,7 @@ const JS_필터링기능 = (event) => {
           <div class="CSS_일기">
             <div class="CSS_일기사진">
             <div>
-              <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
+              <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick=" JS_일기삭제기능(event, ${index});" />
               ${
                 el.기분 === "행복"
                   ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
@@ -226,27 +245,27 @@ const JS_필터링기능 = (event) => {
               <div class="CSS_일기내용">
                 ${
                   el.기분 === "행복"
-                    ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
+                    ? '<div class="CSS_기분 CSS_행복">행복해요</div>'
                     : ""
                 }
                 ${
                   el.기분 === "슬픔"
-                    ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
+                    ? '<div class="CSS_기분 CSS_슬픔">슬퍼요</div>'
                     : ""
                 }
                 ${
                   el.기분 === "놀람"
-                    ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
+                    ? '<div class="CSS_기분 CSS_놀람">놀랐어요</div>'
                     : ""
                 }
                 ${
                   el.기분 === "화남"
-                    ? `<div class="CSS_기분 CSS_화남">화나요</div>`
+                    ? '<div class="CSS_기분 CSS_화남">화나요</div>'
                     : ""
                 }
                 ${
                   el.기분 === "기타"
-                    ? `<div class="CSS_기분 CSS_기타">기타</div>`
+                    ? '<div class="CSS_기분 CSS_기타">기타</div>'
                     : ""
                 }
                 <div class="CSS_날짜">${el.작성일}</div>
@@ -258,7 +277,7 @@ const JS_필터링기능 = (event) => {
         </a>
       `
     )
-    .join("");
+    .join(""); 
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
     HTML_새로운일기도화지;
 };
@@ -311,7 +330,86 @@ const JS_취소모달끄기기능 = () => {
 
 // 삭제묻는창띄우는기능
 const JS_삭제할지다시묻기기능 = () => {
+  document.getElementById("HTML_삭제재확인모달그룹").style.display = "block";
+  console.log("삭제묻기")
 
 }
-const das = 1
-//sdfsdfsdf
+
+// 각자 탭을 선택하면 넘어가지는 기능
+
+const JS_일기보관함탭선택기능 = () => {
+  document.getElementById("JS_메인_일기보관함").classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭")
+
+  // document.getElementById("JS_메인_일기보관함").classList.add("CSS_클릭되지않은탭")
+  // document.getElementById("JS_메인_사진보관함").classList.remove("CSS_클릭된탭")
+  
+  document.getElementById("JS_메인_일기보관함").style = "display: flex";
+
+  document.getElementById("JS_메인_사진보관함").style = "display: none";
+
+
+  document.getElementById("JS_일기보관함탭").classList.add("CSS_클릭된탭")
+  document.getElementById("JS_사진보관함탭").classList.remove("CSS_클릭된탭")
+
+  document.getElementById("JS_일기보관함탭").classList.remove("CSS_클릭되지않은탭")
+  document.getElementById("JS_사진보관함탭").classList.add("CSS_클릭되지않은탭")
+
+  document.getElementById("HTML_강아지보여주는곳").style = "display: none"
+}
+
+const JS_사진보관함탭선택기능 = () => {
+  document.getElementById("JS_메인_사진보관함").classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭")
+  // document.getElementById("JS_메인_일기보관함").classList.remove("CSS_클릭되지않은탭")
+  // document.getElementById("JS_메인_사진보관함").classList.add("CSS_클릭된탭")
+
+  document.getElementById("JS_메인_일기보관함").style = "display: none";
+
+  document.getElementById("JS_메인_사진보관함").style = "display: flex";
+
+
+
+  document.getElementById("JS_일기보관함탭").classList.remove("CSS_클릭된탭")
+  document.getElementById("JS_사진보관함탭").classList.add("CSS_클릭된탭")
+
+  document.getElementById("JS_일기보관함탭").classList.add("CSS_클릭되지않은탭")
+  document.getElementById("JS_사진보관함탭").classList.remove("CSS_클릭되지않은탭")
+
+  document.getElementById("HTML_강아지보여주는곳").style = "display: flex"
+}
+
+// 사진보관함 사진 관리하는 부분
+const JS_강아지사진불러오는기능 = () => {
+  fetch("https://dog.ceo/api/breeds/image/random/10")
+    .then((받은결과) => 받은결과.json())
+    .then((객체로바뀐결과) => {
+      console.log("결과 :", 객체로바뀐결과);
+
+      const 강아지사진 = 객체로바뀐결과.message;
+
+      document.getElementById("HTML_강아지보여주는곳").innerHTML = `
+        ${강아지사진.map((el) => `<img class="CSS_강아지사진" src="${el}">`).join('')}
+      `;
+    })
+    .catch((오류) => console.error("오류 발생:", 오류));
+}
+
+// 사진 넣는건 했고 셀렉트로 사진 조절하는 기능 넣어야함.
+const JS_사진사이즈선택 = () => {
+  const 선택된사이즈 = document.getElementById("사진사이즈선택").value
+  const 사진들 = document.querySelectorAll(".CSS_강아지사진")
+
+  사진들.forEach((사진) => {
+    if(선택된사이즈 === "HTML_1대1사이즈") {
+      사진.style.aspectRatio = "1 / 1";
+    } else if (선택된사이즈 === "HTML_4대3사이즈") {
+      사진.style.aspectRatio = "4 / 3";
+    } else if (선택된사이즈 === "HTML_3대4사이즈") {
+      사진.style.aspectRatio = "3 / 4";
+    }
+  })
+}
+
+
+// 순서. 1번 api호출해서 사진 10장 받아옴
+// 정리다했고  사진보관함을 클릭하면 api를 호출해서 가져오면 될듯함
+// 옵션의 값이 트루인 값에 라티아오의 비율을 바꿔주면 될 것 같고 

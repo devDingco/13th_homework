@@ -1,0 +1,86 @@
+@media (max-width: 779px) {
+  /* 360px */
+
+  .CSS_레이아웃 {
+    width: 95%;
+    display: flex;
+    justify-content: column;
+    align-items: center;
+  }
+
+  .CSS_헤더 {
+    padding-left: 0;
+  }
+
+  .CSS_배너이미지 {
+    width: 100%;
+    height: 15rem; /* 240px */
+  }
+
+  .CSS_탭 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .CSS_메인_일기보관함 {
+    flex-direction: column;
+    width: 100%;
+  }
+
+/* 사진보관함에 관여하는 사진들 */
+
+  .CSS_메인_사진보관함 {
+    display: none;
+    width: 100%;
+  }
+
+
+  .CSS_기분이미지 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem; /* 16px */
+  }
+
+  .CSS_등록상자 {
+    order: 1;
+  }
+
+  .CSS_라디오그룹 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: start start;
+  }
+
+  .CSS_필터_영역_배경 {
+    /* order: 2; */
+  }
+  .CSS_메인상자 {
+    flex-direction: column;
+  }
+  .CSS_일기보여주는곳 {
+    order: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .CSS_메인상자 {
+    display: contents;
+  }
+
+  .CSS_일기내용 {
+    gap: 0;
+  }
+
+  .CSS_일기제목 {
+    padding-top: 0.625rem; /* 10px */
+  }
+
+  .CSS_일기정보 {
+    padding-top: 2.5rem; /* 40px */
+  }
+
+  .CSS_기분 {
+    width: 100%;
+  }
+}

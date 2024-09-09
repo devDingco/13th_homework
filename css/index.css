@@ -33,6 +33,13 @@ a {
   left: 0;
 }
 
+.CSS_삭제재확인모달그룹 {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .CSS_모달배경 {
   /* 뷰포트 위드 */
   width: 100vw;
@@ -134,15 +141,22 @@ letter-spacing: -0.2px;
   font-size: 1.125rem; /* 18px */
   font-weight: 700;
   line-height: 1rem; /* 16px */
-  padding: 1.25rem; /* 20px */
+  padding: 1.25rem 0; /* 20px */
 }
 
 .CSS_배너이미지 {
   width: 100%;
 }
 
-.CSS_메인 {
+.CSS_메인_일기보관함 {
   display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.CSS_메인_사진보관함 {
+  display: none;
   flex-direction: row;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -179,14 +193,33 @@ letter-spacing: -0.2px;
   color: #ababab;
 }
 
+/* 사진보관함에 관여하는 사진들 */
+.CSS_강아지사진 {
+  object-fit:cover;
+  width: 300px;
+  border-radius: 24px;
+  aspect-ratio: 1 / 1;
+}
+.CSS_강아지사진그룹섹션 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.CSS_강아지필터_영역 {
+  margin-bottom: 42px;
+}
+
 /* 필터 */
 .CSS_필터_영역_배경 {
   display: flex;
   width: 100%;
   margin: 0;
-  position: sticky;
+  /* position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 1; */
 }
 
 .CSS_필터 {
@@ -340,7 +373,7 @@ letter-spacing: -0.2px;
   width: 1.875rem; /* 30px */
   height: 1.875rem; /* 30px */
   /* position: relative; 튀어나옴 이슈로 인해 잠시 주석*/
-  z-index: 1;
+  
 }
 
 /* 일기등록 상자 */
@@ -528,83 +561,4 @@ letter-spacing: -0.2px;
 
 .CSS_플로팅이미지 {
   width: 2.5rem; /* 40px */
-}
-
-@media (max-width: 779px) {
-  /* 360px */
-
-  .CSS_레이아웃 {
-    width: 95%;
-    display: flex;
-    justify-content: column;
-    align-items: center;
-  }
-
-  .CSS_헤더 {
-    padding-left: 0;
-  }
-
-  .CSS_배너이미지 {
-    width: 100%;
-    height: 15rem; /* 240px */
-  }
-
-  .CSS_탭 {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .CSS_메인 {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .CSS_기분이미지 {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem; /* 16px */
-  }
-
-  .CSS_등록상자 {
-    order: 1;
-  }
-
-  .CSS_라디오그룹 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: start start;
-  }
-
-  .CSS_필터_영역_배경 {
-    order: 2;
-  }
-  .CSS_메인상자 {
-    flex-direction: column;
-  }
-  .CSS_일기보여주는곳 {
-    order: 3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .CSS_메인상자 {
-    display: contents;
-  }
-
-  .CSS_일기내용 {
-    gap: 0;
-  }
-
-  .CSS_일기제목 {
-    padding-top: 0.625rem; /* 10px */
-  }
-
-  .CSS_일기정보 {
-    padding-top: 2.5rem; /* 40px */
-  }
-
-  .CSS_기분 {
-    width: 100%;
-  }
 }

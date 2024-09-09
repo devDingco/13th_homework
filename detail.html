@@ -31,13 +31,19 @@
           </div>
         </div>
 
-      <!--내용-->
+      <!--일기 내용-->
       <div class="CSS_일기내용">
         <span>내용</span>
         <span
           id="HTML_일기상세내용보여주는곳"
           class="CSS_일기상세내용보여주는곳"
         ></span>
+      </div>
+
+      <!--일기내용 복사 -->
+      <div class="CSS_일기내용_복사">
+        <img src="./assets/images/content_copy.png" alt="복사이미지">
+        <button onclick="JS_일기내용복사기능()">내용 복사</button>
       </div>
 
       <!--버튼-->
@@ -69,5 +75,9 @@
               />
             </button>
     </div>
+    <div class="CSS_복사메세지_부모요소">
+      <div class="CSS_복사메세지">복사되었습니다.</div>      
+    </div>
+
   </body>
 </html>
