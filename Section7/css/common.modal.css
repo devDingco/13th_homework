@@ -264,8 +264,8 @@
 }
 
 .CSS_모달_등록하기버튼 {
-  background-color: var(--버튼배경색);
-  color: var(--버튼글자색);
+  background-color: var(--기본배경색);
+  color: var(--기본글자색);
 }
 
 .CSS_모달_닫기버튼 {

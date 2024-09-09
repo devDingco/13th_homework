@@ -446,16 +446,38 @@ const JS_강아지사진그리기기능 = () => {
   });
 };
 
-
+let timer;
 const JS_검색기능 = (event) => {
-  const 내가검색한단어 = event.target.value
+  const 기분목록 = ["전체", "행복해요", "슬퍼요", "화나요", "놀랐어요", "기타"]
+  clearTimeout(timer)
+  timer = setTimeout(() => {
+    const 내가검색한단어 = event.target.value
 
-  const 스토리지에저장된일기목록 =
-    window.localStorage.getItem("민지의일기목록") ?? "[]";
-  const 일기담는통 = 일기목록[일기번호받는통];
-  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-  일기목록.push(일기담는통);
-
-  window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
-  console.log(일기목록)
+    const 검색결과 = 기분목록.filter(el => el.includes(내가검색한단어))
+    console.log(검색결과)
+    document.getElementById("HTML_검색결과보여주는곳").innerHTML = 검색결과
+  }, 1000)
 }
+
+window.addEventListener("scroll", () => {
+  const scrollpercent = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+  if(scrollpercent < 1){
+      return
+  }
+  
+  if(timer !== null) {
+          return 
+      }
+
+  console.log("작동")
+  // 1 === 100%
+      console.log("상자를 그림")
+      const 기존네모상자들 =  document.getElementById("HTML_네모상자보여주는곳").innerHTML
+      document.getElementById("HTML_일기보여주는곳").innerHTML = 기존네모상자들 + `
+          <div class="CSS_네모상자"></div>
+      `
+      timer = setTimeout(() => {
+          timer = null
+      }, 1000)
+})
+
