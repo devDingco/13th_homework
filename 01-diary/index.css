@@ -96,7 +96,7 @@
     z-index: 1;
 }
 
-.mood_select_box {
+.select_filter_dropbox {
     width: 7.5rem;
     height: 2rem;
 
@@ -105,7 +105,7 @@
     padding: 0.25rem;
 }
 
-.www {
+.contents_diary_filter_dropbox {
     display: flex;
     justify-content: space-between;
 }
@@ -132,6 +132,11 @@
     width: 1.5rem;
     height: 1.5rem;
     background-color: black;
+}
+
+/* 사진 비율에 따른 필터링 */
+.contents_photos_filter_dropbox {
+    display: none;
 }
 
 /* 가운데 일기와 일기 쓰기 컨텐츠 */
@@ -173,6 +178,7 @@
 
 .diary_mood_img {
     border-radius: 1rem;
+    object-fit: cover;
 }
 
 .diary_delete_button {
@@ -266,17 +272,108 @@
     z-index: 2;
 }
 
-/* 사진 보관함 */
+/* 사진 보관함 드랍 박스 */
+.contents_photos_filter_title_container {
+    width: 7.5rem;
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;
+    gap: .625rem;
+    
+    border: .0625rem solid #C7C7C7;
+    border-radius: .5rem;
+    margin-bottom: 0.5rem;
+}
 
+/* .contents_photos_filter_dropbox {
+    appearance: none;
+    width: 7.5rem;
+    height: 3rem;
+    overflow: hidden;
+    border-radius: .75rem;
+
+    background-color: #FFFFFF;
+    color: #1C1C1C;
+
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 3rem;
+    padding-left: 8px;
+    --dropdown_title: "기본형"
+} */
+
+/* .contents_photos_filter_dropbox::after {
+    content: var(--dropdown_title);
+} */
+
+.contents_photos_filter_dropbox_menu {
+    width: 7.5rem;
+    display: none;
+    color: #000000;
+    overflow: hidden;
+
+    border: .0625rem solid #C7C7C7;
+    border-radius: .5rem;
+
+    background-color: #FFFFFF;
+}
+
+.photos_filter_label {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.contents_photos_filter_dropbox_menu input{
+    appearance: none;
+    accent-color: #FFFFFF;
+}
+
+.contents_photos_filter_dropbox_menu label {
+    width: 100%;
+    height: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 1rem;
+    color: black;
+    line-height: 2rem;
+
+    padding: .75rem;
+
+    background-color: #FFFFFF;
+}
+
+.contents_photos_filter_item_group:checked {
+    background-color: yellow;
+}
+
+.contents_photos_filter_item_group {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    background-color: #FFFFFF;
+}
+
+.check_img {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 사진 보관함 */
 .contents_photos_container {
     display: none;
-    
 }
 
 .contents_photos_group {
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2.5rem;
 }
 
@@ -285,6 +382,7 @@
     border-radius: 1.5rem;
 
     object-fit: cover;
+    aspect-ratio: 1/1;
 }
 
 /* 일기쓰기 버튼 클릭 시 생성되는 모달 */

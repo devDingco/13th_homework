@@ -7,6 +7,10 @@
         width: 100%;
     }
 
+    .filter_item {
+        width: 100%;
+    }
+
     .contents {
         width: 100%
     }
@@ -26,5 +30,9 @@
         height: 100%;
 
         object-fit: cover;
+    }
+
+    .contents_photos_container {
+        width: 100%;
     }
 }

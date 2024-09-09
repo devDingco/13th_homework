@@ -1,12 +1,7 @@
 @media (max-width: 779px) {
     .filter_item {
-        order: 2;
-
+        /* order: 2; */
         padding: 0;
-    }
-
-    .navi {
-        width: 100%;
     }
 
     .navi_items {
@@ -15,11 +10,9 @@
 
     .contents {
         display: contents;
-        
     }
 
     .contents_container {
-        /* display: contents; */
         padding: 0px 1.25rem 0px 1.25rem;
     }
 
@@ -33,11 +26,12 @@
 
     .contents_left_item {
         order: 3;
-
         width: 100%;
-
-        /* display: grid; */
         grid-template-columns: 1fr 1fr;
+    }
+
+    .contents_photos_container {
+        width: 100%;
     }
 
     .write_diary_modal_container {
@@ -70,7 +64,6 @@
 
     .diary_mood_img {
         width: 100%;
-        height: 100%;
 
         object-fit: cover;
     }
