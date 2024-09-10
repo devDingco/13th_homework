@@ -155,7 +155,7 @@ a { text-decoration: none;}
     margin-right: 0.8rem;
 
     @media (max-width: 375px) {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         margin-right: 0.4rem;
     }
 
@@ -522,6 +522,37 @@ a { text-decoration: none;}
     to {
         transform: translate(60rem, -6rem) rotate(30deg);
     }
+}
+
+.container__mode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+.mode__toggle {
+    appearance: none;
+    width: 4.8rem;
+    height: 2.4rem;
+    border-radius: 1.2rem;
+    background-color: #fff;
+    transition: 0.2s;
+}
+
+.mode__toggle::after {
+    display: block;
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background-color: #767676;
+    border-radius: 100%;
+    margin: 0.2rem 0.4rem;
+}
+
+.mode__toggle:checked::after {
+    margin-left: 2.4rem;
+    transition: 0.3s;
 }
 
 /* modal style */
