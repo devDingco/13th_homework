@@ -1,6 +1,15 @@
 let diaryList;
 let initialScroll = 0;
 let timer = null;
+const diaryListString = localStorage.getItem('myDiaryList') !== null ? localStorage.getItem('myDiaryList') : '[]';
+const diaries = JSON.parse(diaryListString);
+
+window.onload = () => {
+  showDiary();
+  renderPhotos();
+  renderPageList(1);
+  renderPageNumber();
+};
 
 window.addEventListener('scroll', () => {
   const filterElem = document.querySelectorAll('.filter select');
@@ -32,11 +41,6 @@ window.addEventListener('scroll', () => {
     if (lastScrollPercent === 1) renderPhotos();
   }, 1000);
 });
-
-window.onload = () => {
-  showDiary();
-  renderPhotos();
-};
 
 const renderPhotos = () => {
   const END_POINT = 'https://dog.ceo/api/breeds/image/random/10';
@@ -235,4 +239,67 @@ const toggleMenu = () => {
       content[index].classList.add('active');
     });
   });
+};
+
+let startPage = 1;
+let clickedPage = 1;
+const lastPage = Math.ceil(diaries?.length / 4);
+
+const prevPage = () => {
+  if (startPage === 1) {
+    alert('처음입니다. 더 이상 내려갈 수 없어요.');
+    return;
+  } else {
+    startPage = startPage - 5;
+    clickedPage = startPage;
+    renderPageNumber();
+    renderPageList(clickedPage);
+  }
+};
+const nextPage = () => {
+  startPage = startPage + 5;
+
+  if (startPage <= lastPage) {
+    clickedPage = startPage;
+    renderPageNumber();
+    renderPageList(clickedPage);
+  } else {
+    alert('마지막입니다. 더 이상 불러올 수 없어요.');
+    return;
+  }
+};
+const renderPageList = (pageListNumber) => {
+  const pageList = diaries.filter((_, index) => {
+    const showNumber = 4;
+    const skipNumber = (pageListNumber - 1) * showNumber;
+
+    if (skipNumber <= index && index < skipNumber + showNumber) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  document.querySelector('.panel-list').innerHTML = renderData(pageList);
+};
+
+const renderPageNumber = () => {
+  const numberArray = new Array(4).fill(1);
+
+  const pages = numberArray
+    .map((_, index) => {
+      const pageNumber = index + startPage;
+
+      return pageNumber <= lastPage
+        ? `
+      <li class="${clickedPage === pageNumber ? 'page-number active' : 'page-number'}">
+        <button type="button" href="" onclick="renderPageList(${pageNumber}); clickedPage = ${pageNumber}; renderPageNumber();"
+        >${pageNumber}</button>
+      </li>
+    `
+        : '';
+    })
+    .join('');
+
+  document.querySelector('.page-list').innerHTML = pages;
 };
