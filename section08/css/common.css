@@ -398,6 +398,7 @@ body {
 
 .pagination {
   margin: var(--gap-xxl) auto 0;
+  max-width: 288px;
 }
 
 .page-list {
