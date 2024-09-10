@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>토글 실습</title>
+    <style>
+        .CSS_토글 {
+            appearance:none;
+            width:40px;
+            height:24px;
+            border-radius:20px;
+            background-color:lightgray;
+        }
+        .CSS_토글::after{
+            display:block;
+            content:"";
+            width:20px;
+            height:20px;
+            background-color:#fff;
+            border-radius:50%;
+            margin:2px;
+            transition:margin-left 0.3s; /* 실제로 이동하는 알맹이 => 토글에 적용하면 안됨 */
+        }
+
+        .CSS_토글:checked{
+            background-color:greenyellow;
+        }
+        .CSS_토글:checked::after{
+            margin-left:18px;
+        }
+    </style>
+    <script>
+        const JS_토글기능 = (event) => {
+            console.log(event.target.checked)
+        }
+    </script>
+</head>
+<body>
+    <input type="checkbox" class="CSS_토글" onclick="JS_토글기능(event)">
+</body>
+</html>

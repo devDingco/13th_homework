@@ -127,19 +127,24 @@
                     </div>
                     <div class="em_menu">
                         <div>
-                            <input type="radio" name="emotion">행복해요
+                            <input type="radio" id="happy" name="emotion">
+                            <label for="happy">행복해요</label>
                         </div>
                         <div>
-                            <input type="radio" name="emotion">슬퍼요
+                            <input type="radio" id="sad" name="emotion">
+                            <label for="sad">슬퍼요</label>
                         </div>
                         <div>
-                            <input type="radio" name="emotion">놀랐어요
+                            <input type="radio" id="surp" name="emotion">
+                            <label for="surp">놀랐어요</label>
                         </div>
                         <div>
-                            <input type="radio" name="emotion">화나요
+                            <input type="radio" id="angry" name="emotion">
+                            <label for="angry">화나요</label>
                         </div>
                         <div>
-                            <input type="radio" name="emotion">기타
+                            <input type="radio" id="etc" name="emotion">
+                            <label for="etc">기타</label>
                         </div>
                     </div>
                     <div class="write_title">
@@ -148,20 +153,19 @@
                     </div>
                     <div class="write_memo">
                         <p>내용</p>
-                        <input type="text" placeholder="내용을 입력해 주세요.">
+                        <textarea id="" placeholder="내용을 입력해 주세요." rows="5"></textarea>
                     </div>
                     <div class="write_btn">
-                        <button onclick="wrtie">등록하기</button>
+                        <button onclick="register()">등록하기</button>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     <footer>
         <div class="ft_bg">
             <div>
-                <p>민지의 다이어리</p>
-                <p>대표 : </p>
+                <p class="ft_title">민지의 다이어리</p>
                 <p>CopyRight&copy;2024. nameCo., Ltd.</p>
             </div>
         </div>

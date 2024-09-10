@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>스로틀링 실습</title>
+    <style>
+        .CSS_네모상자 {
+            width:500px;
+            height:500px;
+            background-color:green;
+            margin:50px;
+        }
+    </style>
+    <script>
+        const JS_네모상자보여주는기능 = () => {
+            fetch("https://dog.ceo/api/breeds/image/random").then((받아온결과) => {
+                받아온결과.json().then((객체로변경한결과) => {
+                    console.log("결과: ", 객체로변경한결과)
+
+                    const 철수의이미지 = 객체로변경한결과.message
+
+                    const 기존네모상자들 = document.getElementById("HTML_네모상자보여주는곳").innerHTML
+
+                    document.getElementById("HTML_네모상자보여주는곳").innerHTML = 기존네모상자들 + `
+                        <img src="${철수의이미지}" width="500px">
+                    `
+                })
+            })
+        }
+        let 타이머 = null
+        window.addEventListener("scroll", () => {
+            const 스크롤퍼센트 = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+            // if(타이머 !== null){
+            //     return
+            // } if문에서 한줄일땐 {} 생략가능
+            if(스크롤퍼센트 < 0.7) return;
+            if(타이머 !== null) return;
+
+            console.log("스크롤을 검사합니다.")
+
+                console.log("상자를 그려줍니다.")                
+
+                JS_네모상자보여주는기능()
+
+                타이머 = setTimeout((스크롤퍼센트) => {
+                    타이머 = null
+                    if(스크롤퍼센트 === 1){
+                        JS_네모상자보여주는기능()
+                    }
+            }, 1000)
+        })
+    </script>
+</head>
+<body>
+    <div id="HTML_네모상자보여주는곳">
+        <div class="CSS_네모상자"></div>
+        <div class="CSS_네모상자"></div>
+        <div class="CSS_네모상자"></div>
+    </div>
+</body>
+</html>
