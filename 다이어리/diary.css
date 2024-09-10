@@ -449,26 +449,26 @@
 }
 .dark_mode_toggle {
   appearance: none;
-  width: 40px;
-  height: 24px;
-  border-radius: 20px;
+  width: 2.5rem;
+  height: 1.5rem;
+  border-radius: 1.25rem;
   background-color: lightblue;
 }
 .dark_mode_toggle::after {
   display: block;
   content: "";
-  width: 18px;
-  height: 18px;
+  width: 1.125rem;
+  height: 1.125rem;
   background-color: white;
   border-radius: 50%;
-  margin: 3px;
+  margin: 0.188rem;
   transition: margin-left 0.3s;
 }
 .dark_mode_toggle:checked {
   background-color: rgb(93, 192, 224);
 }
 .dark_mode_toggle:checked::after {
-  margin-left: 18px;
+  margin-left: 1.125rem;
 }
 :root {
   --basicModalBorderColor: #d4d3d3;
@@ -591,6 +591,7 @@
   border: 0.063rem solid var(--Gray-Gray-200, #d4d3d3);
   background-color: var(--basicInputBackgroundColor);
   outline: none;
+  color: var(--basicColor);
 }
 .diary_title_window::placeholder {
   color: var(--Gray-Gray-400, #ababab);
@@ -631,6 +632,7 @@
   outline: none;
   overflow: hidden;
   resize: none;
+  color: var(--basicColor);
 }
 .diary_contents_window::placeholder {
   color: var(--Gray-Gray-400, #ababab);
@@ -738,20 +740,13 @@
     display: contents;
   }
   .aside {
-    order: 1;
     height: 30rem;
     overflow-y: scroll;
-  }
-  .article {
-    order: 3;
   }
   .diary_cover {
     width: 9.25rem;
     height: 17.813rem;
     object-fit: cover;
-  }
-  .navigation_layout {
-    order: 2;
   }
   .topScroll > img {
     width: 3.125rem;
@@ -778,6 +773,27 @@
   }
   .confirm_delete_diary_modal {
     max-width: 20rem;
+  }
+  .dropdown_search_box {
+    display: contents;
+  }
+  .emotion_dropdown_layout {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sub_navigation {
+    padding: 0%;
+    margin-bottom: 2rem;
+  }
+  .search_box {
+    order: -1;
+    flex-grow: 1;
+  }
+  .emotion_dropdown_layout {
+    order: 2;
+  }
+  .btn_register_diary {
+    order: 3;
   }
 }
 @media (max-width: 30rem) {
