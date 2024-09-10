@@ -37,7 +37,8 @@
   max-width: 480px;
   min-height: 200px;
   text-align: center;
-  background-color: var(--nested-border-color);
+  color: var(--color);
+  background-color: var(--nested-bg-color);
   border-radius: var(--radius-sm);
   padding: var(--gap-lg);
 }

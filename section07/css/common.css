@@ -53,7 +53,7 @@
 
   --color: var(--gray-800);
   --bg-color: var(--gray-w);
-  --nested-bg-color: var(--gray-900);
+  --nested-bg-color: var(--gray-w);
   --nested-border-color: var(--gray-800);
   --check-color: var(--gray-b);
   --input-bg-color: var(--gray-w);
@@ -73,6 +73,7 @@
 [isDarked='dark'] {
   --color: var(--gray-300);
   --bg-color: var(--gray-900);
+  --nested-bg-color: var(--gray-900);
   --check-color: var(--gray-w);
   --input-bg-color: var(--gray-b);
   --input-border-color: var(--gray-800);
