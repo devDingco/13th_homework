@@ -9,15 +9,6 @@ let currentFilteredMood = "";
 let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
-// window.addEventListener("scroll", () => {
-//   const scroll = window.scrollY;
-//   const filterCheckbox = document.getElementById("filterCheckbox");
-
-//   scroll > 0
-//     ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
-//     : (filterCheckbox.style = "background-color: #FFF");
-// });
-
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
   const text = document.getElementsByClassName("diary_title_window")[0];
