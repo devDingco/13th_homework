@@ -111,6 +111,7 @@
 }
 
 .left_sub_menu_container {
+    position: relative;
     display: flex;
     gap: 1rem;
 }
@@ -122,7 +123,7 @@
     display: flex;
     align-items: center;
     gap: .5rem;
-
+    background-color: white;
     border-radius: 6.25rem;
     border: .0625rem solid #C7C7C7;
     padding: .75rem 1rem .75rem 1rem;
@@ -130,6 +131,7 @@
 
 .search_bar_text {
     width: 100%;
+    height: 100%;
     border: none;
 }
 
@@ -296,6 +298,10 @@
     z-index: 2;
 }
 
+#dropbox_all {
+    background-color: #299C00;
+}
+
 /* 사진 보관함 드랍 박스 */
 .CSS_dropdown_title {
     appearance: none;
@@ -306,19 +312,20 @@
     margin-bottom: .5rem;
     padding: .75rem .625rem .75rem .625rem;
     line-height: 1.5rem;
-
+    background-color: white;
     font-weight: 500;
     font-size: 1rem;
     --dropdown_title: "전체"
+
 }
 
 .CSS_dropdown_menu {
-    /* 처음에는 보이지 않도록 구성하고, 드롭박스를 눌렀을 때 보여주도록 함. */
+    position: absolute;
     display: none;
     width: 7.5rem;
     border: .0625rem solid #C7C7C7;
+    background-color: white;
     border-radius: .5rem;
-    /* 모서리 영역의 넘치는 부분을 숨김 처리한다. */
     overflow: hidden;
 
     font-weight: 400;
@@ -331,6 +338,10 @@
 }
 
 .CSS_dropdown_title:checked {
+    /* background-color: yellow; */
+}
+
+.mood_filter_dropbox_item:checked {
     background-color: yellow;
 }
 
@@ -345,7 +356,7 @@
 .CSS_dropdown_menu label {
     display: flex;
     justify-content: space-between;
-    height: 2.5rem;
+    height: 2.4rem;
     padding: .625rem;
 }
 
@@ -355,6 +366,16 @@
     font-size: 1rem;
     color: #299C00;
     background-color: #3AB50F0D;
+}
+
+.CSS_dropdown_menu img {
+    display: none;
+}
+
+.CSS_dropdown_menu label:hover img {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 /* 사진 보관함 */
@@ -494,6 +515,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    z-index: 1;
 }
 
 .write_diary_contents_items {

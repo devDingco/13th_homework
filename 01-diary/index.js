@@ -73,8 +73,9 @@ const removeDiary = (id) => {
     reloadData(diaryList)
 }
 
-const filterDiary = () => {
-    const selectedMood = document.getElementById("mood_select").value 
+const filterDiary = (event) => {
+    const selectedMood = event.target.value
+    console.log(selectedMood);
 
     if (selectedMood === "전체") {
         isFiltered = false
@@ -165,6 +166,40 @@ const reloadData = (reload_diaryList) => {
 }
 
 //  [Tap or Press Event]
+const selectDiaryFilterMenu = (event) => {
+    const value = event.target
+    const title = value.id.slice(8)
+
+    switch (title) {
+        case "all": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "전체"`
+            break
+        }
+        case "happy": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "행복해요"`
+            break
+        }
+        case "sad": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "슬퍼요"`
+            break
+        }
+        case "surprised": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "놀랐어요"`
+            break
+        }
+        case "angry": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "화나요"`
+            break
+        }
+        case "other": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "기타"`
+            break
+        }
+    }
+    filterDiary(event)
+    document.getElementById("HTML_dropdown_title").click()
+}
+
 const diaryCardTapped = (id) => {
     console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
@@ -258,11 +293,11 @@ const dismiss = () => {
 window.addEventListener("scroll", () => {
     const y = window.scrollY
 
-    if (y > 0) {
-        document.getElementById("mood_select").style = "background-color: black; color: white;"
-    } else {
-        document.getElementById("mood_select").style = "background-color: white; color: black;"
-    }
+    // if (y > 0) {
+    //     document.getElementById("mood_select").style = "background-color: black; color: white;"
+    // } else {
+    //     document.getElementById("mood_select").style = "background-color: white; color: black;"
+    // }
 })
 
 window.addEventListener("keydown", (event) => {
