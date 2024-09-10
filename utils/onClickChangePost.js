@@ -23,20 +23,24 @@ async function onClickChangePost(event) {
         selectElement.style.display = "none";
         selectElement1.style.display = "flex";
 
-        await fetch("https://dog.ceo/api/breeds/image/random/10")
-            .then((res) => res.json())
-            .then(
-                (res) =>
-                    (document.getElementById(
-                        "article-picture-component"
-                    ).innerHTML = res.message
-                        .map(
-                            (img) => `
+        try {
+            await fetch("https://dog.ceo/api/breeds/image/random/10")
+                .then((res) => res.json())
+                .then(
+                    (res) =>
+                        (document.getElementById(
+                            "article-picture-component"
+                        ).innerHTML = res.message
+                            .map(
+                                (img) => `
                             <div>
                                 <img src=${img} class="dog-img" id="dog-img" />
                             </div>`
-                        )
-                        .join(""))
-            );
+                            )
+                            .join(""))
+                );
+        } catch (err) {
+            alert(`ERROR - ${err}`);
+        }
     }
 }

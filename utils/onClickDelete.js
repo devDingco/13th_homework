@@ -19,4 +19,4 @@ function onClickDelete(event) {
     }
 }
 
-document.getElementById("post-delete").addEventListener("click", onClickDelete);
+// document.getElementById("post-delete").addEventListener("click", onClickDelete);

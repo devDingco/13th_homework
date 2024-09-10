@@ -11,26 +11,34 @@ function onScrollInfinite() {
             timer = setTimeout(() => {
                 clearTimeout(timer);
                 timer = null;
-
-                fetch("https://dog.ceo/api/breeds/image/random/10")
-                    .then((res) => res.json())
-                    .then(
-                        (res) =>
-                            (document.getElementById(
-                                "article-picture-component"
-                            ).innerHTML =
-                                document.getElementById(
-                                    "article-picture-component"
-                                ).innerHTML +
-                                res.message
-                                    .map(
-                                        (img) => `
+                const fetchAPI = async () => {
+                    try {
+                        await fetch(
+                            "https://dog.ceo/api/breeds/image/random/10"
+                        )
+                            .then((res) => res.json())
+                            .then(
+                                (res) =>
+                                    (document.getElementById(
+                                        "article-picture-component"
+                                    ).innerHTML =
+                                        document.getElementById(
+                                            "article-picture-component"
+                                        ).innerHTML +
+                                        res.message
+                                            .map(
+                                                (img) => `
                             <div>
                                 <img src=${img} class="dog-img" id="dog-img" />
                             </div>`
-                                    )
-                                    .join(""))
-                    );
+                                            )
+                                            .join(""))
+                            );
+                    } catch (err) {
+                        alert(`ERROR : ${err}`);
+                    }
+                };
+                fetchAPI();
             }, 1000);
         }
     }
