@@ -10,8 +10,14 @@
     <!--모달그룹-->
     <div id="modal_group">
       <div class="modal_background"></div>
-      <div class="modal_form" id="modal_form">
-        <div class="form_header">일기 쓰기</div>
+      <div class="darkmode" id="modal_form">
+        <div class="modal_header">
+          <div class="form_header">일기 쓰기</div>
+          <div class="darkMode_toggle">
+            <label for="toggle">다크모드</label>
+            <input type="checkbox" id="toggle" onclick="darkmode(event)" />
+          </div>
+        </div>
         <div class="form_radioBox">
           <div class="radioBox_header">오늘 기분은 어땟나요?</div>
           <div class="radioBox_body">
@@ -83,7 +89,7 @@
     </div>
     <div id="modal_group2">
       <div class="modal_background"></div>
-      <div id="modal_register">
+      <div id="modal_register" class="darkmode">
         <div class="register_header_box">
           <div class="register_header">일기 등록 완료</div>
           <div class="register_content">등록이 완료 되었습니다.</div>
@@ -93,7 +99,7 @@
     </div>
     <div id="modal_group3">
       <div class="modal_background"></div>
-      <div id="modal_cancel">
+      <div id="modal_cancel" class="darkmode">
         <div class="cancel_header_box">
           <div class="cancel_header">일기 등록 취소</div>
           <div class="cancel_content">일기 등록을 취소 하시겠어요?</div>
@@ -110,7 +116,7 @@
     </div>
     <div id="modal_group4">
       <div class="modal_background"></div>
-      <div class="modal_delete_diary">
+      <div id="modal_delete_diary" class="darkmode">
         <div class="delete_hedeader_box">
           <div class="delete_header">일기삭제</div>
           <div class="delete_content">일기를 삭제 하시겠어요?</div>
@@ -135,15 +141,97 @@
         <div id="photoNav" onclick="photoNavClick()">사진보관함</div>
       </div>
       <div id="filter_formButton_box">
-        <div class="diary_select">
-          <select onchange="diaryFiltering(event)" id="diaryFilter">
-            <option value="selectAll">전체</option>
-            <option value="selectHappy">행복해요</option>
-            <option value="selectSad">슬퍼요</option>
-            <option value="selectSurprised">놀랐어요</option>
-            <option value="selectAngry">화나요</option>
-            <option value="selectEtc">기타</option>
-          </select>
+        <div class="dropdown_box">
+          <input type="checkbox" id="diary_select" />
+          <ul class="dropdown_menu" onclick="diaryFiltering(event)">
+            <li>
+              <label for="selectAll"
+                >전체
+                <img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectAll"
+                value="selectAll"
+              />
+            </li>
+            <li>
+              <label for="selectHappy"
+                >행복해요<img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectHappy"
+                value="selectHappy"
+              />
+            </li>
+            <li>
+              <label for="selectSad"
+                >슬퍼요<img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectSad"
+                value="selectSad"
+              />
+            </li>
+            <li>
+              <label for="selectSurprised"
+                >놀랐어요<img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectSurprised"
+                value="selectSurprised"
+              />
+            </li>
+            <li>
+              <label for="selectAngry"
+                >화나요<img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectAngry"
+                value="selectAngry"
+              />
+            </li>
+            <li>
+              <label for="selectEtc"
+                >기타<img
+                  src="./assets/check_outline_light_xs.svg"
+                  class="select_img"
+              /></label>
+              <input
+                type="radio"
+                name="diary_select_radio"
+                id="selectEtc"
+                value="selectEtc"
+              />
+            </li>
+          </ul>
+        </div>
+        <div id="search_bar">
+          <img src="./assets/search_outline_light_m.svg" alt="" />
+          <input
+            type="text"
+            placeholder="검색어를 입력해 주세요."
+            oninput="searchTitle(event)"
+          />
         </div>
         <button class="formButton">
           <img src="./assets/plus_outline_light_m.svg" alt="" />

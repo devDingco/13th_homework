@@ -117,6 +117,7 @@ const diaryCardRendering = (diaryCardList) => {
 
 const diaryFiltering = (event) => {
   const selection = event.target.value;
+  document.getElementById("diary_select").click();
   let filterArr = [];
 
   switch (selection) {
@@ -152,7 +153,7 @@ window.onscroll = () => {
   const scrollY = window.scrollY;
 
   if (scrollY > 0) {
-    document.getElementById("diaryFilter").style =
+    document.getElementById("diary_select").style =
       "background-color: black; color: white;";
   }
 };
@@ -261,7 +262,6 @@ const skeleton = () => {
     </div>
   `;
 
-  console.log(skeletonHtml, "스켈레톤보자");
   document.getElementById("main").innerHTML = skeletonHtml;
 };
 
@@ -310,3 +310,60 @@ const photoFiltering = (event) => {
     }
   });
 };
+
+const darkmodeElements = document.getElementsByClassName("darkmode");
+
+const darkmode = (event) => {
+  for (let i = 0; i < darkmodeElements.length; i++) {
+    if (event.target.checked === true) {
+      darkmodeElements[i].setAttribute("darkmode", "on");
+    } else {
+      darkmodeElements[i].setAttribute("darkmode", "off");
+    }
+  }
+};
+
+let searchTimer;
+const searchTitle = (event) => {
+  clearTimeout(searchTimer);
+
+  searchTimer = setTimeout(() => {
+    const diaryArray = JSON.parse(localStorage.getItem("다이어리카드배열"));
+    console.log("다이어리배열", diaryArray);
+
+    const researchResult = diaryArray.filter((el) => {
+      return el.title.includes(event.target.value);
+    });
+    console.log("검색결과", researchResult);
+    diaryCardRendering(researchResult);
+  }, 1000);
+};
+
+let scrolltimer;
+window.addEventListener("scroll", () => {
+  if (document.getElementById("photoNav").style.color == "rgb(0, 0, 0)") {
+    const scrollPercent =
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
+
+    if (scrollPercent < 0.7) return;
+    if (scrolltimer) return;
+
+    fetch("https://dog.ceo/api/breeds/image/random").then((response) => {
+      response.json().then((data) => {
+        const dogimage = data.message;
+        const baseHtml = document.getElementById("main");
+        const image = `<img src="${dogimage}" width="500px"/>`;
+        const imageHtml = document.createElement("div");
+        imageHtml.id = "dog_image_box";
+        imageHtml.innerHTML = image;
+        baseHtml.appendChild(imageHtml);
+      });
+    });
+
+    scrolltimer = setTimeout(() => {
+      scrolltimer = null;
+    }, 300);
+  }
+});
