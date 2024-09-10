@@ -52,6 +52,8 @@ body {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .dropdown_box {
@@ -123,15 +125,21 @@ body {
   display: block;
 }
 
+#search_bar_box {
+  display: flex;
+  flex-grow: 1;
+  margin-left: 16px;
+}
+
 #search_bar {
   display: flex;
-  width: 320px;
+  width: 100%;
+  min-width: 320px;
   height: 48px;
   border-radius: 100px;
   border: 1px solid #c7c7c7;
   padding: 12px 16px;
   gap: 8px;
-  flex-grow: 1;
 }
 
 #search_bar input {
@@ -796,12 +804,14 @@ a {
     width: 80vw;
   }
 
-  #diary_select {
-    order: 2;
+  #search_bar_box {
+    order: 1;
+    flex-basis: 100%;
+    width: 100%;
   }
 
-  #search_bar {
-    order: 1;
+  .dropdown_box {
+    order: 2;
   }
 
   .formButton {
