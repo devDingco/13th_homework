@@ -123,7 +123,7 @@ const 일기DOM만들기 = (일기유형) => {
 
   let 일기목록만들기 = 일기목록_변환.map(
     (일기, index) =>
-      `<a onclick="일기클릭기능()" class="일기_항목" href="./detail.html?diary=${index}">
+      `<a onclick="일기클릭기능(${index})" class="일기_항목" href="./detail.html?diary=${index}">
             <div class="일기_사진">
                 <div class="감정_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
             </div>

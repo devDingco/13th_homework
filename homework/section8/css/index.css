@@ -49,14 +49,17 @@ body {
 }
 
 .필터_박스 {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 2.625rem;
+  z-index: 1;
 }
 
 .필터박스와_서치바 {
+  height: 48px;
   display: flex;
   gap: 16px;
 }
