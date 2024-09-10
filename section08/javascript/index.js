@@ -51,9 +51,11 @@ const renderPhotos = () => {
 
   setTimeout(() => {
     fetch(END_POINT).then((response) => {
-      response.json().then((result) => {
-        const imageElem = result.message.map(
-          (item, index) => `
+      response
+        .json()
+        .then((result) => {
+          const imageElem = result.message.map(
+            (item, index) => `
               <li>
                     <a href="">
                     <img
@@ -64,10 +66,14 @@ const renderPhotos = () => {
                     </a>
                 </li>
             `
-        );
+          );
 
-        document.querySelector('.photo-list').innerHTML = imageElem.join('');
-      });
+          document.querySelector('.photo-list').innerHTML = imageElem.join('');
+        })
+        .catch(() => {
+          alert('알 수 없는 오류가 발생했습니다. 잠시 후에 다시 시도해 주세요.');
+          location.replace('./index.html');
+        });
     });
   }, 3000);
 };
