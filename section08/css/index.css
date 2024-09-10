@@ -111,6 +111,7 @@
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: var(--gap-xs) 10px;
   flex-shrink: 0;
 }
