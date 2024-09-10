@@ -33,7 +33,7 @@ const photoSelect = {
 
 const fetchLocalStorageListData = () => {
   if (localStorage.length) {
-    localData = localStorage.getItem('diaryListArray');
+    const localData = localStorage.getItem('diaryListArray');
     diaryListArray = JSON.parse(localData);
     if (alertDiary) {
       diaryListEl.innerHTML = '';
@@ -233,7 +233,7 @@ let modalDepth;
 const modalOn = (depth, content, event) => {
   modalDepth = depth;
   document.body.style.overflow = 'hidden';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 
   if (content === 'modal_remove_list') {
     event.stopPropagation();
@@ -357,16 +357,17 @@ const onNavigationClick = (type) => {
       classNameChange(diary_nav, 'active', 'none');
       diary_filter.style.display = 'none';
       photo_filter.style.display = 'block';
+      photo_main.innerHTML = '';
       dogImageApi();
       break;
   }
   // classNameChange();
   // classNameChange();
 };
-
+let infinitiePage = 0;
 async function dogImageApi() {
   const photo_main = document.getElementById('photoList');
-  photo_main.innerHTML = '';
+  // photo_main.innerHTML = '';
 
   for (let i = 0; i < 10; i++) {
     photo_main.innerHTML += `
@@ -386,11 +387,13 @@ async function dogImageApi() {
   fetch('https://dog.ceo/api/breeds/image/random/10').then((res) => {
     res.json().then((data) => {
       const dogImageList = data.message;
+      console.log(dogImageList);
 
       for (let i = 0; i < dogImageList.length; i++) {
-        dogImageSkeletons[i].src = dogImageList[i];
-        skeletonStick[i].style.display = 'none';
+        dogImageSkeletons[infinitiePage * 10 + i].src = dogImageList[i];
+        skeletonStick[infinitiePage * 10 + i].style.display = 'none';
       }
+      infinitiePage++;
     });
   });
 }
@@ -411,7 +414,6 @@ const searchFnc = (event) => {
     searchDiary.forEach((diaryData) => {
       const addList = document.createElement('li');
       isList = true;
-      console.log(diaryData.title);
       diaryListEl.append(addList);
 
       addList.innerHTML = diaryCard(diaryData);
@@ -419,27 +421,21 @@ const searchFnc = (event) => {
   }, 500);
 };
 
-let infinityTimer = null;
+let infinitieTimer = null;
 window.addEventListener('scroll', () => {
   const scrollPercent =
     document.documentElement.scrollTop /
     (document.documentElement.scrollHeight -
       document.documentElement.clientHeight);
   if (scrollPercent < 0.9) return;
-  if (infinityTimer !== null) return;
-  // });
-  console.log('불러옵니다');
+  if (scrollPercent === 1) dogImageApi();
+  if (infinitieTimer !== null) return;
+
   dogImageApi();
 
-  infinityTimer = setTimeout(() => {
-    clearTimeout(infinityTimer);
-    infinityTimer = null;
-
-    const scrollPercent =
-      document.documentElement.scrollTop /
-      (document.documentElement.scrollHeight -
-        document.documentElement.clientHeight);
-    if (scrollPercent === 1) dogImageApi();
+  infinitieTimer = setTimeout(() => {
+    clearTimeout(infinitieTimer);
+    infinitieTimer = null;
   }, 5000);
 });
 //
