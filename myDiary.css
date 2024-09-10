@@ -95,10 +95,6 @@ a { text-decoration: none;}
     align-items: center;
     justify-content: space-between;
     margin: 2.4rem 0rem;
-
-    @media (max-width: 375px) {
-        font-size: 1.8rem;
-    }
 }
 
 .title__text {
@@ -107,10 +103,27 @@ a { text-decoration: none;}
     p { font-size: 2rem;}
 }
 
+.title__text b,
+.title__text p {
+    @media (max-width: 375px) {
+        font-size: 1.6rem;
+    }
+}
+
 .container__mode {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+
+    @media (max-width: 375px) {
+        flex-direction: column;
+    }
+}
+
+.mode__text {
+    @media (max-width: 375px) {
+        font-size: 1.4rem;
+    }
 }
 
 .mode__toggle {
@@ -329,6 +342,7 @@ a { text-decoration: none;}
 .search__bar {
     display: flex;
     align-items: center;
+    padding: 1rem;
 }
 
 .search__icon {
@@ -343,6 +357,10 @@ a { text-decoration: none;}
     padding: 1.2rem 3.6rem;
     font-size: 2rem;
     border: 0.2rem solid var(--chroma-mono01);
+
+    @media (max-width: 375px) {
+        width: 18rem;
+    }
 }
 
 /* diary list */
