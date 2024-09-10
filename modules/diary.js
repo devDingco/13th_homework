@@ -6,10 +6,15 @@ const alertDiary = document.getElementById('add-list-alert');
 const scrollFloatingButton = document.getElementById('upFloatingButton');
 const deleteButtonEl = document.getElementById('deleteButton');
 
+//diary data
 let feeling = '';
 let customSelect = 'all';
 let diaryListArray = [];
 let selectedValue = '';
+
+// pagenation
+let startPage = 1;
+let onPage = 1;
 
 const feelingText = {
   angry: '화나요',
@@ -26,23 +31,16 @@ const photoSelect = {
   height: '세로형',
 };
 
-const renderLocalStorageData = () => {
+const fetchLocalStorageListData = () => {
   if (localStorage.length) {
     localData = localStorage.getItem('diaryListArray');
     diaryListArray = JSON.parse(localData);
     if (alertDiary) {
       diaryListEl.innerHTML = '';
     }
-
-    diaryListArray.map((diary) => {
-      const addList = document.createElement('li');
-
-      diaryListEl.append(addList);
-      addList.innerHTML = diaryCard(diary);
-    });
   }
 };
-renderLocalStorageData();
+fetchLocalStorageListData();
 
 const submitButtonStyleChange = (buttonState) => {
   if (buttonState === 'on') {
@@ -113,7 +111,7 @@ const onAddDiary = (e) => {
 const onDeleteButtonClick = (removeId) => {
   diaryListArray = diaryListArray.filter((diary) => diary.id !== removeId);
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
-  renderLocalStorageData();
+  fetchLocalStorageListData();
 };
 
 const onOptionChecked = (e) => {
@@ -150,7 +148,7 @@ const onOptionChecked = (e) => {
         addList.innerHTML = diaryCard(diaryData);
       } else if (customSelect === 'all') {
         isList = true;
-        renderLocalStorageData();
+        renderDiaryList();
       }
     });
   } else if (type === 'photo') {
@@ -174,10 +172,10 @@ const onOptionChecked = (e) => {
   }
   document.getElementById(`optionList_${type}`).classList.add('hidden');
 
-  // if (!isList) {
-  //   diaryListEl.innerHTML =
-  //     '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
-  // }
+  if (!isList) {
+    diaryListEl.innerHTML =
+      '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
+  }
 };
 
 function onThemeToggle(event) {
@@ -235,7 +233,7 @@ let modalDepth;
 const modalOn = (depth, content, event) => {
   modalDepth = depth;
   document.body.style.overflow = 'hidden';
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (content === 'modal_remove_list') {
     event.stopPropagation();
@@ -255,6 +253,7 @@ const modalOn = (depth, content, event) => {
 const modalClose = (isOne, closeModal1, closeModal2, nextFnc) => {
   const modalBack1 = document.getElementById('modal_depth1');
   const modalBack2 = document.getElementById('modal_depth2');
+  document.body.style.overflow = '';
 
   !isOne
     ? ((document.getElementById(closeModal1).style.display = 'none'),
@@ -443,3 +442,65 @@ window.addEventListener('scroll', () => {
     if (scrollPercent === 1) dogImageApi();
   }, 5000);
 });
+//
+//
+//
+//
+//
+//
+
+const lastPage = Math.ceil(diaryListArray.length / 12);
+const prevPage = () => {
+  if (startPage === 1) {
+    alert('처음이에요! 더 이상 내려갈 수 없어요!');
+  } else {
+    startPage = startPage - 12;
+    pageRender();
+  }
+};
+const nextPage = () => {
+  if (startPage + 12 <= lastPage) {
+    startPage = startPage + 12;
+    onPage = startPage;
+    pageRender();
+  } else {
+    alert('lastPage번호를 넘어갑니다. 더 이상 보여줄 수 없어요.');
+  }
+};
+
+const pageRender = () => {
+  const pages = new Array(12)
+    .fill(1)
+    .map((el, index) => {
+      const pageNum = index + startPage;
+
+      return pageNum <= lastPage
+        ? `<button onclick="itemRender(${pageNum});onPage=${pageNum};pageRender();" 
+            class=${
+              onPage === pageNum ? 'clickPagenation' : ''
+            }>${pageNum}</button>`
+        : ``;
+    })
+    .join(' ');
+
+  document.getElementById('pagenation_list').innerHTML = pages;
+};
+
+const itemRender = (pageNum) => {
+  const result = diaryListArray.filter(
+    (el, index) => index < pageNum * 12 && index >= (pageNum - 1) * 12,
+  );
+
+  diaryListEl.innerHTML = result
+    .map((el) => `<li>${diaryCard(el)}</li>`)
+    .join('');
+};
+
+function renderDiaryList() {
+  pageRender();
+  itemRender(startPage);
+}
+
+window.onload = () => {
+  renderDiaryList();
+};

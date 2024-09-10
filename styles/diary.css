@@ -738,3 +738,12 @@ textarea {
     transform: translate(700px, 200px);
   }
 }
+
+#diary_pagenation {
+  display: flex;
+  justify-content: center;
+}
+
+.clickPagenation {
+  color: green;
+}
