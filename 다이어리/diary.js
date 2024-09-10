@@ -52,6 +52,13 @@ const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
   }
 };
 
+const getLastPageIndex = () => {
+  generatePageNumbers();
+  const pageNumber = document.getElementsByClassName("page_number");
+  const lastPageNumber = pageNumber[pageNumber.length - 1];
+  lastPageNumber.click();
+};
+
 const createHtml = (diaryEntry) => {
   const diaryCard = `
     <a href="./diary-detail.html?id=${diaryEntry.id}#comments_container_box" class="diary_detail">
@@ -88,6 +95,7 @@ const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   createHtml(diaryEntry);
+  getLastPageIndex();
 };
 
 const getDate = (diaryEntry) => {
@@ -179,23 +187,29 @@ const renderInitialDiaryEntries = () => {
 };
 
 const handlePageClick = (event) => {
-  [...document.getElementsByClassName("page_number")].map(e => e.setAttribute("page", "none"))
-  event.target.setAttribute("page", "clickedPage")
+  [...document.getElementsByClassName("page_number")].map((e) =>
+    e.setAttribute("page", "none")
+  );
+  event.target.setAttribute("page", "clickedPage");
   const pageNumber = event.target.innerText;
-  const begin = (pageNumber - 1) * 12
-  const end = pageNumber * 12
+  const begin = (pageNumber - 1) * 12;
+  const end = pageNumber * 12;
   const article = document.getElementById("article");
   article.innerHTML = "";
-  storedDiaryList.slice(begin, end).map(diary => createHtml(diary));
-}
+  storedDiaryList.slice(begin, end).map((diary) => createHtml(diary));
+  upScroll();
+};
 
 const generatePageNumbers = () => {
   const pageNumberList = Math.ceil(storedDiaryList.length / 12);
   const pageNumberButtonList = Array(pageNumberList)
     .fill(1)
     .map((n, idx) => {
-      return `<button onclick="handlePageClick(event)" class="page_number">${n + idx}</button>`;
-    }).join('');
+      return `<button onclick="handlePageClick(event)" class="page_number">${
+        n + idx
+      }</button>`;
+    })
+    .join("");
   document.getElementById("page_number_list").innerHTML = pageNumberButtonList;
 };
 
@@ -274,6 +288,7 @@ const deleteDiaryEntry = () => {
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   updateDiaryList(storedDiaryList);
+  generatePageNumbers();
   closeSingleModal("confirm_delete_diary_modal");
 };
 
@@ -440,7 +455,6 @@ const onSearch = (event) => {
     const searchResults = storedDiaryList.filter((e) =>
       e.title.includes(searchQuery)
     );
-    console.log(searchResults);
     document.getElementById("article").innerHTML = "";
     searchResults.map((diary) => {
       const storedDiary = {
