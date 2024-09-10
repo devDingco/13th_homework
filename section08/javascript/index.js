@@ -83,8 +83,9 @@ const renderPhotos = () => {
 };
 
 const renderData = (array) => {
-  return array.map(
-    (el, index) => `
+  return array
+    .map(
+      (el, index) => `
   <li class="panel-item">
     <a href="./detail.html?number=${index}#review">
       <div class="emotion-card">
@@ -118,7 +119,8 @@ const renderData = (array) => {
     </a>
   </li>
 `
-  );
+    )
+    .join('');
 };
 
 const searchItem = (event) => {
@@ -140,8 +142,7 @@ const showDiary = () => {
   const diaryList = JSON.parse(diaryListString);
 
   if (diaryList.length !== 0) {
-    const diaryHTML = renderData(diaryList);
-    const diaries = diaryHTML.join('');
+    const diaries = renderData(diaryList);
     document.querySelector('.panel-list').innerHTML = diaries;
   } else {
     const diaryHTML = `<li class="no-content">
@@ -202,7 +203,7 @@ const filterEmotion = (event) => {
 
   const filteredListHTML = renderData(filteredList);
 
-  document.querySelector('.panel-list').innerHTML = filteredListHTML.join('');
+  document.querySelector('.panel-list').innerHTML = filteredListHTML;
 };
 
 const deleteItem = (event, itemIndex) => {
