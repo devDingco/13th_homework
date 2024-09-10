@@ -399,6 +399,10 @@ body {
 .pagination {
   margin: var(--gap-xxl) auto 0;
   max-width: 288px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-sm);
 }
 
 .page-list {
@@ -412,7 +416,7 @@ body {
   height: 32px;
 }
 
-.page-list a {
+.page-list button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,7 +426,7 @@ body {
   color: var(--gray-600);
 }
 
-.page-list .page-number.active a {
+.page-list .page-number.active button {
   color: var(--gray-b);
   background-color: var(--gray-50);
   border-radius: var(--radius-sm);
