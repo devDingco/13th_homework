@@ -343,6 +343,24 @@ function submitNew() {
     window.scrollTo({ top: document.querySelector(".container__footer").getBoundingClientRect().top, behavior: "smooth" })
 }
 
+let debounce;
+function changeBG(event) {
+    clearTimeout(debounce)
+
+    debounce = setTimeout( () => {
+        const mouseX = Math.ceil(event.offsetX / 8)
+        document.querySelector('.overlay').style.background = `linear-gradient( ${mouseX}deg,
+        #efeeee,
+        #faf1ea,
+        #f2f8ea,
+        #e7f9ef,
+        #e9f2f9,
+        #fff3ff)`
+    }, 10)
+}
+
+document.addEventListener('mousemove', changeBG)
+
 // tab bar관련 event listener
 document.querySelector(".tap__diary").addEventListener('click', openDiary)
 document.querySelector(".tap__gallery").addEventListener('click', openGallery)
@@ -351,7 +369,7 @@ document.querySelector('.search__input').addEventListener('input', searchDiary)
 document.querySelector(".gallery__direction").addEventListener('change', changeDirection)
 
 // modal관련 event listener
-document.querySelector(".modal__bg").addEventListener('click', closeNew)
+document.querySelector('.modal__bg').addEventListener('click', closeNew)
 document.querySelector('.mode__toggle').addEventListener('click', changeMode)
 window.addEventListener("keydown", (event) => { if (event.key === "Escape") { closeNew()} })
 

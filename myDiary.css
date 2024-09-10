@@ -64,6 +64,16 @@ a { text-decoration: none;}
     flex-direction: column;
     align-items: center;
     position: relative;
+    z-index: 0;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    mix-blend-mode: color;
+    filter: blur(1px);
+    z-index: -1;
 }
 
 /* title n banner */
