@@ -1,7 +1,16 @@
-const getDiary = JSON.parse(localStorage.getItem("diaryData"))
+const localDiary = JSON.parse(localStorage.getItem("diaryData"))
+const filterDiary = JSON.parse(sessionStorage.getItem("filterData"))
+const searchDiary = JSON.parse(sessionStorage.getItem("searchData"))
 const indexNum = window.location.search.substring(6)
 
-const currentDiary = getDiary[indexNum]
+let currentDiary = []
+if (filterDiary !== null) {
+    currentDiary = filterDiary[indexNum]
+} else if (searchDiary !== null) {
+    currentDiary = searchDiary[indexNum]
+} else {
+    currentDiary = localDiary[indexNum]
+}
 
 
 const diaryMood = currentDiary.mood
@@ -91,6 +100,8 @@ function makeDiaryDetail() {
                 break
             }
         }
+        sessionStorage.removeItem("filterData")
+        sessionStorage.removeItem("searchData")
     } else {
         console.log( "받아올 데이터가 없어요!!" )
     };

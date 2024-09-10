@@ -5,6 +5,15 @@ diaryLocal = JSON.parse(localStorage.getItem("diaryData"))
 
 const time = new Date().toISOString().split("T")[0].replace(/-/g, ". ")
 
+const moodIndex = {
+    all: "전체",
+    happy: "행복해요",
+    sad: "슬퍼요",
+    surprise: "놀랐어요",
+    angry: "화나요",
+    etc: "기타",
+};
+
 window.onload = () => {
     // const loginName = prompt("이름을 입력해 주세요!")
     // document.getElementById("header__login").innerText = loginName;
@@ -101,14 +110,6 @@ function makeDiaryData () {
 
 //** 일기 만들기 기능: 전달받은 일기 정보로 일기 카드 생성 */
 function makeDiaryCard(diary) {
-    const moodIndex = {
-        happy: "행복해요",
-        sad: "슬퍼요",
-        surprise: "놀랐어요",
-        angry: "화나요",
-        etc: "기타"
-    };
-
     if ( diary ) {
         const diaryCard = document.querySelector(".body__left__card")
         diaryCard.innerHTML = diary.map( (el, index) =>
@@ -137,48 +138,48 @@ function makeDiaryCard(diary) {
 
 //** 일기 필터 기능: filter함수 사용하여 배열 변경 */
 //!! 배열 순서 자체가 변경되기 때문에 index또한 변경되는 이슈 있음
-function activeFilter (event) {
-    const filterMood = event.target.value;
+// function activeFilter (event) {
+//     const filterMood = event.target.value;
 
-    let filterDiary = JSON.parse(localStorage.getItem("diaryData"))
+//     let filterDiary = JSON.parse(localStorage.getItem("diaryData"))
 
-    switch (filterMood) {
-        case "all": {
-            filterDiary = filterDiary.filter( el => el.mood )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        case "happy": {
-            filterDiary = filterDiary.filter( el => el.mood === "happy" )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        case "sad": {
-            filterDiary = filterDiary.filter( el => el.mood === "sad" )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        case "surprise": {
-            filterDiary = filterDiary.filter( el => el.mood === "surprise" )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        case "angry": {
-            filterDiary = filterDiary.filter( el => el.mood === "angry" )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        case "etc": {
-            filterDiary = filterDiary.filter( el => el.mood === "etc" )
-            makeDiaryCard(filterDiary)
-            break
-        }
-        default: {
-            filterDiary = JSON.parse(localStorage.getItem("diaryData"))
-            makeDiaryCard(filterDiary)
-        }
-    }
-}
+//     switch (filterMood) {
+//         case "all": {
+//             filterDiary = filterDiary.filter( el => el.mood )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         case "happy": {
+//             filterDiary = filterDiary.filter( el => el.mood === "happy" )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         case "sad": {
+//             filterDiary = filterDiary.filter( el => el.mood === "sad" )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         case "surprise": {
+//             filterDiary = filterDiary.filter( el => el.mood === "surprise" )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         case "angry": {
+//             filterDiary = filterDiary.filter( el => el.mood === "angry" )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         case "etc": {
+//             filterDiary = filterDiary.filter( el => el.mood === "etc" )
+//             makeDiaryCard(filterDiary)
+//             break
+//         }
+//         default: {
+//             filterDiary = JSON.parse(localStorage.getItem("diaryData"))
+//             makeDiaryCard(filterDiary)
+//         }
+//     }
+// }
 
 //** 일기 삭제 기능: onclick event에서 index할당 받아 올바른 데이터 제거 */
 function deleteDiary(index) {
@@ -194,13 +195,13 @@ window.addEventListener('scroll', () => {
     const currentHeight = window.innerHeight
 
     if ( window.scrollY < 400 ) {
-        document.querySelector(".filter__bar").style = "background-color: #fff; color: #222; transition: 0.2s;"
+        document.querySelector(".inner__text").style = "background-color: #fff; color: #222; transition: 0.2s;"
         document.querySelector(".container__sticky").style = "display: none;"
     } else if ( footerHeight <= currentHeight ) {
         document.querySelector(".container__floating").style = "position: absolute; bottom: 2%; right: 4%;"
     }
     else {
-        document.querySelector(".filter__bar").style = "background-color: #222; color: #fff; transition: 0.2s;"
+        document.querySelector(".inner__text").style = "background-color: #222; color: #fff; transition: 0.2s;"
         document.querySelector(".container__sticky").style = "display: block;"
         document.querySelector(".container__floating").style = "position: fixed; bottom: 2%; right: 4%;"
     }
@@ -241,6 +242,67 @@ function openGallery() {
     window.scrollTo({ top: 0, behavior: "smooth" })
     document.querySelector(".gallery__direction").value = "기본"
     loadIMG()
+}
+
+//** nav filter btn 클릭시 드롭다운 디자인 메뉴 호출 및 실행 */
+function openFilter() {
+    document.querySelector('.filter__menu').style.display = "block";
+    document.querySelector('.filter__menu').addEventListener('click', (event) => {
+        event.stopPropagation()
+        document.querySelector('.inner__text').style.cssText = `--innerTextContent: "${moodIndex[event.target.id]}"`
+        document.querySelector('.filter__menu').style.display = "none";
+
+        let filterDiary = []
+        switch(event.target.id) {
+            case "all": {
+                filterDiary = diaryLocal
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "happy": {
+                filterDiary = diaryLocal.filter( el => el.mood === "happy")
+                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                break
+            }
+            case "sad": {
+                filterDiary = diaryLocal.filter( el => el.mood === "sad")
+                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                break
+            }
+            case "surprise": {
+                filterDiary = diaryLocal.filter( el => el.mood === "surprise")
+                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                break
+            }
+            case "angry": {
+                filterDiary = diaryLocal.filter( el => el.mood === "angry")
+                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                break
+            }
+            case "etc": {
+                filterDiary = diaryLocal.filter( el => el.mood === "etc")
+                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                break
+            }
+        }
+    })
+}
+
+function searchDiary() {
+    let timer;
+    const searchValue = document.querySelector('.search__input').value
+    const searchResult = diaryLocal.filter( el => el.title.includes(searchValue) )
+    clearTimeout(timer)
+
+    timer = setTimeout( () => {
+        sessionStorage.setItem("searchData", JSON.stringify(searchResult))
+        makeDiaryCard( JSON.parse(sessionStorage.getItem("searchData")))
+    }, 1000)
 }
 
 //** 랜덤 강아지 이미지 불러오기 */
@@ -355,6 +417,8 @@ function submitNew() {
 // tab bar관련 event listener
 document.querySelector(".tap__diary").addEventListener('click', openDiary)
 document.querySelector(".tap__gallery").addEventListener('click', openGallery)
+document.querySelector('.filter__inner').addEventListener('click', openFilter)
+document.querySelector('.search__input').addEventListener('input', searchDiary)
 document.querySelector(".gallery__direction").addEventListener('change', changeDirection)
 
 // modal관련 event listener

@@ -155,7 +155,7 @@ a { text-decoration: none;}
     margin-right: 0.8rem;
 
     @media (max-width: 375px) {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         margin-right: 0.4rem;
     }
 
@@ -170,6 +170,7 @@ a { text-decoration: none;}
     height: 5.6rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     position: sticky;
     top: 7.2rem;
@@ -182,12 +183,82 @@ a { text-decoration: none;}
     }
 }
 
-.filter__bar,
-.gallery__direction {
-    height: 3.2rem;
+.inner__text {
+    appearance: none;
+    width: 12rem;
+    height: 3.6rem;
     border-radius: 0.8rem;
+    border: 2px solid #eee;
+    padding: 0rem 1rem;
     font-size: 2rem;
-    padding: 0.2rem 0.4rem;
+    display: flex;
+    align-items: center;
+
+    --innerTextContent: "전체"
+}
+
+.inner__text::after {
+    content: var(--innerTextContent);
+}
+
+.inner__icon {
+    position: absolute;
+    top: 1.6rem;
+    left: 9rem;
+}
+
+.filter__menu {
+    position: absolute;
+    top: 100%;
+    border-radius: 0.8rem;
+    background-color: #F2F3F7;
+    overflow: hidden;
+    display: none;
+    box-shadow: 0px 4px 4px 0px #bbb;
+
+    input {
+        display: none;
+    }
+    label {
+        display: block;
+        width: 12rem;
+        height: 4rem;
+        padding: 1.2rem;
+        border-top: 1px solid #fff;
+    }
+}
+
+.filter__menu label:hover {
+    background-color: #ddd;
+}
+
+.gallery__direction {
+    width: 12rem;
+    height: 3.6rem;
+    border-radius: 0.8rem;
+    border: 2px solid #eee;
+    font-size: 2rem;
+    padding: 0rem 0.8rem;
+    color: #222;
+}
+
+.search__bar {
+    display: flex;
+    align-items: center;
+}
+
+.search__icon {
+    position: absolute;
+    margin: 1rem;
+}
+
+.search__input {
+    width: 36rem;
+    height: 3.6rem;
+    border-radius: 2rem;
+    padding: 1.2rem 3.6rem;
+    font-size: 2rem;
+    border: 2px solid #eee;
 }
 
 /* diary list */
@@ -451,6 +522,37 @@ a { text-decoration: none;}
     to {
         transform: translate(60rem, -6rem) rotate(30deg);
     }
+}
+
+.container__mode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+.mode__toggle {
+    appearance: none;
+    width: 4.8rem;
+    height: 2.4rem;
+    border-radius: 1.2rem;
+    background-color: #fff;
+    transition: 0.2s;
+}
+
+.mode__toggle::after {
+    display: block;
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background-color: #767676;
+    border-radius: 100%;
+    margin: 0.2rem 0.4rem;
+}
+
+.mode__toggle:checked::after {
+    margin-left: 2.4rem;
+    transition: 0.3s;
 }
 
 /* modal style */
