@@ -1,0 +1,67 @@
+  body {
+    gap: 4rem;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .backbutton {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  #title_details {
+    font-size: 1.375rem;
+  }
+
+  #mood_image {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #show_mood {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  #show_date,
+  .date {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+  }
+
+  .diary_content {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .show_content {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .edit {
+    padding: 0.5rem 0.625rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .comment_regist {
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+  }
+
+  .comment_button {
+    font-size: 1.125rem;
+    width: 20%;
+  }

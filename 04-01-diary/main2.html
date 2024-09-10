@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Diary</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.mobile.css" media="(max-width: 765px)" />
+    <script src="./javascript/main2.js" ></script>
+</head>
+<body>
+
+
+    <div class="layout">
+        <div class="header">
+            <div>민지의 다이어리</div>
+        </div>
+        <img class="banner" src="./assets/main.png" alt="Banner">
+
+        <div class="category">
+            <div class="unclick_storage" onclick="JS_click('diary')">일기보관함</div>
+            <div class="click_photos" onclick="JS_click('photos')">사진보관함</div>
+        </div>
+
+        <div class="filter_background">
+          <select class="filter" onchange="JS_filter(this.value)">
+            <option value="basic" selected>기본형</option>
+            <option value="row">가로형</option>
+            <option value="column">세로형</option>
+          </select>
+        </div>
+        
+
+        <div class="main2">
+            <div class="puppy_image" id="basic_image"></div>
+            <div class="puppy_image" id="row_image"></div>
+            <div class="puppy_image" id="column_image"></div>
+        </div>
+
+        
+        <button class="up_scroll" id="floating_button">
+            <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
+        </button>
+        </div>
+    </div>
+
+    <div class="footer_layout" id="footer_section">
+            <div class="footer_title">민지의 다이어리</div>
+            <div class="footer_boss">대표 : {name}</div>
+            <div class="footer_co">Copyright © 2024.{name} Co., Ltd.</div>
+    </div>
+</body>
+</html>

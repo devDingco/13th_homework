@@ -3,37 +3,16 @@
 <head>
     <title>Diary</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.mobile.css" media="(max-width: 765px)" />
     <script src="./javascript/main.js" ></script>
 </head>
 <body>
-    <div class="layout">
-        <div class="header">
-            <div>민지의 다이어리</div>
-        </div>
-        <img class="banner" src="./assets/main.png" alt="Banner">
 
-        <div class="category">
-            <div class="click">일기보관함</div>
-            <div class="nonclick">사진보관함</div>
-        </div>
-
-        
-          <select class="filter" onchange="JS_filtering(event)">
-            <option selected>전체</option>
-            <option value="happy">행복해요</option>
-            <option value="sad">슬퍼요</option>
-            <option value="surprise">놀랐어요</option>
-            <option value="angry">화나요</option>
-            <option value="etc">기타</option>
-          </select>
-        
-
-        <div class="main">
-            <div id="show_diary_html" class="show_diary_css"></div>
-
-            <!-- <div class="right_side"> -->
-            <div class="register">
-                <div class="register_title">📍일기 쓰기</div>
+    <!-- 등록 모달 -->
+    <div id="html_modal_group" class="modal_group">
+        <div class="modal_background" onclick="JS_close()"></div>
+        <div class="modal_register">
+            <div class="register_title">일기 쓰기</div>
                 <div class="register_contentbox">
                     <div class="register_content">오늘 기분은 어땠나요?</div>
                     <div class="radio_group">
@@ -60,32 +39,123 @@
                     </div>
                 </div>
                 <div class="diary_box">
-                    <div class="write_diary">
                         <div>제목</div>
                         <input type="text" id="html_title" placeholder="제목을 입력해 주세요.">
-                    </div>
-                    <div class="write_diary">
                         <div>내용</div>
                         <textarea id="html_content" rows="5" placeholder="내용을 입력해 주세요."></textarea>
-                    </div>
                 </div>
-                <div>
+                <div class="register_button" id="reset">
+                    <button class="close_button" onclick="JS_confirm()">닫기</button>
                     <button class="diary_button" onclick="JS_write()">등록하기</button>
                 </div>
-            </div>
-            <button class="up_scroll" id="floating_button">
-                <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
-            </button>
-        <!-- </div> -->
         </div>
     </div>
 
-    <div class="footer_layout">
-        <div class="footer">
+
+    <!-- 등록 완료 모달 -->
+    <div id="html_reg_fin" class="reg_fin">
+        <div class="reg_group"> 일기 등록 완료
+            <p class="reg_comment">등록이 완료되었습니다.</p>
+            <button class="confirm" onclick="JS_close()">확인</button>
+        </div>
+    </div>
+
+    <!-- 등록 취소 모달-->
+     <div id="html_reg_cancel" class="reg_fin">
+        <div class="reg_group"> 일기 등록 취소
+            <p class="reg_comment">일기 등록을 취소 하시겠어요?</p>
+            <div class="reg_cancel_button">
+                <button class="keep" onclick="JS_back()">계속 작성</button>
+                <button class="clear_button" onclick="JS_close()">등록 취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 삭제 모달-->
+    <div id="html_post_delete" class="reg_fin">
+        <div class="reg_group"> 일기 삭제
+            <p class="reg_comment">일기를 삭제 하시겠어요?</p>
+            <div class="reg_delete_button">
+                <button class="keep" onclick="JS_close()">취소</button>
+                <button class="clear_button" onclick="JS_delete()">삭제</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layout">
+        <div class="header">
+            <div>민지의 다이어리</div>
+        </div>
+        <img class="banner" src="./assets/main.png" alt="Banner">
+
+        <div class="category">
+            <div class="storage" onclick="JS_click('diary')">일기보관함</div>
+            <div class="photos" onclick="JS_click('photos')">사진보관함</div>
+        </div>
+
+        <div class="filter_background">
+            <div class="search_group">
+                <!-- <select class="filter" onchange="JS_filtering(event)">
+                    <option selected>전체</option>
+                    <option value="happy">행복해요</option>
+                    <option value="sad">슬퍼요</option>
+                    <option value="surprise">놀랐어요</option>
+                    <option value="angry">화나요</option>
+                    <option value="etc">기타</option>
+                </select> -->
+
+                <div class="dropdown">
+                    <input type="checkbox" id="html_dropdown_title" class="dropdown_title" onchange="JS_filtering(event)" />
+                    <ul class="dropdown_menu">
+                        <li><input type="radio" name="feeling" id="all" onclick="JS_dropdown(event)" />
+                            <label for="all">전체</label>
+                        </li>
+                        <li><input type="radio" name="feeling" id="happy" onclick="JS_dropdown(event)" />
+                            <label for="happy">행복해요</label>
+                        </li>
+                        <li><input type="radio" name="feeling" id="sad" onclick="JS_dropdown(event)" />
+                            <label for="sad">슬퍼요</label>
+                        </li>
+                        <li><input type="radio" name="feeling" id="surprise" onclick="JS_dropdown(event)" />
+                            <label for="surprise">놀랐어요</label>
+                        </li>
+                        <li><input type="radio" name="feeling" id="angry" onclick="JS_dropdown(event)" />
+                            <label for="angry">화나요</label>
+                        </li>
+                        <li><input type="radio" name="feeling" id="etc" onclick="JS_dropdown(event)" />
+                            <label for="etc">기타</label>
+                        </li>
+                    </ul>
+                </div>
+
+                
+                <div class="search_bar">
+                    <img src="./assets/search_outline_light_m.png" />
+                    <input type="search" class="search_here" id="search_text" placeholder="검색어를 입력해주세요." oninput="JS_search(event)" />
+                </div>
+            </div>
+
+            <div class="register">
+                <button class="write_diary" onclick="JS_open()">일기쓰기</button>
+            </div>
+        </div>
+
+
+        <div class="main">
+            <div id="show_diary_html" class="show_diary_css"></div>
+
+        
+        <button class="up_scroll" id="floating_button">
+            <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
+        </button>
+        </div>
+    </div>
+
+    <div class="footer_layout" id="footer_section">
             <div class="footer_title">민지의 다이어리</div>
             <div class="footer_boss">대표 : {name}</div>
             <div class="footer_co">Copyright © 2024.{name} Co., Ltd.</div>
-        </div>
     </div>
 </body>
 </html>

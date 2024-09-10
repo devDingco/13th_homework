@@ -1,0 +1,74 @@
+  body {
+    gap: 2rem;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .select_mood_title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .backbutton {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .radio_group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .radio_button > div {
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+
+  .input_label {
+    font-size: 0.875rem;
+    line-height: 1.6rem;
+  }
+
+  #edit_title,
+  #edit_content {
+    font-size: 1.4rem;
+  }
+
+  .edit_button {
+    margin-bottom: 2rem;
+    border-bottom: 0.0625rem solid #000000;
+    padding-bottom: 1.8rem;
+  }
+
+  .cancel,
+  .edit {
+    height: 3rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .comment_regist {
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .comment_button {
+    width: 20%;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  

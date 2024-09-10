@@ -3,11 +3,17 @@
 <head>
     <title>Edit</title>
     <link rel="stylesheet" href="./css/edit.css">
-    
+    <link rel="stylesheet" href="./css/edit.mobile.css" media="(max-width: 765px)" />
 </head>
 <body>
     <div class="header">
-        <div>민지의 다이어리</div>
+        <div class="desktop">
+            <div class="title">민지의 다이어리</div>
+        </div>
+        <div class="mobile">
+            <img class="backbutton" src="./assets/back.png" onclick="JS_back()" />
+            <div class="title">일기 수정</div>
+        </div>
     </div>
 
     <div class="edit_diary">
@@ -36,7 +42,7 @@
                 </div>
             </div>
         </div>
-    
+    </div>
 
 
         <div class="edit_part">
@@ -51,10 +57,10 @@
         </div>
 
         <div class="edit_button">
-            <button class="cancle" onclick="JS_cancle()">취소</button>
+            <button class="cancel" onclick="JS_cancel()">취소</button>
             <button class="edit" onclick="JS_edit()">수정 하기</button>
         </div>
-    </div>
+
 
     <div class="recollect">
         <div class="recollect_title">회고</div>
@@ -62,7 +68,7 @@
                 <input class="comment_regist" type="text" id="type_comment" placeholder="수정 중일 때는 회고를 작성할 수 없어요.">
                 <button class="comment_button">입력</button>
             </div>
-            <div id="show_comment"></div>
+        <div id="show_comment"></div>
     </div>
     <script src="./javascript/edit.js" ></script>
 </body>

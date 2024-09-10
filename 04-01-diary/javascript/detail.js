@@ -139,77 +139,27 @@ window.onload = () => {
     window.location.href = `./main.html`;
   };
 
-  
-  // const JS_edit = () => {
-  //   // 1. 주소에서 일기번호 가져오기
-  //   const querystring = window.location.search;
-  //   const number_container = new URLSearchParams(querystring);
-  //   const diary_number = number_container.get("number");
-  
-  //   // 2. 수정페이지로 이동하기
-  //   window.location.href = `./edit.html?number=${diary_number}`;
-  // };
+  const JS_back = () => {
+    window.history.back();
+  }
 
-  // // 삭제
-  // const JS_delete = () => {
-  //   // 1. 주소에서 일기번호 가져오기
-  //   const querystring = window.location.search;
-  //   const number_container = new URLSearchParams(querystring);
-  //   const diary_number = number_container.get("number");
+  let show_toast = null
+  const JS_copy = () => {
+    const contents = document.getElementById("content_details").innerText
+      navigator.clipboard.writeText(contents)
 
+      const toast = document.getElementById("toast_message").style = "display: block;";
+
+      show_toast = setTimeout(() => {
+        document.getElementById("toast_message").style = "display: none; behavior: 'smooth'";
+    }, 1000)
+  }
+
+
+  // 플로팅 버튼
+  const JS_scroll = () => {
     
-  //   // 2. 일기 삭제 후 팝업 안내
-  //   const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
-  //   const diary_list = JSON.parse(storage_diary);
+    window.scrollTo({top: 0, behavior: "smooth"})
+  }
 
-  //   diary_list.splice(diary_number, 1);
-
-  //   window.localStorage.setItem("list_of_diary", JSON.stringify(diary_list));
-  //   alert("삭제되었습니다.");
-  
-  //   // 3. 메인페이지로 이동하기
-  //   window.location.href = `./main.html`;
-  // };
-
-
-  // // 댓글 입력
-  // const JS_regist = () => {
-
-  //   // 1. 주소에서 일기번호 가져오기
-  //   const querystring = window.location.search;
-  //   const number_container = new URLSearchParams(querystring);
-  //   const diary_number = number_container.get("number");
-  
-  //   // 2. 스토리지에 저장된 일기목록 가져오기
-  //   const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
-  //   const diary_list = JSON.parse(storage_diary);
-  
-  //   // 3. 작성된 댓글을 가져오기
-  //   const comment_container = window.document.getElementById("type_comment").value;
-
-  //   // 4. 댓글을 해당 일기 데이터에 추가하기
-  //   if (!diary_list[diary_number].comments) {
-  //       diary_list[diary_number].comments = [];
-  //   }
-  
-  //   diary_list[diary_number].comments.push(comment_container);
-  
-  //   // 5. 변경된 일기 목록 다시 저장
-  //   window.localStorage.setItem("list_of_diary", JSON.stringify(diary_list));
-  
-  //   // 6. 댓글을 화면에 다시 그리기
-  //   showComments(diary_list[diary_number].comments);
-  
-  //   // 7. 댓글 입력 필드 비우기
-  //   window.document.getElementById("type_comment").value = "";
-  // };
  
-  
-  // // 댓글을 화면에 표시하는 함수
-  // const showComments = (comments) => {
-  //   const commentsSection = document.getElementById("show_comment");
-  //   commentsSection.innerHTML = comments.map(comment => `<p>${comment}</p>`).join("");
-  // };
-
-   
-  
