@@ -148,7 +148,7 @@
 }
 
 .panel-item {
-  flex-basis: 274px;
+  flex-basis: 23%;
   transition: all 0.5s ease-out;
   border-radius: var(--radius-md);
   background-color: var(--gray-w);

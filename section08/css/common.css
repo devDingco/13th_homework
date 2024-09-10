@@ -401,7 +401,7 @@ body {
   max-width: 288px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--gap-sm);
 }
 
@@ -600,13 +600,14 @@ body {
     max-width: 100%;
   }
 
-  .panel-item {
-    min-width: 150px;
-  }
-
   .panel-list {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .panel-item {
+    min-width: 150px;
+    width: 100%;
   }
 
   .side-panel {
