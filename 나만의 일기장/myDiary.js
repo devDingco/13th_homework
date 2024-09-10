@@ -96,6 +96,19 @@ const filterDiaries = (e) => {
   const info = document.getElementById('info');
   const filterContent = e.target.value;
 
+  const emotionFilterItems = document.querySelectorAll('.emotionFilter li');
+
+  // 모든 li의 'selected' 클래스를 제거
+  emotionFilterItems.forEach((item) => {
+    item.classList.remove('selected');
+  });
+
+  // 선택된 항목의 label을 찾아서 'selected' 클래스를 추가
+  const selectedLabel = document.querySelector(
+    `input[value="${filterContent}"]`
+  ).nextElementSibling;
+  selectedLabel.parentElement.classList.add('selected');
+
   const filteredDiaries =
     filterContent === '전체'
       ? diaryList
@@ -108,9 +121,42 @@ const filterDiaries = (e) => {
     info.style.display = 'none';
   }
 
+  document.getElementById(
+    'customFilter'
+  ).style.cssText = `--inputValue : "${filterContent}" `;
+  document.getElementById('customFilter').click();
+
   const cardContainer = document.getElementById('card');
   cardContainer.innerHTML = '';
   filteredDiaries.forEach((diary, index) => showCardFunc(diary, index));
+};
+
+//search 함수
+//
+let timer;
+const searchFunc = (e) => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    const text = e.target.value;
+    const cardContainer = document.getElementById('card');
+
+    if (text === '') {
+      cardContainer.innerHTML = '';
+      diaryList.forEach((el, index) => showCardFunc(el, index));
+    } else {
+      const searchResult = diaryList.filter((el) => el.title.includes(text));
+
+      cardContainer.innerHTML = '';
+
+      if (searchResult.length === 0) {
+        cardContainer.innerHTML = `
+        <div class = "warning">검색어와 일치하는 일기가 없습니다.</div>
+        `;
+      } else {
+        searchResult.forEach((el, index) => showCardFunc(el, index));
+      }
+    }
+  }, 1000);
 };
 
 const showCardFunc = (diary, index) => {
@@ -270,4 +316,11 @@ const closeModal = (kind) => {
 
   //스크롤 다시 활성화
   document.body.style.overflow = 'auto';
+};
+
+//다크모드
+const darkMode = (e) => {
+  e.target.checked === true
+    ? document.documentElement.setAttribute('isOnOff', 'off')
+    : document.documentElement.setAttribute('isOnOff', 'on');
 };

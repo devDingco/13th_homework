@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나만의 일기장</title>
     <link rel="stylesheet" href="./myDiary.css" />
   </head>
@@ -23,15 +24,86 @@
 
       <div class="mainContent">
         <div class="headerInfo">
-          <div class="filter">
-            <select id="filterBtn" onchange="filterDiaries(event)">
-              <option value="전체">전체</option>
-              <option value="행복해요">행복해요</option>
-              <option value="슬퍼요">슬퍼요</option>
-              <option value="놀랐어요">놀랐어요</option>
-              <option value="화나요">화나요</option>
-              <option value="기타">기타</option>
-            </select>
+          <div class="findContainer">
+            <!-- <div class="filter">
+              <select id="filterBtn" onchange="filterDiaries(event)">
+                <option value="전체">전체</option>
+                <option value="행복해요">행복해요</option>
+                <option value="슬퍼요">슬퍼요</option>
+                <option value="놀랐어요">놀랐어요</option>
+                <option value="화나요">화나요</option>
+                <option value="기타">기타</option>
+              </select>
+            </div> -->
+
+            <!-- 드롭다운 커스텀 -->
+            <div class="filter">
+              <input type="checkbox" class="filterTitle" id="customFilter" />
+              <ul class="emotionFilter" id="emotionFilter">
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="all"
+                    name="menu"
+                    value="전체"
+                  /><label for="all">전체</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="happy"
+                    name="menu"
+                    value="행복해요"
+                  /><label for="happy">행복해요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="sad"
+                    name="menu"
+                    value="슬퍼요"
+                  /><label for="sad">슬퍼요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="surprise"
+                    name="menu"
+                    value="놀랐어요"
+                  /><label for="surprise">놀랐어요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="mad"
+                    name="menu"
+                    value="화나요"
+                  /><label for="mad">화나요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    onclick="filterDiaries(event)"
+                    id="extra"
+                    name="menu"
+                    value="기타"
+                  /><label for="extra">기타</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="searchBar">
+              <input
+                type="text"
+                placeholder="제목을 입력해주세요."
+                oninput="searchFunc(event)"
+              />
+            </div>
           </div>
           <div class="writeDiary">
             <button id="writeNote" onclick="openModal('writeModal')">
@@ -53,7 +125,14 @@
     <div id="writeModal">
       <div class="background" onclick="closeModal('writeModal')"></div>
       <form id="addContent" onsubmit="handleSubmit(event)">
-        <p class="addTitle">⭐️ 일기 쓰기</p>
+        <div class="firstDiv">
+          <p class="addTitle">⭐️ 일기 쓰기</p>
+          <div class="toggleContainer">
+            <p class="toggleBtn">다크모드</p>
+            <input type="checkbox" class="toggle" onclick="darkMode(event)" />
+          </div>
+        </div>
+
         <p class="subTitle">오늘 기분은 어땠나요?</p>
         <div class="feelingBtn">
           <label for="happyBtn">
