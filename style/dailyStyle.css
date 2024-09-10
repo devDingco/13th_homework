@@ -462,6 +462,14 @@ textarea {
     align-items: center;
     cursor: pointer;
 }
+.pagination {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
 footer {
     width: 100dvw;
     padding: 1.5rem 1.25rem;

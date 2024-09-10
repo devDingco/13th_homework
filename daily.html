@@ -4,7 +4,9 @@
         <title>daily</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./style/dailyStyle.css" />
-        <script>
+
+        <script type="module">
+            import { paintPost } from "./utils/paintPost.js";
             window.onload = function () {
                 const images = document.querySelectorAll("img.post-img");
 
@@ -86,49 +88,15 @@
                     localStorage.getItem("dailyArray")
                 );
 
-                const parentElement = document.getElementById("post");
-
                 if (!dailyArray) {
                     localStorage.setItem(
                         "dailyArray",
                         JSON.stringify(initialDailyArray)
                     );
-                    initialDailyArray.map((resultObject, index) => {
-                        const postContainer = document.createElement("a");
-                        postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
-                        postContainer.className = "post-container";
-                        postContainer.id = `${resultObject.id}`;
-                        postContainer.innerHTML = `
-                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-                <div class="post-title">
-                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-                    <div class="post-date">${resultObject.date}</div>
-                </div>
-                <div class="post-content">${resultObject.title}</div>
-                <button class="post-delete" onclick="onClickDelete(event)">X</button>
-            `;
-
-                        parentElement.appendChild(postContainer);
-                    });
+                    paintPost(initialDailyArray);
                     localStorage.setItem("idx", 5);
                 } else {
-                    dailyArray.map((resultObject, index) => {
-                        const postContainer = document.createElement("a");
-                        postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
-                        postContainer.className = "post-container";
-                        postContainer.id = `${resultObject.id}`;
-                        postContainer.innerHTML = `
-                <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-                <div class="post-title">
-                    <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-                    <div class="post-date">${resultObject.date}</div>
-                </div>
-                <div class="post-content">${resultObject.title}</div>
-                <button class="post-delete" onclick="onClickDelete(event)">X</button>
-            `;
-
-                        parentElement.appendChild(postContainer);
-                    });
+                    paintPost(dailyArray);
                     localStorage.setItem("idx", dailyArray.length);
                 }
             });
@@ -203,11 +171,7 @@
                                     />
                                 </svg>
                             </div>
-                            <div
-                                id="optionList"
-                                class="optionList"
-                                onclick="onChangeSelected(event)"
-                            >
+                            <div id="optionList" class="optionList">
                                 <div
                                     class="optionItem"
                                     id="all"
@@ -379,10 +343,9 @@
                             <input
                                 type="text"
                                 name=""
-                                id=""
+                                id="search-input"
                                 class="search-input"
                                 placeholder="검색어를 입력해 주세요."
-                                oninput="onInputSearch(event)"
                             />
                         </div>
                     </div>
@@ -419,7 +382,9 @@
                     </div>
                 </div>
             </article>
+            <div class="pagination">1</div>
         </main>
+
         <footer>
             <div class="footer_container">
                 <div class="footer-1">민지의 다이어리</div>
@@ -563,8 +528,8 @@
     <script src="./utils/pushDaily.js"></script>
     <script src="./utils/onClickDailyInfor.js"></script>
     <script src="./utils/onInputButtonChange.js"></script>
-    <script src="./utils/onChangeSelected.js"></script>
-    <script src="./utils/onClickDelete.js"></script>
+    <script src="./utils/onChangeSelected.js" type="module"></script>
+    <script src="./utils/onClickDelete.js" type="module"></script>
     <script src="./utils/onClickUp.js"></script>
     <script src="./utils/isScroll.js"></script>
     <script src="./utils/onClickModal.js"></script>
@@ -579,5 +544,6 @@
     <script src="./utils/onClickDropDown.js"></script>
     <script src="./utils/onClickToggle.js"></script>
     <script src="./utils/onScrollInfinite.js"></script>
-    <script src="./utils/onInputSearch.js"></script>
+    <script src="./utils/onInputSearch.js" type="module"></script>
+    <script src="./utils/paintPost.js" type="module"></script>
 </html>
