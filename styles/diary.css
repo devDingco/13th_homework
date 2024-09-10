@@ -717,6 +717,7 @@ textarea {
   min-width: 320px;
   max-width: 360px;
   border-radius: 100px;
+  align-self: stretch;
   gap: 0.5rem;
 }
 .search_wrapper input {
