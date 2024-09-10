@@ -183,19 +183,176 @@
                         >
                             사진 보관함
                         </div>
-                        <select
-                            name=""
-                            id="select-post"
-                            class="select-post"
-                            onchange="onChangeSelected(event)"
-                        >
-                            <option disabled selected>전체</option>
-                            <option value="happy">행복해요</option>
-                            <option value="sad">슬퍼요</option>
-                            <option value="surprise">놀랐어요</option>
-                            <option value="angry">화나요</option>
-                            <option value="etc">기타</option>
-                        </select>
+                    </div>
+                </div>
+                <div class="article-select">
+                    <div class="article-header-left">
+                        <div name="" id="select-post" class="select-post">
+                            <div class="option" onclick="onClickDropDown()">
+                                <div>전체</div>
+                                <svg
+                                    width="10"
+                                    height="5"
+                                    viewBox="0 0 10 5"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M4.47495 4.475L0.849951 0.85C0.799951 0.8 0.762451 0.745833 0.737451 0.6875C0.712451 0.629167 0.699951 0.566667 0.699951 0.5C0.699951 0.366667 0.745785 0.25 0.837451 0.15C0.929118 0.05 1.04995 0 1.19995 0H8.79995C8.94995 0 9.07078 0.05 9.16245 0.15C9.25412 0.25 9.29995 0.366667 9.29995 0.5C9.29995 0.533333 9.24995 0.65 9.14995 0.85L5.52495 4.475C5.44162 4.55833 5.35828 4.61667 5.27495 4.65C5.19162 4.68333 5.09995 4.7 4.99995 4.7C4.89995 4.7 4.80828 4.68333 4.72495 4.65C4.64162 4.61667 4.55828 4.55833 4.47495 4.475Z"
+                                        fill="#333333"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                id="optionList"
+                                class="optionList"
+                                onclick="onChangeSelected(event)"
+                            >
+                                <div
+                                    class="optionItem"
+                                    id="all"
+                                    style="
+                                        background-color: rgba(
+                                            58,
+                                            181,
+                                            15,
+                                            0.05
+                                        );
+                                        color: rgba(41, 156, 0, 1);
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="all"
+                                    />
+                                    <label for="all" id="all">전체</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                        style="display: block"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="happy">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="happy"
+                                    />
+                                    <label for="happy" id="happy"
+                                        >행복해요</label
+                                    >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="sad">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="sad"
+                                    />
+                                    <label for="sad" id="sad">슬퍼요</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="surprise">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="surprise"
+                                    />
+                                    <label for="surprise" id="surprise"
+                                        >놀랐어요</label
+                                    >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="angry">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="angry"
+                                    />
+                                    <label for="angry" id="angry">화나요</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="etc">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="etc"
+                                    />
+                                    <label for="etc" id="etc">기타</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <select
                             name=""
                             id="select-post1"
@@ -206,6 +363,28 @@
                             <option value="row">가로형</option>
                             <option value="col">세로형</option>
                         </select>
+                        <div class="article-search">
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z"
+                                    fill="#777777"
+                                />
+                            </svg>
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                class="search-input"
+                                placeholder="검색어를 입력해 주세요."
+                                oninput="onInputSearch(event)"
+                            />
+                        </div>
                     </div>
                     <div class="article-daily" onclick="onClickModal()">
                         <div class="">+</div>
@@ -250,14 +429,23 @@
         </footer>
         <div id="modal" class="modal" onclick="onClickModalBlank(event)">
             <div class="modal_container">
-                <div class="daily-header">읽기 쓰기</div>
+                <div class="daily-header">
+                    <div>일기 쓰기</div>
+                    <div class="dark">
+                        <div>다크모드</div>
+                        <input
+                            type="checkbox"
+                            class="checkbox_dark"
+                            onclick="onClickToggle(event)"
+                        />
+                    </div>
+                </div>
                 <div class="daily-checkcontainer">
                     <div>오늘 기분은 어땟나요?</div>
                     <div class="daily-inputlist">
                         <div class="daily-input">
                             <input
                                 type="radio"
-                                oninput="onInputButtonChange()"
                                 name="radio"
                                 class="input-radio"
                                 id="happy"
@@ -267,7 +455,6 @@
                         <div class="daily-input">
                             <input
                                 type="radio"
-                                oninput="onInputButtonChange()"
                                 name="radio"
                                 class="input-radio"
                                 id="sad"
@@ -277,7 +464,6 @@
                         <div class="daily-input">
                             <input
                                 type="radio"
-                                oninput="onInputButtonChange()"
                                 name="radio"
                                 class="input-radio"
                                 id="surprise"
@@ -287,7 +473,6 @@
                         <div class="daily-input">
                             <input
                                 type="radio"
-                                oninput="onInputButtonChange()"
                                 name="radio"
                                 class="input-radio"
                                 id="angry"
@@ -297,7 +482,6 @@
                         <div class="daily-input">
                             <input
                                 type="radio"
-                                oninput="onInputButtonChange()"
                                 name="radio"
                                 class="input-radio"
                                 id="etc"
@@ -315,7 +499,6 @@
                                 id="titleId"
                                 class="input-title"
                                 placeholder="제목을 입력해 주세요."
-                                oninput="onInputButtonChange()"
                             />
                         </div>
                         <div class="daily-title">
@@ -324,7 +507,6 @@
                                 id="contentId"
                                 class="input-title input-content"
                                 placeholder="내용을 입력해주세요"
-                                oninput="onInputButtonChange()"
                             ></textarea>
                         </div>
                     </div>
@@ -339,7 +521,6 @@
                             id="submitButton"
                             class="submit-button"
                             onclick="onClickModalSuccess()"
-                            disabled
                         >
                             등록하기
                         </button>
@@ -395,4 +576,8 @@
     <script src="./utils/onKeydownEsc.js"></script>
     <script src="./utils/onClickChangePost.js"></script>
     <script src="./utils/onChangeRatio.js"></script>
+    <script src="./utils/onClickDropDown.js"></script>
+    <script src="./utils/onClickToggle.js"></script>
+    <script src="./utils/onScrollInfinite.js"></script>
+    <script src="./utils/onInputSearch.js"></script>
 </html>

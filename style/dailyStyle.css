@@ -22,6 +22,24 @@
     font-style: normal;
 }
 
+:root {
+    --default: black;
+    --defaultBackgroundColor: white;
+    --defaultBorder: #c7c7c7;
+    --defaultInput: white;
+    --defaultPlaceholder: #ababab;
+    --defaultButton: rgba(199, 199, 199, 1);
+}
+
+[dark="true"] {
+    --default: white;
+    --defaultBackgroundColor: rgba(51, 51, 51, 1);
+    --defaultBorder: rgba(95, 95, 95, 1);
+    --defaultInput: black;
+    --defaultPlaceholder: rgba(119, 119, 119, 1);
+    --defaultButton: white;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -97,10 +115,54 @@ article {
 }
 .select-post,
 .select-post1 {
-    width: 7.5rem;
-    height: 2rem;
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid #c7c7c7;
+    position: relative;
+}
+.select-post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .select-post1 {
+    display: none;
+}
+.option {
+    width: 7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.optionList {
+    display: none;
+    width: 100%;
+    border: 1px solid rgba(199, 199, 199, 1);
+    border-radius: 8px;
+    position: absolute;
+    top: 52px;
+    left: 0px;
+
+    flex-direction: column;
+    z-index: 10;
+    background-color: white;
+    overflow: hidden;
+}
+.optionItem {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(95, 95, 95, 1);
+    background-color: white;
+    cursor: pointer;
+}
+.radio_check {
+    display: none;
+}
+input[name="radio_option"] {
     display: none;
 }
 
@@ -111,12 +173,40 @@ article {
 .article-daily {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.75rem;
     background-color: black;
     color: white;
     padding: 10px 8px;
     border-radius: 8px;
     cursor: pointer;
+}
+.article-header-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.article-search {
+    border: 1px solid #c7c7c7;
+    padding: 8px 12px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+
+    gap: 12px;
+}
+.search-input {
+    border-width: 0;
+    width: 200px;
+    outline: none;
+}
+.select-daily {
+    display: flex;
+}
+.article-select {
+    width: 73rem;
+    display: flex;
+    justify-content: space-between;
 }
 .article-main {
     width: 73rem;
@@ -249,6 +339,40 @@ article {
 .daily-header {
     font-family: "semibold", sans-serif;
     font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dark {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    align-items: center;
+}
+.checkbox_dark {
+    appearance: none;
+    content: "";
+    width: 40px;
+    height: 24px;
+    background-color: rgba(228, 228, 228, 1);
+    border-radius: 100px;
+}
+.checkbox_dark::after {
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 2px;
+
+    transition: margin-left 0.3s;
+}
+.checkbox_dark:checked {
+    background-color: rgba(58, 216, 74, 1);
+}
+.checkbox_dark:checked::after {
+    margin-left: 18px;
 }
 .daily-checkcontainer {
     display: flex;
@@ -268,7 +392,7 @@ article {
     font-size: 1.125rem;
 }
 .input-radio {
-    accent-color: rgba(0, 0, 0, 1);
+    accent-color: var(--default);
 }
 .daily-form {
     width: 100%;
@@ -291,10 +415,12 @@ article {
 .input-title {
     padding: 0.75rem 1rem;
     border-radius: 8px;
-    border: 1px solid rgba(171, 171, 171, 1);
+    border: 1px solid var(--defaultBorder);
+    background-color: var(--defaultInput);
+    color: var(--default);
 }
 .input-title::placeholder {
-    color: #ababab;
+    color: var(--defaultBorder);
 }
 .input-content {
     height: 3.75rem;
@@ -305,8 +431,8 @@ article {
     height: 2.5rem;
     border: none;
     border-radius: 8px;
-    background-color: #c7c7c7;
-    color: white;
+    background-color: var(--defaultButton);
+    color: var(--defaultBackgroundColor);
     cursor: pointer;
 }
 .submit-delete-button {
@@ -314,9 +440,9 @@ article {
     height: 2.5rem;
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    background-color: var(--defaultBackgroundColor);
+    color: var(--default);
+    border: 1px solid var(--default);
     cursor: pointer;
 }
 input,
@@ -373,11 +499,12 @@ footer {
     display: none;
     justify-content: center;
     align-items: center;
+    color: var(--default);
 }
 .modal_container {
     width: 40rem;
     z-index: 4;
-    background-color: white;
+    background-color: var(--defaultBackgroundColor);
     border-radius: 24px;
     padding: 24px;
     gap: 40px;
@@ -402,6 +529,7 @@ footer {
     left: 0;
     top: 0;
     z-index: 5;
+    color: var(--default);
 }
 .modal_success {
     display: flex;
@@ -411,18 +539,18 @@ footer {
     padding: 24px;
     gap: 40px;
     z-index: 5;
-    background-color: white;
+    background-color: var(--defaultBackgroundColor);
     align-items: center;
 }
 .modal_success_button {
     width: 100%;
-    background-color: black;
+    background-color: var(--default);
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 3rem;
-    color: white;
+    color: var(--defaultInput);
     cursor: pointer;
 }
 .modal_fail_button_container {
@@ -432,10 +560,10 @@ footer {
 .modal_fail_button1 {
     width: 6.5rem;
     height: 3rem;
-    background-color: white;
-    border: 1px solid black;
+    background-color: var(--defaultInput);
+    border: 1px solid var(--default);
     border-radius: 8px;
-    color: black;
+    color: var(--default);
     cursor: pointer;
 }
 .modal_fail_button2 {
@@ -443,8 +571,8 @@ footer {
     border-radius: 8px;
     width: 6.5rem;
     height: 3rem;
-    background-color: black;
-    color: white;
+    background-color: var(--default);
+    color: var(--defaultInput);
     cursor: pointer;
 }
 @media (max-width: 375px) {
@@ -464,7 +592,7 @@ footer {
     }
     .article-header {
         flex-direction: column;
-        align-items: end;
+
         gap: 4px;
         width: 100%;
     }
@@ -472,10 +600,15 @@ footer {
         width: 100%;
         flex-direction: column;
     }
-
+    .article-select {
+        position: relative;
+    }
     .article-daily {
-        width: 120px;
         order: 2;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 40px;
     }
     .dog-img {
         min-width: 360px;
@@ -506,6 +639,25 @@ footer {
     }
     footer {
         display: none;
+    }
+    .article-select {
+        width: 100%;
+    }
+    .article-header-left {
+        flex-direction: column;
+    }
+    .article-search {
+        order: 1;
+    }
+    .select-post,
+    .select-post1 {
+        order: 2;
+        position: relative;
+        bottom: 0;
+        left: -120px;
+    }
+    .search-input {
+        width: 300px;
     }
 }
 @keyframes skeleton {

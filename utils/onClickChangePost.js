@@ -13,7 +13,7 @@ async function onClickChangePost(event) {
         dailyComponent.style.display = "flex";
         pictureElement.style.color = "rgba(171, 171, 171, 1)";
         dailyElement.style.color = "black";
-        selectElement.style.display = "block";
+        selectElement.style.display = "flex";
         selectElement1.style.display = "none";
     } else if (event.target.innerText === "사진 보관함") {
         pictureComponent.style.display = "flex";
@@ -21,7 +21,7 @@ async function onClickChangePost(event) {
         pictureElement.style.color = "black";
         dailyElement.style.color = "rgba(171, 171, 171, 1)";
         selectElement.style.display = "none";
-        selectElement1.style.display = "block";
+        selectElement1.style.display = "flex";
 
         await fetch("https://dog.ceo/api/breeds/image/random/10")
             .then((res) => res.json())
