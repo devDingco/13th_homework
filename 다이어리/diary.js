@@ -212,7 +212,7 @@ const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   diaryList.map((diary) => createHtml(diary));
-  setDropdownLabel(selectedMood);
+  selectedMood !== undefined ? setDropdownLabel(selectedMood) : undefined;
 };
 
 const getDiariesByMood = (selectedMood) => {
