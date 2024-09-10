@@ -29,8 +29,9 @@ const JS_일기그리기기능 = () => {
       (el, index) => `
         <a href="./detail.html?number=${index}">
           <div class="CSS_일기">
+          <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
             <div class="CSS_일기사진">
-            <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
+            
               ${
                 el.기분 === "행복"
                   ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
@@ -171,7 +172,8 @@ const JS_글보기기능 = (일기번호받는통) => {
 };
 
 const JS_필터링기능 = (event) => {
-  const 선택한내용 = event.target.value;
+  const 선택한내용 = event.target.id;
+  console.log("필터링 내용:", 선택한내용);
 
   const 스토리지에저장된일기목록 =
     window.localStorage.getItem("민지의일기목록") ?? "[]";
@@ -179,26 +181,27 @@ const JS_필터링기능 = (event) => {
   let 필터링된일기목록;
 
   switch (선택한내용) {
-    case "HTML_행복선택": {
+    case "행복해요클릭": {
       필터링된일기목록 = 일기목록.filter((el) => el.기분 === "행복");
       break;
     }
-    case "HTML_슬픔선택": {
+    case "슬퍼요클릭": {
       필터링된일기목록 = 일기목록.filter((el) => el.기분 === "슬픔");
       break;
     }
-    case "HTML_놀람선택": {
+    case "놀랐어요클릭": {
       필터링된일기목록 = 일기목록.filter((el) => el.기분 === "놀람");
       break;
     }
-    case "HTML_화남선택": {
+    case "화나요클릭": {
       필터링된일기목록 = 일기목록.filter((el) => el.기분 === "화남");
       break;
     }
-    case "HTML_기타선택": {
+    case "기타클릭": {
       필터링된일기목록 = 일기목록.filter((el) => el.기분 === "기타");
       break;
     }
+    case "전체클릭":
     default: {
       필터링된일기목록 = 일기목록;
       break;
@@ -210,36 +213,34 @@ const JS_필터링기능 = (event) => {
       (el, index) => `
         <a href="./detail.html?number=${index}">
           <div class="CSS_일기">
+          <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
             <div class="CSS_일기사진">
-            <div>
-              <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick=" JS_일기삭제기능(event, ${index});" />
-              ${
-                el.기분 === "행복"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
-                  : ""
-              }
-              ${
-                el.기분 === "슬픔"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
-                  : ""
-              }
-              ${
-                el.기분 === "놀람"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
-                  : ""
-              }
-              ${
-                el.기분 === "화남"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
-                  : ""
-              }
-              ${
-                el.기분 === "기타"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
-                  : ""
-              }
-            </div>
 
+                ${
+                  el.기분 === "행복"
+                    ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "슬픔"
+                    ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "놀람"
+                    ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "화남"
+                    ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "기타"
+                    ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
+                    : ""
+                }
             </div>
             <div class="CSS_일기정보">
               <div class="CSS_일기내용">
@@ -272,7 +273,6 @@ const JS_필터링기능 = (event) => {
               </div>
               <div class="CSS_일기제목"> ${el.제목}</div>
             </div>
-
           </div>
         </a>
       `
@@ -281,6 +281,71 @@ const JS_필터링기능 = (event) => {
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
     HTML_새로운일기도화지;
 };
+
+
+// 일기검색하게 도와주는 기능 타이머1초는 아직 적용 못함.
+const JS_일기검색기능 = (event) => {
+  const 검색어 = event.target.value; // 사용자가 입력한 검색어
+  const 스토리지에저장된일기목록 = window.localStorage.getItem("민지의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+  // 검색어가 포함된 제목을 가진 일기 필터링
+  const 필터된일기목록 = 일기목록.filter((일기) => 일기.제목.includes(검색어));
+
+  // 필터링된 결과를 HTML로 변환
+  const HTML_새로운일기도화지 = 필터된일기목록
+    .map(
+      (el, index) => `
+        <a href="./detail.html?number=${index}">
+          <div class="CSS_일기">
+          <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
+            <div class="CSS_일기사진">
+              ${
+                el.기분 === "행복"
+                  ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
+                  : ""
+              }
+              ${
+                el.기분 === "슬픔"
+                  ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+                  : ""
+              }
+              ${
+                el.기분 === "놀람"
+                  ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
+                  : ""
+              }
+              ${
+                el.기분 === "화남"
+                  ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
+                  : ""
+              }
+              ${
+                el.기분 === "기타"
+                  ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
+                  : ""
+              }
+            </div>
+            <div class="CSS_일기정보">
+              <div class="CSS_일기내용">
+                <div class="CSS_기분">${el.기분}</div>
+                <div class="CSS_날짜">${el.작성일}</div>
+              </div>
+              <div class="CSS_일기제목"> ${el.제목}</div>
+            </div>
+          </div>
+        </a>
+      `
+    )
+    .join(""); // HTML 문자열로 변환
+
+  // 결과를 화면에 반영
+  window.document.getElementById("HTML_일기보여주는곳").innerHTML =
+    HTML_새로운일기도화지;
+};
+
+
+
 
 function JS_스크롤위로기능() {
   window.scrollTo({
@@ -291,6 +356,7 @@ function JS_스크롤위로기능() {
 function JS_일기삭제기능(event, 일기번호) {
   // 1. 이 버튼 하위에 있는 모든 태그들의 기본기능 막기 => <a /> 태그 이동 막기
   event.preventDefault();
+  event.stopPropagation(); // 이벤트 전파 중지
 
   const 스토리지에저장된일기목록 =
     window.localStorage.getItem("민지의일기목록");

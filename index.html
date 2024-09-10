@@ -6,6 +6,7 @@
     <title>다이어리 만들기</title>
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/index_mediaQuery.css">
+    <link rel="stylesheet" href="./css/dropdown.css">
     <script src="./javascript/index.js" defer></script>
 </head>
 <body>
@@ -118,15 +119,45 @@
         <div id="JS_메인_일기보관함" class="CSS_메인_일기보관함">
             <div class="CSS_필터랑모달묶은그룹">
                 <div class="CSS_필터_영역_배경">
-                    <select class="CSS_필터" onchange="JS_필터링기능(event)">
-                        <option selected>전체</option>
-                        <option value="HTML_행복선택">행복해요</option>
-                        <option value="HTML_슬픔선택">슬퍼요</option>
-                        <option value="HTML_놀람선택">놀랐어요</option>
-                        <option value="HTML_화남선택">화나요</option>
-                        <option value="HTML_기타선택">기타</option>
-                    </select>
+                  <!-- 새로만든 드롭박스 -->
+                  <div class="CSS_드롭박스" >
+                    <input type="checkbox" id="HTML_드롭다운제목" class="CSS_드롭다운제목">
+                    <ul class="CSS_드롭다운메뉴">
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="전체클릭" onclick="JS_필터링기능(event)">
+                        <label for="전체클릭">전체</label>
+                      </li>
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="행복해요클릭" onclick="JS_필터링기능(event)">
+                        <label for="행복해요클릭">행복해요</label>
+                      </li>
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="슬퍼요클릭" onclick="JS_필터링기능(event)">
+                        <label for="슬퍼요클릭">슬퍼요</label>
+                      </li>
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="놀랐어요클릭" onclick="JS_필터링기능(event)">
+                        <label for="놀랐어요클릭">놀랐어요</label>
+                      </li>
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="화나요클릭" onclick="JS_필터링기능(event)">
+                        <label for="화나요클릭">화나요</label>
+                      </li>
+                      <li>
+                        <input type="radio" name="HTML_선택아이템" id="기타클릭" onclick="JS_필터링기능(event)">
+                        <label for="기타클릭">기타</label>
+                      </li>
+                    </ul>
+                  </div>
+
+
+                  <!-- 서치바 들어갈 자리 -->
+                  <input class="CSS_서치바" type="text" placeholder="검색어를 입력해 주세요." oninput="JS_일기검색기능(event)">
+                  <div id="HTML_검색결과보여주는곳"></div>
+
+                  
                 </div>
+
                 <button class="CSS_일기쓰기모달버튼" onclick="JS_모달열기기능('HTML_모달그룹')">+ 일기쓰기</button>
             </div>
 
