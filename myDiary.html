@@ -10,7 +10,16 @@
 <body>
     <div class="container">
         <div class="container__header">
-            <div class="header__text"> <b class="header__text" id="header__login"> {name} </b>의 다이어리에 오신 것을 환영합니다. </div>
+            <div class="header__title">
+                <div class="title__text">
+                    <b id="header__login"> {name} </b>
+                    <p>의 다이어리에 오신 것을 환영합니다.</p>
+                </div>
+                <div class="container__mode">
+                    <div class="mode__text">다크모드</div>
+                    <input class="mode__toggle" type="checkbox" />
+                </div>
+            </div>
             <div class="header__img">
                 <img src="./asset/header__banner.png">
             </div>
@@ -135,12 +144,6 @@
         <div class="container__modal">
             <div class="modal__bg"></div>
             <div class="modal__form">
-
-                <div class="container__mode">
-                    <div class="mode__text">다크모드</div>
-                    <input class="mode__toggle" type="checkbox" />
-                </div>
-
                 <div class="modal__header">일기 쓰기</div>
                 <div class="modal__question">오늘 기분은 어땠나요?</div>
                 <div class="modal__radio">
