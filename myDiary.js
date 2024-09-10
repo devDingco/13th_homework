@@ -69,44 +69,10 @@ function makeDiaryData () {
     localStorage.setItem("diaryData", JSON.stringify(diaryData))
     diaryData = JSON.parse(localStorage.getItem("diaryData"))
 
-    // makeDiaryTemp ( tempDiary );
     makeDiaryCard(diaryData);
     document.querySelector(".modal__submit").style = "display: flex;"
+    window.scrollTo({ top: document.querySelector(".container__footer").getBoundingClientRect().top, behavior: "smooth" })
 };
-
-//** 일기 만들기 기능: 전달받은 일기 정보로 일기 카드 생성 */
-// function makeDiaryTemp(temp) {
-//     if (diaryData.length !== 0) {
-//         const diaryCard = document.createElement("div");
-//         diaryCard.className = "wrapper__card"
-//         diaryCard.innerHTML =
-// `
-// <div class="card__img">
-//     <img src="./asset/card__${temp.mood}.png">
-// </div>
-// <div class="card__topic">
-//     <div class="card__status">
-//         <div class="card__${temp.mood}">${moodIndex[temp.mood]}</div>
-//         <div class="card__date">${temp.date}</div>
-//     </div>
-//     <div class="card__title">${temp.title}</div>
-// </div>
-// `
-//         document.querySelector(".content__left__card").append(diaryCard);
-//         diaryCard.onclick = () => alertDiary(temp);
-//     };
-// };
-
-// function alertDiary(temp) {
-//     alert(
-// `
-// 제목: ${temp.title}
-// 기분: ${temp.mood}
-// 날짜: ${temp.date}
-// 내용: ${temp.context}
-// `
-//     )
-// };
 
 //** 일기 만들기 기능: 전달받은 일기 정보로 일기 카드 생성 */
 function makeDiaryCard(diary) {
@@ -135,51 +101,6 @@ function makeDiaryCard(diary) {
         console.log( "받아올 데이터가 없어요!!" )
     };
 };
-
-//** 일기 필터 기능: filter함수 사용하여 배열 변경 */
-//!! 배열 순서 자체가 변경되기 때문에 index또한 변경되는 이슈 있음
-// function activeFilter (event) {
-//     const filterMood = event.target.value;
-
-//     let filterDiary = JSON.parse(localStorage.getItem("diaryData"))
-
-//     switch (filterMood) {
-//         case "all": {
-//             filterDiary = filterDiary.filter( el => el.mood )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         case "happy": {
-//             filterDiary = filterDiary.filter( el => el.mood === "happy" )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         case "sad": {
-//             filterDiary = filterDiary.filter( el => el.mood === "sad" )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         case "surprise": {
-//             filterDiary = filterDiary.filter( el => el.mood === "surprise" )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         case "angry": {
-//             filterDiary = filterDiary.filter( el => el.mood === "angry" )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         case "etc": {
-//             filterDiary = filterDiary.filter( el => el.mood === "etc" )
-//             makeDiaryCard(filterDiary)
-//             break
-//         }
-//         default: {
-//             filterDiary = JSON.parse(localStorage.getItem("diaryData"))
-//             makeDiaryCard(filterDiary)
-//         }
-//     }
-// }
 
 //** 일기 삭제 기능: onclick event에서 index할당 받아 올바른 데이터 제거 */
 function deleteDiary(index) {
@@ -244,7 +165,7 @@ function openGallery() {
     loadIMG()
 }
 
-//** nav filter btn 클릭시 드롭다운 디자인 메뉴 호출 및 실행 */
+//** nav filter btn 클릭시 드롭다운 디자인 메뉴 호출 및 실행, 세션스토리지 활용 */
 function openFilter() {
     document.querySelector('.filter__menu').style.display = "block";
     document.querySelector('.filter__menu').addEventListener('click', (event) => {
@@ -261,38 +182,39 @@ function openFilter() {
             }
             case "happy": {
                 filterDiary = diaryLocal.filter( el => el.mood === "happy")
-                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
-                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                sessionStorage.setItem("tempData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
                 break
             }
             case "sad": {
                 filterDiary = diaryLocal.filter( el => el.mood === "sad")
-                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
-                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                sessionStorage.setItem("tempData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
                 break
             }
             case "surprise": {
                 filterDiary = diaryLocal.filter( el => el.mood === "surprise")
-                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
-                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                sessionStorage.setItem("tempData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
                 break
             }
             case "angry": {
                 filterDiary = diaryLocal.filter( el => el.mood === "angry")
-                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
-                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                sessionStorage.setItem("tempData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
                 break
             }
             case "etc": {
                 filterDiary = diaryLocal.filter( el => el.mood === "etc")
-                sessionStorage.setItem("filterData", JSON.stringify(filterDiary))
-                makeDiaryCard( JSON.parse(sessionStorage.getItem("filterData")))
+                sessionStorage.setItem("tempData", JSON.stringify(filterDiary))
+                makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
                 break
             }
         }
     })
 }
 
+//** 검색기능: 검색창 인풋값으로 배열의 제목 필터하여 재정렬, 세션스토리지 활용 */
 function searchDiary() {
     let timer;
     const searchValue = document.querySelector('.search__input').value
@@ -300,8 +222,8 @@ function searchDiary() {
     clearTimeout(timer)
 
     timer = setTimeout( () => {
-        sessionStorage.setItem("searchData", JSON.stringify(searchResult))
-        makeDiaryCard( JSON.parse(sessionStorage.getItem("searchData")))
+        sessionStorage.setItem("tempData", JSON.stringify(searchResult))
+        makeDiaryCard( JSON.parse(sessionStorage.getItem("tempData")))
     }, 1000)
 }
 
@@ -343,6 +265,13 @@ function changeDirection(event) {
             break
         }
     }
+}
+
+//** 다크모드 토글기능 */
+function changeMode(event) {
+    event.target.checked === true ?
+    document.documentElement.setAttribute("dark-mode", "on") :
+    document.documentElement.removeAttribute("dark-mode")
 }
 
 //** 새로운 모달 호출 */
@@ -423,6 +352,7 @@ document.querySelector(".gallery__direction").addEventListener('change', changeD
 
 // modal관련 event listener
 document.querySelector(".modal__bg").addEventListener('click', closeNew)
+document.querySelector('.mode__toggle').addEventListener('click', changeMode)
 window.addEventListener("keydown", (event) => { if (event.key === "Escape") { closeNew()} })
 
 document.querySelector(".tap__new").addEventListener('click', newDiary)

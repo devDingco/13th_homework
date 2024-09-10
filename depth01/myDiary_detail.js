@@ -1,13 +1,11 @@
 const localDiary = JSON.parse(localStorage.getItem("diaryData"))
-const filterDiary = JSON.parse(sessionStorage.getItem("filterData"))
+const tempDiary = JSON.parse(sessionStorage.getItem("tempData"))
 const searchDiary = JSON.parse(sessionStorage.getItem("searchData"))
 const indexNum = window.location.search.substring(6)
 
 let currentDiary = []
-if (filterDiary !== null) {
-    currentDiary = filterDiary[indexNum]
-} else if (searchDiary !== null) {
-    currentDiary = searchDiary[indexNum]
+if (tempDiary !== null) {
+    currentDiary = tempDiary[indexNum]
 } else {
     currentDiary = localDiary[indexNum]
 }
