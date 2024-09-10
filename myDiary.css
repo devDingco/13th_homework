@@ -342,7 +342,10 @@ a { text-decoration: none;}
 .search__bar {
     display: flex;
     align-items: center;
-    padding: 1rem;
+
+    @media (max-width: 375px) {
+        padding: 1rem;
+    }
 }
 
 .search__icon {
@@ -357,6 +360,9 @@ a { text-decoration: none;}
     padding: 1.2rem 3.6rem;
     font-size: 2rem;
     border: 0.2rem solid var(--chroma-mono01);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (max-width: 375px) {
         width: 18rem;
@@ -528,6 +534,7 @@ a { text-decoration: none;}
 
 .diary__titleInput,
 .diary__contentInput {
+    max-width: 30rem;
     width: 100%;
     height: 4.8rem;
     border: 0.1rem solid var(--chroma-mono01);
