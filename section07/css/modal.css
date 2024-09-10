@@ -87,6 +87,7 @@
   width: 104px;
   height: 48px;
   border-radius: var(--radius-sm);
+  border: 1px solid var(--button-border-color);
   color: var(--button-sub-color);
   background-color: var(--button-sub-bg-color);
   font-size: 1.8rem;
