@@ -36,13 +36,33 @@
               <div class="sub_navigation">
                 <div class="emotion_dropdown_layout">
                   <div class="dropdown_name" id="filterCheckbox">
-                    <div class="dropdown_name_none_hover">
-                      기본형
-                      <img src="./image/dropdown_arrow.svg" width="24px" />
+                    <div class="dropdown_text">
+                      <input type="checkbox" id="photo_dropdown" />
+                      <img
+                        src="./image/dropdown_arrow.svg"
+                        width="24px"
+                        class="dropdown_img"
+                      />
                     </div>
-                    <ul id="photo_filter_list">
-                      <li>가로형</li>
-                      <li>세로형</li>
+                    <ul class="dropdown" id="photo_filter_list">
+                      <li>
+                        <div onclick="setDropdownLabel('기본형')">
+                          기본형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div onclick="setDropdownLabel('가로형')">
+                          가로형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
+                      <li>
+                        <div onclick="setDropdownLabel('세로형')">
+                          세로형
+                          <img src="./image/check.svg" class="check" />
+                        </div>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -56,18 +76,61 @@
             <div class="navigation_layout">
               <div class="sub_navigation">
                 <div class="emotion_dropdown_layout">
-                  <div class="dropdown_name" id="filterCheckbox">
-                    <div class="dropdown_name_none_hover">
-                      전체
-                      <img src="./image/dropdown_arrow.svg" width="24px" />
+                  <div class="dropdown_search_box">
+                    <div class="dropdown_name" id="filterCheckbox">
+                      <div class="dropdown_text">
+                        <input type="checkbox" id="mood_dropdown" />
+                        <img
+                          src="./image/dropdown_arrow.svg"
+                          width="24px"
+                          class="dropdown_img"
+                        />
+                      </div>
+                      <ul class="dropdown" id="mood_list">
+                        <li>
+                          <div>
+                            전체
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            행복해요
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            슬퍼요
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            놀랐어요
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            화나요
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            기타
+                            <img src="./image/check.svg" class="check" />
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                    <ul id="mood_list">
-                      <li>행복해요</li>
-                      <li>슬퍼요</li>
-                      <li>놀랐어요</li>
-                      <li>화나요</li>
-                      <li class="etc">기타</li>
-                    </ul>
+                    <div class="search_box">
+                      <div class="search_bar">
+                        <div class="search_img"><img src="./image/search.svg" /></div>
+                        <input oninput="onSearch(event)" type="text" placeholder="검색어를 입력해 주세요." />
+                      </div>
+                    </div>
                   </div>
                   <button
                     class="btn_register_diary"
@@ -83,7 +146,13 @@
               <div id="aside_layout" class="aside_layout">
                 <form action="#" onsubmit="registerDiary(event)" name="form">
                   <div class="aside">
-                    <div class="diary_entry_title">📍 일기 쓰기</div>
+                    <div class="modal_header">
+                      <div class="diary_entry_title">📍 일기 쓰기</div>
+                      <div class="dark_mode_box">
+                        <input type="checkbox" class="dark_mode_toggle" onclick="darkModeToggle(event)" />
+                      </div>
+                    </div>
+                    
                     <div class="diary_entry_form">
                       <div class="mood_selector">
                         <div class="mood_selector_title">
@@ -141,7 +210,7 @@
                               class="mood_options"
                               name="mood"
                               onkeydown="onKeyPress(event)"
-                            /><label for="check_etc">기타</label>
+                            /><label for="check_etc" class="mood_text">기타</label>
                           </div>
                         </div>
                       </div>

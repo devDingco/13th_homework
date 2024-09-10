@@ -9,14 +9,14 @@ let currentFilteredMood = "";
 let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 
-window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-  const filterCheckbox = document.getElementById("filterCheckbox");
+// window.addEventListener("scroll", () => {
+//   const scroll = window.scrollY;
+//   const filterCheckbox = document.getElementById("filterCheckbox");
 
-  scroll > 0
-    ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
-    : (filterCheckbox.style = "background-color: #FFF");
-});
+//   scroll > 0
+//     ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
+//     : (filterCheckbox.style = "background-color: #FFF");
+// });
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
@@ -185,32 +185,51 @@ const renderInitialDiaryEntries = () => {
     };
     createHtml(storedDiary);
   });
-}
+};
 
-const updateDiaryList = (diaryList) => {
+const setDropdownLabel = (selectedMood) => {
+  let dropdownName;
+  selectedMood.includes("형") ? dropdownName = "photo_dropdown" : dropdownName = "mood_dropdown"
+  const dropdownLabel = document.getElementById(dropdownName);
+  dropdownLabel.style.cssText = `--boxText: "${selectedMood}"`;
+};
+
+const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   diaryList.map((diary) => createHtml(diary));
+  setDropdownLabel(selectedMood);
 };
 
 const getDiariesByMood = (selectedMood) => {
-  const filteredDiaries = storedDiaryList.filter(
-    (diary) => diary.mood === selectedMood
+  const filteredDiaries = storedDiaryList.filter((diary) =>
+    diary.mood.includes(selectedMood)
   );
-  filteredDiaries.length === 0
-    ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
-    : updateDiaryList(filteredDiaries);
+  if (selectedMood === "전체") {
+    document.getElementById("article").innerHTML = "";
+    renderInitialDiaryEntries();
+  } else {
+    filteredDiaries.length === 0
+      ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
+      : updateDiaryList(filteredDiaries, selectedMood);
+  }
 };
 
-const onClickMood = (e) => {
-  const selectedMood = e.target.innerText;
+const onClickMood = (event) => {
+  const selectedMood = event.target.closest("li").innerText;
   currentFilteredMood = selectedMood;
-  getDiariesByMood(selectedMood);
+  getDiariesByMood(currentFilteredMood);
 };
 
 const getPhotoByType = (selectedPhotoType) => {
   const dogImages = document.querySelectorAll(".dogImage");
   switch (selectedPhotoType) {
+    case "기본형": {
+      [...dogImages].map((dogImage) => {
+        dogImage.style = "aspect-ratio:  1 / 1;";
+      });
+      break;
+    }
     case "가로형": {
       [...dogImages].map((dogImage) => {
         dogImage.style = "aspect-ratio:  4 / 3;";
@@ -297,7 +316,7 @@ const closeSingleModal = (modal) => {
 window.addEventListener("click", (event) => {
   const className = event.target.className;
   const id = event.target.id;
-  if (className === "aside_layout" || className == "confirm_modal_layout") {
+  if (className === "aside_layout" || className === "confirm_modal_layout") {
     event.target.id != "diary_cancel_modal"
       ? closeAllModals(id)
       : closeSingleModal(id);
@@ -333,6 +352,42 @@ const showLoadingSkeleton = () => {
   fetchAndDisplayPhotos();
 };
 
+const showMoreDogsImage = () => {
+  fetch("https://dog.ceo/api/breeds/image/random").then((result) => {
+    result.json().then((object) => {
+      const dog = object.message;
+      const box = document.getElementById("photo_gallery").innerHTML;
+      document.getElementById("photo_gallery").innerHTML =
+        box + `<img src="${dog}" class="dogImage" />`
+    });
+  });
+};
+
+let photoTimer = null;
+window.addEventListener("scroll", () => {
+  const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+  if(scrollPercent < 0.9) return;
+  if (photoTimer !== null) return;
+
+  showMoreDogsImage()
+
+  photoTimer = setTimeout(() => {
+    photoTimer = null;
+
+    const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+
+    if(scrollPercent === 1) {
+      showMoreDogsImage()
+    }
+  }, 1000);
+});
+
 const toggleDiaryPhotoView = (viewType) => {
   const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
   const photoStorageMenuStyle = document.getElementById("photo_storage_menu");
@@ -343,7 +398,8 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
-      renderInitialDiaryEntries()
+      document.getElementById("article").innerHTML = "";
+      renderInitialDiaryEntries();
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -359,6 +415,37 @@ const toggleDiaryPhotoView = (viewType) => {
       break;
     }
   }
+};
+
+let timer;
+const onSearch = (event) => {
+  clearTimeout(timer)
+
+  timer = setTimeout(() => {
+    const searchQuery = event.target.value
+    const searchResults = storedDiaryList.filter(e => e.title.includes(searchQuery))
+    console.log(searchResults)
+    document.getElementById("article").innerHTML = "";
+    searchResults.map((diary) => {
+      const storedDiary = {
+        id: diary.id,
+        mood: diary.mood,
+        date: diary.date,
+        color: diary.color,
+        title: diary.title,
+        content: diary.content,
+        imageName: diary.imageName,
+      };
+      createHtml(storedDiary);
+    });
+  }, 1000);
+}
+
+const darkModeToggle = (event) => {
+  const mode = document.documentElement;
+  event.target.checked
+    ? (mode.setAttribute("mode", "dark"))
+    : (mode.setAttribute("mode", "light"));
 };
 
 renderInitialDiaryEntries();
