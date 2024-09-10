@@ -58,4 +58,9 @@
     .break_line {
         width: 100%;
     }
+
+    .write_diary_delete_select_modal_container {
+        width: 80%;
+        left: 10%;
+    }
 }

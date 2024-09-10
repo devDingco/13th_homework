@@ -185,11 +185,13 @@ const closedButtonPressed = () => {
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: block;"
 }
 
+// [일기 작성 취소] 버튼 클릭 시 동작
 const cancelButtonPressed = () => {
     dismiss()
     resetInputData()
 }
 
+// [일기 쓰기] 버튼 클릭 시 동작
 const writeButtonPressed = () => {
     presentModal()
 }
@@ -199,9 +201,29 @@ const makeButtonPressed = () => {
     document.getElementById("HTML_write_diary_success_modal_bg").style = "display: block;"
 }
 
-const okButtonPressed = detailModal => {
+const okButtonPressed = () => {
     dismiss()
     resetInputData()
+}
+
+const presentNaviMenu = (naviItem) => {
+    switch (naviItem) {
+        case "diary": {
+            document.getElementById("diary_list").style = "display: grid;"
+            document.getElementById("HTML_contents_photos_container").style = "display: none;"
+            document.getElementById("diary_filter_dropbox").style = "display: flex;"
+            document.getElementById("photos_filter_dropbox").style = "display: none;"
+            break
+        }
+
+        case "photos": {
+            document.getElementById("diary_list").style = "display: none;"
+            document.getElementById("HTML_contents_photos_container").style = "display: block;"
+            document.getElementById("diary_filter_dropbox").style = "display: none;"
+            fetchDogsFromAPI()
+            break
+        }
+    }
 }
 
 const topScrollFloatingButtonTapped = () => {
@@ -210,13 +232,26 @@ const topScrollFloatingButtonTapped = () => {
 
 // [Other]
 const presentModal = () => {
+    window.scrollTo({top:0, behavior: "smooth"})
     document.getElementById("HTML_write_diary_modal_bg").style = "display: block;"
+    document.body.style.overflow = "hidden"
+
+    document.getElementById("HTML_write_diary_modal_container").addEventListener("click", (el) => {
+        console.log("HTML_write_diary_modal_container")
+        el.stopPropagation()
+    })
+
+    document.getElementById("HTML_write_diary_cancel_modal_bg").addEventListener("click", (el) => {
+        console.log("HTML_write_diary_cancel_modal_bg")
+        el.stopPropagation()
+    })
 }
 
 const dismiss = () => {
     document.getElementById("HTML_write_diary_success_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
+    document.body.style.overflow = "auto"
 }
 
 // Event Listener
