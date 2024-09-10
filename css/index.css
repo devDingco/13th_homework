@@ -11,6 +11,14 @@
     box-sizing: border-box;
     margin : 0;
     padding : 0;
+    line-height: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+
+[data-dark=on] {
+    background:black!important;
+    color: white!important;
 }
 
 html {
@@ -172,6 +180,35 @@ div.flexcontainer {
     }
 }
 
+input.dark-btn {
+    appearance: none;
+    width: 40px;
+    height: 24px;
+    border-radius: 20px;
+    background: lightgray;
+    anchor-name: --dark-base
+}
+
+input.dark-btn::after {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    content: "";
+    left: calc(anchor(--dark-base left) + 2px);
+    top: calc(anchor(--dark-base top) + 2px);
+    transition: left 0.3s;
+}
+
+input.dark-btn:checked {
+    background: rgba(0, 0, 255, 0.9);
+}
+
+input.dark-btn:checked::after {
+    left: calc(anchor(--dark-base left) + 18px);
+}
+
 div.flexcontainer > div.flexchild-left {
     width: max(60vw, 100%);
     padding-right: 15vw;
@@ -289,6 +326,7 @@ form.diary-util > div.flexlist, input.text-input, button.submit
         margin: auto;
     }
 }
+
 
 input.text-input
 {
@@ -605,4 +643,20 @@ li.dog-image-card > img {
     width: 100%;
     object-fit: cover;
     aspect-ratio: 1 / 1;
+}
+
+label.search-field {
+    display: flex;
+    gap: 1rem;
+    width: fit-content;
+    /* background-color: red; */
+}
+
+label.search-field > p {
+    padding: 0.5rem;
+    font-size: 1.1rem;
+}
+
+label.search-field > input {
+    padding: 0.5rem;
 }

@@ -138,6 +138,11 @@ document.querySelector("select#dropdownEmotionFilter").addEventListener("change"
     }
 });
 
+document.querySelector("input.search-input").addEventListener("input", e => {
+    console.log(e.target.value);
+    console.log(e.data);
+});
+
 document.querySelector("select#dropdownImageAspect").addEventListener("change", (e) => {
     e.preventDefault();
     const selection = e.target.querySelector(":checked").value;
@@ -152,7 +157,7 @@ document.querySelector("select#dropdownImageAspect").addEventListener("change", 
 const diaryListHTML = document.querySelector("ul#diarylist");
 diaryListHTML.addEventListener("scroll", (e) => {
     if (diaryListHTML.scrollTop > 0) {
-        console.log("dfa")
+        // console.log("dfa")
         document.querySelector("select#dropdownEmotionFilter").style = "background: var(--reverselightgray)"
     } else {
         document.querySelector("select#dropdownEmotionFilter").style = "background: var(--lightgray)"
@@ -209,18 +214,25 @@ document.querySelector("div.container-picker-tab").addEventListener("click", e =
     }
 });
 
-document.querySelector("button#photo-tab").addEventListener("click", e => {
+const msgCache = [];
+const add10Pics = () => {
     const templateHTML = document.querySelector("template.dog-image-template");
     const imageList = document.querySelector("ul.image-scroll-zone");
     let templClone;
     [...Array(10)].forEach(i => {
+        // console.log("out: " + performance.now());
+        // console.log(templClone);
         fetch("https://dog.ceo/api/breeds/image/random")
             .then(res => {
+                // console.log(templClone);
                 res.json()
                     .then(json => {
                         templClone = templateHTML.content.cloneNode(true);
+                        // console.log(templClone);
+                        // console.log("in: " + performance.now());
                         templClone.querySelector("img.dog-image").src = json["message"];
                         imageList.append(templClone);
+                        msgCache.push(json["message"]);
                     })
                     .catch(reason => {
                         console.error(reason);
@@ -230,8 +242,33 @@ document.querySelector("button#photo-tab").addEventListener("click", e => {
             .catch(reason => {
                 console.error(reason);
                 console.log("fetch error");
+                templClone = templateHTML.content.cloneNode(true);
+                // console.log(templClone);
+                // console.log("in: " + performance.now());
+                templClone.querySelector("img.dog-image").src = msgCache[Math.floor(msgCache.length * Math.random())];
+                imageList.append(templClone);
             })
             .finally(() => {
             });
     });
+};
+
+document.querySelector("button#photo-tab").addEventListener("click", e => {
+    add10Pics();
 }, {once : true});
+
+document.querySelector("input.dark-btn").addEventListener("change", e => {
+    document.querySelector("div.flexchild-right").dataset.dark = (e.target.checked) ? "on":"off";
+});
+
+let scrollTimer = null;
+window.addEventListener("scroll", () => {
+    let d;
+    let scrollPerCent = (d=document.documentElement).scrollTop / (d.scrollHeight - d.clientHeight);
+    if (scrollPerCent < 0.7 || scrollTimer) return;
+    add10Pics();
+    scrollTimer = setTimeout(() => {
+        scrollTimer = null;
+        if ((scrollPerCent=(d=document.documentElement).scrollTop / (d.scrollHeight - d.clientHeight)) > 0.9) add10Pics();
+    }, 1000);
+});
