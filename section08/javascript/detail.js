@@ -74,4 +74,8 @@ const copyContent = () => {
   navigator.clipboard.writeText(content);
 
   document.querySelector('.toast-message').classList.add('clicked');
+
+  setTimeout(() => {
+    document.querySelector('.toast-message').classList.remove('clicked');
+  }, 3000);
 };
