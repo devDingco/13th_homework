@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  padding: unset;
+  margin: unset;
+  font-weight: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+fieldset {
+  border: none;
+}
+
+textarea {
+  font-family: unset;
+}
+
+button {
+  cursor: pointer;
+  border: unset;
+}
