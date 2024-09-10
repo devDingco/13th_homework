@@ -396,6 +396,42 @@ body {
   font-weight: var(--weight-regular);
 }
 
+.pagination {
+  margin: var(--gap-xxl) auto 0;
+}
+
+.page-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+.page-list li {
+  width: 32px;
+  height: 32px;
+}
+
+.page-list a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  width: 100%;
+  height: 100%;
+  color: var(--gray-600);
+}
+
+.page-list .page-number.active a {
+  color: var(--gray-b);
+  background-color: var(--gray-50);
+  border-radius: var(--radius-sm);
+  font-weight: var(--weight-medium);
+}
+
+.page-button.active img {
+  filter: invert();
+}
+
 .review {
   padding: var(--gap-lg) 0;
   border-top: 1px solid var(--gray-b);
