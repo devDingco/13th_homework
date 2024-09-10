@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>다크모드 실습</title>
+    <style>
+        .CSS_불켜진방 {
+            color: black;
+            background-color: white;
+        }
+        .CSS_불꺼진방 {
+            color: white;
+            background-color: black;
+        }
+        .CSS_불꺼진방 input {
+            background-color: gray;
+        }
+        .CSS_불꺼진방 input::placeholder {
+            color: orange;
+        }
+        .CSS_불꺼진방 button {
+            color: blue;
+            background-color: aqua;
+        }
+    </style>
+    <script>
+        const JS_전구기능 = (event) => {
+            if (event.target.checked === true) {
+                document.body.className = "CSS_불꺼진방"
+            } else {
+                document.body.className = "CSS_불켜진방"
+            }
+        }
+    </script>
+</head>
+<body class="CSS_불켜진방">
+    <input type="checkbox" onclick="JS_전구기능(event)"/>불끄고 잠자기
+
+    <br/><br/>
+    
+    <div class="CSS_회원가입카드">
+        이메일: <input type="text" placeholder="이메일을 입력해주세요." /> <br/>
+        비밀번호: <input type="password" placeholder="비밀번호를 입력해주세요."> <br/>
+        <input type="radio" name="성별선택" />남자
+        <input type="radio" name="성별선택" />여자 <br/>
+        <button>회원가입</button>
+    </div>
+</body>
+</html>
