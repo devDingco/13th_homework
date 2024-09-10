@@ -1,0 +1,147 @@
+/* 공통모달 */
+.CSS_공통모달그룹 {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.CSS_공통모달배경 {
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  opacity: 50%;
+}
+
+/* 등록상자 */
+.CSS_등록상자 {
+  position: absolute;
+  top: calc(50% - 560px / 2);
+  left: calc(50% - 500px / 2);
+  width: 500px;
+  height: 560px;
+  border-radius: 1.6rem;
+  background-color: var(--기본배경색);
+  padding: 2.4rem;
+  text-align: left;
+  font-size: 2.4rem;
+  color: var(--기본글자색);
+}
+
+/* 등록완료상자 */
+.CSS_등록완료상자,
+.CSS_등록삭제상자 {
+  gap: 2.4rem;
+  position: absolute;
+  top: calc(50% - 200px / 2);
+  left: calc(50% - 480px / 2);
+  width: 480px;
+  height: 200px;
+
+  background-color: var(--기본배경색);
+  border-radius: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.4rem;
+  z-index: 10;
+}
+
+/* 등록취소상자 */
+.CSS_등록취소상자 {
+  gap: 2.4rem;
+  position: absolute;
+  top: calc(50% - 200px / 2);
+  left: calc(50% - 480px / 2);
+  width: 480px;
+  height: 200px;
+  background-color: var(--기본배경색);
+  border-radius: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.4rem;
+  z-index: 3;
+}
+
+.CSS_등록취소제목,
+.CSS_등록완료제목,
+.CSS_일기삭제제목 {
+  width: 100%;
+  font-size: 2.4rem;
+  color: var(--기본글자색);
+  text-align: center;
+}
+
+.CSS_등록취소내용,
+.CSS_등록완료내용,
+.CSS_일기삭제내용 {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--등록완료모달글자색);
+  text-align: center;
+}
+
+/* 모달 버튼*/
+.CSS_모달버튼부분 {
+  gap: 1.6rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.CSS_모달_버튼 {
+  width: 10.4rem;
+  border-radius: 0.8rem;
+  height: 4.8rem;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-size: 1.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.CSS_모달_닫기버튼 {
+  background-color: var(--닫기버튼배경색);
+  border: 1px solid var(--닫기버튼보더색);
+  color: var(--기본글자색);
+}
+
+.CSS_모달_등록하기버튼 {
+  border: none;
+  background-color: var(--등록하기버튼배경색);
+  color: var(--등록하기버튼글자색);
+}
+
+.CSS_모달_등록하기버튼:disabled {
+  background-color: #c7c7c7;
+}
+
+.CSS_모달_등록완료버튼 {
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--등록완료버튼배경색);
+  height: 4.8rem;
+  padding: 0.8rem 1rem;
+  font-size: 1.8rem;
+  color: var(--등록완료버튼글자색);
+}
+
+.CSS_등록취소버튼영역 {
+  gap: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.CSS_모달_등록취소버튼 {
+  border-radius: 8px;
+  background-color: var(--등록완료버튼배경색);
+  height: 4.8rem;
+  padding: 0.8rem 1rem;
+  font-size: 1.8rem;
+  color: var(--등록완료버튼글자색);
+}
