@@ -115,10 +115,7 @@ const onDeleteButtonClick = (removeId) => {
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
   renderLocalStorageData();
 };
-//
-//
-//
-//
+
 const onOptionChecked = (e) => {
   e.preventDefault();
   type = e.target.name;
@@ -182,11 +179,13 @@ const onOptionChecked = (e) => {
   //     '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
   // }
 };
-//
-//
-//
-//
-//
+
+function onThemeToggle(event) {
+  event.target.checked
+    ? document.documentElement.setAttribute('theme', 'dark')
+    : document.documentElement.setAttribute('theme', 'light');
+}
+
 function dateFormatter() {
   const today = new Date();
   const year = today.getFullYear();
@@ -369,6 +368,7 @@ const onNavigationClick = (type) => {
 async function dogImageApi() {
   const photo_main = document.getElementById('photoList');
   photo_main.innerHTML = '';
+
   for (let i = 0; i < 10; i++) {
     photo_main.innerHTML += `
     <li class="dog_photo_box">
@@ -377,18 +377,69 @@ async function dogImageApi() {
     </li>
     `;
   }
+
   document.querySelectorAll('.skeleton_stick').forEach((el) => {
     el.innerHTML = el.style.animation = 'skeleton_ui 0.5s linear infinite';
   });
+
+  const dogImageSkeletons = document.querySelectorAll('.dog_photo_box img');
+  const skeletonStick = document.querySelectorAll('.skeleton_stick');
   fetch('https://dog.ceo/api/breeds/image/random/10').then((res) => {
     res.json().then((data) => {
       const dogImageList = data.message;
-      const dogImageSkeletons = document.querySelectorAll('.dog_photo_box img');
-      const skeletonStick = document.querySelectorAll('.skeleton_stick');
+
       for (let i = 0; i < dogImageList.length; i++) {
         dogImageSkeletons[i].src = dogImageList[i];
-        skeletonStick[i].style.animation = 'fade';
+        skeletonStick[i].style.display = 'none';
       }
     });
   });
 }
+
+let searchTimer;
+const searchFnc = (event) => {
+  clearTimeout(searchTimer);
+
+  searchTimer = setTimeout(() => {
+    const searchValue = event.target.value;
+
+    const searchDiary = diaryListArray.filter((diary) =>
+      diary.title.includes(searchValue),
+    );
+    console.log(searchDiary);
+    diaryListEl.innerHTML = '';
+
+    searchDiary.forEach((diaryData) => {
+      const addList = document.createElement('li');
+      isList = true;
+      console.log(diaryData.title);
+      diaryListEl.append(addList);
+
+      addList.innerHTML = diaryCard(diaryData);
+    });
+  }, 500);
+};
+
+let infinityTimer = null;
+window.addEventListener('scroll', () => {
+  const scrollPercent =
+    document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight -
+      document.documentElement.clientHeight);
+  if (scrollPercent < 0.9) return;
+  if (infinityTimer !== null) return;
+  // });
+  console.log('불러옵니다');
+  dogImageApi();
+
+  infinityTimer = setTimeout(() => {
+    clearTimeout(infinityTimer);
+    infinityTimer = null;
+
+    const scrollPercent =
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
+    if (scrollPercent === 1) dogImageApi();
+  }, 5000);
+});

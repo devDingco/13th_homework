@@ -30,10 +30,9 @@ header h1 {
 
 article .banner {
   height: 240px;
-  min-width: 320px;
   max-width: 1168px;
+  width: 100%;
   height: 240px;
-  min-width: 320px;
   border-radius: 24px;
   overflow: hidden;
   margin: 1.5rem auto;
@@ -99,6 +98,7 @@ main .main-content ul#photoList {
   flex-direction: column;
   align-items: center;
   row-gap: 2.5rem;
+  padding-bottom: 3rem;
 }
 main .main-content ul#diaryList {
   width: 100%;
@@ -274,8 +274,8 @@ footer span {
   display: flex;
   flex-direction: column;
   width: 120px;
-  background-color: #e4e4e4;
   border-radius: 8px;
+  background-color: white;
   border: 1px solid #c7c7c7;
 }
 
@@ -283,19 +283,19 @@ footer span {
   display: none;
 }
 
-.optionList > .option {
-  padding: 4px 12px;
-}
-
 .optionList > .option > button {
+  width: 100%;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  padding: 4px 12px;
 }
 .optionList > .option > button > img {
   display: none;
 }
-
+.optionList > .option > .selected {
+  background: #3ab50f0d;
+}
 .optionList > .option > .selected > img {
   display: block;
 }
@@ -399,7 +399,7 @@ footer span {
   transform: translate(-50%, -50%);
 
   border-radius: 16px;
-  background-color: #fff;
+  background-color: var(--var-bg-color);
 }
 
 .add_buttons_wrap {
@@ -425,6 +425,7 @@ footer span {
   font-weight: 700;
   width: 100%;
   align-self: flex-start;
+  color: var(--var-text-color);
 }
 #modal_main_add form {
   width: 100%;
@@ -436,6 +437,7 @@ footer span {
   font-weight: 600;
   line-height: 24px;
   margin-bottom: 16px;
+  color: var(--var-text-color);
 }
 
 #modal_main_add form .feeling-radio-wrap {
@@ -465,7 +467,9 @@ footer span {
   height: 24px;
   background: url(../public/icons/radio_outline_light_m.svg) no-repeat center;
 }
-
+#modal_main_add form label {
+  color: var(--var-label-color);
+}
 #modal_main_add form .label-sm {
   font-size: 14px;
   font-style: normal;
@@ -491,9 +495,18 @@ textarea {
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
 }
 
+#modal_main_add form textarea,
+#modal_main_add form input {
+  background-color: var(--var-input-bg);
+  color: var(--var-input-text);
+  border: 1px solid var(--var-input-border);
+}
+#modal_main_add form textarea::placeholder,
+#modal_main_add form input::placeholder {
+  color: var(--var-input-placeholder);
+}
 #modal_main_add form textarea {
   resize: none;
   height: 128px;
@@ -517,17 +530,21 @@ textarea {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid #000;
+  background: var(--var-close-button-bg);
+  color: var(--var-close-button-text);
+  border: 1px solid var(--var-close-button-border);
 }
 
 #modal_main_add form button#submitBtn.none {
-  background: #c7c7c7;
-  color: #f2f2f2;
+  background: var(--var-disable-button-bg);
+  color: var(--var-disable-button-text);
+  border: 1px solid var(--var-disable-button-border);
 }
 
 #modal_main_add form button#submitBtn.active {
-  background: #333;
-  color: #f2f2f2;
+  background: var(--var-active-button-bg);
+  color: var(--var-active-button-text);
+  border: 1px solid var(--var-active-button-border);
 }
 
 #modal_depth2 {
@@ -590,9 +607,9 @@ textarea {
   gap: 1rem;
 }
 .buttons_box .first_button {
-  background-color: white !important;
-  border: 1px solid black !important;
-  color: black !important;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 #photoList {
@@ -606,12 +623,13 @@ textarea {
   aspect-ratio: 1/1;
   border-radius: 1.5rem;
   overflow: hidden;
-  background-color: #ccc;
 }
+
 #photoList .dog_photo_box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background-color: #ccc;
 }
 #photoList .skeleton_stick {
   position: absolute;
@@ -620,6 +638,95 @@ textarea {
   background-color: #fff;
   filter: blur(100px);
   animation: skeleton_ui 0.5s linear infinite;
+}
+
+.toggle_style {
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightgray;
+  cursor: pointer;
+}
+.toggle_style::after {
+  display: block;
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+  transition: all 0.5s;
+}
+.toggle_style:checked {
+  background-color: greenyellow;
+}
+.toggle_style:checked:after {
+  display: block;
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+  margin-left: 18px;
+}
+
+.modal_head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.theme_box {
+  display: flex;
+  gap: 0.5rem;
+}
+.theme_box label {
+  width: max-content;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+#added_modal,
+#cancel_prompt_modal {
+  background-color: var(--var-bg-color);
+  color: var(--var-text-color);
+}
+#added_modal button,
+#cancel_prompt_modal button {
+  width: 100%;
+  background-color: var(--var-active-button-bg);
+  color: var(--var-active-button-text);
+  border: 1px solid var(--var-active-button-border);
+}
+
+#cancel_prompt_modal button.first_button {
+  background-color: var(--var-close-button-bg);
+  color: var(--var-close-button-text);
+  border: 1px solid var(--var-close-button-border);
+}
+
+.search_wrapper {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border: 1px solid #c7c7c7;
+  padding: 12px 16px;
+  min-width: 320px;
+  max-width: 360px;
+  border-radius: 100px;
+  gap: 0.5rem;
+}
+.search_wrapper input {
+  width: 100%;
+  border: none;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+.search_wrapper input:focus {
+  outline: none;
 }
 
 @keyframes skeleton_ui {

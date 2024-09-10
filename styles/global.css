@@ -1,0 +1,42 @@
+:root {
+  --var-text-color: black;
+  --var-bg-color: white;
+  --var-label-color: #333;
+  --var-input-bg: white;
+  --var-input-text: gray;
+  --var-input-border: #d4d3d3;
+  --var-input-placeholder: #ababab;
+  /* --var-border: black; */
+  --var-close-button-bg: #333;
+  --var-close-button-text: #fff;
+  --var-close-button-border: #5f5f5f;
+
+  --var-active-button-bg: white;
+  --var-active-button-text: #333;
+  --var-active-button-border: #333;
+
+  --var-disable-button-bg: #c7c7c7;
+  --var-disable-button-text: #f2f2f2;
+  --var-disable-button-border: #c7c7c7;
+}
+[theme='dark'] {
+  --var-text-color: #fff;
+  --var-bg-color: #1c1c1c;
+  --var-label-color: #c7c7c7;
+  --var-input-bg: #000;
+  --var-input-text: #f2f2f2;
+  --var-input-border: #1c1c1c;
+  --var-input-placeholder: #777;
+  /* --var-border: black; */
+  --var-close-button-bg: #1c1c1c;
+  --var-close-button-text: #fff;
+  --var-close-button-border: #5f5f5f;
+
+  --var-active-button-bg: #fff;
+  --var-active-button-text: #1c1c1c;
+  --var-active-button-border: #fff;
+
+  --var-disable-button-bg: #333;
+  --var-disable-button-text: #777;
+  --var-disable-button-border: #333;
+}
