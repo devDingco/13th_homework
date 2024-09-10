@@ -52,10 +52,7 @@
     grid-template-columns: 1fr 1fr;
     place-items: start start;
   }
-
-  .CSS_필터_영역_배경 {
-    /* order: 2; */
-  }
+  
   .CSS_메인상자 {
     flex-direction: column;
   }

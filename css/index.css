@@ -28,16 +28,14 @@ a {
 
 .CSS_모달그룹 {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }
 
 .CSS_삭제재확인모달그룹 {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
 }
 
 .CSS_모달배경 {
@@ -47,10 +45,12 @@ a {
   height: 100vh;
   background-color: lightgray;
   opacity: 0.5;
+  position: absolute;
 }
 
 .CSS_일기등록완료모달 {
   position: fixed;
+  z-index: 10;
   top: calc(50% - 200px / 2);  /* height / 2 */
   left: calc(50% - 420px / 2);  /* width / 2 */
   display: flex;
@@ -215,11 +215,9 @@ letter-spacing: -0.2px;
 /* 필터 */
 .CSS_필터_영역_배경 {
   display: flex;
+  gap: 20px;
   width: 100%;
   margin: 0;
-  /* position: sticky;
-  top: 0;
-  z-index: 1; */
 }
 
 .CSS_필터 {
@@ -236,6 +234,27 @@ letter-spacing: -0.2px;
 .CSS_색상반전 {
   filter: invert(1); /* 색상 반전 */
 }
+
+/* 서치바 담당하는 부분 */
+.CSS_서치바 {
+  display: flex;
+  min-width: 320px;
+  max-width: 360px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+
+  background-image: url('../assets/images/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.png'); /* 아이콘 이미지 경로 */
+  background-repeat: no-repeat;
+  background-position: 10px center; /* 이미지 위치 (텍스트 왼쪽) */
+  background-size: 20px 20px; /* 이미지 크기 */
+  padding-left: 40px; /* 텍스트와 아이콘 간격 */
+}
+
+
+
 /* 모달 버튼 부분 */
 .CSS_필터랑모달묶은그룹 {
   display: flex;
@@ -369,6 +388,8 @@ letter-spacing: -0.2px;
 }
 
 .CSS_삭제버튼 {
+  position: relative;
+  z-index: 1;
   top: 2.5rem; /* 40px */
   width: 1.875rem; /* 30px */
   height: 1.875rem; /* 30px */
@@ -379,6 +400,7 @@ letter-spacing: -0.2px;
 /* 일기등록 상자 */
 .CSS_등록상자 {
   position: fixed;
+  z-index: 10;
   top: calc(50% - 500px / 2);  /* height / 2 */
   left: calc(50% - 360px / 2);  /* width / 2 */
   max-width: 360px;
