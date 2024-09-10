@@ -16,6 +16,7 @@ body {
 
 .CSS_수정페이지메인 {
     width: 1168px;
+    padding-bottom: 16px;
 }
 
 .CSS_배너제목 {
@@ -85,13 +86,65 @@ body {
 .CSS_수정하기페이지_버튼상자 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    gap: 16px;
 }
 
-.CSS_수정하기 {
-    width: 51px;
-    height: 40px;
-    border-radius: 8px;
-    padding: 8px 10px;
+.CSS_취소하기버튼 {
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px 8px 10px;
     gap: 10px;
+    border-radius: 8px 0px 0px 0px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    border: 1px solid var(--Gray-B, #000000);
+    border-radius: 8px;
+}
+
+.CSS_수정하기버튼 {
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px 8px 10px;
+    gap: 10px;
+    border-radius: 8px 0px 0px 0px;
+    opacity: 0px;
+    background: var(--Gray-B, #000000);
+    color: #fff;
+    border-radius: 8px;
+}
+
+.CSS_회고상자 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.CSS_회고인풋상자 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.CSS_회고인풋 {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+    background: var(--Gray-W, #fff);
+    padding: 12px 16px;
+}
+
+.CSS_회고입력버튼 {
+    width: 51px;
+    height: 48px;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    font-family: 'Pretendard Variable';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
 }

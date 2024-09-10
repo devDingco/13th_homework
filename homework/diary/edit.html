@@ -43,11 +43,36 @@
             </div>
 
             <div class="CSS_수정하기페이지_버튼상자">
-                <button class="CSS_수정하기" onclick="JS_수정기능()">
-                    수정
+                <button
+                    class="CSS_취소하기버튼"
+                    onclick="JS_수정취소하기기능()"
+                >
+                    취소
+                </button>
+                <button class="CSS_수정하기버튼" onclick="JS_수정기능()">
+                    수정 하기
                 </button>
             </div>
+
+            <div class="CSS_회고상자">
+                <div class="CSS_회고글자">회고</div>
+                <div class="CSS_회고인풋상자">
+                    <input
+                        id="HTML_회고"
+                        class="CSS_회고인풋"
+                        type="text"
+                        placeholder="회고를 남겨보세요"
+                    />
+                    <button class="CSS_회고입력버튼">입력</button>
+                </div>
+
+                <div
+                    id="id_회고목록보여주기"
+                    class="HTML_회고목록보여주기"
+                ></div>
+            </div>
         </div>
+
         <script defer src="./edit.js"></script>
     </body>
 </html>

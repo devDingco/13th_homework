@@ -15,7 +15,10 @@
             </div>
 
             <div class="CSS_감정선택상자">
-                <select id="CSS_감정선택상자아이디">
+                <select
+                    id="CSS_감정선택상자아이디"
+                    onchange="JS_필러링기능(event)"
+                >
                     <option value="전체선택" disabled selected>✓ 전체</option>
                     <option value="행복선택">행복해요</option>
                     <option value="슬픔선택">슬퍼요</option>
@@ -26,77 +29,82 @@
             </div>
 
             <div class="CSS_메인">
-                <div id="HTML_메인왼쪽일기보여주는곳" class="CSS_메인왼쪽_카드"></div>
-    
-                    <div class="CSS_메인오른쪽">
-                        <img src="./image/writing.png" alt="writing" />
-                        <div class="CSS_메인오른쪽_중간">
-                            <div class="CSS_오늘기분">오늘기분은 어땠나요</div>
-    
-                            <div class="CSS_라디오모음">
-                                <input
-                                    id="id_행복"
-                                    type="radio"
-                                    value="행복"
-                                    name="감정"
-                                />
-                                <label for="행복">행복해요</label>
-    
-                                <input
-                                    id="id_슬픔"
-                                    type="radio"
-                                    value="슬픔"
-                                    name="감정"
-                                />
-                                <label for="슬픔">슬퍼요</label>
-    
-                                <input
-                                    id="id_놀람"
-                                    type="radio"
-                                    value="놀람"
-                                    name="감정"
-                                />
-                                <label for="놀람">놀랐어요</label>
-    
-                                <input
-                                    id="id_화남"
-                                    type="radio"
-                                    value="화남"
-                                    name="감정"
-                                />
-                                <label for="화남">화나요</label>
-    
-                                <input
-                                    id="id_기타"
-                                    type="radio"
-                                    value="기타"
-                                    name="감정"
-                                />
-                                <label for="기타">기타</label>
-                            </div>
-    
-                            <div class="CSS_제목">제목</div>
+                <div
+                    id="HTML_메인왼쪽일기보여주는곳"
+                    class="CSS_메인왼쪽_카드"
+                ></div>
+
+                <div class="CSS_메인오른쪽">
+                    <img src="./image/writing.png" alt="writing" />
+                    <div class="CSS_메인오른쪽_중간">
+                        <div class="CSS_오늘기분">오늘기분은 어땠나요</div>
+
+                        <div class="CSS_라디오모음">
                             <input
-                                id="id_제목"
-                                class="CSS_제목인풋"
-                                type="text"
-                                placeholder="제목을 입력하세요"
+                                id="id_행복"
+                                type="radio"
+                                value="행복"
+                                name="감정"
                             />
-                            <div class="CSS_내용">내용</div>
-                            <textarea
-                                id="id_내용"
-                                class="CSS_내용인풋"
-                                placeholder="내용을 입력하세요"
-                            ></textarea>
+                            <label for="행복">행복해요</label>
+
+                            <input
+                                id="id_슬픔"
+                                type="radio"
+                                value="슬픔"
+                                name="감정"
+                            />
+                            <label for="슬픔">슬퍼요</label>
+
+                            <input
+                                id="id_놀람"
+                                type="radio"
+                                value="놀람"
+                                name="감정"
+                            />
+                            <label for="놀람">놀랐어요</label>
+
+                            <input
+                                id="id_화남"
+                                type="radio"
+                                value="화남"
+                                name="감정"
+                            />
+                            <label for="화남">화나요</label>
+
+                            <input
+                                id="id_기타"
+                                type="radio"
+                                value="기타"
+                                name="감정"
+                            />
+                            <label for="기타">기타</label>
                         </div>
-    
-                        <button class="CSS_등록하기" onclick="JS_일기카드보여주기();">등록하기</button>
+
+                        <div class="CSS_제목">제목</div>
+                        <input
+                            id="id_제목"
+                            class="CSS_제목인풋"
+                            type="text"
+                            placeholder="제목을 입력하세요"
+                        />
+                        <div class="CSS_내용">내용</div>
+                        <textarea
+                            id="id_내용"
+                            class="CSS_내용인풋"
+                            placeholder="내용을 입력하세요"
+                        ></textarea>
+                    </div>
+
+                    <button class="CSS_등록하기" onclick="JS_글쓰기기능();">
+                        등록하기
+                    </button>
+                    <div class="CSS_플로팅버튼" onclick="플로팅버튼()">
+                        <img src="./image/arrow_up.png" />
                     </div>
                 </div>
-            
             </div>
         </div>
-
         <div class="CSS_푸터">
             <div class="CSS_푸터글상자">
                 <div class="CSS_footertitle">민지의 다이어리</div>

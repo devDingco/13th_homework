@@ -12,8 +12,8 @@
 
                 <div class="CSS_감정날짜상자">
                     <div class="CSS_감정상자">
-                        <div id="HTML_감정사진들어가는곳"></div>
-                        <div id="HTML_감정메시지들어가는곳"></div>
+                        <img id="HTML_감정사진들어가는곳" class="CSS_감정사진들어가는곳"></img>
+                        <div id="HTML_감정메시지들어가는곳" class="CSS_감정메시지들어가는곳"></div>
                     </div>
                     <div id="HTML_날짜들어가는곳"></div>
                 </div>
@@ -25,6 +25,24 @@
                 <button button class="CSS_수정버튼" onclick="JS_수정기능()">
                     수정
                 </button>
+            </div>
+
+            <div class="CSS_회고상자">
+                <div class="CSS_회고글자">회고</div>
+                <div class="CSS_회고인풋상자">
+                    <input
+                        id="HTML_회고"
+                        class="CSS_회고인풋"
+                        type="text"
+                        placeholder="회고를 남겨보세요"
+                    />
+                    <button class="CSS_회고입력버튼" onclick="JS_회고기능()">입력</button>
+                </div>
+
+                <div
+                    id="id_회고목록보여주기"
+                    class="HTML_회고목록보여주기"
+                ></div>
             </div>
         </div>
         <script src="./detail.js"></script>
