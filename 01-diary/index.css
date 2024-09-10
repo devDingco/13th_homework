@@ -449,11 +449,51 @@
 }
 
 .write_diary_title {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     font-weight: 700;
     font-size: 1.5rem;
 
     color: black;
+}
+
+.dark_mode_container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 400;
+    font-size: .75rem;
+    color: #1C1C1C;
+}
+
+.dark_mode_toggle {
+    appearance: none;
+
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 6.25rem;
+    background-color: #E4E4E4;
+}
+
+.dark_mode_toggle::after {
+    display: block;
+    content: "";
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: white;
+    border-radius: 50%;
+    margin: .125rem;
+
+    transition: margin-left 0.3s;
+}
+
+.dark_mode_toggle:checked {
+    background-color: #3AD84A;
+}
+
+.dark_mode_toggle:checked::after {
+    margin-left: 1.125rem;
 }
 
 .write_diary {
