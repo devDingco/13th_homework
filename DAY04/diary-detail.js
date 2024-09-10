@@ -58,6 +58,12 @@ function 보기모드로전환() {
       <span>내용</span>
       <div id="일기내용"></div>
     </div>
+    <div class="내용복사상자">
+      <div class="내용복사작은상자">
+        <img src="./images/icons/content_copy.svg"
+        <span>내용 복사</span>
+      </div>
+    </div>
     <div class="버튼상자">
       <button id="수정버튼">수정</button>
       <button id='삭제버튼'>삭제</button>
@@ -67,12 +73,79 @@ function 보기모드로전환() {
   일기표시();
 
   document.getElementById("수정버튼").addEventListener("click", 수정모드활성화);
-  document.getElementById("삭제버튼").addEventListener("click", 일기삭제하기);
+  document
+    .getElementById("삭제버튼")
+    .addEventListener("click", 삭제확인모달열기);
+
+  // 내용 복사 기능 추가
+  const 내용복사버튼 = document.querySelector(".내용복사작은상자");
+  if (내용복사버튼) {
+    내용복사버튼.addEventListener("click", 일기내용복사);
+  }
 
   const 댓글입력 = document.querySelector(".입력상자 input");
   const 댓글등록버튼 = document.querySelector(".입력상자 button");
   if (댓글입력) 댓글입력.disabled = false;
   if (댓글등록버튼) 댓글등록버튼.disabled = false;
+}
+
+function 삭제확인모달열기() {
+  document.getElementById("삭제확인모달그룹").style.display = "block";
+}
+
+function 삭제확인모달닫기() {
+  document.getElementById("삭제확인모달그룹").style.display = "none";
+}
+
+// 일기 내용 복사 함수
+function 일기내용복사() {
+  const 일기내용 = document.getElementById("일기내용");
+  if (일기내용) {
+    navigator.clipboard
+      .writeText(일기내용.textContent)
+      .then(() => {
+        토스트메시지표시();
+      })
+      .catch((err) => {
+        console.error("내용 복사 실패:", err);
+      });
+  }
+}
+
+// 토스트 메시지 표시 함수
+function 토스트메시지표시() {
+  const 토스트 = document.getElementById("토스트메시지");
+  토스트.style.display = "block";
+  토스트.style.opacity = "0";
+
+  // 토스트 위치 조정
+  const viewportHeight = window.innerHeight;
+  const toastHeight = 토스트.offsetHeight;
+  토스트.style.bottom = `${Math.max(20, viewportHeight * 0.1)}px`; // 최소 20px, 최대 뷰포트 높이의 10%
+
+  // 페이드 인 효과
+  let opacity = 0;
+  const fadeIn = setInterval(() => {
+    if (opacity < 1) {
+      opacity += 0.1;
+      토스트.style.opacity = opacity.toString();
+    } else {
+      clearInterval(fadeIn);
+
+      // 2초 후 페이드 아웃
+      setTimeout(() => {
+        const fadeOut = setInterval(() => {
+          if (opacity > 0) {
+            opacity -= 0.1;
+            토스트.style.opacity = opacity.toString();
+          } else {
+            clearInterval(fadeOut);
+            토스트.style.display = "none";
+          }
+        }, 50);
+      }, 2000);
+    }
+  }, 50);
 }
 
 function 일기표시() {
@@ -184,17 +257,13 @@ function 수정완료() {
 }
 
 function 일기삭제하기() {
-  if (confirm("정말로 이 일기를 삭제하시겠습니까?")) {
-    const 일기목록 = JSON.parse(localStorage.getItem("일기목록")) || [];
-    const 새일기목록 = 일기목록.filter(
-      (_, 인덱스) => 인덱스 !== 원본일기.인덱스
-    );
-    localStorage.setItem("일기목록", JSON.stringify(새일기목록));
-    localStorage.removeItem(`댓글_${원본일기.인덱스}`);
+  const 일기목록 = JSON.parse(localStorage.getItem("일기목록")) || [];
+  const 새일기목록 = 일기목록.filter((_, 인덱스) => 인덱스 !== 원본일기.인덱스);
+  localStorage.setItem("일기목록", JSON.stringify(새일기목록));
+  localStorage.removeItem(`댓글_${원본일기.인덱스}`);
 
-    alert("일기와 관련 회고가 삭제되었습니다.");
-    window.location.href = "index.html";
-  }
+  console.log("일기와 관련 회고가 삭제되었습니다.");
+  window.location.href = "index.html";
 }
 
 // 댓글 관련 함수
@@ -303,4 +372,27 @@ function 플로팅버튼초기화() {
 }
 
 // 페이지 로드 시 초기화 함수를 실행
-window.addEventListener("load", 초기화);
+window.addEventListener("load", () => {
+  초기화();
+
+  // 내용 복사 기능 초기화
+  const 내용복사버튼 = document.querySelector(".내용복사작은상자");
+  if (내용복사버튼) {
+    내용복사버튼.addEventListener("click", 일기내용복사);
+  }
+
+  // 삭제 확인 모달 버튼 이벤트 리스너 추가
+  const 삭제취소버튼 = document.querySelector(".삭제취소버튼");
+  const 삭제확인버튼 = document.querySelector(".삭제확인버튼");
+
+  if (삭제취소버튼) {
+    삭제취소버튼.addEventListener("click", 삭제확인모달닫기);
+  }
+
+  if (삭제확인버튼) {
+    삭제확인버튼.addEventListener("click", () => {
+      삭제확인모달닫기();
+      일기삭제하기();
+    });
+  }
+});

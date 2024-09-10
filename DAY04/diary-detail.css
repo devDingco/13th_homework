@@ -10,6 +10,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  min-height: 100vh;
+  position: relative;
 }
 
 a {
@@ -22,7 +24,7 @@ nav {
   align-items: center;
 }
 
-nav div {
+.데스크탑네비 {
   display: flex;
   height: 3.75rem;
   width: 100%;
@@ -30,12 +32,34 @@ nav div {
   align-items: center;
 }
 
-nav div span {
+.데스크탑네비 span {
   color: #000;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01125rem;
+}
+.모바일네비 {
+  display: none;
+  width: 100%;
+  height: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.뒤로가기버튼 {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.페이지제목 {
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
 }
 
 main {
@@ -77,6 +101,14 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.일기쓰기모달배경 {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #일기제목 {
@@ -332,7 +364,119 @@ button {
   line-height: 1.5rem; /* 150% */
   letter-spacing: -0.1px;
 }
+.내용복사상자 {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.내용복사작은상자 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.내용복사상자 span {
+  color: #1c1c1c;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  word-wrap: break-word;
+}
+.토스트 {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 8px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  display: none;
+  z-index: 10000;
+  width: 100%;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.모달그룹 {
+  display: none;
+}
+.삭제확인모달 {
+  width: 100%;
+  max-width: 25rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2.5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+}
+.삭제확인모달_내용 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
 
+.삭제확인모달_제목 {
+  text-align: center;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+.삭제확인모달_설명 {
+  text-align: center;
+  color: #333333;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+.삭제확인모달_버튼그룹 {
+  display: flex;
+  justify-content: center;
+  gap: 1.3125rem;
+}
+.삭제취소버튼,
+.삭제확인버튼 {
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+.삭제취소버튼 {
+  background: white;
+  border: 0.0625rem black solid;
+  color: #1c1c1c;
+}
+.삭제확인버튼 {
+  background: black;
+  border: none;
+  color: #f2f2f2;
+}
+nav,
+main,
+.총상자,
+#위로올리기 {
+  z-index: 1;
+}
+
+.내용복사작은상자 {
+  cursor: pointer;
+}
 .일기기분.행복해요 {
   color: #ea5757;
 }
@@ -353,6 +497,30 @@ button {
   body {
     gap: 2rem;
   }
+  nav {
+    padding: 14px 0;
+  }
+  .데스크탑네비 {
+    display: none;
+  }
+
+  .모바일네비 {
+    display: flex;
+  }
+  .버튼상자 button {
+    color: #1c1c1c;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  .입력상자 button {
+    color: var(--Gray-W, #fff);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
   .입력상자 input {
     width: 100%;
     height: 2.5rem;
@@ -371,5 +539,24 @@ button {
     font-weight: 400;
     line-height: 1rem; /* 133.333% */
     letter-spacing: -0.075rem;
+  }
+  .삭제확인모달 {
+    width: 90%;
+    padding: 1.25rem;
+  }
+
+  .삭제확인모달_제목 {
+    font-size: 1.25rem;
+  }
+
+  .삭제확인모달_설명 {
+    font-size: 1rem;
+  }
+
+  .삭제취소버튼,
+  .삭제확인버튼 {
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1rem;
   }
 }
