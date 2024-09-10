@@ -1,5 +1,25 @@
 @charset "UTF-8";
 :root {
+  --basic-font-color: #000;
+  --basic-bg-color: #fff;
+  --input-border-color: #c7c7c7;
+  --input-bg-color: #fff;
+  --input-font-color: #000;
+  --input-placeholder-color: #ababab;
+  --popup-bg-color: #fff;
+  --list-border-color: #fff;
+  --button-white-btn-bg: #fff;
+  --button-white-btn-color: #000;
+  --button-black-btn-bg: #000;
+  --button-black-btn-color: #fff;
+  --button-border-color: #000;
+  --button-disabled-color: #f2f2f2;
+  --radio-input-color: #000;
+  --input-active-color: #299c00;
+  --input-active-bg: url("../img/check_outline_light_xs.svg");
+  --down-fill-bg: url("../img/down_fill_light_m.svg");
+  --plus-icon: url("../img/plus_outline_light_m.svg");
+  --input-radio-color: #777;
   --font-color-1: #28b4e1;
   --font-color-2: #d59029;
   --font-color-3: #777777;
@@ -9,6 +29,7 @@
   --font-color-7: #919191;
   --font-color-8: #1c1c1c;
   --font-color-9: #299c00;
+  --bg-color-basic: #fff;
   --bg-color-1: #f2f2f2;
   --bg-color-2: #c7c7c7;
   --bg-color-3: rgba(58, 181, 15, 0.05);
@@ -26,6 +47,30 @@
   --font-family: "Pretendard", -apple-system, BlinkMacSystemFont,
     "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
   --max-width: 73rem;
+}
+
+[lightStatus=off] {
+  --basic-font-color: #fff;
+  --basic-bg-color: #000;
+  --input-border-color: #333;
+  --input-bg-color: #000;
+  --input-font-color: #c7c7c7;
+  --input-placeholder-color: #777;
+  --popup-bg-color: #1c1c1c;
+  --list-border-color: #5f5f5f;
+  --button-white-btn-bg: #1c1c1c;
+  --button-white-btn-color: #f5f5f5;
+  --button-black-btn-bg: #f2f2f2;
+  --button-black-btn-color: #000;
+  --radio-input-color: #fff;
+  --input-active-color: #fff;
+  --input-active-bg: url("../img/check_outline_dark_xs.svg");
+  --down-fill-bg: url("../img/down_fill_dark_m.svg");
+  --plus-icon: url("../img/plus_outline_dark_m.svg");
+  --input-radio-color: #c7c7c7;
+  --button-border-color: #5f5f5f;
+  --button-disabled-color: #777;
+  --bg-color-3: #1c1c1c;
 }
 
 @view-transition {
@@ -116,13 +161,14 @@ html {
 
 html,
 body {
-  color: #000;
   letter-spacing: -0.1px;
   padding-bottom: var(--footerHeight);
   scroll-behavior: smooth;
 }
 
 body {
+  color: var(--basic-font-color);
+  background-color: var(--basic-bg-color);
   font-family: var(--font-family);
   font-size: var(--font-size-1);
   overflow-x: hidden;
@@ -142,6 +188,7 @@ nav,
 header {
   height: 60px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
@@ -149,11 +196,45 @@ header h1 {
   font-weight: 700;
   font-size: var(--font-size-2);
 }
-header .toggleSwitch input {
+header label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toggleWrap .toggleSwitch {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightgray;
   position: relative;
+}
+.toggleWrap .toggleSwitch:checked {
+  background-color: #3ad84a;
+}
+.toggleWrap .toggleSwitch:checked::before {
+  left: calc(100% - 22px);
+}
+.toggleWrap .toggleSwitch::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  transition: left 0.3s;
 }
 
 .glitch-wrapper {
@@ -244,12 +325,13 @@ nav ul.navMenu li {
 }
 nav ul.navMenu li.active {
   font-weight: bold;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--basic-font-color);
 }
 
 footer {
   background-color: var(--bg-color-1);
   padding: 24px 0;
+  color: #000;
 }
 footer .footerInner {
   display: flex;
@@ -264,6 +346,10 @@ footer .footerInner {
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
+}
+.diaryWrite .diaryWriteHeader {
+  display: flex;
+  justify-content: space-between;
 }
 .diaryWrite .diaryWriteInner {
   display: flex;
@@ -281,8 +367,15 @@ footer .footerInner {
   border-radius: 8px;
   font-size: var(--font-size-2);
 }
+.diaryWrite .buttonWrap button:disabled {
+  background-color: var(--input-border-color);
+  color: var(--button-disabled-color);
+  border: 1px solid var(--input-border-color);
+}
 .diaryWrite .buttonWrap button.popupClose {
-  background-color: #fff;
+  background-color: var(--popup-bg-color);
+  border: 1px solid var(--button-border-color);
+  color: var(--basic-font-color);
 }
 .diaryWrite h3 {
   font-size: var(--font-size-4);
@@ -310,15 +403,15 @@ footer .footerInner {
   appearance: none;
   width: 18px;
   height: 18px;
-  box-shadow: 0 0 0 2px #777;
+  box-shadow: 0 0 0 2px var(--input-radio-color);
   border-radius: 50%;
   outline: none;
   cursor: pointer;
 }
 .diaryWrite .moodTypeRadio .radioWrap input:checked {
-  background-color: #111;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 2px #000;
+  background-color: var(--basic-font-color);
+  border: 3px solid var(--basic-bg-color);
+  box-shadow: 0 0 0 2px var(--basic-font-color);
 }
 .diaryWrite .moodTypeRadio span {
   display: block;
@@ -341,7 +434,7 @@ footer .footerInner {
 .diaryWrite .diaryContent input,
 .diaryWrite .diaryContent textarea {
   width: 100%;
-  border: 1px solid var(--border-color-1);
+  border: 1px solid var(--input-border-color);
   padding: 12px 16px;
   border-radius: 8px;
 }
@@ -358,6 +451,8 @@ footer .footerInner {
 }
 .diaryWrite .diaryContent input {
   height: 48px;
+  background-color: var(--input-bg-color);
+  color: var(--input-font-color);
 }
 .diaryWrite .diaryContent textarea {
   height: 200px;
@@ -372,7 +467,8 @@ footer .footerInner {
   font-weight: 600;
 }
 .diaryWrite .diaryWriteBtn.active {
-  background-color: #000;
+  background-color: var(--basic-font-color);
+  color: var(--basic-bg-color);
 }
 
 #suneditor_editArea.sun-editor .se-wrapper .se-placeholder {
@@ -383,6 +479,14 @@ footer .footerInner {
 
 #suneditor_editArea {
   width: 100% !important;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+[lightStatus=off] #suneditor_editArea {
+  filter: invert(1);
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .detailHeaderTop {
@@ -436,15 +540,17 @@ footer .footerInner {
   margin-top: 24px;
 }
 .popup.alert .popupInner .whiteBtn {
-  background-color: #fff;
+  background-color: var(--button-white-btn-bg);
+  color: var(--button-white-btn-color);
+  border: 1px solid var(--button-border-color);
 }
 .popup.alert .popupInner .blackBtn {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--button-black-btn-bg);
+  color: var(--button-black-btn-color);
   border: none;
 }
 .popup .popupInner {
-  background-color: #fff;
+  background-color: var(--popup-bg-color);
   border-radius: 1.5rem;
   padding: 1.5rem;
 }/*# sourceMappingURL=index.css.map */

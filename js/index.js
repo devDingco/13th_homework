@@ -80,6 +80,7 @@ const moodTypeSet = {
   기타: { imgSrc: "./img/mood_5.png", colorNum: 5, imgSrcS: "./img/기타(s).png" },
 };
 
+// !헤더 렌더링 함수
 const headerBox = () => {
   const headerElement = document.querySelector("header");
   if (!headerElement) return
@@ -87,16 +88,35 @@ const headerBox = () => {
   // <h1 class="glitch-wrapper"><a class="glitch" data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
   headerElement.innerHTML = `
       <h1><a data-text="${name}의 다이어리" href="./index.html"><span class="userName"></span>의 다이어리</h1></a>
-  `
-  //   <fieldset class="toggleSwitch">
-  //   <label>
-  //     <input role="switch" type="checkbox" />
-  //     <span>다크모드</span>
-  //   </label>
-  // </fieldset>
+      <label class="toggleWrap">다크모드<input class="toggleSwitch" type="checkbox" onclick="darkModeToggle(event)" /></label>
+      `
 }
 headerBox();
 
+
+// !다크모드 토글 처리 함수
+const darkModeToggle = (event) => {
+  const targetCheckValue = event.target.checked ? true : false;
+  const darkModeSwitch = document.getElementsByClassName("toggleSwitch");
+  Array.from(darkModeSwitch).map((el) => el.checked = targetCheckValue);
+
+  const lightStatus = localStorage.getItem("lightStatus");
+  if (!lightStatus) {
+    localStorage.setItem("lightStatus", "off");
+  } else {
+    localStorage.setItem("lightStatus", lightStatus === "off" ? "on" : "off");
+  }
+  document.documentElement.setAttribute("lightStatus", localStorage.getItem("lightStatus"));
+}
+
+if (localStorage.getItem("lightStatus") === "off") {
+  const darkModeSwitch = document.getElementsByClassName("toggleSwitch")
+  Array.from(darkModeSwitch).map((el) => el.checked = true);
+  document.documentElement.setAttribute("lightStatus", "off");
+}
+
+
+// !헤더 배너 렌더링 함수
 const headerBanner = () => {
   const headerBanner = document.querySelector(".headerBanner");
   if (!headerBanner) return
@@ -117,9 +137,9 @@ const navMenu = () => {
   const navMenu = document.createElement("ul");
   navMenu.classList.add("navMenu");
   const nevList = { "일기보관함": "index.html", "사진보관함": "gallery.html" }
-  Object.keys(nevList).map((key) => {
+  Object.keys(nevList).map((key, index) => {
     const li = document.createElement("li");
-    location.href.includes(nevList[key]) ? li.classList.add("active") : li.classList.remove("active");
+    if (location.pathname.includes(nevList[key])) li.classList.add("active")
     li.innerHTML = `<a href="${nevList[key]}">${key}</a>`;
     navMenu.appendChild(li);
   })
@@ -382,8 +402,9 @@ const selectRender = (selector, option) => {
   selectUl.classList.add("filterList");
   selectBox.appendChild(selectUl);
 
-  const selectOption = Object.keys(option).map((key) => {
-    return `<li data-value="${key}" onclick="optionSelect(event, 'galleryFilter')">${option[key]}</li>`
+  const selectOption = Object.keys(option).map((key, index) => {
+    const classSet = index === 0 ? 'class="active"' : '';
+    return `<li ${classSet} data-value="${key}" onclick="optionSelect(event, 'galleryFilter')">${option[key]}</li>`
   }).join("");
 
   selectUl.innerHTML = selectOption;

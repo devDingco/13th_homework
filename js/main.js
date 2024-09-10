@@ -63,10 +63,21 @@ const writeCancelPop = () => popupRender("writeCancelPop",
 
 // !일기 등록하기 클릭시 일기 쓰기 팝업창 렌더링 함수
 const diaryWritePop = () => {
+  const darkModeCheck = localStorage.getItem("lightStatus")
+  let darkModeStatus = false;
+  if (darkModeCheck) {
+    darkModeStatus = darkModeCheck === "off" ? true : false;
+  }
+
   // 팝업 창 렌더링 처리
   popupRender("diaryWritePop",
     `<div class="diaryWrite">
-    <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+          <div class="diaryWriteHeader">
+            <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+            <label class="toggleWrap">
+            다크모드<input class="toggleSwitch" type="checkbox" onclick="darkModeToggle(event)" checked="${darkModeStatus}" />
+            </label>
+          </div>
           <div class="diaryWriteInner">
           ${diaryMoodTypeRender()}
           <div class="diaryContent">
@@ -86,7 +97,7 @@ const diaryWritePop = () => {
           </div>
           </div>
           <div class="buttonWrap">
-            <button onclick="writeCancelPop()">닫기</button>
+            <button class="popupClose" onclick="writeCancelPop()">닫기</button>
             <button class="diaryWriteBtn" onclick="diarySave()" disabled>
               등록하기
             </button>
@@ -166,32 +177,46 @@ const moodFilter = (optionValue) => {
 }
 
 
-// !검색 필터 옵션 선택에 따른 처리 함수
-const searchFilter = (event) => {
+// !검색 필터에 따른 노출 처리 함수
+const searchListSet = (event) => {
+
   const searchType = event.target.parentNode.querySelector(".searchFilter li.active").dataset.value; // 검색 옵션 값
   const searchValue = event.target.value; // 검색어 값
 
-  console.log(searchType, searchValue);
+  // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
+  const diaryFilterList = diaryArr.filter((diary) => {
+    const diaryTitle = diary.title;
+    const diaryContent = diary.content.replace(/<[^>]*>?/g, ''); // html 태그 제거한 텍스트 내용만 가져오기
+    // console.log(diaryTitle, diaryContent);
+
+    if (searchType === "제목") {
+      return diaryTitle.includes(searchValue);
+    } else if (searchType === "내용") {
+      return diaryContent.includes(searchValue);
+    } else
+      if (searchType === "제목+내용") {
+        return diaryTitle.includes(searchValue) || diaryContent.includes(searchValue);
+      }
+  })
+
+  // 필터링된 일기 리스트 노출
+  diaryListSet(diaryFilterList);
+}
+
+
+// !검색 필터 옵션 선택에 따른 1.5초후 검색 처리 함수
+let searchTimer;
+const searchFilterTimer = (event) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    searchListSet(event);
+  }, 1500)
+}
+
+// !검색 필터 옵션 선택에 따른 엔터키 검색 처리 함수
+const searchFilterEnter = (event) => {
   if (event.key === "Enter") {
-    // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
-    const diaryFilterList = diaryArr.filter((diary) => {
-      const diaryTitle = diary.title;
-      const diaryContent = diary.content.replace(/<[^>]*>?/g, ''); // html 태그 제거한 텍스트 내용만 가져오기
-      console.log(diaryTitle, diaryContent);
-
-      if (searchType === "제목") {
-        return diaryTitle.includes(searchValue);
-      } else if (searchType === "내용") {
-        return diaryContent.includes(searchValue);
-      } else
-        if (searchType === "제목+내용") {
-          return diaryTitle.includes(searchValue) || diaryContent.includes(searchValue);
-        }
-    })
-
-    // 필터링된 일기 리스트 노출
-    diaryListSet(diaryFilterList);
-
+    searchListSet(event);
   }
 }
 
