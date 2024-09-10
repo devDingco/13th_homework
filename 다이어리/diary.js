@@ -164,7 +164,7 @@ const registerDiary = (event) => {
 };
 
 const renderInitialDiaryEntries = () => {
-  storedDiaryList.map((diary) => {
+  storedDiaryList.slice(0, 12).map((diary) => {
     const storedDiary = {
       id: diary.id,
       mood: diary.mood,
@@ -178,9 +178,32 @@ const renderInitialDiaryEntries = () => {
   });
 };
 
+const handlePageClick = (event) => {
+  [...document.getElementsByClassName("page_number")].map(e => e.setAttribute("page", "none"))
+  event.target.setAttribute("page", "clickedPage")
+  const pageNumber = event.target.innerText;
+  const begin = (pageNumber - 1) * 12
+  const end = pageNumber * 12
+  const article = document.getElementById("article");
+  article.innerHTML = "";
+  storedDiaryList.slice(begin, end).map(diary => createHtml(diary));
+}
+
+const generatePageNumbers = () => {
+  const pageNumberList = Math.ceil(storedDiaryList.length / 12);
+  const pageNumberButtonList = Array(pageNumberList)
+    .fill(1)
+    .map((n, idx) => {
+      return `<button onclick="handlePageClick(event)" class="page_number">${n + idx}</button>`;
+    }).join('');
+  document.getElementById("page_number_list").innerHTML = pageNumberButtonList;
+};
+
 const setDropdownLabel = (selectedMood) => {
   let dropdownName;
-  selectedMood.includes("형") ? dropdownName = "photo_dropdown" : dropdownName = "mood_dropdown"
+  selectedMood.includes("형")
+    ? (dropdownName = "photo_dropdown")
+    : (dropdownName = "mood_dropdown");
   const dropdownLabel = document.getElementById(dropdownName);
   dropdownLabel.style.cssText = `--boxText: "${selectedMood}"`;
 };
@@ -349,7 +372,7 @@ const showMoreDogsImage = () => {
       const dog = object.message;
       const box = document.getElementById("photo_gallery").innerHTML;
       document.getElementById("photo_gallery").innerHTML =
-        box + `<img src="${dog}" class="dogImage" />`
+        box + `<img src="${dog}" class="dogImage" />`;
     });
   });
 };
@@ -360,21 +383,21 @@ window.addEventListener("scroll", () => {
     document.documentElement.scrollTop /
     (document.documentElement.scrollHeight -
       document.documentElement.clientHeight);
-  if(scrollPercent < 0.9) return;
+  if (scrollPercent < 0.9) return;
   if (photoTimer !== null) return;
 
-  showMoreDogsImage()
+  showMoreDogsImage();
 
   photoTimer = setTimeout(() => {
     photoTimer = null;
 
     const scrollPercent =
-    document.documentElement.scrollTop /
-    (document.documentElement.scrollHeight -
-      document.documentElement.clientHeight);
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
 
-    if(scrollPercent === 1) {
-      showMoreDogsImage()
+    if (scrollPercent === 1) {
+      showMoreDogsImage();
     }
   }, 1000);
 });
@@ -410,12 +433,14 @@ const toggleDiaryPhotoView = (viewType) => {
 
 let timer;
 const onSearch = (event) => {
-  clearTimeout(timer)
+  clearTimeout(timer);
 
   timer = setTimeout(() => {
-    const searchQuery = event.target.value
-    const searchResults = storedDiaryList.filter(e => e.title.includes(searchQuery))
-    console.log(searchResults)
+    const searchQuery = event.target.value;
+    const searchResults = storedDiaryList.filter((e) =>
+      e.title.includes(searchQuery)
+    );
+    console.log(searchResults);
     document.getElementById("article").innerHTML = "";
     searchResults.map((diary) => {
       const storedDiary = {
@@ -430,15 +455,16 @@ const onSearch = (event) => {
       createHtml(storedDiary);
     });
   }, 1000);
-}
+};
 
 const darkModeToggle = (event) => {
   const mode = document.documentElement;
   event.target.checked
-    ? (mode.setAttribute("mode", "dark"))
-    : (mode.setAttribute("mode", "light"));
+    ? mode.setAttribute("mode", "dark")
+    : mode.setAttribute("mode", "light");
 };
 
 renderInitialDiaryEntries();
+generatePageNumbers();
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);

@@ -480,7 +480,9 @@
   --basicConfirmModalColor: #000;
   --basicConfirmModalButton: #000;
   --basicConfirmModalButtonColor: #fff;
-  --basicConfirmModalInputBorderColor: #d4d3d3
+  --basicConfirmModalInputBorderColor: #d4d3d3;
+  --basicPageNumberColor: #777;
+  --basicPageNumberBackgroundColor: #FFF;
 }
 [mode="dark"] {
   --basicModalBorderColor: #333;
@@ -493,6 +495,10 @@
   --basicConfirmModalButton: #FFF;
   --basicConfirmModalButtonColor: #000;
   --basicConfirmModalInputBorderColor: #333
+}
+[page="clickedPage"] {
+  --basicPageNumberColor: #000;
+  --basicPageNumberBackgroundColor: #F2F2F2;
 }
 .diary_entry_title {
   color: var(--basicColor);
@@ -673,6 +679,31 @@
   color: var(--Gray-Gray-50, #f2f2f2);
   background: var(--Gray-Gray-300, #c7c7c7);
   border: none;
+}
+.page_list_box {
+  display: flex;
+  padding-block: 40px;
+  width: 100%;
+  justify-content: center;
+  gap: 12px;
+}
+#page_number_list{
+  display: flex;
+  gap: 16px;
+}
+.page_number{
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  color: var(--basicPageNumberColor);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  background: var(--basicPageNumberBackgroundColor);
 }
 .footer_layout {
   width: 100%;
