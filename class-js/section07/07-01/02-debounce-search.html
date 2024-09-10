@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>디바운스검색 실습</title>
+    <script>
+        const 친구목록 = ["철수", "영희", "철희", "철민", "민희"]
+
+        let 타이머
+
+        const JS_검색기능 = (event) => {
+            clearTimeout(타이머)
+
+            타이머 = setTimeout(() => {
+                const 내가검색한단어 = event.target.value
+                console.log(내가검색한단어)
+
+                const 검색결과들 = 친구목록.filter(el => el.includes(내가검색한단어))
+                console.log(검색결과들)
+
+                document.getElementById("HTML_검색결과보여주는곳").innerHTML = 검색결과들
+            },1000)
+        }
+    </script>
+</head>
+<body>
+    <input type="text" placeholder="친구를 검색하세요." oninput="JS_검색기능(event)">
+    
+    <div id="HTML_검색결과보여주는곳"></div>
+</body>
+</html>

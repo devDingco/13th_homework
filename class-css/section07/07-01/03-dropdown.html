@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>드롭다운 실습</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        .CSS_드롭다운제목 {
+            appearance:none;
+            width:150px;
+            height:40px;
+            border:2px solid green;
+            border-radius:10px;
+            padding:10px;
+            margin-bottom:10px;
+
+            --철수의CSS변수:"선택하세요.";
+        }
+        .CSS_드롭다운제목::after{
+            content:var(--철수의CSS변수);
+        }
+        .CSS_드롭다운제목:checked{
+            background-color:yellow;
+        }
+        .CSS_드롭다운제목:checked + .CSS_드롭다운메뉴 {
+            display:block;
+        }
+
+        .CSS_드롭다운메뉴 {
+            display:none;
+            width:150px;
+            border:2px solid green;
+            border-radius:10px;
+            overflow:hidden; /* 노란색 모서리영역 넘치는거 없애기 */
+        }
+        .CSS_드롭다운메뉴 input{
+            display:none;
+        }
+        .CSS_드롭다운메뉴 label{
+            display:block;
+            height:40px;
+            padding:10px;
+            /* line-height:40px; */
+        }
+        .CSS_드롭다운메뉴 label:hover{
+            background-color:yellow;
+            /* border-radius:10px; */
+        }
+
+    </style>
+    <script>
+        const JS_드롭다운선택기능 = (event) => {
+            console.log(event.target.id)
+            document.getElementById("HTML_드롭다운제목").style.cssText = `--철수의CSS변수: "${event.target.id}"`
+            document.getElementById("HTML_드롭다운제목").click()
+        }
+    </script>
+</head>
+<body>
+    <input type="checkbox" class="CSS_드롭다운제목" id="HTML_드롭다운제목">
+    <ul class="CSS_드롭다운메뉴">
+        <li>
+            <input type="radio" name="HTML_선택아이템" id="사과클릭" onclick="JS_드롭다운선택기능(event)">
+            <label for="사과클릭">사과</label>
+        </li>
+        <li>
+            <input type="radio" name="HTML_선택아이템" id="바나나클릭" onclick="JS_드롭다운선택기능(event)">
+            <label for="바나나클릭">바나나</label>
+        </li>
+        <li>
+            <input type="radio" name="HTML_선택아이템" id="딸기클릭" onclick="JS_드롭다운선택기능(event)">
+            <label for="딸기클릭">딸기</label>
+        </li>
+    </ul>
+</body>
+</html>

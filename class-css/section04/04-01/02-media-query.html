@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>미디어쿼리 실습</title>
+    <style>
+        .CSS_전체그룹 {
+            display:flex;
+            flex-direction: row;
+        }
+
+        .CSS_상자그룹 {
+            background-color:skyblue;
+            padding:50px;
+        }
+        .CSS_상자 {
+            width:150px;
+            height:150px;
+        }
+        .CSS_인풋그룹 {
+            width:300px;
+            background-color:yellow;
+            flex-shrink: 0;
+        }
+
+        @media (max-width:767px) {
+            .CSS_전체그룹 {
+                flex-direction:column;
+            }
+            .CSS_상자그룹 {
+                background-color:red;
+                order:2;
+            }
+            .CSS_인풋그룹 {
+                width:100%;
+                order:1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="CSS_전체그룹">
+        <div class="CSS_상자그룹">
+            <img class="CSS_상자" src="../../../homework/img/Frame 25.png">
+            <img class="CSS_상자" src="../../../homework/img/Frame 25.png">
+            <img class="CSS_상자" src="../../../homework/img/Frame 25.png">
+            <img class="CSS_상자" src="../../../homework/img/Frame 25.png">
+        </div>
+        <div class="CSS_인풋그룹">
+            <h1>강아지옷 등록하기</h1>
+            옷이름: <input type="text">
+            <button>등록하기</button>
+        </div>
+    </div>
+</body>
+</html>
