@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기상세페이지</title>
+    <link rel="stylesheet" href="./css/detail.css" />
+    <link rel="stylesheet" href="./css/common.toast.css" />
+    <link rel="stylesheet" href="./css/common.modal.css" />
+
+    <script src="./javascript/detail.js"></script>
+    <script src="./javascript/common.toast.js"></script>
+    <script src="./javascript/common.modal.js"></script>
+  </head>
+  <body>
+    <div class="CSS_헤더">
+      <div class="CSS_데스크탑헤더">
+        <div class="CSS_타이틀">민지의 다이어리</div>
+      </div>
+      <div class="CSS_모바일헤더">
+        <img
+          class="CSS_뒤로가기버튼"
+          src="./assets/images/back.png"
+          alt="뒤로가기"
+          onclick="JS_뒤로가기기능()"
+        />
+        <div class="CSS_타이틀">일기 상세</div>
+      </div>
+    </div>
+
+    <!--일기 상세 보여주는 영역-->
+    <div class="CSS_일기상세보여주는곳">
+      <!--제목-->
+      <div class="CSS_일기제목">
+        <span id="HTML_일기상세제목보여주는곳"></span>
+
+        <!--기분-->
+        <div class="CSS_일기정보">
+          <div class="CSS_기분">
+            <img id="HTML_기분이미지보여주는곳" />
+            <div id="HTML_일기기분보여주는곳"></div>
+          </div>
+          <div class="CSS_날짜">
+            <div id="HTML_날짜보여주는곳"></div>
+            작성
+          </div>
+        </div>
+
+        <!--내용-->
+        <div class="CSS_일기내용">
+          <span class="CSS_서브타이틀">내용</span>
+          <span
+            id="HTML_일기상세내용보여주는곳"
+            class="CSS_일기상세내용보여주는곳"
+          ></span>
+        </div>
+
+        <!--내용 복사-->
+        <div class="CSS_내용복사버튼_영역">
+          <button class="CSS_내용복사버튼" onclick="JS_복사하기기능()">
+            <img
+              src="./assets/images/content_copy.png"
+              class="CSS_내용복사버튼_아이콘"
+            />
+            <div class="CSS_내용복사버튼_텍스트">내용 복사</div>
+          </button>
+        </div>
+
+        <!--버튼-->
+        <div class="CSS_수정버튼_영역">
+          <button class="CSS_버튼" onclick="JS_수정하러가기기능()">수정</button>
+          <button class="CSS_버튼" onclick="JS_일기삭제기능()">삭제</button>
+        </div>
+
+        <!--회고-->
+        <span class="CSS_구분선"></span>
+        <div class="CSS_회고제목">회고</div>
+        <div class="CSS_회고입력영역">
+          <input
+            placeholder="회고를 남겨보세요."
+            class="CSS_회고입력부분"
+            id="HTML_회고입력부분"
+          />
+          <button onclick="JS_회고추가기능()" class="CSS_회고입력버튼">
+            입력
+          </button>
+        </div>
+        <div id="HTML_회고목록영역"></div>
+      </div>
+    </div>
+
+    <!-- 복사토스트 -->
+    <div id="HTML_복사토스트메시지" class="CSS_복사토스트메시지">
+      복사되었습니다.
+    </div>
+
+    <!-- 일기 삭제 모달 -->
+    <div id="HTML_일기삭제모달그룹" class="CSS_공통모달그룹">
+      <div class="CSS_공통모달배경"></div>
+      <div class="CSS_등록삭제상자">
+        <b class="CSS_일기삭제제목">일기 삭제</b>
+        <p class="CSS_일기삭제내용">일기를 삭제하시겠어요?</p>
+        <div class="CSS_등록취소버튼영역">
+          <button
+            onclick="JS_모달닫기기능('HTML_일기삭제모달그룹');"
+            class="CSS_모달_버튼 CSS_모달_닫기버튼"
+          >
+            취소
+          </button>
+
+          <button
+            class="CSS_모달_버튼 CSS_모달_등록하기버튼"
+            onclick="JS_일기삭제확인기능()"
+          >
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
