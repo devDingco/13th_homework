@@ -82,6 +82,9 @@ body {
   gap: 16px;
   flex: 1 0 0;
   flex-wrap: wrap;
+
+  border-radius: 100px;
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
 }
 
 .선택_탭 {
@@ -161,12 +164,6 @@ body {
 .일기_사진:hover {
   filter: blur(0.313rem);
 }
-
-/* .감정_사진 {
-  height: 100%;
-  width: 100%;
-  border-radius: 1rem
-} */
 
 .삭제_버튼 {
   width: 24px;
@@ -314,7 +311,7 @@ body {
   border-radius: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--기본배경색);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -322,11 +319,98 @@ body {
   gap: 2.5rem;
   text-align: left;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--기본글자색);
+}
+
+/* 다크모드 변수 */
+:root {
+  --기본배경색: white;
+  --기본글자색: black;
+  --기본인풋박스색: white;
+  --기본테두리색: #D4D3D3;
+  --기본버튼색: white;
+  --기본버튼테두리색: #5F5F5F;
+
+  --반대버튼테두리색: black;
+  --반대버튼색: #1C1C1C;
+  --반대버튼글자색: white;
+
+  --반대글자색: black;
+  --등록완료글자색: #333
+}
+
+[모드="다크모드"] {
+  --기본배경색: #1C1C1C;
+  --기본글자색: white;
+  --기본인풋박스색: black;
+  --기본테두리색: #333;
+  --기본버튼색: #1C1C1C;
+  --기본버튼테두리색: #5F5F5F;
+
+  --반대버튼테두리색: #5F5F5F;
+  --반대버튼색: white;
+  --반대버튼글자색: black;
+
+  --반대글자색: white;
+
+  --등록완료글자색: #D4D3D3;
+}
+
+.타이틀_토글_박스 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.토글_박스 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.다크모드 {
+  display: flex;
+
+  color: var(--기본글자색);
+  font-size: 12px;
+  font-weight: 400;
+  /* 200% */
+}
+
+/* 토글 배경 */
+.토글 {
+  /* 고유한 모습을 없애주기 */
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightgray;
+}
+
+/* 흰색 알맹이 */
+.토글::after {
+  display: block;
+  /* content 쓰지 않을거면 비워주자 */
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+
+  /* 실제로 이동하는 알맹이 => 토글에 적용하면 안됨 */
+  transition: margin-left 0.3s;
+}
+
+.토글:checked {
+  background-color: lightseagreen;
+}
+
+/* 체크가 된 토글의 뒷부분 */
+.토글:checked::after {
+  margin-left: 18px;
 }
 
 .일기_제목 {
-  width: 100%;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -385,23 +469,18 @@ body {
   padding: 12px 16px;
   align-items: center;
   gap: 10px;
-  align-self: stretch;
+  width: 100%;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
-  color: var(--Gray-Gray-400, #ABABAB);
-  flex: 1 0 0;
-  font-family: "Pretendard Variable";
+  border: 1px solid var(--기본테두리색);
+  background-color: var(--기본인풋박스색);
+  color: var(--기본글자색);
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  /* 150% */
-  letter-spacing: -0.16px;
 }
 
 .제목_타이틀 {
-  color: var(--Gray-Gray-800, #333);
+  color: var(--기본글자색);
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -420,42 +499,33 @@ body {
 }
 
 .내용_타이틀 {
-  color: var(--Gray-Gray-800, #333);
+  color: var(--기본글자색);
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  /* 142.857% */
-  letter-spacing: -0.14px;
 }
 
 .내용_인풋 {
   display: flex;
   height: 128px;
   padding: 12px 16px;
-  align-items: flex-start;
   gap: 10px;
-  align-self: stretch;
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-  background: var(--Gray-W, #FFF);
-  color: var(--Gray-Gray-400, #ABABAB);
+  border: 1px solid var(--기본테두리색);
+  background-color: var(--기본인풋박스색);
+  color: var(--기본글자색);
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  /* 150% */
-  letter-spacing: -0.16px;
+  width: 100%;
 }
 
 .기분_텍스트 {
-  color: var(--Gray-Gray-800, #333);
-  font-family: "Pretendard Variable";
+  color: var(--기본글자색);
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  /* 111.111% */
 }
 
 .일기_내용_작성 {
@@ -481,10 +551,10 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
-
+  color: var(--기본글자색);
   border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: var(--Gray-W, #FFF);
+  border: 1px solid var(--기본버튼테두리색);
+  background-color: var(--기본버튼색);
   font-size: 18px;
   font-weight: 600;
 }
@@ -500,9 +570,9 @@ body {
   gap: 10px;
 
   border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: black;
-  color: white;
+  border: 1px solid var(--반대버튼테두리색);
+  background-color: var(--반대버튼색);
+  color: var(--반대버튼글자색);
   font-size: 18px;
   font-weight: 600;
 }
@@ -519,7 +589,7 @@ body {
   gap: 40px;
 
   border-radius: 24px;
-  background: #FFF;
+  background-color: var(--기본배경색);
   position: absolute;
   top: calc(50% - (200px/2));
   left: calc(50% - (480px/2));
@@ -530,6 +600,7 @@ body {
   flex-direction: column;
   gap: 16px;
   width: 100%;
+
 }
 
 .완료모달_제목 {
@@ -538,12 +609,12 @@ body {
   font-size: 24px;
   font-weight: 700;
   line-height: 24px;
+  color: var(--반대글자색);
 }
 
 .완료모달_내용 {
-  color: var(--Gray-Gray-800, #333);
+  color: var(--등록완료글자색);
   text-align: center;
-  font-family: "Pretendard Variable";
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -560,9 +631,9 @@ body {
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background: var(--Gray-B, #000);
+  background: var(--반대버튼색);
 
-  color: var(--Gray-W, #FFF);
+  color: var(--반대버튼글자색);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -588,8 +659,9 @@ body {
   gap: 10px;
 
   border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: var(--Gray-W, #FFF);
+  border: 1px solid var(--기본버튼테두리색);
+  background-color: var(--기본버튼색);
+  color: var(--기본글자색);
   font-size: 18px;
   font-weight: 600;
 }
@@ -605,9 +677,9 @@ body {
   gap: 10px;
 
   border-radius: 8px;
-  border: 1px solid var(--Gray-B, #000);
-  background: black;
-  color: white;
+  border: 1px solid var(--반대버튼테두리색);
+  background-color: var(--반대버튼색);
+  color: var(--반대버튼글자색);
   font-size: 18px;
   font-weight: 600;
 }

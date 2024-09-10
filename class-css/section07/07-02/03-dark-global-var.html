@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>다크모드 실습</title>
+  <style>
+    /* 불켜진방 */
+    :root {
+      --기본글자색: black;
+      --기본배경색: white;
+      --기본체크색: red;
+      --인풋배경색: lightgrey;
+      --인풋플레이스홀더색: gray;
+      --버튼글자색: black;
+      --버튼배경색: lightgray;
+    }
+
+    /* 불꺼진방 */
+    [집에불켜놨는지="꺼놨음"] {
+      --기본글자색: white;
+      --기본배경색: black;
+      --기본체크색: white;
+      --인풋배경색: gray;
+      --인풋플레이스홀더색: orange;
+      --버튼글자색: blue;
+      --버튼배경색: aqua;
+    }
+
+    /* [type="text"] {
+      border: 1px solid red; => 속성선택자(type="text"인 속성을 갖고있는 태그들에 적용)
+    } */
+
+    /* input[type="text"] {
+      border: 1px solid blue; => 속성선택자(type="text"인 속성을 갖고있는 input 태그들에 적용)
+    } */
+
+    body {
+      color: var(--기본글자색);
+      background-color: var(--기본배경색);
+      accent-color: var(--기본체크색);
+
+    }
+
+    input {
+      background-color: var(--인풋배경색);
+    }
+
+    input::placeholder {
+      color: var(--인풋플레이스홀더색)
+    }
+
+    button {
+      color: var(--버튼글자색);
+      background-color: var(--버튼배경색)
+    }
+  </style>
+  <script>
+    const JS_전구기능 = (event) => {
+      if (event.target.checked === true) {
+        // document.body.className = "CSS_불꺼진방"
+        document.documentElement.setAttribute("집에불켜놨는지", "꺼놨음")
+      } else {
+        // document.body.className = "CSS_불켜진방"
+        // document.documentElement.setAttribute("집에불켜놨는지", "켜놨음")
+        document.documentElement.removeAttribute("집에불켜놨는지")
+      }
+    }
+  </script>
+</head>
+
+<body class="CSS_불켜진방">
+  <input type="checkbox" onclick="JS_전구기능(event)" />불 끄고 잠자기
+
+  <br /><br />
+
+  <div class="CSS_회원가입카드">
+    이메일: <input type="text" placeholder="이메일을 입력하세요" /><br />
+    비밀번호: <input type="password" placeholder="비밀번호를 입력하세요" /><br />
+    <input type="radio" name="성별선택" />남자<br />
+    <input type="radio" name="성별선택" />여자<br />
+    <button>회원가입</button>
+  </div>
+
+</body>
+
+</html>

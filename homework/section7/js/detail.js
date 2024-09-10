@@ -123,6 +123,6 @@ const 내용복사기능 = () => {
 
   window.setTimeout(() => {
     document.getElementById("토스트_감싸기").style = "display: none"
-  }, 2000)
+  }, 1000)
 }
 
