@@ -26,7 +26,10 @@ a {
   width: 100%;
   max-width: 73rem;
 }
-
+.일기헤더글자_일보,
+.일기헤더글자_사보 {
+  cursor: pointer;
+}
 .일기헤더 {
   display: flex;
   justify-content: flex-start;
@@ -55,26 +58,206 @@ a {
 
 .일기헤더글자_밑줄 {
   border-bottom: 0.125rem solid #000;
+  color: #000;
 }
 
 .일기헤더글자_사보 {
   color: #ababab;
 }
+.일기헤더글자_사보:not(.일기헤더글자_밑줄) {
+  color: #ababab;
+}
+
+.사진보관함_컨텐츠 {
+  display: none;
+  width: 100%;
+  max-width: 73rem;
+}
+
+.사진_그리드 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+}
+
+.사진_아이템 {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: linear-gradient(45deg, #f3f3f3, #e0e0e0);
+}
+
+.사진_아이템 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* 사진 비율 필터 */
+.사진_그리드[data-필터="가로형"] .사진_아이템 {
+  aspect-ratio: 4 / 3;
+}
+
+.사진_그리드[data-필터="세로형"] .사진_아이템 {
+  aspect-ratio: 3 / 4;
+}
+
+/* 스켈레톤 로딩*/
+.스켈레톤 {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: 스켈레톤_로딩 1.5s infinite;
+}
+
+@keyframes 스켈레톤_로딩 {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
 
 .감정필터상자 {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0 1.25rem;
+}
+.필터검색상자 {
+  display: flex;
+  gap: 1rem;
+  width: 70%;
+}
+.필터_드롭다운 {
+  position: relative;
+  width: 8.75rem;
 }
 
+.필터_선택 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.625rem;
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #c7c7c7;
+  cursor: pointer;
+}
+
+.필터_선택 span {
+  color: #1c1c1c;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.드롭다운_화살표 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.필터_옵션들 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border: 1px solid #c7c7c7;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.필터_옵션 {
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.필터_옵션:hover {
+  background: rgba(58, 181, 15, 0.05);
+}
+
+.필터_옵션.선택됨 {
+  background: rgba(58, 181, 15, 0.05);
+  color: #299c00;
+  font-weight: 700;
+}
+.필터_옵션.선택됨::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  width: 24px; /* 이미지 크기에 맞게 조정 */
+  height: 24px; /* 이미지 크기에 맞게 조정 */
+  background-image: url("./images/icons/check_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 1.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.선택_표시 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.검색_상자 {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 360px;
+}
+
+.검색_아이콘 {
+  position: absolute;
+  left: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+#제목검색 {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #c7c7c7;
+  border-radius: 6.25rem;
+  font-size: 1rem;
+  color: #ababab;
+}
+.일기쓰기버튼 {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 0.5rem;
+  background: var(--Gray-B, #000);
+
+  color: var(--Gray-W, #fff);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.18px;
+
+  cursor: pointer;
+}
 .감정필터 {
+  width: 112px;
+  height: 30px;
   border-radius: 0.5rem;
   border: 0.0625rem solid #c7c7c7;
   background: #fff;
-  display: flex;
   min-width: 7.5rem;
   padding: 0.25rem;
-  flex-direction: column;
-  align-items: flex-start;
   color: #1c1c1c;
   font-size: 1rem;
   font-weight: 500;
@@ -91,19 +274,21 @@ a {
 
 .일기리스트 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   width: 100%;
-  max-width: 49rem;
+  max-width: 73rem;
   max-height: 72.9375rem;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  position: relative;
+  z-index: 1;
 }
 
 .등록한일기 {
-  height: 22.3125rem;
-  width: 23.75rem;
-  min-width: 23.75rem;
-  max-width: 23.75rem;
+  height: auto;
+  width: 100%;
+  min-width: auto;
+  max-width: auto;
   padding-bottom: 1rem;
   gap: 1rem;
   display: flex;
@@ -188,18 +373,27 @@ a {
 .일기쓰기상자 {
   display: flex;
   flex-direction: column;
+  gap: 2.5rem;
 }
 
 .일기쓰기 {
+  background-color: white;
+  width: 40rem;
+  height: 35rem;
+  position: fixed;
+  top: calc(50% - 35rem / 2);
+  left: calc(50% - 40rem / 2);
+
   display: flex;
   flex-direction: column;
-  width: 22.5rem;
-  min-width: 17rem;
-  height: 37.75rem;
   padding: 1.5rem;
   gap: 2.5rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   border: 0.0625rem solid #d4d3d3;
+  position: absolute;
+  top: calc(50%- (37.75 / 2) rem);
+  left: calc(50% - (22.5 / 2) rem);
+  z-index: 1001;
 }
 
 .일기쓰기타이틀 {
@@ -212,9 +406,8 @@ a {
 
 .기분에답해상자 {
   display: flex;
+  flex-direction: column;
   max-width: 37rem;
-  align-items: center;
-  align-content: center;
   gap: 1.25rem;
   align-self: stretch;
   flex-wrap: wrap;
@@ -301,7 +494,6 @@ a {
   line-height: 1.5rem;
   letter-spacing: -0.01rem;
 }
-
 .일기제목상자 input::placeholder,
 .일기내용인풋겉상자 textarea::placeholder {
   color: #ababab;
@@ -319,8 +511,8 @@ a {
 }
 
 .일기등록하기버튼 {
+  width: 6.5rem;
   height: 3rem;
-  width: 100%;
   border-radius: 0.5rem;
   background: #c7c7c7;
   color: #f2f2f2;
@@ -365,6 +557,256 @@ a {
   height: 100%;
   object-fit: contain;
 }
+.모달그룹 {
+  display: none;
+  position: fixed; /* absolute에서 fixed로 변경 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* z-index 추가 */
+}
+.일기쓰기모달배경 {
+  position: fixed; /* absolute에서 fixed로 변경 */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.버튼상자들 {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.닫기버튼 {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-B, #000);
+  background: var(--Gray-W, #fff);
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+}
+.등록완료모달 {
+  width: 400px; /* 데스크톱 기본 너비 */
+  padding: 24px;
+  background: white;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.등록완료모달_내용 {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.등록완료모달_제목 {
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.등록완료모달_설명 {
+  width: 100%;
+  text-align: center;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.등록완료모달_버튼그룹 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.확인버튼 {
+  width: 100%;
+  height: 48px;
+  padding: 8px 10px;
+  background: black;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+}
+.취소확인모달 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 24px;
+  background: white;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  z-index: 1001;
+}
+
+.취소확인모달_내용 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.취소확인모달_제목 {
+  text-align: center;
+  color: black;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.취소확인모달_설명 {
+  text-align: center;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.취소확인모달_버튼그룹 {
+  display: flex;
+  justify-content: center;
+  gap: 21px;
+}
+
+.계속작성버튼,
+.등록취소버튼 {
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.계속작성버튼 {
+  background: white;
+  border: 1px black solid;
+  color: #1c1c1c;
+}
+
+.등록취소버튼 {
+  background: black;
+  border: none;
+  color: #f2f2f2;
+}
+.삭제확인모달 {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  background: white;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.삭제확인모달_내용 {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.삭제확인모달_제목 {
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.삭제확인모달_설명 {
+  width: 100%;
+  text-align: center;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.삭제확인모달_버튼그룹 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 21px;
+}
+
+.삭제취소버튼,
+.삭제확인버튼 {
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.삭제취소버튼 {
+  background: white;
+  border: 1px black solid;
+  color: #1c1c1c;
+}
+
+.삭제확인버튼 {
+  background: black;
+  border: none;
+  color: #f2f2f2;
+}
+
+/* 추가: 스크롤바 스타일 (선택사항) */
+.일기쓰기::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+.일기쓰기::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 0.1875rem;
+}
+
+.일기쓰기::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
+}
 
 @media (max-width: 48.75rem) {
   main {
@@ -375,7 +817,77 @@ a {
     order: -1;
   }
   .일기쓰기 {
+    width: 90%;
+    height: 27rem;
+    max-width: 25rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5rem;
+    gap: 1rem;
+    overflow-y: auto;
+
+    /* 모바일에서 스크롤바 숨기기 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  .일기쓰기::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  .일기쓰기타이틀 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .기분에답해상자 {
+    gap: 1rem;
+  }
+
+  .기분인풋상자 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .기분인풋상자 label {
     width: 100%;
+  }
+
+  .일기작성상자 {
+    gap: 1rem;
+  }
+
+  .일기제목상자,
+  .일기내용상자 {
+    gap: 0.5rem;
+  }
+
+  .일기제목상자 input,
+  .일기내용인풋겉상자 {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .일기내용인풋겉상자 {
+    height: 6rem;
+  }
+
+  .버튼상자들 {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .닫기버튼,
+  .일기등록하기버튼 {
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .일기등록하기버튼 {
+    background: #c7c7c7;
+    color: #f2f2f2;
   }
 
   .감정필터상자 {
@@ -407,5 +919,61 @@ a {
 
   .감정표현사진 {
     height: 15rem;
+  }
+  .취소확인모달 {
+    width: 90%;
+    max-width: 400px;
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .취소확인모달_내용 {
+    gap: 8px;
+  }
+
+  .취소확인모달_제목 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .취소확인모달_설명 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .취소확인모달_버튼그룹 {
+    gap: 16px;
+  }
+
+  .계속작성버튼,
+  .등록취소버튼 {
+    height: 40px;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 8px 12px;
+  }
+  .등록완료모달 {
+    width: 90%; /* 모바일에서 화면 너비의 90% */
+    max-width: 400px; /* 최대 너비 제한 */
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .등록완료모달_내용 {
+    height: auto;
+    gap: 12px;
+  }
+
+  .등록완료모달_제목 {
+    font-size: 20px;
+  }
+
+  .등록완료모달_설명 {
+    font-size: 16px;
+  }
+
+  .확인버튼 {
+    height: 40px;
+    font-size: 16px;
   }
 }
