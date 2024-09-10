@@ -119,7 +119,7 @@ window.addEventListener('scroll', () => {
         document.querySelector(".inner__text").style = "background-color: #fff; color: #222; transition: 0.2s;"
         document.querySelector(".container__sticky").style = "display: none;"
     } else if ( footerHeight <= currentHeight ) {
-        document.querySelector(".container__floating").style = "position: absolute; bottom: 2%; right: 4%;"
+        document.querySelector(".container__floating").style = "position: absolute; bottom: 3%; right: 5%;"
     }
     else {
         document.querySelector(".inner__text").style = "background-color: #222; color: #fff; transition: 0.2s;"
