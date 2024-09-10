@@ -88,9 +88,12 @@ const inputverify = () => {
     return writedtitle && wiredcontent && checkedEmotion;
 };
 
-const handleSelectChange = () => {
-    const selectBox = document.getElementById('selectbox');
-    const selectedEmotion = selectBox.value;
+const dropdownselected = (event) => {
+    document.querySelector('.customDropdown').style.cssText = `
+        --text: "${event.target.value}"
+    `
+    document.querySelector('.customDropdown').click() //한번더 드롭다운제목 부분이 클릭되면서 닫히게끔 구현
+    const selectedEmotion = event.target.id
     renderSelectBox(selectedEmotion); 
   };
   
@@ -341,3 +344,79 @@ const loadImages = (size) => {
 window.onload = () => {
     loadImages('basic'); 
 };
+
+const searchDiaryEntries = () => {
+    const searchInput = document.getElementById("searchInput").value
+    const diarylist = getDiaryList();
+    const filteredDiaryList = diarylist.filter(entry => 
+        entry.title.includes(searchInput)
+    );
+
+    const diarylistbox = document.querySelector(".diarylistbox")
+    diarylistbox.innerHTML = ''; 
+
+    setTimeout(() => {
+        const diaryHTML = filteredDiaryList.map((entry, index) => `
+            <div class="diarybox">
+                <div class="xbutton" onClick="deleteButton(${index})"></div>
+                <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
+                <div class="thumbnail_${entry.emotion}"></div>
+                <div class="textbox">
+                    <div class="date_title_container">
+                        <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
+                        <div class="date">${entry.date}</div>
+                    </div>
+                    <div class="date_title_container">
+                        <div class="title">${entry.title}</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+        `).join('');
+
+        diarylistbox.innerHTML = diaryHTML;
+    }, 1000); 
+};
+
+function togglehandle(event) {
+    const isChecked = event.target.checked;
+    const modal = document.querySelector('.modal');
+    const text1 = document.querySelector('.text1');
+    const text2 = document.querySelector('.text2');
+    const titleInModal = document.querySelectorAll('.titleInModal')
+    const inputContainers = document.querySelectorAll('.inputcontainer');
+    const titleInputModal = document.querySelector('.titleInputModal');
+    const closeButton = document.querySelector('.closeButton');
+    const closeButtonText = document.querySelector('.closeButtonText');
+    const confirmButton = document.querySelector('.confirmButton');
+    const confirmButtonText = document.querySelector('.confirmButtonText');
+
+
+    if (isChecked) {
+        modal.classList.add('dark-mode');
+        text1.classList.add('dark-mode');
+        text2.classList.add('dark-mode');
+        titleInModal.forEach(element => element.classList.add('dark-mode'));
+        inputContainers.forEach(container => container.classList.add('dark-mode'));
+        titleInputModal.classList.add('dark-mode');
+        titleTextareaModal.classList.add('dark-mode');
+        closeButton.classList.add('dark-mode');
+        closeButtonText.classList.add('dark-mode');
+        confirmButton.classList.add('dark-mode');
+        confirmButtonText.classList.add('dark-mode');
+    } else {
+        modal.classList.remove('dark-mode');
+        text1.classList.remove('dark-mode');
+        text2.classList.remove('dark-mode');
+        titleInModal.forEach(element => element.classList.remove('dark-mode'));
+        inputContainers.forEach(container => container.classList.remove('dark-mode'));
+        titleInputModal.classList.remove('dark-mode');
+        titleTextareaModal.classList.remove('dark-mode');
+        closeButton.classList.remove('dark-mode');
+        closeButtonText.classList.remove('dark-mode');
+        confirmButton.classList.remove('dark-mode');
+        confirmButtonText.classList.remove('dark-mode');
+        
+    }
+}
+

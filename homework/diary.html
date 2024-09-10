@@ -34,15 +34,45 @@
                 <div class="listcontainer">
 
                     <div class="selectcontainer">
-                        <div class="selectbox">        
-                            <select id="selectbox" onchange="handleSelectChange('modalcontainer')">
-                                <option value="all">전체</option>
-                                <option value="happy">행복해요</option>
-                                <option value="sad">슬퍼요</option>
-                                <option value="surprise">놀랐어요</option>
-                                <option value="etc">기타</option>
-                            </select>
+                        <div class="selectbox">     
+                            <input type="checkbox" class="customDropdown"/> 
+                            <ul class="CSS_dropdownMenu">
+                                <li>
+                                    <input type="radio" name="selected" id="all" value="전체" onclick="dropdownselected(event)"/>
+                                    <label for="all">전체</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="selected" id="happy" value="행복해요" onclick="dropdownselected(event)"/>
+                                    <label for="happy">행복해요</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="selected" id="sad" value="슬퍼요" onclick="dropdownselected(event)"/>
+                                    <label for="sad">슬퍼요</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="selected" id="surprise" value="놀랐어요" onclick="dropdownselected(event)"/>
+                                    <label for="surprise">놀랐어요</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="selected" id="angry" value="화나요" onclick="dropdownselected(event)"/>
+                                    <label for="angry">화나요</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="selected" id="etc" value="기타ㄴ" onclick="dropdownselected(event)"/>
+                                    <label for="etc">기타</label>
+                                </li>
+                            </ul>
 
+                            <!--검색창-->
+                            <div class="search-container">
+                                <div class="input-wrapper">
+                                    <img src="./img/search_outline_light_m.png" alt="Search Icon" class="search-icon"/>
+                                    <input type="text" id="searchInput" placeholder="검색어를 입력하세요" oninput="searchDiaryEntries()" />
+                                </div>
+                            </div>
+                            
+
+                            <!--일기쓰기 버튼-->
                             <div class="writebutton" onclick="openModal('modalcontainer')">
                                 <div><img src="./img/plus_outline_light_m.png"/></div>
                                 <div class="witerbuttontext">일기쓰기</div>
@@ -56,30 +86,6 @@
 
                     </div>
 
-                    <!--일기 쓰는 곳-->
-                    <!-- <div class="writingboxcontainer">
-                        <div class="writingboxtext">📍 일기 쓰기</div> 
-                        <div class="howyoufeel">오늘은 기분이 어땟나요?</div>
-
-                        <div class="radiobox">
-                            <div class="firstline">
-                               <div class="inputcontainer"><input type="radio"  name="emotion" id="happy" oninput="inputverify()"><div>행복해요</div></div> 
-                                <div class="inputcontainer"><input type="radio"  name="emotion" id="sad" oninput="inputverify()"><div>슬퍼요</div></div>
-                                <div class="inputcontainer"><input type="radio"  name="emotion" id="surprise" oninput="inputverify()"><div>놀랐어요</div></div>
-                                <div class="inputcontainer"><input type="radio"  name="emotion" id="angry" oninput="inputverify()"><div>화나요</div></div>
-                                <div class="inputcontainer"><input type="radio"  name="emotion" id="etc" oninput="inputverify()"><div>기타</div></div>
-                            </div>
-                        </div>
-
-                        <div class="titletext">제목</div>
-                        <input id="writingtitle" type="text" placeholder="제목을 입력해 주세요." oninput="inputverify()"/>
-
-                        <div class="contenttext">내용</div>
-                        <textarea id="writingcontent" type="text" placeholder="내용을 입력해주세요." oninput="inputverify()" style="resize:none;"></textarea>
-
-                        <button class="submit" onclick="submit()">등록하기</button>
-                    </div> -->
-
                     <div class="floating" id="floating" onclick="floating()"></div>
                 </div>
                 
@@ -89,7 +95,13 @@
             <div id="modalcontainer" class="modalcontainer">
                 <div class="modalbackground" onclick="closeModal('modalcontainer')"></div>
                 <div class="modal">
-                    <div class="text1">일기 쓰기</div>
+                    <div class="textToggleContainer">
+                        <div class="text1">일기 쓰기</div>
+                        <div class="darkModeLabel">
+                            다크모드
+                            <input type="checkbox" class="toggle" onclick="togglehandle(event)"/>
+                        </div>
+                    </div>
 
                     <div>
                         <div class="text2">
@@ -187,7 +199,7 @@
         </div>
         <!------------------------------------->
 
-
+    
 
 
         <div class="footer" id="footer">
