@@ -4,6 +4,7 @@ const diaryArray = [
     "moodType": "놀랐어요",
     "writeDate": "2024.09.05",
     "title": "sdf",
+    "content": "<p>sdf</p>",
     "id": 1
   },
   {
@@ -69,6 +70,48 @@ const diaryArray = [
     "title": "sdf",
     "content": "<p>sdf</p>",
     "id": 10
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 11
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 12
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 13
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 14
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 15
+  },
+  {
+    "moodType": "화나요",
+    "writeDate": "2024.09.05",
+    "title": "sdf",
+    "content": "<p>sdf</p>",
+    "id": 16
   }
 ]; //[{ "moodType": "놀랐어요", "writeDate": "2024.09.05", "title": "sdf", "id": 1 }]
 
@@ -266,13 +309,6 @@ const optionSelect = (event, type) => {
 
   optionTarget.parentNode.classList.remove("show");
 
-  // const typeFilterList = {
-  //   moodFilter: moodFilter(optionValue),
-  //   galleryFilter: galleryFilter(optionValue)
-  // }
-
-  // return typeFilterList[type]
-
   if (type === 'moodFilter') {
     moodFilter(optionValue)
   } else if (type === 'galleryFilter') {
@@ -358,15 +394,25 @@ const popupRender = (popupName, content, type) => {
 const diaryDelete = (diaryId) => {
   // id : 삭제할 게시글의 id값
   // 삭제할 게시글의 id값을 받아와서 해당 게시글을 제외한 나머지 게시글들을 배열로 저장
-  const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== diaryId);
+  const diaryArr = JSON.parse(localStorage.getItem('diaryArray'));
+  const diaryDelArr = diaryArr.filter((diary, index) => diary.id !== Number(diaryId));
   localStorage.setItem('diaryArray', JSON.stringify(diaryDelArr));
   // 현재 상세페이지에서 삭제할 경우 index.html로 이동, 리스트페이지에서 삭제할 경우 리스트 재렌더링
-  location.href.includes('detail.html') ? location.href = './index.html' : diaryListSet(diaryDelArr);
+  if (location.href.includes('detail.html')) {
+    location.href = './index.html'
+  } else {
+    // 페이징이 생기면서 추가된 부분 - 삭제를 진행한 페이지 번호를 저장 처리
+    const diaryArrayDelPageNum = document.querySelector('.pageButtonBox button.active').innerText;
+    console.log("삭제실행", diaryArrayDelPageNum, diaryDelArr, diaryId);
+    localStorage.setItem('diaryArrayDelPageNum', diaryArrayDelPageNum)
+    diaryListSet();
+  }
 }
 
 
 // !게시글 삭제 팝업창 함수 호출
 const diaryDeletePop = (event, diaryId) => {
+  // console.log("삭제팝", diaryId);
   event.preventDefault();
   // id : 삭제할 게시글의 id값
   popupRender("diaryDeletePop",
