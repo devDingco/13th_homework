@@ -138,11 +138,6 @@ document.querySelector("select#dropdownEmotionFilter").addEventListener("change"
     }
 });
 
-document.querySelector("input.search-input").addEventListener("input", e => {
-    console.log(e.target.value);
-    console.log(e.data);
-});
-
 document.querySelector("select#dropdownImageAspect").addEventListener("change", (e) => {
     e.preventDefault();
     const selection = e.target.querySelector(":checked").value;
@@ -215,14 +210,14 @@ document.querySelector("div.container-picker-tab").addEventListener("click", e =
 });
 
 const msgCache = [];
-const add10Pics = () => {
+const add10Pics = (e) => {
     const templateHTML = document.querySelector("template.dog-image-template");
     const imageList = document.querySelector("ul.image-scroll-zone");
     let templClone;
     [...Array(10)].forEach(i => {
         // console.log("out: " + performance.now());
         // console.log(templClone);
-        fetch("https://dog.ceo/api/breeds/image/random")
+        fetch("https://dog.ceo/api/breeds/image/random") // DEBUG(0)>> GET https://dog.ceo/api/breeds/image/random net::ERR_INSUFFICIENT_RESOURCES
             .then(res => {
                 // console.log(templClone);
                 res.json()
@@ -240,7 +235,9 @@ const add10Pics = () => {
                     });
             })
             .catch(reason => {
-                console.error(reason);
+                // reason.name = "Fetch Image Error: https://dog.ceo/api/breed/image/random"; // Replaces "TypeError"
+                console.dir(reason);
+                console.error(reason); // DEBUG(0)>> Fetch Image Error : https://dog.ceo/api/breed/image/random: Failed to fetch \n at index.js:220:9 \n at Array.forEach (<anonymous>) \n at add10Pics (index.js:217:20) at index.js:328:9 \n (anonymous) @ index.js:238 \n Promise.catch \n (anonymous) @ index.js:237 \n add10Pics @ index.js:217 \n (anonymous) @ index.js:328
                 console.log("fetch error");
                 templClone = templateHTML.content.cloneNode(true);
                 // console.log(templClone);
@@ -303,17 +300,60 @@ document.querySelector("input.dark-btn").addEventListener("change", e => {
 //             3) Event is ignored during the "Timer on" phase
 //             4) At most 1 timer is on
 
-{   // empty nested block creating a scope for timer variable.
-    console.time("----------->ADD10PICS");
-    console.time("SCROLLEVENT");
+// {   // empty nested block creating a scope for timer variable.
+//     console.time("----------->ADD10PICS");
+//     console.time("SCROLLEVENT");
+//     let timer = null;
+//     const TIMEOUT = 1000;
+//     const CALLBACK = add10Pics;
+//     window.addEventListener("scroll", () => {
+//         console.timeLog("SCROLLEVENT");
+//         if (!!timer) return; // Invariant 3) is satisfied because (!!timer) => exit
+//         timer = setTimeout(()=>{timer = null}, TIMEOUT); // Invariant 2) is satisfied because timer is nullified on expiration of timer.
+//         console.timeLog("----------->ADD10PICS");
+//         CALLBACK(); // Invariant 1) is satisfied because Handler was called as soon as Set timer is done.
+//     }); // Invariant 2) is satisfied because timer is not-null if and only if (!timer) 
+// } // Empirically TESTED to be working as intended; Using console.time & console.timeEnd
+
+// Satisfying all 5 SOLID principles seemed like a road to overengineering.
+// Single Responsibility & Open-Closed
+// This function should be extensible without changing internals. Extension: such as adding "logging" feature
+// This function should do one job: It throttles some asynchronous event stream.
+// EventTarget.addEventListener("scroll", throttle(eventListener, timeout, debug)); 
+
+function throttle(eventListener, timeout=1000, debug=false, debugLabel="Throttled Event") {
+    if (debug) console.time(debugLabel);
     let timer = null;
-    const TIMEOUT = 1000;
-    const HANDLER = add10Pics;
-    window.addEventListener("scroll", () => {
-        console.timeLog("SCROLLEVENT");
-        if (!!timer) return; // Invariant 3) is satisfied because (!!timer) => exit
-        timer = setTimeout(()=>{timer = null}, TIMEOUT); // Invariant 2) is satisfied because timer is nullified on expiration of timer.
-        console.timeLog("----------->ADD10PICS");
-        HANDLER(); // Invariant 1) is satisfied because Handler was called as soon as Set timer is done.
-    }); // Invariant 2) is satisfied because timer is not-null if and only if (!timer) 
-}; // Empirically tested to be working as intended; Using console.time & console.timeEnd
+    return (e) => {
+        console.dir(e);
+        if (!!timer) return;
+        timer = setTimeout(()=>{timer=null}, timeout);
+        if (debug) console.timeLog(debugLabel);
+        eventListener(e);
+    };
+}
+window.addEventListener("scroll", throttle(add10Pics, debug=true));
+
+// Similarly, Lecture note implementation would delay key input far too long if user input is rapidly back to back given for a long period.
+// Input debouncing suggested in the lecture note(timeout=2) : 
+//                                    1, 2, 3, 4, 5        8    <----- input event at each timestamps: 1s, 2s, 3s, 4s, 5s, 8s
+//                                    x  x  x  x  x  x  v  x  x  v  <----- x means handler was not executed. v means it was executed                                    
+//
+// another example :                  1, 2, 3, 4, 5     7  8  <----- input event at each timestamps: 1s, 2s, 3s, 4s, 5s, 7s, 8s
+//                                    x  x  x  x  x  x  x  x  x  v
+//
+// another example :                  1, 2, 3, 4, 5, 6, 7, 8, 9
+//                                    x  x  x  x  x  x  x  x  x  x  v
+// <LECTURE NOTE>
+// let debounceTimer = null;
+// document.querySelector("input.search-input").addEventListener("input", (e) => {
+//    setTimeout(getQuery, 1000);
+// });
+// <ETON ERUTCEL>
+
+
+
+document.querySelector("input.search-input").addEventListener("input", e => {
+    console.log(e.target.value);
+    console.log(e.data);
+});
