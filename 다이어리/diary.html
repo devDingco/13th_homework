@@ -188,6 +188,7 @@
                               class="mood_options"
                               name="mood"
                               onkeydown="onKeyPress(event)"
+                              checked="checked"
                             /><label for="check_surprise" class="mood_text"
                               >놀랐어요</label
                             >
@@ -218,7 +219,7 @@
                         <div class="diary_title_group">
                           <div class="diary_title">제목</div>
                           <input
-                            class="diary_title_window"
+                            id="diary_title_window"
                             type="text"
                             placeholder="제목을 입력해 주세요."
                             onkeydown="onKeyPress(event)"
@@ -229,7 +230,7 @@
                             내용
                           </div>
                           <textarea
-                            class="diary_contents_window"
+                            id="diary_contents_window"
                             type="text"
                             placeholder="내용을 입력해 주세요."
                             onkeydown="onKeyPress(event)"
@@ -245,7 +246,7 @@
                       >
                         닫기
                       </button>
-                      <button class="register_button" type="submit">
+                      <button id="register_button" type="submit" disabled = "true">
                         등록하기
                       </button>
                     </div>

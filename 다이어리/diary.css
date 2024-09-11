@@ -598,7 +598,7 @@
   letter-spacing: -0.009rem;
   align-self: stretch;
 }
-.diary_title_window {
+#diary_title_window {
   height: 3rem;
   display: flex;
   padding: 0.75rem 1rem;
@@ -637,7 +637,7 @@
   letter-spacing: -0.009rem;
   align-self: stretch;
 }
-.diary_contents_window {
+#diary_contents_window {
   display: flex;
   height: 8rem;
   padding: 0.75rem 1rem;
@@ -685,9 +685,9 @@
   color: var(--Gray-Gray-900, #1c1c1c);
   background: var(--Gray-W, #fff);
 }
-.register_button {
-  color: var(--Gray-Gray-50, #f2f2f2);
-  background: var(--Gray-Gray-300, #c7c7c7);
+#register_button {
+  color: #f2f2f2;
+  background-color: #c7c7c7;
   border: none;
 }
 .page_list_box {

@@ -15,8 +15,8 @@ let currentPage = 1;
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
-  const text = document.getElementsByClassName("diary_title_window")[0];
-  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  const text = document.getElementById("diary_title_window");
+  const textarea = document.getElementById("diary_contents_window");
   text.value = null;
   textarea.value = null;
   [...getMood].map((e) => (e.checked = false));
@@ -144,31 +144,20 @@ const getId = (diaryEntry) => {
 };
 
 const getTitle = (diaryEntry) => {
-  const diaryTitle =
-    document.getElementsByClassName("diary_title_window")[0].value;
+  const diaryTitle = document.getElementById("diary_title_window").value;
   diaryEntry.title = diaryTitle;
   getId(diaryEntry);
 };
 
 const getContent = (diaryEntry) => {
-  const diaryContent = document.getElementsByClassName(
-    "diary_contents_window"
-  )[0].value;
+  const diaryContent = document.getElementById("diary_contents_window").value;
   diaryEntry.content = diaryContent;
   getTitle(diaryEntry);
 };
 
 const registerDiary = (event) => {
   event.preventDefault();
-  const text = document.getElementsByClassName("diary_title_window")[0];
-  const textarea = document.getElementsByClassName("diary_contents_window")[0];
-  const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].filter((e) => e.checked === true);
-  const isAllFieldsFilled =
-    text.value === "" || textarea.value === "" || mood.length === 0;
-  isAllFieldsFilled
-    ? alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.")
-    : triggerModal("diary_registration_modal");
+  triggerModal("diary_registration_modal");
 };
 
 const renderInitialDiaryEntries = (diaryList) => {
@@ -246,7 +235,7 @@ const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   renderInitialDiaryEntries(diaryList);
-  selectedMood !== undefined ? setDropdownLabel(selectedMood) : undefined;
+  selectedMood ? setDropdownLabel(selectedMood) : "";
 };
 
 const getDiariesByMood = (selectedMood) => {
@@ -310,7 +299,7 @@ const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    e.id === deleteId ? (index = i) : undefined;
+    e.id === deleteId ? (index = i) : "";
   });
   const deleteData = storedDiaryList[index];
   storedDiaryList.splice(index, 1);
@@ -352,11 +341,33 @@ const focusActiveModal = (modal) => {
   }
 };
 
+const validateDiaryInputCompletion = () => {
+  const text = document.getElementById("diary_title_window");
+  const textarea = document.getElementById("diary_contents_window");
+
+  const validate = () => {
+    if (!(text.value && textarea.value)) {
+      document.getElementById("register_button").disabled = true;
+      document.getElementById("register_button").style =
+        "color: #f2f2f2; background-color: #c7c7c7;";
+    } else {
+      console.log(document.getElementById("register_button"))
+      document.getElementById("register_button").disabled = false;
+      document.getElementById("register_button").style =
+        "color: #F2F2F2; background-color: #000;";
+    }
+  };
+
+  text.addEventListener("keyup", validate);
+  textarea.addEventListener("keyup", validate);
+};
+
 const triggerModal = (modal) => {
   upScroll();
   document.body.style.cssText = "overflow-y: hidden;";
   document.getElementById(modal).style = "display: flex;";
   focusActiveModal(modal);
+  modal === "aside_layout" ? validateDiaryInputCompletion() : "";
 };
 
 const closeAllModals = (modal) => {
