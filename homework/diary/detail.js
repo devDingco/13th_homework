@@ -178,6 +178,8 @@ const JS_내용복사하기 = () => {
 
     const 일기목록내용 = 일기목록[일기번호].내용;
     navigator.clipboard.writeText(일기목록내용);
+};
 
-    alert('복사되었습니다');
+const JS_토스트 = () => {
+    window.document.getElementById().innerHTML =
 };
