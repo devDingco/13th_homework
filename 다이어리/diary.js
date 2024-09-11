@@ -202,7 +202,7 @@ const handlePageClick = (event) => {
 
 const goToPageSet = (event) => {
   const isNextClicked = event.target.outerHTML.includes("right");
-  isNextClicked ? currentPage += 1 : currentPage -= 1
+  isNextClicked ? (currentPage += 1) : (currentPage -= 1);
   const begin = (currentPage - 1) * 5;
   const end = currentPage * 5;
   const page = entirePageNumberList.slice(begin, end).join("");
@@ -211,7 +211,7 @@ const goToPageSet = (event) => {
     .getElementsByClassName("page_number")[0]
     .setAttribute("page", "clickedPage");
 
-  document.getElementsByClassName("page_number")[0].click()
+  document.getElementsByClassName("page_number")[0].click();
 };
 
 const generatePageNumbers = () => {
@@ -494,6 +494,7 @@ const onSearch = (event) => {
         createHtml(storedDiary);
       });
     }
+    document.getElementById("search").value = null;
   }, 1000);
 };
 
