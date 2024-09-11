@@ -80,7 +80,6 @@ const removeDiary = (id) => {
 
 const filterDiary = (event) => {
     const selectedMood = event.target.value
-    console.log(selectedMood);
 
     if (selectedMood === "전체") {
         isFiltered = false
@@ -152,23 +151,23 @@ const getMoodSettings = (mood) => {
 }
 
 // [Rendering]
-const reloadData = (reload_diaryList) => {
-    const diaryDOMList = reload_diaryList.map(el => 
-        `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
-            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
-            <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
-                <div class="diary_title">
-                    <div class="diary_sub_title">
-                        <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
-                        <div class="diary_date">${el.date}</div>
-                    </div>
-                 <div class="diary_main_title">${el.title}</div>
-            </div>
-        </div>`
-    ).join("")
+// const reloadData = (reload_diaryList) => {
+//     const diaryDOMList = reload_diaryList.map(el => 
+//         `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
+//             <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
+//             <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
+//                 <div class="diary_title">
+//                     <div class="diary_sub_title">
+//                         <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
+//                         <div class="diary_date">${el.date}</div>
+//                     </div>
+//                  <div class="diary_main_title">${el.title}</div>
+//             </div>
+//         </div>`
+//     ).join("")
 
-    document.getElementById("diary_list").innerHTML = diaryDOMList
-}
+//     document.getElementById("diary_list").innerHTML = diaryDOMList
+// }
 
 //  [Tap or Press Event]
 const selectDiaryFilterMenu = (event) => {
@@ -310,9 +309,15 @@ const searchDiary = (event) => {
 
     timer = setTimeout(() => {
         const inputText = event.target.value
-    
+
         const result = diaryList.filter(el => el.title.includes(inputText))
-        renderDiaryList(result)
+        if (isFiltered) {
+            const result = filteredDiaryList.filter(el => el.title.includes(inputText))
+            renderDiaryList(result)
+        } else {
+            const result = diaryList.filter(el => el.title.includes(inputText))
+            renderDiaryList(result)
+        }
     }, 1000)
 }
 
