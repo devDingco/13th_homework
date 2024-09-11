@@ -797,6 +797,38 @@
     left: 100%;
 }
 
+/* 페이지 버튼 영역 */
+
+.page_button_list_container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.selected_page_button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--GrayGray_200);
+    color: var(--GrayB);
+    
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.page_list_button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--GrayW);
+    color: var(--GrayB);
+    
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
 /* 바닥글 영역 */
 
 .footer {
