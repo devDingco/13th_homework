@@ -8,7 +8,7 @@
   }
   section .diaryList ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - 1rem));
   }
   section .diaryList ul li figure .imgBox {
     height: 17.8125rem;
@@ -46,6 +46,7 @@
   .editWrap .diaryWrite {
     padding: 1.5rem 0;
     border-bottom: 1px solid #000;
+    border-radius: 0;
   }
   .diaryWrite {
     max-width: 100%;
@@ -85,7 +86,6 @@
   }
   .navBottom {
     flex-wrap: wrap;
-    justify-content: flex-end;
     width: 100%;
     padding: 0;
     gap: 12px;
@@ -113,6 +113,9 @@
     width: 100%;
     padding: 0 20px;
     bottom: 40px;
+  }
+  .detailWrap {
+    padding-top: 1.25rem;
   }
   .detailWrap .buttonWrap {
     gap: 0.5rem;
@@ -147,6 +150,7 @@
   }
   .navBottom .filterSearchBox {
     justify-content: space-between;
+    gap: 1.25rem;
   }
   .navBottom .filterSearchBox .searchBox {
     width: 100%;
@@ -178,5 +182,8 @@
   }
   .galleryListWrap.ratio-3-4 li img {
     height: 23.25rem;
+  }
+  .paginationHeader {
+    display: none;
   }
 }/*# sourceMappingURL=media.css.map */
