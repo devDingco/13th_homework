@@ -391,17 +391,6 @@ const showLoadingSkeleton = () => {
   fetchAndDisplayPhotos();
 };
 
-const showMoreDogsImage = () => {
-  fetch("https://dog.ceo/api/breeds/image/random").then((result) => {
-    result.json().then((object) => {
-      const dog = object.message;
-      const box = document.getElementById("photo_gallery").innerHTML;
-      document.getElementById("photo_gallery").innerHTML =
-        box + `<img src="${dog}" class="dogImage" />`;
-    });
-  });
-};
-
 let photoTimer = null;
 window.addEventListener("scroll", () => {
   const scrollPercent =
@@ -411,7 +400,8 @@ window.addEventListener("scroll", () => {
   if (scrollPercent < 0.9) return;
   if (photoTimer !== null) return;
 
-  showMoreDogsImage();
+  showLoadingSkeleton();
+  fetchAndDisplayPhotos();
 
   photoTimer = setTimeout(() => {
     photoTimer = null;
@@ -422,7 +412,7 @@ window.addEventListener("scroll", () => {
         document.documentElement.clientHeight);
 
     if (scrollPercent === 1) {
-      showMoreDogsImage();
+      fetchAndDisplayPhotos();
     }
   }, 1000);
 });
