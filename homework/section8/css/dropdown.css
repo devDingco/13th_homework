@@ -4,6 +4,7 @@
   display: flex;
   min-width: 120px;
   padding: 12px 10px;
+  font-size: 16px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-300, #C7C7C7);
   background: var(--Gray-W, #FFF);
@@ -17,6 +18,7 @@
   content: var(--필터선택변수);
 }
 
+/* 드롭다운 누르면 메뉴를 보이게하기 */
 .드롭다운_제목:checked+.드롭다운_메뉴 {
   display: block;
 }
@@ -32,14 +34,19 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
   /* 넘치는 모서리영역 숨겨주기 */
   overflow: hidden;
-}
-
-.드롭다운_메뉴 label:checked {
-  background-color: black;
+  position: relative;
+  z-index: 0;
 }
 
 .드롭다운_메뉴 input {
   display: none;
+}
+
+/* 드롭다운_메뉴 하위의 체크된 input의 label */
+.드롭다운_메뉴 input:checked+label {
+  padding: 12px;
+  color: #299C00;
+  background: rgba(58, 181, 15, 0.05) url(../images/check.png) no-repeat 90px center;
 }
 
 .드롭다운_메뉴 label {

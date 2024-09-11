@@ -83,13 +83,12 @@ body {
   align-items: center;
   align-content: center;
   gap: 16px;
-  flex: 1 0 0;
   flex-wrap: wrap;
-
+  font-size: 16px;
   border-radius: 100px;
   border: 1px solid var(--Gray-Gray-300, #C7C7C7);
-  padding-left: 35px;
-  background: url(../images/돋보기.png) no-repeat 10px center;
+  padding-left: 45px;
+  background: url(../images/돋보기.png) no-repeat 15px center;
 }
 
 .선택_탭 {
@@ -133,6 +132,7 @@ body {
   width: 100%;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
+  flex-direction: column;
 }
 
 .일기_두개씩_보여주는_공간 {
@@ -293,6 +293,7 @@ body {
   top: 0;
   left: 0;
   position: fixed;
+  z-index: 1;
 }
 
 .모달배경 {
@@ -704,6 +705,47 @@ body {
   position: absolute;
   top: calc(50% - (200px/2));
   left: calc(50% - (480px/2));
+}
+
+.페이지_공간 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.이전페이지_버튼 {
+  line-height: 32px;
+  width: 24px;
+  height: 24px;
+  transform: scaleX(-1);
+}
+
+.다음페이지_버튼 {
+  line-height: 32px;
+  width: 24px;
+  height: 24px;
+}
+
+.페이지번호공간 {
+  display: flex;
+  gap: 16px;
+}
+
+.페이지버튼 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.페이지버튼_선택 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--Gray-Gray-50, #F2F2F2);
 }
 
 @media (max-width: 779px) {

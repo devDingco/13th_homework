@@ -57,14 +57,6 @@
               </li>
             </ul>
           </div>
-          <!-- <select id="필터" class="필터" onchange="필터링기능(event)">
-            <option selected value="전체선택">전체</option>
-            <option value="행복선택">행복해요</option>
-            <option value="슬픔선택">슬퍼요</option>
-            <option value="놀람선택">놀랐어요</option>
-            <option value="화남선택">화나요</option>
-            <option value="기타선택">기타</option>
-          </select> -->
           <input type="text" class="검색창" placeholder="검색어를 입력해 주세요" oninput="검색기능(event)" />
         </div>
         <button onclick="모달열기기능('일기등록모달')" class="일기_쓰기_버튼">+ 일기쓰기</button>
@@ -72,8 +64,18 @@
       <!-- 메인 -->
       <div class="메인_공간">
         <div id="일기추가할공간" class="일기_두개씩_보여주는_공간"></div>
+        <!-- 페이지 -->
+        <div class="페이지_공간">
+          <img src="./images/페이지버튼.png" id="이전페이지버튼" class="이전페이지_버튼" onclick="이전페이지이동기능()">
+          <span class="페이지번호공간" id="페이지번호보여주는곳"></span>
+          <img src="./images/페이지버튼.png" id="다음페이지버튼" class="다음페이지_버튼" onclick="다음페이지이동기능()" />
+        </div>
+
       </div>
     </div>
+
+
+    <img src="./images/topscroll fab.png" class="탑스크롤_버튼" id="탑스크롤버튼" onclick="탑스크롤기능()" />
 
     <!-- 사진 레이아웃 -->
     <div class="사진_레이아웃" id="사진_레이아웃">
@@ -89,11 +91,7 @@
       </div>
     </div>
 
-    <img src="./images/topscroll fab.png" class="탑스크롤_버튼" id="탑스크롤버튼" onclick="탑스크롤기능()" />
   </div>
-
-
-  <!-- </div> -->
 
   </div>
   <!-- 푸터 -->
