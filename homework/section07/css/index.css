@@ -253,6 +253,18 @@ a {
   right: 1rem;
 }
 
+/* 페이지네이션 */
+.CSS_페이지보여주는곳 {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin: 5rem;
+}
+.CSS_페이지보여주는곳 button {
+  width: 32px;
+  height: 32px;
+}
+
 /* 일기쓰기 모달 */
 .CSS_등록상자 {
   border-radius: 1.6rem;
