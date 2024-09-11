@@ -6,7 +6,7 @@ let inputText
 let selectedMood
 
 let isFiltered = false
-let searchTimer
+let searchTimer = null
 
 window.onload = () => {
     diaryList = fetchDiaryListFromLocalStorage()
@@ -258,14 +258,16 @@ const presentNaviMenu = (naviItem) => {
             document.getElementById("HTML_contents_photos_container").style = "display: none;"
             document.getElementById("diary_filter_dropbox").style = "display: flex;"
             document.getElementById("photos_filter_dropbox").style = "display: none;"
+            window.scrollTo({top:0})
+            nowNavMenu = "diary"
             break
         }
-
         case "photos": {
             document.getElementById("diary_list").style = "display: none;"
             document.getElementById("HTML_contents_photos_container").style = "display: block;"
             document.getElementById("diary_filter_dropbox").style = "display: none;"
-            fetchDogsFromAPI()
+            photosPageOnLoad()
+            nowNavMenu = "photos"
             break
         }
     }
@@ -309,9 +311,6 @@ const searchDiary = (event) => {
 }
 
 // Event Listener
-window.addEventListener("scroll", () => {
-    const y = window.scrollY
-})
 
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
