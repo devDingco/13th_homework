@@ -150,8 +150,6 @@ const JS_삭제기능 = () => {
     const 스토리지에저장된일기목록 =
         window.localStorage.getItem('민지의일기목록') ?? '[]';
     const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-    console.log(일기번호);
-    console.log(일기목록);
 
     const 일기삭제후목록 = 일기목록.filter(
         (el, index) => index !== parseInt(일기번호, 10)
@@ -168,4 +166,18 @@ const JS_삭제기능 = () => {
 
     // 현재 페이지를 지우고, 새로운 페이지로 교체 => 뒤로가기해도 현재 페이지로 돌아올 수 없음
     location.replace('./index.html');
+};
+
+const JS_내용복사하기 = () => {
+    const 쿼리스트링 = window.location.search;
+    const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+    const 일기번호 = 잘게나누어담은통.get('number');
+    const 스토리지에저장된일기목록 =
+        window.localStorage.getItem('민지의일기목록') ?? '[]';
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+    const 일기목록내용 = 일기목록[일기번호].내용;
+    navigator.clipboard.writeText(일기목록내용);
+
+    alert('복사되었습니다');
 };
