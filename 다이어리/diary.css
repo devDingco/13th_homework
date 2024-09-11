@@ -696,6 +696,13 @@
   width: 100%;
   justify-content: center;
   gap: 12px;
+  align-items: center;
+}
+.go_to_page_set{
+  border: none;
+  background-color: #FFF;
+  width: 24px;
+  height: 24px;
 }
 #page_number_list {
   display: flex;

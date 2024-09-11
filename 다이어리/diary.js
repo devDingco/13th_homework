@@ -10,6 +10,8 @@ let currentFilteredMood = "";
 let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 paginatedDiaryData = storedDiaryList;
+let entirePageNumberList;
+let currentPage = 1;
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
@@ -198,6 +200,20 @@ const handlePageClick = (event) => {
   upScroll();
 };
 
+const goToPageSet = (event) => {
+  const isNextClicked = event.target.outerHTML.includes("right");
+  isNextClicked ? currentPage += 1 : currentPage -= 1
+  const begin = (currentPage - 1) * 5;
+  const end = currentPage * 5;
+  const page = entirePageNumberList.slice(begin, end).join("");
+  document.getElementById("page_number_list").innerHTML = page;
+  document
+    .getElementsByClassName("page_number")[0]
+    .setAttribute("page", "clickedPage");
+
+  document.getElementsByClassName("page_number")[0].click()
+};
+
 const generatePageNumbers = () => {
   const pageNumberList = Math.ceil(paginatedDiaryData.length / 12);
   const pageNumberButtonList = Array(pageNumberList)
@@ -206,9 +222,12 @@ const generatePageNumbers = () => {
       return `<button onclick="handlePageClick(event)" class="page_number">${
         n + idx
       }</button>`;
-    })
+    });
+  entirePageNumberList = pageNumberButtonList;
+
+  document.getElementById("page_number_list").innerHTML = pageNumberButtonList
+    .slice(0, 5)
     .join("");
-  document.getElementById("page_number_list").innerHTML = pageNumberButtonList;
   document
     .getElementsByClassName("page_number")[0]
     .setAttribute("page", "clickedPage");
