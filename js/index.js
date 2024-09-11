@@ -321,18 +321,27 @@ document.querySelector("input.dark-btn").addEventListener("change", e => {
 // This function should do one job: It throttles some asynchronous event stream.
 // EventTarget.addEventListener("scroll", throttle(eventListener, timeout, debug)); 
 
-function throttle(eventListener, timeout=1000, debug=false, debugLabel="Throttled Event") {
+function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttled Event"}) {
     if (debug) console.time(debugLabel);
     let timer = null;
-    return (e) => {
-        console.dir(e);
-        if (!!timer) return;
+    return (event) => {
+        if (!!timer) {
+            if (debug) {
+                console.log("<Ignored Event>");
+                console.dir(event);
+                console.log("</Ignored Event>");
+            }    
+            return;
+        }
         timer = setTimeout(()=>{timer=null}, timeout);
-        if (debug) console.timeLog(debugLabel);
-        eventListener(e);
+        if (debug) {
+            console.timeLog(debugLabel);
+            console.dir(event);
+            console.log("</Throttled Eventt>");
+        };
     };
 }
-window.addEventListener("scroll", throttle(add10Pics, debug=true));
+window.addEventListener("scroll", throttle(add10Pics, {debug:true}));
 
 // Similarly, Lecture note implementation would delay key input far too long if user input is rapidly back to back given for a long period.
 // Input debouncing suggested in the lecture note(timeout=2) : 
