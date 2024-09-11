@@ -12,8 +12,8 @@ window.onload = () => {
     const 일기담는통 = 일기목록[일기번호];
     // console.log(일기담는통);
 
-    window.document.getElementById('id_제목').value = 일기담는통.제목;
-    window.document.getElementById('id_내용').value = 일기담는통.내용;
+    window.document.getElementById('id_제목').value = 일기담는통?.제목;
+    window.document.getElementById('id_내용').value = 일기담는통?.내용;
     window.document.getElementsByName('감정').forEach((el) => {
         if (el.value === 일기담는통.기분) el.checked = true;
     });

@@ -21,9 +21,12 @@
                 <div class="CSS_디테일제목">제목</div>
                 <div id="HTML_내용들어가는곳"></div>
             </div>
-            <div class="CSS_수정버튼상자">
+            <div class="CSS_버튼상자">
                 <button button class="CSS_수정버튼" onclick="JS_수정기능()">
                     수정
+                </button>
+                <button button class="CSS_삭제버튼" onclick="JS_삭제기능()">
+                    삭제
                 </button>
             </div>
 
@@ -36,12 +39,13 @@
                         type="text"
                         placeholder="회고를 남겨보세요"
                     />
-                    <button class="CSS_회고입력버튼" onclick="JS_회고기능()">입력</button>
+                    <button class="CSS_회고입력버튼" onclick="JS_회고추가기능()">입력</button>
                 </div>
 
                 <div
                     id="id_회고목록보여주기"
                     class="HTML_회고목록보여주기"
+                    onchange="JS_회고그리기기능()"
                 ></div>
             </div>
         </div>

@@ -16,7 +16,6 @@ const JS_일기카드보여주기 = () => {
         .map(
             (element, index) =>
                 `   
-            <div class="CSS_메인왼쪽">
                 <div class="CSS_메인왼쪽_카드" >
                     <img src="./image/closeicon.png" class="CSS_닫힘버튼" onclick='JS_삭제버튼(event, ${index})'/>
                     <a class="CSS_일기사진" href="./detail.html?number=${index}">
@@ -82,7 +81,6 @@ const JS_일기카드보여주기 = () => {
                             ${element.제목}
                     </div>
                 </div>
-            </div>
             `
         )
         .join('');
@@ -236,8 +234,6 @@ const JS_필러링기능 = (event) => {
         )
         .join('');
 
-    alert('왜안넘어가?');
-
     window.document.getElementById('HTML_메인왼쪽일기보여주는곳').innerHTML =
         HTML_필터로걸러진카드;
 };
@@ -248,7 +244,12 @@ const 플로팅버튼 = () => {
 };
 
 // idea: filter사용
+// index2 값은 위쪽에 필러링기능에서 넘겨받은 값
+// index2의 값은 배열의 저장되어있는 index숫자이니까 일기카드 순서를 나타낼 수 있음
+// 내가 삭제를 누른 카드에 번호와 filter가 일기목록을 하나씩 돌며 내가 누른 카드와 인덱스 번호가 같지 않으면
+// true를 반환해 값을남기고 내가누른 카드 인덱스 번호와 같으면 false를 반환해 목록에서 삭제한다
 const JS_삭제버튼 = (event, index2) => {
+    console.log(index2);
     event.preventDefault();
 
     const 로컬스토리지저장된일기목록 =
@@ -259,6 +260,7 @@ const JS_삭제버튼 = (event, index2) => {
         : [];
 
     const 삭제후일기목록 = 일기목록.filter((el, index) => index !== index2);
+    console.log(삭제후일기목록);
 
     window.localStorage.setItem(
         '민지의일기목록',
