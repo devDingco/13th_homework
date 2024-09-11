@@ -37,14 +37,14 @@ const activateWriteButton = () => {
         console.log("등록 버튼이 활성화 됩니다.")
         console.log(selectedMood)
         document.getElementById("HTML_diary_write_button").disabled = false
-        document.getElementById("HTML_diary_write_button").style = "background-color: black; color: white"
+        document.getElementById("HTML_diary_write_button").style = "background-color: var(--button_activation_background_color); color: var(--button_activation_text_color);"
         return
     }
 
     if (inputTitle === "" || inputText === "" || selectedMood === undefined) {
         console.log("등록 버튼이 비활성화 됩니다.")
         document.getElementById("HTML_diary_write_button").disabled = true
-        document.getElementById("HTML_diary_write_button").style = "background-color: #C7C7C7; color: #F2F2F2"  
+        document.getElementById("HTML_diary_write_button").style = "background-color: var(--button_disabled_background_color); color: var(--button_disabled_text_color);"  
         return
     }
 }
@@ -241,6 +241,15 @@ const okButtonPressed = () => {
     resetInputData()
 }
 
+const onDarkMode = (event) => {
+    if (event.target.checked) {
+        document.documentElement.setAttribute("dark_mode", "on")
+    } else {
+        document.documentElement.removeAttribute("dark_mode")
+    }
+    
+}
+
 const presentNaviMenu = (naviItem) => {
     switch (naviItem) {
         case "diary": {
@@ -272,12 +281,10 @@ const presentModal = () => {
     document.body.style.overflow = "hidden"
 
     document.getElementById("HTML_write_diary_modal_container").addEventListener("click", (el) => {
-        console.log("HTML_write_diary_modal_container")
         el.stopPropagation()
     })
 
     document.getElementById("HTML_write_diary_cancel_modal_bg").addEventListener("click", (el) => {
-        console.log("HTML_write_diary_cancel_modal_bg")
         el.stopPropagation()
     })
 }
@@ -292,12 +299,6 @@ const dismiss = () => {
 // Event Listener
 window.addEventListener("scroll", () => {
     const y = window.scrollY
-
-    // if (y > 0) {
-    //     document.getElementById("mood_select").style = "background-color: black; color: white;"
-    // } else {
-    //     document.getElementById("mood_select").style = "background-color: white; color: black;"
-    // }
 })
 
 window.addEventListener("keydown", (event) => {

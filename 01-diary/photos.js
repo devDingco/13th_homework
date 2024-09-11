@@ -22,7 +22,6 @@ const filterPhotos = (event) => {
     const selectedRatio = event.target.value
     const dogImages = document.querySelectorAll(".contents_photos_item")
     dogImages.forEach(el => {
-        console.log(el.style.aspectRatio)
         switch (selectedRatio) {
             case "기본형": {
                 el.style.aspectRatio = "1 / 1"
