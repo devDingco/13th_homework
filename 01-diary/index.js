@@ -6,6 +6,7 @@ let inputText
 let selectedMood
 
 let isFiltered = false
+let searchTimer
 
 window.onload = () => {
     diaryList = fetchDiaryListFromLocalStorage()
@@ -294,6 +295,17 @@ const dismiss = () => {
     document.getElementById("HTML_write_diary_cancel_modal_bg").style = "display: none;"
     document.getElementById("HTML_write_diary_modal_bg").style = "display: none;"
     document.body.style.overflow = "auto"
+}
+
+const searchDiary = (event) => {
+    clearTimeout(searchTimer)
+
+    timer = setTimeout(() => {
+        const inputText = event.target.value
+    
+        const result = diaryList.filter(el => el.title.includes(inputText))
+        reloadData(result)
+    }, 1000)
 }
 
 // Event Listener
