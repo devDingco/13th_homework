@@ -171,7 +171,7 @@ section {
 
     ul {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(auto, calc(25% - 1rem)));
       gap: 1.5rem;
 
       li {
@@ -303,4 +303,11 @@ section {
       }
     }
   }
+}
+
+.diaryPagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
