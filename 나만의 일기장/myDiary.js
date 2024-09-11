@@ -1,21 +1,18 @@
 let diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
 
-window.onload = () => {
-  renderDiaries();
-};
-
 //스크롤 시 필터 배경색 변경
-window.addEventListener('scroll', () => {
-  const filter = document.getElementById('filterBtn');
-  const isScrolled = window.scrollY > 0;
-  filter.style.backgroundColor = isScrolled ? 'black' : 'white';
-  filter.style.color = isScrolled ? 'white' : 'black';
-});
+// window.addEventListener('scroll', () => {
+//   const filter = document.getElementById('filterBtn');
+//   const isScrolled = window.scrollY > 0;
+//   filter.style.backgroundColor = isScrolled ? 'black' : 'white';
+//   filter.style.color = isScrolled ? 'white' : 'black';
+// });
 
 //toast 메시지
 const toastMsg = document.createElement('div');
 toastMsg.className = 'toastMessage';
 document.body.appendChild(toastMsg);
+
 function toastOn() {
   toastMsg.classList.add('active');
   setTimeout(function () {
@@ -78,18 +75,26 @@ const registerDiary = () => {
 
   renderDiaries();
   btnColorFunc();
+  setTimeout(() => {
+    window.location.reload();
+  }, 900);
 };
 
 const renderDiaries = () => {
   const cardContainer = document.getElementById('card');
   const info = document.getElementById('info');
+
+  const start = (clickedPage - 1) * itemPerPage;
+  const end = start + itemPerPage;
+  const paginatedDiaries = diaryList.slice(start, end);
+
   if (diaryList.length === 0) {
     info.style.display = 'block';
   } else {
     info.style.display = 'none';
   }
   cardContainer.innerHTML = '';
-  diaryList.forEach((diary, index) => showCardFunc(diary, index));
+  paginatedDiaries.forEach((diary, index) => showCardFunc(diary, index));
 };
 
 const filterDiaries = (e) => {
@@ -214,13 +219,17 @@ const showCardFunc = (diary, index) => {
       localStorage.setItem('diaries', JSON.stringify(diaryList)); //스토리지 업데이트
       renderDiaries();
       closeModal('delete');
+
       toastOn();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     };
   };
   // deleteIcon을 newContentCard의 container0에 추가
   newContentCard.querySelector('.container0').appendChild(deleteIcon);
 
-  cardContainer.prepend(newContentCard); //appenChild는 맨뒤로 추가, prepand는 그 반대(최신순)
+  cardContainer.appendChild(newContentCard); //appendChild는 맨뒤로 추가, prepand는 그 반대(최신순)
 
   newContentCard.addEventListener('click', function () {
     window.location.href = `./detail.html?number=${index}`; // 상세 페이지로 이동하고 쿼리스트링에 인덱스를 추가
@@ -242,28 +251,6 @@ const btnColorFunc = () => {
     registerBtn.style.backgroundColor = '';
   }
 };
-
-//모바일 환경되면 filter를 가운데로 이동
-// function relocateFilter() {
-//   const filter = document.querySelector('.filter');
-//   const showImgContent = document.querySelector('#showImgContent');
-//   const addContent = document.querySelector('#addContent');
-
-//   if (window.innerWidth <= 1200) {
-//     if (filter.nextElementSibling !== addContent) {
-//       showImgContent.parentNode.insertBefore(filter, addContent);
-//     }
-//   } else {
-//     const container = document.querySelector('.container');
-//     if (filter.nextElementSibling !== showImgContent) {
-//       container.insertBefore(filter, document.querySelector('.mainContent'));
-//     }
-//   }
-// }
-
-// 초기 실행 및 윈도우 크기 변경 시 이벤트 등록
-// window.addEventListener('resize', relocateFilter);
-// window.addEventListener('DOMContentLoaded', relocateFilter);
 
 //플로팅 버튼 맨 위일땐 사라지게 하기
 const disappearBtn = () => {
@@ -323,4 +310,88 @@ const darkMode = (e) => {
   e.target.checked === true
     ? document.documentElement.setAttribute('isOnOff', 'off')
     : document.documentElement.setAttribute('isOnOff', 'on');
+};
+
+//페이지네이션
+let clickedPage = 1;
+let itemPerPage = 12;
+const lastPage = Math.ceil(diaryList.length / itemPerPage);
+
+const prevBtn = () => {
+  if (clickedPage === 1) {
+    toastMsg.innerHTML = '첫 페이지입니다.';
+    toastOn();
+  }
+  if (clickedPage > 1) {
+    clickedPage--;
+    renderDiaries();
+    pageBtnFunc();
+  }
+};
+
+const nextBtn = () => {
+  if (clickedPage === lastPage) {
+    toastMsg.innerHTML = '마지막 페이지입니다.';
+    toastOn();
+  }
+  if (clickedPage < lastPage) {
+    clickedPage++;
+    renderDiaries();
+    pageBtnFunc();
+  }
+};
+
+//페이지 버튼 구현
+const pageBtnFunc = () => {
+  const pages = new Array(lastPage)
+    .fill(1)
+    .map((el, index) => {
+      const pageNum = index + 1;
+
+      //첫, 마지막페이지일때 색상 다르게 설정
+      if (clickedPage === 1) {
+        document.querySelector('.prev').style.color = '#bebcbc';
+      } else {
+        document.querySelector('.prev').style.color = 'black';
+      }
+
+      if (clickedPage === lastPage) {
+        document.querySelector('.next').style.color = '#bebcbc';
+      } else {
+        document.querySelector('.next').style.color = 'black';
+      }
+
+      return `
+      <button onclick = "moveToPage(${pageNum})"
+      class = ${clickedPage === pageNum ? 'currentPage' : ''}>
+      ${pageNum}</button/>`;
+    })
+    .join(' ');
+
+  document.getElementById('pageList').innerHTML = `${pages}`;
+
+  // 페이지가 1개밖에 없을때 이전 , 다음 버튼 보이지 않게 구현
+  // querySelector 를 하면 첫번째 요소만 적용되기에 다 하려면 forEach랑 All
+  const btns = document.querySelectorAll('.pageBtns');
+  if (lastPage === 1) {
+    btns.forEach((btn) => {
+      btn.style.display = 'none';
+    });
+  } else {
+    btns.forEach((btn) => {
+      btn.style.display = 'inline-flex';
+    });
+  }
+};
+
+//페이지 이동함수
+const moveToPage = (pageNum) => {
+  clickedPage = pageNum;
+  renderDiaries();
+  pageBtnFunc();
+};
+
+window.onload = () => {
+  renderDiaries();
+  pageBtnFunc();
 };

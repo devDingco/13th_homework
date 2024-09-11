@@ -43,6 +43,7 @@ const renderDiaryDetail = (diary) => {
       feelImg = '';
   }
 
+  console.log(diary.date);
   diaryDetail.innerHTML = `
     <div class="detailTitle">${diary.title}</div>
     <div class="detailInfo">

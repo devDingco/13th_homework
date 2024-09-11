@@ -28,8 +28,15 @@ const uploadPhoto = () => {
         // 이미지가 로드되면 스켈레톤을 숨기고 이미지 표시
 
         setTimeout(() => {
-          img.style.width = '440px';
+          if (window.innerWidth <= 768) {
+            img.style.width = '100vw';
+            img.style.padding = '0 20px';
+          } else {
+            img.style.width = '440px';
+          }
+
           img.style.display = 'block';
+          img.style.borderRadius = '2rem';
           // 현재 요소의 직전 형제 요소를 의미 : 즉 스켈레톤
           img.previousElementSibling.style.display = 'none';
         }, 1000);

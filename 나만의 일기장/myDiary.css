@@ -60,11 +60,12 @@ button {
   }
   #writeNote {
     border-radius: 4px;
-    padding: 8px;
+    padding: 12px 10px;
     border: none;
-    background-color: #161616;
-    color: white;
+    background-color: #c7ddf6;
+    color: #2a2929;
     cursor: pointer;
+    font-weight: bold;
   }
 
   @media (min-width: 1100px) {
@@ -478,7 +479,7 @@ button {
   /* height: 40px; */
   border: 1px solid #c7c7c7;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 12px 10px;
   cursor: pointer;
   margin-bottom: 10px;
 
@@ -553,7 +554,7 @@ button {
 .searchBar input {
   border: 1px solid #c7c7c7;
   border-radius: 20px;
-  padding: 8px 12px 8px 27px;
+  padding: 12px 10px 12px 27px;
   width: 450px;
   background: url('./images/searchIcon.png') no-repeat scroll 8px center;
   background-size: 1em;
@@ -602,6 +603,38 @@ button {
   padding: 5px;
   border-radius: 100%;
   cursor: pointer;
+}
+
+/* 페이지네이션 */
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  .pageBtns {
+    background-color: #fff;
+  }
+  button {
+    width: 20px;
+    border: none;
+    padding: 6px 12px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background-color: transparent;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: rgb(204, 229, 240);
+  }
+}
+
+#pagination .currentPage {
+  border-radius: 4px;
+  background-color: #dfd8d8;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1490px) {
