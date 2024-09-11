@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/pagination.css" />
     <link rel="stylesheet" href="./css/media.css" />
 
     <link
@@ -116,8 +117,20 @@
           </button>
         </div>
       </div>
-      <article class="diaryList"></article>
+      <div class="paginationHeader">
+        <div class="info"><!-- 다이어리 리스트 총 페이지 및 개수 노출--></div>
+        <div class="pageCountSelect">
+          <!-- 다이어리 리스트 노출 개수 결정 필터 드롭다운 -->
+        </div>
+      </div>
+      <article
+        class="diaryList"
+        data-placeholder="등록된 일기가 없습니다."
+      ></article>
       <!-- <article class="diaryWrite"></article> -->
+      <div class="diaryPagination">
+        <!-- 다이어리 리스트 페이지네이션 노출 -->
+      </div>
     </section>
 
     <div class="scrollBox"></div>
@@ -132,5 +145,7 @@
     <script src="./js/index.js"></script>
     <script src="./js/editor.js"></script>
     <script src="./js/main.js"></script>
+    <!-- <script src="./js/weather.js" type="module"></script> -->
+    <script src="./js/pagination.js"></script>
   </body>
 </html>
