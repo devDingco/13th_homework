@@ -1,30 +1,62 @@
 
-// !다이어리 리스트 노출 함수
+// !다이어리 리스트 노출 함수 -> 페이징 처리한 함수로 변경
 const diaryListSet = (arr) => {
-  const diaryElement = document.querySelector(".diaryList");
 
-  if (arr.length === 0) {
-    // console.log("작성된 일기가 없습니다.");
-    return diaryElement.innerHTML = "<p class='empty'>등록된 일기가 없습니다.</p>";
-  } else {
-    diaryElement.innerHTML = "";
-  }
+  const viewListCount = document.querySelector(".diaryList").dataset.viewlistcount;
+  pageListElement(viewListCount, 1, ".diaryList")
 
-  let diaryUl = diaryElement.querySelector('ul');
-  if (!diaryUl) {
-    // 다이어리 리스트가 없을 경우 ul 생성
-    diaryUl = document.createElement("ul");
-    diaryElement.appendChild(diaryUl);
-  }
+  // const diaryElement = document.querySelector(".diaryList");
 
-  // console.log(arr);
-  diaryUl.innerHTML = arr.map((diary, index) => {
-    const moodType = diary.moodType;
-    const moodTypeInfo = moodTypeSet[moodType];
-    const diaryId = diary.id;
-    const moodColorNum = moodTypeInfo.colorNum;
-    // console.log(diaryId);
-    return `<li>
+  // if (arr.length === 0) {
+  //   // console.log("작성된 일기가 없습니다.");
+  //   return diaryElement.innerHTML = "<p class='empty'>등록된 일기가 없습니다.</p>";
+  // } else {
+  //   diaryElement.innerHTML = "";
+  // }
+
+  // let diaryUl = diaryElement.querySelector('ul');
+  // if (!diaryUl) {
+  //   // 다이어리 리스트가 없을 경우 ul 생성
+  //   diaryUl = document.createElement("ul");
+  //   diaryElement.appendChild(diaryUl);
+  // }
+
+  // // console.log(arr);
+  // diaryUl.innerHTML = arr.map((diary, index) => {
+  //   const moodType = diary.moodType;
+  //   const moodTypeInfo = moodTypeSet[moodType];
+  //   const diaryId = diary.id;
+  //   const moodColorNum = moodTypeInfo.colorNum;
+  //   // console.log(diaryId);
+  //   return `<li>
+  //   <a href="./detail.html?diaryId=${diaryId}&#commentListWrap">
+  //   <button class="closeBtn" onclick="diaryDeletePop(event,${diaryId})">
+  //   <img src="./img/close_outline_light_m.svg" alt="일기 삭제 버튼">
+  //   </button>
+  //     <figure>
+  //       <div class="imgBox imgBox_${moodColorNum}"><img src="${moodTypeInfo.imgSrc}" alt="오늘의 기분 ${moodType}" /></div>
+  //       <figcaption>
+  //         <div class="infoTop">
+  //           <span class="moodText moodTextType${moodColorNum}">${moodType}</span>
+  //           <span class="diaryDate">${diary.writeDate}</span>
+  //         </div>
+  //         <h3>${diary.title}</h3>
+  //       </figcaption>
+  //     </figure>
+  //     </a>
+  //   </li>
+  //   `;
+  // }).join("");
+}
+// diaryListSet(diaryArr);
+
+const diaryLiRender = (diary) => {
+  const moodType = diary.moodType;
+  const moodTypeInfo = moodTypeSet[moodType];
+  const diaryId = diary.id;
+  const moodColorNum = moodTypeInfo.colorNum;
+  // console.log(diaryId);
+  return `<li>
     <a href="./detail.html?diaryId=${diaryId}&#commentListWrap">
     <button class="closeBtn" onclick="diaryDeletePop(event,${diaryId})">
     <img src="./img/close_outline_light_m.svg" alt="일기 삭제 버튼">
@@ -42,11 +74,7 @@ const diaryListSet = (arr) => {
       </a>
     </li>
     `;
-  }).join("");
 }
-diaryListSet(diaryArr);
-
-
 
 
 // !일기 등록 취소 팝업창 렌더링 함수
@@ -159,22 +187,30 @@ const diarySave = () => {
 
 // !일기 필터에 따른 노출 처리 함수
 const moodFilter = (optionValue) => {
-  // // select option 값 가져오기
-  // const moodType = document.querySelector(".diaryFilter option:checked").value;
+
   const moodType = optionValue;
-  console.log(moodType);
+  const filterListSet = (moodType) => {
+    // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
+    const diaryFilterList = diaryArr.filter((diary) => {
+      const diaryMoodType = diary.moodType; // 저장된 일기의 기분 값
+      return moodType === diaryMoodType
+    })
 
-  // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
-  const diaryFilterList = diaryArr.filter((diary) => {
-    const diaryMoodType = diary.moodType; // 저장된 일기의 기분 값
-    return moodType === diaryMoodType
-  })
+    document.querySelector(".diaryList ul").innerHTML = diaryFilterList.map((diary) => diaryLiRender(diary)).join("");
+    document.querySelector(".diaryPagination").classList.add("hide");
+    document.querySelector(".paginationHeader").classList.add("hide");
+  }
 
-  // 필터링된 일기 리스트 노출 : 전체 선택시 전체 리스트 노출
-  diaryListSet(moodType === "전체" ? diaryArr : diaryFilterList);
-
-  // console.log(diaryArr);
+  // 필터링된 일기 리스트 노출
+  if (moodType === "전체") {
+    document.querySelector(".diaryPagination").classList.remove("hide");
+    document.querySelector(".paginationHeader").classList.remove("hide");
+    diaryListSet()
+  } else {
+    filterListSet(moodType);
+  }
 }
+
 
 
 // !검색 필터에 따른 노출 처리 함수
