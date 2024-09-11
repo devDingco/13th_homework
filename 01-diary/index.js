@@ -15,7 +15,7 @@ let lastPage = null
 window.onload = () => {
     diaryList = fetchDiaryListFromLocalStorage()
     lastPage = Math.ceil(diaryList.length / 12)
-    drawPageListButton(diaryList)
+    drawPageNumberButtons()
 }
 
 // [Input Data Validate]
@@ -67,7 +67,11 @@ const createDiary = () => {
     })
 
     updateDiaryListFromLocalStorage(diaryList)
-    renderDiaryList(diaryList)
+
+    
+    isFiltered = false
+    document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "전체"`
+    drawPageNumberButtons()
 }
 
 const removeDiary = (id) => {
@@ -75,19 +79,20 @@ const removeDiary = (id) => {
     console.log(`다이어리가 삭제 됩니다. ${updateDiaryList}`)
     diaryList = updateDiaryList
     updateDiaryListFromLocalStorage(diaryList)
-    renderDiaryList(diaryList)
+    drawPageNumberButtons()
 }
 
 const filterDiary = (event) => {
     const selectedMood = event.target.value
+    selectedPage = 1
 
     if (selectedMood === "전체") {
         isFiltered = false
-        renderDiaryList(diaryList)
+        drawPageNumberButtons()
     } else {
         filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
         isFiltered = true
-        renderDiaryList(filteredDiaryList)
+        drawPageNumberButtons()
     }
 }
 
@@ -149,25 +154,6 @@ const getMoodSettings = (mood) => {
             break
     }
 }
-
-// [Rendering]
-// const reloadData = (reload_diaryList) => {
-//     const diaryDOMList = reload_diaryList.map(el => 
-//         `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
-//             <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
-//             <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
-//                 <div class="diary_title">
-//                     <div class="diary_sub_title">
-//                         <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
-//                         <div class="diary_date">${el.date}</div>
-//                     </div>
-//                  <div class="diary_main_title">${el.title}</div>
-//             </div>
-//         </div>`
-//     ).join("")
-
-//     document.getElementById("diary_list").innerHTML = diaryDOMList
-// }
 
 //  [Tap or Press Event]
 const selectDiaryFilterMenu = (event) => {
@@ -313,17 +299,28 @@ const searchDiary = (event) => {
         const result = diaryList.filter(el => el.title.includes(inputText))
         if (isFiltered) {
             const result = filteredDiaryList.filter(el => el.title.includes(inputText))
-            renderDiaryList(result)
+            drawPageList(result)
         } else {
             const result = diaryList.filter(el => el.title.includes(inputText))
-            renderDiaryList(result)
+            drawPageList(result)
         }
     }, 1000)
 }
 
-const drawPageListButton = (data) => {
+const drawPageNumberButtons = () => {
+    if (isFiltered) {
+        drawPageList(filteredDiaryList)
+    } else {
+        drawPageList(diaryList)
+    }
+}
+
+const drawPageList = (data) => {
+    const lastPage = Math.ceil(data.length / 12)
     const pageList = data.map((el, index) => {
         if ((index + startPage) <= lastPage) {
+            console.log(isFiltered)
+            console.log(index)
             const pageNumber = index + 1
             const className = selectedPage === pageNumber ? "selected_page_button" : "page_list_button"
             return `
@@ -367,7 +364,7 @@ const renderDiaryList = (data) => {
 
 const goToPage = (number) => {
     selectedPage = number
-    drawPageListButton(diaryList)
+    drawPageNumberButtons()
     window.scrollTo({top:300, behavior: "smooth"})
 }
 
