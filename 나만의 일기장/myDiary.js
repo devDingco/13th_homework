@@ -1,4 +1,5 @@
 let diaryList = JSON.parse(localStorage.getItem('diaries')) || [];
+let filteredList = diaryList; // 기본적으로 전체 리스트를 저장
 
 //스크롤 시 필터 배경색 변경
 // window.addEventListener('scroll', () => {
@@ -86,9 +87,9 @@ const renderDiaries = () => {
 
   const start = (clickedPage - 1) * itemPerPage;
   const end = start + itemPerPage;
-  const paginatedDiaries = diaryList.slice(start, end);
+  const paginatedDiaries = filteredList.slice(start, end);
 
-  if (diaryList.length === 0) {
+  if (filteredList.length === 0) {
     info.style.display = 'block';
   } else {
     info.style.display = 'none';
@@ -114,12 +115,26 @@ const filterDiaries = (e) => {
   ).nextElementSibling;
   selectedLabel.parentElement.classList.add('selected');
 
-  const filteredDiaries =
+  // 필터링된 데이터가 아닌 전체 리스트를 가져왔을때 코드 (블로깅위해서 남겼습니다)
+  // const filteredDiaries =
+  //   filterContent === '전체'
+  //     ? diaryList
+  //     : diaryList.filter((diary) => diary.todayFeeling === filterContent);
+
+  // if (filteredDiaries.length === 0) {
+  //   info.style.display = 'block';
+  //   info.innerHTML = `해당하는 일기가 존재하지 않습니다.`;
+  // } else {
+  //   info.style.display = 'none';
+  // }
+
+  // 필터링된 데이터로 `filteredList` 업데이트
+  filteredList =
     filterContent === '전체'
       ? diaryList
       : diaryList.filter((diary) => diary.todayFeeling === filterContent);
 
-  if (filteredDiaries.length === 0) {
+  if (filteredList.length === 0) {
     info.style.display = 'block';
     info.innerHTML = `해당하는 일기가 존재하지 않습니다.`;
   } else {
@@ -131,9 +146,13 @@ const filterDiaries = (e) => {
   ).style.cssText = `--inputValue : "${filterContent}" `;
   document.getElementById('customFilter').click();
 
-  const cardContainer = document.getElementById('card');
-  cardContainer.innerHTML = '';
-  filteredDiaries.forEach((diary, index) => showCardFunc(diary, index));
+  // const cardContainer = document.getElementById('card');
+  // cardContainer.innerHTML = '';
+  // filteredDiaries.forEach((diary, index) => showCardFunc(diary, index));
+
+  clickedPage = 1; // 필터링 시 1페이지로 이동
+  renderDiaries(); // 필터링된 데이터를 기반으로 다이어리 렌더링
+  pageBtnFunc(); // 필터링된 데이터를 기반으로 페이지네이션 업데이트
 };
 
 //search 함수
@@ -315,7 +334,7 @@ const darkMode = (e) => {
 //페이지네이션
 let clickedPage = 1;
 let itemPerPage = 12;
-const lastPage = Math.ceil(diaryList.length / itemPerPage);
+const lastPage = Math.ceil(filteredList.length / itemPerPage);
 
 const prevBtn = () => {
   if (clickedPage === 1) {
@@ -343,6 +362,7 @@ const nextBtn = () => {
 
 //페이지 버튼 구현
 const pageBtnFunc = () => {
+  const lastPage = Math.ceil(filteredList.length / itemPerPage);
   const pages = new Array(lastPage)
     .fill(1)
     .map((el, index) => {
@@ -386,12 +406,14 @@ const pageBtnFunc = () => {
 
 //페이지 이동함수
 const moveToPage = (pageNum) => {
+  scrollToTop();
   clickedPage = pageNum;
   renderDiaries();
   pageBtnFunc();
 };
 
 window.onload = () => {
+  filteredList = diaryList;
   renderDiaries();
   pageBtnFunc();
 };
