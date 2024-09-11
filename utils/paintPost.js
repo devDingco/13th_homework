@@ -1,13 +1,21 @@
 // post container를 다시 그리는 코드가 여러 개 중복되어서
 // 조금 더 효율적인 코드를 작성하기 위해 모듈화하였다.
+import { calculationPagination } from "./calculationPagination.js";
+
 export const paintPost = (array) => {
     const parentElement = document.getElementById("post");
-    array.map((resultObject) => {
-        const postContainer = document.createElement("a");
-        postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
-        postContainer.className = "post-container";
-        postContainer.id = `${resultObject.id}`;
-        postContainer.innerHTML = `
+    parentElement.innerHTML = "";
+    let focus = localStorage.getItem("focus")
+        ? localStorage.getItem("focus")
+        : 1;
+
+    array.map((resultObject, idx) => {
+        if (idx >= (focus - 1) * 12 && idx < focus * 12) {
+            const postContainer = document.createElement("a");
+            postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
+            postContainer.className = "post-container";
+            postContainer.id = `${resultObject.id}`;
+            postContainer.innerHTML = `
                 <img src="${resultObject.img}" alt="img" id=${resultObject.id}  class="post-img" />
                 <div class="post-title">
                     <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
@@ -17,8 +25,11 @@ export const paintPost = (array) => {
                 <button class="post-delete" id="post-delete">X</button>
             `;
 
-        parentElement.appendChild(postContainer);
+            parentElement.appendChild(postContainer);
+        }
     });
+
+    calculationPagination(array, focus);
     // 기존에는 html 내에 직접 이벤트 속성을 적용하여 이벤트를 처리했지만
     // 모듈화를 하기 위해서는 위 방법이 아닌 addEventListener를 사용
     // -> 하지만 문제는 다음과 같음.
