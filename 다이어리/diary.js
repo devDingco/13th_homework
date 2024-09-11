@@ -226,7 +226,7 @@ const setDropdownLabel = (selectedMood) => {
 const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
-  renderInitialDiaryEntries(diaryList)
+  renderInitialDiaryEntries(diaryList);
   selectedMood !== undefined ? setDropdownLabel(selectedMood) : undefined;
 };
 
@@ -462,22 +462,29 @@ const onSearch = (event) => {
 
   timer = setTimeout(() => {
     const searchQuery = event.target.value;
-    const searchResults = storedDiaryList.filter((e) =>
+    const searchResults = paginatedDiaryData.filter((e) =>
       e.title.includes(searchQuery)
     );
     document.getElementById("article").innerHTML = "";
-    searchResults.map((diary) => {
-      const storedDiary = {
-        id: diary.id,
-        mood: diary.mood,
-        date: diary.date,
-        color: diary.color,
-        title: diary.title,
-        content: diary.content,
-        imageName: diary.imageName,
-      };
-      createHtml(storedDiary);
-    });
+    console.log(searchResults.length);
+    if (searchResults.length === 0) {
+      document.getElementById(
+        "article"
+      ).innerHTML += `<div class="no_search_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+    } else {
+      searchResults.map((diary) => {
+        const storedDiary = {
+          id: diary.id,
+          mood: diary.mood,
+          date: diary.date,
+          color: diary.color,
+          title: diary.title,
+          content: diary.content,
+          imageName: diary.imageName,
+        };
+        createHtml(storedDiary);
+      });
+    }
   }, 1000);
 };
 
