@@ -45,7 +45,7 @@ a {
   height: 100vh;
   background-color: lightgray;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
 }
 
 .CSS_일기등록완료모달 {
@@ -60,7 +60,8 @@ a {
   flex-direction: column;
   gap: 40px;
   border-radius: 24px;
-  background-color: white;
+  background-color: var(--기본배경색);
+  border: 1px solid var(--닫기버튼보더색);
 }
 
 .CSS_모달안내말 {
@@ -68,6 +69,7 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  color: var(--기본글자색);
 }
 
 .CSS_모달안내말_상단 {
@@ -93,8 +95,8 @@ letter-spacing: -0.2px;
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  color: #FFF;
-  background-color: #000;
+  color: var(--등록하기버튼글자색);
+  background-color: var(--등록하기버튼배경색);
   width: 100%;
   margin-top: 30px;
 }
@@ -114,8 +116,9 @@ letter-spacing: -0.2px;
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  color: #000;
-  background-color: #FFF;
+  color: var(--기본글자색);
+  background-color: var(--닫기버튼배경색);
+  border: 1px solid var(--닫기버튼보더색);
   width: 50%;
 }
 
@@ -128,8 +131,8 @@ letter-spacing: -0.2px;
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  color: #FFF;
-  background-color: #000;
+  color: var(--등록완료버튼글자색);
+  background-color: var(--등록완료버튼배경색);
   width: 50%;
 }
 
@@ -397,6 +400,64 @@ letter-spacing: -0.2px;
   
 }
 
+.등록상자제목이랑토글 {
+  display: flex;
+  align-items: center;
+  color: var(--기본글자색);
+}
+
+.다크모드토글섹션 {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  min-width: 110px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+/* 토글버튼이랑 다크모드 변환 섹션 */
+.CSS_다크모드 {
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.CSS_다크모드_라벨 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.CSS_다크모드_토글 {
+  appearance: none;
+  content: "";
+  width: 40px;
+  height: 24px;
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.CSS_다크모드_토글::after {
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+  transition: margin-left 0.3s;
+}
+
+.CSS_다크모드_토글:checked {
+  background-color: #3ad84a;
+}
+.CSS_다크모드_토글:checked::after {
+  margin-left: 18px;
+}
+
+
 /* 일기등록 상자 */
 .CSS_등록상자 {
   position: fixed;
@@ -407,7 +468,7 @@ letter-spacing: -0.2px;
   min-width: 22.5rem; /* 360px */
   height: fit-content;  /* 500px */
   border-radius: 1rem; /* 16px */
-  background-color: #fff;
+  background-color: var(--기본배경색);
   border: 0.0625rem solid #d4d3d3; /* 1px */
   display: flex;
   flex-direction: column;
@@ -416,7 +477,7 @@ letter-spacing: -0.2px;
   gap: 2.5rem; /* 40px */
   text-align: left;
   font-size: 1.5rem; /* 24px */
-  color: #000;
+  color: var(--기본글자색);
   margin-top: 35px;
 }
 
@@ -425,6 +486,8 @@ letter-spacing: -0.2px;
   font-size: 1.5rem; /* 24px */
   font-weight: 700;
 }
+
+
 
 .CSS_등록상자_내용 {
   width: 100%;
@@ -453,6 +516,7 @@ letter-spacing: -0.2px;
   gap: 0.5rem; /* 8px */
   justify-content: center;
   align-items: center;
+  color: var(--라디오글자색);
 }
 
 .CSS_일기입력상자 {
@@ -460,7 +524,7 @@ letter-spacing: -0.2px;
   flex-direction: column;
   gap: 1.5rem; /* 24px */
 }
-
+/* 기본 스타일 */
 .CSS_일기쓰기 {
   display: flex;
   flex-direction: column;
@@ -469,7 +533,15 @@ letter-spacing: -0.2px;
   font-size: 0.875rem; /* 14px */
   font-weight: 500;
   line-height: 1.25rem; /* 20px */
-  color: #333;
+  color: var(--인풋플레이스홀더색); /* 기본 글자색 */
+}
+
+.CSS_일기쓰기 input {
+  color: var(--인풋플레이스홀더색);
+}
+
+.CSS_일기쓰기 textarea {
+  color: var(--인풋플레이스홀더색);
 }
 
 #HTML_제목입력창,
@@ -477,8 +549,8 @@ letter-spacing: -0.2px;
   appearance: none;
   width: 100%;
   border-radius: 0.5rem; /* 8px */
-  background-color: #fff;
-  border: 0.0625rem solid #d4d3d3; /* 1px */
+  background-color: var(--인풋배경색);
+  border: 0.0625rem solid var(--인풋보더색); /* 1px */
   padding: 0.75rem 1rem; /* 12px 16px */
   text-align: left;
   font-size: 1rem; /* 16px */
@@ -488,7 +560,7 @@ letter-spacing: -0.2px;
 
 #HTML_제목입력창::placeholder,
 #HTML_내용입력창::placeholder {
-  color: #ababab;
+  color: var(--인풋플레이스홀더색);
 }
 
 .CSS_일기쓰기버튼모음 {
@@ -515,15 +587,25 @@ letter-spacing: -0.2px;
   color: #f2f2f2;
 }
 
+.CSS_일기쓰기_등록버튼:disabled {
+  background-color: var(--등록하기버튼잠김);
+}
+
+/* .CSS_일기쓰기_등록버튼:disabled {
+  background-color: var(--);
+} */
+
+
 .CSS_일기쓰기_닫기버튼 {
   min-width: 75px;
   width: 40%;
   border-radius: 0.5rem; /* 8px */
-  background-color: #FFF;
+  background-color: var(--닫기버튼배경색);
+  color: var(--기본글자색);
   height: 3rem; /* 48px */
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid var(--닫기버튼보더색);
   justify-content: center;
   padding: 0.5rem 0.625rem; /* 8px 10px */
   box-sizing: border-box;
@@ -531,6 +613,57 @@ letter-spacing: -0.2px;
   font-weight: 600;
   line-height: 1.5rem; /* 24px */
 }
+
+
+/* 페이지네이션 영역 */
+
+.CSS_페이지네이션 {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.CSS_이전다음버튼 {
+  background-color: white;
+  border: none;
+  width: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.CSS_페이지보여주는곳 {
+  display: flex;
+  gap: 16px;
+
+}
+
+.CSS_페이지보여주는곳 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background-color: #FFF;
+  font-size: 16px;
+  color: #777;
+  font-weight: 500;
+}
+
+.CSS_현재페이지 {
+  font-weight: 600 !important;
+  border-radius: 8px;
+  background-color: #F2F2F2 !important;
+  color: #000 !important;
+}
+
+/* .CSS_페이지보여주는곳 button:focus {
+  color: red;
+} */
 
 /* 푸터 영역 */
 .CSS_푸터_영역 {
@@ -577,8 +710,8 @@ letter-spacing: -0.2px;
   border: none;
   cursor: pointer;
   position: fixed;
-  bottom: 2.5rem; /* 40px */
-  right: 1.25rem; /* 20px */
+  bottom: 3.5rem;
+  right: 2.25rem;
 }
 
 .CSS_플로팅이미지 {

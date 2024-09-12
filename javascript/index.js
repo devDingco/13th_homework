@@ -1,104 +1,117 @@
 window.onload = () => {
   console.log("민지의 다이어리에 오신 것을 환영합니다.");
-
+  
   // 1. 시작하면 일기 목록에 그리기
-  JS_일기그리기기능();
+  //  JS_일기그리기기능();
+  // 원래는 위에 껀데 이제 페이지네이션으로 줘야해서 이거로 바꿈
+  JS_페이지그리기기능();
 };
 
-// 스크롤 감지하여 필터 배경색 변경
-window.onscroll = function () {
-  const selectElement = document.querySelector(".CSS_필터");
-  // 1. 스크롤 얼마나 내려갔는지 확인하기
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
-    selectElement.classList.add("CSS_색상반전");
+// // 스크롤 감지하여 필터 배경색 변경
+// window.onscroll = function () {
+//   const selectElement = document.querySelector(".CSS_필터");
+//   // 1. 스크롤 얼마나 내려갔는지 확인하기
+//   if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+//     // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+//     selectElement.classList.add("CSS_색상반전");
+//   } else {
+//     selectElement.classList.remove("CSS_색상반전"); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
+//   }
+// };
+
+// 토글기능 담당하는 곳
+const JS_다크모드 = (event) => {
+  console.log("다크모드 토글 상태:", event.target.checked); // 체크 상태 확인
+  if (event.target.checked === true) {
+    document.documentElement.setAttribute("data-다크모드", "on");
   } else {
-    selectElement.classList.remove("CSS_색상반전"); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
+    document.documentElement.setAttribute("data-다크모드", "off");
   }
 };
 
-const JS_일기그리기기능 = () => {
-  // 1. 스토리지에 저장된 일기목록 가져오기
-  const 스토리지에저장된일기목록 =
-    window.localStorage.getItem("민지의일기목록") ?? "[]";
-  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+// 원래는 있었는데 필요없게 된거 같아서 주석처리함.
 
-  // 2. 일기목록 화면에 새롭게 전체 그리기
-  const HTML_새로운일기도화지 = 일기목록
-    .map(
-      (el, index) => `
-        <a href="./detail.html?number=${index}">
-          <div class="CSS_일기">
-          <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
-            <div class="CSS_일기사진">
+// const JS_일기그리기기능 = () => {
+//   // 1. 스토리지에 저장된 일기목록 가져오기
+//   const 스토리지에저장된일기목록 =
+//     window.localStorage.getItem("민지의일기목록") ?? "[]";
+//   const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+//   // console.log(일기목록.length)
+//   // 2. 일기목록 화면에 새롭게 전체 그리기
+//   const HTML_새로운일기도화지 = 일기목록
+//     .map(
+//       (el, index) => `
+//         <a href="./detail.html?number=${index}">
+//           <div class="CSS_일기">
+//           <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index});" />
+//             <div class="CSS_일기사진">
             
-              ${
-                el.기분 === "행복"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
-                  : ""
-              }
-              ${
-                el.기분 === "슬픔"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
-                  : ""
-              }
-              ${
-                el.기분 === "놀람"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
-                  : ""
-              }
-              ${
-                el.기분 === "화남"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
-                  : ""
-              }
-              ${
-                el.기분 === "기타"
-                  ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
-                  : ""
-              }
-            </div>
-            <div class="CSS_일기정보">
-              <div class="CSS_일기내용">
-                ${
-                  el.기분 === "행복"
-                    ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
-                    : ""
-                }
-                ${
-                  el.기분 === "슬픔"
-                    ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
-                    : ""
-                }
-                ${
-                  el.기분 === "놀람"
-                    ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
-                    : ""
-                }
-                ${
-                  el.기분 === "화남"
-                    ? `<div class="CSS_기분 CSS_화남">화나요</div>`
-                    : ""
-                }
-                ${
-                  el.기분 === "기타"
-                    ? `<div class="CSS_기분 CSS_기타">기타</div>`
-                    : ""
-                }
-                <div class="CSS_날짜">${el.작성일}</div>
-              </div>
-              <div class="CSS_일기제목"> ${el.제목}</div>
-            </div>
-          </div>
+//               ${
+//                 el.기분 === "행복"
+//                   ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
+//                   : ""
+//               }
+//               ${
+//                 el.기분 === "슬픔"
+//                   ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+//                   : ""
+//               }
+//               ${
+//                 el.기분 === "놀람"
+//                   ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
+//                   : ""
+//               }
+//               ${
+//                 el.기분 === "화남"
+//                   ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
+//                   : ""
+//               }
+//               ${
+//                 el.기분 === "기타"
+//                   ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
+//                   : ""
+//               }
+//             </div>
+//             <div class="CSS_일기정보">
+//               <div class="CSS_일기내용">
+//                 ${
+//                   el.기분 === "행복"
+//                     ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
+//                     : ""
+//                 }
+//                 ${
+//                   el.기분 === "슬픔"
+//                     ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
+//                     : ""
+//                 }
+//                 ${
+//                   el.기분 === "놀람"
+//                     ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
+//                     : ""
+//                 }
+//                 ${
+//                   el.기분 === "화남"
+//                     ? `<div class="CSS_기분 CSS_화남">화나요</div>`
+//                     : ""
+//                 }
+//                 ${
+//                   el.기분 === "기타"
+//                     ? `<div class="CSS_기분 CSS_기타">기타</div>`
+//                     : ""
+//                 }
+//                 <div class="CSS_날짜">${el.작성일}</div>
+//               </div>
+//               <div class="CSS_일기제목"> ${el.제목}</div>
+//             </div>
+//           </div>
 
-        </a>
-      `
-    )
-    .join("");
-  window.document.getElementById("HTML_일기보여주는곳").innerHTML =
-    HTML_새로운일기도화지;
-};
-
+//         </a>
+//       `
+//     )
+//     .join("");
+//   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
+//     HTML_새로운일기도화지;
+// };
 
 
 const 일기목록 = [];
@@ -121,7 +134,6 @@ window.addEventListener("keyup", () => {
 })
 
 const JS_글쓰기기능 = () => {
-  // 0. 현재 날짜 가져오기
   // 0. 현재 날짜 가져오기
 
   const date = new Date();
@@ -155,7 +167,8 @@ const JS_글쓰기기능 = () => {
   일기목록.push(일기담는통);
   window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
 
-  JS_일기그리기기능();
+  // 페이지그리기기능으로 바꿈
+  JS_페이지그리기기능();
 };
 
 const JS_글보기기능 = (일기번호받는통) => {
@@ -328,7 +341,31 @@ const JS_일기검색기능 = (event) => {
             </div>
             <div class="CSS_일기정보">
               <div class="CSS_일기내용">
-                <div class="CSS_기분">${el.기분}</div>
+              ${
+                el.기분 === "행복"
+                  ? '<div class="CSS_기분 CSS_행복">행복해요</div>'
+                  : ""
+              }
+              ${
+                el.기분 === "슬픔"
+                  ? '<div class="CSS_기분 CSS_슬픔">슬퍼요</div>'
+                  : ""
+              }
+              ${
+                el.기분 === "놀람"
+                  ? '<div class="CSS_기분 CSS_놀람">놀랐어요</div>'
+                  : ""
+              }
+              ${
+                el.기분 === "화남"
+                  ? '<div class="CSS_기분 CSS_화남">화나요</div>'
+                  : ""
+              }
+              ${
+                el.기분 === "기타"
+                  ? `<div class="CSS_기분 CSS_기타">기타</div>`
+                  : ""
+              }
                 <div class="CSS_날짜">${el.작성일}</div>
               </div>
               <div class="CSS_일기제목"> ${el.제목}</div>
@@ -343,8 +380,6 @@ const JS_일기검색기능 = (event) => {
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
     HTML_새로운일기도화지;
 };
-
-
 
 
 function JS_스크롤위로기능() {
@@ -370,7 +405,11 @@ function JS_일기삭제기능(event, 일기번호) {
   alert("삭제되었습니다.");
   // 이부분 얼랏을 지우고 모달 만들어 두고 나오는 식으로 해보기
   // 4. 삭제된 일기목록 화면에 다시 그리기
-  JS_일기그리기기능();
+
+  //페이지그리기기능으로바꿈   
+  JS_페이지그리기기능();  
+
+
 }
 
 
@@ -452,12 +491,31 @@ const JS_강아지사진불러오는기능 = () => {
 
       const 강아지사진 = 객체로바뀐결과.message;
 
-      document.getElementById("HTML_강아지보여주는곳").innerHTML = `
+      document.getElementById("HTML_강아지보여주는곳").innerHTML += `
         ${강아지사진.map((el) => `<img class="CSS_강아지사진" src="${el}">`).join('')}
       `;
     })
     .catch((오류) => console.error("오류 발생:", 오류));
 }
+
+let 타이머 = null;
+window.addEventListener("scroll", () => {
+  const 스크롤퍼센트 = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+  // 90% 이상 스크롤되었을 때 강아지 사진 불러오기
+  if (스크롤퍼센트 >= 0.9) {
+    if (타이머) return; // 타이머가 존재하면 중복 호출 방지
+    JS_강아지사진불러오는기능();
+
+    // 1초 후에 타이머 해제
+    타이머 = setTimeout(() => {
+      타이머 = null;
+    }, 1000);
+  }
+});
+
+
+
 
 // 사진 넣는건 했고 셀렉트로 사진 조절하는 기능 넣어야함.
 const JS_사진사이즈선택 = () => {
@@ -476,6 +534,116 @@ const JS_사진사이즈선택 = () => {
 }
 
 
-// 순서. 1번 api호출해서 사진 10장 받아옴
-// 정리다했고  사진보관함을 클릭하면 api를 호출해서 가져오면 될듯함
-// 옵션의 값이 트루인 값에 라티아오의 비율을 바꿔주면 될 것 같고 
+
+let 시작페이지 = 1;
+const 페이지당개수 = 12;
+
+const 스토리지에저장된일기목록 = window.localStorage.getItem("민지의일기목록") ?? "[]";
+const 페이지내이션일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+const 일기개수 = 페이지내이션일기목록.length;
+const 마지막페이지 = Math.ceil(일기개수 / 페이지당개수);
+
+const JS_이전페이지이동기능 = () => {
+  if (시작페이지 === 1) {
+    alert("첫 페이지입니다!");
+  } else {
+    시작페이지--;
+    JS_페이지그리기기능();
+  }
+};
+
+const JS_다음페이지이동기능 = () => {
+  if (시작페이지 < 마지막페이지) {
+    시작페이지++;
+    JS_페이지그리기기능();
+  } else {
+    alert("마지막 페이지입니다!");
+  }
+};
+
+const JS_페이지그리기기능 = () => {
+  const 페이지들 = new Array(마지막페이지).fill(1).map((_, index) => {
+    const 페이지번호 = index + 1;
+
+    return 페이지번호 === 시작페이지
+      ? `<button class = "CSS_현재페이지">${페이지번호}</button>`
+      : `<button onclick="시작페이지 = ${페이지번호}; JS_페이지그리기기능();">${페이지번호}</button>`;
+  }).join("");
+
+  document.getElementById("HTML_페이지보여주는곳").innerHTML = 페이지들;
+
+  // 현재 페이지에 해당하는 일기 카드 그리기
+  JS_일기카드그리기기능();
+};
+
+const JS_일기카드그리기기능 = () => {
+  const 시작인덱스 = (시작페이지 - 1) * 페이지당개수;
+  const 끝인덱스 = 시작페이지 * 페이지당개수;
+  const 현재페이지일기목록 = 페이지내이션일기목록.slice(시작인덱스, 끝인덱스);
+
+  const HTML_새로운일기도화지 = 현재페이지일기목록.map((el, index) => `
+      <a href="./detail.html?number=${시작인덱스 + index}">
+        <div class="CSS_일기">
+          <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${시작인덱스 + index});" />
+          <div class="CSS_일기사진">
+          ${
+            el.기분 === "행복"
+              ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
+              : el.기분 === "슬픔"
+              ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+              : el.기분 === "놀람"
+              ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
+              : el.기분 === "화남"
+              ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
+              : el.기분 === "기타"
+              ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
+              : ''
+          }
+          </div>
+      
+          <div class="CSS_일기정보">
+            <div class="CSS_일기내용">
+            ${
+              el.기분 === "행복"
+                ? '<div class="CSS_기분 CSS_행복">행복해요</div>'
+                : ""
+            }
+            ${
+              el.기분 === "슬픔"
+                ? '<div class="CSS_기분 CSS_슬픔">슬퍼요</div>'
+                : ""
+            }
+            ${
+              el.기분 === "놀람"
+                ? '<div class="CSS_기분 CSS_놀람">놀랐어요</div>'
+                : ""
+            }
+            ${
+              el.기분 === "화남"
+                ? '<div class="CSS_기분 CSS_화남">화나요</div>'
+                : ""
+            }
+            ${
+              el.기분 === "기타"
+                ? '<div class="CSS_기분 CSS_기타">기타</div>'
+                : ""
+            }
+              <div class="CSS_날짜">${el.작성일}</div>
+            </div>
+            <div class="CSS_일기제목">${el.제목}</div>
+          </div>
+        </div>
+      </a>
+    `).join("");
+
+  document.getElementById("HTML_일기보여주는곳").innerHTML = HTML_새로운일기도화지;
+};
+
+// 여기에 사진보관함 온클릭 추가해서 사진보관함 가면 페이지네이션 안보이게 삭제하는 기능 마저 작성하기
+const JS_페이지네이션삭제 = () => {
+
+}
+
+// 페이지 로드 시 초기화
+JS_페이지그리기기능();
