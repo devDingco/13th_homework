@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/diary.css" />
     <link rel="stylesheet" href="./styles/diary_mobile.css" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script src="./modules/diary.js" defer></script>
   </head>
@@ -132,6 +133,11 @@
           <ul id="diaryList">
             <li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>
           </ul>
+          <div id="diary_pagenation">
+            <button id="prevPage" onclick="prevPage()">이전</button>
+            <div id="pagenation_list"></div>
+            <button id="nextPage" onclick="nextPage()">다음</button>
+          </div>
         </div>
 
         <button id="upFloatingButton" class="">

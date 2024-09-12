@@ -6,10 +6,15 @@ const alertDiary = document.getElementById('add-list-alert');
 const scrollFloatingButton = document.getElementById('upFloatingButton');
 const deleteButtonEl = document.getElementById('deleteButton');
 
+//diary data
 let feeling = '';
 let customSelect = 'all';
 let diaryListArray = [];
 let selectedValue = '';
+
+// pagenation
+let startPage = 1;
+let onPage = 1;
 
 const feelingText = {
   angry: '화나요',
@@ -26,23 +31,16 @@ const photoSelect = {
   height: '세로형',
 };
 
-const renderLocalStorageData = () => {
+const fetchLocalStorageListData = () => {
   if (localStorage.length) {
-    localData = localStorage.getItem('diaryListArray');
+    const localData = localStorage.getItem('diaryListArray');
     diaryListArray = JSON.parse(localData);
     if (alertDiary) {
       diaryListEl.innerHTML = '';
     }
-
-    diaryListArray.map((diary) => {
-      const addList = document.createElement('li');
-
-      diaryListEl.append(addList);
-      addList.innerHTML = diaryCard(diary);
-    });
   }
 };
-renderLocalStorageData();
+fetchLocalStorageListData();
 
 const submitButtonStyleChange = (buttonState) => {
   if (buttonState === 'on') {
@@ -113,7 +111,7 @@ const onAddDiary = (e) => {
 const onDeleteButtonClick = (removeId) => {
   diaryListArray = diaryListArray.filter((diary) => diary.id !== removeId);
   localStorage.setItem('diaryListArray', JSON.stringify(diaryListArray));
-  renderLocalStorageData();
+  fetchLocalStorageListData();
 };
 
 const onOptionChecked = (e) => {
@@ -150,7 +148,7 @@ const onOptionChecked = (e) => {
         addList.innerHTML = diaryCard(diaryData);
       } else if (customSelect === 'all') {
         isList = true;
-        renderLocalStorageData();
+        renderDiaryList();
       }
     });
   } else if (type === 'photo') {
@@ -174,10 +172,10 @@ const onOptionChecked = (e) => {
   }
   document.getElementById(`optionList_${type}`).classList.add('hidden');
 
-  // if (!isList) {
-  //   diaryListEl.innerHTML =
-  //     '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
-  // }
+  if (!isList) {
+    diaryListEl.innerHTML =
+      '<li id="add-list-alert" class="active">등록된 일기가 없습니다.</li>';
+  }
 };
 
 function onThemeToggle(event) {
@@ -255,6 +253,7 @@ const modalOn = (depth, content, event) => {
 const modalClose = (isOne, closeModal1, closeModal2, nextFnc) => {
   const modalBack1 = document.getElementById('modal_depth1');
   const modalBack2 = document.getElementById('modal_depth2');
+  document.body.style.overflow = '';
 
   !isOne
     ? ((document.getElementById(closeModal1).style.display = 'none'),
@@ -358,16 +357,17 @@ const onNavigationClick = (type) => {
       classNameChange(diary_nav, 'active', 'none');
       diary_filter.style.display = 'none';
       photo_filter.style.display = 'block';
+      photo_main.innerHTML = '';
       dogImageApi();
       break;
   }
   // classNameChange();
   // classNameChange();
 };
-
+let infinitiePage = 0;
 async function dogImageApi() {
   const photo_main = document.getElementById('photoList');
-  photo_main.innerHTML = '';
+  // photo_main.innerHTML = '';
 
   for (let i = 0; i < 10; i++) {
     photo_main.innerHTML += `
@@ -387,11 +387,13 @@ async function dogImageApi() {
   fetch('https://dog.ceo/api/breeds/image/random/10').then((res) => {
     res.json().then((data) => {
       const dogImageList = data.message;
+      console.log(dogImageList);
 
       for (let i = 0; i < dogImageList.length; i++) {
-        dogImageSkeletons[i].src = dogImageList[i];
-        skeletonStick[i].style.display = 'none';
+        dogImageSkeletons[infinitiePage * 10 + i].src = dogImageList[i];
+        skeletonStick[infinitiePage * 10 + i].style.display = 'none';
       }
+      infinitiePage++;
     });
   });
 }
@@ -412,7 +414,6 @@ const searchFnc = (event) => {
     searchDiary.forEach((diaryData) => {
       const addList = document.createElement('li');
       isList = true;
-      console.log(diaryData.title);
       diaryListEl.append(addList);
 
       addList.innerHTML = diaryCard(diaryData);
@@ -420,26 +421,82 @@ const searchFnc = (event) => {
   }, 500);
 };
 
-let infinityTimer = null;
+let infinitieTimer = null;
 window.addEventListener('scroll', () => {
   const scrollPercent =
     document.documentElement.scrollTop /
     (document.documentElement.scrollHeight -
       document.documentElement.clientHeight);
   if (scrollPercent < 0.9) return;
-  if (infinityTimer !== null) return;
-  // });
-  console.log('불러옵니다');
+  if (scrollPercent === 1) dogImageApi();
+  if (infinitieTimer !== null) return;
+
   dogImageApi();
 
-  infinityTimer = setTimeout(() => {
-    clearTimeout(infinityTimer);
-    infinityTimer = null;
-
-    const scrollPercent =
-      document.documentElement.scrollTop /
-      (document.documentElement.scrollHeight -
-        document.documentElement.clientHeight);
-    if (scrollPercent === 1) dogImageApi();
+  infinitieTimer = setTimeout(() => {
+    clearTimeout(infinitieTimer);
+    infinitieTimer = null;
   }, 5000);
 });
+//
+//
+//
+//
+//
+//
+
+const lastPage = Math.ceil(diaryListArray.length / 12);
+const prevPage = () => {
+  if (startPage === 1) {
+    alert('처음이에요! 더 이상 내려갈 수 없어요!');
+  } else {
+    startPage = startPage - 12;
+    pageRender();
+  }
+};
+const nextPage = () => {
+  if (startPage + 12 <= lastPage) {
+    startPage = startPage + 12;
+    onPage = startPage;
+    pageRender();
+  } else {
+    alert('lastPage번호를 넘어갑니다. 더 이상 보여줄 수 없어요.');
+  }
+};
+
+const pageRender = () => {
+  const pages = new Array(12)
+    .fill(1)
+    .map((el, index) => {
+      const pageNum = index + startPage;
+
+      return pageNum <= lastPage
+        ? `<button onclick="itemRender(${pageNum});onPage=${pageNum};pageRender();" 
+            class=${
+              onPage === pageNum ? 'clickPagenation' : ''
+            }>${pageNum}</button>`
+        : ``;
+    })
+    .join(' ');
+
+  document.getElementById('pagenation_list').innerHTML = pages;
+};
+
+const itemRender = (pageNum) => {
+  const result = diaryListArray.filter(
+    (el, index) => index < pageNum * 12 && index >= (pageNum - 1) * 12,
+  );
+
+  diaryListEl.innerHTML = result
+    .map((el) => `<li>${diaryCard(el)}</li>`)
+    .join('');
+};
+
+function renderDiaryList() {
+  pageRender();
+  itemRender(startPage);
+}
+
+window.onload = () => {
+  renderDiaryList();
+};
