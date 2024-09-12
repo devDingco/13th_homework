@@ -49,6 +49,10 @@
   --max-width: 73rem;
 }
 
+.hide {
+  display: none !important;
+}
+
 [lightStatus=off] {
   --basic-font-color: #fff;
   --basic-bg-color: #000;

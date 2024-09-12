@@ -8,7 +8,7 @@
 
       ul {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, calc(50% - 1rem));
 
         li {
           figure .imgBox {
@@ -58,6 +58,7 @@
   .editWrap .diaryWrite {
     padding: 1.5rem 0;
     border-bottom: 1px solid #000;
+    border-radius: 0;
   }
 
   .diaryWrite {
@@ -112,7 +113,6 @@
 
   .navBottom {
     flex-wrap: wrap;
-    justify-content: flex-end;
     width: 100%;
     padding: 0;
     gap: 12px;
@@ -147,6 +147,10 @@
     width: 100%;
     padding: 0 20px;
     bottom: 40px;
+  }
+
+  .detailWrap {
+    padding-top: 1.25rem;
   }
 
   // 상세페이지 스타일
@@ -194,6 +198,7 @@
 
   .navBottom .filterSearchBox {
     justify-content: space-between;
+    gap: 1.25rem;
     .searchBox {
       width: 100%;
       display: flex;
@@ -232,5 +237,9 @@
 
   .galleryListWrap.ratio-3-4 li img {
     height: 23.25rem;
+  }
+
+  .paginationHeader {
+    display: none;
   }
 }
