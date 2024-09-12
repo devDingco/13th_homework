@@ -964,3 +964,33 @@ a {
   --registerCancelBackgroundColor: #f2f2f2;
   --registerCancelColor: #000000;
 }
+
+#pageNation_Box {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+#pagesBox {
+  display: flex;
+  gap: 16px;
+}
+
+#pagesNumber {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  padding: 10px;
+  line-height: 8px;
+  background-color: #f2f2f2;
+  border: none;
+}
+
+.pageButton {
+  display: block;
+}
+
+#rightButton {
+  transform: rotate(180deg);
+}
