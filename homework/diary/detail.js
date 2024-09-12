@@ -178,8 +178,11 @@ const JS_내용복사하기 = () => {
 
     const 일기목록내용 = 일기목록[일기번호].내용;
     navigator.clipboard.writeText(일기목록내용);
-};
 
-const JS_토스트 = () => {
-    window.document.getElementById().innerHTML =
+    console.log('이거슨 내용복사');
+
+    window.document.getElementById(
+        'HTML_토스트들어가는곳'
+    ).innerHTML = `<div class="CSS_토스트" >내용이 복사되었습니다</div>`;
+    console.log('이거슨 토스트');
 };
