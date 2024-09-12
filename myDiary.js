@@ -19,8 +19,11 @@ window.onload = () => {
     // document.getElementById("header__login").innerText = loginName;
     // document.getElementById("footer__login").innerText = loginName;
     // document.querySelector(".footer__copy").innerText = `Copyright © 2024. ${loginName} `
-    makeDiaryCard(diaryLocal)
+
+    // makeDiaryCard(diaryLocal) 일기 생성방식 변경
     openDiary()
+    pagination()
+    pageList(1)
 }
 
 //** 일기 작성 기능: 일기 작성 폼 데이터 취합하여 로컬에 저장하고 만들기 기능에 전달 */
@@ -115,7 +118,7 @@ window.addEventListener('scroll', () => {
     const footerHeight = document.querySelector(".container__footer").getBoundingClientRect().top
     const currentHeight = window.innerHeight
 
-    if ( window.scrollY < 400 ) {
+    if ( window.scrollY < 360 ) {
         document.querySelector(".inner__text").style = "background-color: #fff; color: #222; transition: 0.2s;"
         document.querySelector(".container__sticky").style = "display: none;"
     } else if ( footerHeight <= currentHeight ) {
@@ -343,12 +346,13 @@ function submitNew() {
     window.scrollTo({ top: document.querySelector(".container__footer").getBoundingClientRect().top, behavior: "smooth" })
 }
 
-let debounce;
+//** 배경 렌티큘러 오버레이 */
+    let debounce;
 function changeBG(event) {
     clearTimeout(debounce)
 
     debounce = setTimeout( () => {
-        const mouseX = Math.ceil(event.offsetX / 8)
+        const mouseX = Math.ceil(event.offsetX / 12)
         document.querySelector('.overlay').style.background = `linear-gradient( ${mouseX}deg,
         #efeeee,
         #faf1ea,
@@ -358,6 +362,95 @@ function changeBG(event) {
         #fff3ff)`
     }, 10)
 }
+
+//** 일기 폼 X버튼 클릭시 사라지는 인터렉션 구현 */
+function closeDiary() {
+    const diaryForm = document.querySelector('.body__right__diary')
+    diaryForm.style= "transform: translateX(-20px) rotate(-2deg);"
+    setTimeout( () => {
+        diaryForm.style= "transform: translateX(500px) translateY(-50px) rotate(10deg); opacity: 0; transition: 1s; transition-timing-function: ease-out";
+    }, 100)
+    setTimeout( () => {
+        diaryForm.style.display = "none";
+        document.querySelector('.container__diaryForm').style = "display: flex;"
+    }, 1000)
+}
+
+//** 페이지네이션 */
+    let initialPage = 1;
+    let clickedPage = 1;
+    let itemsPerPage = 8;
+    const lastPage = Math.ceil( diaryLocal.length / itemsPerPage )
+
+function pagination() {
+    const dummyData = new Array(10).fill("dummy")
+    const makePageNum = dummyData.map( (el, idx) => {
+        const pageNum = idx + initialPage
+        return pageNum <= lastPage ? `
+        <button
+            onclick="pageList(${pageNum});
+            clickedPage=${pageNum};
+            pagination()";
+            class="${clickedPage === pageNum ? "page__select" : "page__button"}";
+        > ${pageNum}</button>` : ""
+    }).join("")
+
+    document.querySelector('.page__number').innerHTML = makePageNum;
+}
+
+function pageTest(pageMove) {
+    switch(pageMove) {
+        case "prev": {
+            if (initialPage === 1) {
+                alert("불러올 것이 없어요!")
+            } else {
+                initialPage -= 5
+                clickedPage = initialPage
+                pagination()
+                pageList(clickedPage)
+            }
+            break
+        }
+        case "next": {
+            if (initialPage + 5 >= lastPage) {
+                alert("더 불러올 것이 없어요!")
+            } else {
+                initialPage += 5
+                clickedPage = initialPage
+                pagination()
+                pageList(clickedPage)
+            }
+            break
+        }
+    }
+}
+
+function pageList(page) {
+    const diaryPerPage = diaryLocal.filter( (el, idx) => {
+        const skipThis = (page -1) * itemsPerPage
+        if (skipThis <= idx && idx < skipThis + itemsPerPage) {return true} else {return false}
+    })
+    document.querySelector(".body__left__card").innerHTML = diaryPerPage.map( (el, idx) => 
+        `<div class="wrapper__card">
+            <a href="./depth01/myDiary_detail.html?page=${idx}">
+                <div class="card__delete" onclick="deleteDiary(${idx})"></div>
+                <div class="card__img">
+                    <img src="./asset/card__${el.mood}.png">
+                </div>
+                <div class="card__topic">
+                    <div class="card__status">
+                        <div class="card__${el.mood}">${moodIndex[el.mood]}</div>
+                        <div class="card__date">${el.date}</div>
+                    </div>
+                    <div class="card__title">${el.title}</div>
+                </div>
+            </a>
+        </div>`
+    ).join("")
+    window.scrollTo({ top: 359, behavior: "smooth" })
+}
+
+
 
 document.addEventListener('mousemove', changeBG)
 
@@ -381,4 +474,8 @@ document.querySelector(".btn__submit").addEventListener('click', submitNew)
 document.querySelector(".btn__confirm").addEventListener('click', closeNew)
 
 // diary form관련 event listener
+document.querySelector('.diary__close').addEventListener('click', closeDiary)
 document.querySelector(".diary__button").addEventListener('click', makeDiaryData)
+
+document.querySelector('.page__prev').addEventListener('click', () => pageTest("prev") )
+document.querySelector('.page__next').addEventListener('click', () => pageTest("next") )

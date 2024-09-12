@@ -28,6 +28,21 @@
             position: static;
         }
     }
+
+    /* 일기 폼 제거시 플로팅 버튼 트라이 */
+    .container__diaryForm {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    background-color: var(--chroma-mono90);
+    box-shadow: 0rem 0.1rem 0.6rem 0rem var(--chroma-mono50);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 6%;
+    right: 4%;
+}
 </style>
 
 <body>
@@ -40,6 +55,13 @@
         <option name="filter" value="angry">화나요</option>
         <option name="filter" value="etc">기타</option>
     </select>
+
+    <!-- 일기 폼 제거시 플로팅 버튼 트라이 -->
+    <div class="container__diaryForm">
+        <div class="diaryform__icon">
+            <img src="./asset/icon/plus_outline_light_m.png" />
+        </div>
+    </div>
 </body>
 
 <script>
