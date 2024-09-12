@@ -40,8 +40,8 @@ window.onload = () => {
       }
   });
 
-
   
+
   const JS_drawing = (startIndex, endIndex) => {
     const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
     const diary_list = JSON.parse(storage_diary);
