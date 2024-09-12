@@ -1,19 +1,222 @@
+let selectedEmotion = 'all';  
+let clickPage = 1;
+let startPageNumber = 1;
+
 const getDiaryList = () => {
     const jsondiary = localStorage.getItem("diarylist");
     return JSON.parse(jsondiary) || [];
-}
+};
 
-const removeDiaryEntry = (index) => {
-    const diarylist = getDiaryList();
+// 페이지네이션 관련 
+const updatePagination = () => {
+    const data = getFilteredDiaryList();
+    const lastPageNumber = Math.ceil(data.length / 12); 
+    pagination(lastPageNumber);
+};
 
-    if (index >= 0 && index < diarylist.length) {
-        diarylist.splice(index, 1);
-        localStorage.setItem("diarylist", JSON.stringify(diarylist));
-        closeModal('deleteModalContainer')
-        // 다이어리 항목 다시 렌더링
-        renderDiaryEntries();
+const getFilteredDiaryList = () => {
+    const data = getDiaryList();
+    return selectedEmotion === 'all' ? data : data.filter(entry => entry.emotion === selectedEmotion);
+};
+
+const prevPageHandler = () => {
+    if (startPageNumber === 1) {
+        alert('첫 페이지입니다.');
+    } else {
+        startPageNumber -= 10;
+        clickPage = startPageNumber;
+        pageRender(clickPage);
     }
 };
+
+const nextPageHandler = () => {
+    const data = getFilteredDiaryList();
+    const lastPageNumber = Math.ceil(data.length / 12); 
+    if (startPageNumber + 10 <= lastPageNumber) {
+        startPageNumber += 10;
+        clickPage = startPageNumber;
+        pageRender(clickPage);
+    } else {
+        alert("마지막 페이지입니다.");
+    }
+};
+
+const pagination = (lastPageNumber) => {
+    const count = new Array(10).fill('n');
+    
+    const pageNumberRender = count.map((el, index) => {
+        const pageNumber = index + startPageNumber;
+
+        return pageNumber <= lastPageNumber 
+            ? `<div 
+                class="${clickPage === pageNumber ? 'numberButton_active' : 'numberButton'}"
+                onclick="pageRender(${pageNumber}); setClickPage(${pageNumber})"
+                >
+                ${pageNumber}
+            </div>` 
+            : "";
+    }).join('');
+    
+    document.getElementById('pagination_show').innerHTML = pageNumberRender;
+};
+
+const setClickPage = (page) => {
+    clickPage = page;
+};
+
+const pageRender = (pageContainer = 1) => {
+    const filteredData = getFilteredDiaryList();
+    const diaryRender = filteredData.slice((pageContainer - 1) * 12, pageContainer * 12);
+
+    document.querySelector('.diarylistbox').innerHTML = diaryRender.map((el, index) => `
+        <div class="diarybox">
+            <div class="xbutton" onClick="deleteButton(${index})"></div>
+            <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
+                <div class="thumbnail_${el.emotion}"></div>
+                <div class="textbox">
+                    <div class="date_title_container">
+                        <div class="emotion_${el.emotion}">${getEmotionText(el.emotion)}</div>
+                        <div class="date">${el.date}</div>
+                    </div>
+                    <div class="date_title_container">
+                        <div class="title">${el.title}</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    `).join("");
+};
+
+// 드롭다운 선택 시 감정 상태 업데이트
+const dropdownselected = (event) => {
+    document.querySelector('.customDropdown').style.cssText = `
+        --text: "${event.target.value}"
+    `;
+    selectedEmotion = event.target.id; 
+    clickPage = 1;  
+    pageRender();  
+    updatePagination(); 
+};
+
+// 다이어리 항목 렌더링 
+const renderDiaryEntries = () => {
+    selectedEmotion = 'all';  
+    clickPage = 1; 
+    pageRender();
+    updatePagination(); 
+};
+
+
+let deleteIndex = null;
+
+const deleteButton = (index) => {
+    deleteIndex = index;
+    openModal('deleteModalContainer');
+};
+
+// 항목 삭제
+const removeDiaryEntry = () => {
+    if (deleteIndex !== null) {
+        const diarylist = getDiaryList();
+
+        diarylist.splice(deleteIndex, 1);
+
+        localStorage.setItem("diarylist", JSON.stringify(diarylist));
+
+        pageRender(clickPage);
+        updatePagination();
+
+        closeModal('deleteModalContainer');
+        deleteIndex = null; 
+    }
+};
+
+
+
+
+
+
+const getEmotionText = (emotion) => {
+    switch (emotion) {
+        case "happy":
+            return "행복해요";
+        case "sad":
+            return "슬퍼요";
+        case "surprise":
+            return "놀랐어요";
+        case "angry":
+            return "화나요";
+        case "etc":
+            return "기타";
+        default:
+            return "";
+    }
+
+};
+// window.addEventListener("scroll", () => {
+//     const scrollpoint = window.scrollY;
+//     if(scrollpoint > 0) {
+//         document.getElementById("selectbox").style= "background-color: #000; color: #fff"
+//     } else {
+//         document.getElementById("selectbox").style= "background-color: none; color: none"
+//     };
+// });
+
+const floating = () => {
+    window.scrollTo({top:0, behavior:"smooth"});
+};
+
+window.addEventListener('scroll', () => {
+    const toptofooter = document.getElementById('footer').getBoundingClientRect().top;
+    const browserlength = window.innerHeight;
+    console.log(toptofooter)
+
+    if(browserlength >= toptofooter){
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 170px;
+            left: 78%;
+        `
+    }else{
+        document.getElementById("floating").style = `
+            position: fixed;
+            bottom: 10px;
+            left: 78%;
+
+                `
+    };
+    
+})
+
+//------------------------모달 관련 스크립트-------------------------
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'
+
+}
+
+function closeModal(modalIds) {
+    const idsArray = modalIds.split(',');
+
+    idsArray.forEach(modalId => {
+        const modal = document.getElementById(modalId.trim());
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+    document.body.style.overflow = 'auto';
+}
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal('modalcontainer,closeModalContainer'); 
+    }
+});
+
+
+
+
 
 const submit = () => {
     if (inputverify()) {
@@ -63,9 +266,6 @@ const submit = () => {
             alert("내용을 전부 채워주세요.");
     }
 };
-
-
-
 // 인풋검증기능 함수
 const inputverify = () => {
 
@@ -88,175 +288,6 @@ const inputverify = () => {
     return writedtitle && wiredcontent && checkedEmotion;
 };
 
-const dropdownselected = (event) => {
-    document.querySelector('.customDropdown').style.cssText = `
-        --text: "${event.target.value}"
-    `
-    document.querySelector('.customDropdown').click() //한번더 드롭다운제목 부분이 클릭되면서 닫히게끔 구현
-    const selectedEmotion = event.target.id
-    renderSelectBox(selectedEmotion); 
-  };
-  
-  const renderSelectBox = (emt) => {
-    const diarylistbox = document.querySelector(".diarylistbox");
-    const jsondiary = localStorage.getItem("diarylist");
-    const diarylist = JSON.parse(jsondiary) || [];
-  
-    // 셀렉트박스에서 전체가 선택되었을 때 모든 일기를 보여줌
-    const filteredDiaryList = emt ==='all' ? diarylist : diarylist.filter(entry => entry.emotion === emt)
-  
-    // 필터링된 일기 데이터를 기반으로 HTML 생성
-    const diaryHTML = filteredDiaryList.map((entry, index) => `
-      <div class="diarybox">
-        <div class="xbutton" onClick="openModal('deleteModalContainer')"></div>
-        <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
-          <div class="thumbnail_${entry.emotion}"></div>
-          <div class="textbox">
-            <div class="date_title_container">
-              <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
-              <div class="date">${entry.date}</div>
-            </div>
-            <div class="date_title_container">
-              <div class="title">${entry.title}</div>
-            </div>
-          </div>
-        </a>
-      </div>
-    `).join('');
-  
-    diarylistbox.innerHTML = diaryHTML;
-};
-  
-  
-
-
-// 다이어리 항목 랜더링 함수 
-const renderDiaryEntries = () => {
-    const diarylistbox = document.querySelector(".diarylistbox");
-    const jsondiary = localStorage.getItem("diarylist");
-    const diarylist = JSON.parse(jsondiary) || [];
-    const diaryHTML = diarylist.map((entry,index) => `
-        <div class="diarybox">
-            <div class="xbutton" onClick="deleteButton(${index})"></div>
-            <a href="./diary-detail.html?number=${index}" style="text-decoration: none;">
-            <div class="thumbnail_${entry.emotion}"></div>
-            <div class="textbox">
-                <div class="date_title_container">
-                    <div class="emotion_${entry.emotion}">${getEmotionText(entry.emotion)}</div>
-                    <div class="date">${entry.date}</div>
-                </div>
-                <div class="date_title_container">
-                    <div class="title">${entry.title}</div>
-                </div>
-            </div>
-            </a>
-        </div>
-    `).join('');
-
-    diarylistbox.innerHTML = diaryHTML;
-};
-
-const deleteButton = (index) => {
-    openModal('deleteModalContainer')
-    document.getElementById('deleteModalContainer').innerHTML = `
-        <div class="deleteModalbackground" onclick="closeModal('deleteModalContainer')">
-            <div class="deleteModal" onclick="event.stopPropagation()">
-                <div class="text3">일기 삭제</div>
-                <div class="text4">일기를 삭제 하시겠어요?</div>
-                <div class="modalButtonContainer">
-                    <button class="closeButton" type="button" onclick="closeModal('deleteModalContainer')"><div class="closeButtonText">취소</div></button>
-                    <button class="confirmButton" type="button"  onclick="removeDiaryEntry(${index})"><div class="confirmButtonText">삭제</div></button>
-                </div>
-            </div> 
-        </div>
-    `
-}
-
-
-
-
-
-const getEmotionText = (emotion) => {
-    switch (emotion) {
-        case "happy":
-            return "행복해요";
-        case "sad":
-            return "슬퍼요";
-        case "surprise":
-            return "놀랐어요";
-        case "angry":
-            return "화나요";
-        case "etc":
-            return "기타";
-        default:
-            return "";
-    }
-
-};
-window.addEventListener("scroll", () => {
-    const scrollpoint = window.scrollY;
-    if(scrollpoint > 0) {
-        document.getElementById("selectbox").style= "background-color: #000; color: #fff"
-    } else {
-        document.getElementById("selectbox").style= "background-color: none; color: none"
-    };
-});
-
-const floating = () => {
-    window.scrollTo({top:0, behavior:"smooth"});
-};
-
-window.addEventListener('scroll', () => {
-    const toptofooter = document.getElementById('footer').getBoundingClientRect().top;
-    const browserlength = window.innerHeight;
-    console.log(toptofooter);
-
-    if(browserlength >= toptofooter){
-        document.getElementById("floating").style = `
-            position: fixed;
-            bottom: 170px;
-            left: 78%;
-        `
-    }else{
-        document.getElementById("floating").style = `
-            position: fixed;
-            bottom: 10px;
-            left: 78%;
-
-                `
-    };
-    
-})
-
-//------------------------모달 관련 스크립트-------------------------
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'
-
-}
-
-function closeModal(modalIds) {
-    const idsArray = modalIds.split(',');
-
-    idsArray.forEach(modalId => {
-        const modal = document.getElementById(modalId.trim());
-        if (modal) {
-            modal.style.display = 'none';
-        }
-    });
-    document.body.style.overflow = 'auto';
-}
-
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeModal('modalcontainer,closeModalContainer'); 
-    }
-});
-
-
-// 페이지 로드 시 다이어리 항목 렌더링
-document.addEventListener("DOMContentLoaded", renderDiaryEntries);
 
 
 
@@ -284,34 +315,13 @@ const changePage = (click) => {
 }
 
 
-const photoStorageSelectChange = () => {
-    const selectBox2 = document.getElementById('selectbox2');
-    const selectedPhotoSize = selectBox2.value;
-    photoStorageRender(selectedPhotoSize); 
-};
-
-
-const photoStorageRender = (size) => {
-    loadImages(size);
-};
-
-// 스켈레톤을 숨기는 함수
-const hideSkeleton = (imageElement) => {
-    const imageBox = imageElement.closest('.imageBox');
-    const skeleton = imageBox.querySelector('.skeleton');
-    if (skeleton) {
-        skeleton.style.display = 'none';
-    }
-};
-
 // API에서 이미지를 불러옴
 const loadImages = (size) => {
-    fetch('https://dog.ceo/api/breeds/image/random/10')
+    fetch('https://dog.ceo/api/breeds/image/random')
         .then((response) => response.json())
         .then((result) => {
             const photoContainer = document.getElementById('photoContainer');
-            const images = result.message; 
-            
+            const imageUrl = result.message;
             let aspectRatio;
             switch (size) {
                 case "horizontal":
@@ -326,34 +336,86 @@ const loadImages = (size) => {
                     break;
             }
 
-            photoContainer.innerHTML = images.map((url) => `
-                <div class="imageBox" style="aspect-ratio: ${aspectRatio};">
-                    <div class="skeleton">
-                        <div class="skeleton-animation"></div>
-                    </div>
-                    <img src="${url}" onload="hideSkeleton(this)" />
+            const imageBox = document.createElement('div');
+            imageBox.className = 'imageBox';
+            imageBox.style.aspectRatio = aspectRatio;
+            imageBox.innerHTML = `
+                <div class="skeleton">
+                    <div class="skeleton-animation"></div>
                 </div>
-            `).join('');
+                <img src="${imageUrl}" onload="hideSkeleton(this)" />
+            `;
+            photoContainer.appendChild(imageBox);
         })
         .catch((error) => {
             console.error("API 호출 오류:", error);
         });
 };
 
-
-window.onload = () => {
-    loadImages('basic'); 
+// 스켈레톤을 숨기는 함수
+const hideSkeleton = (imageElement) => {
+    const imageBox = imageElement.closest('.imageBox');
+    const skeleton = imageBox.querySelector('.skeleton');
+    if (skeleton) {
+        skeleton.style.display = 'none';
+    }
 };
 
-const searchDiaryEntries = () => {
-    const searchInput = document.getElementById("searchInput").value
-    const diarylist = getDiaryList();
-    const filteredDiaryList = diarylist.filter(entry => 
-        entry.title.includes(searchInput)
-    );
+// 무한 스크롤
+let timer = null;
+const handleScroll = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollPercent = scrollTop / (scrollHeight - clientHeight);
 
-    const diarylistbox = document.querySelector(".diarylistbox")
-    diarylistbox.innerHTML = ''; 
+    if (scrollPercent > 0.7 && timer === null) {
+        const selectBox2 = document.getElementById('selectbox2');
+        const selectedPhotoSize = selectBox2.value;
+        loadImages(selectedPhotoSize);
+
+        timer = setTimeout(() => {
+            timer = null;
+        }, 10);
+    }
+};
+
+// 셀렉트 박스 변경 시
+const handleSelectChange = () => {
+    const selectBox2 = document.getElementById('selectbox2');
+    const selectedPhotoSize = selectBox2.value;
+    document.getElementById('photoContainer').innerHTML = '';
+    loadImages(selectedPhotoSize);
+};
+
+window.onload = () => {
+    loadImages('basic')
+    window.addEventListener('scroll', handleScroll);
+    const selectBox2 = document.getElementById('selectbox2');
+    selectBox2.addEventListener('change', handleSelectChange);
+
+    renderDiaryEntries()
+};
+
+
+
+// 검색창기능 - 셀렉트 박스에 따라서도 검색
+const searchDiaryEntries = () => {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const diarylist = getDiaryList();
+    
+    
+    const selectedEmotion = document.querySelector('input[name="selected"]:checked')?.value || "전체"
+
+    const filteredDiaryList = diarylist.filter(entry => {
+        const matchesTitle = entry.title.toLowerCase().includes(searchInput);
+        const matchesEmotion = selectedEmotion === "전체" || getEmotionText(entry.emotion) === selectedEmotion;
+
+        return matchesTitle && matchesEmotion;
+    });
+
+    const diarylistbox = document.querySelector(".diarylistbox");
+    diarylistbox.innerHTML = ''
 
     setTimeout(() => {
         const diaryHTML = filteredDiaryList.map((entry, index) => `
@@ -378,7 +440,10 @@ const searchDiaryEntries = () => {
     }, 1000); 
 };
 
-function togglehandle(event) {
+
+
+// 다크모드
+function togglehandler(event) {
     const isChecked = event.target.checked;
     const modal = document.querySelector('.modal');
     const text1 = document.querySelector('.text1');
@@ -419,4 +484,9 @@ function togglehandle(event) {
         
     }
 }
+
+
+
+
+
 

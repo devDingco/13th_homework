@@ -58,7 +58,7 @@
                                     <label for="angry">화나요</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name="selected" id="etc" value="기타ㄴ" onclick="dropdownselected(event)"/>
+                                    <input type="radio" name="selected" id="etc" value="기타" onclick="dropdownselected(event)"/>
                                     <label for="etc">기타</label>
                                 </li>
                             </ul>
@@ -70,13 +70,12 @@
                                     <input type="text" id="searchInput" placeholder="검색어를 입력하세요" oninput="searchDiaryEntries()" />
                                 </div>
                             </div>
-                            
+                        </div>   
 
-                            <!--일기쓰기 버튼-->
-                            <div class="writebutton" onclick="openModal('modalcontainer')">
-                                <div><img src="./img/plus_outline_light_m.png"/></div>
-                                <div class="witerbuttontext">일기쓰기</div>
-                            </div>
+                        <!--일기쓰기 버튼-->
+                        <div class="writebutton" onclick="openModal('modalcontainer')">
+                            <div><img src="./img/plus_outline_light_m.png"/></div>
+                            <div class="witerbuttontext">일기쓰기</div>
                         </div>
                   </div>
 
@@ -99,7 +98,7 @@
                         <div class="text1">일기 쓰기</div>
                         <div class="darkModeLabel">
                             다크모드
-                            <input type="checkbox" class="toggle" onclick="togglehandle(event)"/>
+                            <input type="checkbox" class="toggle" onclick="togglehandler(event)"/>
                         </div>
                     </div>
 
@@ -149,8 +148,8 @@
             <div id="closeModalContainer" class="closeModalContainer">
                 <div class="closeModalbackground" onclick="closeModal('closeModalContainer')">
                     <div class="closeModal" onclick="event.stopPropagation()">
-                        <div class="text5">일기 등록 완료</div>
-                        <div class="text6">등록이 완료 되었습니다.</div>
+                        <div class="text5">일기 등록 취소</div>
+                        <div class="text6">일기 등록을 취소 하시겠어요?</div>
                         <div class="modalButtonContainer">
                             <button class="keepWriteButton" type="button" onclick="closeModal('closeModalContainer')"><div class="keepWriteText">계속 작성</div></button>
                             <button class="cancellationButton" type="button"  onclick="closeModal('modalcontainer,closeModalContainer')"><div class="cancellationButtonText">등록 취소</div></button>
@@ -161,7 +160,7 @@
 
             <!--삭제 모달-->
             <div id="deleteModalContainer" class="deleteModalContainer">
-                <!-- <div class="deleteModalbackground" onclick="closeModal('deleteModalContainer')">
+                <div class="deleteModalbackground" onclick="closeModal('deleteModalContainer')">
                     <div class="deleteModal" onclick="event.stopPropagation()">
                         <div class="text3">일기 삭제</div>
                         <div class="text4">일기를 삭제 하시겠어요?</div>
@@ -170,7 +169,7 @@
                             <button class="confirmButton" type="button"  onclick="removeDiaryEntry('modalcontainer,closeModalContainer')"><div class="confirmButtonText">삭제</div></button>
                         </div>
                     </div> 
-                </div> -->
+                </div>
             </div>
         
         </div>
@@ -184,7 +183,7 @@
 
                     <div class="selectcontainer2">
                         <div class="selectbox2">        
-                            <select id="selectbox2" onchange="photoStorageSelectChange('modalcontainer')">
+                            <select id="selectbox2" onchange="handleSelectChange()">
                                 <option value="basic">기본</option>
                                 <option value="horizontal">가로형</option>
                                 <option value="vertical">세로형</option>
@@ -192,14 +191,25 @@
                         </div>
                     </div>
 
-                    <div id="photoContainer"></div>
+                    <div id="photoContainer">
+                        <!--사진 랜더링 되는 곳-->
+                    </div>
                 </div>
             </div>
 
-        </div>
-        <!------------------------------------->
+            
 
-    
+        </div>
+        
+        
+        <!------------------------------------->
+        <div class="paginationContainer">
+            <div class="prevNextButton" onclick="prevPageHandler()"><img src="./img/leftisabled_outline_dark_m.png"></div>
+            <div id="pagination_show">
+
+            </div>
+            <div  onclick="nextPageHandler()"><img src="./img/rightdisabled_outline_dark_m.png"></div>
+        </div>
 
 
         <div class="footer" id="footer">

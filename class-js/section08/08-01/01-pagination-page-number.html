@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>페이지네이션 페이지번호 실습</title>
+    <script>
+        window.onload = () => {
+        const 철수상자 = new Array(10).fill("철수")
+       console.log(철수상자)
+
+       const 페이지들 =  철수상자.map((el, index) => {
+        return `<button>${index + 1}</button>`
+       }).join(" ")
+       console.log(페이지들)
+
+       document.getElementById('HTML_페이지보여주는곳').innerHTML=페이지들
+        }
+
+    </script>
+</head>
+<body>
+    <div id="HTML_페이지보여주는곳"></div>
+</body>
+</html>

@@ -78,6 +78,7 @@
     appearance: none;
     cursor: pointer;
     box-sizing: border-box;  /* padding 포함한 크기 계산 */
+    margin-right: 16px;
 }
 
 .customDropdown::after {
@@ -158,24 +159,24 @@
 
 .input-wrapper > input {
     display: flex;
-    min-width: 320px;
-    max-width: 360px;
-    padding: 12px 16px;
-    padding-left: 48px; 
+    width: 22.5rem;
+    max-width: 22.5rem;
+    padding: 0.75rem 1rem;
+    padding-left: 3rem; 
     border-radius: 100px;
     border: 1px solid var(--Gray-Gray-300, #C7C7C7);
     align-items: center;
-    gap: 8px;
+    gap: 0.5px;
     box-sizing: border-box;
 }
 .input-wrapper > input::placeholder {
     color: var(--Gray-Gray-400, #ABABAB);
-font-family: "Pretendard Variable";
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: 24px; /* 150% */
-letter-spacing: -0.16px;
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.16px;
+    ;
 }
 
 .selectcontainer {
@@ -250,8 +251,6 @@ select {
     max-width: 100%;
     width: 73rem;
     box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .diarylistbox {
@@ -380,20 +379,24 @@ select {
     margin-top: 2.5rem; /* 40px */
     display: flex;
     padding: 1.5rem 1.25rem; /* 24px 20px */
-    flex-direction: column;
     align-items: center;
-    gap: 0.625rem; /* 10px */
     background: var(--Gray-Gray-50, #F2F2F2);
+    justify-content: center;
 }
 
 .footercontainer {
+    max-width: 1168px;
+    width: 1168px;
     height: 7rem; /* 112px */
     display: flex;
     flex-direction: column;
     gap: 2rem; /* 32px */
+    max-width: 73rem;
+    
+
 }
 .footerwhosediary {
-    width: 73rem; /* 1168px */
+    /* width: 73rem; 1168px */
     color: #000;
     font-family: "Pretendard Variable";
     font-size: 1.25rem; /* 20px */
@@ -466,7 +469,6 @@ select {
 /* --------------------------------------- */
 .writebutton{
     display: flex;
-
     height: 48px;
     padding: 8px 10px;
     align-items: center;
@@ -528,14 +530,21 @@ select {
     --인풋배경: #000000;
 
 }
-.modal.dark-mode {
+.modal.dark-mode,
+.closeModal.dark-mode {
     background-color: #1c1c1c;
 }
 .text1.dark-mode {
     color: #fff
 }
-.text2.dark-mode {
+.text2.dark-mode,
+.text3.dark-mode,
+.text5.dark-mode {
     color: #fff;
+}
+.text4.dark-mode,
+.text6.dark-mode {
+    color: #D4D3D3;
 }
 .titleInModal.dark-mode {
     color:#c7c7c7
@@ -545,14 +554,17 @@ select {
 }
 .titleInputModal.dark-mode {
     background-color: #000;
+    color: #c7c7c7
 }
 .titleTextareaModal.dark-mode {
     background-color: #000;
 }
-.closeButton.dark-mode {
+.closeButton.dark-mode,
+.keepWriteButton.dark-mode {
     background-color: #1c1c1c;
 }
-.closeButtonText.dark-mode {
+.closeButtonText.dark-mode ,
+.keepWriteText.dark-mode {
     color: #fff;
 }
 .confirmButton.dark-mode {
@@ -560,6 +572,17 @@ select {
 }
 .confirmButtonText.dark-mode {
     color: #777;
+}
+.completionModal.dark-mode {
+    background-color: #1c1c1c;
+}
+.completionModalButton.dark-mode,
+.cancellationButton.dark-mode {
+    background-color: #fff;
+}
+.completionModalText.dark-mode,
+.cancellationButtonText.dark-mode {
+    color: #000;
 }
 /*-------------------------*/
 .modalcontainer {
@@ -972,13 +995,14 @@ color: #ababab; /* 방문한 링크의 색상 */
 }
 
 .photoContainer {
-    display: flex;
     gap: 10px;
 }
 .imageBox {
-    position: relative;
-    display: inline-block;
+    max-width: 640px; /* 기본 너비 */
     width: 640px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
 }
 .skeleton {
     position: absolute;
@@ -1013,7 +1037,6 @@ color: #ababab; /* 방문한 링크의 색상 */
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 24px;
 }
 #photoContainer {
     display: flex;
@@ -1022,7 +1045,52 @@ color: #ababab; /* 방문한 링크의 색상 */
     justify-content: center;
     align-items: center;
 }
-
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.numberButton_active {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    background: var(--Gray-Gray-50, #F2F2F2);
+}
+.numberButton {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--Gray-Gray-600, #777);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+    gap:16px;
+}
+#pagination_show {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.prevNextButton {
+ margin-top: 4px;
+}
 
 @media (max-width: 360px) { 
     /* 360px에 맞춰서 스타일 조정 */
@@ -1145,9 +1213,11 @@ color: #ababab; /* 방문한 링크의 색상 */
         display: flex;
         flex-direction: column;
     }
-
+    .footer{
+        width: 100vw;
+    }
     .footercontainer {
-        width: 360px;
+        width: 100vw;
         padding: 20px 24px 20px 24px;
     }
 

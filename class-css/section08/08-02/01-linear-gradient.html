@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>선형 그라데이션 실습</title>
+    <style>
+        .CSS_네모박스1 {
+            width:300px;
+            height: 300px;
+            background: linear-gradient(0deg,pink,purple); /*리니어 그라데이션 핑크->퍼플 인데 0deg하면 하단부터 핑->퍼*/
+            background: linear-gradient(45deg,pink,purple); /*45도 방향을 시작으로 핑->퍼*/
+            background: linear-gradient(20deg,pink 30%,purple 30% 100%); /* 30%까지는 핑크 그 이후부터 100%까지 퍼플*/
+            background: linear-gradient(20deg,pink,purple 30%); /* 30%부터 퍼플 그려줘 */
+        }
+
+        .CSS_네모박스2 {
+            width:300px;
+            height: 300px;
+            background: linear-gradient(130deg, yellow, transparent),
+                        linear-gradient(220deg, red, transparent); /*이 부분이 뒤로 겹쳐져있음*/
+       
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_네모박스1"></div>
+    <div class="CSS_네모박스2"></div>
+</body>
+</html>
