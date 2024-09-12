@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>diary-detail</title>
     <link rel="stylesheet" href="./diary-edit.css" />
   </head>
@@ -28,7 +32,9 @@
                       id="check_happy"
                       class="mood_options"
                       name="mood"
-                    /><label for="check_happy" class="mood_text">행복해요</label>
+                    /><label for="check_happy" class="mood_text"
+                      >행복해요</label
+                    >
                   </div>
                   <div class="mood_checkbox">
                     <input
@@ -54,9 +60,7 @@
                       id="check_upset"
                       class="mood_options"
                       name="mood"
-                    /><label for="check_upset" class="mood_text"
-                      >화나요</label
-                    >
+                    /><label for="check_upset" class="mood_text">화나요</label>
                   </div>
                   <div class="mood_checkbox">
                     <input
@@ -72,7 +76,11 @@
             <div class="title_layout">
               <div class="title">제목</div>
               <div class="title_edit_layout">
-                <input type="text" id="title_edit_input" placeholder="제목을 입력해 주세요.">
+                <input
+                  type="text"
+                  id="title_edit_input"
+                  placeholder="제목을 입력해 주세요."
+                />
               </div>
             </div>
             <div class="content_layout">
@@ -99,7 +107,12 @@
           <div class="comment_header_container">
             <div class="comment_title">회고</div>
             <div class="comment_input_container">
-              <input class="comment_input" type="text" placeholder="수정중일땐 회고를 작성할 수 없어요." disabled/>
+              <input
+                class="comment_input"
+                type="text"
+                placeholder="수정중일땐 회고를 작성할 수 없어요."
+                disabled
+              />
               <button class="comment_input_button" disabled>입력</button>
             </div>
             <div id="comments_container_box"></div>

@@ -299,8 +299,8 @@ const deleteDiaryEntry = () => {
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   const newDiaryList = paginatedDiaryData.filter((e) => e.id !== deleteData.id);
-  paginatedDiaryData = newDiaryList
-  updateDiaryList()
+  paginatedDiaryData = newDiaryList;
+  updateDiaryList();
   generatePageNumbers();
   onCloseSingleModal("confirm_delete_diary_modal");
 };
@@ -334,7 +334,7 @@ const validateDiaryInputCompletion = () => {
 const clearDiaryInputs = () => {
   const text = document.getElementById("diary_title_window");
   const textarea = document.getElementById("diary_contents_window");
-  document.getElementById("check_surprise").checked="checked"
+  document.getElementById("check_surprise").checked = "checked";
   text.value = null;
   textarea.value = null;
 };
@@ -350,7 +350,7 @@ window.addEventListener("click", (event) => {
   const className = event.target.className;
   const id = event.target.id;
   if (className === "aside_layout" || className === "confirm_modal_layout") {
-    event.target.id != "diary_cancel_modal"
+    event.target.id !== "diary_cancel_modal"
       ? closeAllModals(id)
       : onCloseSingleModal(id);
   }

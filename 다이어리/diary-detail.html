@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>diary-detail</title>
     <link rel="stylesheet" href="./diary-detail.css" />
   </head>
@@ -23,8 +27,17 @@
           <div class="comment_header_container">
             <div class="comment_title">회고</div>
             <div class="comment_input_container">
-              <input id="comment_input" type="text" placeholder="회고를 남겨보세요."/>
-              <button class="comment_input_button" onclick="setupCommentInput()">입력</button>
+              <input
+                id="comment_input"
+                type="text"
+                placeholder="회고를 남겨보세요."
+              />
+              <button
+                class="comment_input_button"
+                onclick="setupCommentInput()"
+              >
+                입력
+              </button>
             </div>
             <div id="comments_container_box"></div>
           </div>
@@ -34,13 +47,28 @@
         </div>
       </div>
     </div>
-    <div class="confirm_delete_diary_modal_layout" id="confirm_delete_diary_modal_detail_page">
+    <div
+      class="confirm_delete_diary_modal_layout"
+      id="confirm_delete_diary_modal_detail_page"
+    >
       <div class="confirm_delete_diary_modal">
         <div class="delete_diary_modal_title">일기 삭제</div>
         <div class="delete_diary_modal_content">일기를 삭제 하시겠어요?</div>
         <div class="delete_diary_modal_button_group">
-          <button class="delete_diary_cancel_btn" onclick="onCloseSingleModal('confirm_delete_diary_modal_detail_page')">취소</button>
-          <button class="delete_diary_btn" id="deleteDiaryBtn" onclick="deleteDiary()" onkeydown="onKeyPress(event)">삭제</button>
+          <button
+            class="delete_diary_cancel_btn"
+            onclick="onCloseSingleModal('confirm_delete_diary_modal_detail_page')"
+          >
+            취소
+          </button>
+          <button
+            class="delete_diary_btn"
+            id="deleteDiaryBtn"
+            onclick="deleteDiary()"
+            onkeydown="onKeyPress(event)"
+          >
+            삭제
+          </button>
         </div>
       </div>
     </div>

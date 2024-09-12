@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>diary</title>
     <link rel="stylesheet" href="./diary.css" />
   </head>
@@ -44,7 +48,11 @@
                         class="dropdown_img"
                       />
                     </div>
-                    <ul class="dropdown" id="photo_filter_list" onclick="onClickPhoto(event)">
+                    <ul
+                      class="dropdown"
+                      id="photo_filter_list"
+                      onclick="onClickPhoto(event)"
+                    >
                       <li>
                         <div onclick="setDropdownLabel('기본형')">
                           기본형
@@ -86,7 +94,11 @@
                           class="dropdown_img"
                         />
                       </div>
-                      <ul class="dropdown" id="mood_list" onclick="onClickMood(event)">
+                      <ul
+                        class="dropdown"
+                        id="mood_list"
+                        onclick="onClickMood(event)"
+                      >
                         <li>
                           <div>
                             전체
@@ -127,8 +139,15 @@
                     </div>
                     <div class="search_box">
                       <div class="search_bar">
-                        <div class="search_img"><img src="./image/search.svg" /></div>
-                        <input id="search" oninput="onSearch(event)" type="text" placeholder="검색어를 입력해 주세요." />
+                        <div class="search_img">
+                          <img src="./image/search.svg" />
+                        </div>
+                        <input
+                          id="search"
+                          oninput="onSearch(event)"
+                          type="text"
+                          placeholder="검색어를 입력해 주세요."
+                        />
                       </div>
                     </div>
                   </div>
@@ -149,10 +168,14 @@
                     <div class="modal_header">
                       <div class="diary_entry_title">📍 일기 쓰기</div>
                       <div class="dark_mode_box">
-                        <input type="checkbox" class="dark_mode_toggle" onclick="darkModeToggle(event)" />
+                        <input
+                          type="checkbox"
+                          class="dark_mode_toggle"
+                          onclick="darkModeToggle(event)"
+                        />
                       </div>
                     </div>
-                    
+
                     <div class="diary_entry_form">
                       <div class="mood_selector">
                         <div class="mood_selector_title">
@@ -211,7 +234,9 @@
                               class="mood_options"
                               name="mood"
                               onkeydown="onKeyPress(event)"
-                            /><label for="check_etc" class="mood_text">기타</label>
+                            /><label for="check_etc" class="mood_text"
+                              >기타</label
+                            >
                           </div>
                         </div>
                       </div>
@@ -246,7 +271,11 @@
                       >
                         닫기
                       </button>
-                      <button id="register_button" type="submit" disabled = "true">
+                      <button
+                        id="register_button"
+                        type="submit"
+                        disabled="true"
+                      >
                         등록하기
                       </button>
                     </div>
@@ -269,7 +298,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="footer_layout">
         <div class="footer">
           <div class="footer_title" id="footer">예슬이의 다이어리</div>
