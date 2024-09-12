@@ -7,14 +7,29 @@
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/index_mediaQuery.css">
     <link rel="stylesheet" href="./css/dropdown.css">
-    <script src="./javascript/index.js" defer></script>
+    <link rel="stylesheet" href="./css/darkmode.css">
+    <script src="./javascript/index.js" defer></script> 
+
 </head>
 <body>
     <!-- 모달 그룹 -->
     <div id="HTML_모달그룹" class="CSS_모달그룹">
       <div class="CSS_모달배경" onclick="JS_모달닫기기능()"></div>
       <div class="CSS_등록상자">
-          <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+        
+          <div class="등록상자제목이랑토글">
+            <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+            <div class="CSS_다크모드">
+              <label for="다크모드" class="CSS_다크모드_라벨">다크모드</label>
+              <input
+                type="checkbox"
+                id="다크모드"
+                class="CSS_다크모드_토글"
+                onclick="JS_다크모드(event)"
+              />
+            </div>
+
+          </div>
           <div class="CSS_라디오그룹">
               <div class="CSS_라디오버튼">
                   <input type="radio" name="HTML_기분선택버튼" value="행복" checked />
@@ -155,7 +170,7 @@
                   <input class="CSS_서치바" type="text" placeholder="검색어를 입력해 주세요." oninput="JS_일기검색기능(event)">
                   <div id="HTML_검색결과보여주는곳"></div>
 
-                  
+
                 </div>
 
                 <button class="CSS_일기쓰기모달버튼" onclick="JS_모달열기기능('HTML_모달그룹')">+ 일기쓰기</button>
@@ -186,6 +201,14 @@
               <!-- 여기에 개사진 들어옴 -->
             </div>
 
+        <!-- 페이지내이션 들어오는 자리 -->
+        <div class="CSS_페이지네이션">
+          <button class="CSS_이전다음버튼" onclick="JS_이전페이지이동기능()"><</button>
+          <span id="HTML_페이지보여주는곳" class="CSS_페이지보여주는곳"></span>
+          <button class="CSS_이전다음버튼" onclick="JS_다음페이지이동기능()">></button>          
+        </div>
+
+
         <!-- 플로팅 버튼 -->
         <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
             <img class="CSS_플로팅이미지" src="./assets/images/floatingButton.png" onclick="JS_스크롤위로기능()" />
@@ -200,5 +223,6 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>
