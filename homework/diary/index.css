@@ -11,8 +11,8 @@
 .CSS_레이아웃 {
     /* width: 1168px; */
     width: 100vw;
-    height: auto;
-    min-height: 100%;
+    /* height: auto; */
+    /* min-height: 100%; */
     padding-bottom: 40px;
     display: flex;
     flex-direction: column;
@@ -24,6 +24,8 @@
     width: 1168px;
     height: 60px;
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     font-size: 18px;
     font-style: normal;
@@ -46,6 +48,22 @@
 .CSS_감정선택상자 {
     width: 1168px;
     margin-bottom: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CSS_일기쓰기모달버튼 {
+    display: flex;
+    height: 48px;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+    color: #fff;
 }
 
 #CSS_감정선택상자아이디 {
@@ -67,28 +85,38 @@
 }
 
 .CSS_메인 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* margin-bottom: 40px; */
-}
+    width: 1168px;
 
-.CSS_메인왼쪽일기보여주는곳 {
-    width: 784px;
-    height: 300px;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+
+    /* place-items: center center;
+    place-content: end center; */
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-right: 24px;
+    margin-bottom: 40px;
+}
+
+.CSS_메인왼쪽일기보여주는곳 {
+    width: 100%;
+    /* height: 300px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* margin-right: 24px; */
     gap: 24px;
 }
 
 .CSS_메인왼쪽_카드 {
-    width: 380px;
-    height: 373px;
+    width: 274px;
+    height: 260px;
     display: flex;
     flex-direction: column;
-    position: relative; /* ??? */
+    /* position: relative; */
     /* transition: 0.5s; */
 }
 
@@ -121,7 +149,7 @@
     width: 24px;
     height: 24px;
     top: 25px;
-    left: 350px;
+    left: 250px;
     z-index: 90;
     cursor: pointer;
 }
@@ -130,8 +158,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 8px;
-    margin-top: 16px;
+    /* padding: 0 8px; */
+    /* margin-top: 16px; */
 }
 
 .CSS_메인왼쪽_카드_디테일_기분 {
@@ -166,18 +194,7 @@
     letter-spacing: -0.1792px;
 }
 
-.CSS_메인오른쪽 {
-    width: 312px;
-    height: 624px;
-    padding: 24px;
-    border-radius: 16px;
-    border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-    background: var(--Gray-W, #fff);
-    z-index: 999;
-}
-
-.CSS_플로팅버튼 {
-    /* width: 20px; */
+/* .CSS_플로팅버튼 {
     position: fixed;
     background-repeat: no-repeat;
     top: 1150px;
@@ -186,11 +203,12 @@
     border: 1px solid #000;
     display: flex;
     border-radius: 100%;
-}
+} */
 
+/* 
 .CSS_메인오른쪽_중간 {
     margin: 40px 0;
-}
+} */
 
 .CSS_오늘기분 {
     font-size: 20px;
