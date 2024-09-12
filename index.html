@@ -4,9 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>치영의 일기장</title>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" integrity="sha384-80Gx8/ISg4/YRCM3FBSI6ZISwyv1YS06ohM5kCGY9Hz149a6RiLWj8JtqzLrevPZ" crossorigin="anonymous">
         <link rel="stylesheet" href="css/index.css">
-        <script type="text/javascript" src="js/index.js" defer></script>
+        <script type="module" src="js/functool.js"></script>
+        <script type="module" src="js/index.js" defer></script>
     </head>
     <body class="noto-sans-kr">
         <div class="curtain"></div>
@@ -33,6 +34,10 @@
                         <option>화나요</option>
                         <option>기타</option>
                     </select>
+                    <label class="search-field">
+                        <p class="search-input-string">제목 검색</p>
+                        <input class="search-input" type="text" placeholder="제목을 검색해 주세요.">
+                    </label>
                     <button id="write-btn">작성하기</button>
                 </div>
                 <div class="flexcontainer">
@@ -56,8 +61,9 @@
                             </li>
                         </template>
                     </div>
-                    <div class="flexchild-right">
+                    <div class="flexchild-right" data-dark="off">
                         <form class="diary-util" id="adding-form">
+                            <input type="checkbox" class="dark-btn">
                             <p class="diary-util title">
                                 📍 일기 쓰기
                             </p>
@@ -117,7 +123,7 @@
                 </ul>    
                 <template class="dog-image-template loading-lazy">
                     <li class="dog-image-card">
-                        <img class="dog-image" loading="lazy">
+                        <img class="dog-image" loading="lazy" crossorigin="anonymous">
                     </li>
                 </template>
             </section>
