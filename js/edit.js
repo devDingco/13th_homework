@@ -1,3 +1,4 @@
+'use strict';
 const param = Number(new URLSearchParams(window.location.search).get("p"));
 const diaryArray = JSON.parse(localStorage.getItem("diaryArray"));
 const editPostIdx = diaryArray.findIndex(e => e!==null && e.index===param);
