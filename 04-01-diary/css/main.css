@@ -12,8 +12,7 @@ body {
 }
 
 .layout {
-  padding: 0 1rem;
-  max-width: 1167px;
+  margin: 0 2rem 4rem;
   height: auto;
 }
 
@@ -31,6 +30,7 @@ body {
 .main {
   display: flex;
   max-width: 100%;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
@@ -64,7 +64,7 @@ body {
   align-items: center;
 }
 
-.filter {
+/* .filter {
   min-width: 7.5rem;
   height: 2rem;
   padding: 0.25rem;
@@ -75,9 +75,15 @@ body {
 .filter select {
   padding: 0.3125rem;
   font-size: 1rem;
-}
+} */
 
-.dropdown {
+/* .dropdown {
+  display: fixed;
+  flex-direction: column;
+  gap: 10px;
+} */
+
+.filter {
   display: fixed;
   flex-direction: column;
   gap: 10px;
@@ -91,30 +97,42 @@ body {
   border-radius: 8px;
   padding: 14px 10px;
 
-  --CSSment: "전체"
-}
-
-.dropdown_title::after {
-  content: var(--CSSment);
   font-size: 16px;
   font-weight: 500;
   color: rgba(28, 28, 28, 1);
+
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+
+  --CSSment: "전체"
+}
+ 
+
+.dropdown_title::after {
+  content: var(--CSSment);
 }
 
 .dropdown_title:checked + .dropdown_menu {
   display: block;
-  background-color: white;
 }
 
 .dropdown_menu {
   display: none;
   position: absolute;
   width: 120px;
-  border: 2px solid rgba(199, 199, 199, 1);
+  border: 1px solid #C7C7C7;
   border-radius: 10px;
-  overflow: hidden; /* 노란색 모서리 영역 넘치는 거 없애기 */
+  overflow: hidden; /* 모서리 영역 넘치는 거 없애기 */
   margin-top: 8px;
-  justify-content: space-between;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  /* justify-content: space-between; */
+}
+
+.dropdown_menu img {
+  display: none;
 }
 
 .dropdown_menu input {
@@ -131,15 +149,30 @@ body {
 .dropdown_menu label:hover {
   background-color: rgba(58, 181, 15, 0.05);
   color: #299C00;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown_menu label:hover img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown_layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* .dropdown_icon {
-  display: none;
-  width: 16px;
-  height: 16px;
-  margin-left: 6px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 1rem;
+  right: 0.4rem;
+  background-color: #28b4e1;
 } */
-
 
 .storage {
   border-bottom: 0.125rem solid #000;
@@ -167,6 +200,8 @@ body {
   color: #ababab;
 }
 
+
+/* 여기서부터 모달 css */
 .modal_group {
   display: none;
   position: absolute;
@@ -194,11 +229,10 @@ body {
 
   width: 640px;
   height: 560px;
-  background-color: #FFFFFF;
+  background-color: var(--backgroundColor);
   z-index: 300;
 
   border-radius: 1rem;
-  border: 1px solid #d4d3d3;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -206,13 +240,16 @@ body {
   gap: 40px;
   text-align: left;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--textColor);
 }
 
 .register_title {
   width: 100%;
   font-size: 1.5rem;
   font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .register_content {
@@ -234,7 +271,7 @@ body {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.25rem;
-  color: #333;
+  color: var(--raidoTextColor);
 }
 
 .radio_button {
@@ -251,7 +288,7 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
-  color: #333;
+  color: var(--finRegistModalText);
 }
 
 #html_title {
@@ -262,13 +299,14 @@ body {
   appearance: none;
   width: 100%;
   border-radius: 0.5rem;
-  background-color: #fff;
+  background-color: var(--backgroundColor);
   border: 1px solid #d4d3d3;
   padding: 0.75rem 1rem;
   text-align: left;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5rem;
+  color: var(--textColor);
 }
 
 #html_content {
@@ -276,7 +314,7 @@ body {
 }
 
 #html_title::placeholder, #html_content::placeholder {
-  color: #ababab;
+  color: var(--inputPlaceholder);
 }
 
 
@@ -291,7 +329,7 @@ body {
   width: 104px;
   height: 48px;
   border-radius: 0.5rem;
-  background-color: #c7c7c7;
+  background-color: var(--registButtonBackground);
   height: 3rem;
   display: flex;
   align-items: center;
@@ -302,25 +340,25 @@ body {
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  color: #f2f2f2;
+  color: var(--registButtonText);
 }
 
 .close_button {
   width: 104px;
   height: 48px;
   border-radius: 0.5rem;
-  background-color: #FFFFFF;
+  background-color: var(--closeButtonBackground);
   height: 3rem;
   display: flex;
   align-items: center;
-  border: 1px solid #000000;
+  border: var(--closeButtonBorder);
   justify-content: center;
   padding: 0.5rem 0.625rem;
   box-sizing: border-box;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  color: #1C1C1C;
+  color: var(--closeButtonText);
 }
 
 
@@ -332,7 +370,7 @@ body {
 
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 500;
 }
 
@@ -344,7 +382,7 @@ body {
 
   width: 480px;
   height: 200px;
-  background-color: #FFFFFF;
+  background-color: var(--backgroundColor);
   z-index: 600;
 
   border-radius: 1rem;
@@ -356,7 +394,7 @@ body {
   gap: 16px;
   text-align: center;
   font-size: 24px;
-  color: #000;
+  color: var(--textColor);
   font-weight: 700;
 }
 
@@ -369,8 +407,8 @@ body {
 .confirm {
   width: 100%;
   height: 48px;
-  background-color: black;
-  color: white;
+  background-color: var(--registButtonBackground);
+  color: var(--finRegistText);
   font-size: 18px;
   font-weight: 600;
   border-radius: 8px;
@@ -389,20 +427,20 @@ body {
 .keep {
   width: 104px;
   height: 48px;
-  background-color: white;
-  color: black;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
   font-size: 18px;
   font-weight: 600;
   border-radius: 8px;
-  border: 1px solid #000000;
+  border: var(--closeButtonBorder);
   padding: 8px 10px;
 }
 
 .clear_button {
   width: 104px;
   height: 48px;
-  background-color: black;
-  color: white;
+  background-color: var(--finRegistButton);
+  color: var(--registButtonText);
   font-size: 18px;
   font-weight: 600;
   border-radius: 8px;
@@ -413,6 +451,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1.4rem;
+  width: 100%;
 }
 
 .CSS_diary {
@@ -422,14 +461,14 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   
-  transition: width 0.5s, height 0.5s;
+  /* transition: width 0.5s, height 0.5s; */
 }
 
 .CSS_diary:hover {
-filter: opacity(50%);
-transform: scale(1.1);
+  filter: opacity(50%);
+  transform: scale(1.1);
+  transition: width 0.5s, height 0.5s;
 }
-
 
 .diary_image {
   height: 12.5rem;
@@ -512,6 +551,8 @@ transform: scale(1.1);
   background-image: url("../assets/plus_outline_light_m.png");
   background-repeat: no-repeat;
   background-position: 8px;
+  padding: 8px 10px;background-repeat: no-repeat;
+  background-position: 8px;
   padding: 8px 10px;
 }
 
@@ -524,7 +565,6 @@ transform: scale(1.1);
   background-color: #f2f2f2;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 70px;
 }
 
 .footer_title {
@@ -577,7 +617,9 @@ transform: scale(1.1);
   position: fixed;
   bottom: 4rem;
   right: 2rem;
+  z-index: 600;
 }
+
 
 .change_color {
   filter: invert(1);
@@ -613,6 +655,7 @@ transform: scale(1.1);
 
   padding: 12px 16px;
 
+  background-color: #FFFFFF;
 }
 
 .search_here {
@@ -626,4 +669,70 @@ transform: scale(1.1);
   font-size: 16px;
   font-weight: 500;
   color: #ABABAB;
+}
+
+/* 다크모드 토글 */
+.CSS_toggle {
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightgrey;
+}
+
+.CSS_toggle::after {
+  display: block;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 3px;
+
+  transition: margin-left 0.3s; /* 실제로 이동하는 알맹이 -> 토글에 적용하면 안됨!! */
+}
+
+.CSS_toggle:checked {
+  background-color: rgba(58, 216, 74, 1);
+}
+
+.CSS_toggle:checked::after {
+  margin-left: 18px;
+}
+
+.darkmode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.pagination_layout {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 40px 0px;
+}
+
+.pagination_icon {
+  background-color: #ffffff00;
+  border: none;
+}
+
+#pagination {
+  gap: 16px;
+}
+
+.page_button {
+  background-color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  color: #777777;
+  border: none;
+  margin: 0px 12px;
 }

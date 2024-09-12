@@ -21,15 +21,29 @@
         </div>
 
         <div class="filter_background">
-          <select class="filter" onchange="JS_filter(this.value)">
-            <option value="basic" selected>기본형</option>
-            <option value="row">가로형</option>
-            <option value="column">세로형</option>
-          </select>
+            <div class="filter">
+                <input type="checkbox" id="html_dropdown_title" class="dropdown_title" />
+            <ul class="dropdown_menu">
+                <li><input type="radio" id="basic" value="기본형" checked onclick="JS_dropdown(event)" />
+                    <label for="basic">기본형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+                <li><input type="radio" id="row" value="가로형" onclick="JS_dropdown(event)" />
+                    <label for="row">가로형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+                <li><input type="radio" id="column" value="세로형" onclick="JS_dropdown(event)" />
+                    <label for="column">세로형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+            </ul>
+            </div>
         </div>
-        
 
-        <div class="main2">
+        <div class="main2" id="puppy_main">
             <div class="puppy_image" id="basic_image"></div>
             <div class="puppy_image" id="row_image"></div>
             <div class="puppy_image" id="column_image"></div>
@@ -39,7 +53,6 @@
         <button class="up_scroll" id="floating_button">
             <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
         </button>
-        </div>
     </div>
 
     <div class="footer_layout" id="footer_section">

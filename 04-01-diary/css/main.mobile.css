@@ -9,7 +9,7 @@
   .show_diary_css {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.4rem;
+    gap: 1rem;
     width: 100%;
     order: 2;
     overflow: hidden;
