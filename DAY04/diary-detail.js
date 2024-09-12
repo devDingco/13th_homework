@@ -1,4 +1,3 @@
-// 전역 변수 및 상수 선언
 let 원본일기;
 const 기분이모티콘맵 = new Map([
   ["행복해요", "./images/감정이미지/행복해요 (s).png"],
@@ -19,7 +18,6 @@ function 초기화() {
   보기모드로전환();
   댓글기능초기화();
   플로팅버튼초기화();
-  // 반응형레이아웃조정();
 }
 
 // 일기 관련 함수
@@ -100,52 +98,34 @@ function 삭제확인모달닫기() {
 // 일기 내용 복사 함수
 function 일기내용복사() {
   const 일기내용 = document.getElementById("일기내용");
-  if (일기내용) {
+  // 일기 내용이 존재하고 빈 문자열이 아닌 경우에만 복사
+  // 일기 내용이 0인 경우에도 복사가 가능
+  if (일기내용 && 일기내용.textContent.trim() !== "") {
     navigator.clipboard
       .writeText(일기내용.textContent)
       .then(() => {
-        토스트메시지표시();
+        토스트메시지표시("내용이 복사되었습니다.");
       })
       .catch((err) => {
         console.error("내용 복사 실패:", err);
+        토스트메시지표시("내용 복사에 실패했습니다.");
       });
+  } else {
+    console.error("복사할 일기 내용이 없습니다.");
+    토스트메시지표시("복사할 내용이 없습니다.");
   }
 }
 
 // 토스트 메시지 표시 함수
-function 토스트메시지표시() {
+function 토스트메시지표시(메시지 = "내용이 복사되었습니다.") {
   const 토스트 = document.getElementById("토스트메시지");
+  토스트.querySelector("div").textContent = 메시지;
   토스트.style.display = "block";
-  토스트.style.opacity = "0";
 
-  // 토스트 위치 조정
-  const viewportHeight = window.innerHeight;
-  const toastHeight = 토스트.offsetHeight;
-  토스트.style.bottom = `${Math.max(20, viewportHeight * 0.1)}px`; // 최소 20px, 최대 뷰포트 높이의 10%
-
-  // 페이드 인 효과
-  let opacity = 0;
-  const fadeIn = setInterval(() => {
-    if (opacity < 1) {
-      opacity += 0.1;
-      토스트.style.opacity = opacity.toString();
-    } else {
-      clearInterval(fadeIn);
-
-      // 2초 후 페이드 아웃
-      setTimeout(() => {
-        const fadeOut = setInterval(() => {
-          if (opacity > 0) {
-            opacity -= 0.1;
-            토스트.style.opacity = opacity.toString();
-          } else {
-            clearInterval(fadeOut);
-            토스트.style.display = "none";
-          }
-        }, 50);
-      }, 2000);
-    }
-  }, 50);
+  // 3초 후에 토스트 메시지 숨기기
+  setTimeout(() => {
+    토스트.style.display = "none";
+  }, 3000);
 }
 
 function 일기표시() {
