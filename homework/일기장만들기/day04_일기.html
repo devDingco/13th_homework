@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기보관함 Day04</title>
+    <link rel="stylesheet" href="./day04_일기.css" />
+    <link rel="stylesheet" href="./day07_일기mobile.css" media="849px" />
+    <script src="./day04_일기.js"></script>
+  </head>
+  <body>
+    <div class="전체화면">
+      <div id="상단박스Id" class="상단박스">
+        <div id="상단제목박스" class="상단제목박스">
+          <div class="민지의다이어리">민지의다이어리</div>
+        </div>
+        <div id="headerSkinId" class="headerSkin">
+          <img src="./day04img/Rectangle 1.png" alt="" />
+        </div>
+        <div class="saveBox">
+          <div
+            id="saveDiary"
+            class="iconBtn"
+            onclick="saveClick('saveDiary');dropDownDisplay('saveBox')"
+          >
+            일기보관함
+          </div>
+          <div
+            id="savePoto"
+            class="iconBtn"
+            onclick="saveClick('savePoto');potoApi();dropDownDisplay('savePoto')"
+          >
+            사진보관함
+          </div>
+        </div>
+
+        <!-- 일기보관함 드롭다운만들기 -->
+        <div id="stickyBoxId" class="stickyBox">
+          <div id="navBoxDiv" class="navBox">
+            <select id="navSelect" onchange="navFilter(event)">
+              <option>전체</option>
+              <option>행복해요</option>
+              <option>슬퍼요</option>
+              <option>놀랐어요</option>
+              <option>화나요</option>
+              <option>기타</option>
+            </select>
+
+            <!-- 모달 띄우기 버튼 -->
+            <button class="diaryStart" onclick="modalOpen('modalWrite')">
+              <img src="./CSS&JS 마스터/plus_outline_light_m.svg" alt="" />
+              일기쓰기
+            </button>
+          </div>
+        </div>
+
+        <!-- 사진보관함 드롭다운만들기 -->
+        <div id="imgnavId" class="imgnavPoto">
+          <select id="navSelect" onchange="navFilter(event)">
+            <option>기본</option>
+            <option>가로형</option>
+            <option>세로형</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- center -->
+      <div class="contentBox">
+        <!-- 일기장목록 -->
+        <div id="contentBox02Id" class="contentBox02">
+          <div id="iconBoxFId" class="iconBoxF">
+            <!-- <a href="./day05_일기상세페이지.html">
+              <div id="iconBoxFImgID" class="iconBoxFImg">
+                <div class="delBtn">X</div>
+                <img src="./img/day04img/슬퍼요 (m).png" alt="" />
+                <div class="iconBoxF두번째">
+                  <div class="iconBoxF세번째">
+                    <div>슬퍼요</div>
+                    <div>2024.03.12</div>
+                  </div>
+                  <div class="iconBoxF네번째">타이틀 영역 입니다.</div>
+                </div>
+              </div>
+            </a> -->
+          </div>
+        </div>
+
+        <!-- 사진보관함 -->
+        <div id="contentBox03Id" class="contentBox03">
+          <div id="imgScrollId" class="imgScroll"></div>
+        </div>
+
+        <!-- 페이지네이션 만들기 -->
+        <div class="paginationBox">
+          <img
+            id="prevBtn"
+            src="./CSS&JS 마스터/leftenable_outline_light_m.svg"
+            alt=""
+          />
+          <div id="pagination" class="paginationList">
+            <span></span>
+            <!-- 자기 자신의 크기를 갖고 싶어서 -->
+          </div>
+          <img
+            id="nextBtn"
+            src="./CSS&JS 마스터/rightdisabled_outline_dark_m.svg"
+            alt=""
+          />
+        </div>
+
+        <!-- 플로팅버튼     -->
+        <div class="upBtnBox">
+          <div onclick="floatingUp()" id="floatingBtn" class="upBtn">^</div>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div id="footerBoxId" class="footerBox">
+        <div class="footerBox02">민지의다이어리</div>
+      </div>
+    </div>
+
+    <!-- 전체화면 밖 -->
+    <!-- 모달 만들기  -->
+    <div id="modalWrite" class="modalgroup">
+      <div class="modalBackground" onclick="modalClose('modalWrite')"></div>
+      <div class="modalContent">
+        <div class="iconBoxS">
+          <div class="iconBoxS001">📍일기쓰기</div>
+          <div class="iconBoxS002">
+            <div class="todayEmo">
+              <div class="todayTitle">오늘기분이어땟나요?</div>
+              <div class="todayRadio">
+                <div>
+                  <input
+                    id="행복해요체크"
+                    type="radio"
+                    name="radioCheck"
+                    value="행복해요"
+                  />
+                  <label>행복해요</label>
+                </div>
+                <div>
+                  <input
+                    id="슬퍼요체크"
+                    type="radio"
+                    name="radioCheck"
+                    value="슬퍼요"
+                  />
+                  <label>슬퍼요</label>
+                </div>
+                <div>
+                  <input
+                    id="놀랐어요체크"
+                    type="radio"
+                    name="radioCheck"
+                    value="놀랐어요"
+                  />
+                  <label>놀랐어요</label>
+                </div>
+                <div>
+                  <input
+                    id="화나요체크"
+                    type="radio"
+                    name="radioCheck"
+                    value="화나요"
+                  />
+                  <label>화나요</label>
+                </div>
+                <div>
+                  <input
+                    id="기타체크"
+                    type="radio"
+                    name="radioCheck"
+                    value="기타"
+                  />
+                  <label>기타</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="diaryInput">
+              <div class="titleFrsit">
+                <div id="제목란" class="title">제목</div>
+                <input
+                  id="제목입력inputId"
+                  class="titleInput"
+                  placeholder="제목을 입력해 주세요"
+                />
+              </div>
+              <div class="writeSecond">
+                <div id="내용란" class="write">내용</div>
+                <textarea
+                  id="내용입력inputId"
+                  class="writeInput"
+                  placeholder="내용을 입력해 주세요"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="btnList">
+            <button class="modalCloseBtn" onclick="modalClose('modalWrite')">
+              닫기
+            </button>
+            <!-- <button class="diaryPlusBtn" onclick="diaryDivPlusBtn()">등록하기</button> -->
+            <button
+              class="diaryPlusBtn"
+              onclick="modalOpen('modalEndWrite'); diaryDivPlusBtn();"
+            >
+              등록하기
+            </button>
+            <!-- 두개의 함수를 실행하고 싶다면 onclick=" ; " 이렇게 쓴다 ;이 구분하는것이다 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 중첩모달 : 일기등록-->
+    <div id="modalEndWrite" class="modalgroup">
+      <div class="modalBackground"></div>
+      <div class="diaryEnd">
+        <div class="pList">
+          <p>일기 등록 완료</p>
+          <p>등록되었습니다.</p>
+        </div>
+        <button onclick="modalClose('modalEndWrite')">확인</button>
+      </div>
+    </div>
+
+    <!-- 중첩모달 : 일기취소-->
+    <div id="modalNull" class="modalgroup">
+      <div class="modalBackground"></div>
+      <div class="diaryEnd">
+        <div class="pList">
+          <p>일기 등록 취소</p>
+          <p>일기 등록을 취소 하시겠어요?</p>
+        </div>
+        <div class="NullBtnList">
+          <button onclick="modalOpen('modalWrite')">계속작성</button>
+          <button onclick="modalClose('modalNull')">등록취소</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
