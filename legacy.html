@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* (구) 쌩 input filter style */
+    .nav__tap {
+    width: 100vw;
+    height: 15rem;
+    background-color: #FCFCFC;
+    gap: 1rem;
+    margin: 2.4rem 0rem 4.2rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 0rem;
+    z-index: 2;
+    box-shadow: 0rem 0.5rem 0rem 0rem #fff;
+
+        @media (max-width: 375px) {
+            width: 100%;
+            display: block;
+            padding: 2rem;
+            position: static;
+        }
+    }
+</style>
+
+<body>
+    <!-- (구) 쌩 input filter -->
+    <select class="filter__bar" onchange="activeFilter(event)">
+        <option name="filter" value="all">전체</option>
+        <option name="filter" value="happy">행복해요</option>
+        <option name="filter" value="sad">슬퍼요</option>
+        <option name="filter" value="surprise">놀랐어요</option>
+        <option name="filter" value="angry">화나요</option>
+        <option name="filter" value="etc">기타</option>
+    </select>
+</body>
+
+<script>
+    //** (구) 일기 만들기 기능: 전달받은 일기 정보로 일기 카드 생성 */
+    // makeDiaryTemp ( tempDiary );
+    function makeDiaryTemp(temp) {
+        if (diaryData.length !== 0) {
+            const diaryCard = document.createElement("div");
+            diaryCard.className = "wrapper__card"
+            diaryCard.innerHTML =
+    `
+    <div class="card__img">
+        <img src="./asset/card__${temp.mood}.png">
+    </div>
+    <div class="card__topic">
+        <div class="card__status">
+            <div class="card__${temp.mood}">${moodIndex[temp.mood]}</div>
+            <div class="card__date">${temp.date}</div>
+        </div>
+        <div class="card__title">${temp.title}</div>
+    </div>
+    `
+            document.querySelector(".content__left__card").append(diaryCard);
+            diaryCard.onclick = () => alertDiary(temp);
+        };
+    };
+
+    function alertDiary(temp) {
+        alert(
+    `
+    제목: ${temp.title}
+    기분: ${temp.mood}
+    날짜: ${temp.date}
+    내용: ${temp.context}
+    `
+        )
+    };
+
+    //** (구) 일기 필터 기능: filter함수 사용하여 배열 변경 */
+    //!! 배열 순서 자체가 변경되기 때문에 index또한 변경되는 이슈 있음
+    function activeFilter (event) {
+        const filterMood = event.target.value;
+
+        let filterDiary = JSON.parse(localStorage.getItem("diaryData"))
+
+        switch (filterMood) {
+            case "all": {
+                filterDiary = filterDiary.filter( el => el.mood )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "happy": {
+                filterDiary = filterDiary.filter( el => el.mood === "happy" )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "sad": {
+                filterDiary = filterDiary.filter( el => el.mood === "sad" )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "surprise": {
+                filterDiary = filterDiary.filter( el => el.mood === "surprise" )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "angry": {
+                filterDiary = filterDiary.filter( el => el.mood === "angry" )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            case "etc": {
+                filterDiary = filterDiary.filter( el => el.mood === "etc" )
+                makeDiaryCard(filterDiary)
+                break
+            }
+            default: {
+                filterDiary = JSON.parse(localStorage.getItem("diaryData"))
+                makeDiaryCard(filterDiary)
+            }
+        }
+    }
+</script>
+</html>
