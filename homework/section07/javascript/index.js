@@ -1,5 +1,19 @@
+let 클릭한페이지 = 1;
+let 시작페이지 = 1;
+
+const 보여줄갯수 = 4;
+const 페이지버튼갯수 = 5;
+const 마지막페이지 = Math.ceil(
+  JSON.parse(window.localStorage.getItem('민지의일기목록') ?? []).length /
+    보여줄갯수
+);
+console.log('🚀 ~ 마지막페이지:', 마지막페이지);
+
 window.onload = () => {
   console.log('민지의 다이어리에 오신 것을 환영합니다.');
+
+  // 0. 데모 생성..
+  JS_데모데이터생성기능(21);
 
   // 1. 시작하면 일기 목록으로 이동
   JS_메뉴이동('일기');
@@ -14,80 +28,30 @@ window.onload = () => {
       console.error('HTML_메인 요소가 존재하지 않습니다.');
     }
   });
+
+  // 3. 페이지네이션 기능 추가
+  JS_페이지네이션기능();
+
+  // 4. 일기 그리기
+  JS_일기그리기기능(시작페이지);
 };
 
-window.addEventListener('scroll', () => {
-  const 화면위에서푸터위까지길이 = document
-    .getElementById('HTML_푸터')
-    .getBoundingClientRect().top;
-  const 보이는화면길이 = window.innerHeight;
-  const 보이는화면너비 = window.innerWidth;
-
-  // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
-  if (보이는화면길이 >= 화면위에서푸터위까지길이) {
-    if (보이는화면너비 >= 849) {
-      document.getElementById('HTML_플로팅버튼').style = `
-      position: relative;
-      bottom: 0;
-      left: 97%;
-    `;
-    } else {
-      document.getElementById('HTML_플로팅버튼').style = `
-      position: relative;
-      bottom: 0;
-      left: 90%;
-    `;
-    }
-
-    // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
-  } else {
-    document.getElementById('HTML_플로팅버튼').style = `
-      position: fixed;
-      bottom: 4rem;
-      right: 2rem;
-    `;
-  }
-});
-
-// 스크롤 감지하여 필터 배경색 변경
-window.onscroll = function () {
-  const selectElement = document.querySelector('.CSS_필터');
-  // 1. 스크롤 얼마나 내려갔는지 확인하기
-  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-    // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
-    selectElement.classList.add('CSS_색상반전');
-  } else {
-    selectElement.classList.remove('CSS_색상반전'); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
-  }
-};
-
-const 스크롤하면실행될녀석 = () => {
-  // 1. 스크롤 얼마나 내려갔는지 구하기
-  const 스크롤내려간길이 =
-    window.document.getElementById('HTML_메인').scrollTop;
-
-  // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
-  if (스크롤내려간길이 == 0) {
-    window.document.getElementById('HTML_필터').style =
-      'background-color: gray;';
-  } else {
-    window.document.getElementById('HTML_필터').style =
-      'background-color: red;';
-  }
-};
-
-const JS_일기그리기기능 = () => {
+const JS_일기그리기기능 = (현재페이지) => {
   // 1. 스토리지에 저장된 일기목록 가져오기
   const 스토리지에저장된일기목록 =
     window.localStorage.getItem('민지의일기목록') ?? '[]';
   const 일기목록 = JSON.parse(스토리지에저장된일기목록);
 
-  // 2. 일기목록 화면에 새롭게 전체 그리기
+  // 2. 페이지의 게시글 갯수만큼 filter 후, 일기목록 화면에 그릴 일기장만 태그로 생성
   const HTML_새로운일기도화지 = 일기목록
-    .map(
-      (el, index) => `
-        <a href="./detail.html?number=${index}">
-          <div class="CSS_일기">
+    .filter((el, idx) => {
+      const 건너뛸갯수 = (현재페이지 - 1) * 보여줄갯수;
+      return 건너뛸갯수 <= idx && idx < 건너뛸갯수 + 보여줄갯수;
+    })
+    .map((el, index) => {
+      return `
+    <a href="./detail.html?number=${index}">
+    <div class="CSS_일기">
             <div class="CSS_일기사진">
               ${
                 el.기분 === '행복'
@@ -149,11 +113,127 @@ const JS_일기그리기기능 = () => {
             <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
           </div>
         </a>
-      `
-    )
+      `;
+    })
     .join('');
   window.document.getElementById('HTML_일기보여주는곳').innerHTML =
     HTML_새로운일기도화지;
+};
+
+const JS_페이지네이션기능 = () => {
+  const initialArr = new Array(페이지버튼갯수).fill(null);
+  const 페이지네이션결과 = initialArr
+    .map((el, idx) => {
+      const 페이지번호 = 시작페이지 + idx;
+      return 페이지번호 <= 마지막페이지
+        ? `<button
+          onclick="JS_일기그리기기능(${페이지번호});클릭한페이지=${페이지번호};JS_페이지네이션기능()"
+          class=${클릭한페이지 === 페이지번호 ? 'CSS_클릭한페이지' : ''}
+        >
+          ${페이지번호}
+        </button>`
+        : ``;
+    })
+    .join(' ');
+  // console.log('🚀 ~ 페이지네이션결과:', 페이지네이션결과);
+  document.getElementById('HTML_페이지보여주는곳').innerHTML = 페이지네이션결과;
+};
+
+const JS_다음페이지이동기능 = () => {
+  // `시작페이지 + 보여줄갯수`의 의미는 다음페이지 이동을 눌렀을 때 이동할 페이지의 값이다..
+  if (시작페이지 + 보여줄갯수 > 마지막페이지) {
+    alert('더이상 다음 페이지가 없습니다.');
+    return;
+  }
+  console.log('🚀 ~ 시작페이지:', 시작페이지);
+  // 시작페이지가 valid하면 갱신
+  시작페이지 = 시작페이지 + 페이지버튼갯수;
+  클릭한페이지 = 시작페이지;
+  JS_페이지네이션기능();
+  JS_일기그리기기능(클릭한페이지);
+};
+
+const JS_이전페이지이동기능 = () => {
+  if (시작페이지 <= 1) {
+    alert('더이상 이전 페이지가 없습니다.');
+    return;
+  }
+  console.log('🚀 ~ 시작페이지:', 시작페이지);
+  시작페이지 = 시작페이지 - 페이지버튼갯수;
+  클릭한페이지 = 시작페이지;
+  JS_페이지네이션기능();
+  JS_일기그리기기능(클릭한페이지);
+};
+
+const JS_데모데이터생성기능 = (len) => {
+  const mockArr = Array.from({ length: len }, (el, i) => ({
+    제목: `글${i + 1}`,
+    기분: ['행복', '화남', '놀람', '슬픔', '기타'][i % 5], // 다양한 기분을 순환적으로 할당
+    작성일: `2024. 9. ${10 + (i % 10)}.`, // 날짜를 순환적으로 할당
+    내용: `내용${i + 1}`,
+  }));
+
+  window.localStorage.setItem('민지의일기목록', JSON.stringify(mockArr));
+};
+
+window.addEventListener('scroll', () => {
+  const 화면위에서푸터위까지길이 = document
+    .getElementById('HTML_푸터')
+    .getBoundingClientRect().top;
+  const 보이는화면길이 = window.innerHeight;
+  const 보이는화면너비 = window.innerWidth;
+
+  // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
+  if (보이는화면길이 >= 화면위에서푸터위까지길이) {
+    if (보이는화면너비 >= 849) {
+      document.getElementById('HTML_플로팅버튼').style = `
+      position: relative;
+      bottom: 0;
+      left: 97%;
+    `;
+    } else {
+      document.getElementById('HTML_플로팅버튼').style = `
+      position: relative;
+      bottom: 0;
+      left: 90%;
+    `;
+    }
+
+    // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
+  } else {
+    document.getElementById('HTML_플로팅버튼').style = `
+      position: fixed;
+      bottom: 4rem;
+      right: 2rem;
+    `;
+  }
+});
+
+// 스크롤 감지하여 필터 배경색 변경
+window.onscroll = function () {
+  const selectElement = document.querySelector('.CSS_필터');
+  // 1. 스크롤 얼마나 내려갔는지 확인하기
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+    selectElement.classList.add('CSS_색상반전');
+  } else {
+    selectElement.classList.remove('CSS_색상반전'); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
+  }
+};
+
+const 스크롤하면실행될녀석 = () => {
+  // 1. 스크롤 얼마나 내려갔는지 구하기
+  const 스크롤내려간길이 =
+    window.document.getElementById('HTML_메인').scrollTop;
+
+  // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+  if (스크롤내려간길이 === 0) {
+    window.document.getElementById('HTML_필터').style =
+      'background-color: gray;';
+  } else {
+    window.document.getElementById('HTML_필터').style =
+      'background-color: red;';
+  }
 };
 
 const JS_글쓰기기능 = () => {
@@ -456,7 +536,7 @@ window.addEventListener('scroll', () => {
     document.documentElement.scrollTop /
     (document.documentElement.scrollHeight -
       document.documentElement.clientHeight);
-  console.log('🚀 ~ window.addEventListener ~ 스크롤퍼센트:', 스크롤퍼센트);
+  // console.log('🚀 ~ window.addEventListener ~ 스크롤퍼센트:', 스크롤퍼센트);
   // 기존 타이머가 존재하거나 스크롤퍼센트가 95% 미만인 경우는 무한 스크롤을 적용하지 아니함
   if (타이머 || 스크롤퍼센트 < 0.95) return;
 
