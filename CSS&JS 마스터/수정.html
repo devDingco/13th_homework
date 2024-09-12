@@ -1,65 +1,95 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+  <head>
+    <meta charset="UTF-8" />
     <title>수정</title>
-    <link rel="stylesheet" href="./수정.css">
+    <link rel="stylesheet" href="./수정.css" />
     <script src="./수정.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="layout" id="layout">
-        <header>
-            <div class="header_text">민지의 다이어리</div>
-        </header>
-        <main>
-            <div class="main_header">
-                <div class="main_header_text"> <!--헤더텍스트-->
-                    오늘 기분은 어땟나요?
-                </div>
-                <div class="main_header_radio">
-                    <div class="radioButton">
-                        <input type="radio" name="emotion" id="happpy" value="행복해요"><label for="happpy">행복해요</label>
-                    </div>
-                    <div class="radioButton">
-                        <input type="radio" name="emotion" id="sad" value="슬퍼요"><label for="sad">슬퍼요</label>
-                    </div>
-                    <div class="radioButton">
-                        <input type="radio" name="emotion" id="surprised" value="놀랐어요"><label for="surprised">놀랐어요</label>
-                    </div>
-                    <div class="radioButton">
-                        <input type="radio" name="emotion" id="angry" value="화나요"><label for="angry">화나요</label>
-                    </div>
-                    <div class="radioButton">
-                        <input type="radio" name="emotion" id="etc" value="기타"><label for="etc">기타</label>
-                    </div>
-                </div>
+      <header>
+        <div class="header_text">민지의 다이어리</div>
+      </header>
+      <main>
+        <div class="main_header">
+          <div class="main_header_text">
+            <!--헤더텍스트-->
+            오늘 기분은 어땟나요?
+          </div>
+          <div class="main_header_radio">
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="happpy"
+                value="행복해요"
+              /><label for="happpy">행복해요</label>
             </div>
-            <div class="testBox">
-                <div class="main_body_title">
-                    <label for="titleBox">제목</label>
-                    <input type="text" id="titleBox">   
-                </div>
-                <div class="main_body_content">
-                    <label for="contentBox">내용</label>
-                    <textarea name="contentBox" id="contentBox"></textarea>
-                </div>
-                <div class="main_button">
-                    <button onclick="cancel()">취소</button>
-                    <button onclick="modify()">수정하기</button>
-                </div>
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="sad"
+                value="슬퍼요"
+              /><label for="sad">슬퍼요</label>
             </div>
-        </main>
-        <div class="remembranceBox">
-            <div class="inputBox">
-                <div class="inputTitle">회고</div>
-                <div class="inputTextBox">
-                    <input type="text" id="inputText" placeholder="회고를 남겨보세요." disabled> 
-                    <button class="inputButton" onclick="addText()">입력</button>
-                </div>
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="surprised"
+                value="놀랐어요"
+              /><label for="surprised">놀랐어요</label>
             </div>
-            <div id="remembranceTextBox">
-                <!--회고텍스트넣을자리-->
+            <div class="radioButton">
+              <input
+                type="radio"
+                name="emotion"
+                id="angry"
+                value="화나요"
+              /><label for="angry">화나요</label>
             </div>
+            <div class="radioButton">
+              <input type="radio" name="emotion" id="etc" value="기타" /><label
+                for="etc"
+                >기타</label
+              >
+            </div>
+          </div>
         </div>
+        <div class="testBox">
+          <div class="main_body_title">
+            <label for="titleBox">제목</label>
+            <input type="text" id="titleBox" />
+          </div>
+          <div class="main_body_content">
+            <label for="contentBox">내용</label>
+            <textarea name="contentBox" id="contentBox"></textarea>
+          </div>
+          <div class="main_button">
+            <button onclick="cancel()">취소</button>
+            <button onclick="modify()">수정하기</button>
+          </div>
+        </div>
+      </main>
+      <div class="remembranceBox">
+        <div class="inputBox">
+          <div class="inputTitle">회고</div>
+          <div class="inputTextBox">
+            <input
+              type="text"
+              id="inputText"
+              placeholder="회고를 남겨보세요."
+              disabled
+            />
+            <button class="inputButton" onclick="addText()">입력</button>
+          </div>
+        </div>
+        <div id="remembranceTextBox">
+          <!--회고텍스트넣을자리-->
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
