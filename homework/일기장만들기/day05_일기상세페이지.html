@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>day05_일기상세페이지</title>
+    <link rel="stylesheet" href="./day05_일기상세페이지.css">
+    <script src="./day05_일기상세페이지.js"></script>
+</head>
+<body>
+    <div class="전체화면">
+        <div class="상단박스">
+            <div class="민지의다이어리">민지의다이어리</div>
+        </div>
+        <div id="localPrintBox" class="일기내용Box">
+            <section class="titleBox">
+                <div class="titlePrint">이것은타이틀입니다.</div>
+                <div class="myEmotion">
+                    <div class="myEmotionPrint">
+                        <img src="./CSS&JS 마스터/행복해요 (s).png" alt="">
+                        <span>행복해요</span>
+                    </div>
+                    <div class="writeDayPrint">2024.08.18 작성</div>
+                </div>
+            </section>
+            <section class="detailBox">
+                <div>내용</div>
+                <div class="wirtePrint">내용이들어갑니다</div>
+            </section>
+            <div class="copy">
+                <div onclick="detailCopy()">내용복사</div>
+            </div>
+            <div id="copyToastOpen" class="copyToastDefault">복사되었습니다</div>
+            <section class="detailBoxBtn">
+                <button>수정</button>
+                <button>삭제</button>
+            </section>
+            <hr />
+        </div>
+        <hr/>
+
+        <!-- 회고목록 -->
+        <div id="hereA" class="commentList">
+            <div  class="commentBox">
+                <a class="move" href="#hereA">
+                <h1>회고</h1>
+                </a>
+                <div class="commentWriteBox"> 
+                    <input id="commentInput" class="commentInput" type="text" placeholder="회고를남겨보세요">                              
+                    <button onclick="commentPlus()" class="commentBtn">입력</button>
+                </div>
+            </div>
+            <div id="commentBoxId" class="commentBox">
+                <div  class="commentPlus">
+                    <span>3년이 지나고보니 이때가그립</span>
+                    <span>[2024.08.18]</span>
+                </div>
+                <!-- <hr/>
+                <div class="commentPlus">
+                    <span>3년이 지나고보니 이때가그립</span>
+                    <span>[2024.08.18]</span>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 일기 상세p 일기삭제 모달만들기 -->
+    <div id="modalNull" class="modalgroup">
+        <div class="modalBackground"></div>
+        <div class="diaryEnd">
+            <div class="pList">
+                <p>일기 삭제</p>
+                <p>일기를 삭제 하시겠어요?</p>
+            </div>
+            <div class="NullBtnList">
+                <button id="noBtn" onclick="modalOpen('modalWrite')">취소</button>
+                <button id="nullBtn" onclick="modalClose('modalNull')">삭제</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

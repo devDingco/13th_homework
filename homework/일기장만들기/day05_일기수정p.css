@@ -1,0 +1,170 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+.전체화면 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+/*header*/
+
+.상단박스{
+    width: 1168px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.민지의다이어리{
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 0px;
+    
+}
+
+.contentBox {
+    width: 1168px;
+    height: 432px;
+    display: flex;
+    flex-direction: column;
+    gap:24px
+}
+
+.editBox01 {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.myEmoInput{
+    display: flex;
+    gap: 20px;
+}
+
+.editBox02 {
+    width: 100%;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.editBox02 input {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px 12px 16px;
+}
+
+.editBox03 {
+    width: 100%;
+    height: 156px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.editBox03 textarea {
+    width: 100%;
+    height: 128px;
+    padding: 12px 16px 12px 16px;
+}
+
+.editBox04 {
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+}
+
+.editBox04 button {
+    width: 104px;
+    height: 48px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.editBox04 button:hover {
+    color: #F2F2F2;
+    background-color: #000000;
+    transform: skew(15deg)
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.commentLIst{
+    width: 1168px;
+    height: 173px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+
+.commentBox {
+    width: 100%;
+    height: 85px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+
+.commentWriteBox{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.commentInput {
+    width: 1101px;
+    height: 48px;
+    border: 1px solid gray;
+    border-radius: 8px;
+
+
+}
+
+.commentBtn {
+    width: 51px;
+    height: 48px;
+    padding: 8px 10px 8px 10px;
+    background-color: #000000;
+    border-radius: 8px;
+    color: white;
+
+
+    
+}
+
+.commentPlus {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    gap: 12px;
+
+}
+
+

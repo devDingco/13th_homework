@@ -1,0 +1,521 @@
+* {
+  box-sizing: border-box;
+  /* 테두리박스로맞추기 */
+  margin: 0;
+  padding: 0;
+}
+
+.상단박스 {
+  width: 100%;
+  /* height: 100.3125rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* 나누기 시작 */
+.상단제목박스 {
+  width: 73rem;
+  height: 3.75rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.민지의다이어리 {
+  width: 7.5rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0.75rem 0rem;
+}
+
+.headerSkin {
+  max-width: 73rem;
+  /* width: 73rem; */
+  height: 15rem;
+  display: flex;
+  justify-content: center;
+}
+
+.headerSkin img {
+  width: 100%;
+}
+
+/* 페이지네이션 */
+.paginationBox {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.paginationBox button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.btnAction {
+  padding: 10px;
+  color: red;
+}
+
+/* section : 플로팅버튼 부분 */
+
+.upBtnBox {
+  width: 100%;
+  height: 6.25rem;
+  position: relative;
+}
+
+.upBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.0625rem solid blue;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 3.5625rem;
+  font-size: 1.6875rem;
+}
+
+.upBtn:hover {
+  background-color: blue;
+}
+
+/* section content 일기목록  */
+.contentBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contentBox02 {
+  width: 73rem;
+  margin-top: 20px;
+}
+
+.contentBox03 {
+  display: none;
+  width: 73rem;
+}
+
+.imgScroll {
+  width: 100%;
+  height: 1200px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.imgScroll img {
+  width: 640px;
+  height: 640px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.saveBox {
+  width: 73rem;
+  height: 3rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.saveBox div {
+  cursor: pointer;
+}
+
+.iconBtn {
+  width: 7.4375rem;
+  height: 3rem;
+  font-weight: 700;
+  padding: 0.75rem 0.5rem;
+  font-size: 1.4375rem;
+}
+
+.stickyBox {
+  width: 100%;
+  height: 3.125rem;
+  position: sticky;
+  top: 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.navBox {
+  width: 73rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 사진보관함 드롭다운 */
+
+.imgnavPoto {
+  display: none;
+  width: 73rem;
+}
+
+.diaryStart {
+  height: 3rem;
+  background-color: #000000;
+  border-radius: 0.5rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 0.5rem 0.625rem;
+  line-height: 3rem;
+}
+
+.iconBoxF {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.iconBoxFImg {
+  width: 17.125rem;
+  height: 18.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1rem;
+  transition: transform 0.5s;
+}
+
+.iconBoxFImg:hover {
+  transform: scale(1.1);
+}
+
+.iconBoxFImg img {
+  width: 100%;
+  border-radius: 1rem;
+  display: block;
+  transition: filter 0.5s;
+}
+
+.iconBoxFImg img:nth-child(1):hover {
+  border-radius: 1rem;
+  display: block;
+  filter: blur(0.3125rem);
+}
+
+.iconBoxFImg img:nth-child(2) {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  top: 7px;
+  right: 7px;
+
+  cursor: nw-resize;
+}
+
+.iconBoxF두번째 {
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iconBoxF세번째 {
+  width: 100%;
+  height: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.iconBoxF네번째 {
+  width: 100%;
+  height: 1.5rem;
+  display: flex;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* 모달 CSS시작 */
+.modalgroup {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  /* 드롭다운 넘기 */
+}
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  opacity: 70%;
+  background-color: #c7c7c7;
+}
+
+.modalContent {
+  width: 40rem;
+  height: 35rem;
+  background-color: #ffffff;
+  top: calc(50% - 35rem / 2);
+  left: calc(50% - 40rem / 2);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+/* 일기쓰기 CSS시작 */
+.iconBoxS {
+  width: 37rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.iconBoxS001 {
+  width: 100%;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.iconBoxS002 {
+  width: 100%;
+  height: 22.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.todayEmo {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todayTitle {
+  width: 100%;
+  height: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.todayRadio {
+  width: 100%;
+  height: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.오늘기분Radio {
+  height: 1.5rem;
+  text-align: center;
+}
+
+.diaryInput {
+  width: 100%;
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.titleFrsit {
+  width: 100%;
+  height: 4.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  width: 100%;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333333;
+}
+
+.titleInput {
+  width: 100%;
+  height: 3rem;
+  border: 0.0625rem solid #d4d3d3;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.제목입력input::placeholder {
+  color: #ababab;
+}
+
+.writeSecond {
+  width: 100%;
+  height: 9.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.write {
+  width: 100%;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333333;
+}
+
+.writeInput {
+  width: 100%;
+  height: 8rem;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  border: 0.0625rem solid #d4d3d3;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.내용입력input::placeholder {
+  color: #ababab;
+}
+
+.btnList {
+  width: 14rem;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modalCloseBtn {
+  width: 6.5rem;
+  height: 3rem;
+  background-color: #ffffff;
+  border: 0.0625rem solid #000000;
+  border-radius: 0.5rem;
+  color: #000000;
+}
+
+.diaryPlusBtn {
+  width: 6.5rem;
+  height: 3rem;
+  background-color: #c7c7c7;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: #f2f2f2;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+/* 모달다시시작 */
+.diaryEnd {
+  /* display: none; */
+  width: 30rem;
+  height: 12.5rem;
+  background-color: #ffffff;
+  position: absolute;
+  top: calc(50% - 12.5rem / 2);
+  left: calc(50% - 30rem / 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: 1.5rem;
+}
+.pList {
+  width: 27rem;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pList p:nth-child(1) {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.pList p:nth-child(2) {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.diaryEnd button {
+  width: 27rem;
+  height: 3rem;
+  background-color: #000000;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.NullBtnList {
+  width: 14.3125rem;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.NullBtnList button {
+  width: 6.5rem;
+  height: 3rem;
+  border: 0.0625rem solid #000000;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  color: #000000;
+  font-size: 1.125rem;
+  font-weight: 600;
+  /* text-align: center; */
+}
+
+.NullBtnList button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+/*하단*/
+.footerBox {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  padding: 24px 0px;
+  background-color: #f2f2f2;
+}
+
+.footerBox02 {
+  width: 73rem;
+  height: 7rem;
+  /* background-color: pink; */
+}

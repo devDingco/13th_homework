@@ -1,0 +1,336 @@
+html {
+     overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+   
+}
+
+.전체화면 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+/*header*/
+
+.상단박스{
+    width: 1168px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.민지의다이어리{
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 0px;
+    
+}
+
+/*section*/
+
+.일기내용Box {
+    width: 1168px;
+    height: 321px;
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.titleBox{
+    width: 100%;
+    height: 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.titlePrint {
+    width: 100%;
+    height: 36px;
+    font-size: 22px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+
+}
+
+.wirtePrint{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+
+.detailBox {
+    width: 100%;
+
+}
+
+.detailBox div{
+    margin-bottom: 13px;
+}
+
+.copy {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.copy div {
+    width: 91px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.copy div::before {
+    content: url(./CSS&JS\ 마스터/copy_outline_light_m.svg);
+    width: 24px;
+    height: 24px;
+}
+.copyToastDefault {
+    display: none;
+}
+
+.copyToast {
+    display: block;
+    width: 760px;
+    height: 56px;
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 760px /2);
+    text-align: center;
+    line-height: 56px;
+
+    animation-name: toast;
+    animation-duration: 3s;
+}
+
+@keyframes toast {
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0%;
+    }
+}
+
+.myEmotion {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.myEmotionPrint{
+    height: 32px;
+}
+
+.myEmotionPrint span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #EA5757;
+}
+
+.writeDayPrint{
+    height: 20px;
+}
+
+.detailBoxBtn {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content:flex-end;
+    gap: 16px;
+}
+
+.detailBoxBtn button {
+    width: 51px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 8px 10px 8px 10px;
+    background-color: #FFFFFF;
+   
+}
+
+.detailBoxBtn button:hover{
+ transform: skew(15deg);
+ background-color: #000000;
+ color: white;
+ cursor: pointer;
+}
+
+.commentList{
+    width: 1168px;
+    height: 173px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+
+.commentBox {
+    width: 100%;
+    height: 85px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+
+.commentWriteBox{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentInput {
+    width: 1101px;
+    height: 48px;
+    border: 1px solid gray;
+    border-radius: 8px;
+
+
+}
+
+.commentBtn {
+    width: 51px;
+    height: 48px;
+    padding: 8px 10px 8px 10px;
+    background-color: #000000;
+    border-radius: 8px;
+    color: white;
+
+
+    
+}
+
+.commentPlus {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    gap: 12px;
+
+}
+
+
+/* 모달 CSS시작 */
+.modalgroup {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    /* 드롭다운 넘기 */
+}
+
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+    opacity: 70%;
+    background-color: #C7C7C7;
+}
+
+.modalContent {
+    width: 40rem;
+    height: 35rem;
+    background-color: #FFFFFF;
+    top: calc(50% - 35rem / 2);
+    left: calc(50% - 40rem / 2);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.diaryEnd {
+    /* display: none; */
+    width: 30rem;
+    height: 12.5rem;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: calc(50% - 12.5rem/2);
+    left: calc(50% - 30rem/2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    border-radius: 1.5rem;
+
+}
+.pList {
+    width: 27rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pList p:nth-child(1) {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.pList p:nth-child(2) {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.diaryEnd button {
+    width: 27rem;
+    height: 3rem;
+    background-color: #000000;
+    color: white;
+    border-radius: .5rem;
+}
+
+.NullBtnList {
+    width: 14.3125rem;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.NullBtnList button {
+    width: 6.5rem;
+    height: 3rem;
+    border: .0625rem solid #000000;
+    background-color: #FFFFFF;
+    border-radius: .5rem;
+    color: #000000;
+    font-size: 1.125rem;
+    font-weight: 600;
+    /* text-align: center; */
+}
+
+.NullBtnList button:hover{
+    background-color: #000000;
+    color: white;
+}
