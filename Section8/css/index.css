@@ -616,15 +616,17 @@ a {
   height: 24px;
 }
 
-.CSS_클릭한페이지 {
-  color: red;
-  background-color: transparent;
-  border: none;
-}
-
 .CSS_페이지버튼 {
   border: none;
   background-color: transparent;
   width: 40px;
   
 }
+
+.CSS_클릭한페이지 {
+  color: red;
+  background-color: transparent;
+  border: none;
+}
+
+
