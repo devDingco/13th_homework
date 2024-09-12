@@ -632,8 +632,8 @@ const JS_페이지그리기기능 = () => {
   const 상자 = new Array(10). fill("철수")
   const 페이지 = 상자.map((el ,index) => {
     const 페이지번호 = index + 시작페이지
-     return 페이지번호 <= 마지막페이지 ? `<button class="CSS_페이지버튼" onclick="JS_일기목록(${페이지번호}); 클릭한페이지=${페이지번호}; JS_페이지그리기기능()"
-                    class=${클릭한페이지 === 페이지번호 ? "CSS_클릭한페이지" : ""}> ${페이지번호}</button>` : ""
+     return 페이지번호 <= 마지막페이지 ? `<button class="CSS_페이지버튼 ${클릭한페이지 === 페이지번호 ? "CSS_클릭한페이지" : ""}" onclick="JS_일기목록(${페이지번호}); 클릭한페이지=${페이지번호}; JS_페이지그리기기능()"
+                    > ${페이지번호}</button>` : ""
   }).join(" ")
   document.getElementById("HTML_페이지보여주는곳").innerHTML = 페이지
 }

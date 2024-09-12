@@ -6,7 +6,7 @@ const 일기목록 = [];
 
 const JS_글쓰기기능 = () => {
   // 0. 현재 날짜 가져오기
-
+  // 날짜 가져오는 Date 함수
   const date = new Date();
 
   const options = {
@@ -18,11 +18,13 @@ const JS_글쓰기기능 = () => {
   // 1-1. 내가쓴 일기 불러오기
   const 날짜담는통 = options.year + "-" + options.month + "-" + options.date;
   const 제목담는통 = window.document.getElementById("HTML_제목입력창").value;
+  // id를 통해 입력한 내용을 value로 가져옴
   const 내용담는통 = window.document.getElementById("HTML_내용입력창").value;
 
   // 1-2. 오늘의 기분 불러오기
   let 행복담는통 =
     window.document.getElementsByName("HTML_기분선택버튼")[0].checked === true;
+    // radio버튼이라 name을 하나로 통일, 어떤 라디오버튼을 선택했는지 번호로 checked확인, true면 통에 담음
   let 슬픔담는통 =
     window.document.getElementsByName("HTML_기분선택버튼")[1].checked === true;
   let 놀람담는통 =
@@ -38,9 +40,14 @@ const JS_글쓰기기능 = () => {
     내용: 내용담는통,
     작성일: 날짜담는통,
   };
+  // 전체 통들을 객체로 담음
+
 
   일기목록.push(일기담는통);
   localStorage.setItem("일기목록", JSON.stringify(일기목록))
+
+  // 담은 정보들을 목록에 push해서 로컬스토리지에 저장, setItem으로 key와 value로 담음, JSON.stringify로 목록을 문자열로 저장
+
   // 3. 마지막으로 추가한 일기번호 가져오기
   const 일기번호 = 일기목록.length - 1;
 
@@ -50,9 +57,10 @@ const JS_글쓰기기능 = () => {
   
     
   // 5. 새로운 일기도화지 만들기
+  // 작성한 기분으로 맞는 이미지 띄우기
   const HTML_새로운일기도화지 = `
     <div class="CSS_일기" onclick="JS_글보기기능(${일기번호})">
-        <div class="CSS_일기사진">
+        <div class="CSS_일기사진"> 
           ${
             행복담는통 === true
               ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
@@ -114,6 +122,7 @@ const JS_글쓰기기능 = () => {
   // 6. HTML_일기보여주는곳에 기존의 일기도화지와 새로운 일기도화지 함께 보여주기
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
     HTML_기존의일기도화지 + HTML_새로운일기도화지;
+    // 없으면 등록하기 버튼 클릭 후 저장된 일기가 안나옴
 };
 
 const JS_글보기기능 = (일기번호받는통) => {
@@ -146,7 +155,7 @@ const JS_필터링기능 = (event) => {
   ]
   switch(선택지) {
       case "전체선택": {
-          목록 = 목록.filter(el => el.상태 === "전체")
+          목록 = 목록.filter(el => el.상태 === "전체") //el의 상태가 전체인지 검사
           break;
       }
       case "행복선택": {
