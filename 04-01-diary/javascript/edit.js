@@ -65,7 +65,7 @@ window.onload = () => {
     location.replace(`./detail.html?number=${diary_number}`);
   };
   
-  const JS_cancle = () => {
+  const JS_cancel = () => {
     // 1. 주소에서 일기번호 가져오기
     const querystring = window.location.search;
     const number_container = new URLSearchParams(querystring);
@@ -87,3 +87,7 @@ window.onload = () => {
     `<div class="show_comment">${comment.text} <span style="font-size: 0.8em; color: #888;">${comment.date}</span></div>`
   ).join("");
   };
+
+  const JS_back = () => {
+    window.history.back();
+  }

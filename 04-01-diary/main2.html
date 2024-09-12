@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Diary</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.mobile.css" media="(max-width: 765px)" />
+    <script src="./javascript/main2.js" ></script>
+</head>
+<body>
+
+
+    <div class="layout">
+        <div class="header">
+            <div>민지의 다이어리</div>
+        </div>
+        <img class="banner" src="./assets/main.png" alt="Banner">
+
+        <div class="category">
+            <div class="unclick_storage" onclick="JS_click('diary')">일기보관함</div>
+            <div class="click_photos" onclick="JS_click('photos')">사진보관함</div>
+        </div>
+
+        <div class="filter_background">
+            <div class="filter">
+                <input type="checkbox" id="html_dropdown_title" class="dropdown_title" />
+            <ul class="dropdown_menu">
+                <li><input type="radio" id="basic" value="기본형" checked onclick="JS_dropdown(event)" />
+                    <label for="basic">기본형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+                <li><input type="radio" id="row" value="가로형" onclick="JS_dropdown(event)" />
+                    <label for="row">가로형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+                <li><input type="radio" id="column" value="세로형" onclick="JS_dropdown(event)" />
+                    <label for="column">세로형
+                        <img src="./assets/check_outline_light_xs.png" />
+                    </label>
+                </li>
+            </ul>
+            </div>
+        </div>
+
+        <div class="main2" id="puppy_main">
+            <div class="puppy_image" id="basic_image"></div>
+            <div class="puppy_image" id="row_image"></div>
+            <div class="puppy_image" id="column_image"></div>
+        </div>
+
+        
+        <button class="up_scroll" id="floating_button">
+            <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
+        </button>
+    </div>
+
+    <div class="footer_layout" id="footer_section">
+            <div class="footer_title">민지의 다이어리</div>
+            <div class="footer_boss">대표 : {name}</div>
+            <div class="footer_co">Copyright © 2024.{name} Co., Ltd.</div>
+    </div>
+</body>
+</html>

@@ -3,13 +3,20 @@
 <head>
     <title>Detail</title>
     <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="./css/detail.mobile.css" media="(max-width: 765px)" />
     <script src="./javascript/detail.js"></script>
     </head>
     <body>
-        <div class="header">
-            <div>민지의 다이어리</div>
-        </div>
 
+        <div class="header">
+            <div class="desktop">
+                <div class="title">민지의 다이어리</div>
+            </div>
+            <div class="mobile">
+                <img class="backbutton" src="./assets/back.png" onclick="JS_back()" />
+                <div class="title">일기 상세</div>
+            </div>
+        </div>
 
         <div class="diary_layout">
             <div class="diary_title">
@@ -33,6 +40,13 @@
                 <span id="content_details" class="show_content"></span>
             </div>
 
+            <div class="copyboard">
+                <button class="clipboard" onclick="JS_copy()">
+                    <img src="./assets/copy_outline_light_m.png" width="24px;"/>
+                    <span>내용 복사</span>
+                </button>
+            </div>
+
             <div class="edit_button">
                 <button class="edit" onclick="JS_edit()">수정</button>
                 <button class="edit" onclick="JS_delete()">삭제</button>
@@ -45,6 +59,14 @@
                     <button class="comment_button" onclick="JS_regist()">입력</button>
                 </div>
                 <div id="show_comment"></div>
+        </div>
+
+        <button class="up_scroll" id="floating_button">
+            <img src="./assets/up_scroll.png" onclick="JS_scroll()" />
+        </button>
+
+        <div id="toast_message">
+            <div class="toast">내용이 복사되었습니다.</div>
         </div>
     </body>
 </html>
