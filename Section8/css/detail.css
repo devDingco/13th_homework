@@ -1,0 +1,313 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6.4rem;
+  margin: 0 2rem 4rem;
+}
+
+.CSS_헤더 {
+  width: 100%;
+}
+
+.CSS_데스크탑헤더 {
+  display: block;
+}
+
+.CSS_모바일헤더 {
+  display: none;
+}
+
+.CSS_타이틀 {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.CSS_뒤로가기버튼 {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.CSS_일기상세보여주는곳 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  width: 100%;
+}
+
+/* 일기 제목 */
+.CSS_일기제목 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+#HTML_일기상세제목보여주는곳 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 2.4rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 0.2rem solid #000;
+}
+
+.CSS_일기정보 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CSS_기분 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#HTML_기분이미지보여주는곳 {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+#HTML_일기기분보여주는곳 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.CSS_날짜 {
+  display: flex;
+  gap: 0.8rem;
+}
+
+#HTML_날짜보여주는곳,
+.CSS_날짜 {
+  color: #919191;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+/* 일기 내용 */
+.CSS_일기내용 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.CSS_서브타이틀 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.CSS_일기상세내용보여주는곳 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2rem;
+}
+
+/* 수정 버튼, 내용 복사 버튼*/
+.CSS_수정버튼_영역,
+.CSS_내용복사버튼_영역 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  gap: 1.6rem;
+}
+
+.CSS_버튼 {
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #d4d3d3;
+  background-color: #fff;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+  color: #1c1c1c;
+  cursor: pointer;
+}
+
+.CSS_내용복사버튼 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border: none;
+  position: relative;
+  background-color: transparent;
+}
+
+.CSS_내용복사버튼_아이콘 {
+  height: 2.4rem;
+}
+
+.CSS_내용복사버튼_텍스트 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  text-align: left;
+}
+
+/* 회고 */
+.CSS_구분선 {
+  width: 100%;
+  border-bottom: 0.1rem solid #000;
+  box-sizing: border-box;
+}
+
+.CSS_회고제목 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.CSS_회고입력영역 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.CSS_회고입력부분 {
+  border-radius: 0.8rem;
+  background-color: #fff;
+  border: 0.1rem solid #d4d3d3;
+  width: 95%;
+  padding: 1.2rem 1.6rem;
+  height: 4.8rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.CSS_회고입력버튼 {
+  cursor: pointer;
+  color: #fff;
+  border-radius: 0.8rem;
+  background-color: #000;
+  width: 5%;
+  height: 4.8rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.CSS_회고목록 {
+  display: flex;
+  align-items: center;
+  border-bottom: 0.1rem solid #e4e4e4;
+  padding: 1.2rem;
+}
+
+.CSS_회고목록_마지막 {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+}
+
+.CSS_회고목록_날짜영역 {
+  font-size: 1.6rem;
+  color: #777;
+  padding-left: 1.2rem;
+}
+
+.CSS_회고목록_내용영역 {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 500;
+}
+
+@media (max-width: 849px) {
+  body {
+    gap: 4rem;
+  }
+
+  .CSS_데스크탑헤더 {
+    display: none;
+  }
+
+  .CSS_모바일헤더 {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  #HTML_일기상세제목보여주는곳 {
+    font-size: 1.6rem;
+  }
+
+  #HTML_기분이미지보여주는곳 {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  #HTML_일기기분보여주는곳 {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
+  #HTML_날짜보여주는곳,
+  .CSS_날짜 {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+
+  .CSS_서브타이틀 {
+    font-size: 1.4rem;
+  }
+
+  .CSS_일기상세내용보여주는곳 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .CSS_버튼 {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+  }
+
+  .CSS_내용복사버튼_아이콘 {
+    height: 1.6rem;
+  }
+
+  .CSS_내용복사버튼_텍스트 {
+    font-size: 1.2rem;
+  }
+
+  .CSS_회고입력부분 {
+    width: 80%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+  }
+
+  .CSS_회고입력버튼 {
+    font-size: 1.6rem;
+    width: 20%;
+  }
+
+  .CSS_회고목록_내용영역 {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    font-weight: 400;
+  }
+}
