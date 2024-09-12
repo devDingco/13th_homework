@@ -7,12 +7,11 @@ let entirePageNumberList;
 let currentPage = 1;
 
 const clearDiaryInputs = () => {
-  const getMood = document.getElementsByName("mood");
   const text = document.getElementById("diary_title_window");
   const textarea = document.getElementById("diary_contents_window");
+  document.getElementById("check_surprise").checked="checked"
   text.value = null;
   textarea.value = null;
-  [...getMood].map((e) => (e.checked = false));
 };
 
 const appendDiaryEntry = (diaryCard) => {
