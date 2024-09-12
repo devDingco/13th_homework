@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard Variable';
+}
+
+.body {
+    height: 100%;
+}
+
+.CSS_레이아웃 {
+    /* width: 1168px; */
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CSS_배너제목 {
+    width: 1168px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 88.889% */
+    letter-spacing: -0.1792px;
+    margin: 24px 0;
+}
+
+.CSS_디테일상세메인 {
+    width: 1168px;
+}
+
+.CSS_디테일제목 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    padding: 20px 0;
+}
+
+.CSS_버튼상자 {
+    width: 1168px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.CSS_수정버튼 {
+    width: 51px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.CSS_삭제버튼 {
+    width: 51px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.CSS_감정날짜상자 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 16px 0 24px 0;
+}
+
+.CSS_감정상자 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.CSS_감정사진들어가는곳 {
+    width: 32px;
+    height: 32px;
+}
+
+.CSS_카피버튼상자 {
+    cursor: pointer;
+}
+
+.CSS_회고글자 {
+    color: #000;
+    font-family: 'Pretendard Variable';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+    padding-bottom: 13px;
+}
+
+.CSS_회고인풋 {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+    background: var(--Gray-W, #fff);
+    padding: 12px 16px;
+}
+
+.CSS_회고상자 {
+    margin-top: 20px;
+    padding-top: 30px;
+    width: 1168px;
+    height: 500px;
+    border-top: 2px solid #000;
+    /* background-color: red; */
+}
+
+.CSS_회고인풋상자 {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.CSS_회고입력버튼 {
+    /* display: flex; */
+    width: 51px;
+    height: 48px;
+    padding: 8px 10px;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+    color: #fff;
+    cursor: pointer;
+}
+
+.CSS_회고담는상자 {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.CSS_회고내용 {
+    color: #000;
+    font-family: 'Pretendard Variable';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+}
+
+.CSS_회고작성일 {
+    color: var(--Gray-Gray-600, #777);
+    font-family: 'Pretendard Variable';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+}

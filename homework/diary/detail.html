@@ -2,29 +2,55 @@
 <html lang="ko">
     <head>
         <title>상세페이지</title>
-        <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="./detail.css" />
     </head>
     <body>
         <div class="CSS_레이아웃">
             <div class="CSS_배너제목">민지의 다이어리</div>
+
             <div class="CSS_디테일상세메인">
                 <div id="HTML_제목들어가는곳" class="CSS_상세메인타이틀"></div>
 
                 <div class="CSS_감정날짜상자">
                     <div class="CSS_감정상자">
-                        <div id="HTML_감정사진들어가는곳"></div>
-                        <div id="HTML_감정메시지들어가는곳"></div>
+                        <img id="HTML_감정사진들어가는곳" class="CSS_감정사진들어가는곳"></img>
+                        <div id="HTML_감정메시지들어가는곳" class="CSS_감정메시지들어가는곳"></div>
                     </div>
                     <div id="HTML_날짜들어가는곳"></div>
                 </div>
 
                 <div class="CSS_디테일제목">제목</div>
-                <div id="HTML_내용들어가는곳"></div>
+                <div id="HTML_내용들어가는곳" class="CSS_내용들어가는곳"></div>
             </div>
-            <div class="CSS_수정버튼상자">
+            <button class="CSS_카피버튼상자" onclick="JS_내용복사하기(); JS_토스트()">
+                <img src="./image/copy.png" class="CSS_카피사진" />
+            </button>
+            <div class="CSS_버튼상자">
                 <button button class="CSS_수정버튼" onclick="JS_수정기능()">
                     수정
                 </button>
+                <button button class="CSS_삭제버튼" onclick="JS_삭제기능()">
+                    삭제
+                </button>
+            </div>
+
+            <div class="CSS_회고상자">
+                <div class="CSS_회고글자">회고</div>
+                <div class="CSS_회고인풋상자">
+                    <input
+                        id="HTML_회고"
+                        class="CSS_회고인풋"
+                        type="text"
+                        placeholder="회고를 남겨보세요"
+                    />
+                    <button class="CSS_회고입력버튼" onclick="JS_회고추가기능()">입력</button>
+                </div>
+
+                <div
+                    id="id_회고목록보여주기"
+                    class="HTML_회고목록보여주기"
+                    onchange="JS_회고그리기기능()"
+                ></div>
             </div>
         </div>
         <script src="./detail.js"></script>

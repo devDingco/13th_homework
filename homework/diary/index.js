@@ -1,25 +1,96 @@
-// - [ ]  CSS: 일기수정
-//     - [ ]  수정완료 클릭시 버튼이 기울어지게 해주세요.
-// - [ ]  JS: 일기등록
-//     - [ ]  “행복”, “슬픔” 등 기분을 선택할 수 있게 해주세요.
-//     - [ ]  `forEach`로 체크된 라디오버튼을 추출해주세요.
-//     - [ ]  껐다 켜도 일기 남아있게 구현해주세요.
-// - [ ]  JS: 일기목록
-//     - [ ]  `map`으로 렌더링 방식을 변경해주세요.
-//     - [ ]  기분 필터링 기능 추가해주세요. ⇒ “행복”, “슬픔” 등
-//     - [ ]  “행복”, “우울”, “기타”에 따라 이미지를 변경해주세요.
-// - [ ]  JS: 일기상세
-//     - [ ]  상세페이지 만들고 `<a />`로 이동할 수 있어야 합니다.
-// - [ ]  JS: 일기수정
-//     - [ ]  상세페이지에서 일기를 수정할 수 있게 해주세요.
+window.onload = () => {
+    JS_일기카드보여주기();
+};
+
+window.addEventListener('scroll', () => {
+    window.document.getElementById('CSS_감정선택상자아이디').style =
+        'background-color: #000; color:#fff';
+});
 
 const JS_일기카드보여주기 = () => {
     const 로컬스토리지저장된일기목록 =
         window.localStorage.getItem('민지의일기목록') ?? '[]';
-    const 일기상세정보 = JSON.parse(로컬스토리지저장된일기목록);
+    const 일기목록 = JSON.parse(로컬스토리지저장된일기목록);
 
-    // console.log(일기상세정보);
+    const HTML_메인왼쪽카드그리기 = 일기목록
+        .map(
+            (element, index) =>
+                `   
+                <div class="CSS_메인왼쪽_카드" >
+                    <img src="./image/closeicon.png" class="CSS_닫힘버튼" onclick='JS_삭제버튼(event, ${index})'/>
+                    <a class="CSS_일기사진" href="./detail.html?number=${index}">
+                        ${
+                            element.감정 === '행복'
+                                ? '<img class="CSS_기분이미지" src="./image/happy.png" alt="행복"/>'
+                                : ''
+                        }
+                        ${
+                            element.감정 === '슬픔'
+                                ? '<img class="CSS_기분이미지" src="./image/sad.png" alt="슬픔" />'
+                                : ''
+                        }
+                        ${
+                            element.감정 === '놀람'
+                                ? '<img class="CSS_기분이미지" src="./image/shocked.png" alt="놀람" />'
+                                : ''
+                        }
+                        ${
+                            element.감정 === '화남'
+                                ? '<img class="CSS_기분이미지" src="./image/anger.png" alt="화남" />'
+                                : ''
+                        }
+                        ${
+                            element.감정 === '기타'
+                                ? '<img class="CSS_기분이미지" src="./image/thinking.png" alt="기타" />'
+                                : ''
+                        }
+                        </a>
+                        <div class="CSS_메인왼쪽_카드_디테일">
+                            <div class="CSS_메인왼쪽_카드_디테일_기분">
+                            ${
+                                element.감정 === '행복'
+                                    ? '<div class="CSS_행복">행복함</div>'
+                                    : ''
+                            }
+                            ${
+                                element.감정 === '슬픔'
+                                    ? '<div class="CSS_슬픔">슬픔</div>'
+                                    : ''
+                            }
+                            ${
+                                element.감정 === '놀람'
+                                    ? '<div class="CSS_놀람">놀람</div>'
+                                    : ''
+                            }
+                            ${
+                                element.감정 === '화남'
+                                    ? '<div class="CSS_화남">화남</div>'
+                                    : ''
+                            }
+                            ${
+                                element.감정 === '기타'
+                                    ? '<div class="CSS_기타">기타</div>'
+                                    : ''
+                            }
+                        </div>
+                        <div class="CSS_메인왼쪽_카드_디테일_날짜">
+                            ${element.날짜}
+                        </div>
+                    </div>
+                    <div class="CSS_메인왼쪽_카드_디테일_멘트">
+                            ${element.제목}
+                    </div>
+                </div>
+            `
+        )
+        .join('');
+    window.document.getElementById('HTML_메인왼쪽일기보여주는곳').innerHTML =
+        HTML_메인왼쪽카드그리기;
+};
 
+const 일기목록 = [];
+
+const JS_글쓰기기능 = () => {
     let date = new Date();
     const options = {
         year: date.getFullYear(),
@@ -27,7 +98,7 @@ const JS_일기카드보여주기 = () => {
         date: date.getDate(),
     };
 
-    // 1-1. 내가 쓴 일기 불러오기
+    // !!! date 2자리 숫자 만들기
     const 일기제목담는통 = window.document.getElementById('id_제목').value;
     const 일기내용담는통 = window.document.getElementById('id_내용').value;
     const 일기날짜담는통 =
@@ -40,14 +111,6 @@ const JS_일기카드보여주기 = () => {
         }
     });
 
-    // 1-2. 오늘의 기분 불러오기
-    let 행복불러오기 = window.document.getElementById('id_행복').checked;
-    let 슬픔불러오기 = window.document.getElementById('id_슬픔').checked;
-    let 놀람불러오기 = window.document.getElementById('id_놀람').checked;
-    let 화남불러오기 = window.document.getElementById('id_화남').checked;
-    let 기타불러오기 = window.document.getElementById('id_기타').checked;
-
-    // 2.일기목록에 일기 추가하기
     let 일기담는통 = {
         제목: 일기제목담는통,
         내용: 일기내용담는통,
@@ -55,26 +118,54 @@ const JS_일기카드보여주기 = () => {
         날짜: 일기날짜담는통,
     };
 
-    일기상세정보.push(일기담는통);
-    window.localStorage.setItem('민지의일기목록', JSON.stringify(일기상세정보));
+    const 로컬스토리지저장된일기목록 =
+        window.localStorage.getItem('민지의일기목록') ?? '[]';
+    const 일기목록 = JSON.parse(로컬스토리지저장된일기목록);
 
-    // console.log(일기불러오기문자열);
+    일기목록.push(일기담는통);
+    window.localStorage.setItem('민지의일기목록', JSON.stringify(일기목록));
 
-    // 3. 마지막으로 추가한 일련번호 가져오기
-    const 일기번호 = 일기상세정보.length - 1;
-    // console.log(일기번호);
+    JS_일기카드보여주기();
+};
 
-    // 4. 현재까지 그려진 일기 가져오기
-    const HTML_기존도화지가져오기 =
-        window.document.getElementById('HTML_메인왼쪽일기보여주는곳').innerHTML;
+const JS_글보기기능 = (일기번호받는통) => {
+    const 일기담는통 = 일기상세정보[일기번호받는통];
+    const 제목담는통 = 일기담는통.제목;
+    const 내용담는통 = 일기담는통.내용;
 
-    const HTML_메인왼쪽일기보여주는곳 = 일기상세정보
+    alert(`
+    제목: ${제목담는통}
+    내용: ${내용담는통}       
+    `);
+
+    location.href = `./detail.html?일기번호=${일기번호받는통}`;
+};
+
+const JS_필러링기능 = (event) => {
+    const 필터선택내용 = event.target.value;
+
+    const 로컬스토리지저장된일기목록 =
+        window.localStorage.getItem('민지의일기기록') ?? [];
+    const 일기목록 = JSON.parse(로컬스토리지저장된일기목록);
+
+    let 필터링된일기목록;
+
+    switch (필터선택내용) {
+        case '행복선택': {
+            필터링된일기목록 = 일기목록.filter(
+                (element) => element.감정 === '행복'
+            );
+            break;
+        }
+    }
+
+    const HTML_필터로걸러진카드 = 필터링된일기목록
         .map(
             (element, index) =>
-                `   
-            
-            <div class="CSS_메인왼쪽">
+                `
+        <div class="CSS_메인왼쪽">
                 <div class="CSS_메인왼쪽_카드" >
+                    <img src="./image/closeicon.png" class="CSS_닫힘버튼" onclick='JS_삭제버튼(event, ${index})'/>
                     <a class="CSS_일기사진" href="./detail.html?number=${index}">
                         ${
                             element.감정 === '행복'
@@ -139,22 +230,42 @@ const JS_일기카드보여주기 = () => {
                     </div>
                 </div>
             </div>
-            `
+        `
         )
-        .join();
+        .join('');
+
     window.document.getElementById('HTML_메인왼쪽일기보여주는곳').innerHTML =
-        HTML_메인왼쪽일기보여주는곳;
+        HTML_필터로걸러진카드;
 };
 
-const JS_상세페이지기능 = () => {};
+// !!! 원래색으로 돌아오는것도 구현해야함
+const 플로팅버튼 = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
-const JS_글보기기능 = (일기번호받는통) => {
-    const 일기담는통 = 일기상세정보[일기번호받는통];
-    const 제목담는통 = 일기담는통.제목;
-    const 내용담는통 = 일기담는통.내용;
+// idea: filter사용
+// index2 값은 위쪽에 필러링기능에서 넘겨받은 값
+// index2의 값은 배열의 저장되어있는 index숫자이니까 일기카드 순서를 나타낼 수 있음
+// 내가 삭제를 누른 카드에 번호와 filter가 일기목록을 하나씩 돌며 내가 누른 카드와 인덱스 번호가 같지 않으면
+// true를 반환해 값을남기고 내가누른 카드 인덱스 번호와 같으면 false를 반환해 목록에서 삭제한다
+const JS_삭제버튼 = (event, index2) => {
+    console.log(index2);
+    event.preventDefault();
 
-    alert(`
-    제목: ${제목담는통}
-    내용: ${내용담는통}       
-    `);
+    const 로컬스토리지저장된일기목록 =
+        window.localStorage.getItem('민지의일기목록');
+
+    const 일기목록 = 로컬스토리지저장된일기목록
+        ? JSON.parse(로컬스토리지저장된일기목록)
+        : [];
+
+    const 삭제후일기목록 = 일기목록.filter((el, index) => index !== index2);
+    console.log(삭제후일기목록);
+
+    window.localStorage.setItem(
+        '민지의일기목록',
+        JSON.stringify(삭제후일기목록)
+    );
+
+    JS_일기카드보여주기();
 };
