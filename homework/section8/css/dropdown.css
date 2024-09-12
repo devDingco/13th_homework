@@ -1,18 +1,15 @@
-.드롭다운_박스 {
-  gap: 16px;
-}
-
 .드롭다운_제목 {
   /* 원래 모습 안보이게 */
   appearance: none;
   display: flex;
   min-width: 120px;
   padding: 12px 10px;
-  gap: 10px;
+  font-size: 16px;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-300, #C7C7C7);
   background: var(--Gray-W, #FFF);
-
+  background: url(../images/드롭다운.png) no-repeat right center;
+  margin-bottom: 10px;
   /* 다이렉트로 쉽게 바꿀 수 없음 style.cssText 로 바꿔주기! */
   --필터선택변수: "전체"
 }
@@ -21,9 +18,9 @@
   content: var(--필터선택변수);
 }
 
+/* 드롭다운 누르면 메뉴를 보이게하기 */
 .드롭다운_제목:checked+.드롭다운_메뉴 {
   display: block;
-  background: rgba(58, 181, 15, 0.05);
 }
 
 .드롭다운_메뉴 {
@@ -31,16 +28,25 @@
   width: 120px;
   min-width: 120px;
   border-radius: 10px;
-  border-radius: 8px;
+
   border: 1px solid var(--Gray-Gray-300, #C7C7C7);
   background: var(--Gray-W, #FFF);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
   /* 넘치는 모서리영역 숨겨주기 */
   overflow: hidden;
+  position: relative;
+  z-index: 0;
 }
 
 .드롭다운_메뉴 input {
   display: none;
+}
+
+/* 드롭다운_메뉴 하위의 체크된 input의 label */
+.드롭다운_메뉴 input:checked+label {
+  padding: 12px;
+  color: #299C00;
+  background: rgba(58, 181, 15, 0.05) url(../images/check.png) no-repeat 90px center;
 }
 
 .드롭다운_메뉴 label {

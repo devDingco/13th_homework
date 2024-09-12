@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>달력 클릭영역 실습</title>
+  <style>
+    .CSS_나의날짜 {
+      /* 쌓임맥락을 형성하기 위해 어쩔 수 없이 포지션을 주는 것 */
+      position: relative;
+    }
+
+    .CSS_나의날짜::-webkit-calendar-picker-indicator {
+      background: transparent;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="date" class="CSS_나의날짜" />
+</body>
+
+</html>

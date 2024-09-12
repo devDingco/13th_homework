@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상세페이지</title>
+  <link rel="stylesheet" href="./css/detail.css" />
+  <script src="./js/detail.js"></script>
+</head>
+
+<body>
+  <div class="레이아웃">
+    <div class="헤더">
+      <div>민서의 다이어리</div>
+    </div>
+    <div class="메인">
+      <div id="초기_화면" class="바뀌는_부분">
+        <div class="타이틀_영역">
+          <div id="타이틀" class="타이틀"></div>
+          <div class="감정_날짜">
+            <div class="감정_사진_영역">
+              <img id="감정_미니사진" class="감정_미니사진" />
+              <div id="감정" class="감정"></div>
+            </div>
+            <div id="날짜" class="날짜"></div>
+          </div>
+        </div>
+        <div class="내용_영역">
+          <div class="내용_레이블">내용</div>
+          <div id="내용" class="내용"></div>
+        </div>
+        <div class="내용_복사_영역">
+          <img onclick="내용복사기능()" src="./images/copy icon.png" />
+          <div class="내용_복사">내용 복사</div>
+        </div>
+        <div class="버튼_영역">
+          <button onclick="수정버튼기능()" class="버튼">수정</button>
+          <button onclick="삭제버튼기능()" class="버튼">삭제</button>
+        </div>
+      </div>
+    </div>
+    <div class="회고_영역">
+      <div class="입력_영역">
+        <div class="회고_레이블">회고</div>
+        <div class="회고_인풋_영역">
+          <input id="회고인풋" class="회고_인풋" type="text" placeholder="회고를 남겨보세요." />
+          <button onclick="회고입력기능()" class="회고_입력_버튼">입력</button>
+        </div>
+      </div>
+      <div id="회고넣어줄부분" class="보기_영역">
+        <!-- 회고넣어줄부분 -->
+      </div>
+    </div>
+  </div>
+  <div id="토스트_감싸기" class="토스트_감싸기">
+    <div class="토스트" id="토스트">내용이 복사되었습니다.</div>
+  </div>
+
+  <!-- 일기삭제확인 -->
+  <div class="모달그룹" id="일기삭제확인모달">
+    <div class="모달배경"></div>
+    <div class="일기삭제" id="일기등록취소">
+      <div class="일기등록완료_텍스트_영역">
+        <div class="완료모달_제목">일기 삭제</div>
+        <div class="완료모달_내용">일기를 삭제 하시겠어요?</div>
+      </div>
+      <div class="모달_버튼_영역">
+        <button class="모달_계속작성_버튼" onclick="모달닫기기능('일기삭제확인모달')">취소</button>
+        <button class="모달_등록취소_버튼" onclick="모달닫기기능('일기삭제확인모달'); 일기삭제기능()">삭제</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</body>
+
+</html>
