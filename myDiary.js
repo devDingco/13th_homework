@@ -250,14 +250,14 @@ function loadIMG() {
         fetch("https://dog.ceo/api/breeds/image/random/10").then((randIMG) => {
             randIMG.json().then((jsonIMG) => {
                 const randDogURL = jsonIMG.message
-                const initialBox = document.querySelector(".body__gallery").innerHTML
-                
-                document.querySelector('.body__gallery').innerHTML =
-                    initialBox + randDogURL.map( (el) =>
+                const newIMG = randDogURL.map( (el) =>
                         `<div class="gallery__imgBox">
                             <div class="img__skeleton"> </div>
                             <img src="${el}"/>
                         </div>`).join("")
+                
+                const gallery = document.querySelector(".body__gallery")
+                gallery.innerHTML += newIMG
             })
         })
     }
@@ -269,10 +269,10 @@ function loadIMG() {
         const callDocument = document.documentElement
         const scrollPer = callDocument.scrollTop / ( callDocument.scrollHeight - callDocument.clientHeight )
 
-        if(scrollPer < 0.7) return
+        if(scrollPer < 0.8) return
         if(timer !== null) return
 
-        if(scrollPer >= 0.7) {
+        if(scrollPer >= 0.8) {
             getIMG()
         }
 
@@ -417,7 +417,7 @@ function closeDiary() {
     let initialPage = 1;
     let clickedPage = 1;
     let itemsPerPage = 8;
-    const lastPage = Math.ceil( diaryLocal.length / itemsPerPage )
+    const lastPage = diaryLocal !== null ? Math.ceil( diaryLocal.length / itemsPerPage ) : "1"
 
 function pagination() {
     const dummyData = new Array(10).fill("dummy")
@@ -463,28 +463,32 @@ function pageTest(pageMove) {
 }
 
 function pageList(page) {
-    const diaryPerPage = diaryLocal.filter( (el, idx) => {
-        const skipThis = (page -1) * itemsPerPage
-        if (skipThis <= idx && idx < skipThis + itemsPerPage) {return true} else {return false}
-    })
-    document.querySelector(".body__left__card").innerHTML = diaryPerPage.map( (el, idx) => 
-        `<div class="wrapper__card">
-            <a href="./depth01/myDiary_detail.html?page=${idx}">
-                <div class="card__delete" onclick="deleteDiary(${idx})"></div>
-                <div class="card__img">
-                    <img src="./asset/card__${el.mood}.png">
-                </div>
-                <div class="card__topic">
-                    <div class="card__status">
-                        <div class="card__${el.mood}">${moodIndex[el.mood]}</div>
-                        <div class="card__date">${el.date}</div>
+    if (diaryLocal !== null) {
+        const diaryPerPage = diaryLocal.filter( (el, idx) => {
+            const skipThis = (page -1) * itemsPerPage
+            if (skipThis <= idx && idx < skipThis + itemsPerPage) {return true} else {return false}
+        })
+        document.querySelector(".body__left__card").innerHTML = diaryPerPage.map( (el, idx) => 
+            `<div class="wrapper__card">
+                <a href="./depth01/myDiary_detail.html?page=${idx}">
+                    <div class="card__delete" onclick="deleteDiary(${idx})"></div>
+                    <div class="card__img">
+                        <img src="./asset/card__${el.mood}.png">
                     </div>
-                    <div class="card__title">${el.title}</div>
-                </div>
-            </a>
-        </div>`
-    ).join("")
-    window.scrollTo({ top: 359, behavior: "smooth" })
+                    <div class="card__topic">
+                        <div class="card__status">
+                            <div class="card__${el.mood}">${moodIndex[el.mood]}</div>
+                            <div class="card__date">${el.date}</div>
+                        </div>
+                        <div class="card__title">${el.title}</div>
+                    </div>
+                </a>
+            </div>`
+        ).join("")
+        window.scrollTo({ top: 359, behavior: "smooth" })
+    } else {
+        console.log("불러올 데이터 없음")
+    }
 }
 
 
