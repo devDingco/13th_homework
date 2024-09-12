@@ -5,28 +5,22 @@ const photoFilterList = document.getElementById("photo_filter_list");
 
 let deleteId;
 let diaryEntry = {};
+let paginatedDiaryData;
 let currentFilteredMood = "";
 let currentFilteredPhoto = "";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
-
-// window.addEventListener("scroll", () => {
-//   const scroll = window.scrollY;
-//   const filterCheckbox = document.getElementById("filterCheckbox");
-
-//   scroll > 0
-//     ? (filterCheckbox.style = "background-color: #1C1C1C; color: #FFF")
-//     : (filterCheckbox.style = "background-color: #FFF");
-// });
+paginatedDiaryData = storedDiaryList;
+let entirePageNumberList;
+let currentPage = 1;
 
 const clearDiaryInputs = () => {
   const getMood = document.getElementsByName("mood");
-  const text = document.getElementsByClassName("diary_title_window")[0];
-  const textarea = document.getElementsByClassName("diary_contents_window")[0];
+  const text = document.getElementById("diary_title_window");
+  const textarea = document.getElementById("diary_contents_window");
   text.value = null;
   textarea.value = null;
   [...getMood].map((e) => (e.checked = false));
 };
-
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
     "#diary_entry_container"
@@ -50,15 +44,18 @@ const appendDiaryEntry = (diaryCard) => {
 };
 
 const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
-  const diaryCardHtml = appendDiaryEntry(diaryCard);
-  if (currentFilteredMood === "") {
-    diaryCardHtml;
-  } else if (currentFilteredMood === diaryEntry.mood) {
-    diaryCardHtml;
+  if (currentFilteredMood === "" || currentFilteredMood === diaryEntry.mood) {
+    appendDiaryEntry(diaryCard);
   } else {
-    window.location.href = "./diary.html";
-    diaryCardHtml;
+    appendDiaryEntry(diaryCard);
   }
+};
+
+const getLastPageIndex = () => {
+  generatePageNumbers();
+  const pageNumber = document.getElementsByClassName("page_number");
+  const lastPageNumber = pageNumber[pageNumber.length - 1];
+  lastPageNumber.click();
 };
 
 const createHtml = (diaryEntry) => {
@@ -96,7 +93,9 @@ const createHtml = (diaryEntry) => {
 const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  createHtml(diaryEntry);
+  paginatedDiaryData.push({ ...diaryEntry });
+  renderInitialDiaryEntries(paginatedDiaryData);
+  getLastPageIndex();
 };
 
 const getDate = (diaryEntry) => {
@@ -145,35 +144,24 @@ const getId = (diaryEntry) => {
 };
 
 const getTitle = (diaryEntry) => {
-  const diaryTitle =
-    document.getElementsByClassName("diary_title_window")[0].value;
+  const diaryTitle = document.getElementById("diary_title_window").value;
   diaryEntry.title = diaryTitle;
   getId(diaryEntry);
 };
 
 const getContent = (diaryEntry) => {
-  const diaryContent = document.getElementsByClassName(
-    "diary_contents_window"
-  )[0].value;
+  const diaryContent = document.getElementById("diary_contents_window").value;
   diaryEntry.content = diaryContent;
   getTitle(diaryEntry);
 };
 
 const registerDiary = (event) => {
   event.preventDefault();
-  const text = document.getElementsByClassName("diary_title_window")[0];
-  const textarea = document.getElementsByClassName("diary_contents_window")[0];
-  const getMood = document.getElementsByName("mood");
-  const mood = [...getMood].filter((e) => e.checked === true);
-  const isAllFieldsFilled =
-    text.value === "" || textarea.value === "" || mood.length === 0;
-  isAllFieldsFilled
-    ? alert("다이어리를 등록하려면 모든 항목을 입력해야 합니다.")
-    : triggerModal("diary_registration_modal");
+  triggerModal("diary_registration_modal");
 };
 
-const renderInitialDiaryEntries = () => {
-  storedDiaryList.map((diary) => {
+const renderInitialDiaryEntries = (diaryList) => {
+  diaryList.slice(0, 12).map((diary) => {
     const storedDiary = {
       id: diary.id,
       mood: diary.mood,
@@ -187,9 +175,58 @@ const renderInitialDiaryEntries = () => {
   });
 };
 
+const handlePageClick = (event) => {
+  [...document.getElementsByClassName("page_number")].map((e) =>
+    e.setAttribute("page", "none")
+  );
+  event.target.setAttribute("page", "clickedPage");
+  const pageNumber = event.target.innerText;
+  const begin = (pageNumber - 1) * 12;
+  const end = pageNumber * 12;
+  const article = document.getElementById("article");
+  article.innerHTML = "";
+  paginatedDiaryData.slice(begin, end).map((diary) => createHtml(diary));
+  upScroll();
+};
+
+const goToPageSet = (event) => {
+  const isNextClicked = event.target.outerHTML.includes("right");
+  isNextClicked ? (currentPage += 1) : (currentPage -= 1);
+  const begin = (currentPage - 1) * 5;
+  const end = currentPage * 5;
+  const page = entirePageNumberList.slice(begin, end).join("");
+  document.getElementById("page_number_list").innerHTML = page;
+  document
+    .getElementsByClassName("page_number")[0]
+    .setAttribute("page", "clickedPage");
+
+  document.getElementsByClassName("page_number")[0].click();
+};
+
+const generatePageNumbers = () => {
+  const pageNumberList = Math.ceil(paginatedDiaryData.length / 12);
+  const pageNumberButtonList = Array(pageNumberList)
+    .fill(1)
+    .map((n, idx) => {
+      return `<button onclick="handlePageClick(event)" class="page_number">${
+        n + idx
+      }</button>`;
+    });
+  entirePageNumberList = pageNumberButtonList;
+
+  document.getElementById("page_number_list").innerHTML = pageNumberButtonList
+    .slice(0, 5)
+    .join("");
+  document
+    .getElementsByClassName("page_number")[0]
+    .setAttribute("page", "clickedPage");
+};
+
 const setDropdownLabel = (selectedMood) => {
   let dropdownName;
-  selectedMood.includes("형") ? dropdownName = "photo_dropdown" : dropdownName = "mood_dropdown"
+  selectedMood.includes("형")
+    ? (dropdownName = "photo_dropdown")
+    : (dropdownName = "mood_dropdown");
   const dropdownLabel = document.getElementById(dropdownName);
   dropdownLabel.style.cssText = `--boxText: "${selectedMood}"`;
 };
@@ -197,21 +234,27 @@ const setDropdownLabel = (selectedMood) => {
 const updateDiaryList = (diaryList, selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
-  diaryList.map((diary) => createHtml(diary));
-  setDropdownLabel(selectedMood);
+  renderInitialDiaryEntries(diaryList);
+  selectedMood ? setDropdownLabel(selectedMood) : "";
 };
 
 const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter((diary) =>
     diary.mood.includes(selectedMood)
   );
+  paginatedDiaryData = filteredDiaries;
   if (selectedMood === "전체") {
     document.getElementById("article").innerHTML = "";
-    renderInitialDiaryEntries();
+    paginatedDiaryData = storedDiaryList;
+    updateDiaryList(paginatedDiaryData, selectedMood);
+    generatePageNumbers();
   } else {
-    filteredDiaries.length === 0
-      ? alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.")
-      : updateDiaryList(filteredDiaries, selectedMood);
+    if (filteredDiaries.length === 0) {
+      alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.");
+    } else {
+      updateDiaryList(paginatedDiaryData, selectedMood);
+      generatePageNumbers();
+    }
   }
 };
 
@@ -219,6 +262,7 @@ const onClickMood = (event) => {
   const selectedMood = event.target.closest("li").innerText;
   currentFilteredMood = selectedMood;
   getDiariesByMood(currentFilteredMood);
+  upScroll();
 };
 
 const getPhotoByType = (selectedPhotoType) => {
@@ -255,11 +299,14 @@ const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   diaryList.map((e, i) => {
-    e.id === deleteId ? (index = i) : undefined;
+    e.id === deleteId ? (index = i) : "";
   });
+  const deleteData = storedDiaryList[index];
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  updateDiaryList(storedDiaryList);
+  const newDiaryList = paginatedDiaryData.filter((e) => e.id !== deleteData.id);
+  updateDiaryList(newDiaryList);
+  generatePageNumbers();
   closeSingleModal("confirm_delete_diary_modal");
 };
 
@@ -294,11 +341,33 @@ const focusActiveModal = (modal) => {
   }
 };
 
+const validateDiaryInputCompletion = () => {
+  const text = document.getElementById("diary_title_window");
+  const textarea = document.getElementById("diary_contents_window");
+
+  const validate = () => {
+    if (!(text.value && textarea.value)) {
+      document.getElementById("register_button").disabled = true;
+      document.getElementById("register_button").style =
+        "color: #f2f2f2; background-color: #c7c7c7;";
+    } else {
+      console.log(document.getElementById("register_button"))
+      document.getElementById("register_button").disabled = false;
+      document.getElementById("register_button").style =
+        "color: #F2F2F2; background-color: #000;";
+    }
+  };
+
+  text.addEventListener("keyup", validate);
+  textarea.addEventListener("keyup", validate);
+};
+
 const triggerModal = (modal) => {
   upScroll();
   document.body.style.cssText = "overflow-y: hidden;";
   document.getElementById(modal).style = "display: flex;";
   focusActiveModal(modal);
+  modal === "aside_layout" ? validateDiaryInputCompletion() : "";
 };
 
 const closeAllModals = (modal) => {
@@ -352,38 +421,28 @@ const showLoadingSkeleton = () => {
   fetchAndDisplayPhotos();
 };
 
-const showMoreDogsImage = () => {
-  fetch("https://dog.ceo/api/breeds/image/random").then((result) => {
-    result.json().then((object) => {
-      const dog = object.message;
-      const box = document.getElementById("photo_gallery").innerHTML;
-      document.getElementById("photo_gallery").innerHTML =
-        box + `<img src="${dog}" class="dogImage" />`
-    });
-  });
-};
-
 let photoTimer = null;
 window.addEventListener("scroll", () => {
   const scrollPercent =
     document.documentElement.scrollTop /
     (document.documentElement.scrollHeight -
       document.documentElement.clientHeight);
-  if(scrollPercent < 0.9) return;
+  if (scrollPercent < 0.9) return;
   if (photoTimer !== null) return;
 
-  showMoreDogsImage()
+  showLoadingSkeleton();
+  fetchAndDisplayPhotos();
 
   photoTimer = setTimeout(() => {
     photoTimer = null;
 
     const scrollPercent =
-    document.documentElement.scrollTop /
-    (document.documentElement.scrollHeight -
-      document.documentElement.clientHeight);
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
 
-    if(scrollPercent === 1) {
-      showMoreDogsImage()
+    if (scrollPercent === 1) {
+      fetchAndDisplayPhotos();
     }
   }, 1000);
 });
@@ -399,7 +458,7 @@ const toggleDiaryPhotoView = (viewType) => {
   switch (viewType) {
     case "diaryStorage": {
       document.getElementById("article").innerHTML = "";
-      renderInitialDiaryEntries();
+      renderInitialDiaryEntries(storedDiaryList);
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -419,35 +478,45 @@ const toggleDiaryPhotoView = (viewType) => {
 
 let timer;
 const onSearch = (event) => {
-  clearTimeout(timer)
+  clearTimeout(timer);
 
   timer = setTimeout(() => {
-    const searchQuery = event.target.value
-    const searchResults = storedDiaryList.filter(e => e.title.includes(searchQuery))
-    console.log(searchResults)
+    const searchQuery = event.target.value;
+    const searchResults = paginatedDiaryData.filter((e) =>
+      e.title.includes(searchQuery)
+    );
     document.getElementById("article").innerHTML = "";
-    searchResults.map((diary) => {
-      const storedDiary = {
-        id: diary.id,
-        mood: diary.mood,
-        date: diary.date,
-        color: diary.color,
-        title: diary.title,
-        content: diary.content,
-        imageName: diary.imageName,
-      };
-      createHtml(storedDiary);
-    });
+    console.log(searchResults.length);
+    if (searchResults.length === 0) {
+      document.getElementById(
+        "article"
+      ).innerHTML += `<div class="no_search_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+    } else {
+      searchResults.map((diary) => {
+        const storedDiary = {
+          id: diary.id,
+          mood: diary.mood,
+          date: diary.date,
+          color: diary.color,
+          title: diary.title,
+          content: diary.content,
+          imageName: diary.imageName,
+        };
+        createHtml(storedDiary);
+      });
+    }
+    document.getElementById("search").value = null;
   }, 1000);
-}
+};
 
 const darkModeToggle = (event) => {
   const mode = document.documentElement;
   event.target.checked
-    ? (mode.setAttribute("mode", "dark"))
-    : (mode.setAttribute("mode", "light"));
+    ? mode.setAttribute("mode", "dark")
+    : mode.setAttribute("mode", "light");
 };
 
-renderInitialDiaryEntries();
+renderInitialDiaryEntries(storedDiaryList);
+generatePageNumbers();
 moodList.addEventListener("click", onClickMood);
 photoFilterList.addEventListener("click", onClickPhoto);

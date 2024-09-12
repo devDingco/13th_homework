@@ -128,7 +128,7 @@
                     <div class="search_box">
                       <div class="search_bar">
                         <div class="search_img"><img src="./image/search.svg" /></div>
-                        <input oninput="onSearch(event)" type="text" placeholder="검색어를 입력해 주세요." />
+                        <input id="search" oninput="onSearch(event)" type="text" placeholder="검색어를 입력해 주세요." />
                       </div>
                     </div>
                   </div>
@@ -188,6 +188,7 @@
                               class="mood_options"
                               name="mood"
                               onkeydown="onKeyPress(event)"
+                              checked="checked"
                             /><label for="check_surprise" class="mood_text"
                               >놀랐어요</label
                             >
@@ -218,7 +219,7 @@
                         <div class="diary_title_group">
                           <div class="diary_title">제목</div>
                           <input
-                            class="diary_title_window"
+                            id="diary_title_window"
                             type="text"
                             placeholder="제목을 입력해 주세요."
                             onkeydown="onKeyPress(event)"
@@ -229,7 +230,7 @@
                             내용
                           </div>
                           <textarea
-                            class="diary_contents_window"
+                            id="diary_contents_window"
                             type="text"
                             placeholder="내용을 입력해 주세요."
                             onkeydown="onKeyPress(event)"
@@ -245,7 +246,7 @@
                       >
                         닫기
                       </button>
-                      <button class="register_button" type="submit">
+                      <button id="register_button" type="submit" disabled = "true">
                         등록하기
                       </button>
                     </div>
@@ -256,9 +257,19 @@
                 <img src="./image/topscroll.png" id="upScroll" />
               </button>
             </div>
+            <div class="page_list_box">
+              <button class="go_to_page_set" onclick="goToPageSet(event)">
+                <img src="./image/chevron_left.svg" width="24px" />
+              </button>
+              <div id="page_number_list"></div>
+              <button class="go_to_page_set" onclick="goToPageSet(event)">
+                <img src="./image/chevron_right.svg" width="24px" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      
       <div class="footer_layout">
         <div class="footer">
           <div class="footer_title" id="footer">예슬이의 다이어리</div>
