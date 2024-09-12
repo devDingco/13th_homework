@@ -69,7 +69,7 @@ const JS_일기쓰기모달보여주기기능 = () => {
             닫기
         </button>
 
-        <button class="CSS_등록" onclick="JS_글쓰기기능();">
+        <button class="CSS_등록" onclick="JS_글쓰기기능(); onclick=JS_일기등록완료중첩모달()">
             등록하기
         </button>
         </div>
@@ -79,4 +79,15 @@ const JS_일기쓰기모달보여주기기능 = () => {
 
 const JS_닫기 = (모달종류) => {
     window.document.getElementById(모달종류).style = 'display:none';
+};
+
+const JS_일기등록완료중첩모달 = () => {
+    window.document.getElementById('HTML_등록완료모달그룹').style =
+        'display: block';
+};
+
+const JS_일기등록완료중첩모달확인 = () => {
+    window.document.getElementById('HTML_등록완료모달그룹').style =
+        'display: none';
+    window.document.getElementById('HTML모달그룹').style = 'display:none';
 };

@@ -35,15 +35,6 @@
     background: #fff;
 }
 
-/* .CSS_등록완료모달 {
-    position: absolute;
-    top: calc(50% - 150px / 2);
-    left: calc(50% - 600px / 2);
-    width: 600px;
-    height: 150px;
-    background-color: red;
-} */
-
 .CSS_일기쓰기모달버튼 {
     cursor: pointer;
 }
@@ -82,4 +73,60 @@
     padding: 8px 10px;
     flex: 1 0 0;
     border: none;
+}
+
+.CSS_등록완료모달 {
+    position: absolute;
+    top: calc(50% - 200px / 2);
+    left: calc(50% - 480px / 2);
+    width: 480px;
+    height: 200px;
+    background-color: #fff;
+    padding: 24px;
+    gap: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.CSS_등록완료모달제목 {
+    color: #000;
+    text-align: center;
+    font-family: 'Pretendard Variable';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 100% */
+    letter-spacing: -0.24px;
+}
+
+.CSS_등록완료모달내용 {
+    color: var(--Gray-Gray-800, #333);
+    text-align: center;
+    font-family: 'Pretendard Variable';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 120% */
+    letter-spacing: -0.2px;
+}
+
+.CSS_등록완료모달확인버튼 {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    height: 48px;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 24px;
 }

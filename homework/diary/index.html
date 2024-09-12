@@ -53,9 +53,25 @@
             </div>
         </div>
 
+        <!-- 모달 -->
         <div id="HTML모달그룹" class="CSS_모달그룹">
             <div class="CSS_모달배경"></div>
             <div id="HTML_모달" class="CSS_모달"></div>
+        </div>
+
+        <!-- 등록완료모달 -->
+        <div id="HTML_등록완료모달그룹" class="CSS_모달그룹">
+            <div class="CSS_모달배경"></div>
+            <div class="CSS_등록완료모달">
+                <div class="CSS_등록완료모달제목">일기 등록 완료</div>
+                <div class="CSS_등록완료모달내용">등록이 완료 되었습니다.</div>
+                <button
+                    class="CSS_등록완료모달확인버튼"
+                    onclick="JS_일기등록완료중첩모달확인()"
+                >
+                    확인
+                </button>
+            </div>
         </div>
 
         <script defer src="./index.js"></script>
