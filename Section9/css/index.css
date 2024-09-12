@@ -1,0 +1,655 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+  font-family: 폰트1;
+}
+
+@font-face {
+  font-family: 폰트1;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  appearance: none;
+  text-decoration: none;
+}
+
+.CSS_레이아웃 {
+  margin: 0 2rem 4rem;
+}
+
+.CSS_타이틀 {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.CSS_배너이미지 {
+  width: 100%;
+}
+
+.CSS_탭 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+  margin-bottom: 4.2rem;
+}
+
+.CSS_탭_텍스트 {
+  cursor: pointer;
+  line-height: 1.6rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #000;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0.8rem;
+}
+
+/* 필터 */
+.CSS_필터_영역_배경 {
+  display: flex;
+  gap: 1.6rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(1rem);
+  margin-bottom: 3.2rem;
+  z-index: 1;
+}
+
+.CSS_필터_영역 {
+  position: relative;
+  width: fit-content;
+}
+
+.CSS_필터 {
+  min-width: 12rem;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  height: 3.2rem;
+  font-size: 1.6rem;
+}
+
+.CSS_색상반전 {
+  filter: invert(1);
+}
+
+.CSS_드롭다운제목 {
+  appearance: none;
+  padding: 1.2rem 1rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #c7c7c7;
+  width: 12rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+
+  --드롭다운CSS변수: "전체";
+}
+
+.CSS_드롭다운제목::after {
+  content: var(--드롭다운CSS변수);
+}
+
+.CSS_드롭다운제목:checked + .CSS_드롭다운메뉴 {
+  display: block;
+}
+
+.CSS_드롭다운메뉴 {
+  display: none;
+  position: absolute;
+  top: 6rem;
+  width: 12rem;
+  border: 0.1rem solid #c7c7c7;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+.CSS_드롭다운메뉴 img {
+  display: none;
+}
+.CSS_드롭다운메뉴 input {
+  display: none;
+}
+.CSS_드롭다운메뉴 label {
+  display: block;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+.CSS_드롭다운메뉴 label:hover {
+  background-color: rgba(58, 181, 15, 0.05);
+  font-weight: 700;
+  color: #299c00;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CSS_드롭다운메뉴 label:hover img {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.CSS_드롭다운아이콘 {
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 1.1rem;
+  right: 0.4rem;
+}
+
+/* 서치바 */
+.CSS_서치바_영역 {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.CSS_서치바 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 10rem;
+  border: 0.1rem solid #c7c7c7;
+  min-width: 320px;
+  max-width: 360px;
+  padding: 1.2rem 1.6rem;
+  background-color: #fff;
+}
+
+.CSS_서치바_아이콘 {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.CSS_서치바_인풋 {
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+  width: 100%;
+}
+
+.CSS_서치바_인풋::placeholder {
+  color: #ababab;
+}
+
+.CSS_일기쓰기버튼 {
+  border-radius: 0.8rem;
+  background-color: #000;
+  width: 11.5rem;
+  height: 4.8rem;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.CSS_일기쓰기버튼_텍스트 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.CSS_plus부분 {
+  width: 2.4rem;
+}
+
+/* 메인 */
+.CSS_메인 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.CSS_일기보여주는곳 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+  width: 100%;
+}
+
+.CSS_일기 {
+  max-width: 38rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border-radius: 1.6rem;
+  position: relative;
+}
+
+.CSS_일기:hover {
+  transform: scale(1.1);
+  box-shadow: 0rem 0.2rem 3rem 0rem rgba(0, 0, 0, 0.16);
+  transition: 0.5s;
+}
+
+.CSS_일기:hover .CSS_일기사진 {
+  filter: blur(0.3rem);
+}
+
+.CSS_일기사진 {
+  height: 28.5rem;
+  width: auto;
+}
+
+.CSS_일기정보 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.8rem 1.6rem;
+}
+
+.CSS_기분이미지 {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.CSS_일기내용 {
+  width: 100%;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1.4rem;
+  color: #777;
+}
+
+.CSS_기분 {
+  width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.CSS_행복 {
+  color: #ea5757;
+}
+
+.CSS_슬픔 {
+  color: #28b4e1;
+}
+
+.CSS_놀람 {
+  color: #d59029;
+}
+
+.CSS_화남 {
+  color: #777;
+}
+
+.CSS_기타 {
+  color: #a229ed;
+}
+
+.CSS_날짜 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  color: #919191;
+  text-align: right;
+  width: 100%;
+}
+
+.CSS_일기제목 {
+  width: 100%;
+  height: 1.8rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.CSS_삭제버튼 {
+  width: 100%;
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* 등록모달 */
+.CSS_등록상자_헤더 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CSS_등록상자_내부 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+  height: 100%;
+}
+
+.CSS_등록상자_제목 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.CSS_다크모드 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  width: fit-content;
+}
+
+.CSS_다크모드_라벨 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+}
+
+.CSS_다크모드_토글 {
+  appearance: none;
+  content: "";
+  width: 40px;
+  height: 24px;
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.CSS_다크모드_토글::after {
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+  transition: margin-left 0.3s;
+}
+
+.CSS_다크모드_토글:checked {
+  background-color: #3ad84a;
+}
+.CSS_다크모드_토글:checked::after {
+  margin-left: 18px;
+}
+
+.CSS_등록상자_기분 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.CSS_등록상자_기분_타이틀 {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.CSS_일기입력상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  width: 100%;
+}
+
+.CSS_일기쓰기 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.CSS_인풋라벨 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.CSS_라디오그룹 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.CSS_라디오버튼 {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.CSS_라디오버튼 > div {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2rem;
+  color: var(--라디오글자색);
+}
+
+#HTML_제목입력창,
+#HTML_내용입력창 {
+  width: 100%;
+  border-radius: 0.8rem;
+  background-color: var(--인풋배경색);
+  border: 0.1rem solid var(--인풋보더색);
+  padding: 1.2rem 1.6rem;
+  text-align: left;
+  font-size: 1.6rem;
+  color: var(--기본글자색);
+}
+
+#HTML_제목입력창::placeholder,
+#HTML_내용입력창::placeholder {
+  color: var(--인풋플레이스홀더색);
+}
+
+.CSS_라디오버튼 input {
+  appearance: none;
+
+  border-radius: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+
+  box-shadow: 0 0 0 0.2rem #999;
+
+  cursor: pointer;
+
+  &:checked {
+    background-color: black;
+    border: 0.3rem solid #fff;
+    box-shadow: 0 0 0 0.2rem black;
+  }
+}
+
+/* 푸터 영역 */
+.CSS_푸터_영역 {
+  width: 100%;
+  display: flex;
+  padding: 2.4rem 2rem;
+  justify-content: center;
+  background-color: #f2f2f2;
+}
+
+.CSS_푸터 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.CSS_푸터_제목 {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+}
+
+.CSS_푸터_대표 {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: #5f5f5f;
+}
+
+.CSS_푸터_Copyright {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  color: #919191;
+}
+
+/* 플로팅 버튼 */
+.CSS_플로팅버튼 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 4rem;
+  right: 2rem;
+}
+
+.CSS_플로팅이미지 {
+  width: 4rem;
+}
+
+/* 사진보관함 */
+#HTML_사진보관함필터,
+#HTML_사진보관함메인 {
+  display: none;
+}
+
+.CSS_강아지사진보여주는곳,
+.CSS_스켈레톤 {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.CSS_강아지사진 {
+  max-width: 63rem;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 2.4rem;
+}
+
+/* 스켈레톤 */
+.CSS_스켈레톤박스 {
+  max-width: 63rem;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background-color: lightgray;
+  border-radius: 2.4rem;
+}
+
+.CSS_스켈레톤막대기 {
+  width: 100px;
+  height: 1000px;
+  background-color: white;
+  filter: blur(70px);
+
+  animation-name: 스켈레톤애니메이션;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes 스켈레톤애니메이션 {
+  from {
+    transform: translate(-400px, -400px) rotate(30deg);
+  }
+  to {
+    transform: translate(700px, 200px) rotate(30deg);
+  }
+}
+
+/* 페이지네이션 */
+.CSS_페이지네이션보여주는곳 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4rem;
+}
+
+.CSS_페이지버튼 {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #fff;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+}
+
+.CSS_페이지이동버튼 {
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: 0px;
+  height: 32px;
+  width: 32px;
+}
+
+.CSS_페이지눌린버튼 {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+}
+
+.CSS_페이지이동버튼사진 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
