@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <script>
+        let isStarted = false;
+
+        let auth = () => {
+
+            if(isStarted === false){
+                // 타이머가 작동중이 아닐때
+                isStarted = true
+                document.getElementById("finish").disabled = false
+                const token = String(Math.floor(Math.random() * 1000000)).padStart(2,"0")
+                document.getElementById("target").innerText = token
+                document.getElementById("target").style.color = "#" + token
+
+                let time = 5
+                let timer
+
+                timer = setInterval(function(){
+                    if(time >= 0){
+                        const min = Math.floor( time / 60 )
+                        let sec = String(time%60).padStart(2, "0")
+                        document.getElementById("timer").innerText = min + ":" + sec
+                        time = time-1
+                    }
+                    else{
+                        document.getElementById("finish").disabled = true
+                        isStarted = false;
+                        console.log("타이머 작동중")
+                        clearInterval(timer)
+                    }
+                },1000)
+
+            }else{
+                // 타이머가 작동중일때
+
+            }
+          }
+    </script>
+</head>
+<body>
+    <div id="target">000000</div>
+    <button onclick="auth()">인증번호 전송</button>
+    <div id="timer">3:00</div>
+    <button id="finish">인증완료</button>
+</body>
+</html> 

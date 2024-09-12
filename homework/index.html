@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<link rel="stylesheet" href="../homework/css/index.css">
+<script src="./js/index.js"></script>
+<head>
+    <title>일기메인</title>
+</head>
+<body>
+    <button class="top_scroll" onclick="top_scroll()"></button>
+    <div class="content">
+        <div class="name">
+            <b>민지의 다이어리</b>
+        </div>
+        <div class="banner">
+            <div class="banner_img"></div>
+        </div>
+        <div class="select_bg">
+            <div class="select">
+                <a href="#" class="seleted">일기보관함</a>
+                <a href="#" class="no_select">사진보관함</a>
+            </div>
+        </div>
+        <div class="diary_select_bg">
+            <div class="diary_select">
+                <select onchange="(event)">
+                    <option>전체</option>
+                    <option value="happy">행복해요</option>
+                    <option value="sad">슬퍼요</option>
+                    <option value="sup">놀랐어요</option>
+                    <option value="angry">화나요</option>
+                    <option value="etc">기타</option>
+                </select>
+                <!-- <div> -->
+                    <button class="write_btn" onclick="modal_btn()">
+                        <div class="write_img"></div>
+                        <p>일기쓰기</p>
+                    </button>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="diary">
+            <div class="diary_bg" id="diary_box"></div>
+            <div class="modal_group" id="modal">
+                <div class="modal_bg" onclick="modal_close()"></div>
+                <div class="write">
+                    <h3><img src="/homework/img/📍 일기 쓰기.png"></img></h3>
+                    <div class="em_title">
+                        <p>오늘 기분은 어땠나요?</p>
+                    </div>
+                    <div class="em_menu">
+                        <div>
+                            <input type="radio" id="happy" name="emotion" checked>
+                            <label for="happy">행복해요</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sad" name="emotion">
+                            <label for="sad">슬퍼요</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="surp" name="emotion">
+                            <label for="surp">놀랐어요</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="angry" name="emotion">
+                            <label for="angry">화나요</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="etc" name="emotion">
+                            <label for="etc">기타</label>
+                        </div>
+                    </div>
+                    <div class="write_title">
+                        <p>제목</p>
+                        <input id="title_rg" type="text" placeholder="제목을 입력해 주세요.">
+                    </div>
+                    <div class="write_memo">
+                        <p>내용</p>
+                        <textarea id="memo_rg" placeholder="내용을 입력해 주세요." rows="5"></textarea>
+                    </div>
+                    <div class="write_modal_btn">
+                        <div class="modal_close">
+                            <button onclick="modal_close()">닫기</button>
+                        </div>
+                        <div class="regi_btn">
+                            <button onclick="register()">등록하기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="regi_modal_group" id="regi_modal_group">
+                    <div class="regi_modal_bg"></div>
+                    <div class="regi_modal">
+                        <h2>일기 등록 완료</h2>
+                        <p>등록이 완료 되었습니다.</p>
+                        <button>확인</button>
+                    </div>
+                </div>
+                <div class="regi_cancel_group">
+                    <div class="regi_cancel_bg"></div>
+                    <div class="regi_cancel">
+                        <h2>일기 등록 취소</h2>
+                        <p>일기 등록을 취소 하시겠어요?</p>
+                        <button>계속 작성</button>
+                        <button>등록 취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="ft_bg">
+            <div>
+                <p class="ft_title">민지의 다이어리</p>
+                <p>CopyRight&copy;2024. nameCo., Ltd.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

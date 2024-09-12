@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>달력 초기값 실습</title>
+    <style>
+        .CSS_나의날짜 {
+            position:relative;
+        }
+        .CSS_나의날짜::-webkit-calendar-picker-indicator {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            background:transparent;
+            z-index:1;
+        }
+        .CSS_나의날짜::-webkit-datetime-edit-text, 
+        ::-webkit-datetime-edit-year-field, 
+        ::-webkit-datetime-edit-month-field, 
+        ::-webkit-datetime-edit-day-field{
+            display:none;
+        }
+        .CSS_나의날짜:valid::-webkit-datetime-edit-text, 
+        :valid::-webkit-datetime-edit-year-field, 
+        :valid::-webkit-datetime-edit-month-field, 
+        :valid::-webkit-datetime-edit-day-field{
+            display:inline;
+            color:blue;
+        }
+        .CSS_나의날짜::after{
+            position:absolute;
+            top:0;
+            left:0;
+            content:attr(철수의생일) /* 실무에선? data-* 형태로 사용 */   
+        }
+
+        .CSS_나의날짜:valid::after{
+            display:none;
+        }
+        .CSS_나의날짜:invalid::after{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <input type="date" class="CSS_나의날짜" 철수의생일="생일을 선택하세요." required>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <script>
+        // function auth() {
+        //     const token = String(Math.floor(Math.random()*1000000)).padStart(6, "0")
+        //     document.getElementById("target").innerText = token
+        // }
+        let auth = () => {
+            const token = String(Math.floor(Math.random()*1000000)).padStart(6, "0")
+            document.getElementById("target").innerText = token
+            
+            // 인증번호 생성 마다 글자 색 변경
+            document.getElementById("target").style.color = "#" + token
+        }
+    </script>
+</head>
+<body>
+    <div id="target">000000</div>
+    <button onclick="auth()">인증번호 전송</button>
+</body>
+</html>
