@@ -333,7 +333,7 @@ body {
   gap: 1.5rem;
   padding-top: 2.625rem;
 }
-.diary_entry_container {
+#diary_entry_container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1.5rem;

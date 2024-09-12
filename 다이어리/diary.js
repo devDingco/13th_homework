@@ -1,15 +1,8 @@
-const moodList = document.getElementById("mood_list");
-const registerButton = document.querySelector("button");
-const diaryContent = document.getElementById("diaryContent");
-const photoFilterList = document.getElementById("photo_filter_list");
-
 let deleteId;
 let diaryEntry = {};
-let paginatedDiaryData;
-let currentFilteredMood = "";
-let currentFilteredPhoto = "";
+let currentFilteredMood = "전체";
 let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
-paginatedDiaryData = storedDiaryList;
+let paginatedDiaryData = storedDiaryList;
 let entirePageNumberList;
 let currentPage = 1;
 
@@ -21,6 +14,7 @@ const clearDiaryInputs = () => {
   textarea.value = null;
   [...getMood].map((e) => (e.checked = false));
 };
+
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
     "#diary_entry_container"
@@ -33,7 +27,6 @@ const appendDiaryEntry = (diaryCard) => {
     lastDiaryEntryContainer.children.length === 4
   ) {
     const diaryEntryContainer = document.createElement("div");
-    diaryEntryContainer.className = "diary_entry_container";
     diaryEntryContainer.id = "diary_entry_container";
     diaryEntryContainer.innerHTML = diaryCard;
 
@@ -44,9 +37,13 @@ const appendDiaryEntry = (diaryCard) => {
 };
 
 const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
-  if (currentFilteredMood === "" || currentFilteredMood === diaryEntry.mood) {
+  if (
+    currentFilteredMood === "전체" ||
+    currentFilteredMood === diaryEntry.mood
+  ) {
     appendDiaryEntry(diaryCard);
   } else {
+    // 예외 처리
     appendDiaryEntry(diaryCard);
   }
 };
@@ -94,7 +91,7 @@ const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   paginatedDiaryData.push({ ...diaryEntry });
-  renderInitialDiaryEntries(paginatedDiaryData);
+  renderFirstPage(paginatedDiaryData);
   getLastPageIndex();
 };
 
@@ -160,7 +157,7 @@ const registerDiary = (event) => {
   triggerModal("diary_registration_modal");
 };
 
-const renderInitialDiaryEntries = (diaryList) => {
+const renderFirstPage = (diaryList) => {
   diaryList.slice(0, 12).map((diary) => {
     const storedDiary = {
       id: diary.id,
@@ -231,10 +228,10 @@ const setDropdownLabel = (selectedMood) => {
   dropdownLabel.style.cssText = `--boxText: "${selectedMood}"`;
 };
 
-const updateDiaryList = (diaryList, selectedMood) => {
+const updateDiaryList = (selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
-  renderInitialDiaryEntries(diaryList);
+  renderFirstPage(paginatedDiaryData);
   selectedMood ? setDropdownLabel(selectedMood) : "";
 };
 
@@ -246,13 +243,13 @@ const getDiariesByMood = (selectedMood) => {
   if (selectedMood === "전체") {
     document.getElementById("article").innerHTML = "";
     paginatedDiaryData = storedDiaryList;
-    updateDiaryList(paginatedDiaryData, selectedMood);
+    updateDiaryList(selectedMood);
     generatePageNumbers();
   } else {
     if (filteredDiaries.length === 0) {
       alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.");
     } else {
-      updateDiaryList(paginatedDiaryData, selectedMood);
+      updateDiaryList(selectedMood);
       generatePageNumbers();
     }
   }
@@ -289,9 +286,8 @@ const getPhotoByType = (selectedPhotoType) => {
   }
 };
 
-const onClickPhoto = (e) => {
-  const selectedPhotoType = e.target.innerText;
-  currentFilteredPhoto = selectedPhotoType;
+const onClickPhoto = (event) => {
+  const selectedPhotoType = event.target.innerText;
   getPhotoByType(selectedPhotoType);
 };
 
@@ -351,7 +347,6 @@ const validateDiaryInputCompletion = () => {
       document.getElementById("register_button").style =
         "color: #f2f2f2; background-color: #c7c7c7;";
     } else {
-      console.log(document.getElementById("register_button"))
       document.getElementById("register_button").disabled = false;
       document.getElementById("register_button").style =
         "color: #F2F2F2; background-color: #000;";
@@ -458,7 +453,7 @@ const toggleDiaryPhotoView = (viewType) => {
   switch (viewType) {
     case "diaryStorage": {
       document.getElementById("article").innerHTML = "";
-      renderInitialDiaryEntries(storedDiaryList);
+      renderFirstPage(storedDiaryList);
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -486,7 +481,6 @@ const onSearch = (event) => {
       e.title.includes(searchQuery)
     );
     document.getElementById("article").innerHTML = "";
-    console.log(searchResults.length);
     if (searchResults.length === 0) {
       document.getElementById(
         "article"
@@ -516,7 +510,5 @@ const darkModeToggle = (event) => {
     : mode.setAttribute("mode", "light");
 };
 
-renderInitialDiaryEntries(storedDiaryList);
+renderFirstPage(storedDiaryList);
 generatePageNumbers();
-moodList.addEventListener("click", onClickMood);
-photoFilterList.addEventListener("click", onClickPhoto);
