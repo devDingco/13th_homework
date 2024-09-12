@@ -39,12 +39,16 @@
         <div class="delete_diary_modal_title">일기 삭제</div>
         <div class="delete_diary_modal_content">일기를 삭제 하시겠어요?</div>
         <div class="delete_diary_modal_button_group">
-          <button class="delete_diary_cancel_btn" onclick="closeSingleModal('confirm_delete_diary_modal')">취소</button>
+          <button class="delete_diary_cancel_btn" onclick="onCloseSingleModal('confirm_delete_diary_modal_detail_page')">취소</button>
           <button class="delete_diary_btn" id="deleteDiaryBtn" onclick="deleteDiary()" onkeydown="onKeyPress(event)">삭제</button>
         </div>
       </div>
     </div>
   </body>
   <script src="./diary-detail.js"></script>
+  <script src="./utils/onFocusActiveModal.js"></script>
   <script src="./utils/onKeyPress.js"></script>
+  <script src="./utils/upScroll.js"></script>
+  <script src="./utils/onTriggerModal.js"></script>
+  <script src="./utils/onCloseSingleModal.js"></script>
 </html>

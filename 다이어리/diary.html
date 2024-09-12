@@ -134,7 +134,7 @@
                   </div>
                   <button
                     class="btn_register_diary"
-                    onclick="triggerModal('aside_layout')"
+                    onclick="onTriggerModal('aside_layout')"
                   >
                     + 일기추가
                   </button>
@@ -242,7 +242,7 @@
                       <button
                         class="close_button"
                         type="button"
-                        onclick="triggerModal('diary_cancel_modal')"
+                        onclick="onTriggerModal('diary_cancel_modal')"
                       >
                         닫기
                       </button>
@@ -299,7 +299,7 @@
         <div class="modal_button_group">
           <button
             class="continue_writing_btn"
-            onclick="closeSingleModal('diary_cancel_modal')"
+            onclick="onCloseSingleModal('diary_cancel_modal')"
           >
             계속 작성
           </button>
@@ -324,7 +324,7 @@
         <div class="delete_diary_modal_button_group">
           <button
             class="delete_diary_cancel_btn"
-            onclick="closeSingleModal('confirm_delete_diary_modal')"
+            onclick="onCloseSingleModal('confirm_delete_diary_modal')"
           >
             취소
           </button>
@@ -341,5 +341,9 @@
     </div>
   </body>
   <script src="./diary.js"></script>
+  <script src="./utils/onFocusActiveModal.js"></script>
   <script src="./utils/onKeyPress.js"></script>
+  <script src="./utils/upScroll.js"></script>
+  <script src="./utils/onTriggerModal.js"></script>
+  <script src="./utils/onCloseSingleModal.js"></script>
 </html>
