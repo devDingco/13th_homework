@@ -15,16 +15,23 @@ const moodIndex = {
 };
 
 window.onload = () => {
-    // const loginName = prompt("이름을 입력해 주세요!")
-    // document.getElementById("header__login").innerText = loginName;
-    // document.getElementById("footer__login").innerText = loginName;
-    // document.querySelector(".footer__copy").innerText = `Copyright © 2024. ${loginName} `
-
-    // makeDiaryCard(diaryLocal) 일기 생성방식 변경
-    openDiary()
-    pagination()
-    pageList(1)
+    if (JSON.parse(sessionStorage.getItem("userID"))) {
+        openDiary()
+        pagination()
+        pageList(1)
+        const userID = JSON.parse(sessionStorage.getItem("userID"))
+        document.getElementById("header__login").innerText = userID;
+        document.getElementById("footer__login").innerText = userID;
+        document.querySelector(".footer__copy").innerText = `Copyright © 2024. ${userID} `
+    } else {
+        const loginName = prompt("이름을 입력해 주세요!")
+        sessionStorage.setItem("userID", JSON.stringify(loginName))
+        location.href = location.href
+    }
 }
+
+// makeDiaryCard(diaryLocal) 일기 생성방식 변경
+// !! 새로운 일기 작성시 페이지네이션 로직 박살내버리는 이슈 존재함
 
 //** 일기 작성 기능: 일기 작성 폼 데이터 취합하여 로컬에 저장하고 만들기 기능에 전달 */
 function makeDiaryData () {
@@ -143,6 +150,7 @@ function openDiary() {
     document.querySelector(".nav__filter").style = "display: flex;"
     document.querySelector(".body__left__card").style = "display: flex;"
     document.querySelector(".body__right__diary").style = "display: block;"
+    document.querySelector('.container__page').style = "display: flex"
 
     document.querySelector(".tap__gallery").classList.remove("tap__active")
     document.querySelector(".nav__gallery").style = "display: none;"
@@ -158,6 +166,7 @@ function openGallery() {
     document.querySelector(".nav__filter").style = "display: none;"
     document.querySelector(".body__left__card").style = "display: none;"
     document.querySelector(".body__right__diary").style = "display: none;"
+    document.querySelector('.container__page').style = "display: none"
 
     document.querySelector(".tap__diary").classList.remove("tap__active")
     document.querySelector(".nav__gallery").style = "display: flex;"
@@ -232,20 +241,48 @@ function searchDiary() {
 
 //** 랜덤 강아지 이미지 불러오기 */
 function loadIMG() {
-    setTimeout(() => {
-        document.querySelectorAll(".gallery__imgBox img").forEach(el => el.style = "opacity: 100%;")
-        document.querySelectorAll(".img__skeleton").forEach(el => el.style = "display: none;")
-    }, 2000)
-    fetch("https://dog.ceo/api/breeds/image/random/10").then((randIMG) => {
-        randIMG.json().then((jsonIMG) => {
-            const randDogURL = jsonIMG.message
-            document.querySelector(".body__gallery").innerHTML = randDogURL.map(
-                (el) =>
-                    `<div class="gallery__imgBox">
-                        <div class="img__skeleton"></div>
-                        <img src="${el}"/>
-                    </div>`).join("")
+    const getIMG = () => {
+        setTimeout(() => {
+            document.querySelectorAll(".gallery__imgBox img").forEach(el => el.style = "opacity: 100%;")
+            document.querySelectorAll(".img__skeleton").forEach(el => el.style = "display: none;")
+        }, 2000)
+    
+        fetch("https://dog.ceo/api/breeds/image/random/10").then((randIMG) => {
+            randIMG.json().then((jsonIMG) => {
+                const randDogURL = jsonIMG.message
+                const initialBox = document.querySelector(".body__gallery").innerHTML
+                
+                document.querySelector('.body__gallery').innerHTML =
+                    initialBox + randDogURL.map( (el) =>
+                        `<div class="gallery__imgBox">
+                            <div class="img__skeleton"> </div>
+                            <img src="${el}"/>
+                        </div>`).join("")
+            })
         })
+    }
+
+    getIMG()
+
+    let timer = null;
+    window.addEventListener('scroll', () => {
+        const callDocument = document.documentElement
+        const scrollPer = callDocument.scrollTop / ( callDocument.scrollHeight - callDocument.clientHeight )
+
+        if(scrollPer < 0.7) return
+        if(timer !== null) return
+
+        if(scrollPer >= 0.7) {
+            getIMG()
+        }
+
+        timer = setTimeout( (scrollPer) => {
+            timer = null;
+
+            if (scrollPer === 1) {
+                getIMG()
+            }
+        }, 1000)
     })
 }
 

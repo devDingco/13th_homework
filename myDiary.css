@@ -590,7 +590,7 @@ a { text-decoration: none;}
 /* gallery section */
 .body__gallery {
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 2.4rem;
