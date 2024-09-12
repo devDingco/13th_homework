@@ -3,8 +3,12 @@
   margin: 0;
   padding: 0;
   font-size: 62.5%;
+  /* font-family: 철수의폰트; */
 }
-
+@font-face {
+  font-family: 철수의폰트;
+  src: url("../Pretendard-Black.woff2");
+}
 body {
   display: flex;
   flex-direction: column;
