@@ -213,46 +213,56 @@ document.querySelector("div.container-picker-tab").addEventListener("click", e =
     }
 });
 
-const msgCache = [];
-const add10Pics = (e) => {
-    const templateHTML = document.querySelector("template.dog-image-template");
-    const imageList = document.querySelector("ul.image-scroll-zone");
-    let templClone;
-    [...Array(10)].forEach(i => {
-        // console.log("out: " + performance.now());
-        // console.log(templClone);
-        fetch("https://dog.ceo/api/breeds/image/random") // DEBUG(0)>> GET https://dog.ceo/api/breeds/image/random net::ERR_INSUFFICIENT_RESOURCES
-            .then(res => {
-                // console.log(templClone);
-                res.json()
-                    .then(json => {
-                        templClone = templateHTML.content.cloneNode(true);
-                        // console.log(templClone);
-                        // console.log("in: " + performance.now());
-                        templClone.querySelector("img.dog-image").src = json["message"];
-                        imageList.append(templClone);
-                        msgCache.push(json["message"]);
-                    })
-                    .catch(reason => {
-                        console.error(reason);
-                        console.log("json error");
-                    });
-            })
-            .catch(reason => {
-                // reason.name = "Fetch Image Error: https://dog.ceo/api/breed/image/random"; // Replaces "TypeError"
-                console.dir(reason);
-                console.error(reason); // DEBUG(0)>> Fetch Image Error : https://dog.ceo/api/breed/image/random: Failed to fetch \n at index.js:220:9 \n at Array.forEach (<anonymous>) \n at add10Pics (index.js:217:20) at index.js:328:9 \n (anonymous) @ index.js:238 \n Promise.catch \n (anonymous) @ index.js:237 \n add10Pics @ index.js:217 \n (anonymous) @ index.js:328
-                console.log("fetch error");
-                templClone = templateHTML.content.cloneNode(true);
-                // console.log(templClone);
-                // console.log("in: " + performance.now());
-                templClone.querySelector("img.dog-image").src = msgCache[Math.floor(msgCache.length * Math.random())];
-                imageList.append(templClone);
-            })
-            .finally(() => {
-            });
-    });
-};
+function add10PicsWrapper() {
+    const msgCache = [];
+    let scroll = 0;
+    function inner(e) {
+        if (scroll>document.documentElement.scrollTop) return;
+        console.log(scroll);
+        console.log(document.documentElement.scrollTop);
+        scroll = document.documentElement.scrollTop;
+        const templateHTML = document.querySelector("template.dog-image-template");
+        const imageList = document.querySelector("ul.image-scroll-zone");
+        let templClone;
+        [...Array(10)].forEach(i => {
+            // console.log("out: " + performance.now());
+            // console.log(templClone);
+            fetch("https://dog.ceo/api/breeds/image/random") // DEBUG(0)>> GET https://dog.ceo/api/breeds/image/random net::ERR_INSUFFICIENT_RESOURCES
+                .then(res => {
+                    // console.log(templClone);
+                    res.json()
+                        .then(json => {
+                            templClone = templateHTML.content.cloneNode(true);
+                            // console.log(templClone);
+                            // console.log("in: " + performance.now());
+                            templClone.querySelector("img.dog-image").src = json["message"];
+                            imageList.append(templClone);
+                            msgCache.push(json["message"]);
+                        })
+                        .catch(reason => {
+                            console.error(reason);
+                            console.log("json error");
+                        });
+                })
+                .catch(reason => {
+                    // reason.name = "Fetch Image Error: https://dog.ceo/api/breed/image/random"; // Replaces "TypeError"
+                    console.dir(reason);
+                    console.error(reason); // DEBUG(0)>> Fetch Image Error : https://dog.ceo/api/breed/image/random: Failed to fetch \n at index.js:220:9 \n at Array.forEach (<anonymous>) \n at add10Pics (index.js:217:20) at index.js:328:9 \n (anonymous) @ index.js:238 \n Promise.catch \n (anonymous) @ index.js:237 \n add10Pics @ index.js:217 \n (anonymous) @ index.js:328
+                    console.log("fetch error");
+                    templClone = templateHTML.content.cloneNode(true);
+                    // console.log(templClone);
+                    // console.log("in: " + performance.now());
+                    templClone.querySelector("img.dog-image").src = msgCache[Math.floor(msgCache.length * Math.random())];
+                    imageList.append(templClone);
+                })
+                .finally(() => {
+                });
+        });
+    };
+    return inner;
+}
+
+const add10Pics = add10PicsWrapper();
 
 document.querySelector("button#photo-tab").addEventListener("click", e => {
     add10Pics();
@@ -262,10 +272,10 @@ document.querySelector("input.dark-btn").addEventListener("change", e => {
     document.querySelector("div.flexchild-right").dataset.dark = (e.target.checked) ? "on":"off";
 });
 
+
 window.addEventListener("scroll", throttle(add10Pics, {debug:false}));
 
 document.querySelector("input.search-input").addEventListener("input", e => {
     console.log(e.target.value);
     console.log(e.data);
-
 });

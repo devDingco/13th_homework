@@ -14,6 +14,12 @@
     line-height: inherit;
     color: inherit;
     background-color: inherit;
+    font-family: pretendard!important;
+}
+
+@font-face {
+    font-family: pretendard;
+    src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 }
 
 [data-dark=on] {

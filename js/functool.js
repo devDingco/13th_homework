@@ -36,6 +36,7 @@ function isNumber(input) {
 //
 // <ETON ERUTCEL>
 
+
 // My version of throttling should behave like this(timeout=2)
 // 1,  2,  3,  4,  5,  6,  7,  8,  9,  10
 // v   x   x   v   x   x   v   x   x   v
@@ -73,20 +74,20 @@ function isNumber(input) {
 function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttled Event"}) {
     if (!!debug) console.time(debugLabel);
     let timer = null;
-    return (event) => {
+    return (...args) => {
         if (!!timer) {
             if (!!debug) {
                 console.log("<Ignored Event>");
-                console.dir(event);
+                console.dir(args);
                 console.log("</Ignored Event>");
             }    
             return;
         }
         timer = setTimeout(()=>{timer=null}, timeout);
-        eventListener(event);
-        if (debug) {
+        eventListener.apply(args);
+        if (!!debug) {
             console.timeLog(debugLabel);
-            console.dir(event);
+            console.dir(args);
             console.log("</Throttled Event>");
         }
     };
@@ -130,24 +131,24 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
 function debounce(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
     if (!!debug) console.time(debugLabel);
     let timer = null;
-    return (event) => {
+    return (...args) => {
         if (!!timer) {
             if (!!debug) {
                 console.log("<Ignored Event>");
-                console.dir(event);
+                console.dir(args);
                 console.log("</Ignored Event>");
             }
             return; // Invariant 3
         }
-        setTimeout(event => {
-            if (debug) {
+        setTimeout(...args => {
+            if (!!debug) {
                 console.timeLog(debugLabel);
-                console.dir(event);
+                console.dir(args);
                 console.log("</Throttled Event>");
             }
-            return eventListener(event);
+            eventListener.apply(args); // Invariant 1, 2, 4
         }, timeout);
     };
 }
 
-export { isNumber, throttle}; 
+export { isNumber, throttle, debounce }; 
