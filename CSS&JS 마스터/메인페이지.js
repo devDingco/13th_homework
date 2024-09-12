@@ -6,12 +6,14 @@ if (diaryLocalStorage === null) {
   diaryLocalStorage = JSON.parse(localStorage.getItem("다이어리카드배열"));
 }
 
-const diaryCardArr = diaryLocalStorage;
+let diaryCardArr = diaryLocalStorage;
+let currentArr = diaryCardArr;
+let clickPageNumber = 1;
+let lastPage = Math.ceil(diaryCardArr.length / 12);
 
 window.onload = () => {
-  if (diaryCardArr.length > 0) {
-    diaryCardRendering(diaryCardArr);
-  }
+  createPageNumberButton();
+  pageNumberRendering(clickPageNumber, diaryCardArr);
 };
 
 const registerButton = () => {
@@ -40,9 +42,12 @@ const registerButton = () => {
   const diaryCardJson = JSON.stringify(diaryCardArr);
   localStorage.setItem("다이어리카드배열", diaryCardJson);
 
-  const diaryCardList = JSON.parse(localStorage.getItem("다이어리카드배열"));
-
-  diaryCardRendering(diaryCardList);
+  diaryCardArr = JSON.parse(localStorage.getItem("다이어리카드배열"));
+  currentArr = diaryCardArr;
+  clickPageNumber = 1;
+  lastPage = Math.ceil(diaryCardArr.length / 12);
+  createPageNumberButton(currentArr);
+  pageNumberRendering(clickPageNumber, currentArr);
 };
 
 //날짜 함수
@@ -79,42 +84,6 @@ const getImage = (emotionText) => {
   return imageSrc;
 };
 
-const diaryCardRendering = (diaryCardList) => {
-  const diaryCardHtmlString = diaryCardList
-    .map(
-      (el, index) => ` 
-      <div class="diaryCard">
-        <a href="./일기상세페이지.html?diaryCardIndex=${index}">
-            <img src="${el.image}" alt="" id="diaryCard_image">
-            <img src="./assets/close_outline_light_m.svg" 
-            alt="" 
-            id="deleteButton" 
-            onclick="deleteDiaryCard(event, ${index})"
-        ></a>
-        <div class="diaryCard_content">
-            <div class="diaryCard_content_header">
-                <div id="content_header_emotion">${el.emotionText}</div>
-                <div id="content_header_date">${el.date}</div>
-            </div>
-            <div id="diaryCard_content_title">
-                <div id="diarCard_title">
-                ${el.title}
-                </div>    
-            </div>
-        </div>
-        </div>
-    `
-    )
-    .join(""); //map메서드를 통한 새로운 배열객체 리턴
-
-  const diaryCardHtml = `
-    <div id="storage_leftBody">
-      ${diaryCardHtmlString}
-    </div>
-  `;
-  document.getElementById("main").innerHTML = diaryCardHtml;
-};
-
 const diaryFiltering = (event) => {
   const selection = event.target.value;
   document.getElementById("diary_select").click();
@@ -146,7 +115,12 @@ const diaryFiltering = (event) => {
       break;
     }
   }
-  diaryCardRendering(filterArr);
+  currentArr = filterArr;
+
+  clickPageNumber = 1;
+  lastPage = Math.ceil(currentArr.length / 12);
+  createPageNumberButton(currentArr);
+  pageNumberRendering(clickPageNumber, currentArr);
 };
 
 window.onscroll = () => {
@@ -204,7 +178,13 @@ const realDeleteDiary = () => {
   const editDiaryCard = JSON.parse(localStorage.getItem("다이어리카드배열"));
   editDiaryCard.splice(diaryCardIndex, 1);
   localStorage.setItem("다이어리카드배열", JSON.stringify(editDiaryCard));
-  diaryCardRendering(editDiaryCard);
+
+  diaryCardArr = editDiaryCard;
+  currentArr = diaryCardArr;
+  lastPage = Math.ceil(diaryCardArr.length / 12);
+  createPageNumberButton(currentArr);
+  pageNumberRendering(clickPageNumber, currentArr);
+
   document.getElementById("modal_group4").style = "display: none;";
 };
 
@@ -329,13 +309,16 @@ const searchTitle = (event) => {
 
   searchTimer = setTimeout(() => {
     const diaryArray = JSON.parse(localStorage.getItem("다이어리카드배열"));
-    console.log("다이어리배열", diaryArray);
 
     const researchResult = diaryArray.filter((el) => {
       return el.title.includes(event.target.value);
     });
-    console.log("검색결과", researchResult);
-    diaryCardRendering(researchResult);
+
+    currentArr = researchResult;
+
+    clickPageNumber = 1;
+    createPageNumberButton(currentArr);
+    pageNumberRendering(clickPageNumber, currentArr);
   }, 1000);
 };
 
@@ -367,3 +350,86 @@ window.addEventListener("scroll", () => {
     }, 300);
   }
 });
+
+//---------페이지네이션---------
+let firstPage = 1;
+
+const createPageNumberButton = () => {
+  const pageArr = new Array(5).fill("철수");
+  const pagesHtml = pageArr
+    .map((el, index) => {
+      const pageNumber = index + firstPage;
+      return pageNumber <= lastPage
+        ? `<button id="pagesNumber" onclick="changePage(${pageNumber})">${pageNumber}</button>`
+        : "";
+    })
+    .join("");
+  document.getElementById("pagesBox").innerHTML = pagesHtml;
+};
+
+const changePage = (pageNumber) => {
+  clickPageNumber = pageNumber;
+  pageNumberRendering(clickPageNumber, currentArr);
+  createPageNumberButton(currentArr);
+};
+
+const nextPageButton = () => {
+  if (firstPage + 5 <= lastPage) {
+    firstPage = firstPage + 5;
+    createPageNumberButton(diaryCardArr);
+  } else {
+    document.getElementById("rightButton").style = "color: #c7c7c7;";
+  }
+};
+
+const prevPageButton = () => {
+  if (firstPage === 1) {
+    document.getElementById("leftButton").style = "color: #c7c7c7;";
+  } else {
+    firstPage = firstPage - 5;
+    createPageNumberButton(diaryCardArr);
+  }
+};
+
+const pageNumberRendering = (clickPageNumber, arr) => {
+  const dozen = 12;
+  const pageJump = (clickPageNumber - 1) * dozen;
+  const result = arr.slice(pageJump, pageJump + dozen);
+  diaryCardRendering(result);
+};
+
+const diaryCardRendering = (diaryCardList) => {
+  const diaryCardHtmlString = diaryCardList
+    .map(
+      (el, index) => ` 
+      <div class="diaryCard">
+        <a href="./일기상세페이지.html?diaryCardIndex=${index}">
+            <img src="${el.image}" alt="" id="diaryCard_image">
+            <img src="./assets/close_outline_light_m.svg" 
+            alt="" 
+            id="deleteButton" 
+            onclick="deleteDiaryCard(event, ${index})"
+        ></a>
+        <div class="diaryCard_content">
+            <div class="diaryCard_content_header">
+                <div id="content_header_emotion">${el.emotionText}</div>
+                <div id="content_header_date">${el.date}</div>
+            </div>
+            <div id="diaryCard_content_title">
+                <div id="diarCard_title">
+                ${el.title}
+                </div>    
+            </div>
+        </div>
+        </div>
+    `
+    )
+    .join(""); //map메서드를 통한 새로운 배열객체 리턴
+
+  const diaryCardHtml = `
+    <div id="storage_leftBody">
+      ${diaryCardHtmlString}
+    </div>
+  `;
+  document.getElementById("main").innerHTML = diaryCardHtml;
+};
