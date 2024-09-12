@@ -30,51 +30,40 @@
             <!-- 일기 필터 아이템 및 일기 쓰기 버튼 -->
             <div id="filter_item" class="filter_item">
                 <div id="diary_filter_dropbox" class="contents_diary_filter_dropbox">
-                    <!-- <select id="mood_select", class="select_filter_dropbox" onchange="filterDiary()">
-                        <option value="전체" selected>전체</option>
-                        <option value="행복해요">행복해요</option>
-                        <option value="슬퍼요">슬퍼요</option>
-                        <option value="놀랐어요">놀랐어요</option>
-                        <option value="화나요">화나요</option>
-                        <option value="기타">기타</option>
-                    </select> -->
-                    
-                    <!-- 일기 필터 드롭박스 -->
                 <div class="left_sub_menu_container">
                     <div>
                         <input type="checkbox" class="CSS_dropdown_title" id="HTML_dropdown_title">
-                        <ul class="CSS_dropdown_menu">
+                        <ul class="CSS_dropdown_menu" id="photos_filter_dropdown_menu">
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="all" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_all">전체<img src="./assets/check.png" class="check_img"></label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_all" class="mood_filter_dropbox_item" value="전체" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_all" id="diary_filter_all_label">전체<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="happy" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_happy">행복해요</label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_happy" class="mood_filter_dropbox_item" value="행복해요" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_happy" id="diary_filter_happy_label">행복해요<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="sad" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_sad">슬퍼요</label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_sad" class="mood_filter_dropbox_item" value="슬퍼요" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_sad" id="diary_filter_sad_label">슬퍼요<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="surprised" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_surprised">놀랐어요</label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_surprised" class="mood_filter_dropbox_item" value="놀랐어요" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_surprised" id="diary_filter_surprised_label">놀랐어요<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="angry" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_angry">화나요</label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_angry" class="mood_filter_dropbox_item" value="화나요" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_angry" id="diary_filter_angry_label">화나요<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         <li>
-                            <input type="radio" name="mood_filter_dropdown_group" id="other" onclick="JS_select_dropbox_menu(event)">
-                            <label for="dropbox_other">기타</label>
+                            <input type="radio" name="mood_filter_dropdown_group" id="dropbox_other" class="mood_filter_dropbox_item" value="기타" onclick="selectDiaryFilterMenu(event)">
+                            <label for="dropbox_other" id="diary_filter_other_label">기타<img src="./assets/check.png" class="check_img"></label>
                         </li>
                         </ul>
                     </div>
                     <div class="search_bar_container">
-                        <img src="./assets/search.png"><input type="text" class="search_bar_text" placeholder="검색어를 입력해주세요.">
+                        <img src="./assets/search.png"><input type="text" class="search_bar_text" placeholder="검색어를 입력해주세요." oninput="searchDiary(event)">
                     </div>
                 </div>
-                    
                     
                     <div class="write_diary_items">
                         <button class="contents_write_diary_button" onclick="writeButtonPressed()"><img class="write_diary_image" src="./assets/add.png">일기쓰기</button>
@@ -163,19 +152,24 @@
                         <div id="skeleton_box">
                             <div id="skeleton_bar"></div>
                         </div>
-                            <!-- fetch Dogs Image -->
+                            <!-- fetch Dogs Image 추가할 것! -->
                     </div>
                 </div>
-
-            </div>
+            </div> <!-- class = "contents" -->
                 <button class="top_scroll_floating_button" id="top_scroll_button" onclick="topScrollFloatingButtonTapped()"><img src="./assets/top_scroll.png"></button>
-        </div>
+        </div> <!-- class: contents_container -->
     </div>   
     
     
     <div id="HTML_write_diary_modal_bg" class="write_diary_modal_bg" onclick="dismiss()">
         <div id="HTML_write_diary_modal_container" class="write_diary_modal_container">
-            <div class="write_diary_title">일기 쓰기</div>
+            <div class="write_diary_title">
+                일기 쓰기
+                <div class="dark_mode_container">
+                    다크모드
+                    <input type="checkbox" class="dark_mode_toggle" onclick="onDarkMode(event)">
+                </div>
+            </div>
             <div class="write_diary_mood_items">
                 <div class="write_diary_mood_title">오늘 기분은 어땠나요?</div>
                 <div class="write_diary_mood_buttonList">
@@ -249,6 +243,11 @@
         </div>
     </div>
 
+    <section class="page_button_list_container" id="id_page_button_list_container">
+        <button onclick="goToPreviousPage()"><</button>
+        <div id="id_page_number_button_list"></div>
+        <button onclick="goToNextPage()">></button>
+    </section>
 
     <div id="HTML_footer" class="footer">
         <div class="footer_information">

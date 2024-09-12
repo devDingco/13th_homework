@@ -4,6 +4,66 @@
     padding: 0rem;
 }
 
+:root {
+    --GrayGray_50: #F2F2F2;
+    --GrayGray_100: #E4E4E4;
+    --GrayGray_200: #D4D3D3;
+    --GrayGray_300: #C7C7C7;
+    --GrayGray_400: #ABABAB;
+    --GrayGray_600: #777777;
+    --GrayGray_700: #5F5F5F;
+    --GrayGray_800: #333333;
+    --GrayGray_900: #1C1C1C;
+    --GrayW: #FFFFFF;
+    --GrayB: #000000;
+
+    --modal_background_color: var(--GrayW);
+    --modal_title_color: #000000;
+    --modal_text_color: #333333;
+    --modal_border_color: none;
+
+    --input_background_color: #FFFFFF;
+    --input_title_color: var(--GrayGray_800);
+    --input_text_color: var(--GrayB);
+
+    --button_disabled_background_color: #C7C7C7;
+    --button_disabled_text_color: #F2F2F2;
+
+    --button_background_color: var(--GrayB);
+    --button_text_color: var(--GrayW);
+    --button_border_color: var(--GrayB);
+
+    --button_sub_item_background_color: var(--GrayW);
+    --button_sub_item_text_color: var(--GrayGray900);
+
+    --button_activation_background_color: var(--GrayB);
+    --button_activation_text_color: var(--GrayGray_50);
+}
+
+[dark_mode="on"] {
+    --modal_background_color: var(--GrayGray_900);
+    --modal_title_color: var(--GrayW);
+    --modal_text_color: var(--GrayGray_200);
+    --modal_border_color: var(--GrayGray_800);
+
+    --input_background_color: var(--GrayB);
+    --input_title_color: var(--GrayGray_300);
+    --input_text_color: var(--GrayW);
+
+    --button_disabled_background_color: var(--GrayGray_800);
+    --button_disabled_text_color: var(--GrayGray_700);
+
+    --button_background_color: var(--GrayW);
+    --button_text_color: var(--GrayB);
+    --button_border_color: var(--GrayGray_700);
+
+    --button_sub_item_background_color: var(--GrayGray_900);
+    --button_sub_item_text_color: var(--GrayW);
+
+    --button_activation_background_color: var(--GrayGray_50);
+    --button_activation_text_color: var(--GrayB);
+}
+
 .header {
     width: 100%;
     display: flex;
@@ -111,6 +171,7 @@
 }
 
 .left_sub_menu_container {
+    position: relative;
     display: flex;
     gap: 1rem;
 }
@@ -118,11 +179,12 @@
 /* 서치 바 영역 */
 .search_bar_container {
     width: 20rem;
+    height: 3rem;
 
     display: flex;
     align-items: center;
     gap: .5rem;
-
+    background-color: white;
     border-radius: 6.25rem;
     border: .0625rem solid #C7C7C7;
     padding: .75rem 1rem .75rem 1rem;
@@ -130,6 +192,7 @@
 
 .search_bar_text {
     width: 100%;
+    height: 100%;
     border: none;
 }
 
@@ -296,6 +359,10 @@
     z-index: 2;
 }
 
+#dropbox_all {
+    background-color: #299C00;
+}
+
 /* 사진 보관함 드랍 박스 */
 .CSS_dropdown_title {
     appearance: none;
@@ -306,19 +373,20 @@
     margin-bottom: .5rem;
     padding: .75rem .625rem .75rem .625rem;
     line-height: 1.5rem;
-
+    background-color: white;
     font-weight: 500;
     font-size: 1rem;
     --dropdown_title: "전체"
+
 }
 
 .CSS_dropdown_menu {
-    /* 처음에는 보이지 않도록 구성하고, 드롭박스를 눌렀을 때 보여주도록 함. */
+    position: absolute;
     display: none;
     width: 7.5rem;
     border: .0625rem solid #C7C7C7;
+    background-color: white;
     border-radius: .5rem;
-    /* 모서리 영역의 넘치는 부분을 숨김 처리한다. */
     overflow: hidden;
 
     font-weight: 400;
@@ -331,6 +399,10 @@
 }
 
 .CSS_dropdown_title:checked {
+    /* background-color: yellow; */
+}
+
+.mood_filter_dropbox_item:checked {
     background-color: yellow;
 }
 
@@ -345,7 +417,7 @@
 .CSS_dropdown_menu label {
     display: flex;
     justify-content: space-between;
-    height: 2.5rem;
+    height: 2.4rem;
     padding: .625rem;
 }
 
@@ -355,6 +427,16 @@
     font-size: 1rem;
     color: #299C00;
     background-color: #3AB50F0D;
+}
+
+.CSS_dropdown_menu img {
+    display: none;
+}
+
+.CSS_dropdown_menu label:hover img {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 /* 사진 보관함 */
@@ -408,6 +490,7 @@
 }
 
 /* 일기쓰기 버튼 클릭 시 생성되는 모달 */
+
 .write_diary_modal_container {
     width: 40rem;
     padding: 1.5rem;
@@ -416,7 +499,7 @@
     top: calc(50% - 35rem/2);
     left: calc(50% - 40rem/2);
 
-    background-color: white;
+    background-color: var(--modal_background_color);
 
     border-radius: 1rem;
 
@@ -428,11 +511,51 @@
 }
 
 .write_diary_title {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     font-weight: 700;
     font-size: 1.5rem;
 
-    color: black;
+    color: var(--modal_title_color);
+}
+
+.dark_mode_container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 400;
+    font-size: .75rem;
+    color: #1C1C1C;
+}
+
+.dark_mode_toggle {
+    appearance: none;
+
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 6.25rem;
+    background-color: #E4E4E4;
+}
+
+.dark_mode_toggle::after {
+    display: block;
+    content: "";
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: white;
+    border-radius: 50%;
+    margin: .125rem;
+
+    transition: margin-left 0.3s;
+}
+
+.dark_mode_toggle:checked {
+    background-color: #3AD84A;
+}
+
+.dark_mode_toggle:checked::after {
+    margin-left: 1.125rem;
 }
 
 .write_diary {
@@ -455,7 +578,7 @@
     width: 100%;
     height: 1.5rem;
 
-    color: black;
+    color: var(--modal_title_color);
 
     font-weight: 600;
     font-size: 1.25rem;
@@ -478,7 +601,7 @@
 .write_mood_name {
     font-weight: 500;
     font-size: 1.125rem;
-    color: #333333;
+    color: var(--modal_text_color);
 }
 
 .diary_write_items {
@@ -494,6 +617,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    z-index: 1;
 }
 
 .write_diary_contents_items {
@@ -507,7 +631,7 @@
     width: 100%;
     font-weight: 500;
     font-size: 0.875rem;
-    color: #333333;
+    color: var(--input_title_color);
 }
 
 .write_diary_title_input {
@@ -516,6 +640,8 @@
     border: 0.063rem solid #D4D3D3;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem 0.75rem 1rem;
+    color: var(--input_text_color);
+    background-color: var(--input_background_color);
 }
 
 .write_diary_text_input {
@@ -524,6 +650,8 @@
     border: 0.063rem solid #D4D3D3;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem 0.75rem 1rem;
+    color: var(--input_text_color);
+    background-color: var(--input_background_color);
 }
 
 .write_diary_footer_items {
@@ -533,21 +661,20 @@
 }
 
 .write_diary_closed_button {
-    background-color: white;
+    background-color: var(--button_sub_item_background_color);
+    color: var(--button_sub_item_text_color);
     font-weight: 600;
     font-size: 1.125rem;
-    color: #1C1C1C;
-    border: .0625rem solid black;
+    border: .0625rem solid var(--button_border_color);
     border-radius: 0.5rem;
     padding: 0.5rem 0.625rem 0.5rem 0.625rem;
 
 }
 
 .write_diary_button {
-    background-color: #C7C7C7;
-    font-weight: 600;
+    background-color: var(--button_disabled_background_color);
+    color: var(--button_disabled_text_color);
     font-size: 1.125rem;
-    color: #F2F2F2;
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 0.625rem 0.5rem 0.625rem;
@@ -577,7 +704,7 @@
     gap: 2.5rem;
     border-radius: 1.5rem;
     padding: 1.5rem;
-    background-color: #FFFFFF;
+    background-color: var(--modal_background_color);
 
     position: absolute;
     top: calc(50% - 15rem/2);
@@ -593,10 +720,14 @@
 
 /* Success Modal */
 .write_diary_ok_button {
+    width: 100%;
     border-radius: 0.5rem;
-    background-color: #000000;
-    color: #F2F2F2;
+    background-color: var(--button_background_color);
+    color: var(--button_text_color);
     padding: 0.5rem 0.625rem 0.5rem 0.625rem;
+
+    font-weight: 600;
+    font-size: 1.125rem;
 }
 
 /* Cancel Modal */
@@ -605,7 +736,7 @@
     font-size: 1.5rem;
     text-align: center;
 
-    color: #000000;
+    color: var(--modal_title_color);
 }
 
 .write_diary_cancel_text {
@@ -613,11 +744,12 @@
     font-size: 1.25rem;
     text-align: center;
 
-    color: #333333;
+    color: var(--modal_text_color);
 }
 
 .write_diary_cancel_modal_button_items {
     width: 100%;
+    height: 3rem;
     display: flex;
     justify-content: center;
     gap: 1.3125rem;
@@ -629,8 +761,9 @@
 }
 
 .write_diary_continue_button {
-    background-color: #FFFFFF;
-    border: 0.0625rem solid #000000;
+    background-color: var(--button_sub_item_background_color);
+    color: var(--button_sub_item_text_color);
+    border: 0.0625rem solid var(--button_border_color);
     border-radius: 0.5rem;
 
     padding: 0.5rem 0.625rem 0.5rem 0.625rem;
@@ -641,8 +774,8 @@
 
 .write_diary_cancel_button {
     border-radius: 0.5rem;
-    background-color: #000000;
-    color: #F2F2F2;
+    background-color: var(--button_background_color);
+    color: var(--button_text_color);
 
     padding: 0.5rem 0.625rem 0.5rem 0.625rem;
 
@@ -662,6 +795,37 @@
     
     bottom: 20px;
     left: 100%;
+}
+
+/* 페이지 버튼 영역 */
+.page_button_list_container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.selected_page_button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--GrayGray_200);
+    color: var(--GrayB);
+    
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.page_list_button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--GrayW);
+    color: var(--GrayB);
+    
+    font-weight: 500;
+    font-size: 1.5rem;
 }
 
 /* 바닥글 영역 */

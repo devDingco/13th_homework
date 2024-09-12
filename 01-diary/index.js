@@ -6,11 +6,16 @@ let inputText
 let selectedMood
 
 let isFiltered = false
+let searchTimer = null
+
+let startPage = 1
+let selectedPage = 1
+let lastPage = null
 
 window.onload = () => {
     diaryList = fetchDiaryListFromLocalStorage()
-    console.log(diaryList)
-    reloadData(diaryList)
+    lastPage = Math.ceil(diaryList.length / 12)
+    drawPageNumberButtons()
 }
 
 // [Input Data Validate]
@@ -37,14 +42,14 @@ const activateWriteButton = () => {
         console.log("등록 버튼이 활성화 됩니다.")
         console.log(selectedMood)
         document.getElementById("HTML_diary_write_button").disabled = false
-        document.getElementById("HTML_diary_write_button").style = "background-color: black; color: white"
+        document.getElementById("HTML_diary_write_button").style = "background-color: var(--button_activation_background_color); color: var(--button_activation_text_color);"
         return
     }
 
     if (inputTitle === "" || inputText === "" || selectedMood === undefined) {
         console.log("등록 버튼이 비활성화 됩니다.")
         document.getElementById("HTML_diary_write_button").disabled = true
-        document.getElementById("HTML_diary_write_button").style = "background-color: #C7C7C7; color: #F2F2F2"  
+        document.getElementById("HTML_diary_write_button").style = "background-color: var(--button_disabled_background_color); color: var(--button_disabled_text_color);"  
         return
     }
 }
@@ -62,7 +67,11 @@ const createDiary = () => {
     })
 
     updateDiaryListFromLocalStorage(diaryList)
-    reloadData(diaryList)
+
+    
+    isFiltered = false
+    document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "전체"`
+    drawPageNumberButtons()
 }
 
 const removeDiary = (id) => {
@@ -70,19 +79,20 @@ const removeDiary = (id) => {
     console.log(`다이어리가 삭제 됩니다. ${updateDiaryList}`)
     diaryList = updateDiaryList
     updateDiaryListFromLocalStorage(diaryList)
-    reloadData(diaryList)
+    drawPageNumberButtons()
 }
 
-const filterDiary = () => {
-    const selectedMood = document.getElementById("mood_select").value 
+const filterDiary = (event) => {
+    const selectedMood = event.target.value
+    selectedPage = 1
 
     if (selectedMood === "전체") {
         isFiltered = false
-        reloadData(diaryList)
+        drawPageNumberButtons()
     } else {
         filteredDiaryList = diaryList.filter(el => (el.mood === selectedMood))
         isFiltered = true
-        reloadData(filteredDiaryList)
+        drawPageNumberButtons()
     }
 }
 
@@ -145,26 +155,41 @@ const getMoodSettings = (mood) => {
     }
 }
 
-// [Rendering]
-const reloadData = (reload_diaryList) => {
-    const diaryDOMList = reload_diaryList.map(el => 
-        `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
-            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
-            <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
-                <div class="diary_title">
-                    <div class="diary_sub_title">
-                        <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
-                        <div class="diary_date">${el.date}</div>
-                    </div>
-                 <div class="diary_main_title">${el.title}</div>
-            </div>
-        </div>`
-    ).join("")
+//  [Tap or Press Event]
+const selectDiaryFilterMenu = (event) => {
+    const value = event.target
+    const title = value.id.slice(8)
 
-    document.getElementById("diary_list").innerHTML = diaryDOMList
+    switch (title) {
+        case "all": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "전체"`
+            break
+        }
+        case "happy": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "행복해요"`
+            break
+        }
+        case "sad": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "슬퍼요"`
+            break
+        }
+        case "surprised": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "놀랐어요"`
+            break
+        }
+        case "angry": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "화나요"`
+            break
+        }
+        case "other": {
+            document.getElementById("HTML_dropdown_title").style.cssText = `--dropdown_title: "기타"`
+            break
+        }
+    }
+    filterDiary(event)
+    document.getElementById("HTML_dropdown_title").click()
 }
 
-//  [Tap or Press Event]
 const diaryCardTapped = (id) => {
     console.log("diaryCardTapped: 다이어리 카드를 탭했습니다.", id)
     const diary = diaryList[id]
@@ -206,6 +231,15 @@ const okButtonPressed = () => {
     resetInputData()
 }
 
+const onDarkMode = (event) => {
+    if (event.target.checked) {
+        document.documentElement.setAttribute("dark_mode", "on")
+    } else {
+        document.documentElement.removeAttribute("dark_mode")
+    }
+    
+}
+
 const presentNaviMenu = (naviItem) => {
     switch (naviItem) {
         case "diary": {
@@ -213,14 +247,18 @@ const presentNaviMenu = (naviItem) => {
             document.getElementById("HTML_contents_photos_container").style = "display: none;"
             document.getElementById("diary_filter_dropbox").style = "display: flex;"
             document.getElementById("photos_filter_dropbox").style = "display: none;"
+            document.getElementById("id_page_button_list_container").style = "display: flex;"
+            window.scrollTo({top:0})
+            nowNavMenu = "diary"
             break
         }
-
         case "photos": {
             document.getElementById("diary_list").style = "display: none;"
             document.getElementById("HTML_contents_photos_container").style = "display: block;"
             document.getElementById("diary_filter_dropbox").style = "display: none;"
-            fetchDogsFromAPI()
+            document.getElementById("id_page_button_list_container").style = "display: none;"
+            photosPageOnLoad()
+            nowNavMenu = "photos"
             break
         }
     }
@@ -237,12 +275,10 @@ const presentModal = () => {
     document.body.style.overflow = "hidden"
 
     document.getElementById("HTML_write_diary_modal_container").addEventListener("click", (el) => {
-        console.log("HTML_write_diary_modal_container")
         el.stopPropagation()
     })
 
     document.getElementById("HTML_write_diary_cancel_modal_bg").addEventListener("click", (el) => {
-        console.log("HTML_write_diary_cancel_modal_bg")
         el.stopPropagation()
     })
 }
@@ -254,17 +290,101 @@ const dismiss = () => {
     document.body.style.overflow = "auto"
 }
 
-// Event Listener
-window.addEventListener("scroll", () => {
-    const y = window.scrollY
+const searchDiary = (event) => {
+    clearTimeout(searchTimer)
 
-    if (y > 0) {
-        document.getElementById("mood_select").style = "background-color: black; color: white;"
+    timer = setTimeout(() => {
+        const inputText = event.target.value
+
+        const result = diaryList.filter(el => el.title.includes(inputText))
+        if (isFiltered) {
+            const result = filteredDiaryList.filter(el => el.title.includes(inputText))
+            drawPageList(result)
+        } else {
+            const result = diaryList.filter(el => el.title.includes(inputText))
+            drawPageList(result)
+        }
+    }, 1000)
+}
+
+const drawPageNumberButtons = () => {
+    if (isFiltered) {
+        drawPageList(filteredDiaryList)
     } else {
-        document.getElementById("mood_select").style = "background-color: white; color: black;"
+        drawPageList(diaryList)
     }
-})
+}
 
+const drawPageList = (data) => {
+    const lastPage = Math.ceil(data.length / 12)
+    const pageList = data.map((el, index) => {
+        if ((index + startPage) <= lastPage) {
+            console.log(isFiltered)
+            console.log(index)
+            const pageNumber = index + 1
+            const className = selectedPage === pageNumber ? "selected_page_button" : "page_list_button"
+            return `
+                <button onclick="goToPage(${pageNumber})" class=${className}>
+                ${pageNumber}</button>
+                `
+        } else {
+            return ""
+        }
+    }).join("")
+    document.getElementById("id_page_number_button_list").innerHTML = pageList
+    renderDiaryList(data)
+}
+
+const renderDiaryList = (data) => {
+    const result = data.filter((el, index) => {
+        const diaryOfNumber = 12
+        const showIndex = (selectedPage - 1) * diaryOfNumber
+        if (showIndex <= index && index < (showIndex + diaryOfNumber)) {
+            return true 
+        } else {
+            return false
+        }
+    })
+
+    document.getElementById("diary_list").innerHTML = result.map(el => 
+        `<div class="diary" id="diary_DOM" onclick="diaryCardTapped(${el.id})">
+            <img class="diary_mood_img" src=${getMoodSettings(el.mood).img} alt=${getMoodSettings(el.mood).alt}>
+            <button class="diary_delete_button"><img src="./assets/delete_button.png" alt="X 삭제 버튼" onclick="deleteButtonTapped(event, ${el.id})"></button>
+            <div class="diary_title">
+                <div class="diary_sub_title">
+                    <div class=${getMoodSettings(el.mood).attribute}>${el.mood}</div>
+                    <div class="diary_date">${el.date}</div>
+                </div>
+             <div class="diary_main_title">${el.title}</div>
+            </div>
+        </div>
+    `
+    ).join("")
+}
+
+const goToPage = (number) => {
+    selectedPage = number
+    drawPageNumberButtons()
+    window.scrollTo({top:300, behavior: "smooth"})
+}
+
+const goToPreviousPage = () => {
+    if (selectedPage === 1) {
+        alert(`이전 페이지가 없습니다.`)
+    } else {
+        selectedPage -= 12
+    }
+}
+
+const goToNextPage = () => {
+    if (selectedPage + 12 <= lastPage) {
+        selectedPage += 12
+    } else {
+        alert(`다음 페이지가 없습니다.`)
+    }
+}
+
+// Event Listener
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         dismiss()

@@ -1,28 +1,45 @@
-const fetchDogsFromAPI = () => {
-    document.getElementById("skeleton_box").style = "display: block;"
-    const api = "https://dog.ceo/api/breeds/image/random/10"
+let apiFetchTimer = null
+let nowNavMenu = "diary"
 
+const photosPageOnLoad = () => {
+    document.getElementById("photos_filter_dropbox").style = "display: block;"
+    fetchDogsFromAPI(data => {
+        renderPhotos(data)
+    })
+}
+
+const fetchDogsFromAPI = (completionHandler) => {
+    // document.getElementById("skeleton_box").style = "display: block;"
+    const api = `https://dog.ceo/api/breeds/image/random/10`
     fetch(api)
     .then(result => result.json())
-    .then(data => { 
-        const dogImages = data.message
-
-        const imageDOMList = dogImages.map(el =>
-            `<img class="contents_photos_item" src="${el}">`
-        ).join("")
-
-        document.getElementById("HTML_contents_photos_group").innerHTML = imageDOMList
-        document.getElementById("skeleton_box").style = "display: none;"
+    .then(data => {
+        const images = data.message
+        completionHandler(images)
     })
+}
 
-    settings()
+const renderPhotos = (data) => {
+    const photoDOMList = data.map(el =>
+        `<img class="contents_photos_item" src="${el}">`
+    ).join("")
+
+    document.getElementById("HTML_contents_photos_group").innerHTML = photoDOMList
+}
+
+const updateImageDOMList = (images) => {
+    console.log("API를 추가로 호출합니다.")
+    const oldDOMList = document.getElementById("HTML_contents_photos_group").innerHTML
+    const newDOMList = images.map(el => 
+        `<img class="contents_photos_item" src="${el}">`
+    ).join("")
+    document.getElementById("HTML_contents_photos_group").innerHTML = oldDOMList + newDOMList    
 }
 
 const filterPhotos = (event) => {
     const selectedRatio = event.target.value
     const dogImages = document.querySelectorAll(".contents_photos_item")
     dogImages.forEach(el => {
-        console.log(el.style.aspectRatio)
         switch (selectedRatio) {
             case "기본형": {
                 el.style.aspectRatio = "1 / 1"
@@ -45,44 +62,26 @@ const filterPhotos = (event) => {
     })
 }
 
-const settings = () => {
-    document.getElementById("photos_filter_dropbox").style = "display: block;"
-}
+window.addEventListener("scroll", () => {
+    const root = document.documentElement
+    const scroll = root.scrollTop / (root.scrollHeight - root.clientHeight)
 
+    if (nowNavMenu !== "photos") return;
+    if (scroll < 0.8) return;
+    if (apiFetchTimer !== null) return;
 
+    fetchDogsFromAPI((data) => {
+        updateImageDOMList(data)
+    })
+    
+    apiFetchTimer = setTimeout(() => {
+        apiFetchTimer = null
 
-// const selectPhotosFilterMenu = (event) => {
-//     checkSelectedPhotosFilter()
-//     const value = event.target.value
-//         switch (value) {
-//         case "기본형": {
-//             document.getElementById("photos_filter_dropbox").style.cssText = `--dropdown_title: "기본형"`
-//             break
-//         }
-
-//         case "세로형": {
-//             document.getElementById("photos_filter_dropbox").style.cssText = `--dropdown_title: "세로형"`
-//             break
-//         }
-
-//         case "가로형": {
-//             document.getElementById("photos_filter_dropbox").style.cssText = `--dropdown_title: "가로형"`
-//             break
-//         }
-//     }
-//     document.getElementById("photos_filter_dropbox_menu").style = "display: none;"ㅌ   
-// }
-
-// const checkSelectedPhotosFilter = () => {
-//     const menuList = document.getElementsByName("photos_filter_item")
-//     menuList.forEach(el => {
-//         console.log(el.id);
-//         if (el.checked === true) {
-//             document.getElementById(el.id).style = `
-//              color: #3AB50F0D;
-//              background-color: #3AB50F0D;
-//              `
-//         }
-//     })
-// }
-
+        const scroll = root.scrollTop / (root.scrollHeight - root.clientHeight)
+        if(scroll === 1) {
+            fetchDogsFromAPI((data) => {
+                updateImageDOMList(data)
+            })
+        }
+    }, 1000)
+})
