@@ -71,11 +71,11 @@ function isNumber(input) {
 // EventTarget.addEventListener("scroll", throttle(eventListener, timeout, debug)); 
 
 function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttled Event"}) {
-    if (debug) console.time(debugLabel);
+    if (!!debug) console.time(debugLabel);
     let timer = null;
     return (event) => {
         if (!!timer) {
-            if (debug) {
+            if (!!debug) {
                 console.log("<Ignored Event>");
                 console.dir(event);
                 console.log("</Ignored Event>");
@@ -87,8 +87,8 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
         if (debug) {
             console.timeLog(debugLabel);
             console.dir(event);
-            console.log("</Throttled Eventt>");
-        };
+            console.log("</Throttled Event>");
+        }
     };
 }
 
@@ -128,10 +128,25 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
 // 4. At most 1 timer is on, and Timer on/Timer off do not coincide at exact same timestamp
 
 function debounce(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
+    if (!!debug) console.time(debugLabel);
     let timer = null;
     return (event) => {
-        if (!!timer) return; // Invariant 3
-        setTimeout(eventListener(event), timeout);
+        if (!!timer) {
+            if (!!debug) {
+                console.log("<Ignored Event>");
+                console.dir(event);
+                console.log("</Ignored Event>");
+            }
+            return; // Invariant 3
+        }
+        setTimeout(event => {
+            if (debug) {
+                console.timeLog(debugLabel);
+                console.dir(event);
+                console.log("</Throttled Event>");
+            }
+            return eventListener(event);
+        }, timeout);
     };
 }
 
