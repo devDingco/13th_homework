@@ -462,6 +462,34 @@ textarea {
     align-items: center;
     cursor: pointer;
 }
+.pagination {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+.page_button,
+.page_button_bg {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.page_button_bg {
+    background-color: rgba(242, 242, 242, 1);
+}
 footer {
     width: 100dvw;
     padding: 1.5rem 1.25rem;

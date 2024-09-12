@@ -6,6 +6,8 @@
 //     img: string;
 // }
 
+import { paintPost } from "./paintPost.js";
+
 // 이번 목표 - if문 최대한 안 쓰기
 
 const idList = ["angry", "etc", "happy", "sad", "surprise"];
@@ -55,29 +57,10 @@ function pushDaily() {
     resultObject.id = index++;
     resultObject.comments = [];
 
-    // 이후 부모 element를 추출해서 자식들 중 제일 뒤에 append
-    const parentElement = document.getElementById("post");
-
-    const postContainer = document.createElement("a");
-    postContainer.href = `./dailyDetailInfor.html?id=${resultObject.id}`;
-    postContainer.className = "post-container";
-    postContainer.id = `${resultObject.id}`;
-    postContainer.innerHTML = `
-        <img src="${resultObject.img}" alt="1" id=${resultObject.id}  class="post-img" />
-        <div class="post-title">
-            <div class="post-font-${resultObject.moodEng}">${resultObject.mood}</div>
-            <div class="post-date">${resultObject.date}</div>
-        </div>
-        <div class="post-content">${resultObject.title}</div>
-        <button class="post-delete" onclick="onClickDelete(event)">X</button>
-    `;
-
-    parentElement.appendChild(postContainer);
-
-    // 부모 element append 한 이후 dailyArray에 push
     dailyArray.push(resultObject);
     localStorage.setItem("dailyArray", JSON.stringify(dailyArray));
     localStorage.setItem("idx", index);
+    paintPost(dailyArray);
 
     const modalElement = document.getElementById("modal");
     const modalSuccessElement = document.getElementById(
@@ -92,3 +75,7 @@ function pushDaily() {
     modalSuccessElement.style.display = "none";
     bodyElement.style.overflow = "auto";
 }
+
+document
+    .getElementById("modal_success_button")
+    .addEventListener("click", pushDaily);
