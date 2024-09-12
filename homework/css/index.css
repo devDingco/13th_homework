@@ -3,7 +3,6 @@
     /* height:100vh; */
     text-decoration: none;
     color:#000;
-    background-color:#fff;
     font-size:62.5%;
 }
 .top_scroll{
@@ -106,6 +105,10 @@ header h1{
 }
 .content .diary_select_bg .diary_select{
     width:116.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:center;
 }
 .content .diary_select_bg .diary_select select{
     width:12rem;
@@ -119,107 +122,121 @@ header h1{
     filter: invert(1);
 }
 
+/* 일기쓰기 버튼 */
+.write_btn{
+    width:12rem;
+    height:4.8rem;
+    border-radius:0.8rem;
+    padding:0.8rem 1rem 0.8rem 1rem;
+    background-color:#000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    /* flex-wrap:wrap; */
+}
+.write_btn .write_img{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../img/add_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.png) no-repeat center;
+}
+
+.write_btn p{
+    /* width:6.2rem; */
+    height:2.4rem;
+    line-height:2.4rem;
+    color:#fff;
+    font-size:1.8rem;
+    background:transparent;
+}
+
 .diary{
     width:116.8rem;
+    height:116.7rem;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-between;
 }
-.content .content_box{
+.diary_bg{
     width:78.4rem;
+    height:37.3rem;
     display:flex;
-    /* justify-content:center; */
     flex-wrap:wrap;
     gap:1.6rem;
-    position:relative;
 }
-.content .content_box .content_trans{
-    position:relative;
-}
-.content .content_box .diary_close{
-    position:absolute;
-    z-index:10;
-    top:1rem;
-    right:1rem;
-    width:2.4rem;
-    height:2.4rem;
-    background:url(../img/close\ icon.png) no-repeat center;
-    cursor:pointer;
-}
-.content_box .emotion p{
-    font-size:1.4rem;
-    font-weight:400;
-}
-.content_box .emotion p:last-child{
-    color:#919191;
-}
-.content_box .content_title{
-    font-size:1.8rem;
-    font-weight:700;
-}
-.content .content_box .content1,.content2,.content3,.content4,.content5,.content6{
+.content_bg{
     width:38rem;
     height:37.3rem;
     border-radius:1.6rem;
-    /* padding:0 0 16px 0; */
-    /* background:#000; */
+    padding:0 0 1.6rem 0;
 }
-.content .content_box .content_trans{
-    /* background-size:cover; */
-    transition:transform 0.5s, filter 0.5s;
-}
-.content .content_box .content_trans:hover{
+.content_bg:hover{
     transform:scale(1.1);
-    /* filter:blur(5px); */
+    transition-duration:0.5s;
 }
-.content .content_box .content_trans:hover .content_box_bg{
-    filter:blur(0.5rem);
+.diary_close{
+    position:absolute;
+    width:1.315rem;
+    height:1.315rem;
+    background:url(../img/close\ icon.png) no-repeat center;
 }
-.content .content_box .content1 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 47.png);
-}
-.content .content_box .content2 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 46.png);
-}
-.content .content_box .content3 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 48.png);
-}
-.content .content_box .content4 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 49.png);
-}
-.content .content_box .content5 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 25.png);
-}
-.content .content_box .content6 .content_box_bg{
-    width:38rem;
-    height:28.5rem;
-    border-radius:1.6rem;
-    background-image:url(../img/Frame\ 49.png);
-}
-.content_bt{
-    padding:0.8rem;
-}
-.content_bt .emotion{
+.content_title{
     display:flex;
     justify-content:space-between;
+    padding:0.8rem;
 }
-.content_bt .emotion p{
-    padding:0.8rem 0 0.8rem 0;
+.content_title .happy{
+    color:#EA5757;
+    font-size:1.4rem;
+    font-weight:600;
+}
+.content_title .sad{
+    color:#28B4E1;
+    font-size:1.4rem;
+    font-weight:600;
+}
+.content_title .surp{
+    color:#D59029;
+    font-size:1.4rem;
+    font-weight:600;
+}
+.content_title .angry{
+    color:#777;
+    font-size:1.4rem;
+    font-weight:600;
+}
+.content_title .etc{
+    color:#A229ED;
+    font-size:1.4rem;
+    font-weight:600;
+}
+.content_bg .diary_date{
+    font-size:1.4rem;
+    font-weight:400;
+    line-height:2.4rem;
+    color:#919191;
+}
+.content_bg .diary_title{
+    font-size:1.8rem;
+    font-weight:700;
+    line-height:2.4rem;
+    padding:0 0.8rem 0 0.8rem;
+}
+
+/* 모달 */
+.modal_group{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    /* background-color:gray;
+    opacity: 50%; */
+} 
+.modal_bg{
+    width:100vw;
+    height:100vh;
+    background-color:gray;
+    opacity:50%;
 }
 
 .write_bg{
@@ -230,9 +247,12 @@ header h1{
     border-radius:1.6rem;
     padding:2.4rem;
     height:60.4rem;
-    /* position:absolute;
-    top:0;
-    right:0; */
+    position:absolute;
+    width:65rem;
+    height:56rem;
+    top:calc(50% - 56rem/2);
+    left:calc(50% - 64rem/2);
+    background-color:#fff;
 }
 .write .em_title p{
     font-size:2rem;
@@ -243,8 +263,8 @@ header h1{
     margin:2rem 0;
 }
 .write .em_menu{
-    width:31.2rem;
-    height:6.8rem;
+    width:59.2rem;
+    height:2.4rem;
     display:flex;
     flex-wrap:wrap;
 }
@@ -267,12 +287,12 @@ header h1{
     margin:2rem 0;
 }
 .write .write_title input{
-    width:31.2rem;
+    width:59.2rem;
     height:4.8rem;
     border-radius:0.8rem;
     border:0.1rem solid #D4D3D3;
-    padding:0;
-    text-align:center;
+    padding-left:1rem;
+    /* text-align:center; */
     font-size:1.6rem;
 }
 .write .write_memo p{
@@ -280,17 +300,37 @@ header h1{
     margin:2rem 0;
 }
 .write .write_memo textarea{
-    width:31.2rem;
+    width:59.2rem;
     height:12.8rem;
     border-radius:0.8rem;
     border:0.1rem solid #D4D3D3;
-    padding:0;
-    line-height:12.8rem;
-    text-align:center;
+    padding:1rem;
+    /* line-height:12.8rem; */
+    /* text-align:center; */
     font-size:1.6rem;
 }
-.write .write_btn button{
-    width:31.2rem;
+.write_modal_btn{
+    display:flex;
+    justify-content:center;
+}
+.write .modal_close button{
+    width:10.4rem;
+    height:4.8rem;
+    border-radius:0.8rem;
+    padding:0.8rem 1rem 0.8rem 1rem;
+    border:1px solid #000;
+    background-color:#fff;
+    margin-top:3rem;
+    color:#000;
+    font-size:1.8rem;
+    font-weight:600;
+    cursor:pointer;
+}
+.write .regi_btn{
+    margin-left:10px;
+}
+.write .regi_btn button{
+    width:10.4rem;
     height:4.8rem;
     border-radius:0.8rem;
     padding:0.8rem 1rem 0.8rem 1rem;
@@ -300,6 +340,28 @@ header h1{
     color:#f2f2f2;
     font-size:1.8rem;
     font-weight:600;
+    cursor:pointer;
+}
+
+.regi_modal_group{
+    /* display:none; */
+    position:absolute;
+    top:0;
+    left:0;
+}
+.regi_modal_bg{
+    width:100vw;
+    height:100vh;
+    background-color:gray;
+    opacity:50%;
+}
+.regi_modal{
+    width:48rem;
+    height:20rem;
+    position:absolute;
+    top:calc(50% - 48rem / 2);
+    left:calc(50% - 20rem / 2);
+    background-color:#fff;
 }
 
 footer{
