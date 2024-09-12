@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>사진 보관함</title>
     <link rel="stylesheet" href="./photo.css" />
   </head>
@@ -20,12 +22,37 @@
           </button>
         </a>
       </div>
-      <div id="selectContainer">
-        <select id="selectPhoto" onchange="filteredPhoto(event)">
-          <option id="basic" selected value="기본">기본</option>
-          <option id="horizontal" value="가로형">가로형</option>
-          <option id="vertical" value="세로형">세로형</option>
-        </select>
+      <div id="selectContainer" class="filter">
+        <input type="checkbox" class="filterTitle" id="customFilter" />
+        <ul class="photoFilter" id="photoFilter">
+          <li>
+            <input
+              type="radio"
+              name="photo"
+              id="basic"
+              value="기본"
+              onclick="filteredPhoto(event)"
+            /><label for="basic">기본</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="photo"
+              id="horizontal"
+              value="가로형"
+              onclick="filteredPhoto(event)"
+            /><label for="horizontal">가로형</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="photo"
+              id="vertical"
+              value="세로형"
+              onclick="filteredPhoto(event)"
+            /><label for="vertical">세로형</label>
+          </li>
+        </ul>
       </div>
       <div id="photoList"></div>
     </div>

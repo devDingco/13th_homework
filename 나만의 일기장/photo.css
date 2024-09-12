@@ -47,7 +47,7 @@ button {
       border: none;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 24px;
       letter-spacing: -0.01em;
       padding: 5px 10px;
@@ -125,4 +125,98 @@ button {
     padding: 20px;
     overflow: scroll;
   }
+  #photoList {
+    padding: 20px;
+  }
+  .list {
+    width: 100%;
+
+    padding: 20px;
+    img {
+      width: 100%;
+    }
+  }
+}
+.filter {
+  margin-bottom: 30px;
+  margin-right: 1rem;
+}
+
+/* Filter custom */
+.filterTitle {
+  appearance: none;
+  width: 100px;
+  /* height: 40px; */
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  --inputValue: '전체';
+}
+.filterTitle::after {
+  content: var(--inputValue);
+}
+
+.filterTitle:checked + .photoFilter {
+  display: block;
+}
+
+.photoFilter {
+  display: none;
+  width: 100px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 100;
+  background-color: #f2f2f2;
+}
+
+.photoFilter input {
+  display: none;
+}
+.photoFilter li:hover {
+  background: url('./images/check.png') no-repeat right 8px center;
+
+  background-size: 0.8em;
+}
+.photoFilter li:checked {
+  background: url('./images/check.png') no-repeat right 8px center;
+
+  background-size: 0.8em;
+}
+.photoFilter label {
+  display: block;
+  /* height: 40px; */
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+.selected {
+  z-index: 10;
+  background-color: #e3eddf;
+  background: url('./images/check.png') no-repeat right 8px center;
+  background-size: 0.8em;
+}
+
+.photoFilter label:hover {
+  color: #299c00;
+
+  cursor: pointer;
+}
+
+.photoFilter label:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e3eddf;
+  z-index: -1;
+  overflow: hidden;
 }
