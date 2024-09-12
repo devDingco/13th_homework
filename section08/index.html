@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다이어리 만들기</title>
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/common.modal.css" />
+    <link
+      rel="stylesheet"
+      href="./css/index.mobile.css"
+      media="(max-width: 849px)"
+    />
+    <script src="./javascript/index.js"></script>
+    <script src="./javascript/common.modal.js"></script>
+  </head>
+  <body>
+    <div class="CSS_레이아웃">
+      <!--헤더-->
+      <div class="CSS_타이틀">민지의 다이어리</div>
+      <img class="CSS_배너이미지" src="./assets/images/banner.png" />
+
+      <!--내비게이션-->
+      <nav class="CSS_탭">
+        <div
+          id="HTML_일기보관함탭"
+          class="CSS_탭_텍스트"
+          onclick="JS_메뉴이동('일기')"
+        >
+          일기보관함
+        </div>
+        <div
+          id="HTML_사진보관함탭"
+          class="CSS_탭_텍스트"
+          onclick="JS_메뉴이동('사진')"
+        >
+          사진보관함
+        </div>
+      </nav>
+
+      <!-- 일기보관함 필터 -->
+      <div id="HTML_일기보관함필터" class="CSS_필터_영역_배경">
+        <div class="CSS_필터_영역">
+          <input
+            type="checkbox"
+            id="HTML_기분드롭다운제목"
+            class="CSS_드롭다운제목"
+          />
+          <ul id="HTML_기분드롭다운메뉴" class="CSS_드롭다운메뉴">
+            <li>
+              <input
+                type="radio"
+                id="전체"
+                name="HTML_기분선택"
+                value="전체"
+                checked
+                onclick="JS_기분드롭다운선택기능(event)"
+              /><label for="전체"
+                >전체<img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="행복"
+                name="HTML_기분선택"
+                value="행복해요"
+                onclick="JS_기분드롭다운선택기능(event)"
+              />
+              <label for="행복"
+                >행복해요 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="슬픔"
+                name="HTML_기분선택"
+                value="슬퍼요"
+                onclick="JS_기분드롭다운선택기능(event)"
+              /><label for="슬픔"
+                >슬퍼요 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="놀람"
+                name="HTML_기분선택"
+                value="놀랐어요"
+                onclick="JS_기분드롭다운선택기능(event)"
+              /><label for="놀람"
+                >놀랐어요 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="화남"
+                name="HTML_기분선택"
+                value="화나요"
+                onclick="JS_기분드롭다운선택기능(event)"
+              /><label for="화남"
+                >화나요 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="기타"
+                name="HTML_기분선택"
+                value="기타"
+                onclick="JS_기분드롭다운선택기능(event)"
+              /><label for="기타"
+                >기타 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+          </ul>
+          <label for="HTML_기분드롭다운제목">
+            <img
+              id="HTML_드롭다운아이콘"
+              class="CSS_드롭다운아이콘"
+              src="./assets/images/dropdown.png"
+              alt="드롭다운"
+            />
+          </label>
+        </div>
+        <div class="CSS_서치바_영역">
+          <div class="CSS_서치바">
+            <img
+              class="CSS_서치바_아이콘"
+              src="./assets/images/search.png"
+              alt="서치바아이콘"
+            />
+            <input
+              class="CSS_서치바_인풋"
+              placeholder="검색어를 입력해 주세요."
+              oninput="JS_검색기능(event)"
+            />
+          </div>
+        </div>
+        <div class="CSS_일기쓰기버튼_영역">
+          <button
+            class="CSS_일기쓰기버튼"
+            onclick="JS_모달열기기능('HTML_등록모달그룹')"
+          >
+            <img src="./assets/images/plus.png" class="CSS_plus부분" />
+            <div class="CSS_일기쓰기버튼_텍스트">일기쓰기</div>
+          </button>
+        </div>
+      </div>
+
+      <!--사진보관함 필터-->
+      <div id="HTML_사진보관함필터" class="CSS_필터_영역_배경">
+        <div class="CSS_필터_영역">
+          <input
+            type="checkbox"
+            id="HTML_사진드롭다운제목"
+            class="CSS_드롭다운제목"
+          />
+          <ul id="HTML_사진드롭다운메뉴" class="CSS_드롭다운메뉴">
+            <li>
+              <input
+                type="radio"
+                id="기본형"
+                name="HTML_사진비율선택"
+                value="기본형"
+                checked
+                onclick="JS_사진드롭다운선택기능(event)"
+              /><label for="기본형"
+                >기본형 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="가로형"
+                name="HTML_사진비율선택"
+                value="가로형"
+                onclick="JS_사진드롭다운선택기능(event)"
+              /><label for="가로형"
+                >가로형 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="세로형"
+                name="HTML_사진비율선택"
+                value="세로형"
+                onclick="JS_사진드롭다운선택기능(event)"
+              /><label for="세로형"
+                >세로형 <img src="./assets/images/dropdown-checked.png"
+              /></label>
+            </li>
+          </ul>
+          <label for="HTML_사진드롭다운제목">
+            <img
+              id="HTML_드롭다운아이콘"
+              class="CSS_드롭다운아이콘"
+              src="./assets/images/dropdown.png"
+              alt="드롭다운"
+            />
+          </label>
+        </div>
+      </div>
+
+      <main id="HTML_일기보관함메인" class="CSS_메인">
+        <!--일기 보여주는 곳-->
+        <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
+
+        <!-- 등록모달 -->
+        <div id="HTML_등록모달그룹" class="CSS_공통모달그룹">
+          <div
+            class="CSS_공통모달배경"
+            onclick="JS_모달닫기기능('HTML_등록모달그룹')"
+          ></div>
+          <div class="CSS_등록상자">
+            <div class="CSS_등록상자_내부">
+              <div class="CSS_등록상자_헤더">
+                <div class="CSS_등록상자_제목">📍일기 쓰기</div>
+                <div class="CSS_다크모드">
+                  <label for="다크모드" class="CSS_다크모드_라벨"
+                    >다크모드</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="다크모드"
+                    class="CSS_다크모드_토글"
+                    onclick="JS_다크모드(event)"
+                  />
+                </div>
+              </div>
+              <div class="CSS_등록상자_기분">
+                <div class="CSS_등록상자_기분_타이틀">
+                  오늘 기분은 어땠나요?
+                </div>
+                <div class="CSS_라디오그룹">
+                  <div class="CSS_라디오버튼">
+                    <input
+                      type="radio"
+                      name="HTML_기분선택버튼"
+                      value="행복"
+                      checked
+                    />
+                    <div>행복해요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                    <div>슬퍼요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                    <div>놀랐어요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                    <div>화나요</div>
+                  </div>
+                  <div class="CSS_라디오버튼">
+                    <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                    <div>기타</div>
+                  </div>
+                </div>
+              </div>
+              <div class="CSS_일기입력상자">
+                <div class="CSS_일기쓰기">
+                  <div class="CSS_인풋라벨">제목</div>
+                  <input
+                    type="text"
+                    id="HTML_제목입력창"
+                    placeholder="제목을 입력해 주세요."
+                  />
+                </div>
+                <div class="CSS_일기쓰기">
+                  <div class="CSS_인풋라벨">내용</div>
+                  <textarea
+                    id="HTML_내용입력창"
+                    rows="5"
+                    placeholder="내용을 입력해 주세요."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="CSS_모달버튼부분">
+                <button
+                  type="button"
+                  class="CSS_모달_버튼 CSS_모달_닫기버튼"
+                  onclick="JS_모달열기기능('HTML_등록취소모달그룹')"
+                >
+                  닫기
+                </button>
+                <button
+                  type="button"
+                  id="HTML_등록하기버튼"
+                  class="CSS_모달_버튼 CSS_모달_등록하기버튼"
+                  onclick="JS_모달열기기능('HTML_등록완료모달그룹');JS_글쓰기기능();"
+                  disabled
+                >
+                  등록하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 등록완료모달 -->
+        <div id="HTML_등록완료모달그룹" class="CSS_공통모달그룹">
+          <div class="CSS_공통모달배경"></div>
+          <div class="CSS_등록완료상자">
+            <b class="CSS_등록완료제목">일기 등록 완료</b>
+            <p class="CSS_등록완료내용">등록이 완료 되었습니다.</p>
+            <button
+              class="CSS_모달_등록완료버튼"
+              onclick="JS_모달닫기기능('HTML_등록완료모달그룹');JS_모달닫기기능('HTML_등록모달그룹');"
+            >
+              확인
+            </button>
+          </div>
+        </div>
+
+        <!-- 일기 삭제 모달 -->
+        <div id="HTML_일기삭제모달그룹" class="CSS_공통모달그룹">
+          <div class="CSS_공통모달배경"></div>
+          <div class="CSS_등록삭제상자">
+            <b class="CSS_일기삭제제목">일기 삭제</b>
+            <p class="CSS_일기삭제내용">일기를 삭제하시겠어요?</p>
+            <div class="CSS_등록취소버튼영역">
+              <button
+                onclick="JS_모달닫기기능('HTML_일기삭제모달그룹');"
+                class="CSS_모달_버튼 CSS_모달_닫기버튼"
+              >
+                취소
+              </button>
+
+              <button
+                class="CSS_모달_버튼 CSS_모달_등록하기버튼"
+                onclick="JS_일기삭제확인기능()"
+              >
+                삭제
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="CSS_pagination_group">
+          <button id="HTML_pagination_move_prev_button" onclick="JS_move_prev">
+            <
+          </button>
+          <div id="HTML_pagination" class="CSS_pagination"></div>
+          <button id="HTML_pagination_move_next_button" onclick="JS_move_prev">
+            >
+          </button>
+        </div>
+        <!-- 등록취소모달 -->
+        <div id="HTML_등록취소모달그룹" class="CSS_공통모달그룹">
+          <div class="CSS_공통모달배경"></div>
+          <div class="CSS_등록취소상자">
+            <b class="CSS_등록취소제목">일기 등록 취소</b>
+            <p class="CSS_등록취소내용">일기 등록을 취소 하시겠어요?</p>
+            <div class="CSS_등록취소버튼영역">
+              <button
+                onclick="JS_모달닫기기능('HTML_등록취소모달그룹');"
+                class="CSS_모달_버튼 CSS_모달_닫기버튼"
+              >
+                계속 작성
+              </button>
+              <button
+                class="CSS_모달_버튼 CSS_모달_등록취소버튼"
+                onclick="JS_모달닫기기능('HTML_등록취소모달그룹');JS_모달닫기기능('HTML_등록모달그룹');"
+              >
+                등록 취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 사진보관함 -->
+      <main id="HTML_사진보관함메인" class="CSS_메인">
+        <div
+          id="HTML_강아지사진보여주는곳"
+          class="CSS_강아지사진보여주는곳"
+        ></div>
+        <div id="HTML_스켈레톤" class="CSS_스켈레톤">
+          <div class="CSS_스켈레톤박스">
+            <div class="CSS_스켈레톤막대기"></div>
+          </div>
+          <div class="CSS_스켈레톤박스">
+            <div class="CSS_스켈레톤막대기"></div>
+          </div>
+          <div class="CSS_스켈레톤박스">
+            <div class="CSS_스켈레톤막대기"></div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 플로팅버튼 -->
+      <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
+        <img
+          class="CSS_플로팅이미지"
+          src="./assets/images/floatingButton.png"
+          onclick="JS_스크롤위로기능()"
+        />
+      </button>
+    </div>
+
+    <!--푸터-->
+    <footer id="HTML_푸터" class="CSS_푸터_영역">
+      <div class="CSS_푸터">
+        <div class="CSS_푸터_제목">민지의 다이어리</div>
+        <p class="CSS_푸터_대표">대표 : {name}</p>
+        <p class="CSS_푸터_Copyright">Copyright © 2024.{name} Co., Ltd.</p>
+      </div>
+    </footer>
+  </body>
+</html>
