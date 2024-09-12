@@ -1,6 +1,6 @@
 'use strict';
 
-import {throttle} from './functool.js';
+import {throttle, debounce} from './functool.js';
 
 const assetMap = {
     "banner" : "../asset/img/d72d05561bfdb209c688de2957f78ef1.jpeg",
@@ -218,8 +218,8 @@ function add10PicsWrapper() {
     let scroll = 0;
     function inner(e) {
         if (scroll>document.documentElement.scrollTop) return;
-        console.log(scroll);
-        console.log(document.documentElement.scrollTop);
+        // console.log(scroll);
+        // console.log(document.documentElement.scrollTop);
         scroll = document.documentElement.scrollTop;
         const templateHTML = document.querySelector("template.dog-image-template");
         const imageList = document.querySelector("ul.image-scroll-zone");
@@ -275,7 +275,27 @@ document.querySelector("input.dark-btn").addEventListener("change", e => {
 
 window.addEventListener("scroll", throttle(add10Pics, {debug:false}));
 
-document.querySelector("input.search-input").addEventListener("input", e => {
-    console.log(e.target.value);
-    console.log(e.data);
-});
+document.querySelector("input.search-input").addEventListener("input", debounce(printQueryResult, {debug:true}));
+
+// ("input", e => {
+//     // console.log(e.target.value); // whole input
+//     // console.log(e.data); // 1 letter
+
+// });
+
+function getQueryBase(emotion) {
+    if (emotion === null) return JSON.parse(localStorage.getItem("diaryArray")).filter(element => element !== null);
+    return JSON.parse(localStorage.getItem("diaryArray")).filter(element => {
+        element !== null && element["emotion"] === emotion;
+    });
+}
+
+function getQueryResult(query) {
+    const selection = document.querySelector("selection#dropdownEmotionFilter").querySelector(":checked").value;
+    const emotionMap = {"전체": null, "행복해요": "happy", "슬퍼요": "sad", "놀랐어요": "surprised", "화나요": "angry", "기타": "other"};
+    return getQueryBase(emotionMap[selection]).filter(element => element.match(/`${query}`/).length > 0);
+}
+
+function printQueryResult(...e) {
+    console.log(e);
+}

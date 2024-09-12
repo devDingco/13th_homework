@@ -88,7 +88,7 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
         if (!!debug) {
             console.timeLog(debugLabel);
             console.dir(args);
-            console.log("</Throttled Event>");
+            console.log(`</${debugLabel}>`);
         }
     };
 }
@@ -127,28 +127,37 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
 // 2. Timer must last full duration
 // 3. Event is ignored during "Timer on" phase
 // 4. At most 1 timer is on, and Timer on/Timer off do not coincide at exact same timestamp
+// 5. (Bugfix) Debounce should apply args from latest source, not the source from which the timer was set on.
 
-function debounce(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
-    if (!!debug) console.time(debugLabel);
-    let timer = null;
-    return (...args) => {
-        if (!!timer) {
-            if (!!debug) {
-                console.log("<Ignored Event>");
-                console.dir(args);
-                console.log("</Ignored Event>");
+function debounceWrapper() {
+    let array = [];
+    function debounceInner(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
+        if (!!debug) console.time(debugLabel);
+        let timer = null;
+        return (...args) => {
+            if (!!timer) {
+                if (!!debug) {
+                    console.log("<Ignored Event>");
+                    console.dir(args);
+                    console.log("</Ignored Event>");
+                }
+                array = args;
+                return; // Invariant 3
             }
-            return; // Invariant 3
-        }
-        setTimeout(...args => {
-            if (!!debug) {
-                console.timeLog(debugLabel);
-                console.dir(args);
-                console.log("</Throttled Event>");
-            }
-            eventListener.apply(args); // Invariant 1, 2, 4
-        }, timeout);
-    };
+            setTimeout(() => {
+                if (!!debug) {
+                    console.timeLog(debugLabel);
+                    console.dir(args);
+                    console.log(`</${debugLabel}>`);
+                }
+                //eventListener.apply(args); // Invariant 1, 2, 4
+                eventListener.apply(array);
+            }, timeout);
+        };
+    }
+    return debounceInner;
 }
+
+const debounce = debounceWrapper();
 
 export { isNumber, throttle, debounce }; 
