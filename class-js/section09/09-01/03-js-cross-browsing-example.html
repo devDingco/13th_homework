@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>크로스브라우징 CAN_I_USE, MDN 실습</title>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3.38.1/minified.min.js"></script> -->
+  <script>
+    const JS_기능 = () => {
+      const 철수프로필 = {
+        이름: "철수",
+        나이: 12
+      }
+      const 철수문자열 = JSON.stringify(철수프로필)
+
+      // 사파리 안됨
+      JSON.parse(철수문자열, (key, value, context) => {
+        console.log(context)
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+  <button onclick="JS_기능()">안되는거 보여줘</button>
+</body>
+
+</html>
