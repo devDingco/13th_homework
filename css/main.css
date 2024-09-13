@@ -168,6 +168,20 @@ section .diaryList ul li {
   border: 1px solid var(--list-border-color);
   border-radius: 20px;
 }
+section .diaryList ul li .emojiBox {
+  width: 60%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  display: none;
+}
+section .diaryList ul li .emojiBox li img {
+  width: 100%;
+}
 section .diaryList ul li a {
   display: block;
 }
