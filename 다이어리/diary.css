@@ -4,6 +4,16 @@
   padding: 0;
   max-width: 100%;
 }
+body {
+	font-family: 'Pretendard-Regular';
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 .layout {
   display: flex;
   width: 120rem;
@@ -324,7 +334,7 @@
   gap: 1.5rem;
   padding-top: 2.625rem;
 }
-.diary_entry_container {
+#diary_entry_container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1.5rem;
@@ -810,7 +820,7 @@
     align-items: start;
     gap: 0.75rem;
   }
-  .diary_entry_container {
+  #diary_entry_container {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;

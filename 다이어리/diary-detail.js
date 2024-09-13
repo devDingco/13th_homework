@@ -117,19 +117,10 @@ const handleContentCopy = () => {
   }, 2000);
 };
 
-const closeSingleModal = (modal) => {
-  document.getElementById(modal).style = "display: none;";
-};
-
-const triggerModal = (modal) => {
-  document.getElementById(modal).style = "display: flex;";
-  document.getElementById("deleteDiaryBtn").focus();
-};
-
 const confirmDeleteDiary = (event) => {
   event.preventDefault();
   deleteId = event.target.className;
-  triggerModal("confirm_delete_diary_modal_detail_page");
+  onTriggerModal("confirm_delete_diary_modal_detail_page");
 };
 
 createHtml(diary);
