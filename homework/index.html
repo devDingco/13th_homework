@@ -22,20 +22,24 @@
         </div>
         <div class="diary_select_bg">
             <div class="diary_select">
-                <select onchange="(event)">
-                    <option>전체</option>
-                    <option value="happy">행복해요</option>
-                    <option value="sad">슬퍼요</option>
-                    <option value="sup">놀랐어요</option>
-                    <option value="angry">화나요</option>
-                    <option value="etc">기타</option>
-                </select>
-                <!-- <div> -->
-                    <button class="write_btn" onclick="modal_btn()">
-                        <div class="write_img"></div>
-                        <p>일기쓰기</p>
-                    </button>
-                <!-- </div> -->
+                <div class="diary_select_left">
+                    <select onchange="(event)">
+                        <option>전체</option>
+                        <option value="happy">행복해요</option>
+                        <option value="sad">슬퍼요</option>
+                        <option value="sup">놀랐어요</option>
+                        <option value="angry">화나요</option>
+                        <option value="etc">기타</option>
+                    </select>
+                    <div class="search_bg">
+                        <input type="text" placeholder="검색어를 입력하세요.">
+                        <img src="./img/Vector.png" alt="">
+                    </div>
+                </div>
+                <button class="write_btn" onclick="modal_btn()">
+                    <div class="write_img"></div>
+                    <p>일기쓰기</p>
+                </button>
             </div>
         </div>
         <div class="diary">
@@ -79,7 +83,7 @@
                     </div>
                     <div class="write_modal_btn">
                         <div class="modal_close">
-                            <button onclick="modal_close()">닫기</button>
+                            <button onclick="regi_cancel()">닫기</button>
                         </div>
                         <div class="regi_btn">
                             <button onclick="register()">등록하기</button>
@@ -91,16 +95,16 @@
                     <div class="regi_modal">
                         <h2>일기 등록 완료</h2>
                         <p>등록이 완료 되었습니다.</p>
-                        <button>확인</button>
+                        <button onclick="check_close()">확인</button>
                     </div>
                 </div>
-                <div class="regi_cancel_group">
+                <div class="regi_cancel_group" id="regi_cancel_group">
                     <div class="regi_cancel_bg"></div>
                     <div class="regi_cancel">
                         <h2>일기 등록 취소</h2>
                         <p>일기 등록을 취소 하시겠어요?</p>
-                        <button>계속 작성</button>
-                        <button>등록 취소</button>
+                        <button onclick="cancel_close()">계속 작성</button>
+                        <button onclick="modal_close()">등록 취소</button>
                     </div>
                 </div>
             </div>

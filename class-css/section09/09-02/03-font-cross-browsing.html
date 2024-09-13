@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>폰트 크로스브라우징 실습</title>
+    <style>
+        @font-face {
+            font-family: 맹구의폰트;
+            src: url("./00-myfont03-cross-browsing.ttf");
+        }
+
+        @media not all and (min-resolution: 0.001dpcm){
+            div{
+                color:blue;
+            }
+        }
+
+        .CSS_폰트연습 {
+            font-family:맹구의폰트;
+        }
+    </style>
+</head>
+<body>
+    <div class="CSS_폰트연습">폰트연습</div>
+</body>
+</html>

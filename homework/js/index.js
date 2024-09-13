@@ -3,13 +3,23 @@ const top_scroll = () => {
     window.scrollTo( {top:0, behavior:"smooth" })
 }
 
+// window.onload = () => {
+//     register();
+// }
+
 // 일기등록
 // 배열
 const diaryList = [];
 const register = () => {
 
+    // 등록확인모달
+    document.getElementById("regi_modal_group").style="display:block;"    
     // 날짜
     const date = new Date();
+
+    // localStorage 
+    const diary_storage = window.localStorage.getItem("my_diary") ?? "[]";
+    const diaryList = JSON.parse(diary_storage);
 
     const ymd = {
         year:date.getFullYear(),
@@ -36,6 +46,8 @@ const register = () => {
         작성일: diaryDate
     };
     diaryList.push(diaryArray);
+    // 일기 로컬스토리지에 저장
+    window.localStorage.setItem("my_diary", JSON.stringify(diaryList));
 
     // 마지막 순서로 추가
     const diaryNumber = diaryList.length-1;
@@ -46,6 +58,7 @@ const register = () => {
     // 일기 만들기
     const newDiary = `
         <div class="content_bg" onclick="diary_detail_info(${diaryNumber})">
+            <img class="diary_close" src="./img/close icon.png" alt="">
             <div class="diary_content">
                 ${happy === true ? '<img class="emotion_img" src="./img/happy.png" alt="행복">':""}
                 ${sad === true ? '<img class="emotion_img" src="./img/sad.png" alt="슬픔">':""}
@@ -69,12 +82,12 @@ const register = () => {
         window.document.getElementById("diary_box").innerHTML = diaryBr + newDiary;
     }
 
-
     const diary_detail_info = (diaryNumberBox) => {
         const diaryArray = diaryList[diaryNumberBox];
         const diaryTitle = diaryArray.제목;
         const diaryMemo = diaryArray.내용;
-        const diaryNumber = diaryArray.번호;
+        // const diaryNumber = diaryArray.번호;
+        console.log("111")
 
         alert(
             `
@@ -83,17 +96,32 @@ const register = () => {
             `
         );
 
-        document.getElementById("regi_modal_bg").style="display:block;"
+        // location.href =`./detail.html?diaryNumber=${diaryNumberBox}`;
     };
 
 
 // 모달
 const modal_btn = () => {
     document.getElementById("modal").style="display:block;"
+    document.getElementById("regi_cancel_group").style="display:none;"
+    document.getElementById("regi_modal_group").style="display:none;"
 }
 const modal_close = () => {
     document.getElementById("modal").style="display:none;"
 }
+
+// 일기등록취소모달
+const regi_cancel = () => {
+    document.getElementById("regi_cancel_group").style="display:block;"
+}
+const cancel_close = () => {
+    document.getElementById("regi_cancel_group").style="display:none;"
+}
+
+const check_close = () => {
+    document.getElementById("regi_modal_group").style="display:none;"
+}
+
 
 // 스크롤 내리면 필터 색 변경
 window.onscroll = () => {

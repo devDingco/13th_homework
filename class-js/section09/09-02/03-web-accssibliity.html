@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>웹접근성 실습</title>
+</head>
+<body>
+    <!-- 웹접근성 이미지안내 -->
+    <img src="./../../../homework/img/angry.png" alt="강아지이미지" width="100px">
+
+    <!-- 웹접근성 차단하기 -->
+    <img src="./../../../homework/img/angry.png" alt="강아지이미지" width="100px" aria-hidden="true">
+
+    <!-- 웹접근성 기본 -->
+    <button>클릭하여 찾아보세요</button>
+
+    <!--  -->
+    <button aria-label="이걸클릭하면 찾아집니다.">클릭하여 찾아보세요</button>
+
+    <button aria-label="이걸클릭하면 찾아집니다." role="button">클릭하여 찾아보세요</button>
+    <button aria-label="이걸클릭하면 찾아집니다." role="search">클릭하여 찾아보세요</button>
+</body>
+</html>
