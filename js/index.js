@@ -159,15 +159,25 @@ if (localStorage.getItem("lightStatus") === "off") {
 }
 
 
+
+
+
 // !헤더 배너 렌더링 함수
 const headerBanner = () => {
+  const imgData = pixelsImgData();
+  const imgTextArr = koreanAdviceGet(5);
   const headerBanner = document.querySelector(".headerBanner");
   if (!headerBanner) return
+
+  const slideImg = imgData.map((img, idx) => {
+    return `<swiper-slide><div class="title"><h3>${imgTextArr[idx].message}</h3><p>• ${imgTextArr[idx].author} •</p></div><img src="${img}" alt="헤더 배너 이미지" /></swiper-slide>`
+  }).join("");
+
+  //pagination="true", navigation="true" 
   headerBanner.innerHTML = `
-  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="0"
+  <swiper-container class="mySwiper" pagination-clickable="true" space-between="0" speed="600"
     centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-    <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
-    <swiper-slide><img src="./img/mainBanner.jpeg" alt="메인이미지입니다." /></swiper-slide>
+    ${slideImg}
   </swiper-container>
   `
 }
@@ -197,6 +207,7 @@ const footerBox = () => {
     <div class="footerInner">
         <h2><span class="userName"></span>의 다이어리</h2>
         <p><span class="userName"></span>의 일상을 기록하는 공간입니다.</p>
+        <a href="https://www.pexels.com">Photos provided by Pexels</a>
         <p>© 2024. All rights reserved.</p>
     </div>
   `
