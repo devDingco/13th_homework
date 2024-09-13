@@ -2,6 +2,12 @@
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
+  font-family: fontVar;
+}
+
+@font-face {
+  font-family: fontVar;
+  src: url("./assets/Pretendard-Black.woff2");
 }
 
 body {
