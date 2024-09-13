@@ -1,7 +1,6 @@
 
 // !다이어리 리스트 노출 함수 -> 페이징 처리한 함수로 변경
 const diaryListSet = (arr) => {
-
   const viewListCount = document.querySelector(".diaryList").dataset.viewlistcount;
   pageListElement(viewListCount, 1, ".diaryList")
 
@@ -58,6 +57,13 @@ const diaryLiRender = (diary) => {
   // console.log(diaryId);
   return `<li>
     <a href="./detail.html?diaryId=${diaryId}&#commentListWrap">
+    <ul class="emojiBox">
+        <li><img src="./img/웃는얼굴.svg" alt="웃는얼굴"></li>
+        <li><img src="./img/우는얼굴.svg" alt="우는얼굴"></li>
+        <li><img src="./img/화난얼굴.svg" alt="화난얼굴"></li>
+        <li><img src="./img/좋아요.svg" alt="좋아요"></li>
+        <li><img src="./img/최고에요.svg" alt="최고에요"></li>
+    </ul>
     <button class="closeBtn" onclick="diaryDeletePop(event,${diaryId})">
     <img src="./img/close_outline_light_m.svg" alt="일기 삭제 버튼">
     </button>
@@ -91,17 +97,24 @@ const writeCancelPop = () => popupRender("writeCancelPop",
 
 // !일기 등록하기 클릭시 일기 쓰기 팝업창 렌더링 함수
 const diaryWritePop = () => {
+
   const darkModeCheck = localStorage.getItem("lightStatus")
   let darkModeStatus = false;
   if (darkModeCheck) {
     darkModeStatus = darkModeCheck === "off" ? true : false;
   }
 
+  const weatherData = JSON.parse(localStorage.getItem("weatherData"))[0];
+  //    <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
   // 팝업 창 렌더링 처리
   popupRender("diaryWritePop",
     `<div class="diaryWrite">
           <div class="diaryWriteHeader">
-            <h3>📍<span class="userName"></span>의 일기 쓰기</h3>
+           <div>
+            <span>오늘의 날씨</span>
+            <div><img src="${weatherData.weatherIcon}" alt=""/></div>
+            <span>${weatherData.weatherDesc}</span>
+          </div>
             <label class="toggleWrap">
             다크모드<input class="toggleSwitch" type="checkbox" onclick="darkModeToggle(event)" checked="${darkModeStatus}" />
             </label>
@@ -189,6 +202,7 @@ const diarySave = () => {
 const moodFilter = (optionValue) => {
 
   const moodType = optionValue;
+
   const filterListSet = (moodType) => {
     // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
     const diaryFilterList = diaryArr.filter((diary) => {
@@ -213,11 +227,13 @@ const moodFilter = (optionValue) => {
 
 
 
-// !검색 필터에 따른 노출 처리 함수
+// !검색어 필터에 따른 노출 처리 함수
 const searchListSet = (event) => {
 
   const searchType = event.target.parentNode.querySelector(".searchFilter li.active").dataset.value; // 검색 옵션 값
   const searchValue = event.target.value; // 검색어 값
+
+  console.log(searchType, searchValue);
 
   // 필터에서 선택한 기분값에 따른 저장된 일기 필터링리스트
   const diaryFilterList = diaryArr.filter((diary) => {
@@ -236,7 +252,13 @@ const searchListSet = (event) => {
   })
 
   // 필터링된 일기 리스트 노출
-  diaryListSet(diaryFilterList);
+  if (searchValue === '') {
+    diaryListSet()
+  } else {
+    document.querySelector(".diaryList ul").innerHTML = diaryFilterList.map((diary) => diaryLiRender(diary)).join("");
+    document.querySelector(".diaryPagination").classList.add("hide");
+    document.querySelector(".paginationHeader").classList.add("hide");
+  }
 }
 
 
