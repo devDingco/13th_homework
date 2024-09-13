@@ -494,9 +494,9 @@ const entriesPerPage = 12; // 페이지당 다이어리 카드 수
 
 // 총 페이지 수를 계산하는 함수
 const TotalPages = () => {
-const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
-const diary_list = JSON.parse(storage_diary);
-return Math.ceil(diary_list.length / entriesPerPage);
+  const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
+  const diary_list = JSON.parse(storage_diary);
+  return Math.ceil(diary_list.length / entriesPerPage);
 };
 
 // 특정 페이지를 표시하는 함수
@@ -516,20 +516,20 @@ updatePagination();
 
 // 마지막 페이지로 이동
 const JS_nextPage = () => {
-currentPage = TotalPages(); // 마지막 페이지로 이동
-displayPage(currentPage);
+  currentPage = TotalPages(); // 마지막 페이지로 이동
+  displayPage(currentPage);
 };
 
 // 첫 페이지로 이동
 const JS_beforePage = () => {
-currentPage = 1; // 첫 페이지로 이동
-displayPage(currentPage);
+  currentPage = 1; // 첫 페이지로 이동
+  displayPage(currentPage);
 };
 
 // 특정 페이지로 이동
 const goToPage = (page) => {
-currentPage = page;
-displayPage(currentPage);
+  currentPage = page;
+  displayPage(currentPage);
 };
 
 // 수정 필요
@@ -555,7 +555,7 @@ displayPage(currentPage);
 
 // 초기 페이지 로드 시
 window.onload = () => {
-displayPage(currentPage);
+  displayPage(currentPage);
 };
 
 // 버튼 클릭 이벤트 추가

@@ -1,14 +1,24 @@
+
+@font-face {
+  font-family: Pretendard;
+  src: url("./Pretendard-Medium.otf");
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Pretendard;
 }
+
 
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
 }
 
 .layout {
@@ -18,6 +28,7 @@ body {
 
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 6rem;
@@ -64,24 +75,6 @@ body {
   align-items: center;
 }
 
-/* .filter {
-  min-width: 7.5rem;
-  height: 2rem;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid #C7C7C7
-}
-
-.filter select {
-  padding: 0.3125rem;
-  font-size: 1rem;
-} */
-
-/* .dropdown {
-  display: fixed;
-  flex-direction: column;
-  gap: 10px;
-} */
 
 .filter {
   display: fixed;
@@ -99,11 +92,11 @@ body {
 
   font-size: 16px;
   font-weight: 500;
-  color: rgba(28, 28, 28, 1);
+  color: var(--textColor);
 
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--backgroundColor);
 
   --CSSment: "전체"
 }
@@ -125,7 +118,7 @@ body {
   border-radius: 10px;
   overflow: hidden; /* 모서리 영역 넘치는 거 없애기 */
   margin-top: 8px;
-  background-color: #FFFFFF;
+  background-color: var(--backgroundColor);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   z-index: 200;
   /* justify-content: space-between; */
@@ -141,14 +134,15 @@ body {
 
 .dropdown_menu label {
   display: block;
+  align-items: center;
   height: 40px;
   padding: 10px;
-  color: #5F5F5F;
+  color: var(--dropdownMenu);
 }
 
 .dropdown_menu label:hover {
-  background-color: rgba(58, 181, 15, 0.05);
-  color: #299C00;
+  background-color: var(--dropdownHover);
+  color: var(--dropdownCheck);
   display: flex;
   justify-content: space-between;
 }
@@ -165,26 +159,18 @@ body {
   justify-content: space-between;
 }
 
-/* .dropdown_icon {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 1rem;
-  right: 0.4rem;
-  background-color: #28b4e1;
-} */
 
 .storage {
-  border-bottom: 0.125rem solid #000;
+  border-bottom: 0.125rem solid var(--textColor);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 0.5rem;
-  color: #000;
+  color: var(--textColor)
 }
 
 .photos {
-  color: #ababab;
+  color: var(--inputPlaceholder);
 }
 
 .click_photos {
@@ -456,10 +442,10 @@ body {
 
 .CSS_diary {
   position: relative;
-  max-width: 19rem;
+  max-width: 38rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.6rem;
   
   /* transition: width 0.5s, height 0.5s; */
 }
@@ -471,7 +457,7 @@ body {
 }
 
 .diary_image {
-  height: 12.5rem;
+  height: 16rem;
   width: auto;
 }
 
@@ -540,8 +526,8 @@ body {
 .write_diary {
   width: 110px;
   height: 48px;
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: var(--textColor);
+  color: var(--backgroundColor);
   font-size: 18px;
   font-weight: 600;
   border-radius: 8px;
@@ -572,6 +558,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1rem;
+  color: var(--backgroundColor);
 }
 
 .footer_boss {
@@ -591,7 +578,7 @@ body {
 }
 
 .title {
-  color: #000000;
+  color: var(--textColor);
   font-size: 1.125rem;
 }
 
@@ -655,7 +642,7 @@ body {
 
   padding: 12px 16px;
 
-  background-color: #FFFFFF;
+  background-color: var(--backgroundColor);
 }
 
 .search_here {
@@ -669,13 +656,14 @@ body {
   font-size: 16px;
   font-weight: 500;
   color: #ABABAB;
+  background-color: var(--backgroundColor);
 }
 
 /* 다크모드 토글 */
 .CSS_toggle {
   appearance: none;
-  width: 40px;
-  height: 24px;
+  width: 58px;
+  height: 32px;
   border-radius: 20px;
   background-color: lightgrey;
 }
@@ -683,11 +671,11 @@ body {
 .CSS_toggle::after {
   display: block;
   content: "";
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   background-color: white;
   border-radius: 50%;
-  margin: 3px;
+  margin: 4px;
 
   transition: margin-left 0.3s; /* 실제로 이동하는 알맹이 -> 토글에 적용하면 안됨!! */
 }
@@ -697,7 +685,7 @@ body {
 }
 
 .CSS_toggle:checked::after {
-  margin-left: 18px;
+  margin-left: 30px;
 }
 
 .darkmode {
@@ -705,7 +693,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
 }
 
