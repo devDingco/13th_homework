@@ -1,0 +1,55 @@
+/* 사진보관함 */
+
+.사진_레이아웃 {
+  display: none;
+  max-width: 73rem;
+  margin: 0 1.25rem 2.5rem 1.25rem;
+}
+
+.사진_메인_공간 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+}
+
+.사진_기본형 {
+  border-radius: 24px;
+  width: 640px;
+  height: 640px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1
+}
+
+.사진_가로형 {
+  border-radius: 24px;
+  width: 640px;
+  object-fit: cover;
+  aspect-ratio: 4 / 3
+}
+
+.사진_세로형 {
+  border-radius: 24px;
+  height: 640px;
+  object-fit: cover;
+  aspect-ratio: 3 / 4
+}
+
+@media (max-width: 779px) {
+  .사진_메인_공간 {
+    gap: 24px;
+  }
+
+  .배너 {
+    width: 100%;
+  }
+
+  .사진_기본형,
+  .사진_가로형,
+  .사진_세로형 {
+    width: 100%;
+    height: auto;
+    /* max-width: 779px;
+    max-height: 779px; */
+  }
+}

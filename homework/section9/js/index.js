@@ -18,6 +18,15 @@ let 타이머;
 window.onload = () => {
   // 일기DOM만들기();
 
+  window.addEventListener("scroll", () => {
+    const 스크롤내려간길이 = window.scrollY
+    if (스크롤내려간길이 > 0) {
+      document.getElementById("드롭다운_제목").style = "background-color: black; color: white"
+    } else {
+      document.getElementById("드롭다운_제목").style = "background-color: white color: black"
+    }
+  })
+
   페이지그리기기능()
   페이지일기그리기기능(시작페이지)
 
@@ -76,7 +85,11 @@ const 페이지그리기기능 = () => {
 }
 
 const 페이지일기그리기기능 = (페이지번호담는통) => {
-  const 결과 = 일기_목록.filter((_, index) => {
+  let 일기목록;
+  const 스토리지에저장된일기목록 = localStorage.getItem("일기항목") ?? "[]"
+  일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+  const 결과 = 일기목록.filter((_, index) => {
     const 보여줄갯수 = 12
     const 건너뛸갯수 = (페이지번호담는통 - 1) * 보여줄갯수
 
@@ -103,6 +116,7 @@ const 페이지일기그리기기능 = (페이지번호담는통) => {
     `
   ).join("")
 }
+
 
 
 const 일기DOM만들기 = () => {
@@ -165,10 +179,14 @@ const 일기등록기능 = () => {
 
   일기목록.push(일기항목)
   localStorage.setItem("일기항목", JSON.stringify(일기목록));
-  일기DOM만들기();
+
+  // 일기DOM만들기();
+  페이지그리기기능()
+  페이지일기그리기기능(시작페이지)
+
   // 드롭다운 목록 전체로 바꿔주기
   document.getElementById("전체").checked = true
-  document.getElementById("드롭다운_메뉴").innerText = "전체"
+  // document.getElementById("드롭다운_메뉴").innerText = "전체"
 }
 
 const 드롭다운선택기능 = (event) => {
