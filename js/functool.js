@@ -36,6 +36,7 @@ function isNumber(input) {
 //
 // <ETON ERUTCEL>
 
+
 // My version of throttling should behave like this(timeout=2)
 // 1,  2,  3,  4,  5,  6,  7,  8,  9,  10
 // v   x   x   v   x   x   v   x   x   v
@@ -71,24 +72,24 @@ function isNumber(input) {
 // EventTarget.addEventListener("scroll", throttle(eventListener, timeout, debug)); 
 
 function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttled Event"}) {
-    if (debug) console.time(debugLabel);
+    if (!!debug) console.time(debugLabel);
     let timer = null;
-    return (event) => {
+    return (...args) => {
         if (!!timer) {
-            if (debug) {
+            if (!!debug) {
                 console.log("<Ignored Event>");
-                console.dir(event);
+                console.dir(args);
                 console.log("</Ignored Event>");
             }    
             return;
         }
         timer = setTimeout(()=>{timer=null}, timeout);
-        eventListener(event);
-        if (debug) {
+        eventListener.apply(args);
+        if (!!debug) {
             console.timeLog(debugLabel);
-            console.dir(event);
-            console.log("</Throttled Eventt>");
-        };
+            console.dir(args);
+            console.log(`</${debugLabel}>`);
+        }
     };
 }
 
@@ -126,13 +127,37 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
 // 2. Timer must last full duration
 // 3. Event is ignored during "Timer on" phase
 // 4. At most 1 timer is on, and Timer on/Timer off do not coincide at exact same timestamp
+// 5. (Bugfix) Debounce should apply args from latest source, not the source from which the timer was set on.
 
-function debounce(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
-    let timer = null;
-    return (event) => {
-        if (!!timer) return; // Invariant 3
-        setTimeout(eventListener(event), timeout);
-    };
+function debounceWrapper() {
+    let array = [];
+    function debounceInner(eventListener, {timeout=1000, debug=false, debugLabel="Debounced Event"}) {
+        if (!!debug) console.time(debugLabel);
+        let timer = null;
+        return (...args) => {
+            if (!!timer) {
+                if (!!debug) {
+                    console.log("<Ignored Event>");
+                    console.dir(args);
+                    console.log("</Ignored Event>");
+                }
+                array = args;
+                return; // Invariant 3
+            }
+            setTimeout(() => {
+                if (!!debug) {
+                    console.timeLog(debugLabel);
+                    console.dir(args);
+                    console.log(`</${debugLabel}>`);
+                }
+                //eventListener.apply(args); // Invariant 1, 2, 4
+                eventListener.apply(array);
+            }, timeout);
+        };
+    }
+    return debounceInner;
 }
 
-export { isNumber, throttle}; 
+const debounce = debounceWrapper();
+
+export { isNumber, throttle, debounce }; 

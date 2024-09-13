@@ -14,6 +14,12 @@
     line-height: inherit;
     color: inherit;
     background-color: inherit;
+    font-family: pretendard-black!important;
+}
+
+@font-face {
+    font-family: pretendard-black;
+    src: url("../asset/font/Pretendard-Black.otf");
 }
 
 [data-dark=on] {
