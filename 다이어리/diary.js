@@ -57,7 +57,7 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-    appendDiaryEntry(diaryCard)
+  appendDiaryEntry(diaryCard);
 };
 
 const getLastPageIndex = () => {
@@ -73,26 +73,26 @@ const getLastPageIndex = () => {
 };
 
 const handleDiaryEntryBasedOnMood = (mood) => {
-  if (
-    currentFilteredMood === mood
-  ) {
+  if (currentFilteredMood === mood) {
     renderFirstPage(paginatedDiaryData);
     getLastPageIndex();
   } else {
     const article = document.getElementById("article");
     article.innerHTML = "";
-    paginatedDiaryData = storedDiaryList
+    paginatedDiaryData = storedDiaryList;
     renderFirstPage(paginatedDiaryData);
     getLastPageIndex();
-    setDropdownLabel("전체")
+    setDropdownLabel("전체");
   }
-}
+};
 
 const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  currentFilteredMood !== "전체" ? paginatedDiaryData.push({ ...diaryEntry }) : ""
-  handleDiaryEntryBasedOnMood(diaryEntry.mood)
+  currentFilteredMood !== "전체"
+    ? paginatedDiaryData.push({ ...diaryEntry })
+    : "";
+  handleDiaryEntryBasedOnMood(diaryEntry.mood);
 };
 
 const getDate = (diaryEntry) => {
@@ -292,14 +292,20 @@ const onClickPhoto = (event) => {
 const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
-  diaryList.map((e, i) => {
-    e.id === deleteId ? (index = i) : "";
-  });
+  for (let i = 0; i < diaryList.length; i++) {
+    console.log(i);
+    if (diaryList[i].id === deleteId) {
+      index = i;
+      break;
+    }
+  }
+
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
   paginatedDiaryData = storedDiaryList;
   updateDiaryList();
   onCloseSingleModal("confirm_delete_diary_modal");
+  console.log("test");
 };
 
 const confirmDeleteDiary = (event) => {
