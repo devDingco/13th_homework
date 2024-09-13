@@ -502,7 +502,7 @@ function pageList(page) {
         ).join("")
         window.scrollTo({ top: 359, behavior: "smooth" })
     } else {
-        console.log("불러올 데이터 없음")
+        console.log( "불러올 데이터가 없어요!!" )
     }
 }
 
