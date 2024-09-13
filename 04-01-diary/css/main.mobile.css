@@ -1,35 +1,34 @@
 
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .show_diary_css {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-    order: 2;
-    overflow: hidden;
-  }
-  
-  .feeling_image {
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  .CSS_diary {
-    max-width: none;
-  }
-  
-  .register {
-    max-width: none;
-    width: 100%;
-    order: 1;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-  }
-  
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.show_diary_css {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  order: 2;
+  overflow: hidden;
+}
+
+.feeling_image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.CSS_diary {
+  max-width: none;
+}
+
+.register {
+  max-width: none;
+  width: 100%;
+  order: 1;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
