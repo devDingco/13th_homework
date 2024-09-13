@@ -70,15 +70,14 @@
   </div>
   
     <!-- 삭제할지 다시묻는 모달창 -->
-    <!-- <div id="HTML_삭제재확인모달그룹" class="CSS_삭제재확인모달그룹">
+    <div id="HTML_삭제재확인모달그룹" class="CSS_삭제재확인모달그룹">
       <div id="CSS_모달배경" class="CSS_모달배경" onclick="JS_모달닫기기능('CSS_모달배경')">
         <div class="CSS_모달삭제할지묻는그룹">
           <button onclick="JS_모달닫기기능('CSS_모달배경')">취소하기</button>
           <button onclick="JS_일기삭제기능()">삭제하기</button>
         </div>      
       </div>
-
-    </div> -->
+    </div>
 
     <!-- 등록완료모달그룹 -->
     <div id="HTML_등록완료모달그룹" class="CSS_모달그룹">
@@ -127,8 +126,8 @@
         <!-- 내비게이션 -->
         <div class="CSS_탭">
           <!-- 여기 온클릭박고 만약에 사진보관함이 클릭되면 CSS_클릭된탭으로 클래스도 바꾸고  -->
-            <div id="JS_일기보관함탭" class="CSS_클릭된탭" onclick="JS_일기보관함탭선택기능()">일기보관함</div>
-            <div id="JS_사진보관함탭" class="CSS_클릭되지않은탭" onclick="JS_사진보관함탭선택기능(); JS_강아지사진불러오는기능();">사진보관함</div>
+            <div id="JS_일기보관함탭" class="CSS_클릭된탭" onclick="JS_일기보관함탭선택기능(); JS_페이지네이션삭제할지말지();">일기보관함</div>
+            <div id="JS_사진보관함탭" class="CSS_클릭되지않은탭" onclick="JS_사진보관함탭선택기능(); JS_강아지사진불러오는기능(); JS_강아지사진보여주기(); JS_페이지네이션삭제할지말지();">사진보관함</div>
         </div>
 
         <div id="JS_메인_일기보관함" class="CSS_메인_일기보관함">

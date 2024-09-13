@@ -1,12 +1,17 @@
+* {
+  font-family: Pretendard;  
+}
+
 .CSS_드롭다운제목 {
   appearance: none;
+  min-width: 120px;
   width: 150px;
-  height: 40px;
-  border: 2px solid green;
+  height: 50px;
+  border: 1px solid #C7C7C7;
   border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-
+  padding: 12px 10px;
+  font-size: 16px;
+  font-weight: 500;
   --철수의CSS변수: "전체"
 }
 
@@ -47,6 +52,7 @@
   position: absolute;
   background-color: white;
   z-index: 2;
+  padding-top: 15px;
 }
 .CSS_드롭다운메뉴 input {
     display: none;
@@ -63,6 +69,8 @@
 
 .CSS_드롭다운메뉴 label:hover::after {
   content: "✔️";
-
-  transform: translateY(-50%); /* 정확한 가운데 정렬을 위한 변환 */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transform: translateY(-100%); /* 정확한 가운데 정렬을 위한 변환 */
 }
