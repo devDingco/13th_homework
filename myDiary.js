@@ -15,13 +15,23 @@ const moodIndex = {
 };
 
 window.onload = () => {
-    // const loginName = prompt("이름을 입력해 주세요!")
-    // document.getElementById("header__login").innerText = loginName;
-    // document.getElementById("footer__login").innerText = loginName;
-    // document.querySelector(".footer__copy").innerText = `Copyright © 2024. ${loginName} `
-    makeDiaryCard(diaryLocal)
-    openDiary()
+    if (JSON.parse(sessionStorage.getItem("userID"))) {
+        openDiary()
+        pagination()
+        pageList(1)
+        const userID = JSON.parse(sessionStorage.getItem("userID"))
+        document.getElementById("header__login").innerText = userID;
+        document.getElementById("footer__login").innerText = userID;
+        document.querySelector(".footer__copy").innerText = `Copyright © 2024. ${userID} `
+    } else {
+        const loginName = prompt("이름을 입력해 주세요!")
+        sessionStorage.setItem("userID", JSON.stringify(loginName))
+        location.href = location.href
+    }
 }
+
+// makeDiaryCard(diaryLocal) 일기 생성방식 변경
+// !! 새로운 일기 작성시 페이지네이션 로직 박살내버리는 이슈 존재함
 
 //** 일기 작성 기능: 일기 작성 폼 데이터 취합하여 로컬에 저장하고 만들기 기능에 전달 */
 function makeDiaryData () {
@@ -115,7 +125,7 @@ window.addEventListener('scroll', () => {
     const footerHeight = document.querySelector(".container__footer").getBoundingClientRect().top
     const currentHeight = window.innerHeight
 
-    if ( window.scrollY < 400 ) {
+    if ( window.scrollY < 360 ) {
         document.querySelector(".inner__text").style = "background-color: #fff; color: #222; transition: 0.2s;"
         document.querySelector(".container__sticky").style = "display: none;"
     } else if ( footerHeight <= currentHeight ) {
@@ -140,6 +150,7 @@ function openDiary() {
     document.querySelector(".nav__filter").style = "display: flex;"
     document.querySelector(".body__left__card").style = "display: flex;"
     document.querySelector(".body__right__diary").style = "display: block;"
+    document.querySelector('.container__page').style = "display: flex"
 
     document.querySelector(".tap__gallery").classList.remove("tap__active")
     document.querySelector(".nav__gallery").style = "display: none;"
@@ -155,6 +166,7 @@ function openGallery() {
     document.querySelector(".nav__filter").style = "display: none;"
     document.querySelector(".body__left__card").style = "display: none;"
     document.querySelector(".body__right__diary").style = "display: none;"
+    document.querySelector('.container__page').style = "display: none"
 
     document.querySelector(".tap__diary").classList.remove("tap__active")
     document.querySelector(".nav__gallery").style = "display: flex;"
@@ -164,6 +176,9 @@ function openGallery() {
     document.querySelector(".gallery__direction").value = "기본"
     loadIMG()
 }
+
+////////// //** 필터기능 검색기능 */ // //////////
+
 
 //** nav filter btn 클릭시 드롭다운 디자인 메뉴 호출 및 실행, 세션스토리지 활용 */
 function openFilter() {
@@ -227,22 +242,53 @@ function searchDiary() {
     }, 1000)
 }
 
+////////// //** 갤러리 탭 관련 기능 */ // //////////
+
+
 //** 랜덤 강아지 이미지 불러오기 */
 function loadIMG() {
-    setTimeout(() => {
-        document.querySelectorAll(".gallery__imgBox img").forEach(el => el.style = "opacity: 100%;")
-        document.querySelectorAll(".img__skeleton").forEach(el => el.style = "display: none;")
-    }, 2000)
-    fetch("https://dog.ceo/api/breeds/image/random/10").then((randIMG) => {
-        randIMG.json().then((jsonIMG) => {
-            const randDogURL = jsonIMG.message
-            document.querySelector(".body__gallery").innerHTML = randDogURL.map(
-                (el) =>
-                    `<div class="gallery__imgBox">
-                        <div class="img__skeleton"></div>
-                        <img src="${el}"/>
-                    </div>`).join("")
+    const getIMG = () => {
+        setTimeout(() => {
+            document.querySelectorAll(".gallery__imgBox img").forEach(el => el.style = "opacity: 100%;")
+            document.querySelectorAll(".img__skeleton").forEach(el => el.style = "display: none;")
+        }, 2000)
+    
+        fetch("https://dog.ceo/api/breeds/image/random/10").then((randIMG) => {
+            randIMG.json().then((jsonIMG) => {
+                const randDogURL = jsonIMG.message
+                const newIMG = randDogURL.map( (el) =>
+                        `<div class="gallery__imgBox">
+                            <div class="img__skeleton"> </div>
+                            <img src="${el}"/>
+                        </div>`).join("")
+                
+                const gallery = document.querySelector(".body__gallery")
+                gallery.innerHTML += newIMG
+            })
         })
+    }
+
+    getIMG()
+
+    let timer = null;
+    window.addEventListener('scroll', () => {
+        const callDocument = document.documentElement
+        const scrollPer = callDocument.scrollTop / ( callDocument.scrollHeight - callDocument.clientHeight )
+
+        if(scrollPer < 0.8) return
+        if(timer !== null) return
+
+        if(scrollPer >= 0.8) {
+            getIMG()
+        }
+
+        timer = setTimeout( (scrollPer) => {
+            timer = null;
+
+            if (scrollPer === 1) {
+                getIMG()
+            }
+        }, 1000)
     })
 }
 
@@ -267,12 +313,48 @@ function changeDirection(event) {
     }
 }
 
+////////// //** 배경 및 테마 관련 기능 */ // //////////
+
+
 //** 다크모드 토글기능 */
 function changeMode(event) {
     event.target.checked === true ?
     document.documentElement.setAttribute("dark-mode", "on") :
     document.documentElement.removeAttribute("dark-mode")
 }
+
+//** 배경 렌티큘러 오버레이 */
+let debounce;
+function changeBG(event) {
+    clearTimeout(debounce)
+
+    debounce = setTimeout( () => {
+        const mouseX = Math.ceil(event.offsetX / 12)
+        document.querySelector('.overlay').style.background = `linear-gradient( ${mouseX}deg,
+        #efeeee,
+        #faf1ea,
+        #f2f8ea,
+        #e7f9ef,
+        #e9f2f9,
+        #fff3ff)`
+    }, 10)
+}
+
+//** 일기 폼 X버튼 클릭시 사라지는 인터렉션 구현 */
+function closeDiary() {
+    const diaryForm = document.querySelector('.body__right__diary')
+    diaryForm.style= "transform: translateX(-20px) rotate(-2deg);"
+    setTimeout( () => {
+        diaryForm.style= "transform: translateX(500px) translateY(-50px) rotate(10deg); opacity: 0; transition: 1s; transition-timing-function: ease-out";
+    }, 100)
+    setTimeout( () => {
+        diaryForm.style.display = "none";
+        document.querySelector('.container__diaryForm').style = "display: flex;"
+    }, 1000)
+}
+
+////////// //** 모달 관련 기능 */ // //////////
+
 
 //** 새로운 모달 호출 */
 function newDiary() {
@@ -343,23 +425,93 @@ function submitNew() {
     window.scrollTo({ top: document.querySelector(".container__footer").getBoundingClientRect().top, behavior: "smooth" })
 }
 
-let debounce;
-function changeBG(event) {
-    clearTimeout(debounce)
+////////// //** 페이지네이션 관련 기능 */ // //////////
 
-    debounce = setTimeout( () => {
-        const mouseX = Math.ceil(event.offsetX / 8)
-        document.querySelector('.overlay').style.background = `linear-gradient( ${mouseX}deg,
-        #efeeee,
-        #faf1ea,
-        #f2f8ea,
-        #e7f9ef,
-        #e9f2f9,
-        #fff3ff)`
-    }, 10)
+
+//** 페이지네이션 */
+    let initialPage = 1;
+    let clickedPage = 1;
+    let itemsPerPage = 8;
+    const lastPage = diaryLocal !== null ? Math.ceil( diaryLocal.length / itemsPerPage ) : "1"
+//** 페이지네이션 버튼 만들기 */
+function pagination() {
+    const dummyData = new Array(10).fill("dummy")
+    const makePageNum = dummyData.map( (el, idx) => {
+        const pageNum = idx + initialPage
+        return pageNum <= lastPage ? `
+        <button
+            onclick="pageList(${pageNum});
+            clickedPage=${pageNum};
+            pagination()";
+            class="${clickedPage === pageNum ? "page__select" : "page__button"}";
+        > ${pageNum}</button>` : ""
+    }).join("")
+
+    document.querySelector('.page__number').innerHTML = makePageNum;
+}
+//** 페이지 이전 다음 버튼 유효성 검토 */
+function pageTest(pageMove) {
+    switch(pageMove) {
+        case "prev": {
+            if (initialPage === 1) {
+                alert("불러올 것이 없어요!")
+            } else {
+                initialPage -= 5
+                clickedPage = initialPage
+                pagination()
+                pageList(clickedPage)
+            }
+            break
+        }
+        case "next": {
+            if (initialPage + 5 >= lastPage) {
+                alert("더 불러올 것이 없어요!")
+            } else {
+                initialPage += 5
+                clickedPage = initialPage
+                pagination()
+                pageList(clickedPage)
+            }
+            break
+        }
+    }
+}
+//** 페이지 목록 보여주기 및 버튼 클릭시 페이지 이동 */
+function pageList(page) {
+    if (diaryLocal !== null) {
+        const diaryPerPage = diaryLocal.filter( (el, idx) => {
+            const skipThis = (page -1) * itemsPerPage
+            if (skipThis <= idx && idx < skipThis + itemsPerPage) {return true} else {return false}
+        })
+        document.querySelector(".body__left__card").innerHTML = diaryPerPage.map( (el, idx) => 
+            `<div class="wrapper__card">
+                <a href="./depth01/myDiary_detail.html?page=${idx}">
+                    <div class="card__delete" onclick="deleteDiary(${idx})"></div>
+                    <div class="card__img">
+                        <img src="./asset/card__${el.mood}.png">
+                    </div>
+                    <div class="card__topic">
+                        <div class="card__status">
+                            <div class="card__${el.mood}">${moodIndex[el.mood]}</div>
+                            <div class="card__date">${el.date}</div>
+                        </div>
+                        <div class="card__title">${el.title}</div>
+                    </div>
+                </a>
+            </div>`
+        ).join("")
+        window.scrollTo({ top: 359, behavior: "smooth" })
+    } else {
+        console.log( "불러올 데이터가 없어요!!" )
+    }
 }
 
+////////// //** 이벤트 리스너 모음 */ // //////////
+
+
+// 배경 및 테마 관련 event listener
 document.addEventListener('mousemove', changeBG)
+document.querySelector('.mode__toggle').addEventListener('click', changeMode)
 
 // tab bar관련 event listener
 document.querySelector(".tap__diary").addEventListener('click', openDiary)
@@ -370,7 +522,6 @@ document.querySelector(".gallery__direction").addEventListener('change', changeD
 
 // modal관련 event listener
 document.querySelector('.modal__bg').addEventListener('click', closeNew)
-document.querySelector('.mode__toggle').addEventListener('click', changeMode)
 window.addEventListener("keydown", (event) => { if (event.key === "Escape") { closeNew()} })
 
 document.querySelector(".tap__new").addEventListener('click', newDiary)
@@ -381,4 +532,8 @@ document.querySelector(".btn__submit").addEventListener('click', submitNew)
 document.querySelector(".btn__confirm").addEventListener('click', closeNew)
 
 // diary form관련 event listener
+document.querySelector('.diary__close').addEventListener('click', closeDiary)
 document.querySelector(".diary__button").addEventListener('click', makeDiaryData)
+
+document.querySelector('.page__prev').addEventListener('click', () => pageTest("prev") )
+document.querySelector('.page__next').addEventListener('click', () => pageTest("next") )

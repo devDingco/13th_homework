@@ -46,7 +46,14 @@ a { text-decoration: none;}
     padding: 0;
     color: var(--chroma-mono90);
     font-size: 16px;
-    font-family: 'Pretendard-Regular';
+    font-family: 'Paperlogy-4Regluar', 'Pretendard-Regular';
+}
+
+@font-face {
+    font-family: 'Paperlogy-4Regluar';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
@@ -216,7 +223,6 @@ a { text-decoration: none;}
 
 .tap__diary,
 .tap__gallery {
-    width: 12rem;
     height: 4.8rem;
     padding: 1.2rem 0.8rem;
     font-size: 2.4rem;
@@ -502,8 +508,19 @@ a { text-decoration: none;}
 }
 
 .diary__subject {
-    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 4rem;
+}
+
+.diary__text {
+    font-size: 2.4rem;
+}
+
+.diary__close {
+    width: 4rem;
+    height: 4rem;
 }
 
 .diary__question {
@@ -573,7 +590,7 @@ a { text-decoration: none;}
 /* gallery section */
 .body__gallery {
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 2.4rem;
@@ -801,21 +818,49 @@ a { text-decoration: none;}
 .container__floating {
     width: 4rem;
     height: 4rem;
-    position: fixed;
-    background-image: url(./asset/icon/up_outline_light_xl.png);
     border-radius: 100%;
+    background-image: url(./asset/icon/up_outline_light_xl.png);
     box-shadow: 0rem 0.1rem 0.6rem 0rem var(--chroma-mono50);
-    right: 2%;
+    position: fixed;
     bottom: 2%;
-
-    @media (max-width: 375px) {
-        right: 4%;
-        bottom: 2%;
-    }
+    right: 4%;
+    z-index: 3;
 }
 
 .container__floating:hover {
     background-color: var(--chroma-mono90);
+}
+
+.container__page {
+    display: flex;
+    margin: 4rem;
+    gap: 1rem;
+}
+
+.page__prev,
+.page__next {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.8rem;
+    font-size: 2rem;
+    color: var(--chroma-mono50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page__button,
+.page__select {
+    border-radius: 0.8rem;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--chroma-mono00);
+}
+
+.page__select {
+    color: var(--chroma-mono90);
+    background-color: var(--chroma-mono10);
 }
 
 /* footer style */
@@ -847,7 +892,7 @@ a { text-decoration: none;}
 
 .footer__name,
 .footer__copy {
-    color: var(--chroma-mono50);
+    color: var(--chroma-mono30);
 }
 
 .modal__delete {

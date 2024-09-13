@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[이하성] CSS&JS myDiary</title>
-    <link href="./myDiary.css" rel="stylesheet">
+
+    <link href="./myDiary.css" rel="stylesheet" />
+    <link href="./asset/icon__bracket.png" rel="icon" />
+
     <script src="./myDiary.js" defer> </script>
 </head>
 <body>
     <div class="container">
         <div class="overlay"> </div>
+
         <div class="container__header">
             <div class="header__title">
                 <div class="title__text">
@@ -25,6 +29,7 @@
                 <img src="./asset/header__banner.png">
             </div>
         </div>
+
         <div class="container__sticky"></div>
 
         <div class="container__body">
@@ -79,6 +84,14 @@
                 </div>
             </div>
 
+            <div class="nav__gallery">
+                <select class="gallery__direction">
+                    <option selected>기본</option>
+                    <option>가로형</option>
+                    <option>세로형</option>
+                </select>
+            </div>
+
             <div class="body__left__card">
                 <div class="wrapper__card">
                     <div class="card__delete"></div>
@@ -96,9 +109,14 @@
             </div>
 
             <div class="body__right__diary">
-                <div class="diary__subject">📍 일기 쓰기</div>
+                <div class="diary__subject">
+                    <div class="diary__text">📍 일기 쓰기</div>
+                    <div class="diary__close">
+                        <img src="./asset/icon/close_outline_light_m.png" />
+                    </div>
+                </div>
+                
                 <div class="diary__question">오늘 기분은 어땠나요?</div>
-
                 <div class="diary__radio">
                     <div class="radio__wrapper">
                         <input type="radio" name="mood" value="happy" id="radioHappy"/> <label for="radioHappy"> 행복해요 </label>
@@ -126,20 +144,7 @@
                 <div class="diary__button">등록하기</div>
             </div>
 
-            <div class="nav__gallery">
-                <select class="gallery__direction">
-                    <option selected>기본</option>
-                    <option>가로형</option>
-                    <option>세로형</option>
-                </select>
-            </div>
-
-            <div class="body__gallery">
-                <div class="gallery__imgBox">
-                    <div class="img__skeleton"></div>
-                    <img />
-                </div>
-            </div>
+            <div class="body__gallery"> </div>
         </div>
 
         <div class="container__modal">
@@ -201,6 +206,12 @@
                     <div class="btn__delete2">삭제</div>
                 </div>
             </div>
+        </div>
+
+        <div class="container__page">
+            <div class="page__prev">이전</div>
+            <div class="page__number"> </div>
+            <div class="page__next">다음</div>
         </div>
 
         <div class="container__floating"></div>
