@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다이어리 만들기</title>
+    <link rel="stylesheet" href="./css/05-index.css" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+    <link rel="stylesheet" href="./css/toast.css">
+
+    <script src="./js/05-index.js"></script>
+    <script src="./js/05-modal.js"></script>
+    <script src="./js/05-toast.js"></script>
+</head>
+
+<body>
+    <div class="diaryLayout">
+        <!-- <div class="mainContent"> -->
+        <header class="header">
+            <div>민지의 다이어리</div>
+        </header>
+
+        <img class="head_bannerImg" src="../assets/images/headerBanner.png" />
+
+        <!-- 내비게이션 -->
+        <nav class="nav_wrapper">
+            <div class="navBox nav_diaryBox">일기보관함</div>
+            <div class="navBox nav_imgBox">사진보관함</div>
+        </nav>
+
+        <main class="main_wrapper">
+            <section class="showPrevBox">
+                <!-- dropdown -->
+                <div>
+                    <select class="filterBox">
+                        <option class="filterChoice" value="filterChoice" onclick="JS_필터링기능(event)" selected>전체</option>
+                        <option value="HTML_행복선택" onclick="JS_필터링기능(event)">행복해요</option>
+                        <option value="HTML_슬픔선택" onclick="JS_필터링기능(event)">슬퍼요</option>
+                        <option value="HTML_놀람선택" onclick="JS_필터링기능(event)">놀랐어요</option>
+                        <option value="HTML_화남선택" onclick="JS_필터링기능(event)">화나요</option>
+                        <option value="HTML_기타선택" onclick="JS_필터링기능(event)">기타</option>
+                    </select>
+                </div>
+                <div class="searchArea">
+                    <div class="searchBar">
+                        <img class="searchBarIcon" src="/homework/assets/images/search.png" alt="서치바아이콘" />
+                        <input class="searchBarInput" placeholder="검색어를 입력해 주세요." oninput="search(event)" />
+                    </div>
+                </div>
+                <div>
+                    <button class="writerBtn" onclick="openModal('modalGroup')">+ 일기쓰기</button>
+                </div>
+            </section>
+
+            <!-- 일기 보여주는 곳 -->
+            <div id="diaryBoxList" class="diaryBoxList"></div>
+
+
+            <!-- 일기 등록 모달창 -->
+            <div id="modalGroup" class="modalGroup">
+                <div class="modalBackground" onclick="closeModal('modalGroup')"></div>
+                <div class="CSS_등록상자">
+                    <div class="CSS_등록상자_내부">
+                        <div class="CSS_등록상자_제목">📍일기 쓰기
+                            <div class="darkMode">다크모드
+                                <input type="checkbox" id="toggle_darkMode" class="toggle_darkMode"
+                                    onclick="toggle(event)" />
+                            </div>
+                        </div>
+                        <div class="CSS_등록상자_내용_영역">
+                            <div class="CSS_등록상자_내용">오늘 기분은 어땠나요?</div>
+                            <div class="radioGroup">
+                                <!-- Radio buttons for mood choices -->
+                                <div class="radioBtn">
+                                    <input type="radio" name="moodChoiceBtn" value="행복" checked />
+                                    <div>행복해요</div>
+                                </div>
+                                <div class="radioBtn">
+                                    <input type="radio" name="moodChoiceBtn" value="슬픔" />
+                                    <div>슬퍼요</div>
+                                </div>
+                                <div class="radioBtn">
+                                    <input type="radio" name="moodChoiceBtn" value="놀람" />
+                                    <div>놀랐어요</div>
+                                </div>
+                                <div class="radioBtn">
+                                    <input type="radio" name="moodChoiceBtn" value="화남" />
+                                    <div>화나요</div>
+                                </div>
+                                <div class="radioBtn">
+                                    <input type="radio" name="moodChoiceBtn" value="기타" />
+                                    <div>기타</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="CSS_일기입력상자">
+                            <div class="CSS_일기쓰기">
+                                <div>제목</div>
+                                <input type="text" id="inputTitle" placeholder="제목을 입력해 주세요." />
+                            </div>
+                            <div class="CSS_일기쓰기">
+                                <div>내용</div>
+                                <textarea id="inputContent" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+                            </div>
+                        </div>
+                        <div class="button_wrapper">
+                            <button type="button" class="modalBtn registerModalBtn"
+                                onclick="openModal('modalOverlay');writerBtn();">등록하기</button>
+                            <button type="button" id="registerModal" class="modalBtn modalCloseBtn"
+                                onclick="openModal('deleteModal')">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 완료 메세지 모달창 -->
+            <div id="modalOverlay" class="modalGroup">
+                <div class="modalBackground"></div>
+                <div class="modalBox">
+                    <h2 class="completeTitle">일기 등록 완료</h2>
+                    <p class="completeContent">성공적으로 등록되었습니다!</p>
+                    <button class="modalCompleteBtn"
+                        onclick="closeModal('modalOverlay'); closeModal('modalGroup')">확인</button>
+                </div>
+            </div>
+
+            <!-- 일기삭제 메세지 모달창-->
+            <div id="diaryDeleteModalGroup" class="modalGroup">
+                <div class="modalBackground"></div>
+                <div class="modalBox">
+                    <h2 class="deleteTitle">일기 삭제</h2>
+                    <p class="deleteContent">일기를 삭제하시겠어요?</p>
+                    <div class="button_wrapper">
+                        <button class="modalBtn registerModalBtn"
+                            onclick="closeModal('diaryDeleteModalGroup')">취소</button>
+                        <button class="modalCloseBtn" onclick="diaryDeleteConfirm()">삭제</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 취소 모달창 -->
+            <div id="deleteModal" class="modalGroup">
+                <div class="modalBackground"></div>
+                <div class="modalBox">
+                    <h2 class="registerDeleteTitle">일기 등록 취소</h2>
+                    <p class="registerDeleteContent">일기 등록을 취소하시겠어요?</p>
+                    <div class="button_wrapper">
+                        <button class="modalBtn deleteRegisterBtn"
+                            onclick="closeModal('modalGroup');closeModal('deleteModal')">등록 취소</button>
+                        <button class="modalBtn modalCloseBtn" onclick=" closeModal('deleteModal');">계속 작성</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+
+        <button id="HTML_플로팅버튼" class="CSS_플로팅버튼" onclick="scrollTop()">^</button>
+
+
+        <!-- 푸터 -->
+        <footer id="HTML_푸터" class="footer_wrapper">
+            <div class="footer">
+                <div class="footer_title">민지의 다이어리</div>
+                <div class="footer_content">대표 : {name}</div>
+                <div class="footer_Copyright">Copyright © 2024.{name} Co., Ltd.</div>
+            </div>
+        </footer>
+    </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일기상세페이지</title>
+    <link rel="stylesheet" href="./css/05-detail.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+    <link rel="stylesheet" href="./css/toast.css" />
+
+    <script src="./js/05-detail.js"></script>
+    <script src="./js/05-modal.js"></script>
+    <script src="./js/05-toast.js"></script>
+    <script src="dist/clipboard.min.js"></script>
+</head>
+
+<body>
+    <!--헤더-->
+    <header class="header">
+        <div class="headerTitle">민지의 다이어리</div>
+    </header>
+    <div class="mobileHeader">
+        <img src="/homework/assets/images/back.png" alt="뒤로가기" onclick="backToThe()" />
+        <div class="headerTitle">일기 상세</div>
+    </div>
+
+    <!--일기 상세 보여주는 영역-->
+    <section class="container">
+        <!--제목-->
+        <div class="detailContainer">
+            <span id="diaryTitle"></span>
+
+            <!--기분-->
+            <div class="diaryInfo">
+                <div class="diaryInfo_mood">
+                    <img id="moodImg" />
+                    <div id="moodShowing"></div>
+                </div>
+                <div class="diaryInfo_date">
+                    <div id="dateList"></div>
+                    작성
+                </div>
+            </div>
+
+
+            <!--내용-->
+            <div class="diaryContent">
+                <span class="subTitle">내용</span>
+                <span id="diaryContent_detail" class="diaryContent_detail"></span>
+
+            </div>
+
+            <!--클립복사-->
+            <div class="contentCopy_warpper">
+                <button type="button" class="clipBtn" onclick="copyEnter()">
+                    <img src="/homework/assets/images/content_copy.png" class="clipBtnIcon">
+                    <div class="contentCopy_text">내용 복사</div>
+                </button>
+
+            </div>
+
+            <!--버튼-->
+            <div id="diaryDelete" class="modalOverlay">
+                <div class="button_wrapper">
+                    <button class="editBtn" onclick="editMove()">
+                        수정
+                    </button>
+                    <button class="editBtn" onclick="diaryDelete(event,diaryNumber)">삭제</button>
+                </div>
+            </div>
+
+            <!--회고-->
+            <span class="liner"></span>
+            <div class="commentTitle"></div>
+            <div class="commentInputArea">
+                <input type="text" id="commentInput" class="commentInput" placeholder="회고를 남겨보세요!">
+                <button id="commentBtn" onclick="createComment()">입력</button>
+            </div>
+            <div id="commentList"></div>
+        </div>
+    </section>
+
+    <!--복사토스트 나타내기-->
+    <div id="toastMessage" class="toastMessage">복사되었습니다</div>
+
+
+    <!-- 일기삭제 메세지 모달창-->
+    <div id="diaryDeleteModalGroup" class="modalGroup">
+        <div class="modalBackground"></div>
+        <div class="modalBox">
+            <h2 class="deleteTitle">일기 삭제</h2>
+            <p class="deleteContent">일기를 삭제하시겠어요?</p>
+            <div class="button_wrapper">
+                <button class="modalBtn modalCloseBtn" onclick="closeModal('diaryDeleteModalGroup')">취소</button>
+                <button class="modalBtn registerModalBtn" onclick="diaryDeleteConfirm()">삭제</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
