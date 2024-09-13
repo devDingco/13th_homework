@@ -14,6 +14,9 @@
     --finRegistText: #FFFFFF;
     --finRegistButton: #000000;
     --finRegistModalText: #333333;
+    --dropdownMenu: #5F5F5F;
+    --dropdownCheck: #299C00;
+    --dropdownHover: rgba(58, 181, 15, 0.05);
 }
 
 /* darkmode */
@@ -31,4 +34,7 @@
     --finRegistText: #000000;
     --finRegistButton: #FFFFFF;
     --finRegistModalText: #D4D3D3;
+    --dropdownMenu: #C7C7C7;
+    --dropdownCheck: #FFFFFF;
+    --dropdownHover: #303030;
 }
