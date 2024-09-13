@@ -112,7 +112,7 @@ header h1{
 }
 .content .diary_select_bg .diary_select select{
     width:12rem;
-    height:3.2rem;
+    height:4.8rem;
     border-radius:0.8rem;
     border:0.1rem solid #C7C7C7;
     padding:0.4rem;
@@ -120,6 +120,31 @@ header h1{
 }
 .d_change_color{
     filter: invert(1);
+}
+
+.diary_select_left{
+    display:flex;
+    align-items:center;
+}
+.search_bg{
+    display:flex;
+    height:4.8rem;
+    margin-left:1rem;
+    position:relative;
+}
+.search_bg input{
+    width:32rem;
+    /* height:4.8rem; */
+    border-radius:10rem;
+    border:0.1rem solid #c7c7c7;
+    padding:1.2rem 1.6rem 1.2rem 1.6rem;
+    text-indent:3rem;
+    font-size:1.6rem;
+}
+.search_bg img{
+    position:absolute;
+    top:1.6rem;
+    left:2rem;
 }
 
 /* 일기쓰기 버튼 */
@@ -158,27 +183,40 @@ header h1{
     justify-content:space-between;
 }
 .diary_bg{
-    width:78.4rem;
+    /* width:78.4rem; */
+    width:116.8rem;
     height:37.3rem;
     display:flex;
     flex-wrap:wrap;
     gap:1.6rem;
 }
 .content_bg{
-    width:38rem;
+    /* width:38rem; */
+    width:27.4rem;
     height:37.3rem;
     border-radius:1.6rem;
     padding:0 0 1.6rem 0;
+    position:relative;
 }
 .content_bg:hover{
     transform:scale(1.1);
     transition-duration:0.5s;
+    cursor:pointer;
+}
+.content_bg:hover .emotion_img{
+    filter:blur(0.5rem);
+}
+.content_bg .emotion_img{
+    width:27.4rem;
 }
 .diary_close{
     position:absolute;
-    width:1.315rem;
+    top:0;
+    right:0;
+    z-index:1;
+    /* width:1.315rem;
     height:1.315rem;
-    background:url(../img/close\ icon.png) no-repeat center;
+    background:url(../img/close\ icon.png) no-repeat center; */
 }
 .content_title{
     display:flex;
@@ -229,6 +267,7 @@ header h1{
     position:absolute;
     top:0;
     left:0;
+    z-index:2;
     /* background-color:gray;
     opacity: 50%; */
 } 
@@ -344,10 +383,11 @@ header h1{
 }
 
 .regi_modal_group{
-    /* display:none; */
+    display:none;
     position:absolute;
     top:0;
     left:0;
+    z-index:2;
 }
 .regi_modal_bg{
     width:100vw;
@@ -359,9 +399,74 @@ header h1{
     width:48rem;
     height:20rem;
     position:absolute;
-    top:calc(50% - 48rem / 2);
-    left:calc(50% - 20rem / 2);
+    top:calc(50% - 20rem / 2);
+    left:calc(50% - 48rem / 2);
     background-color:#fff;
+    text-align:center;
+    border-radius:2.4rem;
+}
+.regi_modal h2{
+    font-size:2.4rem;
+    padding:1.6rem 0;
+}
+.regi_modal p{
+    font-size:2rem;
+    padding-bottom:4rem;
+}
+.regi_modal button{
+    width:43.2rem;
+    height:4.8rem;
+    background:#000;
+    padding:0.8rem 1rem 0.8rem 1rem;
+    border-radius:0.8rem;
+    color:#fff;
+    font-size:1.8rem;
+    cursor:pointer;
+}
+
+.regi_cancel_group{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.regi_cancel_bg{
+    width:100vw;
+    height:100vh;
+    background-color:gray;
+    opacity:50%;
+}
+.regi_cancel{
+    width:48rem;
+    height:20rem;
+    position:absolute;
+    top:calc(50% - 20rem / 2);
+    left:calc(50% - 48rem / 2);
+    background-color:#fff;
+    text-align:center;
+    border-radius:2.4rem;
+}
+.regi_cancel h2{
+    font-size:2.4rem;
+    padding:1.6rem 0;
+}
+.regi_cancel p{
+    font-size:2rem;
+    padding-bottom:4rem;
+}
+.regi_cancel button{
+    width:10.4rem;
+    height:4.8rem;
+    background:#000;
+    padding:0.8rem 1rem 0.8rem 1rem;
+    border-radius:0.8rem;
+    color:#fff;
+    font-size:1.8rem;
+    cursor:pointer;
+}
+.regi_cancel button:nth-child(3){
+    background-color:#fff;
+    color:#000;
 }
 
 footer{

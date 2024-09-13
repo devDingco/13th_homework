@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>크로스브라우징 실습</title>
+    <script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3.38.1/minified.min.js"></script>
+    <script>
+        const JS_시험날짜보는기능 = () => {
+            // const 자격증시험일 = new Date("2020-09-10 10:30:00"); /* 크롬O, 사파리X */
+            const 자격증시험일 = new Date("2020/09/10 10:30:00"); /* 크롬O, 사파리O */
+            const 몇월 = 자격증시험일.getMonth() + 1
+            alert(`자격증 시험일은 ${몇월}월달 입니다.`)
+        }
+        const JS_과일가져오는기능 = () => {
+            const 과일들 = ["사과", "바나나", "딸기"]
+            console.log(과일들.at(-1))
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JS_시험날짜보는기능()">시험날짜</button>
+    <button onclick="JS_과일가져오는기능()">과일</button>
+</body>
+</html>
