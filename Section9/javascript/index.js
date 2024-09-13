@@ -1,3 +1,5 @@
+let 클릭된페이지 = 1;
+
 window.onload = () => {
   console.log("민지의 다이어리에 오신 것을 환영합니다.");
 
@@ -15,6 +17,10 @@ window.onload = () => {
       console.error("HTML_메인 요소가 존재하지 않습니다.");
     }
   });
+
+  // 페이지네이션 실행하기
+
+  JS_페이지네이션만들기(클릭된페이지);
 };
 
 window.addEventListener("scroll", () => {
@@ -197,7 +203,8 @@ const JS_글쓰기기능 = () => {
 
   window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
 
-  JS_일기그리기기능();
+  JS_카드그리기기능(클릭된페이지);
+  //JS_일기그리기기능();
 };
 
 const JS_글보기기능 = (일기번호받는통) => {
@@ -363,7 +370,7 @@ const JS_일기삭제확인기능 = () => {
     );
 
     // 3. 삭제된 일기목록 화면에 다시 그리기
-    JS_일기그리기기능();
+    JS_카드그리기기능(클릭된페이지);
 
     // 4. 모달 닫기
     JS_모달닫기기능("HTML_일기삭제모달그룹");
@@ -388,7 +395,8 @@ const JS_메뉴이동 = (메뉴) => {
         "border-bottom: 0.2rem solid #000;";
       window.document.getElementById("HTML_사진보관함탭").style =
         "color: #ababab;";
-      JS_일기그리기기능();
+      // JS_일기그리기기능();
+      JS_카드그리기기능(클릭된페이지);
       break;
     }
     case "사진": {
@@ -405,6 +413,7 @@ const JS_메뉴이동 = (메뉴) => {
       window.document.getElementById("HTML_일기보관함탭").style =
         "color: #ababab;";
       JS_강아지사진그리기기능();
+
       break;
     }
   }
@@ -588,132 +597,154 @@ const JS_검색기능 = (event) => {
   }, 1000);
 };
 
+// TODO: 일기가 추가될 때마다 실행되어야 함
+const JS_페이지네이션만들기 = (클릭된페이지) => {
+  const 스토리지에저장된일기목록 =
+    window.localStorage.getItem("민지의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
 
+  const 페이지당아이템수 = 12;
+  const 페이지그룹크기 = 5;
+  const 마지막페이지 = Math.ceil(일기목록.length / 페이지당아이템수);
 
+  const 현재페이지그룹 = Math.ceil(클릭된페이지 / 페이지그룹크기);
+  const 그룹시작페이지 = (현재페이지그룹 - 1) * 페이지그룹크기 + 1; // 현재 페이지네이션 그룹에서 가장 첫번째 숫자
+  const 그룹마지막페이지 = Math.min(
+    그룹시작페이지 + 페이지그룹크기 - 1,
+    마지막페이지
+  ); // 현재 페이지네이션 그룹에서 가장 마지막 숫자
 
+  const 버튼들 = new Array(페이지그룹크기)
+    .fill(1)
+    .map((el, index) => {
+      const 페이지번호 = index + 그룹시작페이지;
 
-let 시작페이지 = 1
-let 클릭한페이지 = 1
-const 스토리지에저장된일기목록 = window.localStorage.getItem("민지의일기목록") ?? "[]";
-const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-window.onload = () => {
-  JS_페이지그리기기능()
-  JS_일기목록(시작페이지)
-}
+      return 페이지번호 <= 마지막페이지
+        ? `<button 
+    onclick="JS_카드그리기기능(${페이지번호});JS_페이지네이션만들기(${페이지번호})"
+      class=${
+        클릭된페이지 === 페이지번호 ? "CSS_페이지눌린버튼" : "CSS_페이지버튼"
+      }>${페이지번호}</button>`
+        : ``;
+    })
+    .join(" ");
 
+  let 왼쪽Chevron =
+    그룹시작페이지 > 1
+      ? `<img class="CSS_페이지이동버튼" src="./assets/images/leftactivechevron.png" onclick="JS_이전페이지이동기능( ${그룹시작페이지})">`
+      : `<img class="CSS_페이지이동버튼" src="./assets/images/leftchevron.png" onclick="JS_이전페이지이동기능( ${그룹시작페이지})">`;
 
-const JS_이전페이지 = () => {
-  if(시작페이지 === 1) {
-      alert(`첫 페이지입니다.`)
+  let 오른쪽Chevron =
+    그룹마지막페이지 < 마지막페이지
+      ? `<img class="CSS_페이지이동버튼" src="./assets/images/rightactivechevron.png" onclick="JS_다음페이지이동기능(${그룹마지막페이지}, ${마지막페이지})">`
+      : `<img class="CSS_페이지이동버튼" src="./assets/images/rightchevron.png" onclick="JS_다음페이지이동기능(${그룹마지막페이지}, ${마지막페이지})">`;
+
+  document.getElementById("HTML_페이지네이션보여주는곳").innerHTML =
+    왼쪽Chevron + 버튼들 + 오른쪽Chevron;
+};
+
+const JS_이전페이지이동기능 = (시작페이지) => {
+  if (시작페이지 > 1) {
+    시작페이지 -= 5;
+    JS_페이지네이션만들기(시작페이지);
+    JS_카드그리기기능(시작페이지);
   } else {
-      시작페이지 = 시작페이지 - 10
-      클릭한페이지 = 시작페이지
-      JS_페이지그리기기능()
-      JS_일기목록(클릭한페이지)
+    alert("처음이에요! 더 이상 내려갈 수 없어요!");
   }
-}
+};
 
-const JS_다음페이지 = () => {
-  if(시작페이지 + 10 <= 마지막페이지) {
-      시작페이지 = 시작페이지 + 10
-      클릭한페이지 = 시작페이지
-      JS_페이지그리기기능()
-      JS_일기목록(클릭한페이지)
+const JS_다음페이지이동기능 = (시작페이지, 마지막페이지) => {
+  if (시작페이지 + 5 <= 마지막페이지) {
+    시작페이지 += 5;
+    JS_페이지네이션만들기(시작페이지);
+    JS_카드그리기기능(시작페이지);
   } else {
-      alert("마지막 페이지입니다.")
+    alert("마지막페이지번호를 넘어갑니다. 더 이상 보여줄 수 없어요.");
   }
-}
+};
 
-const 보여줄갯수 = 12
+const JS_카드그리기기능 = (페이지) => {
+  클릭된페이지 = 페이지;
+  const 스토리지에저장된일기목록 =
+    window.localStorage.getItem("민지의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+  const 결과 = 일기목록.filter((_, index) => {
+    const 보여줄갯수 = 12;
+    const 건너뛸갯수 = (페이지 - 1) * 보여줄갯수;
+    if (건너뛸갯수 <= index && index < 건너뛸갯수 + 보여줄갯수) {
+      return true; // 넣어줘!
+    } else {
+      return false; // 뺴줘!
+    }
+  });
 
-const 마지막페이지 = Math.ceil(일기목록.length / 보여줄갯수)
-const JS_페이지그리기기능 = () => {
-  console.log(일기목록.length)
-  const 상자 = new Array(10). fill("철수")
-  const 페이지 = 상자.map((el ,index) => {
-    const 페이지번호 = index + 시작페이지
-     return 페이지번호 <= 마지막페이지 ? `<button class="CSS_페이지버튼 ${클릭한페이지 === 페이지번호 ? "CSS_클릭한페이지" : ""}" onclick="JS_일기목록(${페이지번호}); 클릭한페이지=${페이지번호}; JS_페이지그리기기능()"
-                    > ${페이지번호}</button>` : ""
-  }).join(" ")
-  document.getElementById("HTML_페이지보여주는곳").innerHTML = 페이지
-}
-
-const JS_일기목록 = (페이지번호담기) => {
-    const 결과 = 일기목록.filter((el, index) =>{ 
-      
-      const 건너뛸갯수 = (페이지번호담기 - 1) * 보여줄갯수
-      if(건너뛸갯수 <= index && index < 건너뛸갯수 + 보여줄갯수) {
-          return true  //결과에 넣기
-      } else {
-          return false //버리기
-      }
-  }) //객체
-
-  document.getElementById("HTML_일기보여주는곳").innerHTML = 결과.map(
-    (el, index) => `
-      <a href="./detail.html?number=${index}">
-        <div class="CSS_일기">
-          <div class="CSS_일기사진">
-            ${
-              el.기분 === "행복"
-                ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
-                : ""
-            }
-            ${
-              el.기분 === "슬픔"
-                ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
-                : ""
-            }
-            ${
-              el.기분 === "놀람"
-                ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
-                : ""
-            }
-            ${
-              el.기분 === "화남"
-                ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
-                : ""
-            }
-            ${
-              el.기분 === "기타"
-                ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
-                : ""
-            }
-          </div>
-          <div class="CSS_일기정보">
-            <div class="CSS_일기내용">
+  document.getElementById("HTML_일기보여주는곳").innerHTML = 결과
+    .map(
+      (el, index) => `
+        <a href="./detail.html?number=${index}">
+          <div class="CSS_일기">
+            <div class="CSS_일기사진">
               ${
                 el.기분 === "행복"
-                  ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
+                  ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
                   : ""
               }
               ${
                 el.기분 === "슬픔"
-                  ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
+                  ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
                   : ""
               }
               ${
                 el.기분 === "놀람"
-                  ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
+                  ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
                   : ""
               }
               ${
                 el.기분 === "화남"
-                  ? `<div class="CSS_기분 CSS_화남">화나요</div>`
+                  ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
                   : ""
               }
               ${
                 el.기분 === "기타"
-                  ? `<div class="CSS_기분 CSS_기타">기타</div>`
+                  ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
                   : ""
               }
-              <div class="CSS_날짜">${el.작성일}</div>
             </div>
-            <div class="CSS_일기제목"> ${el.제목}</div>
+            <div class="CSS_일기정보">
+              <div class="CSS_일기내용">
+                ${
+                  el.기분 === "행복"
+                    ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
+                    : ""
+                }
+                ${
+                  el.기분 === "슬픔"
+                    ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
+                    : ""
+                }
+                ${
+                  el.기분 === "놀람"
+                    ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
+                    : ""
+                }
+                ${
+                  el.기분 === "화남"
+                    ? `<div class="CSS_기분 CSS_화남">화나요</div>`
+                    : ""
+                }
+                ${
+                  el.기분 === "기타"
+                    ? `<div class="CSS_기분 CSS_기타">기타</div>`
+                    : ""
+                }
+                <div class="CSS_날짜">${el.작성일}</div>
+              </div>
+              <div class="CSS_일기제목"> ${el.제목}</div>
+            </div>
+            <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
           </div>
-        </div>
-      </a>
-    `
-).join(" ")}
-
-
+        </a>
+      `
+    )
+    .join("");
+};

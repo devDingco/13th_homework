@@ -3,6 +3,12 @@
   margin: 0;
   padding: 0;
   font-size: 62.5%;
+  font-family: 폰트1;
+}
+
+@font-face {
+  font-family: 폰트1;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
 }
 
 body {
@@ -78,10 +84,10 @@ a {
 
 .CSS_필터 {
   min-width: 12rem;
+  padding: 0.4rem;
   border-radius: 0.8rem;
+  height: 3.2rem;
   font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 2.4rem;
 }
 
 .CSS_색상반전 {
@@ -155,7 +161,7 @@ a {
   width: 2.4rem;
   height: 2.4rem;
   position: absolute;
-  top: 1rem;
+  top: 1.1rem;
   right: 0.4rem;
 }
 
@@ -207,7 +213,8 @@ a {
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1rem;
-  text-align: center;
+  text-align: left;
+  cursor: pointer;
 }
 
 .CSS_일기쓰기버튼_텍스트 {
@@ -559,6 +566,7 @@ a {
   border-radius: 2.4rem;
 }
 
+/* 스켈레톤 */
 .CSS_스켈레톤박스 {
   max-width: 63rem;
   width: 100%;
@@ -588,45 +596,60 @@ a {
   }
 }
 
-/* 페이지네이션 영역 */
-.CSS_페이지네이션 {
+/* 페이지네이션 */
+.CSS_페이지네이션보여주는곳 {
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-
-.CSS_이전페이지 {
-  background-image: url(../assets/images/left.png);
-  background-repeat: no-repeat;
-  background-position: 5px;
-  background-color: transparent;
-  border: none;
-  width: 24px;
-  height: 24px;
-}
-
-.CSS_다음페이지 {
-  background-image: url(../assets/images/right.png);
-  background-repeat: no-repeat;
-  background-position: 5px;
-  background-color: transparent;
-  border: none;
-  width: 24px;
-  height: 24px;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4rem;
 }
 
 .CSS_페이지버튼 {
-  border: none;
-  background-color: transparent;
-  width: 40px;
-  
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #fff;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
 }
 
-.CSS_클릭한페이지 {
-  color: red;
+.CSS_페이지이동버튼 {
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  left: 0;
   background-color: transparent;
-  border: none;
+  border: 0px;
+  height: 32px;
+  width: 32px;
 }
 
+.CSS_페이지눌린버튼 {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+}
 
+.CSS_페이지이동버튼사진 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

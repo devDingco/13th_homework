@@ -97,7 +97,7 @@ body {
   width: 100%;
   display: flex;
   gap: 16px;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
   text-align: left;
   font-size: 14px;
