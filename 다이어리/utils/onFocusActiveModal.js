@@ -8,7 +8,7 @@ const onFocusActiveModal = (modal) => {
       break;
     case "diary_registration_modal": {
       diaryEntry.commentList = [];
-      getContent(diaryEntry);
+      getDiaryTitleAndContent(diaryEntry);
       document.getElementById("confirmRegistration").focus();
       break;
     }

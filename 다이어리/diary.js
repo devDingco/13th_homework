@@ -5,6 +5,7 @@ let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 let paginatedDiaryData = storedDiaryList;
 let entirePageNumberList;
 let currentPage = 1;
+let lastPage;
 
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
@@ -25,25 +26,6 @@ const appendDiaryEntry = (diaryCard) => {
   } else {
     return (lastDiaryEntryContainer.innerHTML += diaryCard);
   }
-};
-
-const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
-  if (
-    currentFilteredMood === "전체" ||
-    currentFilteredMood === diaryEntry.mood
-  ) {
-    appendDiaryEntry(diaryCard);
-  } else {
-    // 예외 처리
-    appendDiaryEntry(diaryCard);
-  }
-};
-
-const getLastPageIndex = () => {
-  generatePageNumbers();
-  const pageNumber = document.getElementsByClassName("page_number");
-  const lastPageNumber = pageNumber[pageNumber.length - 1];
-  lastPageNumber.click();
 };
 
 const createHtml = (diaryEntry) => {
@@ -75,15 +57,42 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  handleDiaryEntryBasedOnMood(diaryCard, diaryEntry);
+    appendDiaryEntry(diaryCard)
 };
+
+const getLastPageIndex = () => {
+  generatePageNumbers();
+  currentPage = 1;
+  const clickNumber = Math.ceil(entirePageNumberList.length / 5) - currentPage;
+  for (let i = 0; i < clickNumber; i++) {
+    document.querySelectorAll(".go_to_page_set")[1].click();
+  }
+  const pageNumber = document.getElementsByClassName("page_number");
+  const lastPageNumber = pageNumber[pageNumber.length - 1];
+  lastPageNumber.click();
+};
+
+const handleDiaryEntryBasedOnMood = (mood) => {
+  if (
+    currentFilteredMood === mood
+  ) {
+    renderFirstPage(paginatedDiaryData);
+    getLastPageIndex();
+  } else {
+    const article = document.getElementById("article");
+    article.innerHTML = "";
+    paginatedDiaryData = storedDiaryList
+    renderFirstPage(paginatedDiaryData);
+    getLastPageIndex();
+    setDropdownLabel("전체")
+  }
+}
 
 const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  paginatedDiaryData.push({ ...diaryEntry });
-  renderFirstPage(paginatedDiaryData);
-  getLastPageIndex();
+  currentFilteredMood !== "전체" ? paginatedDiaryData.push({ ...diaryEntry }) : ""
+  handleDiaryEntryBasedOnMood(diaryEntry.mood)
 };
 
 const getDate = (diaryEntry) => {
@@ -96,16 +105,12 @@ const getDate = (diaryEntry) => {
   saveDiaryEntry(diaryEntry);
 };
 
-const getFontColor = (diaryEntry, coverName) => {
+const getFontColorAndImageName = (diaryEntry, checkedMoodId) => {
+  const coverName = checkedMoodId.split(`_`)[1];
   const fontColor = `${coverName}_emotion_font_color`;
+  diaryEntry.imageName = coverName;
   diaryEntry.color = fontColor;
   getDate(diaryEntry);
-};
-
-const getImageName = (diaryEntry, checkedMoodId) => {
-  const coverName = checkedMoodId.split(`_`)[1];
-  diaryEntry.imageName = coverName;
-  getFontColor(diaryEntry, coverName);
 };
 
 const getMood = (diaryEntry) => {
@@ -121,7 +126,7 @@ const getMood = (diaryEntry) => {
   });
 
   diaryEntry.mood = checkedMood;
-  getImageName(diaryEntry, checkedMoodId);
+  getFontColorAndImageName(diaryEntry, checkedMoodId);
 };
 
 const getId = (diaryEntry) => {
@@ -130,16 +135,12 @@ const getId = (diaryEntry) => {
   getMood(diaryEntry);
 };
 
-const getTitle = (diaryEntry) => {
+const getDiaryTitleAndContent = (diaryEntry) => {
   const diaryTitle = document.getElementById("diary_title_window").value;
-  diaryEntry.title = diaryTitle;
-  getId(diaryEntry);
-};
-
-const getContent = (diaryEntry) => {
   const diaryContent = document.getElementById("diary_contents_window").value;
+  diaryEntry.title = diaryTitle;
   diaryEntry.content = diaryContent;
-  getTitle(diaryEntry);
+  getId(diaryEntry);
 };
 
 const registerDiary = (event) => {
@@ -193,7 +194,6 @@ const goToPageSet = (event) => {
     document
       .getElementsByClassName("page_number")[0]
       .setAttribute("page", "clickedPage");
-
     document.getElementsByClassName("page_number")[0].click();
   }
 };
@@ -208,7 +208,6 @@ const generatePageNumbers = () => {
       }</button>`;
     });
   entirePageNumberList = pageNumberButtonList;
-
   document.getElementById("page_number_list").innerHTML = pageNumberButtonList
     .slice(0, 5)
     .join("");
@@ -230,6 +229,7 @@ const updateDiaryList = (selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   renderFirstPage(paginatedDiaryData);
+  generatePageNumbers();
   selectedMood !== undefined ? setDropdownLabel(selectedMood) : "";
 };
 
@@ -237,18 +237,18 @@ const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter((diary) =>
     diary.mood.includes(selectedMood)
   );
-  paginatedDiaryData = filteredDiaries;
   if (selectedMood === "전체") {
     document.getElementById("article").innerHTML = "";
     paginatedDiaryData = storedDiaryList;
     updateDiaryList(selectedMood);
-    generatePageNumbers();
+    currentPage = 1;
   } else {
     if (filteredDiaries.length === 0) {
       alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.");
     } else {
+      paginatedDiaryData = filteredDiaries;
       updateDiaryList(selectedMood);
-      generatePageNumbers();
+      currentPage = 1;
     }
   }
 };
@@ -295,13 +295,10 @@ const deleteDiaryEntry = () => {
   diaryList.map((e, i) => {
     e.id === deleteId ? (index = i) : "";
   });
-  const deleteData = storedDiaryList[index];
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  const newDiaryList = paginatedDiaryData.filter((e) => e.id !== deleteData.id);
-  paginatedDiaryData = newDiaryList;
+  paginatedDiaryData = storedDiaryList;
   updateDiaryList();
-  generatePageNumbers();
   onCloseSingleModal("confirm_delete_diary_modal");
 };
 
@@ -349,7 +346,11 @@ const closeAllModals = (modal) => {
 window.addEventListener("click", (event) => {
   const className = event.target.className;
   const id = event.target.id;
-  if (className === "aside_layout" || className === "confirm_modal_layout") {
+  if (
+    className === "aside_layout" ||
+    className === "confirm_modal_layout" ||
+    className === "confirm_delete_diary_modal_layout"
+  ) {
     event.target.id !== "diary_cancel_modal"
       ? closeAllModals(id)
       : onCloseSingleModal(id);
