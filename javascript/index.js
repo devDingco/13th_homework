@@ -169,6 +169,8 @@ const JS_글쓰기기능 = () => {
 
   // 페이지그리기기능으로 바꿈
   JS_페이지그리기기능();
+  // 화면 업데이트 확인
+  console.log('일기 추가 후 화면 업데이트');
 };
 
 const JS_글보기기능 = (일기번호받는통) => {
@@ -402,13 +404,17 @@ function JS_일기삭제기능(event, 일기번호) {
   const 삭제후일기목록 = 일기목록.filter((_, index) => index !== 일기번호);
   // 3. 삭제된 일기목록 다시 저장하기
   window.localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
+
   alert("삭제되었습니다.");
   // 이부분 얼랏을 지우고 모달 만들어 두고 나오는 식으로 해보기
+
   // 4. 삭제된 일기목록 화면에 다시 그리기
 
   //페이지그리기기능으로바꿈   
   JS_페이지그리기기능();  
 
+  // 화면 업데이트 확인
+  console.log('일기 삭제 후 화면 업데이트');
 
 }
 
@@ -443,43 +449,59 @@ const JS_삭제할지다시묻기기능 = () => {
 // 각자 탭을 선택하면 넘어가지는 기능
 
 const JS_일기보관함탭선택기능 = () => {
-  document.getElementById("JS_메인_일기보관함").classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭")
+  // 일기보관함 탭을 선택할 때 필요한 동작
+  const 일기보관함탭 = document.getElementById("JS_일기보관함탭");
+  const 사진보관함탭 = document.getElementById("JS_사진보관함탭");
+  const 일기보관함 = document.getElementById("JS_메인_일기보관함");
+  const 사진보관함 = document.getElementById("JS_메인_사진보관함");
+  const 강아지보여주는곳 = document.getElementById("HTML_강아지보여주는곳");
 
-  // document.getElementById("JS_메인_일기보관함").classList.add("CSS_클릭되지않은탭")
-  // document.getElementById("JS_메인_사진보관함").classList.remove("CSS_클릭된탭")
-  
-  document.getElementById("JS_메인_일기보관함").style = "display: flex";
+  // 탭 스타일 업데이트
+  일기보관함탭.classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭");
+  사진보관함탭.classList.replace("CSS_클릭된탭", "CSS_클릭되지않은탭");
 
-  document.getElementById("JS_메인_사진보관함").style = "display: none";
+  // 일기보관함을 표시하고 사진보관함과 강아지 사진을 숨김
+  일기보관함.style.display = "flex";
+  사진보관함.style.display = "none";
+  강아지보여주는곳.style.display = "none";
 
+  // API 호출 타이머를 중단하고 초기화
+  if (타이머) {
+    clearTimeout(타이머); // 타이머 중단
+    타이머 = null; // 타이머 초기화
+  }
 
-  document.getElementById("JS_일기보관함탭").classList.add("CSS_클릭된탭")
-  document.getElementById("JS_사진보관함탭").classList.remove("CSS_클릭된탭")
+  // 스크롤 이벤트 제거로 API 호출 중단
+  window.removeEventListener("scroll", JS_강아지사진불러오는기능);
+};
 
-  document.getElementById("JS_일기보관함탭").classList.remove("CSS_클릭되지않은탭")
-  document.getElementById("JS_사진보관함탭").classList.add("CSS_클릭되지않은탭")
-
-  document.getElementById("HTML_강아지보여주는곳").style = "display: none"
-}
+let 타이머 = null;
 
 const JS_사진보관함탭선택기능 = () => {
-  document.getElementById("JS_메인_사진보관함").classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭")
-  // document.getElementById("JS_메인_일기보관함").classList.remove("CSS_클릭되지않은탭")
-  // document.getElementById("JS_메인_사진보관함").classList.add("CSS_클릭된탭")
+  const 일기보관함 = document.getElementById("JS_메인_일기보관함");
+  const 사진보관함 = document.getElementById("JS_메인_사진보관함");
+  const 강아지보여주는곳 = document.getElementById("HTML_강아지보여주는곳");
 
-  document.getElementById("JS_메인_일기보관함").style = "display: none";
+  // 탭 스타일 업데이트
+  document.getElementById("JS_일기보관함탭").classList.replace("CSS_클릭된탭", "CSS_클릭되지않은탭");
+  document.getElementById("JS_사진보관함탭").classList.replace("CSS_클릭되지않은탭", "CSS_클릭된탭");
 
-  document.getElementById("JS_메인_사진보관함").style = "display: flex";
+  // 사진보관함을 표시하고 일기보관함을 숨김
+  일기보관함.style.display = "none";
+  사진보관함.style.display = "flex";
+  강아지보여주는곳.style.display = "flex";
+
+  // **스크롤 이벤트를 다시 추가**
+  window.addEventListener("scroll", JS_스크롤이벤트체크);
+
+    // 사진보관함 탭 클릭 시 첫 10장을 불러오기
+
+};
 
 
-
-  document.getElementById("JS_일기보관함탭").classList.remove("CSS_클릭된탭")
-  document.getElementById("JS_사진보관함탭").classList.add("CSS_클릭된탭")
-
-  document.getElementById("JS_일기보관함탭").classList.add("CSS_클릭되지않은탭")
-  document.getElementById("JS_사진보관함탭").classList.remove("CSS_클릭되지않은탭")
-
-  document.getElementById("HTML_강아지보여주는곳").style = "display: flex"
+const JS_강아지사진보여주기 = () => {
+  // 강아지 사진을 불러오고 보여줄 영역을 보이도록 설정
+  document.getElementById("HTML_강아지보여주는곳").style.display = "flex"
 }
 
 // 사진보관함 사진 관리하는 부분
@@ -498,8 +520,8 @@ const JS_강아지사진불러오는기능 = () => {
     .catch((오류) => console.error("오류 발생:", 오류));
 }
 
-let 타이머 = null;
-window.addEventListener("scroll", () => {
+// **새로 만든 스크롤 이벤트 체크 함수**
+const JS_스크롤이벤트체크 = () => {
   const 스크롤퍼센트 = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
   // 90% 이상 스크롤되었을 때 강아지 사진 불러오기
@@ -512,7 +534,7 @@ window.addEventListener("scroll", () => {
       타이머 = null;
     }, 1000);
   }
-});
+};
 
 
 
@@ -532,7 +554,6 @@ const JS_사진사이즈선택 = () => {
     }
   })
 }
-
 
 
 let 시작페이지 = 1;
@@ -641,9 +662,18 @@ const JS_일기카드그리기기능 = () => {
 };
 
 // 여기에 사진보관함 온클릭 추가해서 사진보관함 가면 페이지네이션 안보이게 삭제하는 기능 마저 작성하기
-const JS_페이지네이션삭제 = () => {
+const JS_페이지네이션삭제할지말지 = () => {
+  const 페이지네이션선택 = document.querySelector(".CSS_페이지네이션");
+  const 현재디스플레이 = window.getComputedStyle(페이지네이션선택).display;
 
-}
+  if (현재디스플레이 === "flex") {
+    페이지네이션선택.style.display = "none";
+  } else {
+    페이지네이션선택.style.display = "flex";
+  }
+};
+
+
 
 // 페이지 로드 시 초기화
 JS_페이지그리기기능();
