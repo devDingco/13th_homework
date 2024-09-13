@@ -136,8 +136,12 @@
   }
 }
 @media (max-width: 480px) {
+  .headerBanner .title h3 {
+    width: 80%;
+    font-size: 1.5625rem;
+  }
   .headerBanner img {
-    transform: none;
+    height: 100%;
   }
   .navBottom.stickyAddStyle {
     justify-content: space-between;

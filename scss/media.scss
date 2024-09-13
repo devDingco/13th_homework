@@ -178,8 +178,14 @@
 
 @media (max-width: 480px) {
   .headerBanner {
+    .title {
+      h3 {
+        width: 80%;
+        font-size: 1.5625rem;
+      }
+    }
     img {
-      transform: none;
+      height: 100%;
     }
   }
 
