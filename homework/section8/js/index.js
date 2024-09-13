@@ -76,11 +76,7 @@ const 페이지그리기기능 = () => {
 }
 
 const 페이지일기그리기기능 = (페이지번호담는통) => {
-  let 일기목록;
-  const 스토리지에저장된일기목록 = localStorage.getItem("일기항목") ?? "[]"
-  일기목록 = JSON.parse(스토리지에저장된일기목록);
-
-  const 결과 = 일기목록.filter((_, index) => {
+  const 결과 = 일기_목록.filter((_, index) => {
     const 보여줄갯수 = 12
     const 건너뛸갯수 = (페이지번호담는통 - 1) * 보여줄갯수
 
@@ -107,7 +103,6 @@ const 페이지일기그리기기능 = (페이지번호담는통) => {
     `
   ).join("")
 }
-
 
 
 const 일기DOM만들기 = () => {
