@@ -3,6 +3,7 @@
     <head>
         <title>Section1 Homework</title>
         <link rel="stylesheet" href="./index.css" />
+        <link rel="stylesheet" href="./modal.css" />
     </head>
     <body>
         <div class="CSS_레이아웃">
@@ -26,6 +27,12 @@
                     <option value="화남선택">화나요</option>
                     <option value="기타선택">기타</option>
                 </select>
+                <button
+                    class="CSS_일기쓰기모달버튼"
+                    onclick="JS_일기쓰기모달보여주기기능()"
+                >
+                    + 일기쓰기
+                </button>
             </div>
 
             <div class="CSS_메인">
@@ -33,77 +40,10 @@
                     id="HTML_메인왼쪽일기보여주는곳"
                     class="CSS_메인왼쪽일기보여주는곳"
                 ></div>
-
-                <div class="CSS_메인오른쪽">
-                    <img src="./image/writing.png" alt="writing" />
-                    <div class="CSS_메인오른쪽_중간">
-                        <div class="CSS_오늘기분">오늘기분은 어땠나요</div>
-
-                        <div class="CSS_라디오모음">
-                            <input
-                                id="id_행복"
-                                type="radio"
-                                value="행복"
-                                name="감정"
-                            />
-                            <label for="행복">행복해요</label>
-
-                            <input
-                                id="id_슬픔"
-                                type="radio"
-                                value="슬픔"
-                                name="감정"
-                            />
-                            <label for="슬픔">슬퍼요</label>
-
-                            <input
-                                id="id_놀람"
-                                type="radio"
-                                value="놀람"
-                                name="감정"
-                            />
-                            <label for="놀람">놀랐어요</label>
-
-                            <input
-                                id="id_화남"
-                                type="radio"
-                                value="화남"
-                                name="감정"
-                            />
-                            <label for="화남">화나요</label>
-
-                            <input
-                                id="id_기타"
-                                type="radio"
-                                value="기타"
-                                name="감정"
-                            />
-                            <label for="기타">기타</label>
-                        </div>
-
-                        <div class="CSS_제목">제목</div>
-                        <input
-                            id="id_제목"
-                            class="CSS_제목인풋"
-                            type="text"
-                            placeholder="제목을 입력하세요"
-                        />
-                        <div class="CSS_내용">내용</div>
-                        <textarea
-                            id="id_내용"
-                            class="CSS_내용인풋"
-                            placeholder="내용을 입력하세요"
-                        ></textarea>
-                    </div>
-
-                    <button class="CSS_등록하기" onclick="JS_글쓰기기능();">
-                        등록하기
-                    </button>
-                    <div class="CSS_플로팅버튼" onclick="플로팅버튼()">
-                        <img src="./image/arrow_up.png" />
-                    </div>
-                </div>
             </div>
+        </div>
+        <div class="CSS_플로팅버튼" onclick="플로팅버튼()">
+            <img src="./image/arrow_up.png" />
         </div>
         <div class="CSS_푸터">
             <div class="CSS_푸터글상자">
@@ -113,6 +53,28 @@
             </div>
         </div>
 
+        <!-- 모달 -->
+        <div id="HTML모달그룹" class="CSS_모달그룹">
+            <div class="CSS_모달배경"></div>
+            <div id="HTML_모달" class="CSS_모달"></div>
+        </div>
+
+        <!-- 등록완료모달 -->
+        <div id="HTML_등록완료모달그룹" class="CSS_모달그룹">
+            <div class="CSS_모달배경"></div>
+            <div class="CSS_등록완료모달">
+                <div class="CSS_등록완료모달제목">일기 등록 완료</div>
+                <div class="CSS_등록완료모달내용">등록이 완료 되었습니다.</div>
+                <button
+                    class="CSS_등록완료모달확인버튼"
+                    onclick="JS_일기등록완료중첩모달확인()"
+                >
+                    확인
+                </button>
+            </div>
+        </div>
+
         <script defer src="./index.js"></script>
+        <script defer src="./modal.js"></script>
     </body>
 </html>

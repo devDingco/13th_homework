@@ -94,6 +94,30 @@
     cursor: pointer;
 }
 
+.CSS_토스트 {
+    display: flex;
+    width: 760px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    animation-name: 화현이가만든애니메이션;
+    animation-duration: 2s;
+}
+
+@keyframes 화현이가만든애니메이션 {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
 .CSS_회고글자 {
     color: #000;
     font-family: 'Pretendard Variable';
