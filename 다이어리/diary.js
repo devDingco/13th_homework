@@ -149,6 +149,7 @@ const registerDiary = (event) => {
 };
 
 const renderFirstPage = (diaryList) => {
+  document.querySelector(".page_list_box").style.display = "flex";
   diaryList.slice(0, 12).map((diary) => {
     const storedDiary = {
       id: diary.id,
@@ -471,26 +472,20 @@ const onSearch = (event) => {
     const searchResults = paginatedDiaryData.filter((e) =>
       e.title.includes(searchQuery)
     );
+    paginatedDiaryData = searchResults;
     document.getElementById("article").innerHTML = "";
     if (searchResults.length === 0) {
       document.getElementById(
         "article"
       ).innerHTML += `<div class="no_search_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+      document.querySelector(".page_list_box").style.display = "none";
     } else {
-      searchResults.map((diary) => {
-        const storedDiary = {
-          id: diary.id,
-          mood: diary.mood,
-          date: diary.date,
-          color: diary.color,
-          title: diary.title,
-          content: diary.content,
-          imageName: diary.imageName,
-        };
-        createHtml(storedDiary);
-      });
+      renderFirstPage(searchResults);
+      generatePageNumbers();
+      checkCurrentPageSet();
     }
     document.getElementById("search").value = null;
+    paginatedDiaryData = storedDiaryList;
   }, 1000);
 };
 
