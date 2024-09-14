@@ -214,6 +214,12 @@ const checkCurrentPageSet = (event) => {
 };
 
 const generatePageNumbers = () => {
+  if (paginatedDiaryData.length === 0) {
+    document.getElementById(
+      "article"
+    ).innerHTML += `<div class="no_result_box">등록된 일기가 없습니다.</div>`;
+    document.querySelector(".page_list_box").style.display = "none";
+  }
   const pageNumberList = Math.ceil(paginatedDiaryData.length / 12);
   const pageNumberButtonList = Array(pageNumberList)
     .fill(1)
@@ -259,7 +265,11 @@ const getDiariesByMood = (selectedMood) => {
     currentPage = 1;
   } else {
     if (filteredDiaries.length === 0) {
-      alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.");
+      document.getElementById("article").innerHTML = "";
+      document.getElementById(
+        "article"
+      ).innerHTML += `<div class="no_result_box">등록된 일기가 없습니다.</div>`;
+      document.querySelector(".page_list_box").style.display = "none";
     } else {
       paginatedDiaryData = filteredDiaries;
       updateDiaryList(selectedMood);
@@ -445,6 +455,7 @@ const toggleDiaryPhotoView = (viewType) => {
     case "diaryStorage": {
       currentPage = 1;
       getDiariesByMood("전체");
+      checkCurrentPageSet();
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -477,7 +488,7 @@ const onSearch = (event) => {
     if (searchResults.length === 0) {
       document.getElementById(
         "article"
-      ).innerHTML += `<div class="no_search_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+      ).innerHTML += `<div class="no_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
       document.querySelector(".page_list_box").style.display = "none";
     } else {
       renderFirstPage(searchResults);

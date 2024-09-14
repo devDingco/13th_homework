@@ -5,14 +5,15 @@
   max-width: 100%;
 }
 body {
-	font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
 }
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 .layout {
   display: flex;
@@ -295,7 +296,7 @@ body {
   line-height: 1.5rem;
   letter-spacing: -0.01rem;
 }
-.no_search_result_box {
+.no_result_box {
   display: flex;
   width: 50rem;
   height: 14.563rem;
@@ -708,16 +709,16 @@ body {
   gap: 0.75rem;
   align-items: center;
 }
-.go_to_page_set{
+.go_to_page_set {
   border: none;
-  background-color: #FFF;
+  background-color: #fff;
   width: 1.5rem;
   height: 1.5rem;
   /* transform: scaleX(-1); */
 }
 #prev-page-btn {
   transform: scaleX(-1);
-  display: none
+  display: none;
 }
 #page_number_list {
   display: flex;
