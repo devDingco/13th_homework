@@ -713,6 +713,11 @@ body {
   background-color: #FFF;
   width: 1.5rem;
   height: 1.5rem;
+  /* transform: scaleX(-1); */
+}
+#prev-page-btn {
+  transform: scaleX(-1);
+  display: none
 }
 #page_number_list {
   display: flex;

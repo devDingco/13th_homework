@@ -287,11 +287,19 @@
               </button>
             </div>
             <div class="page_list_box">
-              <button class="go_to_page_set" onclick="goToPageSet(event)">
+              <button
+                id="prev-page-btn"
+                class="go_to_page_set"
+                onclick="checkCurrentPageSet(event)"
+              >
                 <img src="./image/chevron_left.svg" width="24px" />
               </button>
               <div id="page_number_list"></div>
-              <button class="go_to_page_set" onclick="goToPageSet(event)">
+              <button
+                id="next-page-btn"
+                class="go_to_page_set"
+                onclick="checkCurrentPageSet(event)"
+              >
                 <img src="./image/chevron_right.svg" width="24px" />
               </button>
             </div>

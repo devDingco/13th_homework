@@ -177,24 +177,38 @@ const handlePageClick = (event) => {
   upScroll();
 };
 
-const goToPageSet = (event) => {
-  const isNextClicked = event.target.outerHTML.includes("right");
-  isNextClicked ? (currentPage += 1) : (currentPage -= 1);
-  if (Math.ceil(entirePageNumberList.length / 5) < currentPage) {
-    currentPage -= 1;
-    alert("last page");
-  } else if (!currentPage) {
-    currentPage += 1;
-    alert("first page");
+const navigateToPageSet = () => {
+  const begin = (currentPage - 1) * 5;
+  const end = currentPage * 5;
+  const page = entirePageNumberList.slice(begin, end).join("");
+  document.getElementById("page_number_list").innerHTML = page;
+  document
+    .getElementsByClassName("page_number")[0]
+    .setAttribute("page", "clickedPage");
+  document.getElementsByClassName("page_number")[0].click();
+};
+
+const checkCurrentPageSet = (event) => {
+  const prevPageBtn = document.getElementById("prev-page-btn");
+  const nextPageBtn = document.getElementById("next-page-btn");
+  const pageSet = Math.ceil(entirePageNumberList.length / 5);
+  if (event === undefined) {
+    currentPage > 1
+      ? (prevPageBtn.style = "display: block")
+      : (prevPageBtn.style = "display: none");
+    pageSet <= currentPage
+      ? (nextPageBtn.style = "display: none")
+      : (nextPageBtn.style = "display: block");
   } else {
-    const begin = (currentPage - 1) * 5;
-    const end = currentPage * 5;
-    const page = entirePageNumberList.slice(begin, end).join("");
-    document.getElementById("page_number_list").innerHTML = page;
-    document
-      .getElementsByClassName("page_number")[0]
-      .setAttribute("page", "clickedPage");
-    document.getElementsByClassName("page_number")[0].click();
+    const isNextClicked = event.target.outerHTML.includes("right");
+    isNextClicked ? (currentPage += 1) : (currentPage -= 1);
+    currentPage > 1
+      ? (prevPageBtn.style = "display: block")
+      : (prevPageBtn.style = "display: none");
+    pageSet <= currentPage
+      ? (nextPageBtn.style = "display: none")
+      : (nextPageBtn.style = "display: block");
+    navigateToPageSet();
   }
 };
 
@@ -256,7 +270,9 @@ const getDiariesByMood = (selectedMood) => {
 const onClickMood = (event) => {
   const selectedMood = event.target.closest("li").innerText;
   currentFilteredMood = selectedMood;
+  currentPage = 1;
   getDiariesByMood(currentFilteredMood);
+  checkCurrentPageSet();
   upScroll();
 };
 
@@ -293,7 +309,6 @@ const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
   for (let i = 0; i < diaryList.length; i++) {
-    console.log(i);
     if (diaryList[i].id === deleteId) {
       index = i;
       break;
@@ -305,7 +320,6 @@ const deleteDiaryEntry = () => {
   paginatedDiaryData = storedDiaryList;
   updateDiaryList();
   onCloseSingleModal("confirm_delete_diary_modal");
-  console.log("test");
 };
 
 const confirmDeleteDiary = (event) => {
