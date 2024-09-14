@@ -442,8 +442,8 @@ const toggleDiaryPhotoView = (viewType) => {
 
   switch (viewType) {
     case "diaryStorage": {
-      document.getElementById("article").innerHTML = "";
-      renderFirstPage(storedDiaryList);
+      currentPage = 1;
+      getDiariesByMood("전체");
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
       photoStorageMenuStyle.style = noneStyle;
@@ -455,6 +455,7 @@ const toggleDiaryPhotoView = (viewType) => {
       photoStorage.style = "display: block";
       diaryStorageMenuStyle.style = noneStyle;
       photoStorageMenuStyle.style = blockStyle;
+      setDropdownLabel("기본형");
       showLoadingSkeleton();
       break;
     }
