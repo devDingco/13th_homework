@@ -28,7 +28,7 @@ const translationMap = {
 });
 
 JSON.parse(localStorage.getItem("diaryArray")).forEach(element => {
-    if (element !== null) addDiaryUI(element);
+    if (element !== null) renderDiaryView(element);
 });
 
 document.querySelector("#adding-form").addEventListener(
@@ -41,7 +41,7 @@ document.querySelector("#adding-form").addEventListener(
             alert("제목과 내용을 입력하세요");
             return;
         }
-        diaryArray = JSON.parse(localStorage.getItem("diaryArray"));
+        const diaryArray = JSON.parse(localStorage.getItem("diaryArray"));
         const emoIndex = JSON.parse(localStorage.getItem(emotion));
         emoIndex.push(diaryArray.length);
         localStorage.setItem(emotion, JSON.stringify([...emoIndex]));
@@ -57,14 +57,14 @@ document.querySelector("#adding-form").addEventListener(
         });
         localStorage.setItem("lastIndex", tempInt);
         localStorage.setItem("diaryArray", JSON.stringify(diaryArray));
-        addDiaryUI(objAdded);
+        renderDiaryView(objAdded);
         e.target.querySelector("input[type='radio'], input[checked]").checked = true;
         e.target.querySelector("input.text-input").value = "";
         e.target.querySelector("textarea.text-input").value = "";
     }
 );
 
-function addDiaryUI(listobj) {
+function renderDiaryView(listobj) {
     const emotion = listobj["emotion"];
     const title = listobj["title"];
     const dateNow = listobj["datenow"];
@@ -109,7 +109,7 @@ function addDiaryUI(listobj) {
                 diaryList.removeChild(diaryList.lastChild);
             }
             array.forEach(element => {
-                if (element !== null) addDiaryUI(element);
+                if (element !== null) renderDiaryView(element);
             });
         });
         diaryList.prepend(templClone);
@@ -138,7 +138,7 @@ document.querySelector("select#dropdownEmotionFilter").addEventListener("change"
     if ('content' in document.createElement('template')) {
         const diaryList = document.querySelector("ul#diarylist");
         while (diaryList.hasChildNodes()) diaryList.removeChild(diaryList.lastChild);
-        list.filter((e) => e !== null && predicate(e.index, filterset)).forEach(e => addDiaryUI(e));
+        list.filter((e) => e !== null && predicate(e.index, filterset)).forEach(e => renderDiaryView(e));
     }
 });
 
@@ -156,7 +156,6 @@ document.querySelector("select#dropdownImageAspect").addEventListener("change", 
 const diaryListHTML = document.querySelector("ul#diarylist");
 diaryListHTML.addEventListener("scroll", (e) => {
     if (diaryListHTML.scrollTop > 0) {
-        // console.log("dfa")
         document.querySelector("select#dropdownEmotionFilter").style = "background: var(--reverselightgray)"
     } else {
         document.querySelector("select#dropdownEmotionFilter").style = "background: var(--lightgray)"
@@ -164,6 +163,7 @@ diaryListHTML.addEventListener("scroll", (e) => {
 });
 
 document.querySelector("div.scroll-up-btn").addEventListener("click", (e) => {
+    window.scrollTo({top: 0, behavior: "smooth"});
     diaryListHTML.scrollTo({top: 0, behavior: "smooth"});
 });
 
@@ -275,7 +275,7 @@ document.querySelector("input.dark-btn").addEventListener("change", e => {
 
 window.addEventListener("scroll", throttle(add10Pics, {debug:false}));
 
-document.querySelector("input.search-input").addEventListener("input", debounce(printQueryResult, {debug:true}));
+document.querySelector("input.search-input").addEventListener("input", debounce(renderQueryResult, {debug:true}));
 
 // ("input", e => {
 //     // console.log(e.target.value); // whole input
@@ -291,11 +291,22 @@ function getQueryBase(emotion) {
 }
 
 function getQueryResult(query) {
-    const selection = document.querySelector("selection#dropdownEmotionFilter").querySelector(":checked").value;
+    const selection = document.querySelector("select#dropdownEmotionFilter").querySelector(":checked").value;
     const emotionMap = {"전체": null, "행복해요": "happy", "슬퍼요": "sad", "놀랐어요": "surprised", "화나요": "angry", "기타": "other"};
-    return getQueryBase(emotionMap[selection]).filter(element => element.match(/`${query}`/).length > 0);
+    const queryRegex = new RegExp(`${query}`);
+    return getQueryBase(emotionMap[selection]).filter(diary => queryRegex.test(diary.title));
 }
 
-function printQueryResult(...e) {
-    console.log(e);
+function printQueryResult(...args) {
+    const [event, ...rest] = args;
+    console.dir(getQueryResult(event.target.value));
+}
+
+function renderQueryResult(...args) {
+    const [event, ...rest] = args;
+    if ('content' in document.createElement('template')) {
+        const diaryList = document.querySelector("ul#diarylist");
+        while (diaryList.hasChildNodes()) diaryList.removeChild(diaryList.lastChild);
+        getQueryResult(event.target.value).forEach(e => renderDiaryView(e));
+    }
 }

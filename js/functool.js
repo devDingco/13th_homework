@@ -84,7 +84,7 @@ function throttle(eventListener, {timeout=1000, debug=false, debugLabel="Throttl
             return;
         }
         timer = setTimeout(()=>{timer=null}, timeout);
-        eventListener.apply(args);
+        eventListener.apply(null, args);
         if (!!debug) {
             console.timeLog(debugLabel);
             console.dir(args);
@@ -136,22 +136,23 @@ function debounceWrapper() {
         let timer = null;
         return (...args) => {
             if (!!timer) {
+                array = args;
                 if (!!debug) {
                     console.log("<Ignored Event>");
-                    console.dir(args);
+                    console.dir(array);
                     console.log("</Ignored Event>");
                 }
-                array = args;
                 return; // Invariant 3
             }
             setTimeout(() => {
+                array = args;
                 if (!!debug) {
                     console.timeLog(debugLabel);
-                    console.dir(args);
+                    console.dir(array);
                     console.log(`</${debugLabel}>`);
                 }
                 //eventListener.apply(args); // Invariant 1, 2, 4
-                eventListener.apply(array);
+                eventListener.apply(null, array);
             }, timeout);
         };
     }
