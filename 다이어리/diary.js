@@ -342,16 +342,14 @@ const confirmDeleteDiary = (event) => {
 const validateDiaryInputCompletion = () => {
   const text = document.getElementById("diary_title_window");
   const textarea = document.getElementById("diary_contents_window");
-
   const validate = () => {
+    const registerButton = document.getElementById("register_button");
     if (!(text.value && textarea.value)) {
-      document.getElementById("register_button").disabled = true;
-      document.getElementById("register_button").style =
-        "color: #f2f2f2; background-color: #c7c7c7;";
+      registerButton.disabled = true;
+      registerButton.style = "color: #f2f2f2; background-color: #c7c7c7;";
     } else {
-      document.getElementById("register_button").disabled = false;
-      document.getElementById("register_button").style =
-        "color: #F2F2F2; background-color: #000;";
+      registerButton.disabled = false;
+      registerButton.style = "color: #F2F2F2; background-color: #000;";
     }
   };
 
@@ -444,10 +442,11 @@ window.addEventListener("scroll", () => {
 });
 
 const toggleDiaryPhotoView = (viewType) => {
-  const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
-  const photoStorageMenuStyle = document.getElementById("photo_storage_menu");
-  const noneStyle = "color: var(--Gray-Gray-400, #ABABAB); border: none";
-  const blockStyle = "color: #000; border-bottom: 2px solid black;";
+  const diaryStorageMenu = document.getElementById("diary_storage_menu");
+  const photoStorageMenu = document.getElementById("photo_storage_menu");
+  const noneStyle = "color: var(--basicMenuColor); border: none";
+  const blockStyle =
+    "color: var(--basicConfirmModalColor); border-bottom: 2px solid var(--basicConfirmModalColor);";
   const diaryStorage = document.getElementById("diary_storage");
   const photoStorage = document.getElementById("photo_storage");
 
@@ -458,15 +457,15 @@ const toggleDiaryPhotoView = (viewType) => {
       checkCurrentPageSet();
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
-      photoStorageMenuStyle.style = noneStyle;
-      diaryStorageMenuStyle.style = blockStyle;
+      photoStorageMenu.style = noneStyle;
+      diaryStorageMenu.style = blockStyle;
       break;
     }
     case "photoStorage": {
       diaryStorage.style = "display: none";
       photoStorage.style = "display: block";
-      diaryStorageMenuStyle.style = noneStyle;
-      photoStorageMenuStyle.style = blockStyle;
+      diaryStorageMenu.style = noneStyle;
+      photoStorageMenu.style = blockStyle;
       setDropdownLabel("기본형");
       showLoadingSkeleton();
       break;
@@ -498,13 +497,6 @@ const onSearch = (event) => {
     document.getElementById("search").value = null;
     paginatedDiaryData = storedDiaryList;
   }, 1000);
-};
-
-const darkModeToggle = (event) => {
-  const mode = document.documentElement;
-  event.target.checked
-    ? mode.setAttribute("mode", "dark")
-    : mode.setAttribute("mode", "light");
 };
 
 renderFirstPage(storedDiaryList);
