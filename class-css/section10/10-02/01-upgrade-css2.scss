@@ -1,0 +1,15 @@
+@for $i from 1 through 3 {
+  .CSS_버튼-#{$i} {
+    width: 100px * $i;
+    background: rgb(255, 188, 162);
+    border: 2px solid salmon;
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+    @if $i ==3 {
+      color: white;
+      margin-bottom: 0
+    }
+  }
+
+}

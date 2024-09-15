@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>다이어리 보관함📔</title>
+  <link rel="stylesheet" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/image.css" />
+  <link rel="stylesheet" href="./css/dropdown.css" />
+  <script src="./js/index.js"></script>
+  <script src="./js/image.js"></script>
+</head>
+
+<body>
+  <div class="레이아웃">
+    <!-- 헤더 -->
+    <div class="헤더">
+      <div>민서의 다이어리</div>
+    </div>
+    <!-- 배너 -->
+    <img class="배너" src="./images/배너.png" />
+    <!-- 탭 -->
+    <div class="탭_박스">
+      <div onclick="탭선택기능('일기보관함탭')" id="일기보관함탭" class="선택_탭">일기보관함</div>
+      <div onclick="탭선택기능('사진보관함탭')" id="사진보관함탭" class="비선택_탭">사진보관함</div>
+    </div>
+    <!-- 일기 레이아웃 -->
+    <div class="일기_레이아웃" id="일기_레이아웃">
+      <div class="필터_박스">
+        <div class="드롭다운_박스">
+          <input type="checkbox" id="드롭다운_제목" class="드롭다운_제목" />
+          <ul class="드롭다운_메뉴">
+            <li>
+              <input type="radio" name="드롭다운" id="전체" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="전체">전체</label>
+            </li>
+            <li>
+              <input type="radio" name="드롭다운" id="행복해요" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="행복해요">행복해요</label>
+            </li>
+            <li>
+              <input type="radio" name="드롭다운" id="슬퍼요" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="슬퍼요">슬퍼요</label>
+            </li>
+            <li>
+              <input type="radio" name="드롭다운" id="놀랐어요" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="놀랐어요">놀랐어요</label>
+            </li>
+            <li>
+              <input type="radio" name="드롭다운" id="화나요" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="화나요">화나요</label>
+            </li>
+            <li>
+              <input type="radio" name="드롭다운" id="기타" onclick="드롭다운선택기능(event); 필터링기능(event)" />
+              <label for="기타">기타</label>
+            </li>
+          </ul>
+        </div>
+        <div class="검색창_영역">
+          <input type="text" class="검색창" placeholder="검색어를 입력해 주세요" oninput="검색기능(event)" />
+        </div>
+        <button onclick="모달열기기능('일기등록모달')" class="일기_쓰기_버튼">+ 일기쓰기</button>
+      </div>
+      <!-- 메인 -->
+      <div class="메인_공간">
+        <div id="일기추가할공간" class="일기_두개씩_보여주는_공간"></div>
+        <!-- 페이지 -->
+        <div class="페이지_공간">
+          <img src="./images/페이지버튼.png" id="이전페이지버튼" class="이전페이지_버튼" onclick="이전페이지이동기능()">
+          <span class="페이지번호공간" id="페이지번호보여주는곳"></span>
+          <img src="./images/페이지버튼.png" id="다음페이지버튼" class="다음페이지_버튼" onclick="다음페이지이동기능()" />
+        </div>
+
+      </div>
+    </div>
+
+
+    <img src="./images/topscroll fab.png" class="탑스크롤_버튼" id="탑스크롤버튼" onclick="탑스크롤기능()" />
+
+    <!-- 사진 레이아웃 -->
+    <div class="사진_레이아웃" id="사진_레이아웃">
+      <div class="필터_박스">
+        <select id="사진_필터" class="필터" onchange="사진_필터링기능()">
+          <option selected value="기본선택">기본형</option>
+          <option value="가로선택">가로형</option>
+          <option value="세로선택">세로형</option>
+        </select>
+      </div>
+      <div class="사진_메인_공간" id="사진추가할공간">
+        <!-- 사진 들어올 공간 -->
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <!-- 푸터 -->
+  <div class="푸터" id="푸터">
+    <div class="푸터_컨테이너">
+      <div class="푸터_타이틀">
+        민서의 다이어리
+      </div>
+      <div class="푸터_전화번호_">
+        대표 : {name}
+      </div>
+      <div class="푸터_하단">
+        Copyright © 2024. {name} Co., Ltd.
+      </div>
+    </div>
+  </div>
+
+  <!-- 일기 쓰는 곳 -->
+  <div class="모달그룹" id="일기등록모달">
+    <div class="모달배경" onclick="모달닫기기능('일기등록모달')"></div>
+    <div class="일기_쓰기_공간_박스">
+      <div class="일기_쓰기_공간">
+        <div class="타이틀_토글_박스">
+          <div class="일기_제목">📍 일기 쓰기</div>
+          <div class="토글_박스">
+            <div class="다크모드">다크모드</div>
+            <input type="checkbox" class="토글" onclick="다크모드기능(event)" />
+          </div>
+        </div>
+        <div class="일기_작성_폼">
+          <div class="기분_어땟나요">오늘 기분은 어땠나요?</div>
+          <div class="기분_선택_라디오_영역">
+            <div class="기분_라디오_박스">
+              <input class="기분_영역" type="radio" value="행복해요" name="기분" />
+              <div class="기분_텍스트">행복해요</div>
+            </div>
+            <div class="기분_라디오_박스">
+              <input class="기분_영역" type="radio" value="슬퍼요" name="기분" />
+              <div class="기분_텍스트">슬퍼요</div>
+            </div>
+            <div class="기분_라디오_박스">
+              <input class="기분_영역" type="radio" value="놀랐어요" name="기분" />
+              <div class="기분_텍스트">놀랐어요</div>
+            </div>
+            <div class="기분_라디오_박스">
+              <input class="기분_영역" type="radio" value="화나요" name="기분" />
+              <div class="기분_텍스트">화나요</div>
+            </div>
+            <div class="기분_라디오_박스">
+              <input class="기분_영역" type="radio" value="기타" name="기분" />
+              <div class="기분_텍스트">기타</div>
+            </div>
+          </div>
+          <div class="텍스트_입력_영역">
+            <div class="제목_타이틀">제목</div>
+            <input id="제목인풋" class="제목_인풋" placeholder="제목을 입력해 주세요" />
+            <div class="내용_영역">
+              <div class="내용_타이틀">내용</div>
+              <textarea id="내용인풋" class="내용_인풋" placeholder="내용을 입력해 주세요"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="버튼_영역">
+          <button class="닫기_버튼" onclick="모달열기기능('일기등록취소모달')">닫기</button>
+          <button class="등록하기_버튼" onclick="일기등록기능()">
+            등록하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 일기등록완료 -->
+  <div class="모달그룹" id="일기등록완료모달">
+    <div class="모달배경"></div>
+    <div class="일기등록완료" id="일기등록완료">
+      <div class="일기등록완료_텍스트_영역">
+        <div class="완료모달_제목">일기 등록 완료</div>
+        <div class="완료모달_내용">등록이 완료 되었습니다.</div>
+      </div>
+      <button class="모달_확인버튼" onclick="모달닫기기능('일기등록완료모달'); 모달닫기기능('일기등록모달')">확인</button>
+    </div>
+  </div>
+
+  <!-- 일기등록취소 -->
+  <div class="모달그룹" id="일기등록취소모달">
+    <div class="모달배경"></div>
+    <div class="일기등록완료" id="일기등록취소">
+      <div class="일기등록완료_텍스트_영역">
+        <div class="완료모달_제목">일기 등록 취소</div>
+        <div class="완료모달_내용">일기 등록을 취소하시겠어요?</div>
+      </div>
+      <div class="버튼_영역">
+        <button class="모달_계속작성_버튼" onclick="모달닫기기능('일기등록취소모달')">계속 작성</button>
+        <button class="모달_등록취소_버튼" onclick="모달닫기기능('일기등록취소모달'); 모달닫기기능('일기등록모달')">등록 취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 일기삭제확인 -->
+  <div class="모달그룹" id="일기삭제확인모달">
+    <div class="모달배경"></div>
+    <div class="일기삭제" id="일기등록취소">
+      <div class="일기등록완료_텍스트_영역">
+        <div class="완료모달_제목">일기 삭제</div>
+        <div class="완료모달_내용">일기를 삭제 하시겠어요?</div>
+      </div>
+      <div class="버튼_영역">
+        <button class="모달_계속작성_버튼" onclick="모달닫기기능('일기삭제확인모달')">취소</button>
+        <button class="모달_등록취소_버튼" onclick="모달닫기기능('일기삭제확인모달'); 일기삭제기능()">삭제</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
