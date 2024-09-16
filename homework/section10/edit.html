@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>상세페이지</title>
+  <title>다이어리📔</title>
   <link rel="stylesheet" href="./css/edit.css" />
   <script src="./js/edit.js"></script>
 </head>
@@ -12,13 +12,14 @@
 <body>
   <div class="레이아웃">
     <div class="헤더">
+      <img onclick="취소버튼기능()" src="./images/뒤로가기버튼.png"></img>
       <div>민서의 다이어리</div>
     </div>
     <div class="메인">
       <!-- 수정 화면 보여주기-->
       <div id="수정_화면" class="바뀌는_부분">
         <div class="수정_기분_선택_영역">
-          <div class="기분_레이블">오늘 기분은 어땟나요?</div>
+          <div class="기분_레이블">오늘 기분은 어땠나요?</div>
           <div class="기분_선택_라디오_영역">
             <div class="라디오버튼">
               <input class="기분_영역" type="radio" value="행복해요" name="기분" />
@@ -65,9 +66,6 @@
         </div>
         <div id="회고넣어줄부분" class="보기_영역">
           <!-- 회고 보여주는 부분 -->
-          <!-- <div class="회고_댓글_영역">
-            <div class="회고_댓글"></div>
-            <div class="회고_날짜"></div> -->
         </div>
       </div>
     </div>

@@ -2,13 +2,15 @@ let 강아지이미지 = []
 let 사진타이머 = null
 
 const 사진불러오는기능 = () => {
-
   fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) => {
     받아온결과.json().then((객체로변경한결과) => {
       // 강아지이미지 주소 배열
       강아지이미지 = 객체로변경한결과.message
       사진_필터링기능()
     })
+    // 사진을 불러오지 못할 경우 에러처리
+  }).catch((error) => {
+    console.error("사진을 불러오는 중 오류가 발생했습니다", error)
   })
 }
 

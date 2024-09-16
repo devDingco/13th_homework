@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>다이어리 보관함📔</title>
+  <title>다이어리📔</title>
   <link rel="stylesheet" href="./css/index.css" />
   <link rel="stylesheet" href="./css/image.css" />
   <link rel="stylesheet" href="./css/dropdown.css" />
@@ -60,7 +60,7 @@
         <div class="검색창_영역">
           <input type="text" class="검색창" placeholder="검색어를 입력해 주세요" oninput="검색기능(event)" />
         </div>
-        <button onclick="모달열기기능('일기등록모달')" class="일기_쓰기_버튼">+ 일기쓰기</button>
+        <button onclick="모달열기기능('일기등록모달'); 입력검사()" class="일기_쓰기_버튼">+ 일기쓰기</button>
       </div>
       <!-- 메인 -->
       <div class="메인_공간">
@@ -122,11 +122,11 @@
             <input type="checkbox" class="토글" onclick="다크모드기능(event)" />
           </div>
         </div>
-        <div class="일기_작성_폼">
+        <form class="일기_작성_폼" id="일기_작성_폼">
           <div class="기분_어땟나요">오늘 기분은 어땠나요?</div>
           <div class="기분_선택_라디오_영역">
             <div class="기분_라디오_박스">
-              <input class="기분_영역" type="radio" value="행복해요" name="기분" />
+              <input class="기분_영역" type="radio" value="행복해요" name="기분" checked />
               <div class="기분_텍스트">행복해요</div>
             </div>
             <div class="기분_라디오_박스">
@@ -148,16 +148,16 @@
           </div>
           <div class="텍스트_입력_영역">
             <div class="제목_타이틀">제목</div>
-            <input id="제목인풋" class="제목_인풋" placeholder="제목을 입력해 주세요" />
+            <input id="제목인풋" class="제목_인풋" placeholder="제목을 입력해 주세요" onchange="입력검사()" />
             <div class="내용_영역">
               <div class="내용_타이틀">내용</div>
-              <textarea id="내용인풋" class="내용_인풋" placeholder="내용을 입력해 주세요"></textarea>
+              <textarea id="내용인풋" class="내용_인풋" placeholder="내용을 입력해 주세요" onchange="입력검사()"></textarea>
             </div>
           </div>
-        </div>
+        </form>
         <div class="버튼_영역">
           <button class="닫기_버튼" onclick="모달열기기능('일기등록취소모달')">닫기</button>
-          <button class="등록하기_버튼" onclick="일기등록기능()">
+          <button id="등록하기버튼" class="등록하기_버튼" onclick="일기등록기능()" disabled>
             등록하기
           </button>
         </div>

@@ -93,6 +93,7 @@ const 회고입력기능 = () => {
 
   localStorage.setItem("일기항목", JSON.stringify(일기목록_변환))
   회고목록그리기();
+  document.getElementById("회고인풋").value = "";
 }
 
 const 회고목록그리기 = () => {
@@ -103,18 +104,21 @@ const 회고목록그리기 = () => {
   // 회고목록이 없을 경우 null로 초기화
   const 회고리스트 = 선택_일기.회고목록 ?? null
 
-  console.log("회고리스트", 회고리스트)
-  if (회고리스트 !== null) {
-    let 회고넣기 = 회고리스트.map(
-      (회고) =>
-        `<div class="회고_댓글_영역">
+  if (회고리스트 === null) {
+    document.getElementById("회고넣어줄부분").innerHTML = `<div class="회고없음_박스"><div>등록된 회고가 없습니다.</div></div>`
+    return
+  }
+
+  let 회고넣기 = 회고리스트.map(
+    (회고) =>
+      `<div class="회고_댓글_영역">
             <div class="회고_댓글">${회고.회고내용}</div>
             <div class="회고_날짜">[${회고.회고작성날짜}]</div>
           </div>
   `
-    ).join("")
-    window.document.getElementById("회고넣어줄부분").innerHTML = 회고넣기;
-  }
+  ).join("")
+  window.document.getElementById("회고넣어줄부분").innerHTML = 회고넣기;
+
 }
 
 const 내용복사기능 = () => {

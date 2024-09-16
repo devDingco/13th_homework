@@ -7,7 +7,6 @@ let 일기목록 = JSON.parse(스토리지일기목록);
 
 let 시작페이지 = 1
 let 클릭한페이지 = 1
-const 마지막페이지 = Math.ceil(일기목록.length / 12)
 
 let 필터링한일기 = [];
 let 삭제할일기번호 = null;
@@ -31,6 +30,27 @@ window.onload = () => {
   document.getElementById("전체").checked = true
 }
 
+// 일기등록하기 인풋 검증
+const 입력검사 = () => {
+  const 제목입력 = document.getElementById("제목인풋").value;
+  const 내용입력 = document.getElementById("내용인풋").value;
+  const 등록버튼 = document.getElementById("등록하기버튼")
+
+  console.log('제목입력', 제목입력)
+  console.log('내용입력', 내용입력)
+
+  // 모두 입력 한 경우
+  if (제목입력.length > 0 && 내용입력.length > 0) {
+    등록버튼.disabled = false;
+    등록버튼.className = "등록하기_버튼"
+  }
+  // 모두 입력 안 한 경우
+  else {
+    등록버튼.disabled = true;
+    등록버튼.className = "등록하기_버튼_비활"
+  }
+}
+
 const 이전페이지이동기능 = () => {
   if (시작페이지 === 1) {
     alert("첫 페이지입니다 !")
@@ -51,6 +71,7 @@ const 다음페이지이동기능 = () => {
 }
 
 const 페이지그리기기능 = () => {
+  const 마지막페이지 = Math.ceil(일기목록.length / 12)
   const 상자 = new Array(5).fill("그냥")
 
   const 페이지들 = 상자.map((_, index) => {
@@ -119,30 +140,6 @@ const 페이지일기그리기기능 = (페이지번호담는통) => {
   ).join("")
 }
 
-// const 일기DOM만들기 = () => {
-//   // 로컬스토리지에서 일기목록 가져오기
-//   const 일기목록_로컬스토리지 = localStorage.getItem("일기항목") ?? "[]"
-//   const 일기목록_변환 = JSON.parse(일기목록_로컬스토리지)
-
-//   let 일기목록만들기 = 일기목록_변환.map(
-//     (일기, index) =>
-//       `<a class="일기_항목" href="./detail.html?diary=${일기.index}">
-
-//             <div class="일기_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
-
-//             <img src="./images/close icon.png" class= "삭제_버튼" onclick="일기삭제버튼기능(event, ${일기.index}); 삭제할일기번호=${일기.index}"/>
-
-//             <div class="일기_내용"> 
-//               <div class="일기_항목_감정">${일기.감정}</div>
-//               <div class="일기_항목_날짜">${일기.날짜}</div>
-//             </div>
-//             <div class="일기_항목_제목">${일기.제목}</div>
-//           </a>
-//         `
-//   ).join("")
-//   window.document.getElementById("일기추가할공간").innerHTML = 일기목록만들기
-// }
-
 const 일기등록기능 = () => {
   모달열기기능("일기등록완료모달");
 
@@ -179,6 +176,10 @@ const 일기등록기능 = () => {
   일기목록 = 일기목록.map((일기, index) => ({ ...일기, index: index }));
 
   localStorage.setItem("일기항목", JSON.stringify(일기목록));
+
+  //인풋창 초기화
+  document.getElementById("제목인풋").value = ""
+  document.getElementById("내용인풋").value = ""
 
   // 일기DOM만들기();
   페이지그리기기능()
