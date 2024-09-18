@@ -8,26 +8,26 @@ let 일기목록 = JSON.parse(스토리지일기목록);
 let 시작페이지 = 1
 let 클릭한페이지 = 1
 
-let 필터링한일기 = [];
+let 필터링한일기 = 일기목록;
 let 삭제할일기번호 = null;
 
 let 타이머;
 
 window.onload = () => {
-  window.addEventListener("scroll", () => {
-    const 스크롤내려간길이 = window.scrollY
-    if (스크롤내려간길이 > 0) {
-      document.getElementById("드롭다운_제목").style = "background-color: black; color: white"
-    } else {
-      document.getElementById("드롭다운_제목").style = "background-color: white color: black"
-    }
-  })
+  // window.addEventListener("scroll", () => {
+  //   const 스크롤내려간길이 = window.scrollY
+  //   if (스크롤내려간길이 > 0) {
+  //     document.getElementById("드롭다운_제목").style = "background-color: black; color: white"
+  //   } else {
+  //     document.getElementById("드롭다운_제목").style = "background-color: white color: black"
+  //   }
+  // })
 
-  페이지그리기기능()
-  페이지일기그리기기능(시작페이지)
+  페이지그리기기능(일기목록)
+  페이지일기그리기기능(일기목록, 시작페이지)
 
   // 초기에 "전체" 드롭박스 체크해주기
-  document.getElementById("전체").checked = true
+  // document.getElementById("전체").checked = true
 }
 
 // 일기등록하기 인풋 검증
@@ -56,53 +56,48 @@ const 이전페이지이동기능 = () => {
     alert("첫 페이지입니다 !")
     document.getElementById("이전페이지버튼")
   } else {
-    시작페이지 = 시작페이지 - 10
+    시작페이지 = 시작페이지 - 5
     페이지그리기기능()
   }
 }
 
 const 다음페이지이동기능 = () => {
-  if (시작페이지 + 10 <= 마지막페이지) {
-    시작페이지 = 시작페이지 + 10
+  if (시작페이지 + 5 <= 마지막페이지) {
+    시작페이지 = 시작페이지 + 5
     페이지그리기기능()
   } else {
     alert("마지막페이지 입니다 !")
   }
 }
 
-const 페이지그리기기능 = () => {
+
+const 페이지그리기기능 = (일기목록) => {
   const 마지막페이지 = Math.ceil(일기목록.length / 12)
   const 상자 = new Array(5).fill("그냥")
 
-  const 페이지들 = 상자.map((_, index) => {
-    const 페이지번호 = index + 시작페이지
+  const 페이지번호보여주는곳 = document.getElementById("페이지번호보여주는곳");
+  페이지번호보여주는곳.innerHTML = '';
 
-    return 페이지번호 <= 마지막페이지 ? `
-    <button
-      onclick="페이지일기그리기기능(${페이지번호}); 클릭한페이지=${페이지번호}; 페이지그리기기능()"
-      class=${클릭한페이지 === 페이지번호 ? "페이지버튼_선택" : "페이지버튼"}
-    >
-      ${페이지번호}
-    </button>
-    ` : ""
-  }).join(" ")
+  상자.forEach((_, index) => {
+    const 페이지번호 = index + 시작페이지;
 
-  const 이전페이지버튼 = document.getElementById("이전페이지버튼")
-  const 다음페이지버튼 = document.getElementById("다음페이지버튼")
+    if (페이지번호 <= 마지막페이지) {
+      const 버튼 = document.createElement("button");
+      버튼.innerText = 페이지번호;
+      버튼.className = 클릭한페이지 === 페이지번호 ? "페이지버튼_선택" : "페이지버튼"
 
-  // 페이지가 1개밖에 없으면 이전페이지, 다음페이지 버튼 숨겨주기
-  if (마지막페이지 === 1) {
-    이전페이지버튼.style.display = "none"
-    다음페이지버튼.style.display = "none"
-  } else {
-    이전페이지버튼.style.display = "block"
-    다음페이지버튼.style.display = "block"
-  }
+      버튼.onclick = () => {
+        페이지일기그리기기능(일기목록, 페이지번호);
+        클릭한페이지 = 페이지번호;
+        페이지그리기기능(일기목록)
+      }
 
-  document.getElementById("페이지번호보여주는곳").innerHTML = 페이지들
+      페이지번호보여주는곳.appendChild(버튼)
+    }
+  })
 }
 
-const 페이지일기그리기기능 = (페이지번호담는통) => {
+const 페이지일기그리기기능 = (일기목록, 페이지번호담는통) => {
   if (일기목록.length === 0) {
     document.getElementById("일기추가할공간").innerHTML = "<div class='일기없을경우_박스'><div class='일기없을경우'>등록된 일기가 없습니다</div></div>"
     return
@@ -120,9 +115,6 @@ const 페이지일기그리기기능 = (페이지번호담는통) => {
     }
   })
 
-  결과 = 결과.map((일기, index) => ({ ...일기, index: index }));
-
-  console.log('결과', 결과)
   document.getElementById("일기추가할공간").innerHTML = 결과.map((일기) =>
     `<a class="일기_항목" href="./detail.html?diary=${일기.index}">
                 
@@ -182,8 +174,8 @@ const 일기등록기능 = () => {
   document.getElementById("내용인풋").value = ""
 
   // 일기DOM만들기();
-  페이지그리기기능()
-  페이지일기그리기기능(시작페이지)
+  페이지그리기기능(일기목록)
+  페이지일기그리기기능(일기목록, 시작페이지)
 
   // 드롭다운 목록 전체로 바꿔주기
   document.getElementById("전체").checked = true
@@ -224,22 +216,41 @@ const 필터링기능 = (event) => {
 
   console.log('필터링한일기', 필터링한일기)
 
-  let 새로운_일기목록만들기 = 필터링한일기.map(
-    (일기) =>
-      `<a class="일기_항목" href="./detail.html?diary=${일기.index}">
-          <div class="일기_사진">
-              <div class="일기_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
-          </div>
-          <div class="일기_내용">
-            <div class="일기_항목_감정" style="${일기.감정색깔}">${일기.감정}</div>
-            <div class="일기_항목_날짜">${일기.날짜}</div>
-          </div>
-          <div class="일기_항목_제목">${일기.제목}</div>
-          <img src="./images/close icon.png" class= "삭제_버튼" onclick="일기삭제버튼기능(event, ${일기.index}); 모달열기기능('일기삭제확인모달'); 삭제할일기번호=${일기.index}"/>
-      </a>
-        `
-  ).join("")
-  window.document.getElementById("일기추가할공간").innerHTML = 새로운_일기목록만들기
+  페이지그리기기능(필터링한일기)
+  페이지일기그리기기능(필터링한일기, 시작페이지)
+}
+
+const 검색기능 = (event) => {
+  const 로컬스토리_일기_문자열 = localStorage.getItem("일기항목")
+  const 로컬스토리_일기 = JSON.parse(로컬스토리_일기_문자열)
+
+  clearTimeout(타이머)
+  타이머 = setTimeout(() => {
+    const 내가검색한단어 = event.target.value
+    console.log(내가검색한단어)
+
+    const 검색결과들 = 로컬스토리_일기.filter(일기 => 일기.제목.includes(내가검색한단어))
+    console.log(검색결과들)
+
+    let 새로운_일기목록만들기 = 검색결과들.map(
+      (일기) =>
+        `<a class="일기_항목" href="./detail.html?diary=${일기.index}">
+            <div class="일기_사진">
+                <div class="일기_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
+            </div>
+            <div class="일기_내용"> 
+              <div class="일기_항목_감정" style="${일기.감정색깔}">${일기.감정}</div>
+              <div class="일기_항목_날짜">${일기.날짜}</div>
+            </div>
+            <div class="일기_항목_제목">${일기.제목}</div>
+            <img src="./images/close icon.png" class= "삭제_버튼" onclick="일기삭제버튼기능(event, ${일기.index}); 모달열기기능('일기삭제확인모달'); 삭제할일기번호=${일기.index}"/>
+        </a>
+          `
+    ).join("")
+    window.document.getElementById("일기추가할공간").innerHTML = 새로운_일기목록만들기
+
+  }, 1000)
+
 }
 
 // 일기삭제 모달 띄우기
@@ -255,8 +266,8 @@ const 일기삭제기능 = () => {
 
   localStorage.setItem("일기항목", JSON.stringify(일기목록))
 
-  페이지그리기기능()
-  페이지일기그리기기능(시작페이지)
+  페이지그리기기능(일기목록)
+  페이지일기그리기기능(일기목록, 시작페이지)
 }
 
 window.addEventListener("scroll", () => {
@@ -297,7 +308,6 @@ const 모달닫기기능 = (모달종류) => {
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    // 라디오버튼도 추가해주기
     if (document.activeElement.id === "제목인풋" || document.activeElement.id === "내용인풋") {
       모달닫기기능("일기등록모달")
     }
@@ -330,36 +340,3 @@ const 다크모드기능 = (event) => {
   }
 }
 
-const 검색기능 = (event) => {
-  const 로컬스토리_일기_문자열 = localStorage.getItem("일기항목")
-  const 로컬스토리_일기 = JSON.parse(로컬스토리_일기_문자열)
-
-  clearTimeout(타이머)
-  타이머 = setTimeout(() => {
-    const 내가검색한단어 = event.target.value
-    console.log(내가검색한단어)
-
-    const 검색결과들 = 로컬스토리_일기.filter(일기 => 일기.제목.includes(내가검색한단어))
-    console.log(검색결과들)
-
-    let 새로운_일기목록만들기 = 검색결과들.map(
-      (일기, index) =>
-        `<a class="일기_항목" href="./detail.html?diary=${일기.index}">
-            <div class="일기_사진">
-                <div class="일기_사진" style="background: url(${일기.감정사진})  lightgray 50% / cover no-repeat"></div>
-            </div>
-            <div class="일기_내용"> 
-              <div class="일기_항목_감정" style="${일기.감정색깔}">${일기.감정}</div>
-              <div class="일기_항목_날짜">${일기.날짜}</div>
-            </div>
-            <div class="일기_항목_제목">${일기.제목}</div>
-            <img src="./images/close icon.png" class= "삭제_버튼" onclick="일기삭제버튼기능(event, ${일기.index}); 모달열기기능('일기삭제확인모달'); 삭제할일기번호=${일기.index}"/>
-        </a>
-          `
-    ).join("")
-    window.document.getElementById("일기추가할공간").innerHTML = 새로운_일기목록만들기
-
-
-  }, 1000)
-
-}
