@@ -1,8 +1,13 @@
+@font-face {
+    font-family: Pretendard;
+    src: url("./Pretendard-Medium.otf");
+  }
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Pretendard Variable";
+    font-family: Pretendard;
 }
 
 body {
@@ -12,19 +17,20 @@ body {
     align-items: center;
     gap: 4rem;
     margin: 0 1.25rem 2.5rem;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
 }
 
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 3.75rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
     font-size: 1.125rem;
     font-weight: 700;
     text-align: left;
-    color: #000000;
+    color: var(--textColor);
 }
 
 .desktop {
@@ -52,7 +58,7 @@ body {
     font-size: 1.375rem;
     font-weight: 700;
     padding-bottom: 0.75rem;
-    border-bottom: 0.125rem solid #000000;
+    border-bottom: 0.125rem solid var(--textColor);
 }
 
 .diary_info {
@@ -108,7 +114,7 @@ body {
 .edit_button {
     display: flex;
     justify-content: end;
-    border-bottom: 0.0625rem solid #000000;
+    border-bottom: 0.0625rem solid var(--textColor);
     padding-bottom: 1rem;
     gap: 1rem;
 }
@@ -138,7 +144,7 @@ body {
 }
 
 .recollect_title {
-    color: #000000;
+    color: var(--textColor);
     font-size: 1.125rem;
     font-weight: 600;
     padding-bottom: 0.8125rem;
@@ -148,12 +154,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .comment_regist {
     display: flex;
-    width: 87.5rem;
+    width: 100%;
     height: 3rem;
     border: 0.0625rem solid #D4D3D3;
     border-radius: 0.5rem;
@@ -172,12 +178,12 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 3.1875rem;
+    width: 8rem;
     height: 3rem;
-    background-color: #000000;
+    background-color: var(--textColor);
     font-size: 1.125rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--backgroundColor);
     border-radius: 0.5rem;
     gap: 0.625rem;
 }
@@ -228,9 +234,9 @@ body {
     gap: 8px;
     font-size: 16px;
     font-weight: 400;
-    color: #1C1C1C;
+    color: var(--textColor);
     border: none;
-    background-color: white;
+    background-color: var(--backgroundColor);
 }
 
 .up_scroll {
@@ -261,3 +267,85 @@ body {
     font-weight: 500;
     border-radius: 8px;
 }
+
+.show_comment_css {
+    display: flex;
+    align-items: center;
+    color: #919191;
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+
+.footer_layout {
+    width: 100%;
+    display: flex;
+    padding: 1.5rem 1.25rem;
+    justify-content: center;
+    background-color: #f2f2f2;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 160px;
+  }
+  
+  .footer_title {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1rem;
+    color: var(--backgroundColor);
+  }
+  
+  .footer_boss {
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1rem;
+    color: #5f5f5f;
+  }
+  
+  .footer_co {
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1rem;
+    color: #919191;
+  }
+
+  /* 다크모드 토글 */
+.CSS_toggle {
+    appearance: none;
+    width: 58px;
+    height: 32px;
+    border-radius: 20px;
+    background-color: lightgrey;
+  }
+  
+  .CSS_toggle::after {
+    display: block;
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 4px;
+  
+    transition: margin-left 0.3s; /* 실제로 이동하는 알맹이 -> 토글에 적용하면 안됨!! */
+  }
+  
+  .CSS_toggle:checked {
+    background-color: rgba(58, 216, 74, 1);
+  }
+  
+  .CSS_toggle:checked::after {
+    margin-left: 30px;
+  }
+
+  .darkmode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+  }

@@ -162,4 +162,11 @@ const getDiaryNumber = () => {
       window.scrollTo({top: 0, behavior: "smooth"})
     }
   
-   
+   // 다크모드
+    const JS_dark = (event) => {
+      if (event.target.checked === true) {
+        document.documentElement.setAttribute("darkmode", "on");
+      } else {
+        document.documentElement.setAttribute("darkmode", "off");
+      }
+    };

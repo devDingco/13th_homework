@@ -91,3 +91,12 @@ commentsSection.innerHTML = comments.map(comment =>
 const JS_back = () => {
   window.history.back();
 }
+
+// 다크모드
+const JS_dark = (event) => {
+  if (event.target.checked === true) {
+    document.documentElement.setAttribute("darkmode", "on");
+  } else {
+    document.documentElement.setAttribute("darkmode", "off");
+  }
+};
