@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>main</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/pagination.css" />
+    <link rel="stylesheet" href="./css/media.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- <div class="loaderBox"><div class="loader"></div></div> -->
+    <header></header>
+    <div class="headerBanner"></div>
+
+    <nav></nav>
+
+    <section>
+      <div class="navBottom">
+        <div class="filterSearchBox">
+          <div class="selectBox">
+            <button class="filterPopBtn" onclick="optionShow(event)">
+              전체
+            </button>
+            <ul class="diaryFilter filterList" name="moodFilter">
+              <li
+                class="active"
+                onclick="optionSelect(event,'moodFilter')"
+                data-value="전체"
+              >
+                전체
+              </li>
+              <li
+                onclick="optionSelect(event,'moodFilter')"
+                data-value="행복해요"
+              >
+                행복해요
+              </li>
+              <li
+                onclick="optionSelect(event,'moodFilter')"
+                data-value="슬퍼요"
+              >
+                슬퍼요
+              </li>
+              <li
+                onclick="optionSelect(event,'moodFilter')"
+                data-value="놀랐어요"
+              >
+                놀랐어요
+              </li>
+              <li
+                onclick="optionSelect(event,'moodFilter')"
+                data-value="화나요"
+              >
+                화나요
+              </li>
+            </ul>
+          </div>
+          <div class="searchBox">
+            <div class="selectBox">
+              <button
+                class="filterPopBtn searchPopBtn"
+                onclick="optionShow(event,'searchFilter')"
+              >
+                제목+내용
+              </button>
+              <ul class="searchFilter filterList">
+                <li
+                  class="active"
+                  onclick="optionSelect(event,'searchFilter')"
+                  data-value="제목+내용"
+                >
+                  제목+내용
+                </li>
+                <li
+                  onclick="optionSelect(event,'searchFilter')"
+                  data-value="제목"
+                >
+                  제목
+                </li>
+                <li
+                  onclick="optionSelect(event,'searchFilter')"
+                  data-value="내용"
+                >
+                  내용
+                </li>
+              </ul>
+            </div>
+            <input
+              class="searchInput"
+              type="search"
+              placeholder="검색어를 입력해 주세요."
+              oninput="searchFilterTimer(event)"
+              onkeyup="searchFilterEnter(event)"
+            />
+          </div>
+          <button class="diaryWritePopBtn" onclick="diaryWritePop()">
+            일기쓰기
+          </button>
+        </div>
+      </div>
+      <div class="paginationHeader">
+        <div class="info"><!-- 다이어리 리스트 총 페이지 및 개수 노출--></div>
+        <div class="pageCountSelect">
+          <!-- 다이어리 리스트 노출 개수 결정 필터 드롭다운 -->
+        </div>
+      </div>
+      <article
+        class="diaryList"
+        data-placeholder="등록된 일기가 없습니다."
+      ></article>
+      <!-- <article class="diaryWrite"></article> -->
+      <div class="diaryPagination">
+        <!-- 다이어리 리스트 페이지네이션 노출 -->
+      </div>
+    </section>
+
+    <div class="scrollBox"></div>
+
+    <footer></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+    <script src="./js/koreaadvice.js"></script>
+    <script src="./js/pixelsImg.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/editor.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/weather.js"></script>
+    <script src="./js/pagination.js"></script>
+  </body>
+</html>
