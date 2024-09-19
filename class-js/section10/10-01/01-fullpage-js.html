@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>풀페이지JS 실습</title>
+  <script src="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.29/dist/fullpage.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.29/dist/fullpage.min.css">
+  <script>
+    window.onload = () => {
+      new fullpage('#fullpage', {
+        sectionsColor: ["red", "yellow", "pink", "purple"]
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <!-- fullPage.js HTML -->
+  <div id="fullpage">
+    <div class="section">
+      <h1>🍎페이지</h1>
+    </div>
+    <div class="section">
+      <div class="slide">
+        <h1>🍌페이지</h1>
+      </div>
+      <div class="slide">
+        <h1>🍓페이지</h1>
+      </div>
+      <div class="slide">
+        <h1>🍇페이지</h1>
+      </div>
+    </div>
+    <div class="section" id="section2">
+      <h1>🍑페이지</h1>
+    </div>
+  </div>
+</body>
+
+</html>

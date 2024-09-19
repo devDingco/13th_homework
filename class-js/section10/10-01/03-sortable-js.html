@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>드래그앤드롭 실습</title>
+  <style>
+    li {
+      width: 500px;
+      height: 30px;
+      border: 1px solid salmon;
+      background-color: peachpuff;
+      cursor: pointer;
+
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+  <script>
+    window.onload = () => {
+      const 과일목록 = document.getElementById("과일들")
+      Sortable.create(과일목록)
+    }
+  </script>
+</head>
+
+<body>
+  <ul id="과일들">
+    <li>🍏</li>
+    <li>🍑</li>
+    <li>🍓</li>
+  </ul>
+</body>
+
+</html>

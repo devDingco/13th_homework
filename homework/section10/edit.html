@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>다이어리📔</title>
+  <link rel="stylesheet" href="./css/edit.css" />
+  <script src="./js/edit.js"></script>
+</head>
+
+<body>
+  <div class="레이아웃">
+    <div class="헤더">
+      <img onclick="취소버튼기능()" src="./images/뒤로가기버튼.png"></img>
+      <div>민서의 다이어리</div>
+    </div>
+    <div class="메인">
+      <!-- 수정 화면 보여주기-->
+      <div id="수정_화면" class="바뀌는_부분">
+        <div class="수정_기분_선택_영역">
+          <div class="기분_레이블">오늘 기분은 어땠나요?</div>
+          <div class="기분_선택_라디오_영역">
+            <div class="라디오버튼">
+              <input class="기분_영역" type="radio" value="행복해요" name="기분" />
+              <div class="기분_텍스트">행복해요</div>
+            </div>
+            <div class="라디오버튼">
+              <input class="기분_영역" type="radio" value="슬퍼요" name="기분" />
+              <div class="기분_텍스트">슬퍼요</div>
+            </div>
+            <div class="라디오버튼">
+              <input class="기분_영역" type="radio" value="놀랐어요" name="기분" />
+              <div class="기분_텍스트">놀랐어요</div>
+            </div>
+            <div class="라디오버튼">
+              <input class="기분_영역" type="radio" value="화나요" name="기분" />
+              <div class="기분_텍스트">화나요</div>
+            </div>
+            <div class="라디오버튼">
+              <input class="기분_영역" type="radio" value="기타" name="기분" />
+              <div class="기분_텍스트">기타</div>
+            </div>
+          </div>
+        </div>
+        <div class="수정_제목_영역">
+          <div class="레이블">제목</div>
+          <input id="제목인풋" class="제목_인풋" type="text" />
+        </div>
+        <div class="수정_내용_영역">
+          <div class="레이블">내용</div>
+          <textarea id="내용인풋" class="내용_인풋"></textarea>
+        </div>
+        <div class="수정_버튼_영역">
+          <button id="취소버튼" class="취소_버튼" onclick="취소버튼기능()">취소</button>
+          <button id="수정하기버튼" class="수정하기_버튼" onclick="수정하기버튼기능()">수정</button>
+        </div>
+      </div>
+      <div class="회고_영역">
+        <div class="입력_영역">
+          <div class="회고_레이블">회고</div>
+          <div class="회고_인풋_영역">
+            <input id="회고인풋" class="회고_인풋" type="text" placeholder="수정중일땐 회고를 작성할 수 없어요." disabled />
+            <button onclick="회고입력기능()" class="회고_입력_버튼" disabled>입력</button>
+          </div>
+        </div>
+        <div id="회고넣어줄부분" class="보기_영역">
+          <!-- 회고 보여주는 부분 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>

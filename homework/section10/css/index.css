@@ -1,0 +1,861 @@
+@font-face {
+  font-family: 기본폰트;
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 기본폰트;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.일기_레이아웃 {
+  display: block;
+  max-width: 100%;
+  margin: 0 1.25rem 2.5rem 1.25rem;
+}
+
+.헤더 {
+  width: 100%;
+  height: 3.75rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1rem;
+  padding: 1.25rem
+}
+
+.배너 {
+  padding: 0px 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+}
+
+.탭_박스 {
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 42px;
+}
+
+.필터_박스 {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 2.625rem;
+  z-index: 1;
+}
+
+.필터 {
+  padding: 0px 20px;
+  display: flex;
+  min-width: 7.5rem;
+  padding: 0.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.063rem solid var(--Gray-Gray-300, #C7C7C7);
+  background: var(--Gray-W, #FFF);
+}
+
+.검색창_영역 {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.검색창 {
+  height: 100%;
+  display: flex;
+  min-width: 320px;
+  max-width: 360px;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 16px;
+  border-radius: 100px;
+  border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+  padding-left: 45px;
+  background: url(../images/돋보기.png) no-repeat 15px center;
+
+  padding: 12px 16px;
+  padding-left: 40px;
+}
+
+.드롭다운_박스 {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.선택_탭 {
+  display: flex;
+  padding: 0.75rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.125rem solid #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.비선택_탭 {
+  display: flex;
+  padding: 0.75rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--Gray-Gray-400, #ABABAB);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.일기_쓰기_버튼 {
+  display: flex;
+  width: 115px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--Gray-B, #000);
+  color: white;
+  font-size: 18px;
+  padding: 8px 1px;
+
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+.메인_공간 {
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-direction: column;
+}
+
+.일기없을경우_박스 {
+  display: flex;
+  width: 100%;
+  padding: 40px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.일기없을경우 {
+  color: #919191;
+  font-weight: 500;
+}
+
+.일기_두개씩_보여주는_공간 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  /* min-width: 784px; */
+}
+
+.일기_항목 {
+  /* height: 381px; */
+  max-width: 23.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.일기_항목:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0.125rem 1.875rem 0rem rgba(0, 0, 0, 0.16);
+  transition: 0.5s;
+}
+
+.일기_사진 {
+  height: 285px;
+  width: 380px;
+  border-radius: 1rem;
+  transition: filter 0.5s;
+}
+
+.일기_사진:hover {
+  filter: blur(0.313rem);
+}
+
+.삭제_버튼 {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 2%;
+  right: 2%
+}
+
+.일기_내용 {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #777;
+}
+
+.일기_감정_날짜 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #919191;
+  text-align: right;
+  width: 100%;
+}
+
+.일기_항목_감정 {
+  color: #28B4E1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+.일기_항목_날짜 {
+  color: var(--Gray-Gray-500, #919191);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.일기_항목_제목 {
+  width: 100%;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+.일기_감정_제목보기 {
+  display: flex;
+  padding: 0rem 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+
+.푸터_컨테이너 {
+  display: flex;
+  max-width: 1168px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
+
+.푸터 {
+  display: flex;
+  padding: 24px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--Gray-Gray-50, #F2F2F2);
+}
+
+.푸터_타이틀 {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  /* 80% */
+  letter-spacing: -0.2px;
+}
+
+.푸터_전화번호 {
+  color: var(--Gray-Gray-700, #5F5F5F);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 114.286% */
+  letter-spacing: -0.14px;
+  align-self: stretch;
+}
+
+.푸터_하단 {
+  color: var(--Gray-Gray-500, #919191);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 16px;
+  /* 114.286% */
+  letter-spacing: -0.14px;
+}
+
+.탑스크롤_버튼 {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  cursor: pointer;
+}
+
+.모달그룹 {
+  display: none;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
+}
+
+.모달배경 {
+  /* viewport width 보고있는 화면의 가로 전체 */
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+  opacity: 50%;
+
+}
+
+.일기_쓰기_공간_박스 {
+  width: 640px;
+  height: 560px;
+  position: absolute;
+  top: calc(50% - 560px/2);
+  left: calc(50% - 640px/2);
+}
+
+.일기_쓰기_공간 {
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  background-color: var(--기본배경색);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5rem;
+  gap: 2.5rem;
+  text-align: left;
+  font-size: 1.5rem;
+  color: var(--기본글자색);
+}
+
+/* 다크모드 변수 */
+:root {
+  --기본배경색: white;
+  --기본글자색: black;
+  --기본인풋박스색: white;
+  --기본테두리색: #D4D3D3;
+  --기본버튼색: white;
+  --기본버튼테두리색: #5F5F5F;
+
+  --반대버튼테두리색: black;
+  --반대버튼색: #1C1C1C;
+  --반대버튼글자색: white;
+
+  --반대글자색: black;
+  --등록완료글자색: #333
+}
+
+[모드="다크모드"] {
+  --기본배경색: #1C1C1C;
+  --기본글자색: white;
+  --기본인풋박스색: black;
+  --기본테두리색: #333;
+  --기본버튼색: #1C1C1C;
+  --기본버튼테두리색: #5F5F5F;
+
+  --반대버튼테두리색: #5F5F5F;
+  --반대버튼색: white;
+  --반대버튼글자색: black;
+
+  --반대글자색: white;
+
+  --등록완료글자색: #D4D3D3;
+}
+
+.타이틀_토글_박스 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.토글_박스 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.다크모드 {
+  display: flex;
+
+  color: var(--기본글자색);
+  font-size: 12px;
+  font-weight: 400;
+  /* 200% */
+}
+
+/* 토글 배경 */
+.토글 {
+  /* 고유한 모습을 없애주기 */
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: lightgray;
+}
+
+/* 흰색 알맹이 */
+.토글::after {
+  display: block;
+  /* content 쓰지 않을거면 비워주자 */
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+
+  /* 실제로 이동하는 알맹이 => 토글에 적용하면 안됨 */
+  transition: margin-left 0.3s;
+}
+
+.토글:checked {
+  background-color: lightseagreen;
+}
+
+/* 체크가 된 토글의 뒷부분 */
+.토글:checked::after {
+  margin-left: 18px;
+}
+
+.일기_제목 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.일기_작성_폼 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.기분_선택_박스 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  align-self: stretch;
+}
+
+.기분_어땟나요 {
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.기분_선택_라디오_영역 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: #333;
+}
+
+.기분_라디오_박스 {
+  display: flex;
+  gap: 8px;
+}
+
+.텍스트_입력_영역 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.제목_영역 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.제목_인풋 {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--기본테두리색);
+  background-color: var(--기본인풋박스색);
+  color: var(--기본글자색);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.제목_타이틀 {
+  color: var(--기본글자색);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 142.857% */
+  letter-spacing: -0.14px;
+  align-self: stretch;
+}
+
+.내용_영역 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.내용_타이틀 {
+  color: var(--기본글자색);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.내용_인풋 {
+  display: flex;
+  height: 128px;
+  padding: 12px 16px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--기본테두리색);
+  background-color: var(--기본인풋박스색);
+  color: var(--기본글자색);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  width: 100%;
+}
+
+.기분_텍스트 {
+  color: var(--기본글자색);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.일기_내용_작성 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.버튼_영역 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+.닫기_버튼 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--기본글자색);
+  border-radius: 8px;
+  border: 1px solid var(--기본버튼테두리색);
+  background-color: var(--기본버튼색);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.등록하기_버튼 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid var(--반대버튼테두리색);
+  background-color: var(--반대버튼색);
+  color: var(--반대버튼글자색);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.등록하기_버튼_비활 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #C7C7C7;
+  color: var(--반대버튼글자색);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.일기등록완료 {
+  display: flex;
+  height: 200px;
+  width: 480px;
+  /* min-width: 480px;
+  max-width: 760px; */
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  border-radius: 24px;
+  background-color: var(--기본배경색);
+  position: absolute;
+  top: calc(50% - (200px/2));
+  left: calc(50% - (480px/2));
+}
+
+.일기등록완료_텍스트_영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+}
+
+.완료모달_제목 {
+  color: #000;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--반대글자색);
+}
+
+.완료모달_내용 {
+  color: var(--등록완료글자색);
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.모달_확인버튼 {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--반대버튼색);
+
+  color: var(--반대버튼글자색);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.모달_버튼_영역 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  justify-content: center;
+  gap: 24px;
+}
+
+.모달_계속작성_버튼 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid var(--기본버튼테두리색);
+  background-color: var(--기본버튼색);
+  color: var(--기본글자색);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.모달_등록취소_버튼 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid var(--반대버튼테두리색);
+  background-color: var(--반대버튼색);
+  color: var(--반대버튼글자색);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.일기삭제 {
+  display: flex;
+  width: 480px;
+  min-width: 480px;
+  max-width: 760px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  border-radius: 24px;
+  background: var(--기본배경색);
+  position: absolute;
+  top: calc(50% - (200px/2));
+  left: calc(50% - (480px/2));
+}
+
+.페이지_공간 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.이전페이지_버튼 {
+  line-height: 32px;
+  width: 24px;
+  height: 24px;
+  transform: scaleX(-1);
+  cursor: pointer;
+}
+
+.다음페이지_버튼 {
+  line-height: 32px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.페이지번호공간 {
+  display: flex;
+  gap: 16px;
+}
+
+.페이지버튼 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.페이지버튼_선택 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--Gray-Gray-50, #F2F2F2);
+}
+
+@media (max-width: 779px) {
+  .메인_공간 {
+    flex-direction: column;
+  }
+
+  .일기_두개씩_보여주는_공간 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .일기_사진 {
+    width: 100%;
+  }
+
+  .일기_쓰기_공간_박스 {
+    width: 320px;
+    height: 480px;
+    top: calc(50% - (480px/2));
+    left: calc(50% - (320px/2));
+  }
+
+
+  .일기등록완료 {
+    width: 320px;
+    height: 200px;
+    top: calc(50% - (200px/2));
+    left: calc(50% - (320px/2));
+  }
+
+  .일기_쓰기_공간 {
+    overflow-y: scroll;
+  }
+
+  .기분_선택_라디오_영역 {
+    flex-direction: column;
+  }
+
+  .필터_박스 {
+    flex-wrap: wrap;
+  }
+
+  .드롭다운_박스 {
+    order: 2;
+  }
+
+  .서치바_영역 {
+    order: 1;
+  }
+
+  .일기_쓰기_버튼 {
+    order: 3
+  }
+}

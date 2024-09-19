@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>리액트 실습</title>
+  <!-- 리액트 다운로드 -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- 바벨 다운로드 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" src="./03-button.js"></script>
+  <script type="text/babel" src="./03-input.js"></script>
+
+  <!-- 1. 최신문법으로 작성해도, 옛날문법으로 바꿔줌 -->
+  <!-- 2. 가짜HTML(JSX)로 입력하면, 진짜 HTML로 바꿔줌 -->
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    // JSX -> javascript XML 확장가능한 markup language
+    root.render(
+      <div>
+        {나의버튼}
+        <br />
+        {나의인풋()}
+        <나의인풋 />
+      </div>
+    )
+  </script>
+  <script></script>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>
