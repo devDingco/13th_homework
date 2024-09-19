@@ -9,7 +9,7 @@ const editPost = diaryArray[editPostIdx];
 });
 
 JSON.parse(localStorage.getItem(`comment${param}`)).forEach(element => {
-    if (element !== null) addDiaryUI(element);
+    if (element !== null) renderCommentView(element);
 });
 
 document.querySelector("label.sticky-input").scrollIntoView({behavior: "smooth", block: "end"});
@@ -57,7 +57,7 @@ document.querySelector("button#delete-button").addEventListener("click", e => {
     location.href = "/";
 });
 
-function addCommentUI(listobj) {
+function renderCommentView(listobj) {
     const content = listobj["content"];
     const dateNow = listobj["dateNow"];
     let year, month, date;
@@ -90,12 +90,14 @@ document.querySelector("form#comment-form").addEventListener("submit", e => {
         alert("댓글을 입력하세요");
         return;
     }
-    commentList = JSON.parse(localStorage.getItem(`comment${param}`));
+    const commentList = JSON.parse(localStorage.getItem(`comment${param}`));
+    let objAdded;
     commentList.push(objAdded={
         "content": content,
         "dateNow": new Date(),
     });
-    addCommentUI(objAdded);
+    renderCommentView(objAdded);
+    localStorage.setItem(`comment${param}`, JSON.stringify(commentList));
     e.target.querySelector("input.edit-title").value="";
 });
 
