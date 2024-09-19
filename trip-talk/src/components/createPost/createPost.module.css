@@ -1,0 +1,77 @@
+form {
+  @apply flex flex-col items-start gap-10 w-full;
+}
+
+form > div {
+  @apply flex w-full pb-10 border-b border-solid;
+  border-color: #e4e4e4;
+}
+
+.author_info_wrapper {
+  @apply gap-10;
+}
+
+.author_info_wrapper > * {
+  width: 50%;
+}
+
+.title_wrapper {
+  @apply flex-col gap-2;
+}
+
+.content_wrapper {
+  @apply flex-col gap-2;
+}
+
+.content_wrapper > div {
+  @apply flex items-start gap-1;
+}
+
+.content_wrapper > div > p {
+  @apply text-base font-medium;
+  color: #333;
+}
+
+.content_wrapper > div > b {
+  @apply text-base font-medium;
+  color: #f66a6a;
+}
+
+.content_wrapper > textarea {
+  @apply outline-none w-full flex py-3 px-4 rounded-lg border border-solid bg-white resize-none;
+  height: 21rem;
+  border-color: #d4d3d3;
+}
+
+.content_wrapper > textarea::placeholder {
+  color: #ababab;
+}
+
+.address_wrapper {
+  @apply flex-col gap-2 w-full;
+}
+
+.address_wrapper > div {
+  @apply flex flex-row gap-2 items-end;
+}
+
+.link_wrapper {
+  @apply flex-col gap-2;
+}
+
+.photo_wrapper {
+  @apply flex-col gap-2 w-full items-start;
+}
+
+.photo_wrapper > p {
+  @apply text-base font-medium;
+  color: #333;
+}
+
+.photo_wrapper > div {
+  @apply flex flex-row gap-4 items-start;
+}
+
+.button_wrapper {
+  @apply flex flex-row gap-4 items-center justify-end border-none;
+}
