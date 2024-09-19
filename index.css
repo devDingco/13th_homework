@@ -1,0 +1,217 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("./font/PretendardVariable.woff2") format("woff2");
+}
+
+* {
+  font-family: "Pretendard Variable";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem;
+}
+
+.게시물등록전체상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  width: 80rem;
+}
+
+nav {
+  color: #000;
+
+  /* b_20_28 */
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+hr {
+  background: var(--gray-100, #e4e4e4);
+  height: 1px;
+  /* border: 0 으로 해야지 적용된다 */
+  border: 0;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+
+  /* r_16_24 */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.구분상자 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.작성자입력상자 {
+  display: flex;
+  gap: 2.5rem;
+  width: 100%;
+}
+
+.작성자비밀번호구성 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.필수입력부분 {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.필수입력부분 span,
+.구분상자 span {
+  /* me_16_24 */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.필수입력부분 span:first-child {
+  color: var(--gray-800, #333);
+}
+
+.필수입력부분 span:last-child {
+  color: var(--red, #f66a6a);
+}
+
+.게시글등록전체상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.내용입력창크기 {
+  height: 336px;
+  /* 사용자입력 사이즈 변경 막기 */
+  resize: none;
+}
+
+.우편번호검색상자 {
+  display: flex;
+  gap: 0.5rem;
+  width: 13.75rem;
+}
+
+.우편번호검색상자 button {
+  width: 18.125rem;
+  height: 3rem;
+  padding: 12px 16px;
+  align-items: center;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+
+  /* 글자 */
+  color: var(--gray-B, #000);
+  font-size: 1.125rem;
+  font-weight: 600;
+  /* 글자 안내려가게 */
+  white-space: nowrap;
+}
+
+.작은입력창크기 {
+  width: 5.125rem;
+  text-align: center;
+}
+form {
+  display: flex;
+  gap: 1rem;
+}
+
+.사진업로드상자 {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 10rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+}
+
+.사진업로드상자 span {
+  color: var(--gray-600, #777);
+
+  /* r_16_24 */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.취소등록버튼상자 {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.취소등록버튼상자 button:first-child {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+
+  height: 48px;
+  padding: 12px 16px;
+
+  color: var(--gray-B, #000);
+  text-align: center;
+
+  /* sb_18_24 */
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+
+.취소등록버튼상자 button:last-child {
+  border: none;
+  border-radius: 8px;
+  background: var(--n-main, #2974e5);
+
+  height: 48px;
+  padding: 12px 16px;
+
+  color: #fff;
+  text-align: center;
+
+  /* sb_18_24 */
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
