@@ -1,0 +1,298 @@
+.navBottom {
+  width: var(--max-width);
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  padding: 2rem 0 2.625rem;
+  transition: 0.5s;
+}
+.navBottom.stickyAddStyle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navBottom.stickyAddStyle .filterSearchBox {
+  filter: invert(1);
+}
+
+[lightStatus=off] .navBottom.stickyAddStyle .filterSearchBox {
+  filter: invert(0);
+}
+
+.filterSearchBox {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.filterSearchBox .selectBox {
+  width: 7.5rem;
+  height: 48px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg-color);
+  background-image: var(--down-fill-bg);
+  background-repeat: no-repeat;
+  background-position: 90% center;
+  font-size: var(--font-size-1);
+  position: relative;
+}
+.filterSearchBox .selectBox .filterPopBtn {
+  width: 100%;
+  height: 100%;
+  min-width: 6.5625rem;
+  display: block;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  padding: 12px 16px;
+  color: var(--input-font-color);
+}
+.filterSearchBox .selectBox .filterList {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg-color);
+  width: 100%;
+  display: none;
+}
+.filterSearchBox .selectBox .filterList.show {
+  display: flex;
+  flex-direction: column;
+}
+.filterSearchBox .selectBox .filterList li {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+.filterSearchBox .selectBox .filterList li:hover {
+  background-color: var(--bg-color-3);
+  color: var(--input-active-color);
+}
+.filterSearchBox .selectBox .filterList li.active {
+  background-color: var(--bg-color-3);
+  color: var(--input-active-color);
+  background-image: var(--input-active-bg);
+  background-repeat: no-repeat;
+  background-position: 90% center;
+}
+.filterSearchBox .searchBox {
+  width: 21.25rem;
+  height: 48px;
+  border-radius: 48px;
+  background-color: var(--input-bg-color);
+  background-image: url("../img/search_outline_light_m.svg");
+  background-position: 12px center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--input-border-color);
+  padding: 0px 20px 0px 40px;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+.filterSearchBox .searchBox .selectBox {
+  width: 6.875rem;
+  border: none;
+  flex-shrink: 0;
+  height: 100%;
+}
+.filterSearchBox .searchBox input[type=search] {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  color: var(--basic-font-color);
+}
+.filterSearchBox .searchBox input[type=search]::-moz-placeholder {
+  color: var(--input-placeholder-color);
+  font-size: var(--font-size-1);
+  font-weight: 500;
+}
+.filterSearchBox .searchBox input[type=search]::placeholder {
+  color: var(--input-placeholder-color);
+  font-size: var(--font-size-1);
+  font-weight: 500;
+}
+.filterSearchBox .searchBox input[type=search]:focus {
+  outline: none;
+}
+
+.diaryWritePopBtn {
+  width: 110px;
+  height: 48px;
+  background-image: var(--plus-icon);
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  padding: 10px;
+  background-color: var(--button-black-btn-bg);
+  color: var(--button-black-btn-color);
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: var(--font-size-2);
+  line-height: 24px;
+  margin-left: auto;
+}
+
+section {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-bottom: 40px;
+}
+section .empty {
+  width: 100%;
+  text-align: center;
+  padding: 20vh;
+  color: var(--font-color-6);
+  font-size: var(--font-size-3);
+}
+section .diaryList {
+  width: 100%;
+}
+section .diaryList ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(auto, calc(25% - 1rem)));
+  gap: 1.5rem;
+}
+section .diaryList ul li {
+  position: relative;
+  border: 1px solid var(--list-border-color);
+  border-radius: 20px;
+}
+section .diaryList ul li .emojiBox {
+  width: 60%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  display: none;
+}
+section .diaryList ul li .emojiBox li img {
+  width: 100%;
+}
+section .diaryList ul li a {
+  display: block;
+}
+section .diaryList ul li:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+section .diaryList ul li:hover figcaption {
+  padding: 0 16px;
+}
+section .diaryList ul li:hover img {
+  animation: vibration 0.5s infinite;
+}
+@keyframes vibration {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+section .diaryList ul li .closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  border: none;
+  background: none;
+}
+section .diaryList ul li figure {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+section .diaryList ul li figure .imgBox {
+  border-radius: 20px;
+  overflow: hidden;
+}
+section .diaryList ul li figure .imgBox img {
+  display: block;
+  width: 100%;
+}
+section .diaryList ul li figure .imgBox_1 {
+  background-color: var(--mood-color-1);
+}
+section .diaryList ul li figure .imgBox_2 {
+  background-color: var(--mood-color-2);
+}
+section .diaryList ul li figure .imgBox_3 {
+  background-color: var(--mood-color-3);
+}
+section .diaryList ul li figure .imgBox_4 {
+  background-color: var(--mood-color-4);
+}
+section .diaryList ul li figure .imgBox_5 {
+  background-color: var(--mood-color-5);
+}
+section .diaryList ul li figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 8px;
+}
+section .diaryList ul li figure figcaption h3 {
+  font-weight: 600;
+  font-size: var(--font-size-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  width: 100%;
+}
+section .diaryList ul li figure .infoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+section .diaryList ul li figure .infoTop .moodText {
+  font-weight: 600;
+  font-size: var(--font-size-1);
+}
+section .diaryList ul li figure .infoTop .moodText.moodTextType1 {
+  color: var(--font-color-1);
+}
+section .diaryList ul li figure .infoTop .moodText.moodTextType2 {
+  color: var(--font-color-2);
+}
+section .diaryList ul li figure .infoTop .moodText.moodTextType3 {
+  color: var(--font-color-3);
+}
+section .diaryList ul li figure .infoTop .moodText.moodTextType4 {
+  color: var(--font-color-4);
+}
+section .diaryList ul li figure .infoTop .moodText.moodTextType5 {
+  color: var(--font-color-5);
+}
+section .diaryList ul li figure .infoTop .diaryDate {
+  font-size: var(--font-size-1);
+  color: var(--font-color-7);
+  font-weight: 400;
+}
+
+.diaryPagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}/*# sourceMappingURL=main.css.map */
