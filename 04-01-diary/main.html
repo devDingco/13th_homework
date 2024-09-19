@@ -144,7 +144,7 @@
             </div>
 
             <div class="register">
-                <button class="write_diary" onclick="JS_open()">일기쓰기</button>
+                <button class="write_diary" onclick="JS_open()">+ 일기쓰기</button>
             </div>
         </div>
 
@@ -161,17 +161,18 @@
         </div>
     </div>
 
-    <div class="pagination_layout">
-        <button class="pagination_icon" onclick="JS_beforePage()">
+    <div id="pagination_html" class="pagination_layout">
+        <button class="pageMoveButton" onclick="JS_beforePage()">
             <img src="./assets/leftside_icon.png" />
         </button>
         <span id="pagination">
-            <button class="page_button"></button>
+            <button class="pageMoveButton"></button>
         </span>
-        <button class="pagination_icon" onclick="JS_nextPage()">
+        <button class="pageMoveButton" onclick="JS_nextPage()">
             <img src="./assets/rightside_button.png" />
         </button>
     </div>
+
 
     <div class="footer_layout" id="footer_section">
         <div class="footer_title">민지의 다이어리</div>

@@ -174,12 +174,12 @@ body {
 }
 
 .click_photos {
-  border-bottom: 0.125rem solid #000;
+  border-bottom: 0.125rem solid var(--textColor);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 0.5rem;
-  color: #000;
+  color: var(--textColor);
 }
 
 .unclick_storage {
@@ -532,14 +532,14 @@ body {
   font-weight: 600;
   border-radius: 8px;
   align-items: center;
-  text-align: right;
+  text-align: center;
 
-  background-image: url("../assets/plus_outline_light_m.png");
+  /* background-image: url("../assets/plus_outline_light_m.png");
   background-repeat: no-repeat;
   background-position: 8px;
-  padding: 8px 10px;background-repeat: no-repeat;
-  background-position: 8px;
   padding: 8px 10px;
+  background-position: 8px; */
+  /* padding: 8px 10px; */
 }
 
 
@@ -697,30 +697,53 @@ body {
   font-weight: 400;
 }
 
-.pagination_layout {
+/* 페이지네이션 */
+.pagination_layout  {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 40px 0px;
-}
-
-.pagination_icon {
-  background-color: #ffffff00;
-  border: none;
-}
-
-#pagination {
   gap: 16px;
+  margin-top: 4rem;
 }
 
 .page_button {
-  background-color: #FFFFFF;
-  font-size: 16px;
-  font-weight: 400;
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #fff;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  color: #777777;
-  border: none;
-  margin: 0px 12px;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+}
+
+.pageMoveButton {
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: 0px;
+  height: 32px;
+  width: 32px;
+}
+
+.Pclicked_button {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
 }

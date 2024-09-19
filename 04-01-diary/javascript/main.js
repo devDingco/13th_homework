@@ -1,9 +1,11 @@
 window.onload = () => {
-  console.log("민지의 다이어리에 오신 것을 환영합니다.");
+  console.log("welcome");
 
 // 1. 시작하면 일기 목록에 그리기
 JS_drawing();
+
 };
+
 
 
 // 스크롤 관련 이벤트
@@ -41,40 +43,82 @@ window.addEventListener("scroll", () => {
 });
 
 
-
-const JS_drawing = (startIndex, endIndex) => {
-  const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
+const JS_drawing = () => {
+  // 1. 스토리지에 저장된 일기목록 가져오기
+  const storage_diary =
+    window.localStorage.getItem("list_of_diary") ?? "[]";
   const diary_list = JSON.parse(storage_diary);
 
-  const paginateDiary = diary_list.slice(startIndex, endIndex);
-
-  const newdiary = paginateDiary
-    .map((element, main) => `
-      <a href="./detail.html?number=${startIndex + main}" style="text-decoration: none;">
+  // 2. 일기목록 화면에 새롭게 전체 그리기
+  const newdiary = diary_list
+  .map(
+    (element, main) => `
+      <a href="./detail.html?number=${main}" style="text-decoration: none;">
         <div class="CSS_diary">
           <div class="diary_image">
-            <img class="cancel_button" src="./assets/close_button.png" onclick="JS_cancel(event, ${startIndex + main})" />
-            ${element.기분 === "happy" ? '<img class="feeling_image" src="./assets/happy.png" alt="happy" />' : ""}
-            ${element.기분 === "sad" ? '<img class="feeling_image" src="./assets/sad.png" alt="sad" />' : ""}
-            ${element.기분 === "surprise" ? '<img class="feeling_image" src="./assets/surprise.png" alt="surprise" />' : ""}
-            ${element.기분 === "angry" ? '<img class="feeling_image" src="./assets/angry.png" alt="angry" />' : ""}
-            ${element.기분 === "etc" ? '<img class="feeling_image" src="./assets/etc.png" alt="etc" />' : ""}
-          </div>
-          <div class="diary_content">
-            ${element.기분 === "happy" ? `<div class="feeling happy">행복해요</div>` : ""}
-            ${element.기분 === "sad" ? `<div class="feeling sad">슬퍼요</div>` : ""}
-            ${element.기분 === "surprise" ? `<div class="feeling surprise">놀랐어요</div>` : ""}
-            ${element.기분 === "angry" ? `<div class="feeling angry">화나요</div>` : ""}
-            ${element.기분 === "etc" ? `<div class="feeling etc">기타</div>` : ""}
+          <img class="cancel_button" src="./assets/close_button.png" onclick="JS_cancel(event, ${main})" />
+            ${
+              element.기분 === "happy"
+              ? '<img class="feeling_image" src="./assets/happy.png" alt="happy" />'
+              : ""
+            }
+            ${
+              element.기분 === "sad"
+              ? '<img class="feeling_image" src="./assets/sad.png" alt="sad" />'
+              : ""
+            }
+            ${
+              element.기분 === "surprise"
+              ? '<img class="feeling_image" src="./assets/surprise.png" alt="surprise" />'
+              : ""
+            }
+            ${
+              element.기분 === "angry"
+              ? '<img class="feeling_image" src="./assets/angry.png" alt="angry" />'
+              : ""
+            }
+            ${
+              element.기분 === "etc"
+              ? '<img class="feeling_image" src="./assets/etc.png" alt="etc" />'
+              : ""
+            }
+            </div>
+            <div class="diary_content">
+            ${
+              element.기분 === "happy"
+              ? `<div class="feeling happy">행복해요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "sad"
+              ? `<div class="feeling sad">슬퍼요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "surprise"
+              ? `<div class="feeling surprise">놀랐어요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "angry"
+              ? `<div class="feeling angry">화나요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "etc"
+              ? `<div class="feeling etc">기타</div>`
+              : ""
+            }
             <div class="date">${element.작성일}</div>
           </div>
-          <div class="title">${element.제목}</div>
-        </div>
-      </a>
-    `)
+        <div class="title"> ${element.제목}</div>
+      </div>
+    </a>
+    `
+    )
     .join("");
-
-  document.getElementById("show_diary_html").innerHTML = newdiary;
+  window.document.getElementById("show_diary_html").innerHTML =
+    newdiary;
 };
 
 
@@ -232,7 +276,6 @@ const JS_dropdown = (event) => {
     }
   }
   
-
 
   const newdiary = filtering_list
   .map(
@@ -489,75 +532,153 @@ if (title_box && content_box) {
 
 
 // 페이지네이션
-let currentPage = 1; // 현재 페이지
-const entriesPerPage = 12; // 페이지당 다이어리 카드 수
+const JS_pagenation = (clickPage) => {
+  // 로컬 스토리지에서 'list_of_diary'라는 키에 저장된 데이터를 가져옴. 만약 데이터가 없다면 빈 배열("[]")을 사용
+  const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]"; 
+  const diary_list = JSON.parse(storage_diary); // JSON 형식의 문자열을 JavaScript 객체로 변환
 
-// 총 페이지 수를 계산하는 함수
-const TotalPages = () => {
+  const pageItem = 12; // 한 페이지에 표시할 일기의 개수
+  const pageSize = 5; // 한 번에 표시할 페이지 번호의 개수
+  const lastPage = Math.ceil(diary_list.length / pageItem); // 총 페이지 수 계산
+
+  // 현재 페이지 그룹(페이지 번호 모음)의 위치 계산
+  const pageGroup = Math.ceil(clickPage / pageSize); 
+  const startGroupPage = (pageGroup - 1) * pageSize + 1; // 현재 그룹에서 가장 첫 번째 페이지 번호
+  const lastGroupPage = Math.min(startGroupPage + pageSize - 1, lastPage); // 현재 그룹에서 가장 마지막 페이지 번호
+
+  // 페이지 번호 버튼을 생성하는 부분
+  const buttons = new Array(pageSize)
+    .fill(1)
+    .map((element, main) => {
+      const pageNumber = main + startGroupPage; // 각 버튼에 표시될 페이지 번호 계산
+
+      // 페이지 번호 버튼을 HTML로 생성
+      return pageNumber <= lastPage
+        ? `<button 
+      onclick="JS_cardDrawing(${pageNumber});JS_pagenation(${pageNumber})"
+      class=${clickPage === pageNumber ? "Pclicked_button" : "page_button"}>${pageNumber}</button>`
+        : ``; // 페이지 번호가 마지막 페이지보다 크면 빈 문자열 반환
+    })
+    .join(" "); // 생성된 버튼들을 하나의 문자열로 결합
+
+  // 왼쪽 방향 화살표 버튼 생성
+  let leftArrow =
+    startGroupPage > 1
+      ? `<img class="pageMoveButton" src="./assets/leftside_icon.png" onclick="JS_beforePage(${startGroupPage})">`
+      : `<img class="pageMoveButton" src="./assets/leftside_icon.png" onclick="JS_beforePage(${startGroupPage})">`;
+
+  // 오른쪽 방향 화살표 버튼 생성
+  let rightArrow =
+    lastGroupPage < lastPage
+      ? `<img class="pageMoveButton" src="./assets/rightside_button.png" onclick="JS_nextPage(${lastGroupPage}, ${lastPage})">`
+      : `<img class="pageMoveButton" src="./assets/rightside_button.png" onclick="JS_nextPage(${lastGroupPage}, ${lastPage})">`;
+
+  // 위에서 생성한 버튼들을 HTML의 특정 요소에 삽입
+  document.getElementById("pagination_html").innerHTML = leftArrow + buttons + rightArrow;
+};
+
+const JS_beforePage = (startPage) => {
+  if (startPage > 1) { // 시작 페이지가 1보다 클 때만 이전으로 이동 가능
+    startPage -= 5; // 페이지 그룹 크기(5)만큼 뒤로 이동
+    JS_pagenation(startPage); // 업데이트된 페이지 그룹을 기반으로 페이지네이션 다시 생성
+    JS_cardDrawing(startPage); // 새로운 페이지에 해당하는 일기 목록을 화면에 표시
+  } else {
+    alert("첫 페이지입니다!"); // 페이지의 시작 부분일 때 경고 메시지 표시
+  }
+};
+
+const JS_nextPage = (startPage, lastPage) => {
+  if (startPage + 5 <= lastPage) { // 시작 페이지에서 5를 더한 값이 마지막 페이지보다 작거나 같을 때만 이동 가능
+    startPage += 5; // 페이지 그룹 크기(5)만큼 앞으로 이동
+    JS_pagenation(startPage); // 업데이트된 페이지 그룹을 기반으로 페이지네이션 다시 생성
+    JS_cardDrawing(startPage); // 새로운 페이지에 해당하는 일기 목록을 화면에 표시
+  } else {
+    alert("마지막 페이지입니다."); // 마지막 페이지일 때 경고 메시지 표시
+  }
+};
+
+const JS_cardDrawing = (page) => {
+  clickPage = page; // 클릭된 페이지를 현재 페이지로 설정
   const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
   const diary_list = JSON.parse(storage_diary);
-  return Math.ceil(diary_list.length / entriesPerPage);
+
+  // 현재 페이지에 해당하는 일기 목록을 필터링하여 가져옴
+  const results = diary_list.filter((_, main) => {
+    const shownumb = 12; // 한 페이지에 보여줄 일기 개수
+    const jumpnumb = (page - 1) * shownumb; // 앞 페이지에서 건너뛸 일기의 개수
+    if (jumpnumb <= main && main < jumpnumb + shownumb) {
+      return true; // 현재 페이지에 해당하는 일기만 필터링
+    } else {
+      return false; // 나머지는 제외
+    }
+  });
+
+  // 필터링된 일기 목록을 HTML로 변환하여 화면에 표시
+  document.getElementById("show_diary_html").innerHTML = results
+  .map(
+    (element, main) => `
+      <a href="./detail.html?number=${main}" style="text-decoration: none;">
+        <div class="CSS_diary">
+          <div class="diary_image">
+          <img class="cancel_button" src="./assets/close_button.png" onclick="JS_cancel(event, ${main})" />
+            ${
+              element.기분 === "happy"
+              ? '<img class="feeling_image" src="./assets/happy.png" alt="happy" />'
+              : ""
+            }
+            ${
+              element.기분 === "sad"
+              ? '<img class="feeling_image" src="./assets/sad.png" alt="sad" />'
+              : ""
+            }
+            ${
+              element.기분 === "surprise"
+              ? '<img class="feeling_image" src="./assets/surprise.png" alt="surprise" />'
+              : ""
+            }
+            ${
+              element.기분 === "angry"
+              ? '<img class="feeling_image" src="./assets/angry.png" alt="angry" />'
+              : ""
+            }
+            ${
+              element.기분 === "etc"
+              ? '<img class="feeling_image" src="./assets/etc.png" alt="etc" />'
+              : ""
+            }
+            </div>
+            <div class="diary_content">
+            ${
+              element.기분 === "happy"
+              ? `<div class="feeling happy">행복해요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "sad"
+              ? `<div class="feeling sad">슬퍼요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "surprise"
+              ? `<div class="feeling surprise">놀랐어요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "angry"
+              ? `<div class="feeling angry">화나요</div>`
+              : ""
+            }
+            ${
+              element.기분 === "etc"
+              ? `<div class="feeling etc">기타</div>`
+              : ""
+            }
+            <div class="date">${element.작성일}</div>
+          </div>
+        <div class="title"> ${element.제목}</div>
+      </div>
+    </a>
+    `
+  )
+  .join("");
 };
-
-// 특정 페이지를 표시하는 함수
-const displayPage = (page) => {
-const storage_diary = window.localStorage.getItem("list_of_diary") ?? "[]";
-const diary_list = JSON.parse(storage_diary);
-
-// 현재 페이지에 대한 항목의 시작 및 끝 인덱스 계산
-const startIndex = (page - 1) * entriesPerPage;
-const endIndex = startIndex + entriesPerPage;
-
-JS_drawing(startIndex, endIndex);
-
-// 현재 페이지 버튼 생성 및 업데이트
-updatePagination();
-};
-
-// 마지막 페이지로 이동
-const JS_nextPage = () => {
-  currentPage = TotalPages(); // 마지막 페이지로 이동
-  displayPage(currentPage);
-};
-
-// 첫 페이지로 이동
-const JS_beforePage = () => {
-  currentPage = 1; // 첫 페이지로 이동
-  displayPage(currentPage);
-};
-
-// 특정 페이지로 이동
-const goToPage = (page) => {
-  currentPage = page;
-  displayPage(currentPage);
-};
-
-// 수정 필요
-// // 페이지 버튼을 생성하고 페이지네이션 표시를 업데이트하는 함수
-// const updatePagination = () => {
-//   const paginationContainer = document.getElementById('pagination');
-//   paginationContainer.innerHTML = ''; // 기존 페이지 버튼 제거
-
-//   const totalPages = TotalPages();
-//   for (let i = 1; i <= totalPages; i++) {
-//     const pageButton = document.createElement('button');
-//     pageButton.textContent = i;
-//     pageButton.className = 'pagination_button'; // 클래스 이름을 추가해 스타일 적용 가능
-//     pageButton.onclick = () => goToPage(i);
-//     if (i === currentPage) {
-//       pageButton.classList.add('active'); // 현재 페이지 버튼 강조
-//     }
-//     paginationContainer.appendChild(pageButton);
-//   }
-      
-// };
-
-
-// 초기 페이지 로드 시
-window.onload = () => {
-  displayPage(currentPage);
-};
-
-// 버튼 클릭 이벤트 추가
-document.querySelector('.pagination_icon.next').addEventListener('click', JS_nextPage);
-document.querySelector('.pagination_icon.prev').addEventListener('click', JS_beforePage);

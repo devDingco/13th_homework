@@ -12,19 +12,20 @@ body {
     align-items: center;
     gap: 4rem;
     margin: 0 1.25rem 2.5rem;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
 }
 
 .header {
     width: 100%;
     height: 3.75rem;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     font-size: 1.125rem;
     font-weight: 700;
     text-align: left;
-    color: #000000;
+    color: var(--textColor);
 }
 
 .desktop {
@@ -88,7 +89,7 @@ body {
 .input_label {
     font-size: 0.875rem;
     font-weight: 400;
-    color: #333333;
+    color: var(--textColor);
 }
 
 #edit_title {
@@ -123,12 +124,12 @@ body {
 .cancel {
     width: 6.5rem;
     height: 3rem;
-    background-color: #ffffff;
-    color: #1C1C1C;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
     text-align: center;
     font-size: 1.125rem;
     font-weight: 600;
-    border: 0.0625rem solid #000000;
+    border: 0.0625rem solid var(--textColor);
     border-radius: 0.5rem;
     gap: 0.625rem;
     padding: 0.5rem 0.625rem;
@@ -137,8 +138,8 @@ body {
 .edit {
     width: 6.5rem;
     height: 3rem;
-    background-color: #000000;
-    color: #F2F2F2;
+    background-color: var(--textColor);
+    color: var(--backgroundColor);
     text-align: center;
     font-size: 1.125rem;
     font-weight: 600;
@@ -161,7 +162,7 @@ body {
 }
 
 .recollect_title {
-    color: #000000;
+    color: var(--textColor);
     font-size: 1.125rem;
     font-weight: 600;
     padding-bottom: 0.8125rem;
@@ -171,12 +172,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .comment_regist {
     display: flex;
-    width: 87.5rem;
+    width: 100%;
     height: 3rem;
     background-color: #F2F2F2;
     border: none;
@@ -196,7 +197,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 3.1875rem;
+    width: 8rem;
     height: 3rem;
     background-color: #C7C7C7;
     font-size: 1.125rem;
@@ -223,7 +224,7 @@ body {
     height: 100%;
     border-bottom: 0.0625rem solid #E4E4E4;
     padding: 1rem 0 2rem;
-    color: #000000;
+    color: var(--textColor);
     font-size: 1rem;
     font-weight: 500;
 }
@@ -236,3 +237,41 @@ body {
     color: #777777;
     gap: 0.5rem;
 }
+
+  /* 다크모드 토글 */
+  .CSS_toggle {
+    appearance: none;
+    width: 58px;
+    height: 32px;
+    border-radius: 20px;
+    background-color: lightgrey;
+  }
+  
+  .CSS_toggle::after {
+    display: block;
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 4px;
+  
+    transition: margin-left 0.3s; /* 실제로 이동하는 알맹이 -> 토글에 적용하면 안됨!! */
+  }
+  
+  .CSS_toggle:checked {
+    background-color: rgba(58, 216, 74, 1);
+  }
+  
+  .CSS_toggle:checked::after {
+    margin-left: 30px;
+  }
+
+  .darkmode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+  }

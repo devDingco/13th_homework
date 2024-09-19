@@ -1,5 +1,5 @@
 window.onload = () => {
-  console.log("민지의 다이어리에 오신 것을 환영합니다.");
+  console.log("welcome");
 
  // 초기 로드 시 기본 레이아웃으로 이미지 로드
 fetch("https://dog.ceo/api/breeds/image/random/10").then((result) => {
@@ -187,3 +187,13 @@ timer = setTimeout(() => {
   }
   }, 1000);
 });
+
+
+// 다크모드
+const JS_dark = (event) => {
+  if (event.target.checked === true) {
+    document.documentElement.setAttribute("darkmode", "on");
+  } else {
+    document.documentElement.setAttribute("darkmode", "off");
+  }
+};
