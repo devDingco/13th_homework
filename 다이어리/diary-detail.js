@@ -75,10 +75,14 @@ const createCommentHtml = (commentEntries) => {
 const addComment = (date) => {
   const comment = document.getElementById("comment_input");
   const commentValue = comment.value;
+  const noResultBox = document.getElementsByClassName("no_result_box");
   commentEntries = { commentValue, date };
   diaryEntries[index].commentList.push({ ...commentEntries });
   localStorage.setItem("diaryList", JSON.stringify(diaryEntries));
   comment.value = null;
+  if (noResultBox.length) {
+    noResultBox[0].style = "display: none";
+  }
   createCommentHtml(commentEntries);
 };
 
@@ -95,10 +99,17 @@ diaryEntries = diaryDetailContentList;
 diaryDetailContentList.map((e, i) => {
   e.id === id ? (index = i) : undefined;
 });
-const currentDiaryComments = diaryDetailContentList[index].commentList;
-currentDiaryComments.map((comment) => {
-  createCommentHtml(comment);
-});
+
+const currentDiaryComments = diaryDetailContent.commentList;
+if (currentDiaryComments.length === 0) {
+  document.getElementById(
+    "comments_container_box"
+  ).innerHTML += `<div class="no_result_box">등록된 회고가 없습니다.</div>`;
+} else {
+  currentDiaryComments.map((comment) => {
+    createCommentHtml(comment);
+  });
+}
 
 const deleteDiary = () => {
   diaryDetailContentList.splice(index, 1);

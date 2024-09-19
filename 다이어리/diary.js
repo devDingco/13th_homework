@@ -5,6 +5,7 @@ let storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
 let paginatedDiaryData = storedDiaryList;
 let entirePageNumberList;
 let currentPage = 1;
+let lastPage;
 
 const appendDiaryEntry = (diaryCard) => {
   const diaryEntryContainer = document.querySelectorAll(
@@ -25,25 +26,6 @@ const appendDiaryEntry = (diaryCard) => {
   } else {
     return (lastDiaryEntryContainer.innerHTML += diaryCard);
   }
-};
-
-const handleDiaryEntryBasedOnMood = (diaryCard, diaryEntry) => {
-  if (
-    currentFilteredMood === "전체" ||
-    currentFilteredMood === diaryEntry.mood
-  ) {
-    appendDiaryEntry(diaryCard);
-  } else {
-    // 예외 처리
-    appendDiaryEntry(diaryCard);
-  }
-};
-
-const getLastPageIndex = () => {
-  generatePageNumbers();
-  const pageNumber = document.getElementsByClassName("page_number");
-  const lastPageNumber = pageNumber[pageNumber.length - 1];
-  lastPageNumber.click();
 };
 
 const createHtml = (diaryEntry) => {
@@ -75,15 +57,42 @@ const createHtml = (diaryEntry) => {
     </a>
     `;
 
-  handleDiaryEntryBasedOnMood(diaryCard, diaryEntry);
+  appendDiaryEntry(diaryCard);
+};
+
+const getLastPageIndex = () => {
+  generatePageNumbers();
+  currentPage = 1;
+  const clickNumber = Math.ceil(entirePageNumberList.length / 5) - currentPage;
+  for (let i = 0; i < clickNumber; i++) {
+    document.querySelectorAll(".go_to_page_set")[1].click();
+  }
+  const pageNumber = document.getElementsByClassName("page_number");
+  const lastPageNumber = pageNumber[pageNumber.length - 1];
+  lastPageNumber.click();
+};
+
+const handleDiaryEntryBasedOnMood = (mood) => {
+  if (currentFilteredMood === mood) {
+    renderFirstPage(paginatedDiaryData);
+    getLastPageIndex();
+  } else {
+    const article = document.getElementById("article");
+    article.innerHTML = "";
+    paginatedDiaryData = storedDiaryList;
+    renderFirstPage(paginatedDiaryData);
+    getLastPageIndex();
+    setDropdownLabel("전체");
+  }
 };
 
 const saveDiaryEntry = (diaryEntry) => {
   storedDiaryList.push({ ...diaryEntry });
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  paginatedDiaryData.push({ ...diaryEntry });
-  renderFirstPage(paginatedDiaryData);
-  getLastPageIndex();
+  currentFilteredMood !== "전체"
+    ? paginatedDiaryData.push({ ...diaryEntry })
+    : "";
+  handleDiaryEntryBasedOnMood(diaryEntry.mood);
 };
 
 const getDate = (diaryEntry) => {
@@ -96,16 +105,12 @@ const getDate = (diaryEntry) => {
   saveDiaryEntry(diaryEntry);
 };
 
-const getFontColor = (diaryEntry, coverName) => {
+const getFontColorAndImageName = (diaryEntry, checkedMoodId) => {
+  const coverName = checkedMoodId.split(`_`)[1];
   const fontColor = `${coverName}_emotion_font_color`;
+  diaryEntry.imageName = coverName;
   diaryEntry.color = fontColor;
   getDate(diaryEntry);
-};
-
-const getImageName = (diaryEntry, checkedMoodId) => {
-  const coverName = checkedMoodId.split(`_`)[1];
-  diaryEntry.imageName = coverName;
-  getFontColor(diaryEntry, coverName);
 };
 
 const getMood = (diaryEntry) => {
@@ -121,7 +126,7 @@ const getMood = (diaryEntry) => {
   });
 
   diaryEntry.mood = checkedMood;
-  getImageName(diaryEntry, checkedMoodId);
+  getFontColorAndImageName(diaryEntry, checkedMoodId);
 };
 
 const getId = (diaryEntry) => {
@@ -130,16 +135,12 @@ const getId = (diaryEntry) => {
   getMood(diaryEntry);
 };
 
-const getTitle = (diaryEntry) => {
+const getDiaryTitleAndContent = (diaryEntry) => {
   const diaryTitle = document.getElementById("diary_title_window").value;
-  diaryEntry.title = diaryTitle;
-  getId(diaryEntry);
-};
-
-const getContent = (diaryEntry) => {
   const diaryContent = document.getElementById("diary_contents_window").value;
+  diaryEntry.title = diaryTitle;
   diaryEntry.content = diaryContent;
-  getTitle(diaryEntry);
+  getId(diaryEntry);
 };
 
 const registerDiary = (event) => {
@@ -148,6 +149,7 @@ const registerDiary = (event) => {
 };
 
 const renderFirstPage = (diaryList) => {
+  document.querySelector(".page_list_box").style.display = "flex";
   diaryList.slice(0, 12).map((diary) => {
     const storedDiary = {
       id: diary.id,
@@ -176,29 +178,48 @@ const handlePageClick = (event) => {
   upScroll();
 };
 
-const goToPageSet = (event) => {
-  const isNextClicked = event.target.outerHTML.includes("right");
-  isNextClicked ? (currentPage += 1) : (currentPage -= 1);
-  if (Math.ceil(entirePageNumberList.length / 5) < currentPage) {
-    currentPage -= 1;
-    alert("last page");
-  } else if (!currentPage) {
-    currentPage += 1;
-    alert("first page");
-  } else {
-    const begin = (currentPage - 1) * 5;
-    const end = currentPage * 5;
-    const page = entirePageNumberList.slice(begin, end).join("");
-    document.getElementById("page_number_list").innerHTML = page;
-    document
-      .getElementsByClassName("page_number")[0]
-      .setAttribute("page", "clickedPage");
+const navigateToPageSet = () => {
+  const begin = (currentPage - 1) * 5;
+  const end = currentPage * 5;
+  const page = entirePageNumberList.slice(begin, end).join("");
+  document.getElementById("page_number_list").innerHTML = page;
+  document
+    .getElementsByClassName("page_number")[0]
+    .setAttribute("page", "clickedPage");
+  document.getElementsByClassName("page_number")[0].click();
+};
 
-    document.getElementsByClassName("page_number")[0].click();
+const checkCurrentPageSet = (event) => {
+  const prevPageBtn = document.getElementById("prev-page-btn");
+  const nextPageBtn = document.getElementById("next-page-btn");
+  const pageSet = Math.ceil(entirePageNumberList.length / 5);
+  if (event === undefined) {
+    currentPage > 1
+      ? (prevPageBtn.style = "display: block")
+      : (prevPageBtn.style = "display: none");
+    pageSet <= currentPage
+      ? (nextPageBtn.style = "display: none")
+      : (nextPageBtn.style = "display: block");
+  } else {
+    const isNextClicked = event.target.outerHTML.includes("right");
+    isNextClicked ? (currentPage += 1) : (currentPage -= 1);
+    currentPage > 1
+      ? (prevPageBtn.style = "display: block")
+      : (prevPageBtn.style = "display: none");
+    pageSet <= currentPage
+      ? (nextPageBtn.style = "display: none")
+      : (nextPageBtn.style = "display: block");
+    navigateToPageSet();
   }
 };
 
 const generatePageNumbers = () => {
+  if (paginatedDiaryData.length === 0) {
+    document.getElementById(
+      "article"
+    ).innerHTML += `<div class="no_result_box">등록된 일기가 없습니다.</div>`;
+    document.querySelector(".page_list_box").style.display = "none";
+  }
   const pageNumberList = Math.ceil(paginatedDiaryData.length / 12);
   const pageNumberButtonList = Array(pageNumberList)
     .fill(1)
@@ -208,7 +229,6 @@ const generatePageNumbers = () => {
       }</button>`;
     });
   entirePageNumberList = pageNumberButtonList;
-
   document.getElementById("page_number_list").innerHTML = pageNumberButtonList
     .slice(0, 5)
     .join("");
@@ -230,6 +250,7 @@ const updateDiaryList = (selectedMood) => {
   const article = document.getElementById("article");
   article.innerHTML = "";
   renderFirstPage(paginatedDiaryData);
+  generatePageNumbers();
   selectedMood !== undefined ? setDropdownLabel(selectedMood) : "";
 };
 
@@ -237,18 +258,22 @@ const getDiariesByMood = (selectedMood) => {
   const filteredDiaries = storedDiaryList.filter((diary) =>
     diary.mood.includes(selectedMood)
   );
-  paginatedDiaryData = filteredDiaries;
   if (selectedMood === "전체") {
     document.getElementById("article").innerHTML = "";
     paginatedDiaryData = storedDiaryList;
     updateDiaryList(selectedMood);
-    generatePageNumbers();
+    currentPage = 1;
   } else {
     if (filteredDiaries.length === 0) {
-      alert("선택한 감정의 다이어리가 없습니다. 다른 감정을 선택해보세요.");
+      document.getElementById("article").innerHTML = "";
+      document.getElementById(
+        "article"
+      ).innerHTML += `<div class="no_result_box">등록된 일기가 없습니다.</div>`;
+      document.querySelector(".page_list_box").style.display = "none";
     } else {
+      paginatedDiaryData = filteredDiaries;
       updateDiaryList(selectedMood);
-      generatePageNumbers();
+      currentPage = 1;
     }
   }
 };
@@ -256,7 +281,9 @@ const getDiariesByMood = (selectedMood) => {
 const onClickMood = (event) => {
   const selectedMood = event.target.closest("li").innerText;
   currentFilteredMood = selectedMood;
+  currentPage = 1;
   getDiariesByMood(currentFilteredMood);
+  checkCurrentPageSet();
   upScroll();
 };
 
@@ -292,16 +319,17 @@ const onClickPhoto = (event) => {
 const deleteDiaryEntry = () => {
   let index;
   const diaryList = JSON.parse(localStorage.getItem("diaryList"));
-  diaryList.map((e, i) => {
-    e.id === deleteId ? (index = i) : "";
-  });
-  const deleteData = storedDiaryList[index];
+  for (let i = 0; i < diaryList.length; i++) {
+    if (diaryList[i].id === deleteId) {
+      index = i;
+      break;
+    }
+  }
+
   storedDiaryList.splice(index, 1);
   localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-  const newDiaryList = paginatedDiaryData.filter((e) => e.id !== deleteData.id);
-  paginatedDiaryData = newDiaryList;
+  paginatedDiaryData = storedDiaryList;
   updateDiaryList();
-  generatePageNumbers();
   onCloseSingleModal("confirm_delete_diary_modal");
 };
 
@@ -314,16 +342,14 @@ const confirmDeleteDiary = (event) => {
 const validateDiaryInputCompletion = () => {
   const text = document.getElementById("diary_title_window");
   const textarea = document.getElementById("diary_contents_window");
-
   const validate = () => {
+    const registerButton = document.getElementById("register_button");
     if (!(text.value && textarea.value)) {
-      document.getElementById("register_button").disabled = true;
-      document.getElementById("register_button").style =
-        "color: #f2f2f2; background-color: #c7c7c7;";
+      registerButton.disabled = true;
+      registerButton.style = "color: #f2f2f2; background-color: #c7c7c7;";
     } else {
-      document.getElementById("register_button").disabled = false;
-      document.getElementById("register_button").style =
-        "color: #F2F2F2; background-color: #000;";
+      registerButton.disabled = false;
+      registerButton.style = "color: #F2F2F2; background-color: #000;";
     }
   };
 
@@ -349,7 +375,11 @@ const closeAllModals = (modal) => {
 window.addEventListener("click", (event) => {
   const className = event.target.className;
   const id = event.target.id;
-  if (className === "aside_layout" || className === "confirm_modal_layout") {
+  if (
+    className === "aside_layout" ||
+    className === "confirm_modal_layout" ||
+    className === "confirm_delete_diary_modal_layout"
+  ) {
     event.target.id !== "diary_cancel_modal"
       ? closeAllModals(id)
       : onCloseSingleModal(id);
@@ -412,28 +442,31 @@ window.addEventListener("scroll", () => {
 });
 
 const toggleDiaryPhotoView = (viewType) => {
-  const diaryStorageMenuStyle = document.getElementById("diary_storage_menu");
-  const photoStorageMenuStyle = document.getElementById("photo_storage_menu");
-  const noneStyle = "color: var(--Gray-Gray-400, #ABABAB); border: none";
-  const blockStyle = "color: #000; border-bottom: 2px solid black;";
+  const diaryStorageMenu = document.getElementById("diary_storage_menu");
+  const photoStorageMenu = document.getElementById("photo_storage_menu");
+  const noneStyle = "color: var(--basicMenuColor); border: none";
+  const blockStyle =
+    "color: var(--basicConfirmModalColor); border-bottom: 2px solid var(--basicConfirmModalColor);";
   const diaryStorage = document.getElementById("diary_storage");
   const photoStorage = document.getElementById("photo_storage");
 
   switch (viewType) {
     case "diaryStorage": {
-      document.getElementById("article").innerHTML = "";
-      renderFirstPage(storedDiaryList);
+      currentPage = 1;
+      getDiariesByMood("전체");
+      checkCurrentPageSet();
       photoStorage.style = "display: none";
       diaryStorage.style = "display: block";
-      photoStorageMenuStyle.style = noneStyle;
-      diaryStorageMenuStyle.style = blockStyle;
+      photoStorageMenu.style = noneStyle;
+      diaryStorageMenu.style = blockStyle;
       break;
     }
     case "photoStorage": {
       diaryStorage.style = "display: none";
       photoStorage.style = "display: block";
-      diaryStorageMenuStyle.style = noneStyle;
-      photoStorageMenuStyle.style = blockStyle;
+      diaryStorageMenu.style = noneStyle;
+      photoStorageMenu.style = blockStyle;
+      setDropdownLabel("기본형");
       showLoadingSkeleton();
       break;
     }
@@ -449,34 +482,21 @@ const onSearch = (event) => {
     const searchResults = paginatedDiaryData.filter((e) =>
       e.title.includes(searchQuery)
     );
+    paginatedDiaryData = searchResults;
     document.getElementById("article").innerHTML = "";
     if (searchResults.length === 0) {
       document.getElementById(
         "article"
-      ).innerHTML += `<div class="no_search_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+      ).innerHTML += `<div class="no_result_box"><p class="no_search_result">"${searchQuery}"</p>에 대한 검색결과가 없습니다.</div>`;
+      document.querySelector(".page_list_box").style.display = "none";
     } else {
-      searchResults.map((diary) => {
-        const storedDiary = {
-          id: diary.id,
-          mood: diary.mood,
-          date: diary.date,
-          color: diary.color,
-          title: diary.title,
-          content: diary.content,
-          imageName: diary.imageName,
-        };
-        createHtml(storedDiary);
-      });
+      renderFirstPage(searchResults);
+      generatePageNumbers();
+      checkCurrentPageSet();
     }
     document.getElementById("search").value = null;
+    paginatedDiaryData = storedDiaryList;
   }, 1000);
-};
-
-const darkModeToggle = (event) => {
-  const mode = document.documentElement;
-  event.target.checked
-    ? mode.setAttribute("mode", "dark")
-    : mode.setAttribute("mode", "light");
 };
 
 renderFirstPage(storedDiaryList);
