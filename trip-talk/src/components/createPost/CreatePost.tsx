@@ -1,43 +1,95 @@
-import Button from "../button/Button";
-import ImageUploader from "../imageUploader/ImageUploader";
+import React, { useState } from "react";
+import Button from "../Button/Button";
+import ImageUploader from "../ImageUploader/ImageUploader";
 import Input from "../input/Input";
-import styles from "./createPost.module.css";
+import styles from "./CreatePost.module.css";
 
 export default function CreatePost() {
+  const [authorName, setAuthorName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.id) {
+      case "authorName":
+        setAuthorName(event.target.value);
+        break;
+      case "password":
+        setPassword(event.target.value);
+        break;
+      case "title":
+        setTitle(event.target.value);
+        break;
+    }
+  };
+
+  const handleContentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setContent(event.target.value);
+  };
+
   return (
     <>
       <form>
         <div className={styles.author_info_wrapper}>
-          <Input
-            isLabel={true}
-            type="text"
-            placeholder="작성자 명을 입력해 주세요."
-            isRequired={true}
-            children="작성자"
-          />
-          <Input
-            isLabel={true}
-            type="password"
-            placeholder="비밀번호를 입력해 주세요."
-            isRequired={true}
-            children="비밀번호"
-          />
+          <div>
+            <Input
+              isLabel={true}
+              id="authorName"
+              type="text"
+              placeholder="작성자 명을 입력해 주세요."
+              isRequired={true}
+              children="작성자"
+              onChange={handleInputChange}
+            />
+            {!authorName && (
+              <div className={styles.required_field}>필수입력 사항 입니다.</div>
+            )}
+          </div>
+          <div>
+            <Input
+              isLabel={true}
+              id="password"
+              type="password"
+              placeholder="비밀번호를 입력해 주세요."
+              isRequired={true}
+              children="비밀번호"
+              onChange={handleInputChange}
+            />
+            {!password && (
+              <div className={styles.required_field}>필수입력 사항 입니다.</div>
+            )}
+          </div>
         </div>
         <div className={styles.title_wrapper}>
           <Input
             isLabel={true}
+            id="title"
             type="text"
             placeholder="제목을 입력해 주세요."
             isRequired={true}
             children="제목"
+            onChange={handleInputChange}
           />
+          {!title && (
+            <div className={styles.required_field}>필수입력 사항 입니다.</div>
+          )}
         </div>
         <div className={styles.content_wrapper}>
           <div>
             <p>내용</p>
             <b>*</b>
           </div>
-          <textarea placeholder="내용을 입력해 주세요." />
+          <textarea
+            id="content"
+            placeholder="내용을 입력해 주세요."
+            onChange={handleContentChange}
+          />
+          {!content && (
+            <div className={styles.required_field}>필수입력 사항 입니다.</div>
+          )}
         </div>
         <div className={styles.address_wrapper}>
           <div>

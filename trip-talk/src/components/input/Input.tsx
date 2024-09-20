@@ -1,20 +1,24 @@
-import { ReactNode } from "react";
+import { ChangeEventHandler, ReactNode } from "react";
 import styles from "./Input.module.css";
 
 type InputProps = {
   isLabel: boolean;
   children?: ReactNode;
   isRequired: boolean;
+  id?: string;
   type: string;
   placeholder: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 export default function Input({
   isLabel,
   children,
   isRequired,
+  id,
   type,
   placeholder,
+  onChange,
 }: InputProps) {
   return (
     <>
@@ -26,7 +30,7 @@ export default function Input({
           </div>
         )}
 
-        <input className={styles.input} type={type} placeholder={placeholder} />
+        <input className={styles.input} id={id} type={type} placeholder={placeholder} onChange={onChange} />
       </div>
     </>
   );
