@@ -1,0 +1,40 @@
+/* lightmode */
+:root {
+    --textColor: #000000;
+    --backgroundColor: #FFFFFF;
+    --raidoTextColor: #333333;
+    --inputbackground: #FFFFFF;
+    --inputPlaceholder: #ABABAB;
+    --inputBorder: 1px solid #D4D3D3;
+    --closeButtonBorder: 1px solid #000000;
+    --closeButtonBackground: #FFFFFF;
+    --closeButtonText: 1C1C1C;
+    --registButtonBackground: #000000;
+    --registButtonText: #F2F2F2;
+    --finRegistText: #FFFFFF;
+    --finRegistButton: #000000;
+    --finRegistModalText: #333333;
+    --dropdownMenu: #5F5F5F;
+    --dropdownCheck: #299C00;
+    --dropdownHover: rgba(58, 181, 15, 0.05);
+}
+
+/* darkmode */
+[darkmode="on"]{
+    --textColor: #FFFFFF;
+    --backgroundColor: #1C1C1C;
+    --raidoTextColor: #C7C7C7;
+    --inputbackground: #000000;
+    --inputPlaceholder: #777777;
+    --inputBorder: 1px solid #333333;
+    --closeButtonBorder: 1px solid #5F5F5F;
+    --closeButtonBackground: #1C1C1C;
+    --registButtonBackground: #FFFFFF;
+    --registButtonText: #000000;
+    --finRegistText: #000000;
+    --finRegistButton: #FFFFFF;
+    --finRegistModalText: #D4D3D3;
+    --dropdownMenu: #C7C7C7;
+    --dropdownCheck: #FFFFFF;
+    --dropdownHover: #303030;
+}

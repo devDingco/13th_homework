@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin: 0 1.25rem 2.5rem;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
+}
+
+.header {
+    width: 100%;
+    height: 3.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--textColor);
+}
+
+.desktop {
+    display: block;
+}
+  
+.mobile {
+    display: none;
+}
+
+.edit_diary {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.select_mood {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.select_mood_title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.radio_group {
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+    width: 100%;
+    height: 1.5rem;
+}
+
+.radio_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.edit_part {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #333333;
+    width: 100%;
+}
+
+.editing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.input_label {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--textColor);
+}
+
+#edit_title {
+    display: flex;
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #D4D3D3;
+    padding: 0.75rem 1rem;
+    gap: 0.625rem;
+}
+
+#edit_content {
+    display: flex;
+    width: 100%;
+    height: 8rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #D4D3D3;
+    padding: 0.75rem 1rem;
+    gap: 0.625rem;
+}
+
+.edit_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    gap: 1rem;
+}
+
+.cancel {
+    width: 6.5rem;
+    height: 3rem;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: 0.0625rem solid var(--textColor);
+    border-radius: 0.5rem;
+    gap: 0.625rem;
+    padding: 0.5rem 0.625rem;
+}
+
+.edit {
+    width: 6.5rem;
+    height: 3rem;
+    background-color: var(--textColor);
+    color: var(--backgroundColor);
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    gap: 0.625rem;
+    padding: 0.5rem 0.625rem;
+}
+
+.edit:hover {
+    transform: skew(-6deg, 0deg)
+}
+
+.recollect {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1.5rem;
+    margin-top: -1.25rem;
+}
+
+.recollect_title {
+    color: var(--textColor);
+    font-size: 1.125rem;
+    font-weight: 600;
+    padding-bottom: 0.8125rem;
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.comment_regist {
+    display: flex;
+    width: 100%;
+    height: 3rem;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    gap: 0.625rem;
+}
+
+.comment_regist::placeholder {
+    color: #ABABAB;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.comment_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 8rem;
+    height: 3rem;
+    background-color: #C7C7C7;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #F2F2F2;
+    border: none;
+    border-radius: 0.5rem;
+    gap: 0.625rem;
+}
+
+#show_comment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 0.25rem;
+}
+
+.show_comment {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    width: 100%;
+    height: 100%;
+    border-bottom: 0.0625rem solid #E4E4E4;
+    padding: 1rem 0 2rem;
+    color: var(--textColor);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+#show_comment_date {
+    display: flex;
+    height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777777;
+    gap: 0.5rem;
+}
+
+  /* 다크모드 토글 */
+  .CSS_toggle {
+    appearance: none;
+    width: 58px;
+    height: 32px;
+    border-radius: 20px;
+    background-color: lightgrey;
+  }
+  
+  .CSS_toggle::after {
+    display: block;
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 4px;
+  
+    transition: margin-left 0.3s; /* 실제로 이동하는 알맹이 -> 토글에 적용하면 안됨!! */
+  }
+  
+  .CSS_toggle:checked {
+    background-color: rgba(58, 216, 74, 1);
+  }
+  
+  .CSS_toggle:checked::after {
+    margin-left: 30px;
+  }
+
+  .darkmode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+  }
