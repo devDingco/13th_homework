@@ -22,7 +22,7 @@
 
 header {
     width: 100%;
-    color: #000000;
+    color: black;
     font-weight: 700;
     font-size: 20px;
 }
@@ -34,7 +34,7 @@ main {
     gap: 2.5rem;
 }
 
-.inputUserForm {
+.UserInputForm {
     display: flex;
     gap: 2.5rem;
 }
@@ -88,11 +88,11 @@ main {
     width: 8.125rem;
     height: 3rem;
     background-color: #FFFFFF;
-    color: #000000;
+    color: black;
     font-weight: 600;
     font-size: 1.125rem;
     border-radius: .5rem;
-    border: .0625rem solid #000000;
+    border: .0625rem solid black;
 }
 
 .uploadButtonContainer {
@@ -135,11 +135,11 @@ footer {
     width: 4rem;
     height: 3rem;
     background-color: #F2F2F2;
-    color: #000000;
+    color: black;
     font-weight: 600;
     font-size: 1.125rem;
     border-radius: .5rem;
-    border: .0625rem solid #000000;
+    border: .0625rem solid black;
 }
 
 .submitButton {

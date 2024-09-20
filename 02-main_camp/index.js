@@ -1,4 +1,4 @@
-const PostEditor = () => {
+const CreatePostPage = () => {
     const writerDescription = "작성자명을 입력해 주세요."
     const passwordDescription = "비밀번호를 입력해 주세요."
     const titleDescription = "제목을 입력해 주세요."
@@ -9,17 +9,17 @@ const PostEditor = () => {
         <div className="rootContainer">
             <header>게시물 등록</header>
             <main>
-                <div className="inputUserForm">
-                    <InputForm isRequired={true} title="작성자" placeholder={writerDescription}/>
-                    <InputForm isRequired={true} title="비밀번호" placeholder={passwordDescription}/>
+                <div className="UserInputForm">
+                    <BasicInputForm isRequired={true} title="작성자" placeholder={writerDescription}/>
+                    <BasicInputForm isRequired={true} title="비밀번호" placeholder={passwordDescription}/>
                 </div>
                 <Divider />
-                <InputForm isRequired={true} title="제목" placeholder={titleDescription}/>
+                <BasicInputForm isRequired={true} title="제목" placeholder={titleDescription}/>
                 <Divider />
                 <ContentsInputForm title="내용" placeholder={contentsDescription}/>
                 <AddressInputForm />
                 <Divider />
-                <InputForm isRequired={false} title="유튜브 링크" placeholder={youtubeLinkDescription}/>
+                <BasicInputForm isRequired={false} title="유튜브 링크" placeholder={youtubeLinkDescription}/>
                 <Divider />
                 <PhotoUploadForm />
             </main>
@@ -30,7 +30,7 @@ const PostEditor = () => {
     );
 }
 
-const InputForm = (props) => {
+const BasicInputForm = (props) => {
     if (props.isRequired) {
         return (
             <div id="PostInputForm" className="inputForm">
@@ -59,15 +59,19 @@ const ContentsInputForm = (props) => {
 }
 
 const AddressInputForm = () => {
+    const zipCodeDescription = "01234"
+    const addressDescription = "주소를 입력해주세요."
+    const detailAddressDescription = "상세 주소"
+
     return (
         <div className="inputForm">
             주소
             <div class="ZipCodeContainer">
-                <TextInput placeholder="01234"/>
+                <TextInput placeholder={zipCodeDescription} />
                 <ZipCodeSearchButton />
             </div>
-            <TextInput placeholder="주소를 입력해 주세요." />
-            <TextInput placeholder="상세 주소" />
+            <TextInput placeholder={addressDescription} />
+            <TextInput placeholder={detailAddressDescription} />
         </div>
     );
 }
