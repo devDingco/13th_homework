@@ -1,0 +1,15 @@
+.inputWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputS {
+  display: flex;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  flex-grow: 1;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}

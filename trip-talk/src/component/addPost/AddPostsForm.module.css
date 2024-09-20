@@ -1,0 +1,24 @@
+.formS {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+}
+
+.columnBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.flexBox {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.lineBox {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+}
