@@ -2,26 +2,11 @@ import React from "react";
 import Input from "../components/input";
 import TextArea from "../components/textarea";
 import Main from "../layout/main";
-// import { useForm, SubmitHandler } from "react-hook-form";
-
-// type Inputs = {
-//   example: string;
-//   exampleRequired: string;
-// };
 
 const write = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors, isValid },
-  // } = useForm<Inputs>();
-  // const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
   return (
     <Main>
       <h1 className="text-2xl font-bold">게시글 등록</h1>
-      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
       <form>
         <div className="flex justify-between gap-10 w-full">
           <Input
@@ -84,13 +69,12 @@ const write = () => {
           <button type="reset" className="whiteBtn">
             취소
           </button>
-          <button
+          <input
             type="submit"
             className="blueBtn disabled:grayBtn"
-            // disabled={isValid ? false : true}
-          >
-            등록하기
-          </button>
+            value="등록하기"
+            // disabled
+          />
         </div>
       </form>
     </Main>
