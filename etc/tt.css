@@ -1,0 +1,42 @@
+.wrapper {
+    width: 1160px;
+    height: 1167px;
+    display: flex;
+    /* gap: 50px; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+}
+
+.container__left {
+    width: 784px;
+    height: 1167px;
+    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;           
+    justify-content: space-between;
+}
+
+img {
+    width: 380px;
+    height: 285px;
+    gap: 10px;
+}
+
+.container__right {
+    width: 360px;
+    height: 1167px;
+    background-color: bisque;
+}
+
+
+.css_네모상자 {
+    width: 360px;
+    height: 604px;
+    border: 1px solid #d4d3d3;
+    padding-left: 10px;
+
+}
+.subContent{
+    display: flex;
+    justify-content: space-between;
+}
