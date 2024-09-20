@@ -57,9 +57,9 @@ const App = () => {
 
 
             {/* 사진 첨부 */}
-            <div class="enroll-row-section">
+            <div class="css_picturepart">
                 <div>사진 첨부</div>
-                <div class="picture-enroll-row">
+                <div class="css_picture">
                     <img src="./assets/add_image.png" />
                     <img src="./assets/add_image.png" />
                     <img src="./assets/add_image.png" />
@@ -68,9 +68,9 @@ const App = () => {
 
 
             {/* 하단 버튼 */}
-            <div class="enroll-button-container">
-                <button class="enroll-cancel-button">취소</button>
-                <button class="enroll-submit-button">등록하기</button>
+            <div class="css_button">
+                <button class="css_cancelbutton">취소</button>
+                <button class="css_submitbutton">등록하기</button>
             </div>
         </div>
     );
