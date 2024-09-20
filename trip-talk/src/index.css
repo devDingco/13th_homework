@@ -9,3 +9,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+#root {
+  width: 100vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  box-sizing: border-box;
+}
