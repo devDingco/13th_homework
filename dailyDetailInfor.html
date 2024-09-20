@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>dailyDetailInfor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../style/dailyDetailInforStyle.css" />
+        <script>
+            window.onload = () => {
+                // location.search를 이용하여 queryString id 들고오기
+                const queryString = location.search;
+                const queryId = new URLSearchParams(queryString).get("id");
+
+                const dailyArray = JSON.parse(
+                    localStorage.getItem("dailyArray")
+                ).filter((daily) => Number(daily.id) === Number(queryId));
+
+                const mainElement = document.getElementsByTagName("main")[0];
+                const articleElement = document.createElement("article");
+                articleElement.innerHTML = `<div class="article-header">${dailyArray[0].title}</div>
+                <div class="article-mood-container">
+                    <div class="article-mood">
+                        <img src="../${dailyArray[0].img}" alt="1" class="post-img" />
+                        <div class="post-font-${dailyArray[0].moodEng}">${dailyArray[0].mood}</div>
+                    </div>
+                    <div class="post-font">${dailyArray[0].date} 작성</div>
+                </div>
+                <div id="article-content">
+                ${dailyArray[0].content}
+                </div>
+                <div class="post-copy-container" onclick="onClickContentCopy()">
+                    <div class="post-copy">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18C8.45 18 7.97917 17.8042 7.5875 17.4125C7.19583 17.0208 7 16.55 7 16V4C7 3.45 7.19583 2.97917 7.5875 2.5875C7.97917 2.19583 8.45 2 9 2H18C18.55 2 19.0208 2.19583 19.4125 2.5875C19.8042 2.97917 20 3.45 20 4V16C20 16.55 19.8042 17.0208 19.4125 17.4125C19.0208 17.8042 18.55 18 18 18H9ZM9 16H18V4H9V16ZM5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V7C3 6.71667 3.09583 6.47917 3.2875 6.2875C3.47917 6.09583 3.71667 6 4 6C4.28333 6 4.52083 6.09583 4.7125 6.2875C4.90417 6.47917 5 6.71667 5 7V20H15C15.2833 20 15.5208 20.0958 15.7125 20.2875C15.9042 20.4792 16 20.7167 16 21C16 21.2833 15.9042 21.5208 15.7125 21.7125C15.5208 21.9042 15.2833 22 15 22H5Z" fill="#5F6368"/>
+                        </svg>
+                        <div class="">내용 복사</div>
+                    </div>    
+                </div>
+                <div class="post-update">
+                    <a href="./dailyUpdate.html?id=${dailyArray[0].id}" class="update-button">수정</a>
+                    <a class="update-button" onclick="onClickDetailModal()">삭제</a>
+                </div>
+                `;
+                mainElement.appendChild(articleElement);
+
+                const sectionElement = document.getElementById("section-list");
+
+                dailyArray[0].comments.map((comment) => {
+                    const divElement = document.createElement("div");
+                    divElement.innerHTML = `
+            <div class="section-comment">
+                <div>${comment}</div>
+                <div class="section-date">[2024.09.24]</div>
+            </div>`;
+                    sectionElement.appendChild(divElement);
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header-text-container">
+                    <div class="header-text">민지의 다이어리</div>
+                </div>
+                <div class="header-mobile">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        onclick="onBack()"
+                    >
+                        <path
+                            d="M9.725 11.9996L17.075 19.3496C17.325 19.5996 17.4458 19.8913 17.4375 20.2246C17.4292 20.558 17.3 20.8496 17.05 21.0996C16.8 21.3496 16.5083 21.4746 16.175 21.4746C15.8417 21.4746 15.55 21.3496 15.3 21.0996L7.6 13.4246C7.4 13.2246 7.25 12.9996 7.15 12.7496C7.05 12.4996 7 12.2496 7 11.9996C7 11.7496 7.05 11.4996 7.15 11.2496C7.25 10.9996 7.4 10.7746 7.6 10.5746L15.3 2.87462C15.55 2.62462 15.8458 2.50379 16.1875 2.51212C16.5292 2.52046 16.825 2.64962 17.075 2.89962C17.325 3.14962 17.45 3.44129 17.45 3.77462C17.45 4.10796 17.325 4.39962 17.075 4.64962L9.725 11.9996Z"
+                            fill="#333333"
+                        />
+                    </svg>
+
+                    <div class="mobile-text">일기 상세</div>
+                </div>
+            </header>
+        </main>
+        <section>
+            <div class="section-title">회고</div>
+            <form class="section-input" onsubmit="onSubmitComment(event)">
+                <input
+                    type="text"
+                    placeholder="회고를 남겨보세요"
+                    class="section-input1"
+                />
+                <button class="section-button">입력</button>
+            </form>
+            <div class="section-list" id="section-list"></div>
+        </section>
+        <footer>
+            <div class="footer-content">내용이 복사되었습니다.</div>
+        </footer>
+        <div id="modal_fail_container" class="modal_fail_container">
+            <div class="modal_success">
+                <div class="daily-header">일기 삭제</div>
+                <div>일기를 삭제 하시겠어요?</div>
+                <div class="modal_fail_button_container">
+                    <button
+                        class="modal_fail_button1"
+                        onclick="onClickCancelDaily()"
+                    >
+                        취소
+                    </button>
+                    <button
+                        class="modal_fail_button2"
+                        onclick="onClickDeletePost()"
+                    >
+                        삭제
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="./utils/onSubmitComment.js"></script>
+    <script src="./utils/onClickDeletePost.js"></script>
+    <script src="./utils/onBack.js"></script>
+    <script src="./utils/onClickContentCopy.js"></script>
+    <script src="./utils/onClickCancelDaily.js"></script>
+    <script src="./utils/onClickDetailModal.js"></script>
+</html>

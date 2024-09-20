@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>daily</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style/dailyStyle.css" />
+
+        <script type="module">
+            import { paintPost } from "./utils/paintPost.js";
+            // 금일 날짜
+            const date = new Date();
+            const year = date.getFullYear();
+            const month =
+                date.getMonth() + 1 < 10
+                    ? `0${date.getMonth() + 1}`
+                    : date.getMonth() + 1;
+            const day =
+                date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+            const today = `${year}.${month}.${day}`;
+
+            window.onload = function () {
+                const images = document.querySelectorAll("img.post-img");
+
+                if (window.innerWidth < 400) {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(
+                            /(\/img\/[a-zA-Z]+)(\.png)$/,
+                            "$1-1$2"
+                        );
+
+                        img.src = url.href;
+                    });
+                } else {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(/-1\.png$/, ".png");
+                        img.src = url.href;
+                    });
+                }
+            };
+
+            document.addEventListener("DOMContentLoaded", (event) => {
+                const initialDailyArray = [
+                    {
+                        id: 0,
+                        moodEng: "happy",
+                        mood: "행복해요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/happy.png`,
+                        comments: [],
+                    },
+                    {
+                        id: 1,
+                        moodEng: "sad",
+                        mood: "슬퍼요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/sad.png`,
+                        comments: [],
+                    },
+                    {
+                        id: 2,
+                        moodEng: "surprise",
+                        mood: "놀랐어요",
+                        date: today,
+                        title: "타이틀영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/surprise.png`,
+                        comments: [],
+                    },
+                    {
+                        id: 3,
+                        moodEng: "etc",
+                        mood: "기타",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/etc.png`,
+                        comments: [],
+                    },
+                    {
+                        id: 4,
+                        moodEng: "angry",
+                        mood: "화나요",
+                        date: today,
+                        title: "타이틀 영역입니다.",
+                        content: "컨텐츠 영역입니다.",
+                        img: `./img/angry.png`,
+                        comments: [],
+                    },
+                ];
+                const dailyArray = JSON.parse(
+                    localStorage.getItem("dailyArray")
+                );
+
+                if (!dailyArray) {
+                    localStorage.setItem(
+                        "dailyArray",
+                        JSON.stringify(initialDailyArray)
+                    );
+                    paintPost(initialDailyArray);
+                    localStorage.setItem("idx", 5);
+                } else {
+                    paintPost(dailyArray);
+                    localStorage.setItem("idx", dailyArray.length);
+                }
+            });
+
+            addEventListener("resize", () => {
+                const images = document.querySelectorAll("img.post-img");
+
+                if (window.innerWidth < 400) {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(
+                            /(\/img\/[a-zA-Z]+)(\.png)$/,
+                            "$1-1$2"
+                        );
+
+                        img.src = url.href;
+                    });
+                } else {
+                    images.forEach((img) => {
+                        const url = new URL(img.src);
+
+                        url.pathname = url.pathname.replace(/-1\.png$/, ".png");
+                        img.src = url.href;
+                    });
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header-text-container">
+                    <div class="header-text">민지의 다이어리</div>
+                </div>
+                <img src="./img/Rectangle1.png" alt="img" class="header-img" />
+            </header>
+            <article>
+                <div class="article-header">
+                    <div class="article-header-container">
+                        <div
+                            class="article-header-font"
+                            onclick="onClickChangePost(event)"
+                            id="article-daily"
+                        >
+                            일기 보관함
+                        </div>
+                        <div
+                            class="article-header-text"
+                            id="article-picture"
+                            onclick="onClickChangePost(event)"
+                        >
+                            사진 보관함
+                        </div>
+                    </div>
+                </div>
+                <div class="article-select">
+                    <div class="article-header-left">
+                        <div name="" id="select-post" class="select-post">
+                            <div class="option" onclick="onClickDropDown()">
+                                <div>전체</div>
+                                <svg
+                                    width="10"
+                                    height="5"
+                                    viewBox="0 0 10 5"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M4.47495 4.475L0.849951 0.85C0.799951 0.8 0.762451 0.745833 0.737451 0.6875C0.712451 0.629167 0.699951 0.566667 0.699951 0.5C0.699951 0.366667 0.745785 0.25 0.837451 0.15C0.929118 0.05 1.04995 0 1.19995 0H8.79995C8.94995 0 9.07078 0.05 9.16245 0.15C9.25412 0.25 9.29995 0.366667 9.29995 0.5C9.29995 0.533333 9.24995 0.65 9.14995 0.85L5.52495 4.475C5.44162 4.55833 5.35828 4.61667 5.27495 4.65C5.19162 4.68333 5.09995 4.7 4.99995 4.7C4.89995 4.7 4.80828 4.68333 4.72495 4.65C4.64162 4.61667 4.55828 4.55833 4.47495 4.475Z"
+                                        fill="#333333"
+                                    />
+                                </svg>
+                            </div>
+                            <div id="optionList" class="optionList">
+                                <div
+                                    class="optionItem"
+                                    id="all"
+                                    style="
+                                        background-color: rgba(
+                                            58,
+                                            181,
+                                            15,
+                                            0.05
+                                        );
+                                        color: rgba(41, 156, 0, 1);
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="all"
+                                    />
+                                    <label for="all" id="all">전체</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                        style="display: block"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="happy">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="happy"
+                                    />
+                                    <label for="happy" id="happy"
+                                        >행복해요</label
+                                    >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="sad">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="sad"
+                                    />
+                                    <label for="sad" id="sad">슬퍼요</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="surprise">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="surprise"
+                                    />
+                                    <label for="surprise" id="surprise"
+                                        >놀랐어요</label
+                                    >
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="angry">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="angry"
+                                    />
+                                    <label for="angry" id="angry">화나요</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="optionItem" id="etc">
+                                    <input
+                                        type="radio"
+                                        name="radio_option"
+                                        id="etc"
+                                    />
+                                    <label for="etc" id="etc">기타</label>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="radio_check"
+                                    >
+                                        <path
+                                            d="M6.10373 10.8098L12.6807 4.23281C12.8359 4.0776 13.017 4 13.224 4C13.4309 4 13.612 4.0776 13.7672 4.23281C13.9224 4.38802 14 4.57233 14 4.78575C14 4.99916 13.9224 5.18347 13.7672 5.33868L6.64696 12.4783C6.49175 12.6335 6.31068 12.7111 6.10373 12.7111C5.89679 12.7111 5.71571 12.6335 5.5605 12.4783L2.2235 9.1413C2.06829 8.9861 1.99392 8.80178 2.00039 8.58837C2.00686 8.37496 2.08769 8.19065 2.2429 8.03544C2.39811 7.88023 2.58242 7.80263 2.79584 7.80263C3.00925 7.80263 3.19356 7.88023 3.34877 8.03544L6.10373 10.8098Z"
+                                            fill="#299C00"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <select
+                            name=""
+                            id="select-post1"
+                            class="select-post1"
+                            onchange="onChangeRatio(event)"
+                        >
+                            <option value="default">기본</option>
+                            <option value="row">가로형</option>
+                            <option value="col">세로형</option>
+                        </select>
+                        <div class="article-search">
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z"
+                                    fill="#777777"
+                                />
+                            </svg>
+                            <input
+                                type="text"
+                                name=""
+                                id="search-input"
+                                class="search-input"
+                                placeholder="검색어를 입력해 주세요."
+                            />
+                        </div>
+                    </div>
+                    <div class="article-daily" onclick="onClickModal()">
+                        <div class="">+</div>
+                        <div class="">일기 쓰기</div>
+                    </div>
+                </div>
+                <div id="article-main" class="article-main">
+                    <div id="post" class="post"></div>
+                    <div class="floating-button" onclick="onClickUp()">
+                        <svg
+                            width="19"
+                            height="10"
+                            viewBox="0 0 19 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M9.10145 2.61068L2.0598 9.65232C1.82029 9.89183 1.53687 10.0076 1.20953 9.99961C0.882202 9.99163 0.598779 9.86788 0.359268 9.62837C0.119756 9.38886 0 9.10544 0 8.7781C0 8.45077 0.119756 8.16735 0.359268 7.92784L7.73623 0.574828C7.92784 0.383219 8.1434 0.239511 8.38291 0.143707C8.62242 0.0479021 8.86193 0 9.10145 0C9.34096 0 9.58047 0.0479021 9.81998 0.143707C10.0595 0.239511 10.2751 0.383219 10.4667 0.574828L17.8436 7.95179C18.0831 8.1913 18.1989 8.47073 18.1909 8.79008C18.1829 9.10943 18.0592 9.38886 17.8197 9.62837C17.5802 9.86788 17.2967 9.98764 16.9694 9.98764C16.6421 9.98764 16.3587 9.86788 16.1191 9.62837L9.10145 2.61068Z"
+                                fill="#5F6368"
+                            />
+                        </svg>
+                    </div>
+                </div>
+                <div
+                    id="article-picture-component"
+                    class="article-picture-component"
+                >
+                    <div>
+                        <div class="dog-img-before">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div id="pagination" class="pagination">
+                <div id="page-left" class="page-left">
+                    <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style="cursor: pointer"
+                    >
+                        <path
+                            d="M2.8001 5.99688L6.7001 2.09688C6.88343 1.91354 6.9751 1.68021 6.9751 1.39688C6.9751 1.11354 6.88343 0.880208 6.7001 0.696875C6.51676 0.513542 6.28343 0.421875 6.0001 0.421875C5.71676 0.421875 5.48343 0.513542 5.3001 0.696875L0.700098 5.29688C0.600098 5.39687 0.529264 5.50521 0.487597 5.62188C0.445931 5.73854 0.425097 5.86354 0.425097 5.99688C0.425097 6.13021 0.445931 6.25521 0.487597 6.37188C0.529264 6.48854 0.600098 6.59688 0.700098 6.69688L5.3001 11.2969C5.48343 11.4802 5.71676 11.5719 6.0001 11.5719C6.28343 11.5719 6.51676 11.4802 6.7001 11.2969C6.88343 11.1135 6.9751 10.8802 6.9751 10.5969C6.9751 10.3135 6.88343 10.0802 6.7001 9.89688L2.8001 5.99688Z"
+                            fill="#333333"
+                        />
+                    </svg>
+                </div>
+                <div id="pagination-list" class="pagination-list"></div>
+                <div id="page-right" class="page-right">
+                    <svg
+                        width="7"
+                        height="12"
+                        viewBox="0 0 7 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style="cursor: pointer"
+                    >
+                        <path
+                            d="M4.5998 5.99688L0.699805 2.09688C0.516471 1.91354 0.424805 1.68021 0.424805 1.39688C0.424805 1.11354 0.516471 0.880208 0.699805 0.696875C0.883138 0.513542 1.11647 0.421875 1.3998 0.421875C1.68314 0.421875 1.91647 0.513542 2.0998 0.696875L6.6998 5.29688C6.7998 5.39687 6.87064 5.50521 6.9123 5.62188C6.95397 5.73854 6.9748 5.86354 6.9748 5.99688C6.9748 6.13021 6.95397 6.25521 6.9123 6.37188C6.87064 6.48854 6.7998 6.59688 6.6998 6.69688L2.0998 11.2969C1.91647 11.4802 1.68314 11.5719 1.3998 11.5719C1.11647 11.5719 0.883138 11.4802 0.699805 11.2969C0.516471 11.1135 0.424805 10.8802 0.424805 10.5969C0.424805 10.3135 0.516471 10.0802 0.699805 9.89688L4.5998 5.99688Z"
+                            fill="#333333"
+                        />
+                    </svg>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer_container">
+                <div class="footer-1">민지의 다이어리</div>
+                <div class="footer-2">대표 : 민지</div>
+                <div class="footer-3">Copyright © 2024. {name} Co., Ltd.</div>
+            </div>
+        </footer>
+        <div id="modal" class="modal" onclick="onClickModalBlank(event)">
+            <div class="modal_container">
+                <div class="daily-header">
+                    <div>일기 쓰기</div>
+                    <div class="dark">
+                        <div>다크모드</div>
+                        <input
+                            type="checkbox"
+                            class="checkbox_dark"
+                            onclick="onClickToggle(event)"
+                        />
+                    </div>
+                </div>
+                <div class="daily-checkcontainer">
+                    <div>오늘 기분은 어땟나요?</div>
+                    <div class="daily-inputlist">
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                name="radio"
+                                class="input-radio"
+                                id="happy"
+                            />
+                            <label for="">행복해요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                name="radio"
+                                class="input-radio"
+                                id="sad"
+                            />
+                            <label for="">슬퍼요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                name="radio"
+                                class="input-radio"
+                                id="surprise"
+                            />
+                            <label for="">놀랐어요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                name="radio"
+                                class="input-radio"
+                                id="angry"
+                            />
+                            <label for="">화나요</label>
+                        </div>
+                        <div class="daily-input">
+                            <input
+                                type="radio"
+                                name="radio"
+                                class="input-radio"
+                                id="etc"
+                            />
+                            <label for="">기타</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-form">
+                    <div class="daily-form-input">
+                        <div class="daily-title">
+                            <div>제목</div>
+                            <input
+                                type="text"
+                                id="titleId"
+                                class="input-title"
+                                placeholder="제목을 입력해 주세요."
+                            />
+                        </div>
+                        <div class="daily-title">
+                            <div>내용</div>
+                            <textarea
+                                id="contentId"
+                                class="input-title input-content"
+                                placeholder="내용을 입력해주세요"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-button-container">
+                        <button
+                            class="submit-delete-button"
+                            onclick="onClickModalFail()"
+                        >
+                            삭제
+                        </button>
+                        <button
+                            id="submitButton"
+                            class="submit-button"
+                            onclick="onClickModalSuccess()"
+                        >
+                            등록하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modal_success_container" class="modal_success_container">
+            <div class="modal_success">
+                <div class="daily-header">일기 등록 완료</div>
+                <div>등록이 완료되었습니다.</div>
+                <button class="modal_success_button" id="modal_success_button">
+                    확인
+                </button>
+            </div>
+        </div>
+        <div id="modal_fail_container" class="modal_fail_container">
+            <div class="modal_success">
+                <div class="daily-header">일기 등록 취소</div>
+                <div>일기 등록을 취소하시겠어요?</div>
+                <div class="modal_fail_button_container">
+                    <button
+                        class="modal_fail_button1"
+                        onclick="onClickContinueWriting()"
+                    >
+                        계속 작성
+                    </button>
+                    <button
+                        class="modal_fail_button2"
+                        onclick="onClickCancelRegister()"
+                    >
+                        등록 취소
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="./utils/pushDaily.js" type="module"></script>
+    <script src="./utils/onClickDailyInfor.js"></script>
+    <script src="./utils/onInputButtonChange.js"></script>
+    <script src="./utils/onChangeSelected.js" type="module"></script>
+    <script src="./utils/onClickDelete.js" type="module"></script>
+    <script src="./utils/onClickUp.js"></script>
+    <script src="./utils/isScroll.js"></script>
+    <script src="./utils/onClickModal.js"></script>
+    <script src="./utils/onClickModalSuccess.js"></script>
+    <script src="./utils/onClickModalFail.js"></script>
+    <script src="./utils/onClickContinueWriting.js"></script>
+    <script src="./utils/onClickCancelRegister.js"></script>
+    <script src="./utils/onClickModalBlank.js"></script>
+    <script src="./utils/onKeydownEsc.js"></script>
+    <script src="./utils/onClickChangePost.js"></script>
+    <script src="./utils/onChangeRatio.js"></script>
+    <script src="./utils/onClickDropDown.js"></script>
+    <script src="./utils/onClickToggle.js"></script>
+    <script src="./utils/onScrollInfinite.js"></script>
+    <script src="./utils/onInputSearch.js" type="module"></script>
+    <script src="./utils/paintPost.js" type="module"></script>
+    <script src="./utils/calculationPagination.js" type="module"></script>
+    <script src="./utils/onClickPrevPagination.js" type="module"></script>
+    <script src="./utils/onClickNextPagination.js" type="module"></script>
+</html>
