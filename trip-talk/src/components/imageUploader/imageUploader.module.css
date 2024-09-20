@@ -1,0 +1,9 @@
+.image_uploader_wrapper {
+  @apply flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-lg;
+  background-color: #F2F2F2;
+}
+
+.upload_prompt {
+  color: #777;
+  @apply text-base font-normal;
+}

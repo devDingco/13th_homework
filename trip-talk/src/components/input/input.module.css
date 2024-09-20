@@ -1,0 +1,40 @@
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label_wrapper {
+  @apply flex items-start gap-1;
+}
+
+.label {
+  @apply text-base font-medium;
+  color: #333;
+}
+
+.required_marker {
+  @apply text-base font-medium;
+  color: #F66A6A;
+}
+
+.input {
+  @apply h-12 py-3 px-4 rounded-lg text-base font-normal border border-solid outline-none bg-white w-full;
+  border-color: #D4D3D3;
+}
+
+.input::placeholder {
+  color: #ABABAB;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
