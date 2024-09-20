@@ -109,7 +109,6 @@
 
 .imgScroll {
   width: 100%;
-  height: 1200px;
   display: flex;
   /* justify-content: center; */
   align-items: center;
@@ -117,11 +116,11 @@
   gap: 40px;
 }
 
-.imgScroll img {
+.imgdog {
   width: 640px;
-  height: 640px;
   object-fit: cover;
   border-radius: 24px;
+  aspect-ratio: 1 / 1;
 }
 
 .saveBox {
@@ -133,6 +132,23 @@
 
 .saveBox div {
   cursor: pointer;
+}
+
+.searchBar {
+  width: 320px;
+  height: 48px;
+  border: 1px solid #c7c7c7;
+  border-radius: 100px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.searchBar input {
+  border: 0px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ababab;
 }
 
 .iconBtn {
@@ -157,15 +173,112 @@
 .navBox {
   width: 73rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
-/* 사진보관함 드롭다운 */
+.navsearch {
+  width: 500px;
+  display: flex;
+  gap: 16px;
+}
 
-.imgnavPoto {
+.checkDropBox {
+  width: 120px;
+  height: 48px;
+}
+
+.checkDropBox input {
+  appearance: none;
+  /* 정해진 디자인 없애줘 */
+  width: 100%;
+  height: 48px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  --contetnChecked: "선택";
+}
+.checkDropBox input::before {
+  content: var(--contetnChecked);
+}
+
+.checkDropBox input::after {
+  content: url(./CSS&JS\ 마스터/down_fill_light_m.svg);
+}
+.checkDropBox input:checked {
+  background-color: yellow;
+}
+
+.checkDropBox input:checked + .dropDownMenu {
+  display: block;
+}
+
+.dropDownMenu {
   display: none;
+  list-style: none;
+  width: 120px;
+  height: 288px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.checkDropBox .dropDownMenu li {
+  width: 120px;
+  height: 48px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #5f5f5f;
+  border: 1px solid #c7c7c7;
+  background-color: #ffffff;
+}
+
+.checkDropBox .dropDownMenu li:hover {
+  background-color: yellow;
+}
+
+/* 사진보관함 드롭다운 */
+.imgnavDropBox {
+  width: 1168px;
+  height: 32px;
+}
+
+.imgnavDropBox input {
+  width: 120px;
+  height: 32px;
+  border: 1px solid #c7c7c7;
+  appearance: none;
+  --contetnChecked: "선택";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imgnavDropBox input::before {
+  content: var(--contetnChecked);
+}
+
+.imgnavDropBox input::after {
+  content: url(./CSS&JS\ 마스터/down_fill_light_m.svg);
+}
+
+/* .dropDownPoto {
   width: 73rem;
+  height: 48px;
+} */
+
+.navSelect {
+  width: 120px;
+  height: 32px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
 }
 
 .diaryStart {
@@ -507,6 +620,7 @@ a {
 
 /*하단*/
 .footerBox {
+  width: 100%;
   height: 160px;
   display: flex;
   justify-content: center;
