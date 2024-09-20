@@ -147,8 +147,8 @@ span {
 
 .cancel {
     border-radius: 8px;
-    border: 1px solid #000000;
-    background-color: #FFFFFF;
+    border: 1px solid black;
+    background-color: white;
     font-size: 18px;
     font-weight: 600;
     width: 68px;
