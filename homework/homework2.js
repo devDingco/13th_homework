@@ -2,6 +2,7 @@ let diaryList = [];
 
 // 모달
 const openWriteModal = () => {
+  scrollUp();
   document.getElementById("open-write-modal-id").style = "display:block";
   document.getElementById("open-complete-modal").style = "display:none";
   document.body.classList.add("stop-scroll");
@@ -9,6 +10,7 @@ const openWriteModal = () => {
 const closeWriteModal = () => {
   document.getElementById("open-write-modal-id").style = "display:none";
   document.getElementById("close-writeModal-id").style = "display:none";
+  document.getElementById("open-completeWrite-modal-id").style = "display:none";
   document.body.classList.remove("stop-scroll");
 };
 const openCompleteModal = () => {
@@ -199,6 +201,12 @@ function LoadDetail() {
 function editClick() {
   document.getElementsByClassName("diary-wrap")[0].setAttribute("class", "diary-wrap disable");
   document.getElementsByClassName("diary-wrap")[1].setAttribute("class", "diary-wrap");
+
+  document.getElementById("edit-input-id").setAttribute("disabled", "");
+  document.getElementById("edit-input-id").setAttribute("placeholder", "수정중일땐 회고를 작성할 수 없어요.");
+  document.getElementById("edit-input-id").style = "border:none; background-color:#f2f2f2";
+  document.getElementById("add-comment-id").setAttribute("disabled", "");
+  document.getElementById("add-comment-id").style = "background-color: #c7c7c7;border:none;color:#f2f2f2";
 }
 
 // 일기를 저장하고, 이후 해당 일기의 상세 페이지로 리디렉션
@@ -265,29 +273,59 @@ const isScroll = () => {
 };
 isScroll();
 
-// 일기 삭제 기능
-const deleteDiary = (event) => {
-  event.preventDefault();
+// // 일기 삭제 기능
+// const deleteDiary = (event) => {
+//   event.preventDefault();
 
-  // 삭제할 일기 항목의 상위 요소인 `.one-album` 찾기
-  let album = event.target.closest(".one-album") == null ? location : event.target.closest(".one-album");
+//   // 삭제할 일기 항목의 상위 요소인 `.one-album` 찾기
+//   let album = event.target.closest(".one-album") == null ? location : event.target.closest(".one-album");
+//   console.log("album", location);
 
-  // URL에서 일기 날짜를 가져와서 고유 식별자로 사용
-  const diaryDate = parseInt(new URL(album.href).searchParams.get("date"));
+//   // URL에서 일기 날짜를 가져와서 고유 식별자로 사용
+//   const diaryDate = parseInt(new URL(album.href).searchParams.get("date"));
+//   // console.log(diaryDate);
 
-  // 일기 목록에서 해당 날짜를 가진 항목을 필터링하여 제거
-  diaryList = diaryList.filter((item) => item.date !== diaryDate);
+//   // 일기 목록에서 해당 날짜를 가진 항목을 필터링하여 제거
+//   diaryList = diaryList.filter((item) => item.date !== diaryDate);
 
-  // 로컬 스토리지에 업데이트된 일기 목록을 저장
-  localStorage.setItem("diaryList", JSON.stringify(diaryList));
+//   // 로컬 스토리지에 업데이트된 일기 목록을 저장
+//   localStorage.setItem("diaryList", JSON.stringify(diaryList));
 
-  // UI에서 삭제된 항목을 제거
-  if (document.querySelectorAll(".one-album").length == 0) {
-    window.location.href = "./homework2.html";
-  } else {
-    album.remove();
+//   // UI에서 삭제된 항목을 제거
+//   if (document.querySelectorAll(".one-album").length == 0) {
+//     window.location.href = "./homework2.html";
+//   } else {
+//     album.remove();
+//   }
+// };
+
+function deleteDiary(event) {
+  // 클릭된 delete 버튼의 부모 요소인 <a> 태그를 찾음
+  let diaryElement = event.target.closest("a");
+
+  // <a> 태그를 찾지 못한 경우 디버깅용으로 확인
+  if (!diaryElement) {
+    console.error("Diary element not found:", event.target);
+    return;
   }
-};
+
+  // <a> 태그의 href 속성에서 일기 정보를 추출
+  const urlParams = new URLSearchParams(diaryElement.href.split("?")[1]);
+  const title = urlParams.get("title");
+  const date = urlParams.get("date");
+
+  // localStorage에서 diaryList 가져오기
+  const diaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
+
+  // 일치하는 일기 제거
+  const updatedDiaryList = diaryList.filter((item) => item.title !== title || item.date !== date);
+
+  // 업데이트된 일기 리스트를 다시 localStorage에 저장
+  localStorage.setItem("diaryList", JSON.stringify(updatedDiaryList));
+
+  // 화면에서 해당 일기 요소 제거
+  diaryElement.remove();
+}
 
 // 상세페이지 > 댓글
 // 페이지 로드 시 기존 댓글을 로컬 스토리지에서 가져와서 화면에 표시

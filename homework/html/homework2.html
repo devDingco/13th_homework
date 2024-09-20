@@ -10,7 +10,7 @@
 
   <body>
     <div id="open-write-modal-id" class="write-modal-group">
-      <div class="write-modal-background"></div>
+      <div class="write-modal-background" onclick="closeWriteModal()"></div>
       <div class="write-modal-content">
         <div class="write-cover">
           <div class="write-title-area">
@@ -67,8 +67,8 @@
     <div id="delete-content-modal-id" class="delete-modal-group">
       <div class="delete-content-modal-background"></div>
       <div class="delete-content-modal">
-        <div class="delete-modal-title"></div>
-        <div class="delete-modal-sub-title"></div>
+        <div class="delete-modal-title">일기 삭제</div>
+        <div class="delete-modal-sub-title">일기를 삭제 하시겠어요?</div>
         <div class="delete-modal-btns">
           <button class="close-deleteModal">취소</button>
           <button class="confirm-deleteModal" onclick="deleteDiary(event)">삭제</button>
