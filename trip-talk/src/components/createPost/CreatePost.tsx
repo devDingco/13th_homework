@@ -30,6 +30,10 @@ export default function CreatePost() {
     setContent(event.target.value);
   };
 
+  if (authorName && password && title && content) {
+    alert("게시글 등록이 가능한 상태입니다!");
+  }
+
   return (
     <>
       <form>
