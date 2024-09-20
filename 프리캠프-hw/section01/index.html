@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프리캠프 section 01</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <div class="CSS_레이아웃">
+      <div class="CSS_가장큰배경">
+        <div class="CSS_헤더">
+          <div class="CSS_왼쪽헤더">
+            <img src="./assets/icon/arrow_left.png" />
+            <img
+              src="./assets/icon/arrow_right.png"
+              class="CSS_왼쪽헤더_가운데버튼"
+            />
+            <img src="./assets/icon/time.png" />
+            <div class="CSS_왼쪽헤더_공간"></div>
+          </div>
+          <div class="CSS_중앙헤더">
+            <img src="./assets/서치바.png" />
+            <div class="CSS_우측헤더">
+              <div><img src="./assets/회원등급배지.png" /></div>
+              <div>
+                <img
+                  src="./assets/icon/help.png"
+                  class="CSS_우측헤더_헬프버튼"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="CSS_사이드바_레이아웃">
+          <div class="CSS_사이드바">
+            <div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/채널 이미지.png" />
+              </div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/icon/home.png" />
+                <div class="CSS_사이드바_텍스트">홈</div>
+              </div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/icon/chat.png" />
+                <div class="CSS_사이드바_텍스트">대화</div>
+              </div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/icon/notifications.png" />
+                <div class="CSS_사이드바_텍스트">알림</div>
+              </div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/icon/bookmark.png" />
+                <div class="CSS_사이드바_텍스트">북마크</div>
+              </div>
+              <div class="CSS_사이드바_아이콘">
+                <img src="./assets/more_meatball.png" />
+                <div class="CSS_사이드바_텍스트">더보기</div>
+              </div>
+            </div>
+            <div class="CSS_사이드바_하단아이콘">
+              <img src="./assets/프로필 추가.png" />
+              <div class="CSS_사이드바_하단아이콘공백"></div>
+              <img src="./assets/내 프로필_A.png" />
+            </div>
+          </div>
+          <div class="CSS_사이드메뉴">
+            <div class="CSS_사이드바_왼쪽부분">
+              <div class="CSS_사이드바_왼쪽부분_항목">
+                <div class="CSS_사이드바_왼쪽부분_제목">코드캠프</div>
+                <div>
+                  <img src="./assets/icon/filter.png" />
+                  <img src="./assets/icon/edit.png" />
+                </div>
+              </div>
+
+              <button class="CSS_사이드바_서약서버튼">
+                <img src="./assets/서약서 자세히 보기 버튼.png" />
+              </button>
+
+              <div class="CSS_구분선"></div>
+              <div class="CSS_사이드바_왼쪽부분_항목">
+                <div class="CSS_사이드바_왼쪽부분_항목_아이콘과제목">
+                  <div>
+                    <img
+                      src="./assets/icon/logo_codecamp.png"
+                      width="24px"
+                      alt="코드캠프아이콘"
+                    />
+                  </div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_제목">
+                    코드캠프 13기
+                  </div>
+                </div>
+                <img src="./assets/상태 배지.png" />
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_항목높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_항목">
+                <div class="CSS_사이드바_왼쪽부분_항목_아이콘과제목">
+                  <div>
+                    <img
+                      src="./assets/icon/group_24dp_E8EAED_FILL0_wght300_GRAD0_opsz24 1.png"
+                    />
+                  </div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_제목">
+                    수강생 리스트
+                  </div>
+                </div>
+                <img src="./assets/icon/arrow_down.png" />
+              </div>
+              <div id="수강생영역" class="CSS_사이드바_왼쪽부분_수강생영역">
+                <div id="가입안내" class="CSS_사이드바_왼쪽부분_가입멤버안내">
+                  <div class="CSS_사이드바_왼쪽부분_가입멤버안내텍스트">
+                    현재 가입한 멤버가 없어요.
+                  </div>
+                  <div class="CSS_사이드바_왼쪽부분_가입멤버안내텍스트">
+                    회원가입 해보세요.
+                  </div>
+                </div>
+                <div id="수강생목록" class="CSS_사이드바_왼쪽부분_수강생목록">
+                  <!-- 여기에 수강생 프로필이 추가됩니다 -->
+                </div>
+              </div>
+              <div id="가입하기버튼" class="CSS_사이드바_왼쪽부분_가입하기버튼">
+                <button>
+                  <img src="./assets/가입하기 버튼.png" />
+                </button>
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_항목높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_항목">
+                <div class="CSS_사이드바_왼쪽부분_항목_아이콘과제목">
+                  <div><img src="./assets/icon/channel_list.png" /></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_제목">채널</div>
+                </div>
+                <img src="./assets/icon/arrow_down.png" />
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_채널제목간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_채널">
+                <div>#</div>
+                <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                <div>채널 1</div>
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_채널높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_채널">
+                <div>#</div>
+                <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                <div>채널 2</div>
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_채널높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_채널">
+                <div>#</div>
+                <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                <div>채널 3</div>
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_채널높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_채널">
+                <div>#</div>
+                <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                <div>채널 4</div>
+              </div>
+              <div class="CSS_사이드바_왼쪽부분_항목높이간격"></div>
+              <div class="CSS_사이드바_왼쪽부분_항목">
+                <div class="CSS_사이드바_왼쪽부분_항목_아이콘과제목">
+                  <div><img src="./assets/icon/skull.png" /></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_제목">
+                    차단 멤버 리스트
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="CSS_회원가입영역">
+              <div class="CSS_회원가입_제목">
+                <div>코드캠프에 가입하고</div>
+                <div>개발자로 커리어 점프 하세요.</div>
+              </div>
+              <div class="CSS_회원가입_입력영역">
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">이름</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <input
+                    id="이름"
+                    placeholder="이름을 입력해 주세요."
+                    class="CSS_사이드바_회원가입_인풋"
+                    onchange="인풋필드추가()"
+                  />
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">이메일</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <input
+                    id="이메일"
+                    class="CSS_사이드바_회원가입_인풋"
+                    placeholder="네이버, 구글, 한메일, 카카오 계정만 입력"
+                    onchange="인풋필드추가()"
+                  />
+                  <div id="이메일메시지" class="CSS_유효성_메시지"></div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">비밀번호</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_회원가입_입력_컨테이너">
+                    <input
+                      id="비밀번호"
+                      class="CSS_사이드바_회원가입_인풋"
+                      type="password"
+                      placeholder="비밀번호를 입력해 주세요."
+                      onchange="인풋필드추가()"
+                    />
+                    <div id="비밀번호메시지" class="CSS_유효성_메시지"></div>
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">비밀번호 확인</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_회원가입_입력_컨테이너">
+                    <input
+                      id="비밀번호확인"
+                      class="CSS_사이드바_회원가입_인풋"
+                      type="password"
+                      placeholder="비밀번호를 한번 더 입력해 주세요."
+                      onchange="인풋필드추가()"
+                      onclick="유효성검사()"
+                    />
+                    <div
+                      id="비밀번호확인메시지"
+                      class="CSS_유효성_메시지"
+                    ></div>
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">전화번호</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_회원가입_입력_컨테이너">
+                    <input
+                      id="전화번호"
+                      class="CSS_사이드바_회원가입_인풋"
+                      type="tel"
+                      placeholder="010으로 시작, '-'을 꼭 입력해 주세요."
+                      onchange="인풋필드추가()"
+                    />
+                    <div id="전화번호메시지" class="CSS_유효성_메시지"></div>
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_사이드바_회원가입_인증">
+                  <div class="CSS_사이드바_회원가입_인증번호요청구역">
+                    <div id="인증번호" class="CSS_사이드바_회원가입_인증번호">
+                      000000
+                    </div>
+                    <div>
+                      <button id="인증후버튼" onclick="인증시작()">
+                        <img src="./assets/button_outline.png" />
+                      </button>
+                    </div>
+                  </div>
+                  <div class="CSS_사이드바_회원가입_인증번호요청구역">
+                    <div
+                      id="인증타이머"
+                      class="CSS_사이드바_회원가입_인증번호"
+                    ></div>
+                    <button id="인증하기버튼" onclick="인증완료버튼()">
+                      <img src="./assets/button_primary.png" />
+                    </button>
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">자기소개</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <textarea
+                    id="자기소개"
+                    class="CSS_사이드바_회원가입_자기소개"
+                    placeholder="자기소개를 입력해 주세요."
+                    rows=""
+                    onchange="인풋필드추가()"
+                  ></textarea>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_항목_제목">성별</div>
+                  <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                  <div class="CSS_사이드바_왼쪽부분_라디오버튼부분">
+                    <div class="CSS_사이드바_왼쪽부분_라디오그룹">
+                      <input
+                        type="radio"
+                        id="male"
+                        name="gender"
+                        onchange="인풋필드추가()"
+                      />
+                      <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                      <label for="male" class="CSS_사이드바_라디오그룹텍스트"
+                        >남성</label
+                      >
+                    </div>
+                    <div class="CSS_회원가입_라디오_간격"></div>
+                    <div class="CSS_사이드바_왼쪽부분_라디오그룹">
+                      <input
+                        type="radio"
+                        id="female"
+                        name="gender"
+                        onchange="인풋필드추가()"
+                      />
+                      <div class="CSS_사이드바_왼쪽부분_항목_간격"></div>
+                      <label for="female" class="CSS_사이드바_라디오그룹텍스트"
+                        >여성</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <div class="CSS_회원가입_동의체크구역">
+                    <input
+                      id="agreement"
+                      type="checkbox"
+                      class="CSS_회원가입_동의체크박스"
+                      onchange="인풋필드추가()"
+                    />
+                    <label
+                      for="agreement"
+                      class="CSS_회원가입_동의체크박스_텍스트"
+                      >집에는 씻으러만 가는데 동의합니다.</label
+                    >
+                  </div>
+                </div>
+                <div class="CSS_사이드바_회원가입_높이간격"></div>
+                <div class="CSS_회원가입_항목">
+                  <button id="활성화된가입버튼" onclick="알림창()">
+                    <img src="./assets/가입버튼.png" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="CSS_회원가입사진영역"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
