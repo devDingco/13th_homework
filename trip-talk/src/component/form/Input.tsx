@@ -3,14 +3,15 @@ import s from './Input.module.css';
 
 interface InputPropsType {
   type: React.HTMLInputTypeAttribute;
-  id: string;
+  id: 'username' | 'userTitle' | 'userpw' | 'usercontent';
+
   value?: string;
   maxLength?: number;
   placeholder?: string;
   disabled?: boolean;
   label?: string;
   name?: string;
-  required?: boolean;
+  required?: RequiredType;
   size?: 'small' | 'medium' | 'large';
   onChangeFnc: (name: string, e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -36,6 +37,9 @@ const Input = ({ ...props }: InputPropsType) => {
         placeholder={props.placeholder}
         onChange={(e) => props.onChangeFnc(props.id, e)}
       />
+      <p className="text-[#f00]">
+        {props.required && props.required[props.id]}
+      </p>
     </p>
   );
 };

@@ -8,6 +8,7 @@ interface ButtonPropsType {
   disabled?: boolean;
   onClickFnc?: () => void;
 }
+
 const buttonConfig = {
   default: 'border border-solid border-1px border-black',
   primary: 'bg-primary text-white',
