@@ -17,7 +17,7 @@ const 게시글등록페이지 = () => {
         }
     };
 
-    
+
     const cancelButton = () => {
         resetFormData();
         alert("등록이 취소되었습니다.")
