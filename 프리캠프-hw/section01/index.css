@@ -1,0 +1,388 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard Variable";
+}
+
+.CSS_레이아웃 {
+  width: 1920px;
+  height: 1208px;
+}
+
+.CSS_가장큰배경 {
+  width: 1920px;
+  height: 1208px;
+  background-image: url("./assets/BG1.png");
+  background-size: cover;
+}
+
+.CSS_헤더 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  padding: 16px 80px;
+}
+
+.CSS_왼쪽헤더 {
+  width: calc(480px - 80px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.CSS_왼쪽헤더_가운데버튼 {
+  margin: 20px;
+}
+.CSS_중앙헤더 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - (560px)); /*  (400px + 80px+ 80px) */
+}
+
+.CSS_우측헤더 {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.CSS_우측헤더_헬프버튼 {
+  margin: 20px 0 20px 20px;
+}
+
+.CSS_사이드바 {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.CSS_사이드바_아이콘 {
+  margin: 15px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.CSS_사이드바_텍스트 {
+  color: var(--gray-100, #e4e4e4);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.CSS_사이드바_하단버튼 {
+  margin-bottom: 50px;
+}
+
+.CSS_사이드바_하단아이콘 {
+  margin: 20px 20px 0 20px;
+}
+
+.CSS_사이드바_하단아이콘공백 {
+  height: 16px;
+}
+
+.CSS_사이드메뉴 {
+  width: 1760px;
+  height: 1048px;
+  background-image: url("./assets/BG2.png");
+  display: flex;
+}
+
+.CSS_사이드바_레이아웃 {
+  display: flex;
+}
+
+.CSS_구분선 {
+  border: 1px solid #955c98;
+  margin-bottom: 24px;
+}
+
+.CSS_사이드바_왼쪽부분 {
+  margin: 20px;
+  width: 400px;
+}
+
+.CSS_회원가입사진영역 {
+  width: 680px;
+  height: 1048px;
+  box-shadow: 0px 0px 40px 0px #d389ff;
+  background-image: url("./assets/일러스트\ 이미지\ 마스크.png");
+}
+
+.CSS_회원가입영역 {
+  width: calc(1360px - 680px);
+  padding: 40px 60px;
+}
+
+button img {
+  display: block;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+.CSS_왼쪽헤더_공간 {
+  width: 24px;
+}
+
+.CSS_사이드바_왼쪽부분_제목 {
+  color: var(--gray-W, #fff);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.CSS_사이드바_왼쪽부분_항목 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.CSS_사이드바_서약서버튼 {
+  margin: 24px 0 24px 0;
+}
+
+.CSS_사이드바_왼쪽부분_항목_아이콘과제목 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CSS_사이드바_왼쪽부분_항목_제목 {
+  color: var(--gray-W, #fff);
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CSS_사이드바_왼쪽부분_항목_간격 {
+  width: 8px;
+}
+
+.CSS_사이드바_왼쪽부분_가입멤버안내 {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+
+.CSS_사이드바_왼쪽부분_가입멤버안내텍스트 {
+  color: var(--Primary-P-L300, #c9aac9);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.CSS_사이드바_왼쪽부분_가입하기버튼 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CSS_사이드바_왼쪽부분_채널 {
+  display: flex;
+  padding: 4px 16px;
+  align-items: center;
+  align-self: stretch;
+  color: #d4d3d3;
+}
+
+.CSS_사이드바_왼쪽부분_항목높이간격 {
+  height: 16px;
+}
+
+.CSS_사이드바_왼쪽부분_채널높이간격 {
+  height: 8px;
+}
+
+.CSS_사이드바_왼쪽부분_채널제목간격 {
+  height: 12px;
+}
+
+.CSS_회원가입_제목 {
+  color: var(--Primary-P-main, #491449);
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 56px;
+  margin-bottom: 40px;
+}
+
+.CSS_회원가입_입력영역 {
+  padding: 0px 56px;
+  width: 448px;
+  height: 612px;
+}
+
+.CSS_회원가입_항목 {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.CSS_회원가입_항목_제목 {
+  width: 120px;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--gray-800, #333);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.CSS_사이드바_회원가입_인풋 {
+  display: flex;
+  width: 320px;
+  height: 44px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #c7c7c7);
+  background: var(--gray-W, #fff);
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.CSS_사이드바_회원가입_자기소개 {
+  display: flex;
+  width: 320px;
+  height: 116px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #c7c7c7);
+  background: var(--gray-W, #fff);
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.CSS_사이드바_회원가입_높이간격 {
+  height: 20px;
+}
+
+.CSS_사이드바_회원가입_인증 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: end;
+  align-self: stretch;
+}
+
+.CSS_사이드바_회원가입_인증번호요청 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CSS_사이드바_회원가입_인증번호요청구역 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.CSS_사이드바_회원가입_인증번호 {
+  color: var(--Primary-P-L200, #955c98);
+  text-align: right;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-right: 8px;
+}
+
+.CSS_사이드바_왼쪽부분_라디오버튼부분 {
+  width: 320px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.CSS_회원가입_라디오_간격 {
+  width: 40px;
+}
+
+.CSS_사이드바_왼쪽부분_라디오그룹 {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.CSS_회원가입_동의체크박스 {
+  margin-right: 8px;
+}
+
+.CSS_회원가입_동의체크구역 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CSS_회원가입_동의체크박스_텍스트 {
+  color: var(--gray-800, #333);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.CSS_사이드바_라디오그룹텍스트 {
+  color: var(--gray-800, #333);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.CSS_회원가입_입력_컨테이너 {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+.CSS_유효성_메시지 {
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px; /* 메시지가 없을 때도 공간 유지 */
+}
+
+.가입하기후_수강생프로필추가 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.가입하기후_수강생프로필추가 img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.가입하기후_수강생프로필추가 span {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#수강생추가 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
