@@ -1,0 +1,99 @@
+{
+  "liveServer.settings.port": 5501,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "gitmoji.addCustomEmoji": [
+    {
+      "emoji": "✨ feat:",
+      "description": "[new features] 새로운 기능 및 코드 추가"
+    },
+    {
+      "emoji": "🐛 fix:",
+      "description": "[fix] 버그 수정"
+    },
+    {
+      "emoji": "💥 BREAKING CHANGE:",
+      "description": "[BREAKING CHANGE] 호환되지 않는 변경 사항"
+    },
+    {
+      "emoji": "📝 docs:",
+      "description": "[docs] 문서 변경 사항"
+    },
+    {
+      "emoji": "💄 style:",
+      "description": "[style] 스타일 및 서식 변경 사항"
+    },
+    {
+      "emoji": "👷🏻 ci:",
+      "description": "[CI/CD] CI/CD 관련 변경 사항"
+    },
+    {
+      "emoji": "♻️ refactor:",
+      "description": "[refactor] 코드 품질 개선 변경 사항"
+    },
+    {
+      "emoji": "🧪 test:",
+      "description": "[test] 테스트 코드 변경 사항"
+    },
+    {
+      "emoji": "🏭 build:",
+      "description": "[build] 빌드 시스템 변경 사항"
+    },
+    {
+      "emoji": "⚡️ perf:",
+      "description": "[performance] 성능 향상"
+    },
+    {
+      "emoji": "💤 chore:",
+      "description": "[chore] 기타 변경 사항"
+    },
+    {
+      "emoji": "🚧 cont:",
+      "description": "[cont] 진행중인 작업 저장"
+    },
+    {
+      "emoji": "✅ update:",
+      "description": "[update] 기능 및 코드 수정 완료"
+    },
+    {
+      "emoji": "🔀 merge:",
+      "description": "[merge] from XXXX to XXXX"
+    },
+    {
+      "emoji": "🔧 conf:",
+      "description": "[config] config 파일 수정"
+    },
+    {
+      "emoji": "➕ add:",
+      "description": "[add] 파일 추가"
+    },
+    {
+      "emoji": "➖ remove:",
+      "description": "[remove] 파일 제거"
+    },
+    {
+      "emoji": "✏️ typos:",
+      "description": "[typos] 오타 수정"
+    },
+    {
+      "emoji": "🍱 assets:",
+      "description": "[assets] assets 폴더 업데이트"
+    },
+    {
+      "emoji": "🏗️ structure:",
+      "description": "[structure] 프로젝트 구조 변경"
+    },
+    {
+      "emoji": "🚑 hotfix:",
+      "description": "[hotfix] 치명적인 버그 수정"
+    },
+    {
+      "emoji": "🎉 init:",
+      "description": "[init] 프로젝트 개시"
+    },
+    {
+      "emoji": "🚀 deploy:",
+      "description": "[deploy] 프로젝트 배포"
+    }
+  ],
+  "gitmoji.onlyUseCustomEmoji": true
+}
