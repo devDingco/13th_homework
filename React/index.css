@@ -237,13 +237,7 @@ hr {
 
 /* 사진첨부 */
 
-.picture-enroll-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.enroll-row-section {
+.css_picturepart {
     align-self: stretch;
     width: 100%;
     display: flex;
@@ -254,9 +248,18 @@ hr {
 }
 
 
+.css_picture {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+
+
+
 /* 하단 버튼 */
 
-.enroll-button-container {
+.css_button {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -265,7 +268,7 @@ hr {
     padding-top: 40px;
 }
 
-.enroll-cancel-button {
+.css_cancelbutton {
     display: flex;
     height: 48px;
     padding: 12px 16px;
@@ -276,7 +279,7 @@ hr {
     background: var(--gray-w, #fff);
 }
 
-  .enroll-submit-button {
+  .css_submitbutton {
     border-radius: 8px;
     background: #2974e5;
     display: flex;
