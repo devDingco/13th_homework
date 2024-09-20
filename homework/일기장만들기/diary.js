@@ -152,40 +152,45 @@ const clearInput = () => {
 
 // 전체화면 기분상태를 필터링하는곳
 const navFilter = (event) => {
-  const navOption = event.target.value;
-
+  const liId = event.target.id;
+  console.log(liId);
   const detailListData01 = localStorage.getItem("detailList") ?? "[]";
   const detailListData02 = JSON.parse(detailListData01);
 
   let navFilterPrint;
-  switch (navOption) {
-    case "행복해요": {
+  switch (liId) {
+    case "everyting": {
+      navFilterPrint = detailListData02.filter((el) => el.기분);
+      break;
+    }
+    case "happy": {
       navFilterPrint = detailListData02.filter((el) => el.기분 === "행복해요");
       break;
     }
-    case "슬퍼요": {
+    case "sad": {
       navFilterPrint = detailListData02.filter((el) => el.기분 === "슬퍼요");
       break;
     }
-    case "놀랐어요": {
+    case "surprise": {
       navFilterPrint = detailListData02.filter((el) => el.기분 === "놀랐어요");
       break;
     }
-    case "화나요": {
+    case "angry": {
       navFilterPrint = detailListData02.filter((el) => el.기분 === "화나요");
       break;
     }
-    case "기타": {
+    case "different": {
       navFilterPrint = detailListData02.filter((el) => el.기분 === "기타");
       break;
     }
   }
 
+  // diaryNumlist(1, navFilterPrint);
   console.log(navFilterPrint);
   const diaryFilterList = navFilterPrint
     .map(
-      (el) => ` 
-                        <a href="./day05_일기상세페이지.html?idV=${el.idV}">
+      (el) => `
+                        <a href="./diary_detail.html?idV=${el.idV}">
                             <div id="iconBoxFImgID" class="iconBoxFImg">
                             ${
                               el.기분 === "행복해요"
@@ -380,7 +385,7 @@ const diaryNumlist = (Num) => {
   document.getElementById("iconBoxFId").innerHTML = diaryPage
     .map(
       (el) => `
-            <a href="./day05_일기상세페이지.html?idV=${el.idV}">
+            <a href="./diary_detail.html?idV=${el.idV}">
             <div id="iconBoxFImgID" class="iconBoxFImg">
             ${
               el.기분 === "행복해요"
@@ -433,7 +438,7 @@ const diaryDelete = (event, one) => {
   const deletSto = localdata02.filter((el) => el.idV != one);
   localStorage.setItem("detailList", JSON.stringify(deletSto));
 
-  window.location.href = "./day04_일기.html";
+  window.location.href = "./diary.html";
   // diaryNum(1) // 왜 안그려짐?????
 };
 
@@ -455,66 +460,94 @@ const saveClick = (element) => {
   }
 };
 
-//api 사진보관함
-const potoApi = () => {
-  console.log(132);
-  fetch("https://dog.ceo/api/breeds/image/random/5").then((poto) => {
-    poto.json().then((jsonPoto) => {
-      const imgList = jsonPoto.message;
-      console.log(imgList);
-
-      scrollMove(imgList);
-    });
-  });
-};
-
-// 일기,사진보관함 드롭다운 display ????
+// 일기,사진보관함 드롭다운 display
 const dropDownDisplay = (element) => {
   console.log(element);
 
   switch (element) {
     case "saveBox": {
-      document.getElementById("navBoxDiv").style = "display : block";
-      document.getElementById("imgnavId").style = "display : none";
+      document.getElementById("stickyBoxId").style = "display : block";
+      document.getElementById("imgnavPotoId").style = "display : none";
       break;
     }
     case "savePoto": {
-      document.getElementById("navBoxDiv").style = "display : none";
-      document.getElementById("imgnavId").style = "display : block";
+      document.getElementById("stickyBoxId").style = "display : none";
+      document.getElementById("imgnavPotoId").style = "display : block";
       break;
     }
   }
 };
 
-// 사진보관함 api 무한스크롤
-const scrollMove = (imgList) => {};
-console.log(imgList);
+//api 사진보관함
+const potoApi = () => {
+  fetch("https://dog.ceo/api/breeds/image/random/10").then((poto) => {
+    poto.json().then((jsonPoto) => {
+      console.log(jsonPoto);
+      const imgList = jsonPoto.message;
 
-window.addEventListener("scroll", (imgList) => {
-  console.log(1234);
+      // 드롭다운 클릭했을때 값을
+      const imgDog = imgList.map((el) => {
+        document.getElementById(
+          "imgScrollId"
+        ).innerHTML += `<img class="imgdog" src="${el}" alt="강아지이미지">`;
+      });
+    });
+  });
+};
+// 무한스크롤
+window.addEventListener("scroll", () => {
+  let timer = null;
   const scroll01 = document.documentElement.scrollTop;
   const scroll02 =
     document.documentElement.scrollHeight -
     document.documentElement.clientHeight;
-  const scrollPercent = scroll01 / scroll02;
 
-  if (scrollPercent >= 0.1) {
-    document.getElementById("imgScrollId").innerHTML = imgList
-      .map(
-        (el) => `
-            <img src="${el}" width="300px" alt="">
-            `
-      )
-      .join("");
+  const scrollPercent = scroll01 / scroll02;
+  console.log(`타이머 :${timer}`);
+
+  if (scrollPercent < 0.9) return; // 현재나의 스크롤이 80%작을때 실행하지마
+  if (timer !== null) {
+    console.log(`타이머가 null이 아닐때 실행해 :${timer}`);
+    return;
   }
+  console.log("그려줘");
+  potoApi(); // 버튼 눌렀을때 한번 실행-> 조건에 false일때 또 실행
+
+  setTimeout(() => {
+    timer = null;
+    console.log(`setTimeout 내부 :${timer}`);
+
+    // if (scrollPercent === 1) {
+    //   potoApi();
+    // }
+  }, 1000);
 });
 
-// // 키보드감지 기능만들기
-// window.addEventListener("keydown", (event) => {
-//     if(event.key === "Esc"){
-//         console.log(1234)
-//         document.getElementById("modalWrite") = "display : none"
-//         // document.getElementById("modalEndWrite") = "display : none"
-//         // document.getElementById("modalNull") = "display : none"
-//     }
-// })
+// 사진 비율에 따른 필터적용
+const potoDesign = (event) => {
+  const eventCho = event.target.value;
+  const imgDogClass = document.querySelectorAll(".imgdog");
+  // querySelectorAll은 nodeList를 반환하고 nodeList에 각 요소에 대한 개별적으로 스타일을 적용해야한다
+  console.log(imgDogClass);
+
+  imgDogClass.forEach((el) => {
+    switch (eventCho) {
+      case "기본": {
+        el.style.aspectRatio = "1/1";
+        el.style.width = "640px";
+        console.log("들어옴?");
+        break;
+      }
+      case "가로형": {
+        el.style.aspectRatio = "4/3";
+        el.style.width = "640px";
+        break;
+      }
+      case "세로형": {
+        el.style.aspectRatio = "3/4";
+        el.style.width = "640px";
+        break;
+      }
+    }
+  });
+};
