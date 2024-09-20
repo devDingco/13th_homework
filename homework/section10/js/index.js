@@ -23,11 +23,11 @@ window.onload = () => {
   //   }
   // })
 
-  페이지그리기기능(일기목록)
-  페이지일기그리기기능(일기목록, 시작페이지)
+  페이지그리기기능(필터링한일기)
+  페이지일기그리기기능(필터링한일기, 시작페이지)
 
   // 초기에 "전체" 드롭박스 체크해주기
-  // document.getElementById("전체").checked = true
+  document.getElementById("전체").checked = true
 }
 
 // 일기등록하기 인풋 검증
@@ -174,12 +174,8 @@ const 일기등록기능 = () => {
   document.getElementById("내용인풋").value = ""
 
   // 일기DOM만들기();
-  페이지그리기기능(일기목록)
-  페이지일기그리기기능(일기목록, 시작페이지)
-
-  // 드롭다운 목록 전체로 바꿔주기
-  document.getElementById("전체").checked = true
-  // document.getElementById("드롭다운_메뉴").innerText = "전체"
+  페이지그리기기능(필터링한일기)
+  페이지일기그리기기능(필터링한일기, 시작페이지)
 }
 
 const 드롭다운선택기능 = (event) => {
@@ -189,7 +185,6 @@ const 드롭다운선택기능 = (event) => {
   // 드롭다운 제목을 강제로 선택에서 드롭다운 메뉴 닫아주기
   document.getElementById("드롭다운_제목").click()
 }
-
 
 const 필터링기능 = (event) => {
   const 선택한내용 = event.target.id;
@@ -266,7 +261,7 @@ const 일기삭제기능 = () => {
 
   localStorage.setItem("일기항목", JSON.stringify(일기목록))
 
-  페이지그리기기능(일기목록)
+  페이지그리기기능(일기목록) // 페이지네이션 버튼
   페이지일기그리기기능(일기목록, 시작페이지)
 }
 
