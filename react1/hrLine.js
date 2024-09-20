@@ -1,0 +1,5 @@
+const HrLine = () => {
+    return (
+        <hr className="hrLine"></hr>
+    )
+}
