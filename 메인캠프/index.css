@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+button {
+  cursor: pointer;
+}
+#root {
+  display: flex;
+  width: 100vw;
+
+  padding: 0rem 20rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#contentContainer {
+  display: flex;
+  width: 60vw;
+  padding: 2.5rem 0rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-shrink: 0;
+}
+
+.block {
+  display: flex;
+  gap: 2.5rem;
+  width: 100%;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  &.photo {
+    border-bottom: none;
+  }
+}
+.semi_block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  flex: 1;
+
+  p {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 150%;
+  }
+  span {
+    color: red;
+  }
+  .zip_code {
+    width: 20%;
+  }
+  input {
+    border-radius: 0.5rem;
+    border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+    background: var(--Gray-W, #fff);
+    display: flex;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  textarea {
+    border-radius: 0.5rem;
+    border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+    background: var(--Gray-W, #fff);
+    display: flex;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+.detail_block {
+  display: flex;
+  gap: 0.5rem;
+  .searchZipCode {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+.photoDiv {
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+  p {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+  }
+  span {
+    color: #777777;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }
+}
+.addPhoto {
+  cursor: pointer;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: stretch;
+  button {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    border: 0.6px solid var(--gray-B, #000);
+  }
+}
+.cancelBtn {
+  background: var(--gray-w, #fff);
+  color: black;
+}
+.registerBtn {
+  background: #2974e5;
+  color: white;
+}
