@@ -1,0 +1,14 @@
+* {
+  padding: unset;
+  margin: unset;
+  box-sizing: border-box;
+}
+
+button {
+  all: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
