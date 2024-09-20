@@ -1,0 +1,44 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+#root {
+  display: flex;
+  justify-content: center;
+}
+.editor-page {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 40px; */
+}
+.editor-header {
+  font-size: 20px;
+  font-weight: 700;
+}
+.input-form-title {
+  display: flex;
+  gap: 8px;
+}
+.input-form-title-text {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.required-star {
+  color: #f66a6a;
+}
+.input-text {
+  height: 48px;
+  padding: 12px 16px;
+
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+}
+.input-text::placeholder {
+  color: #ababab;
+}

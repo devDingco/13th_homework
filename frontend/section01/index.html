@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>section01 homework</title>
+    <!-- 리액트 다운로드 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- 바벨 다운로드 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="./index.css" />
+    <script type="text/babel" src="./InputForm.js"></script>
+    <script type="text/babel" src="./index.js"></script>
+
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<EditorPage />);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
