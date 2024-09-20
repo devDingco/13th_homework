@@ -1,227 +1,30 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>다이어리 만들기</title>
-    <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="./css/index_mediaQuery.css">
-    <link rel="stylesheet" href="./css/dropdown.css">
-    <link rel="stylesheet" href="./css/darkmode.css">
-    <script src="./javascript/index.js" defer></script> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시물 등록하는 페이지</title>
 
+  <!-- 리액트 다운로드 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- 바벨 다운로드 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <link rel="stylesheet" href="./index.css">
+
+  <script type="text/babel" src="./index.js"></script>
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+
+    root.render(<게시물등록페이지 />)
+  </script>
 </head>
+
 <body>
-    <!-- 모달 그룹 -->
-    <div id="HTML_모달그룹" class="CSS_모달그룹">
-      <div class="CSS_모달배경" onclick="JS_모달닫기기능()"></div>
-      <div class="CSS_등록상자">
-        
-          <div class="등록상자제목이랑토글">
-            <div class="CSS_등록상자_제목">📍일기 쓰기</div>
-            <div class="CSS_다크모드">
-              <label for="다크모드" class="CSS_다크모드_라벨">다크모드</label>
-              <input
-                type="checkbox"
-                id="다크모드"
-                class="CSS_다크모드_토글"
-                onclick="JS_다크모드(event)"
-              />
-            </div>
-
-          </div>
-          <div class="CSS_라디오그룹">
-              <div class="CSS_라디오버튼">
-                  <input type="radio" name="HTML_기분선택버튼" value="행복" checked />
-                  <div>행복해요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                  <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
-                  <div>슬퍼요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                  <input type="radio" name="HTML_기분선택버튼" value="놀람" />
-                  <div>놀랐어요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                  <input type="radio" name="HTML_기분선택버튼" value="화남" />
-                  <div>화나요</div>
-              </div>
-              <div class="CSS_라디오버튼">
-                  <input type="radio" name="HTML_기분선택버튼" value="기타" />
-                  <div>기타</div>
-              </div>
-          </div>
-          <div class="CSS_일기입력상자">
-              <div class="CSS_일기쓰기">
-                  <div>제목</div>
-                  <input type="text" id="HTML_제목입력창" placeholder="제목을 입력해 주세요." />
-              </div>
-              <div class="CSS_일기쓰기">
-                  <div>내용</div>
-                  <textarea id="HTML_내용입력창" rows="5" placeholder="내용을 입력해 주세요."></textarea>
-              </div>
-          </div>
-          <div class="CSS_일기쓰기버튼모음">
-              <button class="CSS_일기쓰기_등록버튼" onclick="JS_모달열기기능('HTML_등록완료모달그룹'); JS_글쓰기기능();" disabled>등록하기</button>
-              <button class="CSS_일기쓰기_닫기버튼" onclick="JS_모달열기기능('HTML_취소모달그룹')">닫기</button>
-          </div>
-      </div>
-  </div>
-  
-    <!-- 삭제할지 다시묻는 모달창 -->
-    <div id="HTML_삭제재확인모달그룹" class="CSS_삭제재확인모달그룹">
-      <div id="CSS_모달배경" class="CSS_모달배경" onclick="JS_모달닫기기능('CSS_모달배경')">
-        <div class="CSS_모달삭제할지묻는그룹">
-          <button onclick="JS_모달닫기기능('CSS_모달배경')">취소하기</button>
-          <button onclick="JS_일기삭제기능()">삭제하기</button>
-        </div>      
-      </div>
-    </div>
-
-    <!-- 등록완료모달그룹 -->
-    <div id="HTML_등록완료모달그룹" class="CSS_모달그룹">
-      <div  class="CSS_모달배경"  onclick="JS_모달닫기기능('HTML_등록완료모달그룹')">
-      </div>
-      <div class="CSS_일기등록완료모달">
-        <div class="CSS_모달안내말">
-          <div class="CSS_모달안내말_상단">일기 등록 완료</div>
-          <div class="CSS_모달안내말_하단">등록이 완료 되었습니다.</div>
-          <button class="일기등록모달확인버튼" onclick="JS_모달다끄기기능(); JS_등록완료모달끄기기능();">확인</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    <!-- 취소모달그룹 -->
-    <div id="HTML_취소모달그룹" class="CSS_모달그룹">
-      <div  class="CSS_모달배경"  onclick="JS_모달닫기기능('HTML_취소모달그룹')">
-      </div>
-        <div class="CSS_일기등록완료모달">
-          <div class="CSS_모달안내말">
-            <div class="CSS_모달안내말_상단">일기 등록 취소</div>
-            <div class="CSS_모달안내말_하단">일기 등록을 취소 하시겠어요?</div>
-          </div>
-          <div class="CSS_계속취소버튼그룹">
-            <button class="CSS_일기등록모달계속버튼" onclick="JS_취소모달끄기기능()">계속 작성</button>
-            <button class="CSS_일기등록모달취소버튼" onclick="JS_모달다끄기기능(); JS_취소모달끄기기능();">등록 취소</button>      
-          </div>
-        </div>
-    </div>
-
-    <!-- 삭제버튼 누를시에 재 확인 물어보는 모달그룹  -->
-
-
-
-    <!-- 페이지 내용 -->
-    <div class="CSS_레이아웃">
-        <!-- 헤더 -->
-        <div class="CSS_헤더">
-            <div>민지의 다이어리</div>
-        </div>
-        <img class="CSS_배너이미지" src="./assets/images/banner.png" />
-
-        <!-- 내비게이션 -->
-        <div class="CSS_탭">
-          <!-- 여기 온클릭박고 만약에 사진보관함이 클릭되면 CSS_클릭된탭으로 클래스도 바꾸고  -->
-            <div id="JS_일기보관함탭" class="CSS_클릭된탭" onclick="JS_일기보관함탭선택기능(); JS_페이지네이션삭제할지말지();">일기보관함</div>
-            <div id="JS_사진보관함탭" class="CSS_클릭되지않은탭" onclick="JS_사진보관함탭선택기능(); JS_강아지사진불러오는기능(); JS_강아지사진보여주기(); JS_페이지네이션삭제할지말지();">사진보관함</div>
-        </div>
-
-        <div id="JS_메인_일기보관함" class="CSS_메인_일기보관함">
-            <div class="CSS_필터랑모달묶은그룹">
-                <div class="CSS_필터_영역_배경">
-                  <!-- 새로만든 드롭박스 -->
-                  <div class="CSS_드롭박스" >
-                    <input type="checkbox" id="HTML_드롭다운제목" class="CSS_드롭다운제목">
-                    <ul class="CSS_드롭다운메뉴">
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="전체클릭" onclick="JS_필터링기능(event)">
-                        <label for="전체클릭">전체</label>
-                      </li>
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="행복해요클릭" onclick="JS_필터링기능(event)">
-                        <label for="행복해요클릭">행복해요</label>
-                      </li>
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="슬퍼요클릭" onclick="JS_필터링기능(event)">
-                        <label for="슬퍼요클릭">슬퍼요</label>
-                      </li>
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="놀랐어요클릭" onclick="JS_필터링기능(event)">
-                        <label for="놀랐어요클릭">놀랐어요</label>
-                      </li>
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="화나요클릭" onclick="JS_필터링기능(event)">
-                        <label for="화나요클릭">화나요</label>
-                      </li>
-                      <li>
-                        <input type="radio" name="HTML_선택아이템" id="기타클릭" onclick="JS_필터링기능(event)">
-                        <label for="기타클릭">기타</label>
-                      </li>
-                    </ul>
-                  </div>
-
-
-                  <!-- 서치바 들어갈 자리 -->
-                  <input class="CSS_서치바" type="text" placeholder="검색어를 입력해 주세요." oninput="JS_일기검색기능(event)">
-                  <div id="HTML_검색결과보여주는곳"></div>
-
-
-                </div>
-
-                <button class="CSS_일기쓰기모달버튼" onclick="JS_모달열기기능('HTML_모달그룹')">+ 일기쓰기</button>
-            </div>
-
-            <div class="CSS_메인상자">
-                <!-- 일기 보여주는 곳 -->
-                <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
-
-                <!-- 등록 상자 -->
-                <!-- 여기에 필요한 추가 콘텐츠를 추가하세요 -->
-            </div>
-        </div>
-
-        <!-- 이부분은 사진 보관함이고 처음은 none고 클릭되면 보여짐 -->
-
-          <div id="JS_메인_사진보관함" class="CSS_메인_사진보관함">
-            <div class="CSS_강아지필터_영역">
-              <select class="CSS_필터" id="사진사이즈선택" onchange="JS_사진사이즈선택()">
-                <option value="HTML_1대1사이즈">기본형</option>
-                <option value="HTML_4대3사이즈">가로형</option>
-                <option value="HTML_3대4사이즈">세로형</option>
-              </select>
-            </div>
-          </div>
-
-            <div id="HTML_강아지보여주는곳" class="CSS_강아지사진그룹섹션">
-              <!-- 여기에 개사진 들어옴 -->
-            </div>
-
-        <!-- 페이지내이션 들어오는 자리 -->
-        <div class="CSS_페이지네이션">
-          <button class="CSS_이전다음버튼" onclick="JS_이전페이지이동기능()"><</button>
-          <span id="HTML_페이지보여주는곳" class="CSS_페이지보여주는곳"></span>
-          <button class="CSS_이전다음버튼" onclick="JS_다음페이지이동기능()">></button>          
-        </div>
-
-
-        <!-- 플로팅 버튼 -->
-        <button id="HTML_플로팅버튼" class="CSS_플로팅버튼">
-            <img class="CSS_플로팅이미지" src="./assets/images/floatingButton.png" onclick="JS_스크롤위로기능()" />
-        </button>
-
-        <!-- 푸터 -->
-        <div id="HTML_푸터" class="CSS_푸터_영역">
-            <div class="CSS_푸터">
-                <div class="CSS_푸터_제목">민지의 다이어리</div>
-                <p class="CSS_푸터_대표">대표 : {name}</p>
-                <p class="CSS_푸터_Copyright">Copyright © 2024. {name} Co., Ltd.</p>
-            </div>
-        </div>
-    </div>
-    
+  <div id="root"></div>
 </body>
+
 </html>
