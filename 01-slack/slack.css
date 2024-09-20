@@ -1,0 +1,545 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: opx;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+} 
+
+.container {
+    background-color: #491449;
+    width: 1920px;
+    height: 1208px;
+}
+
+.container__header {
+    width: 1920px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.container__header__btn {
+    width: 480px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn__icon__arrowBack {
+    background-image: url(./asset/btn__icon__arrowBack.png);
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+}
+
+.btn__icon__arrowNext {
+    background-image: url(./asset/btn__icon__arrowNext.png);
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+}
+
+.btn__icon__history {
+    background-image: url(./asset/btn__icon__history.png);
+    width: 32px;
+    height: 32px;
+    margin-right: 24px;
+}
+
+.container__header__right {
+    width: 1360px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container__header__search {
+    background-color: #955C98;
+    width: 920px;
+    height: 48px;
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 10px 0px #222222;
+}
+
+.search__icon_lens {
+    background-image: url(./asset/search__icon__lens.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+
+.search__text {
+    color: #EFE6EF;
+    font-size: 20px;
+    opacity: 80%;
+}
+
+.container__header__myInfo {
+    display: flex;
+    align-items: center;
+}
+
+.myInfo__profile {
+    width: 166px;
+    height: 48px;
+    border: 1px solid #713574;
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.profile__icon__bracket {
+    background-image: url(./asset/profile__icon__bracket.png);
+    width: 32px;
+    height: 32px;
+    margin-right: 4px;
+}
+
+.myInfo__help {
+    background-image: url(./asset/profile__icon__help.png);
+    width: 32px;
+    height: 32px;
+}
+
+.container__wrapper {
+    width: 1920px;
+    height: 1048px;
+    display: flex;
+}
+
+.container__wrapper__content {
+    display: flex;
+}
+
+.container__wrapper__sidebar {
+    width: 80px;
+    height: 1048px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar__icon__00_logo {
+    background-image: url(./asset/sidebar__icon__00_logo.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 24px;
+}
+
+.sidebar__text {
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.sidebar__icon__01_home {
+    background-image: url(./asset/sidebar__icon__01_home.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sidebar__icon__02_chat {
+    background-image: url(./asset/sidebar__icon__02_chat.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sidebar__icon__03_notification {
+    background-image: url(./asset/sidebar__icon__03_notification.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sidebar__icon__04_bookmark {
+    background-image: url(./asset/sidebar__icon__04_bookmark.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sidebar__icon__05_more {
+    background-image: url(./asset/sidebar__icon__05_more.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.sidebar__icon__06_plus {
+    background-image: url(./asset/sidebar__icon__06_plus.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+}
+
+.sidebar__icon__07_profile {
+    background-image: url(./asset/sidebar__icon__07_profile.png);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+}
+
+.container__wrapper__menu {
+    background-color: #713574;
+    width: 400px;
+    height: 1048px;
+    border-radius: 8px 0px 0px 8px;
+    padding: 20px;
+}
+
+.menu__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.menu__header__icon {
+    display: flex;
+}
+
+.menu__header__text {
+    font-size: 24px;
+}
+
+.header__icon__filter {
+    background-image: url(./asset/header__icon__filter.png);
+    width: 24px;
+    height: 24px;
+}
+
+.header__icon__edit {
+    background-image: url(./asset/header__icon__edit.png);
+    width: 24px;
+    height: 24px;
+}
+
+.menu__detail {
+    width: 360px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail__icon__note {
+    background-image: url(./asset/detail__icon__note.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.detail__text {
+    color: #491449;
+    font-size: 20px;
+}
+
+hr {
+    margin: 24px 0px;
+    border: 1px solid #955C98;
+}
+
+.menu__section01__class, .menu__section02__student, .menu__section03__channel, .menu__section04__blackList {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section__text {
+    width: 360px;
+    height: 40px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.section01__icon__bracket {
+    background-image: url(./asset/section01__icon__bracket.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.section02__icon__people {
+    background-image: url(./asset/section02__icon__people.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.section03__icon__channel {
+    background-image: url(./asset/section03__icon__channel.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.section04__icon__skull {
+    background-image: url(./asset/section04__icon__skull.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.section__onboard {
+    width: 66px;
+    height: 32px;
+    background-color: #FFFFFF33;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section__icon__arrowDown {
+    background-image: url(./asset/section__icon__arrowDown.png);
+    width: 24px;
+    height: 24px;
+}
+
+.menu__section02__signUp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signUp__text {
+    font-size: 14px;
+    color: #C9AAC9;
+    line-height: 20px;
+}
+
+.signUp__btn {
+    width: 128px;
+    height: 40px;
+    margin-top: 16px;
+    background-color: #491449;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu__section02__studentList {
+    display: none;
+    align-items: center;
+    padding: 0px 16px;
+    margin-bottom: 16px;
+}
+
+.studentList__icon__profile {
+    background-image: url(./asset/studentList__icon__profile.png);
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+.studentList__text__student {
+    font-size: 20px;
+}
+
+.btn__icon__add {
+    background-image: url(./asset/btn__icon__add.png);
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.channel__text {
+    height: 24px;
+    color: #D4D3D3;
+    padding: 4px 16px;
+    margin-bottom: 16px;
+}
+
+.container__wrapper__form {
+    background-color: #D5BCE4;
+    width: 680px;
+    height: 1048px;
+    padding: 40px 60px 0px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__name, .form__mail, .form__password, .form__passConfirm, .form__phone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form__introduce {
+    display: flex;
+    margin-top: 20px;
+}
+
+.form__title {
+    color: #491449;
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.form__text, .form__text__introduce {
+    color: #222222;
+    font-size: 20px;
+    width: 120px;
+    margin-right: 8px;
+}
+
+.form__text__phone {
+    color: #222222;
+    font-size: 20px;
+    width: 120px;
+    margin-right: 4px;
+}
+
+.form__text__introduce {
+    margin-top: 4px;
+}
+
+.form__input, .form__input__phone, .form__input__introduce {
+    width: 320px;
+    height: 40px;
+    color: #222222;
+    border-radius: 8px;
+    border: 1px solid #C7C7C7;
+    padding: 8px 12px;
+}
+
+.form__input__phone {
+    width: 96px;
+    height: 36px;
+    text-align: center;
+    margin: 0px 4px;
+}
+
+.form__input__introduce {
+    width: 320px;
+    height: 120px;
+}
+
+.form__verified {
+    width: 100%;
+    padding: 0px 60px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.error__mail__text01, .error__mail__text02, .error__password__text, .error__phone__text {
+    width: 448px;
+    margin-top: 4px;
+    margin-left: 256px;
+    color: #E84F4F;
+}
+
+.auth__authKey {
+    display: flex;
+    align-items: center;
+}
+
+.authKey__number {
+    color: #955C98;
+    text-align: center;
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+
+.authKey__btn, .authConfirm__btn {
+    width: 144px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #C7C7C7;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.authConfirm__btn {
+    margin-top: 12px;
+}
+
+.authConfirm__number {
+    width: 68px;
+    height: 34px;
+    border-radius: 6px;
+    background-color: #FFFFFF33;
+    margin-top: 12px;
+    margin-right: 12px;
+    text-align: center;
+    padding: 8px;
+}
+
+.auth__authConfirm {
+    display: flex;
+    align-items: center;
+}
+
+.form__radio {
+    width: 448px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.form__check {
+    display: flex;
+    margin-top: 20px;
+}
+
+.radio__btn, .check__btn {
+    margin-right: 8px;
+}
+
+.radio__text {
+    margin-right: 40px;
+    font-size: 20px;
+    color: #222222;
+}
+
+.check__text {
+    font-size: 20px;
+    color: #222222;
+}
+
+.form__btn__submit {
+    width: 448px;
+    height: 48px;
+    background-color: #491449;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 24px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__wrapper__imgBG {
+    background-image: url(./asset/illust.png);
+    width: 680px;
+    height: 1048px;
+    box-shadow: 0px 0px 40px 0px #D389FF;
+}
