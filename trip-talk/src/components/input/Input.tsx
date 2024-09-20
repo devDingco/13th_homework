@@ -19,12 +19,12 @@ export default function Input({
   return (
     <>
       <div className={styles.input_wrapper}>
-        {isLabel ? (
+        {isLabel && (
           <div className={styles.label_wrapper}>
             <label className={styles.label}>{children}</label>
-            {isRequired ? <b className={`${styles.required_marker}`}>*</b> : null}
+            {isRequired && <b className={`${styles.required_marker}`}>*</b> }
           </div>
-        ) : null}
+        )}
 
         <input className={styles.input} type={type} placeholder={placeholder} />
       </div>
