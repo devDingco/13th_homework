@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./index.css">
+    <!-- 리액트 다운로드 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- 바벨 다운로드 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./index.js"></script>
+
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<게시글등록/>)
+    </script>
+
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
