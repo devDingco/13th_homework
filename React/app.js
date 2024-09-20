@@ -54,6 +54,24 @@ const App = () => {
                 <HtmlInput type="text" id="link_id" placeholder="링크를 입력해 주세요." name="link"/>
             </div>
             <hr></hr>
+
+
+            {/* 사진 첨부 */}
+            <div class="enroll-row-section">
+                <div>사진 첨부</div>
+                <div class="picture-enroll-row">
+                    <img src="./assets/add_image.png" />
+                    <img src="./assets/add_image.png" />
+                    <img src="./assets/add_image.png" />
+                </div>
+            </div>
+
+
+            {/* 하단 버튼 */}
+            <div class="enroll-button-container">
+                <button class="enroll-cancel-button">취소</button>
+                <button class="enroll-submit-button">등록하기</button>
+            </div>
         </div>
     );
 };
