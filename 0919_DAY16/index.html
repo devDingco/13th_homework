@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+  <title>게시물 등록</title>
+
+  <!-- 리액트 다운로드 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- 바벨 다운로드 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- 1. 최신문법으로 작성해도, 많은 브라우저에서 실행 가능하도록 옛날 문법으로 바꿔줌 -->
+  <!-- 가짜html(JSX) 입력하면, 진짜 html로 바꿔줌  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
+  <link rel="stylesheet" href="./index.css"/>
+  
+
+
+  <script type="text/babel" src="./index.js"></script>
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render (<게시글등록페이지 />)
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

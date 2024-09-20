@@ -1,0 +1,263 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard Variable";
+
+  /* font-size: 10px; */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.게시물등록하기전체 {
+  display: flex;
+  flex-direction: column;
+  
+  width: 1280px;
+  gap:40px;
+  /* background-color: skyblue; */
+}
+
+.title {
+  padding-top: 40px;
+  align-items: flex-start;
+  color: #000000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.이전으로돌아가기 {
+  display: none;
+}
+
+
+.이전으로돌아가기 {
+  width: 24px;
+  height: 24px;
+}
+
+.작성영역모두전체 {
+  display: flex;
+  /* padding: 24px 20px 40px 20px; */
+  justify-content: center;
+  align-items: center;
+}
+
+.작성자와비밀번호영역 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  
+  gap: 40px;
+}
+
+.작성보여주는곳 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.타이틀과필수표시 {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.title2 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--gray-800, #333);
+}
+
+.필수작성 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--red, #F66A6A);
+}
+
+.css_input {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+
+
+}
+
+.css_line {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-100, #E4E4E4);
+}
+
+.css_input::placeholder {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ababab;
+}
+
+.css_textarea {
+  width: 100%;
+  height: 336px;
+  padding: 12px 16px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+  
+  
+}
+
+
+.css_textarea::placeholder {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ababab;
+}
+
+.css_주소작성영역전체 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+.css_우편번호검색영역 {
+  display: flex; 
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.css_input_우편번호 {
+  width: 82px;
+  height: 48px;
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+  
+}
+
+.css_input_우편번호::placeholder {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; 
+}
+
+.css_우편번호버튼 {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #FFF);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+
+}
+
+.사진업로드행영역 {
+
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.사진업로드영역 {
+  display: flex;
+  width: 160px;
+  height: 160px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 8px;
+  background: var(--gray-50, #F2F2F2);
+
+}
+
+.img_plus {
+  width: 40px;
+  height: 40px;
+}
+
+.css_img_upload_text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+
+  color: var(--gray-600, #777);
+}
+
+.css_button_area {
+  height: 48px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.css_cancel_button {
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #FFF);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; 
+}
+
+.css_signup_button {
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  background: #2974E5;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
