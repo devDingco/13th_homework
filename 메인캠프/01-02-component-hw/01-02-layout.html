@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>게시물 등록 페이지 레이아웃 html로 구성하기</title>
+    <!-- 시멘틱태그 적용해야하나? 리액트 써도 ? 당연하겟지... -->
+</head>
+<body>
+
+    <!-- 섹션1: 페이지명 -->
+    <!-- 컴포넌트1 class="pageTitleLeft"> 페이지타이틀 좌측정렬 -->
+    <div class="pageTitleLeft">게시물등록</div>
+
+
+    <!-- 섹션2: 작성자, 비번 -->
+    <!-- 컴포넌트2 class="inputTypeNamePsw" 입력칸 스타일1번: 반반 좌우 2개 -->
+    <div class="inputTypeNamePsw" style="display: flex">
+        <div>
+            <label name="작성자입력">작성자 *</label><br />
+            <input type="text" name="작성자입력" placeholder="작성자 명을 입력해 주세요." />
+        </div>
+
+        <div>
+            <label name="비밀번호입력">비밀번호 *</label><br />
+            <input type="password" name="비밀번호입력" placeholder="비밀번호를 입력해 주세요." />
+        </div>
+    </div>
+
+    <!-- 컴포넌트3 class="grayLine" 긴 줄(구역나눔) -->
+    <div class="grayLine"><hr style="border: 1px solid lightgray; margin: 10px;"></div>
+
+
+    <!-- 섹션3: 제목 -->
+    <!-- 컴포넌트4 class="inputTypeTitle" 입력칸 스타일2번: 라벨1줄 + 입력칸 밑에 1줄 -->
+    <div class="inputTypeTitle">
+        <label name="제목입력">제목 *</label><br />
+        <input type="text" name="제목입력" placeholder="제목을 입력해 주세요." />
+    </div>
+
+    <!-- 컴포넌트3 class="grayLine" 긴 줄(구역나눔) -->
+    <div class="grayLine"><hr style="border: 1px solid lightgray; margin: 10px;"></div>
+
+
+    <!-- 섹션4: 내용 -->
+    <!-- 컴포넌트5 class="inputTypeContents"  입력칸 스타일3번: 라벨1줄 + 입력칸 밑에 왕 큼 -->
+    <div class="inputTypeContents">
+        <label name="내용입력">내용 *</label><br />
+        <textarea name="내용입력">내용을 입력해 주세요.</textarea>
+    </div>
+
+    <!-- 섹션5: 주소 -->
+    <!-- 컴포넌트6 class="addressSection" 주소입력부분 -->
+    <div class="addressSection">
+        <div><span>주소</span></div>
+        <input type="text" />
+        <button>우편번호 검색</button><br />
+        <input type="text" placeholder="주소를 입력해 주세요."/><br />
+        <input type="text" placeholder="상세주소"/>
+    </div>
+
+    <!-- 컴포넌트3 class="grayLine" 긴 줄(구역나눔) -->
+    <div class="grayLine"><hr style="border: 1px solid lightgray; margin: 10px;"></div>
+
+    <!-- 섹션6: 유튭링크 -->
+    <!-- 4. 입력칸 스타일2번: 라벨1줄 + 입력칸 밑에 1줄 -->
+    <div class="inputTypeTwo">
+        <label name="링크입력">유튜브 링크</label><br />
+        <input type="text" name="링크입력" placeholder="링크를 입력해 주세요." />
+    </div>
+
+    <!-- 컴포넌트3 class="grayLine" 긴 줄(구역나눔) -->
+    <div class="grayLine"><hr style="border: 1px solid lightgray; margin: 10px;"></div>
+
+
+    <!-- 섹션7: 사진입력 -->
+    <!-- 컴포넌트7 class="inputImageSection" 사진첨부 -->
+    <div class="inputImageSection">
+        <div><span>사진 첨부</span></div>
+        <button onclick="JS_사진업로드기능()" style="width: 100px; height: 100px; background-color: lightpink; text-align: center;">
+            + <br />
+            클릭하여 사진 업로드
+        </button>
+        <button onclick="JS_사진업로드기능()" style="width: 100px; height: 100px; background-color: lightpink; text-align: center;">
+            + <br />
+            클릭하여 사진 업로드
+        </button>
+        <button onclick="JS_사진업로드기능()" style="width: 100px; height: 100px; background-color: lightpink; text-align: center;">
+            + <br />
+            클릭하여 사진 업로드
+        </button>
+    </div>
+
+    <!-- 섹션8: 마지막 버튼 줄 -->
+    <div class="alignToRight">
+        <!-- 컴포넌트8. 하얀버튼 -->
+        <button onclick="JS_취소버튼눌러서창이꺼지는기능()">취소</button>
+        <!-- 컴포넌트9. 파란버튼 -->
+        <button onclick="JS_등록하기기능()" style="background-color: blue; color: white;">등록하기</button>
+    </div>
+
+</body>
+</html>
