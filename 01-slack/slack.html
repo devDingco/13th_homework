@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[30.이하성] pre.camp</title>
+    <link href="./slack.css" rel="stylesheet">
+    <script src="./slack.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="container__header">
+            <div class="container__header_left">
+                <div class="container__header__btn">
+                    <div class="btn__icon__arrowBack"></div>
+                    <div class="btn__icon__arrowNext"></div>
+                    <div class="btn__icon__history"></div>
+                </div>
+            </div>
+
+            <div class="container__header__right">
+                <div class="container__header__search">
+                    <div class="search__icon_lens"></div>
+                    <div class="search__text">수강생을 검색해 보세요.</div>
+                </div>
+                <div class="container__header__myInfo">
+                    <div class="myInfo__profile">
+                        <div class="profile__icon__bracket"></div>
+                        <div class="profile__text">OOOO 수강생</div>
+                    </div>
+                    <div class="myInfo__help"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container__wrapper">
+            <div class="container__wrapper__sidebar">
+                <div class="sidebar__btn__menu">
+                    <div class="sidebar__icon__00_logo"></div>
+
+                    <div class="sidebar__btn__01_home">
+                        <div class="sidebar__icon__01_home"></div>
+                        <div class="sidebar__text">홈</div>
+                    </div>
+                    <div class="sidebar__btn__02_chat">
+                        <div class="sidebar__icon__02_chat"></div>
+                        <div class="sidebar__text">대화</div>
+                    </div>
+                    <div class="sidebar__btn__03_notification">
+                        <div class="sidebar__icon__03_notification"></div>
+                        <div class="sidebar__text">알림</div>
+                    </div>
+                    <div class="sidebar__btn__04_bookmark">
+                        <div class="sidebar__icon__04_bookmark"></div>
+                        <div class="sidebar__text">북마크</div>
+                    </div>
+                    <div class="sidebar__btn__05_more">
+                        <div class="sidebar__icon__05_more"></div>
+                        <div class="sidebar__text">더 보기</div>
+                    </div>
+                </div>
+
+                <div class="sidebar__btn__profile">
+                    <div class="sidebar__icon__06_plus"></div>
+                    <div class="sidebar__icon__07_profile"></div>
+                </div>
+            </div>
+
+            <div class="container__wrapper__content"> 
+                <div class="container__wrapper__menu">
+                    <div class="menu__header">
+                        <div class="menu__header__text">코드캠프</div>
+                        <div class="menu__header__icon">
+                            <div class="header__icon__filter"></div>
+                            <div class="header__icon__edit"></div>
+                        </div>
+                    </div>
+                    <div class="menu__detail">
+                        <div class="detail__icon__note"></div>
+                        <div class="detail__text">서약서 자세히 보기</div>
+                    </div>
+                    <hr />
+                    <div class="menu__section01__class">
+                        <div class="section01__icon__bracket"></div>
+                        <div class="section__text">코드캠프 13기</div>
+                        <div class="section__onboard">수강중</div>
+                    </div>
+                    <div class="menu__section02__student">
+                        <div class="section02__icon__people"></div>
+                        <div class="section__text">수강생 리스트</div>
+                        <div class="section__icon__arrowDown"></div>
+                    </div>
+                    <div class="menu__section02__signUp" id="signUp">
+                        <div class="signUp__text">현재 가입한 멤버가 없어요.</div>
+                        <div class="signUp__text">회원가입 해보세요.</div>
+                        <div class="signUp__btn">
+                            <div class="btn__icon__add"></div>
+                            <div class="btn__text">가입하기</div>
+                        </div>
+                    </div>
+                    <div class="menu__section02__studentList" id="guestStudent">
+                        <div class="studentList__icon__profile"></div>
+                        <div class="studentList__text__student">GUEST 수강생</div>
+                    </div>
+                    <div class="mauu__section02__studentList">
+                        <ul class="test">
+                        </ul>
+                    </div>
+                    <div class="menu__section03__channel">
+                        <div class="section03__icon__channel"></div>
+                        <div class="section__text">채널</div>
+                        <div class="section__icon__arrowDown"></div>
+                    </div>
+                    <div class="menu__section03__chanList">
+                        <div class="channel__text"># 채널 1</div>
+                        <div class="channel__text"># 채널 2</div>
+                        <div class="channel__text"># 채널 3</div>
+                        <div class="channel__text"># 채널 4</div>
+                    </div>
+                    <div class="menu__section04__blackList">
+                        <div class="section04__icon__skull"></div>
+                        <div class="section__text">차단 멤버 리스트</div>
+                    </div>
+                </div>
+
+                <div class="container__wrapper__form">
+                    <div class="form__title">코드캠프에 가입하고</div>
+                    <div class="form__title">개발자로 커리어 점프 하세요.</div>
+                    
+                    <div class="form__name">
+                        <div class="form__text">이름</div>
+                        <input class="form__input" id="name" oninput="inputEvent()" type="text" placeholder="이름을 입력해 주세요." />
+                    </div>
+                    <div class="form__mail">
+                        <div class="form__text">이메일</div>
+                        <input class="form__input" id="mail" oninput="inputEvent()" type="text" placeholder="네이버, 구글, 한메일, 카카오 계정만 입력" />
+                    </div>
+                    <div class="form__mail__error">
+                        <div class="error__mail__text01" hidden>이메일은 naver.com, gmail.com, hanmail.net,</div>
+                        <div class="error__mail__text02" hidden>kakao.com만 사용 가능합니다.</div>
+                    </div>
+                    <div class="form__password">
+                        <div class="form__text">비밀번호</div>
+                        <input class="form__input" id="password" oninput="inputEvent()" type="password" placeholder="비밀번호를 입력해 주세요." />
+                    </div>
+                    <div class="form__passConfirm">
+                        <div class="form__text">비밀번호 확인</div>
+                        <input class="form__input" id="passConfirm" oninput="inputEvent()" type="password" placeholder="비밀번호를 한 번 더 입력해 주세요." />
+                    </div>
+                    <div class="form__password__error">
+                        <div class="error__password__text" hidden>비밀번호와 비밀번호 확인이 일치하지 않습니다.</div>
+                    </div>
+                    <div class="form__phone">
+                        <div class="form__text__phone">전화번호</div>
+                        <input class="form__input__phone" id="phone01" oninput="inputEvent()" type="text" inputmode="numeric" pattern="^\d+$" maxlength="3" /> -
+                        <input class="form__input__phone" id="phone02" oninput="inputEvent()" type="text" inputmode="numeric" pattern="^\d+$" maxlength="4" /> -
+                        <input class="form__input__phone" id="phone03" oninput="inputEvent()" type="text" inputmode="numeric" pattern="^\d+$" maxlength="4" />
+                    </div>
+                    <div>
+                        <div class="error__phone__text" hidden>전화번호는 010으로 시작해야 합니다.</div>
+                    </div>
+                    
+                    <div class="form__verified">
+                        <div class="auth__authKey">
+                            <div class="authKey__number" id="number" hidden>000000</div>
+                            <div class="authKey__btn" id="request">인증버튼 요청</div>
+                        </div>
+                        <div class="auth__authConfirm">
+                            <div class="authConfirm__number" id="timer" hidden>00:00</div>
+                            <div class="authConfirm__btn" id="auth">인증 하기</div>
+                        </div>
+                    </div>
+
+                    <div class="form__introduce">
+                        <div class="form__text__introduce">자기소개</div>
+                        <textarea class="form__input__introduce" id="introduce" placeholder="자기소개를 입력해 주세요."></textarea>
+                    </div>
+
+                    <div class="form__radio">
+                        <div class="form__text">성별</div>
+                        <input class="radio__btn" type="radio" name="gender" id="male" /> <label class="radio__text" for="male">남성</label>
+                        <input class="radio__btn" type="radio" name="gender" id="female" /> <label class="radio__text" for="female">여성</label>
+                    </div>
+
+                    <div class="form__check">
+                        <input class="check__btn" type="checkbox" id="check" />
+                        <div> <label class="check__text" for="check">집에는 씻으러만 가는데 동의합니다.</label> </div>
+                    </div>
+
+                    <div class="form__btn__submit" id="submit">가입</div>
+                </div>
+
+                <div class="container__wrapper__imgBG"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <div>designed by code.camp</div>
+</footer>
+</html>
