@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#root {
+    width: 100vw;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rootContainer {
+    width: 80rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+header {
+    width: 100%;
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.UserInputForm {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.inputForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.inputTitle {
+    display: flex;
+    gap: .5rem;
+
+    color: #333333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.requiredMark {
+    color: #F66A6A;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.inputText {
+    height: 3rem;
+    border-radius: .5rem;
+    border: .0625rem solid #D4D3D3;
+    padding: .75rem 1rem .75rem 1rem;
+}
+
+.inputTextArea {
+    height: 21rem;
+    border-radius: .5rem;
+    border: .0625rem solid #D4D3D3;
+    padding: .75rem 1rem .75rem 1rem;
+}
+
+.divider {
+    border: .0625rem solid #E4E4E4;
+}
+
+.ZipCodeContainer {
+    display: flex;
+    gap: .5rem;
+}
+
+.zipCodeSearchButton {
+    width: 8.125rem;
+    height: 3rem;
+    background-color: #FFFFFF;
+    color: black;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: .5rem;
+    border: .0625rem solid black;
+}
+
+.uploadButtonContainer {
+    display: flex;
+    gap: 1rem;
+}
+
+.uploadImageContainer {
+    position: relative;
+}
+
+#uploadImage {
+    display: none;
+}
+
+#uploadLabel {
+    width: 10rem;
+    aspect-ratio: 1 / 1;
+    background-color: #F2F2F2;
+    color: #777777;
+    font-weight: 400;
+    font-size: 1rem;
+    border-radius: .5rem;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.cancelButton {
+    width: 4rem;
+    height: 3rem;
+    background-color: #F2F2F2;
+    color: black;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: .5rem;
+    border: .0625rem solid black;
+}
+
+.submitButton {
+    width: 5.9375rem;
+    height: 3rem;
+    background-color: #2974E5;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: .5rem;
+    border: none;
+}
