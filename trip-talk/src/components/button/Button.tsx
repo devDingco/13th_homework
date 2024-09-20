@@ -2,11 +2,18 @@ import { ReactNode } from "react";
 import styles from "./Button.module.css";
 
 type ButtonProps = {
+  type?: "submit";
+  disabled?: boolean;
   children: ReactNode;
   color: "blue" | "white";
 };
 
-export default function Button({ children, color }: ButtonProps) {
+export default function Button({
+  type,
+  disabled,
+  children,
+  color,
+}: ButtonProps) {
   const colorVariants = {
     blue: "bg-btn-blue text-white",
     white: "bg-white text-black border-black",
@@ -14,7 +21,11 @@ export default function Button({ children, color }: ButtonProps) {
 
   return (
     <>
-      <button className={`${styles.button} ${colorVariants[color]}`}>
+      <button
+        type={type}
+        disabled={disabled}
+        className={`${styles.button} ${colorVariants[color]}`}
+      >
         {children}
       </button>
     </>

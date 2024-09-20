@@ -30,13 +30,17 @@ export default function CreatePost() {
     setContent(event.target.value);
   };
 
+  const handleSubmit = () => {
+    alert("등록!");
+  };
+
   if (authorName && password && title && content) {
     alert("게시글 등록이 가능한 상태입니다!");
   }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.author_info_wrapper}>
           <div>
             <Input
@@ -138,7 +142,13 @@ export default function CreatePost() {
         </div>
         <div className={styles.button_wrapper}>
           <Button color="white">취소</Button>
-          <Button color="blue">등록하기</Button>
+          <Button
+            type="submit"
+            disabled={!(authorName && password && title && content)}
+            color="blue"
+          >
+            등록하기
+          </Button>
         </div>
       </form>
     </>
