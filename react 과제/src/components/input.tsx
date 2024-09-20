@@ -1,4 +1,5 @@
 import Icon from "../components/iconFactory";
+import { showErrorHandler } from "../utils/validitymessage";
 
 const Input = (props: any) => {
   let { title, ...rest } = props;
@@ -10,7 +11,7 @@ const Input = (props: any) => {
           {title}
           {props.required && <span className="text-red-500">*</span>}
         </div>
-        <div className="flex gap-4">
+        <div className={`flex gap-4 ${props.required ? "validStyle" : ""}`}>
           {props.uploadcount &&
             Array.from({ length: props.uploadcount }).map((_, index) => (
               <label key={index} className="imgUploadBox">
@@ -32,8 +33,8 @@ const Input = (props: any) => {
         {props.required && <span className="text-red-500">*</span>}
       </div>
       <input
-        className={`border border-gray-300 rounded-lg w-full py-3 px-4 
-          ${props.required ? "validStyle" : ""}`}
+        className="border border-gray-300 rounded-lg w-full py-3 px-4"
+        onInvalid={(event) => showErrorHandler(event)}
         {...rest}
       />
       {props.required && <div className="toolTip">필수입력 사항 입니다.</div>}
