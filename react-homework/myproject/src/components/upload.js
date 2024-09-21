@@ -7,3 +7,4 @@ const UploadFile = () => {
     </label>
   )
 }
+export default UploadFile
