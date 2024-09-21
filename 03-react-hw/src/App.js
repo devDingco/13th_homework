@@ -7,60 +7,63 @@ const App = () => {
   const [pwd, setPwd] = useState(""); //비번
   const [title, setTitle] = useState(""); //제목
   const [content, setContent] = useState(""); //내용
-  const [reqerror, SetReqError] = useState(""); //필수사항에러
+  const [reqerrors, SetReqErrors] = useState({
+    username: "",
+    pwd: "",
+    title: "",
+    content: "",
+  }); //필수사항에러
 
   const onChangeUsername = (event) => {
     setUserName(event.target.value);
-    SetReqError("");
+    //...뭐시기 : 스프레드 연산자, reqerrors 객체의 모든 속성을 새 객체에 복사
+    SetReqErrors((prev) => ({ ...prev, username: "" }));
   };
 
   const onChangePassword = (event) => {
     setPwd(event.target.value);
-    SetReqError("");
+    SetReqErrors((prev) => ({ ...prev, pwd: "" }));
   };
 
   const onChangeTitile = (event) => {
     setTitle(event.target.value);
-    SetReqError("");
+    SetReqErrors((prev) => ({ ...prev, title: "" }));
   };
 
   const onChangeContent = (event) => {
     setContent(event.target.value);
-    SetReqError("");
+    SetReqErrors((prev) => ({ ...prev, content: "" }));
+  };
+
+  //필수입력 검사
+  const validateForm = () => {
+    const newErrors = {}; //각 필드의 에러메시지 저장
+    let isValid = true; //전체 폼이 유효한지
+
+    //.trim(): 앞뒤 공백 제거
+    if (username.trim() === "") {
+      newErrors.username = "필수입력 사항입니다.";
+      isValid = false;
+    }
+    if (pwd.trim() === "") {
+      newErrors.pwd = "필수입력 사항입니다.";
+      isValid = false;
+    }
+    if (title.trim() === "") {
+      newErrors.title = "필수입력 사항입니다.";
+      isValid = false;
+    }
+    if (content.trim() === "") {
+      newErrors.content = "필수입력 사항입니다.";
+      isValid = false;
+    }
+
+    SetReqErrors(newErrors);
+    return isValid;
   };
 
   const onClickAdd = () => {
-    let hasError = false;
-
-    if (username === "") {
-      SetReqError("필수입력 사항입니다.");
-      hasError = true;
-    } else {
-      SetReqError("");
-    }
-
-    if (pwd === "") {
-      SetReqError("필수입력 사항입니다.");
-      hasError = true;
-    } else {
-      SetReqError("");
-    }
-
-    if (title === "") {
-      SetReqError("필수입력 사항입니다.");
-      hasError = true;
-    } else {
-      SetReqError("");
-    }
-
-    if (content === "") {
-      SetReqError("필수입력 사항입니다.");
-      hasError = true;
-    } else {
-      SetReqError("");
-    }
-
-    if (!hasError) {
+    if (validateForm()) {
       alert("게시글 등록이 가능한 상태입니다!");
     }
   };
@@ -81,7 +84,7 @@ const App = () => {
             className="중간입력창크기"
             onChange={onChangeUsername}
           />
-          <div className="필수입력에러">{reqerror}</div>
+          <div className="필수입력에러">{reqerrors.username}</div>
         </div>
         <div className="작성자비밀번호구성">
           <div className="필수입력부분">
@@ -94,7 +97,7 @@ const App = () => {
             className="중간입력창크기"
             onChange={onChangePassword}
           />
-          <div className="필수입력에러">{reqerror}</div>
+          <div className="필수입력에러">{reqerrors.pwd}</div>
         </div>
       </div>
       <hr />
@@ -112,7 +115,7 @@ const App = () => {
             className="긴입력창크기"
             onChange={onChangeTitile}
           />
-          <div className="필수입력에러">{reqerror}</div>
+          <div className="필수입력에러">{reqerrors.title}</div>
         </div>
         <hr />
         {/* 내용부분 */}
@@ -126,7 +129,7 @@ const App = () => {
             className="내용입력창크기"
             onChange={onChangeContent}
           ></textarea>
-          <div className="필수입력에러">{reqerror}</div>
+          <div className="필수입력에러">{reqerrors.content}</div>
         </div>
         <hr />
         {/* 주소부분 */}
