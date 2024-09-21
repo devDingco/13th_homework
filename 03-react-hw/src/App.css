@@ -56,6 +56,10 @@ textarea {
   background: var(--Gray-W, #fff);
 }
 
+button {
+  cursor: pointer;
+}
+
 .구분상자 {
   width: 100%;
   display: flex;
@@ -154,6 +158,7 @@ form {
 
   border-radius: 0.5rem;
   background: var(--gray-50, #f2f2f2);
+  cursor: pointer;
 }
 
 .사진업로드상자 span {
