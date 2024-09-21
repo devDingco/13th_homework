@@ -1,72 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ImgUploadBtn from "./components/ImgUploadBtn";
 import "./App.css";
 
 const App = () => {
-  const [username, setUserName] = useState(""); //작성자
-  const [pwd, setPwd] = useState(""); //비번
-  const [title, setTitle] = useState(""); //제목
-  const [content, setContent] = useState(""); //내용
+  //입력폼
+  const [formData, setFormData] = useState({
+    username: "",
+    pwd: "",
+    title: "",
+    content: "",
+  });
+
+  //필수사항에러
   const [reqerrors, SetReqErrors] = useState({
     username: "",
     pwd: "",
     title: "",
     content: "",
-  }); //필수사항에러
+  });
 
-  const onChangeUsername = (event) => {
-    setUserName(event.target.value);
-    //...뭐시기 : 스프레드 연산자, reqerrors 객체의 모든 속성을 새 객체에 복사
-    SetReqErrors((prev) => ({ ...prev, username: "" }));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    SetReqErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+
+    console.log("1. ", formData);
   };
 
-  const onChangePassword = (event) => {
-    setPwd(event.target.value);
-    SetReqErrors((prev) => ({ ...prev, pwd: "" }));
-  };
-
-  const onChangeTitile = (event) => {
-    setTitle(event.target.value);
-    SetReqErrors((prev) => ({ ...prev, title: "" }));
-  };
-
-  const onChangeContent = (event) => {
-    setContent(event.target.value);
-    SetReqErrors((prev) => ({ ...prev, content: "" }));
-  };
-
-  //필수입력 검사
   const validateForm = () => {
-    const newErrors = {}; //각 필드의 에러메시지 저장
-    let isValid = true; //전체 폼이 유효한지
+    let isValid = true;
+    const newErrors = {};
 
-    //.trim(): 앞뒤 공백 제거
-    if (username.trim() === "") {
-      newErrors.username = "필수입력 사항입니다.";
-      isValid = false;
-    }
-    if (pwd.trim() === "") {
-      newErrors.pwd = "필수입력 사항입니다.";
-      isValid = false;
-    }
-    if (title.trim() === "") {
-      newErrors.title = "필수입력 사항입니다.";
-      isValid = false;
-    }
-    if (content.trim() === "") {
-      newErrors.content = "필수입력 사항입니다.";
-      isValid = false;
-    }
+    Object.keys(formData).forEach((key) => {
+      if (formData[key].trim() === "") {
+        newErrors[key] = "필수입력 사항입니다.";
+        isValid = false;
+      }
+    });
 
     SetReqErrors(newErrors);
+    console.log("Validation errors:", newErrors);
     return isValid;
   };
 
   const onClickAdd = () => {
+    console.log("2. ", formData);
     if (validateForm()) {
       alert("게시글 등록이 가능한 상태입니다!");
     }
   };
+
+  useEffect(() => {
+    console.log("Updated formData:", formData);
+  }, [formData]);
 
   return (
     <div className="게시물등록전체상자">
@@ -80,9 +72,11 @@ const App = () => {
           </div>
           <input
             type="text"
+            name="username"
+            value={formData.username}
             placeholder="작성자 명을 입력해 주세요."
             className="중간입력창크기"
-            onChange={onChangeUsername}
+            onChange={handleChange}
           />
           <div className="필수입력에러">{reqerrors.username}</div>
         </div>
@@ -93,9 +87,11 @@ const App = () => {
           </div>
           <input
             type="password"
+            name="pwd"
+            value={formData.pwd}
             placeholder="비밀번호를 입력해 주세요."
             className="중간입력창크기"
-            onChange={onChangePassword}
+            onChange={handleChange}
           />
           <div className="필수입력에러">{reqerrors.pwd}</div>
         </div>
@@ -111,9 +107,11 @@ const App = () => {
           </div>
           <input
             type="text"
+            name="title"
+            value={formData.title}
             placeholder="제목을 입력해 주세요."
             className="긴입력창크기"
-            onChange={onChangeTitile}
+            onChange={handleChange}
           />
           <div className="필수입력에러">{reqerrors.title}</div>
         </div>
@@ -125,9 +123,11 @@ const App = () => {
             <span className="필수별표시">*</span>
           </div>
           <textarea
+            name="content"
+            value={formData.content}
             placeholder="내용을 입력해 주세요."
             className="내용입력창크기"
-            onChange={onChangeContent}
+            onChange={handleChange}
           ></textarea>
           <div className="필수입력에러">{reqerrors.content}</div>
         </div>
