@@ -1,0 +1,14 @@
+{
+  "name": "reacthomework",
+  "version": "1.0.0",
+  "description": "코드캠프 13기 숙제제출 레포지토리 입니다",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1"
+  }
+}
