@@ -1,7 +1,7 @@
-import { showErrorHandler } from "../utils/validitymessage";
+import { forwardRef } from "react";
 
-const TextArea = (props: any) => {
-  const { title, ...rest } = props;
+const TextArea = forwardRef((props: any, ref) => {
+  const { title, errormessage, ...rest } = props;
   console.log();
   return (
     <label className="flex flex-col gap-2" htmlFor={props.id}>
@@ -10,13 +10,13 @@ const TextArea = (props: any) => {
         {props.required && <span className="text-red-500">*</span>}
       </div>
       <textarea
+        ref={ref}
         className="border border-gray-300 rounded-lg w-full py-3 px-4 h-80"
         {...rest}
-        onInvalid={(event) => showErrorHandler(event)}
       ></textarea>
-      {props.required && <div className="toolTip">필수입력 사항 입니다.</div>}
+      {errormessage && <p className="toolTip">{errormessage}</p>}
     </label>
   );
-};
+});
 
 export default TextArea;
