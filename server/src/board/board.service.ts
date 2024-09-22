@@ -15,8 +15,9 @@ export class BoardService {
     ) {}
     async create(createBoardDto: CreateBoardDto): Promise<Board> {
         const board = this.boardRepository.createBoard(createBoardDto);
-        // const boardId =
-        //     await this.boardIdCounterRepository.incrementBoardId('Boards');
+        const boardId =
+            await this.boardIdCounterRepository.incrementBoardId('board');
+        board.boardId = boardId;
         return await this.boardRepository.saveBoard(board);
     }
 

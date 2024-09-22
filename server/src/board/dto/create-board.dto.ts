@@ -3,11 +3,16 @@ import {
     ArrayMinSize,
     IsArray,
     IsNotEmpty,
+    IsNumber,
     IsOptional,
     IsString,
 } from 'class-validator';
 
 export class CreateBoardDto {
+    @IsNotEmpty()
+    @IsNumber()
+    boardId: number;
+
     @IsNotEmpty()
     @IsString()
     author: string;
