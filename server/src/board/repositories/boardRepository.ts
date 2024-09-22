@@ -1,6 +1,6 @@
 import { MongoRepository } from 'typeorm';
 import { Board } from '../entities/board.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBoardDto } from '../dto/create-board.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -31,8 +31,17 @@ export class BoardRepository {
     }
 
     async findBoard(boardId: number): Promise<Board> {
-        const res = await this.boardRepository.findOne({ where: { boardId } });
+        const resultBoard = await this.boardRepository.findOne({
+            where: { boardId },
+        });
 
-        return res;
+        if (!resultBoard) {
+            throw new HttpException(
+                `boardID: ${boardId} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        return resultBoard;
     }
 }
