@@ -3,6 +3,7 @@ import { Board } from '../entities/board.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBoardDto } from '../dto/create-board.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateBoardDto } from '../dto/update-board.dto';
 
 @Injectable()
 export class BoardRepository {
@@ -31,8 +32,8 @@ export class BoardRepository {
     }
 
     async findBoard(boardId: number): Promise<Board> {
-        const findBoard = await this.boardRepository.findOne({
-            where: { boardId },
+        const findBoard = await this.boardRepository.findOneBy({
+            boardId,
         });
 
         if (!findBoard) {
@@ -45,12 +46,44 @@ export class BoardRepository {
         return findBoard;
     }
 
+    async updateOne(
+        boardId: number,
+        updateBoard: UpdateBoardDto,
+    ): Promise<Board> {
+        const updateBoardDB = await this.boardRepository.update(
+            { boardId },
+            updateBoard,
+        );
+
+        if (updateBoardDB.affected === 0) {
+            throw new HttpException(
+                `boardID: ${boardId} is not update`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        return await this.boardRepository.findOneBy({ boardId });
+    }
+
+    async updateAll(
+        boardId: number,
+        updateBoard: CreateBoardDto,
+    ): Promise<Board> {
+        const updateBoardDB = await this.findBoard(boardId);
+
+        Object.assign(updateBoardDB, updateBoard);
+
+        await this.saveBoard(updateBoardDB);
+
+        return await this.boardRepository.findOneBy({ boardId });
+    }
+
     async deleteBoard(boardId: number): Promise<boolean> {
-        const deleteBoard = await this.boardRepository.deleteOne({
+        const deleteBoardDB = await this.boardRepository.deleteOne({
             boardId,
         });
 
-        if (deleteBoard.deletedCount === 0) {
+        if (deleteBoardDB.deletedCount === 0) {
             throw new HttpException(
                 `boardID: ${boardId} is not found in board`,
                 HttpStatus.NOT_FOUND,

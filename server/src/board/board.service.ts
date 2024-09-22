@@ -33,12 +33,18 @@ export class BoardService {
         return await this.boardRepository.findBoard(boardId);
     }
 
-    async updateOne(boardId: number, updateBoardDto: UpdateBoardDto) {
-        return;
+    async updateOne(
+        boardId: number,
+        updateBoardDto: UpdateBoardDto,
+    ): Promise<Board> {
+        return await this.boardRepository.updateOne(boardId, updateBoardDto);
     }
 
-    async updateAll(boardId: number, updateBoardDto: CreateBoardDto) {
-        return 1;
+    async updateAll(
+        boardId: number,
+        updateBoardDto: CreateBoardDto,
+    ): Promise<Board> {
+        return await this.boardRepository.updateAll(boardId, updateBoardDto);
     }
 
     async remove(boardId: number): Promise<void> {
