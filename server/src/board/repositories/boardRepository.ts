@@ -30,7 +30,9 @@ export class BoardRepository {
         return await this.boardRepository.find();
     }
 
-    async findBoard(id: number): Promise<Board[]> {
-        return await this.boardRepository.find({ where: { id } });
+    async findBoard(boardId: number): Promise<Board> {
+        const res = await this.boardRepository.findOne({ where: { boardId } });
+
+        return res;
     }
 }
