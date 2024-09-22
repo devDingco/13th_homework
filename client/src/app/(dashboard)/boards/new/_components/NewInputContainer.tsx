@@ -12,7 +12,7 @@ export default function NewInputContainer({
         <div className="flex flex-col gap-2 flex-1 prose-me_16_24">
             <div className=" flex gap-1">
                 <div className=" text-gray-800">{ENewTitleProps[title]}</div>
-                {title !== 'YoutubeLink' && (
+                {title !== 'YoutubeUrl' && (
                     <div className="text-red-400">*</div>
                 )}
             </div>

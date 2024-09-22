@@ -8,7 +8,7 @@ export interface IBoardType {
     createdAt: string;
     updatedAt?: string;
     imageUrl?: string[];
-    youtubeLink?: string;
+    youtubeUrl?: string;
     like?: number;
     hate?: number;
 }

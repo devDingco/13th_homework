@@ -21,6 +21,7 @@ export default function NewForm() {
             content: undefined,
         },
     });
+    console.log(state.errors);
 
     const [formValues, setFormValues] = useState({
         Author: '',
@@ -67,7 +68,7 @@ export default function NewForm() {
                 onChangeValue={onChangeValue}
             />
             <NewAddressInputContainer title={ETitle.Address} />
-            <NewInputContainer title={ETitle.YoutubeLink} />
+            <NewInputContainer title={ETitle.YoutubeUrl} />
             <NewImageContainer />
             <NewFormButton isButtonDisabled={isButtonDisabled} />
         </form>
