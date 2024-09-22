@@ -33,4 +33,8 @@ export class BoardReactionRepository {
         }
         return true;
     }
+
+    async clearBoardReaction(): Promise<void> {
+        await this.boardReactionRepository.clear();
+    }
 }

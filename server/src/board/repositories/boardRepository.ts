@@ -58,4 +58,7 @@ export class BoardRepository {
         }
         return true;
     }
+    async clearBoard(): Promise<void> {
+        await this.boardRepository.clear();
+    }
 }
