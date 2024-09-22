@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
@@ -29,7 +29,7 @@ export class BoardService {
         return await this.boardRepository.findAllBoard();
     }
 
-    async findOne(boardId: number) {
+    async findOne(boardId: number): Promise<Board> {
         return await this.boardRepository.findBoard(boardId);
     }
 
@@ -37,7 +37,17 @@ export class BoardService {
         return `This action updates a #${id} board`;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} board`;
+    async remove(boardId: number): Promise<void> {
+        const responseBoard = await this.boardRepository.deleteBoard(boardId);
+        const responseBoardReaction =
+            await this.boardReactionRepository.deleteBoardReaction(boardId);
+
+        if (!responseBoard || !responseBoardReaction) {
+            throw new HttpException(
+                `boardID: ${boardId} is not found in totalBoard`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+        return;
     }
 }

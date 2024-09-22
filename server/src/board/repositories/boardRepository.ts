@@ -31,17 +31,31 @@ export class BoardRepository {
     }
 
     async findBoard(boardId: number): Promise<Board> {
-        const resultBoard = await this.boardRepository.findOne({
+        const findBoard = await this.boardRepository.findOne({
             where: { boardId },
         });
 
-        if (!resultBoard) {
+        if (!findBoard) {
             throw new HttpException(
                 `boardID: ${boardId} is not found`,
                 HttpStatus.NOT_FOUND,
             );
         }
 
-        return resultBoard;
+        return findBoard;
+    }
+
+    async deleteBoard(boardId: number): Promise<boolean> {
+        const deleteBoard = await this.boardRepository.deleteOne({
+            boardId,
+        });
+
+        if (deleteBoard.deletedCount === 0) {
+            throw new HttpException(
+                `boardID: ${boardId} is not found in board`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+        return true;
     }
 }

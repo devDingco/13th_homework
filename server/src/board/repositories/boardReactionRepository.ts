@@ -1,25 +1,7 @@
 import { MongoRepository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardReaction } from '../entities/board-reaction.entity';
-
-// import { Entity, ObjectIdColumn, Column } from 'typeorm';
-// import { ObjectId } from 'mongodb';
-
-// @Entity()
-// export class BoardReaction {
-//     @ObjectIdColumn()
-//     _id: ObjectId;
-
-//     @Column()
-//     board: string;
-
-//     @Column({ default: 0 })
-//     like: number;
-
-//     @Column({ default: 0 })
-//     hate: number;
-// }
 
 @Injectable()
 export class BoardReactionRepository {
@@ -35,5 +17,20 @@ export class BoardReactionRepository {
         });
 
         return await this.boardReactionRepository.save(boardReaction);
+    }
+
+    async deleteBoardReaction(boardId: number): Promise<boolean> {
+        const deleteBoardReaction =
+            await this.boardReactionRepository.deleteOne({
+                boardId,
+            });
+
+        if (deleteBoardReaction.deletedCount === 0) {
+            throw new HttpException(
+                `boardID: ${boardId} is not found in boardReaction`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+        return true;
     }
 }

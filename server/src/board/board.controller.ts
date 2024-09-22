@@ -6,6 +6,7 @@ import {
     Patch,
     Param,
     Delete,
+    HttpCode,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -35,8 +36,9 @@ export class BoardController {
         return this.boardService.update(+id, updateBoardDto);
     }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.boardService.remove(+id);
+    @Delete(':boardId')
+    @HttpCode(204)
+    remove(@Param('boardId') boardId: number) {
+        return this.boardService.remove(boardId);
     }
 }
