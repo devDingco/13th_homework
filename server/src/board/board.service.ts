@@ -34,7 +34,7 @@ export class BoardService {
     }
 
     update(id: number, updateBoardDto: UpdateBoardDto) {
-        return `This action updates a #${id} board`;
+        return updateBoardDto;
     }
 
     async remove(boardId: number): Promise<void> {
