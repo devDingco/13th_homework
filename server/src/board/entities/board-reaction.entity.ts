@@ -7,7 +7,7 @@ export class BoardReaction {
     _id: ObjectId;
 
     @Column()
-    board: string;
+    boardId: number;
 
     @Column({ default: 0 })
     like: number;
