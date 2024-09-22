@@ -34,7 +34,7 @@ export class BoardService {
     }
 
     update(id: number, updateBoardDto: UpdateBoardDto) {
-        return updateBoardDto;
+        return id;
     }
 
     async remove(boardId: number): Promise<void> {
