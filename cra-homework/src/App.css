@@ -1,0 +1,327 @@
+:root {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.all-container {
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  width: 80rem;
+  height: auto;
+}
+
+/* 제목영역 */
+.title {
+  width: 100%;
+  height: 5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+/* 작성자정보 영역 */
+.writer-info {
+  width: 100%;
+  height: 8.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+}
+.writer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.writer p {
+  display: flex;
+  gap: 0.25rem;
+}
+.writer p span {
+  color: #f66a6a;
+}
+.writer input {
+  width: 38.75rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.writer input::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #ababab;
+}
+
+/* 제목영역 */
+.title-area {
+  height: 8rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  border-bottom: 1px solid #e4e4e4;
+}
+.title-area p {
+  display: flex;
+  gap: 0.25rem;
+}
+.title-area p span {
+  color: #f66a6a;
+}
+.title-area input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.title-area input::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #ababab;
+}
+
+/* 내용영역 */
+.content-area {
+  height: 26rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  /* background-color: #2974e5; */
+  padding-top: 2rem;
+}
+.content-area p {
+  display: flex;
+  gap: 0.25rem;
+}
+.content-area p span {
+  color: #f66a6a;
+}
+.content-area textarea {
+  width: 100%;
+  height: 21rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  resize: none;
+}
+.content-area textarea::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #ababab;
+}
+
+/* 주소입력영역 */
+.address-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 15rem;
+  border-bottom: 1px solid #e4e4e4;
+  /* background-color: #ababab; */
+}
+.post-num {
+  display: flex;
+  gap: 0.5rem;
+}
+.post-num input {
+  width: 5.125rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.post-num button {
+  width: 8.125rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+.address input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.address input::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #ababab;
+}
+
+/* 유튜브 링크 영역 */
+.youtube-area {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid #e4e4e4;
+}
+.youtube-area input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.youtube-area input::placeholder {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #ababab;
+}
+
+/* 파일 첨부 영역 */
+.file-area {
+  width: 100%;
+  height: 16.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+.add-file-area {
+  display: flex;
+
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.add-file-area label {
+  overflow: hidden;
+}
+
+.file {
+  width: 10rem;
+  height: 10rem;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  color: #777777;
+  position: relative;
+}
+.no-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.file input {
+  background-color: #2974e5;
+}
+.file p:first-child {
+  font-size: 2.5rem;
+}
+.file p:last-child {
+  /* color: #777777; */
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+.file img {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  z-index: 10;
+  object-fit: cover;
+}
+
+/* 버튼영역 */
+.btn-area {
+  width: 100%;
+  height: 6.25rem;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  align-items: center;
+}
+.btn-area button:first-child {
+  width: 4rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+.btn-area button:last-child {
+  width: 5.9375rem;
+  height: 3rem;
+  background-color: #2974e5;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+/* 알림메세지 스타일 */
+.error-msg {
+  color: #f66a6a;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  /* background-color: #2974e5; */
+  height: 30px;
+}
