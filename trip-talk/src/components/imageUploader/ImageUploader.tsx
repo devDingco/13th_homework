@@ -1,5 +1,5 @@
 import add from '../../assets/svgs/add.svg'
-import styles from "./imageUploader.module.css";
+import styles from "./ImageUploader.module.css";
 
 export default function ImageUploader() {
   return (

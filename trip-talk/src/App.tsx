@@ -1,5 +1,4 @@
-import "./App.css";
-import CreatePost from "./components/createPost/CreatePost";
+import CreatePost from "./components/CreatePost/CreatePost";
 
 function App() {
   return (

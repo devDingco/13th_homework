@@ -12,15 +12,15 @@ form > div {
 }
 
 .author_info_wrapper > * {
-  width: 50%;
+  flex: 1;
 }
 
 .title_wrapper {
-  @apply flex-col gap-2;
+  @apply flex-col;
 }
 
 .content_wrapper {
-  @apply flex-col gap-2;
+  @apply flex-col;
 }
 
 .content_wrapper > div {
@@ -74,4 +74,9 @@ form > div {
 
 .button_wrapper {
   @apply flex flex-row gap-4 items-center justify-end border-none;
+}
+
+.required_field {
+  @apply flex pt-2 text-base font-medium;
+  color: #F66A6A;
 }
