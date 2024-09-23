@@ -45,3 +45,5 @@ const ImgUpload = () => {
         </>
     )
 };
+
+export default ImgUpload;
