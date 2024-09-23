@@ -11,66 +11,75 @@ const CreatePostPage = () => {
   const [writer, setWriter] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [title, setTitle] = React.useState("")
-  const [contents, setContents] = React.useState("")
+  const [content, setContent] = React.useState("")
 
   const errorMessage = "필수 입력 사항입니다."
   const [writerErrorMessage, setWriterErrorMessage] = React.useState(errorMessage)
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState(errorMessage)
   const [titleErrorMessage, setTitleErrorMessage] = React.useState(errorMessage)
-  const [contentsErrorMessage, setContentsErrorMessage] = React.useState(errorMessage)
+  const [contentErrorMessage, setContentErrorMessage] = React.useState(errorMessage)
+
+  const [isActive, setIsActive] = React.useState(false)
 
   function onChangeWriter(event) {
-    console.log(event.target.value)
+    const value = event.target.value
     setWriter(event.target.value)
-    checkInputText()
+
+    if (value && !checkSpace(value)) {
+        setWriterErrorMessage("")
+    } else {
+        setWriterErrorMessage(errorMessage)
+    }
+
+    if (value && password && title && content) return setIsActive(true)
+    return setIsActive(false)
   }
   
   function onChangePassword(event) {
+    const value = event.target.value
     setPassword(event.target.value)
-    const result = event.target.value
-    checkInputText(result)
-    console.log(password === "")
-    console.log(password.length)
+
+    if (value && !checkSpace(value)) {
+        setPasswordErrorMessage("")
+    } else {
+        setPasswordErrorMessage(errorMessage)
+    }
+
+    if (writer && value && title && content) return setIsActive(true)
+    return setIsActive(false)
   }
   
   function onChangeTitle(event) {
-    checkInputText()
+    const value = event.target.value
     setTitle(event.target.value)
+
+    if (value && !checkSpace(value)) {
+        setTitleErrorMessage("")
+    } else {
+        setTitleErrorMessage(errorMessage)
+    }
+
+    if (writer && password && value && content) return setIsActive(true)
+    return setIsActive(false)
   }
   
-  function onChangeContents(event) {
-    checkInputText()
-    setContents(event.target.value)
+  function onChangeContent(event) {
+    const value = event.target.value
+    setContent(event.target.value)
+
+    if (value && !checkSpace(value)) {
+        setContentErrorMessage("")
+    } else {
+        setContentErrorMessage(errorMessage)
+    }
+
+    if (writer && password &&  title && value) return setIsActive(true)
+    return setIsActive(false)
   }
 
-  function checkInputText() {
-    if (writer === "") {
-        setWriterErrorMessage(errorMessage)
-    }  else {
-        setWriterErrorMessage("")
-    }
-
-    if (password === "") {
-        setPasswordErrorMessage(errorMessage)
-    } else {
-        setPasswordErrorMessage("")
-    }
-
-    if (title === "") {
-        setTitleErrorMessage(errorMessage)
-    } else {
-        setTitleErrorMessage("")
-    }
-
-    if (contents === "") {
-        setContentsErrorMessage(errorMessage)
-    } else {
-        setContentsErrorMessage("")
-    }
-
-    if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-      alert("모든 항목의 입력이 완료되어, 게시글 등록이 가능합니다.")
-    } 
+  function checkSpace(str) {
+    if (str.search(/\s/) != -1) return true
+    return false
   }
 
   return (
@@ -84,7 +93,7 @@ const CreatePostPage = () => {
               <Divider />
               <BasicInputForm isRequired={true} title="제목" placeholder={titleDescription} onChangeHandler={onChangeTitle} errorMessage={titleErrorMessage}/>
               <Divider />
-              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContents} errorMessage={contentsErrorMessage}/>
+              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContent} errorMessage={contentErrorMessage}/>
               <AddressInputForm />
               <Divider />
               <BasicInputForm isRequired={false} title="유튜브 링크" placeholder={youtubeLinkDescription}/>
@@ -190,7 +199,6 @@ const UploadButton = () => {
       </div>
   );
 }
-
 
 const RegisterForm = () => {
     return (
