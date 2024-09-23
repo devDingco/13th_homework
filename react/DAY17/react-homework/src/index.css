@@ -1,0 +1,15 @@
+* {
+  padding: unset;
+  margin: unset;
+  box-sizing: border-box;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
