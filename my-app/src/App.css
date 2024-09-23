@@ -41,6 +41,13 @@ main {
   color: #f66a6a;
   font-weight: 500;
 }
+.경고글 {
+  color: #f66a6a;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
 
 .게시물등록섹션 {
   width: 1000px;
@@ -79,6 +86,9 @@ main {
 
 .제목입력하는곳 {
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .풀인풋 {
@@ -92,10 +102,12 @@ main {
 
 .내용입력하는곳 {
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .많이큰인풋 {
-  margin-top: 8px;
   display: flex;
   width: 100%;
   height: 336px;
@@ -107,13 +119,15 @@ main {
 }
 
 .주소입력하는곳 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 40px 0;
 }
 
 .우편번호입력하는곳 {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
 }
 
 .우편번호인풋 {
@@ -137,6 +151,9 @@ main {
 }
 
 .링크입력하는곳 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 40px 0;
 }
 
