@@ -30,7 +30,16 @@ export class TransformInterceptor<T>
 
         return next.handle().pipe(
             map((data) => {
-                if (data && typeof data === 'object' && data._id) {
+                if (data._id) {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    const { _id, ...rest } = data;
+                    return { message, statusCode, data: rest };
+                } else if (data[0]._id) {
+                    data = data.map((array) => {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { _id, ...rest } = array;
+                        return rest;
+                    });
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const { _id, ...rest } = data;
                     return { message, statusCode, data: rest };
