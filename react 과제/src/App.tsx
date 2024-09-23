@@ -1,16 +1,16 @@
 import "./App.css";
-import "normalize.css";
-import React from "react";
-import Home from "./pages/home";
-import Write from "./pages/write";
-import { Routes, Route } from "react-router-dom";
-
+import Main from "./layout/main";
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/write" element={<Write />} />
-    </Routes>
+    <Main>
+      <h1 className="text-3xl text-blue-500">Home</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
+        possimus architecto quidem ut officia quod maxime deleniti minus eum
+        numquam at dolorum animi debitis, quo quaerat molestiae quas velit
+        nobis?
+      </p>
+    </Main>
   );
 }
 
