@@ -1,4 +1,4 @@
-import Icon from "./iconFactory";
+import Icon from "components/iconFactory";
 import { forwardRef } from "react";
 
 type InputProps = {
@@ -10,6 +10,7 @@ type InputProps = {
   required?: boolean;
   uploadcount?: number;
   placeholder?: string;
+  value?: string;
 };
 
 type inputRef = HTMLInputElement;
