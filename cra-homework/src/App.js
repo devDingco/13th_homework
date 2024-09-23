@@ -17,7 +17,8 @@ const App = () => {
 
   // onChange
   const onChangeWriter = (event) => {
-    setWriter(event.target.value);
+    const checkWriter = event.target.value;
+    setWriter(checkWriter);
   };
   const onChangePw = (event) => {
     setPw(event.target.value);
@@ -30,16 +31,28 @@ const App = () => {
   };
   // onClick
   const onClickSignup = () => {
-    console.log("writer:", writer, "pw:", pw, "title:", title, "content:", content);
+    // 등록버튼 클릭시 입력창이 비어있는지 안 비어있는지 확인 후 에러메세지
     if (writer === "") {
       setErrorWriter("작성자명을 입력해 주세요!");
-    } else if (pw === "") {
+    } else if (writer !== "") {
+      setErrorWriter("");
+    }
+    if (pw === "") {
       setErrorPw("비밀번호를 입력해 주세요!");
-    } else if (title === "") {
+    } else if (pw !== "") {
+      setErrorPw("");
+    }
+    if (title === "") {
       setErrorTitle("제목을 입력해 주세요!");
-    } else if (content === "") {
+    } else if (title !== "") {
+      setErrorTitle("");
+    }
+    if (content === "") {
       setErrorContent("내용을 입력해 주세요!");
-    } else if (writer !== "" && pw !== "" && title !== "" && content !== "") {
+    } else if (content !== "") {
+      setErrorContent("");
+    }
+    if (writer !== "" && pw !== "" && title !== "" && content !== "") {
       alert("게시글 등록이 가능한 상태입니다!");
     }
   };
@@ -48,6 +61,10 @@ const App = () => {
   const saveImgFile = (e) => {
     const uploadedFiles = Array.from(e.target.files);
     const newFilePreviews = [];
+
+    if (files.length + uploadedFiles.length > 5) {
+      alert("최대 5개의 이미지만 업로드 할 수 있습니다.");
+    }
 
     uploadedFiles.forEach((file) => {
       const reader = new FileReader();
@@ -67,6 +84,7 @@ const App = () => {
     <div className="all-container">
       <div className="container">
         <div className="title">게시글 등록</div>
+        <img src="../public/logo192.png" alt="ss" />
 
         <div className="writer-info">
           <div className="writer">
@@ -143,9 +161,7 @@ const App = () => {
         </div>
         <div className="btn-area">
           <button>취소</button>
-          <button onClick={onClickSignup} disabled={!(writer && title && pw && content)}>
-            등록하기
-          </button>
+          <button onClick={onClickSignup}>등록하기</button>
         </div>
       </div>
     </div>
