@@ -83,6 +83,27 @@ const BoardsNew = () => {
     return false
   }
 
+  const RegisterForm = () => {
+    const disabledSubmitButtonStyle = {
+        backgroundColor: "#C7C7C7",
+        color: "#E4E4E4",
+        disabled: "true"
+    }
+
+    const submitButtonStyle = {
+        backgroundColor: "#2974E5",
+        color: "#FFFFFF",
+        disabled: "false"
+    }
+
+    return (
+        <>
+            <button className="cancelButton">취소</button>
+            <button className="submitButton" style={isActive ? submitButtonStyle : disabledSubmitButtonStyle}>등록하기</button>
+        </>
+    );
+  }
+
   return (
       <div className="rootContainer">
           <header>게시물 등록</header>
@@ -201,11 +222,3 @@ const UploadButton = () => {
   );
 }
 
-const RegisterForm = () => {
-    return (
-        <>
-            <button className="cancelButton">취소</button>
-            <button className="submitButton">등록하기</button>
-        </>
-    );
-  }
