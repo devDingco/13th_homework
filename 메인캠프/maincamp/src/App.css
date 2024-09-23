@@ -141,3 +141,10 @@ button {
   background: #2974e5;
   color: white;
 }
+
+.errorMsg {
+  display: none;
+  color: red;
+  font-size: 0.7rem;
+  line-height: 1.5rem;
+}
