@@ -54,6 +54,10 @@ textarea::placeholder {
   gap: 40px;
 }
 
+.error-msg {
+  color: #F66A6A;
+}
+
 /* 공통 - 레이블과 인풋 그룹 */
 .input-group {
   display: flex;
