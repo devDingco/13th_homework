@@ -4,11 +4,13 @@ import "normalize.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Write from "./pages/write";
+import BoardNew from "./pages/board/boardNew";
+import BoardDetail from "./pages/board/boardDetail";
 
 const mainPageList = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/write", element: <Write /> },
+  { path: "/board/detail", element: <BoardDetail /> },
+  { path: "/board/new", element: <BoardNew /> },
 ]);
 
 const root = ReactDOM.createRoot(
