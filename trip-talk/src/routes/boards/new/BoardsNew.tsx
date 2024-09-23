@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Button from "../Button/Button";
-import ImageUploader from "../ImageUploader/ImageUploader";
-import Input from "../input/Input";
-import styles from "./CreatePost.module.css";
+import Button from "../../../components/Button/Button";
+import ImageUploader from "../../../components/ImageUploader/ImageUploader";
+import Input from "../../../components/input/Input";
+import styles from "./Boards.module.css";
 
-export default function CreatePost() {
+export default function BoardsNew() {
   const [authorName, setAuthorName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -35,6 +35,7 @@ export default function CreatePost() {
   };
 
   if (authorName && password && title && content) {
+    document.getElementById("")
     alert("게시글 등록이 가능한 상태입니다!");
   }
 
