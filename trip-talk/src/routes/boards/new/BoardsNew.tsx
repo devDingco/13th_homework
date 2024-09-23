@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../../../components/Button/Button";
 import ImageUploader from "../../../components/ImageUploader/ImageUploader";
 import Input from "../../../components/input/Input";
-import styles from "./Boards.module.css";
+import styles from "./BoardsNew.module.css";
 
 export default function BoardsNew() {
   const [authorName, setAuthorName] = useState<string>("");
