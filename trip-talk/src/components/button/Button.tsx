@@ -6,6 +6,8 @@ type ButtonProps = {
   disabled?: boolean;
   children: ReactNode;
   color: "blue" | "gray" | "white";
+  src?: string;
+  alt?: string;
 };
 
 export default function Button({
@@ -13,6 +15,8 @@ export default function Button({
   disabled,
   children,
   color,
+  src,
+  alt,
 }: ButtonProps) {
   const colorVariants = {
     blue: "bg-blue text-white",
@@ -27,6 +31,7 @@ export default function Button({
         disabled={disabled}
         className={`${styles.button} ${colorVariants[color]}`}
       >
+        {src && <img src={src} alt={alt} />}
         {children}
       </button>
     </>
