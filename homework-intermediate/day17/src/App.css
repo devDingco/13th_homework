@@ -1,0 +1,239 @@
+.post_form {
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+
+  max-width: 80rem;
+  border: 0.125rem solid pink;
+}
+hr {
+  width: 100%;
+  height: 0.0625rem;
+
+  border: 0;
+  background: #d4d3d3;
+}
+header {
+  width: 100%;
+  /* border: 0.125rem solid black; */
+}
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  /* border: 0.125rem solid black; */
+}
+
+.작성자_비밀번호__영역 {
+  display: flex;
+  gap: 2.5rem;
+
+  width: 100%;
+}
+.작성자_비밀번호__입력영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 50%;
+}
+.작성자_비밀번호__입력영역 label::after {
+  content: '*';
+  color: red;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+.작성자_비밀번호__입력영역 input {
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+.제목__영역 {
+  width: 100%;
+}
+.제목__입력영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+}
+.제목__입력영역 label::after {
+  content: '*';
+  color: red;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+.제목__입력영역 input {
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+.내용__영역 {
+  width: 100%;
+}
+.내용__입력영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+}
+.내용__입력영역 label::after {
+  content: '*';
+  color: red;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+.내용__입력영역 textarea {
+  resize: none;
+  width: 100%;
+  height: 21rem;
+  padding: 0.75rem 1rem;
+
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+/* 주소 입력 영역 전체 스타일 */
+.주소__영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  padding: 1rem 0;
+}
+.우편번호__입력영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.우편번호__영역 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.우편번호__입력 {
+  width: 5rem;
+  padding: 0.5rem;
+
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #f5f5f5;
+
+  text-align: center;
+  font-size: 1rem;
+}
+.우편번호__버튼 {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.버튼__라벨 {
+  font-size: 0.9rem;
+}
+
+/* 주소 입력 필드 간격 */
+.주소__입력영역 input,
+.상세주소__입력영역 input {
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+.유튜브링크__영역 {
+  width: 100%;
+}
+.유튜브링크__입력영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+}
+.유튜브링크__입력영역 input {
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+.사진첨부__영역 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.사진__입력영역 {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+.사진업로드_예시본 {
+  width: 10rem;
+  height: 10rem;
+  background-image: url('https://placehold.co/160x160');
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  width: 100%;
+  /* border: 0.125rem solid black; */
+}
+.취소__버튼 {
+  width: 4.5rem;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer;
+}
+.등록하기__버튼 {
+  width: 6.5rem;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+
+  border-radius: 0.5rem;
+  border: none;
+  background: #2974e5;
+  cursor: pointer;
+}
