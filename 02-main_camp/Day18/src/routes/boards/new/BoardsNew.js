@@ -195,7 +195,7 @@ const TextInput = (props) => {
   return <input className="inputText" type="text" placeholder={props.placeholder} onChange={props.onChangeHandler} />;
 }
 
-const Divider = () => {
+export const Divider = () => {
   return <div className="divider"></div>;
 }
 
@@ -213,7 +213,7 @@ const UploadButton = () => {
           <input type="file" id="uploadImage" />
           <div className="uploadDescription">
               <label htmlFor="uploadImage" id="uploadLabel">
-                  <img src="../public/add.png" />
+                  <img src="/assets/add.png" />
                   클릭해서 사진 업로드
               </label>
           </div>
