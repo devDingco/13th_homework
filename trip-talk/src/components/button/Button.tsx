@@ -5,7 +5,7 @@ type ButtonProps = {
   type?: "submit";
   disabled?: boolean;
   children: ReactNode;
-  color: "blue" | "white";
+  color: "blue" | "gray" | "white";
 };
 
 export default function Button({
@@ -15,7 +15,8 @@ export default function Button({
   color,
 }: ButtonProps) {
   const colorVariants = {
-    blue: "bg-btn-blue text-white",
+    blue: "bg-blue text-white",
+    gray: "bg-gray text-white",
     white: "bg-white text-black border-black",
   };
 

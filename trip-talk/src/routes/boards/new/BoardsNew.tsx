@@ -146,7 +146,7 @@ export default function BoardsNew() {
           <Button
             type="submit"
             disabled={!(authorName && password && title && content)}
-            color="blue"
+            color={!(authorName && password && title && content) ? "gray" : "blue"}
           >
             등록하기
           </Button>
