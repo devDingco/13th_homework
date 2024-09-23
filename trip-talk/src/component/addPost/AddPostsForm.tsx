@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FormEvent, ReactNode, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
@@ -15,12 +21,14 @@ const AddPostsForm = () => {
     userAdressNum: null,
     youtubeLink: null,
   });
+
   const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
     username: null,
     userpw: null,
     userTitle: null,
     usercontent: null,
   });
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
   const onPostFormChange = (
     name: string,
@@ -33,6 +41,7 @@ const AddPostsForm = () => {
       };
     });
   };
+
   const onAdressNumButtonClick = () => {};
 
   const onAddPostsButton = (e: FormEvent<HTMLFormElement>) => {
@@ -42,18 +51,25 @@ const AddPostsForm = () => {
       postData.userpw &&
       postData.userTitle &&
       postData.usercontent &&
-      alert('게시글 등록이 가능한 상태입니다!');
-    setRequiredMessage((prev) => {
-      return {
-        ...prev,
-        username: postData.username ? null : validMessage,
-        userpw: postData.userpw ? null : validMessage,
-        userTitle: postData.userTitle ? null : validMessage,
-        usercontent: postData.usercontent ? null : validMessage,
-      };
-    });
+      setRequiredMessage((prev) => {
+        return {
+          ...prev,
+          username: postData.username ? null : validMessage,
+          userpw: postData.userpw ? null : validMessage,
+          userTitle: postData.userTitle ? null : validMessage,
+          usercontent: postData.usercontent ? null : validMessage,
+        };
+      });
   };
-  console.log(postData);
+
+  useEffect(() => {
+    postData.username &&
+    postData.userpw &&
+    postData.userTitle &&
+    postData.usercontent
+      ? setSubmitButtonDisabled(false)
+      : setSubmitButtonDisabled(true);
+  }, [postData]);
 
   return (
     <form className={s.formS} onSubmit={(event) => onAddPostsButton(event)}>
@@ -155,7 +171,7 @@ const AddPostsForm = () => {
         <Button type="button" style="default">
           취소
         </Button>
-        <Button type="submit" style="primary">
+        <Button type="submit" style="primary" disabled={submitButtonDisabled}>
           등록하기
         </Button>
       </div>

@@ -1,10 +1,9 @@
 import React, { ChangeEvent } from 'react';
 import s from './Input.module.css';
 
-interface InputPropsType {
+interface InputPropsType<RequiredType = undefined> {
   type: React.HTMLInputTypeAttribute;
-  id: 'username' | 'userTitle' | 'userpw' | 'usercontent';
-
+  id: RequiredType extends undefined ? string : keyof RequiredType;
   value?: string;
   maxLength?: number;
   placeholder?: string;
@@ -17,14 +16,21 @@ interface InputPropsType {
 }
 
 const inputConfig = {
-  small: 'px-4 py-3 w-[50px] box-content',
+  small: 'w-[90px]',
   medium: 'px-4 py-3',
   large: 'px-4 py-3',
 };
 
-const Input = ({ ...props }: InputPropsType) => {
+const Input = <
+  RequiredType extends Record<string, any> | undefined = undefined,
+>({
+  ...props
+}: InputPropsType<RequiredType>) => {
   return (
-    <p className={`s.inputWrap ${props.size === 'small' ? 'w-fit' : 'w-full'}`}>
+    <div
+      className={`s.inputWrap ${
+        props.size === 'small' ? inputConfig.small : 'w-full'
+      }`}>
       <span>
         {props.label && <label htmlFor={props.id}>{props.label}</label>}
         {props.required && <b className={`text-[#f00]`}>*</b>}
@@ -40,7 +46,7 @@ const Input = ({ ...props }: InputPropsType) => {
       <p className="text-[#f00]">
         {props.required && props.required[props.id]}
       </p>
-    </p>
+    </div>
   );
 };
 
