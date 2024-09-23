@@ -4,7 +4,6 @@
   padding: 0;
 }
 
-
 body {
   display: flex;
   flex-direction: column;
@@ -22,7 +21,6 @@ body {
 .css_header {
     width: 1280px;
     height: 72px;
-
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
@@ -32,23 +30,32 @@ body {
     width: 1280px;
     height: 80px;
     gap: 16px;
-
-  
 }
 
 .css_user {
     width: 1280px;
     height: 24px;
     gap: 54px;
+    float: right;
     display: flex;
-
+    margin-bottom: 24px;
 }
 
 .css_name {
-    width: 65px;
+    width: 80px;
     height: 24px;
     gap: 4px;
-  
+    display: flex; 
+   
+}
+
+.css_profileimage {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #E4E4E4;
+    border-radius: 100px;
 }
 
 .css_date {
@@ -56,20 +63,35 @@ body {
     height: 24px;
     gap: 8px;
     text-align: right;
-    margin-left: 50px;
-
 }
 
-.css_line {
-    display: flex;
-    margin-bottom: 60px;
+hr {
+    margin-bottom: 20px;
+   
+}
+
+.css_side {
     width: 1280px;
-    border: 1px solid red;
+    height: 24px;
+    gap: 10px;
+    display: flex;
+    justify-content: right;
+    margin-bottom: 100px;
 }
+
+.css_clip {
+    width: 19px;
+}
+
+.css_location {
+    width: 24px;
+}
+
 
 .css_image {
     width: 400px;
     height: 531px;
+    margin-top: 40px;
 }
 
 .css_text {
@@ -78,7 +100,10 @@ body {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    white-space: pre-wrap;
+    gap: 24px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    
 }
 
 .css_bottomimage {
@@ -90,13 +115,31 @@ body {
     justify-content: center;
     background-color: #F2F2F2;
     display: flex;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
-.css_like {
-    text-align: center;
+.css_heart {
     width: 1280px;
     height: 48px;
     gap: 24px;
+    display: flex;
+    justify-content: center;
+}
+.css_hate {
+    width: 19px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.css_like {
+    width: 19px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: red;
 }
 
 .css_button {
@@ -105,6 +148,7 @@ body {
     gap: 24px;
     display: flex;
     justify-content: center;
+    margin-top: 40px;
 }
 
 .css_list {
