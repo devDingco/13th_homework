@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import ImgUploadBtn from "./components/ImgUploadBtn";
-import "./App.css";
+import React, { useState } from "react";
+import ImgUploadBtn from "../../../components/ImgUploadBtn";
+import "../../../BoardsNew.css";
+import { Link } from "react-router-dom";
 
-const App = () => {
-  //입력폼
+const BoardsNew = () => {
+  //입력창
   const [formData, setFormData] = useState({
     username: "",
     pwd: "",
@@ -11,7 +12,7 @@ const App = () => {
     content: "",
   });
 
-  //필수사항에러
+  //에러메시지
   const [reqerrors, SetReqErrors] = useState({
     username: "",
     pwd: "",
@@ -19,18 +20,29 @@ const App = () => {
     content: "",
   });
 
+  //버튼 활성화 여부
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    //setFormData의 비동기 문제 해결: updatedFormData
+    const updatedFormData = {
+      ...formData,
       [name]: value,
-    }));
+    };
+    setFormData(updatedFormData);
+
     SetReqErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
 
-    console.log("1. ", formData);
+    // 모든 필드가 채워졌는지 확인
+    const allFieldsFilled = Object.values(updatedFormData).every(
+      (field) => field.trim() !== ""
+    );
+    //버튼 활성화 여부
+    setIsFormValid(allFieldsFilled);
   };
 
   const validateForm = () => {
@@ -45,20 +57,14 @@ const App = () => {
     });
 
     SetReqErrors(newErrors);
-    console.log("Validation errors:", newErrors);
     return isValid;
   };
 
   const onClickAdd = () => {
-    console.log("2. ", formData);
     if (validateForm()) {
-      alert("게시글 등록이 가능한 상태입니다!");
+      alert("게시글 등록이 완료되었습니다!");
     }
   };
-
-  useEffect(() => {
-    console.log("Updated formData:", formData);
-  }, [formData]);
 
   return (
     <div className="게시물등록전체상자">
@@ -169,11 +175,17 @@ const App = () => {
         {/* 취소, 등록하기 버튼 부분 */}
         <div className="취소등록버튼상자">
           <button>취소</button>
-          <button onClick={onClickAdd}>등록하기</button>
+          <button
+            onClick={onClickAdd}
+            disabled={!isFormValid}
+            className={`등록하기버튼 ${isFormValid ? "active" : "disabled"}`}
+          >
+            <Link to={"/boards/detail"}>등록하기</Link>
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default App;
+export default BoardsNew;
