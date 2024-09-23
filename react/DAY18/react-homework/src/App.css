@@ -97,7 +97,7 @@ textarea {
   border: 1px solid var(--gray-b);
 }
 
-.error-messge {
+.error-message {
   color: var(--red);
 }
 

@@ -64,18 +64,18 @@ const BoardsNew = () => {
             <div className='required flex col gap-8'>
               <label htmlFor='post-password-input'>비밀번호</label>
               <input type='password' id='post-password' onChange={(event) => onChangePassword(event)} placeholder='비밀번호를 입력해 주세요.' />
-              <p className='error-messge'>{errorPassword}</p>
+              <p className='error-message'>{errorPassword}</p>
             </div>
           </div>
           <div className='border-b required flex col gap-8'>
             <label htmlFor='post-title'>제목</label>
             <input type='text' id='post-title' onChange={(event) => onChangeTitle(event)} placeholder='제목을 입력해 주세요.' />
-            <p className='error-messge'>{errorTitle}</p>
+            <p className='error-message'>{errorTitle}</p>
           </div>
           <div className='required flex col gap-8'>
             <label htmlFor='post-content'>내용</label>
             <textarea id='post-content' onChange={(event) => onChangeContent(event)} placeholder='내용을 입력해 주세요.' />
-            <p className='error-messge'>{errorContent}</p>
+            <p className='error-message'>{errorContent}</p>
           </div>
           <div className='border-b flex col gap-8'>
             <label htmlFor='post-address'>주소</label>
