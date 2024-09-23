@@ -1,7 +1,8 @@
 import React from 'react';
-import './CreatePostPage.css';
+import { Link } from 'react-router-dom'
+import './BoardsNew.css';
 
-const CreatePostPage = () => {
+const BoardsNew = () => {
   const writerDescription = "작성자명을 입력해 주세요."
   const passwordDescription = "비밀번호를 입력해 주세요."
   const titleDescription = "제목을 입력해 주세요."
@@ -107,7 +108,7 @@ const CreatePostPage = () => {
   );
 }
 
-export default CreatePostPage;
+export default BoardsNew;
 
 const BasicInputForm = (props) => {
   if (props.isRequired) {

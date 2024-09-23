@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, Router, RouterProvider } from 'react-router-dom'
+import BoardsNew from './routes/boards/new/BoardsNew';
 import './index.css';
-import CreatePostPage from './CreatePostPage';
+
+const routes = createBrowserRouter([
+    {path: "/boards/new", element: <BoardsNew />},
+    {path: "/boards/detail", element: <BoardsDetail />}
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <CreatePostPage />
+    <RouterProvider router={routes} />
 );
 
 // If you want to start measuring performance in your app, pass a function
