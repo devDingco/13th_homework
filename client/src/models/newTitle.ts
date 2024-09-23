@@ -9,7 +9,7 @@ export enum ETitle {
     Content = 'Content',
     Address = 'Address',
     DetailAddress = 'DetailAddress',
-    YoutubeLink = 'YoutubeLink',
+    YoutubeUrl = 'YoutubeUrl',
 }
 
 export enum ENewTitleProps {
@@ -19,7 +19,7 @@ export enum ENewTitleProps {
     Content = '내용',
     Address = '주소',
     DetailAddress = '상세 주소',
-    YoutubeLink = '유튜브 링크',
+    YoutubeUrl = '유튜브 링크',
 }
 
 export const ENewInputPlaceHolder: Record<ETitle, string> = {
@@ -29,7 +29,7 @@ export const ENewInputPlaceHolder: Record<ETitle, string> = {
     [ETitle.Content]: '내용을 입력해주세요.',
     [ETitle.Address]: '주소를 입력해주세요.',
     [ETitle.DetailAddress]: '상세주소',
-    [ETitle.YoutubeLink]: '링크를 입력해주세요.',
+    [ETitle.YoutubeUrl]: '링크를 입력해주세요.',
 };
 
 export interface ITitle {

@@ -21,7 +21,7 @@ export const boardObject: IBoardType[] = [
         content:
             '여여여영희sfdmgksdkgfmskldmfg;fsmdlkgmfskldmglksdmklgmsdlkgmflks',
         createdAt: '2024.09.20',
-        youtubeLink: 'gSSsZReIFRk',
+        youtubeUrl: 'gSSsZReIFRk',
         hate: 21,
         like: 12,
     },
@@ -32,7 +32,7 @@ export const boardObject: IBoardType[] = [
         createdAt: '2024.09.20',
         content: '맹규sfdmgksdkgfmskldmfg;fsmdlkgmfskldmglksdmklgmsdlkgmflks',
         imageUrl: ['/Images/img1.png', '/Images/img1.png', '/Images/img1.png'],
-        youtubeLink: 'gSSsZReIFRk',
+        youtubeUrl: 'gSSsZReIFRk',
         hate: 24,
         like: 13,
     },

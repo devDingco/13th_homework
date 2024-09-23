@@ -19,7 +19,6 @@ const config: Config = {
                 pretendard: ['Pretendard', 'sans-serif'],
             },
             typography: {
-                // 예시: 'heading'이라는 이름의 Typography 세트
                 b_28_36: {
                     css: {
                         fontFamily: ['Pretendard', 'sans-serif'],
