@@ -1,11 +1,26 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from 'react';
 import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
 
 const AddPostsForm = () => {
-  const [postData, setPostData] = useState({});
+  const [postData, setPostData] = useState<PostsType>({
+    username: '',
+    userpw: '',
+    userTitle: '',
+    usercontent: '',
+    userAdress: null,
+    userAdressDetail: null,
+    userAdressNum: null,
+    youtubeLink: null,
+  });
+  const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
+    username: null,
+    userpw: null,
+    userTitle: null,
+    usercontent: null,
+  });
 
   const onPostFormChange = (
     name: string,
@@ -19,17 +34,36 @@ const AddPostsForm = () => {
     });
   };
   const onAdressNumButtonClick = () => {};
+
+  const onAddPostsButton = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const validMessage = '필수입력 사항입니다.';
+    postData.username &&
+      postData.userpw &&
+      postData.userTitle &&
+      postData.usercontent &&
+      alert('게시글 등록이 가능한 상태입니다!');
+    setRequiredMessage((prev) => {
+      return {
+        ...prev,
+        username: postData.username ? null : validMessage,
+        userpw: postData.userpw ? null : validMessage,
+        userTitle: postData.userTitle ? null : validMessage,
+        usercontent: postData.usercontent ? null : validMessage,
+      };
+    });
+  };
   console.log(postData);
 
   return (
-    <form className={s.formS}>
+    <form className={s.formS} onSubmit={(event) => onAddPostsButton(event)}>
       <div className={s.flexBox}>
         <Input
           type="text"
           placeholder="작성자 명을 입력해 주세요"
           label="작성자"
           id="username"
-          required={true}
+          required={requiredMessage}
           onChangeFnc={onPostFormChange}
         />
         <Input
@@ -37,7 +71,7 @@ const AddPostsForm = () => {
           placeholder="비밀번호를 입력해 주세요"
           label="비밀번호"
           id="userpw"
-          required={true}
+          required={requiredMessage}
           onChangeFnc={onPostFormChange}
         />
       </div>
@@ -47,7 +81,7 @@ const AddPostsForm = () => {
         placeholder="제목을 입력해 주세요"
         label="제목"
         id="userTitle"
-        required={true}
+        required={requiredMessage}
         onChangeFnc={onPostFormChange}
       />
       <div className={s.lineBox}></div>
@@ -55,7 +89,7 @@ const AddPostsForm = () => {
         placeholder="내용을 입력해주세요."
         label="내용"
         id="usercontent"
-        required={true}
+        required={requiredMessage}
         onChangeFnc={onPostFormChange}
       />
       <div className={s.columnBox}>
@@ -66,7 +100,6 @@ const AddPostsForm = () => {
             placeholder="01234"
             label="주소"
             id="userAdressNum"
-            required={false}
             onChangeFnc={onPostFormChange}
             size="small"
           />
@@ -81,14 +114,12 @@ const AddPostsForm = () => {
           type="text"
           placeholder="주소를 입력해 주세요."
           id="userAdress"
-          required={false}
           onChangeFnc={onPostFormChange}
         />
         <Input
           type="text"
           placeholder="상세주소"
           id="userAdressDetail"
-          required={false}
           onChangeFnc={onPostFormChange}
         />
       </div>
@@ -97,7 +128,6 @@ const AddPostsForm = () => {
         type="text"
         placeholder="링크를 입력해 주세요."
         id="youtubeLink"
-        required={false}
         onChangeFnc={onPostFormChange}
       />
       <div className={s.flexBox}>
@@ -106,21 +136,18 @@ const AddPostsForm = () => {
           type="file"
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
-          required={false}
           onChangeFnc={onPostFormChange}
         />
         <Input
           type="file"
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
-          required={false}
           onChangeFnc={onPostFormChange}
         />
         <Input
           type="file"
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
-          required={false}
           onChangeFnc={onPostFormChange}
         />
       </div>
