@@ -1,7 +1,20 @@
-import Icon from "../components/iconFactory";
+import Icon from "./iconFactory";
 import { forwardRef } from "react";
 
-const Input = forwardRef((props: any, ref) => {
+type InputProps = {
+  id?: string;
+  title?: string;
+  errormessage?: string;
+  type?: string;
+  accept?: string;
+  required?: boolean;
+  uploadcount?: number;
+  placeholder?: string;
+};
+
+type inputRef = HTMLInputElement;
+
+const Input = forwardRef<inputRef, InputProps>((props, ref) => {
   let { title, errormessage, ...rest } = props;
 
   if (props.type === "file" && props.accept === "image/*") {
