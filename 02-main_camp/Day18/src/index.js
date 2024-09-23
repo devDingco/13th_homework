@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Router, RouterProvider } from 'react-router-dom'
 import BoardsNew from './routes/boards/new/BoardsNew';
+import BoardsDetail from './routes/boards/new/BoardsDetail';
 import './index.css';
 
 const routes = createBrowserRouter([
