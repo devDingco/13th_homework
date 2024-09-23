@@ -13,24 +13,67 @@ const CreatePostPage = () => {
   const [title, setTitle] = React.useState("")
   const [contents, setContents] = React.useState("")
 
-  function onChangeWriter(event) {
-    setWriter(event.target.value)
-    console.log(event.target.value)
-  }
+  const errorMessage = "필수 입력 사항입니다."
+  const [writerErrorMessage, setWriterErrorMessage] = React.useState(errorMessage)
+  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState(errorMessage)
+  const [titleErrorMessage, setTitleErrorMessage] = React.useState(errorMessage)
+  const [contentsErrorMessage, setContentsErrorMessage] = React.useState(errorMessage)
 
+  function onChangeWriter(event) {
+    console.log(event.target.value)
+    setWriter(event.target.value)
+    checkInputText()
+  }
+  
   function onChangePassword(event) {
     setPassword(event.target.value)
-    console.log(event.target.value)
+    const result = event.target.value
+    checkInputText(result)
+    console.log(password === "")
+    console.log(password.length)
   }
-
+  
   function onChangeTitle(event) {
+    checkInputText()
     setTitle(event.target.value)
-    console.log(event.target.value)
+    // console.log(event.target.value)
+    
+  }
+  
+  function onChangeContents(event) {
+    checkInputText()
+    setContents(event.target.value)
+    // console.log(event.target.value)
   }
 
-  function onChangeContents(event) {
-    setContents(event.target.value)
-    console.log(event.target.value)
+  function checkInputText() {
+    if (writer === "") {
+        setWriterErrorMessage(errorMessage)
+    }  else {
+        setWriterErrorMessage("")
+    }
+
+    if (password === "") {
+        setPasswordErrorMessage(errorMessage)
+    } else {
+        setPasswordErrorMessage("")
+    }
+
+    if (title === "") {
+        setTitleErrorMessage(errorMessage)
+    } else {
+        setTitleErrorMessage("")
+    }
+
+    if (contents === "") {
+        setContentsErrorMessage(errorMessage)
+    } else {
+        setContentsErrorMessage("")
+    }
+
+    if (writer !== "" && password !== "" && title !== "" && contents !== "") {
+      alert("모든 항목의 입력이 완료되어, 게시글 등록이 가능합니다.")
+    } 
   }
 
   return (
@@ -38,17 +81,17 @@ const CreatePostPage = () => {
           <header>게시물 등록</header>
           <main>
               <div className="UserInputForm">
-                  <BasicInputForm isRequired={true} title="작성자" placeholder={writerDescription} onChangeHandler={onChangeWriter} />
-                  <BasicInputForm isRequired={true} title="비밀번호" placeholder={passwordDescription} onChangeHandler={onChangePassword} />
+                  <BasicInputForm isRequired={true} title="작성자" placeholder={writerDescription} onChangeHandler={onChangeWriter} errorMessage={writerErrorMessage}/>
+                  <BasicInputForm isRequired={true} title="비밀번호" placeholder={passwordDescription} onChangeHandler={onChangePassword} errorMessage={passwordErrorMessage}/>
               </div>
               <Divider />
-              <BasicInputForm isRequired={true} title="제목" placeholder={titleDescription} onChangeHandler={onChangeTitle} />
+              <BasicInputForm isRequired={true} title="제목" placeholder={titleDescription} onChangeHandler={onChangeTitle} errorMessage={titleErrorMessage}/>
               <Divider />
-              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContents} />
+              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContents} errorMessage={contentsErrorMessage}/>
               <AddressInputForm />
               <Divider />
               <BasicInputForm isRequired={false} title="유튜브 링크" placeholder={youtubeLinkDescription}/>
-              <Divider />
+              <Divider /> 
               <PhotoUploadForm />
           </main>
           <footer>
@@ -65,15 +108,15 @@ const BasicInputForm = (props) => {
       return (
           <div id="PostInputForm" className="inputForm">
               <div className="inputTitle">{props.title}<span className="requiredMark">*</span></div>
-              <TextInput placeholder={props.placeholder} onChangeHandler={props.onChangeHandler}/>
-              <p className="inputError">필수 입력 사항입니다.</p>
+              <TextInput placeholder={props.placeholder} onChangeHandler={props.onChangeHandler} />
+              <p className="inputError">{props.errorMessage}</p>
           </div>
       );        
   } else {
       return (
           <div id="PostInputForm" className="inputForm">
               <div className="inputTitle">{props.title}</div>
-              <TextInput placeholder={props.placeholder}/>
+              <TextInput placeholder={props.placeholder} />
           </div>
       );
   }
@@ -84,7 +127,7 @@ const ContentsInputForm = (props) => {
       <div className="inputForm">
           <div className="inputTitle">{props.title}<span className="requiredMark">*</span></div>
           <textarea className="inputTextArea" placeholder={props.placeholder} onChange={props.onChangeHandler}></textarea>
-          <p className="inputError">필수 입력 사항입니다.</p>
+          <p className="inputError">{props.errorMessage}</p>
       </div>
   );
 }
@@ -121,7 +164,7 @@ const PhotoUploadForm = () => {
 }
 
 const TextInput = (props) => {
-  return <input className="inputText" type="text" placeholder={props.placeholder} onChange={props.onChangeHandler}/>;
+  return <input className="inputText" type="text" placeholder={props.placeholder} onChange={props.onChangeHandler} />;
 }
 
 const Divider = () => {
@@ -151,12 +194,12 @@ const UploadButton = () => {
   );
 }
 
-const RegisterForm = () => {
-  return (
-      <>
-          <button className="cancelButton">취소</button>
-          <button className="submitButton">등록하기</button>
-      </>
-  );
-}
 
+const RegisterForm = () => {
+    return (
+        <>
+            <button className="cancelButton">취소</button>
+            <button className="submitButton">등록하기</button>
+        </>
+    );
+  }
