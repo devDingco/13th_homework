@@ -88,7 +88,16 @@ textarea {
   padding: 0 var(--gap-16);
 }
 
-.button-fill-type {
+.button-common.disabled {
+  cursor: not-allowed;
+}
+
+.button-fill-type.bg-gray {
+  color: var(--gray-100);
+  background-color: var(--gray-300);
+}
+
+.button-fill-type.bg-blue {
   color: var(--gray-w);
   background-color: var(--accent-blue);
 }

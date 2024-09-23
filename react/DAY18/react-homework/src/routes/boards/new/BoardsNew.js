@@ -7,6 +7,7 @@ const BoardsNew = () => {
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
   const [errorWriter, setErrorWriter] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
@@ -16,18 +17,30 @@ const BoardsNew = () => {
   const onChangeWriter = (event) => {
     const value = event.target.value;
     setWriter(value);
+
+    if (event.target.value && password && title && content) return setIsActive(true);
+    setIsActive(false);
   };
   const onChangePassword = (event) => {
     const value = event.target.value;
     setPassword(value);
+
+    if (writer && event.target.value && title && content) return setIsActive(true);
+    setIsActive(false);
   };
   const onChangeTitle = (event) => {
     const value = event.target.value;
     setTitle(value);
+
+    if (writer && password && event.target.value && content) return setIsActive(true);
+    setIsActive(false);
   };
   const onChangeContent = (event) => {
     const value = event.target.value;
     setContent(value);
+
+    if (writer && password && title && event.target.value) return setIsActive(true);
+    setIsActive(false);
   };
 
   const onClickRegister = (event) => {
@@ -113,7 +126,7 @@ const BoardsNew = () => {
             <button type='button' className='button-common button-border-type'>
               취소
             </button>
-            <button className='button-common button-fill-type' onClick={(event) => onClickRegister(event)}>
+            <button onClick={(event) => onClickRegister(event)} className={`button-common button-fill-type ${isActive ? 'bg-blue' : 'bg-gray disabled'}`}>
               등록하기
             </button>
           </div>
