@@ -26,11 +26,7 @@
   }
 
   .toolTip {
-    @apply text-red-500 hidden;
-  }
-
-  .validStyle:invalid ~ .toolTip {
-    @apply block;
+    @apply text-red-500;
   }
 }
 
