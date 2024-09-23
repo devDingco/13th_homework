@@ -39,7 +39,6 @@ const App = () => {
   const[contentblank, setContentBlank] = React.useState("")
 
   const onChangeName = (event) => {
-    console.log(event.target.value)
     setName(event.target.value)
   }
 
@@ -57,20 +56,29 @@ const App = () => {
 
 
   const onClickSignup = (event) => {
+      if(name !== ("") && title !== ("") && content !== ("") && password !== ("")) {
+        alert("게시글 등록 완료")
+        window.location.reload()
+      }
       if(name === ("")) {
         setNameBlank("필수입력 사항입니다.")
-      }  
-      if (password === ("")) {
+      } else {
+        setNameBlank("")
+      }
+      if(password === ("")) {
         setPasswordBlank("필수입력 사항입니다.")
-      }  
+      } else {
+        setPasswordBlank("")
+      }
       if(title === ("")) {
         setTitleBlank("필수입력 사항입니다.")
-      }  
+      } else {
+        setTitleBlank("")
+      }
       if(content === ("")){
         setContentBlank("필수입력 사항입니다.")
-      } 
-      else {
-        alert("게시글 등록 완료")
+      } else {
+        setContentBlank("")
       }
   }
 
