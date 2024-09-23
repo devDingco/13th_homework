@@ -60,7 +60,6 @@ export class BoardService {
                 HttpStatus.NOT_FOUND,
             );
         }
-        return;
     }
 
     async clear(): Promise<void> {

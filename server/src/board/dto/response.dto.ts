@@ -1,14 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ResponseDto<TData> {
-    @ApiProperty()
-    total: number;
+    @ApiProperty({
+        example: 'board 전체를 성공적으로 생성했습니다.',
+    })
+    message: string;
 
-    @ApiProperty()
-    limit: number;
+    @ApiProperty({
+        example: 200,
+    })
+    statusCode: number;
 
-    @ApiProperty()
-    offset: number;
-
-    results: TData[];
+    results: TData;
 }
