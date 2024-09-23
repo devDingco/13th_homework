@@ -193,10 +193,10 @@ form {
   line-height: 24px; /* 133.333% */
 }
 
-.취소등록버튼상자 button:last-child {
+/* .취소등록버튼상자 button:last-child {
   border: none;
   border-radius: 8px;
-  background: var(--n-main, #2974e5);
+  background-color: var(--n-main, #2974e5);
 
   height: 48px;
   padding: 12px 16px;
@@ -204,10 +204,32 @@ form {
   color: #fff;
   text-align: center;
 
-  /* sb_18_24 */
   font-size: 18px;
   font-weight: 600;
-  line-height: 24px; /* 133.333% */
+  line-height: 24px;
+} */
+
+.취소등록버튼상자 .등록하기버튼 {
+  border: none;
+  border-radius: 8px;
+  height: 48px;
+  padding: 12px 16px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.취소등록버튼상자 .등록하기버튼.active {
+  background-color: var(--n-main, #2974e5);
+  cursor: pointer;
+}
+
+.취소등록버튼상자 .등록하기버튼.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .필수입력에러 {
@@ -216,5 +238,5 @@ form {
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.5rem; /* 150% */
+  line-height: 1.5rem;
 }
