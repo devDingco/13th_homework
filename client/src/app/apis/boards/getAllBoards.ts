@@ -3,11 +3,12 @@
 // import { IApiResponseData } from '@/models/apiResponse';
 import { IApiResponseData } from '@/models/apiResponse';
 import { api } from '../config';
+import { IBoardReader } from '@/models/boardReaderResponse';
 
-export default function getAllBoards() {
+export default function getAllBoards(): IBoardReader {
 	let status = 'pending';
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let board: IApiResponseData | any;
+
+	let board: IApiResponseData | Promise<IApiResponseData>;
 	const response = api
 		.get('/board')
 		.then((response) => {

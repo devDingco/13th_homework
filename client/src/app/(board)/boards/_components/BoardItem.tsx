@@ -5,6 +5,7 @@ import { IBoardItem } from '@/models/boardType';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { changeDateToISO } from '@/utils/changeDateToISO';
 
 export default function BoardItem({ board }: IBoardItem) {
 	const router = useRouter();
@@ -14,11 +15,7 @@ export default function BoardItem({ board }: IBoardItem) {
 		router.push(`/boards/${boardId}`);
 	};
 
-	const date = new Date(board.createdAt);
-	const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
-		2,
-		'0',
-	)}.${String(date.getDate()).padStart(2, '0')}`;
+	const formattedDate = changeDateToISO(board.createdAt);
 
 	return (
 		<div

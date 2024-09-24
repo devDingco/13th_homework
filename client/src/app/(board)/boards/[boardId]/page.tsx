@@ -13,23 +13,34 @@ import BoardVideo from './_components/BoardVideo';
 import BoardLikeHate from './_components/BoardLikeHate';
 import { IBoardType } from '@/models/boardType';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import getBoard from '@/app/apis/boards/getBoard';
+import { useEffect } from 'react';
 
 export default function Detail() {
-    const param: Params = useParams();
+	const param: Params = useParams();
 
-    const boardInfor: IBoardType | undefined = boardObject.find(
-        (board) => board.boardId === +param.boardId
-    );
+	useEffect(() => {
+		const getData = async () => {
+			const res = await getBoard(+param.boardId);
+			console.log(res);
+		};
 
-    return (
-        <div className="flex flex-col gap-4">
-            <BoardHeader infor={boardInfor} />
-            <BoardIcon />
-            <BoardImages infor={boardInfor} />
-            <BoardArticle infor={boardInfor} />
-            <BoardVideo infor={boardInfor} />
-            <BoardLikeHate infor={boardInfor} />
-            <BoardFooter />
-        </div>
-    );
+		getData();
+	}, [param]);
+
+	const boardInfor: IBoardType | undefined = boardObject.find(
+		(board) => board.boardId === +param.boardId,
+	);
+
+	return (
+		<div className="flex flex-col gap-4">
+			<BoardHeader infor={boardInfor} />
+			<BoardIcon />
+			<BoardImages infor={boardInfor} />
+			<BoardArticle infor={boardInfor} />
+			<BoardVideo infor={boardInfor} />
+			<BoardLikeHate infor={boardInfor} />
+			<BoardFooter />
+		</div>
+	);
 }

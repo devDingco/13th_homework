@@ -1,14 +1,13 @@
 /** @format */
 
-// import getAllBoards from '@/app/apis/boards/getAllBoards';
-
-// import { useEffect, useState } from 'react';
+import { IBoardReaderResource, IBoardResponse } from '@/models/boardReaderResponse';
 import BoardItem from './BoardItem';
-// import { IApiResponseData } from '@/models/apiResponse';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function BoardItemContainer({ resource }: any) {
-	const boards = resource.read();
+export default function BoardItemContainer({ resource }: IBoardReaderResource) {
+	const boards: IBoardResponse = resource.read();
 
-	return boards.map((board) => <BoardItem key={board.boardId} board={board} />);
+	return (
+		Array.isArray(boards) &&
+		boards.map((board) => <BoardItem key={board.boardId} board={board} />)
+	);
 }
