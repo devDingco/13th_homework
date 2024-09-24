@@ -12,5 +12,7 @@ const 페이지목록 = createBrowserRouter([
   { path: "/boards/detail", element: <BoardsDetail /> },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as ReactDOM.Container
+);
 root.render(<RouterProvider router={페이지목록} />);

@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import ImgUploadBtn from "../../../components/ImgUploadBtn";
 import "../../../BoardsNew.css";
 import { Link } from "react-router-dom";
 
-const BoardsNew = () => {
+interface FormData {
+  username: string;
+  pwd: string;
+  title: string;
+  content: string;
+}
+
+interface FormErrors {
+  username?: string;
+  pwd?: string;
+  title?: string;
+  content?: string;
+}
+
+//함수형 컴포넌트로 명시적으로 선언 : React.FC
+const BoardsNew: React.FC = () => {
   //입력
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     username: "",
     pwd: "",
     title: "",
@@ -13,7 +28,7 @@ const BoardsNew = () => {
   });
 
   //에러메시지
-  const [reqerrors, SetReqErrors] = useState({
+  const [reqerrors, setReqErrors] = useState<FormErrors>({
     username: "",
     pwd: "",
     title: "",
@@ -23,7 +38,9 @@ const BoardsNew = () => {
   //버튼 활성화 여부
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target;
     //setFormData의 비동기 문제 해결: updatedFormData
     const updatedFormData = {
@@ -32,7 +49,7 @@ const BoardsNew = () => {
     };
     setFormData(updatedFormData);
 
-    SetReqErrors((prevErrors) => ({
+    setReqErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
@@ -47,16 +64,20 @@ const BoardsNew = () => {
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = {};
-
+    const newErrors: FormErrors = {};
+    /* 
+    ##### keyof
+    1. 객체의 키 타입을 정확히 추론
+    2. Object.keys()나 forEach 루프 등을 사용할 때 유용
+    */
     Object.keys(formData).forEach((key) => {
-      if (formData[key].trim() === "") {
-        newErrors[key] = "필수입력 사항입니다.";
+      if (formData[key as keyof FormData].trim() === "") {
+        newErrors[key as keyof FormErrors] = "필수입력 사항입니다.";
         isValid = false;
       }
     });
 
-    SetReqErrors(newErrors);
+    setReqErrors(newErrors);
     return isValid;
   };
 
