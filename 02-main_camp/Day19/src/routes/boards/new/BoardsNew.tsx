@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom'
 import './BoardsNew.css';
 
@@ -22,7 +22,7 @@ const BoardsNew = () => {
 
   const [isActive, setIsActive] = React.useState(false)
 
-  function onChangeWriter(event) {
+  function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     setWriter(event.target.value)
 
@@ -36,7 +36,7 @@ const BoardsNew = () => {
     return setIsActive(false)
   }
   
-  function onChangePassword(event) {
+  function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     setPassword(event.target.value)
 
@@ -50,7 +50,7 @@ const BoardsNew = () => {
     return setIsActive(false)
   }
   
-  function onChangeTitle(event) {
+  function onChangeTitle(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     setTitle(event.target.value)
 
@@ -64,7 +64,7 @@ const BoardsNew = () => {
     return setIsActive(false)
   }
   
-  function onChangeContent(event) {
+  function onChangeContent(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     setContent(event.target.value)
 
@@ -78,7 +78,7 @@ const BoardsNew = () => {
     return setIsActive(false)
   }
 
-  function checkSpace(str) {
+  function checkSpace(str: string) {
     if (str.search(/\s/) != -1) return true
     return false
   }
@@ -103,12 +103,12 @@ const BoardsNew = () => {
         </>
     );
   }
-
+  
   return (
       <div className="BoardsNew_rootContainer">
           <header className="BoardsNew_header">게시물 등록</header>
-          <main>
-              <div className="UserInputForm">
+          <main className="BoardsNew_main">
+              <div className="BoardsNew_UserInputForm">
                   <BasicInputForm isRequired={true} title="작성자" placeholder={writerDescription} onChangeHandler={onChangeWriter} errorMessage={writerErrorMessage}/>
                   <BasicInputForm isRequired={true} title="비밀번호" placeholder={passwordDescription} onChangeHandler={onChangePassword} errorMessage={passwordErrorMessage}/>
               </div>
@@ -131,10 +131,10 @@ const BoardsNew = () => {
 
 export default BoardsNew;
 
-const BasicInputForm = (props) => {
+const BasicInputForm = (props: any) => {
   if (props.isRequired) {
       return (
-          <div id="PostInputForm" className="inputForm">
+          <div id="PostInputForm" className="BoardsNew_inputForm">
               <div className="inputTitle">{props.title}<span className="requiredMark">*</span></div>
               <TextInput placeholder={props.placeholder} onChangeHandler={props.onChangeHandler} />
               <p className="inputError">{props.errorMessage}</p>
@@ -142,7 +142,7 @@ const BasicInputForm = (props) => {
       );        
   } else {
       return (
-          <div id="PostInputForm" className="inputForm">
+          <div id="PostInputForm" className="BoardsNew_inputForm">
               <div className="inputTitle">{props.title}</div>
               <TextInput placeholder={props.placeholder} />
           </div>
@@ -150,9 +150,9 @@ const BasicInputForm = (props) => {
   }
 }
 
-const ContentsInputForm = (props) => {
+const ContentsInputForm = (props: any) => {
   return (
-      <div className="inputForm">
+      <div className="BoardsNew_inputForm">
           <div className="inputTitle">{props.title}<span className="requiredMark">*</span></div>
           <textarea className="inputTextArea" placeholder={props.placeholder} onChange={props.onChangeHandler}></textarea>
           <p className="inputError">{props.errorMessage}</p>
@@ -166,7 +166,7 @@ const AddressInputForm = () => {
   const detailAddressDescription = "상세 주소"
 
   return (
-      <div className="inputForm">
+      <div className="BoardsNew_inputForm">
           주소
           <div className="ZipCodeContainer">
               <TextInput placeholder={zipCodeDescription} />
@@ -180,7 +180,7 @@ const AddressInputForm = () => {
 
 const PhotoUploadForm = () => {
   return (
-      <div className="inputForm">
+      <div className="BoardsNew_inputForm">
           사진 첨부
           <div className="uploadButtonContainer">
               <UploadButton />
@@ -191,7 +191,7 @@ const PhotoUploadForm = () => {
   );
 }
 
-const TextInput = (props) => {
+const TextInput = (props: any) => {
   return <input className="inputText" type="text" placeholder={props.placeholder} onChange={props.onChangeHandler} />;
 }
 
@@ -217,7 +217,6 @@ const UploadButton = () => {
                   클릭해서 사진 업로드
               </label>
           </div>
-          
       </div>
   );
 }

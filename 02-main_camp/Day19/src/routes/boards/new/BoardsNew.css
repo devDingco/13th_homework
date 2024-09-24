@@ -27,19 +27,19 @@
   font-size: 20px;
 }
 
-main {
+.BoardsNew_main {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
 }
 
-.UserInputForm {
+.BoardsNew_UserInputForm {
   display: flex;
   gap: 2.5rem;
 }
 
-.inputForm {
+.BoardsNew_inputForm {
   width: 100%;
   display: flex;
   flex-direction: column;
