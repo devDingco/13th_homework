@@ -11,9 +11,10 @@ body {
 }
 
 #root {
-  width: 100vw;
-  margin: 0 auto;
+  width: 100%;
   padding: 2rem;
   text-align: center;
   box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
 }

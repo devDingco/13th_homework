@@ -5,7 +5,9 @@ type ButtonProps = {
   type?: "submit";
   disabled?: boolean;
   children: ReactNode;
-  color: "blue" | "white";
+  color: "blue" | "gray" | "white";
+  src?: string;
+  alt?: string;
 };
 
 export default function Button({
@@ -13,9 +15,12 @@ export default function Button({
   disabled,
   children,
   color,
+  src,
+  alt,
 }: ButtonProps) {
   const colorVariants = {
-    blue: "bg-btn-blue text-white",
+    blue: "bg-blue text-white",
+    gray: "bg-gray text-white",
     white: "bg-white text-black border-black",
   };
 
@@ -26,6 +31,7 @@ export default function Button({
         disabled={disabled}
         className={`${styles.button} ${colorVariants[color]}`}
       >
+        {src && <img src={src} alt={alt} />}
         {children}
       </button>
     </>

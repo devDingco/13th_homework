@@ -1,9 +1,9 @@
-import CreatePost from "./components/CreatePost/CreatePost";
+import BoardsNew from "./routes/boards/new/BoardsNew";
 
 function App() {
   return (
     <>
-      <CreatePost />
+      <BoardsNew />
     </>
   );
 }
