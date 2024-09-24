@@ -1,3 +1,4 @@
+import React from "react";
 export const EditorHeader = (props) => {
   return <div className="editor-header">{props.title}</div>;
 };
@@ -19,7 +20,8 @@ export const InputForm = (props) => {
             className="input-text"
             type="text"
             placeholder={props.placeholder}
-            onChange={props.실행할함수}
+            onChange={props.onChange()}
+            value={props.author}
           />
         );
       case "textarea":
@@ -34,18 +36,24 @@ export const InputForm = (props) => {
         );
     }
   };
+  const InputValMessage = () => {
+    return "";
+  };
 
   return (
     <div className="content-area">
       <InputFormTitle />
       <InputFormContent />
+      <InputValMessage />
     </div>
   );
 };
 
 export const EditButton = (props) => {
   return props.reg ? (
-    <button className="normal-button">{props.value}</button>
+    <button className="normal-button" onClick={props.onClick}>
+      {props.value}
+    </button>
   ) : (
     <button className="edit-button">{props.value}</button>
   );
