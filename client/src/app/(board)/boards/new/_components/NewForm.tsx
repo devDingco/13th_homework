@@ -21,7 +21,6 @@ export default function NewForm() {
             content: undefined,
         },
     });
-    console.log(state.errors);
 
     const [formValues, setFormValues] = useState({
         Author: '',
@@ -36,8 +35,10 @@ export default function NewForm() {
         const allFieldsFilled = Object.values(formValues).every(
             (value) => value.trim() !== ''
         );
-        setIsButtonDisabled(!allFieldsFilled);
-    }, [formValues]);
+
+        if (allFieldsFilled !== isButtonDisabled)
+            setIsButtonDisabled(!allFieldsFilled);
+    }, [formValues, isButtonDisabled]);
 
     const onChangeValue = ({ name, value }: IInputValueParameter) => {
         setFormValues((prev) => ({ ...prev, [name]: value }));
