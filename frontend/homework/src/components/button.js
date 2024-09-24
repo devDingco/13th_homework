@@ -9,9 +9,19 @@ export const postCancelButton = () => {
   return <button class="checkButton postCancelButton">취소</button>;
 };
 
-export const postSubmitButton = ({ onClick }) => {
+export const postSubmitButton = ({ onClick }, buttonActiveStyle) => {
+  // backgroundColor: "var(--n-main, #2974e5)"
+  // backgroundColor: "var(--gray-300, #c7c7c7)"
+  console.log(onClick);
+  console.log(buttonActiveStyle);
+
   return (
-    <button class="checkButton postSubmitButton" onClick={onClick}>
+    <button
+      id="postSubmitButton"
+      class="checkButton postSubmitButton"
+      onClick={onClick}
+      style={{ backgroundColor: buttonActiveStyle ? "var(--n-main, #2974e5)" : "var(--gray-300, #c7c7c7)" }}
+    >
       등록하기
     </button>
   );
