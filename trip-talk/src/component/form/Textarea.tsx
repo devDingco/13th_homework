@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import s from './Textarea.module.css';
 
 interface InputPropsType {
-  id: 'username' | 'userTitle' | 'userpw' | 'usercontent';
+  id: 'usercontent';
   value?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -14,7 +14,7 @@ interface InputPropsType {
 
 const Textarea = ({ ...props }: InputPropsType) => {
   return (
-    <p>
+    <div>
       <label htmlFor={props.id}>{props.label}</label>
       {props.required && <b className="text-[#f00]">*</b>}
       <textarea
@@ -26,7 +26,7 @@ const Textarea = ({ ...props }: InputPropsType) => {
       <p className="text-[#f00]">
         {props.required && props.required[props.id]}
       </p>
-    </p>
+    </div>
   );
 };
 

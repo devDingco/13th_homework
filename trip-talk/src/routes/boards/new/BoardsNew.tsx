@@ -1,8 +1,8 @@
 import React from 'react';
-import AddPostsForm from '../component/addPost/AddPostsForm';
-import s from './MainContainer.module.css';
+import AddPostsForm from '../../../component/addPost/AddPostsForm';
+import s from './BoardsNew.module.css';
 
-const Main = () => {
+const BoardsNew = () => {
   return (
     <>
       <div className={s.mainContainer}>
@@ -13,4 +13,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default BoardsNew;

@@ -1,14 +1,12 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { Outlet } from 'react-router-dom';
 import './App.css';
-import Main from './pages/Main';
+import BoardsNew from './routes/boards/new/BoardsNew';
 
 function App() {
   return (
-    <>
-      <Main />
-    </>
+    <main>
+      <Outlet />
+    </main>
   );
 }
 

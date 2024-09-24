@@ -12,13 +12,17 @@ interface ButtonPropsType {
 const buttonConfig = {
   default: 'border border-solid border-1px border-black',
   primary: 'bg-primary text-white',
+  disabled: 'bg-gray/100 text-white',
 };
 
 const Button = ({ children, ...props }: ButtonPropsType) => {
+  console.log(props.disabled);
   return (
     <>
       <button
-        className={`${s.buttonS} ${buttonConfig[props.style]}`}
+        className={`${s.buttonS} ${
+          props.disabled ? buttonConfig.disabled : buttonConfig[props.style]
+        }`}
         type={props.type}
         disabled={props.disabled}>
         {children}
