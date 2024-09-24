@@ -18,7 +18,7 @@ export default function NewInputContainer({
             </div>
             <NewInput title={title} onChangeValue={onChangeValue} />
 
-            <div className="text-red-400 ">{error}</div>
+            <div className="text-red-400">{error}</div>
 
             {title !== 'Author' && title !== 'Password' && (
                 <div className="border-b-[1px] border-gray-200 mt-10"></div>

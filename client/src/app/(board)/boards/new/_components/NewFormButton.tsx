@@ -12,7 +12,7 @@ export default function NewFormButton({ isButtonDisabled }: IButtonDisabled) {
                 취소
             </button>
             <button
-                className={`h-12 rounded-lg px-3 py-4 flex justify-center items-center prose-sb_18_24 bg-gray-300 text-gray-100 ${
+                className={`h-12 rounded-lg px-3 py-4 flex justify-center items-center prose-sb_18_24 text-gray-100 ${
                     isButtonDisabled ? 'bg-gray-300' : 'bg-[#2974E5]'
                 }`}
                 disabled={isButtonDisabled}

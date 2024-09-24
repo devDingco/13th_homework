@@ -28,9 +28,9 @@ import { ResponseMessage } from './decorators/response-message.decorator';
 import { ResponseDto } from './dto/response.dto';
 import { Board } from './entities/board.entity';
 
-@ApiTags('board')
+@ApiTags('/api/board')
 @ApiExtraModels(ResponseDto)
-@Controller('board')
+@Controller('/api/board')
 @UseInterceptors(TransformInterceptor)
 export class BoardController {
     constructor(private readonly boardService: BoardService) {}
