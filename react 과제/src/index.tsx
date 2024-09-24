@@ -6,6 +6,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import BoardNew from "./pages/board/boardNew";
 import BoardDetail from "./pages/board/boardDetail";
+import store from "./redux/config/configStore";
+import { Provider } from "react-redux";
 
 const mainPageList = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -16,7 +18,11 @@ const mainPageList = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<RouterProvider router={mainPageList} />);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={mainPageList} />
+  </Provider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
