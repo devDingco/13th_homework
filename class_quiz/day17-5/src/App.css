@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0; 
+  position: relative; 
+}
+
+.container {
+  width: 640px;
+  height: 1138px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute; 
+  top: 50%; /* 화면의 50% 위치 */
+  left: 50%; /* 화면의 50% 위치 */
+  transform: translate(-50%, -50%); 
+
+  background-image: url('../public/images/img-bg@3x\ 1@2x.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  margin-bottom: 83px;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  margin-top: 200px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: 700;
+  margin-top: 2px;
+  color: #fff;
+}
+
+.inputContainer{
+ width: 540px;
+ margin-top:144px;
+ margin-bottom: 18px;
+}
+
+.inputContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ margin-bottom: 2px;
+
+}
+
+.deleteBtn {
+  margin-left: 10px; 
+}
+
+.errorMessage {
+  color: #FF1B6D;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+  font-size: 16px;
+}
+
+#email, #password {
+  width: 100%;
+  height: 100%;
+border: none;
+border-radius: 0;
+/* padding: 10px; */
+font-size: 24px;
+outline: none;
+background-color: transparent; 
+}
+
+#email:focus, #password:focus {
+  border-color: #FF1B6D; 
+  background-color: transparent;
+  color:#fff;
+}
+
+.hrLine {
+  width: 100%;
+  border-bottom: 2px solid #7d7d7d;
+  margin-bottom: 18px;
+}
+
+.logginBtn{
+  width: 80%;
+  height: 66px;
+border: none;
+background-color: #FF1B6D;
+color: #fff;
+border-radius: 38px;
+opacity: 1;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 26px;
+cursor: pointer;
+}
+
+.find {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.myFind {
+  color: #fff;
+  font-size: 20px;
+}
+
+.lineStyle {
+  width: 21px;
+  margin-left: 24px;
+}
+
+.kakaoBtn {
+  width: 512px;
+  height: 66px;
+  border: 2px solid #FAE100;
+  background-color: transparent;
+  color: #FAE100;
+  border-radius: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 83px;
+}
+
+.kakaoBtn img {
+  margin-right: 10px;
+  height: 24px; 
+}
+
