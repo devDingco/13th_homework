@@ -1,3 +1,7 @@
+import React from "react"
+import { useState } from "react"
+
+
 // 인풋 컴포넌트 공용, 필수입력 검증
 const InputField = (props) => {
 
@@ -52,17 +56,17 @@ const ImgField = () => {
 
                 <div className="attach__img">
                     <figure>
-                        <img src="./asset/icon__plus.svg" />
+                        <img src="/asset/add.svg" alt="click to upload img" />
                         <figcaption>클릭하여 사진 업로드</figcaption>
                     </figure>
 
                     <figure>
-                        <img src="./asset/icon__plus.svg" />
+                        <img src="/asset/add.svg" alt="click to upload img" />
                         <figcaption>클릭하여 사진 업로드</figcaption>
                     </figure>
 
                     <figure>
-                        <img src="./asset/icon__plus.svg" />
+                        <img src="/asset/add.svg" alt="click to upload img" />
                         <figcaption>클릭하여 사진 업로드</figcaption>
                     </figure>
                 </div>
@@ -80,20 +84,21 @@ const Btn = ({className, value, disabled, onClick}) => {
 
 // 메인 필드
 const Main = () => {
-    const [author, setAuthor] = React.useState()
-    const [password, setPassword] = React.useState()
-    const [title, setTitle] = React.useState()
-    const [content, setContent] = React.useState()
+    const [author, setAuthor] = useState()
+    const [password, setPassword] = useState()
+    const [title, setTitle] = useState()
+    const [content, setContent] = useState()
     const valid = author && password && title && content
 
     const handleChange = (event) => {
         const id = event.target.id
         const value = event.target.value
 
-        id === "author__ID" ? setAuthor(value) : ""
-        id === "password__ID" ? setPassword(value) : ""
-        id === "title__ID" ? setTitle(value) : ""
-        id === "content__ID" ? setContent(value) : ""
+        setAuthor(id === "author__ID" ? value : "")
+        setPassword(id === "password__ID" ? value : "")
+        setTitle(id === "title__ID" ? value : "")
+        setContent(id === "content__ID" ? value : "")
+        console.log( author, password, title, content )
     }
 
     const handleClick = (event) => {
@@ -103,6 +108,7 @@ const Main = () => {
     }
 
     return <>
+        <header>게시물 등록</header>
         <form>
             <InputField
                 fieldClass="field__author"
@@ -177,5 +183,5 @@ const Main = () => {
     </>
 }
 
-// 그리기!!
-ReactDOM.render(<Main />, document.querySelector("main"))
+// Main comp goes to App.js
+export default Main
