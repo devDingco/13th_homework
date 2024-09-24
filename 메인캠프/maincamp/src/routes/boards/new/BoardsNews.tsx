@@ -1,21 +1,32 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 const BoardsNews = () => {
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [error, setError] = useState('');
+  const [user, setUser] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const [isActive, setIsActive] = useState(false);
 
-  const openUploadImg = (id) => {
-    document.getElementById(id).click();
+  // 이 함수는 어떠한 값을 리턴할 필요가 없기 때문에 void
+  const openUploadImg = (
+    id: 'fileInput1' | 'fileInput2' | 'fileInput3'
+  ): void => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.click();
+    }
   };
 
   // 처음에 모든 값을 입력하여 등록함수가 활성화된 후, 입력값을 다시 지웠을때 등록함수가 비활성화되게 하기 위한 함수(나중에 useEffect를 배우고 나면 그거로 적용해도 되지 않을까 싶습니다.)
   // 모든 필드가 입력되었는지 확인하기 위한 함수
-  const checkAllField = (user, password, title, content) => {
+  const checkAllField = (
+    user: string,
+    password: string,
+    title: string,
+    content: string
+  ) => {
     if (user && password && title && content) {
       setIsActive(true);
     } else {
@@ -24,11 +35,15 @@ const BoardsNews = () => {
   };
 
   //작성자 핸들러 함수
-  const handleChangeUser = (e) => {
+  const handleChangeUser = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUser(value); //상태 비동기 업데이트
+
     if (value) {
-      document.getElementsByClassName('errorMsg')[0].style.display = 'none';
+      const errorMsg = document.getElementsByClassName(
+        'errorMsg'
+      )[0] as HTMLElement;
+      errorMsg.style.display = 'none';
     }
 
     // 값 없으면 등록함수 비활성화
@@ -37,40 +52,49 @@ const BoardsNews = () => {
 
   //비밀번호 핸들러 함수
 
-  const handleChangePw = (e) => {
+  const handleChangePw = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
     if (value) {
-      document.getElementsByClassName('errorMsg')[1].style.display = 'none';
+      const errorMsg = document.getElementsByClassName(
+        'errorMsg'
+      )[1] as HTMLElement;
+      errorMsg.style.display = 'none';
     }
 
     checkAllField(user, value, title, content);
   };
 
   //제목 핸들러 함수
-  const handleChangeTitle = (e) => {
+  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setTitle(value);
     if (value) {
-      document.getElementsByClassName('errorMsg')[2].style.display = 'none';
+      const errorMsg = document.getElementsByClassName(
+        'errorMsg'
+      )[2] as HTMLElement;
+      errorMsg.style.display = 'none';
     }
 
     checkAllField(user, password, value, content);
   };
 
   //내용 핸들러 함수
-  const handleChangeContent = (e) => {
+  const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setContent(value);
     if (value) {
-      document.getElementsByClassName('errorMsg')[3].style.display = 'none';
+      const errorMsg = document.getElementsByClassName(
+        'errorMsg'
+      )[3] as HTMLElement;
+      errorMsg.style.display = 'none';
     }
 
     checkAllField(user, password, title, value);
   };
 
   //등록하기 함수
-  const registerFunc = (e) => {
+  const registerFunc = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (user && password && content && title) {
@@ -81,7 +105,7 @@ const BoardsNews = () => {
       window.scrollTo({ top: 0 });
     }
 
-    const errors = [];
+    const errors: any[] = [];
 
     if (!user) errors.push('user');
     if (!password) errors.push('password');
@@ -94,10 +118,13 @@ const BoardsNews = () => {
     }
 
     document.querySelectorAll('.errorMsg').forEach((el) => {
-      if (errors.includes(el.getAttribute('data-field'))) {
-        el.style.display = 'block';
-      } else {
-        el.style.display = 'none';
+      // el이 HTMLElement 타입인지 확인한 후, style 속성에 안전하게 접근해서 스타일 적용
+      if (el instanceof HTMLElement) {
+        if (errors.includes(el.getAttribute('data-field'))) {
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
       }
     });
   };
@@ -162,7 +189,8 @@ const BoardsNews = () => {
           <div>
             <textarea
               placeholder="내용을 입력해주세요."
-              rows="8"
+              //이렇게 해야 숫자로 전달함
+              rows={8}
               onChange={handleChangeContent}
             ></textarea>
             <div className="errorMsg" data-field="content">
