@@ -1,0 +1,118 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 1280px;
+	height: 2171px;
+	margin: auto;
+	padding: 40px;
+}
+
+.title {
+	font-family: Pretendard;
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 36px;
+	text-align: left;
+	margin-bottom: 24px;
+}
+
+.write {
+	width: 1280px;
+	height: 24px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.writer {
+	display: flex;
+	width: 65px;
+	height: 24px;
+	gap: 4px;
+}
+
+.profile {
+	color: #000;
+	/* b_20_28 */
+	font-family: Pretendard;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 28px; /* 140% */
+}
+
+.name {
+	width: 37px;
+	height: 20px;
+	font-family: Pretendard Variable;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 20px;
+	text-align: left;
+}
+
+.date {
+	width: 62px;
+	height: 20px;
+	font-family: Pretendard Variable;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	text-align: left;
+}
+
+.line {
+	border: 1px solid #e4e4e4;
+	width: 1280px;
+	margin: 16px;
+}
+
+.poem {
+	width: 1280px;
+	height: 744px;
+	font-family: Pretendard Variable;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	text-align: left;
+	margin-bottom: 24px;
+}
+.photo {
+	margin: 24px 0;
+}
+
+.share {
+	width: 56px;
+	height: 24px;
+	gap: 8px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: 1280px;
+}
+
+.video {
+	margin: 24px 0;
+}
+
+.reaction {
+	width: 1280px;
+	height: 48px;
+	gap: 24px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 24px;
+}
+
+.button {
+	width: 1280px;
+	height: 48px;
+	gap: 24px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
