@@ -1,0 +1,1 @@
+const 철수의버튼 = <button>등록하기</button> //바벨이 jsx -> html로 바꿔줌 
