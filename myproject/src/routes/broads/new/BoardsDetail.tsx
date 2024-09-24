@@ -70,7 +70,7 @@ const BoardsDetail = () => {
           <div className="bad_count">24</div>
         </div>
         <div className="heart_box good">
-          <img src="/img/good.png" />
+          <img src="/img/good.svg" />
           <div className="good_count">24</div>
         </div>
       </div>
