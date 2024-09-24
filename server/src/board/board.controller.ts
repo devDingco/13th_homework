@@ -218,7 +218,9 @@ export class BoardController {
     }
 
     @Delete()
-    @ApiOperation({ summary: '전체 게시글 삭제' })
+    @ApiOperation({
+        summary: '전체 게시글 삭제 - 함부로 쓰면 류지승이 화낼 예정',
+    })
     @ApiResponse({
         status: HttpStatus.OK,
         description: '전체 게시글 삭제 성공',

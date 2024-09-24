@@ -11,11 +11,13 @@ import BoardIcon from './_components/BoardIcon';
 import BoardImages from './_components/BoardImages';
 import BoardVideo from './_components/BoardVideo';
 import BoardLikeHate from './_components/BoardLikeHate';
+import { IBoardType } from '@/models/boardType';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 export default function Detail() {
-    const param = useParams();
+    const param: Params = useParams();
 
-    const boardInfor = boardObject.find(
+    const boardInfor: IBoardType | undefined = boardObject.find(
         (board) => board.boardId === +param.boardId
     );
 

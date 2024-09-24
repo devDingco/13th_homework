@@ -13,7 +13,9 @@ const HOST = process.env.HOST;
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    app.enableCors();
+    app.enableCors({
+        credentials: true,
+    });
 
     app.useGlobalPipes(
         new ValidationPipe({
@@ -30,7 +32,7 @@ async function bootstrap() {
         .setDescription('The seSAC API description made in RYU')
         .setVersion('1.0')
         .addTag('board', 'board API')
-        .addServer(`https://${HOST}:${PORT}`)
+        .addServer(`http://${HOST}:${PORT}`)
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
