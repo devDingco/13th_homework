@@ -8,7 +8,7 @@ const BoardsNew = () => {
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<string[]>([]);
 
   // error state
   const [errorWriter, setErrorWriter] = useState("");
@@ -28,17 +28,17 @@ const BoardsNew = () => {
   }, [writer, title, pw, content]);
 
   // onChange
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checkWriter = event.target.value;
     setWriter(checkWriter);
   };
-  const onChangePw = (event) => {
+  const onChangePw = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPw(event.target.value);
   };
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
 
@@ -71,27 +71,29 @@ const BoardsNew = () => {
   };
 
   // 이미지 업로드 시 미리보기 input의 onChange
-  const saveImgFile = (e) => {
-    const uploadedFiles = Array.from(e.target.files);
-    const newFilePreviews = [];
+  const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFiles = Array.from(e.target.files || []);
+    const newFilePreviews: string[] = []; 
 
     if (files.length + uploadedFiles.length > 5) {
       alert("최대 5개의 이미지만 업로드 할 수 있습니다.");
+      return; // 경고 후 함수 종료
     }
 
-    uploadedFiles.forEach((file) => {
+    uploadedFiles.forEach((file: File) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        newFilePreviews.push(reader.result);
+        newFilePreviews.push(reader.result as string); 
         // 모든 파일을 읽은 후 상태를 업데이트
         if (newFilePreviews.length === uploadedFiles.length) {
-          setFiles((prevFiles) => [...prevFiles, ...newFilePreviews]);
+          setFiles((prevFiles: string[]) => [...prevFiles, ...newFilePreviews]);
         }
       };
     });
   };
+
   return (
     <div className="all-container">
       <div className="container">
