@@ -24,7 +24,7 @@ export default function BoardsDetail () {
                         </div>
                         <div className='css_date'>2024-09-23</div>
                     </div>
-                    <hr></hr>
+                    <hr className='css_detailhr'></hr>
                     <div className='css_side'>
                         <div className='css_clip'>
                             <img src={Clip} alt='clip'/>
@@ -86,7 +86,7 @@ export default function BoardsDetail () {
                     <img src={Like} alt='like'/> <span>12</span>
                 </div>
             </div>
-                <div className='css_button'>
+                <div className='css_detailbutton'>
                     <button className='css_list'>
                         <img src={List} alt='list'/>
                     </button>

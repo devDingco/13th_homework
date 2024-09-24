@@ -4,7 +4,7 @@ import Input from './commons/Input';
 import Button from './commons/Button';
 
 
-export default function WriteBoard () {
+function WriteBoard () {
     const[name, setName] = React.useState("")
 
     const[password, setPassword] = React.useState("")
@@ -22,10 +22,21 @@ export default function WriteBoard () {
     const[contentblank, setContentBlank] = React.useState("")
   
     const[isActive, setIsActive] = React.useState(false)
+
+    const[addressnumber, setaddressnumber] = React.useState("")
+
+    const[address, setaddress] = React.useState("")
+
+    const[addressdetail, setaddressdetail] = React.useState("")
+
+    
+
+
+
   
     const onChangeName = (event) => {
       setName(event.target.value)
-      if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("")) {
+      if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
@@ -34,7 +45,7 @@ export default function WriteBoard () {
   
     const onChangePassword = (event) => {
       setPassword(event.target.value)
-      if(name !== ("") && title !== ("") && content !== ("") && event.target.value !== ("")) {
+      if(name !== ("") && title !== ("") && content !== ("") && event.target.value !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
@@ -43,7 +54,7 @@ export default function WriteBoard () {
   
     const onChangeTitle = (event) => {
       setTitle(event.target.value)
-      if(name !== ("") && event.target.value !== ("") && content !== ("") && password !== ("")) {
+      if(name !== ("") && event.target.value !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
@@ -52,13 +63,42 @@ export default function WriteBoard () {
     
     const onChangeContent = (event) => {
       setContent(event.target.value)
-      if(name !== "" && password !== "" && title !== "" && event.target.value !== "") {
+      if(name !== "" && password !== "" && title !== "" && event.target.value !== "" && addressnumber !== "" && address !== "" && addressdetail !== "") {
         setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
   
+    const onChangeAddressNumber = (event) => {
+      setaddressnumber(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && address !== "" && addressdetail !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+    const onChangeAddress = (event) => {
+      setaddress(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && addressnumber !== "" && addressdetail !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+    const onChangeAddressDetail = (event) => {
+      setaddressdetail(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && addressnumber !== "" && address !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+
+
   
     const onClickSignup = (event) => {
   
@@ -82,14 +122,14 @@ export default function WriteBoard () {
         } else {
           setContentBlank("")
         }
-        if(name !== ("") && title !== ("") && content !== ("") && password !== ("")) {
+        if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
           alert("게시글 등록 완료")
         }
     }
 
     return(
-      <div class="css_layout"> 
-        <div class="css_header">게시글 등록</div>
+      <div className="css_layout"> 
+        <div className="css_header">게시글 등록</div>
           <div className="css_input">
 
           {/* 작성란 헤더 */}
@@ -131,11 +171,11 @@ export default function WriteBoard () {
           <div className="css_address">
               <label htmlFor="addressnum_id" className="css_addressnumtag">주소</label>
               <div className="css_addressnum">
-                  <Input type="text" id="addressnum_id" placeholder="01234" name="addressnum"/>
+                  <Input type="text" id="addressnum_id" placeholder="01234" name="addressnum" onChange={onChangeAddressNumber}/>
                   <Button type="button" value="우편번호 검색" name="search" />
               </div>
-              <Input type="text" id="address_id" placeholder="주소를 입력해 주세요." name="address"/>
-              <Input type="text" id="addressdetail_id" placeholder="상세주소" name="addressdetail"/>
+              <Input type="text" id="address_id" placeholder="주소를 입력해 주세요." name="address" onChange={onChangeAddress}/>
+              <Input type="text" id="addressdetail_id" placeholder="상세주소" name="addressdetail" onChange={onChangeAddressDetail}/>
           </div>
 
           <hr></hr>
@@ -167,3 +207,5 @@ export default function WriteBoard () {
     </div>
     )
 }
+
+export default WriteBoard;
