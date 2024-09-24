@@ -1,4 +1,3 @@
-// import { useRef, useState } from "react";
 // import Filter from "badwords-ko"; 나중에 욕설 검사 필터링 추가
 // const badwordFilter = new Filter();
 
@@ -19,7 +18,7 @@ export type formList = {
 
 const regexPattern = {
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-  password: /(?=.*\d)(?=.*[a-z]).{8,}/,
+  password: /(?=.*\d)(?=.*[a-z]).{8,}/, // 8자 이상, 영문, 숫자포함
   phone: /^\d{3}-\d{3,4}-\d{4}$/,
   url: /^http[s]?:\/\/([\S]{3,})/i,
   youtube: /^https?:\/\/(www\.)?(youtube\.com|youtu\.?be)\/.+$/,

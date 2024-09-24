@@ -1,41 +1,50 @@
-import Input from "../components/input";
-import TextArea from "../components/textarea";
-import Main from "../layout/main";
+import Input from "components/input";
+import TextArea from "components/textarea";
+import Main from "layout/main";
 import { useForm } from "react-hook-form";
-import type { formList } from "../hooks/useformset";
-import { formResister } from "../hooks/useformset";
+import type { formList } from "hooks/useformset";
+import { formResister } from "hooks/useformset";
+import PostSearchPopBtn from "components/postSearchPopBtn";
+import { useState } from "react";
+import ReactQuillBox from "components/reactQuillBox";
 
-const Write = () => {
+const BoardNew = () => {
   const {
     register, // 검증 규칙 적용 메서드
     // handleSubmit, // 폼 제출 핸들러
     watch, // 입력값을 모니터링하는 메서드
-    setError, // 에러 메시지 설정 메서드
+    // setError, // 에러 메시지 설정 메서드
+    setValue, // 입력값 설정 메서드
     formState: { errors, isDirty, isValid }, // 폼의 상태를 나타내는 속성
     // getValues, // 폼의 입력값을 반환하는 메서드
   } = useForm<formList>({ mode: "onChange" }); // 어떤 이벤트에 동작을 하도록 할지 설정
 
-  const onSubmit = (event: any) => {
-    event.preventDefault();
-    // console.log("onSubmit", data);
+  const [zoneCode, setZoneCode] = useState(""); // 유저 우편번호
+  const [address, setAddress] = useState(""); // 유저 주소
 
-    Object.entries(formResister)
-      .filter(
-        ([key, value]) =>
-          value.required && watch(key as keyof formList) !== undefined
-      )
-      .forEach(([key, value]) => {
-        if (watch(key as keyof formList) === "")
-          setError(key as keyof formList, {
-            type: "required",
-            message: value.required,
-          });
-      });
-    if (!isValid) {
-      console.log("유효성 검사 실패");
-    } else {
-      alert("게시글이 등록되었습니다.");
-    }
+  const [contents, setContents] = useState({ text: "", html: "" });
+
+  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log("게시글 등록");
+
+    // Object.entries(formResister)
+    //   .filter(
+    //     ([key, value]) =>
+    //       value.required && watch(key as keyof formList) !== undefined
+    //   )
+    //   .forEach(([key, value]) => {
+    //     if (watch(key as keyof formList) === "")
+    //       setError(key as keyof formList, {
+    //         type: "required",
+    //         message: value.required,
+    //       });
+    //   });
+    // if (!isValid) {
+    //   console.log("유효성 검사 실패");
+    // } else {
+    //   alert("게시글이 등록되었습니다.");
+    // }
   };
 
   return (
@@ -52,9 +61,6 @@ const Write = () => {
             {...register("writeName", formResister.writeName)}
             errormessage={errors?.writeName?.message}
           />
-          {errors?.writeName?.types?.required && (
-            <p className="toolTip">필수 입력 사항입니다.</p>
-          )}
           <Input
             id="writePassword"
             title="비밀번호"
@@ -76,15 +82,33 @@ const Write = () => {
           errormessage={errors?.writeTitle?.message}
         />
         <hr className="my-10" />
-        <TextArea
+        <ReactQuillBox
+          title={
+            <div className="flex gap-1 pb-3">
+              내용 <span className="text-red-500">*</span>
+            </div>
+          }
+          id="writeContent"
+          contents={contents}
+          setcontents={setContents}
+          onChange={(text) => {
+            register("writeContent", formResister.writeContent);
+            setValue("writeContent", text);
+            console.log(watch("writeContent")); // !입력값 확인 버튼 활성화 관련 점검 필요
+          }}
+          readonly={false}
+          placeholder="내용을 입력해 주세요."
+          errormessage={errors?.writeContent?.message}
+        />
+        {/* <TextArea
           id="writeContent"
           title="내용"
           required
           placeholder="내용을 입력해 주세요."
           {...register("writeContent", formResister.writeContent)}
           errormessage={errors?.writeContent?.message}
-        />
-        <div className="my-10" />
+        /> */}
+        <div className="py-10" />
         <div className="flex gap-2 items-end max-w-56">
           <Input
             id="writeAddressPost"
@@ -93,19 +117,25 @@ const Write = () => {
             type="text"
             {...register("writeAddressPost", formResister.writeAddressPost)}
             errormessage={errors?.writeAddressPost?.message}
+            value={zoneCode}
           />
-          <button className="whiteBtn">우편번호 검색</button>
+          <PostSearchPopBtn
+            setAddress={setAddress}
+            setZoneCode={setZoneCode}
+            btnstyle="btn btn-outline"
+          />
         </div>
         <Input
           id="writeAddress"
-          placeholder="주소를 입력해 주세요."
+          placeholder="주소"
           type="text"
           {...register("writeAddress", formResister.writeAddress)}
           errormessage={errors?.writeAddress?.message}
+          value={address}
         />
         <Input
           id="writeAddressDetail"
-          placeholder="상세주소"
+          placeholder="상세 주소를 입력해주세요"
           type="text"
           {...register("writeAddressDetail", formResister.writeAddressDetail)}
           errormessage={errors?.writeAddressDetail?.message}
@@ -130,17 +160,17 @@ const Write = () => {
           errormessage={errors?.imgFile?.message}
         />
         <div className="flex items-end justify-end gap-4 pt-10">
-          <button type="reset" className="whiteBtn">
+          <button type="reset" className="btn btn-outline">
             취소
           </button>
 
           <button
             type="submit"
-            className="blueBtn disabled:grayBtn"
+            className="btn btn-primary disabled:btn-disabled"
             value="등록하기"
             onClick={(event) => onSubmit(event)}
             // 폼의 유효성 검사를 통과하지 못하면 버튼 비활성화
-            // disabled={!isDirty || !isValid}
+            disabled={!isDirty || !isValid}
           >
             등록하기
           </button>
@@ -150,4 +180,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default BoardNew;

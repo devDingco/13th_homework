@@ -1,6 +1,16 @@
 import { forwardRef } from "react";
 
-const TextArea = forwardRef((props: any, ref) => {
+type TextAreaProps = {
+  id?: string;
+  title?: string;
+  errormessage?: string;
+  required?: boolean;
+  placeholder?: string;
+};
+
+type textAreaRef = HTMLTextAreaElement;
+
+const TextArea = forwardRef<textAreaRef, TextAreaProps>((props, ref) => {
   const { title, errormessage, ...rest } = props;
   console.log();
   return (

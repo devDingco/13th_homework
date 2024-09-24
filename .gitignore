@@ -2,3 +2,5 @@ node_modules
 .DS_*
 .env
 .vscode
+.env
+react 과제/.env
