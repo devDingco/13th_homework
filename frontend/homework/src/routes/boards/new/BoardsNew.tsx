@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "../../../styles/boards/new/BoardsNew.css";
 import close from "../../../assets/icon/close.svg";
 import { addressSearchButton, postCancelButton, postSubmitButton, addImageButton } from "../../../components/button.js";
@@ -19,7 +19,7 @@ const BoardsNew = () => {
   const [titleVaild, setTitleVaild] = useState("");
   const [contentVaild, setContentVaild] = useState("");
 
-  const onChangeOwner = (event) => {
+  const onChangeOwner = (event: ChangeEvent<HTMLInputElement>) => {
     setOwner(event.target.value);
 
     if (event.target.value && password && title && content) {
@@ -32,7 +32,7 @@ const BoardsNew = () => {
     }
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
 
     if (owner && event.target.value && title && content) {
@@ -45,7 +45,7 @@ const BoardsNew = () => {
     }
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
 
     if (owner && password && event.target.value && content) {
@@ -58,7 +58,7 @@ const BoardsNew = () => {
     }
   };
 
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
 
     if (owner && password && title && event.target.value) {
@@ -179,7 +179,6 @@ const BoardsNew = () => {
           <textarea
             id="postContent"
             className="infoInputContent"
-            type="text"
             placeholder="내용을 입력해 주세요."
             onChange={onChangeContent}
           ></textarea>
