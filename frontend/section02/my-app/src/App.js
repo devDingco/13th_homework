@@ -1,8 +1,8 @@
 import "./App.css";
-import PostEditor from "./post/post-editor.js";
+import Post from "./pages/Post1";
 
 function App() {
-  return <PostEditor />;
+  return <Post />;
 }
 
 export default App;
