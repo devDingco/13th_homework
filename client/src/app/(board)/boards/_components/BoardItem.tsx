@@ -14,6 +14,12 @@ export default function BoardItem({ board }: IBoardItem) {
 		router.push(`/boards/${boardId}`);
 	};
 
+	const date = new Date(board.createdAt);
+	const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
+		2,
+		'0',
+	)}.${String(date.getDate()).padStart(2, '0')}`;
+
 	return (
 		<div
 			className="w-full flex px-6 py-4 gap-2 border-[1px] border-[#f2f2f2] rounded-lg items-center cursor-pointer"
@@ -29,10 +35,12 @@ export default function BoardItem({ board }: IBoardItem) {
 				{board.author}
 			</div>
 			<div className="w-[100px] flex justify-center items-center text-[#919191] prose-l_14_20">
-				{board.createdAt}
+				{formattedDate}
 			</div>
-			{hoveredItem === board.boardId && (
-				<Image src="/Images/delete.svg" alt="delete" width={24} height={24} />
+			{hoveredItem === board.boardId ? (
+				<Image src="/Images/delete.svg" alt="delete" width={20} height={20} />
+			) : (
+				<div className="size-6"></div>
 			)}
 		</div>
 	);
