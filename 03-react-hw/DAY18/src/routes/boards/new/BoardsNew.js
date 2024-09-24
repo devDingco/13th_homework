@@ -4,7 +4,7 @@ import "../../../BoardsNew.css";
 import { Link } from "react-router-dom";
 
 const BoardsNew = () => {
-  //입력창
+  //입력
   const [formData, setFormData] = useState({
     username: "",
     pwd: "",
