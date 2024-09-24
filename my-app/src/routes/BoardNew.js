@@ -1,92 +1,139 @@
-import "./App.css";
-import React from "react";
+import "../css/boardNew.css"; // boardNew.css 파일 경로
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+function BoardNew() {
+  // 작성자인풋, 작성자인풋에러
+  const [name, setName] = React.useState("");
+  const [nameError, setNameError] = React.useState("");
+  // 비번인풋, 비번인풋에러
+  const [password, setPassword] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState("");
+  // 제목인풋, 제목인풋에러
+  const [title, setTitle] = React.useState("");
+  const [titleError, setTitleError] = React.useState("");
+  // 내용인풋, 내용인풋에러
+  const [content, setContent] = React.useState("");
+  const [contentError, setContentError] = React.useState("");
 
-function App() {
-  // // 작성자인풋, 작성자인풋에러
-  // const [name, setName] = React.useState("");
-  // const [nameError, setNameError] = React.useState("");
-  // // 비번인풋, 비번인풋에러
-  // const [password, setPassword] = React.useState("");
-  // const [passwordError, setPasswordError] = React.useState("");
-  // // 제목인풋, 제목인풋에러
-  // const [title, setTitle] = React.useState("");
-  // const [titleError, setTitleError] = React.useState("");
-  // // 내용인풋, 내용인풋에러
-  // const [content, setContent] = React.useState("");
-  // const [contentError, setContentError] = React.useState("");
+  // 상황에 따른 버튼 활성화 or 비활성화
+  const [isActive, setIsActive] = useState(false);
 
-  // // 인풋값이 바뀐다면 저장하는 곳
-  // const onChangeName = (event) => {
-  //   setName(event.target.value);
-  // };
+  // 인풋값이 바뀐다면 저장하는 곳
+  const onChangeName = (event) => {
+    setName(event.target.value);
 
-  // const onChangePassword = (event) => {
-  //   setPassword(event.target.value);
-  // };
+    if (
+      event.target.value !== "" &&
+      password !== "" &&
+      title !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
 
-  // const onChangeTitle = (event) => {
-  //   setTitle(event.target.value);
-  // };
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
 
-  // const onChangeContent = (event) => {
-  //   setContent(event.target.value);
-  // };
+    if (
+      name !== "" &&
+      event.target.value !== "" &&
+      title !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
 
-  // const onClickSignup = (event) => {
-  //   event.preventDefault();
+  const onChangeTitle = (event) => {
+    setTitle(event.target.value);
 
-  //   console.log("작성자 이름은:", name);
-  //   console.log("작성자 비번은:", password);
-  //   console.log("게시물 제목은:", title);
-  //   console.log("게시물 내용은:", content);
+    if (
+      name !== "" &&
+      password !== "" &&
+      event.target.value !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
 
-  //   // 유효성을 우선 true로 박아두고 문제가 1개라도 생긴다면 즉시 false로 바뀌므로
-  //   // 마지막에 alert로 알리는 것을 못함.
+  const onChangeContent = (event) => {
+    setContent(event.target.value);
 
-  //   let isValid = true;
+    if (
+      name !== "" &&
+      password !== "" &&
+      title !== "" &&
+      event.target.value !== ""
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
 
-  //   // 작성자 확인
-  //   if (name.length === 0) {
-  //     setNameError("필수입력 사항 입니다.");
-  //     isValid = false;
-  //   } else {
-  //     setNameError("");
-  //   }
+  const onClickSignup = (event) => {
+    event.preventDefault();
 
-  //   // 비밀번호 확인
-  //   if (password.length === 0) {
-  //     setPasswordError("필수입력 사항 입니다.");
-  //     isValid = false;
-  //   } else {
-  //     setPasswordError("");
-  //   }
+    console.log("작성자 이름은:", name);
+    console.log("작성자 비번은:", password);
+    console.log("게시물 제목은:", title);
+    console.log("게시물 내용은:", content);
 
-  //   // 제목 확인
-  //   if (title.length === 0) {
-  //     setTitleError("필수입력 사항 입니다.");
-  //     isValid = false;
-  //   } else {
-  //     setTitleError("");
-  //   }
+    // 유효성을 우선 true로 박아두고 문제가 1개라도 생긴다면 즉시 false로 바뀌므로
+    // 마지막에 alert로 알리는 것을 못함.
 
-  //   // 내용 확인
-  //   if (content.length === 0) {
-  //     setContentError("필수입력 사항 입니다.");
-  //     isValid = false;
-  //   } else {
-  //     setContentError("");
-  //   }
+    let isValid = true;
 
-  //   // 제출 전 모든 부분이 만족해서 true인지 확인하고 alert을 띄울지 정하는 곳
-  //   if (isValid) {
-  //     alert("회원가입 완료됨");
-  //   }
-  // };
+    // 작성자 확인
+    if (name === "") {
+      setNameError("필수입력 사항 입니다.");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    // 비밀번호 확인
+    if (password === "") {
+      setPasswordError("필수입력 사항 입니다.");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    // 제목 확인
+    if (title === "") {
+      setTitleError("필수입력 사항 입니다.");
+      isValid = false;
+    } else {
+      setTitleError("");
+    }
+
+    // 내용 확인
+    if (content === "") {
+      setContentError("필수입력 사항 입니다.");
+      isValid = false;
+    } else {
+      setContentError("");
+    }
+
+    // 제출 전 모든 부분이 만족해서 true인지 확인하고 alert을 띄울지 정하는 곳
+    if (isValid) {
+      alert("회원가입 완료됨");
+    }
+  };
 
   return (
     <>
-      {/* <main className="게시물등록섹션">
+      <main className="게시물등록섹션">
+        <Link to="/BoardsDetail">상세 페이지 이동</Link>
         <section className="게시물등록">
           <h1>게시물 등록</h1>
         </section>
@@ -213,21 +260,17 @@ function App() {
 
           <div className="버튼있는곳">
             <button className="취소버튼">취소</button>
-            <button className="등록하기버튼" onClick={onClickSignup}>
+            <button
+              className={`등록하기버튼 ${isActive ? "active" : ""}`}
+              onClick={onClickSignup}
+            >
               등록하기
             </button>
           </div>
         </form>
       </main>
-      <Link to="/BoardsDetail">상세 페이지 이동</Link> */}
-      <div>메인 페이지인데 날아갈까 무서워서 잠시 주석 걸어둠</div>
-      <br />
-      <div>App js 파일입니다.</div>
-      <Link to="/BoardNew">BoardNew 페이지로 가는 기능</Link>
-
-      <Link to="/BoardsDetail">BoardsEdtail 페이지로 가는 기능</Link>
     </>
   );
 }
 
-export default App;
+export default BoardNew;
