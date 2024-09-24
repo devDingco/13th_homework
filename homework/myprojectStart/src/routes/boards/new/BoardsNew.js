@@ -1,40 +1,54 @@
-import React from "react";
+import { useState } from "react";
 
-import logo from "./logo.svg";
-import "./App.css";
+import "./Board.css";
 
-function App() {
-  const [writer, setWriter] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [input, setInput] = React.useState("");
-  const [errorWMeg, setErrorWMeg] = React.useState("");
-  const [errorPMeg, setErrorPMeg] = React.useState("");
-  const [errorTMeg, setErrorTMeg] = React.useState("");
-  const [errorIMeg, setErrorIMeg] = React.useState("");
+function Board() {
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [input, setInput] = useState("");
+  const [errorWMeg, setErrorWMeg] = useState("");
+  const [errorPMeg, setErrorPMeg] = useState("");
+  const [errorTMeg, setErrorTMeg] = useState("");
+  const [errorIMeg, setErrorIMeg] = useState("");
   // state에서는 사라지고 input()에서 안사라짐
+  const [isActive, setActive] = useState(false);
+  //1. 버튼은 false  색 비활성화함
+  //2. state변수 문자열이 모두 채워졌을때 버튼 색을 활성화시켜라
 
   const handleChangWriterMeg = (event) => {
     console.log(event.target.value);
     setWriter(event.target.value);
+    if (event.target.value && password && title && input)
+      return setActive(true);
+    setActive(false);
   };
 
   const handleChangPwMeg = (event) => {
     console.log(event.target.value);
     setPassword(event.target.value);
+    if (writer && event.target.value && title && input) return setActive(true);
+    setActive(false);
   };
   const handleChangTitleMeg = (event) => {
     console.log(event.target.value);
     setTitle(event.target.value);
+    if (writer && password && event.target.value && input)
+      return setActive(true);
+    setActive(false);
   };
   const handleChangInputMeg = (event) => {
     console.log(event.target.value);
     setInput(event.target.value);
+    if (writer && password && title && event.target.value)
+      return setActive(true);
+    setActive(false);
   };
 
   const handleClickMeg = () => {
     console.log(writer);
-    if (writer !== "" && password !== "" && title !== "" && input !== "") {
+    if (writer && password && title && input) {
+      setActive(true);
       alert("회원등록함");
       // 들어있는 문자열을 모두 빈 문자열로 만들어라
       setWriter("");
@@ -59,20 +73,26 @@ function App() {
       if (input === "") {
         setErrorIMeg("필수입력 사항입니다");
       }
+
+      //   1. 네개의 state변수들이 전부 빈문자열이 아닐때 버튼의 색이 red로 활성화 시킨다
+      //  2. 버튼을 활성화 -> 색을 변하게 하는 불린값이 담긴 state변수를 선언한다
+      // 초기화값을 false로 주고, if문안에서 문자열이 전부 true일때 색을 red로 바꿔준다
+      // button 에서 style = active가 true일때 red : gray
+      // 이벤트가 어디서 발생하는지를 잘 알아둔다
     }
   };
 
   return (
     <div className="css_wrap">
-      <header>
+      <header className="css_headerDiv">
         <p>게시글등록</p>
       </header>
-      <main>
+      <div className="css_mainDiv">
         {/* 작성자 비밀번호 */}
-        <section className="css_containerWP">
+        <section className="css_containerWp">
           <div className="css_inputBox">
             <div>
-              <span>작성자</span>
+              <span className="css_span">작성자</span>
             </div>
             <input
               className="css_inputStyleBox"
@@ -85,7 +105,7 @@ function App() {
           </div>
           <div className="css_inputBox">
             <div>
-              <span>비밀번호</span>
+              <span className="css_span">비밀번호</span>
             </div>
             <input
               className="css_inputStyleBox"
@@ -101,7 +121,7 @@ function App() {
         {/* 제목 */}
         <section className="css_containerTitle">
           <div>
-            <span>제목</span>
+            <span className="css_span">제목</span>
           </div>
           <input
             className="css_inputStyleBox"
@@ -115,7 +135,7 @@ function App() {
         {/* 내용 */}
         <section className="css_writeBox">
           <div>
-            <span>내용</span>
+            <span className="css_span">내용</span>
           </div>
           <input
             type="text"
@@ -127,7 +147,7 @@ function App() {
         {/* 주소 */}
         <section className="css_address">
           <div>
-            <span>주소</span>
+            <span className="css_span">주소</span>
           </div>
           <div>
             <input type="text" className="css_addressNum" placeholder="01234" />
@@ -148,7 +168,7 @@ function App() {
         {/* 유튜브링크 */}
         <section className="css_containerTitle">
           <div>
-            <span>유튜브 링크</span>
+            <span className="css_span">유튜브 링크</span>
           </div>
           <input
             className="css_inputStyleBox"
@@ -160,32 +180,38 @@ function App() {
         {/* 사진첨부 */}
         <section className="css_address">
           <div className="css_plusPotoTitle">
-            <span>사진 첨부</span>
+            <span className="css_span">사진 첨부</span>
           </div>
           <div className="css_addPotoBox">
             <div className="css_poto">
-              <img src="./Vector.png" alt="plusButton" />
+              <img src="/img/VectorPlus.png" alt="plusButton" />
               <p>클릭해서 사진 업로드</p>
             </div>
             <div className="css_poto">
-              <img src="./Vector.png" alt="plusButton" />
+              <img src="/img/VectorPlus.png" alt="plusButton" />
               <p>클릭해서 사진 업로드</p>
             </div>
             <div className="css_poto">
-              <img src="./Vector.png" alt="plusButton" />
+              <img src="/img/VectorPlus.png" alt="plusButton" />
               <p>클릭해서 사진 업로드</p>
             </div>
           </div>
         </section>
         <section className="css_buttonBox">
           <button className="noBtn">취소</button>
-          <button className="addBtn" onClick={handleClickMeg}>
+          <button
+            className="addBtn"
+            onClick={handleClickMeg}
+            style={{
+              backgroundColor: isActive === true ? "yellow" : "gray",
+            }}
+          >
             등록하기
           </button>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Board;
