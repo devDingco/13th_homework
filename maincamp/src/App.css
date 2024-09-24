@@ -1,10 +1,11 @@
 *{
-  margin:0 auto;
   padding:0;
   font-size:62.5%;
 }
-body{
+
+.content{
   width:128rem;
+  margin:0 auto;
 }
 input::placeholder,textarea::placeholder{
   font-size:1.6rem;

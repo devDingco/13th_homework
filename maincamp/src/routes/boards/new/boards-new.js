@@ -1,8 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import '../../../App.css';
 import {useState} from 'react'
 
-const App = () => {
+const BoardsNew = () => {
 
   const [name, setName] = useState("")
   const [nameError, setNameError] = useState("")
@@ -189,4 +189,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default BoardsNew;
