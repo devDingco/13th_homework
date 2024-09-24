@@ -1,7 +1,6 @@
 import ReactQuill from "react-quill-new";
 import React, { useRef } from "react";
 import "react-quill-new/dist/quill.snow.css";
-import { text } from "body-parser";
 
 type ReactQuillBoxProps = {
   id?: string;
@@ -45,7 +44,7 @@ const ReactQuillBox = (props: ReactQuillBoxProps) => {
   const handleChange = () => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
-      const editorText = editor.getText();
+      const editorText = editor.getText().replace(/\n/g, "");
       setcontents({ text: editor.getText(), html: editor.root.innerHTML });
       onChange && onChange(editorText);
     }
