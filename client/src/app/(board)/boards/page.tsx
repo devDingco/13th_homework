@@ -1,6 +1,9 @@
 /** @format */
 
+import { Suspense } from 'react';
 import BoardItemContainer from './_components/BoardItemContainer';
+import BoardLoading from './_components/BoardLoading';
+import getAllBoards from '@/app/apis/boards/getAllBoards';
 
 export default function Board() {
 	return (
@@ -11,7 +14,9 @@ export default function Board() {
 				<div className="w-[100px] flex justify-center items-center">작성자</div>
 				<div className="w-[100px] flex justify-center items-center">날짜</div>
 			</div>
-			<BoardItemContainer />
+			<Suspense fallback={<BoardLoading />}>
+				<BoardItemContainer resource={getAllBoards()} />
+			</Suspense>
 		</div>
 	);
 }
