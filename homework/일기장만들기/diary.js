@@ -520,7 +520,7 @@ window.addEventListener("scroll", () => {
     // if (scrollPercent === 1) {
     //   potoApi();
     // }
-  }, 1000);
+  }, 3000);
 });
 
 // 사진 비율에 따른 필터적용
