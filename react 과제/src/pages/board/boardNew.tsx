@@ -1,51 +1,42 @@
 import Input from "components/input";
-import TextArea from "components/textarea";
 import Main from "layout/main";
 import { useForm } from "react-hook-form";
 import type { formList } from "hooks/useformset";
 import { formResister } from "hooks/useformset";
 import PostSearchPopBtn from "components/postSearchPopBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuillBox from "components/reactQuillBox";
 
 const BoardNew = () => {
   const {
     register, // 검증 규칙 적용 메서드
     // handleSubmit, // 폼 제출 핸들러
-    watch, // 입력값을 모니터링하는 메서드
+    // watch, // 입력값을 모니터링하는 메서드
     // setError, // 에러 메시지 설정 메서드
     setValue, // 입력값 설정 메서드
-    formState: { errors, isDirty, isValid }, // 폼의 상태를 나타내는 속성
+    formState: { errors, isValid }, // 폼의 상태를 나타내는 속성
     // getValues, // 폼의 입력값을 반환하는 메서드
   } = useForm<formList>({ mode: "onChange" }); // 어떤 이벤트에 동작을 하도록 할지 설정
 
   const [zoneCode, setZoneCode] = useState(""); // 유저 우편번호
   const [address, setAddress] = useState(""); // 유저 주소
-
-  const [contents, setContents] = useState({ text: "", html: "" });
+  const [contents, setContents] = useState({ text: "", html: "" }); // 게시글 내용
+  const [disabled, setDisabled] = useState(true);
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log("게시글 등록");
-
-    // Object.entries(formResister)
-    //   .filter(
-    //     ([key, value]) =>
-    //       value.required && watch(key as keyof formList) !== undefined
-    //   )
-    //   .forEach(([key, value]) => {
-    //     if (watch(key as keyof formList) === "")
-    //       setError(key as keyof formList, {
-    //         type: "required",
-    //         message: value.required,
-    //       });
-    //   });
-    // if (!isValid) {
-    //   console.log("유효성 검사 실패");
-    // } else {
-    //   alert("게시글이 등록되었습니다.");
-    // }
+    alert("게시글 등록");
   };
+
+  // isValid가 true여도 content.text가 빈 문자열이면 disabled를 true로 설정
+  // isValid가 true이고 content.text가 빈 문자열이 아니면 disabled를 false로 설정
+  useEffect(() => {
+    if (isValid && contents.text !== "") {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [isValid, contents.text]);
 
   return (
     <Main>
@@ -94,20 +85,12 @@ const BoardNew = () => {
           onChange={(text) => {
             register("writeContent", formResister.writeContent);
             setValue("writeContent", text);
-            console.log(watch("writeContent")); // !입력값 확인 버튼 활성화 관련 점검 필요
           }}
           readonly={false}
           placeholder="내용을 입력해 주세요."
           errormessage={errors?.writeContent?.message}
         />
-        {/* <TextArea
-          id="writeContent"
-          title="내용"
-          required
-          placeholder="내용을 입력해 주세요."
-          {...register("writeContent", formResister.writeContent)}
-          errormessage={errors?.writeContent?.message}
-        /> */}
+
         <div className="py-10" />
         <div className="flex gap-2 items-end max-w-56">
           <Input
@@ -170,7 +153,7 @@ const BoardNew = () => {
             value="등록하기"
             onClick={(event) => onSubmit(event)}
             // 폼의 유효성 검사를 통과하지 못하면 버튼 비활성화
-            disabled={!isDirty || !isValid}
+            disabled={disabled}
           >
             등록하기
           </button>
