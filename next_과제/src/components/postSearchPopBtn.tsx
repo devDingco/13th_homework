@@ -8,9 +8,7 @@ type PostSearchPopProps = {
 
 const PostSearchPopBtn = (props: PostSearchPopProps) => {
   const { setAddress, setZoneCode, btnstyle } = props;
-  const open = useDaumPostcodePopup(
-    process.env.REACT_APP_DAUM_POSTCODE_API_KEY
-  );
+  const open = useDaumPostcodePopup(process.env.DAUM_POSTCODE_API_KEY);
 
   interface dataType {
     address: string;

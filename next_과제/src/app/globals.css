@@ -1,13 +1,17 @@
+@import url("https://webfontworld.github.io/gmarket/GmarketSans.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://webfontworld.github.io/gmarket/GmarketSans.css");
 
 :root {
   /* --background: #ffffff;
   --foreground: #171717; */
 }
+
+/* * {
+  box-sizing: border-box;
+} */
 
 @media (prefers-color-scheme: dark) {
   :root {

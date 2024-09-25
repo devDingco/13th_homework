@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 
 export default function DarkModeButton() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
+  // const themeDefault = localStorage.getItem("theme") ?? "light";
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     localStorage.setItem("theme", theme!);
