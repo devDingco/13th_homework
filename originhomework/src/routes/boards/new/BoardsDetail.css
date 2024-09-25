@@ -1,0 +1,210 @@
+* {
+    box-sizing: border-box;
+    /* background-color: #f8efe8; */
+}
+:root {
+    --gray-50: #f2f2f2;
+    --gray-800: #333;
+    --gray-100: #E4E4E4;
+    --gray-300: #C7C7C7;
+    --gray-700: #5F5F5F;
+    --Gray-Gray-200: #D4D3D3;
+    --Gray-W: #FFF;
+}
+body{
+    padding:0;
+    margin:0;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--gray-300);;
+}
+.bigTitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid var(--gray-300);
+    padding: 60px;
+    height: 200px;
+    gap: 5px;
+}
+.bigTitle {
+    font-size: 50px;
+    font-weight: 500;
+    color: var(--gray-800)
+}
+.subBigTitle {
+    font-size: 13px;
+    color: var(--gray-700)
+}
+.titleContainer {
+    max-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.aboutContent {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    position: relative;
+    top: 0;
+
+    color: var(--gray-700);
+    font-size: 14px;
+}
+.authorDateContainer {
+    display: flex;
+}
+.authorName {
+    margin-left: 3px;
+}
+.date {
+    margin-bottom: 3px;
+    margin-left: 8px;
+}
+
+
+.title {
+    color: var(--gray-800);
+    font-family: Pretendard;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 35px;
+}
+
+.contentContainer{
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    place-items: center;
+}
+.grid1 {
+    display: flex; /* Flexbox를 사용하여 세로 방향으로 배치 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    height: 100%; /* Makes the container take the full height of its grid cell */
+}
+.imgContainer {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    
+}
+.imgContainer img {
+    width: 100%; /* imgContainer의 너비에 맞춤 */
+    height: 100%; /* height를 정사각형으로 고정 */
+    aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
+    object-fit: cover; /* 이미지 비율을 유지하면서 중앙에 맞춤 */
+    margin: 5px 0;
+    justify-content: center;
+}
+
+.textContainer {
+    font-size: 15px;
+    line-height: 25px;
+    color: var(--gray-800);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding-left:45px;
+    /* max-height: 550px; */
+}
+.textContent {
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.carousel-indicators {
+    background-color: transparent;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background: transparent;
+}
+.carousel-inner img {
+    border-radius: 20px;
+}
+.iconContainer {
+    display: flex;
+    width: 100%;
+    justify-content:space-between;
+    gap: 12px;
+    position: relative;
+    top: -20px;
+}
+.iconContainer img {
+    width: 28px;
+}
+.addressContainer {
+    width: 100%; /* 필요한 경우 전체 너비 설정 */
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+.address {
+    margin: 0; /* 여백 제거 */
+    padding: 0; /* 여백 제거 */
+    text-align: left; /* 왼쪽 정렬 */
+}
+.good {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bad{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.videoConatiner {
+    margin-top: 120px;
+    padding-bottom: 80px;
+    /* border-bottom: 1px solid var(--gray-300); */
+}
+.grayBox {
+    background-color: var(--gray-50);
+    width: 100%;
+    height: 512px;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.grayBox img {
+    width: 822px;
+    height: 464px;
+}
+
+.goodBadContainer{
+    display: flex;
+    gap: 15px;
+}
+.locationContainer {
+    display: flex;
+    gap: 15px;
+}
+
+.gotoListButton{
+    display: flex;
+height: 40px;
+padding: 8px 12px;
+align-items: center;
+gap: 8px;
+border-radius: 8px;
+border: 1px solid var(--gray-B, #000);
+background: var(--gray-w, #FFF);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--gray-300);
+}
