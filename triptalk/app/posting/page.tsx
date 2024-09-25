@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { redirect } from 'next/navigation';
 import styles from './postingForm.module.css';
 
 export default function PostingForm() {
@@ -26,6 +27,8 @@ export default function PostingForm() {
       return;
     }
     console.log({ username, password, title, content, address, youtubeLink, files });
+    makePost({ username, password, title, content, address, youtubeLink, files });
+    redirect(`/post/${id}`);
   };
 
   return (

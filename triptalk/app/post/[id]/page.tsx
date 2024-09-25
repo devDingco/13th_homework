@@ -5,12 +5,12 @@ interface Params {
 }
 
 interface PostDisplayProps {
-    params: Params;
+    name: string;
 }
 
-export default function PostDisplay({ params } : PostDisplayProps) {
+export default function PostDisplay({ name, ...rest } : PostDisplayProps) {
   const post = {
-    username: '작성자 이름',
+    username: name,
     date: '2023/09/11',
     title: '게시물 제목',
     content: `게시물 내용: 여기에 게시물 내용을 표시합니다. 게시물에는 여러 줄이 포함될 수 있습니다.`,
