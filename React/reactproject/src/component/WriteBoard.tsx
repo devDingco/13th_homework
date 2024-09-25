@@ -99,9 +99,6 @@ function WriteBoard () {
       }
     }
 
-
-
-  
     const onClickSignup = () => {
   
         if(name === ("")) {
