@@ -1,45 +1,21 @@
 /** @format */
-'use client';
 
-import { useParams } from 'next/navigation';
-
-import { boardObject } from '@/app/boardObject';
-import BoardHeader from './_components/BoardHeader';
-import BoardArticle from './_components/BoardArticle';
+import { Suspense } from 'react';
 import BoardFooter from './_components/BoardFooter';
-import BoardIcon from './_components/BoardIcon';
-import BoardImages from './_components/BoardImages';
-import BoardVideo from './_components/BoardVideo';
-import BoardLikeHate from './_components/BoardLikeHate';
-import { IBoardType } from '@/models/boardType';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import BoardLoading from '../_components/BoardLoading';
+import BoardContainer from './_components/BoardContainer';
 import getBoard from '@/app/apis/boards/getBoard';
-import { useEffect } from 'react';
+import { IDeatilPageProps } from '@/models/detailPageProps';
 
-export default function Detail() {
-	const param: Params = useParams();
-
-	useEffect(() => {
-		const getData = async () => {
-			const res = await getBoard(+param.boardId);
-			console.log(res);
-		};
-
-		getData();
-	}, [param]);
-
-	const boardInfor: IBoardType | undefined = boardObject.find(
-		(board) => board.boardId === +param.boardId,
-	);
+export default function Detail({ params }: IDeatilPageProps) {
+	const param = params.boardId;
 
 	return (
 		<div className="flex flex-col gap-4">
-			<BoardHeader infor={boardInfor} />
-			<BoardIcon />
-			<BoardImages infor={boardInfor} />
-			<BoardArticle infor={boardInfor} />
-			<BoardVideo infor={boardInfor} />
-			<BoardLikeHate infor={boardInfor} />
+			<Suspense fallback={<BoardLoading />}>
+				<BoardContainer resource={getBoard(+param)} />
+			</Suspense>
+			{/* <BoardLikeHate infor={boardInfor} /> */}
 			<BoardFooter />
 		</div>
 	);

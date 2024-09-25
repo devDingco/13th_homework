@@ -5,5 +5,5 @@ export interface ICreateFormBoard {
 	title: string;
 	content: string;
 	youtubeUrl?: string;
-	imageUrl?: string;
+	imageUrl?: string[];
 }
