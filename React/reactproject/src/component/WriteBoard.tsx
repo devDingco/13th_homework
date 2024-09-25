@@ -1,66 +1,108 @@
 import React from 'react';
-import addimage from '../assets/addimage.png'
+import addimage from "../assets/addimage.png"
 import Input from './commons/Input';
 import Button from './commons/Button';
+import { ChangeEvent, useState } from 'react'
 
 
-export default function WriteBoard () {
-    const[name, setName] = React.useState("")
 
-    const[password, setPassword] = React.useState("")
+function WriteBoard () {
+    const[name, setName] = useState("")
+
+    const[password, setPassword] = useState("")
   
-    const[title, setTitle] = React.useState("")
+    const[title, setTitle] = useState("")
   
-    const[content, setContent] = React.useState("")
+    const[content, setContent] = useState("")
     
-    const[nameblank, setNameBlank] = React.useState("")
+    const[nameblank, setNameBlank] = useState("")
   
-    const[passwordblank, setPasswordBlank] = React.useState("")
+    const[passwordblank, setPasswordBlank] = useState("")
   
-    const[titleblank, setTitleBlank] = React.useState("")
+    const[titleblank, setTitleBlank] = useState("")
   
-    const[contentblank, setContentBlank] = React.useState("")
+    const[contentblank, setContentBlank] = useState("")
   
-    const[isActive, setIsActive] = React.useState(false)
+    const[isActive, setIsActive] = useState(false)
+
+    const[addressnumber, setaddressnumber] = useState("")
+
+    const[address, setaddress] = useState("")
+
+    const[addressdetail, setaddressdetail] = useState("")
+
+    
+
+
+
   
-    const onChangeName = (event) => {
+    const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
       setName(event.target.value)
-      if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("")) {
+      if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
   
-    const onChangePassword = (event) => {
+    const onChangePassword = (event:ChangeEvent<HTMLInputElement>) => {
       setPassword(event.target.value)
-      if(name !== ("") && title !== ("") && content !== ("") && event.target.value !== ("")) {
+      if(name !== ("") && title !== ("") && content !== ("") && event.target.value !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
   
-    const onChangeTitle = (event) => {
+    const onChangeTitle = (event:ChangeEvent<HTMLInputElement>) => {
       setTitle(event.target.value)
-      if(name !== ("") && event.target.value !== ("") && content !== ("") && password !== ("")) {
+      if(name !== ("") && event.target.value !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
     
-    const onChangeContent = (event) => {
+    const onChangeContent = (event:ChangeEvent<HTMLInputElement>) => {
       setContent(event.target.value)
-      if(name !== "" && password !== "" && title !== "" && event.target.value !== "") {
+      if(name !== "" && password !== "" && title !== "" && event.target.value !== "" && addressnumber !== "" && address !== "" && addressdetail !== "") {
         setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
   
+    const onChangeAddressNumber = (event:ChangeEvent<HTMLInputElement>) => {
+      setaddressnumber(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && address !== "" && addressdetail !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+    const onChangeAddress = (event:ChangeEvent<HTMLInputElement>) => {
+      setaddress(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && addressnumber !== "" && addressdetail !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+    const onChangeAddressDetail = (event:ChangeEvent<HTMLInputElement>) => {
+      setaddressdetail(event.target.value)
+      if(name !== "" && password !== "" && title !== "" && content !== "" && event.target.value !== "" && addressnumber !== "" && address !== "") {
+        setIsActive(true)
+      } else {
+        setIsActive(false)
+      }
+    }
+
+
+
   
-    const onClickSignup = (event) => {
+    const onClickSignup = () => {
   
         if(name === ("")) {
           setNameBlank("필수입력 사항입니다.")
@@ -82,21 +124,21 @@ export default function WriteBoard () {
         } else {
           setContentBlank("")
         }
-        if(name !== ("") && title !== ("") && content !== ("") && password !== ("")) {
+        if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
           alert("게시글 등록 완료")
         }
     }
 
     return(
-      <div class="css_layout"> 
-        <div class="css_header">게시글 등록</div>
+      <div className="css_layout"> 
+        <div className="css_header">게시글 등록</div>
           <div className="css_input">
 
           {/* 작성란 헤더 */}
           <div className="css_inputtop">
               {/* 작성자 */}
               <div className="css_writer">
-                  <Input label="작성자" type="text" id="name_id" placeholder="작성자 명을 입력해 주세요." name="name" onChange={onChangeName}/>
+                  <Input label="작성자" type="text" id="name_id" placeholder="작성자 명을 입력해 주세요." name="name" onChange={onChangeName} />
                   <div className='css_blankerror'>{nameblank}</div>
               </div>
               {/* 비밀번호 */}
@@ -131,11 +173,11 @@ export default function WriteBoard () {
           <div className="css_address">
               <label htmlFor="addressnum_id" className="css_addressnumtag">주소</label>
               <div className="css_addressnum">
-                  <Input type="text" id="addressnum_id" placeholder="01234" name="addressnum"/>
+                  <Input type="text" id="addressnum_id" placeholder="01234" name="addressnum" onChange={onChangeAddressNumber}/>
                   <Button type="button" value="우편번호 검색" name="search" />
               </div>
-              <Input type="text" id="address_id" placeholder="주소를 입력해 주세요." name="address"/>
-              <Input type="text" id="addressdetail_id" placeholder="상세주소" name="addressdetail"/>
+              <Input type="text" id="address_id" placeholder="주소를 입력해 주세요." name="address" onChange={onChangeAddress}/>
+              <Input type="text" id="addressdetail_id" placeholder="상세주소" name="addressdetail" onChange={onChangeAddressDetail}/>
           </div>
 
           <hr></hr>
@@ -167,3 +209,5 @@ export default function WriteBoard () {
     </div>
     )
 }
+
+export default WriteBoard;

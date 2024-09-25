@@ -4,7 +4,7 @@ import MainImgae from '../assets/MainImage.png'
 import BottomImgae from '../assets/Bottomimage.png'
 import Hate from '../assets/Hate.png'
 import Like from '../assets/Like.png'
-import Profile from '../assets/Profile.png'
+import Profile from 'Profile.png'
 import List from '../assets/List.png'
 import Modify from '../assets/Modify.png'
 import Clip from '../assets/Clip.png'
@@ -15,16 +15,16 @@ export default function BoardsDetail () {
     return (
         <div className="css_layout">
             <div className="css_header">살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라</div>    
-                {/* <img src="../assets/Profile.png" alt='profile'/> */}
+                
                 <div className='css_info'>
                     <div className='css_user'>
                         <div className='css_name'>
-                            <img src={Profile} alt='profile' className='css_profileimage'></img>
+                            <img src="Profile.png" alt='profile' className='css_profileimage'/>
                             홍길동
                         </div>
                         <div className='css_date'>2024-09-23</div>
                     </div>
-                    <hr></hr>
+                    <hr className='css_detailhr'></hr>
                     <div className='css_side'>
                         <div className='css_clip'>
                             <img src={Clip} alt='clip'/>
@@ -34,7 +34,6 @@ export default function BoardsDetail () {
                         </div>
                     </div>
                 </div>
-                
             <div>
                 <div className='css_image'>
                     <img src={MainImgae} alt='mainimage'/>
@@ -86,11 +85,10 @@ export default function BoardsDetail () {
                     <img src={Like} alt='like'/> <span>12</span>
                 </div>
             </div>
-                <div className='css_button'>
+                <div className='css_detailbutton'>
                     <button className='css_list'>
                         <img src={List} alt='list'/>
                     </button>
-
                     <button className='css_modify'>
                         <img src={Modify} alt='modify'/>
                     </button>
