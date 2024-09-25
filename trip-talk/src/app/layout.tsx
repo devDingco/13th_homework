@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+// eslint-disable-next-line
 export const metadata: Metadata = {
   title: "trip-talk",
   description:
