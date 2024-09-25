@@ -33,7 +33,9 @@ const 페이지들 = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as ReactDOM.Container
+);
 root.render(<RouterProvider router={페이지들} />);
 
 // If you want to start measuring performance in your app, pass a function
