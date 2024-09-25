@@ -1,27 +1,36 @@
 import "../../../App.css";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 function BoardsNew() {
-  const [errorMessage, setErrorMessage] = useState({
+  const [errorMessage, setErrorMessage] = useState<IInput>({
     writer: "",
     password: "",
     title: "",
     content: "",
   });
 
-  const [validation, setValidation] = useState({
+  const [validation, setValidation] = useState<IInput>({
     writer: "",
     password: "",
     title: "",
     content: "",
   });
 
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
-  const onChange = (e) => {
+  interface IInput {
+    writer: string;
+    password: string;
+    title: string;
+    content: string;
+  }
+
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const updatedValidation = {
       ...validation,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     };
 
     const isAllFilled = Object.values(updatedValidation).every(
@@ -33,7 +42,7 @@ function BoardsNew() {
   };
 
   const onSubmit = () => {
-    let errors = {
+    let errors: IInput = {
       writer: "",
       password: "",
       title: "",

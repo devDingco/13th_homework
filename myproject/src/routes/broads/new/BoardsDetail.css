@@ -103,6 +103,10 @@ main {
   align-items: center;
 }
 
+.good_count {
+  color: #f66a6a;
+}
+
 .list_edit_box {
   display: flex;
   justify-content: center;
