@@ -43,6 +43,7 @@ const FormComponent: React.FC = () => {
         });
     };
 
+    let hasError = false;
     const handleSubmit = (e: React.FormEvent):void => {
         e.preventDefault();
         const newError:FormError = {
@@ -51,7 +52,7 @@ const FormComponent: React.FC = () => {
             title: '',
             content: ''
         };
-        let hasError = false;
+        
         Object.keys(formData).forEach((key) => {
             if (!formData[key as keyof FormData].trim()) {
                 newError[key as keyof FormData] = "필수입력사항입니다";
@@ -71,22 +72,22 @@ const FormComponent: React.FC = () => {
             <ul className="mt-40 list-inside text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
                 <div className="flex space-x-4">
                     <li className="flex-1 p-2">작성자<code className="text-red-600">*</code>
-                        <input name="name" value={formData.name} onChange={handleInputChange} className="container rounded max-w-screen-xl" type="text" name="name" placeholder='작성자명을 입력해 주세요.' />
-                        <code className="text-red-600">필수입력 사항입니다</code>
+                        <input name="name" value={formData.name} onChange={handleInputChange} className="container rounded max-w-screen-xl border" type="text" placeholder='작성자명을 입력해 주세요.' />
+                        {(formData.name === '') && <code className="text-red-600">필수입력 사항입니다</code>}
                     </li>
                     <li className="flex-1 p-2">비밀번호<code className="text-red-600">*</code>
-                        <input name="pw" value={formData.pw} onChange={handleInputChange} className="container rounded max-w-screen-xl" type="password" name="pw" placeholder='비밀번호를 입력해 주세요.' />
-                        <code className="text-red-600">필수입력 사항입니다</code>
+                        <input name="pw" value={formData.pw} onChange={handleInputChange} className="container rounded max-w-screen-xl border" type="password" placeholder='비밀번호를 입력해 주세요.' />
+                        {(formData.pw === '') && <code className="text-red-600">필수입력 사항입니다</code>}
                     </li>
                 </div>
                 <hr className="mb-2 mt-6" />
                 <li className="flex-1 p-2">제목<code className="text-red-600">*</code>
-                    <input name="title" value={formData.title} onChange={handleInputChange} className="container rounded max-w-screen-xl" type="text" name="title" placeholder='제목을 입력해 주세요.' />
-                    <code className="text-red-600">필수입력 사항입니다</code>
+                    <input name="title" value={formData.title} onChange={handleInputChange} className="container rounded max-w-screen-xl border" type="text" placeholder='제목을 입력해 주세요.' />
+                    {(formData.title === '') && <code className="text-red-600">필수입력 사항입니다</code>}
                 </li>
                 <li className="flex-1 p-2">내용<code className="text-red-600">*</code>
-                    <textarea name="content" value={formData.content} onChange={handleInputChange} className="container rounded max-w-screen-xl h-24" name="content" placeholder='내용을 입력해 주세요.'></textarea>
-                    <code className="text-red-600">필수입력 사항입니다</code>
+                    <textarea name="content" value={formData.content} onChange={handleInputChange} className="container rounded max-w-screen-xl h-24 border" placeholder='내용을 입력해 주세요.'></textarea>
+                    {(formData.content === '') && <code className="text-red-600">필수입력 사항입니다</code>}
                 </li>
             </ul>
             <div className="flex justify-end gap-2 p-2">
