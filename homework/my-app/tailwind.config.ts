@@ -11,9 +11,6 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-
-        철수가좋아하는색: "blue", //나만의 부트스트랩 만들기
-        영희가좋아하는색: "green"
       },
     },
   },

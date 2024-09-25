@@ -1,27 +1,28 @@
+/*
+ * {
+    box-sizing : boer-box
+ }
+위의 css로 설정안해줘도 태일윈드에 기본적으로 내장되어있음 (@tailwind base;)*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
+/* 내가 만드는 css추가 */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .철수의상자 {
+        color: green;
+        font-size: 30px;
+    }
+    .영희의상자 {
+        color: blue;
+        font-size: 30px;
+    }
+
+    *{
+        font-family: var(--글로벌폰트변수);
+    }
 }
+
+
