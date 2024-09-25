@@ -1,9 +1,7 @@
-
-
 "use client";
 
 import React from 'react';
-import styles from './style.module.css'
+import styles from './style.module.css';
 // import MainImgae from '../assets/MainImage.png'
 // import BottomImgae from '../assets/Bottomimage.png'
 // import Hate from '../assets/Hate.png'
