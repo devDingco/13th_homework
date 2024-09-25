@@ -34,9 +34,15 @@ export class TransformInterceptor<T>
                     return { message, statusCode };
                 }
                 if (data._id) {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    const { _id, ...rest } = data;
-                    return { message, statusCode, data: rest };
+                    if (data.like >= 0) {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { _id, boardId, ...rest } = data;
+                        return { message, statusCode, data: rest };
+                    } else {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { _id, ...rest } = data;
+                        return { message, statusCode, data: rest };
+                    }
                 }
 
                 if (typeof data === 'object' && !Array.isArray(data)) {

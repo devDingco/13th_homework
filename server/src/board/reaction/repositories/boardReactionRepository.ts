@@ -1,7 +1,7 @@
 import { MongoRepository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardReaction } from '../entities/board-reaction.entity';
+import { BoardReaction } from '../entities/reaction.entity';
 
 @Injectable()
 export class BoardReactionRepository {
@@ -17,6 +17,21 @@ export class BoardReactionRepository {
         });
 
         return await this.boardReactionRepository.save(boardReaction);
+    }
+
+    async findBoardReaction(boardId: number): Promise<BoardReaction> {
+        const findReaction = await this.boardReactionRepository.findOneBy({
+            boardId,
+        });
+
+        if (!findReaction) {
+            throw new HttpException(
+                `boardID: ${boardId} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        return findReaction;
     }
 
     async deleteBoardReaction(boardId: number): Promise<boolean> {
