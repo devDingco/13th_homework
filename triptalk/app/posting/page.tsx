@@ -22,6 +22,8 @@ export default function PostingForm() {
     setFiles(updatedFiles);
   };
 
+
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password || !title || !content) {
