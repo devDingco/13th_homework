@@ -1,0 +1,281 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --gray-800: #333;
+  --gray-100: #E4E4E4;
+  --gray-300: #C7C7C7;
+  --Gray-Gray-200: #D4D3D3;
+  --Gray-W: #FFF;
+}
+body{
+  padding:0;
+  margin:0;
+}
+input {
+  margin: 0;
+  padding: 0;
+}
+
+/*-----------------게시물등록페이지-----------------*/
+.emphasize {
+  color: var(--red, #F66A6A);
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+.titleContainer {
+ max-width: 100%;
+}
+
+.title {
+  color: #000000;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.formContainer {
+  max-width: 1280px;
+}
+.box {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  align-self: stretch;
+  margin: 40px 0;
+  padding-bottom: 40px; /* border-bottom과 함께 간격 조정 */
+  border-bottom: 1px solid var(--gray-100);
+  max-width: 100%
+}
+.labelContainer {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
+  gap: 4px; /* 라벨과 입력 필드 사이의 간격 */
+  width: 50%;
+}
+
+.labelContainer label,
+.labelContainer2 label {
+  color: var(--gray-800);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+.input1 {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200);
+  background: var(--Gray-W);
+  max-width: 620px;
+  width: 100%; /* 부모 요소의 너비를 채우되 max-width를 초과하지 않음 */
+}
+.labelContainer2 {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
+  gap: 4px; /* 라벨과 입력 필드 사이의 간격 */
+  width: 1280px;
+}
+.input2 {
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+  width: 100%;
+}
+textarea {
+  display: flex;
+  height: 336px; /* 높이 설정 */
+  padding: 12px 16px; /* 내부 여백 설정 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3); /* 테두리 색상 및 두께 설정 */
+  background: var(--Gray-W, #FFF); /* 배경 색상 설정 */
+  max-width: 100%; /* 너비를 부모 요소에 맞추기 위해 설정 (필요에 따라 조정) */
+
+  resize: none; /* 크기 조절 비활성화 */
+}
+
+.columnBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  margin: 40px 0;
+  padding-bottom: 40px; /* border-bottom과 함께 간격 조정 */
+  border-bottom: 1px solid var(--gray-100);
+  max-width: 100%
+}
+.zipAndButtonContainer {
+  display: flex;
+  gap: 8px;
+}
+.zipNum {
+  max-width: 82px;
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+}
+.buttonContainer {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+.searchZipNum {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #FFF);
+
+
+  color: var(--gray-B, #000);
+  text-align: center;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.enterAddress {
+
+}
+.boxEnd {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px 0;
+  width: 100%
+}
+.flexbox2 {
+  max-width: 160px;
+  width: 100%;
+}
+.photoBoxContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.photoBox {
+  display: flex;
+  width: 100%; 
+  height: 160px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-50, #F2F2F2);
+}
+
+.photoBox > img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.photoBoxText {
+  color: var(--gray-600, #777);
+
+  /* r_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  
+}
+.flexBox {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cancelButton {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #FFF);
+
+  color: var(--gray-B, #000);
+  text-align: center;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.submitButton {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-300);
+
+  color: var(--gray-100);
+  border: none;
+  text-align: center;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.submitButton_active {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #2974E5;
+
+  color: #fff; 
+  border: none;
+  text-align: center;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.error-text {
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  display: none;
+}
