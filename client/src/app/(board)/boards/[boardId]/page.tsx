@@ -2,22 +2,23 @@
 
 import { Suspense } from 'react';
 import BoardFooter from './_components/BoardFooter';
-import BoardLoading from '../_components/BoardLoading';
 import BoardContainer from './_components/BoardContainer';
 import getBoard from '@/app/apis/boards/getBoard';
 import { IDeatilPageProps } from '@/models/detailPageProps';
 import BoardLikeHate from './_components/BoardLikeHate';
 import getReaction from '@/app/apis/boards/reaction/getReaction';
+import BoardSkeleton from './_components/BoardSkeleton';
+import BoardSkeletonReaction from './_components/BoardSkeletonReaction';
 
 export default function Detail({ params }: IDeatilPageProps) {
 	const param = params.boardId;
 
 	return (
 		<div className="flex flex-col gap-4">
-			<Suspense fallback={<BoardLoading />}>
+			<Suspense fallback={<BoardSkeleton />}>
 				<BoardContainer resource={getBoard(+param)} />
 			</Suspense>
-			<Suspense fallback={<BoardLoading />}>
+			<Suspense fallback={<BoardSkeletonReaction />}>
 				<BoardLikeHate resource={getReaction(+param)} />
 			</Suspense>
 			<BoardFooter />

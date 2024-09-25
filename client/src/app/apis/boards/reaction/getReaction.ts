@@ -10,7 +10,7 @@ export default function getReaction(boardId: number): IReactionReader {
 
 	let board: IReaction | Promise<IReaction>;
 	const response = api
-		.get(`/board/${boardId}`)
+		.get(`/board/${boardId}/reaction`)
 		.then((response) => {
 			setTimeout(() => {
 				board = response.data.data;
