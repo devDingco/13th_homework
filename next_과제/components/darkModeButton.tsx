@@ -10,7 +10,7 @@ export default function DarkModeButton() {
     document.documentElement.setAttribute("data-theme", localTheme!);
   }, [theme]);
 
-  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleThemeChange = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
@@ -20,7 +20,7 @@ export default function DarkModeButton() {
       <input
         type="checkbox"
         className="theme-controller"
-        onChange={(e) => handleThemeChange(e)}
+        onChange={() => handleThemeChange()}
         checked={theme === "dark"}
       />
 

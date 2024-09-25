@@ -12,10 +12,18 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
     process.env.REACT_APP_DAUM_POSTCODE_API_KEY
   );
 
-  const handleComplete = (data: any) => {
+  interface dataType {
+    address: string;
+    addressType: string;
+    bname: string;
+    buildingName: string;
+    zonecode: string;
+  }
+
+  const handleComplete = (data: dataType) => {
     let fullAddress = data.address;
     let extraAddress = "";
-    let zoneCode = data.zonecode;
+    const zoneCode = data.zonecode;
 
     if (data.addressType === "R") {
       if (data.bname !== "") {

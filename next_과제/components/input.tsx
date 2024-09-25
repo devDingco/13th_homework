@@ -16,8 +16,7 @@ type InputProps = {
 type inputRef = HTMLInputElement;
 
 const Input = forwardRef<inputRef, InputProps>((props, ref) => {
-  let { title, errormessage, ...rest } = props;
-
+  const { title, errormessage, ...rest } = props;
   if (props.type === "file" && props.accept === "image/*") {
     return (
       <div className="flex flex-col gap-2">
@@ -55,5 +54,7 @@ const Input = forwardRef<inputRef, InputProps>((props, ref) => {
     </label>
   );
 });
+
+Input.displayName = "Input";
 
 export default Input;

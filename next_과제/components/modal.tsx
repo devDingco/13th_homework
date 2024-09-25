@@ -28,15 +28,19 @@ export default function Modal(props: ModalProps) {
     title, // 모달 제목
     contents, // 모달 내용
     visible, // 모달 열기/닫기 상태
-    btnstyle, // 모달 열기 버튼 스타일
-    modalstyle, // 모달 스타일
+    // btnstyle, // 모달 열기 버튼 스타일
+    // modalstyle, // 모달 스타일
     // onClick, // 모달 열기 버튼 클릭 이벤트
   } = props;
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!modalRef.current) return;
-    visible ? modalRef.current?.showModal() : modalRef.current?.close();
+    if (visible) {
+      modalRef.current?.showModal();
+    } else {
+      modalRef.current?.close();
+    }
   }, [visible]);
 
   const handleClose = () => {

@@ -39,14 +39,14 @@ const ReactQuillBox = (props: ReactQuillBoxProps) => {
     errormessage,
     ...rest
   } = props;
-  const quillRef = useRef<any>(null);
+  const quillRef = useRef<ReactQuill | null>(null);
 
   const handleChange = () => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const editorText = editor.getText().replace(/\n/g, "");
       setcontents({ text: editor.getText(), html: editor.root.innerHTML });
-      onChange && onChange(editorText);
+      if (onChange) onChange(editorText);
     }
   };
 
