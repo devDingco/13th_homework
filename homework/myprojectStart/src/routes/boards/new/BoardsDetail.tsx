@@ -49,11 +49,11 @@ const BoardDetail = () => {
       </section>
       <section className="sectionDiv">
         <div className="goodBadBtn">
-          <img src="/img/good.png" alt="good" />
+          <img src="/img/bad.png" alt="bad" />
           <span>24</span>
         </div>
         <div className="goodBadBtn">
-          <img src="/img/bad.png" alt="bad" />
+          <img src="/img/good.png" alt="good" />
           <span>24</span>
         </div>
       </section>

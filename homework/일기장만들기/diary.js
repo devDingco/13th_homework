@@ -494,33 +494,70 @@ const potoApi = () => {
     });
   });
 };
+
 // 무한스크롤
+// let 타이머;
+// window.addEventListener("scroll", () => {
+//   const 스크롤퍼센트 =
+//     document.documentElement.scrollTop /
+//     (document.documentElement.scrollHeight -
+//       document.documentElement.clientHeight);
+//   if (스크롤퍼센트 < 0.9) return;
+//   if (타이머) return;
+
+//   potoApi();
+
+//   타이머 = setTimeout(() => {
+//     console.log("들어옴");
+//     // clearTimeout(타이머);
+//     타이머 = null;
+
+//     const 마지막스크롤퍼센트 =
+//       document.documentElement.scrollTop /
+//       (document.documentElement.scrollHeight -
+//         document.documentElement.clientHeight);
+//     if (마지막스크롤퍼센트 === 1) potoApi();
+//   }, 1000);
+// });
+
+let timer = null;
+
 window.addEventListener("scroll", () => {
-  let timer = null;
   const scroll01 = document.documentElement.scrollTop;
   const scroll02 =
     document.documentElement.scrollHeight -
     document.documentElement.clientHeight;
 
   const scrollPercent = scroll01 / scroll02;
-  console.log(`타이머 :${timer}`);
+  // console.log(`타이머 :${timer}`);
+  if (scrollPercent >= 0.99) {
+    // timer 작동하고 있을때 검사해줘
+    //
+    timer = null;
+    // clearTimeout(timer);
+    console.log(`setTimeout 마지막  :${timer}`);
 
+    // potoApi();
+  }
   if (scrollPercent < 0.9) return; // 현재나의 스크롤이 80%작을때 실행하지마
+
   if (timer !== null) {
-    console.log(`타이머가 null이 아닐때 실행해 :${timer}`);
+    // null은 null이 아니다
+    // console.log(`타이머가 null이 아닐때 실행해 :${timer}`);
+    // 90퍼
     return;
   }
-  console.log("그려줘");
+
+  // console.log("그려줘");
   potoApi(); // 버튼 눌렀을때 한번 실행-> 조건에 false일때 또 실행
 
-  setTimeout(() => {
+  timer = setTimeout(() => {
+    // clearTimeout(timer);
     timer = null;
     console.log(`setTimeout 내부 :${timer}`);
 
-    // if (scrollPercent === 1) {
-    //   potoApi();
-    // }
-  }, 3000);
+    // 마지막 100퍼센트로 닿았을때 timer가 null 일 때만 실행? ,
+  }, 10000);
 });
 
 // 사진 비율에 따른 필터적용

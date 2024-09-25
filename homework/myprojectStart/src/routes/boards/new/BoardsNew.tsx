@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, ChangeEvent, useState } from "react";
 
 import "./Board.css";
 
@@ -16,7 +16,7 @@ function Board() {
   //1. 버튼은 false  색 비활성화함
   //2. state변수 문자열이 모두 채워졌을때 버튼 색을 활성화시켜라
 
-  const handleChangWriterMeg = (event) => {
+  const handleChangWriterMeg = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     setWriter(event.target.value);
     if (event.target.value && password && title && input)
@@ -24,20 +24,20 @@ function Board() {
     setActive(false);
   };
 
-  const handleChangPwMeg = (event) => {
+  const handleChangPwMeg = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     setPassword(event.target.value);
     if (writer && event.target.value && title && input) return setActive(true);
     setActive(false);
   };
-  const handleChangTitleMeg = (event) => {
+  const handleChangTitleMeg = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     setTitle(event.target.value);
     if (writer && password && event.target.value && input)
       return setActive(true);
     setActive(false);
   };
-  const handleChangInputMeg = (event) => {
+  const handleChangInputMeg = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
     setInput(event.target.value);
     if (writer && password && title && event.target.value)
@@ -45,7 +45,7 @@ function Board() {
     setActive(false);
   };
 
-  const handleClickMeg = () => {
+  const handleClickMeg = (event: MouseEvent<HTMLButtonElement>) => {
     console.log(writer);
     if (writer && password && title && input) {
       setActive(true);
