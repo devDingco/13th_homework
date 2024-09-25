@@ -1,13 +1,17 @@
-import Button from '../../../component/form/Button';
+import React from 'react';
+
+import Image from 'next/image';
 import LinkIcon from '../../../../public/icons/link_icon.svg';
-import LocationIcon from '../../../../public/icons/location_icon.svg';
-import LikeIcon from '../../../../public/icons/like_icon.svg';
-import UnLikeIcon from '../../../../public/icons/unlike_icon.svg';
-import ListIcon from '../../../../public/icons/list_icon.svg';
-import EditIcon from '../../../../public/icons/edit_icon.svg';
-import MockImg1 from '../../../../public/images/mockImg1.png';
-import MockImg2 from '../../../../public/images/mockImg2.svg';
+import LocationIcon from '@/../public/icons/location_icon.svg';
+import LikeIcon from '@/../public/icons/like_icon.svg';
+import UnLikeIcon from '@/../public/icons/unlike_icon.svg';
+import ListIcon from '@/../public/icons/list_icon.svg';
+import EditIcon from '@/../public/icons/edit_icon.svg';
+import MockImg1 from '@/../public/images/mockImg1.png';
+import MockImg2 from '@/../public/images/mockImg2.svg';
+import Button from '@/app/_component/form/Button';
 import s from './PostDetail.module.css';
+// import Button from '_component/form/Button';
 const PostDetail = () => {
   return (
     <>
@@ -27,13 +31,13 @@ const PostDetail = () => {
         <section className="w-full">
           <div className={`${s.flexbox} justify-end gap-1`}>
             <button>
-              <img src={LinkIcon} alt="linkIcon" />
+              <Image src={LinkIcon} alt="linkIcon" width={0} height={0} />
             </button>
             <button>
-              <img src={LocationIcon} alt="" />
+              <Image src={LocationIcon} alt="" width={0} height={0} />
             </button>
           </div>
-          <img src={MockImg1} alt="" />
+          <Image src={MockImg1} alt="" width={0} height={0} />
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque quia
             cupiditate labore quos voluptate, sit illo assumenda. Corporis
@@ -61,25 +65,25 @@ const PostDetail = () => {
             obcaecati. Mollitia, dolorem repudiandae.
           </p>
           <div className={`${s.videoBox}`}>
-            <img src={MockImg2} alt="" />
+            <Image src={MockImg2} alt="" width={0} height={0} />
           </div>
           <div className={`${s.flexbox} justify-center gap-6`}>
             <button>
-              <img src={UnLikeIcon} alt="" />
+              <Image src={UnLikeIcon} alt="" width={0} height={0} />
               <p>24</p>
             </button>
             <button>
-              <img src={LikeIcon} alt="" />
+              <Image src={LikeIcon} alt="" width={0} height={0} />
               <p className="text-[#F66A6A]">24</p>
             </button>
           </div>
           <div className={`${s.flexbox} justify-center gap-6`}>
             <Button style="default">
-              <img src={ListIcon} alt="" />
+              <Image src={ListIcon} alt="" width={0} height={0} />
               목록으로
             </Button>
             <Button style="default">
-              <img src={EditIcon} alt="" />
+              <Image src={EditIcon} alt="" width={0} height={0} />
               수정하기
             </Button>
           </div>

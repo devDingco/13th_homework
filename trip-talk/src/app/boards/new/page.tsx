@@ -1,5 +1,5 @@
 import React from 'react';
-import AddPostsForm from '../../../component/addPost/AddPostsForm';
+import AddPostsForm from '../../_component/addPost/AddPostsForm';
 import s from './BoardsNew.module.css';
 
 const BoardsNew = () => {
