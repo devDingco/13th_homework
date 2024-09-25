@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "../../../styles/boards/new/BoardsNew.css";
 import close from "../../../assets/icon/close.svg";
-import { addressSearchButton, postCancelButton, postSubmitButton, addImageButton } from "../../../components/button.js";
+import { addressSearchButton, postCancelButton, postSubmitButton, addImageButton } from "../../../components/button";
 
 const BoardsNew = () => {
   const [isVaild, setIsVaild] = useState(false);

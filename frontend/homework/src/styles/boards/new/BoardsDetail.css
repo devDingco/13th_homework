@@ -1,5 +1,62 @@
+.detailPostPage {
+  min-width: 36rem;
+  max-width: 78rem;
+  padding: 0rem 2rem 0rem 2rem;
+}
+
+/* 모바일 헤더 + 배너 */
+.detailMobileHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1.2rem 0rem;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.detailMobileLogin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.detailMobileBanner img {
+  width: 100%;
+}
+
+/* 제목 + 프로필 */
+
+/* 내용 */
+
+/* 버튼 */
 /* 아이콘 버튼 스타일 none */
 .backNone {
   background-color: transparent;
   border: none;
+}
+
+/* 좋아요 버튼 블록 */
+
+/* 목록 + 수정 */
+
+/* 데스크탑 */
+@media (min-width: 781px) {
+  body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .detailPostPage {
+    width: 128rem;
+    min-width: 78.1rem;
+    max-width: 192rem;
+    margin: 0rem 2rem 0rem 2rem;
+    padding: 4rem 0rem;
+  }
+
+  .detailMobileHeader {
+    display: none;
+  }
 }
