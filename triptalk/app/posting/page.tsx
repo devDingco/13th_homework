@@ -23,7 +23,7 @@ export default function PostingForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password || !title || !content) {
-      setErrorMessage('Please fill in all required fields.');
+      setErrorMessage('필수 입력사항을 입력하지 않았습니다');
       return;
     }
     console.log({ username, password, title, content, address, youtubeLink, files });
