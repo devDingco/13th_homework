@@ -1,14 +1,15 @@
-form {
+.form {
   @apply flex flex-col items-start gap-10 w-full;
 }
 
-form > div {
-  @apply flex w-full pb-10 border-b border-solid;
+.form > div {
+  @apply flex w-full pb-10 border-b border-solid border-x-0 border-t-0;
   border-color: #e4e4e4;
 }
 
 .author_info_wrapper {
   @apply gap-10;
+  border: none;
 }
 
 .author_info_wrapper > * {

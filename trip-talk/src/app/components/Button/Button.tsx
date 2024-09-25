@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./Button.module.css";
+import Image from "next/image";
 
 type ButtonProps = {
   type?: "submit";
@@ -31,7 +32,7 @@ export default function Button({
         disabled={disabled}
         className={`${styles.button} ${colorVariants[color]}`}
       >
-        {src && <img src={src} alt={alt} />}
+        {src && alt && <Image src={src} alt={alt} width={24} height={24} />}
         {children}
       </button>
     </>

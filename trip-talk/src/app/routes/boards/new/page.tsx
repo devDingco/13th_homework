@@ -1,8 +1,10 @@
+"use client"
+
 import React, { useState } from "react";
 import Button from "../../../components/Button/Button";
 import ImageUploader from "../../../components/ImageUploader/ImageUploader";
-import Input from "../../../components/input/Input";
-import styles from "./BoardsNew.module.css";
+import Input from "../../../components/Input/Input";
+import styles from "./styles.module.css";
 
 export default function BoardsNew() {
   const [authorName, setAuthorName] = useState<string>("");
@@ -35,13 +37,13 @@ export default function BoardsNew() {
   };
 
   if (authorName && password && title && content) {
-    document.getElementById("")
+    document.getElementById("");
     alert("게시글 등록이 가능한 상태입니다!");
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.author_info_wrapper}>
           <div>
             <Input
@@ -102,6 +104,7 @@ export default function BoardsNew() {
         </div>
         <div className={styles.address_wrapper}>
           <div>
+            <div>
             <Input
               isLabel={true}
               type="number"
@@ -109,6 +112,7 @@ export default function BoardsNew() {
               isRequired={false}
               children="주소"
             />
+            </div>
             <Button color="white">우편번호 검색</Button>
           </div>
           <Input
@@ -146,7 +150,9 @@ export default function BoardsNew() {
           <Button
             type="submit"
             disabled={!(authorName && password && title && content)}
-            color={!(authorName && password && title && content) ? "gray" : "blue"}
+            color={
+              !(authorName && password && title && content) ? "gray" : "blue"
+            }
           >
             등록하기
           </Button>
