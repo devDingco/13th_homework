@@ -11,7 +11,7 @@ import imageA from "../assets/imageA.png";
 import mov from "../assets/mov.png";
 
 
-//깃허브 업로드 힘들다
+
 const BoardsDetail = () => {
   return (
     <div className="layout">
