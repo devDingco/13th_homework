@@ -252,7 +252,10 @@ body {
   gap: 16px;
 }
 
-
+.css_image {
+  width: 100px;
+  height: auto;
+}
 
 
 /* 하단 버튼 */

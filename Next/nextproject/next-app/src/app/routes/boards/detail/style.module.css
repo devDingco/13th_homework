@@ -120,6 +120,14 @@ body {
     margin-bottom: 24px;
 }
 
+.css_bottomimageImage {
+    width: 822px;
+    height: 464px;
+}
+
+
+
+
 .css_heart {
     width: 1280px;
     height: 48px;
@@ -157,7 +165,20 @@ body {
     border: transparent;
 }
 
+
+.css_listimage {
+    width: 105px;
+    height: 40px;
+
+}
+
 .css_modify {
     background-color: transparent;
     border: transparent;
+}
+
+.css_modifyimage {
+    width: 105px;
+    height: 40px;
+
 }

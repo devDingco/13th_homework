@@ -1,19 +1,7 @@
-// "use client";
-// import './BoardsNew.css';
-// import WriteBoard from '../../../component/WriteBoard';
-// import React from 'react';
-// const BoardsNew = () => {
-//   return (
-//        <WriteBoard />
-//    );
-//  };
-
-// export default BoardsNew;
-
 "use client";
 
 
-// import addimage from "../assets/addimage.png"
+import Image from 'next/image';
 import Input from '../../../component/commons/Input';
 import Button from '../../../component/commons/Button';
 import React, { useState, ChangeEvent} from 'react';
@@ -207,9 +195,9 @@ function WriteBoard () {
           <div className={styles.css_picturepart}>
               <div>사진 첨부</div>
               <div className={styles.css_picture}>
-                  <img src="/asset/AddImage.png" alt='addimage'/>
-                  <img src="/asset/AddImage.png" alt='addimage'/>
-                  <img src="/asset/AddImage.png" alt='addimage'/>
+                  <Image src="/assets/AddImage.png" alt='addimage' width={0} height={0} className={styles.css_image} sizes='100vw'/>
+                  <Image src="/assets/AddImage.png" alt='addimage' width={0} height={0} className={styles.css_image} sizes='100vw'/>
+                  <Image src="/assets/AddImage.png" alt='addimage' width={0} height={0} className={styles.css_image} sizes='100vw'/>
               </div>
           </div>
 

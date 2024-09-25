@@ -2,14 +2,7 @@
 
 import React from 'react';
 import styles from './style.module.css';
-// import MainImgae from '../assets/MainImage.png'
-// import BottomImgae from '../assets/Bottomimage.png'
-// import Hate from '../assets/Hate.png'
-// import Like from '../assets/Like.png'
-// import List from '../assets/List.png'
-// import Modify from '../assets/Modify.png'
-// import Clip from '../assets/Clip.png'
-// import Location from '../assets/Location.png'
+import Image from 'next/image'
 
 export default function BoardsDetail () {
     
@@ -19,7 +12,7 @@ export default function BoardsDetail () {
                 <div className={styles.css_info}>
                     <div className={styles.css_user}>
                         <div className={styles.css_name}>
-                            <img src="/assets/Profile.png" alt='profile' className='css_profileimage'/>
+                            <Image src='/assets/Profile.png' width={0} height={0} sizes='100vw' alt='profile' className={styles.css_profileimage} />                            
                             홍길동
                         </div>
                         <div className={styles.css_date}>2024-09-23</div>
@@ -27,16 +20,16 @@ export default function BoardsDetail () {
                     <div className={styles.css_detailhr}></div>
                     <div className={styles.css_side}>
                         <div className={styles.css_clip}>
-                            <img src="/assets/Clip.png" alt='clip'/>
+                            <Image src='/assets/Clip.png' width={0} height={0} sizes='100vw' alt='clip' className={styles.css_clip} />
                         </div>
                         <div className={styles.css_location}>
-                            <img src="/assets/Location.pong" alt='location'/>
+                            <Image src='/assets/Location.png' width={0} height={0} sizes='100vw' alt='location' className={styles.css_location} />
                         </div>
                     </div>
                 </div>
             <div>
                 <div className={styles.css_image}>
-                    <img src="/assets/MainImage.png" alt='mainimage'/>
+                    <Image src='/assets/MainImage.png' width={0} height={0} sizes='100vw' alt='mainimage' className={styles.css_image} />
                 </div>
             </div>
                 <div className={styles.css_text}>
@@ -75,22 +68,22 @@ export default function BoardsDetail () {
                     
                 </div>
                 <div className={styles.css_bottomimage}>
-                    <img src="/assets/BottomImage.png" alt='bottomimage'/>
+                    <Image src='/assets/BottomImage.png' width={0} height={0} sizes='100vw' alt='bottomimage' className={styles.css_bottomimageImage} />
                 </div>
             <div className={styles.css_heart}>
                 <div className={styles.css_hate}>
-                    <img src="/assets/Hate.png" alt='hate'/> <span>24</span>
+                <Image src='/assets/Hate.png' width={0} height={0} sizes='100vw' alt='hate' className={styles.css_hate} /><span>24</span>
                 </div>
                 <div className={styles.css_like}>
-                    <img src="/assets/Like.png" alt='like'/> <span>12</span>
+                    <Image src='/assets/Like.png' width={0} height={0} sizes='100vw' alt='like' className={styles.css_like} /> <span>12</span>
                 </div>
             </div>
                 <div className={styles.css_detailbutton}>
                     <button className={styles.css_list}>
-                        <img src="/assets/List.png" alt='list'/>
+                        <Image src='/assets/List.png' width={0} height={0} sizes='100vw' alt='list' className={styles.css_listimage} />
                     </button>
                     <button className={styles.css_modify}>
-                        <img src="/assets/Modify.png" alt='modify'/>
+                    <Image src='/assets/Modify.png' width={0} height={0} sizes='100vw' alt='modify' className={styles.css_modifyimage} />
                     </button>
                 </div>
         </div>
