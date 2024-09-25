@@ -1,5 +1,5 @@
-import './App.css';
-import Main from './boards/new/BoardsNew'
+import "./App.css";
+import Main from "./boards/new/BoardsNew";
 
 function App() {
   return (
