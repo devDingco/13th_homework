@@ -1,8 +1,9 @@
-import './App.css';
+'use client';
 import React from 'react';
 import { useState } from 'react';
+import styles from './styles.module.css';
 
-import add from './assets/add_image.jpg';
+import Image from 'next/image';
 
 const App = () => {
     const [author, setAuthor] = useState('');
@@ -19,7 +20,7 @@ const App = () => {
 
     // const [isActive, setIsActive] = useState(false);
 
-    let onChangeWriter = (event) => {
+    let onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAuthor(event.target.value);
         if (event.target.value === '') {
             setAuthorError('필수입력 사항 입니다');
@@ -37,7 +38,7 @@ const App = () => {
         }
     };
 
-    let onChangePassword = (event) => {
+    let onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
         if (event.target.value === '') {
             setPassworError('필수입력 사항 입니다');
@@ -55,7 +56,7 @@ const App = () => {
         }
     };
 
-    let onChangeTitle = (event) => {
+    let onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
         if (event.target.value === '') {
             setTitleError('필수입력 사항 입니다');
@@ -73,7 +74,7 @@ const App = () => {
         }
     };
 
-    let onChangeContent = (event) => {
+    let onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContent(event.target.value);
         if (event.target.value === '') {
             setContentError('필수입력 사항 입니다');
@@ -90,7 +91,7 @@ const App = () => {
         }
     };
 
-    let onClickSignup = (event) => {
+    let onClickSignup = () => {
         if (
             author !== '' &&
             password !== '' &&
@@ -104,111 +105,113 @@ const App = () => {
     };
 
     return (
-        <div className="layout">
-            <div className="regi-box">
-                <div className="regi-title">게시물 등록</div>
-                <div className="writer-password-title">
+        <div className={styles.layout}>
+            <div className={styles.regibox}>
+                <div className={styles.regititle}>게시물 등록</div>
+                <div className={styles.writerpasswordtitle}>
                     <div>작성자</div>
                     {/* <div class="enroll-required-indicator"> *</div> */}
                     <div>비밀번호</div>
                     {/* <div class="enroll-required-indicator"> *</div> */}
                 </div>
-                <div className="writer-password-input-box">
+                <div className={styles.writerpasswordinputbox}>
                     <input
-                        text="text"
+                        type="text"
                         placeholder="   작성자 명을 입력해 주세요"
-                        className="writer-password-input"
+                        className={styles.writerpasswordinput}
                         onChange={onChangeWriter}
                     ></input>
 
                     <input
-                        text="password"
+                        type="password"
                         placeholder="   비밀번호를 입력해 주세요"
-                        className="writer-password-input"
+                        className={styles.writerpasswordinput}
                         onChange={onChangePassword}
                     ></input>
                 </div>
-                <div className="requied-mention">
+                <div className={styles.requiedmention}>
                     <div>{authorError}</div>
                     <div>{passwordError}</div>
                 </div>
                 <hr />
-                <div className="title-box">
+                <div className={styles.titlebox}>
                     <div>제목</div>
                     <input
                         type="text"
                         placeholder="   제목을 입력해 주세요"
-                        className="title-input"
+                        className={styles.titleinput}
                         onChange={onChangeTitle}
                     ></input>
                 </div>
 
-                <div className="requied-mention">
+                <div className={styles.requiedmention}>
                     <div>{titleError}</div>
                 </div>
 
                 <hr />
 
-                <div className="content-box">
+                <div className={styles.contentbox}>
                     <div>내용</div>
                     <textarea
-                        type="text"
                         placeholder="    &#13;&#10;   내용을 입력해 주세요"
-                        className="content-textarea"
+                        className={styles.contenttextarea}
                         onChange={onChangeContent}
                     ></textarea>
-                    <div className="requied-mention">
+                    <div className={styles.requiedmention}>
                         <div>{contentError}</div>
                     </div>
                 </div>
             </div>
-            <div className="address-box">
+            <div className={styles.addressbox}>
                 <div>주소</div>
-                <div className="address-number-box">
+                <div className={styles.addressnumberbox}>
                     <input
                         type="text"
                         placeholder="213142"
                         className="address-number"
                     ></input>
-                    <button className="address-number-button">
+                    <button className={styles.addressnumberbutton}>
                         우편번호 검색
                     </button>
                 </div>
 
-                <div className="address-input-box">
+                <div className={styles.addressinputbox}>
                     <input
                         type="text"
                         placeholder="   주소를 입력해 주세요"
-                        className="address-input"
+                        className={styles.addressinput}
                     ></input>
                     <input
                         type="text"
                         placeholder="   상세주소"
-                        className="address-detail-input"
+                        className={styles.addressdetailinput}
                     ></input>
                 </div>
             </div>
 
-            <div className="youtubeBox">
+            <div className={styles.youtubeBox}>
                 <div>유튜브 링크</div>
                 <input
                     placeholder="링크를 입력해 주세요"
-                    className="youtubeBox-input"
+                    className={styles.youtubeBoxinput}
                 ></input>
             </div>
 
             <hr />
 
-            <div className="photoBox">
+            <div className={styles.photoBox}>
                 <div>사진첨부</div>
-                <img src={add} alt="add_image"></img>
-                <img src={add} alt="add_image"></img>
-                <img src={add} alt="add_image"></img>
+                <Image
+                    src="/assets/add_image.jpg"
+                    alt="add_image"
+                    width={100}
+                    height={100}
+                ></Image>
             </div>
-            <div className="bottom-button-box">
-                <button className="bottom-button-cancle">취소</button>
+            <div className={styles.bottombuttonbox}>
+                <button className={styles.bottombuttoncancle}>취소</button>
                 <button
-                    className="bottom-button-regi"
+                    className={styles.bottombuttonregi}
                     onClick={onClickSignup}
                     style={{
                         backgroundColor:

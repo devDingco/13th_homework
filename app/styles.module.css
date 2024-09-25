@@ -1,34 +1,17 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-/* 전체 컴포넌트에 영향을 준다 */
-body {
-    display: flex;
-    justify-content: center;
-}
-
-hr {
-    margin: 40px 0;
-    border: 1px solid var(--gray-200, #d4d3d3);
-}
-
 .layout {
     width: 1280px;
     height: auto;
     /* background-color: orange; */
 }
 
-.requied-mention {
+.requiedmention {
     padding: 5px 0;
     color: red;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.regi-title {
+.regititle {
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
@@ -36,17 +19,17 @@ hr {
     padding: 40px 0;
 }
 
-.writer-password-title {
+.writerpasswordtitle {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.writer-password-input-box {
+.writerpasswordinputbox {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.writer-password-input {
+.writerpasswordinput {
     width: 620px;
     height: 48px;
     gap: 8px;
@@ -57,10 +40,10 @@ hr {
     border-radius: 8px;
 }
 
-.title-box {
+.titlebox {
 }
 
-.title-input {
+.titleinput {
     width: 1280px;
     height: 48px;
     gap: 8px;
@@ -69,11 +52,11 @@ hr {
     border-radius: 8px;
 }
 
-.content-box {
+.contentbox {
     padding: 40px 0;
 }
 
-.content-textarea {
+.contenttextarea {
     width: 1280px;
     height: 336px;
     gap: 8px;
@@ -82,20 +65,20 @@ hr {
     border: 1px solid var(--gray-200, #d4d3d3);
 }
 
-.address-box {
+.addressbox {
     padding: 40px 0;
 
     border-bottom: 1px solid var(--gray-200, #d4d3d3);
 }
 
-.address-number-box {
+.addressnumberbox {
     display: flex;
     flex-direction: row;
     gap: 10px;
     padding: 8px 0;
 }
 
-.address-number {
+.addressnumber {
     width: 82px;
     height: 48px;
     padding: 12px 16px 12px 16px;
@@ -107,7 +90,7 @@ hr {
     border: 1px solid var(--Gray-Gray-200, #d4d3d3);
 }
 
-.address-number-button {
+.addressnumberbutton {
     font-weight: 600;
     line-height: 24px;
     text-align: center;
@@ -120,7 +103,7 @@ hr {
     opacity: 0px;
 }
 
-.address-input {
+.addressinput {
     width: 1280px;
     height: 48px;
     opacity: 0px;
@@ -129,7 +112,7 @@ hr {
     border-radius: 8px;
 }
 
-.address-detail-input {
+.addressdetailinput {
     width: 1280px;
     height: 48px;
     opacity: 0px;
@@ -137,7 +120,7 @@ hr {
     border-radius: 8px;
 }
 
-.address-input-box {
+.addressinputbox {
     display: block;
 }
 
@@ -145,7 +128,7 @@ hr {
     padding: 40px 0;
 }
 
-.youtubeBox-input {
+.youtubeBoxinput {
     width: 1280px;
     height: 48px;
     padding: 12px 16px 12px 16px;
@@ -160,12 +143,7 @@ hr {
     padding: 40px 0;
 }
 
-img {
-    margin-right: 10px;
-    border-radius: 8px;
-}
-
-.bottom-button-box {
+.bottombuttonbox {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -173,7 +151,7 @@ img {
     margin-bottom: 100px;
 }
 
-.bottom-button-cancle {
+.bottombuttoncancle {
     width: 95px;
     height: 48px;
     padding: 12px 16px 12px 16px;
@@ -184,7 +162,7 @@ img {
     cursor: pointer;
 }
 
-.bottom-button-regi {
+.bottombuttonregi {
     width: 95px;
     height: 48px;
     padding: 12px 16px 12px 16px;
