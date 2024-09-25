@@ -45,12 +45,11 @@
 }
 .input-form-title {
   display: flex;
-  gap: 8px;
+  gap: 0.3rem;
 }
 .input-form-title-text {
   font-size: 16px;
   font-weight: 500;
-  margin-right: 0.1rem;
 }
 .required-star {
   color: #f66a6a;
@@ -64,6 +63,10 @@
 }
 .input-text::placeholder {
   color: #ababab;
+}
+.validation-message {
+  color: #f66a6a;
+  font-weight: 500;
 }
 .input-textarea {
   height: 336px;
@@ -100,11 +103,19 @@
   background-color: white;
   font-weight: 600;
 }
-.edit-button {
+.register-button {
   padding: 12px 16px;
   padding: 12px 16px;
   border-radius: 8px;
   background-color: #2974e5;
+  color: white;
+  border: none;
+}
+.register-button:disabled {
+  padding: 12px 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #c7c7c7;
   color: white;
   border: none;
 }
