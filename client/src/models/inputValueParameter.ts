@@ -1,6 +1,6 @@
 /** @format */
 
 export interface IInputValueParameter {
-    name: string;
-    value: string;
+	name: string;
+	value: string;
 }

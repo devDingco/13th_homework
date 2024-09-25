@@ -5,6 +5,7 @@ import {
     IsNotEmpty,
     IsOptional,
     IsString,
+    Length,
 } from 'class-validator';
 
 export class CreateBoardDto {
@@ -15,6 +16,7 @@ export class CreateBoardDto {
     })
     @IsString()
     @IsNotEmpty()
+    @Length(3)
     author: string;
 
     @ApiProperty({

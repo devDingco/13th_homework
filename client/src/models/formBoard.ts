@@ -1,9 +1,9 @@
 /** @format */
 
 export interface ICreateFormBoard {
-    author: string;
-    title: string;
-    content: string;
-    youtubeUrl?: string;
-    // imageUrl?: string;
+	author: string;
+	title: string;
+	content: string;
+	youtubeUrl?: string;
+	imageUrl?: string[];
 }

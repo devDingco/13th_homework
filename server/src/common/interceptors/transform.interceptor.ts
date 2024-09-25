@@ -32,22 +32,25 @@ export class TransformInterceptor<T>
             map((data) => {
                 if (!data) {
                     return { message, statusCode };
-                } else if (data._id) {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                    const { _id, ...rest } = data;
-                    return { message, statusCode, data: rest };
-                } else if (data[0]._id) {
-                    data = data.map((array) => {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        const { _id, ...rest } = array;
-                        return rest;
-                    });
+                }
+                if (data._id) {
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const { _id, ...rest } = data;
                     return { message, statusCode, data: rest };
                 }
 
-                return { message, statusCode };
+                if (typeof data === 'object' && !Array.isArray(data)) {
+                    data = Object.values(data);
+                }
+
+                if (Array.isArray(data)) {
+                    data = data.map((item) => {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { _id, ...rest } = item;
+                        return rest;
+                    });
+                    return { message, statusCode, data };
+                }
             }),
         );
     }
