@@ -14,28 +14,42 @@ const placeholderObj = {
   },
   youtube: "링크를 입력해 주세요.",
 };
-const [inputValud, setInputValue] = useState({
-  author: "",
-  password: "",
-  title: "",
-  content: "",
-});
 
-export default function InputFormText({ title }) {
-  console.log(title);
-  const onChangeInputValue = (e) => {};
+export default function InputFormText({ title, onChange }) {
+  // console.log("🥲", onChange);
+
+  // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  // const onChangeInputValue = (event) => {
+  //   // console.log(typeof event.target.id);
+  //   setInputValue((prev) => ({
+  //     ...prev,
+  //     [event.target.id]: event.target.value,
+  //   }));
+  // };
+  // console.log(inputValue.author);
+  // console.log(inputValue.password);
+
   return (
     <div className="content-area">
       <InputFormTitle title={title} />
-      <input
-        id={title}
-        className="input-text"
-        type={title === "password" ? "password" : "text"}
-        placeholder={placeholderObj[title]}
-        onChange={onChangeInputValue}
-        // value={props.author}
-      />
-      {/* {isError && <ValidationMessage />} */}
+      {title !== "content" ? (
+        <input
+          id={title}
+          className="input-text"
+          type={title === "password" ? "password" : "text"}
+          placeholder={placeholderObj[title]}
+          onChange={(e) => onChange(e)}
+        />
+      ) : (
+        <textarea
+          id={title}
+          className="input-textarea"
+          placeholder={placeholderObj[title]}
+          onChange={(e) => onChange(e)}
+        ></textarea>
+      )}
+      {/* {inputValue[title] === "" && <ValidationMessage />} */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 export default function InputFormTitle({ title }) {
-  console.log(title);
+  // console.log(title);
   const titleObj = {
     author: "작성자",
     password: "비밀번호",
@@ -7,6 +7,13 @@ export default function InputFormTitle({ title }) {
     content: "내용",
     address: "주소",
     youtube: "유튜브 링크",
+    photo: "사진 첨부",
+  };
+  const requiredObj = {
+    author: true,
+    password: true,
+    title: true,
+    content: true,
   };
 
   return (
