@@ -1,6 +1,6 @@
 import "../css/boardNew.css"; // boardNew.css 파일 경로
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 function BoardNew() {
   // 작성자인풋, 작성자인풋에러
   const [name, setName] = React.useState("");
@@ -19,7 +19,7 @@ function BoardNew() {
   const [isActive, setIsActive] = useState(false);
 
   // 인풋값이 바뀐다면 저장하는 곳
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
 
     if (
@@ -34,7 +34,7 @@ function BoardNew() {
     }
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
 
     if (
@@ -49,7 +49,7 @@ function BoardNew() {
     }
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
 
     if (
@@ -64,7 +64,7 @@ function BoardNew() {
     }
   };
 
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
 
     if (
@@ -79,7 +79,7 @@ function BoardNew() {
     }
   };
 
-  const onClickSignup = (event) => {
+  const onClickSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     console.log("작성자 이름은:", name);
