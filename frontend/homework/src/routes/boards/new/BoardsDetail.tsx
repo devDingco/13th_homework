@@ -1,5 +1,8 @@
+import "../../../styles/boards/new/BoardsDetail.css";
+// import {} from "../../../components/button";
+
 // assets import
-// import bannerImg from "../../../assets/images/detail_banner.png";
+import bannerImg from "../../../assets/images/detail_banner.png";
 import videoImg from "../../../assets/images/detail_video.png";
 import postImg from "../../../assets/images/detail_img.png";
 import profileImg from "../../../assets/images/profile_img.png";
@@ -10,12 +13,24 @@ import likeIcon from "../../../assets/icon/good.svg";
 import unlikeIcon from "../../../assets/icon/bad.svg";
 import menuIcon from "../../../assets/icon/menu.svg";
 import editIcom from "../../../assets/icon/edit.svg";
-
-import "../../../styles/boards/new/BoardsDetail.css";
+import leftArrowIcon from "../../../assets/icon/left_arrow.svg";
+import loginIcon from "../../../assets/icon/login.svg";
 
 const BoardsDetail = () => {
   return (
-    <div className="uploadPostPage">
+    <div className="detailPostPage">
+      {/* 모바일 헤더 */}
+      <div className="detailMobileHeader">
+        <img src={leftArrowIcon} alt="back" />
+        <div className="detailMobileLogin">
+          <p>로그인</p>
+          <img src={loginIcon} alt="login" />
+        </div>
+      </div>
+      <div className="detailMobileBanner">
+        <img src={bannerImg} alt="banner img" />
+      </div>
+
       {/* 제목 */}
       <div>
         <div>
@@ -26,20 +41,18 @@ const BoardsDetail = () => {
         </div>
         <div>
           <div>
-            <div>
-              <img src={profileImg} alt="profile img" />
-              <p>홍길동</p>
-            </div>
-            <p>2024.05.29</p>
+            <img src={profileImg} alt="profile img" />
+            <p>홍길동</p>
           </div>
-          <div>
-            <button className="backNone">
-              <img src={linkIcon} alt="link icon" />
-            </button>
-            <button className="backNone">
-              <img src={locationIcon} alt="location icon" />
-            </button>
-          </div>
+          <p>2024.05.29</p>
+        </div>
+        <div>
+          <button className="backNone">
+            <img src={linkIcon} alt="link icon" />
+          </button>
+          <button className="backNone">
+            <img src={locationIcon} alt="location icon" />
+          </button>
         </div>
       </div>
 

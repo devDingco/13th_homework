@@ -1,16 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* 반응형 & 모바일 구현을 위한 폰트 사이즈 재지정 */
-  font-size: 10px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .uploadPostPage {
   min-width: 36rem;
   max-width: 78rem;
