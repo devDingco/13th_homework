@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { redirect } from 'next/navigation';
 import styles from './postingForm.module.css';
 
 export default function PostingForm() {
@@ -22,10 +23,12 @@ export default function PostingForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password || !title || !content) {
-      setErrorMessage('Please fill in all required fields.');
+      setErrorMessage('필수 입력사항을 입력하지 않았습니다');
       return;
     }
     console.log({ username, password, title, content, address, youtubeLink, files });
+    makePost({ username, password, title, content, address, youtubeLink, files });
+    redirect(`/post/${id}`);
   };
 
   return (
