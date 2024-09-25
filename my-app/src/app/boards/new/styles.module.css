@@ -1,0 +1,186 @@
+.root {
+  width: 1280px;
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  width: 100%;
+  height: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputBox_input {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  outline: none;
+}
+
+.inputBox_label {
+  height: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #333333;
+}
+
+.writer_password_box {
+  width: 100%;
+  gap: 40px;
+  display: flex;
+}
+
+.div {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contentTextarea {
+  height: 336px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #ffffff;
+  padding: 12px 16px;
+  resize: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  outline: none;
+}
+
+.address_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addressNumber {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addressNumberSearchBox {
+  display: flex;
+  gap: 8px;
+}
+
+.addressNumberSearchBox_input {
+  width: 82px;
+  outline: none;
+}
+
+.addressNumberButton {
+  width: 130px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -1px;
+}
+
+.address_box input {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.photoBox {
+  display: flex;
+  gap: 8px;
+}
+
+.photoCard {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #777777;
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+}
+
+.button {
+  border-radius: 8px;
+  height: 48px;
+  padding: 12px 16px;
+  border: block;
+}
+
+.cancel {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+}
+
+.register {
+  border: none;
+  background-color: #2874e5;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.hr {
+  height: 1px;
+  border: 0px;
+  background: #e4e4e4;
+}
+
+.photoCardBox {
+  display: flex;
+  gap: 16px;
+}
+
+.span {
+  color: #f66a6a;
+}
+
+.errorText {
+  height: 24px;
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
