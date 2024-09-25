@@ -5,16 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import BoardsNew from './routes/boards/new/boards-new'
-import BoardsDetail from './routes/boards/new/boards-detail'
+import BoardsNew from './routes/boards/new/BoardsNew'
+import BoardsDetail from './routes/boards/detail/BoardsDetail'
 
 const detail = createBrowserRouter([
   { path: "/", element:<App></App> },
-  { path: "/boards-new", element:<BoardsNew></BoardsNew>},
-  { path: "/boards-detail", element:<BoardsDetail></BoardsDetail> }
+  { path: "/BoardsNew", element:<BoardsNew></BoardsNew>},
+  { path: "/BoardsDetail", element:<BoardsDetail></BoardsDetail> }
 ])
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as ReactDOM.Container);
 root.render(<RouterProvider router={detail}/>);
 
 // If you want to start measuring performance in your app, pass a function

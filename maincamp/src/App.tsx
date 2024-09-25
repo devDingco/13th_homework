@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
-import '../../../App.css';
-import {useState} from 'react'
+import './App.css';
+import {ChangeEvent, MouseEvent, useState} from 'react'
 
-const BoardsNew = () => {
+const App = () => {
 
   const [name, setName] = useState("")
   const [nameError, setNameError] = useState("")
@@ -61,25 +61,25 @@ const BoardsNew = () => {
   // }
 
   // 리팩토링 후 early-exit 패턴
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
 
     if(event.target.value !== "" && password !== "" && title !== "" && subject !== "") return setIsActive(true)
     setIsActive(false)
   }
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
 
     if(name !== "" && event.target.value !== "" && title !== "" && subject !== "") return setIsActive(true)
     setIsActive(false)
   }
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
 
     if(name !== "" && password !== "" && event.target.value !== "" && subject !== "") return setIsActive(true)
     setIsActive(false)
   }
-  const onChangeSubject = (event) => {
+  const onChangeSubject = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setSubject(event.target.value)
 
     if(name !== "" && password !== "" && title !== "" && event.target.value !== "") return setIsActive(true)
@@ -88,7 +88,7 @@ const BoardsNew = () => {
 
   let registerError = false;
 
-  const register = (event) => {
+  const register = (event:MouseEvent<HTMLButtonElement>) => {
     if(name.trim() === ""){
       setNameError("필수입력 사항 입니다.")
       registerError = true;
@@ -189,4 +189,4 @@ const BoardsNew = () => {
   )
 }
 
-export default BoardsNew;
+export default App;

@@ -1,4 +1,5 @@
-import '../../../boards-detail.css'
+// import '../../../BoardsDetail.css'
+import './BoardsDetail.css'
 
 const BoardsDetail = () => {
     

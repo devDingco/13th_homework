@@ -38,7 +38,8 @@
 .profile_icon{
     width:2.4rem;
     height:2.4rem;
-    background:url(../img/img.png) no-repeat center;
+    /* background:url(../img/img.png) no-repeat center; */
+    background:url(../../../../img/img.png) no-repeat center;
 }
 .profile:last-child{
     font-size:1.4rem;
@@ -58,19 +59,19 @@
 .detailContent .subjectIcon .clip{
     width:1.9rem;
     height:0.908rem;
-    background:url(../img/clip.png) no-repeat;
+    background:url(../../../../img/clip.png) no-repeat;
     margin-right:1.6rem;
 }
 .detailContent .subjectIcon .mapIcon{
     width:1.51rem;
     height:1.844rem;
-    background:url(../img/map_icon.png) no-repeat;
+    background:url(../../../../img/map_icon.png) no-repeat;
 }
 
 .detailContent .subjectImg{
     width:40rem;
     height:53.1rem;
-    background:url(../img/Tranquil\ Beachside\ Serenity\ 1.png) no-repeat;
+    background:url(../../../../img/Tranquil\ Beachside\ Serenity\ 1.png) no-repeat;
 }
 
 /* 비디오 */
@@ -85,7 +86,7 @@
 .video{
     width:82.2rem;
     height:46.4rem;
-    background:url(../img/Frame\ 427323252.png) no-repeat center;
+    background:url(../../../../img/Frame\ 427323252.png) no-repeat center;
 }
 
 /* 좋아요 싫어요 */
@@ -106,7 +107,7 @@
 .emotion .badIcon{
     width:2.4rem;
     height:2.4rem;
-    background:url(../img/bad.png) no-repeat center;
+    background:url(../../../../img/bad.png) no-repeat center;
 }
 .emotion .good p{
     color:#f66a6a;
@@ -114,7 +115,7 @@
 .emotion .goodIcon{
     width:2.4rem;
     height:2.4rem;
-    background:url(../img/good.png) no-repeat center;
+    background:url(../../../../img/good.png) no-repeat center;
 }
 
 /* 하단 버튼 */
@@ -131,10 +132,10 @@
 .bottomBtn button:first-child{
     width:10.5rem;
     height:4rem;
-    background:url(../img/list_button.png) no-repeat center;
+    background:url(../../../../img/list_button.png) no-repeat center;
 }
 .bottomBtn button:last-child{
     width:10.5rem;
     height:4rem;
-    background:url(../img/edit_button.png) no-repeat center;
+    background:url(../../../../img/edit_button.png) no-repeat center;
 }
