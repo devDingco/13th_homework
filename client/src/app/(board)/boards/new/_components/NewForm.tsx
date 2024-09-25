@@ -40,10 +40,6 @@ export default function NewForm() {
 		setIsButtonDisabled(!allFieldsFilled);
 	}, [formValues]);
 
-	useEffect(() => {
-		console.log(1);
-	}, []);
-
 	const onChangeValue = ({ name, value }: IInputValueParameter): void => {
 		setFormValues((prev: IFormState) => ({ ...prev, [name]: value }));
 	};

@@ -6,6 +6,8 @@ import BoardLoading from '../_components/BoardLoading';
 import BoardContainer from './_components/BoardContainer';
 import getBoard from '@/app/apis/boards/getBoard';
 import { IDeatilPageProps } from '@/models/detailPageProps';
+import BoardLikeHate from './_components/BoardLikeHate';
+import getReaction from '@/app/apis/boards/reaction/getReaction';
 
 export default function Detail({ params }: IDeatilPageProps) {
 	const param = params.boardId;
@@ -15,7 +17,9 @@ export default function Detail({ params }: IDeatilPageProps) {
 			<Suspense fallback={<BoardLoading />}>
 				<BoardContainer resource={getBoard(+param)} />
 			</Suspense>
-			{/* <BoardLikeHate infor={boardInfor} /> */}
+			<Suspense fallback={<BoardLoading />}>
+				<BoardLikeHate resource={getReaction(+param)} />
+			</Suspense>
 			<BoardFooter />
 		</div>
 	);
