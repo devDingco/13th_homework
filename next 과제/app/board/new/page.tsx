@@ -1,13 +1,13 @@
-import Input from "components/input";
-import Main from "layout/main";
+"use client";
+import Input from "@/components/input";
 import { useForm } from "react-hook-form";
-import type { formList } from "hooks/useformset";
-import { formResister } from "hooks/useformset";
-import PostSearchPopBtn from "components/postSearchPopBtn";
+import type { formList } from "@/utils/useformset";
+import { formResister } from "@/utils/useformset";
+import PostSearchPopBtn from "@/components/postSearchPopBtn";
 import { useEffect, useState } from "react";
-import ReactQuillBox from "components/reactQuillBox";
+import ReactQuillBox from "@/components/reactQuillBox";
 
-const BoardNew = () => {
+export default function BoardNew() {
   const {
     register, // 검증 규칙 적용 메서드
     // handleSubmit, // 폼 제출 핸들러
@@ -39,7 +39,7 @@ const BoardNew = () => {
   }, [isValid, contents.text]);
 
   return (
-    <Main>
+    <>
       <h1 className="text-2xl font-bold">게시글 등록</h1>
       <form>
         <div className="flex justify-between gap-10 flex-nowrap">
@@ -159,8 +159,6 @@ const BoardNew = () => {
           </button>
         </div>
       </form>
-    </Main>
+    </>
   );
-};
-
-export default BoardNew;
+}

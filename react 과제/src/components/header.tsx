@@ -7,13 +7,17 @@ const Header = () => {
   return (
     <header className="bg-slate-900 text-white">
       <nav className="max-w-7xl flex justify-between items-center m-auto p-4">
-        <h1>jomira</h1>
-        <Link className="btn btn-primary" to="/board/new">
-          게시글 등록
-        </Link>
-        <Link className="btn btn-secondary" to="/board/detail">
-          게시글 상세
-        </Link>
+        <h1>
+          <Link to={"/"}>jomira</Link>
+        </h1>
+        <div className="flex gap-4">
+          <Link className="btn btn-primary" to="/board/new">
+            게시글 등록
+          </Link>
+          <Link className="btn btn-secondary" to="/board/detail">
+            게시글 상세
+          </Link>
+        </div>
         {/* <ul className="flex gap-4">
           {navItems.map((item, index) => {
             return (
