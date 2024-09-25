@@ -1,6 +1,7 @@
 "use client";
 import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css";
+import Image from "next/image";
 
 function BoardsNew() {
   const [errorMessage, setErrorMessage] = useState<IInput>({
@@ -169,19 +170,37 @@ function BoardsNew() {
           <div className={styles.photoCardBox}>
             <div className={styles.photoBox}>
               <div className={styles.photoCard}>
-                <img src="/img/add.png" />
+                <Image
+                  className={styles.add_img}
+                  src="/img/add.png"
+                  alt="addImg"
+                  width={0}
+                  height={0}
+                />
                 <div className="photo_text">클릭해서 사진 업로드</div>
               </div>
             </div>
             <div className={styles.photoBox}>
               <div className={styles.photoCard}>
-                <img src="/img/add.png" />
+                <Image
+                  className={styles.add_img}
+                  src="/img/add.png"
+                  alt="addImg"
+                  width={0}
+                  height={0}
+                />
                 <div className="photo_text">클릭해서 사진 업로드</div>
               </div>
             </div>
             <div className={styles.photoBox}>
               <div className={styles.photoCard}>
-                <img src="/img/add.png" />
+                <Image
+                  className={styles.add_img}
+                  src="/img/add.png"
+                  alt="addImg"
+                  width={0}
+                  height={0}
+                />
                 <div className="photo_text">클릭해서 사진 업로드</div>
               </div>
             </div>
