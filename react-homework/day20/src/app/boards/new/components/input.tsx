@@ -12,29 +12,21 @@ interface IInputField {
   require: boolean;
 }
 const InputField: React.FC<IInputField> = ({
-  label,
-  type,
+  type = "text",
   name,
   placeholder,
   onChange,
   value,
-  require,
 }) => {
   return (
-    <>
-      <label className={styles.input_label}>
-        {label}
-        {require && <span className={styles.require}> *</span>}
-      </label>
-      <input
-        type={type}
-        name={name}
-        className={styles.input_box}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-      />
-    </>
+    <input
+      type={type}
+      name={name}
+      className={styles.input_box}
+      placeholder={placeholder}
+      onChange={onChange}
+      value={value}
+    />
   );
 };
 
