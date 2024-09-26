@@ -7,13 +7,13 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
 export class Board {
     @ObjectIdColumn()
-    @Field(() => String)
+    @Field(() => ID)
     _id: ObjectId;
 
     @Column()
