@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+*{
+  padding:0;
+  font-size:62.5%;
+}
+
+@layer utilities {
+  /* .text-balance {
+    text-wrap: balance;
+  } */
+  .flex{
+    display:flex;
+  } 
+  .flex-bw{
+    display:flex;
+    justify-content:space-between;
+  }
+  .d-block{
+    display:block;
+  }
+  .new-placeholer{
+    font-size:1.6rem;
+    color:#ababab;
+  }
+  .new-h1{
+    font-size:2rem;
+    font-weight:700;
+    margin-top:4rem;
+  }
+  .new-span, .new-p{font-size:1.6rem;}
+  .new-input, .new-textarea{font-size:1.8rem;}
+  
+  .bt_button{
+    border-radius:0.8rem;
+    height:4.8rem;
+    font-size:1.8rem;
+  }
+}
