@@ -9,6 +9,7 @@ import { BoardIdCounter } from './entities/board-boardId.entity';
 import { BoardReaction } from './reaction/entities/reaction.entity';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { ReactionModule } from './reaction/reaction.module';
+import { BoardResolver } from './board.resolver';
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { ReactionModule } from './reaction/reaction.module';
         BoardRepository,
         BoardIdCounterRepository,
         BoardReactionRepository,
+        BoardResolver,
     ],
 })
 export class BoardModule {}
