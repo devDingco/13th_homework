@@ -1,6 +1,5 @@
 "use client";
 
-
 import Image from 'next/image';
 import Input from '../../../component/commons/Input';
 import Button from '../../../component/commons/Button';
@@ -34,10 +33,6 @@ function WriteBoard () {
     const[addressdetail, setaddressdetail] = useState("")
 
     
-
-
-
-  
     const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
       setName(event.target.value)
       if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
@@ -143,13 +138,12 @@ function WriteBoard () {
               </div>
               {/* 비밀번호 */}
               <div className={styles.css_password}>
-                  <label htmlFor="title_id" className={styles.css_pwdtag}>작성자</label>
+                  <label htmlFor="title_id" className={styles.css_pwdtag}>비밀번호</label>
                   <Input type="password" id="pwd_id" placeholder="비밀번호를 입력해 주세요." name="pwd" onChange={onChangePassword}/>
                   <div className={styles.css_blankerror}>{passwordblank}</div>
               </div>
           </div>
           <div className={styles.css_line}></div>
-        
 
           {/* 제목 */}
           <div className={styles.css_titletop}>
@@ -189,7 +183,6 @@ function WriteBoard () {
               <Input type="text" id="link_id" placeholder="링크를 입력해 주세요." name="link"/>
           </div>
           <div className={styles.css_line}></div>
-
 
           {/* 사진 첨부 */}
           <div className={styles.css_picturepart}>

@@ -19,11 +19,13 @@ export default function BoardsDetail () {
                     </div>
                     <div className={styles.css_detailhr}></div>
                     <div className={styles.css_side}>
-                        <div className={styles.css_clip}>
-                            <Image src='/assets/Clip.png' width={0} height={0} sizes='100vw' alt='clip' className={styles.css_clip} />
-                        </div>
-                        <div className={styles.css_location}>
-                            <Image src='/assets/Location.png' width={0} height={0} sizes='100vw' alt='location' className={styles.css_location} />
+                        <div className={styles.css_sidebutton}>
+                            <div className={styles.css_clip}>
+                                <Image src='/assets/Clip.png' width={0} height={0} sizes='100vw' alt='clip' className={styles.css_clip} />
+                            </div>
+                            <div className={styles.css_location}>
+                                <Image src='/assets/Location.png' width={0} height={0} sizes='100vw' alt='location' className={styles.css_location} />
+                            </div>
                         </div>
                     </div>
                 </div>
