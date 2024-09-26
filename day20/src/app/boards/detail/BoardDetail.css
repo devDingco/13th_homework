@@ -1,0 +1,162 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.detail-layout {
+  display: flex;
+  width: 1920px;
+  padding: 40px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.detail-body {
+  display: flex;
+  padding: 0px 320px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  align-self: stretch;
+}
+
+.detail-frame {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.detail-subject {
+  color: #000;
+
+  /* b_28_36 */
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 128.571% */
+}
+
+.detail-metadata-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 54px;
+  align-self: stretch;
+}
+
+.detail-metadata-date {
+  color: #818181;
+
+  /* r_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.detail-metadata-profile {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.enroll-border {
+  width: 1280px;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+  box-sizing: border-box;
+}
+
+.detail-metadata-icon-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  align-items: center;
+}
+
+.detail-content-container {
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.detail-content-text {
+  color: #000;
+
+  /* r_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.text-gap {
+  height: 20px;
+}
+
+.detail-content-image {
+  width: 480px;
+  height: 531px;
+}
+
+.detail-content-goodorbad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.detail-good-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.detail-good-text {
+  color: var(--red, #f66a6a);
+
+  /* r_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.detail-bad-text {
+  color: var(--gray-700, #5f5f5f);
+
+  /* r_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.detail-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.detail-button {
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}
