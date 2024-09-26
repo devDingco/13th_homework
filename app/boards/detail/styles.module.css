@@ -1,0 +1,85 @@
+.detailhr {
+    margin: 16px 0;
+}
+
+.layout {
+    width: 1280px;
+    height: auto;
+    /* background-color: orange; */
+}
+
+.headerdetail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.headertitle {
+    font-family: Pretendard;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.headerdetail {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #818181;
+}
+
+.mainlinklocation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-bottom: 24px;
+}
+
+.video {
+    width: 1280px;
+    height: 512px;
+    padding: 24px 0px 24px 0px;
+    gap: 10px;
+    opacity: 0px;
+    background: var(--gray-50, #f2f2f2);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.videofeedback {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px 0 50px 0;
+}
+
+.bottombutton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 0 50px 0;
+}
+
+.listbutton {
+    width: 105px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+}
+
+.penbutton {
+    width: 105px;
+    height: 40px;
+    /* padding: 8px 12px 8px 12px; */
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px 0px 0px 0px;
+}
