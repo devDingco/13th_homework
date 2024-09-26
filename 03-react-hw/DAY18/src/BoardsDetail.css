@@ -1,0 +1,122 @@
+.게시물타이틀상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 1280px;
+}
+
+.게시물타이틀상자 > p {
+  color: #000;
+
+  /* b_28_36 */
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px; /* 128.571% */
+}
+
+.작성자등록일자담는상자 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.작성자등록일자담는상자 > span {
+  color: #818181;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.작성자상자 {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.작성자상자 > span {
+  color: var(--gray-700, #5f5f5f);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+hr {
+  background: var(--gray-100, #e4e4e4);
+  height: 1px;
+  /* border: 0 으로 해야지 적용된다 */
+  border: 0;
+}
+
+.아이콘상자 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.게시글총내용상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.동영상배경상자 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+  background-color: var(--gray-50, #f2f2f2);
+}
+
+.동영상배경상자 > div {
+  width: 822px;
+  height: 464px;
+  background-color: coral;
+}
+
+.좋싫상자 {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.좋싫상자 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.좋싫상자 span {
+  color: var(--gray-700, #5f5f5f);
+  /* r_14_20 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.좋아요상자 > span {
+  color: var(--red, #f66a6a);
+}
+
+.목록수정버튼상자 {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.목록수정버튼상자 button {
+  height: 40px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}

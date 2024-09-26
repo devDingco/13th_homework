@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🐨의 다이어리</title>
+    <link rel="stylesheet" href="./diary-detail.css" />
+    <script defer src="./diary-detail.js"></script>
+  </head>
+  <body>
+    <div id="토스트메시지" class="토스트">
+      <div>내용이 복사되었습니다.</div>
+    </div>
+    <nav>
+      <div class="데스크탑네비">
+        <a href="./index.html"><span>🐨의 다이어리</span></a>
+      </div>
+      <!-- 모바일 네비 추가 -->
+      <div class="모바일네비">
+        <a href="./index.html" class="뒤로가기버튼">
+          <img src="./images/icons/Arrow Back Icon.svg" alt="뒤로가기" />
+        </a>
+        <div class="페이지제목">일기 상세</div>
+      </div>
+    </nav>
+    <!-- 작성한 일기 보여지는 공간 -->
+    <main>
+      <div class="총상자">
+        <!-- 삭제 확인 모달 추가 -->
+        <div id="삭제확인모달그룹" class="모달그룹">
+          <div class="일기쓰기모달배경"></div>
+          <div class="삭제확인모달">
+            <div class="삭제확인모달_내용">
+              <div class="삭제확인모달_제목">일기 삭제</div>
+              <div class="삭제확인모달_설명">일기를 삭제 하시겠어요?</div>
+            </div>
+            <div class="삭제확인모달_버튼그룹">
+              <button class="삭제취소버튼">취소</button>
+              <button class="삭제확인버튼">삭제</button>
+            </div>
+          </div>
+        </div>
+        <div class="전체상자">
+          <div class="제목과기분과날짜담는상자">
+            <!-- 일기 제목 불러오기-->
+            <div id="일기제목"></div>
+            <div class="기분과날짜담는상자">
+              <!-- 기분상태 불러오기-->
+              <div id="선택된기분" class="일기기분"></div>
+              <div class="작성일자와작성담는상자">
+                <!-- 작성한 날짜 -->
+                <span id="작성일자"></span>
+                <span class="작성">작성</span>
+              </div>
+            </div>
+          </div>
+          <div class="내용상자">
+            <span>내용</span>
+            <!-- 작성한 내용 불러오기 -->
+            <div id="일기내용"></div>
+          </div>
+          <div class="버튼상자">
+            <button id="수정버튼">수정</button>
+          </div>
+        </div>
+        <div class="회고상자">
+          <div class="회고입력까지상자">
+            <div class="회고글씨">회고</div>
+            <div class="입력상자">
+              <input type="text" placeholder="회고를 남겨보세요." />
+              <button>입력</button>
+            </div>
+          </div>
+          <div class="댓글목록컨테이너"></div>
+          <!-- 여기에 댓글이 추가된다 -->
+        </div>
+        <div id="위로올리기">
+          <img
+            src="./images/icons/Up outline light xl.png"
+            alt="위로 가기"
+            width="40"
+            height="40"
+          />
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

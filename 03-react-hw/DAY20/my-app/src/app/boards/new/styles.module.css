@@ -1,0 +1,275 @@
+.게시물등록전체상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 80rem;
+}
+
+.게시물등록전체상자 nav {
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.구분상자 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.작성자입력상자 {
+  display: flex;
+  gap: 2.5rem;
+  width: 100%;
+}
+
+.작성자비밀번호구성 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.필수입력부분 {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.필수입력부분 span,
+.구분상자 span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.필수입력부분 span:first-child {
+  color: var(--gray-800, #333);
+}
+
+.필수입력부분 span:last-child {
+  color: var(--red, #f66a6a);
+}
+
+.게시글등록전체상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.내용입력창크기 {
+  height: 336px;
+  resize: none;
+}
+
+.우편번호검색상자 {
+  display: flex;
+  gap: 0.5rem;
+  width: 13.75rem;
+}
+
+.우편번호검색상자 button {
+  width: 18.125rem;
+  height: 3rem;
+  padding: 12px 16px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  font-size: 1.125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.작은입력창크기 {
+  width: 5.125rem;
+  text-align: center;
+}
+
+.사진업로드상자 {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 10rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+  cursor: pointer;
+}
+
+.사진업로드상자 span {
+  color: var(--gray-600, #777);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.취소등록버튼상자 {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.취소등록버튼상자 button:first-child {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  height: 48px;
+  padding: 12px 16px;
+  color: var(--gray-B, #000);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.취소등록버튼상자 .등록하기버튼 {
+  border: none;
+  border-radius: 8px;
+  height: 48px;
+  padding: 12px 16px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.취소등록버튼상자 .등록하기버튼.active {
+  background-color: var(--n-main, #2974e5);
+  cursor: pointer;
+}
+
+.취소등록버튼상자 .등록하기버튼.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.필수입력에러 {
+  color: var(--red, #f66a6a);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+/* 게시물 상세 페이지 스타일 */
+.게시물상세화면상자 {
+  width: 1280px;
+}
+
+.게시물타이틀상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.게시물타이틀상자 > p {
+  color: #000;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.작성자등록일자담는상자 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.작성자등록일자담는상자 > span {
+  color: #818181;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.작성자상자 {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.작성자상자 > span {
+  color: var(--gray-700, #5f5f5f);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.아이콘상자 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.게시글총내용상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.동영상배경상자 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+  background-color: var(--gray-50, #f2f2f2);
+}
+
+.동영상배경상자 > div {
+  width: 822px;
+  height: 464px;
+  background-color: coral;
+}
+
+.좋싫상자 {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.좋싫상자 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.좋싫상자 span {
+  color: var(--gray-700, #5f5f5f);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.좋아요상자 > span {
+  color: var(--red, #f66a6a);
+}
+
+.목록수정버튼상자 {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.목록수정버튼상자 button {
+  height: 40px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}
