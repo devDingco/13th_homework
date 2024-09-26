@@ -5,7 +5,7 @@ import Input from '../../../component/commons/Input';
 import Button from '../../../component/commons/Button';
 import React, { useState, ChangeEvent} from 'react';
 import styles from './style.module.css';
-
+import { useMutation, gql } from '@apollo/client'
 
 function WriteBoard () {
     const[name, setName] = useState("")
@@ -32,7 +32,7 @@ function WriteBoard () {
 
     const[addressdetail, setaddressdetail] = useState("")
 
-    
+
     const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
       setName(event.target.value)
       if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
@@ -96,7 +96,20 @@ function WriteBoard () {
       }
     }
 
-    const onClickSignup = () => {
+
+    const register = gql`
+    mutation createBoard($writer: String, $title: String, $contents: String){
+        createBoard(writer: $writer, title: $title, contents: $contents){
+            _id
+            number
+            message
+        }
+    }
+  `
+
+    const [myfunction] = useMutation(register)
+
+    const onClickSignup = async () => {
   
         if(name === ("")) {
           setNameBlank("필수입력 사항입니다.")
@@ -120,9 +133,15 @@ function WriteBoard () {
         }
         if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
           alert("게시글 등록 완료")
+          await myfunction({
+            variables :{
+              writer: name,
+              title: title,
+              contents: content
+            }
+          })
         }
-    }
-
+      }
     return(
       <div className={styles.css_layout}> 
         <div className={styles.css_header}>게시글 등록</div>
