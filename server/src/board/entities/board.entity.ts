@@ -8,10 +8,11 @@ import {
 } from 'typeorm';
 
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { CreateBoardDto } from '../dto/create-board.dto';
 
 @Entity()
 @ObjectType()
-export class Board {
+export class Board extends CreateBoardDto {
     @ObjectIdColumn()
     @Field(() => ID)
     _id: ObjectId;
@@ -20,18 +21,6 @@ export class Board {
     @Field(() => Int)
     boardId: number;
 
-    @Column()
-    @Field()
-    author: string;
-
-    @Column()
-    @Field()
-    title: string;
-
-    @Column()
-    @Field()
-    content: string;
-
     @CreateDateColumn()
     @Field(() => Date)
     createdAt: Date;
@@ -39,12 +28,4 @@ export class Board {
     @UpdateDateColumn()
     @Field(() => Date)
     updatedAt: Date;
-
-    @Column('array')
-    @Field(() => [String], { nullable: true })
-    imageUrl?: string[];
-
-    @Column()
-    @Field({ nullable: true })
-    youtubeUrl?: string;
 }
