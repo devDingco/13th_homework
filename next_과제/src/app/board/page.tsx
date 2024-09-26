@@ -1,5 +1,3 @@
-import Icon from "components/iconFactory";
-
-export default function BoardPage() {
-  return <div>게시판</div>;
+export default function BoardList() {
+  return <div>리스트페이지</div>;
 }

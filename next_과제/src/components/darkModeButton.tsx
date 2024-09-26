@@ -2,18 +2,21 @@
 import { useEffect, useState } from "react";
 
 export default function DarkModeButton() {
-  // const themeDefault = localStorage.getItem("theme") ?? "light";
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<string>("");
 
   useEffect(() => {
-    localStorage.setItem("theme", theme!);
-    const localTheme = localStorage.getItem("theme");
-    document.documentElement.setAttribute("data-theme", localTheme!);
+    const localTheme = localStorage.getItem("theme") ?? "light";
+    localStorage.setItem("theme", localTheme);
+    setTheme(localTheme);
+    document.documentElement.setAttribute("data-theme", localTheme);
   }, [theme]);
 
   const handleThemeChange = () => {
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     setTheme(theme === "light" ? "dark" : "light");
   };
+
+  console.log(theme);
 
   return (
     <label className="swap swap-rotate">

@@ -6,6 +6,7 @@ import Calendar from "../../public/svgs/outline/calendar.svg";
 import Camp from "../../public/svgs/outline/camp.svg";
 import Chat from "../../public/svgs/outline/chat.svg";
 import Close from "../../public/svgs/outline/close.svg";
+import Delete from "../../public/svgs/outline/delete.svg";
 import Edit from "../../public/svgs/outline/edit.svg";
 import Fire from "../../public/svgs/outline/fire.svg";
 import Good from "../../public/svgs/outline/good.svg";
@@ -51,6 +52,7 @@ const icons = {
   camp: Camp,
   chat: Chat,
   close: Close,
+  delete: Delete,
   edit: Edit,
   fire: Fire,
   good: Good,

@@ -1,4 +1,3 @@
-// import Image from "next/image";
 "use client";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/config/hook";
 import {
@@ -7,7 +6,7 @@ import {
   incrementByAmount,
 } from "@/libs/redux/modules/slices/counter";
 import { useGetPokemonByNameQuery } from "@/services/pokemon";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function Home() {
   const counter = useAppSelector((state) => state.counter.value); // Return Root State Slices

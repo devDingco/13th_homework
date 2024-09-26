@@ -15,6 +15,9 @@ const Header = () => {
           <Link className="btn btn-secondary" href="/board/detail">
             게시글 상세
           </Link>
+          <Link className="btn btn-accent" href="/board/list">
+            게시글 리스트
+          </Link>
         </div>
         <DarkModeButton />
       </nav>
