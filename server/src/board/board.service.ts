@@ -4,7 +4,7 @@ import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
 import { BoardRepository } from './repositories/boardRepository';
 import { BoardIdCounterRepository } from './repositories/boardIdCounterRepository';
-import { BoardReactionRepository } from './repositories/boardReactionRepository';
+import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 
 @Injectable()
 export class BoardService {

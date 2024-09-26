@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { changeDateToISO } from '@/utils/changeDateToISO';
+// import onClickDeleteBoard from '@/utils/onClickDeleteBoard';
 
 export default function BoardItem({ board }: IBoardItem) {
 	const router = useRouter();
@@ -24,7 +25,7 @@ export default function BoardItem({ board }: IBoardItem) {
 			onMouseOut={() => setHoveredItem(null)}
 			onClick={() => onClickRouterDetail(board.boardId)}
 		>
-			<div className="w-16 flex justify-center items-center text-[#919191] prose-l_14_20">
+			<div className="w-16 flex justify-center items-center text-[#776c6c] prose-l_14_20">
 				{board.boardId}
 			</div>
 			<div className="w-full prose-me_14_20">{board.title}</div>
@@ -35,7 +36,13 @@ export default function BoardItem({ board }: IBoardItem) {
 				{formattedDate}
 			</div>
 			{hoveredItem === board.boardId ? (
-				<Image src="/Images/delete.svg" alt="delete" width={20} height={20} />
+				<Image
+					src="/Images/delete.svg"
+					alt="delete"
+					width={20}
+					height={20}
+					// onClick={() => onClickDeleteBoard(board.boardId)}
+				/>
 			) : (
 				<div className="size-6"></div>
 			)}

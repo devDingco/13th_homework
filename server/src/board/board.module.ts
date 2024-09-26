@@ -6,11 +6,15 @@ import { Board } from './entities/board.entity';
 import { BoardRepository } from './repositories/boardRepository';
 import { BoardIdCounterRepository } from './repositories/boardIdCounterRepository';
 import { BoardIdCounter } from './entities/board-boardId.entity';
-import { BoardReaction } from './entities/board-reaction.entity';
-import { BoardReactionRepository } from './repositories/boardReactionRepository';
+import { BoardReaction } from './reaction/entities/reaction.entity';
+import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
+import { ReactionModule } from './reaction/reaction.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Board, BoardIdCounter, BoardReaction])],
+    imports: [
+        TypeOrmModule.forFeature([Board, BoardIdCounter, BoardReaction]),
+        ReactionModule,
+    ],
     controllers: [BoardController],
     providers: [
         BoardService,

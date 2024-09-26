@@ -1,6 +1,6 @@
 /** @format */
 
-export interface IBoardType {
+export interface IBoardType extends IReaction {
 	boardId: number;
 	author: string;
 	title: string;
@@ -9,8 +9,11 @@ export interface IBoardType {
 	updatedAt?: string;
 	imageUrl?: string[];
 	youtubeUrl?: string;
-	like?: number;
-	hate?: number;
+}
+
+export interface IReaction {
+	like: number;
+	hate: number;
 }
 
 export interface IBoardItem {
