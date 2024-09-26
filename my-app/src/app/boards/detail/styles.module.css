@@ -1,0 +1,125 @@
+.main {
+  width: 1280px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_box {
+  width: 100%;
+  font-weight: 700px;
+  font-size: 28px;
+  line-height: 36px;
+  @apply text-textColor;
+}
+
+.details_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.writer_date_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.writer_box {
+  display: flex;
+  gap: 4px;
+}
+
+.profile {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+}
+
+.writer {
+  height: 20px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+}
+
+.date_box {
+  height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #818181;
+}
+
+.icon_box {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+
+.icon_box_img {
+  width: 24px;
+  height: 24px;
+}
+
+.content_box_img {
+  width: 400px;
+  height: 531px;
+}
+
+.content_box {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.video_box {
+  width: 100%;
+  padding: 24px 0px;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bad_good_box {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.heart_box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.good_count {
+  color: #f66a6a;
+}
+
+.list_edit_box {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.button_box {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  padding: 8px 12px;
+  gap: 8px;
+  display: flex;
+}
+
+.button_text {
+  height: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
