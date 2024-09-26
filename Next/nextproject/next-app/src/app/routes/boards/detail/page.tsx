@@ -1,43 +1,40 @@
-import React from 'react';
+"use client";
 
-import MainImgae from '../assets/MainImage.png'
-import BottomImgae from '../assets/Bottomimage.png'
-import Hate from '../assets/Hate.png'
-import Like from '../assets/Like.png'
-import List from '../assets/List.png'
-import Modify from '../assets/Modify.png'
-import Clip from '../assets/Clip.png'
-import Location from '../assets/Location.png'
+import React from 'react';
+import styles from './style.module.css';
+import Image from 'next/image'
 
 export default function BoardsDetail () {
     
     return (
-        <div className="css_layout">
-            <div className="css_header">살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라</div>                   
-                <div className='css_info'>
-                    <div className='css_user'>
-                        <div className='css_name'>
-                            <img src="/assets/Profile.png" alt='profile' className='css_profileimage'/>
+        <div className={styles.css_layout}>
+            <div className={styles.css_header}>살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라</div>                   
+                <div className={styles.css_info}>
+                    <div className={styles.css_user}>
+                        <div className={styles.css_name}>
+                            <Image src='/assets/Profile.png' width={0} height={0} sizes='100vw' alt='profile' className={styles.css_profileimage} />                            
                             홍길동
                         </div>
-                        <div className='css_date'>2024-09-23</div>
+                        <div className={styles.css_date}>2024-09-23</div>
                     </div>
-                    <hr className='css_detailhr'></hr>
-                    <div className='css_side'>
-                        <div className='css_clip'>
-                            <img src={Clip} alt='clip'/>
-                        </div>
-                        <div className='css_location'>
-                            <img src={Location} alt='location'/>
+                    <div className={styles.css_detailhr}></div>
+                    <div className={styles.css_side}>
+                        <div className={styles.css_sidebutton}>
+                            <div className={styles.css_clip}>
+                                <Image src='/assets/Clip.png' width={0} height={0} sizes='100vw' alt='clip' className={styles.css_clip} />
+                            </div>
+                            <div className={styles.css_location}>
+                                <Image src='/assets/Location.png' width={0} height={0} sizes='100vw' alt='location' className={styles.css_location} />
+                            </div>
                         </div>
                     </div>
                 </div>
             <div>
-                <div className='css_image'>
-                    <img src={MainImgae} alt='mainimage'/>
+                <div className={styles.css_image}>
+                    <Image src='/assets/MainImage.png' width={0} height={0} sizes='100vw' alt='mainimage' className={styles.css_image} />
                 </div>
             </div>
-                <div className='css_text'>
+                <div className={styles.css_text}>
                    
                         살겠노라 살겠노라. 청산에 살겠노라. <br/>
                         머루랑 다래를 먹고 청산에 살겠노라. <br/>
@@ -72,23 +69,23 @@ export default function BoardsDetail () {
                         얄리얄리 얄라셩 얄라리 얄라<br/>
                     
                 </div>
-                <div className='css_bottomimage'>
-                    <img src={BottomImgae} alt='bottomimage'/>
+                <div className={styles.css_bottomimage}>
+                    <Image src='/assets/BottomImage.png' width={0} height={0} sizes='100vw' alt='bottomimage' className={styles.css_bottomimageImage} />
                 </div>
-            <div className='css_heart'>
-                <div className='css_hate'>
-                    <img src={Hate} alt='hate'/> <span>24</span>
+            <div className={styles.css_heart}>
+                <div className={styles.css_hate}>
+                <Image src='/assets/Hate.png' width={0} height={0} sizes='100vw' alt='hate' className={styles.css_hate} /><span>24</span>
                 </div>
-                <div className='css_like'>
-                    <img src={Like} alt='like'/> <span>12</span>
+                <div className={styles.css_like}>
+                    <Image src='/assets/Like.png' width={0} height={0} sizes='100vw' alt='like' className={styles.css_like} /> <span>12</span>
                 </div>
             </div>
-                <div className='css_detailbutton'>
-                    <button className='css_list'>
-                        <img src={List} alt='list'/>
+                <div className={styles.css_detailbutton}>
+                    <button className={styles.css_list}>
+                        <Image src='/assets/List.png' width={0} height={0} sizes='100vw' alt='list' className={styles.css_listimage} />
                     </button>
-                    <button className='css_modify'>
-                        <img src={Modify} alt='modify'/>
+                    <button className={styles.css_modify}>
+                    <Image src='/assets/Modify.png' width={0} height={0} sizes='100vw' alt='modify' className={styles.css_modifyimage} />
                     </button>
                 </div>
         </div>

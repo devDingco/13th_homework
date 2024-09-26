@@ -1,0 +1,179 @@
+.css_layout {
+  width: 1280px;
+  height: 2171px;
+  padding: 40px 0px 40px 0px;
+  left: 320px;
+  gap: 40px;
+}
+
+.css_header {
+    width: 1280px;
+    height: 72px;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.css_info {
+    width: 1280px;
+    height: 80px;
+    gap: 16px;
+}
+
+.css_user {
+    width: 1280px;
+    height: 24px;
+    gap: 54px;
+    float: right;
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.css_name {
+    width: 80px;
+    height: 24px;
+    gap: 4px;
+    display: flex; 
+   
+}
+
+.css_profileimage {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #E4E4E4;
+    border-radius: 100px;
+}
+
+.css_date {
+    width: 1161px;
+    height: 24px;
+    gap: 8px;
+    text-align: right;
+}
+
+.css_detailhr {
+    margin-bottom: 20px;
+    border: 1px solid #E4E4E4;
+}
+
+.css_side {
+    width: 1280px;
+    height: 24px;
+    gap: 10px;
+    display: flex;
+    justify-content: right;
+    margin-bottom: 100px;
+}
+
+.css_sidebutton {
+    width: 56px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.css_clip {
+    width: 19px;
+    height: 9px;
+    margin-top: 2px;
+}
+
+.css_location {
+    width: 15px;
+    height: 18px;
+    }
+
+
+.css_image {
+    width: 400px;
+    height: 531px;
+    margin-top: 40px;
+}
+
+.css_text {
+    width: 1280px;
+    height: 744px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    gap: 24px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.css_bottomimage {
+    width: 1280px;
+    height: 512px;
+    padding: 24px 0px 24px 0px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #F2F2F2;
+    display: flex;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.css_bottomimageImage {
+    width: 822px;
+    height: 464px;
+}
+
+.css_heart {
+    width: 1280px;
+    height: 48px;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.css_hate {
+    width: 19px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.css_like {
+    width: 19px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: red;
+}
+
+.css_detailbutton {
+    width: 1280px;
+    height: 40px;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.css_list {
+    background-color: transparent;
+    border: transparent;
+}
+
+
+.css_listimage {
+    width: 105px;
+    height: 40px;
+
+}
+
+.css_modify {
+    background-color: transparent;
+    border: transparent;
+}
+
+.css_modifyimage {
+    width: 105px;
+    height: 40px;
+
+}
