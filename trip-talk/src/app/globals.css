@@ -3,17 +3,9 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  @apply flex m-0 min-w-80 min-h-screen;
 }
 
 #root {
-  width: 100%;
-  padding: 2rem;
-  text-align: center;
-  max-width: 1280px;
-  margin: 0 auto;
+  @apply w-full p-8 max-w-7xl my-0 mx-auto;
 }

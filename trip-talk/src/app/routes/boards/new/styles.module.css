@@ -3,13 +3,11 @@
 }
 
 .form > div {
-  @apply flex w-full pb-10 border-b border-solid border-x-0 border-t-0;
-  border-color: #e4e4e4;
+  @apply flex w-full pb-10 border-b border-solid border-x-0 border-t-0 border-lightGray;
 }
 
 .author_info_wrapper {
-  @apply gap-10;
-  border: none;
+  @apply gap-10 border-none;
 }
 
 .author_info_wrapper > * {
@@ -29,13 +27,11 @@
 }
 
 .content_wrapper > div > p {
-  @apply text-base font-medium;
-  color: #333;
+  @apply text-base font-medium text-darkGray;
 }
 
 .content_wrapper > div > b {
-  @apply text-base font-medium;
-  color: #f66a6a;
+  @apply text-base font-medium text-lightCoral;
 }
 
 .content_wrapper > textarea {
@@ -65,8 +61,7 @@
 }
 
 .photo_wrapper > p {
-  @apply text-base font-medium;
-  color: #333;
+  @apply text-base font-medium text-darkGray;
 }
 
 .photo_wrapper > div {
@@ -78,6 +73,5 @@
 }
 
 .required_field {
-  @apply flex pt-2 text-base font-medium;
-  color: #F66A6A;
+  @apply flex pt-2 text-base font-medium text-lightCoral;
 }
