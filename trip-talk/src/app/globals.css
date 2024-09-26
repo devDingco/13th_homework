@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply flex m-0 min-w-80 min-h-screen;
+}
+
+#root {
+  @apply w-full p-8 max-w-7xl my-0 mx-auto;
+}

@@ -1,0 +1,61 @@
+.layout {
+  @apply flex flex-col gap-6;
+}
+
+.title {
+  @apply font-bold text-3xl text-black;
+}
+
+.author_info {
+  @apply flex flex-row justify-between;
+}
+
+.author_name {
+  @apply flex gap-1 items-center;
+}
+
+.date {
+  @apply flex justify-end items-center gap-2 text-sm font-normal;
+  color: #818181;
+}
+
+.divider {
+  @apply w-full h-px my-4 bg-lightGray;
+}
+
+.link_location_row {
+  @apply flex justify-end gap-2;
+}
+
+.post_content {
+  @apply text-start text-black text-base font-normal;
+}
+
+.video_thumbnail_wrapper {
+  @apply flex py-6 flex-col items-center gap-2.5;
+  background-color: #F2F2F2;
+}
+
+.reaction {
+  @apply flex justify-center items-center gap-6;
+}
+
+.reaction > div {
+  @apply flex flex-col justify-center items-center gap-1;
+}
+
+.reaction > div > p {
+  @apply text-sm font-normal;
+}
+
+.bad_count {
+  color: #5f5f5f;
+}
+
+.good_count {
+  @apply text-lightCoral;
+}
+
+.button_layout {
+  @apply flex justify-center items-center gap-6;
+}

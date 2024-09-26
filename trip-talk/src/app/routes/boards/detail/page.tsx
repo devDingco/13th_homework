@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Button from "../../../components/Button/Button";
-import styles from "./BoardsDetail.module.css";
+import styles from "./styles.module.css";
 
 export default function BoardsDetail() {
   return (
@@ -11,7 +12,7 @@ export default function BoardsDetail() {
       <div>
         <div className={styles.author_info}>
           <div className={styles.author_name}>
-            <img src="/src/assets/svgs/profileIcon.svg" alt="profileIcon" />
+            <Image src="/svgs/profileIcon.svg" alt="profileIcon" width={24} height={24} />
             <p>홍길동</p>
           </div>
           <div className={styles.date}>
@@ -20,13 +21,13 @@ export default function BoardsDetail() {
         </div>
         <div className={styles.divider}></div>
         <div className={styles.link_location_row}>
-          <img src="/src/assets/svgs/link.svg" alt="link" />
-          <img src="/src/assets/svgs/location.svg" alt="location" />
+          <Image src="/svgs/link.svg" alt="link" width={24} height={24} />
+          <Image src="/svgs/location.svg" alt="location" width={24} height={24} />
         </div>
       </div>
 
       <div>
-        <img src="/src/assets/pngs/post-image.png" alt="post-image" />
+        <Image src="/pngs/post-image.png" alt="post-image" width={400} height={531} />
       </div>
       <div className={styles.post_content}>
         살겠노라 살겠노라. 청산에 살겠노라.
@@ -84,22 +85,26 @@ export default function BoardsDetail() {
         <br />
         얄리얄리 얄라셩 얄라리 얄라
       </div>
-      <div  className={styles.video_thumbnail_wrapper}>
-        <img src="/src/assets/pngs/video-thumbnail.png" alt="video-thumbnail" />
+      <div className={styles.video_thumbnail_wrapper}>
+        <Image src="/pngs/video-thumbnail.png" alt="video-thumbnail" width={822} height={464} />
       </div>
       <div className={styles.reaction}>
         <div>
-          <img src="/src/assets/svgs/bad.svg" alt="bad" />
+          <Image src="/svgs/bad.svg" alt="bad" width={24} height={24} />
           <p className={styles.bad_count}>12</p>
         </div>
         <div>
-          <img src="/src/assets/svgs/good.svg" alt="good" />
+          <Image src="/svgs/good.svg" alt="good" width={24} height={24} />
           <p className={styles.good_count}>24</p>
         </div>
       </div>
       <div className={styles.button_layout}>
-        <Button color="white" src="/src/assets/svgs/menu.svg" alt="menu">목록으로</Button>
-        <Button color="white" src="/src/assets/svgs/edit.svg" alt="edit">수정하기</Button>
+        <Button color="white" src="/svgs/menu.svg" alt="menu">
+          목록으로
+        </Button>
+        <Button color="white" src="/svgs/edit.svg" alt="edit">
+          수정하기
+        </Button>
       </div>
     </div>
   );
