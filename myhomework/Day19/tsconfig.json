@@ -5,8 +5,8 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "target": "es2015",
+    "moduleResolution": "node",
+    "target": "es6",
 
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
