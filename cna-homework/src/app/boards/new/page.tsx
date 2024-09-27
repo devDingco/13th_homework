@@ -1,10 +1,25 @@
-'use client'
+"use client";
 import React, { useEffect } from "react";
-import { useState } from 'react'
-import styles from './styles.module.css'
+import { useState } from "react";
+import styles from "./styles.module.css";
 import Image from "next/image";
+import { useMutation, gql } from "@apollo/client";
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput:$createBoardInput) {
+      _id
+      title
+      writer
+      contents
+    }
+  }
+`;
 
 const BoardsNewPage = () => {
+  // graphql
+  const [myFunction] = useMutation(CREATE_BOARD);
+
   // state
   const [writer, setWriter] = useState("");
   const [pw, setPw] = useState("");
@@ -45,7 +60,7 @@ const BoardsNewPage = () => {
   };
 
   // onClick
-  const onClickSignup = () => {
+  const onClickSignup = async () => {
     // 등록버튼 클릭시 입력창이 비어있는지 안 비어있는지 확인 후 에러메세지
     if (writer === "") {
       setErrorWriter("작성자명을 입력해 주세요!");
@@ -70,6 +85,19 @@ const BoardsNewPage = () => {
     if (writer !== "" && pw !== "" && title !== "" && content !== "") {
       alert("게시글 등록이 가능한 상태입니다!");
     }
+
+    // 클릭시 게시글등록
+    const result = await myFunction({
+      variables: {
+        createBoardInput: {
+          title: title,
+          writer: writer,
+          contents: content,
+          password: pw,
+        },
+      },
+    });
+    console.log("--", result);
   };
 
   // 이미지 업로드 시 미리보기 input의 onChange
