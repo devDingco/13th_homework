@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import {
     ArrayMaxSize,
     IsArray,
@@ -7,57 +7,41 @@ import {
     IsString,
     Length,
 } from 'class-validator';
+import { Column } from 'typeorm';
 
+@InputType()
+@ObjectType()
 export class CreateBoardDto {
-    @ApiProperty({
-        type: String,
-        description: '작성자',
-        example: '류지승',
-    })
     @IsString()
     @IsNotEmpty()
-    @Length(3)
+    @Length(3, 4)
+    @Column()
+    @Field()
     author: string;
 
-    @ApiProperty({
-        type: String,
-        description: '제목',
-        example: '안녕하세요',
-    })
     @IsString()
     @IsNotEmpty()
+    @Column()
+    @Field()
     title: string;
 
-    @ApiProperty({
-        type: String,
-        description: '내용',
-        example: '저는 류지승입니다.',
-    })
     @IsString()
     @IsNotEmpty()
+    @Column()
+    @Field()
     content: string;
 
-    @ApiProperty({
-        type: [String],
-        description: '사진 첨부',
-        example: '아직미정 어떤 식으로 접근할 지 모르겠음.',
-        minItems: 1,
-        maxItems: 3,
-    })
-    @ApiPropertyOptional()
     @IsArray()
     @IsOptional()
     @IsString({ each: true })
     @ArrayMaxSize(3)
+    @Column('array')
+    @Field(() => [String], { nullable: true })
     imageUrl?: string[];
 
-    @ApiProperty({
-        type: String,
-        description: '유튜브 링크',
-        example: 'https://www.youtube.com',
-    })
-    @ApiPropertyOptional()
     @IsString()
     @IsOptional()
+    @Column()
+    @Field({ nullable: true })
     youtubeUrl?: string;
 }

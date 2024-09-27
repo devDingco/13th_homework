@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from 'configs/typeorm.config';
 import { ReactionModule } from './board/reaction/reaction.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
     imports: [
@@ -15,6 +17,10 @@ import { ReactionModule } from './board/reaction/reaction.module';
         }),
         TypeOrmModule.forRootAsync({
             useClass: typeORMConfig,
+        }),
+        GraphQLModule.forRoot<ApolloDriverConfig>({
+            driver: ApolloDriver,
+            autoSchemaFile: true,
         }),
 
         BoardModule,
