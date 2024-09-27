@@ -47,7 +47,7 @@ export class BoardService {
         return await this.boardRepository.updateAll(boardId, updateBoardDto);
     }
 
-    async remove(boardId: number): Promise<void> {
+    async remove(boardId: number): Promise<boolean> {
         const responseBoard = await this.boardRepository.deleteBoard(boardId);
         const responseBoardReaction =
             await this.boardReactionRepository.deleteBoardReaction(boardId);
@@ -60,6 +60,7 @@ export class BoardService {
                 HttpStatus.NOT_FOUND,
             );
         }
+        return true;
     }
 
     async clear(): Promise<void> {

@@ -16,11 +16,6 @@ import { TransformInterceptor } from 'src/common/interceptors/transform.intercep
 export class ReactionController {
     constructor(private readonly reactionService: ReactionService) {}
 
-    // @Post()
-    // create(@Body() createReactionDto: CreateReactionDto) {
-    //     return this.reactionService.create(createReactionDto);
-    // }
-
     @Get()
     @ResponseMessage(`board의 reaction을 성공적으로 가져왔습니다.`)
     @HttpCode(HttpStatus.OK)

@@ -22,13 +22,30 @@ export class BoardResolver {
         return this.boardService.create(data);
     }
 
-    // @Mutation(() => Board)
-    // updateBoard(@Args('id') id: number, @Args('data') data) {
-    //     return this.boardService.updateOne(id, data);
-    // }
+    @Mutation(() => Board)
+    updateBoard(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('data') data: CreateBoardDto,
+    ) {
+        return this.boardService.updateOne(boardId, data);
+    }
 
-    // @Mutation(() => Boolean)
-    // deleteBoard(@Args('id') id: number) {
-    //     return this.boardService.remove(id);
-    // }
+    @Mutation(() => Board)
+    updateBoards(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('data') data: CreateBoardDto,
+    ) {
+        return this.boardService.updateAll(boardId, data);
+    }
+
+    @Mutation(() => Boolean)
+    deleteBoard(@Args('boardId', { type: () => Int }) boardId: number) {
+        return this.boardService.remove(boardId);
+    }
+
+    @Mutation(() => Boolean)
+    async clearBoard() {
+        await this.boardService.clear();
+        return true;
+    }
 }
