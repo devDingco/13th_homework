@@ -16,7 +16,7 @@ function BoardsNew() {
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
 
-  const onChangeName = (event) => {
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setName(value);
     if (value === "") {
@@ -34,7 +34,7 @@ function BoardsNew() {
     // setErrorMessage(false);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPassword(value);
     if (value === "") {
@@ -52,7 +52,7 @@ function BoardsNew() {
     // setErrorMessage(false);
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setTitle(value);
     if (value === "") {
@@ -70,7 +70,7 @@ function BoardsNew() {
     // setErrorMessage(false);
   };
 
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     setContent(value);
     if (value === "") {
@@ -88,7 +88,7 @@ function BoardsNew() {
     // setErrorMessage(false);
   };
 
-  const onClickSignup = (event) => {
+  const onClickSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log("버튼클릭확인");
     // if (
     //   name.length === 0 ||
@@ -175,7 +175,6 @@ function BoardsNew() {
             내용<span>*</span>
           </label>
           <textarea
-            type="text"
             onChange={onChangeContent}
             id="내용인풋"
             placeholder="내용을 입력해 주세요."

@@ -15,5 +15,5 @@ const day18 = createBrowserRouter([
 //주소다. 첫 path는 /로 해야한다
 //element가 불러오는 진짜 파일명이다
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<RouterProvider router={day18} />);
