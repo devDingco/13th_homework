@@ -1,6 +1,17 @@
 "use client";
 import { useState, ChangeEvent } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import styles from './styles.module.css';
+
+const CREATE_BOARD = gql`
+    mutation createBoard($writer: String, $title: String, $contents: String) {
+        createBoard(writer: $writer, title: $title, contents: $contents) {
+            _id
+            message
+            number
+        }
+    } 
+`
 
 const NewPage = () => {
   const writerDescription = "작성자명을 입력해 주세요."
@@ -12,15 +23,17 @@ const NewPage = () => {
   const [writer, setWriter] = useState("")
   const [password, setPassword] = useState("")
   const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+  const [contents, setContents] = useState("")
 
   const errorMessage = "필수 입력 사항입니다."
   const [writerErrorMessage, setWriterErrorMessage] = useState(errorMessage)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(errorMessage)
   const [titleErrorMessage, setTitleErrorMessage] = useState(errorMessage)
-  const [contentErrorMessage, setContentErrorMessage] = useState(errorMessage)
+  const [contentsErrorMessage, setContentsErrorMessage] = useState(errorMessage)
 
   const [isActive, setIsActive] = useState(false)
+
+  const [createBoard] = useMutation(CREATE_BOARD)
 
   function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
@@ -32,7 +45,7 @@ const NewPage = () => {
         setWriterErrorMessage(errorMessage)
     }
 
-    if (value && password && title && content) return setIsActive(true)
+    if (value && password && title && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
@@ -46,7 +59,7 @@ const NewPage = () => {
         setPasswordErrorMessage(errorMessage)
     }
 
-    if (writer && value && title && content) return setIsActive(true)
+    if (writer && value && title && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
@@ -60,22 +73,33 @@ const NewPage = () => {
         setTitleErrorMessage(errorMessage)
     }
 
-    if (writer && password && value && content) return setIsActive(true)
+    if (writer && password && value && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
-  function onChangeContent(event: ChangeEvent<HTMLInputElement>) {
+  function onChangeContents(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-    setContent(event.target.value)
+    setContents(event.target.value)
 
     if (value && !checkSpace(value)) {
-        setContentErrorMessage("")
+        setContentsErrorMessage("")
     } else {
-        setContentErrorMessage(errorMessage)
+        setContentsErrorMessage(errorMessage)
     }
 
     if (writer && password &&  title && value) return setIsActive(true)
     return setIsActive(false)
+  }
+
+  async function onClickSubmitButton() {
+    const result = await createBoard({
+        variables: {
+            writer: writer,
+            title: title,
+            contents: contents
+        },
+    });
+    console.log(result)
   }
 
   function checkSpace(str: string) {
@@ -99,7 +123,7 @@ const NewPage = () => {
     return (
         <>
             <button className={styles.cancelButton}>취소</button>
-            <button className={styles.submitButton} style={isActive ? submitButtonStyle : disabledSubmitButtonStyle}>등록하기</button>
+            <button className={styles.submitButton} style={isActive ? submitButtonStyle : disabledSubmitButtonStyle} onClick={onClickSubmitButton}>등록하기</button>
         </>
     );
   }
@@ -117,7 +141,7 @@ const NewPage = () => {
               <Divider />
               <BasicInputForm isRequired={true} title="제목" placeholder={titleDescription} onChangeHandler={onChangeTitle} errorMessage={titleErrorMessage}/>
               <Divider />
-              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContent} errorMessage={contentErrorMessage}/>
+              <ContentsInputForm title="내용" placeholder={contentsDescription} onChangeHandler={onChangeContents} errorMessage={contentsErrorMessage}/>
               <AddressInputForm />
               <Divider />
               <BasicInputForm isRequired={false} title="유튜브 링크" placeholder={youtubeLinkDescription}/>
@@ -198,7 +222,6 @@ const TextInput = (props: any) => {
 }
 
 export const Divider = () => {
-console.log(styles)
   return <div className={styles.divider}></div>;
 }
 
@@ -227,7 +250,7 @@ const UploadButton = () => {
 interface IInputProps {
     isRequired: boolean;
     title: string;
-    content: string;
+    contents: string;
     placeholder: string;
     onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
 }
