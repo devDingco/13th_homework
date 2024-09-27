@@ -4,13 +4,15 @@ import { gql, useMutation } from '@apollo/client';
 import styles from './styles.module.css';
 
 const CREATE_BOARD = gql`
-    mutation createBoard($writer: String, $title: String, $contents: String) {
-        createBoard(writer: $writer, title: $title, contents: $contents) {
-            _id
-            message
-            number
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
+        createBoard(createBoardInput: $createBoardInput) {
+          _id
+          writer
+          title
+          contents
+          createdAt
         }
-    } 
+    }
 `
 
 const NewPage = () => {
@@ -94,9 +96,12 @@ const NewPage = () => {
   async function onClickSubmitButton() {
     const result = await createBoard({
         variables: {
-            writer: writer,
-            title: title,
-            contents: contents
+            createBoardInput: {
+                writer: writer,
+                password: password,
+                title: title,
+                contents: contents
+            }
         },
     });
     console.log(result)

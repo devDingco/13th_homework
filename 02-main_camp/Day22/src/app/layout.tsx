@@ -37,16 +37,3 @@ export default function RootLayout(props: any) {
     </html>
   );
 }
-
-// export default function Input ({label, type, id, placeholder, name, onChange} : Props) {
-//   const aaa: string = `css_${name}input`
-//   console.log(aaa)
-//   console.log(`스타일 태그: ${styles.[aaa]}`)
-//   console.log(`스타일 태그: ${styles.css_password}`)
-//   return (
-//   <div>
-//     <label htmlFor={name} className={`css_${name}tag`}>{label}</label>
-//     <input type={type} id={id} name={name} placeholder={placeholder} className={styles.aaa} onChange={onChange}/>
-//   </div>
-//   );
-// };
