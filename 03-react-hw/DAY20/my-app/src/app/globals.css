@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+button {
+  cursor: pointer;
+}
+
+hr {
+  background: var(--gray-100, #e4e4e4);
+  height: 1px;
+  border: 0;
+}
+form {
+  display: flex;
+  gap: 1rem;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
