@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ApolloSetting from "@/commons/settings/appollo-settings";
 
 const pretendardFont = localFont({
   src: "./fonts/Pretendard-Black.woff2",
@@ -21,7 +22,9 @@ export const metadata: Metadata = {
 export default function RootLayout(props) {
   return (
     <html lang="ko">
-      <body className={pretendardFont.variable}>{props.children}</body>
+      <body className={pretendardFont.variable}>
+        <ApolloSetting>{props.children}</ApolloSetting>
+      </body>
     </html>
   );
 }

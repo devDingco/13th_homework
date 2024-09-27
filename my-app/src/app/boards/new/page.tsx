@@ -2,20 +2,33 @@
 import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import { useMutation, gql } from "@apollo/client";
+
+const query = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
 
 function BoardsNew() {
+  const [createBoard] = useMutation(query);
   const [errorMessage, setErrorMessage] = useState<IInput>({
     writer: "",
     password: "",
     title: "",
-    content: "",
+    contents: "",
   });
 
   const [validation, setValidation] = useState<IInput>({
     writer: "",
     password: "",
     title: "",
-    content: "",
+    contents: "",
   });
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -24,7 +37,7 @@ function BoardsNew() {
     writer: string;
     password: string;
     title: string;
-    content: string;
+    contents: string;
   }
 
   const onChange = (
@@ -43,19 +56,19 @@ function BoardsNew() {
     setIsActive(isAllFilled);
   };
 
-  const onSubmit = () => {
+  const onClickSubmit = async () => {
     const errors: IInput = {
       writer: "",
       password: "",
       title: "",
-      content: "",
+      contents: "",
     };
 
     // 빈 값 검증
     if (!validation.writer) errors.writer = "필수 입력 사항입니다.";
     if (!validation.password) errors.password = "필수 입력 사항입니다.";
     if (!validation.title) errors.title = "필수 입력 사항입니다.";
-    if (!validation.content) errors.content = "필수 입력 사항입니다.";
+    if (!validation.contents) errors.contents = "필수 입력 사항입니다.";
 
     setErrorMessage(errors);
 
@@ -63,9 +76,17 @@ function BoardsNew() {
       validation.writer &&
       validation.password &&
       validation.title &&
-      validation.content
+      validation.contents
     ) {
       alert("게시글 등록이 가능한 상태입니다!");
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            ...validation,
+          },
+        },
+      });
+      console.log(result);
     }
   };
 
@@ -126,10 +147,10 @@ function BoardsNew() {
           <textarea
             className={styles.contentTextarea}
             placeholder="내용을 입력해주세요."
-            name="content"
+            name="contents"
             onChange={onChange}
           ></textarea>
-          <div className={styles.errorText}>{errorMessage.content}</div>
+          <div className={styles.errorText}>{errorMessage.contents}</div>
         </div>
         <hr className={styles.hr} />
         <div className={styles.address_box}>
@@ -211,7 +232,7 @@ function BoardsNew() {
         <button className={`${styles.button} ${styles.cancel}`}>취소</button>
         <button
           className={`${styles.button} ${styles.register}`}
-          onClick={onSubmit}
+          onClick={onClickSubmit}
           disabled={!isActive}
           style={{ backgroundColor: isActive === true ? "#2974e5" : "#c7c7c7" }}
         >
