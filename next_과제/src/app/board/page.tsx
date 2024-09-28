@@ -1,3 +1,5 @@
-export default function BoardList() {
-  return <div>리스트페이지</div>;
+import { redirect } from "next/navigation";
+
+export default async function Page() {
+  redirect("/board/list");
 }
