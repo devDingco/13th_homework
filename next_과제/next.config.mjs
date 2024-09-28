@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -9,17 +10,17 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      // {
-      //   protocol: "http",
-      //   hostname: "localhost",
-      //   port: "3000",
-      //   pathname: "images/**"
-      // },
-      // {
-      //   protocol: "https",
-      //   hostname: "raw.githubusercontent.com",
-      //   pathname: "/PokeAPI/sprites/master/sprites/pokemon/*/*"
-      // }
+      {
+        protocol: "http",
+        hostname: "219.251.16.138",
+        port: "3000",
+        pathname: "images/**"
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/PokeAPI/sprites/master/sprites/pokemon/**/*"
+      }
     ]
   }
 };
