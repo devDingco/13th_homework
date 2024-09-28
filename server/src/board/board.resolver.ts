@@ -8,12 +8,12 @@ export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
     @Query(() => [Board])
-    boards() {
+    getBoards() {
         return this.boardService.findAll();
     }
 
     @Query(() => Board)
-    board(@Args('boardId', { type: () => Int }) boardId: number) {
+    getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
         return this.boardService.findOne(boardId);
     }
 
