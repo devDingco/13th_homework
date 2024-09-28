@@ -10,17 +10,11 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "219.251.16.138",
-        port: "3000",
-        pathname: "images/**"
-      },
-      {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
-        pathname: "/PokeAPI/sprites/master/sprites/pokemon/**/*"
-      }
+      // {
+      //   protocol: "https",
+      //   hostname: "raw.githubusercontent.com",
+      //   pathname: "/PokeAPI/sprites/master/sprites/pokemon/**/*"
+      // }
     ]
   }
 };
