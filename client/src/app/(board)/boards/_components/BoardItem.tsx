@@ -4,7 +4,7 @@
 import { IBoardItem } from '@/models/boardType';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 // import deleteBoard from '@/app/apis/boards/deleteBoard';
 
@@ -12,14 +12,17 @@ export default function BoardItem({ board }: IBoardItem) {
 	const router = useRouter();
 	const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
+	useEffect(() => {
+		router.prefetch('/?modal=true');
+	}, [router]);
+
 	const onClickRouterDetail = (boardId: number) => {
 		router.push(`/boards/${boardId}`);
 	};
 
 	const onClickDeleteButton = (event: React.MouseEvent) => {
 		event.stopPropagation();
-
-		// deleteBoard(board.boardId);
+		router.push('boards/?modal=true');
 	};
 
 	const formattedDate = changeDateToISO(board.createdAt);
@@ -41,15 +44,17 @@ export default function BoardItem({ board }: IBoardItem) {
 			<div className="w-[100px] flex justify-center items-center text-[#919191] prose-l_14_20">
 				{formattedDate}
 			</div>
-			{hoveredItem === board.boardId && (
-				<Image
-					src="/Images/delete.svg"
-					alt="delete"
-					width={20}
-					height={20}
-					onClick={(event) => onClickDeleteButton(event)}
-				/>
-			)}
+
+			<Image
+				src="/Images/delete.svg"
+				alt="delete"
+				width={20}
+				height={20}
+				className={`transition-opacity duration-300 ${
+					hoveredItem === board.boardId ? 'opacity-100' : 'opacity-0'
+				}`}
+				onClick={(event) => onClickDeleteButton(event)}
+			/>
 		</div>
 	);
 }

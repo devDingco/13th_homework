@@ -5,7 +5,7 @@ import BoardItemContainer from './_components/BoardItemContainer';
 import BoardLoading from './_components/BoardLoading';
 import getAllBoards from '@/app/apis/boards/getAllBoards';
 
-export default function Board() {
+export default function boardPage() {
 	return (
 		<div className="w-full rounded-2xl shadow  flex flex-col px-12 py-6 gap-6 text-[#1c1c1c] prose-me_16_20">
 			<div className="w-full flex px-6 py-4 gap-2 justify-center">

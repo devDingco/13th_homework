@@ -1,8 +1,11 @@
 /** @format */
-import { IProps } from '@/models/children';
+import { IBoardListProps } from '@/models/children';
 
-export default function Layout({ children }: IProps) {
-    return (
-        <div className="py-10 gap-10 flex flex-col w-[75dvw]">{children}</div>
-    );
+export default function Layout({ children, modal }: IBoardListProps) {
+	return (
+		<div className="py-10 gap-10 flex flex-col w-[75dvw]">
+			{children}
+			{modal}
+		</div>
+	);
 }
