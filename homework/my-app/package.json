@@ -9,16 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.8",
     "bootstrap": "^5.3.3",
+    "flatpickr": "^4.6.13",
+    "graphql": "^16.9.0",
     "next": "14.2.13",
     "react": "^18",
     "react-bootstrap": "^2.10.4",
-    "react-dom": "^18"
+    "react-datepicker": "^7.4.0",
+    "react-dom": "^18",
+    "react-flatpickr": "^3.10.13"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-datepicker": "7.0.0",
     "@types/react-dom": "^18",
+    "@types/react-flatpickr": "^3.8.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
