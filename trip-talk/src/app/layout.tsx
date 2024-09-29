@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ApolloSetting from "../commons/settings/apollo-setting";
 
 // eslint-disable-next-line
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
         <title>trip-talk</title>
       </head>
       <body>
-        <div id="root">{children}</div>
+        <div id="root"><ApolloSetting>{children}</ApolloSetting></div>
       </body>
     </html>
   );
