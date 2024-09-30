@@ -6,6 +6,7 @@ import ImageUploader from "../../../components/ImageUploader/ImageUploader";
 import Input from "../../../components/Input/Input";
 import styles from "./styles.module.css";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -20,6 +21,7 @@ const CREATE_BOARD = gql`
 `
 
 export default function BoardsNew() {
+  const router = useRouter()
   const [writer, setWriter] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -58,7 +60,10 @@ export default function BoardsNew() {
         }
         },
       });
+      const boardId = result.data.createBoard._id;
       console.log(result);
+      console.log(boardId)
+      router.push(`/routes/boards/${boardId}`)
     } catch(error) {
       console.error(error);
       alert("An error has occurred. Please try again.");
