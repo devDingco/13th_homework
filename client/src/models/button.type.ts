@@ -21,4 +21,15 @@ export enum EButtonKorea {
 	cancel = '취소',
 	delete = '삭제 하기',
 	back = '뒤로 가기',
+	list = '목록으로',
+	update = '수정하기',
+}
+
+export enum EBoardButton {
+	list = 'list',
+	update = 'update',
+}
+
+export interface IBoardButton {
+	content: EBoardButton;
 }

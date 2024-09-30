@@ -1,6 +1,6 @@
 /** @format */
 
-import { ICreateFormBoard } from './formBoard';
+import { ICreateFormBoard } from './board.type';
 
 export interface IApiResponseData extends ICreateFormBoard {
 	boardId: number;

@@ -17,7 +17,7 @@ export default function BoardContainer({ resource }: IBoardReaderResource) {
 					<BoardIcon />
 					<BoardImages infor={boardInfor} />
 					<div className="prose-r_16_24">{boardInfor.content}</div>
-					<div className="w-full flex justify-center items-center bg-gray-100 py-4">
+					<div className="flex w-full items-center justify-center bg-gray-100 py-4">
 						<iframe
 							width="560"
 							height="315"

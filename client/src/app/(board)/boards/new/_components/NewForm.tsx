@@ -1,21 +1,23 @@
 /** @format */
 'use client';
 
-import NewAddressInputContainer from './NewAddressInputContainer';
-import NewInputContainer from './NewInputContainer';
-import NewImageContainer from './NewImageContainer';
-import NewTextarea from './NewTextarea';
-import { ETitle } from '@/models/newTitle';
-import { createBoardAction } from '@/actions/createBoardAction';
-import { useFormState } from 'react-dom';
 import { useEffect, useState } from 'react';
-import { IInputValueParameter } from '@/models/inputValueParameter';
-import { IFormState } from '@/models/formBoardError';
+
 import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
+import { ETitle } from '@/models/board.type';
+import { IFormState } from '@/models/formBoardError';
+import { IInputValueParameter } from '@/models/inputValueParameter';
+import NewAddressInputContainer from './NewAddressInputContainer';
+import NewImageContainer from './NewImageContainer';
+import NewInputContainer from './NewInputContainer';
+import NewTextarea from './NewTextarea';
+import { createBoardAction } from '@/actions/createBoardAction';
+import { useFormState } from 'react-dom';
 
 export default function NewForm() {
 	const [state, formAction] = useFormState(createBoardAction, {
+		data: null,
 		errors: {
 			author: undefined,
 			password: undefined,

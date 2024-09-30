@@ -1,6 +1,6 @@
 /** @format */
 
-import { RNewInputPlaceHolder, ITitle } from '@/models/newTitle';
+import { ITitle, RNewInputPlaceHolder } from '@/models/board.type';
 
 export default function NewInput({ title, onChangeValue }: ITitle) {
 	return (

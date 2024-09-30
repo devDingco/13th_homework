@@ -1,6 +1,6 @@
 /** @format */
 
-import { RNewInputPlaceHolder, ENewTitleProps, ITitle } from '@/models/newTitle';
+import { ENewTitleProps, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
 
 export default function NewTextarea({ title, error, onChangeValue }: ITitle) {
 	return (
