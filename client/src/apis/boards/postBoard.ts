@@ -1,9 +1,8 @@
 /** @format */
 
-import { ICreateFormBoard } from '@/models/formBoard';
-
-import { api } from '../config';
 import { IApiResponseData } from '@/models/apiResponse';
+import { ICreateFormBoard } from '@/models/board.type';
+import { api } from '../config';
 
 export default async function postBoard(data: ICreateFormBoard): Promise<IApiResponseData | null> {
 	try {

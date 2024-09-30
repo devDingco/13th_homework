@@ -1,11 +1,11 @@
 /** @format */
 'use client';
 
-import { IBoardItem } from '@/models/boardType';
+import { IBoardItem } from '@/models/board.type';
 import Image from 'next/image';
+import { changeDateToISO } from '@/utils/changeDateToISO';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { changeDateToISO } from '@/utils/changeDateToISO';
 // import deleteBoard from '@/app/apis/boards/deleteBoard';
 
 export default function BoardItem({ board }: IBoardItem) {
@@ -25,19 +25,19 @@ export default function BoardItem({ board }: IBoardItem) {
 
 	return (
 		<div
-			className="w-full flex px-6 py-4 gap-2 border-[1px] border-[#f2f2f2] rounded-lg items-center cursor-pointer"
+			className="flex w-full cursor-pointer items-center gap-2 rounded-lg border-[1px] border-[#f2f2f2] px-6 py-4"
 			onMouseEnter={() => setHoveredItem(board.boardId)}
 			onMouseLeave={() => setHoveredItem(null)}
 			onClick={() => onClickRouterDetail(board.boardId)}
 		>
-			<div className="w-16 flex justify-center items-center text-[#776c6c] prose-l_14_20">
+			<div className="prose-l_14_20 flex w-16 items-center justify-center text-[#776c6c]">
 				{board.boardId}
 			</div>
-			<div className="w-full prose-me_14_20">{board.title}</div>
-			<div className="w-[100px] flex justify-center items-center text-[#333333] prose-l_14_20">
+			<div className="prose-me_14_20 w-full">{board.title}</div>
+			<div className="prose-l_14_20 flex w-[100px] items-center justify-center text-[#333333]">
 				{board.author}
 			</div>
-			<div className="w-[100px] flex justify-center items-center text-[#919191] prose-l_14_20">
+			<div className="prose-l_14_20 flex w-[100px] items-center justify-center text-[#919191]">
 				{formattedDate}
 			</div>
 
