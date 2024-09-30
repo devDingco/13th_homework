@@ -1,8 +1,22 @@
 'use client';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './styles.module.css';
+import { gql, useMutation } from '@apollo/client';
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
 
 const BoardsNews = () => {
+  const [myBoard] = useMutation(CREATE_BOARD);
   const [user, setUser] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -44,8 +58,10 @@ const BoardsNews = () => {
     if (value) {
       const errorMsg = document.getElementsByClassName(
         'errorMsg'
-      )[0] as HTMLElement;
-      errorMsg.style.display = 'none';
+      )[0] as HTMLElement | null;
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     }
 
     // 값 없으면 등록함수 비활성화
@@ -60,8 +76,10 @@ const BoardsNews = () => {
     if (value) {
       const errorMsg = document.getElementsByClassName(
         'errorMsg'
-      )[1] as HTMLElement;
-      errorMsg.style.display = 'none';
+      )[1] as HTMLElement | null;
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     }
 
     checkAllField(user, value, title, content);
@@ -74,8 +92,10 @@ const BoardsNews = () => {
     if (value) {
       const errorMsg = document.getElementsByClassName(
         'errorMsg'
-      )[2] as HTMLElement;
-      errorMsg.style.display = 'none';
+      )[2] as HTMLElement | null;
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     }
 
     checkAllField(user, password, value, content);
@@ -88,19 +108,36 @@ const BoardsNews = () => {
     if (value) {
       const errorMsg = document.getElementsByClassName(
         'errorMsg'
-      )[3] as HTMLElement;
-      errorMsg.style.display = 'none';
+      )[3] as HTMLElement | null;
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     }
 
     checkAllField(user, password, title, value);
   };
 
   //등록하기 함수
-  const registerFunc = (e: FormEvent<HTMLFormElement>) => {
+  const registerFunc = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const result = await myBoard({
+      variables: {
+        createBoardInput: {
+          writer: user,
+          title: title,
+          password: password,
+          contents: content,
+        },
+      },
+    });
+    console.log('등록된 게시글 : ', result);
+
     if (user && password && content && title) {
-      alert('게시글 등록이 가능한 상태입니다!');
+      alert('게시글 등록이 완료되었습니다!');
+
+      setIsActive(false);
+
       return;
     } else {
       alert('필수 입력 사항을 확인해주세요.');
