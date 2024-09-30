@@ -11,6 +11,7 @@ type ReactQuillBoxProps = {
   readonly?: boolean;
   placeholder?: string;
   errormessage?: string;
+  defaultValue?: string;
 };
 
 const modules = {
@@ -58,6 +59,7 @@ const ReactQuillBox = (props: ReactQuillBoxProps) => {
         id={id}
         theme="snow"
         value={contents.html || ""}
+        defaultValue={props.defaultValue}
         modules={modules}
         onChange={() => handleChange()}
         readOnly={readonly}
