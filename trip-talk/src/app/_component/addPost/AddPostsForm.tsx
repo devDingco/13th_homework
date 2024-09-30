@@ -13,12 +13,14 @@ import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
 import { useMutation, gql } from '@apollo/client';
 
-const ADD_POST = gql`
-  mutation createBoard($writer: String!, $title: String!, $contents: String!) {
-    createBoard(writer: $writer, title: $title, contents: $contents) {
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
       _id
-      number
-      message
+      writer
+      title
+      contents
+      createdAt
     }
   }
 `;
@@ -43,7 +45,7 @@ const AddPostsForm = () => {
   });
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
-  const [addPost] = useMutation(ADD_POST);
+  const [createBoard] = useMutation(CREATE_BOARD);
 
   const onPostFormChange = (
     name: string,
@@ -59,15 +61,19 @@ const AddPostsForm = () => {
 
   const onAdressNumButtonClick = () => {};
 
-  const onAddPostsButton = (e: FormEvent<HTMLFormElement>) => {
+  const onAddPostsButton = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addPost({
+    const { data } = await createBoard({
       variables: {
-        writer: postData.username,
-        title: postData.userTitle,
-        contents: postData.usercontent,
+        createBoardInput: {
+          writer: postData.username,
+          password: postData.userpw,
+          title: postData.userTitle,
+          contents: postData.usercontent,
+        },
       },
     });
+    console.log(data);
   };
 
   useEffect(() => {
