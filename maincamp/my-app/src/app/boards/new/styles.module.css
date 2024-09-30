@@ -25,7 +25,7 @@
     width:128rem;
     height:4.8rem;
     border-radius:0.8rem;
-    border:1px solid #d4d3d3;
+    border:0.1rem solid #d4d3d3;
     text-indent:1.6rem;
   }
   .content input{font-size:1.8rem;}
@@ -39,9 +39,12 @@
   /* 작성자 / 비밀번호 */
   .name_pw_bg{
     height:8rem;
-    margin:4rem 0;
+    /* margin:4rem 0; */
+    margin-top:3rem;
     display:flex;
     justify-content:space-between;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:12rem;
   }
   .name_pw_bg div{
     width:62rem;
@@ -60,13 +63,19 @@
   /* 제목 */
   .title{
     height:8rem;
-    margin:8rem 0;
+    /* margin:8rem 0; */
+    margin-top:3rem;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:12rem;
   }
   
   /* 내용 */
   .subject{
     height:36.8rem;
-    margin:8rem 0;
+    margin-top:3rem;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:12rem;
+    /* margin:8rem 0; */
   }
   .subject textarea{
     width:128rem;
@@ -81,7 +90,10 @@
   /* 주소 */
   .address{
     height:19.2rem;
-    margin:4rem 0;
+    margin-top:3rem;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:25rem;
+    /* margin:4rem 0; */
   }
   .address input{
     margin:0.8rem 0 0.8rem 0;
@@ -105,7 +117,10 @@
   /* 유튜브 링크 */
   .link{
     height:8rem;
-    margin:8rem 0;
+    margin-top:3rem;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:12rem;
+    /* margin:8rem 0; */
   }
   .link input{margin-top:0.8rem;}
   
