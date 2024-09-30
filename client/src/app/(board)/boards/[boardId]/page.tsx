@@ -3,10 +3,10 @@
 import { Suspense } from 'react';
 import BoardFooter from './_components/BoardFooter';
 import BoardContainer from './_components/BoardContainer';
-import getBoard from '@/app/apis/boards/getBoard';
+import getBoard from '@/apis/boards/getBoard';
 import { IDeatilPageProps } from '@/models/detailPageProps';
 import BoardLikeHate from './_components/BoardLikeHate';
-import getReaction from '@/app/apis/boards/reaction/getReaction';
+import getReaction from '@/apis/boards/reaction/getReaction';
 import BoardSkeleton from './_components/BoardSkeleton';
 import BoardSkeletonReaction from './_components/BoardSkeletonReaction';
 

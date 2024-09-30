@@ -72,7 +72,7 @@ export default function NewForm() {
 			<NewAddressInputContainer title={ETitle.Address} />
 			<NewInputContainer title={ETitle.YoutubeUrl} />
 			<NewImageContainer />
-			<div className="w-full flex justify-end items-center gap-4">
+			<div className="flex w-full items-center justify-end gap-4">
 				<CommonButton title={EButtonTitle.sumbit} />
 				<CommonButton title={EButtonTitle.cancel} isButtonDisabled={isButtonDisabled} />
 			</div>

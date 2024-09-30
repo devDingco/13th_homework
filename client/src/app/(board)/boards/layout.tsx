@@ -3,7 +3,7 @@ import { IBoardListProps } from '@/models/children';
 
 export default function Layout({ children, modal }: IBoardListProps) {
 	return (
-		<div className="py-10 gap-10 flex flex-col w-[75dvw]">
+		<div className="flex w-[75dvw] flex-col gap-10 py-10">
 			{children}
 			{modal}
 		</div>

@@ -5,12 +5,12 @@ import { IButtonDisabled } from '@/models/formButton';
 
 export default function NewFormButton({ isButtonDisabled }: IButtonDisabled) {
 	return (
-		<div className="w-full flex justify-end items-center gap-4">
-			<button className="h-12 rounded-lg border-[1px] border-black px-3 py-4 flex justify-center items-center cursor-pointer prose-sb_18_24">
+		<div className="flex w-full items-center justify-end gap-4">
+			<button className="prose-sb_18_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] border-black px-3 py-4">
 				취소
 			</button>
 			<button
-				className={`h-12 rounded-lg px-3 py-4 flex justify-center items-center prose-sb_18_24 text-gray-100 ${
+				className={`prose-sb_18_24 flex h-12 items-center justify-center rounded-lg px-3 py-4 text-gray-100 ${
 					isButtonDisabled ? 'bg-gray-300' : 'bg-[#2974E5]'
 				}`}
 				disabled={isButtonDisabled}
