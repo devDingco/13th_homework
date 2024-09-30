@@ -1,21 +1,36 @@
-"use client"
+"use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import Button from "../../../components/Button/Button";
 import ImageUploader from "../../../components/ImageUploader/ImageUploader";
 import Input from "../../../components/Input/Input";
 import styles from "./styles.module.css";
+import { gql, useMutation } from "@apollo/client";
+
+const CREATE_BOARD = gql`
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
+        createBoard(createBoardInput: $createBoardInput) {
+          _id
+          writer
+          title
+          contents
+          createdAt
+        }
+    }
+`
 
 export default function BoardsNew() {
-  const [authorName, setAuthorName] = useState<string>("");
+  const [writer, setWriter] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [contents, setContents] = useState<string>("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [createBoard] = useMutation(CREATE_BOARD);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
-      case "authorName":
-        setAuthorName(event.target.value);
+      case "writer":
+        setWriter(event.target.value);
         break;
       case "password":
         setPassword(event.target.value);
@@ -26,20 +41,24 @@ export default function BoardsNew() {
     }
   };
 
-  const handleContentChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setContent(event.target.value);
+  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setContents(event.target.value);
   };
 
-  const handleSubmit = () => {
-    alert("등록!");
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const result = await createBoard({
+      variables: {
+        createBoardInput: {
+          writer: writer,
+          password: password,
+          title: title,
+          contents: contents
+      }
+      },
+    });
+    console.log(result);
   };
-
-  if (authorName && password && title && content) {
-    document.getElementById("");
-    alert("게시글 등록이 가능한 상태입니다!");
-  }
 
   return (
     <>
@@ -48,14 +67,14 @@ export default function BoardsNew() {
           <div>
             <Input
               isLabel={true}
-              id="authorName"
+              id="writer"
               type="text"
               placeholder="작성자 명을 입력해 주세요."
               isRequired={true}
               children="작성자"
               onChange={handleInputChange}
             />
-            {!authorName && (
+            {!writer && (
               <div className={styles.required_field}>필수입력 사항 입니다.</div>
             )}
           </div>
@@ -98,20 +117,20 @@ export default function BoardsNew() {
             placeholder="내용을 입력해 주세요."
             onChange={handleContentChange}
           />
-          {!content && (
+          {!contents && (
             <div className={styles.required_field}>필수입력 사항 입니다.</div>
           )}
         </div>
         <div className={styles.address_wrapper}>
           <div>
             <div>
-            <Input
-              isLabel={true}
-              type="number"
-              placeholder="01234"
-              isRequired={false}
-              children="주소"
-            />
+              <Input
+                isLabel={true}
+                type="number"
+                placeholder="01234"
+                isRequired={false}
+                children="주소"
+              />
             </div>
             <Button color="white">우편번호 검색</Button>
           </div>
@@ -149,10 +168,8 @@ export default function BoardsNew() {
           <Button color="white">취소</Button>
           <Button
             type="submit"
-            disabled={!(authorName && password && title && content)}
-            color={
-              !(authorName && password && title && content) ? "gray" : "blue"
-            }
+            disabled={!(writer && password && title && contents)}
+            color={!(writer && password && title && contents) ? "gray" : "blue"}
           >
             등록하기
           </Button>
