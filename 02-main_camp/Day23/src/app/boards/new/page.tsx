@@ -1,5 +1,5 @@
 "use client";
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, SetStateAction } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
@@ -42,56 +42,32 @@ const NewPage = () => {
 
   function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-    setWriter(event.target.value)
-
-    if (value && !checkSpace(value)) {
-        setWriterErrorMessage("")
-    } else {
-        setWriterErrorMessage(errorMessage)
-    }
-
+    setWriter(value)
+    checkTextInput(value, setWriterErrorMessage)
     if (value && password && title && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
   function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-    setPassword(event.target.value)
-
-    if (value && !checkSpace(value)) {
-        setPasswordErrorMessage("")
-    } else {
-        setPasswordErrorMessage(errorMessage)
-    }
-
+    setPassword(value)
+    checkTextInput(value, setPasswordErrorMessage)
     if (writer && value && title && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
   function onChangeTitle(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-    setTitle(event.target.value)
-
-    if (value && !checkSpace(value)) {
-        setTitleErrorMessage("")
-    } else {
-        setTitleErrorMessage(errorMessage)
-    }
-
+    setTitle(value)
+    checkTextInput(value, setTitleErrorMessage)
     if (writer && password && value && contents) return setIsActive(true)
     return setIsActive(false)
   }
   
   function onChangeContents(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-    setContents(event.target.value)
-
-    if (value && !checkSpace(value)) {
-        setContentsErrorMessage("")
-    } else {
-        setContentsErrorMessage(errorMessage)
-    }
-
+    setContents(value)
+    checkTextInput(value, setContentsErrorMessage)
     if (writer && password &&  title && value) return setIsActive(true)
     return setIsActive(false)
   }
@@ -108,11 +84,28 @@ const NewPage = () => {
                 }
             },
         });
-        console.log(result)
-        router.push(`/boards/detail/${result.data.createBoard._id}`)
+
+        const boardId = result.data.createBoard._id
+        router.push(`/boards/detail/${boardId}`)
     } catch {
         alert("에러가 발생하였습니다. 다시 시도해 주세요.")
     }
+  }
+
+  function checkTextInput(input: string, handler: (value: SetStateAction<string>) => void) {
+    if (input && !checkSpace(input)) {
+        handler("")
+    } else if (checkString(input)) {
+        handler("")
+    } else {
+        handler(errorMessage)
+    }
+  }
+
+  function checkString(str: string) {
+    const regex = /[ㄱ-ㅎ가-힣a-zA-Z0-9]/;
+    if (str.search(regex) != -1) return true
+    return false
   }
 
   function checkSpace(str: string) {
