@@ -1,5 +1,6 @@
 "use client";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 // import styles from "./styles.module.css";
 
@@ -111,20 +112,22 @@ const Btn = ({ className, value, disabled, onClick }: BtnProps) => {
 };
 
 const CREATE_BOARD = gql`
-mutation creteBoard($createBoardInput: CreateBoardInput!) {
-  createBoard(createBoardInput: $createBoardInput) {
-    _id
-    writer
-    title
-    contents
-    createdAt
+  mutation creteBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
   }
-}
-`
+`;
 
 // 메인 필드
 const Main = () => {
-  const [createBoard] = useMutation(CREATE_BOARD)
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const Router = useRouter();
+
   const [author, setAuthor] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [title, setTitle] = React.useState("");
@@ -135,40 +138,52 @@ const Main = () => {
     const id = event.target.id;
     const value = event.target.value;
 
-    switch(id) {
+    switch (id) {
       case "author__ID": {
-        setAuthor(value)
-        break
+        setAuthor(value);
+        break;
       }
       case "password__ID": {
-        setPassword(value)
-        break
+        setPassword(value);
+        break;
       }
       case "title__ID": {
-        setTitle(value)
-        break
+        setTitle(value);
+        break;
       }
       case "content__ID": {
-        setContent(value)
-        break
+        setContent(value);
+        break;
       }
     }
   };
 
-  const handleClick = async(event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const gqlResult = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: author,
-          password: password,
-          title: title,
-          contents: content
-        }
-      }
-    })
-    console.log(gqlResult)
-    if (gqlResult) alert("등록되었습니다!!")
+    if (author === "") return alert("작성자를 확인해 주세요.");
+    if (password === "") return alert("비밀번호를 확인해 주세요.");
+    if (title === "") return alert("제목을 작성해 주세요.")
+    if (content === "") return alert("내용을 작성해 주세요.")
+
+    try {
+      const gqlResult = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: author,
+            password: password,
+            title: title,
+            contents: content,
+          },
+        },
+      });
+      Router.push(`/boards/${gqlResult.data.createBoard._id}`);
+      if (gqlResult)
+        alert(`등록되었습니다!! num: ${gqlResult.data.createBoard._id}`);
+    } catch {
+      alert("등록에 실패하였습니다. 다시 시도해 주세요.");
+    } finally {
+      console.log("powered by graphql api");
+    }
   };
 
   return (
