@@ -5,6 +5,14 @@
 import styles from "./styles.module.css"
 import Image from "next/image"
 import {ChangeEvent, MouseEvent, useState} from 'react'
+import { NewNamePassword } from "@/components/NewNamePassword"
+import { NewTitle } from "@/components/NewTitle"
+import { NewSubject } from "@/components/NewSubject"
+import { NewAddress } from "@/components/NewAddress"
+import { NewYoutube } from "@/components/NewYoutube"
+import { NewPicture } from "@/components/NewPicture"
+import { NewButton } from "@/components/NewButton"
+import { gql, useMutation } from "@apollo/client"
 
 const BoardsNew = () => {
 
@@ -90,9 +98,34 @@ const BoardsNew = () => {
     setIsActive(false)
   }
 
+  const boardGraphql = gql`
+  mutation createBoard(
+      $boardwriter:String
+      $boardtitle:String
+      $boardcontents:String
+    ){
+      createBoard(writer:$boardwriter, title:$boardtitle, contents:$boardcontents){
+        _id
+        number
+        message
+      }  
+    }
+  `
+
+  // GraphQL
+  const [boardRegister] = useMutation(boardGraphql);
+
   let registerError = false;
 
-  const register = (event:MouseEvent<HTMLButtonElement>) => {
+  const register = async (event:MouseEvent<HTMLButtonElement>) => {
+    const result = await boardRegister({
+      variables: {
+        boardwriter: name,
+        boardtitle: title,
+        boardcontents: subject,
+      },
+    })
+    
     if(name.trim() === ""){
       setNameError("필수입력 사항 입니다.")
       registerError = true;
@@ -132,16 +165,23 @@ const BoardsNew = () => {
 
   const registerColor = {
     backgroundColor:"#c3c3c3",
-    color:"#E4E4E4;"
+    color:"#E4E4E4"
   }
   const registerActive = {
     backgroundColor:"#2974E5",
-    color:"#fff;"
-  }
+    color:"#fff"
+  }  
 
   return (
       <div className={styles.content}>
           <h1 className="new-h1">게시글등록</h1>
+          {/* <NewNamePassword />
+          <NewTitle />
+          <NewSubject />
+          <NewAddress />
+          <NewYoutube />
+          <NewPicture />
+          <NewButton /> */}
           <div className={styles.name_pw_bg}>
               <div>
                   <span className="new-span">작성자</span><span className={`${styles.red} new-span`}>*</span>
