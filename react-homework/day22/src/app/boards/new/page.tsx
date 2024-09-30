@@ -1,6 +1,5 @@
 "use client";
 
-// import "./BoardsNew.css";
 import styles from "./styles.module.css";
 import Form from "./components/form";
 
