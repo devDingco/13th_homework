@@ -21,13 +21,13 @@ const BoardsDetail = () => {
         <div className={styles.imgContainer}>
           <Carousel>
             <Carousel.Item>
-              <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage}/>
+              <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage} style={{borderRadius:"20px"}}/>
             </Carousel.Item>
             <Carousel.Item>
-            <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage}/>
+            <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage} style={{borderRadius:"20px"}}/>
             </Carousel.Item>
             <Carousel.Item>
-            <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage}/>
+            <Image src='/image/sampleimg2.jpg' alt='풍경' width={0} height={0} sizes='100vw' className={styles.carouselImage} style={{borderRadius:"20px"}}/>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -60,7 +60,7 @@ const BoardsDetail = () => {
       <div className={styles.textContainer}>
         <div className={styles.aboutContent}>
           <div className={styles.authorDateContainer}>
-          <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
+            <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
             <div className={styles.authorName}>홍길동</div>
             <div className={styles.date}>2024.11.11</div>
           </div>
@@ -167,6 +167,7 @@ const BoardsDetail = () => {
           얄리얄리 얄랑셩 얄라리 얄라
 
           우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
+
         </div>
       </div>
    </div>
@@ -195,10 +196,71 @@ const BoardsDetail = () => {
 
 
 
-   <div>
-    <div className={styles.title}>Comment</div>
-   </div>
+   <div className={styles.commentContainer}>
+      <div className={styles.title}>Add comment</div>
+      <div className={styles.titil_sm}>Comment</div>
+      <div className={styles.rating}>
+        <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+      </div>
+      <textarea className={styles.commentInput} placeholder='댓글을 입력해 주세요.'></textarea>
+      <button className={styles.commentUpload}>댓글 등록</button>
 
+
+      <div className={styles.noComments}>등록된 댓글이 없습니다.</div>
+
+      <div className={styles.commentList}>
+        <div className={styles.profileConatiner}>
+          <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
+          <div className={styles.authorName}>홍길동</div>
+          <div className={styles.rating}>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        </div>
+        </div>
+        <div>살겠노라 살겠노라. 청산에 살겠노라. 머루랑 다래를 먹고 청산에 살겠노라. 얄리얄리 얄랑셩 얄라리 얄라</div>
+        <div className={styles.date}>2024.11.11</div>
+      </div>
+
+      <div className={styles.commentList}>
+        <div className={styles.profileConatiner}>
+          <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
+          <div className={styles.authorName}>홍길동</div>
+          <div className={styles.rating}>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        </div>
+        </div>
+        <div>살겠노라 살겠노라. 청산에 살겠노라. 머루랑 다래를 먹고 청산에 살겠노라. 얄리얄리 얄랑셩 얄라리 얄라</div>
+        <div className={styles.date}>2024.11.11</div>
+      </div>
+
+      <div className={styles.commentList}>
+        <div className={styles.profileConatiner}>
+          <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
+          <div className={styles.authorName}>홍길동</div>
+          <div className={styles.rating}>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+          <Image src='/image/star.png' width={24} height={24} sizes='100vw' alt='별점별이미지'/>
+        </div>
+        </div>
+        <div>살겠노라 살겠노라. 청산에 살겠노라. 머루랑 다래를 먹고 청산에 살겠노라. 얄리얄리 얄랑셩 얄라리 얄라</div>
+        <div className={styles.date}>2024.11.11</div>
+      </div>
+   </div>
+ 
 
 
     

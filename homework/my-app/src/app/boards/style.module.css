@@ -1,0 +1,132 @@
+
+.inputContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 60px;
+    gap: 16px;
+}
+.searchBar {
+    display: flex;
+    min-width: 180px;
+    max-width: 640px;
+    height: 48px;
+    padding: 12px;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+
+    border-radius: 8px;
+    background: var(#fff);
+}
+.datePickerContainer {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    width: 300px;
+
+ 
+ 
+
+}
+
+.dateInput {
+    width: 100%;
+    display: flex;
+    height: 48px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    height: 48px;
+    
+
+
+}
+.dateInput::placeholder {
+    color: var(--gray-600, #777);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+
+.calendarIcon {
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    font-size: 18px; /* 아이콘 크기 조정 */
+
+    /* position: relative; 
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    cursor: pointer;  */
+    
+}
+
+
+
+.listContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 60px;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.listOfWriing {
+    border-top: 1px solid var(--gray-300);
+    width: 800px;
+    height: 240px;
+    padding: 20px;
+
+    display: grid; /* 그리드 레이아웃 활성화 */
+    grid-template-columns: 0.5fr 1.4fr 1fr; /* 3개의 동일한 너비의 컬럼 생성 */
+    gap: 15px;
+}
+
+.box1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.dateContainer {
+    margin-left: 10px;
+    width: 100px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.date {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--gray-300)
+}
+.month {
+    font-size: 19px;
+    font-weight:700;
+    color: var(--gray-300);
+
+}
+.authorName {
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gray-700)
+}
+
+.thumbnail img {
+    width: 386px; /* 가로 크기 고정 */
+    height: 200px; /* 세로 크기 고정 */
+    object-fit: cover; /* 이미지 비율을 유지하면서 크기에 맞게 잘라냄 */
+}
+
