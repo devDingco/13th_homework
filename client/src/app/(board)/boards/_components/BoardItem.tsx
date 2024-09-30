@@ -18,8 +18,7 @@ export default function BoardItem({ board }: IBoardItem) {
 
 	const onClickDeleteButton = (event: React.MouseEvent) => {
 		event.stopPropagation();
-
-		// deleteBoard(board.boardId);
+		router.push(`boards/?modal=${board.boardId}`);
 	};
 
 	const formattedDate = changeDateToISO(board.createdAt);
@@ -41,15 +40,17 @@ export default function BoardItem({ board }: IBoardItem) {
 			<div className="w-[100px] flex justify-center items-center text-[#919191] prose-l_14_20">
 				{formattedDate}
 			</div>
-			{hoveredItem === board.boardId && (
-				<Image
-					src="/Images/delete.svg"
-					alt="delete"
-					width={20}
-					height={20}
-					onClick={(event) => onClickDeleteButton(event)}
-				/>
-			)}
+
+			<Image
+				src="/Images/delete.svg"
+				alt="delete"
+				width={20}
+				height={20}
+				className={`transition-opacity duration-300 ${
+					hoveredItem === board.boardId ? 'opacity-100' : 'opacity-0'
+				}`}
+				onClick={(event) => onClickDeleteButton(event)}
+			/>
 		</div>
 	);
 }

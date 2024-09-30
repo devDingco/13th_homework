@@ -12,10 +12,8 @@ export default function getReaction(boardId: number): IReactionReader {
 	const response = api
 		.get(`/board/${boardId}/reaction`)
 		.then((response) => {
-			setTimeout(() => {
-				board = response.data.data;
-				status = 'fulfilled';
-			}, 2000);
+			board = response.data.data;
+			status = 'fulfilled';
 		})
 		.catch((e) => {
 			status = 'reject';

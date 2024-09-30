@@ -3,16 +3,16 @@
 import { Suspense } from 'react';
 import BoardItemContainer from './_components/BoardItemContainer';
 import BoardLoading from './_components/BoardLoading';
-import getAllBoards from '@/app/apis/boards/getAllBoards';
+import getAllBoards from '@/apis/boards/getAllBoards';
 
-export default function Board() {
+export default function boardPage() {
 	return (
-		<div className="w-full rounded-2xl shadow  flex flex-col px-12 py-6 gap-6 text-[#1c1c1c] prose-me_16_20">
-			<div className="w-full flex px-6 py-4 gap-2 justify-center">
-				<div className="w-16 flex justify-center items-center">번호</div>
+		<div className="prose-me_16_20 flex w-full flex-col gap-6 rounded-2xl px-12 py-6 text-[#1c1c1c] shadow">
+			<div className="flex w-full justify-center gap-2 px-6 py-4">
+				<div className="flex w-16 items-center justify-center">번호</div>
 				<div className="w-full">제목</div>
-				<div className="w-[100px] flex justify-center items-center">작성자</div>
-				<div className="w-[100px] flex justify-center items-center">날짜</div>
+				<div className="flex w-[100px] items-center justify-center">작성자</div>
+				<div className="flex w-[100px] items-center justify-center">날짜</div>
 				<div className="w-6"></div>
 			</div>
 			<Suspense fallback={<BoardLoading />}>

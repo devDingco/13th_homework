@@ -22,7 +22,7 @@ export enum ENewTitleProps {
 	YoutubeUrl = '유튜브 링크',
 }
 
-export const ENewInputPlaceHolder: Record<ETitle, string> = {
+export const RNewInputPlaceHolder: Record<ETitle, string> = {
 	[ETitle.Author]: '작성자 명을 입력해주세요.',
 	[ETitle.Password]: '비밀번호를 입력해주세요.',
 	[ETitle.Title]: '제목을 입력해주세요.',

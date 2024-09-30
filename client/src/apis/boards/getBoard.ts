@@ -3,18 +3,17 @@
 import { IApiResponseData } from '@/models/apiResponse';
 import { api } from '../config';
 import { IBoardReader } from '@/models/boardReaderResponse';
+//
 
-export default function getAllBoards(): IBoardReader {
+export default function getBoard(boardId: number): IBoardReader {
 	let status = 'pending';
 
 	let board: IApiResponseData | Promise<IApiResponseData>;
 	const response = api
-		.get('/board')
+		.get(`/board/${boardId}`)
 		.then((response) => {
-			setTimeout(() => {
-				board = response.data.data;
-				status = 'fulfilled';
-			}, 2000);
+			board = response.data.data;
+			status = 'fulfilled';
 		})
 		.catch((e) => {
 			status = 'reject';
