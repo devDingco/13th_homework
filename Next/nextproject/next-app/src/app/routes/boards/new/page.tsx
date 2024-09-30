@@ -15,6 +15,7 @@ function WriteBoard () {
     const[title, setTitle] = useState("")
   
     const[content, setContent] = useState("")
+
     
     const[nameblank, setNameBlank] = useState("")
   
@@ -23,8 +24,10 @@ function WriteBoard () {
     const[titleblank, setTitleBlank] = useState("")
   
     const[contentblank, setContentBlank] = useState("")
-  
+
+
     const[isActive, setIsActive] = useState(false)
+    
 
     const[addressnumber, setaddressnumber] = useState("")
 
@@ -35,6 +38,7 @@ function WriteBoard () {
 
     const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
       setName(event.target.value)
+
       if(event.target.value !== ("") && title !== ("") && content !== ("") && password !== ("") && addressnumber !== "" && address !== "" && addressdetail !== "") {
         return setIsActive(true)
       } else {
@@ -97,51 +101,114 @@ function WriteBoard () {
     }
 
 
-    const register = gql`
-    mutation createBoard($writer: String, $title: String, $contents: String){
-        createBoard(writer: $writer, title: $title, contents: $contents){
-            _id
-            number
-            message
-        }
+//     const register = gql`
+//    mutation {
+//   createBoard( $name: String!, $password: String!, $title: String!, $contents: String!, $addressnumber: String!, $address: String!, $addressdetail: String!
+//     createBoardInput:{
+//       writer: $name
+//       password: $password
+//       title: $title
+//       contents: $contents
+//       boardAddress: {
+//         zipcode: $addressnumber
+//         address: $address
+//         addressDetail: $addressdetail
+//       }
+//     }
+//   )  {
+//     _id
+//     writer
+//     title
+//     boardAddress{ 
+//       zipcode
+//       address
+//       addressDetail}     
+//   }
+// }
+//   `;
+
+const register = gql`
+mutation createBoard(
+  $writer: String, 
+  $password: String, 
+  $title: String!, 
+  $contents: String!, 
+  $addressnumber: String, 
+  $address: String, 
+  $addressdetail: String
+) 
+  {
+  createBoard(
+    createBoardInput: {
+      writer: $writer
+      password: $password
+      title: $title
+      contents: $contents
+      boardAddress: {
+        zipcode: $addressnumber
+        address: $address
+        addressDetail: $addressdetail
+      }
     }
-  `
+  ) {
+    _id
+    writer
+    title
+    boardAddress { 
+      zipcode
+      address
+      addressDetail
+    }     
+  }
+}
+`;
+
 
     const [myfunction] = useMutation(register)
 
+    const checkValid = () => {
+      if(name === ("")) {
+        setNameBlank("필수입력 사항입니다.")
+      } else {
+        setNameBlank("")
+      }
+      if(password === ("")) {
+        setPasswordBlank("필수입력 사항입니다.")
+      } else {
+        setPasswordBlank("")
+      }
+      if(title === ("")) {
+        setTitleBlank("필수입력 사항입니다.")
+      } else {
+        setTitleBlank("")
+      }
+      if(content === ("")) {
+        setContentBlank("필수입력 사항입니다.")
+      } else {
+        setContentBlank("")
+      }
+    }
+    
     const onClickSignup = async () => {
-  
-        if(name === ("")) {
-          setNameBlank("필수입력 사항입니다.")
-        } else {
-          setNameBlank("")
-        }
-        if(password === ("")) {
-          setPasswordBlank("필수입력 사항입니다.")
-        } else {
-          setPasswordBlank("")
-        }
-        if(title === ("")) {
-          setTitleBlank("필수입력 사항입니다.")
-        } else {
-          setTitleBlank("")
-        }
-        if(content === ("")){
-          setContentBlank("필수입력 사항입니다.")
-        } else {
-          setContentBlank("")
-        }
+        await checkValid()
         if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
           alert("게시글 등록 완료")
           await myfunction({
             variables :{
-              writer: name,
-              title: title,
-              contents: content
+                writer: name,
+                password: password,
+                title: title,
+                contents: content,  
+                boardAddress: {
+                  zipcode: addressnumber,
+                  address: address,
+                  addressdetail: addressdetail
+                }
             }
           })
         }
       }
+
     return(
       <div className={styles.css_layout}> 
         <div className={styles.css_header}>게시글 등록</div>
