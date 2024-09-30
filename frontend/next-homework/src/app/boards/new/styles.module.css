@@ -1,0 +1,310 @@
+.uploadPostPage {
+  min-width: 36rem;
+  max-width: 78rem;
+  padding: 0rem 2rem 0rem 2rem;
+}
+
+/* title */
+.menuTitle {
+  width: 100%;
+  padding: 1.2rem 2rem 1.2rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: 2.4rem;
+  text-align: center;
+  gap: 0.8rem;
+}
+
+.menuTitle p {
+  color: #000;
+  text-align: center;
+
+  font-family: "Pretendard Variable";
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+/* 작성 영역 */
+.postContainer {
+  padding: 2rem 2.4rem 2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.titleContainer > .inputContainer:first-child {
+  margin-bottom: 1.6rem;
+}
+
+.labelTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.label {
+  color: var(--gray-800, #333);
+
+  font-family: "Pretendard Variable";
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.important {
+  color: var(--red, #f66a6a);
+
+  font-family: "Pretendard Variable";
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.infoInput {
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  line-height: 2.4rem;
+
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.infoInputContent {
+  width: 100%;
+  height: 12rem;
+  padding: 1.2rem 1.6rem;
+  line-height: 2.4rem;
+  resize: none;
+
+  border-radius: 0.8rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.postVaildation {
+  display: none;
+}
+
+.addressInput {
+  gap: 0.8rem;
+}
+
+.addressMail {
+  display: flex;
+  flex-direction: row;
+}
+
+.infoInputAddress {
+  padding: 1.2rem 1.6rem;
+  line-height: 2.4rem;
+
+  border-radius: 0.8rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.infoInput::placeholder,
+.infoInputContent::placeholder,
+.infoInputAddress::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+
+  font-family: "Pretendard Variable";
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+}
+
+.line {
+  width: 100%;
+  height: 0.1rem;
+  background: var(--gray-100, #e4e4e4);
+}
+
+/* 사진 업로드 */
+.postUploadImage {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postUploadeImg > .label {
+  margin-bottom: 0.8rem;
+}
+
+.postUploadImageButton {
+  width: 8rem;
+  height: 8rem;
+
+  border: none;
+  border-radius: 0.8rem;
+  background: var(--gray-50, #f2f2f2);
+}
+
+.postUploadImageButton p {
+  color: var(--gray-600, #777);
+
+  font-family: "Pretendard Variable";
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+/* 버튼 */
+.addressSearch {
+  height: 4.8rem;
+  padding: 1.2rem 1.6rem;
+  align-items: center;
+  margin-left: 0.8rem;
+
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+
+  color: var(--gray-B, #000);
+  text-align: center;
+
+  font-family: "Pretendard Variable";
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+
+.postButtonGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.checkButton {
+  width: 50%;
+  height: 4.8rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.8rem;
+
+  text-align: center;
+
+  font-family: "Pretendard Variable";
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.postCancelButton {
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+
+  color: var(--gray-B, #000);
+}
+
+.postSubmitButton {
+  border: none;
+  background: var(--gray-300, #c7c7c7);
+
+  color: var(--gray-100, #e4e4e4);
+}
+
+/* 데스크탑 */
+@media (min-width: 781px) {
+  /* body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  } */
+
+  .uploadPostPage {
+    width: 128rem;
+    min-width: 78.1rem;
+    max-width: 192rem;
+    margin: 0rem 2rem 0rem 2rem;
+    padding: 4rem 0rem;
+  }
+
+  /* title */
+  .menuTitle {
+    padding: 0rem;
+    margin-bottom: 4rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .menuTitle p {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.8rem;
+  }
+
+  .menuTitle img {
+    display: none;
+  }
+
+  .postContainer {
+    padding: 0rem;
+    gap: 4rem;
+  }
+
+  .titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+
+  /* 작성 영역 */
+  .infoInputContent {
+    height: 33.6rem;
+  }
+  /* 사진 업로드 */
+  .postUploadImage {
+    justify-content: flex-start;
+    gap: 1.6rem;
+  }
+
+  .postUploadImageButton {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  /* 버튼 */
+  .postButtonGroup {
+    justify-content: flex-end;
+    gap: 1.6rem;
+  }
+
+  .checkButton {
+    width: auto;
+
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+
+  .postSubmitButton {
+    /* background: var(--n-main, #2974e5); */
+
+    color: #fff;
+  }
+}
