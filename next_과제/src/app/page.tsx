@@ -1,24 +1,14 @@
 "use client";
-// import { useAppDispatch, useAppSelector } from "@/libs/redux/config/hook";
-// import {
-//   decrement,
-//   increment,
-//   incrementByAmount,
-// } from "@/libs/redux/modules/slices/counter";
-// import { useGetPokemonByNameQuery } from "@/services/pokemon";
-// import Image from "next/image";
 
 import CardBox from "@/components/cardBox";
 import MainSlide from "@/components/mainSlide";
 import SearchBox from "@/components/searchBox";
 import Icon from "@/components/iconFactory";
-import BoardList from "@/app/board/list/page";
+import BoardList from "@/app/board/list/[pageNum]/page";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  // const counter = useAppSelector((state) => state.counter.value); // Return Root State Slices
-  // const dispatch = useAppDispatch(); // Action Dispatcher
-
-  // const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
+  const router = useRouter();
 
   const cardData = [
     {
@@ -75,7 +65,10 @@ export default function Home() {
           <h3 className="font-bold text-xl">트립토크 게시판</h3>
           <div className="flex gap-4 justify-between flex-wrap">
             <SearchBox />
-            <button className="btn btn-info text-white max-sm:fixedBtn">
+            <button
+              className="btn btn-info text-white max-sm:fixedBtn"
+              onClick={() => router.push("/board/new")}
+            >
               <span className="w-6 h-6 fill-white">
                 <Icon icon="rwite" />
               </span>
