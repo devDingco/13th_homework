@@ -21,7 +21,7 @@ export default function BoardsDetail() {
   const params = useParams();
   const boardId = params.boardId;
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: boardId },
+    variables: { boardId },
   });
 
   const boardWriter = data?.fetchBoard.writer;

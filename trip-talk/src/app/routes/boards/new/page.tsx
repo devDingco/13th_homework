@@ -9,19 +9,19 @@ import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
-    mutation createBoard($createBoardInput: CreateBoardInput!) {
-        createBoard(createBoardInput: $createBoardInput) {
-          _id
-          writer
-          title
-          contents
-          createdAt
-        }
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
     }
-`
+  }
+`;
 
 export default function BoardsNew() {
-  const router = useRouter()
+  const router = useRouter();
   const [writer, setWriter] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -53,18 +53,16 @@ export default function BoardsNew() {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents
-        }
+            writer,
+            password,
+            title,
+            contents,
+          },
         },
       });
       const boardId = result.data.createBoard._id;
-      console.log(result);
-      console.log(boardId)
-      router.push(`/routes/boards/${boardId}`)
-    } catch(error) {
+      router.push(`/routes/boards/${boardId}`);
+    } catch (error) {
       console.error(error);
       alert("An error has occurred. Please try again.");
     }
