@@ -11,10 +11,8 @@ export default function getAllBoards(): IBoardReader {
 	const response = api
 		.get('/board')
 		.then((response) => {
-			setTimeout(() => {
-				board = response.data.data;
-				status = 'fulfilled';
-			}, 2000);
+			board = response.data.data;
+			status = 'fulfilled';
 		})
 		.catch((e) => {
 			status = 'reject';

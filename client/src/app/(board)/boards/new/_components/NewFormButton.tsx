@@ -3,8 +3,6 @@
 
 import { IButtonDisabled } from '@/models/formButton';
 
-// import onFormBoard from '@/utils/onFormBoard';
-
 export default function NewFormButton({ isButtonDisabled }: IButtonDisabled) {
 	return (
 		<div className="w-full flex justify-end items-center gap-4">

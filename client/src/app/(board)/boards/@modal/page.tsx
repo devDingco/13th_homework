@@ -1,13 +1,10 @@
 /** @format */
 'use client';
 import { IModalProps } from '@/models/children';
-import { useRouter } from 'next/navigation';
+import { useOnClickBack } from '@/utils/useOnClickBack';
 
 export default function ModalPage({ searchParams }: IModalProps) {
-	const router = useRouter();
-	const onClickBack = () => {
-		router.back();
-	};
+	const onClickBack = useOnClickBack();
 	return (
 		<>
 			{searchParams.modal && (
@@ -16,9 +13,12 @@ export default function ModalPage({ searchParams }: IModalProps) {
 					onClick={onClickBack}
 				>
 					<div
-						className="w-1/2 h-1/2 bg-white rounded-3xl shadow"
+						className="w-1/3 h-1/3 bg-white rounded-3xl shadow flex flex-col p-8 justify-between"
 						onClick={(event) => event.stopPropagation()}
-					></div>
+					>
+						<div className="prose-sb_18_24">{`게시글 ${searchParams.modal}을 삭제하시겠습니까?`}</div>
+						<div className="flex items-center justify-center gap-4"></div>
+					</div>
 				</div>
 			)}
 		</>

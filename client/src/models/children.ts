@@ -9,5 +9,5 @@ export interface IBoardListProps extends IProps {
 }
 
 export interface IModalProps {
-	searchParams: { modal: boolean };
+	searchParams: { modal: number };
 }

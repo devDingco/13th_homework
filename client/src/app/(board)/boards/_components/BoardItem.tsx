@@ -4,7 +4,7 @@
 import { IBoardItem } from '@/models/boardType';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 // import deleteBoard from '@/app/apis/boards/deleteBoard';
 
@@ -12,17 +12,13 @@ export default function BoardItem({ board }: IBoardItem) {
 	const router = useRouter();
 	const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
-	useEffect(() => {
-		router.prefetch('/?modal=true');
-	}, [router]);
-
 	const onClickRouterDetail = (boardId: number) => {
 		router.push(`/boards/${boardId}`);
 	};
 
 	const onClickDeleteButton = (event: React.MouseEvent) => {
 		event.stopPropagation();
-		router.push('boards/?modal=true');
+		router.push(`boards/?modal=${board.boardId}`);
 	};
 
 	const formattedDate = changeDateToISO(board.createdAt);

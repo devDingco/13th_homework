@@ -5,13 +5,14 @@ import NewAddressInputContainer from './NewAddressInputContainer';
 import NewInputContainer from './NewInputContainer';
 import NewImageContainer from './NewImageContainer';
 import NewTextarea from './NewTextarea';
-import NewFormButton from './NewFormButton';
 import { ETitle } from '@/models/newTitle';
 import { createBoardAction } from '@/app/actions/createBoardAction';
 import { useFormState } from 'react-dom';
 import { useEffect, useState } from 'react';
 import { IInputValueParameter } from '@/models/inputValueParameter';
 import { IFormState } from '@/models/formBoardError';
+import CommonButton from '../../_components/CommonButton';
+import { EButtonTitle } from '@/models/button.type';
 
 export default function NewForm() {
 	const [state, formAction] = useFormState(createBoardAction, {
@@ -71,7 +72,10 @@ export default function NewForm() {
 			<NewAddressInputContainer title={ETitle.Address} />
 			<NewInputContainer title={ETitle.YoutubeUrl} />
 			<NewImageContainer />
-			<NewFormButton isButtonDisabled={isButtonDisabled} />
+			<div className="w-full flex justify-end items-center gap-4">
+				<CommonButton title={EButtonTitle.sumbit} />
+				<CommonButton title={EButtonTitle.cancel} isButtonDisabled={isButtonDisabled} />
+			</div>
 		</form>
 	);
 }
