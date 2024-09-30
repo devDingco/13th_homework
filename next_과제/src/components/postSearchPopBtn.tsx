@@ -1,13 +1,13 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
 type PostSearchPopProps = {
-  setAddress: (address: string) => void;
-  setZoneCode: (zoneCode: string) => void;
+  setaddress: (field: string, value: string) => void;
+  setzonecode: (field: string, value: string) => void;
   btnstyle?: string;
 };
 
 const PostSearchPopBtn = (props: PostSearchPopProps) => {
-  const { setAddress, setZoneCode, btnstyle } = props;
+  const { setaddress, setzonecode, btnstyle } = props;
   const open = useDaumPostcodePopup(process.env.DAUM_POSTCODE_API_KEY);
 
   interface dataType {
@@ -35,8 +35,8 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
     }
 
     console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    setAddress(fullAddress);
-    setZoneCode(zoneCode);
+    setaddress("writeAddress", fullAddress);
+    setzonecode("writeAddressPost", zoneCode);
   };
 
   const handleClick = () => {
