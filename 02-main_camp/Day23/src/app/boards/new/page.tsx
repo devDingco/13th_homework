@@ -2,6 +2,7 @@
 import { useState, ChangeEvent } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -36,6 +37,8 @@ const NewPage = () => {
   const [isActive, setIsActive] = useState(false)
 
   const [createBoard] = useMutation(CREATE_BOARD)
+
+  const router = useRouter()
 
   function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
@@ -105,7 +108,8 @@ const NewPage = () => {
                 }
             },
         });
-        console.log(result)   
+        console.log(result)
+        router.push(`/boards/detail/${result.data.createBoard._id}`)
     } catch {
         alert("에러가 발생하였습니다. 다시 시도해 주세요.")
     }
