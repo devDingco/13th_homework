@@ -5,12 +5,14 @@ export type formList = {
   writeName?: string;
   writePassword?: string;
   writeTitle?: string;
-  writeContent?: string;
+  writeContents?: string;
   writeAddressPost?: string;
   writeAddress?: string;
   writeAddressDetail?: string;
   youtubeUrl?: URL;
-  imgFile?: File;
+  imgFile1?: File | null;
+  imgFile2?: File | null;
+  imgFile3?: File | null;
   email?: string;
   phone?: string;
   userId?: string;
@@ -66,7 +68,7 @@ export const formResister: {
       message: "제목은 20자 이내로 입력해 주세요.",
     },
   },
-  writeContent: {
+  writeContents: {
     required: "필수 입력 사항입니다.",
     maxLength: {
       value: 300,
@@ -80,7 +82,9 @@ export const formResister: {
       message: "유투브 URL 형식을 확인해 주세요.",
     },
   },
-  imgFile: {},
+  imgFile1: {},
+  imgFile2: {},
+  imgFile3: {},
   email: {
     pattern: {
       value: regexPattern.email,
