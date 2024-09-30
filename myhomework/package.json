@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "create-next-app": "^14.2.13",
     "graphql": "^16.9.0"
   }
 }
