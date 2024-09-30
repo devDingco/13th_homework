@@ -2,6 +2,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import React, {ReactNode} from "react";
+import ApolloSetting from '@/commons/settings/apollo-setting'
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,9 +27,9 @@ export default function RootLayout(props: Props){
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div>
+        <ApolloSetting>
           {props.children}
-        </div>
+        </ApolloSetting>
       </body>
     </html>
   );
