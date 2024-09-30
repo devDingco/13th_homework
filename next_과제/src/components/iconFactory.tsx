@@ -100,7 +100,7 @@ export interface IconProps {
   height?: string;
   fill?: string;
 }
-
+// <Icon icon="location" className="fill-gray-500 w-fit" />
 function Icon({
   icon,
   className,
