@@ -64,12 +64,11 @@
     @apply absolute top-0 left-0 w-full h-full;
   }
 
-  #writeContent {
+  #writeContents {
     @apply h-96 flex flex-col;
   }
 }
 
-html,
 body {
   font-family: var(--noto-sans-kr), var(--roboto), -apple-system,
     BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
