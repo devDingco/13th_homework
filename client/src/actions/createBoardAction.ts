@@ -1,7 +1,7 @@
 /** @format */
 'use server';
 import { IFormStateError } from '@/models/formBoardError';
-import postBoard from '../../apis/boards/postBoard';
+import postBoard from '../apis/boards/postBoard';
 import { ICreateFormBoard } from '@/models/formBoard';
 
 export async function createBoardAction(

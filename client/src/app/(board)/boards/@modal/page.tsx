@@ -1,7 +1,9 @@
 /** @format */
 'use client';
 import { IModalProps } from '@/models/children';
-import { useOnClickBack } from '@/utils/useOnClickBack';
+import { useOnClickBack } from '@/hooks/useOnClickBack';
+import CommonButton from '../_components/CommonButton';
+import { EButtonTitle } from '@/models/button.type';
 
 export default function ModalPage({ searchParams }: IModalProps) {
 	const onClickBack = useOnClickBack();
@@ -9,15 +11,18 @@ export default function ModalPage({ searchParams }: IModalProps) {
 		<>
 			{searchParams.modal && (
 				<div
-					className="absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-30 flex justify-center items-center"
+					className="absolute left-0 top-0 flex h-screen w-screen items-center justify-center bg-black bg-opacity-30"
 					onClick={onClickBack}
 				>
 					<div
-						className="w-1/3 h-1/3 bg-white rounded-3xl shadow flex flex-col p-8 justify-between"
+						className="flex h-1/3 w-1/3 flex-col items-center justify-between rounded-3xl bg-white py-12 shadow"
 						onClick={(event) => event.stopPropagation()}
 					>
 						<div className="prose-sb_18_24">{`게시글 ${searchParams.modal}을 삭제하시겠습니까?`}</div>
-						<div className="flex items-center justify-center gap-4"></div>
+						<div className="flex items-center justify-center gap-4">
+							<CommonButton title={EButtonTitle.back} onClickBack={onClickBack} />
+							<CommonButton title={EButtonTitle.delete} />
+						</div>
 					</div>
 				</div>
 			)}

@@ -6,7 +6,7 @@ import NewInputContainer from './NewInputContainer';
 import NewImageContainer from './NewImageContainer';
 import NewTextarea from './NewTextarea';
 import { ETitle } from '@/models/newTitle';
-import { createBoardAction } from '@/app/actions/createBoardAction';
+import { createBoardAction } from '@/actions/createBoardAction';
 import { useFormState } from 'react-dom';
 import { useEffect, useState } from 'react';
 import { IInputValueParameter } from '@/models/inputValueParameter';
@@ -73,8 +73,8 @@ export default function NewForm() {
 			<NewInputContainer title={ETitle.YoutubeUrl} />
 			<NewImageContainer />
 			<div className="flex w-full items-center justify-end gap-4">
-				<CommonButton title={EButtonTitle.sumbit} />
-				<CommonButton title={EButtonTitle.cancel} isButtonDisabled={isButtonDisabled} />
+				<CommonButton title={EButtonTitle.cancel} />
+				<CommonButton title={EButtonTitle.sumbit} isButtonDisabled={isButtonDisabled} />
 			</div>
 		</form>
 	);
