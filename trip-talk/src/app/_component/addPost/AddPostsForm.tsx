@@ -3,7 +3,7 @@
 import React, {
   ChangeEvent,
   FormEvent,
-  ReactNode,
+  // ReactNode,
   useEffect,
   useState,
 } from 'react';
@@ -11,6 +11,19 @@ import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
+import { useMutation, gql } from '@apollo/client';
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
 
 const AddPostsForm = () => {
   const [postData, setPostData] = useState<PostsType>({
@@ -32,6 +45,8 @@ const AddPostsForm = () => {
   });
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
+  const [createBoard] = useMutation(CREATE_BOARD);
+
   const onPostFormChange = (
     name: string,
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
@@ -46,25 +61,33 @@ const AddPostsForm = () => {
 
   const onAdressNumButtonClick = () => {};
 
-  const onAddPostsButton = (e: FormEvent<HTMLFormElement>) => {
+  const onAddPostsButton = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const validMessage = '필수입력 사항입니다.';
-    postData.username &&
-      postData.userpw &&
-      postData.userTitle &&
-      postData.usercontent &&
-      setRequiredMessage((prev) => {
-        return {
-          ...prev,
-          username: postData.username ? null : validMessage,
-          userpw: postData.userpw ? null : validMessage,
-          userTitle: postData.userTitle ? null : validMessage,
-          usercontent: postData.usercontent ? null : validMessage,
-        };
-      });
+    const { data } = await createBoard({
+      variables: {
+        createBoardInput: {
+          writer: postData.username,
+          password: postData.userpw,
+          title: postData.userTitle,
+          contents: postData.usercontent,
+        },
+      },
+    });
+    console.log(data);
   };
 
   useEffect(() => {
+    const validMessage = '필수입력 사항입니다.';
+    setRequiredMessage((prev) => {
+      return {
+        ...prev,
+        username: postData.username ? null : validMessage,
+        userpw: postData.userpw ? null : validMessage,
+        userTitle: postData.userTitle ? null : validMessage,
+        usercontent: postData.usercontent ? null : validMessage,
+      };
+    });
+
     postData.username &&
     postData.userpw &&
     postData.userTitle &&

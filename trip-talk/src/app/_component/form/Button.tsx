@@ -16,7 +16,6 @@ const buttonConfig = {
 };
 
 const Button = ({ children, ...props }: ButtonPropsType) => {
-  console.log(props.disabled);
   return (
     <>
       <button

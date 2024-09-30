@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import '@/app/global.css';
+import ApolloSetting from './_commons/settings/apollo-setting';
 
 export const metadata: Metadata = {
   title: 'My App',
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main id="root">{children}</main>
+        <ApolloSetting>
+          <main id="root">{children}</main>
+        </ApolloSetting>
       </body>
     </html>
   );
