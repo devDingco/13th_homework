@@ -46,18 +46,23 @@ export default function BoardsNew() {
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const result = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: writer,
-          password: password,
-          title: title,
-          contents: contents
-      }
-      },
-    });
-    console.log(result);
+    try {
+      event.preventDefault();
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: contents
+        }
+        },
+      });
+      console.log(result);
+    } catch(error) {
+      console.error(error);
+      alert("An error has occurred. Please try again.");
+    }
   };
 
   return (
