@@ -3,8 +3,9 @@ import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
-const query = gql`
+const createQuery = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -16,7 +17,8 @@ const query = gql`
 `;
 
 function BoardsNew() {
-  const [createBoard] = useMutation(query);
+  const router = useRouter();
+  const [createBoard] = useMutation(createQuery);
   const [errorMessage, setErrorMessage] = useState<IInput>({
     writer: "",
     password: "",
@@ -57,36 +59,42 @@ function BoardsNew() {
   };
 
   const onClickSubmit = async () => {
-    const errors: IInput = {
-      writer: "",
-      password: "",
-      title: "",
-      contents: "",
-    };
+    try {
+      const errors: IInput = {
+        writer: "",
+        password: "",
+        title: "",
+        contents: "",
+      };
 
-    // 빈 값 검증
-    if (!validation.writer) errors.writer = "필수 입력 사항입니다.";
-    if (!validation.password) errors.password = "필수 입력 사항입니다.";
-    if (!validation.title) errors.title = "필수 입력 사항입니다.";
-    if (!validation.contents) errors.contents = "필수 입력 사항입니다.";
+      // 빈 값 검증
+      if (!validation.writer) errors.writer = "필수 입력 사항입니다.";
+      if (!validation.password) errors.password = "필수 입력 사항입니다.";
+      if (!validation.title) errors.title = "필수 입력 사항입니다.";
+      if (!validation.contents) errors.contents = "필수 입력 사항입니다.";
 
-    setErrorMessage(errors);
+      setErrorMessage(errors);
 
-    if (
-      validation.writer &&
-      validation.password &&
-      validation.title &&
-      validation.contents
-    ) {
-      alert("게시글 등록이 가능한 상태입니다!");
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            ...validation,
+      if (
+        validation.writer &&
+        validation.password &&
+        validation.title &&
+        validation.contents
+      ) {
+        alert("게시글 등록이 가능한 상태입니다!");
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              ...validation,
+            },
           },
-        },
-      });
-      console.log(result);
+        });
+        console.log(result);
+        console.log("어디까지실행되는거임?");
+        router.push(`/boards/${result.data.createBoard._id}`);
+      }
+    } catch (error) {
+      console.error("에러가 발생하였습니다. 다시 시도해 주세요.", error);
     }
   };
 
