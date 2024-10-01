@@ -13,6 +13,7 @@ import { NewYoutube } from "@/components/NewYoutube"
 import { NewPicture } from "@/components/NewPicture"
 import { NewButton } from "@/components/NewButton"
 import { gql, useMutation } from "@apollo/client"
+import { useRouter } from "next/navigation"
 
 const BoardsNew = () => {
 
@@ -29,6 +30,8 @@ const BoardsNew = () => {
   const [subjectError, setSubjectError] = useState("")
 
   const [isActive, setIsActive] = useState(false)
+
+  const router = useRouter();
 
   // 리팩토링 전
   // const onChangeName = (event) => {
@@ -118,48 +121,58 @@ const BoardsNew = () => {
   let registerError = false;
 
   const register = async (event:MouseEvent<HTMLButtonElement>) => {
-    const result = await boardRegister({
-      variables: {
-        boardwriter: name,
-        boardtitle: title,
-        boardcontents: subject,
-      },
-    })
-    
-    if(name.trim() === ""){
-      setNameError("필수입력 사항 입니다.")
-      registerError = true;
-    }
-    else{
-      setNameError("")
-    }
+    try{
+      const result = await boardRegister({
+        variables: {
+          boardwriter: name,
+          boardtitle: title,
+          boardcontents: subject,
+        },
+      })
 
-    if(password.trim() === ""){
-      setPasswordError("필수입력 사항 입니다.")
-      registerError = true;
-    }
-    else{
-      setPasswordError("")
-    }
+      if(name.trim() === ""){
+        setNameError("필수입력 사항 입니다.")
+        registerError = true;
+      }
+      else{
+        setNameError("")
+      }
+  
+      if(password.trim() === ""){
+        setPasswordError("필수입력 사항 입니다.")
+        registerError = true;
+      }
+      else{
+        setPasswordError("")
+      }
+  
+      if(title.trim() === ""){
+        setTitleError("필수입력 사항 입니다.")
+        registerError = true;
+      }
+      else{
+        setTitleError("")
+      }
+  
+      if(subject.trim() === ""){
+        setSubjectError("필수입력 사항 입니다.")
+        registerError = true;
+      }
+      else{
+        setSubjectError("")
+      }
+  
+      if(!registerError){
+        alert("게시글 등록이 가능한 상태입니다.")
+      }
+      console.log(result);
+      console.log(result.data.createBoard._id);
 
-    if(title.trim() === ""){
-      setTitleError("필수입력 사항 입니다.")
-      registerError = true;
-    }
-    else{
-      setTitleError("")
-    }
-
-    if(subject.trim() === ""){
-      setSubjectError("필수입력 사항 입니다.")
-      registerError = true;
-    }
-    else{
-      setSubjectError("")
-    }
-
-    if(!registerError){
-      alert("게시글 등록이 가능한 상태입니다.")
+      router.push(
+        `/boards/${result.data.createBoard._id}`
+      )
+    }catch(error){
+      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
     }
   }
 
