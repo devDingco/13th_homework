@@ -1,21 +1,47 @@
+'use client';
+import { gql, useQuery } from '@apollo/client';
 import styles from './styles.module.css';
+import { useParams } from 'next/navigation';
+
+const FETCH_BOARD = gql`
+  query fetBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+      likeCount
+      dislikeCount
+    }
+  }
+`;
+
 const BoardsDetail = () => {
+  const params = useParams();
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: params.boardId,
+    },
+  });
+  console.log(data);
+
   return (
     <div id="detailContainer" className="container">
       <div className="flex flex-col w-full justify-between">
         <div id="boardTitle" className="prose-b_28_36 mb-4">
-          추후 글 제목이 들어가는 공간입니다.
+          {data?.fetchBoard.title || ''}
         </div>
         <div className="flex justify-between mb-2">
           <div className="flex items-center">
             <img className="mr-2" src="/images/profile.png" alt="profile" />
             <p id="writer" className="prose-l_14_20">
-              요플레
+              {data?.fetchBoard.writer || ''}
             </p>
           </div>
           <div className="boardDate">
             <p id="date" className="prose-r_14_20">
-              2024.11.11
+              {data?.fetchBoard.createdAt.split('T')[0] || ''}
             </p>
           </div>
         </div>
@@ -34,7 +60,7 @@ const BoardsDetail = () => {
           alt="예시 그림"
         />
         <div id="detailContent">
-          <p>추후 글이 들어올 예정</p>
+          <p>{data?.fetchBoard.contents || ''}</p>
         </div>
         <img
           className="w-full h-auto"
@@ -47,13 +73,13 @@ const BoardsDetail = () => {
         <div className="flex flex-col">
           <img src="/images/bad.png" alt="싫어요" className="w-6 h-auto" />
           <p id="badCount" style={{ color: 'black' }} className="prose-r_14_20">
-            24
+            {data?.fetchBoard.dislikeCount || 0}
           </p>
         </div>
         <div className="flex flex-col">
           <img src="/images/good.png" alt="좋아요" className="w-6 h-auto" />
           <p id="goodCount" style={{ color: 'red' }} className="prose-r_14_20">
-            54
+            {data?.fetchBoard.likeCount || 0}
           </p>
         </div>
       </div>
