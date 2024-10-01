@@ -62,6 +62,11 @@
   dependencies:
     tslib "^2.3.0"
 
+create-next-app@^14.2.13:
+  version "14.2.13"
+  resolved "https://registry.yarnpkg.com/create-next-app/-/create-next-app-14.2.13.tgz#65abdcb68a5b9dbbdd1807bfddb27276c7024660"
+  integrity sha512-dFVUbLAbddh3kwQi/ov17Y8vt69POw9DgkI6ZvyAVjAyKONOxS3X+wsehCfgTDBx8jPeXLKS+/qsHiQZJ4szdQ==
+
 graphql-tag@^2.12.6:
   version "2.12.6"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
