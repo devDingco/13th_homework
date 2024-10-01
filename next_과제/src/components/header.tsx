@@ -69,7 +69,7 @@ const Header = () => {
                   className={
                     "rounded-none p-2" +
                     (pathName === key.link
-                      ? " border-b-2 border-inherit font-bold"
+                      ? " border-b-2 border-current font-bold"
                       : "")
                   }
                   href={key.link}
@@ -83,12 +83,12 @@ const Header = () => {
       </nav>
       <div className="flex gap-6">
         <DarkModeButton />
-        <button className="rounded-full btn btn-neutral font-black text-white">
+        <Link href="/login" className="rounded-full btn btn-accent-content">
           로그인
-          <span className="w-6 h-6 fill-white">
-            <Icon icon="rightArrow" className="fill-inherit" />
+          <span className="w-6 h-6 fill-base-100">
+            <Icon icon="rightArrow" />
           </span>
-        </button>
+        </Link>
       </div>
     </header>
   );
