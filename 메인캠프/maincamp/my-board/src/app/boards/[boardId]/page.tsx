@@ -1,7 +1,7 @@
 'use client';
 import { gql, useQuery } from '@apollo/client';
 import styles from './styles.module.css';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const FETCH_BOARD = gql`
   query fetBoard($boardId: ID!) {
@@ -18,6 +18,7 @@ const FETCH_BOARD = gql`
 `;
 
 const BoardsDetail = () => {
+  const router = useRouter();
   const params = useParams();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -29,7 +30,7 @@ const BoardsDetail = () => {
   return (
     <div id="detailContainer" className="container">
       <div className="flex flex-col w-full justify-between">
-        <div id="boardTitle" className="prose-b_28_36 mb-4">
+        <div id="boardTitle" className=" mb-4 prose-b_28_36">
           {data?.fetchBoard.title || ''}
         </div>
         <div className="flex justify-between mb-2">
@@ -60,7 +61,9 @@ const BoardsDetail = () => {
           alt="예시 그림"
         />
         <div id="detailContent">
-          <p>{data?.fetchBoard.contents || ''}</p>
+          <p className="text-black prose-r_16_24">
+            {data?.fetchBoard.contents || ''}
+          </p>
         </div>
         <img
           className="w-full h-auto"
@@ -84,11 +87,14 @@ const BoardsDetail = () => {
         </div>
       </div>
       <div className="flex text-center justify-center w-full gap-4">
-        <button className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold">
+        <button
+          onClick={() => router.push('/boards')}
+          className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20"
+        >
           <img className="w-4 h-auto" src="/images/list_icon.png" alt="목록" />
           목록으로
         </button>
-        <button className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold">
+        <button className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20">
           <img className="w-4 h-auto" src="/images/edit_icon.png" alt="수정" />
           수정하기
         </button>

@@ -185,6 +185,9 @@ const config: Config = {
           },
         },
       },
+      boxShadow: {
+        boardsList: '0px 0px 20px 0px #00000014',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
