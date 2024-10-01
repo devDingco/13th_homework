@@ -2,6 +2,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './styles.module.css';
 import { gql, useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -17,6 +18,7 @@ const CREATE_BOARD = gql`
 
 const BoardsNews = () => {
   const [myBoard] = useMutation(CREATE_BOARD);
+  const router = useRouter();
   const [user, setUser] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -120,30 +122,36 @@ const BoardsNews = () => {
   //등록하기 함수
   const registerFunc = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const result = await myBoard({
-      variables: {
-        createBoardInput: {
-          writer: user,
-          title: title,
-          password: password,
-          contents: content,
+    try {
+      const result = await myBoard({
+        variables: {
+          createBoardInput: {
+            writer: user,
+            title: title,
+            password: password,
+            contents: content,
+          },
         },
-      },
-    });
-    console.log('등록된 게시글 : ', result);
+      });
+      console.log('등록된 게시글 : ', result);
+      console.log(result.data.createBoard._id);
 
-    if (user && password && content && title) {
-      alert('게시글 등록이 완료되었습니다!');
+      if (user && password && content && title) {
+        alert('게시글 등록이 완료되었습니다!');
 
-      setIsActive(false);
+        setIsActive(false);
 
-      return;
-    } else {
-      alert('필수 입력 사항을 확인해주세요.');
-      window.scrollTo({ top: 0 });
+        router.push(`/boards/${result.data.createBoard._id}`);
+
+        return;
+      } else {
+        alert('필수 입력 사항을 확인해주세요.');
+        window.scrollTo({ top: 0 });
+      }
+    } catch (error) {
+      console.log(error);
+      alert('에러가 발생했습니다. 다시 시도해 주세요.');
     }
-
     const errors: any[] = [];
 
     if (!user) errors.push('user');
@@ -336,7 +344,10 @@ const BoardsNews = () => {
       </div>
 
       <div className="flex gap-2 justify-end items-center self-stretch">
-        <button className="flex h-12 px-4 py-3 items-center gap-2 rounded-md border border-black bg-white text-black">
+        <button
+          type="button"
+          className="flex h-12 px-4 py-3 items-center gap-2 rounded-md border border-black bg-white text-black"
+        >
           취소
         </button>
         <button
