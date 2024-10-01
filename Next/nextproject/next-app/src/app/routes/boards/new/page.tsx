@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import Input from '../../../component/commons/Input';
 import Button from '../../../component/commons/Button';
-import React, { useState, ChangeEvent} from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styles from './style.module.css';
 import { useMutation, gql } from '@apollo/client'
+import { useRouter } from 'next/navigation';
 
 function WriteBoard () {
     const[name, setName] = useState("")
@@ -16,6 +17,7 @@ function WriteBoard () {
   
     const[content, setContent] = useState("")
 
+    // const[imgae, setImage] = useState(null)
     
     const[nameblank, setNameBlank] = useState("")
   
@@ -101,31 +103,6 @@ function WriteBoard () {
     }
 
 
-//     const register = gql`
-//    mutation {
-//   createBoard( $name: String!, $password: String!, $title: String!, $contents: String!, $addressnumber: String!, $address: String!, $addressdetail: String!
-//     createBoardInput:{
-//       writer: $name
-//       password: $password
-//       title: $title
-//       contents: $contents
-//       boardAddress: {
-//         zipcode: $addressnumber
-//         address: $address
-//         addressDetail: $addressdetail
-//       }
-//     }
-//   )  {
-//     _id
-//     writer
-//     title
-//     boardAddress{ 
-//       zipcode
-//       address
-//       addressDetail}     
-//   }
-// }
-//   `;
 
 const register = gql`
 mutation createBoard(
@@ -154,6 +131,8 @@ mutation createBoard(
     _id
     writer
     title
+    createdAt
+    updatedAt
     boardAddress { 
       zipcode
       address
@@ -163,9 +142,9 @@ mutation createBoard(
 }
 `;
 
-
+    const router = useRouter();
     const [myfunction] = useMutation(register)
-
+    
     const checkValid = () => {
       if(name === ("")) {
         setNameBlank("필수입력 사항입니다.")
@@ -191,25 +170,33 @@ mutation createBoard(
     
     const onClickSignup = async () => {
         await checkValid()
-        if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
-          alert("게시글 등록 완료")
-          await myfunction({
-            variables :{
-                writer: name,
-                password: password,
-                title: title,
-                contents: content,  
-                boardAddress: {
-                  zipcode: addressnumber,
-                  address: address,
-                  addressdetail: addressdetail
-                }
-            }
-          })
+        try {
+          if(name !== ("") && title !== ("") && content !== ("") && password !== ("") && addressdetail !== "" && addressnumber !== "" && address !== "") {
+            const result = await myfunction({
+              variables :{
+                  writer: name,
+                  password: password,
+                  title: title,
+                  contents: content,  
+                  boardAddress: {
+                    zipcode: addressnumber,
+                    address: address,
+                    addressdetail: addressdetail
+                  }
+              }
+            })
+            alert("게시글 등록 완료")
+            console.log(result.data.createBoard._id)
+            // router.push(`/routes/boards/${result.data.createBoard._id}`)
+            router.push("../../../boards")
+          }
+        } catch {
+          alert("에러가 발생하였습니다. 다시 시도해 주세요.")
         }
       }
 
     return(
+
       <div className={styles.css_layout}> 
         <div className={styles.css_header}>게시글 등록</div>
           <div className={styles.css_input}>

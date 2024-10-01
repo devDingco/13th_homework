@@ -10,7 +10,6 @@ export default function ApolloSetting(props: IApolloSetting) {
         uri: "http://main-practice.codebootcamp.co.kr/graphql", //practice
         cache: new InMemoryCache()
     })    
-
     return (
         <ApolloProvider client={client}>
             {props.children}
