@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import * as React from 'react';
+import * as React from "react";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 
 const Paperlogy = localFont({
   src: "./fonts/Paperlogy-5Medium.woff2",
   variable: "--font-paperlogy-medium",
-  weight: "500"
-})
+  weight: "500",
+});
 
 const Pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -25,12 +25,11 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {return (
+}>) {
+  return (
     <html lang="en">
       <body className={`${Paperlogy.variable} ${Pretendard.variable}`}>
-        <ApolloSetting>
-          {children}
-        </ApolloSetting>
+        <ApolloSetting>{children}</ApolloSetting>
       </body>
     </html>
   );
