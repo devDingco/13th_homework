@@ -12,6 +12,7 @@ import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
 import { useMutation, gql } from '@apollo/client';
+import { useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -26,6 +27,7 @@ const CREATE_BOARD = gql`
 `;
 
 const AddPostsForm = () => {
+  const routes = useRouter();
   const [postData, setPostData] = useState<PostsType>({
     username: '',
     userpw: '',
@@ -63,17 +65,21 @@ const AddPostsForm = () => {
 
   const onAddPostsButton = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { data } = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: postData.username,
-          password: postData.userpw,
-          title: postData.userTitle,
-          contents: postData.usercontent,
+    try {
+      const { data } = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: postData.username,
+            password: postData.userpw,
+            title: postData.userTitle,
+            contents: postData.usercontent,
+          },
         },
-      },
-    });
-    console.log(data);
+      });
+      routes.push(`/boards/detail/${data.createBoard._id}`);
+    } catch (err) {
+      alert(`에러가 발생했습니다. ${err}`);
+    }
   };
 
   useEffect(() => {
@@ -88,9 +94,9 @@ const AddPostsForm = () => {
       };
     });
 
-    postData.username &&
-    postData.userpw &&
-    postData.userTitle &&
+    postData.username ??
+    postData.userpw ??
+    postData.userTitle ??
     postData.usercontent
       ? setSubmitButtonDisabled(false)
       : setSubmitButtonDisabled(true);
