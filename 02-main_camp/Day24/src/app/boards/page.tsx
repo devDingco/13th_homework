@@ -23,7 +23,7 @@ const BoardsPage = () => {
             <main className={styles.boards_MainContainer}>
                 <BoardHeader />
                 <ul className={styles.boards_ul}>
-                    {data?.fetchBoards.map((el: any, index: number) => <Board key={el._id} index={index + 1} title={el.title} writer={el.writer}/>)}
+                    {data?.fetchBoards.map((el: any, index: number) => <Board key={el._id} id={el._id} index={index + 1} title={el.title} writer={el.writer}/>)}
                 </ul>
             </main>
         </div>
