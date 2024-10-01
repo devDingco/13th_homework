@@ -2,6 +2,7 @@
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 import { gql, useMutation } from '@apollo/client'; 
+import { MouseEvent } from 'react';
 
 
 interface IBoard {
@@ -38,7 +39,7 @@ const Board = ({id, index, title, writer}: IBoard) => {
         router.push(`/boards/detail/${id}`)
     };
 
-    const onClickDelete = (event) => {
+    const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
         deleteBoard({
             variables: {
