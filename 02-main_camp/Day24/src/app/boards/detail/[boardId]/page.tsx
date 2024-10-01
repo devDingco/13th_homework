@@ -3,7 +3,6 @@ import { useParams } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
 import styles from './styles.module.css';
 import { Divider } from '@/app/boards/new/page'
-import { log } from 'console';
 
 const FETCH_BOARD = gql`
 query fetchBoard($boardId: ID!){
