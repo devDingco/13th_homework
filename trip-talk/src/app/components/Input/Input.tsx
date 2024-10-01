@@ -1,5 +1,5 @@
 import { ChangeEventHandler, ReactNode } from "react";
-import styles from "./Input.module.css";
+import styles from "./styles.module.css";
 
 type InputProps = {
   isLabel: boolean;
