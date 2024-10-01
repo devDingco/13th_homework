@@ -6,6 +6,8 @@ import SearchBox from "@/components/searchBox";
 import Icon from "@/components/iconFactory";
 import BoardList from "@/app/board/list/[pageNum]/page";
 import { useRouter } from "next/navigation";
+import Headers from "@/components/header";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -47,6 +49,7 @@ export default function Home() {
 
   return (
     <div>
+      <Headers />
       <MainSlide />
 
       <div className="max-xl:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
@@ -65,15 +68,13 @@ export default function Home() {
           <h3 className="font-bold text-xl">트립토크 게시판</h3>
           <div className="flex gap-4 justify-between flex-wrap">
             <SearchBox />
-            <button
-              className="btn btn-info text-white max-sm:fixedBtn"
-              onClick={() => router.push("/board/new")}
+            <Link
+              href="/board/write"
+              className="btn btn-primary text-white max-sm:fixedBtn"
             >
-              <span className="w-6 h-6 fill-white">
-                <Icon icon="rwite" />
-              </span>
+              <Icon icon="rwite" className="w-6 h-6 fill-white" />
               트립토크 등록
-            </button>
+            </Link>
           </div>
           <BoardList />
         </div>
