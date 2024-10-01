@@ -1,8 +1,9 @@
 "use client";
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
-import { gql, useMutation } from '@apollo/client'; 
+import { useMutation } from '@apollo/client'; 
 import { MouseEvent } from 'react';
+import { FETCH_BOARDS, DELETE_BOARD } from '@/commons/graphql/backend-api'
 
 
 interface IBoard {
@@ -12,23 +13,6 @@ interface IBoard {
     title: string
     // createdAt: string;
 };
-
-const FETCH_BOARDS = gql`
-    query {
-        fetchBoards {
-            _id
-            writer
-            title
-            createdAt
-        }
-    }
-`;
-
-const DELETE_BOARD = gql`
-    mutation deleteBoard($id: ID!){
-        deleteBoard(boardId: $id)
-    }
-`;
 
 const Board = ({id, index, title, writer}: IBoard) => {
     const router = useRouter();

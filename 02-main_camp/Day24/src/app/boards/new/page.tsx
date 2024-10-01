@@ -3,18 +3,7 @@ import { useState, ChangeEvent, SetStateAction } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
-
-const CREATE_BOARD = gql`
-    mutation createBoard($createBoardInput: CreateBoardInput!) {
-        createBoard(createBoardInput: $createBoardInput) {
-          _id
-          writer
-          title
-          contents
-          createdAt
-        }
-    }
-`
+import { CREATE_BOARD } from '@/commons/graphql/backend-api'
 
 const NewPage = () => {
   const writerDescription = "작성자명을 입력해 주세요."

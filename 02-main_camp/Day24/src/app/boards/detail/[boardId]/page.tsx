@@ -1,19 +1,9 @@
 "use client";
 import { useParams } from 'next/navigation';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import styles from './styles.module.css';
 import { Divider } from '@/app/boards/new/page'
-
-const FETCH_BOARD = gql`
-query fetchBoard($boardId: ID!){
-    fetchBoard(boardId: $boardId) {
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
+import { FETCH_BOARD } from '@/commons/graphql/backend-api'
 
 const BoardsDetail = () => {
     const params = useParams()

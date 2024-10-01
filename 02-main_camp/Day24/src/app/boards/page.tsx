@@ -1,19 +1,9 @@
 "use client"
 import styles from './styles.module.css';
+import { useQuery } from '@apollo/client';
 import Board from '@/app/boards/components/Board';
 import BoardsHeader from '@/app/boards/components/BoardsHeader';
-import { gql, useQuery } from '@apollo/client';
-
-const FETCH_BOARDS = gql`
-    query {
-        fetchBoards {
-            _id
-            writer
-            title
-            createdAt
-        }
-    }
-`;
+import { FETCH_BOARDS } from '@/commons/graphql/backend-api';
 
 const BoardsPage = () => {
     const { data } = useQuery(FETCH_BOARDS);
