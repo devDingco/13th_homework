@@ -8,6 +8,7 @@ import { useOnClickBack } from '@/hooks/useOnClickBack';
 
 export default function ModalPage({ searchParams }: IModalProps) {
 	const onClickBack = useOnClickBack();
+
 	return (
 		<>
 			{searchParams.modal && (
@@ -21,8 +22,11 @@ export default function ModalPage({ searchParams }: IModalProps) {
 					>
 						<div className="prose-sb_18_24">{`게시글 ${searchParams.modal}을 삭제하시겠습니까?`}</div>
 						<div className="flex items-center justify-center gap-4">
-							<CommonButton title={EButtonTitle.back} onClickBack={onClickBack} />
-							<CommonButton title={EButtonTitle.delete} />
+							<CommonButton title={EButtonTitle.back} />
+							<CommonButton
+								title={EButtonTitle.delete}
+								boardId={searchParams.modal}
+							/>
 						</div>
 					</div>
 				</div>

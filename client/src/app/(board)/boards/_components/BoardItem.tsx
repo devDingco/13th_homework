@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-// import deleteBoard from '@/app/apis/boards/deleteBoard';
 
 export default function BoardItem({ board }: IBoardItem) {
 	const router = useRouter();
@@ -46,7 +45,7 @@ export default function BoardItem({ board }: IBoardItem) {
 				alt="delete"
 				width={20}
 				height={20}
-				className={`transition-opacity duration-300 ${
+				className={`cursor-pointer transition-opacity duration-300 ${
 					hoveredItem === board.boardId ? 'opacity-100' : 'opacity-0'
 				}`}
 				onClick={(event) => onClickDeleteButton(event)}
