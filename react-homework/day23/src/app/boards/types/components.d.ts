@@ -19,3 +19,10 @@ export interface IInputGroup {
   error?: string;
   isRequired?: boolean;
 }
+
+export interface IBoardList {
+  number: number;
+  title: string;
+  writer: string;
+  date: string;
+}

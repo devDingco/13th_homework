@@ -129,7 +129,7 @@
   padding: 8px 12px;
   align-items: center;
   gap: 8px;
-
+  line-height: 24px;
   border-radius: 8px;
   border: 1px solid black;
   background: white;
@@ -142,8 +142,8 @@
   height: 40px;
   padding: 8px 12px;
   align-items: center;
+  line-height: 24px;
   gap: 8px;
-
   border-radius: 8px;
   border: 1px solid black;
   background: white;

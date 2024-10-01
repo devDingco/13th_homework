@@ -121,7 +121,7 @@ const BoardsDetail = () => {
             width={24}
             height={24}
           />
-          수정하기
+          <span>수정하기</span>
         </button>
       </div>
     </div>

@@ -26,3 +26,14 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
+
+export const FETCH_BOARDS = gql`
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
+      _id
+      title
+      writer
+      createdAt
+    }
+  }
+`;
