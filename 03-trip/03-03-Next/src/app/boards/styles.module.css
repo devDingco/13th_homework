@@ -42,6 +42,9 @@
   .date {
     color: #767676;
   }
+  .date {
+    font-size: 1.2rem;
+  }
 }
 
 .idx,
@@ -49,12 +52,14 @@
 .author,
 .date,
 .bin {
-  width: 6.4rem;
+  width: 8rem;
   height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .title {
@@ -73,22 +78,27 @@
   .date {
     color: #fff;
   }
+  .btn {
+    display: block;
+  }
 }
 
-.post_wrapper:hover::after {
+.btn {
   content: "";
-  width: 4rem;
-  height: 4rem;
-  display: block;
+  width: 3.6rem;
+  height: 3.6rem;
+  display: none;
   flex-shrink: 0;
   border-radius: 0.8rem;
+  margin: 1rem;
   background-color: #eee;
   background-image: url(../../../public/svg/delete.svg);
   background-position: center;
   background-repeat: no-repeat;
-  filter: contrast(150%);
+  filter: contrast(120%);
 }
 
 .post_wrapper {
   transition: 0.2s;
+  transition-timing-function: ease-out;
 }
