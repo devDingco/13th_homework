@@ -3,6 +3,7 @@ import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react'
 import styles from './style.module.css'
 import Image from 'next/image'
 import { gql, useMutation } from '@apollo/client'
+import { useRouter } from 'next/navigation'
 
 
 const CREATE_BOARD = gql`
@@ -42,6 +43,8 @@ const BoardsNew = () => {
   const [isAllFilled, setIsAllFilled] = useState(false);
 
   const [aboutUpLoadBoard] = useMutation(CREATE_BOARD);
+
+  const router = useRouter()
 
   useEffect(() => {
     setIsAllFilled(!!(author && password && title && content));
@@ -101,6 +104,7 @@ const BoardsNew = () => {
   };
 
   const onClickSubmit = async () => {
+   try {
     const result = await aboutUpLoadBoard({
       variables: {
         createBoardInput: {
@@ -119,6 +123,12 @@ const BoardsNew = () => {
       }
     });
     console.log(result);
+    router.push(`/boards/${result.data.createBoard._id}`)
+    
+   } catch (error) {
+    console.log(error)
+    alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+   }
   };
 
 

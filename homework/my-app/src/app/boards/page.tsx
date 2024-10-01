@@ -1,10 +1,12 @@
 'use client';
 
 import styles from './style.module.css';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import Image from 'next/image'
+import ko from 'date-fns/locale/ko'; 
 
+import 'react-datepicker/dist/react-datepicker.css'
 
 
 
@@ -12,9 +14,28 @@ import Image from 'next/image'
 const Page = () => {
 
 
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  // 커스텀 인풋 컴포넌트 정의
+  const CustomInput = forwardRef(({ value, onClick }) => (
+    <input
+        className={styles.customInput} // CSS 모듈을 사용하여 스타일 적용
+        onClick={onClick}   
+        value={value}
+        readOnly // 읽기 전용으로 설정
+    />
+    ));
 
+CustomInput.displayName = 'CustomInput'; // 디스플레이 이름 추가
 
+    const [dateRange, setDateRange] = useState([new Date(), new Date()]); // 날짜 범위 상태 관리
+    const [startDate, endDate] = dateRange;
+
+    // 날짜 범위를 설정하는 함수
+    const updateDateRange = (update) => {
+        setDateRange(update);
+        console.log(update)
+    };
+
+    
 
   return (
     <div>
@@ -23,17 +44,19 @@ const Page = () => {
             <input className={styles.searchBar}/>
 
             <div className={styles.datePickerContainer}>
-            <span className={styles.calendarIcon}>📅</span>
+                 <span className={styles.inputImage}>📅</span>
             
-            <DatePicker
-            swapRange={true}
-            dateFormat='yyyy.MM.dd' // 날짜 형태
-            shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-            minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
-            maxDate={new Date()} // maxDate 이후 날짜 선택 불가
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+                 <DatePicker
+                 showIcon
+                selectsRange
+                startDate={startDate}
+                endDate={endDate}
+                onChange={updateDateRange}
+                locale={ko} // 한국어 설정
+                customInput={<CustomInput />} // 커스텀 인풋 전달
+                placeholderText="날짜를 선택하세요" // 플레이스홀더 텍스트
             />
+
             </div>
 
 
@@ -50,11 +73,11 @@ const Page = () => {
                 <div className={styles.listOfWriing}>
                     <div className={styles.box1}>
                         <div className={styles.dateContainer}>
-                            <div className={styles.month}>2024</div> 
-                            <div className={styles.date}>09.20</div>
+                            <div className={styles.listNum}>103</div> 
+                            <div className={styles.date}>24.09.20</div> 
                         </div>
                     </div>
-                    <div className='Box2'>
+                    <div>
                         <div className={styles.titleContainer}>
                             <div className={styles.title}>
                                 블로그 게시물 제목입니다 블로그 게시물 제목입니다 블로그 게시물 제목입니다.
@@ -62,7 +85,7 @@ const Page = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='Box3'>
+                    <div>
                         <div className={styles.titleContainer}>
                             <div className={styles.thumbnail}>
                                 <Image src='/image/sampleimg3.jpg' width={0} height={0} sizes='100vw' alt='썸네일'/>
@@ -73,11 +96,11 @@ const Page = () => {
                 <div className={styles.listOfWriing}>
                     <div className={styles.box1}>
                         <div className={styles.dateContainer}>
-                            <div className={styles.month}>2024</div> 
-                            <div className={styles.date}>09.20</div>
+                        <div className={styles.listNum}>103</div> 
+                        <div className={styles.date}>24.09.20</div> 
                         </div>
                     </div>
-                    <div className='Box2'>
+                    <div>
                         <div className={styles.titleContainer}>
                             <div className={styles.title}>
                                 블로그 게시물 제목입니다 블로그 게시물 제목입니다 블로그 게시물 제목입니다.
@@ -85,7 +108,7 @@ const Page = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='Box3'>
+                    <div>
                         <div className={styles.titleContainer}>
                             <div className={styles.thumbnail}>
                                 <Image src='/image/sampleimg3.jpg' width={0} height={0} sizes='100vw' alt='썸네일'/>
@@ -97,8 +120,8 @@ const Page = () => {
                 <div className={styles.listOfWriing}>
                     <div className={styles.box1}>
                         <div className={styles.dateContainer}>
-                            <div className={styles.month}>2024</div> 
-                            <div className={styles.date}>09.20</div>
+                        <div className={styles.listNum}>103</div> 
+                        <div className={styles.date}>24.09.20</div> 
                         </div>
                     </div>
                     <div className='Box2'>
@@ -120,8 +143,8 @@ const Page = () => {
                 <div className={styles.listOfWriing}>
                     <div className={styles.box1}>
                         <div className={styles.dateContainer}>
-                            <div className={styles.month}>2024</div> 
-                            <div className={styles.date}>09.20</div>
+                        <div className={styles.listNum}>103</div> 
+                        <div className={styles.date}>24.09.20</div> 
                         </div>
                     </div>
                     <div className='Box2'>

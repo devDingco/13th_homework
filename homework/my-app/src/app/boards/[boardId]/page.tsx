@@ -4,10 +4,56 @@ import styles from './style.module.css'
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'next/image'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useParams } from 'next/navigation';
+import { gql, useQuery } from '@apollo/client';
+
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId:ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`
+
 
 
 
 const BoardsDetail = () => {
+  
+  const params = useParams()
+  
+  const {data} = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: params.boardId
+    }
+  })
+  console.log(data)
+
+
+
+
+
+
+
   return (
   <div className={styles.container}>
 
@@ -61,112 +107,17 @@ const BoardsDetail = () => {
         <div className={styles.aboutContent}>
           <div className={styles.authorDateContainer}>
             <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
-            <div className={styles.authorName}>홍길동</div>
+            <div className={styles.authorName}>{data && data.fetchBoard.writer}</div>
             <div className={styles.date}>2024.11.11</div>
           </div>
 
           <div className={styles.titleContainer}>
-            <div className={styles.title}>Post title1 </div>
+            <div className={styles.title}>{data && data.fetchBoard.title}</div>
           </div>
         </div>
 
         <div className={styles.textContent}>
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          너보다 시름 많은 나도 자고 일어나 우노라.
-          얄리얄리 얄라셩 얄라리 얄라 <br/>
-
-          갈던 밭 갈던 밭 보았느냐. 물 아래 갈던 밭 보았느냐
-          이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          이럭저럭 하여 낮일랑 지내 왔건만
-          올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          어디다 던지는 돌인가 누구를 맞히려던 돌인가.
-          미워할 이도 사랑할 이도 없이 맞아서 우노라.
-          얄리얄리 얄라셩 얄라리 얄라
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          너보다 시름 많은 나도 자고 일어나 우노라.
-          얄리얄리 얄라셩 얄라리 얄라 <br/>
-
-          갈던 밭 갈던 밭 보았느냐. 물 아래 갈던 밭 보았느냐
-          이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          이럭저럭 하여 낮일랑 지내 왔건만
-          올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          어디다 던지는 돌인가 누구를 맞히려던 돌인가.
-          미워할 이도 사랑할 이도 없이 맞아서 우노라.
-          얄리얄리 얄라셩 얄라리 얄라
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          너보다 시름 많은 나도 자고 일어나 우노라.
-          얄리얄리 얄라셩 얄라리 얄라 <br/>
-
-          갈던 밭 갈던 밭 보았느냐. 물 아래 갈던 밭 보았느냐
-          이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          이럭저럭 하여 낮일랑 지내 왔건만
-          올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.
-          얄리얄리 얄라셩 얄라리 얄라
-
-          어디다 던지는 돌인가 누구를 맞히려던 돌인가.
-          미워할 이도 사랑할 이도 없이 맞아서 우노라.
-          얄리얄리 얄라셩 얄라리 얄라
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          살겠노라 살겠노라. 청산에 살겠노라.
-          머루랑 다래를 먹고 청산에 살겠노라.
-          얄리얄리 얄랑셩 얄라리 얄라
-
-          우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
+          {data && data.fetchBoard.contents}
 
         </div>
       </div>

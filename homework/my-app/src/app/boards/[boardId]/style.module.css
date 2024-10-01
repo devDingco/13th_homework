@@ -13,7 +13,7 @@
 }
 body{
   padding:0;
-  margin:0;
+  margin:0;titleContainer
 } */
 
 .container {
@@ -124,14 +124,17 @@ body{
   color: var(--gray-800);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   height: 100%;
   padding-left:30px;
   /* max-height: 550px; */
+  align-self: start; /* 상단 정렬 */
+  justify-self: start; /* 좌측 정렬 */
 }
 .textContent {
   overflow: auto;
   overflow-x: hidden;
+  
+  
 }
 
 .carousel-indicators {
