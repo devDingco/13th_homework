@@ -1,0 +1,173 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80rem;
+    margin-top:2.5rem;
+    margin-left: 20rem;
+    padding: 2.5rem 0;
+    gap:2.5rem;
+    
+}
+
+.legend {
+    width: 80rem;
+    height: 1.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2.8rem;
+
+}
+
+.formControl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name,.password {
+    width: 38.75rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: 1px solid lightslategray;
+    padding:0.75rem 1rem;
+}
+
+.firstLine {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap:5px;
+}
+
+
+.title, .addressInput, .detailAddressInput, .youtubeUrl{
+    height: 3rem;
+    width: 100%;
+    border: 1px solid  lightslategray;
+    border-radius: 0.5rem;
+}
+
+.formContent  {
+    width: 100%;
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 0.5rem;
+/* align-self: stretch; */
+}
+
+.titleAdd {
+    
+}
+
+.content {
+    width: 100%;
+    height:21rem;
+}
+
+.addressSearch {
+    display: flex;
+    flex-direction: row;
+    gap:0.5rem;
+    margin-bottom: 16px;
+}
+
+.number{
+    
+    width: 10rem;
+    padding: 0.75rem 1rem;
+   height: 3rem;
+}
+    
+.postCode {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.inputBox {
+    width: 100%;
+    gap: 0.3rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.imgBox {
+    display: flex;
+    flex-direction: column;
+align-items: flex-start;
+gap: 0.25rem;
+align-self: stretch;
+}
+.cardBox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap:0.2rem;
+}
+
+.imgCard {
+    display: flex;
+width: 10rem;
+height: 10rem;
+background-color: #f2f2f2;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+color: #777777;
+border-radius: 0.5rem;
+}
+
+.uploadText {
+    text-align: center;
+}
+
+.uploadText:first-child {
+    font-size: 2.5rem; 
+    
+}
+
+.uploadText:last-child {
+    font-size: 1rem;
+}
+
+.formButton {
+    display: flex;
+    justify-content: flex-end;
+   
+
+}
+.submitBtn {
+ width: 6rem;
+ height: 3rem;
+ padding: 0.75rem 1rem;
+ align-items: center;
+ margin-right: 0.5rem;
+ border-radius: 0.5rem;
+ border: none;
+ background-color: #2974E5;
+ color: #fff;
+ 
+}
+.resetBtn {
+    width: 4rem;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+ align-items: center;
+ border-radius: 0.5rem;
+ color:black;
+
+}
+
+.hrLine {
+    width: 100%;
+    border:1px solid #e4e4e4;
+    margin-top:2rem;
+    margin-bottom: 2rem;
+}
