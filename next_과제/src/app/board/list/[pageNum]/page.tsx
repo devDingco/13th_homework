@@ -66,9 +66,14 @@ export default function BoardList() {
         variables: {
           boardId: postId,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARDS,
+          },
+        ],
       });
       alert("게시글이 삭제되었습니다.");
-      router.refresh();
+      // router.refresh();
     } catch (error) {
       alert("게시글 삭제에 실패했습니다.");
       console.log(error);
@@ -114,7 +119,7 @@ export default function BoardList() {
             {data?.fetchBoards.map((post: Ipost, idx: number) => {
               return (
                 <tr
-                  key={idx}
+                  key={post._id}
                   className="cursor-pointer hover:bg-gray-100"
                   onMouseOver={(e) => listItemMouseHandler(e, "over")}
                   onMouseLeave={(e) => listItemMouseHandler(e, "leave")}
