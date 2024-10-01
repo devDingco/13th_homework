@@ -1,0 +1,38 @@
+.inputDate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+
+  &::before {
+    content: attr(placeholder);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  &::webkit-clear-button,
+  &::webkit-inner-spin-button {
+    display: none;
+  }
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+  }
+  &:valid::before {
+    display: none;
+  }
+}
