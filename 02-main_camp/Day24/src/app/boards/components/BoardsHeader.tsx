@@ -1,7 +1,7 @@
 "use client"
 import styles from './styles.module.css'
 
-const BoardHeader = () => {
+const BoardsHeader = () => {
     return (
         <div className={styles.boardHeader_header}>
             <div className={styles.boardHeader_number}>번호</div>
@@ -12,4 +12,4 @@ const BoardHeader = () => {
     );
 }
 
-export default BoardHeader
+export default BoardsHeader
