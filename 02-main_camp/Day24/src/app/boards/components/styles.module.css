@@ -36,7 +36,7 @@
     padding: .75rem 1.5rem .75rem 1.5rem;
 }
 
-.board:hover .board_deleteImg {
+.board:hover .board_deleteButton {
     display: block;
 }
 
@@ -69,7 +69,7 @@
     color: #919191;
 }
 
-.board_deleteImg {
+.board_deleteButton {
     display: none;
     position: absolute;
     top: 10px;

@@ -17,6 +17,7 @@ const FETCH_BOARDS = gql`
 
 const BoardsPage = () => {
     const { data } = useQuery(FETCH_BOARDS);
+    console.log(data?.fetchBoards)
 
     return(
         <div className={styles.boards_RootContainer}>
