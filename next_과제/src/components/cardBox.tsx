@@ -38,9 +38,7 @@ export default function CardBox(props: CardBoxProps) {
         </div>
         <div className="flex justify-between text-sm">
           <div className="text-red-500 flex gap-1">
-            <div className="w-6 h-6">
-              <Icon icon="good" className="fill-current" />
-            </div>
+            <Icon icon="good" className="fill-red-500 w-6 h-6" />
             <span>{goodcount ?? 0}</span>
           </div>
           <div className="font-light">{writedate ?? "0000.00.00"}</div>
