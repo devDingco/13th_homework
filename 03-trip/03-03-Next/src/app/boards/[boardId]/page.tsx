@@ -1,11 +1,32 @@
+"use client";
+import { gql, useQuery } from "@apollo/client";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles.module.css";
 
-export default function DetailPage() {
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
+
+export default function PostBoards() {
+  const post = useParams();
+
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { boardId: post.boardId },
+  });
+
   return (
     <>
       <header>
-        <p className={styles.header_title}>title</p>
+        <p className={styles.header_title}>{data.fetchBoard.title}</p>
 
         <div className={styles.header_info}>
           <div className={styles.info_profile}>
@@ -16,10 +37,10 @@ export default function DetailPage() {
               height={24}
               sizes="100%"
             />
-            <p>author</p>
+            <p>{data.fetchBoard.writer}</p>
           </div>
           <div>
-            <p>date</p>
+            <p>{data.fetchBoard.createdAt}</p>
           </div>
         </div>
 
@@ -51,7 +72,7 @@ export default function DetailPage() {
         />
 
         <div className={styles.main_content}>
-          <pre>contents</pre>
+          <pre>{data.fetchBoard.contents}</pre>
         </div>
 
         <div className={styles.main_video}>

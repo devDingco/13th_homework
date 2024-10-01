@@ -162,8 +162,8 @@ const Main = () => {
     event.preventDefault();
     if (author === "") return alert("작성자를 확인해 주세요.");
     if (password === "") return alert("비밀번호를 확인해 주세요.");
-    if (title === "") return alert("제목을 작성해 주세요.")
-    if (content === "") return alert("내용을 작성해 주세요.")
+    if (title === "") return alert("제목을 작성해 주세요.");
+    if (content === "") return alert("내용을 작성해 주세요.");
 
     try {
       const gqlResult = await createBoard({
