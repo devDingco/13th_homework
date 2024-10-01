@@ -4,35 +4,48 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 import Image from 'next/image';
+import { gql, useMutation } from '@apollo/client';
 
-const App = () => {
-    const [author, setAuthor] = useState('');
+const 나의그래프큐엘셋팅 = gql`
+    mutation createBoard(
+        $mywriter: String
+        $mytitle: String
+        $mycontents: String
+    ) {
+        createBoard(writer: $mywriter, title: $mytitle, contents: $mycontents) {
+            _id
+            number
+            message
+        }
+    }
+`;
+
+export default function App() {
+    const [writer, setwriter] = useState('');
     const [password, setPassword] = useState('');
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [contents, setcontents] = useState('');
 
-    const [authorError, setAuthorError] = useState('');
+    const [writerError, setwriterError] = useState('');
     const [passwordError, setPassworError] = useState('');
     const [titleError, setTitleError] = useState('');
-    const [contentError, setContentError] = useState('');
+    const [contentsError, setcontentsError] = useState('');
 
     let [isActive, setIsActive] = useState(false);
 
-    // const [isActive, setIsActive] = useState(false);
-
     let onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuthor(event.target.value);
+        setwriter(event.target.value);
         if (event.target.value === '') {
-            setAuthorError('필수입력 사항 입니다');
+            setwriterError('필수입력 사항 입니다');
         } else {
-            setAuthorError('');
+            setwriterError('');
         }
 
         if (
-            author !== '' &&
+            writer !== '' &&
             password !== '' &&
             title !== '' &&
-            content !== ''
+            contents !== ''
         ) {
             setIsActive(true);
         }
@@ -47,10 +60,10 @@ const App = () => {
         }
 
         if (
-            author !== '' &&
+            writer !== '' &&
             password !== '' &&
             title !== '' &&
-            content !== ''
+            contents !== ''
         ) {
             setIsActive(true);
         }
@@ -58,6 +71,7 @@ const App = () => {
 
     let onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
+        console.log(event.target.value);
         if (event.target.value === '') {
             setTitleError('필수입력 사항 입니다');
         } else {
@@ -65,40 +79,62 @@ const App = () => {
         }
 
         if (
-            author !== '' &&
+            writer !== '' &&
             password !== '' &&
             title !== '' &&
-            content !== ''
+            contents !== ''
         ) {
             setIsActive(true);
         }
     };
 
-    let onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setContent(event.target.value);
+    let onChangecontens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setcontents(event.target.value);
         if (event.target.value === '') {
-            setContentError('필수입력 사항 입니다');
+            setcontentsError('필수입력 사항 입니다');
         } else {
-            setContentError('');
+            setcontentsError('');
         }
         if (
-            author !== '' &&
+            writer !== '' &&
             password !== '' &&
             title !== '' &&
-            content !== event.target.value
+            contents !== event.target.value
         ) {
             setIsActive(true);
         }
     };
 
-    let onClickSignup = () => {
+    const [나의함수] = useMutation(나의그래프큐엘셋팅);
+
+    // const 그래프큐엘저장하기 = async () => {
+    //     const result = await 나의함수({
+    //         variables: {
+    //             mywriter: writer,
+    //             mytile: title,
+    //             mycontenss: contens,
+    //         },
+    //     });
+    //     console.log(result);
+    // };
+
+    let onClickSignupSubmit = async () => {
+        const result = await 나의함수({
+            variables: {
+                mywriter: writer,
+                mytitle: title,
+                mycontents: contents,
+            },
+        });
+
         if (
-            author !== '' &&
+            writer !== '' &&
             password !== '' &&
             title !== '' &&
-            content !== ''
+            contents !== ''
         ) {
             alert('회원가입을 축하드려요');
+            console.log(result);
         } else {
             alert('필수항목을 입력해 주세요');
         }
@@ -130,7 +166,7 @@ const App = () => {
                     ></input>
                 </div>
                 <div className={styles.requiedmention}>
-                    <div>{authorError}</div>
+                    <div>{writerError}</div>
                     <div>{passwordError}</div>
                 </div>
                 <hr />
@@ -150,15 +186,15 @@ const App = () => {
 
                 <hr />
 
-                <div className={styles.contentbox}>
+                <div className={styles.contentsbox}>
                     <div>내용</div>
                     <textarea
                         placeholder="    &#13;&#10;   내용을 입력해 주세요"
-                        className={styles.contenttextarea}
-                        onChange={onChangeContent}
+                        className={styles.contentstextarea}
+                        onChange={onChangecontens}
                     ></textarea>
                     <div className={styles.requiedmention}>
-                        <div>{contentError}</div>
+                        <div>{contentsError}</div>
                     </div>
                 </div>
             </div>
@@ -201,18 +237,32 @@ const App = () => {
 
             <div className={styles.photoBox}>
                 <div>사진첨부</div>
-                <Image
-                    src="/assets/add_image.jpg"
-                    alt="add_image"
-                    width={100}
-                    height={100}
-                ></Image>
+                <div className={styles.imagebox}>
+                    <Image
+                        src="/assets/add_image.jpg"
+                        alt="add_image"
+                        width={200}
+                        height={200}
+                    ></Image>
+                    <Image
+                        src="/assets/add_image.jpg"
+                        alt="add_image"
+                        width={200}
+                        height={200}
+                    ></Image>
+                    <Image
+                        src="/assets/add_image.jpg"
+                        alt="add_image"
+                        width={200}
+                        height={200}
+                    ></Image>
+                </div>
             </div>
             <div className={styles.bottombuttonbox}>
                 <button className={styles.bottombuttoncancle}>취소</button>
                 <button
                     className={styles.bottombuttonregi}
-                    onClick={onClickSignup}
+                    onClick={onClickSignupSubmit}
                     style={{
                         backgroundColor:
                             isActive === true
@@ -225,6 +275,4 @@ const App = () => {
             </div>
         </div>
     );
-};
-
-export default App;
+}

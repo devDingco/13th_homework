@@ -52,11 +52,11 @@
     border-radius: 8px;
 }
 
-.contentbox {
+.contentsbox {
     padding: 40px 0;
 }
 
-.contenttextarea {
+.contentstextarea {
     width: 1280px;
     height: 336px;
     gap: 8px;
@@ -141,6 +141,12 @@
 
 .photoBox {
     padding: 40px 0;
+}
+
+.imagebox {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }
 
 .bottombuttonbox {
