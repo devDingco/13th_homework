@@ -18,7 +18,7 @@ export default function StarCountBox(props: IstarCountbox) {
     }
     if (!targetParent) return;
     targetParent.querySelectorAll("button").forEach((el, elIndex) => {
-      const icon = el.querySelector("svg");
+      const icon = el.querySelector("span");
       if (icon) {
         if (idx >= elIndex) {
           icon.classList.add("fill-yellow-500");
