@@ -47,8 +47,8 @@ const IMAGE_SRC = {
 export default function BoardsDetailPage() {
   const { detailId } = useParams();
   const 나의그래프큐엘셋팅 = gql`
-    query fetchBoard($detailId: ID!) {
-      fetchBoard(boardId: $detailId) {
+    query fetchBoard($boardId: ID!) {
+      fetchBoard(boardId: $boardId) {
         _id
         writer
         title
@@ -68,26 +68,27 @@ export default function BoardsDetailPage() {
     }
   `;
 
-  const { loading, error, data } = useQuery(나의그래프큐엘셋팅);
-  console.dir(data);
+  const { loading, error, data } = useQuery(나의그래프큐엘셋팅,
+    {variables:{boardId: detailId}}
+  );
+  console.dir(data?.fetchBoard);
 
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
         <div className={styles.detailFrame}>
-          <div className={styles.detailSubject}>
-            살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-            쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
-          </div>
+          <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
           <div className={styles.detailMetadataContainer}>
             <div className={styles.detailMetadataProfile}>
               <Image
                 src={IMAGE_SRC.profileImage.src}
                 alt={IMAGE_SRC.profileImage.alt}
               />
-              <div>홍길동</div>
+              <div>{data?.fetchBoard?.writer}</div>
             </div>
-            <div className={styles.detailMetadataDate}>2024.11.11</div>
+            <div className={styles.detailMetadataDate}>
+              {(data?.fetchBoard?.createdAt).slice(0, 10).replace(/-/g, '.')}
+            </div>
           </div>
           <div className={styles.enrollBorder}></div>
           <div className={styles.detailMetadataIconContainer}>
@@ -107,43 +108,8 @@ export default function BoardsDetailPage() {
               className={styles.detailContentImage}
             />
             <div className={styles.detailContentText}>
-              <div>살겠노라 살겠노라. 청산에 살겠노라.</div>
-              <div>머루랑 다래를 먹고 청산에 살겠노라.</div>
-              <div>얄리얄리 얄랑셩 얄라리 얄라</div>
+              <div>{data?.fetchBoard?.content}</div>
               <div className={styles.textGap}></div>
-              <div>우는구나 우는구나 새야. 자고 일어나 우는구나 새야.</div>
-              <div>너보다 시름 많은 나도 자고 일어나 우노라.</div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>
-                갈던 밭(사래) 갈던 밭 보았느냐. 물 아래(근처) 갈던 밭 보았느냐
-              </div>
-              <div>이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.</div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>이럭저럭 하여 낮일랑 지내 왔건만</div>
-              <div>올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.</div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>어디다 던지는 돌인가 누구를 맞히려던 돌인가.</div>
-              <div>미워할 이도 사랑할 이도 없이 맞아서 우노라.</div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>살겠노라 살겠노라. 바다에 살겠노라.</div>
-              <div>나문재, 굴, 조개를 먹고 바다에 살겠노라.</div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>가다가 가다가 듣노라. 에정지(미상) 가다가 듣노라.</div>
-              <div>
-                사슴(탈 쓴 광대)이 솟대에 올라서 해금을 켜는 것을 듣노라.
-              </div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
-              <div className={styles.textGap}></div>
-              <div>가다 보니 배불룩한 술독에 독한 술을 빚는구나.</div>
-              <div>
-                조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1]
-              </div>
-              <div>얄리얄리 얄라셩 얄라리 얄라</div>
             </div>
             <Image
               src={IMAGE_SRC.neotubeImage.src}
