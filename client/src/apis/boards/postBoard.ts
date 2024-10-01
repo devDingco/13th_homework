@@ -10,8 +10,9 @@ export default async function postBoard(data: ICreateFormBoard): Promise<IApiRes
 		if (response.data.statusCode === 201) {
 			return response.data.data;
 		}
+		return null;
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
-	return null;
 }

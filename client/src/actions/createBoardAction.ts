@@ -1,13 +1,14 @@
 /** @format */
 'use server';
+
+import { ICreateFormBoard } from '@/models/board.type';
 import { IFormStateError } from '@/models/formBoardError';
 import postBoard from '../apis/boards/postBoard';
-import { ICreateFormBoard } from '@/models/formBoard';
 
 export async function createBoardAction(
 	prevState: IFormStateError,
 	formData: FormData,
-): Promise<IFormStateError | void> {
+): Promise<IFormStateError> {
 	const required = '필수입력 사항입니다.';
 
 	const author = formData.get('Author');
@@ -27,26 +28,23 @@ export async function createBoardAction(
 			},
 		};
 	else {
-		try {
-			const data: ICreateFormBoard = {
-				author: author as string,
-				title: title as string,
-				content: content as string,
-				youtubeUrl: youtubeUrl as string | undefined,
-			};
+		const data: ICreateFormBoard = {
+			author: author as string,
+			title: title as string,
+			content: content as string,
+			youtubeUrl: youtubeUrl as string | undefined,
+		};
 
-			const responseData = await postBoard(data);
-			return {
-				data: responseData,
-				errors: {
-					author: undefined,
-					password: undefined,
-					title: undefined,
-					content: undefined,
-				},
-			};
-		} catch (error) {
-			console.error(error);
-		}
+		const responseData = await postBoard(data);
+
+		return {
+			data: responseData,
+			errors: {
+				author: undefined,
+				password: undefined,
+				title: undefined,
+				content: undefined,
+			},
+		};
 	}
 }
