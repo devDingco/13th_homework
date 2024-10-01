@@ -6,20 +6,22 @@ import ImageUploader from "../../../components/ImageUploader/ImageUploader";
 import Input from "../../../components/Input/Input";
 import styles from "./styles.module.css";
 import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
-    mutation createBoard($createBoardInput: CreateBoardInput!) {
-        createBoard(createBoardInput: $createBoardInput) {
-          _id
-          writer
-          title
-          contents
-          createdAt
-        }
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
     }
-`
+  }
+`;
 
 export default function BoardsNew() {
+  const router = useRouter();
   const [writer, setWriter] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -46,18 +48,24 @@ export default function BoardsNew() {
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const result = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: writer,
-          password: password,
-          title: title,
-          contents: contents
-      }
-      },
-    });
-    console.log(result);
+    try {
+      event.preventDefault();
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            password,
+            title,
+            contents,
+          },
+        },
+      });
+      const boardId = result.data.createBoard._id;
+      router.push(`/routes/boards/${boardId}`);
+    } catch (error) {
+      console.error(error);
+      alert("An error has occurred. Please try again.");
+    }
   };
 
   return (
