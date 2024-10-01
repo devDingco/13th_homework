@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 // import "../css/boardNew.css"; // boardNew.css 파일 경로
 import styles from "./styles.module.css";
 import Image from "next/image";
@@ -36,6 +37,8 @@ const CREATE_BOARD = gql`
 `;
 
 export default function BoardNew() {
+  const router = useRouter();
+
   // 작성자인풋, 작성자인풋에러
   const [name, setName] = React.useState("");
   const [nameError, setNameError] = React.useState("");
@@ -173,18 +176,24 @@ export default function BoardNew() {
     }
 
     // 제출 전 모든 부분이 만족해서 true인지 확인하고 alert을 띄울지 정하는 곳
-    if (isValid) {
-      alert("회원가입 완료됨");
 
-      const result = await 나의함수({
-        variables: {
-          writer: name,
-          password: password,
-          title: title,
-          contents: content,
-        },
-      });
-      console.log(result);
+    try {
+      if (isValid) {
+        alert("게시물 등록 완료됨");
+
+        const result = await 나의함수({
+          variables: {
+            writer: name,
+            password: password,
+            title: title,
+            contents: content,
+          },
+        });
+        console.log(result);
+        router.push(`/boards/${result.data.createBoard._id}`);
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 
