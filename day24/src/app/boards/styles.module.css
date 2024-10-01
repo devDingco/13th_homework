@@ -1,0 +1,69 @@
+.wrapper {
+	width: 1184px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.index {
+	display: flex;
+	padding: 16px 24px;
+	gap: 8px;
+}
+
+.index_text {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #1c1c1c;
+}
+
+.list {
+	display: flex;
+	border-radius: 8px;
+	border: 1px solid #f2f2f2;
+	padding: 12px 0px 12px 24px;
+	gap: 8px;
+}
+
+.list:hover .delete {
+	opacity: 1;
+}
+
+.delete {
+	opacity: 0;
+}
+.number {
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	color: #919191;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	color: #1c1c1c;
+}
+
+.writer {
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: cetner;
+	color: #333333;
+}
+
+.date {
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	color: #919191;
+}
