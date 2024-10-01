@@ -7,16 +7,6 @@
   --roboto: "Roboto";
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-  }
-}
-
-@media (prefers-color-scheme: dracula) {
-  :root {
-  }
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -30,23 +20,14 @@
   .mainContent {
     @apply max-w-7xl m-auto py-10 max-xl:max-w-full max-xl:mx-5 flex flex-col gap-10;
   }
-  .whiteBtn {
-    @apply bg-white text-black rounded-lg border-black border py-3 px-4 text-nowrap;
-  }
-  .blackBtn {
-    @apply bg-black text-white rounded-lg border-inherit border py-3 px-4 text-nowrap;
-  }
-  .blueBtn {
-    @apply bg-blue-500 text-white rounded-lg border-inherit border py-3 px-4 text-nowrap;
-  }
 
-  .grayBtn {
-    @apply bg-gray-300 text-white rounded-lg border-inherit border py-3 px-4 text-nowrap;
-  }
   .imgUploadBox {
     @apply appearance-none bg-gray-50 flex flex-col items-center justify-center rounded-lg w-40 h-40 gap-2 text-gray-500 font-light cursor-pointer;
   }
 
+  svg {
+    @apply fill-current w-full h-full overflow-hidden;
+  }
   svg > path {
     @apply fill-inherit;
   }
@@ -76,6 +57,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  color: var(--accent-content);
 }
 
 .blind {
