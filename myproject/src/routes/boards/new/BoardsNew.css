@@ -1,0 +1,228 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.전체창 {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px;
+  gap: 40px;
+}
+
+header {
+  width: 100%;
+  height: 28px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+main {
+  width: 100%;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.메인첫번째박스 {
+  width: 100%;
+  gap: 40px;
+  display: flex;
+}
+.작성자박스 {
+  width: 620px;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+}
+#작성자인풋 {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+}
+
+.비밀번호박스 {
+  width: 620px;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+#비밀번호인풋 {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+}
+.제목박스 {
+  width: 100%;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+#제목인풋 {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+}
+.내용박스 {
+  width: 100%;
+  height: 368px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+#내용인풋 {
+  height: 336px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+  resize: none;
+}
+.주소박스 {
+  width: 100%;
+  height: 192px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.우편번호전체박스 {
+  width: 220px;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.우편번호창 {
+  width: 100%;
+  height: 48px;
+  gap: 8px;
+  display: flex;
+}
+#우편번호인풋 {
+  width: 82px;
+  /* height: 48px; */
+  border-radius: 8px;
+  color: #ffffff;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+}
+.우편번호검색 {
+  width: 130px;
+  /* height: 48px; */
+  border-radius: 8px;
+  /* color: #ffffff; */
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  gap: 8px;
+}
+.주소입력인풋 {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+}
+.상세주소입력인풋 {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px;
+  padding: 12px 16px;
+  /* color: #ffffff; */
+  border: 1px solid #d4d3d3;
+}
+.유튜브링크박스 {
+  width: 100%;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+#유튜브링크인풋 {
+  height: 48px;
+  gap: 8px;
+}
+.사진첨부여섯번째박스 {
+  width: 100%;
+  height: 192px;
+  gap: 8px;
+}
+#사진업로드전체박스 {
+  width: 512px;
+  height: 160px;
+  gap: 16px;
+  display: flex;
+}
+.사진박스 {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  gap: 8px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #777777;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+span {
+  color: red;
+}
+.푸터전체박스1 {
+  width: 100%;
+  height: 48px;
+  gap: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.푸터취소 {
+  width: 64px;
+  height: 48px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 12px 16px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+}
+.푸터등록하기 {
+  width: 95px;
+  height: 48px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  gap: 8px;
+  background-color: #2974e5;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+}
+.에러메시지 {
+  color: red;
+}
+.영상사진박스 {
+  background-color: #f2f2f2;
+}
