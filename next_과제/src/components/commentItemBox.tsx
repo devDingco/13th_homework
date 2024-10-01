@@ -84,11 +84,11 @@ export default function CommentItemBox(props: IcommentItemBox) {
             )}
           </div>
           <div className="flex gap-2">
-            <button className="h-5 w-5" onClick={() => setMode("edit")}>
-              <Icon icon="edit" />
+            <button onClick={() => setMode("edit")}>
+              <Icon icon="edit" className="w-6 h-6" />
             </button>
-            <button className="h-5 w-5" onClick={() => commentDelete()}>
-              <Icon icon="close" />
+            <button onClick={() => commentDelete()}>
+              <Icon icon="close" className="w-6 h-6" />
             </button>
           </div>
         </div>

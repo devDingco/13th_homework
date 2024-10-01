@@ -54,9 +54,11 @@ export default function BoardDetail() {
         <div>
           <div className="flex justify-between text-sm text-gray-400">
             <div className="flex items-center gap-1 text-gray-700">
-              <span className="bg-gray-300 rounded-full w-6 h-6">
-                <Icon icon="mypage" className="fill-gray-500 w-fit" />
-              </span>
+              <Icon
+                icon="mypage"
+                className="bg-gray-300 rounded-full w-6 h-6"
+              />
+
               {detailData?.writer}
             </div>
             <div>
@@ -65,12 +67,8 @@ export default function BoardDetail() {
           </div>
           <hr className="my-4" />
           <div className="flex gap-2 justify-end">
-            <span className="w-6 h-6">
-              <Icon icon="link" className="fill-gray-800 w-fit" />
-            </span>
-            <span className="w-6 h-6">
-              <Icon icon="location" className="fill-gray-800 w-fit" />
-            </span>
+            <Icon icon="link" className="fill-gray-800 w-6 h-6" />
+            <Icon icon="location" className="fill-gray-800 w-6 h-6" />
           </div>
         </div>
         {detailData?.youtubeUrl && (
@@ -117,18 +115,14 @@ export default function BoardDetail() {
 
         <div className="flex gap-6 justify-center">
           <Link className="btn btn-outline" href={`/board/list`}>
-            <div className="w-6 h-6">
-              <Icon icon="menu" className="fill-current w-fit" />
-            </div>
+            <Icon icon="menu" className="fill-current w-6 h-6" />
             목록으로
           </Link>
           <Link
             className="btn btn-outline"
             href={`/board/edit/${params.boardId}`}
           >
-            <div className="w-6 h-6">
-              <Icon icon="edit" className="fill-current w-fit" />
-            </div>
+            <Icon icon="edit" className="fill-current w-6 h-6" />
             수정하기
           </Link>
         </div>

@@ -25,13 +25,16 @@ export default function CommentBox(props: ICommentBox) {
   } = props;
   const [textCount, setTextCount] = useState(defaultValue.length);
 
+  // 댓글 등록
+  const commentSave = () => {
+    console.log("commentSave");
+  };
+
   return (
     <div className="flex flex-col gap-6">
       {type === "commentWrite" && (
         <div className="flex gap-2">
-          <span className="w-6 h-6">
-            <Icon icon="chat" className="fill-current w-fit" />
-          </span>
+          <Icon icon="chat" className="w-6 h-6" />
           {title}
         </div>
       )}
@@ -44,14 +47,19 @@ export default function CommentBox(props: ICommentBox) {
           onChange={(e) => setTextCount(e.target.value.length)}
           maxLength={textMaxCount}
           minLength={1}
-          defaultValue={defaultValue} // ! 수정할 댓글 내용
+          defaultValue={defaultValue} // ! 수정할 댓글 내용 및 댓글 작성시 초기값 설정
         ></textarea>
         <div className="absolute bottom-3 right-4">
           {textCount}/{textMaxCount}
         </div>
       </label>
       {type === "commentWrite" && (
-        <button className="btn btn-neutral self-end">댓글 등록</button>
+        <button
+          className="btn btn-neutral self-end"
+          onClick={() => commentSave()}
+        >
+          댓글 등록
+        </button>
       )}
     </div>
   );
