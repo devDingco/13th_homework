@@ -187,7 +187,6 @@ mutation createBoard(
             })
             alert("게시글 등록 완료")
             console.log(result.data.createBoard._id)
-            // router.push(`/routes/boards/${result.data.createBoard._id}`)
             router.push("../../../boards")
           }
         } catch {

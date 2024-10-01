@@ -30,7 +30,7 @@ export default function BoardsDetail () {
       
     return (
         <div className={styles.css_layout}>
-            <div className={styles.css_header}>{data?.fetchBoard?.title}</div>                   
+            <div className={styles.css_header}>{data?.fetchBoard.title}</div>                   
                 <div className={styles.css_info}>
                     <div className={styles.css_user}>
                         
