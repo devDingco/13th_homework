@@ -1,0 +1,17 @@
+.loginWrap {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+}
+
+.loginBox {
+  display: flex;
+  justify-content: center;
+}
+
+.loginBg {
+  height: 100vh;
+  background-image: url("../../../public/images/loginBg.png");
+  background-size: cover;
+}
