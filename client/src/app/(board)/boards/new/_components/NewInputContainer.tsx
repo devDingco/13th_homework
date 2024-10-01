@@ -1,16 +1,17 @@
 /** @format */
 
-import { ENewTitleProps, ITitle } from '@/models/newTitle';
+import { ENewTitleProps, ITitle } from '@/models/board.type';
+
 import NewInput from './NewInput';
 
-export default function NewInputContainer({ title, error, onChangeValue }: ITitle) {
+export default function NewInputContainer({ title, error }: ITitle) {
 	return (
 		<div className="prose-me_16_24 flex flex-1 flex-col gap-2">
 			<div className="flex gap-1">
 				<div className="text-gray-800">{ENewTitleProps[title]}</div>
 				{title !== 'YoutubeUrl' && <div className="text-red-400">*</div>}
 			</div>
-			<NewInput title={title} onChangeValue={onChangeValue} />
+			<NewInput title={title} />
 
 			<div className="text-red-400">{error}</div>
 

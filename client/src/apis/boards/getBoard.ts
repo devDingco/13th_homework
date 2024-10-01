@@ -1,9 +1,8 @@
 /** @format */
 
 import { IApiResponseData } from '@/models/apiResponse';
-import { api } from '../config';
 import { IBoardReader } from '@/models/boardReaderResponse';
-//
+import { api } from '../config';
 
 export default function getBoard(boardId: number): IBoardReader {
 	let status = 'pending';

@@ -11,3 +11,9 @@ export interface IBoardListProps extends IProps {
 export interface IModalProps {
 	searchParams: { modal: number };
 }
+
+export interface IDeatilPageProps {
+	params: {
+		boardId: string;
+	};
+}

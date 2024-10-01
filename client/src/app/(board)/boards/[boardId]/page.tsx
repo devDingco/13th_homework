@@ -1,14 +1,14 @@
 /** @format */
 
-import { Suspense } from 'react';
-import BoardFooter from './_components/BoardFooter';
 import BoardContainer from './_components/BoardContainer';
-import getBoard from '@/apis/boards/getBoard';
-import { IDeatilPageProps } from '@/models/detailPageProps';
+import BoardFooter from './_components/BoardFooter';
 import BoardLikeHate from './_components/BoardLikeHate';
-import getReaction from '@/apis/boards/reaction/getReaction';
 import BoardSkeleton from './_components/BoardSkeleton';
 import BoardSkeletonReaction from './_components/BoardSkeletonReaction';
+import { IDeatilPageProps } from '@/models/children.type';
+import { Suspense } from 'react';
+import getBoard from '@/apis/boards/getBoard';
+import getReaction from '@/apis/boards/reaction/getReaction';
 
 export default function Detail({ params }: IDeatilPageProps) {
 	const param = params.boardId;

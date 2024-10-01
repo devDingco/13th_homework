@@ -3,10 +3,13 @@
 export enum EButtonTitle {
 	sumbit = 'sumbit',
 	cancel = 'cancel',
+	delete = 'delete',
+	back = 'back',
 }
 
 export interface IButtonProps extends IButtonDisabled {
 	title: EButtonTitle;
+	onClickBack?: () => void;
 }
 
 export interface IButtonDisabled {
@@ -16,4 +19,17 @@ export interface IButtonDisabled {
 export enum EButtonKorea {
 	sumbit = '작성하기',
 	cancel = '취소',
+	delete = '삭제 하기',
+	back = '뒤로 가기',
+	list = '목록으로',
+	update = '수정하기',
+}
+
+export enum EBoardButton {
+	list = 'list',
+	update = 'update',
+}
+
+export interface IBoardButton {
+	content: EBoardButton;
 }

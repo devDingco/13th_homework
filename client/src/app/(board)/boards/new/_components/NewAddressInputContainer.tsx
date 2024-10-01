@@ -1,6 +1,7 @@
 /** @format */
 
-import { ETitle, ITitle } from '@/models/newTitle';
+import { ETitle, ITitle } from '@/models/board.type';
+
 import NewInput from './NewInput';
 
 export default function NewAddressInputContainer({ title }: ITitle) {

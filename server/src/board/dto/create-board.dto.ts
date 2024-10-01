@@ -5,7 +5,6 @@ import {
     IsNotEmpty,
     IsOptional,
     IsString,
-    Length,
 } from 'class-validator';
 import { Column } from 'typeorm';
 
@@ -14,7 +13,6 @@ import { Column } from 'typeorm';
 export class CreateBoardDto {
     @IsString()
     @IsNotEmpty()
-    @Length(3, 4)
     @Column()
     @Field()
     author: string;

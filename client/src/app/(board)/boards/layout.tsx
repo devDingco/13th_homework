@@ -1,5 +1,5 @@
 /** @format */
-import { IBoardListProps } from '@/models/children';
+import { IBoardListProps } from '@/models/children.type';
 
 export default function Layout({ children, modal }: IBoardListProps) {
 	return (

@@ -1,7 +1,7 @@
 /** @format */
 
 import { IApiResponseData } from './apiResponse';
-import { IReaction } from './boardType';
+import { IReaction } from './board.type';
 
 export type IBoardResponse = IApiResponseData | Promise<IApiResponseData> | undefined;
 

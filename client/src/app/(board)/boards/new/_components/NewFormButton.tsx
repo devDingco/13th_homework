@@ -1,7 +1,7 @@
 /** @format */
 'use client';
 
-import { IButtonDisabled } from '@/models/formButton';
+import { IButtonDisabled } from '@/models/button.type';
 
 export default function NewFormButton({ isButtonDisabled }: IButtonDisabled) {
 	return (

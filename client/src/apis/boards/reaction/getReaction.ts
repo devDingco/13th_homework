@@ -1,9 +1,8 @@
 /** @format */
 
-import { api } from '../../config';
+import { IReaction } from '@/models/board.type';
 import { IReactionReader } from '@/models/boardReaderResponse';
-import { IReaction } from '@/models/boardType';
-//
+import { api } from '../../config';
 
 export default function getReaction(boardId: number): IReactionReader {
 	let status = 'pending';

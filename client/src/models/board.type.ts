@@ -1,7 +1,5 @@
 /** @format */
 
-import { IInputValueParameter } from './inputValueParameter';
-
 export enum ETitle {
 	Author = 'Author',
 	Password = 'Password',
@@ -35,5 +33,31 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 export interface ITitle {
 	title: ETitle;
 	error?: string;
-	onChangeValue?: ({ name, value }: IInputValueParameter) => void;
+}
+export interface ICreateFormBoard {
+	author: string;
+	title: string;
+	content: string;
+	youtubeUrl?: string;
+	imageUrl?: string[];
+}
+
+export interface IBoardType extends IReaction, ICreateFormBoard {
+	boardId: number;
+	createdAt: string;
+	updatedAt?: string;
+}
+
+export interface IReaction {
+	like: number;
+	hate: number;
+}
+
+export interface IBoardItem {
+	key: number;
+	board: IBoardType;
+}
+
+export interface IBoardProps {
+	infor?: IBoardType;
 }
