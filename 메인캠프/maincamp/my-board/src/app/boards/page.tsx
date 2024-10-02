@@ -67,7 +67,7 @@ export default function BoardsList() {
           <div
             key={el._id}
             onClick={() => moveToDetailPage(el._id)}
-            className="flex justify-between items-center py-4 px-6 border border-solid rounded-md border-gray-200 hover:shadow-md transition-shadow"
+            className="flex justify-between items-center py-4 px-6 border border-solid rounded-md border-gray-200 hover:shadow-md transition-shadow group"
           >
             <div className="flex items-center">
               <span className="w-10 text-center text-gray-400 font-semibold">
@@ -81,7 +81,7 @@ export default function BoardsList() {
               <span className="text-gray-600 text-left">{el.writer}</span>
               <span className="text-gray-400">{el.createdAt.slice(0, 10)}</span>
               <button
-                className="flex items-center justify-center group"
+                className="flex items-center justify-center invisible group-hover:visible transition-opacity"
                 onClick={(e) => deleteBoardFunc(el._id, e)}
               >
                 <Image
@@ -89,7 +89,7 @@ export default function BoardsList() {
                   width={20}
                   height={20}
                   alt="삭제"
-                  className="cursor-pointer group-hover:opacity-75 transition-opacity"
+                  className="cursor-pointer group-hover:opacity-75"
                 />
               </button>
             </div>
