@@ -12,7 +12,7 @@ import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
 import { useMutation, gql } from '@apollo/client';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -25,18 +25,42 @@ const CREATE_BOARD = gql`
     }
   }
 `;
+const UPDATE_BOARD = gql`
+  mutation updateBoard(
+    $updateBoardInput: UpdateBoardInput!
+    $password: String
+    $boardId: ID!
+  ) {
+    updateBoard(
+      updateBoardInput: $updateBoardInput
+      password: $password
+      boardId: $boardId
+    ) {
+      writer
+      youtubeUrl
+      deletedAt
+    }
+  }
+`;
 
-const AddPostsForm = () => {
+export default function PostsForm({
+  type,
+  contents,
+  title,
+  writer,
+}: PostFormType) {
   const routes = useRouter();
+  const params = useParams();
+
   const [postData, setPostData] = useState<PostsType>({
-    username: '',
-    userpw: '',
-    userTitle: '',
-    usercontent: '',
-    userAdress: null,
-    userAdressDetail: null,
-    userAdressNum: null,
-    youtubeLink: null,
+    username: writer || '',
+    userpw: writer ? '임시비밀번호' : '',
+    userTitle: title || '',
+    usercontent: contents || '',
+    userAdressNum: '',
+    userAdress: '',
+    userAdressDetail: '',
+    youtubeLink: '',
   });
 
   const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
@@ -48,6 +72,7 @@ const AddPostsForm = () => {
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onPostFormChange = (
     name: string,
@@ -63,22 +88,39 @@ const AddPostsForm = () => {
 
   const onAdressNumButtonClick = () => {};
 
-  const onAddPostsButton = async (e: FormEvent<HTMLFormElement>) => {
+  const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data } = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: postData.username,
-            password: postData.userpw,
-            title: postData.userTitle,
-            contents: postData.usercontent,
+      if (type === 'ADD') {
+        const { data } = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: postData.username,
+              password: postData.userpw,
+              title: postData.userTitle,
+              contents: postData.usercontent,
+            },
           },
-        },
-      });
-      routes.push(`/boards/detail/${data.createBoard._id}`);
-    } catch (err) {
-      alert(`에러가 발생했습니다. ${err}`);
+        });
+        routes.push(`/boards/${data.createBoard._id}`);
+      } else if (type === 'EDIT') {
+        const newPw = prompt('비밀번호를 입력하세요');
+        const { data } = await updateBoard({
+          variables: {
+            updateBoardInput: {
+              title: postData.userTitle,
+              contents: postData.usercontent,
+            },
+            password: newPw,
+            boardId: params.postId,
+          },
+        });
+        routes.push(`/boards/${params.postId}`);
+      }
+    } catch (err: any) {
+      // alert(err.graphQLErrors);
+      console.log(err.graphQLErrors);
+      alert(err.graphQLErrors[0].message);
     }
   };
 
@@ -94,36 +136,41 @@ const AddPostsForm = () => {
       };
     });
 
-    postData.username ??
-    postData.userpw ??
-    postData.userTitle ??
+    postData.username &&
+    postData.userpw &&
+    postData.userTitle &&
     postData.usercontent
       ? setSubmitButtonDisabled(false)
       : setSubmitButtonDisabled(true);
   }, [postData]);
 
   return (
-    <form className={s.formS} onSubmit={(event) => onAddPostsButton(event)}>
+    <form className={s.formS} onSubmit={(event) => onPostsButtonClick(event)}>
       <div className={s.flexBox}>
         <Input
+          value={postData.username}
           type="text"
           placeholder="작성자 명을 입력해 주세요"
           label="작성자"
           id="username"
           required={requiredMessage}
+          disabled={type === 'EDIT' ? true : false}
           onChangeFnc={onPostFormChange}
         />
         <Input
+          value={postData.userpw}
           type="password"
           placeholder="비밀번호를 입력해 주세요"
           label="비밀번호"
           id="userpw"
+          disabled={type === 'EDIT' ? true : false}
           required={requiredMessage}
           onChangeFnc={onPostFormChange}
         />
       </div>
       <div className={s.lineBox}></div>
       <Input
+        value={postData.userTitle}
         type="text"
         placeholder="제목을 입력해 주세요"
         label="제목"
@@ -133,6 +180,7 @@ const AddPostsForm = () => {
       />
       <div className={s.lineBox}></div>
       <Textarea
+        value={postData.usercontent}
         placeholder="내용을 입력해주세요."
         label="내용"
         id="usercontent"
@@ -142,6 +190,7 @@ const AddPostsForm = () => {
       <div className={s.columnBox}>
         <div className={s.flexBox}>
           <Input
+            value={postData.userAdress}
             type="text"
             maxLength={5}
             placeholder="01234"
@@ -158,12 +207,14 @@ const AddPostsForm = () => {
           </Button>
         </div>
         <Input
+          value={postData.userAdressDetail}
           type="text"
           placeholder="주소를 입력해 주세요."
           id="userAdress"
           onChangeFnc={onPostFormChange}
         />
         <Input
+          value={postData.userAdressNum}
           type="text"
           placeholder="상세주소"
           id="userAdressDetail"
@@ -171,6 +222,7 @@ const AddPostsForm = () => {
         />
       </div>
       <Input
+        value={postData.youtubeLink}
         label="유튜브링크"
         type="text"
         placeholder="링크를 입력해 주세요."
@@ -179,6 +231,7 @@ const AddPostsForm = () => {
       />
       <div className={s.flexBox}>
         <Input
+          // value={postData.}
           label="사진 첨부"
           type="file"
           placeholder="클릭해서 사진 업로드"
@@ -186,12 +239,14 @@ const AddPostsForm = () => {
           onChangeFnc={onPostFormChange}
         />
         <Input
+          // value={postData.}
           type="file"
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
           onChangeFnc={onPostFormChange}
         />
         <Input
+          // value={postData.}
           type="file"
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
@@ -203,11 +258,9 @@ const AddPostsForm = () => {
           취소
         </Button>
         <Button type="submit" style="primary" disabled={submitButtonDisabled}>
-          등록하기
+          {type === 'ADD' ? '등록하기' : '수정하기'}
         </Button>
       </div>
     </form>
   );
-};
-
-export default AddPostsForm;
+}

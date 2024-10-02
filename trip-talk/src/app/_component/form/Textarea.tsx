@@ -22,6 +22,7 @@ const Textarea = ({ ...props }: InputPropsType) => {
         className={s.textareaS}
         placeholder={props.placeholder}
         onChange={(e) => props.onChangeFnc(props.id, e)}
+        value={props.value}
       />
       <p className="text-[#f00]">
         {props.required && props.required[props.id]}

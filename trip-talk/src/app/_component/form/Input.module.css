@@ -11,5 +11,5 @@
   flex-grow: 1;
   border-radius: 8px;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
-  background: var(--Gray-W, #fff);
+  /* background: var(--Gray-W, #fff); */
 }

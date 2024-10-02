@@ -22,6 +22,7 @@ const Button = ({ children, ...props }: ButtonPropsType) => {
         className={`${s.buttonS} ${
           props.disabled ? buttonConfig.disabled : buttonConfig[props.style]
         }`}
+        onClick={props.onClickFnc}
         type={props.type}
         disabled={props.disabled}>
         {children}

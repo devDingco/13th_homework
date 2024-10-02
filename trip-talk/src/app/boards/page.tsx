@@ -36,9 +36,8 @@ function BoardsList() {
   };
 
   const onClickDetailBoard = (id: string) => {
-    router.push(`/boards/detail/${id}`);
+    router.push(`/boards/${id}`);
   };
-  console.log(data);
 
   return (
     <div className="w-full h-full flex flex-col gap-y-3 min-w-[680px] px-12 py-6 m-10 rounded-2xl shadow-[0px_0px_20px_0px_#00000014]">

@@ -14,7 +14,7 @@ import MockImg2 from '@/../public/images/mockImg2.svg';
 import Button from '@/app/_component/form/Button';
 import s from './PostDetail.module.css';
 import dateFormatter from '@/app/_commons/formatter/dateFormat';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
 
 const FETCH_BOARD = gql`
@@ -33,6 +33,7 @@ const PostDetail = () => {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: params },
   });
+  const router = useRouter();
 
   return (
     <>
@@ -91,7 +92,9 @@ const PostDetail = () => {
               <Image src={ListIcon} alt="" width={0} height={0} />
               목록으로
             </Button>
-            <Button style="default">
+            <Button
+              style="default"
+              onClickFnc={() => router.push(`/boards/${params}/edit`)}>
               <Image src={EditIcon} alt="" width={0} height={0} />
               수정하기
             </Button>

@@ -19,6 +19,7 @@ const inputConfig = {
   small: 'w-[90px]',
   medium: 'px-4 py-3',
   large: 'px-4 py-3',
+  disabled: 'bg-gray/100 text-white',
 };
 
 const Input = <
@@ -36,12 +37,16 @@ const Input = <
         {props.required && <b className={`text-[#f00]`}>*</b>}
       </span>
       <input
-        className={`${s.inputS} ${props.size && inputConfig[props.size]}`}
+        className={`${s.inputS} ${props.size && inputConfig[props.size]} ${
+          props.disabled && inputConfig['disabled']
+        }`}
         type={props.type}
         id={props.id}
         maxLength={props.maxLength}
         placeholder={props.placeholder}
         onChange={(e) => props.onChangeFnc(props.id, e)}
+        value={props.value}
+        disabled={props.disabled}
       />
       <p className="text-[#f00]">
         {props.required && props.required[props.id]}
