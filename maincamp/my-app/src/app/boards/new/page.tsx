@@ -15,6 +15,24 @@ import { NewButton } from "@/components/NewButton"
 import { gql, useMutation } from "@apollo/client"
 import { useRouter } from "next/navigation"
 
+const boardGraphql = gql`
+  mutation createBoard($createBoardInput:CreateBoardInput!){
+    createBoard(createBoardInput:$createBoardInput){
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      images
+      boardAddress{
+        zipcode
+        address
+        addressDetail
+      }
+    }
+  }
+`;
+
 const BoardsNew = () => {
 
   const [name, setName] = useState("")
@@ -32,48 +50,6 @@ const BoardsNew = () => {
   const [isActive, setIsActive] = useState(false)
 
   const router = useRouter();
-
-  // 리팩토링 전
-  // const onChangeName = (event) => {
-  //   setName(event.target.value)
-
-  //   if(event.target.value !== "" && password !== "" && title !== "" && subject !== ""){
-  //     setIsActive(true)
-  //   }
-  //   else{
-  //     setIsActive(false)
-  //   }
-  // }
-  // const onChangePassword = (event) => {
-  //   setPassword(event.target.value)
-
-  //   if(name !== "" && event.target.value !== "" && title !== "" && subject !== ""){
-  //     setIsActive(true)
-  //   }
-  //   else{
-  //     setIsActive(false)
-  //   }
-  // }
-  // const onChangeTitle = (event) => {
-  //   setTitle(event.target.value)
-
-  //   if(name !== "" && password !== "" && event.target.value !== "" && subject !== ""){
-  //     setIsActive(true)
-  //   }
-  //   else{
-  //     setIsActive(false)
-  //   }
-  // }
-  // const onChangeSubject = (event) => {
-  //   setSubject(event.target.value)
-
-  //   if(name !== "" && password !== "" && title !== "" && event.target.value !== ""){
-  //     setIsActive(true)
-  //   }
-  //   else{
-  //     setIsActive(false)
-  //   }
-  // }
 
   // 리팩토링 후 early-exit 패턴
   const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
@@ -101,32 +77,21 @@ const BoardsNew = () => {
     setIsActive(false)
   }
 
-  const boardGraphql = gql`
-  mutation createBoard(
-      $boardwriter:String
-      $boardtitle:String
-      $boardcontents:String
-    ){
-      createBoard(writer:$boardwriter, title:$boardtitle, contents:$boardcontents){
-        _id
-        number
-        message
-      }  
-    }
-  `
-
   // GraphQL
-  const [boardRegister] = useMutation(boardGraphql);
+  const [createBoard] = useMutation(boardGraphql);
 
   let registerError = false;
 
   const register = async (event:MouseEvent<HTMLButtonElement>) => {
     try{
-      const result = await boardRegister({
+      const result = await createBoard({
         variables: {
-          boardwriter: name,
-          boardtitle: title,
-          boardcontents: subject,
+          createBoardInput:{
+            writer: name,
+            password: password,
+            title: title,
+            contents: subject
+          }
         },
       })
 
