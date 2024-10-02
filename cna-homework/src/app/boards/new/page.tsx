@@ -4,10 +4,11 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput:$createBoardInput) {
+    createBoard(createBoardInput: $createBoardInput) {
       _id
       title
       writer
@@ -18,7 +19,10 @@ const CREATE_BOARD = gql`
 
 const BoardsNewPage = () => {
   // graphql
-  const [myFunction] = useMutation(CREATE_BOARD);
+  const [createBoard] = useMutation(CREATE_BOARD);
+
+  // router
+  const router = useRouter();
 
   // state
   const [writer, setWriter] = useState("");
@@ -83,21 +87,27 @@ const BoardsNewPage = () => {
       setErrorContent("");
     }
     if (writer !== "" && pw !== "" && title !== "" && content !== "") {
-      alert("게시글 등록이 가능한 상태입니다!");
+      // alert("게시글 등록이 가능한 상태입니다!");
+      console.log("게시글등록가능");
     }
 
     // 클릭시 게시글등록
-    const result = await myFunction({
-      variables: {
-        createBoardInput: {
-          title: title,
-          writer: writer,
-          contents: content,
-          password: pw,
+    try {
+      const { data } = await createBoard({
+        variables: {
+          createBoardInput: {
+            title: title,
+            writer: writer,
+            contents: content,
+            password: pw,
+          },
         },
-      },
-    });
-    console.log("--", result);
+      });
+      router.push(`/boards/${data.createBoard._id}`);
+    } catch (error) {
+      console.log(error);
+      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+    }
   };
 
   // 이미지 업로드 시 미리보기 input의 onChange
