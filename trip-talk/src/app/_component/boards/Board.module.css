@@ -1,0 +1,20 @@
+.boardContainer {
+  display: flex;
+  padding: 12px 24px;
+  gap: 9px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.boardContainer > button {
+  /* width: 0; */
+  right: 0;
+  opacity: 0;
+}
+.boardContainer:hover > button {
+  opacity: 1;
+}
+
+.boardItems {
+  min-width: 100px;
+  text-align: center;
+}
