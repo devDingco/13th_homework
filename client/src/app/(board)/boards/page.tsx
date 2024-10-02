@@ -13,6 +13,7 @@ export default function boardPage() {
 				<div className="flex w-28 items-center justify-center">작성자</div>
 				<div className="flex w-32 items-center justify-center">날짜</div>
 			</div>
+
 			<Suspense fallback={<BoardLoading />}>
 				<BoardItemContainer />
 			</Suspense>
