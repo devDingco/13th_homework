@@ -1,6 +1,6 @@
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
-export default function BoardsHeader () {
+export default function BoardsHeader() {
   return (
     <>
       <div className={styles.boards_header}>
@@ -10,5 +10,5 @@ export default function BoardsHeader () {
         <span className={styles.boards_header_createdAt}>날짜</span>
       </div>
     </>
-  )
+  );
 }

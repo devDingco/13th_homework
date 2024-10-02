@@ -15,16 +15,16 @@
 
 .required_marker {
   @apply text-base font-medium;
-  color: #F66A6A;
+  color: #f66a6a;
 }
 
 .input {
   @apply h-12 py-3 px-4 rounded-lg text-base font-normal border border-solid outline-none bg-white w-full;
-  border-color: #D4D3D3;
+  border-color: #d4d3d3;
 }
 
 .input::placeholder {
-  color: #ABABAB;
+  color: #ababab;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -35,6 +35,6 @@
 }
 
 /* Firefox  */
-.input[type='number'] {
+.input[type="number"] {
   -moz-appearance: textfield;
 }

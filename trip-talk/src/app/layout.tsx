@@ -20,7 +20,9 @@ export default function RootLayout({
         <title>trip-talk</title>
       </head>
       <body>
-        <div id="root"><ApolloSetting>{children}</ApolloSetting></div>
+        <div id="root">
+          <ApolloSetting>{children}</ApolloSetting>
+        </div>
       </body>
     </html>
   );
