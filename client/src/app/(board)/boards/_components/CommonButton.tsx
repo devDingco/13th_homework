@@ -4,12 +4,11 @@
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
 import deleteBoard from '@/apis/boards/deleteBoard';
-import fetcher from '@/libs/fetcher';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
 
 export default function CommonButton({ title, isButtonDisabled, boardId }: IButtonProps) {
-	const { data, mutate } = useSWR('/board', fetcher);
+	const { data, mutate } = useSWR('/board', null);
 
 	const onClickBack = useOnClickBack();
 	const onClickButtonCondition = async (
