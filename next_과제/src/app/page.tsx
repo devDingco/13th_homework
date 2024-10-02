@@ -4,14 +4,11 @@ import CardBox from "@/components/cardBox";
 import MainSlide from "@/components/mainSlide";
 import SearchBox from "@/components/searchBox";
 import Icon from "@/components/iconFactory";
-import BoardList from "@/app/board/list/[pageNum]/page";
-import { useRouter } from "next/navigation";
+import BoardsPage from "@/app/boards/page";
 import Headers from "@/components/header";
 import Link from "next/link";
 
 export default function Home() {
-  const router = useRouter();
-
   const cardData = [
     {
       img: "/images/img-0.png",
@@ -69,14 +66,14 @@ export default function Home() {
           <div className="flex gap-4 justify-between flex-wrap">
             <SearchBox />
             <Link
-              href="/board/write"
+              href="/boards/new"
               className="btn btn-primary text-white max-sm:fixedBtn"
             >
               <Icon icon="rwite" className="w-6 h-6 fill-white" />
               트립토크 등록
             </Link>
           </div>
-          <BoardList />
+          <BoardsPage />
         </div>
       </div>
       {/* {error ? (
