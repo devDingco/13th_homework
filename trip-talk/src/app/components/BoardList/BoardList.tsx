@@ -21,7 +21,7 @@ export default function BoardList(props: IBoardList) {
     router.push(`/routes/boards/${id}`)
   }
 
-  const onCLickDelete = (event: MouseEvent) => {
+  const onCLickDelete = (event: React.MouseEvent) => {
     event.stopPropagation()
     deleteBoard({
       variables: {
