@@ -1,50 +1,51 @@
 "use client"
 import React from 'react'
 import styles from './style.module.css'
-// import List from '../component/commons/ListInput';
-import { useParams } from 'next/navigation';
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image'
 
 
-const FetchBoard = gql`
-  query fetchBoard($myboardId: ID!) {
-    fetchBoard(boardId: $myboardId) {
-      writer
-      title
-      contents
-      createdAt
-    }
+
+const FetchBoards = gql `
+query {
+  fetchBoards {
+    writer
+    contents
+    title
+    createdAt
+    _id
   }
-`;
-
-interface Props {
-    name: string,
-    title: string,
 }
+`
 
-function List({title, name} : Props) {
-    return (
-        <>
-        <div className={styles.css_yourboard}>
-            <div className={styles.css_boardnum}></div>
-            <div className={styles.css_boardtitle}>{title}</div>
-            <div className={styles.css_boardwriter}>{name}</div>
-            <div className={styles.css_boarddate}></div>
-        </div>
-        </>
-    )
+const DeleteBoard = gql`
+    mutation deleteBoard($boardId: ID!){
+        deleteBoard(boardId: $boardId) 
 }
-
+`
 export default function ListPage() {
-    const params = useParams();
-    const { data } = useQuery(FetchBoard, {
-        variables: {
-        myboardId: params.boardId,
-        },
-    });
+
+
+    const { data } = useQuery(FetchBoards)
     console.log(data)
-    const t = data?.fetchBoard.title
-    console.log(t)
+
+    const router = useRouter();
+
+    const onMoveDeatilPage = (id) => {
+        router.push(`/routes/boards/${id}`)
+}
+    const [deleteBoard] = useMutation(DeleteBoard)
+
+    const onClickDelete = (id) => {
+        console.log(id)
+        deleteBoard({
+            variables: {
+                boardId: id
+            },
+            refetchQueries: [{query: FetchBoards}]
+        })
+    }
     return (
         <>
         <div className={styles.css_listlayout}>
@@ -58,20 +59,26 @@ export default function ListPage() {
                             <div className={styles.css_listdate}>날짜</div>
                         </div>
                         <div className={styles.css_listall}>
-                            {/* <div className={styles.css_yourboard}>
-                                <List title={data?.fetchBoard?.title}  name={data?.fetchBoard?.writer}/>
-                                <div className={styles.css_boardnum}>1</div>
-                                <div className={styles.css_boardtitle}>1</div>
-                                <div className={styles.css_boardwriter}>{data?.fetchBoard?.writer}</div>
-                                <div className={styles.css_boarddate}>1</div>
-                            </div> */}
-                            <List title={data?.fetchBoard?.title}  name={data?.fetchBoard?.writer}/>
+                        {data?.fetchBoards.map((el, index) => (
+                            <div key={el._id}>
+                                <div className={styles.css_yourboard} >
+                                    <div className={styles.css_border} >
+                                        <div className={styles.css_boardnum} onClick={()=>onMoveDeatilPage(el._id)}>{data?.fetchBoards.length - index}</div>
+                                        <div className={styles.css_boardtitle} onClick={()=>onMoveDeatilPage(el._id)}>{el.title}</div>
+                                        <div className={styles.css_boardwriter} onClick={()=>onMoveDeatilPage(el._id)}>{el.writer}</div>
+                                        <div className={styles.css_boarddate} onClick={()=>onMoveDeatilPage(el._id)}>{el.createdAt.split("T")[0]}</div>
+                                        <Image src="/assets/Delete.png" width={0} height={0} alt='delete' className={styles.css_delete} id={el._id} onClick={()=>onClickDelete(el._id)}/>
 
+                                    </div>
+                                </div>  
+                            </div>
+                            ))}  
                         </div>
                     </div>
                 </div>
             </div>
         </div> 
+        
         </>
     )
 }
