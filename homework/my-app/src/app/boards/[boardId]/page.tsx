@@ -4,7 +4,7 @@ import styles from './style.module.css'
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'next/image'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
 
 const FETCH_BOARD = gql`
@@ -49,7 +49,10 @@ const BoardsDetail = () => {
   console.log(data)
 
 
-
+  const router = useRouter()
+  const listButton = () => {
+    router.push("/boards")
+  }
 
 
 
@@ -106,19 +109,17 @@ const BoardsDetail = () => {
       <div className={styles.textContainer}>
         <div className={styles.aboutContent}>
           <div className={styles.authorDateContainer}>
-            <Image src="/image/profile.png" className={styles.profilebasic} alt="프로필기본이미지" width={0} height={0} sizes='100vw'/>
             <div className={styles.authorName}>{data && data.fetchBoard.writer}</div>
             <div className={styles.date}>2024.11.11</div>
           </div>
 
-          <div className={styles.titleContainer}>
+          <div className={styles.titleContainer}> 
             <div className={styles.title}>{data && data.fetchBoard.title}</div>
           </div>
         </div>
 
         <div className={styles.textContent}>
           {data && data.fetchBoard.contents}
-
         </div>
       </div>
    </div>
@@ -133,7 +134,7 @@ const BoardsDetail = () => {
    </div>
 
    <div className={styles.buttonContainer}>
-      <button className={styles.gotoListButton}>
+      <button className={styles.gotoListButton}  onClick={listButton}>
         <Image src="/image/list_icon.png" className={styles.buttonIcon} alt="동영상썸네일" width={0} height={0} sizes='100vw'  />
         목록으로
       </button>
