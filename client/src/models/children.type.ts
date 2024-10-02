@@ -9,7 +9,7 @@ export interface IBoardListProps extends IProps {
 }
 
 export interface IModalProps {
-	searchParams: { modal: number };
+	modal: number;
 }
 
 export interface IDeatilPageProps {

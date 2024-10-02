@@ -1,12 +1,11 @@
 /** @format */
-'use client';
 
-import CommonButton from '../_components/CommonButton';
+import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { IModalProps } from '@/models/children.type';
 import useOnClickBack from '@/hooks/useOnClickBack';
 
-export default function ModalPage(props) {
+export default function ModalValidPage(props) {
 	console.log(props);
 	const onClickBack = useOnClickBack();
 
