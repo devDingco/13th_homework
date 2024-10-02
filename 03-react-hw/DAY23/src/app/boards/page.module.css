@@ -1,0 +1,117 @@
+.총상자 {
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+
+  min-width: 680px;
+  padding: 24px 48px;
+  align-self: stretch;
+}
+
+.게시글전체상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.게시글목록나누기 {
+  display: flex;
+  padding: 16px 24px;
+  gap: 0.5rem;
+}
+
+.게시글목록나누기 span {
+  color: var(--gray-900, #1c1c1c);
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.번호 {
+  width: 64px;
+  text-align: center;
+}
+.제목 {
+  width: 848px;
+  text-align: start;
+}
+.작날 {
+  width: 100px;
+  text-align: center;
+}
+
+.등록된게시글상자 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.게시글한줄상자 {
+  display: flex;
+  padding: 12px 24px;
+  gap: 8px;
+  align-items: center;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+
+  cursor: pointer;
+
+  position: relative;
+}
+
+.유저번호 {
+  overflow: hidden;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  text-align: center;
+  text-overflow: ellipsis;
+
+  /* l_14_20 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.유저제목 {
+  overflow: hidden;
+  color: var(--Gray-90, var(--gray-900, #1c1c1c));
+  text-overflow: ellipsis;
+
+  /* me_14_20 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.유저작성자 {
+  overflow: hidden;
+  color: var(--Gray-80, #333);
+  text-align: center;
+  text-overflow: ellipsis;
+
+  /* l_14_20 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.유저날짜 {
+  overflow: hidden;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  text-align: center;
+  text-overflow: ellipsis;
+
+  /* l_14_20 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.게시글삭제버튼 {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
