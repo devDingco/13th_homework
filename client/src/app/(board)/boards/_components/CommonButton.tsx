@@ -1,10 +1,12 @@
 /** @format */
 'use client';
 
-import { useOnClickBack } from '@/hooks/useOnClickBack';
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
-export default function CommonButton({ title, isButtonDisabled }: IButtonProps) {
+import deleteBoard from '@/apis/boards/deleteBoard';
+import { useOnClickBack } from '@/hooks/useOnClickBack';
+
+export default function CommonButton({ title, isButtonDisabled, boardId }: IButtonProps) {
 	const onClickBack = useOnClickBack();
 	const onClickButtonCondition = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		switch (event.currentTarget.id) {
@@ -12,6 +14,7 @@ export default function CommonButton({ title, isButtonDisabled }: IButtonProps) 
 				onClickBack();
 				break;
 			case EButtonTitle.delete:
+				deleteBoard(boardId as number);
 				break;
 			case EButtonTitle.cancel:
 				onClickBack();

@@ -1,13 +1,23 @@
 /** @format */
+'use client';
 
-import { IBoardReaderResource, IBoardResponse } from '@/models/boardReaderResponse';
 import BoardItem from './BoardItem';
+import BoardLoading from './BoardLoading';
+import { IApiResponseData } from '@/models/apiResponse';
+import fetcher from '@/libs/fetcher';
+import useSWR from 'swr';
 
-export default function BoardItemContainer({ resource }: IBoardReaderResource) {
-	const boards: IBoardResponse = resource.read();
+export default function BoardItemContainer() {
+	const { data, isLoading } = useSWR('/board', fetcher, {
+		suspense: true,
+		fallbackData: [],
+	});
 
+	if (isLoading) {
+		return <BoardLoading />;
+	}
 	return (
-		Array.isArray(boards) &&
-		boards.map((board) => <BoardItem key={board.boardId} board={board} />)
+		Array.isArray(data) &&
+		data.map((board: IApiResponseData) => <BoardItem key={board.boardId} board={board} />)
 	);
 }

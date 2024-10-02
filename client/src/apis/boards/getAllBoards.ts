@@ -1,30 +1,16 @@
 /** @format */
 
-import { IApiResponseData } from '@/models/apiResponse';
 import { api } from '../config';
-import { IBoardReader } from '@/models/boardReaderResponse';
 
-export default function getAllBoards(): IBoardReader {
-	let status = 'pending';
+export default async function getAllBoards() {
+	try {
+		const result = await api.get('/board');
 
-	let board: IApiResponseData | Promise<IApiResponseData>;
-	const response = api
-		.get('/board')
-		.then((response) => {
-			board = response.data.data;
-			status = 'fulfilled';
-		})
-		.catch((e) => {
-			status = 'reject';
-			board = e;
-		});
-
-	return {
-		read() {
-			if (status === 'pending') {
-				throw response;
-			} else if (status === 'reject') throw board;
-			else if (status === 'fulfilled') return board;
-		},
-	};
+		if (result.data.statusCode === 200) {
+			return result.data.data;
+		}
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
 }

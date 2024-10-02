@@ -44,13 +44,13 @@ export interface ICreateFormBoard {
 
 export interface IBoardType extends IReaction, ICreateFormBoard {
 	boardId: number;
-	createdAt: string;
-	updatedAt?: string;
+	createdAt: Date;
+	updatedAt?: Date;
 }
 
 export interface IReaction {
-	like: number;
-	hate: number;
+	like?: number;
+	hate?: number;
 }
 
 export interface IBoardItem {

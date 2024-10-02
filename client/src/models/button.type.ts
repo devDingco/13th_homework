@@ -9,7 +9,7 @@ export enum EButtonTitle {
 
 export interface IButtonProps extends IButtonDisabled {
 	title: EButtonTitle;
-	onClickBack?: () => void;
+	boardId?: number;
 }
 
 export interface IButtonDisabled {
