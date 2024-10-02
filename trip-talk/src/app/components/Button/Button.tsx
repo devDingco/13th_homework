@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "./Button.module.css";
+import styles from "./styles.module.css";
 import Image from "next/image";
 
 type ButtonProps = {

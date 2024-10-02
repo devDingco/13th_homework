@@ -1,0 +1,39 @@
+.post_contain {
+  @apply flex flex-col items-start gap-2 self-stretch w-full rounded-2xl bg-white py-6 px-12;
+  min-width: 680px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.posts {
+  @apply w-full flex flex-col gap-2;
+}
+
+.post_list {
+  @apply flex py-3 px-6 items-center gap-2 self-stretch rounded-lg text-center text-ellipsis text-sm font-light border border-solid border-offWhite relative;
+}
+
+.post_list:hover .delete {
+  @apply block;
+}
+
+.post_number {
+  @apply w-16 overflow-hidden text-mediumGray;
+}
+
+.post_title {
+  @apply overflow-hidden text-start font-medium text-charcoal flex-1;
+}
+
+.post_writer {
+  @apply text-darkGray;
+  width: 100px;
+}
+
+.post_createdAt {
+  @apply text-mediumGray;
+  width: 100px;
+}
+
+.delete {
+  @apply hidden absolute right-2 top-2.5;
+}

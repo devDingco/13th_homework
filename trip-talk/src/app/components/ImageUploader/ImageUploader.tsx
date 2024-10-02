@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./ImageUploader.module.css";
+import styles from "./styles.module.css";
 
 export default function ImageUploader() {
   return (

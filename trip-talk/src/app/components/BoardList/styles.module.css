@@ -1,0 +1,29 @@
+.board_list {
+  @apply flex py-3 px-6 items-center gap-2 self-stretch rounded-lg text-center text-ellipsis text-sm font-light border border-solid border-offWhite relative;
+}
+
+.board_list:hover .deleteButton {
+  @apply block;
+}
+
+.board_number {
+  @apply w-16 overflow-hidden text-mediumGray;
+}
+
+.board_title {
+  @apply overflow-hidden text-start font-medium text-charcoal flex-1;
+}
+
+.board_writer {
+  @apply text-darkGray;
+  width: 100px;
+}
+
+.board_createdAt {
+  @apply text-mediumGray;
+  width: 100px;
+}
+
+.deleteButton {
+  @apply hidden absolute right-2 top-2.5;
+}

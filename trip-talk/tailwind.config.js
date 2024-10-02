@@ -10,7 +10,10 @@ export default {
       black: "#000",
       lightCoral: "#F66A6A",
       darkGray: "#333",
-      lightGray: "#e4e4e4"
+      lightGray: "#e4e4e4",
+      charcoal: "#1c1c1c",
+      mediumGray: "#919191",
+      offWhite: "#f2f2f2",
     },
   },
   plugins: [],
