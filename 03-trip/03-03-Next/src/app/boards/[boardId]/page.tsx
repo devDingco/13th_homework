@@ -1,6 +1,6 @@
 "use client";
 import { gql, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles.module.css";
 
@@ -18,6 +18,7 @@ const FETCH_BOARD = gql`
 
 export default function PostBoards() {
   const post = useParams();
+  const Router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: post.boardId },
@@ -25,8 +26,8 @@ export default function PostBoards() {
 
   return (
     <>
-      <header>
-        <p className={styles.header_title}>{data.fetchBoard.title}</p>
+      <header className={styles.detail_header}>
+        <p className={styles.header_title}>{data?.fetchBoard.title}</p>
 
         <div className={styles.header_info}>
           <div className={styles.info_profile}>
@@ -37,10 +38,10 @@ export default function PostBoards() {
               height={24}
               sizes="100%"
             />
-            <p>{data.fetchBoard.writer}</p>
+            <p>{data?.fetchBoard.writer}</p>
           </div>
           <div>
-            <p>{data.fetchBoard.createdAt}</p>
+            <p>{data?.fetchBoard.createdAt.split("T")[0]}</p>
           </div>
         </div>
 
@@ -62,7 +63,7 @@ export default function PostBoards() {
         </div>
       </header>
 
-      <main>
+      <main className={styles.detail_main}>
         <Image
           src="/img/bg01.png"
           alt="thumbnail"
@@ -71,8 +72,8 @@ export default function PostBoards() {
           sizes="100%"
         />
 
-        <div className={styles.main_content}>
-          <pre>{data.fetchBoard.contents}</pre>
+        <div>
+          <pre className={styles.main_content}>{data?.fetchBoard.contents}</pre>
         </div>
 
         <div className={styles.main_video}>
@@ -109,7 +110,10 @@ export default function PostBoards() {
         </div>
 
         <div className={styles.main_btn}>
-          <div className={styles.btn_list}>
+          <div
+            className={styles.btn_list}
+            onClick={() => Router.push(`/boards`)}
+          >
             <Image
               src="/svg/menu.svg"
               alt="menu"

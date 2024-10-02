@@ -177,8 +177,7 @@ const Main = () => {
         },
       });
       Router.push(`/boards/${gqlResult.data.createBoard._id}`);
-      if (gqlResult)
-        alert(`등록되었습니다!! num: ${gqlResult.data.createBoard._id}`);
+      if (gqlResult) alert(`등록되었습니다!!`);
     } catch {
       alert("등록에 실패하였습니다. 다시 시도해 주세요.");
     } finally {

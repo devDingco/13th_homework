@@ -35,6 +35,25 @@ a {
   font-family: var(--font-paperlogy-medium);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--mono-gray050);
+}
+
+header {
+  width: 100rem;
+  font-size: 2.4rem;
+  padding: 4rem 0rem;
+}
+
+main {
+  width: 100rem;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ========== ========== ========== */
 
 fieldset {
@@ -70,25 +89,6 @@ hr {
   border: 0;
   background-color: var(--mono-gray300);
   margin-bottom: 2rem;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--mono-gray050);
-}
-
-header {
-  width: 100rem;
-  font-size: 2.4rem;
-  padding: 4rem 0rem;
-}
-
-main {
-  width: 100rem;
-  display: flex;
-  flex-direction: column;
 }
 
 form {
