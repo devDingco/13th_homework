@@ -114,7 +114,20 @@
     font-weight: 900;
     color: var(--gray-900)
 }
+.trachIcon {
 
+}
+.titleContainer {
+    display: flex; /* Flexbox를 사용하여 수평 정렬 */
+    align-items: center; /* 수직 정렬 */
+    justify-content: space-between;
+    cursor: pointer; /* 포인터 커서 */
+  }
+  
+  .title {
+    margin-left: 8px; /* 아이콘과 타이틀 간격 조정 */
+  }
+  
 .thumbnail img {
     width: 386px; /* 가로 크기 고정 */
     height: 180px; /* 세로 크기 고정 */
