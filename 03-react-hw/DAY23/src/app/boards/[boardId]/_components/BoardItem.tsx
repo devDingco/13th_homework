@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import styles from "../boards/page.module.css";
 import { useRouter } from "next/navigation";

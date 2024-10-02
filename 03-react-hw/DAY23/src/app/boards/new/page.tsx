@@ -1,14 +1,14 @@
 "use client";
 
 import React, { ChangeEvent, useState } from "react";
-import ImgUploadBtn from "@/app/components/ImgUploadBtn";
-import styles from "./styles.module.css";
+import ImgUploadBtn from "@/app/boards/new/_components/ImgUploadBtn";
+import styles from "./boardNew.module.css";
 import "@/app/globals.css";
 import { gql, useMutation } from "@apollo/client";
-import InputField from "@/app/components/Input";
-import AddressInput from "@/app/components/AddressInput";
-import TextareaField from "@/app/components/TextareaField";
+import InputField from "@/components/Input";
+import TextareaField from "@/app/boards/new/_components/TextareaField";
 import { useRouter } from "next/navigation";
+import AddressInput from "./_components/AddressInput";
 
 interface FormData {
   username: string;

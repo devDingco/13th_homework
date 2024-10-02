@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../boards/[boardId]/styles.module.css";
+import styles from "../boardDetail.module.css";
 
 const IconSection: React.FC = () => (
   <div className={styles.아이콘상자}>

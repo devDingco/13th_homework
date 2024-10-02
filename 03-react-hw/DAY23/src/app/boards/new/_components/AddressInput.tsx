@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import styles from "../boards/new/styles.module.css";
+import styles from "../boardNew.module.css";
 
 interface AddressInputProps {
   zipCode: string; // 우편번호

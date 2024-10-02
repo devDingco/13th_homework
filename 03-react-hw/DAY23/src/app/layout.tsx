@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-// import localFont from "next/font/local";
 import "./globals.css";
-import ApolloSetting from "./commons/setting/apollo-setting";
+import ApolloSetting from "@/commons/setting/apollo-setting";
 
-/* const geistSans = localFont({
-  src: "/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+/* const pretendard = localFont({
+  src: "../public/font/PretendarVariable.woff2",
+  variable: "--font-pretendard",
 }); */
 
 export const metadata: Metadata = {
@@ -25,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // className={`${pretendard.variable}`}
     <html lang="en">
-      {/* className={`${geistSans.variable} ${geistMono.variable} antialiased`} */}
       <ApolloSetting>
         <body>{children}</body>
       </ApolloSetting>

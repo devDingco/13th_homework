@@ -1,7 +1,8 @@
 import Image from "next/image";
+
+import styles from "../boardDetail.module.css";
 import LikeDislikeButtons from "./LikeDislikeButtons";
 import ActionButtons from "./ActionButtons";
-import styles from "../boards/[boardId]/styles.module.css";
 
 interface BoardContentProps {
   contents: string;

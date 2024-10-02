@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import styles from "./styles.module.css";
+import styles from "./boardDetail.module.css";
 import "@/app/globals.css";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-import BoardDetailHeader from "@/app/components/BoardDetailHeader";
-import IconSection from "@/app/components/IconSection";
-import BoardDetailContent from "@/app/components/BoardDetailContent";
+import BoardDetailHeader from "./_components/BoardDetailHeader";
+import BoardDetailContent from "./_components/BoardDetailContent";
+import IconSection from "./_components/IconSection";
 
 const FETCH_BOARD = gql`
   query fetchBoard($mynumber: ID!) {

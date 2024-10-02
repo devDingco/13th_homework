@@ -2,8 +2,8 @@
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 import styles from "./page.module.css";
-import BoardHeader from "../components/BoardHeader";
-import BoardItem from "../components/BoardItem";
+import BoardHeader from "./[boardId]/_components/BoardHeader";
+import BoardItem from "./[boardId]/_components/BoardItem";
 
 interface Board {
   _id: string;

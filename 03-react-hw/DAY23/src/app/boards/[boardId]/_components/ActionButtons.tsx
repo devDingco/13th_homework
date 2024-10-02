@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../boards/[boardId]/styles.module.css";
+import styles from "../boardDetail.module.css";
 
 const ActionButtons: React.FC = () => (
   <div className={styles.목록수정버튼상자}>
