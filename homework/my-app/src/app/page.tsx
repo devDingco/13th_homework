@@ -1,3 +1,18 @@
 export default function Home() {
-  return <div>처음 페이지 입니다</div>;
+  return (
+    <main className="">
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+    </main>
+  );
 }
