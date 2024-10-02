@@ -3,12 +3,41 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
+import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
-function Board() {
+const CREATE_BOARD = gql`
+  mutation createBoard(
+    $myWriter: String
+    $myPassword: String
+    $myTitle: String!
+    $myContents: String!
+  ) {
+    createBoard(
+      createBoardInput: {
+        writer: $myWriter
+        password: $myPassword
+        title: $myTitle
+        contents: $myContents
+      }
+    ) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
+
+export default function Board() {
+  const router = useRouter();
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [input, setInput] = useState("");
+
+  // 에러메세지 state
   const [errorWMeg, setErrorWMeg] = useState("");
   const [errorPMeg, setErrorPMeg] = useState("");
   const [errorTMeg, setErrorTMeg] = useState("");
@@ -17,6 +46,61 @@ function Board() {
   const [isActive, setActive] = useState(false);
   //1. 버튼은 false  색 비활성화함
   //2. state변수 문자열이 모두 채워졌을때 버튼 색을 활성화시켜라
+
+  const [myFunction] = useMutation(CREATE_BOARD);
+
+  const handleClickMeg = async () => {
+    try {
+      const result = await myFunction({
+        variables: {
+          myWriter: writer,
+          myPassword: password,
+          myTitle: title,
+          myContents: input,
+        },
+      });
+
+      console.log(result);
+
+      if (writer && password && title && input) {
+        setActive(true);
+        alert("회원등록함");
+        // 들어있는 문자열을 모두 빈 문자열로 만들어라
+        setWriter("");
+        setPassword("");
+        setTitle("");
+        setInput("");
+      } else {
+        if (writer === "") {
+          setErrorWMeg("필수입력 사항입니다");
+        } else {
+          setErrorWMeg("");
+          setWriter("");
+        }
+        if (password === "") {
+          setErrorPMeg("필수입력 사항입니다");
+        }
+
+        if (title === "") {
+          setErrorTMeg("필수입력 사항입니다");
+        }
+
+        if (input === "") {
+          setErrorIMeg("필수입력 사항입니다");
+        }
+
+        //   1. 네개의 state변수들이 전부 빈문자열이 아닐때 버튼의 색이 red로 활성화 시킨다
+        //  2. 버튼을 활성화 -> 색을 변하게 하는 불린값이 담긴 state변수를 선언한다
+        // 초기화값을 false로 주고, if문안에서 문자열이 전부 true일때 색을 red로 바꿔준다
+        // button 에서 style = active가 true일때 red : gray
+        // 이벤트가 어디서 발생하는지를 잘 알아둔다
+      }
+      console.log(result.data.createBoard._id);
+      router.push(`/boards/detail/${result.data.createBoard._id}`);
+    } catch (error) {
+      alert(`${error}에러가 발생했습니다`);
+    }
+  };
 
   const handleChangWriterMeg = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
@@ -45,43 +129,6 @@ function Board() {
     if (writer && password && title && event.target.value)
       return setActive(true);
     setActive(false);
-  };
-
-  const handleClickMeg = () => {
-    console.log(writer);
-    if (writer && password && title && input) {
-      setActive(true);
-      alert("회원등록함");
-      // 들어있는 문자열을 모두 빈 문자열로 만들어라
-      setWriter("");
-      setPassword("");
-      setTitle("");
-      setInput("");
-    } else {
-      if (writer === "") {
-        setErrorWMeg("필수입력 사항입니다");
-      } else {
-        setErrorWMeg("");
-        setWriter("");
-      }
-      if (password === "") {
-        setErrorPMeg("필수입력 사항입니다");
-      }
-
-      if (title === "") {
-        setErrorTMeg("필수입력 사항입니다");
-      }
-
-      if (input === "") {
-        setErrorIMeg("필수입력 사항입니다");
-      }
-
-      //   1. 네개의 state변수들이 전부 빈문자열이 아닐때 버튼의 색이 red로 활성화 시킨다
-      //  2. 버튼을 활성화 -> 색을 변하게 하는 불린값이 담긴 state변수를 선언한다
-      // 초기화값을 false로 주고, if문안에서 문자열이 전부 true일때 색을 red로 바꿔준다
-      // button 에서 style = active가 true일때 red : gray
-      // 이벤트가 어디서 발생하는지를 잘 알아둔다
-    }
   };
 
   return (
@@ -140,11 +187,11 @@ function Board() {
             <div>
               <span className={styles.css_span}>내용</span>
             </div>
-            <input
+            <textarea
               type="text"
               placeholder="내용을 입력해 주세요"
               onChange={handleChangInputMeg}
-            />
+            ></textarea>
             <div className={styles.css_errorColor}>{errorIMeg}</div>
           </section>
           {/* 주소 */}
@@ -239,5 +286,3 @@ function Board() {
     </div>
   );
 }
-
-export default Board;
