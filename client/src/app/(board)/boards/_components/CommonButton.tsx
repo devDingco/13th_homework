@@ -4,17 +4,27 @@
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
 import deleteBoard from '@/apis/boards/deleteBoard';
-import { useOnClickBack } from '@/hooks/useOnClickBack';
+import fetcher from '@/libs/fetcher';
+import useOnClickBack from '@/hooks/useOnClickBack';
+import useSWR from 'swr';
 
 export default function CommonButton({ title, isButtonDisabled, boardId }: IButtonProps) {
+	const { data, mutate } = useSWR('/board', fetcher);
+
 	const onClickBack = useOnClickBack();
-	const onClickButtonCondition = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const onClickButtonCondition = async (
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	) => {
 		switch (event.currentTarget.id) {
 			case EButtonTitle.back:
 				onClickBack();
 				break;
 			case EButtonTitle.delete:
-				deleteBoard(boardId as number);
+				const result = await deleteBoard(boardId as number, data);
+				if (result) {
+					await mutate();
+					onClickBack();
+				}
 				break;
 			case EButtonTitle.cancel:
 				onClickBack();
