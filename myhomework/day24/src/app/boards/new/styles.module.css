@@ -12,9 +12,10 @@
   font-size: 20px;
   font-weight: 700;
   align-items: center;
+  font-family: var(--pretendard-medium);
 }
 
-span {
+.asterisk {
   color: tomato;
 }
 
@@ -44,7 +45,7 @@ span {
 }
 
 #addressNum {
-  width: 62px;
+  width: 82px;
   height: 48px;
   border-radius: 8px;
   border: 1px solid #d4d3d3;
@@ -91,6 +92,7 @@ span {
   color: #000000;
   font-size: 18px;
   font-weight: 600;
+  align-items: center;
 }
 
 .address {
@@ -125,7 +127,7 @@ span {
   border-radius: 8px;
   border: none;
   background-color: #f2f2f2;
-  background-image: url(./icon/outline/add.png);
+  background-image: url("/images/add.png");
   background-repeat: no-repeat;
   background-position: 62px 42px;
   cursor: pointer;
@@ -157,8 +159,9 @@ span {
   font-weight: 600;
   width: 68px;
   height: 48px;
-  padding: 12px 16px;
+  /* padding: 12px 16px; */
   color: #000000;
+  align-items: center;
 }
 
 .regist {
@@ -170,5 +173,6 @@ span {
   font-weight: 600;
   width: 95px;
   height: 48px;
-  padding: 12px 16px;
+  /* padding: 12px 16px; */
+  align-items: center;
 }
