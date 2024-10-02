@@ -9,7 +9,9 @@ interface BoardListPropsType {
   title?: string;
   writer?: string;
   createdAt?: Date;
-  onClickFnc?: () => void;
+  id?: string;
+  onClickDelete?: (id: string, e: any) => void;
+  onClickDetail?: () => void;
 }
 
 export default function Board({
@@ -17,13 +19,16 @@ export default function Board({
   title,
   writer,
   createdAt,
-  onClickFnc,
+  id,
+  onClickDelete,
+  onClickDetail,
 }: BoardListPropsType) {
   return (
     <div
       className={`${s.boardContainer} ${
         title ? 'border border-solid border-[#F2F2F2]' : ''
-      }`}>
+      }`}
+      onClick={onClickDetail}>
       <p
         className={`${s.boardItems} ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
         {number ?? '번호'}
@@ -39,8 +44,8 @@ export default function Board({
         className={`${s.boardItems} ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
         {(createdAt && dateFormatter(createdAt)) ?? '날짜'}
       </p>
-      {title ? (
-        <button onClick={onClickFnc}>
+      {onClickDelete && id ? (
+        <button onClick={(e) => onClickDelete(id, e)}>
           <Image src={DeleteIcon} alt="" width={0} height={0} />
         </button>
       ) : (

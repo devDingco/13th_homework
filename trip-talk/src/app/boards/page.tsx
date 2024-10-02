@@ -3,6 +3,7 @@
 import React from 'react';
 import Board from '../_component/boards/Board';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import { useRouter } from 'next/navigation';
 
 const FETCH_BOARDS = gql`
   query {
@@ -23,12 +24,19 @@ const DELETE_BOARD = gql`
 function BoardsList() {
   const { data, loading } = useQuery(FETCH_BOARDS);
   const [deleteBoard] = useMutation(DELETE_BOARD);
+  const router = useRouter();
 
-  const onClickDeleteBoard = (id: string) => {
+  const onClickDeleteBoard = (id: string, e: any) => {
+    e.stopPropagation();
+
     deleteBoard({
       variables: { id },
       refetchQueries: [{ query: FETCH_BOARDS }],
     });
+  };
+
+  const onClickDetailBoard = (id: string) => {
+    router.push(`/boards/detail/${id}`);
   };
   console.log(data);
 
@@ -46,7 +54,9 @@ function BoardsList() {
                 title={title}
                 writer={writer}
                 createdAt={createdAt}
-                onClickFnc={() => onClickDeleteBoard(_id)}
+                id={_id}
+                onClickDelete={onClickDeleteBoard}
+                onClickDetail={() => onClickDetailBoard(_id)}
               />
             );
           })}
