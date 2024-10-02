@@ -16,9 +16,7 @@ export default function SearchBox() {
       </label>
       <div className="flex gap-4 flex-wrap max-sm:w-full">
         <label className="input input-bordered flex items-center gap-2 w-72 max-sm:w-full">
-          <span className="w-6 h-6 inline-block">
-            <Icon icon="calendar" />
-          </span>
+          <Icon icon="calendar" className="w-6 h-6 fill-accent-content" />
           <input
             className={styles.inputDate}
             type="date"
@@ -26,9 +24,7 @@ export default function SearchBox() {
             required
           />
         </label>
-        <button className="btn bg-accent-content text-base-100 max-sm:w-full">
-          검색
-        </button>
+        <button className="btn btn-accent-content max-sm:w-full">검색</button>
       </div>
     </div>
   );

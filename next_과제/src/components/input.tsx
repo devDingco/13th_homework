@@ -12,12 +12,13 @@ type InputProps = {
   placeholder?: string;
   defaultValue?: string;
   readOnly?: boolean;
+  className?: string;
 };
 
 type inputRef = HTMLInputElement;
 
 const Input = forwardRef<inputRef, InputProps>((props, ref) => {
-  const { title, errormessage, ...rest } = props;
+  const { title, errormessage, className, ...rest } = props;
 
   const showImage = (e: ChangeEvent<HTMLInputElement>) => {
     // const targetLable = e.target.parentNode as HTMLLabelElement;
@@ -32,7 +33,7 @@ const Input = forwardRef<inputRef, InputProps>((props, ref) => {
 
   if (props.type === "file" && props.accept === "image/*") {
     return (
-      <div className="flex flex-col gap-2">
+      <div className={`flex flex-col${title ? " gap-2" : ""}`}>
         <div className="flex gap-1">
           {title}
           {props.required && <span className="text-red-500">*</span>}
@@ -58,16 +59,19 @@ const Input = forwardRef<inputRef, InputProps>((props, ref) => {
   }
 
   return (
-    <label className="flex flex-col gap-2 w-full" htmlFor={props.id}>
+    <label
+      className={`flex flex-col w-full${title ? " gap-2" : ""}`}
+      htmlFor={props.id}
+    >
       <div className="flex gap-1">
         {title}
         {props.required && <span className="text-red-500">*</span>}
       </div>
       <input
         ref={ref}
-        className={`border border-gray-300 rounded-lg w-full py-3 px-4 ${
-          props.readOnly ? "bg-gray-100" : ""
-        }`}
+        className={`border border-gray-300 rounded-lg w-full py-3 px-4${
+          props.readOnly ? " bg-gray-100" : ""
+        } ${className ? " " + className : ""}`}
         {...rest}
       />
       {errormessage && <p className="toolTip">{errormessage}</p>}
