@@ -1,17 +1,18 @@
 import {
+    CallHandler,
+    ExecutionContext,
     Injectable,
     NestInterceptor,
-    ExecutionContext,
-    CallHandler,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import {
     IDeleteResponse,
     IResponseInterceptor,
 } from '../types/interceptor.interface';
+
 import { GqlContextType } from '@nestjs/graphql';
+import { Observable } from 'rxjs';
+import { Reflector } from '@nestjs/core';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TransformInterceptor<T>
@@ -37,11 +38,11 @@ export class TransformInterceptor<T>
                 } else if (context.getType() === 'http') {
                     if (Array.isArray(data)) {
                         const deleteIdData = data.map((item) =>
-                            this.removeId(item),
+                            this.removeSensitiveData(item),
                         );
                         return { message, statusCode, data: deleteIdData };
                     } else if (typeof data === 'object' && data !== null) {
-                        const deleteIdData = this.removeId(data);
+                        const deleteIdData = this.removeSensitiveData(data);
                         return { message, statusCode, data: deleteIdData };
                     } else {
                         return { message, statusCode };
@@ -50,10 +51,10 @@ export class TransformInterceptor<T>
             }),
         );
     }
-    private removeId(item: any): any {
-        if (item && item._id) {
+    private removeSensitiveData(item: any): any {
+        if (item && item._id && item.password) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { _id, ...rest } = item;
+            const { _id, password, ...rest } = item;
             return rest;
         }
         return item;

@@ -1,4 +1,3 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import {
     ArrayMaxSize,
     IsArray,
@@ -6,6 +5,8 @@ import {
     IsOptional,
     IsString,
 } from 'class-validator';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
+
 import { Column } from 'typeorm';
 
 @InputType()
@@ -42,4 +43,10 @@ export class CreateBoardDto {
     @Column()
     @Field({ nullable: true })
     youtubeUrl?: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @Column()
+    @Field()
+    password: string;
 }
