@@ -7,11 +7,18 @@ import { useParams } from "next/navigation"
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
-        id
+        _id
         writer
         title
         contents
         createdAt
+        youtubeUrl
+        images
+        boardAddress{
+            zipcode
+            address
+            addressDetail
+        }
     }
   }
 `;
@@ -63,7 +70,6 @@ const BoardsDetail = () => {
             </div>
         </div>
     )
-
 }
 
 

@@ -1,0 +1,72 @@
+.listForm{
+    width:128rem;
+    margin:0 auto;
+    font-size:62.5%;
+    border-radius:1.6rem;
+    padding:2.4rem 4.8rem 2.4rem 4.8rem;
+    box-shadow: 0 0 2rem 0 #00000014;
+    margin-top:2.4rem;
+}
+.listBg{
+    width:118.4rem;
+}
+/* ul/li 공통 */
+.listForm ul{
+    display:flex;
+    justify-content:center;
+    padding:1.2rem 2.4rem 1.2rem 2.4rem;
+    border:1px solid #f2f2f2;
+    border-radius:0.8rem;
+    margin:0.8rem 0;
+}
+.listForm ul li:first-child{
+    width:6.4rem;
+    height:2rem;
+}
+.listForm ul li:nth-child(2){
+    width:84.8rem;
+    height:2rem;
+}
+.listForm ul li:nth-child(3){
+    width:10rem;
+    height:2rem;
+}
+.listForm ul li:last-child{
+    width:10rem;
+    height:2rem;
+}
+
+.listForm .listTop{
+    width:118.4rem;
+    height:5.2rem;
+    font-weight:500;
+}
+
+.listForm li{
+    font-size:1.6rem;
+}
+
+/* 게시글 목록 */
+.listContent li:first-child, .listContent li:nth-child(4){
+    color:#919191;
+}
+.listContent li:last-child{
+    position:relative;
+}
+.listContent li{
+    font-size:1.4rem;
+}
+.listContent li:nth-child(2){cursor:pointer;}
+.listContent li span{
+    display:none;
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/delete.png) no-repeat;
+    position:absolute;
+    top:0;
+    left:8rem;
+    cursor:pointer;
+}
+.listContent:hover span{
+    display:block;
+}
