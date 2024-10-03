@@ -5,11 +5,14 @@ import { EBoardButton, EButtonKorea, IBoardButton } from '@/models/button.type';
 
 import Image from 'next/image';
 import useOnClickBack from '@/hooks/useOnClickBack';
-import { useRouter } from 'next/navigation';
+import useOnClickPush from '@/hooks/useOnClickPush';
+import { useParams } from 'next/navigation';
 
 export default function BoardButton({ content }: IBoardButton) {
+	const { boardId } = useParams();
+
 	const onClickBack = useOnClickBack();
-	const router = useRouter();
+	const onClickPush = useOnClickPush();
 
 	const onClickButtonCondition = () => {
 		switch (content) {
@@ -17,7 +20,7 @@ export default function BoardButton({ content }: IBoardButton) {
 				onClickBack();
 				break;
 			case EBoardButton.update:
-				router.push(`boards/?modal=${content}`);
+				onClickPush(`/boards/${boardId}/edit`);
 				break;
 		}
 	};

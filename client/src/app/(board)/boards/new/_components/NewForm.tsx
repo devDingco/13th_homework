@@ -11,10 +11,10 @@ import NewTextarea from './NewTextarea';
 import { createBoardAction } from '@/actions/createBoardAction';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
+import useOnClickPush from '@/hooks/useOnClickPush';
 
 export default function NewForm() {
-	const router = useRouter();
+	const onClickPush = useOnClickPush();
 
 	const [state, formAction] = useFormState(createBoardAction, {
 		data: null,
@@ -28,9 +28,10 @@ export default function NewForm() {
 
 	useEffect(() => {
 		if (state.data) {
-			router.push(`/boards/${state.data.boardId}`);
+			onClickPush(`/boards/${state.data.boardId}`);
 		}
-	}, [state.data, router]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state.data]);
 
 	return (
 		<form className="flex flex-col gap-10" action={formAction}>

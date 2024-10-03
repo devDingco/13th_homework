@@ -7,7 +7,6 @@ import { IModalProps } from '@/models/children.type';
 import useOnClickBack from '@/hooks/useOnClickBack';
 
 export default function ModalPage(props) {
-	console.log(props);
 	const onClickBack = useOnClickBack();
 
 	return (
