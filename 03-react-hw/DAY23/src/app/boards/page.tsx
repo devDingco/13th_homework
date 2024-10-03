@@ -1,44 +1,15 @@
 "use client";
 
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import styles from "./page.module.css";
-import BoardHeader from "./[boardId]/_components/BoardHeader";
-import BoardItem from "./[boardId]/_components/BoardItem";
-
-interface Board {
-  _id: string;
-  writer: string;
-  title: string;
-  contents: string;
-  createdAt: string;
-}
-
-interface FetchBoardsResult {
-  fetchBoards: Board[];
-}
-
-const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
-
-const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
+import BoardItem from "./_components/BoardItem";
+import { FetchBoardsResult } from "@/types/board";
+import { DELETE_BOARD, FETCH_BOARDS } from "@/graphql/board";
 
 export default function Boardspage() {
   const { data, refetch } = useQuery<FetchBoardsResult>(FETCH_BOARDS, {
     variables: {
-      page: 10,
+      page: 1,
     },
   });
 
@@ -63,7 +34,12 @@ export default function Boardspage() {
     <div>
       <div className={styles.총상자}>
         <div className={styles.게시글전체상자}>
-          <BoardHeader />
+          <div className={styles.게시글목록나누기}>
+            <span className={styles.번호}>번호</span>
+            <span className={styles.제목}>제목</span>
+            <span className={styles.작날}>작성자</span>
+            <span className={styles.작날}>날짜</span>
+          </div>
           <div className={styles.등록된게시글상자}>
             {data?.fetchBoards.map((board, index) => (
               <BoardItem

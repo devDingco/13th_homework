@@ -1,10 +1,6 @@
 import Image from "next/image";
 import styles from "../boardDetail.module.css";
-
-interface LikeDislikeButtonsProps {
-  likes: number;
-  dislikes: number;
-}
+import { LikeDislikeButtonsProps } from "@/types/board";
 
 const LikeDislikeButtons: React.FC<LikeDislikeButtonsProps> = ({
   likes,

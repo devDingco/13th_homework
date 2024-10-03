@@ -1,17 +1,5 @@
-import React, { ChangeEvent } from "react";
 import styles from "../boardNew.module.css";
-
-interface TextareaFieldProps {
-  label: string; // 라벨 텍스트
-  name: string; // textarea 이름
-  value: string; // 입력 값
-  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void; // 변경
-  placeholder?: string; // 플레이스홀더 텍스트
-  required?: boolean; // 필수 입력 여부
-  error?: string; // 에러 메시지
-  className?: string;
-  rows?: number; // textarea의 행 수
-}
+import { TextareaFieldProps } from "@/types/board";
 
 const TextareaField: React.FC<TextareaFieldProps> = ({
   label,

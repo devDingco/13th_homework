@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "../boardNew.module.css";
 
 const ImgUploadBtn: React.FC = () => {

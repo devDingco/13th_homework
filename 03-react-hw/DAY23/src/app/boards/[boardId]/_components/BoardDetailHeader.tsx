@@ -1,11 +1,6 @@
 import Image from "next/image";
 import styles from "../boardDetail.module.css";
-
-interface BoardHeaderProps {
-  title: string;
-  writer: string;
-  createdAt: string;
-}
+import { BoardHeaderProps } from "@/types/board";
 
 const BoardDetailHeader: React.FC<BoardHeaderProps> = ({
   title,

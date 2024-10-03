@@ -1,15 +1,5 @@
-import React, { ChangeEvent } from "react";
 import styles from "../boardNew.module.css";
-
-interface AddressInputProps {
-  zipCode: string; // 우편번호
-  address: string; // 주소
-  detailAddress: string; // 상세주소
-  onZipCodeChange: (event: ChangeEvent<HTMLInputElement>) => void; // 우편번호 변경
-  onAddressChange: (event: ChangeEvent<HTMLInputElement>) => void; // 주소 변경
-  onDetailAddressChange: (event: ChangeEvent<HTMLInputElement>) => void; // 상세주소
-  onSearchClick: () => void; // 우편번호 검색 버튼
-}
+import { AddressInputProps } from "@/types/board";
 
 const AddressInput: React.FC<AddressInputProps> = ({
   zipCode,
