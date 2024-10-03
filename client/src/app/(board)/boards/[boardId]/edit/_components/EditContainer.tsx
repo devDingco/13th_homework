@@ -1,18 +1,22 @@
 /** @format */
+'use client';
 
-import { IBoardReaderResource, IBoardResponse } from '@/models/boardReaderResponse';
-
+import BoardLoading from '../../../_components/BoardLoading';
 import { IApiResponseData } from '@/models/apiResponse';
 import NewForm from '../../../new/_components/NewForm';
+import fetcher from '@/libs/fetcher';
+import useSWR from 'swr';
 
-export default function EditContainer({ resource }: IBoardReaderResource) {
-	const boardInfor: IBoardResponse = resource.read();
+export default function EditContainer({ boardId }) {
+	const { data, isLoading } = useSWR(`/board/${boardId}`, fetcher, {
+		suspense: true,
+		revalidateOnFocus: false,
+		fallbackData: [],
+	});
 
-	return (
-		<>
-			{boardInfor && typeof boardInfor === 'object' && (
-				<NewForm boardInfor={boardInfor as IApiResponseData} />
-			)}
-		</>
-	);
+	if (isLoading) {
+		return <BoardLoading />;
+	}
+
+	return <>{data && <NewForm boardInfor={data as IApiResponseData} />}</>;
 }

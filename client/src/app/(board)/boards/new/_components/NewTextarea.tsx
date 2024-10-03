@@ -14,7 +14,7 @@ export default function NewTextarea({ title, error, edit }: ITitle) {
 				name={title}
 				className="h-[336px] w-full rounded-lg border-[1px] border-gray-200 px-3 py-4 outline-none placeholder:prose-r_16_24 placeholder:text-gray-400"
 				placeholder={RNewInputPlaceHolder[title]}
-				value={edit as string}
+				defaultValue={edit as string}
 			></textarea>
 			<div className="prose-me_16_24 text-red-400">{error}</div>
 		</div>
