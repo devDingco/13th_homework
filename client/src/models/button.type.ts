@@ -2,6 +2,7 @@
 
 export enum EButtonTitle {
 	sumbit = 'sumbit',
+	update = 'update',
 	cancel = 'cancel',
 	delete = 'delete',
 	back = 'back',

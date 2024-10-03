@@ -16,7 +16,7 @@ export default function ModalPage({ searchParams }: IModalProps) {
 		return () => {
 			document.body.classList.remove('overflow-hidden');
 		};
-	}, [searchParams.boardId]); // boardId가 변경될 때마다 effect가 다시 실행됨
+	}, [searchParams.boardId]);
 
 	return searchParams.boardId && <ModalContainer boardId={searchParams.boardId} />;
 }

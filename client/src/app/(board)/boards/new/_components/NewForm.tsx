@@ -65,7 +65,7 @@ export default function NewForm({ boardInfor }: IBoardEditProps) {
 			<NewImageContainer />
 			<div className="flex w-full items-center justify-end gap-4">
 				<CommonButton title={EButtonTitle.cancel} />
-				<CommonButton title={EButtonTitle.sumbit} />
+				<CommonButton title={boardInfor ? EButtonTitle.update : EButtonTitle.sumbit} />
 			</div>
 		</form>
 	);

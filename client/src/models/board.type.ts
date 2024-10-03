@@ -34,12 +34,12 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 
 export interface ITitle {
 	title: ETitle;
-	edit?: string | IAddress;
+	edit?: string | IAddress | boolean;
 	error?: string;
 }
 export interface IAddress {
-	address: string;
-	detailAddress: string;
+	address?: string;
+	detailAddress?: string;
 }
 export interface ICreateFormBoard {
 	author: string;
