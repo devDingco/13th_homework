@@ -38,6 +38,7 @@ export interface ICreateFormBoard {
 	author: string;
 	title: string;
 	content: string;
+	password: string;
 	youtubeUrl?: string;
 	imageUrl?: string[];
 }

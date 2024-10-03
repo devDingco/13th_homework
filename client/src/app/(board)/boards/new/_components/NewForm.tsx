@@ -9,7 +9,6 @@ import NewImageContainer from './NewImageContainer';
 import NewInputContainer from './NewInputContainer';
 import NewTextarea from './NewTextarea';
 import { createBoardAction } from '@/actions/createBoardAction';
-import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import useOnClickPush from '@/hooks/useOnClickPush';
 
@@ -26,12 +25,9 @@ export default function NewForm() {
 		},
 	});
 
-	useEffect(() => {
-		if (state.data) {
-			onClickPush(`/boards/${state.data.boardId}`);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.data]);
+	if (state.data) {
+		onClickPush(`/boards/${state.data.boardId}`);
+	}
 
 	return (
 		<form className="flex flex-col gap-10" action={formAction}>

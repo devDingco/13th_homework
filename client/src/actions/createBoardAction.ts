@@ -31,6 +31,7 @@ export async function createBoardAction(
 		const data: ICreateFormBoard = {
 			author: author as string,
 			title: title as string,
+			password: password as string,
 			content: content as string,
 			youtubeUrl: youtubeUrl as string | undefined,
 		};

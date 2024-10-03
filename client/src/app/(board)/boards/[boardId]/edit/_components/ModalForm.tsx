@@ -1,5 +1,6 @@
 /** @format */
 
+import { IValidPasswordState } from '@/models/validationPasssword.type';
 import isValidationPasswordBoard from '@/actions/isValidationPasswordBoard';
 import { useFormState } from 'react-dom';
 import useOnClickPush from '@/hooks/useOnClickPush';
@@ -9,7 +10,7 @@ export default function ModalForm() {
 	const { boardId } = useParams();
 	const onClickPush = useOnClickPush();
 
-	const [state, formAction] = useFormState(isValidationPasswordBoard, {
+	const [state, formAction] = useFormState<IValidPasswordState>(isValidationPasswordBoard, {
 		boardId,
 		error: null,
 		validation: false,

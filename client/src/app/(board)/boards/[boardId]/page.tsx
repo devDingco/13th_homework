@@ -10,8 +10,6 @@ import { Suspense } from 'react';
 import getBoard from '@/apis/boards/getBoard';
 import getReaction from '@/apis/boards/reaction/getReaction';
 
-// 에러 잡아야함
-
 export default function Detail({ params }: IDeatilProps) {
 	const param = params.boardId;
 
