@@ -2,10 +2,14 @@
 
 import isValidationPasswordBoard from '@/actions/isValidationPasswordBoard';
 import { useFormState } from 'react-dom';
+import { useParams } from 'next/navigation';
 
 export default function ModalForm() {
+	const { boardId } = useParams();
+
 	const [state, formAction] = useFormState(isValidationPasswordBoard, {
-		data: 1,
+		boardId,
+		error: null,
 	});
 	return (
 		<>
