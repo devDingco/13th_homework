@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Button from "../../../components/Button/Button";
+import Button from "../../components/Button/Button";
 import styles from "./styles.module.css";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";

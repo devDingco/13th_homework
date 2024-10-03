@@ -1,9 +1,9 @@
 "use client";
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import Button from "../../../components/Button/Button";
-import ImageUploader from "../../../components/ImageUploader/ImageUploader";
-import Input from "../../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import ImageUploader from "../../components/ImageUploader/ImageUploader";
+import Input from "../../components/Input/Input";
 import styles from "./styles.module.css";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
