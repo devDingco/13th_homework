@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,4 +24,25 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+} */
+
+@media (min-width: 781px) {
+  body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 반응형 & 모바일 구현을 위한 폰트 사이즈 재지정 */
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }

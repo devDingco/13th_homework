@@ -79,7 +79,7 @@
 
 .info {
   width: 100%;
-  padding: 1.2rem 1.6rem;
+  padding: 1rem 1.2rem;
   line-height: 2.4rem;
 
   border-radius: 0.8rem;
@@ -172,29 +172,29 @@
   }
 
   /* title */
-  .menuTitle {
+  .menu {
     padding: 0rem;
     margin-bottom: 4rem;
     justify-content: flex-start;
     align-items: flex-start;
   }
 
-  .menuTitle p {
+  .menu p {
     font-size: 2rem;
     font-weight: 700;
     line-height: 2.8rem;
   }
 
-  .menuTitle img {
+  .menu img {
     display: none;
   }
 
-  .postContainer {
+  .container {
     padding: 0rem;
     gap: 4rem;
   }
 
-  .titleContainer {
+  .title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -202,7 +202,7 @@
   }
 
   /* 작성 영역 */
-  .infoInputContent {
+  .infoContent {
     height: 33.6rem;
   }
   /* 사진 업로드 */
@@ -211,27 +211,9 @@
     gap: 1.6rem;
   }
 
-  .postUploadImageButton {
-    width: 16rem;
-    height: 16rem;
-  }
-
   /* 버튼 */
   .postButtonGroup {
     justify-content: flex-end;
     gap: 1.6rem;
-  }
-
-  .checkButton {
-    width: auto;
-
-    font-size: 1.8rem;
-    line-height: 2.4rem;
-  }
-
-  .postSubmitButton {
-    /* background: var(--n-main, #2974e5); */
-
-    color: #fff;
   }
 }
