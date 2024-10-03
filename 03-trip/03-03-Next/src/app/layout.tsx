@@ -5,9 +5,9 @@ import * as React from "react";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 
 const Paperlogy = localFont({
-  src: "./fonts/Paperlogy-5Medium.woff2",
-  variable: "--font-paperlogy-medium",
-  weight: "500",
+  src: "./fonts/Paperlogy-4Regular.woff2",
+  variable: "--font-paperlogy-regular",
+  weight: "400",
 });
 
 const Pretendard = localFont({
