@@ -17,7 +17,7 @@ export default function BoardItem({ board }: IBoardItem) {
 
 	const onClickDeleteButton = (event: React.MouseEvent) => {
 		event.stopPropagation();
-		onClickPush(`boards/?modal=${board.boardId}`);
+		onClickPush(`boards/?boardId=${board.boardId}`);
 	};
 
 	const formattedDate = changeDateToISO(board.createdAt);

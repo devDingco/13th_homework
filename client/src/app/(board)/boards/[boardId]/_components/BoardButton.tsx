@@ -20,7 +20,7 @@ export default function BoardButton({ content }: IBoardButton) {
 				onClickBack();
 				break;
 			case EBoardButton.update:
-				onClickPush(`/boards/${boardId}/edit`);
+				onClickPush(`/boards/${boardId}/edit?modal=true`);
 				break;
 		}
 	};

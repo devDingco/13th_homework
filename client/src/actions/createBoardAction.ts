@@ -5,12 +5,12 @@ import { ICreateFormBoard } from '@/models/board.type';
 import { IFormStateError } from '@/models/formBoardError';
 import postBoard from '../apis/boards/postBoard';
 
+const required = '필수입력 사항입니다.';
+
 export async function createBoardAction(
 	prevState: IFormStateError,
 	formData: FormData,
 ): Promise<IFormStateError> {
-	const required = '필수입력 사항입니다.';
-
 	const author = formData.get('Author');
 	const password = formData.get('Password');
 	const title = formData.get('Title');
