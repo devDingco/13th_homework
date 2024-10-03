@@ -9,6 +9,10 @@ export interface IBoardListProps extends IProps {
 }
 
 export interface IModalProps {
+	searchParams: IModalBoards;
+}
+
+export interface IModalBoards {
 	modal: number;
 }
 

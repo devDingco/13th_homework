@@ -3,10 +3,10 @@
 
 import CommonButton from './CommonButton';
 import { EButtonTitle } from '@/models/button.type';
-import { IModalProps } from '@/models/children.type';
+import { IModalBoards } from '@/models/children.type';
 import useOnClickBack from '@/hooks/useOnClickBack';
 
-export default function ModalContainer({ modal }: IModalProps) {
+export default function ModalContainer({ modal }: IModalBoards) {
 	const onClickBack = useOnClickBack();
 
 	return (
