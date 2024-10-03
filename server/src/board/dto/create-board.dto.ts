@@ -49,4 +49,16 @@ export class CreateBoardDto {
     @Column()
     @Field()
     password: string;
+
+    @IsString()
+    @IsOptional()
+    @Column()
+    @Field()
+    address: string;
+
+    @IsString()
+    @IsOptional()
+    @Column()
+    @Field()
+    detailAddress: string;
 }

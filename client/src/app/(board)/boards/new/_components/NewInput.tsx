@@ -2,7 +2,9 @@
 
 import { ETitle, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
 
-export default function NewInput({ title }: ITitle) {
+export default function NewInput({ title, edit }: ITitle) {
+	console.log(title);
+	console.log(edit);
 	return (
 		<input
 			id={title}

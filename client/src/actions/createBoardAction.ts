@@ -16,6 +16,8 @@ export async function createBoardAction(
 	const title = formData.get('Title');
 	const content = formData.get('Content');
 	const youtubeUrl = formData.get('YoutubeUrl');
+	const address = formData.get('Address');
+	const detailAddress = formData.get('DetailAddress');
 
 	if (!author || !password || !title || !content)
 		return {
@@ -34,6 +36,8 @@ export async function createBoardAction(
 			password: password as string,
 			content: content as string,
 			youtubeUrl: youtubeUrl as string | undefined,
+			address: address as string,
+			detailAddress: detailAddress as string,
 		};
 
 		const responseData = await postBoard(data);

@@ -18,8 +18,16 @@ export class BoardRepository {
     ) {}
 
     createBoard(createBoardDto: CreateBoardDto): Board {
-        const { author, title, content, imageUrl, youtubeUrl, password } =
-            createBoardDto;
+        const {
+            author,
+            title,
+            content,
+            imageUrl,
+            youtubeUrl,
+            password,
+            address,
+            detailAddress,
+        } = createBoardDto;
         return this.boardRepository.create({
             author,
             title,
@@ -27,6 +35,8 @@ export class BoardRepository {
             password,
             ...(imageUrl?.length > 0 && { imageUrl }),
             ...(youtubeUrl && { youtubeUrl }),
+            ...(address && { address }),
+            ...(detailAddress && { detailAddress }),
         });
     }
 
