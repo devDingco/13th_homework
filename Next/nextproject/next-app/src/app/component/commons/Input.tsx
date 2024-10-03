@@ -7,11 +7,12 @@ interface Props {
   id: string, 
   placeholder: string, 
   name: string, 
+  value ?: string,
   onChange ?:(event: ChangeEvent<HTMLInputElement>) => void; 
   // void = 함수의 반환 타입을 정의, 아무값도 반환하지않는 함수
 }
 
-export default function Input ({label, type, id, placeholder, name, onChange} : Props) {
+export default function Input ({label, type, id, placeholder, name, value,onChange} : Props) {
     return (
     <div>
       <label htmlFor={name} className={`css_${name}tag`}>{label}</label>
@@ -21,6 +22,7 @@ export default function Input ({label, type, id, placeholder, name, onChange} : 
         id={id}
         name={name}
         placeholder={placeholder}
+        value={value}
         className={styles[`css_${name}input`]}  
         onChange={onChange}
       />
