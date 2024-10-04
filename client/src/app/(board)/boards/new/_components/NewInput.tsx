@@ -1,6 +1,6 @@
 /** @format */
 
-import { ETitle, ETitleLowerCase, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
+import { ETitle, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
 import { useParams, usePathname } from 'next/navigation';
 
 import useSWR from 'swr';
