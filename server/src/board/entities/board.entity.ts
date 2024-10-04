@@ -1,13 +1,14 @@
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     ObjectId,
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { CreateBoardDto } from '../dto/create-board.dto';
 
 @Entity()
@@ -28,4 +29,8 @@ export class Board extends CreateBoardDto {
     @UpdateDateColumn()
     @Field(() => Date)
     updatedAt: Date;
+
+    @DeleteDateColumn()
+    @Field(() => Date)
+    deletedAt: Date;
 }

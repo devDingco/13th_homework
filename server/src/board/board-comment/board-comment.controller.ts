@@ -15,7 +15,7 @@ import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 import { ResponseMessage } from '../decorators/response-message.decorator';
 
-@Controller('board-comment')
+@Controller('/api/board/:boardId/comment')
 export class BoardCommentController {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
@@ -26,7 +26,7 @@ export class BoardCommentController {
         @Param(':boardId', ParseIntPipe) boardId: number,
         @Body() createBoardCommentDto: CreateBoardCommentDto,
     ) {
-        return this.boardCommentService.create(createBoardCommentDto);
+        return this.boardCommentService.create(boardId, createBoardCommentDto);
     }
 
     @Get()

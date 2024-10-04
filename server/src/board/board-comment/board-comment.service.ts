@@ -1,10 +1,14 @@
+import { BoardCommentRepository } from './board-comment.repository';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { Injectable } from '@nestjs/common';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
 @Injectable()
 export class BoardCommentService {
-    create(createBoardCommentDto: CreateBoardCommentDto) {
+    constructor(
+        private readonly boardCommentRepository: BoardCommentRepository,
+    ) {}
+    create(boardId: number, createBoardCommentDto: CreateBoardCommentDto) {
         return 'This action adds a new boardComment';
     }
 

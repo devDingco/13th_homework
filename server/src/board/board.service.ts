@@ -3,9 +3,9 @@ import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { Board } from './entities/board.entity';
-import { BoardIdCounterRepository } from './repositories/boardIdCounterRepository';
+import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
-import { BoardRepository } from './repositories/boardRepository';
+import { BoardRepository } from './repositories/board.repository';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 

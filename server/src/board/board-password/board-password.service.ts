@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
-import { BoardRepository } from '../repositories/boardRepository';
+import { BoardRepository } from '../repositories/board.repository';
 
 @Injectable()
 export class BoardPasswordService {
