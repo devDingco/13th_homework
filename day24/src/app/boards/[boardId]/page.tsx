@@ -7,39 +7,39 @@ import Image from "next/image";
 
 const IMAGE_SRC = {
   profileImage: {
-    src: require("@assets/profile_image.png"),
+    src: require("./_components/profile_image.png"),
     alt: "프로필이미지",
   },
   linkImage: {
-    src: require("@assets/link.png"),
+    src: require("./_components/link.png"),
     alt: "링크아이콘",
   },
   locationImage: {
-    src: require("@assets/location.png"),
+    src: require("./_components/location.png"),
     alt: "위치아이콘",
   },
   cheongsanImage: {
-    src: require("@assets/cheongsan.png"),
+    src: require("./_components/cheongsan.png"),
     alt: "청산사진",
   },
-  neotubeImage: {
-    src: require("@assets/neotube.png"),
-    alt: "너튜브사진",
+  youtubeImage: {
+    src: require("./_components/cheongsan.png"),
+    alt: "유튜브사진",
   },
   badImage: {
-    src: require("@assets/bad.png"),
+    src: require("./_components/bad.png"),
     alt: "싫어요",
   },
   goodImage: {
-    src: require("@assets/good.png"),
+    src: require("./_components/good.png"),
     alt: "좋아요",
   },
   hamberger: {
-    src: require("@assets/hamberger.png"),
+    src: require("./_components/hamburger.png"),
     alt: "목록아이콘",
   },
   pencil: {
-    src: require("@assets/pencil.png"),
+    src: require("./_components/pencil.png"),
     alt: "수정아이콘",
   },
 } as const;
@@ -118,8 +118,8 @@ export default function BoardsDetailPage() {
               {data?.fetchBoard?.contents}
             </div>
             <Image
-              src={IMAGE_SRC.neotubeImage.src}
-              alt={IMAGE_SRC.neotubeImage.alt}
+              src={IMAGE_SRC.cheongsanImage.src}
+              alt={IMAGE_SRC.cheongsanImage.alt}
             />
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
