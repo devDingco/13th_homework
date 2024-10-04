@@ -124,7 +124,7 @@ const CREATE_BOARD = gql`
 `;
 
 // 메인 필드
-const Main = () => {
+const BoardsNewPage = () => {
   const [createBoard] = useMutation(CREATE_BOARD);
   const Router = useRouter();
 
@@ -260,4 +260,4 @@ const Main = () => {
 };
 
 // Main comp goes to App.js
-export default Main;
+export default BoardsNewPage;
