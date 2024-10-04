@@ -38,16 +38,15 @@ interface Ipost {
   title: string;
   createdAt: string;
 }
-
-export default function BoardList() {
+export default function BoardsPage() {
   const router = useRouter();
   const params = useParams();
   console.log(params);
 
   const { data } = useQuery(FETCH_BOARDS, {
     variables: {
-      endDate: "2024-09-30T18:54:33Z",
-      startDate: "2023-09-03T09:54:33Z",
+      endDate: "2024-10-30T18:54:33Z",
+      startDate: "2021-09-03T09:54:33Z",
       search: "",
       page: Number(params.pageNum) || 1,
     },
@@ -99,7 +98,7 @@ export default function BoardList() {
     postId: string
   ) => {
     // console.log("detail", postId);
-    router.push(`/board/detail/${postId}`);
+    router.push(`/boards/${postId}`);
   };
 
   return (

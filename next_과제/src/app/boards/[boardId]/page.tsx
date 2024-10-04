@@ -37,7 +37,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function BoardDetail() {
+export default function BoardsDetailPage() {
   const params = useParams();
   // 주소에서 값을 가져온 params.id는 문자이므로 Number로 변환해주고
   // FETCH_BOARD 쿼리에 넣어준다.
@@ -114,13 +114,13 @@ export default function BoardDetail() {
         </div>
 
         <div className="flex gap-6 justify-center">
-          <Link className="btn btn-outline" href={`/board/list`}>
+          <Link className="btn btn-outline" href={`/boards`}>
             <Icon icon="menu" className="fill-current w-6 h-6" />
             목록으로
           </Link>
           <Link
             className="btn btn-outline"
-            href={`/board/edit/${params.boardId}`}
+            href={`/boards/${params.boardId}/edit`}
           >
             <Icon icon="edit" className="fill-current w-6 h-6" />
             수정하기

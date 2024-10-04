@@ -17,9 +17,9 @@ const Header = () => {
       name: "board",
       link: "/board",
       subnav: [
-        { name: "게시글리스트", link: "/board/list" },
+        { name: "게시글리스트", link: "/boards" },
         // { name: "게시글상세", link: "/board/detail" },
-        { name: "게시글등록", link: "/board/write" },
+        { name: "게시글등록", link: "/boards/new" },
         // { name: "게시글수정", link: "/board/edit" },
       ],
     },
