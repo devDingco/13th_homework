@@ -1,77 +1,84 @@
-'use client';
-import React from 'react';
-import styles from './styles.module.css';
-import Image from 'next/image';
-import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'next/navigation';
+"use client";
+import { useQuery, gql } from "@apollo/client";
+import { useParams } from "next/navigation";
+
+import styles from "./styles.module.css";
+import Image from "next/image";
+import Link from "next/link";
 
 const IMAGE_SRC = {
   profileImage: {
-    src: require('@assets/profile_image.png'),
-    alt: '프로필이미지',
+    src: require("@assets/profile_image.png"),
+    alt: "프로필이미지",
   },
   linkImage: {
-    src: require('@assets/link.png'),
-    alt: '링크아이콘',
+    src: require("@assets/link.png"),
+    alt: "링크아이콘",
   },
   locationImage: {
-    src: require('@assets/location.png'),
-    alt: '위치아이콘',
+    src: require("@assets/location.png"),
+    alt: "위치아이콘",
   },
   cheongsanImage: {
-    src: require('@assets/cheongsan.png'),
-    alt: '청산사진',
+    src: require("@assets/cheongsan.png"),
+    alt: "청산사진",
   },
   neotubeImage: {
-    src: require('@assets/neotube.png'),
-    alt: '너튜브사진',
+    src: require("@assets/neotube.png"),
+    alt: "너튜브사진",
   },
   badImage: {
-    src: require('@assets/bad.png'),
-    alt: '싫어요',
+    src: require("@assets/bad.png"),
+    alt: "싫어요",
   },
   goodImage: {
-    src: require('@assets/good.png'),
-    alt: '좋아요',
+    src: require("@assets/good.png"),
+    alt: "좋아요",
   },
   hamberger: {
-    src: require('@assets/hamberger.png'),
-    alt: '목록아이콘',
+    src: require("@assets/hamberger.png"),
+    alt: "목록아이콘",
   },
   pencil: {
-    src: require('@assets/pencil.png'),
-    alt: '수정아이콘',
+    src: require("@assets/pencil.png"),
+    alt: "수정아이콘",
   },
 } as const;
 
-export default function BoardsDetailPage() {
-  const { detailId } = useParams();
-  const 나의그래프큐엘셋팅 = gql`
-    query fetchBoard($boardId: ID!) {
-      fetchBoard(boardId: $boardId) {
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      user {
         _id
-        writer
-        title
-        contents
-        youtubeUrl
-        likeCount
-        images
-        boardAddress {
-          zipcode
-          address
-          addressDetail
-        }
-        createdAt
-        updatedAt
-        deletedAt
+        email
+        name
+        picture
       }
+      createdAt
+      updatedAt
+      deletedAt
     }
-  `;
+  }
+`;
 
-  const { loading, error, data } = useQuery(나의그래프큐엘셋팅,
-    {variables:{boardId: detailId}}
-  );
-  console.dir(data?.fetchBoard);
+export default function BoardsDetailPage() {
+  const params = useParams();
+  const id = params.boardId;
+  console.log("detail 화면에서 id::::", id);
+
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { boardId: id },
+  });
+
+  console.log("detail 화면에서 data:::", data);
 
   return (
     <div className={styles.detailLayout}>
@@ -84,10 +91,11 @@ export default function BoardsDetailPage() {
                 src={IMAGE_SRC.profileImage.src}
                 alt={IMAGE_SRC.profileImage.alt}
               />
-              <div>{data?.fetchBoard?.writer}</div>
+              <div> {data?.fetchBoard?.writer}</div>
             </div>
             <div className={styles.detailMetadataDate}>
-              {(data?.fetchBoard?.createdAt).slice(0, 10).replace(/-/g, '.')}
+              {' '}
+              {data?.fetchBoard?.createdAt}
             </div>
           </div>
           <div className={styles.enrollBorder}></div>
@@ -108,8 +116,7 @@ export default function BoardsDetailPage() {
               className={styles.detailContentImage}
             />
             <div className={styles.detailContentText}>
-              <div>{data?.fetchBoard?.content}</div>
-              <div className={styles.textGap}></div>
+              {data?.fetchBoard?.contents}
             </div>
             <Image
               src={IMAGE_SRC.neotubeImage.src}
@@ -137,11 +144,17 @@ export default function BoardsDetailPage() {
                   src={IMAGE_SRC.hamberger.src}
                   alt={IMAGE_SRC.hamberger.alt}
                 />
-                <div>목록으로</div>
+                <div>
+                  <Link href="/boards">목록으로</Link>
+                </div>
               </button>
               <button className={styles.detailButton}>
                 <Image src={IMAGE_SRC.pencil.src} alt={IMAGE_SRC.pencil.alt} />
-                <div>수정하기</div>
+                <div>
+                  <Link href={`/boards/edit/${id}`}>
+                    수정하기
+                  </Link>
+                </div>
               </button>
             </div>
           </div>
