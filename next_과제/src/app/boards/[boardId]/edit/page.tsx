@@ -36,8 +36,6 @@ export default function BoardsEditPage() {
     variables: { boardId: params.boardId },
   });
 
-  console.log(data);
-
   return (
     <BoardForm
       title="게시글 수정"
