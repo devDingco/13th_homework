@@ -3,13 +3,13 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
     HttpCode,
     HttpStatus,
     ParseIntPipe,
     UseInterceptors,
+    Put,
 } from '@nestjs/common';
 import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -42,12 +42,20 @@ export class BoardCommentController {
         return this.boardCommentService.findAllComment(boardId);
     }
 
-    @Patch(':id')
+    @Put(':commentId')
+    @ResponseMessage('comment가 성공적으로 수정했습니다.')
+    @HttpCode(HttpStatus.OK)
     update(
-        @Param('id') id: string,
+        @Param('boardId', ParseIntPipe) boardId: number,
+        @Param('commentId') commentId: string,
         @Body() updateBoardCommentDto: UpdateBoardCommentDto,
     ) {
-        return this.boardCommentService.update(+id, updateBoardCommentDto);
+        return this.boardCommentService.updateComment(
+            boardId,
+            updateBoardCommentDto,
+            updateBoardCommentDto.password,
+            commentId,
+        );
     }
 
     @Delete(':id')

@@ -37,6 +37,9 @@ export class TransformInterceptor<T>
                     return { data };
                 } else if (context.getType() === 'http') {
                     if (Array.isArray(data)) {
+                        if (data[0].rating) {
+                            return { message, statusCode, data };
+                        }
                         const deleteIdData = data.map((item) =>
                             this.removeSensitiveData(item),
                         );

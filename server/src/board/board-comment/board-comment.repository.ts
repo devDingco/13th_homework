@@ -3,6 +3,7 @@ import { BoardComment } from './entities/board-comment.entity';
 import { Injectable } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class BoardCommentRepository {
@@ -13,6 +14,13 @@ export class BoardCommentRepository {
 
     async findCommentById(parentId: string): Promise<BoardComment | null> {
         return await this.boardCommentRepository.findOneBy({ parentId });
+    }
+
+    async findComment(id: string) {
+        console.log(id);
+        return await this.boardCommentRepository.findOne({
+            where: { _id: new ObjectId(id) },
+        });
     }
     createComment(
         boardId: number,
