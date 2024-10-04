@@ -1,5 +1,6 @@
 /** @format */
 
+import BoardCommentContainer from './_components/BoardCommentContainer';
 import BoardContainer from './_components/BoardContainer';
 import BoardFooter from './_components/BoardFooter';
 import BoardLikeHate from './_components/BoardLikeHate';
@@ -22,6 +23,7 @@ export default function Detail({ params }: IDeatilProps) {
 				<BoardLikeHate resource={getReaction(+param)} />
 			</Suspense>
 			<BoardFooter />
+			<BoardCommentContainer />
 		</div>
 	);
 }

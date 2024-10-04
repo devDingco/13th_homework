@@ -44,7 +44,9 @@ export default function NewForm() {
 			<NewImageContainer />
 			<div className="flex w-full items-center justify-end gap-4">
 				<CommonButton title={EButtonTitle.cancel} />
-				<CommonButton title={path === 'edit' ? EButtonTitle.update : EButtonTitle.sumbit} />
+				<CommonButton
+					title={path.includes('edit') ? EButtonTitle.update : EButtonTitle.sumbit}
+				/>
 			</div>
 		</form>
 	);
