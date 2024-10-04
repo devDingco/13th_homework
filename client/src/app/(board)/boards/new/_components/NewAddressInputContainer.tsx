@@ -4,7 +4,7 @@ import { ETitle, ITitle } from '@/models/board.type';
 
 import NewInput from './NewInput';
 
-export default function NewAddressInputContainer({ title }: ITitle) {
+export default function NewAddressInputContainer({ title, edit }: ITitle) {
 	return (
 		<div className="flex flex-1 flex-col gap-2">
 			<div className="prose-me_16_24 text-gray-800">주소</div>
@@ -16,8 +16,11 @@ export default function NewAddressInputContainer({ title }: ITitle) {
 					우편번호 검색
 				</button>
 			</div>
-			<NewInput title={title} />
-			<NewInput title={ETitle.DetailAddress} />
+			<NewInput title={title} edit={typeof edit === 'object' && edit.address} />
+			<NewInput
+				title={ETitle.DetailAddress}
+				edit={typeof edit === 'object' && edit.detailAddress}
+			/>
 		</div>
 	);
 }

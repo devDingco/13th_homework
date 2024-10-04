@@ -10,6 +10,7 @@ import useSWR from 'swr';
 export default function BoardItemContainer() {
 	const { data, isLoading } = useSWR('/board', fetcher, {
 		suspense: true,
+		revalidateOnFocus: false,
 		fallbackData: [],
 	});
 

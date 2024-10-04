@@ -1,5 +1,7 @@
 /** @format */
 
+import { IApiResponseData } from './apiResponse';
+
 export enum ETitle {
 	Author = 'Author',
 	Password = 'Password',
@@ -32,12 +34,20 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 
 export interface ITitle {
 	title: ETitle;
+	edit?: string | IAddress | boolean;
 	error?: string;
+}
+export interface IAddress {
+	address?: string;
+	detailAddress?: string;
 }
 export interface ICreateFormBoard {
 	author: string;
 	title: string;
 	content: string;
+	password: string;
+	address?: string;
+	detailAddress?: string;
 	youtubeUrl?: string;
 	imageUrl?: string[];
 }
@@ -60,4 +70,8 @@ export interface IBoardItem {
 
 export interface IBoardProps {
 	infor?: IBoardType;
+}
+
+export interface IBoardEditProps {
+	boardInfor?: IApiResponseData;
 }

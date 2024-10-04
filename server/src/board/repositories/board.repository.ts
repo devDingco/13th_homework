@@ -1,6 +1,11 @@
 import { MongoRepository } from 'typeorm';
 import { Board } from '../entities/board.entity';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+    HttpException,
+    HttpStatus,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { CreateBoardDto } from '../dto/create-board.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateBoardDto } from '../dto/update-board.dto';
@@ -13,13 +18,25 @@ export class BoardRepository {
     ) {}
 
     createBoard(createBoardDto: CreateBoardDto): Board {
-        const { author, title, content, imageUrl, youtubeUrl } = createBoardDto;
+        const {
+            author,
+            title,
+            content,
+            imageUrl,
+            youtubeUrl,
+            password,
+            address,
+            detailAddress,
+        } = createBoardDto;
         return this.boardRepository.create({
             author,
             title,
             content,
+            password,
             ...(imageUrl?.length > 0 && { imageUrl }),
             ...(youtubeUrl && { youtubeUrl }),
+            ...(address && { address }),
+            ...(detailAddress && { detailAddress }),
         });
     }
 
@@ -37,10 +54,7 @@ export class BoardRepository {
         });
 
         if (!findBoard) {
-            throw new HttpException(
-                `boardID: ${boardId} is not found`,
-                HttpStatus.NOT_FOUND,
-            );
+            throw new NotFoundException(`boardID: ${boardId} is not found`);
         }
 
         return findBoard;
@@ -91,6 +105,7 @@ export class BoardRepository {
         }
         return true;
     }
+
     async clearBoard(): Promise<void> {
         await this.boardRepository.clear();
     }

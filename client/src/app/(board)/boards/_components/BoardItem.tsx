@@ -4,20 +4,20 @@
 import { IBoardItem } from '@/models/board.type';
 import Image from 'next/image';
 import { changeDateToISO } from '@/utils/changeDateToISO';
-import { useRouter } from 'next/navigation';
+import useOnClickPush from '@/hooks/useOnClickPush';
 import { useState } from 'react';
 
 export default function BoardItem({ board }: IBoardItem) {
-	const router = useRouter();
+	const onClickPush = useOnClickPush();
 	const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
 	const onClickRouterDetail = (boardId: number) => {
-		router.push(`/boards/${boardId}`);
+		onClickPush(`/boards/${boardId}`);
 	};
 
 	const onClickDeleteButton = (event: React.MouseEvent) => {
 		event.stopPropagation();
-		router.push(`boards/?modal=${board.boardId}`);
+		onClickPush(`boards/?boardId=${board.boardId}`);
 	};
 
 	const formattedDate = changeDateToISO(board.createdAt);

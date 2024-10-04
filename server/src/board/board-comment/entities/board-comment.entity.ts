@@ -3,17 +3,17 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
-    ObjectId,
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
-import { CreateBoardDto } from '../dto/create-board.dto';
+import { CreateBoardCommentDto } from '../dto/create-board-comment.dto';
+import { ObjectId } from 'mongodb';
 
 @Entity()
 @ObjectType()
-export class Board extends CreateBoardDto {
+export class BoardComment extends CreateBoardCommentDto {
     @ObjectIdColumn()
     @Field(() => ID)
     _id: ObjectId;

@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
-import { BoardService } from './board.service';
-import { BoardController } from './board.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Board } from './entities/board.entity';
-import { BoardRepository } from './repositories/boardRepository';
-import { BoardIdCounterRepository } from './repositories/boardIdCounterRepository';
+import { BoardController } from './board.controller';
 import { BoardIdCounter } from './entities/board-boardId.entity';
+import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
 import { BoardReaction } from './reaction/entities/reaction.entity';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
-import { ReactionModule } from './reaction/reaction.module';
+import { BoardRepository } from './repositories/board.repository';
 import { BoardResolver } from './board.resolver';
+import { BoardService } from './board.service';
+import { Module } from '@nestjs/common';
+import { ReactionModule } from './reaction/reaction.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [

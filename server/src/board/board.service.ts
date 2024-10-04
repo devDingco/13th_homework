@@ -1,10 +1,13 @@
+import * as bcrypt from 'bcrypt';
+
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+
+import { Board } from './entities/board.entity';
+import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
+import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
+import { BoardRepository } from './repositories/board.repository';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
-import { Board } from './entities/board.entity';
-import { BoardRepository } from './repositories/boardRepository';
-import { BoardIdCounterRepository } from './repositories/boardIdCounterRepository';
-import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 
 @Injectable()
 export class BoardService {
@@ -14,6 +17,8 @@ export class BoardService {
         private readonly boardReactionRepository: BoardReactionRepository,
     ) {}
     async create(createBoardDto: CreateBoardDto): Promise<Board> {
+        createBoardDto = await this.transformPassword(createBoardDto);
+
         const board = this.boardRepository.createBoard(createBoardDto);
 
         const boardId =
@@ -66,5 +71,16 @@ export class BoardService {
     async clear(): Promise<void> {
         await this.boardRepository.clearBoard();
         await this.boardReactionRepository.clearBoardReaction();
+    }
+
+    async transformPassword(
+        createBoardDto: CreateBoardDto,
+    ): Promise<CreateBoardDto> {
+        createBoardDto.password = await bcrypt.hash(
+            createBoardDto.password,
+            10,
+        );
+
+        return createBoardDto;
     }
 }
