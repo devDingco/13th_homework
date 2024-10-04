@@ -203,6 +203,7 @@ export default function BoardsCommonPage({
   if (mode === 'edit') {
     useEffect(() => {
       if (editData) {
+        setName(editData.writer);
         setTitle(editData.title);
         setContent(editData.contents);
       }
