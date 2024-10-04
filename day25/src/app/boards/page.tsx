@@ -5,6 +5,7 @@ import { useState, MouseEvent } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface BoardType {
 	createdAt: Date;
