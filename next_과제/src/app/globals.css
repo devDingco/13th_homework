@@ -25,10 +25,10 @@
     @apply appearance-none bg-gray-50 flex flex-col items-center justify-center rounded-lg w-40 h-40 gap-2 text-gray-500 font-light cursor-pointer;
   }
 
-  svg {
+  .iconSvg {
     @apply fill-current w-full h-full overflow-hidden;
   }
-  svg > path {
+  .iconSvg > svg > path {
     @apply fill-inherit;
   }
 
