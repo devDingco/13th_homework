@@ -3,10 +3,10 @@ interface PostsType {
   userpw: string;
   userTitle: string;
   usercontent: string;
-  userAdress?: string | null;
-  userAdressDetail?: string | null;
-  userAdressNum?: string | null;
-  youtubeLink?: string | null;
+  userAdress?: string;
+  userAdressDetail?: string;
+  userAdressNum?: string;
+  youtubeLink?: string;
 }
 
 interface RequiredType {

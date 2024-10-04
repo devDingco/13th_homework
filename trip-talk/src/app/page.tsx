@@ -7,8 +7,6 @@ function App() {
   return (
     <>
       <Link href="/boards/new">포스트 생성페이지</Link>
-      <br />
-      <Link href="/boards/detail">포스트 상세 페이지</Link>
     </>
   );
 }

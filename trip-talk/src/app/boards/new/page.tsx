@@ -1,5 +1,5 @@
 import React from 'react';
-import AddPostsForm from '../../_component/addPost/AddPostsForm';
+import PostsForm from '../../_component/boardForm/PostsForm';
 import s from './BoardsNew.module.css';
 
 const BoardsNew = () => {
@@ -7,7 +7,7 @@ const BoardsNew = () => {
     <>
       <div className={s.mainContainer}>
         <h2 className={s.title}>게시물 등록</h2>
-        <AddPostsForm />
+        <PostsForm type="ADD" />
       </div>
     </>
   );
