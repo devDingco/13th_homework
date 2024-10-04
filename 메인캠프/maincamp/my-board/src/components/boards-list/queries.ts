@@ -1,6 +1,3 @@
-'use client';
-
-import { BoardsList } from '@/components/boards-list';
 import { gql } from '@apollo/client';
 
 const DELETE_BOARD = gql`
@@ -8,7 +5,3 @@ const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
-
-export default function BoardsListPage() {
-  return <BoardsList />;
-}
