@@ -24,5 +24,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         BoardReactionRepository,
         BoardResolver,
     ],
+    exports: [BoardService, BoardRepository],
 })
 export class BoardModule {}

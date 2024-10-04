@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Board } from './entities/board.entity';
 import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
@@ -17,9 +17,14 @@ export class BoardService {
         private readonly boardReactionRepository: BoardReactionRepository,
     ) {}
     async create(createBoardDto: CreateBoardDto): Promise<Board> {
-        createBoardDto = await this.transformPassword(createBoardDto);
+        const hashPassword = await this.transformPassword(
+            createBoardDto.password,
+        );
 
-        const board = this.boardRepository.createBoard(createBoardDto);
+        const board = this.boardRepository.createBoard({
+            ...createBoardDto,
+            password: hashPassword,
+        });
 
         const boardId =
             await this.boardIdCounterRepository.incrementBoardId('board');
@@ -60,9 +65,8 @@ export class BoardService {
         // 원래 서비스 로직에서 에러는 처리하지 않으려고 했지만 현재 같은 경우 한 번 더 확인하는 것
         // 한 번 더 둘 다 truthy인 지 확인하고, 혹시나해서 만약에 하나라도 falsy면 에러처리
         if (!responseBoard || !responseBoardReaction) {
-            throw new HttpException(
-                `boardID: ${boardId} is not found in totalBoard`,
-                HttpStatus.NOT_FOUND,
+            throw new NotFoundException(
+                `boardID: ${boardId} is not found in Board`,
             );
         }
         return true;
@@ -73,14 +77,7 @@ export class BoardService {
         await this.boardReactionRepository.clearBoardReaction();
     }
 
-    async transformPassword(
-        createBoardDto: CreateBoardDto,
-    ): Promise<CreateBoardDto> {
-        createBoardDto.password = await bcrypt.hash(
-            createBoardDto.password,
-            10,
-        );
-
-        return createBoardDto;
+    async transformPassword(password: string): Promise<string> {
+        return await bcrypt.hash(password, 10);
     }
 }

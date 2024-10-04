@@ -1,7 +1,8 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
     IsNotEmpty,
     IsNumber,
+    IsOptional,
     IsString,
     Length,
     Max,
@@ -21,13 +22,13 @@ export class CreateBoardCommentDto {
 
     @IsString()
     @IsNotEmpty()
-    @Length(1, 100)
     @Column()
     @Field()
     password: string;
 
     @IsString()
     @IsNotEmpty()
+    @Length(1, 100)
     @Column()
     @Field()
     content: string;
@@ -39,4 +40,10 @@ export class CreateBoardCommentDto {
     @Column()
     @Field(() => Int)
     rating: number;
+
+    @IsString()
+    @IsOptional()
+    @Column()
+    @Field(() => ID, { nullable: true })
+    parentId: string | null;
 }

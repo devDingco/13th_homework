@@ -1,15 +1,60 @@
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
+
+import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
+import { BoardRepository } from '../repositories/board.repository';
+import { BoardService } from '../board.service';
+// import { BoardCommentRepository } from './board-comment.repository';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { Injectable } from '@nestjs/common';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
+//     private readonly boardCommentRepository: BoardCommentRepository,
 @Injectable()
 export class BoardCommentService {
     constructor(
+        private readonly boardService: BoardService,
         private readonly boardCommentRepository: BoardCommentRepository,
+        private readonly boardRepsitory: BoardRepository,
     ) {}
-    create(boardId: number, createBoardCommentDto: CreateBoardCommentDto) {
-        return 'This action adds a new boardComment';
+    async createComment(
+        boardId: number,
+        createBoardCommentDto: CreateBoardCommentDto,
+    ): Promise<BoardComment> {
+        const isExistBoard = await this.boardRepsitory.findBoard(boardId);
+
+        if (!isExistBoard) {
+            throw new NotFoundException(
+                `boardID: ${boardId} is not found in Board`,
+            );
+        }
+
+        if (createBoardCommentDto.parentId) {
+            const isExistParentComment =
+                await this.boardCommentRepository.findCommentById(
+                    createBoardCommentDto.parentId,
+                );
+            if (!isExistParentComment) {
+                throw new BadRequestException('Parent comment not found');
+            }
+        }
+
+        const hashPassword: string = await this.boardService.transformPassword(
+            createBoardCommentDto.password,
+        );
+
+        const comment: BoardComment = this.boardCommentRepository.createComment(
+            boardId,
+            {
+                ...createBoardCommentDto,
+                password: hashPassword,
+            },
+        );
+
+        return await this.boardCommentRepository.saveComment(comment);
     }
 
     findAll() {

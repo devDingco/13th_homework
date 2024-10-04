@@ -52,11 +52,12 @@ export class TransformInterceptor<T>
         );
     }
     private removeSensitiveData(item: any): any {
-        if (item && item._id && item.password) {
+        if (item && item._id) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { _id, password, ...rest } = item;
             return rest;
         }
+
         return item;
     }
 }
