@@ -1,3 +1,5 @@
+// 상세페이지
+
 "use client";
 
 import { gql, useQuery } from "@apollo/client";
@@ -133,7 +135,11 @@ const BoardsDetail = () => {
               height={0}
               sizes="100vw"
             />
-            <span>목록으로</span>
+
+            <span></span>
+            <Link href="/boards">
+              <span>목록으로</span>
+            </Link>
           </button>
           <button className={styles.edit}>
             <Image
@@ -144,7 +150,7 @@ const BoardsDetail = () => {
               height={0}
               sizes="100vw"
             />
-            <span>수정하기</span>
+            <Link href={`/boards/${params.boardId}/edit`}>수정하러가기</Link>
           </button>
         </div>
       </main>
