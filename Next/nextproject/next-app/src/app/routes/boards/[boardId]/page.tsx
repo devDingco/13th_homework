@@ -4,8 +4,7 @@ import React from 'react';
 import styles from './style.module.css';
 import Image from 'next/image'
 import { gql, useQuery } from '@apollo/client';
-import { useParams } from 'next/navigation';
-
+import { useParams, useRouter } from 'next/navigation';
 
 
 const FetchBoard = gql`
@@ -15,19 +14,30 @@ const FetchBoard = gql`
       title
       contents
       createdAt
+      _id
     }
   }
 `;
 
+
+
 export default function BoardsDetail () {
     const params = useParams();
+    const router = useRouter();
+    
+
+    
     const { data } = useQuery(FetchBoard, {
         variables: {
           myboardId: params.boardId,
         },
       });
-      console.log(data)
-      
+
+    const onModify = () => {
+        router.push(`${data?.fetchBoard._id}/edit`)
+        
+        
+    }
     return (
         <div className={styles.css_layout}>
             <div className={styles.css_header}>{data?.fetchBoard.title}</div>                   
@@ -74,8 +84,8 @@ export default function BoardsDetail () {
                     <button className={styles.css_list}>
                         <Image src='/assets/List.png' width={0} height={0} sizes='100vw' alt='list' className={styles.css_listimage} />
                     </button>
-                    <button className={styles.css_modify}>
-                    <Image src='/assets/Modify.png' width={0} height={0} sizes='100vw' alt='modify' className={styles.css_modifyimage} />
+                    <button className={styles.css_modify} >
+                    <Image src='/assets/Modify.png' width={0} height={0} sizes='100vw' alt='modify' className={styles.css_modifyimage} onClick={onModify}/>
                     </button>
                 </div>
         </div>
