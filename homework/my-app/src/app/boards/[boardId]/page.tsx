@@ -40,7 +40,8 @@ const FETCH_BOARD = gql`
 const BoardsDetail = () => {
   
   const params = useParams()
-  
+  const router = useRouter()
+
   const {data} = useQuery(FETCH_BOARD, {
     variables: {
       boardId: params.boardId
@@ -49,9 +50,14 @@ const BoardsDetail = () => {
   console.log(data)
 
 
-  const router = useRouter()
+
+
   const listButton = () => {
     router.push("/boards")
+  }
+
+  const editButton = () => {
+    router.push(`/boards/${params.boardId}/edit`)
   }
 
 
@@ -139,8 +145,8 @@ const BoardsDetail = () => {
         목록으로
       </button>
       
-      <button className={styles.gotoListButton}>
-        <Image src="/image/edit_icon.png" className={styles.buttonIcon} alt="동영상썸네일" width={0} height={0} sizes='100vw'  />
+      <button className={styles.gotoListButton} onClick={editButton}>
+        <Image src="/image/edit_icon.png" className={styles.buttonIcon} alt="동영상썸네일" width={0} height={0} sizes='100vw'/>
         수정하기
       </button>
    </div>
