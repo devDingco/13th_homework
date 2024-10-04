@@ -1,5 +1,6 @@
 import styles from "../boardNew.module.css";
 import { AddressInputProps } from "@/types/board";
+import React from "react";
 
 const AddressInput: React.FC<AddressInputProps> = ({
   zipCode,

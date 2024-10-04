@@ -6,6 +6,12 @@ export interface Board {
   title: string;
   contents: string;
   createdAt: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode: string;
+    address: string;
+    addressDetail: string;
+  };
 }
 
 export interface FetchBoardsResult {
@@ -97,4 +103,51 @@ export interface BoardItemProps {
   };
   index: number;
   onDelete: (id: string) => void;
+}
+
+export interface BoardContentProps {
+  contents: string;
+  likes: number;
+  dislikes: number;
+}
+export interface FormData {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+  zipCode: string;
+  address: string;
+  detailAddress: string;
+  youtubeLink: string;
+}
+
+export interface CreateBoardInput {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode: string;
+    address: string;
+    addressDetail: string;
+  };
+}
+
+export interface UpdateBoardInput {
+  title?: string;
+  contents?: string;
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode: string;
+    address: string;
+    addressDetail: string;
+  };
+}
+
+export interface FormErrors {
+  writer?: string;
+  password?: string;
+  title?: string;
+  contents?: string;
 }

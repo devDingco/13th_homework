@@ -1,5 +1,6 @@
 import styles from "../boardNew.module.css";
 import { TextareaFieldProps } from "@/types/board";
+import React from "react";
 
 const TextareaField: React.FC<TextareaFieldProps> = ({
   label,

@@ -5,12 +5,13 @@ import styles from "./boardDetail.module.css";
 import "@/app/globals.css";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-import BoardDetailHeader from "./_components/BoardDetailHeader";
+
 import BoardDetailContent from "./_components/BoardDetailContent";
 import IconSection from "./_components/IconSection";
 import { FETCH_BOARD } from "@/graphql/board";
+import BoardDetailHeader from "./_components/BoardDetailHeader";
 
-export const BoardsDetailPage: React.FC = () => {
+const BoardsDetailPage: React.FC = () => {
   const params = useParams();
   const { data, loading } = useQuery(FETCH_BOARD, {
     variables: {
@@ -37,3 +38,5 @@ export const BoardsDetailPage: React.FC = () => {
     </div>
   );
 };
+
+export default BoardsDetailPage;

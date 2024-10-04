@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import styles from "./page.module.css";
 import BoardItem from "./_components/BoardItem";

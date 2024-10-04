@@ -1,9 +1,10 @@
+import React from "react";
 import Image from "next/image";
 import styles from "../boardDetail.module.css";
 import { useRouter } from "next/navigation";
 import { ActionButtonsProps } from "@/types/board";
 
-export const ActionButtons: React.FC<ActionButtonsProps> = ({ boardId }) => {
+const ActionButtons: React.FC<ActionButtonsProps> = ({ boardId }) => {
   const router = useRouter();
 
   const handleListClick = () => {
@@ -37,3 +38,5 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ boardId }) => {
     </div>
   );
 };
+
+export default ActionButtons;

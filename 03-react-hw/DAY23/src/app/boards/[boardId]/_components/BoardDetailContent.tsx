@@ -2,13 +2,10 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import styles from "../boardDetail.module.css";
 import LikeDislikeButtons from "./LikeDislikeButtons";
-import { ActionButtons } from "./ActionButtons";
 
-interface BoardContentProps {
-  contents: string;
-  likes: number;
-  dislikes: number;
-}
+import React from "react";
+import ActionButtons from "./ActionButtons";
+import { BoardContentProps } from "@/types/board";
 
 const BoardDetailContent: React.FC<BoardContentProps> = ({
   contents,

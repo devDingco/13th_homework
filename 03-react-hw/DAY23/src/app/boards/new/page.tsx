@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { BoardForm } from "../_components/BoardForm";
+import BoardForm from "../../../components/BoardForm";
 
-export const NewBoardPage: React.FC = () => {
+const NewBoardPage: React.FC = () => {
   return <BoardForm mode="create" />;
 };
+
+export default NewBoardPage;
