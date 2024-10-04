@@ -3,6 +3,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BoardModule } from './board/board.module';
+import { BoardPasswordModule } from './board/board-password/board-password.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
@@ -24,6 +25,7 @@ import { typeORMConfig } from 'configs/typeorm.config';
         }),
 
         BoardModule,
+        BoardPasswordModule,
     ],
     controllers: [AppController],
     providers: [AppService],
