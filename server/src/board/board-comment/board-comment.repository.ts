@@ -4,6 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
+import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
 @Injectable()
 export class BoardCommentRepository {
@@ -40,7 +41,10 @@ export class BoardCommentRepository {
         return await this.boardCommentRepository.find({ where: { boardId } });
     }
 
-    async updateComment(commentId: string, updateBoardCommentDto) {
+    async updateComment(
+        commentId: string,
+        updateBoardCommentDto: UpdateBoardCommentDto,
+    ): Promise<boolean> {
         const updateBoardDB = await this.boardCommentRepository.update(
             new ObjectId(commentId),
             updateBoardCommentDto,
@@ -49,6 +53,17 @@ export class BoardCommentRepository {
             throw new NotFoundException(
                 `commentId: ${commentId} is not update`,
             );
+        }
+        return true;
+    }
+
+    async deleteComment(commentId: string): Promise<void> {
+        const deleteComment = await this.findComment(commentId);
+
+        if (!deleteComment) {
+            throw new NotFoundException(`commentId: ${commentId} is not found`);
+        } else {
+            await this.boardCommentRepository.softRemove(deleteComment);
         }
     }
 }

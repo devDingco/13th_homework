@@ -59,8 +59,10 @@ export class BoardCommentController {
         );
     }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.boardCommentService.remove(+id);
+    @Delete(':commentId')
+    @ResponseMessage('comment를 성공적으로 삭제했습니다.')
+    @HttpCode(HttpStatus.OK)
+    remove(@Param('commentId') commentId: string) {
+        return this.boardCommentService.removeComment(commentId);
     }
 }
