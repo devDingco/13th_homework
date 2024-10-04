@@ -110,7 +110,7 @@ function Icon({
 }: IconProps): JSX.Element {
   const SVGIcon = icons[icon];
   return (
-    <span className={`overflow-hidden inline-block ${className}`}>
+    <span className={`iconSvg overflow-hidden inline-block ${className}`}>
       <SVGIcon
         width={width}
         height={height}
