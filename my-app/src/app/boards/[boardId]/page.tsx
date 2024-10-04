@@ -1,8 +1,10 @@
 "use client";
+
 import { gql, useQuery } from "@apollo/client";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -15,6 +17,7 @@ const FETCH_BOARD = gql`
     }
   }
 `;
+
 const BoardsDetail = () => {
   const params = useParams();
   console.log(params, "params를 봐보자");
@@ -87,7 +90,9 @@ const BoardsDetail = () => {
         </div>
         <div className={styles.button_box}>
           <Image src="/img/edit.png" alt="editImg" width={24} height={24} />
-          <div className={styles.button_text}>수정하기</div>
+          <div className={styles.button_text}>
+            <Link href={`/boards/${params.boardId}/edit`}>수정하기</Link>
+          </div>
         </div>
       </div>
     </main>
