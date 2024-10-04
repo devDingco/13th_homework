@@ -1,8 +1,8 @@
 /** @format */
 
 import { ENewTitleProps, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
-import { useParams, usePathname } from 'next/navigation';
 
+import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 export default function NewTextarea({ title, error }: ITitle) {
