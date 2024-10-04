@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { gql, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -29,12 +29,17 @@ const FETCH_BOARD = gql`
 const BoardsDetailPage = () => {
   // graphql
   const params = useParams();
+  const router = useRouter();
   const id = params.boardId;
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: id },
   });
   console.log("data:", data);
   const createdDate = data?.fetchBoard?.createdAt.slice(0, 10);
+
+  const onClickMoveEdit = () => {
+    router.push(`/boards/${id}/edit`)
+  }
 
   return (
     <div className={styles.detailAllContainer}>
@@ -92,7 +97,7 @@ const BoardsDetailPage = () => {
               <Image src="/images/list.png" alt="list" width={0} height={0} sizes="100vw" />
               목록으로
             </button>
-            <button>
+            <button onClick={onClickMoveEdit}>
               <Image src="/images/edit.png" alt="edit" width={0} height={0} sizes="100vw" />
               수정하기
             </button>

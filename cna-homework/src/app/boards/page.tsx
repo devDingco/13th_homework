@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import styles from "./styles.module.css";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
