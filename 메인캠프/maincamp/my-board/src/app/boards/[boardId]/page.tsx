@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import { useParams, useRouter } from 'next/navigation';
 
 const FETCH_BOARD = gql`
-  query fetBoard($boardId: ID!) {
+  query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
       writer
@@ -20,11 +20,15 @@ const FETCH_BOARD = gql`
 const BoardsDetail = () => {
   const router = useRouter();
   const params = useParams();
-  const { data } = useQuery(FETCH_BOARD, {
+  // 만약 구조분해할당 할거면 , const {boardId} = useParams 하고, variables에도 boardId:boardId하면 됌
+  const { data, loading, error } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: params.boardId,
     },
   });
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
   console.log(data);
 
   return (
@@ -94,7 +98,10 @@ const BoardsDetail = () => {
           <img className="w-4 h-auto" src="/images/list_icon.png" alt="목록" />
           목록으로
         </button>
-        <button className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20">
+        <button
+          onClick={() => router.push(`/boards/${data?.fetchBoard._id}/edit`)}
+          className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20"
+        >
           <img className="w-4 h-auto" src="/images/edit_icon.png" alt="수정" />
           수정하기
         </button>
