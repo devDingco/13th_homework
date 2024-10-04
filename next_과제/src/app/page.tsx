@@ -73,6 +73,7 @@ export default function Home() {
               트립토크 등록
             </Link>
           </div>
+          {/* !!!!!!!!!! 검색시 보이는 내용 바뀌도록 처리 필요 */}
           <BoardsPage />
         </div>
       </div>
