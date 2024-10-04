@@ -12,6 +12,16 @@ export enum ETitle {
 	YoutubeUrl = 'YoutubeUrl',
 }
 
+export enum ETitleLowerCase {
+	Author = 'author',
+	Password = 'password',
+	Title = 'title',
+	Content = 'content',
+	Address = 'address',
+	DetailAddress = 'detailAddress',
+	YoutubeUrl = 'youtubeUrl',
+}
+
 export enum ENewTitleProps {
 	Author = '작성자',
 	Password = '비밀번호',
@@ -34,7 +44,6 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 
 export interface ITitle {
 	title: ETitle;
-	edit?: string | IAddress | boolean;
 	error?: string;
 }
 export interface IAddress {
