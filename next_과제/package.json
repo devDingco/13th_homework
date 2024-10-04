@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
@@ -28,6 +29,7 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18.3.9",
@@ -38,6 +40,6 @@
     "postcss": "^8",
     "sass": "^1.79.3",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.6.2"
   }
 }
