@@ -39,5 +39,5 @@ export class UpdateBoardCommentDto {
     @IsNotEmpty()
     @Column()
     @Field()
-    password: string;
+    password?: string;
 }

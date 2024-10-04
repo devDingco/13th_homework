@@ -50,10 +50,11 @@ export class BoardCommentController {
         @Param('commentId') commentId: string,
         @Body() updateBoardCommentDto: UpdateBoardCommentDto,
     ) {
+        const { password, ...restUpdateBoardComment } = updateBoardCommentDto;
         return this.boardCommentService.updateComment(
             boardId,
-            updateBoardCommentDto,
-            updateBoardCommentDto.password,
+            restUpdateBoardComment,
+            password,
             commentId,
         );
     }

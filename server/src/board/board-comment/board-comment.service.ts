@@ -9,7 +9,6 @@ import {
 
 import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
-import { BoardPasswordService } from '../board-password/board-password.service';
 import { BoardRepository } from '../repositories/board.repository';
 import { BoardService } from '../board.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -63,7 +62,12 @@ export class BoardCommentService {
         if (updateBoardCommentDto.parentId) {
             await this.isExistParentComment(updateBoardCommentDto.parentId);
         }
+
         await this.validateBoardComment(commentId, password);
+        this.boardCommentRepository.updateComment(
+            commentId,
+            updateBoardCommentDto,
+        );
     }
 
     remove(id: number) {
@@ -82,7 +86,7 @@ export class BoardCommentService {
 
     async isExistParentComment(parentId: string): Promise<void> {
         const isExistParentComment =
-            await this.boardCommentRepository.findCommentById(parentId);
+            await this.boardCommentRepository.findComment(parentId);
         if (!isExistParentComment) {
             throw new BadRequestException(
                 `Parent ID ${parentId} comment not found`,
