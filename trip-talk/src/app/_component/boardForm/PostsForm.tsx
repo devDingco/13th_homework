@@ -13,35 +13,10 @@ import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
 import { useMutation, gql } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-
-const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
-const UPDATE_BOARD = gql`
-  mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
-    $boardId: ID!
-  ) {
-    updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
-      boardId: $boardId
-    ) {
-      writer
-      youtubeUrl
-      deletedAt
-    }
-  }
-`;
+import {
+  CREATE_BOARD,
+  UPDATE_BOARD,
+} from '@/app/_api/board/mutation/postBoardData';
 
 export default function PostsForm({
   type,
@@ -69,6 +44,7 @@ export default function PostsForm({
     userTitle: null,
     usercontent: null,
   });
+
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
   const [createBoard] = useMutation(CREATE_BOARD);
@@ -190,7 +166,7 @@ export default function PostsForm({
       <div className={s.columnBox}>
         <div className={s.flexBox}>
           <Input
-            value={postData.userAdress}
+            value={postData.userAdressNum}
             type="text"
             maxLength={5}
             placeholder="01234"
@@ -207,14 +183,14 @@ export default function PostsForm({
           </Button>
         </div>
         <Input
-          value={postData.userAdressDetail}
+          value={postData.userAdress}
           type="text"
           placeholder="주소를 입력해 주세요."
           id="userAdress"
           onChangeFnc={onPostFormChange}
         />
         <Input
-          value={postData.userAdressNum}
+          value={postData.userAdressDetail}
           type="text"
           placeholder="상세주소"
           id="userAdressDetail"

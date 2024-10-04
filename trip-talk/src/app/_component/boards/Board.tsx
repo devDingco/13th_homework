@@ -7,7 +7,7 @@ import DeleteIcon from '@/../public/icons/delete_icon.svg';
 interface BoardListPropsType {
   number?: number;
   title?: string;
-  writer?: string;
+  writer?: string | null;
   createdAt?: Date;
   id?: string;
   onClickDelete?: (id: string, e: any) => void;
