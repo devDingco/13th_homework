@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 
 // gql 쓰는용도
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 // 라우터.push 보내는 용도
 import { useRouter } from "next/navigation";
 
@@ -19,6 +19,12 @@ const FETCH_BOARDS = gql`
   }
 `;
 
+const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
+  }
+`;
+
 export default function Board() {
   const { data } = useQuery(FETCH_BOARDS);
   console.log(data);
@@ -27,6 +33,23 @@ export default function Board() {
 
   const goingBoardDetail = (id: string) => {
     router.push(`/boards/${id}`);
+  };
+
+  const [deleteBoard] = useMutation(DELETE_BOARD);
+
+  const onClickDelete = (event) => {
+    event.stopPropagation();
+    deleteBoard({
+      variables: {
+        boardId: event.target.id,
+      },
+      refetchQueries: [
+        { query: FETCH_BOARDS },
+        // {}
+        // ....
+      ],
+    });
+    alert("삭제되었습니다!");
   };
 
   return (
@@ -61,14 +84,17 @@ export default function Board() {
                 <div className={styles.boardName}>{el.writer}</div>
                 <div className={styles.boardDate}>{el.createdAt}</div>
               </div>
-              <Image
-                src="/images/delete.png"
-                alt="삭제하기"
-                className={styles.deleteIcon}
-                width={0}
-                height={0}
-                sizes="100vw"
-              />
+              <span onClick={onClickDelete}>
+                <Image
+                  src="/images/delete.png"
+                  alt="삭제하기"
+                  className={styles.deleteIcon}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  id={el._id}
+                />
+              </span>
             </div>
           </div>
         ))}
