@@ -1,5 +1,12 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+    IsNotEmpty,
+    IsNumber,
+    IsString,
+    Length,
+    Max,
+    Min,
+} from 'class-validator';
 
 import { Column } from 'typeorm';
 
@@ -14,9 +21,10 @@ export class CreateBoardCommentDto {
 
     @IsString()
     @IsNotEmpty()
+    @Length(1, 100)
     @Column()
     @Field()
-    title: string;
+    password: string;
 
     @IsString()
     @IsNotEmpty()
@@ -26,6 +34,8 @@ export class CreateBoardCommentDto {
 
     @IsNumber()
     @IsNotEmpty()
+    @Min(1)
+    @Max(5)
     @Column()
     @Field(() => Int)
     rating: number;

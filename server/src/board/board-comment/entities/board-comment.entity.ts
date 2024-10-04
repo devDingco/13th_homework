@@ -22,6 +22,10 @@ export class BoardComment extends CreateBoardCommentDto {
     @Field(() => Int)
     boardId: number;
 
+    @Column()
+    @Field(() => ID, { nullable: true })
+    parentId: ObjectId | null;
+
     @CreateDateColumn()
     @Field(() => Date)
     createdAt: Date;
