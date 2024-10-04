@@ -8,11 +8,9 @@ import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
 import { BoardRepository } from '../repositories/board.repository';
 import { BoardService } from '../board.service';
-// import { BoardCommentRepository } from './board-comment.repository';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
-//     private readonly boardCommentRepository: BoardCommentRepository,
 @Injectable()
 export class BoardCommentService {
     constructor(
@@ -24,14 +22,7 @@ export class BoardCommentService {
         boardId: number,
         createBoardCommentDto: CreateBoardCommentDto,
     ): Promise<BoardComment> {
-        const isExistBoard = await this.boardRepsitory.findBoard(boardId);
-
-        if (!isExistBoard) {
-            throw new NotFoundException(
-                `boardID: ${boardId} is not found in Board`,
-            );
-        }
-
+        await this.isExistBoard(boardId);
         if (createBoardCommentDto.parentId) {
             const isExistParentComment =
                 await this.boardCommentRepository.findCommentById(
@@ -57,8 +48,10 @@ export class BoardCommentService {
         return await this.boardCommentRepository.saveComment(comment);
     }
 
-    findAll() {
-        return `This action returns all boardComment`;
+    async findAllComment(boardId: number): Promise<BoardComment[]> {
+        await this.isExistBoard(boardId);
+
+        return this.boardCommentRepository.findAllComment(boardId);
     }
 
     findOne(id: number) {
@@ -71,5 +64,15 @@ export class BoardCommentService {
 
     remove(id: number) {
         return `This action removes a #${id} boardComment`;
+    }
+
+    async isExistBoard(boardId: number) {
+        const isExist = await this.boardRepsitory.findBoard(boardId);
+
+        if (!isExist) {
+            throw new NotFoundException(
+                `boardID: ${boardId} is not found in Board`,
+            );
+        }
     }
 }

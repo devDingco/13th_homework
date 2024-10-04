@@ -36,13 +36,10 @@ export class BoardCommentController {
     }
 
     @Get()
-    findAll() {
-        return this.boardCommentService.findAll();
-    }
-
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.boardCommentService.findOne(+id);
+    @ResponseMessage('comment 전체가 성공적으로 가져왔습니다.')
+    @HttpCode(HttpStatus.OK)
+    findAll(@Param('boardId', ParseIntPipe) boardId: number) {
+        return this.boardCommentService.findAllComment(boardId);
     }
 
     @Patch(':id')

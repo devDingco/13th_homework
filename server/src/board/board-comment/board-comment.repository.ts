@@ -14,7 +14,6 @@ export class BoardCommentRepository {
     async findCommentById(parentId: string): Promise<BoardComment | null> {
         return await this.boardCommentRepository.findOneBy({ parentId });
     }
-
     createComment(
         boardId: number,
         { author, password, content, rating, parentId }: CreateBoardCommentDto,
@@ -30,6 +29,10 @@ export class BoardCommentRepository {
     }
 
     async saveComment(comment: BoardComment): Promise<BoardComment> {
-        return this.boardCommentRepository.save(comment);
+        return await this.boardCommentRepository.save(comment);
+    }
+
+    async findAllComment(boardId: number): Promise<BoardComment[]> {
+        return await this.boardCommentRepository.find({ where: { boardId } });
     }
 }
