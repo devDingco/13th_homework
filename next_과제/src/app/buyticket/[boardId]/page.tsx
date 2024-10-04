@@ -4,7 +4,7 @@ import CommentItemBox from "@/components/commentItemBox";
 export default function BuyTicket() {
   return (
     <div>
-      <h1>숙박권구매 페이지 노출</h1>
+      <h1>숙박권구매 상세 페이지 노출</h1>
       <CommentBox
         title="문의하기"
         textMaxCount={100}
