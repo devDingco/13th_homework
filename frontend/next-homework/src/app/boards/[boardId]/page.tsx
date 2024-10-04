@@ -4,6 +4,7 @@ import "./styles.module.css";
 import Image from "next/image";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 
 // assets import
 import bannerImg from "../../../../public/images/detail_banner.png";
@@ -116,14 +117,18 @@ const BoardsDetail = () => {
           </div>
         </div>
         <div>
-          <button className="backNone">
-            <Image src={menuIcon} alt="menu icon" />
-            목록으로
-          </button>
-          <button className="backNone">
-            <Image src={editIcom} alt="edit icon" />
-            수정하기
-          </button>
+          <Link href={`/boards`}>
+            <button className="backNone">
+              <Image src={menuIcon} alt="menu icon" />
+              목록으로
+            </button>
+          </Link>
+          <Link href={`/boards/${params.boardId}/edit`}>
+            <button className="backNone">
+              <Image src={editIcom} alt="edit icon" />
+              수정하기
+            </button>
+          </Link>
         </div>
       </div>
     </div>
