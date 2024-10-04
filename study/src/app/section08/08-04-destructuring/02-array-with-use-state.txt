@@ -1,0 +1,19 @@
+const useState = (초기값) => {
+  let 변수 = 초기값;
+  const 변수바꿔주는함수 = (변경값) => {
+     console.log(`${변수}에서 ${변경값}으로 값을 변경할께요!`)
+  }
+  return [변수,변수바꿔주는함수]
+}
+undefined
+
+const [count,setCount] = useState(0)
+undefined
+
+count
+0
+
+setCount(10)
+VM837:4 0에서 10으로 값을 변경할께요!
+
+undefined
