@@ -10,18 +10,19 @@ export enum ETitle {
 	Address = 'Address',
 	DetailAddress = 'DetailAddress',
 	YoutubeUrl = 'YoutubeUrl',
-	Comment = 'comment',
+	Comment = 'Comment',
 }
 
-export enum ENewTitleProps {
-	Author = '작성자',
-	Password = '비밀번호',
-	Title = '제목',
-	Content = '내용',
-	Address = '주소',
-	DetailAddress = '상세 주소',
-	YoutubeUrl = '유튜브 링크',
-}
+export const RNewTitle: Record<ETitle, string> = {
+	[ETitle.Author]: '작성자',
+	[ETitle.Password]: '비밀번호',
+	[ETitle.Title]: '제목',
+	[ETitle.Content]: '내용',
+	[ETitle.Address]: '주소',
+	[ETitle.DetailAddress]: '상세 주소',
+	[ETitle.YoutubeUrl]: '유튜브 링크',
+	[ETitle.Comment]: '댓글',
+};
 
 export const RNewInputPlaceHolder: Record<ETitle, string> = {
 	[ETitle.Author]: '작성자 명을 입력해주세요.',
