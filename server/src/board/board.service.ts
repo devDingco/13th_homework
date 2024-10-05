@@ -79,7 +79,9 @@ export class BoardService {
 
     async clear(): Promise<void> {
         await this.boardRepository.clearBoard();
+
         await this.boardReactionRepository.clearBoardReaction();
+
         await this.boardCommentRepository.clearComment();
     }
 
