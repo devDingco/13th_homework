@@ -1,4 +1,6 @@
 import { Board } from './entities/board.entity';
+import { BoardComment } from './board-comment/entities/board-comment.entity';
+import { BoardCommentRepository } from './board-comment/board-comment.repository';
 import { BoardController } from './board.controller';
 import { BoardIdCounter } from './entities/board-boardId.entity';
 import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
@@ -13,7 +15,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Board, BoardIdCounter, BoardReaction]),
+        TypeOrmModule.forFeature([
+            Board,
+            BoardIdCounter,
+            BoardReaction,
+            BoardComment,
+        ]),
         ReactionModule,
     ],
     controllers: [BoardController],
@@ -22,6 +29,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         BoardRepository,
         BoardIdCounterRepository,
         BoardReactionRepository,
+        BoardCommentRepository,
         BoardResolver,
     ],
     exports: [BoardService, BoardRepository],

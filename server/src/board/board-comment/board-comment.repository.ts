@@ -63,7 +63,23 @@ export class BoardCommentRepository {
         if (!deleteComment) {
             throw new NotFoundException(`commentId: ${commentId} is not found`);
         } else {
-            await this.boardCommentRepository.softRemove(deleteComment);
+            await this.boardCommentRepository.remove(deleteComment);
         }
+    }
+
+    async deleteAllComment(boardId: number): Promise<boolean> {
+        const deleteAllComment = await this.boardCommentRepository.delete({
+            boardId,
+        });
+
+        if (!deleteAllComment) {
+            throw new NotFoundException(`boardId: ${boardId} is not found`);
+        }
+
+        return true;
+    }
+
+    async clearComment(): Promise<void> {
+        await this.boardCommentRepository.clear();
     }
 }

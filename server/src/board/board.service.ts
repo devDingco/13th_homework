@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Board } from './entities/board.entity';
+import { BoardCommentRepository } from './board-comment/board-comment.repository';
 import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repositories/board.repository';
@@ -15,6 +16,7 @@ export class BoardService {
         private readonly boardRepository: BoardRepository,
         private readonly boardIdCounterRepository: BoardIdCounterRepository,
         private readonly boardReactionRepository: BoardReactionRepository,
+        private readonly boardCommentRepository: BoardCommentRepository,
     ) {}
     async create(createBoardDto: CreateBoardDto): Promise<Board> {
         const hashPassword = await this.transformPassword(
@@ -40,7 +42,9 @@ export class BoardService {
     }
 
     async findOne(boardId: number): Promise<Board> {
-        return await this.boardRepository.findBoard(boardId);
+        const board = await this.boardRepository.findBoard(boardId);
+
+        return board;
     }
 
     async updateOne(
@@ -62,7 +66,10 @@ export class BoardService {
         const responseBoardReaction =
             await this.boardReactionRepository.deleteBoardReaction(boardId);
 
-        if (!responseBoard || !responseBoardReaction) {
+        const responseBoardComment =
+            await this.boardCommentRepository.deleteAllComment(boardId);
+
+        if (!responseBoard || !responseBoardReaction || !responseBoardComment) {
             throw new NotFoundException(
                 `boardID: ${boardId} is not found in Board`,
             );
@@ -73,6 +80,7 @@ export class BoardService {
     async clear(): Promise<void> {
         await this.boardRepository.clearBoard();
         await this.boardReactionRepository.clearBoardReaction();
+        await this.boardCommentRepository.clearComment();
     }
 
     async transformPassword(password: string): Promise<string> {

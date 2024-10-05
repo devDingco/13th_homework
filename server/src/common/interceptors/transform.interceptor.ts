@@ -41,6 +41,7 @@ export class TransformInterceptor<T>
                         const { password, ...rest } = data;
                         data = rest;
                     }
+
                     if (Array.isArray(data)) {
                         if (data[0].rating) {
                             return { message, statusCode, data };

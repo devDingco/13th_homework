@@ -12,5 +12,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     imports: [TypeOrmModule.forFeature([BoardComment, Board]), BoardModule],
     controllers: [BoardCommentController],
     providers: [BoardCommentService, BoardCommentRepository, BoardRepository],
+    exports: [BoardCommentRepository],
 })
 export class BoardCommentModule {}
