@@ -10,6 +10,7 @@ export enum ETitle {
 	Address = 'Address',
 	DetailAddress = 'DetailAddress',
 	YoutubeUrl = 'YoutubeUrl',
+	Comment = 'comment',
 }
 
 export enum ENewTitleProps {
@@ -30,11 +31,15 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 	[ETitle.Address]: '주소를 입력해주세요.',
 	[ETitle.DetailAddress]: '상세주소',
 	[ETitle.YoutubeUrl]: '링크를 입력해주세요.',
+	[ETitle.Comment]: '댓글을 입력해 주세요.',
 };
 
 export interface ITitle {
 	title: ETitle;
 	error?: string;
+}
+export interface ITitleTextArea extends ITitle {
+	setLength?: React.Dispatch<React.SetStateAction<number>>;
 }
 export interface IAddress {
 	address?: string;

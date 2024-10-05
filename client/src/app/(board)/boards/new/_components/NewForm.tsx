@@ -43,9 +43,9 @@ export default function NewForm() {
 			<NewInputContainer title={ETitle.YoutubeUrl} />
 			<NewImageContainer />
 			<div className="flex w-full items-center justify-end gap-4">
-				<CommonButton title={EButtonTitle.cancel} />
+				<CommonButton title={EButtonTitle.Cancel} />
 				<CommonButton
-					title={path.includes('edit') ? EButtonTitle.update : EButtonTitle.sumbit}
+					title={path.includes('edit') ? EButtonTitle.Update : EButtonTitle.Sumbit}
 				/>
 			</div>
 		</form>

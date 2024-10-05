@@ -15,20 +15,20 @@ export default function CommonButton({ title, isButtonDisabled, boardId }: IButt
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
 		switch (event.currentTarget.id) {
-			case EButtonTitle.back:
+			case EButtonTitle.Back:
 				onClickBack();
 				break;
-			case EButtonTitle.delete:
+			case EButtonTitle.Delete:
 				const result = await deleteBoard(boardId as number, data);
 				if (result) {
 					await mutate();
 					onClickBack();
 				}
 				break;
-			case EButtonTitle.cancel:
+			case EButtonTitle.Cancel:
 				onClickBack();
 				break;
-			case EButtonTitle.sumbit:
+			case EButtonTitle.Sumbit:
 				break;
 		}
 	};
@@ -36,9 +36,9 @@ export default function CommonButton({ title, isButtonDisabled, boardId }: IButt
 		<button
 			id={title}
 			className={`prose-sb_18_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] px-3 py-4 text-black ${
-				(title === EButtonTitle.cancel || title === EButtonTitle.back) &&
+				(title === EButtonTitle.Cancel || title === EButtonTitle.Back) &&
 				'border-black text-black'
-			} ${(title === EButtonTitle.sumbit || title === EButtonTitle.update) && (isButtonDisabled ? 'bg-gray-300 text-gray-100' : 'bg-[#2974E5] text-gray-100')} ${title === EButtonTitle.delete && 'border-white bg-black text-white'}`}
+			} ${(title === EButtonTitle.Sumbit || title === EButtonTitle.Update) && (isButtonDisabled ? 'bg-gray-300 text-gray-100' : 'bg-[#2974E5] text-gray-100')} ${title === EButtonTitle.Delete && 'border-white bg-black text-white'}`}
 			onClick={onClickButtonCondition}
 		>
 			{EButtonKorea[title]}
