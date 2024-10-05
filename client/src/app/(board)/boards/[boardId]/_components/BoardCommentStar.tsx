@@ -14,7 +14,7 @@ export default function BoardCommentStar() {
 					<Fragment key={currentRate}>
 						<label>
 							<input
-								name="Star"
+								name="Rating"
 								type="radio"
 								value={currentRate}
 								onClick={() => setRating(currentRate)}

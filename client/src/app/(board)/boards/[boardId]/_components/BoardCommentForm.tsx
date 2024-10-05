@@ -9,9 +9,13 @@ import { ETitle } from '@/models/board.type';
 import NewInputContainer from '../../new/_components/NewInputContainer';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
+import { useParams } from 'next/navigation';
 
 export default function BoardCommentForm() {
+	const param = useParams();
+
 	const [state, formAction] = useFormState(createBoardCommentAction, {
+		boardId: param.boardId,
 		error: undefined,
 	});
 
