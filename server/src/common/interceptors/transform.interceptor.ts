@@ -45,6 +45,9 @@ export class TransformInterceptor<T>
                         );
                         return { message, statusCode, data: deleteIdData };
                     } else if (typeof data === 'object' && data !== null) {
+                        if (data.rating) {
+                            return { message, statusCode, data };
+                        }
                         const deleteIdData = this.removeSensitiveData(data);
                         return { message, statusCode, data: deleteIdData };
                     } else {
