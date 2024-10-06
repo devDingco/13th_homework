@@ -14,7 +14,7 @@ export default function BoardList(props: IBoardList) {
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const opnClickBoard = () => {
-    router.push(`/routes/boards/${_id}`);
+    router.push(`/boards/${_id}`);
   };
 
   const onCLickDelete = (event: React.MouseEvent) => {
