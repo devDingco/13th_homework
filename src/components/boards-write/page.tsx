@@ -71,7 +71,7 @@ export default function BoardsCommonPage({
     variables: { boardId: id },
   })?.data?.fetchBoard : null;
 
-  if (mode === "edit") { console.dir(editData) }
+  // if (mode === "edit") { console.dir(editData) }
   const modeTextMap = new Map();
   modeTextMap.set("edit", "수정하기");
   modeTextMap.set("new", "등록하기");
@@ -198,6 +198,8 @@ export default function BoardsCommonPage({
         password: password
       }
     });
+    alert("게시글이 수정되었습니다");
+    router.push(`/boards`);
   };
 
   if (mode === 'edit') {
