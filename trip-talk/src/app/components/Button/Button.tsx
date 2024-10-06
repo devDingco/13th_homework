@@ -1,15 +1,6 @@
-import { ReactNode } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-
-type ButtonProps = {
-  type?: "submit";
-  disabled?: boolean;
-  children: ReactNode;
-  color: "blue" | "gray" | "white";
-  src?: string;
-  alt?: string;
-};
+import { ButtonProps } from "../../../types/components.type";
 
 export default function Button({
   type,

@@ -24,7 +24,8 @@ export default function BoardsWrite(props: IBoardsWrite) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const formAction = props.isEdit ? "수정" : "등록";
-  const disabled = props.isEdit ? true : false;
+  const disabledInput = props.isEdit ? true : false;
+  const disabledButton = props.isEdit ? !(title && contents) : !(writer && password && title && contents);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
@@ -124,7 +125,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               children="작성자"
               onChange={handleInputChange}
               defaultValue={props.data?.fetchBoard.writer}
-              disabled={disabled}
+              disabled={disabledInput}
             />
             {!writer && (
               <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -139,7 +140,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               isRequired={true}
               children="비밀번호"
               onChange={handleInputChange}
-              disabled={disabled}
+              disabled={disabledInput}
             />
             {!password && (
               <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -227,8 +228,8 @@ export default function BoardsWrite(props: IBoardsWrite) {
           <Button color="white">취소</Button>
           <Button
             type="submit"
-            disabled={!(writer && password && title && contents)}
-            color={!(writer && password && title && contents) ? "gray" : "blue"}
+            disabled={disabledButton}
+            color={disabledButton ? "gray" : "blue"}
           >
             {formAction}하기
           </Button>
