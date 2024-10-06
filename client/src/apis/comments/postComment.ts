@@ -1,23 +1,20 @@
 /** @format */
 
+import { IApiResponse } from '@/models/apiResponse';
 import { IRequestComment } from '@/models/comment.type';
 import { api } from '../config';
 
-export default async function postComment(data: IRequestComment, boardId: number) {
+export default async function postComment(
+	data: IRequestComment,
+	boardId: number,
+): Promise<string | IApiResponse | undefined> {
 	try {
-		const response = await api.post(`/board/${12}/comment`, data);
-		if (response && response.data && response.data.statusCode === 201) {
-			return response.data.data;
-		} else {
-			console.log('Failed to post comment:', response.data || response);
-			return null;
+		const response = await api.post(`/board/${boardId}/comment`, data);
+		if (response.data.statusCode === 201) {
+			return response.data;
 		}
-	} catch (error: any) {
-		if (error.response && error.response.data && error.response.data.validationErrors) {
-			console.log(error.response.data.validationErrors);
-		} else {
-			console.log('An error occurred:', error.message || error);
-		}
-		return null;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	} catch (error) {
+		return 'comment가 정상적으로 생성되지 않았습니다.';
 	}
 }

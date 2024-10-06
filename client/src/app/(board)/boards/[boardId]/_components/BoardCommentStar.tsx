@@ -1,11 +1,9 @@
 /** @format */
-'use client';
 
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
+import { IRatingProps } from '@/models/children.type';
 
-export default function BoardCommentStar() {
-	const [rating, setRating] = useState<number>(0);
-
+export default function BoardCommentStar({ rating, setRating }: IRatingProps) {
 	return (
 		<div className="flex">
 			{[...Array(5)].map((_, index) => {

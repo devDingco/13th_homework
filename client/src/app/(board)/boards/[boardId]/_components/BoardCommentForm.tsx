@@ -1,6 +1,8 @@
 /** @format */
 'use client';
 
+import { useLayoutEffect, useRef, useState } from 'react';
+
 import BoardCommentStar from './BoardCommentStar';
 import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
 import CommonButton from '../../_components/CommonButton';
@@ -14,14 +16,26 @@ import { useParams } from 'next/navigation';
 export default function BoardCommentForm() {
 	const param = useParams();
 
+	const [rating, setRating] = useState<number>(0);
+
 	const [state, formAction] = useFormState(createBoardCommentAction, {
+		message: '',
 		boardId: param.boardId,
 		error: undefined,
 	});
 
+	const formRef = useRef<HTMLFormElement>(null);
+
+	useLayoutEffect(() => {
+		if (state?.message === 'success') {
+			formRef.current?.reset();
+			setRating(0);
+		}
+	}, [state]);
+
 	return (
-		<form action={formAction} className="flex flex-col gap-4">
-			<BoardCommentStar />
+		<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
+			<BoardCommentStar rating={rating} setRating={setRating} />
 			<div className="flex items-center gap-8">
 				<div className="flex w-1/2 gap-4">
 					<NewInputContainer title={ETitle.Author} />
