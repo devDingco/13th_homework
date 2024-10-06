@@ -3,10 +3,10 @@ import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import { IBoardsWrite } from "../../../types/components.type";
 import UseBoardsWrite from "../../../commons/hooks/UseBoardsWrite";
+import { IBoardsWriteHook } from "../../../types/components.type";
 
-export default function BoardsWrite(props: IBoardsWrite) {
+export default function BoardsWrite(props: IBoardsWriteHook) {
   const {
     formAction,
     disabledInput,
@@ -14,7 +14,6 @@ export default function BoardsWrite(props: IBoardsWrite) {
     handleInputChange,
     handleContentChange,
     onSubmit,
-    boardsWriteProps,
     writer,
     password,
     title,
@@ -34,7 +33,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               isRequired={true}
               children="작성자"
               onChange={handleInputChange}
-              defaultValue={boardsWriteProps.data?.fetchBoard.writer}
+              defaultValue={props.data?.fetchBoard.writer}
               disabled={disabledInput}
             />
             {!writer && (
@@ -66,7 +65,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             isRequired={true}
             children="제목"
             onChange={handleInputChange}
-            defaultValue={boardsWriteProps.data?.fetchBoard.title}
+            defaultValue={props.data?.fetchBoard.title}
           />
           {!title && (
             <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -81,7 +80,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             id="content"
             placeholder="내용을 입력해 주세요."
             onChange={handleContentChange}
-            defaultValue={boardsWriteProps.data?.fetchBoard.contents}
+            defaultValue={props.data?.fetchBoard.contents}
           />
           {!contents && (
             <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -96,7 +95,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
                 placeholder="01234"
                 isRequired={false}
                 children="주소"
-                defaultValue={boardsWriteProps.data?.fetchBoard.zipcode}
+                defaultValue={props.data?.fetchBoard.zipcode}
               />
             </div>
             <Button color="white">우편번호 검색</Button>
@@ -106,14 +105,14 @@ export default function BoardsWrite(props: IBoardsWrite) {
             type="text"
             placeholder="주소를 입력해 주세요."
             isRequired={false}
-            defaultValue={boardsWriteProps.data?.fetchBoard.address}
+            defaultValue={props.data?.fetchBoard.address}
           />
           <Input
             isLabel={false}
             type="text"
             placeholder="상세주소"
             isRequired={false}
-            defaultValue={boardsWriteProps.data?.fetchBoard.addressDetail}
+            defaultValue={props.data?.fetchBoard.addressDetail}
           />
         </div>
         <div className={styles.link_wrapper}>
@@ -123,7 +122,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             placeholder="링크를 입력해 주세요."
             isRequired={false}
             children="유튜브 링크"
-            defaultValue={boardsWriteProps.data?.fetchBoard.youtubeUrl}
+            defaultValue={props.data?.fetchBoard.youtubeUrl}
           />
         </div>
         <div className={styles.photo_wrapper}>

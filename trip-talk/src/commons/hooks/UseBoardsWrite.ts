@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "../graphql/backend-api";
 import { IBoardsWriteHook, IError } from "../../types/components.type";
 
-export default function UseBoardsWrite(boardsWriteProps: IBoardsWriteHook) {
+export default function UseBoardsWrite(props: IBoardsWriteHook) {
   const params = useParams();
   const router = useRouter();
   const [writer, setWriter] = useState<string>("");
@@ -14,9 +14,9 @@ export default function UseBoardsWrite(boardsWriteProps: IBoardsWriteHook) {
   const [youtubeUrl, setYoutubeUrl] = useState<string>("");
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-  const formAction = boardsWriteProps.isEdit ? "수정" : "등록";
-  const disabledInput = boardsWriteProps.isEdit ? true : false;
-  const disabledButton = boardsWriteProps.isEdit
+  const formAction = props.isEdit ? "수정" : "등록";
+  const disabledInput = props.isEdit ? true : false;
+  const disabledButton = props.isEdit
     ? !(title && contents)
     : !(writer && password && title && contents);
 
@@ -105,9 +105,7 @@ export default function UseBoardsWrite(boardsWriteProps: IBoardsWriteHook) {
     }
   };
 
-  const onSubmit = boardsWriteProps.isEdit
-    ? handleSubmitEdit
-    : handleSubmitRegistration;
+  const onSubmit = props.isEdit ? handleSubmitEdit : handleSubmitRegistration;
 
   return {
     formAction,

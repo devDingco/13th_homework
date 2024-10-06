@@ -12,7 +12,6 @@ export interface IBoardsWrite {
   handleInputChange: void;
   handleContentChange: void;
   onSubmit: void;
-  boardsWriteProps: IBoardsWriteHook;
 }
 export interface IInputProps {
   isLabel: boolean;
@@ -39,4 +38,12 @@ export interface IError {
   graphQLErrors: {
     message: string;
   };
+}
+
+export interface IBoardsDetail {
+  boardId: string;
+  boardWriter: string;
+  boardTitle: string;
+  boardContents: string;
+  boardCreatedAt: string;
 }
