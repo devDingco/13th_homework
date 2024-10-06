@@ -3,8 +3,9 @@
 import { ITitle, RNewTitle } from '@/models/board.type';
 
 import NewInput from './NewInput';
+import React from 'react';
 
-export default function NewInputContainer({ title, error }: ITitle) {
+const NewInputContainer = React.memo(({ title, error }: ITitle) => {
 	return (
 		<div className="prose-me_16_24 flex flex-1 flex-col gap-2">
 			<div className="flex gap-1">
@@ -20,4 +21,8 @@ export default function NewInputContainer({ title, error }: ITitle) {
 			)}
 		</div>
 	);
-}
+});
+
+NewInputContainer.displayName = 'NewInputContainer';
+
+export default NewInputContainer;

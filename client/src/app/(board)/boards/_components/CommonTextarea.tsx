@@ -17,6 +17,7 @@ export default function CommonTextarea({ title, setLength }: ITitleTextArea) {
 			placeholder={RNewInputPlaceHolder[title]}
 			defaultValue={data?.title}
 			onInput={setLength ? (event) => setLength(event.currentTarget.value.length) : undefined}
+			maxLength={100}
 		></textarea>
 	);
 }
