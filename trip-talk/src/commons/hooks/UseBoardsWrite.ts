@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "../graphql/backend-api";
 import { IBoardsWriteHook, IError } from "../../types/components.type";
 
-export default function UseBoardsWrite (boardsWriteProps: IBoardsWriteHook) {
+export default function UseBoardsWrite(boardsWriteProps: IBoardsWriteHook) {
   const params = useParams();
   const router = useRouter();
   const [writer, setWriter] = useState<string>("");
@@ -16,7 +16,9 @@ export default function UseBoardsWrite (boardsWriteProps: IBoardsWriteHook) {
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const formAction = boardsWriteProps.isEdit ? "수정" : "등록";
   const disabledInput = boardsWriteProps.isEdit ? true : false;
-  const disabledButton = boardsWriteProps.isEdit ? !(title && contents) : !(writer && password && title && contents);
+  const disabledButton = boardsWriteProps.isEdit
+    ? !(title && contents)
+    : !(writer && password && title && contents);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
@@ -64,7 +66,9 @@ export default function UseBoardsWrite (boardsWriteProps: IBoardsWriteHook) {
   const handleSubmitEdit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      const userPassword = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+      const userPassword = prompt(
+        "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
+      );
       const editVariables = {
         updateBoardInput: {
           title: title,
@@ -92,15 +96,18 @@ export default function UseBoardsWrite (boardsWriteProps: IBoardsWriteHook) {
       router.push(`/boards/${result.data?.updateBoard._id}`);
       router.refresh();
     } catch (error: unknown) {
-      const err = error as IError; 
+      const err = error as IError;
       console.error(err);
-      const graphQLErrors = `${err}.graphQLErrors[0]`
-      if(graphQLErrors.includes("비밀번호가 일치하지 않습니다.")) alert("비밀번호가 일치하지 않습니다.");
+      const graphQLErrors = `${err}.graphQLErrors[0]`;
+      if (graphQLErrors.includes("비밀번호가 일치하지 않습니다."))
+        alert("비밀번호가 일치하지 않습니다.");
       else alert("An error occurred while editing. Please try again.");
     }
   };
 
-  const onSubmit = boardsWriteProps.isEdit ? handleSubmitEdit : handleSubmitRegistration;
+  const onSubmit = boardsWriteProps.isEdit
+    ? handleSubmitEdit
+    : handleSubmitRegistration;
 
   return {
     formAction,
@@ -109,10 +116,9 @@ export default function UseBoardsWrite (boardsWriteProps: IBoardsWriteHook) {
     handleInputChange,
     handleContentChange,
     onSubmit,
-    boardsWriteProps,
     writer,
     password,
     title,
-    contents
-  }
+    contents,
+  };
 }
