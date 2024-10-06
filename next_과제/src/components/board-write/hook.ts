@@ -2,7 +2,7 @@ import {
   IeditVariables,
   IformList,
   IformResister,
-  IwriteVariables,
+  // IwriteVariables,
 } from "@/components/board-write/types";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
@@ -127,7 +127,7 @@ export const useBoardWrite = () => {
         alert("필수 입력 사항을 입력해 주세요.");
         return;
       }
-      const writeVariables: IwriteVariables = {
+      const writeVariables = {
         createBoardInput: {
           writer: writeName,
           password: writePassword,
