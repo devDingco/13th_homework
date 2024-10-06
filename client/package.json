@@ -10,6 +10,7 @@
 		"codegen": "graphql-codegen --config ./config/codegen.ts"
 	},
 	"dependencies": {
+		"@apollo/client": "^3.11.8",
 		"@tailwindcss/typography": "^0.5.15",
 		"axios": "^1.7.7",
 		"graphql": "^16.9.0",
