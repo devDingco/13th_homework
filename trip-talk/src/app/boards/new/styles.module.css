@@ -2,6 +2,10 @@
   @apply flex flex-col items-start gap-10 w-full;
 }
 
+.form_title {
+  @apply text-xl font-bold text-black;
+}
+
 .form > div {
   @apply flex w-full pb-10 border-b border-solid border-x-0 border-t-0 border-lightGray;
 }
