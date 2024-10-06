@@ -13,7 +13,7 @@ export default function BoardList(props: IBoardList) {
   const router = useRouter();
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
-  const opnClickBoard = () => {
+  const onClickBoard = () => {
     router.push(`/boards/${_id}`);
   };
 
@@ -29,7 +29,7 @@ export default function BoardList(props: IBoardList) {
 
   return (
     <>
-      <li className={styles.board_list} onClick={opnClickBoard}>
+      <li className={styles.board_list} onClick={onClickBoard}>
         <span className={styles.board_number}>{number}</span>
         <span className={styles.board_title}>{title}</span>
         <span className={styles.board_writer}>{writer}</span>
