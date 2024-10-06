@@ -9,7 +9,8 @@ export default function Input({
   type,
   placeholder,
   onChange,
-  defaultValue
+  defaultValue,
+  disabled,
 }: IInputProps) {
   return (
     <>
@@ -28,6 +29,7 @@ export default function Input({
           placeholder={placeholder}
           onChange={onChange}
           defaultValue={defaultValue}
+          disabled={disabled}
         />
       </div>
     </>

@@ -13,5 +13,6 @@ export interface IInputProps {
   type: string;
   placeholder: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  defaultValue?: string
-};
+  defaultValue?: string;
+  disabled?: boolean;
+}

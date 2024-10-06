@@ -24,6 +24,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const formAction = props.isEdit ? "수정" : "등록";
+  const disabled = props.isEdit ? true : false;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
@@ -123,6 +124,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               children="작성자"
               onChange={handleInputChange}
               defaultValue={props.data?.fetchBoard.writer}
+              disabled={disabled}
             />
             {!writer && (
               <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -137,6 +139,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               isRequired={true}
               children="비밀번호"
               onChange={handleInputChange}
+              disabled={disabled}
             />
             {!password && (
               <div className={styles.required_field}>필수입력 사항 입니다.</div>
