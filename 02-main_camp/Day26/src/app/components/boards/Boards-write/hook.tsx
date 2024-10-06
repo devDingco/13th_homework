@@ -90,7 +90,7 @@ export const useBoardWrite = (isEdit: boolean) => {
     const passwordInput = prompt(
       "글을 입력할 때, 입력하셨던 비밀번호를 입력해주세요."
     );
-    console.log(passwordInput);
+
     try {
       const result = await updateBoard({
         variables: {
@@ -103,6 +103,7 @@ export const useBoardWrite = (isEdit: boolean) => {
           boardId: params.boardId as string,
         },
       });
+      alert("수정 완료!");
       router.push(`/boards/${params.boardId}`);
     } catch (error: any) {
       alert(error.graphQLErrors[0].message);
