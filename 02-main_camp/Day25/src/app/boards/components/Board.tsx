@@ -5,13 +5,11 @@ import { useMutation } from '@apollo/client';
 import { MouseEvent } from 'react';
 import { FETCH_BOARDS, DELETE_BOARD } from '@/commons/graphql/backend-api'
 
-
 interface IBoard {
     id: string
     index: number
     writer: string
     title: string
-    // createdAt: string;
 };
 
 const Board = ({id, index, title, writer}: IBoard) => {
@@ -19,8 +17,7 @@ const Board = ({id, index, title, writer}: IBoard) => {
     const [deleteBoard] = useMutation(DELETE_BOARD);
 
     const onClickBoard = () => {
-        console.log("이동합니다~ 바이바이")
-        router.push(`/boards/detail/${id}`)
+        router.push(`/boards/${id}`)
     };
 
     const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {

@@ -13,7 +13,7 @@ export const CREATE_BOARD = gql`
 `;
 
 export const FETCH_BOARD = gql`
-query fetchBoard($boardId: ID!){
+query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       writer
       title
@@ -23,8 +23,24 @@ query fetchBoard($boardId: ID!){
   }
 `;
 
+export const UPDATE_BOARD = gql`
+mutation updateBoard(
+    $updateBoardInput: UpdateBoardInput!
+    $password: String
+    $boardId: ID!
+    ) {
+    updateBoard(
+      updateBoardInput: $updateBoardInput
+      password: $password
+      boardId: $boardId
+      ) {
+      _id
+    }
+  }
+`
+
 export const DELETE_BOARD = gql`
-    mutation deleteBoard($id: ID!){
+    mutation deleteBoard($id: ID!) {
         deleteBoard(boardId: $id)
     }
 `;

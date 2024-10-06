@@ -1,11 +1,13 @@
 "use client";
 import { useParams } from 'next/navigation';
 import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/navigation'
 import styles from './styles.module.css';
-import { Divider } from '@/app/boards/new/page'
-import { FETCH_BOARD } from '@/commons/graphql/backend-api'
+import { Divider } from '@/app/components/boards/Boards-write';
+import { FETCH_BOARD } from '@/commons/graphql/backend-api';
 
 const BoardsDetail = () => {
+    const router = useRouter()
     const params = useParams()
     console.log(params.boardId)
 
@@ -17,7 +19,15 @@ const BoardsDetail = () => {
 
     const title = data?.fetchBoard.title
     const writer = data?.fetchBoard.writer
-    const contents = data?.fetchBoard.contents    
+    const contents = data?.fetchBoard.contents
+
+    const onClickEditButton = () => {
+        router.push(`/boards/${params.boardId}/edit`)
+    }
+
+    const onClickShowBoards = () => {
+        router.push("/boards")
+    }
     
     return (
         <div className={styles.BoardsDetail_root}>
@@ -47,8 +57,8 @@ const BoardsDetail = () => {
                     <div className={styles.BoardsDetail_heart_button}><img src="/assets/heart.png" />12</div>
             </section>
             <footer className={styles.BoardsDetail_footer}>
-                <button className={styles.BoardsDetail_footer_button}><img src="/assets/list.png"/>목록으로</button>
-                <button className={styles.BoardsDetail_footer_button}><img src="/assets/edit.png" />수정하기</button>
+                <button className={styles.BoardsDetail_footer_button} onClick={onClickShowBoards}><img src="/assets/list.png"/>목록으로</button>
+                <button className={styles.BoardsDetail_footer_button} onClick={onClickEditButton}><img src="/assets/edit.png" />수정하기</button>
             </footer>
         </div>
     );
