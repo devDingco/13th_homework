@@ -1,120 +1,25 @@
 "use client";
-
-import { useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
-import {
-  CREATE_BOARD,
-  UPDATE_BOARD,
-} from "../../../commons/graphql/backend-api";
 import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import { IBoardsWrite, IError } from "../../../types/components.type";
+import { IBoardsWrite } from "../../../types/components.type";
+import UseBoardsWrite from "../../../commons/hooks/UseBoardsWrite";
 
 export default function BoardsWrite(props: IBoardsWrite) {
-  const params = useParams();
-  const router = useRouter();
-  const [writer, setWriter] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [contents, setContents] = useState<string>("");
-  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const formAction = props.isEdit ? "수정" : "등록";
-  const disabledInput = props.isEdit ? true : false;
-  const disabledButton = props.isEdit ? !(title && contents) : !(writer && password && title && contents);
-  // const { data } = useQuery(FETCH_BOARD, {
-  //   variables: { password },
-  // });
-  // const password = data?.fetchBoard.pass
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    switch (event.target.id) {
-      case "writer":
-        setWriter(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-      case "title":
-        setTitle(event.target.value);
-        break;
-      case "youtubeUrl":
-        setYoutubeUrl(event.target.value);
-    }
-  };
-
-  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
-  };
-
-  const handleSubmitRegistration = async (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    try {
-      event.preventDefault();
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer,
-            password,
-            title,
-            contents,
-          },
-        },
-      });
-      const boardId = result.data.createBoard._id;
-      router.push(`/boards/${boardId}`);
-    } catch (error) {
-      console.error(error);
-      alert("An error has occurred. Please try again.");
-    }
-  };
-
-  const handleSubmitEdit = async (event: FormEvent<HTMLFormElement>) => {
-    try {
-      event.preventDefault();
-      const userPassword = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-      const editVariables = {
-        updateBoardInput: {
-          title: title,
-          contents: contents,
-          youtubeUrl: youtubeUrl,
-          // boardAddress: {
-          //   zipcode: string,
-          //   address: string,
-          //   addressDetail: string;
-          // };
-          // likeCount: number;
-          // dislikeCount: number;
-          // images: string;
-        },
-        boardId: params.boardId,
-        password: userPassword,
-      };
-      if (title) editVariables.updateBoardInput.title = title;
-      if (contents) editVariables.updateBoardInput.contents = contents;
-
-      const result = await updateBoard({
-        variables: editVariables,
-      });
-      alert("수정 완료");
-      router.push(`/boards/${result.data?.updateBoard._id}`);
-      router.refresh();
-    } catch (error: unknown) {
-      const err = error as IError; 
-      console.error(err);
-      const graphQLErrors = `${err}.graphQLErrors[0]`
-      if(graphQLErrors.includes("비밀번호가 일치하지 않습니다.")) alert("비밀번호가 일치하지 않습니다.");
-      else alert("An error occurred while editing. Please try again.");
-    }
-  };
-
-  const onSubmit = props.isEdit ? handleSubmitEdit : handleSubmitRegistration;
-
+  const {
+    formAction,
+    disabledInput,
+    disabledButton,
+    handleInputChange,
+    handleContentChange,
+    onSubmit,
+    boardsWriteProps,
+    writer,
+    password,
+    title,
+    contents,
+  } = UseBoardsWrite(props);
   return (
     <>
       <form className={styles.form} onSubmit={onSubmit}>
@@ -129,7 +34,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
               isRequired={true}
               children="작성자"
               onChange={handleInputChange}
-              defaultValue={props.data?.fetchBoard.writer}
+              defaultValue={boardsWriteProps.data?.fetchBoard.writer}
               disabled={disabledInput}
             />
             {!writer && (
@@ -161,7 +66,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             isRequired={true}
             children="제목"
             onChange={handleInputChange}
-            defaultValue={props.data?.fetchBoard.title}
+            defaultValue={boardsWriteProps.data?.fetchBoard.title}
           />
           {!title && (
             <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -176,7 +81,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             id="content"
             placeholder="내용을 입력해 주세요."
             onChange={handleContentChange}
-            defaultValue={props.data?.fetchBoard.contents}
+            defaultValue={boardsWriteProps.data?.fetchBoard.contents}
           />
           {!contents && (
             <div className={styles.required_field}>필수입력 사항 입니다.</div>
@@ -191,7 +96,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
                 placeholder="01234"
                 isRequired={false}
                 children="주소"
-                defaultValue={props.data?.fetchBoard.zipcode}
+                defaultValue={boardsWriteProps.data?.fetchBoard.zipcode}
               />
             </div>
             <Button color="white">우편번호 검색</Button>
@@ -201,14 +106,14 @@ export default function BoardsWrite(props: IBoardsWrite) {
             type="text"
             placeholder="주소를 입력해 주세요."
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.address}
+            defaultValue={boardsWriteProps.data?.fetchBoard.address}
           />
           <Input
             isLabel={false}
             type="text"
             placeholder="상세주소"
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.addressDetail}
+            defaultValue={boardsWriteProps.data?.fetchBoard.addressDetail}
           />
         </div>
         <div className={styles.link_wrapper}>
@@ -218,7 +123,7 @@ export default function BoardsWrite(props: IBoardsWrite) {
             placeholder="링크를 입력해 주세요."
             isRequired={false}
             children="유튜브 링크"
-            defaultValue={props.data?.fetchBoard.youtubeUrl}
+            defaultValue={boardsWriteProps.data?.fetchBoard.youtubeUrl}
           />
         </div>
         <div className={styles.photo_wrapper}>

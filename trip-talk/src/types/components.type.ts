@@ -1,10 +1,19 @@
 import { ChangeEventHandler, ReactNode } from "react";
 
-export interface IBoardsWrite {
+export interface IBoardsWriteHook {
   isEdit: boolean;
   data?: any;
 }
 
+export interface IBoardsWrite {
+  formAction: string;
+  disabledInput: boolean;
+  disabledButton: boolean;
+  handleInputChange: void;
+  handleContentChange: void;
+  onSubmit: void;
+  boardsWriteProps: IBoardsWriteHook;
+}
 export interface IInputProps {
   isLabel: boolean;
   children?: ReactNode;
@@ -27,7 +36,7 @@ export interface IButtonProps {
 }
 
 export interface IError {
-	graphQLErrors: {
-		message: string;
-	};
+  graphQLErrors: {
+    message: string;
+  };
 }
