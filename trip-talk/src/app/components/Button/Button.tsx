@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { ButtonProps } from "../../../types/components.type";
+import { IButtonProps } from "../../../types/components.type";
 
 export default function Button({
   type,
@@ -9,7 +9,7 @@ export default function Button({
   color,
   src,
   alt,
-}: ButtonProps) {
+}: IButtonProps) {
   const colorVariants = {
     blue: "bg-blue text-white",
     gray: "bg-gray text-white",

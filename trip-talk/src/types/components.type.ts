@@ -16,3 +16,12 @@ export interface IInputProps {
   defaultValue?: string;
   disabled?: boolean;
 }
+
+export interface IButtonProps {
+  type?: "submit";
+  disabled?: boolean;
+  children: ReactNode;
+  color: "blue" | "gray" | "white";
+  src?: string;
+  alt?: string;
+}
