@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import { IBoardsWrite } from "../../../types/components.type";
+import { IBoardsWrite, IError } from "../../../types/components.type";
 
 export default function BoardsWrite(props: IBoardsWrite) {
   const params = useParams();
@@ -26,6 +26,10 @@ export default function BoardsWrite(props: IBoardsWrite) {
   const formAction = props.isEdit ? "수정" : "등록";
   const disabledInput = props.isEdit ? true : false;
   const disabledButton = props.isEdit ? !(title && contents) : !(writer && password && title && contents);
+  // const { data } = useQuery(FETCH_BOARD, {
+  //   variables: { password },
+  // });
+  // const password = data?.fetchBoard.pass
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
@@ -73,7 +77,8 @@ export default function BoardsWrite(props: IBoardsWrite) {
   const handleSubmitEdit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      const myVariables = {
+      const userPassword = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+      const editVariables = {
         updateBoardInput: {
           title: title,
           contents: contents,
@@ -88,23 +93,23 @@ export default function BoardsWrite(props: IBoardsWrite) {
           // images: string;
         },
         boardId: params.boardId,
-        password: password,
+        password: userPassword,
       };
-      // if (writer) myVariables.updateBoardInput.writer = writer;
-      if (title) myVariables.updateBoardInput.title = title;
-      if (contents) myVariables.updateBoardInput.contents = contents;
-      // if (password) myVariables.password = password;
+      if (title) editVariables.updateBoardInput.title = title;
+      if (contents) editVariables.updateBoardInput.contents = contents;
 
       const result = await updateBoard({
-        variables: myVariables,
+        variables: editVariables,
       });
-      console.log(result.data);
       alert("수정 완료");
       router.push(`/boards/${result.data?.updateBoard._id}`);
       router.refresh();
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while editing. Please try again.");
+    } catch (error: unknown) {
+      const err = error as IError; 
+      console.error(err);
+      const graphQLErrors = `${err}.graphQLErrors[0]`
+      if(graphQLErrors.includes("비밀번호가 일치하지 않습니다.")) alert("비밀번호가 일치하지 않습니다.");
+      else alert("An error occurred while editing. Please try again.");
     }
   };
 

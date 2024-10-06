@@ -25,3 +25,9 @@ export interface IButtonProps {
   src?: string;
   alt?: string;
 }
+
+export interface IError {
+	graphQLErrors: {
+		message: string;
+	};
+}
