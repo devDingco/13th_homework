@@ -3,17 +3,18 @@ import { BoardCommentService } from './board-comment.service';
 import { BoardComment } from './entities/board-comment.entity';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
+import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
 
 @Resolver(() => BoardComment)
 export class BoardCommentResolver {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
-    @Query(() => [BoardComment])
+    @Query(() => [BoardCommentResponseDto])
     getAllBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
         return this.boardCommentService.findAllComment(boardId);
     }
 
-    @Mutation(() => BoardComment)
+    @Mutation(() => BoardCommentResponseDto)
     createBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('createBoardCommentDTO')
@@ -25,7 +26,7 @@ export class BoardCommentResolver {
         );
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => BoardCommentResponseDto)
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('updateBoardCommentDTO')

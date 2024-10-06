@@ -5,6 +5,7 @@ import { MongoRepository } from 'typeorm';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
+import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
 
 @Injectable()
 export class BoardCommentRepository {
@@ -44,7 +45,7 @@ export class BoardCommentRepository {
     async updateComment(
         commentId: string,
         updateBoardCommentDto: UpdateBoardCommentDto,
-    ): Promise<boolean> {
+    ): Promise<BoardCommentResponseDto> {
         const updateBoardDB = await this.boardCommentRepository.update(
             new ObjectId(commentId),
             updateBoardCommentDto,
@@ -54,7 +55,7 @@ export class BoardCommentRepository {
                 `commentId: ${commentId} is not update`,
             );
         }
-        return true;
+        return this.boardCommentRepository.findOneBy({ commentId });
     }
 
     async deleteComment(commentId: string): Promise<void> {

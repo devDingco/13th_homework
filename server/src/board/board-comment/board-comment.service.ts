@@ -9,6 +9,7 @@ import {
 
 import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
+import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
 import { BoardRepository } from '../repositories/board.repository';
 import { BoardService } from '../board.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -56,7 +57,7 @@ export class BoardCommentService {
         updateBoardCommentDto: UpdateBoardCommentDto,
         password: string,
         commentId: string,
-    ): Promise<boolean> {
+    ): Promise<BoardCommentResponseDto> {
         await this.isExistBoard(boardId);
 
         if (updateBoardCommentDto.parentId) {
@@ -64,12 +65,10 @@ export class BoardCommentService {
         }
 
         await this.validateBoardComment(commentId, password);
-        this.boardCommentRepository.updateComment(
+        return this.boardCommentRepository.updateComment(
             commentId,
             updateBoardCommentDto,
         );
-
-        return true;
     }
 
     async removeComment(boardId: number, commentId: string): Promise<boolean> {
