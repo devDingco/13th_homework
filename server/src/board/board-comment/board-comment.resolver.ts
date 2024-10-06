@@ -2,8 +2,8 @@ import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BoardCommentService } from './board-comment.service';
 import { BoardComment } from './entities/board-comment.entity';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
+import { UpdateBoardCommentGraphDto } from './dto/update-graphql.entity';
 
 @Resolver(() => BoardComment)
 export class BoardCommentResolver {
@@ -30,7 +30,7 @@ export class BoardCommentResolver {
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('updateBoardCommentDTO')
-        updateBoardCommentDTO: UpdateBoardCommentDto,
+        updateBoardCommentDTO: UpdateBoardCommentGraphDto,
         @Args('password') password: string,
         @Args('commentId') commentId: string,
     ) {

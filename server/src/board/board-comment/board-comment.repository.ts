@@ -50,12 +50,16 @@ export class BoardCommentRepository {
             new ObjectId(commentId),
             updateBoardCommentDto,
         );
+
         if (updateBoardDB.affected === 0) {
             throw new NotFoundException(
                 `commentId: ${commentId} is not update`,
             );
         }
-        return this.boardCommentRepository.findOneBy({ commentId });
+
+        return await this.boardCommentRepository.findOneBy({
+            _id: new ObjectId(commentId),
+        });
     }
 
     async deleteComment(commentId: string): Promise<void> {

@@ -38,6 +38,6 @@ export class UpdateBoardCommentDto {
     @IsString()
     @IsNotEmpty()
     @Column()
-    @Field()
+    @Field({})
     password?: string;
 }

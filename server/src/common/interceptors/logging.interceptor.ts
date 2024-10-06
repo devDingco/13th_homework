@@ -23,6 +23,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
         if (isGraphQL) {
             const ctx = GqlExecutionContext.create(context);
+
             const info = ctx.getInfo();
 
             const fieldName = info.path.key;

@@ -37,14 +37,18 @@ export class HttpExceptionFilter implements ExceptionFilter {
         } else if (host.getType<GqlContextType>() === 'graphql') {
             const gqlHost = GqlArgumentsHost.create(host);
 
-            const status = exception.getStatus();
+            const statusCode = exception.getStatus();
+            const message = exception.getResponse();
 
-            return {
-                statusCode: status,
-                message: exception.message,
-                timestamp: new Date().toISOString(),
-                path: gqlHost.getInfo().fieldName,
-            };
+            throw new HttpException(
+                {
+                    statusCode,
+                    message,
+                    timestamp: new Date().toISOString(),
+                    path: gqlHost.getInfo().fieldName,
+                },
+                statusCode,
+            );
         }
     }
 }
