@@ -56,7 +56,7 @@ export class BoardCommentService {
         updateBoardCommentDto: UpdateBoardCommentDto,
         password: string,
         commentId: string,
-    ): Promise<void> {
+    ): Promise<boolean> {
         await this.isExistBoard(boardId);
 
         if (updateBoardCommentDto.parentId) {
@@ -68,9 +68,12 @@ export class BoardCommentService {
             commentId,
             updateBoardCommentDto,
         );
+
+        return true;
     }
 
-    async removeComment(commentId: string): Promise<boolean> {
+    async removeComment(boardId: number, commentId: string): Promise<boolean> {
+        await this.isExistBoard(boardId);
         await this.boardCommentRepository.deleteComment(commentId);
         return true;
     }

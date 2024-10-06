@@ -4,7 +4,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { Column } from 'typeorm';
 
 @InputType()
-export class BoardPasswordBodyDTO {
+export class BoardPasswordDTO {
     @IsString()
     @IsNotEmpty()
     @Column()

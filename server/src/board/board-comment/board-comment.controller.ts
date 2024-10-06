@@ -62,7 +62,10 @@ export class BoardCommentController {
     @Delete(':commentId')
     @ResponseMessage('comment를 성공적으로 삭제했습니다.')
     @HttpCode(HttpStatus.OK)
-    remove(@Param('commentId') commentId: string) {
-        return this.boardCommentService.removeComment(commentId);
+    remove(
+        @Param('boardId', ParseIntPipe) boardId: number,
+        @Param('commentId') commentId: string,
+    ) {
+        return this.boardCommentService.removeComment(boardId, commentId);
     }
 }
