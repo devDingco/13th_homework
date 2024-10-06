@@ -77,7 +77,7 @@ export class BoardCommentService {
 
     async isExistBoard(boardId: number): Promise<void> {
         const isExist = await this.boardRepsitory.findBoard(boardId);
-        console.log(isExist);
+
         if (!isExist) {
             throw new NotFoundException(
                 `boardID: ${boardId} is not found in Board`,
