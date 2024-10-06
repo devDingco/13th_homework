@@ -1,7 +1,7 @@
 "use client";
 import styles from "./styles.module.css";
 import Board from "@/app/components/boards/Boards-list/components/Board";
-import BoardsHeader from "@/app/components/boards/Boards-list/components/BoardsHeader";
+import BoardsHeader from "@/app/components/boards/Boards-list/components/BoardHeader";
 import useBoardsList from "@/app/components/boards/Boards-list/hook";
 
 const BoardsList = () => {
