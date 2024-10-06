@@ -8,6 +8,20 @@ export const WRITE_CREATE_BOARD = gql`
   }
 `;
 
+export const WRITE_UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      _id
+      url
+      size
+      isUsed
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+
 export const WRITE_UPDATE_BOARD = gql`
   mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!

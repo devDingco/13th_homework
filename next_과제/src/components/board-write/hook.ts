@@ -2,29 +2,32 @@ import {
   IeditVariables,
   IformList,
   IformResister,
+  IwriteVariables,
 } from "@/components/board-write/types";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  WRITE_CREATE_BOARD,
-  WRITE_UPDATE_BOARD,
-  WRITE_FETCH_BOARD,
-} from "@/components/board-write/queries";
 
-export const useBoardWrite = (formType: string) => {
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+  UploadFileDocument,
+} from "@/commons/graphql/graphql";
+
+export const useBoardWrite = () => {
   const router = useRouter();
   const params = useParams() as { boardId: string };
 
   // !수정할 게시글 데이터 가져오기
-  const { data } = useQuery(WRITE_FETCH_BOARD, {
+  const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId: params.boardId },
   });
 
   // !게시글 등록 및 수정을 위한 useMutation
-  const [boardControl] = useMutation(
-    formType === "edit" ? WRITE_UPDATE_BOARD : WRITE_CREATE_BOARD
-  );
+  const [upDateBoard] = useMutation(UpdateBoardDocument);
+  const [newBoard] = useMutation(CreateBoardDocument);
+  const [uploadFile] = useMutation(UploadFileDocument);
 
   const {
     control,
@@ -59,17 +62,18 @@ export const useBoardWrite = (formType: string) => {
         if (writeContentsData)
           editVariables.updateBoardInput.contents = writeContentsData;
 
-        const result = await boardControl({
+        const result = await upDateBoard({
           variables: editVariables,
           refetchQueries: [
-            ...(FETCH_BOARD
-              ? [{ query: FETCH_BOARD, variables: { boardId: params.boardId } }]
-              : []),
+            {
+              query: CreateBoardDocument,
+              variables: { boardId: params.boardId },
+            },
           ],
         });
         // console.log(result);
         alert(`게시글이 수정되었습니다.`);
-        router.push(`/boards/${result.data.updateBoard._id}`);
+        router.push(`/boards/${result.data?.updateBoard._id}`);
       } else {
         alert("비밀번호가 틀려서 수정할 수 없습니다.");
         return;
@@ -87,40 +91,62 @@ export const useBoardWrite = (formType: string) => {
   // !게시글 등록 함수
   const onBoardNew = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      const {
-        writeName,
-        writeAddress,
-        writePassword,
-        writeTitle,
-        youtubeUrl,
-        writeAddressPost,
-        writeAddressDetail,
-      } = getValues(); // useForm의 모든 데이터를 가져옴
 
-      const writeVariables = {
+    const {
+      writeName,
+      writeAddress,
+      writePassword,
+      writeTitle,
+      writeContents,
+      youtubeUrl,
+      writeAddressPost,
+      writeAddressDetail,
+      // imgFile1,
+      // imgFile2,
+      // imgFile3,
+    } = getValues(); // useForm의 모든 데이터를 가져옴
+
+    console.log(getValues());
+
+    // // 이미지 파일 업로드 및 URL 가져오기
+    // // ! 나중에 용량 조절 및 용량 제한 기능 추가 필요
+    // const imgFiles = [imgFile1, imgFile2, imgFile3];
+    // const imgUrl = imgFiles.forEach(async (imgFile) => {
+    //   if (imgFile && imgFile[0]) {
+    //     const formData = new FormData();
+    //     formData.append("fileList", imgFile[0]);
+    //     const result = await uploadFile({ variables: { file: formData } });
+    //     console.log(result);
+    //     return result.data?.uploadFile.url;
+    //   }
+    // });
+    // console.log(imgUrl);
+
+    try {
+      if (!writeName || !writePassword || !writeTitle || !writeContents) {
+        alert("필수 입력 사항을 입력해 주세요.");
+        return;
+      }
+      const writeVariables: IwriteVariables = {
         createBoardInput: {
           writer: writeName,
           password: writePassword,
           title: writeTitle,
-          contents: getValues("writeContents"),
-          youtubeUrl: youtubeUrl as URL,
+          contents: writeContents,
+          youtubeUrl: youtubeUrl,
           boardAddress: {
             zipcode: writeAddressPost,
             address: writeAddress,
             addressDetail: writeAddressDetail,
           },
-          images: "",
+          images: [""],
         },
       };
-
-      // console.log(writeVariables);
-
-      const result = await boardControl({ variables: writeVariables });
-      // console.log(result);
-
+      console.log(writeVariables);
+      const result = await newBoard({ variables: writeVariables });
+      console.log(result);
       alert(`게시글이 등록되었습니다.`);
-      router.push(`/boards/${result.data.createBoard._id}`);
+      router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
       alert(`게시글 등록에 실패했습니다.`);
       console.log(error);

@@ -1,17 +1,22 @@
+import {
+  FetchBoardLikeCountDocument,
+  LikeBoardDocument,
+  DislikeBoardDocument,
+} from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { DISLIKE_BOARD, FETCH_LIKECOUNT, LIKE_BOARD } from "./queries";
+// import { DISLIKE_BOARD, FETCH_LIKECOUNT, LIKE_BOARD } from "./queries";
 
 export const useLikeCount = (type: string) => {
   const params = useParams();
 
-  const { data } = useQuery(FETCH_LIKECOUNT, {
+  const { data } = useQuery(FetchBoardLikeCountDocument, {
     variables: { boardId: params.boardId },
   });
   console.log(data);
 
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState<number | undefined>(0);
 
   useEffect(() => {
     setLikeCount(
@@ -22,16 +27,16 @@ export const useLikeCount = (type: string) => {
   }, [data, type]);
 
   const [likeBoardHandler] = useMutation(
-    type === "like" ? LIKE_BOARD : DISLIKE_BOARD
+    type === "like" ? LikeBoardDocument : DislikeBoardDocument
   );
 
   const likeCountHandler = async () => {
     const result = await likeBoardHandler({
       variables: { boardId: params.boardId },
-      refetchQueries: [{ query: FETCH_LIKECOUNT }],
+      refetchQueries: [{ query: FetchBoardLikeCountDocument }],
     });
     setLikeCount(
-      type === "like" ? result.data.likeBoard : result.data.dislikeBoard
+      type === "like" ? result.data?.likeBoard : result.data?.dislikeBoard
     );
     console.log(result);
   };

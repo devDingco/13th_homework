@@ -1,5 +1,6 @@
 import Icon from "@/components/iconFactory";
 import { ChangeEvent, forwardRef } from "react";
+import styles from "@/components/input/styles.module.scss";
 
 type InputProps = {
   id?: string;
@@ -21,14 +22,14 @@ const Input = forwardRef<inputRef, InputProps>((props, ref) => {
   const { title, errormessage, className, ...rest } = props;
 
   const showImage = (e: ChangeEvent<HTMLInputElement>) => {
-    // const targetLable = e.target.parentNode as HTMLLabelElement;
+    const targetLabel = e.target.parentNode as HTMLLabelElement;
     const targetFile = e.target.files as FileList;
-    const targetFileArray = Array.from(targetFile);
-    const selectedFiles: string[] = targetFileArray.map((file) => {
+    const selectedFiles: string[] = Array.from(targetFile).map((file) => {
       return URL.createObjectURL(file);
     });
-    console.log(selectedFiles[0]);
-    //targetLable.setAttribute("style", `url(${selectedFiles[0]})`);
+
+    targetLabel.classList.add(styles.imgViewBox);
+    targetLabel.style.backgroundImage = `url(${selectedFiles[0]})`;
   };
 
   if (props.type === "file" && props.accept === "image/*") {

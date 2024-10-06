@@ -24,7 +24,7 @@ export default function BoardWrite(props: IboardFormProps) {
     Controller,
     router,
     params,
-  } = useBoardWrite(formType);
+  } = useBoardWrite();
 
   // 모든 태그 및 개행문자를 제거한 문자열 반환
   // const removeTags = (str: string) => {
@@ -39,12 +39,14 @@ export default function BoardWrite(props: IboardFormProps) {
           <Input
             id="writeName"
             title="작성자"
-            // required
+            required
             placeholder="작성자 명을 입력해 주세요."
             type="text"
             {...register("writeName", formResister.writeName)}
             errormessage={errors?.writeName?.message}
-            defaultValue={formType === "edit" ? data?.fetchBoard.writer : ""}
+            defaultValue={
+              formType === "edit" ? data?.fetchBoard.writer || "" : ""
+            }
             {...(formType === "edit" && { readOnly: true })}
           />
 
@@ -77,6 +79,7 @@ export default function BoardWrite(props: IboardFormProps) {
             name="writeContents"
             control={control}
             defaultValue={data?.fetchBoard.contents}
+            rules={{ required: "내용을 입력해 주세요." }}
             render={({ field }) => (
               <ReactQuillBox
                 id="writeContents"
@@ -111,7 +114,7 @@ export default function BoardWrite(props: IboardFormProps) {
               {...(formType === "edit" && { readOnly: true })}
               defaultValue={
                 formType === "edit"
-                  ? data?.fetchBoard.boardAddress?.zipcode
+                  ? data?.fetchBoard.boardAddress?.zipcode || ""
                   : ""
               }
             />
@@ -132,7 +135,9 @@ export default function BoardWrite(props: IboardFormProps) {
             errormessage={errors?.writeAddress?.message}
             {...(formType === "edit" && { readOnly: true })}
             defaultValue={
-              formType === "edit" ? data?.fetchBoard.boardAddress?.address : ""
+              formType === "edit"
+                ? data?.fetchBoard.boardAddress?.address || ""
+                : ""
             }
           />
           <Input
@@ -144,7 +149,7 @@ export default function BoardWrite(props: IboardFormProps) {
             {...(formType === "edit" && { readOnly: true })}
             defaultValue={
               formType === "edit"
-                ? data?.fetchBoard.boardAddress?.addressDetail
+                ? data?.fetchBoard.boardAddress?.addressDetail || ""
                 : ""
             }
           />
@@ -158,7 +163,9 @@ export default function BoardWrite(props: IboardFormProps) {
           {...register("youtubeUrl", formResister.youtubeUrl)}
           errormessage={errors?.youtubeUrl?.message}
           {...(formType === "edit" && { readOnly: true })}
-          defaultValue={formType === "edit" ? data?.fetchBoard.youtubeUrl : ""}
+          defaultValue={
+            formType === "edit" ? data?.fetchBoard.youtubeUrl || "" : ""
+          }
         />
         <hr className="my-10" />
         <div className="flex gap-4 items-end">
@@ -170,7 +177,11 @@ export default function BoardWrite(props: IboardFormProps) {
             {...register("imgFile1", formResister.imgFile1)}
             errormessage={errors?.imgFile1?.message}
             {...(formType === "edit" && { readOnly: true })}
-            defaultValue={formType === "edit" ? data?.fetchBoard.images[0] : ""}
+            // defaultValue={
+            //   formType === "edit"
+            //     ? data?.fetchBoard.images?.[0] ?? undefined
+            //     : undefined
+            // }
           />
           <Input
             placeholder="클릭해서 사진 업로드"
@@ -179,7 +190,11 @@ export default function BoardWrite(props: IboardFormProps) {
             {...register("imgFile2", formResister.imgFile2)}
             errormessage={errors?.imgFile2?.message}
             {...(formType === "edit" && { readOnly: true })}
-            defaultValue={formType === "edit" ? data?.fetchBoard.images[1] : ""}
+            // defaultValue={
+            //   formType === "edit"
+            //     ? data?.fetchBoard.images?.[1] ?? undefined
+            //     : undefined
+            // }
           />
           <Input
             placeholder="클릭해서 사진 업로드"
@@ -188,7 +203,11 @@ export default function BoardWrite(props: IboardFormProps) {
             {...register("imgFile3", formResister.imgFile3)}
             errormessage={errors?.imgFile3?.message}
             {...(formType === "edit" && { readOnly: true })}
-            defaultValue={formType === "edit" ? data?.fetchBoard.images[2] : ""}
+            // defaultValue={
+            //   formType === "edit"
+            //     ? data?.fetchBoard.images?.[2] ?? undefined
+            //     : undefined
+            // }
           />
         </div>
         <div className="flex items-end justify-end gap-4 pt-10">
@@ -208,15 +227,15 @@ export default function BoardWrite(props: IboardFormProps) {
             value="등록하기"
             onClick={formType === "edit" ? onBoardEdit : onBoardNew}
             // 폼의 유효성 검사를 통과하지 못하면 버튼 비활성화
-            disabled={
-              formType === "edit"
-                ? // 수정 시 내용이나 제목이 변경된 경우만 버튼 활성화
-                  dirtyFields.writeContents === true ||
-                  dirtyFields.writeTitle === true
-                  ? false
-                  : true
-                : !isValid || !isDirty // 등록 시 폼의 유효성 검사를 통과하지 못하면 버튼 비활성화
-            }
+            // disabled={
+            //   formType === "edit"
+            //     ? // 수정 시 내용이나 제목이 변경된 경우만 버튼 활성화
+            //       dirtyFields.writeContents === true ||
+            //       dirtyFields.writeTitle === true
+            //       ? false
+            //       : true
+            //     : !isValid || !isDirty // 등록 시 폼의 유효성 검사를 통과하지 못하면 버튼 비활성화
+            // }
           >
             {formType === "edit" ? "수정" : "등록"}하기
           </button>

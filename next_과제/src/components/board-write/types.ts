@@ -51,13 +51,29 @@ export interface IformList {
   writeAddressPost?: string;
   writeAddress?: string;
   writeAddressDetail?: string;
-  youtubeUrl?: URL;
-  imgFile1?: File | null;
-  imgFile2?: File | null;
-  imgFile3?: File | null;
+  youtubeUrl?: string;
+  imgFile1?: FileList;
+  imgFile2?: FileList;
+  imgFile3?: FileList;
   email?: string;
   phone?: string;
   userId?: string;
+}
+
+export interface IwriteVariables {
+  createBoardInput: {
+    writer: string;
+    password: string;
+    title: string;
+    contents: string;
+    youtubeUrl?: string;
+    boardAddress?: {
+      zipcode?: string;
+      address?: string;
+      addressDetail?: string;
+    };
+    images?: (string | undefined)[];
+  };
 }
 
 export interface IformResister {

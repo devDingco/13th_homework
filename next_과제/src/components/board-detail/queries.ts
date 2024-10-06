@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const DETAIL_FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
+  query fetchBoardDetail($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
       writer

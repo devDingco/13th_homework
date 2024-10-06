@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_LIKECOUNT = gql`
-  query fetchBoard($boardId: ID!) {
+  query fetchBoardLikeCount($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       likeCount
       dislikeCount

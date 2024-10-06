@@ -1,16 +1,20 @@
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery } from "@apollo/client";
+// import {
+//   LIST_DELETE_BOARD,
+//   LIST_FETCH_BOARDS,
+// } from "@/components/board-list/queries";
 import {
-  LIST_DELETE_BOARD,
-  LIST_FETCH_BOARDS,
-} from "@/components/board-list/queries";
+  DeleteBoardDocument,
+  FetchBoardsListDocument,
+} from "@/commons/graphql/graphql";
 
 export const useBoardList = () => {
   const router = useRouter();
   const params = useParams();
 
-  const { data } = useQuery(LIST_FETCH_BOARDS, {
+  const { data } = useQuery(FetchBoardsListDocument, {
     variables: {
       endDate: "2024-10-30T18:54:33Z",
       startDate: "2021-09-03T09:54:33Z",
@@ -20,7 +24,7 @@ export const useBoardList = () => {
   });
   // console.log(params.pageNum, data?.fetchBoards);
 
-  const [deleteBoard] = useMutation(LIST_DELETE_BOARD);
+  const [deleteBoard] = useMutation(DeleteBoardDocument);
   const postDelete = async (
     e: React.MouseEvent<HTMLButtonElement>,
     postId: string
@@ -34,7 +38,7 @@ export const useBoardList = () => {
         },
         refetchQueries: [
           {
-            query: LIST_FETCH_BOARDS,
+            query: FetchBoardsListDocument,
           },
         ],
       });
