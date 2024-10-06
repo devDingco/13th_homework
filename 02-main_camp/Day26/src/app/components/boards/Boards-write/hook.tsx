@@ -1,7 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, SetStateAction, useState } from "react";
-import { CREATE_BOARD, UPDATE_BOARD } from "./queries";
+import {
+  CreateBoardDocument,
+  UpdateBoardDocument,
+} from "@/commons/gql/graphql";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
@@ -26,8 +29,8 @@ export const useBoardWrite = (isEdit: boolean) => {
     useState(defaultErrorMessage);
 
   // graphql
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
 
   // onChange
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +79,7 @@ export const useBoardWrite = (isEdit: boolean) => {
         },
       });
 
-      const boardId = result.data.createBoard._id;
+      const boardId = result.data?.createBoard._id;
       router.push(`/boards/${boardId}`);
     } catch {
       alert("에러가 발생하였습니다. 다시 시도해 주세요.");
@@ -97,7 +100,7 @@ export const useBoardWrite = (isEdit: boolean) => {
             youtubeUrl: "www.youtube.com",
           },
           password: passwordInput,
-          boardId: params.boardId,
+          boardId: params.boardId as string,
         },
       });
       router.push(`/boards/${params.boardId}`);

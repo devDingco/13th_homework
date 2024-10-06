@@ -1,8 +1,13 @@
+import { FetchBoardsDocument } from "@/commons/gql/graphql";
 import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS } from "../Boards-write/queries";
 
 const useBoardsList = () => {
-  const { data } = useQuery(FETCH_BOARDS);
+  const { data } = useQuery(FetchBoardsDocument, {
+    variables: {
+      page: Number(1),
+    },
+  });
+
   return {
     data,
   };
