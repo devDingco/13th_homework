@@ -1,7 +1,7 @@
 /** @format */
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import BoardCommentStar from './BoardCommentStar';
 import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
@@ -26,7 +26,7 @@ export default function BoardCommentForm() {
 
 	const formRef = useRef<HTMLFormElement>(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (state?.message === 'success') {
 			formRef.current?.reset();
 			setRating(0);
