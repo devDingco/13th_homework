@@ -3,19 +3,10 @@
 import Image from "next/image";
 import Button from "../../components/Button/Button";
 import styles from "./styles.module.css";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
+import Link from "next/link";
+import { FETCH_BOARD } from "../../../commons/graphql/backend-api";
 
 export default function BoardsDetail() {
   const params = useParams();
@@ -27,7 +18,9 @@ export default function BoardsDetail() {
   const boardWriter = data?.fetchBoard.writer;
   const boardTitle = data?.fetchBoard.title;
   const boardContents = data?.fetchBoard.contents;
-  const boardCreatedAt = data?.fetchBoard.createdAt.slice(0, 10).replaceAll('-', '.');
+  const boardCreatedAt = data?.fetchBoard.createdAt
+    .slice(0, 10)
+    .replaceAll("-", ".");
 
   return (
     <div className={styles.layout}>
@@ -86,12 +79,16 @@ export default function BoardsDetail() {
         </div>
       </div>
       <div className={styles.button_layout}>
+      <Link href={"/boards"}>
         <Button color="white" src="/svgs/menu.svg" alt="menu">
           목록으로
         </Button>
+        </Link>
+        <Link href={`${boardId}/edit`}>
         <Button color="white" src="/svgs/edit.svg" alt="edit">
           수정하기
         </Button>
+        </Link>
       </div>
     </div>
   );
