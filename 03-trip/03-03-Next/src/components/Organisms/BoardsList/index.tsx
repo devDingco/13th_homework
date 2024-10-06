@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { FetchBoardsDocument } from "@/commons/graphql/graphql";
 import { MouseEventHandler } from "react";
-import useHooksDelete from "@/commons/hooks/useHooksDelete";
+import useDelete from "@/commons/hooks/useDelete";
+
 import styles from "./styles.module.css";
 import Btn from "@/components/Atoms/_Btn";
 
@@ -12,7 +13,7 @@ export default function BoardsListUI() {
     const { data } = useQuery(FetchBoardsDocument, {
         variables: { number: 1 },
     });
-    const onClickDelete: MouseEventHandler = useHooksDelete();
+    const onClickDelete: MouseEventHandler = useDelete();
 
     return (
         <>

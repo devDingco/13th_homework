@@ -10,7 +10,7 @@ interface InputProps {
     value?: string;
 }
 // 인풋 컴포넌트 공용, 필수입력 검증
-export const InputField = ({
+export default function InputField({
     fieldClass,
     labelID,
     innerText,
@@ -20,7 +20,7 @@ export const InputField = ({
     placeHolder,
     onChange,
     value,
-}: InputProps) => {
+}: InputProps) {
     return (
         <fieldset className={fieldClass}>
             <label htmlFor={labelID}>{innerText}</label>

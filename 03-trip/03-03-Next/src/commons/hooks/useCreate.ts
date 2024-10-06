@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { CreteBoardDocument } from "../graphql/graphql";
 import { IHooksCreateProps } from "../types/types";
 
-export default function useHooksCreate(props: IHooksCreateProps) {
+export default function useCreate(props: IHooksCreateProps) {
     const { author, password, title, content } = props;
 
     const [createBoard] = useMutation(CreteBoardDocument);
