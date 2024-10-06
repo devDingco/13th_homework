@@ -1,15 +1,5 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { IInputProps } from "../../../types/components.type";
 import styles from "./styles.module.css";
-
-type InputProps = {
-  isLabel: boolean;
-  children?: ReactNode;
-  isRequired: boolean;
-  id?: string;
-  type: string;
-  placeholder: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-};
 
 export default function Input({
   isLabel,
@@ -19,7 +9,8 @@ export default function Input({
   type,
   placeholder,
   onChange,
-}: InputProps) {
+  defaultValue
+}: IInputProps) {
   return (
     <>
       <div className={styles.input_wrapper}>
@@ -36,6 +27,7 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           onChange={onChange}
+          defaultValue={defaultValue}
         />
       </div>
     </>
