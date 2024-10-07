@@ -4,8 +4,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
-import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
+import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-password-comment.dto';
 
 @Injectable()
 export class BoardCommentRepository {
@@ -41,12 +41,13 @@ export class BoardCommentRepository {
     async findAllComment(boardId: number): Promise<BoardComment[]> {
         return await this.boardCommentRepository.find({
             where: { boardId },
+            order: { createdAt: 'ASC' },
         });
     }
 
     async updateComment(
         commentId: string,
-        updateBoardCommentDto: UpdateBoardCommentDto,
+        updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
     ): Promise<BoardCommentResponseDto> {
         const updateBoardDB = await this.boardCommentRepository.update(
             new ObjectId(commentId),

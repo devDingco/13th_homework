@@ -15,12 +15,12 @@ import {
 import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
-import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
+import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 import { ResponseMessage } from './decorators/response-message.decorator';
 import { Board } from './entities/board.entity';
 
 @Controller('/api/board')
-@UseInterceptors(TransformInterceptor)
+@UseInterceptors(TransformBoardInterceptor)
 export class BoardController {
     constructor(private readonly boardService: BoardService) {}
 

@@ -15,7 +15,7 @@ import { Reflector } from '@nestjs/core';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class TransformInterceptor<T>
+export class TransformBoardInterceptor<T>
     implements NestInterceptor<T, IResponseInterceptor<T> | IDeleteResponse>
 {
     constructor(private readonly reflector: Reflector) {}

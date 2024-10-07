@@ -8,17 +8,18 @@ import {
     HttpCode,
     HttpStatus,
     ParseIntPipe,
-    UseInterceptors,
+    // UseInterceptors,
     Put,
+    UseInterceptors,
 } from '@nestjs/common';
 import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 import { ResponseMessage } from '../decorators/response-message.decorator';
-import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
+import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
+@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board/:boardId/comment')
-@UseInterceptors(TransformInterceptor)
 export class BoardCommentController {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
@@ -47,15 +48,15 @@ export class BoardCommentController {
     @HttpCode(HttpStatus.OK)
     update(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Param('commentId') commentId: string,
-        @Body() updateBoardCommentDto: UpdateBoardCommentDto,
+        @Param('parentId') parentId: string,
+        @Body() updateBoardCommentDTO: UpdateBoardCommentDto,
     ) {
-        const { password, ...restUpdateBoardComment } = updateBoardCommentDto;
+        const { password, ...restUpdateBoardComment } = updateBoardCommentDTO;
         return this.boardCommentService.updateComment(
             boardId,
             restUpdateBoardComment,
             password,
-            commentId,
+            parentId,
         );
     }
 

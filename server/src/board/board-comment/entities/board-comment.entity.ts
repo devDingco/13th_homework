@@ -1,7 +1,6 @@
 import {
     Column,
     CreateDateColumn,
-    DeleteDateColumn,
     Entity,
     ObjectIdColumn,
     UpdateDateColumn,
@@ -29,8 +28,4 @@ export class BoardComment extends CreateBoardCommentDto {
     @UpdateDateColumn()
     @Field(() => Date)
     updatedAt: Date;
-
-    @DeleteDateColumn()
-    @Field(() => Date)
-    deletedAt?: Date;
 }
