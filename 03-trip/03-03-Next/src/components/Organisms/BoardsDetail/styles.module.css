@@ -1,0 +1,79 @@
+.header_title {
+    font-size: 2rem;
+    padding: 2rem 0rem;
+}
+
+.header_info {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.4rem;
+}
+
+.info_profile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.profile_text,
+.date_text {
+    padding: 0.4rem 1.2rem;
+    border-radius: 0.8rem;
+    background-color: #222;
+    color: #f2f2f2;
+}
+
+.info_link {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    padding: 2rem 0rem;
+}
+
+.main_content {
+    max-width: 50rem;
+    padding: 2rem 0rem;
+    text-wrap: balance;
+    font-family: var(--font-paperlogy-regular);
+}
+
+.main_video {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rem;
+    height: 40rem;
+}
+
+.main_recommend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem;
+}
+
+.main_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 8rem;
+}
+
+.btn_list,
+.btn_edit {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 2px solid #bdbdbd;
+    border-radius: 0.8rem;
+}
+
+.btn_list:hover,
+.btn_edit:hover {
+    background-color: #f0f0f0;
+    filter: invert(1);
+}

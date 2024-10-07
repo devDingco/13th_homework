@@ -1,5 +1,6 @@
-import PostDetail from "@/components/PostDetail";
+"use client";
+import BoardsDetailUI from "@/components/Organisms/BoardsDetail";
 
-export default function BoardsPostEdit() {
-  return <PostDetail isEdit={true} />;
+export default function BoardsDetailEdit() {
+    return <BoardsDetailUI isEdit={true} />;
 }
