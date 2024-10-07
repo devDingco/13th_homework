@@ -52,7 +52,13 @@ export class BoardCommentService {
         const boardComments =
             await this.boardCommentRepository.findAllComment(boardId);
 
-        return boardComments;
+        const restBoardComments = boardComments.map((item) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { password, ...rest } = item;
+            return rest;
+        });
+
+        return this.makeCommentMap(restBoardComments);
     }
 
     async updateComment(
@@ -121,7 +127,7 @@ export class BoardCommentService {
         }
     }
 
-    makeCommentMap(boardComments: BoardComment[]) {
+    makeCommentMap(boardComments: BoardCommentResponseDto[]) {
         const commentMap = new Map<string, any>();
 
         boardComments.forEach((comment) => {
@@ -139,5 +145,6 @@ export class BoardCommentService {
                 }
             }
         });
+        return Array.from(commentMap.values());
     }
 }
