@@ -17,7 +17,8 @@ const DELETE_BOARD = gql`
 `;
 
 function BoardsList() {
-  const { data, loading } = useQuery(FetchBoardsDocument, {
+  const { data, loading, refetch } = useQuery(FetchBoardsDocument, {
+    fetchPolicy: 'no-cache',
     variables: { page: 1 },
   });
 
@@ -29,8 +30,8 @@ function BoardsList() {
 
     deleteBoard({
       variables: { id },
-      refetchQueries: [{ query: FetchBoardsDocument }],
     });
+    refetch();
   };
 
   const onClickDetailBoard = (id: string) => {

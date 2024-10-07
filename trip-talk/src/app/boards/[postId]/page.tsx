@@ -11,12 +11,13 @@ import BoardDetail from '@/app/_component/boardDetail/BoardDetail';
 
 const PostDetail = () => {
   const { postId: params } = useParams();
+  console.log(params);
 
   const router = useRouter();
 
   return (
     <>
-      <BoardDetail style={s} postId={params} />
+      <BoardDetail style={s} postId={params.toString()} />
       <div className={`${s.flexbox} justify-center gap-6`}>
         <Button style="default" onClickFnc={() => router.push('/boards')}>
           <Image src={ListIcon} alt="" width={0} height={0} />
