@@ -2,6 +2,8 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useBoardsDetail } from "./hooks";
+import CommentWrite from "../comment-write";
+import CommentList from "../comment-list";
 
 function BoardsDetail() {
   const { params, data } = useBoardsDetail();
@@ -75,6 +77,7 @@ function BoardsDetail() {
           </div>
         </div>
       </div>
+      <CommentWrite />
     </main>
   );
 }

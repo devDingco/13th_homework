@@ -125,5 +125,11 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
       alert(error.graphQLErrors[0].message);
     }
   };
-  return { onChange, onClickSubmit, onClickEdit, isActive, errorMessage };
+  return {
+    onChange,
+    onClickSubmit,
+    onClickEdit,
+    isActive,
+    errorMessage,
+  };
 };
