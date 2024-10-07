@@ -1,10 +1,11 @@
 "use client";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 
 import styles from "./styles.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const IMAGE_SRC = {
   profileImage: {
@@ -69,33 +70,82 @@ const FETCH_BOARD = gql`
   }
 `;
 
+const LIKE_BOARD = gql`
+  mutation likeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
+  }
+`;
+
+const DISLIKE_BOARD = gql`
+  mutation dislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
+  }
+`;
+
 export default function BoardsDetailPage() {
   const params = useParams();
   const id = params.boardId;
   console.log("detail 화면에서 id::::", id);
 
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data: boardData } = useQuery(FETCH_BOARD, {
     variables: { boardId: id },
   });
 
-  console.log("detail 화면에서 data:::", data);
+  console.log("detail 화면에서 data:::", boardData);
+
+  const [likeCount, setLikeCount] = useState(0);
+  const [dislikeCount, setDislikeCount] = useState(0);
+
+  useEffect(() => {
+    if (boardData?.fetchBoard) {
+      setLikeCount(boardData.fetchBoard.likeCount);
+      setDislikeCount(boardData.fetchBoard.dislikeCount);
+    }
+  }, [boardData]);
+
+  const [likeMutation] = useMutation(LIKE_BOARD);
+  const [dislikeMutation] = useMutation(DISLIKE_BOARD);
+
+  const increaseLikes = async () => {
+    try {
+      const { data } = await likeMutation({
+        variables: { boardId: id },
+      });
+      setLikeCount(data.likeBoard);
+      console.dir(data);
+    } catch (error) {
+      console.error("like 에러", error);
+    }
+  };
+
+  const increaseDislikes = async () => {
+    try {
+      const { data } = await dislikeMutation({
+        variables: { boardId: id },
+      });
+      setDislikeCount(data.dislikeBoard);
+      console.dir(data);
+    } catch (error) {
+      console.error('dislike 에러', error);
+    }
+  };
 
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
         <div className={styles.detailFrame}>
-          <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
+          <div className={styles.detailSubject}>{boardData?.fetchBoard?.title}</div>
           <div className={styles.detailMetadataContainer}>
             <div className={styles.detailMetadataProfile}>
               <Image
                 src={IMAGE_SRC.profileImage.src}
                 alt={IMAGE_SRC.profileImage.alt}
               />
-              <div> {data?.fetchBoard?.writer}</div>
+              <div> {boardData?.fetchBoard?.writer}</div>
             </div>
             <div className={styles.detailMetadataDate}>
               {' '}
-              {data?.fetchBoard?.createdAt}
+              {boardData?.fetchBoard?.createdAt}
             </div>
           </div>
           <div className={styles.enrollBorder}></div>
@@ -116,7 +166,7 @@ export default function BoardsDetailPage() {
               className={styles.detailContentImage}
             />
             <div className={styles.detailContentText}>
-              {data?.fetchBoard?.contents}
+              {boardData?.fetchBoard?.contents}
             </div>
             <Image
               src={IMAGE_SRC.neotubeImage.src}
@@ -125,17 +175,23 @@ export default function BoardsDetailPage() {
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
                 <Image
-                  src={IMAGE_SRC.badImage.src}
-                  alt={IMAGE_SRC.badImage.alt}
+                  src={IMAGE_SRC.goodImage.src}
+                  alt={IMAGE_SRC.goodImage.alt}
+                  onClick={ increaseLikes }
                 />
-                <div className={styles.detailBadText}>24</div>
+                <div className={styles.detailGoodText} onClick={ increaseLikes }>
+                  {likeCount}
+                </div>
               </div>
               <div className={styles.detailGoodContainer}>
                 <Image
-                  src={IMAGE_SRC.goodImage.src}
-                  alt={IMAGE_SRC.goodImage.alt}
+                  src={IMAGE_SRC.badImage.src}
+                  alt={IMAGE_SRC.badImage.alt}
+                  onClick={ increaseDislikes }
                 />
-                <div className={styles.detailGoodText}>12</div>
+                <div className={styles.detailBadText} onClick={ increaseDislikes }>
+                  {dislikeCount}
+                </div>
               </div>
             </div>
             <div className={styles.detailButtonsContainer}>
@@ -151,9 +207,7 @@ export default function BoardsDetailPage() {
               <button className={styles.detailButton}>
                 <Image src={IMAGE_SRC.pencil.src} alt={IMAGE_SRC.pencil.alt} />
                 <div>
-                  <Link href={`/boards/edit/${id}`}>
-                    수정하기
-                  </Link>
+                  <Link href={`/boards/edit/${id}`}>수정하기</Link>
                 </div>
               </button>
             </div>
