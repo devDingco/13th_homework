@@ -6,29 +6,22 @@ import {
 } from "../../../commons/graphql/backend-api";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
-
-interface IBoardList {
-  id: string;
-  number: number;
-  writer: string;
-  title: string;
-  createdAt: string;
-}
+import { IBoardList } from "../../../types/board.type";
 
 export default function BoardList(props: IBoardList) {
-  const { id, number, title, writer, createdAt } = props;
+  const { _id, number, title, writer, createdAt } = props;
   const router = useRouter();
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
-  const opnClickBoard = () => {
-    router.push(`/routes/boards/${id}`);
+  const onClickBoard = () => {
+    router.push(`/boards/${_id}`);
   };
 
   const onCLickDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
     deleteBoard({
       variables: {
-        id: id,
+        id: _id,
       },
       refetchQueries: [{ query: FETCH_BOARDS }],
     });
@@ -36,7 +29,7 @@ export default function BoardList(props: IBoardList) {
 
   return (
     <>
-      <li className={styles.board_list} onClick={opnClickBoard}>
+      <li className={styles.board_list} onClick={onClickBoard}>
         <span className={styles.board_number}>{number}</span>
         <span className={styles.board_title}>{title}</span>
         <span className={styles.board_writer}>{writer}</span>

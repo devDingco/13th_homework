@@ -5,14 +5,7 @@ import styles from "./styles.module.css";
 import BoardsHeader from "../components/BoardsHeader/BoardsHeader";
 import BoardList from "../components/BoardList/BoardList";
 import { FETCH_BOARDS } from "../../commons/graphql/backend-api";
-
-interface IBoardList {
-  _id: string;
-  number: number;
-  writer: string;
-  title: string;
-  createdAt: string;
-}
+import { IBoardList } from "../../types/board.type";
 
 export default function Boards() {
   const { data } = useQuery(FETCH_BOARDS);
@@ -25,7 +18,7 @@ export default function Boards() {
           {data?.fetchBoards.map((e: IBoardList, index: number) => (
             <BoardList
               key={e._id}
-              id={e._id}
+              _id={e._id}
               number={index + 1}
               title={e.title}
               writer={e.writer}

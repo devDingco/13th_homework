@@ -1,15 +1,6 @@
-import { ReactNode } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-
-type ButtonProps = {
-  type?: "submit";
-  disabled?: boolean;
-  children: ReactNode;
-  color: "blue" | "gray" | "white";
-  src?: string;
-  alt?: string;
-};
+import { IButtonProps } from "../../../types/components.type";
 
 export default function Button({
   type,
@@ -18,7 +9,7 @@ export default function Button({
   color,
   src,
   alt,
-}: ButtonProps) {
+}: IButtonProps) {
   const colorVariants = {
     blue: "bg-blue text-white",
     gray: "bg-gray text-white",

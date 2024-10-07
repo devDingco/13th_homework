@@ -33,7 +33,7 @@
 
 .video_thumbnail_wrapper {
   @apply flex py-6 flex-col items-center gap-2.5;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 .reaction {
