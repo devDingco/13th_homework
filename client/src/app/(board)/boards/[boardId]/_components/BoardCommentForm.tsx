@@ -40,6 +40,7 @@ export default function BoardCommentForm() {
 			setRating(0);
 			reMutation();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
 
 	return (
