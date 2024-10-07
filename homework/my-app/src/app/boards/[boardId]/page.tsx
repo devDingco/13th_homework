@@ -1,10 +1,11 @@
-// import { useState } from "react";
+// 상세페이지
 
 "use client";
 import { useParams } from "next/navigation";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useQuery, gql } from "@apollo/client";
+import Link from "next/link";
 
 const FETCH_BOARD = gql`
   query fetchBoard($myid: ID!) {
@@ -17,22 +18,23 @@ const FETCH_BOARD = gql`
 `;
 
 const BoardDetail = () => {
-  const param = useParams();
-  console.log(param);
+  const params = useParams();
+  console.log(params);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      myid: param.boardId,
+      myid: String(params.boardId),
     },
+
     // param._id가 아니라 param.boardId인 이유는 다이나믹페이지 이동 할때 uri주소에 id를 상세페이지에서는 boardId(변수)로 받겠다고해서이다
     // param.boardId -> 애가 타입이 다르면 자동변환되지 않고 null로 들어간다 그래서 fetch오류가 자꾸 뜬다
   });
 
   console.log(data);
-  console.log(param.boardId);
+  console.log(params.boardId);
 
   return (
-    <main className={styles.containerWap}>
+    <main className={styles.containerWrap}>
       <header className={styles.headerTitle}>
         <span>{data?.fetchBoard.title}</span>
       </header>
@@ -128,16 +130,18 @@ const BoardDetail = () => {
           />
           목록으로
         </button>
-        <button>
-          <Image
-            src="/img/left_icon2.png"
-            alt="icon"
-            width={24}
-            height={24}
-            sizes="100vw"
-          />
-          수정하기
-        </button>
+        <Link href={`/boards/${params.boardId}/edit`}>
+          <button>
+            <Image
+              src="/img/left_icon2.png"
+              alt="icon"
+              width={24}
+              height={24}
+              sizes="100vw"
+            />
+            수정하기
+          </button>
+        </Link>
       </section>
     </main>
   );
