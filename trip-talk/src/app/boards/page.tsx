@@ -25,7 +25,10 @@ function BoardsList() {
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const router = useRouter();
 
-  const onClickDeleteBoard = async (id: string, e: any) => {
+  const onClickDeleteBoard = async (
+    id: string,
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => {
     e.stopPropagation();
 
     deleteBoard({

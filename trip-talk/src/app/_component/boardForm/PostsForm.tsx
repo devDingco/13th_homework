@@ -11,7 +11,7 @@ import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, ApolloError } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import {
   CREATE_BOARD,
@@ -93,10 +93,15 @@ export default function PostsForm({
         });
         routes.push(`/boards/${params.postId}`);
       }
-    } catch (err: any) {
-      // alert(err.graphQLErrors);
-      console.log(err.graphQLErrors);
-      alert(err.graphQLErrors[0].message);
+    } catch (err: unknown) {
+      if (err instanceof ApolloError) {
+        console.log(err.graphQLErrors);
+        alert(
+          err.graphQLErrors[0]?.message || '알 수 없는 오류가 발생했습니다.',
+        );
+      } else {
+        console.error(err);
+      }
     }
   };
 

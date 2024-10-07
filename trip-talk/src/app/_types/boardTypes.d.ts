@@ -1,5 +1,5 @@
 interface BoardType {
-  createdAt?: any;
+  createdAt?: Date;
   title?: string;
   writer?: string | null | undefined;
   _id: string;

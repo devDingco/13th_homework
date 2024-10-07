@@ -8,6 +8,8 @@ import Button from '@/app/_component/form/Button';
 import s from './PostDetail.module.css';
 import { useParams, useRouter } from 'next/navigation';
 import BoardDetail from '@/app/_component/boardDetail/BoardDetail';
+import CommentList from '@/app/_component/boardDetail/CommentList';
+import CommentWrite from '@/app/_component/boardDetail/CommentWrite';
 
 const PostDetail = () => {
   const { postId: params } = useParams();
@@ -30,6 +32,8 @@ const PostDetail = () => {
           수정하기
         </Button>
       </div>
+      <CommentWrite />
+      <CommentList />
     </>
   );
 };
