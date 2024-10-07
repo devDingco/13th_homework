@@ -2,7 +2,7 @@ import { BasicInputForm, Divider } from "../../Boards-write";
 
 import styles from "./styles.module.css";
 
-const BoardComments = () => {
+const BoardCommentsInputForm = () => {
   const commentsDescription = "댓글을 입력해 주세요.";
 
   return (
@@ -22,21 +22,24 @@ const BoardComments = () => {
       <div className={styles.textInputContainer}>
         <BasicInputForm
           isRequired={true}
-          title={"작성자"}
-          placeholder={"작성자 명을 입력해 주세요."}
+          title="작성자"
+          placeholder="작성자 명을 입력해 주세요."
         />
         <BasicInputForm
           isRequired={true}
           title="비밀번호"
-          placeholder={"비밀번호를 입력해 주세요."}
+          placeholder="비밀번호를 입력해 주세요."
         />
       </div>
       <textarea
         className={styles.commentsInput}
         placeholder={commentsDescription}
       ></textarea>
+      <div className={styles.buttonContainer}>
+        <button className={styles.submitButton}>댓글 등록</button>
+      </div>
     </div>
   );
 };
 
-export default BoardComments;
+export default BoardCommentsInputForm;

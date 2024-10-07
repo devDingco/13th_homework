@@ -2,7 +2,9 @@
 import useBoardsDetail from "@/app/components/boards/Boards-detail/hook";
 import styles from "./styles.module.css";
 import { Divider } from "@/app/components/boards/Boards-write";
-import BoardComments from "./BoardComments";
+import BoardCommentsInputForm from "@/app/components/boards//Boards-detail/BoardCommentsInputForm";
+import BoardDetailProfile from "./Profile";
+import BoardComment from "./BoardComment";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();
@@ -12,10 +14,7 @@ const BoardsDetail = () => {
       <header className={styles.BoardsDetail_header}>{board.title}</header>
       <div className={styles.BoardsDetail_userForm_and_sideButton}>
         <div className={styles.BoardsDetail_userForm}>
-          <div className={styles.profileName}>
-            <img className={styles.profileImg} src="/assets/profile.png" />
-            {board.writer}
-          </div>
+          <BoardDetailProfile writer={board.writer} />
           <div className={styles.postDate}>2024.11.11</div>
         </div>
         <Divider />
@@ -63,7 +62,8 @@ const BoardsDetail = () => {
           수정하기
         </button>
       </footer>
-      <BoardComments />
+      <BoardCommentsInputForm />
+      <BoardComment />
     </div>
   );
 };
