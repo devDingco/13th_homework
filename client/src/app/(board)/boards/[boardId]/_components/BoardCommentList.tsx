@@ -17,7 +17,6 @@ export default function BoardCommentList() {
 		fallbackData: [],
 	});
 
-	console.log(data);
 	if (isLoading) return <BoardLoading />;
 	else if (!data.length)
 		return (

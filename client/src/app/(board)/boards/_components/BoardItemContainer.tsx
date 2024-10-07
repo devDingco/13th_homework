@@ -13,7 +13,6 @@ export default function BoardItemContainer() {
 		revalidateOnFocus: false,
 		fallbackData: [],
 	});
-	console.log(data);
 
 	if (isLoading) {
 		return <BoardLoading />;
