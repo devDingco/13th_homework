@@ -1,17 +1,17 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
-import {
-  DELETE_BOARD,
-  FETCH_BOARDS,
-} from "../../../commons/graphql/backend-api";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
 import { IBoardList } from "../../../types/board.type";
+import {
+  DeleteBoardDocument,
+  FetchBoardsDocument,
+} from "../../../commons/graphql/graphql";
 
 export default function BoardList(props: IBoardList) {
   const { _id, number, title, writer, createdAt } = props;
   const router = useRouter();
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [deleteBoard] = useMutation(DeleteBoardDocument);
 
   const onClickBoard = () => {
     router.push(`/boards/${_id}`);
@@ -23,7 +23,7 @@ export default function BoardList(props: IBoardList) {
       variables: {
         id: _id,
       },
-      refetchQueries: [{ query: FETCH_BOARDS }],
+      refetchQueries: [{ query: FetchBoardsDocument }],
     });
   };
 

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
-  query {
+  query fetchBoards {
     fetchBoards {
       _id
       writer
@@ -59,7 +59,7 @@ export const FETCH_BOARD = gql`
 `;
 
 export const UPDATE_BOARD = gql`
-  mutation (
+  mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
     $password: String
     $boardId: ID!

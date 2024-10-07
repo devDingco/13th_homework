@@ -2,13 +2,13 @@
 
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { FETCH_BOARD } from "../graphql/backend-api";
+import { FetchBoardDocument } from "../graphql/graphql";
 
 export default function UseBoardsDetail() {
   const params = useParams();
   const boardId = params.boardId;
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId },
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: String(boardId) },
   });
 
   const boardWriter = data?.fetchBoard.writer;
