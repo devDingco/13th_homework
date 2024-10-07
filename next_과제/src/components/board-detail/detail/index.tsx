@@ -37,7 +37,7 @@ export default function BoardDetail() {
         </div>
         {detailData?.youtubeUrl && (
           <div className="flex gap-4">
-            {detailData?.images.length > 0 &&
+            {/* {detailData?.images.length > 0 &&
               detailData?.images.map((url: string, index: number) => (
                 <Image
                   key={index}
@@ -47,13 +47,13 @@ export default function BoardDetail() {
                   width="100"
                   height="100"
                 />
-              ))}
+              ))} */}
           </div>
         )}
 
         <div
           className="min-h-[500px]"
-          dangerouslySetInnerHTML={{ __html: detailData?.contents }}
+          dangerouslySetInnerHTML={{ __html: detailData?.contents || "" }}
         ></div>
         {detailData?.youtubeUrl && (
           <div className="bg-gray-200 py-6">
