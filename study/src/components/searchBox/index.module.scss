@@ -1,0 +1,16 @@
+.datePicker {
+  display: flex;
+  align-items: center;
+
+  [class="react-datepicker__input-container"],
+  [class="react-datepicker-wrapper"] {
+    width: 6.8125rem;
+    input {
+      width: 100%;
+      text-align: center;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

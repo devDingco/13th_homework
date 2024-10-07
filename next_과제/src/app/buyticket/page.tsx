@@ -2,7 +2,7 @@ import Link from "next/link";
 export default function BuyTicketPage() {
   return (
     <div>
-      숙박권 구매
+      숙박권 메인 페이지
       <br />
       <br />
       <br />
