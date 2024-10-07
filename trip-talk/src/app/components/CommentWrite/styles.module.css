@@ -1,0 +1,52 @@
+.form {
+  @apply flex flex-col items-start gap-6 w-full pt-10;
+}
+
+.form > div {
+  @apply w-full;
+}
+
+.comment {
+  @apply flex gap-2 text-black text-base font-semibold;
+}
+
+.rating_stars {
+  @apply flex;
+}
+
+.input_layout {
+  @apply flex flex-col gap-2;
+}
+
+.input_wrapper {
+  @apply flex gap-4;
+  width: 640px;
+}
+
+.input_wrapper > * {
+  @apply flex-1;
+}
+
+.textarea_wrapper {
+  min-width: 640px;
+}
+
+.textarea_wrapper > textarea {
+  @apply outline-none w-full flex py-3 px-4 rounded-lg border border-solid bg-white resize-none border-softGray h-36;
+}
+
+.textarea_wrapper > textarea::placeholder {
+  @apply text-slateGray;
+}
+
+.button_wrapper {
+  @apply w-full flex justify-end;
+}
+
+.comment_area {
+  @apply py-10;
+}
+
+.comment_area > p {
+  @apply text-dimGray text-center text-sm font-normal;
+}
