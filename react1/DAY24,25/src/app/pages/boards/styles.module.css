@@ -1,0 +1,54 @@
+.layout {
+    display: flex;
+    width: 120rem;
+    padding: 2.5rem 0rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-shrink: 0;
+}
+
+.body {
+    display: flex;
+    padding: 0rem 20rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    align-self: stretch;
+}
+
+.listBox {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+.headerItem {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.listItem {
+    flex: 1;
+    text-align: center;
+}
+.deleteBtn {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.deleteBtn:hover {
+    transform: scale(1.1);
+}
