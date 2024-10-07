@@ -1,27 +1,19 @@
-import { Divider } from "../../Boards-write";
-import BoardDetailProfile from "../Profile";
+import Comment from "../Comment";
+import useCommentList from "./hook";
 import styles from "./styles.module.css";
 
 const CommentList = () => {
+  const { data } = useCommentList();
+
   return (
     <div className={styles.boardCommentContainer}>
-      <div className={styles.headerContainer}>
-        <BoardDetailProfile writer="애슐리" />
-        <div className={styles.starsContainer}>
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-        </div>
-      </div>
-      <div className="contentsContainer">
-        <p>살겠노라 살겠노라. 청산에 살겠노라.</p>
-        <p>머루랑 다래를 먹고 청산에 살겠노라.</p>
-        <p>얄리얄리 얄량셩 얄라리 얄라</p>
-      </div>
-      <div className={styles.dateContainer}>2024.04.01</div>
-      <Divider />
+      {data?.fetchBoardComments.map((el) => (
+        <Comment
+          key={el._id}
+          writer={String(el.writer)}
+          contents={el.contents}
+        />
+      ))}
     </div>
   );
 };

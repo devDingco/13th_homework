@@ -1,19 +1,32 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
-export const CREATE_BOARD = gql`
-    mutation createBoard($createBoardInput: CreateBoardInput!) {
-        createBoard(createBoardInput: $createBoardInput) {
-          _id
-          writer
-          title
-          contents
-          createdAt
-        }
+// 게시판 목록
+export const FETCH_BOARDS = gql`
+  query fetchBoards {
+    fetchBoards {
+      _id
+      writer
+      title
+      createdAt
     }
+  }
+`;
+
+// 게시판 상세
+export const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
 `;
 
 export const FETCH_BOARD = gql`
-query fetchBoard($boardId: ID!) {
+  query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       writer
       title
@@ -24,35 +37,59 @@ query fetchBoard($boardId: ID!) {
 `;
 
 export const UPDATE_BOARD = gql`
-mutation updateBoard(
+  mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
     $password: String
     $boardId: ID!
-    ) {
+  ) {
     updateBoard(
       updateBoardInput: $updateBoardInput
       password: $password
       boardId: $boardId
-      ) {
+    ) {
       _id
     }
   }
-`
+`;
 
 export const DELETE_BOARD = gql`
-    mutation deleteBoard($id: ID!) {
-        deleteBoard(boardId: $id)
-    }
+  mutation deleteBoard($id: ID!) {
+    deleteBoard(boardId: $id)
+  }
 `;
 
-export const FETCH_BOARDS = gql`
-    query {
-        fetchBoards {
-            _id
-            writer
-            title
-            createdAt
-        }
+// 게시판 댓글
+
+export const CREATE_BOARD_COMMENT = gql`
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
+    createBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardId: $boardId
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+      deletedAt
     }
+  }
 `;
 
+export const FETCH_BOARD_COMMENTS = gql`
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;

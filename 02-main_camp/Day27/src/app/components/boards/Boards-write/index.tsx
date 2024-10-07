@@ -137,6 +137,7 @@ export const BasicInputForm = (props: any) => {
           placeholder={props.placeholder}
           onChangeHandler={props.onChangeHandler}
           defaultValue={props.defaultValue}
+          value={props.value}
         />
         <p className={styles.inputError}>{props.errorMessage}</p>
       </div>
@@ -163,6 +164,7 @@ const ContentsInputForm = (props: any) => {
         placeholder={props.placeholder}
         onChange={props.onChangeHandler}
         defaultValue={props.defaultValue}
+        value={props.value}
       ></textarea>
       <p className={styles.inputError}>{props.errorMessage}</p>
     </div>
@@ -208,6 +210,7 @@ const TextInput = (props: any) => {
       placeholder={props.placeholder}
       onChange={props.onChangeHandler}
       defaultValue={props.defaultValue}
+      value={props.value}
       disabled={props.isEdit}
     />
   );

@@ -1,0 +1,16 @@
+.headerContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.starsContainer {
+  display: flex;
+}
+
+.dateContainer {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #818181;
+
+  margin-bottom: 2.5rem;
+}

@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 const useBoardsList = () => {
   const { data } = useQuery(FetchBoardsDocument, {
     variables: {
-      page: Number(1),
+      // page: Number(1),
     },
   });
 
