@@ -5,7 +5,7 @@ import useUpdate from "@/commons/hooks/useUpdate";
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { Input, Textarea } from "@/components/Atoms/_Input";
+import { Input } from "@/components/Atoms/_Input";
 
 export default function BoardsDetailUI({ isEdit }) {
     const Params = useParams();
@@ -85,10 +85,11 @@ export default function BoardsDetailUI({ isEdit }) {
                 </p>
                 <p>
                     {isEdit ? (
-                        <Textarea
+                        <Input
                             id="contents"
                             contents={data?.fetchBoard.contents}
                             onChange={handleChange}
+                            textarea
                         />
                     ) : (
                         ""
