@@ -6,7 +6,7 @@ import CommentList from "../comment-list";
 
 function CommentWrite() {
   const { data } = useCommentList();
-  const { onChange, onClickSubmit, isActive } = useCommentWrite();
+  const { onChange, onClickSubmit, isActive, validation } = useCommentWrite();
   return (
     <main className={styles.main}>
       <div className={styles.commentTitle}>
@@ -33,6 +33,7 @@ function CommentWrite() {
               type="text"
               placeholder="작성자 명을 입력해주세요."
               name="writer"
+              value={validation.writer}
             />
           </div>
           <div className={styles.writer_password_box}>
@@ -46,6 +47,7 @@ function CommentWrite() {
               type="text"
               placeholder="비밀번호를 입력해 주세요."
               name="password"
+              value={validation.password}
             />
           </div>
         </div>
@@ -55,6 +57,7 @@ function CommentWrite() {
           id="commentTextarea"
           className={styles.commentTextarea}
           placeholder="댓글을 입력해주세요."
+          value={validation.contents}
         ></textarea>
         <div className={styles.button_box}>
           <button

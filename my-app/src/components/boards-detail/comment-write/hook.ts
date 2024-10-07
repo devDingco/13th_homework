@@ -11,13 +11,19 @@ export function useCommentWrite() {
   const params = useParams();
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
   const [isActive, setIsActive] = useState<boolean>(false);
-
   const [validation, setValidation] = useState({
     writer: "",
     password: "",
     contents: "",
     rating: 0,
   });
+
+  const initialValidationState = {
+    writer: "",
+    password: "",
+    contents: "",
+    rating: 0,
+  };
 
   const validateForm = () => {
     const isValid = validation.writer !== "" && validation.password !== "";
@@ -34,7 +40,6 @@ export function useCommentWrite() {
     };
 
     setValidation(commentValidation);
-    console.log(commentValidation);
     validateForm();
   };
 
@@ -57,6 +62,7 @@ export function useCommentWrite() {
             },
           ],
         });
+        setValidation(initialValidationState);
       }
     } catch (error) {
       console.error("에러가 발생하였습니다. 다시 시도해주세요.", error);
@@ -67,5 +73,6 @@ export function useCommentWrite() {
     onChange,
     onClickSubmit,
     isActive,
+    validation,
   };
 }
