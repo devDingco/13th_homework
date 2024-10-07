@@ -5,6 +5,7 @@ import {
   CreateBoardDocument,
   UpdateBoardDocument,
 } from "@/commons/gql/graphql";
+import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
@@ -18,7 +19,7 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [isActive, setIsActive] = useState(isEdit ? true : false);
 
   // 오류 메세지
-  const defaultErrorMessage = isEdit ? "" : "필수 입력 사항입니다.";
+  const defaultErrorMessage = isEdit ? "" : CONSTANTS_DESCRIPTION.ERROR_MESSAGE;
   const [writerErrorMessage, setWriterErrorMessage] =
     useState(defaultErrorMessage);
   const [passwordErrorMessage, setPasswordErrorMessage] =
@@ -82,13 +83,13 @@ export const useBoardWrite = (isEdit: boolean) => {
       const boardId = result.data?.createBoard._id;
       router.push(`/boards/${boardId}`);
     } catch {
-      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+      alert(CONSTANTS_ALERT_MESSAGE.CREATE_BOARD_FAILED);
     }
   };
 
   const onClickEdit = async () => {
     const passwordInput = prompt(
-      "글을 입력할 때, 입력하셨던 비밀번호를 입력해주세요."
+      CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_INPUT_PASSWORD
     );
 
     try {
@@ -103,7 +104,7 @@ export const useBoardWrite = (isEdit: boolean) => {
           boardId: params.boardId as string,
         },
       });
-      alert("수정 완료!");
+      alert(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED);
       router.push(`/boards/${params.boardId}`);
     } catch (error: any) {
       alert(error.graphQLErrors[0].message);

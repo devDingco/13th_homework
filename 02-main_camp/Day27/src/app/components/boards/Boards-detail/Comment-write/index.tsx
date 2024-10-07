@@ -1,11 +1,11 @@
+import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import { BasicInputForm, Divider } from "../../Boards-write";
 import useCommentWrite from "./hook";
 
 import styles from "./styles.module.css";
+import CONSTANTS_TITLE from "@/commons/constants/title";
 
 const CommentWrite = () => {
-  const commentsDescription = "댓글을 입력해 주세요.";
-
   const {
     comment,
     onChangeWriter,
@@ -19,7 +19,7 @@ const CommentWrite = () => {
       <Divider />
       <div className={styles.titleContainer}>
         <img src="/assets/chat.png" alt="댓글 그림" />
-        댓글
+        {CONSTANTS_TITLE.COMMENTS}
       </div>
       <div className={styles.starsContainer}>
         <img src="/assets/star.png" alt="별 그림" />
@@ -31,22 +31,22 @@ const CommentWrite = () => {
       <div className={styles.textInputContainer}>
         <BasicInputForm
           isRequired={true}
-          title="작성자"
-          placeholder="작성자 명을 입력해 주세요."
+          title={CONSTANTS_TITLE.WRITER}
+          placeholder={CONSTANTS_DESCRIPTION.WRITER}
           onChangeHandler={onChangeWriter}
           value={comment.writer}
         />
         <BasicInputForm
           isRequired={true}
-          title="비밀번호"
-          placeholder="비밀번호를 입력해 주세요."
+          title={CONSTANTS_TITLE.PASSWORD}
+          placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
           onChangeHandler={onChangePassword}
           value={comment.password}
         />
       </div>
       <textarea
         className={styles.commentsInput}
-        placeholder={commentsDescription}
+        placeholder={CONSTANTS_DESCRIPTION.COMMENTS}
         onChange={onChangeContents}
         value={comment.contents}
       ></textarea>

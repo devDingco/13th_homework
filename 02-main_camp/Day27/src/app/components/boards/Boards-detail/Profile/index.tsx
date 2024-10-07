@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-const BoardDetailProfile = (props) => {
+const BoardDetailProfile = (props: IProfile) => {
   const profileImg = "/assets/profile.png";
 
   return (

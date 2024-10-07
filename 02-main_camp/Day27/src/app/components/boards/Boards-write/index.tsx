@@ -1,6 +1,8 @@
 "use client";
 import styles from "./styles.module.css";
 import { useBoardWrite } from "./hook";
+import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
+import CONSTANTS_TITLE from "@/commons/constants/title";
 
 const BoardsWrite = (props: any) => {
   const board = {
@@ -10,13 +12,9 @@ const BoardsWrite = (props: any) => {
     contents: props.data?.fetchBoard.contents,
   };
 
-  const pageTitle = props.isEdit ? "수정" : "등록";
-
-  const writerDescription = "작성자명을 입력해 주세요.";
-  const passwordDescription = "비밀번호를 입력해 주세요.";
-  const titleDescription = "제목을 입력해 주세요.";
-  const contentsDescription = "내용을 입력해 주세요.";
-  const youtubeLinkDescription = "링크를 입력해 주세요.";
+  const pageTitle = props.isEdit
+    ? CONSTANTS_TITLE.EDIT
+    : CONSTANTS_TITLE.SUBMIT;
 
   const {
     onChangeWriter,
@@ -71,8 +69,8 @@ const BoardsWrite = (props: any) => {
         <div className={styles.BoardsNew_UserInputForm}>
           <BasicInputForm
             isRequired={true}
-            title="작성자"
-            placeholder={writerDescription}
+            title={CONSTANTS_TITLE.WRITER}
+            placeholder={CONSTANTS_DESCRIPTION.WRITER}
             onChangeHandler={onChangeWriter}
             errorMessage={writerErrorMessage}
             isEdit={props.isEdit}
@@ -80,8 +78,8 @@ const BoardsWrite = (props: any) => {
           />
           <BasicInputForm
             isRequired={true}
-            title="비밀번호"
-            placeholder={passwordDescription}
+            title={CONSTANTS_TITLE.PASSWORD}
+            placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
             onChangeHandler={onChangePassword}
             errorMessage={passwordErrorMessage}
             isEdit={props.isEdit}
@@ -91,16 +89,16 @@ const BoardsWrite = (props: any) => {
         <Divider />
         <BasicInputForm
           isRequired={true}
-          title="제목"
-          placeholder={titleDescription}
+          title={CONSTANTS_TITLE.TITLE}
+          placeholder={CONSTANTS_DESCRIPTION.TITLE}
           onChangeHandler={onChangeTitle}
           errorMessage={titleErrorMessage}
           defaultValue={board.title}
         />
         <Divider />
         <ContentsInputForm
-          title="내용"
-          placeholder={contentsDescription}
+          title={CONSTANTS_TITLE.CONTENTS}
+          placeholder={CONSTANTS_DESCRIPTION.CONTENTS}
           onChangeHandler={onChangeContents}
           errorMessage={contentsErrorMessage}
           defaultValue={board.contents}
@@ -109,8 +107,8 @@ const BoardsWrite = (props: any) => {
         <Divider />
         <BasicInputForm
           isRequired={false}
-          title="유튜브 링크"
-          placeholder={youtubeLinkDescription}
+          title={CONSTANTS_TITLE.YOUTUBE_LINK}
+          placeholder={CONSTANTS_DESCRIPTION.YOUTUBE_LINK}
         />
         <Divider />
         <PhotoUploadForm />
@@ -172,19 +170,15 @@ const ContentsInputForm = (props: any) => {
 };
 
 const AddressInputForm = () => {
-  const zipCodeDescription = "01234";
-  const addressDescription = "주소를 입력해주세요.";
-  const detailAddressDescription = "상세 주소";
-
   return (
     <div className={styles.BoardsNew_inputForm}>
-      주소
+      {CONSTANTS_TITLE.ADDRESS}
       <div className={styles.ZipCodeContainer}>
-        <TextInput placeholder={zipCodeDescription} />
+        <TextInput placeholder={CONSTANTS_DESCRIPTION.ZIP_CODE} />
         <ZipCodeSearchButton />
       </div>
-      <TextInput placeholder={addressDescription} />
-      <TextInput placeholder={detailAddressDescription} />
+      <TextInput placeholder={CONSTANTS_DESCRIPTION.ADDRESS} />
+      <TextInput placeholder={CONSTANTS_DESCRIPTION.ADDRESS_DETAIL} />
     </div>
   );
 };
@@ -192,7 +186,7 @@ const AddressInputForm = () => {
 const PhotoUploadForm = () => {
   return (
     <div className={styles.BoardsNew_inputForm}>
-      사진 첨부
+      {CONSTANTS_TITLE.UPLOAD_PHOTO}
       <div className={styles.uploadButtonContainer}>
         <UploadButton />
         <UploadButton />

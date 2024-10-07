@@ -30,7 +30,7 @@ const Comment = (props: ICommentInput) => {
           </button>
         </div>
       </div>
-      <div className="contentsContainer">{props.contents}</div>
+      <div className={styles.contentsContainer}>{props.contents}</div>
       <div className={styles.dateContainer}>2024.04.01</div>
       <Divider />
     </>

@@ -68,9 +68,9 @@ const useCommentWrite = () => {
         ],
       });
       resetInputValue();
-      alert("댓글 등록이 완료되었습니다.");
+      alert(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED);
     } catch (error) {
-      alert(`댓글 등록을 실패했습니다. (${error})`);
+      alert(`${CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_FAILED} (${error})`);
     }
   };
 
