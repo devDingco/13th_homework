@@ -1,10 +1,10 @@
 "use client";
-import BoardsWrite from "@/components/studyComponent/boardsWrite";
+import BoardsWrite from "@/components/board-write";
 
 export default function BoardsNewPage() {
   return (
     <>
-      <BoardsWrite />
+      <BoardsWrite title="등록" formType="new" />
     </>
   );
 }
