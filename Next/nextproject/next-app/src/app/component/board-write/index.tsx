@@ -4,7 +4,7 @@ import Button from "../commons/Button";
 import styles from "./style.module.css";
 import { IProps } from "./types";
 import { UseBoardsWrite } from "./hook";
-
+import React from "react";
 export default function BoardsWrite(props: IProps) {
   const {
     onChangeContent,
@@ -19,12 +19,11 @@ export default function BoardsWrite(props: IProps) {
     contentblank,
     passwordblank,
     name,
-    contents,
     title,
     password,
     data,
   } = UseBoardsWrite(props);
-  console.log(data?.fetchBoard.contents);
+  console.log(data?.fetchBoard.name);
 
   return (
     <div className={styles.css_layout}>

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./style.module.css";
 import UseListWrite from "./hook";
 export default function ListPage() {
-  const { onMoveDeatilPage, onClickDelete, data } = UseListWrite();
+  const { onMoveDetailPage, onClickDelete, data } = UseListWrite();
   return (
     <>
       <div className={styles.css_listlayout}>
@@ -19,42 +19,32 @@ export default function ListPage() {
               <div className={styles.css_listall}>
                 {data?.fetchBoards.map((el, index) => (
                   <div key={el._id}>
-                    <div className={styles.css_yourboard}>
+                    <div
+                      className={styles.css_yourboard}
+                      onClick={() => onMoveDetailPage(el._id)}
+                    >
                       <div className={styles.css_border}>
-                        <div
-                          className={styles.css_boardnum}
-                          onClick={() => onMoveDeatilPage(el._id)}
-                        >
+                        <div className={styles.css_boardnum}>
                           {data?.fetchBoards.length - index}
                         </div>
-                        <div
-                          className={styles.css_boardtitle}
-                          onClick={() => onMoveDeatilPage(el._id)}
-                        >
-                          {el.title}
-                        </div>
-                        <div
-                          className={styles.css_boardwriter}
-                          onClick={() => onMoveDeatilPage(el._id)}
-                        >
+                        <div className={styles.css_boardtitle}>{el.title}</div>
+                        <div className={styles.css_boardwriter}>
                           {el.writer}
                         </div>
-                        <div
-                          className={styles.css_boarddate}
-                          onClick={() => onMoveDeatilPage(el._id)}
-                        >
+                        <div className={styles.css_boarddate}>
                           {el.createdAt.split("T")[0]}
                         </div>
-                        <Image
-                          src="/assets/Delete.png"
-                          width={0}
-                          height={0}
-                          alt="delete"
-                          className={styles.css_delete}
-                          id={el._id}
-                          onClick={() => onClickDelete(el._id)}
-                        />
                       </div>
+
+                      <Image
+                        src="/assets/Delete.png"
+                        width={0}
+                        height={0}
+                        alt="delete"
+                        className={styles.css_delete}
+                        id={el._id}
+                        onClick={(event) => onClickDelete(event, el._id)}
+                      />
                     </div>
                   </div>
                 ))}

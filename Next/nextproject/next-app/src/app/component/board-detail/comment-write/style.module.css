@@ -1,0 +1,70 @@
+.css_input {
+  width: 1280px;
+  height: 100px;
+  gap: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.css_inputbox {
+  width: 640px;
+  height: 80px;
+  gap: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.css_namebox {
+  width: 312px;
+  height: 80px;
+  gap: 8px;
+}
+.css_namelabel {
+  width: 312px;
+  height: 24px;
+  gap: 4px;
+}
+
+.css_nameinput {
+  height: 48px;
+  width: 312px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 12px 16px 12px 16px;
+}
+
+.css_pwdinput {
+  height: 48px;
+  width: 312px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 12px 16px 12px 16px;
+}
+
+.css_bottombox {
+  width: 1280px;
+  height: 304px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.css_commentinput {
+  width: 1280px;
+  height: 144px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  padding: 12px 16px 12px 16px;
+}
+
+.css_commentsubmit {
+  width: 99px;
+  height: 48px;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 12px 16px 12px 16px;
+  border: 1px solid gray;
+  background-color: #c7c7c7;
+  color: white;
+}
