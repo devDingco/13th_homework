@@ -11,7 +11,7 @@ export default function BoardsDetail() {
   if (error) return <h3>error : {error.message}</h3>;
 
   return (
-    <div id="detailContainer" className="container">
+    <div id="detailContainer" className="container border-b border-gray-200">
       <div className="flex flex-col w-full justify-between">
         <div id="boardTitle" className=" mb-4 prose-b_28_36">
           {data?.fetchBoard.title || ''}

@@ -1,0 +1,26 @@
+.inputCSS {
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  display: flex;
+  padding: 0.7rem 0.9rem;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.9rem;
+}
+
+.textareaCSS {
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.container {
+  gap: 1rem;
+}
