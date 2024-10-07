@@ -3,16 +3,7 @@ import PostsForm from '@/app/_component/boardForm/PostsForm';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import React, { useMemo } from 'react';
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      writer
-      title
-      contents
-    }
-  }
-`;
+import { FETCH_BOARD } from '@/app/_api/board/query/getBoardData';
 
 export default function BoardEditPage() {
   const params = useParams();
@@ -36,9 +27,9 @@ export default function BoardEditPage() {
       ) : (
         <PostsForm
           type="EDIT"
-          contents={data.fetchBoard.contents}
-          title={data.fetchBoard.title}
-          writer={data.fetchBoard.writer}
+          contents={data?.fetchBoard.contents}
+          title={data?.fetchBoard.title}
+          writer={data?.fetchBoard.writer}
         />
       )}
     </>

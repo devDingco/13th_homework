@@ -1,7 +1,12 @@
 interface BoardType {
-  createdAt: Date;
-  title: string;
-  writer: string;
-  __typename: string;
+  createdAt?: any;
+  title?: string;
+  writer?: string | null | undefined;
+  // __typename?: string;
   _id: string;
+}
+
+interface BoardDetailPropsType {
+  style: classes;
+  postId: string;
 }
