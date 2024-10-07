@@ -1,10 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery } from "@apollo/client";
-// import {
-//   LIST_DELETE_BOARD,
-//   LIST_FETCH_BOARDS,
-// } from "@/components/board-list/queries";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
@@ -16,8 +12,8 @@ export const useBoardList = () => {
 
   const { data } = useQuery(FetchBoardsListDocument, {
     variables: {
-      endDate: "2024-10-30T18:54:33Z",
       startDate: "2021-09-03T09:54:33Z",
+      endDate: "2024-10-30T18:54:33Z",
       search: "",
       page: Number(params.pageNum) || 1,
     },
