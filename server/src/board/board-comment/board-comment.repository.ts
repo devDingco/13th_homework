@@ -39,7 +39,9 @@ export class BoardCommentRepository {
     }
 
     async findAllComment(boardId: number): Promise<BoardComment[]> {
-        return await this.boardCommentRepository.find({ where: { boardId } });
+        return await this.boardCommentRepository.find({
+            where: { boardId },
+        });
     }
 
     async updateComment(
