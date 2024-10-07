@@ -1,19 +1,19 @@
 "use client";
 
 import BoardsWrite from "@/app/components/boards/Boards-write";
-import { FETCH_BOARD } from "@/commons/graphql/backend-api";
+import { FetchBoardDocument } from "@/commons/gql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 
 const BoardsEditPage = () => {
-  const params = useParams()
-  const { data } = useQuery(FETCH_BOARD, {
+  const params = useParams();
+  const { data } = useQuery(FetchBoardDocument, {
     variables: {
-      boardId: params.boardId
-    }
-  })
+      boardId: String(params.boardId),
+    },
+  });
 
-  return <BoardsWrite isEdit={true} data={data}/>
-}
+  return <BoardsWrite isEdit={true} data={data} />;
+};
 
 export default BoardsEditPage;

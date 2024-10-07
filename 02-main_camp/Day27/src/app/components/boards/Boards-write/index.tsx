@@ -3,11 +3,11 @@ import styles from "./styles.module.css";
 import { useBoardWrite } from "./hook";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_TITLE from "@/commons/constants/title";
+import { IBoardWriteInput } from "./types";
 
-const BoardsWrite = (props: any) => {
+const BoardsWrite = (props: IBoardWriteInput) => {
   const board = {
     writer: props.data?.fetchBoard.writer,
-    password: props.data?.fetchBoard.password,
     title: props.data?.fetchBoard.title,
     contents: props.data?.fetchBoard.contents,
   };
