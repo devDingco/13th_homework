@@ -4,7 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
-import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
+import { BoardCommentResponse } from './responses/board-comment-response.entity';
 import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-password-comment.dto';
 
 @Injectable()
@@ -48,7 +48,7 @@ export class BoardCommentRepository {
     async updateComment(
         commentId: string,
         updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
-    ): Promise<BoardCommentResponseDto> {
+    ): Promise<BoardCommentResponse> {
         const updateBoardDB = await this.boardCommentRepository.update(
             new ObjectId(commentId),
             updateBoardCommentDto,

@@ -9,7 +9,7 @@ import {
 
 import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
-import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
+import { BoardCommentResponse } from './responses/board-comment-response.entity';
 import { BoardRepository } from '../repositories/board.repository';
 import { BoardService } from '../board.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -66,7 +66,7 @@ export class BoardCommentService {
         updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
         password: string,
         commentId: string,
-    ): Promise<BoardCommentResponseDto> {
+    ): Promise<BoardCommentResponse> {
         await this.isExistBoard(boardId);
 
         if (updateBoardCommentDto.parentId) {
@@ -127,7 +127,7 @@ export class BoardCommentService {
         }
     }
 
-    makeCommentMap(boardComments: BoardCommentResponseDto[]) {
+    makeCommentMap(boardComments: BoardCommentResponse[]) {
         const commentMap = new Map<string, any>();
 
         boardComments.forEach((comment) => {
