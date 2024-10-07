@@ -28,7 +28,6 @@ export default function NewForm() {
 	});
 
 	if (state.data) {
-		console.log(state.data);
 		onClickPush(`/boards/${state.data.boardId}`);
 	}
 

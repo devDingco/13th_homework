@@ -25,5 +25,4 @@ export interface IBoardComment extends ICommonAPIComment {
 export interface IBoardCommentProps {
 	key: string;
 	comment: IBoardComment;
-	index: number;
 }

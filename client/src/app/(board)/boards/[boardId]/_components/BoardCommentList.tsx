@@ -24,7 +24,7 @@ export default function BoardCommentList() {
 				등록된 댓글이 없습니다.
 			</div>
 		);
-	return data.map((comment: IResponseComment, index: number) => (
-		<BoardComment key={comment._id} comment={comment} index={index} />
+	return data.map((comment: IResponseComment) => (
+		<BoardComment key={comment._id} comment={comment} />
 	));
 }

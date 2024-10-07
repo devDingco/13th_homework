@@ -33,7 +33,9 @@ export default function BoardCommentForm() {
 
 	useEffect(() => {
 		const reMutation = async () => {
+			console.log(1);
 			await mutate();
+			console.log(2);
 		};
 		if (state?.message === 'success') {
 			formRef.current?.reset();
