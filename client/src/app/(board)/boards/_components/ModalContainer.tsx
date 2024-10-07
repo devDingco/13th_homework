@@ -32,8 +32,8 @@ export default function ModalContainer({ boardId, modal }: IModalCommon) {
 					<>
 						<div className="prose-sb_18_24">{`게시글 ${boardId}을 삭제하시겠습니까?`}</div>
 						<div className="flex items-center justify-center gap-4">
-							<CommonButton title={EButtonTitle.back} />
-							<CommonButton title={EButtonTitle.delete} boardId={boardId} />
+							<CommonButton title={EButtonTitle.Back} />
+							<CommonButton title={EButtonTitle.Delete} boardId={boardId} />
 						</div>
 					</>
 				)}

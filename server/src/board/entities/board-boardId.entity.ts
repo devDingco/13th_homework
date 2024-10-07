@@ -1,5 +1,5 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { ObjectId } from 'mongodb';
 
@@ -7,7 +7,6 @@ import { ObjectId } from 'mongodb';
 @ObjectType()
 export class BoardIdCounter {
     @ObjectIdColumn()
-    @Field(() => ID)
     _id: ObjectId;
 
     @Column()

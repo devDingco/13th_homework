@@ -98,9 +98,8 @@ export class BoardRepository {
         });
 
         if (deleteBoardDB.deletedCount === 0) {
-            throw new HttpException(
+            throw new NotFoundException(
                 `boardID: ${boardId} is not found in board`,
-                HttpStatus.NOT_FOUND,
             );
         }
         return true;

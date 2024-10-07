@@ -19,7 +19,7 @@ export class ReactionController {
     @Get()
     @ResponseMessage(`board의 reaction을 성공적으로 가져왔습니다.`)
     @HttpCode(HttpStatus.OK)
-    findReaction(@Param('boardId', ParseIntPipe) BoardId: number) {
-        return this.reactionService.findOne(BoardId);
+    getBoardReaction(@Param('boardId', ParseIntPipe) BoardId: number) {
+        return this.reactionService.getBoardReaction(BoardId);
     }
 }

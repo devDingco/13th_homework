@@ -1,0 +1,10 @@
+query GetBoards {
+  getBoards {
+    author
+    title
+    content
+    boardId
+    createdAt
+    updatedAt
+  }
+}

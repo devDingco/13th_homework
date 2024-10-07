@@ -32,5 +32,5 @@ export class BoardComment extends CreateBoardCommentDto {
 
     @DeleteDateColumn()
     @Field(() => Date)
-    deletedAt: Date;
+    deletedAt?: Date;
 }

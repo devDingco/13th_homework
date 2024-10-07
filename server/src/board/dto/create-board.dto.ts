@@ -53,12 +53,12 @@ export class CreateBoardDto {
     @IsString()
     @IsOptional()
     @Column()
-    @Field()
+    @Field({ nullable: true })
     address: string;
 
     @IsString()
     @IsOptional()
     @Column()
-    @Field()
+    @Field({ nullable: true })
     detailAddress: string;
 }

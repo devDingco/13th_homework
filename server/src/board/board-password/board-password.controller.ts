@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ResponseMessage } from '../decorators/response-message.decorator';
 import { BoardPasswordService } from './board-password.service';
-import { BoardPasswordBodyDTO } from './board-password-body.dto';
+import { BoardPasswordDTO } from './entities/board-password.dto';
 
 @Controller('/api/board/:boardId/password')
 export class BoardPasswordController {
@@ -20,7 +20,7 @@ export class BoardPasswordController {
     @HttpCode(HttpStatus.OK)
     validateBoardData(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Body() body: BoardPasswordBodyDTO,
+        @Body() body: BoardPasswordDTO,
     ): Promise<boolean> {
         return this.boardPasswordService.validateBoardData(
             boardId,

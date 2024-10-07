@@ -2,7 +2,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BoardCommentModule } from './board/board-comment/board-comment.module';
 import { BoardModule } from './board/board.module';
+import { BoardPasswordModule } from './board/board-password/board-password.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
@@ -24,6 +26,8 @@ import { typeORMConfig } from 'configs/typeorm.config';
         }),
 
         BoardModule,
+        BoardPasswordModule,
+        BoardCommentModule,
     ],
     controllers: [AppController],
     providers: [AppService],

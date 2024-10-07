@@ -36,12 +36,24 @@ export class TransformInterceptor<T>
                 if (context.getType<GqlContextType>() === 'graphql') {
                     return { data };
                 } else if (context.getType() === 'http') {
+                    if (data.password) {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { password, ...rest } = data;
+                        data = rest;
+                    }
+
                     if (Array.isArray(data)) {
+                        if (data[0].rating) {
+                            return { message, statusCode, data };
+                        }
                         const deleteIdData = data.map((item) =>
                             this.removeSensitiveData(item),
                         );
                         return { message, statusCode, data: deleteIdData };
                     } else if (typeof data === 'object' && data !== null) {
+                        if (data.rating) {
+                            return { message, statusCode, data };
+                        }
                         const deleteIdData = this.removeSensitiveData(data);
                         return { message, statusCode, data: deleteIdData };
                     } else {
@@ -52,11 +64,12 @@ export class TransformInterceptor<T>
         );
     }
     private removeSensitiveData(item: any): any {
-        if (item && item._id && item.password) {
+        if (item && item._id) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { _id, password, ...rest } = item;
+            const { _id, ...rest } = item;
             return rest;
         }
+
         return item;
     }
 }

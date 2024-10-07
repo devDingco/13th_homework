@@ -2,7 +2,6 @@
 'use client';
 
 import BoardLoading from '../../../_components/BoardLoading';
-import { IApiResponseData } from '@/models/apiResponse';
 import { IboardId } from '@/models/children.type';
 import NewForm from '../../../new/_components/NewForm';
 import fetcher from '@/libs/fetcher';
@@ -19,5 +18,5 @@ export default function EditContainer({ boardId }: IboardId) {
 		return <BoardLoading />;
 	}
 
-	return <>{data && <NewForm boardInfor={data as IApiResponseData} />}</>;
+	return <>{data && <NewForm />}</>;
 }

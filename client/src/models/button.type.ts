@@ -1,11 +1,12 @@
 /** @format */
 
 export enum EButtonTitle {
-	sumbit = 'sumbit',
-	update = 'update',
-	cancel = 'cancel',
-	delete = 'delete',
-	back = 'back',
+	Sumbit = 'sumbit',
+	Update = 'update',
+	Cancel = 'cancel',
+	Delete = 'delete',
+	Back = 'back',
+	Comment = 'comment',
 }
 
 export interface IButtonProps extends IButtonDisabled {
@@ -24,6 +25,7 @@ export enum EButtonKorea {
 	back = '뒤로 가기',
 	list = '목록으로',
 	update = '수정하기',
+	comment = '댓글 등록',
 }
 
 export enum EBoardButton {
