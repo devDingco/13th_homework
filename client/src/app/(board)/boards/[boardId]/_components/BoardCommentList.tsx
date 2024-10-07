@@ -3,7 +3,7 @@
 
 import BoardComment from './BoardComment';
 import BoardLoading from '../../_components/BoardLoading';
-import BoardNoComment from './BoardNoComment';
+import { IResponseComment } from '@/models/comment.type';
 import fetcher from '@/libs/fetcher';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
@@ -13,9 +13,19 @@ export default function BoardCommentList() {
 
 	const { data, isLoading } = useSWR(`/board/${params.boardId}/comment`, fetcher, {
 		suspense: true,
+		revalidateOnFocus: false,
 		fallbackData: [],
 	});
+
+	console.log(data);
 	if (isLoading) return <BoardLoading />;
-	else if (!data) return <BoardNoComment />;
-	return data.map((comment) => <BoardComment key={comment._id} />);
+	else if (!data.length)
+		return (
+			<div className="prose-r_14_20 w-full text-center text-gray-500">
+				등록된 댓글이 없습니다.
+			</div>
+		);
+	return data.map((comment: IResponseComment, index: number) => (
+		<BoardComment key={comment._id} comment={comment} index={index} />
+	));
 }

@@ -16,3 +16,14 @@ export interface IResponseComment extends ICommonAPIComment {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export interface IBoardComment extends ICommonAPIComment {
+	_id: string;
+	parentId: string | null;
+	createdAt: string;
+}
+export interface IBoardCommentProps {
+	key: string;
+	comment: IBoardComment;
+	index: number;
+}
