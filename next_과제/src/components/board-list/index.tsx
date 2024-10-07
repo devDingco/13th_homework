@@ -1,6 +1,6 @@
 import Icon from "@/components/iconFactory";
 import { useBoardList } from "@/components/board-list/hook";
-import { Ipost } from "@/components/board-list/types";
+import { dateViewSet } from "@/utils/dateViewSet";
 
 export default function BoardList() {
   const { data, listItemMouseHandler, detailPageHandler, postDelete } =
@@ -20,7 +20,7 @@ export default function BoardList() {
             </tr>
           </thead>
           <tbody>
-            {data?.fetchBoards.map((post: Ipost, idx: number) => {
+            {data?.fetchBoards.map((post, idx: number) => {
               return (
                 <tr
                   key={post._id}
@@ -40,7 +40,7 @@ export default function BoardList() {
                     {post.writer}
                   </td>
                   <td className="border-solid border-y border-gray-100 font-light text-neutral-400">
-                    {post.createdAt.split("T")[0].replaceAll("-", ".")}
+                    {dateViewSet(post.createdAt)}
                   </td>
                   <td className="border-solid border-y border-gray-100 border-r rounded-e-xl pl-0">
                     <div className="w-6 h-5">
