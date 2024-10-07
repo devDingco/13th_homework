@@ -17,16 +17,7 @@ export default function BoardContainer({ resource }: IBoardReaderResource) {
 					<BoardIcon />
 					<BoardImages infor={boardInfor} />
 					<div className="prose-r_16_24">{boardInfor.content}</div>
-					<div className="flex w-full items-center justify-center bg-gray-100 py-4">
-						<iframe
-							width="560"
-							height="315"
-							src={`https://www.youtube.com/embed/${boardInfor.youtubeUrl}`}
-							title="YouTube video player"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-							allowFullScreen
-						></iframe>
-					</div>
+					<div className="flex h-64 w-full items-center justify-center bg-gray-100 py-4"></div>
 				</>
 			)}
 		</>

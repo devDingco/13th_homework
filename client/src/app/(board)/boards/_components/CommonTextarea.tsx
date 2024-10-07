@@ -7,7 +7,9 @@ import useSWR from 'swr';
 
 export default function CommonTextarea({ title, setLength }: ITitleTextArea) {
 	const param = useParams();
-	const { data } = useSWR(`/board/${param.boardId}`, null);
+	const { data } = useSWR(`/board/${param.boardId}`, null, {
+		revalidateOnFocus: false,
+	});
 
 	return (
 		<textarea

@@ -4,7 +4,7 @@ import BoardItemContainer from './_components/BoardItemContainer';
 import BoardLoading from './_components/BoardLoading';
 import { Suspense } from 'react';
 
-export default function boardPage() {
+export default async function boardPage() {
 	return (
 		<div className="prose-me_16_20 flex w-full flex-col gap-6 rounded-2xl px-12 py-6 text-[#1c1c1c] shadow">
 			<div className="flex w-full justify-center gap-2 px-6 py-4">

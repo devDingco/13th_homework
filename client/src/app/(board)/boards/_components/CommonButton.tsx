@@ -9,7 +9,9 @@ import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
 
 const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonProps) => {
-	const { data, mutate } = useSWR('/board', null);
+	const { data, mutate } = useSWR('/board', null, {
+		revalidateOnFocus: false,
+	});
 
 	const onClickBack = useOnClickBack();
 
