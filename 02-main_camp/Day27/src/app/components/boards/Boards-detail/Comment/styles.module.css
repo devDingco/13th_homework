@@ -1,10 +1,20 @@
 .headerContainer {
   display: flex;
+  justify-content: space-between;
+}
+
+.profileContainer {
+  display: flex;
   gap: 0.5rem;
 }
 
 .starsContainer {
   display: flex;
+}
+
+.sideButtonContainer {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .dateContainer {

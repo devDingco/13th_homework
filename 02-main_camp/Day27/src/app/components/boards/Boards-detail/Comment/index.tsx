@@ -11,13 +11,23 @@ const Comment = (props: ICommentInput) => {
   return (
     <>
       <div className={styles.headerContainer}>
-        <BoardDetailProfile writer={props.writer} />
-        <div className={styles.starsContainer}>
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
-          <img src="/assets/star.png" alt="별 그림" />
+        <div className={styles.profileContainer}>
+          <BoardDetailProfile writer={props.writer} />
+          <div className={styles.starsContainer}>
+            <img src="/assets/star.png" alt="별 그림" />
+            <img src="/assets/star.png" alt="별 그림" />
+            <img src="/assets/star.png" alt="별 그림" />
+            <img src="/assets/star.png" alt="별 그림" />
+            <img src="/assets/star.png" alt="별 그림" />
+          </div>
+        </div>
+        <div className={styles.sideButtonContainer}>
+          <button>
+            <img src="/assets/edit.png" alt="" />
+          </button>
+          <button>
+            <img src="/assets/close.png" alt="" />
+          </button>
         </div>
       </div>
       <div className="contentsContainer">{props.contents}</div>
