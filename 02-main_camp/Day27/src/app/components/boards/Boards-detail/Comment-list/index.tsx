@@ -2,7 +2,7 @@ import { Divider } from "../../Boards-write";
 import BoardDetailProfile from "../Profile";
 import styles from "./styles.module.css";
 
-const BoardComment = () => {
+const CommentList = () => {
   return (
     <div className={styles.boardCommentContainer}>
       <div className={styles.headerContainer}>
@@ -26,4 +26,4 @@ const BoardComment = () => {
   );
 };
 
-export default BoardComment;
+export default CommentList;

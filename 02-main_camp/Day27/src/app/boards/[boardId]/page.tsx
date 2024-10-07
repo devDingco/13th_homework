@@ -1,6 +1,6 @@
 "use client";
 
-import BoardsDetail from "@/app/components/boards/Boards-detail";
+import BoardsDetail from "@/app/components/boards/Boards-detail/Detail";
 
 const BoardsDetailPage = () => {
   return <BoardsDetail />;

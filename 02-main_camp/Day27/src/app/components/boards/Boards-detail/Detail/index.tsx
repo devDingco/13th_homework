@@ -1,10 +1,10 @@
 "use client";
-import useBoardsDetail from "@/app/components/boards/Boards-detail/hook";
+import useBoardsDetail from "@/app/components/boards/Boards-detail/Detail/hook";
 import styles from "./styles.module.css";
 import { Divider } from "@/app/components/boards/Boards-write";
-import BoardCommentsInputForm from "@/app/components/boards//Boards-detail/BoardCommentsInputForm";
-import BoardDetailProfile from "./Profile";
-import BoardComment from "./BoardComment";
+import BoardCommentsInputForm from "@/app/components/boards/Boards-detail/Comment-write";
+import BoardDetailProfile from "../Profile";
+import BoardComment from "../Comment-list";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();

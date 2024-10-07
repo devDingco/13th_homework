@@ -2,7 +2,7 @@ import { BasicInputForm, Divider } from "../../Boards-write";
 
 import styles from "./styles.module.css";
 
-const BoardCommentsInputForm = () => {
+const CommentWrite = () => {
   const commentsDescription = "댓글을 입력해 주세요.";
 
   return (
@@ -42,4 +42,4 @@ const BoardCommentsInputForm = () => {
   );
 };
 
-export default BoardCommentsInputForm;
+export default CommentWrite;
