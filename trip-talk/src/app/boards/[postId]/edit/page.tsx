@@ -3,7 +3,7 @@ import PostsForm from '@/app/_component/boardForm/PostsForm';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import React, { useMemo } from 'react';
-import { FETCH_BOARD } from '@/app/_api/board/query/getBoardData';
+import { FETCH_BOARD } from '@/app/_api/board/getBoardData';
 
 export default function BoardEditPage() {
   const params = useParams();

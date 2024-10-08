@@ -21,3 +21,14 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
+export const FETCH_BOARD_COMMENT = gql`
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+    }
+  }
+`;

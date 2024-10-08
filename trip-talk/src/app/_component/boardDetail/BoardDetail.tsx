@@ -8,7 +8,7 @@ import LikeIcon from '@/../public/icons/like_icon.svg';
 import UnLikeIcon from '@/../public/icons/unlike_icon.svg';
 import MockImg1 from '@/../public/images/mockImg1.png';
 import MockImg2 from '@/../public/images/mockImg2.svg';
-import { FETCH_BOARD } from '@/app/_api/board/query/getBoardData';
+import { FETCH_BOARD } from '@/app/_api/board/getBoardData';
 import { FetchBoardDocument } from '@/app/_commons/graphql/graphql';
 
 export default function BoardDetail({

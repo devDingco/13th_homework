@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import s from './Textarea.module.css';
 
-interface InputPropsType {
-  id: 'usercontent';
+interface InputPropsType<RequiredType = undefined> {
+  id: RequiredType extends undefined ? string : keyof RequiredType;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -12,7 +12,11 @@ interface InputPropsType {
   onChangeFnc: (name: string, e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const Textarea = ({ ...props }: InputPropsType) => {
+const Textarea = <
+  RequiredType extends Record<string, any> | undefined = undefined,
+>({
+  ...props
+}: InputPropsType<RequiredType>) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.label}</label>

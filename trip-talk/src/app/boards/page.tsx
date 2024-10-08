@@ -4,7 +4,7 @@ import React from 'react';
 import Board from '../_component/boards/Board';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-import { FETCH_BOARDS } from '@/app/_api/board/query/getBoardData';
+import { FETCH_BOARDS } from '@/app/_api/board/getBoardData';
 import {
   DeleteBoardDocument,
   FetchBoardsDocument,
