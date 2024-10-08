@@ -6,7 +6,7 @@ import { useCommentList } from "./hook";
 
 export default function CommentList() {
   const { data } = useCommentList();
-  console.log("comment:", data?.fetchBoardComments);
+  // console.log("comment:", data?.fetchBoardComments);
 
   return (
     <div className={styles.commentAllListContainer}>
