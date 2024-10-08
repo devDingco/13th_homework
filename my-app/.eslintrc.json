@@ -1,0 +1,16 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "plugins": ["@typescript-eslint", "react"],
+  "settings": {
+    "react": {
+      "version": "detect" // React의 버전을 자동으로 감지
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" } // 사용되지 않는 변수 경고 설정
+    ],
+    "react/react-in-jsx-scope": "off" // React 17 이후 불필요한 오류 비활성화
+  }
+}

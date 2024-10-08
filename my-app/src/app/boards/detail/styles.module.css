@@ -1,0 +1,108 @@
+.전체박스 {
+  width: 1280px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+.타이틀 {
+  width: 100%;
+  font-weight: 700;
+  font-size: 28;
+  line-height: 36px;
+}
+.헤더전체박스 {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+}
+.윗줄전체박스 {
+  width: 1280px;
+  height: 24px;
+  gap: 54px;
+  display: flex;
+  justify-content: space-between;
+}
+.홍길동박스 {
+  /* width: 65px; */
+  height: 24px;
+  gap: 4px;
+  display: flex;
+}
+
+.hr스타일 {
+  height: 1px;
+  border: 0px;
+  background-color: gray;
+}
+
+.아랫줄전체박스 {
+  height: 39px;
+  display: flex;
+  flex-direction: right;
+  justify-content: end;
+}
+.영상사진박스 {
+  height: 512px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+.푸터전체박스 {
+  /* width: 1280px; */
+  height: 48px;
+  /* gap: 24px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* .하트전체박스 {
+  width: 24px;
+  height: 24px;
+  display: flex;
+} */
+
+.숫자박스 {
+  /* height: 24px; */
+  display: flex;
+
+  /* margin-right: 20px; */
+}
+
+.왼쪽하트 {
+  margin-right: 20px;
+}
+
+.왼쪽24 {
+  width: 17px;
+  /* height: 20px; */
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: 26px;
+}
+
+.오른쪽12 {
+  width: 17px;
+  /* height: 20px; */
+  font-size: 14px;
+  line-height: 20px;
+  color: #f66a6a;
+}
+.푸터2전체박스 {
+  /* height: 40px; */
+  gap: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  width: 105px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: gray;
+}
