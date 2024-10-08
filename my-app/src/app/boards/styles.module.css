@@ -1,0 +1,4 @@
+.boardsList {
+  display: flex;
+  flex-direction: column;
+}

@@ -3,23 +3,25 @@ import { useCommentWrite } from "./hook";
 import styles from "./styles.module.css";
 import { useCommentList } from "../comment-list/hook";
 import CommentList from "../comment-list";
+import { Rate } from "antd";
 
 function CommentWrite() {
   const { data } = useCommentList();
-  const { onChange, onClickSubmit, isActive, validation } = useCommentWrite();
+  const {
+    onChange,
+    onClickSubmit,
+    isActive,
+    validation,
+    starCount,
+    setStarCount,
+  } = useCommentWrite();
   return (
     <main className={styles.main}>
       <div className={styles.commentTitle}>
         <Image src="/img/chat.svg" alt="chatImg" width={24} height={24} />
         <div>댓글</div>
       </div>
-      <div className={styles.star_box}>
-        <Image src="/img/Vector.svg" alt="starImg" width={24} height={24} />
-        <Image src="/img/Vector.svg" alt="starImg" width={24} height={24} />
-        <Image src="/img/Vector.svg" alt="starImg" width={24} height={24} />
-        <Image src="/img/Vector.svg" alt="starImg" width={24} height={24} />
-        <Image src="/img/Vector.svg" alt="starImg" width={24} height={24} />
-      </div>
+      <Rate onChange={setStarCount} value={starCount} />
       <div className={styles.commentBox}>
         <div className={styles.writer_password_div}>
           <div className={styles.writer_password_box}>

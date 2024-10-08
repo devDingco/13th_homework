@@ -7,6 +7,7 @@ const FETCH_BOARD_COMMENTS = gql`
       writer
       contents
       createdAt
+      rating
     }
   }
 `;

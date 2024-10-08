@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from "./queries";
-import { ChangeEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import {
   CreateBoardCommentDocument,
@@ -8,21 +7,23 @@ import {
 } from "@/commons/gql/graphql";
 
 export function useCommentWrite() {
+  const [starCount, setStarCount] = useState(3);
   const params = useParams();
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
   const [isActive, setIsActive] = useState<boolean>(false);
+
   const [validation, setValidation] = useState({
     writer: "",
     password: "",
     contents: "",
-    rating: 0,
+    rating: starCount,
   });
 
   const initialValidationState = {
     writer: "",
     password: "",
     contents: "",
-    rating: 0,
+    rating: starCount,
   };
 
   const validateForm = () => {
@@ -31,14 +32,22 @@ export function useCommentWrite() {
     return isValid;
   };
 
+  useEffect(() => {
+    setValidation((prevValidation) => ({
+      ...prevValidation,
+      rating: starCount,
+    }));
+  }, [starCount]);
+
   const onChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const commentValidation = {
       ...validation,
       [event.target.name]: event.target.value,
+      rating: starCount,
     };
-
+    console.log("commentValidation확인", commentValidation);
     setValidation(commentValidation);
     validateForm();
   };
@@ -74,5 +83,7 @@ export function useCommentWrite() {
     onClickSubmit,
     isActive,
     validation,
+    starCount,
+    setStarCount,
   };
 }
