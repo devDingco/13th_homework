@@ -4,6 +4,7 @@ import { Rate } from "antd";
 import useCommentsWrite from "./hook";
 
 export default function CommentWrite() {
+  
   const {
     onClickSignup,
     onChangeContent,

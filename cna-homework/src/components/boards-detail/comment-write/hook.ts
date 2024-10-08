@@ -40,7 +40,7 @@ export default function useCommentsWrite() {
             writer: writer,
             password: pw,
             contents: content,
-            rating: 0.0,
+            rating: Number(value),
           },
           boardId: String(id),
         },

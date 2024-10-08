@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useCommentList } from "./hook";
 
 export default function CommentList() {
-  const [value, setValue] = useState(0);
   const { data } = useCommentList();
   console.log("comment:", data?.fetchBoardComments);
 
@@ -23,7 +22,7 @@ export default function CommentList() {
                     <Image src="/images/profile.png" alt="user" width={0} height={0} className={styles.userIcon} />
                   </div>
                   <p>{el.writer}</p>
-                  <Rate onChange={setValue} value={value} />
+                  <Rate disabled value={el.rating} />
                 </div>
                 <div className={styles.iconsArea}>
                   <Image src="/images/edit.png" alt="edit" width={0} height={0} className={styles.editIcon} />

@@ -1,11 +1,16 @@
 "use client";
-import BoardList from "@/components/boards-list";
-import styles from './styles.module.css'
+import BoardList from "@/components/boards-list/list";
+import SwiperComponent from "@/components/boards-list/banner";
 
 const Boards = () => {
   // graphql
 
-  return <BoardList />;
+  return (
+    <>
+      <SwiperComponent />
+      <BoardList />
+    </>
+  );
 };
 
 export default Boards;
