@@ -174,14 +174,10 @@
   height: 40px;
 }
 
-.css_commentbox {
-  width: 1280px;
-  height: 460px;
-}
-
 .css_comment {
   width: 1280px;
   height: 400px;
+  margin-top: 50px;
 }
 
 .css_commentheader {
@@ -193,61 +189,11 @@
   background-image: url("/assets/Comment.png");
   background-repeat: no-repeat;
   align-items: end;
+  margin-bottom: 10px;
 }
 
 .css_commenttag {
   width: 28px;
   height: 24px;
   text-align: right;
-}
-
-.css_input {
-  width: 1280px;
-  height: 100px;
-  gap: 16px;
-  display: flex;
-  flex-direction: row;
-}
-
-.css_inputbox {
-  width: 640px;
-  height: 80px;
-  gap: 16px;
-  display: flex;
-  flex-direction: row;
-}
-
-.css_namebox {
-  width: 312px;
-  height: 80px;
-  gap: 8px;
-}
-.css_namelabel {
-  width: 312px;
-  height: 24px;
-  gap: 4px;
-}
-
-.css_nameinput {
-  height: 48px;
-  width: 312px;
-  border: 1px solid gray;
-  border-radius: 8px;
-  padding: 12px 16px 12px 16px;
-}
-
-.css_pwdinput {
-  height: 48px;
-  width: 312px;
-  border: 1px solid gray;
-  border-radius: 8px;
-  padding: 12px 16px 12px 16px;
-}
-
-.css_commentinput {
-  width: 1280px;
-  height: 144px;
-  border-radius: 8px;
-  border: 1px solid gray;
-  padding: 12px 16px 12px 16px;
 }

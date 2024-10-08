@@ -11,7 +11,7 @@ export const UseBoardsWrite = (props: IProps) => {
     props.data?.fetchBoard.password || ""
   );
 
-  const [title, setTitle] = useState(props.data?.fetchBoard.title);
+  const [title, setTitle] = useState(props.data?.fetchBoard.title || "");
 
   const [contents, setContents] = useState(
     props.data?.fetchBoard.contents || ""
@@ -116,7 +116,7 @@ export const UseBoardsWrite = (props: IProps) => {
     }
   };
   const onClickSignup = async () => {
-    checkValid();
+    await checkValid;
     try {
       if (name !== "" && title !== "" && contents !== "" && password !== "") {
         const result = await myfunction({
@@ -129,6 +129,7 @@ export const UseBoardsWrite = (props: IProps) => {
             },
           },
         });
+
         alert("게시글 등록 완료");
         console.log(result.data.createBoard._id);
         router.push("../../../boards");

@@ -1,18 +1,19 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { FetchBoards, DeleteBoard } from "./queries";
 import { useRouter } from "next/navigation";
+
 export default function UseListWrite() {
   const { data } = useQuery(FetchBoards);
-  console.log(data);
 
   const router = useRouter();
 
-  const onMoveDeatilPage = (id) => {
+  const onMoveDetailPage = (id) => {
     router.push(`/routes/boards/${id}`);
   };
   const [deleteBoard] = useMutation(DeleteBoard);
 
-  const onClickDelete = (id) => {
+  const onClickDelete = (event, id) => {
+    event.stopPropagation();
     console.log(id);
     deleteBoard({
       variables: {
@@ -23,7 +24,7 @@ export default function UseListWrite() {
   };
 
   return {
-    onMoveDeatilPage,
+    onMoveDetailPage,
     onClickDelete,
     data,
   };

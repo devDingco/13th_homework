@@ -2,19 +2,9 @@ import styles from "./style.module.css";
 import { UseDetailWrite } from "./hook";
 import Image from "next/image";
 import React from "react";
-
+import CommnentPage from "../comment-write";
 export default function DetailWrite() {
-  const {
-    onModify,
-    data,
-    onList,
-    onChangeName,
-    name,
-    onChangePassword,
-    password,
-    onChangeComment,
-    comment,
-  } = UseDetailWrite();
+  const { onModify, data, onList } = UseDetailWrite();
   console.log(data);
   return (
     <div className={styles.css_layout}>
@@ -131,50 +121,11 @@ export default function DetailWrite() {
           />
         </button>
       </div>
-      <div className={styles.css_commentbox}>
-        <div className={styles.css_comment}>
-          <div className={styles.css_commentheader}>
-            <div className={styles.css_commenttag}>댓글</div>
-          </div>
-          <div className={styles.css_input}>
-            <div className={styles.css_inputbox}>
-              <div className={styles.css_namebox}>
-                <div className={styles.css_namelabel}>작성자</div>
-                <input
-                  type="text"
-                  id="title_id"
-                  placeholder="작성자 명을 입력해 주세요."
-                  name="title"
-                  defaultValue={name}
-                  onChange={onChangeName}
-                  className={styles.css_nameinput}
-                />
-              </div>
-              <div className={styles.css_namebox}>
-                <div className={styles.css_namelabel}>비밀번호</div>
-                <input
-                  type="text"
-                  id="pwd_id"
-                  placeholder="비밀번호를 입력해 주세요."
-                  name="pwd"
-                  defaultValue={password}
-                  onChange={onChangePassword}
-                  className={styles.css_pwdinput}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.css_commentinput}>
-            <input
-              type="comment"
-              id="comment_id"
-              placeholder="댓글을 입력해 주세요."
-              name="comment"
-              defaultValue={comment}
-              onChange={onChangeComment}
-            />
-          </div>
+      <div className={styles.css_comment}>
+        <div className={styles.css_commentheader}>
+          <div className={styles.css_commenttag}>댓글</div>
         </div>
+        <CommnentPage />
       </div>
     </div>
   );
