@@ -27,8 +27,9 @@ export class BoardCommentService {
         createBoardCommentDto: CreateBoardCommentDto,
     ): Promise<BoardComment> {
         await this.isExistBoard(boardId);
-        if (createBoardCommentDto.parentId) {
-            await this.isExistParentComment(createBoardCommentDto.parentId);
+        const { parentId } = createBoardCommentDto;
+        if (parentId) {
+            await this.isExistParentComment(parentId);
         }
 
         const password: string = await this.boardService.transformPassword(
@@ -103,6 +104,8 @@ export class BoardCommentService {
             throw new BadRequestException(
                 `Parent ID ${parentId} comment not found`,
             );
+        } else if (isExistParentComment.parentId) {
+            throw new NotFoundException(`commnetId ${parentId} have parentId`);
         }
     }
 
