@@ -1,3 +1,5 @@
+import React from "react";
+import { Rate } from "antd";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import { BasicInputForm, Divider } from "../../Boards-write";
 import useCommentWrite from "./hook";
@@ -11,6 +13,7 @@ const CommentWrite = () => {
     onChangeWriter,
     onChangePassword,
     onChangeContents,
+    onChangeRating,
     onClickSubmit,
   } = useCommentWrite();
 
@@ -22,11 +25,11 @@ const CommentWrite = () => {
         {CONSTANTS_TITLE.COMMENTS}
       </div>
       <div className={styles.starsContainer}>
-        <img src="/assets/star.png" alt="별 그림" />
-        <img src="/assets/star.png" alt="별 그림" />
-        <img src="/assets/star.png" alt="별 그림" />
-        <img src="/assets/star.png" alt="별 그림" />
-        <img src="/assets/star.png" alt="별 그림" />
+        <Rate
+          allowHalf
+          defaultValue={comment.rating}
+          onChange={onChangeRating}
+        />
       </div>
       <div className={styles.textInputContainer}>
         <BasicInputForm
