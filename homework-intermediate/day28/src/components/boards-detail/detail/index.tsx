@@ -8,6 +8,7 @@ import CommentWrite from '../comment-write';
 import CommentList from '../comment-list';
 import { useQuery } from '@apollo/client';
 import { FetchBoardCommentsDocument } from '@/commons/graphql/graphql';
+import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
 
 const IMAGE_SRC = {
   profileImage: {
@@ -101,17 +102,19 @@ export default function BaordDeatil() {
             />
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
-                <Image
+                {/* <Image
                   src={IMAGE_SRC.badImage.src}
                   alt={IMAGE_SRC.badImage.alt}
-                />
+                /> */}
+                <DislikeOutlined />
                 <div className={styles.detailBadText}>24</div>
               </div>
               <div className={styles.detailGoodContainer}>
-                <Image
+                {/* <Image
                   src={IMAGE_SRC.goodImage.src}
                   alt={IMAGE_SRC.goodImage.alt}
-                />
+                /> */}
+                <LikeOutlined />
                 <div className={styles.detailGoodText}>12</div>
               </div>
             </div>
