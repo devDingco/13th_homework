@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ApolloSetting from "@/commons/settings/apollo-setting";
+import Navbar from "@/components/Navbar";
 
 
 const geistSans = localFont({
@@ -29,9 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
         <ApolloSetting>
+          <Navbar/>
           {children}
         </ApolloSetting>
       </body>

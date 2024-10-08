@@ -1,0 +1,25 @@
+.Container {
+    display: flex;
+    justify-content: center;
+}
+.menuContainer {
+    height: 80px;
+    width: 1280px;
+    padding: 20px 20px
+
+}
+
+.menu {
+    font-family: "basic";
+    font-size: 30px;
+    cursor: pointer;
+}
+.menuListContainer {
+
+}
+.list {
+    font-size: 18px;
+}
+.dropdown {
+
+  }
