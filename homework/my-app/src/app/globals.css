@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 /* 
 :root {
   --background: #ffffff;
@@ -26,20 +28,33 @@ body {
   }
 } */
 
-
+@font-face {
+  font-family: 'boldEn';
+  src: url('./fonts/BlackHanSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'basic';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KORAILCondensed-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   --gray-50: #f2f2f2;
   --gray-800: #333;
   --gray-100: #E4E4E4;
   --gray-300: #C7C7C7;
   --gray-700: #5F5F5F;
+  --gray-900: #3c3c3c;
   --Gray-Gray-200: #D4D3D3;
   --Gray-W: #FFF;
-  --background: #edeff5
+  --background: #f5f4f1
 }
 body{
   padding:0;
   margin:0;
+  font-family: 'boldEn', sans-serif;
 }
 input {
   margin: 0;

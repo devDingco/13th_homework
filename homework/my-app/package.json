@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": " graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -21,6 +22,7 @@
     "react-flatpickr": "^3.10.13"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-datepicker": "7.0.0",
