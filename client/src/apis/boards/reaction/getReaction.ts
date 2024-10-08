@@ -1,15 +1,16 @@
 /** @format */
 
+import { api, boardUrlEndPoint } from '../../config';
+
 import { IReaction } from '@/models/board.type';
 import { IReactionReader } from '@/models/boardReaderResponse';
-import { api } from '../../config';
 
 export default function getReaction(boardId: number): IReactionReader {
 	let status = 'pending';
 
 	let board: IReaction | Promise<IReaction>;
 	const response = api
-		.get(`/board/${boardId}/reaction`)
+		.get(`${boardUrlEndPoint}/${boardId}/reaction`)
 		.then((response) => {
 			board = response.data.data;
 			status = 'fulfilled';

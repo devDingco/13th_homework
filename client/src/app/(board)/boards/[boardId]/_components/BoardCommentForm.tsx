@@ -32,13 +32,13 @@ export default function BoardCommentForm() {
 	const formRef = useRef<HTMLFormElement>(null);
 
 	useEffect(() => {
-		const reMutation = async () => {
+		const reMutate = async () => {
 			await mutate();
 		};
 		if (state?.message === 'success') {
 			formRef.current?.reset();
 			setRating(0);
-			reMutation();
+			reMutate();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);

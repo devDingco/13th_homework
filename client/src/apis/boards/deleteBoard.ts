@@ -1,19 +1,12 @@
 /** @format */
 
-import { api } from '../config';
-import { mutate } from 'swr';
+import { api, boardUrlEndPoint } from '../config';
 
-export default async function deleteBoard(boardId: number, data) {
+export default async function deleteBoard(boardId: number) {
 	try {
-		const response = await api.delete(`/board/${boardId}`);
+		const response = await api.delete(`${boardUrlEndPoint}/${boardId}`);
 
 		if (response.data.statusCode === 200) {
-			await mutate(
-				'/api/board',
-				data?.filter((board) => board.boardId !== boardId),
-				false,
-			);
-
 			return true;
 		}
 	} catch (error) {

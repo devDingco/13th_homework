@@ -23,7 +23,7 @@ export default async function createBoardCommentAction(
 		};
 
 	const result = await postComment({ author, password, content, rating }, boardId);
-	// 업데이트 client cache & 재 생성할 때 comment가 정상적으로 생성되지 않앗음
+
 	if (typeof result === 'string') {
 		return {
 			message: 'fail',

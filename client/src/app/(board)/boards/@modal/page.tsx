@@ -18,5 +18,5 @@ export default function ModalPage({ searchParams }: IModalProps) {
 		};
 	}, [searchParams.boardId]);
 
-	return searchParams.boardId && <ModalContainer boardId={searchParams.boardId} />;
+	return searchParams.boardId && <ModalContainer boardId={+searchParams.boardId} />;
 }
