@@ -1,8 +1,8 @@
 'use client';
 
 import { useQuery } from '@apollo/client';
-import { FetchBoardDocument } from 'commons/graphql/graphql';
-import BoardWrite from 'components/boards-write';
+import { FetchBoardDocument } from '@/commons/graphql/graphql';
+import BoardWrite from '@/components/boards-write';
 import { useParams } from 'next/navigation';
 
 export default function BoardsEditPage() {
