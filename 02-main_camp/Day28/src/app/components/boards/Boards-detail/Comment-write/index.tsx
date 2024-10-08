@@ -25,11 +25,7 @@ const CommentWrite = () => {
         {CONSTANTS_TITLE.COMMENTS}
       </div>
       <div className={styles.starsContainer}>
-        <Rate
-          allowHalf
-          defaultValue={comment.rating}
-          onChange={onChangeRating}
-        />
+        <Rate allowHalf value={comment.rating} onChange={onChangeRating} />
       </div>
       <div className={styles.textInputContainer}>
         <BasicInputForm
