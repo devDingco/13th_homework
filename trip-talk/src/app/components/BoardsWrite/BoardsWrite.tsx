@@ -40,7 +40,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
               isRequired={true}
               children={INPUT_CHILDREN.WRITER}
               onChange={handleInputChange}
-              defaultValue={props.data?.fetchBoard.writer}
+              defaultValue={String(props.data?.fetchBoard.writer)}
               disabled={disabledInput}
             />
             {!writer && (
@@ -110,7 +110,9 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
                 placeholder="01234"
                 isRequired={false}
                 children={INPUT_CHILDREN.ADDRESS}
-                defaultValue={props.data?.fetchBoard.zipcode}
+                defaultValue={String(
+                  props.data?.fetchBoard.boardAddress?.zipcode
+                )}
               />
             </div>
             <Button color="white">{BUTTON.ZIP_CODE_SEARCH}</Button>
@@ -120,14 +122,16 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
             type="text"
             placeholder={PLACEHOLDERS.ADDRESS}
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.address}
+            defaultValue={String(props.data?.fetchBoard.boardAddress?.address)}
           />
           <Input
             isLabel={false}
             type="text"
             placeholder={PLACEHOLDERS.DETAIL_ADDRESS}
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.addressDetail}
+            defaultValue={String(
+              props.data?.fetchBoard.boardAddress?.addressDetail
+            )}
           />
         </div>
         <div className={styles.link_wrapper}>
@@ -137,7 +141,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
             placeholder={PLACEHOLDERS.URL}
             isRequired={false}
             children={INPUT_CHILDREN.URL}
-            defaultValue={props.data?.fetchBoard.youtubeUrl}
+            defaultValue={String(props.data?.fetchBoard.youtubeUrl)}
           />
         </div>
         <div className={styles.photo_wrapper}>

@@ -71,9 +71,9 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
       );
       const editVariables = {
         updateBoardInput: {
-          title: title,
-          contents: contents,
-          youtubeUrl: youtubeUrl,
+          title,
+          contents,
+          youtubeUrl,
           // boardAddress: {
           //   zipcode: string,
           //   address: string,

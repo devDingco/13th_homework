@@ -1,8 +1,9 @@
 import { ChangeEventHandler, ReactNode } from "react";
+import { FetchBoardQuery } from "../commons/graphql/graphql";
 
 export interface IBoardsWriteHook {
   isEdit: boolean;
-  data?: any;
+  data?: FetchBoardQuery;
 }
 
 export interface IBoardsWrite {
@@ -23,6 +24,7 @@ export interface IInputProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
   disabled?: boolean;
+  value?: string;
 }
 
 export interface IButtonProps {
@@ -46,4 +48,12 @@ export interface IBoardsDetail {
   boardTitle: string;
   boardContents: string;
   boardCreatedAt: string;
+}
+
+export interface ICommentList {
+  writer: string;
+  contents: string;
+  createdAt: string;
+  number: number;
+  _id: string;
 }
