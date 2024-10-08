@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -10,9 +10,10 @@ export default function BoardsListBanner() {
     <div className={styles.BannerContainer}>
       <Swiper
         pagination={true}
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
+        autoplay={{ delay: 3500, pauseOnMouseEnter: true }}
         style={{
           "--swiper-pagination-color": "#FFFFFF",
           "--swiper-pagination-bullet-inactive-color": "#FFFFFF",
