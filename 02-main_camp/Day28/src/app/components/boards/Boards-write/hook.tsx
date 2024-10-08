@@ -6,6 +6,7 @@ import {
   UpdateBoardDocument,
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
+import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();

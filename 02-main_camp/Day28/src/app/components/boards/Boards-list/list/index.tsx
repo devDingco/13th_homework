@@ -1,8 +1,8 @@
 "use client";
 import styles from "./styles.module.css";
-import Board from "@/app/components/boards/Boards-list/components/Board";
-import BoardsHeader from "@/app/components/boards/Boards-list/components/BoardHeader";
-import useBoardsList from "@/app/components/boards/Boards-list/hook";
+import Board from "@/app/components/boards/Boards-list/list/components/Board";
+import BoardsHeader from "@/app/components/boards/Boards-list/list/components/BoardHeader";
+import useBoardsList from "@/app/components/boards/Boards-list/list/hook";
 
 const BoardsList = () => {
   const { data } = useBoardsList();
