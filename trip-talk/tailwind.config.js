@@ -17,6 +17,8 @@ export default {
       softGray: "#d4d3d3",
       slateGray: "#ababab",
       dimGray: "#777",
+      neutralGray: "#5F5F5F",
+      grayMuted: "#818181",
     },
   },
   plugins: [],
