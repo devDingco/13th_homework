@@ -12,6 +12,7 @@ const CommentList = () => {
           key={el._id}
           writer={String(el.writer)}
           contents={el.contents}
+          rating={el.rating}
         />
       ))}
     </div>

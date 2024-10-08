@@ -1,3 +1,5 @@
+import React from "react";
+import { Rate } from "antd";
 import { Divider } from "../../Boards-write";
 import BoardDetailProfile from "../Profile";
 import styles from "./styles.module.css";
@@ -9,19 +11,15 @@ const Comment = (props: ICommentInput) => {
         <div className={styles.profileContainer}>
           <BoardDetailProfile writer={props.writer} />
           <div className={styles.starsContainer}>
-            <img src="/assets/star.png" alt="별 그림" />
-            <img src="/assets/star.png" alt="별 그림" />
-            <img src="/assets/star.png" alt="별 그림" />
-            <img src="/assets/star.png" alt="별 그림" />
-            <img src="/assets/star.png" alt="별 그림" />
+            <Rate disabled defaultValue={props.rating} />
           </div>
         </div>
         <div className={styles.sideButtonContainer}>
           <button>
-            <img src="/assets/edit.png" alt="" />
+            <img src="/assets/edit.png" alt="댓글 편집 버튼 이미지" />
           </button>
           <button>
-            <img src="/assets/close.png" alt="" />
+            <img src="/assets/close.png" alt="댓글 삭제 버튼 이미지" />
           </button>
         </div>
       </div>
