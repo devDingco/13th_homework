@@ -5,3 +5,5 @@ enum CONSTANTS_ALERT_MESSAGE {
   CREATE_COMMENTS_SUCCEED = "댓글 등록이 완료되었습니다.",
   CREATE_COMMENTS_FAILED = "댓글 등록을 실패했습니다.",
 }
+
+export default CONSTANTS_ALERT_MESSAGE;

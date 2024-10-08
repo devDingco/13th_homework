@@ -1,3 +1,4 @@
+import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 import {
   CreateBoardCommentDocument,
   FetchBoardCommentsDocument,
@@ -12,7 +13,7 @@ const useCommentWrite = () => {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
 
   const comment: IComment = {
     writer: writer,
@@ -44,6 +45,7 @@ const useCommentWrite = () => {
     setWriter("");
     setPassword("");
     setContents("");
+    setRating(0);
   };
 
   const onClickSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -54,7 +56,7 @@ const useCommentWrite = () => {
             writer: writer,
             password: password,
             contents: contents,
-            rating: Number(rating),
+            rating: rating,
           },
           boardId: String(params.boardId),
         },
