@@ -3,13 +3,17 @@
 
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
+import { IApiResponseData } from '@/models/apiResponse';
 import React from 'react';
+import { boardUrlEndPoint } from '@/apis/config';
 import deleteBoard from '@/apis/boards/deleteBoard';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
 
 const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonProps) => {
-	const { data, mutate } = useSWR('/board', null);
+	const { data, mutate } = useSWR(boardUrlEndPoint, null, {
+		revalidateOnFocus: false,
+	});
 
 	const onClickBack = useOnClickBack();
 
@@ -22,9 +26,15 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				break;
 			case EButtonTitle.Delete:
 				if (boardId) {
-					const result = await deleteBoard(boardId, data);
+					const result = await deleteBoard(boardId);
+
+					console.log(data);
+
 					if (result) {
-						await mutate();
+						mutate(
+							data.filter((board: IApiResponseData) => board.boardId !== boardId),
+							false,
+						);
 						onClickBack();
 					}
 				}

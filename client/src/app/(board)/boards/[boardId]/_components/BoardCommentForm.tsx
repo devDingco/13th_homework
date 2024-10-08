@@ -12,6 +12,7 @@ import NewInputContainer from '../../new/_components/NewInputContainer';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
+import useSWR from 'swr';
 
 export default function BoardCommentForm() {
 	const param = useParams();
@@ -24,13 +25,22 @@ export default function BoardCommentForm() {
 		error: undefined,
 	});
 
+	const { mutate } = useSWR(`/board/${param.boardId}/comment`, null, {
+		revalidateOnFocus: false,
+	});
+
 	const formRef = useRef<HTMLFormElement>(null);
 
 	useEffect(() => {
+		const reMutate = async () => {
+			await mutate();
+		};
 		if (state?.message === 'success') {
 			formRef.current?.reset();
 			setRating(0);
+			reMutate();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
 
 	return (

@@ -2,12 +2,15 @@
 
 import { ETitle, ITitleTextArea, RNewInputPlaceHolder } from '@/models/board.type';
 
+import { boardUrlEndPoint } from '@/apis/config';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 export default function CommonTextarea({ title, setLength }: ITitleTextArea) {
 	const param = useParams();
-	const { data } = useSWR(`/board/${param.boardId}`, null);
+	const { data } = useSWR(`${boardUrlEndPoint}/${param.boardId}`, null, {
+		revalidateOnFocus: false,
+	});
 
 	return (
 		<textarea

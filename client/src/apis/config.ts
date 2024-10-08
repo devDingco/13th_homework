@@ -10,6 +10,8 @@ export const api: AxiosInstance = axios.create({
 	},
 });
 
+export const boardUrlEndPoint = '/board';
+
 api.interceptors.request.use(
 	(config) => {
 		return config;

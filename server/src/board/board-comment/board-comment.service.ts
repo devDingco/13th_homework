@@ -9,11 +9,11 @@ import {
 
 import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
-import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
+import { BoardCommentResponse } from './responses/board-comment-response.entity';
 import { BoardRepository } from '../repositories/board.repository';
 import { BoardService } from '../board.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
+import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-password-comment.dto';
 
 @Injectable()
 export class BoardCommentService {
@@ -31,7 +31,7 @@ export class BoardCommentService {
             await this.isExistParentComment(createBoardCommentDto.parentId);
         }
 
-        const hashPassword: string = await this.boardService.transformPassword(
+        const password: string = await this.boardService.transformPassword(
             createBoardCommentDto.password,
         );
 
@@ -39,7 +39,7 @@ export class BoardCommentService {
             boardId,
             {
                 ...createBoardCommentDto,
-                password: hashPassword,
+                password,
             },
         );
 
@@ -49,15 +49,24 @@ export class BoardCommentService {
     async findAllComment(boardId: number): Promise<BoardComment[]> {
         await this.isExistBoard(boardId);
 
-        return this.boardCommentRepository.findAllComment(boardId);
+        const boardComments =
+            await this.boardCommentRepository.findAllComment(boardId);
+
+        const restBoardComments = boardComments.map((item) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { password, ...rest } = item;
+            return rest;
+        });
+
+        return this.makeCommentMap(restBoardComments);
     }
 
     async updateComment(
         boardId: number,
-        updateBoardCommentDto: UpdateBoardCommentDto,
+        updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
         password: string,
         commentId: string,
-    ): Promise<BoardCommentResponseDto> {
+    ): Promise<BoardCommentResponse> {
         await this.isExistBoard(boardId);
 
         if (updateBoardCommentDto.parentId) {
@@ -116,5 +125,26 @@ export class BoardCommentService {
         if (!validatePassword) {
             throw new UnauthorizedException(`password is invalid`);
         }
+    }
+
+    makeCommentMap(boardComments: BoardCommentResponse[]) {
+        const commentMap = new Map<string, any>();
+
+        boardComments.forEach((comment) => {
+            if (!comment.parentId) {
+                commentMap.set(comment._id.toString(), {
+                    ...comment,
+                    replies: [],
+                });
+            } else {
+                const parentComment = commentMap.get(
+                    comment.parentId.toString(),
+                );
+                if (parentComment) {
+                    parentComment.replies.push(comment);
+                }
+            }
+        });
+        return Array.from(commentMap.values());
     }
 }

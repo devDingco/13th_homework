@@ -1,10 +1,10 @@
 /** @format */
 
-import { api } from '../config';
+import { api, boardUrlEndPoint } from '../config';
 
 export default async function getAllBoards() {
 	try {
-		const result = await api.get('/board');
+		const result = await api.get(boardUrlEndPoint);
 
 		if (result.data.statusCode === 200) {
 			return result.data.data;

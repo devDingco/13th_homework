@@ -8,7 +8,9 @@ import useSWR from 'swr';
 export default function NewInput({ title }: ITitle) {
 	const param = useParams();
 
-	const { data } = useSWR(`/board/${param.boardId}`, null);
+	const { data } = useSWR(`/board/${param.boardId}`, null, {
+		revalidateOnFocus: false,
+	});
 
 	const path: string = usePathname();
 

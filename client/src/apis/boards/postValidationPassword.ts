@@ -1,13 +1,13 @@
 /** @format */
 
-import { api } from '../config';
+import { api, boardUrlEndPoint } from '../config';
 
 export default async function postValidationPassword(
 	boardId: string,
 	password: string,
 ): Promise<boolean | undefined> {
 	try {
-		const response = await api.post(`/board/${boardId}/password`, { password });
+		const response = await api.post(`${boardUrlEndPoint}/${boardId}/password`, { password });
 		if (response.data) return true;
 	} catch (error) {
 		console.log(error);

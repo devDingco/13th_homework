@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { ReactionService } from './reaction.service';
 import { ResponseMessage } from '../decorators/response-message.decorator';
-import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
+import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
-@UseInterceptors(TransformInterceptor)
+@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board/:boardId/reaction')
 export class ReactionController {
     constructor(private readonly reactionService: ReactionService) {}

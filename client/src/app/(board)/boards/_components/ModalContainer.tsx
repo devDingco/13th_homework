@@ -1,17 +1,13 @@
 /** @format */
 'use client';
 
-import { IModalBoards, IModalCommon } from '@/models/children.type';
-
 import CommonButton from './CommonButton';
 import { EButtonTitle } from '@/models/button.type';
+import { IModalCommon } from '@/models/children.type';
 import ModalForm from '../[boardId]/edit/_components/ModalForm';
 import useOnClickBack from '@/hooks/useOnClickBack';
-import { useParams } from 'next/navigation';
 
 export default function ModalContainer({ boardId, modal }: IModalCommon) {
-	const params: IModalBoards = useParams();
-
 	const onClickBack = useOnClickBack();
 
 	return (
@@ -25,7 +21,7 @@ export default function ModalContainer({ boardId, modal }: IModalCommon) {
 			>
 				{modal ? (
 					<>
-						<div className="prose-sb_18_24">{`게시글 ${params.boardId} 비밀번호를 입력해주세요`}</div>
+						<div className="prose-sb_18_24">{`게시글 ${boardId} 비밀번호를 입력해주세요`}</div>
 						<ModalForm />
 					</>
 				) : (

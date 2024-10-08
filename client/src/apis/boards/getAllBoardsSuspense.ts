@@ -1,15 +1,16 @@
 /** @format */
 
+import { api, boardUrlEndPoint } from '../config';
+
 import { IApiResponseData } from '@/models/apiResponse';
 import { IBoardReader } from '@/models/boardReaderResponse';
-import { api } from '../config';
 
 export default function getAllBoardsSuspense(): IBoardReader {
 	let status = 'pending';
 
 	let board: IApiResponseData | Promise<IApiResponseData>;
 	const response = api
-		.get('/board')
+		.get(boardUrlEndPoint)
 		.then((response) => {
 			board = response.data.data;
 			status = 'fulfilled';

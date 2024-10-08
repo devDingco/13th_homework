@@ -15,7 +15,7 @@ export default function BoardCommentStar({ rating, setRating }: IRatingProps) {
 								name="Rating"
 								type="radio"
 								value={currentRate}
-								onClick={() => setRating(currentRate)}
+								onClick={setRating ? () => setRating(currentRate) : undefined}
 								className="absolute size-6 cursor-pointer opacity-0"
 							/>
 						</label>

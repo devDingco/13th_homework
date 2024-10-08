@@ -2,19 +2,19 @@ import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BoardCommentService } from './board-comment.service';
 import { BoardComment } from './entities/board-comment.entity';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { BoardCommentResponseDto } from './entities/board-comment-response.entity';
-import { UpdateBoardCommentGraphDto } from './dto/update-graphql.entity';
+import { BoardCommentResponse } from './responses/board-comment-response.entity';
+import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
 @Resolver(() => BoardComment)
 export class BoardCommentResolver {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
-    @Query(() => [BoardCommentResponseDto])
+    @Query(() => [BoardCommentResponse])
     getAllBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
         return this.boardCommentService.findAllComment(boardId);
     }
 
-    @Mutation(() => BoardCommentResponseDto)
+    @Mutation(() => BoardCommentResponse)
     createBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('createBoardCommentDTO')
@@ -26,19 +26,19 @@ export class BoardCommentResolver {
         );
     }
 
-    @Mutation(() => BoardCommentResponseDto)
+    @Mutation(() => BoardCommentResponse)
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('updateBoardCommentDTO')
-        updateBoardCommentDTO: UpdateBoardCommentGraphDto,
-        @Args('password') password: string,
-        @Args('commentId') commentId: string,
+        updateBoardCommentDTO: UpdateBoardCommentDto,
+        @Args('parentId') parentId: string,
     ) {
+        const { password, ...restUpdateBoardComment } = updateBoardCommentDTO;
         return this.boardCommentService.updateComment(
             boardId,
-            updateBoardCommentDTO,
+            restUpdateBoardComment,
             password,
-            commentId,
+            parentId,
         );
     }
 

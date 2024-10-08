@@ -31,5 +31,5 @@ export interface IModalCommon extends IModalBoards, IModalEditBoard {}
 
 export interface IRatingProps {
 	rating: number;
-	setRating: React.Dispatch<React.SetStateAction<number>>;
+	setRating?: React.Dispatch<React.SetStateAction<number>>;
 }
