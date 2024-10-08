@@ -14,7 +14,7 @@ const useBoardsDetail = () => {
 
   const board = {
     title: data?.fetchBoard.title,
-    writer: data?.fetchBoard.writer,
+    writer: String(data?.fetchBoard.writer),
     contents: data?.fetchBoard.contents,
   };
 

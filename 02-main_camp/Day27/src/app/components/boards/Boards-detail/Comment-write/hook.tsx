@@ -67,6 +67,7 @@ const useCommentWrite = () => {
           },
         ],
       });
+      comment.id = result.data?.createBoardComment._id;
       resetInputValue();
       alert(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED);
     } catch (error) {

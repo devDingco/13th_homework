@@ -2,11 +2,6 @@ import { Divider } from "../../Boards-write";
 import BoardDetailProfile from "../Profile";
 import styles from "./styles.module.css";
 
-interface ICommentInput {
-  writer: string;
-  contents: string;
-}
-
 const Comment = (props: ICommentInput) => {
   return (
     <>
