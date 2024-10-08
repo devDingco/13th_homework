@@ -22,7 +22,7 @@ export default function Boards() {
             _id={board._id}
             number={index + 1}
             title={board.title}
-            writer={String(board.writer)}
+            writer={board.writer as string}
             createdAt={board.createdAt}
           />
         ))}
