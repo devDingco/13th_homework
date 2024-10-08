@@ -56,7 +56,7 @@ main {
 
 /* ========== ========== ========== */
 
-fieldset {
+/* fieldset {
     width: 100%;
     border: none;
 }
@@ -181,4 +181,4 @@ figcaption {
     color: var(--mono-gray050);
     background-color: var(--chroma-info);
     border: 1px solid var(--mono-gray200);
-}
+} */
