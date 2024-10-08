@@ -1,5 +1,6 @@
 'use client';
 
+import { Flex, Rate } from 'antd';
 import Image from 'next/image';
 import useCommentWrite from './hook';
 
@@ -18,11 +19,16 @@ const IMAGE_SRC = {
   },
 } as const;
 
+// 별점 Rating
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+
 export default function CommentWrite() {
   const {
     writer,
     password,
     content,
+    rating,
+    setRating,
     onChangeWriter,
     onChangePassword,
     onChangeContent,
@@ -37,9 +43,12 @@ export default function CommentWrite() {
       </div>
 
       <div className="flex">
-        {new Array(5).fill(null).map((a, idx) => (
+        {/* {new Array(5).fill(null).map((a, idx) => (
           <Image src={IMAGE_SRC.starImage.src} alt={IMAGE_SRC.starImage.alt} />
-        ))}
+        ))} */}
+        <Flex gap="middle">
+          <Rate onChange={setRating} value={rating} />
+        </Flex>
       </div>
 
       <div className="flex gap-4 max-w-screen-sm">

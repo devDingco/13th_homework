@@ -1,4 +1,5 @@
 import { FetchBoardCommentsQuery } from '@/commons/graphql/graphql';
+import { Flex, Rate } from 'antd';
 import Image from 'next/image';
 
 const IMAGE_SRC = {
@@ -25,21 +26,24 @@ export default function CommentList({ data }: ICommentListProps) {
     <div className="flex flex-col items-center gap-10 w-full">
       {data?.fetchBoardComments.length ? (
         data?.fetchBoardComments.map((el) => (
-          <div key={el._id} className="flex flex-col gap-2 w-full">
-            <div className="flex">
+          <div key={el._id} className="flex flex-col gap-5 w-full">
+            <div className="flex gap-3">
               <Image
                 src={IMAGE_SRC.profileImage.src}
                 alt={IMAGE_SRC.profileImage.alt}
               ></Image>
               <div>{el.writer}</div>
-              <div className="flex">
+              {/* <div className="flex">
                 {new Array(5).fill(null).map((a, idx) => (
                   <Image
                     src={IMAGE_SRC.starImage.src}
                     alt={IMAGE_SRC.starImage.alt}
                   />
                 ))}
-              </div>
+              </div> */}
+              <Flex gap="middle">
+                <Rate disabled value={el.rating} />
+              </Flex>
             </div>
             <div>{el.contents}</div>
             <div>

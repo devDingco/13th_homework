@@ -10,6 +10,7 @@ export default function useCommentWrite() {
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
   const [content, setContent] = useState('');
+  const [rating, setRating] = useState(3);
 
   const params = useParams();
   const { data } = useQuery(FetchBoardCommentsDocument, {
@@ -39,7 +40,7 @@ export default function useCommentWrite() {
           writer: writer,
           password: password,
           contents: content,
-          rating: 0.0,
+          rating: rating,
         },
         boardId: String(params.boardId),
       },
@@ -62,6 +63,8 @@ export default function useCommentWrite() {
     writer,
     password,
     content,
+    rating,
+    setRating,
     onChangeWriter,
     onChangePassword,
     onChangeContent,
