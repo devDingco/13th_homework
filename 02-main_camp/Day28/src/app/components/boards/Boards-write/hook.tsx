@@ -16,6 +16,7 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtubeLink, setYoutubeLink] = useState("");
 
   const [isActive, setIsActive] = useState(isEdit ? true : false);
 
@@ -59,13 +60,15 @@ export const useBoardWrite = (isEdit: boolean) => {
     return isEdit ? setIsActive(true) : setIsActive(false);
   };
 
-  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     setContents(value);
     checkTextInput(value, setContentsErrorMessage);
     if (writer && password && title && value) return setIsActive(true);
     return isEdit ? setIsActive(true) : setIsActive(false);
   };
+
+  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {};
 
   // onClick
   const onClickSubmit = async () => {
@@ -152,6 +155,7 @@ export const useBoardWrite = (isEdit: boolean) => {
     onChangePassword,
     onChangeTitle,
     onChangeContents,
+    onChangeYoutubeLink,
     onClickSubmit,
     onClickEdit,
     onClickCancel,

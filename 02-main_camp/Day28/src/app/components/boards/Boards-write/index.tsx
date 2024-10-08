@@ -4,6 +4,14 @@ import { useBoardWrite } from "./hook";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_TITLE from "@/commons/constants/title";
 import { IBoardWriteInput } from "./types";
+import {
+  ContentsInputForm,
+  DefaultInputForm,
+  RequiredInputForm,
+} from "./components/input-form/text";
+import { TextInputType } from "./components/input-form/types";
+import { AddressInputForm } from "./components/input-form/address";
+import { Divider } from "antd";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
   const board = {
@@ -21,6 +29,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     onChangePassword,
     onChangeTitle,
     onChangeContents,
+    onChangeYoutubeLink,
     onClickSubmit,
     onClickEdit,
     onClickCancel,
@@ -63,57 +72,56 @@ const BoardsWrite = (props: IBoardWriteInput) => {
   };
 
   return (
-    <div className={styles.BoardsNew_rootContainer}>
-      <header className={styles.BoardsNew_header}>게시물 {pageTitle}</header>
-      <main className={styles.BoardsNew_main}>
-        <div className={styles.BoardsNew_UserInputForm}>
-          <BasicInputForm
-            isRequired={true}
+    <div className={styles.rootContainer}>
+      <header className={styles.headerContainer}>게시물 {pageTitle}</header>
+      <main className={styles.mainContainer}>
+        <div className={styles.userInputForm}>
+          <RequiredInputForm
+            type={TextInputType.text}
             title={CONSTANTS_TITLE.WRITER}
             placeholder={CONSTANTS_DESCRIPTION.WRITER}
-            onChangeHandler={onChangeWriter}
             errorMessage={writerErrorMessage}
-            isEdit={props.isEdit}
-            defaultValue={board.writer}
+            defaultValue={board.writer ?? ""}
+            onChange={onChangeWriter}
           />
-          <BasicInputForm
-            isRequired={true}
+          <RequiredInputForm
+            type={TextInputType.password}
             title={CONSTANTS_TITLE.PASSWORD}
             placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
-            onChangeHandler={onChangePassword}
             errorMessage={passwordErrorMessage}
-            isEdit={props.isEdit}
             defaultValue={props.isEdit ? "********" : ""}
+            onChange={onChangePassword}
           />
         </div>
         <Divider />
-        <BasicInputForm
-          isRequired={true}
+        <RequiredInputForm
+          type={TextInputType.text}
           title={CONSTANTS_TITLE.TITLE}
           placeholder={CONSTANTS_DESCRIPTION.TITLE}
-          onChangeHandler={onChangeTitle}
           errorMessage={titleErrorMessage}
           defaultValue={board.title}
+          onChange={onChangeTitle}
         />
         <Divider />
         <ContentsInputForm
           title={CONSTANTS_TITLE.CONTENTS}
           placeholder={CONSTANTS_DESCRIPTION.CONTENTS}
-          onChangeHandler={onChangeContents}
+          onChange={onChangeContents}
           errorMessage={contentsErrorMessage}
           defaultValue={board.contents}
         />
         <AddressInputForm />
         <Divider />
-        <BasicInputForm
-          isRequired={false}
+        <DefaultInputForm
+          type={TextInputType.text}
           title={CONSTANTS_TITLE.YOUTUBE_LINK}
           placeholder={CONSTANTS_DESCRIPTION.YOUTUBE_LINK}
+          onChange={onChangeYoutubeLink}
         />
         <Divider />
         <PhotoUploadForm />
       </main>
-      <footer className={styles.BoardsNew_footer}>
+      <footer className={styles.footerContainer}>
         <RegisterForm />
       </footer>
     </div>
@@ -121,67 +129,6 @@ const BoardsWrite = (props: IBoardWriteInput) => {
 };
 
 export default BoardsWrite;
-
-export const BasicInputForm = (props: any) => {
-  if (props.isRequired) {
-    return (
-      <div id={styles.PostInputForm} className={styles.BoardsNew_inputForm}>
-        <div className={styles.inputTitle}>
-          {props.title}
-          <span className={styles.requiredMark}>*</span>
-        </div>
-        <TextInput
-          isEdit={props.isEdit}
-          placeholder={props.placeholder}
-          onChangeHandler={props.onChangeHandler}
-          defaultValue={props.defaultValue}
-          value={props.value}
-        />
-        <p className={styles.inputError}>{props.errorMessage}</p>
-      </div>
-    );
-  } else {
-    return (
-      <div id={styles.PostInputForm} className={styles.BoardsNew_inputForm}>
-        <div className={styles.inputTitle}>{props.title}</div>
-        <TextInput placeholder={props.placeholder} />
-      </div>
-    );
-  }
-};
-
-const ContentsInputForm = (props: any) => {
-  return (
-    <div className={styles.BoardsNew_inputForm}>
-      <div className={styles.inputTitle}>
-        {props.title}
-        <span className={styles.requiredMark}>*</span>
-      </div>
-      <textarea
-        className={styles.inputTextArea}
-        placeholder={props.placeholder}
-        onChange={props.onChangeHandler}
-        defaultValue={props.defaultValue}
-        value={props.value}
-      ></textarea>
-      <p className={styles.inputError}>{props.errorMessage}</p>
-    </div>
-  );
-};
-
-const AddressInputForm = () => {
-  return (
-    <div className={styles.BoardsNew_inputForm}>
-      {CONSTANTS_TITLE.ADDRESS}
-      <div className={styles.ZipCodeContainer}>
-        <TextInput placeholder={CONSTANTS_DESCRIPTION.ZIP_CODE} />
-        <ZipCodeSearchButton />
-      </div>
-      <TextInput placeholder={CONSTANTS_DESCRIPTION.ADDRESS} />
-      <TextInput placeholder={CONSTANTS_DESCRIPTION.ADDRESS_DETAIL} />
-    </div>
-  );
-};
 
 const PhotoUploadForm = () => {
   return (
@@ -194,28 +141,6 @@ const PhotoUploadForm = () => {
       </div>
     </div>
   );
-};
-
-const TextInput = (props: any) => {
-  return (
-    <input
-      className={styles.inputText}
-      type="text"
-      placeholder={props.placeholder}
-      onChange={props.onChangeHandler}
-      defaultValue={props.defaultValue}
-      value={props.value}
-      disabled={props.isEdit}
-    />
-  );
-};
-
-export const Divider = () => {
-  return <div className={styles.divider}></div>;
-};
-
-const ZipCodeSearchButton = () => {
-  return <button className={styles.zipCodeSearchButton}>우편번호 검색</button>;
 };
 
 const UploadButton = () => {
