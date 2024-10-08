@@ -1,22 +1,16 @@
 'use client';
 
-import React, {
-  ChangeEvent,
-  FormEvent,
-  // ReactNode,
-  useEffect,
-  useState,
-} from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, ApolloError } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import {
-  CREATE_BOARD,
-  UPDATE_BOARD,
-} from '@/app/_api/board/mutation/postBoardData';
+  CreateBoardDocument,
+  UpdateBoardDocument,
+} from '@/app/_commons/graphql/graphql';
 
 export default function PostsForm({
   type,
@@ -47,8 +41,8 @@ export default function PostsForm({
 
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
 
   const onPostFormChange = (
     name: string,
@@ -78,7 +72,7 @@ export default function PostsForm({
             },
           },
         });
-        routes.push(`/boards/${data.createBoard._id}`);
+        routes.push(`/boards/${data?.createBoard._id}`);
       } else if (type === 'EDIT') {
         const newPw = prompt('비밀번호를 입력하세요');
         const { data } = await updateBoard({
@@ -88,15 +82,20 @@ export default function PostsForm({
               contents: postData.usercontent,
             },
             password: newPw,
-            boardId: params.postId,
+            boardId: params.postId.toString(),
           },
         });
         routes.push(`/boards/${params.postId}`);
       }
-    } catch (err: any) {
-      // alert(err.graphQLErrors);
-      console.log(err.graphQLErrors);
-      alert(err.graphQLErrors[0].message);
+    } catch (err: unknown) {
+      if (err instanceof ApolloError) {
+        console.log(err.graphQLErrors);
+        alert(
+          err.graphQLErrors[0]?.message || '알 수 없는 오류가 발생했습니다.',
+        );
+      } else {
+        console.error(err);
+      }
     }
   };
 

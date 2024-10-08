@@ -10,7 +10,10 @@ interface BoardListPropsType {
   writer?: string | null;
   createdAt?: Date;
   id?: string;
-  onClickDelete?: (id: string, e: any) => void;
+  onClickDelete?: (
+    id: string,
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => void;
   onClickDetail?: () => void;
 }
 

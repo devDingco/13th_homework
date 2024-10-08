@@ -29,7 +29,7 @@ const Input = <
 }: InputPropsType<RequiredType>) => {
   return (
     <div
-      className={`s.inputWrap ${
+      className={`${s.inputWrap} ${
         props.size === 'small' ? inputConfig.small : 'w-full'
       }`}>
       <span>

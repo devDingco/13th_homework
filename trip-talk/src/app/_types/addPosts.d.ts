@@ -14,4 +14,5 @@ interface RequiredType {
   userpw: string | null;
   userTitle: string | null;
   usercontent: string | null;
+  // commentContent: string | null;
 }

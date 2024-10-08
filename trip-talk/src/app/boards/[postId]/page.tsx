@@ -8,15 +8,18 @@ import Button from '@/app/_component/form/Button';
 import s from './PostDetail.module.css';
 import { useParams, useRouter } from 'next/navigation';
 import BoardDetail from '@/app/_component/boardDetail/BoardDetail';
+import CommentList from '@/app/_component/boardDetail/CommentList';
+import CommentWrite from '@/app/_component/boardDetail/CommentWrite';
 
 const PostDetail = () => {
   const { postId: params } = useParams();
+  console.log(params);
 
   const router = useRouter();
 
   return (
     <>
-      <BoardDetail style={s} postId={params} />
+      <BoardDetail style={s} postId={params.toString()} />
       <div className={`${s.flexbox} justify-center gap-6`}>
         <Button style="default" onClickFnc={() => router.push('/boards')}>
           <Image src={ListIcon} alt="" width={0} height={0} />
@@ -29,6 +32,8 @@ const PostDetail = () => {
           수정하기
         </Button>
       </div>
+      <CommentWrite />
+      <CommentList />
     </>
   );
 };
