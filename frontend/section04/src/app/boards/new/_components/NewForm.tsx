@@ -6,7 +6,6 @@ import NewFormText from "./NewFormText";
 import NewFormPhoto from "./NewFormPhoto";
 import NewFormButton from "./NewFormButton";
 import { gql, useMutation } from "@apollo/client";
-// import { CREATE_BOARD } from "../../queries";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
