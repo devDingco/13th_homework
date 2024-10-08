@@ -72,6 +72,9 @@ export class BoardCommentRepository {
             throw new NotFoundException(`commentId: ${commentId} is not found`);
         } else {
             await this.boardCommentRepository.remove(deleteComment);
+            await this.boardCommentRepository.delete({
+                parentId: commentId,
+            });
         }
     }
 
