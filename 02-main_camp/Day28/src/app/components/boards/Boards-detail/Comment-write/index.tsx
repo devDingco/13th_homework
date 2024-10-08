@@ -1,11 +1,12 @@
 import React from "react";
 import { Rate } from "antd";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
-import { BasicInputForm, Divider } from "../../Boards-write";
 import useCommentWrite from "./hook";
 
 import styles from "./styles.module.css";
 import CONSTANTS_TITLE from "@/commons/constants/title";
+import { RequiredInputForm } from "../../Boards-write/components/input-form/text";
+import Divider from "@/commons/components/divider";
 
 const CommentWrite = () => {
   const {
@@ -28,18 +29,16 @@ const CommentWrite = () => {
         <Rate allowHalf value={comment.rating} onChange={onChangeRating} />
       </div>
       <div className={styles.textInputContainer}>
-        <BasicInputForm
-          isRequired={true}
+        <RequiredInputForm
           title={CONSTANTS_TITLE.WRITER}
           placeholder={CONSTANTS_DESCRIPTION.WRITER}
-          onChangeHandler={onChangeWriter}
+          onChange={onChangeWriter}
           value={comment.writer}
         />
-        <BasicInputForm
-          isRequired={true}
+        <RequiredInputForm
           title={CONSTANTS_TITLE.PASSWORD}
           placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
-          onChangeHandler={onChangePassword}
+          onChange={onChangePassword}
           value={comment.password}
         />
       </div>
