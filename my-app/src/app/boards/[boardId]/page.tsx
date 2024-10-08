@@ -2,8 +2,16 @@
 
 "use client";
 
-import BoardsDetail from "@/components/boards-detail";
+import BoardsDetailCommentList from "@/components/boards-detail/comment-list";
+import BoardsDetailCommentWrite from "@/components/boards-detail/comment-write";
+import BoardsDetail from "@/components/boards-detail/detail";
 
 export default function boardDetail() {
-  return <BoardsDetail />;
+  return (
+    <div>
+      <BoardsDetail />
+      <BoardsDetailCommentWrite />
+      <BoardsDetailCommentList />
+    </div>
+  );
 }

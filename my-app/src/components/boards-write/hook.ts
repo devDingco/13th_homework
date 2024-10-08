@@ -1,8 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "./queries";
+import React from "react";
 
+// import React from "react"; 이부분 작성안해도 잘 돌아감. 근데 이거 안해주면 ts(2686)에러가 8개 나와서 그거땜에 넣어줌
 export const useBoardsWrite = () => {
   const router = useRouter();
   const params = useParams();
@@ -99,11 +101,11 @@ export const useBoardsWrite = () => {
   const onCLickUpdate = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const 입력받은비밀번호 = prompt(
+    const inputPassword = prompt(
       "글을 작성할 때 입력하셨던 비밀번호를 입력해주세요"
     );
 
-    if (!입력받은비밀번호) {
+    if (!inputPassword) {
       alert("비밀번호를 입력해주세요.");
       return;
     }
@@ -112,7 +114,7 @@ export const useBoardsWrite = () => {
       boardId: params.boardId, // 수정할 게시물의 ID
       title: title || undefined, // 수정할 제목
       contents: content || undefined, // 수정할 내용
-      password: 입력받은비밀번호, // 입력받은 비밀번호
+      password: inputPassword, // 입력받은 비밀번호
     };
 
     try {
@@ -198,6 +200,8 @@ export const useBoardsWrite = () => {
         });
         console.log(result);
         router.push(`/boards/${result.data.createBoard._id}`);
+      } else {
+        alert("다시 작성해주세요");
       }
     } catch (error) {
       alert(error);
