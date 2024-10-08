@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import useSWR, { mutate } from 'swr';
 
 import BoardCommentStar from './BoardCommentStar';
 import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
@@ -12,7 +13,6 @@ import NewInputContainer from '../../new/_components/NewInputContainer';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
-import useSWR from 'swr';
 
 export default function BoardCommentForm() {
 	const param = useParams();
@@ -30,15 +30,15 @@ export default function BoardCommentForm() {
 	});
 
 	const formRef = useRef<HTMLFormElement>(null);
-	console.log(data);
 
 	useEffect(() => {
-		if (state?.result) {
-			console.log(state.result);
-			formRef.current?.reset();
-			setRating(0);
-			mutate(data.push(state.result.data), false);
+		if (!state?.result) return;
+		formRef.current?.reset();
+		setRating(0);
+		if (Array.isArray(data)) {
+			mutate([...data, state.result], false);
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
 

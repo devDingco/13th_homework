@@ -34,7 +34,7 @@ export default async function createBoardCommentAction(
 		return {
 			boardId: boardId,
 			error: undefined,
-			result: result,
+			result: result.data,
 		};
 	}
 }
