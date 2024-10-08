@@ -201,7 +201,9 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           </fieldset>
 
           <div className={props.styles.버튼있는곳}>
-            <button className={props.styles.취소버튼}>취소</button>
+            <button className={props.styles.취소버튼}>
+              <Link href="/boards">취소</Link>
+            </button>
             <button
               className={`${props.styles.등록하기버튼} ${
                 isActive ? props.styles.active : ""
