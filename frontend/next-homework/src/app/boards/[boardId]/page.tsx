@@ -20,6 +20,8 @@ import menuIcon from "../../../../public/icons/menu.svg";
 import editIcom from "../../../../public/icons/edit.svg";
 import leftArrowIcon from "../../../../public/icons/left_arrow.svg";
 import loginIcon from "../../../../public/icons/login.svg";
+import CommentWriteComponent from "@/app/components/boards-detail/comment-write";
+import CommentListComponent from "@/app/components/boards-detail/comment-list";
 
 // 데이터 불러오기
 const FETCH_BOARD = gql`
@@ -131,6 +133,9 @@ const BoardsDetail = () => {
           </Link>
         </div>
       </div>
+
+      <CommentWriteComponent />
+      <CommentListComponent />
     </div>
   );
 };
