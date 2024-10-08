@@ -29,6 +29,12 @@ export const UPDATE_BOARD = gql`
   }
 `;
 
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($id: ID!) {
+    deleteBoard(boardId: $id)
+  }
+`;
+
 export const CREATE_COMMMENT = gql`
   mutation createBoardComment(
     $createBoardCommentInput: CreateBoardCommentInput!

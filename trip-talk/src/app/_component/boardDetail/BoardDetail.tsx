@@ -1,15 +1,13 @@
 import dateFormatter from '@/app/_commons/formatter/dateFormat';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 import React from 'react';
 import LinkIcon from '@/../public/icons/link_icon.svg';
 import LocationIcon from '@/../public/icons/location_icon.svg';
-import LikeIcon from '@/../public/icons/like_icon.svg';
-import UnLikeIcon from '@/../public/icons/unlike_icon.svg';
 import MockImg1 from '@/../public/images/mockImg1.png';
 import MockImg2 from '@/../public/images/mockImg2.svg';
-import { FETCH_BOARD } from '@/app/_api/board/getBoardData';
 import { FetchBoardDocument } from '@/app/_commons/graphql/graphql';
+import { DislikeTwoTone, LikeTwoTone } from '@ant-design/icons';
 
 export default function BoardDetail({
   style: s,
@@ -61,11 +59,11 @@ export default function BoardDetail({
         </div>
         <div className={`${s.flexbox} justify-center gap-6`}>
           <button>
-            <Image src={UnLikeIcon} alt="" width={0} height={0} />
+            <DislikeTwoTone />
             <p>24</p>
           </button>
           <button>
-            <Image src={LikeIcon} alt="" width={0} height={0} />
+            <LikeTwoTone twoToneColor="#F66A6A" />
             <p className="text-[#F66A6A]">24</p>
           </button>
         </div>
