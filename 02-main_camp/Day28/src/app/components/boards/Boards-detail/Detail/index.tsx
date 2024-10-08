@@ -5,6 +5,7 @@ import { Divider } from "@/app/components/boards/Boards-write";
 import BoardCommentsInputForm from "@/app/components/boards/Boards-detail/Comment-write";
 import BoardDetailProfile from "../Profile";
 import BoardComment from "../Comment-list";
+import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();
@@ -38,11 +39,11 @@ const BoardsDetail = () => {
       </section>
       <section className={styles.BoardsDetail_heartButton_list_section}>
         <div className={styles.BoardsDetail_heartBreak_button}>
-          <img src="/assets/heartBreak.png" />
+          <DislikeOutlined style={{ fontSize: "24px" }} />
           24
         </div>
         <div className={styles.BoardsDetail_heart_button}>
-          <img src="/assets/heart.png" />
+          <HeartOutlined style={{ fontSize: "24px" }} />
           12
         </div>
       </section>
