@@ -1,0 +1,5 @@
+.post_detail_page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
