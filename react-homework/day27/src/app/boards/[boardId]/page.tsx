@@ -8,8 +8,10 @@ const BoardsDetailPage = () => {
   return (
     <div className={styles.post_detail_page}>
       <BoardsDetail />
-      <CommentWrite />
-      <CommentList />
+      <div>
+        <CommentWrite />
+        <CommentList />
+      </div>
     </div>
   );
 };

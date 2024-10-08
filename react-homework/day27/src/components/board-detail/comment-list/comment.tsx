@@ -1,29 +1,48 @@
-import { FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
 import styles from "./styles.module.css";
+import Image from "next/image";
+import { CommentProps } from "./type";
 
-const Comment = ({ comments }) => {
+const Comment = ({ comments }: CommentProps) => {
+  console.log("comment list: ", comments);
   return (
-    <div>
+    <>
       {comments.map((comment) => (
         <div key={comment._id} className={styles.comment_box}>
-          <div>
-            <div>
+          <div className={styles.comment_header}>
+            <div className={styles.user_info}>
               <div>
-                <div>프로필사진</div>
+                <Image
+                  src="/images/profile.png"
+                  width={24}
+                  height={24}
+                  alt="프로필이미지"
+                />
                 <div>{comment.writer}</div>
               </div>
-              <div>{comment.rating}</div>
+              <div>별점: {comment.rating}</div>
             </div>
-            <div>
-              <div>수정버튼</div>
-              <div>삭제버튼</div>
+            <div className={styles.btn_box}>
+              <Image
+                src="/images/comment-edit.png"
+                width={24}
+                height={24}
+                alt="수정버튼"
+              />
+              <Image
+                src="/images/close.png"
+                width={24}
+                height={24}
+                alt="삭제버튼"
+              />
             </div>
           </div>
-          <div>{comment.contents}</div>
-          <div>{comment.createdAt}</div>
+          <div className={styles.contents_box}>{comment.contents}</div>
+          <div className={styles.date_box}>
+            {comment.createdAt.split("T")[0]}
+          </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

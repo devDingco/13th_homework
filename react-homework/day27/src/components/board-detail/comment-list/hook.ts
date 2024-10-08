@@ -3,5 +3,13 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 
 export const useCommentList = () => {
-  return {};
+  const params = useParams();
+  const { data } = useQuery(FetchBoardCommentsDocument, {
+    variables: { boardId: params.boardId as string },
+  });
+  // console.log(data?.fetchBoardComments);
+  const comments = data?.fetchBoardComments || [];
+  return {
+    comments,
+  };
 };

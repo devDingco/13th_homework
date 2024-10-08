@@ -1,4 +1,7 @@
-import { CreateBoardCommentDocument } from "@/commons/graphql/graphql";
+import {
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -15,7 +18,14 @@ export const useCommentWrite = () => {
   // params 이거 Page컴포넌트에서 props로 받아오는게 나으려나..
   const params = useParams();
 
-  const [createBoardComment] = useMutation(CreateBoardCommentDocument);
+  const [createBoardComment] = useMutation(CreateBoardCommentDocument, {
+    refetchQueries: [
+      {
+        query: FetchBoardCommentsDocument,
+        variables: { boardId: params.boardId },
+      },
+    ],
+  });
 
   const onChangeInput = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,7 +42,6 @@ export const useCommentWrite = () => {
     inputs.writer.trim() !== "" && inputs.password.trim() !== "";
 
   const commentSubmit = async () => {
-    // 리패치 코드 추가
     try {
       const result = await createBoardComment({
         variables: {
