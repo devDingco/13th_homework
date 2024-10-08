@@ -1,12 +1,17 @@
 import Icon from "@/components/iconFactory";
 import LikeCountBtn from "@/components/likeCountBtn";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 
-import { useBoardDetail } from "@/components/board-detail/hook";
+import { dateViewSet } from "@/utils/dateViewSet";
+import { useBoardDetail } from "@/components/board-detail/detail/hook";
+import { redirect } from "next/navigation";
 
 export default function BoardDetail() {
-  const { detailData, params } = useBoardDetail();
+  const { detailData, params, error } = useBoardDetail();
+  // console.log(error);
+
+  if (detailData === null || error) return redirect("/boards");
 
   return (
     <div className="flex flex-col gap-10">
@@ -22,9 +27,7 @@ export default function BoardDetail() {
 
               {detailData?.writer}
             </div>
-            <div>
-              {detailData?.createdAt.split("T")[0].replaceAll("-", ".")}
-            </div>
+            <div>{dateViewSet(detailData?.createdAt)}</div>
           </div>
           <hr className="my-4" />
           <div className="flex gap-2 justify-end">
@@ -34,7 +37,7 @@ export default function BoardDetail() {
         </div>
         {detailData?.youtubeUrl && (
           <div className="flex gap-4">
-            {detailData?.images.length > 0 &&
+            {/* {detailData?.images.length > 0 &&
               detailData?.images.map((url: string, index: number) => (
                 <Image
                   key={index}
@@ -44,13 +47,13 @@ export default function BoardDetail() {
                   width="100"
                   height="100"
                 />
-              ))}
+              ))} */}
           </div>
         )}
 
         <div
           className="min-h-[500px]"
-          dangerouslySetInnerHTML={{ __html: detailData?.contents }}
+          dangerouslySetInnerHTML={{ __html: detailData?.contents || "" }}
         ></div>
         {detailData?.youtubeUrl && (
           <div className="bg-gray-200 py-6">

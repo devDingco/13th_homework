@@ -8,8 +8,6 @@ export const DETAIL_FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
-      # likeCount
-      # dislikeCount
       images
       boardAddress {
         zipcode

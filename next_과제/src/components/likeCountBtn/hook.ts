@@ -14,7 +14,7 @@ export const useLikeCount = (type: string) => {
   const { data } = useQuery(FetchBoardLikeCountDocument, {
     variables: { boardId: params.boardId },
   });
-  console.log(data);
+  // console.log(data);
 
   const [likeCount, setLikeCount] = useState<number | undefined>(0);
 
