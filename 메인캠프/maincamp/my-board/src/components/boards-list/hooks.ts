@@ -4,7 +4,7 @@ import {
 } from '@/commons/graphql/graphql';
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { MouseEvent } from 'react';
 
 export function useBoardsList() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export function useBoardsList() {
 
   const deleteBoardFunc = async (
     id: string,
-    e: React.MouseEvent<HTMLButtonElement>
+    e: MouseEvent<HTMLButtonElement>
   ) => {
     e.stopPropagation();
     console.log(e.currentTarget.id);

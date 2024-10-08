@@ -1,20 +1,14 @@
 'use client';
-import BoardsDetail from '@/components/boards-detail';
-
-// const FETCH_BOARD = gql`
-//   query fetchBoard($boardId: ID!) {
-//     fetchBoard(boardId: $boardId) {
-//       _id
-//       writer
-//       title
-//       contents
-//       createdAt
-//       likeCount
-//       dislikeCount
-//     }
-//   }
-// `;
+import CommentList from '@/components/boards-detail/comment-list';
+import CommentWrite from '@/components/boards-detail/comment-write';
+import BoardsDetail from '@/components/boards-detail/detail';
 
 export default function BoardsDetailPage() {
-  return <BoardsDetail />;
+  return (
+    <div className="flex flex-col">
+      <BoardsDetail />
+      <CommentWrite />
+      <CommentList />
+    </div>
+  );
 }

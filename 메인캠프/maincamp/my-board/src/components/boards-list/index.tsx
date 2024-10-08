@@ -19,11 +19,11 @@ export function BoardsList() {
         </div>
       </div>
       <div className="space-y-4 cursor-pointer">
-        {data?.fetchBoards.map((el: IFetchBoard, index: number) => (
+        {data?.fetchBoards?.map((el, index: number) => (
           <div
             key={el._id}
             onClick={() => moveToDetailPage(el._id)}
-            className="flex justify-between items-center py-4 px-6 border border-solid rounded-md border-gray-200 hover:shadow-md transition-shadow group"
+            className="flex justify-between items-center py-4 px-6 border border-solid rounded-md border-gray-200 hover:shadow-md transition-shadow group cursor-pointer"
           >
             <div className="flex items-center">
               <span className="w-10 text-center text-gray-400 font-semibold">

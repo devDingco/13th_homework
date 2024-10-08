@@ -207,7 +207,7 @@ export default function BoardWrite(props: IBoardWrite) {
       <div className="flex gap-2 justify-end items-center self-stretch">
         <button
           type="button"
-          onClick={() => router.push(`/boards/${params.boardId}`)}
+          onClick={() => router.push(`/boards/${params?.boardId}`)}
           className="flex h-12 px-4 py-3 items-center gap-2 rounded-md border border-black bg-white text-black"
         >
           취소

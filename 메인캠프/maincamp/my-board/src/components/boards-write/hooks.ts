@@ -189,7 +189,7 @@ export function useBoardWrite(props: IBoardWrite) {
 
       const result = await updateBoard({
         variables: {
-          boardId: String(params.boardId),
+          boardId: String(params?.boardId),
           updateBoardInput: {
             title: title || props.data?.fetchBoard?.title,
             contents: content || props.data?.fetchBoard?.contents,
@@ -200,7 +200,7 @@ export function useBoardWrite(props: IBoardWrite) {
       console.log('수정', result);
 
       alert('수정이 완료되었습니다.');
-      router.push(`/boards/${params.boardId}`);
+      router.push(`/boards/${params?.boardId}`);
     } catch (error) {
       // 나중에 에러문구를 ApolloError 빼고
       alert(error);
