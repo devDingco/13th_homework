@@ -1,5 +1,4 @@
 import InputFormTitle from "./NewFormTitle";
-import { IInputFormTextProps } from "../../_models/new-props";
 
 export default function InputFormPhoto({ title }: IInputFormTextProps) {
   return (

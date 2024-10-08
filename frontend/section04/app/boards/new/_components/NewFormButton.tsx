@@ -1,13 +1,14 @@
-import { IButtonProps } from "../../_models/new-props";
-
-const Button = (props: IButtonProps) => {
-  return props.value === "cancel" ? (
-    <button className="normal-button">{props.value}</button>
-  ) : (
-    <button className="edit-button" disabled={props.disabled}>
-      {props.value}
-    </button>
-  );
+const buttonObj: IButtonObj = {
+  cancel: "취소",
+  register: "등록하기",
 };
 
-export default Button;
+export default function Button({ value, disabled, onClick }: IButtonProps) {
+  return value === "cancel" ? (
+    <button className="normal-button">{buttonObj[value]}</button>
+  ) : (
+    <button className="register-button" disabled={disabled} onClick={onClick}>
+      {buttonObj[value]}
+    </button>
+  );
+}

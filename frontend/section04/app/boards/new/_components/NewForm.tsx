@@ -2,13 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 
-import { IInputValue } from "../../_models/new-inputValue";
-
 import NewFormText from "./NewFormText";
-import NewFormAddress from "./NewFormAddress";
 import NewFormPhoto from "./NewFormPhoto";
 import NewFormButton from "./NewFormButton";
+import { gql, useMutation } from "@apollo/client";
+// import { CREATE_BOARD } from "../../queries";
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      writer
+      title
+      contents
+    }
+  }
+`;
 export default function NewForm() {
   const [inputValue, setInputValue] = useState<IInputValue>({
     author: "",
@@ -17,6 +25,7 @@ export default function NewForm() {
     content: "",
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [createBoard] = useMutation(CREATE_BOARD);
   const onChangeInputValue = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -25,6 +34,7 @@ export default function NewForm() {
       [event.target.id]: event.target.value,
     }));
   };
+
   useEffect(() => {
     inputValue.author &&
     inputValue.password &&
@@ -33,6 +43,20 @@ export default function NewForm() {
       ? setIsButtonDisabled(false)
       : setIsButtonDisabled(true);
   }, [inputValue]);
+
+  const onClickSubmit = async () => {
+    console.log("gkgk");
+    const result = await createBoard({
+      variables: {
+        createBoardInput: {
+          writer: inputValue.author,
+          title: inputValue.title,
+          password: inputValue.password,
+          contents: inputValue.content,
+        },
+      },
+    });
+  };
 
   return (
     <>
@@ -50,7 +74,11 @@ export default function NewForm() {
       </div>
       <div className="button-area">
         <NewFormButton value={"cancel"} />
-        <NewFormButton value={"register"} disabled={isButtonDisabled} />
+        <NewFormButton
+          value={"register"}
+          disabled={isButtonDisabled}
+          onClick={onClickSubmit}
+        />
       </div>
     </>
   );
