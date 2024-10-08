@@ -28,8 +28,6 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				if (boardId) {
 					const result = await deleteBoard(boardId);
 
-					console.log(data);
-
 					if (result) {
 						mutate(
 							data.filter((board: IApiResponseData) => board.boardId !== boardId),

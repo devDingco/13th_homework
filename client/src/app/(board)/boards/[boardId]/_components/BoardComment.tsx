@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 
 export default function BoardComment(props: IBoardCommentProps) {
-	const { _id, parentId, createdAt, author, content, rating } = props.comment;
+	const { _id, createdAt, author, content, rating } = props.comment;
 
 	const changeDate = changeDateToISO(createdAt);
 

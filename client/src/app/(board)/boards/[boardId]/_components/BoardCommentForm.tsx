@@ -20,25 +20,24 @@ export default function BoardCommentForm() {
 	const [rating, setRating] = useState<number>(0);
 
 	const [state, formAction] = useFormState(createBoardCommentAction, {
-		message: '',
+		result: '',
 		boardId: param.boardId,
 		error: undefined,
 	});
 
-	const { mutate } = useSWR(`/board/${param.boardId}/comment`, null, {
+	const { data, mutate } = useSWR(`/board/${param.boardId}/comment`, null, {
 		revalidateOnFocus: false,
 	});
 
 	const formRef = useRef<HTMLFormElement>(null);
+	console.log(data);
 
 	useEffect(() => {
-		const reMutate = async () => {
-			await mutate();
-		};
-		if (state?.message === 'success') {
+		if (state?.result) {
+			console.log(state.result);
 			formRef.current?.reset();
 			setRating(0);
-			reMutate();
+			mutate(data.push(state.result.data), false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
