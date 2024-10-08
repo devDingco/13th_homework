@@ -5,6 +5,7 @@ import {
   FetchBoardsDocument,
   DeleteBoardDocument,
 } from "@/commons/gql/graphql";
+
 export function useBoardsList() {
   const { data } = useQuery(FetchBoardsDocument);
   const [deleteBoard] = useMutation(DeleteBoardDocument);
