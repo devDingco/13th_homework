@@ -3,18 +3,19 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Input from "../Input/Input";
-import UseCommentForm from "../../../commons/hooks/UseCommentWrite";
+import UseCommentWrite from "../../../commons/hooks/UseCommentWrite";
 import Button from "../Button/Button";
-import {
-  BUTTON,
-  COMMENT_FORM,
-  INPUT_CHILDREN,
-  PLACEHOLDERS,
-} from "../../../enums/constants";
+import { BUTTON, INPUT_CHILDREN, PLACEHOLDERS } from "../../../enums/constants";
 
 export default function CommentWrite() {
-  const { handleCommentSubmit, handleInputChange, disabledButton } =
-    UseCommentForm();
+  const {
+    handleCommentSubmit,
+    handleInputChange,
+    handleContentChange,
+    disabledButton,
+    comment,
+  } = UseCommentWrite();
+
   return (
     <>
       <form className={styles.form} onSubmit={handleCommentSubmit}>
@@ -64,6 +65,7 @@ export default function CommentWrite() {
               type="text"
               placeholder={PLACEHOLDERS.WRITER}
               onChange={handleInputChange}
+              value={comment.writer}
             />
             <Input
               isLabel={true}
@@ -73,10 +75,16 @@ export default function CommentWrite() {
               type="password"
               placeholder={PLACEHOLDERS.PASSWORD}
               onChange={handleInputChange}
+              value={comment.password}
             />
           </div>
           <div className={styles.textarea_wrapper}>
-            <textarea id="comment" placeholder={PLACEHOLDERS.COMMENT} />
+            <textarea
+              id="comment"
+              placeholder={PLACEHOLDERS.COMMENT}
+              onChange={handleContentChange}
+              value={comment.contents}
+            />
           </div>
           <div className={styles.button_wrapper}>
             <Button
@@ -89,9 +97,6 @@ export default function CommentWrite() {
           </div>
         </div>
       </form>
-      <div className={styles.comment_area}>
-        <p>{COMMENT_FORM.NO_COMMENTS}</p>
-      </div>
     </>
   );
 }

@@ -1,11 +1,13 @@
 import BoardsDetail from "../../components/BoardsDetail/BoardsDetail";
-import CommentForm from "../../components/CommentForm/CommentForm";
+import CommentList from "../../components/CommentList/CommentList";
+import CommentWrite from "../../components/CommentWrite/CommentWrite";
 
 export default function BoardsDetailPage() {
   return (
     <>
-    <BoardsDetail />
-    <CommentForm />
+      <BoardsDetail />
+      <CommentWrite />
+      <CommentList />
     </>
-  )
+  );
 }

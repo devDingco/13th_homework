@@ -11,6 +11,7 @@ export default function Input({
   onChange,
   defaultValue,
   disabled,
+  value,
 }: IInputProps) {
   return (
     <>
@@ -30,6 +31,7 @@ export default function Input({
           onChange={onChange}
           defaultValue={defaultValue}
           disabled={disabled}
+          value={value}
         />
       </div>
     </>
