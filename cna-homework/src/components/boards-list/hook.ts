@@ -6,7 +6,7 @@ export default function useBoardList() {
 
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
-  const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClickDelete = (event: React.MouseEvent<HTMLImageElement>) => {
     event.stopPropagation();
     deleteBoard({
       variables: {

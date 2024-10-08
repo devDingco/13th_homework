@@ -14,7 +14,9 @@ export const useBoardsWrite = (props: any) => {
 
   const editId = props.isEdit ? params.boardId : null;
 
+  // 수정페이지에서사용
   const { data } = useQuery(FetchBoardDocument);
+  console.log("---", data);
 
   // state
   const [writer, setWriter] = useState("");
@@ -31,15 +33,6 @@ export const useBoardsWrite = (props: any) => {
 
   // active state
   const disabledBtn = !writer.trim() || !pw.trim() || !title?.trim() || !content?.trim();
-  // const [isActive, setIsActive] = useState(false);
-
-  // useEffect(() => {
-  //   if (writer !== "" && title !== "" && pw !== "" && content !== "") {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  // }, [writer, title, pw, content]);
 
   // onChange
   const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,9 +177,12 @@ export const useBoardsWrite = (props: any) => {
       }
 
       // 비밀번호 확인하기
-
-      const 입력받은비밀번호 = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
-      const editInput: any = {};
+      interface IEditinput {
+        title?: string;
+        contents?: string;
+      }
+      const myPw = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
+      const editInput: IEditinput = {};
       if (title?.trim() && title !== data?.fetchBoard?.title) {
         editInput.title = title;
       }
@@ -202,7 +198,7 @@ export const useBoardsWrite = (props: any) => {
           const result = await updateBoard({
             variables: {
               updateBoardInput: editInput,
-              password: 입력받은비밀번호,
+              password: myPw,
               boardId: String(editId),
             },
           });
@@ -215,7 +211,7 @@ export const useBoardsWrite = (props: any) => {
           }
           // 수정이 완료되면 상세 화면으로 이동하기
           router.push(`/boards/${editId}`);
-        } catch (error: any) {
+        } catch (error) {
           // 에러 발생 시 처리
           if (error.graphQLErrors) {
             const errorMessages = error.graphQLErrors.map((err: any) => err.message);
@@ -267,5 +263,6 @@ export const useBoardsWrite = (props: any) => {
     errorTitle,
     errorContent,
     files,
+    data,
   };
 };
