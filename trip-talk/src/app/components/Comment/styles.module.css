@@ -1,0 +1,23 @@
+.comment_layout > div {
+  @apply flex flex-col w-full gap-2 py-10 border-b border-lightGray;
+}
+
+.action_container {
+  @apply flex w-full justify-between items-center;
+}
+
+.action_container > div {
+  @apply flex gap-2;
+}
+
+.profile {
+  @apply flex gap-1 text-sm font-light text-neutralGray items-center;
+}
+
+.rating_stars {
+  @apply flex gap-0;
+}
+
+.date {
+  @apply text-grayMuted text-sm font-normal;
+}

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
-  query {
+  query fetchBoards {
     fetchBoards {
       _id
       writer
@@ -59,7 +59,7 @@ export const FETCH_BOARD = gql`
 `;
 
 export const UPDATE_BOARD = gql`
-  mutation (
+  mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
     $password: String
     $boardId: ID!
@@ -81,6 +81,37 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+    }
+  }
+`;
+
+export const CREATE_BOARD_COMMENTS = gql`
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
+    createBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardId: $boardId
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const FETCH_BOARD_COMMENTS = gql`
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
     }
   }
 `;

@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { CREATE_BOARD, UPDATE_BOARD } from "../graphql/backend-api";
 import { IBoardsWriteHook, IError } from "../../types/components.type";
+import { CreateBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
 
 export default function UseBoardsWrite(props: IBoardsWriteHook) {
   const params = useParams();
@@ -12,8 +12,8 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
   const [title, setTitle] = useState<string>("");
   const [contents, setContents] = useState<string>("");
   const [youtubeUrl, setYoutubeUrl] = useState<string>("");
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
   const formAction = props.isEdit ? "수정" : "등록";
   const disabledInput = props.isEdit ? true : false;
   const disabledButton = props.isEdit
@@ -55,7 +55,7 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
           },
         },
       });
-      const boardId = result.data.createBoard._id;
+      const boardId = result?.data?.createBoard._id;
       router.push(`/boards/${boardId}`);
     } catch (error) {
       console.error(error);
@@ -71,9 +71,9 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
       );
       const editVariables = {
         updateBoardInput: {
-          title: title,
-          contents: contents,
-          youtubeUrl: youtubeUrl,
+          title,
+          contents,
+          youtubeUrl,
           // boardAddress: {
           //   zipcode: string,
           //   address: string,
@@ -83,7 +83,7 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
           // dislikeCount: number;
           // images: string;
         },
-        boardId: params.boardId,
+        boardId: String(params.boardId),
         password: userPassword,
       };
       if (title) editVariables.updateBoardInput.title = title;

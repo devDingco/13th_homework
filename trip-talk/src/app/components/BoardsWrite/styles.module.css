@@ -22,29 +22,28 @@
   @apply flex-col;
 }
 
-.content_wrapper {
+.contents_wrapper {
   @apply flex-col;
 }
 
-.content_wrapper > div {
+.contents_wrapper > div {
   @apply flex items-start gap-1;
 }
 
-.content_wrapper > div > p {
+.contents_wrapper > div > p {
   @apply text-base font-medium text-darkGray;
 }
 
-.content_wrapper > div > b {
+.contents_wrapper > div > b {
   @apply text-base font-medium text-lightCoral;
 }
 
-.content_wrapper > textarea {
-  @apply outline-none w-full flex py-3 px-4 rounded-lg border border-solid bg-white resize-none;
+.contents_wrapper > textarea {
+  @apply outline-none w-full flex py-3 px-4 rounded-lg border border-solid bg-white resize-none border-softGray;
   height: 21rem;
-  border-color: #d4d3d3;
 }
 
-.content_wrapper > textarea::placeholder {
+.contents_wrapper > textarea::placeholder {
   color: #ababab;
 }
 

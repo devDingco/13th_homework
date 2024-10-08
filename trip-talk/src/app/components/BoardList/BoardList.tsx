@@ -1,31 +1,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
-import {
-  DELETE_BOARD,
-  FETCH_BOARDS,
-} from "../../../commons/graphql/backend-api";
-import { useRouter } from "next/navigation";
-import { useMutation } from "@apollo/client";
 import { IBoardList } from "../../../types/board.type";
+import UseBoardsList from "../../../commons/hooks/UseBoardList";
 
 export default function BoardList(props: IBoardList) {
-  const { _id, number, title, writer, createdAt } = props;
-  const router = useRouter();
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-
-  const onClickBoard = () => {
-    router.push(`/boards/${_id}`);
-  };
-
-  const onCLickDelete = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    deleteBoard({
-      variables: {
-        id: _id,
-      },
-      refetchQueries: [{ query: FETCH_BOARDS }],
-    });
-  };
+  const {onClickBoard, onCLickDelete, number, title, writer, createdAt} = UseBoardsList(props)
 
   return (
     <>

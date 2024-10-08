@@ -1,0 +1,7 @@
+.comment_area {
+  @apply flex flex-col py-10;
+}
+
+.comment_area > p {
+  @apply text-dimGray text-center text-sm font-normal;
+}

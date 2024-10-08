@@ -1,10 +1,17 @@
 "use client";
+
 import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import UseBoardsWrite from "../../../commons/hooks/UseBoardsWrite";
 import { IBoardsWriteHook } from "../../../types/components.type";
+import {
+  BOARDS_WRITE,
+  BUTTON,
+  INPUT_CHILDREN,
+  PLACEHOLDERS,
+} from "../../../enums/constants";
 
 export default function BoardsWrite(props: IBoardsWriteHook) {
   const {
@@ -29,15 +36,17 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
               isLabel={true}
               id="writer"
               type="text"
-              placeholder="작성자 명을 입력해 주세요."
+              placeholder={PLACEHOLDERS.WRITER}
               isRequired={true}
-              children="작성자"
+              children={INPUT_CHILDREN.WRITER}
               onChange={handleInputChange}
-              defaultValue={props.data?.fetchBoard.writer}
+              defaultValue={String(props.data?.fetchBoard.writer)}
               disabled={disabledInput}
             />
             {!writer && (
-              <div className={styles.required_field}>필수입력 사항 입니다.</div>
+              <div className={styles.required_field}>
+                {BOARDS_WRITE.REQUIRED_FIELDS}
+              </div>
             )}
           </div>
           <div>
@@ -45,14 +54,16 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
               isLabel={true}
               id="password"
               type="password"
-              placeholder="비밀번호를 입력해 주세요."
+              placeholder={PLACEHOLDERS.PASSWORD}
               isRequired={true}
-              children="비밀번호"
+              children={INPUT_CHILDREN.PASSWORD}
               onChange={handleInputChange}
               disabled={disabledInput}
             />
             {!password && (
-              <div className={styles.required_field}>필수입력 사항 입니다.</div>
+              <div className={styles.required_field}>
+                {BOARDS_WRITE.REQUIRED_FIELDS}
+              </div>
             )}
           </div>
         </div>
@@ -61,29 +72,33 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
             isLabel={true}
             id="title"
             type="text"
-            placeholder="제목을 입력해 주세요."
+            placeholder={PLACEHOLDERS.TITLE}
             isRequired={true}
-            children="제목"
+            children={INPUT_CHILDREN.TITLE}
             onChange={handleInputChange}
             defaultValue={props.data?.fetchBoard.title}
           />
           {!title && (
-            <div className={styles.required_field}>필수입력 사항 입니다.</div>
+            <div className={styles.required_field}>
+              {BOARDS_WRITE.REQUIRED_FIELDS}
+            </div>
           )}
         </div>
-        <div className={styles.content_wrapper}>
+        <div className={styles.contents_wrapper}>
           <div>
             <p>내용</p>
             <b>*</b>
           </div>
           <textarea
-            id="content"
-            placeholder="내용을 입력해 주세요."
+            id="contents"
+            placeholder={PLACEHOLDERS.CONTESTS}
             onChange={handleContentChange}
             defaultValue={props.data?.fetchBoard.contents}
           />
           {!contents && (
-            <div className={styles.required_field}>필수입력 사항 입니다.</div>
+            <div className={styles.required_field}>
+              {BOARDS_WRITE.REQUIRED_FIELDS}
+            </div>
           )}
         </div>
         <div className={styles.address_wrapper}>
@@ -94,35 +109,39 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
                 type="number"
                 placeholder="01234"
                 isRequired={false}
-                children="주소"
-                defaultValue={props.data?.fetchBoard.zipcode}
+                children={INPUT_CHILDREN.ADDRESS}
+                defaultValue={String(
+                  props.data?.fetchBoard.boardAddress?.zipcode
+                )}
               />
             </div>
-            <Button color="white">우편번호 검색</Button>
+            <Button color="white">{BUTTON.ZIP_CODE_SEARCH}</Button>
           </div>
           <Input
             isLabel={false}
             type="text"
-            placeholder="주소를 입력해 주세요."
+            placeholder={PLACEHOLDERS.ADDRESS}
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.address}
+            defaultValue={String(props.data?.fetchBoard.boardAddress?.address)}
           />
           <Input
             isLabel={false}
             type="text"
-            placeholder="상세주소"
+            placeholder={PLACEHOLDERS.DETAIL_ADDRESS}
             isRequired={false}
-            defaultValue={props.data?.fetchBoard.addressDetail}
+            defaultValue={String(
+              props.data?.fetchBoard.boardAddress?.addressDetail
+            )}
           />
         </div>
         <div className={styles.link_wrapper}>
           <Input
             isLabel={true}
             type="url"
-            placeholder="링크를 입력해 주세요."
+            placeholder={PLACEHOLDERS.URL}
             isRequired={false}
-            children="유튜브 링크"
-            defaultValue={props.data?.fetchBoard.youtubeUrl}
+            children={INPUT_CHILDREN.URL}
+            defaultValue={String(props.data?.fetchBoard.youtubeUrl)}
           />
         </div>
         <div className={styles.photo_wrapper}>
@@ -134,13 +153,14 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
           </div>
         </div>
         <div className={styles.button_wrapper}>
-          <Button color="white">취소</Button>
+          <Button color="white">{BUTTON.CANCEL}</Button>
           <Button
             type="submit"
             disabled={disabledButton}
             color={disabledButton ? "gray" : "blue"}
           >
-            {formAction}하기
+            {formAction}
+            {BUTTON.ACTION}
           </Button>
         </div>
       </form>
