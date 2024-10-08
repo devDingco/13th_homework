@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./style.module.css";
 import { UseCommentWrite } from "../comment-write/hook";
+import { Rate } from "antd";
 export default function CommentListPage() {
   const { data } = UseCommentWrite();
   return (
@@ -18,8 +19,12 @@ export default function CommentListPage() {
                   height={10}
                   className={styles.css_profileimage}
                 />
-                <div className={styles.css_writer}>{el.writer}</div>
+                <div className={styles.css_writer}>
+                  {el.writer}
+                  <Rate allowHalf defaultValue={el.rating} />
+                </div>
               </div>
+
               <div className={styles.css_image}>
                 <Image
                   src="/assets/Edit.png"

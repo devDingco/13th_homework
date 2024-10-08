@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./style.module.css";
 import { UseCommentWrite } from "./hook";
 import CommentListPage from "../comment-list/index";
+import { Rate } from "antd";
 export default function CommentPage() {
   const {
     name,
@@ -11,9 +12,14 @@ export default function CommentPage() {
     onChangePassword,
     onChangeName,
     onclicksubmit,
+    value,
+    onChangeStar,
   } = UseCommentWrite();
   return (
     <>
+      <div className={styles.css_star}>
+        <Rate onChange={onChangeStar} allowHalf defaultValue={value} />
+      </div>
       <div className={styles.css_input}>
         <div className={styles.css_inputbox}>
           <div className={styles.css_namebox}>

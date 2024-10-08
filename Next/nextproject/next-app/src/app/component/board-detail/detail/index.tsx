@@ -3,6 +3,7 @@ import { UseDetailWrite } from "./hook";
 import Image from "next/image";
 import React from "react";
 import CommnentPage from "../comment-write";
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 export default function DetailWrite() {
   const { onModify, data, onList } = UseDetailWrite();
   console.log(data);
@@ -75,25 +76,11 @@ export default function DetailWrite() {
       </div>
       <div className={styles.css_heart}>
         <div className={styles.css_hate}>
-          <Image
-            src="/assets/Hate.png"
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="hate"
-            className={styles.css_hate}
-          />
+          <DislikeOutlined />
           <span>24</span>
         </div>
         <div className={styles.css_like}>
-          <Image
-            src="/assets/Like.png"
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="like"
-            className={styles.css_like}
-          />{" "}
+          <LikeOutlined />
           <span>12</span>
         </div>
       </div>
