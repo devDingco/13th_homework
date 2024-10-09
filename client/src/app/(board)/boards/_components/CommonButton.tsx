@@ -51,7 +51,7 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 	return (
 		<button
 			id={title}
-			className={`prose-r_16_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] px-3 py-4 text-black ${
+			className={`prose-r_16_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] px-3 py-4 text-black outline-none ${
 				(title === EButtonTitle.Cancel || title === EButtonTitle.Back) &&
 				'border-black text-black'
 			} ${
