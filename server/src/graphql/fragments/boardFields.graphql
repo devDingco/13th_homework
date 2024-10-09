@@ -1,9 +1,0 @@
-fragment BoardField on Board {
-    author
-    title
-    content
-    imageUrl
-    youtubeUrl
-    address
-    createdAt
-}

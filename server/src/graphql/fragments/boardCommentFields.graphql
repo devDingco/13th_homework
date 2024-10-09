@@ -1,9 +1,0 @@
-fragment BoardCommentField on BoardComment {
-    author
-    content
-    rating
-    parentId
-    _id
-    createdAt
-    replies
-}

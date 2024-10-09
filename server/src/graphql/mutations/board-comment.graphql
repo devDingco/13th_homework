@@ -6,7 +6,17 @@ mutation CreateBoardComment(
         boardId: $boardId
         createBoardComment: $createBoardComment
     ) {
-        ...BoardCommentField
+        author
+        content
+        rating
+        parentId
+        _id
+        createdAt
+        replies {
+            author
+            content
+            createdAt
+        }
     }
 }
 
@@ -20,7 +30,17 @@ mutation UpdateBoardComment(
         updateBoardComment: $updateBoardComment
         parentId: $parentId
     ) {
-        ...BoardCommentField
+        author
+        content
+        rating
+        parentId
+        _id
+        createdAt
+        replies {
+            author
+            content
+            createdAt
+        }
     }
 }
 

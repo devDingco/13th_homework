@@ -8,6 +8,12 @@ query GetBoards {
 }
 query GetBoard($boardId: Int!) {
     getBoard(boardId: $boardId) {
-        ...BoardField
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        address
+        createdAt
     }
 }

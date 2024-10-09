@@ -1,5 +1,15 @@
 query GetBoardComment($boardId: Int!) {
     getBoardComment(boardId: $boardId) {
-        ...BoardCommentField
+        author
+        content
+        rating
+        parentId
+        _id
+        createdAt
+        replies {
+            author
+            content
+            createdAt
+        }
     }
 }
