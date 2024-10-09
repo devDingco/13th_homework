@@ -1,0 +1,10 @@
+overwrite: true
+schema: "http://172.16.2.165:8080/graphql" 
+documents: "src/graphql/**/*.graphql" 
+generates:
+  ../src/graphql/generated/:
+    preset: client-preset
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
