@@ -6,7 +6,7 @@ import BoardHeader from './BoardHeader';
 import BoardIcon from './BoardIcon';
 import BoardImages from './BoardImages';
 
-export default function BoardContainer({ resource }: IBoardReaderResource) {
+export default function BoardIdContainer({ resource }: IBoardReaderResource) {
 	const boardInfor: IBoardResponse = resource.read();
 
 	return (

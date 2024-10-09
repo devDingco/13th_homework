@@ -1,8 +1,8 @@
 /** @format */
 
 import BoardCommentContainer from './_components/BoardCommentContainer';
-import BoardContainer from './_components/BoardContainer';
 import BoardFooter from './_components/BoardFooter';
+import BoardIdContainer from './_components/BoardIdContainer';
 import BoardLikeHate from './_components/BoardLikeHate';
 import BoardSkeleton from './_components/BoardSkeleton';
 import BoardSkeletonReaction from './_components/BoardSkeletonReaction';
@@ -17,7 +17,7 @@ export default function Detail({ params }: IDeatilProps) {
 	return (
 		<div className="flex flex-col gap-4">
 			<Suspense fallback={<BoardSkeleton />}>
-				<BoardContainer resource={getBoard(+param)} />
+				<BoardIdContainer resource={getBoard(+param)} />
 			</Suspense>
 			<Suspense fallback={<BoardSkeletonReaction />}>
 				<BoardLikeHate resource={getReaction(+param)} />
