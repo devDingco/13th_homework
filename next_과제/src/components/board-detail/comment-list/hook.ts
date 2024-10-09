@@ -21,7 +21,7 @@ export const useCommentList = () => {
   const [deleteComment] = useMutation(DeleteBoardCommentDocument);
 
   const [mode, setMode] = useState(
-    Array.from({ length: 10 }, (el, idx) => "view") || []
+    Array.from({ length: 10 }, () => "view") || []
   );
 
   // 댓글 삭제
