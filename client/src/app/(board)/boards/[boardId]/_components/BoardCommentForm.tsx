@@ -1,8 +1,8 @@
 /** @format */
 'use client';
 
+import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
 import { useEffect, useRef, useState } from 'react';
-import useSWR, { mutate } from 'swr';
 
 import BoardCommentStar from './BoardCommentStar';
 import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
@@ -10,10 +10,10 @@ import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { ETitle } from '@/models/board.type';
 import NewInputContainer from '../../new/_components/NewInputContainer';
-import { boardUrlEndPoint } from '@/apis/config';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
+import useSWR from 'swr';
 
 export default function BoardCommentForm() {
 	const param = useParams();
@@ -26,9 +26,13 @@ export default function BoardCommentForm() {
 		error: undefined,
 	});
 
-	const { data, mutate } = useSWR(`${boardUrlEndPoint}/${param.boardId}/comment`, null, {
-		revalidateOnFocus: false,
-	});
+	const { data, mutate } = useSWR(
+		`${boardUrlEndPoint}/${param.boardId}${commentUrlEndPoint}`,
+		null,
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
 	const formRef = useRef<HTMLFormElement>(null);
 

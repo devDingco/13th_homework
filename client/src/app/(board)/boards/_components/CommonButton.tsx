@@ -1,5 +1,4 @@
 /** @format */
-'use client';
 
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
