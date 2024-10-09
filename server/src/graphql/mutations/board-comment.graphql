@@ -1,0 +1,21 @@
+mutation CreateBoardComment(
+    $boardId: Int!
+    $createBoardComment: CreateBoardCommentDto!
+) {
+    createBoard(boardId: $boardId, createBoardComment: $createBoardComment) {
+        ...BoardCommentField
+    }
+}
+
+mutation UpdateBoardComment(
+    $boardId: Int!
+    $updateBoardComment: UpdateBoardCommentDto!
+) {
+    updateBoard(boardId: $boardId, updateBoardComment: $updateBoardComment) {
+        ...BoardCommentField
+    }
+}
+
+mutation DeleteBoardComment($boardId: Int!, $commentId: String!) {
+    deleteBoardComment(boardId: $boardId, commentId: $commentId)
+}

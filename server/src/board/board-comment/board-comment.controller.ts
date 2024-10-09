@@ -48,7 +48,7 @@ export class BoardCommentController {
     @HttpCode(HttpStatus.OK)
     update(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Param('parentId') parentId: string,
+        @Param('commentId') commentId: string,
         @Body() updateBoardCommentDTO: UpdateBoardCommentDto,
     ) {
         const { password, ...restUpdateBoardComment } = updateBoardCommentDTO;
@@ -56,7 +56,7 @@ export class BoardCommentController {
             boardId,
             restUpdateBoardComment,
             password,
-            parentId,
+            commentId,
         );
     }
 

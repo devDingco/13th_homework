@@ -65,17 +65,13 @@ export class BoardCommentRepository {
         });
     }
 
-    async deleteComment(commentId: string): Promise<void> {
-        const deleteComment = await this.findComment(commentId);
+    async deleteComment(parentId: string): Promise<void> {
+        const deleteComment = await this.findComment(parentId);
 
-        if (!deleteComment) {
-            throw new NotFoundException(`commentId: ${commentId} is not found`);
-        } else {
-            await this.boardCommentRepository.remove(deleteComment);
-            await this.boardCommentRepository.delete({
-                parentId: commentId,
-            });
-        }
+        await this.boardCommentRepository.remove(deleteComment);
+        await this.boardCommentRepository.delete({
+            parentId,
+        });
     }
 
     async deleteAllComment(boardId: number): Promise<boolean> {

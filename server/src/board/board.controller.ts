@@ -75,7 +75,7 @@ export class BoardController {
     @Delete()
     @ResponseMessage('board 전체를 성공적으로 삭제했습니다.')
     @HttpCode(HttpStatus.OK)
-    clear(): Promise<void> {
+    clear(): Promise<boolean> {
         return this.boardService.clear();
     }
 }

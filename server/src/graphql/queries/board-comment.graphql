@@ -1,0 +1,5 @@
+query GetBoardComment($boardId: Int!) {
+    getBoardComment(boardId: $boardId) {
+        ...BoardCommentField
+    }
+}

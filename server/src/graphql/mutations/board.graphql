@@ -1,0 +1,19 @@
+mutation CreateBoard($createBoard: CreateBoardDto!) {
+    createBoard(createBoard: $createBoard) {
+        ...BoardField
+    }
+}
+
+mutation UpdateBoard($boardId: Int!, $updateBoard: UpdateBoardDto!) {
+    updateBoard(boardId: $boardId, updateBoard: $updateBoard) {
+        ...BoardField
+    }
+}
+
+mutation DeleteBoard($boardId: Int!) {
+    deleteBoard(boardId: $boardId)
+}
+
+mutation ClearBoard {
+    clearBoard
+}

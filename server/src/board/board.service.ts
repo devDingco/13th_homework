@@ -77,12 +77,14 @@ export class BoardService {
         return true;
     }
 
-    async clear(): Promise<void> {
+    async clear(): Promise<boolean> {
         await this.boardRepository.clearBoard();
 
         await this.boardReactionRepository.clearBoardReaction();
 
         await this.boardCommentRepository.clearComment();
+
+        return true;
     }
 
     async transformPassword(password: string): Promise<string> {
