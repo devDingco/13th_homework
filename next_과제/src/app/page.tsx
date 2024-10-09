@@ -1,52 +1,15 @@
-"use client";
-
 import CardBox from "@/components/cardBox";
 import MainSlide from "@/components/mainSlide";
 import SearchBox from "@/components/searchBox";
 import Icon from "@/components/iconFactory";
 import BoardsPage from "@/app/boards/page";
-import Headers from "@/components/header";
+import Header from "@/components/header";
 import Link from "next/link";
 
 export default function Home() {
-  const cardData = [
-    {
-      img: "/images/img-0.png",
-      title: "제목입니다.",
-      writer: "작성자이름",
-      writerimg: "/images/img-0.png",
-      goodcount: 0,
-      writedate: "2024.02.20",
-    },
-    {
-      img: "/images/img-0.png",
-      title: "제목입니다.",
-      writer: "작성자이름",
-      writerimg: "/images/img-0.png",
-      goodcount: 0,
-      writedate: "2024.02.20",
-    },
-    {
-      img: "/images/img-0.png",
-      title: "제목입니다.",
-      writer: "작성자이름",
-      writerimg: "/images/img-0.png",
-      goodcount: 0,
-      writedate: "2024.02.20",
-    },
-    {
-      img: "/images/img-0.png",
-      title: "제목입니다.",
-      writer: "작성자이름",
-      writerimg: "/images/img-0.png",
-      goodcount: 0,
-      writedate: "2024.02.20",
-    },
-  ];
-
   return (
     <div>
-      <Headers />
+      <Header />
       <MainSlide />
 
       <div className="max-xl:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
@@ -77,53 +40,42 @@ export default function Home() {
           <BoardsPage />
         </div>
       </div>
-      {/* {error ? (
-          <>Oh no, there was an error</>
-        ) : isLoading ? (
-          <>Loading...</>
-        ) : data ? (
-          <>
-            <h3>{data.species.name}</h3>
-            <img
-              src={data.sprites.front_shiny}
-              alt={data.species.name}
-              width={100}
-              height={100}
-            />
-          </>
-        ) : null} */}
-
-      {/* <main className="flex min-h-screen flex-col items-center justify-center p-24">
-        <div className="text-center mb-12">Count is {counter}</div>
-
-        <div className="flex">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              dispatch(increment());
-            }}
-          >
-            Increment
-          </button>
-          <button
-            className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              dispatch(decrement());
-            }}
-          >
-            Decrement
-          </button>
-
-          <button
-            className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              dispatch(incrementByAmount(10));
-            }}
-          >
-            Incement By 10
-          </button>
-        </div>
-      </main> */}
     </div>
   );
 }
+
+// 더미 데이터 나중에 삭제
+const cardData = [
+  {
+    img: "/images/img-0.png",
+    title: "제목입니다.",
+    writer: "작성자이름",
+    writerimg: "/images/img-0.png",
+    goodcount: 0,
+    writedate: "2024.02.20",
+  },
+  {
+    img: "/images/img-0.png",
+    title: "제목입니다.",
+    writer: "작성자이름",
+    writerimg: "/images/img-0.png",
+    goodcount: 0,
+    writedate: "2024.02.20",
+  },
+  {
+    img: "/images/img-0.png",
+    title: "제목입니다.",
+    writer: "작성자이름",
+    writerimg: "/images/img-0.png",
+    goodcount: 0,
+    writedate: "2024.02.20",
+  },
+  {
+    img: "/images/img-0.png",
+    title: "제목입니다.",
+    writer: "작성자이름",
+    writerimg: "/images/img-0.png",
+    goodcount: 0,
+    writedate: "2024.02.20",
+  },
+];
