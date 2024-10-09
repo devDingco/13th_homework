@@ -2,7 +2,10 @@ mutation CreateBoardComment(
     $boardId: Int!
     $createBoardComment: CreateBoardCommentDto!
 ) {
-    createBoard(boardId: $boardId, createBoardComment: $createBoardComment) {
+    createBoardComment(
+        boardId: $boardId
+        createBoardComment: $createBoardComment
+    ) {
         ...BoardCommentField
     }
 }
@@ -10,8 +13,13 @@ mutation CreateBoardComment(
 mutation UpdateBoardComment(
     $boardId: Int!
     $updateBoardComment: UpdateBoardCommentDto!
+    $parentId: String!
 ) {
-    updateBoard(boardId: $boardId, updateBoardComment: $updateBoardComment) {
+    updateBoardComment(
+        boardId: $boardId
+        updateBoardComment: $updateBoardComment
+        parentId: $parentId
+    ) {
         ...BoardCommentField
     }
 }

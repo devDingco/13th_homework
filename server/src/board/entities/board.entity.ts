@@ -6,7 +6,7 @@ import {
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
 import { CreateBoardDto } from '../dto/create-board.dto';
 
@@ -14,6 +14,7 @@ import { CreateBoardDto } from '../dto/create-board.dto';
 @ObjectType()
 export class Board extends CreateBoardDto {
     @ObjectIdColumn()
+    @Field(() => ID)
     _id: ObjectId;
 
     @Column()
