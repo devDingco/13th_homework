@@ -99,6 +99,7 @@ export interface IconProps {
   width?: string;
   height?: string;
   fill?: string;
+  viewBox?: string;
 }
 // <Icon icon="location" className="fill-gray-500 w-fit" />
 function Icon({
@@ -107,6 +108,7 @@ function Icon({
   width,
   height,
   fill,
+  viewBox,
 }: IconProps): JSX.Element {
   const SVGIcon = icons[icon];
   return (
@@ -115,6 +117,7 @@ function Icon({
         width={width}
         height={height}
         fill={fill}
+        viewBox={viewBox || "0 0 24 24"}
         className="fill-inherit"
       />
     </span>
