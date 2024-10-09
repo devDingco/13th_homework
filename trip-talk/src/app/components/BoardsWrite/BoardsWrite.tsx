@@ -5,7 +5,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import { IBoardsWriteHook } from "../../../types/components.type";
-import { BOARDS_WRITE } from "../../../enums/constants";
+import { BOARDS_WRITE } from "../../../constants/constants";
 import { usePathname } from "next/navigation";
 import TextArea from "../TextArea/TextArea";
 import useBoardsWrite from "../../../commons/hooks/useBoardsWrite";

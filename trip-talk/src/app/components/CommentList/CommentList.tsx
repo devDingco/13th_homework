@@ -1,6 +1,6 @@
 "use client";
 
-import { COMMENT_FORM } from "../../../enums/constants";
+import { COMMENT_FORM } from "../../../constants/constants";
 import styles from "./styles.module.css";
 import Comment from "../Comment/Comment";
 import useCommentList from "../../../commons/hooks/useCommentList";

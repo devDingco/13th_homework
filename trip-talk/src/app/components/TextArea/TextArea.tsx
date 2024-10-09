@@ -1,4 +1,4 @@
-import { PLACEHOLDERS } from "../../../enums/constants";
+import { PLACEHOLDERS } from "../../../constants/constants";
 import { ITextArea } from "../../../types/components.type";
 
 export default function TextArea({

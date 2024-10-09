@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { IButtonProps } from "../../../types/components.type";
-import { BUTTON } from "../../../enums/constants";
+import { BUTTON } from "../../../constants/constants";
 
 export default function Button({ id, disabled, color }: IButtonProps) {
   const colorVariants = {

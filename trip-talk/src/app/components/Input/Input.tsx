@@ -1,4 +1,4 @@
-import { INPUT_CHILDREN, PLACEHOLDERS } from "../../../enums/constants";
+import { INPUT_CHILDREN, PLACEHOLDERS } from "../../../constants/constants";
 import { IInputProps } from "../../../types/components.type";
 import styles from "./styles.module.css";
 
