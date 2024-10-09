@@ -35,7 +35,14 @@ export default function Board(props: IBoardProps) {
               </div>
               <div className={props.styles.boardSide}>
                 <div className={props.styles.boardName}>{el.writer}</div>
-                <div className={props.styles.boardDate}>{el.createdAt}</div>
+                <div className={props.styles.boardDate}>
+                  {new Date(el.createdAt).toLocaleDateString()}
+                  {/* 
+                  el.createdAt: "2023-10-08T12:34:56.789Z"으로 전달받음
+                  new Date(el.createdAt): JS에 있는 Date객체로 변환했음
+                  .toLocaleDateString(): Date 객체의 메서드라서 2024.11.11으로 변환해줌.
+                  */}
+                </div>
               </div>
               <span onClick={onClickDelete}>
                 <Image

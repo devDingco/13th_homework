@@ -1,7 +1,18 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
+import useBoardsCommentWrite from "./hook";
 
 export default function BoardsDetailCommentWrite() {
+  const {
+    onChangeName,
+    onChangePassword,
+    onChangeContent,
+    onCLickComment,
+    name,
+    password,
+    content,
+  } = useBoardsCommentWrite();
+
   return (
     <>
       <main>
@@ -68,8 +79,10 @@ export default function BoardsDetailCommentWrite() {
               </div>
               <input
                 className={styles.inputRequired}
-                type="type"
+                type="text"
                 placeholder="작성자 명을 입력해 주세요."
+                onChange={onChangeName}
+                value={name}
               />
             </div>
             <div className={styles.commentSectionWriter}>
@@ -81,6 +94,8 @@ export default function BoardsDetailCommentWrite() {
                 className={styles.inputRequired}
                 type="password"
                 placeholder="비밀번호를 입력해 주세요."
+                onChange={onChangePassword}
+                value={password}
               />
             </div>
           </div>
@@ -88,11 +103,15 @@ export default function BoardsDetailCommentWrite() {
             <textarea
               className={styles.textareaContents}
               placeholder="댓글을 입력해 주세요."
+              onChange={onChangeContent}
+              value={content}
             />
-            <div>0 / 100</div>
+            <div>{content.length} / 100</div>
           </div>
           <div className={styles.btnSection}>
-            <button className={styles.commentSubmit}>댓글 등록</button>
+            <button className={styles.commentSubmit} onClick={onCLickComment}>
+              댓글 등록
+            </button>
           </div>
           <div className={styles.noComment}>
             <span>등록된 댓글이 없습니다.</span>
