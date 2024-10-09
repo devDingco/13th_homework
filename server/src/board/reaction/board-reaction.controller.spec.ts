@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ReactionController } from './reaction.controller';
-import { ReactionService } from './reaction.service';
+import { ReactionController } from './board-reaction.controller';
+import { ReactionService } from './board-reaction.service';
 
 describe('ReactionController', () => {
     let controller: ReactionController;

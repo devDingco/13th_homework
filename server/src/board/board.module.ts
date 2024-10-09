@@ -4,13 +4,13 @@ import { BoardCommentRepository } from './board-comment/board-comment.repository
 import { BoardController } from './board.controller';
 import { BoardIdCounter } from './entities/board-boardId.entity';
 import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
-import { BoardReaction } from './reaction/entities/reaction.entity';
+import { BoardReaction } from './reaction/entities/board-reaction.entity';
+import { BoardReactionModule } from './reaction/board-reaction.module';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repositories/board.repository';
 import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
 import { Module } from '@nestjs/common';
-import { ReactionModule } from './reaction/reaction.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             BoardReaction,
             BoardComment,
         ]),
-        ReactionModule,
+        BoardReactionModule,
     ],
     controllers: [BoardController],
     providers: [

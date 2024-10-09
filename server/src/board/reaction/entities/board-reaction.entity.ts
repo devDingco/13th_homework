@@ -13,6 +13,7 @@ import { ObjectId } from 'mongodb';
 @ObjectType()
 export class BoardReaction {
     @ObjectIdColumn()
+    @Field(() => ID)
     _id: ObjectId;
 
     @Column()

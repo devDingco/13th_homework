@@ -1,7 +1,7 @@
 import { MongoRepository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardReaction } from '../entities/reaction.entity';
+import { BoardReaction } from '../entities/board-reaction.entity';
 
 @Injectable()
 export class BoardReactionRepository {
