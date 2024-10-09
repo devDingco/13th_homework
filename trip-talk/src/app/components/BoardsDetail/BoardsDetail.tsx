@@ -67,14 +67,10 @@ export default function BoardsDetail() {
       </div>
       <div className={styles.button_layout}>
         <Link href={"/boards"}>
-          <Button color="white" src="/svgs/menu.svg" alt="menu">
-            목록으로
-          </Button>
+          <Button color="white" id="list" />
         </Link>
         <Link href={`${boardId}/edit`}>
-          <Button color="white" src="/svgs/edit.svg" alt="edit">
-            수정하기
-          </Button>
+          <Button color="white" id="edit" />
         </Link>
       </div>
     </div>
