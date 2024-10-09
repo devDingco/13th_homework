@@ -23,7 +23,7 @@ export interface IModalProps {
 export interface IDeatilProps {
 	params: IboardId;
 }
-export interface IDeatilPageProps {
+export interface IDeatilPageProps extends IDeatilProps {
 	searchParams: IModalEditBoard;
 }
 
