@@ -1,13 +1,18 @@
-'use client'
-import { useBoardsWrite } from './hook'
-import styles from './style.module.css'
-import Image from 'next/image'
-import { IBoardWriteprops } from './type'
+"use client";
+import { useBoardsWrite } from "./hook";
+import styles from "./style.module.css";
+import Image from "next/image";
+import { IBoardWriteprops } from "./type";
 
-
-
-const BoardsWrite = (props:IBoardWriteprops) => {
-  const {authorOnChange, passwordOnChange, titleOnChange, contentOnChange, signupButtonHandler, isAllFilled} = useBoardsWrite(props)
+const BoardsWrite = (props: IBoardWriteprops) => {
+  const {
+    authorOnChange,
+    passwordOnChange,
+    titleOnChange,
+    contentOnChange,
+    signupButtonHandler,
+    isAllFilled,
+  } = useBoardsWrite(props);
 
   return (
     <div className={styles.container}>
@@ -39,7 +44,7 @@ const BoardsWrite = (props:IBoardWriteprops) => {
                 비밀번호 <span className={styles.emphasize}>*</span>{" "}
               </label>
               <input
-              className={styles.input1}
+                className={styles.input1}
                 type="password"
                 onChange={passwordOnChange}
                 disabled={props.isEdit}
@@ -49,19 +54,23 @@ const BoardsWrite = (props:IBoardWriteprops) => {
               </div>
             </div>
           </div>
-  
+
           <div className={styles.box}>
             <div className={styles.labelContainer2}>
               <label>
                 제목 <span className={styles.emphasize}>*</span>{" "}
               </label>
-              <input className={styles.input2} type="text" onChange={titleOnChange} />
+              <input
+                className={styles.input2}
+                type="text"
+                onChange={titleOnChange}
+              />
               <div id="titleRedText" className={styles.errorText}>
                 필수 입력 사항입니다
               </div>
             </div>
           </div>
-  
+
           <div className={styles.box}>
             <div className={styles.labelContainer2}>
               <label>
@@ -73,7 +82,7 @@ const BoardsWrite = (props:IBoardWriteprops) => {
               </div>
             </div>
           </div>
-  
+
           <div className={styles.columnBox}>
             <label>주소</label>
             <div className={styles.zipAndButtonContainer}>
@@ -83,14 +92,14 @@ const BoardsWrite = (props:IBoardWriteprops) => {
             <input className={styles.input2} type="text" />
             <input className={styles.input2} type="text" />
           </div>
-  
+
           <div className={styles.box}>
             <div className={styles.labelContainer2}>
               <label>유튜브 링크</label>
               <input className={styles.input2} type="text" />
             </div>
           </div>
-  
+
           <div className={styles.boxEnd}>
             <div className={styles.labelContainer2}>
               <label>사진 첨부</label>
@@ -114,11 +123,13 @@ const BoardsWrite = (props:IBoardWriteprops) => {
               </div>
             </div>
           </div>
-  
+
           <div className={styles.buttonContainer}>
             <button className={styles.cancelButton}>취소</button>
             <button
-              className={isAllFilled ? styles.submitButton_active : styles.submitButton}
+              className={
+                isAllFilled ? styles.submitButton_active : styles.submitButton
+              }
               type="submit"
               onClick={signupButtonHandler}
             >
@@ -129,8 +140,6 @@ const BoardsWrite = (props:IBoardWriteprops) => {
       </div>
     </div>
   );
+};
 
-}
-
-
-export default BoardsWrite
+export default BoardsWrite;
