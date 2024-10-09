@@ -10,6 +10,7 @@ import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { ETitle } from '@/models/board.type';
 import NewInputContainer from '../../new/_components/NewInputContainer';
+import { boardUrlEndPoint } from '@/apis/config';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
@@ -25,7 +26,7 @@ export default function BoardCommentForm() {
 		error: undefined,
 	});
 
-	const { data, mutate } = useSWR(`/board/${param.boardId}/comment`, null, {
+	const { data, mutate } = useSWR(`${boardUrlEndPoint}/${param.boardId}/comment`, null, {
 		revalidateOnFocus: false,
 	});
 
