@@ -1,43 +1,37 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IBoardsWriteHook, IError } from "../../types/components.type";
+import {
+  IBoardsWriteHook,
+  IError,
+  IFormData,
+} from "../../types/components.type";
 import { CreateBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
 
-export default function UseBoardsWrite(props: IBoardsWriteHook) {
+export default function useBoardsWrite(props: IBoardsWriteHook) {
   const params = useParams();
   const router = useRouter();
-  const [writer, setWriter] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [contents, setContents] = useState<string>("");
-  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
+
+  const [formData, setFormData] = useState<IFormData>({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+    youtubeUrl: "",
+  });
+
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
-  const formAction = props.isEdit ? "수정" : "등록";
-  const disabledInput = props.isEdit ? true : false;
-  const disabledButton = props.isEdit
-    ? !(title && contents)
-    : !(writer && password && title && contents);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    switch (event.target.id) {
-      case "writer":
-        setWriter(event.target.value);
-        break;
-      case "password":
-        setPassword(event.target.value);
-        break;
-      case "title":
-        setTitle(event.target.value);
-        break;
-      case "youtubeUrl":
-        setYoutubeUrl(event.target.value);
-    }
-  };
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = event.target;
 
-  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
 
   const handleSubmitRegistration = async (
@@ -48,10 +42,10 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            writer,
-            password,
-            title,
-            contents,
+            writer: formData.writer,
+            password: formData.password,
+            title: formData.title,
+            contents: formData.contents,
           },
         },
       });
@@ -71,9 +65,9 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
       );
       const editVariables = {
         updateBoardInput: {
-          title,
-          contents,
-          youtubeUrl,
+          title: formData.title,
+          contents: formData.contents,
+          youtubeUrl: formData.youtubeUrl,
           // boardAddress: {
           //   zipcode: string,
           //   address: string,
@@ -86,8 +80,9 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
         boardId: String(params.boardId),
         password: userPassword,
       };
-      if (title) editVariables.updateBoardInput.title = title;
-      if (contents) editVariables.updateBoardInput.contents = contents;
+      if (formData.title) editVariables.updateBoardInput.title = formData.title;
+      if (formData.contents)
+        editVariables.updateBoardInput.contents = formData.contents;
 
       const result = await updateBoard({
         variables: editVariables,
@@ -95,6 +90,7 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
       alert("수정 완료");
       router.push(`/boards/${result.data?.updateBoard._id}`);
       router.refresh();
+      // refetch
     } catch (error: unknown) {
       const err = error as IError;
       console.error(err);
@@ -108,15 +104,8 @@ export default function UseBoardsWrite(props: IBoardsWriteHook) {
   const onSubmit = props.isEdit ? handleSubmitEdit : handleSubmitRegistration;
 
   return {
-    formAction,
-    disabledInput,
-    disabledButton,
     handleInputChange,
-    handleContentChange,
     onSubmit,
-    writer,
-    password,
-    title,
-    contents,
+    formData,
   };
 }
