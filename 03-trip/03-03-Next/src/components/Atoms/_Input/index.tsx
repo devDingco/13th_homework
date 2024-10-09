@@ -1,17 +1,25 @@
 "use client";
 
+import useSubmitInput from "@/commons/hooks/useSubmitInput";
+import { InputPlaceholder } from "@/commons/types/types";
+
 export const Input = function CompInput({ ...props }) {
-    const { id, placeholder, onChange, textarea } = props;
+    const { id, textarea } = props;
+    const { handleChange } = useSubmitInput;
 
     return (
         <>
             {!textarea ? (
-                <input id={id} placeholder={placeholder} onChange={onChange} />
+                <input
+                    id={id}
+                    placeholder={InputPlaceholder[id]}
+                    onChange={handleChange}
+                />
             ) : (
                 <textarea
                     id={id}
-                    placeholder={placeholder}
-                    onChange={onChange}
+                    placeholder={InputPlaceholder[id]}
+                    onChange={handleChange}
                 ></textarea>
             )}
         </>

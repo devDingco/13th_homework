@@ -25,6 +25,7 @@ export default function BoardsListUI() {
                     Router.push(`/boards/new`);
                 }}
             />
+
             <div className={styles.post_list}>
                 <div className={styles.label_wrapper}>
                     <div className={styles.idx}>번호</div>

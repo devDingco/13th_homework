@@ -1,11 +1,12 @@
 "use client";
 
+import { Rate } from "antd";
+
 import Btn from "@/components/Atoms/_Btn";
 import InputField from "@/components/Molecules/_InputField";
-import Image from "next/image";
 
+import Image from "next/image";
 import chat from "/public/svg/chat.svg";
-import StarBox from "@/components/Molecules/_StarBox";
 
 export default function CommentNewUI() {
     return (
@@ -22,23 +23,19 @@ export default function CommentNewUI() {
                 <label>댓글</label>
             </div>
 
-            <div style={{ display: "flex" }}>
-                <StarBox />
-            </div>
+            <Rate />
+            <br />
+            <br />
 
             <div style={{ display: "flex", gap: "20px" }}>
-                <InputField
-                    innerText="작성자"
-                    placeholder="작성자 명을 입력해 주세요."
-                    required
-                />
-                <InputField
-                    innerText="비밀번호"
-                    placeholder="비밀번호를 입력해 주세요."
-                    required
-                />
+                <InputField id="author_ID" required />
+                <InputField id="password_ID" required />
             </div>
+            <br />
+
             <textarea></textarea>
+            <br />
+            <br />
 
             <Btn value="등록하기" />
         </div>
