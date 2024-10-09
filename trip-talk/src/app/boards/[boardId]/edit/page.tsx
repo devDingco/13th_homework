@@ -10,9 +10,5 @@ export default function BoardsEdit() {
   const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId: String(params.boardId) },
   });
-  return (
-    <>
-      <BoardsWrite isEdit={true} data={data} />
-    </>
-  );
+  return <BoardsWrite isEdit={true} data={data} />;
 }

@@ -11,19 +11,17 @@ export default function Button({ id, disabled, color }: IButtonProps) {
   };
 
   return (
-    <>
-      <button
-        id={id}
-        type={id.includes("submit") ? "submit" : undefined}
-        disabled={disabled}
-        className={`${styles.button} ${colorVariants[color]}`}
-      >
-        {BUTTON[id]}
-        {id === "menu" ||
-          ((id === "edit" || id === "list") && (
-            <Image src={`/svgs/${id}.svg`} alt={id} width={24} height={24} />
-          ))}
-      </button>
-    </>
+    <button
+      id={id}
+      type={id.includes("submit") ? "submit" : undefined}
+      disabled={disabled}
+      className={`${styles.button} ${colorVariants[color]}`}
+    >
+      {BUTTON[id]}
+      {id === "menu" ||
+        ((id === "edit" || id === "list") && (
+          <Image src={`/svgs/${id}.svg`} alt={id} width={24} height={24} />
+        ))}
+    </button>
   );
 }
