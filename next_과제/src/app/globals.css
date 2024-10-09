@@ -5,6 +5,10 @@
 :root {
   --noto-sans-kr: "Noto Sans KR";
   --roboto: "Roboto";
+  --bg-dark: #141414;
+  --bg-light: #f5f5f5;
+  --text-dark: #f5f5f5;
+  --text-light: #141414;
 }
 
 @layer utilities {
@@ -29,7 +33,7 @@
     @apply fill-current w-full h-full overflow-hidden;
   }
   .iconSvg > svg > path {
-    @apply fill-inherit;
+    @apply fill-inherit w-full h-full;
   }
 
   .toolTip {
@@ -48,6 +52,11 @@
   #writeContents {
     @apply h-96 flex flex-col;
   }
+}
+
+.dark body {
+  color: var(--text-dark);
+  background-color: var(--bg-dark);
 }
 
 body {
