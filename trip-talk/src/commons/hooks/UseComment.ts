@@ -1,6 +1,6 @@
 import { ICommentList } from "../../types/components.type";
 
-export default function UseComment(props: ICommentList) {
+export default function useComment(props: ICommentList) {
   const { writer, contents, createdAt } = props;
   const onClickEditComment = () => {
     // edit!

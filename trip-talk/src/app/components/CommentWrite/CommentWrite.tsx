@@ -3,13 +3,13 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Input from "../Input/Input";
-import UseCommentWrite from "../../../commons/hooks/UseCommentWrite";
 import Button from "../Button/Button";
 import TextArea from "../TextArea/TextArea";
+import useCommentWrite from "../../../commons/hooks/useCommentWrite";
 
 export default function CommentWrite() {
   const { handleCommentSubmit, handleInputChange, disabledButton, comment } =
-    UseCommentWrite();
+    useCommentWrite();
 
   return (
     <>

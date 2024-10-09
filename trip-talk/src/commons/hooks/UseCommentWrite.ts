@@ -1,10 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { CreateBoardCommentDocument, FetchBoardCommentsDocument } from "../graphql/graphql";
+import {
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from "../graphql/graphql";
 import { useParams } from "next/navigation";
 import { ICommentFormData } from "../../types/components.type";
 
-export default function UseCommentWrite() {
+export default function useCommentWrite() {
   const [commentFormData, setCommentFormData] = useState<ICommentFormData>({
     writer: "",
     password: "",

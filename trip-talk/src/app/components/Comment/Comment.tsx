@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ICommentList } from "../../../types/components.type";
-import UseComment from "../../../commons/hooks/UseComment";
 import styles from "./styles.module.css";
+import useComment from "../../../commons/hooks/useComment";
 
 export default function Comment(props: ICommentList) {
   const {
@@ -10,7 +10,7 @@ export default function Comment(props: ICommentList) {
     writer,
     contents,
     createdAt,
-  } = UseComment(props);
+  } = useComment(props);
 
   return (
     <>

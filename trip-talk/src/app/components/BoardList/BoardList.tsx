@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { IBoardList } from "../../../types/board.type";
-import useBoardsList from "../../../commons/hooks/UseBoardList";
+import useBoardsList from "../../../commons/hooks/useBoardList";
 
 export default function BoardList(props: IBoardList) {
   const { onClickBoard, onCLickDelete } = useBoardsList(props.id);

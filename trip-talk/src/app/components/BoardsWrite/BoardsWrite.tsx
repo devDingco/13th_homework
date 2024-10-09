@@ -8,7 +8,7 @@ import { IBoardsWriteHook } from "../../../types/components.type";
 import { BOARDS_WRITE } from "../../../enums/constants";
 import { usePathname } from "next/navigation";
 import TextArea from "../TextArea/TextArea";
-import useBoardsWrite from "../../../commons/hooks/UseBoardsWrite";
+import useBoardsWrite from "../../../commons/hooks/useBoardsWrite";
 
 export default function BoardsWrite(props: IBoardsWriteHook) {
   const { handleInputChange, onSubmit, formData } = useBoardsWrite(props);

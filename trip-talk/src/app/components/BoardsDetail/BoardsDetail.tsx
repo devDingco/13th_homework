@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
 import styles from "./styles.module.css";
-import UseBoardsDetail from "../../../commons/hooks/UseBoardsDetail";
+import useBoardsDetail from "../../../commons/hooks/useBoardsDetail";
 
 export default function BoardsDetail() {
   const { boardId, boardWriter, boardTitle, boardContents, boardCreatedAt } =
-    UseBoardsDetail();
+    useBoardsDetail();
   return (
     <div className={styles.layout}>
       <div className={styles.title}>{boardTitle}</div>

@@ -3,10 +3,10 @@
 import { COMMENT_FORM } from "../../../enums/constants";
 import styles from "./styles.module.css";
 import Comment from "../Comment/Comment";
-import UseCommentList from "../../../commons/hooks/UseCommentList";
+import useCommentList from "../../../commons/hooks/useCommentList";
 
 export default function CommentList() {
-  const { data } = UseCommentList();
+  const { data } = useCommentList();
 
   return (
     <>
