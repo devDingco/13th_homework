@@ -28,6 +28,8 @@ export const useBoardsWrite = () => {
   const router = useRouter();
   const params = useParams();
 
+  const boardId = params.boardId as string;
+
   const onChangeInput = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -108,7 +110,7 @@ export const useBoardsWrite = () => {
       const variables: UpdateBoardMutationVariables = {
         updateBoardInput: {},
         password: password,
-        boardId: String(params.boardId),
+        boardId: boardId,
       };
 
       // state에 값이 있으면 넣기
@@ -126,7 +128,7 @@ export const useBoardsWrite = () => {
       console.log("update: ", result);
       alert("수정 완료👍");
 
-      router.push(`/boards/${params.boardId}`);
+      router.push(`/boards/${boardId}`);
     } catch (error) {
       // error가 ApolloError 타입인 경우에만 graphQLErrors를 확인
       console.log(error);
@@ -141,7 +143,7 @@ export const useBoardsWrite = () => {
   };
 
   const onClickEditCancel = () => {
-    router.push(`/boards/${params.boardId}`);
+    router.push(`/boards/${boardId}`);
   };
 
   const onClickRegisterCancel = () => {

@@ -6,7 +6,7 @@ import Banner from "@/components/boards-list/banner";
 const BoardsListPage = () => {
   return (
     <>
-      {/* <Banner /> */}
+      <Banner />
       <BoardsList />
     </>
   );

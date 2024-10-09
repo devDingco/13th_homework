@@ -5,12 +5,19 @@ import InputField from "@/components/input";
 import styles from "./styles.module.css";
 import Button from "@/components/button";
 import Image from "next/image";
-import StarButton from "./star";
+// import StarButton from "./star";
 import { useCommentWrite } from "./hook";
+import { Rate } from "antd";
 
 const CommentWrite = () => {
-  const { onChangeInput, inputs, allInputFilled, onClickSubmit } =
-    useCommentWrite();
+  const {
+    onChangeInput,
+    commentInfo,
+    allInputFilled,
+    onClickSubmit,
+    rating,
+    setRating,
+  } = useCommentWrite();
 
   return (
     <div className={styles.comment_write_body}>
@@ -20,11 +27,7 @@ const CommentWrite = () => {
           댓글
         </div>
         <div className={styles.star_btn_box}>
-          <StarButton />
-          <StarButton />
-          <StarButton />
-          <StarButton />
-          <StarButton />
+          <Rate onChange={setRating} value={rating} />
         </div>
         <div className={styles.comment_group}>
           <div className={styles.comment_input_group}>
@@ -34,7 +37,7 @@ const CommentWrite = () => {
                   onChange={onChangeInput}
                   name="writer"
                   placeholder="작성자 명을 입력해 주세요."
-                  value={inputs.writer}
+                  value={commentInfo.writer}
                 />
               </FieldWrapper>
               <FieldWrapper label="비밀번호" isRequired={true}>
@@ -42,7 +45,7 @@ const CommentWrite = () => {
                   onChange={onChangeInput}
                   name="password"
                   placeholder="비밀번호를 입력해 주세요."
-                  value={inputs.password}
+                  value={commentInfo.password}
                 />
               </FieldWrapper>
             </div>
@@ -51,12 +54,12 @@ const CommentWrite = () => {
               name="contents"
               className={styles.comment_input}
               placeholder="댓글을 입력해 주세요."
-              value={inputs.contents}
+              value={commentInfo.contents}
             />
           </div>
           <div className={styles.btn_box}>
             <Button
-              variant={!allInputFilled ? "disabled" : "blue_active"}
+              variant={allInputFilled ? "active" : "disabled"}
               disabled={!allInputFilled}
               onClick={onClickSubmit}
             >

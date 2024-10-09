@@ -1,4 +1,5 @@
-/* .banner_image {
-  width: 961.473px;
-  height: 494px;
-} */
+.banner_image {
+  object-fit: cover;
+  width: 100%;
+  height: 516px;
+}

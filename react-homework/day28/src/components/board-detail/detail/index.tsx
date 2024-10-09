@@ -3,6 +3,10 @@ import styles from "./styles.module.css";
 import { useBoardsDetail } from "./hook";
 import Link from "next/link";
 
+import likeButton from "@mui/icons-material/FavoriteBorder";
+import { IconButton, SvgIcon } from "@mui/material";
+import dislikeButton from "@mui/icons-material/HeartBrokenOutlined";
+
 const BoardsDetail = () => {
   const { params, data } = useBoardsDetail();
 
@@ -71,51 +75,39 @@ const BoardsDetail = () => {
           />
         </div>
         <div className={styles.reaction_btn_group}>
-          <div className={styles.bad_btn_group}>
-            <button className={styles.bad_btn}>
-              <Image
-                src="/images/bad.png"
-                alt="bad-button"
-                width={24}
-                height={24}
-              />
-            </button>
-            <div className={styles.bad_count}>10</div>
+          <div className={styles.dislike_btn_group}>
+            {/* 싫어요 버튼 */}
+            <IconButton>
+              <SvgIcon component={dislikeButton} sx={{ color: "#5f5f5f" }} />
+            </IconButton>
+            <div className={styles.dislike_count}>10</div>
           </div>
-          <div className={styles.good_btn_group}>
-            <button className={styles.good_btn}>
-              <Image
-                src="/images/good.png"
-                alt="good-button"
-                width={24}
-                height={24}
-              />
-            </button>
-            <div className={styles.good_count}>10</div>
+          <div className={styles.like_btn_group}>
+            {/* 좋아요 버튼 */}
+            <IconButton>
+              <SvgIcon component={likeButton} sx={{ color: "#f66a6a" }} />
+            </IconButton>
+            <div className={styles.like_count}>10</div>
           </div>
         </div>
         <div className={styles.list_edit_btn_group}>
-          <Link href={"/boards"}>
-            <button className={styles.list_btn}>
-              <Image
-                src="/images/list.png"
-                alt="list-button"
-                width={24}
-                height={24}
-              />
-              목록으로
-            </button>
+          <Link href={"/boards"} className={styles.list_btn}>
+            <Image
+              src="/images/list.png"
+              alt="list-button"
+              width={24}
+              height={24}
+            />
+            목록으로
           </Link>
-          <Link href={`./${params.boardId}/edit`}>
-            <button className={styles.edit_btn}>
-              <Image
-                src="/images/edit.png"
-                alt="edit-button"
-                width={24}
-                height={24}
-              />
-              <span>수정하기</span>
-            </button>
+          <Link href={`./${params.boardId}/edit`} className={styles.edit_btn}>
+            <Image
+              src="/images/edit.png"
+              alt="edit-button"
+              width={24}
+              height={24}
+            />
+            <span>수정하기</span>
           </Link>
         </div>
       </div>

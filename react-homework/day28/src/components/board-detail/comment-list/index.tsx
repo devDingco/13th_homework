@@ -10,7 +10,7 @@ const CommentList = () => {
         {comments.length > 0 ? (
           <Comment comments={comments} />
         ) : (
-          <p className={styles.no_comments}>등록된 댓글이 없습니다.</p>
+          <div className={styles.no_comments}>등록된 댓글이 없습니다.</div>
         )}
       </div>
     </div>
