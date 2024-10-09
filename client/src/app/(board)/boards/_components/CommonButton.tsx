@@ -41,7 +41,8 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				onClickBack();
 				break;
 			case EButtonTitle.Sumbit:
-				// Submit logic goes here
+				// 현재 업데이트하면 그 이후 로직은 짜지 않았음
+				// 추후 업데이트할 예정
 				break;
 			default:
 				break;

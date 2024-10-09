@@ -16,12 +16,12 @@ export default function BoardCarousel() {
 	return (
 		<div className="mx-auto">
 			<Carousel
-				className="w-full"
-				plugins={[
-					Autoplay({
-						delay: 4000,
-					}),
-				]}
+				className="flex w-full justify-center"
+				// plugins={[
+				// 	Autoplay({
+				// 		delay: 4000,
+				// 	}),
+				// ]}
 			>
 				<CarouselContent>
 					{[...Array(3)].map((_, index) => {
