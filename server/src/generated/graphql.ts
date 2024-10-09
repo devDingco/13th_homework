@@ -35,7 +35,7 @@ export type Scalars = {
     Boolean: { input: boolean; output: boolean };
     Int: { input: number; output: number };
     Float: { input: number; output: number };
-    DateTime: { input: any; output: any };
+    DateTime: { input: string; output: string };
 };
 
 export type BoardCommentResponse = {
@@ -183,7 +183,12 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
     resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+export type Resolver<
+    TResult,
+    TParent = unknown,
+    TContext = unknown,
+    TArgs = unknown,
+> =
     | ResolverFn<TResult, TParent, TContext, TArgs>
     | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
@@ -247,22 +252,22 @@ export type SubscriptionObject<
 export type SubscriptionResolver<
     TResult,
     TKey extends string,
-    TParent = {},
-    TContext = {},
-    TArgs = {},
+    TParent = unknown,
+    TContext = unknown,
+    TArgs = unknown,
 > =
     | ((
           ...args: any[]
       ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
     | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
+export type TypeResolveFn<TTypes, TParent = unknown, TContext = unknown> = (
     parent: TParent,
     context: TContext,
     info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+export type IsTypeOfResolverFn<T = unknown, TContext = unknown> = (
     obj: T,
     context: TContext,
     info: GraphQLResolveInfo,
@@ -271,10 +276,10 @@ export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
 export type NextResolverFn<T> = () => Promise<T>;
 
 export type DirectiveResolverFn<
-    TResult = {},
-    TParent = {},
-    TContext = {},
-    TArgs = {},
+    TResult = unknown,
+    TParent = unknown,
+    TContext = unknown,
+    TArgs = unknown,
 > = (
     next: NextResolverFn<TResult>,
     parent: TParent,
@@ -294,8 +299,8 @@ export type ResolversTypes = {
     DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
     ID: ResolverTypeWrapper<Scalars['ID']['output']>;
     Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-    Mutation: ResolverTypeWrapper<{}>;
-    Query: ResolverTypeWrapper<{}>;
+    Mutation: ResolverTypeWrapper<unknown>;
+    Query: ResolverTypeWrapper<unknown>;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
     UpdateBoardCommentDto: UpdateBoardCommentDto;
     UpdateBoardDto: UpdateBoardDto;
@@ -312,8 +317,8 @@ export type ResolversParentTypes = {
     DateTime: Scalars['DateTime']['output'];
     ID: Scalars['ID']['output'];
     Int: Scalars['Int']['output'];
-    Mutation: {};
-    Query: {};
+    Mutation: unknown;
+    Query: unknown;
     String: Scalars['String']['output'];
     UpdateBoardCommentDto: UpdateBoardCommentDto;
     UpdateBoardDto: UpdateBoardDto;

@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://localhost:8080/graphql'
+schema: 'http://172.16.2.165:8080/graphql'
 documents: 'src/graphql/**/*.graphql'
 
 generates:
@@ -7,3 +7,8 @@ generates:
         plugins:
             - 'typescript'
             - 'typescript-resolvers'
+config:
+    scalars:
+        DateTime:
+            input: string
+            output: string
