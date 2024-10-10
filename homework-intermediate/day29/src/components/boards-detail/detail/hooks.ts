@@ -10,6 +10,9 @@ export default function useBoardsDeatil() {
     variables: { boardId: String(params.boardId) },
   });
   console.log('🚀 ~ useBoardsDeatil ~ data:', data);
+  if (data?.fetchBoard.youtubeUrl) {
+    console.log(new URL(data?.fetchBoard?.youtubeUrl).searchParams.get('v'));
+  }
 
   return {
     boardId: String(params.boardId),

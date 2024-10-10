@@ -9,6 +9,8 @@ import CommentList from '../comment-list';
 import { useQuery } from '@apollo/client';
 import { FetchBoardCommentsDocument } from '@/commons/graphql/graphql';
 import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+import YouTube from 'react-youtube';
 
 const IMAGE_SRC = {
   profileImage: {
@@ -68,7 +70,7 @@ export default function BaordDeatil() {
                 src={IMAGE_SRC.profileImage.src}
                 alt={IMAGE_SRC.profileImage.alt}
               />
-              <div> {data?.fetchBoard?.writer}</div>
+              <div>{data?.fetchBoard?.writer}</div>
             </div>
             <div className={styles.detailMetadataDate}>
               {new Date(data?.fetchBoard?.createdAt).toLocaleString('ko-KR', {
@@ -82,10 +84,15 @@ export default function BaordDeatil() {
               src={IMAGE_SRC.linkImage.src}
               alt={IMAGE_SRC.linkImage.alt}
             />
-            <Image
-              src={IMAGE_SRC.locationImage.src}
-              alt={IMAGE_SRC.locationImage.alt}
-            />
+            <Tooltip
+              placement="bottom"
+              title={data?.fetchBoard.boardAddress?.address}
+            >
+              <Image
+                src={IMAGE_SRC.locationImage.src}
+                alt={IMAGE_SRC.locationImage.alt}
+              />
+            </Tooltip>
           </div>
           <div className="flex flex-col gap-6 w-full">
             <Image
@@ -96,10 +103,23 @@ export default function BaordDeatil() {
             <div className={styles.detailContentText}>
               {data?.fetchBoard?.contents}
             </div>
-            <Image
+            {/* <Image
               src={IMAGE_SRC.neotubeImage.src}
               alt={IMAGE_SRC.neotubeImage.alt}
-            />
+            /> */}
+
+            {data?.fetchBoard?.youtubeUrl && (
+              <YouTube
+                videoId={new URL(data?.fetchBoard?.youtubeUrl).searchParams.get(
+                  'v'
+                )}
+                opts={{
+                  width: '100%',
+                  height: '720px',
+                }}
+              />
+              // <iframe src={data?.fetchBoard?.youtubeUrl}></iframe>
+            )}
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
                 {/* <Image
