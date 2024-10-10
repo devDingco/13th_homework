@@ -25,7 +25,8 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     register,
     getValues,
     setValue,
-    formState: { isDirty, isValid },
+    control,
+    formState: { isDirty, isValid, errors },
   } = useForm<IcommentForm>({
     mode: "onChange",
   });
@@ -49,13 +50,22 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
   // !댓글 등록
   const commentNew = async () => {
-    const { commentWriter, commentPassword, commentContents } = getValues();
+    const { commentWriter, commentPassword, commentContents, commentRating } =
+      getValues();
+
+    console.log(getValues());
+
+    // 입력된 값이 없을 경우
+    if (!commentWriter || !commentPassword || !commentContents) {
+      return alert("모든 항목을 입력해 주세요.");
+    }
+
     const newCommentData = {
       createBoardCommentInput: {
         writer: "",
         password: "",
         contents: "",
-        rating: 30,
+        rating: 0,
       },
       boardId: String(params.boardId),
     };
@@ -65,6 +75,8 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       newCommentData.createBoardCommentInput.password = commentPassword;
     if (commentContents)
       newCommentData.createBoardCommentInput.contents = commentContents;
+    if (commentRating > 0)
+      newCommentData.createBoardCommentInput.rating = commentRating;
 
     const result = await createBoardComment({
       variables: newCommentData,
@@ -77,10 +89,12 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     });
     console.log(result);
     alert("댓글이 등록되었습니다.");
+
     // 입력창 초기화
     setValue("commentWriter", "");
     setValue("commentPassword", "");
     setValue("commentContents", "");
+    setValue("commentRating", 0);
   };
 
   // !댓글 수정 최종 저장
@@ -129,5 +143,9 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     commentEdit,
     isDirty,
     isValid,
+    errors,
+    editModeCancel,
+    control,
+    setValue,
   };
 };

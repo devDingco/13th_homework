@@ -1,9 +1,12 @@
 "use client";
-import StarCountBox from "@/components/starCountBox";
+// import StarCountBox from "@/components/starCountBox";
+
 import Icon from "@/components/iconFactory";
 import Input from "@/components/input";
 import { IcommentWriteProps } from "@/components/board-detail/comment-write/types";
 import { useCommentWrite } from "@/components/board-detail/comment-write/hook";
+import { Rate, Button } from "antd";
+import { Controller } from "react-hook-form";
 
 export default function CommentWrite(props: IcommentWriteProps) {
   const {
@@ -27,6 +30,10 @@ export default function CommentWrite(props: IcommentWriteProps) {
     commentEdit,
     isDirty,
     isValid,
+    errors,
+    editModeCancel,
+    control,
+    setValue,
   } = useCommentWrite({ setMode, mode, commentIndex, data });
 
   return (
@@ -37,33 +44,60 @@ export default function CommentWrite(props: IcommentWriteProps) {
           {title}
         </div>
       )}
-      {starCountBox && <StarCountBox />}
-      <div className="flex justify-start gap-6 w-1/2">
+      {starCountBox && (
+        <Controller
+          name="commentRating"
+          control={control}
+          render={({ field }) => (
+            <Rate
+              allowHalf
+              defaultValue={type === "commentEdit" ? data?.rating : 0}
+              onChange={(value) => {
+                field.onChange(value);
+                setValue("commentRating", value);
+              }}
+            />
+          )}
+        />
+      )}
+      <div className="flex justify-start gap-6 w-2/3">
         <Input
           title="작성자"
           type="text"
+          required
           placeholder="작성자 명을 입력해 주세요"
           defaultValue={type === "commentEdit" ? data?.writer : ""}
-          {...register("commentWriter", { required: true, minLength: 2 })}
+          {...register("commentWriter", {
+            required: "필수 입력 사항입니다.",
+            minLength: { value: 2, message: "작성자명은 2자 이상입니다." },
+          })}
+          errormessage={errors?.commentWriter?.message}
+          readOnly={type === "commentEdit"}
         />
         <Input
           title="비밀번호"
           type="password"
-          placeholder={"비밀번호를 입력해 주세요"}
-          {...register("commentPassword", { required: true, minLength: 4 })}
+          required
+          placeholder={
+            type === "commentEdit"
+              ? "댓글 작성시 등록한 비밀번호를 입력해주세요"
+              : "비밀번호를 입력해 주세요"
+          }
+          {...register("commentPassword", {
+            required: "필수 입력 사항입니다.",
+            minLength: { value: 4, message: "비밀번호는 4자 이상 입니다" },
+          })}
+          errormessage={errors?.commentPassword?.message}
         />
       </div>
       <label htmlFor={id} className="relative">
         <textarea
           className="w-full h-36 py-3 px-4 border border-gray-300 rounded-lg block resize-none"
-          // name={id} // ! 아이디가 중복될수 있으므로 고유값 다시 설정 필요
           placeholder={placeholder}
-          // maxLength={textMaxCount}
-          // minLength={1}
           defaultValue={type === "commentEdit" ? data?.contents : ""} // ! 수정할 댓글 내용 및 댓글 작성시 초기값 설정
           {...register("commentContents", {
             required: true,
-            minLength: 1,
+            minLength: { value: 1, message: "내용은 1자 이상입니다." },
             maxLength: textMaxCount,
             onChange(event) {
               setTextCount(event.target.value.length);
@@ -77,24 +111,36 @@ export default function CommentWrite(props: IcommentWriteProps) {
       </label>
       {type === "commentEdit" ? (
         <div className="flex justify-end gap-3">
-          <button className="btn btn-outline" onClick={() => editModeCancel()}>
+          <Button
+            color="default"
+            variant="outlined"
+            size="large"
+            className="btn btn-outline"
+            onClick={() => editModeCancel()}
+          >
             취소
-          </button>
-          <button
+          </Button>
+          <Button
+            color="default"
+            variant="solid"
+            size="large"
             className="btn btn-accent-content"
             onClick={() => commentEdit()}
           >
             수정하기
-          </button>
+          </Button>
         </div>
       ) : (
-        <button
+        <Button
+          type="default"
+          shape="default"
+          size="large"
           className="btn btn-neutral self-end"
           onClick={() => commentNew()}
           disabled={!isDirty || !isValid}
         >
           댓글 등록
-        </button>
+        </Button>
       )}
     </div>
   );
