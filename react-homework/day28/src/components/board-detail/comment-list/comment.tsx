@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { CommentProps } from "./type";
+import { Rate } from "antd";
 
 const Comment = ({ comments }: CommentProps) => {
   console.log("comment list: ", comments);
@@ -19,7 +20,7 @@ const Comment = ({ comments }: CommentProps) => {
                 />
                 <div>{comment.writer}</div>
               </div>
-              <div>별점: {comment.rating}</div>
+              <Rate disabled defaultValue={comment.rating} />
             </div>
             <div className={styles.btn_box}>
               <Image

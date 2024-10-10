@@ -1,8 +1,19 @@
+.comment_list_body {
+  display: flex;
+  justify-content: center;
+}
+
+.comment_list {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+}
+
 .comment_box {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   padding: 40px 0;
+  gap: 8px;
   border-bottom: solid 1px #e4e4e4;
 }
 
@@ -51,5 +62,5 @@
   text-align: center;
   font-size: 14px;
   font-weight: 400;
-  margin-top: 40px;
+  padding: 40px 0;
 }
