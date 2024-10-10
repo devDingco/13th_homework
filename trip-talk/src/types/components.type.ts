@@ -1,4 +1,4 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { ChangeEvent, ChangeEventHandler } from "react";
 import { FetchBoardQuery } from "../commons/graphql/graphql";
 
 export interface IBoardsWriteHook {
@@ -15,12 +15,7 @@ export interface IBoardsWrite {
   onSubmit: void;
 }
 export interface IInputProps {
-  isLabel: boolean;
-  children?: ReactNode;
-  isRequired: boolean;
-  id?: string;
-  type: string;
-  placeholder: string;
+  id: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
   disabled?: boolean;
@@ -28,12 +23,9 @@ export interface IInputProps {
 }
 
 export interface IButtonProps {
-  type?: "submit";
+  id: string;
   disabled?: boolean;
-  children: ReactNode;
   color: "blue" | "gray" | "white";
-  src?: string;
-  alt?: string;
 }
 
 export interface IError {
@@ -56,4 +48,41 @@ export interface ICommentList {
   createdAt: string;
   number: number;
   _id: string;
+}
+
+export interface IFormData {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+  youtubeUrl: string;
+}
+
+export interface ICommentFormData {
+  writer: string;
+  password: string;
+  contents: string;
+  rating: number;
+}
+
+export interface ITextArea {
+  id: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  value?: string;
+  defaultValue?: string | undefined;
+}
+
+export type EnumType = {
+  [key: string]: string;
+};
+
+export interface IImageName {
+  list: string;
+  edit: string;
+}
+
+export type TRecord = Record<string, string>;
+
+export interface ICustomImage {
+  image: string;
 }
