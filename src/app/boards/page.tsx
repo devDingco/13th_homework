@@ -12,7 +12,7 @@ const IMAGE_SRC = {
   },
 };
 const FETCH_BOARDS = gql`
-  query {
+  query fetchBoards{
     fetchBoards {
       _id
       writer
@@ -52,10 +52,10 @@ interface IBoardList {
 
 export default function BoardsPage() {
   const [hoveredId, setHoveredId] = useState("");
-  const { data } = useQuery(FETCH_BOARDS);
+  const { data: boardsData } = useQuery(FETCH_BOARDS);
 
   const [deleteBoard] = useMutation(DELETE_BOARD);
-  console.log("boards 페이지에서 data.fetchBoards::::", data?.fetchBoards);
+  console.log("boards 페이지에서 data.fetchBoards::::", boardsData?.fetchBoards);
 
   const router = useRouter();
   const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -71,7 +71,7 @@ export default function BoardsPage() {
     }
   };
 
-  const onClickDetail = async (
+  const onClickDetail = (
     event: MouseEvent<HTMLButtonElement>,
     id: String
   ) => {
@@ -96,7 +96,9 @@ export default function BoardsPage() {
             </button>
           </div>
           <div className={styles.contentBody}>
-            {data?.fetchBoards.map((el: IBoardList, index: number) => (
+            {boardsData?.fetchBoards.map((el: IBoardList, index: number) => {
+              console.dir(el);
+              return (
               <button
                 onClick={(event) => onClickDetail(event, el?._id)}
                 key={el._id}
@@ -124,7 +126,8 @@ export default function BoardsPage() {
                   </span>
                 </div>
               </button>
-            ))}
+            )}
+            )}
           </div>
         </div>
       </div>

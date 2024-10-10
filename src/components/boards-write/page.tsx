@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useMutation, gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 
-import { BoardData } from 'app/boards/edit/[boardId]/page';
+// import { BoardData } from 'app/boards/edit/[boardId]/page';
 
 const IMAGE_SRC = {
   addImage: {
@@ -67,9 +67,12 @@ export default function BoardsCommonPage({
   mode: string,
   id?: string
   }) {
-  const editData = (mode === "edit") ? useQuery(FETCH_BOARD, {
+  
+  const { data: queryData } = useQuery(FETCH_BOARD, {
     variables: { boardId: id },
-  })?.data?.fetchBoard : null;
+  });
+
+  const editData = (mode === "edit") ? queryData?.fetchBoard : null;
 
   // if (mode === "edit") { console.dir(editData) }
   const modeTextMap = new Map();
@@ -199,18 +202,18 @@ export default function BoardsCommonPage({
       }
     });
     alert("게시글이 수정되었습니다");
+    console.dir(data);
     router.push(`/boards`);
   };
 
-  if (mode === 'edit') {
-    useEffect(() => {
-      if (editData) {
-        setName(editData.writer);
-        setTitle(editData.title);
-        setContent(editData.contents);
-      }
-    }, [editData]);
-  }
+  useEffect(() => {
+    if (mode === 'edit' && editData) {
+      setName(editData.writer);
+      setTitle(editData.title);
+      setContent(editData.contents);
+    }
+  }, [mode, editData]);
+
   return (
     <div className={styles.layout}>
       <div className={styles['enroll-subject']}>
