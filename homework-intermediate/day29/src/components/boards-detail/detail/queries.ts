@@ -11,6 +11,14 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        createdAt
+        updatedAt
+      }
       user {
         _id
         email

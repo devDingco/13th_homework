@@ -19,6 +19,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     password,
     title,
     content,
+    youtubeUrl,
     zipcode,
     address,
     detailedAddress,
@@ -32,6 +33,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeYoutubeUrl,
     onChangeDetailedAddress,
     onClickContent,
     onClickSubmit,
@@ -114,7 +116,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           <textarea
             value={content}
             placeholder="내용을 입력해 주세요."
-            className={`${styles['enroll-input']} ${styles['enroll-textarea']}`}
+            className={`${styles['enroll-input']} ${styles['enroll-textarea']} resize-none`}
             onChange={onChangeContent}
             onClick={props.isEdit ? onClickContent : undefined}
             defaultValue={props.data?.fetchBoard.contents}
@@ -175,6 +177,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
           <input
             className={styles['enroll-input']}
             placeholder="링크를 입력해 주세요."
+            value={youtubeUrl}
+            onChange={onChangeYoutubeUrl}
           />
         </div>
 
