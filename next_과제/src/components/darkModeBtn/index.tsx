@@ -18,8 +18,8 @@ export default function DarkModeBtn(props: IdarkModeBtn) {
 
   return (
     <div
-      className={`fixed overflow-hidden h-12 w-12 bottom-[15%] right-10 rounded-lg z-50 shadow-lg border box-content ${
-        theme === "light" ? styles.light : styles.dark
+      className={`fixed overflow-hidden h-12 w-12 bottom-[15%] right-10 rounded-lg z-50 shadow-lg box-content ${
+        theme === "dark" ? styles.dark : styles.light
       }`}
     >
       <label className="flex flex-col items-start absolute">
