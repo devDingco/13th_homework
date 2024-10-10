@@ -5,12 +5,14 @@ import CommentStarEmpty from '@/../public/icons/comment_star_empty.svg';
 import CommentEditIcon from '@/../public/icons/comment_edit_icon.svg';
 import CommentDeleteIcon from '@/../public/icons/comment_delete_icon.svg';
 import dateFormatter from '@/app/_commons/formatter/dateFormat';
+import { Rate } from 'antd';
+import { useState } from 'react';
 
 interface CommentItemType {
   writer: string;
   content: string;
   createdAt: Date;
-  rating: string;
+  rating: number;
 }
 
 export default function CommentItem({
@@ -19,18 +21,13 @@ export default function CommentItem({
   createdAt,
   rating,
 }: CommentItemType) {
-  console.log('여기는 아이템', writer, content);
   return (
     <>
       <div className="flex gap-4">
         <Image src={UserImage} width={0} height={0} alt="dd" />
         <p>{writer}</p>
         <div className="flex grow">
-          <Image src={CommentStarEmpty} width={0} height={0} alt="댓글별점1" />
-          <Image src={CommentStarEmpty} width={0} height={0} alt="댓글별점2" />
-          <Image src={CommentStarEmpty} width={0} height={0} alt="댓글별점3" />
-          <Image src={CommentStarEmpty} width={0} height={0} alt="댓글별점4" />
-          <Image src={CommentStarEmpty} width={0} height={0} alt="댓글별점5" />
+          <Rate value={rating} />
         </div>
         <Image
           src={CommentEditIcon}

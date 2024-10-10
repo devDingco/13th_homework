@@ -10,9 +10,11 @@ interface PostsType {
 }
 
 interface RequiredType {
-  username: string | null;
-  userpw: string | null;
-  userTitle: string | null;
-  usercontent: string | null;
-  // commentContent: string | null;
+  username?: string | null;
+  userpw?: string | null;
+  userTitle?: string | null;
+  usercontent?: string | null;
+  commentContent?: string | null;
+  commentUser?: string | null;
+  commentPw?: string | null;
 }

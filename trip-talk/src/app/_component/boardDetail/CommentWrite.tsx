@@ -4,19 +4,31 @@ import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import CommentStarEmpty from '@/../public/icons/comment_star_empty.svg';
 import ChatIcon from '@/../public/icons/chat.svg';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useParams } from 'next/navigation';
-import { CreateBoardCommentDocument } from '@/app/_commons/graphql/graphql';
+import {
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from '@/app/_commons/graphql/graphql';
+import { Rate } from 'antd';
 
 export default function CommentWrite() {
   const resetCommentData = {
     commentContent: '',
     commentUser: '',
     commentPw: '',
+    commentRate: 0,
   };
-  const { postId } = useParams();
   const [commentData, setCommentData] = useState({ ...resetCommentData });
+  const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
+    commentContent: null,
+    commentUser: null,
+    commentPw: null,
+  });
+
+  const { postId } = useParams();
+
   const onCommentFormChange = (
     name: string,
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
@@ -40,16 +52,30 @@ export default function CommentWrite() {
             writer: commentData.commentUser,
             password: commentData.commentPw,
             contents: commentData.commentContent,
-            rating: 5,
+            rating: commentData.commentRate,
           },
           boardId: postId.toString(),
         },
+        refetchQueries: [FetchBoardCommentsDocument],
       });
       setCommentData({ ...resetCommentData });
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const validMessage = '필수입력 사항입니다.';
+    setRequiredMessage((prev) => {
+      return {
+        ...prev,
+        username: commentData.commentUser ? null : validMessage,
+        userpw: commentData.commentPw ? null : validMessage,
+        userTitle: commentData.commentContent ? null : validMessage,
+      };
+    });
+  }, [commentData]);
+
   return (
     <>
       <h3 className="flex">
@@ -58,35 +84,16 @@ export default function CommentWrite() {
       </h3>
       <form onSubmit={(event) => onPostsButtonClick(event)}>
         <div className="flex">
-          <Image
-            src={CommentStarEmpty}
-            width={0}
-            height={0}
-            alt="댓글 별리뷰1"
-          />
-          <Image
-            src={CommentStarEmpty}
-            width={0}
-            height={0}
-            alt="댓글 별리뷰2"
-          />
-          <Image
-            src={CommentStarEmpty}
-            width={0}
-            height={0}
-            alt="댓글 별리뷰3"
-          />
-          <Image
-            src={CommentStarEmpty}
-            width={0}
-            height={0}
-            alt="댓글 별리뷰4"
-          />
-          <Image
-            src={CommentStarEmpty}
-            width={0}
-            height={0}
-            alt="댓글 별리뷰5"
+          <Rate
+            onChange={(e) =>
+              setCommentData((prev) => {
+                return {
+                  ...prev,
+                  commentRate: e,
+                };
+              })
+            }
+            value={commentData.commentRate}
           />
         </div>
         <div className="flex gap-4 w-1/2 mb-4">
@@ -96,7 +103,7 @@ export default function CommentWrite() {
             placeholder="작성자 명을 입력해 주세요"
             label="작성자"
             id="commentUser"
-            // required={requiredMessage}
+            required={requiredMessage}
             onChangeFnc={onCommentFormChange}
           />
           <Input
@@ -105,7 +112,7 @@ export default function CommentWrite() {
             placeholder="비밀번호을 입력해주세요."
             label="비밀번호"
             id="commentPw"
-            // required={requiredMessage}
+            required={requiredMessage}
             onChangeFnc={onCommentFormChange}
           />
         </div>
@@ -113,7 +120,7 @@ export default function CommentWrite() {
           value={commentData.commentContent}
           placeholder="내용을 입력해주세요."
           id="commentContent"
-          // required={requiredMessage}
+          required={requiredMessage}
           onChangeFnc={onCommentFormChange}
         />
         <div className="flex justify-end">

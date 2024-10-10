@@ -11,15 +11,19 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.1",
     "@apollo/client": "^3.11.8",
+    "antd": "^5.21.2",
     "graphql": "^16.9.0",
     "next": "^14.2.13",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@graphql-codegen/cli": "^5.0.2",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "22.7.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
