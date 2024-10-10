@@ -91,10 +91,10 @@
   line-height: 20px; /* 142.857% */
 }
 
-.badIcon {
+/* .badIcon {
   width: 24px;
   height: 24px;
-}
+} */
 
 .good {
   display: flex;
@@ -105,10 +105,10 @@
   line-height: 20px; /* 142.857% */
 }
 
-.goodIcon {
+/* .goodIcon {
   width: 24px;
   height: 24px;
-}
+} */
 
 .menuAndEdit {
   display: flex;

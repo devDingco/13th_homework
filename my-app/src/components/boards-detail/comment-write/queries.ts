@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const CREATE_BOARD_COMMENT = gql`
   #타입 적는 곳
   mutation createBoardComment(
+    $boardId: ID!
     $writer: String
     $password: String
     $contents: String!
@@ -10,7 +11,7 @@ export const CREATE_BOARD_COMMENT = gql`
   ) {
     # 변수 적는 곳
     createBoardComment(
-      boardId: "6703a8585413b3002914cf06"
+      boardId: $boardId
       createBoardCommentInput: {
         writer: $writer
         password: $password
