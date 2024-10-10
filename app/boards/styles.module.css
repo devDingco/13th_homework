@@ -1,0 +1,123 @@
+.layout {
+    width: 1280px;
+    height: 656px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px #00000014;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.titleBox {
+    width: 1184px;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 24px 48px 8px 48px;
+    gap: 8px;
+    opacity: 0px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    border: 1px solid #f2f2f2;
+}
+
+.titleBoxNumber {
+    padding: 0 0 0 24px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+    color: #1c1c1c;
+}
+
+.titleBoxTitle {
+    padding: 0 0 0 8px;
+    width: 848px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    color: #1c1c1c;
+}
+
+.titleBoxWrite {
+    padding: 0 0 0 8px;
+    width: 100px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+    color: #1c1c1c;
+}
+
+.titleBoxDate {
+    padding: 0 0 0 8px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+    color: #1c1c1c;
+}
+
+.boardListBox {
+    width: 1184px;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    opacity: 0px;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #3a1a1a;
+}
+
+.boardListBoxNumber {
+    padding: 0 0 0 24px;
+    color: #919191;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+}
+
+.boardListBoxTitle {
+    padding: 0 0 0 8px;
+    width: 848px;
+    height: 20px;
+    color: #1c1c1c;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
+.boardListBoxWrite {
+    padding: 0 0 0 8px;
+    width: 100px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+    color: linear-gradient(0deg, #333333, #333333),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+
+.boardListBoxDate {
+    padding: 0 0 0 8px;
+    color: #919191;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+}
+
+.BoardListBoxDelete {
+}

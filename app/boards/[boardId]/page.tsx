@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
 import styles from './styles.module.css';
+import { gql, useQuery } from '@apollo/client';
+import { useParams, useRouter } from 'next/navigation';
 
-const BoardsDetail = () => {
+export default function BoardsDetail() {
     // 날짜
     const date = new Date();
     const options = {
@@ -13,15 +15,46 @@ const BoardsDetail = () => {
 
     const 날짜담는통 = options.year + '.' + options.month + '.' + options.date;
 
+    const FETCH_BOARD = gql`
+        query fetchBoard($mynumber: ID!) {
+            fetchBoard(boardId: $mynumber) {
+                _id
+                writer
+                title
+                contents
+                youtubeUrl
+                likeCount
+                dislikeCount
+            }
+        }
+    `;
+
+    const params = useParams();
+    const router = useRouter();
+
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: {
+            mynumber: params.boardId,
+        },
+    });
+
+    console.log(data);
+
+    const onClickMoveBoardList = () => {
+        router.push('/boards');
+    };
+
     return (
         <>
             <div className={styles.layout}>
                 <div className={styles.header}>
                     <div className={styles.headertitle}>
-                        응? 무슨 게시글할지 아직모름~~
+                        {data?.fetchBoard?.title}
                     </div>
                     <div className={styles.headerdetail}>
-                        <div className={styles.headerdetailname}>장화현</div>
+                        <div className={styles.headerdetailname}>
+                            {data?.fetchBoard?.writer}
+                        </div>
                         <div className={styles.headerdetaildate}>
                             {날짜담는통}
                         </div>
@@ -45,14 +78,17 @@ const BoardsDetail = () => {
                             height={24}
                         ></Image>
                     </div>
-
-                    <Image
-                        className={styles.mainphoto}
-                        alt="mainphoto"
-                        src="/assets/running.jpg"
-                        width={1280}
-                        height={512}
-                    ></Image>
+                    <div className={styles.mainPhotoBox}>
+                        <Image
+                            className={styles.mainPhoto}
+                            alt="mainphoto"
+                            src="/assets/beach.png"
+                            width={400}
+                            height={531}
+                            // layout="responsive"
+                        ></Image>
+                        <div>{data?.fetchBoard?.contents}</div>
+                    </div>
                 </div>
                 <div className={styles.video}>
                     <Image
@@ -76,8 +112,14 @@ const BoardsDetail = () => {
                         height={24}
                     ></Image>
                 </div>
-                <div className={styles.bottombutton}>
-                    <button className={styles.listbutton}>
+                <div
+                    className={styles.bottombutton}
+                    // onClick={onClickMoveBoardList}
+                >
+                    <button
+                        className={styles.listbutton}
+                        onClick={onClickMoveBoardList}
+                    >
                         <Image
                             src="/assets/list.png"
                             alt="list"
@@ -111,6 +153,4 @@ const BoardsDetail = () => {
             </div>
         </>
     );
-};
-
-export default BoardsDetail;
+}
