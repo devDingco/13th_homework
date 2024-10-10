@@ -1,5 +1,6 @@
 import { DocumentNode } from "@apollo/client";
-
+import type { GetProp, UploadProps } from "antd";
+export type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 export interface IboardFormProps {
   title: string;
   formType: string;
@@ -52,9 +53,7 @@ export interface IformList {
   writeAddress?: string;
   writeAddressDetail?: string;
   youtubeUrl?: string;
-  imgFile1?: FileList;
-  imgFile2?: FileList;
-  imgFile3?: FileList;
+  imgFiles?: FileList;
   email?: string;
   phone?: string;
   userId?: string;
