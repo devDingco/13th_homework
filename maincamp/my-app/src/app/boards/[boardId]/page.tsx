@@ -1,4 +1,3 @@
-// import './BoardsDetail.css'
 "use client"
 import { gql, useQuery } from "@apollo/client"
 import styles from "./styles.module.css"
@@ -19,6 +18,9 @@ const FETCH_BOARD = gql`
             address
             addressDetail
         }
+        createdAt
+        updatedAt
+        deletedAt
     }
   }
 `;
@@ -26,6 +28,8 @@ const FETCH_BOARD = gql`
 const BoardsDetail = () => {
     
     const params = useParams();
+    // const id = params.boardId;
+    // console.log(id);
     
     const { data } = useQuery(FETCH_BOARD, {
         variables: { boardId: params.boardId },
@@ -33,14 +37,14 @@ const BoardsDetail = () => {
     console.log(data);
     return (
         <div className={styles.content}>
-            <h1>{data?.fetchBoard.title}</h1>
+            <h1>{data?.fetchBoard?.title}</h1>
             <div className={styles.profile}>
                 <div className={styles.profileLeft}>
                     <p className={styles.profile_icon}></p>
-                    <p>{data?.fetchBoard.writer}</p>
+                    <p>{data?.fetchBoard?.writer}</p>
                 </div>
                 <div className={styles.createDate}>
-                    <p>2024.11.11</p>
+                    <p>{data?.fetchBoard?.createdAt}</p>
                 </div>
             </div>
             <div className={styles.subject}>
@@ -49,7 +53,7 @@ const BoardsDetail = () => {
                     <p className={styles.mapIcon}></p>
                 </div>
                 <p className={styles.subjectImg}></p>
-                <p>{data?.fetchBoard.contents}</p>
+                <p>{data?.fetchBoard?.contents}</p>
             </div>
             <div className={styles.videoBg}>
                 <div className={styles.video}></div>

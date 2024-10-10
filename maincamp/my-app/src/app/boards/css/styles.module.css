@@ -57,7 +57,7 @@
     font-size:1.4rem;
 }
 .listContent li:nth-child(2){cursor:pointer;}
-.listContent li span{
+.listContent li button{
     display:none;
     width:2.4rem;
     height:2.4rem;
@@ -67,6 +67,6 @@
     left:8rem;
     cursor:pointer;
 }
-.listContent:hover span{
+.listContent:hover button{
     display:block;
 }
