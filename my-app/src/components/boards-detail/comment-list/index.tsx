@@ -1,10 +1,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useCommentList } from "./hook";
+import { Rate } from "antd";
 
 function CommentList() {
   const { data } = useCommentList();
-  const stars = Array(5).fill(0);
 
   return (
     <div>
@@ -19,15 +19,7 @@ function CommentList() {
                 height={24}
               />
               <div className="writer">{el.writer}</div>
-              {stars.map((el, index) => (
-                <Image
-                  key={index}
-                  src="/img/vector.svg"
-                  alt="starImg"
-                  width={24}
-                  height={24}
-                />
-              ))}
+              <Rate value={el.rating} disabled={true} />
             </div>
             <div className={styles.comment_header_right}>
               <Image

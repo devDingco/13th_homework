@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useBoardsDetail } from "./hooks";
 import CommentWrite from "../comment-write";
-import CommentList from "../comment-list";
+import { DislikeFilled, LikeFilled } from "@ant-design/icons";
 
 function BoardsDetail() {
   const { params, data } = useBoardsDetail();
@@ -57,11 +57,11 @@ function BoardsDetail() {
       </div>
       <div className={styles.bad_good_box}>
         <div className={styles.heart_box}>
-          <Image src="/img/bad.png" alt="badImg" width={24} height={24} />
+          <DislikeFilled />
           <div className="bad_count">24</div>
         </div>
         <div className={styles.heart_box}>
-          <Image src="/img/good.svg" alt="goodImg" width={24} height={24} />
+          <LikeFilled />
           <div className={styles.good_count}>24</div>
         </div>
       </div>

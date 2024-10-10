@@ -1,9 +1,16 @@
 "use client";
 
-import BoardsList from "@/components/boards-list";
+// import styles from "./styles.module.css";
+import Banner from "@/components/boards-list/banner";
+import BoardsList from "@/components/boards-list/list";
 
 const Boards = () => {
-  return <BoardsList />;
+  return (
+    <>
+      <Banner />
+      <BoardsList />
+    </>
+  );
 };
 
 export default Boards;
