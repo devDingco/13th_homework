@@ -3,6 +3,8 @@ import styles from './styles.module.css';
 import Image from 'next/image';
 import useBoardWrite from './hook';
 import { IBoardWriteProps } from './types';
+import { Modal } from 'antd';
+import DaumPostcodeEmbed from 'react-daum-postcode';
 
 const IMAGE_SRC = {
   addImage: {
@@ -17,7 +19,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
     password,
     title,
     content,
+    zipcode,
+    address,
+    detailedAddress,
     isButtonDisabled,
+    isModalOpen,
     nameError,
     passwordError,
     titleError,
@@ -26,9 +32,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeDetailedAddress,
     onClickContent,
     onClickSubmit,
     onClickUpdate,
+    onToggleZipcodeModal,
+    onZipcodeModalComplete,
   } = useBoardWrite(props.data!);
 
   return (
@@ -121,21 +130,41 @@ export default function BoardWrite(props: IBoardWriteProps) {
               type="number"
               className={styles['zipcode-input']}
               placeholder="12345"
+              value={zipcode}
+              readOnly
             />
-            <button className={styles['zipcode-search-button']}>
+            <button
+              onClick={onToggleZipcodeModal}
+              className={styles['zipcode-search-button']}
+            >
               우편번호 검색
             </button>
+            {isModalOpen && (
+              <Modal
+                open={isModalOpen}
+                onOk={onToggleZipcodeModal}
+                onCancel={onToggleZipcodeModal}
+                okText="완료"
+                cancelText="취소"
+              >
+                <DaumPostcodeEmbed onComplete={onZipcodeModalComplete} />
+              </Modal>
+            )}
           </div>
 
           <input
             placeholder="주소를 입력해주세요."
             className={styles['enroll-input']}
             type="text"
+            value={address}
+            readOnly
           />
           <input
             placeholder="상세주소"
             className={styles['enroll-input']}
             type="text"
+            value={detailedAddress}
+            onChange={onChangeDetailedAddress}
           />
         </div>
         <div className={styles['enroll-border']}></div>

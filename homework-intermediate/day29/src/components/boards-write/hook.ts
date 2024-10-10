@@ -9,6 +9,7 @@ import {
   UpdateBoardMutationVariables,
 } from '@/commons/graphql/graphql';
 import { Modal } from 'antd';
+import { Address } from 'react-daum-postcode';
 
 export default function useBoardWrite(data: FetchBoardQuery) {
   // 사용자 입력값을 위한 state
@@ -20,6 +21,10 @@ export default function useBoardWrite(data: FetchBoardQuery) {
     !name || !password || !title || !content
   );
   // let isButtonDisabled = !name || !password || !title || !content;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [zipcode, setZipCode] = useState('');
+  const [address, setAddress] = useState('');
+  const [detailedAddress, setDetailedAddress] = useState('');
 
   // 필수 입력값 검증을 위한 state
   const [nameError, setNameError] = useState('');
@@ -48,6 +53,10 @@ export default function useBoardWrite(data: FetchBoardQuery) {
     setContent(event.target.value);
     setIsButtonDisabled(!name || !password || !title || !event.target.value);
   };
+  const onChangeDetailedAddress = (event: ChangeEvent<HTMLInputElement>) => {
+    setDetailedAddress(event.currentTarget.value);
+  };
+
   const onClickContent = () => {
     if (password) {
       setIsButtonDisabled(false);
@@ -60,7 +69,11 @@ export default function useBoardWrite(data: FetchBoardQuery) {
       console.log('isButtonDisabled >>> ', isButtonDisabled);
     } else alert('비밀번호를 반드시 입력해 주십쇼.');
   };
-  const validateFeild = (field, setErrorMessage, message) => {
+  const validateFeild = (
+    field: string,
+    setErrorMessage: (message: string) => void,
+    message: string
+  ) => {
     if (field.trim() === '') {
       setErrorMessage(message);
       return false;
@@ -100,24 +113,21 @@ export default function useBoardWrite(data: FetchBoardQuery) {
             contents: content,
             youtubeUrl: '',
             boardAddress: {
-              zipcode: '',
-              address: '',
-              addressDetail: '',
+              zipcode: zipcode,
+              address: address,
+              addressDetail: detailedAddress,
             },
             images: ['', ''],
           },
         },
       });
-
       console.log('data', data);
-      // alert('게시글이 등록되었습니다!');
       Modal.success({
         content: `게시글이 등록 되었습니다!`,
       });
       router.push(`/boards/${data?.createBoard._id}`);
     }
   };
-
   const onClickUpdate = async () => {
     console.log('onClickUpdate called', password);
     const myVariables: UpdateBoardMutationVariables = {
@@ -147,12 +157,27 @@ export default function useBoardWrite(data: FetchBoardQuery) {
     router.push(`/boards/${data?.fetchBoard._id}`);
   };
 
+  const onToggleZipcodeModal = () => {
+    setIsModalOpen((_isModalOpen) => !_isModalOpen);
+  };
+  const onZipcodeModalComplete = (data: Address) => {
+    console.log('🚀 ~ onZipcodeModalComplete ~ data:', data);
+    setZipCode(data.zonecode);
+    setAddress(data.address);
+    onToggleZipcodeModal();
+  };
+  // console.log(address, zipcode);
+
   return {
     name,
     password,
     title,
     content,
+    zipcode,
+    address,
+    detailedAddress,
     isButtonDisabled,
+    isModalOpen,
     nameError,
     passwordError,
     titleError,
@@ -161,8 +186,11 @@ export default function useBoardWrite(data: FetchBoardQuery) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeDetailedAddress,
     onClickContent,
     onClickSubmit,
     onClickUpdate,
+    onToggleZipcodeModal,
+    onZipcodeModalComplete,
   };
 }
