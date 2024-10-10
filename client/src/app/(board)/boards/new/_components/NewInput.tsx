@@ -3,9 +3,11 @@
 import { ETitle, ITitle, RNewInputPlaceHolder } from '@/models/board.type';
 import { useParams, usePathname } from 'next/navigation';
 
+import { useAddressStore } from '@/stores/useAddressStore';
 import useSWR from 'swr';
 
 export default function NewInput({ title }: ITitle) {
+	const { address } = useAddressStore();
 	const param = useParams();
 
 	const { data } = useSWR(`/board/${param.boardId}`, null, {
@@ -19,7 +21,8 @@ export default function NewInput({ title }: ITitle) {
 			id={title}
 			disabled={
 				(data && title === ETitle.Author) ||
-				(path.includes('edit') && title === ETitle.Password)
+				(path.includes('edit') && title === ETitle.Password) ||
+				(address && title === ETitle.Address)
 			}
 			name={title}
 			type={title === ETitle.Password ? 'password' : 'text'}
@@ -27,7 +30,11 @@ export default function NewInput({ title }: ITitle) {
 			placeholder={RNewInputPlaceHolder[title]}
 			defaultValue={
 				data?.title ||
-				(path.includes('edit') && title === ETitle.Password ? '123' : undefined)
+				(path.includes('edit') && title === ETitle.Password
+					? '123'
+					: address && title === ETitle.Address
+						? address
+						: undefined)
 			}
 		/>
 	);

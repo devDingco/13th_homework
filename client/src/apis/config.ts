@@ -12,6 +12,7 @@ export const api: AxiosInstance = axios.create({
 
 export const boardUrlEndPoint = '/board';
 export const boardsUrlEndPoint = `${boardUrlEndPoint}s`;
+export const newUrlEndPoint = '/new';
 export const editUrlEndPoint = '/edit';
 export const commentUrlEndPoint = '/comment';
 

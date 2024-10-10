@@ -31,7 +31,8 @@
 		"react-dom": "^18.3.1",
 		"swr": "^2.2.5",
 		"tailwind-merge": "^2.5.3",
-		"tailwindcss-animate": "^1.0.7"
+		"tailwindcss-animate": "^1.0.7",
+		"zustand": "^5.0.0-rc.2"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^5.0.2",
