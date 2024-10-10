@@ -8,6 +8,7 @@ import {
   UpdateBoardDocument,
   UpdateBoardMutationVariables,
 } from '@/commons/graphql/graphql';
+import { Modal } from 'antd';
 
 export default function useBoardWrite(data: FetchBoardQuery) {
   // 사용자 입력값을 위한 state
@@ -59,36 +60,35 @@ export default function useBoardWrite(data: FetchBoardQuery) {
       console.log('isButtonDisabled >>> ', isButtonDisabled);
     } else alert('비밀번호를 반드시 입력해 주십쇼.');
   };
+  const validateFeild = (field, setErrorMessage, message) => {
+    if (field.trim() === '') {
+      setErrorMessage(message);
+      return false;
+    } else {
+      setErrorMessage('');
+      return true;
+    }
+  };
   const onClickSubmit = async () => {
-    let hasError = false;
+    const validName = validateFeild(name, setNameError, '필수입력 사항입니다.');
+    const validPassword = validateFeild(
+      password,
+      setPasswordError,
+      '필수입력 사항입니다.'
+    );
+    const validTittle = validateFeild(
+      title,
+      setTitleError,
+      '필수입력 사항입니다.'
+    );
+    const valiContent = validateFeild(
+      content,
+      setContentError,
+      '필수입력 사항입니다.'
+    );
 
-    if (name.trim() === '') {
-      setNameError('필수입력 사항입니다.');
-      hasError = true;
-    } else {
-      setNameError('');
-    }
-
-    if (password.length === 0) {
-      setPasswordError('필수입력 사항입니다.');
-      hasError = true;
-    } else {
-      setPasswordError('');
-    }
-
-    if (title.trim() === '') {
-      setTitleError('필수입력 사항입니다.');
-      hasError = true;
-    } else {
-      setTitleError('');
-    }
-
-    if (content.trim() === '') {
-      setContentError('필수입력 사항입니다.');
-      hasError = true;
-    } else {
-      setContentError('');
-    }
+    const hasError =
+      !validName || !validPassword || !validTittle || !valiContent;
 
     if (!hasError) {
       const { data } = await createBoard({
@@ -110,7 +110,10 @@ export default function useBoardWrite(data: FetchBoardQuery) {
       });
 
       console.log('data', data);
-      alert('게시글이 등록되었습니다!');
+      // alert('게시글이 등록되었습니다!');
+      Modal.success({
+        content: `게시글이 등록 되었습니다!`,
+      });
       router.push(`/boards/${data?.createBoard._id}`);
     }
   };

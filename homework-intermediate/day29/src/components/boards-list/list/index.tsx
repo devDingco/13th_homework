@@ -48,7 +48,9 @@ export default function BoardList() {
                   <div className={styles.contentTitle}>{el.title}</div>
                   <div className={styles.contentWriter}>{el.writer}</div>
                   <div className={styles.contentDate}>
-                    {el.createdAt.split('T')[0].replace(/-/g, '.')}
+                    {new Date(el.createdAt).toLocaleString('ko-KR', {
+                      timeZone: 'Asia/Seoul',
+                    })}
                   </div>
                   <div>
                     <span

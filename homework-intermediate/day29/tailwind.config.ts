@@ -7,8 +7,14 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pretendard: ['Pretendard-Regular', 'sans-serif'],
+        hakgyo: ['HakgyoansimDunggeunmisoTTF-B'],
+      },
+    },
   },
   plugins: [],
 };
+
 export default config;

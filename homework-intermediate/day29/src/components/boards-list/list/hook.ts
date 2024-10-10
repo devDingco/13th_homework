@@ -5,6 +5,7 @@ import {
 } from '@/commons/graphql/graphql';
 import { useRouter } from 'next/navigation';
 import { useState, MouseEvent } from 'react';
+import { Modal } from 'antd';
 
 export default function useBoardList() {
   const [hoveredId, setHoveredId] = useState('');
@@ -24,8 +25,14 @@ export default function useBoardList() {
           { query: FetchBoardsDocument, variables: { page: 1 } },
         ],
       });
-      alert(`게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`);
+      // alert(`게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`);
+      Modal.success({
+        content: `게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`,
+      });
     } catch (err) {
+      Modal.error({
+        content: `게시글 삭제에 실패했습니다.`,
+      });
       console.error('삭제실패');
     }
   };

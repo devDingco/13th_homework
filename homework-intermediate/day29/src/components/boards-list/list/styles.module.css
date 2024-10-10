@@ -17,6 +17,7 @@
   margin-top: 40px;
   display: flex;
   max-width: 1280px;
+  min-width: 640px;
   flex-direction: column;
   align-items: center;
   gap: 24px;
@@ -118,7 +119,7 @@
 }
 
 .contentDate {
-  width: 100px;
+  width: 90px;
   color: var(--Gray-50, var(--gray-500, #919191));
   font-size: 14px;
   font-style: normal;
