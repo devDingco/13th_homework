@@ -4,10 +4,19 @@ import { useQuery } from "@apollo/client";
 import styles from "./styles.module.css";
 import BoardList from "../components/BoardList/BoardList";
 import { FetchBoardsDocument } from "../../commons/graphql/graphql";
+import BannerSlider from "../components/BannerSlider/BannerSlider";
 
 export default function Boards() {
-  const { data } = useQuery(FetchBoardsDocument);
+  const { data, loading, error } = useQuery(FetchBoardsDocument);
+  if (loading) {
+    //  skeleton
+  }
+  if (error) {
+    // error
+  }
   return (
+    <>
+    <BannerSlider />
     <div className={styles.post_contain}>
       <div className={styles.boards_header}>
         <div className={styles.boards_header_number}>번호</div>
@@ -19,7 +28,7 @@ export default function Boards() {
         {data?.fetchBoards.map((board, index: number) => (
           <BoardList
             key={board._id}
-            _id={board._id}
+            id={board._id}
             number={index + 1}
             title={board.title}
             writer={board.writer as string}
@@ -28,5 +37,6 @@ export default function Boards() {
         ))}
       </ul>
     </div>
+    </>
   );
 }

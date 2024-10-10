@@ -1,13 +1,13 @@
 "use client";
 
-import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import ImageUploader from "../ImageUploader/ImageUploader";
-import { IBoardsWriteHook } from "../../../types/components.type";
-import { BOARDS_WRITE } from "../../../constants/constants";
-import { usePathname } from "next/navigation";
+import styles from "./styles.module.css";
 import TextArea from "../TextArea/TextArea";
+import { usePathname } from "next/navigation";
+import ImageUploader from "../ImageUploader/ImageUploader";
+import { BOARDS_WRITE } from "../../../constants/constants";
+import { IBoardsWriteHook } from "../../../types/components.type";
 import useBoardsWrite from "../../../commons/hooks/useBoardsWrite";
 
 export default function BoardsWrite(props: IBoardsWriteHook) {
