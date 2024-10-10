@@ -1,17 +1,17 @@
 .light {
   label {
-    transition: all 0.5s ease-in-out;
     background-color: #000;
     top: 0;
+    transition: all 0.5s ease-in-out;
     animation: moveOff 0.5s ease-in-out;
   }
 }
 
 .dark {
   label {
-    transition: all 0.5s ease-in-out;
     background-color: #fff;
     top: -100%;
+    transition: all 0.5s ease-in-out;
     animation: moveOn 0.5s ease-in-out;
   }
 }
