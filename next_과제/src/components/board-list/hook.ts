@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
+  FetchBoardDocument,
 } from "@/commons/graphql/graphql";
 
 export const useBoardList = () => {
@@ -35,11 +36,20 @@ export const useBoardList = () => {
         refetchQueries: [
           {
             query: FetchBoardsListDocument,
+            variables: {
+              page: Number(params.pageNum) || 1,
+            },
+          },
+          {
+            query: FetchBoardDocument,
+            variables: {
+              boardId: postId,
+            },
           },
         ],
       });
       alert("게시글이 삭제되었습니다.");
-      // router.refresh();
+      router.refresh();
     } catch (error) {
       alert("게시글 삭제에 실패했습니다.");
       console.log(error);
@@ -51,12 +61,14 @@ export const useBoardList = () => {
     type: string
   ) => {
     const target = e.currentTarget;
-    const childTarget =
-      target.lastElementChild?.firstElementChild?.firstElementChild?.classList;
+    const childTarget = target.lastElementChild?.firstElementChild?.classList;
+    // console.log(childTarget);
     if (type === "over") {
+      childTarget?.add("flex");
       childTarget?.remove("hidden");
     } else {
       childTarget?.add("hidden");
+      childTarget?.remove("flex");
     }
   };
 
