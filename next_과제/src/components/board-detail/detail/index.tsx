@@ -1,13 +1,14 @@
 import Icon from "@/components/iconFactory";
 import LikeCountBtn from "@/components/likeCountBtn";
-// import Image from "next/image";
-import Link from "next/link";
+import { Button } from "antd";
 
 import { dateViewSet } from "@/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/detail/hook";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function BoardDetail() {
+  const router = useRouter();
   const { detailData, params, error } = useBoardDetail();
   // console.log(error);
 
@@ -78,17 +79,25 @@ export default function BoardDetail() {
         </div>
 
         <div className="flex gap-6 justify-center">
-          <Link className="btn btn-outline" href={`/boards`}>
-            <Icon icon="menu" className="fill-current w-6 h-6" />
-            목록으로
-          </Link>
-          <Link
-            className="btn btn-outline"
-            href={`/boards/${params.boardId}/edit`}
+          <Button
+            type="default"
+            variant="outlined"
+            size="large"
+            icon={<Icon icon="menu" className="fill-current w-6 h-6" />}
+            onClick={() => router.push(`/boards`)}
           >
-            <Icon icon="edit" className="fill-current w-6 h-6" />
+            목록으로
+          </Button>
+
+          <Button
+            type="default"
+            shape="default"
+            size="large"
+            icon={<Icon icon="edit" className="fill-current w-6 h-6" />}
+            onClick={() => router.push(`/boards/${params.boardId}/edit`)}
+          >
             수정하기
-          </Link>
+          </Button>
         </div>
       </div>
     </div>
