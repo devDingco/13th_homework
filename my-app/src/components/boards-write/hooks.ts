@@ -6,12 +6,20 @@ import {
   CreateBoardDocument,
   UpdateBoardDocument,
 } from "@/commons/gql/graphql";
+import { Address } from "react-daum-postcode";
 
 export const useBoardsWrite = (props: IBoardsWriteProps) => {
   const params = useParams();
   const router = useRouter();
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [isOpen, setIsOpen] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [address, setAddress] = useState({
+    zipcode: "",
+    address: "",
+    addressDetail: "",
+  });
 
   const [errorMessage, setErrorMessage] = useState<IInput>({
     writer: "",
@@ -73,6 +81,8 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
           variables: {
             createBoardInput: {
               ...validation,
+              boardAddress: address,
+              youtubeUrl,
             },
           },
         });
@@ -107,12 +117,16 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
 
       if (checkPassWord && validation.title && validation.contents) {
         const updateVariables: IupdateVariables = {};
+
         if (validation.title) updateVariables.title = validation.title;
         if (validation.contents) updateVariables.contents = validation.contents;
+
         const result = await updateBoard({
           variables: {
             updateBoardInput: {
               ...updateVariables,
+              youtubeUrl,
+              boardAddress: address,
             },
             password: checkPassWord,
             boardId: String(params.boardId),
@@ -125,11 +139,53 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
       alert(error.graphQLErrors[0].message);
     }
   };
+
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (data: Address) => {
+    console.log(data, "어드레스 데이타");
+    let addr = "";
+
+    if (data.userSelectedType === "R") {
+      addr = data.roadAddress;
+    } else {
+      addr = data.jibunAddress;
+    }
+
+    setAddress({
+      zipcode: String(data.zonecode),
+      address: String(addr),
+      addressDetail: "",
+    });
+
+    onToggleModal();
+  };
+
+  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddress({
+      ...address,
+      addressDetail: event.target.value,
+    });
+  };
+
+  const onChangeYouTube = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
   return {
     onChange,
     onClickSubmit,
     onClickEdit,
+    onToggleModal,
+    handleComplete,
+    onChangeAddress,
+    onChangeYouTube,
+    youtubeUrl,
     isActive,
     errorMessage,
+    isOpen,
+    address,
   };
 };
