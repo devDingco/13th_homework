@@ -19,7 +19,9 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     errorTitle,
     errorContent,
     files,
+    data
   } = useBoardsWrite(props);
+  console.log("sss",data)
 
   return (
     <div className={styles.allContainer}>
@@ -33,7 +35,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             <input
               onChange={onChangeWriter}
               placeholder="작성자 명을 입력해 주세요."
-              defaultValue={String(props?.data?.fetchBoard?.writer)}
+              defaultValue={props.isEdit? String(props?.data?.fetchBoard?.writer):""}
               style={props.isEdit ? { backgroundColor: "#f2f2f2" } : { backgroundColor: "#ffffff" }}
               disabled={props.isEdit ? true : false}
             ></input>
