@@ -1,0 +1,21 @@
+mutation CreateBoardComment(
+    $boardId: Int!
+    $createBoardComment: CreateBoardCommentDto!
+) {
+    createBoardComment(
+        boardId: $boardId
+        createBoardComment: $createBoardComment
+    ) {
+        author
+        content
+        rating
+        parentId
+        _id
+        createdAt
+        replies {
+            author
+            content
+            createdAt
+        }
+    }
+}

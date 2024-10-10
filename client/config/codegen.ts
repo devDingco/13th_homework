@@ -9,6 +9,11 @@ const config: CodegenConfig = {
 	generates: {
 		'./src/graphql/generated/': {
 			preset: 'client',
+			config: {
+				withHooks: true,
+				withComponent: false,
+				withHOC: false,
+			},
 		},
 	},
 };
