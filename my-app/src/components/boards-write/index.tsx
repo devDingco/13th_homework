@@ -4,11 +4,25 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useBoardsWrite } from "./hooks";
 import { IBoardsWriteProps } from "./types";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 function BoardsWrite(props: IBoardsWriteProps) {
-  const { onChange, onClickSubmit, onClickEdit, isActive, errorMessage } =
-    useBoardsWrite(props);
+  const {
+    onChange,
+    onClickSubmit,
+    onClickEdit,
+    isActive,
+    errorMessage,
+    onToggleModal,
+    handleComplete,
+    isOpen,
+    onChangeAddress,
+    address,
+    onChangeYouTube,
+  } = useBoardsWrite(props);
 
+  console.log(props.data, "propsdata 확인");
   return (
     <div className={styles.root}>
       <header className={styles.header}>게시물 등록</header>
@@ -92,12 +106,39 @@ function BoardsWrite(props: IBoardsWriteProps) {
                 type="text"
                 className={styles.addressNumberSearchBox_input}
                 placeholder="01234"
+                disabled={true}
+                value={
+                  props.isEdit
+                    ? props.data?.fetchBoard.boardAddress.zipcode
+                    : address?.zipcode
+                }
               ></input>
-              <div className={styles.addressNumberButton}>우편번호 검색</div>
+              <div
+                onClick={onToggleModal}
+                className={styles.addressNumberButton}
+              >
+                우편번호 검색
+              </div>
             </div>
           </div>
-          <input type="text" placeholder="주소를 입력해 주세요."></input>
-          <input type="text" placeholder="상세주소"></input>
+          <input
+            type="text"
+            name="address"
+            placeholder="주소를 입력해 주세요."
+            value={
+              props.isEdit
+                ? props.data?.fetchBoard.boardAddress.address
+                : address?.address
+            }
+            disabled={true}
+          ></input>
+          <input
+            onChange={onChangeAddress}
+            type="text"
+            name="addressDetail"
+            placeholder="상세주소"
+            defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+          ></input>
         </div>
         <hr className={styles.hr} />
         <div className={styles.inputBox}>
@@ -105,10 +146,13 @@ function BoardsWrite(props: IBoardsWriteProps) {
             유튜브 링크
           </label>
           <input
+            onChange={onChangeYouTube}
             className={styles.inputBox_input}
+            name="youtubeUrl"
             type="text"
             id="youtubeInput"
             placeholder="링크를 입력해 주세요."
+            defaultValue={props.data?.fetchBoard.youtubeUrl}
           ></input>
         </div>
         <hr className={styles.hr} />
@@ -165,6 +209,11 @@ function BoardsWrite(props: IBoardsWriteProps) {
           {props.isEdit ? "수정" : "등록"}하기
         </button>
       </footer>
+      {isOpen && (
+        <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
     </div>
   );
 }

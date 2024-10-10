@@ -7,6 +7,13 @@ const CREATE_QUERY = gql`
       writer
       title
       contents
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
+      youtubeUrl
     }
   }
 `;

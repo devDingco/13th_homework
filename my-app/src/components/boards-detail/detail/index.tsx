@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useBoardsDetail } from "./hooks";
 import CommentWrite from "../comment-write";
 import { DislikeFilled, LikeFilled } from "@ant-design/icons";
+import { Tooltip } from "antd";
+import YouTube from "react-youtube";
 
 function BoardsDetail() {
-  const { params, data } = useBoardsDetail();
+  const { params, data, youtubeOpts } = useBoardsDetail();
+  console.log(data, "data");
   return (
     <main className={styles.main}>
       <div className={styles.title_box}>{data?.fetchBoard.title}</div>
@@ -22,7 +25,9 @@ function BoardsDetail() {
             />
             <div className={styles.writer}>{data?.fetchBoard.writer}</div>
           </div>
-          <div className={styles.date_box}>{data?.fetchBoard.createdAt}</div>
+          <div className={styles.date_box}>
+            {data?.fetchBoard.createdAt.split("T")[0].replace(/-/g, ".")}
+          </div>
         </div>
         <hr />
         <div className={styles.icon_box}>
@@ -33,27 +38,36 @@ function BoardsDetail() {
             width={0}
             height={0}
           />
-          <Image
-            className={styles.icon_box_img}
-            src="/img/location.png"
-            alt="locationImg"
-            width={0}
-            height={0}
-          />
+          <Tooltip
+            title={data?.fetchBoard.boardAddress?.address}
+            placement="bottomRight"
+            arrow={false}
+          >
+            <Image
+              className={styles.icon_box_img}
+              src="/img/location.png"
+              alt="locationImg"
+              width={0}
+              height={0}
+            />
+          </Tooltip>
         </div>
       </div>
-      <Image
+      {/* <Image
         className={styles.content_box_img}
         src="/img/beach.svg"
         alt="beachImg"
         width={0}
         height={0}
-      />
+      /> */}
       <div className={styles.content_box}>
         <pre>{data?.fetchBoard.contents}</pre>
       </div>
       <div className={styles.video_box}>
-        <Image src="/img/video.png" alt="videoImg" width={822} height={464} />
+        <YouTube
+          videoId={data?.fetchBoard.youtubeUrl?.split("=")[1]}
+          opts={youtubeOpts}
+        />
       </div>
       <div className={styles.bad_good_box}>
         <div className={styles.heart_box}>

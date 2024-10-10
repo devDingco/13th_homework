@@ -7,8 +7,13 @@ export const useBoardsDetail = () => {
     variables: { boardId: String(params.boardId) },
   });
 
+  const youtubeOpts = {
+    width: "822",
+    height: "464",
+  };
   return {
     params,
     data,
+    youtubeOpts,
   };
 };
