@@ -1,107 +1,40 @@
 import Image from "next/image";
 import styles from "./style.module.css";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
-import { useParams } from "next/navigation";
-import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from "./queries";
+import useCommentListPage from "./hooks";
+import { ICommentListPageprops } from "./types";
+import { Rate } from "antd";
 
-export default function CommentPage() {
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [contents, setContents] = useState("");
-  const params = useParams();
-  const boardId = params.boardId;
-
-  // 쿼리에서 boardId 변수를 사용하여 데이터 조회
-  const { data, refetch } = useQuery(FETCH_BOARD_COMMENTS, {
-    variables: { boardId },
-  });
-
-  const commentSubmit = async () => {
-    try {
-      const result = await createBoardComment({
-        variables: {
-          boardId,
-          writer,
-          password,
-          contents,
-        },
-      });
-      setWriter("");
-      setPassword("");
-      setContents("");
-
-      refetch();
-    } catch (error) {
-      console.error("Error creating comment:", error);
-    }
-  };
-
+export default function CommentListPage(props: ICommentListPageprops) {
+  const { data } = useCommentListPage();
   return (
     <div className={styles.container}>
       <div className={styles.commentContainer}>
-        <div className={styles.title}>Add comment</div>
-        <div className={styles.titil_sm}>Comment</div>
-        <div className={styles.rating}>
-          <Image
-            src="/image/star.png"
-            width={24}
-            height={24}
-            sizes="100vw"
-            alt="별점별이미지"
-          />
-          <Image
-            src="/image/star.png"
-            width={24}
-            height={24}
-            sizes="100vw"
-            alt="별점별이미지"
-          />
-          <Image
-            src="/image/star.png"
-            width={24}
-            height={24}
-            sizes="100vw"
-            alt="별점별이미지"
-          />
-          <Image
-            src="/image/star.png"
-            width={24}
-            height={24}
-            sizes="100vw"
-            alt="별점별이미지"
-          />
-          <Image
-            src="/image/star.png"
-            width={24}
-            height={24}
-            sizes="100vw"
-            alt="별점별이미지"
-          />
-        </div>
-        <input
-          type="text"
-          placeholder="작성자 이름"
-          value={writer}
-          onChange={(e) => setWriter(e.target.value)}
-          style={{ marginLeft: "10px" }}
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <textarea
-          className={styles.commentInput}
-          placeholder="댓글을 입력해 주세요."
-          value={contents}
-          onChange={(e) => setContents(e.target.value)}
-        ></textarea>
-        <button className={styles.commentUpload} onClick={commentSubmit}>
-          댓글 등록
-        </button>
+        {data?.fetchBoardComments.length === 0 && (
+          <div className={styles.noComments}>등록된 댓글이 없습니다.</div>
+        )}
+
+        {data?.fetchBoardComments.map((el) => (
+          <div key={el._id} className={styles.commentList}>
+            <div className={styles.profileContainer}>
+              <Image
+                src={el.user?.picture || "/image/profile.png"}
+                className={styles.profilebasic}
+                alt="프로필기본이미지"
+                width={24}
+                height={24}
+                sizes="100vw"
+              />
+              <div className={styles.authorName}>{el.writer}</div>
+              <div className={styles.rating}>
+                <Rate disabled defaultValue={el.rating} />
+              </div>
+            </div>
+            <div>{el.contents}</div>
+            <div className={styles.date}>
+              {new Date(el.createdAt).toLocaleDateString()}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -6,9 +6,17 @@ import Image from "next/image";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { useBoardsDetail } from "./hooks";
 import { IBoardsDetailprops } from "./types";
+import {
+  FrownTwoTone,
+  HeartOutlined,
+  HeartTwoTone,
+  SmileTwoTone,
+} from "@ant-design/icons";
 
 export default function BoardsDetail(props: IBoardsDetailprops) {
   const { listButton, editButton, data } = useBoardsDetail();
+
+  const App: React.FC = () => <HeartOutlined twoToneColor="#eb2f96" />;
 
   return (
     <div className={styles.container}>
@@ -80,24 +88,12 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
 
             <div className={styles.goodBadContainer}>
               <div className={styles.good}>
-                <Image
-                  src="/image/bad.png"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  alt="깨진하트"
-                />
+                <FrownTwoTone />
                 <div>24</div>
               </div>
 
               <div className={styles.bad}>
-                <Image
-                  src="/image/good.png"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  alt="하트"
-                />
+                <HeartTwoTone twoToneColor="#eb2f96" />
                 <div>30</div>
               </div>
             </div>
