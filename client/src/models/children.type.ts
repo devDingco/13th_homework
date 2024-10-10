@@ -15,6 +15,7 @@ export interface IboardId {
 }
 export interface IModalEditBoard {
 	modal?: boolean;
+	address?: boolean;
 }
 
 export interface IModalProps {
