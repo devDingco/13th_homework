@@ -20,10 +20,10 @@ export interface IModalEditBoard {
 export interface IModalProps {
 	searchParams: IModalBoards;
 }
-export interface IDeatilProps {
+export interface IDetailProps {
 	params: IboardId;
 }
-export interface IDeatilPageProps {
+export interface IDeatilPageProps extends IDetailProps {
 	searchParams: IModalEditBoard;
 }
 

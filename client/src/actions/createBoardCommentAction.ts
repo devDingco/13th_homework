@@ -17,24 +17,24 @@ export default async function createBoardCommentAction(
 
 	if (!author || !password || !content || !rating)
 		return {
-			message: 'fail',
 			boardId: boardId,
 			error: '댓글을 정확히 입력해주세요',
+			result: '',
 		};
 
 	const result = await postComment({ author, password, content, rating }, boardId);
 
 	if (typeof result === 'string') {
 		return {
-			message: 'fail',
 			boardId: boardId,
 			error: result,
+			result: '',
 		};
 	} else if (typeof result === 'object') {
 		return {
-			message: 'success',
 			boardId: boardId,
 			error: undefined,
+			result: result.data,
 		};
 	}
 }

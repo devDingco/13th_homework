@@ -10,30 +10,30 @@ export class BoardCommentResolver {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
     @Query(() => [BoardCommentResponse])
-    getAllBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
+    getBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
         return this.boardCommentService.findAllComment(boardId);
     }
 
     @Mutation(() => BoardCommentResponse)
     createBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('createBoardCommentDTO')
-        createBoardCommentDTO: CreateBoardCommentDto,
+        @Args('createBoardComment')
+        createBoardComment: CreateBoardCommentDto,
     ) {
         return this.boardCommentService.createComment(
             boardId,
-            createBoardCommentDTO,
+            createBoardComment,
         );
     }
 
     @Mutation(() => BoardCommentResponse)
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('updateBoardCommentDTO')
-        updateBoardCommentDTO: UpdateBoardCommentDto,
+        @Args('updateBoardComment')
+        updateBoardComment: UpdateBoardCommentDto,
         @Args('parentId') parentId: string,
     ) {
-        const { password, ...restUpdateBoardComment } = updateBoardCommentDTO;
+        const { password, ...restUpdateBoardComment } = updateBoardComment;
         return this.boardCommentService.updateComment(
             boardId,
             restUpdateBoardComment,

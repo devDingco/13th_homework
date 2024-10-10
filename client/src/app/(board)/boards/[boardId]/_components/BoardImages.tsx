@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 export default function BoardImages({ infor }: IBoardProps) {
 	return (
-		<div className="w-full flex gap-2">
-			{infor?.imageUrl?.map((img, idx) => (
+		<div className="flex w-full gap-2">
+			{infor.imageUrl?.map((img, idx) => (
 				<Image
 					src={`${img}`}
 					alt="image"

@@ -1,9 +1,9 @@
-import { BoardReaction } from './entities/reaction.entity';
+import { BoardReaction } from './entities/board-reaction.entity';
 import { BoardReactionRepository } from './repositories/boardReactionRepository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class ReactionService {
+export class BoardReactionService {
     constructor(
         private readonly boardReactionRepository: BoardReactionRepository,
     ) {}

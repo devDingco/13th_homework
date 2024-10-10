@@ -1,5 +1,7 @@
 /** @format */
 
+import { boardsUrlEndPoint, editUrlEndPoint } from '@/apis/config';
+
 import { IValidPasswordState } from '@/models/validationPasssword.type';
 import isValidationPasswordBoard from '@/actions/isValidationPasswordBoard';
 import { useFormState } from 'react-dom';
@@ -16,7 +18,7 @@ export default function ModalForm() {
 		validation: false,
 	});
 
-	if (state.validation) onClickPush(`/boards/${boardId}/edit`);
+	if (state.validation) onClickPush(`${boardsUrlEndPoint}/${boardId}${editUrlEndPoint}`);
 	return (
 		<>
 			<form

@@ -1,5 +1,4 @@
 /** @format */
-'use client';
 
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
@@ -28,8 +27,6 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				if (boardId) {
 					const result = await deleteBoard(boardId);
 
-					console.log(data);
-
 					if (result) {
 						mutate(
 							data.filter((board: IApiResponseData) => board.boardId !== boardId),
@@ -43,7 +40,8 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				onClickBack();
 				break;
 			case EButtonTitle.Sumbit:
-				// Submit logic goes here
+				// 현재 업데이트하면 그 이후 로직은 짜지 않았음
+				// 추후 업데이트할 예정
 				break;
 			default:
 				break;
@@ -53,7 +51,7 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 	return (
 		<button
 			id={title}
-			className={`prose-r_16_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] px-3 py-4 text-black ${
+			className={`prose-r_16_24 flex h-12 cursor-pointer items-center justify-center rounded-lg border-[1px] px-3 py-4 text-black outline-none ${
 				(title === EButtonTitle.Cancel || title === EButtonTitle.Back) &&
 				'border-black text-black'
 			} ${

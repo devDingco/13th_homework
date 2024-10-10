@@ -21,6 +21,9 @@
     },
     "dependencies": {
         "@apollo/server": "^4.11.0",
+        "@graphql-codegen/cli": "^5.0.3",
+        "@graphql-codegen/typescript": "^4.1.0",
+        "@graphql-codegen/typescript-resolvers": "^4.3.0",
         "@nestjs/apollo": "^12.2.0",
         "@nestjs/common": "^10.0.0",
         "@nestjs/config": "^3.2.3",
@@ -31,6 +34,7 @@
         "@nestjs/swagger": "^7.4.2",
         "@nestjs/typeorm": "^10.0.2",
         "@types/bcrypt": "^5.0.2",
+        "apollo-server-express": "^3.13.0",
         "bcrypt": "^5.1.1",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.1",

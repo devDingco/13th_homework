@@ -1,12 +1,14 @@
 /** @format */
 
+import BoardCommentDeleteImage from './BoardCommentDeleteImage';
+import BoardCommentEditImage from './BoardCommentEditImage';
 import BoardCommentStar from './BoardCommentStar';
 import { IBoardCommentProps } from '@/models/comment.type';
 import Image from 'next/image';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 
 export default function BoardComment(props: IBoardCommentProps) {
-	const { _id, parentId, createdAt, author, content, rating } = props.comment;
+	const { _id, createdAt, author, content, rating } = props.comment;
 
 	const changeDate = changeDateToISO(createdAt);
 
@@ -21,9 +23,9 @@ export default function BoardComment(props: IBoardCommentProps) {
 					<div className="prose-l_14_20">{author}</div>
 					<BoardCommentStar rating={rating} />
 				</div>
-				<div className="flex gap-2">
-					<Image src="/Images/edit.svg" alt="edit" width={20} height={20} />
-					<Image src="/Images/close.svg" alt="close" width={20} height={20} />
+				<div className="flex items-center gap-2">
+					<BoardCommentEditImage />
+					<BoardCommentDeleteImage />
 				</div>
 			</div>
 			<div className="prose-r_16_24">{content}</div>

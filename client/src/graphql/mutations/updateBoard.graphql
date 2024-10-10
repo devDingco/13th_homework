@@ -1,0 +1,11 @@
+mutation UpdateBoard($boardId: Int!, $updateBoard: UpdateBoardDto!) {
+    updateBoard(boardId: $boardId, updateBoard: $updateBoard) {
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        address
+        createdAt
+    }
+}

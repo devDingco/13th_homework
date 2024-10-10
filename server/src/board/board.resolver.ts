@@ -3,6 +3,7 @@ import { BoardService } from './board.service';
 import { Board } from './entities/board.entity';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardResponseDto } from './dto/board-response.dto';
+import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Resolver(() => Board)
 export class BoardResolver {
@@ -19,24 +20,16 @@ export class BoardResolver {
     }
 
     @Mutation(() => BoardResponseDto)
-    createBoard(@Args('createBoardDto') createBoardDto: CreateBoardDto) {
-        return this.boardService.create(createBoardDto);
+    createBoard(@Args('createBoard') createBoard: CreateBoardDto) {
+        return this.boardService.create(createBoard);
     }
 
     @Mutation(() => BoardResponseDto)
     updateBoard(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('createBoardDto') createBoardDto: CreateBoardDto,
+        @Args('updateBoard') updateBoard: UpdateBoardDto,
     ) {
-        return this.boardService.updateOne(boardId, createBoardDto);
-    }
-
-    @Mutation(() => BoardResponseDto)
-    updateBoards(
-        @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('createBoardDto') createBoardDto: CreateBoardDto,
-    ) {
-        return this.boardService.updateAll(boardId, createBoardDto);
+        return this.boardService.updateOne(boardId, updateBoard);
     }
 
     @Mutation(() => Boolean)
@@ -45,8 +38,7 @@ export class BoardResolver {
     }
 
     @Mutation(() => Boolean)
-    async clearBoard() {
-        await this.boardService.clear();
-        return true;
+    clearBoard() {
+        return this.boardService.clear();
     }
 }

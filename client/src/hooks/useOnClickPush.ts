@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation';
 export default function useOnClickPush() {
 	const router = useRouter();
 
-	const onClickPush = (url: string) => {
+	const onClickPush = (url: string, event?: React.MouseEvent<HTMLImageElement>) => {
+		event?.preventDefault();
+
 		router.push(url);
 	};
 

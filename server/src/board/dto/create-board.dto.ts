@@ -54,11 +54,11 @@ export class CreateBoardDto {
     @IsOptional()
     @Column()
     @Field({ nullable: true })
-    address: string;
+    address?: string;
 
     @IsString()
     @IsOptional()
     @Column()
     @Field({ nullable: true })
-    detailAddress: string;
+    detailAddress?: string;
 }
