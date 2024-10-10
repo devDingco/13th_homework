@@ -1,25 +1,21 @@
 "use client";
 
+import { InputData } from "@/commons/types/types";
 import { Input } from "@/components/Atoms/_Input";
-import styles from "../../Organisms/BoardsNew/styles.module.css";
 
 export default function InputField({ ...props }) {
-    const { id, label, placeholder, value, onChange, required, textarea } =
-        props;
+    const { id, value, required, textarea } = props;
 
     return (
         <label style={{ display: "flex", flexDirection: "column" }}>
-            {label}
-            <b style={{ color: "#F55" }}>{required && " * "}</b>
-            <Input
-                id={id}
-                placeholder={placeholder}
-                onChange={onChange}
-                textarea={textarea}
-            />
-            <b style={{ color: "#F55" }}>
-                {value || !required ? <br /> : "필수 입력 사항입니다."}
-            </b>
+            {InputData[id]}
+            <strong style={{ color: "#F55", display: "contents" }}>
+                {required && " * "}
+            </strong>
+            <Input id={id} textarea={textarea} />
+            <strong style={{ color: "#F55" }}>
+                {value || !required ? "" : "필수 입력 사항입니다."}
+            </strong>
         </label>
     );
 }

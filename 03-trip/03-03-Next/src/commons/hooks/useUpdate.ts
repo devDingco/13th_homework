@@ -40,7 +40,6 @@ export default function useUpdate() {
             password: password,
             updateBoardInput: { title, contents },
         };
-
         console.log(updateData);
 
         try {
@@ -48,6 +47,7 @@ export default function useUpdate() {
                 variables: updateData,
             });
             console.log(result);
+
             alert("수정이 완료 되었습니다!");
             Router.push(`/boards/${Params.boardId}`);
         } catch (error) {

@@ -6,7 +6,6 @@
 
 import useSubmitInput from "@/commons/hooks/useSubmitInput";
 import InputField from "@/components/Molecules/_InputField";
-import styles from "./styles.module.css";
 
 export default function BoardsNewUI() {
     // const Router = useRouter();
@@ -24,39 +23,10 @@ export default function BoardsNewUI() {
                 width: "100rem",
             }}
         >
-            <InputField
-                id="author_ID"
-                label="작성자"
-                placeholder="작성자 명을 입력해 주세요."
-                onChange={handleChange}
-                value={author}
-                required
-            />
-            <InputField
-                id="password_ID"
-                label="비밀번호"
-                placeholder="비밀번호를 입력해 주세요."
-                onChange={handleChange}
-                value={password}
-                required
-            />
-            <InputField
-                id="title_ID"
-                label="제목"
-                placeholder="제목을 입력해 주세요."
-                onChange={handleChange}
-                value={title}
-                required
-            />
-            <InputField
-                id="content_ID"
-                label="내용"
-                placeholder="내용을 입력해 주세요."
-                onChange={handleChange}
-                value={content}
-                required
-                textarea
-            />
+            <InputField id="author_ID" value={author} required />
+            <InputField id="password_ID" value={password} required />
+            <InputField id="title_ID" value={title} required />
+            <InputField id="content_ID" value={content} required textarea />
         </form>
     );
 }

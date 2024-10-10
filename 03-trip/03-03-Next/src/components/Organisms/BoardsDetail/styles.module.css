@@ -54,6 +54,15 @@
     padding: 4rem;
 }
 
+.recommend_bad,
+.recommend_good {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
 .main_btn {
     display: flex;
     justify-content: center;

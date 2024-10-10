@@ -6,6 +6,7 @@ import useUpdate from "@/commons/hooks/useUpdate";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { Input } from "@/components/Atoms/_Input";
+import { FrownFilled, HeartFilled } from "@ant-design/icons";
 
 export default function BoardsDetailUI({ isEdit }) {
     const Params = useParams();
@@ -107,25 +108,27 @@ export default function BoardsDetailUI({ isEdit }) {
                 </div>
 
                 <div className={styles.main_recommend}>
-                    <div>
-                        <Image
+                    <div className={styles.recommend_bad}>
+                        {/* <Image
                             src="/svg/bad.svg"
                             alt="thumbnail"
                             width={24}
                             height={24}
                             sizes="100%"
-                        />
-                        <p>24</p>
+                        /> */}
+                        <FrownFilled />
+                        <p>1</p>
                     </div>
-                    <div>
-                        <Image
+                    <div className={styles.recommend_good}>
+                        {/* <Image
                             src="/svg/good.svg"
                             alt="thumbnail"
                             width={24}
                             height={24}
                             sizes="100%"
-                        />
-                        <p>12</p>
+                        /> */}
+                        <HeartFilled style={{ color: "#f55" }} />
+                        <p>2</p>
                     </div>
                 </div>
 

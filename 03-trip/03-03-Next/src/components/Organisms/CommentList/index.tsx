@@ -1,12 +1,12 @@
 "use client";
 
+import { Rate } from "antd";
+
 import Image from "next/image";
 
 import profile from "/public/svg/person.svg";
-import chat from "/public/svg/chat.svg";
 import edit from "/public/svg/edit.svg";
 import close from "/public/svg/close.svg";
-import StarBox from "@/components/Molecules/_StarBox";
 
 export default function CommentListUI() {
     const comment = `
@@ -34,7 +34,7 @@ export default function CommentListUI() {
                     <div style={{ display: "flex", gap: "10px" }}>
                         <Image src={profile} alt="profile" />
                         <div>writer</div>
-                        <StarBox />
+                        <Rate disabled defaultValue={2} />
                     </div>
                     <div style={{ display: "flex", gap: "10px" }}>
                         <Image src={edit} alt="edit" />
