@@ -8,13 +8,7 @@ const config: CodegenConfig = {
 	documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
 	generates: {
 		'./src/graphql/generated/': {
-			preset: 'client-preset',
-			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
-			config: {
-				withHooks: true,
-				withComponent: false,
-				withHOC: false,
-			},
+			preset: 'client',
 		},
 	},
 };
