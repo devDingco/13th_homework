@@ -19,7 +19,7 @@ const useCommentWrite = () => {
     writer: writer,
     password: password,
     contents: contents,
-    rating: Number(rating),
+    rating: rating,
   };
 
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
@@ -39,7 +39,9 @@ const useCommentWrite = () => {
     setContents(value);
   };
 
-  const onChangeRating = () => {};
+  const onChangeRating = (value: number) => {
+    setRating(value);
+  };
 
   const resetInputValue = () => {
     setWriter("");
@@ -82,6 +84,7 @@ const useCommentWrite = () => {
     onChangeWriter,
     onChangePassword,
     onChangeContents,
+    onChangeRating,
     onClickSubmit,
   };
 };
