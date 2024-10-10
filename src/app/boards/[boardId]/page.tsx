@@ -116,7 +116,7 @@ export default function BoardsDetailPage() {
     } catch (error) {
       console.error("like 에러", error);
     }
-  };
+  }
 
   const increaseDislikes = async () => {
     try {
