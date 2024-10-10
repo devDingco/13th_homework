@@ -4,19 +4,8 @@ import { Rate } from "antd";
 import useCommentsWrite from "./hook";
 
 export default function CommentWrite() {
-  
-  const {
-    onClickSignup,
-    onChangeContent,
-    onChangePw,
-    onChangeWriter,
-    disabledBtn,
-    value,
-    setValue,
-    writer,
-    pw,
-    content,
-  } = useCommentsWrite();
+  const { onClickSignup, onChangeContent, onChangePw, onChangeWriter, value, setValue, writer, pw, content } =
+    useCommentsWrite();
   return (
     <>
       <div className={styles.commentAllContainer}>

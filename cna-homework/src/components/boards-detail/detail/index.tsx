@@ -1,9 +1,14 @@
+import { Tooltip } from "antd";
 import { useBoardDetail } from "./hook";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import Image from "next/image";
+import YouTube from "react-youtube";
 
 export default function BoardDetail() {
-  const { onClickMoveEdit, data, createdDate } = useBoardDetail();
+  const { onClickMoveEdit, data, createdDate, youtubeId } = useBoardDetail();
+  console.log("youtube:", youtubeId);
+
+  const address = data?.fetchBoard.boardAddress?.address;
 
   return (
     <div className={styles.detailAllContainer}>
@@ -22,15 +27,51 @@ export default function BoardDetail() {
         </div>
         <div className={styles.shareArea}>
           <div className={styles.shareImg}>
-            <Image src="/images/clip.png" alt="clip" width={0} height={0} sizes="100vw" />
-            <Image src="/images/place.png" alt="place" width={0} height={0} sizes="100vw" />
+            <Image src="/images/clip.png" alt="clip" width={19} height={9} sizes="100vw" />
+
+            <Tooltip
+              placement="bottomRight"
+              title={
+                <div style={{ color: "black", fontSize: "14px", fontWeight: "500", lineHeight: "20px" }}>{address}</div>
+              }
+              arrow={false}
+              color="white"
+            >
+              <Image
+                src="/images/place.png"
+                alt="place"
+                width={15}
+                height={18}
+                sizes="100vw"
+                className={styles.tooltipImg}
+              />
+            </Tooltip>
           </div>
         </div>
         <div className={styles.detailContentArea}>
-          <Image src="/images/example.png" alt="ex" className={styles.contentImg} width={0} height={0} sizes="100vw" />
+          <Image
+            src="/images/example.png"
+            alt="example"
+            className={styles.contentImg}
+            width={0}
+            height={0}
+            sizes="100vw"
+          />
           <div className={styles.detailContent}>{data?.fetchBoard?.contents}</div>
           <div className={styles.videoArea}>
-            <Image className={styles.videoImg} src="/images/video.png" alt="video" width={0} height={0} sizes="100vw" />
+            <YouTube
+              videoId={youtubeId}
+              opts={{
+                width: "820",
+                height: "464",
+                playerVars: {
+                  autoplay: 1, //자동 재생 여부
+                  modestbranding: 1, //컨트롤 바에 유튜브 로고 표시 여부
+                  loop: 1, //반복 재생
+                  playlist: youtubeId, //반복 재생으로 재생할 플레이 리스트
+                },
+              }}
+            />
           </div>
           <div className={styles.heartArea}>
             <div className={styles.brokenHeart}>

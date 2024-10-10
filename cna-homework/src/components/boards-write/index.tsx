@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import styles from './styles.module.css'
+import styles from "./styles.module.css";
 import Image from "next/image";
 import { IBoardsWriteProps } from "../types";
 import { useBoardsWrite } from "./hook";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
@@ -19,12 +21,31 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     errorTitle,
     errorContent,
     files,
-    data
+    data,
+    showModal,
+    isModalOpen,
+    handleOk,
+    handleCancel,
+    handleComplete,
+    zonecode,
+    address,
+    detailAddress,
+    onChangeAddress,
+    onChangeYoutube,
   } = useBoardsWrite(props);
-  console.log("sss",data)
+  console.log("sss", data);
+
+  const fetchedZonecode = data?.fetchBoard?.boardAddress?.zipcode;
+  const fetchedAddress = data?.fetchBoard?.boardAddress?.address;
+  const fetchedDetailAddress = data?.fetchBoard?.boardAddress?.addressDetail;
 
   return (
     <div className={styles.allContainer}>
+      {isModalOpen && (
+        <Modal open={true} onOk={handleOk} onCancel={handleCancel}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
       <div className={styles.container}>
         <div className={styles.title}>게시글 {props.isEdit ? "수정" : "등록"}</div>
         <div className={styles.writerInfo}>
@@ -35,7 +56,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             <input
               onChange={onChangeWriter}
               placeholder="작성자 명을 입력해 주세요."
-              defaultValue={props.isEdit? String(props?.data?.fetchBoard?.writer):""}
+              defaultValue={props.isEdit ? String(props?.data?.fetchBoard?.writer) : ""}
               style={props.isEdit ? { backgroundColor: "#f2f2f2" } : { backgroundColor: "#ffffff" }}
               disabled={props.isEdit ? true : false}
             ></input>
@@ -81,19 +102,23 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         <div className={styles.addressArea}>
           <p>주소</p>
           <div className={styles.postNum}>
-            <input placeholder="01234" />
-            <button>우편번호 검색</button>
+            <input placeholder="01234" value={zonecode || fetchedZonecode || ""} />
+            <button onClick={showModal}>우편번호 검색</button>
           </div>
           <div className={styles.address}>
-            <input placeholder="주소를 입력해 주세요." />
+            <input placeholder="주소를 입력해 주세요." value={address || fetchedAddress || ""} />
           </div>
           <div className={styles.address}>
-            <input placeholder="상세주소" />
+            <input
+              placeholder="상세주소"
+              onChange={onChangeAddress}
+              value={detailAddress || fetchedDetailAddress || ""}
+            />
           </div>
         </div>
         <div className={styles.youtubeArea}>
           <p>유튜브 링크</p>
-          <input placeholder="링크를 입력해 주세요." />
+          <input placeholder="링크를 입력해 주세요." onChange={onChangeYoutube} />
         </div>
         <div className={styles.fileArea}>
           <p>사진 첨부</p>

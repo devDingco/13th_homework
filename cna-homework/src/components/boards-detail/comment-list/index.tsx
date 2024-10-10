@@ -1,7 +1,6 @@
 import { Rate } from "antd";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useState } from "react";
 import { useCommentList } from "./hook";
 
 export default function CommentList() {

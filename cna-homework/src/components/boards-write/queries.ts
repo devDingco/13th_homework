@@ -9,6 +9,7 @@ export const CREATE_BOARD = gql`
       contents
       youtubeUrl
       likeCount
+      dislikeCount
       images
       boardAddress {
         zipcode
@@ -33,6 +34,11 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt
       updatedAt
       deletedAt
