@@ -238,6 +238,7 @@ export default function BoardWrite(props: IboardFormProps) {
                     fileList={fileList}
                     onPreview={handlePreview}
                     onChange={handleChange}
+                    {...field}
                   >
                     {fileList.length >= 8 ? null : (
                       <button

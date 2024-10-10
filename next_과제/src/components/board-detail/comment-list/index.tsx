@@ -19,6 +19,8 @@ export default function CommentList(props: IcommentItemBox) {
 
   // if (error) return redirect("/boards");
 
+  console.log(data);
+
   return (
     <>
       {data?.fetchBoardComments.map((data, idx) => {
@@ -65,8 +67,7 @@ export default function CommentList(props: IcommentItemBox) {
                   </div>
                   {/* 별점 노출 여부 */}
                   {starCountBox && (
-                    // <StarCountBox readOnly={true} starCount={starCount} />
-                    <Rate disabled defaultValue={data.rating} allowHalf />
+                    <Rate disabled value={data.rating} allowHalf />
                   )}
                 </div>
                 <div className="flex gap-2">

@@ -102,16 +102,18 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     console.log(getValues(), data);
 
     try {
-      const { commentPassword, commentContents } = getValues();
+      const { commentPassword, commentContents, commentRating } = getValues();
 
       const editCommentData = {
-        updateBoardCommentInput: { contents: "" },
+        updateBoardCommentInput: { contents: "", rating: 0 },
         password: commentPassword,
         boardCommentId: String(data?._id),
       };
 
       if (commentContents)
         editCommentData.updateBoardCommentInput.contents = commentContents;
+      if (commentRating > 0)
+        editCommentData.updateBoardCommentInput.rating = commentRating;
       if (commentPassword === "") return alert("비밀번호를 입력해 주세요.");
 
       const result = await updateBoardComment({

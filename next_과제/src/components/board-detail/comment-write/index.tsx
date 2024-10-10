@@ -33,7 +33,7 @@ export default function CommentWrite(props: IcommentWriteProps) {
     errors,
     editModeCancel,
     control,
-    setValue,
+    // setValue,
   } = useCommentWrite({ setMode, mode, commentIndex, data });
 
   return (
@@ -47,47 +47,55 @@ export default function CommentWrite(props: IcommentWriteProps) {
       {starCountBox && (
         <Controller
           name="commentRating"
+          defaultValue={type === "commentEdit" ? data?.rating : 0}
           control={control}
           render={({ field }) => (
-            <Rate
-              allowHalf
-              defaultValue={type === "commentEdit" ? data?.rating : 0}
-              onChange={(value) => {
-                field.onChange(value);
-                setValue("commentRating", value);
-              }}
-            />
+            <Rate allowHalf defaultValue={data?.rating || 0} {...field} />
           )}
         />
       )}
       <div className="flex justify-start gap-6 w-2/3">
-        <Input
-          title="작성자"
-          type="text"
-          required
-          placeholder="작성자 명을 입력해 주세요"
-          defaultValue={type === "commentEdit" ? data?.writer : ""}
-          {...register("commentWriter", {
+        <Controller
+          name="commentWriter"
+          control={control}
+          rules={{
             required: "필수 입력 사항입니다.",
             minLength: { value: 2, message: "작성자명은 2자 이상입니다." },
-          })}
-          errormessage={errors?.commentWriter?.message}
-          readOnly={type === "commentEdit"}
+          }}
+          defaultValue={type === "commentEdit" ? data?.writer : ""}
+          render={({ field }) => (
+            <Input
+              title="작성자"
+              type="text"
+              placeholder="작성자 명을 입력해 주세요"
+              errormessage={errors?.commentWriter?.message}
+              readOnly={type === "commentEdit"}
+              {...field}
+            />
+          )}
         />
-        <Input
-          title="비밀번호"
-          type="password"
-          required
-          placeholder={
-            type === "commentEdit"
-              ? "댓글 작성시 등록한 비밀번호를 입력해주세요"
-              : "비밀번호를 입력해 주세요"
-          }
-          {...register("commentPassword", {
+
+        <Controller
+          name="commentPassword"
+          control={control}
+          rules={{
             required: "필수 입력 사항입니다.",
             minLength: { value: 4, message: "비밀번호는 4자 이상 입니다" },
-          })}
-          errormessage={errors?.commentPassword?.message}
+          }}
+          defaultValue={""}
+          render={({ field }) => (
+            <Input
+              title="비밀번호"
+              type="password"
+              placeholder={
+                type === "commentEdit"
+                  ? "댓글 작성시 등록한 비밀번호를 입력해주세요"
+                  : "비밀번호를 입력해 주세요"
+              }
+              errormessage={errors?.commentPassword?.message}
+              {...field}
+            />
+          )}
         />
       </div>
       <label htmlFor={id} className="relative">
