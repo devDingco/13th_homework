@@ -13,7 +13,10 @@
   display: flex;
   flex-direction: row;
 }
-
+.css_star {
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
 .css_namebox {
   width: 312px;
   height: 80px;

@@ -2,10 +2,13 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { Comment, FETCH_COMMENTS } from "./queries";
+
 export const UseCommentWrite = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState("");
+
+  const [value, setValue] = useState(0);
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event?.target.value);
@@ -16,13 +19,14 @@ export const UseCommentWrite = () => {
   const onChangeComment = (event: ChangeEvent<HTMLInputElement>) => {
     setComment(event?.target.value);
   };
+
+  const onChangeStar = (value) => {
+    setValue(value);
+  };
   const params = useParams();
   const { data } = useQuery(FETCH_COMMENTS, {
     variables: {
-      writer: name,
-      comment: comment,
       boardId: params.boardId,
-      password: password,
     },
   });
 
@@ -37,11 +41,12 @@ export const UseCommentWrite = () => {
             writer: name,
             contents: comment,
             password: password,
-            rating: 4.5,
+            rating: value,
           },
         },
         refetchQueries: [{ query: FETCH_COMMENTS }],
       });
+      console.log(result);
     } catch {
       alert("에러");
     }
@@ -56,5 +61,7 @@ export const UseCommentWrite = () => {
     onChangeName,
     onclicksubmit,
     data,
+    value,
+    onChangeStar,
   };
 };

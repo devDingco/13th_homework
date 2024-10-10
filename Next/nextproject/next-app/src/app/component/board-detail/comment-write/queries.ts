@@ -24,6 +24,7 @@ export const FETCH_COMMENTS = gql`
       contents
       createdAt
       _id
+      rating
     }
   }
 `;
