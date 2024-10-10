@@ -31,7 +31,7 @@ export default function BoardList(props: IBoardListprops) {
   CustomInput.displayName = "CustomInput";
 
   return (
-    <div>
+    <div className="">
       <div className={styles.inputContainer}>
         <input className={styles.searchBar} />
 
