@@ -12,9 +12,10 @@ export default function NewAddressInputContainer({ title }: ITitle) {
 				<div className="flex items-center justify-center rounded-lg border-[1px] border-gray-200 px-3 text-gray-400 outline-none">
 					01234
 				</div>
-				<button className="prose-sb_18_24 rounded-lg border-[1px] border-black bg-white px-3 py-4">
+
+				<div className="prose-sb_18_24 rounded-lg border-[1px] border-black bg-white px-3 py-4">
 					우편번호 검색
-				</button>
+				</div>
 			</div>
 			<NewInput title={title} />
 			<NewInput title={ETitle.DetailAddress} />
