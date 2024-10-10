@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardsCommentWrite from "./hook";
+import { Rate } from "antd";
 
 export default function BoardsDetailCommentWrite() {
   const {
@@ -8,9 +9,12 @@ export default function BoardsDetailCommentWrite() {
     onChangePassword,
     onChangeContent,
     onCLickComment,
+    onChangeRating,
     name,
     password,
     content,
+    rating,
+    desc,
   } = useBoardsCommentWrite();
 
   return (
@@ -29,46 +33,7 @@ export default function BoardsDetailCommentWrite() {
           <span className={styles.comment}>댓글</span>
         </div>
         <div className={styles.starSection}>
-          <Image
-            src="/images/star.png"
-            alt="별점아이콘"
-            width={10}
-            height={10}
-            sizes="100vw"
-            className={styles.starIcon}
-          />
-          <Image
-            src="/images/star.png"
-            alt="별점아이콘"
-            width={10}
-            height={10}
-            sizes="100vw"
-            className={styles.starIcon}
-          />
-          <Image
-            src="/images/star.png"
-            alt="별점아이콘"
-            width={10}
-            height={10}
-            sizes="100vw"
-            className={styles.starIcon}
-          />
-          <Image
-            src="/images/star.png"
-            alt="별점아이콘"
-            width={10}
-            height={10}
-            sizes="100vw"
-            className={styles.starIcon}
-          />
-          <Image
-            src="/images/star.png"
-            alt="별점아이콘"
-            width={10}
-            height={10}
-            sizes="100vw"
-            className={styles.starIcon}
-          />
+          <Rate tooltips={desc} onChange={onChangeRating} value={rating} />
         </div>
         <div className={styles.commentSection}>
           <div className={styles.authorPasswordLabel}>

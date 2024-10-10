@@ -11,6 +11,9 @@ export default function useBoardsCommentWrite() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [content, setContent] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const desc = ["매우싫음", "싫음", "보통", "좋음", "매우좋음"];
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -23,6 +26,10 @@ export default function useBoardsCommentWrite() {
 
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+  };
+
+  const onChangeRating = (value: number) => {
+    setRating(value); // 선택된 숫자 값을 바로 설정
   };
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
@@ -42,7 +49,7 @@ export default function useBoardsCommentWrite() {
           writer: name, // 나머지 필드는 바로 전달
           password: password,
           contents: content,
-          rating: 3,
+          rating: rating,
         },
         refetchQueries: [
           {
@@ -69,9 +76,12 @@ export default function useBoardsCommentWrite() {
     onChangeName,
     onChangePassword,
     onChangeContent,
+    onChangeRating,
     onCLickComment,
     name,
     password,
     content,
+    rating,
+    desc,
   };
 }

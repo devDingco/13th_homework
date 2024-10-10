@@ -3,6 +3,10 @@ import { useBoardsDetail } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 
+// mui 아이콘 사용
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+
 export default function BoardsDetail() {
   const { params, data } = useBoardsDetail();
 
@@ -76,25 +80,28 @@ export default function BoardsDetail() {
 
         <div className={styles.goodAndBad}>
           <div className={styles.bad}>
-            <Image
+            <HeartBrokenIcon />
+            {/* <Image
               src="/images/bad.png"
               alt="싫어요"
               className={styles.badIcon}
               width={0}
               height={0}
               sizes="100vw"
-            />
+            /> */}
+
             <span>24</span>
           </div>
           <div className={styles.good}>
-            <Image
+            <FavoriteBorderIcon />
+            {/* <Image
               src="/images/good.png"
               alt="좋아요"
               className={styles.goodIcon}
               width={0}
               height={0}
               sizes="100vw"
-            />
+            /> */}
             <span>12</span>
           </div>
         </div>

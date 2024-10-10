@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useBoardsWrite } from "./hook";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IBoardsWriteProps } from "./types";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
@@ -17,10 +17,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
   } = useBoardsWrite();
 
   // 그냥 esLint에러 보기싫어서 만든 줄
-  const [nameError, setNameError] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState("");
-  const [titleError, setTitleError] = React.useState("");
-  const [contentError, setContentError] = React.useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
   const [isActive, setIsActive] = useState(false);
   console.log(
     setNameError,

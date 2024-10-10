@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "./queries";
-import React from "react";
 
 // import React from "react"; 이부분 작성안해도 잘 돌아감. 근데 이거 안해주면 ts(2686)에러가 8개 나와서 그거땜에 넣어줌
 export const useBoardsWrite = () => {
@@ -10,17 +9,17 @@ export const useBoardsWrite = () => {
   const params = useParams();
 
   // 작성자인풋, 작성자인풋에러
-  const [name, setName] = React.useState("");
-  const [nameError, setNameError] = React.useState("");
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
   // 비번인풋, 비번인풋에러
-  const [password, setPassword] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   // 제목인풋, 제목인풋에러
-  const [title, setTitle] = React.useState("");
-  const [titleError, setTitleError] = React.useState("");
+  const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState("");
   // 내용인풋, 내용인풋에러
-  const [content, setContent] = React.useState("");
-  const [contentError, setContentError] = React.useState("");
+  const [content, setContent] = useState("");
+  const [contentError, setContentError] = useState("");
 
   // 상황에 따른 버튼 활성화 or 비활성화
   const [isActive, setIsActive] = useState(false);

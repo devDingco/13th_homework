@@ -1,10 +1,24 @@
 "use client";
 
-import Board from "@/components/boards-list";
-import styles from "@/components/boards-list/styles.module.css";
+import BoardListBanner from "@/components/boards-list/banner";
+import Board from "@/components/boards-list/list";
+import styles from "@/components/boards-list/list/styles.module.css";
 
 export default function board() {
-  return <Board styles={styles} />;
+  return (
+    <div
+      style={{
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <BoardListBanner />
+      <Board styles={styles} />
+    </div>
+  );
 }
 // import styles from "./styles.module.css";
 // import Image from "next/image";

@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 import useBoardsDetailCommentList from "./hook";
+import { Rate } from "antd";
 
 export default function BoardsDetailCommentList() {
   const { data } = useBoardsDetailCommentList();
@@ -23,7 +24,7 @@ export default function BoardsDetailCommentList() {
               />
               <div className={styles.commentName}>{el.writer}</div>
               <div className={styles.starSection}>
-                {Array.from({ length: el.rating }).map((_, starIndex) => (
+                {/* {Array.from({ length: el.rating }).map((_, starIndex) => (
                   <Image
                     key={starIndex}
                     src="/images/star.png"
@@ -33,7 +34,8 @@ export default function BoardsDetailCommentList() {
                     sizes="100vw"
                     className={styles.starIcon}
                   />
-                ))}
+                ))} */}
+                <Rate value={el.rating} disabled />
               </div>
               <div className={styles.editAndClose}>
                 <Image
