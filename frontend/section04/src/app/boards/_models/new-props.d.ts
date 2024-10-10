@@ -1,15 +1,18 @@
-export interface IButtonProps {
-  value: string;
+interface IButtonProps {
+  value: "cancel" | "register";
   disabled?: boolean;
+  onClick?: () => void;
 }
 
-export interface IInputFormTextProps {
+interface IInputFormTextProps {
   title:
     | "author"
     | "password"
     | "title"
     | "content"
-    | "address"
+    | "addressNum"
+    | "addressInput"
+    | "addressDetail"
     | "youtube"
     | "photo";
   onChange?: (

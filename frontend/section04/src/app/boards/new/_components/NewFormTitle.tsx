@@ -1,12 +1,12 @@
-import type { IInputFormTextProps } from "../../_models/new-props";
-
 export default function InputFormTitle({ title }: IInputFormTextProps) {
   const titleObj = {
     author: "작성자",
     password: "비밀번호",
     title: "제목",
     content: "내용",
-    address: "주소",
+    addressNum: "주소",
+    addressInput: "",
+    addressDetail: "",
     youtube: "유튜브 링크",
     photo: "사진 첨부",
   };

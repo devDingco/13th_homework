@@ -1,4 +1,4 @@
-export interface IInputValue {
+interface IInputValue {
   author: string;
   password: string;
   title: string;
