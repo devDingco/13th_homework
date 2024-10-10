@@ -1,0 +1,38 @@
+.boxWrapper {
+    width: 1200px;
+    margin: 0px 100px;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.inputArea {
+    width: 180px;
+    height: 52px;
+    padding-left: 20px;
+    border: 1px solid lightgray;
+    margin-right: 20px;
+}
+
+.contentsWrapper {
+    border: 1px solid lightgray;
+}
+
+.contents {
+    width: 100%;
+    min-height: 108px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
