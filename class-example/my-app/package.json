@@ -6,17 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": " graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.1",
     "@apollo/client": "^3.11.8",
     "@apollo/server": "^4.11.0",
+    "antd": "^5.21.2",
     "graphql": "^16.9.0",
     "next": "14.2.13",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

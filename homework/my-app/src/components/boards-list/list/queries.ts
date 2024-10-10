@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
   query fetchBoards($endDate: DateTime, $startDate: DateTime, $search: String) {
-    fetchBoards(endDate: $endDate, startDate: $startDate, search: $search ) {
+    fetchBoards(endDate: $endDate, startDate: $startDate, search: $search) {
       _id
       writer
       title
@@ -14,7 +14,6 @@ export const FETCH_BOARDS = gql`
 
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId) 
+    deleteBoard(boardId: $boardId)
   }
 `;
-

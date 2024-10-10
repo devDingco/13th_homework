@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 
 const 나의그래프큐엘셋팅 = gql `
-    mutation creatBoard($mywriter: String, $mytitle: String, $mycontents: String) { 
+    mutation createBoard09_04($mywriter: String, $mytitle: String, $mycontents: String) { 
         createBoard (
         writer: $mywriter
         title: $mytitle

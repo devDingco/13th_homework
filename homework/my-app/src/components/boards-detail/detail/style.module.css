@@ -1,4 +1,3 @@
-
 /* * {
   box-sizing: border-box;
   background-color: #f8efe8;
@@ -17,12 +16,11 @@ body{
   margin:0;titleContainer
 } */
 
-
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 60px 0;
-  border-bottom: 1px solid var(--gray-300);;
+  border-bottom: 1px solid var(--gray-300);
 }
 .bigTitleContainer {
   display: flex;
@@ -37,11 +35,11 @@ body{
   font-family: "basic";
   font-size: 70px;
   font-weight: 500;
-  color: var(--gray-800)
+  color: var(--gray-800);
 }
 .subBigTitle {
   font-size: 13px;
-  color: var(--gray-700)
+  color: var(--gray-700);
 }
 .titleContainer {
   max-width: 100%;
@@ -52,7 +50,7 @@ body{
 .aboutContent {
   display: flex;
   flex-direction: column;
-  align-items:flex-start;
+  align-items: flex-start;
   position: relative;
   top: 0;
 
@@ -61,23 +59,20 @@ body{
 }
 .authorDateContainer {
   display: flex;
-  gap:5px;
+  gap: 5px;
 }
 .profilebasic {
   width: 24px;
   height: 24px;
-
 }
 .authorName {
   margin-left: 3px;
   font-size: 16px;
-  color:#000
-
+  color: #000;
 }
 .date {
   font-size: 14px;
 }
-
 
 .title {
   color: var(--gray-800);
@@ -85,7 +80,7 @@ body{
   font-weight: 700;
   line-height: 35px;
 }
-.contentContainer{
+.contentContainer {
   margin-top: 60px;
   display: grid;
   grid-template-columns: 0.7fr 1.3fr;
@@ -109,7 +104,6 @@ body{
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
-  
 }
 .carouselImage {
   width: 550px; /* imgContainer의 너비에 맞춤 */
@@ -126,17 +120,14 @@ body{
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-left:50px;
+  padding-left: 50px;
   /* max-height: 550px; */
   align-self: start; /* 상단 정렬 */
   justify-self: start; /* 좌측 정렬 */
-
 }
 .textContent {
   overflow: auto;
   overflow-x: hidden;
-  
-  
 }
 
 .carousel-indicators {
@@ -152,7 +143,7 @@ body{
 .iconContainer {
   display: flex;
   width: 100%;
-  justify-content:space-between;
+  justify-content: space-between;
   gap: 12px;
   position: relative;
   top: -20px;
@@ -178,12 +169,11 @@ body{
   flex-direction: column;
   align-items: center;
 }
-.bad{
+.bad {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 
 .videoConatiner {
   margin-top: 120px;
@@ -204,7 +194,7 @@ body{
   height: 464px;
 }
 
-.goodBadContainer{
+.goodBadContainer {
   display: flex;
   gap: 15px;
 }
@@ -213,16 +203,16 @@ body{
   gap: 15px;
 }
 
-.gotoListButton{
+.gotoListButton {
   display: flex;
-height: 40px;
-padding: 8px 12px;
-align-items: center;
-justify-content: center;
-gap: 8px;
-border-radius: 8px;
-border: 1px solid var(--gray-B, #000);
-background: var(--gray-w, #FFF);
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
 }
 .buttonIcon {
   width: 24px;
@@ -235,24 +225,20 @@ background: var(--gray-w, #FFF);
   padding-bottom: 50px;
   margin-bottom: 30px;
   border-bottom: 1px solid var(--gray-300);
-  gap:24px
+  gap: 24px;
 }
-
-
 
 /* -----------------댓글부분---------------------*/
 .commentContainer {
-
 }
 .titil_sm {
   font-size: 20px;
   margin: 20px 0;
 }
-.rating{
+.rating {
   margin-left: 10px;
   display: flex;
   gap: 8px;
-
 }
 .commentInput {
   width: 100%;
@@ -269,28 +255,28 @@ background: var(--gray-w, #FFF);
   border-radius: 8px;
   background: var(--gray-B, #000);
 
-  color: #FFF;
-text-align: center;
+  color: #fff;
+  text-align: center;
 
-/* sb_18_24 */
-font-family: "Pretendard Variable";
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 24px; /* 133.333% */
-font-weight: 700;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  font-weight: 700;
 }
 .noComments {
   margin-top: 30px;
   align-self: stretch;
   color: var(--gray-600, #777);
-text-align: center;
-/* r_14_20 */
-font-family: "Pretendard Variable";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; /* 142.857% */
+  text-align: center;
+  /* r_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
 }
 .commentList {
   display: flex;
@@ -298,6 +284,6 @@ line-height: 20px; /* 142.857% */
   gap: 8px;
   margin-top: 30px;
 }
-.profileConatiner{
+.profileConatiner {
   display: flex;
 }

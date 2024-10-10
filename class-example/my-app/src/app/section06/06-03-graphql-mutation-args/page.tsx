@@ -3,7 +3,7 @@ import {useMutation, gql} from '@apollo/client'
 
 //명시되어있는 타입은 타입스크립트 타입이아니라 그래프큐엘에 명시되어있는 타입임
 const 나의그래프큐엘셋팅 = gql `
-mutation creatBoard($mywriter: String, $mytitle: String, $mycontent: String) { 
+mutation createBoard06_03($mywriter: String, $mytitle: String, $mycontent: String) { 
 	createBoard (
     writer: $mywriter
     title: $mytitle

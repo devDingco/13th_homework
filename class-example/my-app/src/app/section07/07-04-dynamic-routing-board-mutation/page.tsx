@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation" // 최신버전에서는 넥스트 �
 import { ChangeEvent, useState } from "react"
 
 const 나의그래프큐엘셋팅 = gql `
-mutation creatBoard($mywriter: String, $mytitle: String, $mycontent: String) { 
+mutation createBoard07_04($mywriter: String, $mytitle: String, $mycontent: String) { 
 	createBoard (
     writer: $mywriter
     title: $mytitle
@@ -17,7 +17,7 @@ mutation creatBoard($mywriter: String, $mytitle: String, $mycontent: String) {
     message
   } 
 }
-` 
+`
 export default function StaticRoutingPage () {
 
     const router = useRouter()
