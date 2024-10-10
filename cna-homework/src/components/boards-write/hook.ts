@@ -2,11 +2,44 @@ import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Address } from "react-daum-postcode";
 
 export const useBoardsWrite = (props: any) => {
   // graphql
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+
+  // youtube
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  // address modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [writeAddressData, setWriteAddressData] = useState({});
+  const [zonecode, setZoneCode] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [detailAddress, setDetailAddress] = useState<string>("");
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleComplete = (addressData: Address) => {
+    console.log(writeAddressData);
+    setWriteAddressData(addressData);
+    setZoneCode(addressData.zonecode);
+    setAddress(addressData.address);
+    setIsModalOpen(false);
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const onChangeAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDetailAddress(event.target.value);
+  };
 
   // router
   const router = useRouter();
@@ -15,8 +48,11 @@ export const useBoardsWrite = (props: any) => {
   const editId = props.isEdit ? params.boardId : null;
 
   // 수정페이지에서사용
-  const { data } = useQuery(FetchBoardDocument);
-  console.log("---", data);
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: String(editId) },
+    skip: !props.isEdit,
+  });
+  console.log("---", props.data);
 
   // state
   const [writer, setWriter] = useState("");
@@ -48,60 +84,9 @@ export const useBoardsWrite = (props: any) => {
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
-
-  // onClick
-  // const onClickSignup = async () => {
-  //   // 등록버튼 클릭시 입력창이 비어있는지 안 비어있는지 확인 후 에러메세지
-  //   if (writer === "") {
-  //     setErrorWriter("작성자명을 입력해 주세요!");
-  //   } else if (writer !== "") {
-  //     setErrorWriter("");
-  //   }
-  //   if (pw === "") {
-  //     setErrorPw("비밀번호를 입력해 주세요!");
-  //   } else if (pw !== "") {
-  //     setErrorPw("");
-  //   }
-  //   if (title === "") {
-  //     setErrorTitle("제목을 입력해 주세요!");
-  //   } else if (title !== "") {
-  //     setErrorTitle("");
-  //   }
-  //   if (content === "") {
-  //     setErrorContent("내용을 입력해 주세요!");
-  //   } else if (content !== "") {
-  //     setErrorContent("");
-  //   }
-  //   if (writer !== "" && pw !== "" && title !== "" && content !== "") {
-  //     // alert("게시글 등록이 가능한 상태입니다!");
-  //     console.log("게시글등록가능");
-  //   }
-
-  //   // 클릭시 게시글등록
-  //   try {
-  //     const { data } = await createBoard({
-  //       variables: {
-  //         createBoardInput: {
-  //           title: title,
-  //           writer: writer,
-  //           contents: content,
-  //           password: pw,
-  //           youtubeUrl: "",
-  //           boardAddress: {
-  //             zipcode: "",
-  //             address: "",
-  //             addressDetail: "",
-  //           },
-  //           images: ["", ""],
-  //         },
-  //       },
-  //     });
-  //     router.push(`/boards/${data.createBoard._id}`);
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert("에러가 발생하였습니다. 다시 시도해 주세요.");
-  //   }
-  // };
+  const onChangeYoutube = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
 
   const onClickSignup = async () => {
     //등록하기
@@ -144,11 +129,11 @@ export const useBoardsWrite = (props: any) => {
               password: pw,
               title: String(title),
               contents: String(content),
-              youtubeUrl: "",
+              youtubeUrl: youtubeUrl,
               boardAddress: {
-                zipcode: "",
-                address: "",
-                addressDetail: "",
+                zipcode: zonecode,
+                address: address,
+                addressDetail: detailAddress,
               },
               images: ["", ""],
             },
@@ -180,6 +165,12 @@ export const useBoardsWrite = (props: any) => {
       interface IEditinput {
         title?: string;
         contents?: string;
+        boardAddress?: {
+          zipcode?: string;
+          address?: string;
+          addressDetail?: string;
+        };
+        youtubeUrl?: string;
       }
       const myPw = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
       const editInput: IEditinput = {};
@@ -189,6 +180,16 @@ export const useBoardsWrite = (props: any) => {
 
       if (content?.trim() && content !== data?.fetchBoard?.contents) {
         editInput.contents = content;
+      }
+      if (zonecode || address || detailAddress) {
+        editInput.boardAddress = {
+          zipcode: zonecode !== data?.fetchBoard?.boardAddress?.zipcode ? zonecode : undefined,
+          address: address !== data?.fetchBoard?.boardAddress?.address ? address : undefined,
+          addressDetail: detailAddress !== data?.fetchBoard?.boardAddress?.addressDetail ? detailAddress : undefined,
+        };
+      }
+      if (youtubeUrl?.trim() && youtubeUrl !== data?.fetchBoard?.youtubeUrl) {
+        editInput.youtubeUrl = youtubeUrl;
       }
 
       // 수정된 값이 있는 항목만 API 요청
@@ -264,5 +265,15 @@ export const useBoardsWrite = (props: any) => {
     errorContent,
     files,
     data,
+    showModal,
+    isModalOpen,
+    handleOk,
+    handleCancel,
+    handleComplete,
+    zonecode,
+    address,
+    detailAddress,
+    onChangeAddress,
+    onChangeYoutube,
   };
 };

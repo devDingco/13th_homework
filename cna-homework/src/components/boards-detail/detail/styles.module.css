@@ -180,3 +180,11 @@
   font-weight: 600;
   line-height: 20px;
 }
+/* tooltip */
+.antdTooltip:hover {
+  color: yellow;
+    background-color: green;
+}
+.tooltipImg {
+  z-index: 10;
+}
