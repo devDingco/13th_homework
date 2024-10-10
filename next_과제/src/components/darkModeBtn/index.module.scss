@@ -1,0 +1,35 @@
+.light {
+  label {
+    transition: all 0.5s ease-in-out;
+    background-color: #000;
+    top: 0;
+    animation: moveOff 0.5s ease-in-out;
+  }
+}
+
+.dark {
+  label {
+    transition: all 0.5s ease-in-out;
+    background-color: #fff;
+    top: -100%;
+    animation: moveOn 0.5s ease-in-out;
+  }
+}
+
+@keyframes moveOn {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
+@keyframes moveOff {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 0;
+  }
+}

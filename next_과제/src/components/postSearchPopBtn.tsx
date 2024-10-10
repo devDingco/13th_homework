@@ -1,13 +1,15 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { Button } from "antd";
 
 type PostSearchPopProps = {
   setaddress: (field: string, value: string) => void;
   setzonecode: (field: string, value: string) => void;
   btnstyle?: string;
+  disabled?: boolean;
 };
 
 const PostSearchPopBtn = (props: PostSearchPopProps) => {
-  const { setaddress, setzonecode, btnstyle } = props;
+  const { setaddress, setzonecode, btnstyle, disabled = false } = props;
   const open = useDaumPostcodePopup(process.env.DAUM_POSTCODE_API_KEY);
 
   interface dataType {
@@ -44,13 +46,17 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
   };
 
   return (
-    <button
+    <Button
+      disabled={disabled}
+      type="default"
+      size="large"
+      color="default"
+      variant="solid"
       className={btnstyle ? btnstyle : "btn btn-outline"}
-      type="button"
       onClick={() => handleClick()}
     >
       우편번호 검색
-    </button>
+    </Button>
   );
 };
 

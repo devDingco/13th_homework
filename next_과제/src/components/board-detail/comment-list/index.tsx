@@ -1,7 +1,8 @@
 "use client";
-import StarCountBox from "@/components/starCountBox";
+// import StarCountBox from "@/components/starCountBox";
 import Icon from "@/components/iconFactory";
 import CommentWrite from "@/components/board-detail/comment-write";
+import { Rate } from "antd";
 import Image from "next/image";
 
 import { redirect } from "next/navigation";
@@ -11,17 +12,26 @@ import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
 import { useCommentList } from "@/components/board-detail/comment-list/hook";
 
 export default function CommentList(props: IcommentItemBox) {
-  const { starCountBox = true, reply, starCount, user } = props;
+  const { starCountBox = true, reply, user } = props;
 
   const { data, error, commentDelete, editModeHandler, mode, setMode } =
     useCommentList();
 
-  if (error) return redirect("/boards");
+  // if (error) return redirect("/boards");
+
+  console.log(data);
 
   return (
     <>
       {data?.fetchBoardComments.map((data, idx) => {
+        // console.log(data.rating);
         if (mode.length > 0 && mode[idx] === "edit") {
+          const editData = {
+            _id: data._id,
+            contents: data.contents,
+            writer: data.writer || "",
+            rating: data.rating,
+          };
           return (
             <div key={data._id} className="flex flex-col gap-2 border-b pb-10">
               <CommentWrite
@@ -33,7 +43,7 @@ export default function CommentList(props: IcommentItemBox) {
                 starCountBox={true}
                 setMode={setMode}
                 mode={mode}
-                data={data}
+                data={editData}
               />
             </div>
           );
@@ -57,7 +67,7 @@ export default function CommentList(props: IcommentItemBox) {
                   </div>
                   {/* 별점 노출 여부 */}
                   {starCountBox && (
-                    <StarCountBox readOnly={true} starCount={starCount} />
+                    <Rate disabled value={data.rating} allowHalf />
                   )}
                 </div>
                 <div className="flex gap-2">

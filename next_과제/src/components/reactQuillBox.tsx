@@ -13,6 +13,7 @@ type ReactQuillBoxProps = {
   readonly?: boolean;
   placeholder?: string;
   errormessage?: string;
+  defaultValue?: string;
 };
 
 const modules = {
@@ -86,6 +87,7 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
           onChange={handleChange}
           readOnly={readonly}
           placeholder={props.placeholder}
+          // defaultValue={props.defaultValue}
           {...rest}
         />
         {errormessage && <p className="toolTip">{errormessage}</p>}
