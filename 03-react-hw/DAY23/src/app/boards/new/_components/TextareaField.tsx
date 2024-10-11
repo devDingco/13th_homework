@@ -1,17 +1,15 @@
-import styles from "../boardNew.module.css";
-import { TextareaFieldProps } from "@/types/board";
 import React from "react";
+import { InputProps } from "@/types/board";
+import styles from "../boardNew.module.css";
 
-const TextareaField: React.FC<TextareaFieldProps> = ({
+const TextareaField: React.FC<InputProps> = ({
   label,
   name,
   value,
   onChange,
   placeholder,
-  required = false,
+  required,
   error,
-  className,
-  rows = 4, // 기본 4행으로 설정
 }) => {
   return (
     <div className={styles.구분상자}>
@@ -24,8 +22,7 @@ const TextareaField: React.FC<TextareaFieldProps> = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${styles.내용입력창크기} ${className}`}
-        rows={rows}
+        className={`${styles.내용입력창크기}`}
       />
       {error && <div className={styles.필수입력에러}>{error}</div>}
     </div>

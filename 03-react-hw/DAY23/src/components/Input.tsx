@@ -1,7 +1,8 @@
+import React from "react";
+import { InputProps } from "@/types/board";
 import styles from "../app/boards/new/boardNew.module.css";
-import { InputFieldProps } from "@/types/board";
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField: React.FC<InputProps> = ({
   label,
   name,
   value,
@@ -10,7 +11,6 @@ const InputField: React.FC<InputFieldProps> = ({
   type,
   required,
   error,
-  className,
   disabled,
 }) => {
   return (
@@ -25,7 +25,9 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${styles.긴입력창크기} ${className}`}
+        className={`${styles.긴입력창크기} ${
+          disabled ? styles.비활성화입력필드 : ""
+        }`}
         disabled={disabled}
       />
       {error && <div className={styles.필수입력에러}>{error}</div>}

@@ -273,3 +273,14 @@
   border: 1px solid var(--gray-B, #000);
   background: var(--gray-w, #fff);
 }
+
+.비활성화입력필드 {
+  background-color: #f2f2f2;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.사진첨부상자 {
+  display: flex;
+  gap: 1rem;
+}

@@ -3,12 +3,12 @@ import { AddressInputProps } from "@/types/board";
 import React from "react";
 
 const AddressInput: React.FC<AddressInputProps> = ({
-  zipCode,
+  zipcode,
   address,
-  detailAddress,
+  addressDetail,
   onZipCodeChange,
   onAddressChange,
-  onDetailAddressChange,
+  onAddressDetailChange,
   onSearchClick,
 }) => {
   return (
@@ -18,7 +18,7 @@ const AddressInput: React.FC<AddressInputProps> = ({
       <div className={styles.우편번호검색상자}>
         <input
           type="text"
-          value={zipCode}
+          value={zipcode}
           onChange={onZipCodeChange}
           placeholder="01234"
           className={styles.작은입력창크기}
@@ -36,8 +36,8 @@ const AddressInput: React.FC<AddressInputProps> = ({
       {/* 상세주소 입력 */}
       <input
         type="text"
-        value={detailAddress}
-        onChange={onDetailAddressChange}
+        value={addressDetail}
+        onChange={onAddressDetailChange}
         placeholder="상세주소"
         className={styles.긴입력창크기}
       />
