@@ -95,35 +95,6 @@ export default function SearchBox() {
             setEndDate(new Date(dateString[1]).toISOString());
           }}
         />
-        {/* <label className="flex items-center border rounded-lg px-3 overflow-hidden">
-          <div className={`${styles.datePicker}`}>
-            <Icon icon="calendar" className="w-6 h-6 fill-accent-content" /> */}
-        {/* <DatePicker
-              selected={startDate}
-              locale={ko}
-              onChange={(date) => setStartDate(date || new Date())}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              dateFormat={"yyyy.MM.dd"}
-              placeholderText="YYYY.MM.DD"
-              closeOnScroll={true}
-            />
-            <span>-</span>
-            <DatePicker
-              selected={endDate}
-              locale={ko}
-              onChange={(date) => setEndDate(date || new Date())}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              dateFormat={"yyyy.MM.dd"}
-              placeholderText="YYYY.MM.DD"
-              closeOnScroll={true}
-            /> */}
-        {/* </div>
-        </label> */}
         <Button
           size="large"
           className="btn btn-accent-content max-sm:w-full"

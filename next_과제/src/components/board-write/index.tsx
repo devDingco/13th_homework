@@ -2,6 +2,7 @@
 import Input from "@/components/input";
 import PostSearchPopBtn from "@/components/postSearchPopBtn";
 import ReactQuillBox from "@/components/reactQuillBox";
+import ModalAlertBox from "@/components/ModalAlertBox";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Upload } from "antd";
 
@@ -30,6 +31,9 @@ export default function BoardWrite(props: IboardFormProps) {
     setPreviewOpen,
     handleChange,
     handlePreview,
+    isModalOpen,
+    setIsModalOpen,
+    modalType,
   } = useBoardWrite(formType);
 
   // 모든 태그 및 개행문자를 제거한 문자열 반환
@@ -38,10 +42,13 @@ export default function BoardWrite(props: IboardFormProps) {
   // };
 
   //! 에러메시지가 있을 경우 alert 후 페이지 이동 처리 필요
-  // if (errors) return redirect("/boards");
+  // if (errors && data === null) return redirect("/boards");
 
   return (
     <>
+      {isModalOpen && (
+        <ModalAlertBox type={modalType} setIsModalOpen={setIsModalOpen} />
+      )}
       <h1 className="text-2xl font-bold">{title}</h1>
       <form>
         <div className="flex justify-between gap-10 flex-nowrap">

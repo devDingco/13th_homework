@@ -10,6 +10,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.21.1",
     "@ant-design/icons": "^5.5.1",
     "@ant-design/nextjs-registry": "^1.0.1",
     "@apollo/client": "^3.6.2",

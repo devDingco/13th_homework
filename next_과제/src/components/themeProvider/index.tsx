@@ -5,7 +5,7 @@ import { theme as antdTheme } from "antd";
 import { ThemeConfig } from "antd";
 import { useEffect, useState } from "react";
 import DarkModeBtn from "@/components/darkModeBtn";
-
+import { StyleProvider } from "@ant-design/cssinjs";
 import locale from "antd/locale/ko_KR";
 
 export default function ThemeProvider({
@@ -14,16 +14,6 @@ export default function ThemeProvider({
   children: React.ReactNode;
 }) {
   const [ThemeControl, setThemeControl] = useState<string>("");
-
-  if (
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
 
   useEffect(() => {
     const themeCheck = localStorage.getItem("theme");
@@ -37,14 +27,13 @@ export default function ThemeProvider({
         document.documentElement.classList.remove("dark");
       }
     }
-  }, []);
+  }, [ThemeControl]);
 
   const theme = (ThemeControl: string) => {
     const theme = {
       token: {
         colorPrimary: "#2974E5",
         controlHeightLG: 48,
-        // controlHeightLG: "48px",
       },
       components: {
         Menu: {
@@ -60,11 +49,11 @@ export default function ThemeProvider({
   };
 
   return (
-    <>
+    <StyleProvider hashPriority="high">
       <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
       <ConfigProvider locale={locale} theme={theme(ThemeControl)}>
         {children}
       </ConfigProvider>
-    </>
+    </StyleProvider>
   );
 }

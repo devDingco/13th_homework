@@ -1,12 +1,16 @@
+"use client";
 import CardBox from "@/components/cardBox";
 import MainSlide from "@/components/mainSlide";
 import SearchBox from "@/components/searchBox";
 import Icon from "@/components/iconFactory";
 import BoardsPage from "@/app/boards/page";
 import Header from "@/components/header";
-import Link from "next/link";
+// import Link from "next/link";
+import { Button } from "antd";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div>
       <Header />
@@ -28,13 +32,23 @@ export default function Home() {
           <h3 className="font-bold text-xl">트립토크 게시판</h3>
           <div className="flex gap-4 justify-between flex-wrap">
             <SearchBox />
-            <Link
+            {/* <Link
               href="/boards/new"
               className="btn btn-primary text-white max-sm:fixedBtn"
             >
               <Icon icon="rwite" className="w-6 h-6 fill-white" />
               트립토크 등록
-            </Link>
+            </Link> */}
+            <Button
+              className="max-sm:fixedBtn"
+              size="large"
+              color="default"
+              variant="solid"
+              icon={<Icon icon="rwite" className="w-6 h-6 fill-white" />}
+              onClick={() => router.push("/boards/new")}
+            >
+              트립토크 등록
+            </Button>
           </div>
           {/* !!!!!!!!!! 검색시 보이는 내용 바뀌도록 처리 필요 */}
           <BoardsPage />

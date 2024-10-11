@@ -10,17 +10,18 @@ export default function BoardsDetailPage() {
       <BoardDetail />
       <CommentWrite
         title="댓글"
-        id="tripTalkComment"
         placeholder="댓글을 입력해 주세요."
-        textMaxCount={100}
+        textMaxCount={10}
         type="commentWrite"
       />
-      <CommentList
-        starCountBox={true}
-        reply={false}
-        user={{ img: "/images/logo.png", name: "김개똥" }}
-        starCount={5}
-      />
+      <div className="pb-28">
+        <CommentList
+          starCountBox={true}
+          reply={false}
+          user={{ img: "/images/logo.png", name: "김개똥" }}
+          starCount={5}
+        />
+      </div>
     </>
   );
 }

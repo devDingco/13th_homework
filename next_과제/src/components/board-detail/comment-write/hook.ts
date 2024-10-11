@@ -33,7 +33,14 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
   const params = useParams();
 
-  const [textCount, setTextCount] = useState(0);
+  const [textCount, setTextCount] = useState(0); // 댓글 글자 수
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
+  const [modalType, setModalType] = useState(""); // 모달 타입
+
+  const modalControl = ({ type }: { type: string }) => {
+    setIsModalOpen((isOpen) => !isOpen);
+    setModalType(type);
+  };
 
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
@@ -54,11 +61,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       getValues();
 
     console.log(getValues());
-
-    // 입력된 값이 없을 경우
-    if (!commentWriter || !commentPassword || !commentContents) {
-      return alert("모든 항목을 입력해 주세요.");
-    }
 
     const newCommentData = {
       createBoardCommentInput: {
@@ -88,7 +90,9 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       ],
     });
     console.log(result);
-    alert("댓글이 등록되었습니다.");
+
+    // 댓글 등록 완료 모달
+    modalControl({ type: "commentNewSubmit" });
 
     // 입력창 초기화
     setValue("commentWriter", "");
@@ -99,7 +103,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
   // !댓글 수정 최종 저장
   const commentEdit = async () => {
-    console.log(getValues(), data);
+    // console.log(getValues(), data);
 
     try {
       const { commentPassword, commentContents, commentRating } = getValues();
@@ -114,7 +118,10 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         editCommentData.updateBoardCommentInput.contents = commentContents;
       if (commentRating > 0)
         editCommentData.updateBoardCommentInput.rating = commentRating;
-      if (commentPassword === "") return alert("비밀번호를 입력해 주세요.");
+      if (commentPassword === "")
+        return modalControl({
+          type: "commentEditPasswordRequired",
+        }); // 비밀번호 입력 안내 모달
 
       const result = await updateBoardComment({
         variables: editCommentData,
@@ -126,13 +133,14 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         ],
       });
       console.log(result);
-      alert("댓글이 수정되었습니다.");
-      editModeCancel();
+
+      modalControl({ type: "commentEditSubmit" }); // 수정 완료 모달
+      editModeCancel(); // 수정 모드 취소
     } catch (error) {
       if (error instanceof Error) {
-        alert(`${error.message}`);
+        modalControl({ type: "commentEditPasswordError" }); // 비밀번호 오류 모달
       } else {
-        alert("An unknown error occurred");
+        modalControl({ type: "commentEditErrorUnknown" }); // 예상치 못한 오류 모달
       }
     }
   };
@@ -149,5 +157,8 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     editModeCancel,
     control,
     setValue,
+    isModalOpen,
+    setIsModalOpen,
+    modalType,
   };
 };

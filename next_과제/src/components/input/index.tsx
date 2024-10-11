@@ -1,6 +1,6 @@
-import Icon from "@/components/iconFactory";
+// import Icon from "@/components/iconFactory";
 import { ChangeEvent, forwardRef } from "react";
-import styles from "@/components/input/styles.module.scss";
+// import styles from "@/components/input/styles.module.scss";
 import { Input as AntInput } from "antd";
 import type { InputRef } from "antd";
 
@@ -25,50 +25,37 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   const { title, errormessage } = props;
   // console.log(props.id, errormessage);
 
-  const showImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const targetLabel = e.target.parentNode as HTMLLabelElement;
-    const targetFile = e.target.files as FileList;
-    const selectedFiles: string[] = Array.from(targetFile).map((file) => {
-      return URL.createObjectURL(file);
-    });
+  // const showImage = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const targetLabel = e.target.parentNode as HTMLLabelElement;
+  //   const targetFile = e.target.files as FileList;
+  //   const selectedFiles: string[] = Array.from(targetFile).map((file) => {
+  //     return URL.createObjectURL(file);
+  //   });
 
-    targetLabel.classList.add(styles.imgViewBox);
-    targetLabel.style.backgroundImage = `url(${selectedFiles[0]})`;
-  };
+  //   targetLabel.classList.add(styles.imgViewBox);
+  //   targetLabel.style.backgroundImage = `url(${selectedFiles[0]})`;
+  // };
 
-  if (props.type === "file" && props.accept === "image/*") {
-    return (
-      <div className={`flex flex-col${title ? " gap-2" : ""}`}>
-        <div className="flex gap-1">
-          {title}
-          {props.required && <span className="text-red-500">*</span>}
-        </div>
-        <div className={`flex gap-4 ${props.required ? "validStyle" : ""}`}>
-          <label className="imgUploadBox" htmlFor={props.id}>
-            {/* <input
-              ref={ref}
-              id={props.id}
-              className="blind imgFile"
-              {...rest}
-              onChange={(e) => showImage(e)}
-            /> */}
-            <AntInput
-              ref={ref}
-              id={props.id}
-              // className="blind imgFile"
-              // {...rest}
-              // onChange={(e) => showImage(e)}
-            />
-            <span className="w-10 h-10">
-              <Icon icon="add" className="fill-gray-500 w-10" />
-            </span>
-            클릭해서 사진 업로드
-          </label>
-        </div>
-        {errormessage && <p className="toolTip">{errormessage}</p>}
-      </div>
-    );
-  }
+  // if (props.type === "file" && props.accept === "image/*") {
+  //   return (
+  //     <div className={`flex flex-col${title ? " gap-2" : ""}`}>
+  //       <div className="flex gap-1">
+  //         {title}
+  //         {props.required && <span className="text-red-500">*</span>}
+  //       </div>
+  //       <div className={`flex gap-4 ${props.required ? "validStyle" : ""}`}>
+  //         <label className="imgUploadBox" htmlFor={props.id}>
+  //           <AntInput ref={ref} id={props.id}{...props} />
+  //           <span className="w-10 h-10">
+  //             <Icon icon="add" className="fill-gray-500 w-10" />
+  //           </span>
+  //           클릭해서 사진 업로드
+  //         </label>
+  //       </div>
+  //       {errormessage && <p className="toolTip">{errormessage}</p>}
+  //     </div>
+  //   );
+  // }
 
   return (
     <label

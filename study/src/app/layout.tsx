@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans_KR, Roboto } from "next/font/google";
-
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ApolloSetting from "../commons/settings/apollo-setting";
 
 export const metadata: Metadata = {
@@ -32,7 +32,9 @@ export default function RootLayout({
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`antialiased`}>
-        <ApolloSetting>{children}</ApolloSetting>
+        <ApolloSetting>
+          <AntdRegistry>{children}</AntdRegistry>
+        </ApolloSetting>
       </body>
     </html>
   );
