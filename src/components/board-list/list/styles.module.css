@@ -1,0 +1,136 @@
+/* styles.module.css */
+
+.boardBody {
+  display: flex;
+  padding: 0px 320px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  align-self: stretch;
+}
+
+.boardInnerBody {
+  width: 100%;
+}
+
+.boardFrame {
+  margin-top: 40px;
+  display: flex;
+  max-width: 1280px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+  padding: 24px 48px;
+  border-radius: 16px;
+  background: #fff;
+
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.boardHeader {
+  display: flex;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.headerNumber,
+.headerTitle,
+.headerWriter,
+.headerDate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #1c1c1c;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.headerNumber {
+  width: 64px;
+}
+
+.headerTitle {
+  flex: 1 0 0;
+  justify-content: left;
+}
+
+.headerWriter,
+.headerDate {
+  width: 100px;
+}
+
+.contentContainer {
+  height: 44px;
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+}
+
+.contentBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.contentNumber,
+.contentWriter,
+.contentDate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.contentNumber {
+  width: 64px;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  font-size: 14px;
+}
+
+.contentTitle {
+  overflow: hidden;
+  color: var(--Gray-90, #1c1c1c);
+  font-size: 14px;
+  display: flex;
+
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  justify-content: left;
+}
+
+.contentWriter {
+  width: 100px;
+  color: var(--Gray-80, var(--gray-800, #333));
+  font-size: 14px;
+}
+
+.contentDate {
+  width: 100px;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.showButton {
+  visibility: visible;
+}

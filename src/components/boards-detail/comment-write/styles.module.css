@@ -1,0 +1,147 @@
+.commentListFrame {
+  display: flex;
+  width: 1920px;
+  padding: 40px 320px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.commentListContainer {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.commentListBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.commentInput {
+  width: 100%;
+  display: flex;
+  height: 144px;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.commentInputBody {
+  width: 100%;
+  position: relative;
+}
+
+.inputTextCount {
+  position: relative;
+  bottom: 30px;
+  right: 10px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--Gray-Gray-400, #ababab);
+  text-align: right;
+}
+
+.commentEnrollButton {
+  border-radius: 8px;
+  background: var(--gray-B, #000);
+
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+
+  color: #fff;
+
+  text-align: center;
+}
+
+.commentEnrollButton:disabled {
+  background: var(--gray-300, #c7c7c7);
+
+  cursor: not-allowed; /* 비활성화 상태 커서 */
+}
+
+.buttonBody {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+.borderLine {
+  width: 1280px;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+  box-sizing: border-box;
+}
+
+.commentUserInput {
+  display: flex;
+  width: 640px;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.userTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.title {
+  display: flex;
+  justify-content: left;
+}
+
+.aster {
+  color: var(--red, #f66a6a);
+
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.commentWriterInput {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+
+  width: 312px;
+  height: 48px;
+}

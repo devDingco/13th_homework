@@ -1,0 +1,195 @@
+.layout {
+  display: flex;
+
+  padding: 40px 320px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.enroll_subject {
+  display: flex;
+  width: 1280px;
+  padding: 40px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.disabled_input {
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+}
+
+.enroll_subject_text {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+.enroll_row_container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 40px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.enroll_form_title {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.enroll_row_section {
+  align-self: stretch;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.enroll_required_indicator {
+  color: var(--red, #f66a6a);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.enroll_input {
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  padding: 12px 16px;
+  box-sizing: border-box;
+  height: 48px;
+}
+
+.enroll_border {
+  width: 1280px;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+}
+
+.enroll_textarea {
+  height: 336px;
+}
+
+.enroll_row_flex {
+  display: flex;
+  gap: 40px;
+}
+
+.zipcode_input {
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 95px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.enroll_address_firstrow {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  height: 48px;
+}
+
+.zipcode_search_button {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+}
+
+.picture_enroll_row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.enroll_cancel_button {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}
+
+.enroll_submit_button {
+  border-radius: 8px;
+  background: #2974e5;
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  color: #ffffff;
+}
+
+.enroll_button_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  padding-top: 40px;
+}
+
+.error_msg {
+  color: var(--red, #f66a6a);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.flex_half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.disabled {
+  border-radius: 8px;
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background-color: #c7c7c7;
+  color: #e4e4e4;
+}
