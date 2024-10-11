@@ -41,7 +41,7 @@ export default function useBoardList() {
     event: MouseEvent<HTMLButtonElement>,
     id: String
   ) => {
-    event.stopPropagation(); //
+    event.stopPropagation();
     router.push(`/boards/${id}`);
   };
 

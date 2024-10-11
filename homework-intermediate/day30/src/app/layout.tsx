@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import ApolloSetting from '@/commons/settings/apollo-setting';
+import Layout from '@/commons/layout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,9 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <ApolloSetting>
-        <body className={inter.className}>{children}</body>
-      </ApolloSetting>
+      <body>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
+      </body>
     </html>
   );
 }
