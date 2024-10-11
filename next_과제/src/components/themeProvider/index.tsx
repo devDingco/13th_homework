@@ -34,7 +34,6 @@ export default function ThemeProvider({
       token: {
         colorPrimary: "#2974E5",
         controlHeightLG: 48,
-        // controlHeightLG: "48px",
       },
       components: {
         Menu: {
