@@ -40,20 +40,12 @@
   @apply flex justify-center items-center gap-6;
 }
 
-.reaction > div {
+.reaction > * {
   @apply flex flex-col justify-center items-center gap-1;
 }
 
 .reaction > div > p {
   @apply text-sm font-normal;
-}
-
-.bad_count {
-  color: #5f5f5f;
-}
-
-.good_count {
-  @apply text-lightCoral;
 }
 
 .button_layout {
