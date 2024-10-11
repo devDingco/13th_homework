@@ -52,13 +52,14 @@
   @apply rounded-lg border border-black bg-white h-12 px-4 py-3 text-black text-center text-lg font-semibold leading-6;
 }
 
-.등록하기버튼 {
+.등록하기버튼,
+.disabled {
   @apply border-none rounded-lg h-12 px-4 py-3 text-white text-center text-lg font-semibold leading-6 transition-colors duration-300  bg-blue-600 cursor-pointer;
 }
 
-.disabled {
+/* .disabled {
   @apply bg-gray-400 cursor-not-allowed;
-}
+} */
 
 /* 게시물 상세 페이지 스타일 */
 .게시물상세화면상자 {

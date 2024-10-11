@@ -39,7 +39,7 @@ export default function NewBoardPage() {
       [name]: value, // ex. writer 속성만 업데이트
     }));
     console.log(name, value);
-    console.log(Object.keys(errors).length);
+
     // 실시간 유효성 검사
     if (!value) {
       setErrors((prev) => ({
@@ -61,6 +61,7 @@ export default function NewBoardPage() {
     const newErrors = {}; // 불필요한 렌더링을 줄일 수 있다
     const requiredFields = ["writer", "password", "title", "contents"];
 
+    console.log(formData);
     // 유효성 검사
     requiredFields.forEach((field) => {
       // 대괄호 표기법: const field = "writer", formData[field] = formData.wirter
@@ -71,12 +72,14 @@ export default function NewBoardPage() {
     if (Object.keys(newErrors).length > 0) {
       console.log(Object.keys(newErrors).length > 0);
       setErrors(newErrors);
-      console.log(newErrors);
+      console.log(errors);
+
       return; //중단
     }
 
     //에러 하나도 없다면 데이터 넘김
     console.log("성공: ", formData);
+    console.log(errors); // 초기값이 빈문자열""이므로 keys.length는 4가 나온다............
   };
 
   return (
@@ -161,9 +164,14 @@ export default function NewBoardPage() {
           <div className={styles.취소등록버튼상자}>
             <button>취소</button>
             <button
-              className={`${styles.등록하기버튼}`}
+              className={
+                Object.keys(errors).length > 0
+                  ? styles.disabled
+                  : styles.등록하기버튼
+              }
               onClick={handleSubmit}
-              disabled={Object.keys(errors).length > 0}
+              disabled={!!errors}
+              // 초기값 4로 인해 항상 true..?
             >
               등록하기
             </button>
