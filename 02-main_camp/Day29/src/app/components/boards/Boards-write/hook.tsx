@@ -20,6 +20,7 @@ export const useBoardWrite = (isEdit?: boolean) => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
 
   const [isActive, setIsActive] = useState(isEdit ? true : false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   // 오류 메세지
   const defaultErrorMessage = isEdit ? "" : CONSTANTS_DESCRIPTION.ERROR_MESSAGE;
@@ -156,6 +157,10 @@ export const useBoardWrite = (isEdit?: boolean) => {
     });
   };
 
+  const showAddressSearchModal = () => {
+    setIsAddressModalOpen((prev) => !prev);
+  };
+
   const checkTextInput = (
     input: string,
     handler: (value: SetStateAction<string>) => void
@@ -193,6 +198,8 @@ export const useBoardWrite = (isEdit?: boolean) => {
     onClickCancel,
     showSuccessModal,
     showErrorModal,
+    showAddressSearchModal,
+    isAddressModalOpen,
     writerErrorMessage,
     passwordErrorMessage,
     titleErrorMessage,

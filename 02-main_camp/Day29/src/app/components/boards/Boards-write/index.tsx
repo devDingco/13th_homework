@@ -10,10 +10,11 @@ import {
   RequiredInputForm,
 } from "./components/input-form/text";
 import { TextInputType } from "./components/input-form/types";
-import { AddressInputForm } from "./components/input-form/address";
+import { AddressInputForm } from "./components/input-form/address-from";
 import Divider from "@/app/components/commons/divider";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
+  console.log("컴포넌트가 다시 그려집니다.");
   const board = {
     writer: props.data?.fetchBoard.writer,
     title: props.data?.fetchBoard.title,
