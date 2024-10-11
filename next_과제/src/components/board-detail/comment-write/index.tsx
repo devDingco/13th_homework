@@ -3,17 +3,18 @@
 
 import Icon from "@/components/iconFactory";
 import Input from "@/components/input";
+import TextAreaBox from "@/components/textAreaBox";
 import { IcommentWriteProps } from "@/components/board-detail/comment-write/types";
 import { useCommentWrite } from "@/components/board-detail/comment-write/hook";
 import { Rate, Button } from "antd";
 import { Controller } from "react-hook-form";
+import ModalAlertBox from "@/components/ModalAlertBox";
 
 export default function CommentWrite(props: IcommentWriteProps) {
   const {
     title = "",
     textMaxCount,
     placeholder,
-    id,
     type,
     starCountBox = true,
     data,
@@ -23,9 +24,6 @@ export default function CommentWrite(props: IcommentWriteProps) {
   } = props;
 
   const {
-    register,
-    textCount,
-    setTextCount,
     commentNew,
     commentEdit,
     isDirty,
@@ -33,17 +31,24 @@ export default function CommentWrite(props: IcommentWriteProps) {
     errors,
     editModeCancel,
     control,
-    // setValue,
+    isModalOpen,
+    setIsModalOpen,
+    modalType,
   } = useCommentWrite({ setMode, mode, commentIndex, data });
 
   return (
     <div className="flex flex-col gap-6">
+      {isModalOpen && (
+        <ModalAlertBox type={modalType} setIsModalOpen={setIsModalOpen} />
+      )}
+
       {type === "commentWrite" && (
         <div className="flex gap-2">
           <Icon icon="chat" className="w-6 h-6" />
           {title}
         </div>
       )}
+
       {starCountBox && (
         <Controller
           name="commentRating"
@@ -70,6 +75,7 @@ export default function CommentWrite(props: IcommentWriteProps) {
               placeholder="작성자 명을 입력해 주세요"
               errormessage={errors?.commentWriter?.message}
               readOnly={type === "commentEdit"}
+              required
               {...field}
             />
           )}
@@ -87,6 +93,7 @@ export default function CommentWrite(props: IcommentWriteProps) {
             <Input
               title="비밀번호"
               type="password"
+              required
               placeholder={
                 type === "commentEdit"
                   ? "댓글 작성시 등록한 비밀번호를 입력해주세요"
@@ -98,25 +105,30 @@ export default function CommentWrite(props: IcommentWriteProps) {
           )}
         />
       </div>
-      <label htmlFor={id} className="relative">
-        <textarea
-          className="w-full h-36 py-3 px-4 border border-gray-300 rounded-lg block resize-none"
-          placeholder={placeholder}
-          defaultValue={type === "commentEdit" ? data?.contents : ""} // ! 수정할 댓글 내용 및 댓글 작성시 초기값 설정
-          {...register("commentContents", {
-            required: true,
-            minLength: { value: 1, message: "내용은 1자 이상입니다." },
-            maxLength: textMaxCount,
-            onChange(event) {
-              setTextCount(event.target.value.length);
-            },
-          })}
-        ></textarea>
-        <div className="absolute bottom-3 right-4">
-          {type === "commentEdit" ? data?.contents.length : textCount}/
-          {textMaxCount}
-        </div>
-      </label>
+
+      <Controller
+        name="commentContents"
+        control={control}
+        rules={{
+          required: "필수 입력 사항입니다.",
+          maxLength: {
+            value: textMaxCount,
+            message: `최대 ${textMaxCount}자까지 입력 가능합니다.`,
+          },
+        }}
+        defaultValue={type === "commentEdit" ? data?.contents : ""}
+        render={({ field }) => (
+          <TextAreaBox
+            placeholder={placeholder}
+            errormessage={errors?.commentContents?.message}
+            rows={4}
+            showCount
+            maxLength={textMaxCount}
+            {...field}
+          />
+        )}
+      />
+
       {type === "commentEdit" ? (
         <div className="flex justify-end gap-3">
           <Button

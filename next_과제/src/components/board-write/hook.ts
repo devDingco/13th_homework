@@ -21,6 +21,14 @@ export const useBoardWrite = (formType: string) => {
   const router = useRouter();
   const params = useParams() as { boardId: string };
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
+  const [modalType, setModalType] = useState(""); // 모달 타입
+
+  const modalControl = ({ type }: { type: string }) => {
+    setIsModalOpen((isOpen) => !isOpen);
+    setModalType(type);
+  };
+
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([
@@ -100,10 +108,12 @@ export const useBoardWrite = (formType: string) => {
           ],
         });
         // console.log(result);
-        alert(`게시글이 수정되었습니다.`);
-        router.push(`/boards/${result.data?.updateBoard._id}`);
+        modalControl({ type: "boardEditSubmit" });
+        if (!isModalOpen)
+          router.push(`/boards/${result.data?.updateBoard._id}`);
       } else {
-        alert("비밀번호가 틀려서 수정할 수 없습니다.");
+        // alert("비밀번호가 틀려서 수정할 수 없습니다.");
+        modalControl({ type: "boardEditPasswordError" });
         return;
       }
     } catch (error) {
@@ -111,7 +121,7 @@ export const useBoardWrite = (formType: string) => {
         const graphQLError = error as { graphQLErrors: { message: string }[] };
         alert(`${graphQLError.graphQLErrors[0].message}`);
       } else {
-        alert("예상치 못한 오류가 발생했습니다.");
+        modalControl({ type: "boardEditErrorUnknown" });
       }
     }
   };
@@ -139,7 +149,7 @@ export const useBoardWrite = (formType: string) => {
 
     try {
       if (!writeName || !writePassword || !writeTitle || !writeContents) {
-        alert("필수 입력 사항을 입력해 주세요.");
+        modalControl({ type: "boardNewRequired" });
         return;
       }
       const writeVariables = {
@@ -168,10 +178,12 @@ export const useBoardWrite = (formType: string) => {
         ],
       });
       console.log(result);
-      alert(`게시글이 등록되었습니다.`);
-      router.push(`/boards/${result.data?.createBoard._id}`);
+      // alert(`게시글이 등록되었습니다.`);
+      modalControl({ type: "boardNewSubmit" });
+      if (!isModalOpen) router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
-      alert(`게시글 등록에 실패했습니다.`);
+      // alert(`게시글 등록에 실패했습니다.`);
+      modalControl({ type: "boardNewErrorUnknown" });
       console.log(error);
     }
   };
@@ -311,5 +323,8 @@ export const useBoardWrite = (formType: string) => {
     setFileList,
     handlePreview,
     handleChange,
+    isModalOpen,
+    setIsModalOpen,
+    modalType,
   };
 };
