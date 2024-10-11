@@ -7,6 +7,10 @@ export const CREATE_BOARD = gql`
     $password: String
     $title: String!
     $contents: String!
+    $youtubeUrl: String
+    $zipcode: String
+    $address: String
+    $addressDetail: String
   ) {
     #전달할 변수 적는곳
     createBoard(
@@ -15,12 +19,24 @@ export const CREATE_BOARD = gql`
         password: $password
         title: $title
         contents: $contents
+        youtubeUrl: $youtubeUrl
+        boardAddress: {
+          zipcode: $zipcode
+          address: $address
+          addressDetail: $addressDetail
+        }
       }
     ) {
       _id
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -32,10 +48,23 @@ export const UPDATE_BOARD = gql`
     $contents: String
     $password: String
     $boardId: ID!
+    $youtubeUrl: String
+    $zipcode: String
+    $address: String
+    $addressDetail: String
   ) {
     # 전달할 변수 적는곳
     updateBoard(
-      updateBoardInput: { title: $title, contents: $contents }
+      updateBoardInput: {
+        title: $title
+        contents: $contents
+        youtubeUrl: $youtubeUrl
+        boardAddress: {
+          zipcode: $zipcode
+          address: $address
+          addressDetail: $addressDetail
+        }
+      }
       password: $password
       boardId: $boardId
     ) {
@@ -43,6 +72,27 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
+
+// export const FETCH_BOARD = gql`
+//   query fetchBoard($boardId: ID!) {
+//     fetchBoard(boardId: $boardId) {
+//       _id
+//       writer
+//       title
+//       contents
+//       youtubeUrl
+//       boardAddress {
+//         address
+//       }
+//     }
+//   }
+// `;

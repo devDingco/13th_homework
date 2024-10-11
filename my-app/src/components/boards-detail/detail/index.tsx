@@ -6,6 +6,7 @@ import Image from "next/image";
 // mui 아이콘 사용
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import { Tooltip } from "antd";
 
 export default function BoardsDetail() {
   const { params, data } = useBoardsDetail();
@@ -42,14 +43,22 @@ export default function BoardsDetail() {
             height={0}
             sizes="100vw"
           />
-          <Image
-            src="/images/location.png"
-            alt="위치아이콘"
-            className={styles.locationIcon}
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
+
+          <Tooltip
+            title={data?.fetchBoard.boardAddress.address || "주소 정보 없음"}
+            placement="bottomRight"
+          >
+            {/* 문제점 address는 필수값이 아니여서 작성 안해도 상세페이지가 들어가져야 하는데 address가 없는 id값은 상세로 들어가지지않음,, */}
+            {/* 딮하겐 모르겠지만 과제 밀린분이 gql에 주소값을 넣지않고 만들때 생기는 문제라는 생각을 함. 왜냐면 "주소 정보 없음"이라는 값도 나오는걸 보고 추측함 */}
+            <Image
+              src="/images/location.png"
+              alt="위치아이콘"
+              className={styles.locationIcon}
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
+          </Tooltip>
         </div>
 
         <div className={styles.boardImage}>
