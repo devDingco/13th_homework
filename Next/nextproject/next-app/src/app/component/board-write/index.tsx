@@ -57,7 +57,7 @@ export default function BoardsWrite(props: IProps) {
               id="name_id"
               placeholder="작성자 명을 입력해 주세요."
               name="name"
-              defaultValue={props.isEdit ? data?.fetchBoard.writer : name}
+              defaultValue={props.isEdit ? data?.fetchBoard.writer : name} // defaultValue: input tag에서 처음 보여줄 값, input 박스에 값을 입력하면 값이 수정이 됨₩.
               onChange={onChangeName}
               disabled={props.isEdit ? true : false}
               className={
@@ -136,7 +136,7 @@ export default function BoardsWrite(props: IProps) {
               placeholder="01234"
               className={styles.css_addressnuminput}
               readOnly
-              value={addressnum}
+              value={addressnum} //input tag에서 계속 보여줄 값, input 박스에 값을 입력하면 값이 입력되지 않고 지정해준 value만 계속해서 보여줌
             />
 
             <Button onClick={onToggleModal} className={styles.css_search}>
