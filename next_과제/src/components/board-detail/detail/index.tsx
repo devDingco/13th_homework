@@ -1,6 +1,7 @@
 import Icon from "@/components/iconFactory";
 import LikeCountBtn from "@/components/likeCountBtn";
-import { Button } from "antd";
+import { Button, Tooltip, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 import { dateViewSet } from "@/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/detail/hook";
@@ -14,26 +15,48 @@ export default function BoardDetail() {
 
   if (detailData === null || error) return redirect("/boards");
 
+  // console.log(detailData);
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-6">
         <h3 className="text-2xl">{detailData?.title}</h3>
         <div>
           <div className="flex justify-between text-sm text-gray-400">
-            <div className="flex items-center gap-1 text-gray-700">
-              <Icon
-                icon="mypage"
-                className="bg-gray-300 rounded-full w-6 h-6"
-              />
-
+            <div className="flex items-center gap-1 text-gray-700 dark:text-white">
+              <Avatar size="small" icon={<UserOutlined />} />
               {detailData?.writer}
             </div>
             <div>{dateViewSet(detailData?.createdAt)}</div>
           </div>
           <hr className="my-4" />
-          <div className="flex gap-2 justify-end">
-            <Icon icon="link" className="fill-gray-800 w-6 h-6" />
-            <Icon icon="location" className="fill-gray-800 w-6 h-6" />
+          <div className="flex gap-3 justify-end items-center">
+            <Icon
+              icon="link"
+              className="fill-gray-800 w-6 h-6 dark:fill-white"
+            />
+
+            <Tooltip
+              placement="bottomRight"
+              arrow={{ pointAtCenter: true }}
+              mouseLeaveDelay={0.8}
+              key="#fff"
+              color="#fff"
+              trigger={["hover"]}
+              overlayInnerStyle={{ color: "#000" }}
+              title={
+                (detailData?.boardAddress?.address || "") +
+                " " +
+                (detailData?.boardAddress?.addressDetail || "")
+              }
+            >
+              <button className="w-6 h-6">
+                <Icon
+                  icon="location"
+                  className="fill-gray-800 w-6 h-6 dark:fill-white"
+                />
+              </button>
+            </Tooltip>
           </div>
         </div>
         {detailData?.youtubeUrl && (
