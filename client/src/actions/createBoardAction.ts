@@ -11,13 +11,16 @@ export async function createBoardAction(
 	prevState: IFormStateError,
 	formData: FormData,
 ): Promise<IFormStateError> {
-	const author = formData.get('Author');
-	const password = formData.get('Password');
-	const title = formData.get('Title');
-	const content = formData.get('Content');
-	const youtubeUrl = formData.get('YoutubeUrl');
-	const address = formData.get('Address');
-	const detailAddress = formData.get('DetailAddress');
+	// 왜 formData에서 address를 못 들고 오는걸까..? 나중에 디버깅하기
+	const author = formData.get('Author') as string;
+	const password = formData.get('Password') as string;
+	const title = formData.get('Title') as string;
+	const content = formData.get('Content') as string;
+	const youtubeUrl = formData.get('YoutubeUrl') as string;
+	const address = formData.get('Address') as string;
+	const detailAddress = formData.get('DetailAddress') as string;
+
+	console.log(formData);
 
 	if (!author || !password || !title || !content)
 		return {
@@ -31,13 +34,13 @@ export async function createBoardAction(
 		};
 	else {
 		const data: ICreateFormBoard = {
-			author: author as string,
-			title: title as string,
-			password: password as string,
-			content: content as string,
-			youtubeUrl: youtubeUrl as string | undefined,
-			address: address as string,
-			detailAddress: detailAddress as string,
+			author,
+			title,
+			password,
+			content,
+			youtubeUrl,
+			address,
+			detailAddress,
 		};
 
 		const responseData = await postBoard(data);

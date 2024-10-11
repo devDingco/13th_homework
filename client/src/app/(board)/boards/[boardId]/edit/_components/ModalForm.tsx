@@ -23,7 +23,7 @@ export default function ModalForm() {
 		<>
 			<form
 				autoComplete="off"
-				className="mt-4 flex w-2/3 items-center justify-evenly rounded-2xl border-2 border-[#c1c1c1]"
+				className="mt-4 flex w-full items-center justify-evenly rounded-2xl border-2 border-[#c1c1c1]"
 				action={formAction}
 			>
 				<input
@@ -45,6 +45,7 @@ export default function ModalForm() {
 					/>
 				</svg>
 			</form>
+			{/* size로 처리하지않고 padding으로 처리하니깐 모달 사이즈가 변경됨 나중에 추후 잡을 예정 */}
 			<div className="prose-me_16_24 mt-2 text-sm text-red-500">{state?.error}</div>
 		</>
 	);
