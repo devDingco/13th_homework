@@ -4,7 +4,7 @@ import "./globals.css";
 import ApolloSetting from "./commons/setting/apollo-setting";
 
 const Pretendard = localFont({
-  src: "../public/fonts/PretendardVariable.woff2",
+  src: "../../public/fonts/PretendardVariable.woff2",
   variable: "--font-Pretendard",
   weight: "100 900",
 });
