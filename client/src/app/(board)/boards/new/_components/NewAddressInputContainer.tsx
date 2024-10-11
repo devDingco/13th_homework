@@ -17,7 +17,7 @@ export default function NewAddressInputContainer({ title }: ITitle) {
 			<div className="prose-me_16_24 text-gray-800">주소</div>
 			<div className="flex gap-2">
 				<div className="flex items-center justify-center rounded-lg border-[1px] border-gray-200 px-3 text-gray-400 outline-none">
-					{zonecode ? zonecode : '우편번호'}
+					{zonecode}
 				</div>
 
 				<div

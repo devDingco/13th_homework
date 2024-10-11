@@ -7,7 +7,7 @@ import useIsScrollLock from '@/hooks/useIsScrollLock';
 
 export default function ModalEditPage({ searchParams, params }: IDeatilPageProps) {
 	const isModal = searchParams.modal as boolean;
-	useIsScrollLock(isModal);
+	useIsScrollLock(!!isModal);
 
 	return searchParams.modal && <ModalContainer modal={isModal} boardId={+params.boardId} />;
 }

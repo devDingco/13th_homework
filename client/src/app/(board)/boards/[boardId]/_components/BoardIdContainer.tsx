@@ -14,7 +14,7 @@ export default function BoardIdContainer({ resource }: IBoardReaderResource) {
 			{boardInfor && typeof boardInfor === 'object' && 'boardId' in boardInfor && (
 				<>
 					<BoardHeader infor={boardInfor} />
-					<BoardIcon />
+					<BoardIcon address={boardInfor?.detailAddress} />
 					{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
 					<div className="prose-r_16_24">{boardInfor.content}</div>
 					{/* 나중에 youtubeComponent로 변경할 예정 */}
