@@ -1,4 +1,5 @@
 /** @format */
+// TODO 시간되면.. skeleton 변경하기
 
 import BoardCommentContainer from './_components/BoardCommentContainer';
 import BoardFooter from './_components/BoardFooter';

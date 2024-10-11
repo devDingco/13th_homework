@@ -1,5 +1,6 @@
 /** @format */
 'use client';
+// NOTE useFormState & useFormStatus
 
 import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';

@@ -1,5 +1,6 @@
 /** @format */
 'use client';
+// WARNING - third party cookie error
 
 import YouTube from 'react-youtube';
 
@@ -9,7 +10,6 @@ export default function BoardYoutube() {
 		height: '390',
 		width: '640',
 		playerVars: {
-			autoplay: 1,
 			controls: 1,
 		},
 	};

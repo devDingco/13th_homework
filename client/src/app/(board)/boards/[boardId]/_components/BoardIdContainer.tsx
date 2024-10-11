@@ -1,4 +1,5 @@
 /** @format */
+// TODO 좀더 깔끔하게 리팩토링해보기
 
 import { IBoardReaderResource, IBoardResponse } from '@/models/boardReaderResponse';
 
@@ -18,7 +19,6 @@ export default function BoardIdContainer({ resource }: IBoardReaderResource) {
 					<BoardIcon address={boardInfor?.detailAddress} />
 					{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
 					<div className="prose-r_16_24">{boardInfor.content}</div>
-					{/* 나중에 youtubeComponent로 변경할 예정 */}
 					<BoardYoutube />
 				</>
 			)}

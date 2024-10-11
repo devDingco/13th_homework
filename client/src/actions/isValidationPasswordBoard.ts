@@ -1,5 +1,6 @@
 /** @format */
 'use server';
+// NOTE SSR에 대해서 제대로 공부하기
 
 import { IValidPasswordState } from '@/models/validationPasssword.type';
 import postValidationPassword from '@/apis/boards/postValidationPassword';

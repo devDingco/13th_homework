@@ -1,5 +1,6 @@
 /** @format */
 // 'use client';
+// TODO: graphql 적용시켜보기
 
 import './globals.css';
 

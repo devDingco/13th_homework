@@ -9,7 +9,7 @@ import useOnClickPush from '@/hooks/useOnClickPush';
 
 export default function NewAddressInputContainer({ title }: ITitle) {
 	const onClickPush = useOnClickPush();
-	// 타입 에러는 천천히.. 구현부터
+
 	const { zonecode } = useAddressStore();
 
 	return (
