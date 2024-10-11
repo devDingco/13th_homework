@@ -2,7 +2,7 @@
 
 import { Rate } from "antd";
 
-import Btn from "@/components/Atoms/_Btn";
+import Button from "@/components/Atoms/_Button";
 import InputField from "@/components/Molecules/_InputField";
 
 import Image from "next/image";
@@ -37,7 +37,7 @@ export default function CommentNewUI() {
             <br />
             <br />
 
-            <Btn value="등록하기" />
+            <Button label="등록하기" />
         </div>
     );
 }

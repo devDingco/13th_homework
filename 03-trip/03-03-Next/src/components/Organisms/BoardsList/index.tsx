@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { FetchBoardsDocument } from "@/commons/graphql/graphql";
@@ -6,7 +7,6 @@ import { MouseEventHandler } from "react";
 import useDelete from "@/commons/hooks/useDelete";
 
 import styles from "./styles.module.css";
-import Btn from "@/components/Atoms/_Btn";
 
 export default function BoardsListUI() {
     const Router = useRouter();
@@ -17,15 +17,6 @@ export default function BoardsListUI() {
 
     return (
         <>
-            <Btn
-                className="btn__submit"
-                value="등록하기"
-                onClick={(e) => {
-                    e.preventDefault();
-                    Router.push(`/boards/new`);
-                }}
-            />
-
             <div className={styles.post_list}>
                 <div className={styles.label_wrapper}>
                     <div className={styles.idx}>번호</div>

@@ -5,7 +5,7 @@ import useUpdate from "@/commons/hooks/useUpdate";
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { Input } from "@/components/Atoms/_Input";
+import Input from "@/components/Atoms/_Input";
 import { FrownFilled, HeartFilled } from "@ant-design/icons";
 
 export default function BoardsDetailUI({ isEdit }) {
@@ -76,8 +76,8 @@ export default function BoardsDetailUI({ isEdit }) {
                 <p>
                     {isEdit ? (
                         <Input
-                            id="title"
-                            title={data?.fetchBoard.title}
+                            id="title_ID"
+                            value={data?.fetchBoard.title}
                             onChange={handleChange}
                         />
                     ) : (
@@ -87,8 +87,8 @@ export default function BoardsDetailUI({ isEdit }) {
                 <p>
                     {isEdit ? (
                         <Input
-                            id="contents"
-                            contents={data?.fetchBoard.contents}
+                            id="content_ID"
+                            value={data?.fetchBoard.contents}
                             onChange={handleChange}
                             textarea
                         />
