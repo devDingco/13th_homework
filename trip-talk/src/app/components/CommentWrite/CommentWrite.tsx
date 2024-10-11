@@ -6,6 +6,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import TextArea from "../TextArea/TextArea";
 import useCommentWrite from "../../../commons/hooks/useCommentWrite";
+import StarRating from "../StarRating/StarRating";
 
 export default function CommentWrite() {
   const { handleCommentSubmit, handleInputChange, disabledButton, comment } =
@@ -18,36 +19,7 @@ export default function CommentWrite() {
         <p>댓글</p>
       </div>
       <div className={styles.rating_stars}>
-        <Image
-          src="/svgs/star-empty.svg"
-          alt="starEmpty"
-          width={24}
-          height={24}
-        />
-        <Image
-          src="/svgs/star-empty.svg"
-          alt="starEmpty"
-          width={24}
-          height={24}
-        />
-        <Image
-          src="/svgs/star-empty.svg"
-          alt="starEmpty"
-          width={24}
-          height={24}
-        />
-        <Image
-          src="/svgs/star-empty.svg"
-          alt="starEmpty"
-          width={24}
-          height={24}
-        />
-        <Image
-          src="/svgs/star-empty.svg"
-          alt="starEmpty"
-          width={24}
-          height={24}
-        />
+        <StarRating />
       </div>
       <div className={styles.input_layout}>
         <div className={styles.input_wrapper}>
