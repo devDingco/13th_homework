@@ -8,6 +8,7 @@ export const register = gql`
       title
       createdAt
       updatedAt
+      youtubeUrl
       boardAddress {
         zipcode
         address
@@ -34,6 +35,12 @@ export const UPDATE_BOARD = gql`
       createdAt
       updatedAt
       writer
+      youtubeUrl
+      boardAddress {
+        address
+        addressDetail
+        zipcode
+      }
     }
   }
 `;
@@ -45,11 +52,12 @@ export const FetchBoard = gql`
       title
       contents
       createdAt
-      # boardAddress {
-      #   address
-      #   zipcode
-      #   addressDetail
-      # }
+      youtubeUrl
+      boardAddress {
+        address
+        zipcode
+        addressDetail
+      }
     }
   }
 `;

@@ -15,6 +15,7 @@ export default function CommentPage() {
     value,
     onChangeStar,
   } = UseCommentWrite();
+
   return (
     <>
       <div className={styles.css_star}>

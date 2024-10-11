@@ -1,20 +1,31 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { FetchBoard, register, UPDATE_BOARD } from "./queries";
 import { IProps } from "./types";
+import { FetchBoards } from "../board-list/list/queries";
+import { Modal } from "antd";
+import { Address } from "react-daum-postcode";
 
 export const UseBoardsWrite = (props: IProps) => {
-  const [name, setName] = useState(props.data?.fetchBoard.writer || "");
+  const router = useRouter();
+  const params = useParams(); //라우터 사용 시 파라미터 정보를 가져오기 위한 설정
+  const { data } = useQuery(FetchBoard, {
+    variables: {
+      myboardId: params.boardId,
+    },
+  });
 
-  const [password, setPassword] = useState(
-    props.data?.fetchBoard.password || ""
+  const [name, setName] = useState("");
+
+  const [password, setPassword] = useState("");
+
+  const [title, setTitle] = useState(
+    props.isEdit ? data?.fetchBoard.title : ""
   );
 
-  const [title, setTitle] = useState(props.data?.fetchBoard.title || "");
-
   const [contents, setContents] = useState(
-    props.data?.fetchBoard.contents || ""
+    props.isEdit ? data?.fetchBoard.contents : ""
   );
 
   const [nameblank, setNameBlank] = useState("");
@@ -26,6 +37,28 @@ export const UseBoardsWrite = (props: IProps) => {
   const [contentblank, setContentBlank] = useState("");
 
   const [isActive, setIsActive] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [addressnum, setAddressNum] = useState(
+    props.isEdit ? data?.fetchBoard.boardAddress.zipcode : ""
+  );
+
+  // useEffect(() => {
+  //   setAddressNum(data?.fetchBoard.boardAddress.zipcode);
+  // }, [data]);
+
+  const [address, setAddress] = useState(
+    props.isEdit ? data?.fetchBoard.boardAddress.address : ""
+  );
+
+  const [addressDetail, setAddressDetail] = useState(
+    props.isEdit ? data?.fetchBoard.boardAddress.addressDetail : ""
+  );
+
+  const [youtubeUrl, setYoutubeUrl] = useState(
+    props.isEdit ? data?.fetchBoard.youtubeUrl : ""
+  );
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -82,13 +115,14 @@ export const UseBoardsWrite = (props: IProps) => {
       setIsActive(false);
     }
   };
-  const router = useRouter();
-  const params = useParams(); //라우터 사용 시 파라미터 정보를 가져오기 위한 설정
-  const { data } = useQuery(FetchBoard, {
-    variables: {
-      myboardId: params.boardId,
-    },
-  });
+
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
 
   const [myfunction] = useMutation(register);
   const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -115,6 +149,8 @@ export const UseBoardsWrite = (props: IProps) => {
       setContentBlank("");
     }
   };
+
+  // 등록하기
   const onClickSignup = async () => {
     await checkValid;
     try {
@@ -126,19 +162,31 @@ export const UseBoardsWrite = (props: IProps) => {
               password: password,
               title: title,
               contents: contents,
+              youtubeUrl: youtubeUrl,
+              boardAddress: {
+                address: address,
+                zipcode: addressnum,
+                addressDetail: addressDetail,
+              },
             },
           },
+          refetchQueries: [{ query: FetchBoards }],
         });
 
-        alert("게시글 등록 완료");
+        Modal.success({
+          title: "성공",
+        });
         console.log(result.data.createBoard._id);
         router.push("../../../boards");
       }
     } catch {
-      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+      Modal.error({
+        title: "에러",
+      });
     }
   };
 
+  // 수정하기
   const onClickUpdate = async () => {
     const password = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요");
     try {
@@ -146,15 +194,47 @@ export const UseBoardsWrite = (props: IProps) => {
         variables: {
           boardId: params.boardId,
           password: password,
-          updateBoardInput: { title, contents },
+          updateBoardInput: {
+            title,
+            contents,
+            youtubeUrl,
+            boardAddress: {
+              address,
+              addressDetail,
+              zipcode: addressnum,
+            },
+          },
         },
       });
-      console.log(result);
-      alert("수정완료");
+      Modal.success({
+        title: "성공",
+      });
       router.push(`../../boards/${result.data.updateBoard._id}`);
     } catch {
-      alert("비밀번호 오류");
+      Modal.error({
+        title: "에러",
+      });
     }
+  };
+
+  // 수정상태일때 취소버튼 클릭 시 상세정보로 이동, 아니면 목록으로 이동
+  const onClickGoToList = () => {
+    router.push("../../boards");
+  };
+  const onClickGoToDetail = () => {
+    router.push(`../../boards/${data.fetchBoard._id}`);
+  };
+
+  // 우편 검색
+  const onToggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+  const handleCpmplete = (data: Address) => {
+    console.log(data);
+    const { address, zonecode } = data;
+    setAddressNum(zonecode);
+    setAddress(address);
+    onToggleModal();
   };
 
   return {
@@ -162,8 +242,14 @@ export const UseBoardsWrite = (props: IProps) => {
     onChangeName,
     onChangePassword,
     onChangeTitle,
-    onClickSignup,
     onClickUpdate,
+    onClickGoToList,
+    onClickGoToDetail,
+    onClickSignup,
+    handleCpmplete,
+    onToggleModal,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
     nameblank,
     passwordblank,
     titleblank,
@@ -172,8 +258,13 @@ export const UseBoardsWrite = (props: IProps) => {
     title,
     contents,
     password,
+    address,
+    addressDetail,
+    addressnum,
     isActive,
     isButtonDisabled,
+    isModalOpen,
     data,
+    youtubeUrl,
   };
 };

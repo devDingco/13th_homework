@@ -1,23 +1,9 @@
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
 .css_layout {
   width: 1280px;
   padding: 40px 0px 40px 0px;
   left: 320px;
   gap: 40px;
-  
 }
-
 
 .disabled_input {
   display: flex;
@@ -50,13 +36,11 @@ body {
   height: 80px;
 }
 
-
 /* 이름 */
 .css_writer {
   width: 620px;
   height: 80px;
   gap: 8px;
-  
 }
 
 .css_nametag {
@@ -100,7 +84,7 @@ body {
 
 .css_line {
   width: 100%;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   margin-top: 30px;
 }
 
@@ -126,7 +110,6 @@ body {
   border-radius: 8px;
   padding: 12px 16px 12px 16px;
 }
-
 
 /* 내용 */
 .css_content {
@@ -191,7 +174,7 @@ body {
   height: 48px;
   border-radius: 8px;
   border: 1px solid gray;
-  padding: 12px 16px 12px 16px;   
+  padding: 12px 16px 12px 16px;
 }
 
 .css_addressinput {
@@ -212,14 +195,11 @@ body {
   margin-top: 10px;
 }
 
-
-
 .css_line {
   width: 100%;
   margin-top: 40px;
   margin-bottom: 30px;
 }
-
 
 /* 링크 */
 
@@ -256,7 +236,6 @@ body {
   gap: 8px;
 }
 
-
 .css_picture {
   display: flex;
   align-items: flex-start;
@@ -267,7 +246,6 @@ body {
   width: 100px;
   height: auto;
 }
-
 
 /* 하단 버튼 */
 
@@ -302,7 +280,6 @@ body {
   border: 0;
   color: #ffffff;
 }
-
 
 /* 빈칸 에러 */
 .css_blankerror {

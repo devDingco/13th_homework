@@ -1,18 +1,27 @@
 import Image from "next/image";
 import Input from "../commons/Input";
-import Button from "../commons/Button";
+// import Button from "../commons/Button";
 import styles from "./style.module.css";
 import { IProps } from "./types";
 import { UseBoardsWrite } from "./hook";
 import React from "react";
+import { Button, Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
+
 export default function BoardsWrite(props: IProps) {
   const {
     onChangeContent,
     onChangeName,
     onChangePassword,
     onChangeTitle,
-    onClickSignup,
     onClickUpdate,
+    onClickGoToList,
+    onClickGoToDetail,
+    onClickSignup,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
+    onToggleModal,
+    handleCpmplete,
     isButtonDisabled,
     nameblank,
     titleblank,
@@ -21,9 +30,14 @@ export default function BoardsWrite(props: IProps) {
     name,
     title,
     password,
+    contents,
+    addressnum,
+    address,
+    addressDetail,
+    isModalOpen,
     data,
+    youtubeUrl,
   } = UseBoardsWrite(props);
-  console.log(data?.fetchBoard.name);
 
   return (
     <div className={styles.css_layout}>
@@ -43,9 +57,9 @@ export default function BoardsWrite(props: IProps) {
               id="name_id"
               placeholder="작성자 명을 입력해 주세요."
               name="name"
-              value={props.isEdit ? data?.fetchBoard.writer : name}
+              defaultValue={props.isEdit ? data?.fetchBoard.writer : name}
               onChange={onChangeName}
-              disabled={props.isEdit}
+              disabled={props.isEdit ? true : false}
               className={
                 props.isEdit
                   ? styles.disabled_input
@@ -64,9 +78,9 @@ export default function BoardsWrite(props: IProps) {
               id="pwd_id"
               placeholder="비밀번호를 입력해 주세요."
               name="pwd"
-              value={props.isEdit ? "******" : password}
+              defaultValue={props.isEdit ? "******" : password}
               onChange={onChangePassword}
-              disabled={props.isEdit}
+              disabled={props.isEdit ? true : false}
               className={
                 props.isEdit
                   ? styles.disabled_input
@@ -83,13 +97,11 @@ export default function BoardsWrite(props: IProps) {
           <div className={styles.css_title}>
             제목
             <input
+              defaultValue={props.isEdit ? data?.fetchBoard?.title : title}
               type="text"
-              id="title_id"
-              placeholder="제목을 입력해 주세요."
-              name="title"
-              defaultValue={props.isEdit ? data?.fetchBoard.title : title}
-              onChange={onChangeTitle}
               className={styles.css_titleinput}
+              placeholder="제목을 입력해 주세요."
+              onChange={onChangeTitle}
             />
             <div className={styles.css_blankerror}>{titleblank}</div>
           </div>
@@ -101,13 +113,13 @@ export default function BoardsWrite(props: IProps) {
           <div className={styles.css_content}>
             내용
             <input
+              defaultValue={
+                props.isEdit ? data?.fetchBoard?.contents : contents
+              }
               type="text"
-              id="title_content"
-              placeholder="내용을 입력해 주세요."
-              name="content"
-              defaultValue={data?.fetchBoard.contents}
-              onChange={onChangeContent}
               className={styles.css_contentinput}
+              placeholder="내용을 입력해 주세요."
+              onChange={onChangeContent}
             />
             <div className={styles.css_blankerror}>{contentblank}</div>
           </div>
@@ -119,26 +131,40 @@ export default function BoardsWrite(props: IProps) {
             주소
           </label>
           <div className={styles.css_addressnum}>
-            <Input
+            <input
               type="text"
-              id="addressnum_id"
               placeholder="01234"
-              name="addressnum"
+              className={styles.css_addressnuminput}
+              readOnly
+              value={addressnum}
             />
-            {/* value={addressnumber}onChange={onChangeAddressNumber} */}
-            <Button type="button" value="우편번호 검색" name="search" />
+
+            <Button onClick={onToggleModal} className={styles.css_search}>
+              우편번호 검색
+            </Button>
+            {isModalOpen && (
+              <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+                <DaumPostcodeEmbed onComplete={handleCpmplete} />
+              </Modal>
+            )}
           </div>
-          <Input
+          <input
             type="text"
-            id="address_id"
             placeholder="주소를 입력해 주세요."
-            name="address"
+            className={styles.css_addressinput}
+            readOnly
+            value={address}
           />
-          <Input
+          <input
             type="text"
-            id="addressdetail_id"
-            placeholder="상세주소"
-            name="addressdetail"
+            placeholder="상세주소를 입력해 주세요."
+            className={styles.css_addressinput}
+            onChange={onChangeAddressDetail}
+            defaultValue={
+              props.isEdit
+                ? data?.fetchBoard?.boardAddress.addressDetail
+                : addressDetail
+            }
           />
         </div>
 
@@ -149,11 +175,14 @@ export default function BoardsWrite(props: IProps) {
           <label htmlFor="link_id" className={styles.css_linktag}>
             링크
           </label>
-          <Input
+          <input
             type="text"
-            id="link_id"
-            placeholder="링크를 입력해 주세요."
-            name="link"
+            placeholder="링크 입력"
+            className={styles.css_linkinput}
+            onChange={onChangeYoutubeUrl}
+            defaultValue={
+              props.isEdit ? data?.fetchBoard?.youtubeUrl : youtubeUrl
+            }
           />
         </div>
         <div className={styles.css_line}></div>
@@ -191,18 +220,23 @@ export default function BoardsWrite(props: IProps) {
 
         {/* 하단 버튼 */}
         <div className={styles.css_button}>
-          <button className={styles.css_cancelbutton}>취소</button>
           <button
+            className={styles.css_cancelbutton}
+            onClick={props.isEdit ? onClickGoToDetail : onClickGoToList}
+          >
+            취소
+          </button>
+          <Button
+            onClick={props.isEdit ? onClickUpdate : onClickSignup}
             className={
               !props.isEdit && isButtonDisabled
                 ? `${styles.css_submitbutton} ${styles.disabled}`
                 : styles.css_submitbutton
             }
-            onClick={props.isEdit ? onClickUpdate : onClickSignup}
             disabled={!props.isEdit && isButtonDisabled}
           >
             {props.isEdit ? "수정" : "등록"}하기
-          </button>
+          </Button>
         </div>
       </div>
     </div>

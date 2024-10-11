@@ -7,7 +7,6 @@
   --foreground: #171717;
 }
 
-
 body {
   color: var(--foreground);
   background: var(--background);
@@ -20,12 +19,11 @@ body {
   }
 }
 
-
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 body {
   display: flex;

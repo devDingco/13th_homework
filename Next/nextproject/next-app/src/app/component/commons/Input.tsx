@@ -7,7 +7,7 @@ interface Props {
   id: string;
   placeholder: string;
   name: string;
-  value?: string;
+  defaultValue?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   className?: string;
@@ -20,7 +20,7 @@ export default function Input({
   id,
   placeholder,
   name,
-  value,
+  defaultValue,
   onChange,
   disabled,
 }: Props) {
@@ -35,7 +35,7 @@ export default function Input({
         id={id}
         name={name}
         placeholder={placeholder}
-        value={value}
+        defaultValue={defaultValue}
         className={styles[`css_${name}input`]}
         onChange={onChange}
         disabled={disabled}
