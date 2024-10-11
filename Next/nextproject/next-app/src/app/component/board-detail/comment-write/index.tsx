@@ -15,6 +15,7 @@ export default function CommentPage() {
     value,
     onChangeStar,
   } = UseCommentWrite();
+
   return (
     <>
       <div className={styles.css_star}>
@@ -37,7 +38,7 @@ export default function CommentPage() {
           <div className={styles.css_namebox}>
             <div className={styles.css_namelabel}>비밀번호</div>
             <input
-              type="text"
+              type="password"
               id="pwd_id"
               placeholder="비밀번호를 입력해 주세요."
               name="pwd"

@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { FetchBoards, DeleteBoard } from "./queries";
 import { useRouter } from "next/navigation";
-
 export default function UseListWrite() {
   const { data } = useQuery(FetchBoards);
 
@@ -23,9 +22,13 @@ export default function UseListWrite() {
     });
   };
 
+  const onClickWriteBoard = () => {
+    router.push("../../../routes/boards/new");
+  };
   return {
     onMoveDetailPage,
     onClickDelete,
     data,
+    onClickWriteBoard,
   };
 }
