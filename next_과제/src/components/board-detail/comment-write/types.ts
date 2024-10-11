@@ -2,7 +2,7 @@ export interface IcommentWriteProps {
   title?: string;
   textMaxCount: number;
   placeholder: string;
-  id: string;
+  id?: string;
   type: string;
   starCountBox?: boolean;
   data?: {
@@ -26,7 +26,7 @@ export interface IcommentForm {
 
 export interface IuseCommentWriteProps {
   data?: {
-    __typename: string;
+    __typename?: string;
     _id: string;
     writer: string;
     password?: string;
