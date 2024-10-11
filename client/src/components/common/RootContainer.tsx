@@ -6,7 +6,7 @@ import RootHeader from './RootHeader';
 
 export default function RootContainer({ children }: IProps) {
 	return (
-		<main className="flex flex-col items-center">
+		<main className="flex flex-col items-center justify-center">
 			{/* active link */}
 			<RootHeader />
 			<RootBanner />

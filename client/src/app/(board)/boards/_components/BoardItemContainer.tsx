@@ -19,7 +19,6 @@ export default function BoardItemContainer() {
 		fallbackData: [],
 	});
 	// const { data, loading } = useQuery<GetBoardsQuery>(GetBoardDocument);
-	console.log(data);
 
 	if (isLoading) {
 		return <BoardLoading />;
