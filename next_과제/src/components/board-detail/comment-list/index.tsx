@@ -19,7 +19,7 @@ export default function CommentList(props: IcommentItemBox) {
 
   // if (error) return redirect("/boards");
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -33,7 +33,12 @@ export default function CommentList(props: IcommentItemBox) {
             rating: data.rating,
           };
           return (
-            <div key={data._id} className="flex flex-col gap-2 border-b pb-10">
+            <div
+              key={data._id}
+              className={`flex flex-col gap-2 py-10 ${
+                idx % 2 === 1 && "border-t"
+              }`}
+            >
               <CommentWrite
                 id="commentEdit"
                 type="commentEdit"
@@ -49,7 +54,12 @@ export default function CommentList(props: IcommentItemBox) {
           );
         } else {
           return (
-            <div key={data._id} className="flex flex-col gap-2 border-b pb-10">
+            <div
+              key={data._id}
+              className={`flex flex-col gap-2 py-10 ${
+                idx % 2 === 1 && "border-t"
+              }`}
+            >
               <div className="flex justify-between">
                 <div className="flex gap-2">
                   <div className="flex gap-1 items-center">
