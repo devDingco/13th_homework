@@ -5,7 +5,9 @@ import BoardCommentsInputForm from "@/app/components/boards/Boards-detail/Commen
 import BoardDetailProfile from "../Profile";
 import BoardComment from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
-import { Divider } from "antd";
+import Divider from "@/app/components/commons/divider";
+import ModalContainer from "@/app/components/commons/modal-container";
+import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();

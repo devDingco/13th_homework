@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { FetchBoardDocument } from "@/commons/gql/graphql";
+import useModalContainer from "@/app/components/commons/modal-container/hook";
 
 const useBoardsDetail = () => {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import React from "react";
 import { Rate } from "antd";
-import { Divider } from "../../Boards-write";
 import BoardDetailProfile from "../Profile";
 import styles from "./styles.module.css";
+import Divider from "@/app/components/commons/divider";
 
 const Comment = (props: ICommentInput) => {
   return (

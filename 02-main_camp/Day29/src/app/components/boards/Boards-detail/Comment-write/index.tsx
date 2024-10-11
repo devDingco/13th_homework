@@ -2,11 +2,11 @@ import React from "react";
 import { Rate } from "antd";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import useCommentWrite from "./hook";
-
 import styles from "./styles.module.css";
 import CONSTANTS_TITLE from "@/commons/constants/title";
 import { RequiredInputForm } from "../../Boards-write/components/input-form/text";
-import Divider from "@/commons/components/divider";
+import Divider from "@/app/components/commons/divider";
+import { TextInputType } from "../../Boards-write/components/input-form/types";
 
 const CommentWrite = () => {
   const {
@@ -36,6 +36,7 @@ const CommentWrite = () => {
           value={comment.writer}
         />
         <RequiredInputForm
+          type={TextInputType.password}
           title={CONSTANTS_TITLE.PASSWORD}
           placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
           onChange={onChangePassword}

@@ -11,7 +11,7 @@ import {
 } from "./components/input-form/text";
 import { TextInputType } from "./components/input-form/types";
 import { AddressInputForm } from "./components/input-form/address";
-import { Divider } from "antd";
+import Divider from "@/app/components/commons/divider";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
   const board = {

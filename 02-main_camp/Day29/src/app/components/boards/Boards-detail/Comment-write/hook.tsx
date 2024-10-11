@@ -5,10 +5,13 @@ import {
 } from "@/commons/gql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
+
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { useBoardWrite } from "../../Boards-write/hook";
 
 const useCommentWrite = () => {
   const params = useParams();
+  const { showSuccessModal, showErrorModal } = useBoardWrite();
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -72,10 +75,14 @@ const useCommentWrite = () => {
         ],
       });
       comment.id = result.data?.createBoardComment._id;
-      resetInputValue();
-      alert(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED);
+      showSuccessModal(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED, () => {
+        resetInputValue();
+      });
     } catch (error) {
-      alert(`${CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_FAILED} (${error})`);
+      showErrorModal(
+        "댓글 작성 오류",
+        `${CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_FAILED} (${error})`
+      );
     }
   };
 

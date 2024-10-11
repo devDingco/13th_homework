@@ -7,8 +7,9 @@ import {
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
+import { Modal } from "antd";
 
-export const useBoardWrite = (isEdit: boolean) => {
+export const useBoardWrite = (isEdit?: boolean) => {
   const router = useRouter();
   const params = useParams();
 
@@ -16,7 +17,7 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [youtubeLink, setYoutubeLink] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
   const [isActive, setIsActive] = useState(isEdit ? true : false);
 
@@ -68,7 +69,10 @@ export const useBoardWrite = (isEdit: boolean) => {
     return isEdit ? setIsActive(true) : setIsActive(false);
   };
 
-  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {};
+  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setYoutubeUrl(value);
+  };
 
   // onClick
   const onClickSubmit = async () => {
@@ -80,14 +84,19 @@ export const useBoardWrite = (isEdit: boolean) => {
             password: password,
             title: title,
             contents: contents,
+            youtubeUrl: youtubeUrl,
           },
         },
       });
-
       const boardId = result.data?.createBoard._id;
-      router.push(`/boards/${boardId}`);
+      showSuccessModal("게시글이 작성 되었습니다.", () => {
+        router.push(`/boards/${boardId}`);
+      });
     } catch {
-      alert(CONSTANTS_ALERT_MESSAGE.CREATE_BOARD_FAILED);
+      showErrorModal(
+        "게시글 작성 오류",
+        CONSTANTS_ALERT_MESSAGE.CREATE_BOARD_FAILED
+      );
     }
   };
 
@@ -102,17 +111,17 @@ export const useBoardWrite = (isEdit: boolean) => {
           updateBoardInput: {
             title: title,
             contents: contents,
-            youtubeUrl: "www.youtube.com",
+            youtubeUrl: youtubeUrl,
           },
           password: passwordInput,
           boardId: params.boardId as string,
         },
       });
-      alert(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED);
-      router.push(`/boards/${params.boardId}`);
+      showSuccessModal(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED, () => {
+        router.push(`/boards/${params.boardId}`);
+      });
     } catch (error: any) {
-      alert(error.graphQLErrors[0].message);
-      console.log(error.message);
+      showErrorModal("게시글 수정 오류", error.graphQLErrors[0].message);
     }
   };
 
@@ -122,6 +131,29 @@ export const useBoardWrite = (isEdit: boolean) => {
     } else {
       router.push(`/boards`);
     }
+  };
+
+  // Modal
+  const showSuccessModal = (
+    content: string,
+    completionHandler?: () => void
+  ) => {
+    Modal.success({
+      content: content,
+      onOk: completionHandler,
+    });
+  };
+
+  const showErrorModal = (
+    title: string,
+    content: string,
+    completionHandler?: () => void
+  ) => {
+    Modal.error({
+      title: title,
+      content: content,
+      onOk: completionHandler,
+    });
   };
 
   const checkTextInput = (
@@ -159,6 +191,8 @@ export const useBoardWrite = (isEdit: boolean) => {
     onClickSubmit,
     onClickEdit,
     onClickCancel,
+    showSuccessModal,
+    showErrorModal,
     writerErrorMessage,
     passwordErrorMessage,
     titleErrorMessage,
