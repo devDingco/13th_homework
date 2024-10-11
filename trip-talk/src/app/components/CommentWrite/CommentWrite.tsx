@@ -19,7 +19,7 @@ export default function CommentWrite() {
         <p>댓글</p>
       </div>
       <div className={styles.rating_stars}>
-        <StarRating />
+        <StarRating readOnly={false} />
       </div>
       <div className={styles.input_layout}>
         <div className={styles.input_wrapper}>

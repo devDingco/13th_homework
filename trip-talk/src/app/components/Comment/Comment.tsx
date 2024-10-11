@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ICommentList } from "../../../types/components.type";
 import styles from "./styles.module.css";
 import useComment from "../../../commons/hooks/useComment";
+import StarRating from "../StarRating/StarRating";
 
 export default function Comment(props: ICommentList) {
   const {
@@ -27,36 +28,7 @@ export default function Comment(props: ICommentList) {
               <span>{writer}</span>
             </div>
             <div className={styles.rating_stars}>
-              <Image
-                src="/svgs/star-empty.svg"
-                alt="starEmpty"
-                width={24}
-                height={24}
-              />
-              <Image
-                src="/svgs/star-empty.svg"
-                alt="starEmpty"
-                width={24}
-                height={24}
-              />
-              <Image
-                src="/svgs/star-empty.svg"
-                alt="starEmpty"
-                width={24}
-                height={24}
-              />
-              <Image
-                src="/svgs/star-empty.svg"
-                alt="starEmpty"
-                width={24}
-                height={24}
-              />
-              <Image
-                src="/svgs/star-empty.svg"
-                alt="starEmpty"
-                width={24}
-                height={24}
-              />
+              <StarRating readOnly={true} />
             </div>
           </div>
           <div>

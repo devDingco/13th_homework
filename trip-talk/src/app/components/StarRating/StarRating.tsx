@@ -1,5 +1,5 @@
-import { Rate } from 'antd';
+import { Rate } from "antd";
 
-export default function StarRating () {
-  return <Rate />
+export default function StarRating({ readOnly }: { readOnly: boolean }) {
+  return <div>{readOnly ? <Rate disabled defaultValue={2} /> : <Rate />}</div>;
 }
