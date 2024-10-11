@@ -1,0 +1,40 @@
+.navigation {
+  width: 1280px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+}
+
+.leftNavigation {
+  width: 364px;
+  gap: 24px;
+  display: flex;
+}
+
+.leftNavigation_menu_box {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.leftNavigation_menu {
+  width: 74px;
+  height: 24px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #333333;
+}
+
+.leftNavigation_menu:hover {
+  font-weight: 700;
+  border-bottom: 2px solid #000000;
+}
+
+.rightNavigation_menu {
+  display: flex;
+  gap: 4px;
+}

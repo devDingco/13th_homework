@@ -10,7 +10,7 @@ import Banner1 from "@/../public/img/beach1.svg";
 import Banner2 from "@/../public/img/beach2.svg";
 import Banner3 from "@/../public/img/beach3.svg";
 
-const Banner = () => {
+const LayoutBanner = () => {
   return (
     <div className={`swiper-container ${styles.boxSize}`}>
       <Swiper
@@ -34,4 +34,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default LayoutBanner;
