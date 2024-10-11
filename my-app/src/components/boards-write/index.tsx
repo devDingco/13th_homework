@@ -5,6 +5,8 @@ import { useBoardsWrite } from "./hook";
 import Link from "next/link";
 import { useState } from "react";
 import { IBoardsWriteProps } from "./types";
+import { Button, Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
@@ -14,6 +16,20 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     onChangeContent,
     onCLickUpdate,
     onClickSignup,
+
+    // 아래부터 주소
+    isOpen,
+    onToggleModal,
+    handleComplete,
+    zipcode,
+    address,
+    addressDetail,
+    setAddressDetail,
+
+    // showModal,
+    // isOpen,
+    // handleOk,
+    // handleCancel,
   } = useBoardsWrite();
 
   // 그냥 esLint에러 보기싫어서 만든 줄
@@ -123,6 +139,11 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
 
           <hr className={props.styles.실선} />
 
+          {isOpen && (
+            <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+              <DaumPostcodeEmbed onComplete={handleComplete} />
+            </Modal>
+          )}
           <fieldset className={props.styles.주소입력하는곳}>
             <legend>주소 정보</legend>
             <label className={props.styles.인풋이름}>주소</label>
@@ -131,19 +152,28 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 className={props.styles.우편번호인풋}
                 type="text"
                 placeholder="01234"
+                value={zipcode}
+                defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
               />
-              <button className={props.styles.우편버튼}>우편번호 검색</button>
+              <button onClick={onToggleModal} className={props.styles.우편버튼}>
+                우편번호 검색
+              </button>
             </div>
 
             <input
               className={props.styles.풀인풋}
               type="text"
               placeholder="주소를 입력해 주세요."
+              value={address}
+              defaultValue={props.data?.fetchBoard.boardAddress.address}
             />
             <input
               className={props.styles.풀인풋}
               type="text"
               placeholder="상세주소"
+              value={addressDetail}
+              onChange={(e) => setAddressDetail(e.target.value)} // 입력값을 상태에 저장
+              defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
             />
           </fieldset>
 
@@ -212,6 +242,18 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             >
               {props.isEdit ? "수정" : "등록"}하기
             </button>
+            {/* <Button type="primary" onClick={showModal}>
+              Open Modal
+            </Button>
+            <Modal
+              title="비밀번호를 입력해주세요."
+              open={isOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              비밀번호 입력:
+              <input type="password" />
+            </Modal> */}
           </div>
         </form>
       </main>
