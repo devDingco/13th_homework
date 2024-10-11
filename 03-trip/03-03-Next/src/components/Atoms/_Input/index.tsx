@@ -1,36 +1,30 @@
 "use client";
 
-import { InputStyle, TextStyle } from "@/commons/types/styles";
+import useSubmitInput from "@/commons/hooks/useSubmitInput";
 import { InputPlaceholder } from "@/commons/types/types";
 
-export default function Input({ ...props }) {
-    const { id, textarea, onChange, value, disabled } = props;
+export const Input = function CompInput({ ...props }) {
+    const { id, textarea } = props;
+    const { handleChange } = useSubmitInput;
 
     return (
         <>
             {!textarea ? (
                 <input
-                    style={InputStyle}
                     id={id}
-                    type={id === "password_ID" ? "password" : "text"}
                     placeholder={InputPlaceholder[id]}
-                    onChange={onChange}
-                    value={value}
-                    disabled={disabled}
+                    onChange={handleChange}
                 />
             ) : (
                 <textarea
-                    style={{ ...InputStyle, ...TextStyle }}
                     id={id}
                     placeholder={InputPlaceholder[id]}
-                    onChange={onChange}
-                    value={value}
-                    disabled={disabled}
+                    onChange={handleChange}
                 ></textarea>
             )}
         </>
     );
-}
+};
 
 // export const Input = function CompInput(props) {
 //     return (

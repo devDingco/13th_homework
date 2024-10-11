@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 export default function useDelete() {
     const [deleteBoard] = useMutation(DeleteBoardDocument);
 
-    const onClickDelete = (e: React.MouseEvent) => {
+    const onClickDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         const target = e.target as HTMLButtonElement;
         deleteBoard({

@@ -40,6 +40,7 @@ export default function useUpdate() {
             password: password,
             updateBoardInput: { title, contents },
         };
+        console.log(updateData);
 
         try {
             const result = await updateBoard({
