@@ -1,7 +1,7 @@
 import { ICommentList } from "../../types/components.type";
 
-export default function useComment(props: ICommentList) {
-  const { writer, contents, createdAt } = props;
+export default function useComment(commentData: ICommentList) {
+  // const { writer, contents, createdAt } = props;
   const onClickEditComment = () => {
     // edit!
   };
@@ -13,8 +13,6 @@ export default function useComment(props: ICommentList) {
   return {
     onClickEditComment,
     onClickDeleteComment,
-    writer,
-    contents,
-    createdAt,
+    commentData,
   };
 }

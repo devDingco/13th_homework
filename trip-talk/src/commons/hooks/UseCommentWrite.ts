@@ -12,8 +12,9 @@ export default function useCommentWrite() {
     writer: "",
     password: "",
     contents: "",
-    rating: 0,
   });
+
+  const [rating, setRating] = useState(0);
 
   const disabledButton = !(commentFormData.writer && commentFormData.password);
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
@@ -23,7 +24,7 @@ export default function useCommentWrite() {
     writer: commentFormData.writer,
     password: commentFormData.password,
     contents: commentFormData.contents,
-    rating: commentFormData.rating,
+    rating: rating,
   };
 
   const resetInputValue = () => {
@@ -31,8 +32,8 @@ export default function useCommentWrite() {
       writer: "",
       password: "",
       contents: "",
-      rating: 0,
     });
+    setRating(0);
   };
 
   const handleInputChange = (
@@ -42,6 +43,7 @@ export default function useCommentWrite() {
       ...commentFormData,
       [event.target.id]: event.target.value,
     };
+
     setCommentFormData(newFormData);
   };
 
@@ -54,7 +56,7 @@ export default function useCommentWrite() {
             writer: commentFormData.writer,
             password: commentFormData.password,
             contents: commentFormData.contents,
-            rating: commentFormData.rating,
+            rating: rating,
           },
           boardId: params.boardId as string,
         },
@@ -79,5 +81,7 @@ export default function useCommentWrite() {
     handleInputChange,
     disabledButton,
     comment,
+    rating,
+    setRating,
   };
 }
