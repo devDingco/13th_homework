@@ -5,13 +5,8 @@ import useComment from "../../../commons/hooks/useComment";
 import StarRating from "../StarRating/StarRating";
 
 export default function Comment(props: ICommentList) {
-  const {
-    onClickEditComment,
-    onClickDeleteComment,
-    writer,
-    contents,
-    createdAt,
-  } = useComment(props);
+  const { onClickEditComment, onClickDeleteComment, commentData } =
+    useComment(props);
 
   return (
     <li className={styles.comment_layout}>
@@ -25,10 +20,10 @@ export default function Comment(props: ICommentList) {
                 width={24}
                 height={24}
               />
-              <span>{writer}</span>
+              <span>{commentData.writer}</span>
             </div>
             <div className={styles.rating_stars}>
-              <StarRating readOnly={true} />
+              <StarRating defaultValue={commentData.rating} />
             </div>
           </div>
           <div>
@@ -45,9 +40,9 @@ export default function Comment(props: ICommentList) {
             </button>
           </div>
         </div>
-        <div>{contents}</div>
+        <div>{commentData.contents}</div>
         <span className={styles.date}>
-          {createdAt.slice(0, 10).replaceAll("-", ".")}
+          {commentData.createdAt.slice(0, 10).replaceAll("-", ".")}
         </span>
       </div>
     </li>
