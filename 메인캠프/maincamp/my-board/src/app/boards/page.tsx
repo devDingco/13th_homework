@@ -1,7 +1,13 @@
 'use client';
 
-import { BoardsList } from '@/components/boards-list';
+import BoardBanner from '@/components/boards-list/banner';
+import { BoardsList } from '@/components/boards-list/list';
 
 export default function BoardsListPage() {
-  return <BoardsList />;
+  return (
+    <>
+      <BoardBanner />
+      <BoardsList />
+    </>
+  );
 }

@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { useCommentList } from './hooks';
 import styles from './styles.module.css';
+import { Rate } from 'antd';
 
 export default function CommentList() {
   const { data } = useCommentList();
-
+  // console.log('data', data);
   return (
     <div className={`container ${styles.container}`}>
       {data?.fetchBoardComments && data?.fetchBoardComments.length > 0 ? (
@@ -24,13 +25,9 @@ export default function CommentList() {
                     alt="프로필"
                   />
                   <span>{el.writer}</span>
-                  {/* 추후에 5개로... */}
-                  <Image
-                    width={20}
-                    height={20}
-                    alt="별점"
-                    src="/images/star.svg"
-                  />
+                  <span>
+                    <Rate value={el.rating} />
+                  </span>
                 </div>
                 <div className="flex gap-1">
                   <Image

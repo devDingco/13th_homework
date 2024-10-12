@@ -3,18 +3,19 @@
 import Image from 'next/image';
 import styles from './styles.module.css';
 import { useCommentWrite } from './hooks';
+import { Rate } from 'antd';
 
 export default function CommentWrite() {
   const {
-    selectedStar,
-    handleStarClick,
+    rating,
+    setRating,
     registerComment,
     onChangeWriter,
     onChangeCommentPw,
     onChangeCommentContents,
     isActive,
   } = useCommentWrite();
-  const stars = Array(5).fill(0);
+
   return (
     <form
       className={`container ${styles.container}`}
@@ -24,32 +25,9 @@ export default function CommentWrite() {
         <Image width={20} height={20} src="/images/chat.png" alt="댓글아이콘" />
         <span className="ml-2 prose-sb_16_24">댓글</span>
       </div>
-      <div className="flex gap-1">
-        {stars.map((_, index) => (
-          <div
-            key={index}
-            className="mr-1"
-            onClick={() => handleStarClick(index)}
-            style={{
-              display: 'inline-block',
-              cursor: 'pointer',
-            }}
-          >
-            <Image
-              width={20}
-              height={20}
-              alt="별점"
-              src="/images/star.svg"
-              style={{
-                filter:
-                  selectedStar !== -1 && selectedStar >= index
-                    ? 'brightness(0.5)'
-                    : 'brightness(1)',
-              }}
-            />
-          </div>
-        ))}
-      </div>
+
+      <Rate onChange={setRating} value={rating} />
+
       <div className="flex gap-10 w-2/3 items-center mt-1">
         <div className="flex flex-col gap-2 flex-1">
           <p className="prose-me_16_24">
@@ -90,8 +68,9 @@ export default function CommentWrite() {
         <button
           disabled={!isActive}
           style={{
-            background: isActive ? '#2974e5' : 'bg-slate-400',
-            color: isActive ? 'black' : 'text-slate-200',
+            border: isActive ? '#2974e5' : '#959292',
+            background: isActive ? '#2974e5' : '#959292',
+            color: 'white',
           }}
           className="border-none rounded-md px-3 py-2 "
         >

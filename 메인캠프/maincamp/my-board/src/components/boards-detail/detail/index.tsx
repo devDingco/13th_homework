@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useBoardsDetail } from './hooks';
+import { DislikeTwoTone, HeartTwoTone, LikeTwoTone } from '@ant-design/icons';
 
 export default function BoardsDetail() {
   const router = useRouter();
@@ -54,17 +55,32 @@ export default function BoardsDetail() {
           alt="예시 동영상"
         />
       </div>
-      <div className="flex w-full justify-center text-center gap-4">
+      <div className="flex w-full justify-center text-center gap-6">
         {/* 추후 각각의 div을 만지면 count */}
         <div className="flex flex-col">
-          <img src="/images/bad.png" alt="싫어요" className="w-6 h-auto" />
-          <p id="badCount" style={{ color: 'black' }} className="prose-r_14_20">
+          <button>
+            <DislikeTwoTone
+              twoToneColor="#eb2f96"
+              style={{ fontSize: '24px' }}
+            />
+          </button>
+          <p
+            id="badCount"
+            style={{ color: '#eb2f96' }}
+            className="prose-r_14_20"
+          >
             {data?.fetchBoard.dislikeCount || 0}
           </p>
         </div>
         <div className="flex flex-col">
-          <img src="/images/good.png" alt="좋아요" className="w-6 h-auto" />
-          <p id="goodCount" style={{ color: 'red' }} className="prose-r_14_20">
+          <button>
+            <LikeTwoTone style={{ fontSize: '24px' }} />
+          </button>
+          <p
+            id="goodCount"
+            style={{ color: '#2f4beb' }}
+            className="prose-r_14_20"
+          >
             {data?.fetchBoard.likeCount || 0}
           </p>
         </div>
