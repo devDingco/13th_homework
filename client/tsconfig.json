@@ -28,7 +28,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/utils/checkPromiseStatus.js"
+		"src/utils/wrapPromise.ts"
 	],
 	"exclude": ["node_modules"]
 }

@@ -23,7 +23,7 @@ export default async function createBoardCommentAction(
 		};
 
 	const result = await postComment({ author, password, content, rating }, boardId);
-
+	console.log(result);
 	if (typeof result === 'string') {
 		return {
 			boardId: boardId,
