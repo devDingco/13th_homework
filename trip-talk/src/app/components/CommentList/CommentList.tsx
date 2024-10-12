@@ -20,6 +20,7 @@ export default function CommentList() {
               writer={String(e.writer)}
               contents={e.contents}
               createdAt={e.createdAt}
+              rating={e.rating}
             />
           ))}
         </ul>

@@ -9,8 +9,14 @@ import useCommentWrite from "../../../commons/hooks/useCommentWrite";
 import StarRating from "../StarRating/StarRating";
 
 export default function CommentWrite() {
-  const { handleCommentSubmit, handleInputChange, disabledButton, comment } =
-    useCommentWrite();
+  const {
+    handleCommentSubmit,
+    handleInputChange,
+    disabledButton,
+    comment,
+    rating,
+    setRating,
+  } = useCommentWrite();
 
   return (
     <form className={styles.form} onSubmit={handleCommentSubmit}>
@@ -19,7 +25,7 @@ export default function CommentWrite() {
         <p>댓글</p>
       </div>
       <div className={styles.rating_stars}>
-        <StarRating readOnly={false} />
+        <StarRating setRating={setRating} rating={rating} />
       </div>
       <div className={styles.input_layout}>
         <div className={styles.input_wrapper}>
