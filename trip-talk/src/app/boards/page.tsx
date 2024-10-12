@@ -9,32 +9,44 @@ import {
   FetchBoardsDocument,
 } from '../_commons/graphql/graphql';
 import BoardListBanner from '../_component/boards/BoardListBanner';
+import { constants } from 'buffer';
+import useModalStore from '../_store/useModalStore';
 
 function BoardsList() {
+  // ^state
+  const { showModal } = useModalStore();
+
+  // ?fetch
   const { data, loading, refetch } = useQuery(FetchBoardsDocument, {
     fetchPolicy: 'no-cache',
     variables: { page: 1 },
   });
-
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const router = useRouter();
 
+  // *function
   const onClickDeleteBoard = async (
     id: string,
     e: React.MouseEvent<HTMLElement, MouseEvent>,
   ) => {
     e.stopPropagation();
-
-    deleteBoard({
-      variables: { id },
-    });
-    refetch();
+    showModal('CONFIRM', '삭제 모달', '정말로 해당 게시물을 삭제하시겠습니까?')
+      .then((result: string | boolean) => {
+        result &&
+          deleteBoard({
+            variables: { id },
+          });
+        refetch();
+      })
+      .catch(() => {
+        console.log('삭제 취소');
+      });
   };
 
   const onClickDetailBoard = (id: string) => {
     router.push(`/boards/${id}`);
   };
-  console.log(data?.fetchBoards);
+
   return (
     <>
       <div className="w-screen">
@@ -65,5 +77,4 @@ function BoardsList() {
     </>
   );
 }
-
 export default BoardsList;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ListIcon from '@/../public/icons/list_icon.svg';
 import EditIcon from '@/../public/icons/edit_icon.svg';
@@ -10,11 +10,11 @@ import { useParams, useRouter } from 'next/navigation';
 import BoardDetail from '@/app/_component/boardDetail/BoardDetail';
 import CommentList from '@/app/_component/boardDetail/CommentList';
 import CommentWrite from '@/app/_component/boardDetail/CommentWrite';
+import ModalTemplete from '@/app/_component/modal/ModalTemplete';
+import useModalStore from '@/app/_store/useModalStore';
 
 const PostDetail = () => {
   const { postId: params } = useParams();
-  console.log(params);
-
   const router = useRouter();
 
   return (
@@ -37,5 +37,4 @@ const PostDetail = () => {
     </>
   );
 };
-
 export default PostDetail;

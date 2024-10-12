@@ -30,7 +30,7 @@ const Input = <
   return (
     <div
       className={`${s.inputWrap} ${
-        props.size === 'small' ? inputConfig.small : 'w-full'
+        props.size === 'small' ? inputConfig[props.size] : 'w-full'
       }`}>
       <span>
         {props.label && <label htmlFor={props.id}>{props.label}</label>}

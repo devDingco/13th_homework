@@ -3,9 +3,12 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, Autoplay, Pagination } from 'swiper/modules';
 import SwiperCore from 'swiper';
-import Banner1 from '@/../public/images/banner1.svg';
+import Banner1 from '@/../public/images/banner1.jpg';
 import Banner2 from '@/../public/images/banner2.jpg';
 import Banner3 from '@/../public/images/banner3.jpg';
+import Banner4 from '@/../public/images/banner4.jpg';
+import Banner5 from '@/../public/images/banner5.jpg';
+import Banner6 from '@/../public/images/banner6.jpg';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -53,7 +56,7 @@ export default function BoardListBanner() {
         </SwiperSlide>
         <SwiperSlide className="w-full">
           <Image
-            src={Banner1}
+            src={Banner4}
             layout="fill"
             objectFit="cover"
             alt="배너이미지1"
@@ -61,7 +64,7 @@ export default function BoardListBanner() {
         </SwiperSlide>
         <SwiperSlide className="w-full">
           <Image
-            src={Banner2}
+            src={Banner5}
             layout="fill"
             objectFit="cover"
             alt="배너이미지1"
@@ -69,7 +72,7 @@ export default function BoardListBanner() {
         </SwiperSlide>
         <SwiperSlide className="w-full">
           <Image
-            src={Banner3}
+            src={Banner6}
             layout="fill"
             objectFit="cover"
             alt="배너이미지1"

@@ -23,8 +23,6 @@ export const UPDATE_BOARD = gql`
       boardId: $boardId
     ) {
       writer
-      youtubeUrl
-      deletedAt
     }
   }
 `;
