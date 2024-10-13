@@ -4,13 +4,35 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --noto-sans-kr: "Noto Sans KR";
-  --roboto: "Roboto";
-  --bg-dark: #141414;
-  --bg-light: #f5f5f5;
-  --text-dark: #f5f5f5;
-  --text-light: #141414;
+@layer base {
+  :root {
+    --noto-sans-kr: "Noto Sans KR";
+    --roboto: "Roboto";
+
+    --border-color: #f0f0f0;
+    --text-color: #030303;
+    --variant-color: #000;
+  }
+  html.dark {
+    --border-color: #303030;
+    --text-color: #f0f0f0;
+    --variant-color: #fff;
+  }
+}
+
+html.dark
+  .ant-btn-color-default.ant-btn-variant-solid:not(:disabled):not(
+    .ant-btn-disabled
+  ):hover {
+  color: #000;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+html
+  #bodyRoot
+  .ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
+  border-color: var(--variant-color);
+  color: var(--variant-color);
 }
 
 @layer utilities {
@@ -57,8 +79,7 @@
 }
 
 .dark body {
-  color: var(--text-dark);
-  background-color: var(--bg-dark);
+  background-color: #141414;
 }
 
 body {
