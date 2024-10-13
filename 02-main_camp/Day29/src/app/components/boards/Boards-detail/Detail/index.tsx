@@ -7,6 +7,7 @@ import BoardComment from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 import Divider from "@/app/components/commons/divider";
 import { Tooltip } from "antd";
+import YouTube from "react-youtube";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();
@@ -47,7 +48,7 @@ const BoardsDetail = () => {
         <p className={styles.BoardsDetail_p}>{board.contents}</p>
       </article>
       <section className={styles.BoardsDetail_video_section}>
-        <img src="/assets/video.png" />
+        <YouTube videoId={"0mOvvBwPHJ0"} />
       </section>
       <section className={styles.BoardsDetail_heartButton_list_section}>
         <div className={styles.BoardsDetail_heartBreak_button}>
