@@ -1,22 +1,25 @@
 import styles from "./styles.module.css";
 import { IBoardsWriteContentsInput, IBoardsWriteInput } from "./types";
 
-export const RequiredInputForm = (props: IBoardsWriteInput) => {
+export const BoardsWriteInputForm = (props: IBoardsWriteInput) => {
   return (
     <div className={styles.inputFormContainer}>
       <div className={styles.inputFormTitle}>
         {props.title}
-        <span className={styles.requiredMark}>*</span>
+        {props.isRequired && <span className={styles.requiredMark}>*</span>}
       </div>
       <input
         className={styles.inputFormText}
+        name={props.name}
         type={props.type}
         placeholder={props.placeholder}
         value={props.value}
         defaultValue={props.defaultValue}
         onChange={props.onChange}
       />
-      <p className={styles.requiredInputError}>{props.errorMessage}</p>
+      {props.isRequired && (
+        <p className={styles.requiredInputError}>{props.errorMessage}</p>
+      )}
     </div>
   );
 };
@@ -27,6 +30,7 @@ export const DefaultInputForm = (props: IBoardsWriteInput) => {
       <div className={styles.inputFormTitle}>{props.title}</div>
       <input
         className={styles.inputFormText}
+        name={props.name}
         type={props.type}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
@@ -45,6 +49,7 @@ export const ContentsInputForm = (props: IBoardsWriteContentsInput) => {
       </div>
       <textarea
         className={styles.inputTextArea}
+        name={props.name}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
         onChange={props.onChange}

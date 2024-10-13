@@ -9,7 +9,8 @@ import useAddressInputForm from "./hook";
 
 export const AddressInputForm = () => {
   const { isAddressModalOpen, showAddressSearchModal } = useBoardWrite();
-  const { zipcode, address, selectAddressHandler } = useAddressInputForm();
+  const { zipcode, address, selectAddressHandler, onChangeAddressDetail } =
+    useAddressInputForm();
 
   return (
     <div className={styles.AddressFormContainer}>
@@ -46,6 +47,7 @@ export const AddressInputForm = () => {
       <input
         type="text"
         className={styles.inputFormText}
+        onChange={onChangeAddressDetail}
         placeholder={CONSTANTS_DESCRIPTION.ADDRESS_DETAIL}
       />
     </div>

@@ -13,66 +13,65 @@ export const useBoardWrite = (isEdit?: boolean) => {
   const router = useRouter();
   const params = useParams();
 
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-
   const [isActive, setIsActive] = useState(isEdit ? true : false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
-  // 오류 메세지
+  const requiredInputList = ["writer", "password", "title", "contents"];
+  const [boardInput, setBoardInput] = useState({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+    boardAddress: {
+      address: "",
+      addressDetail: "",
+      zipcode: "",
+    },
+    youtubeUrl: "",
+  });
+
   const defaultErrorMessage = isEdit ? "" : CONSTANTS_DESCRIPTION.ERROR_MESSAGE;
-  const [writerErrorMessage, setWriterErrorMessage] =
-    useState(defaultErrorMessage);
-  const [passwordErrorMessage, setPasswordErrorMessage] =
-    useState(defaultErrorMessage);
-  const [titleErrorMessage, setTitleErrorMessage] =
-    useState(defaultErrorMessage);
-  const [contentsErrorMessage, setContentsErrorMessage] =
-    useState(defaultErrorMessage);
+  const [requiredInputDescription, setRequiredInputDescription] = useState({
+    writer: defaultErrorMessage,
+    password: defaultErrorMessage,
+    title: defaultErrorMessage,
+    contents: defaultErrorMessage,
+  });
 
   // graphql
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
 
+  const onChangeBoardWriteInput = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const value = event.target.value;
+    const changedInputName = event.target.name;
+    setBoardInput((prev) => {
+      return {
+        ...prev,
+        [changedInputName]: value,
+      };
+    });
+
+    if (requiredInputList.includes(changedInputName)) {
+      setRequiredInputDescription((prev) => {
+        return {
+          ...prev,
+          [changedInputName]: "",
+        };
+      });
+    }
+    return setIsActive(true);
+  };
+
   // onChange
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setWriter(value);
-    checkTextInput(value, setWriterErrorMessage);
-    if (value && password && title && contents) return setIsActive(true);
+    setBoardInput({ ...boardInput, writer: value });
+    // checkTextInput(value, setWriterErrorMessage);
+    // if (value && password && title && contents) return setIsActive(true);
     return setIsActive(false);
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-    checkTextInput(value, setPasswordErrorMessage);
-    if (writer && value && title && contents) return setIsActive(true);
-    return setIsActive(false);
-  };
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setTitle(value);
-    checkTextInput(value, setTitleErrorMessage);
-    if (writer && password && value && contents) return setIsActive(true);
-    return isEdit ? setIsActive(true) : setIsActive(false);
-  };
-
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
-    setContents(value);
-    checkTextInput(value, setContentsErrorMessage);
-    if (writer && password && title && value) return setIsActive(true);
-    return isEdit ? setIsActive(true) : setIsActive(false);
-  };
-
-  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setYoutubeUrl(value);
   };
 
   // onClick
@@ -80,13 +79,7 @@ export const useBoardWrite = (isEdit?: boolean) => {
     try {
       const result = await createBoard({
         variables: {
-          createBoardInput: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents,
-            youtubeUrl: youtubeUrl,
-          },
+          createBoardInput: boardInput,
         },
       });
       const boardId = result.data?.createBoard._id;
@@ -105,14 +98,13 @@ export const useBoardWrite = (isEdit?: boolean) => {
     const passwordInput = prompt(
       CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_INPUT_PASSWORD
     );
-
     try {
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
-            title: title,
-            contents: contents,
-            youtubeUrl: youtubeUrl,
+            title: boardInput.title,
+            contents: boardInput.contents,
+            youtubeUrl: boardInput.youtubeUrl,
           },
           password: passwordInput,
           boardId: params.boardId as string,
@@ -161,22 +153,19 @@ export const useBoardWrite = (isEdit?: boolean) => {
     setIsAddressModalOpen((prev) => !prev);
   };
 
-  const checkTextInput = (
-    input: string,
-    handler: (value: SetStateAction<string>) => void
-  ) => {
-    if (input && !checkSpace(input)) {
-      handler("");
-    } else if (checkString(input)) {
-      handler("");
-    } else if (isEdit) {
-      handler("");
-    } else {
-      handler(defaultErrorMessage);
-    }
-  };
+  // const checkTextInput = (input: string) => {
+  //   if (input && !checkSpace(input)) {
+  //     handler("");
+  //   } else if (checkString(input)) {
+  //     handler("");
+  //   } else if (isEdit) {
+  //     handler("");
+  //   } else {
+  //     handler(defaultErrorMessage);
+  //   }
+  // };
 
-  const checkString = (str: string) => {
+  const checkSpaceInString = (str: string) => {
     const regex = /[ㄱ-ㅎ가-힣a-zA-Z0-9]/;
     if (str.search(regex) != -1) return true;
     return false;
@@ -189,21 +178,15 @@ export const useBoardWrite = (isEdit?: boolean) => {
 
   return {
     onChangeWriter,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContents,
-    onChangeYoutubeLink,
     onClickSubmit,
     onClickEdit,
     onClickCancel,
     showSuccessModal,
     showErrorModal,
     showAddressSearchModal,
+    onChangeBoardWriteInput,
+    requiredInputDescription,
     isAddressModalOpen,
-    writerErrorMessage,
-    passwordErrorMessage,
-    titleErrorMessage,
-    contentsErrorMessage,
     isActive,
   };
 };

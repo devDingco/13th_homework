@@ -6,8 +6,7 @@ import CONSTANTS_TITLE from "@/commons/constants/title";
 import { IBoardWriteInput } from "./types";
 import {
   ContentsInputForm,
-  DefaultInputForm,
-  RequiredInputForm,
+  BoardsWriteInputForm,
 } from "./components/input-form/text";
 import { TextInputType } from "./components/input-form/types";
 import { AddressInputForm } from "./components/input-form/address-from";
@@ -26,18 +25,11 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     : CONSTANTS_TITLE.SUBMIT;
 
   const {
-    onChangeWriter,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContents,
-    onChangeYoutubeLink,
+    onChangeBoardWriteInput,
     onClickSubmit,
     onClickEdit,
     onClickCancel,
-    writerErrorMessage,
-    passwordErrorMessage,
-    titleErrorMessage,
-    contentsErrorMessage,
+    requiredInputDescription,
     isActive,
   } = useBoardWrite(props.isEdit);
 
@@ -77,47 +69,57 @@ const BoardsWrite = (props: IBoardWriteInput) => {
       <header className={styles.headerContainer}>게시물 {pageTitle}</header>
       <main className={styles.mainContainer}>
         <div className={styles.userInputForm}>
-          <RequiredInputForm
+          <BoardsWriteInputForm
+            isRequired={true}
+            name="writer"
             type={TextInputType.text}
             title={CONSTANTS_TITLE.WRITER}
             placeholder={CONSTANTS_DESCRIPTION.WRITER}
-            errorMessage={writerErrorMessage}
+            errorMessage={requiredInputDescription.writer}
             defaultValue={board.writer ?? ""}
-            onChange={onChangeWriter}
+            onChange={onChangeBoardWriteInput}
           />
-          <RequiredInputForm
+          <BoardsWriteInputForm
+            isRequired={true}
+            name="password"
             type={TextInputType.password}
             title={CONSTANTS_TITLE.PASSWORD}
             placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
-            errorMessage={passwordErrorMessage}
+            errorMessage={requiredInputDescription.password}
             defaultValue={props.isEdit ? "********" : ""}
-            onChange={onChangePassword}
+            onChange={onChangeBoardWriteInput}
           />
         </div>
         <Divider />
-        <RequiredInputForm
+        <BoardsWriteInputForm
+          isRequired={true}
+          name="title"
           type={TextInputType.text}
           title={CONSTANTS_TITLE.TITLE}
           placeholder={CONSTANTS_DESCRIPTION.TITLE}
-          errorMessage={titleErrorMessage}
+          errorMessage={requiredInputDescription.title}
           defaultValue={board.title}
-          onChange={onChangeTitle}
+          onChange={onChangeBoardWriteInput}
         />
         <Divider />
         <ContentsInputForm
+          // isRequired={true}
+          name="contents"
           title={CONSTANTS_TITLE.CONTENTS}
           placeholder={CONSTANTS_DESCRIPTION.CONTENTS}
-          onChange={onChangeContents}
-          errorMessage={contentsErrorMessage}
+          onChange={onChangeBoardWriteInput}
+          errorMessage={requiredInputDescription.contents}
           defaultValue={board.contents}
         />
         <AddressInputForm />
         <Divider />
-        <DefaultInputForm
+        <BoardsWriteInputForm
+          isRequired={false}
+          name="youtubeUrl"
           type={TextInputType.text}
           title={CONSTANTS_TITLE.YOUTUBE_LINK}
           placeholder={CONSTANTS_DESCRIPTION.YOUTUBE_LINK}
-          onChange={onChangeYoutubeLink}
+          onChange={onChangeBoardWriteInput}
         />
         <Divider />
         <PhotoUploadForm />

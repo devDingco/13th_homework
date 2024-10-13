@@ -6,6 +6,8 @@ export enum TextInputType {
 }
 
 export interface IBoardsWriteInput {
+  isRequired: boolean;
+  name: string;
   title: string;
   type?: TextInputType;
   placeholder: string;
@@ -16,6 +18,7 @@ export interface IBoardsWriteInput {
 }
 
 export interface IBoardsWriteContentsInput {
+  name: string;
   title: string;
   placeholder: string;
   defaultValue?: string;
