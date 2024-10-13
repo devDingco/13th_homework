@@ -12,25 +12,6 @@ import YouTube from "react-youtube";
 const BoardsDetail = () => {
   const { params, data } = useBoardsDetail();
 
-  // URL에서 비디오 ID 추출
-  const getVideoIdFromUrl = (url: string | null | undefined) => {
-    if (!url) return null;
-    const regex = /[?&]v=([^&#]*)|youtu\.be\/([^&#]*)/;
-    const matches = url.match(regex);
-    return matches ? matches[1] || matches[2] : null;
-  };
-
-  const videoId = getVideoIdFromUrl(data?.fetchBoard.youtubeUrl); // 비디오 ID 추출
-
-  console.log(videoId);
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 0, // 0이면 자동재생 안함, 1이면 자동재생
-    },
-  };
-
   return (
     <div className={styles.post_detail_main_body}>
       <div className={styles.post_detail_main}>
@@ -90,11 +71,15 @@ const BoardsDetail = () => {
           />
         </div>
         <div className={styles.content_box}>{data?.fetchBoard.contents}</div>
-        {videoId && (
+
+        {data?.fetchBoard.youtubeUrl && (
           <div className={styles.video_box}>
-            <YouTube videoId={videoId} opts={opts} />
+            <YouTube
+              videoId={data?.fetchBoard?.youtubeUrl?.split("=")[1] || undefined}
+            />
           </div>
         )}
+
         <div className={styles.reaction_btn_group}>
           <div className={styles.dislike_btn_group}>
             {/* 싫어요 버튼 */}

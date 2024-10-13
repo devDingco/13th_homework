@@ -5,10 +5,13 @@ import { useParams } from "next/navigation";
 export const useBoardsDetail = () => {
   const params = useParams();
   const boardId = params.boardId as string;
+
   // fetchBoard
   const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId },
   });
+  console.log("[detail] data?.fetchBoard: ", data?.fetchBoard);
+
   return {
     params,
     data,

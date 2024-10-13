@@ -38,7 +38,7 @@ hr {
   }
 }
 
-.btn_back {
+.btn_white {
   display: flex;
   height: 48px;
   padding: 12px 16px;
@@ -51,7 +51,7 @@ hr {
   font-weight: 600;
 }
 
-.btn_basic_active {
+.btn_basic {
   display: flex;
   height: 48px;
   padding: 12px 16px;
@@ -65,7 +65,7 @@ hr {
   font-weight: 600;
 }
 
-.btn_blue_active {
+.btn_blue {
   display: flex;
   height: 48px;
   padding: 12px 16px;

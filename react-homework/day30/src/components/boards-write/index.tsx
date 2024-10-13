@@ -8,33 +8,28 @@ import InputField from "../input";
 import ErrorMsg from "../error";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import AddressInputField from "../addressInput";
 
 export default function BoardsWrite(props: BoardsWriteProps) {
   const {
-    onChangeInput,
-    onClickRegister,
-    onClickEdit,
-    isDisabled,
+    addressInfo,
     errors,
+    allInputFilled,
+    isPasswordModalOpen,
+    isZipCodeModalOpen,
+    onChangeInput,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
+    onChangePassword,
+    onClickRegister,
     onClickEditCancel,
     onClickRegisterCancel,
-
-    isPasswordModalOpen,
     onTogglePasswordModal,
-    onChangePassword,
-    handleOk,
-
-    isZipCodeModalOpen,
     onToggleZipCodeModal,
-    onClickZipCodeSearch,
-    handleComplete,
-    addressInfo,
-    onChangeAddressDetail,
-
-    onChangeYoutubeUrl,
+    handleOkPasswordModal,
+    handleCompleteZipcodeModal,
   } = useBoardsWrite(props.data);
 
-  console.log(addressInfo);
   return (
     <div className={styles.post_page_body}>
       <div className={styles.post_page}>
@@ -98,24 +93,15 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           {/* 주소 입력 필드 */}
           <FieldWrapper label="주소">
             <div className={styles.search_group_zip_code}>
-              <input
-                type="text"
-                value={addressInfo.zipcode}
-                className={styles.input_box_zip_code}
-                placeholder="01234"
-                readOnly
-              />
-              <button
-                className={styles.btn_search_zip_code}
-                onClick={onClickZipCodeSearch}
-              >
+              <AddressInputField value={addressInfo.zipcode} />
+              <Button variant="white" onClick={onToggleZipCodeModal}>
                 우편번호 검색
-              </button>
+              </Button>
             </div>
             {/* 우편번호 검색 모달 */}
             {isZipCodeModalOpen && (
               <Modal open={true} onCancel={onToggleZipCodeModal} footer={null}>
-                <DaumPostcodeEmbed onComplete={handleComplete} />
+                <DaumPostcodeEmbed onComplete={handleCompleteZipcodeModal} />
               </Modal>
             )}
             <InputField
@@ -158,31 +144,34 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           <div className={styles.btn_group}>
             <Button
               onClick={props.isEdit ? onClickEditCancel : onClickRegisterCancel}
-              variant="cancel"
+              variant="white"
             >
               취소
             </Button>
             <Button
-              onClick={props.isEdit ? onClickEdit : onClickRegister}
-              // 수정하기일 땐 blue_active, 등록하기일 땐 blue_active or disabled
+              onClick={props.isEdit ? onTogglePasswordModal : onClickRegister}
+              // 수정하기일 땐 blue, 등록하기일 땐 blue or disabled
               variant={
-                props.isEdit || (!props.isEdit && !isDisabled)
-                  ? "blue_active"
+                props.isEdit || (!props.isEdit && allInputFilled)
+                  ? "blue"
                   : "disabled"
               }
-              disabled={!props.isEdit && isDisabled}
+              disabled={!props.isEdit && !allInputFilled}
             >
               {props.isEdit ? "수정" : "등록"}하기
             </Button>
             {isPasswordModalOpen && (
               <Modal
                 open={true}
-                onOk={handleOk}
+                onOk={handleOkPasswordModal}
                 onCancel={onTogglePasswordModal}
               >
-                <p> 글을 작성할 때 입력하셨던 비밀번호를 입력해 주세요.</p>
+                <div className={styles.password_modal_title}>
+                  글을 작성할 때 입력하셨던 비밀번호를 입력해 주세요.
+                </div>
                 <input
-                  className={styles.modal_password_input}
+                  className={styles.custom_input}
+                  placeholder="비밀번호 입력"
                   onChange={onChangePassword}
                   type="password"
                 />
