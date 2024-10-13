@@ -1,6 +1,6 @@
 import styles from "./style.module.css";
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { useParams } from "next/navigation";
 import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from "./queries";
 import { Flex, Rate } from "antd";
@@ -41,7 +41,7 @@ export default function CommentPage() {
     }
   };
 
-  const handleRatingChange = (value) => {
+  const handleRatingChange = (value: SetStateAction<number>) => {
     setRating(value);
   };
 

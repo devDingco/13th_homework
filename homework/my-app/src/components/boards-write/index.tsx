@@ -3,6 +3,9 @@ import { useBoardsWrite } from "./hook";
 import styles from "./style.module.css";
 import Image from "next/image";
 import { IBoardWriteprops } from "./type";
+import { useState } from "react";
+import { Button, Modal } from "antd";
+import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 
 const BoardsWrite = (props: IBoardWriteprops) => {
   const {
@@ -12,8 +15,18 @@ const BoardsWrite = (props: IBoardWriteprops) => {
     contentOnChange,
     signupButtonHandler,
     isAllFilled,
+    handleComplete,
+    zoneCode,
+    setZoneCode,
+    address,
+    setAddress,
+    onToggleModal,
+    isModalOpen,
+    addressDetail,
+    setAddressDetail,
+    youtubeOnChange,
+    data,
   } = useBoardsWrite(props);
-
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
@@ -33,7 +46,7 @@ const BoardsWrite = (props: IBoardWriteprops) => {
                 type="text"
                 onChange={authorOnChange}
                 disabled={props.isEdit}
-                defaultValue={props.data?.fetchBoard.writer ?? ""}
+                defaultValue={data?.fetchBoard.writer ?? ""}
               />
               <div id="authorRedText" className={styles.errorText}>
                 필수 입력 사항입니다
@@ -64,6 +77,7 @@ const BoardsWrite = (props: IBoardWriteprops) => {
                 className={styles.input2}
                 type="text"
                 onChange={titleOnChange}
+                defaultValue={data?.fetchBoard.title ?? " "}
               />
               <div id="titleRedText" className={styles.errorText}>
                 필수 입력 사항입니다
@@ -76,7 +90,10 @@ const BoardsWrite = (props: IBoardWriteprops) => {
               <label>
                 내용 <span className={styles.emphasize}>*</span>{" "}
               </label>
-              <textarea onChange={contentOnChange} />
+              <textarea
+                onChange={contentOnChange}
+                defaultValue={data?.fetchBoard.contents ?? " "}
+              />
               <div id="contentRedText" className={styles.errorText}>
                 필수 입력 사항입니다
               </div>
@@ -86,17 +103,55 @@ const BoardsWrite = (props: IBoardWriteprops) => {
           <div className={styles.columnBox}>
             <label>주소</label>
             <div className={styles.zipAndButtonContainer}>
-              <input className={styles.zipNum} type="text" />{" "}
-              <button className={styles.searchZipNum}>우편번호 검색</button>
+              <input
+                className={styles.zipNum}
+                type="text"
+                placeholder="01234"
+                onChange={(e) => setZoneCode(e.target.value)}
+                value={zoneCode}
+              />
+
+              <Button className={styles.searchZipNum} onClick={onToggleModal}>
+                우편번호 검색
+              </Button>
+              {isModalOpen && (
+                <Modal
+                  title="Basic Modal"
+                  open={isModalOpen}
+                  onOk={onToggleModal}
+                  onCancel={onToggleModal}
+                >
+                  <DaumPostcodeEmbed onComplete={handleComplete} />
+                </Modal>
+              )}
             </div>
-            <input className={styles.input2} type="text" />
-            <input className={styles.input2} type="text" />
+
+            <input
+              className={styles.input2}
+              type="text"
+              placeholder="주소를 입력해 주세요."
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <input
+              className={styles.input2}
+              type="text"
+              placeholder="상세주소"
+              defaultValue={addressDetail}
+              onChange={(e) => setAddressDetail(e.target.value)}
+            />
           </div>
 
           <div className={styles.box}>
             <div className={styles.labelContainer2}>
               <label>유튜브 링크</label>
-              <input className={styles.input2} type="text" />
+              <input
+                className={styles.input2}
+                type="text"
+                placeholder="링크를 입력해 주세요."
+                onChange={youtubeOnChange}
+                defaultValue={data?.fetchBoard.youtubeUrl ?? ""}
+              />
             </div>
           </div>
 
