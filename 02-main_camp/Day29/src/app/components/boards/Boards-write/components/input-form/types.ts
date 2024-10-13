@@ -22,6 +22,7 @@ export interface IBoardsWriteContentsInput {
   title: string;
   placeholder: string;
   defaultValue?: string;
+  value?: string;
   errorMessage?: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }

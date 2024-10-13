@@ -52,6 +52,7 @@ export const ContentsInputForm = (props: IBoardsWriteContentsInput) => {
         name={props.name}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
+        value={props.value}
         onChange={props.onChange}
       ></textarea>
       <p className={styles.requiredInputError}>{props.errorMessage}</p>

@@ -1,18 +1,19 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
   CreateBoardInput,
   BoardAddressInput,
+  FetchBoardQuery,
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
 
-export const useBoardWrite = (isEdit?: boolean) => {
+export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
   const router = useRouter();
   const params = useParams();
 
@@ -21,17 +22,17 @@ export const useBoardWrite = (isEdit?: boolean) => {
 
   const requiredInputList = ["writer", "password", "title", "contents"];
   const [boardInput, setBoardInput] = useState<CreateBoardInput>({
-    writer: "",
+    writer: data?.fetchBoard.writer ?? "",
     password: "",
-    title: "",
-    contents: "",
-    youtubeUrl: "",
+    title: data?.fetchBoard.title ?? "",
+    contents: data?.fetchBoard.contents ?? "",
+    youtubeUrl: data?.fetchBoard.youtubeUrl ?? "",
   });
 
   const [boardAddress, setBoardAddress] = useState<BoardAddressInput>({
-    address: "",
-    addressDetail: "",
-    zipcode: "",
+    address: data?.fetchBoard.boardAddress?.address ?? "",
+    addressDetail: data?.fetchBoard.boardAddress?.addressDetail ?? "",
+    zipcode: data?.fetchBoard.boardAddress?.zipcode ?? "",
   });
 
   const defaultErrorMessage = isEdit ? "" : CONSTANTS_DESCRIPTION.ERROR_MESSAGE;
@@ -57,7 +58,6 @@ export const useBoardWrite = (isEdit?: boolean) => {
       updateBoardInput(inputName, value);
     }
     validateRequiredInput(inputName, value);
-    console.log(boardAddress);
     return setIsActive(true);
   };
 
@@ -68,7 +68,6 @@ export const useBoardWrite = (isEdit?: boolean) => {
         [inputName]: value,
       };
     });
-    console.log("값이 업데이트 됩니다.", boardInput);
   };
 
   const updateAddress = (inputName: string, value: string) => {
@@ -78,8 +77,7 @@ export const useBoardWrite = (isEdit?: boolean) => {
         [inputName]: value,
       };
     });
-    console.log("주소가 업데이트 됩니다.", boardAddress);
-    console.log("주소가 업데이트 됩니다.", boardInput);
+    console.log(boardAddress);
   };
 
   const validateRequiredInput = (inputName: string, value: string) => {
@@ -139,6 +137,7 @@ export const useBoardWrite = (isEdit?: boolean) => {
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
+            boardAddress: boardAddress,
             title: boardInput.title,
             contents: boardInput.contents,
             youtubeUrl: boardInput.youtubeUrl,
@@ -205,6 +204,7 @@ export const useBoardWrite = (isEdit?: boolean) => {
     onChangeBoardWriteInput,
     updateBoardInput,
     onCompletionSearchAddress,
+    boardInput,
     boardAddress,
     requiredInputDescription,
     isAddressModalOpen,

@@ -19,6 +19,10 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     writer: props.data?.fetchBoard.writer,
     title: props.data?.fetchBoard.title,
     contents: props.data?.fetchBoard.contents,
+    address: props.data?.fetchBoard.boardAddress?.address,
+    addressDetail: props.data?.fetchBoard.boardAddress?.addressDetail,
+    zipcode: props.data?.fetchBoard.boardAddress?.zipcode,
+    youtubeUrl: props.data?.fetchBoard.youtubeUrl,
   };
 
   const pageTitle = props.isEdit
@@ -35,8 +39,9 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     requiredInputDescription,
     isActive,
     isAddressModalOpen,
+    boardInput,
     boardAddress,
-  } = useBoardWrite(props.isEdit);
+  } = useBoardWrite(props.isEdit, props.data);
 
   const RegisterForm = () => {
     const disabledSubmitButtonStyle = {
@@ -81,7 +86,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
             title={CONSTANTS_TITLE.WRITER}
             placeholder={CONSTANTS_DESCRIPTION.WRITER}
             errorMessage={requiredInputDescription.writer}
-            defaultValue={board.writer ?? ""}
+            value={boardInput.writer ?? ""}
             onChange={onChangeBoardWriteInput}
           />
           <BoardsWriteInputForm
@@ -103,7 +108,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           title={CONSTANTS_TITLE.TITLE}
           placeholder={CONSTANTS_DESCRIPTION.TITLE}
           errorMessage={requiredInputDescription.title}
-          defaultValue={board.title}
+          value={boardInput.title}
           onChange={onChangeBoardWriteInput}
         />
         <Divider />
@@ -113,7 +118,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           placeholder={CONSTANTS_DESCRIPTION.CONTENTS}
           onChange={onChangeBoardWriteInput}
           errorMessage={requiredInputDescription.contents}
-          defaultValue={board.contents}
+          value={boardInput.contents ?? ""}
         />
         <div className={styles.AddressFormContainer}>
           <div className={styles.inputFormTitle}>{CONSTANTS_TITLE.ADDRESS}</div>
@@ -157,7 +162,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
             className={styles.inputFormText}
             onChange={onChangeBoardWriteInput}
             placeholder={CONSTANTS_DESCRIPTION.ADDRESS_DETAIL}
-            defaultValue={boardAddress.addressDetail ?? ""}
+            value={boardAddress.addressDetail ?? ""}
           />
         </div>
         <Divider />
@@ -167,6 +172,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           type={TextInputType.text}
           title={CONSTANTS_TITLE.YOUTUBE_LINK}
           placeholder={CONSTANTS_DESCRIPTION.YOUTUBE_LINK}
+          defaultValue={boardInput.youtubeUrl ?? ""}
           onChange={onChangeBoardWriteInput}
         />
         <Divider />
