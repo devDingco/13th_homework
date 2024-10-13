@@ -1,13 +1,16 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
+  CreateBoardInput,
+  BoardAddressInput,
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 import { Modal } from "antd";
+import { Address } from "react-daum-postcode";
 
 export const useBoardWrite = (isEdit?: boolean) => {
   const router = useRouter();
@@ -17,17 +20,18 @@ export const useBoardWrite = (isEdit?: boolean) => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   const requiredInputList = ["writer", "password", "title", "contents"];
-  const [boardInput, setBoardInput] = useState({
+  const [boardInput, setBoardInput] = useState<CreateBoardInput>({
     writer: "",
     password: "",
     title: "",
     contents: "",
-    boardAddress: {
-      address: "",
-      addressDetail: "",
-      zipcode: "",
-    },
     youtubeUrl: "",
+  });
+
+  const [boardAddress, setBoardAddress] = useState<BoardAddressInput>({
+    address: "",
+    addressDetail: "",
+    zipcode: "",
   });
 
   const defaultErrorMessage = isEdit ? "" : CONSTANTS_DESCRIPTION.ERROR_MESSAGE;
@@ -47,18 +51,35 @@ export const useBoardWrite = (isEdit?: boolean) => {
   ) => {
     const value = event.target.value;
     const inputName = event.target.name;
-    updateBoardInput(inputName, value);
+    if (inputName === "addressDetail") {
+      updateAddress(inputName, value);
+    } else {
+      updateBoardInput(inputName, value);
+    }
     validateRequiredInput(inputName, value);
+    console.log(boardAddress);
     return setIsActive(true);
   };
 
   const updateBoardInput = (inputName: string, value: string) => {
     setBoardInput((prev) => {
       return {
+        ...prev, // 기존 상태 유지
+        [inputName]: value,
+      };
+    });
+    console.log("값이 업데이트 됩니다.", boardInput);
+  };
+
+  const updateAddress = (inputName: string, value: string) => {
+    setBoardAddress((prev) => {
+      return {
         ...prev,
         [inputName]: value,
       };
     });
+    console.log("주소가 업데이트 됩니다.", boardAddress);
+    console.log("주소가 업데이트 됩니다.", boardInput);
   };
 
   const validateRequiredInput = (inputName: string, value: string) => {
@@ -72,15 +93,33 @@ export const useBoardWrite = (isEdit?: boolean) => {
     }
   };
 
+  const showAddressSearchModal = () => {
+    onToggleModal();
+  };
+
+  const onCompletionSearchAddress = (data: Address) => {
+    updateAddress("zipcode", data.zonecode);
+    updateAddress("address", data.address);
+    onToggleModal();
+  };
+
+  const onToggleModal = () => {
+    setIsAddressModalOpen((prev) => !prev);
+  };
+
   // onClick
   const onClickSubmit = async () => {
     try {
       const result = await createBoard({
         variables: {
-          createBoardInput: boardInput,
+          createBoardInput: {
+            ...boardInput,
+            boardAddress: boardAddress,
+          },
         },
       });
       const boardId = result.data?.createBoard._id;
+      console.log(result.data?.createBoard);
       showSuccessModal("게시글이 작성 되었습니다.", () => {
         router.push(`/boards/${boardId}`);
       });
@@ -147,10 +186,6 @@ export const useBoardWrite = (isEdit?: boolean) => {
     });
   };
 
-  const showAddressSearchModal = () => {
-    setIsAddressModalOpen((prev) => !prev);
-  };
-
   const checkWithSpace = (input: string) => {
     const hasSpace = /\s/.test(input);
     const isOnlySpace = input.trim().length === 0;
@@ -168,6 +203,9 @@ export const useBoardWrite = (isEdit?: boolean) => {
     showErrorModal,
     showAddressSearchModal,
     onChangeBoardWriteInput,
+    updateBoardInput,
+    onCompletionSearchAddress,
+    boardAddress,
     requiredInputDescription,
     isAddressModalOpen,
     isActive,

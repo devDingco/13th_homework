@@ -4,7 +4,7 @@ import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import useCommentWrite from "./hook";
 import styles from "./styles.module.css";
 import CONSTANTS_TITLE from "@/commons/constants/title";
-import { RequiredInputForm } from "../../Boards-write/components/input-form/text";
+import { BoardsWriteInputForm } from "../../Boards-write/components/input-form/text";
 import Divider from "@/app/components/commons/divider";
 import { TextInputType } from "../../Boards-write/components/input-form/types";
 
@@ -29,15 +29,19 @@ const CommentWrite = () => {
         <Rate allowHalf value={comment.rating} onChange={onChangeRating} />
       </div>
       <div className={styles.textInputContainer}>
-        <RequiredInputForm
+        <BoardsWriteInputForm
+          name={"comments_writer"}
           title={CONSTANTS_TITLE.WRITER}
+          isRequired={false}
           placeholder={CONSTANTS_DESCRIPTION.WRITER}
           onChange={onChangeWriter}
           value={comment.writer}
         />
-        <RequiredInputForm
+        <BoardsWriteInputForm
+          name={"comments_password"}
           type={TextInputType.password}
           title={CONSTANTS_TITLE.PASSWORD}
+          isRequired={false}
           placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
           onChange={onChangePassword}
           value={comment.password}

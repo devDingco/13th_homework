@@ -9,8 +9,9 @@ import {
   BoardsWriteInputForm,
 } from "./components/input-form/text";
 import { TextInputType } from "./components/input-form/types";
-import { AddressInputForm } from "./components/input-form/address-from";
 import Divider from "@/app/components/commons/divider";
+import Modal from "antd/es/modal/Modal";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
   console.log("컴포넌트가 다시 그려집니다.");
@@ -29,8 +30,12 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     onClickSubmit,
     onClickEdit,
     onClickCancel,
+    onCompletionSearchAddress,
+    showAddressSearchModal,
     requiredInputDescription,
     isActive,
+    isAddressModalOpen,
+    boardAddress,
   } = useBoardWrite(props.isEdit);
 
   const RegisterForm = () => {
@@ -103,7 +108,6 @@ const BoardsWrite = (props: IBoardWriteInput) => {
         />
         <Divider />
         <ContentsInputForm
-          // isRequired={true}
           name="contents"
           title={CONSTANTS_TITLE.CONTENTS}
           placeholder={CONSTANTS_DESCRIPTION.CONTENTS}
@@ -111,7 +115,51 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           errorMessage={requiredInputDescription.contents}
           defaultValue={board.contents}
         />
-        <AddressInputForm />
+        <div className={styles.AddressFormContainer}>
+          <div className={styles.inputFormTitle}>{CONSTANTS_TITLE.ADDRESS}</div>
+          <div className={styles.zipCodeContainer}>
+            <input
+              name="zipcode"
+              type="text"
+              className={styles.inputFormText}
+              placeholder={CONSTANTS_DESCRIPTION.ZIP_CODE}
+              value={boardAddress.zipcode ?? ""}
+              readOnly
+            />
+            <button
+              className={styles.zipCodeSearchButton}
+              onClick={showAddressSearchModal}
+            >
+              우편번호 검색
+            </button>
+            {isAddressModalOpen && (
+              <Modal
+                open={isAddressModalOpen}
+                onOk={showAddressSearchModal}
+                onCancel={showAddressSearchModal}
+              >
+                <div>우편 번호 찾기</div>
+                <DaumPostcodeEmbed onComplete={onCompletionSearchAddress} />
+              </Modal>
+            )}
+          </div>
+          <input
+            name="address"
+            type="text"
+            className={styles.inputFormText}
+            placeholder={CONSTANTS_DESCRIPTION.ADDRESS}
+            value={boardAddress.address ?? ""}
+            readOnly
+          />
+          <input
+            name="addressDetail"
+            type="text"
+            className={styles.inputFormText}
+            onChange={onChangeBoardWriteInput}
+            placeholder={CONSTANTS_DESCRIPTION.ADDRESS_DETAIL}
+            defaultValue={boardAddress.addressDetail ?? ""}
+          />
+        </div>
         <Divider />
         <BoardsWriteInputForm
           isRequired={false}

@@ -20,7 +20,24 @@ export const CREATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        address
+        zipcode
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+        picture
+      }
       createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
@@ -28,10 +45,28 @@ export const CREATE_BOARD = gql`
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
+      _id
       writer
       title
       contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        address
+        zipcode
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+        picture
+      }
       createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
