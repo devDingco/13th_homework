@@ -230,7 +230,6 @@ export const UseBoardsWrite = (props: IProps) => {
     setIsModalOpen((prev) => !prev);
   };
   const handleCpmplete = (data: Address) => {
-    console.log(data);
     const { address, zonecode } = data;
     setAddressNum(zonecode);
     setAddress(address);

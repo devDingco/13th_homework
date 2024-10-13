@@ -20,7 +20,7 @@ export const UseCommentWrite = () => {
     setComment(event?.target.value);
   };
 
-  const onChangeStar = (value) => {
+  const onChangeStar = (value: any) => {
     setValue(value);
   };
   const params = useParams();
@@ -29,6 +29,7 @@ export const UseCommentWrite = () => {
       boardId: params.boardId,
     },
   });
+  console.log(data);
 
   const [submit] = useMutation(Comment);
 

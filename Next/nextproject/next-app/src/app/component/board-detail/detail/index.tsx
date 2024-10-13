@@ -4,15 +4,13 @@ import Image from "next/image";
 import React from "react";
 import CommnentPage from "../comment-write";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
-import ListBannerPage from "../../board-list/banner";
+import YouTube from "react-youtube";
+import { Tooltip } from "antd";
 export default function DetailWrite() {
   const { onModify, data, onList } = UseDetailWrite();
-  console.log(data);
+  console.log(data, "ddd");
   return (
     <div className={styles.css_layout}>
-      <div className={styles.css_banner}>
-        <ListBannerPage />
-      </div>
       <div className={styles.css_header}>{data?.fetchBoard?.title}</div>
       <div className={styles.css_info}>
         <div className={styles.css_user}>
@@ -43,14 +41,16 @@ export default function DetailWrite() {
               />
             </div>
             <div className={styles.css_location}>
-              <Image
-                src="/assets/Location.png"
-                width={0}
-                height={0}
-                sizes="100vw"
-                alt="location"
-                className={styles.css_location}
-              />
+              <Tooltip title={data?.fetchBoard?.boardAddress?.address}>
+                <Image
+                  src="/assets/Location.png"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  alt="location"
+                  className={styles.css_location}
+                />
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -68,28 +68,11 @@ export default function DetailWrite() {
         </div>
       </div>
       <div className={styles.css_text}>{data?.fetchBoard?.contents}</div>
-      <div className={styles.css_showaddressitem}>
-        <div className={styles.css_showaddressnum}>
-          우편번호 : {data?.fetchBoard?.boardAddress.zipcode}
-        </div>
-        <div className={styles.css_showaddress}>
-          주소 : {data?.fetchBoard?.boardAddress.address}
-        </div>
-        <div className={styles.css_showaddressdetail}>
-          상세 주소 : {data?.fetchBoard?.boardAddress.addressDetail}
-        </div>
-      </div>
-      <div className={styles.css_showyoutubeUrl}>
-        링크 : {data?.fetchBoard?.youtubeUrl}
-      </div>
+
       <div className={styles.css_bottomimage}>
-        <Image
-          src="/assets/BottomImage.png"
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt="bottomimage"
-          className={styles.css_bottomimageImage}
+        <YouTube
+          videoId={data?.fetchBoard?.youtubeUrl?.split("=")[1]}
+          // youtube주소는 www......={videoId}로 구성, =으로 나누어줌
         />
       </div>
       <div className={styles.css_heart}>

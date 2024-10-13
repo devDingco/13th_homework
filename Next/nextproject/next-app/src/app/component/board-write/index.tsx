@@ -136,7 +136,10 @@ export default function BoardsWrite(props: IProps) {
               placeholder="01234"
               className={styles.css_addressnuminput}
               readOnly
-              value={addressnum} //input tag에서 계속 보여줄 값, input 박스에 값을 입력하면 값이 입력되지 않고 지정해준 value만 계속해서 보여줌
+              value={addressnum}
+              defaultValue={
+                props.isEdit ? data?.fetchBoard.boardAddress.zipcode : ""
+              } //input tag에서 계속 보여줄 값, input 박스에 값을 입력하면 값이 입력되지 않고 지정해준 value만 계속해서 보여줌
             />
 
             <Button onClick={onToggleModal} className={styles.css_search}>
@@ -154,6 +157,9 @@ export default function BoardsWrite(props: IProps) {
             className={styles.css_addressinput}
             readOnly
             value={address}
+            defaultValue={
+              props.isEdit ? data?.fetchBoard.boardAddress.address : ""
+            }
           />
           <input
             type="text"
@@ -180,6 +186,7 @@ export default function BoardsWrite(props: IProps) {
             placeholder="링크 입력"
             className={styles.css_linkinput}
             onChange={onChangeYoutubeUrl}
+            value={youtubeUrl}
             defaultValue={
               props.isEdit ? data?.fetchBoard?.youtubeUrl : youtubeUrl
             }

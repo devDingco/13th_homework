@@ -2,16 +2,14 @@ import Image from "next/image";
 import React from "react";
 import styles from "./style.module.css";
 import UseListWrite from "./hook";
-import ListBannerPage from "../banner";
+// import ListBannerPage from "../../commons/layout/banner";
 export default function ListPage() {
   const { onMoveDetailPage, onClickDelete, data, onClickWriteBoard } =
     UseListWrite();
+
   return (
     <>
       <div className={styles.css_layout}>
-        <div className={styles.css_banner}>
-          <ListBannerPage />
-        </div>
         <div className={styles.css_listborder}>
           <div className={styles.css_listheader}>
             <div className={styles.css_number}>번호</div>
@@ -27,9 +25,7 @@ export default function ListPage() {
                   onClick={() => onMoveDetailPage(el._id)}
                 >
                   <div className={styles.css_border}>
-                    <div className={styles.css_boardnum}>
-                      {data?.fetchBoards.length - index}
-                    </div>
+                    <div className={styles.css_boardnum}>{index + 1}</div>
                     <div className={styles.css_boardtitle}>{el.title}</div>
                     <div className={styles.css_boardwriter}>{el.writer}</div>
                     <div className={styles.css_boarddate}>

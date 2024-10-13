@@ -120,15 +120,9 @@
   gap: 10px;
   display: flex;
   justify-content: center;
-  background-color: #f2f2f2;
   display: flex;
   margin-top: 24px;
   margin-bottom: 24px;
-}
-
-.css_bottomimageImage {
-  width: 822px;
-  height: 464px;
 }
 
 .css_heart {
