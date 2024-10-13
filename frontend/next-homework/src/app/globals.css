@@ -14,17 +14,18 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 } */
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--pretendard);
+}
 
 @media (min-width: 781px) {
   body {
@@ -39,10 +40,22 @@ body {
   padding: 0;
   box-sizing: border-box;
   /* 반응형 & 모바일 구현을 위한 폰트 사이즈 재지정 */
+  font-family: var(--pretendard);
   font-size: 10px;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-theme-color: transparent;
+  --swiper-navigation-size: 100%;
+  --swiper-navigation-top-offset: 100%;
+}
+
+.swiper-pagination-bullet-active {
+  --swiper-theme-color: white;
 }

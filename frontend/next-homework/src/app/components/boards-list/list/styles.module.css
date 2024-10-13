@@ -34,8 +34,6 @@
   text-align: center;
   color: var(--gray-900, #1c1c1c);
 
-  /* me_16_20 */
-  font-family: "Pretendar Variable";
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
@@ -53,7 +51,6 @@
   text-align: center;
   text-overflow: ellipsis;
 
-  font-family: "Pretendard Variable";
   font-style: normal;
   font-weight: 500;
   line-height: 2rem;
