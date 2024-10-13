@@ -30,7 +30,7 @@ html {
     padding: 0;
     /* color: var(--mono-gray900); */
     font-size: 1.6rem;
-    font-family: var(--font-paperlogy-regular);
+    font-family: var(--font-paperlogy-light);
 }
 
 body {

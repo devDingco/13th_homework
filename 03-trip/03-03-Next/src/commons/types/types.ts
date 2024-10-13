@@ -7,14 +7,15 @@ export interface ICreateProps {
 
 export interface ISubmitInput {
     [index: string]: string | undefined;
-    author_ID: string;
-    password_ID: string;
-    title_ID: string;
-    content_ID: string;
-    zipcode?: string;
-    address01?: string;
-    address02?: string;
-    link_ID?: string | undefined;
+    author_ID?: string;
+    password_ID?: string;
+    title_ID?: string;
+    content_ID?: string;
+
+    link_ID?: string;
+    zipcode_ID?: string;
+    address01_ID?: string;
+    address02_ID?: string;
 }
 
 export const InputData: ISubmitInput = {
@@ -22,6 +23,7 @@ export const InputData: ISubmitInput = {
     password_ID: "비밀번호",
     title_ID: "제목",
     content_ID: "내용",
+
     link_ID: "링크",
 };
 
@@ -30,6 +32,7 @@ export const InputPlaceholder: ISubmitInput = {
     password_ID: "비밀번호를 입력해 주세요.",
     title_ID: "제목을 입력해 주세요.",
     content_ID: "내용을 입력해 주세요.",
+
     link_ID: "링크를 입력해 주세요.",
     zipcode_ID: "01234",
     address01_ID: "주소를 검색해 주세요.",

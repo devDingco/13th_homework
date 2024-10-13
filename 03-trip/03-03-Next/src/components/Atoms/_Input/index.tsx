@@ -1,10 +1,10 @@
 "use client";
 
-import { InputStyle, TextStyle } from "@/commons/types/styles";
+import { InputStyle, TextStyle } from "@/commons/styles/styles";
 import { InputPlaceholder } from "@/commons/types/types";
 
 export default function Input({ ...props }) {
-    const { id, textarea, onChange, value, disabled } = props;
+    const { id, textarea, onChange, onClick, value, disabled } = props;
 
     return (
         <>
@@ -15,41 +15,18 @@ export default function Input({ ...props }) {
                     type={id === "password_ID" ? "password" : "text"}
                     placeholder={InputPlaceholder[id]}
                     onChange={onChange}
-                    value={value}
+                    onClick={onClick}
+                    defaultValue={value}
                     disabled={disabled}
                 />
             ) : (
                 <textarea
-                    style={{ ...InputStyle, ...TextStyle }}
+                    style={{ ...InputStyle, ...TextStyle, resize: "none" }}
                     id={id}
                     placeholder={InputPlaceholder[id]}
                     onChange={onChange}
-                    value={value}
-                    disabled={disabled}
                 ></textarea>
             )}
         </>
     );
 }
-
-// export const Input = function CompInput(props) {
-//     return (
-//         <input
-//             id={props.id}
-//             defaultValue={props.title}
-//             onChange={props.onChange}
-//             placeholder="input"
-//         />
-//     );
-// };
-
-// export const Textarea = function CompTextarea(props) {
-//     return (
-//         <textarea
-//             id={props.id}
-//             defaultValue={props.contents}
-//             onChange={props.onChange}
-//             placeholder="area"
-//         ></textarea>
-//     );
-// };

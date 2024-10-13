@@ -7,14 +7,14 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import Image from "next/image";
 
-export const CarouselUI = () => {
+const BannerStyle = {
+    width: "100vw",
+    height: "100%",
+};
+
+export default function LayoutBanner() {
     return (
-        <div
-            style={{
-                width: "100vw",
-                height: "100%",
-            }}
-        >
+        <div style={BannerStyle}>
             <Swiper
                 modules={[EffectFade, Pagination, Autoplay]}
                 effect="fade"
@@ -22,7 +22,7 @@ export const CarouselUI = () => {
                 pagination={{ clickable: true }}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 1600,
+                    delay: 3000,
                     disableOnInteraction: false,
                 }}
             >
@@ -32,7 +32,7 @@ export const CarouselUI = () => {
                             <Image
                                 src={`/img/banner0${el + 1}.jpg`}
                                 alt="banner img"
-                                width={1920}
+                                width={3840}
                                 height={0}
                             />
                         </SwiperSlide>
@@ -41,4 +41,4 @@ export const CarouselUI = () => {
             </Swiper>
         </div>
     );
-};
+}

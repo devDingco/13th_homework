@@ -1,64 +1,64 @@
 .header_title {
-  font-size: 2rem;
-  padding: 2rem 0rem;
+    font-size: 2rem;
+    padding: 2rem 0rem;
 }
 
 .header_info {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.4rem;
 }
 
 .info_profile {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .info_link {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  padding: 2rem 0rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    padding: 2rem 0rem;
 }
 
 .main_content {
-  max-width: 50rem;
-  padding: 2rem 0rem;
-  text-wrap: balance;
+    max-width: 50rem;
+    padding: 2rem 0rem;
+    text-wrap: balance;
 }
 
 .main_video {
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100rem;
-  height: 40rem;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rem;
+    height: 40rem;
 }
 
 .main_recommend {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem;
 }
 
 .main_btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding-bottom: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 8rem;
 }
 
 .btn_list,
 .btn_edit {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 1rem;
-  border: 2px solid #bdbdbd;
-  border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 2px solid #bdbdbd;
+    border-radius: 0.8rem;
 }

@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 import Input from "@/components/Atoms/_Input";
 import { FrownFilled, HeartFilled } from "@ant-design/icons";
 
-export default function BoardsDetailUI({ isEdit }) {
+export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
     const { handleChange, handleUpdate, data } = useUpdate();

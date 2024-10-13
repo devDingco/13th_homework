@@ -2,13 +2,13 @@
 
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { CreteBoardDocument } from "../graphql/graphql";
+import { CreateBoardDocument } from "../graphql/graphql";
 import { ICreateProps } from "../types/types";
 
 export default function useCreate(props: ICreateProps) {
     const { author, password, title, content } = props;
 
-    const [createBoard] = useMutation(CreteBoardDocument);
+    const [createBoard] = useMutation(CreateBoardDocument);
     const Router = useRouter();
 
     const onClickCreate = async () => {
@@ -26,6 +26,12 @@ export default function useCreate(props: ICreateProps) {
                         password: password,
                         title: title,
                         contents: content,
+                        youtubeUrl: link,
+                        boardAddress: {
+                            zipcode: zipcode,
+                            address: address01,
+                            addressDetail: address02,
+                        },
                     },
                 },
             });
