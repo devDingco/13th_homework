@@ -17,6 +17,7 @@ const useBoardsDetail = () => {
     title: data?.fetchBoard.title,
     writer: String(data?.fetchBoard.writer),
     contents: data?.fetchBoard.contents,
+    address: data?.fetchBoard.boardAddress?.address,
   };
 
   const onClickEdit = () => {

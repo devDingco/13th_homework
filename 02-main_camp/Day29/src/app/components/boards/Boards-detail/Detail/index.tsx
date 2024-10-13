@@ -6,8 +6,7 @@ import BoardDetailProfile from "../Profile";
 import BoardComment from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 import Divider from "@/app/components/commons/divider";
-import ModalContainer from "@/app/components/commons/modal-container";
-import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
+import { Tooltip } from "antd";
 
 const BoardsDetail = () => {
   const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();
@@ -26,7 +25,18 @@ const BoardsDetail = () => {
             <img src="/assets/link.png" />
           </button>
           <button className={styles.BoardsDetail_userForm_sideButton}>
-            <img src="/assets/location.png" />
+            <Tooltip
+              placement="bottomLeft"
+              color={"white"}
+              title={board.address}
+              arrow={false}
+              overlayInnerStyle={{
+                color: "black",
+                boxShadow: "0px 2px 6px 2px #00000026",
+              }}
+            >
+              <img src="/assets/location.png" />
+            </Tooltip>
           </button>
         </section>
       </div>
