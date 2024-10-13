@@ -46,32 +46,30 @@ export const useBoardWrite = (isEdit?: boolean) => {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
     const value = event.target.value;
-    const changedInputName = event.target.name;
-    setBoardInput((prev) => {
-      return {
-        ...prev,
-        [changedInputName]: value,
-      };
-    });
-
-    if (requiredInputList.includes(changedInputName)) {
-      setRequiredInputDescription((prev) => {
-        return {
-          ...prev,
-          [changedInputName]: "",
-        };
-      });
-    }
+    const inputName = event.target.name;
+    updateBoardInput(inputName, value);
+    validateRequiredInput(inputName, value);
     return setIsActive(true);
   };
 
-  // onChange
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setBoardInput({ ...boardInput, writer: value });
-    // checkTextInput(value, setWriterErrorMessage);
-    // if (value && password && title && contents) return setIsActive(true);
-    return setIsActive(false);
+  const updateBoardInput = (inputName: string, value: string) => {
+    setBoardInput((prev) => {
+      return {
+        ...prev,
+        [inputName]: value,
+      };
+    });
+  };
+
+  const validateRequiredInput = (inputName: string, value: string) => {
+    if (requiredInputList.includes(inputName)) {
+      setRequiredInputDescription((prev) => {
+        return {
+          ...prev,
+          [inputName]: checkWithSpace(value) ? defaultErrorMessage : "",
+        };
+      });
+    }
   };
 
   // onClick
@@ -153,31 +151,16 @@ export const useBoardWrite = (isEdit?: boolean) => {
     setIsAddressModalOpen((prev) => !prev);
   };
 
-  // const checkTextInput = (input: string) => {
-  //   if (input && !checkSpace(input)) {
-  //     handler("");
-  //   } else if (checkString(input)) {
-  //     handler("");
-  //   } else if (isEdit) {
-  //     handler("");
-  //   } else {
-  //     handler(defaultErrorMessage);
-  //   }
-  // };
+  const checkWithSpace = (input: string) => {
+    const hasSpace = /\s/.test(input);
+    const isOnlySpace = input.trim().length === 0;
 
-  const checkSpaceInString = (str: string) => {
-    const regex = /[ㄱ-ㅎ가-힣a-zA-Z0-9]/;
-    if (str.search(regex) != -1) return true;
-    return false;
-  };
-
-  const checkSpace = (str: string) => {
-    if (str.search(/\s/) != -1) return true;
+    if (hasSpace) return true;
+    if (isOnlySpace) return true;
     return false;
   };
 
   return {
-    onChangeWriter,
     onClickSubmit,
     onClickEdit,
     onClickCancel,
