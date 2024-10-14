@@ -16,8 +16,8 @@ export default function BoardsDetail() {
     const 날짜담는통 = options.year + '.' + options.month + '.' + options.date;
 
     const FETCH_BOARD = gql`
-        query fetchBoard($mynumber: ID!) {
-            fetchBoard(boardId: $mynumber) {
+        query fetchBoard($boardId: ID!) {
+            fetchBoard(boardId: $boardId) {
                 _id
                 writer
                 title
@@ -34,14 +34,17 @@ export default function BoardsDetail() {
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
-            mynumber: params.boardId,
+            boardId: String(params.boardId),
         },
     });
 
-    console.log(data);
-
     const onClickMoveBoardList = () => {
         router.push('/boards');
+    };
+
+    const onClickMoveEditPage = () => {
+        alert('응 시진핑');
+        router.push(`/boards/${params.boardId}/edit`);
     };
 
     return (
@@ -134,7 +137,10 @@ export default function BoardsDetail() {
                         ></Image>
                         목록으로
                     </button>
-                    <button className={styles.penbutton}>
+                    <button
+                        className={styles.penbutton}
+                        onClick={onClickMoveEditPage}
+                    >
                         <Image
                             src="/assets/pen.png"
                             alt="pen"
