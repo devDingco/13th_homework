@@ -8,8 +8,6 @@ import {
   DeleteBoardDocument,
   FetchBoardsDocument,
 } from '../_commons/graphql/graphql';
-import BoardListBanner from '../_component/boards/BoardListBanner';
-import { constants } from 'buffer';
 import useModalStore from '../_store/useModalStore';
 
 function BoardsList() {
@@ -49,9 +47,9 @@ function BoardsList() {
 
   return (
     <>
-      <div className="w-screen">
+      {/* <div className="w-screen">
         <BoardListBanner />
-      </div>
+      </div> */}
       <div className="p-10">
         <div className="w-full h-full flex flex-col gap-y-3 max-w-[1280px] min-w-[680px] px-12 py-6 my-0 mx-auto rounded-2xl shadow-[0px_0px_20px_0px_#00000014]">
           <Board />

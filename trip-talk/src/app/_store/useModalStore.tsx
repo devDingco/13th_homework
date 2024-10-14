@@ -1,8 +1,28 @@
 // store/useModalStore.js
+import { promises } from 'dns';
 import { ReactNode } from 'react';
 import { create } from 'zustand';
 
-const useModalStore = create((set) => ({
+interface ModalStateType {
+  modalTitle: string;
+  modalContent: string | ReactNode;
+  isModalVisible: boolean;
+  userPromptResult: boolean | string;
+  modalType: 'MODAL' | 'CONFIRM' | 'PROMPT';
+  resolve: ((result: ModalStateType['userPromptResult']) => void) | null;
+  reject: ((reason?: any) => void) | null;
+
+  showModal: (
+    modalType: ModalStateType['modalType'],
+    modalTitle: ModalStateType['modalTitle'],
+    modalContent: ModalStateType['modalContent'],
+  ) => Promise<ModalStateType['userPromptResult']>;
+
+  closeModal: (input: boolean | string | null) => void;
+  cancelModal: () => void;
+}
+
+const useModalStore = create<ModalStateType>((set) => ({
   modalTitle: '',
   modalContent: '',
   isModalVisible: false,
@@ -11,14 +31,18 @@ const useModalStore = create((set) => ({
   resolve: null,
   reject: null,
 
-  showModal: (type = 'MODAL', title?: string, content?: string | ReactNode) => {
+  showModal: (
+    modalType = 'MODAL',
+    modalTitle?,
+    modalContent?: string | ReactNode,
+  ) => {
     return new Promise((resolve, reject) => {
       set({
         userPromptResult: '',
         isModalVisible: true,
-        modalContent: content,
-        modalTitle: title,
-        modalType: type,
+        modalContent,
+        modalTitle,
+        modalType,
         resolve,
         reject,
       });
