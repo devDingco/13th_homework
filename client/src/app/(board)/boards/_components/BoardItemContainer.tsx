@@ -10,11 +10,13 @@ import ErrorComponent from './ErrorComponent';
 import { IApiResponseData } from '@/models/apiResponse';
 import { boardUrlEndPoint } from '@/apis/config';
 import fetcher from '@/libs/fetcher';
+import { usePaginationStore } from '@/stores/usePaginationStore';
 // import { useQuery } from '@apollo/client';
 import useSWR from 'swr';
 
 export default function BoardItemContainer() {
-	const { data, isLoading, error } = useSWR(boardUrlEndPoint, fetcher, {
+	const { page } = usePaginationStore();
+	const { data, isLoading, error } = useSWR(`${boardUrlEndPoint}?page=${page}`, fetcher, {
 		suspense: true,
 		revalidateOnFocus: false,
 		fallbackData: [],

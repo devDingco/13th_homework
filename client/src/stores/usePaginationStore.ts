@@ -2,6 +2,7 @@
 interface IPaginationState {
 	page: number;
 	pageCount: number | undefined;
+	setPage: (page: number) => void;
 	setPrevPage: () => void;
 	setNextPage: () => void;
 	setPageCount: (pageCount: number) => void;
@@ -9,10 +10,11 @@ interface IPaginationState {
 
 import { create } from 'zustand';
 
-export const useAddressStore = create<IPaginationState>((set) => ({
-	page: 0,
+export const usePaginationStore = create<IPaginationState>((set) => ({
+	page: 1,
 	pageCount: undefined,
-	setPrevPage: () => set((state) => ({ page: state.page - 1 })),
-	setNextPage: () => set((state) => ({ page: state.page + 1 })),
+	setPage: (page) => set({ page }),
+	setPrevPage: () => set((state) => ({ page: state.page - 10 })),
+	setNextPage: () => set((state) => ({ page: state.page + 10 })),
 	setPageCount: (pageCount) => set({ pageCount }),
 }));

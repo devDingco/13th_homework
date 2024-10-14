@@ -19,6 +19,7 @@ export default async function boardPage() {
 			<Suspense fallback={<BoardLoading />}>
 				<BoardItemContainer />
 			</Suspense>
+			<Suspense></Suspense>
 		</div>
 	);
 }
