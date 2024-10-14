@@ -1,0 +1,163 @@
+.content{
+    width:128rem;
+    height:auto;
+    margin:0 auto;
+  }
+  /* input::placeholder,textarea::placeholder{
+    font-size:1.6rem;
+    color:#ababab;
+  } */
+  .red{
+    color:red;
+    margin-left:0.4rem;
+  }
+
+  /* h1{
+    font-size:2rem;
+    font-weight:700;
+    margin-top:4rem;
+  }
+  span{font-size:1.6rem;}
+  p{font-size:1.6rem;} */
+  
+.disabled_input{
+  background-color:#f2f2f2;
+  padding:1.2rem 1.6rem;
+  border-radius:0.8rem;
+}
+
+/* 공통 input */
+.title input, .address input, .link input{
+  width:128rem;
+  height:4.8rem;
+  border-radius:0.8rem;
+  border:0.1rem solid #d4d3d3;
+  text-indent:1.6rem;
+}
+.content input{font-size:1.8rem;}
+.content textarea{font-size:1.8rem;}
+
+.error{
+  font-size:1.6rem;
+  color:red;
+}
+
+/* 작성자 / 비밀번호 */
+.name_pw_bg{
+  height:8rem;
+  /* margin:4rem 0; */
+  margin-top:3rem;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:12rem;
+}
+.name_pw_bg div{
+  width:62rem;
+  margin:0;
+}
+.name_pw_bg input, .title input{
+  width:62rem;
+  height:4.8rem;
+  border-radius:0.8rem;
+  border:0.1rem solid #d4d3d3;
+  text-indent:1.6rem;
+  margin:0.8rem 0 0.8rem 0;
+  font-size:1.8rem;
+}
+
+/* 제목 */
+.title{
+  height:8rem;
+  /* margin:8rem 0; */
+  margin-top:3rem;
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:12rem;
+}
+
+/* 내용 */
+.subject{
+  height:36.8rem;
+  margin-top:3rem;
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:12rem;
+  /* margin:8rem 0; */
+}
+.subject textarea{
+  width:128rem;
+  height:33.6rem;
+  border-radius:0.8rem;
+  border:0.1rem solid #d4d3d3;
+  text-indent:1.6rem;
+  padding-top:1.2rem;
+  margin-top:0.8rem;
+}
+
+/* 주소 */
+.address{
+  height:19.2rem;
+  margin-top:3rem;
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:25rem;
+  /* margin:4rem 0; */
+}
+.address input{
+  margin:0.8rem 0 0.8rem 0;
+}
+.address_top > input{
+  width:8.2rem !important;
+  text-align:center;
+  text-indent:0 !important;
+
+}
+.address_top button{
+  width:13rem;
+  height:4.8rem;
+  border-radius:0.8rem;
+  border:0.1rem solid #000;
+  background:#fff;
+  margin:0.8rem;
+  font-size:1.8rem;
+}
+
+/* 유튜브 링크 */
+.link{
+  height:8rem;
+  margin-top:3rem;
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:12rem;
+  /* margin:8rem 0; */
+}
+.link input{margin-top:0.8rem;}
+
+/* 사진 첨부 */
+.picture{margin:4rem 0;}
+.picture .picture_btn{
+  width:16rem;
+  height:16rem;
+  margin:0.8rem 1.6rem 0.8rem 0;
+  border:none;
+}
+
+/* 하단 버튼 */
+.bt_button{
+  float:right;
+  margin-bottom:4rem;
+}
+.bt_button button{
+  border-radius:0.8rem;
+  height:4.8rem;
+  font-size:1.8rem;
+}
+.bt_button .cancel_btn{
+  width:6.4rem;
+  background:#fff;
+  margin-right:1.6rem;
+  border:1px solid #000;
+}
+.bt_button button:last-child{
+  width:9.5rem;
+  background:#2874e5;
+  color:#fff;
+  border:none;
+}
