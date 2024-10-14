@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import Index from "../component/board-list/list";
+import List from "../component/board-list/list";
 
 export default function ListPage() {
-  return <Index />;
+  return <List />;
 }

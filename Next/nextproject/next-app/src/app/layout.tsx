@@ -2,8 +2,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import * as React from "react";
-import ApolloSetting from '@/commons/settings/apollo-setting'
-
+import ApolloSetting from "@/commons/settings/apollo-setting";
+import LayoutComponent from "./component/commons/layout";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,13 +22,14 @@ const geistMono = localFont({
 interface Props {
   children: React.ReactNode;
 }
-export default function RootLayout(props: Props){
-
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ApolloSetting>
-          {props.children}
+          <div></div>
+          <LayoutComponent>{children}</LayoutComponent>
+          <div></div>
         </ApolloSetting>
       </body>
     </html>

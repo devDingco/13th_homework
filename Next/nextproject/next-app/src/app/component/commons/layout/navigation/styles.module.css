@@ -1,0 +1,52 @@
+.css_navbox {
+  padding: 0px 20px 0px 20px;
+  gap: 10px;
+}
+
+.css_nav {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.css_navbutton {
+  gap: 24px;
+  display: flex;
+}
+.css_logo {
+  width: 56px;
+  height: 32px;
+}
+.css_tap {
+  width: 284px;
+  height: 40px;
+  gap: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.css_tap1 {
+  padding: 8px;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.css_tap2 {
+  padding: 8px;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.css_tap3 {
+  padding: 8px;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.css_user {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}

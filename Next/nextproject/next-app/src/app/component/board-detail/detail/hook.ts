@@ -19,6 +19,7 @@ export const UseDetailWrite = () => {
   const onList = () => {
     router.push("../../boards");
   };
+
   return {
     onModify,
     data,

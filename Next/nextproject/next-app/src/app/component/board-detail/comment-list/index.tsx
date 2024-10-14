@@ -8,7 +8,7 @@ export default function CommentListPage() {
   return (
     <>
       {data && data.fetchBoardComments ? (
-        data.fetchBoardComments.map((el) => (
+        data.fetchBoardComments.map((el: any) => (
           <div key={el._id} className={styles.css_commentshow}>
             <div className={styles.css_commentwriter}>
               <div className={styles.css_profilewriter}>
