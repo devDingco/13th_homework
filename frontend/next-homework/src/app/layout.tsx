@@ -1,4 +1,4 @@
-import ApolloSetting from "@/commons/settings/06-02-apollo-setting";
+import ApolloSetting from "@/commons/settings/apollo-setting";
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -21,14 +21,11 @@ interface IProps {
 
 export default function RootLayout({ children }: IProps) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${pretendard.variable}`}>
-        {/* 헤더 */}
-        {/* 내용 */}
         <ApolloSetting>
           <Layout>{children}</Layout>
         </ApolloSetting>
-        {/* 푸터 */}
       </body>
     </html>
   );

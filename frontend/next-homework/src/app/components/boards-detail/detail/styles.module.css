@@ -1,35 +1,71 @@
-.detailPostPage {
-  min-width: 36rem;
-  max-width: 78rem;
-  padding: 0rem 2rem 0rem 2rem;
-}
-
-/* 모바일 헤더 + 배너 */
-.detailMobileHeader {
+.container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1.2rem 0rem;
-  align-items: center;
-  gap: 0.8rem;
+  min-width: 36rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4rem;
 }
 
-.detailMobileLogin {
+/* 제목 + 프로필 */
+.title {
+  color: #000;
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.6rem;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5.4rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--gray-100, #e4e4e4);
+}
+
+.writer {
+  color: var(--gray-700, #5f5f5f);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 2rem;
+}
+
+.user {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.4rem;
 }
 
-.detailMobileBanner img {
-  width: 100%;
+.profileImg {
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
-/* 제목 + 프로필 */
+.date {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.tools {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+}
 
 /* 내용 */
 
 /* 버튼 */
+.button {
+}
+
 /* 아이콘 버튼 스타일 none */
 .backNone {
   background-color: transparent;
@@ -41,7 +77,7 @@
 /* 목록 + 수정 */
 
 /* 데스크탑 */
-@media (min-width: 781px) {
+@media (min-width: 1000px) {
   /* body {
     display: flex;
     flex-direction: row;

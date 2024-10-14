@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.button {
+  width: 5rem;
+  height: 5rem;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--gray-50, #f2f2f2);
+  border-radius: 1rem;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: var(--Gray-50, var(--gray-500, #b4b4b4));
+}
