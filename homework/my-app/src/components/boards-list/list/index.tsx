@@ -1,16 +1,14 @@
 "use client";
 import useBoardList from "./hooks";
-
 import styles from "./style.module.css";
 import DatePicker from "react-datepicker";
 import Image from "next/image";
 import "react-datepicker/dist/react-datepicker.css";
-import { IBoardListprops } from "./types";
+import { IListProps } from "./types";
 import { useRouter } from "next/navigation";
 
-export default function BoardList(props: IBoardListprops) {
-  const { updateDateRange, onClickDelete, startDate, endDate, data } =
-    useBoardList();
+export default function BoardList(props: IListProps) {
+  const { updateDateRange, onClickDelete, startDate, endDate } = useBoardList();
   const router = useRouter();
 
   // CustomInput을 정의하고 displayName 설정
@@ -50,12 +48,14 @@ export default function BoardList(props: IBoardListprops) {
 
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {data?.fetchBoards?.map((el, index) => (
+          {props.data?.fetchBoards?.map((el, index) => (
             <div key={el._id} onClick={() => router.push(`/boards/${el._id}`)}>
               <div className={styles.listOfWriing}>
                 <div className={styles.box1}>
                   <div className={styles.dateContainer}>
-                    <div className={styles.listNum}>{index + 1}</div>
+                    <div className={styles.listNum}>
+                      {(props.currentPage - 1) * 10 + (index + 1)}
+                    </div>
                     <div className={styles.date}>{el.createdAt}</div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export default function BoardList(props: IBoardListprops) {
                       height={24}
                       onClick={(e) => {
                         e.stopPropagation(); // 부모로의 이벤트 전파를 막음
-                        onClickDelete(e); // onClickDelete 호출
+                        onClickDelete(e, props.refetch); // refetch 전달
                       }}
                       id={el._id}
                     />

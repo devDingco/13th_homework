@@ -27,7 +27,7 @@ export default function ModalCustomPage() {
         onCancel={handleCancel}
       >
         게시글 내용 입력: <input type="text" />
-      </Modal> */}
+      </Modal> *ㅇㅇㅇ/}
 
       {/* 모달 종료 방식 - 2. 모달 삭제하는 방법(ex.신용카드, 비밀번혿 등)*/}
       <button onClick={onToggleModal}>모달창열기</button>
