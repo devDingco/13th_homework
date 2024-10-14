@@ -37,11 +37,11 @@ export class BoardController {
     @Get()
     @ResponseMessage('board 전체를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findAll(@Query('query') query: PaginationDto): Promise<Board[]> {
-        return this.boardService.findAll(query.page);
+    findAll(@Query('page') page: number): Promise<Board[]> {
+        return this.boardService.findAll(page);
     }
 
-    @Get('count')
+    @Get('/count')
     @ResponseMessage('board의 count 개수를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
     getBoardCount() {

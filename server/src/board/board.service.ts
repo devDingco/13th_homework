@@ -42,15 +42,13 @@ export class BoardService {
     }
 
     async findAll(page: number): Promise<Board[]> {
-        await this.checkEntityCount(page);
-        return await this.boardRepository.findAllBoard();
+        await this.checkBoardEntityCount(page);
+        return await this.boardRepository.findAllBoard(page);
         // return await this.boardRepository.countBoard();
     }
 
     async findOne(boardId: number): Promise<Board> {
-        const board = await this.boardRepository.findBoard(boardId);
-
-        return board;
+        return await this.boardRepository.findBoard(boardId);
     }
 
     async getBoardCount(): Promise<number> {
@@ -101,7 +99,7 @@ export class BoardService {
         return await bcrypt.hash(password, 10);
     }
 
-    async checkEntityCount(page: number) {
+    async checkBoardEntityCount(page: number) {
         const maxCount = await this.boardRepository.countBoard();
 
         if (page > maxCount) {

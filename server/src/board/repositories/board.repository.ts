@@ -44,8 +44,13 @@ export class BoardRepository {
         return await this.boardRepository.save(board);
     }
 
-    async findAllBoard(): Promise<Board[]> {
-        return await this.boardRepository.find();
+    async findAllBoard(page: number): Promise<Board[]> {
+        const [result] = await this.boardRepository.findAndCount({
+            skip: (page - 1) * 10,
+            take: 10,
+        });
+
+        return result;
     }
 
     async findBoard(boardId: number): Promise<Board> {
