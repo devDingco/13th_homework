@@ -2,8 +2,8 @@ import { useBoardsList } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 
-const BoardsList = () => {
-  const { data, onClickMove, onClickDelete } = useBoardsList();
+const BoardsList = (props) => {
+  const { onClickMove, onClickDelete } = useBoardsList();
   return (
     <main className={styles.main}>
       <div className={styles.head}>
@@ -13,7 +13,7 @@ const BoardsList = () => {
         <div className={`${styles.date} ${styles.head_text}`}>날짜</div>
       </div>
       <div className={styles.boards}>
-        {data?.fetchBoards.map((el, index: number) => (
+        {props.data?.fetchBoards.map((el, index: number) => (
           <div
             className={styles.board_box}
             key={el._id}
