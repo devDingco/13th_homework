@@ -13,6 +13,7 @@ import { BoardReactionRepository } from './reaction/repositories/boardReactionRe
 import { BoardRepository } from './repositories/board.repository';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { PaginationDto } from './dto/pagination.dto';
+import { PaginationResponseDto } from './dto/pagination-response.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Injectable()
@@ -42,7 +43,10 @@ export class BoardService {
         return await this.boardRepository.saveBoard(board);
     }
 
-    async findAll({ page, take }: PaginationDto): Promise<Board[]> {
+    async findAll({
+        page,
+        take,
+    }: PaginationDto): Promise<PaginationResponseDto> {
         await this.checkBoardEntityCount(page, take);
         return await this.boardRepository.findAllBoard(page, take);
     }

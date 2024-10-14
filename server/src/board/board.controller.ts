@@ -21,6 +21,7 @@ import { TransformBoardInterceptor } from 'src/common/interceptors/transform-boa
 import { ResponseMessage } from './decorators/response-message.decorator';
 import { Board } from './entities/board.entity';
 import { PaginationDto } from './dto/pagination.dto';
+import { PaginationResponseDto } from './dto/pagination-response.dto';
 
 @Controller('/api/board')
 @UseInterceptors(TransformBoardInterceptor)
@@ -37,7 +38,7 @@ export class BoardController {
     @Get()
     @ResponseMessage('board 전체를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findAll(@Query() query: PaginationDto): Promise<Board[]> {
+    findAll(@Query() query: PaginationDto): Promise<PaginationResponseDto> {
         return this.boardService.findAll(query);
     }
 
