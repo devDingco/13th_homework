@@ -12,6 +12,7 @@ import { BoardIdCounterRepository } from './repositories/board-id-counter.reposi
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repositories/board.repository';
 import { CreateBoardDto } from './dto/create-board.dto';
+import { PaginationDto } from './dto/pagination.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Injectable()
@@ -41,10 +42,9 @@ export class BoardService {
         return await this.boardRepository.saveBoard(board);
     }
 
-    async findAll(page: number): Promise<Board[]> {
-        await this.checkBoardEntityCount(page);
-        return await this.boardRepository.findAllBoard(page);
-        // return await this.boardRepository.countBoard();
+    async findAll({ page, take }: PaginationDto): Promise<Board[]> {
+        await this.checkBoardEntityCount(page, take);
+        return await this.boardRepository.findAllBoard(page, take);
     }
 
     async findOne(boardId: number): Promise<Board> {
@@ -99,12 +99,13 @@ export class BoardService {
         return await bcrypt.hash(password, 10);
     }
 
-    async checkBoardEntityCount(page: number) {
+    async checkBoardEntityCount(page: number, take: number) {
         const maxCount = await this.boardRepository.countBoard();
+        const maxPage = Math.ceil(maxCount / take);
 
-        if (page > maxCount) {
+        if (page > maxPage) {
             throw new BadRequestException(
-                `Entity count exceeds the limit of ${page}. Current count: ${maxCount}`,
+                `Entity count exceeds the limit of ${page}. Current count: ${maxPage}`,
             );
         }
     }

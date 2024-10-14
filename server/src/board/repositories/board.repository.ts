@@ -44,10 +44,10 @@ export class BoardRepository {
         return await this.boardRepository.save(board);
     }
 
-    async findAllBoard(page: number): Promise<Board[]> {
+    async findAllBoard(page: number, take: number): Promise<Board[]> {
         const [result] = await this.boardRepository.findAndCount({
-            skip: (page - 1) * 10,
-            take: 10,
+            skip: (page - 1) * take,
+            take,
         });
 
         return result;
@@ -115,7 +115,6 @@ export class BoardRepository {
     }
 
     async countBoard(): Promise<number> {
-        const count = await this.boardRepository.count();
-        return Math.ceil(count / 10);
+        return await this.boardRepository.count();
     }
 }
