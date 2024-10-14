@@ -1,40 +1,104 @@
 "use client";
-import { useState } from "react";
-// import "./BoardsNew.css";
+import { useRef, useState } from "react";
 import styles from "./styles.module.css";
-import type { Metadata } from "next";
+import { gql, useMutation } from "@apollo/client";
+import Image from "next/image";
+import Add from "@/../public/add.png";
+
+const 짱구의인적사항 = gql`
+  # mutation createBoard(
+  #   # $jgwriter: String
+  #   # $jgpassword: String
+  #   # $jgtitle: String!
+  #   # $jgcontents: String!
+  #   $createBoardInput: CreatedBoardInput!
+  # ) {
+  #   createBoard(createBoardInput: $createBoardInput) # writer: $jgwriter
+  #   # password: $jgpassword
+  #   # title: $jgtitle
+  #   # contents: $jgcontents
+
+  #   {
+  #     writer
+  #     title
+  #     contents
+  #     _id
+  #   }
+  # }
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
 
 export default function New() {
-  const [name, setName] = useState("");
+  const [짱구회원] = useMutation(짱구의인적사항);
+
+  const onClickSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("test");
+
+    try {
+      if (writer && password && title && contents) {
+        // event.preventDefault();
+        const result = await 짱구회원({
+          variables: {
+            createBoardInput: {
+              writer: writer,
+              password: password,
+              title: title,
+              contents: contents,
+            },
+          },
+        });
+        console.log(result);
+      }
+    } catch (error) {
+      alert("값 필요");
+    }
+    // if (writer && password && title && contents) {
+    //   // event.preventDefault();
+    //   const result = await 짱구회원({
+    //     variables: {
+    //       jgwriter: "짱구",
+    //       jgpassword: "12345",
+    //       jgtitle: "짱구의외출",
+    //       jgcontents: "불꽃놀이보러간짱구와친구들",
+    //       jgimages: ["인증샷"],
+    //     },
+    //   });
+    // } else {
+    //   console.log("값 필요");
+    // }
+  };
+
+  const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [contents, setContents] = useState("");
 
   const [isActive, setIsActive] = useState(false);
 
   // const [errorMessage, setErrorMessage] = useState("");
 
-  const [nameError, setNameError] = useState("");
+  const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [contentsError, setContentsError] = useState("");
 
-  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setName(value);
+    setWriter(value);
     if (value === "") {
-      setNameError("필수입력 사항입니다");
-    } else {
-      setNameError("");
-    }
-    if (value === "") {
+      setWriterError("필수입력 사항입니다");
       setIsActive(true);
+    } else {
+      setWriterError("");
+      setIsActive(false);
     }
-    // if (name(value) ==!"" && password ==!"" &&title ==!"" && content ==!""){
-    //   return isActive === true
-    // setErrorMessage("");
-    // if (name && password && title && content) return setErrorMessage(true);
-    // setErrorMessage(false);
   };
 
   const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,17 +106,11 @@ export default function New() {
     setPassword(value);
     if (value === "") {
       setPasswordError("필수입력 사항입니다");
+      setIsActive(true);
     } else {
       setPasswordError("");
+      setIsActive(false);
     }
-    if (value === "") {
-      setIsActive(true);
-    }
-    // if (name ==!"" && password(value) ==!"" &&title ==!"" && content ==!""){
-    //   return isActive === true
-    // setErrorMessage("");
-    // if (name && password && title && content) return setErrorMessage(true);
-    // setErrorMessage(false);
   };
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,78 +118,48 @@ export default function New() {
     setTitle(value);
     if (value === "") {
       setTitleError("필수입력 사항입니다");
+      setIsActive(true);
     } else {
       setTitleError("");
+      setIsActive(false);
     }
-    if (value === "") {
-      setIsActive(true);
-    }
-    // if (name ==!"" && password ==!"" &&title(value) ==!"" && content ==!""){
-    //   return isActive === true
-    // setErrorMessage("");
-    // if (name && password && title && content) return setErrorMessage(true);
-    // setErrorMessage(false);
   };
 
-  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     event.target.value;
 
-    setContent(value);
+    setContents(value);
     if (value === "") {
-      setContentError("필수입력 사항입니다");
-    } else {
-      setContentError("");
-    }
-    if (value === "") {
+      setContentsError("필수입력 사항입니다");
       setIsActive(true);
+    } else {
+      setContentsError("");
+      setIsActive(false);
     }
-    // if (name ==!"" && password ==!"" &&title ==!"" && content(value) ==!""){
-    //   return isActive === true
-    // setErrorMessage("");
-    // if (name && password && title && content) return setErrorMessage(true);
-    // setErrorMessage(false);
   };
 
-  const onClickSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("버튼클릭확인");
-    // if (
-    //   name.length === 0 ||
-    //   password.length === 0 ||
-    //   title.length === 0 ||
-    //   content.length === 0
-    // ) {
-    //   setErrorMessage("필수입력 사항입니다");
-    // } else {
-    //   alert("게시글 등록이 가능한 상태입니다");
-    // }
-    // console.log("name:", name);
-    // console.log("password:", password);
-    // console.log("title:", title);
-    // console.log("content:", content);
-
-    let message = false;
-    if (name === "") {
-      setNameError("필수입력 사항입니다");
-      message = true;
-    }
-    if (password === "") {
-      setPasswordError("필수입력 사항입니다");
-      message = true;
-    }
-    if (title === "") {
-      setTitleError("필수입력 사항입니다");
-      message = true;
-    }
-    if (content === "") {
-      setContentError("필수입력 사항입니다");
-      message = true;
-    }
-    if (!message) {
-      alert("게시글 등록이 가능합니다");
-    }
-    console.log(isActive);
-  };
+  // let message = false;
+  // const message = useRef(false);
+  // if (writer === "") {
+  //   setWriterError("필수입력 사항입니다");
+  //   message.current = true;
+  // }
+  // if (password === "") {
+  //   setPasswordError("필수입력 사항입니다");
+  //   message.current = true;
+  // }
+  // if (title === "") {
+  //   setTitleError("필수입력 사항입니다");
+  //   message.current = true;
+  // }
+  // if (contents === "") {
+  //   setContentsError("필수입력 사항입니다");
+  //   message.current = true;
+  // }
+  // if (!message) {
+  //   alert("게시글 등록이 가능합니다");
+  // }
 
   return (
     <div className="전체창">
@@ -144,15 +172,15 @@ export default function New() {
             </label>
             <input
               type="text"
-              onChange={onChangeName}
+              onChange={onChangeWriter}
               id="작성자인풋"
               className={styles.작성자인풋}
               placeholder="작성자 명을 입력해 주세요."
             />
-            <div className={styles.에러메시지}>{nameError}</div>
+            <div className={styles.에러메시지}>{writerError}</div>
           </div>
           <div className={styles.비밀번호박스}>
-            <label htmlFor="비밀번호인풋" className={styles.비밀번호인풋}>
+            <label htmlFor="비밀번호인풋">
               비밀번호<span className={styles.span}>*</span>
             </label>
             <input
@@ -166,7 +194,7 @@ export default function New() {
           </div>
         </div>
         <div className={styles.제목박스}>
-          <label htmlFor="제목인풋" className={styles.제목인풋}>
+          <label htmlFor="제목인풋">
             제목<span className={styles.span}>*</span>
           </label>
           <input
@@ -179,16 +207,16 @@ export default function New() {
           <div className={styles.에러메시지}>{titleError}</div>
         </div>
         <div className={styles.내용박스}>
-          <label htmlFor="내용인풋" className={styles.내용인풋}>
+          <label htmlFor="내용인풋">
             내용<span className={styles.span}>*</span>
           </label>
           <textarea
-            onChange={onChangeContent}
+            onChange={onChangeContents}
             id="내용인풋"
             className={styles.내용인풋}
             placeholder="내용을 입력해 주세요."
           ></textarea>
-          <div className={styles.에러메시지}>{contentError}</div>
+          <div className={styles.에러메시지}>{contentsError}</div>
         </div>
         <div className={styles.주소박스}>
           <div className={styles.우편번호전체박스}>
@@ -232,15 +260,15 @@ export default function New() {
           <label htmlFor="">사진 첨부</label>
           <div className={styles.사진업로드전체박스}>
             <div className={styles.사진박스}>
-              <img src="./add.png" alt="" />
+              <Image src={Add} width={0} height={0} alt="" />
               <div>클릭해서 사진 업로드</div>
             </div>
             <div className={styles.사진박스}>
-              <img src="./add.png" alt="" />
+              <Image src={Add} width={0} height={0} alt="" />
               <div>클릭해서 사진 업로드</div>
             </div>
             <div className={styles.사진박스}>
-              <img src="./add.png" alt="" />
+              <Image src={Add} width={0} height={0} alt="" />
               <div>클릭해서 사진 업로드</div>
             </div>
           </div>
@@ -250,8 +278,8 @@ export default function New() {
         <div className={styles.푸터취소}>취소</div>
         <button
           className={styles.푸터등록하기}
-          onClick={onClickSignup}
-          disabled={!isActive}
+          onClick={onClickSubmit}
+          // disabled={!isActive}
         >
           {isActive ? true : false}
           등록하기

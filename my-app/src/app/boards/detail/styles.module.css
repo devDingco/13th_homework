@@ -58,15 +58,20 @@
   justify-content: center;
   align-items: center;
 }
-/* .하트전체박스 {
+.하트전체박스 {
   width: 24px;
-  height: 24px;
-  display: flex;
-} */
-
-.숫자박스 {
   /* height: 24px; */
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.숫자박스 {
+  width: 24px;
+  /* height: 24px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   /* margin-right: 20px; */
 }
@@ -80,7 +85,7 @@
   /* height: 20px; */
   font-size: 14px;
   line-height: 20px;
-  margin-right: 26px;
+  margin-right: 24px;
 }
 
 .오른쪽12 {
@@ -105,4 +110,6 @@
   align-items: center;
   border-radius: 8px;
   color: gray;
+  border-radius: 8px;
+  border: 1px solid #000;
 }
