@@ -6,25 +6,29 @@ import { Menu } from "antd";
 import Image from "next/image";
 import { Button } from "antd";
 import Icon from "@/components/iconFactory";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import { useLayout } from "@/commons/hooks/useLayout";
 
 const Header = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
+  const { isHeaderHide } = useLayout();
 
   const menuItems: MenuProps["items"] = [
     {
       label: <Link href="/">트립토크</Link>,
-      key: "home",
+      key: "/",
     },
     {
       label: <Link href="/buyticket">숙박권구매</Link>,
-      key: "buyticket",
+      key: "/buyticket",
     },
     {
       label: <Link href="/mypage">마이페이지</Link>,
-      key: "mypage",
+      key: "/mypage",
     },
     {
       label: "게시판 임시",
@@ -42,56 +46,57 @@ const Header = () => {
     },
   ];
 
-  const [current, setCurrent] = useState("home");
+  const [current, setCurrent] = useState(pathname || "/");
   const onMenu: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
 
-  return (
-    <header className="max-w-7xl flex justify-between items-center m-auto p-4 navbar">
-      <nav className="flex items-center gap-6">
-        <h1>
-          <Link href={"/"}>
-            <Image
-              className="dark:invert"
-              src="/images/logo.png"
-              alt="트립트립"
-              width={52}
-              height={32}
-            />
-          </Link>
-        </h1>
-        <Menu
-          id={styles.menu}
-          onClick={onMenu}
-          selectedKeys={[current]}
-          items={menuItems}
-          mode="horizontal" // "vertical"
-        />
-      </nav>
-      <div className="flex gap-6">
-        <Button
-          style={{ paddingRight: "15px" }}
-          color="default"
-          variant="solid"
-          type="default"
-          shape="round"
-          size="large"
-          onClick={() => router.push("/login")}
-          icon={
-            <Icon
-              icon="rightArrow"
-              className="w-5 h-5 dark:fill-black fill-white flex"
-              viewBox="-3 0 24 24"
-            />
-          }
-          iconPosition="end"
-        >
-          로그인
-        </Button>
-      </div>
-    </header>
-  );
+  if (!isHeaderHide)
+    return (
+      <header className="max-w-7xl flex justify-between items-center m-auto p-4 navbar">
+        <nav className="flex items-center gap-6">
+          <h1>
+            <Link href={"/"}>
+              <Image
+                className="dark:invert"
+                src="/images/logo.png"
+                alt="트립트립"
+                width={52}
+                height={32}
+              />
+            </Link>
+          </h1>
+          <Menu
+            id={styles.menu}
+            onClick={onMenu}
+            selectedKeys={[current]}
+            items={menuItems}
+            mode="horizontal" // "vertical"
+          />
+        </nav>
+        <div className="flex gap-6">
+          <Button
+            style={{ paddingRight: "15px" }}
+            color="default"
+            variant="solid"
+            // type="default"
+            shape="round"
+            size="large"
+            onClick={() => router.push("/login")}
+            icon={
+              <Icon
+                icon="rightArrow"
+                className="w-5 h-5 flex"
+                viewBox="-3 0 24 24"
+              />
+            }
+            iconPosition="end"
+          >
+            로그인
+          </Button>
+        </div>
+      </header>
+    );
 };
 export default Header;
 
