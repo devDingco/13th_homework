@@ -1,0 +1,53 @@
+.main {
+  min-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.navLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.logoIcon {
+  width: 52px;
+  height: 32px;
+}
+
+.navBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+}
+
+.navContents {
+  padding: 8px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.navChoice {
+  border-bottom: 2px solid var(--gray-B, #000);
+}
+
+.navRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.profileIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.downArrow {
+  width: 24px;
+  height: 24px;
+}

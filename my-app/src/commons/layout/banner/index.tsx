@@ -1,9 +1,11 @@
+"use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.css";
 import "swiper/css";
 import Image from "next/image";
-
-export default function BoardListBanner() {
+//BoardListBanner
+export default function LayoutBanner() {
   return (
     <>
       <Swiper
@@ -45,7 +47,7 @@ export default function BoardListBanner() {
         </SwiperSlide>
         <SwiperSlide>
           <Image
-            src="/banner/banner-1.png"
+            src="/banner/banner-4.jpeg"
             alt="/배너1"
             className={styles.banner}
             width={0}

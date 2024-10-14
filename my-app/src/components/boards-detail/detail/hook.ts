@@ -10,7 +10,7 @@ export const useBoardsDetail = () => {
       myid: params.boardId,
     },
   });
-  console.log(data);
+  console.log("data:", data);
 
   return {
     params,
