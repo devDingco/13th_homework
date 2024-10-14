@@ -9,6 +9,7 @@ import BoardLoading from './BoardLoading';
 import ErrorComponent from './ErrorComponent';
 import { IApiResponseData } from '@/models/apiResponse';
 import { ISearchParamsProps } from '@/models/children.type';
+import { PaginationWithLinks } from '@/components/common/PaginationWithLinks';
 import { boardUrlEndPoint } from '@/apis/config';
 import fetcher from '@/libs/fetcher';
 // import { useQuery } from '@apollo/client';
@@ -32,11 +33,14 @@ export default function BoardItemContainer({ searchParams }: ISearchParamsProps)
 		return <BoardLoading />;
 	}
 	if (error) return <ErrorComponent />;
-	console.log(data);
-	return (
-		Array.isArray(data.result) &&
-		data.result.map((board: IApiResponseData) => (
-			<BoardItem key={board.boardId} board={board} />
-		))
-	);
+
+	if (data)
+		return (
+			<>
+				{data.result.map((board: IApiResponseData) => (
+					<BoardItem key={board.boardId} board={board} />
+				))}
+				<PaginationWithLinks page={page} pageSize={take} totalCount={data.totalCount} />
+			</>
+		);
 }
