@@ -23,7 +23,7 @@ export interface PaginationWithLinksProps {
 		pageSizeOptions: number[];
 	};
 	totalCount: number;
-	pageSize: number;
+	take: number;
 	page: number;
 	pageSearchParam?: string;
 }
@@ -42,7 +42,7 @@ export interface PaginationWithLinksProps {
  */
 export function PaginationWithLinks({
 	pageSizeSelectOptions,
-	pageSize,
+	take,
 	totalCount,
 	page,
 	pageSearchParam,
@@ -51,7 +51,7 @@ export function PaginationWithLinks({
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const totalPageCount = Math.ceil(totalCount / pageSize);
+	const totalPageCount = Math.ceil(totalCount / take);
 
 	const buildLink = useCallback(
 		(newPage: number) => {
@@ -148,7 +148,7 @@ export function PaginationWithLinks({
 					<SelectRowsPerPage
 						options={pageSizeSelectOptions.pageSizeOptions}
 						setPageSize={navToPageSize}
-						pageSize={pageSize}
+						pageSize={take}
 					/>
 				</div>
 			)}

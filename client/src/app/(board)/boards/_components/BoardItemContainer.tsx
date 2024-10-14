@@ -1,46 +1,41 @@
 /** @format */
-'use client';
-// CHECKLIST : SWR은 상태관리라이브러리입니다. prop drilling으로 data를 안 내려줘도 됨.
+
+// NOTE Uncaught SyntaxError: Invalid or unexpected token (at layout.js:28:29)
 
 // import { GetBoardDocument, GetBoardsQuery } from '@/graphql/generated/graphql';
 
 import BoardItem from './BoardItem';
-import BoardLoading from './BoardLoading';
-import ErrorComponent from './ErrorComponent';
+// import BoardLoading from './BoardLoading';
+// import ErrorComponent from './ErrorComponent';
 import { IApiResponseData } from '@/models/apiResponse';
 import { ISearchParamsProps } from '@/models/children.type';
 import { PaginationWithLinks } from '@/components/common/PaginationWithLinks';
 import { boardUrlEndPoint } from '@/apis/config';
-import fetcher from '@/libs/fetcher';
+import commonGet from '@/apis/commonGet';
+
 // import { useQuery } from '@apollo/client';
-import useSWR from 'swr';
 
-export default function BoardItemContainer({ searchParams }: ISearchParamsProps) {
+export default async function BoardItemContainer({ searchParams }: ISearchParamsProps) {
 	const page = parseInt((searchParams.page as string) || '1');
-	const take = parseInt((searchParams.page as string) || '10');
-	const { data, isLoading, error } = useSWR(
-		`${boardUrlEndPoint}?page=${page}&take=${take}`,
-		fetcher,
-		{
-			suspense: true,
-			revalidateOnFocus: false,
-			fallbackData: [],
-		},
-	);
-	// const { data, loading } = useQuery<GetBoardsQuery>(GetBoardDocument);
+	const take = parseInt((searchParams.take as string) || '5');
 
-	if (isLoading) {
-		return <BoardLoading />;
-	}
-	if (error) return <ErrorComponent />;
+	const data = await commonGet(`${boardUrlEndPoint}?page=${page}&take=${take}`);
 
-	if (data && !isLoading)
+	if (data)
 		return (
 			<>
 				{data.result.map((board: IApiResponseData) => (
 					<BoardItem key={board.boardId} board={board} />
 				))}
-				<PaginationWithLinks page={page} pageSize={take} totalCount={data.totalCount} />
+				<PaginationWithLinks
+					page={page}
+					take={take}
+					totalCount={data.totalCount}
+					pageSizeSelectOptions={{
+						pageSizeSearchParam: 'take',
+						pageSizeOptions: [3, 5, 10, 15, 20],
+					}}
+				/>
 			</>
 		);
 }
