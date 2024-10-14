@@ -8,7 +8,7 @@ import { Button, Image, Upload } from "antd";
 
 import { useBoardWrite } from "@/components/board-write/hook";
 import { IboardFormProps } from "@/components/board-write/types";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 export default function BoardWrite(props: IboardFormProps) {
   const { title, formType } = props;
@@ -43,13 +43,14 @@ export default function BoardWrite(props: IboardFormProps) {
 
   //! 에러메시지가 있을 경우 alert 후 페이지 이동 처리 필요
   // if (errors && data === null) return redirect("/boards");
+  console.log("data", data);
 
   return (
     <>
       {isModalOpen && (
         <ModalAlertBox type={modalType} setIsModalOpen={setIsModalOpen} />
       )}
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h3 className="text-2xl font-bold">{title}</h3>
       <form>
         <div className="flex justify-between gap-10 flex-nowrap">
           {(data || formType !== "edit") && (
@@ -244,8 +245,8 @@ export default function BoardWrite(props: IboardFormProps) {
                     listType="picture-card"
                     fileList={fileList}
                     onPreview={handlePreview}
-                    onChange={handleChange}
                     {...field}
+                    onChange={handleChange}
                   >
                     {fileList.length >= 8 ? null : (
                       <button
@@ -274,49 +275,6 @@ export default function BoardWrite(props: IboardFormProps) {
             />
           </>
         )}
-
-        {/* <div className="flex gap-4 items-end">
-          <Input
-            title="사진 첨부"
-            placeholder="클릭해서 사진 업로드"
-            type="file"
-            accept="image/*"
-            {...register("imgFile1", formResister.imgFile1)}
-            errormessage={errors?.imgFile1?.message}
-            {...(formType === "edit" && { readOnly: true })}
-            // defaultValue={
-            //   formType === "edit"
-            //     ? data?.fetchBoard.images?.[0] ?? undefined
-            //     : undefined
-            // }
-          />
-          <Input
-            placeholder="클릭해서 사진 업로드"
-            type="file"
-            accept="image/*"
-            {...register("imgFile2", formResister.imgFile2)}
-            errormessage={errors?.imgFile2?.message}
-            {...(formType === "edit" && { readOnly: true })}
-            // defaultValue={
-            //   formType === "edit"
-            //     ? data?.fetchBoard.images?.[1] ?? undefined
-            //     : undefined
-            // }
-          />
-          <Input
-            placeholder="클릭해서 사진 업로드"
-            type="file"
-            accept="image/*"
-            {...register("imgFile3", formResister.imgFile3)}
-            errormessage={errors?.imgFile3?.message}
-            {...(formType === "edit" && { readOnly: true })}
-            // defaultValue={
-            //   formType === "edit"
-            //     ? data?.fetchBoard.images?.[2] ?? undefined
-            //     : undefined
-            // }
-          />
-        </div> */}
 
         <div className="flex items-end justify-end gap-4 pt-10">
           <Button
