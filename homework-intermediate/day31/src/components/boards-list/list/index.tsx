@@ -7,13 +7,13 @@ import { Board, FetchBoardsQuery } from '@/commons/graphql/graphql';
 import styles from './styles.module.css';
 import deleteImage from '@/assets/delete.png';
 
-export interface IBoardsList {
-  data: FetchBoardsQuery | undefined;
+interface IBoardList {
+  activePage: number;
 }
 
-export default function BoardList({ data }: IBoardsList) {
-  const { hoveredId, setHoveredId, onClickDelete, onClickDetail } =
-    useBoardList();
+export default function BoardList({ activePage }: { activePage: number }) {
+  const { data, hoveredId, setHoveredId, onClickDelete, onClickDetail } =
+    useBoardList({ activePage });
 
   return (
     <div className={styles.boardBody}>

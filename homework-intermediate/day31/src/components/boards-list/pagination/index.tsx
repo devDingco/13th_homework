@@ -1,19 +1,21 @@
 'use client';
 
 import { usePagination } from './hook';
-import { IBoardsPaginationProps } from './types';
 
 export default function BoardsPagination({
-  refetch,
-  lastPage,
-}: IBoardsPaginationProps) {
+  activePage,
+  setActivePage,
+}: {
+  activePage: number;
+  setActivePage: (activePage: number) => void;
+}) {
   const {
-    activePage,
     startPage,
+    lastPage,
     onClickPrevPageGroup,
     onClickNextPageGroup,
     onClickPage,
-  } = usePagination({ refetch, lastPage });
+  } = usePagination({ setActivePage });
 
   return (
     <div className="flex gap-2 items-center justify-center p-4">

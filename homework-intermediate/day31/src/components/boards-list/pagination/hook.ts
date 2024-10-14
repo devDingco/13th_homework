@@ -1,14 +1,20 @@
+import {
+  FetchBoardsCountDocument,
+  FetchBoardsDocument,
+} from '@/commons/graphql/graphql';
+import { useQuery } from '@apollo/client';
 import { MouseEvent, useState } from 'react';
 
 export const usePagination = ({
-  refetch,
-  lastPage,
+  setActivePage,
 }: {
-  refetch: (arg: any) => void;
-  lastPage: number;
+  setActivePage: (activePage: number) => void;
 }) => {
   const [startPage, setStartPage] = useState(1);
-  const [activePage, setActivePage] = useState(1);
+
+  const { data: dataBoardsCount } = useQuery(FetchBoardsCountDocument);
+  const { refetch } = useQuery(FetchBoardsDocument);
+  const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
   const onClickPrevPageGroup = () => {
     if (startPage === 1) return;
@@ -30,8 +36,8 @@ export const usePagination = ({
   };
 
   return {
-    activePage,
     startPage,
+    lastPage,
     onClickPrevPageGroup,
     onClickNextPageGroup,
     onClickPage,
