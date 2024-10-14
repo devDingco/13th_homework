@@ -3,7 +3,7 @@ import BoardDetailEdit from "@/components/boards-write"
 
 const BoardsNew = () => {
   
-  return <BoardDetailEdit isEdit={false}/>
+  return <BoardDetailEdit isEdit={true} />
 }
 
 export default BoardsNew;

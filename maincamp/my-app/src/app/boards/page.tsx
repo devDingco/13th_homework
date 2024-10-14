@@ -3,30 +3,31 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 import styles from "./css/styles.module.css"
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+import { DELETE_BOARD, FETCH_BOARDS } from "@/components/queries";
 
-const FETCH_BOARDS = gql`
-    query {
-        fetchBoards {
-            _id
-            writer
-            title
-            contents
-            youtubeUrl
-            likeCount
-            dislikeCount
-            images
-            createdAt
-            updatedAt
-            deletedAt
-        }
-    }
-`;
+// const FETCH_BOARDS = gql`
+//     query {
+//         fetchBoards {
+//             _id
+//             writer
+//             title
+//             contents
+//             youtubeUrl
+//             likeCount
+//             dislikeCount
+//             images
+//             createdAt
+//             updatedAt
+//             deletedAt
+//         }
+//     }
+// `;
 
-const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
+// const DELETE_BOARD = gql`
+//   mutation deleteBoard($boardId: ID!) {
+//     deleteBoard(boardId: $boardId)
+//   }
+// `;
 
 export default function BoardsList() {
     const { data } = useQuery(FETCH_BOARDS);
@@ -35,8 +36,8 @@ export default function BoardsList() {
 
     const [deleteBoard] = useMutation(DELETE_BOARD)
 
-    const onClickDetail = async (event :MouseEvent<HTMLLIElement>, id: string) => {
-        event.stopPropagation();
+    const onClickDetail = (id) => {
+        // event.stopPropagation();
         router.push(`/boards/${id}`)
     }
 
@@ -47,7 +48,7 @@ export default function BoardsList() {
                 refetchQueries: [{ query: FETCH_BOARDS}],
             });
             console.log("성공", response.data.deleteBoard);
-        }catch{
+        }catch(err){
             console.error("실패")
         }
     };

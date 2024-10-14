@@ -2,6 +2,7 @@
 import { gql, useMutation } from "@apollo/client"
 import styles from "../app/boards/new/styles.module.css"
 import { ChangeEvent, useState, MouseEvent } from "react"
+import { boardGraphql } from "./queries"
 export function NewButton(){
 
     const [name, setName] = useState("")
@@ -18,19 +19,19 @@ export function NewButton(){
 
     const [isActive, setIsActive] = useState(false)
 
-    const boardGraphql = gql`
-    mutation createBoard(
-        $boardwriter:String
-        $boardtitle:String
-        $boardcontents:String
-      ){
-        createBoard(writer:$boardwriter, title:$boardtitle, contents:$boardcontents){
-          _id
-          number
-          message
-        }  
-      }
-    `
+    // const boardGraphql = gql`
+    // mutation createBoard(
+    //     $boardwriter:String
+    //     $boardtitle:String
+    //     $boardcontents:String
+    //   ){
+    //     createBoard(writer:$boardwriter, title:$boardtitle, contents:$boardcontents){
+    //       _id
+    //       number
+    //       message
+    //     }  
+    //   }
+    // `
 
     const [boardRegister] = useMutation(boardGraphql);
 

@@ -1,40 +1,47 @@
 "use client"
 import { gql, useQuery } from "@apollo/client"
 import styles from "./styles.module.css"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
+import { FETCH_BOARD } from "@/components/queries"
 
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-        _id
-        writer
-        title
-        contents
-        createdAt
-        youtubeUrl
-        images
-        boardAddress{
-            zipcode
-            address
-            addressDetail
-        }
-        createdAt
-        updatedAt
-        deletedAt
-    }
-  }
-`;
+// const FETCH_BOARD = gql`
+//   query fetchBoard($boardId: ID!) {
+//     fetchBoard(boardId: $boardId) {
+//         _id
+//         writer
+//         title
+//         contents
+//         createdAt
+//         youtubeUrl
+//         images
+//         boardAddress{
+//             zipcode
+//             address
+//             addressDetail
+//         }
+//         createdAt
+//         updatedAt
+//         deletedAt
+//     }
+//   }
+// `;
 
 const BoardsDetail = () => {
     
     const params = useParams();
-    // const id = params.boardId;
+    const router = useRouter();
+    const id = params.boardId;
     // console.log(id);
     
     const { data } = useQuery(FETCH_BOARD, {
-        variables: { boardId: params.boardId },
+        variables: { boardId: id },
     });
     console.log(data);
+
+    const onClickEdit = () => {
+        router.push(`${id}/edit`)
+    }
+
     return (
         <div className={styles.content}>
             <h1>{data?.fetchBoard?.title}</h1>
@@ -44,7 +51,7 @@ const BoardsDetail = () => {
                     <p>{data?.fetchBoard?.writer}</p>
                 </div>
                 <div className={styles.createDate}>
-                    <p>{data?.fetchBoard?.createdAt}</p>
+                    <p>{data?.fetchBoard?.createdAt.split("T")[0].replace(/-/g, ".")}</p>
                 </div>
             </div>
             <div className={styles.subject}>
@@ -70,7 +77,7 @@ const BoardsDetail = () => {
             </div>
             <div className={styles.bottomBtn}>
                 <button></button>
-                <button></button>
+                <button onClick={onClickEdit}></button>
             </div>
         </div>
     )
