@@ -14,7 +14,7 @@ import { useParams } from "next/navigation";
 export const useCommentList = () => {
   const params = useParams();
 
-  const { data, error } = useQuery(FetchBoardCommentsDocument, {
+  const { data, error, loading } = useQuery(FetchBoardCommentsDocument, {
     variables: { page: 1, boardId: String(params.boardId) },
   });
 
@@ -62,5 +62,13 @@ export const useCommentList = () => {
     setMode(newMode);
   };
 
-  return { data, error, commentDelete, editModeHandler, mode, setMode };
+  return {
+    data,
+    error,
+    loading,
+    commentDelete,
+    editModeHandler,
+    mode,
+    setMode,
+  };
 };
