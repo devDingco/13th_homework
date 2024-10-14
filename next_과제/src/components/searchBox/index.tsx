@@ -1,73 +1,23 @@
 "use client";
 
 import Icon from "@/components/iconFactory";
-import { useParams } from "next/navigation";
-import { gql, useQuery } from "@apollo/client";
-import styles from "./index.module.scss";
-
-import { useState } from "react";
-
 import { DatePicker, Input, Button } from "antd";
+import { use, useState } from "react";
+import { IsearchBoxProps } from "@/components/searchBox/types";
+import useCustomSearchParams from "@/commons/hooks/useCustomSearchParams";
+import dayjs from "dayjs";
+import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
 
-const SEARCH_BOARD = gql`
-  query fetchBoards(
-    $endDate: DateTime
-    $startDate: DateTime
-    $search: String
-    $page: Int
-  ) {
-    fetchBoards(
-      endDate: $endDate
-      startDate: $startDate
-      search: $search
-      page: $page
-    ) {
-      _id
-      writer
-      title
-      createdAt
-    }
-  }
-`;
-
-export default function SearchBox() {
-  const params = useParams();
-
-  const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
-  const [search, setSearch] = useState("");
+export default function SearchBox({ handleSearch }: IsearchBoxProps) {
   const { RangePicker } = DatePicker;
-
-  const toKoreanTimeString = (date?: string, isEndDate = false) => {
-    if (!date) return undefined;
-    const dateSet = new Date(date);
-    const offset = 9 * 60; // Korea is UTC+9
-    const koreanTime = new Date(dateSet.getTime() + offset * 60 * 1000);
-    if (isEndDate) {
-      // 종료일은 24시로 설정
-      koreanTime.setHours(24, 0, 0, 0);
-    }
-    return koreanTime.toISOString();
-  };
-
-  const { refetch } = useQuery(SEARCH_BOARD, {
-    variables: {
-      endDate: toKoreanTimeString(endDate, true),
-      startDate: toKoreanTimeString(startDate),
-      search: search,
-      page: Number(params.pageNum) || 1,
-    },
-  });
-
-  const searchBoard = async () => {
-    const result = await refetch();
-    console.log(result.data);
-    console.log(
-      toKoreanTimeString(startDate),
-      toKoreanTimeString(endDate, true),
-      search
-    );
-  };
+  const { searchParams, setSearchParams } = useCustomSearchParams();
+  const [startDate, setStartDate] = useState<string>(
+    toKoreanTimeString(searchParams.startDate) || "2021-09-03T09:54:33Z"
+  );
+  const [endDate, setEndDate] = useState<string>(
+    toKoreanTimeString(searchParams.endDate, true) || new Date().toISOString()
+  );
+  const [search, setSearch] = useState(searchParams.search || "");
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">
@@ -90,15 +40,28 @@ export default function SearchBox() {
             start: "startDate",
             end: "endDate",
           }}
+          defaultValue={[
+            dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
+            dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
+          ]}
           onChange={(date, dateString) => {
             setStartDate(new Date(dateString[0]).toISOString());
             setEndDate(new Date(dateString[1]).toISOString());
+            setSearchParams({
+              startDate: new Date(dateString[0]).toISOString(),
+              endDate: new Date(dateString[1]).toISOString(),
+            });
           }}
         />
         <Button
           size="large"
+          color="default"
+          variant="solid"
           className="btn btn-accent-content max-sm:w-full"
-          onClick={() => searchBoard()}
+          onClick={(e) => {
+            e.preventDefault();
+            handleSearch({ startDate, endDate, search });
+          }}
         >
           검색
         </Button>
