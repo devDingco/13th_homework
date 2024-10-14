@@ -16,6 +16,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     onChangeContent,
     onCLickUpdate,
     onClickSignup,
+    onChangeYoutubeUrl,
 
     // 아래부터 주소
     isOpen,
@@ -25,12 +26,16 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     address,
     addressDetail,
     setAddressDetail,
+    setAddress,
+    setZipcode,
+    data,
+    password,
 
     // showModal,
     // isOpen,
     // handleOk,
     // handleCancel,
-  } = useBoardsWrite();
+  } = useBoardsWrite(props);
 
   // 그냥 esLint에러 보기싫어서 만든 줄
   const [nameError, setNameError] = useState("");
@@ -38,19 +43,18 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
   const [isActive, setIsActive] = useState(false);
-  console.log(
-    setNameError,
-    setPasswordError,
-    setTitleError,
-    setContentError,
-    setIsActive
-  );
+  // console.log(
+  //   setNameError,
+  //   setPasswordError,
+  //   setTitleError,
+  //   setContentError,
+  //   setIsActive
+  // );
 
   return (
     <>
       <main className={props.styles.게시물등록섹션}>
-        <Link href="/boards/detail">상세 페이지 이동</Link>
-        {/* <button onClick={onClickSubmit}>그래프큐엘요청하는버튼</button> */}
+        {/* <Link href="/boards/detail">상세 페이지 이동</Link> */}
         <section className={props.styles.게시물등록}>
           <h1>게시물 {props.isEdit ? "수정" : "등록"}</h1>
         </section>
@@ -90,8 +94,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 type="password"
                 placeholder="비밀번호를 입력해주세요."
                 onChange={onChangePassword}
-                disabled={props.isEdit}
-                defaultValue={props.data?.fetchBoard.password ? "" : "****"}
+                disabled={props.isEdit ? true : false}
+                defaultValue={props.isEdit ? "******" : password}
               />
               <span id="비밀번호경고" className={props.styles.경고글}>
                 {passwordError}
@@ -152,8 +156,15 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 className={props.styles.우편번호인풋}
                 type="text"
                 placeholder="01234"
+                defaultValue={
+                  props.isEdit ? data?.fetchBoard.boardAddress.zipcode : ""
+                }
                 value={zipcode}
-                defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
+                onChange={(event) => setZipcode(event.target.value)}
+                // 시작할때 빈값인가?
+                // 수정할때 값이 오는가?
+                // 수정시 인풋에 적용되는가?
+                // 수정되고 튤팁에 적용되는가?
               />
               <button onClick={onToggleModal} className={props.styles.우편버튼}>
                 우편번호 검색
@@ -164,16 +175,23 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               className={props.styles.풀인풋}
               type="text"
               placeholder="주소를 입력해 주세요."
+              defaultValue={
+                props.isEdit ? data?.fetchBoard.boardAddress.address : ""
+              }
               value={address}
-              defaultValue={props.data?.fetchBoard.boardAddress.address}
+              onChange={(event) => setAddress(event.target.value)}
+
+              // value={address}
             />
             <input
               className={props.styles.풀인풋}
               type="text"
               placeholder="상세주소"
+              defaultValue={
+                data ? data?.fetchBoard.boardAddress.addressDetail : ""
+              }
               value={addressDetail}
-              onChange={(e) => setAddressDetail(e.target.value)} // 입력값을 상태에 저장
-              defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+              onChange={(event) => setAddressDetail(event.target.value)} // 입력값을 상태에 저장
             />
           </fieldset>
 
@@ -186,7 +204,16 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               className={props.styles.풀인풋}
               type="text"
               placeholder="링크를 입력해 주세요."
+              onChange={onChangeYoutubeUrl}
+              defaultValue={data?.fetchBoard.youtubeUrl}
             />
+            {/* <input
+              className={props.styles.풀인풋}
+              type="text"
+              placeholder="제목을 입력해 주세요."
+              onChange={onChangeTitle}
+              defaultValue={props.data?.fetchBoard.title}
+            /> */}
           </fieldset>
 
           <hr className={props.styles.실선} />

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useBoardsDetail } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import React from "react";
+import ReactPlayer from "react-player";
 
 // mui 아이콘 사용
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -77,13 +79,11 @@ export default function BoardsDetail() {
         </div>
 
         <div className={styles.boardVideo}>
-          <Image
-            src="/images/mainVideo.png"
-            alt="메인비디오"
-            className={styles.mainVideo}
-            width={0}
-            height={0}
-            sizes="100vw"
+          <ReactPlayer
+            url={data?.fetchBoard.youtubeUrl}
+            width="822px"
+            height="464px"
+            controls={true}
           />
         </div>
 

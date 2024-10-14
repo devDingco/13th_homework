@@ -6,16 +6,8 @@ import styles from "@/components/boards-list/list/styles.module.css";
 
 export default function board() {
   return (
-    <div
-      style={{
-        width: "100vw",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <BoardListBanner />
+    <div>
+      {/* <BoardListBanner /> */}
       <Board styles={styles} />
     </div>
   );
