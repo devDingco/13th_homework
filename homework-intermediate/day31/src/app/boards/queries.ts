@@ -18,8 +18,8 @@ export const FETCH_BOARDS = gql`
   }
 `;
 
-export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
+export const FETCH_BOARDS_COUNT = gql`
+  query fetchBoardsCount {
+    fetchBoardsCount
   }
 `;

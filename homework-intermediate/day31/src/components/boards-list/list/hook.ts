@@ -9,11 +9,8 @@ import { Modal } from 'antd';
 
 export default function useBoardList() {
   const [hoveredId, setHoveredId] = useState('');
-  const { data } = useQuery(FetchBoardsDocument, {
-    variables: { page: 1 },
-  });
   const [deleteBoard] = useMutation(DeleteBoardDocument);
-  // console.log('boards 페이지에서 data.fetchBoards::::', data?.fetchBoards);
+
   const router = useRouter();
 
   const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -21,14 +18,16 @@ export default function useBoardList() {
     try {
       const response = await deleteBoard({
         variables: { boardId: hoveredId },
-        refetchQueries: [
-          { query: FetchBoardsDocument, variables: { page: 1 } },
-        ],
+        // refetchQueries: [
+        //   { query: FetchBoardsDocument, variables: { page: 1 } },
+        // ],
       });
       // alert(`게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`);
       Modal.success({
         content: `게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`,
       });
+      // refetch({ page: 1 });
+      router.push(`/boards`);
     } catch (err) {
       Modal.error({
         content: `게시글 삭제에 실패했습니다.`,
@@ -45,11 +44,5 @@ export default function useBoardList() {
     router.push(`/boards/${id}`);
   };
 
-  return {
-    data,
-    hoveredId,
-    setHoveredId,
-    onClickDelete,
-    onClickDetail,
-  };
+  return { hoveredId, setHoveredId, onClickDelete, onClickDetail };
 }

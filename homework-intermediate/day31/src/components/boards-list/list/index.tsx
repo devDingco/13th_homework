@@ -1,19 +1,18 @@
 'use client';
 
-import styles from './styles.module.css';
 import Image from 'next/image';
+
 import useBoardList from './hook';
-import { Board } from '@/commons/graphql/graphql';
+import { Board, FetchBoardsQuery } from '@/commons/graphql/graphql';
+import styles from './styles.module.css';
+import deleteImage from '@/assets/delete.png';
 
-const IMAGE_SRC = {
-  deleteImage: {
-    src: require('@/assets/delete.png'),
-    alt: '삭제버튼',
-  },
-};
+export interface IBoardsList {
+  data: FetchBoardsQuery | undefined;
+}
 
-export default function BoardList() {
-  const { data, hoveredId, setHoveredId, onClickDelete, onClickDetail } =
+export default function BoardList({ data }: IBoardsList) {
+  const { hoveredId, setHoveredId, onClickDelete, onClickDetail } =
     useBoardList();
 
   return (
@@ -26,10 +25,7 @@ export default function BoardList() {
             <div className={styles.headerWriter}>작성자</div>
             <div className={styles.headerDate}>날짜</div>
             <button className={styles.hidden}>
-              <Image
-                src={IMAGE_SRC.deleteImage.src}
-                alt={IMAGE_SRC.deleteImage.alt}
-              />
+              <Image src={deleteImage} alt="삭제버튼" />
             </button>
           </div>
           <div className={styles.contentBody}>
@@ -56,10 +52,7 @@ export default function BoardList() {
                       hoveredId === el._id ? styles.showButton : styles.hidden
                     }
                   >
-                    <Image
-                      src={IMAGE_SRC.deleteImage.src}
-                      alt={IMAGE_SRC.deleteImage.alt}
-                    />
+                    <Image src={deleteImage} alt="삭제버튼" />
                   </span>
                 </div>
               </button>
