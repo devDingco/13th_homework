@@ -10,12 +10,10 @@ import { useRouter } from "next/navigation";
 
 export default function BoardDetail() {
   const router = useRouter();
-  const { detailData, params, error } = useBoardDetail();
-  // console.log(error);
+  const { detailData, params, error, loading } = useBoardDetail();
 
+  if (loading) return <div>로딩중...</div>; //! 로딩중일때 디자인 변경하여 처리필요
   if (detailData === null || error) return redirect("/boards");
-
-  // console.log(detailData);
 
   return (
     <div className="flex flex-col gap-10">
@@ -85,9 +83,11 @@ export default function BoardDetail() {
               <iframe
                 title="YouTube video player"
                 src={
-                  detailData?.youtubeUrl.includes(".be/")
+                  detailData?.youtubeUrl.includes(".be/") ||
+                  detailData?.youtubeUrl.includes("watch?v=")
                     ? `https://www.youtube.com/embed/${
-                        detailData?.youtubeUrl.split(".be/")[1]
+                        detailData?.youtubeUrl.split(".be/")[1] ||
+                        detailData?.youtubeUrl.split("watch?v=")[1]
                       }`
                     : detailData?.youtubeUrl
                 }
