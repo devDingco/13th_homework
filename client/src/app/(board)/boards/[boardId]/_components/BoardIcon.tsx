@@ -1,5 +1,6 @@
 /** @format */
 'use client';
+// TODO - 추후 지도랑 주소 관련 이벤트 처리해야함 즉 icon 별로 컴포넌트화를 시켜야함.
 
 import Image from 'next/image';
 import { useState } from 'react';

@@ -1,4 +1,5 @@
 /** @format */
+// TODO 이거 너무 복잡함 정신없음 무조건 리팩토링 해야함
 
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 

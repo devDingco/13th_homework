@@ -1,4 +1,5 @@
 /** @format */
+// TODO 이거 NewInput.tsx 컴포넌트 재사용할 수 있음
 
 import { ITitle, RNewTitle } from '@/models/board.type';
 

@@ -1,6 +1,5 @@
 /** @format */
-'use client';
-
+// TODO: HOC 또는 컴포넌트 합성을 통해 모달 컨테이너를 리팩토링
 import CommonButton from './CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { IModalCommon } from '@/models/children.type';
@@ -10,9 +9,6 @@ import useOnClickBack from '@/hooks/useOnClickBack';
 
 export default function ModalContainer({ boardId, modal, address }: IModalCommon) {
 	const onClickBack = useOnClickBack();
-	// 오늘은 과제를 기한내로 제출하지 못할 거 같아서
-	// 모달 같은 경우 추후 HOC를 공부한 이후에 적용할 예정
-	// 오늘 일정이 너무 빡빡해서.. 구현만 먼저 하겠습니다.
 
 	return (
 		<div

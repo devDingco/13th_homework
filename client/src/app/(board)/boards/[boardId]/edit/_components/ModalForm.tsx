@@ -1,4 +1,7 @@
 /** @format */
+// TODO size로 처리하지않고 padding으로 처리하니깐 error 여부에 따라 모달 사이즈가 변경됨 나중에 추후 잡을 예정
+// WARNING useFormAction type Error?
+// NOTE useFormStatus 적용하기
 
 import { boardsUrlEndPoint, editUrlEndPoint } from '@/apis/config';
 
@@ -45,7 +48,7 @@ export default function ModalForm() {
 					/>
 				</svg>
 			</form>
-			{/* size로 처리하지않고 padding으로 처리하니깐 모달 사이즈가 변경됨 나중에 추후 잡을 예정 */}
+
 			<div className="prose-me_16_24 mt-2 text-sm text-red-500">{state?.error}</div>
 		</>
 	);

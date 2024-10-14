@@ -1,5 +1,5 @@
 /** @format */
-'use client';
+// TODO: hover시 mouseOver & mouseLeave custom hook
 
 import { IBoardItem } from '@/models/board.type';
 import Image from 'next/image';

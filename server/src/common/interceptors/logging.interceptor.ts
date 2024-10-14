@@ -16,27 +16,39 @@ export class LoggingInterceptor implements NestInterceptor {
         const isHttp: boolean = context.getType() === 'http';
         const isGraphQL: boolean =
             context.getType<GqlContextType>() === 'graphql';
+
+        let method = '';
+        let url = '';
+
         if (isHttp) {
             const request: Request = context.switchToHttp().getRequest();
-            console.log(`Incoming ${request.method} request to ${request.url}`);
+            method = request.method;
+            url = request.url;
+            console.log(`Incoming ${method} request to ${url}`);
         }
 
         if (isGraphQL) {
             const ctx = GqlExecutionContext.create(context);
-
             const info = ctx.getInfo();
 
             const fieldName = info.path.key;
             const fieldMethod = info.path.typename;
+            method = fieldMethod;
+            url = fieldName;
 
-            console.log(`Incoming GraphQL ${fieldMethod} : ${fieldName} `);
+            console.log(`Incoming GraphQL ${method} : ${url}`);
         }
 
         console.log('Before...');
 
         const now = Date.now();
-        return next
-            .handle()
-            .pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
+
+        // next.handle()는 Observable을 반환하며, 그 응답에 접근할 수 있음
+        return next.handle().pipe(
+            tap(() => {
+                console.log(`Outgoing response for ${method} ${url}`);
+                console.log(`After... ${Date.now() - now}ms`);
+            }),
+        );
     }
 }

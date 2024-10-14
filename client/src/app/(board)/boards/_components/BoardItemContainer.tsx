@@ -1,5 +1,6 @@
 /** @format */
 'use client';
+// CHECKLIST : SWR은 상태관리라이브러리입니다. prop drilling으로 data를 안 내려줘도 됨.
 
 // import { GetBoardDocument, GetBoardsQuery } from '@/graphql/generated/graphql';
 
@@ -19,7 +20,6 @@ export default function BoardItemContainer() {
 		fallbackData: [],
 	});
 	// const { data, loading } = useQuery<GetBoardsQuery>(GetBoardDocument);
-	console.log(data);
 
 	if (isLoading) {
 		return <BoardLoading />;
