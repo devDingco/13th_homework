@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 import "./globals.css";
+import Layout from "@/commons/layout";
 
 const pretendardBold = localFont({
   src: "./fonts/Pretendard-Bold.woff",
@@ -31,7 +32,7 @@ export default function RootLayout(props: any) {
     <html lang="ko">
       <body>
         <ApolloSetting>
-          {props.children}  
+          <Layout>{props.children}</Layout>
         </ApolloSetting>
       </body>
     </html>

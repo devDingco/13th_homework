@@ -10,6 +10,7 @@
 }
 
 body {
+  width: 100vw;
   padding-bottom: 2.5rem;
 
   display: flex;
