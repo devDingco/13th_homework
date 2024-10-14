@@ -2,11 +2,13 @@
 import styles from "./styles.module.css";
 import Board from "@/app/components/boards/Boards-list/list/components/Board";
 import BoardsHeader from "@/app/components/boards/Boards-list/list/components/BoardHeader";
-import useBoardsList from "@/app/components/boards/Boards-list/list/hook";
+import { FetchBoardsQuery } from "@/commons/gql/graphql";
 
-const BoardsList = () => {
-  const { data } = useBoardsList();
+interface IBoardsListProps {
+  data?: FetchBoardsQuery;
+}
 
+const BoardsList = ({ data }: IBoardsListProps) => {
   return (
     <div className={styles.boards_RootContainer}>
       <main className={styles.boards_MainContainer}>
