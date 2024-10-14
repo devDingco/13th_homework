@@ -30,18 +30,18 @@ button {
   cursor: pointer;
 }
 #root {
-  display: flex;
-  width: 100vw;
+  /* display: flex; */
 
-  padding: 0rem 20rem;
-  justify-content: center;
-  align-items: center;
+  /* padding: 0rem 20rem; */
+  /* justify-content: center; */
+  /* align-items: center; */
   background-color: #fff;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 .container {
   display: flex;
+  margin: 0 auto;
   width: 60vw;
   padding: 2.5rem 0rem;
   flex-direction: column;
