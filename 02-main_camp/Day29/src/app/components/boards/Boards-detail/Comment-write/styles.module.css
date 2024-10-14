@@ -1,0 +1,49 @@
+.BoardCommentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.titleContainer {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+
+  display: flex;
+  gap: 0.5rem;
+}
+
+.starsContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.textInputContainer {
+  width: 40rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.commentsInput {
+  height: 9rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  height: 3rem;
+  background-color: #c7c7c7;
+  border-radius: 0.5rem;
+
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #e4e4e4;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
