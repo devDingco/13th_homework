@@ -34,7 +34,7 @@ export default function BoardItemContainer({ searchParams }: ISearchParamsProps)
 	}
 	if (error) return <ErrorComponent />;
 
-	if (data)
+	if (data && !isLoading)
 		return (
 			<>
 				{data.result.map((board: IApiResponseData) => (

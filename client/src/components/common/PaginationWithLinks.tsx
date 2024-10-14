@@ -15,13 +15,7 @@ import {
 	PaginationPrevious,
 } from '../ui/pagination';
 import { cn } from '@/libs/utils';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@radix-ui/react-select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 export interface PaginationWithLinksProps {
 	pageSizeSelectOptions?: {
