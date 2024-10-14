@@ -42,6 +42,7 @@ export class BoardService {
     }
 
     async findAll(page: number): Promise<Board[]> {
+        await this.checkEntityCount(page);
         return await this.boardRepository.findAllBoard();
         // return await this.boardRepository.countBoard();
     }
@@ -50,6 +51,10 @@ export class BoardService {
         const board = await this.boardRepository.findBoard(boardId);
 
         return board;
+    }
+
+    async getBoardCount(): Promise<number> {
+        return await this.boardRepository.countBoard();
     }
 
     async updateOne(
@@ -98,11 +103,10 @@ export class BoardService {
 
     async checkEntityCount(page: number) {
         const maxCount = await this.boardRepository.countBoard();
-        const maxPage = Math.ceil(maxCount / 10);
 
-        if (page > maxPage) {
+        if (page > maxCount) {
             throw new BadRequestException(
-                `Entity count exceeds the limit of ${page}. Current count: ${maxPage}`,
+                `Entity count exceeds the limit of ${page}. Current count: ${maxCount}`,
             );
         }
     }

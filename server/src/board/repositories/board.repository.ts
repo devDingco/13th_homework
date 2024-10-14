@@ -110,6 +110,7 @@ export class BoardRepository {
     }
 
     async countBoard(): Promise<number> {
-        return await this.boardRepository.count();
+        const count = await this.boardRepository.count();
+        return Math.ceil(count / 10);
     }
 }

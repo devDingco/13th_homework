@@ -41,6 +41,13 @@ export class BoardController {
         return this.boardService.findAll(query.page);
     }
 
+    @Get('count')
+    @ResponseMessage('board의 count 개수를 성공적으로 가져왔습니다.')
+    @HttpCode(HttpStatus.OK)
+    getBoardCount() {
+        return this.boardService.getBoardCount();
+    }
+
     @Get(':boardId')
     @ResponseMessage('board를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
