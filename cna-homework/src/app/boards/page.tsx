@@ -2,8 +2,6 @@
 import BoardList from "@/components/boards-list/list";
 
 const Boards = () => {
-  // graphql
-
   return (
     <>
       <BoardList />
