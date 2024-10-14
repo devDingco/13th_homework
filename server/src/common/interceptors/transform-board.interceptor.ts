@@ -64,6 +64,8 @@ export class TransformBoardInterceptor<T>
                         }
                         const deleteIdData = this.removeSensitiveData(data);
                         return { message, statusCode, data: deleteIdData };
+                    } else if (typeof data === 'number') {
+                        return { message, statusCode, data };
                     } else {
                         return { message, statusCode };
                     }

@@ -108,4 +108,8 @@ export class BoardRepository {
     async clearBoard(): Promise<void> {
         await this.boardRepository.clear();
     }
+
+    async countBoard(): Promise<number> {
+        return await this.boardRepository.count();
+    }
 }

@@ -1,6 +1,10 @@
 import * as bcrypt from 'bcrypt';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 
 import { Board } from './entities/board.entity';
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
@@ -37,8 +41,9 @@ export class BoardService {
         return await this.boardRepository.saveBoard(board);
     }
 
-    async findAll(): Promise<Board[]> {
+    async findAll(page: number): Promise<Board[]> {
         return await this.boardRepository.findAllBoard();
+        // return await this.boardRepository.countBoard();
     }
 
     async findOne(boardId: number): Promise<Board> {
@@ -89,5 +94,16 @@ export class BoardService {
 
     async transformPassword(password: string): Promise<string> {
         return await bcrypt.hash(password, 10);
+    }
+
+    async checkEntityCount(page: number) {
+        const maxCount = await this.boardRepository.countBoard();
+        const maxPage = Math.ceil(maxCount / 10);
+
+        if (page > maxPage) {
+            throw new BadRequestException(
+                `Entity count exceeds the limit of ${page}. Current count: ${maxPage}`,
+            );
+        }
     }
 }
