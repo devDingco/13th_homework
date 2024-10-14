@@ -8,9 +8,18 @@ import {
 } from "../../types/components.type";
 import { CreateBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
 
-export default function useBoardsWrite(props: IBoardsWriteHook) {
+export default function useBoardsWrite(
+  props: IBoardsWriteHook,
+  userPassword: string
+) {
   const params = useParams();
   const router = useRouter();
+
+  const [isInputPasswordModalOpen, setIsInputPasswordModalOpen] =
+    useState(false);
+  const [isWrongPasswordModalOpen, setIsWrongPasswordModalOpen] =
+    useState(false);
+  const [isEditCompleteModalOpen, setIsEditCompleteModalOpen] = useState(false);
 
   const [formData, setFormData] = useState<IFormData>({
     writer: "",
@@ -58,11 +67,9 @@ export default function useBoardsWrite(props: IBoardsWriteHook) {
   };
 
   const handleSubmitEdit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsInputPasswordModalOpen(!isInputPasswordModalOpen);
     try {
-      event.preventDefault();
-      const userPassword = prompt(
-        "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
-      );
       const editVariables = {
         updateBoardInput: {
           title: formData.title,
@@ -80,6 +87,7 @@ export default function useBoardsWrite(props: IBoardsWriteHook) {
         boardId: String(params.boardId),
         password: userPassword,
       };
+      console.log(userPassword);
       if (formData.title) editVariables.updateBoardInput.title = formData.title;
       if (formData.contents)
         editVariables.updateBoardInput.contents = formData.contents;
@@ -87,7 +95,7 @@ export default function useBoardsWrite(props: IBoardsWriteHook) {
       const result = await updateBoard({
         variables: editVariables,
       });
-      alert("수정 완료");
+      setIsEditCompleteModalOpen(!isEditCompleteModalOpen);
       router.push(`/boards/${result.data?.updateBoard._id}`);
       router.refresh();
       // refetch
@@ -96,7 +104,7 @@ export default function useBoardsWrite(props: IBoardsWriteHook) {
       console.error(err);
       const graphQLErrors = `${err}.graphQLErrors[0]`;
       if (graphQLErrors.includes("비밀번호가 일치하지 않습니다."))
-        alert("비밀번호가 일치하지 않습니다.");
+        setIsWrongPasswordModalOpen(!isWrongPasswordModalOpen);
       else alert("An error occurred while editing. Please try again.");
     }
   };
@@ -107,5 +115,9 @@ export default function useBoardsWrite(props: IBoardsWriteHook) {
     handleInputChange,
     onSubmit,
     formData,
+    isInputPasswordModalOpen,
+    setIsInputPasswordModalOpen,
+    isWrongPasswordModalOpen,
+    isEditCompleteModalOpen,
   };
 }
