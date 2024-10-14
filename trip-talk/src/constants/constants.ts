@@ -27,6 +27,7 @@ export const BUTTON: TRecord = {
   submit: "등록하기",
   list: "목록으로",
   edit: "수정하기",
+  confirm: "확인",
 };
 
 export const BOARDS_WRITE: TRecord = {
