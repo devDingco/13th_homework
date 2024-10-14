@@ -20,15 +20,9 @@ export default function BoardsNewUI() {
         // address01,
         // address02,
     } = useSubmitInput();
-
     const valid = author && password && title && content;
 
-    const onClickCreate = useCreate({
-        author,
-        password,
-        title,
-        content,
-    });
+    const onClickCreate = useCreate({ author, password, title, content });
 
     return (
         <form

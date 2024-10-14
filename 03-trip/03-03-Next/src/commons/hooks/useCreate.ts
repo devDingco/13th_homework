@@ -26,12 +26,12 @@ export default function useCreate(props: ICreateProps) {
                         password: password,
                         title: title,
                         contents: content,
-                        youtubeUrl: link,
-                        boardAddress: {
-                            zipcode: zipcode,
-                            address: address01,
-                            addressDetail: address02,
-                        },
+                        // youtubeUrl: link,
+                        // boardAddress: {
+                        //     zipcode: zipcode,
+                        //     address: address01,
+                        //     addressDetail: address02,
+                        // },
                     },
                 },
             });

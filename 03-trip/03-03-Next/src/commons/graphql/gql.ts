@@ -16,7 +16,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n    mutation createBoard($createBoardInput: CreateBoardInput!) {\n        createBoard(createBoardInput: $createBoardInput) {\n            _id\n            writer\n            title\n            contents\n            youtubeUrl\n            likeCount\n            dislikeCount\n            images\n            boardAddress {\n                _id\n                zipcode\n                address\n                addressDetail\n                createdAt\n            }\n            createdAt\n            updatedAt\n            deletedAt\n        }\n    }\n": types.CreateBoardDocument,
     "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardDocument,
-    "\n    query fetchBoards($number: Int) {\n        fetchBoards(page: $number) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardsDocument,
+    "\n    query fetchBoards($page: Int) {\n        fetchBoards(page: $page) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardsDocument,
+    "\n    query fetchBoardsCount {\n        fetchBoardsCount\n    }\n": types.FetchBoardsCountDocument,
     "\n    mutation updateBoard(\n        $boardId: ID!\n        $password: String\n        $updateBoardInput: UpdateBoardInput!\n    ) {\n        updateBoard(\n            boardId: $boardId\n            password: $password\n            updateBoardInput: $updateBoardInput\n        ) {\n            _id\n            writer\n            title\n            contents\n            updatedAt\n        }\n    }\n": types.UpdateBoardDocument,
     "\n    mutation deleteBoard($boardId: ID!) {\n        deleteBoard(boardId: $boardId)\n    }\n": types.DeleteBoardDocument,
 };
@@ -46,7 +47,11 @@ export function graphql(source: "\n    query fetchBoard($boardId: ID!) {\n      
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query fetchBoards($number: Int) {\n        fetchBoards(page: $number) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    query fetchBoards($number: Int) {\n        fetchBoards(page: $number) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n"];
+export function graphql(source: "\n    query fetchBoards($page: Int) {\n        fetchBoards(page: $page) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    query fetchBoards($page: Int) {\n        fetchBoards(page: $page) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query fetchBoardsCount {\n        fetchBoardsCount\n    }\n"): (typeof documents)["\n    query fetchBoardsCount {\n        fetchBoardsCount\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

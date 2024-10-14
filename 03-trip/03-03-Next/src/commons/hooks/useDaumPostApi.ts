@@ -1,29 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Address } from "react-daum-postcode";
-import useSubmitInput from "./useSubmitInput";
 
 export default function useDaumPostApi() {
-    const { zipcode, setZipcode, address, setAddress } = useSubmitInput();
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [addrData, setAddrData] = useState<Address>();
 
     const onToggleModal = () => {
         setIsModalOpen((prev) => !prev);
     };
 
+    // const [addressData, setAddressData] = useState<Address>();
+    const [zipcode, setZipcode] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
+
     const handleComplete = (data: Address) => {
-        setAddrData(data);
+        console.log(data);
         setZipcode(data.zonecode);
-        console.log(zipcode);
         setAddress(data.address);
-        console.log(address);
         onToggleModal();
     };
 
+    useEffect(() => {
+        console.log(zipcode, address);
+    }, [zipcode, address]);
+
     return {
         isModalOpen,
-        addrData,
+        zipcode,
+        address,
         onToggleModal,
         handleComplete,
     };

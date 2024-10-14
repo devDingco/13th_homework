@@ -1,18 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useQuery } from "@apollo/client";
-import { FetchBoardsDocument } from "@/commons/graphql/graphql";
 import { MouseEventHandler } from "react";
 import useDelete from "@/commons/hooks/useDelete";
 
 import styles from "./styles.module.css";
 
-export default function BoardsListUI() {
+export default function BoardsListUI({ data, count, current }) {
     const Router = useRouter();
-    const { data } = useQuery(FetchBoardsDocument, {
-        variables: { number: 1 },
-    });
+
     const onClickDelete: MouseEventHandler = useDelete();
 
     return (
@@ -32,7 +28,12 @@ export default function BoardsListUI() {
                         onClick={() => Router.push(`/boards/${el._id}`)}
                     >
                         <div className={styles.idx}>
-                            {data?.fetchBoards.length - idx}
+                            {Number(
+                                count?.fetchBoardsCount +
+                                    10 -
+                                    idx -
+                                    current * 10
+                            )}
                         </div>
                         <div className={styles.title}>{el.title}</div>
                         <div className={styles.author}>{el.writer}</div>

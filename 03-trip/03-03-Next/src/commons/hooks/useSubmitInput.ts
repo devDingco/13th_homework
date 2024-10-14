@@ -1,27 +1,31 @@
 import { useState } from "react";
 import { ISubmitInput } from "../types/types";
+import useDaumPostApi from "./useDaumPostApi";
 
 export default function useSubmitInput() {
+    const { zipcode, address } = useDaumPostApi();
+
     const [submitInput, setSubmitInput] = useState<ISubmitInput>({
         author_ID: "",
         password_ID: "",
         title_ID: "",
         content_ID: "",
     });
-    const [zipcode, setZipcode] = useState();
-    const [address, setAddress] = useState();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSubmitInput((prev) => ({
             ...prev,
+            zipcode_ID: zipcode,
+            address01_ID: address,
             [e.target.id]: e.target.value,
         }));
         console.log(submitInput);
-        // const submitInputFields = { ...submitInput };
-        // submitInputFields[e.target.id] = e.target.value;
-        // setSubmitInput(submitInputFields);
-        // console.log(submitInput);
     };
+
+    // const submitInputFields = { ...submitInput };
+    // submitInputFields[e.target.id] = e.target.value;
+    // setSubmitInput(submitInputFields);
+    // console.log(submitInput);
 
     // variable naming compression
     const author = submitInput.author_ID;
@@ -41,9 +45,7 @@ export default function useSubmitInput() {
 
         youtube,
         zipcode,
-        setZipcode,
         address,
-        setAddress,
         addressDetail,
     };
 }
