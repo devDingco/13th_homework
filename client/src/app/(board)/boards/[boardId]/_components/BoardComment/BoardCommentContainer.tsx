@@ -2,7 +2,7 @@
 
 import BoardCommentList from './BoardCommentList';
 import BoardCommentWrapper from './BoardCommentWrapper';
-import BoardLoading from '../../_components/BoardLoading';
+import BoardLoading from '../../../_components/BoardLoading';
 import { Suspense } from 'react';
 
 export default function BoardCommentContainer() {

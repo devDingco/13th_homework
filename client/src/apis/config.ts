@@ -15,6 +15,7 @@ export const boardsUrlEndPoint = `${boardUrlEndPoint}s`;
 export const newUrlEndPoint = '/new';
 export const editUrlEndPoint = '/edit';
 export const commentUrlEndPoint = '/comment';
+export const reactionUrlEndPoint = '/reaction';
 
 api.interceptors.request.use(
 	(config) => {

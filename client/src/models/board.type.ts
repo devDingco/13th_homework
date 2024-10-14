@@ -78,5 +78,5 @@ export interface IBoardProps {
 }
 
 export interface IBoardEditProps {
-	boardInfor?: IApiResponseData;
+	boardInfor: IApiResponseData;
 }

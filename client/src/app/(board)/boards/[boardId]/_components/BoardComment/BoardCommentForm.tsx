@@ -3,10 +3,10 @@
 
 import BoardCommentStar from './BoardCommentStar';
 import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
-import CommonButton from '../../_components/CommonButton';
+import CommonButton from '../../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { ETitle } from '@/models/board.type';
-import NewInputContainer from '../../new/_components/NewInputContainer';
+import NewInputContainer from '../../../new/_components/NewInputContainer';
 import { useBoardCommentForm } from '@/hooks/useBoardCommentForm';
 
 export default function BoardCommentForm() {
