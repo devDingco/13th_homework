@@ -1,14 +1,19 @@
-import Link from "next/link";
+import MainSlide from "@/components/mainSlide";
+import AccommodationList from "@/components/accommodation-list";
+import AccommodationRecommended from "@/components/accommodation-recommended";
+import LineBanner from "@/components/line-banner";
+
 export default function BuyTicketPage() {
   return (
-    <div>
-      숙박권 메인 페이지
-      <br />
-      <br />
-      <br />
-      <Link className="btn" href="/buyticket/detail/1">
-        숙박권상세
-      </Link>
-    </div>
+    <>
+      <MainSlide />
+      <div className="mainContent">
+        <div className="flex flex-col gap-12">
+          <AccommodationRecommended />
+          <LineBanner />
+          <AccommodationList />
+        </div>
+      </div>
+    </>
   );
 }
