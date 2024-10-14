@@ -8,11 +8,7 @@ export default function BoardsDetailPage() {
         <>
             <BoardsDetailUI isEdit={false} />
             <CommentNewUI />
-            <br />
-            <br />
             <CommentListUI />
-            <br />
-            <br />
         </>
     );
 }

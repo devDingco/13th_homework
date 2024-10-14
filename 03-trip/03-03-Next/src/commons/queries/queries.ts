@@ -2,16 +2,56 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
-    mutation creteBoard($createBoardInput: CreateBoardInput!) {
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
         createBoard(createBoardInput: $createBoardInput) {
             _id
             writer
             title
             contents
+            youtubeUrl
+            likeCount
+            dislikeCount
+            images
+            boardAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                createdAt
+            }
             createdAt
+            updatedAt
+            deletedAt
         }
     }
 `;
+
+// boardAddress {
+//     _id
+//     zipcode
+//     address
+//     addressDetail
+//     createdAt
+//     updatedAt
+//     deletedAt
+// }
+// user {
+//     _id
+//     email
+//     name
+//     picture
+//     userPoint {
+//         _id
+//         amount
+//         user
+//         createdAt
+//         updatedAt
+//         deletedAt
+//     }
+//     createdAt
+//     updatedAt
+//     deletedAt
+// }
 
 export const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!) {
