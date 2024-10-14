@@ -4,6 +4,7 @@ import ApolloSetting from "../commons/settings/apollo-setting";
 import { Noto_Sans_KR, Roboto } from "next/font/google";
 import ThemeProvider from "@/components/themeProvider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import Header from "@/components/header";
 
 const notoSansKr = Noto_Sans_KR({
   preload: false,
@@ -32,11 +33,15 @@ export default function RootLayout({
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body
+        id="bodyRoot"
         className={`antialiased ${notoSansKr.variable} ${roboto.variable} dark:bg-[#141414]`}
       >
         <ApolloSetting>
           <AntdRegistry>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              <Header />
+              {children}
+            </ThemeProvider>
           </AntdRegistry>
         </ApolloSetting>
       </body>

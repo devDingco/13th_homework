@@ -5,15 +5,15 @@
   }
   [class*="ant-table-row"] {
     td:first-child {
-      border-left: 1px solid #f0f0f0;
+      border-left: 1px solid var(--border-color);
       border-radius: 0.5rem 0 0 0.5rem;
     }
     td:last-child {
       border-radius: 0 0.5rem 0.5rem 0;
-      border-right: 1px solid #f0f0f0;
+      border-right: 1px solid var(--border-color);
     }
     td {
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid var(--border-color);
     }
   }
 

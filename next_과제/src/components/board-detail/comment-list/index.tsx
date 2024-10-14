@@ -3,23 +3,28 @@
 import Icon from "@/components/iconFactory";
 import CommentWrite from "@/components/board-detail/comment-write";
 import { Rate } from "antd";
-import Image from "next/image";
+// import Image from "next/image";
 
-import { redirect } from "next/navigation";
 import { dateViewSet } from "@/utils/dateViewSet";
 
 import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
 import { useCommentList } from "@/components/board-detail/comment-list/hook";
 
 export default function CommentList(props: IcommentItemBox) {
-  const { starCountBox = true, reply, user } = props;
+  const { starCountBox = true, reply } = props;
 
-  const { data, error, commentDelete, editModeHandler, mode, setMode } =
-    useCommentList();
+  const {
+    data,
+    error,
+    loading,
+    commentDelete,
+    editModeHandler,
+    mode,
+    setMode,
+  } = useCommentList();
 
-  // if (error) return redirect("/boards");
-
-  // console.log(data);
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>에러가 발생했습니다.</div>;
 
   return (
     <>
@@ -64,12 +69,12 @@ export default function CommentList(props: IcommentItemBox) {
                 <div className="flex gap-2">
                   <div className="flex gap-1 items-center">
                     <span className="rounded-full overflow-hidden bg-gray-600 w-6 h-6">
-                      <Image
+                      {/* <Image
                         src={user.img}
                         alt={user.name}
                         width={24}
                         height={24}
-                      />
+                      /> */}
                     </span>
                     {/* <span className="text-gray-700 text-sm">{user.name}</span> */}
                     {/* !! 나중에 유저명으로 바꾸기 */}
