@@ -32,9 +32,11 @@ export default function RootLayout({
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`antialiased`}>
+        <div>~~~~~레이아웃~~~~~~</div>
         <ApolloSetting>
           <AntdRegistry>{children}</AntdRegistry>
         </ApolloSetting>
+        <div>~~~~~레이아웃~~~~~~</div>
       </body>
     </html>
   );
