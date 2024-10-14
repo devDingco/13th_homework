@@ -1,26 +1,11 @@
-.boards_RootContainer {
-    max-width: 80rem;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    padding: 1.5rem 3rem 1.5rem 3rem;
-
-    border-radius: 16px;
-
-    background-color: #FFFFFF;
-    box-shadow: 0px 0px 20px 0px #00000014;
-}
-
 .boards_MainContainer {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .boards_ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

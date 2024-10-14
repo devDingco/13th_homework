@@ -1,54 +1,18 @@
 import Image from "next/image";
-import { MouseEvent, useState } from "react";
 import styles from "./styles.module.css";
-import { ApolloQueryResult, useQuery } from "@apollo/client";
-import {
-  Exact,
-  FetchBoardsCountDocument,
-  FetchBoardsQuery,
-  InputMaybe,
-} from "@/commons/gql/graphql";
-
-interface IPaginationProps {
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            page?: InputMaybe<number> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
-}
+import { IPaginationProps } from "./types";
+import usePagination from "./hook";
 
 export default function Pagination(props: IPaginationProps) {
-  const [startPage, setStartPage] = useState(1);
-  const [selectedPage, setSelectedPage] = useState("");
-  const { data: boardsCount } = useQuery(FetchBoardsCountDocument);
-  const lastPage = Math.ceil((boardsCount?.fetchBoardsCount ?? 10) / 10);
-  const hasNextPage = startPage + 5 <= lastPage;
-
-  const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
-    setSelectedPage(event.currentTarget.id);
-    props.refetch({ page: Number(event.currentTarget.id) });
-  };
-
-  const onClickPrevPage = (event: MouseEvent<HTMLSpanElement>) => {
-    if (startPage === 1) return;
-
-    setStartPage(startPage - 5);
-    setSelectedPage(String(startPage - 5));
-    props.refetch({ page: startPage - 5 });
-  };
-
-  const onClickNextPage = (event: MouseEvent<HTMLSpanElement>) => {
-    if (startPage + 5 <= lastPage) {
-      setStartPage(startPage + 5);
-      setSelectedPage(String(startPage + 5));
-      props.refetch({ page: startPage + 5 });
-      return;
-    }
-  };
+  const {
+    startPage,
+    lastPage,
+    selectedPage,
+    hasNextPage,
+    onClickPage,
+    onClickPrevPage,
+    onClickNextPage,
+  } = usePagination(props);
 
   return (
     <div className={styles.paginationContainer}>

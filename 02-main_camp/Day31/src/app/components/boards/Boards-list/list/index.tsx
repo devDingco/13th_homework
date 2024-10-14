@@ -2,11 +2,7 @@
 import styles from "./styles.module.css";
 import Board from "@/app/components/boards/Boards-list/list/components/Board";
 import BoardsHeader from "@/app/components/boards/Boards-list/list/components/BoardHeader";
-import { FetchBoardsQuery } from "@/commons/gql/graphql";
-
-interface IBoardsListProps {
-  data?: FetchBoardsQuery;
-}
+import { IBoardsListProps } from "./types";
 
 const BoardsList = ({ data }: IBoardsListProps) => {
   return (

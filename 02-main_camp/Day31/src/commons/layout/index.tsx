@@ -19,7 +19,7 @@ export default function Layout({ children }: ILayout) {
     <div className={styles.layoutContainer}>
       <LayoutNavigation />
       {!isHiddenBanner && <LayoutBanner />}
-      {children}
+      <div className={styles.childrenContainer}>{children}</div>
     </div>
   );
 }
