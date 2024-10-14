@@ -5,6 +5,8 @@ import styles from "./styles.module.css";
 import close from "../../../../public/icons/close.svg";
 import useBoardWrite from "./hook";
 import { IBoardsWriteProps } from "./types";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 // TODO: 남은 요소들(주소, 링크, 이미지 등) 넣기
 
@@ -14,6 +16,8 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     password,
     title,
     content,
+    zipcode,
+    address,
     buttonActiveStyle,
     ownerVaild,
     passwordVaild,
@@ -25,6 +29,10 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     onChangeTitle,
     onClickSubmitPostVaildation,
     onClickEditPostVaildation,
+    onClickCancle,
+    onToggleModal,
+    isOpen,
+    handleComplete,
   } = useBoardWrite();
   return (
     <div className={styles.page}>
@@ -153,24 +161,32 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
           <p className={styles.label}>주소</p>
           <div className={styles.addressMail}>
             <input
+              id="zipcode"
               className={styles.infoAddress}
               type="text"
               placeholder="01234"
+              value={zipcode}
               // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
             />
-            <button className={styles.addressSearch}>우편번호 검색</button>
+            <button className={styles.addressSearch} onClick={onToggleModal}>
+              우편번호 검색
+            </button>
           </div>
           <input
+            id="address"
             className={styles.info}
             type="text"
             placeholder="주소를 입력해 주세요."
+            value={address}
             // defaultValue={props.data?.fetchBoard.boardAddress.address}
+            readOnly
           />
           <input
             className={styles.info}
             type="text"
             placeholder="상세주소"
             // defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+            readOnly
           />
         </div>
         <hr className={styles.line} />
@@ -197,7 +213,9 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
           </div>
         </div>
         <div className={styles.postButtonGroup}>
-          <button className={`${styles.check} ${styles.cancle}`}>취소</button>
+          <button onClick={onClickCancle} className={`${styles.check} ${styles.cancle}`}>
+            취소
+          </button>
           {props.isEdit ? (
             <button
               id="postEditButton"
@@ -218,6 +236,11 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
           )}
         </div>
       </div>
+      {isOpen && (
+        <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal} closable={true}>
+          <DaumPostcodeEmbed onComplete={handleComplete} autoClose={true} {...props} />
+        </Modal>
+      )}
     </div>
   );
 };

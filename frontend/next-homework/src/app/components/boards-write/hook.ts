@@ -1,10 +1,11 @@
 "use client";
 
 import { useMutation, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
+import { Modal } from "antd";
+import { Address } from "react-daum-postcode";
 
 const useBoardWrite = () => {
   const router = useRouter();
@@ -34,6 +35,47 @@ const useBoardWrite = () => {
   const [titleVaild, setTitleVaild] = useState("");
   const [contentVaild, setContentVaild] = useState("");
 
+  // 주소 관련 변수
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+
+  // 모듈
+  const successModule = () => {
+    Modal.success({
+      content: "게시글 등록에 성공헀습니다.",
+    });
+  };
+
+  const warningModule = () => {
+    Modal.warning({
+      title: "취소",
+      content: "게시글 등록을 취소하시겠습니까?",
+    });
+  };
+
+  const errorModule = () => {
+    Modal.error({
+      title: "게시글 등록 실패",
+      content: "게시글 등록에 실패했습니다.",
+    });
+  };
+
+  // 주소 찾기 모달
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (data: Address) => {
+    console.log(data);
+    setIsOpen((prev) => !prev);
+
+    setZipcode(data.zonecode);
+    setAddress(data.address);
+  };
+
+  // onChange 함수 모음
   const onChangeOwner = (event: ChangeEvent<HTMLInputElement>) => {
     setOwner(event.target.value);
     if (event.target.value && password && title && content) {
@@ -95,13 +137,17 @@ const useBoardWrite = () => {
         });
 
         console.log(result);
-        alert("게시글 등록이 완료 되었습니다.");
+        // alert("게시글 등록이 완료 되었습니다.");
+
+        successModule();
 
         router.push(`/boards/${result.data?.createBoard._id}`);
       }
     } catch (error) {
       console.log(error);
       alert(`에러가 발생했습니다. 다시 시도하여 주세요. \n error: ${error}`);
+
+      errorModule();
     }
   };
 
@@ -146,12 +192,19 @@ const useBoardWrite = () => {
     }
   };
 
+  const onClickCancle = () => {
+    warningModule();
+    window.location.href = "/boards";
+  };
+
   return {
     data,
     owner,
     password,
     title,
     content,
+    zipcode,
+    address,
     buttonActiveStyle,
     ownerVaild,
     passwordVaild,
@@ -163,6 +216,11 @@ const useBoardWrite = () => {
     onChangeTitle,
     onClickSubmitPostVaildation,
     onClickEditPostVaildation,
+    onClickCancle,
+    successModule,
+    onToggleModal,
+    handleComplete,
+    isOpen,
   };
 };
 
