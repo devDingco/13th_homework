@@ -5,3 +5,9 @@ const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
+
+const FETCH_BOARDS_COUNT = gql`
+  query fetchBoardsCount {
+    fetchBoardsCount
+  }
+`;

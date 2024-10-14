@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { IBoardWrite } from './types';
+import { Modal } from 'antd';
 
 export function useBoardWrite(props: IBoardWrite) {
   const router = useRouter();
@@ -138,7 +139,11 @@ export function useBoardWrite(props: IBoardWrite) {
       console.log(result.data?.createBoard._id);
 
       if (user && password && content && title) {
-        alert('게시글 등록이 완료되었습니다!');
+        Modal.success({
+          title: '성공',
+          content: '게시글 등록이 완료되었습니다.',
+          onOk() {},
+        });
 
         setIsActive(false);
 
@@ -146,12 +151,15 @@ export function useBoardWrite(props: IBoardWrite) {
 
         return;
       } else {
-        alert('필수 입력 사항을 확인해주세요.');
+        Modal.warning({
+          title: '경고',
+          content: '필수 입력 사항을 확인해주세요.',
+          onOk() {},
+        });
         window.scrollTo({ top: 0 });
       }
     } catch (error) {
       console.log(error);
-      alert('에러가 발생했습니다. 다시 시도해 주세요.');
     }
     const errors: any[] = [];
 
@@ -199,7 +207,11 @@ export function useBoardWrite(props: IBoardWrite) {
       });
       console.log('수정', result);
 
-      alert('수정이 완료되었습니다.');
+      Modal.success({
+        title: '성공',
+        content: '게시물 수정이 완료되었습니다.',
+        onOk() {},
+      });
       router.push(`/boards/${params?.boardId}`);
     } catch (error) {
       // 나중에 에러문구를 ApolloError 빼고
