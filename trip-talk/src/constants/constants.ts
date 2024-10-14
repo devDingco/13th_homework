@@ -9,7 +9,7 @@ export const PLACEHOLDERS: TRecord = {
   zip_code: "01234",
   address: "주소를 입력해 주세요.",
   detail_address: "상세주소",
-  url: "링크를 입력해 주세요.",
+  youtubeUrl: "링크를 입력해 주세요.",
 };
 
 export const INPUT_CHILDREN: TRecord = {
@@ -17,7 +17,7 @@ export const INPUT_CHILDREN: TRecord = {
   password: "비밀번호",
   title: "제목",
   zip_code: "주소",
-  url: "유튜브 링크",
+  youtubeUrl: "유튜브 링크",
 };
 
 export const BUTTON: TRecord = {

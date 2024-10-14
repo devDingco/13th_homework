@@ -118,7 +118,8 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       </div>
       <div className={styles.link_wrapper}>
         <Input
-          id="url"
+          id="youtubeUrl"
+          onChange={handleInputChange}
           defaultValue={props.data?.fetchBoard.youtubeUrl as string}
         />
       </div>

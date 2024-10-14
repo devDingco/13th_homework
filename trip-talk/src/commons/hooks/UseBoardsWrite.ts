@@ -55,6 +55,7 @@ export default function useBoardsWrite(
             password: formData.password,
             title: formData.title,
             contents: formData.contents,
+            youtubeUrl: formData.youtubeUrl,
           },
         },
       });
