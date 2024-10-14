@@ -1,4 +1,11 @@
-import { ChangeEvent, ChangeEventHandler } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  MouseEventHandler,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { FetchBoardQuery } from "../commons/graphql/graphql";
 
 export interface IBoardsWriteHook {
@@ -26,6 +33,7 @@ export interface IButtonProps {
   id: string;
   disabled?: boolean;
   color: "blue" | "gray" | "white";
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export interface IError {
@@ -48,6 +56,7 @@ export interface ICommentList {
   createdAt: string;
   number: number;
   _id: string;
+  rating: number;
 }
 
 export interface IFormData {
@@ -62,7 +71,6 @@ export interface ICommentFormData {
   writer: string;
   password: string;
   contents: string;
-  rating: number;
 }
 
 export interface ITextArea {
@@ -85,4 +93,18 @@ export type TRecord = Record<string, string>;
 
 export interface ICustomImage {
   image: string;
+}
+
+export interface IStarRating {
+  defaultValue?: number;
+  setRating?: Dispatch<React.SetStateAction<number>>;
+  rating?: number;
+}
+
+export interface IModalContainer {
+  isSwitched: boolean;
+  children: ReactNode;
+  isPrompt: boolean;
+  alertMessage: ReactNode;
+  setUserPassword?: Dispatch<SetStateAction<string>> | undefined;
 }
