@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 export default function LayoutNavigation() {
   const navigationItem = ["트립토크", "숙박권 구매", "마이 페이지"];
+
   return (
     <div className={styles.navigationContainer}>
       <div className={styles.navigationLeftItemContainer}>
