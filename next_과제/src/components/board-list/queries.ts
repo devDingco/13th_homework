@@ -17,6 +17,8 @@ export const LIST_FETCH_BOARDS = gql`
       writer
       title
       createdAt
+      images
+      youtubeUrl
     }
   }
 `;
@@ -24,5 +26,15 @@ export const LIST_FETCH_BOARDS = gql`
 export const LIST_DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
+  }
+`;
+
+export const LIST_FETCH_BOARDS_COUNT = gql`
+  query fetchBoardsCount(
+    $endDate: DateTime
+    $startDate: DateTime
+    $search: String
+  ) {
+    fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)
   }
 `;
