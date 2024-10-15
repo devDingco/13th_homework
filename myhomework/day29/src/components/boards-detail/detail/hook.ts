@@ -4,12 +4,24 @@ import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 
 import { FetchBoardDocument } from "@/commons/graphql/graphql";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { TooltipProps } from "antd";
 
 export const useBoardsDetail = () => {
   const router = useRouter();
   const params = useParams();
   console.log("Params:", params);
+
+  const [arrow, setArrow] = useState<"Hide">("Hide");
+
+  const mergedArrow = useMemo<TooltipProps["arrow"]>(() => {
+    if (arrow === "Hide") {
+      return false;
+    }
+    return {
+      pointAtCenter: true,
+    };
+  }, [arrow]);
 
   const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId: params.boardId as string },
@@ -25,6 +37,7 @@ export const useBoardsDetail = () => {
 
   const [likeCount, countUp] = useState(0);
   const [dislikeCount, countDown] = useState(0);
+  // const [videoId, setVideoId] = useState<string | null>(null); // 비디오 ID 상태 추가
 
   const onClickLikeCount = async () => {
     countUp(likeCount + 1);
@@ -43,5 +56,7 @@ export const useBoardsDetail = () => {
     onClickDislikeCount,
     likeCount,
     dislikeCount,
+    setArrow,
+    mergedArrow,
   };
 };

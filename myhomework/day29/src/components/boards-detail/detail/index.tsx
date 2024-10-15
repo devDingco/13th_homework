@@ -5,6 +5,8 @@ import styles from "./styles.module.css";
 import { useBoardsDetail } from "./hook";
 import { IBoardsDetailProps } from "./types";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
+import YouTube from "react-youtube";
+import { Button, Tooltip } from "antd";
 
 const BoardsDetail = (props: IBoardsDetailProps) => {
   const {
@@ -14,6 +16,7 @@ const BoardsDetail = (props: IBoardsDetailProps) => {
     onClickDislikeCount,
     likeCount,
     dislikeCount,
+    mergedArrow,
   } = useBoardsDetail();
 
   return (
@@ -49,14 +52,22 @@ const BoardsDetail = (props: IBoardsDetailProps) => {
             height={0}
             sizes="100vw"
           />
-          <Image
-            src="/icon/location_24.png"
-            className={styles.shareicon}
-            alt="위치 아이콘"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
+          <Tooltip
+            placement="bottomRight"
+            title={props.data?.fetchBoard.boardAddress?.address}
+            arrow={mergedArrow}
+          >
+            <Button className={styles.locationButton}>
+              <Image
+                src="/icon/location_24.png"
+                className={styles.shareicon}
+                alt="위치 아이콘"
+                width={0}
+                height={0}
+                sizes="100vw"
+              />
+            </Button>
+          </Tooltip>
         </div>
       </div>
 
@@ -75,13 +86,16 @@ const BoardsDetail = (props: IBoardsDetailProps) => {
 
       <div className={styles.previewBox}>
         {" "}
-        <Image
-          src="/images/video.png"
-          className={styles.previewImg}
-          alt="동영상 미리보기"
-          width={0}
-          height={0}
-          sizes="100vw"
+        <YouTube
+          videoId={props.data?.fetchBoard.youtubeUrl} //동영상 주소
+          opts={{
+            width: "820px",
+            height: "460px",
+            playerVars: {
+              modestbranding: 1, //컨트롤 바에 유튜브 로고 표시 여부
+              loop: 1, //반복 재생
+            },
+          }}
         />
       </div>
 

@@ -19,6 +19,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     onClickSearchAddress,
     handleComplete,
     onChangeDetailAddress,
+    onChangeYoutube,
     isActive,
     isOpen,
     writername,
@@ -32,6 +33,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     zipcode,
     basicAddress,
     detailAddress,
+    youtubeLink,
   } = useBoardsWrite(props);
 
   return (
@@ -112,7 +114,6 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               type="text"
               placeholder={adrNum}
               value={zipcode}
-              readOnly
             />
             <button
               className={styles.searchAddress}
@@ -136,7 +137,6 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder={adrType}
             value={basicAddress}
-            readOnly
           />
           <input
             id={styles.addressDetail}
@@ -152,7 +152,13 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
         <div className={styles.group}>
           {" "}
           유튜브 링크
-          <input id={styles.youtube} type="url" placeholder={youtube} />
+          <input
+            id={styles.youtube}
+            type="url"
+            placeholder={youtube}
+            onChange={onChangeYoutube}
+            value={youtubeLink}
+          />
         </div>
       </div>
 

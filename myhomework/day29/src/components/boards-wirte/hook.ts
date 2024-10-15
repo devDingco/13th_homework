@@ -28,6 +28,8 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
   const [basicAddress, setBasicAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
 
+  const [youtubeLink, setYoutubeLink] = useState<string>("");
+
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,7 +42,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     skip: !isEdit, // 수정 모드일 때만 데이터 요청
   });
 
-  // 기존 데이터를 상태에 설정
   useEffect(() => {
     if (isEdit && data) {
       setWriter(data.fetchBoard?.writer || "");
@@ -49,6 +50,7 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
       setZipcode(data.fetchBoard?.boardAddress?.zipcode || "");
       setBasicAddress(data.fetchBoard?.boardAddress?.address || "");
       setDetailAddress(data.fetchBoard?.boardAddress?.addressDetail || "");
+      setYoutubeLink(data.fetchBoard?.youtubeUrl || "");
     }
   }, [isEdit, data]);
 
@@ -94,6 +96,20 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
 
   const onChangeDetailAddress = (event: ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(event.target.value);
+  };
+
+  // const changeVideoId = (url: string): string | null => {
+  //   const regex =
+  //     /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  //   const matches = url.match(regex);
+  //   return matches ? matches[1] : null; // 비디오 ID 반환
+  // };
+
+  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+    const url = event.target.value;
+    setYoutubeLink(url); // 입력값 업데이트
+    // const extractedVideoId = changeVideoId(url); // 비디오 ID 추출
+    // setVideoId(extractedVideoId); // 비디오 ID 업데이트
   };
 
   const registButton = async () => {
@@ -150,15 +166,33 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
         password: promptPassword,
         updateBoardInput: {
           boardAddress: {
-            zipcode: zipcode || null,
-            address: basicAddress || null,
-            addressDetail: detailAddress || null,
+            zipcode: zipcode || undefined,
+            address: basicAddress || undefined,
+            addressDetail: detailAddress || undefined,
           },
         },
       };
 
       if (title) myvariables.updateBoardInput.title = title;
       if (content) myvariables.updateBoardInput.contents = content;
+      if (zipcode) {
+        myvariables.updateBoardInput.boardAddress = {
+          ...myvariables.updateBoardInput.boardAddress,
+          zipcode,
+        };
+      }
+      if (basicAddress) {
+        myvariables.updateBoardInput.boardAddress = {
+          ...myvariables.updateBoardInput.boardAddress,
+          address: basicAddress,
+        };
+      }
+      if (detailAddress) {
+        myvariables.updateBoardInput.boardAddress = {
+          ...myvariables.updateBoardInput.boardAddress,
+          addressDetail: detailAddress,
+        };
+      }
 
       const result = await updateBoard({ variables: myvariables });
 
@@ -209,7 +243,12 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
 
   const cancelButton = () => {
     resetFormData();
-    Modal.info({ content: "등록이 취소되었습니다." });
+    Modal.info({
+      content: `${isEdit ? "수정" : "등록"}이 취소되었습니다.`,
+      onOk: () => {
+        router.push(`/boards/${params.boardId}`); // 확인 버튼 클릭 시 이동
+      },
+    });
   };
 
   return {
@@ -223,6 +262,7 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     onClickSearchAddress,
     handleComplete,
     onChangeDetailAddress,
+    onChangeYoutube,
     isActive,
     isOpen,
     writername,
@@ -236,5 +276,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     zipcode,
     basicAddress,
     detailAddress,
+    youtubeLink,
   };
 };
