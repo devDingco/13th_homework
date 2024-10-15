@@ -2,6 +2,7 @@ import ReactQuill, { Quill } from "react-quill-new";
 import { ImageResize } from "quill-image-resize-module-ts";
 import React, { forwardRef } from "react";
 import "react-quill-new/dist/quill.snow.css";
+import styles from "./index.module.scss";
 
 Quill.register("modules/imageResize", ImageResize);
 
@@ -82,6 +83,7 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
         <ReactQuill
           ref={ref}
           id={id}
+          className={styles.reactQuillBox}
           theme="snow"
           modules={modules}
           onChange={handleChange}
