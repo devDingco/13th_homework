@@ -19,6 +19,7 @@ export default function CommentWrite({
   content,
   rating,
   commentId,
+  editType,
   onEditComment,
 }: ICommentInput) {
   const {
@@ -32,7 +33,7 @@ export default function CommentWrite({
     content,
     rating,
     commentId,
-    type: 'EDIT',
+    type: editType && 'EDIT',
     onEditComment,
   });
 

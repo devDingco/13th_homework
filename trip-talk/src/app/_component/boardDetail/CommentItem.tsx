@@ -39,6 +39,7 @@ export default function CommentItem({
           rating={rating}
           commentId={commentId}
           onEditComment={onEditComment}
+          editType={editType}
         />
       ) : (
         <>

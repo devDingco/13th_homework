@@ -11,6 +11,7 @@ import { DislikeTwoTone, LikeTwoTone } from '@ant-design/icons';
 import { FETCH_BOARD } from '@/app/_api/board/Query';
 import { Divider, Space, Tooltip } from 'antd';
 import ReactPlayer from 'react-player';
+import CommentList from './CommentList';
 
 export default function BoardDetail({
   style: s,
@@ -82,6 +83,7 @@ export default function BoardDetail({
           </button>
         </div>
       </section>
+      <CommentList />
     </>
   );
 }

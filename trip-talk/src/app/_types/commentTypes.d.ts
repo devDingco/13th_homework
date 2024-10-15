@@ -3,6 +3,9 @@ interface ICommentInput {
   content?: string;
   rating?: number;
   commentId?: string;
-  type?: 'EDIT';
+  type?: 'EDIT' | boolean;
+  editType?: boolean;
   onEditComment?: () => void;
+  resetHasMore?: () => void;
+  changeHasMore?: () => void;
 }

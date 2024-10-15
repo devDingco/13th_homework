@@ -36,6 +36,7 @@ export default function useCommentInput({
   commentId,
   type,
   onEditComment,
+  changeHasMore,
 }: ICommentInput) {
   const resetCommentData = {
     commentContent: content || '',
@@ -65,7 +66,7 @@ export default function useCommentInput({
   };
 
   const [createComment] = useMutation(CreateBoardCommentDocument);
-  const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,11 +99,13 @@ export default function useCommentInput({
         });
         setCommentData({ ...resetCommentData });
       }
+      changeHasMore!();
     } catch (err) {
       console.log(err);
     }
+    console.log('실행 가능?');
   };
-
+  // console.log('여기 hooks임', hasMore);
   useEffect(() => {
     const validMessage = '필수입력 사항입니다.';
     setRequiredMessage((prev) => {
