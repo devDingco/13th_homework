@@ -32,6 +32,7 @@ export default function ThemeProvider({
       token: {
         colorPrimary: "#2974E5",
         controlHeightLG: 48,
+        fontFamily: `var(--font-family)`,
       },
     } as ThemeConfig;
     if (ThemeControl === "dark") {
