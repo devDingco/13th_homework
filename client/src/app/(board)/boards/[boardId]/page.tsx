@@ -39,7 +39,7 @@ export default function DetailPage({ params }: IDetailProps) {
 					></ComposeSuspenseWrapper>
 				</Suspense>
 				<BoardFooter />
-				<BoardCommentContainer />
+				<BoardCommentContainer boardId={boardId} />
 			</ErrorBoundary>
 		</div>
 	);
