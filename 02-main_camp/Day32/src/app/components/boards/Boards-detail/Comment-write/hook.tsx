@@ -15,9 +15,14 @@ import { useBoardWrite } from "../../Boards-write/hook";
 interface ICommentWriteProps {
   comments: FetchBoardCommentsQuery["fetchBoardComments"][0] | undefined;
   toggleEditMode: () => void;
+  toggleHasMoreScroll: () => void;
 }
 
-const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
+const useCommentWrite = ({
+  comments,
+  toggleEditMode,
+  toggleHasMoreScroll,
+}: ICommentWriteProps) => {
   const params = useParams();
   const { showSuccessModal, showErrorModal } = useBoardWrite();
   const [commentInput, setCommentInput] = useState<CreateBoardCommentInput>({
@@ -41,7 +46,7 @@ const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
   const updateCommentInput = (inputName: string, value: string) => {
     setCommentInput((prev) => {
       return {
-        ...prev, // 기존 상태 유지
+        ...prev,
         [inputName]: value,
       };
     });
@@ -50,7 +55,7 @@ const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
   const onChangeRating = (value: number) => {
     setCommentInput((prev) => {
       return {
-        ...prev, // 기존 상태 유지
+        ...prev,
         rating: value,
       };
     });
@@ -61,7 +66,7 @@ const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
       writer: "",
       password: "",
       contents: "",
-      rating: 3,
+      rating: 0,
     });
   };
 
@@ -90,6 +95,8 @@ const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
       showSuccessModal(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED, () => {
         resetInputValue();
       });
+      // 댓글 생성 후 다시 스크롤 할 수 있도록 "hasMoreScroll" 상태 변경 필요.
+      toggleHasMoreScroll();
     } catch (error) {
       showErrorModal(
         "댓글 작성 오류",
@@ -109,6 +116,7 @@ const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
         password: commentInput.password,
       },
     });
+    // 댓글 업데이트 후 컴포넌트를 변경하기 위해서 "isEdit" 상태를 변경해야함.
     toggleEditMode();
   };
 

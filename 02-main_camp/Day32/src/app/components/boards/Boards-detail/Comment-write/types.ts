@@ -12,4 +12,5 @@ export interface IBoardCommentWriteProps {
   comments?: FetchBoardCommentsQuery["fetchBoardComments"][0];
   isEdit: boolean;
   toggleEditMode?: () => void;
+  toggleHasMoreScroll?: () => void;
 }

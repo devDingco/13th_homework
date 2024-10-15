@@ -4,10 +4,13 @@ import {
   FetchBoardCommentsDocument,
   FetchBoardDocument,
 } from "@/commons/gql/graphql";
+import { useState } from "react";
 
 const useBoardsDetail = () => {
   const router = useRouter();
   const params = useParams();
+
+  const [hasMore, setHasMore] = useState(true);
 
   const { data } = useQuery(FetchBoardDocument, {
     variables: {
@@ -40,11 +43,17 @@ const useBoardsDetail = () => {
     router.push("/boards");
   };
 
+  const toggleHasMoreScroll = () => {
+    setHasMore((prev) => !prev);
+  };
+
   return {
     board,
     comments,
+    hasMore,
     onClickEdit,
     onClickShowBoards,
+    toggleHasMoreScroll,
   };
 };
 

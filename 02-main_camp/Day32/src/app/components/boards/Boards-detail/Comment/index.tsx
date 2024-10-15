@@ -13,7 +13,7 @@ const Comment = ({ comments }: ICommentInput) => {
   return (
     <>
       {!isEdit ? (
-        <>
+        <div className={styles.commentContainer}>
           <div className={styles.headerContainer}>
             <div className={styles.profileContainer}>
               <BoardDetailProfile writer={comments?.writer ?? ""} />
@@ -33,7 +33,7 @@ const Comment = ({ comments }: ICommentInput) => {
           <div className={styles.contentsContainer}>{comments?.contents}</div>
           <div className={styles.dateContainer}>2024.04.01</div>
           <Divider />
-        </>
+        </div>
       ) : (
         <BoardCommentWrite
           comments={comments}

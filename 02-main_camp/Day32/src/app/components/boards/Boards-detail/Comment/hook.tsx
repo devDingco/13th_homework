@@ -5,7 +5,6 @@ export default function useComment() {
 
   const toggleEditMode = () => {
     setIsEdit((prev) => !prev);
-    console.log("편집 모드가 반전됩니다.:::", isEdit);
   };
 
   const onClickEdit = () => {

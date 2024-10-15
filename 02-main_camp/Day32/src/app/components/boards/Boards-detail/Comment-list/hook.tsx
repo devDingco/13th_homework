@@ -1,14 +1,10 @@
-import {
-  FetchBoardCommentsDocument,
-  FetchBoardCommentsQuery,
-} from "@/commons/gql/graphql";
+import { FetchBoardCommentsDocument } from "@/commons/gql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { IUseCommentListProps } from "./types";
 
-const useCommentList = () => {
+const useCommentList = ({ toggleHasMoreScroll }: IUseCommentListProps) => {
   const params = useParams();
-  const [hasMore, setHasMore] = useState(true);
 
   const { data, fetchMore } = useQuery(FetchBoardCommentsDocument, {
     variables: {
@@ -26,9 +22,11 @@ const useCommentList = () => {
         boardId: String(params.boardId),
       },
 
+      // 이 오류는 무엇일까요? 하하하
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoardComments?.length) {
-          setHasMore(false);
+          // 데이터 불러올 수 없으면 false로 바꿈.
+          toggleHasMoreScroll();
           return;
         }
 
@@ -42,13 +40,8 @@ const useCommentList = () => {
     });
   };
 
-  const resetHasMoreScroll = () => {
-    if (hasMore === false) setHasMore(true);
-  };
-
   return {
     data,
-    hasMore,
     fetchDataOnScroll,
   };
 };

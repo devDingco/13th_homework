@@ -12,7 +12,9 @@ import { IBoardCommentWriteProps } from "./types";
 const BoardCommentWrite = ({
   comments,
   isEdit,
+  // undefined 일 경우, 처리하는 방법이 이렇게 기본값을 줘서 해결하는 방법만 있나?
   toggleEditMode = () => {},
+  toggleHasMoreScroll = () => {},
 }: IBoardCommentWriteProps) => {
   const {
     commentInput,
@@ -20,7 +22,7 @@ const BoardCommentWrite = ({
     onChangeRating,
     onClickSubmit,
     onClickUpdate,
-  } = useCommentWrite({ comments, toggleEditMode });
+  } = useCommentWrite({ comments, toggleEditMode, toggleHasMoreScroll });
 
   const completionHandler = isEdit ? onClickUpdate : onClickSubmit;
 

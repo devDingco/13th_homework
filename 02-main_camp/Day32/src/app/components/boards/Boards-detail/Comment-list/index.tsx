@@ -6,10 +6,16 @@ import { FetchBoardCommentsQuery } from "@/commons/gql/graphql";
 
 interface ICommentListProps {
   comments: FetchBoardCommentsQuery | undefined;
+  hasMore: boolean;
+  toggleHasMoreScroll: () => void;
 }
 
-const CommentList = ({ comments }: ICommentListProps) => {
-  const { data, hasMore, fetchDataOnScroll } = useCommentList();
+const CommentList = ({
+  comments,
+  hasMore,
+  toggleHasMoreScroll,
+}: ICommentListProps) => {
+  const { data, fetchDataOnScroll } = useCommentList({ toggleHasMoreScroll });
 
   return (
     <div className={styles.boardCommentContainer}>
@@ -19,9 +25,11 @@ const CommentList = ({ comments }: ICommentListProps) => {
         loader={<div>로딩중입니다.</div>}
         dataLength={data?.fetchBoardComments.length ?? 0}
       >
-        {comments?.fetchBoardComments.map((el) => (
-          <Comment key={el._id} comments={el} />
-        ))}
+        <div className={styles.commentsContainer}>
+          {comments?.fetchBoardComments.map((el) => (
+            <Comment key={el._id} comments={el} />
+          ))}
+        </div>
       </InfiniteScroll>
     </div>
   );

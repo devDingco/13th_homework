@@ -10,7 +10,14 @@ import { Tooltip } from "antd";
 import YouTube from "react-youtube";
 
 const BoardsDetail = () => {
-  const { board, comments, onClickEdit, onClickShowBoards } = useBoardsDetail();
+  const {
+    board,
+    comments,
+    hasMore,
+    onClickEdit,
+    onClickShowBoards,
+    toggleHasMoreScroll,
+  } = useBoardsDetail();
 
   return (
     <div className={styles.BoardsDetail_root}>
@@ -76,8 +83,15 @@ const BoardsDetail = () => {
           수정하기
         </button>
       </footer>
-      <BoardCommentWrite isEdit={false} />
-      <BoardCommentList comments={comments} />
+      <BoardCommentWrite
+        isEdit={false}
+        toggleHasMoreScroll={toggleHasMoreScroll}
+      />
+      <BoardCommentList
+        comments={comments}
+        hasMore={hasMore}
+        toggleHasMoreScroll={toggleHasMoreScroll}
+      />
     </div>
   );
 };
