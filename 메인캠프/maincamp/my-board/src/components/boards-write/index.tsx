@@ -5,6 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import styles from './styles.module.css';
 import { useBoardWrite } from './hooks';
 import { IBoardWrite } from './types';
+import { Modal } from 'antd';
+import DaumPostcodeEmbed from 'react-daum-postcode';
 
 export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
@@ -19,6 +21,16 @@ export default function BoardWrite(props: IBoardWrite) {
     registerFunc,
     isActive,
     error,
+    isModalOpen,
+    onToggleModal,
+    addressComplete,
+    address,
+    detailAddress,
+    zonecode,
+    onChangeAddress,
+    onChangeZipcode,
+    onChangeDetailAddress,
+    onChangeYoutubeUrl,
   } = useBoardWrite(props);
 
   return (
@@ -131,16 +143,32 @@ export default function BoardWrite(props: IBoardWrite) {
               className={`w-1/5 ${styles.inputCSS} `}
               type="text"
               placeholder="01234"
+              value={
+                zonecode || props.data?.fetchBoard.boardAddress?.zipcode || ''
+              }
+              onChange={onChangeZipcode}
             />
-            <button className="flex h-12 items-center gap-2 py-3 px-4 border border-solid border-black rounded">
+            <button
+              onClick={onToggleModal}
+              className="flex h-12 items-center gap-2 py-3 px-4 border border-solid border-black rounded"
+            >
               우편번호 검색
             </button>
+            {isModalOpen && (
+              <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+                <DaumPostcodeEmbed onComplete={addressComplete} />
+              </Modal>
+            )}
           </div>
           <div>
             <input
               className={`w-full ${styles.inputCSS} `}
               type="text"
               placeholder="주소를 입력해주세요."
+              value={
+                address || props.data?.fetchBoard.boardAddress?.address || ''
+              }
+              onChange={onChangeAddress}
             />
           </div>
           <div>
@@ -148,6 +176,12 @@ export default function BoardWrite(props: IBoardWrite) {
               className={`w-full ${styles.inputCSS} `}
               type="text"
               placeholder="상세주소"
+              value={
+                detailAddress ||
+                props.data?.fetchBoard.boardAddress?.addressDetail ||
+                ''
+              }
+              onChange={onChangeDetailAddress}
             />
           </div>
         </div>
@@ -160,6 +194,8 @@ export default function BoardWrite(props: IBoardWrite) {
               className={`w-full ${styles.inputCSS} `}
               type="url"
               placeholder="링크를 입력해주세요."
+              defaultValue={props.data?.fetchBoard.youtubeUrl || ''}
+              onChange={onChangeYoutubeUrl}
             />
           </div>
         </div>

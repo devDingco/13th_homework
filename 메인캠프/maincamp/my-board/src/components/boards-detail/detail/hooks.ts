@@ -10,5 +10,9 @@ export function useBoardsDetail() {
       boardId: String(params.boardId),
     },
   });
-  return { data, loading, error };
+  const youtubeOpts = {
+    width: '522',
+    height: '364',
+  };
+  return { data, loading, error, youtubeOpts };
 }
