@@ -38,3 +38,7 @@ export interface IRatingProps {
 export interface ISearchParamsProps {
 	searchParams: { [key: string]: string | undefined };
 }
+
+export interface IDeleteProps {
+	id: string;
+}

@@ -25,7 +25,7 @@ export default function BoardComment(props: IBoardCommentProps) {
 				</div>
 				<div className="flex items-center gap-2">
 					<BoardCommentEditImage />
-					<BoardCommentDeleteImage />
+					<BoardCommentDeleteImage id={_id} />
 				</div>
 			</div>
 			<div className="prose-r_16_24">{content}</div>

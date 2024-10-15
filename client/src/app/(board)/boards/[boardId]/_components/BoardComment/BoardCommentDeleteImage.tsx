@@ -1,8 +1,9 @@
 /** @format */
 
+import { IDeleteProps } from '@/models/children.type';
 import Image from 'next/image';
 
-export default function BoardCommentDeleteImage() {
+export default function BoardCommentDeleteImage({ id }: IDeleteProps) {
 	return (
 		<Image
 			src="/Images/close.svg"
