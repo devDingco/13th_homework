@@ -38,8 +38,10 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 export interface ITitle {
 	title: ETitle;
 	error?: string;
+	value?: string;
 }
 export interface ITitleTextArea extends ITitle {
+	value: string;
 	setLength?: React.Dispatch<React.SetStateAction<number>>;
 }
 export interface IAddress {

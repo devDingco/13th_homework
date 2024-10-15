@@ -49,3 +49,9 @@ export interface ICommentEditProps {
 	comment?: IBoardComment;
 	setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface ICommentTextareProps {
+	length: number;
+	setLength: React.Dispatch<React.SetStateAction<number>>;
+	value?: string;
+}

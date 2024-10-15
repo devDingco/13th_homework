@@ -20,12 +20,16 @@ export default function BoardCommentForm({ comment, setIsEdit }: ICommentEditPro
 			<BoardCommentStar rating={rating} setRating={setRating} />
 			<div className="flex items-center gap-8">
 				<div className="flex w-1/2 gap-4">
-					<NewInputContainer title={ETitle.Author} />
+					<NewInputContainer title={ETitle.Author} value={comment?.author} />
 					<NewInputContainer title={ETitle.Password} />
 				</div>
 				<div className="prose-me_16_24 text-red-500">{state?.error}</div>
 			</div>
-			<BoardCommentTextareaWrapper length={length} setLength={setLength} />
+			<BoardCommentTextareaWrapper
+				length={length}
+				setLength={setLength}
+				value={comment?.content}
+			/>
 			<div className="flex justify-end gap-4">
 				{comment && <CommonButton title={EButtonTitle.Cancel} setIsEdit={setIsEdit} />}
 				<CommonButton title={EButtonTitle.Comment} />

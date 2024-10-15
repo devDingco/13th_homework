@@ -14,7 +14,7 @@ export function useBoardCommentForm(comment?: IBoardComment) {
 
 	const [rating, setRating] = useState<number>(comment ? comment.rating : 0);
 
-	const [length, setLength] = useState<number>(0);
+	const [length, setLength] = useState<number>(comment ? comment.content.length : 0);
 
 	const [state, formAction] = useFormState(createBoardCommentAction, {
 		result: '',
