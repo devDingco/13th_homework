@@ -4,18 +4,17 @@
 
 import Image from 'next/image';
 
-export default function BoardLikeHate() {
+export default function BoardLikeHate({ boardInfor }) {
 	return (
-		// <div className="flex items-center justify-center gap-6">
-		// 	<div className="flex cursor-pointer flex-col items-center gap-1">
-		// 		<Image src="/Images/hate.svg" alt="hate" width={24} height={24} />
-		// 		<div className="prose-r_14_20 text-gray-700">{infor.hate}</div>
-		// 	</div>
-		// 	<div className="flex cursor-pointer flex-col items-center gap-1">
-		// 		<Image src="/Images/like.svg" alt="like" width={24} height={24} />
-		// 		<div className="prose-r_14_20 text-[#F66A6A]">{infor.like}</div>
-		// 	</div>
-		// </div>
-		1
+		<div className="flex items-center justify-center gap-6">
+			<div className="flex cursor-pointer flex-col items-center gap-1">
+				<Image src="/Images/hate.svg" alt="hate" width={24} height={24} />
+				<div className="prose-r_14_20 text-gray-700">{boardInfor.hate}</div>
+			</div>
+			<div className="flex cursor-pointer flex-col items-center gap-1">
+				<Image src="/Images/like.svg" alt="like" width={24} height={24} />
+				<div className="prose-r_14_20 text-[#F66A6A]">{boardInfor.like}</div>
+			</div>
+		</div>
 	);
 }

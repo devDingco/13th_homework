@@ -9,9 +9,9 @@ export default function BoardCommentContainer() {
 	return (
 		<div className="flex w-full flex-col gap-10 border-t-[1px] border-gray-200">
 			<BoardCommentWrapper />
-			<Suspense fallback={<BoardLoading />}>
+			{/* <Suspense fallback={<BoardLoading />}>
 				<BoardCommentList />
-			</Suspense>
+			</Suspense> */}
 		</div>
 	);
 }

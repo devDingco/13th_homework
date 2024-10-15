@@ -1,11 +1,9 @@
 /** @format */
-// WARNING: 뭐가 문제인 지 모르겠는데 가끔 무한 loading 상태가 됨.
+// WARNING: 뭐가 문제인 지 모르겠는데 가끔 무한 loading 상태가 됨 뭐 layout.tsx error라는데?.
 // NOTE Suspense & SWR 공부하기
 
 import BoardItemContainer from './_components/BoardItemContainer';
-import BoardLoading from './_components/BoardLoading';
 import { ISearchParamsProps } from '@/models/children.type';
-import { Suspense } from 'react';
 
 export default async function boardPage({ searchParams }: ISearchParamsProps) {
 	return (
@@ -17,9 +15,7 @@ export default async function boardPage({ searchParams }: ISearchParamsProps) {
 				<div className="flex w-32 items-center justify-center">날짜</div>
 			</div>
 
-			<Suspense fallback={<BoardLoading />}>
-				<BoardItemContainer searchParams={searchParams} />
-			</Suspense>
+			<BoardItemContainer searchParams={searchParams} />
 		</div>
 	);
 }

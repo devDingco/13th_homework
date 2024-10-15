@@ -1,19 +1,15 @@
 /** @format */
 
-import React, { useMemo } from 'react';
-
-import commonGet from '@/apis/commonGet';
-import { wrapPromise } from '@/utils/wrapPromise';
+import { IBoardReader } from '@/models/boardReaderResponse';
+import React from 'react';
 
 interface ISuspenseProps {
-	children: React.ReactNode;
-	url: string;
+	Component: React.ComponentType<{ boardInfor: any }>;
+	resource: IBoardReader;
 }
 
-export default function ComposeSuspenseWrapper({ url, children }: ISuspenseProps) {
-	const resource = useMemo(() => wrapPromise(commonGet(url)), [url]);
-
+export default function ComposeSuspenseWrapper({ resource, Component }: ISuspenseProps) {
 	const boardInfor = resource.read();
 
-	return <> {React.cloneElement(children as React.ReactElement<unknown>, { boardInfor })}</>;
+	return <Component boardInfor={boardInfor} />;
 }

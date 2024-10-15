@@ -8,16 +8,14 @@ import { IBoardEditProps } from '@/models/board.type';
 
 // import BoardYoutube from './BoardYoutube';
 
-export default function BoardIdContainer(props) {
-	console.log(props);
+export default function BoardIdContainer({ boardInfor }: IBoardEditProps) {
 	return (
-		// <>
-		// 	<BoardHeader infor={boardInfor} />
-		// 	<BoardIcon address={boardInfor?.detailAddress} />
-		// 	{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
-		// 	<div className="prose-r_16_24">{boardInfor.content}</div>
-		// 	{/* <BoardYoutube /> */}
-		// </>
-		1
+		<>
+			<BoardHeader infor={boardInfor} />
+			<BoardIcon address={boardInfor?.detailAddress} />
+			{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
+			<div className="prose-r_16_24">{boardInfor.content}</div>
+			{/* <BoardYoutube /> */}
+		</>
 	);
 }

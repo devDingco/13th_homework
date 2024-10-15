@@ -14,7 +14,6 @@ export function wrapPromise<T>(promise: Promise<T>) {
 			result = err;
 		},
 	);
-	console.log(suspender);
 
 	return {
 		read() {

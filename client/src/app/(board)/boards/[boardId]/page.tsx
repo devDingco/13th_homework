@@ -15,6 +15,8 @@ import ErrorBoundary from '@/components/error/ErrorBoundary';
 import ErrorComponent from '../_components/ErrorComponent';
 import { IDetailProps } from '@/models/children.type';
 import { Suspense } from 'react';
+import commonGet from '@/apis/commonGet';
+import { wrapPromise } from '@/utils/wrapPromise';
 
 export default function DetailPage({ params }: IDetailProps) {
 	const boardId: string = params.boardId;
@@ -23,16 +25,18 @@ export default function DetailPage({ params }: IDetailProps) {
 		<div className="flex flex-col gap-4">
 			<ErrorBoundary fallback={<ErrorComponent />}>
 				<Suspense fallback={<BoardSkeleton />}>
-					<ComposeSuspenseWrapper url={`${boardUrlEndPoint}/${boardId}`}>
-						<BoardIdContainer />
-					</ComposeSuspenseWrapper>
+					<ComposeSuspenseWrapper
+						resource={wrapPromise(commonGet(`${boardUrlEndPoint}/${boardId}`))}
+						Component={BoardIdContainer}
+					></ComposeSuspenseWrapper>
 				</Suspense>
 				<Suspense fallback={<BoardSkeletonReaction />}>
 					<ComposeSuspenseWrapper
-						url={`${boardUrlEndPoint}/${boardId}${reactionUrlEndPoint}`}
-					>
-						<BoardLikeHate />
-					</ComposeSuspenseWrapper>
+						resource={wrapPromise(
+							commonGet(`${boardUrlEndPoint}/${boardId}${reactionUrlEndPoint}`),
+						)}
+						Component={BoardLikeHate}
+					></ComposeSuspenseWrapper>
 				</Suspense>
 				<BoardFooter />
 				<BoardCommentContainer />
