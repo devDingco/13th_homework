@@ -12,6 +12,7 @@ export function useBoardCommentForm() {
 	const param = useParams();
 
 	const [rating, setRating] = useState<number>(0);
+	const [length, setLength] = useState<number>(0);
 
 	const [state, formAction] = useFormState(createBoardCommentAction, {
 		result: '',
@@ -33,6 +34,7 @@ export function useBoardCommentForm() {
 		if (!state?.result) return;
 		formRef.current?.reset();
 		setRating(0);
+		setLength(0);
 		if (Array.isArray(data)) {
 			mutate([...data, state.result], false);
 		}
@@ -41,6 +43,8 @@ export function useBoardCommentForm() {
 	}, [state]);
 
 	return {
+		length,
+		setLength,
 		rating,
 		setRating,
 		state,

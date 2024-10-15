@@ -1,4 +1,5 @@
 /** @format */
+
 'use client';
 
 import BoardCommentStar from './BoardCommentStar';
@@ -10,7 +11,8 @@ import NewInputContainer from '../../../new/_components/NewInputContainer';
 import { useBoardCommentForm } from '@/hooks/useBoardCommentForm';
 
 export default function BoardCommentForm() {
-	const { state, formAction, formRef, rating, setRating } = useBoardCommentForm();
+	const { length, setLength, state, formAction, formRef, rating, setRating } =
+		useBoardCommentForm();
 
 	return (
 		<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
@@ -22,7 +24,7 @@ export default function BoardCommentForm() {
 				</div>
 				<div className="prose-me_16_24 text-red-500">{state?.error}</div>
 			</div>
-			<BoardCommentTextareaWrapper />
+			<BoardCommentTextareaWrapper length={length} setLength={setLength} />
 			<div className="flex justify-end">
 				<CommonButton title={EButtonTitle.Comment} />
 			</div>

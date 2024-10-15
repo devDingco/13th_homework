@@ -3,11 +3,8 @@
 import CommonTextarea from '../../../_components/CommonTextarea';
 import { ETitle } from '@/models/board.type';
 import React from 'react';
-import { useState } from 'react';
 
-const BoardCommentTextareaWrapper = React.memo(() => {
-	const [length, setLength] = useState(0);
-
+const BoardCommentTextareaWrapper = ({ length, setLength }) => {
 	return (
 		<div className="relative">
 			<CommonTextarea title={ETitle.Comment} setLength={setLength} />
@@ -16,7 +13,7 @@ const BoardCommentTextareaWrapper = React.memo(() => {
 			</div>
 		</div>
 	);
-});
+};
 
 BoardCommentTextareaWrapper.displayName = 'BoardCommentTextareaWrapper';
 

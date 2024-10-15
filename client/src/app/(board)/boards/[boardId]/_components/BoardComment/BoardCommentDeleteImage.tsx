@@ -13,7 +13,9 @@ export default function BoardCommentDeleteImage({ commentId }: IDeleteProps) {
 	const param = useParams();
 	const boardId = param.boardId as string;
 
-	const { data, mutate } = useSWR(`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}`);
+	const { data, mutate } = useSWR(`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}`, {
+		revalidateOnFocus: false,
+	});
 
 	const onClickDeleteBoardComment = async (commentId: string) => {
 		// 낙관적 UI 업데이트
