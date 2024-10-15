@@ -1,4 +1,5 @@
 /** @format */
+// [ ] props type error
 
 import CommonTextarea from '../../../_components/CommonTextarea';
 import { ETitle } from '@/models/board.type';
