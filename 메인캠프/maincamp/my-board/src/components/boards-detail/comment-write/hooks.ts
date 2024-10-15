@@ -3,8 +3,9 @@ import {
   FetchBoardCommentsDocument,
 } from '@/commons/graphql/graphql';
 import { useMutation } from '@apollo/client';
+import { Modal } from 'antd';
 import { useParams } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 
 export function useCommentWrite() {
   const params = useParams();
@@ -44,7 +45,8 @@ export function useCommentWrite() {
     }
   };
   //댓글 등록함수
-  const registerComment = async () => {
+  const registerComment = async (e: MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const result = await createComment({
         variables: {
@@ -67,13 +69,13 @@ export function useCommentWrite() {
       });
       console.log('등록된 댓글', result);
       if (commentWriter && commentPw) {
-        alert('댓글이 등록되었습니다.');
-
-        setCommentPw('');
-        setCommentWriter('');
-        setComments('');
-        setRating(0);
-        setIsActive(false);
+        Modal.success({
+          title: '성공',
+          content: '댓글이 등록되었습니다.',
+          onOk: () => {
+            window.location.reload();
+          },
+        });
       }
     } catch (error) {
       console.log('댓글 등록 실패', error);

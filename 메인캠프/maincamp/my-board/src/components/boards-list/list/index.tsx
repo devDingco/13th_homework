@@ -1,11 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { IFetchBoard } from './types';
 import { useBoardsList } from './hooks';
+import Pagination from '../pagination';
+import { useState } from 'react';
 
 export function BoardsList() {
-  const { data, moveToDetailPage, deleteBoardFunc } = useBoardsList();
+  const { data, moveToDetailPage, deleteBoardFunc, refetch, lastPageNum } =
+    useBoardsList();
+  //setSelectedPage 상태 직접관리
+  const [selectedPage, setSelectedPage] = useState(1);
   return (
     <div className="w-full max-w-4xl mx-auto shadow-lg py-8 px-6 mt-8 bg-white rounded-2xl">
       <div className="grid grid-cols-2 font-bold text-lg mb-4 border-b pb-2">
@@ -27,7 +31,7 @@ export function BoardsList() {
           >
             <div className="flex items-center">
               <span className="w-10 text-center text-gray-400 font-semibold">
-                {index + 1}
+                {(selectedPage - 1) * 10 + (index + 1)}
               </span>
               <span className="ml-12 font-medium text-gray-700">
                 {el.title}
@@ -52,6 +56,11 @@ export function BoardsList() {
           </div>
         ))}
       </div>
+      <Pagination
+        refetch={refetch}
+        lastPageNum={lastPageNum}
+        setSelectedPage={setSelectedPage}
+      />
     </div>
   );
 }
