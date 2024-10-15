@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useCommentWrite } from "./hook";
 import styles from "./styles.module.css";
@@ -5,7 +7,7 @@ import { useCommentList } from "../comment-list/hook";
 import CommentList from "../comment-list";
 import { Rate } from "antd";
 
-function CommentWrite() {
+function CommentWrite({ el, isEdit, commentId, onFalseEdit }) {
   const { data } = useCommentList();
   const {
     onChange,
@@ -14,7 +16,9 @@ function CommentWrite() {
     validation,
     starCount,
     setStarCount,
-  } = useCommentWrite();
+    onClickEdit,
+  } = useCommentWrite(onFalseEdit);
+
   return (
     <main className={styles.main}>
       <div className={styles.commentTitle}>
@@ -35,7 +39,8 @@ function CommentWrite() {
               type="text"
               placeholder="작성자 명을 입력해주세요."
               name="writer"
-              value={validation.writer}
+              value={isEdit ? el.writer : validation.writer}
+              disabled={isEdit ? true : false}
             />
           </div>
           <div className={styles.writer_password_box}>
@@ -49,7 +54,7 @@ function CommentWrite() {
               type="text"
               placeholder="비밀번호를 입력해 주세요."
               name="password"
-              value={validation.password}
+              defaultValue={validation.password}
             />
           </div>
         </div>
@@ -59,28 +64,30 @@ function CommentWrite() {
           id="commentTextarea"
           className={styles.commentTextarea}
           placeholder="댓글을 입력해주세요."
-          value={validation.contents}
+          defaultValue={isEdit ? el.contents : validation.contents}
         ></textarea>
         <div className={styles.button_box}>
           <button
-            onClick={onClickSubmit}
+            onClick={() => (isEdit ? onClickEdit(commentId) : onClickSubmit())}
             className={styles.button}
-            disabled={!isActive}
+            // disabled={!isActive}
             style={{
               backgroundColor: isActive === true ? "#2974e5" : "#c7c7c7",
             }}
           >
-            댓글 등록
+            {isEdit ? "수정하기" : "댓글 등록"}
           </button>
         </div>
       </div>
-      <div className={styles.commnetList}>
-        {data && data.fetchBoardComments.length > 0 ? (
-          <CommentList />
-        ) : (
-          "등록된 댓글이 없습니다."
-        )}
-      </div>
+      {!isEdit && (
+        <div className={styles.commentList}>
+          {data && data.fetchBoardComments.length > 0 ? (
+            <CommentList />
+          ) : (
+            "등록된 댓글이 없습니다."
+          )}
+        </div>
+      )}
     </main>
   );
 }

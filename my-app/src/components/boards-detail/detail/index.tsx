@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./styles.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +11,6 @@ import YouTube from "react-youtube";
 
 function BoardsDetail() {
   const { params, data, youtubeOpts } = useBoardsDetail();
-  console.log(data, "data");
   return (
     <main className={styles.main}>
       <div className={styles.title_box}>{data?.fetchBoard.title}</div>

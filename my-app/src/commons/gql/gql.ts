@@ -13,8 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query fetchBoardComments($boardId: ID!) {\n    fetchBoardComments(boardId: $boardId) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n    }\n  }\n": types.FetchBoardCommentsDocument,
+    "\n  query fetchBoardComments($boardId: ID!, $page: Int) {\n    fetchBoardComments(boardId: $boardId, page: $page) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n      updatedAt\n    }\n  }\n": types.FetchBoardCommentsDocument,
     "\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      contents\n    }\n  }\n": types.CreateBoardCommentDocument,
+    "\n  mutation updateBoardComment(\n    $password: String\n    $boardCommentId: ID!\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n  ) {\n    updateBoardComment(\n      password: $password\n      boardCommentId: $boardCommentId\n      updateBoardCommentInput: $updateBoardCommentInput\n    ) {\n      _id\n      writer\n      contents\n      rating\n      updatedAt\n      createdAt\n    }\n  }\n": types.UpdateBoardCommentDocument,
     "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n      youtubeUrl\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n": types.FetchBoardDocument,
     "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n": types.FetchBoardsDocument,
     "\n  mutation deleteBoard($board_id: ID!) {\n    deleteBoard(boardId: $board_id)\n  }\n": types.DeleteBoardDocument,
@@ -40,11 +41,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query fetchBoardComments($boardId: ID!) {\n    fetchBoardComments(boardId: $boardId) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n    }\n  }\n"): (typeof documents)["\n  query fetchBoardComments($boardId: ID!) {\n    fetchBoardComments(boardId: $boardId) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n    }\n  }\n"];
+export function graphql(source: "\n  query fetchBoardComments($boardId: ID!, $page: Int) {\n    fetchBoardComments(boardId: $boardId, page: $page) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  query fetchBoardComments($boardId: ID!, $page: Int) {\n    fetchBoardComments(boardId: $boardId, page: $page) {\n      _id\n      writer\n      contents\n      createdAt\n      rating\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      contents\n    }\n  }\n"): (typeof documents)["\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      contents\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateBoardComment(\n    $password: String\n    $boardCommentId: ID!\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n  ) {\n    updateBoardComment(\n      password: $password\n      boardCommentId: $boardCommentId\n      updateBoardCommentInput: $updateBoardCommentInput\n    ) {\n      _id\n      writer\n      contents\n      rating\n      updatedAt\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  mutation updateBoardComment(\n    $password: String\n    $boardCommentId: ID!\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n  ) {\n    updateBoardComment(\n      password: $password\n      boardCommentId: $boardCommentId\n      updateBoardCommentInput: $updateBoardCommentInput\n    ) {\n      _id\n      writer\n      contents\n      rating\n      updatedAt\n      createdAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

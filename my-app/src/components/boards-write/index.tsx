@@ -22,7 +22,6 @@ function BoardsWrite(props: IBoardsWriteProps) {
     onChangeYouTube,
   } = useBoardsWrite(props);
 
-  console.log(props.data, "propsdata 확인");
   return (
     <div className={styles.root}>
       <header className={styles.header}>게시물 등록</header>
