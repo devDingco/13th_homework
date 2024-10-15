@@ -3,9 +3,12 @@ import { IPagination } from "../../types/components.type";
 
 export default function usePagination(props: IPagination) {
   const [startPage, setStartPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     props.refetch({ page: Number(event.currentTarget.id) });
+    setCurrentPage(Number(event.currentTarget.id));
+    console.log(event.target);
   };
 
   const onClickPrevPage = () => {
@@ -29,5 +32,6 @@ export default function usePagination(props: IPagination) {
     onClickPage,
     onClickPrevPage,
     onClickNextPage,
+    currentPage,
   };
 }
