@@ -78,5 +78,13 @@ export interface IBoardProps {
 }
 
 export interface IBoardEditProps {
-	boardInfor: IApiResponseData;
+	data: IApiResponseData;
+}
+export interface ILikeHate {
+	like: number;
+	hate: number;
+}
+
+export interface IBoardReactionProps {
+	data: ILikeHate;
 }

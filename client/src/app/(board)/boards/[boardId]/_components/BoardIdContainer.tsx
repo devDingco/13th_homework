@@ -8,13 +8,13 @@ import { IBoardEditProps } from '@/models/board.type';
 
 // import BoardYoutube from './BoardYoutube';
 
-export default function BoardIdContainer({ boardInfor }: IBoardEditProps) {
+export default function BoardIdContainer({ data }: IBoardEditProps) {
 	return (
 		<>
-			<BoardHeader infor={boardInfor} />
-			<BoardIcon address={boardInfor?.detailAddress} />
-			{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
-			<div className="prose-r_16_24">{boardInfor.content}</div>
+			<BoardHeader infor={data} />
+			<BoardIcon address={data?.detailAddress} />
+			{data.imageUrl && <BoardImages infor={data} />}
+			<div className="prose-r_16_24">{data.content}</div>
 			{/* <BoardYoutube /> */}
 		</>
 	);
