@@ -7,7 +7,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { Pagination } from "swiper/modules";
+import "swiper/css/autoplay";
+import { Pagination, Autoplay } from "swiper/modules";
 
 export default function BannerPage() {
   return (
@@ -19,7 +20,8 @@ export default function BannerPage() {
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
           pagination={{ clickable: true }}
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
         >
           <SwiperSlide>
             <Image
