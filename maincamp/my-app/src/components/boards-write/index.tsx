@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.css";
 import { useMutation, useQuery } from "@apollo/client"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent, MouseEvent, useState } from "react"
 import { boardGraphql, FETCH_BOARD } from "../queries"
 import Image from "next/image"
@@ -12,13 +12,7 @@ export interface IBoardsWriteProps {
   }
 
 export default function BoardDetailEdit(props: IBoardsWriteProps){
-
-    // const {data} = useQuery(
-    //     FETCH_BOARD,{
-    //         variables: {boardId: ID!(params.id)},
-    //     }
-    // );
-
+    
     const [name, setName] = useState("")
     const [nameError, setNameError] = useState("")
 
@@ -34,6 +28,13 @@ export default function BoardDetailEdit(props: IBoardsWriteProps){
     const [isActive, setIsActive] = useState(false)
 
     const router = useRouter();
+    const params = useParams();
+    const editId = props.isEdit ? params.boardId : null;
+
+    const {data} = useQuery(FETCH_BOARD, {
+        variables: {boardId: editId},
+    }); // useQuery는 data로 받아야함
+    console.log('data:::::', data);
 
     // 리팩토링 후 early-exit 패턴
     const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
@@ -67,61 +68,80 @@ export default function BoardDetailEdit(props: IBoardsWriteProps){
     let registerError = false;
 
     const register = async (event:MouseEvent<HTMLButtonElement>) => {
-        try{
-        const result = await createBoard({
-            variables: {
-            createBoardInput:{
-                writer: name,
-                password: password,
-                title: title,
-                contents: subject
+        
+        if(props.isEdit === false){
+            if(name.trim() === ""){
+                setNameError("필수입력 사항입니다.")
+                registerError = true;
             }
-            },
-        })
-
-        if(name.trim() === ""){
-            setNameError("필수입력 사항 입니다.")
-            registerError = true;
+            else{
+                setNameError("")
+            }
+        
+            if(password.trim() === ""){
+                setPasswordError("필수입력 사항입니다.")
+                registerError = true;
+            }
+            else{
+                setPasswordError("")
+            }
+        
+            if(title.trim() === ""){
+                setTitleError("필수입력 사항입니다.")
+                registerError = true;
+            }
+            else{
+                setTitleError("")
+            }
+        
+            if(subject.trim() === ""){
+                setSubjectError("필수입력 사항입니다.")
+                registerError = true;
+            }
+            else{
+                setSubjectError("")
+            }
+        
+            if(!registerError){
+                const result = await createBoard({
+                    variables: {
+                        createBoardInput:{
+                            writer: name,
+                            password: password,
+                            title: title,
+                            contents: subject,
+                            youtubeUrl: "",
+                            boardAddress: {
+                                zipcode: "",
+                                address: "",
+                                addressDetail: "",
+                            },
+                            images: ""
+                        }
+                    },
+                })
+                alert("게시글이 등록되었습니다.")
+                console.log(result.data.createBoard._id);
+        
+                router.push(`/boards/${result.data.createBoard._id}`)
+            }
         }
-        else{
-            setNameError("")
-        }
-    
-        if(password.trim() === ""){
-            setPasswordError("필수입력 사항 입니다.")
-            registerError = true;
-        }
-        else{
-            setPasswordError("")
-        }
-    
-        if(title.trim() === ""){
-            setTitleError("필수입력 사항 입니다.")
-            registerError = true;
-        }
-        else{
-            setTitleError("")
-        }
-    
-        if(subject.trim() === ""){
-            setSubjectError("필수입력 사항 입니다.")
-            registerError = true;
-        }
-        else{
-            setSubjectError("")
-        }
-    
-        if(!registerError){
-            alert("게시글 등록이 가능한 상태입니다.")
-        }
-        console.log(result);
-        console.log(result.data.createBoard._id);
-
-        router.push(
-            `/boards/${result.data.createBoard._id}`
-        )
-        }catch(error){
-        alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+        // 수정페이지
+        else if(props.isEdit===true){
+            if(title.trim() === ""){
+                setTitleError("필수입력 사항입니다.")
+                registerError = true;
+            }
+            else{
+                setTitleError("")
+            }
+            if(subject.trim() === ""){
+                setSubjectError("필수입력 사항입니다.")
+                registerError = true;
+            }
+            else{
+                setSubjectError("")
+            }
         }
     }
 
