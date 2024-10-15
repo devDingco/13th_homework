@@ -64,6 +64,7 @@ export class BoardCommentService {
 
         const commentBoardList = this.makeCommentMap(restBoardComments);
 
+        if (commentBoardList.length === 0) return [];
         this.isInvalidPage(commentBoardList.length, page);
 
         return commentBoardList.filter(

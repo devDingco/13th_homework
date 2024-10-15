@@ -12,6 +12,7 @@ import {
     Put,
     UseInterceptors,
     Query,
+    DefaultValuePipe,
 } from '@nestjs/common';
 import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -42,7 +43,7 @@ export class BoardCommentController {
     @HttpCode(HttpStatus.OK)
     findAll(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Query('page', ParseIntPipe) page: number,
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     ) {
         return this.boardCommentService.findAllComment(boardId, page);
     }
