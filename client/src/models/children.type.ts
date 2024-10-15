@@ -34,3 +34,7 @@ export interface IRatingProps {
 	rating: number;
 	setRating?: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export interface ISearchParamsProps {
+	searchParams: { [key: string]: string | undefined };
+}

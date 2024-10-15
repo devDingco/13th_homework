@@ -9,6 +9,7 @@ import {
 import { CreateBoardDto } from '../dto/create-board.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateBoardDto } from '../dto/update-board.dto';
+import { PaginationResponseDto } from '../dto/pagination-response.dto';
 
 @Injectable()
 export class BoardRepository {
@@ -44,8 +45,16 @@ export class BoardRepository {
         return await this.boardRepository.save(board);
     }
 
-    async findAllBoard(): Promise<Board[]> {
-        return await this.boardRepository.find();
+    async findAllBoard(
+        page: number,
+        take: number,
+    ): Promise<PaginationResponseDto> {
+        const [result, totalCount] = await this.boardRepository.findAndCount({
+            skip: (page - 1) * take,
+            take,
+        });
+
+        return { result, totalCount };
     }
 
     async findBoard(boardId: number): Promise<Board> {
@@ -107,5 +116,9 @@ export class BoardRepository {
 
     async clearBoard(): Promise<void> {
         await this.boardRepository.clear();
+    }
+
+    async countBoard(): Promise<number> {
+        return await this.boardRepository.count();
     }
 }

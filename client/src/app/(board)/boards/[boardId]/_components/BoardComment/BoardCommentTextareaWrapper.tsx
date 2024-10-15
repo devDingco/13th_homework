@@ -1,6 +1,6 @@
 /** @format */
 
-import CommonTextarea from '../../_components/CommonTextarea';
+import CommonTextarea from '../../../_components/CommonTextarea';
 import { ETitle } from '@/models/board.type';
 import React from 'react';
 import { useState } from 'react';

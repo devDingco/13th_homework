@@ -4,26 +4,18 @@
 import BoardHeader from './BoardHeader';
 import BoardIcon from './BoardIcon';
 import BoardImages from './BoardImages';
-import { IBoardResponse } from '@/models/boardReaderResponse';
-import { IboardId } from '@/models/children.type';
+import { IBoardEditProps } from '@/models/board.type';
 
 // import BoardYoutube from './BoardYoutube';
 
-export default function BoardIdContainer({ boardId }: IboardId) {
-	// const resource
-	const boardInfor: IBoardResponse = resource.read();
-
+export default function BoardIdContainer({ data }: IBoardEditProps) {
 	return (
 		<>
-			{boardInfor && typeof boardInfor === 'object' && 'boardId' in boardInfor && (
-				<>
-					<BoardHeader infor={boardInfor} />
-					<BoardIcon address={boardInfor?.detailAddress} />
-					{boardInfor.imageUrl && <BoardImages infor={boardInfor} />}
-					<div className="prose-r_16_24">{boardInfor.content}</div>
-					{/* <BoardYoutube /> */}
-				</>
-			)}
+			<BoardHeader infor={data} />
+			<BoardIcon address={data?.detailAddress} />
+			{data.imageUrl && <BoardImages infor={data} />}
+			<div className="prose-r_16_24">{data.content}</div>
+			{/* <BoardYoutube /> */}
 		</>
 	);
 }

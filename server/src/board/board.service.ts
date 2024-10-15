@@ -1,6 +1,10 @@
 import * as bcrypt from 'bcrypt';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 
 import { Board } from './entities/board.entity';
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
@@ -8,6 +12,8 @@ import { BoardIdCounterRepository } from './repositories/board-id-counter.reposi
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repositories/board.repository';
 import { CreateBoardDto } from './dto/create-board.dto';
+import { PaginationDto } from './dto/pagination.dto';
+import { PaginationResponseDto } from './dto/pagination-response.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Injectable()
@@ -37,14 +43,20 @@ export class BoardService {
         return await this.boardRepository.saveBoard(board);
     }
 
-    async findAll(): Promise<Board[]> {
-        return await this.boardRepository.findAllBoard();
+    async findAll({
+        page,
+        take,
+    }: PaginationDto): Promise<PaginationResponseDto> {
+        await this.checkBoardEntityCount(page, take);
+        return await this.boardRepository.findAllBoard(page, take);
     }
 
     async findOne(boardId: number): Promise<Board> {
-        const board = await this.boardRepository.findBoard(boardId);
+        return await this.boardRepository.findBoard(boardId);
+    }
 
-        return board;
+    async getBoardCount(): Promise<number> {
+        return await this.boardRepository.countBoard();
     }
 
     async updateOne(
@@ -89,5 +101,16 @@ export class BoardService {
 
     async transformPassword(password: string): Promise<string> {
         return await bcrypt.hash(password, 10);
+    }
+
+    async checkBoardEntityCount(page: number, take: number) {
+        const maxCount = await this.boardRepository.countBoard();
+        const maxPage = Math.ceil(maxCount / take);
+
+        if (page > maxPage) {
+            throw new BadRequestException(
+                `Entity count exceeds the limit of ${page}. Current count: ${maxPage}`,
+            );
+        }
     }
 }

@@ -6,7 +6,7 @@ import { IReaction } from './board.type';
 export type IBoardResponse = IApiResponseData | Promise<IApiResponseData> | undefined;
 
 export interface IBoardReader {
-	read(): IBoardResponse;
+	read(): IBoardResponse | IReactionResource;
 }
 export interface IBoardReaderResource {
 	resource: IBoardReader;

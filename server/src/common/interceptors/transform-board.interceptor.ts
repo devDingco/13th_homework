@@ -43,6 +43,8 @@ export class TransformBoardInterceptor<T>
                     }
 
                     if (Array.isArray(data)) {
+                        if (data.length === 0)
+                            return { message, statusCode, data };
                         if (data[0].password) {
                             data = data.map((item) => {
                                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,7 +52,7 @@ export class TransformBoardInterceptor<T>
                                 return rest;
                             });
                         }
-                        if (data.length === 0 || data[0].rating) {
+                        if (data[0].rating) {
                             return { message, statusCode, data };
                         }
 
@@ -64,6 +66,8 @@ export class TransformBoardInterceptor<T>
                         }
                         const deleteIdData = this.removeSensitiveData(data);
                         return { message, statusCode, data: deleteIdData };
+                    } else if (typeof data === 'number') {
+                        return { message, statusCode, data };
                     } else {
                         return { message, statusCode };
                     }

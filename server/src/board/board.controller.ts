@@ -1,3 +1,4 @@
+// TODO: 1014 - getBoardsCount / pagination
 import {
     Controller,
     Get,
@@ -11,6 +12,7 @@ import {
     HttpStatus,
     UseInterceptors,
     ParseIntPipe,
+    Query,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -18,6 +20,8 @@ import { UpdateBoardDto } from './dto/update-board.dto';
 import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 import { ResponseMessage } from './decorators/response-message.decorator';
 import { Board } from './entities/board.entity';
+import { PaginationDto } from './dto/pagination.dto';
+import { PaginationResponseDto } from './dto/pagination-response.dto';
 
 @Controller('/api/board')
 @UseInterceptors(TransformBoardInterceptor)
@@ -34,8 +38,15 @@ export class BoardController {
     @Get()
     @ResponseMessage('board 전체를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findAll(): Promise<Board[]> {
-        return this.boardService.findAll();
+    findAll(@Query() query: PaginationDto): Promise<PaginationResponseDto> {
+        return this.boardService.findAll(query);
+    }
+
+    @Get('/count')
+    @ResponseMessage('board의 count 개수를 성공적으로 가져왔습니다.')
+    @HttpCode(HttpStatus.OK)
+    getBoardCount() {
+        return this.boardService.getBoardCount();
     }
 
     @Get(':boardId')

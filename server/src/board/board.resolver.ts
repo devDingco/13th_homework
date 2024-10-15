@@ -1,3 +1,4 @@
+// TODO getBoards -> findAll args page number
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { BoardService } from './board.service';
 import { Board } from './entities/board.entity';
@@ -9,10 +10,10 @@ import { UpdateBoardDto } from './dto/update-board.dto';
 export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
-    @Query(() => [BoardResponseDto])
-    getBoards() {
-        return this.boardService.findAll();
-    }
+    // @Query(() => [BoardResponseDto])
+    // getBoards() {
+    //     return this.boardService.findAll();
+    // }
 
     @Query(() => BoardResponseDto)
     getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
