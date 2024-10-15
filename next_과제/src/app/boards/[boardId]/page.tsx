@@ -8,12 +8,7 @@ export default function BoardsDetailPage() {
   return (
     <div className="mainContent">
       <BoardDetail />
-      <CommentWrite
-        title="댓글"
-        placeholder="댓글을 입력해 주세요."
-        textMaxCount={100}
-        type="commentWrite"
-      />
+      <CommentWrite starCountBox={true} type="commentWrite" />
       <div className="pb-28">
         <CommentList starCountBox={true} reply={false} />
       </div>
