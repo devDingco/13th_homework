@@ -1,3 +1,4 @@
+import { comment } from "postcss";
 import { DocumentNode } from "@apollo/client";
 import type { GetProp, UploadProps } from "antd";
 export type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
@@ -57,6 +58,10 @@ export interface IformList {
   email?: string;
   phone?: string;
   userId?: string;
+  commentWriter?: string;
+  commentPassword?: string;
+  commentContents?: string;
+  commentRating?: number;
 }
 
 export interface IwriteVariables {
@@ -72,23 +77,5 @@ export interface IwriteVariables {
       addressDetail?: string;
     };
     images?: (string | undefined)[];
-  };
-}
-
-export interface IformResister {
-  [key: string]: {
-    required?: string;
-    pattern?: {
-      value: RegExp;
-      message: string;
-    };
-    maxLength?: {
-      value: number;
-      message: string;
-    };
-    minLength?: {
-      value: number;
-      message: string;
-    };
   };
 }
