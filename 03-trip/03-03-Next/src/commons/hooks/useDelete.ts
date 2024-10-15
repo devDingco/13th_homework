@@ -6,7 +6,9 @@ import {
 import { useMutation } from "@apollo/client";
 
 export default function useDelete() {
-    const [deleteBoard] = useMutation(DeleteBoardDocument);
+    const [deleteBoard] = useMutation(DeleteBoardDocument, {
+        // variables: {boardId: }
+    });
 
     const onClickDelete = (e: React.MouseEvent) => {
         e.stopPropagation();

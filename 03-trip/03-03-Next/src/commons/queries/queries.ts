@@ -66,14 +66,20 @@ export const FETCH_BOARD = gql`
 `;
 
 export const FETCH_LIST = gql`
-    query fetchBoards($number: Int) {
-        fetchBoards(page: $number) {
+    query fetchBoards($page: Int) {
+        fetchBoards(page: $page) {
             _id
             writer
             title
             contents
             createdAt
         }
+    }
+`;
+
+export const FETCH_COUNT = gql`
+    query fetchBoardsCount {
+        fetchBoardsCount
     }
 `;
 

@@ -18,7 +18,7 @@ export default function AddressFieldUI({
 }: {
     onChange: React.ChangeEventHandler;
 }) {
-    const { isModalOpen, addrData, onToggleModal, handleComplete } =
+    const { isModalOpen, zipcode, address, onToggleModal, handleComplete } =
         useDaumPostApi();
 
     return (
@@ -29,16 +29,16 @@ export default function AddressFieldUI({
                     <Input
                         id="zipcode_ID"
                         onClick={onToggleModal}
-                        value={addrData?.zonecode}
-                        disabled={addrData ? true : false}
+                        value={zipcode}
+                        disabled={zipcode ? true : false}
                     />
                     <Button onClick={onToggleModal}>주소 검색</Button>
                 </div>
                 <Input
                     id="address01_ID"
                     onClick={onToggleModal}
-                    value={addrData?.address}
-                    disabled={addrData ? true : false}
+                    value={address}
+                    disabled={address ? true : false}
                 />
                 <Input id="address02_ID" onChange={onChange} />
                 {/* modal */}
