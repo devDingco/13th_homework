@@ -1,7 +1,7 @@
 import {
   IeditVariables,
   IformList,
-  IformResister,
+  // IformResister,
 } from "@/components/board-write/types";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
@@ -14,7 +14,7 @@ import {
   CreateBoardDocument,
   FetchBoardDocument,
   UpdateBoardDocument,
-  UploadFileDocument,
+  // UploadFileDocument,
   FetchBoardsListDocument,
 } from "@/commons/graphql/graphql";
 
@@ -83,13 +83,13 @@ export const useBoardWrite = (formType: string) => {
   // !게시글 등록 및 수정을 위한 useMutation
   const [upDateBoard] = useMutation(UpdateBoardDocument);
   const [newBoard] = useMutation(CreateBoardDocument);
-  const [uploadFile] = useMutation(UploadFileDocument);
+  // const [uploadFile] = useMutation(UploadFileDocument);
 
   const {
     control,
-    register, // 검증 규칙 적용 메서드
+    // register, // 검증 규칙 적용 메서드
     setValue, // 입력값 설정 메서드
-    formState: { errors, isValid, isDirty, dirtyFields }, // 폼의 상태를 나타내는 속성 isValid, isDirty
+    formState: { errors }, // 폼의 상태를 나타내는 속성 isValid, isDirty, dirtyFields
     getValues, // 폼의 입력값을 반환하는 메서드
   } = useForm<IformList>({
     mode: "onChange",
@@ -158,7 +158,7 @@ export const useBoardWrite = (formType: string) => {
       youtubeUrl,
       writeAddressPost,
       writeAddressDetail,
-      imgFiles,
+      // imgFiles,
       // imgFile1,
       // imgFile2,
       // imgFile3,
@@ -209,82 +209,6 @@ export const useBoardWrite = (formType: string) => {
     }
   };
 
-  const regexPattern = {
-    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-    password: /(?=.*\d)(?=.*[a-z]).{8,}/, // 8자 이상, 영문, 숫자포함
-    phone: /^\d{3}-\d{3,4}-\d{4}$/,
-    url: /^http[s]?:\/\/([\S]{3,})/i,
-    youtube: /^https?:\/\/(www\.)?(youtube\.com|youtu\.?be)\/.+$/,
-  };
-
-  const formResister: IformResister = {
-    writeName: {
-      required: "필수 입력 사항입니다.",
-      maxLength: {
-        value: 10,
-        message: "작성자명은 10자 이내로 입력해 주세요.",
-      },
-    },
-    writePassword: {
-      required: "필수 입력 사항입니다.",
-      // pattern: {
-      //   value: regexPattern.password,
-      //   message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
-      // },
-      minLength: {
-        value: 4,
-        message: "비밀번호는 4자 이상으로 입력해 주세요.",
-      },
-    },
-    writeTitle: {
-      required: "필수 입력 사항입니다.",
-      maxLength: {
-        value: 20,
-        message: "제목은 20자 이내로 입력해 주세요.",
-      },
-    },
-    writeContents: {
-      required: "필수 입력 사항입니다.",
-      // maxLength: {
-      //   value: 300,
-      //   message: "내용은 300자 이내로 입력해 주세요.",
-      // },
-    },
-    writeAddress: {},
-    youtubeUrl: {
-      pattern: {
-        value: regexPattern.youtube,
-        message: "유투브 URL 형식을 확인해 주세요. ex) https://youtu.be/xxxxxx",
-      },
-    },
-    imgFiles: {
-      //! 이미지 용량 및 파일 형식 제한 추가 필요
-      pattern: {
-        value: /\.(jpe?g|png|gif)$/i,
-        message: "이미지 파일만 업로드 가능합니다.",
-      },
-    },
-    email: {
-      pattern: {
-        value: regexPattern.email,
-        message: "이메일 형식을 확인해 주세요.",
-      },
-    },
-    phone: {
-      pattern: {
-        value: regexPattern.phone,
-        message: "휴대폰 번호 형식을 확인해 주세요.",
-      },
-    },
-    userId: {
-      required: "필수 입력 사항입니다.",
-      maxLength: {
-        value: 20,
-        message: "아이디는 20자 이내로 입력해 주세요.",
-      },
-    },
-  };
-
   const getBase64 = (file: FileType): Promise<string> =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -326,7 +250,7 @@ export const useBoardWrite = (formType: string) => {
     onBoardEdit,
     onBoardNew,
     errors,
-    formResister,
+    // formResister,
     control,
     setValue,
     Controller,
