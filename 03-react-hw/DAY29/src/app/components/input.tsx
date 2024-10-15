@@ -1,56 +1,31 @@
-import { ChangeEvent } from "react";
-import styles from "./input.module.css";
+import React, { ChangeEvent } from "react";
 
-interface IInputProps {
-  label: string;
-  name: string;
+interface InputProps {
   type?: string;
+  name: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  className?: string;
   required?: boolean;
-  error?: string;
 }
 
-const Input: React.FC<IInputProps> = ({
-  label,
+const Input: React.FC<InputProps> = ({
   type,
   name,
   onChange,
+  placeholder,
+  className,
   required,
-  error,
 }) => {
-  const getPlaceholder = (label: string) => {
-    switch (label) {
-      case "작성자":
-        return "작성자 명을 입력해 주세요.";
-      case "비밀번호":
-        return "비밀번호를 입력해 주세요.";
-      case "제목":
-        return "제목을 입력해 주세요.";
-      case "내용":
-        return "내용을 입력해 주세요.";
-      case "주소":
-        return "주소를 입력해 주세요.";
-      case "유튜브 링크":
-        return "링크를 입력해 주세요.";
-    }
-  };
-
   return (
-    <div className={styles.구분상자}>
-      <div className={styles.필수입력부분}>
-        <span>{label}</span>
-        <span>*</span>
-      </div>
-      <input
-        type={type}
-        name={name}
-        placeholder={getPlaceholder(label)}
-        className={styles.중간입력창크기}
-        onChange={onChange}
-        required
-      />
-      {required && <div className={styles.필수입력에러}>{error}</div>}
-    </div>
+    <input
+      type={type}
+      name={name}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={className}
+      required={required}
+    />
   );
 };
 
