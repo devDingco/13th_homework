@@ -23,7 +23,7 @@ export default function BoardListBanner() {
 
   return (
     !isHiddenHeader && (
-      <div className="swiper-container w-screen">
+      <div className="swiper-container w-screen contents ">
         <Swiper
           loop={true} // 슬라이드 루프
           spaceBetween={50} // 슬라이스 사이 간격

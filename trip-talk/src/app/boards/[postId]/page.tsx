@@ -30,7 +30,6 @@ const PostDetail = () => {
           수정하기
         </Button>
       </div>
-      <CommentWrite />
       <CommentList />
     </>
   );

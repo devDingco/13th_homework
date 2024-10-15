@@ -18,7 +18,7 @@ interface ModalStateType {
     modalContent: ModalStateType['modalContent'],
   ) => Promise<ModalStateType['userPromptResult']>;
 
-  closeModal: (input: boolean | string | null) => void;
+  closeModal: (input?: boolean | string | null) => void;
   cancelModal: () => void;
 }
 

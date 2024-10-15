@@ -24,12 +24,16 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={myFont.className}>
-      <body className={'w-full max-w-[1280px] mx-auto contents'}>
+      <body>
+        <ModalTemplete />
+        <DefaultLayout />
         <ApolloSetting>
-          <ModalTemplete />
-          <DefaultLayout />
-          <BoardListBanner />
-          <main id="root">{children}</main>
+          <div className="contents w-screen">
+            <BoardListBanner />
+          </div>
+          <main className={'w-full max-w-[1280px] mx-auto'} id="root">
+            {children}
+          </main>
         </ApolloSetting>
       </body>
     </html>

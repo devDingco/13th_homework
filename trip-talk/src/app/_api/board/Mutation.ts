@@ -51,3 +51,24 @@ export const CREATE_COMMMENT = gql`
     }
   }
 `;
+
+// export const UPDATE_COMMENT = gql`
+//   mutation updateBoardComment(
+//     $createBoardCommentInput: CreateBoardCommentInput!
+//     $boardCommentId: ID!
+//     $password: String
+//   ) {
+//     updateBoardComment(
+//       createBoardCommentInput: $createBoardCommentInput
+//       boardCommentId: $boardCommentId
+//       password: $password
+//     ) {
+//       _id
+//       writer
+//       contents
+//       rating
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;
