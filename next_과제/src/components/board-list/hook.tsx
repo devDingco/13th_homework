@@ -2,13 +2,14 @@ import { useRouter } from "next/navigation";
 import useCustomSearchParams from "@/commons/hooks/useCustomSearchParams";
 import { dateViewSet } from "@/utils/dateViewSet";
 import type { TableProps } from "antd";
-import type { DataType, IhandleSearch } from "@/components/board-list/types";
+import type { DataType } from "@/components/board-list/types";
 import { useMutation, useQuery } from "@apollo/client";
+import { useState } from "react";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
-  // FetchBoardDocument,
   FetchBoardsCountDocument,
+  FetchBoardsCountQueryVariables,
 } from "@/commons/graphql/graphql";
 import Icon from "@/components/iconFactory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
@@ -17,48 +18,57 @@ import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
 export const useBoardList = () => {
   const router = useRouter();
   const { searchParams, setSearchParams } = useCustomSearchParams();
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
+  const [endDate, setEndDate] = useState<string>(new Date().toISOString());
 
   const { data, refetch } = useQuery(FetchBoardsListDocument, {
     variables: {
-      startDate: toKoreanTimeString("2021-09-03"),
-      endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
-      search: searchParams.search || "",
-      page: Number(searchParams.page) || 1,
+      startDate: toKoreanTimeString(startDate),
+      endDate: toKoreanTimeString(endDate),
+      search: search,
+      page: 1,
     },
   });
 
   const { data: countData } = useQuery(FetchBoardsCountDocument, {
     variables: {
-      startDate: toKoreanTimeString("2021-09-03"),
-      endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
-      search: "",
+      startDate: toKoreanTimeString(startDate),
+      endDate: toKoreanTimeString(endDate, true),
+      search: search,
     },
   });
 
   const fetchBoardsCount = countData?.fetchBoardsCount; // !게시글 총 갯수
 
-  // !검색 결과 리패치
+  // !검색 결과 리패치 - 검색컴포넌트에서 검색시 받아오는 값으로 리패치
   const handleSearch = async ({
     startDate,
     endDate,
     search,
-  }: IhandleSearch) => {
-    setSearchParams({
-      startDate: startDate.split("T")[0],
-      endDate: endDate.split("T")[0],
-      search: search,
-      page: "1",
-    });
+  }: FetchBoardsCountQueryVariables) => {
     const result = await refetch({
-      startDate: toKoreanTimeString(startDate || "2021-09-03"),
-      endDate: toKoreanTimeString(
-        endDate || new Date().toISOString().split("T")[0],
-        true
-      ),
+      startDate: toKoreanTimeString(startDate),
+      endDate: toKoreanTimeString(endDate, true),
       search: search,
       page: 1,
     });
     console.log(result);
+    setStartDate(startDate);
+    setEndDate(endDate);
+    setSearch(search || "");
+  };
+
+  const pageChangeHandler = async (page: number) => {
+    const result = await refetch({
+      startDate: toKoreanTimeString("2021-09-03"),
+      endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
+      search: search, // 기본값은 ""인데 검색결과 리패치 상태인 경우 search값이 있음
+      page: page,
+    });
+    console.log(result);
+    setPage(page);
   };
 
   // console.log(params.pageNum, data?.fetchBoards);
@@ -79,7 +89,7 @@ export const useBoardList = () => {
           {
             query: FetchBoardsListDocument,
             variables: {
-              page: Number(searchParams.page) || 1,
+              page: page,
             },
           },
         ],
@@ -120,7 +130,7 @@ export const useBoardList = () => {
   const dataSource = Array.from({
     length: data?.fetchBoards.length || 0,
   }).map<DataType>((_, idx) => ({
-    key: String(idx + 1 + (Number(searchParams.page || 1) - 1) * 10),
+    key: String(idx + 1 + (page - 1) * 10),
     title: data?.fetchBoards[idx].title || "",
     writer: data?.fetchBoards[idx].writer || "",
     createdAt: dateViewSet(data?.fetchBoards[idx].createdAt),
@@ -147,7 +157,7 @@ export const useBoardList = () => {
           {data?.fetchBoards[index].youtubeUrl && (
             <VideoCameraTwoTone twoToneColor="#ff4848" />
           )}
-          {data?.fetchBoards[index].images.length > 0 && (
+          {(data?.fetchBoards[index].images?.length ?? 0) > 0 && (
             <FileImageTwoTone twoToneColor="#2e53fc" />
           )}
         </div>
@@ -190,6 +200,8 @@ export const useBoardList = () => {
 
   return {
     data,
+    page,
+    pageChangeHandler,
     postDelete,
     listItemMouseHandler,
     detailPageHandler,

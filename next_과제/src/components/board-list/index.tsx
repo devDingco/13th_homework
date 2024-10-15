@@ -13,9 +13,9 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
     dataSource,
     columns,
     fetchBoardsCount,
-    searchParams,
-    setSearchParams,
+    pageChangeHandler,
     router,
+    page,
   } = useBoardList();
 
   return (
@@ -53,29 +53,18 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
             pagination={{
               position: ["none", "bottomCenter"],
               // pageSize: Number(data?.fetchBoards.length) || 10,
-              current: searchParams.page ? Number(searchParams.page) : 1,
+              current: page,
               defaultPageSize: 10,
               responsive: true,
               total: fetchBoardsCount,
               showTotal: (total) => `총 게시글 수 : ${total}`,
-              defaultCurrent: searchParams.page ? Number(searchParams.page) : 1,
+              defaultCurrent: 1,
               showLessItems: false,
               onShowSizeChange: (current, size) => {
                 console.log(current, size);
               },
               onChange: (page, pageSize) => {
-                const startDate = searchParams.startDate;
-                const endDate = searchParams.endDate;
-                const search = searchParams.search;
-
-                const newParams = {
-                  page: String(page),
-                  pageSize: String(pageSize),
-                  startDate,
-                  endDate,
-                  search,
-                };
-                setSearchParams(newParams);
+                pageChangeHandler(page);
               },
               showSizeChanger: false,
               showQuickJumper: true,
