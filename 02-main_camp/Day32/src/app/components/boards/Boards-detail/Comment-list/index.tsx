@@ -2,10 +2,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../Comment";
 import useCommentList from "./hook";
 import styles from "./styles.module.css";
+import { FetchBoardCommentsQuery } from "@/commons/gql/graphql";
 
-const CommentList = () => {
-  const { data, hasMore, fetchDataOnScroll, resetHasMoreScroll } =
-    useCommentList();
+interface ICommentListProps {
+  comments: FetchBoardCommentsQuery | undefined;
+}
+
+const CommentList = ({ comments }: ICommentListProps) => {
+  const { data, hasMore, fetchDataOnScroll } = useCommentList();
 
   return (
     <div className={styles.boardCommentContainer}>
@@ -15,13 +19,8 @@ const CommentList = () => {
         loader={<div>로딩중입니다.</div>}
         dataLength={data?.fetchBoardComments.length ?? 0}
       >
-        {data?.fetchBoardComments.map((el) => (
-          <Comment
-            key={el._id}
-            writer={String(el.writer)}
-            contents={el.contents}
-            rating={el.rating}
-          />
+        {comments?.fetchBoardComments.map((el) => (
+          <Comment key={el._id} comments={el} />
         ))}
       </InfiniteScroll>
     </div>

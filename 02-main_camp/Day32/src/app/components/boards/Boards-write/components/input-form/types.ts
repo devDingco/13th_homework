@@ -7,6 +7,7 @@ export enum TextInputType {
 
 export interface IBoardsWriteInput {
   isRequired: boolean;
+  disabled?: boolean;
   name: string;
   title: string;
   type?: TextInputType;

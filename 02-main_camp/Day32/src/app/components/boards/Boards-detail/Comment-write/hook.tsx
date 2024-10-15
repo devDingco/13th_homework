@@ -1,7 +1,10 @@
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 import {
   CreateBoardCommentDocument,
+  CreateBoardCommentInput,
   FetchBoardCommentsDocument,
+  FetchBoardCommentsQuery,
+  UpdateBoardCommentDocument,
 } from "@/commons/gql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
@@ -9,59 +12,68 @@ import { useParams } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { useBoardWrite } from "../../Boards-write/hook";
 
-const useCommentWrite = () => {
+interface ICommentWriteProps {
+  comments: FetchBoardCommentsQuery["fetchBoardComments"][0] | undefined;
+  toggleEditMode: () => void;
+}
+
+const useCommentWrite = ({ comments, toggleEditMode }: ICommentWriteProps) => {
   const params = useParams();
   const { showSuccessModal, showErrorModal } = useBoardWrite();
-
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [contents, setContents] = useState("");
-  const [rating, setRating] = useState(0);
-
-  const comment: IComment = {
-    writer: writer,
-    password: password,
-    contents: contents,
-    rating: rating,
-  };
+  const [commentInput, setCommentInput] = useState<CreateBoardCommentInput>({
+    writer: comments?.writer ?? "",
+    password: "",
+    contents: comments?.contents ?? "",
+    rating: comments?.rating ?? 0,
+  });
 
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
+  const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCommentInput = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const value = event.target.value;
-    setWriter(value);
+    const inputName = event.target.name;
+    updateCommentInput(inputName, value);
   };
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
-
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
-    setContents(value);
+  const updateCommentInput = (inputName: string, value: string) => {
+    setCommentInput((prev) => {
+      return {
+        ...prev, // 기존 상태 유지
+        [inputName]: value,
+      };
+    });
   };
 
   const onChangeRating = (value: number) => {
-    setRating(value);
+    setCommentInput((prev) => {
+      return {
+        ...prev, // 기존 상태 유지
+        rating: value,
+      };
+    });
   };
 
   const resetInputValue = () => {
-    setWriter("");
-    setPassword("");
-    setContents("");
-    setRating(0);
+    setCommentInput({
+      writer: "",
+      password: "",
+      contents: "",
+      rating: 3,
+    });
   };
 
   const onClickSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
-      const result = await createBoardComment({
+      const _ = await createBoardComment({
         variables: {
           createBoardCommentInput: {
-            writer: writer,
-            password: password,
-            contents: contents,
-            rating: rating,
+            writer: commentInput.writer,
+            password: commentInput.password,
+            contents: commentInput.contents,
+            rating: commentInput.rating,
           },
           boardId: String(params.boardId),
         },
@@ -75,7 +87,6 @@ const useCommentWrite = () => {
           },
         ],
       });
-      comment.id = result.data?.createBoardComment._id;
       showSuccessModal(CONSTANTS_ALERT_MESSAGE.CREATE_COMMENTS_SUCCEED, () => {
         resetInputValue();
       });
@@ -87,13 +98,26 @@ const useCommentWrite = () => {
     }
   };
 
+  const onClickUpdate = async () => {
+    const _ = await updateBoardComment({
+      variables: {
+        updateBoardCommentInput: {
+          contents: commentInput.contents,
+          rating: commentInput.rating,
+        },
+        boardCommentId: comments?._id ?? "",
+        password: commentInput.password,
+      },
+    });
+    toggleEditMode();
+  };
+
   return {
-    comment,
-    onChangeWriter,
-    onChangePassword,
-    onChangeContents,
+    commentInput,
+    onChangeCommentInput,
     onChangeRating,
     onClickSubmit,
+    onClickUpdate,
   };
 };
 

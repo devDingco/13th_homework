@@ -9,16 +9,13 @@ import { useState } from "react";
 const useCommentList = () => {
   const params = useParams();
   const [hasMore, setHasMore] = useState(true);
+
   const { data, fetchMore } = useQuery(FetchBoardCommentsDocument, {
     variables: {
       page: 1,
       boardId: String(params.boardId),
     },
   });
-
-  const resetHasMoreScroll = () => {
-    if (hasMore === false) setHasMore(true);
-  };
 
   const fetchDataOnScroll = () => {
     if (data === undefined) return;
@@ -45,11 +42,14 @@ const useCommentList = () => {
     });
   };
 
+  const resetHasMoreScroll = () => {
+    if (hasMore === false) setHasMore(true);
+  };
+
   return {
     data,
     hasMore,
     fetchDataOnScroll,
-    resetHasMoreScroll,
   };
 };
 

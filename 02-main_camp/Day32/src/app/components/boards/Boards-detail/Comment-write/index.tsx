@@ -7,59 +7,67 @@ import CONSTANTS_TITLE from "@/commons/constants/title";
 import { BoardsWriteInputForm } from "../../Boards-write/components/input-form/text";
 import Divider from "@/app/components/commons/divider";
 import { TextInputType } from "../../Boards-write/components/input-form/types";
+import { IBoardCommentWriteProps } from "./types";
 
-const CommentWrite = () => {
+const BoardCommentWrite = ({
+  comments,
+  isEdit,
+  toggleEditMode = () => {},
+}: IBoardCommentWriteProps) => {
   const {
-    comment,
-    onChangeWriter,
-    onChangePassword,
-    onChangeContents,
+    commentInput,
+    onChangeCommentInput,
     onChangeRating,
     onClickSubmit,
-  } = useCommentWrite();
+    onClickUpdate,
+  } = useCommentWrite({ comments, toggleEditMode });
+
+  const completionHandler = isEdit ? onClickUpdate : onClickSubmit;
 
   return (
     <div className={styles.BoardCommentsContainer}>
-      <Divider />
+      {!isEdit && <Divider />}
       <div className={styles.titleContainer}>
         <img src="/assets/chat.png" alt="댓글 그림" />
-        {CONSTANTS_TITLE.COMMENTS}
+        {isEdit ? "댓글 수정" : CONSTANTS_TITLE.COMMENTS}
       </div>
       <div className={styles.starsContainer}>
-        <Rate allowHalf value={comment.rating} onChange={onChangeRating} />
+        <Rate allowHalf value={commentInput.rating} onChange={onChangeRating} />
       </div>
       <div className={styles.textInputContainer}>
         <BoardsWriteInputForm
-          name={"comments_writer"}
+          disabled={isEdit ? true : false}
+          name="writer"
           title={CONSTANTS_TITLE.WRITER}
           isRequired={false}
           placeholder={CONSTANTS_DESCRIPTION.WRITER}
-          onChange={onChangeWriter}
-          value={comment.writer}
+          onChange={onChangeCommentInput}
+          value={commentInput.writer ?? ""}
         />
         <BoardsWriteInputForm
-          name={"comments_password"}
+          name="password"
           type={TextInputType.password}
           title={CONSTANTS_TITLE.PASSWORD}
           isRequired={false}
           placeholder={CONSTANTS_DESCRIPTION.PASSWORD}
-          onChange={onChangePassword}
-          value={comment.password}
+          onChange={onChangeCommentInput}
+          value={commentInput.password ?? ""}
         />
       </div>
       <textarea
+        name="contents"
         className={styles.commentsInput}
         placeholder={CONSTANTS_DESCRIPTION.COMMENTS}
-        onChange={onChangeContents}
-        value={comment.contents}
+        onChange={onChangeCommentInput}
+        value={commentInput?.contents}
       ></textarea>
       <div className={styles.buttonContainer}>
-        <button className={styles.submitButton} onClick={onClickSubmit}>
-          댓글 등록
+        <button className={styles.submitButton} onClick={completionHandler}>
+          {isEdit ? "수정하기" : "댓글 등록"}
         </button>
       </div>
     </div>
   );
 };
 
-export default CommentWrite;
+export default BoardCommentWrite;

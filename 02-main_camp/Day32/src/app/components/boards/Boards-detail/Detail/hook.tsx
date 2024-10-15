@@ -1,6 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { FetchBoardDocument } from "@/commons/gql/graphql";
+import {
+  FetchBoardCommentsDocument,
+  FetchBoardDocument,
+} from "@/commons/gql/graphql";
 
 const useBoardsDetail = () => {
   const router = useRouter();
@@ -9,6 +12,13 @@ const useBoardsDetail = () => {
   const { data } = useQuery(FetchBoardDocument, {
     variables: {
       boardId: params.boardId as string,
+    },
+  });
+
+  const { data: comments } = useQuery(FetchBoardCommentsDocument, {
+    variables: {
+      page: 1,
+      boardId: String(params.boardId),
     },
   });
 
@@ -32,6 +42,7 @@ const useBoardsDetail = () => {
 
   return {
     board,
+    comments,
     onClickEdit,
     onClickShowBoards,
   };

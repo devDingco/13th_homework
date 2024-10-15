@@ -1,16 +1,16 @@
 "use client";
 import useBoardsDetail from "@/app/components/boards/Boards-detail/Detail/hook";
 import styles from "./styles.module.css";
-import BoardCommentsWrite from "@/app/components/boards/Boards-detail/Comment-write";
+import BoardCommentWrite from "@/app/components/boards/Boards-detail/Comment-write";
 import BoardDetailProfile from "../Profile";
-import BoardComment from "../Comment-list";
+import BoardCommentList from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 import Divider from "@/app/components/commons/divider";
 import { Tooltip } from "antd";
 import YouTube from "react-youtube";
 
 const BoardsDetail = () => {
-  const { board, onClickEdit, onClickShowBoards } = useBoardsDetail();
+  const { board, comments, onClickEdit, onClickShowBoards } = useBoardsDetail();
 
   return (
     <div className={styles.BoardsDetail_root}>
@@ -76,8 +76,8 @@ const BoardsDetail = () => {
           수정하기
         </button>
       </footer>
-      <BoardCommentsWrite />
-      <BoardComment />
+      <BoardCommentWrite isEdit={false} />
+      <BoardCommentList comments={comments} />
     </div>
   );
 };
