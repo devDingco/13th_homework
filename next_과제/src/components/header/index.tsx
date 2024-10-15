@@ -1,55 +1,14 @@
 "use client";
-
 import Link from "next/link";
-import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import Image from "next/image";
 import { Button } from "antd";
 import Icon from "@/components/iconFactory";
-import { usePathname, useRouter } from "next/navigation";
+import { useHeader } from "./hook";
 import styles from "./index.module.scss";
-import { useState } from "react";
-import { useLayout } from "@/commons/hooks/useLayout";
 
 const Header = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  console.log(pathname);
-  const { isHeaderHide } = useLayout();
-
-  const menuItems: MenuProps["items"] = [
-    {
-      label: <Link href="/">트립토크</Link>,
-      key: "/",
-    },
-    {
-      label: <Link href="/buyticket">숙박권구매</Link>,
-      key: "/buyticket",
-    },
-    {
-      label: <Link href="/mypage">마이페이지</Link>,
-      key: "/mypage",
-    },
-    {
-      label: "게시판 임시",
-      key: "[boards]",
-      children: [
-        {
-          label: <Link href="/boards">게시글리스트</Link>,
-          key: "boards",
-        },
-        {
-          label: <Link href="/boards/new">게시글등록</Link>,
-          key: "boards/new",
-        },
-      ],
-    },
-  ];
-
-  const [current, setCurrent] = useState(pathname || "/");
-  const onMenu: MenuProps["onClick"] = (e) => {
-    setCurrent(e.key);
-  };
+  const { isHeaderHide, onMenu, menuItems, current, router } = useHeader();
 
   if (!isHeaderHide)
     return (
@@ -100,48 +59,3 @@ const Header = () => {
     );
 };
 export default Header;
-
-{
-  /* <ul className="font-medium menu lg:menu-horizontal gap-4 text-base z-10 max-sm:hidden">
-          {mainMenu.map((key, idx) => {
-            return key.subnav ? (
-              <li key={idx}>
-                <details>
-                  <summary className="rounded-none">{key.name}</summary>
-                  <ul className="rounded-none">
-                    {key.subnav.map((subkey, subidx) => {
-                      return (
-                        <li key={subidx}>
-                          <Link
-                            className={
-                              "text-nowrap rounded-none p-2" +
-                              (pathName === subkey.link ? " font-bold" : "")
-                            }
-                            href={subkey.link}
-                          >
-                            {subkey.name}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </details>
-              </li>
-            ) : (
-              <li key={idx}>
-                <Link
-                  className={
-                    "rounded-none p-2" +
-                    (pathName === key.link
-                      ? " border-b-2 border-current font-bold"
-                      : "")
-                  }
-                  href={key.link}
-                >
-                  {key.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul> */
-}
