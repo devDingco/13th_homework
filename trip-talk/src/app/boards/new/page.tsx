@@ -1,4 +1,4 @@
-import BoardsWrite from "../../components/BoardsWrite/BoardsWrite";
+import BoardsWrite from "../../_components/BoardsWrite/BoardsWrite";
 
 export default function BoardsNew() {
   return <BoardsWrite isEdit={false} />;
