@@ -30,13 +30,13 @@ export default function NewInput({ title, value }: ITitle) {
 			className="flex w-full rounded-lg border-[1px] border-gray-200 px-3 py-4 outline-none placeholder:prose-r_16_24 placeholder:text-gray-400"
 			placeholder={RNewInputPlaceHolder[title]}
 			defaultValue={
-				data?.title || value
-					? value
-					: path.includes('edit') && title === ETitle.Password
-						? '123'
-						: address && title === ETitle.Address
-							? address
-							: undefined
+				data?.title ||
+				(path.includes('edit') && title === ETitle.Password
+					? '123'
+					: address && title === ETitle.Address
+						? address
+						: undefined) ||
+				value
 			}
 		/>
 	);
