@@ -13,5 +13,5 @@ export class PaginationDto {
     @Type(() => Number)
     @IsPositive()
     @IsInt()
-    take: number = 10;
+    take: number = 5;
 }

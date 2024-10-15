@@ -49,13 +49,12 @@ export class BoardRepository {
         page: number,
         take: number,
     ): Promise<PaginationResponseDto> {
-        const [result, counter] = await this.boardRepository.findAndCount({
+        const [result, totalCount] = await this.boardRepository.findAndCount({
             skip: (page - 1) * take,
             take,
         });
-        const maxPage = Math.ceil(counter / take);
 
-        return { result, maxPage };
+        return { result, totalCount };
     }
 
     async findBoard(boardId: number): Promise<Board> {
