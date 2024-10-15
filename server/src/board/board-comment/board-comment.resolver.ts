@@ -9,10 +9,10 @@ import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 export class BoardCommentResolver {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
-    @Query(() => [BoardCommentResponse])
-    getBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
-        return this.boardCommentService.findAllComment(boardId);
-    }
+    // @Query(() => [BoardCommentResponse])
+    // getBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
+    //     return this.boardCommentService.findAllComment(boardId);
+    // }
 
     @Mutation(() => BoardCommentResponse)
     createBoardComment(

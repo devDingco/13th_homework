@@ -47,7 +47,10 @@ export class BoardCommentService {
         return await this.boardCommentRepository.saveComment(comment);
     }
 
-    async findAllComment(boardId: number): Promise<BoardComment[]> {
+    async findAllComment(
+        boardId: number,
+        page: number,
+    ): Promise<BoardComment[]> {
         await this.isExistBoard(boardId);
 
         const boardComments =
@@ -59,7 +62,13 @@ export class BoardCommentService {
             return rest;
         });
 
-        return this.makeCommentMap(restBoardComments);
+        const commentBoardList = this.makeCommentMap(restBoardComments);
+
+        this.isInvalidPage(commentBoardList.length, page);
+
+        return commentBoardList.filter(
+            (_, index) => index >= 5 * (page - 1) && index < 5 * page,
+        );
     }
 
     async updateComment(
@@ -149,5 +158,13 @@ export class BoardCommentService {
             }
         });
         return Array.from(commentMap.values());
+    }
+
+    isInvalidPage(length: number, page: number) {
+        if (5 * page > length) {
+            throw new BadRequestException(
+                `page: ${page} is over. max length: ${length}`,
+            );
+        }
     }
 }
