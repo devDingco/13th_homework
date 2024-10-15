@@ -40,5 +40,5 @@ export interface ISearchParamsProps {
 }
 
 export interface IDeleteProps {
-	id: string;
+	commentId: string;
 }

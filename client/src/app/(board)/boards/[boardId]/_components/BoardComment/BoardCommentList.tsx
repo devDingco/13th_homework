@@ -11,7 +11,7 @@ import fetcher from '@/libs/fetcher';
 import useSWR from 'swr';
 
 export default function BoardCommentList({ data, boardId }: IBoardCommentProp) {
-	const { data: cachedData, mutate } = useSWR(
+	const { data: cachedData } = useSWR(
 		`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}`,
 		fetcher,
 		{ fallbackData: data },
