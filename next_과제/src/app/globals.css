@@ -6,8 +6,10 @@
 
 @layer base {
   :root {
-    --noto-sans-kr: "Noto Sans KR";
-    --roboto: "Roboto";
+    --font-base-size: 1rem;
+    --font-base-family: "Noto Sans KR", "Roboto", -apple-system,
+      BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+      "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
     --border-color: #f0f0f0;
     --text-color: #030303;
@@ -83,9 +85,7 @@ html
 }
 
 body {
-  font-family: var(--noto-sans-kr), var(--roboto), -apple-system,
-    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-base-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -100,6 +100,24 @@ body {
   height: 1px;
   margin: -1px;
 }
+/* 
+.textOverflow_line1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 1;
+  box-orient: vertical;
+}
+
+.textOverflow_line2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 2;
+  box-orient: vertical;
+} */
 
 .quill > * {
   border-color: inherit !important;
