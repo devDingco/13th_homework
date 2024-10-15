@@ -1,0 +1,50 @@
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.enabledMovePageButton {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+}
+
+.enabledPrevPageButton {
+  filter: opacity(0.5) drop-shadow(0 0 0 black);
+  margin: 0 auto;
+}
+
+.disabledPrevPageButton {
+  display: none;
+  margin: 0 auto;
+}
+
+.pageNumber {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #777777;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.selectedPageNumber {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+
+  background-color: #f2f2f2;
+  color: black;
+  font-weight: 500;
+  font-size: 1rem;
+}
