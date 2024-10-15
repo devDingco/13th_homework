@@ -7,6 +7,7 @@ import {
   SetStateAction,
 } from "react";
 import { FetchBoardQuery } from "../commons/graphql/graphql";
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 
 export interface IBoardsWriteHook {
   isEdit: boolean;
@@ -107,4 +108,11 @@ export interface IModalContainer {
   isPrompt: boolean;
   alertMessage: ReactNode;
   setUserPassword?: Dispatch<SetStateAction<string>> | undefined;
+}
+
+export interface IPagination {
+  refetch: (
+    variables?: Partial<OperationVariables> | undefined
+  ) => Promise<ApolloQueryResult<any>>;
+  lastPage: number;
 }
