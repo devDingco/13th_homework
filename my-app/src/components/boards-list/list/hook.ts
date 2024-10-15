@@ -7,7 +7,6 @@ import {
 } from "@/commons/gql/graphql";
 
 export function useBoardsList() {
-  const { data } = useQuery(FetchBoardsDocument);
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const router = useRouter();
 
@@ -26,7 +25,6 @@ export function useBoardsList() {
   };
 
   return {
-    data,
     onClickMove,
     onClickDelete,
   };
