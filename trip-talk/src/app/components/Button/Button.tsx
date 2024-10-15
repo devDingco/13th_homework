@@ -1,15 +1,9 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { IButtonProps } from "../../../types/components.type";
+import { BUTTON } from "../../../constants/constants";
 
-export default function Button({
-  type,
-  disabled,
-  children,
-  color,
-  src,
-  alt,
-}: IButtonProps) {
+export default function Button({ id, disabled, color, onClick }: IButtonProps) {
   const colorVariants = {
     blue: "bg-blue text-white",
     gray: "bg-gray text-white",
@@ -17,15 +11,18 @@ export default function Button({
   };
 
   return (
-    <>
-      <button
-        type={type}
-        disabled={disabled}
-        className={`${styles.button} ${colorVariants[color]}`}
-      >
-        {src && alt && <Image src={src} alt={alt} width={24} height={24} />}
-        {children}
-      </button>
-    </>
+    <button
+      id={id}
+      type={id.includes("submit") ? "submit" : undefined}
+      disabled={disabled}
+      className={`${styles.button} ${colorVariants[color]}`}
+      onClick={onClick}
+    >
+      {BUTTON[id]}
+      {id === "menu" ||
+        ((id === "edit" || id === "list") && (
+          <Image src={`/svgs/${id}.svg`} alt={id} width={24} height={24} />
+        ))}
+    </button>
   );
 }

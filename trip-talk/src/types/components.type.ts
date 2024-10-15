@@ -1,5 +1,13 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  MouseEventHandler,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { FetchBoardQuery } from "../commons/graphql/graphql";
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 
 export interface IBoardsWriteHook {
   isEdit: boolean;
@@ -15,12 +23,7 @@ export interface IBoardsWrite {
   onSubmit: void;
 }
 export interface IInputProps {
-  isLabel: boolean;
-  children?: ReactNode;
-  isRequired: boolean;
-  id?: string;
-  type: string;
-  placeholder: string;
+  id: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
   disabled?: boolean;
@@ -28,12 +31,10 @@ export interface IInputProps {
 }
 
 export interface IButtonProps {
-  type?: "submit";
+  id: string;
   disabled?: boolean;
-  children: ReactNode;
   color: "blue" | "gray" | "white";
-  src?: string;
-  alt?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export interface IError {
@@ -56,4 +57,62 @@ export interface ICommentList {
   createdAt: string;
   number: number;
   _id: string;
+  rating: number;
+}
+
+export interface IFormData {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+  youtubeUrl: string;
+}
+
+export interface ICommentFormData {
+  writer: string;
+  password: string;
+  contents: string;
+}
+
+export interface ITextArea {
+  id: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  value?: string;
+  defaultValue?: string | undefined;
+}
+
+export type EnumType = {
+  [key: string]: string;
+};
+
+export interface IImageName {
+  list: string;
+  edit: string;
+}
+
+export type TRecord = Record<string, string>;
+
+export interface ICustomImage {
+  image: string;
+}
+
+export interface IStarRating {
+  defaultValue?: number;
+  setRating?: Dispatch<React.SetStateAction<number>>;
+  rating?: number;
+}
+
+export interface IModalContainer {
+  isSwitched: boolean;
+  children: ReactNode;
+  isPrompt: boolean;
+  alertMessage: ReactNode;
+  setUserPassword?: Dispatch<SetStateAction<string>> | undefined;
+}
+
+export interface IPagination {
+  refetch: (
+    variables?: Partial<OperationVariables> | undefined
+  ) => Promise<ApolloQueryResult<any>>;
+  lastPage: number;
 }

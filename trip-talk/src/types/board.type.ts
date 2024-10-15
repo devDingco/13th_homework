@@ -1,5 +1,5 @@
 export interface IBoardList {
-  _id: string;
+  id: string;
   number: number;
   writer: string;
   title: string;

@@ -1,22 +1,20 @@
 import { useMutation } from "@apollo/client";
 import { DeleteBoardDocument, FetchBoardsDocument } from "../graphql/graphql";
 import { useRouter } from "next/navigation";
-import { IBoardList } from "../../types/board.type";
 
-export default function UseBoardsList (props: IBoardList) {
-  const { _id, number, title, writer, createdAt } = props;
+export default function useBoardsList(id: string) {
   const router = useRouter();
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
   const onClickBoard = () => {
-    router.push(`/boards/${_id}`);
+    router.push(`/boards/${id}`);
   };
 
   const onCLickDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
     deleteBoard({
       variables: {
-        id: _id,
+        id,
       },
       refetchQueries: [{ query: FetchBoardsDocument }],
     });
@@ -25,9 +23,5 @@ export default function UseBoardsList (props: IBoardList) {
   return {
     onClickBoard,
     onCLickDelete,
-    number,
-    title,
-    writer,
-    createdAt
-  }
+  };
 }

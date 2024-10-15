@@ -1,169 +1,170 @@
 "use client";
 
-import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import styles from "./styles.module.css";
+import TextArea from "../TextArea/TextArea";
+import { usePathname } from "next/navigation";
 import ImageUploader from "../ImageUploader/ImageUploader";
-import UseBoardsWrite from "../../../commons/hooks/UseBoardsWrite";
+import { BOARDS_WRITE } from "../../../constants/constants";
 import { IBoardsWriteHook } from "../../../types/components.type";
-import {
-  BOARDS_WRITE,
-  BUTTON,
-  INPUT_CHILDREN,
-  PLACEHOLDERS,
-} from "../../../enums/constants";
+import useBoardsWrite from "../../../commons/hooks/useBoardsWrite";
+import ModalContainer from "../ModalContainer/ModalContainer";
+import { useState } from "react";
 
 export default function BoardsWrite(props: IBoardsWriteHook) {
+  const [userPassword, setUserPassword] = useState("");
   const {
-    formAction,
-    disabledInput,
-    disabledButton,
     handleInputChange,
-    handleContentChange,
     onSubmit,
-    writer,
-    password,
-    title,
-    contents,
-  } = UseBoardsWrite(props);
+    formData,
+    isInputPasswordModalOpen,
+    isWrongPasswordModalOpen,
+    isEditCompleteModalOpen,
+  } = useBoardsWrite(props, userPassword);
+
+  const path: string = usePathname();
+  const isEdit = path.includes("edit")
+    ? !(formData.title && formData.contents)
+    : !(
+        formData.writer &&
+        formData.password &&
+        formData.title &&
+        formData.contents
+      );
+
   return (
-    <>
-      <form className={styles.form} onSubmit={onSubmit}>
-        <div className={styles.form_title}>게시물 {formAction}</div>
-        <div className={styles.author_info_wrapper}>
-          <div>
-            <Input
-              isLabel={true}
-              id="writer"
-              type="text"
-              placeholder={PLACEHOLDERS.WRITER}
-              isRequired={true}
-              children={INPUT_CHILDREN.WRITER}
-              onChange={handleInputChange}
-              defaultValue={String(props.data?.fetchBoard.writer)}
-              disabled={disabledInput}
-            />
-            {!writer && (
-              <div className={styles.required_field}>
-                {BOARDS_WRITE.REQUIRED_FIELDS}
-              </div>
-            )}
-          </div>
-          <div>
-            <Input
-              isLabel={true}
-              id="password"
-              type="password"
-              placeholder={PLACEHOLDERS.PASSWORD}
-              isRequired={true}
-              children={INPUT_CHILDREN.PASSWORD}
-              onChange={handleInputChange}
-              disabled={disabledInput}
-            />
-            {!password && (
-              <div className={styles.required_field}>
-                {BOARDS_WRITE.REQUIRED_FIELDS}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className={styles.title_wrapper}>
+    <form className={styles.form} onSubmit={onSubmit}>
+      <div className={styles.form_title}>
+        게시물 {props.isEdit ? "수정" : "등록"}
+      </div>
+      <div className={styles.author_info_wrapper}>
+        <div>
           <Input
-            isLabel={true}
-            id="title"
-            type="text"
-            placeholder={PLACEHOLDERS.TITLE}
-            isRequired={true}
-            children={INPUT_CHILDREN.TITLE}
+            id="writer"
             onChange={handleInputChange}
-            defaultValue={props.data?.fetchBoard.title}
+            defaultValue={props.data?.fetchBoard.writer as string}
+            disabled={props.isEdit}
           />
-          {!title && (
+          {!formData.writer && (
             <div className={styles.required_field}>
               {BOARDS_WRITE.REQUIRED_FIELDS}
             </div>
           )}
         </div>
-        <div className={styles.contents_wrapper}>
-          <div>
-            <p>내용</p>
-            <b>*</b>
-          </div>
-          <textarea
-            id="contents"
-            placeholder={PLACEHOLDERS.CONTESTS}
-            onChange={handleContentChange}
-            defaultValue={props.data?.fetchBoard.contents}
+        <div>
+          <Input
+            id="password"
+            onChange={handleInputChange}
+            disabled={props.isEdit}
           />
-          {!contents && (
+          {!formData.password && (
             <div className={styles.required_field}>
               {BOARDS_WRITE.REQUIRED_FIELDS}
             </div>
           )}
         </div>
-        <div className={styles.address_wrapper}>
-          <div>
-            <div>
-              <Input
-                isLabel={true}
-                type="number"
-                placeholder="01234"
-                isRequired={false}
-                children={INPUT_CHILDREN.ADDRESS}
-                defaultValue={String(
-                  props.data?.fetchBoard.boardAddress?.zipcode
-                )}
-              />
-            </div>
-            <Button color="white">{BUTTON.ZIP_CODE_SEARCH}</Button>
+      </div>
+      <div className={styles.title_wrapper}>
+        <Input
+          id="title"
+          onChange={handleInputChange}
+          defaultValue={props.data?.fetchBoard.title}
+        />
+        {!formData.title && (
+          <div className={styles.required_field}>
+            {BOARDS_WRITE.REQUIRED_FIELDS}
           </div>
-          <Input
-            isLabel={false}
-            type="text"
-            placeholder={PLACEHOLDERS.ADDRESS}
-            isRequired={false}
-            defaultValue={String(props.data?.fetchBoard.boardAddress?.address)}
-          />
-          <Input
-            isLabel={false}
-            type="text"
-            placeholder={PLACEHOLDERS.DETAIL_ADDRESS}
-            isRequired={false}
-            defaultValue={String(
-              props.data?.fetchBoard.boardAddress?.addressDetail
-            )}
-          />
+        )}
+      </div>
+      <div className={styles.contents_wrapper}>
+        <div>
+          <p>내용</p>
+          <b>*</b>
         </div>
-        <div className={styles.link_wrapper}>
-          <Input
-            isLabel={true}
-            type="url"
-            placeholder={PLACEHOLDERS.URL}
-            isRequired={false}
-            children={INPUT_CHILDREN.URL}
-            defaultValue={String(props.data?.fetchBoard.youtubeUrl)}
-          />
-        </div>
-        <div className={styles.photo_wrapper}>
-          <p>사진 첨부</p>
-          <div>
-            <ImageUploader />
-            <ImageUploader />
-            <ImageUploader />
+        <TextArea
+          id="contents"
+          onChange={handleInputChange}
+          defaultValue={props.data?.fetchBoard.contents}
+        />
+        {!formData.contents && (
+          <div className={styles.required_field}>
+            {BOARDS_WRITE.REQUIRED_FIELDS}
           </div>
+        )}
+      </div>
+      <div className={styles.address_wrapper}>
+        <div>
+          <div>
+            <Input
+              id="zip_code"
+              defaultValue={
+                props.data?.fetchBoard.boardAddress?.zipcode as string
+              }
+            />
+          </div>
+          <Button id="zip_code_search" color="white" />
         </div>
-        <div className={styles.button_wrapper}>
-          <Button color="white">{BUTTON.CANCEL}</Button>
-          <Button
-            type="submit"
-            disabled={disabledButton}
-            color={disabledButton ? "gray" : "blue"}
-          >
-            {formAction}
-            {BUTTON.ACTION}
-          </Button>
+        <Input
+          id="address"
+          defaultValue={props.data?.fetchBoard.boardAddress?.address as string}
+        />
+        <Input
+          id="detail_address"
+          defaultValue={
+            props.data?.fetchBoard.boardAddress?.addressDetail as string
+          }
+        />
+      </div>
+      <div className={styles.link_wrapper}>
+        <Input
+          id="youtubeUrl"
+          onChange={handleInputChange}
+          defaultValue={props.data?.fetchBoard.youtubeUrl as string}
+        />
+      </div>
+      <div className={styles.photo_wrapper}>
+        <p>사진 첨부</p>
+        <div>
+          <ImageUploader />
+          <ImageUploader />
+          <ImageUploader />
         </div>
-      </form>
-    </>
+      </div>
+      <div className={styles.button_wrapper}>
+        <Button id="cancel" color="white" />
+
+        <Button
+          id="submit"
+          disabled={isEdit}
+          color={isEdit ? "gray" : "blue"}
+        />
+      </div>
+      {isInputPasswordModalOpen && (
+        <ModalContainer
+          isSwitched={false}
+          children="ALERT!!"
+          isPrompt={true}
+          alertMessage="글을 등록할 때 입력하셨던 비밀번호를 입력해 주세요."
+          setUserPassword={setUserPassword}
+        />
+      )}
+      {isWrongPasswordModalOpen && (
+        <ModalContainer
+          isSwitched={true}
+          children="ERROR!!"
+          isPrompt={false}
+          alertMessage="비밀번호가 일치하지 않습니다."
+        />
+      )}
+      {isEditCompleteModalOpen && (
+        <ModalContainer
+          isSwitched={false}
+          children="ALERT!!"
+          isPrompt={false}
+          alertMessage="수정 완료."
+        />
+      )}
+    </form>
   );
 }

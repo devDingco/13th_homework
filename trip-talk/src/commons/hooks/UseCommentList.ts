@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { FetchBoardCommentsDocument } from "../graphql/graphql";
 
-export default function UseCommentList() {
+export default function useCommentList() {
   const params = useParams();
   const { data } = useQuery(FetchBoardCommentsDocument, {
     variables: {

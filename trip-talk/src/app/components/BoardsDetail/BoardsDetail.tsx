@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
 import styles from "./styles.module.css";
-import UseBoardsDetail from "../../../commons/hooks/UseBoardsDetail";
+import useBoardsDetail from "../../../commons/hooks/useBoardsDetail";
+import LikeButton from "../LikeButton/LikeButton";
+import DisLikeButton from "../DisLikeButton/DisLikeButton";
 
 export default function BoardsDetail() {
   const { boardId, boardWriter, boardTitle, boardContents, boardCreatedAt } =
-    UseBoardsDetail();
+    useBoardsDetail();
   return (
     <div className={styles.layout}>
       <div className={styles.title}>{boardTitle}</div>
@@ -56,25 +58,15 @@ export default function BoardsDetail() {
         />
       </div>
       <div className={styles.reaction}>
-        <div>
-          <Image src="/svgs/bad.svg" alt="bad" width={24} height={24} />
-          <p className={styles.bad_count}>12</p>
-        </div>
-        <div>
-          <Image src="/svgs/good.svg" alt="good" width={24} height={24} />
-          <p className={styles.good_count}>24</p>
-        </div>
+        <DisLikeButton />
+        <LikeButton />
       </div>
       <div className={styles.button_layout}>
         <Link href={"/boards"}>
-          <Button color="white" src="/svgs/menu.svg" alt="menu">
-            목록으로
-          </Button>
+          <Button color="white" id="list" />
         </Link>
         <Link href={`${boardId}/edit`}>
-          <Button color="white" src="/svgs/edit.svg" alt="edit">
-            수정하기
-          </Button>
+          <Button color="white" id="edit" />
         </Link>
       </div>
     </div>

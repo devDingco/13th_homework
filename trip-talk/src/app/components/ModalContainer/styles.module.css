@@ -1,0 +1,22 @@
+.modal_background {
+  @apply fixed inset-0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal_box {
+  @apply flex justify-center items-center rounded-xl absolute bg-white w-96 h-48 flex-col;
+  top: calc(50vh - 100px);
+  left: calc(50vw - 200px);
+}
+
+.header {
+  @apply w-full h-14 absolute flex flex-row justify-between items-center top-0 text-2xl rounded-t-xl px-3;
+}
+
+.contents_layout {
+  @apply flex flex-col gap-4 absolute bottom-3;
+}
+
+.button_layout {
+  @apply flex gap-2 justify-center;
+}
