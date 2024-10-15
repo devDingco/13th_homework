@@ -36,21 +36,23 @@ export default function BoardsList() {
 
     const [deleteBoard] = useMutation(DELETE_BOARD)
 
-    const onClickDetail = (id) => {
+    const onClickDetail = (id:string) => {
         // event.stopPropagation();
+        console.log('id', id) // id를 잘 받아오는지 
         router.push(`/boards/${id}`)
     }
 
-    const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
+    const onClickDelete = async (id) => {
         try{
             const response = await deleteBoard({
+                variables: {boardId: id},
                 refetchQueries: [{ query: FETCH_BOARDS}],
             });
             console.log("성공", response.data.deleteBoard);
         }catch(err){
-            console.error("실패")
+            console.error(err)
         }
+
     };
 
     return (
@@ -65,11 +67,12 @@ export default function BoardsList() {
                     </ul>
                     <ul className={styles.listContent}>
                         <li>{data.fetchBoards.length - index}</li>
-                        <li onClick={onClickDetail}>{el.title}</li>
+                        <li onClick={()=>onClickDetail(el._id)}>{el.title}</li>
+                        {/* id값을 인자로 받아오기 위해 ()=>(el._id)를 사용함 */}
                         <li>{el.writer}</li>
                         <li>
                             {el.createdAt.split("T")[0].replace(/-/g, ".")}
-                            <button id={el.number} onClick={onClickDelete}></button>
+                            <button onClick={()=>onClickDelete(el._id)}></button>
                         </li>
                     </ul>
                 </div>

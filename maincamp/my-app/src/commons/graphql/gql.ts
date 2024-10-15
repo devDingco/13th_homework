@@ -14,8 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "\n    query fetchBoards{\n        fetchBoards {\n            _id\n            writer\n            title\n            contents\n            youtubeUrl\n            likeCount\n            dislikeCount\n            images\n            createdAt\n            updatedAt\n            deletedAt\n        }\n    }\n": types.FetchBoardsDocument,
     "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n": types.DeleteBoardDocument,
-    "\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n": types.CreateBoardDocument,
+    "\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": types.CreateBoardDocument,
     "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n        _id\n        writer\n        title\n        contents\n        createdAt\n        youtubeUrl\n        likeCount\n        dislikeCount\n        images\n        boardAddress{\n            zipcode\n            address\n            addressDetail\n        }\n        createdAt\n        updatedAt\n        deletedAt\n    }\n  }\n": types.FetchBoardDocument,
 };
 
@@ -36,11 +37,15 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n    query fetchBoards{\n        fetchBoards {\n            _id\n            writer\n            title\n            contents\n            youtubeUrl\n            likeCount\n            dislikeCount\n            images\n            createdAt\n            updatedAt\n            deletedAt\n        }\n    }\n"): (typeof documents)["\n    query fetchBoards{\n        fetchBoards {\n            _id\n            writer\n            title\n            contents\n            youtubeUrl\n            likeCount\n            dislikeCount\n            images\n            createdAt\n            updatedAt\n            deletedAt\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n"): (typeof documents)["\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($createBoardInput:CreateBoardInput!){\n    createBoard(createBoardInput:$createBoardInput){\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      images\n      boardAddress{\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
