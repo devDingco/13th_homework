@@ -2,10 +2,12 @@ import Image from "next/image";
 import React from "react";
 import styles from "./style.module.css";
 import UseListWrite from "./hook";
-// import ListBannerPage from "../../commons/layout/banner";
-export default function ListPage() {
-  const { onMoveDetailPage, onClickDelete, data, onClickWriteBoard } =
-    UseListWrite();
+import { IListProps } from "./types";
+
+export default function ListPage(props: IListProps) {
+  const { onMoveDetailPage, onClickDelete, onClickWriteBoard } = UseListWrite(
+    props.currentPage
+  );
 
   return (
     <>
@@ -18,21 +20,25 @@ export default function ListPage() {
             <div className={styles.css_listdate}>날짜</div>
           </div>
           <div className={styles.css_listall}>
-            {data?.fetchBoards.map((el, index) => (
+            {props.data?.fetchBoards.map((el, index) => (
               <div key={el._id}>
                 <div
                   className={styles.css_yourboard}
                   onClick={() => onMoveDetailPage(el._id)}
                 >
                   <div className={styles.css_border}>
-                    <div className={styles.css_boardnum}>{index + 1}</div>
+                    <div className={styles.css_boardnum}>
+                      {props.count?.fetchBoardsCount +
+                        10 -
+                        index -
+                        props.currentPage * 10}
+                    </div>
                     <div className={styles.css_boardtitle}>{el.title}</div>
                     <div className={styles.css_boardwriter}>{el.writer}</div>
                     <div className={styles.css_boarddate}>
                       {el.createdAt.split("T")[0]}
                     </div>
                   </div>
-
                   <Image
                     src="/assets/Delete.png"
                     width={0}

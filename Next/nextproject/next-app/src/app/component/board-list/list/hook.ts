@@ -1,34 +1,49 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FetchBoards, DeleteBoard } from "./queries";
+import { FetchBoards, DeleteBoard, FetchBoardsCount } from "./queries";
 import { useRouter } from "next/navigation";
-export default function UseListWrite() {
-  const { data } = useQuery(FetchBoards);
+import { MouseEvent } from "react";
 
+export default function UseListWrite(currentPage: number) {
+  const { data, refetch } = useQuery(FetchBoards, {
+    variables: {
+      mypage: currentPage,
+    },
+  });
+  const { data: dataBoardsCount } = useQuery(FetchBoardsCount);
+  console.log(dataBoardsCount?.fetchBoardsCount);
   const router = useRouter();
 
-  const onMoveDetailPage = (id) => {
+  const onMoveDetailPage = (id: string) => {
     router.push(`/routes/boards/${id}`);
   };
   const [deleteBoard] = useMutation(DeleteBoard);
-
-  const onClickDelete = (event, id) => {
+  const onClickDelete = async (
+    event: MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
     event.stopPropagation();
     console.log(id);
-    deleteBoard({
-      variables: {
-        boardId: id,
-      },
-      refetchQueries: [{ query: FetchBoards }],
-    });
+    try {
+      await deleteBoard({
+        variables: {
+          boardId: id,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    refetch({ page: currentPage });
   };
 
   const onClickWriteBoard = () => {
     router.push("../../../routes/boards/new");
   };
+
   return {
     onMoveDetailPage,
     onClickDelete,
     data,
+    dataBoardsCount,
     onClickWriteBoard,
   };
 }

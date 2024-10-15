@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FetchBoard, register, UPDATE_BOARD } from "./queries";
 import { IProps } from "./types";
 import { FetchBoards } from "../board-list/list/queries";
