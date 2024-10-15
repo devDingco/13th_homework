@@ -63,6 +63,7 @@ const Header = () => {
                 alt="트립트립"
                 width={52}
                 height={32}
+                style={{ cursor: "pointer", width: "52px", height: "32px" }}
               />
             </Link>
           </h1>
