@@ -9,7 +9,7 @@ export default function HotTripTalk() {
   console.log("핫한트립토크", data, error, loading);
 
   return (
-    <div className="max-xl:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
+    <div className="max-md:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
       <div className="flex flex-col gap-6">
         <h3 className="font-bold text-xl">오늘 핫한 트립토크</h3>
         <div className="grid grid-cols-4 gap-8 max-sm:flex max-sm:gap-4 max-sm:overflow-x-auto overflow-hidden max-sm:mr-[-100px]">
@@ -22,7 +22,7 @@ export default function HotTripTalk() {
               <Link
                 href={`/boards/${cardData._id}`}
                 key={idx}
-                className="flex gap-2 justify-between min-w-[280px]"
+                className="flex gap-2 justify-between"
               >
                 <Image
                   src={user?.picture || "/images/img-0.png"}
@@ -31,8 +31,8 @@ export default function HotTripTalk() {
                   height={152}
                 />
 
-                <div className="flex flex-col justify-between min-w-44 text-gray-800 dark:text-gray-200">
-                  <div className="flex flex-col gap-2">
+                <div className="flex flex-col justify-between text-gray-800 dark:text-gray-200 w-full">
+                  <div className="flex flex-col gap-2 w-full">
                     <h4 className="font-extrabold">{title ?? "제목"}</h4>
                     <div className="flex justify-between text-sm text-gray-400">
                       <div className="flex items-center gap-1 text-gray-700">
