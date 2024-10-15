@@ -6,7 +6,6 @@
   gap: 24px;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
 }
 
 .boardTop {
@@ -92,4 +91,9 @@
 
 .boardContents:hover .deleteIcon {
   opacity: 1; /* 호버 시 아이콘이 나타남 */
+}
+
+.임시페이지내이션 {
+  display: flex;
+  gap: 8px;
 }
