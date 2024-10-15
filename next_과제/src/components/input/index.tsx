@@ -23,8 +23,6 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     maxLength,
   } = props;
 
-  console.log(control);
-
   const { formResister } = useInput();
 
   return (
@@ -38,7 +36,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
       </div>
       {type === "password" ? (
         <Controller
-          name={id}
+          name={id.includes("_") ? id.split("_")[0] : id} // useform 컨트롤 용 name으로 사용
           control={control}
           rules={formResister[id]}
           defaultValue={defaultValue}
@@ -55,13 +53,14 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
         />
       ) : type === "textArea" ? (
         <Controller
-          name={id}
+          name={id.includes("_") ? id.split("_")[0] : id}
           control={control}
           rules={formResister[id]}
           defaultValue={defaultValue}
           render={({ field }) => (
             <div id={styles.textAreaBox}>
               <TextArea
+                id={id}
                 rows={rows}
                 size="large"
                 showCount={showCount}
@@ -74,12 +73,13 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
         />
       ) : (
         <Controller
-          name={id}
+          name={id.includes("_") ? id.split("_")[0] : id}
           control={control}
           rules={formResister[id]}
           defaultValue={defaultValue}
           render={({ field }) => (
             <AntInput
+              id={id}
               size="large"
               disabled={readOnly}
               placeholder={placeholder}

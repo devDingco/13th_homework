@@ -96,6 +96,20 @@ export const useInput = () => {
         message: "아이디는 20자 이내로 입력해 주세요.",
       },
     },
+    loginId: {
+      required: "필수 입력 사항입니다.",
+      maxLength: {
+        value: 20,
+        message: "아이디는 20자 이내로 입력해 주세요.",
+      },
+    },
+    loginPassword: {
+      required: "필수 입력 사항입니다.",
+      minLength: {
+        value: 4,
+        message: "비밀번호는 4자 이상으로 입력해 주세요.",
+      },
+    },
   };
 
   return { formResister };
