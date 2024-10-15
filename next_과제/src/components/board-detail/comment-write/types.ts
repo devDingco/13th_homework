@@ -1,7 +1,7 @@
 export interface IcommentWriteProps {
   title?: string;
-  textMaxCount: number;
-  placeholder: string;
+  textMaxCount?: number;
+  placeholder?: string;
   id?: string;
   type: string;
   starCountBox?: boolean;
@@ -15,13 +15,6 @@ export interface IcommentWriteProps {
   setMode?: (mode: string[]) => void;
   mode?: string[];
   commentIndex?: number;
-}
-
-export interface IcommentForm {
-  commentWriter: string;
-  commentPassword: string;
-  commentContents: string;
-  commentRating: number;
 }
 
 export interface IuseCommentWriteProps {
