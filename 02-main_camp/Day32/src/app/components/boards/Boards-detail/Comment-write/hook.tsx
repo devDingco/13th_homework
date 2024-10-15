@@ -69,6 +69,7 @@ const useCommentWrite = () => {
           {
             query: FetchBoardCommentsDocument,
             variables: {
+              page: 1,
               boardId: String(params.boardId),
             },
           },

@@ -1,7 +1,7 @@
 "use client";
 import useBoardsDetail from "@/app/components/boards/Boards-detail/Detail/hook";
 import styles from "./styles.module.css";
-import BoardCommentsInputForm from "@/app/components/boards/Boards-detail/Comment-write";
+import BoardCommentsWrite from "@/app/components/boards/Boards-detail/Comment-write";
 import BoardDetailProfile from "../Profile";
 import BoardComment from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
@@ -76,7 +76,7 @@ const BoardsDetail = () => {
           수정하기
         </button>
       </footer>
-      <BoardCommentsInputForm />
+      <BoardCommentsWrite />
       <BoardComment />
     </div>
   );
