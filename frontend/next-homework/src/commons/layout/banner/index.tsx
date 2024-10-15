@@ -16,8 +16,6 @@ const LayoutBanner = () => {
         speed={300}
         autoHeight={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        spaceBetween={50}
-        slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
         pagination={{
@@ -28,13 +26,34 @@ const LayoutBanner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src="/images/banner01.jpeg" alt="banner1" width={0} height={0} sizes="100vw" className={styles.css} />
+          <Image
+            src="/images/banner01.jpeg"
+            alt="banner1"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "51.2rem", objectFit: "cover" }}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src="/images/banner02.jpeg" alt="banner2" width={0} height={0} sizes="100vw" className={styles.css} />
+          <Image
+            src="/images/banner02.jpeg"
+            alt="banner2"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "51.2rem", objectFit: "cover" }}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src="/images/banner03.jpeg" alt="banner3" width={0} height={0} sizes="100vw" className={styles.css} />
+          <Image
+            src="/images/banner03.jpeg"
+            alt="banner3"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "51.2rem", objectFit: "cover" }}
+          />
         </SwiperSlide>
       </Swiper>
     </div>

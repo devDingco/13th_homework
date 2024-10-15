@@ -2,20 +2,22 @@
 
 import { usePathname } from "next/navigation";
 import LayoutBanner from "./banner";
-import LayoutNavigation from "./navigation";
+// import LayoutNavigation from "./navigation";
 
 interface ILayout {
   children: React.ReactNode;
 }
 
-const HIDDEN_BANNER = ["/boards/new"];
+const SHOW_BANNER = ["/", "/boards", "/boards/new"];
+// const HIDDEN_NAVIGATION = ["/boards/new", "/boards"];
 
 export default function Layout({ children }: ILayout) {
   const pathname = usePathname();
+  console.log(pathname);
   return (
     <>
-      {!HIDDEN_BANNER.includes(pathname) && <LayoutBanner />}
-      <LayoutNavigation />
+      {SHOW_BANNER.includes(pathname) && <LayoutBanner />}
+      {/* {!HIDDEN_NAVIGATION.includes(pathname) && <LayoutNavigation />} */}
       <div>{children}</div>
     </>
   );

@@ -1,8 +1,8 @@
-import ApolloSetting from "@/commons/settings/06-02-apollo-setting";
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Layout from "@/commons/layout";
+import ApolloSetting from "@/commons/settings/apollo-setting";
 
 const pretendard = localFont({
   src: "./fonts/Pretendard-Regular.woff2",
@@ -21,14 +21,11 @@ interface IProps {
 
 export default function RootLayout({ children }: IProps) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${pretendard.variable}`}>
-        {/* 헤더 */}
-        {/* 내용 */}
         <ApolloSetting>
           <Layout>{children}</Layout>
         </ApolloSetting>
-        {/* 푸터 */}
       </body>
     </html>
   );
