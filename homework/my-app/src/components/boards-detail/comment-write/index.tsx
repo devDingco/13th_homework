@@ -1,11 +1,21 @@
 import styles from "./style.module.css";
-import { useMutation, useQuery } from "@apollo/client";
-import { SetStateAction, useState } from "react";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { SetStateAction, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from "./queries";
 import { Flex, Rate } from "antd";
 
-export default function CommentPage() {
+interface ICommentWriteProps {
+  isEdit: boolean;
+  commentId: string;
+  setIsEdit: (value: boolean) => void;
+}
+
+export default function CommentPage({
+  isEdit,
+  commentId,
+  setIsEdit,
+}: ICommentWriteProps) {
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -15,14 +25,26 @@ export default function CommentPage() {
   const params = useParams();
   const boardId = params.boardId;
 
-  // 쿼리에서 boardId 변수를 사용하여 데이터 조회
   const { data, refetch } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId },
   });
 
+  useEffect(() => {
+    if (isEdit && data) {
+      const existingComment = data.fetchBoardComments.find(
+        (comment: { _id: string }) => comment._id === commentId
+      );
+      if (existingComment) {
+        setWriter(existingComment.writer);
+        setContents(existingComment.contents);
+        setRating(existingComment.rating);
+      }
+    }
+  }, [isEdit, data, commentId]);
+
   const commentSubmit = async () => {
     try {
-      const result = await createBoardComment({
+      await createBoardComment({
         variables: {
           boardId,
           writer,
@@ -35,9 +57,11 @@ export default function CommentPage() {
       setPassword("");
       setContents("");
 
-      refetch();
+      console.log("댓글 등록 후 refetch 호출");
+      await refetch();
     } catch (error) {
       console.error("Error creating comment:", error);
+      alert("댓글 등록 중 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -45,11 +69,62 @@ export default function CommentPage() {
     setRating(value);
   };
 
+  const UPDATE_BOARD_COMMENT = gql`
+    mutation updateBoardComment(
+      $updateBoardCommentInput: UpdateBoardCommentInput!
+      $password: String!
+      $boardCommentId: ID!
+    ) {
+      updateBoardComment(
+        updateBoardCommentInput: $updateBoardCommentInput
+        password: $password
+        boardCommentId: $boardCommentId
+      ) {
+        _id
+        contents
+        rating
+      }
+    }
+  `;
+
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+
+  const updateComment = async () => {
+    try {
+      const result = await updateBoardComment({
+        variables: {
+          boardCommentId: commentId,
+          password,
+          updateBoardCommentInput: {
+            contents,
+            rating,
+          },
+        },
+      });
+
+      console.log("댓글 수정 후 refetch 호출");
+      await refetch();
+      setIsEdit(false);
+    } catch (error: any) {
+      console.error("Error updating comment:", error);
+      if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+        const errorMessage = error.graphQLErrors[0].message;
+        alert(`댓글 수정 중 오류가 발생했습니다: ${errorMessage}`);
+      } else {
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.commentContainer}>
-        <div className={styles.title}>Add comment</div>
-        <div className={styles.titil_sm}>Comment</div>
+        {!isEdit && (
+          <>
+            <div className={styles.title}>Add comment</div>
+            <div className={styles.titil_sm}>Comment</div>
+          </>
+        )}
         <div className={styles.rating}>
           <Flex gap="middle" vertical>
             <Rate onChange={handleRatingChange} value={rating} />
@@ -74,8 +149,11 @@ export default function CommentPage() {
           value={contents}
           onChange={(e) => setContents(e.target.value)}
         ></textarea>
-        <button className={styles.commentUpload} onClick={commentSubmit}>
-          댓글 등록
+        <button
+          className={styles.commentUpload}
+          onClick={isEdit ? updateComment : commentSubmit}
+        >
+          {isEdit ? "댓글 수정" : "댓글 등록"}
         </button>
       </div>
     </div>
