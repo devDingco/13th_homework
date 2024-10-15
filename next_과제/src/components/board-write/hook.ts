@@ -1,8 +1,4 @@
-import {
-  IeditVariables,
-  IformList,
-  // IformResister,
-} from "@/components/board-write/types";
+import { IformList } from "@/components/board-write/types";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
@@ -15,6 +11,7 @@ import {
   FetchBoardDocument,
   UpdateBoardDocument,
   // UploadFileDocument,
+  MutationUpdateBoardArgs,
   FetchBoardsListDocument,
 } from "@/commons/graphql/graphql";
 
@@ -30,19 +27,6 @@ export const useBoardWrite = (formType: string) => {
       content: `${message}`,
     });
   };
-
-  // const prompt = (message: string) => {
-  //   Modal.confirm({
-  //     title: "비밀번호 확인",
-  //     content: `${message}`,
-  //     onOk() {
-  //       console.log("OK");
-  //     },
-  //     onCancel() {
-  //       console.log("Cancel");
-  //     },
-  //   });
-  // };
 
   const modalControl = ({ type }: { type: string }) => {
     setIsModalOpen((isOpen) => !isOpen);
@@ -107,7 +91,7 @@ export const useBoardWrite = (formType: string) => {
         const writeContentsData = getValues("writeContents"); // useForm의 writeTitle 데이터를 가져옴
 
         // 수정된 내용이 있는 경우에만 데이터 보내도록 처리
-        const editVariables: IeditVariables = {
+        const editVariables: MutationUpdateBoardArgs = {
           updateBoardInput: {},
           boardId: params.boardId,
           password: promptPassword,

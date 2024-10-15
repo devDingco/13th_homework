@@ -61,24 +61,7 @@ export default function BoardWrite(props: IboardFormProps) {
                 control={control}
                 {...(formType === "edit" && { readOnly: true })}
               />
-              {/* <Controller
-                name="writeName"
-                control={control}
-                rules={formResister.writeName}
-                defaultValue={data?.fetchBoard.writer || ""}
-                render={({ field }) => (
-                  <Input
-                    id="writeName"
-                    title="작성자"
-                    required
-                    placeholder="작성자 명을 입력해 주세요."
-                    type="text"
-                    errormessage={errors?.writeName?.message}
-                    {...(formType === "edit" && { readOnly: true })}
-                    {...field}
-                  />
-                )} 
-              /> */}
+
               <Input
                 id="writePassword"
                 title="비밀번호"
@@ -90,24 +73,6 @@ export default function BoardWrite(props: IboardFormProps) {
                 control={control}
                 {...(formType === "edit" && { readOnly: true })}
               />
-              {/* <Controller
-                name="writePassword"
-                control={control}
-                rules={formResister.writePassword}
-                defaultValue={formType === "edit" ? "01234567" : ""}
-                render={({ field }) => (
-                  <Input
-                    id="writePassword"
-                    title="비밀번호"
-                    required
-                    placeholder="비밀번호를 입력해 주세요."
-                    type="password"
-                    errormessage={errors?.writePassword?.message}
-                    {...(formType === "edit" && { readOnly: true })}
-                    {...field}
-                  />
-                )}
-              /> */}
             </>
           )}
         </div>
@@ -126,23 +91,6 @@ export default function BoardWrite(props: IboardFormProps) {
               defaultValue={data?.fetchBoard.title || ""}
               control={control}
             />
-            {/* <Controller
-              name="writeTitle"
-              control={control}
-              rules={formResister.writeTitle}
-              defaultValue={data?.fetchBoard.title || ""}
-              render={({ field }) => (
-                <Input
-                  id="writeTitle"
-                  title="제목"
-                  required
-                  placeholder="제목을 입력해 주세요."
-                  type="text"
-                  errormessage={errors?.writeTitle?.message}
-                  {...field}
-                />
-              )}
-            /> */}
             <hr className="my-10" />
             <Controller
               name="writeContents"
@@ -183,22 +131,6 @@ export default function BoardWrite(props: IboardFormProps) {
                 defaultValue={data?.fetchBoard.boardAddress?.zipcode || ""}
                 control={control}
               />
-              // <Controller
-              //   name="writeAddressPost"
-              //   control={control}
-              //   rules={formResister.writeAddressPost}
-              //   defaultValue={data?.fetchBoard.boardAddress?.zipcode || ""}
-              //   render={({ field }) => (
-              //     <Input
-              //       id="writeAddressPost"
-              //       title="주소"
-              //       placeholder="01234"
-              //       type="text"
-              //       errormessage={errors?.writeAddressPost?.message}
-              //       {...field}
-              //     />
-              //   )}
-              // />
             )}
             <PostSearchPopBtn
               setaddress={(field, value) => setValue("writeAddress", value)}
@@ -219,21 +151,6 @@ export default function BoardWrite(props: IboardFormProps) {
                 defaultValue={data?.fetchBoard.boardAddress?.address || ""}
                 control={control}
               />
-              {/* <Controller
-                name="writeAddress"
-                control={control}
-                rules={formResister.writeAddress}
-                defaultValue={data?.fetchBoard.boardAddress?.address || ""}
-                render={({ field }) => (
-                  <Input
-                    id="writeAddress"
-                    placeholder="주소"
-                    type="text"
-                    errormessage={errors?.writeAddress?.message}
-                    {...field}
-                  />
-                )}
-              /> */}
 
               <Input
                 id="writeAddressDetail"
@@ -245,24 +162,6 @@ export default function BoardWrite(props: IboardFormProps) {
                 }
                 control={control}
               />
-
-              {/* <Controller
-                name="writeAddressDetail"
-                control={control}
-                rules={formResister.writeAddressDetail}
-                defaultValue={
-                  data?.fetchBoard.boardAddress?.addressDetail || ""
-                }
-                render={({ field }) => (
-                  <Input
-                    id="writeAddressDetail"
-                    placeholder="상세 주소를 입력해주세요"
-                    type="text"
-                    errormessage={errors?.writeAddressDetail?.message}
-                    {...field}
-                  />
-                )}
-              /> */}
             </>
           )}
         </div>
@@ -279,25 +178,7 @@ export default function BoardWrite(props: IboardFormProps) {
               defaultValue={data?.fetchBoard.youtubeUrl || ""}
               control={control}
             />
-            {/* <Controller
-              name="youtubeUrl"
-              control={control}
-              rules={formResister.youtubeUrl}
-              defaultValue={data?.fetchBoard.youtubeUrl || ""}
-              render={({ field }) => (
-                <Input
-                  id="youtubeUrl"
-                  title="유투브 링크"
-                  placeholder="링크를 입력해 주세요."
-                  type="url"
-                  errormessage={errors?.youtubeUrl?.message}
-                  {...field}
-                />
-              )}
-            /> */}
-
             <hr className="my-10" />
-
             <Controller
               name="imgFiles"
               control={control}
