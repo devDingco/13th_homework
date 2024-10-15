@@ -1,35 +1,47 @@
 'use client';
 
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 import Button from '../form/Button';
 import s from './AddPostsForm.module.css';
-import { useMutation, gql, ApolloError } from '@apollo/client';
+import { useMutation, ApolloError } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
 } from '@/app/_commons/graphql/graphql';
+import useModalStore from '@/app/_store/useModalStore';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+import { CREATE_BOARD } from '@/app/_api/board/Mutation';
 
 export default function PostsForm({
   type,
   contents,
   title,
   writer,
+  youtubeUrl,
+  boardAddress,
 }: PostFormType) {
   const routes = useRouter();
   const params = useParams();
 
+  // ^state
   const [postData, setPostData] = useState<PostsType>({
     username: writer || '',
     userpw: writer ? '임시비밀번호' : '',
     userTitle: title || '',
     usercontent: contents || '',
-    userAdressNum: '',
-    userAdress: '',
-    userAdressDetail: '',
-    youtubeLink: '',
+    userAddressNum: boardAddress?.zipcode || '',
+    userAddress: boardAddress?.address || '',
+    userAddressDetail: boardAddress?.addressDetail || '',
+    youtubeLink: youtubeUrl || '',
   });
 
   const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
@@ -40,10 +52,14 @@ export default function PostsForm({
   });
 
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+  const addressInfo = useRef<any>();
+  const { showModal, closeModal } = useModalStore();
 
-  const [createBoard] = useMutation(CreateBoardDocument);
+  // ?fetch
+  const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UpdateBoardDocument);
 
+  // *functions
   const onPostFormChange = (
     name: string,
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
@@ -56,7 +72,34 @@ export default function PostsForm({
     });
   };
 
-  const onAdressNumButtonClick = () => {};
+  const onAdressNumButtonClick = () => {
+    addressInfo.current = null;
+    showModal(
+      'CONFIRM',
+      '우편번호 모달',
+      <DaumPostcodeEmbed
+        onComplete={(result) => {
+          console.log('왜 다시 안됨?');
+          addressInfo.current = result;
+          closeModal();
+        }}
+        onClose={() => {
+          closeModal();
+        }}
+      />,
+    )
+      .then(() => {
+        if (addressInfo.current) {
+          setPostData((prev) => ({
+            ...prev,
+            userAddressNum: addressInfo.current.zonecode,
+            userAddress: addressInfo.current.address,
+          }));
+        }
+      })
+      .catch(() => {});
+    addressInfo.current = '';
+  };
 
   const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,23 +112,51 @@ export default function PostsForm({
               password: postData.userpw,
               title: postData.userTitle,
               contents: postData.usercontent,
+              youtubeUrl: postData.youtubeLink,
+              boardAddress: {
+                zipcode: postData.userAddressNum,
+                address: postData.userAddress,
+                addressDetail: postData.userAddressDetail,
+              },
             },
           },
         });
-        routes.push(`/boards/${data?.createBoard._id}`);
+
+        showModal('CONFIRM', '추가 모달', '새로운 게시글을 추가하시겠습니까?')
+          .then((result: string) => {
+            result && routes.push(`/boards/${data?.createBoard._id}`);
+          })
+          .catch(() => {
+            console.log('입력 취소됨');
+          });
       } else if (type === 'EDIT') {
-        const newPw = prompt('비밀번호를 입력하세요');
-        const { data } = await updateBoard({
-          variables: {
-            updateBoardInput: {
-              title: postData.userTitle,
-              contents: postData.usercontent,
-            },
-            password: newPw,
-            boardId: params.postId.toString(),
-          },
-        });
-        routes.push(`/boards/${params.postId}`);
+        showModal(
+          'PROMPT',
+          '수정 모달',
+          '게시글을 수정하시려면 비밀번호를 입력해주세요',
+        )
+          .then(async (result: string | boolean) => {
+            await updateBoard({
+              variables: {
+                updateBoardInput: {
+                  title: postData.userTitle,
+                  contents: postData.usercontent,
+                  youtubeUrl: postData.youtubeLink,
+                  boardAddress: {
+                    zipcode: postData.userAddressNum,
+                    address: postData.userAddress,
+                    addressDetail: postData.userAddressDetail,
+                  },
+                },
+                password: result.toString(),
+                boardId: params.postId.toString(),
+              },
+            });
+            routes.push(`/boards/${params.postId}`);
+          })
+          .catch(() => {
+            console.log('입력 취소됨');
+          });
       }
     } catch (err: unknown) {
       if (err instanceof ApolloError) {
@@ -99,6 +170,7 @@ export default function PostsForm({
     }
   };
 
+  // !useEffect
   useEffect(() => {
     const validMessage = '필수입력 사항입니다.';
     setRequiredMessage((prev) => {
@@ -165,12 +237,12 @@ export default function PostsForm({
       <div className={s.columnBox}>
         <div className={s.flexBox}>
           <Input
-            value={postData.userAdressNum}
+            value={postData.userAddressNum}
             type="text"
             maxLength={5}
             placeholder="01234"
             label="주소"
-            id="userAdressNum"
+            id="userAddressNum"
             onChangeFnc={onPostFormChange}
             size="small"
           />
@@ -182,17 +254,17 @@ export default function PostsForm({
           </Button>
         </div>
         <Input
-          value={postData.userAdress}
+          value={postData.userAddress}
           type="text"
           placeholder="주소를 입력해 주세요."
-          id="userAdress"
+          id="userAddress"
           onChangeFnc={onPostFormChange}
         />
         <Input
-          value={postData.userAdressDetail}
+          value={postData.userAddressDetail}
           type="text"
           placeholder="상세주소"
-          id="userAdressDetail"
+          id="userAddressDetail"
           onChangeFnc={onPostFormChange}
         />
       </div>

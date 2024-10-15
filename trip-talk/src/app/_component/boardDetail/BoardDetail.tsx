@@ -1,19 +1,23 @@
 import dateFormatter from '@/app/_commons/formatter/dateFormat';
 import { useQuery } from '@apollo/client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import LinkIcon from '@/../public/icons/link_icon.svg';
 import LocationIcon from '@/../public/icons/location_icon.svg';
 import MockImg1 from '@/../public/images/mockImg1.png';
 import MockImg2 from '@/../public/images/mockImg2.svg';
 import { FetchBoardDocument } from '@/app/_commons/graphql/graphql';
 import { DislikeTwoTone, LikeTwoTone } from '@ant-design/icons';
+import { FETCH_BOARD } from '@/app/_api/board/Query';
+import { Divider, Space, Tooltip } from 'antd';
+import ReactPlayer from 'react-player';
 
 export default function BoardDetail({
   style: s,
   postId,
 }: BoardDetailPropsType) {
-  const { data } = useQuery(FetchBoardDocument, {
+  const [locateHover, setLocateHover] = useState(false);
+  const { data } = useQuery(FETCH_BOARD, {
     fetchPolicy: 'no-cache',
     variables: { boardId: postId },
   });
@@ -46,16 +50,26 @@ export default function BoardDetail({
           <button>
             <Image src={LinkIcon} alt="linkIcon" width={0} height={0} />
           </button>
-          <button>
-            <Image src={LocationIcon} alt="" width={0} height={0} />
-          </button>
+          {/* <Divider orientation="left">Presets</Divider> */}
+          <Space wrap>
+            {data && (
+              <Tooltip
+                placement="topRight"
+                title={data?.fetchBoard.boardAddress.address}
+                color="#999">
+                <button>
+                  <Image src={LocationIcon} alt="" width={0} height={0} />
+                </button>
+              </Tooltip>
+            )}
+          </Space>
         </div>
         <Image src={MockImg1} alt="" width={0} height={0} />
         <p className={`${data ? '' : 'bg-[#ccc] w-[100px] h-[20px]'}`}>
           {data?.fetchBoard.contents}
         </p>
         <div className={`${s.videoBox}`}>
-          <Image src={MockImg2} alt="" width={0} height={0} />
+          {data && <ReactPlayer url={data?.fetchBoard.youtubeUrl} />}
         </div>
         <div className={`${s.flexbox} justify-center gap-6`}>
           <button>

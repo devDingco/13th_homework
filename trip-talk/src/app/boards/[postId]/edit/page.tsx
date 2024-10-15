@@ -3,7 +3,7 @@ import PostsForm from '@/app/_component/boardForm/PostsForm';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import React, { useMemo } from 'react';
-import { FETCH_BOARD } from '@/app/_api/board/getBoardData';
+import { FETCH_BOARD } from '@/app/_api/board/Query';
 
 export default function BoardEditPage() {
   const params = useParams();
@@ -13,12 +13,6 @@ export default function BoardEditPage() {
       boardId: params.postId,
     },
   });
-
-  console.log(data);
-
-  // const { contents, title, writer } = useMemo(() => {
-  //   return !loading ? data.fetchBoard : { contents: '', title: '', writer: '' };
-  // }, [data]);
 
   return (
     <>
@@ -30,6 +24,8 @@ export default function BoardEditPage() {
           contents={data?.fetchBoard.contents}
           title={data?.fetchBoard.title}
           writer={data?.fetchBoard.writer}
+          youtubeUrl={data?.fetchBoard.youtubeUrl}
+          boardAddress={data?.fetchBoard.boardAddress}
         />
       )}
     </>

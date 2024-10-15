@@ -3,9 +3,9 @@ interface PostsType {
   userpw: string;
   userTitle: string;
   usercontent: string;
-  userAdress?: string;
-  userAdressDetail?: string;
-  userAdressNum?: string;
+  userAddress?: string;
+  userAddressDetail?: string;
+  userAddressNum?: string;
   youtubeLink?: string;
 }
 

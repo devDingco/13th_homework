@@ -29,22 +29,28 @@ export default function Board({
   return (
     <div
       className={`${s.boardContainer} ${
-        title ? 'border border-solid border-[#F2F2F2]' : ''
+        createdAt ? 'border border-solid border-[#F2F2F2]' : ''
       }`}
       onClick={onClickDetail}>
       <p
-        className={`${s.boardItems} ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
+        className={`${s.boardItems} ${
+          !createdAt ? 'text-[16px]' : 'text-[14px]'
+        }`}>
         {number ?? '번호'}
       </p>
-      <p className={`grow ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
+      <p className={`grow ${!createdAt ? 'text-[16px]' : 'text-[14px]'}`}>
         {title ?? '제목'}
       </p>
       <p
-        className={`${s.boardItems} ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
+        className={`${s.boardItems} ${
+          !createdAt ? 'text-[16px]' : 'text-[14px]'
+        }`}>
         {writer ?? '작성자'}
       </p>
       <p
-        className={`${s.boardItems} ${!title ? 'text-[16px]' : 'text-[14px]'}`}>
+        className={`${s.boardItems} ${
+          !createdAt ? 'text-[16px]' : 'text-[14px]'
+        }`}>
         {(createdAt && dateFormatter(createdAt)) ?? '날짜'}
       </p>
       {onClickDelete && id ? (

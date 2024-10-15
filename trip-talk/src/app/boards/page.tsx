@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Board from '../_component/boards/Board';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
@@ -8,62 +8,45 @@ import {
   DeleteBoardDocument,
   FetchBoardsDocument,
 } from '../_commons/graphql/graphql';
-import BoardListBanner from '../_component/boards/BoardListBanner';
+import useModalStore from '../_store/useModalStore';
+import BoardsPagenation from '../_component/boards/BoardsPagenation';
+import { FETCH_BOARDS } from '../_api/board/Query';
+import BoardsListComponent from '../_component/boards/BoardsList';
 
 function BoardsList() {
-  const { data, loading, refetch } = useQuery(FetchBoardsDocument, {
+  // ^state
+  const [page, setPage] = useState(1);
+
+  // ?fetch
+  const { data, loading, refetch } = useQuery(FETCH_BOARDS, {
     fetchPolicy: 'no-cache',
-    variables: { page: 1 },
+    variables: { page },
   });
 
-  const [deleteBoard] = useMutation(DeleteBoardDocument);
-  const router = useRouter();
+  console.log(data);
 
-  const onClickDeleteBoard = async (
-    id: string,
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
-  ) => {
-    e.stopPropagation();
-
-    deleteBoard({
-      variables: { id },
-    });
-    refetch();
+  const onPageChange = (newPage: number) => {
+    setPage(newPage);
+    refetch({ page });
   };
+  // *function
 
-  const onClickDetailBoard = (id: string) => {
-    router.push(`/boards/${id}`);
-  };
-  console.log(data?.fetchBoards);
   return (
     <>
-      <div className="w-screen">
-        <BoardListBanner />
-      </div>
       <div className="p-10">
-        <div className="w-full h-full flex flex-col gap-y-3 max-w-[1280px] min-w-[680px] px-12 py-6 my-0 mx-auto rounded-2xl shadow-[0px_0px_20px_0px_#00000014]">
-          <Board />
-          {loading
-            ? '리스트 조회중...'
-            : data?.fetchBoards.map((board: BoardType, index: number) => {
-                const { _id, title, writer, createdAt } = board;
-                return (
-                  <Board
-                    key={_id}
-                    number={++index}
-                    title={title}
-                    writer={writer}
-                    createdAt={createdAt}
-                    id={_id}
-                    onClickDelete={onClickDeleteBoard}
-                    onClickDetail={() => onClickDetailBoard(_id)}
-                  />
-                );
-              })}
-        </div>
+        {loading
+          ? '리스트 조회중...'
+          : data && (
+              <BoardsListComponent data={data} page={page} refetch={refetch} />
+            )}
+        <BoardsPagenation
+          nowPage={page}
+          setPage={setPage}
+          onPageChange={onPageChange}
+          refetch={refetch}
+        />
       </div>
     </>
   );
 }
-
 export default BoardsList;

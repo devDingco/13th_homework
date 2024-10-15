@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ListIcon from '@/../public/icons/list_icon.svg';
 import EditIcon from '@/../public/icons/edit_icon.svg';
@@ -13,8 +13,6 @@ import CommentWrite from '@/app/_component/boardDetail/CommentWrite';
 
 const PostDetail = () => {
   const { postId: params } = useParams();
-  console.log(params);
-
   const router = useRouter();
 
   return (
@@ -37,5 +35,4 @@ const PostDetail = () => {
     </>
   );
 };
-
 export default PostDetail;
