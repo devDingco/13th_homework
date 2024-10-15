@@ -73,6 +73,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               defaultValue={props.isEdit ? "******" : ""}
               style={props.isEdit ? { backgroundColor: "#f2f2f2" } : { backgroundColor: "#ffffff" }}
               disabled={props.isEdit ? true : false}
+              readOnly
             ></input>
             <div className={styles.errorMsg}>{errorPw}</div>
           </div>

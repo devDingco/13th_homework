@@ -1,0 +1,18 @@
+.pagination {
+  /* background-color: red; */
+  margin-top: 15px;
+}
+.onePageNum {
+  margin: 7px;
+  font-size: 18px;
+  color: #777777;
+}
+.activePageNum {
+ font-weight: 500;
+  color: #000000;
+  border-bottom: 2px solid #000000;
+}
+.arrow {
+  margin: 0 10px;
+  color: #777777;
+}

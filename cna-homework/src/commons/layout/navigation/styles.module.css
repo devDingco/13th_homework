@@ -1,0 +1,59 @@
+.navigation {
+  /* background-color: skyblue; */
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+.navigationContent {
+  /* background-color: yellow; */
+  width: 1280px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.leftMenu {
+  width: 363px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  /* background-color: pink; */
+}
+.logoArea {
+  /* background-color: aliceblue; */
+  height: 100%;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menuArea {
+  /* background-color: azure; */
+  height: 100%;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #333333;
+}
+.rightMenu {
+  /* background-color: aqua; */
+  width: 68px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.profileArea {
+  background-color: #e4e4e4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

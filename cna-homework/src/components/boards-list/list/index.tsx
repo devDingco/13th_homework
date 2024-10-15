@@ -1,13 +1,15 @@
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useBoardList from "./hook";
+import Pagination from "../pagination";
 
 export default function BoardList() {
   const router = useRouter();
-  const { onClickDelete, data } = useBoardList();
-
+  const { onClickDelete, data, lastPage, refetch } = useBoardList();
+  // console.log('list::',data);
   
+
   return (
     <div className={styles.allContainer}>
       <div className={styles.boardContainer}>
@@ -30,7 +32,7 @@ export default function BoardList() {
               <div className={styles.contentNum}>{index + 1}</div>
               <div className={styles.contentTitle}>{el.title}</div>
               <div className={styles.contentWriter}>{el.writer}</div>
-              <div className={styles.contentDate}>{el.createdAt.slice(0, 10)}</div>
+              <div className={styles.contentDate}>{el.createdAt.slice(0,10)}</div>
               <div className={styles.iconArea}>
                 <Image
                   className={styles.deleteIcon}
@@ -45,6 +47,7 @@ export default function BoardList() {
             </div>
           ))}
         </div>
+        <Pagination lastPage={lastPage} refetch={refetch} />
       </div>
     </div>
   );

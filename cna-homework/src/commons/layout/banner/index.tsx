@@ -3,7 +3,7 @@ import Image from "next/image";
 import "swiper/css";
 import styles from "./styles.module.css";
 
-export default function SwiperComponent() {
+export default function Banner() {
   return (
     <Swiper
       spaceBetween={50}
