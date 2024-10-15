@@ -1,0 +1,97 @@
+.commentLayout {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 200px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.commentTitle {
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  gap: 8px;
+}
+
+.commentImg {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.evaluateStar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.starImg {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.part {
+  display: flex;
+  align-items: flex-start;
+  width: 640px;
+  gap: 16px;
+}
+
+.asterisk {
+  color: tomato;
+}
+
+#writer,
+#password {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 0px 16px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+#typeComment {
+  display: flex;
+  height: 144px;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+}
+
+.registDiv {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.commentRegist {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background-color: #2974e5;
+  color: #fff;
+  cursor: pointer;
+}
+
+.commentRegist:disabled {
+  background-color: #c7c7c7;
+  cursor: not-allowed;
+}
