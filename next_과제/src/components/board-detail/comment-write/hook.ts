@@ -8,20 +8,18 @@ import {
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import {
-  IcommentForm,
-  IuseCommentWriteProps,
-} from "@/components/board-detail/comment-write/types";
+import { IuseCommentWriteProps } from "@/components/board-detail/comment-write/types";
+
+import { IformList } from "@/components/board-write/types";
 
 export const useCommentWrite = (props: IuseCommentWriteProps) => {
   const { setMode, mode, commentIndex, data } = props;
   const {
-    register,
     getValues,
     setValue,
     control,
     formState: { isDirty, isValid, errors },
-  } = useForm<IcommentForm>({
+  } = useForm<IformList>({
     mode: "onChange",
   });
 
@@ -142,7 +140,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   };
 
   return {
-    register,
     textCount,
     setTextCount,
     commentNew,
@@ -156,5 +153,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     isModalOpen,
     setIsModalOpen,
     modalType,
+    data,
   };
 };
