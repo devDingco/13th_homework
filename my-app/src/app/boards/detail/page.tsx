@@ -1,6 +1,40 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 
+const image_src = {
+  profileimg: {
+    src: require("@assets/img.svg"),
+  },
+  linkimg: {
+    src: require("@assets/image2.svg"),
+  },
+  locationimg: {
+    src: require("@assets/room.svg"),
+  },
+  cheongsanimg: {
+    src: require("@assets/beach.png"),
+  },
+  neotubeimg: {
+    src: require("@assets/Frame.svg"),
+  },
+  badImage: {
+    src: require("@assets/Vector.svg"),
+    alt: "싫어요",
+  },
+  goodImage: {
+    src: require("@assets/good.svg"),
+    alt: "좋아요",
+  },
+  hamberger: {
+    src: require("@assets/footer2.svg"),
+    alt: "목록아이콘",
+  },
+  pencil: {
+    src: require("@assets/footer1.svg"),
+    alt: "수정아이콘",
+  },
+};
+
 export default function Detail() {
   return (
     <>
@@ -12,7 +46,7 @@ export default function Detail() {
         <div className={styles.헤더전체박스}>
           <div className={styles.윗줄전체박스}>
             <div className={styles.홍길동박스}>
-              <img src="/img/img.svg" alt="" />
+              <Image src={image_src.profileimg.src} alt="" />
               <div>홍길동</div>
             </div>
 
@@ -20,11 +54,12 @@ export default function Detail() {
           </div>
           <hr className={styles.hr스타일} />
           <div className={styles.아랫줄전체박스}>
-            <img src="/img/image2.svg" alt="" />
-            <img src="/img/room.svg" alt="" />
+            <Image src={image_src.linkimg.src} alt="" />
+            <Image src={image_src.locationimg.src} alt="" />
           </div>
         </div>
-        <img src="/img/beach.png" width="400px" alt="" />
+        <Image src={image_src.cheongsanimg.src} alt="" />
+        {/* width={400} height={0} */}
         <div>
           살겠노라 살겠노라. 청산에 살겠노라. <br />
           머루랑 다래를 먹고 청산에 살겠노라. <br />
@@ -59,12 +94,21 @@ export default function Detail() {
           얄리얄리 얄라셩 얄라리 얄라
         </div>
         <div className={styles.영상사진박스}>
-          <img src="/img/Frame.svg" width="822px" alt="" />
+          <Image src={image_src.neotubeimg.src} alt="" />
+          {/* width={822} */}
         </div>
         <div className={styles.푸터전체박스}>
           <div className={styles.하트전체박스}>
-            <img className={styles.왼쪽하트} src="/img/Vector.svg" alt="" />
-            <img className="오른쪽하트" src="/img/good.svg" alt="" />
+            <Image
+              className={styles.왼쪽하트}
+              src={image_src.badImage.src}
+              alt="싫어요"
+            />
+            <Image
+              className="오른쪽하트"
+              src={image_src.goodImage.src}
+              alt="좋아요"
+            />
           </div>
           <div className={styles.숫자박스}>
             <div className={styles.왼쪽24}>24</div>
@@ -73,11 +117,11 @@ export default function Detail() {
         </div>
         <div className={styles.푸터2전체박스}>
           <button className={styles.button}>
-            <img src="/img/footer2.svg" alt="" />
+            <Image src={image_src.hamberger.src} alt="목록아이콘" />
             <div>목록으로</div>
           </button>
           <button className={styles.button}>
-            <img src="/img/footer1.svg" alt="" />
+            <Image src={image_src.pencil.src} alt="수정아이콘" />
             <div>수정하기</div>
           </button>
         </div>
