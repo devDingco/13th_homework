@@ -1,16 +1,27 @@
 "use client";
+import { Exact, FetchBoardsQuery, InputMaybe } from "@/commons/gql/graphql";
 import styles from "../styles.module.css";
 import useBoard from "./hook";
+import { ApolloQueryResult } from "@apollo/client";
 
 interface IBoard {
   id: string;
   index: number;
   writer: string;
   title: string;
+  refetch: (
+    variables?:
+      | Partial<
+          Exact<{
+            page?: InputMaybe<number> | undefined;
+          }>
+        >
+      | undefined
+  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
 }
 
-const Board = ({ id, index, title, writer }: IBoard) => {
-  const { onClickBoard, onClickDelete } = useBoard(id);
+const Board = ({ id, index, title, writer, refetch }: IBoard) => {
+  const { onClickBoard, onClickDelete } = useBoard({ id, refetch });
 
   return (
     <li className={styles.board} onClick={onClickBoard}>

@@ -10,7 +10,7 @@ export default function BoardsPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <BoardsList data={boards} />
+      <BoardsList data={boards} refetch={refetch} />
       <Pagination refetch={refetch} />
     </div>
   );

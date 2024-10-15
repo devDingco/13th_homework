@@ -1,12 +1,10 @@
-import {
-  DeleteBoardDocument,
-  FetchBoardsDocument,
-} from "@/commons/gql/graphql";
+import { DeleteBoardDocument } from "@/commons/gql/graphql";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
-const useBoard = (id: string) => {
+// 계속 반복되는 타입이 존재함. 어떻게 할래?
+const useBoard = ({ id, refetch }: any) => {
   const router = useRouter();
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
@@ -20,15 +18,8 @@ const useBoard = (id: string) => {
       variables: {
         id: id,
       },
-      refetchQueries: [
-        {
-          query: FetchBoardsDocument,
-          variables: {
-            page: Number(1),
-          },
-        },
-      ],
     });
+    refetch({ page: 1 });
   };
 
   return {
