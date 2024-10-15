@@ -1,7 +1,8 @@
 "use client";
 import Input from "@/components/input";
-import { Controller } from "react-hook-form";
+// import { Controller } from "react-hook-form";
 import { useJoinPage } from "./hook";
+import { Button } from "antd";
 
 export default function JoinPage() {
   const { control } = useJoinPage();
@@ -13,54 +14,45 @@ export default function JoinPage() {
           회원가입을 위해 아래 빈칸을 모두 채워 주세요.
         </p>
         <form className="flex flex-col gap-3">
-          <Controller
+          <Input
             control={control}
-            name="email"
-            render={({ field }) => (
-              <Input
-                className="h-10"
-                title="이메일"
-                type="email"
-                required
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="name"
-            render={({ field }) => (
-              <Input
-                className="h-10"
-                title="이름"
-                type="text"
-                required
-                {...field}
-              />
-            )}
+            id="joinEmail"
+            className="h-10"
+            title="이메일"
+            type="email"
+            required
           />
 
-          <Controller
-            control={control}
-            name="password"
-            render={({ field }) => (
-              <Input
-                className="h-10"
-                title="비밀번호"
-                type="password"
-                required
-                {...field}
-              />
-            )}
-          />
           <Input
+            control={control}
+            id="joinName"
+            className="h-10"
+            title="이름"
+            type="text"
+            required
+          />
+
+          <Input
+            control={control}
+            id="joinPassword"
+            className="h-10"
+            title="비밀번호"
+            type="password"
+            required
+          />
+
+          <Input
+            id="joinPasswordConfirm"
+            control={control}
             className="h-10"
             title="비밀번호 확인"
             type="password"
             required
           />
         </form>
-        <button className="btn btn-primary text-base-100">회원가입</button>
+        <Button variant="solid" color="primary">
+          회원가입
+        </Button>
       </div>
     </>
   );
