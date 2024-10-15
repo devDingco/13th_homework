@@ -1,9 +1,7 @@
 "use client";
-// import StarCountBox from "@/components/starCountBox";
 
 import Icon from "@/components/iconFactory";
 import Input from "@/components/input";
-import TextAreaBox from "@/components/textAreaBox";
 import { IcommentWriteProps } from "@/components/board-detail/comment-write/types";
 import { useCommentWrite } from "@/components/board-detail/comment-write/hook";
 import { Rate, Button } from "antd";
@@ -11,17 +9,8 @@ import { Controller } from "react-hook-form";
 import ModalAlertBox from "@/components/ModalAlertBox";
 
 export default function CommentWrite(props: IcommentWriteProps) {
-  const {
-    title = "",
-    textMaxCount,
-    placeholder,
-    type,
-    starCountBox = true,
-    data,
-    setMode,
-    mode,
-    commentIndex,
-  } = props;
+  const { type, starCountBox, mode, setMode, commentIndex, data, title } =
+    props;
 
   const {
     commentNew,
@@ -60,7 +49,17 @@ export default function CommentWrite(props: IcommentWriteProps) {
         />
       )}
       <div className="flex justify-start gap-6 w-2/3">
-        <Controller
+        <Input
+          id="commentWriter"
+          title="작성자"
+          type="text"
+          placeholder="작성자 명을 입력해 주세요"
+          errormessage={errors?.commentWriter?.message}
+          control={control}
+          readOnly={type === "commentEdit"}
+          required
+        />
+        {/* <Controller
           name="commentWriter"
           control={control}
           rules={{
@@ -79,9 +78,23 @@ export default function CommentWrite(props: IcommentWriteProps) {
               {...field}
             />
           )}
+        /> */}
+
+        <Input
+          id="commentPassword"
+          title="비밀번호"
+          type="password"
+          required
+          placeholder={
+            type === "commentEdit"
+              ? "댓글 작성시 등록한 비밀번호를 입력해주세요"
+              : "비밀번호를 입력해 주세요"
+          }
+          errormessage={errors?.commentPassword?.message}
+          control={control}
         />
 
-        <Controller
+        {/* <Controller
           name="commentPassword"
           control={control}
           rules={{
@@ -103,10 +116,22 @@ export default function CommentWrite(props: IcommentWriteProps) {
               {...field}
             />
           )}
-        />
+        /> */}
       </div>
 
-      <Controller
+      <Input
+        id="commentContents"
+        type="textArea"
+        control={control}
+        defaultValue={type === "commentEdit" ? data?.contents : ""}
+        rows={4}
+        showCount
+        maxLength={100}
+        errormessage={errors?.commentContents?.message}
+        placeholder="댓글을 입력해 주세요"
+      />
+
+      {/* <Controller
         name="commentContents"
         control={control}
         rules={{
@@ -127,7 +152,7 @@ export default function CommentWrite(props: IcommentWriteProps) {
             {...field}
           />
         )}
-      />
+      /> */}
 
       {type === "commentEdit" ? (
         <div className="flex justify-end gap-3">
