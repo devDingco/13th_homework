@@ -3,15 +3,17 @@
 import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
 import { useEffect, useRef, useState } from 'react';
 
+import { IBoardComment } from '@/models/comment.type';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
-export function useBoardCommentForm() {
+export function useBoardCommentForm(comment?: IBoardComment) {
 	const param = useParams();
 
-	const [rating, setRating] = useState<number>(0);
+	const [rating, setRating] = useState<number>(comment ? comment.rating : 0);
+
 	const [length, setLength] = useState<number>(0);
 
 	const [state, formAction] = useFormState(createBoardCommentAction, {

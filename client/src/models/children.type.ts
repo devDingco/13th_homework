@@ -1,5 +1,7 @@
 /** @format */
 
+import { IBoardComment } from './comment.type';
+
 export interface IProps {
 	children: React.ReactNode;
 }
@@ -41,4 +43,9 @@ export interface ISearchParamsProps {
 
 export interface IDeleteProps {
 	commentId: string;
+}
+
+export interface ICommentEditProps {
+	comment?: IBoardComment;
+	setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }

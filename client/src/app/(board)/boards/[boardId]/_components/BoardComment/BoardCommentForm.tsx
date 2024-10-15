@@ -7,12 +7,13 @@ import BoardCommentTextareaWrapper from './BoardCommentTextareaWrapper';
 import CommonButton from '../../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { ETitle } from '@/models/board.type';
+import { ICommentEditProps } from '@/models/children.type';
 import NewInputContainer from '../../../new/_components/NewInputContainer';
 import { useBoardCommentForm } from '@/hooks/useBoardCommentForm';
 
-export default function BoardCommentForm() {
+export default function BoardCommentForm({ comment, setIsEdit }: ICommentEditProps) {
 	const { length, setLength, state, formAction, formRef, rating, setRating } =
-		useBoardCommentForm();
+		useBoardCommentForm(comment);
 
 	return (
 		<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
@@ -25,7 +26,8 @@ export default function BoardCommentForm() {
 				<div className="prose-me_16_24 text-red-500">{state?.error}</div>
 			</div>
 			<BoardCommentTextareaWrapper length={length} setLength={setLength} />
-			<div className="flex justify-end">
+			<div className="flex justify-end gap-4">
+				{comment && <CommonButton title={EButtonTitle.Cancel} setIsEdit={setIsEdit} />}
 				<CommonButton title={EButtonTitle.Comment} />
 			</div>
 		</form>

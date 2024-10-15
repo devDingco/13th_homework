@@ -3,11 +3,13 @@
 import BoardCommentDeleteImage from './BoardCommentDeleteImage';
 import BoardCommentEditImage from './BoardCommentEditImage';
 import BoardCommentStar from './BoardCommentStar';
+import { IBoardComment } from '@/models/comment.type';
+import { ICommentEditProps } from '@/models/children.type';
 import Image from 'next/image';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 
-export default function BoardComment({ comment, setIsEdit }) {
-	const { _id, createdAt, author, content, rating } = comment;
+export default function BoardComment({ comment, setIsEdit }: ICommentEditProps) {
+	const { _id, createdAt, author, content, rating } = comment as IBoardComment;
 
 	const changeDate = changeDateToISO(createdAt);
 
