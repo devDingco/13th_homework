@@ -1,0 +1,79 @@
+.board_box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.board_box:hover {
+  cursor: pointer;
+}
+
+.board_box > div:nth-child(1) {
+  display: flex;
+  width: 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: #919191;
+}
+
+.board_box > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+
+  color: #1c1c1c;
+  font-weight: 500;
+}
+
+.board_box > div:nth-child(3) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: #333;
+}
+
+.board_box > div:nth-child(4) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: #919191;
+}
+
+.delete_btn_box_hover {
+  position: absolute;
+  display: block;
+  right: 8px;
+  /* 세로 가운데 정렬 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.delete_btn_box {
+  position: absolute;
+  display: none;
+  right: 8px;
+  /* 세로 가운데 정렬 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.delete_btn {
+  display: block;
+}
