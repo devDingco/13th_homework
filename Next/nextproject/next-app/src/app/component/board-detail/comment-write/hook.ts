@@ -35,7 +35,7 @@ export const UseCommentWrite = () => {
 
   const onclicksubmit = async () => {
     try {
-      const result = await submit({
+      await submit({
         variables: {
           boardId: params.boardId,
           createBoardCommentInput: {
@@ -45,9 +45,16 @@ export const UseCommentWrite = () => {
             rating: value,
           },
         },
-        refetchQueries: [{ query: FETCH_COMMENTS }],
+        refetchQueries: [
+          {
+            query: FETCH_COMMENTS,
+            variables: {
+              boardId: params.boardId,
+              page: 1,
+            },
+          },
+        ],
       });
-      console.log(result);
     } catch {
       alert("에러");
     }

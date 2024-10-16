@@ -11,7 +11,7 @@ export const UseDetailWrite = () => {
       myboardId: params.boardId,
     },
   });
-
+  console.log(data);
   const onModify = () => {
     router.push(`../../routes/boards/${data?.fetchBoard._id}/edit`);
   };

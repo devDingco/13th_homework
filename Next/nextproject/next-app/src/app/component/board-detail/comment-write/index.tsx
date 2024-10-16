@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import { UseCommentWrite } from "./hook";
-import CommentListPage from "../comment-list/index";
+import CommentListPage from "../comment-list";
 import { Rate } from "antd";
 export default function CommentPage() {
   const {
