@@ -63,7 +63,8 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
               onShowSizeChange: (current, size) => {
                 console.log(current, size);
               },
-              onChange: (page, pageSize) => {
+              onChange: (page) => {
+                //pageSize
                 pageChangeHandler(page);
               },
               showSizeChanger: false,
@@ -71,7 +72,7 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
             }}
             tableLayout="auto"
             loading={data === undefined}
-          ></Table>
+          />
         </div>
       </div>
     </>
