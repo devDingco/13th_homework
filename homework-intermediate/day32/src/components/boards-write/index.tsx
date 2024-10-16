@@ -2,9 +2,9 @@
 import styles from './styles.module.css';
 import Image from 'next/image';
 import useBoardWrite from './hook';
-import { IBoardWriteProps } from './types';
 import { Modal } from 'antd';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import { FetchBoardQuery } from '@/commons/graphql/graphql';
 
 const IMAGE_SRC = {
   addImage: {
@@ -13,7 +13,14 @@ const IMAGE_SRC = {
   },
 };
 
+export interface IBoardWriteProps {
+  isEdit: boolean;
+  data?: FetchBoardQuery;
+}
+
 export default function BoardWrite(props: IBoardWriteProps) {
+  console.log('🚀 ~ BoardWrite ~ props:', props);
+
   const {
     name,
     password,
@@ -40,7 +47,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onClickUpdate,
     onToggleZipcodeModal,
     onZipcodeModalComplete,
-  } = useBoardWrite(props.data!);
+  } = useBoardWrite(props);
 
   return (
     <div className={styles.layout}>
@@ -57,7 +64,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               </div>
               <input
                 type="text"
-                value={name}
+                defaultValue={name}
                 placeholder={'작성자 명을 입력해 주세요.'}
                 className={
                   props.isEdit
@@ -76,7 +83,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               </div>
               <input
                 type="password"
-                value={password}
+                defaultValue={password}
                 placeholder={'비밀번호를 입력해 주세요.'}
                 className={
                   props.isEdit
@@ -101,7 +108,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           <input
             type="text"
             className={styles['enroll-input']}
-            value={title}
+            defaultValue={title}
             placeholder="제목을 입력해 주세요."
             onChange={onChangeTitle}
           />
@@ -114,12 +121,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
             <div className={styles['enroll-required-indicator']}> *</div>
           </div>
           <textarea
-            value={content}
+            defaultValue={content}
             placeholder="내용을 입력해 주세요."
             className={`${styles['enroll-input']} ${styles['enroll-textarea']} resize-none`}
             onChange={onChangeContent}
             onClick={props.isEdit ? onClickContent : undefined}
-            defaultValue={props.data?.fetchBoard.contents}
           ></textarea>
           <div className={styles['error-msg']}>{contentError}</div>
         </div>
@@ -132,7 +138,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               type="number"
               className={styles['zipcode-input']}
               placeholder="12345"
-              value={zipcode}
+              defaultValue={zipcode}
               readOnly
             />
             <button
@@ -158,14 +164,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
             placeholder="주소를 입력해주세요."
             className={styles['enroll-input']}
             type="text"
-            value={address}
+            defaultValue={address}
             readOnly
           />
           <input
             placeholder="상세주소"
             className={styles['enroll-input']}
             type="text"
-            value={detailedAddress}
+            defaultValue={detailedAddress}
             onChange={onChangeDetailedAddress}
           />
         </div>
@@ -177,7 +183,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           <input
             className={styles['enroll-input']}
             placeholder="링크를 입력해 주세요."
-            value={youtubeUrl}
+            defaultValue={youtubeUrl}
             onChange={onChangeYoutubeUrl}
           />
         </div>

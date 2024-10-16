@@ -1,61 +1,67 @@
-import { FetchBoardCommentsQuery } from '@/commons/graphql/graphql';
-import { Flex, Rate } from 'antd';
-import Image from 'next/image';
+import { FetchBoardCommentsDocument } from '@/commons/graphql/graphql';
+import { useQuery } from '@apollo/client';
 
-const IMAGE_SRC = {
-  chatImage: {
-    src: require('@/assets/chat.png'),
-    alt: '댓글입력창아이콘',
-  },
-  starImage: {
-    src: require('@/assets/star.png'),
-    alt: '별점아이콘',
-  },
-  profileImage: {
-    src: require('@/assets/profile.png'),
-    alt: '기본프로필아이콘',
-  },
-} as const;
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import CommentItem from '../comment-list-item';
 
-interface ICommentListProps {
-  data: FetchBoardCommentsQuery;
-}
+export default function CommentList() {
+  const params = useParams();
+  const [hasMore, setHasMore] = useState(true);
+  const { data: dataCommentList, fetchMore } = useQuery(
+    FetchBoardCommentsDocument,
+    {
+      variables: {
+        boardId: String(params.boardId),
+      },
+    }
+  );
+  console.log('🚀 ~ CommentList ~ dataCommentList:', dataCommentList);
 
-export default function CommentList({ data }: ICommentListProps) {
+  const onNext = () => {
+    if (!dataCommentList?.fetchBoardComments.length) {
+      return;
+    }
+    fetchMore({
+      variables: {
+        page: Math.ceil(dataCommentList?.fetchBoardComments.length / 10) + 1,
+        boardId: params.boardId as string,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments.length) {
+          setHasMore(false);
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        }
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
   return (
-    <div className="flex flex-col items-center gap-10 w-full">
-      {data?.fetchBoardComments.length ? (
-        data?.fetchBoardComments.map((el) => (
-          <div key={el._id} className="flex flex-col gap-5 w-full">
-            <div className="flex gap-3">
-              <Image
-                src={IMAGE_SRC.profileImage.src}
-                alt={IMAGE_SRC.profileImage.alt}
-              ></Image>
-              <div>{el.writer}</div>
-              {/* <div className="flex">
-                {new Array(5).fill(null).map((a, idx) => (
-                  <Image
-                    src={IMAGE_SRC.starImage.src}
-                    alt={IMAGE_SRC.starImage.alt}
-                  />
-                ))}
-              </div> */}
-              <Flex gap="middle">
-                <Rate disabled value={el.rating} />
-              </Flex>
-            </div>
-            <div>{el.contents}</div>
-            <div>
-              {new Date(el.createdAt).toLocaleString('ko-KR', {
-                timeZone: 'Asia/Seoul',
-              })}
-            </div>
-            <hr className="my-10" />
-          </div>
-        ))
+    <div className=" w-full">
+      {dataCommentList?.fetchBoardComments.length ? (
+        <InfiniteScroll
+          next={onNext}
+          hasMore={hasMore}
+          loader={<div>댓글 불러오기..</div>}
+          dataLength={dataCommentList?.fetchBoardComments.length ?? 0}
+          className="flex flex-col items-center gap-10"
+        >
+          {dataCommentList?.fetchBoardComments.map((el) => (
+            <CommentItem commentItem={el} />
+          ))}
+        </InfiniteScroll>
       ) : (
-        <div>등록된 댓글이 없습니다.</div>
+        <div>댓글이 없습니다.</div>
       )}
     </div>
   );

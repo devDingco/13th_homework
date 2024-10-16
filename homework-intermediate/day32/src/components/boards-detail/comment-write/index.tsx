@@ -1,8 +1,17 @@
 'use client';
 
-import { Flex, Rate } from 'antd';
+import { Flex, Modal, Rate } from 'antd';
 import Image from 'next/image';
 import useCommentWrite from './hook';
+import { useMutation } from '@apollo/client';
+import {
+  BoardComment,
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from '@/commons/graphql/graphql';
+import { useParams } from 'next/navigation';
+import { UpdateBoardCommentDocument } from '@/commons/graphql/graphql';
+import { UpdateBoardCommentMutationVariables } from '@/commons/graphql/graphql';
 
 const IMAGE_SRC = {
   chatImage: {
@@ -19,21 +28,91 @@ const IMAGE_SRC = {
   },
 } as const;
 
-// 별점 Rating
-const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+export type CommentWriteProps = {
+  isEdit?: boolean;
+  commentItem?: BoardComment;
+  onToggleEdit?: () => void;
+};
 
-export default function CommentWrite() {
+export default function CommentWrite(props: CommentWriteProps) {
+  const params = useParams();
   const {
     writer,
     password,
     content,
     rating,
+    setWriter,
+    setPassword,
+    setContent,
     setRating,
     onChangeWriter,
     onChangePassword,
     onChangeContent,
-    onClickSubmit,
-  } = useCommentWrite();
+  } = useCommentWrite(props);
+
+  const [createComment] = useMutation(CreateBoardCommentDocument);
+  const onClickSubmit = async () => {
+    if (!writer || !password) {
+      alert('작성자와 비밀번호를 올바르게 입력해 주십쇼');
+      return;
+    }
+    const { data } = await createComment({
+      variables: {
+        createBoardCommentInput: {
+          writer: writer,
+          password: password,
+          contents: content,
+          rating: rating,
+        },
+        boardId: String(params.boardId),
+      },
+      refetchQueries: [
+        {
+          query: FetchBoardCommentsDocument,
+          variables: {
+            boardId: String(params.boardId),
+          },
+        },
+      ],
+    });
+    alert('댓글이 등록되었습니다!');
+    setWriter('');
+    setPassword('');
+    setContent('');
+  };
+
+  const [updateComment] = useMutation(UpdateBoardCommentDocument);
+  const onClickUpdate = async () => {
+    if (!props.commentItem || !props.onToggleEdit) {
+      return;
+    }
+
+    const myVariables: UpdateBoardCommentMutationVariables = {
+      boardCommentId: props.commentItem._id,
+      password: password,
+      updateBoardCommentInput: {},
+    };
+    if (content) myVariables.updateBoardCommentInput.contents = content;
+
+    try {
+      const result = await updateComment({
+        variables: myVariables,
+      });
+      if (result.errors) throw new Error('사용자 비밀번호 입력값 불일치');
+    } catch (error) {
+      Modal.error({
+        content: '비밀번호가 틀렸습니다.',
+      });
+    }
+    const result = await updateComment({
+      variables: myVariables,
+    });
+    console.log('🚀 ~ onClickUpdate ~ result:', result);
+    Modal.success({
+      content: '수정이 완료되었습니다.',
+    });
+    props.onToggleEdit();
+  };
 
   return (
     <div className="flex flex-col gap-6 w-full">
@@ -43,9 +122,6 @@ export default function CommentWrite() {
       </div>
 
       <div className="flex">
-        {/* {new Array(5).fill(null).map((a, idx) => (
-          <Image src={IMAGE_SRC.starImage.src} alt={IMAGE_SRC.starImage.alt} />
-        ))} */}
         <Flex gap="middle">
           <Rate onChange={setRating} value={rating} />
         </Flex>
@@ -92,9 +168,20 @@ export default function CommentWrite() {
           onChange={onChangeContent}
         ></textarea>
       </div>
-      <div className="flex justify-end">
-        <button className="p-4 border-2 rounded-lg" onClick={onClickSubmit}>
-          댓글 등록
+      <div className="flex justify-end gap-4">
+        {props.isEdit && (
+          <button
+            className="p-4 border-2 rounded-lg bg-black text-white"
+            onClick={props.onToggleEdit}
+          >
+            취소
+          </button>
+        )}
+        <button
+          className="p-4 border-2 rounded-lg"
+          onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+        >
+          {props.isEdit ? `댓글 수정` : `댓글 등록`}
         </button>
       </div>
     </div>

@@ -7,10 +7,11 @@ import useBoardsDeatil from './hooks';
 import CommentWrite from '../comment-write';
 import CommentList from '../comment-list';
 import { useQuery } from '@apollo/client';
-import { FetchBoardCommentsDocument } from '@/commons/graphql/graphql';
 import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import YouTube from 'react-youtube';
+import { FETCH_BOARD_COMMENTS } from '../comment-list/queries';
+import { useState } from 'react';
 
 const IMAGE_SRC = {
   profileImage: {
@@ -53,11 +54,34 @@ const IMAGE_SRC = {
 
 export default function BaordDeatil() {
   const { boardId, data } = useBoardsDeatil();
-  const { data: commentList } = useQuery(FetchBoardCommentsDocument, {
-    variables: {
-      boardId: String(boardId),
-    },
+  const { data: dataCommentList, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: boardId },
   });
+  const [hasMore, setHasMore] = useState(true);
+  const onNext = () => {
+    if (!dataCommentList?.fetchBoardComments.length) {
+      return;
+    }
+
+    fetchMore({
+      variables: {
+        page: Math.ceil(dataCommentList?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments.length) {
+          setHasMore(false);
+          return;
+        }
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   return (
     <div className={styles.detailLayout}>
@@ -155,8 +179,6 @@ export default function BaordDeatil() {
               </Link>
             </div>
           </div>
-          <CommentWrite />
-          <CommentList data={commentList!} />
         </div>
       </div>
     </div>
