@@ -9,7 +9,7 @@ import { Button, Image, Upload } from "antd";
 import { useBoardWrite } from "@/components/board-write/hook";
 import { IboardFormProps } from "@/components/board-write/types";
 import { Controller } from "react-hook-form";
-// import { redirect } from "next/navigation";
+
 
 export default function BoardWrite(props: IboardFormProps) {
   const { title, formType } = props;
@@ -19,10 +19,8 @@ export default function BoardWrite(props: IboardFormProps) {
     onBoardEdit,
     onBoardNew,
     errors,
-    // formResister,
     control,
     setValue,
-    // Controller,
     router,
     params,
     fileList,
