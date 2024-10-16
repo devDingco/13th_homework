@@ -7,6 +7,7 @@ import { dateViewSet } from "@/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/detail/hook";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import YoutubeBox from "@/components/youtubeBox";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -79,20 +80,25 @@ export default function BoardDetail() {
         ></div>
         {detailData?.youtubeUrl && (
           <div className="bg-gray-200 py-6">
-            <div className="videoContainer max-w-4xl mx-auto">
+            <YoutubeBox videoUrl={detailData?.youtubeUrl} />
+            {/* <div className="videoContainer max-w-4xl mx-auto">
               <iframe
                 title="YouTube video player"
                 src={
                   detailData?.youtubeUrl.includes(".be/") ||
                   detailData?.youtubeUrl.includes("watch?v=")
-                    ? `https://www.youtube.com/embed/${
-                        detailData?.youtubeUrl.split(".be/")[1] ||
-                        detailData?.youtubeUrl.split("watch?v=")[1]
+                    ? `https://www.youtube-nocookie.com/embed/${
+                        detailData?.youtubeUrl.split(".be/")[1] +
+                          "&autoplay=1&mute=1" ||
+                        detailData?.youtubeUrl.split("watch?v=")[1] +
+                          "&autoplay=1&mute=1"
                       }`
                     : detailData?.youtubeUrl
                 }
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                allowFullScreen
               ></iframe>
-            </div>
+            </div> */}
           </div>
         )}
 

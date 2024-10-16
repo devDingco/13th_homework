@@ -3,33 +3,91 @@ import { Input as AntInput } from "antd";
 import type { InputRef } from "antd";
 import type { InputProps } from "./types";
 import { Controller } from "react-hook-form";
+import { useInput } from "./hook";
+import styles from "./styles.module.scss";
+const { TextArea } = AntInput;
 
 const Input = forwardRef<InputRef, InputProps>((props, ref) => {
-  const { title, errormessage } = props;
+  const {
+    id,
+    title,
+    errormessage,
+    control,
+    defaultValue,
+    readOnly,
+    type,
+    placeholder,
+    required,
+    rows,
+    showCount,
+    maxLength,
+  } = props;
+
+  const { formResister } = useInput();
+
   return (
     <label
       className={`flex flex-col w-full${title ? " gap-2" : ""}`}
-      htmlFor={props.id}
+      htmlFor={id}
     >
       <div className="flex gap-1">
         {title}
-        {props.required && <span className="text-red-500">*</span>}
+        {required && <span className="text-red-500">*</span>}
       </div>
-      {props.type === "password" ? (
-        <AntInput.Password
-          ref={ref}
-          id={props.id}
-          size="large"
-          disabled={props.readOnly}
-          {...props}
+      {type === "password" ? (
+        <Controller
+          name={id.includes("_") ? id.split("_")[0] : id} // useform 컨트롤 용 name으로 사용
+          control={control}
+          rules={formResister[id]}
+          defaultValue={defaultValue}
+          render={({ field }) => (
+            <AntInput.Password
+              id={id}
+              size="large"
+              placeholder={placeholder}
+              disabled={readOnly}
+              {...field}
+              ref={ref}
+            />
+          )}
+        />
+      ) : type === "textArea" ? (
+        <Controller
+          name={id.includes("_") ? id.split("_")[0] : id}
+          control={control}
+          rules={formResister[id]}
+          defaultValue={defaultValue}
+          render={({ field }) => (
+            <div id={styles.textAreaBox}>
+              <TextArea
+                id={id}
+                rows={rows}
+                size="large"
+                showCount={showCount}
+                maxLength={maxLength}
+                placeholder={placeholder}
+                {...field}
+              />
+            </div>
+          )}
         />
       ) : (
-        <AntInput
-          ref={ref}
-          id={props.id}
-          size="large"
-          disabled={props.readOnly}
-          {...props}
+        <Controller
+          name={id.includes("_") ? id.split("_")[0] : id}
+          control={control}
+          rules={formResister[id]}
+          defaultValue={defaultValue}
+          render={({ field }) => (
+            <AntInput
+              id={id}
+              size="large"
+              disabled={readOnly}
+              placeholder={placeholder}
+              type={type}
+              {...field}
+              ref={ref}
+            />
+          )}
         />
       )}
 

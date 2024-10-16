@@ -1,3 +1,7 @@
+import {
+  MutationCreateBoardCommentArgs,
+  MutationUpdateBoardCommentArgs,
+} from "@/commons/graphql/graphql";
 import { useState } from "react";
 import {
   CreateBoardCommentDocument,
@@ -8,20 +12,17 @@ import {
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import {
-  IcommentForm,
-  IuseCommentWriteProps,
-} from "@/components/board-detail/comment-write/types";
+import { IuseCommentWriteProps } from "@/components/board-detail/comment-write/types";
+import { IformList } from "@/components/board-write/types";
 
 export const useCommentWrite = (props: IuseCommentWriteProps) => {
-  const { setMode, mode, commentIndex, data } = props;
+  const { data, editModeHandler } = props;
   const {
-    register,
     getValues,
     setValue,
     control,
     formState: { isDirty, isValid, errors },
-  } = useForm<IcommentForm>({
+  } = useForm<IformList>({
     mode: "onChange",
   });
 
@@ -39,26 +40,14 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
 
-  // !댓글 수정 모드 취소
-  const editModeCancel = () => {
-    if (mode && Array.isArray(mode) && commentIndex !== undefined && setMode) {
-      const idx = commentIndex;
-      const newMode = [...mode];
-      newMode[idx] = newMode[idx] === "view" ? "edit" : "view";
-      setMode(newMode);
-    }
-  };
-
   // !댓글 등록
   const commentNew = async () => {
     try {
       const { commentWriter, commentPassword, commentContents, commentRating } =
         getValues();
 
-      const newCommentData = {
+      const newCommentData: MutationCreateBoardCommentArgs = {
         createBoardCommentInput: {
-          writer: "",
-          password: "",
           contents: "",
           rating: 0,
         },
@@ -70,7 +59,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         newCommentData.createBoardCommentInput.password = commentPassword;
       if (commentContents)
         newCommentData.createBoardCommentInput.contents = commentContents;
-      if (commentRating > 0)
+      if (commentRating)
         newCommentData.createBoardCommentInput.rating = commentRating;
 
       const result = await createBoardComment({
@@ -103,23 +92,24 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   const commentEdit = async () => {
     try {
       const { commentPassword, commentContents, commentRating } = getValues();
+      // console.log(commentPassword, commentContents, commentRating);
 
-      const editCommentData = {
-        updateBoardCommentInput: { contents: "", rating: 0 },
+      const editCommentData: MutationUpdateBoardCommentArgs = {
+        updateBoardCommentInput: {},
         password: commentPassword,
         boardCommentId: String(data?._id),
       };
 
       if (commentContents)
         editCommentData.updateBoardCommentInput.contents = commentContents;
-      if (commentRating > 0)
+      if (commentRating)
         editCommentData.updateBoardCommentInput.rating = commentRating;
       if (commentPassword === "")
         return modalControl({
           type: "commentEditPasswordRequired",
         }); // 비밀번호 입력 안내 모달
 
-      const result = await updateBoardComment({
+      await updateBoardComment({
         variables: editCommentData,
         refetchQueries: [
           {
@@ -128,10 +118,11 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
           },
         ],
       });
-      console.log(result);
 
       modalControl({ type: "commentEditSubmit" }); // 수정 완료 모달
-      editModeCancel(); // 수정 모드 취소
+      if (editModeHandler) {
+        editModeHandler(); // 수정 모드 종료
+      }
     } catch (error) {
       if (error instanceof Error) {
         modalControl({ type: "commentEditPasswordError" }); // 비밀번호 오류 모달
@@ -142,7 +133,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   };
 
   return {
-    register,
     textCount,
     setTextCount,
     commentNew,
@@ -150,11 +140,11 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     isDirty,
     isValid,
     errors,
-    editModeCancel,
     control,
     setValue,
     isModalOpen,
     setIsModalOpen,
     modalType,
+    data,
   };
 };

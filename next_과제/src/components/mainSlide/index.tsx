@@ -86,6 +86,7 @@ export default function MainSlide() {
               alt={img}
               width="2000"
               height="2000"
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           </SwiperSlide>
         );

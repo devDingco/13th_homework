@@ -2,22 +2,21 @@
 
 import Icon from "@/components/iconFactory";
 import { DatePicker, Input, Button } from "antd";
-import { use, useState } from "react";
-import { IsearchBoxProps } from "@/components/searchBox/types";
-import useCustomSearchParams from "@/commons/hooks/useCustomSearchParams";
-import dayjs from "dayjs";
-import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
+import { useState } from "react";
+// import dayjs from "dayjs";
+import "dayjs/locale/ko";
+import { FetchBoardsCountQueryVariables } from "@/commons/graphql/graphql";
+import locale from "antd/lib/date-picker/locale/ko_KR";
 
-export default function SearchBox({ handleSearch }: IsearchBoxProps) {
+export default function SearchBox({
+  handleSearch,
+}: {
+  handleSearch: (params: FetchBoardsCountQueryVariables) => void;
+}) {
   const { RangePicker } = DatePicker;
-  const { searchParams, setSearchParams } = useCustomSearchParams();
-  const [startDate, setStartDate] = useState<string>(
-    toKoreanTimeString(searchParams.startDate) || "2021-09-03T09:54:33Z"
-  );
-  const [endDate, setEndDate] = useState<string>(
-    toKoreanTimeString(searchParams.endDate, true) || new Date().toISOString()
-  );
-  const [search, setSearch] = useState(searchParams.search || "");
+  const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
+  const [endDate, setEndDate] = useState<string>(new Date().toISOString());
+  const [search, setSearch] = useState("");
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">
@@ -31,26 +30,27 @@ export default function SearchBox({ handleSearch }: IsearchBoxProps) {
           prefix={
             <Icon icon="search" className="w-6 h-6 fill-accent-content" />
           }
+          onKeyUp={(e) =>
+            e.key === "Enter" && handleSearch({ startDate, endDate, search })
+          }
         />
       </label>
       <div className="flex gap-4 flex-wrap max-sm:w-full">
         <RangePicker
+          locale={locale}
           size="large"
           id={{
             start: "startDate",
             end: "endDate",
           }}
-          defaultValue={[
-            dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
-            dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
-          ]}
+          // defaultValue={[
+          //   dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
+          //   dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
+          // ]}
+          // placeholder={["시작일", "종료일"]}
           onChange={(date, dateString) => {
             setStartDate(new Date(dateString[0]).toISOString());
             setEndDate(new Date(dateString[1]).toISOString());
-            setSearchParams({
-              startDate: new Date(dateString[0]).toISOString(),
-              endDate: new Date(dateString[1]).toISOString(),
-            });
           }}
         />
         <Button
@@ -58,10 +58,7 @@ export default function SearchBox({ handleSearch }: IsearchBoxProps) {
           color="default"
           variant="solid"
           className="btn btn-accent-content max-sm:w-full"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSearch({ startDate, endDate, search });
-          }}
+          onClick={() => handleSearch({ startDate, endDate, search })}
         >
           검색
         </Button>

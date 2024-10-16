@@ -1,39 +1,14 @@
+import { FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
+
 export interface IcommentWriteProps {
-  title?: string;
-  textMaxCount: number;
-  placeholder: string;
-  id?: string;
   type: string;
   starCountBox?: boolean;
-  data?: {
-    __typename?: string;
-    _id: string;
-    writer: string;
-    contents: string;
-    rating?: number;
-  };
-  setMode?: (mode: string[]) => void;
-  mode?: string[];
-  commentIndex?: number;
-}
-
-export interface IcommentForm {
-  commentWriter: string;
-  commentPassword: string;
-  commentContents: string;
-  commentRating: number;
+  data?: FetchBoardCommentsQuery["fetchBoardComments"][0];
+  commentId?: string;
+  editModeHandler?: () => void;
 }
 
 export interface IuseCommentWriteProps {
-  data?: {
-    __typename?: string;
-    _id: string;
-    writer: string;
-    password?: string;
-    contents: string;
-    rating?: number;
-  };
-  setMode?: (mode: string[]) => void;
-  mode?: string[];
-  commentIndex?: number;
+  data?: FetchBoardCommentsQuery["fetchBoardComments"][0];
+  editModeHandler?: () => void;
 }

@@ -1,74 +1,45 @@
-import { useState } from "react";
-// import {
-//   FETCH_BOARD_COMMENTS,
-//   DELETE_BOARD_COMMENT,
-// } from "@/components/board-detail/comment-list/queries";
-
-import {
-  FetchBoardCommentsDocument,
-  DeleteBoardCommentDocument,
-} from "@/commons/graphql/graphql";
-import { useQuery, useMutation } from "@apollo/client";
+import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export const useCommentList = () => {
   const params = useParams();
 
-  const { data, error, loading } = useQuery(FetchBoardCommentsDocument, {
-    variables: { page: 1, boardId: String(params.boardId) },
-  });
-
-  const [deleteComment] = useMutation(DeleteBoardCommentDocument);
-
-  const [mode, setMode] = useState(
-    Array.from({ length: 10 }, () => "view") || []
+  const [hasMore, setHasMore] = useState(true);
+  const { data, error, loading, fetchMore } = useQuery(
+    FetchBoardCommentsDocument,
+    {
+      variables: { page: 1, boardId: String(params.boardId) },
+    }
   );
 
-  // 댓글 삭제
-  const commentDelete = async (commentId: string) => {
-    console.log(commentId, params.boardId);
-    try {
-      const prompt = window.prompt("비밀번호를 입력해 주세요.");
-      if (prompt) {
-        const result = await deleteComment({
-          variables: {
-            password: prompt,
-            boardCommentId: String(commentId),
-          },
-          refetchQueries: [
-            {
-              query: FetchBoardCommentsDocument,
-              variables: { page: 1, boardId: String(params.boardId) },
-            },
+  const fetchMoreData = async () => {
+    if (!data) return;
+    await fetchMore({
+      variables: {
+        page: Math.ceil((data.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments?.length) {
+          setHasMore(false);
+          return prev;
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
           ],
-        });
-        console.log(result);
-      } else {
-        // alert("취소되었습니다.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(`${error.message}`);
-      } else {
-        alert("An unknown error occurred");
-      }
-    }
-  };
-
-  // 댓글 수정 모드
-  const editModeHandler = (idx: number) => {
-    const newMode = [...mode];
-    newMode[idx] = newMode[idx] === "view" ? "edit" : "view";
-    setMode(newMode);
+        };
+      },
+    });
   };
 
   return {
     data,
     error,
     loading,
-    commentDelete,
-    editModeHandler,
-    mode,
-    setMode,
+    fetchMoreData,
+    hasMore,
   };
 };
