@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
   # 타입적는곳
-  mutation createBoard(
+  mutation createBoard_boardWrite(
     $writer: String
     $password: String
     $title: String!
