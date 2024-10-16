@@ -12,69 +12,30 @@ import {
   FetchBoardCommentsDocument,
 } from '@/app/_commons/graphql/graphql';
 import { Rate } from 'antd';
+import useCommentInput from '@/app/_hooks/boardDetail/useCommentInput';
 
-export default function CommentWrite() {
-  const resetCommentData = {
-    commentContent: '',
-    commentUser: '',
-    commentPw: '',
-    commentRate: 0,
-  };
-  const [commentData, setCommentData] = useState({ ...resetCommentData });
-  const [requiredMessage, setRequiredMessage] = useState<RequiredType>({
-    commentContent: null,
-    commentUser: null,
-    commentPw: null,
+export default function CommentWrite({
+  writer,
+  content,
+  rating,
+  commentId,
+  editType,
+  onEditComment,
+}: ICommentInput) {
+  const {
+    commentData,
+    requiredMessage,
+    setCommentData,
+    onCommentFormChange,
+    onPostsButtonClick,
+  } = useCommentInput({
+    writer,
+    content,
+    rating,
+    commentId,
+    type: editType && 'EDIT',
+    onEditComment,
   });
-
-  const { postId } = useParams();
-
-  const onCommentFormChange = (
-    name: string,
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setCommentData((prev) => {
-      return {
-        ...prev,
-        [name]: event.target.value,
-      };
-    });
-  };
-
-  const [createComment] = useMutation(CreateBoardCommentDocument);
-
-  const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const { data } = await createComment({
-        variables: {
-          createBoardCommentInput: {
-            writer: commentData.commentUser,
-            password: commentData.commentPw,
-            contents: commentData.commentContent,
-            rating: commentData.commentRate,
-          },
-          boardId: postId.toString(),
-        },
-        refetchQueries: [FetchBoardCommentsDocument],
-      });
-      setCommentData({ ...resetCommentData });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    const validMessage = '필수입력 사항입니다.';
-    setRequiredMessage((prev) => {
-      return {
-        ...prev,
-        username: commentData.commentUser ? null : validMessage,
-        userpw: commentData.commentPw ? null : validMessage,
-        userTitle: commentData.commentContent ? null : validMessage,
-      };
-    });
-  }, [commentData]);
 
   return (
     <>
@@ -83,19 +44,22 @@ export default function CommentWrite() {
         댓글
       </h3>
       <form onSubmit={(event) => onPostsButtonClick(event)}>
-        <div className="flex">
-          <Rate
-            onChange={(e) =>
-              setCommentData((prev) => {
-                return {
-                  ...prev,
-                  commentRate: e,
-                };
-              })
-            }
-            value={commentData.commentRate}
-          />
-        </div>
+        {!content && (
+          <div className="flex">
+            <Rate
+              onChange={(e) =>
+                setCommentData((prev) => {
+                  return {
+                    ...prev,
+                    commentRate: e,
+                  };
+                })
+              }
+              // onChange={(e) => onCommentFormChange('commentRate', e)}
+              value={commentData.commentRate}
+            />
+          </div>
+        )}
         <div className="flex gap-4 w-1/2 mb-4">
           <Input
             value={commentData.commentUser}
@@ -105,6 +69,7 @@ export default function CommentWrite() {
             id="commentUser"
             required={requiredMessage}
             onChangeFnc={onCommentFormChange}
+            disabled={writer ? true : false}
           />
           <Input
             value={commentData.commentPw}

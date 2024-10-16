@@ -56,7 +56,7 @@ export default function PostsForm({
   const { showModal, closeModal } = useModalStore();
 
   // ?fetch
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
 
   // *functions
@@ -123,7 +123,7 @@ export default function PostsForm({
         });
 
         showModal('CONFIRM', '추가 모달', '새로운 게시글을 추가하시겠습니까?')
-          .then((result: string) => {
+          .then((result: any) => {
             result && routes.push(`/boards/${data?.createBoard._id}`);
           })
           .catch(() => {
