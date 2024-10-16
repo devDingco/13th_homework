@@ -4,7 +4,10 @@ import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 
 import { useState } from 'react';
-import { UPDATE_BOARD, 나의그래프큐엘셋팅 } from './queries';
+import {
+    CreateBoardDocument,
+    UpdateBoardDocument,
+} from '@/commons/graphql/graphql';
 
 export const useBoardWrite = () => {
     const router = useRouter();
@@ -94,8 +97,8 @@ export const useBoardWrite = () => {
         }
     };
 
-    const [나의함수] = useMutation(나의그래프큐엘셋팅);
-    const [updateBoard] = useMutation(UPDATE_BOARD);
+    const [나의함수] = useMutation(CreateBoardDocument);
+    const [updateBoard] = useMutation(UpdateBoardDocument);
 
     let onClickSubmit = async () => {
         try {

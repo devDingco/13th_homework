@@ -1,16 +1,20 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { DELETE_BOARD, FETCH_BOARDS } from './queries';
+import { FETCH_BOARDS } from './queries';
 import { useMutation, useQuery } from '@apollo/client';
+import {
+    DeleteBoardDocument,
+    FetchBoardDocument,
+} from '@/commons/graphql/graphql';
 
 export default function useBoardList() {
     const router = useRouter();
     const params = useParams();
 
-    const { data } = useQuery(FETCH_BOARDS, {
+    const { data } = useQuery(FetchBoardDocument, {
         variables: {
-            mynumber: params.boardId,
+            boardId: params.boardId,
         },
     });
 
@@ -19,13 +23,13 @@ export default function useBoardList() {
         alert('자리 옮겨여');
     };
 
-    const [삭제함수이름] = useMutation(DELETE_BOARD);
+    const [삭제함수이름] = useMutation(DeleteBoardDocument);
 
     const onClickDelete = (event) => {
         event.stopPropagation();
         삭제함수이름({
             variables: {
-                mynumber: event.target.id,
+                boardId: event.target.id,
             },
             refetchQueries: [{ query: FETCH_BOARDS }],
         });
