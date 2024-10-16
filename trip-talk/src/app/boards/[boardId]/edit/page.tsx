@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import BoardsWrite from "../../../components/BoardsWrite/BoardsWrite";
+import BoardsWrite from "../../../_components/BoardsWrite/BoardsWrite";
 import { useQuery } from "@apollo/client";
 import { FetchBoardDocument } from "../../../../commons/graphql/graphql";
 

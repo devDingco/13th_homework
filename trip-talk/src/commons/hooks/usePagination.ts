@@ -8,7 +8,6 @@ export default function usePagination(props: IPagination) {
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     props.refetch({ page: Number(event.currentTarget.id) });
     setCurrentPage(Number(event.currentTarget.id));
-    console.log(event.target);
   };
 
   const onClickPrevPage = () => {

@@ -133,7 +133,6 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       </div>
       <div className={styles.button_wrapper}>
         <Button id="cancel" color="white" />
-
         <Button
           id="submit"
           disabled={isEdit}

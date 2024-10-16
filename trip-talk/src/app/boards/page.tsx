@@ -2,13 +2,13 @@
 
 import { useQuery } from "@apollo/client";
 import styles from "./styles.module.css";
-import BoardList from "../components/BoardList/BoardList";
+import BoardList from "../_components/BoardList/BoardList";
 import {
   FetchBoardsCountDocument,
   FetchBoardsDocument,
 } from "../../commons/graphql/graphql";
-import BannerSlider from "../components/BannerSlider/BannerSlider";
-import Pagination from "../components/Pagination/Pagination";
+import BannerSlider from "../_components/BannerSlider/BannerSlider";
+import Pagination from "../_components/Pagination/Pagination";
 
 export default function Boards() {
   const { data, loading, error, refetch } = useQuery(FetchBoardsDocument);

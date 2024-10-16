@@ -12,7 +12,6 @@ export default function ModalContainer(props: IModalContainer) {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const ontoggleModal = () => {
-    console.log("test");
     setIsModalOpen((prev) => !prev);
   };
 

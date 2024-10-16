@@ -88,7 +88,6 @@ export default function useBoardsWrite(
         boardId: String(params.boardId),
         password: userPassword,
       };
-      console.log(userPassword);
       if (formData.title) editVariables.updateBoardInput.title = formData.title;
       if (formData.contents)
         editVariables.updateBoardInput.contents = formData.contents;
