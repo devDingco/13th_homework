@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./Detail.module.css";
 import "@/app/globals.css";
 import { gql, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -26,6 +26,7 @@ const FETCH_BOARD = gql`
 `;
 
 const BoardsDetail = () => {
+  const router = useRouter();
   const params = useParams(); //동적 라우팅, boardID에 접근한다
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -34,6 +35,10 @@ const BoardsDetail = () => {
   });
 
   console.log(params.boardId);
+
+  const handlePage = () => {
+    router.push(`/boards/${params.boardId}/edit`);
+  };
 
   return (
     <div className={styles.게시물상세화면상자}>
@@ -121,7 +126,7 @@ const BoardsDetail = () => {
               />
               목록으로
             </button>
-            <button>
+            <button onClick={handlePage}>
               <Image
                 src="/images/icons/Left icon (1).svg"
                 alt="수정하기버튼"

@@ -7,6 +7,7 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   required?: boolean;
+  defaultValue: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   className,
   required,
+  defaultValue,
 }) => {
   return (
     <input
@@ -25,6 +27,7 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       className={className}
       required={required}
+      defaultValue={defaultValue}
     />
   );
 };
