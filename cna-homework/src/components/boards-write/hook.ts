@@ -214,9 +214,8 @@ export const useBoardsWrite = (props: any) => {
           router.push(`/boards/${editId}`);
         } catch (error) {
           // 에러 발생 시 처리
-          if (error.graphQLErrors) {
-            const errorMessages = error.graphQLErrors.map((err: any) => err.message);
-            alert(errorMessages.join(", "));
+          if (error) {
+            console.log(error);
           } else {
             console.error("네트워크에러 발생");
           }

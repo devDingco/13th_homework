@@ -1,99 +1,14 @@
 .commentAllListContainer {
   width: 100%;
   /* background-color: aliceblue; */
-  height: auto;
+  height: fit-content;
   display: flex;
   justify-content: center;
   margin-bottom: 100px;
   flex-direction: column;
   align-items: center;
 }
-.commentContainer {
-  width: 1280px;
-  height: auto;
-  /* background-color: antiquewhite; */
-}
-.oneCommentList {
-  width: 100%;
-  min-height: 136px;
-  height: auto;
-  /* background-color: aqua; */
-  margin: 30px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.commentListUp {
-  display: flex;
-}
-.writerInfo {
-  /* background-color: aquamarine; */
-  width: 100%;
-  height: 24px;
-  display: flex;
-  gap: 2px;
-  align-items: center;
-}
-.writerInfo p {
-  color: #5f5f5f;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 20px;
-  margin-right: 10px;
-}
-.userIconArea {
-  width: 24px;
-  height: 24px;
-  background-color: #e4e4e4;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.userIcon {
-  width: 15px;
-  height: 15px;
-}
-.iconsArea {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-.editIcon {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-.deleteIcon {
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-}
-.commentContent {
-  /* background-color: beige; */
-  width: 100%;
-  height: auto;
-  margin: 15px 0;
-}
-.commentContent p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-}
-.commentDate {
-  /* background-color: cadetblue; */
-  width: 100%;
-  height: 24px;
-  color: #818181;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-}
-.commentContainer hr {
-  height: 1px;
-  background-color: #e4e4e4;
-}
+
 .noComment {
   margin-top: 20px;
   font-size: 14px;
