@@ -1,0 +1,16 @@
+.footerContainer {
+    width: 80rem;
+    height: auto;
+    display: flex;
+}
+.footerContent {
+    width: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+h3 {
+    border-bottom: 1px solid lightgray;
+}
