@@ -1,5 +1,6 @@
 /** @format */
 
+import BoardCommentForm from './BoardCommentForm';
 import BoardCommentReply from './BoardCommentReply';
 import { IReplies } from '@/models/comment.type';
 import { useState } from 'react';
@@ -19,6 +20,10 @@ export default function BoardCommentReplyWrapper({ replies }: IReplies) {
 				{replies.map((reply) => (
 					<BoardCommentReply key={reply._id} reply={reply} />
 				))}
+				<div className="mt-6 flex flex-col gap-4">
+					<div className="prose-sb_18_24">대댓글</div>
+					<BoardCommentForm />
+				</div>
 			</div>
 		</>
 	);

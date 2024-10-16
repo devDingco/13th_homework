@@ -2,6 +2,7 @@
 
 import BoardCommentDeleteImage from './BoardCommentDeleteImage';
 import BoardCommentEditImage from './BoardCommentEditImage';
+import BoardCommentNoReplyWrapper from './BoardCommentNoReplyWrapper';
 import BoardCommentReplyWrapper from './BoardCommentReplyWrapper';
 import BoardCommentStar from './BoardCommentStar';
 import { IBoardComment } from '@/models/comment.type';
@@ -33,7 +34,7 @@ export default function BoardComment({ comment, setIsEdit }: ICommentEditProps) 
 				{replies.length ? (
 					<BoardCommentReplyWrapper replies={replies} />
 				) : (
-					<div className="cursor-pointer">+ 답글 달기</div>
+					<BoardCommentNoReplyWrapper />
 				)}
 			</div>
 		</>

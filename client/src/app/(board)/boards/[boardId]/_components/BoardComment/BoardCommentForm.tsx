@@ -18,7 +18,9 @@ export default function BoardCommentForm({ comment, setIsEdit }: ICommentEditPro
 	return (
 		<>
 			<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
-				<BoardCommentStar rating={rating} setRating={setRating} />
+				{comment || setIsEdit ? (
+					<BoardCommentStar rating={rating} setRating={setRating} />
+				) : null}
 				<div className="flex items-center gap-8">
 					<div className="flex w-1/2 gap-4">
 						<NewInputContainer title={ETitle.Author} value={comment?.author} />
