@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
-import ApolloSetting from '../next-project/src/commons/settings/apollo-setting';
+import ApolloSetting from '../commons/settings/apollo-setting';
 
 export const metadata: Metadata = {
     title: '지금 놀자',

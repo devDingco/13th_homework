@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import BoardComponentWrite from '../../../../next-project/src/components/boards-write';
+import BoardComponentWrite from '../../../../components/boards-write';
 import { gql, useQuery } from '@apollo/client';
 
 const FETCH_BOARD = gql`
