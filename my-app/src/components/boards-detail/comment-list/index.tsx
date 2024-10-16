@@ -1,49 +1,47 @@
-import Image from "next/image";
-import styles from "./styles.module.css";
+"use client";
+
+import CommentListItem from "../comment-list-item";
 import { useCommentList } from "./hook";
-import { Rate } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function CommentList() {
-  const { data } = useCommentList();
+  const { data, fetchMore, hasMore, setHasMore } = useCommentList();
+
+  const onNext = () => {
+    if (data === undefined) return;
+
+    fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments?.length) {
+          setHasMore(false);
+          return;
+        }
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   return (
     <div>
-      {data?.fetchBoardComments.map((el) => (
-        <div className={styles.comment_box} key={el._id}>
-          <div className={styles.comment_header}>
-            <div className={styles.comment_header_left}>
-              <Image
-                src="/img/profile.png"
-                alt="profileImg"
-                width={24}
-                height={24}
-              />
-              <div className="writer">{el.writer}</div>
-              <Rate value={el.rating} disabled={true} />
-            </div>
-            <div className={styles.comment_header_right}>
-              <Image
-                src="/img/edit.svg"
-                alt="editImg"
-                width={24}
-                height={24}
-                className="img"
-              />
-              <Image
-                src="/img/delete.svg"
-                alt="deleteImg"
-                width={24}
-                height={24}
-                className="img"
-              />
-            </div>
-          </div>
-          <div className={styles.comment_main}>{el.contents}</div>
-          <div className={styles.date}>
-            {el.createdAt.split("T")[0].replace(/-/g, ".")}
-          </div>
-        </div>
-      ))}
+      <InfiniteScroll
+        next={onNext}
+        hasMore={hasMore}
+        loader={<div>로딩중입니다.</div>}
+        dataLength={data?.fetchBoardComments.length ?? 0}
+      >
+        {data?.fetchBoardComments.map((el) => (
+          <CommentListItem el={el} key={el._id} commentId={el._id} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 }
