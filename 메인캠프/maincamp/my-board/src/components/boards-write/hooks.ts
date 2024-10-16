@@ -3,7 +3,7 @@ import {
   CreateBoardDocument,
   UpdateBoardDocument,
 } from '@/commons/graphql/graphql';
-import { useMutation } from '@apollo/client';
+import { ApolloError, useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import { IBoardWrite } from './types';
@@ -13,10 +13,13 @@ import { Address } from 'react-daum-postcode';
 export function useBoardWrite(props: IBoardWrite) {
   const router = useRouter();
   const params = useParams();
-  const [user, setUser] = useState<string>('');
+  // 제목, 내용, 작성자 상태를 하나의 객체로 통합
+  const [formState, setFormState] = useState({
+    user: '',
+    title: '',
+    content: '',
+  });
   const [password, setPassword] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
   const [error, setError] = useState<string>('');
 
   const [isActive, setIsActive] = useState(false);
@@ -37,21 +40,15 @@ export function useBoardWrite(props: IBoardWrite) {
       element.click();
     }
   };
-  const checkAllField = (
-    user: string,
-    password: string,
-    title: string,
-    content: string
-  ) => {
+  const checkAllField = () => {
+    const { user, title, content } = formState;
     if (props.isEdit) {
-      // 수정모드
       if (title || content) {
         setIsActive(true);
       } else {
         setIsActive(false);
       }
     } else {
-      //등록모드
       if (user && password && title && content) {
         setIsActive(true);
       } else {
@@ -59,77 +56,45 @@ export function useBoardWrite(props: IBoardWrite) {
       }
     }
   };
-
-  //작성자 핸들러 함수
-  const handleChangeUser = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setUser(value); //상태 비동기 업데이트
-
-    if (value) {
-      const errorMsg = document.getElementsByClassName(
-        'errorMsg'
-      )[0] as HTMLElement | null;
-      if (errorMsg) {
-        errorMsg.style.display = 'none';
-      }
-    }
-
-    // 값 없으면 등록함수 비활성화
-    checkAllField(value, password, title, content); //이전상태의 user로 확인, 상태 업데이트 후에 항상 호출될 수 있게
+  // 하나의 함수로 통합된 상태 업데이트
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    checkAllField();
   };
-
-  //비밀번호 핸들러 함수
 
   const handleChangePw = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
-    if (value) {
-      const errorMsg = document.getElementsByClassName(
-        'errorMsg'
-      )[1] as HTMLElement | null;
-      if (errorMsg) {
-        errorMsg.style.display = 'none';
-      }
-    }
-
-    checkAllField(user, value, title, content);
+    checkAllField();
   };
 
-  //제목 핸들러 함수
-  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTitle(value);
-    if (value) {
-      const errorMsg = document.getElementsByClassName(
-        'errorMsg'
-      )[2] as HTMLElement | null;
-      if (errorMsg) {
-        errorMsg.style.display = 'none';
-      }
-    }
+  //비밀번호 핸들러 함수
 
-    checkAllField(user, password, value, content);
-  };
+  // const handleChangePw = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setPassword(value);
+  //   if (value) {
+  //     const errorMsg = document.getElementsByClassName(
+  //       'errorMsg'
+  //     )[1] as HTMLElement | null;
+  //     if (errorMsg) {
+  //       errorMsg.style.display = 'none';
+  //     }
+  //   }
 
-  //내용 핸들러 함수
-  const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setContent(value);
-    if (value) {
-      const errorMsg = document.getElementsByClassName(
-        'errorMsg'
-      )[3] as HTMLElement | null;
-      if (errorMsg) {
-        errorMsg.style.display = 'none';
-      }
-    }
-
-    checkAllField(user, password, title, value);
-  };
+  //   checkAllField(user, value, title, content);
+  // };
 
   //등록하기 함수
   const registerFunc = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { user, title, content } = formState;
     try {
       const result = await myBoard({
         variables: {
@@ -160,8 +125,6 @@ export function useBoardWrite(props: IBoardWrite) {
         setIsActive(false);
 
         router.push(`/boards/${result.data?.createBoard._id}`);
-
-        return;
       } else {
         Modal.warning({
           title: '경고',
@@ -171,35 +134,56 @@ export function useBoardWrite(props: IBoardWrite) {
         window.scrollTo({ top: 0 });
       }
     } catch (error) {
-      console.log(error);
-    }
-    const errors: any[] = [];
+      let errorMessage = '게시글 등록에 실패하였습니다.';
 
-    if (!user) errors.push('user');
-    if (!password) errors.push('password');
-    if (!title) errors.push('title');
-    if (!content) errors.push('content');
-
-    //에러있을경우
-    if (errors.length > 0) {
-      setError('필수 입력 사항입니다.');
-    }
-
-    document.querySelectorAll('.errorMsg').forEach((el) => {
-      // el이 HTMLElement 타입인지 확인한 후, style 속성에 안전하게 접근해서 스타일 적용
-      if (el instanceof HTMLElement) {
-        if (errors.includes(el.getAttribute('data-field'))) {
-          el.style.display = 'block';
-        } else {
-          el.style.display = 'none';
+      // error가 ApolloError인지 확인하는 타입 보호
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          // GraphQL 에러 메시지가 있는 경우
+          errorMessage = error.graphQLErrors[0].message;
+        } else if (error.message) {
+          // 일반 오류 메시지가 있는 경우
+          errorMessage = error.message;
         }
+      } else if (error instanceof Error) {
+        // 일반 JavaScript Error인 경우
+        errorMessage = error.message;
       }
-    });
+      Modal.error({
+        title: '실패',
+        content: errorMessage,
+        onOk() {},
+      });
+      console.log('게시글 등록 실패', error);
+    }
+    // const errors: any[] = [];
+
+    // if (!user) errors.push('user');
+    // if (!password) errors.push('password');
+    // if (!title) errors.push('title');
+    // if (!content) errors.push('content');
+
+    // //에러있을경우
+    // if (errors.length > 0) {
+    //   setError('필수 입력 사항입니다.');
+    // }
+
+    // document.querySelectorAll('.errorMsg').forEach((el) => {
+    //   // el이 HTMLElement 타입인지 확인한 후, style 속성에 안전하게 접근해서 스타일 적용
+    //   if (el instanceof HTMLElement) {
+    //     if (errors.includes(el.getAttribute('data-field'))) {
+    //       el.style.display = 'block';
+    //     } else {
+    //       el.style.display = 'none';
+    //     }
+    //   }
+    // });
   };
 
   //수정하기 함수
   const updateFunc = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { title, content } = formState;
 
     // 스프레드연산자 : 안에있는 요소만 가져올 수 있음, //기존 데이터가 포함된 변수를 스프레드 연산자로 전달
     try {
@@ -234,9 +218,27 @@ export function useBoardWrite(props: IBoardWrite) {
       });
       router.push(`/boards/${params?.boardId}`);
     } catch (error) {
-      // 나중에 에러문구를 ApolloError 빼고
-      alert(error);
-      console.log(error);
+      let errorMessage = '게시글 수정에 실패하였습니다.';
+
+      // error가 ApolloError인지 확인하는 타입 보호
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          // GraphQL 에러 메시지가 있는 경우
+          errorMessage = error.graphQLErrors[0].message;
+        } else if (error.message) {
+          // 일반 오류 메시지가 있는 경우
+          errorMessage = error.message;
+        }
+      } else if (error instanceof Error) {
+        // 일반 JavaScript Error인 경우
+        errorMessage = error.message;
+      }
+      Modal.error({
+        title: '실패',
+        content: errorMessage,
+        onOk() {},
+      });
+      console.log('게시글 수정 실패', error);
     }
   };
 
@@ -273,10 +275,8 @@ export function useBoardWrite(props: IBoardWrite) {
   };
 
   return {
-    handleChangeUser,
+    handleChange,
     handleChangePw,
-    handleChangeTitle,
-    handleChangeContent,
     openUploadImg,
     updateFunc,
     registerFunc,

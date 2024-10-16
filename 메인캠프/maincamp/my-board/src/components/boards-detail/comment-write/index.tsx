@@ -9,12 +9,10 @@ import { ICommentWrite } from './types';
 export default function CommentWrite({
   isEdit,
   el,
-  setIsEdit,
   commentId,
   handleUnableEdit,
 }: ICommentWrite) {
   const {
-    rating,
     setRating,
     registerComment,
     onChangeWriter,
@@ -34,7 +32,7 @@ export default function CommentWrite({
         <span className="ml-2 prose-sb_16_24">댓글</span>
       </div>
 
-      <Rate onChange={setRating} defaultValue={isEdit ? el?.rating : 0} />
+      <Rate onChange={setRating} defaultValue={el?.rating} />
 
       <div className="flex gap-10 w-2/3 items-center mt-1">
         <div className="flex flex-col gap-2 flex-1">
@@ -46,7 +44,7 @@ export default function CommentWrite({
               className={`w-full ${styles.inputCSS} `}
               type="text"
               onChange={onChangeWriter}
-              defaultValue={isEdit ? el?.writer ?? '' : ''}
+              defaultValue={el?.writer || ''}
               disabled={isEdit ? true : false}
               style={{ background: isEdit ? '#e2e2e2' : 'white' }}
               placeholder="작성자 명을 입력해 주세요."
@@ -70,7 +68,7 @@ export default function CommentWrite({
       <div className="w-full items-center ">
         <textarea
           className={styles.textareaCSS}
-          defaultValue={isEdit ? el?.contents : ''}
+          defaultValue={el?.contents}
           onChange={onChangeCommentContents}
           placeholder="댓글을 입력해주세요."
           rows={5}

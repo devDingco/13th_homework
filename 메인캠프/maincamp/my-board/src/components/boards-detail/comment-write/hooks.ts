@@ -6,10 +6,10 @@ import {
 import { ApolloError, useMutation } from '@apollo/client';
 import { Modal } from 'antd';
 import { useParams } from 'next/navigation';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { ICommentWrite } from './types';
 
-export function useCommentWrite({ isEdit, commentId }: ICommentWrite) {
+export function useCommentWrite({ isEdit, commentId, el }: ICommentWrite) {
   const params = useParams();
   const [isActive, setIsActive] = useState(false);
   const [commentWriter, setCommentWriter] = useState('');
@@ -95,15 +95,14 @@ export function useCommentWrite({ isEdit, commentId }: ICommentWrite) {
   //댓글 수정함수
   const updateCommentFunc = async (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // passwond가 다르면 다르다고 뜨게 해야하는데?
     try {
       const result = await updateComment({
         variables: {
           password: commentPw,
           boardCommentId: String(commentId),
           updateBoardCommentInput: {
-            contents: comments,
-            rating: rating,
+            contents: comments || el?.contents,
+            rating: rating || el?.rating,
           },
         },
         refetchQueries: [{ query: FetchBoardCommentsDocument }],
@@ -141,7 +140,6 @@ export function useCommentWrite({ isEdit, commentId }: ICommentWrite) {
     }
   };
   return {
-    rating,
     setRating,
     registerComment,
     onChangeWriter,

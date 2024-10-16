@@ -12,10 +12,8 @@ export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
   const params = useParams();
   const {
-    handleChangeUser,
+    handleChange,
     handleChangePw,
-    handleChangeTitle,
-    handleChangeContent,
     openUploadImg,
     updateFunc,
     registerFunc,
@@ -52,8 +50,9 @@ export default function BoardWrite(props: IBoardWrite) {
             <input
               className={`w-full ${styles.inputCSS} `}
               type="text"
+              name="user"
               placeholder="작성자 명을 입력해 주세요."
-              onChange={handleChangeUser}
+              onChange={handleChange}
               defaultValue={
                 props.isEdit ? props.data?.fetchBoard?.writer ?? '' : ''
               }
@@ -99,8 +98,9 @@ export default function BoardWrite(props: IBoardWrite) {
             <input
               className={`w-full ${styles.inputCSS} `}
               type="text"
+              name="title"
               placeholder="제목을 입력해주세요."
-              onChange={handleChangeTitle}
+              onChange={handleChange}
               defaultValue={props.data?.fetchBoard?.title}
             />
             <div
@@ -123,7 +123,8 @@ export default function BoardWrite(props: IBoardWrite) {
               placeholder="내용을 입력해주세요."
               //이렇게 해야 숫자로 전달함
               rows={8}
-              onChange={handleChangeContent}
+              name="content"
+              onChange={handleChange}
               defaultValue={props.data?.fetchBoard?.contents}
             ></textarea>
             <div
