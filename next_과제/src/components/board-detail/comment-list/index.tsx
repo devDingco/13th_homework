@@ -15,20 +15,22 @@ export default function CommentList(props: IcommentItemBox) {
   if (error) return <div>에러가 발생했습니다.</div>;
 
   return (
-    <InfiniteScroll
-      dataLength={data?.fetchBoardComments.length || 0}
-      next={fetchMoreData}
-      hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
-    >
-      {data?.fetchBoardComments.map((commentData) => (
-        <CommentItem
-          key={commentData._id}
-          commentData={commentData}
-          starCountBox={starCountBox}
-          reply={reply}
-        />
-      ))}
-    </InfiniteScroll>
+    <div className="pb-28">
+      <InfiniteScroll
+        dataLength={data?.fetchBoardComments.length || 0}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
+      >
+        {data?.fetchBoardComments.map((commentData) => (
+          <CommentItem
+            key={commentData._id}
+            commentData={commentData}
+            starCountBox={starCountBox}
+            reply={reply}
+          />
+        ))}
+      </InfiniteScroll>
+    </div>
   );
 }
