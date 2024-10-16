@@ -2,59 +2,14 @@ import { Rate } from "antd";
 import { dateViewSet } from "@/utils/dateViewSet";
 import Icon from "@/components/iconFactory";
 import CommentWrite from "@/components/board-detail/comment-write";
+import useCommentItem from "@/components/board-detail/comment-item/hook";
 
-import {
-  DeleteBoardCommentDocument,
-  FetchBoardCommentsDocument,
-} from "@/commons/graphql/graphql";
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { IcommentItemBox } from "@/components/commentItem/types";
-import { useParams } from "next/navigation";
+import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
 
 export default function CommentItem(props: IcommentItemBox) {
-  const params = useParams();
   const { commentData, starCountBox, reply } = props;
 
-  const [deleteComment] = useMutation(DeleteBoardCommentDocument);
-
-  const [isEdit, setIsEdit] = useState(false);
-
-  // 댓글 삭제
-  const commentDelete = async (commentId: string) => {
-    console.log(commentId);
-    try {
-      const prompt = window.prompt("비밀번호를 입력해 주세요.");
-      if (prompt) {
-        const result = await deleteComment({
-          variables: {
-            password: prompt,
-            boardCommentId: String(commentId),
-          },
-          refetchQueries: [
-            {
-              query: FetchBoardCommentsDocument,
-              variables: { page: 1, boardId: String(params.boardId) },
-            },
-          ],
-        });
-        console.log(result);
-      } else {
-        // alert("취소되었습니다.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(`${error.message}`);
-      } else {
-        alert("An unknown error occurred");
-      }
-    }
-  };
-
-  // 댓글 수정 모드
-  const editModeHandler = () => {
-    setIsEdit(!isEdit);
-  };
+  const { isEdit, editModeHandler, commentDelete } = useCommentItem();
 
   return (
     <div className="flex flex-col gap-2 py-10 border-t first:border-0">
