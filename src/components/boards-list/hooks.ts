@@ -1,26 +1,24 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { FETCH_BOARDS } from './queries';
 import { useMutation, useQuery } from '@apollo/client';
-import {
-    DeleteBoardDocument,
-    FetchBoardDocument,
-} from '@/commons/graphql/graphql';
+import { DeleteBoardDocument } from '@/commons/graphql/graphql';
+import { FETCH_BOARDS } from './queries';
 
 export default function useBoardList() {
     const router = useRouter();
     const params = useParams();
 
-    const { data } = useQuery(FetchBoardDocument, {
+    const { data } = useQuery(FETCH_BOARDS, {
         variables: {
-            boardId: params.boardId,
+            boardId: String(params.boardId),
         },
     });
 
     const onClickMoveToDetailPage = async (event) => {
-        // router.push(`/boards/${data.fetchBoards._id}`);
-        alert('자리 옮겨여');
+        alert('상세페이지로 이동합니다');
+        // console.log(event.currentTarget.id);
+        router.push(`/boards/${event.currentTarget.id}`);
     };
 
     const [삭제함수이름] = useMutation(DeleteBoardDocument);

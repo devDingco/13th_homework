@@ -17,11 +17,12 @@ export default function BoardsComponentList() {
                     <div className={styles.titleBoxDate}>날짜</div>
                 </div>
 
-                {data?.fetchBoards && data.fetchBoards.length > 0 ? (
+                {data?.fetchBoards && data?.fetchBoards.length > 0 ? (
                     data.fetchBoards.map((el: any, index: any) => (
                         <button
                             className={styles.boardListBox}
                             key={el._id}
+                            id={el._id}
                             onClick={onClickMoveToDetailPage}
                         >
                             <div className={styles.boardListBoxNumber}>
@@ -47,7 +48,7 @@ export default function BoardsComponentList() {
                         </button>
                     ))
                 ) : (
-                    <div>게시글이 없당!</div>
+                    <div>!게시글이 없당!</div>
                 )}
             </div>
         </>
