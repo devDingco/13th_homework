@@ -8,9 +8,12 @@ export default function useCommentListPage() {
   const boardId = params.boardId;
 
   // 쿼리에서 boardId 변수를 사용하여 데이터 조회
-  const { data } = useQuery<FetchBoardCommentsQuery>(FETCH_BOARD_COMMENTS, {
-    variables: { boardId },
-  });
+  const { data, fetchMore } = useQuery<FetchBoardCommentsQuery>(
+    FETCH_BOARD_COMMENTS,
+    {
+      variables: { boardId },
+    }
+  );
 
-  return { data };
+  return { data, fetchMore };
 }
