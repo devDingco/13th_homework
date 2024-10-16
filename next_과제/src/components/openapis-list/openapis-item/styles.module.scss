@@ -1,0 +1,15 @@
+#movieItem {
+  overflow: hidden;
+
+  [class^="ant-card-meta-description"] {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* 여러 줄 밑줄임표 적용 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 3번째 줄까지만 글자를 표현하고 그 이후는 줄임 처리 */
+  }
+}
