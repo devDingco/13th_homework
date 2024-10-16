@@ -11,9 +11,11 @@ export default function BoardsListUI({ data, count, current }) {
 
     const onClickDelete: MouseEventHandler = useDelete();
 
+    const postNum = Number(count?.fetchBoardsCount + 10 - current * 10);
+
     return (
         <>
-            <div className={styles.post_list}>
+            <section className={styles.post_list}>
                 <div className={styles.label_wrapper}>
                     <div className={styles.idx}>번호</div>
                     <div className={styles.title}>제목</div>
@@ -27,14 +29,7 @@ export default function BoardsListUI({ data, count, current }) {
                         key={el._id}
                         onClick={() => Router.push(`/boards/${el._id}`)}
                     >
-                        <div className={styles.idx}>
-                            {Number(
-                                count?.fetchBoardsCount +
-                                    10 -
-                                    idx -
-                                    current * 10
-                            )}
-                        </div>
+                        <div className={styles.idx}>{postNum - idx}</div>
                         <div className={styles.title}>{el.title}</div>
                         <div className={styles.author}>{el.writer}</div>
                         <div className={styles.date}>
@@ -47,7 +42,7 @@ export default function BoardsListUI({ data, count, current }) {
                         ></div>
                     </div>
                 ))}
-            </div>
+            </section>
         </>
     );
 }

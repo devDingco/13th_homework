@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ISubmitInput } from "../types/types";
-import useDaumPostApi from "./useDaumPostApi";
+// import useDaumPostApi from "./useDaumPostApi";
 
 export default function useSubmitInput() {
-    const { zipcode, address } = useDaumPostApi();
+    // const { zipcode, address } = useDaumPostApi();
 
     const [submitInput, setSubmitInput] = useState<ISubmitInput>({
         author_ID: "",
@@ -13,12 +13,10 @@ export default function useSubmitInput() {
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSubmitInput((prev) => ({
-            ...prev,
-            zipcode_ID: zipcode,
-            address01_ID: address,
-            [e.target.id]: e.target.value,
-        }));
+        const submitInputFields = { ...submitInput };
+        submitInputFields[e.target.id] = e.target.value;
+
+        setSubmitInput(submitInputFields);
         console.log(submitInput);
     };
 
@@ -33,8 +31,8 @@ export default function useSubmitInput() {
     const title = submitInput.title_ID;
     const content = submitInput.content_ID;
 
-    const youtube = submitInput.link_ID;
-    const addressDetail = submitInput?.address02_ID;
+    // const youtube = submitInput.link_ID;
+    // const addressDetail = submitInput?.address02_ID;
 
     return {
         handleChange,
@@ -43,9 +41,9 @@ export default function useSubmitInput() {
         title,
         content,
 
-        youtube,
-        zipcode,
-        address,
-        addressDetail,
+        // youtube,
+        // zipcode,
+        // address,
+        // addressDetail,
     };
 }

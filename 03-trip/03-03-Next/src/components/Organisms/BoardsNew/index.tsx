@@ -17,15 +17,15 @@ export default function BoardsNewUI() {
         content,
         // youtube,
         // zipcode,
-        // address01,
-        // address02,
+        // address,
+        // addressDetail,
     } = useSubmitInput();
     const valid = author && password && title && content;
 
-    const onClickCreate = useCreate({ author, password, title, content });
+    const { onClickCreate } = useCreate({ author, password, title, content });
 
     return (
-        <form
+        <section
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -71,6 +71,6 @@ export default function BoardsNewUI() {
                 disabled={!valid}
                 onClick={onClickCreate}
             />
-        </form>
+        </section>
     );
 }
