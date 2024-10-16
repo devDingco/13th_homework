@@ -6,16 +6,21 @@ import { IDeleteProps } from '@/models/children.type';
 import { IResponseComment } from '@/models/comment.type';
 import Image from 'next/image';
 import deleteComment from '@/apis/comments/deleteComment';
+import { useCommentPageStore } from '@/stores/useCommentPage';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 export default function BoardCommentDeleteImage({ commentId }: IDeleteProps) {
+	const { page } = useCommentPageStore();
 	const param = useParams();
 	const boardId = param.boardId as string;
 
-	const { data, mutate } = useSWR(`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}`, {
-		revalidateOnFocus: false,
-	});
+	const { data, mutate } = useSWR(
+		`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}?page=${page}`,
+		{
+			revalidateOnFocus: false,
+		},
+	);
 
 	const onClickDeleteBoardComment = async (commentId: string) => {
 		// 낙관적 UI 업데이트

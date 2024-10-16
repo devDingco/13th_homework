@@ -5,11 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 
 import { IBoardComment } from '@/models/comment.type';
 import createBoardCommentAction from '@/actions/createBoardCommentAction';
+import { useCommentPageStore } from '@/stores/useCommentPage';
 import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 export function useBoardCommentForm(comment?: IBoardComment) {
+	const { page } = useCommentPageStore();
 	const param = useParams();
 
 	const [rating, setRating] = useState<number>(comment ? comment.rating : 0);
@@ -23,7 +25,7 @@ export function useBoardCommentForm(comment?: IBoardComment) {
 	});
 
 	const { data, mutate } = useSWR(
-		`${boardUrlEndPoint}/${param.boardId}${commentUrlEndPoint}`,
+		`${boardUrlEndPoint}/${param.boardId}${commentUrlEndPoint}?page=${page}`,
 		null,
 		{
 			revalidateOnFocus: false,
@@ -37,9 +39,7 @@ export function useBoardCommentForm(comment?: IBoardComment) {
 		formRef.current?.reset();
 		setRating(0);
 		setLength(0);
-		if (Array.isArray(data)) {
-			mutate([...data, state.result], false);
-		}
+		mutate([...data, state.result], false);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state]);
