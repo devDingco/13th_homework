@@ -1,6 +1,6 @@
 "use client";
 
-import BoardForm from "@/app/components/BoardForm";
+import BoardForm from "@/app/components/boards-write";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 
@@ -31,5 +31,5 @@ export default function BoardEditPage() {
     },
   });
 
-  return <BoardForm isEdit={true} data={data} />;
+  return <BoardForm isEdit={true} data={data} boardId={params.boardId} />;
 }
