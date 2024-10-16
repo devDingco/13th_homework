@@ -3,13 +3,19 @@
 import Image from 'next/image';
 
 import useBoardList from './hook';
-import { Board } from '@/commons/graphql/graphql';
+import { Board, FetchBoardsQuery } from '@/commons/graphql/graphql';
 import styles from './styles.module.css';
 import deleteImage from '@/assets/delete.png';
 
-export default function BoardList({ activePage, data }) {
+export type BoardListProps = {
+  data?: FetchBoardsQuery;
+  activePage?: number;
+};
+
+export default function BoardList(props: BoardListProps) {
+  const { activePage, data } = props;
   const { hoveredId, setHoveredId, onClickDelete, onClickDetail } =
-    useBoardList({ activePage });
+    useBoardList(props);
 
   return (
     <div className={styles.boardBody}>

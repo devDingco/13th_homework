@@ -6,8 +6,9 @@ import {
 import { useRouter } from 'next/navigation';
 import { useState, MouseEvent } from 'react';
 import { Modal } from 'antd';
+import { BoardListProps } from '.';
 
-export default function useBoardList({ activePage }: { activePage: number }) {
+export default function useBoardList({ activePage }: BoardListProps) {
   const [hoveredId, setHoveredId] = useState('');
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
@@ -19,16 +20,16 @@ export default function useBoardList({ activePage }: { activePage: number }) {
       const response = await deleteBoard({
         variables: { boardId: hoveredId },
         refetchQueries: [
-          { query: FetchBoardsDocument, variables: { page: +activePage } },
+          {
+            query: FetchBoardsDocument,
+            variables: { page: +(activePage || 1) },
+          },
         ],
       });
       Modal.success({
         content: `게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`,
       });
       // refetch({ page: +activePage });
-      console.log('🚀 ~ onClickDelete ~ { page: +activePage }:', {
-        page: +activePage,
-      });
     } catch (err) {
       Modal.error({
         content: `게시글 삭제에 실패했습니다.`,
