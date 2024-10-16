@@ -9,9 +9,7 @@ export default function BoardsDetailPage() {
     <>
       <BoardDetail />
       <CommentWrite starCountBox={true} type="commentWrite" />
-      <div className="pb-28">
-        <CommentList starCountBox={true} />
-      </div>
+      <CommentList starCountBox={true} />
     </>
   );
 }
