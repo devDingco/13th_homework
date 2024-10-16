@@ -2,11 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useBoardsDetail } from './hooks';
-import { DislikeTwoTone, HeartTwoTone, LikeTwoTone } from '@ant-design/icons';
+import { DislikeTwoTone, LikeTwoTone } from '@ant-design/icons';
+import { Tooltip } from 'antd';
+import Image from 'next/image';
+import YouTube from 'react-youtube';
 
 export default function BoardsDetail() {
   const router = useRouter();
-  const { data, loading, error } = useBoardsDetail();
+  const { data, loading, error, youtubeOpts } = useBoardsDetail();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <h3>error : {error.message}</h3>;
@@ -33,28 +36,40 @@ export default function BoardsDetail() {
         <div
           className={`flex justify-end w-full gap-2 pt-2 border-t border-gray-200`}
         >
-          <img src="/images/link.png" alt="공유" className="w-4" />
-          <img src="/images/location.png" alt="위치" className="w-4" />
+          <Tooltip
+            title={data?.fetchBoard.youtubeUrl}
+            placement="top"
+            arrow={true}
+          >
+            <Image src="/images/link.png" alt="링크" width={16} height={16} />
+          </Tooltip>
+
+          <Tooltip
+            title={data?.fetchBoard.boardAddress?.address}
+            placement="bottomRight"
+            arrow={false}
+          >
+            <Image
+              src="/images/location.png"
+              alt="위치"
+              width={16}
+              height={16}
+            />
+          </Tooltip>
         </div>
       </div>
 
       <div className="boardContent">
-        <img
-          className="w-80 h-96"
-          src="/images/exampleImg.png"
-          alt="예시 그림"
-        />
         <div id="detailContent">
           <p className="text-black prose-r_16_24">
             {data?.fetchBoard.contents || ''}
           </p>
         </div>
-        <img
-          className="w-full h-auto"
-          src="/images/videoEx.png"
-          alt="예시 동영상"
-        />
       </div>
+      <YouTube
+        videoId={data?.fetchBoard.youtubeUrl?.split('=')[1]}
+        opts={youtubeOpts}
+      />
       <div className="flex w-full justify-center text-center gap-6">
         {/* 추후 각각의 div을 만지면 count */}
         <div className="flex flex-col">

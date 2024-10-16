@@ -29,6 +29,13 @@ const EDIT_BOARD = gql`
       contents
       createdAt
       updatedAt
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
+      youtubeUrl
     }
   }
 `;
@@ -42,6 +49,13 @@ const CREATE_BOARD = gql`
       title
       contents
       createdAt
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
+      youtubeUrl
     }
   }
 `;

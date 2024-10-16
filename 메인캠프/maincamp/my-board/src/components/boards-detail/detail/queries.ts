@@ -10,6 +10,13 @@ const FETCH_BOARD = gql`
       createdAt
       likeCount
       dislikeCount
+      boardAddress {
+        _id
+        address
+        zipcode
+        addressDetail
+      }
+      youtubeUrl
     }
   }
 `;

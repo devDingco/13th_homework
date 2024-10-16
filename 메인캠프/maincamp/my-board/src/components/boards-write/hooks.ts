@@ -5,9 +5,10 @@ import {
 } from '@/commons/graphql/graphql';
 import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import { IBoardWrite } from './types';
 import { Modal } from 'antd';
+import { Address } from 'react-daum-postcode';
 
 export function useBoardWrite(props: IBoardWrite) {
   const router = useRouter();
@@ -19,6 +20,11 @@ export function useBoardWrite(props: IBoardWrite) {
   const [error, setError] = useState<string>('');
 
   const [isActive, setIsActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [address, setAddress] = useState(''); //주소상태관리
+  const [zonecode, setZonecode] = useState(''); //우편번호 관리
+  const [detailAddress, setDetailAddress] = useState(''); //상세주소
+  const [youtubeUrl, setYoutubeUrl] = useState('');
 
   const [myBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
@@ -132,6 +138,12 @@ export function useBoardWrite(props: IBoardWrite) {
             title: title,
             password: password,
             contents: content,
+            boardAddress: {
+              zipcode: zonecode,
+              address: address,
+              addressDetail: detailAddress,
+            },
+            youtubeUrl: youtubeUrl,
           },
         },
       });
@@ -201,6 +213,14 @@ export function useBoardWrite(props: IBoardWrite) {
           updateBoardInput: {
             title: title || props.data?.fetchBoard?.title,
             contents: content || props.data?.fetchBoard?.contents,
+            boardAddress: {
+              zipcode: zonecode || props.data?.fetchBoard.boardAddress?.zipcode,
+              address: address || props.data?.fetchBoard.boardAddress?.address,
+              addressDetail:
+                detailAddress ||
+                props.data?.fetchBoard.boardAddress?.addressDetail,
+            },
+            youtubeUrl: youtubeUrl,
           },
           password: promptPw,
         },
@@ -219,6 +239,39 @@ export function useBoardWrite(props: IBoardWrite) {
       console.log(error);
     }
   };
+
+  // 우편번호 모달 열기
+  const onToggleModal = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsModalOpen((prev) => !prev);
+  };
+
+  // 우편번호 선택하고 종료하면 모달 닫기
+  const addressComplete = (data: Address) => {
+    console.log(data);
+    setAddress(data.address);
+    setZonecode(data.zonecode);
+    setIsModalOpen((prev) => !prev);
+  };
+
+  const onChangeZipcode = (e: ChangeEvent<HTMLInputElement>) => {
+    setZonecode(e.target.value);
+  };
+  const onChangeAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value);
+  };
+
+  //상세주소 입력하면 값 올라가는거
+  const onChangeDetailAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDetailAddress(value);
+  };
+
+  //youtube
+  const onChangeYoutubeUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(e.target.value);
+  };
+
   return {
     handleChangeUser,
     handleChangePw,
@@ -229,5 +282,15 @@ export function useBoardWrite(props: IBoardWrite) {
     registerFunc,
     isActive,
     error,
+    isModalOpen,
+    onToggleModal,
+    addressComplete,
+    address,
+    detailAddress,
+    zonecode,
+    onChangeAddress,
+    onChangeZipcode,
+    onChangeDetailAddress,
+    onChangeYoutubeUrl,
   };
 }
