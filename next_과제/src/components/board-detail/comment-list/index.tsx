@@ -3,7 +3,7 @@
 
 import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
 import { useCommentList } from "@/components/board-detail/comment-list/hook";
-import CommentItem from "@/components/commentItem";
+import CommentItem from "@/components/board-detail/comment-item";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function CommentList(props: IcommentItemBox) {
@@ -22,9 +22,9 @@ export default function CommentList(props: IcommentItemBox) {
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
-        {data?.fetchBoardComments.map((commentData) => (
+        {data?.fetchBoardComments.map((commentData, idx) => (
           <CommentItem
-            key={commentData._id}
+            key={commentData._id + idx}
             commentData={commentData}
             starCountBox={starCountBox}
             reply={reply}
