@@ -1,0 +1,132 @@
+.content{
+    width:128rem;
+    height:217.1rem;
+    margin:0 auto;
+}
+
+/* 제목 */
+.content h1{
+    font-size:2.8rem;
+    height:7.2rem;
+}
+
+/* 프로필 */
+.profile{
+    width:128rem;
+    height:2.4rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:3.2rem 0 3.2rem 0;
+}
+.profileLeft{
+    width:11.9rem;
+    height:2.4rem;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+}
+.profile_icon{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/img.png) no-repeat center;
+}
+.profile:last-child{font-size:1.4rem;}
+.createDate{font-size:1.4rem;}
+
+/* 내용 */
+.content .subject{
+    height:118rem;
+}
+.content .subjectIcon{
+    height:2.4rem;
+    display:flex;
+    align-items:center;
+    justify-content:end;
+    margin-bottom:1.6rem;
+}
+.content .subjectIcon .clip{
+    width:1.9rem;
+    height:0.908rem;
+    background:url(../../../../public/images/clip.png) no-repeat;
+    margin-right:1.6rem;
+}
+.content .subjectIcon .mapIcon{
+    width:1.51rem;
+    height:1.844rem;
+    background:url(../../../../public/images/map_icon.png) no-repeat;
+}
+
+.content .subjectImg{
+    width:40rem;
+    height:53.1rem;
+    background:url(../../../../public/images/Tranquil\ Beachside\ Serenity\ 1.png) no-repeat;
+    margin-bottom:2.4rem;
+}
+.content .subject p{font-size:1.6rem;}
+
+/* 비디오 */
+.videoBg{
+    width:128rem;
+    height:51.2rem;
+    background-color:#f2f2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.video{
+    width:82.2rem;
+    height:46.4rem;
+    background:url(../../../../public/images/Frame\ 427323252.png) no-repeat center;
+}
+
+/* 좋아요 싫어요 */
+.emotion{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:4.8rem;
+    gap:2.4rem;
+    margin-bottom:7.2rem;
+    margin-top:2.4rem;
+}
+.emotion .bad, .emotion .good{
+    width:2.4rem;
+    height:2.4rem;
+    text-align:center;
+}
+.emotion .badIcon{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/bad.png) no-repeat center;
+}
+.emotion .good p{
+    color:#f66a6a;
+}
+.emotion .goodIcon{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/good.png) no-repeat center;
+}
+
+/* 하단 버튼 */
+.bottomBtn{
+    height:4rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:2.4rem;
+}
+.bottomBtn button{
+    border-radius:0.8rem;
+}
+.bottomBtn button:first-child{
+    width:10.5rem;
+    height:4rem;
+    background:url(../../../../public/images/list_button.png) no-repeat center;
+}
+.bottomBtn button:last-child{
+    width:10.5rem;
+    height:4rem;
+    background:url(../../../../public/images/edit_button.png) no-repeat center;
+}

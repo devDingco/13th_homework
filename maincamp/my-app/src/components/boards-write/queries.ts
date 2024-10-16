@@ -1,39 +1,16 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_BOARDS = gql`
-    query fetchBoards{
-        fetchBoards {
-            _id
-            writer
-            title
-            contents
-            youtubeUrl
-            likeCount
-            dislikeCount
-            images
-            createdAt
-            updatedAt
-            deletedAt
-        }
-    }
-`;
-
-export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
-
 export const boardGraphql = gql`
-  mutation createBoard($createBoardInput:CreateBoardInput!){
-    createBoard(createBoardInput:$createBoardInput){
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
       _id
       writer
       title
       contents
       youtubeUrl
+      likeCount
       images
-      boardAddress{
+      boardAddress {
         zipcode
         address
         addressDetail
@@ -71,3 +48,26 @@ export const UPDATE_BOARD = gql`
   }
 `;
 
+export const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      user {
+        _id
+        email
+        name
+        picture
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
