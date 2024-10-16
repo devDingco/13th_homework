@@ -55,3 +55,6 @@ button {
   gap: 2rem;
   flex-shrink: 0;
 }
+.layout {
+  width: 60vw;
+}
