@@ -1,6 +1,9 @@
 "use client";
 
-import { CreateBoardCommentDocument } from "@/commons/graphql/graphql";
+import {
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -39,15 +42,32 @@ export const useCommentWrite = () => {
           writer: writer,
           password: password,
           contents: contents,
-          rating: 32, // 별같애
+          rating: 0, // 별같애
         },
         boardId: String(params.boardId),
       },
+      refetchQueries: [
+        {
+          query: FetchBoardCommentsDocument,
+          variables: {
+            page: 1,
+            boardId: String(params.boardId),
+          },
+        },
+      ],
     });
+    setWriter("");
+    setPassword("");
+    setContents("");
+    setRating("");
     console.log(data);
   };
 
   return {
+    writer,
+    password,
+    contents,
+    rating,
     onClickCommmentAdd,
     onChangeWriter,
     onChangePassword,

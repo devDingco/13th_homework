@@ -14,18 +14,9 @@ export const useCommentList = () => {
       boardId: String(params.boardId),
     },
   });
-  console.log(`댓글리스트 : ${data}`);
+  console.log(data);
 
   return {
     data,
   };
 };
-// 그래프큐엘 {} [] 데이터 넘기는 타입
-
-// const { data } = useQuery(FetchBoardCommentsDocument, {
-//         variables: {
-//         page: 2,
-//         boardId: String(params.boardId)
-//         },
-//     };
-//   )
