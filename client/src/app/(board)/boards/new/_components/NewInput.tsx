@@ -6,7 +6,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { useAddressStore } from '@/stores/useAddressStore';
 import useSWR from 'swr';
 
-export default function NewInput({ title }: ITitle) {
+export default function NewInput({ title, value }: ITitle) {
 	const { address } = useAddressStore();
 	const param = useParams();
 
@@ -22,7 +22,8 @@ export default function NewInput({ title }: ITitle) {
 			disabled={
 				(data && title === ETitle.Author) ||
 				(path.includes('edit') && title === ETitle.Password) ||
-				(address && title === ETitle.Address)
+				(address && title === ETitle.Address) ||
+				value
 			}
 			name={title}
 			type={title === ETitle.Password ? 'password' : 'text'}
@@ -34,7 +35,8 @@ export default function NewInput({ title }: ITitle) {
 					? '123'
 					: address && title === ETitle.Address
 						? address
-						: undefined)
+						: undefined) ||
+				value
 			}
 		/>
 	);

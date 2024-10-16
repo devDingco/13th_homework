@@ -33,7 +33,7 @@ export default async function BoardItemContainer({ searchParams }: ISearchParams
 					totalCount={data.totalCount}
 					pageSizeSelectOptions={{
 						pageSizeSearchParam: 'take',
-						pageSizeOptions: [3, 5, 10, 15, 20],
+						pageSizeOptions: [3, 5, 10],
 					}}
 				/>
 			</>

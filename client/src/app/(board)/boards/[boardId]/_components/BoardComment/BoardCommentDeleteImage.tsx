@@ -1,8 +1,39 @@
 /** @format */
 
-import Image from 'next/image';
+import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
 
-export default function BoardCommentDeleteImage() {
+import { IDeleteProps } from '@/models/children.type';
+import { IResponseComment } from '@/models/comment.type';
+import Image from 'next/image';
+import deleteComment from '@/apis/comments/deleteComment';
+import { useCommentPageStore } from '@/stores/useCommentPage';
+import { useParams } from 'next/navigation';
+import useSWR from 'swr';
+
+export default function BoardCommentDeleteImage({ commentId }: IDeleteProps) {
+	const { page } = useCommentPageStore();
+	const param = useParams();
+	const boardId = param.boardId as string;
+
+	const { data, mutate } = useSWR(
+		`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}?page=${page}`,
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
+	const onClickDeleteBoardComment = async (commentId: string) => {
+		// 낙관적 UI 업데이트
+		mutate(
+			data.filter((item: IResponseComment) => item._id !== commentId),
+			false,
+		);
+		const res = await deleteComment(boardId, commentId);
+
+		if (!res) {
+			mutate();
+		}
+	};
 	return (
 		<Image
 			src="/Images/close.svg"
@@ -10,6 +41,7 @@ export default function BoardCommentDeleteImage() {
 			width={24}
 			height={24}
 			className="cursor-pointer"
+			onClick={() => onClickDeleteBoardComment(commentId)}
 		/>
 	);
 }

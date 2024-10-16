@@ -28,6 +28,7 @@ export default function ModalForm() {
 				autoComplete="off"
 				className="mt-4 flex w-full items-center justify-evenly rounded-2xl border-2 border-[#c1c1c1]"
 				action={formAction}
+				id="form"
 			>
 				<input
 					name="password"

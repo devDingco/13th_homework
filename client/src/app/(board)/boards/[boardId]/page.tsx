@@ -1,6 +1,4 @@
 /** @format */
-// TODO 시간되면.. skeleton 변경하기
-// [ ] swr을 사용하지 않고 component 합성을 통해 재사용성 늘리기 그러면서 use hook 사용해보기
 
 import { boardUrlEndPoint, reactionUrlEndPoint } from '@/apis/config';
 
@@ -28,16 +26,18 @@ export default function DetailPage({ params }: IDetailProps) {
 					<ComposeSuspenseWrapper
 						resource={wrapPromise(commonGet(`${boardUrlEndPoint}/${boardId}`))}
 						Component={BoardIdContainer}
-					></ComposeSuspenseWrapper>
+					/>
 				</Suspense>
+
 				<Suspense fallback={<BoardSkeletonReaction />}>
 					<ComposeSuspenseWrapper
 						resource={wrapPromise(
 							commonGet(`${boardUrlEndPoint}/${boardId}${reactionUrlEndPoint}`),
 						)}
 						Component={BoardLikeHate}
-					></ComposeSuspenseWrapper>
+					/>
 				</Suspense>
+
 				<BoardFooter />
 				<BoardCommentContainer boardId={boardId} />
 			</ErrorBoundary>

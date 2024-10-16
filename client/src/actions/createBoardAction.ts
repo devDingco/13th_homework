@@ -20,8 +20,6 @@ export async function createBoardAction(
 	const address = formData.get('Address') as string;
 	const detailAddress = formData.get('DetailAddress') as string;
 
-	console.log(formData);
-
 	if (!author || !password || !title || !content)
 		return {
 			data: null,

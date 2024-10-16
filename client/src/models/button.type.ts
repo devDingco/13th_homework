@@ -12,6 +12,7 @@ export enum EButtonTitle {
 export interface IButtonProps extends IButtonDisabled {
 	title: EButtonTitle;
 	boardId?: number;
+	setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IButtonDisabled {

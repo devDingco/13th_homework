@@ -10,7 +10,7 @@ import deleteBoard from '@/apis/boards/deleteBoard';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
 
-const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonProps) => {
+const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }: IButtonProps) => {
 	const { data, mutate } = useSWR(boardUrlEndPoint, null, {
 		revalidateOnFocus: false,
 	});
@@ -24,6 +24,7 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 			case EButtonTitle.Back:
 				onClickBack();
 				break;
+
 			case EButtonTitle.Delete:
 				if (boardId) {
 					const result = await deleteBoard(boardId);
@@ -38,8 +39,13 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonPr
 				}
 				break;
 			case EButtonTitle.Cancel:
-				onClickBack();
+				if (setIsEdit) {
+					setIsEdit((prev) => !prev);
+				} else {
+					onClickBack();
+				}
 				break;
+
 			case EButtonTitle.Sumbit:
 				// 현재 업데이트하면 그 이후 로직은 짜지 않았음
 				// 추후 업데이트할 예정

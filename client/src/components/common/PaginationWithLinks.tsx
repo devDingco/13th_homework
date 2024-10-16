@@ -69,6 +69,7 @@ export function PaginationWithLinks({
 			const key = pageSizeSelectOptions?.pageSizeSearchParam || 'pageSize';
 			const newSearchParams = new URLSearchParams(searchParams || undefined);
 			newSearchParams.set(key, String(newPageSize));
+			newSearchParams.set('page', '1');
 			router.push(`${pathname}?${newSearchParams.toString()}`);
 		},
 		[searchParams, pathname],

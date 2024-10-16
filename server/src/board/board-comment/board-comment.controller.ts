@@ -11,6 +11,8 @@ import {
     // UseInterceptors,
     Put,
     UseInterceptors,
+    Query,
+    DefaultValuePipe,
 } from '@nestjs/common';
 import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
@@ -39,8 +41,11 @@ export class BoardCommentController {
     @Get()
     @ResponseMessage('comment 전체가 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findAll(@Param('boardId', ParseIntPipe) boardId: number) {
-        return this.boardCommentService.findAllComment(boardId);
+    findAll(
+        @Param('boardId', ParseIntPipe) boardId: number,
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    ) {
+        return this.boardCommentService.findAllComment(boardId, page);
     }
 
     @Put(':commentId')
