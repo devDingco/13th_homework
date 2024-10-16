@@ -1,0 +1,49 @@
+.총상자 {
+  @apply rounded-lg bg-white shadow-lg min-w-[680px] p-6 self-stretch;
+}
+
+.게시글전체상자 {
+  @apply flex flex-col gap-2;
+}
+
+.게시글목록나누기 {
+  @apply flex p-4 gap-2;
+}
+
+.게시글목록나누기 span {
+  @apply text-gray-900 text-base font-medium;
+}
+
+.번호 {
+  @apply w-16 text-center;
+}
+
+.제목 {
+  @apply w-[848px] text-left;
+}
+
+.작날 {
+  @apply w-24 text-center;
+}
+
+.등록된게시글상자 {
+  @apply flex flex-col gap-3;
+}
+
+.게시글한줄상자 {
+  @apply flex p-3 gap-2 items-center rounded-md border border-gray-50 cursor-pointer relative;
+}
+
+.유저번호,
+.유저작성자,
+.유저날짜 {
+  @apply overflow-hidden text-center text-gray-500 text-sm font-light truncate;
+}
+
+.유저제목 {
+  @apply overflow-hidden text-gray-900 text-sm font-medium truncate;
+}
+
+.게시글삭제버튼 {
+  @apply absolute right-2 bg-none border-none cursor-pointer;
+}

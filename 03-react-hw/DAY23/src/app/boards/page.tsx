@@ -1,81 +1,38 @@
 "use client";
 
-import { gql, useMutation, useQuery } from "@apollo/client";
+import React from "react";
+import { useBoardQuery } from "@/hooks/useBoardQuery";
 import styles from "./page.module.css";
-import BoardHeader from "./[boardId]/_components/BoardHeader";
-import BoardItem from "./[boardId]/_components/BoardItem";
+import BoardItem from "./_components/BoardItem";
 
-interface Board {
-  _id: string;
-  writer: string;
-  title: string;
-  contents: string;
-  createdAt: string;
-}
+const BoardsPage: React.FC = () => {
+  const { boards, loading, error, handleDelete } = useBoardQuery();
 
-interface FetchBoardsResult {
-  fetchBoards: Board[];
-}
-
-const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
-
-const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
-
-export default function Boardspage() {
-  const { data, refetch } = useQuery<FetchBoardsResult>(FETCH_BOARDS, {
-    variables: {
-      page: 10,
-    },
-  });
-
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-
-  const onClickDelete = async (id: string) => {
-    try {
-      await deleteBoard({
-        variables: {
-          boardId: id,
-        },
-      });
-      alert("게시글이 삭제되었습니다.");
-      refetch();
-    } catch (error) {
-      alert("게시글 삭제에 실패했습니다.");
-      console.log(`게시글 삭제 오류: ${error}`);
-    }
-  };
+  if (loading) return <div>롸딩중🎶</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
-      <div className={styles.총상자}>
-        <div className={styles.게시글전체상자}>
-          <BoardHeader />
-          <div className={styles.등록된게시글상자}>
-            {data?.fetchBoards.map((board, index) => (
-              <BoardItem
-                key={board._id}
-                board={board}
-                index={index}
-                onDelete={onClickDelete}
-              />
-            ))}
-          </div>
+    <div className={styles.총상자}>
+      <div className={styles.게시글전체상자}>
+        <div className={styles.게시글목록나누기}>
+          <span className={styles.번호}>번호</span>
+          <span className={styles.제목}>제목</span>
+          <span className={styles.작날}>작성자</span>
+          <span className={styles.작날}>날짜</span>
+        </div>
+        <div className={styles.등록된게시글상자}>
+          {boards?.map((board, index) => (
+            <BoardItem
+              key={board._id}
+              board={board}
+              index={index}
+              onDelete={handleDelete}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default BoardsPage;

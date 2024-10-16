@@ -1,0 +1,75 @@
+.게시물상세화면상자 {
+  @apply w-[1280px];
+}
+
+.게시물타이틀상자 {
+  @apply flex flex-col gap-6;
+}
+
+.게시물타이틀상자 > p {
+  @apply text-black text-2xl font-bold leading-9;
+}
+
+.작성자등록일자담는상자 {
+  @apply flex justify-between mb-4;
+}
+
+.작성자등록일자담는상자 > span {
+  @apply text-gray-500 text-sm font-normal leading-5;
+}
+
+.작성자상자 {
+  @apply flex gap-1 items-center;
+}
+
+.작성자상자 > span {
+  @apply text-gray-700 text-sm font-light leading-5;
+}
+
+.아이콘상자 {
+  @apply flex justify-end gap-2 pt-4;
+}
+
+.게시글총내용상자 {
+  @apply flex flex-col gap-6;
+}
+
+.동영상배경상자 {
+  @apply flex justify-center items-center py-6 bg-gray-100;
+}
+
+.동영상배경상자 > div {
+  @apply w-[822px] h-[464px] bg-[coral];
+}
+
+.좋싫상자 {
+  @apply flex justify-center gap-6;
+}
+
+.좋싫상자 > div {
+  @apply flex flex-col items-center gap-1;
+}
+
+.좋싫상자 span {
+  @apply text-gray-700 text-sm font-normal leading-5;
+}
+
+.좋아요상자 > span {
+  @apply text-red-500;
+}
+
+.목록수정버튼상자 {
+  @apply flex justify-center gap-6;
+}
+
+.목록수정버튼상자 button {
+  @apply h-10 px-3 py-2 flex items-center gap-2 rounded-lg border border-black bg-white;
+}
+
+.비활성화입력필드 {
+  @apply bg-gray-100 text-gray-600 cursor-not-allowed;
+}
+
+.사진첨부상자 {
+  @apply flex gap-4;
+}
