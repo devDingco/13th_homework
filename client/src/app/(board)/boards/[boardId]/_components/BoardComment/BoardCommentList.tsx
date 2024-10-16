@@ -8,19 +8,34 @@ import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
 
 import BoardCommentEmpty from './BoardCommentEmpty';
 import BoardCommentSection from './BoardCommentSection';
+import Spinner from '@/components/common/Spinner';
 import fetcher from '@/libs/fetcher';
 import useSWR from 'swr';
+import { useState } from 'react';
 
 export default function BoardCommentList({ data, boardId }: IBoardCommentProp) {
+	const [page, setPage] = useState<number>(1);
 	const { data: cachedData } = useSWR(
-		`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}`,
+		`${boardUrlEndPoint}/${boardId}${commentUrlEndPoint}?page=${page}`,
 		fetcher,
-		{ fallbackData: data },
+		{
+			fallbackData: data,
+			revalidateOnFocus: false,
+		},
 	);
+
 	if (cachedData.length === 0) {
 		return <BoardCommentEmpty />;
 	}
-	return cachedData.map((comment: IResponseComment) => (
-		<BoardCommentSection key={comment._id} comment={comment} />
-	));
+
+	return (
+		<>
+			{cachedData.map((comment: IResponseComment) => (
+				<BoardCommentSection key={comment._id} comment={comment} />
+			))}
+			<div className="flex w-full items-center justify-center">
+				<Spinner />
+			</div>
+		</>
+	);
 }
