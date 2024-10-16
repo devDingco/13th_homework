@@ -1,3 +1,13 @@
+.css_commentedit {
+  width: 14px;
+  height: 14px;
+}
+
+.css_commentclose {
+  width: 16px;
+  height: 16px;
+}
+
 .css_commentshow {
   width: 1280px;
   height: 136px;
@@ -37,15 +47,6 @@
   display: flex;
   flex-direction: row;
 }
-.css_commentedit {
-  width: 14px;
-  height: 14px;
-}
-
-.css_commentclose {
-  width: 20px;
-  height: 20px;
-}
 
 .css_commentcontents {
   width: 1280px;
@@ -55,4 +56,13 @@
 .css_hr {
   margin-top: 10px;
   border: 1px solid #e4e4e4;
+}
+.css_commentedit {
+  width: 14px;
+  height: 14px;
+}
+
+.css_commentclose {
+  width: 16px;
+  height: 16px;
 }
