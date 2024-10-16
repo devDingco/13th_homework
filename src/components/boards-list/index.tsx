@@ -1,75 +1,11 @@
 'use client';
 
-import { gql, useMutation, useQuery } from '@apollo/client';
-import styles from './styles.module.css';
-import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import useBoardList from './hooks';
+import styles from './styles.module.css';
 
-const FETCH_BOARDS = gql`
-    query {
-        fetchBoards {
-            _id
-            writer
-            title
-            contents
-            createdAt
-        }
-    }
-`;
-
-const FETCH_BOARD = gql`
-    query fetchBoard($mynumber: ID!) {
-        fetchBoard(boardId: $mynumber) {
-            _id
-            writer
-            title
-            contents
-            youtubeUrl
-            likeCount
-            dislikeCount
-        }
-    }
-`;
-
-const DELETE_BOARD = gql`
-    mutation deleteBoard($mynumber: ID!) {
-        deleteBoard(boardId: $mynumber)
-    }
-`;
-
-export default function BoardList(props: any) {
-    const router = useRouter();
-    const params = useParams();
-
-    const { data } = useQuery(FETCH_BOARDS, {
-        variables: {
-            mynumber: params.boardId,
-        },
-    });
-
-    // const { mutation_data } = useQuery(FETCH_BOARDS, {
-    //     variables: {
-    //         mynumber: params.boardId,
-    //     },
-    // });
-
-    const onClickMoveToDetailPage = async (event) => {
-        // router.push(`/boards/${data.fetchBoards._id}`);
-        alert('자리 옮겨여');
-    };
-
-    const [삭제함수이름] = useMutation(DELETE_BOARD);
-
-    const onClickDelete = (event) => {
-        event.stopPropagation();
-        삭제함수이름({
-            variables: {
-                mynumber: event.target.id,
-            },
-            refetchQueries: [{ query: FETCH_BOARDS }],
-        });
-        alert('삭제버튼을 눌렀군요');
-    };
+export default function BoardsComponentList() {
+    const { data, onClickMoveToDetailPage, onClickDelete } = useBoardList();
 
     return (
         <>

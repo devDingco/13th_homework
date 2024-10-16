@@ -1,51 +1,11 @@
 'use client';
 import Image from 'next/image';
 import styles from './styles.module.css';
-import { gql, useQuery } from '@apollo/client';
-import { useParams, useRouter } from 'next/navigation';
+import { useBoardDetail } from './hook';
 
-export default function BoardsDetail() {
-    // 날짜
-    const date = new Date();
-    const options = {
-        year: date.getFullYear(),
-        month: (date.getMonth() + 1).toString().padStart(2, '0'),
-        date: date.getDate().toString().padStart(2, '0'),
-    };
-
-    const 날짜담는통 = options.year + '.' + options.month + '.' + options.date;
-
-    const FETCH_BOARD = gql`
-        query fetchBoard($boardId: ID!) {
-            fetchBoard(boardId: $boardId) {
-                _id
-                writer
-                title
-                contents
-                youtubeUrl
-                likeCount
-                dislikeCount
-            }
-        }
-    `;
-
-    const params = useParams();
-    const router = useRouter();
-
-    const { data } = useQuery(FETCH_BOARD, {
-        variables: {
-            boardId: String(params.boardId),
-        },
-    });
-
-    const onClickMoveBoardList = () => {
-        router.push('/boards');
-    };
-
-    const onClickMoveEditPage = () => {
-        alert('응 시진핑');
-        router.push(`/boards/${params.boardId}/edit`);
-    };
+export default function BoardsComponentDetail() {
+    const { 날짜담는통, data, onClickMoveBoardList, onClickMoveEditPage } =
+        useBoardDetail();
 
     return (
         <>
