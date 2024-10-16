@@ -43,6 +43,7 @@ export interface ISearchParamsProps {
 
 export interface IDeleteProps {
 	commentId: string;
+	parentId?: string;
 }
 
 export interface ICommentEditProps {
