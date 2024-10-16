@@ -35,6 +35,10 @@ export default function UseBoardsWrite() {
   //1. 버튼은 false  색 비활성화함
   //2. state변수 문자열이 모두 채워졌을때 버튼 색을 활성화시켜라
 
+  // 모달 state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalContent, setIsModalContent] = useState(false);
+
   const [myCreateBoard] = useMutation(CreateBoardDocument);
   const [myUpdateBoard] = useMutation(UpdateBoardDocument);
 
@@ -68,6 +72,23 @@ export default function UseBoardsWrite() {
     setActive(false);
   };
 
+  const onClickAddressModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleComplete = (data) => {
+    console.log(data);
+  };
+
+  // 모달 기능
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   // 게시물 등록하기 기능
   const handlerOnclickAdd = async () => {
     try {
@@ -94,13 +115,6 @@ export default function UseBoardsWrite() {
 
       if (writer && password && title && contents) {
         setActive(true);
-        alert("회원등록함");
-
-        // 들어있는 문자열을 모두 빈 문자열로 만들어라
-        setWriter("");
-        setPassword("");
-        setTitle("");
-        setContents("");
 
         const result = await myCreateBoard({
           variables: {
@@ -121,9 +135,19 @@ export default function UseBoardsWrite() {
           },
         });
 
+        // alert("회원등록함");
+        setIsModalContent("게시물등록완료");
+        setIsModalOpen(true);
+
+        // 들어있는 문자열을 모두 빈 문자열로 만들어라
+        setWriter("");
+        setPassword("");
+        setTitle("");
+        setContents("");
+
         console.log(result);
         console.log(result.data?.createBoard?._id);
-        router.push(`/boards/${result.data?.createBoard?._id}`);
+        // router.push(`/boards/${result.data?.createBoard?._id}`);
       }
 
       //   1. 네개의 state변수들이 전부 빈문자열이 아닐때 버튼의 색이 red로 활성화 시킨다
@@ -197,5 +221,11 @@ export default function UseBoardsWrite() {
     handleChangContentsMeg,
     handlerOnclickAdd,
     handlerOnclickEdit,
+    isModalOpen,
+    handleOk,
+    handleCancel,
+    isModalContent,
+    onClickAddressModal,
+    handleComplete,
   };
 }

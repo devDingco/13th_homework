@@ -11,7 +11,6 @@ const BoardsDetail = () => {
   return (
     <Fragment>
       <BoardsDetailUI />
-      <hr />
       <CommentWriteUI />
       <CommentListUI />
     </Fragment>

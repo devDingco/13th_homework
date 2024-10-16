@@ -5,6 +5,8 @@
 import Image from "next/image";
 import UseBoardsWrite from "./hooks";
 import styles from "./styles.module.css";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWriteUI(props) {
   const {
@@ -23,6 +25,12 @@ export default function BoardsWriteUI(props) {
     handleChangContentsMeg,
     handlerOnclickAdd,
     handlerOnclickEdit,
+    isModalOpen,
+    handleOk,
+    handleCancel,
+    isModalContent,
+    onClickAddressModal,
+    handleComplete,
   } = UseBoardsWrite();
 
   return (
@@ -103,7 +111,22 @@ export default function BoardsWriteUI(props) {
                 className={styles.css_addressNum}
                 placeholder="01234"
               />
-              <button className={styles.css_addressBtn}>우편번호검색</button>
+              <button
+                className={styles.css_addressBtn}
+                onClick={onClickAddressModal}
+              >
+                우편번호검색
+              </button>
+              {isModalOpen && (
+                <Modal
+                  title="주소모달"
+                  open={true}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <DaumPostcodeEmbed onComplete={handleComplete} />
+                </Modal>
+              )}
             </div>
             <input
               className={styles.css_inputStyleBox}
@@ -178,6 +201,16 @@ export default function BoardsWriteUI(props) {
             >
               {props.isEdit ? "수정" : "등록"}하기
             </button>
+            {/* {isModalOpen && (
+              <Modal
+                title="Boards Modal"
+                open={true}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <p>{isModalContent}</p>
+              </Modal>
+            )} */}
           </section>
         </div>
       </div>

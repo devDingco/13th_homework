@@ -1,3 +1,9 @@
+.css_display {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .css_wrapper {
   width: 1280px;
   margin: 40px 0px;
