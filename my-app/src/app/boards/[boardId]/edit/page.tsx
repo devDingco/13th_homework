@@ -8,7 +8,7 @@ import { gql, useQuery } from "@apollo/client";
 import { FetchBoardDocument } from "@/commons/graphql/graphql";
 
 const FETCH_BOARD = gql`
-  query fetchBoard($myid: ID!) {
+  query fetchBoard_edit($myid: ID!) {
     fetchBoard(boardId: $myid) {
       _id
       writer
