@@ -68,7 +68,7 @@ export class BoardCommentService {
         this.isInvalidPage(commentBoardList.length, page);
 
         return commentBoardList.filter(
-            (_, index) => index >= 5 * (page - 1) && index < 5 * page,
+            (_, index) => index >= 3 * (page - 1) && index < 3 * page,
         );
     }
 
@@ -162,7 +162,8 @@ export class BoardCommentService {
     }
 
     isInvalidPage(length: number, page: number) {
-        if (5 * page > length) {
+        if (page === 1) return;
+        if (3 * page > length) {
             throw new BadRequestException(
                 `page: ${page} is over. max length: ${length}`,
             );
