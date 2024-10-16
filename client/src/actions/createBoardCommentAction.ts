@@ -4,10 +4,11 @@
 import postComment from '@/apis/comments/postComment';
 
 export default async function createBoardCommentAction(
-	prevState: { boardId: number },
+	prevState: { boardId: number; parentId: string | null },
 	formData: { get: (arg0: string) => string | null },
 ) {
 	const boardId: number = prevState.boardId;
+	const parentId: string | null = prevState.parentId;
 	const author: string | null = formData.get('Author');
 	const password: string | null = formData.get('Password');
 	const content: string | null = formData.get('Comment');
@@ -22,7 +23,7 @@ export default async function createBoardCommentAction(
 			result: '',
 		};
 
-	const result = await postComment({ author, password, content, rating }, boardId);
+	const result = await postComment({ author, password, content, rating, parentId }, boardId);
 
 	if (typeof result === 'string') {
 		return {

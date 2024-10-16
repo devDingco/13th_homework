@@ -7,6 +7,7 @@ export interface ICommonAPIComment {
 }
 export interface IRequestComment extends ICommonAPIComment {
 	password: string;
+	parentId: string | null;
 }
 
 export interface IResponseComment extends ICommonAPIComment {
@@ -36,4 +37,7 @@ export interface IReplies {
 }
 export interface IReply {
 	reply: IBoardComment;
+}
+export interface IParentId {
+	parentId: string;
 }

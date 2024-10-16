@@ -1,9 +1,10 @@
 /** @format */
 
 import BoardCommentForm from './BoardCommentForm';
+import { IParentId } from '@/models/comment.type';
 import { useState } from 'react';
 
-export default function BoardCommentNoReplyWrapper() {
+export default function BoardCommentNoReplyWrapper({ parentId }: IParentId) {
 	const [isView, setIsView] = useState(true);
 	return isView ? (
 		<div className="cursor-pointer" onClick={() => setIsView((prev) => !prev)}>
@@ -15,7 +16,7 @@ export default function BoardCommentNoReplyWrapper() {
 				- 숨기기
 			</div>
 			<div className="prose-sb_18_24">대댓글</div>
-			<BoardCommentForm />
+			<BoardCommentForm parentId={parentId} />
 		</div>
 	);
 }

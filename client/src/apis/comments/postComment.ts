@@ -1,4 +1,5 @@
 /** @format */
+'use server';
 
 import { IApiResponse } from '@/models/apiResponse';
 import { IRequestComment } from '@/models/comment.type';

@@ -11,39 +11,37 @@ import { ICommentEditProps } from '@/models/children.type';
 import NewInputContainer from '../../../new/_components/NewInputContainer';
 import { useBoardCommentForm } from '@/hooks/useBoardCommentForm';
 
-export default function BoardCommentForm({ comment, setIsEdit }: ICommentEditProps) {
+export default function BoardCommentForm({ comment, setIsEdit, parentId }: ICommentEditProps) {
 	const { length, setLength, state, formAction, formRef, rating, setRating } =
-		useBoardCommentForm(comment);
+		useBoardCommentForm(comment, parentId);
 
 	return (
-		<>
-			<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
-				{comment || setIsEdit ? (
-					<BoardCommentStar rating={rating} setRating={setRating} />
-				) : null}
-				<div className="flex items-center gap-8">
-					<div className="flex w-1/2 gap-4">
-						<NewInputContainer title={ETitle.Author} value={comment?.author} />
-						<NewInputContainer title={ETitle.Password} />
-					</div>
-					<div className="prose-me_16_24 text-red-500">{state?.error}</div>
+		<form action={formAction} className="flex flex-col gap-4" ref={formRef}>
+			{!parentId ? <BoardCommentStar rating={rating} setRating={setRating} /> : null}
+			<div className="flex items-center gap-8">
+				<div className="flex w-1/2 gap-4">
+					<NewInputContainer title={ETitle.Author} value={comment?.author} />
+					<NewInputContainer title={ETitle.Password} />
 				</div>
-				<BoardCommentTextareaWrapper
-					length={length}
-					setLength={setLength}
-					value={comment?.content}
-				/>
-			</form>
+				<div className="prose-me_16_24 text-red-500">{state?.error}</div>
+			</div>
+			<BoardCommentTextareaWrapper
+				length={length}
+				setLength={setLength}
+				value={comment?.content}
+			/>
 			<div className="flex justify-end gap-4">
 				{comment ? (
 					<>
 						<CommonButton title={EButtonTitle.Cancel} setIsEdit={setIsEdit} />
 						<CommonButton title={EButtonTitle.Update} />
 					</>
+				) : parentId ? (
+					<CommonButton title={EButtonTitle.Reply} />
 				) : (
 					<CommonButton title={EButtonTitle.Comment} />
 				)}
 			</div>
-		</>
+		</form>
 	);
 }

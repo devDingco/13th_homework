@@ -7,6 +7,7 @@ export enum EButtonTitle {
 	Delete = 'delete',
 	Back = 'back',
 	Comment = 'comment',
+	Reply = 'reply',
 }
 
 export interface IButtonProps extends IButtonDisabled {
@@ -27,6 +28,7 @@ export enum EButtonKorea {
 	list = '목록으로',
 	update = '수정하기',
 	comment = '댓글 등록',
+	reply = '대댓글 등록',
 }
 
 export enum EBoardButton {

@@ -49,6 +49,7 @@ export interface IDeleteProps {
 export interface ICommentEditProps {
 	comment?: IBoardComment;
 	setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
+	parentId?: string;
 }
 
 export interface ICommentTextareProps {

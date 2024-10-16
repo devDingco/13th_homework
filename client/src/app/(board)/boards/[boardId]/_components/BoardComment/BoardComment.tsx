@@ -15,6 +15,8 @@ export default function BoardComment({ comment, setIsEdit }: ICommentEditProps) 
 
 	const changeDate = changeDateToISO(createdAt);
 
+	console.log(replies);
+
 	return (
 		<>
 			<div className="flex w-full items-center justify-between">
@@ -31,10 +33,12 @@ export default function BoardComment({ comment, setIsEdit }: ICommentEditProps) 
 			<div className="prose-r_16_24">{content}</div>
 			<div className="prose-r_14_20 text-[#818181]">{changeDate}</div>
 			<div className="prose-sb_16_24 w-24">
-				{replies.length ? (
+				{!replies ? (
+					<BoardCommentNoReplyWrapper parentId={_id} />
+				) : replies.length ? (
 					<BoardCommentReplyWrapper replies={replies} />
 				) : (
-					<BoardCommentNoReplyWrapper />
+					<BoardCommentNoReplyWrapper parentId={_id} />
 				)}
 			</div>
 		</>
