@@ -1,0 +1,40 @@
+class Monster {
+    power = 50
+
+    attack() {
+        console.log("공격합니다")
+    }
+}
+
+class 슈퍼몬스터 extends Monster{
+    //power값을 새로 명시 안하면 상속받아온 기본값을 쓰게됨
+    //오버라이딩 -덮어씌움
+    attack() {
+        console.log("슈퍼몬스터 필살기")
+    }
+
+    run() {
+        console.log("도망가기")
+    }
+}
+
+const monster = new Monster()
+
+monster.power
+50
+
+monster.attack()
+VM578:5 공격합니다
+
+
+const supermonster = new 슈퍼몬스터()
+
+supermonster.power
+50
+
+supermonster.attack()
+VM842:5 슈퍼몬스터 필살기
+
+
+supermonster.run()
+VM842:9 도망가기

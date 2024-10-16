@@ -15,6 +15,7 @@ import {
   Tooltip,
   TooltipProps,
 } from "antd";
+import ReactPlayer from "react-player";
 
 export default function BoardsDetail(props: IBoardsDetailprops) {
   const { listButton, editButton, data } = useBoardsDetail();
@@ -87,7 +88,7 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
               <div>
                 <Tooltip
                   placement="bottomLeft"
-                  title={`${data?.fetchBoard.boardAddress?.zipcode} ${data?.fetchBoard.boardAddress?.address}${data?.fetchBoard.boardAddress?.addressDetail}`}
+                  title={`${data?.fetchBoard.boardAddress?.zipcode} ${data?.fetchBoard.boardAddress?.address} ${data?.fetchBoard.boardAddress?.addressDetail}`}
                   arrow={mergedArrow}
                 >
                   <Image
@@ -147,16 +148,15 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
       <div className={styles.videoConatiner}>
         <div className={styles.grayBox}>
           {data?.fetchBoard.youtubeUrl ? (
-            <iframe
-              width="822"
-              height="464"
-              src={data.fetchBoard.youtubeUrl}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+            <ReactPlayer
+              url={data.fetchBoard.youtubeUrl}
+              playing={true}
+              muted={true}
+              controls={true}
+              loop={true}
+              width={"100%"}
+              height={"100%"}
+            />
           ) : (
             <div
               style={{

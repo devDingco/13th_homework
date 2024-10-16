@@ -1,0 +1,24 @@
+
+class Date {
+
+    qqq = 3
+
+    getFullYear() {
+
+    }
+
+    getMonth() {
+
+    }
+
+}
+
+
+위에 클래스를 사용하는 방법
+//date는? 인스턴스 라고 함 -->찍언낸 객체를 부르는말
+const date = new Date()
+date.qqq
+date.getFullYear()
+date.getMonth() // --> 메서드라고 부름 
+
+const date2 = new Date() --> 두번세번 찍어내기 가능

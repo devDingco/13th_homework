@@ -9,9 +9,6 @@ import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 
 const BoardsWrite = (props: IBoardWriteprops) => {
   const {
-    authorOnChange,
-    passwordOnChange,
-    titleOnChange,
     contentOnChange,
     signupButtonHandler,
     isAllFilled,
@@ -26,6 +23,8 @@ const BoardsWrite = (props: IBoardWriteprops) => {
     setAddressDetail,
     youtubeOnChange,
     data,
+
+    onChangeInputs,
   } = useBoardsWrite(props);
   return (
     <div className={styles.container}>
@@ -42,9 +41,10 @@ const BoardsWrite = (props: IBoardWriteprops) => {
                 작성자 <span className={styles.emphasize}>*</span>{" "}
               </label>
               <input
+                id="writer"
                 className={styles.input1}
                 type="text"
-                onChange={authorOnChange}
+                onChange={onChangeInputs}
                 disabled={props.isEdit}
                 defaultValue={data?.fetchBoard.writer ?? ""}
               />
@@ -57,9 +57,10 @@ const BoardsWrite = (props: IBoardWriteprops) => {
                 비밀번호 <span className={styles.emphasize}>*</span>{" "}
               </label>
               <input
+                id="password"
                 className={styles.input1}
                 type="password"
-                onChange={passwordOnChange}
+                onChange={onChangeInputs}
                 disabled={props.isEdit}
               />
               <div id="passwordRedText" className={styles.errorText}>
@@ -74,9 +75,10 @@ const BoardsWrite = (props: IBoardWriteprops) => {
                 제목 <span className={styles.emphasize}>*</span>{" "}
               </label>
               <input
+                id="title"
                 className={styles.input2}
                 type="text"
-                onChange={titleOnChange}
+                onChange={onChangeInputs}
                 defaultValue={data?.fetchBoard.title ?? " "}
               />
               <div id="titleRedText" className={styles.errorText}>
