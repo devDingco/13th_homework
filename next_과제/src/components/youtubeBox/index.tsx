@@ -1,32 +1,20 @@
 "use client";
-
-import styles from "./index.module.scss";
+import ReactPlayer from "react-player";
 import { useEffect, useState } from "react";
+import styles from "./index.module.scss";
 
-interface YouTubeBoxProps {
-  videoUrl: string;
-}
+const YoutubeBox = ({ videoUrl }: { videoUrl: string }) => {
+  const [isWindow, setIsWindow] = useState<boolean>(false);
 
-const YoutubeBox: React.FC<YouTubeBoxProps> = ({ videoUrl }) => {
-  const videoUrlSet =
-    videoUrl.includes(".be/") || videoUrl.includes("watch?v=")
-      ? `https://www.youtube-nocookie.com/embed/${
-          videoUrl.split(".be/")[1] + "&autoplay=1&mute=1" ||
-          videoUrl.split("watch?v=")[1] + "&autoplay=1&mute=1"
-        }`
-      : videoUrl;
-  // console.log(videoUrlSet);
-
+  useEffect(() => {
+    setIsWindow(true);
+  }, []);
   return (
     <div className={styles.videoWrapper}>
-      <iframe
-        title="YouTube video player"
-        src={videoUrlSet}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-        allowFullScreen
-      ></iframe>
+      {isWindow && (
+        <ReactPlayer url={videoUrl} controls playing={true} muted={true} />
+      )}
     </div>
   );
 };
-
 export default YoutubeBox;
