@@ -3,19 +3,26 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import { useParams } from "next/navigation";
-import { Comment, FETCH_COMMENTS, UPDATE_COMMENT } from "../queries";
+import {
+  Comment,
+  FETCH_COMMENTS,
+  UPDATE_COMMENT,
+} from "../../../queires/queries";
 import { ICommentWriteProps } from "../types";
 import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 
 export default function UseCommentWriteBox(props: ICommentWriteProps) {
   const [submit] = useMutation(Comment);
   const [edit] = useMutation(UPDATE_COMMENT);
+
   const params = useParams();
+
   const { data } = useQuery(FETCH_COMMENTS, {
     variables: {
       boardId: params.boardId,
     },
   });
+
   const [name, setName] = useState(
     props.isEdit ? data?.fetchBoardComments[props.index].writer : ""
   );
@@ -23,10 +30,10 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
   const [comment, setComment] = useState(
     props.isEdit ? data?.fetchBoardComments[props.index].contents : ""
   );
-
   const [value, setValue] = useState(
     props.isEdit ? data?.fetchBoardComments[props.index].rating : 0
   );
+
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -40,7 +47,9 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
   const onChangeStar = (value: any) => {
     setValue(value);
   };
+
   console.log(data);
+
   const onClickSubmit = async () => {
     try {
       await submit({
@@ -67,6 +76,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
       alert("에러");
     }
   };
+
   const onClickEdit = async () => {
     try {
       await edit({

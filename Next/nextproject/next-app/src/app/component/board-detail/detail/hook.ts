@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { FetchBoard } from "../../board-write/queries";
+import { FetchBoard } from "../../queires/queries";
 
 export const UseDetailWrite = () => {
   const params = useParams();

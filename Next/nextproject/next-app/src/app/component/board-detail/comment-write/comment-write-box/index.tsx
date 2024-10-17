@@ -41,7 +41,7 @@ export default function CommentWriteBox(props: ICommentWriteProps) {
               name="writer"
               defaultValue={
                 props.isEdit
-                  ? data?.fetchBoardComments[props.index].writer
+                  ? data?.fetchBoardComments[props.index]?.writer
                   : name
               }
               onChange={onChangeName}

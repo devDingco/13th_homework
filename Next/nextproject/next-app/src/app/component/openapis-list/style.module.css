@@ -1,0 +1,17 @@
+.css_APILayout {
+  width: 1920px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.css_apiImage {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  size: 100vw;
+}

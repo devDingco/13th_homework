@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { FETCH_COMMENTS } from "../comment-write/queries";
+import { FETCH_COMMENTS } from "../../queires/queries";
 
 export const useCommentList = () => {
   const params = useParams();
