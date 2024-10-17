@@ -16,22 +16,24 @@ export const useBoardsWrite = (props) => {
       boardId: params.boardId,
     },
   });
+  // 작성자, 비번, 제목, 내용 인풋 싹다 모아서 관리함.
+  const [requireInputs, setRequireInputs] = useState({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+  });
 
-  // 모달 상태 및 모달 컨트롤 함수 정의
-  // const [isOpen, setIsOpen] = useState(false);
+  //TODO: 에러부분도 충분히 리팩토링 가능해 보이지만 추후 시간이 나면 그때 바꿔보기
 
   // 작성자인풋, 작성자인풋에러
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState("");
+  const [writerError, setWriterError] = useState("");
   // 비번인풋, 비번인풋에러
-  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   // 제목인풋, 제목인풋에러
-  const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState("");
   // 내용인풋, 내용인풋에러
-  const [content, setContent] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [contentsError, setContentsError] = useState("");
 
   // 상황에 따른 버튼 활성화 or 비활성화
   const [isActive, setIsActive] = useState(false);
@@ -55,21 +57,7 @@ export const useBoardsWrite = (props) => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
 
   // 인풋 패스워드 검사해서 수정할지말지?
-  const [inputPassword, setInputPassword] = useState(""); // 비밀번호 상태 변수 추가 내가 추가한거
   const [isOpen, setIsOpen] = useState(false); // 주소모달 토글기능
-
-  const showModal = () => {
-    setIsOpen(true);
-  };
-
-  const handleOk = () => {
-    console.log("입력한 비밀번호:", inputPassword); // 비밀번호를 콘솔에 출력 (테스트 용도) 내가 추가한거
-    setIsOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsOpen(false);
-  };
 
   // 우편번호 조회하는 곳
   const onToggleModal = (event) => {
@@ -88,63 +76,16 @@ export const useBoardsWrite = (props) => {
     onToggleModal(event);
   };
 
-  // 그냥 esLint에러 보기싫어서 만든 줄
-  console.log(nameError, passwordError, titleError, contentError, isActive);
-
-  // 인풋값이 바뀐다면 저장하는 곳
-  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-
+  const onChangerequireInputs = (event) => {
+    setRequireInputs((prev) => ({
+      ...prev,
+      [event.target.id]: event.target.value,
+    }));
     if (
-      event.target.value !== "" &&
-      password !== "" &&
-      title !== "" &&
-      content !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-
-    if (
-      name !== "" &&
-      event.target.value !== "" &&
-      title !== "" &&
-      content !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-
-    if (
-      name !== "" &&
-      password !== "" &&
-      event.target.value !== "" &&
-      content !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
-
-    if (
-      name !== "" &&
-      password !== "" &&
-      title !== "" &&
-      event.target.value !== ""
+      requireInputs.writer !== "" &&
+      requireInputs.password !== "" &&
+      requireInputs.title !== "" &&
+      requireInputs.contents !== ""
     ) {
       setIsActive(true);
     } else {
@@ -182,8 +123,8 @@ export const useBoardsWrite = (props) => {
       boardId: params.boardId, // 수정할 게시물의 ID
       password: inputPassword, // 입력받은 비밀번호
 
-      title: title || undefined, // 수정할 제목
-      contents: content || undefined, // 수정할 내용
+      title: requireInputs.title || undefined, // 수정할 제목
+      contents: requireInputs.contents || undefined, // 수정할 내용
       youtubeUrl: youtubeUrl || undefined,
       zipcode: zipcode || undefined, // 수정할 우편번호
       address: address || undefined, // 수정할 주소
@@ -221,10 +162,10 @@ export const useBoardsWrite = (props) => {
   const onClickSignup = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    console.log("작성자 이름은:", name);
-    console.log("작성자 비번은:", password);
-    console.log("게시물 제목은:", title);
-    console.log("게시물 내용은:", content);
+    console.log("작성자 이름은:", requireInputs.writer);
+    console.log("작성자 비번은:", requireInputs.password);
+    console.log("게시물 제목은:", requireInputs.title);
+    console.log("게시물 내용은:", requireInputs.contents);
     console.log("유튜브 링크는:", youtubeUrl);
 
     // 유효성을 우선 true로 박아두고 문제가 1개라도 생긴다면 즉시 false로 바뀌므로
@@ -232,16 +173,18 @@ export const useBoardsWrite = (props) => {
 
     let isValid = true;
 
+    //TODO 이 부분도 유사해서 리팩토링해서 줄일 각이 보이는데 나중에 시간나면 시도해보기
+
     // 작성자 확인
-    if (name === "") {
-      setNameError("필수입력 사항 입니다.");
+    if (requireInputs.writer === "") {
+      setWriterError("필수입력 사항 입니다.");
       isValid = false;
     } else {
-      setNameError("");
+      setWriterError("");
     }
 
     // 비밀번호 확인
-    if (password === "") {
+    if (requireInputs.password === "") {
       setPasswordError("필수입력 사항 입니다.");
       isValid = false;
     } else {
@@ -249,7 +192,7 @@ export const useBoardsWrite = (props) => {
     }
 
     // 제목 확인
-    if (title === "") {
+    if (requireInputs.title === "") {
       setTitleError("필수입력 사항 입니다.");
       isValid = false;
     } else {
@@ -257,11 +200,11 @@ export const useBoardsWrite = (props) => {
     }
 
     // 내용 확인
-    if (content === "") {
-      setContentError("필수입력 사항 입니다.");
+    if (requireInputs.contents === "") {
+      setContentsError("필수입력 사항 입니다.");
       isValid = false;
     } else {
-      setContentError("");
+      setContentsError("");
     }
 
     // 제출 전 모든 부분이 만족해서 true인지 확인하고 alert을 띄울지 정하는 곳
@@ -275,7 +218,7 @@ export const useBoardsWrite = (props) => {
         // const result = await 나의함수({
         //   variables: {
         //     createBoardInput: {
-        //       writer: name,
+        //       writer: writer,
         //       password: password,
         //       title: title,            => variables 이렇게 지정하면 에러남 그냥 키: 벨류만 딱 두기
         //       contents: content,
@@ -291,10 +234,7 @@ export const useBoardsWrite = (props) => {
 
         const result = await 나의함수({
           variables: {
-            writer: name,
-            password: password,
-            title: title,
-            contents: content,
+            ...requireInputs, // => writer: writer, / password: password, / title: title, / contents: contents,
             youtubeUrl: youtubeUrl,
             zipcode: zipcode,
             address: address,
@@ -314,13 +254,11 @@ export const useBoardsWrite = (props) => {
   };
   // console.log(props.data?.fetchBoard.contents);
   return {
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangerequireInputs,
     onCLickUpdate,
     onClickSignup,
     onChangeYoutubeUrl,
+    writerError,
     // 아래부터 주소
     isOpen,
     onToggleModal,
@@ -332,13 +270,6 @@ export const useBoardsWrite = (props) => {
     setAddress,
     setZipcode,
     data,
-    password,
-
-    showModal,
-    handleOk,
-    handleCancel,
+    // password,
   };
 };
-function setYoutubeUrl(value: string) {
-  throw new Error("Function not implemented.");
-}
