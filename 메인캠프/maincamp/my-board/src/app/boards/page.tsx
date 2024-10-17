@@ -6,7 +6,7 @@ import { BoardsList } from '@/components/boards-list/list';
 export default function BoardsListPage() {
   return (
     <>
-      <BoardBanner />
+      {/* <BoardBanner /> */}
       <BoardsList />
     </>
   );
