@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this의 이해</title>
+    <script>
+      // ! this 는 실행 주체를 가리킨다. 그렇기 때문에 계속 변할 수 있다.
+      class 카운터클래스 {
+        count = 10;
+
+        카운트올려주세요() {
+          this.count = this.count + 1;
+          console.log("카운트의 this", this);
+          console.log("카운트의 this", this.count);
+        }
+
+        버튼그려주세요() {
+          console.log("버튼의 this", this);
+          const button = document.createElement("button");
+          button.count = 50;
+          button.innerText = "카운트 올리기 버튼";
+
+          // this.카운트올려주세요() 를 사용하면 this는 button을 가리키게 된다.
+          // button.addEventListener("click", this.카운트올려주세요);
+
+          // 1번째 방법 : bind를 사용하여 this를 앞에서 사용한 this로 고정시켜줄수 있다.
+          // button.addEventListener("click", this.카운트올려주세요.bind(this));
+
+          // 2번째 방법 : 화살표 함수를 사용하여 this를 앞에서 사용한 this로 고정시켜줄수 있다.
+          button.addEventListener("click", () => {
+            this.카운트올려주세요();
+          });
+
+          document.body.appendChild(button);
+        }
+      }
+
+      window.onload = () => {
+        const 카운터 = new 카운터클래스();
+        카운터.버튼그려주세요();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

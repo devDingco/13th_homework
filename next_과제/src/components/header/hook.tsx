@@ -42,18 +42,18 @@ export const useHeader = () => {
   ];
 
   const [current, setCurrent] = useState("/");
-  function getKeys(items) {
+
+  function getKeys(items: MenuProps["items"]): string[] {
     return _.flatMap(items, (item) => {
-      const keys = [item?.key];
-      if (item.children) {
+      if (!item) return [];
+      const keys = [item.key].filter((key): key is string => key !== undefined);
+      if ("children" in item && item.children) {
         keys.push(...getKeys(item.children)); // children의 key 값도 추출
       }
       return keys;
     });
   }
-
   const keys = getKeys(menuItems);
-  // console.log(keys);
 
   useEffect(() => {
     keys.forEach((key) => {

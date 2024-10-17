@@ -26,7 +26,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
     mode: "onChange",
   });
 
-  const params = useParams();
+  const { boardId } = useParams();
 
   const [textCount, setTextCount] = useState(0); // 댓글 글자 수
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
@@ -51,7 +51,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
           contents: "",
           rating: 0,
         },
-        boardId: String(params.boardId),
+        boardId: String(boardId),
       };
       if (commentWriter)
         newCommentData.createBoardCommentInput.writer = commentWriter;
@@ -67,11 +67,11 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         refetchQueries: [
           {
             query: FetchBoardCommentsDocument,
-            variables: { page: 1, boardId: String(params.boardId) },
+            variables: { boardId: String(boardId) },
           },
         ],
       });
-      console.log(result);
+      // console.log(result);
 
       // 댓글 등록 완료 모달
       modalControl({ type: "commentNewSubmit" });
@@ -114,7 +114,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         refetchQueries: [
           {
             query: FetchBoardCommentsDocument,
-            variables: { page: 1, boardId: String(params.boardId) },
+            variables: { boardId: String(boardId) },
           },
         ],
       });

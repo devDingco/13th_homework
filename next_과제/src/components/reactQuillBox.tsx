@@ -1,13 +1,9 @@
+"use client";
 import ReactQuill, { Quill } from "react-quill-new";
 import ImageResize from "quill-image-resize-module-react";
 import React, { forwardRef } from "react";
 import "react-quill-new/dist/quill.snow.css";
 
-// parchment 모듈 가져오기
-import * as Parchment from "parchment";
-
-// Quill에 parchment 모듈 등록
-Quill.register("parchment", Parchment);
 Quill.register("modules/imageResize", ImageResize);
 
 type ReactQuillBoxProps = {
@@ -18,6 +14,7 @@ type ReactQuillBoxProps = {
   readonly?: boolean;
   placeholder?: string;
   errormessage?: string;
+  defaultValue?: string;
 };
 
 const modules = {
@@ -33,11 +30,32 @@ const modules = {
     ["link", "image"],
     ["clean"],
   ],
+  // handlers:{
+  //   image: imageHandler
+  // },
   imageResize: {
     // 옵션 설정 (필요에 따라 설정)
+    parchment: Quill.import("parchment"),
     modules: ["Resize", "DisplaySize", "Toolbar"],
   },
 };
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+];
 
 const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
   (props, ref) => {
@@ -70,6 +88,7 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
           onChange={handleChange}
           readOnly={readonly}
           placeholder={props.placeholder}
+          // defaultValue={props.defaultValue}
           {...rest}
         />
         {errormessage && <p className="toolTip">{errormessage}</p>}

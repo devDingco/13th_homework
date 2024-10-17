@@ -1,5 +1,5 @@
 import ReactQuill, { Quill } from "react-quill-new";
-import { ImageResize } from "quill-image-resize-module-ts";
+import ImageResize from "quill-image-resize-module-react";
 import React, { forwardRef } from "react";
 import "react-quill-new/dist/quill.snow.css";
 import styles from "./index.module.scss";
@@ -39,23 +39,6 @@ const modules = {
     modules: ["Resize", "DisplaySize", "Toolbar"],
   },
 };
-
-const formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "video",
-];
 
 const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
   (props, ref) => {

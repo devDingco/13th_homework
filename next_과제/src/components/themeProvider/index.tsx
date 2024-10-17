@@ -17,15 +17,15 @@ export default function ThemeProvider({
     const themeCheck = localStorage.getItem("theme");
     if (themeCheck) {
       console.log("모드 확인", themeCheck);
+      setThemeControl(themeCheck === "dark" ? "dark" : "light");
+      const documentClass = document.documentElement.classList;
       if (themeCheck === "dark") {
-        setThemeControl("dark");
-        document.documentElement.classList.add("dark");
+        documentClass.add("dark");
       } else {
-        setThemeControl("light");
-        document.documentElement.classList.remove("dark");
+        documentClass.remove("dark");
       }
     }
-  }, [ThemeControl]);
+  }, []);
 
   const theme = (ThemeControl: string) => {
     const theme = {

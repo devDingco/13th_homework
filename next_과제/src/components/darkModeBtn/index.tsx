@@ -13,6 +13,7 @@ export default function DarkModeBtn(props: IdarkModeBtn) {
   const handleThemeChange = () => {
     const themeStr = theme === "light" ? "dark" : "light";
     localStorage.setItem("theme", themeStr);
+    document.documentElement.classList.toggle("dark");
     setTheme(themeStr);
   };
 

@@ -1,0 +1,44 @@
+class Date {
+  qqq = 3
+  getFullYear(){
+
+  }
+
+  getMonth(){
+
+  }
+
+
+}
+
+// 인스턴스
+const date = new Date()
+date.qqq
+date.getFullYear()
+date.getMonth() // 메서드
+
+class Monster {
+  power = 50
+  attack(){
+    console.log("공격이다!")
+  }
+}
+
+
+class 슈퍼몬스터 extend Monster {
+  attack(){
+    console.log("필살기다!")
+  }
+  run(){
+    console.log("도망가자!")
+  }
+}
+
+const monster = new Monster()
+monster.power
+monster.attack()
+
+const superMonster = new 슈퍼몬스터()
+superMonster.power
+superMonster.attack()
+superMonster.run()
