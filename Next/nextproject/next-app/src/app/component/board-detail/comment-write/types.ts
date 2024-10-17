@@ -1,5 +1,9 @@
-export interface IProps {
-  isEdit: boolean;
+// import { FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
+
+export interface ICommentWriteProps {
+  isEdit?: boolean;
   data?: any;
-  // data?: FetchBoardQuery
+  index: number;
+  // isCommentEdit: boolean;
+  // setIsCommetEdit: Dispatch<SetStateAction<boolean>>;
 }
