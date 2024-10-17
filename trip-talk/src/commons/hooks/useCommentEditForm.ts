@@ -4,13 +4,13 @@ import {
   FetchBoardCommentsDocument,
   UpdateBoardCommentDocument,
 } from "../graphql/graphql";
-import { IError } from "../../types/components.type";
+import { ICommentData } from "../../types/components.type";
 
-export default function useCommentEditForm(commentData) {
+export default function useCommentEditForm(commentData: ICommentData) {
   const [commentEditData, setCommentEditData] = useState({
     writer: commentData.commentData.writer,
     password: "",
-    contents: commentData.commentData.content,
+    contents: commentData.commentData.contents,
   });
 
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
@@ -23,8 +23,6 @@ export default function useCommentEditForm(commentData) {
       ...prev,
       [id]: value,
     }));
-
-    console.log(commentEditData);
   };
 
   const handleSubmitEdit = async (event: FormEvent<HTMLFormElement>) => {
@@ -42,13 +40,15 @@ export default function useCommentEditForm(commentData) {
       });
       console.log(result);
     } catch (error) {
-      const err = error as IError;
-      console.error(err);
+      console.error(error);
       alert("error");
     }
   };
 
-  let disabledButton;
+  const disabledButton = !(
+    commentEditData.password &&
+    commentData.commentData.contents !== commentEditData.contents
+  );
 
   return {
     handleSubmitEdit,
