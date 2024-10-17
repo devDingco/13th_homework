@@ -7,9 +7,12 @@ import { Address } from "react-daum-postcode";
 import { FetchBoardQuery } from "@/commons/graphql/graphql";
 
 export const useBoardsWrite = (props: IBoardWriteprops) => {
-  const [author, setAuthor] = useState("");
-  const [password, setPassword] = useState("");
   const [isAllFilled, setIsAllFilled] = useState(false);
+  const [inputs, setInputs] = useState({
+    writer: "",
+    password: "",
+    title: "",
+  });
 
   const [aboutUpLoadBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -22,7 +25,6 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     },
   });
 
-  const [title, setTitle] = useState(data?.fetchBoard.title || "");
   const [content, setContent] = useState(data?.fetchBoard.contents || "");
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
         const result = await updateBoard({
           variables: {
             updateBoardInput: {
-              title: title || "", // 제목 수정 여부 체크
+              title: inputs.title || "", // 제목 수정 여부 체크
               contents: content || "", // 내용 수정 여부 체크
               youtubeUrl: youtubeUrl || "",
               boardAddress: {
@@ -53,7 +55,10 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
             boardId: params.boardId,
           },
         });
-        setPassword(enteredPassword);
+        setInputs((prev) => ({
+          ...prev, // 기존 입력값 복사
+          password: enteredPassword, // password만 업데이트
+        }));
         console.log(result);
       } catch (error: any) {
         console.log(error.message);
@@ -75,22 +80,19 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
   useEffect(() => {
     // 수정 모드가 아닌 경우에만 필수 입력사항을 체크하여 버튼 활성화
     if (!props.isEdit) {
-      setIsAllFilled(!!(author && password && title && content));
+      setIsAllFilled(
+        !!(inputs.writer && inputs.password && inputs.title && content)
+      );
     } else {
       setIsAllFilled(true); // 수정 모드에서는 항상 true로 설정하여 버튼 활성화
     }
-  }, [author, password, title, content, props.isEdit]);
+  }, [inputs.writer, inputs.password, inputs.title, content, props.isEdit]);
 
-  const authorOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
-  };
-
-  const passwordOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const titleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev) => ({
+      ...prev,
+      [event.target.id]: event.target.value,
+    }));
   };
 
   const contentOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -99,7 +101,6 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
   const youtubeOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
-
   const signupButtonHandler = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -115,9 +116,9 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
       const result = await aboutUpLoadBoard({
         variables: {
           createBoardInput: {
-            writer: author,
-            password: password,
-            title: title,
+            writer: inputs.writer,
+            password: inputs.password,
+            title: inputs.title,
             contents: content,
             youtubeUrl: youtubeUrl,
             boardAddress: {
@@ -141,7 +142,8 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     try {
       const updateBoardInput: any = {
         // title, content 수정 안했으면 기존 값 유지, 수정했을 때 지울 수 있도록 빈 값 전달
-        title: title !== undefined ? title : data?.fetchBoard.title,
+        title:
+          inputs.title !== undefined ? inputs.title : data?.fetchBoard.title,
         contents: content !== undefined ? content : data?.fetchBoard.contents,
         youtubeUrl:
           youtubeUrl !== undefined ? youtubeUrl : data?.fetchBoard.youtubeUrl,
@@ -166,7 +168,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
       const result = await updateBoard({
         variables: {
           boardId: String(params.boardId), // boardId는 별도로 전달
-          password: password, // password도 별도로 전달
+          password: inputs.password, // password도 별도로 전달
           updateBoardInput: updateBoardInput, // update할 데이터 전달
         },
       });
@@ -216,9 +218,6 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
   };
 
   return {
-    authorOnChange,
-    passwordOnChange,
-    titleOnChange,
     contentOnChange,
     signupButtonHandler,
     isAllFilled,
@@ -231,7 +230,8 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     setAddress,
     addressDetail,
     setAddressDetail,
-    youtubeOnChange,
     data,
+    youtubeOnChange,
+    onChangeInputs,
   };
 };

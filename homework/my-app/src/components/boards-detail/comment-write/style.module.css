@@ -239,6 +239,7 @@ body{
   margin-left: 10px;
   display: flex;
   gap: 8px;
+  margin-bottom: 10px;
 }
 .commentInput {
   width: 100%;

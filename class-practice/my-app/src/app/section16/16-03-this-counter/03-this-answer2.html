@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>this의 이해</title>
+    <script>
+      class 카운트클래스 {
+        count = 10;
+
+        카운트올려주세요() {
+          console.log("카운트올려주세요 this", this); //this = 카운터클래스
+
+          this.count = this.count + 1;
+          console.log(this.count);
+        }
+
+        버튼그려주세요() {
+          console.log("버튼그려주세요 this", this); //this = 카운터클래스
+
+          const button = document.createElement("button");
+          //   button.count = 50;
+          button.innerText = "카운트 올리는 버튼";
+          button.addEventListener("click", this.카운트올려주세요.bind(this)); // 해결방법2) this가 변경될 부분에, 미리 현재 로직상의 this를 연결해 둠
+          document.body.appendChild(button);
+        }
+      }
+
+      window.onload = () => {
+        const 카운터 = new 카운트클래스();
+        카운터.버튼그려주세요();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

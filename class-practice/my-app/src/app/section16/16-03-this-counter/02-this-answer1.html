@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>this의 이해</title>
+    <script>
+      class 카운트클래스 {
+        count = 10;
+
+        // 해결방법1) 화살표 함수로 바꾸기  --> 실행주체가 바껴도 로직 상에서의 this를 가리킴
+        카운트올려주세요 = () => {
+          console.log("카운트올려주세요 this", this); //this = 카운터클래스
+          this.count = this.count + 1;
+          console.log(this.count);
+        };
+
+        버튼그려주세요() {
+          console.log("버튼그려주세요 this", this); //this = 카운터클래스
+
+          const button = document.createElement("button");
+
+          button.innerText = "카운트 올리는 버튼";
+          button.addEventListener("click", this.카운트올려주세요);
+          document.body.appendChild(button);
+        }
+      }
+
+      window.onload = () => {
+        const 카운터 = new 카운트클래스();
+        카운터.버튼그려주세요();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

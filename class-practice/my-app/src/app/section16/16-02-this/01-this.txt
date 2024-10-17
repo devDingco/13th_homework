@@ -1,0 +1,12 @@
+this
+this를 감싸고있는 객체 또는 클래스를 가리킨다 
+
+Window {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
+function 더하기() {
+    console.log(this)
+}
+
+
+
+더하기()
+VM1462:2 Window {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
