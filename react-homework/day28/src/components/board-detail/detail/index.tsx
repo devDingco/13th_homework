@@ -6,6 +6,7 @@ import Link from "next/link";
 import likeButton from "@mui/icons-material/FavoriteBorder";
 import { IconButton, SvgIcon } from "@mui/material";
 import dislikeButton from "@mui/icons-material/HeartBrokenOutlined";
+import { formDate } from "@/utils/date";
 
 const BoardsDetail = () => {
   const { params, data } = useBoardsDetail();
@@ -28,7 +29,7 @@ const BoardsDetail = () => {
               <div className={styles.user_name}>{data?.fetchBoard.writer}</div>
             </div>
             <div className={styles.user_date}>
-              {data?.fetchBoard.createdAt?.split("T")[0]}
+              {formDate(data?.fetchBoard.createdAt)}
             </div>
           </div>
 
@@ -90,6 +91,7 @@ const BoardsDetail = () => {
             <div className={styles.like_count}>10</div>
           </div>
         </div>
+        {/* 이 부분 따로 컴포넌트로 빼주기 */}
         <div className={styles.list_edit_btn_group}>
           <Link href={"/boards"} className={styles.list_btn}>
             <Image

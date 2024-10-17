@@ -27,6 +27,7 @@ const CommentWrite = () => {
           댓글
         </div>
         <div className={styles.star_btn_box}>
+          {/* 별점 컴포넌트로 빼고싶은데 */}
           <Rate onChange={setRating} value={rating} />
         </div>
         <div className={styles.comment_group}>

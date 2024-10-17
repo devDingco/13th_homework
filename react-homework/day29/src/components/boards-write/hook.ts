@@ -11,7 +11,8 @@ import { ChangeEvent, useState } from "react";
 import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 
-export const useBoardsWrite = () => {
+export const useBoardsWrite = (data) => {
+  console.log("받아온 data: ", data);
   // input state
   const [inputs, setInputs] = useState<IInputs>({
     writer: "",
@@ -23,8 +24,9 @@ export const useBoardsWrite = () => {
   const [errors, setErrors] = useState<IErrors>({});
   // address state
   const [addressInfo, setAddressInfo] = useState({
-    zipcode: "",
-    address: "",
+    // 수정하기에서 초깃값 안불러와짐 ㅠ
+    zipcode: data?.fetchBoard?.fetchBoard?.boardAddress.zipcode ?? "",
+    address: data?.fetchBoard?.fetchBoard?.boardAddress.address ?? "",
   });
   // 상세주소 state
   const [addressDetail, setAddressDetail] = useState("");
@@ -32,6 +34,7 @@ export const useBoardsWrite = () => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   // 등록하기버튼 비활성화 or 활성화 state
   const [isDisabled, setIsDisabled] = useState(true);
+
   // modal 토글 - password
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   // modal password
@@ -149,18 +152,23 @@ export const useBoardsWrite = () => {
   const handleOk = async () => {
     try {
       const variables: UpdateBoardMutationVariables = {
-        updateBoardInput: {},
+        updateBoardInput: {
+          boardAddress: {
+            zipcode: addressInfo.zipcode,
+            address: addressInfo.address,
+          },
+        },
         password: modalPassword,
         boardId: boardId,
       };
 
       // state에 값이 있으면 넣기
-      if (inputs.title) {
-        variables.updateBoardInput.title = inputs.title;
-      }
-      if (inputs.contents) {
+      if (inputs.title) variables.updateBoardInput.title = inputs.title;
+      if (inputs.contents)
         variables.updateBoardInput.contents = inputs.contents;
-      }
+      if (youtubeUrl) variables.updateBoardInput.youtubeUrl = youtubeUrl;
+      if (addressDetail)
+        variables.updateBoardInput.boardAddress.addressDetail = addressDetail;
 
       const result = await updateBoard({
         variables: variables,
@@ -182,6 +190,7 @@ export const useBoardsWrite = () => {
         errorModal("에러가 발생하였습니다.");
       }
     }
+
     // 모달 닫기
     onTogglePasswordModal();
   };

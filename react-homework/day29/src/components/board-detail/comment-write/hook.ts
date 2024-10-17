@@ -17,7 +17,6 @@ export const useCommentWrite = () => {
   // rating state
   const [rating, setRating] = useState(0);
 
-  // params 이거 Page컴포넌트에서 props로 받아오는게 나으려나..
   const params = useParams();
   // boardId
   const boardId = params.boardId as string;

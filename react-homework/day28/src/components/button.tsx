@@ -8,8 +8,8 @@ const Button: React.FC<IButton> = ({
 }) => {
   const getClassName = () => {
     switch (variant) {
-      case "cancel":
-        return "btn_cancel";
+      case "back":
+        return "btn_back";
       case "active":
         return "btn_basic_active";
       case "blue_active":
