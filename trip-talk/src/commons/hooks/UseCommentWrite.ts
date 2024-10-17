@@ -81,7 +81,6 @@ export default function useCommentWrite() {
     handleInputChange,
     disabledButton,
     comment,
-    rating,
     setRating,
   };
 }
