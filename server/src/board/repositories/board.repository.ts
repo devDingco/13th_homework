@@ -14,7 +14,7 @@ import { PaginationResponseDto } from '../dto/pagination-response.dto';
 @Injectable()
 export class BoardRepository {
     constructor(
-        @InjectRepository(Board)
+        @InjectRepository(Board, 'mongodb')
         private readonly boardRepository: MongoRepository<Board>,
     ) {}
 

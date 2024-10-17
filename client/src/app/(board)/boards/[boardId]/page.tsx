@@ -37,10 +37,9 @@ export default function DetailPage({ params }: IDetailProps) {
 						Component={BoardLikeHate}
 					/>
 				</Suspense>
-
-				<BoardFooter />
-				<BoardCommentContainer boardId={boardId} />
 			</ErrorBoundary>
+			<BoardFooter />
+			<BoardCommentContainer boardId={boardId} />
 		</div>
 	);
 }

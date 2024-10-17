@@ -10,17 +10,18 @@ import { useFormState } from 'react-dom';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
-export function useBoardCommentForm(comment?: IBoardComment) {
+export function useBoardCommentForm(comment?: IBoardComment, parentId?: string) {
 	const { page } = useCommentPageStore();
 	const param = useParams();
 
-	const [rating, setRating] = useState<number>(comment ? comment.rating : 0);
+	const [rating, setRating] = useState<number>(comment ? (comment.rating as number) : 0);
 
 	const [length, setLength] = useState<number>(comment ? comment.content.length : 0);
 
 	const [state, formAction] = useFormState(createBoardCommentAction, {
 		result: '',
 		boardId: param.boardId,
+		parentId: parentId || null,
 		error: undefined,
 	});
 

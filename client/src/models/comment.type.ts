@@ -3,10 +3,11 @@
 export interface ICommonAPIComment {
 	author: string;
 	content: string;
-	rating: number;
+	rating: number | null;
 }
 export interface IRequestComment extends ICommonAPIComment {
 	password: string;
+	parentId: string | null;
 }
 
 export interface IResponseComment extends ICommonAPIComment {
@@ -15,13 +16,14 @@ export interface IResponseComment extends ICommonAPIComment {
 	_id: string;
 	createdAt: string;
 	updatedAt: string;
+	replies: IBoardComment[];
 }
 
 export interface IBoardCommentProp {
 	boardId: string;
 }
 
-export interface IBoardComment extends ICommonAPIComment {
+export interface IBoardComment extends ICommonAPIComment, IReplies {
 	_id: string;
 	parentId: string | null;
 	createdAt: string;
@@ -29,4 +31,13 @@ export interface IBoardComment extends ICommonAPIComment {
 export interface IBoardCommentProps {
 	key: string;
 	comment: IBoardComment;
+}
+export interface IReplies {
+	replies: IBoardComment[];
+}
+export interface IReply {
+	reply: IBoardComment;
+}
+export interface IParentId {
+	parentId: string;
 }

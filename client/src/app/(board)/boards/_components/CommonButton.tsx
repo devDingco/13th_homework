@@ -1,5 +1,6 @@
 /** @format */
 // TODO 이거 너무 복잡함 정신없음 무조건 리팩토링 해야함
+// TODO Button case 처리하기
 
 import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
@@ -45,7 +46,8 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }
 					onClickBack();
 				}
 				break;
-
+			case EButtonTitle.Reply:
+				break;
 			case EButtonTitle.Sumbit:
 				// 현재 업데이트하면 그 이후 로직은 짜지 않았음
 				// 추후 업데이트할 예정
@@ -65,7 +67,9 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }
 				(title === EButtonTitle.Sumbit || title === EButtonTitle.Update) &&
 				(isButtonDisabled ? 'bg-gray-300 text-gray-100' : 'bg-[#2974E5] text-gray-100')
 			} ${
-				(title === EButtonTitle.Delete || title === EButtonTitle.Comment) &&
+				(title === EButtonTitle.Delete ||
+					title === EButtonTitle.Comment ||
+					title === EButtonTitle.Reply) &&
 				'border-white bg-black text-white'
 			}`}
 			onClick={onClickButtonCondition}

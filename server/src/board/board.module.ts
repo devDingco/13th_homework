@@ -15,12 +15,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([
-            Board,
-            BoardIdCounter,
-            BoardReaction,
-            BoardComment,
-        ]),
+        TypeOrmModule.forFeature(
+            [Board, BoardIdCounter, BoardReaction, BoardComment],
+            'mongodb',
+        ),
         BoardReactionModule,
     ],
     controllers: [BoardController],

@@ -10,7 +10,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([BoardComment, Board]), BoardModule],
+    imports: [
+        TypeOrmModule.forFeature([BoardComment, Board], 'mongodb'),
+        BoardModule,
+    ],
     controllers: [BoardCommentController],
     providers: [
         BoardCommentService,

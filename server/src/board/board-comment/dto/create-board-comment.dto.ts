@@ -33,7 +33,7 @@ export class CreateBoardCommentDto {
     @Max(5)
     @Column()
     @Field(() => Int)
-    rating: number;
+    rating?: number;
 
     @IsString()
     @IsOptional()
