@@ -29,13 +29,11 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     onClickZipCodeSearch,
     handleComplete,
     addressInfo,
-    addressDetail,
     onChangeAddressDetail,
 
-    youtubeUrl,
     onChangeYoutubeUrl,
-  } = useBoardsWrite();
-
+  } = useBoardsWrite(props.data);
+  console.log(addressInfo);
   return (
     <div className={styles.post_page_body}>
       <div className={styles.post_page}>
@@ -128,10 +126,12 @@ export default function BoardsWrite(props: BoardsWriteProps) {
             />
             <input
               type="text"
-              value={addressDetail}
               onChange={onChangeAddressDetail}
               className={styles.input_box}
               placeholder="상세주소"
+              defaultValue={
+                props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
+              }
             />
           </FieldWrapper>
 
@@ -141,8 +141,8 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           <FieldWrapper label="유튜브 링크">
             <InputField
               placeholder="링크를 입력해 주세요."
-              value={youtubeUrl}
               onChange={onChangeYoutubeUrl}
+              defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}
             />
           </FieldWrapper>
 

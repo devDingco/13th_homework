@@ -1,4 +1,4 @@
-import { IButton } from "../types/button";
+import { IButton } from "../commons/types/button";
 
 const Button: React.FC<IButton> = ({
   children,

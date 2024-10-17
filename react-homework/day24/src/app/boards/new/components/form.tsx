@@ -13,7 +13,7 @@ import ContentGroup from "./content";
 import UploadFile from "./upload";
 
 import { useMutation } from "@apollo/client";
-import Button from "@/commons/components/button";
+import Button from "@/components/button";
 
 const Form = () => {
   // input state

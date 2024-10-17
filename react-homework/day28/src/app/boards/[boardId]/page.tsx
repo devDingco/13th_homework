@@ -7,7 +7,6 @@ const BoardsDetailPage = () => {
   return (
     <>
       <BoardsDetail />
-
       <CommentWrite />
       <CommentList />
     </>

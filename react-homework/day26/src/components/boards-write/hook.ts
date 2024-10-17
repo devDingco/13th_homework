@@ -42,7 +42,7 @@ export const useBoardsWrite = () => {
       (input) => input !== ""
     );
     setIsDisabled(!allInputFilled);
-    console.log(inputs);
+    //console.log(inputs);
   };
 
   // 등록하기 - graphql state 전달
