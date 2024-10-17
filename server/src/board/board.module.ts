@@ -12,6 +12,7 @@ import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BoardImageModule } from './board-image/board-image.module';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             'mongodb',
         ),
         BoardReactionModule,
+        BoardImageModule,
     ],
     controllers: [BoardController],
     providers: [
