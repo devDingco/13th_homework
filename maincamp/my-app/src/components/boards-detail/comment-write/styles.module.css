@@ -1,0 +1,78 @@
+.commentWrap{
+    width:128rem;
+    height:40rem;
+    margin-top:6rem;
+}
+
+/* 댓글 상단 이미지 */
+.comment_top{
+    display:flex;
+}
+.comment_top .commentImg{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/comment.png) no-repeat;
+}
+.comment_top p{
+    font-size:1.6rem;
+}
+
+/* 댓글 등록 */
+.content_box{
+    width:128rem;
+    height:24rem;
+}
+.content_box .writer p, .content_box .password p{
+    font-size:1.6rem;
+    font-weight:500;
+    margin-bottom:1.6rem;
+}
+.content_box .writer .d_flex,
+.content_box .password .d_flex{
+    display:flex;
+}
+.content_box .writer span,
+.content_box .password span{
+    color:#f66a6a;
+    font-size:1.6rem;
+    margin-left:0.8rem;
+}
+
+.content_flex{
+    width:64rem;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* 인풋 공통 */
+.content_box .writer input, 
+.content_box .password input, 
+.content_box .comment_box textarea{
+    padding:1.2rem 1.6rem;
+    border:1px solid #d4d3d3;
+    border-radius:0.8rem;
+    font-size:1.6rem;
+    color:#ababab;
+}
+.content_box .writer input, .content_box .password input{
+    width:31.2rem;
+    height:4.8rem;
+}
+.content_box .comment_box textarea{
+    width:128rem;
+    height:14.4rem;
+    margin-top:3.2rem;
+}
+
+.content_box button{
+    width:9.9rem;
+    height:4.8rem;
+    border-radius:0.8rem;
+    padding:1.2rem 1.6rem;
+    background-color:#c7c7c7;
+    color:#e4e4e4;
+    font-size:1.8rem;
+    float:right;
+    margin:1.6rem 0;
+    cursor:pointer;
+}

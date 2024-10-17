@@ -1,4 +1,5 @@
 "use client"
+import BoardCommentWrite from "../comment-write";
 import styles from "./styles.module.css"
 import useBoardsDetail from "@/components/boards-detail/detail/hook"
 

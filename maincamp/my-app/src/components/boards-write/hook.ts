@@ -3,14 +3,17 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, MouseEvent, useState } from "react";
-import { boardGraphql, FETCH_BOARD, UPDATE_BOARD } from "./queries";
-import { CreateBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
+import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
 
 export default function useBoardDetailEdit(isEdit: boolean){
     const router = useRouter();
     const params = useParams();
 
-    const editId = isEdit ? params.boardId.toString() : null;
+    const editId = isEdit ? params.boardId.toString() : "";
+
+    // GraphQL
+    const [createBoard] = useMutation(CreateBoardDocument);
+    const [updateBoard] = useMutation(UpdateBoardDocument);
 
     const [name, setName] = useState("")
     const [nameError, setNameError] = useState("")
@@ -26,8 +29,8 @@ export default function useBoardDetailEdit(isEdit: boolean){
 
     const [isActive, setIsActive] = useState(false)
 
-    const {data} = useQuery(FETCH_BOARD, {
-        variables: {boardId: editId},
+    const {data} = useQuery(FetchBoardDocument, {
+        variables: {boardId: editId.toString()},
     }); // useQuery는 data로 받아야함
     console.log('data:::::', data);
 
@@ -57,9 +60,6 @@ export default function useBoardDetailEdit(isEdit: boolean){
         setIsActive(false)
     }
 
-    // GraphQL
-    const [createBoard] = useMutation(boardGraphql);
-    const [updateBoard] = useMutation(UPDATE_BOARD);
 
     let registerError = false;
 
@@ -99,7 +99,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
             }
         
             if(!registerError){
-                const result = await createBoard({
+                const {data} = await createBoard({
                     variables: {
                         createBoardInput:{
                             writer: name,
@@ -116,8 +116,8 @@ export default function useBoardDetailEdit(isEdit: boolean){
                         }
                     },
                 })
+                console.log("id:::" , data?.createBoard._id);
                 alert("게시글이 등록되었습니다.")
-                console.log(data.createBoard._id);
         
                 router.push(`/boards/${data?.createBoard._id}`)
             }
