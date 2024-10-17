@@ -1,0 +1,64 @@
+.openApisListContainer {
+  max-width: 80rem;
+  width: 80rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.headerContainer {
+  font-weight: 500;
+  font-size: 26px;
+}
+
+.searchBardContainer {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #c7c7c7;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.locationContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.navItem {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #333333;
+}
+
+.navItem_selected {
+  font-weight: 500;
+  font-size: 1.25rem;
+
+  border-bottom: 2px solid black;
+}
+
+.cardListContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.cardImage {
+  width: 1240 / 3;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
