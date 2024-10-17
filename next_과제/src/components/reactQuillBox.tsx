@@ -1,10 +1,10 @@
 "use client";
 import ReactQuill, { Quill } from "react-quill-new";
-import ImageResize from "quill-image-resize-module-react";
-import React, { forwardRef } from "react";
+import QuillResizeImage from "quill-resize-image";
+import { forwardRef } from "react";
 import "react-quill-new/dist/quill.snow.css";
 
-Quill.register("modules/imageResize", ImageResize);
+Quill.register("modules/resize", QuillResizeImage);
 
 type ReactQuillBoxProps = {
   id?: string;
@@ -30,32 +30,10 @@ const modules = {
     ["link", "image"],
     ["clean"],
   ],
-  // handlers:{
-  //   image: imageHandler
-  // },
-  imageResize: {
-    // 옵션 설정 (필요에 따라 설정)
-    parchment: Quill.import("parchment"),
-    modules: ["Resize", "DisplaySize", "Toolbar"],
+  resize: {
+    locale: {},
   },
 };
-
-const formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "video",
-];
 
 const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
   (props, ref) => {
