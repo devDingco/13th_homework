@@ -60,7 +60,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                 </div>
             </header>
 
-            <main className={styles.detail_main}>
+            <section className={styles.detail_main}>
                 <Image
                     src="/img/bg01.png"
                     alt="thumbnail"
@@ -109,24 +109,10 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
                 <div className={styles.main_recommend}>
                     <div className={styles.recommend_bad}>
-                        {/* <Image
-                            src="/svg/bad.svg"
-                            alt="thumbnail"
-                            width={24}
-                            height={24}
-                            sizes="100%"
-                        /> */}
                         <FrownFilled />
                         <p>1</p>
                     </div>
                     <div className={styles.recommend_good}>
-                        {/* <Image
-                            src="/svg/good.svg"
-                            alt="thumbnail"
-                            width={24}
-                            height={24}
-                            sizes="100%"
-                        /> */}
                         <HeartFilled style={{ color: "#f55" }} />
                         <p>2</p>
                     </div>
@@ -191,7 +177,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                         <p>{isEdit ? "수정완료" : "수정하기"}</p>
                     </div>
                 </div>
-            </main>
+            </section>
         </>
     );
 }

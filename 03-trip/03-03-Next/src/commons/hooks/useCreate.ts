@@ -3,15 +3,16 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { CreateBoardDocument } from "../graphql/graphql";
-import { ICreateProps } from "../types/types";
 
-export default function useCreate(props: ICreateProps) {
-    const { author, password, title, content } = props;
+export default function useCreate({ ...args }) {
+    const { author, password, title, content } = args;
 
     const [createBoard] = useMutation(CreateBoardDocument);
     const Router = useRouter();
 
-    const onClickCreate = async () => {
+    const onClickCreate = async (e) => {
+        e.preventDefault();
+
         if (author === "") return alert("작성자를 확인해 주세요.");
         if (password === "") return alert("비밀번호를 확인해 주세요.");
         if (title === "") return alert("제목을 작성해 주세요.");
@@ -26,12 +27,6 @@ export default function useCreate(props: ICreateProps) {
                         password: password,
                         title: title,
                         contents: content,
-                        // youtubeUrl: link,
-                        // boardAddress: {
-                        //     zipcode: zipcode,
-                        //     address: address01,
-                        //     addressDetail: address02,
-                        // },
                     },
                 },
             });
@@ -44,5 +39,5 @@ export default function useCreate(props: ICreateProps) {
         }
     };
 
-    return onClickCreate;
+    return { onClickCreate };
 }

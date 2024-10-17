@@ -23,7 +23,7 @@ export const InputStyle = {
 
 // for textarea tag (in atoms)
 export const TextStyle = {
-    minHeight: "30rem",
+    minHeight: "10rem",
     overflow: "scroll",
     paddingTop: "1.2rem",
     lineHeight: "2.4rem",

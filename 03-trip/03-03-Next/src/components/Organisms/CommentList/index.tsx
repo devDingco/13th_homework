@@ -3,49 +3,57 @@
 import { Rate } from "antd";
 
 import Image from "next/image";
-
 import profile from "/public/svg/person.svg";
 import edit from "/public/svg/edit.svg";
 import close from "/public/svg/close.svg";
 
+import {
+    comment_btn,
+    comment_input,
+    comment_label,
+    comment_wrap,
+} from "@/commons/styles/commentStyles";
+
+import { useQuery } from "@apollo/client";
+import { useParams } from "next/navigation";
+import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+
 export default function CommentListUI() {
-    const comment = `
-살겠노라 살겠노라. 청산에 살겠노라.
-머루랑 다래를 먹고 청산에 살겠노라.
-얄리얄리 얄랑셩 얄라리 얄라
-    `;
+    const params = useParams();
+
+    const { data } = useQuery(FetchBoardCommentsDocument, {
+        variables: { page: 1, boardId: String(params.boardId) },
+    });
 
     return (
-        <>
-            <div
-                style={{
-                    width: "1000px",
-                    backgroundColor: "#f3f2f7",
-                    borderRadius: "8px",
-                    padding: "20px",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <div style={{ display: "flex", gap: "10px" }}>
-                        <Image src={profile} alt="profile" />
-                        <div>writer</div>
-                        <Rate disabled defaultValue={2} />
-                    </div>
-                    <div style={{ display: "flex", gap: "10px" }}>
-                        <Image src={edit} alt="edit" />
-                        <Image src={close} alt="close" />
-                    </div>
-                </div>
+        <section style={comment_wrap}>
+            {data ? (
+                data.fetchBoardComments.map((el) => (
+                    <div key={el._id}>
+                        <div style={comment_input}>
+                            <div style={comment_label}>
+                                <Image src={profile} alt="profile" />
+                                <div>{el.writer}</div>
+                                <Rate value={el.rating} allowHalf disabled />
+                            </div>
+                            <div style={comment_label}>
+                                <div style={comment_btn}>
+                                    <Image src={edit} alt="edit" />
+                                </div>
+                                <div style={comment_btn}>
+                                    <Image src={close} alt="close" />
+                                </div>
+                            </div>
+                        </div>
 
-                <pre style={{ margin: "0", padding: "0" }}>{comment}</pre>
+                        <pre>{el.contents}</pre>
 
-                <div>2024.11.11</div>
-            </div>
-        </>
+                        <div>{el.createdAt.split("T")[0]}</div>
+                    </div>
+                ))
+            ) : (
+                <div>등록된 댓글이 없습니다.</div>
+            )}
+        </section>
     );
 }

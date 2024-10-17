@@ -1,6 +1,7 @@
 "use client";
 
 import { Rate } from "antd";
+import { useState } from "react";
 
 import Button from "@/components/Atoms/_Button";
 import InputField from "@/components/Molecules/_InputField";
@@ -8,36 +9,42 @@ import InputField from "@/components/Molecules/_InputField";
 import Image from "next/image";
 import chat from "/public/svg/chat.svg";
 
+import {
+    comment_input,
+    comment_label,
+    comment_wrap,
+} from "@/commons/styles/commentStyles";
+
+import useCommentNew from "@/commons/hooks/useCommentNew";
+
 export default function CommentNewUI() {
+    const [stars, setStars] = useState(0);
+
+    const { changeCommentData, createCommentNew } = useCommentNew(stars);
+
     return (
-        <div
-            style={{
-                width: "1000px",
-                backgroundColor: "#f3f2f7",
-                borderRadius: "8px",
-                padding: "20px",
-            }}
-        >
-            <div style={{ display: "flex", gap: "10px" }}>
+        <section style={comment_wrap}>
+            <div style={comment_label}>
                 <Image src={chat} alt="chat" />
                 <label>댓글</label>
             </div>
 
-            <Rate />
-            <br />
-            <br />
+            <Rate value={stars} onChange={setStars} allowHalf />
 
-            <div style={{ display: "flex", gap: "20px" }}>
-                <InputField id="author_ID" required />
-                <InputField id="password_ID" required />
+            <div style={{ ...comment_input, width: "50rem" }}>
+                <InputField id="author_ID" onChange={changeCommentData} />
+                <InputField id="password_ID" onChange={changeCommentData} />
             </div>
-            <br />
 
-            <textarea></textarea>
-            <br />
-            <br />
+            <div>
+                <InputField
+                    id="content_ID"
+                    onChange={changeCommentData}
+                    textarea
+                />
+            </div>
 
-            <Button label="등록하기" />
-        </div>
+            <Button label="등록하기" onClick={createCommentNew} />
+        </section>
     );
 }

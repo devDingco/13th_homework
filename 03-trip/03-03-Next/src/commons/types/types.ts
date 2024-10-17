@@ -1,9 +1,12 @@
-export interface ICreateProps {
-    author: string;
-    password: string;
-    title: string;
-    content: string;
-}
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
+import { Dispatch, SetStateAction } from "react";
+
+// export interface ICreateProps {
+//     author: string;
+//     password: string;
+//     title: string;
+//     content: string;
+// }
 
 export interface ISubmitInput {
     [index: string]: string | undefined;
@@ -38,3 +41,12 @@ export const InputPlaceholder: ISubmitInput = {
     address01_ID: "주소를 검색해 주세요.",
     address02_ID: "상세주소를 입력해 주세요.",
 };
+
+export interface ILayoutProps {
+    refetch: (
+        variables?: Partial<OperationVariables> | undefined
+    ) => Promise<ApolloQueryResult<any>>;
+    lastPage: number;
+    current: number;
+    setCurrent: Dispatch<SetStateAction<number>>;
+}

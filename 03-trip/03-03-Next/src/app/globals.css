@@ -46,8 +46,14 @@ header {
     padding: 4rem 0rem;
 }
 
-main {
+section {
     width: 100rem;
     display: flex;
     flex-direction: column;
+    padding: 2rem;
+    margin: 2rem;
+}
+
+button:hover {
+    background-color: #424242;
 }

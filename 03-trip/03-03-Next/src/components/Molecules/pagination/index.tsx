@@ -1,24 +1,33 @@
 "use client";
 
+import { ILayoutProps } from "@/commons/types/types";
 import { useState } from "react";
 
 const PageBtnStyle = {
     width: "40px",
     height: "40px",
     borderRadius: "8px",
-    backgroundColor: "#F2F3f7",
+    backgroundColor: "#f5f5f5",
     boxShadow: "0px 4px 10px #bdbdbd",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
 };
 
-export default function LayoutPagination({
+const BtnBoxStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    margin: "20px",
+};
+
+export default function Pagination({
     refetch,
     lastPage,
     current,
     setCurrent,
-}) {
+}: ILayoutProps) {
     const [startPage, setStartPage] = useState(1);
 
     const onClick = (event) => {
@@ -28,19 +37,25 @@ export default function LayoutPagination({
         switch (event.target.id) {
             case "-xx": {
                 setStartPage(1);
+                refetch({ page: 1 });
+                setCurrent(1);
                 break;
             }
             case "-x": {
-                if (startPage <= 1) return alert("첫 페이지 입니다!");
+                if (startPage <= 1) alert("불러올 데이터가 없습니다!");
                 setStartPage(startPage - 10);
                 refetch({ page: startPage - 10 });
+                setCurrent(startPage - 10);
                 break;
             }
             case "+x": {
-                if (startPage + 10 >= lastPage)
-                    return alert("마지막 페이지 입니다!");
+                if (startPage + 10 >= lastPage) {
+                    console.log(Math.floor(lastPage));
+                    alert("마지막 페이지 입니다!");
+                }
                 setStartPage(startPage + 10);
                 refetch({ page: startPage + 10 });
+                setCurrent(startPage + 10);
                 break;
             }
             case "+xx": {
@@ -52,7 +67,7 @@ export default function LayoutPagination({
 
     return (
         <>
-            <div style={{ display: "flex", gap: "16px", margin: "20px" }}>
+            <div style={BtnBoxStyle}>
                 <span id="-xx" onClick={onClick}>{`<<`}</span>
                 <span id="-x" onClick={onClick}>{`<`}</span>
 

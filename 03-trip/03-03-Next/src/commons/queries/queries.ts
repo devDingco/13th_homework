@@ -8,50 +8,10 @@ export const CREATE_BOARD = gql`
             writer
             title
             contents
-            youtubeUrl
-            likeCount
-            dislikeCount
-            images
-            boardAddress {
-                _id
-                zipcode
-                address
-                addressDetail
-                createdAt
-            }
             createdAt
-            updatedAt
-            deletedAt
         }
     }
 `;
-
-// boardAddress {
-//     _id
-//     zipcode
-//     address
-//     addressDetail
-//     createdAt
-//     updatedAt
-//     deletedAt
-// }
-// user {
-//     _id
-//     email
-//     name
-//     picture
-//     userPoint {
-//         _id
-//         amount
-//         user
-//         createdAt
-//         updatedAt
-//         deletedAt
-//     }
-//     createdAt
-//     updatedAt
-//     deletedAt
-// }
 
 export const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!) {
@@ -106,5 +66,35 @@ export const UPDATE_BOARD = gql`
 export const DELETE_BOARD = gql`
     mutation deleteBoard($boardId: ID!) {
         deleteBoard(boardId: $boardId)
+    }
+`;
+
+export const CREATE_COMMENT = gql`
+    mutation createBoardComment(
+        $boardId: ID!
+        $createBoardCommentInput: CreateBoardCommentInput!
+    ) {
+        createBoardComment(
+            boardId: $boardId
+            createBoardCommentInput: $createBoardCommentInput
+        ) {
+            _id
+            writer
+            contents
+            rating
+            createdAt
+        }
+    }
+`;
+
+export const FETCH_COMMENTS = gql`
+    query fetchBoardComments($page: Int, $boardId: ID!) {
+        fetchBoardComments(page: $page, boardId: $boardId) {
+            _id
+            writer
+            contents
+            rating
+            createdAt
+        }
     }
 `;
