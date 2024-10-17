@@ -28,7 +28,7 @@
 }
 
 .textarea_wrapper {
-  min-width: 640px;
+  @apply w-full;
 }
 
 .textarea_wrapper > textarea {
@@ -41,4 +41,10 @@
 
 .button_wrapper {
   @apply w-full flex justify-end;
+}
+
+@media (max-width: 45rem) {
+  .input_wrapper {
+    @apply flex flex-col w-full;
+  }
 }
