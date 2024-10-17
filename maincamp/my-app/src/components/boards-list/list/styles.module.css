@@ -6,6 +6,7 @@
     padding:2.4rem 4.8rem 2.4rem 4.8rem;
     box-shadow: 0 0 2rem 0 #00000014;
     margin-top:2.4rem;
+    margin-bottom:2.4rem;
 }
 .listBg{
     width:118.4rem;
@@ -61,7 +62,7 @@
     display:none;
     width:2.4rem;
     height:2.4rem;
-    background:url(../../../public/images/delete.png) no-repeat;
+    background:url(../../../../public/images/delete.png) no-repeat;
     position:absolute;
     top:0;
     left:8rem;

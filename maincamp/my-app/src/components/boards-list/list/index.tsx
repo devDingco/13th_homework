@@ -7,7 +7,7 @@ export default function BoardsList(){
     return (
         <div className={styles.listForm}>
             {data?.fetchBoards.map((el, index) => (
-                <div key={el.number} className={styles.listBg}>
+                <div key={el._id} className={styles.listBg}>
                     <ul className={styles.listTop}>
                         <li>번호</li>
                         <li>제목</li>

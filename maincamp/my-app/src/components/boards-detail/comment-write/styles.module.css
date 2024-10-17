@@ -1,7 +1,11 @@
-.commentWrap{
+.comment_write_wrap{
     width:128rem;
     height:40rem;
+    margin:0 auto;
     margin-top:6rem;
+    display:flex;
+    flex-direction:column;
+    gap:2.4rem;
 }
 
 /* 댓글 상단 이미지 */

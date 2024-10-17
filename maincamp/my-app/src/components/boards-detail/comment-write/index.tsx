@@ -9,10 +9,13 @@ export default function BoardCommentWrite(){
         onChangeContent,
         onChangeWriter,
         onChangePassword,
+        setCommentContent,
+        setCommentWriter,
+        setCommentPassword,
     } = useBoardCommentWrite();
     
     return(
-        <div className={styles.commentWrap}>
+        <div className={styles.comment_write_wrap}>
             <div className={styles.comment_top}>
                 <p className={styles.commentImg}></p>
                 <p>댓글</p>
