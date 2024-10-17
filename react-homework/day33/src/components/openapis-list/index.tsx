@@ -11,7 +11,7 @@ export default function MovieList() {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${process.env.MOVIE_API_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_API_KEY}`,
     },
   };
 

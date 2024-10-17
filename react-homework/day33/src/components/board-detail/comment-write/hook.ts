@@ -7,17 +7,18 @@ import { errorModal } from "@/utils/modal";
 import { ApolloError, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import { ICommentWriteProps } from "./types";
 
-export const useCommentWrite = (editId, closeEdit) => {
+export const useCommentWrite = (props: ICommentWriteProps) => {
   // commentInfo state
   const [commentInfo, setCommentInfo] = useState({
-    writer: "",
+    writer: props.comment?.writer ?? "",
     password: "",
-    contents: "",
+    contents: props.comment?.contents ?? "",
   });
 
   // rating state
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(props.comment?.rating ?? 0);
 
   const params = useParams();
   // boardId
@@ -79,17 +80,17 @@ export const useCommentWrite = (editId, closeEdit) => {
   // 댓글 수정 뮤테이션
   const commentEdit = async () => {
     try {
-      const result = await updateBoardComment({
+      const EditResult = await updateBoardComment({
         variables: {
           updateBoardCommentInput: {
             contents: commentInfo.contents,
             rating: rating,
           },
           password: commentInfo.password,
-          boardCommentId: editId,
+          boardCommentId: props.editId,
         },
       });
-      console.log(result);
+      console.log(EditResult);
     } catch (error) {
       if (error instanceof ApolloError) {
         console.error(error?.graphQLErrors[0].message);
@@ -113,7 +114,7 @@ export const useCommentWrite = (editId, closeEdit) => {
     // 수정하기 graphql
     commentEdit();
     // 수정하는 화면 닫고 수정된 댓글 보여주기
-    closeEdit();
+    props.closeEdit();
   };
 
   return {

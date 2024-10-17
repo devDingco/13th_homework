@@ -4,8 +4,9 @@ import styles from "./styles.module.css";
 import { formDate } from "@/utils/date";
 import CommentWrite from "../comment-write";
 import useCommentListItem from "./hook";
+import { ICommentListItemProps } from "./types";
 
-export default function CommentListItem({ comment }) {
+export default function CommentListItem({ comment }: ICommentListItemProps) {
   const { isEdit, onClickEdit, closeEdit } = useCommentListItem();
 
   return (
@@ -24,7 +25,7 @@ export default function CommentListItem({ comment }) {
                 <div>{comment?.writer}</div>
               </div>
               {/* 별점 */}
-              <Rate disabled defaultValue={comment?.rating} />
+              <Rate disabled value={comment?.rating} />
             </div>
             <div className={styles.btn_box}>
               <Image
@@ -51,6 +52,7 @@ export default function CommentListItem({ comment }) {
           isEdit={isEdit}
           editId={comment?._id}
           closeEdit={closeEdit}
+          comment={comment}
         />
       )}
     </div>
