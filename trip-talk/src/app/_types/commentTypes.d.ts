@@ -7,5 +7,4 @@ interface ICommentInput {
   editType?: boolean;
   onEditComment?: () => void;
   resetHasMore?: () => void;
-  changeHasMore?: () => void;
 }

@@ -36,7 +36,6 @@ export default function useCommentInput({
   commentId,
   type,
   onEditComment,
-  changeHasMore,
 }: ICommentInput) {
   const resetCommentData = {
     commentContent: content || '',
@@ -99,7 +98,6 @@ export default function useCommentInput({
         });
         setCommentData({ ...resetCommentData });
       }
-      changeHasMore!();
     } catch (err) {
       console.log(err);
     }

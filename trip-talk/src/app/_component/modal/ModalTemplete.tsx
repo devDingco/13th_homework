@@ -15,6 +15,7 @@ export default function ModalTemplete() {
     modalContent,
     modalTitle,
   } = useModalStore();
+
   const [inputValue, setInputValue] = useState('');
 
   return (
