@@ -1,14 +1,14 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
-  FetchBoard,
   DeleteBoard,
   FetchBoardsCount,
+  FetchBoards,
 } from "../../queires/queries";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
 export default function UseListWrite(currentPage: number) {
-  const { data, refetch } = useQuery(FetchBoard, {
+  const { data, refetch } = useQuery(FetchBoards, {
     variables: {
       mypage: currentPage,
     },
@@ -49,5 +49,6 @@ export default function UseListWrite(currentPage: number) {
     data,
     dataBoardsCount,
     onClickWriteBoard,
+    refetch,
   };
 }

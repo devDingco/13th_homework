@@ -1,7 +1,12 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { FetchBoard, register, UPDATE_BOARD } from "../queires/queries";
+import {
+  FetchBoard,
+  FetchBoards,
+  register,
+  UPDATE_BOARD,
+} from "../queires/queries";
 import { IProps } from "./types";
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
@@ -151,6 +156,7 @@ export const UseBoardsWrite = (props: IProps) => {
               },
             },
           },
+          refetchQueries: [{ query: FetchBoards }],
         });
         Modal.success({
           title: "성공!",

@@ -122,3 +122,14 @@ export const FetchBoardsCount = gql`
     fetchBoardsCount
   }
 `;
+export const FetchBoards = gql`
+  query fetchBoards($mypage: Int) {
+    fetchBoards(page: $mypage) {
+      writer
+      contents
+      title
+      createdAt
+      _id
+    }
+  }
+`;

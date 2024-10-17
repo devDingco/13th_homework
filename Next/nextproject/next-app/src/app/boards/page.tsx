@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import List from "../component/board-list/list";
 import { useQuery } from "@apollo/client";
 import Pagination from "../component/board-list/pagination";
-import {
-  FetchBoards,
-  FetchBoardsCount,
-} from "../component/board-list/list/queries";
+import { FetchBoards, FetchBoardsCount } from "../component/queires/queries";
 
 export default function ListPage() {
   const { data, refetch } = useQuery(FetchBoards);

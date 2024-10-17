@@ -23,9 +23,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
     },
   });
 
-  const [name, setName] = useState(
-    props.isEdit ? data?.fetchBoardComments[props.index].writer : ""
-  );
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState(
     props.isEdit ? data?.fetchBoardComments[props.index].contents : ""
@@ -98,7 +96,6 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
     } catch {
       alert("에러");
     }
-    console.log(data?.fetchBoardComments[props.index]._id);
   };
 
   return {
