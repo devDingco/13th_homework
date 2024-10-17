@@ -10,7 +10,7 @@ import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-pa
 @Injectable()
 export class BoardCommentRepository {
     constructor(
-        @InjectRepository(BoardComment)
+        @InjectRepository(BoardComment, 'mongodb')
         private readonly boardCommentRepository: MongoRepository<BoardComment>,
     ) {}
 

@@ -7,7 +7,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Board])],
+    imports: [TypeOrmModule.forFeature([Board], 'mongodb')],
     controllers: [BoardPasswordController],
     providers: [BoardPasswordService, BoardRepository, BoardPasswordResolver],
 })

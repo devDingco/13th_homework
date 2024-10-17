@@ -6,7 +6,7 @@ import { BoardReaction } from '../entities/board-reaction.entity';
 @Injectable()
 export class BoardReactionRepository {
     constructor(
-        @InjectRepository(BoardReaction)
+        @InjectRepository(BoardReaction, 'mongodb')
         private readonly boardReactionRepository: MongoRepository<BoardReaction>,
     ) {}
     async initializatedBoardReaction(boardId: number): Promise<BoardReaction> {

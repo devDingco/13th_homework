@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class BoardIdCounterRepository {
     constructor(
-        @InjectRepository(BoardIdCounter)
+        @InjectRepository(BoardIdCounter, 'mongodb')
         private readonly boardIdCounterRepository: MongoRepository<BoardIdCounter>,
     ) {}
     async incrementBoardId(board: string): Promise<number> {

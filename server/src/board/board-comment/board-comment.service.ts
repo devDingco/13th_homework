@@ -27,7 +27,9 @@ export class BoardCommentService {
         createBoardCommentDto: CreateBoardCommentDto,
     ): Promise<BoardComment> {
         await this.isExistBoard(boardId);
+
         const { parentId } = createBoardCommentDto;
+
         if (parentId) {
             await this.isExistParentComment(parentId);
         }
