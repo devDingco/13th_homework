@@ -2,10 +2,11 @@ import styles from "./style.module.css";
 import { UseDetailWrite } from "./hook";
 import Image from "next/image";
 import React from "react";
-import CommnentPage from "../comment-write";
+import CommentPage from "../comment-write";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 import YouTube from "react-youtube";
 import { Tooltip } from "antd";
+
 export default function DetailWrite() {
   const { onModify, data, onList } = UseDetailWrite();
   console.log(data, "ddd");
@@ -113,7 +114,7 @@ export default function DetailWrite() {
         <div className={styles.css_commentheader}>
           <div className={styles.css_commenttag}>댓글</div>
         </div>
-        <CommnentPage />
+        <CommentPage />
       </div>
     </div>
   );
