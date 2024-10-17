@@ -5,19 +5,16 @@ import { useBoardsWrite } from "./hook";
 import Link from "next/link";
 import { useState } from "react";
 import { IBoardsWriteProps } from "./types";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangerequireInputs,
     onCLickUpdate,
     onClickSignup,
     onChangeYoutubeUrl,
-
+    writerError,
     // 아래부터 주소
     isOpen,
     onToggleModal,
@@ -29,27 +26,15 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddress,
     setZipcode,
     data,
-    password,
-
-    // showModal,
-    // isOpen,
-    // handleOk,
-    // handleCancel,
+    // password,
   } = useBoardsWrite(props);
 
   // 그냥 esLint에러 보기싫어서 만든 줄
-  const [nameError, setNameError] = useState("");
+
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [contentsError, setContentError] = useState("");
   const [isActive, setIsActive] = useState(false);
-  // console.log(
-  //   setNameError,
-  //   setPasswordError,
-  //   setTitleError,
-  //   setContentError,
-  //   setIsActive
-  // );
 
   return (
     <>
@@ -68,18 +53,19 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 작성자 <span className={props.styles.빨간별}>*</span>
               </label>
               <input
+                id="writer"
                 className={`${props.styles.반쪽인풋} ${
                   props.isEdit ? props.styles.disabled : ""
                 }`}
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
-                onChange={onChangeName}
+                onChange={onChangerequireInputs}
                 disabled={props.isEdit}
-                defaultValue={props.data?.fetchBoard.writer}
+                defaultValue={props.isEdit ? data?.fetchBoard.writer : ""}
               />
 
               <span id="작성자경고" className={props.styles.경고글}>
-                {nameError}
+                {writerError}
               </span>
             </div>
 
@@ -88,14 +74,15 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 비밀번호 <span className={props.styles.빨간별}>*</span>
               </label>
               <input
+                id="password"
                 className={`${props.styles.반쪽인풋} ${
                   props.isEdit ? props.styles.disabled : ""
                 }`}
                 type="password"
                 placeholder="비밀번호를 입력해주세요."
-                onChange={onChangePassword}
+                onChange={onChangerequireInputs}
                 disabled={props.isEdit ? true : false}
-                defaultValue={props.isEdit ? "******" : password}
+                defaultValue={props.isEdit ? "******" : ""}
               />
               <span id="비밀번호경고" className={props.styles.경고글}>
                 {passwordError}
@@ -111,11 +98,12 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               제목 <span className={props.styles.빨간별}>*</span>
             </label>
             <input
+              id="title"
               className={props.styles.풀인풋}
               type="text"
               placeholder="제목을 입력해 주세요."
-              onChange={onChangeTitle}
-              defaultValue={props.data?.fetchBoard.title}
+              onChange={onChangerequireInputs}
+              defaultValue={props.isEdit ? data?.fetchBoard.title : ""}
             />
             <span id="제목경고" className={props.styles.경고글}>
               {titleError}
@@ -129,15 +117,17 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             <label className={props.styles.인풋이름}>
               내용 <span className={props.styles.빨간별}>*</span>
             </label>
-            <textarea
+            <input
+              id="contents"
+              type="text"
               className={props.styles.많이큰인풋}
               placeholder="내용을 입력해 주세요."
-              onChange={onChangeContent}
-              defaultValue={props.data?.fetchBoard.contents}
+              onChange={onChangerequireInputs}
+              defaultValue={props.isEdit ? data?.fetchBoard.contents : ""}
             />
 
             <span id="내용경고" className={props.styles.경고글}>
-              {contentError}
+              {contentsError}
             </span>
           </fieldset>
 
@@ -269,18 +259,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             >
               {props.isEdit ? "수정" : "등록"}하기
             </button>
-            {/* <Button type="primary" onClick={showModal}>
-              Open Modal
-            </Button>
-            <Modal
-              title="비밀번호를 입력해주세요."
-              open={isOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              비밀번호 입력:
-              <input type="password" />
-            </Modal> */}
           </div>
         </form>
       </main>
