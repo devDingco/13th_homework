@@ -14,14 +14,16 @@ export default async function createBoardCommentAction(
 	const content: string | null = formData.get('Comment');
 	const stringRating: string | null = formData.get('Rating');
 
-	const rating: number | null = Number(stringRating);
+	const rating: number | null = stringRating ? Number(stringRating) : null;
 
-	if (!author || !password || !content || !rating)
+	if (!author || !password || !content || (!parentId && !rating)) {
 		return {
+			parentId: parentId,
 			boardId: boardId,
 			error: '댓글을 정확히 입력해주세요',
 			result: '',
 		};
+	}
 
 	const result = await postComment({ author, password, content, rating, parentId }, boardId);
 

@@ -9,6 +9,7 @@ export default async function postComment(
 	data: IRequestComment,
 	boardId: number,
 ): Promise<string | IApiResponse | undefined> {
+	console.log(data);
 	try {
 		const response = await api.post(`/board/${boardId}/comment`, data);
 		if (response.data.statusCode === 201) {

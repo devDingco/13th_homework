@@ -15,8 +15,6 @@ export default function BoardComment({ comment, setIsEdit }: ICommentEditProps) 
 
 	const changeDate = changeDateToISO(createdAt);
 
-	console.log(replies);
-
 	return (
 		<>
 			<div className="flex w-full items-center justify-between">

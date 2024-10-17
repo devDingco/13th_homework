@@ -3,7 +3,7 @@
 export interface ICommonAPIComment {
 	author: string;
 	content: string;
-	rating?: number;
+	rating: number | null;
 }
 export interface IRequestComment extends ICommonAPIComment {
 	password: string;
