@@ -19,7 +19,7 @@ export default function useCommentsWrite() {
   const [pw, setPw] = useState("");
   const [content, setContent] = useState("");
   // actie state
-  const disabledBtn = !writer.trim() || !pw.trim() || !content.trim();
+  // const disabledBtn = !writer.trim() || !pw.trim() || !content.trim();
   // onChange
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -66,11 +66,14 @@ export default function useCommentsWrite() {
     onChangeContent,
     onChangePw,
     onChangeWriter,
-    disabledBtn,
     value,
     setValue,
     writer,
-    content,
     pw,
+    content,
+    setContent,
+    setWriter,
+    setPw,
+    id,
   };
 }
