@@ -58,6 +58,19 @@ export interface ICommentList {
   number: number;
   _id: string;
   rating: number;
+  password: string;
+}
+
+export interface ICommentData {
+  commentData: {
+    writer: string;
+    contents: string;
+    createdAt: string;
+    number: number;
+    _id: string;
+    rating: number;
+    password: string;
+  }
 }
 
 export interface IFormData {
