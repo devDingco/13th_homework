@@ -1,0 +1,12 @@
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item {
+  width: 100px;
+  height: 200px;
+
+  background-color: aqua;
+}
