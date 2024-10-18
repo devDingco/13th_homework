@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@apollo/server": "^4.11.0",
+        "@aws-sdk/client-s3": "^3.674.0",
         "@graphql-codegen/cli": "^5.0.3",
         "@graphql-codegen/typescript": "^4.1.0",
         "@graphql-codegen/typescript-resolvers": "^4.3.0",

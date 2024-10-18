@@ -22,6 +22,7 @@ import { ResponseMessage } from './decorators/response-message.decorator';
 import { Board } from './entities/board.entity';
 import { PaginationDto } from './dto/pagination.dto';
 import { PaginationResponseDto } from './dto/pagination-response.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('/api/board')
 @UseInterceptors(TransformBoardInterceptor)
@@ -29,6 +30,7 @@ export class BoardController {
     constructor(private readonly boardService: BoardService) {}
 
     @Post()
+    @UseInterceptors(FilesInterceptor('imageUrl', 3))
     @ResponseMessage('board가 성공적으로 생성되었습니다.')
     @HttpCode(HttpStatus.CREATED)
     create(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
