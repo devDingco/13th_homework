@@ -54,11 +54,11 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         password: "",
         title: data.fetchBoard.title || "",
         contents: data.fetchBoard.contents || "",
-        boardAddress: data.fetchBoard.boardAddress || {
+        /*  boardAddress: data.fetchBoard.boardAddress || {
           zipcode: "",
           address: "",
           addressDetail: "",
-        },
+        }, */
         youtubeUrl: data.fetchBoard.youtubeUrl || "",
         images: data.fetchBoard.images || [],
       };

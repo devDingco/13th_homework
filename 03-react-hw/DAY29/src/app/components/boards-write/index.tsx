@@ -1,5 +1,5 @@
 import FormField from "../FormField";
-import styles from "../../boards/new/new.module.css";
+import styles from "./styles.module.css";
 import useBoardForm from "./hook";
 import { IBoardFormProps } from "./types";
 
@@ -27,10 +27,12 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
             type="password"
             name="password"
             onChange={handleChange}
+            defaultValue="안보이지롱요"
             required={!isEdit} // 수정 시 선택적으로 변경 가능
             disabled={isEdit}
           />
         </div>
+        <hr />
         {/* 제목 입력 필드 */}
         <FormField
           label="제목"
@@ -39,6 +41,7 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
           required
           defaultValue={formData.title}
         />
+        <hr />
         {/* 내용 입력 필드 */}
         <FormField
           label="내용"
@@ -47,6 +50,7 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
           required
           defaultValue={formData.contents}
         />
+        <hr />
         {/* 주소 입력 필드 */}
         <div className={styles.구분상자}>
           <span>주소</span>

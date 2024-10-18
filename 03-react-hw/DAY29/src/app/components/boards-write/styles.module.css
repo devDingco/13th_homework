@@ -60,5 +60,3 @@
 .disabled {
   @apply bg-gray-400 cursor-not-allowed;
 }
-
-/* 게시물 상세 페이지 스타일 */
