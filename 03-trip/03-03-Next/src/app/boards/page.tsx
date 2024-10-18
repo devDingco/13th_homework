@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 
 import BoardsListUI from "@/components/Organisms/BoardsList";
-import Pagination from "@/components/Organisms/pagination";
+import Pagination from "@/components/Molecules/pagination";
 
 export default function BoardsListPage() {
     const [current, setCurrent] = useState(1);

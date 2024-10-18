@@ -1,6 +1,6 @@
 "use client";
 
-const HeaderStyle = {
+const NavStyle = {
     width: "100vw",
     height: "60px",
     backgroundColor: "#f2f3f7",
@@ -10,10 +10,10 @@ const HeaderStyle = {
     alignItems: "center",
 };
 
-export default function LayoutHeader() {
+export default function LayoutNav() {
     return (
         <>
-            <header style={HeaderStyle}>여기는 헤더 입니다~</header>
+            <nav style={NavStyle}>여기는 헤더 입니다~</nav>
         </>
     );
 }
