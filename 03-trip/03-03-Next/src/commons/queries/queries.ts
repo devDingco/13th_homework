@@ -8,6 +8,14 @@ export const CREATE_BOARD = gql`
             writer
             title
             contents
+            youtubeUrl
+            boardAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                createdAt
+            }
             createdAt
         }
     }
@@ -20,6 +28,14 @@ export const FETCH_BOARD = gql`
             writer
             title
             contents
+            youtubeUrl
+            boardAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                createdAt
+            }
             createdAt
         }
     }

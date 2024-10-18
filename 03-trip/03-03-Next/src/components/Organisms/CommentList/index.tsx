@@ -27,7 +27,7 @@ export default function CommentListUI() {
 
     return (
         <section style={comment_wrap}>
-            {data ? (
+            {data && data.fetchBoardComments.length > 0 ? (
                 data.fetchBoardComments.map((el) => (
                     <div key={el._id}>
                         <div style={comment_input}>

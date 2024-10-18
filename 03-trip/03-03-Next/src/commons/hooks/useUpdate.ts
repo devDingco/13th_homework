@@ -19,11 +19,11 @@ export default function useUpdate() {
         const value = e.target.value;
 
         switch (id) {
-            case "title": {
+            case "title_ID": {
                 setTitle(value);
                 break;
             }
-            case "contents": {
+            case "content_ID": {
                 setContents(value);
                 break;
             }

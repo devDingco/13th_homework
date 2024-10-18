@@ -1,6 +1,6 @@
 "use client";
 
-import useCreate from "@/commons/hooks/useCreate";
+import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
 import useSubmitInput from "@/commons/hooks/useSubmitInput";
 
 import Button from "@/components/Atoms/_Button";
@@ -9,20 +9,17 @@ import ImgField from "@/components/Molecules/_ImgField";
 import InputField from "@/components/Molecules/_InputField";
 
 export default function BoardsNewUI() {
-    const {
-        handleChange,
-        author,
-        password,
-        title,
-        content,
-        // youtube,
-        // zipcode,
-        // address,
-        // addressDetail,
-    } = useSubmitInput();
-    const valid = author && password && title && content;
+    const { isModalOpen, addressData, onToggleModal, handleComplete } =
+        useDaumPostApi();
+    const { submitInput, handleChange, onClickCreate } = useSubmitInput({
+        addressData,
+    });
 
-    const { onClickCreate } = useCreate({ author, password, title, content });
+    const valid =
+        submitInput.author_ID &&
+        submitInput.password_ID &&
+        submitInput.title_ID &&
+        submitInput.content_ID;
 
     return (
         <section
@@ -36,31 +33,37 @@ export default function BoardsNewUI() {
 
             <InputField
                 id="author_ID"
-                value={author}
+                value={submitInput.author_ID}
                 onChange={handleChange}
                 required
             />
             <InputField
                 id="password_ID"
-                value={password}
+                value={submitInput.password_ID}
                 onChange={handleChange}
                 required
             />
             <InputField
                 id="title_ID"
-                value={title}
+                value={submitInput.title_ID}
                 onChange={handleChange}
                 required
             />
             <InputField
                 id="content_ID"
-                value={content}
+                value={submitInput.content_ID}
                 onChange={handleChange}
                 required
                 textarea
             />
 
-            <AddressField onChange={handleChange} />
+            <AddressField
+                onChange={handleChange}
+                isModalOpen={isModalOpen}
+                addressData={addressData}
+                onToggleModal={onToggleModal}
+                handleComplete={handleComplete}
+            />
 
             <InputField id="link_ID" onChange={handleChange} />
 

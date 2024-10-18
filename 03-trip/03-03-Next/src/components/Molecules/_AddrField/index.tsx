@@ -4,7 +4,6 @@ import Input from "@/components/Atoms/_Input";
 import { Button, Modal } from "antd";
 
 import DaumPostcodeEmbed from "react-daum-postcode";
-import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
 
 const SearchBarStyle = {
     display: "flex",
@@ -13,14 +12,14 @@ const SearchBarStyle = {
     width: "180px",
 };
 
-export default function AddressFieldUI({
-    onChange,
-}: {
-    onChange: React.ChangeEventHandler;
-}) {
-    const { isModalOpen, zipcode, address, onToggleModal, handleComplete } =
-        useDaumPostApi();
-
+export default function AddressFieldUI({ ...props }) {
+    const {
+        onChange,
+        isModalOpen,
+        addressData,
+        onToggleModal,
+        handleComplete,
+    } = props;
     return (
         <>
             <label>
@@ -29,16 +28,16 @@ export default function AddressFieldUI({
                     <Input
                         id="zipcode_ID"
                         onClick={onToggleModal}
-                        value={zipcode}
-                        disabled={zipcode ? true : false}
+                        value={addressData?.zonecode}
+                        disabled={isModalOpen}
                     />
                     <Button onClick={onToggleModal}>주소 검색</Button>
                 </div>
                 <Input
                     id="address01_ID"
                     onClick={onToggleModal}
-                    value={address}
-                    disabled={address ? true : false}
+                    value={addressData?.address}
+                    disabled={isModalOpen}
                 />
                 <Input id="address02_ID" onChange={onChange} />
                 {/* modal */}

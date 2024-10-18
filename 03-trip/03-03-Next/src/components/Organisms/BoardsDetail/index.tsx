@@ -7,6 +7,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import Input from "@/components/Atoms/_Input";
 import { FrownFilled, HeartFilled } from "@ant-design/icons";
+import AddressFieldUI from "@/components/Molecules/_AddrField";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
@@ -73,29 +74,23 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                     {isEdit ? "" : data?.fetchBoard.contents}
                 </pre>
 
-                <p>
-                    {isEdit ? (
+                
+                {isEdit && (
+                    <>
                         <Input
                             id="title_ID"
                             value={data?.fetchBoard.title}
                             onChange={handleChange}
                         />
-                    ) : (
-                        ""
-                    )}
-                </p>
-                <p>
-                    {isEdit ? (
                         <Input
                             id="content_ID"
                             value={data?.fetchBoard.contents}
                             onChange={handleChange}
                             textarea
                         />
-                    ) : (
-                        ""
-                    )}
-                </p>
+                        <AddressFieldUI />
+                    </>
+                )}
 
                 <div className={styles.main_video}>
                     <Image
