@@ -1,0 +1,17 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.mainContainer h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.mainContainer p {
+    font-size: 1.5rem;
+}

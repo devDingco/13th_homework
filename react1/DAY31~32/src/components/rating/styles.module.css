@@ -1,0 +1,14 @@
+.ratingContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 80rem;
+    height: 1.5rem;
+}
+
+.ratingText {
+    margin-left: 0.5rem;
+    font-size: 12px;
+    color: #21046f;
+}
