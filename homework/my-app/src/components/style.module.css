@@ -1,25 +1,23 @@
 .Container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .menuContainer {
-    height: 80px;
-    width: 1280px;
-    padding: 20px 20px
-
+  height: 80px;
+  width: 1280px;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
 }
-
 .menu {
-    font-family: "basic";
-    font-size: 30px;
-    cursor: pointer;
+  font-family: "basic";
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 10px;
 }
-.menuListContainer {
 
-}
 .list {
-    font-size: 18px;
+  font-size: 14px;
+  margin: 0 15px;
+  font-weight: 600;
 }
-.dropdown {
-
-  }
