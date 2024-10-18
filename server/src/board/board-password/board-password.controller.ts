@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ResponseMessage } from '../decorators/response-message.decorator';
 import { BoardPasswordService } from './board-password.service';
-import { BoardPasswordDTO } from './entities/board-password.dto';
+import { BoardPasswordDTO } from './dto/board-password.dto';
 
 @Controller('/api/board/:boardId/password')
 export class BoardPasswordController {

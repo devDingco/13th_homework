@@ -6,8 +6,6 @@ import {
     IsString,
 } from 'class-validator';
 
-import { Column } from 'typeorm';
-
 export class CreateBoardDTO {
     @IsString()
     @IsNotEmpty()
@@ -25,7 +23,6 @@ export class CreateBoardDTO {
     @IsOptional()
     @IsString({ each: true })
     @ArrayMaxSize(3)
-    @Column('array')
     imageUrl?: string[];
 
     @IsString()
