@@ -1,5 +1,5 @@
 "use client"
-import BoardCommentWrite from "../comment-write";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css"
 import useBoardsDetail from "@/components/boards-detail/detail/hook"
 
@@ -32,10 +32,12 @@ export default function BoardsDetail() {
             <div className={styles.emotion}>
                 <div className={styles.bad}>
                     <div className={styles.badIcon}></div>
+                    {/* <FrownOutlined /> */}
                     <p>24</p>
                 </div>
                 <div className={styles.good}>
                     <div className={styles.goodIcon}></div>
+                    {/* <SmileOutlined /> */}
                     <p>12</p>
                 </div>
             </div>

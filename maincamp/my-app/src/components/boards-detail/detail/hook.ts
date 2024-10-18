@@ -9,7 +9,8 @@ import { FetchBoardDocument } from "@/commons/graphql/graphql";
 export default function useBoardsDetail (){
     const params = useParams();
     const router = useRouter();
-    const id = params.boardId.toString();
+    // const id = params.boardId.toString(); // 갑자기 타입에러
+    const id = params.boardId;
     // console.log(id);
     
     const { data } = useQuery(FetchBoardDocument, {

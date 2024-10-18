@@ -44,7 +44,8 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
                     <span className="new-span">작성자</span><span className={`${styles.red} new-span`}>*</span>
                     <input 
                         disabled={props.isEdit} 
-                        defaultValue={props.isEdit ? data?.fetchBoard.writer:name} 
+                        defaultValue={props.isEdit ? data?.fetchBoard.writer || "" :name} 
+                        // fetchBoard.writer || "" : name > data?.fetchBoard.writer가 null 또는 undefined일 경우 빈 문자열("")이 사용됨.
                         type="text" 
                         placeholder="작성자 명을 입력하세요." 
                         onChange={onChangeName}>

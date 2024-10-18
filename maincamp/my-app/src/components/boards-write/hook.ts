@@ -142,7 +142,10 @@ export default function useBoardDetailEdit(isEdit: boolean){
             const editPassword = prompt(
                 "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
             );
-            const updateBoardInput = {};
+
+            // const updateBoardInput = {}; 타입 지정
+            const updateBoardInput: {title?:string, contents?:string} = {};
+
             if (title.trim() && title !== data?.fetchBoard?.title) {
                 updateBoardInput.title = title;
             }
@@ -178,8 +181,6 @@ export default function useBoardDetailEdit(isEdit: boolean){
               }
         }
         console.log("클릭",register)
-
-
     }
     const registerColor = {
         backgroundColor:"#c3c3c3",

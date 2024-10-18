@@ -2,20 +2,21 @@
 
 import { CreateBoardCommentDocument, FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
+import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+
 
 export default function useBoardCommentWrite(){
 
     // const [value, setValue] = useState(3);
 
-    const [createComment] = useMutation(CreateBoardCommentDocument)
+    const [createComment] = useMutation(CreateBoardCommentDocument);
     const [commentWriter, setCommentWriter] = useState("");
     const [commentPassword, setCommentPassword] = useState("");
     const [commentContent, setCommentContent] = useState("");
 
     const params = useParams();
-    const id = params.boardId
+    const id = params.boardId.toString();
 
     const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
         setCommentWriter(event.target.value);
@@ -44,21 +45,23 @@ export default function useBoardCommentWrite(){
                 refetchQueries:[
                     {
                         query: FetchBoardCommentsDocument,
-                        variables: {boardId: id},
+                        variables: {page:1, boardId: id},
                     }
                 ]
             });
-            console.log(data);
+            console.log("댓글등록클릭",data);
             if(data?.createBoardComment){
                 alert("댓글이 등록 되었습니다.");
                 setCommentWriter("");
+                console.log("작성자: ", commentWriter);
                 setCommentPassword("");
+                console.log("비밀번호: ", commentPassword);
                 setCommentContent("");
+                console.log("내용: ", commentContent);
             }
             else{
                 alert("댓글 등록을 실패했습니다.");
             }
-
         }catch(err){
             console.error(err);
         }
