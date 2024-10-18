@@ -1,5 +1,5 @@
-import { BoardReaction } from './entities/board-reaction.entity';
-import { BoardReactionRepository } from './repositories/boardReactionRepository';
+import { BoardReactionEntity } from './entity/board-reaction.entity';
+import { BoardReactionRepository } from './repository/boardReactionRepository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class BoardReactionService {
         private readonly boardReactionRepository: BoardReactionRepository,
     ) {}
 
-    async getBoardReaction(boardId: number): Promise<BoardReaction> {
+    async getBoardReaction(boardId: number): Promise<BoardReactionEntity> {
         return this.boardReactionRepository.findBoardReaction(boardId);
     }
 }

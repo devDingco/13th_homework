@@ -5,9 +5,9 @@ import { BoardEntity } from './entity/board.entity';
 import { BoardIdCounterEntity } from './entity/board-boardId.entity';
 import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
 import { BoardImageModule } from './board-image/board-image.module';
-import { BoardReaction } from './reaction/entities/board-reaction.entity';
-import { BoardReactionModule } from './reaction/board-reaction.module';
-import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
+import { BoardReactionEntity } from './board-reaction/entity/board-reaction.entity';
+import { BoardReactionModule } from './board-reaction/board-reaction.module';
+import { BoardReactionRepository } from './board-reaction/repository/boardReactionRepository';
 import { BoardRepository } from './repository/board.repository';
 import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
@@ -17,7 +17,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
     imports: [
         TypeOrmModule.forFeature(
-            [BoardEntity, BoardIdCounterEntity, BoardReaction, BoardComment],
+            [
+                BoardEntity,
+                BoardIdCounterEntity,
+                BoardReactionEntity,
+                BoardComment,
+            ],
             'mongodb',
         ),
         BoardReactionModule,

@@ -22,7 +22,10 @@ export class BoardResolver {
     }
 
     @Mutation(() => BoardSchema)
-    createBoard(@Args('createBoardInput') createBoard: CreateBoardInput) {
+    createBoard(
+        @Args('createBoardInput')
+        createBoard: CreateBoardInput,
+    ) {
         return this.boardService.create(createBoard);
     }
 

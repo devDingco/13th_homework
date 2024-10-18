@@ -1,15 +1,17 @@
 import { MongoRepository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardReaction } from '../entities/board-reaction.entity';
+import { BoardReactionEntity } from '../entity/board-reaction.entity';
 
 @Injectable()
 export class BoardReactionRepository {
     constructor(
-        @InjectRepository(BoardReaction, 'mongodb')
-        private readonly boardReactionRepository: MongoRepository<BoardReaction>,
+        @InjectRepository(BoardReactionEntity, 'mongodb')
+        private readonly boardReactionRepository: MongoRepository<BoardReactionEntity>,
     ) {}
-    async initializatedBoardReaction(boardId: number): Promise<BoardReaction> {
+    async initializatedBoardReaction(
+        boardId: number,
+    ): Promise<BoardReactionEntity> {
         const boardReaction = this.boardReactionRepository.create({
             boardId,
             like: 0,
@@ -19,7 +21,7 @@ export class BoardReactionRepository {
         return await this.boardReactionRepository.save(boardReaction);
     }
 
-    async findBoardReaction(boardId: number): Promise<BoardReaction> {
+    async findBoardReaction(boardId: number): Promise<BoardReactionEntity> {
         const findReaction = await this.boardReactionRepository.findOneBy({
             boardId,
         });
