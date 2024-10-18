@@ -1,52 +1,57 @@
-// import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-// import { BoardCommentService } from './board-comment.service';
-// import { BoardComment } from './entity/board-comment.entity';
-// import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-// import { BoardCommentResponse } from './dto/board-comment-response.entity';
-// import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { BoardCommentService } from './board-comment.service';
 
-// @Resolver(() => BoardComment)
-// export class BoardCommentResolver {
-//     constructor(private readonly boardCommentService: BoardCommentService) {}
+import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
 
-//     // @Query(() => [BoardCommentResponse])
-//     // getBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
-//     //     return this.boardCommentService.findAllComment(boardId);
-//     // }
+import { BoardCommentSchema } from './schema/board-comment.schema';
+import { CreateBoardCommentInput } from './schema/create-board-comment-input.schema';
+import { UpdateBoardCommentInput } from './schema/update-board-comment-input.schema';
 
-//     @Mutation(() => BoardCommentResponse)
-//     createBoardComment(
-//         @Args('boardId', { type: () => Int }) boardId: number,
-//         @Args('createBoardComment')
-//         createBoardComment: CreateBoardCommentDto,
-//     ) {
-//         return this.boardCommentService.createComment(
-//             boardId,
-//             createBoardComment,
-//         );
-//     }
+@Resolver(() => BoardCommentSchema)
+export class BoardCommentResolver {
+    constructor(private readonly boardCommentService: BoardCommentService) {}
 
-//     @Mutation(() => BoardCommentResponse)
-//     updateBoardComment(
-//         @Args('boardId', { type: () => Int }) boardId: number,
-//         @Args('updateBoardComment')
-//         updateBoardComment: UpdateBoardCommentDto,
-//         @Args('parentId') parentId: string,
-//     ) {
-//         const { password, ...restUpdateBoardComment } = updateBoardComment;
-//         return this.boardCommentService.updateComment(
-//             boardId,
-//             restUpdateBoardComment,
-//             password,
-//             parentId,
-//         );
-//     }
+    @Query(() => [BoardCommentResponseDTO])
+    getBoardComment(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('page', { type: () => Int }) page: number = 1,
+    ) {
+        return this.boardCommentService.findAllComment(boardId, page);
+    }
 
-//     @Mutation(() => Boolean)
-//     deleteBoardComment(
-//         @Args('boardId', { type: () => Int }) boardId: number,
-//         @Args('commentId') commentId: string,
-//     ) {
-//         return this.boardCommentService.removeComment(boardId, commentId);
-//     }
-// }
+    @Mutation(() => BoardCommentResponseDTO)
+    createBoardComment(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('boardComment')
+        createBoardComment: CreateBoardCommentInput,
+    ) {
+        return this.boardCommentService.createComment(
+            boardId,
+            createBoardComment,
+        );
+    }
+
+    @Mutation(() => BoardCommentResponseDTO)
+    updateBoardComment(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('updateBoardComment')
+        updateBoardComment: UpdateBoardCommentInput,
+        @Args('parentId') parentId: string,
+    ) {
+        const { password, ...restUpdateBoardComment } = updateBoardComment;
+        return this.boardCommentService.updateComment(
+            boardId,
+            restUpdateBoardComment,
+            password,
+            parentId,
+        );
+    }
+
+    @Mutation(() => Boolean)
+    deleteBoardComment(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('commentId') commentId: string,
+    ) {
+        return this.boardCommentService.removeComment(boardId, commentId);
+    }
+}
