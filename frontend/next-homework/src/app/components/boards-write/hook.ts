@@ -3,9 +3,14 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
+
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+} from "@/commons/graphql/graphql";
 
 const useBoardWrite = () => {
   const router = useRouter();
@@ -24,13 +29,14 @@ const useBoardWrite = () => {
   });
 
   // 이벤트 받아올 변수
-  const [owner, setOwner] = useState("");
+  const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
   // 경고 메시지 변수
-  const [ownerVaild, setOwnerVaild] = useState("");
+  const [writerVaild, setWriterVaild] = useState("");
   const [passwordVaild, setPasswordVaild] = useState("");
   const [titleVaild, setTitleVaild] = useState("");
   const [contentVaild, setContentVaild] = useState("");
@@ -38,25 +44,15 @@ const useBoardWrite = () => {
   // 주소 관련 변수
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   // 모듈
-  const successModule = () => {
-    Modal.success({
-      content: "게시글 등록에 성공헀습니다.",
-    });
-  };
-
+  // TODO: 게시글 등록 여부 알리는 토스트 띄워주기
+  // TODO: 취소 버튼 누르면 아래 모달 보여주고 확인 시 넘어가기
   const warningModule = () => {
     Modal.warning({
       title: "취소",
       content: "게시글 등록을 취소하시겠습니까?",
-    });
-  };
-
-  const errorModule = () => {
-    Modal.error({
-      title: "게시글 등록 실패",
-      content: "게시글 등록에 실패했습니다.",
     });
   };
 
@@ -76,21 +72,21 @@ const useBoardWrite = () => {
   };
 
   // onChange 함수 모음
-  const onChangeOwner = (event: ChangeEvent<HTMLInputElement>) => {
-    setOwner(event.target.value);
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    setWriter(event.target.value);
     if (event.target.value && password && title && content) {
       setIsVaild(true);
       setButtonActiveStyle(true);
     } else {
       setButtonActiveStyle(false);
-      setOwnerVaild("필수입력 사항입니다.");
+      setWriterVaild("필수입력 사항입니다.");
       setIsVaild(false);
     }
   };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if (owner && event.target.value && title && content) {
+    if (writer && event.target.value && title && content) {
       setIsVaild(true);
       setButtonActiveStyle(true);
     } else {
@@ -102,7 +98,7 @@ const useBoardWrite = () => {
 
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    if (owner && password && event.target.value && content) {
+    if (writer && password && event.target.value && content) {
       setIsVaild(true);
       setButtonActiveStyle(true);
     } else {
@@ -114,7 +110,7 @@ const useBoardWrite = () => {
 
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    if (owner && password && title && event.target.value) {
+    if (writer && password && title && event.target.value) {
       setIsVaild(true);
       setButtonActiveStyle(true);
     } else {
@@ -124,35 +120,50 @@ const useBoardWrite = () => {
     }
   };
 
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
   const onClickSubmitPostVaildation = async () => {
     try {
-      if (isVaild && owner && password && title && content) {
+      if (isVaild && writer && password && title && content) {
         const result = await createBoard({
           variables: {
-            writer: owner,
-            password: password,
-            title: title,
-            contents: content,
+            createBoardInput: {
+              writer: writer,
+              password: password,
+              title: title,
+              contents: content,
+              youtubeUrl: youtubeUrl,
+              boardAddress: {
+                zipcode: zipcode,
+                address: address,
+                addressDetail: addressDetail,
+              },
+            },
           },
         });
 
         console.log(result);
         // alert("게시글 등록이 완료 되었습니다.");
 
-        successModule();
-
         router.push(`/boards/${result.data?.createBoard._id}`);
       }
     } catch (error) {
       console.log(error);
       alert(`에러가 발생했습니다. 다시 시도하여 주세요. \n error: ${error}`);
-
-      errorModule();
     }
   };
 
   const onClickEditPostVaildation = async () => {
-    const promptPassword = prompt("게시글 생성 시 입력했던 비밀번호를 입력해주세요.", "");
+    const promptPassword = prompt(
+      "게시글 생성 시 입력했던 비밀번호를 입력해주세요.",
+      ""
+    );
     const myVariables = {
       boardId: params.boardId,
     };
@@ -170,12 +181,13 @@ const useBoardWrite = () => {
           updateBoardInput: {
             title: title,
             contents: content,
-            // youtubeUrl: ,
+            youtubeUrl: youtubeUrl,
             // boardArress: {
             //   zipcode: ,
             //   address: ,
             //   addressDetail: ,
             // },
+            // TODO: 이미지 수정
             // image: [""]
           },
         },
@@ -199,25 +211,26 @@ const useBoardWrite = () => {
 
   return {
     data,
-    owner,
+    writer,
     password,
     title,
     content,
     zipcode,
     address,
     buttonActiveStyle,
-    ownerVaild,
+    writerVaild,
     passwordVaild,
     titleVaild,
     contentVaild,
-    onChangeOwner,
+    onChangeWriter,
     onChangePassword,
     onChangeContent,
     onChangeTitle,
+    onChangeYoutubeUrl,
+    onChangeAddressDetail,
     onClickSubmitPostVaildation,
     onClickEditPostVaildation,
     onClickCancle,
-    successModule,
     onToggleModal,
     handleComplete,
     isOpen,

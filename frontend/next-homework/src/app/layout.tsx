@@ -1,8 +1,8 @@
+import ApolloSetting from "@/commons/settings/apollo-setting";
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Layout from "@/commons/layout";
-import ApolloSetting from "@/commons/settings/apollo-setting";
 
 const pretendard = localFont({
   src: "./fonts/Pretendard-Regular.woff2",

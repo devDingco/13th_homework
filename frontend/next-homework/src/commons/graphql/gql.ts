@@ -17,9 +17,11 @@ const documents = {
     "\n  mutation createBoardComment($boardId: ID!, $createBoardCommentInput: CreateBoardCommentInput!) {\n    createBoardComment(boardId: $boardId, createBoardCommentInput: $createBoardCommentInput) {\n      _id\n      writer\n      contents\n      createdAt\n      updatedAt\n    }\n  }\n": types.CreateBoardCommentDocument,
     "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n    }\n  }\n": types.FetchBoardDocument,
     "\n  query fetchBoards($page: Int) {\n    fetchBoards(page: $page) {\n      _id\n      writer\n      title\n      likeCount\n      dislikeCount\n      createdAt\n    }\n  }\n": types.FetchBoardsDocument,
+    "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n": types.DeleteBoardDocument,
     "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n": types.FetchBoardsCountDocument,
-    "\n  mutation createBoard($writer: String, $password: String, $title: String!, $contents: String!) {\n    createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {\n      _id\n      writer\n      title\n      contents\n      likeCount\n      dislikeCount\n    }\n  }\n": types.CreateBoardDocument,
-    "\n  mutation updateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {\n    updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {\n      _id\n    }\n  }\n": types.UpdateBoardDocument,
+    "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      # images\n      # boardAddress {\n\n      # }\n      # user\n      createdAt\n    }\n  }\n": types.CreateBoardDocument,
+    "\n  mutation updateBoard(\n    $boardId: ID!\n    $password: String\n    $updateBoardInput: UpdateBoardInput!\n  ) {\n    updateBoard(\n      boardId: $boardId\n      password: $password\n      updateBoardInput: $updateBoardInput\n    ) {\n      _id\n    }\n  }\n": types.UpdateBoardDocument,
+    "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      # TODO: 추후 사용자 + 날짜 추가\n    }\n  }\n": types.FetchBoardDocument,
 };
 
 /**
@@ -55,15 +57,23 @@ export function graphql(source: "\n  query fetchBoards($page: Int) {\n    fetchB
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n"): (typeof documents)["\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n"): (typeof documents)["\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createBoard($writer: String, $password: String, $title: String!, $contents: String!) {\n    createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {\n      _id\n      writer\n      title\n      contents\n      likeCount\n      dislikeCount\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($writer: String, $password: String, $title: String!, $contents: String!) {\n    createBoard(createBoardInput: { writer: $writer, password: $password, title: $title, contents: $contents }) {\n      _id\n      writer\n      title\n      contents\n      likeCount\n      dislikeCount\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      # images\n      # boardAddress {\n\n      # }\n      # user\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      # images\n      # boardAddress {\n\n      # }\n      # user\n      createdAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation updateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {\n    updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {\n      _id\n    }\n  }\n"): (typeof documents)["\n  mutation updateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {\n    updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {\n      _id\n    }\n  }\n"];
+export function graphql(source: "\n  mutation updateBoard(\n    $boardId: ID!\n    $password: String\n    $updateBoardInput: UpdateBoardInput!\n  ) {\n    updateBoard(\n      boardId: $boardId\n      password: $password\n      updateBoardInput: $updateBoardInput\n    ) {\n      _id\n    }\n  }\n"): (typeof documents)["\n  mutation updateBoard(\n    $boardId: ID!\n    $password: String\n    $updateBoardInput: UpdateBoardInput!\n  ) {\n    updateBoard(\n      boardId: $boardId\n      password: $password\n      updateBoardInput: $updateBoardInput\n    ) {\n      _id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      # TODO: 추후 사용자 + 날짜 추가\n    }\n  }\n"): (typeof documents)["\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      writer\n      title\n      contents\n      youtubeUrl\n      likeCount\n      dislikeCount\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n      createdAt\n      # TODO: 추후 사용자 + 날짜 추가\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
