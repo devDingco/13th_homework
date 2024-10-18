@@ -1,44 +1,46 @@
-// import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-// import { BoardService } from './board.service';
-// import { BoardEntity } from './entities/board.entity';
-// import { CreateBoardDto } from './dto/create-board.dto';
-// import { BoardResponseDto } from './dto/board-response.dto';
-// import { UpdateBoardDto } from './dto/update-board.dto';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { BoardService } from './board.service';
+import { BoardSchema } from './schema/board.schema';
+import { CreateBoardInput } from './schema/create-board-input.schema';
+import { UpdateBoardInput } from './schema/update-board-input.schema';
 
-// @Resolver(() => BoardEntity)
-// export class BoardResolver {
-//     constructor(private readonly boardService: BoardService) {}
+@Resolver(() => BoardSchema)
+export class BoardResolver {
+    constructor(private readonly boardService: BoardService) {}
 
-//     @Query(() => [BoardResponseDto])
-//     getBoards(@Args('page') page: number, @Args('take') take: number) {
-//         return this.boardService.findAll({ page, take });
-//     }
+    @Query(() => [BoardSchema])
+    async getBoards(
+        @Args('page', { type: () => Int }) page: number,
+        @Args('take', { type: () => Int }) take: number,
+    ) {
+        return await this.boardService.findAll({ page, take });
+    }
 
-//     @Query(() => BoardResponseDto)
-//     getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
-//         return this.boardService.findOne(boardId);
-//     }
+    @Query(() => BoardSchema)
+    async getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
+        return await this.boardService.findOne(boardId);
+    }
 
-//     @Mutation(() => BoardResponseDto)
-//     createBoard(@Args('createBoard') createBoard: CreateBoardDto) {
-//         return this.boardService.create(createBoard);
-//     }
+    @Mutation(() => BoardSchema)
+    createBoard(@Args('createBoardInput') createBoard: CreateBoardInput) {
+        return this.boardService.create(createBoard);
+    }
 
-//     @Mutation(() => BoardResponseDto)
-//     updateBoard(
-//         @Args('boardId', { type: () => Int }) boardId: number,
-//         @Args('updateBoard') updateBoard: UpdateBoardDto,
-//     ) {
-//         return this.boardService.updateOne(boardId, updateBoard);
-//     }
+    @Mutation(() => BoardSchema)
+    updateBoard(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('updateBoardInput') updateBoard: UpdateBoardInput,
+    ) {
+        return this.boardService.updateAll(boardId, updateBoard);
+    }
 
-//     @Mutation(() => Boolean)
-//     deleteBoard(@Args('boardId', { type: () => Int }) boardId: number) {
-//         return this.boardService.remove(boardId);
-//     }
+    @Mutation(() => Boolean)
+    deleteBoard(@Args('boardId', { type: () => Int }) boardId: number) {
+        return this.boardService.remove(boardId);
+    }
 
-//     @Mutation(() => Boolean)
-//     clearBoard() {
-//         return this.boardService.clear();
-//     }
-// }
+    @Mutation(() => Boolean)
+    clearBoard() {
+        return this.boardService.clear();
+    }
+}

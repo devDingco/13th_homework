@@ -9,7 +9,7 @@ import { BoardReaction } from './reaction/entities/board-reaction.entity';
 import { BoardReactionModule } from './reaction/board-reaction.module';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repository/board.repository';
-// import { BoardResolver } from './board.resolver';
+import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -30,7 +30,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         BoardIdCounterRepository,
         BoardReactionRepository,
         BoardCommentRepository,
-        // BoardResolver,
+        BoardResolver,
     ],
     exports: [BoardService, BoardRepository],
 })
