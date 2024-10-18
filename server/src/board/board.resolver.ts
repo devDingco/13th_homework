@@ -10,10 +10,10 @@ import { UpdateBoardDto } from './dto/update-board.dto';
 export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
-    // @Query(() => [BoardResponseDto])
-    // getBoards() {
-    //     return this.boardService.findAll();
-    // }
+    @Query(() => [BoardResponseDto])
+    getBoards(@Args('page') page: number, @Args('take') take: number) {
+        return this.boardService.findAll({ page, take });
+    }
 
     @Query(() => BoardResponseDto)
     getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
