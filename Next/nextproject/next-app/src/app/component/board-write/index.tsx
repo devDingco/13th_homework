@@ -10,10 +10,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWrite(props: IProps) {
   const {
-    onChangeContent,
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
+    onChangeInput,
     onClickUpdate,
     onClickGoToList,
     onClickGoToDetail,
@@ -22,21 +19,18 @@ export default function BoardsWrite(props: IProps) {
     onChangeYoutubeUrl,
     onToggleModal,
     handleCpmplete,
-    isButtonDisabled,
+    // isButtonDisabled,
     nameblank,
     titleblank,
     contentblank,
     passwordblank,
-    name,
-    title,
-    password,
-    contents,
     addressnum,
     address,
     addressDetail,
     isModalOpen,
     data,
     youtubeUrl,
+    inputs,
   } = UseBoardsWrite(props);
 
   return (
@@ -57,13 +51,13 @@ export default function BoardsWrite(props: IProps) {
               id="name_id"
               placeholder="작성자 명을 입력해 주세요."
               name="name"
-              defaultValue={props.isEdit ? data?.fetchBoard.writer : name} // defaultValue: input tag에서 처음 보여줄 값, input 박스에 값을 입력하면 값이 수정이 됨₩.
-              onChange={onChangeName}
+              defaultValue={
+                props.isEdit ? data?.fetchBoard.writer : inputs.name_id
+              } // defaultValue: input tag에서 처음 보여줄 값, input 박스에 값을 입력하면 값이 수정이 됨₩.
+              onChange={onChangeInput}
               disabled={props.isEdit ? true : false}
               className={
-                props.isEdit
-                  ? styles.disabled_input
-                  : styles[`css_${name}input`]
+                props.isEdit ? styles.disabled_input : styles.css_nameinput
               }
             />
             <div className={styles.css_blankerror}>{nameblank}</div>
@@ -75,16 +69,14 @@ export default function BoardsWrite(props: IProps) {
             </label>
             <Input
               type="password"
-              id="pwd_id"
+              id="password_id"
               placeholder="비밀번호를 입력해 주세요."
               name="pwd"
-              defaultValue={props.isEdit ? "******" : password}
-              onChange={onChangePassword}
+              defaultValue={props.isEdit ? "******" : inputs.password_id}
+              onChange={onChangeInput}
               disabled={props.isEdit ? true : false}
               className={
-                props.isEdit
-                  ? styles.disabled_input
-                  : styles[`css_${name}input`]
+                props.isEdit ? styles.disabled_input : styles.css_pwdinput
               }
             />
             <div className={styles.css_blankerror}>{passwordblank}</div>
@@ -97,11 +89,14 @@ export default function BoardsWrite(props: IProps) {
           <div className={styles.css_title}>
             제목
             <input
-              defaultValue={props.isEdit ? data?.fetchBoard?.title : title}
+              defaultValue={
+                props.isEdit ? data?.fetchBoard?.title : inputs.title_id
+              }
               type="text"
+              id="title_id"
               className={styles.css_titleinput}
               placeholder="제목을 입력해 주세요."
-              onChange={onChangeTitle}
+              onChange={onChangeInput}
             />
             <div className={styles.css_blankerror}>{titleblank}</div>
           </div>
@@ -114,12 +109,13 @@ export default function BoardsWrite(props: IProps) {
             내용
             <input
               defaultValue={
-                props.isEdit ? data?.fetchBoard?.contents : contents
+                props.isEdit ? data?.fetchBoard?.contents : inputs.contents_id
               }
               type="text"
+              id="contents_id"
               className={styles.css_contentinput}
               placeholder="내용을 입력해 주세요."
-              onChange={onChangeContent}
+              onChange={onChangeInput}
             />
             <div className={styles.css_blankerror}>{contentblank}</div>
           </div>
@@ -235,12 +231,13 @@ export default function BoardsWrite(props: IProps) {
           </button>
           <Button
             onClick={props.isEdit ? onClickUpdate : onClickSignup}
-            className={
-              !props.isEdit && isButtonDisabled
-                ? `${styles.css_submitbutton} ${styles.disabled}`
-                : styles.css_submitbutton
-            }
-            disabled={!props.isEdit && isButtonDisabled}
+            // className={
+            //   !props.isEdit && isButtonDisabled
+            //     ? `${styles.css_submitbutton} ${styles.disabled}`
+            //     : styles.css_submitbutton
+            // }
+            className={styles.css_submitbutton}
+            // disabled={!props.isEdit && isButtonDisabled}
           >
             {props.isEdit ? "수정" : "등록"}하기
           </Button>

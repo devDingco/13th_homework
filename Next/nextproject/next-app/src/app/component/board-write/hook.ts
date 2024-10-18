@@ -1,32 +1,52 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { FetchBoard, register, UPDATE_BOARD } from "./queries";
+import {
+  FetchBoard,
+  FetchBoards,
+  register,
+  UPDATE_BOARD,
+} from "../queires/queries";
 import { IProps } from "./types";
-import { FetchBoards } from "../board-list/list/queries";
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
 
 export const UseBoardsWrite = (props: IProps) => {
   const router = useRouter();
   const params = useParams(); //라우터 사용 시 파라미터 정보를 가져오기 위한 설정
+
   const { data } = useQuery(FetchBoard, {
     variables: {
       myboardId: params.boardId,
     },
   });
 
-  const [name, setName] = useState("");
+  const [inputs, setInputs] = useState({
+    name_id: "",
+    title_id: "",
+    password_id: "",
+    contents_id: "",
+  });
 
-  const [password, setPassword] = useState("");
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.id);
 
-  const [title, setTitle] = useState(
-    props.isEdit ? data?.fetchBoard.title : ""
-  );
+    setInputs((prev) => ({
+      ...prev,
+      [event?.target.id]: event?.target.value,
+    }));
+  };
+  // const [name, setName] = useState("");
 
-  const [contents, setContents] = useState(
-    props.isEdit ? data?.fetchBoard.contents : ""
-  );
+  // const [password, setPassword] = useState("");
+
+  // const [title, setTitle] = useState(
+  //   props.isEdit ? data?.fetchBoard.title : ""
+  // );
+
+  // const [contents, setContents] = useState(
+  //   props.isEdit ? data?.fetchBoard.contents : ""
+  // );
 
   const [nameblank, setNameBlank] = useState("");
 
@@ -36,7 +56,7 @@ export const UseBoardsWrite = (props: IProps) => {
 
   const [contentblank, setContentBlank] = useState("");
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -55,95 +75,50 @@ export const UseBoardsWrite = (props: IProps) => {
   const [addressDetail, setAddressDetail] = useState(
     props.isEdit ? data?.fetchBoard.boardAddress.addressDetail : ""
   );
-
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
   const [youtubeUrl, setYoutubeUrl] = useState(
     props.isEdit ? data?.fetchBoard.youtubeUrl : ""
   );
-
-  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-    if (
-      event.target.value !== "" &&
-      title !== "" &&
-      contents !== "" &&
-      password !== ""
-    ) {
-      return setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    if (
-      name !== "" &&
-      title !== "" &&
-      contents !== "" &&
-      event.target.value !== ""
-    ) {
-      return setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    if (
-      name !== "" &&
-      event.target.value !== "" &&
-      contents !== "" &&
-      password !== ""
-    ) {
-      return setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-    setContents(event.target.value);
-    if (
-      name !== "" &&
-      password !== "" &&
-      title !== "" &&
-      event.target.value !== ""
-    ) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
 
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
-  };
+  // const A = () => {
+  //   if(inputs.name && inputs.password && inputs.title && inputs.contents) {
+  //     return setIsActive(true);
+  //   } else {
+  //     setIsActive(false);
+  //   }
+  //   }
+  // }
+
+  // const valid =
+  //   inputs.name && inputs.password && inputs.title && inputs.contents;
 
   const [myfunction] = useMutation(register);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-  const isButtonDisabled = !name || !password || !title || !contents;
+  // const isButtonDisabled =
+  //   !inputs.name || !inputs.password || !inputs.title || !inputs.contents;
+
   const checkValid = () => {
-    if (name === "") {
+    if (inputs.name_id === "") {
       setNameBlank("필수입력 사항입니다.");
     } else {
       setNameBlank("");
     }
-    if (password === "") {
+    if (inputs.password_id === "") {
       setPasswordBlank("필수입력 사항입니다.");
     } else {
       setPasswordBlank("");
     }
-    if (title === "") {
+    if (inputs.title_id === "") {
       setTitleBlank("필수입력 사항입니다.");
     } else {
       setTitleBlank("");
     }
-    if (contents === "") {
+    if (inputs.contents_id === "") {
       setContentBlank("필수입력 사항입니다.");
     } else {
       setContentBlank("");
@@ -152,16 +127,27 @@ export const UseBoardsWrite = (props: IProps) => {
 
   // 등록하기
   const onClickSignup = async () => {
-    await checkValid;
+    console.log(
+      inputs.name_id,
+      inputs.password_id,
+      inputs.title_id,
+      inputs.contents_id
+    );
+    await checkValid();
     try {
-      if (name !== "" && title !== "" && contents !== "" && password !== "") {
+      if (
+        inputs.name_id !== "" &&
+        inputs.title_id !== "" &&
+        inputs.contents_id !== "" &&
+        inputs.password_id !== ""
+      ) {
         const result = await myfunction({
           variables: {
             createBoardInput: {
-              writer: name,
-              password: password,
-              title: title,
-              contents: contents,
+              writer: inputs.name_id,
+              password: inputs.password_id,
+              title: inputs.title_id,
+              contents: inputs.contents_id,
               youtubeUrl: youtubeUrl,
               boardAddress: {
                 address: address,
@@ -172,14 +158,15 @@ export const UseBoardsWrite = (props: IProps) => {
           },
           refetchQueries: [{ query: FetchBoards }],
         });
-
         Modal.success({
-          title: "성공",
+          title: "성공!",
         });
         console.log(result.data.createBoard._id);
         router.push("../../../boards");
       }
-    } catch {
+    } catch (error) {
+      console.log(inputs);
+      console.log(error);
       Modal.error({
         title: "에러",
       });
@@ -195,8 +182,8 @@ export const UseBoardsWrite = (props: IProps) => {
           boardId: params.boardId,
           password: password,
           updateBoardInput: {
-            title,
-            contents,
+            title: inputs.title_id,
+            contents: inputs.contents_id,
             youtubeUrl,
             boardAddress: {
               address,
@@ -237,10 +224,7 @@ export const UseBoardsWrite = (props: IProps) => {
   };
 
   return {
-    onChangeContent,
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
+    onChangeInput,
     onClickUpdate,
     onClickGoToList,
     onClickGoToDetail,
@@ -253,17 +237,13 @@ export const UseBoardsWrite = (props: IProps) => {
     passwordblank,
     titleblank,
     contentblank,
-    name,
-    title,
-    contents,
-    password,
     address,
     addressDetail,
     addressnum,
-    isActive,
-    isButtonDisabled,
+    // isButtonDisabled,
     isModalOpen,
     data,
     youtubeUrl,
+    inputs,
   };
 };
