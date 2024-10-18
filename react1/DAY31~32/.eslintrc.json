@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "next/core-web-vitals",
+        "next/typescript",
+        "plugin:@typescript-eslint/recommended" // TypeScript 규칙 추가
+    ],
+    "plugins": ["@typescript-eslint"], // TypeScript ESLint 플러그인 추가
+    "parser": "@typescript-eslint/parser", // TypeScript ESLint 파서 설정
+    "parserOptions": {
+        "project": "./tsconfig.json", // TypeScript 프로젝트 설정 연결
+        "sourceType": "module" // 모듈 시스템 지정
+    },
+    "rules": {
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "caughtErrors": "all",
+                "ignoreRestSiblings": false,
+                "reportUsedIgnorePattern": false
+            }
+        ], // 사용하지 않는 변수에 대한 경고
+        "@typescript-eslint/explicit-function-return-type": "off" // 함수 반환 타입 명시 여부
+        // 추가 규칙을 필요에 따라 여기에 정의
+    }
+}
