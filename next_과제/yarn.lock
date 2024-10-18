@@ -5540,6 +5540,11 @@ quill-delta@^5.1.0:
     lodash.clonedeep "^4.5.0"
     lodash.isequal "^4.5.0"
 
+quill-image-drop-and-paste@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/quill-image-drop-and-paste/-/quill-image-drop-and-paste-2.0.1.tgz#3352fd2e33ab61ca0f1dee28102a8f094b46b404"
+  integrity sha512-Qs0v6kf0v4dsB0s9Tf8rAFQb6LVPjfZL1i1fgN7jaT81XqpoHMQIC+QZN3LEM5nQ8LT2NNe4nuNjdMN1r8BI+g==
+
 quill-resize-image@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/quill-resize-image/-/quill-resize-image-1.0.5.tgz#072533bad859d38d21056fd5ac6600841a62c5fc"
