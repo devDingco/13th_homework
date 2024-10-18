@@ -5,29 +5,20 @@ import {
     IsOptional,
     IsString,
 } from 'class-validator';
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
 import { Column } from 'typeorm';
 
-@InputType()
-@ObjectType()
-export class CreateBoardDto {
+export class CreateBoardDTO {
     @IsString()
     @IsNotEmpty()
-    @Column()
-    @Field()
     author: string;
 
     @IsString()
     @IsNotEmpty()
-    @Column()
-    @Field()
     title: string;
 
     @IsString()
     @IsNotEmpty()
-    @Column()
-    @Field()
     content: string;
 
     @IsArray()
@@ -35,30 +26,21 @@ export class CreateBoardDto {
     @IsString({ each: true })
     @ArrayMaxSize(3)
     @Column('array')
-    @Field(() => [String], { nullable: true })
     imageUrl?: string[];
 
     @IsString()
     @IsOptional()
-    @Column()
-    @Field({ nullable: true })
     youtubeUrl?: string;
 
     @IsString()
     @IsNotEmpty()
-    @Column()
-    @Field()
     password: string;
 
     @IsString()
     @IsOptional()
-    @Column()
-    @Field({ nullable: true })
     address?: string;
 
     @IsString()
     @IsOptional()
-    @Column()
-    @Field({ nullable: true })
     detailAddress?: string;
 }

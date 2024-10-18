@@ -6,26 +6,42 @@ import {
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
-import { CreateBoardDto } from '../dto/create-board.dto';
-
-@Entity()
-@ObjectType()
-export class Board extends CreateBoardDto {
+@Entity('board')
+export class BoardEntity {
     @ObjectIdColumn()
-    @Field(() => ID)
     _id: ObjectId;
 
     @Column()
-    @Field(() => Int)
+    author: string;
+
+    @Column()
+    password: string;
+
+    @Column()
+    title: string;
+
+    @Column()
+    content: string;
+
+    @Column('array', { nullable: true })
+    imageUrl?: string[];
+
+    @Column({ nullable: true })
+    youtubeUrl?: string;
+
+    @Column({ nullable: true })
+    address?: string;
+
+    @Column({ nullable: true })
+    detailAddress?: string;
+
+    @Column()
     boardId: number;
 
     @CreateDateColumn()
-    @Field(() => Date)
     createdAt: Date;
 
     @UpdateDateColumn()
-    @Field(() => Date)
     updatedAt: Date;
 }

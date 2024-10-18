@@ -1,19 +1,15 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { ObjectId } from 'mongodb';
 
-@Entity()
-@ObjectType()
-export class BoardIdCounter {
+@Entity('board_id_counter')
+export class BoardIdCounterEntity {
     @ObjectIdColumn()
     _id: ObjectId;
 
     @Column()
-    @Field()
-    board: string;
+    collection: string;
 
     @Column()
-    @Field(() => Int)
     boardId: number;
 }

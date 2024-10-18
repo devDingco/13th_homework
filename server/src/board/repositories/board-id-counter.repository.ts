@@ -1,17 +1,17 @@
 import { MongoRepository } from 'typeorm';
-import { BoardIdCounter } from '../entities/board-boardId.entity';
+import { BoardIdCounterEntity } from '../entities/board-boardId.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class BoardIdCounterRepository {
     constructor(
-        @InjectRepository(BoardIdCounter, 'mongodb')
-        private readonly boardIdCounterRepository: MongoRepository<BoardIdCounter>,
+        @InjectRepository(BoardIdCounterEntity, 'mongodb')
+        private readonly boardIdCounterRepository: MongoRepository<BoardIdCounterEntity>,
     ) {}
     async incrementBoardId(board: string): Promise<number> {
         const counter = await this.boardIdCounterRepository.findOneAndUpdate(
-            { board },
+            { collection: board },
             { $inc: { boardId: 1 } },
             { upsert: true, returnDocument: 'after' },
         );

@@ -1,23 +1,23 @@
-import { Board } from './entities/board.entity';
 import { BoardComment } from './board-comment/entities/board-comment.entity';
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
 import { BoardController } from './board.controller';
-import { BoardIdCounter } from './entities/board-boardId.entity';
+import { BoardEntity } from './entities/board.entity';
+import { BoardIdCounterEntity } from './entities/board-boardId.entity';
 import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
+import { BoardImageModule } from './board-image/board-image.module';
 import { BoardReaction } from './reaction/entities/board-reaction.entity';
 import { BoardReactionModule } from './reaction/board-reaction.module';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
 import { BoardRepository } from './repositories/board.repository';
-import { BoardResolver } from './board.resolver';
+// import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BoardImageModule } from './board-image/board-image.module';
 
 @Module({
     imports: [
         TypeOrmModule.forFeature(
-            [Board, BoardIdCounter, BoardReaction, BoardComment],
+            [BoardEntity, BoardIdCounterEntity, BoardReaction, BoardComment],
             'mongodb',
         ),
         BoardReactionModule,
@@ -30,7 +30,7 @@ import { BoardImageModule } from './board-image/board-image.module';
         BoardIdCounterRepository,
         BoardReactionRepository,
         BoardCommentRepository,
-        BoardResolver,
+        // BoardResolver,
     ],
     exports: [BoardService, BoardRepository],
 })

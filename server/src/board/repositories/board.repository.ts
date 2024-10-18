@@ -1,24 +1,24 @@
 import { MongoRepository } from 'typeorm';
-import { Board } from '../entities/board.entity';
+import { BoardEntity } from '../entities/board.entity';
 import {
     HttpException,
     HttpStatus,
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
-import { CreateBoardDto } from '../dto/create-board.dto';
+import { CreateBoardDTO } from '../dto/create-board.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateBoardDto } from '../dto/update-board.dto';
-import { PaginationResponseDto } from '../dto/pagination-response.dto';
+import { UpdateBoardDTO } from '../dto/update-board.dto';
+import { PaginationResponseDTO } from '../dto/pagination-response.dto';
 
 @Injectable()
 export class BoardRepository {
     constructor(
-        @InjectRepository(Board, 'mongodb')
-        private readonly boardRepository: MongoRepository<Board>,
+        @InjectRepository(BoardEntity, 'mongodb')
+        private readonly boardRepository: MongoRepository<BoardEntity>,
     ) {}
 
-    createBoard(createBoardDto: CreateBoardDto): Board {
+    createBoard(createBoard: CreateBoardDTO): BoardEntity {
         const {
             author,
             title,
@@ -28,7 +28,7 @@ export class BoardRepository {
             password,
             address,
             detailAddress,
-        } = createBoardDto;
+        } = createBoard;
         return this.boardRepository.create({
             author,
             title,
@@ -41,14 +41,14 @@ export class BoardRepository {
         });
     }
 
-    async saveBoard(board: Board): Promise<Board> {
+    async saveBoard(board: BoardEntity): Promise<BoardEntity> {
         return await this.boardRepository.save(board);
     }
 
     async findAllBoard(
         page: number,
         take: number,
-    ): Promise<PaginationResponseDto> {
+    ): Promise<PaginationResponseDTO> {
         const [result, totalCount] = await this.boardRepository.findAndCount({
             skip: (page - 1) * take,
             take,
@@ -57,7 +57,7 @@ export class BoardRepository {
         return { result, totalCount };
     }
 
-    async findBoard(boardId: number): Promise<Board> {
+    async findBoard(boardId: number): Promise<BoardEntity> {
         const findBoard = await this.boardRepository.findOneBy({
             boardId,
         });
@@ -71,8 +71,8 @@ export class BoardRepository {
 
     async updateOne(
         boardId: number,
-        updateBoard: UpdateBoardDto,
-    ): Promise<Board> {
+        updateBoard: UpdateBoardDTO,
+    ): Promise<BoardEntity> {
         const updateBoardDB = await this.boardRepository.update(
             { boardId },
             updateBoard,
@@ -90,8 +90,8 @@ export class BoardRepository {
 
     async updateAll(
         boardId: number,
-        updateBoard: CreateBoardDto,
-    ): Promise<Board> {
+        updateBoard: UpdateBoardDTO,
+    ): Promise<BoardEntity> {
         const updateBoardDB = await this.findBoard(boardId);
 
         Object.assign(updateBoardDB, updateBoard);

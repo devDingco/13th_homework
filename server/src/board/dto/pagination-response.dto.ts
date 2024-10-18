@@ -1,6 +1,6 @@
-import { Board } from '../entities/board.entity';
+import { BoardEntity } from '../entities/board.entity';
 
-export class PaginationResponseDto {
-    result: Board[];
+export class PaginationResponseDTO {
+    result: BoardEntity[];
     totalCount: number;
 }
