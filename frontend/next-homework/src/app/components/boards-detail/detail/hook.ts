@@ -15,7 +15,13 @@ const useBoardsDetail = () => {
 
   console.log(data?.fetchBoard);
 
-  return { params, data };
+  const address =
+    "(" +
+    data?.fetchBoard.boardAddress?.zipcode +
+    ") " +
+    data?.fetchBoard.boardAddress?.address;
+
+  return { params, data, address };
 };
 
 export default useBoardsDetail;

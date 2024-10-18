@@ -5,7 +5,7 @@ import { IPaginationProps } from "./types";
 import styles from "./styles.module.css";
 
 export default function Pagination(props: IPaginationProps) {
-  const { startPage, onClickPage, onClickPrevPage, onClickNextPage } = usePagination(props);
+  const { startPage, currentPage, onClickPage, onClickPrevPage, onClickNextPage } = usePagination(props);
   return (
     <div className={styles.container}>
       <button onClick={onClickPrevPage} className={styles.button}>

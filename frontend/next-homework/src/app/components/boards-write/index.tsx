@@ -12,21 +12,23 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 
 const BoardsWrite = (props: IBoardsWriteProps) => {
   const {
-    owner,
+    writer,
     password,
     title,
     content,
     zipcode,
     address,
     buttonActiveStyle,
-    ownerVaild,
+    writerVaild,
     passwordVaild,
     titleVaild,
     contentVaild,
-    onChangeOwner,
+    onChangeWriter,
     onChangePassword,
     onChangeContent,
     onChangeTitle,
+    onChangeYoutubeUrl,
+    onChangeAddressDetail,
     onClickSubmitPostVaildation,
     onClickEditPostVaildation,
     onClickCancle,
@@ -49,26 +51,26 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               <p className={styles.star}>*</p>
             </div>
             <input
-              id="postOwner"
+              id="posWriter"
               className={styles.info}
               type="text"
               placeholder="작성자 명을 입력해 주세요."
-              onChange={onChangeOwner}
+              onChange={onChangeWriter}
               disabled={props.isEdit ? true : false}
               defaultValue={props.data?.fetchBoard?.writer ?? ""}
             />
             <p
-              id="postOwnerVaild"
+              id="postWriterVaild"
               className={styles.vaildation}
               style={{
-                display: !owner ? "block" : "none",
+                display: !writer ? "block" : "none",
                 color: "var(--red, #F66A6A)",
                 fontSize: "1.6rem",
                 fontWeight: "500",
                 lineHeight: "2.4rem",
               }}
             >
-              {ownerVaild}
+              {writerVaild}
             </p>
           </div>
           <div className={styles.input}>
@@ -167,6 +169,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               placeholder="01234"
               value={zipcode}
               // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
+              readOnly
             />
             <button className={styles.addressSearch} onClick={onToggleModal}>
               우편번호 검색
@@ -185,8 +188,8 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             className={styles.info}
             type="text"
             placeholder="상세주소"
+            onChange={onChangeAddressDetail}
             // defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
-            readOnly
           />
         </div>
         <hr className={styles.line} />
@@ -197,6 +200,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             className={styles.info}
             type="text"
             placeholder="링크를 입력해 주세요."
+            onChange={onChangeYoutubeUrl}
             // defaultValue={props.data?.fetchBoard.youtubeUrl}
           />
         </div>
@@ -205,7 +209,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
         <div className={styles.postUploadeImg}>
           <p className={styles.label}>사진 첨부</p>
           <div className={styles.postUploadImage}>
-            {/* map 사용해서 돌려주기 */}
+            {/* TODO: map 사용해서 돌려주기, 사진 업로드 기능 넣기 */}
             <button className={styles.uploadImg}>
               <Image src="/icons/add.svg" alt="add" width={0} height={0} />
               <p>사진 업로드</p>
@@ -213,7 +217,10 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
           </div>
         </div>
         <div className={styles.postButtonGroup}>
-          <button onClick={onClickCancle} className={`${styles.check} ${styles.cancle}`}>
+          <button
+            onClick={onClickCancle}
+            className={`${styles.check} ${styles.cancle}`}
+          >
             취소
           </button>
           {props.isEdit ? (
@@ -229,7 +236,11 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               id="postSubmitButton"
               className={`${styles.check} ${styles.submit}`}
               onClick={onClickSubmitPostVaildation}
-              style={{ backgroundColor: buttonActiveStyle ? "var(--n-main, #2974e5)" : "var(--gray-300, #c7c7c7)" }}
+              style={{
+                backgroundColor: buttonActiveStyle
+                  ? "var(--n-main, #2974e5)"
+                  : "var(--gray-300, #c7c7c7)",
+              }}
             >
               등록하기
             </button>
@@ -237,8 +248,17 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
         </div>
       </div>
       {isOpen && (
-        <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal} closable={true}>
-          <DaumPostcodeEmbed onComplete={handleComplete} autoClose={true} {...props} />
+        <Modal
+          open={true}
+          onOk={onToggleModal}
+          onCancel={onToggleModal}
+          closable={true}
+        >
+          <DaumPostcodeEmbed
+            onComplete={handleComplete}
+            autoClose={true}
+            {...props}
+          />
         </Modal>
       )}
     </div>

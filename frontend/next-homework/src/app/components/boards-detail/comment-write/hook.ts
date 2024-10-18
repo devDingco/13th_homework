@@ -3,11 +3,12 @@
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { CREATE_COMMIT } from "./queries";
+import { CreateBoardCommentDocument } from "@/commons/graphql/graphql";
+import { FETCH_COMMENTS } from "../comment-list/queries";
 
 const useCommentWrite = () => {
   const param = useParams();
-  const [createBoardComment] = useMutation(CREATE_COMMIT);
+  const [createBoardComment] = useMutation(CreateBoardCommentDocument);
 
   const [isVaild, setIsVaild] = useState(false);
   const [buttonActiveStyle, setButtonActiveStyle] = useState(false);
@@ -19,6 +20,8 @@ const useCommentWrite = () => {
   const [writerVaild, setwriterVaild] = useState("");
   const [passwordVaild, setPasswordVaild] = useState("");
   const [contentsVaild, setContentsVaild] = useState("");
+
+  const [rank, setRank] = useState(3);
 
   const onChangewriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -56,12 +59,17 @@ const useCommentWrite = () => {
     }
   };
 
+  const onChangeRank = (value: number) => {
+    setRank(value);
+    console.log("rank", rank);
+  };
+
   const onClickSubmitComment = async () => {
     try {
       if (isVaild && writer && password && contents) {
         const result = await createBoardComment({
           variables: {
-            boardId: param.boardId,
+            boardId: String(param.boardId),
             createBoardCommentInput: {
               writer: writer,
               password: password,
@@ -69,6 +77,7 @@ const useCommentWrite = () => {
               rating: 0,
             },
           },
+          refetchQueries: [{ query: FETCH_COMMENTS }],
         });
 
         console.log(result);
@@ -90,6 +99,8 @@ const useCommentWrite = () => {
     writerVaild,
     passwordVaild,
     contentsVaild,
+    rank,
+    onChangeRank,
     onChangewriter,
     onChangePassword,
     onChangeComment,

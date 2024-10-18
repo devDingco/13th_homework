@@ -1,3 +1,6 @@
+// TODO: 페이지 이동 후 삭제 시 리패치 안됨
+// TODO: 번호 인덱싱 처음 글이 1번이 되도록
+
 "use client";
 
 import Link from "next/link";
