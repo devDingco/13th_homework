@@ -6,6 +6,7 @@ import { IFormStateError } from '@/models/formBoardError';
 import postBoard from '../apis/boards/postBoard';
 
 const required = '필수입력 사항입니다.';
+const maxSize = 5 * 1024 * 1024;
 
 export async function createBoardAction(
 	prevState: IFormStateError,
@@ -20,37 +21,47 @@ export async function createBoardAction(
 	const address = formData.get('Address') as string;
 	const detailAddress = formData.get('DetailAddress') as string;
 
-	if (!author || !password || !title || !content)
-		return {
-			data: null,
-			errors: {
-				author: author ? undefined : required,
-				password: password ? undefined : required,
-				title: title ? undefined : required,
-				content: content ? undefined : required,
-			},
-		};
-	else {
-		const data: ICreateFormBoard = {
-			author,
-			title,
-			password,
-			content,
-			youtubeUrl,
-			address,
-			detailAddress,
-		};
+	let images = formData.getAll('image') as File[];
+	images = images.filter(
+		(image) =>
+			image.size > 0 &&
+			image.size < maxSize &&
+			image.type.includes('jpeg') &&
+			image.type.includes('png'),
+	);
+	console.log(images);
+	// if (!author || !password || !title || !content)
+	// 	return {
+	// 		data: null,
+	// 		errors: {
+	// 			author: author ? undefined : required,
+	// 			password: password ? undefined : required,
+	// 			title: title ? undefined : required,
+	// 			content: content ? undefined : required,
+	// 		},
+	// 	};
 
-		const responseData = await postBoard(data);
+	// const data: ICreateFormBoard = {
+	// 	author,
+	// 	title,
+	// 	password,
+	// 	content,
+	// 	youtubeUrl,
+	// 	address,
+	// 	detailAddress,
+	// };
 
-		return {
-			data: responseData,
-			errors: {
-				author: undefined,
-				password: undefined,
-				title: undefined,
-				content: undefined,
-			},
-		};
-	}
+	// const responseData = await postBoard(data);
+
+	// return {
+	// 	data,
+	// 	// data: responseData,
+	// 	errors: {
+	// 		author: undefined,
+	// 		password: undefined,
+	// 		title: undefined,
+	// 		content: undefined,
+	// 	},
+	// };
+	return 1;
 }

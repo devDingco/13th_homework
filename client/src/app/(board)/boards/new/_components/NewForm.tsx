@@ -29,9 +29,9 @@ export default function NewForm() {
 		},
 	});
 
-	if (state.data) {
-		onClickPush(`${boardsUrlEndPoint}/${state.data.boardId}`);
-	}
+	// if (state.data) {
+	// 	onClickPush(`${boardsUrlEndPoint}/${state.data.boardId}`);
+	// }
 
 	return (
 		<form className="flex flex-col gap-10" action={formAction}>
