@@ -36,8 +36,12 @@ const BoardsDetail = () => {
 
   console.log(params.boardId);
 
-  const handlePage = () => {
-    router.push(`/boards/${params.boardId}/edit`);
+  const handlePage = (event) => {
+    if (event.currentTarget.id === "boardListPage") {
+      router.push(`/boards`);
+    } else {
+      router.push(`/boards/${params.boardId}/edit`);
+    }
   };
 
   return (
@@ -117,7 +121,7 @@ const BoardsDetail = () => {
           </div>
           {/* 목록, 수정하기 버튼 상자 */}
           <div className={styles.목록수정버튼상자}>
-            <button>
+            <button onClick={handlePage} id="boardListPage">
               <Image
                 src="/images/icons/Left icon.svg"
                 alt="목록버튼"

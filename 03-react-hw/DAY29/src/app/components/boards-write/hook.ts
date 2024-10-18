@@ -1,0 +1,191 @@
+import { IFormDataProps, IUseBoardFormProps } from "./types";
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+} from "@/commons/graphql/graphql";
+import { ApolloError, useMutation, useQuery } from "@apollo/client";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
+
+// 필수 입력 필드 배열 정의
+const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
+  "writer",
+  "password",
+  "title",
+  "contents",
+];
+
+export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
+  const router = useRouter();
+
+  // 폼 데이터 상태 관리
+  const [formData, setFormData] = useState<IFormDataProps>({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+    boardAddress: { zipcode: "", address: "", addressDetail: "" },
+    youtubeUrl: "",
+    images: [],
+  });
+
+  // 초기 데이터 상태 관리 (수정페이지에서)
+  const [initialData, setInitialData] = useState<IFormDataProps | null>(null);
+
+  // GraphQL 뮤테이션 훅
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+
+  const params = useParams(); //동적 라우팅, boardID에 접근한다
+  const boardId = params.boardId as string;
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: {
+      boardId,
+    },
+  });
+
+  // useEffect: 그려질 때 처음에 딱 한번 실행?함
+  useEffect(() => {
+    // 수정 모드, 데이터가 존재할 때만 실행
+    if (isEdit && data?.fetchBoard) {
+      const initialFormData: IFormDataProps = {
+        writer: data.fetchBoard.writer || "",
+        password: "",
+        title: data.fetchBoard.title || "",
+        contents: data.fetchBoard.contents || "",
+        boardAddress: data.fetchBoard.boardAddress || {
+          zipcode: "",
+          address: "",
+          addressDetail: "",
+        },
+        youtubeUrl: data.fetchBoard.youtubeUrl || "",
+        images: data.fetchBoard.images || [],
+      };
+      // formData와 initialData 상태 업데이트
+      setFormData(initialFormData);
+      setInitialData(initialFormData);
+    }
+  }, [isEdit, data]);
+  // isEdit와 data를 포함시켜 이 값들이 변경될 때만 효과가 실행되도록 함
+
+  // 입력 필드 변경 핸들러
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // 버튼 활성화 여부 결정
+  const isButtonEnabled = useMemo(() => {
+    if (isEdit) {
+      // 수정일때: 하나의 필드라도 변경되었는지 확인
+      return Object.keys(formData).some(
+        (key) =>
+          formData[key as keyof IFormDataProps] !==
+          initialData?.[key as keyof IFormDataProps]
+      );
+    } else {
+      // 등록일때: 필수 필드가 채워져 있는지 확인
+      return REQUIRED_FIELDS.every(
+        (field) => (formData[field] as string).trim() !== ""
+      );
+    }
+  }, [formData, initialData, isEdit]);
+  // formData, initialData, isEdit이 변경될 때만 재계산
+
+  // 폼 제출 핸들러
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!isButtonEnabled) return;
+
+    const variables = {
+      ...(formData.title && { title: formData.title }),
+      ...(formData.contents && { contents: formData.contents }),
+      ...(formData.youtubeUrl && { youtubeUrl: formData.youtubeUrl }),
+      //...(formData.boardAddress && { boardAddress: formData.boardAddress }),
+    };
+
+    try {
+      let updateResult;
+      let createResult;
+      if (isEdit) {
+        // 수정 모드일 때 비밀번호 입력 받기
+        const password = prompt(
+          "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
+        );
+
+        if (password === null) {
+          console.log("비밀번호 입력이 취소.");
+          return;
+        }
+
+        if (!boardId) {
+          console.error("boardId가 없습니다.");
+          alert("게시글 ID를 찾을 수 없습니다.");
+          return;
+        }
+
+        // 수정 로직
+        updateResult = await updateBoard({
+          variables: {
+            updateBoardInput: variables,
+            password,
+            boardId,
+          },
+        });
+        console.log("게시글 수정 성공: ", updateResult);
+      } else {
+        // 등록 로직
+        createResult = await createBoard({
+          variables: {
+            createBoardInput: formData,
+          },
+        });
+        console.log("게시글 등록 성공: ", createResult);
+      }
+
+      // true 시 상세 페이지로 이동 , false 시 등록 페이지로 이동
+      const resultBoardId = isEdit
+        ? boardId
+        : createResult?.data?.createBoard._id;
+
+      router.push(`/boards/${resultBoardId}/`);
+    } catch (error: unknown) {
+      console.error("Error details:", error);
+
+      if (error instanceof ApolloError) {
+        console.log("GraphQL errors:", error.graphQLErrors);
+        console.log("Network error:", error.networkError);
+
+        const passwordError = error.graphQLErrors.find(
+          (err) => err.extensions?.code === "INVALID_PASSWORD"
+        );
+
+        if (passwordError) {
+          alert("비밀번호가 틀렸습니다. 다시 시도해주세요.");
+        } else {
+          alert(
+            isEdit
+              ? "게시글 수정에 실패했습니다."
+              : "게시글 등록에 실패했습니다."
+          );
+        }
+      } else {
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
+  return {
+    handleChange,
+    handleSubmit,
+    formData,
+    isButtonEnabled,
+    router,
+  };
+}

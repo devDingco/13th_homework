@@ -1,5 +1,5 @@
 .총상자 {
-  @apply rounded-lg bg-white shadow-lg min-w-[680px] p-6 self-stretch;
+  @apply rounded-lg bg-white shadow-lg min-w-[680px] px-[48px] py-6 self-stretch;
 }
 
 .게시글전체상자 {
@@ -7,7 +7,7 @@
 }
 
 .게시글목록나누기 {
-  @apply flex p-4 gap-2;
+  @apply flex py-4 px-[24px] gap-2;
 }
 
 .게시글목록나누기 span {
@@ -19,11 +19,11 @@
 }
 
 .제목 {
-  @apply w-[848px] text-left;
+  @apply w-[848px];
 }
 
 .작날 {
-  @apply w-24 text-center;
+  @apply w-[100px] text-center;
 }
 
 .등록된게시글상자 {
@@ -31,7 +31,7 @@
 }
 
 .게시글한줄상자 {
-  @apply flex p-3 gap-2 items-center rounded-md border border-gray-50 cursor-pointer relative;
+  @apply flex py-3 px-[24px] gap-2 items-center rounded-md border border-gray-50 cursor-pointer relative;
 }
 
 .유저번호,

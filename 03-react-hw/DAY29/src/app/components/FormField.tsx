@@ -10,6 +10,7 @@ interface FormFieldProps {
   required?: boolean;
   error?: string;
   defaultValue?: string;
+  disabled?: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -20,6 +21,7 @@ const FormField: React.FC<FormFieldProps> = ({
   required,
   error,
   defaultValue,
+  disabled,
 }) => {
   const getPlaceholder = (label: string) => {
     switch (label) {
@@ -53,7 +55,8 @@ const FormField: React.FC<FormFieldProps> = ({
         placeholder={getPlaceholder(label)}
         className={styles.중간입력창크기}
         required={required}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue ?? ""}
+        disabled={disabled}
       />
       {required && error && <div className={styles.필수입력에러}>{error}</div>}
     </div>

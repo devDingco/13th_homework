@@ -7,7 +7,8 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   required?: boolean;
-  defaultValue: string;
+  defaultValue?: string;
+  disabled?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ const Input: React.FC<InputProps> = ({
   className,
   required,
   defaultValue,
+  disabled,
 }) => {
   return (
     <input
@@ -28,6 +30,7 @@ const Input: React.FC<InputProps> = ({
       className={className}
       required={required}
       defaultValue={defaultValue}
+      disabled={disabled}
     />
   );
 };
