@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FormField.module.css";
-import Input from "./input/input";
+import Input from "./input";
 
 interface FormFieldProps {
   label: string;

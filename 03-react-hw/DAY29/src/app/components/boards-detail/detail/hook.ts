@@ -1,4 +1,4 @@
-import { FetchBoardDocument } from "./../../../../../DAY23/src/commons/graphql/graphql";
+import { FetchBoardDocument } from "@/commons/graphql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { MouseEvent } from "react";
@@ -8,7 +8,7 @@ export default function useBoardsDetailForm() {
   const params = useParams(); //동적 라우팅, boardID에 접근한다
   const { data } = useQuery(FetchBoardDocument, {
     variables: {
-      boardId: params.boardId,
+      boardId: params.boardId as string,
     },
   });
 
