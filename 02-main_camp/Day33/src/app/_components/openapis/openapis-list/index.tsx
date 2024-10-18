@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 const locationList: string[] = ["서울", "부산", "제주", "경기", "인천", "강원"];
 
 export default function OpenApisList() {
+  console.log("컴포넌트가 생성됩니다.");
   const [numberOfFestivals, setNumberOfFestivals] = useState(1);
   const [pageNum, setPageNum] = useState(1);
   const [festivals, setFestivals] = useState<IFestival[]>([]);
@@ -20,7 +21,7 @@ export default function OpenApisList() {
 
   const fetchFestivals = async (page: number) => {
     const api = "http://apis.data.go.kr/B551011/KorService1";
-    const params = `&numOfRows=12&pageNo=${pageNum}&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&eventStartDate=20241017`;
+    const params = `&numOfRows=12&pageNo=${page}&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&eventStartDate=20241017`;
     const key = process.env.NEXT_PUBLIC_API_KEY;
 
     try {
@@ -29,7 +30,8 @@ export default function OpenApisList() {
         `${api}/searchFestival1?serviceKey=${key}${params}`
       );
       const responseJson = await response.json();
-      setNumberOfFestivals(responseJson.response.body.totalCount);
+      if (!numberOfFestivals)
+        setNumberOfFestivals(responseJson.response.body.totalCount);
       setPageNum(responseJson.response.body.pageNo + 1);
       return responseJson.response.body.items.item;
     } catch (error) {
@@ -47,12 +49,13 @@ export default function OpenApisList() {
       setHasMore(false);
       return;
     }
+
     setFestivals((prevFestivals) => [...prevFestivals, ...more]);
     console.log("Fetch Festivals!!!!");
   };
 
   const onError = () => {
-    // console.log("스크롤 오류가 발생했습니다.");
+    console.log("스크롤 오류가 발생했습니다.");
   };
 
   useEffect(() => {
@@ -102,7 +105,7 @@ export default function OpenApisList() {
               cover={
                 <Image
                   className={styles.cardImage}
-                  src={el.firstimage}
+                  src={el.firstimage ? el.firstimage : "/assets/no_image.png"}
                   alt={`${el.title} 이미지`}
                   width={0}
                   height={0}
