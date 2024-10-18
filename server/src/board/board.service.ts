@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
-import { BoardEntity } from './entities/board.entity';
-import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
+import { BoardEntity } from './entity/board.entity';
+import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
 import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
-import { BoardRepository } from './repositories/board.repository';
+import { BoardRepository } from './repository/board.repository';
 import { CreateBoardDTO } from './dto/create-board.dto';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';

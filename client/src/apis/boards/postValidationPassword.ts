@@ -1,6 +1,6 @@
 /** @format */
 
-import { api, boardUrlEndPoint } from '../config';
+import { api, boardUrlEndPoint } from '../../../config/axios_config';
 
 export default async function postValidationPassword(
 	boardId: string,

@@ -3,9 +3,9 @@ import { BoardCommentController } from './board-comment.controller';
 import { BoardCommentRepository } from './board-comment.repository';
 import { BoardCommentResolver } from './board-comment.resolver';
 import { BoardCommentService } from './board-comment.service';
-import { BoardEntity } from '../entities/board.entity';
+import { BoardEntity } from '../entity/board.entity';
 import { BoardModule } from '../board.module';
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardRepository } from '../repository/board.repository';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 

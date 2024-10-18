@@ -1,8 +1,8 @@
-import { BoardEntity } from '../entities/board.entity';
+import { BoardEntity } from '../entity/board.entity';
 import { BoardPasswordController } from './board-password.controller';
 import { BoardPasswordResolver } from './board-password.resolver';
 import { BoardPasswordService } from './board-password.service';
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardRepository } from '../repository/board.repository';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 

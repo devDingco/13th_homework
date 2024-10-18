@@ -1,6 +1,6 @@
 /** @format */
 
-import { boardUrlEndPoint, reactionUrlEndPoint } from '@/apis/config';
+import { boardUrlEndPoint, reactionUrlEndPoint } from '~/config/axios_config';
 
 import BoardCommentContainer from './_components/BoardComment/BoardCommentContainer';
 import BoardFooter from './_components/BoardFooter';

@@ -1,5 +1,5 @@
 import { MongoRepository } from 'typeorm';
-import { BoardEntity } from '../entities/board.entity';
+import { BoardEntity } from '../entity/board.entity';
 import {
     HttpException,
     HttpStatus,

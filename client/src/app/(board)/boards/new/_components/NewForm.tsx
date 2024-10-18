@@ -9,7 +9,7 @@ import NewAddressInputContainer from './NewAddressInputContainer';
 import NewImageContainer from './NewImageContainer';
 import NewInputContainer from './NewInputContainer';
 import NewTextarea from './NewTextarea';
-import { boardsUrlEndPoint } from '@/apis/config';
+import { boardsUrlEndPoint } from '~/config/axios_config';
 import { createBoardAction } from '@/actions/createBoardAction';
 import { useFormState } from 'react-dom';
 import useOnClickPush from '@/hooks/useOnClickPush';

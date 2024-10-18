@@ -5,7 +5,7 @@
 import { IBoardItem } from '@/models/board.type';
 import Image from 'next/image';
 import Link from 'next/link';
-import { boardsUrlEndPoint } from '@/apis/config';
+import { boardsUrlEndPoint } from '~/config/axios_config';
 import { changeDateToISO } from '@/utils/changeDateToISO';
 import useOnClickPush from '@/hooks/useOnClickPush';
 import { useState } from 'react';

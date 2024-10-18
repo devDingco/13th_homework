@@ -1,6 +1,6 @@
 /** @format */
 
-import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
+import { boardUrlEndPoint, commentUrlEndPoint } from '~/config/axios_config';
 import { useEffect, useRef, useState } from 'react';
 
 import { IBoardComment } from '@/models/comment.type';

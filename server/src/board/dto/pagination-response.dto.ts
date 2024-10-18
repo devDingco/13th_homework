@@ -1,4 +1,4 @@
-import { BoardEntity } from '../entities/board.entity';
+import { BoardEntity } from '../entity/board.entity';
 
 export class PaginationResponseDTO {
     result: BoardEntity[];

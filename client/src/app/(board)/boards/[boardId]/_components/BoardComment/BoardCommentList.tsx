@@ -4,7 +4,7 @@
 // [ ] key를 통해서 Update Delete 처리하기
 
 import { IBoardCommentProp, IResponseComment } from '@/models/comment.type';
-import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
+import { boardUrlEndPoint, commentUrlEndPoint } from '~/config/axios_config';
 
 import BoardCommentEmpty from './BoardCommentEmpty';
 import BoardCommentSection from './BoardCommentSection';

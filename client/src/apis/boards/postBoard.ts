@@ -1,6 +1,6 @@
 /** @format */
 
-import { api, boardUrlEndPoint } from '../config';
+import { api, boardUrlEndPoint } from '../../../config/axios_config';
 
 import { IApiResponseData } from '@/models/apiResponse';
 import { ICreateFormBoard } from '@/models/board.type';

@@ -1,7 +1,7 @@
 /** @format */
 
 import { IBoardComment, IResponseComment } from '@/models/comment.type';
-import { boardUrlEndPoint, commentUrlEndPoint } from '@/apis/config';
+import { boardUrlEndPoint, commentUrlEndPoint } from '~/config/axios_config';
 
 import { IDeleteProps } from '@/models/children.type';
 import Image from 'next/image';

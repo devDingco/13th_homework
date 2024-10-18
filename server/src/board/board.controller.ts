@@ -18,7 +18,7 @@ import { CreateBoardDTO } from './dto/create-board.dto';
 import { UpdateBoardDTO } from './dto/update-board.dto';
 import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 import { ResponseMessage } from './decorators/response-message.decorator';
-import { BoardEntity } from './entities/board.entity';
+import { BoardEntity } from './entity/board.entity';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';

@@ -3,7 +3,7 @@
 
 import { IApiResponse } from '@/models/apiResponse';
 import { IRequestComment } from '@/models/comment.type';
-import { api } from '../config';
+import { api } from '../../../config/axios_config';
 
 export default async function postComment(
 	data: IRequestComment,

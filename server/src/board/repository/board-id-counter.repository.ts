@@ -1,5 +1,5 @@
 import { MongoRepository } from 'typeorm';
-import { BoardIdCounterEntity } from '../entities/board-boardId.entity';
+import { BoardIdCounterEntity } from '../entity/board-boardId.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
