@@ -1,8 +1,6 @@
-import { InputType, PartialType } from '@nestjs/graphql';
+import { CreateBoardCommentDTO } from './create-board-comment.dto';
+import { PartialType } from '@nestjs/mapped-types';
 
-import { CreateBoardCommentDto } from './create-board-comment.dto';
-
-@InputType()
-export class UpdateBoardCommentExceptCommentDto extends PartialType(
-    CreateBoardCommentDto,
+export class UpdateBoardCommentExceptPasswordDTO extends PartialType(
+    CreateBoardCommentDTO,
 ) {}

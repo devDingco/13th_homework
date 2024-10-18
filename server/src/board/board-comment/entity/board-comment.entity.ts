@@ -5,27 +5,35 @@ import {
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
-import { CreateBoardCommentDto } from '../dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
 
-@Entity()
-@ObjectType()
-export class BoardComment extends CreateBoardCommentDto {
+@Entity('board_comment')
+export class BoardCommentEntity {
     @ObjectIdColumn()
-    @Field(() => ID)
     _id: ObjectId;
 
     @Column()
-    @Field(() => Int)
+    author: string;
+
+    @Column()
+    content: string;
+
+    @Column({ nullable: true })
+    rating?: number;
+
+    @Column({ nullable: true })
+    parentId?: string;
+
+    @Column()
+    password: string;
+
+    @Column()
     boardId: number;
 
     @CreateDateColumn()
-    @Field(() => Date)
     createdAt: Date;
 
     @UpdateDateColumn()
-    @Field(() => Date)
     updatedAt: Date;
 }

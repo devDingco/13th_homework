@@ -8,7 +8,7 @@ import {
 
 import { ObjectId } from 'mongodb';
 
-@Entity()
+@Entity('board_reaction')
 export class BoardReactionEntity {
     @ObjectIdColumn()
     _id: ObjectId;

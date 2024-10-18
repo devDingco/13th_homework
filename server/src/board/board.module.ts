@@ -1,10 +1,9 @@
-import { BoardComment } from './board-comment/entities/board-comment.entity';
+import { BoardCommentEntity } from './board-comment/entity/board-comment.entity';
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
 import { BoardController } from './board.controller';
 import { BoardEntity } from './entity/board.entity';
 import { BoardIdCounterEntity } from './entity/board-boardId.entity';
 import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
-import { BoardImageModule } from './board-image/board-image.module';
 import { BoardReactionEntity } from './board-reaction/entity/board-reaction.entity';
 import { BoardReactionModule } from './board-reaction/board-reaction.module';
 import { BoardReactionRepository } from './board-reaction/repository/boardReactionRepository';
@@ -21,12 +20,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
                 BoardEntity,
                 BoardIdCounterEntity,
                 BoardReactionEntity,
-                BoardComment,
+                BoardCommentEntity,
             ],
             'mongodb',
         ),
         BoardReactionModule,
-        BoardImageModule,
     ],
     controllers: [BoardController],
     providers: [
