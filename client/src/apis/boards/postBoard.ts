@@ -3,6 +3,7 @@
 import { actionHandleError, defaultErrors } from '@/utils/actionHandlerError';
 import { api, boardUrlEndPoint } from '../../../config/axiosConfig';
 
+import { EError } from '@/models/error.type';
 import { ICreateFormBoard } from '@/models/board.type';
 import { IFormStateError } from '@/models/formBoardError';
 
@@ -16,7 +17,7 @@ export default async function postBoard(data: ICreateFormBoard): Promise<IFormSt
 				errors: defaultErrors,
 			};
 		}
-		return actionHandleError({}, '정상적으로 데이터가 저장되지 않았습니다.');
+		return actionHandleError({}, EError.DB_ERROR);
 	} catch (error) {
 		console.error(error);
 		return actionHandleError({});

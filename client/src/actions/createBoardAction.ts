@@ -30,7 +30,7 @@ export async function createBoardAction(
 
 	let imageUrl: string[] = [];
 	if (images.length > 0) {
-		isValidImage(images);
+		await isValidImage(images);
 
 		imageUrl = await uploadImageS3(images);
 	}

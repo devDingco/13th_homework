@@ -1,6 +1,8 @@
 /** @format */
 
+import { EError } from '@/models/error.type';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
+import { actionHandleError } from '@/utils/actionHandlerError';
 import s3Client from '~/config/s3ClientConfig';
 
 export default async function uploadImageS3(images: File[]): Promise<string[]> {
@@ -20,11 +22,11 @@ export default async function uploadImageS3(images: File[]): Promise<string[]> {
 			return `https://${process.env.NEXT_PUBLIC_AWS_BUCKET_NAME}.s3.amazonaws.com/${Key}`;
 		} catch (error) {
 			console.error('Error uploading to S3:', error);
-			throw new Error('이미지 업로드 실패');
+			actionHandleError({}, EError.S3_ERROR);
 		}
 	});
 
 	const uploadedUrls = await Promise.all(uploadPromises);
 
-	return uploadedUrls;
+	return uploadedUrls.filter((url): url is string => !!url);
 }
