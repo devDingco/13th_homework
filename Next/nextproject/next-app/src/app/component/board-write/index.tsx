@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Input from "../commons/Input";
-// import Button from "../commons/Button";
 import styles from "./style.module.css";
 import { IProps } from "./types";
 import { UseBoardsWrite } from "./hook";

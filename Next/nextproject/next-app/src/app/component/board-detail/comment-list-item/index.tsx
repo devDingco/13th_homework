@@ -8,7 +8,6 @@ import CommentWriteBox from "../comment-write/comment-write-box";
 import { FetchBoardCommentsQuery } from "../../../../commons/graphql/graphql";
 
 interface IProps {
-  // el: FetchBoardCommentsQuery["fetchBoardComments"][0];
   el: FetchBoardCommentsQuery["fetchBoardComments"][0];
   index: number;
 }

@@ -9,7 +9,7 @@ import {
   UPDATE_COMMENT,
 } from "../../../queires/queries";
 import { ICommentWriteProps } from "../types";
-import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+// import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 
 export default function UseCommentWriteBox(props: ICommentWriteProps) {
   const [submit] = useMutation(Comment);
@@ -48,6 +48,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
 
   console.log(data);
 
+  // 댓글 등록
   const onClickSubmit = async () => {
     try {
       await submit({
@@ -75,6 +76,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
     }
   };
 
+  //댓글 수정
   const onClickEdit = async () => {
     try {
       await edit({
@@ -86,12 +88,6 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
             rating: value,
           },
         },
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: params.boardId, page: 1 },
-          },
-        ],
       });
     } catch {
       alert("에러");

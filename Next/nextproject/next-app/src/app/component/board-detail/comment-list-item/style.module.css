@@ -51,6 +51,7 @@
 .css_commentcontents {
   width: 1280px;
   height: 72px;
+  word-break: break-all;
 }
 
 .css_hr {

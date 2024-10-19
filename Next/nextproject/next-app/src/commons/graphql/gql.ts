@@ -22,6 +22,7 @@ const documents = {
     "\n  mutation updateBoardComment(\n    $boardCommentId: ID!\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n    $password: String!\n  ) {\n    updateBoardComment(\n      boardCommentId: $boardCommentId\n      updateBoardCommentInput: $updateBoardCommentInput\n      password: $password\n    ) {\n      _id\n      contents\n      rating\n      writer\n      updatedAt\n    }\n  }\n": types.UpdateBoardCommentDocument,
     "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n": types.DeleteBoardDocument,
     "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n": types.FetchBoardsCountDocument,
+    "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n": types.FetchBoardsDocument,
 };
 
 /**
@@ -70,6 +71,10 @@ export function graphql(source: "\n  mutation deleteBoard($boardId: ID!) {\n    
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n"): (typeof documents)["\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n"): (typeof documents)["\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

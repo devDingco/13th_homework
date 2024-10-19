@@ -6,11 +6,14 @@ import { FETCH_COMMENTS } from "../../queires/queries";
 export const useCommentList = () => {
   const params = useParams();
   const id = params.boardId.toString();
+
   const { data, fetchMore } = useQuery(FETCH_COMMENTS, {
     variables: { page: 1, boardId: id },
   });
+
   const [hasMore, setHasMore] = useState(true);
   console.log(data?.fetchBoardComments.length);
+
   const onNext = () => {
     if (data === undefined) return;
     fetchMore({
@@ -31,5 +34,6 @@ export const useCommentList = () => {
       },
     });
   };
+
   return { data, hasMore, onNext };
 };

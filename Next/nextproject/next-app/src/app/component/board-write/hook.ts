@@ -85,18 +85,6 @@ export const UseBoardsWrite = (props: IProps) => {
     setYoutubeUrl(event.target.value);
   };
 
-  // const A = () => {
-  //   if(inputs.name && inputs.password && inputs.title && inputs.contents) {
-  //     return setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  //   }
-  // }
-
-  // const valid =
-  //   inputs.name && inputs.password && inputs.title && inputs.contents;
-
   const [myfunction] = useMutation(register);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   // const isButtonDisabled =
