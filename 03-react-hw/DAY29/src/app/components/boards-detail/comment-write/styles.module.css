@@ -11,7 +11,7 @@
 }
 
 .commentBox_commentInputs {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-4 relative;
 }
 
 .commentBox_commentInputs_writerpwBox {
@@ -20,6 +20,10 @@
 
 .commentBox_comment {
   @apply flex h-36 p-3 px-4 flex-col items-start self-stretch rounded-lg border border-gray-200 bg-white resize-none;
+}
+
+.commentBox_commentInputs > span {
+  @apply absolute top-[204px] right-4 text-gray-400 text-right font-medium text-base leading-6;
 }
 
 .commentBox_button_justifyEnd {

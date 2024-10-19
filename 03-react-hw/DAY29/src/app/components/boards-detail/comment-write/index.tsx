@@ -48,10 +48,23 @@ export default function CommentWrite() {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setCommentData((prev) => ({
-      ...prev, //copies all existing properties from the current state
-      [name]: value, // updates only specific (writer,, or ~) property with the new value
-    }));
+
+    // contents일때만 길이 체크
+    if (name === "contents") {
+      if (value.length <= 100) {
+        setCommentData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+      // 100자 넘으면 입력안되게?
+    } else {
+      // 다른 필드라면 그래도 업데이트
+      setCommentData((prev) => ({
+        ...prev, //copies all existing properties from the current state
+        [name]: value, // updates only specific (writer,, or ~) property with the new value
+      }));
+    }
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -109,6 +122,7 @@ export default function CommentWrite() {
           onChange={onChange}
           value={commentData.contents}
         />
+        <span>{`${commentData.contents.length}/100`}</span>
         <div className={styles.commentBox_button_justifyEnd}>
           <button className={styles.commentBox_button} type="submit">
             댓글등록
@@ -118,3 +132,14 @@ export default function CommentWrite() {
     </form>
   );
 }
+
+/*  댓글 0/100 하는 방법
+1. 일단 총길이가 100을 넘지 못함
+ ---- commentData.contents.length <= 100
+ 1.1 현재 글자수 측정하는 법
+ ---- 상태를 바로 확인할 수 있어야하므로 useState를 사용하기
+ ---- const [commentLength, setCommentLength] = useState(0) 처음에는 길이 0
+ ---- setCommentLength(commentLenght.length)
+2. span 태그에 값이 변하는 거 연동하기
+----- <span>{`${commentLength}/100`}</span>
+*/
