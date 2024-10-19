@@ -32,9 +32,9 @@ export default function NewForm() {
 
 	const [state, formAction] = useFormState(createBoardAction, initialState);
 
-	// if (state.data) {
-	// 	onClickPush(`${boardsUrlEndPoint}/${state.data.boardId}`);
-	// }
+	if (state.data) {
+		onClickPush(`${boardsUrlEndPoint}/${state.data.boardId}`);
+	}
 
 	return (
 		<form className="flex flex-col gap-10" action={formAction}>

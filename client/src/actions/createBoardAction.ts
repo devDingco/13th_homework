@@ -56,7 +56,7 @@ export async function createBoardAction(
 		imageUrl = await uploadImageS3(images);
 	}
 
-	const data: ICreateFormBoard = {
+	const finalData: ICreateFormBoard = {
 		...fieldValues,
 		imageUrl,
 		youtubeUrl,
@@ -64,17 +64,16 @@ export async function createBoardAction(
 		detailAddress,
 	};
 
-	const responseData = await postBoard(data);
+	const data = await postBoard(finalData);
 
-	// return {
-	// 	data,
-	// 	// data: responseData,
-	// 	errors: {
-	// 		author: undefined,
-	// 		password: undefined,
-	// 		title: undefined,
-	// 		content: undefined,
-	// 	},
-	// };
-	return 1;
+	return {
+		data,
+		errors: {
+			author: '',
+			password: '',
+			title: '',
+			content: '',
+			general: '',
+		},
+	};
 }
