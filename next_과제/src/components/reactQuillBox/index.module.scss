@@ -1,6 +1,12 @@
 .reactQuillBox {
-  p {
-    font-size: var(--font-base-size);
-    font-family: var(--font-base-family);
+  [class~="ql-container"] {
+    overflow: visible;
+    resize: vertical;
+    min-height: 31.25rem;
+
+    p {
+      font-size: var(--font-base-size);
+      font-family: var(--font-base-family);
+    }
   }
 }

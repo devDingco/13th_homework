@@ -1,14 +1,23 @@
 "use client";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
-interface IApolloSetting {
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+
+interface IApolloUploadSetting {
   children: React.ReactNode;
 }
-export default function ApolloSetting(props: IApolloSetting) {
-  // const testUrl = "http://main-example.codebootcamp.co.kr/graphql";
-  const realUrl = "http://main-practice.codebootcamp.co.kr/graphql";
+export default function ApolloUploadSetting(props: IApolloUploadSetting) {
+  const uploadLink = createUploadLink({
+    uri: "http://main-practice.codebootcamp.co.kr/graphql",
+  });
+
   const client = new ApolloClient({
-    uri: realUrl,
+    link: ApolloLink.from([uploadLink]),
     cache: new InMemoryCache(),
   });
 

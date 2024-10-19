@@ -10,7 +10,6 @@ import { useBoardWrite } from "@/components/board-write/hook";
 import { IboardFormProps } from "@/components/board-write/types";
 import { Controller } from "react-hook-form";
 
-
 export default function BoardWrite(props: IboardFormProps) {
   const { title, formType } = props;
 
