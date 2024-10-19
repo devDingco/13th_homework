@@ -3,89 +3,10 @@ import styles from "./styles.module.css";
 import FormField from "../../FormField";
 import Input from "../../input";
 import Textarea from "../../textarea";
-import { gql, useMutation } from "@apollo/client";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useParams } from "next/navigation";
-
-const CREATE_BOARD_COMMENT = gql`
-  mutation createBoardComment(
-    $createBoardCommentInput: CreateBoardCommentInput!
-    $boardId: ID!
-  ) {
-    createBoardComment(
-      createBoardCommentInput: $createBoardCommentInput
-      boardId: $boardId
-    ) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-    }
-  }
-`;
+import useCommentWriter from "./hook";
 
 export default function CommentWrite() {
-  //댓글 등록후 초기화
-  const INITIAL_COMMENT_DATA = {
-    writer: "",
-    password: "",
-    rating: 0,
-    contents: "",
-  };
-
-  //input에 따라 상태 변화
-  const [commentData, setCommentData] = useState(INITIAL_COMMENT_DATA);
-
-  //그래프큐엘 내용들 보내기
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-
-  const params = useParams();
-  const boardId = params.boardId;
-
-  // typing value will udate 'commentData.writer or ...' to my typing
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-
-    // contents일때만 길이 체크
-    if (name === "contents") {
-      if (value.length <= 100) {
-        setCommentData((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-      }
-      // 100자 넘으면 입력안되게?
-    } else {
-      // 다른 필드라면 그래도 업데이트
-      setCommentData((prev) => ({
-        ...prev, //copies all existing properties from the current state
-        [name]: value, // updates only specific (writer,, or ~) property with the new value
-      }));
-    }
-  };
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault(); //폼 제출 기본 동작 방지
-
-    try {
-      // 댓글 등록
-      const commentResult = await createBoardComment({
-        variables: {
-          createBoardCommentInput: commentData,
-          boardId,
-        },
-      });
-      console.log("게시글 댓글 등록 성공: ", commentResult);
-      alert("댓글 등록 성공 🍀");
-      //성공후 댓글 초기화
-      setCommentData(INITIAL_COMMENT_DATA);
-    } catch (error) {
-      console.error("게시글 댓글 등록 실패: ", error);
-    }
-  };
+  const { commentData, handleSubmit, onChange } = useCommentWriter();
   return (
     <form className={styles.commentBox} onSubmit={handleSubmit}>
       <div className={styles.댓글상자}>
@@ -132,14 +53,3 @@ export default function CommentWrite() {
     </form>
   );
 }
-
-/*  댓글 0/100 하는 방법
-1. 일단 총길이가 100을 넘지 못함
- ---- commentData.contents.length <= 100
- 1.1 현재 글자수 측정하는 법
- ---- 상태를 바로 확인할 수 있어야하므로 useState를 사용하기
- ---- const [commentLength, setCommentLength] = useState(0) 처음에는 길이 0
- ---- setCommentLength(commentLenght.length)
-2. span 태그에 값이 변하는 거 연동하기
------ <span>{`${commentLength}/100`}</span>
-*/
