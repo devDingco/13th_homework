@@ -1,5 +1,6 @@
 /** @format */
 
+import { EError } from '@/models/error.type';
 import { IFormStateError } from '@/models/formBoardError';
 
 export const defaultErrors: IFormStateError['errors'] = {
@@ -12,7 +13,7 @@ export const defaultErrors: IFormStateError['errors'] = {
 
 export function actionHandleError(
 	errors: Partial<IFormStateError['errors']>,
-	general: string = '서버에서 오류가 발생했습니다. 다시 시도해주세요.',
+	general: string = EError.SERVER,
 ): IFormStateError {
 	return {
 		data: null,

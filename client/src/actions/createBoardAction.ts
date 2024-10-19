@@ -4,9 +4,8 @@
 import { ICreateFormBoard, IFormLower } from '@/models/board.type';
 
 import { IFormStateError } from '@/models/formBoardError';
-import { actionHandleError } from '@/utils/actionHandlerError';
-import { filterFormImage } from '@/utils/filterFormImage';
 import { filterFormRequire } from '@/utils/filterFormRequire';
+import { isValidImage } from '@/utils/validImage/isValidImage';
 import postBoard from '../apis/boards/postBoard';
 import uploadImageS3 from '@/apis/boards/uploadImageS3';
 
@@ -31,7 +30,7 @@ export async function createBoardAction(
 
 	let imageUrl: string[] = [];
 	if (images.length > 0) {
-		if (!filterFormImage(images)) actionHandleError({}, '이미지 형식에 맞지 않습니다.');
+		isValidImage(images);
 
 		imageUrl = await uploadImageS3(images);
 	}

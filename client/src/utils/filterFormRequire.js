@@ -1,12 +1,11 @@
 /** @format */
 
+import { EError } from '@/models/error.type';
 import { actionHandleError } from './actionHandlerError';
-
-const required = '필수입력 사항입니다.';
 
 export function filterFormRequire(fieldValues, requiredFields) {
 	const errors = Object.fromEntries(
-		requiredFields.map((key) => [key.toLowerCase(), fieldValues[key] ? '' : required]),
+		requiredFields.map((key) => [key.toLowerCase(), fieldValues[key] ? '' : EError.REQUIRED]),
 	);
 
 	const hasError = Object.values(errors).some((error) => error);
