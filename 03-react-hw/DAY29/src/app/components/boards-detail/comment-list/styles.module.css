@@ -1,5 +1,5 @@
 .commentList {
-  @apply flex flex-col gap-2 py-10 border-b border-gray-100;
+  @apply flex flex-col gap-2 py-10 w-[1280px] border-b border-gray-100;
 }
 
 .comment_US_EC_box {

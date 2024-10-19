@@ -7,7 +7,7 @@ import "@/app/globals.css";
 
 const BoardsDetail = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center py-10">
       <BoardsDetailForm />
       <CommentWrite />
       <CommentList />

@@ -12,7 +12,7 @@ export default function BoardsDetailForm() {
       <div className={styles.게시물타이틀상자}>
         <p>{data?.fetchBoard.title}</p>
         <div className={styles.작성자등록일자담는상자}>
-          <UserProfile writer={data?.fetchBoard.writer} />
+          <UserProfile writer={data?.fetchBoard.writer || ""} />
           <span>{data?.fetchBoard.createdAt}</span>
         </div>
       </div>
