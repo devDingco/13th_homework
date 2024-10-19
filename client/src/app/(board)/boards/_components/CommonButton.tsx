@@ -6,7 +6,7 @@ import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
 import { IApiResponseData } from '@/models/apiResponse';
 import React from 'react';
-import { boardUrlEndPoint } from '~/config/axios_config';
+import { boardUrlEndPoint } from '~/config/axiosConfig';
 import deleteBoard from '@/apis/boards/deleteBoard';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';

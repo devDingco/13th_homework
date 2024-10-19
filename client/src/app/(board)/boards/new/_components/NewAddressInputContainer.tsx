@@ -1,7 +1,7 @@
 /** @format */
 
 import { ETitle, IInput } from '@/models/board.type';
-import { boardsUrlEndPoint, newUrlEndPoint } from '~/config/axios_config';
+import { boardsUrlEndPoint, newUrlEndPoint } from '~/config/axiosConfig';
 
 import NewInput from './NewInput';
 import { useAddressStore } from '@/stores/useAddressStore';

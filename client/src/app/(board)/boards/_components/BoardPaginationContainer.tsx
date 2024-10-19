@@ -2,7 +2,7 @@
 'use client';
 
 import BoardLoading from './BoardLoading';
-import { boardUrlEndPoint } from '~/config/axios_config';
+import { boardUrlEndPoint } from '~/config/axiosConfig';
 import fetcher from '@/libs/fetcher';
 import useSWR from 'swr';
 

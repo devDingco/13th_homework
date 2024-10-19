@@ -9,26 +9,28 @@ import NewAddressInputContainer from './NewAddressInputContainer';
 import NewImageContainer from './NewImageContainer';
 import NewInputContainer from './NewInputContainer';
 import NewTextarea from './NewTextarea';
-import { boardsUrlEndPoint } from '~/config/axios_config';
+import { boardsUrlEndPoint } from '~/config/axiosConfig';
 import { createBoardAction } from '@/actions/createBoardAction';
 import { useFormState } from 'react-dom';
 import useOnClickPush from '@/hooks/useOnClickPush';
 import { usePathname } from 'next/navigation';
 
+const initialState = {
+	data: null,
+	errors: {
+		author: '',
+		password: '',
+		title: '',
+		content: '',
+		general: '',
+	},
+};
+
 export default function NewForm() {
 	const onClickPush = useOnClickPush();
 	const path: string = usePathname();
 
-	const [state, formAction] = useFormState(createBoardAction, {
-		data: null,
-		errors: {
-			author: '',
-			password: '',
-			title: '',
-			content: '',
-			general: '',
-		},
-	});
+	const [state, formAction] = useFormState(createBoardAction, initialState);
 
 	// if (state.data) {
 	// 	onClickPush(`${boardsUrlEndPoint}/${state.data.boardId}`);

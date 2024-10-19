@@ -2,7 +2,7 @@
 'use client';
 
 import { EBoardButton, EButtonKorea, IBoardButton } from '@/models/button.type';
-import { boardsUrlEndPoint, editUrlEndPoint } from '~/config/axios_config';
+import { boardsUrlEndPoint, editUrlEndPoint } from '~/config/axiosConfig';
 
 import Image from 'next/image';
 import Link from 'next/link';

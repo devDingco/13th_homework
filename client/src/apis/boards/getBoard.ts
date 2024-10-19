@@ -1,6 +1,6 @@
 /** @format */
 
-import { api, boardUrlEndPoint } from '../../../config/axios_config';
+import { api, boardUrlEndPoint } from '../../../config/axiosConfig';
 
 import { wrapPromise } from '@/utils/wrapPromise';
 

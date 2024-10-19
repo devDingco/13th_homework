@@ -10,7 +10,7 @@ import BoardItem from './BoardItem';
 import { IApiResponseData } from '@/models/apiResponse';
 import { ISearchParamsProps } from '@/models/children.type';
 import { PaginationWithLinks } from '@/components/common/PaginationWithLinks';
-import { boardUrlEndPoint } from '~/config/axios_config';
+import { boardUrlEndPoint } from '~/config/axiosConfig';
 import commonGet from '@/apis/commonGet';
 
 // import { useQuery } from '@apollo/client';

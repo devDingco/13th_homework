@@ -20,6 +20,7 @@ const InputImage = React.forwardRef<HTMLInputElement, any>(({ number }, ref) => 
 				)}
 				name="image"
 				ref={ref}
+				accept="image/jpeg,image/png"
 			/>
 		</div>
 	);

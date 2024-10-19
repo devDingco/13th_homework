@@ -2,7 +2,7 @@
 
 import { ETitle, ITitleTextArea, RNewInputPlaceHolder } from '@/models/board.type';
 
-import { boardUrlEndPoint } from '~/config/axios_config';
+import { boardUrlEndPoint } from '~/config/axiosConfig';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
