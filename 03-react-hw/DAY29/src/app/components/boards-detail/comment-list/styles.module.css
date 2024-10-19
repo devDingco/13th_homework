@@ -1,0 +1,22 @@
+.commentList {
+  @apply flex flex-col gap-2 py-10 border-b border-gray-100;
+}
+
+.comment_US_EC_box {
+  @apply flex justify-between;
+}
+
+.commentUserStar {
+  @apply flex gap-2;
+}
+
+.commentEditClose {
+  @apply flex gap-2;
+}
+.comment_contents {
+  @apply text-gray-800 font-normal;
+}
+
+.comment_createAt {
+  @apply text-gray-500 font-normal text-sm;
+}

@@ -1,4 +1,7 @@
-import { CreateBoardCommentDocument } from "./../../../../commons/graphql/graphql";
+import {
+  CreateBoardCommentDocument,
+  FetchBoardCommentsDocument,
+} from "./../../../../commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -55,6 +58,13 @@ export default function useCommentWriter() {
           createBoardCommentInput: commentData,
           boardId,
         },
+        // 댓글 목록 새로고침
+        refetchQueries: [
+          {
+            query: FetchBoardCommentsDocument,
+            variables: { boardId },
+          },
+        ],
       });
       console.log("게시글 댓글 등록 성공: ", commentResult);
       alert("댓글 등록 성공 🍀");

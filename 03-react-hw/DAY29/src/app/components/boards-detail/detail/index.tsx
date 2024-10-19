@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardsDetailForm from "./hook";
+import UserProfile from "../../UserProfile";
 
 export default function BoardsDetailForm() {
   const { data, handlePage } = useBoardsDetailForm();
@@ -11,15 +12,7 @@ export default function BoardsDetailForm() {
       <div className={styles.게시물타이틀상자}>
         <p>{data?.fetchBoard.title}</p>
         <div className={styles.작성자등록일자담는상자}>
-          <div className={styles.작성자상자}>
-            <Image
-              src="/images/icons/img.svg"
-              alt="프로필사진"
-              width={24}
-              height={24}
-            />
-            <span>{data?.fetchBoard.writer}</span>
-          </div>
+          <UserProfile writer={data?.fetchBoard.writer} />
           <span>{data?.fetchBoard.createdAt}</span>
         </div>
       </div>

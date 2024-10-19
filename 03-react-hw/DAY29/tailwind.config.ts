@@ -11,7 +11,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        gray: {
+          800: "#333",
+        },
       },
+      // commentGray: "#818181",
     },
   },
   plugins: [],

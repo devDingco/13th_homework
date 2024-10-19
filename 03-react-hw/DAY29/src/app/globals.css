@@ -50,4 +50,7 @@ form {
   .text-balance {
     text-wrap: balance;
   }
+  .text-commentGray {
+    color: #818181;
+  }
 }

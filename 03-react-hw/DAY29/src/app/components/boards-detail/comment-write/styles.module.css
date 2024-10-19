@@ -1,5 +1,5 @@
 .commentBox {
-  @apply flex flex-col gap-6 py-10;
+  @apply flex flex-col gap-6 pt-10;
 }
 
 .댓글상자 {
