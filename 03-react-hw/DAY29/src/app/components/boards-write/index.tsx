@@ -2,6 +2,8 @@ import FormField from "../FormField";
 import styles from "./styles.module.css";
 import useBoardForm from "./hook";
 import { IBoardFormProps } from "./types";
+import Input from "../input";
+import Textarea from "../textarea";
 
 export default function BoardForm({ isEdit }: IBoardFormProps) {
   const { handleChange, handleSubmit, formData, isButtonEnabled, router } =
@@ -13,43 +15,52 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
       <form className={styles.게시물등록form} onSubmit={handleSubmit}>
         <div className={styles.작성자입력상자}>
           {/* 작성자 입력 필드 */}
-          <FormField
-            label="작성자"
-            name="writer"
-            onChange={handleChange}
-            required
-            defaultValue={formData.writer ?? ""}
-            disabled={isEdit}
-          />
+          <FormField label="작성자" required>
+            <Input
+              type="text"
+              name="writer"
+              onChange={handleChange}
+              placeholder="작성자 명을 입력해 주세요."
+              className={styles.중간입력창크기}
+              defaultValue={formData.writer ?? ""}
+              required
+            />
+          </FormField>
           {/* 비밀번호 입력 필드 */}
-          <FormField
-            label="비밀번호"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            defaultValue="안보이지롱요"
-            required={!isEdit} // 수정 시 선택적으로 변경 가능
-            disabled={isEdit}
-          />
+          <FormField label="비밀번호" required>
+            <Input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              placeholder="비밀번호을 입력해 주세요."
+              className={styles.중간입력창크기}
+              required={!isEdit} //수정할때
+            />
+          </FormField>
         </div>
         <hr />
         {/* 제목 입력 필드 */}
-        <FormField
-          label="제목"
-          name="title"
-          onChange={handleChange}
-          required
-          defaultValue={formData.title}
-        />
+        <FormField label="제목" required>
+          <Input
+            type="text"
+            name="title"
+            onChange={handleChange}
+            placeholder="제목을 입력해 주세요."
+            defaultValue={formData.title}
+          />
+        </FormField>
         <hr />
         {/* 내용 입력 필드 */}
-        <FormField
-          label="내용"
-          name="contents"
-          onChange={handleChange}
-          required
-          defaultValue={formData.contents}
-        />
+        <FormField label="내용" required>
+          <Textarea
+            name="contents"
+            onChange={handleChange}
+            required
+            defaultValue={formData.contents}
+            placeholder="내용을 입력해 주세요."
+            className="styles.내용입력창크기"
+          />
+        </FormField>
         <hr />
         {/* 주소 입력 필드 */}
         <div className={styles.구분상자}>
@@ -75,12 +86,14 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
         </div>
         <hr />
         {/* 유튜브 링크 입력 필드 */}
-        <FormField
-          label="유튜브 링크"
-          name="youtubeUrl"
-          onChange={handleChange}
-          defaultValue={formData.youtubeUrl}
-        />
+        <FormField label="유튜브 링크">
+          <Input
+            name="youtubeUrl"
+            onChange={handleChange}
+            defaultValue={formData.youtubeUrl}
+            placeholder="유튜브 링크를 입력해 주세요."
+          />
+        </FormField>
         {/* 사진 첨부 기능 */}
         {/* 취소, 등록/수정 버튼 */}
         <div className={styles.취소등록버튼상자}>

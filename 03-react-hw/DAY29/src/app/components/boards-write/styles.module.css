@@ -60,3 +60,7 @@
 .disabled {
   @apply bg-gray-400 cursor-not-allowed;
 }
+
+.내용입력창크기 {
+  @apply h-[336px] resize-none;
+}

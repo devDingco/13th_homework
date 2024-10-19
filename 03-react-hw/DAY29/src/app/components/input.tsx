@@ -3,12 +3,13 @@ import React, { ChangeEvent } from "react";
 interface InputProps {
   type?: string;
   name: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
   required?: boolean;
-  defaultValue?: string;
+  defaultValue?: string; //작성했던 값
   disabled?: boolean;
+  value?: string | number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -20,6 +21,7 @@ const Input: React.FC<InputProps> = ({
   required,
   defaultValue,
   disabled,
+  value,
 }) => {
   return (
     <input
@@ -31,6 +33,7 @@ const Input: React.FC<InputProps> = ({
       required={required}
       defaultValue={defaultValue}
       disabled={disabled}
+      value={value}
     />
   );
 };

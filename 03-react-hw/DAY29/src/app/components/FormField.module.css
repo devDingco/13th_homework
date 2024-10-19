@@ -1,5 +1,5 @@
 .구분상자 {
-  @apply w-full flex flex-col gap-2 py-10;
+  @apply w-full flex flex-col gap-2;
 }
 
 .필수입력부분 {
