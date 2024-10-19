@@ -4,7 +4,7 @@ import {
 } from "./../../../../commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function useCommentWriter() {
   //댓글 등록후 초기화
@@ -25,10 +25,9 @@ export default function useCommentWriter() {
   const boardId = params.boardId as string;
 
   // typing value will udate 'commentData.writer or ...' to my typing
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (event) => {
     const { name, value } = event.target;
+    console.log(typeof event.target.value); //rating -> string...
 
     // contents일때만 길이 체크
     if (name === "contents") {
@@ -38,7 +37,13 @@ export default function useCommentWriter() {
           [name]: value,
         }));
       }
-      // 100자 넘으면 입력안되게?
+      // 100자 넘으면 입력안되게
+    } else if (name === "rating") {
+      const ratingValue = parseFloat(value);
+      setCommentData((prev) => ({
+        ...prev,
+        [name]: ratingValue,
+      }));
     } else {
       // 다른 필드라면 그래도 업데이트
       setCommentData((prev) => ({
@@ -46,6 +51,7 @@ export default function useCommentWriter() {
         [name]: value, // updates only specific (writer,, or ~) property with the new value
       }));
     }
+    console.log(event.target.value);
   };
 
   const handleSubmit = async (event: FormEvent) => {

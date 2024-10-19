@@ -2,6 +2,7 @@ import Image from "next/image";
 import UserProfile from "../../UserProfile";
 import styles from "./styles.module.css";
 import useCommentList from "./hook";
+import { Rating } from "@mui/material";
 
 export default function CommentList() {
   const { data } = useCommentList();
@@ -18,7 +19,7 @@ export default function CommentList() {
           <div className={styles.comment_US_EC_box}>
             <div className={styles.commentUserStar}>
               <UserProfile writer={el.writer as string} />
-              <span>별있음</span>
+              <Rating value={el.rating} precision={0.5} />
             </div>
             <div className={styles.commentEditClose}>
               <Image

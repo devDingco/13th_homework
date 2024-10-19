@@ -4,6 +4,7 @@ import FormField from "../../FormField";
 import Input from "../../input";
 import Textarea from "../../textarea";
 import useCommentWriter from "./hook";
+import { Rating } from "@mui/material";
 
 export default function CommentWrite() {
   const { commentData, handleSubmit, onChange } = useCommentWriter();
@@ -13,7 +14,12 @@ export default function CommentWrite() {
         <Image src="/images/icons/chat.svg" width={24} height={24} alt="chat" />
         <span>댓글</span>
       </div>
-      <div>별이 있음</div>
+      <Rating
+        name="rating"
+        value={commentData.rating}
+        precision={0.5}
+        onChange={onChange}
+      />
       <div className={styles.commentBox_commentInputs}>
         {/* 작성자, 비밀번호 상자 */}
         <div className={styles.commentBox_commentInputs_writerpwBox}>
