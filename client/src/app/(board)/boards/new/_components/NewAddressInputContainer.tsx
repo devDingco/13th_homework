@@ -1,13 +1,13 @@
 /** @format */
 
-import { ETitle, ITitle } from '@/models/board.type';
+import { ETitle, IInput } from '@/models/board.type';
 import { boardsUrlEndPoint, newUrlEndPoint } from '~/config/axios_config';
 
 import NewInput from './NewInput';
 import { useAddressStore } from '@/stores/useAddressStore';
 import useOnClickPush from '@/hooks/useOnClickPush';
 
-export default function NewAddressInputContainer({ title }: ITitle) {
+export default function NewAddressInputContainer({ title }: IInput) {
 	const onClickPush = useOnClickPush();
 
 	const { zonecode } = useAddressStore();

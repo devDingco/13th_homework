@@ -2,26 +2,28 @@
 
 import * as React from 'react';
 
+import { Label } from './label';
 import { cn } from '@/libs/utils';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+// export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-const InputImage = React.forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, ...props }, ref) => {
-		return (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const InputImage = React.forwardRef<HTMLInputElement, any>(({ number }, ref) => {
+	return (
+		<div className="grid w-48 items-center gap-1.5">
+			<Label htmlFor="picture">{`사진${number + 1}`}</Label>
 			<input
-				type={type}
+				id={number}
+				type="file"
 				className={cn(
 					'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-					className,
 				)}
 				name="image"
 				ref={ref}
-				{...props}
 			/>
-		);
-	},
-);
+		</div>
+	);
+});
 InputImage.displayName = 'InputImage';
 
 export { InputImage };

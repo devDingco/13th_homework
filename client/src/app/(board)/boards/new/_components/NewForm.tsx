@@ -22,10 +22,11 @@ export default function NewForm() {
 	const [state, formAction] = useFormState(createBoardAction, {
 		data: null,
 		errors: {
-			author: undefined,
-			password: undefined,
-			title: undefined,
-			content: undefined,
+			author: '',
+			password: '',
+			title: '',
+			content: '',
+			general: '',
 		},
 	});
 
@@ -36,11 +37,11 @@ export default function NewForm() {
 	return (
 		<form className="flex flex-col gap-10" action={formAction}>
 			<div className="flex gap-10 border-b-[1px] border-gray-200 pb-10">
-				<NewInputContainer title={ETitle.Author} error={state.errors?.author} />
-				<NewInputContainer title={ETitle.Password} error={state.errors?.password} />
+				<NewInputContainer title={ETitle.Author} error={state.errors.author} />
+				<NewInputContainer title={ETitle.Password} error={state.errors.password} />
 			</div>
-			<NewInputContainer title={ETitle.Title} error={state.errors?.title} />
-			<NewTextarea title={ETitle.Content} error={state.errors?.content} />
+			<NewInputContainer title={ETitle.Title} error={state.errors.title} />
+			<NewTextarea title={ETitle.Content} error={state.errors.content} />
 			<NewAddressInputContainer title={ETitle.Address} />
 			<NewInputContainer title={ETitle.YoutubeUrl} />
 			<NewImageContainer />

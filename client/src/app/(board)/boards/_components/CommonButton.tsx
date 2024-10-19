@@ -39,12 +39,12 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }
 					}
 				}
 				break;
-			case EButtonTitle.Cancel:
-				if (setIsEdit) {
-					setIsEdit((prev) => !prev);
-				} else {
-					onClickBack();
-				}
+				// case EButtonTitle.Cancel:
+				// 	if (setIsEdit) {
+				// 		setIsEdit((prev) => !prev);
+				// 	} else {
+				// 		onClickBack();
+				// 	}
 				break;
 			case EButtonTitle.Reply:
 				break;

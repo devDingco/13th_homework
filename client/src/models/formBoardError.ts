@@ -5,10 +5,11 @@ import { IApiResponseData } from './apiResponse';
 export interface IFormStateError {
 	data: IApiResponseData | null;
 	errors: {
-		author?: string;
-		password?: string;
-		title?: string;
-		content?: string;
+		author: string | null;
+		password: string | null;
+		title: string | null;
+		content: string | null;
+		general: string | null;
 	};
 }
 
