@@ -1,14 +1,17 @@
 /** @format */
+
+import { actionHandleError } from './actionHandlerError';
+
 const required = '필수입력 사항입니다.';
 
 export function filterFormRequire(fieldValues, requiredFields) {
-	const errors = requiredFields.reduce((acc, field) => {
-		const fieldName = field.toLowerCase();
-		acc[fieldName] = fieldValues[fieldName] ? '' : required;
-		return acc;
-	}, {});
+	const errors = Object.fromEntries(
+		requiredFields.map((key) => [key.toLowerCase(), fieldValues[key] ? '' : required]),
+	);
 
 	const hasError = Object.values(errors).some((error) => error);
 
-	return { errors, hasError };
+	if (hasError) {
+		return actionHandleError(errors, '');
+	}
 }

@@ -23,13 +23,10 @@ export async function createBoardAction(
 	const youtubeUrl = (formData.get('YoutubeUrl') as string) || '';
 	const address = (formData.get('Address') as string) || '';
 	const detailAddress = (formData.get('DetailAddress') as string) || '';
-	let images = (formData.getAll('image') as File[]) || [];
+	let images = formData.getAll('image') as File[];
 
-	const { errors, hasError } = filterFormRequire(fieldValues, requiredFields);
+	filterFormRequire(fieldValues, requiredFields);
 
-	if (hasError) {
-		return actionHandleError(errors);
-	}
 	images = images.filter((image) => image.size !== 0);
 
 	let imageUrl: string[] = [];
@@ -47,5 +44,5 @@ export async function createBoardAction(
 		detailAddress,
 	};
 
-	// return await postBoard(finalData);
+	return await postBoard(finalData);
 }

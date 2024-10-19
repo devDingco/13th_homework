@@ -2,7 +2,7 @@
 
 import { IFormStateError } from '@/models/formBoardError';
 
-export const defaultErrors = {
+export const defaultErrors: IFormStateError['errors'] = {
 	author: '',
 	password: '',
 	title: '',
