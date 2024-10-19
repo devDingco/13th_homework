@@ -5,6 +5,7 @@
 import CommonButton from '../../_components/CommonButton';
 import { EButtonTitle } from '@/models/button.type';
 import { ETitle } from '@/models/board.type';
+import { IFormStateError } from '@/models/formBoardError';
 import NewAddressInputContainer from './NewAddressInputContainer';
 import NewImageContainer from './NewImageContainer';
 import NewInputContainer from './NewInputContainer';
@@ -15,7 +16,7 @@ import { useFormState } from 'react-dom';
 import useOnClickPush from '@/hooks/useOnClickPush';
 import { usePathname } from 'next/navigation';
 
-const initialState = {
+const initialState: IFormStateError = {
 	data: null,
 	errors: {
 		author: '',

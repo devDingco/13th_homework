@@ -1,10 +1,10 @@
 /** @format */
 'use server';
-// [ ] 왜 formData에서 address를 못 들고 오는걸까..? 나중에 디버깅하기
 
 import { ICreateFormBoard, IFormLower } from '@/models/board.type';
 
 import { IFormStateError } from '@/models/formBoardError';
+import { actionHandleError } from '@/utils/actionHandlerError';
 import { filterFormImage } from '@/utils/filterFormImage';
 import { filterFormRequire } from '@/utils/filterFormRequire';
 import postBoard from '../apis/boards/postBoard';
@@ -25,33 +25,16 @@ export async function createBoardAction(
 	const detailAddress = (formData.get('DetailAddress') as string) || '';
 	let images = (formData.getAll('image') as File[]) || [];
 
-	images = images.filter((image) => image.size !== 0);
-
 	const { errors, hasError } = filterFormRequire(fieldValues, requiredFields);
 
 	if (hasError) {
-		return {
-			data: null,
-			errors: {
-				...errors,
-				general: '',
-			},
-		};
+		return actionHandleError(errors);
 	}
+	images = images.filter((image) => image.size !== 0);
 
 	let imageUrl: string[] = [];
 	if (images.length > 0) {
-		if (!filterFormImage(images))
-			return {
-				data: null,
-				errors: {
-					author: '',
-					password: '',
-					title: '',
-					content: '',
-					general: '이미지가 형식에 맞지 않습니다.',
-				},
-			};
+		if (!filterFormImage(images)) actionHandleError({}, '이미지 형식에 맞지 않습니다.');
 
 		imageUrl = await uploadImageS3(images);
 	}
@@ -64,16 +47,5 @@ export async function createBoardAction(
 		detailAddress,
 	};
 
-	const data = await postBoard(finalData);
-
-	return {
-		data,
-		errors: {
-			author: '',
-			password: '',
-			title: '',
-			content: '',
-			general: '',
-		},
-	};
+	// return await postBoard(finalData);
 }
