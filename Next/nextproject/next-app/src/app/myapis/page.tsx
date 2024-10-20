@@ -1,6 +1,6 @@
 "use client";
 import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { firebaseApp } from "./firebase";
 
 export default function FireBase() {
@@ -8,15 +8,15 @@ export default function FireBase() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event?.target.value);
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event?.target.value);
   };
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event?.target.value);
   };
 
