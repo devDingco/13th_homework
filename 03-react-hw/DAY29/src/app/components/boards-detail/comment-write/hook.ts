@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function useCommentWriter() {
-  //댓글 등록후 초기화
+  //#region 댓글 등록후 초기화
   const INITIAL_COMMENT_DATA = {
     writer: "",
     password: "",
@@ -15,7 +15,7 @@ export default function useCommentWriter() {
     contents: "",
   };
 
-  //input에 따라 상태 변화
+  // input에 따라 상태 변화
   const [commentData, setCommentData] = useState(INITIAL_COMMENT_DATA);
 
   //그래프큐엘 내용들 보내기
@@ -24,8 +24,9 @@ export default function useCommentWriter() {
   const params = useParams();
   const boardId = params.boardId as string;
 
-  // typing value will udate 'commentData.writer or ...' to my typing
+  //  typing value will udate 'commentData.writer or ...' to my typing
   const onChange = (event) => {
+    // #region event...? I dont knw type....
     const { name, value } = event.target;
     console.log(typeof event.target.value); //rating -> string...
 
