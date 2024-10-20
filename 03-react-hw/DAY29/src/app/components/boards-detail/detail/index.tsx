@@ -2,6 +2,8 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardsDetailForm from "./hook";
 import UserProfile from "../../UserProfile";
+import { FavoriteBorder, ThumbDownOutlined } from "@mui/icons-material";
+import { pink } from "@mui/material/colors";
 
 export default function BoardsDetailForm() {
   const { data, handlePage } = useBoardsDetailForm();
@@ -13,7 +15,9 @@ export default function BoardsDetailForm() {
         <p>{data?.fetchBoard.title}</p>
         <div className={styles.작성자등록일자담는상자}>
           <UserProfile writer={data?.fetchBoard.writer || ""} />
-          <span>{data?.fetchBoard.createdAt}</span>
+          <span>
+            {new Date(data?.fetchBoard.createdAt).toLocaleDateString()}
+          </span>
         </div>
       </div>
       <hr />
@@ -54,22 +58,12 @@ export default function BoardsDetailForm() {
           <div className={styles.좋싫상자}>
             {/* 싫어요 상자 */}
             <div>
-              <Image
-                src="/images/icons/bad.svg"
-                alt="싫어요버튼"
-                width={24}
-                height={24}
-              />
+              <ThumbDownOutlined sx={{ fontSize: 24 }} color="disabled" />
               <span>24</span>
             </div>
             {/* 좋아요 상자 */}
             <div className={styles.좋아요상자}>
-              <Image
-                src="/images/icons/good.svg"
-                alt="좋아요버튼"
-                width={24}
-                height={24}
-              />
+              <FavoriteBorder sx={{ fontSize: 24, color: pink[500] }} />
               <span>12</span>
             </div>
           </div>
