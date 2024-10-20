@@ -8,7 +8,8 @@ export default function ListPage(props: IListProps) {
   const { onMoveDetailPage, onClickDelete, onClickWriteBoard } = UseListWrite(
     props.currentPage
   );
-
+  console.log(props.data?.fetchBoards);
+  //노션 24
   return (
     <>
       <div className={styles.css_layout}>

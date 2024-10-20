@@ -5,14 +5,9 @@ import Image from "next/image";
 import styles from "./style.module.css";
 import { Rate } from "antd";
 import CommentWriteBox from "../comment-write/comment-write-box";
-import { FetchBoardCommentsQuery } from "../../../../commons/graphql/graphql";
+import { IListItemProps } from "./types";
 
-interface IProps {
-  el: FetchBoardCommentsQuery["fetchBoardComments"][0];
-  index: number;
-}
-
-export default function CommentItem({ el, index }: IProps) {
+export default function CommentItem({ el, index }: IListItemProps) {
   const [isEdit, setIsEdit] = useState(false);
 
   const onClickEdit = () => {

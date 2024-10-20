@@ -1,4 +1,4 @@
-export interface IProps {
+export interface IBoardWriteProps {
   isEdit: boolean;
   data?: any;
   // data?: FetchBoardQuery
