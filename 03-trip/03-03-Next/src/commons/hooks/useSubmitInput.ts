@@ -25,10 +25,6 @@ export default function useSubmitInput({ addressData }) {
 
     const onClickCreate = async (e) => {
         e.preventDefault();
-        console.log(submitInput);
-        console.log(addressData);
-        console.log(addressData?.zonecode);
-        console.log(addressData?.address);
 
         if (submitInput.author_ID === "")
             return alert("작성자를 확인해 주세요.");
@@ -50,7 +46,7 @@ export default function useSubmitInput({ addressData }) {
                         boardAddress: {
                             zipcode: addressData?.zonecode,
                             address: addressData?.address,
-                            addressDetail: submitInput.address02_ID,
+                            addressDetail: submitInput.address01_ID,
                         },
                     },
                 },

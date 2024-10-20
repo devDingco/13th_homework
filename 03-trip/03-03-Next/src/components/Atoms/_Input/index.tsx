@@ -4,7 +4,7 @@ import { InputStyle, TextStyle } from "@/commons/styles/styles";
 import { InputPlaceholder } from "@/commons/types/types";
 
 export default function Input({ ...props }) {
-    const { id, textarea, onChange, onClick, value } = props;
+    const { id, textarea, onChange, onClick, value, disabled } = props;
 
     return (
         <>
@@ -17,6 +17,7 @@ export default function Input({ ...props }) {
                     onChange={onChange}
                     onClick={onClick}
                     defaultValue={value}
+                    disabled={disabled}
                 />
             ) : (
                 <textarea
@@ -25,6 +26,7 @@ export default function Input({ ...props }) {
                     placeholder={InputPlaceholder[id]}
                     onChange={onChange}
                     defaultValue={value}
+                    disabled={disabled}
                 ></textarea>
             )}
         </>

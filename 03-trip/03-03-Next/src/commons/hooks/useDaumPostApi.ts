@@ -3,7 +3,7 @@ import { Address } from "react-daum-postcode";
 
 export default function useDaumPostApi() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [addressData, setAddressData] = useState<Address>();
+    const [addressData, setAddressData] = useState({});
 
     const onToggleModal = () => {
         setIsModalOpen((prev) => !prev);

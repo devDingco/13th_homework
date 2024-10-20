@@ -1,18 +1,23 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import useUpdate from "@/commons/hooks/useUpdate";
+
+import Input from "@/components/Atoms/_Input";
+import AddressFieldUI from "@/components/Molecules/_AddrField";
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import Input from "@/components/Atoms/_Input";
 import { FrownFilled, HeartFilled } from "@ant-design/icons";
-import AddressFieldUI from "@/components/Molecules/_AddrField";
+
+import useUpdate from "@/commons/hooks/useUpdate";
+import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
-    const { handleChange, handleUpdate, data } = useUpdate();
+    const { isModalOpen, addressData, onToggleModal, handleComplete } =
+        useDaumPostApi();
+    const { handleChange, handleUpdate, data } = useUpdate({ addressData });
 
     return (
         <>
@@ -74,7 +79,6 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                     {isEdit ? "" : data?.fetchBoard.contents}
                 </pre>
 
-                
                 {isEdit && (
                     <>
                         <Input
@@ -88,7 +92,20 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                             onChange={handleChange}
                             textarea
                         />
-                        <AddressFieldUI />
+                        <AddressFieldUI
+                            onChange={handleChange}
+                            isModalOpen={isModalOpen}
+                            addressData={addressData}
+                            onToggleModal={onToggleModal}
+                            handleComplete={handleComplete}
+                            data={data}
+                            isEdit={true}
+                        />
+                        <Input
+                            id="link_ID"
+                            value={data?.fetchBoard.youtubeUrl}
+                            onChange={handleChange}
+                        />
                     </>
                 )}
 

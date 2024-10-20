@@ -19,7 +19,10 @@ export default function AddressFieldUI({ ...props }) {
         addressData,
         onToggleModal,
         handleComplete,
+        data,
+        isEdit,
     } = props;
+
     return (
         <>
             <label>
@@ -28,18 +31,34 @@ export default function AddressFieldUI({ ...props }) {
                     <Input
                         id="zipcode_ID"
                         onClick={onToggleModal}
-                        value={addressData?.zonecode}
+                        value={
+                            isEdit && addressData.zonecode === undefined
+                                ? data?.fetchBoard.boardAddress?.zipcode
+                                : addressData?.zonecode
+                        }
                         disabled={isModalOpen}
                     />
                     <Button onClick={onToggleModal}>주소 검색</Button>
                 </div>
                 <Input
-                    id="address01_ID"
+                    id="address00_ID"
                     onClick={onToggleModal}
-                    value={addressData?.address}
+                    value={
+                        isEdit && addressData.address === undefined
+                            ? data?.fetchBoard.boardAddress?.address
+                            : addressData?.address
+                    }
                     disabled={isModalOpen}
                 />
-                <Input id="address02_ID" onChange={onChange} />
+                <Input
+                    id="address01_ID"
+                    onChange={onChange}
+                    value={
+                        isEdit && addressData.addressDetail === undefined
+                            ? data?.fetchBoard.boardAddress?.addressDetail
+                            : ""
+                    }
+                />
                 {/* modal */}
                 {isModalOpen && (
                     <Modal

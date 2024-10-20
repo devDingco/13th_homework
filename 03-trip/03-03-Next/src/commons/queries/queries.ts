@@ -74,6 +74,14 @@ export const UPDATE_BOARD = gql`
             writer
             title
             contents
+            youtubeUrl
+            boardAddress {
+                _id
+                zipcode
+                address
+                addressDetail
+                updatedAt
+            }
             updatedAt
         }
     }
