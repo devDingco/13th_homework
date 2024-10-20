@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAhf4R88xZLB3ujtj5PMLz0olnbebrMYr8",
+  apiKey: process.env.FIREBASE_API,
   authDomain: "codecamp-jomira.firebaseapp.com",
   projectId: "codecamp-jomira",
   storageBucket: "codecamp-jomira.appspot.com",
