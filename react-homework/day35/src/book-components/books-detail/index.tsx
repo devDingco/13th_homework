@@ -12,6 +12,7 @@ export default function BooksDetail() {
   const bookId = params.myapiId as string;
   const [data, setData] = useState<DocumentData | null>(null);
 
+  // bookId가 바뀔 때 렌더링
   useEffect(() => {
     const fetchData = async () => {
       // bookId 없으면 리턴

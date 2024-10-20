@@ -1,14 +1,14 @@
 import styles from "./styles.module.css";
-import UploadFile from "@/components/upload";
-import Button from "../button";
+import UploadFile from "@/components/commons/upload";
+import Button from "../commons/button";
 import { useBoardsWrite } from "./hook";
 import { BoardsWriteProps } from "./types";
-import FieldWrapper from "../fieldWrapper";
-import InputField from "../input";
-import ErrorMsg from "../error";
+import FieldWrapper from "../commons/fieldWrapper";
+import InputField from "../commons/input";
+import ErrorMsg from "../commons/error";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import AddressInputField from "../addressInput";
+import AddressInputField from "./addressInput";
 
 export default function BoardsWrite(props: BoardsWriteProps) {
   const {

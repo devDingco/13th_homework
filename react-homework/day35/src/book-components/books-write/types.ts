@@ -1,3 +1,5 @@
+import { DocumentData } from "firebase/firestore";
+
 interface Book {
   title?: string;
   author?: string;
@@ -8,6 +10,6 @@ interface Book {
 
 export interface IBooksWriteProps {
   isEdit: boolean;
-  data?: Book;
+  data?: DocumentData | null;
   bookId?: string;
 }

@@ -57,6 +57,8 @@ export const useCommentWrite = (props: ICommentWriteProps) => {
   const allInputFilled =
     commentInfo.writer.trim() !== "" && commentInfo.password.trim() !== "";
 
+  const commentFilled = commentInfo.contents.trim() !== "";
+
   const commentSubmit = async () => {
     try {
       const result = await createBoardComment({
@@ -119,11 +121,12 @@ export const useCommentWrite = (props: ICommentWriteProps) => {
 
   return {
     onChangeInput,
-    commentInfo,
-    allInputFilled,
     onClickSubmit,
-    rating,
     setRating,
     onClickEdit,
+    commentInfo,
+    rating,
+    allInputFilled,
+    commentFilled,
   };
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import BooksDetail from "@/components/bookLog/books-detail";
+import BooksDetail from "@/book-components/books-detail";
 
 const BooksDetailPage = () => {
   return <BooksDetail />;

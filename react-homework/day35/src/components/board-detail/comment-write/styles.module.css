@@ -7,7 +7,7 @@
   display: flex;
   width: 1280px;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .comment_title {
@@ -23,7 +23,6 @@
 .star_btn_box {
   display: flex;
   width: 100%;
-  padding-top: 32px;
   align-items: center;
 }
 

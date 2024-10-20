@@ -1,9 +1,9 @@
 "use client";
 
-import FieldWrapper from "@/components/fieldWrapper";
-import InputField from "@/components/input";
+import FieldWrapper from "@/components/commons/fieldWrapper";
+import InputField from "@/components/commons/input";
 import styles from "./styles.module.css";
-import Button from "@/components/button";
+import Button from "@/components/commons/button";
 import Image from "next/image";
 import { useCommentWrite } from "./hook";
 import { Rate } from "antd";
@@ -11,12 +11,14 @@ import { ICommentWriteProps } from "./types";
 
 const CommentWrite = (props: ICommentWriteProps) => {
   const {
-    commentInfo,
-    rating,
     onChangeInput,
     onClickSubmit,
-    onClickEdit,
     setRating,
+    onClickEdit,
+    commentInfo,
+    rating,
+    allInputFilled,
+    commentFilled,
   } = useCommentWrite(props);
 
   return (
@@ -29,9 +31,11 @@ const CommentWrite = (props: ICommentWriteProps) => {
           </div>
         )}
         <div className={styles.comment_group}>
+          <div className={styles.star_btn_box}>
+            <Rate onChange={setRating} value={rating} />
+          </div>
           <div className={styles.comment_input_group}>
             <div className={styles.writer_info_group}>
-              {/* {isEdit && ( */}
               <div className={styles.writer_input_group}>
                 <FieldWrapper label="작성자" isRequired={true}>
                   <InputField
@@ -39,6 +43,7 @@ const CommentWrite = (props: ICommentWriteProps) => {
                     name="writer"
                     placeholder="작성자 명을 입력해 주세요."
                     value={commentInfo.writer}
+                    isDisabled={props.isEdit}
                   />
                 </FieldWrapper>
                 <FieldWrapper label="비밀번호" isRequired={true}>
@@ -50,11 +55,6 @@ const CommentWrite = (props: ICommentWriteProps) => {
                     value={commentInfo.password}
                   />
                 </FieldWrapper>
-              </div>
-              {/* )} */}
-
-              <div className={styles.star_btn_box}>
-                <Rate onChange={setRating} value={rating} />
               </div>
             </div>
 
@@ -73,7 +73,16 @@ const CommentWrite = (props: ICommentWriteProps) => {
               </Button>
             )}
             <Button
-              variant={"active"}
+              disabled={props.isEdit ? !commentFilled : !allInputFilled}
+              variant={
+                props.isEdit
+                  ? commentFilled
+                    ? "active"
+                    : "disabled"
+                  : allInputFilled
+                  ? "active"
+                  : "disabled"
+              }
               onClick={props.isEdit ? onClickEdit : onClickSubmit}
             >
               {props.isEdit ? "수정 하기" : "댓글 등록"}

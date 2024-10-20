@@ -1,6 +1,7 @@
 import {
   BoardAddressInput,
   CreateBoardDocument,
+  FetchBoardDocument,
   FetchBoardQuery,
   UpdateBoardDocument,
   UpdateBoardMutationVariables,
@@ -9,12 +10,11 @@ import { IErrors, IInputs } from "./types";
 import { ApolloError, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 
 export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
-  console.log("수정하기");
   // input state
   const [inputs, setInputs] = useState<IInputs>({
     writer: "",
@@ -26,9 +26,18 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
   const [errors, setErrors] = useState<IErrors>({});
   // address state
   const [addressInfo, setAddressInfo] = useState({
-    zipcode: data?.fetchBoard?.boardAddress?.zipcode ?? "",
-    address: data?.fetchBoard?.boardAddress?.address ?? "",
+    zipcode: "",
+    address: "",
   });
+  // 새로고침해도 주소 인풋 유지
+  useEffect(() => {
+    if (!data) return;
+    setAddressInfo({
+      zipcode: data?.fetchBoard?.boardAddress?.zipcode || "",
+      address: data?.fetchBoard?.boardAddress?.address || "",
+    });
+  }, [data]);
+
   // 상세주소 state
   const [addressDetail, setAddressDetail] = useState("");
   // youtube Url
@@ -150,11 +159,17 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
 
   // 수정하기
   const updateBoardSubmit = async () => {
+    const { title, contents } = inputs;
     const variables: UpdateBoardMutationVariables = {
-      updateBoardInput: {},
+      updateBoardInput: {
+        ...(title && { title }),
+        ...(contents && { contents }),
+        ...(youtubeUrl && { youtubeUrl }),
+      },
       password: modalPassword,
       boardId,
     };
+
     const boardAddress: BoardAddressInput = {};
 
     // 주소가 수정되었으면 boardAddress 객체에 넣기
@@ -164,11 +179,6 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
       boardAddress.address = addressInfo.address;
     if (addressDetail) boardAddress.addressDetail = addressDetail;
 
-    // state에 값이 있으면 넣기
-    if (inputs.title) variables.updateBoardInput.title = inputs.title;
-    if (inputs.contents) variables.updateBoardInput.contents = inputs.contents;
-    if (youtubeUrl) variables.updateBoardInput.youtubeUrl = youtubeUrl;
-
     // 주소객체 있으면 넣기
     if (Object.keys(boardAddress).length !== 0)
       variables.updateBoardInput.boardAddress = boardAddress;
@@ -176,7 +186,7 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     try {
       const result = await updateBoard({
         variables,
-        // refetchQueries: [{ query: FetchBoardDocument, variables: { boardId } }],
+        refetchQueries: [{ query: FetchBoardDocument, variables: { boardId } }],
       });
       console.log("update: ", result);
 

@@ -7,14 +7,15 @@ import {
   collection,
   deleteDoc,
   doc,
+  DocumentData,
   getDocs,
   getFirestore,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 export default function BooksList() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<DocumentData[]>([]);
   const db = getFirestore(firebaseApp);
   const router = useRouter();
 
@@ -34,7 +35,10 @@ export default function BooksList() {
     }
   };
 
-  const onClickDelete = async (event, id) => {
+  const onClickDelete = async (
+    event: MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
     event.stopPropagation();
     try {
       const bookRef = doc(db, "book", id);
@@ -45,7 +49,7 @@ export default function BooksList() {
     }
   };
 
-  const onClickBook = (id) => {
+  const onClickBook = (id: string) => {
     console.log(id);
 
     router.push(`/myapis/${id}`);
