@@ -19,7 +19,7 @@ export default function InputField({ ...props }) {
                 </div>
 
                 <strong style={{ color: "#F55" }}>
-                    {!value ? "" : "필수 입력 사항입니다."}
+                    {value || !required ? "" : "필수 입력 사항입니다."}
                 </strong>
             </label>
         </>

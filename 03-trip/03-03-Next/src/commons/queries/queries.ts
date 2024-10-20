@@ -10,11 +10,9 @@ export const CREATE_BOARD = gql`
             contents
             youtubeUrl
             boardAddress {
-                _id
                 zipcode
                 address
                 addressDetail
-                createdAt
             }
             createdAt
         }
@@ -30,13 +28,12 @@ export const FETCH_BOARD = gql`
             contents
             youtubeUrl
             boardAddress {
-                _id
                 zipcode
                 address
                 addressDetail
-                createdAt
             }
             createdAt
+            updatedAt
         }
     }
 `;
@@ -76,11 +73,9 @@ export const UPDATE_BOARD = gql`
             contents
             youtubeUrl
             boardAddress {
-                _id
                 zipcode
                 address
                 addressDetail
-                updatedAt
             }
             updatedAt
         }

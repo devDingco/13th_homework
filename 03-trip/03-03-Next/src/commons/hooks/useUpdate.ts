@@ -11,36 +11,7 @@ export default function useUpdate({ addressData }) {
         variables: { boardId: Params.boardId },
     });
 
-    // interface IUpdateInput {
-    //     title_ID: string;
-    //     content_ID: string;
-    //     link_ID: string;
-    // }
-
-    // interface IUpdateAdd {
-    //     zipcode_ID: string;
-    //     address00_ID: string;
-    //     address01_ID: string;
-    // }
-
     const [updateInput, setUpdateInput] = useState({});
-
-    // useEffect(() => {
-    //     setUpdateInput((prev) => ({
-    //         ...prev,
-    //         zipcode_ID: addressData?.zonecode,
-    //         address00_ID: addressData?.address,
-    //     }));
-    // }, [addressData]);
-
-    useEffect(() => {
-        setUpdateInput({
-            title_ID: data?.fetchBoard.title,
-            content_ID: data?.fetchBoard.contents,
-            zipcode_ID: data?.fetchBoard.boardAddress?.zipcode,
-            address00_ID: data?.fetchBoard.boardAddress?.address,
-        });
-    }, [data]);
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setUpdateInput((prev) => ({
@@ -56,24 +27,24 @@ export default function useUpdate({ addressData }) {
         const password = prompt("비밀번호를 입력해주세요");
 
         const updateData = {
-            boardId: Params.boardId,
-            password: password,
-            updateBoardInput: {
-                title: updateInput.title_ID,
-                contents: updateInput.content_ID,
-                youtubeUrl: updateInput.link_ID,
+                title: updateInput.title_ID || data?.fetchBoard.title,
+                contents: updateInput.content_ID || data?.fetchBoard.contents,
+                youtubeUrl: updateInput.link_ID || data?.fetchBoard.youtubeUrl,
                 boardAddress: {
-                    zipcode: updateInput.zipcode_ID,
-                    address: updateInput.address00_ID,
-                    addressDetail: updateInput.address01_ID,
-                },
+                    zipcode: addressData.zonecode || data?.fetchBoard.boardAddress?.zipcode,
+                    address: addressData.address || data?.fetchBoard.boardAddress?.address,
+                    addressDetail: updateInput.address01_ID || data?.fetchBoard.boardAddress?.addressDetail,
             },
         };
         console.log(updateData);
 
         try {
             const result = await updateBoard({
-                variables: updateData,
+                variables: {
+                    boardId: Params.boardId,
+                    password: password,
+                    updateBoardInput: updateData
+                }
             });
             console.log(result);
 

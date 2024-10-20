@@ -32,7 +32,7 @@ export default function AddressFieldUI({ ...props }) {
                         id="zipcode_ID"
                         onClick={onToggleModal}
                         value={
-                            isEdit && addressData.zonecode === undefined
+                            isEdit && addressData === undefined
                                 ? data?.fetchBoard.boardAddress?.zipcode
                                 : addressData?.zonecode
                         }
@@ -44,7 +44,7 @@ export default function AddressFieldUI({ ...props }) {
                     id="address00_ID"
                     onClick={onToggleModal}
                     value={
-                        isEdit && addressData.address === undefined
+                        isEdit && addressData === undefined
                             ? data?.fetchBoard.boardAddress?.address
                             : addressData?.address
                     }
@@ -54,7 +54,7 @@ export default function AddressFieldUI({ ...props }) {
                     id="address01_ID"
                     onChange={onChange}
                     value={
-                        isEdit && addressData.addressDetail === undefined
+                        isEdit && addressData === undefined
                             ? data?.fetchBoard.boardAddress?.addressDetail
                             : ""
                     }
