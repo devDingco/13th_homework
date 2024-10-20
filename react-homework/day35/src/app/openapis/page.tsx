@@ -1,8 +1,8 @@
 "use client";
+import MovieList from "@/components/openapis-list";
 
-import MovieList from "@/movie-components/openapis-list";
-
-const MyMoviesPage = () => {
+const MovieListPage = () => {
   return <MovieList />;
 };
-export default MyMoviesPage;
+
+export default MovieListPage;

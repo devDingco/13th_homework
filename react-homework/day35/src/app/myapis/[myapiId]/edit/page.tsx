@@ -1,7 +1,7 @@
 "use client";
 
 import { firebaseApp } from "@/commons/libraries/firebase";
-import BooksWrite from "@/book-components/books-write";
+import BooksWrite from "@/components/books-write";
 import { doc, DocumentData, getDoc, getFirestore } from "firebase/firestore";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";

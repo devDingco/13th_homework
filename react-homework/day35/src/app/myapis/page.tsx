@@ -1,4 +1,4 @@
-import BooksList from "@/book-components/books-list";
+import BooksList from "@/components/books-list";
 
 const BooksListPage = () => {
   return <BooksList />;

@@ -1,6 +1,6 @@
 "use client";
 
-import BooksWrite from "@/book-components/books-write";
+import BooksWrite from "@/components/books-write";
 
 const BooksNewPage = () => {
   return <BooksWrite isEdit={false} />;
