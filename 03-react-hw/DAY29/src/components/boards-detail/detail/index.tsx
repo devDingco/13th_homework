@@ -1,9 +1,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardsDetailForm from "./hook";
-import UserProfile from "../../UserProfile";
+
 import { FavoriteBorder, ThumbDownOutlined } from "@mui/icons-material";
 import { pink } from "@mui/material/colors";
+import UserProfile from "@/components/UserProfile";
 
 export default function BoardsDetailForm() {
   const { data, handlePage } = useBoardsDetailForm();

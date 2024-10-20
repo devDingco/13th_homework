@@ -1,10 +1,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
-import FormField from "../../FormField";
-import Input from "../../input";
-import Textarea from "../../textarea";
 import useCommentWriter from "./hook";
 import { Rating } from "@mui/material";
+import FormField from "@/components/FormField";
+import Input from "@/components/input";
+import Textarea from "@/components/textarea";
 
 export default function CommentWrite() {
   const { commentData, handleSubmit, onChange } = useCommentWriter();
@@ -59,5 +59,3 @@ export default function CommentWrite() {
     </form>
   );
 }
-
- 

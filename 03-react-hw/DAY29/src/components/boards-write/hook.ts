@@ -8,7 +8,7 @@ import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 
-// 필수 입력 필드 배열 정의
+// #region 필수 입력 필드 배열 정의
 const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
   "writer",
   "password",
@@ -19,7 +19,7 @@ const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
 export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   const router = useRouter();
 
-  // 폼 데이터 상태 관리
+  //#region 폼 데이터 상태 관리
   const [formData, setFormData] = useState<IFormDataProps>({
     writer: "",
     password: "",
@@ -29,11 +29,12 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     youtubeUrl: "",
     images: [],
   });
+  //#endregion
 
-  // 초기 데이터 상태 관리 (수정페이지에서)
+  //#region 초기 데이터 상태 관리 (수정페이지에서)
   const [initialData, setInitialData] = useState<IFormDataProps | null>(null);
 
-  // GraphQL 뮤테이션 훅
+  //#region GraphQL 뮤테이션 훅
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
 
@@ -45,7 +46,7 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     },
   });
 
-  // useEffect: 그려질 때 처음에 딱 한번 실행?함
+  //#region useEffect: 그려질 때 처음에 딱 한번 실행?함
   useEffect(() => {
     // 수정 모드, 데이터가 존재할 때만 실행
     if (isEdit && data?.fetchBoard) {
@@ -68,8 +69,9 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     }
   }, [isEdit, data]);
   // isEdit와 data를 포함시켜 이 값들이 변경될 때만 효과가 실행되도록 함
+  //#endregion
 
-  // 입력 필드 변경 핸들러
+  //#region 입력 필드 변경 핸들러
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -79,8 +81,9 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
       [name]: value,
     }));
   };
+  //#endregion
 
-  // 버튼 활성화 여부 결정
+  //#region 버튼 활성화 여부 결정
   const isButtonEnabled = useMemo(() => {
     if (isEdit) {
       // 수정일때: 하나의 필드라도 변경되었는지 확인
@@ -97,8 +100,9 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     }
   }, [formData, initialData, isEdit]);
   // formData, initialData, isEdit이 변경될 때만 재계산
+  //#endregion
 
-  // 폼 제출 핸들러
+  //#region 폼 제출 핸들러
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isButtonEnabled) return;

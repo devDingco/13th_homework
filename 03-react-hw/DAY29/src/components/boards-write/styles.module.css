@@ -1,12 +1,12 @@
 .게시물등록전체상자 {
-  @apply flex flex-col w-[80rem];
+  @apply flex flex-col w-[80rem] gap-10;
 }
 
 .게시물등록전체상자 nav {
   @apply text-black text-xl font-bold leading-7;
 }
 .게시물등록form {
-  @apply flex flex-col;
+  @apply flex flex-col gap-10;
 }
 .작성자입력상자 {
   @apply flex gap-10 w-full;
@@ -20,10 +20,10 @@
   @apply flex flex-col gap-10;
 }
 
+/* MARK: Textarea component*/
 .내용입력창크기 {
   @apply h-[336px] resize-none;
 }
-
 .우편번호검색상자 {
   @apply flex gap-2 w-[13.75rem];
 }

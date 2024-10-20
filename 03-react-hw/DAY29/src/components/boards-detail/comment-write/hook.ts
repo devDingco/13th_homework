@@ -1,7 +1,7 @@
 import {
   CreateBoardCommentDocument,
   FetchBoardCommentsDocument,
-} from "./../../../../commons/graphql/graphql";
+} from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { FormEvent, useState } from "react";
