@@ -117,3 +117,24 @@ export const FETCH_COMMENTS = gql`
         }
     }
 `;
+
+export const UPDATE_COMMENT = gql`
+    mutation updateBoardComment(
+        $boardCommentId: ID!
+        $password: String
+        $updateBoardCommentInput: UpdateBoardCommentInput!
+    ) {
+        updateBoardComment(
+            boardCommentId: $boardCommentId
+            password: $password
+            updateBoardCommentInput: $updateBoardCommentInput
+        ) {
+            _id
+            writer
+            contents
+            rating
+            createdAt
+            updatedAt
+        }
+    }
+`;
