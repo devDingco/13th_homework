@@ -2,6 +2,7 @@
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useApiList from './hooks';
+import Image from 'next/image';
 
 export default function OpenApisComponent() {
   const { characters, hasMore, FetchDisneyData, onClickDetail } = useApiList();
@@ -18,7 +19,7 @@ export default function OpenApisComponent() {
       >
         {characters.map((character) => (
           <div key={character._id} onClick={() => onClickDetail(character._id)}>
-            <img
+            <Image
               src={character.imageUrl}
               alt={character.name}
               width={200}

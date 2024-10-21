@@ -3,6 +3,7 @@ import { useParams } from 'next/navigation';
 import useApiDetail from './hooks';
 import { useEffect, useState } from 'react';
 import { ICharacter } from '../openapis-list/types';
+import Image from 'next/image';
 
 //openapi 상세페이지
 export default function OpenApiDetailComponent() {
@@ -32,7 +33,7 @@ export default function OpenApiDetailComponent() {
   return (
     <div className="container">
       <div>캐릭터 명 : {characterId.name}</div>
-      <img
+      <Image
         src={characterId.imageUrl}
         alt={characterId.name}
         width={200}
