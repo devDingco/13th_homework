@@ -26,12 +26,12 @@ export default function CommentUI({ el, idx, data }) {
 
     function handleChange(e) {
         switch (e.target.id) {
-            case "comment": {
+            case "comment_ID": {
                 setComment(e.target.value);
                 console.log(comment);
                 break;
             }
-            case "password": {
+            case "password_ID": {
                 setPassword(e.target.value);
                 console.log(password);
                 break;
@@ -100,7 +100,7 @@ export default function CommentUI({ el, idx, data }) {
             <pre>
                 {isEdit ? (
                     <Input
-                        id="comment"
+                        id="comment_ID"
                         value={data.fetchBoardComments[idx].contents}
                         onChange={handleChange}
                     />
@@ -111,7 +111,7 @@ export default function CommentUI({ el, idx, data }) {
 
             <div>
                 {isEdit ? (
-                    <Input id="password" onChange={handleChange} />
+                    <Input id="password_ID" onChange={handleChange} />
                 ) : (
                     el.createdAt.split("T")[0]
                 )}
