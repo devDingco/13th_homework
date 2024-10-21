@@ -1,4 +1,5 @@
 /** @format */
+'use client';
 
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 

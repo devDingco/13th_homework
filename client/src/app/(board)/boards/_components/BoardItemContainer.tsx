@@ -1,55 +1,47 @@
 /** @format */
+'use client';
 
 // NOTE Uncaught SyntaxError: Invalid or unexpected token (at layout.js:28:29)
 
-// import { GetBoardDocument, GetBoardsQuery } from '@/graphql/generated/graphql';
-
-import { GetBoardsDocument, GetBoardsQuery } from '@/graphql/generated/graphql';
+import { GetBoardsQuery, useGetBoardsQuery } from '@/graphql/queries/getBoards.generated';
 
 import BoardItem from './BoardItem';
-// import BoardLoading from './BoardLoading';
-// import ErrorComponent from './ErrorComponent';
 import { IApiResponseData } from '@/models/apiResponse';
 import { ISearchParamsProps } from '@/models/children.type';
 import { PaginationWithLinks } from '@/components/common/PaginationWithLinks';
-import { boardUrlEndPoint } from '~/config/axiosConfig';
-import commonGet from '@/apis/commonGet';
-import { useQuery } from '@apollo/client';
 
-// import { useQuery } from '@apollo/client';
+// import { boardUrlEndPoint } from '~/config/axiosConfig';
+// import commonGet from '@/apis/commonGet';
 
 export default function BoardItemContainer({ searchParams }: ISearchParamsProps) {
 	const page = parseInt((searchParams.page as string) || '1');
 	const take = parseInt((searchParams.take as string) || '5');
 
-	// const data = await commonGet(`${boardUrlEndPoint}?page=${page}&take=${take}`);
+	const variables = { page, take };
 
-	const { data } = useQuery<GetBoardsQuery>(GetBoardsDocument, {
-		variables: {
-			page,
-			take,
-		},
+	const { data } = useGetBoardsQuery({
+		variables,
 	});
 
-	console.log(data);
+	// const data = await commonGet(`${boardUrlEndPoint}?page=${page}&take=${take}`);
 
-	// if (data)
-	// 	return (
-	// 		<>
-	// 			{data.result.map((board: IApiResponseData) => (
-	// 				<BoardItem key={board.boardId} board={board} />
-	// 			))}
-	// 			<PaginationWithLinks
-	// 				page={page}
-	// 				take={take}
-	// 				totalCount={data.totalCount}
-	// 				pageSizeSelectOptions={{
-	// 					pageSizeSearchParam: 'take',
-	// 					pageSizeOptions: [3, 5, 10],
-	// 				}}
-	// 			/>
-	// 		</>
-	// 	);
-
-	return 1;
+	if (data)
+		return (
+			<>
+				{data.getBoards.result.map(
+					(board: IApiResponseData | GetBoardsQuery['getBoards']['result'][0]) => (
+						<BoardItem key={board.boardId} board={board} />
+					),
+				)}
+				<PaginationWithLinks
+					page={page}
+					take={take}
+					totalCount={data.getBoards.totalCount}
+					pageSizeSelectOptions={{
+						pageSizeSearchParam: 'take',
+						pageSizeOptions: [3, 5, 10],
+					}}
+				/>
+			</>
+		);
 }

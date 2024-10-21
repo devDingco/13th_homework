@@ -1,5 +1,6 @@
 /** @format */
 
+import { GetBoardsQuery } from '@/graphql/queries/getBoards.generated';
 import { IApiResponseData } from './apiResponse';
 
 export enum ETitle {
@@ -75,8 +76,7 @@ export interface IReaction {
 }
 
 export interface IBoardItem {
-	key: number;
-	board: IBoardType;
+	board: IBoardType | GetBoardsQuery['getBoards']['result'][0];
 }
 
 export interface IBoardProps {
