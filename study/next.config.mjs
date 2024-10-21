@@ -19,6 +19,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.dog.ceo",
         pathname: "/breeds/*/*",
+      },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/codecamp-file-storage/*/*/*/*"
       }
       // {
       //   protocol: "https",
