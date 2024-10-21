@@ -11,7 +11,12 @@ const config: CodegenConfig = {
 	documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
 	generates: {
 		'./src/graphql/generated/': {
-			preset: 'client',
+			preset: 'near-operation-file-preset',
+			presetConfig: {
+				extension: '.generated.ts',
+				baseTypesPath: 'types.ts',
+			},
+			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
 			config: {
 				withHooks: true,
 				withComponent: false,
