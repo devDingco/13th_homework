@@ -1,0 +1,69 @@
+.inputFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputFormTitle {
+  display: flex;
+  gap: 0.5rem;
+
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inputFormText {
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.requiredMark {
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.requiredInputError {
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inputTextArea {
+  height: 21rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.AddressFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin-top: 2.5rem;
+}
+
+.zipCodeContainer {
+  display: flex;
+  gap: 0.5rem;
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.zipCodeSearchButton {
+  width: 8.125rem;
+  height: 3rem;
+  background-color: #ffffff;
+  color: black;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid black;
+}
