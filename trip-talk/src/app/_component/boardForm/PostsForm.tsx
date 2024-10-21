@@ -20,6 +20,7 @@ import {
 import useModalStore from '@/app/_store/useModalStore';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { CREATE_BOARD, UPLOAD_FILE } from '@/app/_api/board/Mutation';
+import CustomImageInput from '../form/CustomImageInput';
 
 export default function PostsForm({
   type,
@@ -177,9 +178,11 @@ export default function PostsForm({
     imageRef.current?.click();
   };
 
-  const onChangeImage = async (event: any) => {
+  const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     console.log(event.target.files);
+
+    if (!file) return; // 파일이 없을 경우를 처리
 
     const result = await uploadFile({ variables: { file } });
     console.log('file', result.data?.uploadFile.url);
@@ -293,39 +296,12 @@ export default function PostsForm({
         onChangeFnc={onPostFormChange}
       />
       <div className={s.flexBox}>
-        {/* <Input
-          // value={postData.}
-          label="사진 첨부"
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
+        <CustomImageInput
+          onClickFnc={onClickImage}
+          onChangeFnc={onChangeImage}
+          imageTarget={imageRef}
+          imageUrl={imageUrl}
         />
-        <Input
-          // value={postData.}
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
-        />
-        <Input
-          // value={postData.}
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
-        /> */}
-        <div
-          className="w-[100px] h-[100px] bg-gray/100"
-          onClick={onClickImage}></div>
-        <input
-          type="file"
-          className="hidden"
-          onChange={onChangeImage}
-          ref={imageRef}
-        />
-
-        <img src={`https://storage.googleapis.com/${imageUrl}`} alt="dd" />
       </div>
       <div className={`${s.flexBox} justify-end`}>
         <Button type="button" style="default">
