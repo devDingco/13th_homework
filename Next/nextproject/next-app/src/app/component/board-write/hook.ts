@@ -7,11 +7,11 @@ import {
   register,
   UPDATE_BOARD,
 } from "../queires/queries";
-import { IProps } from "./types";
+import { IBoardWriteProps } from "./types";
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
 
-export const UseBoardsWrite = (props: IProps) => {
+export const UseBoardWrite = (props: IBoardWriteProps) => {
   const router = useRouter();
   const params = useParams(); //라우터 사용 시 파라미터 정보를 가져오기 위한 설정
 
@@ -36,17 +36,6 @@ export const UseBoardsWrite = (props: IProps) => {
       [event?.target.id]: event?.target.value,
     }));
   };
-  // const [name, setName] = useState("");
-
-  // const [password, setPassword] = useState("");
-
-  // const [title, setTitle] = useState(
-  //   props.isEdit ? data?.fetchBoard.title : ""
-  // );
-
-  // const [contents, setContents] = useState(
-  //   props.isEdit ? data?.fetchBoard.contents : ""
-  // );
 
   const [nameblank, setNameBlank] = useState("");
 
@@ -56,7 +45,7 @@ export const UseBoardsWrite = (props: IProps) => {
 
   const [contentblank, setContentBlank] = useState("");
 
-  // const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -85,22 +74,14 @@ export const UseBoardsWrite = (props: IProps) => {
     setYoutubeUrl(event.target.value);
   };
 
-  // const A = () => {
-  //   if(inputs.name && inputs.password && inputs.title && inputs.contents) {
-  //     return setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  //   }
-  // }
-
-  // const valid =
-  //   inputs.name && inputs.password && inputs.title && inputs.contents;
-
   const [myfunction] = useMutation(register);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-  // const isButtonDisabled =
-  //   !inputs.name || !inputs.password || !inputs.title || !inputs.contents;
+
+  const isButtonDisabled =
+    !inputs.name_id ||
+    !inputs.password_id ||
+    !inputs.title_id ||
+    !inputs.contents_id;
 
   const checkValid = () => {
     if (inputs.name_id === "") {
@@ -240,7 +221,7 @@ export const UseBoardsWrite = (props: IProps) => {
     address,
     addressDetail,
     addressnum,
-    // isButtonDisabled,
+    isButtonDisabled,
     isModalOpen,
     data,
     youtubeUrl,

@@ -13,6 +13,7 @@ export default function UseListWrite(currentPage: number) {
       mypage: currentPage,
     },
   });
+
   const { data: dataBoardsCount } = useQuery(FetchBoardsCount);
   console.log(dataBoardsCount?.fetchBoardsCount);
   const router = useRouter();
@@ -20,7 +21,9 @@ export default function UseListWrite(currentPage: number) {
   const onMoveDetailPage = (id: string) => {
     router.push(`/routes/boards/${id}`);
   };
+
   const [deleteBoard] = useMutation(DeleteBoard);
+
   const onClickDelete = async (
     event: MouseEvent<HTMLButtonElement>,
     id: string

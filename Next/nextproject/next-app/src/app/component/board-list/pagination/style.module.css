@@ -1,10 +1,12 @@
+.css_pagebox {
+  display: flex;
+  justify-content: space-between;
+}
+
 .css_pagination {
-  margin-left: 58px;
-  margin-right: 58px;
+  gap: 10px;
 }
 
 .css_clickpagenum {
   color: red;
-  margin-left: 58px;
-  margin-right: 58px;
 }

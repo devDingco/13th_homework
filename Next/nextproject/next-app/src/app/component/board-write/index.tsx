@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Input from "../commons/Input";
-// import Button from "../commons/Button";
 import styles from "./style.module.css";
-import { IProps } from "./types";
-import { UseBoardsWrite } from "./hook";
+import { IBoardWriteProps } from "./types";
+import { UseBoardWrite } from "./hook";
 import React from "react";
 import { Button, Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
-export default function BoardsWrite(props: IProps) {
+export default function BoardWrite(props: IBoardWriteProps) {
   const {
     onChangeInput,
     onClickUpdate,
@@ -19,7 +18,7 @@ export default function BoardsWrite(props: IProps) {
     onChangeYoutubeUrl,
     onToggleModal,
     handleCpmplete,
-    // isButtonDisabled,
+    isButtonDisabled,
     nameblank,
     titleblank,
     contentblank,
@@ -31,7 +30,7 @@ export default function BoardsWrite(props: IProps) {
     data,
     youtubeUrl,
     inputs,
-  } = UseBoardsWrite(props);
+  } = UseBoardWrite(props);
 
   return (
     <div className={styles.css_layout}>
@@ -53,7 +52,7 @@ export default function BoardsWrite(props: IProps) {
               name="name"
               defaultValue={
                 props.isEdit ? data?.fetchBoard.writer : inputs.name_id
-              } // defaultValue: input tag에서 처음 보여줄 값, input 박스에 값을 입력하면 값이 수정이 됨₩.
+              } // defaultValue: input tag에서 처음 보여줄 값, input 박스에 값을 입력하면 값이 수정이 됨.
               onChange={onChangeInput}
               disabled={props.isEdit ? true : false}
               className={
@@ -88,12 +87,13 @@ export default function BoardsWrite(props: IProps) {
         <div className={styles.css_titletop}>
           <div className={styles.css_title}>
             제목
-            <input
+            <Input
               defaultValue={
                 props.isEdit ? data?.fetchBoard?.title : inputs.title_id
               }
               type="text"
               id="title_id"
+              name="title"
               className={styles.css_titleinput}
               placeholder="제목을 입력해 주세요."
               onChange={onChangeInput}
@@ -107,12 +107,13 @@ export default function BoardsWrite(props: IProps) {
         <div className={styles.css_contenttop}>
           <div className={styles.css_content}>
             내용
-            <input
+            <Input
               defaultValue={
                 props.isEdit ? data?.fetchBoard?.contents : inputs.contents_id
               }
               type="text"
               id="contents_id"
+              name="content"
               className={styles.css_contentinput}
               placeholder="내용을 입력해 주세요."
               onChange={onChangeInput}
@@ -231,13 +232,13 @@ export default function BoardsWrite(props: IProps) {
           </button>
           <Button
             onClick={props.isEdit ? onClickUpdate : onClickSignup}
-            // className={
-            //   !props.isEdit && isButtonDisabled
-            //     ? `${styles.css_submitbutton} ${styles.disabled}`
-            //     : styles.css_submitbutton
-            // }
-            className={styles.css_submitbutton}
-            // disabled={!props.isEdit && isButtonDisabled}
+            className={
+              !props.isEdit && isButtonDisabled
+                ? `${styles.css_submitbutton} ${styles.disabled}`
+                : styles.css_submitbutton
+            }
+            // className={styles.css_submitbutton}
+            disabled={!props.isEdit && isButtonDisabled}
           >
             {props.isEdit ? "수정" : "등록"}하기
           </Button>

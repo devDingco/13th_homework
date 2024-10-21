@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// 게시글 등록
 export const register = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
@@ -18,6 +19,7 @@ export const register = gql`
   }
 `;
 
+// 게시글 수정
 export const UPDATE_BOARD = gql`
   mutation updateBoard(
     $boardId: ID!
@@ -44,6 +46,8 @@ export const UPDATE_BOARD = gql`
     }
   }
 `;
+
+// 게시글 조회
 export const FetchBoard = gql`
   query fetchBoard($myboardId: ID!) {
     fetchBoard(boardId: $myboardId) {
@@ -62,6 +66,7 @@ export const FetchBoard = gql`
   }
 `;
 
+// 댓글 작성
 export const Comment = gql`
   mutation createBoardComment(
     $createBoardCommentInput: CreateBoardCommentInput!
@@ -79,6 +84,8 @@ export const Comment = gql`
     }
   }
 `;
+
+// 댓글 조회
 export const FETCH_COMMENTS = gql`
   query fetchBoardComments($page: Int, $boardId: ID!) {
     fetchBoardComments(page: $page, boardId: $boardId) {
@@ -91,6 +98,7 @@ export const FETCH_COMMENTS = gql`
   }
 `;
 
+// 댓글 수정
 export const UPDATE_COMMENT = gql`
   mutation updateBoardComment(
     $boardCommentId: ID!
@@ -111,17 +119,21 @@ export const UPDATE_COMMENT = gql`
   }
 `;
 
+// 게시글 삭제
 export const DeleteBoard = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
 `;
 
+// 게시글 수 조회
 export const FetchBoardsCount = gql`
   query fetchBoardsCount {
     fetchBoardsCount
   }
 `;
+
+// 게시글 조회
 export const FetchBoards = gql`
   query fetchBoards($mypage: Int) {
     fetchBoards(page: $mypage) {
