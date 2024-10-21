@@ -28,8 +28,8 @@ export default function BoardBanner() {
         pagination={{ clickable: true }}
         spaceBetween={50}
         slidesPerView={1}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
       >
         <SwiperSlide>
           <div style={{ position: 'relative', width: '100%', height: '500px' }}>

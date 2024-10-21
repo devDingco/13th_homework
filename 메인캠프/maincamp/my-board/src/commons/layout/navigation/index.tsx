@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Avatar, Tabs, TabsProps } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MainNavigation() {
   const [isCaretUp, setIsCaretUp] = useState(false);
@@ -43,7 +44,14 @@ export default function MainNavigation() {
   return (
     <div className="flex justify-between bg-slate-100 h-20 mx-auto layout">
       <div className="flex items-center gap-6">
-        <Image src="/images/logo area.png" width={46} height={32} alt="로고" />
+        <Link href={'/boards'}>
+          <Image
+            src="/images/logo area.png"
+            width={46}
+            height={32}
+            alt="로고"
+          />
+        </Link>
         <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       </div>
       <div className="flex gap-4 items-center">

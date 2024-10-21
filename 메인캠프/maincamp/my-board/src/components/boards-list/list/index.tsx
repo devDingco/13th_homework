@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useBoardsList } from './hooks';
 import Pagination from '../pagination';
 import { useState } from 'react';
+import { Button } from 'antd';
+import Link from 'next/link';
 
 export function BoardsList() {
   const { data, moveToDetailPage, deleteBoardFunc, refetch, lastPageNum } =
@@ -12,12 +14,17 @@ export function BoardsList() {
   const [selectedPage, setSelectedPage] = useState(1);
   return (
     <div className="w-full max-w-4xl mx-auto shadow-lg py-8 px-6 mt-8 bg-white rounded-2xl">
+      <div className="flex justify-end">
+        <Link href={'/boards/new'}>
+          <Button>글쓰기</Button>
+        </Link>
+      </div>
       <div className="grid grid-cols-2 font-bold text-lg mb-4 border-b pb-2">
         <div className="flex items-center">
           <span className="mr-14 ml-6 text-black">번호</span>
           <span className="text-black">제목</span>
         </div>
-        <div className="flex space-x-16 justify-start pl-28">
+        <div className="flex space-x-16 justify-start pl-40">
           <span className="text-black">작성자</span>
           <span className="text-black">작성일</span>
         </div>
