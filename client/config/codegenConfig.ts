@@ -3,9 +3,10 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
+	// client codegenerator 처리하기
 	overwrite: true,
-	schema: `${process.env.NEXT_PUBLIC_BACK_URL}/graphql`,
-	documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
+	schema: `http://172.16.2.165:8080/graphql`,
+	documents: ['src/graphql/queries/*.graphql'],
 	generates: {
 		'./src/graphql/generated/': {
 			preset: 'client',
