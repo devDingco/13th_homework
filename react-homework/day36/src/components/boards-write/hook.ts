@@ -11,7 +11,14 @@ import { IErrors, IInputs } from "./types";
 import { ApolloError, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 import { checkValidationFile } from "@/utils/validation-file";
@@ -48,7 +55,11 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
     });
     setImageUrl(data?.fetchBoard?.images || ["", "", ""]);
   }, [data]);
-  const fileRefs = [useRef(null), useRef(null), useRef(null)];
+  const fileRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   // modal 토글 - password
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -117,7 +128,7 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
   };
 
   // delete버튼 클릭 시 이미지 미리보기 삭제
-  const onClickDelete = (event) => {
+  const onClickDelete = (event: MouseEvent<HTMLImageElement>) => {
     // 이벤트버블링 막기 (파일 열기)
     event.stopPropagation();
     const imageId = event.currentTarget.id;
@@ -131,9 +142,10 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
   console.log(imageUrl);
 
   // file버튼 클릭해주기
-  const onClickImage = (event) => {
+  const onClickImage = (event: MouseEvent<HTMLInputElement>) => {
     const id = event.currentTarget.id;
-    fileRefs[id].current?.click();
+    const index = Number(id);
+    fileRefs[index]?.current?.click();
   };
 
   // 구조분해할당
