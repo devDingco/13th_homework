@@ -24,7 +24,7 @@ export class BoardSchema {
     youtubeUrl?: string;
 
     @Field(() => BoardAddressOutput, { nullable: true })
-    BoardAddressOutput?: BoardAddressOutput;
+    boardAddressOutput?: BoardAddressOutput;
 
     @Field(() => Int)
     boardId: number;

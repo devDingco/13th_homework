@@ -37,5 +37,5 @@ export class UpdateBoardInput {
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => BoardAddressInput)
-    BoardAddressInput?: BoardAddressInput;
+    boardAddressInput?: BoardAddressInput;
 }

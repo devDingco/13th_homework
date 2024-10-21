@@ -22,20 +22,23 @@ export class BoardCommentResolver {
     @Mutation(() => BoardCommentResponseDTO)
     createBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('boardComment')
-        boardComment: CreateBoardCommentInput,
+        @Args('createBoardComment')
+        createBoardComment: CreateBoardCommentInput,
     ) {
-        return this.boardCommentService.createComment(boardId, boardComment);
+        return this.boardCommentService.createComment(
+            boardId,
+            createBoardComment,
+        );
     }
 
     @Mutation(() => BoardCommentResponseDTO)
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('boardComment')
-        boardComment: UpdateBoardCommentInput,
+        @Args('updateBoardComment')
+        updateBoardComment: UpdateBoardCommentInput,
         @Args('commentId') commentId: string,
     ) {
-        const { password, ...restUpdateBoardComment } = boardComment;
+        const { password, ...restUpdateBoardComment } = updateBoardComment;
         return this.boardCommentService.updateComment(
             boardId,
             restUpdateBoardComment,

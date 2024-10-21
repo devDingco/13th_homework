@@ -1,6 +1,6 @@
 mutation CreateBoardComment(
     $boardId: Int!
-    $createBoardComment: CreateBoardCommentDto!
+    $createBoardComment: CreateBoardCommentInput!
 ) {
     createBoardComment(
         boardId: $boardId
@@ -22,13 +22,13 @@ mutation CreateBoardComment(
 
 mutation UpdateBoardComment(
     $boardId: Int!
-    $updateBoardComment: UpdateBoardCommentDto!
-    $parentId: String!
+    $updateBoardComment: UpdateBoardCommentInput!
+    $commentId: String!
 ) {
     updateBoardComment(
         boardId: $boardId
         updateBoardComment: $updateBoardComment
-        parentId: $parentId
+        commentId: $commentId
     ) {
         author
         content
