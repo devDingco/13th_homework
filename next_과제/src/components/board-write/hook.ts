@@ -1,19 +1,20 @@
-import { IformList } from "@/components/board-write/types";
+import { IformList, UploadFileList } from "@/components/board-write/types";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
-import { FileType } from "@/components/board-write/types";
-import { useState } from "react";
+import { validationImageFile } from "@/commons/libs/validation-image-file";
+import { useEffect, useState } from "react";
 import type { UploadProps, UploadFile } from "antd";
-import { Modal } from "antd";
 import {
   CreateBoardDocument,
   FetchBoardDocument,
   UpdateBoardDocument,
-  // UploadFileDocument,
+  UploadFileDocument,
   MutationUpdateBoardArgs,
   FetchBoardsListDocument,
+  MutationCreateBoardArgs,
 } from "@/commons/graphql/graphql";
+import { message } from "antd";
 
 export const useBoardWrite = (formType: string) => {
   const router = useRouter();
@@ -22,12 +23,6 @@ export const useBoardWrite = (formType: string) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
   const [modalType, setModalType] = useState(""); // 모달 타입
 
-  const success = (message: string) => {
-    Modal.success({
-      content: `${message}`,
-    });
-  };
-
   const modalControl = ({ type }: { type: string }) => {
     setIsModalOpen((isOpen) => !isOpen);
     setModalType(type);
@@ -35,43 +30,36 @@ export const useBoardWrite = (formType: string) => {
 
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    // {
-    //   uid: "-1",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    // },
-    // {
-    //   uid: "-xxx",
-    //   percent: 50,
-    //   name: "image.png",
-    //   status: "uploading",
-    //   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    // },
-    // {
-    //   uid: "-5",
-    //   name: "image.png",
-    //   status: "error",
-    // },
-  ]);
 
   // !수정할 게시글 데이터 가져오기
-  const { data: fetchData } = useQuery(FetchBoardDocument, {
+  const { data, loading } = useQuery(FetchBoardDocument, {
     variables: { boardId: params.boardId },
     skip: !(params.boardId && formType === "edit"),
   });
 
-  const data = fetchData || null;
+  // !이미지 업로드를 위한 fileList
+  const [imgFileList, setImgFileList] = useState<UploadFileList[]>([]);
+  useEffect(() => {
+    if (data?.fetchBoard.images) {
+      setImgFileList(
+        data?.fetchBoard.images?.map((url) => ({
+          uid: url.replace("https://storage.googleapis.com/", ""),
+          name: url.split("/").pop(),
+          status: "done",
+          url: url.replace("https://storage.googleapis.com/", ""),
+        })) as UploadFileList[]
+      );
+    }
+  }, [data]);
+  console.log("이미지 파일 리스트", imgFileList);
 
   // !게시글 등록 및 수정을 위한 useMutation
   const [upDateBoard] = useMutation(UpdateBoardDocument);
   const [newBoard] = useMutation(CreateBoardDocument);
-  // const [uploadFile] = useMutation(UploadFileDocument);
+  const [uploadFile] = useMutation(UploadFileDocument);
 
   const {
     control,
-    // register, // 검증 규칙 적용 메서드
     setValue, // 입력값 설정 메서드
     formState: { errors }, // 폼의 상태를 나타내는 속성 isValid, isDirty, dirtyFields
     getValues, // 폼의 입력값을 반환하는 메서드
@@ -101,6 +89,12 @@ export const useBoardWrite = (formType: string) => {
           editVariables.updateBoardInput.title = writeTitleData;
         if (writeContentsData)
           editVariables.updateBoardInput.contents = writeContentsData;
+        if (imgFileList.length > 0)
+          editVariables.updateBoardInput.images = imgFileList
+            .map((data) => data.url)
+            .filter((url): url is string => url !== undefined);
+
+        console.log(editVariables, imgFileList);
 
         const result = await upDateBoard({
           variables: editVariables,
@@ -112,10 +106,12 @@ export const useBoardWrite = (formType: string) => {
           ],
         });
 
-        success("게시글이 수정되었습니다.");
+        message.open({
+          type: "success",
+          content: "게시글 수정이 완료되었습니다.",
+        });
         router.push(`/boards/${result.data?.updateBoard._id}`);
       } else {
-        // alert("비밀번호가 틀려서 수정할 수 없습니다.");
         modalControl({ type: "boardEditPasswordError" });
         return;
       }
@@ -142,35 +138,34 @@ export const useBoardWrite = (formType: string) => {
       youtubeUrl,
       writeAddressPost,
       writeAddressDetail,
-      // imgFiles,
-      // imgFile1,
-      // imgFile2,
-      // imgFile3,
     } = getValues(); // useForm의 모든 데이터를 가져옴
 
-    console.log(getValues());
+    // console.log(getValues());
 
     try {
       if (!writeName || !writePassword || !writeTitle || !writeContents) {
         modalControl({ type: "boardNewRequired" });
         return;
       }
-      const writeVariables = {
+      const writeVariables: MutationCreateBoardArgs = {
         createBoardInput: {
           writer: writeName,
           password: writePassword,
           title: writeTitle,
           contents: writeContents,
-          youtubeUrl: youtubeUrl,
+          youtubeUrl,
           boardAddress: {
             zipcode: writeAddressPost,
             address: writeAddress,
             addressDetail: writeAddressDetail,
           },
-          images: [""],
+          images: imgFileList
+            .map((data) => data.url)
+            .filter((url): url is string => url !== undefined),
         },
       };
       console.log(writeVariables);
+
       const result = await newBoard({
         variables: writeVariables,
         refetchQueries: [
@@ -184,49 +179,68 @@ export const useBoardWrite = (formType: string) => {
         ],
       });
       console.log(result);
-      success("게시글이 등록되었습니다.");
+      message.open({
+        type: "success",
+        content: "게시글 등록이 완료되었습니다.",
+      });
       router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
-      // alert(`게시글 등록에 실패했습니다.`);
       modalControl({ type: "boardNewErrorUnknown" });
       console.log(error);
     }
   };
 
-  const getBase64 = (file: FileType): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-
-  const handlePreview = async (file: UploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj as FileType);
-    }
-
-    setPreviewImage(file.url || (file.preview as string));
-    setPreviewOpen(true);
+  const handlePreviewImg = async (file: UploadFile) => {
+    console.log("프리뷰", file);
+    // setPreviewImage();
+    // setPreviewOpen(true);
   };
 
-  const handleChange: UploadProps["onChange"] = async ({
-    fileList: newFileList,
+  const handleChangeImg: UploadProps["onChange"] = async ({
+    file,
+    fileList: _fileList,
   }) => {
-    // // ! 나중에 용량 조절 및 용량 제한 기능 추가 필요
-    console.log(newFileList);
+    if (!file) {
+      return;
+    }
 
-    // const formData = new FormData();
-    // formData.append("file", newFileList[newFileList.length - 1].originFileObj);
+    const temp = [...imgFileList];
+    if (file.status !== "removed") {
+      // 이미지 삭제가 아닌 경우에만 검증 진행
+      const isValid = validationImageFile(file.originFileObj as File);
+      if (!isValid) {
+        return;
+      }
+    } else {
+      // 이미지 삭제시에는 업로드 하지 않음
+      temp.pop();
+      setImgFileList(temp);
+      return;
+    }
 
-    // const imgFile = newFileList[newFileList.length - 1].originFileObj;
-    // console.log(imgFile);
+    const newFileItem: UploadFileList = {
+      uid: file.uid,
+      name: file.name,
+      status: "uploading",
+      url: "",
+    };
 
-    // const result = await uploadFile({
-    //   variables: { file: imgFile },
-    // });
-    // console.log(result);
-    setFileList(newFileList);
+    try {
+      console.log(file);
+      const res = await uploadFile({
+        variables: {
+          file: file.originFileObj as File,
+        },
+      });
+
+      newFileItem.status = "done";
+      newFileItem.uid = res.data?.uploadFile.url || "";
+      newFileItem.url = res.data?.uploadFile.url || "";
+      setImgFileList([...imgFileList, newFileItem]);
+    } catch (err) {
+      console.error(err);
+      newFileItem.status = "error";
+    }
   };
 
   return {
@@ -234,21 +248,22 @@ export const useBoardWrite = (formType: string) => {
     onBoardEdit,
     onBoardNew,
     errors,
-    // formResister,
     control,
     setValue,
     Controller,
     router,
     params,
-    fileList,
+    imgFileList,
     previewImage,
     previewOpen,
     setPreviewImage,
     setPreviewOpen,
-    handleChange,
-    handlePreview,
+    handleChangeImg,
+    handlePreviewImg,
     isModalOpen,
     setIsModalOpen,
     modalType,
+    // handleRemoveImg,
+    // defaultFileList,
   };
 };

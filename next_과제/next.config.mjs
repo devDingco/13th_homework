@@ -9,6 +9,8 @@ const nextConfig = {
     return config;
   },
   images: {
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 322, 384],
+    deviceSizes: [320, 420, 768, 1024, 1200, 1920],
     remotePatterns: [
       {
         protocol: "https",
@@ -19,16 +21,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "image.tmdb.org",
         pathname: "/t/p/**/*",
+      },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/codecamp-file-storage/*/*/*/*"
       }
-      // {
-      //   protocol: "https",
-      //   hostname: "raw.githubusercontent.com",
-      //   pathname: "/PokeAPI/sprites/master/sprites/pokemon/**/*"
-      // }
     ]
   }
 };
 
-///PokeAPI/sprites/master/sprites/pokemon/shiny/1.png
-//https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg
 export default nextConfig;

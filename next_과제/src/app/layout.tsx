@@ -34,7 +34,7 @@ export default function RootLayout({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body
         id="bodyRoot"
-        className={`antialiased ${notoSansKr.variable} ${roboto.variable} dark:bg-[#141414]`}
+        className={`antialiased ${notoSansKr.variable} ${roboto.variable}`}
       >
         <ApolloSetting>
           <AntdRegistry>

@@ -11,9 +11,9 @@ export const FETCH_TRAVELS = gql`
       tags
       images
       pickedCount
-      travelproductAddress
-      buyer
-      seller
+      # travelproductAddress
+      # buyer
+      # seller
       soldAt
       createdAt
       updatedAt

@@ -1,7 +1,5 @@
-import { comment } from "postcss";
-import { DocumentNode } from "@apollo/client";
-import type { GetProp, UploadProps } from "antd";
-import { FetchBoardDetailQuery } from "@/commons/graphql/graphql";
+import type { GetProp, UploadProps, UploadFile } from "antd";
+
 export type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 export interface IboardFormProps {
   title: string;
@@ -25,4 +23,11 @@ export interface IformList {
   commentPassword?: string;
   commentContents?: string;
   commentRating?: number;
+}
+
+export interface UploadFileList extends UploadFile {
+  uid: string;
+  name: string;
+  status: "done" | "uploading" | "error";
+  url: string;
 }

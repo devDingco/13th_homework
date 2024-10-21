@@ -22,20 +22,21 @@ export default function BoardWrite(props: IboardFormProps) {
     setValue,
     router,
     params,
-    fileList,
     previewImage,
     previewOpen,
     setPreviewImage,
     setPreviewOpen,
-    handleChange,
-    handlePreview,
+    handleChangeImg,
+    handlePreviewImg,
     isModalOpen,
     setIsModalOpen,
     modalType,
+    // handleRemoveImg,
+    imgFileList,
   } = useBoardWrite(formType);
 
   //! 에러메시지가 있을 경우 alert 후 페이지 이동 처리 필요
-  console.log("data", data);
+  console.log("수정할 데이터", data);
 
   return (
     <>
@@ -176,54 +177,43 @@ export default function BoardWrite(props: IboardFormProps) {
               control={control}
             />
             <hr className="my-10" />
-            <Controller
-              name="imgFiles"
-              control={control}
-              rules={{
-                pattern: {
-                  value: /\.(jpe?g|png|gif)$/i,
-                  message: "이미지 파일만 업로드 가능합니다.",
-                },
-              }}
-              render={({ field }) => (
-                <>
-                  <Upload
-                    // action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onPreview={handlePreview}
-                    {...field}
-                    onChange={handleChange}
+            {imgFileList && (
+              <Upload
+                listType="picture-card"
+                accept="image/jpeg, image/png"
+                fileList={imgFileList.map((file) => ({
+                  ...file,
+                  url: `${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${file.url}`,
+                }))}
+                onChange={handleChangeImg}
+              >
+                {imgFileList.length >= 3 ? null : (
+                  <button
+                    style={{ border: 0, background: "none" }}
+                    type="button"
                   >
-                    {fileList.length >= 8 ? null : (
-                      <button
-                        style={{ border: 0, background: "none" }}
-                        type="button"
-                      >
-                        <PlusOutlined />
-                        <div style={{ marginTop: 8 }}>Upload</div>
-                      </button>
-                    )}
-                  </Upload>
-                  {previewImage && (
-                    <Image
-                      wrapperStyle={{ display: "none" }}
-                      preview={{
-                        visible: previewOpen,
-                        onVisibleChange: (visible) => setPreviewOpen(visible),
-                        afterOpenChange: (visible) =>
-                          !visible && setPreviewImage(""),
-                      }}
-                      src={previewImage}
-                      width={200}
-                      height={200}
-                      style={{ width: "100%", height: "100%" }}
-                      alt="preview"
-                    />
-                  )}
-                </>
-              )}
-            />
+                    <PlusOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </button>
+                )}
+              </Upload>
+            )}
+
+            {previewImage && (
+              <Image
+                wrapperStyle={{ display: "none" }}
+                preview={{
+                  visible: previewOpen,
+                  onVisibleChange: (visible) => setPreviewOpen(visible),
+                  afterOpenChange: (visible) => !visible && setPreviewImage(""),
+                }}
+                src={previewImage}
+                width={200}
+                height={200}
+                style={{ width: "100%", height: "100%" }}
+                alt="preview"
+              />
+            )}
           </>
         )}
 
