@@ -1,0 +1,13 @@
+fragment BoardCommentFields on BoardComment {
+    author
+    content
+    rating
+    parentId
+    _id
+    createdAt
+    replies {
+        author
+        content
+        createdAt
+    }
+}

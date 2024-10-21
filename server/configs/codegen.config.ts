@@ -9,9 +9,9 @@ const config: CodegenConfig = {
     generates: {
         './src/generated/graphql.ts': {
             plugins: [
-                'typescript', // TypeScript 타입 생성
-                'typescript-operations', // 쿼리 및 뮤테이션에 대한 타입 생성
-                'typescript-resolvers', // 리졸버 타입 생성
+                'typescript',
+                'typescript-operations',
+                'typescript-resolvers',
             ],
         },
     },
