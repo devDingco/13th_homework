@@ -127,7 +127,8 @@ export const useBoardsWrite = (props) => {
       contents: requireInputs.contents || undefined, // 수정할 내용
       youtubeUrl: youtubeUrl || undefined,
       zipcode: zipcode || undefined, // 수정할 우편번호
-      address: address || undefined, // 수정할 주소
+      address: address || props.data?.fetchBoard.boardAddress?.addresss, // 수정할 주소
+      //TODO 수정했다 안되면 돌려라
       addressDetail: addressDetail || undefined, // 수정할 상세 주소
 
       // 추가적인 필드도 필요하다면 여기에 포함

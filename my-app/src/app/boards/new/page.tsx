@@ -5,6 +5,6 @@
 import BoardsWrite from "@/components/boards-write";
 import styles from "@/components/boards-write/styles.module.css";
 
-export default function boardsDetailEditage() {
+export default function boardsDetailEditPage() {
   return <BoardsWrite isEdit={false} styles={styles} data={undefined} />;
 }
