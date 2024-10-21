@@ -7,3 +7,11 @@
   color: #777;
   @apply text-base font-normal;
 }
+
+.input {
+  @apply hidden;
+}
+
+.upload_image {
+  @apply w-40 h-40 rounded-lg;
+}
