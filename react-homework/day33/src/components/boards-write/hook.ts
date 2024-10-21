@@ -1,7 +1,6 @@
 import {
   BoardAddressInput,
   CreateBoardDocument,
-  FetchBoardDocument,
   FetchBoardQuery,
   UpdateBoardDocument,
   UpdateBoardMutationVariables,

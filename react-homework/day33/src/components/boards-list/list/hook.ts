@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import {
@@ -22,7 +22,6 @@ export const useBoardsList = (id?: string) => {
   };
 
   // 게시글 클릭시 디테일페이지로 이동
-
   const onClickBoard = () => {
     console.log(id);
     router.push(`/boards/${id}`);
