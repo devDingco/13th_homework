@@ -1,0 +1,86 @@
+.input_box input::placeholder,
+.input_box textarea::placeholder {
+  color: #251a1a;
+}
+
+.post_page_body {
+  display: flex;
+  padding: 40px;
+  justify-content: center;
+}
+
+.post_page {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  justify-content: center;
+  gap: 40px;
+}
+
+.header {
+  width: 100%;
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.post_main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+.writer_box {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+.error_msg {
+  color: #f66a6a;
+}
+
+.search_group_zip_code {
+  display: flex;
+  gap: 8px;
+}
+
+.input_box_zip_code {
+  padding: 12px 16px;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  width: 82px;
+}
+
+.upload_group {
+  display: flex;
+  gap: 16px;
+}
+
+.btn_group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+.password_modal_title {
+  margin-bottom: 10px;
+}
+
+.custom_input {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.btn_upload {
+  cursor: pointer;
+  width: 160px;
+  height: 160px;
+}
+
+.btn_upload input {
+  display: none;
+}
