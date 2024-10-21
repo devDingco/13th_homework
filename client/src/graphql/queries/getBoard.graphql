@@ -1,14 +1,3 @@
-query GetBoards($page: Int, $take: Int) {
-    getBoards(page: $page, take: $take) {
-        result {
-            author
-            title
-            boardId
-            createdAt
-        }
-        totalCount
-    }
-}
 query GetBoard($boardId: Int!) {
     getBoard(boardId: $boardId) {
         author

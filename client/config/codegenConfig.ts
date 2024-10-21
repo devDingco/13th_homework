@@ -1,29 +1,17 @@
 /** @format */
 
-import { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from '@graphql-codegen/cli';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const config: CodegenConfig = {
-	overwrite: true,
 	schema: process.env.NEXT_PUBLIC_BACK_GRAPHQL_URL,
 	documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
 	generates: {
 		'./src/graphql/generated/': {
-			preset: 'near-operation-file-preset',
-			presetConfig: {
-				extension: '.generated.ts',
-				baseTypesPath: 'types.ts',
-			},
-			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
-			config: {
-				withHooks: true,
-				withComponent: false,
-				withHOC: false,
-			},
+			preset: 'client',
 		},
 	},
 };
-
 export default config;

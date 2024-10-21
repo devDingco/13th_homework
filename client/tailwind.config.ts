@@ -1,7 +1,6 @@
 /** @format */
 
 import type { Config } from 'tailwindcss';
-/** @format */
 import typography from '@tailwindcss/typography';
 
 const config: Config = {
