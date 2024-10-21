@@ -1,11 +1,13 @@
 /** @format */
 
 import { CodegenConfig } from '@graphql-codegen/cli';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const config: CodegenConfig = {
-	// client codegenerator 처리하기
 	overwrite: true,
-	schema: `http://172.16.2.165:8080/graphql`,
+	schema: process.env.NEXT_PUBLIC_BACK_GRAPHQL_URL,
 	documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
 	generates: {
 		'./src/graphql/generated/': {
