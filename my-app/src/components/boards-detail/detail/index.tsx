@@ -52,15 +52,20 @@ function BoardsDetail() {
               height={0}
             />
           </Tooltip>
+          ``
         </div>
       </div>
-      {/* <Image
-        className={styles.content_box_img}
-        src="/img/beach.svg"
-        alt="beachImg"
-        width={0}
-        height={0}
-      /> */}
+      <div>
+        {data?.fetchBoard.images?.map((imageUrl, index) => (
+          <Image
+            key={index}
+            src={`https://storage.googleapis.com/${imageUrl}`}
+            alt="boardImage"
+            width={500}
+            height={500}
+          />
+        ))}
+      </div>
       <div className={styles.content_box}>
         <pre>{data?.fetchBoard.contents}</pre>
       </div>
