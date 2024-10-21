@@ -1,35 +1,10 @@
 'use client';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { ICharacter } from './types';
+import useApiList from './hooks';
 
 export default function OpenApisComponent() {
-  const [characters, setCharacters] = useState<ICharacter[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    FetchDisneyData();
-  }, []);
-
-  const FetchDisneyData = async () => {
-    const result = await fetch(
-      `https://api.disneyapi.dev/character?page=${page}`
-    );
-    const data = await result.json();
-
-    // 새로운 데이터를 기존 데이터에 추가
-    setCharacters((prevCharacters) => [...prevCharacters, ...data.data]);
-
-    // 만약 더 이상 가져올 데이터가 없으면 hasMore을 false로 설정
-    if (data.data.length === 0) {
-      setHasMore(false);
-    } else {
-      setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
-    }
-
-    console.log(data[10]);
-  };
+  const { characters, hasMore, FetchDisneyData, onClickDetail } = useApiList();
 
   return (
     <div className="container">
@@ -42,7 +17,7 @@ export default function OpenApisComponent() {
         endMessage={<p>완료</p>}
       >
         {characters.map((character) => (
-          <div key={character._id}>
+          <div key={character._id} onClick={() => onClickDetail(character._id)}>
             <img
               src={character.imageUrl}
               alt={character.name}
