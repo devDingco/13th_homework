@@ -13,7 +13,9 @@ import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
 import { BoardRepository } from '../repository/board.repository';
 import { BoardService } from '../board.service';
 import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
+import { CreateBoardCommentInput } from './schema/create-board-comment-input.schema';
 import { UpdateBoardCommentExceptPasswordDTO } from './dto/update-board-except-password-comment.dto';
+import { UpdateBoardCommentInput } from './schema/update-board-comment-input.schema';
 
 @Injectable()
 export class BoardCommentService {
@@ -24,7 +26,7 @@ export class BoardCommentService {
     ) {}
     async createComment(
         boardId: number,
-        createBoardCommentDto: CreateBoardCommentDTO,
+        createBoardCommentDto: CreateBoardCommentDTO | CreateBoardCommentInput,
     ): Promise<BoardCommentEntity> {
         await this.isExistBoard(boardId);
 
@@ -74,7 +76,9 @@ export class BoardCommentService {
 
     async updateComment(
         boardId: number,
-        updateBoardCommentDto: UpdateBoardCommentExceptPasswordDTO,
+        updateBoardCommentDto:
+            | UpdateBoardCommentExceptPasswordDTO
+            | UpdateBoardCommentInput,
         password: string,
         commentId: string,
     ): Promise<BoardCommentResponseDTO> {

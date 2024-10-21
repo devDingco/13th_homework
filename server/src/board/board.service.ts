@@ -12,6 +12,7 @@ import { BoardIdCounterRepository } from './repository/board-id-counter.reposito
 import { BoardReactionRepository } from './board-reaction/repository/boardReactionRepository';
 import { BoardRepository } from './repository/board.repository';
 import { CreateBoardDTO } from './dto/create-board.dto';
+import { CreateBoardInput } from './schema/create-board-input.schema';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
 import { UpdateBoardDTO } from './dto/update-board.dto';
@@ -24,7 +25,9 @@ export class BoardService {
         private readonly boardReactionRepository: BoardReactionRepository,
         private readonly boardCommentRepository: BoardCommentRepository,
     ) {}
-    async create(createBoard: CreateBoardDTO): Promise<BoardEntity> {
+    async create(
+        createBoard: CreateBoardDTO | CreateBoardInput,
+    ): Promise<BoardEntity> {
         const hashPassword = await this.transformPassword(createBoard.password);
 
         const board = this.boardRepository.createBoard({
