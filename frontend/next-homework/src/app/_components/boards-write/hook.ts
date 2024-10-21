@@ -11,6 +11,7 @@ import {
   FetchBoardDocument,
   UpdateBoardDocument,
 } from "@/commons/graphql/graphql";
+import { IUpdateBoardInput } from "./types";
 
 const useBoardWrite = () => {
   const router = useRouter();
@@ -164,33 +165,29 @@ const useBoardWrite = () => {
       "게시글 생성 시 입력했던 비밀번호를 입력해주세요.",
       ""
     );
-    const myVariables = {
-      boardId: params.boardId,
+    const myVariables: IUpdateBoardInput = {
+      boardId: String(params.boardId),
+      password: promptPassword ?? "",
+      updateBoardInput: { boardAddressInput: {} },
+      // TODO: 이미지 수정
+      // image: [""]
     };
+    if (title) myVariables.updateBoardInput.title = title;
+    if (content) myVariables.updateBoardInput.contents = content;
+    if (youtubeUrl) myVariables.updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode)
+      myVariables.updateBoardInput.boardAddressInput.zipcode = zipcode;
+    if (address)
+      myVariables.updateBoardInput.boardAddressInput.address = address;
+    if (addressDetail)
+      myVariables.updateBoardInput.boardAddressInput.addressDetail =
+        addressDetail;
 
     console.log(`myVariables: ${JSON.stringify(myVariables)}`);
 
-    // if (title) myVariables.myTitle = title;
-    // if (content) myVariables.myContents = content;
-
     try {
       const result = await updateBoard({
-        variables: {
-          boardId: String(params.boardId),
-          password: promptPassword,
-          updateBoardInput: {
-            title: title,
-            contents: content,
-            youtubeUrl: youtubeUrl,
-            // boardArress: {
-            //   zipcode: ,
-            //   address: ,
-            //   addressDetail: ,
-            // },
-            // TODO: 이미지 수정
-            // image: [""]
-          },
-        },
+        variables: myVariables,
       });
       console.log(result);
 
@@ -199,7 +196,7 @@ const useBoardWrite = () => {
       router.push(`/boards/${params.boardId}`);
     } catch (error) {
       console.log(error);
-      // alert(`${error?.message}`);
+      alert(`${error?.message}`);
       router.push(`/boards`);
     }
   };

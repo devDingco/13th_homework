@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./styles.module.css";
-import chat from "../../../../../public/icons/chat.svg";
 import useCommentWrite from "./hook";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import { Rate } from "antd";
 
 const CommentWriteComponent = () => {
@@ -22,13 +21,10 @@ const CommentWriteComponent = () => {
     onChangeRank,
     onClickSubmitComment,
   } = useCommentWrite();
-
   return (
     <div>
-      <div>
-        <Image src={chat} alt="댓글" width={0} height={0} />
-        <p>댓글</p>
-      </div>
+      <ChatOutlinedIcon />
+      <p>댓글</p>
       <div>
         <Rate onChange={onChangeRank} value={rank} allowHalf />
       </div>
@@ -76,7 +72,7 @@ const CommentWriteComponent = () => {
       </div>
       <div>
         <textarea id="commentContent" onChange={onChangeComment}></textarea>
-        <p>0/100</p>
+        <p>0/250</p>
         <p
           id="postPasswordVaild"
           style={{

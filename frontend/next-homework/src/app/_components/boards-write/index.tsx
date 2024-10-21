@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import close from "../../../../public/icons/close.svg";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import useBoardWrite from "./hook";
 import { IBoardsWriteProps } from "./types";
 import { Modal } from "antd";
@@ -16,8 +16,8 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     password,
     title,
     content,
-    zipcode,
-    address,
+    // zipcode,
+    // address,
     buttonActiveStyle,
     writerVaild,
     passwordVaild,
@@ -39,8 +39,8 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
   return (
     <div className={styles.page}>
       <div className={styles.menu}>
-        <p>게시글 등록하기</p>
-        <Image src={close} alt="" width={0} height={0} />
+        {props.isEdit ? <p>게시글 수정하기</p> : <p>게시글 등록하기</p>}
+        <CloseOutlinedIcon />
       </div>
       <div className={styles.container}>
         {/* 작성자, 비번 */}
@@ -51,7 +51,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               <p className={styles.star}>*</p>
             </div>
             <input
-              id="posWriter"
+              id="postWriter"
               className={styles.info}
               type="text"
               placeholder="작성자 명을 입력해 주세요."
@@ -78,14 +78,26 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               <p className={styles.label}>비밀번호</p>
               <p className={styles.star}>*</p>
             </div>
-            <input
-              id="postPassword"
-              className={styles.info}
-              type="password"
-              placeholder="비밀번호를 입력해 주세요."
-              onChange={onChangePassword}
-              disabled={props.isEdit ? true : false}
-            />
+            {props?.isEdit ? (
+              <input
+                id="postPassword"
+                className={styles.info}
+                type="password"
+                defaultValue="****"
+                onChange={onChangePassword}
+                disabled={props.isEdit ? true : false}
+              />
+            ) : (
+              <input
+                id="postPassword"
+                className={styles.info}
+                type="password"
+                placeholder="비밀번호를 입력해 주세요."
+                onChange={onChangePassword}
+                disabled={props.isEdit ? true : false}
+              />
+            )}
+
             <p
               id="postPasswordVaild"
               className={styles.vaildation}
@@ -158,7 +170,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             {contentVaild}
           </p>
         </div>
-        {/* 주소 */}
+        {/* MARK: address */}
         <div className={`${styles.input} ${styles.address}`}>
           <p className={styles.label}>주소</p>
           <div className={styles.addressMail}>
@@ -166,10 +178,9 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               id="zipcode"
               className={styles.infoAddress}
               type="text"
-              placeholder="01234"
-              value={zipcode}
-              // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
-              readOnly
+              defaultValue={String(
+                props.data?.fetchBoard?.boardAddress?.zipcode ?? ""
+              )}
             />
             <button className={styles.addressSearch} onClick={onToggleModal}>
               우편번호 검색
@@ -180,8 +191,9 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             className={styles.info}
             type="text"
             placeholder="주소를 입력해 주세요."
-            value={address}
-            // defaultValue={props.data?.fetchBoard.boardAddress.address}
+            defaultValue={String(
+              props.data?.fetchBoard?.boardAddress?.address ?? ""
+            )}
             readOnly
           />
           <input
@@ -189,7 +201,9 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder="상세주소"
             onChange={onChangeAddressDetail}
-            // defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+            defaultValue={
+              props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""
+            }
           />
         </div>
         <hr className={styles.line} />
@@ -201,7 +215,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder="링크를 입력해 주세요."
             onChange={onChangeYoutubeUrl}
-            // defaultValue={props.data?.fetchBoard.youtubeUrl}
+            defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}
           />
         </div>
         <hr className={styles.line} />
