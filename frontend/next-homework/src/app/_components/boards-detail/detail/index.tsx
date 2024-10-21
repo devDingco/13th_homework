@@ -1,18 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import useBoardsDetail from "./hook";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import profile from "../../../../../public/images/profile_img.png";
-import {
-  DislikeOutlined,
-  EditOutlined,
-  EnvironmentOutlined,
-  LikeOutlined,
-  LinkOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import IosShareOutlinedIcon from "@mui/icons-material/IosShareOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import HeartBrokenOutlinedIcon from "@mui/icons-material/HeartBrokenOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import YouTube from "react-youtube";
 import { Tooltip } from "antd";
 
@@ -27,14 +24,7 @@ const BoardsDetailComponent = () => {
       </div>
       <div className={styles.profile}>
         <div className={styles.user}>
-          <Image
-            src={profile}
-            alt="profile img"
-            width={0}
-            height={0}
-            sizes=""
-            className={styles.profileImg}
-          />
+          <AccountCircleOutlinedIcon />
           <p className={styles.writer}>{data?.fetchBoard.writer}</p>
         </div>
         <p className={styles.date}>
@@ -43,11 +33,11 @@ const BoardsDetailComponent = () => {
       </div>
       <div className={styles.tools}>
         <button className={styles.backNone}>
-          <LinkOutlined />
+          <IosShareOutlinedIcon />
         </button>
         <Tooltip placement="bottom" title={address}>
           <button className={styles.backNone}>
-            <EnvironmentOutlined />
+            <PlaceOutlinedIcon />
           </button>
         </Tooltip>
       </div>
@@ -68,7 +58,7 @@ const BoardsDetailComponent = () => {
         <div>
           <div>
             <button className={styles.backNone}>
-              <LikeOutlined />
+              <FavoriteBorderOutlinedIcon />
               {/* TODO: 좋아요 눌렀을 때 */}
               {/* <LikeFilled /> */}
             </button>
@@ -76,7 +66,7 @@ const BoardsDetailComponent = () => {
           </div>
           <div>
             <button className={styles.backNone}>
-              <DislikeOutlined />
+              <HeartBrokenOutlinedIcon />
               {/* TODO:싫어요 눌렀을 때 */}
               {/* <DislikeFilled /> */}
             </button>
@@ -87,13 +77,13 @@ const BoardsDetailComponent = () => {
           {/* TODO: Link 말고 onClick으로 구현? 근데 단순 페이지 이동이라... */}
           <Link href={`/boards`}>
             <button className="backNone">
-              <MenuOutlined />
+              <ListOutlinedIcon />
               목록으로
             </button>
           </Link>
           <Link href={`/boards/${params.boardId}/edit`}>
             <button className="backNone">
-              <EditOutlined />
+              <EditOutlinedIcon />
               수정하기
             </button>
           </Link>

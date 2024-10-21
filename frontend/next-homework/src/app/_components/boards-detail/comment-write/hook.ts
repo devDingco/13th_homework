@@ -61,7 +61,6 @@ const useCommentWrite = () => {
 
   const onChangeRank = (value: number) => {
     setRank(value);
-    console.log("rank", rank);
   };
 
   const onClickSubmitComment = async () => {
@@ -74,7 +73,7 @@ const useCommentWrite = () => {
               writer: writer,
               password: password,
               contents: contents,
-              rating: 0,
+              rating: rank,
             },
           },
           refetchQueries: [{ query: FETCH_COMMENTS }],

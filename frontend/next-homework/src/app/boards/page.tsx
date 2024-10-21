@@ -1,11 +1,11 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import BoardList from "../components/boards-list/list";
+import BoardList from "../_components/boards-list/list";
 import styles from "./styles.module.css";
-import { FETCH_BOARDS } from "../components/boards-list/list/queries";
-import { FETCH_BOARDS_COUNT } from "../components/boards-list/pagination/queries";
-import Pagination from "../components/boards-list/pagination";
+import { FETCH_BOARDS } from "../_components/boards-list/list/queries";
+import { FETCH_BOARDS_COUNT } from "../_components/boards-list/pagination/queries";
+import Pagination from "../_components/boards-list/pagination";
 
 const BoardsList = () => {
   const { data, refetch } = useQuery(FETCH_BOARDS);
