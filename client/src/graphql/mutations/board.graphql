@@ -1,0 +1,39 @@
+mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
+        createdAt
+    }
+}
+
+mutation UpdateBoard($boardId: Int!, $updateBoardInput: UpdateBoardInput!) {
+    updateBoard(boardId: $boardId, updateBoardInput: $updateBoardInput) {
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
+        createdAt
+    }
+}
+
+mutation DeleteBoard($boardId: Int!) {
+    deleteBoard(boardId: $boardId)
+}
+
+mutation ClearBoard {
+    clearBoard
+}
