@@ -1,38 +1,36 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
-interface InputProps {
-  type?: string;
+interface ITextareaProps {
   name: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
-  className?: string;
   required?: boolean;
   defaultValue?: string;
   disabled?: boolean;
+  className?: string;
+  value?: string;
 }
 
-const Input: React.FC<InputProps> = ({
-  type,
+export default function Textarea({
   name,
   onChange,
   placeholder,
-  className,
   required,
   defaultValue,
   disabled,
-}) => {
+  className,
+  value,
+}: ITextareaProps) {
   return (
-    <input
-      type={type}
+    <textarea
       name={name}
       onChange={onChange}
       placeholder={placeholder}
-      className={className}
       required={required}
       defaultValue={defaultValue}
       disabled={disabled}
+      className={className}
+      value={value}
     />
   );
-};
-
-export default Input;
+}

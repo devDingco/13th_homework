@@ -1,5 +1,5 @@
 .총상자 {
-  @apply rounded-lg bg-white shadow-lg min-w-[680px] px-[48px] py-6 self-stretch;
+  @apply rounded-lg bg-white shadow-lg min-w-[680px] px-[48px] py-6 self-stretch max-w-[1280px];
 }
 
 .게시글전체상자 {

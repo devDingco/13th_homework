@@ -1,0 +1,7 @@
+.작성자상자 {
+  @apply flex gap-1 items-center;
+}
+
+.작성자상자 > span {
+  @apply text-gray-700 text-sm font-light leading-5;
+}

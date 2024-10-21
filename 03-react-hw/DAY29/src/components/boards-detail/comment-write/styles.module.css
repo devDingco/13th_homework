@@ -1,0 +1,35 @@
+.commentBox {
+  @apply flex flex-col gap-6 pt-10 w-[1280px];
+}
+
+.댓글상자 {
+  @apply flex gap-2;
+}
+
+.댓글상자 span {
+  @apply text-black text-base font-semibold leading-6;
+}
+
+.commentBox_commentInputs {
+  @apply flex flex-col gap-4 relative;
+}
+
+.commentBox_commentInputs_writerpwBox {
+  @apply flex gap-4 w-[640px];
+}
+
+.commentBox_comment {
+  @apply flex h-36 p-3 px-4 flex-col items-start self-stretch rounded-lg border border-gray-200 bg-white resize-none;
+}
+
+.commentBox_commentInputs > span {
+  @apply absolute top-[204px] right-4 text-gray-400 text-right font-medium text-base leading-6;
+}
+
+.commentBox_button_justifyEnd {
+  @apply flex justify-end;
+}
+
+.commentBox_button {
+  @apply w-[99px] h-12 py-3 px-4 items-center rounded-lg bg-gray-300 text-gray-100 text-center text-lg font-semibold leading-6;
+}
