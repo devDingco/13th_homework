@@ -1,6 +1,6 @@
 /** @format */
 
-import { api, boardUrlEndPoint } from '../config';
+import { api, boardUrlEndPoint } from '../../../config/axiosConfig';
 
 export default async function getAllBoards() {
 	try {

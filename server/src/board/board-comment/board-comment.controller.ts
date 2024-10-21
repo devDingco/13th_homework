@@ -14,8 +14,8 @@ import {
     DefaultValuePipe,
 } from '@nestjs/common';
 import { BoardCommentService } from './board-comment.service';
-import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
+import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
+import { UpdateBoardCommentDTO } from './dto/update-board-comment.dto';
 import { ResponseMessage } from '../decorators/response-message.decorator';
 import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
@@ -29,11 +29,11 @@ export class BoardCommentController {
     @HttpCode(HttpStatus.CREATED)
     create(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Body() createBoardCommentDto: CreateBoardCommentDto,
+        @Body() createBoardComment: CreateBoardCommentDTO,
     ) {
         return this.boardCommentService.createComment(
             boardId,
-            createBoardCommentDto,
+            createBoardComment,
         );
     }
 
@@ -53,9 +53,9 @@ export class BoardCommentController {
     update(
         @Param('boardId', ParseIntPipe) boardId: number,
         @Param('commentId') commentId: string,
-        @Body() updateBoardCommentDTO: UpdateBoardCommentDto,
+        @Body() updateBoardComment: UpdateBoardCommentDTO,
     ) {
-        const { password, ...restUpdateBoardComment } = updateBoardCommentDTO;
+        const { password, ...restUpdateBoardComment } = updateBoardComment;
         return this.boardCommentService.updateComment(
             boardId,
             restUpdateBoardComment,

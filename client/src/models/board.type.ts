@@ -36,10 +36,11 @@ export const RNewInputPlaceHolder: Record<ETitle, string> = {
 };
 
 export interface ITitle {
+	error?: string | null;
 	title: ETitle;
-	error?: string;
 	value?: string;
 }
+
 export interface ITitleTextArea extends ITitle {
 	value: string;
 	setLength?: React.Dispatch<React.SetStateAction<number>>;
@@ -48,15 +49,18 @@ export interface IAddress {
 	address?: string;
 	detailAddress?: string;
 }
-export interface ICreateFormBoard {
-	author: string;
-	title: string;
-	content: string;
-	password: string;
+export interface ICreateFormBoard extends IFormLower {
 	address?: string;
 	detailAddress?: string;
 	youtubeUrl?: string;
 	imageUrl?: string[];
+}
+
+export interface IFormLower {
+	author: string;
+	title: string;
+	content: string;
+	password: string;
 }
 
 export interface IBoardType extends IReaction, ICreateFormBoard {

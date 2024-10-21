@@ -1,7 +1,7 @@
 /** @format */
 
 import DaumPostcode, { Address } from 'react-daum-postcode';
-import { boardsUrlEndPoint, newUrlEndPoint } from '@/apis/config';
+import { boardsUrlEndPoint, newUrlEndPoint } from '~/config/axiosConfig';
 
 import { useAddressStore } from '@/stores/useAddressStore';
 import useOnClickPush from '@/hooks/useOnClickPush';

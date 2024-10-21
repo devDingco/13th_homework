@@ -7,13 +7,13 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 
-import { BoardComment } from './entities/board-comment.entity';
+import { BoardCommentEntity } from './entity/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
-import { BoardCommentResponse } from './responses/board-comment-response.entity';
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
+import { BoardRepository } from '../repository/board.repository';
 import { BoardService } from '../board.service';
-import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-password-comment.dto';
+import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
+import { UpdateBoardCommentExceptPasswordDTO } from './dto/update-board-except-password-comment.dto';
 
 @Injectable()
 export class BoardCommentService {
@@ -24,8 +24,8 @@ export class BoardCommentService {
     ) {}
     async createComment(
         boardId: number,
-        createBoardCommentDto: CreateBoardCommentDto,
-    ): Promise<BoardComment> {
+        createBoardCommentDto: CreateBoardCommentDTO,
+    ): Promise<BoardCommentEntity> {
         await this.isExistBoard(boardId);
 
         const { parentId } = createBoardCommentDto;
@@ -38,13 +38,11 @@ export class BoardCommentService {
             createBoardCommentDto.password,
         );
 
-        const comment: BoardComment = this.boardCommentRepository.createComment(
-            boardId,
-            {
+        const comment: BoardCommentEntity =
+            this.boardCommentRepository.createComment(boardId, {
                 ...createBoardCommentDto,
                 password,
-            },
-        );
+            });
 
         return await this.boardCommentRepository.saveComment(comment);
     }
@@ -52,7 +50,7 @@ export class BoardCommentService {
     async findAllComment(
         boardId: number,
         page: number,
-    ): Promise<BoardComment[]> {
+    ): Promise<BoardCommentResponseDTO[]> {
         await this.isExistBoard(boardId);
 
         const boardComments =
@@ -76,10 +74,10 @@ export class BoardCommentService {
 
     async updateComment(
         boardId: number,
-        updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
+        updateBoardCommentDto: UpdateBoardCommentExceptPasswordDTO,
         password: string,
         commentId: string,
-    ): Promise<BoardCommentResponse> {
+    ): Promise<BoardCommentResponseDTO> {
         await this.isExistBoard(boardId);
 
         if (updateBoardCommentDto.parentId) {
@@ -142,7 +140,7 @@ export class BoardCommentService {
         }
     }
 
-    makeCommentMap(boardComments: BoardCommentResponse[]) {
+    makeCommentMap(boardComments: BoardCommentResponseDTO[]) {
         const commentMap = new Map<string, any>();
 
         boardComments.forEach((comment) => {

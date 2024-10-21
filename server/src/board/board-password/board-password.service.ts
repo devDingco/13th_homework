@@ -6,7 +6,7 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardRepository } from '../repository/board.repository';
 
 @Injectable()
 export class BoardPasswordService {

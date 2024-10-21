@@ -3,7 +3,7 @@
 // WARNING useFormAction type Error?
 // NOTE useFormStatus 적용하기
 
-import { boardsUrlEndPoint, editUrlEndPoint } from '@/apis/config';
+import { boardsUrlEndPoint, editUrlEndPoint } from '~/config/axiosConfig';
 
 import { IValidPasswordState } from '@/models/validationPasssword.type';
 import isValidationPasswordBoard from '@/actions/isValidationPasswordBoard';

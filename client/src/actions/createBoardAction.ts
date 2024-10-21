@@ -1,56 +1,47 @@
 /** @format */
 'use server';
 
-import { ICreateFormBoard } from '@/models/board.type';
-import { IFormStateError } from '@/models/formBoardError';
-import postBoard from '../apis/boards/postBoard';
+import { ICreateFormBoard, IFormLower } from '@/models/board.type';
 
-const required = '필수입력 사항입니다.';
+import { IFormStateError } from '@/models/formBoardError';
+import { filterFormRequire } from '@/utils/filterFormRequire';
+import { isValidImage } from '@/utils/validImage/isValidImage';
+import postBoard from '../apis/boards/postBoard';
+import uploadImageS3 from '@/apis/boards/uploadImageS3';
+
+const requiredFields = ['Author', 'Password', 'Title', 'Content'];
 
 export async function createBoardAction(
 	prevState: IFormStateError,
 	formData: FormData,
 ): Promise<IFormStateError> {
-	// 왜 formData에서 address를 못 들고 오는걸까..? 나중에 디버깅하기
-	const author = formData.get('Author') as string;
-	const password = formData.get('Password') as string;
-	const title = formData.get('Title') as string;
-	const content = formData.get('Content') as string;
-	const youtubeUrl = formData.get('YoutubeUrl') as string;
-	const address = formData.get('Address') as string;
-	const detailAddress = formData.get('DetailAddress') as string;
+	const fieldValues = Object.fromEntries(
+		requiredFields.map((key) => [key.toLowerCase(), formData.get(key) as string]),
+	) as unknown as IFormLower;
 
-	if (!author || !password || !title || !content)
-		return {
-			data: null,
-			errors: {
-				author: author ? undefined : required,
-				password: password ? undefined : required,
-				title: title ? undefined : required,
-				content: content ? undefined : required,
-			},
-		};
-	else {
-		const data: ICreateFormBoard = {
-			author,
-			title,
-			password,
-			content,
-			youtubeUrl,
-			address,
-			detailAddress,
-		};
+	const youtubeUrl = (formData.get('YoutubeUrl') as string) || '';
+	const address = (formData.get('Address') as string) || '';
+	const detailAddress = (formData.get('DetailAddress') as string) || '';
+	let images = formData.getAll('image') as File[];
 
-		const responseData = await postBoard(data);
+	filterFormRequire(fieldValues, requiredFields);
 
-		return {
-			data: responseData,
-			errors: {
-				author: undefined,
-				password: undefined,
-				title: undefined,
-				content: undefined,
-			},
-		};
+	images = images.filter((image) => image.size !== 0);
+
+	let imageUrl: string[] = [];
+	if (images.length > 0) {
+		await isValidImage(images);
+
+		imageUrl = await uploadImageS3(images);
 	}
+
+	const finalData: ICreateFormBoard = {
+		...fieldValues,
+		imageUrl,
+		youtubeUrl,
+		address,
+		detailAddress,
+	};
+
+	return await postBoard(finalData);
 }

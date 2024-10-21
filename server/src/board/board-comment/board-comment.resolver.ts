@@ -1,24 +1,29 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BoardCommentService } from './board-comment.service';
-import { BoardComment } from './entities/board-comment.entity';
-import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
-import { BoardCommentResponse } from './responses/board-comment-response.entity';
-import { UpdateBoardCommentDto } from './dto/update-board-comment.dto';
 
-@Resolver(() => BoardComment)
+import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
+
+import { BoardCommentSchema } from './schema/board-comment.schema';
+import { CreateBoardCommentInput } from './schema/create-board-comment-input.schema';
+import { UpdateBoardCommentInput } from './schema/update-board-comment-input.schema';
+
+@Resolver(() => BoardCommentSchema)
 export class BoardCommentResolver {
     constructor(private readonly boardCommentService: BoardCommentService) {}
 
-    // @Query(() => [BoardCommentResponse])
-    // getBoardComment(@Args('boardId', { type: () => Int }) boardId: number) {
-    //     return this.boardCommentService.findAllComment(boardId);
-    // }
+    @Query(() => [BoardCommentResponseDTO])
+    getBoardComment(
+        @Args('boardId', { type: () => Int }) boardId: number,
+        @Args('page', { type: () => Int, nullable: true }) page: number = 1,
+    ) {
+        return this.boardCommentService.findAllComment(boardId, page);
+    }
 
-    @Mutation(() => BoardCommentResponse)
+    @Mutation(() => BoardCommentResponseDTO)
     createBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('createBoardComment')
-        createBoardComment: CreateBoardCommentDto,
+        @Args('boardComment')
+        createBoardComment: CreateBoardCommentInput,
     ) {
         return this.boardCommentService.createComment(
             boardId,
@@ -26,11 +31,11 @@ export class BoardCommentResolver {
         );
     }
 
-    @Mutation(() => BoardCommentResponse)
+    @Mutation(() => BoardCommentResponseDTO)
     updateBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
         @Args('updateBoardComment')
-        updateBoardComment: UpdateBoardCommentDto,
+        updateBoardComment: UpdateBoardCommentInput,
         @Args('parentId') parentId: string,
     ) {
         const { password, ...restUpdateBoardComment } = updateBoardComment;

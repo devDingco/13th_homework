@@ -1,6 +1,6 @@
 /** @format */
 
-import { api, boardUrlEndPoint } from '../config';
+import { api, boardUrlEndPoint } from '../../../config/axiosConfig';
 
 import { IApiResponseData } from '@/models/apiResponse';
 import { IBoardReader } from '@/models/boardReaderResponse';

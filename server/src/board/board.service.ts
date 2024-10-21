@@ -6,15 +6,15 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 
-import { Board } from './entities/board.entity';
 import { BoardCommentRepository } from './board-comment/board-comment.repository';
-import { BoardIdCounterRepository } from './repositories/board-id-counter.repository';
-import { BoardReactionRepository } from './reaction/repositories/boardReactionRepository';
-import { BoardRepository } from './repositories/board.repository';
-import { CreateBoardDto } from './dto/create-board.dto';
-import { PaginationDto } from './dto/pagination.dto';
-import { PaginationResponseDto } from './dto/pagination-response.dto';
-import { UpdateBoardDto } from './dto/update-board.dto';
+import { BoardEntity } from './entity/board.entity';
+import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
+import { BoardReactionRepository } from './board-reaction/repository/boardReactionRepository';
+import { BoardRepository } from './repository/board.repository';
+import { CreateBoardDTO } from './dto/create-board.dto';
+import { PaginationDTO } from './dto/pagination.dto';
+import { PaginationResponseDTO } from './dto/pagination-response.dto';
+import { UpdateBoardDTO } from './dto/update-board.dto';
 
 @Injectable()
 export class BoardService {
@@ -24,13 +24,11 @@ export class BoardService {
         private readonly boardReactionRepository: BoardReactionRepository,
         private readonly boardCommentRepository: BoardCommentRepository,
     ) {}
-    async create(createBoardDto: CreateBoardDto): Promise<Board> {
-        const hashPassword = await this.transformPassword(
-            createBoardDto.password,
-        );
+    async create(createBoard: CreateBoardDTO): Promise<BoardEntity> {
+        const hashPassword = await this.transformPassword(createBoard.password);
 
         const board = this.boardRepository.createBoard({
-            ...createBoardDto,
+            ...createBoard,
             password: hashPassword,
         });
 
@@ -46,12 +44,12 @@ export class BoardService {
     async findAll({
         page,
         take,
-    }: PaginationDto): Promise<PaginationResponseDto> {
+    }: PaginationDTO): Promise<PaginationResponseDTO> {
         await this.checkBoardEntityCount(page, take);
         return await this.boardRepository.findAllBoard(page, take);
     }
 
-    async findOne(boardId: number): Promise<Board> {
+    async findOne(boardId: number): Promise<BoardEntity> {
         return await this.boardRepository.findBoard(boardId);
     }
 
@@ -61,16 +59,16 @@ export class BoardService {
 
     async updateOne(
         boardId: number,
-        updateBoardDto: UpdateBoardDto,
-    ): Promise<Board> {
-        return await this.boardRepository.updateOne(boardId, updateBoardDto);
+        updateBoard: UpdateBoardDTO,
+    ): Promise<BoardEntity> {
+        return await this.boardRepository.updateOne(boardId, updateBoard);
     }
 
     async updateAll(
         boardId: number,
-        updateBoardDto: CreateBoardDto,
-    ): Promise<Board> {
-        return await this.boardRepository.updateAll(boardId, updateBoardDto);
+        updateBoard: UpdateBoardDTO,
+    ): Promise<BoardEntity> {
+        return await this.boardRepository.updateAll(boardId, updateBoard);
     }
 
     async remove(boardId: number): Promise<boolean> {

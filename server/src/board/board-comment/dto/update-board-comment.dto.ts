@@ -1,14 +1,10 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-import { Column } from 'typeorm';
-import { CreateBoardCommentDto } from './create-board-comment.dto';
+import { CreateBoardCommentDTO } from './create-board-comment.dto';
+import { PartialType } from '@nestjs/mapped-types';
 
-@InputType()
-export class UpdateBoardCommentDto extends PartialType(CreateBoardCommentDto) {
+export class UpdateBoardCommentDTO extends PartialType(CreateBoardCommentDTO) {
     @IsString()
     @IsNotEmpty()
-    @Column()
-    @Field()
     password: string;
 }

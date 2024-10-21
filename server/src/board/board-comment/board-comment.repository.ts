@@ -1,17 +1,17 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardComment } from './entities/board-comment.entity';
+import { BoardCommentEntity } from './entity/board-comment.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
-import { CreateBoardCommentDto } from './dto/create-board-comment.dto';
+import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
-import { BoardCommentResponse } from './responses/board-comment-response.entity';
-import { UpdateBoardCommentExceptCommentDto } from './dto/update-board-except-password-comment.dto';
+import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
+import { UpdateBoardCommentExceptPasswordDTO } from './dto/update-board-except-password-comment.dto';
 
 @Injectable()
 export class BoardCommentRepository {
     constructor(
-        @InjectRepository(BoardComment, 'mongodb')
-        private readonly boardCommentRepository: MongoRepository<BoardComment>,
+        @InjectRepository(BoardCommentEntity, 'mongodb')
+        private readonly boardCommentRepository: MongoRepository<BoardCommentEntity>,
     ) {}
 
     async findComment(id: string) {
@@ -22,23 +22,31 @@ export class BoardCommentRepository {
 
     createComment(
         boardId: number,
-        { author, password, content, rating, parentId }: CreateBoardCommentDto,
-    ): BoardComment {
+        {
+            author,
+            password,
+            content,
+            rating,
+            parentId = null,
+        }: CreateBoardCommentDTO,
+    ): BoardCommentEntity {
         return this.boardCommentRepository.create({
             author,
             password,
             content,
             rating,
             boardId,
-            parentId: parentId || null,
+            parentId,
         });
     }
 
-    async saveComment(comment: BoardComment): Promise<BoardComment> {
+    async saveComment(
+        comment: BoardCommentEntity,
+    ): Promise<BoardCommentEntity> {
         return await this.boardCommentRepository.save(comment);
     }
 
-    async findAllComment(boardId: number): Promise<BoardComment[]> {
+    async findAllComment(boardId: number): Promise<BoardCommentEntity[]> {
         return await this.boardCommentRepository.find({
             where: { boardId },
             order: { createdAt: 'ASC' },
@@ -47,8 +55,8 @@ export class BoardCommentRepository {
 
     async updateComment(
         commentId: string,
-        updateBoardCommentDto: UpdateBoardCommentExceptCommentDto,
-    ): Promise<BoardCommentResponse> {
+        updateBoardCommentDto: UpdateBoardCommentExceptPasswordDTO,
+    ): Promise<BoardCommentResponseDTO> {
         const updateBoardDB = await this.boardCommentRepository.update(
             new ObjectId(commentId),
             updateBoardCommentDto,

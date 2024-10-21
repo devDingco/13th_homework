@@ -1,10 +1,8 @@
-// TODO: 1014 - getBoardsCount / pagination
 import {
     Controller,
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
     HttpCode,
@@ -15,13 +13,13 @@ import {
     Query,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
-import { CreateBoardDto } from './dto/create-board.dto';
-import { UpdateBoardDto } from './dto/update-board.dto';
+import { CreateBoardDTO } from './dto/create-board.dto';
+import { UpdateBoardDTO } from './dto/update-board.dto';
 import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 import { ResponseMessage } from './decorators/response-message.decorator';
-import { Board } from './entities/board.entity';
-import { PaginationDto } from './dto/pagination.dto';
-import { PaginationResponseDto } from './dto/pagination-response.dto';
+import { BoardEntity } from './entity/board.entity';
+import { PaginationDTO } from './dto/pagination.dto';
+import { PaginationResponseDTO } from './dto/pagination-response.dto';
 
 @Controller('/api/board')
 @UseInterceptors(TransformBoardInterceptor)
@@ -31,14 +29,14 @@ export class BoardController {
     @Post()
     @ResponseMessage('board가 성공적으로 생성되었습니다.')
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
-        return this.boardService.create(createBoardDto);
+    create(@Body() createBoardDTO: CreateBoardDTO): Promise<BoardEntity> {
+        return this.boardService.create(createBoardDTO);
     }
 
     @Get()
     @ResponseMessage('board 전체를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findAll(@Query() query: PaginationDto): Promise<PaginationResponseDto> {
+    findAll(@Query() query: PaginationDTO): Promise<PaginationResponseDTO> {
         return this.boardService.findAll(query);
     }
 
@@ -52,18 +50,10 @@ export class BoardController {
     @Get(':boardId')
     @ResponseMessage('board를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
-    findOne(@Param('boardId', ParseIntPipe) boardId: number): Promise<Board> {
-        return this.boardService.findOne(boardId);
-    }
-
-    @Patch(':boardId')
-    @ResponseMessage('board를 성공적으로 수정했습니다.')
-    @HttpCode(HttpStatus.OK)
-    updateOne(
+    findOne(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Body() updateBoardDto: UpdateBoardDto,
-    ): Promise<Board> {
-        return this.boardService.updateOne(boardId, updateBoardDto);
+    ): Promise<BoardEntity> {
+        return this.boardService.findOne(boardId);
     }
 
     @Put(':boardId')
@@ -71,9 +61,9 @@ export class BoardController {
     @HttpCode(HttpStatus.OK)
     updateAll(
         @Param('boardId', ParseIntPipe) boardId: number,
-        @Body() updateBoardDto: CreateBoardDto,
-    ): Promise<Board> {
-        return this.boardService.updateAll(boardId, updateBoardDto);
+        @Body() updateBoardDTO: UpdateBoardDTO,
+    ): Promise<BoardEntity> {
+        return this.boardService.updateAll(boardId, updateBoardDTO);
     }
 
     @Delete(':boardId')

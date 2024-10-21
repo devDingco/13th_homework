@@ -1,36 +1,43 @@
-// TODO getBoards -> findAll args page number
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { BoardService } from './board.service';
-import { Board } from './entities/board.entity';
-import { CreateBoardDto } from './dto/create-board.dto';
-import { BoardResponseDto } from './dto/board-response.dto';
-import { UpdateBoardDto } from './dto/update-board.dto';
+import { BoardSchema } from './schema/board.schema';
+import { CreateBoardInput } from './schema/create-board-input.schema';
+import { UpdateBoardInput } from './schema/update-board-input.schema';
+import { BoardPaginationResponse } from './schema/board-pagination-response.schema';
 
-@Resolver(() => Board)
+@Resolver(() => BoardSchema)
 export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
-    // @Query(() => [BoardResponseDto])
-    // getBoards() {
-    //     return this.boardService.findAll();
-    // }
+    @Query(() => BoardPaginationResponse)
+    async getBoards(
+        @Args('page', { type: () => Int, nullable: true }) page: number = 1,
+        @Args('take', { type: () => Int, nullable: true }) take: number = 5,
+    ) {
+        const res = await this.boardService.findAll({ page, take });
+        console.log(res);
+        return res;
+    }
 
-    @Query(() => BoardResponseDto)
+    @Query(() => BoardSchema)
     getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
         return this.boardService.findOne(boardId);
     }
 
-    @Mutation(() => BoardResponseDto)
-    createBoard(@Args('createBoard') createBoard: CreateBoardDto) {
+    @Mutation(() => BoardSchema)
+    createBoard(
+        @Args('createBoardInput')
+        createBoard: CreateBoardInput,
+    ) {
         return this.boardService.create(createBoard);
     }
 
-    @Mutation(() => BoardResponseDto)
+    @Mutation(() => BoardSchema)
     updateBoard(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('updateBoard') updateBoard: UpdateBoardDto,
+        @Args('updateBoardInput') updateBoard: UpdateBoardInput,
     ) {
-        return this.boardService.updateOne(boardId, updateBoard);
+        return this.boardService.updateAll(boardId, updateBoard);
     }
 
     @Mutation(() => Boolean)

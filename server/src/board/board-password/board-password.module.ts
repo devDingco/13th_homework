@@ -1,13 +1,13 @@
-import { Board } from '../entities/board.entity';
+import { BoardEntity } from '../entity/board.entity';
 import { BoardPasswordController } from './board-password.controller';
 import { BoardPasswordResolver } from './board-password.resolver';
 import { BoardPasswordService } from './board-password.service';
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardRepository } from '../repository/board.repository';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Board], 'mongodb')],
+    imports: [TypeOrmModule.forFeature([BoardEntity], 'mongodb')],
     controllers: [BoardPasswordController],
     providers: [BoardPasswordService, BoardRepository, BoardPasswordResolver],
 })

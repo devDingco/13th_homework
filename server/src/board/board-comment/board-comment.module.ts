@@ -1,17 +1,17 @@
-import { Board } from '../entities/board.entity';
-import { BoardComment } from './entities/board-comment.entity';
 import { BoardCommentController } from './board-comment.controller';
+import { BoardCommentEntity } from './entity/board-comment.entity';
 import { BoardCommentRepository } from './board-comment.repository';
 import { BoardCommentResolver } from './board-comment.resolver';
 import { BoardCommentService } from './board-comment.service';
+import { BoardEntity } from '../entity/board.entity';
 import { BoardModule } from '../board.module';
-import { BoardRepository } from '../repositories/board.repository';
+import { BoardRepository } from '../repository/board.repository';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([BoardComment, Board], 'mongodb'),
+        TypeOrmModule.forFeature([BoardCommentEntity, BoardEntity], 'mongodb'),
         BoardModule,
     ],
     controllers: [BoardCommentController],

@@ -6,7 +6,7 @@ import { EButtonKorea, EButtonTitle, IButtonProps } from '@/models/button.type';
 
 import { IApiResponseData } from '@/models/apiResponse';
 import React from 'react';
-import { boardUrlEndPoint } from '@/apis/config';
+import { boardUrlEndPoint } from '~/config/axiosConfig';
 import deleteBoard from '@/apis/boards/deleteBoard';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
@@ -39,12 +39,12 @@ const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }
 					}
 				}
 				break;
-			case EButtonTitle.Cancel:
-				if (setIsEdit) {
-					setIsEdit((prev) => !prev);
-				} else {
-					onClickBack();
-				}
+				// case EButtonTitle.Cancel:
+				// 	if (setIsEdit) {
+				// 		setIsEdit((prev) => !prev);
+				// 	} else {
+				// 		onClickBack();
+				// 	}
 				break;
 			case EButtonTitle.Reply:
 				break;

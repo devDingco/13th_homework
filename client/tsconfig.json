@@ -29,6 +29,6 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"src/utils/wrapPromise.ts"
-	],
+, "src/utils/filterFormRequire.js"	],
 	"exclude": ["node_modules"]
 }
