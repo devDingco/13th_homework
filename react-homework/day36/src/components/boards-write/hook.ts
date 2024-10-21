@@ -16,7 +16,7 @@ import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 import { checkValidationFile } from "@/utils/validation-file";
 
-export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
+export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
   // input state
   const [inputs, setInputs] = useState<IInputs>({
     writer: "",
@@ -132,7 +132,8 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
 
   // file버튼 클릭해주기
   const onClickImage = (event) => {
-    fileRefs[Number(event.target.id)].current?.click();
+    const id = event.currentTarget.id;
+    fileRefs[id].current?.click();
   };
 
   // 구조분해할당
