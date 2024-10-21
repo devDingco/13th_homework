@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 import "./globals.css";
 import Layout from "@/commons/layout";

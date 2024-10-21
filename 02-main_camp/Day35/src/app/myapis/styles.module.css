@@ -15,7 +15,6 @@
 .left {
   width: 60%;
   display: flex;
-  /* justify-content: center; */
   background-color: #9cdddf;
   border-radius: 8px;
   padding: 20px 1rem;
@@ -31,7 +30,6 @@
 
 .right {
   width: 20%;
-  /* height: 200px; */
   background-color: #e1ece8;
   border-radius: 8px;
   box-shadow: 5px 5px 20px 0px #e1ece8;
