@@ -31,14 +31,6 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     zipcode: "",
     address: "",
   });
-  // 새로고침해도 주소 인풋 유지
-  useEffect(() => {
-    if (!data) return;
-    setAddressInfo({
-      zipcode: data?.fetchBoard?.boardAddress?.zipcode || "",
-      address: data?.fetchBoard?.boardAddress?.address || "",
-    });
-  }, [data]);
 
   // 상세주소 state
   const [addressDetail, setAddressDetail] = useState("");
@@ -46,6 +38,16 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   // image Url
   const [imageUrl, setImageUrl] = useState(["", "", ""]);
+
+  // 새로고침해도 주소 인풋, 파일 유지
+  useEffect(() => {
+    if (!data) return;
+    setAddressInfo({
+      zipcode: data?.fetchBoard?.boardAddress?.zipcode || "",
+      address: data?.fetchBoard?.boardAddress?.address || "",
+    });
+    setImageUrl(data?.fetchBoard?.images || ["", "", ""]);
+  }, [data]);
   const fileRefs = [useRef(null), useRef(null), useRef(null)];
 
   // modal 토글 - password
@@ -100,7 +102,7 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     const file = event.target.files?.[0];
     console.log(file);
 
-    // 검증 실패치 OnChangeFile함수 즉시 종료
+    // 검증 실패시 OnChangeFile함수 즉시 종료
     const isValid = checkValidationFile(file);
     if (!isValid) return;
 
@@ -110,8 +112,21 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     if (!fileUrl) return;
 
     setImageUrl((prev) =>
-      prev.map((image, idx) => (idx === imageId ? fileUrl : image))
+      prev.map((image, index) => (index === imageId ? fileUrl : image))
     );
+  };
+
+  // delete버튼 클릭 시 이미지 미리보기 삭제
+  const onClickDelete = (event) => {
+    // 이벤트버블링 막기 (파일 열기)
+    event.stopPropagation();
+    const imageId = event.currentTarget.id;
+    console.log("삭제할 이미지 아이디: ", imageId);
+    // 선택된 아이디 는 빈문자열로 , 아니면 그대로
+    const deletedImageUrl = imageUrl.map((image, index) =>
+      index !== Number(imageId) ? image : ""
+    );
+    setImageUrl(deletedImageUrl);
   };
   console.log(imageUrl);
 
@@ -198,6 +213,7 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
         ...(title && { title }),
         ...(contents && { contents }),
         ...(youtubeUrl && { youtubeUrl }),
+        images: imageUrl,
       },
       password: modalPassword,
       boardId,
@@ -211,7 +227,6 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     if (addressInfo.address !== data?.fetchBoard?.boardAddress?.address)
       boardAddress.address = addressInfo.address;
     if (addressDetail) boardAddress.addressDetail = addressDetail;
-
     // 주소객체 있으면 넣기
     if (Object.keys(boardAddress).length !== 0)
       variables.updateBoardInput.boardAddress = boardAddress;
@@ -291,6 +306,7 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     onChangeFile,
     onChangePassword,
     onClickImage,
+    onClickDelete,
     onClickRegister,
     onClickEditCancel,
     onClickRegisterCancel,

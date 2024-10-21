@@ -59,6 +59,22 @@
   gap: 16px;
 }
 
+.upload_button_group {
+  position: relative;
+}
+
+.delete_btn {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: none;
+  cursor: pointer;
+}
+
+.upload_button_group:hover .delete_btn {
+  display: block;
+}
+
 .btn_group {
   display: flex;
   justify-content: flex-end;
@@ -79,6 +95,8 @@
   cursor: pointer;
   width: 160px;
   height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .btn_upload input {

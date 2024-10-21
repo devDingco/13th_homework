@@ -61,14 +61,20 @@ const BoardsDetail = () => {
           </div>
         </div>
         <div className={styles.image_box}>
-          <Image
-            src="/images/beach.png"
-            className={styles.main_image}
-            alt="main-image"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
+          {data?.fetchBoard.images?.map((image, index) =>
+            // 이미지가 빈문자열이 아니면 그려주기
+            image ? (
+              <Image
+                key={index}
+                src={`https://storage.googleapis.com/${image}`}
+                className={styles.main_image}
+                alt="image"
+                width={0}
+                height={0}
+                sizes="100vw"
+              />
+            ) : null
+          )}
         </div>
         <div className={styles.content_box}>{data?.fetchBoard.contents}</div>
 

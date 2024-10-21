@@ -75,6 +75,13 @@
   display: block;
 }
 
+.image_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
 .main_image {
   width: 400px;
   height: auto;

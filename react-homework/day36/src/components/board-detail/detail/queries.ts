@@ -14,6 +14,7 @@ export const FETCH_BOARD = gql`
       }
       youtubeUrl
       createdAt
+      images
     }
   }
 `;
