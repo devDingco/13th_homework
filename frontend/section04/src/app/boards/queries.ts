@@ -21,6 +21,7 @@ export const CREATE_BOARD = gql`
     }
   }
 `;
+
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -42,6 +43,30 @@ export const FETCH_BOARD = gql`
       updatedAt
       deletedAt
     }
+  }
+`;
+
+export const FETCH_BOARDS = gql`
+  query {
+    fetchBoards {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `;
 

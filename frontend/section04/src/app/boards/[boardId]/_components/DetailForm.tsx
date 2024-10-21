@@ -18,7 +18,7 @@ export default function DetailForm() {
   console.log(data);
 
   return (
-    <div className="flex-col py-10">
+    <div className="flex-col py-10 flex gap-5">
       <div className="prose-b_28_36">{data?.fetchBoard?.title}</div>
       <DetailFormInfo value={data?.fetchBoard?.writer} />
       <DetailFormContent value={data?.fetchBoard?.contents} />
