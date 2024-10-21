@@ -22,8 +22,6 @@ export class AppController {
     @Post()
     @UseInterceptors(FilesInterceptor('image'))
     createTestImage(@UploadedFiles() files, @Body() body) {
-        console.log(files);
-        console.log(body);
         return files;
     }
 }

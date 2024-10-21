@@ -12,9 +12,6 @@ export class BoardSchema {
     author: string;
 
     @Field()
-    password: string;
-
-    @Field()
     title: string;
 
     @Field()

@@ -3,22 +3,25 @@ import { BoardService } from './board.service';
 import { BoardSchema } from './schema/board.schema';
 import { CreateBoardInput } from './schema/create-board-input.schema';
 import { UpdateBoardInput } from './schema/update-board-input.schema';
+import { BoardPaginationResponse } from './schema/board-pagination-response.schema';
 
 @Resolver(() => BoardSchema)
 export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
-    @Query(() => [BoardSchema])
+    @Query(() => BoardPaginationResponse)
     async getBoards(
-        @Args('page', { type: () => Int }) page: number,
-        @Args('take', { type: () => Int }) take: number,
+        @Args('page', { type: () => Int, nullable: true }) page: number = 1,
+        @Args('take', { type: () => Int, nullable: true }) take: number = 5,
     ) {
-        return await this.boardService.findAll({ page, take });
+        const res = await this.boardService.findAll({ page, take });
+        console.log(res);
+        return res;
     }
 
     @Query(() => BoardSchema)
-    async getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
-        return await this.boardService.findOne(boardId);
+    getBoard(@Args('boardId', { type: () => Int }) boardId: number) {
+        return this.boardService.findOne(boardId);
     }
 
     @Mutation(() => BoardSchema)

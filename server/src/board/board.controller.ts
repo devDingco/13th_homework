@@ -1,4 +1,3 @@
-// TODO: 1014 - getBoardsCount / pagination
 import {
     Controller,
     Get,
@@ -21,7 +20,6 @@ import { ResponseMessage } from './decorators/response-message.decorator';
 import { BoardEntity } from './entity/board.entity';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('/api/board')
 @UseInterceptors(TransformBoardInterceptor)
@@ -29,7 +27,6 @@ export class BoardController {
     constructor(private readonly boardService: BoardService) {}
 
     @Post()
-    @UseInterceptors(FilesInterceptor('imageUrl', 3))
     @ResponseMessage('board가 성공적으로 생성되었습니다.')
     @HttpCode(HttpStatus.CREATED)
     create(@Body() createBoardDTO: CreateBoardDTO): Promise<BoardEntity> {
