@@ -40,7 +40,7 @@ export default function useBoardList() {
         variables: { boardId: event.currentTarget.id },
         onCompleted: () => {
           console.log("Board deleted, refetching...");
-          refetch(); // 삭제 후 리스트 다시 불러오기
+          refetch();
         },
       });
     } catch (error) {

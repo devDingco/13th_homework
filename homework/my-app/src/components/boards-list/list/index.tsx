@@ -11,6 +11,19 @@ export default function BoardList(props: IListProps) {
   const { updateDateRange, onClickDelete, startDate, endDate } = useBoardList();
   const router = useRouter();
 
+  const formatDate = (isoString: string | number | Date) => {
+    const date = new Date(isoString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+
+    return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+  };
+
   // CustomInput을 정의하고 displayName 설정
   const CustomInput = ({
     value,
@@ -56,7 +69,9 @@ export default function BoardList(props: IListProps) {
                     <div className={styles.listNum}>
                       {(props.currentPage - 1) * 10 + (index + 1)}
                     </div>
-                    <div className={styles.date}>{el.createdAt}</div>
+                    <div className={styles.date}>
+                      {formatDate(el.createdAt)}
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -71,7 +86,7 @@ export default function BoardList(props: IListProps) {
                       width={24}
                       height={24}
                       onClick={(e) => {
-                        e.stopPropagation(); // 부모로의 이벤트 전파를 막음
+                        e.stopPropagation();
                         onClickDelete(e, props.refetch); // refetch 전달
                       }}
                       id={el._id}

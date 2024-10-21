@@ -1,0 +1,19 @@
+{
+  "name": "17-02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "graphql": "^16.9.0",
+    "pg": "^8.13.0",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20"
+  },
+  "scripts": {
+    "qqq": "ts-node index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
