@@ -1,11 +1,13 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
+import { validation } from "../commons/libraries/validation-file";
 import {
   FetchBoard,
   FetchBoards,
   register,
   UPDATE_BOARD,
+  UPLOAD_FILE,
 } from "../queires/queries";
 import { IBoardWriteProps } from "./types";
 import { Modal } from "antd";
@@ -23,9 +25,9 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
 
   const [inputs, setInputs] = useState({
     name_id: "",
-    title_id: "",
+    title_id: props.isEdit ? data?.fetchBoard.title_id : "",
     password_id: "",
-    contents_id: "",
+    contents_id: props.isEdit ? data?.fetchBoard.contents_id : "",
   });
 
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +47,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
 
   const [contentblank, setContentBlank] = useState("");
 
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -130,6 +132,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
               title: inputs.title_id,
               contents: inputs.contents_id,
               youtubeUrl: youtubeUrl,
+              images: [imgUrl],
               boardAddress: {
                 address: address,
                 zipcode: addressnum,
@@ -166,6 +169,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
             title: inputs.title_id,
             contents: inputs.contents_id,
             youtubeUrl,
+            images: imgUrl,
             boardAddress: {
               address,
               addressDetail,
@@ -174,6 +178,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
           },
         },
       });
+      console.log(result);
       Modal.success({
         title: "성공",
       });
@@ -189,6 +194,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
   const onClickGoToList = () => {
     router.push("../../boards");
   };
+
   const onClickGoToDetail = () => {
     router.push(`../../boards/${data.fetchBoard._id}`);
   };
@@ -204,6 +210,37 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
     onToggleModal();
   };
 
+  // 사진 등록
+  const [uploadfile] = useMutation(UPLOAD_FILE);
+  const [imgUrl, setImgUrl] = useState(
+    props.isEdit ? data?.fetchBoard?.images[0] : ""
+  );
+  console.log(data?.fetchBoard?.images[0]);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+
+    const isValid = validation(file);
+    if (!isValid) return;
+
+    const result = await uploadfile({
+      variables: {
+        file,
+      },
+    });
+    console.log(result);
+    setImgUrl(result.data?.uploadFile.url ?? "");
+  };
+
+  const onClickImage = () => {
+    fileRef.current?.click();
+  };
+
+  const onClickDelete = () => {
+    setImgUrl("");
+  };
   return {
     onChangeInput,
     onClickUpdate,
@@ -214,6 +251,9 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
     onToggleModal,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
+    onClickImage,
+    onChangeFile,
+    onClickDelete,
     nameblank,
     passwordblank,
     titleblank,
@@ -226,5 +266,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
     data,
     youtubeUrl,
     inputs,
+    imgUrl,
+    fileRef,
   };
 };

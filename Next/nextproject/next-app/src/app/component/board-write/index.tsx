@@ -16,6 +16,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onClickSignup,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
+    onClickImage,
+    onChangeFile,
     onToggleModal,
     handleCpmplete,
     isButtonDisabled,
@@ -30,6 +32,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
     data,
     youtubeUrl,
     inputs,
+    fileRef,
+    imgUrl,
+    onClickDelete,
   } = UseBoardWrite(props);
 
   return (
@@ -195,30 +200,46 @@ export default function BoardWrite(props: IBoardWriteProps) {
         <div className={styles.css_picturepart}>
           <div>사진 첨부</div>
           <div className={styles.css_picture}>
-            <Image
-              src="/assets/AddImage.png"
-              alt="addimage"
-              width={0}
-              height={0}
-              className={styles.css_image}
-              sizes="100vw"
-            />
-            <Image
-              src="/assets/AddImage.png"
-              alt="addimage"
-              width={0}
-              height={0}
-              className={styles.css_image}
-              sizes="100vw"
-            />
-            <Image
-              src="/assets/AddImage.png"
-              alt="addimage"
-              width={0}
-              height={0}
-              className={styles.css_image}
-              sizes="100vw"
-            />
+            <div
+              onClick={onClickImage}
+              style={{
+                width: "100px",
+                height: "100px",
+                backgroundColor: "skyblue",
+              }}
+            >
+              {/* {!isDelete && ( */}
+              <input
+                type="file"
+                onChange={onChangeFile}
+                style={{ display: "none" }}
+                ref={fileRef}
+                accept="iamge/jpeg, image/png"
+              />
+              {/* )} */}
+              <div className={styles.css_imagebox}>
+                {imgUrl && (
+                  <Image
+                    src={`https://storage.googleapis.com/${imgUrl}`}
+                    alt="addimage"
+                    width={0}
+                    height={0}
+                    className={styles.css_image}
+                    sizes="100vw"
+                  />
+                )}
+              </div>
+            </div>
+            <div className={styles.css_box}>
+              <Image
+                src="/assets/Close.png"
+                alt="delete"
+                width={0}
+                height={0}
+                className={styles.css_delete}
+                onClick={onClickDelete}
+              />
+            </div>
           </div>
         </div>
 

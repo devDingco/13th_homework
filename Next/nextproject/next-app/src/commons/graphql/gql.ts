@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n": types.CreateBoardDocument,
+    "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n": types.CreateBoardDocument,
     "\n  mutation updateBoard(\n    $boardId: ID!\n    $password: String\n    $updateBoardInput: UpdateBoardInput!\n  ) {\n    updateBoard(\n      boardId: $boardId\n      password: $password\n      updateBoardInput: $updateBoardInput\n    ) {\n      _id\n      title\n      contents\n      createdAt\n      updatedAt\n      writer\n      youtubeUrl\n      boardAddress {\n        address\n        addressDetail\n        zipcode\n      }\n    }\n  }\n": types.UpdateBoardDocument,
     "\n  query fetchBoard($myboardId: ID!) {\n    fetchBoard(boardId: $myboardId) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n      youtubeUrl\n      boardAddress {\n        address\n        zipcode\n        addressDetail\n      }\n    }\n  }\n": types.FetchBoardDocument,
     "\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      contents\n      createdAt\n      writer\n      rating\n    }\n  }\n": types.CreateBoardCommentDocument,
@@ -23,6 +23,7 @@ const documents = {
     "\n  mutation deleteBoard($boardId: ID!) {\n    deleteBoard(boardId: $boardId)\n  }\n": types.DeleteBoardDocument,
     "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n": types.FetchBoardsCountDocument,
     "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n": types.FetchBoardsDocument,
+    "\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n": types.UploadFileDocument,
 };
 
 /**
@@ -42,7 +43,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      createdAt\n      updatedAt\n      youtubeUrl\n      images\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -75,6 +76,10 @@ export function graphql(source: "\n  query fetchBoardsCount {\n    fetchBoardsCo
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n"): (typeof documents)["\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      writer\n      contents\n      title\n      createdAt\n      _id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n"): (typeof documents)["\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

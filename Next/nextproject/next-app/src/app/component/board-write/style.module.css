@@ -242,9 +242,23 @@
   gap: 16px;
 }
 
+.css_imagebox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .css_image {
-  width: 100px;
-  height: auto;
+  width: 100%;
+  height: 100px;
+}
+
+.css_delete {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  padding: 4px;
+  gap: 10px;
+  border: 1px solid #000000;
 }
 
 /* 하단 버튼 */
