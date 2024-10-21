@@ -9,6 +9,8 @@ export default function BoardDetail() {
   console.log("youtube:", youtubeId);
 
   const address = data?.fetchBoard.boardAddress?.address;
+  const imageUrl = data?.fetchBoard.images;
+  console.log("imageurl:", imageUrl);
 
   return (
     <div className={styles.detailAllContainer}>
@@ -49,14 +51,25 @@ export default function BoardDetail() {
           </div>
         </div>
         <div className={styles.detailContentArea}>
-          <Image
-            src="/images/example.png"
-            alt="example"
-            className={styles.contentImg}
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
+          {imageUrl && imageUrl.every((el) => el === "") ? (
+            <div className={styles.noImage}></div> 
+          ) : (
+            imageUrl?.map(
+              (el) =>
+                el && (
+                  <Image
+                    key={el}
+                    src={`https://storage.googleapis.com/${el}`}
+                    alt="contents-image"
+                    className={styles.contentImg}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                  />
+                )
+            )
+          )}
+
           <div className={styles.detailContent}>{data?.fetchBoard?.contents}</div>
           <div className={styles.videoArea}>
             <YouTube

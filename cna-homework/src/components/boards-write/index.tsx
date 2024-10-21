@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { IBoardsWriteProps } from "../types";
@@ -9,7 +8,6 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
-    saveImgFile,
     onClickSignup,
     onChangeContent,
     onChangeTitle,
@@ -20,7 +18,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     errorPw,
     errorTitle,
     errorContent,
-    files,
     data,
     showModal,
     isModalOpen,
@@ -32,8 +29,11 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     detailAddress,
     onChangeAddress,
     onChangeYoutube,
+    imageUrls,
+    onChangeFile,
+    onClickImage,
+    fileRefs,
   } = useBoardsWrite(props);
-  console.log("sss", data);
 
   const fetchedZonecode = data?.fetchBoard?.boardAddress?.zipcode;
   const fetchedAddress = data?.fetchBoard?.boardAddress?.address;
@@ -58,8 +58,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               placeholder="작성자 명을 입력해 주세요."
               defaultValue={props.isEdit ? String(props?.data?.fetchBoard?.writer) : ""}
               style={props.isEdit ? { backgroundColor: "#f2f2f2" } : { backgroundColor: "#ffffff" }}
-              disabled={props.isEdit ? true : false}
-            ></input>
+              disabled={props.isEdit}
+            />
             <div className={styles.errorMsg}>{errorWriter}</div>
           </div>
           <div className={styles.writer}>
@@ -72,9 +72,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               placeholder="비밀번호를 입력해 주세요."
               defaultValue={props.isEdit ? "******" : ""}
               style={props.isEdit ? { backgroundColor: "#f2f2f2" } : { backgroundColor: "#ffffff" }}
-              disabled={props.isEdit ? true : false}
-              readOnly
-            ></input>
+              disabled={props.isEdit}
+            />
             <div className={styles.errorMsg}>{errorPw}</div>
           </div>
         </div>
@@ -86,7 +85,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             onChange={onChangeTitle}
             placeholder="제목을 입력해 주세요."
             defaultValue={props.data?.fetchBoard.title}
-          ></input>
+          />
           <div className={styles.errorMsg}>{errorTitle}</div>
         </div>
         <div className={styles.contentArea}>
@@ -97,7 +96,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             onChange={onChangeContent}
             placeholder="내용을 입력해 주세요."
             defaultValue={props.data?.fetchBoard.contents}
-          ></textarea>
+          />
           <div className={styles.errorMsg}>{errorContent}</div>
         </div>
         <div className={styles.addressArea}>
@@ -124,27 +123,32 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         <div className={styles.fileArea}>
           <p>사진 첨부</p>
           <div className={styles.addFileArea}>
-            {files.map((file, index) => (
-              <div className={styles.file} key={index}>
-                <Image src={file} alt={`upload-${index}`} width={0} height={0} sizes="100vw" />
-              </div>
-            ))}
-            <label htmlFor="input-file">
-              <div className={styles.file}>
-                <div className={styles.noImage}>
-                  <p>+</p>
-                  <p>클릭해서 사진 업로드</p>
-                </div>
+            {imageUrls.map((imageUrl, index) => (
+              <div key={index} className={styles.file}>
+                {imageUrl ? (
+                  <Image
+                    src={`https://storage.googleapis.com/${imageUrl}`}
+                    alt={`file-${index}`}
+                    width={160}
+                    height={160}
+                    sizes="100vw"
+                  />
+                ) : (
+                  <div className={styles.noImage} onClick={() => onClickImage(index)}>
+                    <p>+</p>
+                    <p>클릭해서 사진 업로드</p>
+                  </div>
+                )}
                 <input
                   type="file"
-                  id="input-file"
+                  ref={fileRefs[index]}
                   multiple
                   style={{ display: "none" }}
-                  onChange={(e) => saveImgFile(e)}
+                  onChange={(event) => onChangeFile(event, index)}
                   accept="image/*"
                 />
               </div>
-            </label>
+            ))}
           </div>
         </div>
         <div className={styles.btnArea}>
@@ -153,10 +157,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             onClick={onClickSignup}
             disabled={!props.isEdit && disabledBtn}
             className={!props.isEdit && disabledBtn ? `${styles.unActiveBtn} ${styles.disabled}` : styles.unActiveBtn}
-            // style={{
-            //   backgroundColor: isActive ? "#2974e5" : "#c7c7c7",
-            //   cursor: isActive ? "pointer" : "default",
-            // }}
           >
             {props.isEdit ? "수정" : "등록"}하기
           </button>
