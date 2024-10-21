@@ -7,6 +7,7 @@ interface PostsType {
   userAddressDetail?: string;
   userAddressNum?: string;
   youtubeLink?: string;
+  images?: string[];
 }
 
 interface RequiredType {

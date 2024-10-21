@@ -19,7 +19,7 @@ import {
 } from '@/app/_commons/graphql/graphql';
 import useModalStore from '@/app/_store/useModalStore';
 import DaumPostcodeEmbed from 'react-daum-postcode';
-import { CREATE_BOARD } from '@/app/_api/board/Mutation';
+import { CREATE_BOARD, UPLOAD_FILE } from '@/app/_api/board/Mutation';
 
 export default function PostsForm({
   type,
@@ -52,12 +52,16 @@ export default function PostsForm({
   });
 
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+  const [imageUrl, setImageUrl] = useState('');
+
+  const imageRef = useRef<HTMLInputElement>(null);
   const addressInfo = useRef<any>();
   const { showModal, closeModal } = useModalStore();
 
   // ?fetch
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   // *functions
   const onPostFormChange = (
@@ -169,6 +173,18 @@ export default function PostsForm({
       }
     }
   };
+  const onClickImage = () => {
+    imageRef.current?.click();
+  };
+
+  const onChangeImage = async (event: any) => {
+    const file = event.target.files?.[0];
+    console.log(event.target.files);
+
+    const result = await uploadFile({ variables: { file } });
+    console.log('file', result.data?.uploadFile.url);
+    setImageUrl(result.data?.uploadFile.url);
+  };
 
   // !useEffect
   useEffect(() => {
@@ -277,7 +293,7 @@ export default function PostsForm({
         onChangeFnc={onPostFormChange}
       />
       <div className={s.flexBox}>
-        <Input
+        {/* <Input
           // value={postData.}
           label="사진 첨부"
           type="file"
@@ -298,7 +314,18 @@ export default function PostsForm({
           placeholder="클릭해서 사진 업로드"
           id="photoUpload"
           onChangeFnc={onPostFormChange}
+        /> */}
+        <div
+          className="w-[100px] h-[100px] bg-gray/100"
+          onClick={onClickImage}></div>
+        <input
+          type="file"
+          className="hidden"
+          onChange={onChangeImage}
+          ref={imageRef}
         />
+
+        <img src={`https://storage.googleapis.com/${imageUrl}`} alt="dd" />
       </div>
       <div className={`${s.flexBox} justify-end`}>
         <Button type="button" style="default">

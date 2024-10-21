@@ -1,5 +1,3 @@
-'use client';
-
 export default async function getTourOpenapi(page: number) {
   try {
     const res = await fetch(
