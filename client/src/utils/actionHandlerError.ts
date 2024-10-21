@@ -1,6 +1,5 @@
 /** @format */
 
-import { EError } from '@/models/error.type';
 import { IFormStateError } from '@/models/formBoardError';
 
 export const defaultErrors: IFormStateError['errors'] = {
@@ -13,7 +12,7 @@ export const defaultErrors: IFormStateError['errors'] = {
 
 export function actionHandleError(
 	errors: Partial<IFormStateError['errors']>,
-	general: string = EError.SERVER,
+	general: string,
 ): IFormStateError {
 	return {
 		data: null,

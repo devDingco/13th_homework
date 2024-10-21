@@ -1,11 +1,11 @@
 /** @format */
 
-import { actionHandleError, defaultErrors } from '@/utils/actionHandlerError';
 import { api, boardUrlEndPoint } from '../../../config/axiosConfig';
 
 import { EError } from '@/models/error.type';
 import { ICreateFormBoard } from '@/models/board.type';
 import { IFormStateError } from '@/models/formBoardError';
+import { defaultErrors } from '@/utils/actionHandlerError';
 
 export default async function postBoard(data: ICreateFormBoard): Promise<IFormStateError> {
 	try {
@@ -17,9 +17,21 @@ export default async function postBoard(data: ICreateFormBoard): Promise<IFormSt
 				errors: defaultErrors,
 			};
 		}
-		return actionHandleError({}, EError.DB_ERROR);
+		return {
+			data: null,
+			errors: {
+				...defaultErrors,
+				general: EError.DB_ERROR,
+			},
+		};
 	} catch (error) {
 		console.error(error);
-		return actionHandleError({});
+		return {
+			data: null,
+			errors: {
+				...defaultErrors,
+				general: EError.SERVER,
+			},
+		};
 	}
 }
