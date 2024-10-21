@@ -31,8 +31,8 @@ export default function Pagination({
     const [startPage, setStartPage] = useState(1);
 
     const onClick = (event) => {
-        refetch({ page: Number(event.currentTarget.id) });
         setCurrent(Number(event.target.id));
+        refetch({ page: Number(event.currentTarget.id) });
 
         switch (event.target.id) {
             case "-xx": {
@@ -42,7 +42,12 @@ export default function Pagination({
                 break;
             }
             case "-x": {
-                if (startPage <= 1) alert("불러올 데이터가 없습니다!");
+                if (startPage <= 1) {
+                    alert("불러올 데이터가 없습니다!!");
+                    setCurrent(current);
+                    refetch({ page: current });
+                    return;
+                }
                 setStartPage(startPage - 10);
                 refetch({ page: startPage - 10 });
                 setCurrent(startPage - 10);
@@ -50,8 +55,10 @@ export default function Pagination({
             }
             case "+x": {
                 if (startPage + 10 >= lastPage) {
-                    console.log(Math.floor(lastPage));
                     alert("마지막 페이지 입니다!");
+                    setCurrent(current);
+                    refetch({ page: current });
+                    return;
                 }
                 setStartPage(startPage + 10);
                 refetch({ page: startPage + 10 });
@@ -60,6 +67,8 @@ export default function Pagination({
             }
             case "+xx": {
                 setStartPage(lastPage);
+                refetch({ page: lastPage });
+                setCurrent(lastPage);
                 break;
             }
         }

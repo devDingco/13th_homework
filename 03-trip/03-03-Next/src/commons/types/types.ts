@@ -17,8 +17,8 @@ export interface ISubmitInput {
 
     link_ID?: string;
     zipcode_ID?: string;
+    address00_ID?: string;
     address01_ID?: string;
-    address02_ID?: string;
 }
 
 export const InputData: ISubmitInput = {
@@ -38,8 +38,8 @@ export const InputPlaceholder: ISubmitInput = {
 
     link_ID: "링크를 입력해 주세요.",
     zipcode_ID: "01234",
-    address01_ID: "주소를 검색해 주세요.",
-    address02_ID: "상세주소를 입력해 주세요.",
+    address00_ID: "주소를 검색해 주세요.",
+    address01_ID: "상세주소를 입력해 주세요.",
 };
 
 export interface ILayoutProps {

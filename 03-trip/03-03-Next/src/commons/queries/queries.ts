@@ -10,11 +10,9 @@ export const CREATE_BOARD = gql`
             contents
             youtubeUrl
             boardAddress {
-                _id
                 zipcode
                 address
                 addressDetail
-                createdAt
             }
             createdAt
         }
@@ -30,13 +28,12 @@ export const FETCH_BOARD = gql`
             contents
             youtubeUrl
             boardAddress {
-                _id
                 zipcode
                 address
                 addressDetail
-                createdAt
             }
             createdAt
+            updatedAt
         }
     }
 `;
@@ -74,6 +71,12 @@ export const UPDATE_BOARD = gql`
             writer
             title
             contents
+            youtubeUrl
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
             updatedAt
         }
     }
@@ -111,6 +114,27 @@ export const FETCH_COMMENTS = gql`
             contents
             rating
             createdAt
+        }
+    }
+`;
+
+export const UPDATE_COMMENT = gql`
+    mutation updateBoardComment(
+        $boardCommentId: ID!
+        $password: String
+        $updateBoardCommentInput: UpdateBoardCommentInput!
+    ) {
+        updateBoardComment(
+            boardCommentId: $boardCommentId
+            password: $password
+            updateBoardCommentInput: $updateBoardCommentInput
+        ) {
+            _id
+            writer
+            contents
+            rating
+            createdAt
+            updatedAt
         }
     }
 `;

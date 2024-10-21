@@ -1,9 +1,9 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { FetchBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
-export default function useUpdate() {
+export default function useUpdate({ addressData }) {
     const Params = useParams();
     const Router = useRouter();
 
@@ -11,23 +11,14 @@ export default function useUpdate() {
         variables: { boardId: Params.boardId },
     });
 
-    const [title, setTitle] = useState(data?.fetchBoard.title);
-    const [contents, setContents] = useState(data?.fetchBoard.contents);
+    const [updateInput, setUpdateInput] = useState({});
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        const id = e.target.id;
-        const value = e.target.value;
-
-        switch (id) {
-            case "title_ID": {
-                setTitle(value);
-                break;
-            }
-            case "content_ID": {
-                setContents(value);
-                break;
-            }
-        }
+        setUpdateInput((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value,
+        }));
+        console.log(updateInput);
     }
 
     const [updateBoard] = useMutation(UpdateBoardDocument);
@@ -36,20 +27,31 @@ export default function useUpdate() {
         const password = prompt("비밀번호를 입력해주세요");
 
         const updateData = {
-            boardId: Params.boardId,
-            password: password,
-            updateBoardInput: { title, contents },
+                title: updateInput.title_ID || data?.fetchBoard.title,
+                contents: updateInput.content_ID || data?.fetchBoard.contents,
+                youtubeUrl: updateInput.link_ID || data?.fetchBoard.youtubeUrl,
+                boardAddress: {
+                    zipcode: addressData.zonecode || data?.fetchBoard.boardAddress?.zipcode,
+                    address: addressData.address || data?.fetchBoard.boardAddress?.address,
+                    addressDetail: updateInput.address01_ID || data?.fetchBoard.boardAddress?.addressDetail,
+            },
         };
+        console.log(updateData);
 
         try {
             const result = await updateBoard({
-                variables: updateData,
+                variables: {
+                    boardId: Params.boardId,
+                    password: password,
+                    updateBoardInput: updateData
+                }
             });
             console.log(result);
 
             alert("수정이 완료 되었습니다!");
             Router.push(`/boards/${Params.boardId}`);
-        } catch (error) {
+        } catch (err) {
+            console.log(err);
             alert("비밀번호를 확인해주세요");
         }
     }

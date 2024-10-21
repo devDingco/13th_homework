@@ -1,18 +1,33 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import useUpdate from "@/commons/hooks/useUpdate";
+
+import Input from "@/components/Atoms/_Input";
+import AddressFieldUI from "@/components/Molecules/_AddrField";
 
 import Image from "next/image";
+import profile from "/public/svg/person.svg";
+import link from "/public/svg/link.svg";
+import location from "/public/svg/location.svg";
+import close from "/public/svg/close.svg";
+import menu from "/public/svg/menu.svg";
+import submit from "/public/svg/submit.svg";
+import edit from "/public/svg/edit.svg";
+
 import styles from "./styles.module.css";
-import Input from "@/components/Atoms/_Input";
 import { FrownFilled, HeartFilled } from "@ant-design/icons";
-import AddressFieldUI from "@/components/Molecules/_AddrField";
+import { Tooltip } from "antd";
+import YouTube from "react-youtube";
+
+import useUpdate from "@/commons/hooks/useUpdate";
+import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
-    const { handleChange, handleUpdate, data } = useUpdate();
+    const { isModalOpen, addressData, onToggleModal, handleComplete } =
+        useDaumPostApi();
+    const { handleChange, handleUpdate, data } = useUpdate({ addressData });
 
     return (
         <>
@@ -23,13 +38,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
                 <div className={styles.header_info}>
                     <div className={styles.info_profile}>
-                        <Image
-                            src="/svg/person.svg"
-                            alt="profile"
-                            width={24}
-                            height={24}
-                            sizes="100%"
-                        />
+                        <Image src={profile} alt="profile" />
                         <p className={isEdit ? styles.profile_text : ""}>
                             {data?.fetchBoard.writer}
                         </p>
@@ -38,26 +47,19 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                         <p className={isEdit ? styles.date_text : ""}>
                             {isEdit
                                 ? "**비밀번호**"
-                                : data?.fetchBoard.createdAt.split("T")[0]}
+                                : data?.fetchBoard.updatedAt.split("T")[0]}
                         </p>
                     </div>
                 </div>
 
                 <div className={styles.info_link}>
-                    <Image
-                        src="/svg/link.svg"
-                        alt="share"
-                        width={24}
-                        height={24}
-                        sizes="100%"
-                    />
-                    <Image
-                        src="/svg/location.svg"
-                        alt="location"
-                        width={24}
-                        height={24}
-                        sizes="100%"
-                    />
+                    <Image src={link} alt="share" />
+                    <Tooltip
+                        title={data?.fetchBoard.boardAddress?.address}
+                        color="#FFBE98"
+                    >
+                        <Image src={location} alt="location" />
+                    </Tooltip>
                 </div>
             </header>
 
@@ -74,7 +76,6 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                     {isEdit ? "" : data?.fetchBoard.contents}
                 </pre>
 
-                
                 {isEdit && (
                     <>
                         <Input
@@ -88,18 +89,30 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                             onChange={handleChange}
                             textarea
                         />
-                        <AddressFieldUI />
                     </>
                 )}
 
                 <div className={styles.main_video}>
-                    <Image
-                        src="/img/bg02.png"
-                        alt="video"
-                        width={660}
-                        height={360}
-                        sizes="100%"
-                    />
+                    {isEdit ? (
+                        <div>
+                            <AddressFieldUI
+                                onChange={handleChange}
+                                isModalOpen={isModalOpen}
+                                addressData={addressData}
+                                onToggleModal={onToggleModal}
+                                handleComplete={handleComplete}
+                                data={data}
+                                isEdit={true}
+                            />
+                            <Input
+                                id="link_ID"
+                                value={data?.fetchBoard.youtubeUrl}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    ) : (
+                        <YouTube videoId="e7g54ZvcKDI" />
+                    )}
                 </div>
 
                 <div className={styles.main_recommend}>
@@ -123,21 +136,9 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                         }
                     >
                         {isEdit ? (
-                            <Image
-                                src="/svg/close.svg"
-                                alt="close"
-                                width={24}
-                                height={24}
-                                sizes="100%"
-                            />
+                            <Image src={close} alt="close" />
                         ) : (
-                            <Image
-                                src="/svg/menu.svg"
-                                alt="menu"
-                                width={24}
-                                height={24}
-                                sizes="100%"
-                            />
+                            <Image src={menu} alt="menu" />
                         )}
                         <p>{isEdit ? "취소하기" : "목록으로"}</p>
                     </div>
@@ -153,21 +154,9 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                         }
                     >
                         {isEdit ? (
-                            <Image
-                                src="/svg/return.svg"
-                                alt="return"
-                                width={24}
-                                height={24}
-                                sizes="100%"
-                            />
+                            <Image src={submit} alt="submit" />
                         ) : (
-                            <Image
-                                src="/svg/edit.svg"
-                                alt="edit"
-                                width={24}
-                                height={24}
-                                sizes="100%"
-                            />
+                            <Image src={edit} alt="edit" />
                         )}
                         <p>{isEdit ? "수정완료" : "수정하기"}</p>
                     </div>
