@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2016", // 컴파일된 코드가 지원할 ECMAScript 버전을 지정합니다.
+    "module": "commonjs", // 컴파일러가 생성하는 코드를 어떤 모듈 시스템으로 할지 결정합니다.
+    "strict": true, // 모든 엄격한 형식 검사 옵션을 활성화합니다.
+    "esModuleInterop": true, // ES 모듈을 CommonJS 모듈로 가져오는 데 필요한 추가 코드를 생성합니다.
+    "skipLibCheck": true, // 라이브러리 검사를 건너뛰도록 설정합니다.
+    "forceConsistentCasingInFileNames": true, // 파일 이름의 일관성을 강제합니다.
+    "experimentalDecorators": true // ES7 데코레이터에 대한 실험적 지원을 활성화합니다.
+  },
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}

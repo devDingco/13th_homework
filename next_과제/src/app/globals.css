@@ -67,7 +67,7 @@ html
   }
 
   #writeContents {
-    @apply h-96 flex flex-col;
+    @apply flex flex-col min-h-[31.25rem];
   }
 }
 
