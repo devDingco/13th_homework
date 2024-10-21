@@ -14,7 +14,7 @@ export class BoardCommentResolver {
     @Query(() => [BoardCommentResponseDTO])
     getBoardComment(
         @Args('boardId', { type: () => Int }) boardId: number,
-        @Args('page', { type: () => Int }) page: number = 1,
+        @Args('page', { type: () => Int, nullable: true }) page: number = 1,
     ) {
         return this.boardCommentService.findAllComment(boardId, page);
     }

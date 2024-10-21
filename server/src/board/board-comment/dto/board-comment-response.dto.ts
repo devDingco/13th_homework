@@ -1,10 +1,9 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, OmitType } from '@nestjs/graphql';
 
-import { BoardCommentEntity } from '../entity/board-comment.entity';
-import { OmitType } from '@nestjs/mapped-types';
+import { BoardCommentSchema } from '../schema/board-comment.schema';
 
 @ObjectType()
-export class BoardCommentResponseDTO extends OmitType(BoardCommentEntity, [
+export class BoardCommentResponseDTO extends OmitType(BoardCommentSchema, [
     'password',
 ]) {
     @Field(() => [BoardCommentResponseDTO], { nullable: true })
