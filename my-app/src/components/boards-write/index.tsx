@@ -26,6 +26,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddress,
     setZipcode,
     data,
+
     // password,
   } = useBoardsWrite(props);
 
@@ -165,10 +166,11 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               className={props.styles.풀인풋}
               type="text"
               placeholder="주소를 입력해 주세요."
-              defaultValue={
-                props.isEdit ? data?.fetchBoard.boardAddress.address : ""
+              value={
+                address || props.data?.fetchBoard.boardAddress?.address || ""
               }
-              value={address}
+              //TODO 수정했다 안되면 돌려라
+              // value={address}
               onChange={(event) => setAddress(event.target.value)}
 
               // value={address}
