@@ -8,6 +8,7 @@ import { FETCH_BOARDS } from './queries';
 export default function useBoardList() {
     const router = useRouter();
     const params = useParams();
+    const [삭제함수이름] = useMutation(DeleteBoardDocument);
 
     const { data } = useQuery(FETCH_BOARDS, {
         variables: {
@@ -20,8 +21,6 @@ export default function useBoardList() {
         // console.log(event.currentTarget.id);
         router.push(`/boards/${event.currentTarget.id}`);
     };
-
-    const [삭제함수이름] = useMutation(DeleteBoardDocument);
 
     const onClickDelete = (event) => {
         event.stopPropagation();
