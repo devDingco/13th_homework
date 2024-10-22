@@ -13,3 +13,15 @@
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
   /* background: var(--Gray-W, #fff); */
 }
+
+.smallInput {
+  width: 50px;
+}
+
+.middleInput {
+  width: 100px;
+}
+
+.lagreInput {
+  width: 300px;
+}
