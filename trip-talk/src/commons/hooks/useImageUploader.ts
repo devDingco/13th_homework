@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import { UploadFileDocument } from "../graphql/graphql";
 import checkValidationFile from "../Libraries/checkValidationFile";
 import { ICheckValidationFile } from "../../types/components.type";
@@ -11,6 +11,7 @@ export default function useImageUploader() {
 
   const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    console.log(file);
 
     const isValid = checkValidationFile(file as ICheckValidationFile);
     if (!isValid) return true;
@@ -23,8 +24,15 @@ export default function useImageUploader() {
     fileRef.current?.click();
   };
 
+  const onCLickDelete = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setImageUrl("");
+  };
+
   return {
     onClickImage,
+    onCLickDelete,
     handleImageUpload,
     imageUrl,
     fileRef,
