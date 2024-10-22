@@ -9,14 +9,14 @@ import { FetchBoardDocument } from "@/commons/graphql/graphql";
 export default function useBoardsDetail (){
     const params = useParams();
     const router = useRouter();
-    // const id = params.boardId.toString(); // 갑자기 타입에러
-    const id = params.boardId;
-    // console.log(id);
+    const id = params.boardId.toString();
     
     const { data } = useQuery(FetchBoardDocument, {
         variables: { boardId: id },
     });
-    console.log(data);
+    console.log("전체 데이터", data);
+    console.log("boardId", id);
+    console.log("주소",data?.fetchBoard.boardAddress?.address);
 
     const onClickEdit = () => {
         router.push(`${id}/edit`)

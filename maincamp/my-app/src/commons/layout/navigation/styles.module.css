@@ -1,0 +1,46 @@
+.naviWrap{
+    width:192rem;
+    height:8rem;
+    margin:0 auto;
+}
+.naviBg{
+    width:128rem;
+    height:8rem;
+    margin:0 auto;
+    padding:2rem 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.naviLeft{
+    width:36.4rem;
+    display:flex;
+    align-items:center;
+    gap:2.4rem;
+}
+.naviLeft .logo{
+    width:5.6rem;
+    height:3.2rem;
+    background:url(../../../../public/images/logo\ area.png) no-repeat;
+}
+.naviLeft div{font-size:1.6rem;}
+.naviLeft div:nth-child(2){
+    font-weight:700;
+    border-bottom:2px solid #000;
+}
+
+.naviRight{
+    width:6.8rem;
+    display:flex;
+    align-items:center;
+}
+.naviRight .profileIcon{
+    width:4rem;
+    height:4rem;
+    background:url(../../../../public/images/navi_profile.png) no-repeat;
+}
+.naviRight .dropdown{
+    width:2.4rem;
+    height:2.4rem;
+    background:url(../../../../public/images/down_arrow.png) no-repeat;
+}
