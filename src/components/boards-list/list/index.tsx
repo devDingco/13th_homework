@@ -35,16 +35,19 @@ export default function BoardsComponentList() {
                                 {el.writer}
                             </div>
                             {/* <div>{ el.creactAt}</div> */}
-                            <div className={styles.BoardListBoxDelete}>
+                            <button
+                                className={styles.BoardListBoxDelete}
+                                onClick={onClickDelete}
+                            >
                                 <Image
-                                    src="/assets/delete.png"
+                                    src="/images/delete.png"
                                     alt="deleteImage"
                                     width={24}
                                     height={24}
                                     id={el._id}
                                     onClick={onClickDelete}
                                 ></Image>
-                            </div>
+                            </button>
                         </button>
                     ))
                 ) : (

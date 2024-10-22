@@ -31,13 +31,13 @@ export default function BoardsComponentDetail() {
                     <div className={styles.main}>
                         <div className={styles.mainlinklocation}>
                             <Image
-                                src="/assets/list.png"
+                                src="/images/list.png"
                                 alt="link"
                                 width={24}
                                 height={24}
                             ></Image>
                             <Image
-                                src="/assets/location.png"
+                                src="/images/location.png"
                                 alt="location"
                                 width={24}
                                 height={24}
@@ -47,7 +47,7 @@ export default function BoardsComponentDetail() {
                             <Image
                                 className={styles.mainPhoto}
                                 alt="mainphoto"
-                                src="/assets/beach.png"
+                                src="/images/beach.png"
                                 width={400}
                                 height={531}
                                 // layout="responsive"
@@ -57,7 +57,7 @@ export default function BoardsComponentDetail() {
                     </div>
                     <div className={styles.video}>
                         <Image
-                            src="/assets/fake_video.png"
+                            src="/images/fake_video.png"
                             alt="fake_video"
                             width={822}
                             height={464}
@@ -65,13 +65,13 @@ export default function BoardsComponentDetail() {
                     </div>
                     <div className={styles.videofeedback}>
                         <Image
-                            src="/assets/broken_heart.png"
+                            src="/images/broken_heart.png"
                             alt="videofeedback"
                             width={24}
                             height={24}
                         ></Image>
                         <Image
-                            src="/assets/heart.png"
+                            src="/images/heart.png"
                             alt="heart"
                             width={24}
                             height={24}

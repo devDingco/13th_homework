@@ -19,10 +19,10 @@ export default function useBoardListCommnetList() {
 
     return {
         data,
+        value,
         useState,
         useParams,
         useQuery,
-        value,
         setValue,
     };
 }

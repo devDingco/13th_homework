@@ -16,13 +16,13 @@ export default function useBoardList() {
         },
     });
 
-    const onClickMoveToDetailPage = async (event) => {
+    const onClickMoveToDetailPage = async (event: any) => {
         alert('상세페이지로 이동합니다');
         // console.log(event.currentTarget.id);
         router.push(`/boards/${event.currentTarget.id}`);
     };
 
-    const onClickDelete = (event) => {
+    const onClickDelete = (event: any) => {
         event.stopPropagation();
         삭제함수이름({
             variables: {
