@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 interface IPlanInputType {
+  id: number;
   title: string;
   startDate: string;
   endDate: string;
@@ -18,7 +19,9 @@ interface IPlanInputType {
 
 export default function usePlanNewPage() {
   const router = useRouter();
+  const [index, setIndex] = useState(1);
   const [plan, setPlan] = useState<IPlanInputType>({
+    id: index,
     title: "",
     startDate: "",
     endDate: "",
@@ -27,8 +30,6 @@ export default function usePlanNewPage() {
     destination: "",
     timeline: [],
   });
-  const [index, setIndex] = useState(1);
-
   const [isActive, setIsActive] = useState(true);
 
   const { createDocument } = FirebaseAPI();
@@ -36,8 +37,16 @@ export default function usePlanNewPage() {
   const initDocumentIndex = async (name: CollectionList) => {
     const documents = await getDocs(collection(db, name));
     if (documents.docs.length !== 0) {
+      // 마지막 문서의 id 보다 +1 증가한 값을 새로 생성하는 문서의 인덱스로 사용한다.
       const index = Number(documents.docs[documents.docs.length - 1].id) + 1;
       setIndex(Number(index));
+      // 처음 문서의 인덱스를 초기화하면서, 생성될 인덱스의 번호도 초기화해준다.
+      setPlan((prev) => {
+        return {
+          ...prev,
+          id: index,
+        };
+      });
     }
   };
 
