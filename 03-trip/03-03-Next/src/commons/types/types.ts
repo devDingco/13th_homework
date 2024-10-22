@@ -40,6 +40,8 @@ export const InputPlaceholder: ISubmitInput = {
     zipcode_ID: "01234",
     address00_ID: "주소를 검색해 주세요.",
     address01_ID: "상세주소를 입력해 주세요.",
+
+    search_ID: "검색어를 입력해 주세요.",
 };
 
 export interface ILayoutProps {

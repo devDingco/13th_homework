@@ -6,7 +6,7 @@ import useDelete from "@/commons/hooks/useDelete";
 
 import styles from "./styles.module.css";
 
-export default function BoardsListUI({ data, count, current }) {
+export default function BoardsListUI({ data, count, current, keyword }) {
     const Router = useRouter();
 
     const onClickDelete: MouseEventHandler = useDelete();
@@ -30,7 +30,24 @@ export default function BoardsListUI({ data, count, current }) {
                         onClick={() => Router.push(`/boards/${el._id}`)}
                     >
                         <div className={styles.idx}>{postNum - idx}</div>
-                        <div className={styles.title}>{el.title}</div>
+                        <div className={styles.title}>
+                            {el.title
+                                .replaceAll(keyword, `@_¡¡${keyword}@_¡¡`)
+                                .split("@_¡¡")
+                                .map((el, idx) => (
+                                    <span
+                                        key={`${el}_${idx}`}
+                                        style={{
+                                            color:
+                                                el === keyword
+                                                    ? "#f55"
+                                                    : "#222",
+                                        }}
+                                    >
+                                        {el}
+                                    </span>
+                                ))}
+                        </div>
                         <div className={styles.author}>{el.writer}</div>
                         <div className={styles.date}>
                             {el.createdAt.split("T")[0]}

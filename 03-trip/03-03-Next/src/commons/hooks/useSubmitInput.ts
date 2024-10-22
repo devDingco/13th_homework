@@ -42,13 +42,13 @@ export default function useSubmitInput({ addressData, imageUrl }) {
                         password: submitInput.password_ID,
                         title: submitInput.title_ID,
                         contents: submitInput.content_ID,
-                        youtubeUrl: submitInput.author_ID,
+                        youtubeUrl: submitInput.link_ID,
                         boardAddress: {
                             zipcode: addressData?.zonecode,
                             address: addressData?.address,
                             addressDetail: submitInput.address01_ID,
                         },
-                        images: [String(imageUrl)],
+                        images: imageUrl,
                     },
                 },
             });

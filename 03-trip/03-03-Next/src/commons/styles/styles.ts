@@ -7,7 +7,7 @@ export const BtnStyle = {
     borderRadius: "8px",
     backgroundColor: "#fafafa",
     cursor: "pointer",
-    margin: "4px 0px",
+    flexShrink: 0,
 };
 
 // for input tag (in atoms)

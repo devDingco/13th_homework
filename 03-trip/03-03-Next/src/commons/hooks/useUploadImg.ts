@@ -12,7 +12,6 @@ export default function useUploadImg() {
     const onChangeFile = async (e: ChangeEvent<HTMLInputElement>) => {
         const id = e.target.id;
         const file = e.target.files?.[0];
-        console.log(id);
         console.log(file);
 
         const isValid = checkImgFile(file);
@@ -36,16 +35,8 @@ export default function useUploadImg() {
         }
     };
 
-    console.log(imageUrl);
-
     return {
         imageUrl,
         onChangeFile,
     };
 }
-
-// setImageUrl((prev) => [
-//     ...prev.map((el, idx) => {
-//         el[id === idx] = result.data?.uploadFile.url ?? "";
-//     }),
-// ]);
