@@ -10,6 +10,7 @@ export const register = gql`
       createdAt
       updatedAt
       youtubeUrl
+      images
       boardAddress {
         zipcode
         address
@@ -38,6 +39,7 @@ export const UPDATE_BOARD = gql`
       updatedAt
       writer
       youtubeUrl
+      images
       boardAddress {
         address
         addressDetail
@@ -57,6 +59,7 @@ export const FetchBoard = gql`
       contents
       createdAt
       youtubeUrl
+      images
       boardAddress {
         address
         zipcode
@@ -142,6 +145,16 @@ export const FetchBoards = gql`
       title
       createdAt
       _id
+      images
+    }
+  }
+`;
+
+// 사진 등록
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
     }
   }
 `;

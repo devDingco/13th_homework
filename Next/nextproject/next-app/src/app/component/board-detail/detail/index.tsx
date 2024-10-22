@@ -6,10 +6,13 @@ import CommentPage from "../comment-write";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 import YouTube from "react-youtube";
 import { Tooltip } from "antd";
+import { IDetailProps } from "./types";
 
-export default function DetailWrite() {
+export default function DetailWrite(props: IDetailProps) {
   const { onModify, data, onList } = UseDetailWrite();
   console.log(data, "ddd");
+  console.log(data?.fetchBoard.images.length);
+
   return (
     <div className={styles.css_layout}>
       <div className={styles.css_header}>{data?.fetchBoard?.title}</div>
@@ -57,15 +60,20 @@ export default function DetailWrite() {
         </div>
       </div>
       <div>
-        <div className={styles.css_image}>
-          <Image
-            src="/assets/MainImage.png"
-            width={0}
-            height={0}
-            sizes="100vw"
-            alt="mainimage"
-            className={styles.css_image}
-          />
+        <div>
+          {data &&
+            (data.fetchBoard.images && data.fetchBoard.images.length > 0 ? ( // 배열이 비어있을 때 index가 undefined가 나옴 그래서 배열 길이 체크
+              <Image
+                src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}
+                width={0}
+                height={0}
+                sizes="100vw"
+                alt="mainimage"
+                className={styles.css_image}
+              />
+            ) : (
+              <p>이미지가 없습니다.</p> // 대체 UI
+            ))}
         </div>
       </div>
       <div className={styles.css_text}>{data?.fetchBoard?.contents}</div>

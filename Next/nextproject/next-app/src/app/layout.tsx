@@ -4,6 +4,7 @@ import "./globals.css";
 import * as React from "react";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 import LayoutComponent from "./component/commons/layout";
+import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -26,11 +27,11 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ApolloSetting>
+        <ApolloUploadSetting>
           <div></div>
           <LayoutComponent>{children}</LayoutComponent>
           <div></div>
-        </ApolloSetting>
+        </ApolloUploadSetting>
       </body>
     </html>
   );
