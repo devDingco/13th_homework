@@ -1,0 +1,164 @@
+.post_detail_main_body {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.post_detail_main {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  justify-content: center;
+  gap: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.info_box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info_user_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info_user {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user_profile {
+  width: 24px;
+  height: 24px;
+}
+
+.user_name {
+  color: #5f5f5f;
+  font-size: 14px;
+}
+
+.user_date {
+  color: #818181;
+  font-size: 14px;
+}
+
+.link_location_btn_group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.link_btn_box {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.link_btn_box img {
+  display: block;
+}
+
+.location_btn_box {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.location_btn_box img {
+  display: block;
+}
+
+.image_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+.main_image {
+  width: 400px;
+  height: auto;
+}
+
+.video_box {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  background-color: #f2f2f2;
+}
+
+.video_box img {
+  width: 822px;
+  height: 464px;
+}
+
+.reaction_btn_group {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.dislike_btn_group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.like_btn_group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dislike_count {
+  color: #5f5f5f;
+  font-size: 14px;
+  text-align: center;
+}
+
+.like_count {
+  color: #f66a6a;
+  font-size: 14px;
+  text-align: center;
+}
+
+.list_edit_btn_group {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.list_btn {
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  line-height: 24px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.edit_btn {
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  line-height: 24px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+}
