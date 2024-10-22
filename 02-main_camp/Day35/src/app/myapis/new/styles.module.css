@@ -23,20 +23,67 @@
 }
 
 .inputForm {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.inputForm::after {
+.dateForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* .inputForm::after {
   content: "";
   border: 0.0625rem solid #e4e4e4;
   margin-top: 2.5rem;
-}
+} */
 
 .inputFormContainer .inputForm input {
   height: 3rem;
   border-radius: 0.5rem;
   border: 0.0625rem solid #d4d3d3;
   padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.inputFormContainer .dateForm input {
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.locationContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button {
+  width: 5.3125rem;
+  height: 2.5rem;
+  background-color: #c7c7c7;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #e4e4e4;
+  border-radius: 0.5rem;
+}
+
+.submitButton_enable {
+  background-color: #2974e5;
+  color: white;
+}
+
+.cancelButton {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
