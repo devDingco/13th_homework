@@ -10,13 +10,13 @@ const BoardsList = ({ data, refetch }: IBoardsListProps) => {
       <main className={styles.boards_MainContainer}>
         <BoardsHeader />
         <ul className={styles.boards_ul}>
-          {data?.fetchBoards.map((el: any, index: number) => (
+          {data?.fetchBoards.map((el, index) => (
             <Board
               key={el._id}
               id={el._id}
               index={index + 1}
               title={el.title}
-              writer={el.writer}
+              writer={el.writer ?? ""}
               refetch={refetch}
             />
           ))}
