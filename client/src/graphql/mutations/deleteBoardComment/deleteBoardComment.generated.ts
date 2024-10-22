@@ -1,27 +1,23 @@
-/** @format */
-
-import * as Apollo from '@apollo/client';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-
+import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type DeleteBoardCommentMutationVariables = Types.Exact<{
-	boardId: Types.Scalars['Int']['input'];
-	commentId: Types.Scalars['String']['input'];
+  boardId: Types.Scalars['Int']['input'];
+  commentId: Types.Scalars['String']['input'];
 }>;
 
-export type DeleteBoardCommentMutation = { __typename?: 'Mutation'; deleteBoardComment: boolean };
+
+export type DeleteBoardCommentMutation = { __typename?: 'Mutation', deleteBoardComment: boolean };
+
 
 export const DeleteBoardCommentDocument = gql`
-	mutation DeleteBoardComment($boardId: Int!, $commentId: String!) {
-		deleteBoardComment(boardId: $boardId, commentId: $commentId)
-	}
-`;
-export type DeleteBoardCommentMutationFn = Apollo.MutationFunction<
-	DeleteBoardCommentMutation,
-	DeleteBoardCommentMutationVariables
->;
+    mutation DeleteBoardComment($boardId: Int!, $commentId: String!) {
+  deleteBoardComment(boardId: $boardId, commentId: $commentId)
+}
+    `;
+export type DeleteBoardCommentMutationFn = Apollo.MutationFunction<DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables>;
 
 /**
  * __useDeleteBoardCommentMutation__
@@ -41,21 +37,10 @@ export type DeleteBoardCommentMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDeleteBoardCommentMutation(
-	baseOptions?: Apollo.MutationHookOptions<
-		DeleteBoardCommentMutation,
-		DeleteBoardCommentMutationVariables
-	>,
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useMutation<DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables>(
-		DeleteBoardCommentDocument,
-		options,
-	);
-}
+export function useDeleteBoardCommentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables>(DeleteBoardCommentDocument, options);
+      }
 export type DeleteBoardCommentMutationHookResult = ReturnType<typeof useDeleteBoardCommentMutation>;
 export type DeleteBoardCommentMutationResult = Apollo.MutationResult<DeleteBoardCommentMutation>;
-export type DeleteBoardCommentMutationOptions = Apollo.BaseMutationOptions<
-	DeleteBoardCommentMutation,
-	DeleteBoardCommentMutationVariables
->;
+export type DeleteBoardCommentMutationOptions = Apollo.BaseMutationOptions<DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables>;

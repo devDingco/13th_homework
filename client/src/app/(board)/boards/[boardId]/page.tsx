@@ -1,4 +1,5 @@
 /** @format */
+'use client';
 
 import { boardUrlEndPoint, reactionUrlEndPoint } from '~/config/axiosConfig';
 
@@ -23,6 +24,10 @@ export default function DetailPage({ params }: IDetailProps) {
 		<div className="flex flex-col gap-4">
 			<ErrorBoundary fallback={<ErrorComponent />}>
 				<Suspense fallback={<BoardSkeleton />}>
+					{/* <ComposeSuspenseWrapper
+						resource={wrapPromise(commonGet(`${boardUrlEndPoint}/${boardId}`))}
+						Component={BoardIdContainer}
+					/> */}
 					<ComposeSuspenseWrapper
 						resource={wrapPromise(commonGet(`${boardUrlEndPoint}/${boardId}`))}
 						Component={BoardIdContainer}

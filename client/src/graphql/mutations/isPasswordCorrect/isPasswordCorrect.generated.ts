@@ -1,27 +1,23 @@
-/** @format */
-
-import * as Apollo from '@apollo/client';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-
+import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type IsPasswordCorrectMutationVariables = Types.Exact<{
-	boardId: Types.Scalars['Int']['input'];
-	password: Types.Scalars['String']['input'];
+  boardId: Types.Scalars['Int']['input'];
+  password: Types.Scalars['String']['input'];
 }>;
 
-export type IsPasswordCorrectMutation = { __typename?: 'Mutation'; isPasswordCorrect: boolean };
+
+export type IsPasswordCorrectMutation = { __typename?: 'Mutation', isPasswordCorrect: boolean };
+
 
 export const IsPasswordCorrectDocument = gql`
-	mutation IsPasswordCorrect($boardId: Int!, $password: String!) {
-		isPasswordCorrect(boardId: $boardId, password: $password)
-	}
-`;
-export type IsPasswordCorrectMutationFn = Apollo.MutationFunction<
-	IsPasswordCorrectMutation,
-	IsPasswordCorrectMutationVariables
->;
+    mutation IsPasswordCorrect($boardId: Int!, $password: String!) {
+  isPasswordCorrect(boardId: $boardId, password: $password)
+}
+    `;
+export type IsPasswordCorrectMutationFn = Apollo.MutationFunction<IsPasswordCorrectMutation, IsPasswordCorrectMutationVariables>;
 
 /**
  * __useIsPasswordCorrectMutation__
@@ -41,21 +37,10 @@ export type IsPasswordCorrectMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useIsPasswordCorrectMutation(
-	baseOptions?: Apollo.MutationHookOptions<
-		IsPasswordCorrectMutation,
-		IsPasswordCorrectMutationVariables
-	>,
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useMutation<IsPasswordCorrectMutation, IsPasswordCorrectMutationVariables>(
-		IsPasswordCorrectDocument,
-		options,
-	);
-}
+export function useIsPasswordCorrectMutation(baseOptions?: Apollo.MutationHookOptions<IsPasswordCorrectMutation, IsPasswordCorrectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<IsPasswordCorrectMutation, IsPasswordCorrectMutationVariables>(IsPasswordCorrectDocument, options);
+      }
 export type IsPasswordCorrectMutationHookResult = ReturnType<typeof useIsPasswordCorrectMutation>;
 export type IsPasswordCorrectMutationResult = Apollo.MutationResult<IsPasswordCorrectMutation>;
-export type IsPasswordCorrectMutationOptions = Apollo.BaseMutationOptions<
-	IsPasswordCorrectMutation,
-	IsPasswordCorrectMutationVariables
->;
+export type IsPasswordCorrectMutationOptions = Apollo.BaseMutationOptions<IsPasswordCorrectMutation, IsPasswordCorrectMutationVariables>;

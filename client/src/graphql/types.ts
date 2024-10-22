@@ -32,11 +32,11 @@ export type BoardCommentResponseDto = {
   __typename?: 'BoardCommentResponseDTO';
   _id: Scalars['ID']['output'];
   author: Scalars['String']['output'];
-  boardId: Scalars['Float']['output'];
+  boardId: Scalars['Int']['output'];
   content: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   parentId?: Maybe<Scalars['String']['output']>;
-  rating?: Maybe<Scalars['Float']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
   replies?: Maybe<Array<BoardCommentResponseDto>>;
   updatedAt: Scalars['DateTime']['output'];
 };
