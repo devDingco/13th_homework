@@ -35,11 +35,11 @@ export type BoardCommentResponseDto = {
   __typename?: 'BoardCommentResponseDTO';
   _id: Scalars['ID']['output'];
   author: Scalars['String']['output'];
-  boardId: Scalars['Float']['output'];
+  boardId: Scalars['Int']['output'];
   content: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   parentId?: Maybe<Scalars['String']['output']>;
-  rating?: Maybe<Scalars['Float']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
   replies?: Maybe<Array<BoardCommentResponseDto>>;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -361,7 +361,6 @@ export type ResolversTypes = {
   CreateBoardCommentInput: CreateBoardCommentInput;
   CreateBoardInput: CreateBoardInput;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
-  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -383,7 +382,6 @@ export type ResolversParentTypes = {
   CreateBoardCommentInput: CreateBoardCommentInput;
   CreateBoardInput: CreateBoardInput;
   DateTime: Scalars['DateTime']['output'];
-  Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Mutation: {};
@@ -403,11 +401,11 @@ export type BoardAddressOutputResolvers<ContextType = any, ParentType extends Re
 export type BoardCommentResponseDtoResolvers<ContextType = any, ParentType extends ResolversParentTypes['BoardCommentResponseDTO'] = ResolversParentTypes['BoardCommentResponseDTO']> = {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  boardId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  boardId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   parentId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  rating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  rating?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   replies?: Resolver<Maybe<Array<ResolversTypes['BoardCommentResponseDTO']>>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
