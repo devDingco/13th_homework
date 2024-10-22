@@ -5,10 +5,20 @@ import Input from "../input";
 import Textarea from "../textarea";
 import FormField from "../FormField";
 import { Button } from "../ui/button";
+import ImageUpload from "../ImageUpload";
 
 export default function BoardForm({ isEdit }: IBoardFormProps) {
-  const { handleChange, handleSubmit, formData, isButtonEnabled, router } =
-    useBoardForm({ isEdit });
+  const {
+    handleChange,
+    handleSubmit,
+    formData,
+    isButtonEnabled,
+    router,
+    onClickImage,
+    onChangeFile,
+    fileRefs,
+    images,
+  } = useBoardForm({ isEdit });
 
   return (
     <div className="flex justify-center pt-10">
@@ -98,6 +108,18 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
           </FormField>
           <hr />
           {/* MARK: 사진 첨부 기능 */}
+          <div className="flex gap-4">
+            {[0, 1, 2].map((index) => (
+              <ImageUpload
+                key={index}
+                onClickImage={() => onClickImage(index)}
+                onChangeFile={(event) => onChangeFile(event, index)}
+                fileRef={fileRefs[index]}
+                url={images[index]}
+              />
+            ))}
+          </div>
+
           {/* MARK: 취소, 등록/수정 버튼 */}
           <div className={styles.취소등록버튼상자}>
             <Button onClick={() => router.back()}>취소</Button>

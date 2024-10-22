@@ -3,10 +3,18 @@ import {
   CreateBoardDocument,
   FetchBoardDocument,
   UpdateBoardDocument,
+  UploadFileDocument,
 } from "@/commons/graphql/graphql";
 import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 // #region 필수 입력 필드 배열 정의
 const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
@@ -17,7 +25,14 @@ const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
 ];
 
 export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
+  const [images, setImages] = useState<string[]>(["", "", ""]);
+
   const router = useRouter();
+  const fileRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   //#region 폼 데이터 상태 관리
   const [formData, setFormData] = useState<IFormDataProps>({
@@ -27,7 +42,7 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     contents: "",
     boardAddress: { zipcode: "", address: "", addressDetail: "" },
     youtubeUrl: "",
-    images: [],
+    images: ["", "", ""],
   });
   //#endregion
 
@@ -37,6 +52,7 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   //#region GraphQL 뮤테이션 훅
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [uploadFile] = useMutation(UploadFileDocument);
 
   const params = useParams(); //동적 라우팅, boardID에 접근한다
   const boardId = params.boardId as string;
@@ -83,6 +99,39 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   };
   //#endregion
 
+  //#region 이미지 업로드
+  const onChangeFile = async (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const result = await uploadFile({
+        variables: {
+          file,
+        },
+      });
+      const imageUrl = result.data?.uploadFile.url || "";
+      setImages((prev) => {
+        const newImages = [...prev];
+        newImages[index] = imageUrl;
+        return newImages;
+      });
+      setFormData((prev) => ({
+        ...prev,
+        images: prev.images?.map((img, i) => (i === index ? imageUrl : img)),
+      }));
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
+  const onClickImage = (index: number) => {
+    fileRefs[index].current?.click();
+  };
+
   //#region 버튼 활성화 여부 결정
   const isButtonEnabled = useMemo(() => {
     if (isEdit) {
@@ -108,10 +157,8 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     if (!isButtonEnabled) return;
 
     const variables = {
-      ...(formData.title && { title: formData.title }),
-      ...(formData.contents && { contents: formData.contents }),
-      ...(formData.youtubeUrl && { youtubeUrl: formData.youtubeUrl }),
-      //...(formData.boardAddress && { boardAddress: formData.boardAddress }),
+      ...formData,
+      images,
     };
 
     try {
@@ -191,5 +238,9 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     formData,
     isButtonEnabled,
     router,
+    onClickImage,
+    onChangeFile,
+    fileRefs,
+    images,
   };
 }
