@@ -19,6 +19,8 @@ export default function useMyPlanWrite() {
     destination: "",
     timeline: [],
   });
+
+  // 필수 항목 입력 확인 후 [등록하기] 버튼 활성화하도록 추후 구현 필요.
   const [isActive, setIsActive] = useState(true);
 
   const { createDocument } = FirebaseAPI();
