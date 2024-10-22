@@ -15,8 +15,8 @@ export const useBoardWrite = () => {
 
     const [writer, setwriter] = useState('');
     const [password, setPassword] = useState('');
-    const [title, setTitle] = useState();
-    const [contents, setContents] = useState();
+    const [title, setTitle] = useState('');
+    const [contents, setContents] = useState('');
 
     const [writerError, setwriterError] = useState('');
     const [passwordError, setPassworError] = useState('');
@@ -91,7 +91,7 @@ export const useBoardWrite = () => {
             writer !== '' &&
             password !== '' &&
             title !== '' &&
-            contents !== event.target.value
+            contents !== ''
         ) {
             setIsActive(true);
         }

@@ -24,22 +24,9 @@ body {
     color: var(--foreground);
     background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    justify-content: center;
-}
-
-@layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
 }
 
 hr {
     margin: 40px 0;
     border: 1px solid var(--gray-200, #d4d3d3);
-}
-
-img {
-    margin-right: 10px;
-    /* border-radius: 8px; */
 }
