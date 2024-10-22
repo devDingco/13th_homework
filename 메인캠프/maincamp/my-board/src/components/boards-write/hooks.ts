@@ -5,7 +5,7 @@ import {
 } from '@/commons/graphql/graphql';
 import { ApolloError, useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from 'react';
 import { IBoardWrite } from './types';
 import { Modal } from 'antd';
 import { Address } from 'react-daum-postcode';
@@ -13,6 +13,8 @@ import { Address } from 'react-daum-postcode';
 export function useBoardWrite(props: IBoardWrite) {
   const router = useRouter();
   const params = useParams();
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
   // 제목, 내용, 작성자 상태를 하나의 객체로 통합
   const [formState, setFormState] = useState({
     user: '',
@@ -20,6 +22,7 @@ export function useBoardWrite(props: IBoardWrite) {
     content: '',
   });
   const [password, setPassword] = useState<string>('');
+
   const [error, setError] = useState<string>('');
 
   const [isActive, setIsActive] = useState(false);
@@ -32,14 +35,25 @@ export function useBoardWrite(props: IBoardWrite) {
   const [myBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
 
-  const openUploadImg = (
-    id: 'fileInput1' | 'fileInput2' | 'fileInput3'
-  ): void => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.click();
+  // 수정 모드일 때 기존 이미지를 설정
+  useEffect(() => {
+    if (props.isEdit && props.data?.fetchBoard?.images) {
+      setImageUrls([...props.data.fetchBoard.images]); // 기존 이미지 설정
     }
+  }, [props.isEdit, props.data]);
+
+  const handleImageUrlsUpdate = (newImageUrls: string[]) => {
+    setImageUrls(newImageUrls); // 자식 컴포넌트에서 받은 이미지 URL을 업데이트
   };
+  // ref 없을떄
+  // const openUploadImg = (
+  //   id: 'fileInput1' | 'fileInput2' | 'fileInput3'
+  // ): void => {
+  //   const element = document.getElementById(id);ㅂ
+  //   if (element) {
+  //     element.click();
+  //   }
+  // };
   const checkAllField = () => {
     const { user, title, content } = formState;
     if (props.isEdit) {
@@ -74,27 +88,11 @@ export function useBoardWrite(props: IBoardWrite) {
     checkAllField();
   };
 
-  //비밀번호 핸들러 함수
-
-  // const handleChangePw = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const value = e.target.value;
-  //   setPassword(value);
-  //   if (value) {
-  //     const errorMsg = document.getElementsByClassName(
-  //       'errorMsg'
-  //     )[1] as HTMLElement | null;
-  //     if (errorMsg) {
-  //       errorMsg.style.display = 'none';
-  //     }
-  //   }
-
-  //   checkAllField(user, value, title, content);
-  // };
-
   //등록하기 함수
   const registerFunc = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { user, title, content } = formState;
+
     try {
       const result = await myBoard({
         variables: {
@@ -103,6 +101,7 @@ export function useBoardWrite(props: IBoardWrite) {
             title: title,
             password: password,
             contents: content,
+            images: imageUrls,
             boardAddress: {
               zipcode: zonecode,
               address: address,
@@ -197,6 +196,7 @@ export function useBoardWrite(props: IBoardWrite) {
           updateBoardInput: {
             title: title || props.data?.fetchBoard?.title,
             contents: content || props.data?.fetchBoard?.contents,
+            images: imageUrls,
             boardAddress: {
               zipcode: zonecode || props.data?.fetchBoard.boardAddress?.zipcode,
               address: address || props.data?.fetchBoard.boardAddress?.address,
@@ -277,7 +277,6 @@ export function useBoardWrite(props: IBoardWrite) {
   return {
     handleChange,
     handleChangePw,
-    openUploadImg,
     updateFunc,
     registerFunc,
     isActive,
@@ -292,5 +291,7 @@ export function useBoardWrite(props: IBoardWrite) {
     onChangeZipcode,
     onChangeDetailAddress,
     onChangeYoutubeUrl,
+    handleImageUrlsUpdate,
+    imageUrls,
   };
 }

@@ -64,12 +64,25 @@ export default function BoardsDetail() {
           <p className="text-black prose-r_16_24">
             {data?.fetchBoard.contents || ''}
           </p>
+          {data?.fetchBoard.images?.map((imageUrl: string[], index: number) => (
+            <div key={index}>
+              <Image
+                className="h-auto"
+                src={`https://storage.googleapis.com/${imageUrl}`}
+                alt={`${index + 1} 이미지`}
+                width={300}
+                height={0}
+              />
+            </div>
+          ))}
         </div>
       </div>
-      <YouTube
-        videoId={data?.fetchBoard.youtubeUrl?.split('=')[1]}
-        opts={youtubeOpts}
-      />
+      {data?.fetchBoard.youtubeUrl && (
+        <YouTube
+          videoId={data?.fetchBoard.youtubeUrl?.split('=')[1]}
+          opts={youtubeOpts}
+        />
+      )}
       <div className="flex w-full justify-center text-center gap-6">
         {/* 추후 각각의 div을 만지면 count */}
         <div className="flex flex-col">
@@ -105,14 +118,24 @@ export default function BoardsDetail() {
           onClick={() => router.push('/boards')}
           className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20"
         >
-          <img className="w-4 h-auto" src="/images/list_icon.png" alt="목록" />
+          <Image
+            src="/images/list_icon.png"
+            alt="목록"
+            width={16}
+            height={16}
+          />
           목록으로
         </button>
         <button
           onClick={() => router.push(`/boards/${data?.fetchBoard._id}/edit`)}
           className="flex justify-center items-center h-8 p-4 gap-1 rounded-lg border-solid border border-black text-center bg-none font-bold text-black prose-sb_14_20"
         >
-          <img className="w-4 h-auto" src="/images/edit_icon.png" alt="수정" />
+          <Image
+            src="/images/edit_icon.png"
+            alt="수정"
+            width={16}
+            height={16}
+          />
           수정하기
         </button>
       </div>

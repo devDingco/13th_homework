@@ -1,4 +1,5 @@
 import CommentListItem from '../comment-list-item';
+import { IBoardComment, ICommentWrite } from '../comment-write/types';
 import { useCommentList } from './hooks';
 import styles from './styles.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -16,7 +17,7 @@ export default function CommentList() {
             loader={<div>댓글 로딩중...</div>}
             dataLength={data?.fetchBoardComments.length ?? 0}
           >
-            {data?.fetchBoardComments?.map((el, index) => (
+            {data?.fetchBoardComments?.map((el: IBoardComment) => (
               <CommentListItem el={el} key={el._id} />
             ))}
           </InfiniteScroll>
