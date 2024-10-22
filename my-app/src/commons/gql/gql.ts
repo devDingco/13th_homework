@@ -17,7 +17,7 @@ const documents = {
     "\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      contents\n    }\n  }\n": types.CreateBoardCommentDocument,
     "\n  mutation updateBoardComment(\n    $password: String\n    $boardCommentId: ID!\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n  ) {\n    updateBoardComment(\n      password: $password\n      boardCommentId: $boardCommentId\n      updateBoardCommentInput: $updateBoardCommentInput\n    ) {\n      _id\n      writer\n      contents\n      rating\n      updatedAt\n      createdAt\n    }\n  }\n": types.UpdateBoardCommentDocument,
     "\n  query fetchBoard($boardId: ID!) {\n    fetchBoard(boardId: $boardId) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n      youtubeUrl\n      boardAddress {\n        zipcode\n        address\n        addressDetail\n      }\n      images\n    }\n  }\n": types.FetchBoardDocument,
-    "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n": types.FetchBoardsDocument,
+    "\n  query fetchBoards($mypage: Int, $mysearch: String) {\n    fetchBoards(page: $mypage, search: $mysearch) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n": types.FetchBoardsDocument,
     "\n  mutation deleteBoard($board_id: ID!) {\n    deleteBoard(boardId: $board_id)\n  }\n": types.DeleteBoardDocument,
     "\n  query fetchBoardsCount {\n    fetchBoardsCount\n  }\n": types.FetchBoardsCountDocument,
     "\n  mutation createBoard($createBoardInput: CreateBoardInput!) {\n    createBoard(createBoardInput: $createBoardInput) {\n      _id\n      writer\n      title\n      contents\n      boardAddress {\n        _id\n        zipcode\n        address\n        addressDetail\n      }\n      youtubeUrl\n      images\n    }\n  }\n": types.CreateBoardDocument,
@@ -58,7 +58,7 @@ export function graphql(source: "\n  query fetchBoard($boardId: ID!) {\n    fetc
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  query fetchBoards($mypage: Int) {\n    fetchBoards(page: $mypage) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n"];
+export function graphql(source: "\n  query fetchBoards($mypage: Int, $mysearch: String) {\n    fetchBoards(page: $mypage, search: $mysearch) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  query fetchBoards($mypage: Int, $mysearch: String) {\n    fetchBoards(page: $mypage, search: $mysearch) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

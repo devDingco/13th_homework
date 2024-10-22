@@ -1,13 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import {
-  ChangeEvent,
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import type { IBoardsWriteProps, IupdateVariables, IInput } from "./types";
 import {
   CreateBoardDocument,
