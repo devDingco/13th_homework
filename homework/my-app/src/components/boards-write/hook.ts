@@ -1,7 +1,12 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queries";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  CREATE_BOARD,
+  FETCH_BOARD,
+  UPDATE_BOARD,
+  UPLOAD_FILE,
+} from "./queries";
 import { IBoardWriteprops } from "./type";
 import { Address } from "react-daum-postcode";
 import { FetchBoardQuery } from "@/commons/graphql/graphql";
@@ -27,12 +32,30 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
 
   const [content, setContent] = useState(data?.fetchBoard.contents || "");
 
+  // 수정 모드에서 데이터를 불러와 초기값 설정
+  useEffect(() => {
+    if (props.isEdit && data?.fetchBoard) {
+      setInputs((prev) => ({
+        ...prev,
+        writer: data.fetchBoard.writer || "",
+        title: prev.title || data.fetchBoard.title || "",
+      }));
+      setContent(data.fetchBoard.contents || "");
+    }
+  }, [props.isEdit, data]);
+
+  const [imageUrl, setImageUrl] = useState(data?.fetchBoard.images?.[0] || "");
+  const [isImageDeleted, setIsImageDeleted] = useState(false);
+
+  const [uploadFile] = useMutation(UPLOAD_FILE);
+
   useEffect(() => {
     if (!props.isEdit) return; // isEdit이 false면 실행하지 않음
     const enteredPassword = prompt("비밀번호를 입력하세요");
 
     if (!enteredPassword) {
       alert("비밀번호가 입력되지 않았습니다.");
+      router.push("/boards");
       return;
     }
 
@@ -49,27 +72,27 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
                 address: address || "",
                 addressDetail: addressDetail || "",
               },
-              images: [],
+              images: [imageUrl],
             },
             password: enteredPassword,
             boardId: params.boardId,
           },
         });
         setInputs((prev) => ({
-          ...prev, // 기존 입력값 복사
-          password: enteredPassword, // password만 업데이트
+          ...prev,
+          password: enteredPassword,
         }));
         console.log(result);
       } catch (error: any) {
         console.log(error.message);
 
-        // 에러 메시지에 "비밀번호가 일치하지 않습니다."가 포함되어 있는지 확인
         if (error.message.includes("비밀번호가 일치하지 않습니다.")) {
           alert("비밀번호가 틀렸습니다. 다시 시도해 주세요.");
-          router.push("/board"); // 비밀번호가 틀리면 다른 페이지로 리다이렉트
+          router.push("/boards");
         } else {
           alert("다른 에러가 발생했습니다.");
-          router.push("/board");
+          router.push("/boards");
+          console.log("알수없는 에러", error);
         }
       }
     };
@@ -126,7 +149,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
               address: address,
               addressDetail: addressDetail,
             },
-            images: [],
+            images: [imageUrl],
           },
         },
       });
@@ -140,42 +163,33 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
 
   const onClickUpdate = async () => {
     try {
-      const updateBoardInput: any = {
-        // title, content 수정 안했으면 기존 값 유지, 수정했을 때 지울 수 있도록 빈 값 전달
-        title:
-          inputs.title !== undefined ? inputs.title : data?.fetchBoard.title,
-        contents: content !== undefined ? content : data?.fetchBoard.contents,
-        youtubeUrl:
-          youtubeUrl !== undefined ? youtubeUrl : data?.fetchBoard.youtubeUrl,
-
-        // 주소도 마찬가지로 null이나 빈 값이 올 수 있도록 설정
+      const updateBoardInput = {
+        title: inputs.title || data?.fetchBoard.title,
+        contents: content || data?.fetchBoard.contents,
+        youtubeUrl: youtubeUrl || data?.fetchBoard.youtubeUrl,
         boardAddress: {
-          zipcode:
-            zoneCode !== undefined
-              ? zoneCode
-              : data?.fetchBoard.boardAddress?.zipcode,
-          address:
-            address !== undefined
-              ? address
-              : data?.fetchBoard.boardAddress?.address,
+          zipcode: zoneCode || data?.fetchBoard.boardAddress?.zipcode,
+          address: address || data?.fetchBoard.boardAddress?.address,
           addressDetail:
-            addressDetail !== undefined
-              ? addressDetail
-              : data?.fetchBoard.boardAddress?.addressDetail,
+            addressDetail || data?.fetchBoard.boardAddress?.addressDetail,
         },
+        images: isImageDeleted
+          ? []
+          : imageUrl
+          ? [imageUrl]
+          : data?.fetchBoard.images || [],
       };
 
       const result = await updateBoard({
         variables: {
-          boardId: String(params.boardId), // boardId는 별도로 전달
-          password: inputs.password, // password도 별도로 전달
-          updateBoardInput: updateBoardInput, // update할 데이터 전달
+          boardId: String(params.boardId),
+          password: inputs.password,
+          updateBoardInput,
         },
       });
 
       alert("수정이 완료되었습니다.");
       await refetch();
-
       router.push(`/boards/${result.data.updateBoard._id}`);
     } catch (error: any) {
       if (error.message.includes("비밀번호가 일치하지 않습니다.")) {
@@ -217,6 +231,31 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     onToggleModal();
   };
 
+  //이미지 업로드
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    try {
+      const result = await uploadFile({
+        variables: { file },
+      });
+
+      if (result.data?.uploadFile.url) {
+        setImageUrl(result.data.uploadFile.url); // 새 이미지 URL 설정
+      }
+    } catch (error) {
+      console.error("파일 업로드 오류:", error);
+    }
+  };
+
+  const fileRef = useRef<HTMLInputElement>(null);
+  const onClickImage = () => {
+    fileRef.current?.click(); //현재 참조하고 있는 파일 인풋태그를 클릭하게 된다.
+  };
+  const imgDeleted = (event) => {
+    event.stopPropagation();
+    setImageUrl("");
+    setIsImageDeleted(true);
+  };
   return {
     contentOnChange,
     signupButtonHandler,
@@ -233,5 +272,10 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     data,
     youtubeOnChange,
     onChangeInputs,
+    onChangeFile,
+    fileRef,
+    onClickImage,
+    imageUrl,
+    imgDeleted,
   };
 };

@@ -7,7 +7,6 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
-
 interface IApolloSetting {
   children: React.ReactNode;
 }

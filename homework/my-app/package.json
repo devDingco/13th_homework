@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.5.1",
     "@apollo/client": "^3.11.8",
     "antd": "^5.21.3",
+    "apollo-upload-client": "^18.0.1",
     "bootstrap": "^5.3.3",
     "firebase": "^10.14.1",
     "flatpickr": "^4.6.13",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
+    "@types/apollo-upload-client": "^18.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-datepicker": "7.0.0",

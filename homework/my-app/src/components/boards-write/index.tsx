@@ -23,8 +23,12 @@ const BoardsWrite = (props: IBoardWriteprops) => {
     setAddressDetail,
     youtubeOnChange,
     data,
-
+    onChangeFile,
     onChangeInputs,
+    fileRef,
+    onClickImage,
+    imageUrl,
+    imgDeleted,
   } = useBoardsWrite(props);
   return (
     <div className={styles.container}>
@@ -162,21 +166,55 @@ const BoardsWrite = (props: IBoardWriteprops) => {
               <label>사진 첨부</label>
               <div className={styles.photoBoxContainer}>
                 <div className={styles.flexbox2}>
-                  <div className={styles.photoBox}>
-                    <Image
-                      src="/image/add.png"
-                      className={styles.addImageIcon}
-                      alt="사진추가"
-                      width={0}
-                      height={0}
-                      sizes="100vw"
+                  <div
+                    className={styles.photoBox}
+                    style={{
+                      backgroundImage: imageUrl
+                        ? `url(https://storage.googleapis.com/${imageUrl})`
+                        : "none",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      position: "relative",
+                    }}
+                    onClick={onClickImage}
+                  >
+                    {/* 이미지가 있을 때만 X 버튼 표시 */}
+                    {imageUrl && (
+                      <button
+                        className={styles.deleteButton}
+                        onClick={imgDeleted}
+                      >
+                        ✕
+                      </button>
+                    )}
+
+                    {/* 이미지가 없을 때 파일 업로드 안내 표시 */}
+                    {!imageUrl && (
+                      <>
+                        <div className={styles.addImageIcon}>
+                          <Image
+                            src="/image/add.png"
+                            alt="사진 추가"
+                            width={300}
+                            height={300}
+                            className={styles.addImageIcon}
+                            onClick={onClickImage}
+                          />
+                        </div>
+                        <div className={styles.photoBoxText}>
+                          클릭해서 사진 업로드
+                        </div>
+                      </>
+                    )}
+
+                    <input
+                      type="file"
+                      ref={fileRef}
+                      style={{ display: "none" }}
+                      onChange={onChangeFile}
                     />
-                    <div className={styles.photoBoxText}>
-                      클릭해서 사진 업로드
-                    </div>
                   </div>
                 </div>
-                {/* 다른 사진 업로드 칸들 */}
               </div>
             </div>
           </div>
