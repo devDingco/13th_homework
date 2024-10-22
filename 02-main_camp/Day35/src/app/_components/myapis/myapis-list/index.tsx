@@ -1,17 +1,30 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { DocumentData } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 interface IMyPlanListProps {
   data: DocumentData[];
 }
 
 export default function MyPlanList({ data }: IMyPlanListProps) {
+  const router = useRouter();
+  const onClickCard = (event: MouseEvent<HTMLDivElement>) => {
+    const id = event.currentTarget.id;
+    router.push(`/myapis/${id}`);
+  };
+  console.log("받은 일정 목록:", data);
+
   return (
     <div className={styles.cardListContainer}>
-      {data.map((el, index) => (
-        <div key={index} className={styles.cardContainer}>
+      {data.map((el) => (
+        <div
+          key={el.id}
+          id={el.id}
+          className={styles.cardContainer}
+          onClick={onClickCard}
+        >
           <div className={styles.left}>
             <div className={styles.titleContainer}>
               <span className={styles.title}>{el.title}</span>
