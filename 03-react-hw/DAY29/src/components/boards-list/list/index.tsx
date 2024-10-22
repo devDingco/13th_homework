@@ -1,13 +1,26 @@
 import Link from "next/link";
-import useBoardsList from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import type { FetchBoardsQuery } from "@/commons/graphql/graphql";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 
-export default function BoardsList() {
-  const { data, handleDelete, isHovered, setIsHovered } = useBoardsList();
+interface IBoardsListProps {
+  data: FetchBoardsQuery | undefined;
+  handleDelete: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
+  isHovered: number | null;
+  setIsHovered: Dispatch<SetStateAction<number | null>>;
+  keyword: string;
+}
 
+export default function BoardsList({
+  data,
+  handleDelete,
+  isHovered,
+  setIsHovered,
+  keyword,
+}: IBoardsListProps) {
   return (
-    <div className="flex justify-center py-10 w-full">
+    <div className="flex justify-center pd-10 w-full">
       <div className={styles.총상자}>
         <div className={styles.게시글전체상자}>
           <div className={styles.게시글목록나누기}>
@@ -28,7 +41,17 @@ export default function BoardsList() {
                     {String(index + 1).padStart(3, "0")}
                   </span>
                   <span className={`${styles.제목} ${styles.유저제목}`}>
-                    {board.title}
+                    {board.title
+                      .replace(keyword, `@#$%${keyword}@#$%`)
+                      .split("@#$%")
+                      .map((el, index) => (
+                        <span
+                          key={`${el}_${index}`}
+                          style={{ color: el === keyword ? "red" : "black" }}
+                        >
+                          {el}
+                        </span>
+                      ))}
                   </span>
                   <span className={`${styles.작날} ${styles.유저작성자}`}>
                     {board.writer}

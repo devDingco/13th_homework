@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "../commons/setting/apollo-setting";
+import Layout from "@/commons/layout";
 
 const Pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${Pretendard.variable} antialiased`}>
-        <ApolloSetting>{children}</ApolloSetting>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
       </body>
     </html>
   );

@@ -3,11 +3,17 @@ import {
   FetchBoardsDocument,
 } from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useState, type ChangeEvent } from "react";
+import _ from "lodash";
 
 export default function useBoardsList() {
+  //키보드
+  const [keyword, setKeyword] = useState("");
+  // 마우스에 따른 삭제버튼 유무
+  const [isHovered, setIsHovered] = useState<number | null>(null);
+
   // 게시글 1페이지 불러오기
-  const { data } = useQuery(FetchBoardsDocument, {
+  const { data, refetch } = useQuery(FetchBoardsDocument, {
     variables: {
       page: 1,
     },
@@ -37,13 +43,23 @@ export default function useBoardsList() {
     }
   };
 
-  // 마우스에 따른 삭제버튼 유무
-  const [isHovered, setIsHovered] = useState<number | null>(null);
+  const getDebounce = _.debounce((value) => {
+    refetch({ search: value, page: 1 });
+    setKeyword(value);
+  }, 500); // 0.5초
+
+  //검색하기
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(event.target.value);
+  };
 
   return {
     data,
     handleDelete,
     isHovered,
     setIsHovered,
+    refetch,
+    onChangeSearch,
+    keyword,
   };
 }
