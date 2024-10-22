@@ -5,3 +5,7 @@ interface IDetailContentProps {
 interface IDetailInfoProps {
   value: string;
 }
+
+interface IDetailButtonProps {
+  value: string;
+}

@@ -3,7 +3,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useMutation } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARDS } from "../../queries";
 
-export default function ListFromBlock({ el, idx }: IBlockProps) {
+export default function ListFromBlock({ el, idx }: IListBlockProps) {
   const router = useRouter();
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
@@ -29,18 +29,25 @@ export default function ListFromBlock({ el, idx }: IBlockProps) {
       console.error("안돼,,,");
     }
   };
+
+  //날짜 계산
+  const date = new Date(el.createdAt);
+  const dateString = `${date.getFullYear()}.${String(
+    date.getMonth() + 1
+  ).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+
   return (
     <div
       key={idx}
       id={el._id}
-      className="flex border rounded h-[44px] px-3 py-6 items-center hover:bg-gray-300 relative group"
+      className="flex border rounded h-12 px-6 py-4 gap-2 items-center hover:bg-gray-300 relative group"
       onClick={onClickDetail}
     >
-      <div className="w-24 flex justify-center">{idx}</div>
-      <div className="w-full">{el.title}</div>
+      <div className="w-16 flex justify-center prose-l_14_20">{idx}</div>
+      <div className="w-full prose-sb_14_20">{el.title}</div>
 
-      <div className="w-24 flex justify-center">{el.writer}</div>
-      <div className="w-24 flex justify-center">{el.createdAt}</div>
+      <div className="w-24 flex justify-center prose-me_14_20">{el.writer}</div>
+      <div className="w-24 flex justify-center prose-l_14_20">{dateString}</div>
 
       <button
         id={el._id}

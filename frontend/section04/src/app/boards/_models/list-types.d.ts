@@ -13,7 +13,7 @@ interface IListBoard {
   __typename: string;
 }
 
-interface IBlockProps {
+interface IListBlockProps {
   el: IListBoard;
   idx: number;
 }

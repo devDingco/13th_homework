@@ -23,7 +23,7 @@ export default function DetailForm() {
       <DetailFormInfo value={data?.fetchBoard?.writer} />
       <DetailFormContent value={data?.fetchBoard?.contents} />
       <DetailFormLike />
-      <DetailFormButton />
+      <DetailFormButton value={data?.fetchBoard?._id} />
     </div>
   );
 }
