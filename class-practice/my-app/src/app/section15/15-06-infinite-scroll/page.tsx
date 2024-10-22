@@ -5,8 +5,8 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const FETCH_BOARDS = gql`
-  query fetchBoards($currentPage: Int) {
-    fetchBoards(page: $currentPage) {
+  query fetchBoardshello($mypage: Int) {
+    fetchBoards(page: $mypage) {
       _id
       writer
       title
@@ -23,7 +23,7 @@ export default function StaticRoutingMovedPage() {
     if (!data?.fetchBoards.length) return;
 
     fetchMore({
-      variables: { currentPage: Math.ceil(data?.fetchBoards.length / 10) + 1 },
+      variables: { mypage: Math.ceil(data?.fetchBoards.length / 10) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoards?.length) {
           setHasMore(false);

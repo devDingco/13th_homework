@@ -5,7 +5,7 @@ import CommentItem from "@/components/15-05-comment-edit3-typescript";
 import { gql, useQuery } from "@apollo/client";
 
 const FETCH_BOARDS = gql`
-  query fetchBoards($mypage: Int) {
+  query fetchBoardshello($mypage: Int) {
     fetchBoards(page: $mypage) {
       _id
       writer
