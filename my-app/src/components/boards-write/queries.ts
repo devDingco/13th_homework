@@ -35,6 +35,7 @@ const UPDATE_QUERY = gql`
       title
       contents
       updatedAt
+      images
     }
   }
 `;

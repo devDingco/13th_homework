@@ -1,6 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import type { IBoardsWriteProps, IupdateVariables, IInput } from "./types";
 import {
   CreateBoardDocument,
@@ -135,6 +142,7 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
               ...updateVariables,
               youtubeUrl,
               boardAddress: address,
+              images: imageUrl,
             },
             password: checkPassWord,
             boardId: String(params.boardId),
@@ -182,7 +190,10 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     setYoutubeUrl(event.target.value);
   };
 
-  const onChangeFile = async (event, index) => {
+  const onChangeFile = async (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     console.log("가져온 index", index);
     const file = event.target.files?.[0];
     const isValid = checkValidationFile(file);
@@ -195,13 +206,29 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     setImageUrl(updatedUrls);
   };
 
-  const onClickImage = (index) => {
+  const onClickImage = (index: number) => {
     const fileInput = document.querySelectorAll('input[type="file"]')[index];
     fileInput.click();
   };
 
   const handleDeleteImage = (index: number) => {
     setImageUrl((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  useEffect(() => {
+    if (props.isEdit && props.data?.fetchBoard.images) {
+      setImageUrl([...props.data?.fetchBoard.images]);
+    }
+  }, [props.isEdit, props.data]);
+
+  const onClickDeleteImage = (
+    event: MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    event.stopPropagation();
+    const deleteUrl = [...imageUrl];
+    deleteUrl[index] = "";
+    setImageUrl(deleteUrl);
   };
 
   return {
@@ -215,6 +242,7 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     onChangeFile,
     onClickImage,
     handleDeleteImage,
+    onClickDeleteImage,
     youtubeUrl,
     isActive,
     errorMessage,

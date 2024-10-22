@@ -21,9 +21,9 @@ function BoardsWrite(props: IBoardsWriteProps) {
     address,
     onChangeYouTube,
     onChangeFile,
-    fileRef,
     onClickImage,
     imageUrl,
+    onClickDeleteImage,
   } = useBoardsWrite(props);
 
   return (
@@ -173,16 +173,20 @@ function BoardsWrite(props: IBoardsWriteProps) {
                     type="file"
                     onChange={(event) => onChangeFile(event, index)}
                     style={{ display: "none" }}
-                    ref={fileRef}
                     accept="image/jpeg,image/png"
                   />
-                  <Image
+                  <button
                     className={styles.photoCardImage}
-                    src={`https://storage.googleapis.com/${imageUrl[index]}`}
-                    alt="fileImage"
-                    width={0}
-                    height={0}
-                  />
+                    onClick={(event) => onClickDeleteImage(event, index)}
+                  >
+                    <Image
+                      className={styles.photoCardImage}
+                      src={`https://storage.googleapis.com/${imageUrl[index]}`}
+                      alt="fileImage"
+                      width={0}
+                      height={0}
+                    />
+                  </button>
                 </div>
               </div>
             ))}
