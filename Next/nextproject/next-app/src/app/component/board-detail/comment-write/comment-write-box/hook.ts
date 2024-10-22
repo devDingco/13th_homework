@@ -43,8 +43,6 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
     setValue(value);
   };
 
-  console.log(data);
-
   const [submit] = useMutation(Comment);
   const [edit] = useMutation(UPDATE_COMMENT);
 
