@@ -138,8 +138,8 @@ export const FetchBoardsCount = gql`
 
 // 게시글 조회
 export const FetchBoards = gql`
-  query fetchBoards($mypage: Int) {
-    fetchBoards(page: $mypage) {
+  query fetchBoards($mypage: Int, $search: String) {
+    fetchBoards(page: $mypage, search: $search) {
       writer
       contents
       title

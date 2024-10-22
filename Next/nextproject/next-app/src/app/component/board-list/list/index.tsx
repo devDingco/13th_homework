@@ -1,17 +1,22 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
 import UseListWrite from "./hook";
 import { IListProps } from "./types";
-
+import SearchPage from "../search";
+import UseSearchPage from "../search/hook";
 export default function ListPage(props: IListProps) {
   const { onMoveDetailPage, onClickDelete, onClickWriteBoard } = UseListWrite(
     props.currentPage
   );
+
+  const { onChangeSearch, keyword } = UseSearchPage(props);
+  // const [keyword, setKeyWord] = useState("");
   console.log(props.data?.fetchBoards);
   //노션 24
   return (
     <>
+      <SearchPage keyword={keyword} onChange={onChangeSearch} />
       <div className={styles.css_layout}>
         <div className={styles.css_listborder}>
           <div className={styles.css_listheader}>
@@ -34,7 +39,21 @@ export default function ListPage(props: IListProps) {
                         index -
                         props.currentPage * 10}
                     </div>
-                    <div className={styles.css_boardtitle}>{el.title}</div>
+                    <div className={styles.css_boardtitle}>
+                      {el.title
+                        .replaceAll(keyword, `@@@${keyword}@@@`)
+                        .split("@@@")
+                        .map((el, index) => (
+                          <span
+                            key={`${el}_${index}`}
+                            style={{
+                              color: el === keyword ? "red" : "black",
+                            }}
+                          >
+                            {el}
+                          </span>
+                        ))}
+                    </div>
                     <div className={styles.css_boardwriter}>{el.writer}</div>
                     <div className={styles.css_boarddate}>
                       {el.createdAt.split("T")[0]}
