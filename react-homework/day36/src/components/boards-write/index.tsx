@@ -18,7 +18,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     allInputFilled,
     isPasswordModalOpen,
     isZipCodeModalOpen,
-    fileRefs,
     imageUrl,
     onChangeInput,
     onChangeAddressDetail,
@@ -28,7 +27,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     onClickRegister,
     onClickEditCancel,
     onClickRegisterCancel,
-    onClickImage,
     onClickDelete,
     onTogglePasswordModal,
     onToggleZipCodeModal,
@@ -147,9 +145,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
                   index={index}
                   imageUrl={imageUrl}
                   onClickDelete={onClickDelete}
-                  onClickImage={onClickImage}
                   onChangeFile={onChangeFile}
-                  fileRef={fileRefs[index]}
                 />
               ))}
             </div>

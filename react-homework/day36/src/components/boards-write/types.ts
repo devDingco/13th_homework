@@ -1,4 +1,5 @@
 import { FetchBoardQuery } from "@/commons/graphql/graphql";
+import { ChangeEvent, MouseEvent } from "react";
 
 // input state 타입정의
 export interface IInputs {
@@ -18,4 +19,11 @@ export interface IErrors {
 export interface BoardsWriteProps {
   isEdit: boolean;
   data?: FetchBoardQuery;
+}
+
+export interface IImageButtonProps {
+  index: number;
+  imageUrl: string[];
+  onClickDelete: (event: MouseEvent<HTMLImageElement>) => void;
+  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
 }

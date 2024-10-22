@@ -11,14 +11,7 @@ import { IErrors, IInputs } from "./types";
 import { ApolloError, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import {
-  ChangeEvent,
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 import { checkValidationFile } from "@/utils/validation-file";
@@ -55,11 +48,6 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
     });
     setImageUrl(data?.fetchBoard?.images || ["", "", ""]);
   }, [data]);
-  const fileRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
 
   // modal 토글 - password
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -140,13 +128,6 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
     setImageUrl(deletedImageUrl);
   };
   console.log(imageUrl);
-
-  // file버튼 클릭해주기
-  const onClickImage = (event: MouseEvent<HTMLInputElement>) => {
-    const id = event.currentTarget.id;
-    const index = Number(id);
-    fileRefs[index]?.current?.click();
-  };
 
   // 구조분해할당
   const { writer, password, title, contents } = inputs;
@@ -311,14 +292,12 @@ export const useBoardsWrite = (data?: FetchBoardQuery | undefined) => {
     allInputFilled,
     isPasswordModalOpen,
     isZipCodeModalOpen,
-    fileRefs,
     imageUrl,
     onChangeInput,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
     onChangeFile,
     onChangePassword,
-    onClickImage,
     onClickDelete,
     onClickRegister,
     onClickEditCancel,

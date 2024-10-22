@@ -1,14 +1,21 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
+import { MouseEvent, useRef } from "react";
+import { IImageButtonProps } from "./types";
 
-const ImageButton = ({
+const ImageButton: React.FC<IImageButtonProps> = ({
   index,
   imageUrl,
   onClickDelete,
-  onClickImage,
   onChangeFile,
-  fileRef,
 }) => {
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // file버튼 클릭해주기
+  const onClickImage = (event: MouseEvent<HTMLImageElement>) => {
+    fileRef.current?.click();
+  };
+
   return (
     <div className={styles.upload_button_group}>
       {/* 사진 업로드 안했으면 삭제버튼 안보이게 */}
