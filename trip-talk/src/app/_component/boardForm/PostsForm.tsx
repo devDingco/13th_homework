@@ -3,6 +3,9 @@
 import React, {
   ChangeEvent,
   FormEvent,
+  Fragment,
+  MouseEvent,
+  MouseEventHandler,
   useEffect,
   useRef,
   useState,
@@ -21,6 +24,7 @@ import useModalStore from '@/app/_store/useModalStore';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { CREATE_BOARD, UPLOAD_FILE } from '@/app/_api/board/Mutation';
 import CustomImageInput from '../form/CustomImageInput';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function PostsForm({
   type,
@@ -29,6 +33,7 @@ export default function PostsForm({
   writer,
   youtubeUrl,
   boardAddress,
+  images,
 }: PostFormType) {
   const routes = useRouter();
   const params = useParams();
@@ -53,10 +58,11 @@ export default function PostsForm({
   });
 
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(images || ['']);
 
-  const imageRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement[]>([]);
   const addressInfo = useRef<any>();
+
   const { showModal, closeModal } = useModalStore();
 
   // ?fetch
@@ -84,7 +90,6 @@ export default function PostsForm({
       '우편번호 모달',
       <DaumPostcodeEmbed
         onComplete={(result) => {
-          console.log('왜 다시 안됨?');
           addressInfo.current = result;
           closeModal();
         }}
@@ -108,6 +113,7 @@ export default function PostsForm({
 
   const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const images = imageUrl.filter((prevImg) => !!prevImg);
     try {
       if (type === 'ADD') {
         const { data } = await createBoard({
@@ -123,6 +129,7 @@ export default function PostsForm({
                 address: postData.userAddress,
                 addressDetail: postData.userAddressDetail,
               },
+              images,
             },
           },
         });
@@ -152,6 +159,7 @@ export default function PostsForm({
                     address: postData.userAddress,
                     addressDetail: postData.userAddressDetail,
                   },
+                  images,
                 },
                 password: result.toString(),
                 boardId: params.postId.toString(),
@@ -174,19 +182,55 @@ export default function PostsForm({
       }
     }
   };
-  const onClickImage = () => {
-    imageRef.current?.click();
+
+  const onCancelImage = (
+    e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>,
+    index: number,
+  ) => {
+    e.stopPropagation();
+    setImageUrl((prev) => {
+      const newImageUrls = [...prev];
+      newImageUrls[index] = '';
+      return newImageUrls;
+    });
   };
 
-  const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    console.log(event.target.files);
+  const onClickImage = (index: number) => {
+    if (imageRef.current[index]) {
+      imageRef.current[index].click();
+    }
+  };
 
-    if (!file) return; // 파일이 없을 경우를 처리
+  const onChangeImage = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ): Promise<void> => {
+    const file = event.target.files?.[0];
+
+    // 검증 로직
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      // 5MB
+      alert('파일 용량이 너무 큽니다.(제한: 5MB)');
+      return;
+    }
+
+    if (
+      !file.type.includes('jpeg') &&
+      !file.type.includes('jpg') &&
+      !file.type.includes('png')
+    ) {
+      alert('jpeg, jpg 또는 png 파일만 업로드 가능합니다!!!');
+      return;
+    }
 
     const result = await uploadFile({ variables: { file } });
-    console.log('file', result.data?.uploadFile.url);
-    setImageUrl(result.data?.uploadFile.url);
+    setImageUrl((prev) => {
+      const newImageUrls = [...prev];
+      newImageUrls[index] = result.data?.uploadFile.url || '';
+      return newImageUrls;
+    });
   };
 
   // !useEffect
@@ -296,12 +340,24 @@ export default function PostsForm({
         onChangeFnc={onPostFormChange}
       />
       <div className={s.flexBox}>
-        <CustomImageInput
-          onClickFnc={onClickImage}
-          onChangeFnc={onChangeImage}
-          imageTarget={imageRef}
-          imageUrl={imageUrl}
-        />
+        {imageUrl.map((_, index) => (
+          <Fragment key={index}>
+            <CustomImageInput
+              index={index}
+              onClickFnc={onClickImage}
+              onCancelImage={onCancelImage}
+              onChangeFnc={onChangeImage}
+              imageRef={imageRef}
+              imageUrl={imageUrl}
+            />
+          </Fragment>
+        ))}
+        <button
+          type="button"
+          className=""
+          onClick={() => setImageUrl((prev) => [...prev, ''])}>
+          <PlusCircleOutlined className="text-[30px]" />
+        </button>
       </div>
       <div className={`${s.flexBox} justify-end`}>
         <Button type="button" style="default">

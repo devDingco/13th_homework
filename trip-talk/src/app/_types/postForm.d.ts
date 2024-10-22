@@ -12,4 +12,5 @@ interface PostFormType {
     zipcode: string;
     __typename: string;
   };
+  images?: string[];
 }
