@@ -2,6 +2,7 @@ import { db } from "@/commons/apis/firebase/config";
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   setDoc,
   updateDoc,
@@ -12,6 +13,17 @@ export enum CollectionList {
 }
 
 export default function FirebaseAPI() {
+  const fetchDocuments = async (name: CollectionList) => {
+    try {
+      const documents = await getDocs(collection(db, name));
+      const data = documents.docs.map((el) => el.data());
+      console.log(`${name} 문서 "가져오기" 성공`);
+      return data;
+    } catch (error) {
+      console.log(`${name} 문서 "가져오기" 실패: `, error);
+    }
+  };
+
   const createDocument = async (
     name: CollectionList,
     index: number,
@@ -27,14 +39,17 @@ export default function FirebaseAPI() {
     }
   };
 
-  const fetchDocuments = async (name: CollectionList) => {
-    try {
-      const documents = await getDocs(collection(db, name));
-      const data = documents.docs.map((el) => el.data());
-      console.log(`${name} 문서 "가져오기" 성공`);
-      return data;
-    } catch (error) {
-      console.log(`${name} 문서 "가져오기" 실패: `, error);
+  const fetchDocument = async (name: string, id: string) => {
+    const docRef = doc(db, name, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      const result = docSnap.data();
+      return result;
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
     }
   };
 
@@ -55,8 +70,9 @@ export default function FirebaseAPI() {
   };
 
   return {
-    createDocument,
     fetchDocuments,
+    createDocument,
+    fetchDocument,
     updateDocument,
   };
 }
