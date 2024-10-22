@@ -4,7 +4,7 @@ import { CreateBoardDocument } from "../graphql/graphql";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
 
-export default function useSubmitInput({ addressData }) {
+export default function useSubmitInput({ addressData, imageUrl }) {
     const [submitInput, setSubmitInput] = useState<ISubmitInput>({
         author_ID: "",
         password_ID: "",
@@ -48,6 +48,7 @@ export default function useSubmitInput({ addressData }) {
                             address: addressData?.address,
                             addressDetail: submitInput.address01_ID,
                         },
+                        images: [String(imageUrl)],
                     },
                 },
             });

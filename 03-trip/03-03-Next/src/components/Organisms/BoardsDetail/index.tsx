@@ -21,12 +21,17 @@ import YouTube from "react-youtube";
 
 import useUpdate from "@/commons/hooks/useUpdate";
 import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
+import ImgField from "@/components/Molecules/_ImgField";
+import useUploadImg from "@/commons/hooks/useUploadImg";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
     const { isModalOpen, addressData, onToggleModal, handleComplete } =
         useDaumPostApi();
+
+    const { imageUrl, onChangeFile } = useUploadImg();
+
     const { handleChange, handleUpdate, data } = useUpdate({ addressData });
 
     return (
@@ -65,11 +70,10 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
             <section className={styles.detail_main}>
                 <Image
-                    src="/img/bg01.png"
+                    src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
                     alt="thumbnail"
                     width={400}
                     height={500}
-                    sizes="100%"
                 />
 
                 <pre className={styles.main_content}>
@@ -94,22 +98,30 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
                 <div className={styles.main_video}>
                     {isEdit ? (
-                        <div>
-                            <AddressFieldUI
-                                onChange={handleChange}
-                                isModalOpen={isModalOpen}
-                                addressData={addressData}
-                                onToggleModal={onToggleModal}
-                                handleComplete={handleComplete}
-                                data={data}
-                                isEdit={true}
-                            />
-                            <Input
-                                id="link_ID"
-                                value={data?.fetchBoard.youtubeUrl}
-                                onChange={handleChange}
-                            />
-                        </div>
+                        <>
+                            <div style={{ width: "40rem" }}>
+                                <AddressFieldUI
+                                    onChange={handleChange}
+                                    isModalOpen={isModalOpen}
+                                    addressData={addressData}
+                                    onToggleModal={onToggleModal}
+                                    handleComplete={handleComplete}
+                                    data={data}
+                                    isEdit={true}
+                                />
+                                <Input
+                                    id="link_ID"
+                                    value={data?.fetchBoard.youtubeUrl}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <ImgField
+                                    imageUrl={imageUrl}
+                                    onChange={onChangeFile}
+                                />
+                            </div>
+                        </>
                     ) : (
                         <YouTube videoId="e7g54ZvcKDI" />
                     )}

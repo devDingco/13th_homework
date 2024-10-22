@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
-import CommentUI from "@/components/Molecules/_Comment";
+import CommentUI from "@/components/Molecules/Comment";
 
 export default function CommentListUI() {
     const [hasMore, setHasMore] = useState(true);

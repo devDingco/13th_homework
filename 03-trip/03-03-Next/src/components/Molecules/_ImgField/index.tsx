@@ -1,28 +1,25 @@
 "use client";
 
-import Image from "next/image";
-import add from "/public/svg/add.svg";
-import { FigureStyle } from "@/commons/styles/styles";
+import ImgUploader from "../ImgUploader";
 
-export default function ImgField() {
+const ImgUploaderStyle = {
+    display: "flex",
+    gap: "2rem",
+};
+
+export default function ImgField({ imageUrl, onChange }) {
     return (
         <>
             <label>사진 첨부</label>
-            <div style={{ display: "flex", gap: "10px" }}>
-                <figure style={FigureStyle}>
-                    <Image src={add} alt="alt" />
-                    <figcaption>클릭하여 사진 업로드</figcaption>
-                </figure>
-
-                <figure style={FigureStyle}>
-                    <Image src={add} alt="alt" />
-                    <figcaption>클릭하여 사진 업로드</figcaption>
-                </figure>
-
-                <figure style={FigureStyle}>
-                    <Image src={add} alt="alt" />
-                    <figcaption>클릭하여 사진 업로드</figcaption>
-                </figure>
+            <div style={ImgUploaderStyle}>
+                {imageUrl.map((el, idx) => (
+                    <ImgUploader
+                        key={idx}
+                        idx={idx}
+                        imageUrl={el}
+                        onChange={onChange}
+                    />
+                ))}
             </div>
         </>
     );

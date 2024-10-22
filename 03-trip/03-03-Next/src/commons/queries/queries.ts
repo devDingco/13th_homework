@@ -14,6 +14,7 @@ export const CREATE_BOARD = gql`
                 address
                 addressDetail
             }
+            images
             createdAt
         }
     }
@@ -32,6 +33,7 @@ export const FETCH_BOARD = gql`
                 address
                 addressDetail
             }
+            images
             createdAt
             updatedAt
         }
@@ -46,6 +48,7 @@ export const FETCH_LIST = gql`
             title
             contents
             createdAt
+            updatedAt
         }
     }
 `;
@@ -77,6 +80,7 @@ export const UPDATE_BOARD = gql`
                 address
                 addressDetail
             }
+            images
             updatedAt
         }
     }
@@ -135,6 +139,17 @@ export const UPDATE_COMMENT = gql`
             rating
             createdAt
             updatedAt
+        }
+    }
+`;
+
+export const UPLOAD_FILE = gql`
+    mutation uploadFile($file: Upload!) {
+        uploadFile(file: $file) {
+            _id
+            url
+            size
+            createdAt
         }
     }
 `;
