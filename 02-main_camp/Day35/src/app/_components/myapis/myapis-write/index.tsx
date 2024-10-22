@@ -6,8 +6,15 @@ import { useEffect } from "react";
 import { CollectionList } from "@/commons/apis/firebase";
 import styles from "./styles.module.css";
 import useMyPlanWrite from "./hook";
+import { DocumentData } from "firebase/firestore";
 
-export default function MyPlanWrite() {
+interface IMyPlanWriteProps {
+  isEdit: boolean;
+  data?: DocumentData;
+}
+
+export default function MyPlanWrite({ isEdit, data }: IMyPlanWriteProps) {
+  const pageTitle = isEdit ? "수정" : "등록";
   const { RangePicker } = DatePicker;
   dayjs.locale("ko");
 
@@ -21,12 +28,12 @@ export default function MyPlanWrite() {
   } = useMyPlanWrite();
 
   useEffect(() => {
-    initDocumentIndex(CollectionList.plan);
-  });
+    if (!isEdit) initDocumentIndex(CollectionList.plan);
+  }, []);
 
   return (
     <div className={styles.planWriteContainer}>
-      <h3 className={styles.header}>일정 등록</h3>
+      <h3 className={styles.header}>{pageTitle} 등록</h3>
       <div className={styles.inputFormContainer}>
         <div className={styles.inputForm}>
           일정명
@@ -76,7 +83,7 @@ export default function MyPlanWrite() {
           onClick={onClickCreate}
           disabled={isActive ? false : true}
         >
-          등록하기
+          {pageTitle}
         </button>
       </div>
     </div>
