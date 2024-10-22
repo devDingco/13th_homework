@@ -6,7 +6,12 @@ import LayoutBanner from "./banner";
 import styles from "./styles.module.css";
 import { ILayout } from "./types";
 
-const HIDDEN_BANNERS = ["/boards/new", "/boards/[boardId]/edit", "/openapis"];
+const HIDDEN_BANNERS = [
+  "/boards/new",
+  "/boards/[boardId]/edit",
+  "/openapis",
+  "/myapis/new",
+];
 
 export default function Layout({ children }: ILayout) {
   const pathname = usePathname();
