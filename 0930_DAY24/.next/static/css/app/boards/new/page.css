@@ -1,0 +1,196 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/app/boards/new/styles.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+.styles_layout__kqNz5 {
+  display: flex;
+  width: 1280px;
+  padding: 40px 320px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.styles_enroll-subject__0GNTT {
+  display: flex;
+  width: 1280px;
+  padding: 40px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.styles_enroll-subject-text___qSAT {
+  color: #000;
+  /* b_20_28 */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+.styles_enroll-row-container__2CHSw {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 40px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.styles_enroll-form-title__MJpcN {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.styles_enroll-row-section__idDmt {
+  align-self: stretch;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.styles_enroll-required-indicator__PeZtW {
+  color: var(--red, #f66a6a);
+
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.styles_enroll-input__23kn_ {
+  align-items: flex-start;
+  gap: 8px;
+
+  width: 100%;
+
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+
+  padding: 12px 16px;
+  box-sizing: border-box;
+
+  height: 48px;
+}
+
+.styles_enroll-border__g08_Q {
+  width: 1280px;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+}
+
+.styles_enroll-textarea__77_KJ {
+  height: 336px;
+}
+
+.styles_enroll-row-flex__HY_Ek {
+  display: flex;
+  gap: 40px;
+}
+
+.styles_zipcode-input__DBV9c {
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  width: 82px;
+  height: 48px;
+}
+
+.styles_enroll-address-firstrow__dCz3b {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  height: 48px;
+}
+
+.styles_zipcode-search-button__chwE_ {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+}
+
+.styles_picture-enroll-row__PbwGg {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.styles_enroll-cancel-button__YljTu {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}
+
+.styles_enroll-submit-button__PFPX_ {
+  border-radius: 8px;
+  background: #2974e5;
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  color: #ffffff;
+}
+
+.styles_enroll-button-container__2YRj5 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  padding-top: 40px;
+}
+
+.styles_error-msg__3zF7l {
+  color: var(--red, #f66a6a);
+
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.styles_flex-half__SY6Wm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.styles_disabled__uCT7T {
+  border-radius: 8px;
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background-color: #c7c7c7;
+  color: #e4e4e4;
+}
+
