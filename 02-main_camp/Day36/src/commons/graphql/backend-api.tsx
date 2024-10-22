@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import exp from "constants";
 
 // 게시판 목록
 export const FETCH_BOARDS = gql`
@@ -154,6 +153,15 @@ export const UPDATE_BOARD_COMMENT = gql`
       createdAt
       updatedAt
       deletedAt
+    }
+  }
+`;
+
+// 이미지 업로드
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
     }
   }
 `;
