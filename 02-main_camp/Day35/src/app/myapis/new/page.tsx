@@ -1,56 +1,29 @@
 "use client";
-
-import React, { ChangeEvent, useState } from "react";
 import { DatePicker } from "antd";
 import locale from "antd/es/date-picker/locale/ko_KR";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import styles from "./styles.module.css";
-import FirebaseAPI, { CollectionList } from "@/commons/apis/firebase";
+import usePlanNewPage from "./hook";
+import { useEffect } from "react";
+import { CollectionList } from "@/commons/apis/firebase";
 
 export default function PlanNewPage() {
   const { RangePicker } = DatePicker;
   dayjs.locale("ko");
 
-  const [plan, setPlan] = useState({
-    title: "",
-    startDate: "",
-    endDate: "",
-    companions: [],
-    departureLocation: "",
-    destination: "",
-    timeline: [],
+  const {
+    isActive,
+    initDocumentIndex,
+    onClickCreate,
+    onClickCancel,
+    onChangeInput,
+    onChangeDate,
+  } = usePlanNewPage();
+
+  useEffect(() => {
+    initDocumentIndex(CollectionList.plan);
   });
-  const { createDocument } = FirebaseAPI();
-
-  const onClickCreate = () => {
-    createDocument(CollectionList.plan, plan);
-  };
-
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const tagName = event.currentTarget.name;
-    setPlan((prev) => {
-      return {
-        ...prev,
-        [tagName]: value,
-      };
-    });
-    console.log(value);
-  };
-
-  const onChangeDate = (
-    dates: [Dayjs | null, Dayjs | null] | null,
-    datesString: [string, string]
-  ) => {
-    setPlan((prev) => {
-      return {
-        ...prev,
-        startDate: datesString[0],
-        endDate: datesString[1],
-      };
-    });
-  };
 
   return (
     <div className={styles.planWriteContainer}>
@@ -60,7 +33,7 @@ export default function PlanNewPage() {
           일정명
           <input type="text" name="title" onChange={onChangeInput} />
         </div>
-        <div className={styles.inputForm}>
+        <div className={styles.dateForm}>
           여행 일자
           <RangePicker
             className={styles.datePicker}
@@ -72,21 +45,41 @@ export default function PlanNewPage() {
           동행자
           <input type="text" name="companions" onChange={onChangeInput} />
         </div>
-        <div className={styles.inputForm}>
-          출발지
-          <input
-            type="text"
-            name="departureLocation"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div className={styles.inputForm}>
-          목적지
-          <input type="text" name="destination" onChange={onChangeInput} />
+        <div className={styles.locationContainer}>
+          <div className={styles.inputForm}>
+            출발지
+            <input
+              type="text"
+              name="departureLocation"
+              onChange={onChangeInput}
+            />
+          </div>
+          <div className={styles.inputForm}>
+            목적지
+            <input type="text" name="destination" onChange={onChangeInput} />
+          </div>
         </div>
         <div className={styles.inputForm}>타임라인</div>
       </div>
-      <button onClick={onClickCreate}>등록하기</button>
+      <div className={styles.buttonContainer}>
+        <button
+          className={`${styles.button} ${styles.cancelButton}`}
+          onClick={onClickCancel}
+        >
+          취소
+        </button>
+        <button
+          className={
+            isActive
+              ? `${styles.button} ${styles.submitButton_enable}`
+              : styles.button
+          }
+          onClick={onClickCreate}
+          disabled={isActive ? false : true}
+        >
+          등록하기
+        </button>
+      </div>
     </div>
   );
 }
