@@ -1,5 +1,5 @@
+// search.tsx
 import Input from "@/components/input";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import UserDatePicker from "./datePicker";
 import Link from "next/link";
@@ -7,19 +7,20 @@ import type { ChangeEvent } from "react";
 
 interface ISearchProps {
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  onDateChange: (dates: any) => void; // 날짜 변경 props 추가
 }
 
-export default function Search({ onChangeSearch }: ISearchProps) {
+export default function Search({ onChangeSearch, onDateChange }: ISearchProps) {
   return (
     <div className="h-12 flex gap-2 w-full ">
       <div className="flex gap-4 w-[1110px] justify-start">
-        <UserDatePicker />
+        <UserDatePicker onDateChange={onDateChange} />
         <div className="relative flex w-full min-w-[180px] max-w-[640px]">
           <Input
             name="search"
             type="text"
             placeholder="제목을 검색해주세요"
-            className="bg-[#f2f2f2]  rounded-lg border-none pl-11"
+            className="bg-[#f2f2f2] rounded-lg border-none pl-11"
             onChange={onChangeSearch}
           />
           <Image
@@ -30,9 +31,6 @@ export default function Search({ onChangeSearch }: ISearchProps) {
             className="absolute top-3 left-3"
           />
         </div>
-        <Button className="h-12 px-4 py-3 bg-black rounded-lg text-white text-lg font-semibold leading-normal ">
-          검색
-        </Button>
       </div>
       <Link
         href={"/boards/new"}

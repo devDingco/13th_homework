@@ -12,7 +12,11 @@ dayjs.locale("ko");
 const { RangePicker } = DatePicker;
 const dateFormat = "YYYY.MM.DD";
 
-export default function UserDatePicker() {
+interface IUserDatePickerProps {
+  onDateChange: (dates) => void; // 날짜 변경 시 실행될 함수
+}
+
+export default function UserDatePicker({ onDateChange }: IUserDatePickerProps) {
   return (
     <ConfigProvider
       locale={locale}
@@ -39,6 +43,7 @@ export default function UserDatePicker() {
           placeholder={["YYYY.MM.DD", "YYYY.MM.DD"]}
           separator="-"
           suffixIcon={null}
+          onChange={onDateChange} // 날짜 변경 시 호출될 함수 연결
         />
       </div>
     </ConfigProvider>
