@@ -1,34 +1,52 @@
+/** @format */
+
+import * as Apollo from '@apollo/client';
 import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+
 const defaultOptions = {} as const;
 export type GetBoardCommentQueryVariables = Types.Exact<{
-  boardId: Types.Scalars['Int']['input'];
-  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	boardId: Types.Scalars['Int']['input'];
+	page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
-
-export type GetBoardCommentQuery = { __typename?: 'Query', getBoardComment: Array<{ __typename?: 'BoardCommentResponseDTO', author: string, content: string, rating?: number | null, parentId?: string | null, _id: string, createdAt: Date, replies?: Array<{ __typename?: 'BoardCommentResponseDTO', author: string, content: string, createdAt: Date }> | null }> };
-
+export type GetBoardCommentQuery = {
+	__typename?: 'Query';
+	getBoardComment: Array<{
+		__typename?: 'BoardCommentResponseDTO';
+		author: string;
+		content: string;
+		rating?: number | null;
+		parentId?: string | null;
+		_id: string;
+		createdAt: Date;
+		replies?: Array<{
+			__typename?: 'BoardCommentResponseDTO';
+			author: string;
+			content: string;
+			createdAt: Date;
+		}> | null;
+	}>;
+};
 
 export const GetBoardCommentDocument = gql`
-    query GetBoardComment($boardId: Int!, $page: Int) {
-  getBoardComment(boardId: $boardId, page: $page) {
-    author
-    content
-    rating
-    parentId
-    _id
-    createdAt
-    replies {
-      author
-      content
-      createdAt
-    }
-  }
-}
-    `;
+	query GetBoardComment($boardId: Int!, $page: Int) {
+		getBoardComment(boardId: $boardId, page: $page) {
+			author
+			content
+			rating
+			parentId
+			_id
+			createdAt
+			replies {
+				author
+				content
+				createdAt
+			}
+		}
+	}
+`;
 
 /**
  * __useGetBoardCommentQuery__
@@ -47,19 +65,43 @@ export const GetBoardCommentDocument = gql`
  *   },
  * });
  */
-export function useGetBoardCommentQuery(baseOptions: Apollo.QueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables> & ({ variables: GetBoardCommentQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(GetBoardCommentDocument, options);
-      }
-export function useGetBoardCommentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(GetBoardCommentDocument, options);
-        }
-export function useGetBoardCommentSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(GetBoardCommentDocument, options);
-        }
+export function useGetBoardCommentQuery(
+	baseOptions: Apollo.QueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables> &
+		({ variables: GetBoardCommentQueryVariables; skip?: boolean } | { skip: boolean }),
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(
+		GetBoardCommentDocument,
+		options,
+	);
+}
+export function useGetBoardCommentLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(
+		GetBoardCommentDocument,
+		options,
+	);
+}
+export function useGetBoardCommentSuspenseQuery(
+	baseOptions?:
+		| Apollo.SkipToken
+		| Apollo.SuspenseQueryHookOptions<GetBoardCommentQuery, GetBoardCommentQueryVariables>,
+) {
+	const options =
+		baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+	return Apollo.useSuspenseQuery<GetBoardCommentQuery, GetBoardCommentQueryVariables>(
+		GetBoardCommentDocument,
+		options,
+	);
+}
 export type GetBoardCommentQueryHookResult = ReturnType<typeof useGetBoardCommentQuery>;
 export type GetBoardCommentLazyQueryHookResult = ReturnType<typeof useGetBoardCommentLazyQuery>;
-export type GetBoardCommentSuspenseQueryHookResult = ReturnType<typeof useGetBoardCommentSuspenseQuery>;
-export type GetBoardCommentQueryResult = Apollo.QueryResult<GetBoardCommentQuery, GetBoardCommentQueryVariables>;
+export type GetBoardCommentSuspenseQueryHookResult = ReturnType<
+	typeof useGetBoardCommentSuspenseQuery
+>;
+export type GetBoardCommentQueryResult = Apollo.QueryResult<
+	GetBoardCommentQuery,
+	GetBoardCommentQueryVariables
+>;

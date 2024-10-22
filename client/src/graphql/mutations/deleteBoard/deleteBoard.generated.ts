@@ -1,22 +1,26 @@
+/** @format */
+
+import * as Apollo from '@apollo/client';
 import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+
 const defaultOptions = {} as const;
 export type DeleteBoardMutationVariables = Types.Exact<{
-  boardId: Types.Scalars['Int']['input'];
+	boardId: Types.Scalars['Int']['input'];
 }>;
 
-
-export type DeleteBoardMutation = { __typename?: 'Mutation', deleteBoard: boolean };
-
+export type DeleteBoardMutation = { __typename?: 'Mutation'; deleteBoard: boolean };
 
 export const DeleteBoardDocument = gql`
-    mutation DeleteBoard($boardId: Int!) {
-  deleteBoard(boardId: $boardId)
-}
-    `;
-export type DeleteBoardMutationFn = Apollo.MutationFunction<DeleteBoardMutation, DeleteBoardMutationVariables>;
+	mutation DeleteBoard($boardId: Int!) {
+		deleteBoard(boardId: $boardId)
+	}
+`;
+export type DeleteBoardMutationFn = Apollo.MutationFunction<
+	DeleteBoardMutation,
+	DeleteBoardMutationVariables
+>;
 
 /**
  * __useDeleteBoardMutation__
@@ -35,10 +39,18 @@ export type DeleteBoardMutationFn = Apollo.MutationFunction<DeleteBoardMutation,
  *   },
  * });
  */
-export function useDeleteBoardMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBoardMutation, DeleteBoardMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteBoardMutation, DeleteBoardMutationVariables>(DeleteBoardDocument, options);
-      }
+export function useDeleteBoardMutation(
+	baseOptions?: Apollo.MutationHookOptions<DeleteBoardMutation, DeleteBoardMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<DeleteBoardMutation, DeleteBoardMutationVariables>(
+		DeleteBoardDocument,
+		options,
+	);
+}
 export type DeleteBoardMutationHookResult = ReturnType<typeof useDeleteBoardMutation>;
 export type DeleteBoardMutationResult = Apollo.MutationResult<DeleteBoardMutation>;
-export type DeleteBoardMutationOptions = Apollo.BaseMutationOptions<DeleteBoardMutation, DeleteBoardMutationVariables>;
+export type DeleteBoardMutationOptions = Apollo.BaseMutationOptions<
+	DeleteBoardMutation,
+	DeleteBoardMutationVariables
+>;

@@ -1,33 +1,51 @@
+/** @format */
+
+import * as Apollo from '@apollo/client';
 import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+
 const defaultOptions = {} as const;
 export type GetBoardQueryVariables = Types.Exact<{
-  boardId: Types.Scalars['Int']['input'];
+	boardId: Types.Scalars['Int']['input'];
 }>;
 
-
-export type GetBoardQuery = { __typename?: 'Query', getBoard: { __typename?: 'BoardSchema', author: string, title: string, content: string, imageUrl?: Array<string> | null, youtubeUrl?: string | null, createdAt: Date, boardAddressOutput?: { __typename?: 'BoardAddressOutput', zoneCode: number, address: string, detailAddress: string } | null } };
-
+export type GetBoardQuery = {
+	__typename?: 'Query';
+	getBoard: {
+		__typename?: 'BoardSchema';
+		author: string;
+		title: string;
+		content: string;
+		imageUrl?: Array<string> | null;
+		youtubeUrl?: string | null;
+		createdAt: Date;
+		boardAddressOutput?: {
+			__typename?: 'BoardAddressOutput';
+			zoneCode: number;
+			address: string;
+			detailAddress: string;
+		} | null;
+	};
+};
 
 export const GetBoardDocument = gql`
-    query GetBoard($boardId: Int!) {
-  getBoard(boardId: $boardId) {
-    author
-    title
-    content
-    imageUrl
-    youtubeUrl
-    boardAddressOutput {
-      zoneCode
-      address
-      detailAddress
-    }
-    createdAt
-  }
-}
-    `;
+	query GetBoard($boardId: Int!) {
+		getBoard(boardId: $boardId) {
+			author
+			title
+			content
+			imageUrl
+			youtubeUrl
+			boardAddressOutput {
+				zoneCode
+				address
+				detailAddress
+			}
+			createdAt
+		}
+	}
+`;
 
 /**
  * __useGetBoardQuery__
@@ -45,18 +63,31 @@ export const GetBoardDocument = gql`
  *   },
  * });
  */
-export function useGetBoardQuery(baseOptions: Apollo.QueryHookOptions<GetBoardQuery, GetBoardQueryVariables> & ({ variables: GetBoardQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, options);
-      }
-export function useGetBoardLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBoardQuery, GetBoardQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, options);
-        }
-export function useGetBoardSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBoardQuery, GetBoardQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, options);
-        }
+export function useGetBoardQuery(
+	baseOptions: Apollo.QueryHookOptions<GetBoardQuery, GetBoardQueryVariables> &
+		({ variables: GetBoardQueryVariables; skip?: boolean } | { skip: boolean }),
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, options);
+}
+export function useGetBoardLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBoardQuery, GetBoardQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, options);
+}
+export function useGetBoardSuspenseQuery(
+	baseOptions?:
+		| Apollo.SkipToken
+		| Apollo.SuspenseQueryHookOptions<GetBoardQuery, GetBoardQueryVariables>,
+) {
+	const options =
+		baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+	return Apollo.useSuspenseQuery<GetBoardQuery, GetBoardQueryVariables>(
+		GetBoardDocument,
+		options,
+	);
+}
 export type GetBoardQueryHookResult = ReturnType<typeof useGetBoardQuery>;
 export type GetBoardLazyQueryHookResult = ReturnType<typeof useGetBoardLazyQuery>;
 export type GetBoardSuspenseQueryHookResult = ReturnType<typeof useGetBoardSuspenseQuery>;

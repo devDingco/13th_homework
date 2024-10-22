@@ -1,30 +1,44 @@
+/** @format */
+
+import * as Apollo from '@apollo/client';
 import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+
 const defaultOptions = {} as const;
 export type GetBoardsQueryVariables = Types.Exact<{
-  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  take?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+	take?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
-
-export type GetBoardsQuery = { __typename?: 'Query', getBoards: { __typename?: 'BoardPaginationResponse', totalCount: number, result: Array<{ __typename?: 'BoardSchema', author: string, title: string, boardId: number, createdAt: Date }> } };
-
+export type GetBoardsQuery = {
+	__typename?: 'Query';
+	getBoards: {
+		__typename?: 'BoardPaginationResponse';
+		totalCount: number;
+		result: Array<{
+			__typename?: 'BoardSchema';
+			author: string;
+			title: string;
+			boardId: number;
+			createdAt: Date;
+		}>;
+	};
+};
 
 export const GetBoardsDocument = gql`
-    query GetBoards($page: Int, $take: Int) {
-  getBoards(page: $page, take: $take) {
-    result {
-      author
-      title
-      boardId
-      createdAt
-    }
-    totalCount
-  }
-}
-    `;
+	query GetBoards($page: Int, $take: Int) {
+		getBoards(page: $page, take: $take) {
+			result {
+				author
+				title
+				boardId
+				createdAt
+			}
+			totalCount
+		}
+	}
+`;
 
 /**
  * __useGetBoardsQuery__
@@ -43,18 +57,30 @@ export const GetBoardsDocument = gql`
  *   },
  * });
  */
-export function useGetBoardsQuery(baseOptions?: Apollo.QueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, options);
-      }
-export function useGetBoardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, options);
-        }
-export function useGetBoardsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, options);
-        }
+export function useGetBoardsQuery(
+	baseOptions?: Apollo.QueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, options);
+}
+export function useGetBoardsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, options);
+}
+export function useGetBoardsSuspenseQuery(
+	baseOptions?:
+		| Apollo.SkipToken
+		| Apollo.SuspenseQueryHookOptions<GetBoardsQuery, GetBoardsQueryVariables>,
+) {
+	const options =
+		baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+	return Apollo.useSuspenseQuery<GetBoardsQuery, GetBoardsQueryVariables>(
+		GetBoardsDocument,
+		options,
+	);
+}
 export type GetBoardsQueryHookResult = ReturnType<typeof useGetBoardsQuery>;
 export type GetBoardsLazyQueryHookResult = ReturnType<typeof useGetBoardsLazyQuery>;
 export type GetBoardsSuspenseQueryHookResult = ReturnType<typeof useGetBoardsSuspenseQuery>;
