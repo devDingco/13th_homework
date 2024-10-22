@@ -2,8 +2,9 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
+import { Address } from "react-daum-postcode";
 
 export default function useBoardDetailEdit(isEdit: boolean){
     const router = useRouter();
@@ -27,12 +28,13 @@ export default function useBoardDetailEdit(isEdit: boolean){
     const [subject, setSubject] = useState("")
     const [subjectError, setSubjectError] = useState("")
 
+    
     const [isActive, setIsActive] = useState(false)
-
+    
     const {data} = useQuery(FetchBoardDocument, {
         variables: {boardId: editId.toString()},
     }); // useQuery는 data로 받아야함
-    console.log('data:::::', data);
+    console.log('data???????', data);
 
     // 리팩토링 후 early-exit 패턴
     const onChangeName = (event:ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +62,41 @@ export default function useBoardDetailEdit(isEdit: boolean){
         setIsActive(false)
     }
 
+    
+    // 주소
+    const [isOpen, setIsOpen] = useState(false);
+    const [writeAddress, setWriteAddress] = useState("");
+    const [zoneAddress, setZoneAddress] = useState("");
+    const [detailAddress, setdetailAddress] = useState("");
 
+    // useEffect (isEdit 또는 data가 변경될 때 상태를 업데이트 하도록 함)
+    useEffect(() => {
+        if(isEdit && data){
+            setZoneAddress(data?.fetchBoard.boardAddress?.zipcode || "");
+            setWriteAddress(data?.fetchBoard.boardAddress?.address || "");
+        }
+    }, [isEdit, data]);
+    const onClickAddress = () => {
+        setIsOpen(true);
+    }
+    const handleOk = () => {
+        setIsOpen(false);
+    };
+    
+    const handleCancel = () => {
+        setIsOpen(false);
+    };
+
+    const handleComplete = (data: Address) => {
+        const fullAddress = data.address; // Address에 포함된 address
+        const zonecode = data.zonecode; // Address에 포함된 zonecode
+        setWriteAddress(fullAddress);
+        setZoneAddress(zonecode);
+        console.log(data);
+        setIsOpen(false);
+    };
+
+    // 
     let registerError = false;
 
     const register = async (event:MouseEvent<HTMLButtonElement>) => {
@@ -108,9 +144,9 @@ export default function useBoardDetailEdit(isEdit: boolean){
                             contents: subject,
                             youtubeUrl: "",
                             boardAddress: {
-                                zipcode: "",
-                                address: "",
-                                addressDetail: "",
+                                zipcode: zoneAddress,
+                                address: writeAddress,
+                                addressDetail: detailAddress,
                             },
                             images: ["", ""],
                         }
@@ -204,10 +240,20 @@ export default function useBoardDetailEdit(isEdit: boolean){
         registerColor,
         registerActive,
         isActive,
+        isOpen,
+        writeAddress,
+        zoneAddress,
         onChangeName,
         onChangePassword,
         onChangeSubject,
         onChangeTitle,
+        onClickAddress,
+        handleOk,
+        handleCancel,
+        handleComplete,
+        setWriteAddress,
+        setZoneAddress,
+        setdetailAddress,
         register,
     };
 

@@ -1,3 +1,6 @@
+.customTooltip{
+    font-size:1.6rem;
+}
 .content{
     width:128rem;
     height:217.1rem;
@@ -51,10 +54,11 @@
     background:url(../../../../public/images/clip.png) no-repeat;
     margin-right:1.6rem;
 }
-.content .subjectIcon .mapIcon{
+.content .mapIcon{
     width:1.51rem;
     height:1.844rem;
     background:url(../../../../public/images/map_icon.png) no-repeat;
+    cursor:pointer;
 }
 
 .content .subjectImg{

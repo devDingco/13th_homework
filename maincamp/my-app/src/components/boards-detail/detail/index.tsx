@@ -2,6 +2,7 @@
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css"
 import useBoardsDetail from "@/components/boards-detail/detail/hook"
+import { Tooltip } from "antd";
 
 export default function BoardsDetail() {
     const {data, onClickEdit} = useBoardsDetail();
@@ -21,7 +22,9 @@ export default function BoardsDetail() {
             <div className={styles.subject}>
                 <div className={styles.subjectIcon}>
                     <p className={styles.clip}></p>
-                    <p className={styles.mapIcon}></p>
+                    <Tooltip title={data?.fetchBoard.boardAddress?.address || "주소가 없습니다."} overlayClassName={styles.customTooltip}>
+                        <p className={styles.mapIcon}></p>
+                    </Tooltip>
                 </div>
                 <p className={styles.subjectImg}></p>
                 <p>{data?.fetchBoard?.contents}</p>

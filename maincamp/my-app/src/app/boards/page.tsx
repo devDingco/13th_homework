@@ -8,9 +8,8 @@ export default function BoardsListPage() {
 
     return(
         <>
-            <BoardListBanner />
+            {/* <BoardListBanner /> */}
             <BoardsList />
-            {/* <BoardsDetail /> */}
         </>
     )
 }

@@ -4,6 +4,8 @@ import styles from "./styles.module.css";
 import Image from "next/image"
 import useBoardDetailEdit from "./hook";
 import { IBoardWriteProps } from "./types";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardDetailEdit(props: IBoardWriteProps){
     const {isEdit} = props;
@@ -21,10 +23,19 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
         registerColor,
         registerActive,
         isActive,
+        isOpen,
+        writeAddress,
+        zoneAddress,
         onChangeName,
         onChangePassword,
         onChangeSubject,
         onChangeTitle,
+        onClickAddress,
+        setZoneAddress,
+        setWriteAddress,
+        handleOk,
+        handleCancel,
+        handleComplete,
         register
 
     } = useBoardDetailEdit(isEdit);
@@ -32,13 +43,6 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
     return (
         <div className={styles.content}>
             <h1 className="new-h1">{props.isEdit===true ? "게시글 수정" : "게시글 등록"}</h1>
-            {/* <NewNamePassword />
-            <NewTitle />
-            <NewSubject />
-            <NewAddress />
-            <NewYoutube />
-            <NewPicture />
-            <NewButton /> */}
             <div className={styles.name_pw_bg}>
                 <div>
                     <span className="new-span">작성자</span><span className={`${styles.red} new-span`}>*</span>
@@ -77,10 +81,30 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
             <div className={styles.address}>
                 <p className="new-p">주소</p>
                 <div className={styles.address_top}>
-                    <input type="text" placeholder="01234"></input>
-                    <button>우편번호 검색</button>
+                    <input 
+                        type="text" 
+                        placeholder="01234" 
+                        value={zoneAddress}
+                        onChange={(event) => setZoneAddress(event.target.value)}
+                        readOnly
+                    >
+                    </input>
+                    <button onClick={onClickAddress}>우편번호 검색</button>
+                    {isOpen && (
+                        <Modal open={true} onOk={handleOk} onCancel={handleCancel}>
+                            <DaumPostcodeEmbed onComplete={handleComplete} />
+                        </Modal>
+                    )}
                 </div>
-                <input className="d-block" type="text" placeholder="주소를 입력해 주세요."></input>
+                <input 
+                    className="d-block" 
+                    type="text" 
+                    placeholder="주소를 입력해 주세요." 
+                    value={writeAddress}
+                    onChange={(event) => setWriteAddress(event.target.value)}
+                    readOnly
+                >    
+                </input>
                 <input type="text" placeholder="상세주소"></input>
             </div>
             <div className={styles.link}>
