@@ -3,11 +3,11 @@ import Image from "next/image";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { MdInsertLink } from "react-icons/md";
 
-export default function DetailFormInfo() {
+export default function DetailFormInfo({ value }: IDetailInfoProps) {
   return (
     <div className="flex-col gap-3 items-center">
       <div className="flex justify-between">
-        <div>홍길동</div>
+        <div>{value}</div>
         <div>2024.11.11</div>
       </div>
       <hr />

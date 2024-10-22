@@ -1,4 +1,5 @@
 import InputFormTitle from "./NewFormTitle";
+import NewFormValidationMessage from "./NewFormValidation";
 
 const placeholderObj: IPlaceholderObj = {
   author: "작성자 명을 입력해 주세요.",
@@ -17,24 +18,26 @@ export default function InputFormText({
   onChange,
 }: IInputFormTextProps) {
   return (
-    <div className="content-area">
-      <InputFormTitle title={title} />
-      {title !== "content" ? (
-        <input
-          id={title}
-          className="input-text"
-          type={title === "password" ? "password" : "text"}
-          placeholder={placeholderObj[title]}
-          onChange={(e) => onChange?.(e)}
-        />
-      ) : (
-        <textarea
-          id={title}
-          className="input-textarea"
-          placeholder={placeholderObj[title]}
-          onChange={(e) => onChange?.(e)}
-        ></textarea>
-      )}
-    </div>
+    <>
+      <div className="content-area">
+        <InputFormTitle title={title} />
+        {title !== "content" ? (
+          <input
+            id={title}
+            className="input-text"
+            type={title === "password" ? "password" : "text"}
+            placeholder={placeholderObj[title]}
+            onChange={(e) => onChange?.(e)}
+          />
+        ) : (
+          <textarea
+            id={title}
+            className="input-textarea"
+            placeholder={placeholderObj[title]}
+            onChange={(e) => onChange?.(e)}
+          ></textarea>
+        )}
+      </div>
+    </>
   );
 }
