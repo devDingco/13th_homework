@@ -12,6 +12,8 @@ interface IBoardsListProps {
   keyword: string;
 }
 
+const 검색어암호화 = "!@#$!@#%#^#$%@#$%#$%&$%&@$%#$%!$#>#$%#?";
+
 export default function BoardsList({
   data,
   handleDelete,
@@ -38,12 +40,15 @@ export default function BoardsList({
                   onMouseLeave={() => setIsHovered(null)}
                 >
                   <span className={`${styles.번호} ${styles.유저번호}`}>
-                    {String(index + 1).padStart(3, "0")}
+                    {String(index + 1).padStart(3, "0")} {/*001*/}
                   </span>
                   <span className={`${styles.제목} ${styles.유저제목}`}>
                     {board.title
-                      .replace(keyword, `@#$%${keyword}@#$%`)
-                      .split("@#$%")
+                      .replace(
+                        keyword,
+                        `${검색어암호화}${keyword}${검색어암호화}`
+                      )
+                      .split(검색어암호화)
                       .map((el, index) => (
                         <span
                           key={`${el}_${index}`}

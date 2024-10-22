@@ -13,7 +13,7 @@ const { RangePicker } = DatePicker;
 const dateFormat = "YYYY.MM.DD";
 
 interface IUserDatePickerProps {
-  onDateChange: (dates) => void; // 날짜 변경 시 실행될 함수
+  onDateChange: (dates: any) => void;
 }
 
 export default function UserDatePicker({ onDateChange }: IUserDatePickerProps) {

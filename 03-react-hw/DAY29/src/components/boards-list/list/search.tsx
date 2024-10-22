@@ -1,4 +1,3 @@
-// search.tsx
 import Input from "@/components/input";
 import Image from "next/image";
 import UserDatePicker from "./datePicker";
@@ -7,7 +6,7 @@ import type { ChangeEvent } from "react";
 
 interface ISearchProps {
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-  onDateChange: (dates: any) => void; // 날짜 변경 props 추가
+  onDateChange: (dates: any) => void; //type 모름
 }
 
 export default function Search({ onChangeSearch, onDateChange }: ISearchProps) {
