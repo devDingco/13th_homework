@@ -27,7 +27,7 @@ export default function FirebaseAPI() {
     }
   };
 
-  const fetchDocument = async (name: CollectionList) => {
+  const fetchDocuments = async (name: CollectionList) => {
     try {
       const documents = await getDocs(collection(db, name));
       const data = documents.docs.map((el) => el.data());
@@ -56,7 +56,7 @@ export default function FirebaseAPI() {
 
   return {
     createDocument,
-    fetchDocument,
+    fetchDocuments,
     updateDocument,
   };
 }
