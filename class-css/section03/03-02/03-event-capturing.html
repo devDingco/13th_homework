@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>이벤트버블링 전파중단 실습</title>
+    <style>
+        .css_이미지사진 {
+            width: 100px;
+            height: 100px;
+            background-color: deepskyblue;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        const JS_확대하기기능 = () => {
+            document.getElementById("HTML_이미지사진").style = "width: 100vw; height: 100vh;"
+        }
+        const JS_좋아요기능 = () => {
+            // event.preventDefault//<a /> 태그처럼 기본 기능들을 금지(prevent) => 여기서는 소용 없음
+            event.stopPropagation() //부모태그로 클릭이벤트 전파(propagation)를 중단(stop)하세요
+            alert("좋아요가 +1 올라갔습니다.")
+
+        }
+
+        const JS_로그인체크기능 =() => {
+            const 비밀번호 = prompt("로그인 후 이용해 주세요.")
+            if(비밀번호 === "1234"){
+                alert("민지님 반갑습니다. 즐거운 여행 되세요~")
+
+                window.addEventListener("click", js_로그인체크기능, {capture: true})
+            } else {
+                alert("로그인에 실패하였습니다. 다시 시도해 주세요.")
+            }
+        }
+        window.addEventListener("click", js_로그인체크기능, {capture: true})
+    </script>
+</head>
+<body>
+    <div id="HTML_이미지사진" class="css_이미지사진" onclick="JS_확대하기기능()">
+        <button onclick="JS_좋아요기능(event)">좋아요</button>
+    </div>
+    <p>사진을 클릭하면 전체화면으로 볼 수 있습니다.</p>
+</body>
+</html>

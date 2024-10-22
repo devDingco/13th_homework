@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>윈도우 스크롤리스너 실습</title>
+    <style>
+        .css_네모박스 {
+            width: 1000px;
+            height: 500px;
+            overflow: scroll;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            document
+        }
+            const 스크롤내려간길이 = window.scrollY
+            console.log('스크롤이 ${스크롤내려간길이}만큼 내려갔어요)')
+
+            if(스크롤내려간길이 > 0){
+                document.getElementById("HTML_이미지상자").style = "border: 20px solid red"
+            }
+            else {
+                    document.getElementById("HTML_이미지상자").style = "border: none"
+                }
+            })
+
+    </script>
+</head>
+<body>
+    <img src="./00-image.jpg" width="1000px" />
+</body>
+</html>

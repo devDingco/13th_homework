@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>윈도우스크롤 실습</title>
+    <script>
+        const JS_스크롤기능 = () => {
+            // window.scrollTo({top: 0 }) //스크롤 맨 위로 올려줘!
+
+            // window.scrollBy({ top: -500}) //지금 위치에서 500만큼 올려줘
+
+            window.scrollTo({top: 0, behavior: "smooth"})
+        }
+    </script>
+</head>
+<body>
+    <img src="./00-image.jpg" width="2000px" />
+    <button>HTML 스크롤 올리기</button>
+</body>
+</html>
