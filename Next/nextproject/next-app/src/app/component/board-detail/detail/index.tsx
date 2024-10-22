@@ -10,7 +10,6 @@ import { IDetailProps } from "./types";
 
 export default function DetailWrite(props: IDetailProps) {
   const { onModify, data, onList } = UseDetailWrite();
-  console.log(data, "ddd");
   console.log(data?.fetchBoard.images.length);
   console.log(data?.fetchBoard?.images[0]);
 
