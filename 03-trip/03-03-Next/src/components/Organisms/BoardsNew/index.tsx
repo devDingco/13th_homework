@@ -2,6 +2,7 @@
 
 import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
 import useSubmitInput from "@/commons/hooks/useSubmitInput";
+import useUploadImg from "@/commons/hooks/useUploadImg";
 
 import Button from "@/components/Atoms/_Button";
 import AddressField from "@/components/Molecules/_AddrField";
@@ -11,8 +12,12 @@ import InputField from "@/components/Molecules/_InputField";
 export default function BoardsNewUI() {
     const { isModalOpen, addressData, onToggleModal, handleComplete } =
         useDaumPostApi();
+
+    const { imageUrl, onChangeFile } = useUploadImg();
+
     const { submitInput, handleChange, onClickCreate } = useSubmitInput({
         addressData,
+        imageUrl,
     });
 
     const valid =
@@ -67,7 +72,7 @@ export default function BoardsNewUI() {
 
             <InputField id="link_ID" onChange={handleChange} />
 
-            <ImgField />
+            <ImgField imageUrl={imageUrl} onChange={onChangeFile} />
 
             <Button
                 label="등록하기"
