@@ -73,3 +73,16 @@ const UPLOAD_FILE = gql`
     }
   }
 `;
+
+// 검색
+const FETCH_BOARDS_SEARCH = gql`
+  query fetchBoardsSearch($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
