@@ -1,8 +1,10 @@
 import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Address } from "react-daum-postcode";
+import { IEditinput } from "./types";
+import { UPLOAD_FILE } from "./queries";
 
 export const useBoardsWrite = (props: any) => {
   // graphql
@@ -59,7 +61,6 @@ export const useBoardsWrite = (props: any) => {
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard?.title : "");
   const [content, setContent] = useState(props.isEdit ? data?.fetchBoard?.contents : "");
-  const [files, setFiles] = useState<string[]>([]);
 
   // error state
   const [errorWriter, setErrorWriter] = useState("");
@@ -135,7 +136,7 @@ export const useBoardsWrite = (props: any) => {
                 address: address,
                 addressDetail: detailAddress,
               },
-              images: ["", ""],
+              images: imageUrls,
             },
           },
         });
@@ -145,7 +146,7 @@ export const useBoardsWrite = (props: any) => {
         router.push(`/boards/${data?.createBoard._id}`);
       }
     }
-    // 수정
+    // 수정 관련 내용
     else if (props.isEdit === true) {
       if (content?.trim() === "" && title?.trim() === "") {
         setErrorContent("필수입력 사항입니다.");
@@ -162,22 +163,13 @@ export const useBoardsWrite = (props: any) => {
       }
 
       // 비밀번호 확인하기
-      interface IEditinput {
-        title?: string;
-        contents?: string;
-        boardAddress?: {
-          zipcode?: string;
-          address?: string;
-          addressDetail?: string;
-        };
-        youtubeUrl?: string;
-      }
       const myPw = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
       const editInput: IEditinput = {};
       if (title?.trim() && title !== data?.fetchBoard?.title) {
         editInput.title = title;
       }
 
+      // 수정기능
       if (content?.trim() && content !== data?.fetchBoard?.contents) {
         editInput.contents = content;
       }
@@ -190,6 +182,9 @@ export const useBoardsWrite = (props: any) => {
       }
       if (youtubeUrl?.trim() && youtubeUrl !== data?.fetchBoard?.youtubeUrl) {
         editInput.youtubeUrl = youtubeUrl;
+      }
+      if (imageUrls.length > 0 && JSON.stringify(imageUrls) !== JSON.stringify(data?.fetchBoard?.images)) {
+        editInput.images = imageUrls;
       }
 
       // 수정된 값이 있는 항목만 API 요청
@@ -226,32 +221,52 @@ export const useBoardsWrite = (props: any) => {
     }
   };
 
-  // 이미지 업로드 시 미리보기 input의 onChange
-  const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFiles = Array.from(e.target.files || []);
-    const newFilePreviews: string[] = [];
+  // 이미지 미리보기
+  const [imageUrls, setImageUrls] = useState(props.isEdit ? data?.fetchBoard?.images || ["", "", ""] : ["", "", ""]);
 
-    if (files.length + uploadedFiles.length > 5) {
-      alert("최대 5개의 이미지만 업로드 할 수 있습니다.");
-      return; // 경고 후 함수 종료
+  const fileRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
+  const [uploadFile] = useMutation(UPLOAD_FILE);
+
+  const checkValidationFile = (file?: File) => {
+    if (!file) {
+      alert("파일이 없습니다.");
+      return false;
     }
 
-    uploadedFiles.forEach((file: File) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
+    if (file.size > 5 * 1024 * 1024) {
+      alert("파일 용량이 너무 큽니다.(제한: 5MB)");
+      return false;
+    }
 
-      reader.onload = () => {
-        newFilePreviews.push(reader.result as string);
-        // 모든 파일을 읽은 후 상태를 업데이트
-        if (newFilePreviews.length === uploadedFiles.length) {
-          setFiles((prevFiles: string[]) => [...prevFiles, ...newFilePreviews]);
-        }
-      };
-    });
+    if (!file.type.includes("jpeg") && !file.type.includes("png")) {
+      alert("jpeg 또는 png 파일만 업로드 가능합니다.");
+      return false;
+    }
+    return true;
+  };
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const isValid = checkValidationFile(file);
+      if (!isValid) return;
+
+      const result = await uploadFile({ variables: { file } });
+      setImageUrls((prev) => {
+        const newImageUrls = [...prev];
+        newImageUrls[index] = result.data.uploadFile.url ?? "";
+        return newImageUrls; // URL 변경
+      });
+    }
+  };
+
+  const onClickImage = (index: number): void => {
+    fileRefs[index].current?.click();
   };
 
   return {
-    saveImgFile,
     onClickSignup,
     onChangeContent,
     onChangeTitle,
@@ -262,7 +277,6 @@ export const useBoardsWrite = (props: any) => {
     errorPw,
     errorTitle,
     errorContent,
-    files,
     data,
     showModal,
     isModalOpen,
@@ -274,5 +288,9 @@ export const useBoardsWrite = (props: any) => {
     detailAddress,
     onChangeAddress,
     onChangeYoutube,
+    imageUrls,
+    onChangeFile,
+    onClickImage,
+    fileRefs,
   };
 };
