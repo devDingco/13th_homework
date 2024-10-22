@@ -1,11 +1,15 @@
-mutation CreateBoard($createBoard: CreateBoardDto!) {
-    createBoard(createBoard: $createBoard) {
+mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
         author
         title
         content
         imageUrl
         youtubeUrl
-        address
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
         createdAt
     }
 }

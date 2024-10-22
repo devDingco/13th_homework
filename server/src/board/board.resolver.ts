@@ -10,13 +10,11 @@ export class BoardResolver {
     constructor(private readonly boardService: BoardService) {}
 
     @Query(() => BoardPaginationResponse)
-    async getBoards(
+    getBoards(
         @Args('page', { type: () => Int, nullable: true }) page: number = 1,
         @Args('take', { type: () => Int, nullable: true }) take: number = 5,
     ) {
-        const res = await this.boardService.findAll({ page, take });
-        console.log(res);
-        return res;
+        return this.boardService.findAll({ page, take });
     }
 
     @Query(() => BoardSchema)

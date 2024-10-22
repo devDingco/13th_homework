@@ -29,7 +29,7 @@ import { typeORMpostgreSQLConfig } from 'configs/typeorm_postgreSQL.config';
 
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
-            autoSchemaFile: true,
+            autoSchemaFile: 'src/graphql/schema.gql',
         }),
 
         BoardModule,

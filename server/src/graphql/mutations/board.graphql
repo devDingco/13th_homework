@@ -1,23 +1,31 @@
-mutation CreateBoard($createBoard: CreateBoardDto!) {
-    createBoard(createBoard: $createBoard) {
+mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
         author
         title
         content
         imageUrl
         youtubeUrl
-        address
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
         createdAt
     }
 }
 
-mutation UpdateBoard($boardId: Int!, $updateBoard: UpdateBoardDto!) {
-    updateBoard(boardId: $boardId, updateBoard: $updateBoard) {
+mutation UpdateBoard($boardId: Int!, $updateBoardInput: UpdateBoardInput!) {
+    updateBoard(boardId: $boardId, updateBoardInput: $updateBoardInput) {
         author
         title
         content
         imageUrl
         youtubeUrl
-        address
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
         createdAt
     }
 }

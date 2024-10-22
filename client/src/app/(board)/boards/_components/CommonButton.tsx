@@ -11,7 +11,7 @@ import deleteBoard from '@/apis/boards/deleteBoard';
 import useOnClickBack from '@/hooks/useOnClickBack';
 import useSWR from 'swr';
 
-const CommonButton = React.memo(({ title, isButtonDisabled, boardId, setIsEdit }: IButtonProps) => {
+const CommonButton = React.memo(({ title, isButtonDisabled, boardId }: IButtonProps) => {
 	const { data, mutate } = useSWR(boardUrlEndPoint, null, {
 		revalidateOnFocus: false,
 	});

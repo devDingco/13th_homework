@@ -5,7 +5,11 @@ query GetBoard($boardId: Int!) {
         content
         imageUrl
         youtubeUrl
-        address
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
         createdAt
     }
 }

@@ -1,9 +1,12 @@
-query GetBoards {
-    getBoards {
-        author
-        title
-        boardId
-        createdAt
+query GetBoards($page: Int, $take: Int) {
+    getBoards(page: $page, take: $take) {
+        result {
+            author
+            title
+            boardId
+            createdAt
+        }
+        totalCount
     }
 }
 query GetBoard($boardId: Int!) {
@@ -13,7 +16,11 @@ query GetBoard($boardId: Int!) {
         content
         imageUrl
         youtubeUrl
-        address
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
         createdAt
     }
 }

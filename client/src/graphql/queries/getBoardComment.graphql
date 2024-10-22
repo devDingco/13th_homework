@@ -1,5 +1,5 @@
-query GetBoardComment($boardId: Int!) {
-    getBoardComment(boardId: $boardId) {
+query GetBoardComment($boardId: Int!, $page: Int) {
+    getBoardComment(boardId: $boardId, page: $page) {
         author
         content
         rating

@@ -3,7 +3,9 @@
 
 import { ICreateFormBoard, IFormLower } from '@/models/board.type';
 
+import { EError } from '@/models/error.type';
 import { IFormStateError } from '@/models/formBoardError';
+import { actionHandleError } from '@/utils/actionHandlerError';
 import { filterFormRequire } from '@/utils/filterFormRequire';
 import { isValidImage } from '@/utils/validImage/isValidImage';
 import postBoard from '../apis/boards/postBoard';
@@ -24,15 +26,24 @@ export async function createBoardAction(
 	const detailAddress = (formData.get('DetailAddress') as string) || '';
 	let images = formData.getAll('image') as File[];
 
-	filterFormRequire(fieldValues, requiredFields);
+	const { errors, hasError } = filterFormRequire(fieldValues, requiredFields);
+
+	if (hasError) {
+		return actionHandleError(errors, '');
+	}
 
 	images = images.filter((image) => image.size !== 0);
 
 	let imageUrl: string[] = [];
+
 	if (images.length > 0) {
-		await isValidImage(images);
+		if (isValidImage(images)) return actionHandleError({}, EError.SIZE_TYPE);
 
 		imageUrl = await uploadImageS3(images);
+
+		if (imageUrl.length === 0) {
+			return actionHandleError({}, EError.S3_ERROR);
+		}
 	}
 
 	const finalData: ICreateFormBoard = {

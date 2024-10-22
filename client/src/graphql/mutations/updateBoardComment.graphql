@@ -1,12 +1,12 @@
 mutation UpdateBoardComment(
     $boardId: Int!
-    $updateBoardComment: UpdateBoardCommentDto!
-    $parentId: String!
+    $updateBoardComment: UpdateBoardCommentInput!
+    $commentId: String!
 ) {
     updateBoardComment(
         boardId: $boardId
         updateBoardComment: $updateBoardComment
-        parentId: $parentId
+        commentId: $commentId
     ) {
         author
         content

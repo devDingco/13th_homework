@@ -1,6 +1,6 @@
 mutation CreateBoardComment(
     $boardId: Int!
-    $createBoardComment: CreateBoardCommentDto!
+    $createBoardComment: CreateBoardCommentInput!
 ) {
     createBoardComment(
         boardId: $boardId
