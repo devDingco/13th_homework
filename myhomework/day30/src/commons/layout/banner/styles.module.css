@@ -1,0 +1,5 @@
+.mySwiper {
+  --swiper-pagination-color: white;
+  --swiper-pagination-bullet-inactive-color: #ffffff;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+}

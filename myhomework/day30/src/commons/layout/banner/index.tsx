@@ -6,8 +6,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import Image from "next/image";
 import "swiper/css/pagination";
-
-import "./styles.module.css";
+import style from "./styles.module.css";
 
 export default function BannerPage() {
   return (
@@ -23,9 +22,9 @@ export default function BannerPage() {
         clickable: true,
       }}
       modules={[Autoplay, Pagination]}
-      className="mySwiper"
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
+      className={style.mySwiper}
     >
       <SwiperSlide>
         <Image
