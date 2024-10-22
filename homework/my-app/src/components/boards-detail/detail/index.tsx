@@ -36,6 +36,7 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
       pointAtCenter: true,
     };
   }, [arrow]);
+  const defaultImage = "/image/sampleimg2.jpg";
 
   return (
     <div className={styles.container}>
@@ -50,10 +51,14 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
             <Carousel>
               <Carousel.Item>
                 <Image
-                  src="/image/sampleimg2.jpg"
+                  src={
+                    data?.fetchBoard.images?.[0]
+                      ? `https://storage.googleapis.com/${data.fetchBoard.images[0]}`
+                      : defaultImage
+                  }
                   alt="풍경"
-                  width={0}
-                  height={0}
+                  width={500} // 적절한 고정 크기
+                  height={300}
                   sizes="100vw"
                   className={styles.carouselImage}
                   style={{ borderRadius: "20px" }}
