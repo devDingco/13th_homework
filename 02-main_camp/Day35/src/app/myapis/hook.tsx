@@ -3,17 +3,17 @@ import FirebaseAPI, { CollectionList } from "@/commons/apis/firebase";
 import { useState } from "react";
 
 export default function usePlanPage() {
-  const [plans, setPlans] = useState<DocumentData[]>([]);
+  const [planList, setPlanList] = useState<DocumentData[]>([]);
 
   const { fetchDocument } = FirebaseAPI();
 
-  const getPlan = async () => {
+  const getPlanList = async () => {
     const result = await fetchDocument(CollectionList.plan);
-    setPlans(result);
+    setPlanList(result ?? []);
   };
 
   return {
-    getPlan,
-    plans,
+    planList,
+    getPlanList,
   };
 }

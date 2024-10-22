@@ -5,12 +5,12 @@ import React, { useEffect } from "react";
 import PlanList from "../_components/myapis/myapis-list";
 import usePlanPage from "./hook";
 
-export default function MyPlanPage() {
-  const { getPlan, plans } = usePlanPage();
+export default function MyPlanListPage() {
+  const { planList, getPlanList } = usePlanPage();
 
   useEffect(() => {
-    getPlan();
+    getPlanList();
   }, []);
 
-  return <PlanList data={plans} />;
+  return <PlanList data={planList} />;
 }
