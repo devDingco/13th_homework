@@ -13,11 +13,6 @@ export const WRITE_UPLOAD_FILE = gql`
     uploadFile(file: $file) {
       _id
       url
-      size
-      isUsed
-      createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;

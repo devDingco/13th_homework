@@ -2,6 +2,7 @@ import Icon from "@/components/iconFactory";
 import LikeCountBtn from "@/components/likeCountBtn";
 import { Button, Tooltip, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import Image from "next/image";
 
 import { dateViewSet } from "@/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/detail/hook";
@@ -15,6 +16,8 @@ export default function BoardDetail() {
 
   if (loading) return <div>로딩중...</div>; //! 로딩중일때 디자인 변경하여 처리필요
   if (detailData === null || error) return redirect("/boards");
+
+  console.log("디테일 데이터", detailData);
 
   return (
     <div className="flex flex-col gap-10">
@@ -58,21 +61,22 @@ export default function BoardDetail() {
             </Tooltip>
           </div>
         </div>
-        {detailData?.youtubeUrl && (
-          <div className="flex gap-4">
-            {/* {detailData?.images.length > 0 &&
-              detailData?.images.map((url: string, index: number) => (
+        {detailData?.images &&
+          detailData?.images.length > 0 &&
+          !detailData?.images.includes("") && (
+            <div className="flex gap-4">
+              {detailData?.images.map((url: string) => (
                 <Image
-                  key={index}
-                  src={url}
+                  key={url}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${url}`}
                   alt="content"
-                  className=""
                   width="100"
                   height="100"
+                  style={{ width: "auto", height: "auto" }}
                 />
-              ))} */}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
         <div
           className="min-h-[500px]"
@@ -81,24 +85,6 @@ export default function BoardDetail() {
         {detailData?.youtubeUrl && (
           <div className="bg-gray-200 py-6">
             <YoutubeBox videoUrl={detailData?.youtubeUrl} />
-            {/* <div className="videoContainer max-w-4xl mx-auto">
-              <iframe
-                title="YouTube video player"
-                src={
-                  detailData?.youtubeUrl.includes(".be/") ||
-                  detailData?.youtubeUrl.includes("watch?v=")
-                    ? `https://www.youtube-nocookie.com/embed/${
-                        detailData?.youtubeUrl.split(".be/")[1] +
-                          "&autoplay=1&mute=1" ||
-                        detailData?.youtubeUrl.split("watch?v=")[1] +
-                          "&autoplay=1&mute=1"
-                      }`
-                    : detailData?.youtubeUrl
-                }
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                allowFullScreen
-              ></iframe>
-            </div> */}
           </div>
         )}
 

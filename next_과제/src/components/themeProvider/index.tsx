@@ -1,6 +1,6 @@
 "use client";
 
-import { ConfigProvider, theme as antdTheme, ThemeConfig, App } from "antd";
+import { ConfigProvider, theme as antdTheme, ThemeConfig } from "antd";
 import { useEffect, useState, useRef } from "react";
 import DarkModeBtn from "@/components/darkModeBtn";
 import { StyleProvider } from "@ant-design/cssinjs";
@@ -51,9 +51,7 @@ export default function ThemeProvider({
         theme={theme(ThemeControl)}
         getPopupContainer={() => modalContainerRef.current as HTMLElement}
       >
-        <App>
-          <div ref={modalContainerRef}>{children}</div>
-        </App>
+        <div ref={modalContainerRef}>{children}</div>
       </ConfigProvider>
     </StyleProvider>
   );

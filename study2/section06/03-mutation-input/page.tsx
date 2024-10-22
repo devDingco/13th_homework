@@ -39,9 +39,9 @@ export default function GraphQlMutationPage() {
     // useMutation Hook을 이용해 graphql mutation을 요청하는 코드
     const result = await 나의함수({
       variables: {
-        writer: writer,
-        title: title,
-        contents: contents,
+        writer,
+        title,
+        contents,
       },
     });
     console.log(result);
