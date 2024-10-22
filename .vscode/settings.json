@@ -1,4 +1,15 @@
 {
-  "liveServer.settings.port": 5501,
-  "git.ignoreLimitWarning": true
+  // "liveServer.settings.port": 5501,
+  // "git.ignoreLimitWarning": true,
+  // "cSpell.overrides": [],
+  // "typescript.suggest.completeFunctionCalls": false,
+  // "editor.parameterHints.enabled": false,
+  // "editor.hover.enabled": false,
+  // "emmet.includeLanguages": {
+  //   "javascript": "javascript",
+  //   "typescript": "typescript",
+  //   "html": "html"
+  // },
+  // "editor.suggestSelection": "recentlyUsedByPrefix",
+  // "editor.suggestOnTriggerCharacters": true
 }

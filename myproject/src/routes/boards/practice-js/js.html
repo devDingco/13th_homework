@@ -1,0 +1,226 @@
+<!-- 성아코드연습 -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <script>
+      // console.log(10 > 5);
+      // console.log(10 === 5);
+      // console.log(10 !== 5);
+
+      // const age = 19;
+      // if (age > 19) {
+      //   alert("환영합니다");
+      // } else if (age === 19) {
+      //   console.log("수능 보고 만나요");
+      // } else {
+      //   alert("아쉽지만 다음에 뵙겠습니다");
+      // }
+      // const password = true;
+      // if (password === true) {
+      //   console.log("어서오세요");
+      // } else {
+      //   console.log("비밀번호를 입력하세요");
+      // }
+
+      // const 버튼 = 11;
+      // if (버튼 <= 9) {
+      //   console.log(true);
+      // } else if (버튼 === 10) {
+      //   console.log("정답입니다");
+      // } else {
+      //   console.log(false);
+      // }
+      // const name = "jake";
+      // const age = 18;
+      // if (age <= 19 && name !== "jake") {
+      //   console.log(false);
+      // } else if (name === "" || age === 17) {
+      //   console.log(`${name}님 이신가요?`);
+      // } else {
+      //   console.log(true);
+      // }
+      // for (let e = 0; e <= 10; e++) {
+      //   console.log(e + 1);
+      //
+      //   for (let i = 0; i < 10; i++) {
+      //     if (i % 2) {
+      //       continue;
+      //     }
+      //     console.log(i);
+      //   }
+      //
+
+      // let fruit = prompt("무슨 과일을 사고 싶나요?");
+      // switch (fruit) {
+      //   case "사과":
+      //     console.log("100원입니다");
+      //     break;
+      //   case "딸기":
+      //     console.log("200원입니다");
+      //     break;
+      //   case "바나나":
+      //     console.log("2000원입니다");
+      //     break;
+      //   case "포도":
+      //     console.log("3천원입니다");
+      //     break;
+      //   default:
+      //     console.log("그건 없습니다");
+      //     break;
+      // }
+      // let 운동 = prompt("좋아하는 운동은?");
+      // switch (운동) {
+      //   case "축구":
+      //     console.log("축구부로 오세요");
+      //     break;
+      //   case "농구":
+      //     console.log("농구부로 오세요");
+      //     break;
+      //   case "배드민턴":
+      //     console.log("배드민턴부로 오세요");
+      //     break;
+      //   default:
+      //     console.log("그건 없습니다");
+      // }
+      // const job = prompt();
+      // switch (job) {
+      //   case "과학자":
+      //     console.log("과학자시군요");
+      //     break;
+      //   case "선생님":
+      //   case "수학선생님":
+      //     console.log("선생님이시군요");
+      //     break;
+      //   default:
+      //     console.log("취업 화이팅하세요");
+      // }
+
+      // function name() {
+      //   alert("에러가 발생했습니다");
+      // }
+      // name();
+      // const  = prompt(name);
+      // function sayhello(name) {
+      //   const 이름 = `안녕, ${name}`;
+      //   console.log(이름);
+      // }
+      // sayhello("성아");
+      // sayhello("han");
+
+      // function food(choice) {
+      //   const 점심 = `오늘은 ${choice}먹을까?`;
+      //   console.log(점심);
+      // }
+      // food("피자");
+
+      // function food(choice) {
+      //   const 저녁 = `오늘 ${choice} 먹을래?`;
+      //   console.log(저녁);
+      // }
+      // food("한정식");
+
+      // function hobby(aa) {
+      //   const 취미 = `${aa}가 취미야?`;
+      //   console.log(취미);
+      // }
+      // hobby("넷플보기");
+
+      // const supperman = {
+      //   name: "슈퍼맨",
+      //   age: 30,
+      // };
+      // console.log(supperman.age);
+      // supperman.haircolor = "blue";
+      // console.log(supperman);
+      // delete supperman.haircolor;
+      // console.log(supperman);
+
+      // function man(name, age) {
+      //   return {
+      //     name: name,
+      //     age: age,
+      //     hobby: "football",
+      //   };
+      // }
+      // const info = man("Mike", 13);
+      // console.log(info);
+
+      // //man이라는 함수를 선언하고 name과 age를 받아서(매개변수를 넣고) 객체를 반환하는 함수를 만들어라
+      // function man(name, age) {
+      //   return {
+      //     name,
+      //     age,
+      //     hobby: "football",
+      //   };
+      // }
+      // const info2 = man("kyo", 35);
+      // console.log(info2);
+
+      // function isAdult(user) {
+      //   if (!("age" in user) || user.age < 20) {
+      //     return false;
+      //   }
+      //   return true;
+      // }
+      // const jake = {
+      //   age: 20,
+      //   hobby: "running",
+      // };
+
+      // console.log(isAdult(jake));
+
+      // const isAdult = (user) => {
+      //   if (!("age" in user) || user.age < 20) {
+      //     return true;
+      //   }
+      //   {
+      //     return false;
+      //   }
+      // };
+      // const Mike = {
+      //   age: 20,
+      //   hobby: "baseball",
+      // };
+
+      // console.log(isAdult(Mike));
+
+      // const days = ["화", "수", "목", "금"];
+      // days.push("월");
+      // console.log(days);
+      // days.pop();
+      // console.log(days);
+      // days.pop();
+      // console.log(days);
+
+      // const 숫자 = [1, 2, 3, 4, 5];
+      // 숫자.push(6, 7);
+      // 숫자.pop();
+      // 숫자.unshift(10, 11);
+      // 숫자.shift();
+      // console.log(숫자);
+      // days.unshift("월");
+      // console.log(days);
+      // days.unshift("일");
+      // console.log(days);
+      // days.shift();
+      // console.log(days);
+
+      // 요일 배열 만들어서 요일 앞,뒤로 추가하고 0에서 시작하는 인덱스 반복문을 만들어라
+      // const days = ["mon", "tue", "wed", "thu"];
+      // console.log(days);
+      // days.unshift("sun");
+      // console.log(days);
+      // days.push("fri");
+      // console.log(days);
+      // // for (let index = 0; index < days.length; index++) {
+      // //   console.log(days[index]);
+      // // }
+      // for (let day of days) {
+      //   console.log(day);
+      // }
+    </script>
+  </head>
+  <body></body>
+</html>
