@@ -58,6 +58,19 @@ export interface ICommentList {
   number: number;
   _id: string;
   rating: number;
+  password?: string;
+}
+
+export interface ICommentData {
+  commentData: {
+    writer: string;
+    contents: string;
+    createdAt: string;
+    number: number;
+    _id: string;
+    rating: number;
+    password?: string;
+  };
 }
 
 export interface IFormData {
@@ -115,4 +128,14 @@ export interface IPagination {
     variables?: Partial<OperationVariables> | undefined
   ) => Promise<ApolloQueryResult<any>>;
   lastPage: number;
+}
+
+export interface ICommentData {
+  props?: object;
+  isEdit: boolean;
+}
+
+export interface ICheckValidationFile {
+  size: number;
+  type: string;
 }

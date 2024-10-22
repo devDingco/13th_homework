@@ -3,14 +3,15 @@
 }
 
 .rating_stars {
-  @apply flex;
-}
-
-.input_layout {
-  @apply flex flex-col gap-2;
+  @apply flex items-end;
 }
 
 .input_wrapper {
+  @apply flex gap-4;
+  /* width: 640px; */
+}
+
+.input_box {
   @apply flex gap-4;
   width: 640px;
 }
@@ -19,8 +20,12 @@
   @apply flex-1;
 }
 
+.contents_layout {
+  @apply flex flex-col gap-2 w-full;
+}
+
 .textarea_wrapper {
-  min-width: 640px;
+  @apply w-full;
 }
 
 .textarea_wrapper > textarea {
@@ -33,4 +38,14 @@
 
 .button_wrapper {
   @apply w-full flex justify-end gap-2;
+}
+
+@media (max-width: 45rem) {
+  .input_wrapper {
+    @apply flex flex-col w-full;
+  }
+
+  .input_box {
+    @apply flex flex-col w-full;
+  }
 }

@@ -14,7 +14,6 @@ export default function CommentWrite() {
     handleInputChange,
     disabledButton,
     comment,
-    rating,
     setRating,
   } = useCommentWrite();
 
@@ -25,7 +24,7 @@ export default function CommentWrite() {
         <p>댓글</p>
       </div>
       <div className={styles.rating_stars}>
-        <StarRating setRating={setRating} rating={rating} />
+        <StarRating setRating={setRating} rating={comment.rating} />
       </div>
       <div className={styles.input_layout}>
         <div className={styles.input_wrapper}>
