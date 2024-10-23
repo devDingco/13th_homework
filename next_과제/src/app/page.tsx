@@ -5,8 +5,12 @@ import MainSlide from "@/components/mainSlide";
 import BoardList from "@/components/board-list";
 
 import HotTripTalk from "@/components/hotTripTalk";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+  console.log("세션", session);
+
   return (
     <>
       <MainSlide />
