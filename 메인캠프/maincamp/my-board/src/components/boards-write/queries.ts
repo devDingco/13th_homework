@@ -29,6 +29,7 @@ const EDIT_BOARD = gql`
       contents
       createdAt
       updatedAt
+      images
       boardAddress {
         _id
         zipcode
@@ -49,6 +50,7 @@ const CREATE_BOARD = gql`
       title
       contents
       createdAt
+      images
       boardAddress {
         _id
         zipcode
@@ -56,6 +58,31 @@ const CREATE_BOARD = gql`
         addressDetail
       }
       youtubeUrl
+    }
+  }
+`;
+
+// 파일 업로드
+const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      _id
+      url
+      size
+      createdAt
+    }
+  }
+`;
+
+// 검색
+const FETCH_BOARDS_SEARCH = gql`
+  query fetchBoardsSearch($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
+      _id
+      writer
+      title
+      contents
+      createdAt
     }
   }
 `;

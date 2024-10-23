@@ -7,14 +7,15 @@ import { useBoardWrite } from './hooks';
 import { IBoardWrite } from './types';
 import { Modal } from 'antd';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import UploadFileComponent from '../UploadFile';
 
 export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
   const params = useParams();
+
   const {
     handleChange,
     handleChangePw,
-    openUploadImg,
     updateFunc,
     registerFunc,
     isActive,
@@ -29,6 +30,8 @@ export default function BoardWrite(props: IBoardWrite) {
     onChangeZipcode,
     onChangeDetailAddress,
     onChangeYoutubeUrl,
+    handleImageUrlsUpdate,
+    imageUrls,
   } = useBoardWrite(props);
 
   return (
@@ -192,7 +195,7 @@ export default function BoardWrite(props: IBoardWrite) {
           <p className="prose-me_16_24">유튜브 링크</p>
           <div>
             <input
-              className={`w-full ${styles.inputCSS} `}
+              className={`w-full ${styles.inputCSS}`}
               type="url"
               placeholder="링크를 입력해주세요."
               defaultValue={props.data?.fetchBoard.youtubeUrl || ''}
@@ -201,45 +204,12 @@ export default function BoardWrite(props: IBoardWrite) {
           </div>
         </div>
       </div>
-      {/* 추후 추가하기 버튼을 누르면 새 div이 생성되게 */}
-
-      <div className="flex gap-10 w-full items-center">
-        <div className="flex flex-col gap-2 mb-5 flex-1">
-          <p className="prose-me_16_24">사진 첨부</p>
-          <div className="flex gap-3 cursor-pointer">
-            <div
-              className="flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-md bg-gray-50"
-              onClick={() => openUploadImg('fileInput1')}
-            >
-              <p className={styles.pCSS}>
-                <img src="/images/add.svg" alt="추가버튼" />
-              </p>
-              <span className="prose-r_16_24">클릭해서 사진 업로드</span>
-              <input type="file" id="fileInput1" style={{ display: 'none' }} />
-            </div>
-            <div
-              className="flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-md bg-gray-50"
-              onClick={() => openUploadImg('fileInput2')}
-            >
-              <p className={styles.pCSS}>
-                <img src="/images/add.svg" alt="추가버튼" />
-              </p>
-              <span className="prose-r_16_24">클릭해서 사진 업로드</span>
-              <input type="file" id="fileInput2" style={{ display: 'none' }} />
-            </div>
-            <div
-              className="flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-md bg-gray-50"
-              onClick={() => openUploadImg('fileInput3')}
-            >
-              <p className={styles.pCSS}>
-                <img src="/images/add.svg" alt="추가버튼" />
-              </p>
-              <span className="prose-r_16_24">클릭해서 사진 업로드</span>
-              <input type="file" id="fileInput3" style={{ display: 'none' }} />
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* 이미지 등록 컴포넌트 */}
+      {/* onUpdateImageUrls : 업데이트된 이미지 URL 배열을 받아 처리하는 함수 */}
+      <UploadFileComponent
+        imageUrls={imageUrls}
+        onUpdateImageUrls={handleImageUrlsUpdate}
+      />
 
       <div className="flex gap-2 justify-end items-center self-stretch">
         <button

@@ -8,6 +8,7 @@ const FETCH_BOARD = gql`
       title
       contents
       createdAt
+      images
       likeCount
       dislikeCount
       boardAddress {
