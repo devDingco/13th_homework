@@ -1,8 +1,9 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
+
 import {
     CreateBoardCommentDocument,
     FetchBoardCommentsDocument,
@@ -26,7 +27,7 @@ export default function useCommentNew(stars: number) {
 
     const [createComment] = useMutation(CreateBoardCommentDocument);
 
-    const createCommentNew = async (e: MouseEvent) => {
+    const createCommentNew = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         try {

@@ -15,7 +15,9 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
                     ref.current?.click();
                 }}
             >
-                {imageUrl ? (
+                {imageUrl === "" ? (
+                    <Image src={add} alt="upload your image" />
+                ) : (
                     <Image
                         src={`https://storage.googleapis.com/${imageUrl}`}
                         alt="#yourImage"
@@ -23,8 +25,6 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
                         height={120}
                         style={{ objectFit: "cover" }}
                     />
-                ) : (
-                    <Image src={add} alt="upload your image" />
                 )}
                 <input
                     type="file"

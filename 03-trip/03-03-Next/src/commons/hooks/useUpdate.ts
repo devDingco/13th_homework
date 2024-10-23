@@ -1,17 +1,18 @@
+import { ChangeEvent, useState } from "react";
+import { IBoardArgs, IBoardInput } from "../types/types";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
 import { FetchBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
-import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
 
-export default function useUpdate({ addressData }) {
+export default function useUpdate({ addressData, imageUrl }: IBoardArgs) {
     const Params = useParams();
     const Router = useRouter();
 
     const { data } = useQuery(FetchBoardDocument, {
-        variables: { boardId: Params.boardId },
+        variables: { boardId: Params.boardId as string },
     });
 
-    const [updateInput, setUpdateInput] = useState({});
+    const [updateInput, setUpdateInput] = useState<IBoardInput>({});
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setUpdateInput((prev) => ({
@@ -27,24 +28,31 @@ export default function useUpdate({ addressData }) {
         const password = prompt("비밀번호를 입력해주세요");
 
         const updateData = {
-                title: updateInput.title_ID || data?.fetchBoard.title,
-                contents: updateInput.content_ID || data?.fetchBoard.contents,
-                youtubeUrl: updateInput.link_ID || data?.fetchBoard.youtubeUrl,
-                boardAddress: {
-                    zipcode: addressData.zonecode || data?.fetchBoard.boardAddress?.zipcode,
-                    address: addressData.address || data?.fetchBoard.boardAddress?.address,
-                    addressDetail: updateInput.address01_ID || data?.fetchBoard.boardAddress?.addressDetail,
+            title: updateInput.title_ID || data?.fetchBoard.title,
+            contents: updateInput.content_ID || data?.fetchBoard.contents,
+            youtubeUrl: updateInput.link_ID || data?.fetchBoard.youtubeUrl,
+            boardAddress: {
+                zipcode:
+                    addressData?.zonecode ||
+                    data?.fetchBoard.boardAddress?.zipcode,
+                address:
+                    addressData?.address ||
+                    data?.fetchBoard.boardAddress?.address,
+                addressDetail:
+                    updateInput.address01_ID ||
+                    data?.fetchBoard.boardAddress?.addressDetail,
             },
+            images: imageUrl,
         };
         console.log(updateData);
 
         try {
             const result = await updateBoard({
                 variables: {
-                    boardId: Params.boardId,
+                    boardId: Params.boardId as string,
                     password: password,
-                    updateBoardInput: updateData
-                }
+                    updateBoardInput: updateData,
+                },
             });
             console.log(result);
 

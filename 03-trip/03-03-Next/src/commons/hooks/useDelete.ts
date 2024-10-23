@@ -1,9 +1,11 @@
 "use client";
+
+import { useMutation } from "@apollo/client";
+
 import {
     DeleteBoardDocument,
     FetchBoardsDocument,
 } from "@/commons/graphql/graphql";
-import { useMutation } from "@apollo/client";
 
 export default function useDelete() {
     const [deleteBoard] = useMutation(DeleteBoardDocument, {
@@ -12,6 +14,7 @@ export default function useDelete() {
 
     const onClickDelete = (e: React.MouseEvent) => {
         e.stopPropagation();
+
         const target = e.target as HTMLButtonElement;
         deleteBoard({
             variables: {

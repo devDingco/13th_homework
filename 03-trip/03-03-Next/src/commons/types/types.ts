@@ -1,14 +1,9 @@
-import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 import { Dispatch, SetStateAction } from "react";
+import { FetchBoardsCountQuery, FetchBoardsQuery } from "../graphql/graphql";
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
+import { Address } from "react-daum-postcode";
 
-// export interface ICreateProps {
-//     author: string;
-//     password: string;
-//     title: string;
-//     content: string;
-// }
-
-export interface ISubmitInput {
+export interface IBoardInput {
     [index: string]: string | undefined;
     author_ID?: string;
     password_ID?: string;
@@ -21,7 +16,7 @@ export interface ISubmitInput {
     address01_ID?: string;
 }
 
-export const InputData: ISubmitInput = {
+export const InputData = {
     author_ID: "작성자",
     password_ID: "비밀번호",
     title_ID: "제목",
@@ -30,7 +25,7 @@ export const InputData: ISubmitInput = {
     link_ID: "링크",
 };
 
-export const InputPlaceholder: ISubmitInput = {
+export const InputPlaceholder = {
     author_ID: "작성자 명을 입력해 주세요.",
     password_ID: "비밀번호를 입력해 주세요.",
     title_ID: "제목을 입력해 주세요.",
@@ -40,13 +35,35 @@ export const InputPlaceholder: ISubmitInput = {
     zipcode_ID: "01234",
     address00_ID: "주소를 검색해 주세요.",
     address01_ID: "상세주소를 입력해 주세요.",
+
+    search_ID: "검색어를 입력해 주세요.",
 };
 
-export interface ILayoutProps {
+export interface ISearchProps {
     refetch: (
         variables?: Partial<OperationVariables> | undefined
-    ) => Promise<ApolloQueryResult<any>>;
+    ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+    keyword: string;
+    setKeyword: Dispatch<SetStateAction<string>>;
+}
+
+export interface IBoardListProps {
+    data: FetchBoardsQuery | undefined;
+    count: FetchBoardsCountQuery | undefined;
+    current: number;
+    keyword: string;
+}
+
+export interface IPagination {
+    refetch: (
+        variables?: Partial<OperationVariables> | undefined
+    ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
     lastPage: number;
     current: number;
     setCurrent: Dispatch<SetStateAction<number>>;
+}
+
+export interface IBoardArgs {
+    addressData: Address | undefined;
+    imageUrl: string[];
 }

@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import Input from "@/components/Atoms/_Input";
 import AddressFieldUI from "@/components/Molecules/_AddrField";
+import ImgField from "@/components/Molecules/_ImgField";
 
 import Image from "next/image";
 import profile from "/public/svg/person.svg";
@@ -21,18 +22,21 @@ import YouTube from "react-youtube";
 
 import useUpdate from "@/commons/hooks/useUpdate";
 import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
-import ImgField from "@/components/Molecules/_ImgField";
 import useUploadImg from "@/commons/hooks/useUploadImg";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
+
     const { isModalOpen, addressData, onToggleModal, handleComplete } =
         useDaumPostApi();
 
     const { imageUrl, onChangeFile } = useUploadImg();
 
-    const { handleChange, handleUpdate, data } = useUpdate({ addressData });
+    const { handleChange, handleUpdate, data } = useUpdate({
+        addressData,
+        imageUrl,
+    });
 
     return (
         <>
@@ -57,24 +61,38 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                     </div>
                 </div>
 
-                <div className={styles.info_link}>
-                    <Image src={link} alt="share" />
-                    <Tooltip
-                        title={data?.fetchBoard.boardAddress?.address}
-                        color="#FFBE98"
-                    >
-                        <Image src={location} alt="location" />
-                    </Tooltip>
-                </div>
+                {isEdit ? (
+                    ""
+                ) : (
+                    <div className={styles.info_link}>
+                        <Image src={link} alt="share" />
+                        <Tooltip
+                            title={data?.fetchBoard.boardAddress?.address}
+                            color="#FFBE98"
+                        >
+                            <Image src={location} alt="location" />
+                        </Tooltip>
+                    </div>
+                )}
             </header>
 
             <section className={styles.detail_main}>
-                <Image
-                    src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
-                    alt="thumbnail"
-                    width={400}
-                    height={500}
-                />
+                <div>
+                    {data?.fetchBoard.images?.map((el) =>
+                        el !== "" ? (
+                            <Image
+                                key={el}
+                                src={`https://storage.googleapis.com/${el}`}
+                                alt="thumbnail"
+                                width={400}
+                                height={400}
+                                objectFit="cover"
+                            />
+                        ) : (
+                            ""
+                        )
+                    )}
+                </div>
 
                 <pre className={styles.main_content}>
                     {isEdit ? "" : data?.fetchBoard.contents}
@@ -123,7 +141,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                             </div>
                         </>
                     ) : (
-                        <YouTube videoId="e7g54ZvcKDI" />
+                        <YouTube videoId={data?.fetchBoard.youtubeUrl} />
                     )}
                 </div>
 

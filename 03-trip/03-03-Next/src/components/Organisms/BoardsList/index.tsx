@@ -1,17 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { MouseEventHandler } from "react";
 import useDelete from "@/commons/hooks/useDelete";
 
 import styles from "./styles.module.css";
+import { IBoardListProps } from "@/commons/types/types";
 
-export default function BoardsListUI({ data, count, current }) {
+export default function BoardsListUI(props: IBoardListProps) {
+    const { data, count, current, keyword } = props;
     const Router = useRouter();
 
-    const onClickDelete: MouseEventHandler = useDelete();
+    const onClickDelete = useDelete();
 
-    const postNum = Number(count?.fetchBoardsCount + 10 - current * 10);
+    const postNum = Number((count?.fetchBoardsCount ?? 0) + 10 - current * 10);
 
     return (
         <>
@@ -30,7 +31,24 @@ export default function BoardsListUI({ data, count, current }) {
                         onClick={() => Router.push(`/boards/${el._id}`)}
                     >
                         <div className={styles.idx}>{postNum - idx}</div>
-                        <div className={styles.title}>{el.title}</div>
+                        <div className={styles.title}>
+                            {el.title
+                                .replaceAll(keyword, `@_¡¡${keyword}@_¡¡`)
+                                .split("@_¡¡")
+                                .map((el, idx) => (
+                                    <span
+                                        key={`${el}_${idx}`}
+                                        style={{
+                                            color:
+                                                el === keyword
+                                                    ? "#f55"
+                                                    : "#222",
+                                        }}
+                                    >
+                                        {el}
+                                    </span>
+                                ))}
+                        </div>
                         <div className={styles.author}>{el.writer}</div>
                         <div className={styles.date}>
                             {el.createdAt.split("T")[0]}

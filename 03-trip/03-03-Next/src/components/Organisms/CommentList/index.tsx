@@ -1,13 +1,14 @@
 "use client";
 
-import { comment_wrap } from "@/commons/styles/commentStyles";
-
-import { useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
-import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useState } from "react";
 import CommentUI from "@/components/Molecules/Comment";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import { useState } from "react";
+import { useParams } from "next/navigation";
+import { useQuery } from "@apollo/client";
+import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+
+import { comment_wrap } from "@/commons/styles/commentStyles";
 
 export default function CommentListUI() {
     const [hasMore, setHasMore] = useState(true);
@@ -50,7 +51,7 @@ export default function CommentListUI() {
             >
                 {data && data.fetchBoardComments.length > 0 ? (
                     data.fetchBoardComments.map((el, idx) => (
-                        <CommentUI key={el._id} el={el} idx={idx} data={data} />
+                        <CommentUI el={el} key={idx} />
                     ))
                 ) : (
                     <div>등록된 댓글이 없습니다.</div>
