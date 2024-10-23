@@ -3,41 +3,18 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import useCommentList from "./hook";
 import { Rate } from "antd";
+import styles from "./styles.module.css";
 
 const CommentListComponent = () => {
-  const { data, fetchMore } = useCommentList();
-
-  const onNext = () => {
-    if (data === undefined) return;
-
-    fetchMore({
-      variables: {
-        page: Math.ceil((data?.fetchBoardComments.length ?? 5) / 5) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (fetchMoreResult.fetchBoardComments === undefined) {
-          return {
-            fetchBoardComments: [...prev.fetchBoardComments],
-          };
-        }
-
-        return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
-        };
-      },
-    });
-  };
+  const { data, onNext, isHasMore } = useCommentList();
 
   return (
-    <div>
+    <div className={styles.comment}>
       <InfiniteScroll
-        dataLength={data?.fetchBoardComments.length ?? 0}
         next={onNext}
-        hasMore={false} // 무한스크롤 일부러 막았습니다.
+        hasMore={isHasMore}
         loader={<div>로딩중입니다</div>}
+        dataLength={data?.fetchBoardComments.length ?? 0}
       >
         {data?.fetchBoardComments.map((el) => (
           <div key={el._id}>
