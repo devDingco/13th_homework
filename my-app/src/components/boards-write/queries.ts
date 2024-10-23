@@ -14,9 +14,11 @@ const CREATE_QUERY = gql`
         addressDetail
       }
       youtubeUrl
+      images
     }
   }
 `;
+
 const UPDATE_QUERY = gql`
   mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
@@ -33,8 +35,17 @@ const UPDATE_QUERY = gql`
       title
       contents
       updatedAt
+      images
     }
   }
 `;
 
-export { CREATE_QUERY, UPDATE_QUERY };
+const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
+
+export { CREATE_QUERY, UPDATE_QUERY, UPLOAD_FILE };

@@ -1,18 +1,23 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import type { IBoardsWriteProps, IupdateVariables, IInput } from "./types";
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
 } from "@/commons/gql/graphql";
 import { Address } from "react-daum-postcode";
+import { UPLOAD_FILE } from "./queries";
+import { checkValidationFile } from "@/commons/libraries/validation-file";
 
 export const useBoardsWrite = (props: IBoardsWriteProps) => {
+  const [imageUrl, setImageUrl] = useState(["", "", ""]);
   const params = useParams();
   const router = useRouter();
+  const [uplaodFile] = useMutation(UPLOAD_FILE);
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const fileRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [address, setAddress] = useState({
@@ -77,12 +82,15 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
         validation.contents
       ) {
         alert("게시글 등록이 가능한 상태입니다!");
+        console.log(imageUrl, "imageUrlArray확인");
+        console.log(imageUrl, "imageUr확인");
         const result = await createBoard({
           variables: {
             createBoardInput: {
               ...validation,
               boardAddress: address,
               youtubeUrl,
+              images: imageUrl,
             },
           },
         });
@@ -127,6 +135,7 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
               ...updateVariables,
               youtubeUrl,
               boardAddress: address,
+              images: imageUrl,
             },
             password: checkPassWord,
             boardId: String(params.boardId),
@@ -174,6 +183,47 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     setYoutubeUrl(event.target.value);
   };
 
+  const onChangeFile = async (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    console.log("가져온 index", index);
+    const file = event.target.files?.[0];
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+    const result = await uplaodFile({ variables: { file } });
+    const newImageUrl = result.data.uploadFile.url;
+
+    const updatedUrls = [...imageUrl];
+    updatedUrls[index] = newImageUrl;
+    setImageUrl(updatedUrls);
+  };
+
+  const onClickImage = (index: number) => {
+    const fileInput = document.querySelectorAll('input[type="file"]')[index];
+    fileInput.click();
+  };
+
+  const handleDeleteImage = (index: number) => {
+    setImageUrl((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  useEffect(() => {
+    if (props.isEdit && props.data?.fetchBoard.images) {
+      setImageUrl([...props.data?.fetchBoard.images]);
+    }
+  }, [props.isEdit, props.data]);
+
+  const onClickDeleteImage = (
+    event: MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    event.stopPropagation();
+    const deleteUrl = [...imageUrl];
+    deleteUrl[index] = "";
+    setImageUrl(deleteUrl);
+  };
+
   return {
     onChange,
     onClickSubmit,
@@ -182,10 +232,16 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     handleComplete,
     onChangeAddress,
     onChangeYouTube,
+    onChangeFile,
+    onClickImage,
+    handleDeleteImage,
+    onClickDeleteImage,
     youtubeUrl,
     isActive,
     errorMessage,
     isOpen,
     address,
+    fileRef,
+    imageUrl,
   };
 };

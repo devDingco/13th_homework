@@ -1,13 +1,17 @@
 "use client";
 
+import Search from "../search";
+import useSearch from "../search/hooks";
 import { useBoardsList } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 
 const BoardsList = (props) => {
-  const { onClickMove, onClickDelete } = useBoardsList();
+  const { onClickMove, onClickDelete } = useBoardsList(props);
+  const { keyword } = useSearch(props);
   return (
     <main className={styles.main}>
+      <Search data={props.data} refetch={props.refetch} />
       <div className={styles.head}>
         <div className={`${styles.number} ${styles.head_text}`}>번호</div>
         <div className={`${styles.title} ${styles.head_text}`}>제목</div>
@@ -25,7 +29,17 @@ const BoardsList = (props) => {
               {index + 1}
             </div>
             <div className={`${styles.title} ${styles.board_title}`}>
-              {el.title}
+              {el.title
+                .replaceAll(keyword, `@#$${keyword}@#$$`)
+                .split("@#$")
+                .map((el, index) => (
+                  <span
+                    key={`${el}_${index}`}
+                    style={{ color: el === keyword ? "red" : "black" }}
+                  >
+                    {el}
+                  </span>
+                ))}
             </div>
             <div className={`${styles.writer} ${styles.board_writer}`}>
               {el.writer}

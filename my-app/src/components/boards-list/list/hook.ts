@@ -6,7 +6,7 @@ import {
   DeleteBoardDocument,
 } from "@/commons/gql/graphql";
 
-export function useBoardsList() {
+export function useBoardsList(props) {
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const router = useRouter();
 

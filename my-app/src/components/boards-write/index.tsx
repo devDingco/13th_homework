@@ -1,11 +1,11 @@
 "use client";
 
 import styles from "./styles.module.css";
-import Image from "next/image";
 import { useBoardsWrite } from "./hooks";
 import { IBoardsWriteProps } from "./types";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import Image from "next/image";
 
 function BoardsWrite(props: IBoardsWriteProps) {
   const {
@@ -20,6 +20,10 @@ function BoardsWrite(props: IBoardsWriteProps) {
     onChangeAddress,
     address,
     onChangeYouTube,
+    onChangeFile,
+    onClickImage,
+    imageUrl,
+    onClickDeleteImage,
   } = useBoardsWrite(props);
 
   return (
@@ -158,42 +162,34 @@ function BoardsWrite(props: IBoardsWriteProps) {
         <div className={styles.inputBox}>
           <label className={styles.inputBox_label}>사진첨부</label>
           <div className={styles.photoCardBox}>
-            <div className={styles.photoBox}>
-              <div className={styles.photoCard}>
-                <Image
-                  className={styles.add_img}
-                  src="/img/add.png"
-                  alt="addImg"
-                  width={0}
-                  height={0}
-                />
-                <div className="photo_text">클릭해서 사진 업로드</div>
+            {[0, 1, 2].map((index) => (
+              <div
+                className={styles.photoBox}
+                key={index}
+                onClick={() => onClickImage(index)}
+              >
+                <div className={styles.photoCard}>
+                  <input
+                    type="file"
+                    onChange={(event) => onChangeFile(event, index)}
+                    style={{ display: "none" }}
+                    accept="image/jpeg,image/png"
+                  />
+                  <button
+                    className={styles.photoCardImage}
+                    onClick={(event) => onClickDeleteImage(event, index)}
+                  >
+                    <Image
+                      className={styles.photoCardImage}
+                      src={`https://storage.googleapis.com/${imageUrl[index]}`}
+                      alt="fileImage"
+                      width={0}
+                      height={0}
+                    />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className={styles.photoBox}>
-              <div className={styles.photoCard}>
-                <Image
-                  className={styles.add_img}
-                  src="/img/add.png"
-                  alt="addImg"
-                  width={0}
-                  height={0}
-                />
-                <div className="photo_text">클릭해서 사진 업로드</div>
-              </div>
-            </div>
-            <div className={styles.photoBox}>
-              <div className={styles.photoCard}>
-                <Image
-                  className={styles.add_img}
-                  src="/img/add.png"
-                  alt="addImg"
-                  width={0}
-                  height={0}
-                />
-                <div className="photo_text">클릭해서 사진 업로드</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </main>
