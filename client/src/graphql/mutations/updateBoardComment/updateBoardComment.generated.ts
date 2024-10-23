@@ -1,7 +1,7 @@
 /** @format */
 
 import * as Apollo from '@apollo/client';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
 
@@ -21,12 +21,12 @@ export type UpdateBoardCommentMutation = {
 		rating?: number | null;
 		parentId?: string | null;
 		_id: string;
-		createdAt: any;
+		createdAt: Date;
 		replies?: Array<{
 			__typename?: 'BoardCommentResponseDTO';
 			author: string;
 			content: string;
-			createdAt: any;
+			createdAt: Date;
 		}> | null;
 	};
 };

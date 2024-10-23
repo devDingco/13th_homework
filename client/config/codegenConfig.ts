@@ -9,11 +9,16 @@ const config: CodegenConfig = {
 	overwrite: true,
 	schema: process.env.NEXT_PUBLIC_BACK_GRAPHQL_URL,
 	generates: {
-		'./src/types.ts': {
+		'./src/graphql/types.ts': {
 			plugins: ['typescript'],
+			config: {
+				scalars: {
+					DateTime: 'Date',
+				},
+			},
 		},
 		'./src/': {
-			documents: ['src/graphql/queries/*.graphql', 'src/graphql/mutations/*.graphql'],
+			documents: ['src/graphql/queries/**/*.graphql', 'src/graphql/mutations/**/*.graphql'],
 			preset: 'near-operation-file',
 			presetConfig: {
 				extension: '.generated.ts',
@@ -22,6 +27,11 @@ const config: CodegenConfig = {
 			plugins: ['typescript-operations', 'typescript-react-apollo'],
 			config: {
 				withHooks: true,
+				withComponent: false,
+				withHOC: false,
+				scalars: {
+					DateTime: 'Date',
+				},
 			},
 		},
 	},

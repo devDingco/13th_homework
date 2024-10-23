@@ -6,9 +6,9 @@ type BoardCommentResponseDTO {
   _id: ID!
   author: String!
   content: String!
-  rating: Float
+  rating: Int
   parentId: String
-  boardId: Float!
+  boardId: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
   replies: [BoardCommentResponseDTO!]

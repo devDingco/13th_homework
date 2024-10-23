@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
 import { ObjectId } from 'typeorm';
 
@@ -13,7 +13,7 @@ export class BoardCommentSchema {
     @Field()
     content: string;
 
-    @Field({ nullable: true })
+    @Field(() => Int, { nullable: true })
     rating?: number;
 
     @Field({ nullable: true })
@@ -22,7 +22,7 @@ export class BoardCommentSchema {
     @Field()
     password: string;
 
-    @Field()
+    @Field(() => Int)
     boardId: number;
 
     @Field(() => Date)

@@ -1,7 +1,7 @@
 /** @format */
 
 import * as Apollo from '@apollo/client';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
 

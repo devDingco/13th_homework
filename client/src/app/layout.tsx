@@ -1,5 +1,5 @@
 /** @format */
-// 'use client';
+
 // TODO: graphql 적용시켜보기
 'use client';
 
@@ -9,8 +9,6 @@ import { ApolloProvider } from '@apollo/client';
 import { IProps } from '@/models/children.type';
 import RootContainer from '@/components/common/RootContainer';
 import client from '~/config/apolloConfig';
-
-// import client from '@/libs/apollo';
 
 export default function RootLayout({ children }: IProps) {
 	return (

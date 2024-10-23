@@ -1,7 +1,7 @@
 /** @format */
 
 import * as Apollo from '@apollo/client';
-import * as Types from '../../types';
+import * as Types from '../../../types';
 
 import { gql } from '@apollo/client';
 
@@ -19,7 +19,7 @@ export type CreateBoardMutation = {
 		content: string;
 		imageUrl?: Array<string> | null;
 		youtubeUrl?: string | null;
-		createdAt: any;
+		createdAt: Date;
 		boardAddressOutput?: {
 			__typename?: 'BoardAddressOutput';
 			zoneCode: number;
