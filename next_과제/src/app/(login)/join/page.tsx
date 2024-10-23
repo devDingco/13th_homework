@@ -4,8 +4,7 @@ import { useJoinPage } from "./hook";
 import { Button } from "antd";
 
 export default function JoinPage() {
-  const { control, joinSubmit, duplicateCheck, errors, isValid, isDirty } =
-    useJoinPage();
+  const { control, joinSubmit, errors, isValid, isDirty } = useJoinPage();
 
   return (
     <>
@@ -23,16 +22,6 @@ export default function JoinPage() {
               type="email"
               placeholder="이메일을 입력해 주세요."
               errormessage={errors?.joinEmail?.message?.toString()}
-              addbutton={
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  onClick={() => duplicateCheck()}
-                >
-                  중복확인
-                </Button>
-              }
               required
             />
           </div>

@@ -6,7 +6,7 @@ import { useLoginPage } from "./hook";
 import { Button } from "antd";
 
 export default function LoginPage() {
-  const { control, signInSubmit, router } = useLoginPage();
+  const { control, signInSubmit, router, logOut } = useLoginPage();
 
   return (
     <>
@@ -55,6 +55,10 @@ export default function LoginPage() {
           onClick={() => router.push("/join")}
         >
           회원가입
+        </Button>
+
+        <Button color="default" variant="outlined" onClick={() => logOut()}>
+          로그아웃
         </Button>
       </div>
     </>
