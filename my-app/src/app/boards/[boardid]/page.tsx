@@ -40,7 +40,7 @@ export default function Detail() {
     <>
       <div className={styles.전체박스}>
         <div className={styles.타이틀}>
-          살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
+          나왔다 살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
           쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄 <br /> 라
         </div>
         <div className={styles.헤더전체박스}>

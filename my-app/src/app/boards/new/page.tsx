@@ -1,30 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
 import styles from "./styles.module.css";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import Image from "next/image";
 import Add from "@/../public/add.png";
+import { useRouter } from "next/navigation";
 
 const 짱구의인적사항 = gql`
-  # mutation createBoard(
-  #   # $jgwriter: String
-  #   # $jgpassword: String
-  #   # $jgtitle: String!
-  #   # $jgcontents: String!
-  #   $createBoardInput: CreatedBoardInput!
-  # ) {
-  #   createBoard(createBoardInput: $createBoardInput) # writer: $jgwriter
-  #   # password: $jgpassword
-  #   # title: $jgtitle
-  #   # contents: $jgcontents
-
-  #   {
-  #     writer
-  #     title
-  #     contents
-  #     _id
-  #   }
-  # }
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -35,15 +17,87 @@ const 짱구의인적사항 = gql`
   }
 `;
 
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      writer
+      title
+      contents
+      _id
+    }
+  }
+`;
 export default function New() {
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState("");
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [contentsError, setContentsError] = useState("");
+  const { data } = useQuery(FETCH_BOARD);
+
+  const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setWriter(value);
+    console.log(writer, "작성자");
+    if (value === "") {
+      setWriterError("필수입력 사항입니다");
+      // setIsActive(true);
+    } else {
+      setWriterError("");
+      // setIsActive(false);
+    }
+  };
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setPassword(value);
+    console.log(password, "비밀번호");
+    if (value === "") {
+      setPasswordError("필수입력 사항입니다");
+      // setIsActive(true);
+    } else {
+      setPasswordError("");
+      // setIsActive(false);
+    }
+  };
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setTitle(value);
+    console.log(title, "제목");
+    if (value === "") {
+      setTitleError("필수입력 사항입니다");
+      // setIsActive(true);
+    } else {
+      setTitleError("");
+      // setIsActive(false);
+    }
+  };
+  const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = event.target.value;
+    setContents(value);
+    console.log(contents, "내용");
+    if (value === "") {
+      setContentsError("필수입력 사항입니다");
+      // setIsActive(true);
+    } else {
+      setContentsError("");
+      // setIsActive(false);
+    }
+  };
+  const router = useRouter();
   const [짱구회원] = useMutation(짱구의인적사항);
 
-  const onClickSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClickSubmit = async () => {
     console.log("test");
-
     try {
       if (writer && password && title && contents) {
-        // event.preventDefault();
+        setIsActive(true);
+      }
+      if (writer && password && title && contents) {
         const result = await 짱구회원({
           variables: {
             createBoardInput: {
@@ -54,10 +108,12 @@ export default function New() {
             },
           },
         });
-        console.log(result);
+        console.log(result, "결과");
+        router.push(`/boards/${result.data.createBoard._id}`);
       }
     } catch (error) {
-      alert("값 필요");
+      console.error("에러가 발생하였습니다. 다시 시도해 주세요.", error);
+      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
     }
     // if (writer && password && title && contents) {
     //   // event.preventDefault();
@@ -74,71 +130,6 @@ export default function New() {
     //   console.log("값 필요");
     // }
   };
-
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-
-  const [isActive, setIsActive] = useState(false);
-
-  // const [errorMessage, setErrorMessage] = useState("");
-
-  const [writerError, setWriterError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentsError, setContentsError] = useState("");
-
-  const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setWriter(value);
-    if (value === "") {
-      setWriterError("필수입력 사항입니다");
-      setIsActive(true);
-    } else {
-      setWriterError("");
-      setIsActive(false);
-    }
-  };
-
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-    if (value === "") {
-      setPasswordError("필수입력 사항입니다");
-      setIsActive(true);
-    } else {
-      setPasswordError("");
-      setIsActive(false);
-    }
-  };
-
-  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setTitle(value);
-    if (value === "") {
-      setTitleError("필수입력 사항입니다");
-      setIsActive(true);
-    } else {
-      setTitleError("");
-      setIsActive(false);
-    }
-  };
-
-  const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
-    event.target.value;
-
-    setContents(value);
-    if (value === "") {
-      setContentsError("필수입력 사항입니다");
-      setIsActive(true);
-    } else {
-      setContentsError("");
-      setIsActive(false);
-    }
-  };
-
   // let message = false;
   // const message = useRef(false);
   // if (writer === "") {
@@ -160,7 +151,6 @@ export default function New() {
   // if (!message) {
   //   alert("게시글 등록이 가능합니다");
   // }
-
   return (
     <div className="전체창">
       <header className={styles.header}>게시물 등록</header>
@@ -223,7 +213,6 @@ export default function New() {
             <label htmlFor="우편번호인풋" className={styles.label}>
               주소
             </label>
-
             <div className={styles.우편번호창}>
               <input
                 type="text"
@@ -277,16 +266,17 @@ export default function New() {
       <footer className={styles.푸터전체박스1}>
         <div className={styles.푸터취소}>취소</div>
         <button
+          style={{
+            backgroundColor:
+              writer && password && title && contents ? "yellow" : "gray",
+          }}
           className={styles.푸터등록하기}
           onClick={onClickSubmit}
-          // disabled={!isActive}
         >
-          {isActive ? true : false}
           등록하기
         </button>
       </footer>
     </div>
   );
 }
-
 // export default New;
