@@ -4,11 +4,10 @@ import Link from "next/link";
 import Input from "@/components/input";
 import { useLoginPage } from "./hook";
 import { Button } from "antd";
-import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const { control } = useLoginPage();
-  const router = useRouter();
+  const { control, signInSubmit, router, logOut } = useLoginPage();
+
   return (
     <>
       <h1>
@@ -26,14 +25,14 @@ export default function LoginPage() {
         <p className="text-sm text-gray-800">트립토크에 로그인 하세요.</p>
         <form className="flex flex-col gap-3">
           <Input
-            id="loginEmail"
+            id="email"
             type="text"
             placeholder="이메일을 입력해 주세요."
             control={control}
           />
 
           <Input
-            id="loginPassword"
+            id="password"
             control={control}
             type="password"
             placeholder="비밀번호를 입력해 주세요."
@@ -41,15 +40,25 @@ export default function LoginPage() {
         </form>
       </div>
       <div className="flex flex-col gap-6 w-full">
-        <Button color="default" variant="outlined">
+        <Button
+          color="default"
+          variant="outlined"
+          size="large"
+          onClick={() => signInSubmit()}
+        >
           로그인
         </Button>
         <Button
           color="primary"
           variant="solid"
+          size="large"
           onClick={() => router.push("/join")}
         >
           회원가입
+        </Button>
+
+        <Button color="default" variant="outlined" onClick={() => logOut()}>
+          로그아웃
         </Button>
       </div>
     </>

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { Control } from "react-hook-form";
 
 export type InputProps = {
   id: string;
@@ -7,7 +8,6 @@ export type InputProps = {
   type?: string;
   accept?: string;
   required?: boolean;
-  uploadcount?: number;
   placeholder?: string;
   defaultValue?: string;
   readOnly?: boolean;
@@ -15,11 +15,12 @@ export type InputProps = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   addonAfter?: string;
   addonBefore?: string;
-  control?: any;
+  control?: Control;
   rows?: number;
   showCount?: boolean;
   maxLength?: number;
   textMaxCount?: number;
+  addbutton?: React.ReactNode;
 };
 
 export interface IformResister {

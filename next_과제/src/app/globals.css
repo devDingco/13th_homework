@@ -19,6 +19,7 @@
     --border-color: #303030;
     --text-color: #f0f0f0;
     --variant-color: #fff;
+    color: var(--text-color);
   }
 }
 

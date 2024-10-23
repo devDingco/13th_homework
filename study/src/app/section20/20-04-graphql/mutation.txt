@@ -1,0 +1,3 @@
+{
+    "query": "mutation { createBoard(createBoardInput: {writer:\"whalfk\"password: \"1234\"title:\"sdfdsf\"contents:\"sdfsdf\"}){_id} }"
+}

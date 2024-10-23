@@ -1,12 +1,12 @@
 "use client";
 // import StarCountBox from "@/components/starCountBox";
 
-import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
+import { IcommentList } from "@/components/board-detail/comment-list/types";
 import { useCommentList } from "@/components/board-detail/comment-list/hook";
 import CommentItem from "@/components/board-detail/comment-item";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function CommentList(props: IcommentItemBox) {
+export default function CommentList(props: IcommentList) {
   const { starCountBox = true, reply = false } = props;
 
   const { data, error, loading, fetchMoreData, hasMore } = useCommentList();

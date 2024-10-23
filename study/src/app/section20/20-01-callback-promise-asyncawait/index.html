@@ -1,0 +1,102 @@
+<!-- 
+ `http://numbersapi.com/random?min=1&max=200`
+`https://koreanjson.com/posts/${num}`
+`https://koreanjson.com/posts?userId=${userId}` 
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>20-01-callback-promise-asyncawait</title>
+        <script>
+            const onClickCallback = () => {
+                /*
+          function addEventListener(type, callback) {
+            // 상단에서 api 주소로 요청이 끝났다고 가정
+            const res = { status: 200, responseText: "hello" }; // 가짜 응답
+            callback(res);
+          }
+        */
+
+                // 1. 옛날 방식의 비동기 처리
+                // 이러한 방식은 콜백 지옥이 발생할 수 있음
+                const oldRequest = new XMLHttpRequest();
+                oldRequest.open("GET", "http://numbersapi.com/random?min=1&max=200");
+                oldRequest.send();
+                oldRequest.addEventListener("load", function (res) {
+                    const num = res.target.response.split(" ")[0]; // 결과에서 숫자만 가져오기
+                    const bb = new XMLHttpRequest();
+                    bb.open("GET", `https://koreanjson.com/posts/${num}`);
+                    bb.send();
+                    bb.addEventListener("load", function (bbRes) {
+                        const userId = JSON.parse(bbRes.target.response).UserId;
+                        const cc = new XMLHttpRequest();
+                        cc.open("GET", `https://koreanjson.com/users/${userId}`);
+                        cc.send();
+                        cc.addEventListener("load", function (ccRes) {
+                            console.log(ccRes.target.response);
+                        });
+                    });
+                });
+
+                /* 
+        oldRequest.onload = function () {
+          if (oldRequest.status === 200) {
+            console.log(oldRequest.responseText);
+          } else {
+            console.error("error", oldRequest.status);
+          }
+        };
+        */
+            };
+
+            const onClickPromise = () => {
+                // 2. Promise를 이용한 비동기 처리
+                // fetch의 경우 이미 Promise를 반환하는 함수이다.
+
+                fetch("http://numbersapi.com/random?min=1&max=200")
+                    .then((res) => res.text())
+                    .then((qqq) => {
+                        const num = qqq.split(" ")[0];
+                        return fetch(`https://koreanjson.com/posts/${num}`);
+                    })
+                    .then((res) => res.json())
+                    .then((qqq) => {
+                        const userId = qqq.UserId;
+                        return fetch(`https://koreanjson.com/posts?userId=${userId}`);
+                        <!-- return fetch(`https://koreanjson.com/users/${userId}`); -->
+                    })
+                    .then((res) => res.json())
+                    .then((qqq) => {
+                        console.log(qqq);
+                    });
+            };
+
+            // axios, fetch 등의 라이브러리를 사용하면 더 쉽게 Promise를 사용할 수 있다.
+            // axios, fetch 를 사용할때 기다리는 두가지 방법
+            // 1. then을 사용하여 계속해서 Promise를 반환하면서 처리
+            // 2. async/await를 사용하여 Promise를 처리
+
+            const onClickAsyncAwait = async () => {
+                // 3. async/await를 이용한 비동기 처리
+                // async/await는 Promise를 더 쉽게 사용할 수 있게 해준다.
+                // async 함수 내부에서 await를 사용하면 Promise가 끝날 때까지 기다려준다.
+                const res = await fetch("http://numbersapi.com/random?min=1&max=200");
+                const num = (await res.text()).split(" ")[0];
+                const res2 = await fetch(`https://koreanjson.com/posts/${num}`);
+                const qqq = await res2.json();
+                const userId = qqq.UserId;
+                const res3 = await fetch(`https://koreanjson.com/posts?userId=${userId}`);
+                const qqq2 = await res3.json();
+                console.log(qqq2);
+            };
+        </script>
+    </head>
+    <body>
+        <button onclick="onClickCallback()">callback 연습</button>
+        <button onclick="onClickPromise()">promise 연습</button>
+        <button onclick="onClickAsyncAwait()">async/await 연습</button>
+    </body>
+</html>

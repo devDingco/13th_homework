@@ -27,7 +27,6 @@ export default function BoardWrite(props: IboardFormProps) {
     setPreviewImage,
     setPreviewOpen,
     handleChangeImg,
-    handlePreviewImg,
     isModalOpen,
     setIsModalOpen,
     modalType,

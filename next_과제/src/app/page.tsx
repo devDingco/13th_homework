@@ -1,9 +1,7 @@
 "use client";
 
 import MainSlide from "@/components/mainSlide";
-
 import BoardList from "@/components/board-list";
-
 import HotTripTalk from "@/components/hotTripTalk";
 
 export default function Home() {

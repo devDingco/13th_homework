@@ -4,9 +4,9 @@ import Icon from "@/components/iconFactory";
 import CommentWrite from "@/components/board-detail/comment-write";
 import useCommentItem from "@/components/board-detail/comment-item/hook";
 
-import { IcommentItemBox } from "@/components/board-detail/comment-list/types";
+import { IcommentItem } from "@/components/board-detail/comment-list/types";
 
-export default function CommentItem(props: IcommentItemBox) {
+export default function CommentItem(props: IcommentItem) {
   const { commentData, starCountBox, reply } = props;
 
   const { isEdit, editModeHandler, commentDelete } = useCommentItem();

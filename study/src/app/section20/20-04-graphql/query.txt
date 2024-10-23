@@ -1,0 +1,9 @@
+{
+    "query":"query {fetchBoards(page:1){_id title writer contents}}"
+}
+
+
+동시에 여러개의 데이터를 호출할 수 있다!
+{
+    "query":"query {fetchBoards(page:1){_id title writer contents}fetchBoard(boardId:\"6718741c5413b3002914dec0\"){_id title}}"
+}

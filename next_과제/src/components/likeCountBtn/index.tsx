@@ -4,7 +4,7 @@ import { LikeCountBtnProps } from "@/components/likeCountBtn/types";
 
 export default function LikeCountBtn(props: LikeCountBtnProps) {
   const { type } = props;
-  const { likeCountHandler, likeCount } = useLikeCount(type);
+  const { likeCountHandler, data } = useLikeCount(type);
 
   return (
     <button
@@ -18,7 +18,10 @@ export default function LikeCountBtn(props: LikeCountBtnProps) {
         ></Icon>
       </div>
       <div className={type === "like" ? "text-red-600" : "text-gray-600"}>
-        {likeCount}
+        {data &&
+          (type === "like"
+            ? data?.fetchBoard.likeCount
+            : data?.fetchBoard.dislikeCount)}
       </div>
     </button>
   );

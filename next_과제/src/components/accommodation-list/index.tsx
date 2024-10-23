@@ -55,7 +55,7 @@ export default function AccommodationList() {
 
       <div className="grid grid-cols-4 grid-rows-2 gap-8">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div className="flex flex-col gap-3">
+          <div key={i} className="flex flex-col gap-3">
             <div className="rounded-xl overflow-hidden relative">
               <div className="absolute right-4 top-4 flex text-white bg-[rgba(0,0,0,0.6)] py-1 pl-1 pr-2 rounded-lg">
                 <Icon icon="bookmark" className="w-6 h-6" />

@@ -10,8 +10,10 @@ import locale from "antd/lib/date-picker/locale/ko_KR";
 
 export default function SearchBox({
   handleSearch,
+  isDate = true,
 }: {
   handleSearch: (params: FetchBoardsCountQueryVariables) => void;
+  isDate?: boolean;
 }) {
   const { RangePicker } = DatePicker;
   const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
@@ -35,24 +37,28 @@ export default function SearchBox({
           }
         />
       </label>
+
       <div className="flex gap-4 flex-wrap max-sm:w-full">
-        <RangePicker
-          locale={locale}
-          size="large"
-          id={{
-            start: "startDate",
-            end: "endDate",
-          }}
-          // defaultValue={[
-          //   dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
-          //   dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
-          // ]}
-          // placeholder={["시작일", "종료일"]}
-          onChange={(date, dateString) => {
-            setStartDate(new Date(dateString[0]).toISOString());
-            setEndDate(new Date(dateString[1]).toISOString());
-          }}
-        />
+        {isDate && (
+          <RangePicker
+            locale={locale}
+            size="large"
+            id={{
+              start: "startDate",
+              end: "endDate",
+            }}
+            // defaultValue={[
+            //   dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
+            //   dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
+            // ]}
+            // placeholder={["시작일", "종료일"]}
+            onChange={(date, dateString) => {
+              setStartDate(new Date(dateString[0]).toISOString());
+              setEndDate(new Date(dateString[1]).toISOString());
+            }}
+          />
+        )}
+
         <Button
           size="large"
           color="default"
