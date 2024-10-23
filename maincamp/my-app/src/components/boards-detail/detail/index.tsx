@@ -34,13 +34,13 @@ export default function BoardsDetail() {
             </div>
             <div className={styles.emotion}>
                 <div className={styles.bad}>
-                    <div className={styles.badIcon}></div>
-                    {/* <FrownOutlined /> */}
+                    {/* <div className={styles.badIcon}></div> */}
+                    <FrownOutlined style={{fontSize: "4rem"}} />
                     <p>24</p>
                 </div>
                 <div className={styles.good}>
-                    <div className={styles.goodIcon}></div>
-                    {/* <SmileOutlined /> */}
+                    {/* <div className={styles.goodIcon}></div> */}
+                    <SmileOutlined style={{fontSize: "4rem", color: "#f66a6a"}} />
                     <p>12</p>
                 </div>
             </div>

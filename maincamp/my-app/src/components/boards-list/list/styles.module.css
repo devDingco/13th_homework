@@ -4,15 +4,16 @@
     font-size:62.5%;
     border-radius:1.6rem;
     padding:2.4rem 4.8rem 2.4rem 4.8rem;
-    box-shadow: 0 0 2rem 0 #00000014;
-    margin-top:2.4rem;
-    margin-bottom:2.4rem;
+    /* box-shadow: 0 0 2rem 0 #00000014; */
+    /* margin-top:2.4rem; */
+    /* margin-bottom:2.4rem; */
 }
 .listBg{
     width:118.4rem;
 }
 /* ul/li 공통 */
-.listForm ul{
+.listForm .listTop,
+.listForm .listContent{
     display:flex;
     justify-content:center;
     padding:1.2rem 2.4rem 1.2rem 2.4rem;
@@ -20,19 +21,23 @@
     border-radius:0.8rem;
     margin:0.8rem 0;
 }
-.listForm ul li:first-child{
+.listForm .listTop li:first-child,
+.listForm .listContent li:first-child{
     width:6.4rem;
     height:2rem;
 }
-.listForm ul li:nth-child(2){
+.listForm .listTop li:nth-child(2),
+.listForm .listContent li:nth-child(2){
     width:84.8rem;
     height:2rem;
 }
-.listForm ul li:nth-child(3){
+.listForm .listTop li:nth-child(3),
+.listForm .listContent li:nth-child(3){
     width:10rem;
     height:2rem;
 }
-.listForm ul li:last-child{
+.listForm .listTop li:last-child,
+.listForm .listContent li:last-child{    
     width:10rem;
     height:2rem;
 }
