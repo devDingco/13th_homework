@@ -28,6 +28,7 @@ export interface IInputProps {
   defaultValue?: string;
   disabled?: boolean;
   value?: string;
+  required: boolean;
 }
 
 export interface IButtonProps {

@@ -42,6 +42,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
         <div>
           <Input
             id="writer"
+            required={true}
             onChange={handleInputChange}
             defaultValue={props.data?.fetchBoard.writer as string}
             disabled={props.isEdit}
@@ -55,6 +56,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
         <div>
           <Input
             id="password"
+            required={true}
             onChange={handleInputChange}
             disabled={props.isEdit}
           />
@@ -68,6 +70,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       <div className={styles.title_wrapper}>
         <Input
           id="title"
+          required={true}
           onChange={handleInputChange}
           defaultValue={props.data?.fetchBoard.title}
         />
@@ -98,6 +101,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
           <div>
             <Input
               id="zip_code"
+              required={false}
               defaultValue={
                 props.data?.fetchBoard.boardAddress?.zipcode as string
               }
@@ -106,10 +110,12 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
           <Button id="zip_code_search" color="white" />
         </div>
         <Input
+          required={false}
           id="address"
           defaultValue={props.data?.fetchBoard.boardAddress?.address as string}
         />
         <Input
+          required={false}
           id="detail_address"
           defaultValue={
             props.data?.fetchBoard.boardAddress?.addressDetail as string
@@ -118,6 +124,7 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       </div>
       <div className={styles.link_wrapper}>
         <Input
+          required={true}
           id="youtubeUrl"
           onChange={handleInputChange}
           defaultValue={props.data?.fetchBoard.youtubeUrl as string}

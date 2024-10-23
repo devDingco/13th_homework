@@ -14,16 +14,18 @@ export default function CommentEditForm(commentData: ICommentData) {
     <form className={styles.form} onSubmit={handleSubmitEdit}>
       <div className={styles.input_wrapper}>
         <div className={styles.input_box}>
-        <Input
-          id="writer"
-          onChange={handleInputChange}
-          defaultValue={commentData.commentData.writer}
-        />
-        <Input
-          id="password"
-          onChange={handleInputChange}
-          value={commentData.commentData.password}
-        />
+          <Input
+            id="writer"
+            required={true}
+            onChange={handleInputChange}
+            defaultValue={commentData.commentData.writer}
+          />
+          <Input
+            id="password"
+            required={true}
+            onChange={handleInputChange}
+            value={commentData.commentData.password}
+          />
         </div>
         <div className={styles.rating_stars}>
           <StarRating defaultValue={commentData.commentData.rating} />

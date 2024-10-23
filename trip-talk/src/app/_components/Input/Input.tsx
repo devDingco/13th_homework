@@ -8,15 +8,14 @@ export default function Input({
   defaultValue,
   disabled,
   value,
+  required,
 }: IInputProps) {
   return (
     <div className={styles.input_wrapper}>
       {id !== "address" && id !== "detail_address" && (
         <div className={styles.label_wrapper}>
           <label className={styles.label}>{INPUT_CHILDREN[id]}</label>
-          {id !== "zip_code" && id !== "url" && (
-            <b className={`${styles.required_marker}`}>*</b>
-          )}
+          {required && <b className={`${styles.required_marker}`}>*</b>}
         </div>
       )}
 
@@ -29,6 +28,7 @@ export default function Input({
         defaultValue={defaultValue}
         disabled={disabled}
         value={value}
+        required={required}
       />
     </div>
   );
