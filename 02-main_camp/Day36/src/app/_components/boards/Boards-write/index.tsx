@@ -12,9 +12,9 @@ import { TextInputType } from "./components/input-form/types";
 import Divider from "@/app/_components/commons/divider";
 import Modal from "antd/es/modal/Modal";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import ImageUploadForm from "./components/image-upload-form";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
-  console.log("컴포넌트가 다시 그려집니다.");
   const pageTitle = props.isEdit
     ? CONSTANTS_TITLE.EDIT
     : CONSTANTS_TITLE.SUBMIT;
@@ -31,6 +31,9 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     isAddressModalOpen,
     boardInput,
     boardAddress,
+    fileRefs,
+    onChangeFile,
+    onClickImage,
   } = useBoardWrite(props.isEdit, props.data);
 
   const RegisterForm = () => {
@@ -166,7 +169,12 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           onChange={onChangeBoardWriteInput}
         />
         <Divider />
-        <PhotoUploadForm />
+        <ImageUploadForm
+          imageUrl={boardInput.images ?? []}
+          fileRefs={fileRefs}
+          onChangeFile={onChangeFile}
+          onClickImage={onClickImage}
+        />
       </main>
       <footer className={styles.footerContainer}>
         <RegisterForm />
@@ -176,30 +184,3 @@ const BoardsWrite = (props: IBoardWriteInput) => {
 };
 
 export default BoardsWrite;
-
-const PhotoUploadForm = () => {
-  return (
-    <div className={styles.BoardsNew_inputForm}>
-      {CONSTANTS_TITLE.UPLOAD_PHOTO}
-      <div className={styles.uploadButtonContainer}>
-        <UploadButton />
-        <UploadButton />
-        <UploadButton />
-      </div>
-    </div>
-  );
-};
-
-const UploadButton = () => {
-  return (
-    <div className={styles.uploadImageContainer}>
-      <input type="file" id={styles.uploadImage} />
-      <div className={styles.uploadDescription}>
-        <label htmlFor="uploadImage" id={styles.uploadLabel}>
-          <img src="/assets/add.png" />
-          클릭해서 사진 업로드
-        </label>
-      </div>
-    </div>
-  );
-};

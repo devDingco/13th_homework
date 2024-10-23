@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import {
@@ -22,7 +22,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   const requiredInputList = ["writer", "password", "title", "contents"];
-  const fileRefs = useRef<HTMLInputElement | null[]>([]);
+  const fileRefs = useRef<HTMLInputElement[]>([]);
 
   const [boardInput, setBoardInput] = useState<CreateBoardInput>({
     writer: data?.fetchBoard.writer ?? "",
@@ -154,8 +154,9 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
       showSuccessModal(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED, () => {
         router.push(`/boards/${params.boardId}`);
       });
-    } catch (error: any) {
-      showErrorModal("게시글 수정 오류", error.graphQLErrors[0].message);
+    } catch (error: unknown) {
+      if (error instanceof ApolloError)
+        showErrorModal("게시글 수정 오류", error.graphQLErrors[0].message);
     }
   };
 

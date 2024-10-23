@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface IImageUploadFormProps {
   imageUrl: string[];
-  fileRefs: MutableRefObject<HTMLInputElement | null[]>;
+  fileRefs: MutableRefObject<HTMLInputElement[]>;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
   onClickImage: (event: MouseEvent<HTMLDivElement>) => void;
 }
@@ -45,7 +45,7 @@ interface IUploadButtonProps {
   onClickImage: (event: MouseEvent<HTMLDivElement>) => void;
   id: number;
   imageUrl: string[];
-  fileRefs: MutableRefObject<HTMLInputElement | null[]>;
+  fileRefs: MutableRefObject<HTMLInputElement[]>;
 }
 
 const UploadButton = ({
@@ -66,7 +66,9 @@ const UploadButton = ({
         type="file"
         className={styles.uploadImageInput}
         onChange={onChange}
-        ref={(el) => (fileRefs.current[id] = el)}
+        ref={(el) => {
+          fileRefs.current[id] = el as HTMLInputElement;
+        }}
       />
       <div className={styles.uploadDescription}>
         <label htmlFor="uploadImage" id={styles.uploadLabel}>
