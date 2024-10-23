@@ -1,0 +1,115 @@
+/* 기본 스타일 리셋 */
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 프로필 사이드바 */
+.profileSidebar {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profilePhoto {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.profileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1da1f2;
+  color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0d8ddb;
+}
+
+/* 메인 콘텐츠 */
+.content {
+  width: 70%;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.tabButton:hover {
+  text-decoration: underline;
+}
+
+.tweets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tweet {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+/* 메뉴 스타일 */
+.menuContainer {
+  background-color: #fff;
+  padding: 10px 10px; /* 상하좌우 여백 조정 */
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  text-align: left; /* 왼쪽 정렬 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 항목 간격 균등 분배 */
+}
+
+.menu p {
+  cursor: pointer;
+
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+  margin: 5px 0; /* 항목 간 간격 */
+}
+
+.menu p:hover {
+  background-color: #f1f1f1; /* 호버 시 배경색 */
+}

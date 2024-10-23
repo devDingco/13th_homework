@@ -27,6 +27,7 @@ export default function useBoardList() {
       search: "",
     },
   });
+  console.log("data", data);
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const onClickDelete = async (

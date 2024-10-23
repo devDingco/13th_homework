@@ -3,21 +3,20 @@
   justify-content: center;
 }
 .menuContainer {
-  height: 80px;
-  width: 1280px;
-  padding: 20px 20px;
+  width: 100%;
+  padding: 0vw 1vw;
   display: flex;
   align-items: center;
 }
 .menu {
   font-family: "basic";
-  font-size: 30px;
+  font-size: 45px;
   cursor: pointer;
   margin-right: 10px;
 }
 
 .list {
-  font-size: 14px;
+  font-size: 20px;
   margin: 0 15px;
   font-weight: 600;
 }
