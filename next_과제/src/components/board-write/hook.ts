@@ -32,7 +32,7 @@ export const useBoardWrite = (formType: string) => {
   const [previewImage, setPreviewImage] = useState("");
 
   // !수정할 게시글 데이터 가져오기
-  const { data, loading } = useQuery(FetchBoardDocument, {
+  const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId: params.boardId },
     skip: !(params.boardId && formType === "edit"),
   });
