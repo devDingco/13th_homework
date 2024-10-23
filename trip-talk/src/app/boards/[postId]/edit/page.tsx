@@ -26,6 +26,7 @@ export default function BoardEditPage() {
           writer={data?.fetchBoard.writer}
           youtubeUrl={data?.fetchBoard.youtubeUrl}
           boardAddress={data?.fetchBoard.boardAddress}
+          images={data?.fetchBoard.images}
         />
       )}
     </>

@@ -47,6 +47,7 @@ export default function OpenApiPage() {
       }
     }
   }, [data]);
+  console.log(data);
 
   return (
     <>

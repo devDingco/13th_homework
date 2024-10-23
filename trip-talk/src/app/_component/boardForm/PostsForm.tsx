@@ -3,6 +3,9 @@
 import React, {
   ChangeEvent,
   FormEvent,
+  Fragment,
+  MouseEvent,
+  MouseEventHandler,
   useEffect,
   useRef,
   useState,
@@ -19,7 +22,9 @@ import {
 } from '@/app/_commons/graphql/graphql';
 import useModalStore from '@/app/_store/useModalStore';
 import DaumPostcodeEmbed from 'react-daum-postcode';
-import { CREATE_BOARD } from '@/app/_api/board/Mutation';
+import { CREATE_BOARD, UPLOAD_FILE } from '@/app/_api/board/Mutation';
+import CustomImageInput from '../form/CustomImageInput';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export default function PostsForm({
   type,
@@ -28,6 +33,7 @@ export default function PostsForm({
   writer,
   youtubeUrl,
   boardAddress,
+  images,
 }: PostFormType) {
   const routes = useRouter();
   const params = useParams();
@@ -52,12 +58,17 @@ export default function PostsForm({
   });
 
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+  const [imageUrl, setImageUrl] = useState(images || ['']);
+
+  const imageRef = useRef<HTMLInputElement[]>([]);
   const addressInfo = useRef<any>();
+
   const { showModal, closeModal } = useModalStore();
 
   // ?fetch
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   // *functions
   const onPostFormChange = (
@@ -79,7 +90,6 @@ export default function PostsForm({
       '우편번호 모달',
       <DaumPostcodeEmbed
         onComplete={(result) => {
-          console.log('왜 다시 안됨?');
           addressInfo.current = result;
           closeModal();
         }}
@@ -103,6 +113,7 @@ export default function PostsForm({
 
   const onPostsButtonClick = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const images = imageUrl.filter((prevImg) => !!prevImg);
     try {
       if (type === 'ADD') {
         const { data } = await createBoard({
@@ -118,6 +129,7 @@ export default function PostsForm({
                 address: postData.userAddress,
                 addressDetail: postData.userAddressDetail,
               },
+              images,
             },
           },
         });
@@ -147,6 +159,7 @@ export default function PostsForm({
                     address: postData.userAddress,
                     addressDetail: postData.userAddressDetail,
                   },
+                  images,
                 },
                 password: result.toString(),
                 boardId: params.postId.toString(),
@@ -168,6 +181,56 @@ export default function PostsForm({
         console.error(err);
       }
     }
+  };
+
+  const onCancelImage = (
+    e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>,
+    index: number,
+  ) => {
+    e.stopPropagation();
+    setImageUrl((prev) => {
+      const newImageUrls = [...prev];
+      newImageUrls[index] = '';
+      return newImageUrls;
+    });
+  };
+
+  const onClickImage = (index: number) => {
+    if (imageRef.current[index]) {
+      imageRef.current[index].click();
+    }
+  };
+
+  const onChangeImage = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ): Promise<void> => {
+    const file = event.target.files?.[0];
+
+    // 검증 로직
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      // 5MB
+      alert('파일 용량이 너무 큽니다.(제한: 5MB)');
+      return;
+    }
+
+    if (
+      !file.type.includes('jpeg') &&
+      !file.type.includes('jpg') &&
+      !file.type.includes('png')
+    ) {
+      alert('jpeg, jpg 또는 png 파일만 업로드 가능합니다!!!');
+      return;
+    }
+
+    const result = await uploadFile({ variables: { file } });
+    setImageUrl((prev) => {
+      const newImageUrls = [...prev];
+      newImageUrls[index] = result.data?.uploadFile.url || '';
+      return newImageUrls;
+    });
   };
 
   // !useEffect
@@ -277,28 +340,24 @@ export default function PostsForm({
         onChangeFnc={onPostFormChange}
       />
       <div className={s.flexBox}>
-        <Input
-          // value={postData.}
-          label="사진 첨부"
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
-        />
-        <Input
-          // value={postData.}
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
-        />
-        <Input
-          // value={postData.}
-          type="file"
-          placeholder="클릭해서 사진 업로드"
-          id="photoUpload"
-          onChangeFnc={onPostFormChange}
-        />
+        {imageUrl.map((_, index) => (
+          <Fragment key={index}>
+            <CustomImageInput
+              index={index}
+              onClickFnc={onClickImage}
+              onCancelImage={onCancelImage}
+              onChangeFnc={onChangeImage}
+              imageRef={imageRef}
+              imageUrl={imageUrl}
+            />
+          </Fragment>
+        ))}
+        <button
+          type="button"
+          className=""
+          onClick={() => setImageUrl((prev) => [...prev, ''])}>
+          <PlusCircleOutlined className="text-[30px]" />
+        </button>
       </div>
       <div className={`${s.flexBox} justify-end`}>
         <Button type="button" style="default">

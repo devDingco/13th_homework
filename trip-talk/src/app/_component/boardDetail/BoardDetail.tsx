@@ -65,13 +65,25 @@ export default function BoardDetail({
             )}
           </Space>
         </div>
-        <Image src={MockImg1} alt="" width={0} height={0} />
+        <div className="flex gap-2">
+          {data &&
+            data?.fetchBoard.images?.map((imageUrl: string) => (
+              <Image
+                src={`https://storage.googleapis.com/${imageUrl}`}
+                alt=""
+                width={200}
+                height={200}
+              />
+            ))}
+        </div>
         <p className={`${data ? '' : 'bg-[#ccc] w-[100px] h-[20px]'}`}>
           {data?.fetchBoard.contents}
         </p>
-        <div className={`${s.videoBox}`}>
-          {data && <ReactPlayer url={data?.fetchBoard.youtubeUrl} />}
-        </div>
+        {data?.fetchBoard.youtubeUrl && (
+          <div className={`${s.videoBox}`}>
+            {data && <ReactPlayer url={data?.fetchBoard.youtubeUrl} />}
+          </div>
+        )}
         <div className={`${s.flexbox} justify-center gap-6`}>
           <button>
             <DislikeTwoTone />

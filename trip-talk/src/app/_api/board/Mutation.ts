@@ -52,23 +52,36 @@ export const CREATE_COMMMENT = gql`
   }
 `;
 
-// export const UPDATE_COMMENT = gql`
-//   mutation updateBoardComment(
-//     $createBoardCommentInput: CreateBoardCommentInput!
-//     $boardCommentId: ID!
-//     $password: String
-//   ) {
-//     updateBoardComment(
-//       createBoardCommentInput: $createBoardCommentInput
-//       boardCommentId: $boardCommentId
-//       password: $password
-//     ) {
-//       _id
-//       writer
-//       contents
-//       rating
-//       createdAt
-//       updatedAt
-//     }
-//   }
-// `;
+export const UPDATE_COMMENT = gql`
+  mutation updateBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardCommentId: ID!
+    $password: String
+  ) {
+    updateBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardCommentId: $boardCommentId
+      password: $password
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      _id
+      url
+      size
+      isUsed
+      createdAt
+      updatedAt
+    }
+  }
+`;

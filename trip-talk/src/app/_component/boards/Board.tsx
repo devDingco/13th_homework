@@ -10,6 +10,7 @@ interface BoardListPropsType {
   writer?: string | null;
   createdAt?: Date;
   id?: string;
+  searchValue?: string;
   onClickDelete?: (
     id: string,
     e: React.MouseEvent<HTMLElement, MouseEvent>,
@@ -23,6 +24,7 @@ export default function Board({
   writer,
   createdAt,
   id,
+  searchValue,
   onClickDelete,
   onClickDetail,
 }: BoardListPropsType) {
@@ -39,7 +41,20 @@ export default function Board({
         {number ?? '번호'}
       </p>
       <p className={`grow ${!createdAt ? 'text-[16px]' : 'text-[14px]'}`}>
-        {title ?? '제목'}
+        {'제목' &&
+          title &&
+          title
+            ?.replaceAll(searchValue, `@#$${searchValue}@#$`)
+            .split('@#$')
+            .map((part, index) => (
+              <span
+                key={`${part}_${index}`}
+                style={{
+                  color: part === searchValue ? 'red' : 'black',
+                }}>
+                {part}
+              </span>
+            ))}
       </p>
       <p
         className={`${s.boardItems} ${

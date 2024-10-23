@@ -12,6 +12,8 @@ interface InputPropsType<RequiredType = undefined> {
   name?: string;
   required?: RequiredType;
   size?: 'small' | 'medium' | 'large';
+  dispaly?: string;
+  target?: HTMLInputElement;
   onChangeFnc: (name: string, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
