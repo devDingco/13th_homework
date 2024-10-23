@@ -96,19 +96,29 @@ export const useInput = () => {
         message: "아이디는 20자 이내로 입력해 주세요.",
       },
     },
-    loginId: {
+    joinEmail: {
       required: "필수 입력 사항입니다.",
-      maxLength: {
-        value: 20,
-        message: "아이디는 20자 이내로 입력해 주세요.",
+      pattern: {
+        value: regexPattern.email,
+        message: "이메일 형식을 확인해 주세요.",
       },
     },
-    loginPassword: {
+    joinName: {
       required: "필수 입력 사항입니다.",
-      minLength: {
-        value: 4,
-        message: "비밀번호는 4자 이상으로 입력해 주세요.",
+      maxLength: {
+        value: 10,
+        message: "이름은 10자 이내로 입력해 주세요.",
       },
+    },
+    joinPassword: {
+      required: "필수 입력 사항입니다.",
+      pattern: {
+        value: regexPattern.password,
+        message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
+      },
+    },
+    joinPasswordConfirm: {
+      required: "필수 입력 사항입니다.",
     },
   };
 
