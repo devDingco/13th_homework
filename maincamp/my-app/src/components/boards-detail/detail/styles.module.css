@@ -95,8 +95,8 @@
     margin-top:2.4rem;
 }
 .emotion .bad, .emotion .good{
-    width:2.4rem;
-    height:2.4rem;
+    /* width:2.4rem;
+    height:2.4rem; */
     text-align:center;
 }
 .emotion .badIcon{

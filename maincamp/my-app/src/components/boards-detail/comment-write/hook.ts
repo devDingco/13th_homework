@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from "react";
 
 export default function useBoardCommentWrite(){
 
-    // const [value, setValue] = useState(3);
+    const [star, setStar] = useState(0);
 
     const [createComment] = useMutation(CreateBoardCommentDocument);
     const [commentWriter, setCommentWriter] = useState("");
@@ -29,6 +29,10 @@ export default function useBoardCommentWrite(){
     const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setCommentContent(event.target.value);
     };
+
+    const onChangeStar = (event: number) => {
+        setStar(event);
+    }
 
     const CreateBoardComment = async () => {
         try{
@@ -78,5 +82,6 @@ export default function useBoardCommentWrite(){
         setCommentPassword,
         setCommentWriter,
         CreateBoardComment,
+        onChangeStar,
     }
 }

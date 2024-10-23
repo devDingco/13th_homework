@@ -12,6 +12,7 @@ export default function BoardCommentWrite(){
         setCommentContent,
         setCommentWriter,
         setCommentPassword,
+        onChangeStar,
     } = useBoardCommentWrite();
     
     return(
@@ -20,7 +21,13 @@ export default function BoardCommentWrite(){
                 <p className={styles.commentImg}></p>
                 <p>댓글</p>
             </div>
-            {/* <Rate onChange={setValue} value={value} /> */}
+            <div>
+                <Rate 
+                    // style={{fontSize:"4rem"}}
+                    className={styles.rateStar}
+                    onChange={(event) => onChangeStar(event)}  
+                />
+            </div>
             <div className={styles.content_box}>
                 <div className={styles.content_flex}>
                     <div className={styles.writer}>

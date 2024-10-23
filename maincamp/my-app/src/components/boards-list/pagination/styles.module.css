@@ -1,0 +1,15 @@
+.paginationWrap{
+    /* text-align:center; */
+    margin-top:2.4rem;
+    display:flex;
+    justify-content:center;
+    gap:4rem;
+}
+.listPrev, .listNext, .paginationNumber{
+    font-size:1.6rem;
+    cursor:pointer;
+}
+
+.pagination button span{
+    font-size:2rem;
+}

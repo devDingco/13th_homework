@@ -2,11 +2,15 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { DeleteBoardDocument, FetchBoardsDocument } from "@/commons/graphql/graphql";
+import { DeleteBoardDocument, FetchBoardsCountDocument, FetchBoardsDocument } from "@/commons/graphql/graphql";
 
 export default function useBoardsList(){
-    const { data } = useQuery(FetchBoardsDocument);
+    const { data, refetch } = useQuery(FetchBoardsDocument);
+    const { data:dataBoardsCount } = useQuery(FetchBoardsCountDocument);
     console.log(data);
+
+    const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
+
     const router = useRouter();
 
     const [deleteBoard] = useMutation(DeleteBoardDocument)
@@ -34,5 +38,7 @@ export default function useBoardsList(){
         data,
         onClickDelete,
         onClickDetail,
+        lastPage,
+        refetch,
     }
 }
