@@ -5,11 +5,11 @@ export interface IBoardListprops {
   data?: FetchBoardsQuery;
 }
 
-export interface IListProps {
-  data?: FetchBoardsQuery;
-  currentPage: number;
+// export interface IListProps {
+//   data?: FetchBoardsQuery;
+//   currentPage: number;
 
-  refetch: (
-    variables?: Partial<OperationVariables> | undefined
-  ) => Promise<ApolloQueryResult<any>>;
-}
+//   refetch: (
+//     variables?: Partial<OperationVariables> | undefined
+//   ) => Promise<ApolloQueryResult<any>>;
+// }

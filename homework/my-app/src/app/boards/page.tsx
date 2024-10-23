@@ -10,6 +10,7 @@ import BannerPage from "@/components/boards-list/banner";
 import BoardList from "@/components/boards-list/list";
 import Pagination from "@/components/boards-list/pagination";
 import { useState } from "react";
+import SearchBar from "@/components/boards-list/search";
 
 const Page = () => {
   const [startPage, setStartPage] = useState(1);
@@ -20,9 +21,11 @@ const Page = () => {
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
   console.log(data);
+
   return (
     <>
       <BannerPage />
+      <SearchBar refetch={refetch} />
       <BoardList data={data} refetch={refetch} currentPage={currentPage} />
       <Pagination
         refetch={refetch}

@@ -1,3 +1,4 @@
+"use client";
 import styles from "./style.module.css";
 import useCommentListPage from "./hooks";
 import { ICommentListPageprops } from "./types";
