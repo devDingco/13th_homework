@@ -16,8 +16,8 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     password,
     title,
     content,
-    // zipcode,
-    // address,
+    zipcode,
+    address,
     buttonActiveStyle,
     writerVaild,
     passwordVaild,
@@ -126,7 +126,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder="제목을 입력해 주세요."
             onChange={onChangeTitle}
-            defaultValue={props.data?.fetchBoard?.title ?? ""}
+            defaultValue={props.data?.fetchBoard?.title}
           />
           <p
             id="postTitleVaild"
@@ -154,13 +154,13 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             className={styles.infoContent}
             placeholder="내용을 입력해 주세요."
             onChange={onChangeContent}
-            defaultValue={props.data?.fetchBoard?.contents ?? ""}
+            defaultValue={props.data?.fetchBoard?.contents}
           ></textarea>
           <p
             id="postContentVaild"
             className={styles.vaildation}
             style={{
-              display: content ? "block" : "none",
+              display: !content ? "block" : "none",
               color: "var(--red, #F66A6A)",
               fontSize: "1.6rem",
               fontWeight: "500",
@@ -170,7 +170,6 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             {contentVaild}
           </p>
         </div>
-        {/* MARK: address */}
         <div className={`${styles.input} ${styles.address}`}>
           <p className={styles.label}>주소</p>
           <div className={styles.addressMail}>
@@ -179,7 +178,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               className={styles.infoAddress}
               type="text"
               defaultValue={String(
-                props.data?.fetchBoard?.boardAddress?.zipcode ?? ""
+                props.data?.fetchBoard?.boardAddress?.zipcode ?? zipcode
               )}
             />
             <button className={styles.addressSearch} onClick={onToggleModal}>
@@ -192,7 +191,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder="주소를 입력해 주세요."
             defaultValue={String(
-              props.data?.fetchBoard?.boardAddress?.address ?? ""
+              props.data?.fetchBoard?.boardAddress?.address ?? address
             )}
             readOnly
           />
@@ -201,9 +200,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             type="text"
             placeholder="상세주소"
             onChange={onChangeAddressDetail}
-            defaultValue={
-              props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""
-            }
+            defaultValue={props.data?.fetchBoard?.boardAddress?.addressDetail}
           />
         </div>
         <hr className={styles.line} />
