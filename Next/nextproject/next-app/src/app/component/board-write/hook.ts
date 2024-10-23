@@ -215,12 +215,10 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
   const [imgUrl, setImgUrl] = useState(
     props.isEdit ? data?.fetchBoard?.images[0] : ""
   );
-  console.log(data?.fetchBoard?.images[0]);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
 
     const isValid = validation(file);
     if (!isValid) return;
@@ -230,7 +228,6 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
         file,
       },
     });
-    console.log(result);
     setImgUrl(result.data?.uploadFile.url ?? "");
   };
 

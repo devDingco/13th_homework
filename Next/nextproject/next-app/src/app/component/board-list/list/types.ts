@@ -5,4 +5,6 @@ export interface IListProps {
   // yarn codegen 으로 el._id해결
   currentPage: number;
   count: number;
+  keyword: string;
+  dataDocument: FetchBoardsQuery | undefined;
 }

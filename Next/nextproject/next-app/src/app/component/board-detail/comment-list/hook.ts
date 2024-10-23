@@ -12,7 +12,6 @@ export const useCommentList = () => {
   });
 
   const [hasMore, setHasMore] = useState(true);
-  console.log(data?.fetchBoardComments.length);
 
   const onNext = () => {
     if (data === undefined) return;

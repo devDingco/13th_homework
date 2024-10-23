@@ -15,7 +15,6 @@ export default function UseListWrite(currentPage: number) {
   });
 
   const { data: dataBoardsCount } = useQuery(FetchBoardsCount);
-  console.log(dataBoardsCount?.fetchBoardsCount);
   const router = useRouter();
 
   const onMoveDetailPage = (id: string) => {
