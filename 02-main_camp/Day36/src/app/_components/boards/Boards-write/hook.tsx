@@ -1,12 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
   CreateBoardInput,
   BoardAddressInput,
   FetchBoardQuery,
+  UploadFileDocument,
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
@@ -21,12 +22,15 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   const requiredInputList = ["writer", "password", "title", "contents"];
+  const fileRefs = useRef<HTMLInputElement | null[]>([]);
+
   const [boardInput, setBoardInput] = useState<CreateBoardInput>({
     writer: data?.fetchBoard.writer ?? "",
     password: "",
     title: data?.fetchBoard.title ?? "",
     contents: data?.fetchBoard.contents ?? "",
     youtubeUrl: data?.fetchBoard.youtubeUrl ?? "",
+    images: data?.fetchBoard.images ?? [],
   });
 
   const [boardAddress, setBoardAddress] = useState<BoardAddressInput>({
@@ -46,6 +50,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
   // graphql
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [uploadFile] = useMutation(UploadFileDocument);
 
   const onChangeBoardWriteInput = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -112,7 +117,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
         variables: {
           createBoardInput: {
             ...boardInput,
-            boardAddress: boardAddress,
+            boardAddress,
           },
         },
       });
@@ -134,7 +139,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
       CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_INPUT_PASSWORD
     );
     try {
-      const result = await updateBoard({
+      await updateBoard({
         variables: {
           updateBoardInput: {
             boardAddress: boardAddress,
@@ -160,6 +165,34 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
     } else {
       router.push(`/boards`);
     }
+  };
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    const id = Number(event.target.id);
+    const copy = boardInput.images ?? [];
+    console.log(copy);
+    copy[id] = result.data?.uploadFile.url ?? "";
+
+    setBoardInput((prev) => {
+      return {
+        ...prev,
+        images: copy,
+      };
+    });
+  };
+
+  const onClickImage = (event: MouseEvent<HTMLDivElement>) => {
+    // 어떤 요소를 눌렀는지 알아야한다.
+    const id = Number(event.currentTarget.id);
+    console.log("onClickImage:: ID", id);
+    fileRefs.current[id].click();
   };
 
   // Modal
@@ -209,5 +242,8 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
     requiredInputDescription,
     isAddressModalOpen,
     isActive,
+    fileRefs,
+    onChangeFile,
+    onClickImage,
   };
 };
