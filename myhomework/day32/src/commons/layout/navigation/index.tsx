@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import styles from "./styles.module.css";
-import { CaretDownOutlined, SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function Navigation() {
   return (
@@ -34,7 +34,13 @@ export default function Navigation() {
             />
           </button>
           <button className={styles.dropdownButton}>
-            <CaretDownOutlined />
+            <Image
+              src="/icon/down_arrow.svg"
+              alt="드롭다운"
+              width={24}
+              height={24}
+              sizes="100vw"
+            />
           </button>
         </div>
       </div>
