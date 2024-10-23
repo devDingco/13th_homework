@@ -1,8 +1,8 @@
 "use client";
-import ProductList from "@/components/product-list";
+import BookmarkList from "@/components/bookmark-list";
 import TableButtonMenu from "@/components/table-button-menu";
 
-export default function MyPage() {
+export default function MyBookMarkPage() {
   return (
     <>
       <TableButtonMenu
@@ -11,7 +11,7 @@ export default function MyPage() {
           { name: "북마크", link: "/mypage/bookmark" },
         ]}
       />
-      <ProductList />
+      <BookmarkList />
     </>
   );
 }

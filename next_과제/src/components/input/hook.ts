@@ -120,6 +120,16 @@ export const useInput = () => {
     joinPasswordConfirm: {
       required: "필수 입력 사항입니다.",
     },
+    newPassword: {
+      required: "필수 입력 사항입니다.",
+      pattern: {
+        value: regexPattern.password,
+        message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
+      },
+    },
+    newPasswordCheck: {
+      required: "필수 입력 사항입니다.",
+    },
   };
 
   return { formResister };
