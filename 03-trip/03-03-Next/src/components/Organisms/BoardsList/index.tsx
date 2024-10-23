@@ -1,17 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { MouseEventHandler } from "react";
 import useDelete from "@/commons/hooks/useDelete";
 
 import styles from "./styles.module.css";
+import { IBoardListProps } from "@/commons/types/types";
 
-export default function BoardsListUI({ data, count, current, keyword }) {
+export default function BoardsListUI(props: IBoardListProps) {
+    const { data, count, current, keyword } = props;
     const Router = useRouter();
 
-    const onClickDelete: MouseEventHandler = useDelete();
+    const onClickDelete = useDelete();
 
-    const postNum = Number(count?.fetchBoardsCount + 10 - current * 10);
+    const postNum = Number((count?.fetchBoardsCount ?? 0) + 10 - current * 10);
 
     return (
         <>

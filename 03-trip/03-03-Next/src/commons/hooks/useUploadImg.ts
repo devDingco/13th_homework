@@ -10,7 +10,7 @@ export default function useUploadImg() {
     const [uploadFile] = useMutation(UploadFileDocument);
 
     const onChangeFile = async (e: ChangeEvent<HTMLInputElement>) => {
-        const id = e.target.id;
+        const id = Number(e.target.id);
         const file = e.target.files?.[0];
         console.log(file);
 

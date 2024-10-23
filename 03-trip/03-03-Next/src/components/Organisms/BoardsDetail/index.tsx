@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import Input from "@/components/Atoms/_Input";
 import AddressFieldUI from "@/components/Molecules/_AddrField";
+import ImgField from "@/components/Molecules/_ImgField";
 
 import Image from "next/image";
 import profile from "/public/svg/person.svg";
@@ -21,12 +22,12 @@ import YouTube from "react-youtube";
 
 import useUpdate from "@/commons/hooks/useUpdate";
 import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
-import ImgField from "@/components/Molecules/_ImgField";
 import useUploadImg from "@/commons/hooks/useUploadImg";
 
 export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     const Params = useParams();
     const Router = useRouter();
+
     const { isModalOpen, addressData, onToggleModal, handleComplete } =
         useDaumPostApi();
 

@@ -1,40 +1,18 @@
 "use client";
 
-import { ILayoutProps } from "@/commons/types/types";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
+import { IPagination } from "@/commons/types/types";
 
-const PageBtnStyle = {
-    width: "40px",
-    height: "40px",
-    borderRadius: "8px",
-    backgroundColor: "#f5f5f5",
-    boxShadow: "0px 4px 10px #bdbdbd",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
+export default function PaginationUI(props: IPagination) {
+    const { refetch, lastPage, current, setCurrent } = props;
 
-const BtnBoxStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "20px",
-    margin: "20px",
-};
-
-export default function Pagination({
-    refetch,
-    lastPage,
-    current,
-    setCurrent,
-}: ILayoutProps) {
     const [startPage, setStartPage] = useState(1);
 
-    const onClick = (event) => {
-        setCurrent(Number(event.target.id));
+    const onClick = (event: MouseEvent<HTMLSpanElement>) => {
+        setCurrent(Number(event.currentTarget.id));
         refetch({ page: Number(event.currentTarget.id) });
 
-        switch (event.target.id) {
+        switch (event.currentTarget.id) {
             case "-xx": {
                 setStartPage(1);
                 refetch({ page: 1 });
@@ -107,3 +85,22 @@ export default function Pagination({
         </>
     );
 }
+
+const BtnBoxStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    margin: "20px",
+};
+
+const PageBtnStyle = {
+    width: "40px",
+    height: "40px",
+    borderRadius: "8px",
+    backgroundColor: "#f5f5f5",
+    boxShadow: "0px 4px 10px #bdbdbd",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};

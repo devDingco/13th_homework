@@ -1,18 +1,20 @@
-import { useState } from "react";
-import { ISubmitInput } from "../types/types";
-import { CreateBoardDocument } from "../graphql/graphql";
+import { ChangeEvent, MouseEvent, useState } from "react";
+import { IBoardArgs, IBoardInput } from "../types/types";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
+import { CreateBoardDocument } from "../graphql/graphql";
 
-export default function useSubmitInput({ addressData, imageUrl }) {
-    const [submitInput, setSubmitInput] = useState<ISubmitInput>({
+export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
+    const Router = useRouter();
+
+    const [submitInput, setSubmitInput] = useState<IBoardInput>({
         author_ID: "",
         password_ID: "",
         title_ID: "",
         content_ID: "",
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const submitInputFields = { ...submitInput };
         submitInputFields[e.target.id] = e.target.value;
 
@@ -21,9 +23,8 @@ export default function useSubmitInput({ addressData, imageUrl }) {
     };
 
     const [createBoard] = useMutation(CreateBoardDocument);
-    const Router = useRouter();
 
-    const onClickCreate = async (e) => {
+    const onClickCreate = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         if (submitInput.author_ID === "")
@@ -40,8 +41,8 @@ export default function useSubmitInput({ addressData, imageUrl }) {
                     createBoardInput: {
                         writer: submitInput.author_ID,
                         password: submitInput.password_ID,
-                        title: submitInput.title_ID,
-                        contents: submitInput.content_ID,
+                        title: submitInput.title_ID || "",
+                        contents: submitInput.content_ID || "",
                         youtubeUrl: submitInput.link_ID,
                         boardAddress: {
                             zipcode: addressData?.zonecode,

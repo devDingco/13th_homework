@@ -12,7 +12,7 @@ export default function useDaumPostApi() {
     const handleComplete = (data: Address) => {
         console.log(data);
         setAddressData(data);
-        console.log(addressData)
+        console.log(addressData);
         onToggleModal();
     };
 

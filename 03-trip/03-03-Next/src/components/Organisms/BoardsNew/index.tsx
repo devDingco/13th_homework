@@ -1,7 +1,7 @@
 "use client";
 
 import useDaumPostApi from "@/commons/hooks/useDaumPostApi";
-import useSubmitInput from "@/commons/hooks/useSubmitInput";
+import useSubmit from "@/commons/hooks/useSubmit";
 import useUploadImg from "@/commons/hooks/useUploadImg";
 
 import Button from "@/components/Atoms/_Button";
@@ -15,7 +15,7 @@ export default function BoardsNewUI() {
 
     const { imageUrl, onChangeFile } = useUploadImg();
 
-    const { submitInput, handleChange, onClickCreate } = useSubmitInput({
+    const { submitInput, handleChange, onClickCreate } = useSubmit({
         addressData,
         imageUrl,
     });

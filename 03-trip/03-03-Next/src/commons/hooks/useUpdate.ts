@@ -1,17 +1,18 @@
+import { ChangeEvent, useState } from "react";
+import { IBoardArgs, IBoardInput } from "../types/types";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
 import { FetchBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
-import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
 
-export default function useUpdate({ addressData, imageUrl }) {
+export default function useUpdate({ addressData, imageUrl }: IBoardArgs) {
     const Params = useParams();
     const Router = useRouter();
 
     const { data } = useQuery(FetchBoardDocument, {
-        variables: { boardId: Params.boardId },
+        variables: { boardId: Params.boardId as string },
     });
 
-    const [updateInput, setUpdateInput] = useState({});
+    const [updateInput, setUpdateInput] = useState<IBoardInput>({});
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setUpdateInput((prev) => ({
@@ -48,7 +49,7 @@ export default function useUpdate({ addressData, imageUrl }) {
         try {
             const result = await updateBoard({
                 variables: {
-                    boardId: Params.boardId,
+                    boardId: Params.boardId as string,
                     password: password,
                     updateBoardInput: updateData,
                 },

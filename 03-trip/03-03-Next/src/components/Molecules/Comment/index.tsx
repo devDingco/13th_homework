@@ -1,6 +1,7 @@
 "use client";
 
 import { Rate } from "antd";
+import Input from "@/components/Atoms/_Input";
 
 import Image from "next/image";
 import profile from "/public/svg/person.svg";
@@ -13,18 +14,18 @@ import {
     comment_input,
     comment_label,
 } from "@/commons/styles/commentStyles";
-import { useState } from "react";
-import Input from "@/components/Atoms/_Input";
+
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UpdateBoardCommentDocument } from "@/commons/graphql/graphql";
 
-export default function CommentUI({ el, idx, data }) {
+export default function CommentUI({ el }) {
     const [isEdit, setIsEdit] = useState(false);
-    const [comment, setComment] = useState();
+    const [comment, setComment] = useState("");
     const [stars, setStars] = useState(0);
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState("");
 
-    function handleChange(e) {
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
         switch (e.target.id) {
             case "comment_ID": {
                 setComment(e.target.value);
@@ -101,7 +102,7 @@ export default function CommentUI({ el, idx, data }) {
                 {isEdit ? (
                     <Input
                         id="comment_ID"
-                        value={data.fetchBoardComments[idx].contents}
+                        value={el.contents}
                         onChange={handleChange}
                     />
                 ) : (
