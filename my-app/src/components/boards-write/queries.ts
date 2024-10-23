@@ -84,6 +84,7 @@ export const UPDATE_BOARD = gql`
   }
 `;
 
+// 이미지 추가하기
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {

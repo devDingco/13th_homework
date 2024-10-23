@@ -3,12 +3,44 @@
 import Image from "next/image";
 import { useBoardsWrite } from "./hook";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IBoardsWriteProps } from "./types";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { gql, useMutation } from "@apollo/client";
+import { checkVaildation } from "@/commons/libraries/validation-file";
+
+const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
+  const [imageUrl, setImageUrl] = useState("");
+
+  const fileRef = useRef();
+
+  const [uploadFile] = useMutation(UPLOAD_FILE);
+
+  const onChangeFile = async (event) => {
+    const file = event.target.files[0];
+    console.log(file);
+
+    const isValid = checkVaildation(file);
+    if (!isValid) return;
+
+    const result = await uploadFile({ variables: { file } });
+    console.log(result.data.uploadFile.url);
+    setImageUrl(result.data.uploadFile.url);
+  };
+
+  const onClickImage = () => {
+    fileRef.current.click();
+  };
+
   const {
     onChangerequireInputs,
     onCLickUpdate,
@@ -212,9 +244,22 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
 
           <fieldset className={props.styles.사진첨부하는곳}>
             <legend>사진 첨부</legend>
+            <div className={props.styles.ex} onClick={onClickImage}>
+              가짜이미지선택
+            </div>
+            <input
+              type="file"
+              onChange={onChangeFile}
+              className={props.styles.fakeInput}
+              ref={fileRef}
+              // accept="image/jpeg,image/png" // jpeg, png가 아니면 파일 선택 자체가 안됨
+            />
+
             <div className={props.styles.업로드박스그룹}>
               <div className={props.styles.업로드박스}>
+                <img src={`https://storage.googleapis.com/${imageUrl}`} />
                 <Image
+                ₩
                   src="/images/add.png"
                   alt="추가"
                   className={props.styles.addIcon}
