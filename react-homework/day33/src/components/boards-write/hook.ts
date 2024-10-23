@@ -14,6 +14,7 @@ import { errorModal, successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
 
 export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
+  console.log("수정하기");
   // input state
   const [inputs, setInputs] = useState<IInputs>({
     writer: "",
@@ -102,7 +103,6 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
         },
       });
       console.log("등록한 게시글:", result?.data?.createBoard);
-
       const navigateToDetail = () => {
         router.push(`/boards/${result.data?.createBoard._id}`);
       };
@@ -168,6 +168,7 @@ export const useBoardsWrite = (data: FetchBoardQuery | undefined) => {
     if (inputs.title) variables.updateBoardInput.title = inputs.title;
     if (inputs.contents) variables.updateBoardInput.contents = inputs.contents;
     if (youtubeUrl) variables.updateBoardInput.youtubeUrl = youtubeUrl;
+
     // 주소객체 있으면 넣기
     if (Object.keys(boardAddress).length !== 0)
       variables.updateBoardInput.boardAddress = boardAddress;

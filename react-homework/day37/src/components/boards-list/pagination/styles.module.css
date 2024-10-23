@@ -1,0 +1,39 @@
+.pagination_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.number_box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.number {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: #777;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.click_number {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #f2f2f2;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
