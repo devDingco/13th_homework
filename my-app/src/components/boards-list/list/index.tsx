@@ -36,6 +36,8 @@ export default function Board(props: IBoardProps) {
   // };
 
   // ------------------------------------------ 페이지네이션
+  const { keyword } = props; // 프롭스로 받고 나서 구조분해 할당하는 방식
+
   const { goingBoardDetail, onClickDelete, data } = useBoard();
 
   return (
@@ -65,7 +67,20 @@ export default function Board(props: IBoardProps) {
             >
               <div className={props.styles.boardSide}>
                 <div className={props.styles.boardNum}>{index + 1}</div>
-                <div className={props.styles.boardTitle}>{el.title}</div>
+                <div className={props.styles.boardTitle}>
+                  {el.title
+                    .replaceAll(keyword, `#$${keyword}#$`)
+                    .split("#$")
+                    .map((el, index) => (
+                      <span
+                        key={`${el}_${index}`}
+                        style={{ color: el === keyword ? "#59ce42" : "black" }}
+                      >
+                        {el}
+                      </span>
+                    ))}
+                  {/* 이곳을 바꾸면되는데  keyword를 어떻게 가져올지가 의문*/}
+                </div>
               </div>
               <div className={props.styles.boardSide}>
                 <div className={props.styles.boardName}>{el.writer}</div>

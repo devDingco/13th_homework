@@ -200,3 +200,13 @@
   background-color: #2974e5; /* 버튼이 활성화되었을 때 배경색 */
   color: white; /* 활성화 시 글자색 */
 }
+
+.ex {
+  width: 100px;
+  height: 100px;
+  background-color: blueviolet;
+}
+
+.fakeInput {
+  display: none;
+}

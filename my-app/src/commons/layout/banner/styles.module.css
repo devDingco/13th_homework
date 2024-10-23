@@ -1,10 +1,10 @@
 .asd {
   width: 100%; /* 부모 요소 너비에 맞추어 슬라이더가 커지도록 */
-  margin-bottom: 50px;
 }
 /* 페이지내이션 편하게 보려고 지워둠 나중에 여기서 주석 치워야 함. */
 .banner {
   /* width: 100%;
   height: 516px; */
+  /* TODO: 배너보이게하려면 이 주석을 푸시오. */
   object-fit: cover;
 }
