@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from "react";
 import DarkModeBtn from "@/components/darkModeBtn";
 import { StyleProvider } from "@ant-design/cssinjs";
 import locale from "antd/locale/ko_KR";
-import { SessionProvider } from "next-auth/react";
 
 export default function ThemeProvider({
   children,
@@ -45,17 +44,15 @@ export default function ThemeProvider({
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <SessionProvider>
-      <StyleProvider hashPriority="high">
-        <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
-        <ConfigProvider
-          locale={locale}
-          theme={theme(ThemeControl)}
-          getPopupContainer={() => modalContainerRef.current as HTMLElement}
-        >
-          <div ref={modalContainerRef}>{children}</div>
-        </ConfigProvider>
-      </StyleProvider>
-    </SessionProvider>
+    <StyleProvider hashPriority="high">
+      <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
+      <ConfigProvider
+        locale={locale}
+        theme={theme(ThemeControl)}
+        getPopupContainer={() => modalContainerRef.current as HTMLElement}
+      >
+        <div ref={modalContainerRef}>{children}</div>
+      </ConfigProvider>
+    </StyleProvider>
   );
 }
