@@ -1,4 +1,5 @@
 /** @format */
+
 export enum EProtocol {
 	REST = 'rest',
 	GRAPHQL = 'graphql',
@@ -6,7 +7,7 @@ export enum EProtocol {
 
 interface RestOptions {
 	protocol: EProtocol.REST;
-	data: object;
+	variables?: object;
 	endpoint: string;
 }
 
