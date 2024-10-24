@@ -1,7 +1,7 @@
 "use client"
 
 import { MouseEvent, useState } from "react"
-import { IPageNationProps } from "./types";
+import { IPagiNationProps } from "./types";
 import { useQuery } from "@apollo/client";
 import { FetchBoardsCountDocument } from "@/commons/graphql/graphql";
 
@@ -10,19 +10,23 @@ export const useListPagination = (props: IPagiNationProps) => {
     const [startPage, setStartPage] = useState(1);
 
     const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
-        props.refetch({ nowPage: Number(event.currentTarget.id)})
+        const selectedPage = Number(event.currentTarget.id);
+        setStartPage(selectedPage);
+        props.refetch({ nowPage: selectedPage });
     };
 
     const onClickPrevPage = () => {
         if(startPage === 1) return;
-        setStartPage(startPage - 1);
-        props.refetch({ nowPage: startPage - 1});
+        const newPage = startPage - 1;
+        setStartPage(newPage);
+        props.refetch({ nowPage: newPage });
     }
 
     const onClickNextPage = () => {
         if(startPage + 1 <= props.lastPage){
-            setStartPage(startPage + 1);
-            props.refetch({ nowPage: startPage + 1});
+            const newPage = startPage + 1;
+            setStartPage(newPage)
+            props.refetch({ nowPage: newPage });
         }
     };
 

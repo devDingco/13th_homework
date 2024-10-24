@@ -26,6 +26,8 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
         isOpen,
         writeAddress,
         zoneAddress,
+        fileRef,
+        imageUrl,
         onChangeName,
         onChangePassword,
         onChangeSubject,
@@ -36,6 +38,8 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
         handleOk,
         handleCancel,
         handleComplete,
+        onClickImageFile,
+        onChangeImageUpload,
         register
 
     } = useBoardDetailEdit(isEdit);
@@ -113,8 +117,8 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
             </div>
             <div className={styles.picture}>
                 <p className="new-p">사진 첨부</p>
-                <div>
-                    <button>
+                <div className={styles.imageUpload}>
+                    {/* <button>
                         <Image 
                             src="/images/add-image.png"
                             alt="사진업로드"
@@ -143,7 +147,34 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
                             height={0}
                             sizes="100vw"
                         />
-                    </button>
+                    </button> */}
+                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
+                    <input 
+                        type="file"
+                        onChange={onChangeImageUpload}
+                        accept="image/jpeg, image/png"
+                        ref={fileRef}
+                        style={{display:"none"}}
+                    />
+                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
+                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
+                    <input 
+                        type="file"
+                        onChange={onChangeImageUpload}
+                        accept="image/jpeg, image/png"
+                        ref={fileRef}
+                        style={{display:"none"}}
+                    />
+                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
+                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
+                    <input 
+                        type="file"
+                        onChange={onChangeImageUpload}
+                        accept="image/jpeg, image/png"
+                        ref={fileRef}
+                        style={{display:"none"}}
+                    />
+                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
                 </div>
             </div>
             <div className={styles.bt_button}>

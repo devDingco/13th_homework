@@ -1,11 +1,11 @@
 "use client"
 
 import {useListPagination} from "./hook"
-import { IPaginationProps } from "./types"
+import { IPagiNationProps } from "./types"
 import styles from "./styles.module.css"
 import { Pagination } from "antd"
 
-export default function ListPagination(props:IPaginationProps){
+export default function ListPagination(props:IPagiNationProps){
     const {
         data,
         startPage,
@@ -32,7 +32,7 @@ export default function ListPagination(props:IPaginationProps){
                     )
             )}
             <span onClick={onClickNextPage} className={styles.listNext}>다음</span> */}
-            {/* <Pagination
+            <Pagination
                 defaultCurrent={1}
                 defaultPageSize={10}
                 align="center"
@@ -41,7 +41,7 @@ export default function ListPagination(props:IPaginationProps){
                 showSizeChanger={false}
                 onChange={(page) => console.log(page)} // 페이지 변경 시 동작
                 className={styles.pagination}
-            /> */}
+            />
         </div>
     )
 }

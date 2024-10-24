@@ -16,8 +16,6 @@ export default function Home() {
 
   return(
     <>
-      <BoardsList />
-      <ListPagination refetch={refetch} lastPage={lastPage} />
     </>
   )
 }

@@ -138,6 +138,15 @@
   margin:0.8rem 1.6rem 0.8rem 0;
   border:none;
 }
+.imageUpload{
+  display:flex;
+}
+.onClickImageFile{
+  width:16rem;
+  height:16rem;
+  margin:0.8rem 1.6rem 0.8rem 0;
+  background:url(../../../public/images/add-image.png) no-repeat;
+}
 
 /* 하단 버튼 */
 .bt_button{

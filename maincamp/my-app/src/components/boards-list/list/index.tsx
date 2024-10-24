@@ -2,8 +2,9 @@
 import ListPagination from "../pagination";
 import useBoardsList from "./hook";
 import styles from "./styles.module.css"
+import { IListProps } from "./types";
 
-export default function BoardsList(){
+export default function BoardsList(props:IListProps){
     const {data, refetch, lastPage, onClickDetail, onClickDelete} = useBoardsList();
     return (
         <>
@@ -28,7 +29,7 @@ export default function BoardsList(){
                         </ul>
                     </div>
                 ))}
-                <ListPagination refetch={refetch} lastPage={lastPage} />
+                {/* <ListPagination refetch={refetch} lastPage={lastPage} /> */}
             </div>
         </>
     );
