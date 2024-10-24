@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class typeORMMongoDBConfig implements TypeOrmOptionsFactory {
+export class mongoDBConfig implements TypeOrmOptionsFactory {
     constructor(private readonly configService: ConfigService) {}
 
     createTypeOrmOptions(): TypeOrmModuleOptions {

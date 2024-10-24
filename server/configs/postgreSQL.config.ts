@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class typeORMpostgreSQLConfig implements TypeOrmOptionsFactory {
+export class postgreSQLConfig implements TypeOrmOptionsFactory {
     constructor(private readonly configService: ConfigService) {}
 
     createTypeOrmOptions(): TypeOrmModuleOptions {
