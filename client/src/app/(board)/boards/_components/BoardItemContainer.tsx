@@ -3,7 +3,7 @@
 
 // NOTE Uncaught SyntaxError: Invalid or unexpected token (at layout.js:28:29)
 
-import { GetBoardsQuery, useGetBoardsQuery } from '@/graphql/queries/getBoards.generated';
+import { GetBoardsQuery, useGetBoardsQuery } from '@/graphql/queries/getBoards/getBoards.generated';
 
 import BoardItem from './BoardItem';
 import { IApiResponseData } from '@/models/apiResponse';
@@ -22,6 +22,7 @@ export default function BoardItemContainer({ searchParams }: ISearchParamsProps)
 	const { data } = useGetBoardsQuery({
 		variables,
 	});
+	console.log(data);
 
 	// const data = await commonGet(`${boardUrlEndPoint}?page=${page}&take=${take}`);
 
