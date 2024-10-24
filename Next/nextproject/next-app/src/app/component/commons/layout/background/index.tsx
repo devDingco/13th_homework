@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
-// const apiKey = "08077ca991dee566d895349c1e0253aa"; // OpenWeather API 키 입력
+// const apiKey = ""; // OpenWeather API 키 입력
 
 export default function Background({ children }) {
   // 날씨 정보를 저장하는 상태
