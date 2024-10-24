@@ -1,31 +1,22 @@
 "use client"
 
-import BoardsDetail from "@/components/boards-detail/detail"
-import BoardListBanner from "@/components/boards-list/banner"
 import BoardsList from "@/components/boards-list/list"
-import { useListPagination } from "@/components/boards-list/pagination/hook"
-import { IPagiNationProps } from "@/components/boards-list/pagination/types"
-import { Pagination } from "antd"
 import styles from "./css/styles.module.css"
+import { useQuery } from "@apollo/client"
+import { FetchBoardDocument, FetchBoardsCountDocument } from "@/commons/graphql/graphql"
+import ListPagination from "@/components/boards-list/pagination"
 
-export default function BoardsListPage(props:IPagiNationProps) {
-    const {
-        data
-    } = useListPagination(props);
+export default function BoardsListPage() {
+    const {data, refetch} = useQuery(FetchBoardDocument);
+
+    const {data: dataBoardsCount} = useQuery(FetchBoardsCountDocument);
+
+    const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
     return(
         <div className={styles.boardWrap}>
-            <BoardsList />
-            <Pagination
-                defaultCurrent={1}
-                defaultPageSize={10}
-                align="center"
-                current={props.page}
-                total={data?.fetchBoardsCount}
-                showSizeChanger={false}
-                onChange={(page) => console.log(page)} // 페이지 변경 시 동작
-                className={styles.pagination}
-            />
+            <BoardsList data={data} />
+            <ListPagination refetch={refetch} lastPage={lastPage} />
         </div>
     )
 }

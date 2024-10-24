@@ -2,9 +2,11 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument } from "@/commons/graphql/graphql";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
 import { Address } from "react-daum-postcode";
+import { UPLOAD_FILE } from "./queries";
+import { checkValidationFile } from "@/commons/libraries";
 
 export default function useBoardDetailEdit(isEdit: boolean){
     const router = useRouter();
@@ -67,7 +69,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
     const [isOpen, setIsOpen] = useState(false);
     const [writeAddress, setWriteAddress] = useState("");
     const [zoneAddress, setZoneAddress] = useState("");
-    const [detailAddress, setdetailAddress] = useState("");
+    const [detailAddress, setDetailAddress] = useState("");
 
     // useEffect (isEdit 또는 data가 변경될 때 상태를 업데이트 하도록 함)
     useEffect(() => {
@@ -95,6 +97,28 @@ export default function useBoardDetailEdit(isEdit: boolean){
         console.log(data);
         setIsOpen(false);
     };
+
+    // 이미지업로드
+    const [imageUrl, setImageUrl] = useState("");
+    const fileRef = useRef<HTMLInputElement>(null);
+    const [imageUpload] = useMutation(UploadFileDocument);
+
+    const onChangeImageUpload = async (event:ChangeEvent<HTMLInputElement>) => {
+        const imageFile = event.target.files?.[0];
+
+        const isValid = checkValidationFile(imageFile);
+        if(!isValid) return;
+
+        const result = await imageUpload({ variables: {file: imageFile}});
+        console.log("업로드", result.data?.uploadFile.url);
+        setImageUrl(result.data?.uploadFile.url ?? "");
+    };
+
+    const onClickImageFile = () => {
+        fileRef.current?.click();
+        console.log("업로드클릭");
+    };
+
 
     // 
     let registerError = false;
@@ -148,7 +172,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
                                 address: writeAddress,
                                 addressDetail: detailAddress,
                             },
-                            images: ["", ""],
+                            images: [imageUrl],
                         }
                     },
                 })
@@ -243,6 +267,8 @@ export default function useBoardDetailEdit(isEdit: boolean){
         isOpen,
         writeAddress,
         zoneAddress,
+        fileRef,
+        imageUrl,
         onChangeName,
         onChangePassword,
         onChangeSubject,
@@ -253,7 +279,9 @@ export default function useBoardDetailEdit(isEdit: boolean){
         handleComplete,
         setWriteAddress,
         setZoneAddress,
-        setdetailAddress,
+        setDetailAddress,
+        onClickImageFile,
+        onChangeImageUpload,
         register,
     };
 
