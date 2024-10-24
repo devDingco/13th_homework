@@ -2,7 +2,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import * as React from "react";
-import ApolloSetting from "@/commons/settings/apollo-setting";
 import LayoutComponent from "./component/commons/layout";
 import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 const geistSans = localFont({

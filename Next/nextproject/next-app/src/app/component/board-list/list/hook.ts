@@ -6,11 +6,12 @@ import {
 } from "../../queires/queries";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+import { IListProps } from "./types";
 
-export default function UseListWrite(currentPage: number) {
+export default function UseListWrite(props: IListProps) {
   const { data, refetch } = useQuery(FetchBoards, {
     variables: {
-      mypage: currentPage,
+      mypage: props.currentPage,
     },
   });
 
@@ -27,18 +28,18 @@ export default function UseListWrite(currentPage: number) {
     event: MouseEvent<HTMLButtonElement>,
     id: string
   ) => {
-    event.stopPropagation();
+    event.stopPropagation(); // 이벤트 버블링 방지
     console.log(id);
     try {
       await deleteBoard({
         variables: {
           boardId: id,
         },
+        refetchQueries: [FetchBoards],
       });
     } catch (err) {
       console.log(err);
     }
-    refetch({ page: currentPage });
   };
 
   const onClickWriteBoard = () => {

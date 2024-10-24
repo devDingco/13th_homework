@@ -132,7 +132,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
               title: inputs.title_id,
               contents: inputs.contents_id,
               youtubeUrl: youtubeUrl,
-              images: [imgUrl],
+              images: imgUrl,
               boardAddress: {
                 address: address,
                 zipcode: addressnum,
@@ -219,7 +219,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
+    console.log(file);
     const isValid = validation(file);
     if (!isValid) return;
 
@@ -229,8 +229,8 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
       },
     });
     setImgUrl(result.data?.uploadFile.url ?? "");
+    console.log(result.data?.uploadFile.url);
   };
-
   const onClickImage = () => {
     fileRef.current?.click();
   };

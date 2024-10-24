@@ -11,7 +11,7 @@ import { IDetailProps } from "./types";
 export default function DetailWrite(props: IDetailProps) {
   const { onModify, data, onList } = UseDetailWrite();
   console.log(data?.fetchBoard.images.length);
-  console.log(data?.fetchBoard?.images[0]);
+  console.log(data?.fetchBoard?.images);
 
   return (
     <div className={styles.css_layout}>
@@ -62,7 +62,7 @@ export default function DetailWrite(props: IDetailProps) {
       <div>
         <div>
           {data &&
-          data.fetchBoard.images &&
+          data.fetchBoard.images[0] &&
           data.fetchBoard.images.length > 0 ? (
             <Image
               src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}

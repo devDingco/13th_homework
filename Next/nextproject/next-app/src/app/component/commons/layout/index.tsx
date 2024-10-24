@@ -2,10 +2,12 @@
 import React from "react";
 import LayoutBannerPage from "./banner";
 import LayoutNavigation from "./navigation";
-import styles from "./banner/styles.module.css";
+import styles from "./styles.module.css";
 import { useParams, usePathname } from "next/navigation";
+import Background from "../layout/background";
 interface ILayout {
   children: React.ReactNode;
+  hidelayout?: boolean;
 }
 
 export default function LayoutComponent({ children }: ILayout) {
@@ -15,15 +17,19 @@ export default function LayoutComponent({ children }: ILayout) {
     "/routes/boards/new",
   ];
   const pathname = usePathname();
-  console.log(pathname);
+
   const hidelayout = HIDDEN_LAYOUT.includes(pathname);
+  console.log("Current Pathname:", pathname);
+  console.log("Hide Layout:", hidelayout);
   return (
     <>
-      <div className={styles.css_layout}>
+      {/* <div className={styles.css_layout}> */}
+      <Background>
         <LayoutNavigation />
-        {!hidelayout && <LayoutBannerPage />}
+        {hidelayout && <LayoutBannerPage />}
         <div>{children}</div>
-      </div>
+      </Background>
+      {/* </div> */}
     </>
   );
 }
