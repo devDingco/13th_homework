@@ -6,9 +6,12 @@ import { FavoriteBorder, ThumbDownOutlined } from "@mui/icons-material";
 import { pink } from "@mui/material/colors";
 import UserProfile from "@/components/UserProfile";
 
+const STORAGE_URL = "https://storage.googleapis.com";
+
 export default function BoardsDetailForm() {
   const { data, handlePage } = useBoardsDetailForm();
 
+  console.log("사진: ", data?.fetchBoard.images?.[1]);
   return (
     <div className={styles.게시물상세화면상자}>
       {/* 게시글 제목부분 */}
@@ -42,12 +45,18 @@ export default function BoardsDetailForm() {
         <div className={styles.게시글총내용상자}>
           {/* 사진 */}
           <div>
-            <Image
-              src="/images/donggle1.jpeg"
-              alt="고양이사진"
-              width={400}
-              height={531}
-            />
+            {data?.fetchBoard.images
+              ?.filter((image) => image) // 빈 문자열 필터링
+              .map((image, index) => (
+                <Image
+                  key={index}
+                  src={`${STORAGE_URL}/${image}`}
+                  alt={`게시글 이미지 ${index + 1}`}
+                  width={500}
+                  height={300}
+                  style={{ objectFit: "cover" }}
+                />
+              ))}
           </div>
           {/* 게시글 내용 */}
           <pre>{data?.fetchBoard.contents}</pre>
