@@ -1,6 +1,6 @@
 import { ApolloError, useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import {
   CreateBoardDocument,
   UpdateBoardDocument,
@@ -8,6 +8,7 @@ import {
   BoardAddressInput,
   FetchBoardQuery,
   UploadFileDocument,
+  FetchBoardDocument,
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
@@ -146,10 +147,20 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
             title: boardInput.title,
             contents: boardInput.contents,
             youtubeUrl: boardInput.youtubeUrl,
+            images: boardInput.images,
           },
           password: passwordInput,
           boardId: params.boardId as string,
         },
+
+        refetchQueries: [
+          {
+            query: FetchBoardDocument,
+            variables: {
+              boardId: String(params.boardId),
+            },
+          },
+        ],
       });
       showSuccessModal(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED, () => {
         router.push(`/boards/${params.boardId}`);
@@ -177,14 +188,12 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
       },
     });
     const id = Number(event.target.id);
-    const copy = boardInput.images ?? [];
-    console.log(copy);
-    copy[id] = result.data?.uploadFile.url ?? "";
-
     setBoardInput((prev) => {
+      const newImages = prev.images ? [...prev.images] : [];
+      newImages[id] = result.data?.uploadFile.url ?? "";
       return {
         ...prev,
-        images: copy,
+        images: newImages,
       };
     });
   };
@@ -227,6 +236,32 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
     if (isOnlySpace) return true;
     return false;
   };
+
+  // 새로 고침을 해도 데이터를 불러오도록 구현
+  useEffect(() => {
+    if (isEdit && data?.fetchBoard) {
+      setBoardInput(() => {
+        return {
+          writer: data.fetchBoard.writer,
+          title: data.fetchBoard.title,
+          contents: data.fetchBoard.contents,
+          youtubeUrl: data.fetchBoard.youtubeUrl,
+          images: data.fetchBoard.images,
+        };
+      });
+    }
+
+    if (isEdit && data?.fetchBoard.boardAddress) {
+      setBoardAddress(() => {
+        return {
+          address: data.fetchBoard.boardAddress?.address,
+          addressDetail: data.fetchBoard.boardAddress?.addressDetail,
+          zipcode: data.fetchBoard.boardAddress?.zipcode,
+        };
+      });
+    }
+    console.log(data);
+  }, [data, isEdit]);
 
   return {
     onClickSubmit,
