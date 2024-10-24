@@ -1,6 +1,5 @@
 /** @format */
 // WARNING: 뭐가 문제인 지 모르겠는데 가끔 무한 loading 상태가 됨 뭐 layout.tsx error라는데?.
-// NOTE Suspense & SWR 공부하기
 
 import BoardItemContainer from './_components/BoardItemContainer';
 import { ISearchParamsProps } from '@/models/children.type';

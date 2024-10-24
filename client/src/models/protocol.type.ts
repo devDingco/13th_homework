@@ -5,15 +5,14 @@ export enum EProtocol {
 	GRAPHQL = 'graphql',
 }
 
-interface RestOptions {
+export interface RestOptions {
 	protocol: EProtocol.REST;
-	variables?: object;
 	endpoint: string;
 }
 
-interface GraphQLOptions {
+export interface GraphQLOptions<TVariables = Record<string, unknown>> {
 	protocol: EProtocol.GRAPHQL;
-	variables?: object;
+	variables?: TVariables;
 }
 
 export type ProtocolOptions = RestOptions | GraphQLOptions;
