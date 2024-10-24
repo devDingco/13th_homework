@@ -197,6 +197,7 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         addressDetail: formData.boardAddress?.addressDetail,
       },
       images: formData.images,
+      youtubeUrl: formData.youtubeUrl,
     };
 
     try {

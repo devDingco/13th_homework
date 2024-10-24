@@ -6,13 +6,29 @@ import FormField from "@/components/FormField";
 import Input from "@/components/input";
 import Textarea from "@/components/textarea";
 
-export default function CommentWrite() {
-  const { commentData, handleSubmit, onChange } = useCommentWriter();
+interface ICommentWriteProps {
+  isEdit?: boolean;
+  defaultValue?: {
+    contents: string;
+    rating: number;
+    _id: string;
+    writer: string;
+  };
+  onCancel?: () => void;
+}
+
+export default function CommentWrite(props: ICommentWriteProps) {
+  const { commentData, handleSubmit, onChange } = useCommentWriter({
+    isEdit: props.isEdit,
+    defaultValue: props.defaultValue,
+    onCancel: props.onCancel,
+  });
+
   return (
     <form className={styles.commentBox} onSubmit={handleSubmit}>
       <div className={styles.댓글상자}>
         <Image src="/images/icons/chat.svg" width={24} height={24} alt="chat" />
-        <span>댓글</span>
+        <span>{props.isEdit ? "댓글 수정" : "댓글"}</span>
       </div>
       <Rating
         name="rating"
@@ -21,14 +37,16 @@ export default function CommentWrite() {
         onChange={onChange}
       />
       <div className={styles.commentBox_commentInputs}>
-        {/* 작성자, 비밀번호 상자 */}
         <div className={styles.commentBox_commentInputs_writerpwBox}>
           <FormField label="작성자" required>
             <Input
               name="writer"
-              placeholder="작성자 명을 입력해 주세요"
+              value={
+                props.isEdit ? props.defaultValue?.writer : commentData.writer
+              }
               onChange={onChange}
-              value={commentData.writer}
+              disabled={props.isEdit}
+              placeholder={props.isEdit ? "" : "작성자 명을 입력해 주세요"}
             />
           </FormField>
           <FormField label="비밀번호" required>
@@ -41,7 +59,6 @@ export default function CommentWrite() {
             />
           </FormField>
         </div>
-        {/* 댓글 입력 창 */}
         <Textarea
           name="contents"
           placeholder="댓글을 입력해주세요"
@@ -51,8 +68,18 @@ export default function CommentWrite() {
         />
         <span>{`${commentData.contents.length}/100`}</span>
         <div className={styles.commentBox_button_justifyEnd}>
+          {props.isEdit && (
+            <button
+              className={styles.commentBox_button}
+              type="button"
+              onClick={props.onCancel}
+              style={{ marginRight: "12px" }}
+            >
+              취소
+            </button>
+          )}
           <button className={styles.commentBox_button} type="submit">
-            댓글등록
+            {props.isEdit ? "수정하기" : "댓글등록"}
           </button>
         </div>
       </div>
