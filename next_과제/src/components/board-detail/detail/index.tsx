@@ -1,5 +1,5 @@
-import Icon from "@/components/iconFactory";
-import LikeCountBtn from "@/components/likeCountBtn";
+import Icon from "@/components/icon-factory";
+import LikeCountBtn from "@/components/like-count-btn";
 import { Button, Tooltip, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import { dateViewSet } from "@/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/detail/hook";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
-import YoutubeBox from "@/components/youtubeBox";
+import YoutubeBox from "@/components/youtube-box";
 
 export default function BoardDetail() {
   const router = useRouter();

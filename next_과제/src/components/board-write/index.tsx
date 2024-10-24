@@ -1,8 +1,8 @@
 "use client";
 import Input from "@/components/input";
-import PostSearchPopBtn from "@/components/postSearchPopBtn";
-import ReactQuillBox from "@/components/reactQuillBox";
-import ModalAlertBox from "@/components/ModalAlertBox";
+import PostSearchPopBtn from "@/components/post-search-pop-btn";
+import ReactQuillBox from "@/components/react-quill-box";
+import ModalAlertBox from "@/components/modal-alert-box";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Upload } from "antd";
 

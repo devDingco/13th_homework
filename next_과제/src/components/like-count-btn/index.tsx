@@ -1,6 +1,6 @@
-import Icon from "@/components/iconFactory";
-import { useLikeCount } from "@/components/likeCountBtn/hook";
-import { LikeCountBtnProps } from "@/components/likeCountBtn/types";
+import Icon from "@/components/icon-factory";
+import { useLikeCount } from "@/components/like-count-btn/hook";
+import { LikeCountBtnProps } from "@/components/like-count-btn/types";
 
 export default function LikeCountBtn(props: LikeCountBtnProps) {
   const { type } = props;

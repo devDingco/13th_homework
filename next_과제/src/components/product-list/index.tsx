@@ -1,5 +1,5 @@
 import { useBoardList } from "@/components/product-list/hook";
-import SearchBox from "@/components/searchBox";
+import SearchBox from "@/components/search-box";
 import { Table } from "antd";
 import styles from "./styles.module.scss";
 

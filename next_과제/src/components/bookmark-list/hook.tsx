@@ -12,7 +12,7 @@ import {
   FetchBoardsCountQueryVariables,
 } from "@/commons/graphql/graphql";
 
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
 import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
 

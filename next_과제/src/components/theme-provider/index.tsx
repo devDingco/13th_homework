@@ -2,7 +2,7 @@
 
 import { ConfigProvider, theme as antdTheme, ThemeConfig } from "antd";
 import { useEffect, useState, useRef } from "react";
-import DarkModeBtn from "@/components/darkModeBtn";
+import DarkModeBtn from "@/components/dark-mode-btn";
 import { StyleProvider } from "@ant-design/cssinjs";
 import locale from "antd/locale/ko_KR";
 

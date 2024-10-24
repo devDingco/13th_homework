@@ -13,7 +13,7 @@ Quill.register("modules/resize", QuillResizeImage);
 
 const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
   (props, ref) => {
-    const quillRef = React.useRef<ReactQuill>(null);
+    const quillRef = useRef<ReactQuill>(null);
     const { id, title, onChange, readonly, errormessage, ...rest } = props;
     const { imageHandler } = useReactQuillBox();
 

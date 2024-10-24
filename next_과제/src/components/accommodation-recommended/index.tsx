@@ -1,4 +1,4 @@
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 
 export default function AccommodationRecommended() {
   return (

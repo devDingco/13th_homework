@@ -1,12 +1,12 @@
 "use client";
 
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import Input from "@/components/input";
 import { IcommentWriteProps } from "@/components/board-detail/comment-write/types";
 import { useCommentWrite } from "@/components/board-detail/comment-write/hook";
 import { Rate, Button } from "antd";
 import { Controller } from "react-hook-form";
-import ModalAlertBox from "@/components/ModalAlertBox";
+import ModalAlertBox from "@/components/modal-alert-box";
 
 export default function CommentWrite(props: IcommentWriteProps) {
   const { type, starCountBox, data, editModeHandler, commentId } = props;

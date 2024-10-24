@@ -1,9 +1,8 @@
 "use client";
 
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { DatePicker, Input, Button } from "antd";
 import { useState } from "react";
-// import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { FetchBoardsCountQueryVariables } from "@/commons/graphql/graphql";
 import locale from "antd/lib/date-picker/locale/ko_KR";

@@ -1,4 +1,4 @@
-import MainSlide from "@/components/mainSlide";
+import MainSlide from "@/components/main-slide";
 import AccommodationList from "@/components/accommodation-list";
 import AccommodationRecommended from "@/components/accommodation-recommended";
 import LineBanner from "@/components/line-banner";

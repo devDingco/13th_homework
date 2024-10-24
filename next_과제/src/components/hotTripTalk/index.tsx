@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { useHotTripTalk } from "@/components/hotTripTalk/hook";
 import { dateViewSet } from "@/utils/dateViewSet";
 import Link from "next/link";

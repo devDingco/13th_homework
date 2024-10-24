@@ -1,8 +1,8 @@
 "use client";
-import SearchBox from "@/components/searchBox";
+import SearchBox from "@/components/search-box";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import Image from "next/image";
 
 export default function AccommodationList() {
