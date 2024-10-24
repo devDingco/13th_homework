@@ -9,8 +9,8 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeORMMongoDBConfig } from 'configs/typeorm_mongoDB.config';
-import { typeORMpostgreSQLConfig } from 'configs/typeorm_postgreSQL.config';
+import { mongoDBConfig } from 'configs/mongoDB.config';
+import { postgreSQLConfig } from 'configs/postgreSQL.config';
 
 @Module({
     imports: [
@@ -20,11 +20,11 @@ import { typeORMpostgreSQLConfig } from 'configs/typeorm_postgreSQL.config';
         }),
         TypeOrmModule.forRootAsync({
             name: 'mongodb',
-            useClass: typeORMMongoDBConfig,
+            useClass: mongoDBConfig,
         }),
         TypeOrmModule.forRootAsync({
             name: 'postgre',
-            useClass: typeORMpostgreSQLConfig,
+            useClass: postgreSQLConfig,
         }),
 
         GraphQLModule.forRoot<ApolloDriverConfig>({
