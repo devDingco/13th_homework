@@ -1,0 +1,44 @@
+.custom-range-picker {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.custom-range-picker input {
+  font-size: 1rem !important;
+  color: #777777 !important;
+  font-weight: normal !important;
+}
+
+/* 구분선(-) 스타일 */
+.custom-range-picker .ant-picker-range-separator {
+  color: #777777 !important;
+}
+
+/* placeholder 스타일 */
+.custom-range-picker input::placeholder {
+  color: #777777 !important;
+}
+
+/* hover 시 스타일 */
+.custom-range-picker:hover {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* focus 시 스타일 */
+.custom-range-picker-focused {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.custom-range-picker .ant-picker-input {
+  width: 98px;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.custom-range-picker .ant-picker-clear {
+  background: transparent !important;
+}

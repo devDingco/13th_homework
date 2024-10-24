@@ -27,13 +27,6 @@ const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
 export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   const [images, setImages] = useState<string[]>(["", "", ""]);
 
-  const router = useRouter();
-  const fileRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
-
   //#region 폼 데이터 상태 관리
   const [formData, setFormData] = useState<IFormDataProps>({
     writer: "",
@@ -49,17 +42,30 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   //#region 초기 데이터 상태 관리 (수정페이지에서)
   const [initialData, setInitialData] = useState<IFormDataProps | null>(null);
 
+  //#region 우편번호 모달창
+  const [isOpen, setIsopen] = useState(false);
+
   //#region GraphQL 뮤테이션 훅
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
   const [uploadFile] = useMutation(UploadFileDocument);
 
+  const router = useRouter();
+  const fileRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   const params = useParams(); //동적 라우팅, boardID에 접근한다
   const boardId = params.boardId as string;
+
+  //등록페이지에서 fetchBoard 실행됨 ----> 수정페이지에서만 되어야함
   const { data } = useQuery(FetchBoardDocument, {
     variables: {
       boardId,
     },
+    skip: !isEdit, // 수정 페이지가 아닌 경우 쿼리 실행을 건너뜀
   });
 
   //#region useEffect: 그려질 때 처음에 딱 한번 실행?함
@@ -71,13 +77,13 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         password: "",
         title: data.fetchBoard.title || "",
         contents: data.fetchBoard.contents || "",
-        /*  boardAddress: data.fetchBoard.boardAddress || {
-          zipcode: "",
-          address: "",
-          addressDetail: "",
-        }, */
+        boardAddress: {
+          zipcode: data.fetchBoard.boardAddress?.zipcode || "",
+          address: data.fetchBoard.boardAddress?.address || "",
+          addressDetail: data.fetchBoard.boardAddress?.addressDetail || "",
+        },
         youtubeUrl: data.fetchBoard.youtubeUrl || "",
-        images: data.fetchBoard.images || [],
+        images: data.fetchBoard.images || ["", "", ""],
       };
       // formData와 initialData 상태 업데이트
       setFormData(initialFormData);
@@ -87,15 +93,45 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   // isEdit와 data를 포함시켜 이 값들이 변경될 때만 효과가 실행되도록 함
   //#endregion
 
+  const onToggleModal = () => {
+    setIsopen((prev) => !prev);
+  };
+
+  const handleComplete = (data) => {
+    console.log("zipcode: ", data.zonecode);
+    setFormData((prev) => ({
+      ...prev,
+      boardAddress: {
+        ...prev.boardAddress,
+        zipcode: data.zonecode,
+        address: data.address,
+      },
+    }));
+    onToggleModal();
+  };
+
   //#region 입력 필드 변경 핸들러
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // 주소 관련 필드들은 boardAddress 객체 안에 넣기
+    if (["zipcode", "address", "addressDetail"].includes(name)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        boardAddress: {
+          ...prevData.boardAddress,
+          [name]: value,
+        },
+      }));
+    } else {
+      // 다른 필드들은 최상위 레벨에 유지
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
   //#endregion
 
@@ -158,6 +194,11 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
 
     const variables = {
       ...formData,
+      boardAddress: {
+        zipcode: formData.boardAddress?.zipcode,
+        address: formData.boardAddress?.address,
+        addressDetail: formData.boardAddress?.addressDetail,
+      },
       images,
     };
 
@@ -194,7 +235,7 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         // 등록 로직
         createResult = await createBoard({
           variables: {
-            createBoardInput: formData,
+            createBoardInput: variables,
           },
         });
         console.log("게시글 등록 성공: ", createResult);
@@ -242,5 +283,9 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     onChangeFile,
     fileRefs,
     images,
+    setIsopen,
+    isOpen,
+    handleComplete,
+    onToggleModal,
   };
 }

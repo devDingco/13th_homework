@@ -25,7 +25,7 @@
   @apply h-[336px] resize-none;
 }
 .우편번호검색상자 {
-  @apply flex gap-2 w-[13.75rem];
+  @apply flex gap-2 w-[14.2rem];
 }
 
 .우편번호검색상자 button {
