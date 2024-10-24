@@ -15,6 +15,7 @@ interface ICommentWriteProps {
     writer: string;
   };
   onCancel?: () => void;
+  onSuccess?: () => void;
 }
 
 export default function CommentWrite(props: ICommentWriteProps) {
@@ -22,6 +23,8 @@ export default function CommentWrite(props: ICommentWriteProps) {
     isEdit: props.isEdit,
     defaultValue: props.defaultValue,
     onCancel: props.onCancel,
+    onSuccess: props.onSuccess,
+    boardId: "",
   });
 
   return (

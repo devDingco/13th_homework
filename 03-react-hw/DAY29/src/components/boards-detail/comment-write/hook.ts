@@ -16,6 +16,8 @@ interface IUseCommentWriterProps {
     writer: string;
   };
   onCancel?: () => void;
+  boardId: string;
+  onSuccess?: () => void;
 }
 
 export default function useCommentWriter(props: IUseCommentWriterProps) {
@@ -34,7 +36,12 @@ export default function useCommentWriter(props: IUseCommentWriterProps) {
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
 
   //그래프큐엘 내용들 보내기
-  const [createBoardComment] = useMutation(CreateBoardCommentDocument);
+  const [createBoardComment] = useMutation(CreateBoardCommentDocument, {
+    onCompleted: () => {
+      // 댓글 작성 완료 후 콜백 실행
+      props.onSuccess?.();
+    },
+  });
 
   const params = useParams();
   const boardId = params.boardId as string;

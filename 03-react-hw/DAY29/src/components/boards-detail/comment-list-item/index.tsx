@@ -14,6 +14,7 @@ interface ICommentListItemProps {
   onDelete: () => void;
   isEdit: boolean;
   onEdit: () => void;
+  onSuccess?: () => void;
 }
 
 export default function CommentListItem(props: ICommentListItemProps) {
@@ -64,6 +65,7 @@ export default function CommentListItem(props: ICommentListItemProps) {
         writer: props.writer,
       }}
       onCancel={props.onEdit}
+      onSuccess={props.onSuccess}
     />
   );
 }
