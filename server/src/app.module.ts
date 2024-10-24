@@ -18,6 +18,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
             envFilePath: '.env',
             isGlobal: true,
         }),
+
         TypeOrmModule.forRootAsync({
             name: 'mongodb',
             useClass: mongoDBConfig,

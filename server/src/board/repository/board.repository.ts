@@ -1,6 +1,7 @@
 import { MongoRepository } from 'typeorm';
 import { BoardEntity } from '../entity/board.entity';
 import {
+    BadRequestException,
     HttpException,
     HttpStatus,
     Injectable,
@@ -26,9 +27,9 @@ export class BoardRepository {
             imageUrl,
             youtubeUrl,
             password,
-            address,
-            detailAddress,
+            boardAddressInput,
         } = createBoard;
+
         return this.boardRepository.create({
             author,
             title,
@@ -36,13 +37,19 @@ export class BoardRepository {
             password,
             ...(imageUrl?.length > 0 && { imageUrl }),
             ...(youtubeUrl && { youtubeUrl }),
-            ...(address && { address }),
-            ...(detailAddress && { detailAddress }),
+            ...(boardAddressInput && { boardAddressOutput: boardAddressInput }),
         });
     }
 
     async saveBoard(board: BoardEntity): Promise<BoardEntity> {
-        return await this.boardRepository.save(board);
+        const saveBoard = await this.boardRepository.save(board);
+        if (!saveBoard) {
+            throw new BadRequestException(
+                `Failed to save the board in database`,
+            );
+        }
+        delete saveBoard.password;
+        return saveBoard;
     }
 
     async findAllBoard(
@@ -52,14 +59,24 @@ export class BoardRepository {
         const [result, totalCount] = await this.boardRepository.findAndCount({
             skip: (page - 1) * take,
             take,
+            select: ['boardId', 'title', 'author', 'createdAt'],
         });
 
         return { result, totalCount };
     }
 
     async findBoard(boardId: number): Promise<BoardEntity> {
-        const findBoard = await this.boardRepository.findOneBy({
-            boardId,
+        const findBoard = await this.boardRepository.findOne({
+            where: { boardId },
+            select: [
+                'author',
+                'title',
+                'content',
+                'youtubeUrl',
+                'createdAt',
+                'imageUrl',
+                'boardAddressOutput',
+            ],
         });
 
         if (!findBoard) {

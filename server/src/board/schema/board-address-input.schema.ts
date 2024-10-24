@@ -1,3 +1,4 @@
+// [ ] omitType -> pickType
 import { Field, InputType, Int, ObjectType, OmitType } from '@nestjs/graphql';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 

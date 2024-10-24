@@ -2,9 +2,14 @@ import {
     ArrayMaxSize,
     IsArray,
     IsNotEmpty,
+    IsObject,
     IsOptional,
     IsString,
+    ValidateNested,
 } from 'class-validator';
+
+import { BoardAddressDTO } from './board-addresss.dto';
+import { Type } from 'class-transformer';
 
 export class CreateBoardDTO {
     @IsString()
@@ -33,11 +38,9 @@ export class CreateBoardDTO {
     @IsNotEmpty()
     password: string;
 
-    @IsString()
     @IsOptional()
-    address?: string;
-
-    @IsString()
-    @IsOptional()
-    detailAddress?: string;
+    @ValidateNested({ each: true })
+    @Type(() => BoardAddressDTO)
+    @IsObject()
+    boardAddressInput?: BoardAddressDTO;
 }
