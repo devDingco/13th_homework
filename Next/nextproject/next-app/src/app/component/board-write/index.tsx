@@ -36,7 +36,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     imgUrl,
     onClickDelete,
   } = UseBoardWrite(props);
-
+  console.log(imgUrl);
   return (
     <div className={styles.css_layout}>
       <div className={styles.css_header}>
@@ -208,7 +208,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 backgroundColor: "skyblue",
               }}
             >
-              {/* {!isDelete && ( */}
               <input
                 type="file"
                 onChange={onChangeFile}
@@ -216,7 +215,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 ref={fileRef}
                 accept="iamge/jpeg, image/png"
               />
-              {/* )} */}
+
+              {/* map으로 받기 */}
               <div className={styles.css_imagebox}>
                 {imgUrl && (
                   <Image

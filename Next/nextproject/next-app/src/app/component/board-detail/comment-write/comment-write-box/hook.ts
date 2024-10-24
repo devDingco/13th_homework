@@ -23,7 +23,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState(
-    props.isEdit ? data?.fetchBoardComments[props.index].contents : ""
+    props.isEdit ? data?.fetchBoardComments[props.index].comment : ""
   );
   const [value, setValue] = useState(
     props.isEdit ? data?.fetchBoardComments[props.index].rating : 0
