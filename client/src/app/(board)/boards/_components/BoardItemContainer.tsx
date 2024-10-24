@@ -18,29 +18,33 @@ export default async function BoardItemContainer({ searchParams }: ISearchParams
 	const page = parseInt((searchParams.page as string) || '1');
 	const take = parseInt((searchParams.take as string) || '5');
 
-	// const variables = { page, take };
+	const variables = { page, take };
 
+	// const data = await determineProtocolGetBoards({
+	// 	protocol: EProtocol.REST,
+	// 	endpoint: `${EUrlEndPoint.BOARD}?page=${page}&take=${take}`,
+	// });
 	const data = await determineProtocolGetBoards({
-		protocol: EProtocol.REST,
-		endpoint: `${EUrlEndPoint.BOARD}?page=${page}&take=${take}`,
+		protocol: EProtocol.GRAPHQL,
+		variables,
 	});
 
-	return (
-		<>
-			{data.result.map(
-				(board: IApiResponseData | GetBoardsQuery['getBoards']['result'][0]) => (
-					<BoardItem key={board.boardId} board={board} />
-				),
-			)}
-			<PaginationWithLinks
-				page={page}
-				take={take}
-				totalCount={data.totalCount}
-				pageSizeSelectOptions={{
-					pageSizeSearchParam: 'take',
-					pageSizeOptions: [3, 5, 10],
-				}}
-			/>
-		</>
-	);
+	// return (
+	// 	<>
+	// 		{data.result.map(
+	// 			(board: IApiResponseData | GetBoardsQuery['getBoards']['result'][0]) => (
+	// 				<BoardItem key={board.boardId} board={board} />
+	// 			),
+	// 		)}
+	// 		<PaginationWithLinks
+	// 			page={page}
+	// 			take={take}
+	// 			totalCount={data.totalCount}
+	// 			pageSizeSelectOptions={{
+	// 				pageSizeSearchParam: 'take',
+	// 				pageSizeOptions: [3, 5, 10],
+	// 			}}
+	// 		/>
+	// 	</>
+	// );
 }
