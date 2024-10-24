@@ -1,8 +1,13 @@
 import { FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
 
-export interface IcommentItemBox {
+export interface IcommentItem {
   commentData: FetchBoardCommentsQuery["fetchBoardComments"][0];
   starCountBox?: boolean;
   reply?: boolean;
-  starCount?: number;
+}
+
+export interface IcommentList {
+  commentData: FetchBoardCommentsQuery["fetchBoardComments"][0];
+  starCountBox?: boolean;
+  reply?: boolean;
 }

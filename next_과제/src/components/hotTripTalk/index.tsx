@@ -17,7 +17,10 @@ export default function HotTripTalk() {
           {data?.map((cardData, idx) => {
             const { images, title, user, writer, createdAt, likeCount } =
               cardData;
-            const image = images ? images[0] : null;
+            const imageURl = images?.[0]
+              ? `${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${images[0]}`
+              : "/images/img-0.png";
+
             return (
               <Link
                 href={`/boards/${cardData._id}`}
@@ -25,7 +28,8 @@ export default function HotTripTalk() {
                 className="flex gap-2 justify-between"
               >
                 <Image
-                  src={user?.picture || "/images/img-0.png"}
+                  className="rounded-md"
+                  src={imageURl}
                   alt=""
                   width={112}
                   height={152}
@@ -37,8 +41,11 @@ export default function HotTripTalk() {
                     <div className="flex justify-between text-sm text-gray-400">
                       <div className="flex items-center gap-1 text-gray-700">
                         <span className="bg-gray-300 rounded-full w-6 h-6 overflow-hidden">
-                          <Image
-                            src={image || "/images/img-0.png"}
+                          {/* <Image
+                            src={
+                              user?.picture ||
+                              "/images/img-0.png"
+                            }
                             alt=""
                             width={24}
                             height={24}
@@ -47,7 +54,7 @@ export default function HotTripTalk() {
                               width: "100%",
                               height: "100%",
                             }}
-                          />
+                          /> */}
                         </span>
                         {writer || "작성자"}
                       </div>
