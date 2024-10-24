@@ -3,7 +3,7 @@
 import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import {
     CreateBoardDocument,
     UpdateBoardDocument,
@@ -24,6 +24,9 @@ export const useBoardWrite = () => {
     const [contentsError, setcontentsError] = useState('');
 
     let [isActive, setIsActive] = useState(false);
+    const [address, setAddress] = useState('');
+    const [zonecode, setZoncode] = useState('');
+    const [detailAddress, setDetailAddress] = useState('');
 
     let onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
         setwriter(event.target.value);
@@ -80,6 +83,11 @@ export const useBoardWrite = () => {
         }
     };
 
+    const onChangeDetailAddress = (event: ChangeEvent<HTMLInputElement>) => {
+        setDetailAddress(event.target.value);
+        console.log(detailAddress);
+    };
+
     let onChangecontens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContents(event.target.value);
         if (event.target.value === '') {
@@ -111,9 +119,9 @@ export const useBoardWrite = () => {
                         contents: contents,
                         youtubeUrl: '',
                         boardAddress: {
-                            zipcode: '',
-                            address: '',
-                            addressDetail: '',
+                            zipcode: zonecode,
+                            address: address,
+                            addressDetail: detailAddress,
                         },
                         images: [''],
                     },
@@ -166,7 +174,48 @@ export const useBoardWrite = () => {
         router.back();
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const showModal = () => {
+        setIsOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsOpen(false);
+    };
+
+    const handleComplete = (data: any) => {
+        console.log(data);
+        setAddress(data.address);
+        setZoncode(data.zonecode);
+        console.log(address);
+        // console.log(data.address);
+        // console.log(data.zonecode);
+        setIsOpen(false); // 모달종료
+    };
+
     return {
+        detailAddress,
+        setDetailAddress,
+        zonecode,
+        setZoncode,
+        address,
+        setAddress,
+        isOpen,
+        writerError,
+        passwordError,
+        titleError,
+        contentsError,
+        isActive,
+        showModal,
+        handleOk,
+        handleCancel,
+        handleComplete,
+        onChangeDetailAddress,
         onChangeWriter,
         onChangePassword,
         onChangeTitle,
@@ -174,10 +223,6 @@ export const useBoardWrite = () => {
         onClickSubmit,
         onClickUpdate,
         onClickBack,
-        writerError,
-        passwordError,
-        titleError,
-        contentsError,
-        isActive,
+        setIsOpen,
     };
 };

@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@apollo/client';
 import { DeleteBoardDocument } from '@/commons/graphql/graphql';
 import { FETCH_BOARDS } from './queries';
+import { Modal } from 'antd';
 
 export default function useBoardList() {
     const router = useRouter();
@@ -17,7 +18,10 @@ export default function useBoardList() {
     });
 
     const onClickMoveToDetailPage = async (event: any) => {
-        alert('상세페이지로 이동합니다');
+        Modal.info({
+            title: 'This is an information',
+            content: '상세페이지로 이동합니다',
+        });
         // console.log(event.currentTarget.id);
         router.push(`/boards/${event.currentTarget.id}`);
     };
@@ -30,7 +34,11 @@ export default function useBoardList() {
             },
             refetchQueries: [{ query: FETCH_BOARDS }],
         });
-        alert('삭제버튼을 눌렀군요');
+
+        Modal.error({
+            title: 'This is an information ',
+            content: '삭제버튼을 눌렀군요',
+        });
     };
 
     return {

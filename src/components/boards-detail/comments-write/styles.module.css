@@ -1,6 +1,8 @@
 .layout {
     /* background-color: gray; */
-    width: 1358px;
+    /* width: 1358px; */
+    width: 100%;
+    /* height: auto; */
     border-radius: 10px;
     border: 1px solid #c7c6c7;
     padding: 30px;
@@ -13,6 +15,7 @@
 
 .commentBox {
     margin: 0 0 16px 0;
+    gap: 8px;
 }
 
 .starBox {

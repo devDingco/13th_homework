@@ -8,7 +8,7 @@ export default function Home() {
             <div className={styles.homeHeader}>
                 <div className={styles.homeHeaderLeft}>
                     <Image
-                        src="/assets/logo.png"
+                        src="/images/logo.png"
                         alt="link"
                         width={56}
                         height={32}
@@ -20,9 +20,9 @@ export default function Home() {
 
                 <div className={styles.homeLoginButtonBox}>
                     <button className={styles.homeLoginButton}>
-                        <div className="textLogin">로그인</div>
+                        <div className="textLogin">Login</div>
                         <Image
-                            src="/assets/arrow_right.png"
+                            src="/images/arrow_right.png"
                             alt="로고"
                             width={9}
                             height={19}

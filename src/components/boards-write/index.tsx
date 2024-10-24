@@ -3,9 +3,22 @@ import React from 'react';
 import styles from './styles.module.css';
 import Image from 'next/image';
 import { useBoardWrite } from './hook';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+import { Modal } from 'antd';
 
 export default function BoardComponentWrite(props: any) {
     const {
+        detailAddress,
+        setDetailAddress,
+        zonecode,
+        setZoncode,
+        address,
+        setAddress,
+        showModal,
+        handleOk,
+        handleCancel,
+        handleComplete,
+        onChangeDetailAddress,
         onChangeWriter,
         onChangePassword,
         onChangeTitle,
@@ -13,6 +26,8 @@ export default function BoardComponentWrite(props: any) {
         onClickSubmit,
         onClickUpdate,
         onClickBack,
+        isOpen,
+        setIsOpen,
         writerError,
         passwordError,
         titleError,
@@ -35,7 +50,7 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.writerpasswordinputbox}>
                     <input
                         type="text"
-                        placeholder="   작성자 명을 입력해 주세요"
+                        placeholder="작성자 명을 입력해 주세요"
                         className={styles.writerpasswordinput}
                         onChange={onChangeWriter}
                         defaultValue={props.data?.fetchBoard.writer}
@@ -44,7 +59,7 @@ export default function BoardComponentWrite(props: any) {
 
                     <input
                         type="password"
-                        placeholder="   비밀번호를 입력해 주세요"
+                        placeholder="비밀번호를 입력해 주세요"
                         className={styles.writerpasswordinput}
                         onChange={onChangePassword}
                         disabled={props.isEdit}
@@ -59,7 +74,7 @@ export default function BoardComponentWrite(props: any) {
                     <div>제목</div>
                     <input
                         type="text"
-                        placeholder="   제목을 입력해 주세요"
+                        placeholder="제목을 입력해 주세요"
                         className={styles.titleinput}
                         onChange={onChangeTitle}
                         defaultValue={props.data?.fetchBoard.title}
@@ -75,7 +90,7 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.contentsbox}>
                     <div>내용</div>
                     <textarea
-                        placeholder="    &#13;&#10;   내용을 입력해 주세요"
+                        placeholder="내용을 입력해 주세요"
                         className={styles.contentstextarea}
                         onChange={onChangecontens}
                         defaultValue={props.data?.fetchBoard.contents}
@@ -90,24 +105,41 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.addressnumberbox}>
                     <input
                         type="text"
-                        placeholder="213142"
+                        placeholder=" "
+                        value={zonecode}
                         className="address-number"
                     ></input>
-                    <button className={styles.addressnumberbutton}>
+                    <button
+                        className={styles.addressnumberbutton}
+                        onClick={showModal}
+                    >
                         우편번호 검색
                     </button>
+                    {isOpen && (
+                        <Modal
+                            title="주소 검색"
+                            open={true}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                        >
+                            <DaumPostcodeEmbed onComplete={handleComplete} />
+                        </Modal>
+                    )}
                 </div>
 
                 <div className={styles.addressinputbox}>
                     <input
                         type="text"
-                        placeholder="   주소를 입력해 주세요"
+                        placeholder="주소를 입력해 주세요"
                         className={styles.addressinput}
+                        value={address}
                     ></input>
+
                     <input
                         type="text"
-                        placeholder="   상세주소"
+                        placeholder="상세주소"
                         className={styles.addressdetailinput}
+                        onChange={onChangeDetailAddress}
                     ></input>
                 </div>
             </div>
@@ -126,13 +158,13 @@ export default function BoardComponentWrite(props: any) {
                 <div>사진첨부</div>
                 <div className={styles.imagebox}>
                     <Image
-                        src="/assets/add_image.jpg"
+                        src="/images/add_image.jpg"
                         alt="add_image"
                         width={200}
                         height={200}
                     ></Image>
                     <Image
-                        src="/assets/add_image.jpg"
+                        src="/images/add_image.jpg"
                         alt="add_image"
                         width={200}
                         height={200}
