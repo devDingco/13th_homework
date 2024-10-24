@@ -2,9 +2,9 @@ import { FetchBoardQuery } from "@/commons/graphql/graphql";
 
 // 주소 정보
 export interface IBoardAddressProps {
-  zipcode: string;
-  address: string;
-  addressDetail: string;
+  zipcode?: string | null;
+  address?: string | null;
+  addressDetail?: string | null;
 }
 
 // 폼 데이터

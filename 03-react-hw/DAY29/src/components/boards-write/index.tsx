@@ -6,6 +6,8 @@ import Textarea from "../textarea";
 import FormField from "../FormField";
 import { Button } from "../ui/button";
 import ImageUpload from "../ImageUpload";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardForm({ isEdit }: IBoardFormProps) {
   const {
@@ -18,6 +20,9 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
     onChangeFile,
     fileRefs,
     images,
+    isOpen,
+    handleComplete,
+    onToggleModal,
   } = useBoardForm({ isEdit });
 
   return (
@@ -75,27 +80,46 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
           </FormField>
           <hr />
           {/* MARK: 주소 입력 필드 */}
-          <div className={styles.구분상자}>
-            <span>주소</span>
+          <FormField label="주소">
             <div className={styles.우편번호검색상자}>
-              <input
-                type="text"
+              <Input
+                name="zipcode"
                 placeholder="01234"
-                className={styles.작은입력창크기}
+                value={formData.boardAddress?.zipcode || ""}
+                onChange={handleChange}
               />
-              <button type="button">우편번호 검색</button>
+              <button type="button" onClick={onToggleModal}>
+                우편번호 검색
+              </button>
+              {isOpen && (
+                <Modal
+                  title="우편번호"
+                  open={true}
+                  onOk={onToggleModal}
+                  onCancel={onToggleModal}
+                  okText="확인"
+                  centered
+                  okButtonProps={{ style: { display: "none" } }}
+                  cancelButtonProps={{ style: { display: "none" } }}
+                >
+                  <DaumPostcodeEmbed onComplete={handleComplete} />
+                </Modal>
+              )}
             </div>
-            <input
-              type="text"
+            <Input
+              name="address"
               placeholder="주소를 입력해 주세요."
-              className={styles.긴입력창크기}
+              value={formData.boardAddress?.address || ""}
+              onChange={handleChange}
             />
-            <input
-              type="text"
+            <Input
+              name="addressDetail"
               placeholder="상세주소"
-              className={styles.긴입력창크기}
+              value={formData.boardAddress?.addressDetail || ""}
+              onChange={handleChange}
             />
-          </div>
+          </FormField>
+
           <hr />
           {/* MARK: 유튜브 링크 입력 필드 */}
           <FormField label="유튜브 링크">
