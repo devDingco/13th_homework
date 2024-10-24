@@ -16,7 +16,10 @@ const placeholderObj: IPlaceholderObj = {
 export default function InputFormText({
   title,
   onChange,
+  value,
+  disabled,
 }: IInputFormTextProps) {
+  // if (title === "author") console.log("🌻", value);
   return (
     <>
       <div className="content-area">
@@ -26,6 +29,8 @@ export default function InputFormText({
             id={title}
             className="input-text"
             type={title === "password" ? "password" : "text"}
+            disabled={disabled}
+            defaultValue={value}
             placeholder={placeholderObj[title]}
             onChange={(e) => onChange?.(e)}
           />
@@ -33,6 +38,7 @@ export default function InputFormText({
           <textarea
             id={title}
             className="input-textarea"
+            defaultValue={value}
             placeholder={placeholderObj[title]}
             onChange={(e) => onChange?.(e)}
           ></textarea>

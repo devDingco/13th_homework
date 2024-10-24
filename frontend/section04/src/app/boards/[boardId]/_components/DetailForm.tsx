@@ -15,7 +15,7 @@ export default function DetailForm() {
     variables: { boardId: params.boardId },
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="flex-col py-10 flex gap-5">

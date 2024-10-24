@@ -1,11 +1,11 @@
 import React from "react";
-import NewForm from "./_components/NewForm";
+import NewForm from "../_components/NewForm";
 import "../styles.css";
 
 const BoardsNew = () => {
   return (
     <div className="boards-new-page">
-      <div className="editor-header">게시물 등록</div>
+      <div className="editor-header">게시물 수정</div>
       <NewForm />
     </div>
   );

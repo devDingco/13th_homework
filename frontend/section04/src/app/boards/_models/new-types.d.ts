@@ -9,7 +9,7 @@ interface IInputValue {
 
 // new - props
 interface IButtonProps {
-  value: "cancel" | "register";
+  value: "cancel" | "register" | "edit";
   disabled?: boolean;
   onClick?: () => void;
 }
@@ -25,6 +25,8 @@ interface IInputFormTextProps {
     | "addressDetail"
     | "youtube"
     | "photo";
+  value?: string;
+  disabled?: boolean;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -46,4 +48,9 @@ interface IPlaceholderObj {
 interface IButtonObj {
   cancel: string;
   register: string;
+  edit: string;
+}
+
+interface GraphQLError {
+  graphQLErrors?: { message: string }[];
 }
