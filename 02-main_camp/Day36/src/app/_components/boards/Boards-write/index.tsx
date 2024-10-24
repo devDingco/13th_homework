@@ -34,6 +34,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
     fileRefs,
     onChangeFile,
     onClickImage,
+    onClickDeleteImage,
   } = useBoardWrite(props.isEdit, props.data);
 
   const RegisterForm = () => {
@@ -174,6 +175,7 @@ const BoardsWrite = (props: IBoardWriteInput) => {
           fileRefs={fileRefs}
           onChangeFile={onChangeFile}
           onClickImage={onClickImage}
+          onClickDeleteImage={onClickDeleteImage}
         />
       </main>
       <footer className={styles.footerContainer}>

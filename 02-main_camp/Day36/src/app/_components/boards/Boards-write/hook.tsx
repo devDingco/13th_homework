@@ -205,6 +205,20 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
     fileRefs.current[id].click();
   };
 
+  const onClickDeleteImage = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const id = Number(event.currentTarget.id);
+    const newImages = [...(boardInput.images ?? [])];
+    newImages[id] = "";
+    setBoardInput((prev) => {
+      return {
+        ...prev,
+        ...boardAddress,
+        images: newImages,
+      };
+    });
+  };
+
   // Modal
   const showSuccessModal = (
     content: string,
@@ -281,5 +295,6 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
     fileRefs,
     onChangeFile,
     onClickImage,
+    onClickDeleteImage,
   };
 };

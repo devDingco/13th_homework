@@ -2,12 +2,14 @@ import CONSTANTS_TITLE from "@/commons/constants/title";
 import styles from "./styles.module.css";
 import { ChangeEvent, MouseEvent, MutableRefObject } from "react";
 import Image from "next/image";
+import { CloseOutlined } from "@ant-design/icons";
 
 interface IImageUploadFormProps {
   imageUrl: string[];
   fileRefs: MutableRefObject<HTMLInputElement[]>;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
   onClickImage: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickDeleteImage: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ImageUploadForm = ({
@@ -15,6 +17,7 @@ const ImageUploadForm = ({
   fileRefs,
   onChangeFile,
   onClickImage,
+  onClickDeleteImage,
 }: IImageUploadFormProps) => {
   return (
     <div className={styles.BoardsNew_inputForm}>
@@ -29,6 +32,7 @@ const ImageUploadForm = ({
               id={index}
               onChange={onChangeFile}
               onClickImage={onClickImage}
+              onClickDeleteImage={onClickDeleteImage}
               imageUrl={imageUrl}
               fileRefs={fileRefs}
             />
@@ -43,6 +47,7 @@ export default ImageUploadForm;
 interface IUploadButtonProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
   onClickImage: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickDeleteImage: (event: MouseEvent<HTMLButtonElement>) => void;
   id: number;
   imageUrl: string[];
   fileRefs: MutableRefObject<HTMLInputElement[]>;
@@ -51,6 +56,7 @@ interface IUploadButtonProps {
 const UploadButton = ({
   onChange,
   onClickImage,
+  onClickDeleteImage,
   id,
   imageUrl,
   fileRefs,
@@ -73,14 +79,23 @@ const UploadButton = ({
       <div className={styles.uploadDescription}>
         <label htmlFor="uploadImage" id={styles.uploadLabel}>
           {imageUrl[id] ? (
-            <Image
-              src={`https://storage.googleapis.com/${imageUrl[id]}`}
-              alt="추가한 이미지"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className={styles.uploadImage}
-            ></Image>
+            <div className={styles.imageContainer}>
+              <button
+                id={String(id)}
+                className={styles.deleteButton}
+                onClick={onClickDeleteImage}
+              >
+                <CloseOutlined className={styles.deleteImageIcon} />
+              </button>
+              <Image
+                src={`https://storage.googleapis.com/${imageUrl[id]}`}
+                alt="추가한 이미지"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className={styles.uploadImage}
+              ></Image>
+            </div>
           ) : (
             <Image
               src="/assets/add.png"
