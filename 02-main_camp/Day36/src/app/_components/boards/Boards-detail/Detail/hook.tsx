@@ -31,6 +31,7 @@ const useBoardsDetail = () => {
     contents: data?.fetchBoard.contents,
     address: data?.fetchBoard.boardAddress?.address,
     youtubeUrl: data?.fetchBoard.youtubeUrl,
+    images: data?.fetchBoard.images ?? [],
   };
 
   // Youtube URL의 v= 짤라서 ID를 통해 비디오 보여주도록 구현 필요함.

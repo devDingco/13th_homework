@@ -52,6 +52,19 @@
   gap: 1.5rem;
 }
 
+.uploadImagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 이미지 스타일이 안먹음;; */
+.uploadImage {
+  /* width: 12.5rem; */
+  height: auto;
+  object-fit: contain;
+}
+
 .BoardsDetail_p {
   color: black;
   font-weight: 400;

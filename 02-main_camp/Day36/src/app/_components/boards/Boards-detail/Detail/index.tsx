@@ -6,7 +6,7 @@ import BoardDetailProfile from "../Profile";
 import BoardCommentList from "../Comment-list";
 import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 import Divider from "@/app/_components/commons/divider";
-import { Tooltip } from "antd";
+import { Image, Tooltip } from "antd";
 import YouTube from "react-youtube";
 
 const BoardsDetail = () => {
@@ -18,6 +18,8 @@ const BoardsDetail = () => {
     onClickShowBoards,
     toggleHasMoreScroll,
   } = useBoardsDetail();
+
+  console.log(board.images);
 
   return (
     <div className={styles.BoardsDetail_root}>
@@ -49,8 +51,23 @@ const BoardsDetail = () => {
         </section>
       </div>
       <article className={styles.BoardsDetail_article}>
-        <figure>
-          <img src="/assets/boards_main_img.png" />
+        <figure className={styles.uploadImagesContainer}>
+          {board.images.map((el, index) =>
+            el !== "" ? (
+              <Image
+                key={index}
+                src={`https://storage.googleapis.com/${el}`}
+                alt="추가한 이미지"
+                width={400}
+                height={513}
+                sizes="100vw"
+                // 이미지 스타일이 안먹는다..? 왜그런지 찾아봐야함.
+                className={styles.uploadImage}
+              ></Image>
+            ) : (
+              <div key={index}></div>
+            )
+          )}
         </figure>
         <p className={styles.BoardsDetail_p}>{board.contents}</p>
       </article>
