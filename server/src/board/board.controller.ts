@@ -10,6 +10,7 @@ import {
     HttpStatus,
     ParseIntPipe,
     Query,
+    UseInterceptors,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardDTO } from './dto/create-board.dto';
@@ -18,7 +19,8 @@ import { ResponseMessage } from './decorators/response-message.decorator';
 import { BoardEntity } from './entity/board.entity';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
-
+import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
+@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board')
 export class BoardController {
     constructor(private readonly boardService: BoardService) {}
