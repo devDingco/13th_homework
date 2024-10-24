@@ -1,0 +1,121 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/app/boards/styles.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.styles_board_list__KwEHa {
+  display: flex;
+  min-width: 1280px;
+  padding: 24px 48px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8ps;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+}
+.styles_header_box__V6rpl {
+  display: flex;
+  width: 100%;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 8px;
+  color: #1C1C1C;
+  font-size: 16px;
+  font-weight: 500;
+}
+.styles_header_box__V6rpl > div:nth-child(1) {
+  display: flex;
+  width: 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.styles_header_box__V6rpl > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+}
+.styles_header_box__V6rpl > div:nth-child(3) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.styles_header_box__V6rpl > div:nth-child(4) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.styles_list_box__mMrLx {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.styles_board_box__2_7z1 {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #F2F2F2);
+  font-size: 14px;
+  font-weight: 300;
+}
+.styles_board_box__2_7z1 > div:nth-child(1) {
+  display: flex;
+  width: 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #919191;
+}
+.styles_board_box__2_7z1 > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  color: #1C1C1C;
+  font-weight: 500;
+}
+.styles_board_box__2_7z1 > div:nth-child(3) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+}
+.styles_board_box__2_7z1 > div:nth-child(4) {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #919191;
+}
+.styles_delete_btn_box_hover__4dyOC {
+  position: absolute;
+  display: block;
+  right: 8px;
+  /* 세로 가운데 정렬 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+.styles_delete_btn_box__BN1Wn {
+  position: absolute;
+  display: none;
+  right: 8px;
+  /* 세로 가운데 정렬 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+.styles_delete_btn__lb4Gb {
+  display: block;
+}
