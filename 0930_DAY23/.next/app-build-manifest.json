@@ -20,8 +20,13 @@
     "/boards/[boardId]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/boards/[boardId]/page.css",
-      "static/chunks/app/boards/[boardId]/page.js"
+      "static/chunks/app/boards/[boardId]/page.js",
+      "static/css/app/boards/[boardId]/page.css"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

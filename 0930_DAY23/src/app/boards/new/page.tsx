@@ -6,14 +6,10 @@ import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
 
 import addImage from "@assets/add_image.png";
+import { MouseEvent } from "react";
 
-// const IMAGE_SRC = {
-//   addImage: {
-//     src: require("../../../../public/assets/add_image.png"),
-//     alt: "사진추가이미지",
-//   },
-// };
-
+// 서버에 보낼 GraphQL 쿼리를 작성합니다.
+// 게시물을 생성하기 위한 정보를 서버에 보내는 구조입니다.
 const 나의그래프큐엘셋팅 = gql`
   mutation createBoard(
     $writer: String
@@ -40,6 +36,7 @@ const 나의그래프큐엘셋팅 = gql`
   }
 `;
 
+// 게시물 작성 페이지를 나타내는 함수입니다.
 export default function BoardsNewPage() {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -52,12 +49,13 @@ export default function BoardsNewPage() {
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
 
-  const isButtonDisabled = !name || !password || !title || !content;
+  // const isButtonDisabled = !name || !password || !title || !content;  
 
   const [submit] = useMutation(나의그래프큐엘셋팅);
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+    console.log(event.target.value)
   };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
@@ -72,39 +70,43 @@ export default function BoardsNewPage() {
     setContent(event.target.value);
   };
 
-  const onClickSignup = async () => {
+  const onClickSignup = async (event: MouseEvent<HTMLButtonElement>) => {
     let hasError = false;
 
-    if (name.trim() === "") {
+    if (name === "") {
+
       setNameError("필수입력 사항입니다.");
       hasError = true;
     } else {
       setNameError("");
     }
 
-    if (password.length === 0) {
+    if (password === "") {
+
       setPasswordError("필수입력 사항입니다.");
       hasError = true;
     } else {
       setPasswordError("");
     }
 
-    if (title.trim() === "") {
+    if (title === "") {
       setTitleError("필수입력 사항입니다.");
       hasError = true;
     } else {
       setTitleError("");
     }
 
-    if (content.trim() === "") {
+    if (content === "") {
       setContentError("필수입력 사항입니다.");
       hasError = true;
     } else {
       setContentError("");
     }
-
+    console.log(hasError)
     if (!hasError) {
+      console.log(!hasError)
       try {
+        console.log(hasError)
         console.log("try");
         const result = await submit({
           variables: {
@@ -151,11 +153,12 @@ export default function BoardsNewPage() {
               </div>
               <input
                 type="text"
+                value={name}
                 placeholder="작성자 명을 입력해 주세요."
                 className={styles["enroll-input"]}
                 onChange={onChangeName}
               />
-              <div className={styles["error-msg"]}>{nameError}</div>
+              <div className={styles["error-msg"]}>{name ? "" : "필수 입력 사항입니다."}</div>
             </div>
             <div className={styles["flex-half"]}>
               <div className={styles["enroll-form-title"]}>
@@ -168,7 +171,7 @@ export default function BoardsNewPage() {
                 className={styles["enroll-input"]}
                 onChange={onChangePassword}
               />
-              <div className={styles["error-msg"]}>{passwordError}</div>
+              <div className={styles["error-msg"]}>{password ? "" : "필수 입력 사항입니다."}</div>
             </div>
           </div>
         </div>
@@ -186,7 +189,7 @@ export default function BoardsNewPage() {
             placeholder="제목을 입력해 주세요."
             onChange={onChangeTitle}
           />
-          <div className={styles["error-msg"]}>{titleError}</div>
+          <div className={styles["error-msg"]}>{title ? "" : "필수 입력 사항입니다."}</div>
         </div>
         <div className={styles["enroll-border"]}></div>
         <div className={styles["enroll-row-section"]}>
@@ -199,7 +202,7 @@ export default function BoardsNewPage() {
             className={`${styles["enroll-input"]} ${styles["enroll-textarea"]}`}
             onChange={onChangeContent}
           ></textarea>
-          <div className={styles["error-msg"]}>{contentError}</div>
+          <div className={styles["error-msg"]}>{content ? "" : "필수 입력 사항입니다."}</div>
         </div>
         <div className={styles["enroll-row-section"]}>
           <div className={styles["enroll-form-title"]}>
@@ -252,13 +255,13 @@ export default function BoardsNewPage() {
       <div className={styles["enroll-button-container"]}>
         <button className={styles["enroll-cancel-button"]}>취소</button>
         <button
-          className={
-            isButtonDisabled
-              ? `${styles["enroll-submit-button"]} ${styles["disabled"]}`
-              : styles["enroll-submit-button"]
-          }
+          // className={
+          //   isButtonDisabled
+          //     ? `${styles["enroll-submit-button"]} ${styles["disabled"]}`
+          //     : styles["enroll-submit-button"]
+          // }
           onClick={onClickSignup}
-          disabled={isButtonDisabled}
+          // disabled={isButtonDisabled}
         >
           등록하기
         </button>
@@ -304,3 +307,4 @@ mutation {
   }
 }
   */
+

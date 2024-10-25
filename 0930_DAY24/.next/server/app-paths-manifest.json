@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/boards/page": "app/boards/page.js",
-  "/boards/[boardId]/page": "app/boards/[boardId]/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
-}

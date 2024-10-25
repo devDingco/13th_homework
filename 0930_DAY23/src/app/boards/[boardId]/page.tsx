@@ -15,6 +15,7 @@ import neotubeImage from "@assets/neotube.png";
 import hamberger from "@assets/hamberger.png";
 import pencil from "@assets/pencil.png";
 
+// fetchBoard(boardId: ID!): Board!
 const 나의그래프큐엘셋팅 = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -26,44 +27,7 @@ const 나의그래프큐엘셋팅 = gql`
   }
 `;
 
-// const IMAGE_SRC = {
-//   profileImage: {
-//     src: require("../../../../public/assets/profile_image.png"),
-//     alt: "프로필이미지",
-//   },
-//   linkImage: {
-//     src: require("../../../../public/assets/link.png"),
-//     alt: "링크아이콘",
-//   },
-//   locationImage: {
-//     src: require("../../../../public/assets/location.png"),
-//     alt: "위치아이콘",
-//   },
-//   cheongsanImage: {
-//     src: require("../../../../public/assets/cheongsan.png"),
-//     alt: "청산사진",
-//   },
-// neotubeImage: {
-//   src: require("@assets/neotube.png"),
-//   alt: "너튜브사진",
-// },
-// badImage: {
-//   src: require("../../../../public/assets/bad.png"),
-//   alt: "싫어요",
-// },
-//   goodImage: {
-//     src: require("../../../../public/assets/good.png"),
-//     alt: "좋아요",
-//   },
-//   hamberger: {
-//     src: require("../../../../public/assets/hamberger.png"),
-//     alt: "목록아이콘",
-//   },
-//   pencil: {
-//     src: require("../../../../public/assets/pencil.png"),
-//     alt: "수정아이콘",
-//   },
-// } as const;
+
 
 export default function BoardsDetailPage() {
   const params = useParams();
@@ -91,7 +55,9 @@ export default function BoardsDetailPage() {
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
         <div className={styles.detailFrame}>
-          <div className={styles.detailSubject}>{data?.fetchBoard.title}</div>
+          <div className={styles.detailSubject}>
+            {data?.fetchBoard.title}
+          </div>
           <div className={styles.detailMetadataContainer}>
             <div className={styles.detailMetadataProfile}>
               <Image src={profileImage} alt="프로필 이미지" />

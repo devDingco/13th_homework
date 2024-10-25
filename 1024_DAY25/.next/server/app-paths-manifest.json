@@ -1,0 +1,6 @@
+{
+  "/boards/[boardId]/edit/page": "app/boards/[boardId]/edit/page.js",
+  "/boards/page": "app/boards/page.js",
+  "/boards/[boardId]/page": "app/boards/[boardId]/page.js",
+  "/boards/new/page": "app/boards/new/page.js"
+}
