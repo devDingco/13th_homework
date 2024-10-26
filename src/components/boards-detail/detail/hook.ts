@@ -3,6 +3,7 @@
 import { useQuery } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { FetchBoardDocument } from '@/commons/graphql/graphql';
+import { FETCH_BOARD } from './queries';
 
 export const useBoardDetail = () => {
     const date = new Date();
@@ -17,7 +18,7 @@ export const useBoardDetail = () => {
     const params = useParams();
     const router = useRouter();
 
-    const { data } = useQuery(FetchBoardDocument, {
+    const { data } = useQuery(FETCH_BOARD, {
         variables: {
             boardId: String(params.boardId),
         },

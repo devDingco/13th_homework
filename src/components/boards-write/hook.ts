@@ -17,18 +17,23 @@ export const useBoardWrite = () => {
     const [password, setPassword] = useState('');
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
+    const [youtube, setYoutube] = useState('');
 
     const [writerError, setwriterError] = useState('');
     const [passwordError, setPassworError] = useState('');
     const [titleError, setTitleError] = useState('');
     const [contentsError, setcontentsError] = useState('');
 
-    let [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(false);
     const [address, setAddress] = useState('');
     const [zonecode, setZoncode] = useState('');
     const [detailAddress, setDetailAddress] = useState('');
 
-    let onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeYouTubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setYoutube(event.target.value);
+    };
+
+    const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
         setwriter(event.target.value);
         if (event.target.value === '') {
             setwriterError('필수입력 사항 입니다');
@@ -46,7 +51,7 @@ export const useBoardWrite = () => {
         }
     };
 
-    let onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
         if (event.target.value === '') {
             setPassworError('필수입력 사항 입니다');
@@ -64,7 +69,7 @@ export const useBoardWrite = () => {
         }
     };
 
-    let onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
 
         if (event.target.value === '') {
@@ -88,7 +93,7 @@ export const useBoardWrite = () => {
         console.log(detailAddress);
     };
 
-    let onChangecontens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangecontens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContents(event.target.value);
         if (event.target.value === '') {
             setcontentsError('필수입력 사항 입니다');
@@ -108,7 +113,7 @@ export const useBoardWrite = () => {
     const [나의함수] = useMutation(CreateBoardDocument);
     const [updateBoard] = useMutation(UpdateBoardDocument);
 
-    let onClickSubmit = async () => {
+    const onClickSubmit = async () => {
         try {
             const result = await 나의함수({
                 variables: {
@@ -117,7 +122,7 @@ export const useBoardWrite = () => {
                         password: password,
                         title: title,
                         contents: contents,
-                        youtubeUrl: '',
+                        youtubeUrl: youtube,
                         boardAddress: {
                             zipcode: zonecode,
                             address: address,
@@ -151,10 +156,12 @@ export const useBoardWrite = () => {
         const myvariables = {
             boardId: String(params.boardId),
             password: 입력받은비밀번호,
+            // 빈객체로 받고 if문으로 수정된 값 넣기
             updateBoardInput: {},
         };
         if (title) myvariables.updateBoardInput.title = title;
         if (contents) myvariables.updateBoardInput.contents = contents;
+        if (youtube) myvariables.updateBoardInput.youtubeUrl = youtube;
 
         try {
             const result = await updateBoard({
@@ -165,7 +172,7 @@ export const useBoardWrite = () => {
             alert('수정이 완료 되었습니다');
             router.push('/boards');
         } catch (error) {
-            alert('비밀번호가 틀렸어요 ㅜㅜ');
+            alert('기존 비밀번호와 맞지않아요 ㅜㅜ');
             console.log('error');
         }
     };
@@ -199,6 +206,8 @@ export const useBoardWrite = () => {
     };
 
     return {
+        youtube,
+        setYoutube,
         detailAddress,
         setDetailAddress,
         zonecode,
@@ -215,6 +224,7 @@ export const useBoardWrite = () => {
         handleOk,
         handleCancel,
         handleComplete,
+        onChangeYouTubeUrl,
         onChangeDetailAddress,
         onChangeWriter,
         onChangePassword,

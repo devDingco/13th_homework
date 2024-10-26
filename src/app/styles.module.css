@@ -1,6 +1,3 @@
-.layout {
-}
-
 .homeHeader {
     width: 1280px;
     height: 80px;
@@ -8,6 +5,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    /* 수평정렬 */
+    margin: 0 auto;
 }
 .homeHeaderLeft {
     display: flex;

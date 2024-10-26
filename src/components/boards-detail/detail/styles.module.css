@@ -40,6 +40,7 @@
     flex-direction: row;
     justify-content: flex-end;
     padding-bottom: 24px;
+    gap: 20px;
 }
 
 .video {
@@ -64,12 +65,12 @@
     gap: 10px;
 }
 
-.bottombutton {
+.detailLayout {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
     padding: 0 0 50px 0;
+    gap: 10px;
 }
 
 .listbutton,
@@ -84,6 +85,6 @@
     border: 1px 0px 0px 0px;
     opacity: 0px;
     border: 1px solid var(--gray-B, #000000);
-    padding: 5px;
+    padding: 10px;
     gap: 5px;
 }

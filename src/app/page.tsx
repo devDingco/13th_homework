@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import styles from './styles.module.css';
+import BoardsComponentListBanner from '@/components/boards-list/banner';
 
 export default function Home() {
     return (
@@ -30,14 +31,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-
-            <div className="carousel"></div>
-            <div className="tripTalk">
-                <h1>오늘의 핫한 트립토크</h1>
-            </div>
-            <div className="tripTalkBoard">
-                <h1>트립토크 게시판</h1>
-            </div>
+            <BoardsComponentListBanner />
         </div>
     );
 }

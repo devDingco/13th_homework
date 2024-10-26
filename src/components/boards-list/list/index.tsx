@@ -17,7 +17,7 @@ export default function BoardsComponentList() {
                     <div className={styles.titleBoxDate}>날짜</div>
                 </div>
 
-                {data?.fetchBoards && data?.fetchBoards.length > 0 ? (
+                {data?.fetchBoards.length > 0 ? (
                     data.fetchBoards.map((el: any, index: any) => (
                         <button
                             className={styles.boardListBox}

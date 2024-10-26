@@ -1,11 +1,10 @@
 .layout {
-    /* background-color: gray; */
-    /* width: 1358px; */
-    width: 100%;
-    /* height: auto; */
+    width: 1358px;
     border-radius: 10px;
     border: 1px solid #c7c6c7;
     padding: 30px;
+    /* 수평정렬 */
+    margin: 0 auto;
 }
 
 .requiedMention {

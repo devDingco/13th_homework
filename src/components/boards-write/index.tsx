@@ -8,16 +8,11 @@ import { Modal } from 'antd';
 
 export default function BoardComponentWrite(props: any) {
     const {
-        detailAddress,
-        setDetailAddress,
-        zonecode,
-        setZoncode,
-        address,
-        setAddress,
         showModal,
         handleOk,
         handleCancel,
         handleComplete,
+        onChangeYouTubeUrl,
         onChangeDetailAddress,
         onChangeWriter,
         onChangePassword,
@@ -26,8 +21,9 @@ export default function BoardComponentWrite(props: any) {
         onClickSubmit,
         onClickUpdate,
         onClickBack,
+        zonecode,
+        address,
         isOpen,
-        setIsOpen,
         writerError,
         passwordError,
         titleError,
@@ -147,8 +143,10 @@ export default function BoardComponentWrite(props: any) {
             <div className={styles.youtubeBox}>
                 <div>유튜브 링크</div>
                 <input
+                    // defaultValue={props.data?.fetchBoard.youtube}
                     placeholder="링크를 입력해 주세요"
                     className={styles.youtubeBoxinput}
+                    onChange={onChangeYouTubeUrl}
                 ></input>
             </div>
 
