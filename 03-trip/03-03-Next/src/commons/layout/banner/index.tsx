@@ -42,6 +42,7 @@ export default function LayoutBanner() {
 
 const BannerWrap = {
     width: "100vw",
+    height: "100%",
     display: "flex",
     justifyContent: "center",
     padding: "2rem",
@@ -57,7 +58,8 @@ const BannerImg = {
 
 const BannerBG = {
     width: "100vw",
-    height: "56rem",
+    maxHeight: "56rem",
     marginTop: "4rem",
+    paddingBottom: "40%",
     backgroundColor: "#ffdfcc",
 };
