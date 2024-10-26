@@ -2,10 +2,8 @@
 export const BtnStyle = {
     width: "80px",
     height: "40px",
-    color: "#222",
-    border: "2px solid #9e9e9e",
+    border: "1px solid #bdbdbd",
     borderRadius: "8px",
-    backgroundColor: "#fafafa",
     cursor: "pointer",
     flexShrink: 0,
 };

@@ -8,8 +8,11 @@ import Button from "@/components/Atoms/_Button";
 import AddressField from "@/components/Molecules/_AddrField";
 import ImgField from "@/components/Molecules/_ImgField";
 import InputField from "@/components/Molecules/_InputField";
+import { useRouter } from "next/navigation";
 
 export default function BoardsNewUI() {
+    const router = useRouter();
+
     const { isModalOpen, addressData, onToggleModal, handleComplete } =
         useDaumPostApi();
 
@@ -74,11 +77,23 @@ export default function BoardsNewUI() {
 
             <ImgField imageUrl={imageUrl} onChange={onChangeFile} />
 
-            <Button
-                label="등록하기"
-                disabled={!valid}
-                onClick={onClickCreate}
-            />
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    gap: "2rem",
+                }}
+            >
+                <Button
+                    label="취소하기"
+                    onClick={() => router.push(`/boards`)}
+                />
+                <Button
+                    label="등록하기"
+                    disabled={!valid}
+                    onClick={onClickCreate}
+                />
+            </div>
         </section>
     );
 }

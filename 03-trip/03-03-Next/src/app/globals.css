@@ -55,9 +55,10 @@ section {
 }
 
 button:hover {
-    background-color: #424242;
+    background-color: #981b1e;
+    color: #eee;
 }
 
 input:disabled {
-    background-color: #5555ff;
+    background-color: #bdbdbd;
 }
