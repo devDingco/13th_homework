@@ -213,7 +213,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 onChange={onChangeFile}
                 style={{ display: "none" }}
                 ref={fileRef}
-                accept="iamge/jpeg, image/png"
+                accept="image/jpeg, image/png"
               />
 
               {/* map으로 받기 */}

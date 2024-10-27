@@ -14,10 +14,17 @@ export default function CommentItem({ el, index }: IListItemProps) {
     setIsEdit(!isEdit);
   };
 
+  const EditChange = () => {
+    setIsEdit(false);
+  };
   return (
     <>
       {isEdit ? (
-        <CommentWriteBox isEdit={isEdit} index={index} />
+        <CommentWriteBox
+          isEdit={isEdit}
+          index={index}
+          EditChange={EditChange}
+        />
       ) : (
         <>
           <div className={styles.css_commentshow}>

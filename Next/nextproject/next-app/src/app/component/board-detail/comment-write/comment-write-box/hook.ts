@@ -19,14 +19,13 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
       boardId: params.boardId,
     },
   });
-
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState(
-    props.isEdit ? data?.fetchBoardComments[props.index].comment : ""
+    props.isEdit ? data.fetchBoardComments[props.index].contents : ""
   );
   const [value, setValue] = useState(
-    props.isEdit ? data?.fetchBoardComments[props.index].rating : 0
+    props.isEdit ? data.fetchBoardComments[props.index].rating : 0
   );
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +48,14 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
   // 댓글 등록
   const onClickSubmit = async () => {
     try {
-      await submit({
+      const { data } = await submit({
         variables: {
           boardId: params.boardId,
           createBoardCommentInput: {
             writer: name,
-            contents: comment,
+            contents: comment || "",
             password: password,
-            rating: value,
+            rating: value || 0,
           },
         },
         refetchQueries: [
@@ -96,6 +95,7 @@ export default function UseCommentWriteBox(props: ICommentWriteProps) {
           },
         ],
       });
+      props.EditChange();
     } catch {
       alert("에러");
     }
