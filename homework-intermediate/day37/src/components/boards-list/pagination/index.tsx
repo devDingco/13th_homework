@@ -3,7 +3,6 @@
 import { usePagination } from './hook';
 
 export default function BoardsPagination(props) {
-	console.log('🚀 ~ BoardsPagination ~ props:', props);
 	const {
 		startPage,
 		lastPage,
@@ -11,9 +10,6 @@ export default function BoardsPagination(props) {
 		onClickNextPageGroup,
 		onClickPage,
 	} = usePagination(props);
-
-	const length = props.data?.fetchBoards.length;
-	console.log('🚀 ~ BoardsPagination ~ length:', length);
 
 	return (
 		<div className="flex items-center justify-center gap-2 p-4">

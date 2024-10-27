@@ -9,17 +9,19 @@ import BoardTitleSearch from '@/components/boards-list/search';
 
 export default function BoardsPage() {
 	const [activePage, setActivePage] = useState(1);
+	const [titleSearch, setTitleSearch] = useState('');
 	const { data, refetch } = useQuery(FetchBoardsDocument);
 
 	return (
 		<div className="flex w-full max-w-7xl flex-col gap-8">
-			<BoardTitleSearch refetch={refetch} />
+			<BoardTitleSearch {...{ titleSearch, setTitleSearch, refetch }} />
 			<BoardList data={data} />
 			<BoardsPagination
 				data={data}
 				refetch={refetch}
 				activePage={activePage}
 				setActivePage={setActivePage}
+				titleSearch={titleSearch}
 			/>
 		</div>
 	);

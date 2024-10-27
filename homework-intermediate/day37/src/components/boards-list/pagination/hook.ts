@@ -1,12 +1,24 @@
 import { FetchBoardsCountDocument } from '@/commons/graphql/graphql';
-import { useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { MouseEvent, useState } from 'react';
 
+export const FETCH_BOARDS_COUNT = gql`
+	query fetchBoardsCount(
+		$search: String
+		$endDate: DateTime
+		$startDate: DateTime
+	) {
+		fetchBoardsCount(search: $search, endDate: $endDate, startDate: $startDate)
+	}
+`;
+
 export const usePagination = (props) => {
-	const { setActivePage, refetch } = props;
+	const { setActivePage, refetch, titleSearch } = props;
 
 	const [startPage, setStartPage] = useState(1);
-	const { data: dataBoardsCount } = useQuery(FetchBoardsCountDocument);
+	const { data: dataBoardsCount } = useQuery(FetchBoardsCountDocument, {
+		variables: { search: titleSearch },
+	});
 	const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
 	const onClickPrevPageGroup = () => {

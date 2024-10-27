@@ -12,12 +12,13 @@ type SizeType = ConfigProviderProps['componentSize'];
 const { RangePicker } = DatePicker;
 
 export default function BoardTitleSearch(props) {
+	const { titleSearch, setTitleSearch, refetch } = props;
+
 	const [size, setSize] = useState<SizeType>('middle');
-	const [titleSearch, setTitleSearch] = useState('');
 	const router = useRouter();
 
 	const debounceFn = useDebounce((titleSearch) => {
-		props.refetch({ search: titleSearch });
+		refetch({ search: titleSearch });
 		setTitleSearch(titleSearch);
 	}, 800);
 
@@ -27,7 +28,7 @@ export default function BoardTitleSearch(props) {
 	};
 
 	const onClickTitleSearch = () => {
-		props.refetch({ search: titleSearch });
+		refetch({ search: titleSearch });
 	};
 
 	const onClickBoardWrite = () => {
