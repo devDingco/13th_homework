@@ -2,6 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { BoardCommentModule } from './board/board-comment/board-comment.module';
 import { BoardModule } from './board/board.module';
 import { BoardPasswordModule } from './board/board-password/board-password.module';
@@ -36,6 +37,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         BoardModule,
         BoardPasswordModule,
         BoardCommentModule,
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -1,11 +1,11 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardCommentEntity } from './entity/board-comment.entity';
+import { BoardCommentEntity } from '../entity/board-comment.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
-import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
+import { CreateBoardCommentDTO } from '../dto/create-board-comment.dto';
 import { ObjectId } from 'mongodb';
-import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
-import { UpdateBoardCommentExceptPasswordDTO } from './dto/update-board-except-password-comment.dto';
+import { BoardCommentResponseDTO } from '../dto/board-comment-response.dto';
+import { UpdateBoardCommentExceptPasswordDTO } from '../dto/update-board-except-password-comment.dto';
 
 @Injectable()
 export class BoardCommentRepository {
