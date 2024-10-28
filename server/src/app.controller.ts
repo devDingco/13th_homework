@@ -19,9 +19,9 @@ export class AppController {
         return this.appService.getHello();
     }
 
-    @Post()
-    @UseInterceptors(FilesInterceptor('image'))
-    createTestImage(@UploadedFiles() files, @Body() body) {
-        return files;
-    }
+    // @Post()
+    // @UseInterceptors(FilesInterceptor('image'))
+    // createTestImage(@UploadedFiles() files, @Body() body) {
+    //     return files;
+    // }
 }

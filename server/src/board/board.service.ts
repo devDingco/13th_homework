@@ -101,7 +101,9 @@ export class BoardService {
     }
 
     async transformPassword(password: string): Promise<string> {
-        return await bcrypt.hash(password, 10);
+        const salt = await bcrypt.genSalt();
+
+        return await bcrypt.hash(password, salt);
     }
 
     async checkBoardEntityCount(page: number, take: number) {
