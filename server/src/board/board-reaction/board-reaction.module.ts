@@ -7,7 +7,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([BoardReactionEntity], 'mongodb')],
+    imports: [TypeOrmModule.forFeature([BoardReactionEntity], 'MongoDB')],
     controllers: [BoardReactionController],
     providers: [
         BoardReactionService,

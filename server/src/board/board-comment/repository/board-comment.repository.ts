@@ -10,7 +10,7 @@ import { UpdateBoardCommentExceptPasswordDTO } from '../dto/update-board-except-
 @Injectable()
 export class BoardCommentRepository {
     constructor(
-        @InjectRepository(BoardCommentEntity, 'mongodb')
+        @InjectRepository(BoardCommentEntity, 'MongoDB')
         private readonly boardCommentRepository: MongoRepository<BoardCommentEntity>,
     ) {}
 

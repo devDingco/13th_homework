@@ -21,11 +21,11 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         }),
 
         TypeOrmModule.forRootAsync({
-            name: 'mongodb',
+            name: 'MongoDB',
             useClass: mongoDBConfig,
         }),
         TypeOrmModule.forRootAsync({
-            name: 'postgre',
+            name: 'PostgreSQL',
             useClass: postgreSQLConfig,
         }),
 

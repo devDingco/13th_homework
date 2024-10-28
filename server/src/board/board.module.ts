@@ -22,7 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
                 BoardReactionEntity,
                 BoardCommentEntity,
             ],
-            'mongodb',
+            'MongoDB',
         ),
         BoardReactionModule,
     ],

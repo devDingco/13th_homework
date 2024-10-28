@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([BoardCommentEntity, BoardEntity], 'mongodb'),
+        TypeOrmModule.forFeature([BoardCommentEntity, BoardEntity], 'MongoDB'),
         BoardModule,
     ],
     controllers: [BoardCommentController],
