@@ -1,0 +1,13 @@
+.mypage_body {
+  display: flex;
+  padding: 40px 20px;
+  justify-content: center;
+}
+
+.mypage_page {
+  width: 1280px;
+}
+
+.header {
+  width: 100%;
+}
