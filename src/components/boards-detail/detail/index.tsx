@@ -2,11 +2,14 @@
 import Image from 'next/image';
 import styles from './styles.module.css';
 import { useBoardDetail } from './hook';
-import BoardsComponentComment from '../comments-write';
+import { Divider, Tooltip } from 'antd';
+import ReactPlayer from 'react-player/youtube';
 
 export default function BoardsComponentDetail() {
     const { 날짜담는통, data, onClickMoveBoardList, onClickMoveEditPage } =
         useBoardDetail();
+    console.log(data?.fetchBoard);
+    const text = <span>{data?.fetchBoard.boardAddress.address}</span>;
 
     return (
         <>
@@ -31,23 +34,25 @@ export default function BoardsComponentDetail() {
                     <div className={styles.main}>
                         <div className={styles.mainlinklocation}>
                             <Image
-                                src="/assets/list.png"
+                                src="/images/list.png"
                                 alt="link"
                                 width={24}
                                 height={24}
                             ></Image>
-                            <Image
-                                src="/assets/location.png"
-                                alt="location"
-                                width={24}
-                                height={24}
-                            ></Image>
+                            <Tooltip placement="bottom" title={text}>
+                                <Image
+                                    src="/images/location.png"
+                                    alt="location"
+                                    width={24}
+                                    height={24}
+                                ></Image>
+                            </Tooltip>
                         </div>
                         <div className={styles.mainPhotoBox}>
                             <Image
                                 className={styles.mainPhoto}
                                 alt="mainphoto"
-                                src="/assets/beach.png"
+                                src="/images/beach.png"
                                 width={400}
                                 height={531}
                                 // layout="responsive"
@@ -56,46 +61,46 @@ export default function BoardsComponentDetail() {
                         </div>
                     </div>
                     <div className={styles.video}>
-                        <Image
-                            src="/assets/fake_video.png"
-                            alt="fake_video"
-                            width={822}
-                            height={464}
-                        ></Image>
+                        {data?.fetchBoard.youtubeUrl &&
+                        data?.fetchBoard.youtubeUrl.includes('youtube.com') ? (
+                            <ReactPlayer
+                                url={data.fetchBoard.youtubeUrl}
+                                muted={true}
+                            />
+                        ) : (
+                            <div>유튜브 주소를 다시 입력해 주세요 ㅠㅠ</div>
+                        )}
                     </div>
                     <div className={styles.videofeedback}>
                         <Image
-                            src="/assets/broken_heart.png"
+                            src="/images/broken_heart.png"
                             alt="videofeedback"
                             width={24}
                             height={24}
                         ></Image>
                         <Image
-                            src="/assets/heart.png"
+                            src="/images/heart.png"
                             alt="heart"
                             width={24}
                             height={24}
                         ></Image>
                     </div>
-                    <div
-                        className={styles.bottombutton}
-                        // onClick={onClickMoveBoardList}
-                    >
+                    <div className={styles.detailLayout}>
                         <button
                             className={styles.listbutton}
                             onClick={onClickMoveBoardList}
                         >
                             <Image
-                                src="/assets/list.png"
+                                src="/images/list.png"
                                 alt="list"
                                 className={styles.listImage}
                                 style={{
-                                    width: '24px',
-                                    height: '24px',
+                                    width: '20px',
+                                    height: '20px',
                                     objectFit: 'cover',
                                 }}
-                                width={17}
-                                height={17}
+                                width={15}
+                                height={15}
                             ></Image>
                             목록으로
                         </button>
@@ -104,7 +109,7 @@ export default function BoardsComponentDetail() {
                             onClick={onClickMoveEditPage}
                         >
                             <Image
-                                src="/assets/pen.png"
+                                src="/images/pen.png"
                                 alt="pen"
                                 className={styles.penImage}
                                 style={{

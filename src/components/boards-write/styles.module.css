@@ -1,7 +1,8 @@
+
 .layout {
     width: 1280px;
     height: auto;
-    /* background-color: orange; */
+    margin: 0 auto;
 }
 
 .requiedmention {

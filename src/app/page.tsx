@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import styles from './styles.module.css';
+import BoardsComponentListBanner from '@/components/boards-list/banner';
 
 export default function Home() {
     return (
@@ -8,7 +9,7 @@ export default function Home() {
             <div className={styles.homeHeader}>
                 <div className={styles.homeHeaderLeft}>
                     <Image
-                        src="/assets/logo.png"
+                        src="/images/logo.png"
                         alt="link"
                         width={56}
                         height={32}
@@ -20,9 +21,9 @@ export default function Home() {
 
                 <div className={styles.homeLoginButtonBox}>
                     <button className={styles.homeLoginButton}>
-                        <div className="textLogin">로그인</div>
+                        <div className="textLogin">Login</div>
                         <Image
-                            src="/assets/arrow_right.png"
+                            src="/images/arrow_right.png"
                             alt="로고"
                             width={9}
                             height={19}
@@ -30,14 +31,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-
-            <div className="carousel"></div>
-            <div className="tripTalk">
-                <h1>오늘의 핫한 트립토크</h1>
-            </div>
-            <div className="tripTalkBoard">
-                <h1>트립토크 게시판</h1>
-            </div>
+            <BoardsComponentListBanner />
         </div>
     );
 }

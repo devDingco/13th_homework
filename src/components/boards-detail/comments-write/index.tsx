@@ -5,6 +5,7 @@ import { Rate } from 'antd';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { FetchBoardCommentsDocument } from '@/commons/graphql/graphql';
+import Image from 'next/image';
 
 const FETCH_BOARD_CREATE_COMMENT = gql`
     mutation createBoardComment(
@@ -115,12 +116,12 @@ export default function BoardsComponentComment() {
         <>
             <div className={styles.layout}>
                 <div className={styles.commentBox}>
-                    {/* <Image
-                        src="/assets/chat.png"
+                    <Image
+                        src="/images/chat.png"
                         alt="chat"
                         width={24}
                         height={24}
-                    ></Image> */}
+                    ></Image>
                     댓글
                 </div>
                 <div className={styles.starBox}>
@@ -137,6 +138,7 @@ export default function BoardsComponentComment() {
                             placeholder="작성자 명을 입력해 주세요."
                             className={styles.inputWriter}
                             onChange={onChangeWriter}
+                            value={writer}
                         />
                         <div className={styles.requiedMention}>
                             {writerError}
@@ -151,6 +153,7 @@ export default function BoardsComponentComment() {
                             placeholder="비밀번호를 입력해 주세요."
                             className={styles.inputPassword}
                             onChange={onChangePassword}
+                            value={password}
                         />
                         <div className={styles.requiedMention}>
                             {passwordError}
@@ -162,6 +165,7 @@ export default function BoardsComponentComment() {
                         className={styles.comment}
                         placeholder="댓글을 입력해주세요."
                         onChange={onChangeContents}
+                        value={contents}
                     ></textarea>
                     <div className={styles.requiedMention}>{contentsError}</div>
                     <div className={styles.commentBoxButton}>
