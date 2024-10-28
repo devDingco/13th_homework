@@ -2,7 +2,6 @@
 import React from "react";
 import LayoutBannerPage from "./banner";
 import LayoutNavigation from "./navigation";
-import styles from "./styles.module.css";
 import { useParams, usePathname } from "next/navigation";
 import Background from "../layout/background";
 interface ILayout {
@@ -24,11 +23,11 @@ export default function LayoutComponent({ children }: ILayout) {
   return (
     <>
       {/* <div className={styles.css_layout}> */}
-      <Background>
-        <LayoutNavigation />
-        {hidelayout && <LayoutBannerPage />}
-        <div>{children}</div>
-      </Background>
+      {/* <Background> */}
+      <LayoutNavigation />
+      {!hidelayout && <LayoutBannerPage />}
+      <div>{children}</div>
+      {/* </Background> */}
       {/* </div> */}
     </>
   );
