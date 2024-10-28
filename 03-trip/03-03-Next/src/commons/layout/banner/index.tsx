@@ -60,6 +60,6 @@ const BannerBG = {
     width: "100vw",
     maxHeight: "56rem",
     marginTop: "4rem",
-    paddingBottom: "40%",
+    aspectRatio: "16/9",
     backgroundColor: "#ffdfcc",
 };
