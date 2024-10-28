@@ -35,12 +35,14 @@ export default function LoginUI() {
                 <div style={CSSLoginForm}>
                     {isLogIn ? (
                         <>
-                            <Image
-                                src={logoVer}
-                                alt="logo_ver"
-                                style={CSSLogoAdjust}
-                                onClick={() => router.push(`/`)}
-                            />
+                            <p style={{ fontSize: "2.4rem", margin: "1rem" }}>
+                                <Image
+                                    src={logoVer}
+                                    alt="logo_ver"
+                                    style={CSSLogoAdjust}
+                                    onClick={() => router.push(`/`)}
+                                />
+                            </p>
 
                             <p style={{ fontSize: "2rem", margin: "1rem" }}>
                                 성북 통합 구립도서관 사이트에 오신 것을
