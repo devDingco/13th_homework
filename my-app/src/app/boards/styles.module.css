@@ -1,0 +1,53 @@
+.header {
+  width: 1184px;
+  height: 52px;
+  display: flex;
+  padding: 16px 24px;
+  gap: 8px;
+}
+.번호 {
+  width: 64px;
+  height: 20px;
+  gap: 10px;
+}
+.제목 {
+  width: 848px;
+  height: 20px;
+  gap: 10px;
+}
+.작성자 {
+  width: 100px;
+  gap: 10px;
+}
+.날짜 {
+  width: 100px;
+  gap: 10px;
+}
+.내용박스 {
+  width: 1184px;
+  height: 44px;
+  display: flex;
+  padding: 12px 24px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px;
+  border: solid #f2f2f2;
+}
+.넘버 {
+  width: 64px;
+  height: 20px;
+  gap: 10px;
+}
+.타이틀 {
+  width: 848px;
+  height: 20px;
+  gap: 10px;
+}
+.라이터 {
+  width: 100px;
+  gap: 10px;
+}
+.데이 {
+  width: 100px;
+  gap: 10px;
+}
