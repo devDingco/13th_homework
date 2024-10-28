@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-export default function My() {
+import { UseMyInfoPage } from "./hook";
+
+export default function MyInfo() {
+  // const { data } = UseMyInfoPage();
   return (
     <>
       <div className={styles.css_mypage}>마이 페이지</div>

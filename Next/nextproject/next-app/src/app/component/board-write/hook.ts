@@ -110,12 +110,6 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
 
   // 등록하기
   const onClickSignup = async () => {
-    console.log(
-      inputs.name_id,
-      inputs.password_id,
-      inputs.title_id,
-      inputs.contents_id
-    );
     await checkValid();
     try {
       if (

@@ -11,21 +11,26 @@ interface ILayout {
 
 export default function LayoutComponent({ children }: ILayout) {
   const params = useParams();
-  const HIDDEN_LAYOUT = [
+  const HIDDEN_BANNER = [
     `/routes/boards/${params.boardId}/edit`,
     "/routes/boards/new",
+    "/login",
+    "/signup",
   ];
+
+  const HIDDEN_NAV = ["/login", "/signup"];
   const pathname = usePathname();
 
-  const hidelayout = HIDDEN_LAYOUT.includes(pathname);
+  const hidenav = HIDDEN_NAV.includes(pathname);
+  const hidebanner = HIDDEN_BANNER.includes(pathname);
   console.log("Current Pathname:", pathname);
-  console.log("Hide Layout:", hidelayout);
+  console.log("Hide Layout:", hidebanner);
   return (
     <>
       {/* <div className={styles.css_layout}> */}
       {/* <Background> */}
-      <LayoutNavigation />
-      {!hidelayout && <LayoutBannerPage />}
+      {!hidenav && <LayoutNavigation />}
+      {!hidebanner && <LayoutBannerPage />}
       <div>{children}</div>
       {/* </Background> */}
       {/* </div> */}
