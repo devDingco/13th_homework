@@ -1,13 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import logo from "/public/img/logo.png";
+import logo from "/public/img/logo_hoz.png";
 import Button from "@/components/Atoms/_Button";
 import { CSSProperties } from "react";
 import { useRouter } from "next/navigation";
 
+import { useQuery } from "@apollo/client";
+import { FETCH_USER } from "@/commons/queries/queries";
+
 export default function LayoutNav() {
     const router = useRouter();
+
+    const { data: login } = useQuery(FETCH_USER);
+    console.log(login);
 
     return (
         <>
@@ -22,7 +28,19 @@ export default function LayoutNav() {
                     <div style={NavButton}>마이 페이지</div>
                 </div>
 
-                <Button label="로그인" />
+                {login ? (
+                    <div>
+                        <span style={{ color: "#5C0000", fontSize: "2rem" }}>
+                            {login.fetchUserLoggedIn.name}
+                        </span>{" "}
+                        님 안녕하세요!
+                    </div>
+                ) : (
+                    <Button
+                        label="로그인"
+                        onClick={() => router.push(`/login`)}
+                    />
+                )}
             </nav>
         </>
     );

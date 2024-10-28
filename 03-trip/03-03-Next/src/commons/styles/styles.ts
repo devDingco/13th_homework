@@ -2,7 +2,7 @@
 export const BtnStyle = {
     width: "80px",
     height: "40px",
-    border: "1px solid #bdbdbd",
+    border: "2px solid #bdbdbd",
     borderRadius: "8px",
     cursor: "pointer",
     flexShrink: 0,

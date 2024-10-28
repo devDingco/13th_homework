@@ -23,6 +23,9 @@ export const InputData = {
     content_ID: "내용",
 
     link_ID: "링크",
+    email_ID: "이메일",
+    name_ID: "이름",
+    passwordConfirm_ID: "비밀번호 확인",
 };
 
 export const InputPlaceholder = {
@@ -33,10 +36,13 @@ export const InputPlaceholder = {
 
     link_ID: "링크를 입력해 주세요.",
     zipcode_ID: "01234",
-    address00_ID: "주소를 검색해 주세요.",
-    address01_ID: "상세주소를 입력해 주세요.",
+    address_ID: "주소를 검색해 주세요.",
+    addressDetail_ID: "상세주소를 입력해 주세요.",
 
     search_ID: "검색어를 입력해 주세요.",
+    email_ID: "이메일을 입력해 주세요.",
+    name_ID: "이름을 입력해 주세요.",
+    passwordConfirm_ID: "비밀번호를 한 번 더 입력해 주세요.",
 };
 
 export interface ISearchProps {
