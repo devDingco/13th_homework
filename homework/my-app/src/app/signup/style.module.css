@@ -21,14 +21,14 @@
   text-align: left;
 }
 
-label {
+.label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #34495e;
 }
 
-input {
+.input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #dfe6e9;
@@ -38,7 +38,7 @@ input {
   transition: border-color 0.3s ease;
 }
 
-input:focus {
+.input:focus {
   border-color: #3498db;
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
   outline: none;

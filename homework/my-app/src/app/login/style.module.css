@@ -71,7 +71,7 @@
 }
 
 /* 비밀번호 찾기 */
-.forgotPassword {
+.signup {
   display: block;
   margin-top: 0.5rem;
   text-align: right;
@@ -80,7 +80,7 @@
   text-decoration: none;
 }
 
-.forgotPassword:hover {
+.signup:hover {
   text-decoration: underline;
 }
 

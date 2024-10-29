@@ -11,6 +11,7 @@ import BoardList from "@/components/boards-list/list";
 import Pagination from "@/components/boards-list/pagination";
 import { useState } from "react";
 import SearchBar from "@/components/boards-list/search";
+import { loginCheck } from "@/commons/hocs/login-check";
 
 const Page = () => {
   const [startPage, setStartPage] = useState(1);
@@ -37,4 +38,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default loginCheck(Page);
