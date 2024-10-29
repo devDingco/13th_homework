@@ -1,3 +1,9 @@
+import ProductWrite from "@/components/product-write";
+
 export default function SellingPage() {
-  return <>숙박권 판매하기 페이지</>;
+  return (
+    <>
+      <ProductWrite isEdit={false} />
+    </>
+  );
 }
