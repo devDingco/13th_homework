@@ -6,6 +6,7 @@ import LayoutFooter from "./footer";
 import { usePathname } from "next/navigation";
 
 const SHOW_BANNER = [`/`, `/boards`];
+const HIDE_BANNER = [`/login`];
 
 interface IChildren {
     children: React.ReactNode;
@@ -14,13 +15,16 @@ interface IChildren {
 export default function PageLayout({ children }: IChildren) {
     const pathname = usePathname();
     const isShowBanner = SHOW_BANNER.includes(pathname);
+    const isHideBanner = HIDE_BANNER.includes(pathname);
 
     return (
         <>
-            <LayoutNav />
+            {!isHideBanner && <LayoutNav />}
             {isShowBanner && <LayoutBanner />}
+
             {children}
-            <LayoutFooter />
+
+            {!isHideBanner && <LayoutFooter />}
         </>
     );
 }

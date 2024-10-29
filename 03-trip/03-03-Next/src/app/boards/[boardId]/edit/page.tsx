@@ -1,6 +1,9 @@
 "use client";
 import BoardsDetailUI from "@/components/Organisms/BoardsDetail";
+import { withLoginCheck } from "@/commons/hocs/withLoginCheck";
 
-export default function BoardsDetailEdit() {
+function BoardsDetailEdit() {
     return <BoardsDetailUI isEdit={true} />;
 }
+
+export default withLoginCheck(BoardsDetailEdit);
