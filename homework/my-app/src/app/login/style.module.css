@@ -1,0 +1,204 @@
+/* 배경 이미지와 컨테이너 */
+.wallpaper {
+  width: 100%;
+  height: 85vh;
+  background-image: url("/image/wallpaper2.jpeg"); /* 배경 이미지 경로 */
+  background-size: cover; /* 이미지가 전체 화면에 꽉 차도록 */
+  background-position: center; /* 이미지 가운데 정렬 */
+  background-repeat: no-repeat; /* 이미지 반복 방지 */
+  backdrop-filter: blur(8px); /* 배경 블러 효과 (선택 사항) */
+  position: relative; /* 자식 요소 배치를 위한 상대 위치 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; /* 작은 화면에서 여백 */
+}
+
+/* 로그인 컨테이너 */
+.loginContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 폼 박스 */
+.formBox {
+  width: 100%;
+  max-width: 500px;
+  padding: 6rem 4rem; /* 기본 여백 */
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 상단 타이틀 */
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+/* 입력 그룹 */
+.inputGroup {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  color: #34495e;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #dfe6e9;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    outline: none;
+  }
+}
+
+/* 비밀번호 찾기 */
+.forgotPassword {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: right;
+  font-size: 0.9rem;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+/* 로그인 버튼 */
+.loginButton {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+}
+
+/* 회원가입 링크 */
+.signupLink {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.signupLink a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.signupLink a:hover {
+  text-decoration: underline;
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+  .formBox {
+    padding: 4rem 2rem; /* 작은 화면에서 여백 축소 */
+  }
+
+  .title {
+    font-size: 2rem; /* 타이틀 크기 축소 */
+  }
+
+  .input {
+    padding: 0.6rem; /* 입력 필드 축소 */
+  }
+
+  .loginButton {
+    font-size: 1rem; /* 버튼 글자 크기 축소 */
+  }
+}
+
+@media (max-width: 480px) {
+  .formBox {
+    padding: 3rem 1.5rem; /* 더 작은 화면에서는 더 많은 축소 */
+    border-radius: 12px;
+  }
+
+  .title {
+    font-size: 1.8rem; /* 타이틀 더 축소 */
+  }
+
+  .loginButton {
+    font-size: 0.9rem; /* 버튼 크기 조정 */
+  }
+}
+/* 배경 이미지와 컨테이너 */
+.wallpaper {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #d4d3dd, #c2c1ce, #f3f2f5, #e8e6ef);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease-in-out infinite;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 모서리 그라데이션 효과 */
+  -webkit-mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+/* 배경 애니메이션 정의 */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 로그인 컨테이너 */
+.loginContainer {
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}

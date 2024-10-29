@@ -1,115 +1,230 @@
-/* 기본 스타일 리셋 */
+/* style.module.css */
 
+/* 전체 컨테이너 */
 .container {
   display: flex;
-  max-width: 1200px;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  gap: 20px;
-  padding: 20px;
+  padding: 2rem;
+  gap: 2rem;
+  background-color: var(--background, #f5f4f1);
+  box-sizing: border-box;
+  color: #333;
 }
 
 /* 프로필 사이드바 */
 .profileSidebar {
   width: 25%;
+  max-width: 320px;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
+}
+
+/* 프로필 정보 */
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
 }
 
 .profilePhoto {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.profileActions {
+.profilePhoto:hover {
+  transform: scale(1.1);
+}
+
+.profileTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pointContainer {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
   align-items: center;
-}
-
-.button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1da1f2;
-  color: white;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #0d8ddb;
-}
-
-/* 메인 콘텐츠 */
-.content {
-  width: 70%;
-}
-
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-
-.tabButton {
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 10px 20px;
-}
-
-.tabButton:hover {
-  text-decoration: underline;
-}
-
-.tweets {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.tweet {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  color: #1da1f2;
+  font-weight: 600;
 }
 
 /* 메뉴 스타일 */
 .menuContainer {
-  background-color: #fff;
-  padding: 10px 10px; /* 상하좌우 여백 조정 */
-  display: flex;
-  align-items: center; /* 세로 가운데 정렬 */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.menu {
-  text-align: left; /* 왼쪽 정렬 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* 항목 간격 균등 분배 */
+  width: 100%;
 }
 
 .menu p {
   cursor: pointer;
-
-  border-radius: 5px;
-  transition: background-color 0.2s ease-in-out;
-  margin: 5px 0; /* 항목 간 간격 */
+  padding: 1rem;
+  border-radius: 0.8rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .menu p:hover {
-  background-color: #f1f1f1; /* 호버 시 배경색 */
+  background-color: #1da1f2;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* 메인 콘텐츠 */
+.content {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+/* 서브 메뉴 */
+.subMenu {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+/* 버튼 기본 스타일 */
+.buttonActive {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid #e0ddd5;
+  background-color: #e0ddd5;
+  color: #3a3a3a;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  box-shadow: 0 2px 4px rgba(58, 58, 58, 0.1);
+  transform: scale(1.15); /* 클릭 시 확대 */
+}
+
+/* 버튼 호버 효과 */
+.button:hover {
+  background-color: #b5b5b2;
+  color: white;
+  box-shadow: 0 4px 8px rgba(58, 58, 58, 0.2);
+  transform: scale(1.05);
+}
+
+/* 활성화된 버튼 - 클릭 시 확대 효과 */
+.button {
+  padding: 0.1rem 0.3rem;
+  background-color: #8d8d8a;
+  color: rgb(196, 193, 193);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 6px 14px rgba(58, 58, 58, 0.3);
+  transition: all 0.4s ease-in-out; /* 확대가 부드럽게 진행 */
+}
+
+/* 클릭된 버튼에서 호버 시 */
+.buttonActive:hover {
+  transform: scale(1.2); /* 호버 시 약간 더 확대 */
+  box-shadow: 0 8px 16px rgba(58, 58, 58, 0.4);
+}
+
+/* 클릭된 버튼의 활성화 효과 유지 */
+.buttonActive:active {
+  transform: scale(1.1); /* 클릭 시 살짝 축소 */
+  box-shadow: 0 4px 12px rgba(58, 58, 58, 0.2);
+}
+
+/* 서브 콘텐츠 */
+.subContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* 비밀번호 변경 */
+.passwordChange {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #1da1f2;
+  outline: none;
+  box-shadow: 0 0 8px rgba(29, 161, 242, 0.2);
+}
+
+.passwordChangeButton {
+  padding: 1rem;
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.passwordChangeButton:hover {
+  background-color: #0d8ddb;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    height: auto;
+  }
+
+  .profileSidebar {
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .subMenu {
+    flex-direction: column;
+    align-items: center;
+  }
 }

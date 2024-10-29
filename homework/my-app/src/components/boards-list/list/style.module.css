@@ -1,125 +1,85 @@
-/* Container 스타일 */
+/* 전체 컨테이너 */
 .Container {
   display: flex;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-/* 리스트 컨테이너 */
-.listContainer {
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  justify-content: center;
-  padding: 0 10px; /* 양쪽 여백 추가 */
-}
-
-/* 유동형 그리드 */
-.list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 기본 5열 */
-  gap: 20px;
-  justify-items: center;
-}
-
-/* 반응형: 화면 크기에 따른 열 수 조정 */
-@media (max-width: 1024px) {
-  .list {
-    grid-template-columns: repeat(3, 1fr); /* 태블릿: 3열 */
-  }
-}
-
-@media (max-width: 768px) {
-  .list {
-    grid-template-columns: repeat(2, 1fr); /* 작은 화면: 2열 */
-  }
-}
-
-@media (max-width: 480px) {
-  .list {
-    grid-template-columns: 1fr; /* 모바일: 1열 */
-  }
-}
-
-/* .listOfWriing에 상대적 위치 지정 */
-.listOfWriing {
-  position: relative;
-  height: 450px;
-  width: 300px; /* 부모의 너비를 채우도록 */
-  border-radius: 15px;
-  padding: 16px;
-  background-color: #ffffff;
-  box-shadow: 3px 3px 0px 2px rgba(93, 93, 88, 0.813);
-  transition: transform 0.2s;
-  cursor: pointer;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
 }
 
-/* 휴지통 아이콘 스타일 */
-.trashIcon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-/* 박스 호버 시 아이콘 표시 */
-.listOfWriing:hover .trashIcon {
-  opacity: 1;
-}
-
-/* 날짜, 제목, 썸네일 컨테이너 */
-.dateContainer,
-.titleContainer,
-.thumbnailContainer {
-  margin-bottom: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* 썸네일 */
-.thumbnail {
+/* 카드 스타일 */
+.card {
   width: 100%;
-  height: 200px;
-  background-color: #f0f0f0;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* 카드 헤더 */
+.header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 4px;
-  position: relative; /* layout="fill"을 위한 설정 */
+  margin-bottom: 10px;
 }
 
-.thumbnail img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+/* 아바타 이미지 */
+.avatar {
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-/* 제목 및 텍스트 스타일 */
-.title {
+/* 유저 정보 */
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
   font-weight: bold;
   font-size: 16px;
-  line-height: 1.4;
-  max-height: 2.8em; /* 두 줄의 최대 높이 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  display: block;
 }
 
-/* 작성자 이름 */
-.authorName {
+.handle {
   font-size: 14px;
   color: #555;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+}
+
+/* 카드 본문 */
+.content {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* 카드 하단 */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* 아이콘 그룹 */
+.iconGroup {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #777;
+}
+
+.date {
+  font-size: 12px;
+  color: #999;
 }

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.css";
+import BoardList from "@/components/boards-list/list";
 
 const ProfilePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("history"); // 초기 메뉴
@@ -14,14 +15,29 @@ const ProfilePage = () => {
         return (
           <>
             <div className={styles.subMenu}>
-              <button onClick={() => setSubMenu("myProducts")}>나의상품</button>
-              <button onClick={() => setSubMenu("bookmark")}>북마크</button>
+              <button
+                onClick={() => setSubMenu("myProducts")}
+                className={
+                  subMenu === "myProducts" ? styles.buttonActive : styles.button
+                }
+              >
+                나의상품
+              </button>
+              <button
+                onClick={() => setSubMenu("bookmark")}
+                className={
+                  subMenu === "bookmark" ? styles.buttonActive : styles.button
+                }
+              >
+                북마크
+              </button>
             </div>
             <div className={styles.subContent}>
               {subMenu === "myProducts" ? (
                 <div>
                   <h3>나의상품</h3>
                   <p>등록한 상품들을 확인할 수 있습니다.</p>
+                  <BoardList />
                 </div>
               ) : (
                 <div>
@@ -37,14 +53,42 @@ const ProfilePage = () => {
         return (
           <>
             <div className={styles.subMenu}>
-              <button onClick={() => setPointsMenu("all")}>전체</button>
-              <button onClick={() => setPointsMenu("recharge")}>
+              <button
+                onClick={() => setPointsMenu("all")}
+                className={
+                  pointsMenu === "all" ? styles.buttonActive : styles.button
+                }
+              >
+                전체
+              </button>
+              <button
+                onClick={() => setPointsMenu("recharge")}
+                className={
+                  pointsMenu === "recharge"
+                    ? styles.buttonActive
+                    : styles.button
+                }
+              >
                 충전내역
               </button>
-              <button onClick={() => setPointsMenu("purchase")}>
+              <button
+                onClick={() => setPointsMenu("purchase")}
+                className={
+                  pointsMenu === "purchase"
+                    ? styles.buttonActive
+                    : styles.button
+                }
+              >
                 구매내역
               </button>
-              <button onClick={() => setPointsMenu("sale")}>판매내역</button>
+              <button
+                onClick={() => setPointsMenu("sale")}
+                className={
+                  pointsMenu === "sale" ? styles.buttonActive : styles.button
+                }
+              >
+                판매내역
+              </button>
             </div>
             <div className={styles.subContent}>
               {pointsMenu === "all" && (
@@ -61,13 +105,25 @@ const ProfilePage = () => {
         return (
           <div className={styles.passwordChange}>
             <div className={styles.inputGroup}>
+              <h3>비밀번호 변경</h3>
               <label>새 비밀번호</label>
-              <input type="password" placeholder="새 비밀번호를 입력하세요" />
+              <input
+                type="password"
+                placeholder="새 비밀번호를 입력하세요"
+                className={styles.input}
+              />
             </div>
             <div className={styles.inputGroup}>
               <label>새 비밀번호 확인</label>
-              <input type="password" placeholder="비밀번호를 다시 입력하세요" />
+              <input
+                type="password"
+                placeholder="비밀번호를 다시 입력하세요"
+                className={styles.input}
+              />
             </div>
+            <button className={styles.passwordChangeButton}>
+              비밀번호 변경
+            </button>
           </div>
         );
 
@@ -83,11 +139,20 @@ const ProfilePage = () => {
           <Image
             src="/image/sampleimg3.jpg"
             alt="Profile"
-            width={0}
-            height={0}
+            width={240}
+            height={240}
             className={styles.profilePhoto}
           />
-          <h2>Yunjeong Lim</h2>
+          <h2 className={styles.profileTitle}>Yunjeong Lim</h2>
+          <div className={styles.pointContainer}>
+            <Image
+              src="/image/Vector.png"
+              alt="Profile"
+              width={20}
+              height={0}
+            />
+            <div>23,000</div>
+          </div>
           <div className={styles.menuContainer}>
             <div className={styles.menu}>
               <p onClick={() => setSelectedMenu("history")}>
