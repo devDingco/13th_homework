@@ -4,11 +4,13 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
+import { jwtConfig } from 'configs/jwt.config';
 
 @Module({
     imports: [
@@ -18,15 +20,11 @@ import { UserRepository } from './repository/user.repository';
         JwtModule.registerAsync({
             imports: [ConfigModule],
             inject: [ConfigService],
-            useFactory: async (configService: ConfigService) => ({
-                secret: configService.get('JWT_SECRET_KEY'),
-                signOptions: {
-                    expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`,
-                },
-            }),
+            useFactory: jwtConfig,
         }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, UserRepository],
+    providers: [AuthService, UserRepository, JwtStrategy],
+    exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

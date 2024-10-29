@@ -7,7 +7,7 @@ import {
     MinLength,
 } from 'class-validator';
 
-export class AuthCredentialsDTO {
+export class userDTO {
     @IsString()
     @IsNotEmpty()
     @IsEmail({}, { message: 'Invalid email format' })

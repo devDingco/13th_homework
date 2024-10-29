@@ -5,9 +5,8 @@ import {
     ConflictException,
     Injectable,
     InternalServerErrorException,
-    NotFoundException,
 } from '@nestjs/common';
-import { AuthCredentialsDTO } from '../dto/auth-credential.dto';
+import { userDTO } from '../dto/user.dto';
 
 @Injectable()
 export class UserRepository {
@@ -16,7 +15,7 @@ export class UserRepository {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async createUser(authCredentialDTO: AuthCredentialsDTO): Promise<User> {
+    async createUser(authCredentialDTO: userDTO): Promise<User> {
         const { email, password } = authCredentialDTO;
         const user = this.userRepository.create({ email, password });
         try {
@@ -31,12 +30,8 @@ export class UserRepository {
     }
 
     async findUser(email: string): Promise<User> {
-        const userInfor = await this.userRepository.findOneBy({
+        return await this.userRepository.findOneBy({
             email,
         });
-
-        if (!userInfor) throw new NotFoundException('is not exist login infor');
-
-        return userInfor;
     }
 }

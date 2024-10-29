@@ -1,9 +1,10 @@
-import { AuthCredentialsDTO } from './dto/auth-credential.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { BcryptService } from 'src/bcrypt/bcrypt.service';
-import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
+import { userDTO } from './dto/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -13,25 +14,27 @@ export class AuthService {
         private readonly bcryptService: BcryptService,
     ) {}
 
-    async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<User> {
+    async signUp(userDTO: userDTO): Promise<User> {
         const password: string = await this.bcryptService.transformPassword(
-            authCredentialsDTO.password,
+            userDTO.password,
         );
         return await this.userRepository.createUser({
-            ...authCredentialsDTO,
+            ...userDTO,
             password,
         });
     }
 
-    async signIn(
-        authCredentialsDTO: AuthCredentialsDTO,
-    ): Promise<{ accessToken: string }> {
-        const { email, password } = authCredentialsDTO;
-        const userData = await this.userRepository.findUser(email);
+    async signIn(userDTO: userDTO): Promise<{ accessToken: string }> {
+        const { email, password } = userDTO;
+        const user: User = await this.userRepository.findUser(email);
 
-        await this.bcryptService.validatePassword(password, userData.password);
+        if (!user) {
+            throw new NotFoundException('is not exist email in database');
+        }
+
+        await this.bcryptService.validatePassword(password, user.password);
         // create access token
-        const payload = { id: userData.id };
+        const payload = { id: user.id };
         const accessToken = this.jwtService.sign(payload);
 
         return { accessToken };
