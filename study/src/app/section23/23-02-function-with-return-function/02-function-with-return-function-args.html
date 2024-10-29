@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>HOF 실습!</title>
+    <script>
+      // 함수 선언식
+      function aaa(apple) {
+        return function bbb(banana) {
+          console.log(banana);
+          console.log(apple);
+        };
+      }
+
+      aaa(100)(500);
+
+      // 실행 결과
+      // 100 => aaa에 넣은 인자값
+      // 500 => bbb에 넣은 인자값
+    </script>
+  </head>
+  <body></body>
+</html>
