@@ -19,7 +19,7 @@ export default function DarkModeBtn(props: IdarkModeBtn) {
 
   return (
     <div
-      className={`fixed overflow-hidden h-12 w-12 bottom-[15%] right-10 rounded-lg z-50 shadow-lg box-content ${
+      className={`fixed overflow-hidden h-12 w-12 top-4 right-4 rounded-lg z-50 shadow-lg box-content ${
         theme === "dark" ? styles.dark : styles.light
       }`}
     >
