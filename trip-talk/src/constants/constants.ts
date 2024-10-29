@@ -10,6 +10,7 @@ export const PLACEHOLDERS: TRecord = {
   address: "주소를 입력해 주세요.",
   detail_address: "상세주소",
   youtubeUrl: "링크를 입력해 주세요.",
+  email: "이메일을 입력해 주세요.",
 };
 
 export const INPUT_CHILDREN: TRecord = {
@@ -28,6 +29,9 @@ export const BUTTON: TRecord = {
   list: "목록으로",
   edit: "수정하기",
   confirm: "확인",
+  search: "검색",
+  login: "로그인",
+  singUp: "회원가입",
 };
 
 export const BOARDS_WRITE: TRecord = {
