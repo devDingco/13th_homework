@@ -1,0 +1,12 @@
+.mypageSection {
+  margin: 40px 20px;
+}
+
+.title {
+  color: #000;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px; /* 128.571% */
+  width: 1000px;
+  margin-bottom: 40px;
+}

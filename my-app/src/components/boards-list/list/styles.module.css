@@ -97,3 +97,15 @@
   display: flex;
   gap: 8px;
 }
+
+.가짜수정용 {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 8px;
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+  position: relative;
+}

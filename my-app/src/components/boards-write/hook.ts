@@ -56,6 +56,8 @@ export const useBoardsWrite = (props) => {
 
   const [youtubeUrl, setYoutubeUrl] = useState("");
 
+  const [images, setImages] = useState("");
+
   // 인풋 패스워드 검사해서 수정할지말지?
   const [isOpen, setIsOpen] = useState(false); // 주소모달 토글기능
 
@@ -126,10 +128,12 @@ export const useBoardsWrite = (props) => {
       title: requireInputs.title || undefined, // 수정할 제목
       contents: requireInputs.contents || undefined, // 수정할 내용
       youtubeUrl: youtubeUrl || undefined,
-      zipcode: zipcode || undefined, // 수정할 우편번호
+      images: images || undefined,
+      zipcode: zipcode || props.data?.fetchBoard.boardAddress?.zipcode, // 수정할 우편번호
       address: address || props.data?.fetchBoard.boardAddress?.addresss, // 수정할 주소
       //TODO 수정했다 안되면 돌려라
-      addressDetail: addressDetail || undefined, // 수정할 상세 주소
+      addressDetail:
+        addressDetail || props.data?.fetchBoard.boardAddress?.addressDetail, // 수정할 상세 주소
 
       // 추가적인 필드도 필요하다면 여기에 포함
     };
@@ -237,6 +241,7 @@ export const useBoardsWrite = (props) => {
           variables: {
             ...requireInputs, // => writer: writer, / password: password, / title: title, / contents: contents,
             youtubeUrl: youtubeUrl,
+            images: [images],
             zipcode: zipcode,
             address: address,
             addressDetail: addressDetail,
@@ -272,5 +277,7 @@ export const useBoardsWrite = (props) => {
     setZipcode,
     data,
     // password,
+    images,
+    setImages,
   };
 };

@@ -16,7 +16,6 @@ export default function BoardsDetail() {
   return (
     <>
       <main className={styles.boardDetail}>
-        <Link href="/boards/new">BoardNew 페이지로 가는 기능</Link>
         <div className={styles.title}>{data?.fetchBoard.title}</div>
 
         <div className={styles.nameAndDate}>
@@ -65,7 +64,7 @@ export default function BoardsDetail() {
 
         <div className={styles.boardImage}>
           <Image
-            src="/images/mainImage.png"
+            src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
             alt="메인이미지"
             className={styles.mainImage}
             width={0}
@@ -90,27 +89,11 @@ export default function BoardsDetail() {
         <div className={styles.goodAndBad}>
           <div className={styles.bad}>
             <HeartBrokenIcon />
-            {/* <Image
-              src="/images/bad.png"
-              alt="싫어요"
-              className={styles.badIcon}
-              width={0}
-              height={0}
-              sizes="100vw"
-            /> */}
 
             <span>24</span>
           </div>
           <div className={styles.good}>
             <FavoriteBorderIcon />
-            {/* <Image
-              src="/images/good.png"
-              alt="좋아요"
-              className={styles.goodIcon}
-              width={0}
-              height={0}
-              sizes="100vw"
-            /> */}
             <span>12</span>
           </div>
         </div>
