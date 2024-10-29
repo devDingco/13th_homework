@@ -33,12 +33,14 @@ export default function CommentWrite() {
             required={true}
             onChange={handleInputChange}
             value={comment.writer}
+            isLabel={true}
           />
           <Input
             id="password"
             required={true}
             onChange={handleInputChange}
             value={comment.password}
+            isLabel={true}
           />
         </div>
         <div className={styles.textarea_wrapper}>

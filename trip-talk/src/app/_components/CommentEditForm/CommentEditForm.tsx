@@ -19,12 +19,14 @@ export default function CommentEditForm(commentData: ICommentData) {
             required={true}
             onChange={handleInputChange}
             defaultValue={commentData.commentData.writer}
+            isLabel={true}
           />
           <Input
             id="password"
             required={true}
             onChange={handleInputChange}
             value={commentData.commentData.password}
+            isLabel={true}
           />
         </div>
         <div className={styles.rating_stars}>

@@ -9,10 +9,11 @@ export default function Input({
   disabled,
   value,
   required,
+  isLabel,
 }: IInputProps) {
   return (
     <div className={styles.input_wrapper}>
-      {id !== "address" && id !== "detail_address" && (
+      {isLabel && (
         <div className={styles.label_wrapper}>
           <label className={styles.label}>{INPUT_CHILDREN[id]}</label>
           {required && <b className={`${styles.required_marker}`}>*</b>}
