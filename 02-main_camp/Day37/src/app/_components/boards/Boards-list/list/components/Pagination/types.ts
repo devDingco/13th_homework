@@ -1,14 +1,7 @@
-import { Exact, FetchBoardsQuery, InputMaybe } from "@/commons/gql/graphql";
-import { ApolloQueryResult } from "@apollo/client";
+import { ISearchParams } from "@/app/_store/boards/store";
+import { FetchBoardsCountQuery } from "@/commons/gql/graphql";
 
 export interface IPaginationProps {
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            page?: InputMaybe<number> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+  boardsCount: FetchBoardsCountQuery | undefined;
+  refetchBoards: (searchParams: ISearchParams, page: number) => void;
 }

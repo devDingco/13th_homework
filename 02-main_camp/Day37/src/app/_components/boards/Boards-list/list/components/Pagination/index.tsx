@@ -13,7 +13,6 @@ export default function Pagination(props: IPaginationProps) {
     onClickPrevPage,
     onClickNextPage,
   } = usePagination(props);
-
   return (
     <div className={styles.paginationContainer}>
       <span className={styles.enabledMovePageButton} onClick={onClickPrevPage}>
