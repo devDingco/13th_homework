@@ -11,11 +11,7 @@ export default function useBoardList() {
     const params = useParams();
     const [삭제함수이름] = useMutation(DeleteBoardDocument);
 
-    const { data } = useQuery(FETCH_BOARDS, {
-        variables: {
-            boardId: String(params.boardId),
-        },
-    });
+    const { data, refetch } = useQuery(FETCH_BOARDS);
 
     const onClickMoveToDetailPage = async (event: any) => {
         Modal.info({
@@ -43,6 +39,7 @@ export default function useBoardList() {
 
     return {
         data,
+        refetch,
         onClickMoveToDetailPage,
         onClickDelete,
     };

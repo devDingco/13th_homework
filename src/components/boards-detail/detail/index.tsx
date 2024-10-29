@@ -9,7 +9,15 @@ export default function BoardsComponentDetail() {
     const { 날짜담는통, data, onClickMoveBoardList, onClickMoveEditPage } =
         useBoardDetail();
     console.log(data?.fetchBoard);
-    const text = <span>{data?.fetchBoard.boardAddress.address}</span>;
+    const text = (
+        <span>
+            {data?.fetchBoard.boardAddress?.address === null ? (
+                <span>{data?.fetchBoard.boardAddress.address}</span>
+            ) : (
+                <span>주소가 등록되지 않았습니다</span>
+            )}
+        </span>
+    );
 
     return (
         <>

@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 
-export default function BoardsComponentListBanner() {
+export default function LayOutBanner() {
     return (
         <>
             <Swiper

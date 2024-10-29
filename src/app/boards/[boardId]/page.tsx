@@ -8,7 +8,6 @@ import BoardsComponentListBanner from '@/components/boards-list/banner';
 export default function BoardsDetailPage() {
     return (
         <>
-            <BoardsComponentListBanner />
             <BoardsComponentDetail />
             <BoardsComponentComment />
             <BoardsComponentCommentList />

@@ -1,5 +1,4 @@
 .layout {
-    
     width: 100%;
     /* height: 656px; */
     border-radius: 8px;
@@ -127,4 +126,28 @@
     font-weight: 300;
     line-height: 20px;
     text-align: center;
+}
+
+.paginationBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.paginationSpan {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: larger;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.paginationSpan:hover {
+    text-decoration: underline;
+}
+
+.active {
+    font-weight: bold;
+    color: orange; /* Change to your desired highlight color */
 }

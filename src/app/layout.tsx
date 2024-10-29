@@ -2,17 +2,20 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 import ApolloSetting from '../commons/settings/apollo-setting';
+import LayOutPage from '../commons/layout/index';
 
 export const metadata: Metadata = {
-    title: '지금 놀자',
-    description: '야놀자를 대채할 플랫폼',
+    title: '축구하자',
+    description: '서울 경기 축구 예약 플랫폼',
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
     return (
         <html lang="ko">
             <body>
-                <ApolloSetting>{props.children}</ApolloSetting>
+                <ApolloSetting>
+                    <LayOutPage>{props.children}</LayOutPage>
+                </ApolloSetting>
             </body>
         </html>
     );
