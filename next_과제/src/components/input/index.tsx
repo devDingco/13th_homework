@@ -90,6 +90,10 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
                   type={type}
                   {...field}
                   ref={ref}
+                  count={{
+                    show: formResister[id]?.maxLength ? true : false,
+                    max: formResister[id]?.maxLength?.value || 0,
+                  }}
                 />
                 {addbutton && addbutton} {/* 추가 버튼 (중복 확인) */}
               </div>
