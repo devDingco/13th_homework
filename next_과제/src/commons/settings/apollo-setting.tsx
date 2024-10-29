@@ -15,18 +15,18 @@ interface IApolloUploadSetting {
   children: React.ReactNode;
 }
 export default function ApolloUploadSetting(props: IApolloUploadSetting) {
+  const { accessToken, setAccessToken } = useAccessTokenStore();
+
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      useAccessTokenStore.getState().setAccessToken(accessToken);
+    if (localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken"));
     }
   }, []);
 
-  const { accessToken } = useAccessTokenStore();
   const uploadLink = createUploadLink({
     uri: `${process.env.NEXT_PUBLIC_SERVER_URI}/graphql`,
     headers: {
-      authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 
