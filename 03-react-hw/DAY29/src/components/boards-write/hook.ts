@@ -15,6 +15,7 @@ import {
   useRef,
   useState,
 } from "react";
+import type { Address } from "react-daum-postcode";
 
 // #region 필수 입력 필드 배열 정의
 const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
@@ -25,8 +26,6 @@ const REQUIRED_FIELDS: (keyof IFormDataProps)[] = [
 ];
 
 export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
-  const [images, setImages] = useState<string[]>(["", "", ""]);
-
   //#region 폼 데이터 상태 관리
   const [formData, setFormData] = useState<IFormDataProps>({
     writer: "",
@@ -93,11 +92,12 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
   // isEdit와 data를 포함시켜 이 값들이 변경될 때만 효과가 실행되도록 함
   //#endregion
 
+  // 모달 열고 닫기
   const onToggleModal = () => {
     setIsopen((prev) => !prev);
   };
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: Address) => {
     console.log("zipcode: ", data.zonecode);
     setFormData((prev) => ({
       ...prev,
@@ -150,11 +150,6 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         },
       });
       const imageUrl = result.data?.uploadFile.url || "";
-      setImages((prev) => {
-        const newImages = [...prev];
-        newImages[index] = imageUrl;
-        return newImages;
-      });
       setFormData((prev) => ({
         ...prev,
         images: prev.images?.map((img, i) => (i === index ? imageUrl : img)),
@@ -193,13 +188,16 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     if (!isButtonEnabled) return;
 
     const variables = {
-      ...formData,
+      // ...formData,
+      title: formData.title,
+      contents: formData.contents,
       boardAddress: {
         zipcode: formData.boardAddress?.zipcode,
         address: formData.boardAddress?.address,
         addressDetail: formData.boardAddress?.addressDetail,
       },
-      images,
+      images: formData.images,
+      youtubeUrl: formData.youtubeUrl,
     };
 
     try {
@@ -235,7 +233,11 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
         // 등록 로직
         createResult = await createBoard({
           variables: {
-            createBoardInput: variables,
+            createBoardInput: {
+              ...variables,
+              writer: formData.writer,
+              password: formData.password,
+            },
           },
         });
         console.log("게시글 등록 성공: ", createResult);
@@ -282,7 +284,6 @@ export default function useBoardForm({ isEdit }: IUseBoardFormProps) {
     onClickImage,
     onChangeFile,
     fileRefs,
-    images,
     setIsopen,
     isOpen,
     handleComplete,

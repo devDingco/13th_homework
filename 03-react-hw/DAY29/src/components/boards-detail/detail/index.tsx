@@ -5,10 +5,28 @@ import useBoardsDetailForm from "./hook";
 import { FavoriteBorder, ThumbDownOutlined } from "@mui/icons-material";
 import { pink } from "@mui/material/colors";
 import UserProfile from "@/components/UserProfile";
+import YouTube, { type YouTubeProps } from "react-youtube";
+
+const STORAGE_URL = "https://storage.googleapis.com";
 
 export default function BoardsDetailForm() {
   const { data, handlePage } = useBoardsDetailForm();
 
+  // 유튜브: react-youtube 설치
+  const opts: YouTubeProps["opts"] = {
+    height: "464",
+    width: "822",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0, // 자동 재생하도록 설정
+      controls: 1, // 플레이어 컨트롤 표시
+      modestbranding: 1, // 모드 Branding 표시
+      rel: 0, // 관련 비디오 표시 안 함
+      playsinline: 1, // 인라인 재생 지원
+    },
+  };
+
+  console.log("사진: ", data?.fetchBoard.images?.[1]);
   return (
     <div className={styles.게시물상세화면상자}>
       {/* 게시글 제목부분 */}
@@ -42,19 +60,35 @@ export default function BoardsDetailForm() {
         <div className={styles.게시글총내용상자}>
           {/* 사진 */}
           <div>
-            <Image
-              src="/images/donggle1.jpeg"
-              alt="고양이사진"
-              width={400}
-              height={531}
-            />
+            {data?.fetchBoard.images
+              ?.filter((image) => image) // 빈 문자열 필터링
+              .map((image, index) => (
+                <Image
+                  key={index}
+                  src={`${STORAGE_URL}/${image}`}
+                  alt={`게시글 이미지 ${index + 1}`}
+                  width={500}
+                  height={300}
+                  style={{ objectFit: "cover" }}
+                />
+              ))}
           </div>
           {/* 게시글 내용 */}
           <pre>{data?.fetchBoard.contents}</pre>
           {/* 게시글 동영상 */}
-          <div className={styles.동영상배경상자}>
-            <div></div>
-          </div>
+
+          {data?.fetchBoard.youtubeUrl && (
+            <div className={styles.동영상배경상자}>
+              <YouTube
+                videoId={
+                  data?.fetchBoard.youtubeUrl
+                    .split("youtu.be/")[1]
+                    ?.split("?")[0]
+                }
+                opts={opts}
+              />
+            </div>
+          )}
           {/* 좋아요 싫어요 상자 */}
           <div className={styles.좋싫상자}>
             {/* 싫어요 상자 */}

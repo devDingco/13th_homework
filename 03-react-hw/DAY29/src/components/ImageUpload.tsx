@@ -5,7 +5,7 @@ interface IImageUploadProps {
   onClickImage: () => void;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
   fileRef: RefObject<HTMLInputElement>;
-  url: string;
+  url: string | undefined;
 }
 
 export default function ImageUpload({

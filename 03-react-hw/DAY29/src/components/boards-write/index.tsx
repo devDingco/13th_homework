@@ -19,7 +19,6 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
     onClickImage,
     onChangeFile,
     fileRefs,
-    images,
     isOpen,
     handleComplete,
     onToggleModal,
@@ -139,11 +138,10 @@ export default function BoardForm({ isEdit }: IBoardFormProps) {
                 onClickImage={() => onClickImage(index)}
                 onChangeFile={(event) => onChangeFile(event, index)}
                 fileRef={fileRefs[index]}
-                url={images[index]}
+                url={formData.images?.[index]}
               />
             ))}
           </div>
-
           {/* MARK: 취소, 등록/수정 버튼 */}
           <div className={styles.취소등록버튼상자}>
             <Button onClick={() => router.back()}>취소</Button>

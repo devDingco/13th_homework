@@ -1,28 +1,60 @@
+import { UpdateBoardCommentDocument } from "./../../../commons/graphql/graphql";
 import {
   CreateBoardCommentDocument,
   FetchBoardCommentsDocument,
 } from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
-export default function useCommentWriter() {
+interface IUseCommentWriterProps {
+  isEdit?: boolean;
+  defaultValue?: {
+    contents: string;
+    rating: number;
+    _id: string;
+    writer: string;
+  };
+  onCancel?: () => void;
+  boardId: string;
+  onSuccess?: () => void;
+}
+
+export default function useCommentWriter(props: IUseCommentWriterProps) {
   //#region 댓글 등록후 초기화
   const INITIAL_COMMENT_DATA = {
     writer: "",
     password: "",
-    rating: 0,
-    contents: "",
+    rating: props.defaultValue?.rating ?? 0,
+    contents: props.defaultValue?.contents ?? "",
   };
 
   // input에 따라 상태 변화
   const [commentData, setCommentData] = useState(INITIAL_COMMENT_DATA);
 
+  // 댓글 수정
+  const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
+
   //그래프큐엘 내용들 보내기
-  const [createBoardComment] = useMutation(CreateBoardCommentDocument);
+  const [createBoardComment] = useMutation(CreateBoardCommentDocument, {
+    onCompleted: () => {
+      // 댓글 작성 완료 후 콜백 실행
+      props.onSuccess?.();
+    },
+  });
 
   const params = useParams();
   const boardId = params.boardId as string;
+
+  useEffect(() => {
+    if (props.defaultValue) {
+      setCommentData((prev) => ({
+        ...prev,
+        contents: props.defaultValue?.contents ?? "",
+        rating: props.defaultValue?.rating ?? 0,
+      }));
+    }
+  }, [props.defaultValue]);
 
   //  typing value will udate 'commentData.writer or ...' to my typing
   const onChange = (event) => {
@@ -59,26 +91,54 @@ export default function useCommentWriter() {
     event.preventDefault(); //폼 제출 기본 동작 방지
 
     try {
-      // 댓글 등록
-      const commentResult = await createBoardComment({
-        variables: {
-          createBoardCommentInput: commentData,
-          boardId,
-        },
-        // 댓글 목록 새로고침
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId },
+      if (props.isEdit) {
+        // 수정 시 비밀번호 검증 먼저 시도
+        try {
+          await updateBoardComment({
+            variables: {
+              updateBoardCommentInput: {
+                contents: commentData.contents,
+                rating: commentData.rating,
+              },
+              password: commentData.password,
+              boardCommentId: props.defaultValue?._id as string,
+            },
+            refetchQueries: [
+              {
+                query: FetchBoardCommentsDocument,
+                variables: { boardId },
+              },
+            ],
+          });
+          alert("댓글이 수정되었습니다.");
+          props.onCancel?.();
+        } catch (error) {
+          if (error instanceof Error) {
+            if (error.message.includes("password")) {
+              alert("비밀번호가 일치하지 않습니다.");
+            } else {
+              alert(error.message);
+            }
+          }
+        }
+      } else {
+        await createBoardComment({
+          variables: {
+            createBoardCommentInput: commentData,
+            boardId,
           },
-        ],
-      });
-      console.log("게시글 댓글 등록 성공: ", commentResult);
-      alert("댓글 등록 성공 🍀");
-      //성공후 댓글 초기화
-      setCommentData(INITIAL_COMMENT_DATA);
+          refetchQueries: [
+            {
+              query: FetchBoardCommentsDocument,
+              variables: { boardId },
+            },
+          ],
+        });
+        alert("댓글이 등록되었습니다. 🍀");
+        setCommentData(INITIAL_COMMENT_DATA);
+      }
     } catch (error) {
-      console.error("게시글 댓글 등록 실패: ", error);
+      console.log("댓글 수정 실패: ", error);
     }
   };
 
