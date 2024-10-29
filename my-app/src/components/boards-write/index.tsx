@@ -9,19 +9,12 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { gql, useMutation } from "@apollo/client";
 import { checkVaildation } from "@/commons/libraries/validation-file";
-
-const UPLOAD_FILE = gql`
-  mutation uploadFile($file: Upload!) {
-    uploadFile(file: $file) {
-      url
-    }
-  }
-`;
+import { UPLOAD_FILE } from "./queries";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
-  const [imageUrl, setImageUrl] = useState("");
+  // const [images, setImages] = useState("");
 
-  const fileRef = useRef();
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
@@ -34,11 +27,11 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
 
     const result = await uploadFile({ variables: { file } });
     console.log(result.data.uploadFile.url);
-    setImageUrl(result.data.uploadFile.url);
+    setImages(result.data.uploadFile.url);
   };
 
   const onClickImage = () => {
-    fileRef.current.click();
+    fileRef.current?.click();
   };
 
   const {
@@ -58,6 +51,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddress,
     setZipcode,
     data,
+    images,
+    setImages,
 
     // password,
   } = useBoardsWrite(props);
@@ -72,7 +67,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
   return (
     <>
       <main className={props.styles.게시물등록섹션}>
-        {/* <Link href="/boards/detail">상세 페이지 이동</Link> */}
         <section className={props.styles.게시물등록}>
           <h1>게시물 {props.isEdit ? "수정" : "등록"}</h1>
         </section>
@@ -179,10 +173,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 className={props.styles.우편번호인풋}
                 type="text"
                 placeholder="01234"
-                defaultValue={
-                  props.isEdit ? data?.fetchBoard.boardAddress.zipcode : ""
+                value={
+                  zipcode || props.data?.fetchBoard.boardAddress?.zipcode || ""
                 }
-                value={zipcode}
+                // value={zipcode}
                 onChange={(event) => setZipcode(event.target.value)}
                 // 시작할때 빈값인가?
                 // 수정할때 값이 오는가?
@@ -211,10 +205,12 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               className={props.styles.풀인풋}
               type="text"
               placeholder="상세주소"
-              defaultValue={
-                data ? data?.fetchBoard.boardAddress.addressDetail : ""
+              value={
+                addressDetail ||
+                props.data?.fetchBoard.boardAddress?.addressDetail ||
+                ""
               }
-              value={addressDetail}
+              // value={addressDetail}
               onChange={(event) => setAddressDetail(event.target.value)} // 입력값을 상태에 저장
             />
           </fieldset>
@@ -244,9 +240,9 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
 
           <fieldset className={props.styles.사진첨부하는곳}>
             <legend>사진 첨부</legend>
-            <div className={props.styles.ex} onClick={onClickImage}>
+            {/* <div className={props.styles.ex} onClick={onClickImage}>
               가짜이미지선택
-            </div>
+            </div> */}
             <input
               type="file"
               onChange={onChangeFile}
@@ -256,10 +252,9 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             />
 
             <div className={props.styles.업로드박스그룹}>
-              <div className={props.styles.업로드박스}>
-                <img src={`https://storage.googleapis.com/${imageUrl}`} />
+              <div className={props.styles.업로드박스} onClick={onClickImage}>
+                <img src={`https://storage.googleapis.com/${images}`} />
                 <Image
-                ₩
                   src="/images/add.png"
                   alt="추가"
                   className={props.styles.addIcon}
@@ -269,7 +264,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 />
                 <div>클릭해서 사진 업로드</div>
               </div>
-              <div className={props.styles.업로드박스}>
+              <div className={props.styles.업로드박스} onClick={onClickImage}>
                 <Image
                   src="/images/add.png"
                   alt="추가"

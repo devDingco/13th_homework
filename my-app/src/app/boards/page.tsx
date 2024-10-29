@@ -27,7 +27,7 @@ export default function board() {
       */}
       {/* <BoardListBanner /> */}
       <Search refetch={refetch} keyword={keyword} setKeyword={setKeyword} />
-      {/* 서로 연결하려면 리패치는 리패치로 연결해야함. 제일 상단에 있는 이 패치보드에서 다 요청*/}
+      {/* 서로 연결하려면 refetch={refetch} 연결해야함. 제일 상단에 있는 이 패치보드에서 다 요청*/}
 
       <div // 껍데기에 이거 하나만 적용할 예정이라서 그냥 인라인으로 만듬. 나중에 CSS늘어나거나 더러우면 따로 만들어서 연결예정
         style={{

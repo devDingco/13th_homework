@@ -8,6 +8,7 @@ export const FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         zipcode
         address

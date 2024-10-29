@@ -109,6 +109,7 @@ export default function Board(props: IBoardProps) {
           </div>
         ))}
       </div>
+
       {/* ------------------------------------------ 페이지네이션 */}
       {/* <div className={props.styles.임시페이지내이션}>
         <span onClick={onClickPrevPage}>이전페이지</span>

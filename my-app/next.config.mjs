@@ -9,7 +9,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["images.dog.ceo"],
+    domains: ["images.dog.ceo", "storage.googleapis.com"], // 기존 도메인에 추가
   },
 };
 

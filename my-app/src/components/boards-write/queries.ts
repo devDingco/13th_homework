@@ -8,6 +8,7 @@ export const CREATE_BOARD = gql`
     $title: String!
     $contents: String!
     $youtubeUrl: String
+    $images: [String!]
     $zipcode: String
     $address: String
     $addressDetail: String
@@ -20,6 +21,7 @@ export const CREATE_BOARD = gql`
         title: $title
         contents: $contents
         youtubeUrl: $youtubeUrl
+        images: $images
         boardAddress: {
           zipcode: $zipcode
           address: $address
@@ -32,6 +34,7 @@ export const CREATE_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         _id
         zipcode
@@ -50,6 +53,7 @@ export const UPDATE_BOARD = gql`
     $password: String
     $boardId: ID!
     $youtubeUrl: String
+    $images: [String!]
     $zipcode: String
     $address: String
     $addressDetail: String
@@ -60,6 +64,7 @@ export const UPDATE_BOARD = gql`
         title: $title
         contents: $contents
         youtubeUrl: $youtubeUrl
+        images: $images
         boardAddress: {
           zipcode: $zipcode
           address: $address
@@ -74,6 +79,7 @@ export const UPDATE_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         _id
         zipcode
@@ -93,11 +99,20 @@ export const FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         zipcode
         address
         addressDetail
       }
+    }
+  }
+`;
+
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
     }
   }
 `;

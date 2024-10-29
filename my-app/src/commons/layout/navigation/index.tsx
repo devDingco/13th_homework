@@ -3,14 +3,24 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LayoutNavigation() {
+  const [selected, setSElected] = useState(""); // nav에서 선택한 항목을 선택함
+
+  const handleClick = (item) => {
+    setSElected(item);
+  };
+
   return (
     <>
       <main className={styles.main}>
         <div className={styles.navLeft}>
           <Link href="/boards">
-            <div className={styles.logoSection}>
+            <div
+              className={styles.logoSection}
+              onClick={() => handleClick("트립토크")} // 로고 클릭 시 "트립토크" 선택
+            >
               <Image
                 src="/images/logo.png"
                 alt="페이지 로고"
@@ -23,11 +33,36 @@ export default function LayoutNavigation() {
           </Link>
 
           <div className={styles.navBar}>
-            <div className={`${styles.navChoice} ${styles.navContents}`}>
-              트립토크
-            </div>
-            <div className={styles.navContents}>숙박권 구매</div>
-            <div className={styles.navContents}>마이 페이지</div>
+            <Link href="/boards">
+              <div
+                className={`${styles.navContents} ${
+                  selected === "트립토크" ? styles.navChoice : ""
+                }`}
+                onClick={() => handleClick("트립토크")}
+              >
+                트립토크
+              </div>
+            </Link>
+            <Link href="/purchase">
+              <div
+                className={`${styles.navContents} ${
+                  selected === "숙박권구매" ? styles.navChoice : ""
+                }`}
+                onClick={() => handleClick("숙박권구매")}
+              >
+                숙박권구매
+              </div>
+            </Link>
+            <Link href="/mypage">
+              <div
+                className={`${styles.navContents} ${
+                  selected === "마이페이지" ? styles.navChoice : ""
+                }`}
+                onClick={() => handleClick("마이페이지")}
+              >
+                마이페이지
+              </div>
+            </Link>
           </div>
         </div>
         <div className={styles.navRight}>
