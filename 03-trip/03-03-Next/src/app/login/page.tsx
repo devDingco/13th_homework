@@ -17,6 +17,7 @@ export default function LoginUI() {
     const {
         isLogIn,
         setIsLogIn,
+        loginError,
         onLoginChange,
         onLoginInClick,
         onSignUpChange,
@@ -42,20 +43,29 @@ export default function LoginUI() {
                                 onClick={() => router.push(`/`)}
                             />
 
-                            <p style={{ fontSize: "2rem", margin: "1rem" }}>
+                            <p style={{ fontSize: "1.8rem", margin: "1rem" }}>
                                 성북 통합 구립도서관 사이트에 오신 것을
                                 환영합니다.
                             </p>
 
                             <Input id="email_ID" onChange={onLoginChange} />
                             <Input id="password_ID" onChange={onLoginChange} />
+                            {loginError && (
+                                <div style={CSSValidText}>
+                                    아이디 또는 비밀번호를 확인해 주세요.
+                                </div>
+                            )}
 
-                            <Button label="로그인" onClick={onLoginInClick} />
-
-                            <Button
-                                label="회원가입"
-                                onClick={() => setIsLogIn((prev) => !prev)}
-                            />
+                            <div style={CSSButtonWrap}>
+                                <Button
+                                    label="로그인"
+                                    onClick={onLoginInClick}
+                                />
+                                <Button
+                                    label="회원가입"
+                                    onClick={() => setIsLogIn((prev) => !prev)}
+                                />
+                            </div>
                         </>
                     ) : (
                         <>
@@ -87,11 +97,16 @@ export default function LoginUI() {
                                 required
                             />
 
-                            <Button
-                                label="취소"
-                                onClick={() => setIsLogIn((prev) => !prev)}
-                            />
-                            <Button label="회원가입" onClick={onSignUpClick} />
+                            <div style={CSSButtonWrap}>
+                                <Button
+                                    label="취소"
+                                    onClick={() => setIsLogIn((prev) => !prev)}
+                                />
+                                <Button
+                                    label="회원가입"
+                                    onClick={onSignUpClick}
+                                />
+                            </div>
                         </>
                     )}
                 </div>
@@ -149,4 +164,13 @@ const CSSLineBG: CSSProperties = {
     position: "absolute",
     right: "28%",
     zIndex: "1",
+};
+
+const CSSButtonWrap = {
+    display: "flex",
+    gap: "2rem",
+};
+
+const CSSValidText = {
+    color: "#f55",
 };

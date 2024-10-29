@@ -20,6 +20,7 @@ export default function useLoginUser() {
         email_ID: "",
         password_ID: "",
     });
+    const [loginError, setLoginError] = useState(false);
 
     //** 회원가입 인풋 관리용 스테이트 */
     const [signUpInput, setSignUpInput] = useState({
@@ -49,23 +50,34 @@ export default function useLoginUser() {
     const [loginUser] = useMutation(LoginUserDocument);
 
     async function onLoginInClick() {
-        const result = await loginUser({
-            variables: {
-                email: loginInput.email_ID,
-                password: loginInput.password_ID,
-            },
-        });
-        console.log(result);
-
-        const token = result.data?.loginUser.accessToken;
-        if (!token) {
-            alert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
+        if (!loginInput.email_ID || !loginInput.password_ID) {
+            return setLoginError(true);
+        } else {
+            setLoginError(false);
         }
-        setToken(token ?? "");
 
-        alert(`로그인 성공
-            ${token}`);
-        router.push(`/`);
+        try {
+            const result = await loginUser({
+                variables: {
+                    email: loginInput.email_ID,
+                    password: loginInput.password_ID,
+                },
+            });
+            console.log(result);
+
+            const token = result.data?.loginUser.accessToken;
+            if (!token) {
+                return alert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
+            }
+            setToken(token ?? "");
+
+            alert(`로그인 성공
+                ${token}`);
+            router.push(`/`);
+        } catch (error) {
+            alert("로그인에 실패하였습니다");
+            console.log(error);
+        }
     }
 
     //** 회원가입 로직 실행, 성공시 로그인으로 */
@@ -90,8 +102,9 @@ export default function useLoginUser() {
 
             setIsLogIn(true);
             router.push(`/login`);
-        } catch {
+        } catch (error) {
             alert("등록에 실패하였습니다. 다시 시도해 주세요.");
+            console.log(error);
         }
     }
 
@@ -99,6 +112,7 @@ export default function useLoginUser() {
     return {
         isLogIn,
         setIsLogIn,
+        loginError,
         onLoginChange,
         onSignUpChange,
         onLoginInClick,
