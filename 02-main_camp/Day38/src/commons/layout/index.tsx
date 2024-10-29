@@ -11,6 +11,7 @@ const HIDDEN_BANNERS = [
   "/boards/[boardId]/edit",
   "/openapis",
   "/myapis/new",
+  "/mypage",
 ];
 
 export default function Layout({ children }: ILayout) {
