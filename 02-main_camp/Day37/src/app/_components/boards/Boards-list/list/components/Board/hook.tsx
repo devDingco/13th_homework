@@ -1,10 +1,16 @@
+import { ISearchParams, useSearchStore } from "@/app/_store/boards/store";
 import { DeleteBoardDocument } from "@/commons/gql/graphql";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
-// 계속 반복되는 타입이 존재함. 어떻게 할래?
-const useBoard = ({ id, refetch }: any) => {
+interface IBoardProps {
+  id: string;
+  refetchBoards: (searchParams: ISearchParams, page: number) => void;
+}
+
+const useBoard = ({ id, refetchBoards }: IBoardProps) => {
+  const { searchParams } = useSearchStore();
   const router = useRouter();
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
@@ -19,12 +25,13 @@ const useBoard = ({ id, refetch }: any) => {
         id: id,
       },
     });
-    refetch({ page: 1 });
+    refetchBoards(searchParams, 1);
   };
 
   return {
     onClickBoard,
     onClickDelete,
+    searchParams,
   };
 };
 

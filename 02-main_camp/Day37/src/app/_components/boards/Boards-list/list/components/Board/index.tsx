@@ -1,34 +1,51 @@
 "use client";
-import { Exact, FetchBoardsQuery, InputMaybe } from "@/commons/gql/graphql";
 import styles from "../styles.module.css";
 import useBoard from "./hook";
-import { ApolloQueryResult } from "@apollo/client";
+import { ISearchParams } from "@/app/_store/boards/store";
+import { convertDateTime } from "@/commons/fomatter/date";
 
-interface IBoard {
+export interface IBoard {
   id: string;
   index: number;
   writer: string;
   title: string;
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            page?: InputMaybe<number> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+  createdAt: string;
+  refetchBoards: (searchParams: ISearchParams) => void;
 }
 
-const Board = ({ id, index, title, writer, refetch }: IBoard) => {
-  const { onClickBoard, onClickDelete } = useBoard({ id, refetch });
+const Board = ({
+  id,
+  index,
+  title,
+  writer,
+  createdAt,
+  refetchBoards,
+}: IBoard) => {
+  const { searchParams, onClickBoard, onClickDelete } = useBoard({
+    id,
+    refetchBoards,
+  });
 
   return (
     <li className={styles.board} onClick={onClickBoard}>
       <p className={styles.board_number}>{index}</p>
-      <p className={styles.board_title}>{title}</p>
+      <p className={styles.board_title}>
+        {title
+          .replaceAll(searchParams.keyword, `@#$${searchParams.keyword}@#$`)
+          .split("@#$")
+          .map((el, index) => (
+            <span
+              key={`${el}_${index}`}
+              style={{
+                color: el === searchParams.keyword ? "red" : "black",
+              }}
+            >
+              {el}
+            </span>
+          ))}
+      </p>
       <p className={styles.board_writer}>{writer}</p>
-      <p className={styles.board_date}>2024.04.01</p>
+      <p className={styles.board_date}>{convertDateTime(createdAt)}</p>
       <button className={styles.board_deleteButton} onClick={onClickDelete}>
         <img src="/assets/delete.png" />
       </button>
