@@ -7,14 +7,14 @@ import { useBoards } from "./hook";
 import SearchBar from "../_components/boards/Boards-list/list/components/Search";
 
 export default function BoardsPage() {
-  const { boards, refetch } = useBoards();
+  const { boards, boardsCount, refetchBoards } = useBoards();
 
   return (
     <div className={styles.mainContainer}>
-      <SearchBar />
+      <SearchBar refetchBoards={refetchBoards} />
       <div className={styles.boardListContainer}>
-        <BoardsList data={boards} refetch={refetch} />
-        <Pagination refetch={refetch} />
+        <BoardsList data={boards} refetchBoards={refetchBoards} />
+        <Pagination boardsCount={boardsCount} refetchBoards={refetchBoards} />
       </div>
     </div>
   );
