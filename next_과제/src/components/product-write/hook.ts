@@ -1,6 +1,10 @@
 import { UploadFileList, IformList } from "./types";
 import { useRouter, useParams } from "next/navigation";
-import { CREATE_TRAVEL_PRODUCT, UPDATE_TRAVEL_PRODUCT } from "./queries";
+import {
+  CreateTravelproductDocument,
+  UpdateTravelproductDocument,
+  FetchTravelproductDocument,
+} from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import type { UploadProps } from "antd";
@@ -8,15 +12,26 @@ import { validationImageFile } from "@/commons/libs/validation-image-file";
 import { useForm } from "react-hook-form";
 import { UploadFileDocument } from "@/commons/graphql/graphql";
 
-export const useProductWrite = (isEdit: boolean) => {
+export const useProductWrite = () => {
   const router = useRouter();
-  const { boardId } = useParams();
+  const { productId }: { productId: string } = useParams();
+  const [tags, setTags] = useState<string[]>([]);
+
+  //!수정할 게시글 데이터 가져오기
+  const { data: travelProductData } = useQuery(FetchTravelproductDocument, {
+    variables: {
+      travelproductId: productId,
+    },
+  });
+
+  const data = travelProductData?.fetchTravelproduct;
 
   const {
     control,
     setValue,
     formState: { errors, isValid, isDirty },
     getValues,
+    watch,
   } = useForm<IformList>({
     mode: "onChange",
   });
@@ -26,64 +41,109 @@ export const useProductWrite = (isEdit: boolean) => {
 
   // !이미지 업로드를 위한 fileList
   const [imgFileList, setImgFileList] = useState<UploadFileList[]>([]);
-  //  useEffect(() => {
-  //    if (data?.fetchBoard.images) {
-  //      setImgFileList(
-  //        data?.fetchBoard.images?.map((url) => ({
-  //          uid: url.replace("https://storage.googleapis.com/", ""),
-  //          name: url.split("/").pop(),
-  //          status: "done",
-  //          url: url.replace("https://storage.googleapis.com/", ""),
-  //        })) as UploadFileList[]
-  //      );
-  //    }
-  //  }, [data]);
-  //  console.log("이미지 파일 리스트", imgFileList);
-
-  //!수정할 게시글 데이터 가져오기
-  // const { data } = useQuery()
+  useEffect(() => {
+    if (data?.images) {
+      setImgFileList(
+        data?.images?.map((url) => ({
+          uid: url.replace("https://storage.googleapis.com/", ""),
+          name: url.split("/").pop(),
+          status: "done",
+          url: url.replace("https://storage.googleapis.com/", ""),
+        })) as UploadFileList[]
+      );
+    }
+    if (data?.tags) {
+      setTags(data?.tags);
+    }
+  }, [data]);
+  console.log("이미지 파일 리스트", imgFileList);
 
   // !게시글 등록 및 수정을 위한 useMutation
-  const [createProduct] = useMutation(CREATE_TRAVEL_PRODUCT);
-  const [updateProduct] = useMutation(UPDATE_TRAVEL_PRODUCT);
+  const [createProduct] = useMutation(CreateTravelproductDocument);
+  const [updateProduct] = useMutation(UpdateTravelproductDocument);
   const [uploadFile] = useMutation(UploadFileDocument);
 
   //! 상품 등록 클릭
   const createProductClick = async () => {
-    const result = await createProduct({
-      variables: {
-        createProductInput: {
-          name: getValues("productName"),
-          remarks: getValues("productRemarks"),
-          contents: getValues("productContents"),
-          tags: getValues("productTags"),
-          images: imgFileList.map((data) => data.url),
+    const {
+      productName,
+      productRemarks,
+      productContents,
+      productPrice,
+      productAddressPost,
+      productAddress,
+      productAddressDetail,
+      productAddressLAT,
+      productAddressLNG,
+    } = getValues();
+
+    const createProductVariables = {
+      createTravelproductInput: {
+        name: productName as string,
+        remarks: productRemarks as string,
+        contents: productContents as string,
+        price: Number(productPrice),
+        tags: tags,
+        travelproductAddress: {
+          zipcode: productAddressPost,
+          address: productAddress,
+          addressDetail: productAddressDetail,
+          lat: Number(productAddressLAT),
+          lng: Number(productAddressLNG),
         },
+        images: imgFileList.map((data) => data.url),
       },
+    };
+
+    const result = await createProduct({
+      variables: createProductVariables,
     });
-    if (result.data?.createProduct._id) {
+
+    if (result.data?.createTravelproduct._id) {
       alert("상품이 등록되었습니다.");
-      router.push(`/product/${result.data?.createProduct._id}`);
+      router.push(`/products/${result.data?.createTravelproduct._id}`);
     }
   };
 
   //! 상품 수정 클릭
   const updateProductClick = async () => {
-    const result = await updateProduct({
-      variables: {
-        updateProductInput: {
-          productId: boardId,
-          name: getValues("productName"),
-          remarks: getValues("productRemarks"),
-          contents: getValues("productContents"),
-          tags: getValues("productTags"),
-          images: imgFileList.map((data) => data.url),
+    const {
+      productName,
+      productRemarks,
+      productContents,
+      productPrice,
+      productAddressPost,
+      productAddress,
+      productAddressDetail,
+      productAddressLAT,
+      productAddressLNG,
+    } = getValues();
+
+    const updateVariables = {
+      updateTravelproductInput: {
+        name: productName as string,
+        remarks: productRemarks as string,
+        contents: productContents as string,
+        price: Number(productPrice),
+        tags: tags,
+        travelproductAddress: {
+          zipcode: productAddressPost,
+          address: productAddress,
+          addressDetail: productAddressDetail,
+          lat: Number(productAddressLAT),
+          lng: Number(productAddressLNG),
         },
+        images: imgFileList.map((data) => data.url),
       },
+      travelproductId: productId,
+    };
+
+    const result = await updateProduct({
+      variables: updateVariables,
     });
-    if (result.data?.updateProduct._id) {
+    if (result.data?.updateTravelproduct._id) {
       alert("상품이 수정되었습니다.");
-      router.push(`/product/${result.data?.updateProduct._id}`);
+      router.push(`/products/${result.data?.updateTravelproduct._id}`);
     }
   };
 
@@ -121,8 +181,11 @@ export const useProductWrite = (isEdit: boolean) => {
         },
       });
 
+      //랜덤한 숫자를 리턴하는 함수
+      const randomNum = String(Math.floor(Math.random() * 100));
+
       newFileItem.status = "done";
-      newFileItem.uid = res.data?.uploadFile.url || "";
+      newFileItem.uid = randomNum || "";
       newFileItem.url = res.data?.uploadFile.url || "";
       setImgFileList([...imgFileList, newFileItem]);
     } catch (err) {
@@ -140,7 +203,6 @@ export const useProductWrite = (isEdit: boolean) => {
     previewOpen,
     setPreviewImage,
     previewImage,
-    boardId,
     errors,
     router,
     setValue,
@@ -148,6 +210,10 @@ export const useProductWrite = (isEdit: boolean) => {
     isDirty,
     setPreviewOpen,
     getValues,
-    // data,
+    data,
+    productId,
+    setTags,
+    tags,
+    watch,
   };
 };

@@ -2,9 +2,9 @@ import { gql } from "@apollo/client";
 
 export const CREATE_TRAVEL_PRODUCT = gql`
   mutation createTravelproduct(
-    $createTravelProductInput: CreateTravelproductInput!
+    $createTravelproductInput: CreateTravelproductInput!
   ) {
-    createTravelproduct(createTravelProductInput: $createTravelProductInput) {
+    createTravelproduct(createTravelproductInput: $createTravelproductInput) {
       _id
     }
   }
