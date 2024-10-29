@@ -15,9 +15,8 @@ export class UserRepository {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async createUser(authCredentialDTO: userDTO): Promise<User> {
-        const { email, password } = authCredentialDTO;
-        const user = this.userRepository.create({ email, password });
+    async createUser(userDTO: userDTO): Promise<User> {
+        const user = this.userRepository.create(userDTO);
         try {
             return await this.userRepository.save(user);
         } catch (error) {

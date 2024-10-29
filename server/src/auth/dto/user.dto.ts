@@ -10,6 +10,10 @@ import {
 export class userDTO {
     @IsString()
     @IsNotEmpty()
+    name: string;
+
+    @IsString()
+    @IsNotEmpty()
     @IsEmail({}, { message: 'Invalid email format' })
     email: string;
 

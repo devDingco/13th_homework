@@ -6,6 +6,8 @@ import {
     Unique,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 @Entity()
 @Unique(['email'])
 export class User extends BaseEntity {
@@ -13,8 +15,12 @@ export class User extends BaseEntity {
     id: number;
 
     @Column()
+    name: string;
+
+    @Column()
     email: string;
 
     @Column()
+    @Exclude()
     password: string;
 }

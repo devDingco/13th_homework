@@ -4,6 +4,7 @@ import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
+import { instanceToPlain } from 'class-transformer';
 import { userDTO } from './dto/user.dto';
 
 @Injectable()
@@ -14,14 +15,15 @@ export class AuthService {
         private readonly bcryptService: BcryptService,
     ) {}
 
-    async signUp(userDTO: userDTO): Promise<User> {
+    async signUp(userDTO: userDTO): Promise<any> {
         const password: string = await this.bcryptService.transformPassword(
             userDTO.password,
         );
-        return await this.userRepository.createUser({
+        const user = await this.userRepository.createUser({
             ...userDTO,
             password,
         });
+        return instanceToPlain(user);
     }
 
     async signIn(userDTO: userDTO): Promise<{ accessToken: string }> {
