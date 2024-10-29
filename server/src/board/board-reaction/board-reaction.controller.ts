@@ -7,7 +7,7 @@ import {
     ParseIntPipe,
 } from '@nestjs/common';
 import { BoardReactionService } from './board-reaction.service';
-import { ResponseMessage } from '../decorators/response-message.decorator';
+import { ResponseMessage } from '../../common/decorators/response-message.decorator';
 
 @Controller('/api/board/:boardId/reaction')
 export class BoardReactionController {

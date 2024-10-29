@@ -7,7 +7,7 @@ import {
     ParseIntPipe,
     Post,
 } from '@nestjs/common';
-import { ResponseMessage } from '../decorators/response-message.decorator';
+import { ResponseMessage } from '../../common/decorators/response-message.decorator';
 import { BoardPasswordService } from './board-password.service';
 import { BoardPasswordDTO } from './dto/board-password.dto';
 

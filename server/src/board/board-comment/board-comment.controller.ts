@@ -15,7 +15,7 @@ import {
 import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDTO } from './dto/update-board-comment.dto';
-import { ResponseMessage } from '../decorators/response-message.decorator';
+import { ResponseMessage } from '../../common/decorators/response-message.decorator';
 
 @Controller('/api/board/:boardId/comment')
 export class BoardCommentController {
