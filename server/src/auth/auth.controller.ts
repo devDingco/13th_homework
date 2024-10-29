@@ -19,7 +19,9 @@ export class AuthController {
     @Post('/login')
     @ResponseMessage('login이 성공적으로 되었습니다.')
     @HttpCode(HttpStatus.OK)
-    login(@Body() authcredentialsDTO: AuthCredentialsDTO) {
+    login(
+        @Body() authcredentialsDTO: AuthCredentialsDTO,
+    ): Promise<{ accessToken: string }> {
         return this.authService.signIn(authcredentialsDTO);
     }
 }

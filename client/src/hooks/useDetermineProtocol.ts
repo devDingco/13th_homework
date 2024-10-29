@@ -18,11 +18,12 @@ export function useDetermineProtocol<T>(
 	if (options.protocol === EProtocol.REST) {
 		const restOptions = options as RestOptions;
 		return (apiCall as RestApiCall<T>)(restOptions.endpoint);
-	} else if (options.protocol === EProtocol.GRAPHQL) {
-		// GraphQL 프로토콜 처리
-		const { variables } = options as GraphQLOptions<T>;
-		return (apiCall as GraphQLApiCall<T>)(variables);
 	}
+	//  else if (options.protocol === EProtocol.GRAPHQL) {
+	// 	// GraphQL 프로토콜 처리
+	// 	const { variables } = options as GraphQLOptions<T>;
+	// 	return (apiCall as GraphQLApiCall<T>)(variables);
+	// }
 
 	throw new Error('올바르지 않은 프로토콜입니다.');
 }

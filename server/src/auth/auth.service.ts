@@ -23,10 +23,17 @@ export class AuthService {
         });
     }
 
-    async signIn(authCredentialsDTO: AuthCredentialsDTO) {
+    async signIn(
+        authCredentialsDTO: AuthCredentialsDTO,
+    ): Promise<{ accessToken: string }> {
         const { email, password } = authCredentialsDTO;
         const userData = await this.userRepository.findUser(email);
 
         await this.bcryptService.validatePassword(password, userData.password);
+        // create access token
+        const payload = { id: userData.id };
+        const accessToken = this.jwtService.sign(payload);
+
+        return { accessToken };
     }
 }

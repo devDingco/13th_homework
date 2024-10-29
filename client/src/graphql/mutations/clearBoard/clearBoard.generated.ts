@@ -1,24 +1,20 @@
-/** @format */
-
-import * as Apollo from '@apollo/client';
-import * as Types from '../../../types';
+import * as Types from '../../types';
 
 import { gql } from '@apollo/client';
-
+import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type ClearBoardMutationVariables = Types.Exact<{ [key: string]: never }>;
+export type ClearBoardMutationVariables = Types.Exact<{ [key: string]: never; }>;
 
-export type ClearBoardMutation = { __typename?: 'Mutation'; clearBoard: boolean };
+
+export type ClearBoardMutation = { __typename?: 'Mutation', clearBoard: boolean };
+
 
 export const ClearBoardDocument = gql`
-	mutation ClearBoard {
-		clearBoard
-	}
-`;
-export type ClearBoardMutationFn = Apollo.MutationFunction<
-	ClearBoardMutation,
-	ClearBoardMutationVariables
->;
+    mutation ClearBoard {
+  clearBoard
+}
+    `;
+export type ClearBoardMutationFn = Apollo.MutationFunction<ClearBoardMutation, ClearBoardMutationVariables>;
 
 /**
  * __useClearBoardMutation__
@@ -36,18 +32,10 @@ export type ClearBoardMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useClearBoardMutation(
-	baseOptions?: Apollo.MutationHookOptions<ClearBoardMutation, ClearBoardMutationVariables>,
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useMutation<ClearBoardMutation, ClearBoardMutationVariables>(
-		ClearBoardDocument,
-		options,
-	);
-}
+export function useClearBoardMutation(baseOptions?: Apollo.MutationHookOptions<ClearBoardMutation, ClearBoardMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ClearBoardMutation, ClearBoardMutationVariables>(ClearBoardDocument, options);
+      }
 export type ClearBoardMutationHookResult = ReturnType<typeof useClearBoardMutation>;
 export type ClearBoardMutationResult = Apollo.MutationResult<ClearBoardMutation>;
-export type ClearBoardMutationOptions = Apollo.BaseMutationOptions<
-	ClearBoardMutation,
-	ClearBoardMutationVariables
->;
+export type ClearBoardMutationOptions = Apollo.BaseMutationOptions<ClearBoardMutation, ClearBoardMutationVariables>;

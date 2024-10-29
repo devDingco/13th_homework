@@ -20,21 +20,22 @@ export default async function BoardItemContainer({ searchParams }: ISearchParams
 	const page = parseInt((searchParams.page as string) || '1');
 	const take = parseInt((searchParams.take as string) || '5');
 
-	// const restOptions: RestOptions = {
-	// 	protocol: EProtocol.REST,
-	// 	endpoint: `${EUrlEndPoint.BOARD}?page=${page}&take=${take}`,
-	// };
-
-	// const data = await useDetermineProtocol(restOptions, commonGet);
-
-	const variables = { page, take };
-
-	const graphQLOptions: GraphQLOptions = {
-		protocol: EProtocol.GRAPHQL,
-		variables,
+	const restOptions: RestOptions = {
+		protocol: EProtocol.REST,
+		endpoint: `${EUrlEndPoint.BOARD}?page=${page}&take=${take}`,
 	};
 
-	const data = await useDetermineProtocol(graphQLOptions, useGetBoardsQuery);
+	const data = await useDetermineProtocol(restOptions, commonGet);
+
+	// const variables = { page, take };
+
+	// const graphQLOptions: GraphQLOptions = {
+	// 	protocol: EProtocol.GRAPHQL,
+	// 	variables,
+	// };
+	// // [ ] tomorrow
+
+	// const data = await useDetermineProtocol(graphQLOptions, useGetBoardsQuery);
 
 	return (
 		<>
