@@ -1,0 +1,41 @@
+#thumbsGallery {
+  width: 844px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: 8fr 2fr;
+  gap: 1.5rem;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.mySwiper {
+  .swiper-slide {
+    width: 100%;
+    height: 100px;
+    opacity: 0.4;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+}
