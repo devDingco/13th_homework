@@ -57,9 +57,9 @@ export default function LoginPage() {
           회원가입
         </Button>
 
-        <Button color="default" variant="outlined" onClick={() => logOut()}>
+        {/* <Button color="default" variant="outlined" onClick={() => logOut()}>
           로그아웃
-        </Button>
+        </Button> */}
       </div>
     </>
   );
