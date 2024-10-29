@@ -4,6 +4,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { AuthCredentialsDTO } from './dto/auth-credential.dto';
 import { BoardService } from 'src/board/board.service';
+import { JwtService } from '@nestjs/jwt';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
 
@@ -12,6 +13,7 @@ export class AuthService {
     constructor(
         private readonly userRepository: UserRepository,
         private readonly boardService: BoardService,
+        private readonly jwtService: JwtService,
     ) {}
 
     async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<User> {
@@ -24,7 +26,7 @@ export class AuthService {
         });
     }
 
-    async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<boolean> {
+    async signIn(authCredentialsDTO: AuthCredentialsDTO) {
         const { email, password } = authCredentialsDTO;
         const userData = await this.userRepository.findUser(email);
         const passwordValidation = await bcrypt.compare(
@@ -34,6 +36,5 @@ export class AuthService {
 
         if (!passwordValidation)
             throw new UnauthorizedException('password is not correct');
-        else return true;
     }
 }

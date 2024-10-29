@@ -30,7 +30,7 @@ export class UserRepository {
         }
     }
 
-    async findUser(email: string) {
+    async findUser(email: string): Promise<User> {
         const userInfor = await this.userRepository.findOneBy({
             email,
         });

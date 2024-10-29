@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { BoardModule } from 'src/board/board.module';
 import { JwtModule } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
@@ -13,6 +14,7 @@ import { UserRepository } from './repository/user.repository';
     imports: [
         TypeOrmModule.forFeature([User], 'PostgreSQL'),
         BoardModule,
+        PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
             imports: [ConfigModule],
             inject: [ConfigService],

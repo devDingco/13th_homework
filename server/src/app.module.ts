@@ -12,6 +12,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { mongoDBConfig } from 'configs/mongoDB.config';
 import { postgreSQLConfig } from 'configs/postgreSQL.config';
+import { BcryptModule } from './bcrypt/bcrypt.module';
 
 @Module({
     imports: [
@@ -38,6 +39,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         BoardPasswordModule,
         BoardCommentModule,
         AuthModule,
+        BcryptModule,
     ],
     controllers: [AppController],
     providers: [AppService],

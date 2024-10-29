@@ -18,8 +18,8 @@ export class AuthController {
 
     @Post('/login')
     @ResponseMessage('login이 성공적으로 되었습니다.')
-    @HttpCode(HttpStatus.CREATED)
-    login(@Body() authcredentialsDTO: AuthCredentialsDTO): Promise<boolean> {
+    @HttpCode(HttpStatus.OK)
+    login(@Body() authcredentialsDTO: AuthCredentialsDTO) {
         return this.authService.signIn(authcredentialsDTO);
     }
 }
