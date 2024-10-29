@@ -48,7 +48,7 @@ export class BoardRepository {
                 `Failed to save the board in database`,
             );
         }
-        delete saveBoard.password;
+
         return saveBoard;
     }
 
@@ -68,15 +68,6 @@ export class BoardRepository {
     async findBoard(boardId: number): Promise<BoardEntity> {
         const findBoard = await this.boardRepository.findOne({
             where: { boardId },
-            select: [
-                'author',
-                'title',
-                'content',
-                'youtubeUrl',
-                'createdAt',
-                'imageUrl',
-                'boardAddressOutput',
-            ],
         });
 
         if (!findBoard) {

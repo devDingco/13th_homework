@@ -28,13 +28,13 @@ export class BoardService {
     async create(
         createBoard: CreateBoardDTO | CreateBoardInput,
     ): Promise<BoardEntity> {
-        const hashPassword = await this.bcryptService.transformPassword(
+        const password = await this.bcryptService.transformPassword(
             createBoard.password,
         );
 
         const board = this.boardRepository.createBoard({
             ...createBoard,
-            password: hashPassword,
+            password,
         });
 
         const boardId =

@@ -6,6 +6,7 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
 import { ObjectId } from 'mongodb';
 
 @Entity('board_comment')
@@ -26,6 +27,7 @@ export class BoardCommentEntity {
     parentId?: string;
 
     @Column()
+    @Exclude()
     password: string;
 
     @Column()

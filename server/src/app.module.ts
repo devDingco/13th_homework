@@ -3,6 +3,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { BcryptModule } from './bcrypt/bcrypt.module';
 import { BoardCommentModule } from './board/board-comment/board-comment.module';
 import { BoardModule } from './board/board.module';
 import { BoardPasswordModule } from './board/board-password/board-password.module';
@@ -10,9 +11,9 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
 import { mongoDBConfig } from 'configs/mongoDB.config';
 import { postgreSQLConfig } from 'configs/postgreSQL.config';
-import { BcryptModule } from './bcrypt/bcrypt.module';
 
 @Module({
     imports: [
@@ -40,6 +41,7 @@ import { BcryptModule } from './bcrypt/bcrypt.module';
         BoardCommentModule,
         AuthModule,
         BcryptModule,
+        UserModule,
     ],
     controllers: [AppController],
     providers: [AppService],
