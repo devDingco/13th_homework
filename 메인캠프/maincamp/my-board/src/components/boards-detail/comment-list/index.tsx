@@ -1,5 +1,5 @@
 import CommentListItem from '../comment-list-item';
-import { IBoardComment, ICommentWrite } from '../comment-write/types';
+import { IBoardComment } from '../comment-write/types';
 import { useCommentList } from './hooks';
 import styles from './styles.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
