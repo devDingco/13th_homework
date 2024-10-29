@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.5.1",
     "@apollo/client": "^3.11.8",
     "@graphql-codegen/cli": "^5.0.2",
+    "@react-icons/all-files": "^4.1.0",
     "antd": "^5.21.2",
     "apollo-upload-client": "^18.0.1",
     "firebase": "^10.14.1",

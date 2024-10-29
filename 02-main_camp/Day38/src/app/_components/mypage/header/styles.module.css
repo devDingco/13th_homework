@@ -1,0 +1,20 @@
+.customListHeaderContainer {
+  display: flex;
+  gap: 0.5rem;
+
+  padding: 1rem 1.5rem;
+}
+
+.headerItem {
+  width: 6.25rem;
+  color: #1c1c1c;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.headerItem_main {
+  flex-grow: 1;
+  color: #1c1c1c;
+  font-weight: 500;
+  font-size: 1rem;
+}

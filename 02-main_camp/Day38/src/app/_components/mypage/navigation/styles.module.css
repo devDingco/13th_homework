@@ -1,0 +1,21 @@
+.navigationContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.item {
+  background-color: #ffffff;
+
+  color: #525252;
+  font-weight: 500;
+  font-size: 1rem;
+
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.selectedItem {
+  background-color: black;
+  color: #ffffff;
+  font-weight: 500;
+}
