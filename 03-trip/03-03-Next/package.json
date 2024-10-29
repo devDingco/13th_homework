@@ -23,7 +23,8 @@
         "react-infinite-scroll-component": "^6.1.0",
         "react-youtube": "^10.1.0",
         "styled-components": "^6.1.13",
-        "swiper": "^11.1.14"
+        "swiper": "^11.1.14",
+        "zustand": "^5.0.0"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "^5.0.2",

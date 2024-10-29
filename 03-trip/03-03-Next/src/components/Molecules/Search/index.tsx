@@ -43,8 +43,8 @@ const UtilBarStyle = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100rem",
-    marginTop: "4rem",
+    width: "110rem",
+    marginTop: "2rem",
 };
 
 const SearchBarStyle = {

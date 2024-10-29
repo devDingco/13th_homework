@@ -41,7 +41,7 @@ export default function AddressFieldUI({ ...props }) {
                     <Button onClick={onToggleModal}>주소 검색</Button>
                 </div>
                 <Input
-                    id="address00_ID"
+                    id="address_ID"
                     onClick={onToggleModal}
                     value={
                         isEdit && addressData === undefined
@@ -51,7 +51,7 @@ export default function AddressFieldUI({ ...props }) {
                     disabled={isModalOpen}
                 />
                 <Input
-                    id="address01_ID"
+                    id="addressDetail_ID"
                     onChange={onChange}
                     value={
                         isEdit && addressData === undefined

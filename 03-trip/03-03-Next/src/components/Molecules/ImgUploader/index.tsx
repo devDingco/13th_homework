@@ -23,7 +23,7 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
                         alt="#yourImage"
                         width={120}
                         height={120}
-                        style={{ objectFit: "cover" }}
+                        style={{ objectFit: "cover", overflow: "clip" }}
                     />
                 )}
                 <input
