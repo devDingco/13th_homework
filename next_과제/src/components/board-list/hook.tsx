@@ -137,8 +137,6 @@ export const useBoardList = () => {
     deleteBoard: data?.fetchBoards[idx]._id || "",
   }));
 
-  console.log("게시판리스트", data?.fetchBoards);
-
   const columns: TableProps<DataType>["columns"] = [
     {
       title: "번호",

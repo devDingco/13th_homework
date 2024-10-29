@@ -29,8 +29,6 @@ export const useBoardList = () => {
     },
   });
 
-  console.log("상품", data);
-
   const { data: countData } = useQuery(FetchBoardsCountDocument, {
     variables: {
       search: search,
@@ -131,8 +129,6 @@ export const useBoardList = () => {
     createdAt: dateViewSet(data?.fetchBoards[idx].createdAt),
     deleteBoard: data?.fetchBoards[idx]._id || "",
   }));
-
-  console.log("게시판리스트", data?.fetchBoards);
 
   const columns: TableProps<DataType>["columns"] = [
     {
