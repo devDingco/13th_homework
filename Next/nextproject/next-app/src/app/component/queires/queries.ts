@@ -158,3 +158,33 @@ export const UPLOAD_FILE = gql`
     }
   }
 `;
+
+// 회원가입 ========== ^^
+export const CREATE_USER = gql`
+  mutation createUser($createUserInput: CreateUserInput!) {
+    createUser(createUserInput: $createUserInput) {
+      _id
+      email
+      name
+    }
+  }
+`;
+
+// 로그인
+export const LOGIN = gql`
+  mutation loginUser($password: String!, $email: String!) {
+    loginUser(password: $password, email: $email) {
+      accessToken
+    }
+  }
+`;
+
+export const FETCHUSER = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+    }
+  }
+`;

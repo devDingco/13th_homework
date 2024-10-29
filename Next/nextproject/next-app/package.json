@@ -34,7 +34,8 @@
     "react-youtube": "^10.1.0",
     "swiper": "^11.1.14",
     "ts-node": "^10.9.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

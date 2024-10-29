@@ -3,11 +3,36 @@ import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { UseLayout } from "./hook";
+import { Dropdown, MenuProps, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+
 export default function NavigationPage() {
   const router = useRouter();
   const onClickMain = () => {
     router.push("../../../../boards");
   };
+  const { data, onClickLogin } = UseLayout();
+  console.log(data);
+
+  const items: MenuProps["items"] = [
+    {
+      label: <a href="../../../component/mypage">1st menu item</a>,
+      key: "0",
+    },
+    {
+      label: <a href="https://www.aliyun.com">2nd menu item</a>,
+      key: "1",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: "3rd menu item",
+      key: "3",
+    },
+  ];
+  console.log(data?.fetchUserLoggedIn._id);
   return (
     <>
       <div className={styles.css_navbox}>
@@ -31,20 +56,30 @@ export default function NavigationPage() {
           </div>
 
           <div className={styles.css_user}>
-            <Image
-              src="/assets/Profile.png"
-              alt="user"
-              width={30}
-              height={10}
-              sizes="100vw"
-            />
-            <Image
-              src="/assets/Down_arrow.png"
-              alt="arrow"
-              width={30}
-              height={20}
-              sizes="100vw"
-            />
+            {data?.fetchUserLoggedIn._id ? (
+              <>
+                <Image
+                  src="/assets/Profile.png"
+                  alt="user"
+                  width={30}
+                  height={10}
+                  sizes="100vw"
+                />
+                <Dropdown menu={{ items }} trigger={["click"]}>
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <DownOutlined />
+                    </Space>
+                  </a>
+                </Dropdown>
+              </>
+            ) : (
+              <>
+                <button className={styles.css_loginbtn} onClick={onClickLogin}>
+                  로그인
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

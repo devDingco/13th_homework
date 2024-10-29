@@ -1,8 +1,8 @@
-import My from "./my";
+import MyInfo from "./myinfo";
 export default function MyPage() {
   return (
     <>
-      <My />
+      <MyInfo />
     </>
   );
 }
