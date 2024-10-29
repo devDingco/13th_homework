@@ -1,7 +1,8 @@
 import MainSlide from "@/components/main-slide";
 import AccommodationList from "@/components/accommodation-list";
 import AccommodationRecommended from "@/components/accommodation-recommended";
-import LineBanner from "@/components/line-banner";
+import AccommodationLineBanner from "@/components/accommodation-line-banner";
+import RecentViewProducts from "@/components/accommodation-recent";
 
 export default function BuyTicketPage() {
   return (
@@ -10,9 +11,10 @@ export default function BuyTicketPage() {
       <div className="mainContent">
         <div className="flex flex-col gap-12">
           <AccommodationRecommended />
-          <LineBanner />
+          <AccommodationLineBanner />
           <AccommodationList />
         </div>
+        <RecentViewProducts />
       </div>
     </>
   );
