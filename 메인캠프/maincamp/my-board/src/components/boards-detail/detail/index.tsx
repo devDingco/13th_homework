@@ -64,7 +64,7 @@ export default function BoardsDetail() {
           <p className="text-black prose-r_16_24">
             {data?.fetchBoard.contents || ''}
           </p>
-          {data?.fetchBoard.images?.map((imageUrl: string[], index: number) => (
+          {data?.fetchBoard.images?.map((imageUrl: string, index: number) => (
             <div key={index}>
               <Image
                 className="h-auto"

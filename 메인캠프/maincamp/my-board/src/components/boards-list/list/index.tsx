@@ -52,6 +52,7 @@ export function BoardsList() {
     <div className="w-full max-w-4xl mx-auto shadow-lg py-8 px-6 mt-8 bg-white rounded-2xl">
       <div className="flex justify-between mb-5">
         <div className="flex gap-2">
+          {/* 날짜 구현해야함 */}
           <SearchTimeComponent onChangeDateSearch={onChangeDateSearch} />
           <SearchComponent onChangeSearch={onChangeSearch} />
         </div>
