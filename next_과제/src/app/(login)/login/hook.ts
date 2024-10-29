@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER, LOGOUT_USERS } from "./queries";
+import { useAccessTokenStore } from "@/commons/stores/access-token";
 
 export const useLoginPage = () => {
   const [loginUser] = useMutation(LOGIN_USER);
   const [logoutUser] = useMutation(LOGOUT_USERS);
+
+  const { setAccessToken } = useAccessTokenStore();
 
   const router = useRouter();
 
@@ -16,10 +19,8 @@ export const useLoginPage = () => {
 
   //! 로그아웃 함수
   const logOut = async () => {
-    await logoutUser().then((res) => {
-      console.log(res);
-      localStorage.removeItem("accessToken");
-    });
+    const result = await logoutUser();
+    console.log(result);
   };
 
   //! 로그인 제출 함수
@@ -30,23 +31,22 @@ export const useLoginPage = () => {
       return alert("이메일과 비밀번호를 입력해 주세요.");
     }
 
-    // 1. 로그인 요청
-    await loginUser({
-      variables: {
-        email,
-        password,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        const accessToken = res.data.loginUser.accessToken;
-        localStorage.setItem("accessToken", accessToken);
-        router.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("이메일과 비밀번호를 확인해 주세요.");
+    try {
+      // 1. 로그인 요청
+      const result = await loginUser({
+        variables: {
+          email,
+          password,
+        },
       });
+
+      // 2. 로그인 성공 시
+      setAccessToken(result.data?.loginUser.accessToken);
+      localStorage.setItem("accessToken", result.data?.loginUser.accessToken);
+    } catch (e) {
+      console.log("에러 확인: ", e);
+      alert("로그인에 실패했습니다.");
+    }
   };
 
   return { control, signInSubmit, router, logOut };
