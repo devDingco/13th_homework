@@ -4,84 +4,43 @@ import {
     Injectable,
     NestInterceptor,
 } from '@nestjs/common';
-import {
-    IDeleteResponse,
-    IResponseInterceptor,
-} from '../types/interceptor.interface';
 
-import { GqlContextType } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
-import { Reflector } from '@nestjs/core';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class TransformBoardInterceptor<T>
-    implements NestInterceptor<T, IResponseInterceptor<T> | IDeleteResponse>
-{
-    constructor(private readonly reflector: Reflector) {}
-
+export class TransformBoardInterceptor<T> implements NestInterceptor<T, any> {
     intercept(
         context: ExecutionContext,
         next: CallHandler<any>,
-    ): Observable<IResponseInterceptor<T> | IDeleteResponse> {
-        const message = this.reflector.get<string>(
-            'response-message',
-            context.getHandler(),
-        );
-
-        const statusCode = context.switchToHttp().getResponse().statusCode;
-
+    ): Observable<any> {
         return next.handle().pipe(
             map((data) => {
-                if (context.getType<GqlContextType>() === 'graphql') {
-                    return { data };
-                } else if (context.getType() === 'http') {
-                    if (data.password) {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        const { password, ...rest } = data;
-                        data = rest;
-                    }
-
-                    if (Array.isArray(data)) {
-                        if (data.length === 0)
-                            return { message, statusCode, data };
-                        if (data[0].password) {
-                            data = data.map((item) => {
-                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                                const { password, ...rest } = item;
-                                return rest;
-                            });
-                        }
-                        if (data[0].rating) {
-                            return { message, statusCode, data };
-                        }
-
-                        const deleteIdData = data.map((item) =>
-                            this.removeSensitiveData(item),
-                        );
-                        return { message, statusCode, data: deleteIdData };
-                    } else if (typeof data === 'object' && data !== null) {
-                        if (data.rating) {
-                            return { message, statusCode, data };
-                        }
-                        const deleteIdData = this.removeSensitiveData(data);
-                        return { message, statusCode, data: deleteIdData };
-                    } else if (typeof data === 'number') {
-                        return { message, statusCode, data };
-                    } else {
-                        return { message, statusCode };
-                    }
+                if (Array.isArray(data.result)) {
+                    const sanitizedResult = data.result.map((item) =>
+                        this.removeSensitiveData(item),
+                    );
+                    return {
+                        ...data,
+                        result: sanitizedResult,
+                    };
                 }
+
+                if (typeof data === 'object' && data !== null) {
+                    return this.removeSensitiveData(data);
+                }
+
+                return data;
             }),
         );
     }
+
     private removeSensitiveData(item: any): any {
-        if (item && item._id) {
+        if (item && typeof item === 'object') {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { _id, ...rest } = item;
             return rest;
         }
-
         return item;
     }
 }

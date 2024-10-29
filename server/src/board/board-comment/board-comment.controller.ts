@@ -9,7 +9,6 @@ import {
     HttpStatus,
     ParseIntPipe,
     Put,
-    UseInterceptors,
     Query,
     DefaultValuePipe,
 } from '@nestjs/common';
@@ -17,9 +16,7 @@ import { BoardCommentService } from './board-comment.service';
 import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
 import { UpdateBoardCommentDTO } from './dto/update-board-comment.dto';
 import { ResponseMessage } from '../decorators/response-message.decorator';
-import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
-@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board/:boardId/comment')
 export class BoardCommentController {
     constructor(private readonly boardCommentService: BoardCommentService) {}

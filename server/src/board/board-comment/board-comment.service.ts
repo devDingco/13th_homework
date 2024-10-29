@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 
 import { BoardCommentEntity } from './entity/board-comment.entity';
-import { BoardCommentRepository } from './board-comment.repository';
+import { BoardCommentRepository } from './repository/board-comment.repository';
 import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
 import { BoardRepository } from '../repository/board.repository';
 import { BoardService } from '../board.service';

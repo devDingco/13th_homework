@@ -5,13 +5,10 @@ import {
     HttpCode,
     HttpStatus,
     ParseIntPipe,
-    UseInterceptors,
 } from '@nestjs/common';
 import { BoardReactionService } from './board-reaction.service';
 import { ResponseMessage } from '../decorators/response-message.decorator';
-import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
-@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board/:boardId/reaction')
 export class BoardReactionController {
     constructor(private readonly boardReactionService: BoardReactionService) {}

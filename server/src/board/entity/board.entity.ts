@@ -7,6 +7,8 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
+import { BoardAddressDTO } from '../dto/board-addresss.dto';
+
 @Entity('board')
 export class BoardEntity {
     @ObjectIdColumn()
@@ -30,11 +32,8 @@ export class BoardEntity {
     @Column({ nullable: true })
     youtubeUrl?: string;
 
-    @Column({ nullable: true })
-    address?: string;
-
-    @Column({ nullable: true })
-    detailAddress?: string;
+    @Column({ type: 'json', nullable: true })
+    boardAddressOutput?: BoardAddressDTO;
 
     @Column()
     boardId: number;

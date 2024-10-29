@@ -9,6 +9,14 @@ export const api: AxiosInstance = axios.create({
 		'Content-Type': 'application/json',
 	},
 });
+export enum EUrlEndPoint {
+	BOARD = '/board',
+	BOARDS = '/boards',
+	NEW = '/new',
+	EDIT = '/edit',
+	COMMENT = '/comment',
+	REACTION = '/reaction',
+}
 
 export const boardUrlEndPoint = '/board';
 export const boardsUrlEndPoint = `${boardUrlEndPoint}s`;

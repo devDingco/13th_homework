@@ -6,7 +6,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 
-import { BoardCommentRepository } from './board-comment/board-comment.repository';
+import { BoardCommentRepository } from './board-comment/repository/board-comment.repository';
 import { BoardEntity } from './entity/board.entity';
 import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
 import { BoardReactionRepository } from './board-reaction/repository/boardReactionRepository';
@@ -101,7 +101,9 @@ export class BoardService {
     }
 
     async transformPassword(password: string): Promise<string> {
-        return await bcrypt.hash(password, 10);
+        const salt = await bcrypt.genSalt();
+
+        return await bcrypt.hash(password, salt);
     }
 
     async checkBoardEntityCount(page: number, take: number) {
