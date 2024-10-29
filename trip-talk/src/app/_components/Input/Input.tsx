@@ -19,17 +19,15 @@ export default function Input({
           {required && <b className={`${styles.required_marker}`}>*</b>}
         </div>
       )}
-
       <input
         className={styles.input}
         id={id}
-        type={id === "password" ? "password" : "text"}
+        type={id.toLowerCase().includes("password") ? "password" : "text"}
         placeholder={PLACEHOLDERS[id]}
         onChange={onChange}
         defaultValue={defaultValue}
         disabled={disabled}
         value={value}
-        required={required}
       />
     </div>
   );
