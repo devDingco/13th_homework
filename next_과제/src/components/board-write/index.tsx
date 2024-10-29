@@ -134,7 +134,8 @@ export default function BoardWrite(props: IboardFormProps) {
               setzonecode={(field, value) =>
                 setValue("writeAddressPost", value)
               }
-              btnstyle="btn btn-outline"
+              addressKeyName="writeAddress"
+              addressPostKeyName="writeAddressPost"
             />
           </div>
 

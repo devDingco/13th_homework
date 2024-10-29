@@ -196,10 +196,7 @@ export const useBoardWrite = (formType: string) => {
     // setPreviewOpen(true);
   };
 
-  const handleChangeImg: UploadProps["onChange"] = async ({
-    file,
-    fileList: _fileList,
-  }) => {
+  const handleChangeImg: UploadProps["onChange"] = async ({ file }) => {
     if (!file) {
       return;
     }
