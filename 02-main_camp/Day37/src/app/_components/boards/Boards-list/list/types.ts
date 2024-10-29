@@ -1,15 +1,7 @@
-import { Exact, FetchBoardsQuery, InputMaybe } from "@/commons/gql/graphql";
-import { ApolloQueryResult } from "@apollo/client";
+import { ISearchParams } from "@/app/_store/boards/store";
+import { FetchBoardsQuery } from "@/commons/gql/graphql";
 
 export interface IBoardsListProps {
   data?: FetchBoardsQuery;
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            page?: InputMaybe<number> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+  refetchBoards: (searchParams: ISearchParams) => void;
 }

@@ -4,7 +4,7 @@ import Board from "@/app/_components/boards/Boards-list/list/components/Board";
 import BoardsHeader from "@/app/_components/boards/Boards-list/list/components/BoardHeader";
 import { IBoardsListProps } from "./types";
 
-const BoardsList = ({ data, refetch }: IBoardsListProps) => {
+const BoardsList = ({ data, refetchBoards }: IBoardsListProps) => {
   return (
     <div className={styles.boards_RootContainer}>
       <main className={styles.boards_MainContainer}>
@@ -17,7 +17,8 @@ const BoardsList = ({ data, refetch }: IBoardsListProps) => {
               index={index + 1}
               title={el.title}
               writer={el.writer ?? ""}
-              refetch={refetch}
+              createdAt={el.createdAt}
+              refetchBoards={refetchBoards}
             />
           ))}
         </ul>
