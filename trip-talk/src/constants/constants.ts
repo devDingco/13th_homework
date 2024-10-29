@@ -11,6 +11,8 @@ export const PLACEHOLDERS: TRecord = {
   detail_address: "상세주소",
   youtubeUrl: "링크를 입력해 주세요.",
   email: "이메일을 입력해 주세요.",
+  name: "이름을 입력해 주세요.",
+  checkPassword: "비밀번호를 한 번 더 입력해 주세요.",
 };
 
 export const INPUT_CHILDREN: TRecord = {
@@ -19,6 +21,9 @@ export const INPUT_CHILDREN: TRecord = {
   title: "제목",
   zip_code: "주소",
   youtubeUrl: "유튜브 링크",
+  name: "이름",
+  email: "이메일",
+  checkPassword: "비밀번호 확인",
 };
 
 export const BUTTON: TRecord = {
