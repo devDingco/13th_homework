@@ -1,11 +1,10 @@
-import * as bcrypt from 'bcrypt';
-
 import {
     BadRequestException,
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
 
+import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { BoardCommentRepository } from './board-comment/repository/board-comment.repository';
 import { BoardEntity } from './entity/board.entity';
 import { BoardIdCounterRepository } from './repository/board-id-counter.repository';
@@ -24,11 +23,14 @@ export class BoardService {
         private readonly boardIdCounterRepository: BoardIdCounterRepository,
         private readonly boardReactionRepository: BoardReactionRepository,
         private readonly boardCommentRepository: BoardCommentRepository,
+        private readonly bcryptService: BcryptService,
     ) {}
     async create(
         createBoard: CreateBoardDTO | CreateBoardInput,
     ): Promise<BoardEntity> {
-        const hashPassword = await this.transformPassword(createBoard.password);
+        const hashPassword = await this.bcryptService.transformPassword(
+            createBoard.password,
+        );
 
         const board = this.boardRepository.createBoard({
             ...createBoard,
@@ -98,12 +100,6 @@ export class BoardService {
         await this.boardCommentRepository.clearComment();
 
         return true;
-    }
-
-    async transformPassword(password: string): Promise<string> {
-        const salt = await bcrypt.genSalt();
-
-        return await bcrypt.hash(password, salt);
     }
 
     async checkBoardEntityCount(page: number, take: number) {

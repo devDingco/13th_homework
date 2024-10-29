@@ -1,3 +1,4 @@
+import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 import { BoardCommentEntity } from './board-comment/entity/board-comment.entity';
 import { BoardCommentRepository } from './board-comment/repository/board-comment.repository';
 import { BoardController } from './board.controller';
@@ -25,6 +26,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             'MongoDB',
         ),
         BoardReactionModule,
+        BcryptModule,
     ],
     controllers: [BoardController],
     providers: [

@@ -2,7 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { BoardModule } from 'src/board/board.module';
+import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 import { JwtModule } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
@@ -13,7 +13,7 @@ import { UserRepository } from './repository/user.repository';
 @Module({
     imports: [
         TypeOrmModule.forFeature([User], 'PostgreSQL'),
-        BoardModule,
+        BcryptModule,
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
             imports: [ConfigModule],
