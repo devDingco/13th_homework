@@ -2,10 +2,11 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
-import { CREATE_USER } from "./queries";
+// import { CREATE_USER } from "./queries";
+import { CreateUserDocument } from "@/commons/graphql/graphql";
 
 export const useJoinPage = () => {
-  const [createUser] = useMutation(CREATE_USER);
+  const [createUser] = useMutation(CreateUserDocument);
 
   const router = useRouter();
   const {
