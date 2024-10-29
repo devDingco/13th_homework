@@ -5,8 +5,8 @@ import styles from "./index.module.scss";
 import { ItagInputProps } from "./types";
 
 const TagInput: React.FC<ItagInputProps> = (props) => {
-  const { title, required } = props;
-  const [tags, setTags] = useState<string[]>([]);
+  const { title, required, setTags, tags } = props;
+  // const [tags, setTags] = useState<string[]>([]);
 
   const [inputValue, setInputValue] = useState("");
   const [InputVisible, setInputVisible] = useState(true);
