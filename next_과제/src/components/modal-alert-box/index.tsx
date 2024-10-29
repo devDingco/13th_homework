@@ -80,6 +80,12 @@ export default function ModalAlertBox(props: ImodalContent) {
         <CheckCircleFilled style={{ fontSize: "40px", color: "#ff4d4f" }} />
       ),
     },
+    commentNewErrorUnknown: {
+      contents: "예상치 못한 오류가 발생하였습니다.",
+      icon: (
+        <CheckCircleFilled style={{ fontSize: "40px", color: "#ff4d4f" }} />
+      ),
+    },
   };
   return (
     <Modal
