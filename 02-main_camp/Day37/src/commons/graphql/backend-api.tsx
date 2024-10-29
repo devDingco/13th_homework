@@ -2,8 +2,18 @@ import { gql } from "@apollo/client";
 
 // 게시판 목록
 export const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
+  query fetchBoards(
+    $page: Int
+    $search: String
+    $startDate: DateTime
+    $endDate: DateTime
+  ) {
+    fetchBoards(
+      page: $page
+      search: $search
+      startDate: $startDate
+      endDate: $endDate
+    ) {
       _id
       writer
       title
@@ -13,8 +23,12 @@ export const FETCH_BOARDS = gql`
 `;
 
 export const FETCH_BOARDS_COUNT = gql`
-  query fetchBoardsCount {
-    fetchBoardsCount
+  query fetchBoardsCount(
+    $search: String
+    $startDate: DateTime
+    $endDate: DateTime
+  ) {
+    fetchBoardsCount(search: $search, startDate: $startDate, endDate: $endDate)
   }
 `;
 
