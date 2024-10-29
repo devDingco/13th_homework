@@ -3,10 +3,11 @@ import ReactQuill, { Quill } from "react-quill-new";
 import QuillResizeImage from "quill-resize-image";
 import QuillImageDropAndPaste from "quill-image-drop-and-paste";
 import { useReactQuillBox } from "./hook";
-import React, { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import styles from "./index.module.scss";
 import "react-quill-new/dist/quill.snow.css";
 import { ReactQuillBoxProps } from "./types";
+import { useState } from "react";
 
 Quill.register("modules/imageDropAndPaste", QuillImageDropAndPaste);
 Quill.register("modules/resize", QuillResizeImage);
@@ -16,6 +17,15 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
     const quillRef = useRef<ReactQuill>(null);
     const { id, title, onChange, readonly, errormessage, ...rest } = props;
     const { imageHandler } = useReactQuillBox();
+
+    useEffect(() => {
+      if (ref) {
+        if (quillRef.current) {
+          (ref as React.MutableRefObject<ReactQuill>).current =
+            quillRef.current;
+        }
+      }
+    }, []);
 
     // const formats = ["header", "size", "link", "image", "video"];
 
@@ -118,6 +128,7 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
           readOnly={readonly}
           placeholder={props.placeholder}
           // defaultValue={props.defaultValue}
+          // value={props.defaultValue}
           {...rest}
         />
         {errormessage && <p className="toolTip">{errormessage}</p>}
