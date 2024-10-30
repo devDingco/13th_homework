@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Menu } from "antd";
 import Image from "next/image";
 import { Button } from "antd";
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { useHeader } from "./hook";
 import styles from "./index.module.scss";
 

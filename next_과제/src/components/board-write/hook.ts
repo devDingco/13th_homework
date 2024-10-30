@@ -16,7 +16,7 @@ import {
 } from "@/commons/graphql/graphql";
 import { message } from "antd";
 
-export const useBoardWrite = (formType: string) => {
+export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
   const params = useParams() as { boardId: string };
 
@@ -34,7 +34,7 @@ export const useBoardWrite = (formType: string) => {
   // !수정할 게시글 데이터 가져오기
   const { data } = useQuery(FetchBoardDocument, {
     variables: { boardId: params.boardId },
-    skip: !(params.boardId && formType === "edit"),
+    skip: !(params.boardId && isEdit),
   });
 
   // !이미지 업로드를 위한 fileList
@@ -196,10 +196,7 @@ export const useBoardWrite = (formType: string) => {
     // setPreviewOpen(true);
   };
 
-  const handleChangeImg: UploadProps["onChange"] = async ({
-    file,
-    fileList: _fileList,
-  }) => {
+  const handleChangeImg: UploadProps["onChange"] = async ({ file }) => {
     if (!file) {
       return;
     }
@@ -233,8 +230,11 @@ export const useBoardWrite = (formType: string) => {
         },
       });
 
+      //랜덤한 숫자를 리턴하는 함수
+      const randomNum = String(Math.floor(Math.random() * 100));
+
       newFileItem.status = "done";
-      newFileItem.uid = res.data?.uploadFile.url || "";
+      newFileItem.uid = randomNum || "";
       newFileItem.url = res.data?.uploadFile.url || "";
       setImgFileList([...imgFileList, newFileItem]);
     } catch (err) {

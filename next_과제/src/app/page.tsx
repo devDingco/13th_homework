@@ -1,6 +1,6 @@
 "use client";
 
-import MainSlide from "@/components/mainSlide";
+import MainSlide from "@/components/main-slide";
 import BoardList from "@/components/board-list";
 import HotTripTalk from "@/components/hotTripTalk";
 

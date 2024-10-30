@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans_KR, Roboto } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import ApolloSetting from "../commons/settings/apollo-setting";
+// import ApolloSetting from "../commons/settings/apollo-setting";
+// import ApolloUploadSetting from "../commons/settings/apollo-setting";
+import ApolloHeaderSetting from "../commons/settings/apollo-setting";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,9 +36,9 @@ export default function RootLayout({
 
       <body className={`antialiased`}>
         <div>~~~~~레이아웃~~~~~~</div>
-        <ApolloSetting>
+        <ApolloHeaderSetting>
           <AntdRegistry>{children}</AntdRegistry>
-        </ApolloSetting>
+        </ApolloHeaderSetting>
         <div>~~~~~레이아웃~~~~~~</div>
       </body>
     </html>

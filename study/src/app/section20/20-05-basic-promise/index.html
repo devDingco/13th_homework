@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Promise 함수 만들어보기</title>
+    <script>
+      const onClickThen = () => {
+        new Promise((성공시_실행할함수, 실패시_실행할함수) => {
+          try {
+            setTimeout(() => {
+              const res = "강아지.jpg"; // 2초 뒤에 받아온 이미지 주소라고 가정
+              성공시_실행할함수(res);
+            }, 2000);
+          } catch (error) {
+            실패시_실행할함수(error);
+          }
+        })
+          .then((qqq) => {
+            // qqq는 성공시_실행할함수에서 넘겨준 res
+            console.log(qqq);
+          })
+          .catch((error) => {
+            // 실패시_실행할함수에서 넘겨준 error
+            console.error(error);
+          });
+      };
+
+      const onClickAwait = async () => {
+        const result = await new Promise(
+          (성공시_실행할함수, 실패시_실행할함수) => {
+            try {
+              setTimeout(() => {
+                const res = "강아지.jpg"; // 2초 뒤에 받아온 이미지 주소라고 가정
+                성공시_실행할함수(res);
+              }, 2000);
+            } catch (error) {
+              실패시_실행할함수(error);
+            }
+          }
+        );
+
+        console.log(result); // 성공여부에 따라서 출력
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickThen()">Promise 실행하기(.then)</button>
+    <button onclick="onClickAwait()">Promise 실행하기(await)</button>
+  </body>
+</html>

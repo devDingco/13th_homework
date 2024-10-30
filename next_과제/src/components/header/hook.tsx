@@ -18,8 +18,14 @@ export const useHeader = () => {
       key: "/",
     },
     {
-      label: <Link href="/buyticket">숙박권구매</Link>,
-      key: "/buyticket",
+      label: <Link href="/products">숙박권구매</Link>,
+      key: "/products",
+      children: [
+        {
+          label: <Link href="/products/new">숙박권등록</Link>,
+          key: "/products/new",
+        },
+      ],
     },
     {
       label: <Link href="/mypage">마이페이지</Link>,

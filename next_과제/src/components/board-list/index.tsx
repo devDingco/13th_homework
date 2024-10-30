@@ -1,6 +1,6 @@
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { useBoardList } from "@/components/board-list/hook";
-import SearchBox from "@/components/searchBox";
+import SearchBox from "@/components/search-box";
 import { Button, Table } from "antd";
 import styles from "./styles.module.scss";
 

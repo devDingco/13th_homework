@@ -1,6 +1,6 @@
 import { Rate } from "antd";
 import { dateViewSet } from "@/utils/dateViewSet";
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import CommentWrite from "@/components/board-detail/comment-write";
 import useCommentItem from "@/components/board-detail/comment-item/hook";
 

@@ -13,3 +13,11 @@ export const LOGOUT_USERS = gql`
     logoutUser
   }
 `;
+
+export const RESTORE_ACCESS_TOKEN = gql`
+  mutation restoreAccessToken {
+    restoreAccessToken {
+      accessToken
+    }
+  }
+`;

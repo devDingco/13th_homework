@@ -11,7 +11,7 @@ import {
   FetchBoardsCountDocument,
   FetchBoardsCountQueryVariables,
 } from "@/commons/graphql/graphql";
-import Icon from "@/components/iconFactory";
+import Icon from "@/components/icon-factory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
 import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
 
@@ -136,8 +136,6 @@ export const useBoardList = () => {
     createdAt: dateViewSet(data?.fetchBoards[idx].createdAt),
     deleteBoard: data?.fetchBoards[idx]._id || "",
   }));
-
-  console.log("게시판리스트", data?.fetchBoards);
 
   const columns: TableProps<DataType>["columns"] = [
     {

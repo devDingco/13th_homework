@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ApolloSetting from "../commons/settings/apollo-setting";
 import { Noto_Sans_KR, Roboto } from "next/font/google";
-import ThemeProvider from "@/components/themeProvider";
+import ThemeProvider from "@/components/theme-provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Header from "@/components/header";
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>closure 실습</title>
+    <script>
+      function aaa() {
+        const apple = 10;
+
+        function bbb() {
+          const banana = 20;
+          console.log(banana);
+          console.log(apple);
+          console.log(orange);
+
+          function ccc() {
+            const tomoto = 40;
+            console.log(tomoto);
+            console.log(banana);
+            console.log(apple);
+            console.log(orange);
+          }
+
+          ccc();
+        }
+
+        const orange = 30;
+
+        bbb();
+      }
+
+      aaa();
+    </script>
+  </head>
+  <body></body>
+</html>

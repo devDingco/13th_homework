@@ -1,18 +1,16 @@
 "use client";
 import Input from "@/components/input";
-import PostSearchPopBtn from "@/components/postSearchPopBtn";
-import ReactQuillBox from "@/components/reactQuillBox";
-import ModalAlertBox from "@/components/ModalAlertBox";
+import PostSearchPopBtn from "@/components/post-search-pop-btn";
+import ReactQuillBox from "@/components/react-quill-box";
+import ModalAlertBox from "@/components/modal-alert-box";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Upload } from "antd";
 
 import { useBoardWrite } from "@/components/board-write/hook";
-import { IboardFormProps } from "@/components/board-write/types";
+
 import { Controller } from "react-hook-form";
 
-export default function BoardWrite(props: IboardFormProps) {
-  const { title, formType } = props;
-
+export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
   const {
     data,
     onBoardEdit,
@@ -32,7 +30,7 @@ export default function BoardWrite(props: IboardFormProps) {
     modalType,
     // handleRemoveImg,
     imgFileList,
-  } = useBoardWrite(formType);
+  } = useBoardWrite(isEdit);
 
   //! 에러메시지가 있을 경우 alert 후 페이지 이동 처리 필요
   console.log("수정할 데이터", data);
@@ -42,10 +40,12 @@ export default function BoardWrite(props: IboardFormProps) {
       {isModalOpen && (
         <ModalAlertBox type={modalType} setIsModalOpen={setIsModalOpen} />
       )}
-      <h3 className="text-2xl font-bold">{title}</h3>
+      <h3 className="text-2xl font-bold">
+        {isEdit ? "게시글 수정" : "게시글 등록"}
+      </h3>
       <form>
         <div className="flex justify-between gap-10 flex-nowrap">
-          {(data || formType !== "edit") && (
+          {(data || !isEdit) && (
             <>
               <Input
                 id="writeName"
@@ -56,7 +56,7 @@ export default function BoardWrite(props: IboardFormProps) {
                 errormessage={errors?.writeName?.message}
                 defaultValue={data?.fetchBoard.writer || ""}
                 control={control}
-                {...(formType === "edit" && { readOnly: true })}
+                {...(isEdit && { readOnly: true })}
               />
 
               <Input
@@ -66,9 +66,9 @@ export default function BoardWrite(props: IboardFormProps) {
                 placeholder="비밀번호를 입력해 주세요."
                 type="password"
                 errormessage={errors?.writePassword?.message}
-                defaultValue={formType === "edit" ? "01234567" : ""}
+                defaultValue={isEdit ? "01234567" : ""}
                 control={control}
-                {...(formType === "edit" && { readOnly: true })}
+                {...(isEdit && { readOnly: true })}
               />
             </>
           )}
@@ -76,7 +76,7 @@ export default function BoardWrite(props: IboardFormProps) {
 
         <hr className="my-10" />
 
-        {(data || formType !== "edit") && (
+        {(data || !isEdit) && (
           <>
             <Input
               id="writeTitle"
@@ -118,7 +118,7 @@ export default function BoardWrite(props: IboardFormProps) {
         <div className="py-10" />
         <div className="flex flex-col gap-3">
           <div className="flex gap-2 items-end max-w-56">
-            {(data || formType !== "edit") && (
+            {(data || isEdit) && (
               <Input
                 id="writeAddressPost"
                 title="주소"
@@ -134,11 +134,12 @@ export default function BoardWrite(props: IboardFormProps) {
               setzonecode={(field, value) =>
                 setValue("writeAddressPost", value)
               }
-              btnstyle="btn btn-outline"
+              addressKeyName="writeAddress"
+              addressPostKeyName="writeAddressPost"
             />
           </div>
 
-          {(data || formType !== "edit") && (
+          {(data || !isEdit) && (
             <>
               <Input
                 id="writeAddress"
@@ -164,7 +165,7 @@ export default function BoardWrite(props: IboardFormProps) {
         </div>
         <hr className="my-10" />
 
-        {(data || formType !== "edit") && (
+        {(data || !isEdit) && (
           <>
             <Input
               id="youtubeUrl"
@@ -218,12 +219,10 @@ export default function BoardWrite(props: IboardFormProps) {
 
         <div className="flex items-end justify-end gap-4 pt-10">
           <Button
-            htmlType={formType === "edit" ? "button" : "reset"}
+            htmlType={isEdit ? "button" : "reset"}
             size="large"
             // className="btn btn-outline"
-            onClick={() =>
-              formType === "edit" && router.push(`/boards/${params.boardId}`)
-            }
+            onClick={() => isEdit && router.push(`/boards/${params.boardId}`)}
           >
             취소
           </Button>
@@ -235,10 +234,10 @@ export default function BoardWrite(props: IboardFormProps) {
             variant="solid"
             // className="btn btn-primary text-base-100 disabled:btn-disabled"
             value="등록하기"
-            onClick={formType === "edit" ? onBoardEdit : onBoardNew}
+            onClick={isEdit ? onBoardEdit : onBoardNew}
             // disabled={!isValid || !isDirty}
           >
-            {formType === "edit" ? "수정" : "등록"}하기
+            {isEdit ? "수정" : "등록"}하기
           </Button>
         </div>
       </form>

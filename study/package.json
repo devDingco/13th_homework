@@ -32,7 +32,8 @@
     "react-quill-new": "^3.3.2",
     "react-redux": "^9.1.2",
     "redux": "^5.0.1",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

@@ -130,6 +130,38 @@ export const useInput = () => {
     newPasswordCheck: {
       required: "필수 입력 사항입니다.",
     },
+    productName: {
+      required: "필수 입력 사항입니다.",
+      maxLength: {
+        value: 20,
+        message: "제목은 20자 이내로 입력해 주세요.",
+      },
+    },
+    productPrice: {
+      required: "필수 입력 사항입니다.",
+      pattern: {
+        value: /^[0-9]*$/,
+        message: "숫자만 입력해주세요.",
+      },
+      minLength: {
+        value: 1,
+        message: "숫자만 입력해주세요.",
+      },
+    },
+    productRemarks: {
+      required: "필수 입력 사항입니다.",
+      maxLength: {
+        value: 50,
+        message: "제목은 50자 이내로 입력해 주세요.",
+      },
+    },
+    productContents: {
+      required: "필수 입력 사항입니다.",
+      maxLength: {
+        value: 300,
+        message: "내용은 300자 이내로 입력해 주세요.",
+      },
+    },
   };
 
   return { formResister };

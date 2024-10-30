@@ -6,6 +6,7 @@
     "modalstyle",
     "Daum",
     "bname",
-    "zonecode"
+    "zonecode",
+    "localstorage"
   ]
 }
