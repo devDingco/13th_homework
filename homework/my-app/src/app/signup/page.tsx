@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 import Modal from "antd/lib/modal/Modal";
 import { gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import { loginCheck } from "@/commons/hocs/login-check";
 
 const CREATE_USER = gql`
   mutation createUser($name: String!, $email: String!, $password: String!) {
