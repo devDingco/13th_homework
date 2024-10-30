@@ -2,7 +2,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from 'src/user/entity/user.entity';
 
 @Injectable()
 export class postgreSQLConfig implements TypeOrmOptionsFactory {
@@ -11,7 +11,7 @@ export class postgreSQLConfig implements TypeOrmOptionsFactory {
     createTypeOrmOptions(): TypeOrmModuleOptions {
         return {
             type: 'postgres',
-            host: this.configService.get<string>('POSTGRE_DB_HOST'),
+            host: this.configService.get<string>('HOST'),
             port: this.configService.get<number>('POSTGRE_DB_PORT'),
             username: this.configService.get<string>('POSTGRE_DB_USERNAME'),
             password: this.configService.get<string>('POSTGRE_DB_PASSWORD'),
