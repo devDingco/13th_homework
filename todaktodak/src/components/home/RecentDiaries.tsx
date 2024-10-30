@@ -15,9 +15,9 @@ export default function RecentDiaries() {
           title="졸리다"
           content="침대가 좋아"
           date="24.10.30"
-          emotion="슬픔"
+          emotion="🥲"
         />
-        {/* More diary cards */}
+        {/* 기타 등등의 일기들 */}
       </div>
     </div>
   );

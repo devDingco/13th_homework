@@ -1,10 +1,7 @@
-"use client";
-import { useNewDiaryStore } from "@/stores/newDiaryStore";
 import { Search, Sun, Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function TopBar() {
-  const { openNewDiary } = useNewDiaryStore();
-
   return (
     <header className="fixed top-0 right-0 left-64 h-16 bg-white border-b border-gray-200 z-10">
       <div className="flex items-center justify-between h-full px-8">
@@ -23,13 +20,13 @@ export default function TopBar() {
           <button className="p-2 text-gray-500 rounded-lg hover:bg-gray-100">
             <Sun className="w-5 h-5" />
           </button>
-          <button
-            onClick={openNewDiary}
+          <Link
+            href="/diary/new"
             className="flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
           >
             <Plus className="w-5 h-5 mr-2" />
             <span>새 일기 작성</span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>

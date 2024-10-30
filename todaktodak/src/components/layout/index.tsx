@@ -8,21 +8,14 @@ interface ILayout {
   children: React.ReactNode;
 }
 
-const HIDDEN_LAYOUT = [
-  "/diary/new",
-  "/diary/edit/",
-  "/auth/login",
-  "/auth/signup",
-];
+const HIDDEN_LAYOUT = ["/login", "/signup", "/"];
 
 export default function Layout({ children }: ILayout) {
   const pathname = usePathname();
-  const isHiddenLayout = HIDDEN_LAYOUT.some((path) =>
-    pathname.startsWith(path)
-  );
+  const isHiddenLayout = HIDDEN_LAYOUT.includes(pathname);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-full bg-gray-50">
       {!isHiddenLayout && <SideBar />}
       <div className={`flex-1 ${!isHiddenLayout ? "ml-64" : ""}`}>
         {!isHiddenLayout && <TopBar />}

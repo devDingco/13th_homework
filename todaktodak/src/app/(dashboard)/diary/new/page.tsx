@@ -135,8 +135,8 @@ export default function NewDiaryPage() {
   );
 
   return (
-    <div className="flex-1 ml-64 bg-gray-50 min-h-screen">
-      {/* Header - 항상 고정 */}
+    <div className="flex-1  bg-gray-50 min-h-screen">
+      {/* Header*/}
       <div className="fixed top-0 right-0 left-64 bg-white border-b border-gray-200 z-10">
         <div className="max-w-5xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
@@ -185,7 +185,7 @@ export default function NewDiaryPage() {
       </div>
 
       {/* Main Content */}
-      <div className="pt-20 pb-12">
+      <div className="pt-14 pb-12">
         <div className="max-w-5xl mx-auto px-8">
           {/* Progress Bar */}
           <div className="mb-8">
@@ -200,14 +200,14 @@ export default function NewDiaryPage() {
           {/* Content */}
           <div className="transition-all duration-300 ease-in-out">
             {currentStep === 1 ? (
-              // Step 1: Emotion Selection
+              // Step 1: 감정 선택하기
               <div className="bg-white rounded-2xl shadow-sm p-8">
                 <h2 className="text-lg font-semibold mb-2">오늘의 감정</h2>
                 <p className="text-gray-500 mb-6">
                   현재 느끼는 감정을 모두 선택해주세요 (여러 개 선택 가능)
                 </p>
 
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-3 gap-4">
                   {emotions.map((emotion) => (
                     <button
                       key={emotion.id}
@@ -231,7 +231,7 @@ export default function NewDiaryPage() {
                         {emotion.label}
                       </span>
 
-                      {/* Tooltip */}
+                      {/* 감정 Tooltip */}
                       <div
                         className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2
                           px-3 py-1 bg-gray-900 text-white text-xs rounded-lg
@@ -244,6 +244,7 @@ export default function NewDiaryPage() {
                   ))}
                 </div>
 
+                {/* 감정선택하면 다음페이지가는 버튼 */}
                 {selectedEmotions.length > 0 && (
                   <div className="flex justify-center mt-8">
                     <button
@@ -257,7 +258,7 @@ export default function NewDiaryPage() {
                 )}
               </div>
             ) : (
-              // Step 2: Content Writing
+              // Step 2: 일기작성하기
               <div className="bg-white rounded-2xl shadow-sm p-8">
                 <EmotionTags />
 
@@ -323,9 +324,6 @@ export default function NewDiaryPage() {
                       </button>
                     )}
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">
-                    최대 3장의 사진을 업로드할 수 있습니다
-                  </p>
                 </div>
 
                 {/* Tags */}
