@@ -2,11 +2,11 @@
 
 import { useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
-import { LOGIN_USER } from "../backend-api";
 import { useAccessTokenStore } from "../stores/useAccessTokenStore";
+import { LoginUserDocument } from "../graphql/graphql";
 
 export default function useLogin() {
-  const [loginUser] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LoginUserDocument); 
   const { setAccessToken } = useAccessTokenStore();
   const [login, setLogin] = useState({
     email: "",
@@ -29,7 +29,7 @@ export default function useLogin() {
         password: login.password,
       },
     });
-    const accessToken = result.data.loginUser.accessToken;
+    const accessToken = result.data?.loginUser.accessToken;
     console.log(accessToken);
 
     if (accessToken === undefined) {
