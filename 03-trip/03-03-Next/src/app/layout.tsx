@@ -7,19 +7,19 @@ import ApolloSetting from "@/commons/settings/apollo-setting";
 import PageLayout from "@/commons/layout";
 
 const Paperlogy = localFont({
-    src: "./fonts/Paperlogy-3Light.woff2",
+    src: "../../public/fonts/Paperlogy-3Light.woff2",
     variable: "--font-paperlogy-light",
     weight: "300",
 });
 
 const Pretendard = localFont({
-    src: "./fonts/PretendardVariable.woff2",
+    src: "../../public/fonts/PretendardVariable.woff2",
     variable: "--font-pretendard-var",
     weight: "100 900",
 });
 
 export const metadata: Metadata = {
-    title: "[이하성] Maincamp Next migration",
+    title: "[이하성] MainCamp Next migration",
     description: "project for code.camp 13th front-end course",
 };
 

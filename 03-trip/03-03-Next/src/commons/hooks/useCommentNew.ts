@@ -8,8 +8,11 @@ import {
     CreateBoardCommentDocument,
     FetchBoardCommentsDocument,
 } from "../graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useCommentNew(stars: number) {
+    const { plainAlert, errorAlert } = withSweetAlert();
+
     const params = useParams();
 
     const [commentData, setCommentData] = useState({
@@ -48,9 +51,9 @@ export default function useCommentNew(stars: number) {
                     },
                 ],
             });
-            if (result) alert("댓글이 등록 되었습니다!");
+            if (result) plainAlert("댓글이 등록 되었습니다!", "success");
         } catch {
-            alert("댓글 등록 실패!");
+            errorAlert("댓글 등록 실패!");
         }
     };
 

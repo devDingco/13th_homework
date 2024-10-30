@@ -6,8 +6,11 @@ import {
     DeleteBoardDocument,
     FetchBoardsDocument,
 } from "@/commons/graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useDelete() {
+    const { plainAlert } = withSweetAlert();
+
     const [deleteBoard] = useMutation(DeleteBoardDocument, {
         // variables: {boardId: }
     });
@@ -24,7 +27,7 @@ export default function useDelete() {
                 { query: FetchBoardsDocument, variables: { number: 1 } },
             ],
         });
-        alert("삭제완료!!");
+        plainAlert("삭제완료!!", "success");
     };
 
     return onClickDelete;

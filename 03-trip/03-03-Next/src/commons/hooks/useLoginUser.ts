@@ -5,8 +5,11 @@ import { ChangeEvent, useState } from "react";
 import { useTokenStore } from "../stores/useTokenStore";
 import { useMutation } from "@apollo/client";
 import { CreateUserDocument, LoginUserDocument } from "../graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useLoginUser() {
+    const { plainAlert, errorAlert } = withSweetAlert();
+
     const router = useRouter();
 
     //** 글로벌 스테이트로 토큰 관리 */
@@ -67,16 +70,21 @@ export default function useLoginUser() {
 
             const token = result.data?.loginUser.accessToken;
             if (!token) {
-                return alert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
+                return errorAlert(
+                    "로그인에 실패하였습니다! 다시 시도하여 주세요."
+                );
             }
             setToken(token ?? "");
             sessionStorage.setItem("@_¡¡", token);
 
-            alert(`로그인 성공
-                ${token}`);
+            plainAlert(
+                `로그인 성공
+                ${token}`,
+                "success"
+            );
             router.push(`/`);
         } catch (error) {
-            alert("로그인에 실패하였습니다");
+            errorAlert("로그인에 실패하였습니다");
             console.log(error);
         }
     }
@@ -86,7 +94,7 @@ export default function useLoginUser() {
 
     async function onSignUpClick() {
         if (signUpInput.password_ID !== signUpInput.passwordConfirm_ID) {
-            return alert("비밀번호가 다릅니다!! 다시 확인해 주세요.");
+            return errorAlert("비밀번호가 다릅니다!! 다시 확인해 주세요.");
         }
 
         try {
@@ -99,12 +107,12 @@ export default function useLoginUser() {
                     },
                 },
             });
-            if (result) alert(`등록되었습니다!!`);
+            if (result) plainAlert(`등록되었습니다!!`, "success");
 
             setIsLogIn(true);
             router.push(`/login`);
         } catch (error) {
-            alert("등록에 실패하였습니다. 다시 시도해 주세요.");
+            errorAlert("등록에 실패하였습니다. 다시 시도해 주세요.");
             console.log(error);
         }
     }

@@ -3,30 +3,75 @@
 import Image from "next/image";
 import logo from "/public/img/logo_hoz.png";
 import Button from "@/components/Atoms/_Button";
-import { CSSProperties } from "react";
-import { useRouter } from "next/navigation";
+import { CSSProperties, MouseEvent, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 import { useQuery } from "@apollo/client";
 import { FETCH_USER } from "@/commons/queries/queries";
 
 export default function LayoutNav() {
+    const [isSelect, setIsSelect] = useState("mainPage");
     const router = useRouter();
+    const params = useParams();
 
     const { data: login } = useQuery(FETCH_USER);
-    console.log(login);
+
+    function onNavClick(e: MouseEvent) {
+        const target = e.target as HTMLLIElement;
+        setIsSelect(target.id);
+
+        switch (target.id) {
+            case "mainPage": {
+                router.push(`/boards`);
+                break;
+            }
+            case "subPage": {
+                router.push(`/boards/new`);
+                break;
+            }
+            case "myPage": {
+                router.push(`/boards/${params.boardId}`);
+                break;
+            }
+        }
+    }
 
     return (
         <>
             <nav style={NavWrap}>
-                <div style={NavMenu}>
-                    <div onClick={() => router.push(`/boards`)}>
+                <ul style={NavMenu}>
+                    <li onClick={() => router.push(`/boards`)}>
                         <Image src={logo} alt="logo" width={200} height={0} />
-                    </div>
+                    </li>
 
-                    <div style={NavButton}>성북구 도서관</div>
-                    <div style={NavButton}>도서 대출</div>
-                    <div style={NavButton}>마이 페이지</div>
-                </div>
+                    <li
+                        style={
+                            isSelect === "mainPage" ? selectedButton : NavButton
+                        }
+                        id="mainPage"
+                        onClick={onNavClick}
+                    >
+                        성북구 도서관
+                    </li>
+                    <li
+                        style={
+                            isSelect === "subPage" ? selectedButton : NavButton
+                        }
+                        id="subPage"
+                        onClick={onNavClick}
+                    >
+                        도서 대출
+                    </li>
+                    <li
+                        style={
+                            isSelect === "myPage" ? selectedButton : NavButton
+                        }
+                        id="myPage"
+                        onClick={onNavClick}
+                    >
+                        마이 페이지
+                    </li>
+                </ul>
 
                 {login ? (
                     <div>
@@ -53,6 +98,7 @@ const NavWrap = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: "2rem",
 };
 
 const NavMenu = {
@@ -65,6 +111,15 @@ const NavButton: CSSProperties = {
     width: "11rem",
     height: "4rem",
     borderBottom: "1px solid #bdbdbd",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
+
+const selectedButton: CSSProperties = {
+    width: "11rem",
+    height: "4rem",
+    borderBottom: "2px solid #ffbe98",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
