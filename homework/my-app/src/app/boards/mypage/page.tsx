@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./style.module.css";
 import BoardList from "@/components/boards-list/list";
+import { loginCheck } from "@/commons/hocs/login-check";
 
 const ProfilePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("history"); // 초기 메뉴
@@ -170,4 +171,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default loginCheck(ProfilePage);
