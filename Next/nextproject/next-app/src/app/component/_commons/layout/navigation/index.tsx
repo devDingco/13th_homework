@@ -16,12 +16,17 @@ export default withLoginCheck(function NavigationPage() {
   };
   const { data, onClickLogin, isLogin } = UseLayout();
 
-  console.log(localStorage.getItem("accessToken"));
+  // console.log(localStorage.getItem("accessToken"));
 
   const items: MenuProps["items"] = [
     {
       label: <Link href="/component/mypage">마이 페이지</Link>,
       key: "0",
+    },
+
+    {
+      label: <Link href="/product">상품 등록</Link>,
+      key: "1",
     },
   ];
   console.log(data?.fetchUserLoggedIn.name);
@@ -48,7 +53,7 @@ export default withLoginCheck(function NavigationPage() {
           </div>
 
           <div className={styles.css_user}>
-            {!isLogin ? (
+            {isLogin ? (
               <>
                 <Image
                   src="/assets/Profile.png"

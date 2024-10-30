@@ -188,3 +188,28 @@ export const FETCHUSER = gql`
     }
   }
 `;
+
+// 상품 등록
+export const CreateTravelProduct = gql`
+  mutation createTravelproduct(
+    $createTravelproductInput: CreateTravelproductInput!
+  ) {
+    createTravelproduct(createTravelproductInput: $createTravelproductInput) {
+      _id
+      name
+      contents
+    }
+  }
+`;
+
+// 상품 조회
+export const FETCHTRAVELPRODUCT = gql`
+  query fetchTravelproduct ($travelproductId: ID!) {
+    fetchTravelproduct(fetchTravelproduct: $$travelproductId) {
+      _id
+      name
+      remarks
+      contents
+    }
+  }
+`;

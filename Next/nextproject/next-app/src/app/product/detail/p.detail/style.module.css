@@ -1,0 +1,15 @@
+.css_detaillayout {
+  display: flex;
+  flex-direction: column;
+}
+
+.css_detailbox {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+
+.css_productname {
+  width: 100px;
+  height: 20px;
+}
