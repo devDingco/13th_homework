@@ -10,7 +10,7 @@ export class mongoDBConfig implements TypeOrmOptionsFactory {
     createTypeOrmOptions(): TypeOrmModuleOptions {
         return {
             type: 'mongodb',
-            host: this.configService.get<string>('HOST'),
+            host: this.configService.get<string>('MONGO_DB_HOST'),
             port: this.configService.get<number>('MONGO_DB_PORT'),
             database: this.configService.get<string>('MONGO_DB_DATABASE'),
             entities: [__dirname + '/../**/*.entity.{js,ts}'],

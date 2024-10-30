@@ -1,4 +1,4 @@
-version: '3.8'
+version: '4.0'
 services:
     app:
         build:
@@ -6,13 +6,7 @@ services:
             dockerfile: Dockerfile
         ports:
             - '${PORT}:${PORT}'
-        environment:
-            - DATABASE_URL=${DATABASE_URL}
-            - MONGO_URL=${MONGO_URL}
-            - REDIS_URL=${REDIS_URL}
-            - ELASTIC_URL=${ELASTIC_URL}
-            - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-            - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
+        env_file: .env.development
         depends_on:
             - postgres
             - mongo
@@ -20,6 +14,8 @@ services:
             - elasticsearch
             - logstash
             - kibana
+        networks:
+            - my_network
 
     postgres:
         image: postgres:14
@@ -31,6 +27,8 @@ services:
             - '${POSTGRE_DB_PORT}:${POSTGRE_DB_PORT}'
         volumes:
             - postgres-data:/var/lib/postgresql/data
+        networks:
+            - my_network
 
     mongo:
         image: mongo:5.0
@@ -38,11 +36,15 @@ services:
             - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
         volumes:
             - mongo-data:/data/db
+        networks:
+            - my_network
 
     redis:
         image: redis:6-alpine
         ports:
             - '6379:6379'
+        networks:
+            - my_network
 
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.17.4
@@ -52,6 +54,8 @@ services:
             - '9200:9200'
         volumes:
             - es-data:/usr/share/elasticsearch/data
+        networks:
+            - my_network
 
     logstash:
         image: docker.elastic.co/logstash/logstash:7.17.4
@@ -61,6 +65,8 @@ services:
             - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
         depends_on:
             - elasticsearch
+        networks:
+            - my_network
 
     kibana:
         image: docker.elastic.co/kibana/kibana:7.17.4
@@ -70,8 +76,13 @@ services:
             - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
         depends_on:
             - elasticsearch
+        networks:
+            - my_network
 
 volumes:
     postgres-data:
     mongo-data:
     es-data:
+
+networks:
+    my_network:

@@ -14,8 +14,5 @@ COPY . .
 # NestJS 빌드
 RUN npm run build
 
-# main.js가 dist 바로 아래로 이동하도록 설정
-RUN mv dist/src/main.js dist/
-
 # 애플리케이션 실행
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]
