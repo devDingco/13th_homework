@@ -1,0 +1,14 @@
+* nav 상단에 클릭하면 밑줄 바뀌게 해주는 거 동작원리 *
+const [selected, setSelected] = useState("");
+
+const handleClick = (item) => {
+  setSelected(item);
+};
+- handleClick은 클릭된 항목의 이름을 인자로 받아 selected 상태를 업데이트함. 특정학목을 클릭하면 selected는 그 상태의 이름으로 변경
+
+<div className={`${styles.navContents} ${selected === "tripTalk" ? styles.navChoice : ""}`}
+     onClick={() => handleClick("tripTalk")}
+>
+  트립토크
+</div>
+- selected한 값을 기준으로 값과 항목이 일치하면 새로운 style을 추가해준다. 
