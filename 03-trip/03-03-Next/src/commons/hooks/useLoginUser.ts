@@ -70,6 +70,7 @@ export default function useLoginUser() {
                 return alert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
             }
             setToken(token ?? "");
+            sessionStorage.setItem("@_¡¡", token);
 
             alert(`로그인 성공
                 ${token}`);
