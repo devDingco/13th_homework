@@ -1,0 +1,169 @@
+.background {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  margin: 0px auto;
+  padding: 40px 0px;
+  gap: 40px;
+}
+
+.header {
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.writer_password_box {
+  display: flex;
+  gap: 40px;
+}
+
+.input_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.input_box input {
+  border-radius: 8px;
+  padding: 12px 16 px;
+  border: 1px solid #d4d3d3;
+}
+
+.hr {
+  height: 1px;
+  border: 0px;
+  background: #e4e4e4;
+}
+
+.title_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contents_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.textarea {
+  width: 100%;
+  height: 336px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid #d4d3d3;
+  resize: none;
+}
+
+.address_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.address_search_box {
+  width: 220px;
+  display: flex;
+  gap: 8px;
+}
+
+.address_search_box button {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  background-color: #ffffff;
+  letter-spacing: -1px;
+}
+
+.address_box input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+}
+
+.youtube_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.youtube_box input {
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+}
+
+.photo_box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add_photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+}
+
+.board_new_button {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.board_new_button_register {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  background-color: #2974e5;
+  color: #ffffff;
+}
+
+.address_search_box .addressNumber {
+  width: 82px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  padding: 12px 16px;
+}
+
+.errorMessage {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #f66a6a;
+}
