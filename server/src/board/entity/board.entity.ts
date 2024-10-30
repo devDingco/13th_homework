@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import { BoardAddressDTO } from '../dto/board-addresss.dto';
+import { Exclude } from 'class-transformer';
 
 @Entity('board')
 export class BoardEntity {
@@ -18,6 +19,7 @@ export class BoardEntity {
     author: string;
 
     @Column()
+    @Exclude()
     password: string;
 
     @Column()

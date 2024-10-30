@@ -17,7 +17,7 @@ const config: CodegenConfig = {
 				},
 			},
 		},
-		'./src/': {
+		'./src/graphql/': {
 			documents: ['src/graphql/queries/**/*.graphql', 'src/graphql/mutations/**/*.graphql'],
 			preset: 'near-operation-file',
 			presetConfig: {

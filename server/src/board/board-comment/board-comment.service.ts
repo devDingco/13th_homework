@@ -1,17 +1,14 @@
-import * as bcrypt from 'bcrypt';
-
 import {
     BadRequestException,
     Injectable,
     NotFoundException,
-    UnauthorizedException,
 } from '@nestjs/common';
 
+import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { BoardCommentEntity } from './entity/board-comment.entity';
 import { BoardCommentRepository } from './repository/board-comment.repository';
 import { BoardCommentResponseDTO } from './dto/board-comment-response.dto';
 import { BoardRepository } from '../repository/board.repository';
-import { BoardService } from '../board.service';
 import { CreateBoardCommentDTO } from './dto/create-board-comment.dto';
 import { CreateBoardCommentInput } from './schema/create-board-comment-input.schema';
 import { UpdateBoardCommentExceptPasswordDTO } from './dto/update-board-except-password-comment.dto';
@@ -20,9 +17,9 @@ import { UpdateBoardCommentInput } from './schema/update-board-comment-input.sch
 @Injectable()
 export class BoardCommentService {
     constructor(
-        private readonly boardService: BoardService,
         private readonly boardCommentRepository: BoardCommentRepository,
         private readonly boardRepsitory: BoardRepository,
+        private readonly bcryptService: BcryptService,
     ) {}
     async createComment(
         boardId: number,
@@ -36,7 +33,7 @@ export class BoardCommentService {
             await this.isExistParentComment(parentId);
         }
 
-        const password: string = await this.boardService.transformPassword(
+        const password: string = await this.bcryptService.transformPassword(
             createBoardCommentDto.password,
         );
 
@@ -134,14 +131,7 @@ export class BoardCommentService {
             throw new NotFoundException(`commentId ${commentId} is not found`);
         }
 
-        const validatePassword = await bcrypt.compare(
-            password,
-            comment.password,
-        );
-
-        if (!validatePassword) {
-            throw new UnauthorizedException(`password is invalid`);
-        }
+        await this.bcryptService.validatePassword(password, comment.password);
     }
 
     makeCommentMap(boardComments: BoardCommentResponseDTO[]) {

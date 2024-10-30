@@ -1,3 +1,4 @@
+import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 import { BoardEntity } from '../entity/board.entity';
 import { BoardPasswordController } from './board-password.controller';
 import { BoardPasswordResolver } from './board-password.resolver';
@@ -7,7 +8,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([BoardEntity], 'MongoDB')],
+    imports: [TypeOrmModule.forFeature([BoardEntity], 'MongoDB'), BcryptModule],
     controllers: [BoardPasswordController],
     providers: [BoardPasswordService, BoardRepository, BoardPasswordResolver],
 })

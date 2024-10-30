@@ -23,6 +23,4 @@ const NewInputContainer = React.memo(({ title, error, value }: ITitle) => {
 	);
 });
 
-NewInputContainer.displayName = 'NewInputContainer';
-
 export default NewInputContainer;

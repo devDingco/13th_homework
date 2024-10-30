@@ -1,16 +1,14 @@
-import * as bcrypt from 'bcrypt';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
-import {
-    Injectable,
-    NotFoundException,
-    UnauthorizedException,
-} from '@nestjs/common';
-
+import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { BoardRepository } from '../repository/board.repository';
 
 @Injectable()
 export class BoardPasswordService {
-    constructor(private readonly boardRepository: BoardRepository) {}
+    constructor(
+        private readonly boardRepository: BoardRepository,
+        private readonly bcryptService: BcryptService,
+    ) {}
 
     async validateBoardData(
         boardId: number,
@@ -22,14 +20,7 @@ export class BoardPasswordService {
             throw new NotFoundException(`boardId ${boardId} is not found`);
         }
 
-        const validatePassword = await bcrypt.compare(
-            password,
-            findBoard.password,
-        );
-
-        if (!validatePassword) {
-            throw new UnauthorizedException(`password is invalid`);
-        }
+        await this.bcryptService.validatePassword(password, findBoard.password);
 
         return true;
     }

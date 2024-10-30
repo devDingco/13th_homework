@@ -1,40 +1,27 @@
-import * as bcrypt from 'bcrypt';
+// import { BcryptService } from 'src/bcrypt/bcrypt.service';
+// import { Injectable } from '@nestjs/common';
+// import { JwtService } from '@nestjs/jwt';
 
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+// @Injectable()
+// export class AuthService {
+//     constructor(
+//         private readonly jwtService: JwtService,
+//         private readonly bcryptService: BcryptService,
+//     ) {}
 
-import { AuthCredentialsDTO } from './dto/auth-credential.dto';
-import { BoardService } from 'src/board/board.service';
-import { JwtService } from '@nestjs/jwt';
-import { User } from './entity/user.entity';
-import { UserRepository } from './repository/user.repository';
+//     //     async signIn(userDTO: userDTO): Promise<{ accessToken: string }> {
+//     //         const { email, password } = userDTO;
+//     //         const user: User = await this.userRepository.findUser(email);
 
-@Injectable()
-export class AuthService {
-    constructor(
-        private readonly userRepository: UserRepository,
-        private readonly boardService: BoardService,
-        private readonly jwtService: JwtService,
-    ) {}
+//     //         if (!user) {
+//     //             throw new NotFoundException('is not exist email in database');
+//     //         }
 
-    async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<User> {
-        const password: string = await this.boardService.transformPassword(
-            authCredentialsDTO.password,
-        );
-        return await this.userRepository.createUser({
-            ...authCredentialsDTO,
-            password,
-        });
-    }
+//     //         await this.bcryptService.validatePassword(password, user.password);
+//     //         // create access token
+//     //         const payload = { id: user.id };
+//     //         const accessToken = this.jwtService.sign(payload);
 
-    async signIn(authCredentialsDTO: AuthCredentialsDTO) {
-        const { email, password } = authCredentialsDTO;
-        const userData = await this.userRepository.findUser(email);
-        const passwordValidation = await bcrypt.compare(
-            password,
-            userData.password,
-        );
-
-        if (!passwordValidation)
-            throw new UnauthorizedException('password is not correct');
-    }
-}
+//     //         return { accessToken };
+//     //     }
+// }

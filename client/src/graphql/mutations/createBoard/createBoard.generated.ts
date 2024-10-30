@@ -1,55 +1,34 @@
-/** @format */
-
-import * as Apollo from '@apollo/client';
-import * as Types from '../../../types';
+import * as Types from '../../types';
 
 import { gql } from '@apollo/client';
-
+import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type CreateBoardMutationVariables = Types.Exact<{
-	createBoardInput: Types.CreateBoardInput;
+  createBoardInput: Types.CreateBoardInput;
 }>;
 
-export type CreateBoardMutation = {
-	__typename?: 'Mutation';
-	createBoard: {
-		__typename?: 'BoardSchema';
-		author: string;
-		title: string;
-		content: string;
-		imageUrl?: Array<string> | null;
-		youtubeUrl?: string | null;
-		createdAt: Date;
-		boardAddressOutput?: {
-			__typename?: 'BoardAddressOutput';
-			zoneCode: number;
-			address: string;
-			detailAddress: string;
-		} | null;
-	};
-};
+
+export type CreateBoardMutation = { __typename?: 'Mutation', createBoard: { __typename?: 'BoardSchema', author: string, title: string, content: string, imageUrl?: Array<string> | null, youtubeUrl?: string | null, createdAt: Date, boardAddressOutput?: { __typename?: 'BoardAddressOutput', zoneCode: number, address: string, detailAddress: string } | null } };
+
 
 export const CreateBoardDocument = gql`
-	mutation CreateBoard($createBoardInput: CreateBoardInput!) {
-		createBoard(createBoardInput: $createBoardInput) {
-			author
-			title
-			content
-			imageUrl
-			youtubeUrl
-			boardAddressOutput {
-				zoneCode
-				address
-				detailAddress
-			}
-			createdAt
-		}
-	}
-`;
-export type CreateBoardMutationFn = Apollo.MutationFunction<
-	CreateBoardMutation,
-	CreateBoardMutationVariables
->;
+    mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+  createBoard(createBoardInput: $createBoardInput) {
+    author
+    title
+    content
+    imageUrl
+    youtubeUrl
+    boardAddressOutput {
+      zoneCode
+      address
+      detailAddress
+    }
+    createdAt
+  }
+}
+    `;
+export type CreateBoardMutationFn = Apollo.MutationFunction<CreateBoardMutation, CreateBoardMutationVariables>;
 
 /**
  * __useCreateBoardMutation__
@@ -68,18 +47,10 @@ export type CreateBoardMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateBoardMutation(
-	baseOptions?: Apollo.MutationHookOptions<CreateBoardMutation, CreateBoardMutationVariables>,
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
-		CreateBoardDocument,
-		options,
-	);
-}
+export function useCreateBoardMutation(baseOptions?: Apollo.MutationHookOptions<CreateBoardMutation, CreateBoardMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBoardMutation, CreateBoardMutationVariables>(CreateBoardDocument, options);
+      }
 export type CreateBoardMutationHookResult = ReturnType<typeof useCreateBoardMutation>;
 export type CreateBoardMutationResult = Apollo.MutationResult<CreateBoardMutation>;
-export type CreateBoardMutationOptions = Apollo.BaseMutationOptions<
-	CreateBoardMutation,
-	CreateBoardMutationVariables
->;
+export type CreateBoardMutationOptions = Apollo.BaseMutationOptions<CreateBoardMutation, CreateBoardMutationVariables>;
