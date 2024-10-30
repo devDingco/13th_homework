@@ -11,8 +11,9 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Su Trip",
-  description: "당신의 여행을 편하게 해주는 친구, Su Trip입니다.",
+  title: "Wokation",
+  description:
+    "여행에서도 일을 포기할 수 없는 당신을 위한 워케이션 추천 사이트, Workation",
 };
 
 interface IProps {
