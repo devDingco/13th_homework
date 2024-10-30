@@ -75,13 +75,13 @@ export default function SignUp() {
 				},
 			},
 		});
-		console.log('🚀 ~ onClickSignUp ~ result:', result);
-		setIsModalOpen(true);
-		// router.push('/login');
-	};
 
-	const handleOk = () => {
-		setIsModalOpen(false);
+		Modal.success({
+			content: `회원가입이 완료 되었습니다!`,
+			onOk(...args) {
+				router.push('/login');
+			},
+		});
 	};
 
 	return (
@@ -185,12 +185,6 @@ export default function SignUp() {
 			>
 				회원가입
 			</button>
-			<Modal
-				title="회원가입을 축하합니다."
-				open={isModalOpen}
-				onOk={handleOk}
-				centered
-			/>
 		</div>
 	);
 }

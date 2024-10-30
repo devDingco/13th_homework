@@ -154,6 +154,7 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 			});
 			Modal.success({
 				content: `게시글이 등록 되었습니다!`,
+				onOk: () => router.push('/login'),
 			});
 			console.log('🚀 ~ onClickSubmit ~ data:', data);
 			router.push(`/boards/${data?.createBoard._id}`);
@@ -194,6 +195,7 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 	const onToggleZipcodeModal = () => {
 		setIsModalOpen((_isModalOpen) => !_isModalOpen);
 	};
+
 	const onZipcodeModalComplete = (data: Address) => {
 		setZipCode(data.zonecode);
 		setAddress(data.address);
