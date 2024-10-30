@@ -25,3 +25,8 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.container {
+  margin: 0 auto;
+  padding-top: 50px;
+}
