@@ -1,11 +1,10 @@
 "use client"
-import ListPagination from "../pagination";
 import useBoardsList from "./hook";
 import styles from "./styles.module.css"
 import { IListProps } from "./types";
 
 export default function BoardsList(props:IListProps){
-    const {data, refetch, lastPage, onClickDetail, onClickDelete} = useBoardsList();
+    const {data, onClickDetail, onClickDelete} = useBoardsList();
     return (
         <>
             <div className={styles.listForm}>
@@ -29,7 +28,6 @@ export default function BoardsList(props:IListProps){
                         </ul>
                     </div>
                 ))}
-                {/* <ListPagination refetch={refetch} lastPage={lastPage} /> */}
             </div>
         </>
     );

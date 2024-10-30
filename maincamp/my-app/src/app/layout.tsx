@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "@/commons/settings/apollo-setting";
 import LayoutPage from "@/commons/layout";
+import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +32,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LayoutPage />
-        <ApolloSetting>{children}</ApolloSetting>
+        {/* <ApolloSetting></ApolloSetting> */}
+        <ApolloUploadSetting>{children}</ApolloUploadSetting>
       </body>
     </html>
   );

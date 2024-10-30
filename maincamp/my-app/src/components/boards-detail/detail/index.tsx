@@ -35,12 +35,12 @@ export default function BoardsDetail() {
             <div className={styles.emotion}>
                 <div className={styles.bad}>
                     {/* <div className={styles.badIcon}></div> */}
-                    <FrownOutlined style={{fontSize: "4rem"}} />
+                    <FrownOutlined />
                     <p>24</p>
                 </div>
                 <div className={styles.good}>
                     {/* <div className={styles.goodIcon}></div> */}
-                    <SmileOutlined style={{fontSize: "4rem", color: "#f66a6a"}} />
+                    <SmileOutlined style={{color: "#f66a6a"}} />
                     <p>12</p>
                 </div>
             </div>
