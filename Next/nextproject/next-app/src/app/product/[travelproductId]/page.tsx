@@ -23,6 +23,9 @@ export default withLoginCheck(function ProductDeatil() {
           <div className={styles.css_productname}>
             {data?.fetchTravelproduct?.remarks}
           </div>
+          <div className={styles.css_productname}>
+            {data?.fetchTravelproduct?.travelproductAddress.zipcode}
+          </div>
           <button onClick={onClickUpdate}>수정하기</button>
         </div>
       </div>

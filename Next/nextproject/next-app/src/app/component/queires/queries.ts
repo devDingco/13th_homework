@@ -199,6 +199,11 @@ export const CreateTravelProduct = gql`
       name
       contents
       price
+      travelproductAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -212,6 +217,11 @@ export const FETCHTRAVELPRODUCT = gql`
       remarks
       contents
       price
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
     }
   }
 `;
@@ -231,6 +241,11 @@ export const UPDATETRAVELPRODUCT = gql`
       contents
       remarks
       price
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
     }
   }
 `;

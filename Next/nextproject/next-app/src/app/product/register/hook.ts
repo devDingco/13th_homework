@@ -9,10 +9,13 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-export default function UseProductRegister() {
-  const { register, handleSubmit } = useForm();
-  const [product] = useMutation(CreateTravelProduct);
-  const [updateproduct] = useMutation(UPDATETRAVELPRODUCT);
+import { Address } from "react-daum-postcode";
+import { IPropsProduct } from "./types";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { schema } from "./schema";
+
+export default function UseProductRegister(props: IPropsProduct) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const params = useParams();
   const { data } = useQuery(FETCHTRAVELPRODUCT, {
@@ -20,21 +23,36 @@ export default function UseProductRegister() {
       travelproductId: params.travelproductId,
     },
   });
+  const [zipcode, setZipcode] = useState(
+    props.isEdit ? data?.fetchTravelproduct.travelproductAddress.zipcode : ""
+  );
+  const { register, handleSubmit, formState } = useForm();
+  const [product] = useMutation(CreateTravelProduct);
+  const [updateproduct] = useMutation(UPDATETRAVELPRODUCT);
 
   const onClickSubmit = async (data) => {
-    const result = await product({
-      variables: {
-        createTravelproductInput: {
-          name: data.name,
-          price: Number(data.price),
-          contents: data.contents,
-          remarks: data.remarks,
+    try {
+      const result = await product({
+        variables: {
+          createTravelproductInput: {
+            name: data.name,
+            price: Number(data.price),
+            contents: data.contents,
+            remarks: data.remarks,
+            travelproductAddress: {
+              zipcode,
+              addressDetail: data.addressdetail,
+            },
+          },
         },
-      },
-    });
-    router.push(`../../product/${result.data?.createTravelproduct._id}`);
-    console.log(result);
+      });
+      router.push(`../../product/${result.data?.createTravelproduct._id}`);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const onClickUpdate = async (data) => {
     const result = await updateproduct({
       variables: {
@@ -44,10 +62,23 @@ export default function UseProductRegister() {
           price: Number(data.price),
           contents: data.contents,
           remarks: data.remarks,
+          travelproductAddress: {
+            zipcode,
+            addressDetail: data.addressdetail,
+          },
         },
       },
     });
     router.push(`../../product/${result.data?.updateTravelproduct._id}`);
+  };
+
+  const onToggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+  const handleCpmplete = (data: Address) => {
+    const { zonecode } = data;
+    setZipcode(zonecode);
+    onToggleModal();
   };
 
   return {
@@ -56,5 +87,10 @@ export default function UseProductRegister() {
     onClickSubmit,
     onClickUpdate,
     data,
+    formState,
+    handleCpmplete,
+    isModalOpen,
+    onToggleModal,
+    zipcode,
   };
 }
