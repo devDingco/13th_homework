@@ -1,5 +1,5 @@
   .content{
-    width:128rem;
+    width:1280px;
     height:auto;
     margin:0 auto;
   }
@@ -9,7 +9,7 @@
   } */
   .red{
     color:red;
-    margin-left:0.4rem;
+    margin-left:4px;
   }
 
   /* h1{
@@ -22,135 +22,135 @@
   
   /* 공통 input */
   .title input, .address input, .link input{
-    width:128rem;
-    height:4.8rem;
-    border-radius:0.8rem;
-    border:0.1rem solid #d4d3d3;
-    text-indent:1.6rem;
+    width:1280px;
+    height:48px;
+    border-radius:8px;
+    border:1px solid #d4d3d3;
+    text-indent:16px;
   }
-  .content input{font-size:1.8rem;}
-  .content textarea{font-size:1.8rem;}
+  .content input{font-size:18px;}
+  .content textarea{font-size:18px;}
   
   .error{
-    font-size:1.6rem;
+    font-size:16px;
     color:red;
   }
   
   /* 작성자 / 비밀번호 */
   .name_pw_bg{
-    height:8rem;
+    height:80px;
     /* margin:4rem 0; */
-    margin-top:3rem;
+    margin-top:30px;
     display:flex;
     justify-content:space-between;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:12rem;
+    padding-bottom:120px;
   }
   .name_pw_bg div{
-    width:62rem;
+    width:620px;
     margin:0;
   }
   .name_pw_bg input, .title input{
-    width:62rem;
-    height:4.8rem;
-    border-radius:0.8rem;
-    border:0.1rem solid #d4d3d3;
-    text-indent:1.6rem;
-    margin:0.8rem 0 0.8rem 0;
-    font-size:1.8rem;
+    width:620px;
+    height:48px;
+    border-radius:8px;
+    border:1px solid #d4d3d3;
+    text-indent:16px;
+    margin:8px 0 8px 0;
+    font-size:18px;
   }
   
   /* 제목 */
   .title{
-    height:8rem;
+    height:80px;
     /* margin:8rem 0; */
-    margin-top:3rem;
+    margin-top:30px;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:12rem;
+    padding-bottom:120px;
   }
   
   /* 내용 */
   .subject{
-    height:36.8rem;
-    margin-top:3rem;
+    height:368px;
+    margin-top:30px;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:12rem;
+    padding-bottom:120px;
     /* margin:8rem 0; */
   }
   .subject textarea{
-    width:128rem;
-    height:33.6rem;
-    border-radius:0.8rem;
-    border:0.1rem solid #d4d3d3;
-    text-indent:1.6rem;
-    padding-top:1.2rem;
-    margin-top:0.8rem;
+    width:1280px;
+    height:336px;
+    border-radius:8px;
+    border:1px solid #d4d3d3;
+    text-indent:16px;
+    padding-top:12px;
+    margin-top:8px;
   }
   
   /* 주소 */
   .address{
-    height:19.2rem;
-    margin-top:3rem;
+    height:192px;
+    margin-top:30px;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:25rem;
+    padding-bottom:250px;
     /* margin:4rem 0; */
   }
   .address input{
-    margin:0.8rem 0 0.8rem 0;
+    margin:8px 0 8px 0;
   }
   .address_top > input{
-    width:8.2rem !important;
+    width:82px !important;
     text-align:center;
     text-indent:0 !important;
   
   }
   .address_top button{
-    width:13rem;
-    height:4.8rem;
-    border-radius:0.8rem;
-    border:0.1rem solid #000;
+    width:130px;
+    height:48px;
+    border-radius:8px;
+    border:1px solid #000;
     background:#fff;
-    margin:0.8rem;
-    font-size:1.8rem;
+    margin:8px;
+    font-size:18px;
   }
   
   /* 유튜브 링크 */
   .link{
-    height:8rem;
-    margin-top:3rem;
+    height:80px;
+    margin-top:30px;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:12rem;
+    padding-bottom:120px;
     /* margin:8rem 0; */
   }
-  .link input{margin-top:0.8rem;}
+  .link input{margin-top:8px;}
   
   /* 사진 첨부 */
-  .picture{margin:4rem 0;}
+  .picture{margin:40px 0;}
   .picture .picture_btn{
-    width:16rem;
-    height:16rem;
-    margin:0.8rem 1.6rem 0.8rem 0;
+    width:160px;
+    height:160px;
+    margin:8px 16px 8px 0;
     border:none;
   }
   
   /* 하단 버튼 */
   .bt_button{
     float:right;
-    margin-bottom:4rem;
+    margin-bottom:40px;
   }
   .bt_button button{
-    border-radius:0.8rem;
-    height:4.8rem;
-    font-size:1.8rem;
+    border-radius:8px;
+    height:48px;
+    font-size:18px;
   }
   .bt_button .cancel_btn{
-    width:6.4rem;
+    width:64px;
     background:#fff;
-    margin-right:1.6rem;
+    margin-right:16px;
     border:1px solid #000;
   }
   .bt_button button:last-child{
-    width:9.5rem;
+    width:95px;
     background:#2874e5;
     color:#fff;
     border:none;

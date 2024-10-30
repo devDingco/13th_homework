@@ -3,16 +3,16 @@
     align-items:center;
 }
 .comment_list_wrap{
-    width:128rem;
+    width:1280px;
     margin:0 auto;
 }
 .comment_list_container{
-    margin-bottom:4rem;
+    margin-bottom:40px;
     border-bottom:1px solid #e4e4e4;
-    padding-bottom:4rem;
+    padding-bottom:40px;
     display:flex;
     flex-direction:column;
-    gap:0.8rem;
+    gap:8px;
 }
 .comment_list_container:last-child{
     border-style:none;
@@ -20,43 +20,43 @@
 }
 
 .profile{
-    height:2rem;
+    height:20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
 .profile .profileIcon{
-    width:2.4rem;
-    height:2.4rem;
+    width:24px;
+    height:24px;
     background:url(../../../../public/images/img.png) no-repeat;
-    margin-right:0.8rem;
+    margin-right:8px;
 }
 .profile .writer{
-    font-size:1.4rem;
+    font-size:14px;
     font-weight:300;
     color:#5f5f5f;
-    line-height:2rem;
-    margin-right:0.8rem;
+    line-height:20px;
+    margin-right:8px;
 }
 
 .profile .editIcon{
-    width:2rem;
-    height:2rem;
+    width:20px;
+    height:20px;
     background:url(../../../../public/images/edit.png) no-repeat;
-    margin-right:0.8rem;
+    margin-right:8px;
 }
 .profile .closeIcon{
-    width:2rem;
-    height:2rem;
+    width:20px;
+    height:20px;
     background:url(../../../../public/images/close.png) no-repeat;
 }
 
 .comment_text{
-    font-size:1.6rem;
+    font-size:16px;
     color:#333;
 }
 
 .comment_date{
-    font-size:1.4rem;
+    font-size:14px;
     color:#818181;
 }

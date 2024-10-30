@@ -1,9 +1,10 @@
 "use client"
+import { Rate } from "antd";
 import useBoardCommentList from "./hook"
 import styles from "./styles.module.css"
 
 export default function BoardCommentList() {
-    const { data } = useBoardCommentList();
+    const { data, onChangeStar } = useBoardCommentList();
     return(
         <div className={styles.comment_list_wrap}>
             {data?.fetchBoardComments.map((comment, index) => (
@@ -12,7 +13,10 @@ export default function BoardCommentList() {
                         <div className={styles.d_flex}>
                             <p className={styles.profileIcon}></p>
                             <p className={styles.writer}>{comment?.writer}</p>
-                            <div>☆☆☆☆☆</div>
+                            <Rate 
+                                className={styles.rateStar}
+                                onChange={(event) => onChangeStar(event)}  
+                            />
                         </div>
                         <div>
                             <button className={styles.editIcon}></button>

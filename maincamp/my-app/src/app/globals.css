@@ -23,9 +23,13 @@ body {
   padding:0;
   margin:0;
   box-sizing:border-box;
-  font-size:62.5%;
+  /* font-size:62.5%; */
   /* font-family:Pretendard-Regular.woff2 */
 }
+
+/* .ant-pagination{
+  font-size:inherit;
+} */
 
 @layer utilities {
   /* .text-balance {
@@ -42,20 +46,20 @@ body {
     display:block;
   }
   .new-placeholer{
-    font-size:1.6rem;
+    font-size:16px;
     color:#ababab;
   }
   .new-h1{
-    font-size:2rem;
+    font-size:20px;
     font-weight:700;
-    margin-top:4rem;
+    margin-top:40px;
   }
-  .new-span, .new-p{font-size:1.6rem;}
-  .new-input, .new-textarea{font-size:1.8rem;}
+  .new-span, .new-p{font-size:16px;}
+  .new-input, .new-textarea{font-size:18px;}
   
   .bt_button{
-    border-radius:0.8rem;
-    height:4.8rem;
-    font-size:1.8rem;
+    border-radius:8px;
+    height:48px;
+    font-size:18px;
   }
 }

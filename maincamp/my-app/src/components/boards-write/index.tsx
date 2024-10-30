@@ -117,64 +117,25 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
             </div>
             <div className={styles.picture}>
                 <p className="new-p">사진 첨부</p>
-                <div className={styles.imageUpload}>
-                    {/* <button>
-                        <Image 
-                            src="/images/add-image.png"
-                            alt="사진업로드"
-                            className={styles.picture_btn}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                        />
-                    </button>
-                    <button>
-                        <Image 
-                            src="/images/add-image.png"
-                            alt="사진업로드"
-                            className={styles.picture_btn}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                        />
-                    </button>
-                    <button>
-                        <Image 
-                            src="/images/add-image.png"
-                            alt="사진업로드"
-                            className={styles.picture_btn}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                        />
-                    </button> */}
-                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
-                    <input 
-                        type="file"
-                        onChange={onChangeImageUpload}
-                        accept="image/jpeg, image/png"
-                        ref={fileRef}
-                        style={{display:"none"}}
-                    />
-                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
-                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
-                    <input 
-                        type="file"
-                        onChange={onChangeImageUpload}
-                        accept="image/jpeg, image/png"
-                        ref={fileRef}
-                        style={{display:"none"}}
-                    />
-                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
-                    <button onClick={onClickImageFile} className={styles.onClickImageFile}></button>
-                    <input 
-                        type="file"
-                        onChange={onChangeImageUpload}
-                        accept="image/jpeg, image/png"
-                        ref={fileRef}
-                        style={{display:"none"}}
-                    />
-                    <img src={`https://storage.googleapis.com/${imageUrl}`} alt="" />
+                <div className={styles.imageWrap}>
+                    {imageUrl.map((imageUrl, index) => (
+                        <div key={index} className={styles.imageUpload}>
+                            <button 
+                                onClick={() => onClickImageFile(index)} 
+                                className={styles.onClickImageFile}>
+                            </button>
+                            <input 
+                                type="file"
+                                onChange={(event) => onChangeImageUpload(index, event)}
+                                accept="image/jpeg, image/png"
+                                ref={fileRef[index]}
+                                style={{display:"none"}}
+                                />
+                            {imageUrl && 
+                                <img src={`https://storage.googleapis.com/${imageUrl}`} 
+                                alt={`미리보기 ${index + 1}`} />}
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className={styles.bt_button}>

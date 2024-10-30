@@ -99,11 +99,11 @@ export default function useBoardDetailEdit(isEdit: boolean){
     };
 
     // 이미지업로드
-    const [imageUrl, setImageUrl] = useState("");
-    const fileRef = useRef<HTMLInputElement>(null);
+    const [imageUrl, setImageUrl] = useState(["", "", ""]);
+    const fileRef = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
     const [imageUpload] = useMutation(UploadFileDocument);
 
-    const onChangeImageUpload = async (event:ChangeEvent<HTMLInputElement>) => {
+    const onChangeImageUpload = async (index: number, event:ChangeEvent<HTMLInputElement>) => {
         const imageFile = event.target.files?.[0];
 
         const isValid = checkValidationFile(imageFile);
@@ -111,11 +111,17 @@ export default function useBoardDetailEdit(isEdit: boolean){
 
         const result = await imageUpload({ variables: {file: imageFile}});
         console.log("업로드", result.data?.uploadFile.url);
-        setImageUrl(result.data?.uploadFile.url ?? "");
+        // setImageUrl(result.data?.uploadFile.url ?? "");
+
+        setImageUrl(prev => {
+            const newUrl = [...prev];
+            newUrl[index] = result.data?.uploadFile.url ?? ""
+            return newUrl;
+        })
     };
 
-    const onClickImageFile = () => {
-        fileRef.current?.click();
+    const onClickImageFile = (index: number) => {
+        fileRef[index].current?.click();
         console.log("업로드클릭");
     };
 

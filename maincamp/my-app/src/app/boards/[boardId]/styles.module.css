@@ -1,82 +1,82 @@
 .content{
-    width:128rem;
-    height:217.1rem;
+    width:1280px;
+    height:2171px;
     margin:0 auto;
 }
 
 /* 제목 */
 .content h1{
-    font-size:2.8rem;
-    height:7.2rem;
+    font-size:28px;
+    height:72px;
 }
 
 /* 프로필 */
 .profile{
-    width:128rem;
-    height:2.4rem;
+    width:1280px;
+    height:24px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin:3.2rem 0 3.2rem 0;
+    margin:32px 0 32px 0;
 }
 .profileLeft{
-    width:11.9rem;
-    height:2.4rem;
+    width:119px;
+    height:24px;
     display:flex;
     align-items:center;
-    gap:0.4rem;
+    gap:4v;
 }
 .profile_icon{
-    width:2.4rem;
-    height:2.4rem;
+    width:24px;
+    height:24px;
     background:url(../../../../public/images/img.png) no-repeat center;
 }
-.profile:last-child{font-size:1.4rem;}
-.createDate{font-size:1.4rem;}
+.profile:last-child{font-size:14px;}
+.createDate{font-size:14px;}
 
 /* 내용 */
 .content .subject{
-    height:118rem;
+    height:1180px;
 }
 .content .subjectIcon{
-    height:2.4rem;
+    height:24px;
     display:flex;
     align-items:center;
     justify-content:end;
-    margin-bottom:1.6rem;
+    margin-bottom:16px;
 }
 .content .subjectIcon .clip{
-    width:1.9rem;
-    height:0.908rem;
+    width:19px;
+    height:9.08px;
     background:url(../../../../public/images/clip.png) no-repeat;
-    margin-right:1.6rem;
+    margin-right:16px;
 }
 .content .subjectIcon .mapIcon{
-    width:1.51rem;
-    height:1.844rem;
+    width:15.1px;
+    height:18.44px;
     background:url(../../../../public/images/map_icon.png) no-repeat;
 }
 
 .content .subjectImg{
-    width:40rem;
-    height:53.1rem;
+    width:400px;
+    height:531px;
     background:url(../../../../public/images/Tranquil\ Beachside\ Serenity\ 1.png) no-repeat;
-    margin-bottom:2.4rem;
+    margin-bottom:24px;
 }
-.content .subject p{font-size:1.6rem;}
+.content .subject p{font-size:16px;}
 
 /* 비디오 */
 .videoBg{
-    width:128rem;
-    height:51.2rem;
+    width:1280px;
+    height:512px;
     background-color:#f2f2f2;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 .video{
-    width:82.2rem;
-    height:46.4rem;
+    width:822px;
+    height:464px;
     background:url(../../../../public/images/Frame\ 427323252.png) no-repeat center;
 }
 
@@ -85,48 +85,48 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    height:4.8rem;
-    gap:2.4rem;
-    margin-bottom:7.2rem;
-    margin-top:2.4rem;
+    height:48px;
+    gap:24px;
+    margin-bottom:72px;
+    margin-top:24px;
 }
 .emotion .bad, .emotion .good{
-    width:2.4rem;
-    height:2.4rem;
+    width:24px;
+    height:24px;
     text-align:center;
 }
 .emotion .badIcon{
-    width:2.4rem;
-    height:2.4rem;
+    width:24px;
+    height:24px;
     background:url(../../../../public/images/bad.png) no-repeat center;
 }
 .emotion .good p{
     color:#f66a6a;
 }
 .emotion .goodIcon{
-    width:2.4rem;
-    height:2.4rem;
+    width:24px;
+    height:24px;
     background:url(../../../../public/images/good.png) no-repeat center;
 }
 
 /* 하단 버튼 */
 .bottomBtn{
-    height:4rem;
+    height:40px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:2.4rem;
+    gap:24px;
 }
 .bottomBtn button{
-    border-radius:0.8rem;
+    border-radius:8px;
 }
 .bottomBtn button:first-child{
-    width:10.5rem;
-    height:4rem;
+    width:105px;
+    height:40px;
     background:url(../../../../public/images/list_button.png) no-repeat center;
 }
 .bottomBtn button:last-child{
-    width:10.5rem;
-    height:4rem;
+    width:105px;
+    height:40px;
     background:url(../../../../public/images/edit_button.png) no-repeat center;
 }
