@@ -7,7 +7,6 @@ import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import styles from "./index.module.scss";
 import "react-quill-new/dist/quill.snow.css";
 import { ReactQuillBoxProps } from "./types";
-import { useState } from "react";
 
 Quill.register("modules/imageDropAndPaste", QuillImageDropAndPaste);
 Quill.register("modules/resize", QuillResizeImage);
@@ -123,12 +122,9 @@ const ReactQuillBox = forwardRef<ReactQuill, ReactQuillBoxProps>(
           ref={quillRef}
           theme="snow"
           modules={modules}
-          // formats={formats}
           onChange={handleChange}
           readOnly={readonly}
           placeholder={props.placeholder}
-          // defaultValue={props.defaultValue}
-          // value={props.defaultValue}
           {...rest}
         />
         {errormessage && <p className="toolTip">{errormessage}</p>}
