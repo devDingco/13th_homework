@@ -1,3 +1,12 @@
 {
-  "liveServer.settings.port": 5503
+  "liveServer.settings.port": 5503,
+  "editor.tokenColorCustomizations": {
+    "comments": "#FFB6C1"
+  }
 }
+/*
+주석색 추천
+초록: #50C878
+노랑: #F9E79F
+핑크: #FFB6C1
+*/

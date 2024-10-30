@@ -1,3 +1,18 @@
+/* 마이페이지 상단 css */
+
+.mypageSection {
+  margin: 40px 20px;
+}
+
+.title {
+  color: #000;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px; /* 128.571% */
+  width: 1000px;
+  margin-bottom: 40px;
+}
+
 .informationSection {
   display: flex;
   min-width: 280px;
@@ -15,10 +30,48 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 24px; /* 133.333% */
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nameSection {
+  display: flex;
+  gap: 4px;
+}
+
+.name {
+  font-weight: 500;
 }
 
 .underLine {
   border: 1px solid #e4e4e4;
   width: 100%;
   margin: 12px 0;
+}
+
+.leaveMoney {
+  font-size: 20px;
+
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+}
+
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.transactionHistorySection {
+  display: flex;
+  background-color: red;
+  color: red;
+}
+
+.as {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1000px;
 }
