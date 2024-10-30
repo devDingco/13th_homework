@@ -1,9 +1,14 @@
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { CreateUserDocument } from "../graphql/graphql";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { schema } from "../zod/schema";
 
 export default function useSignUp() {
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, formState } = useForm({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+  });
   const [createUser] = useMutation(CreateUserDocument);
 
   const onClickSubmit = async (data) => {
@@ -23,5 +28,6 @@ export default function useSignUp() {
     register,
     handleSubmit,
     control,
+    formState,
   };
 }
