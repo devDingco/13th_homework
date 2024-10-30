@@ -1,0 +1,3 @@
+interface IProfile {
+  writer: string;
+}

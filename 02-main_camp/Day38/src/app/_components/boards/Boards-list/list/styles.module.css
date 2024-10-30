@@ -1,0 +1,11 @@
+.boards_MainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.boards_ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
