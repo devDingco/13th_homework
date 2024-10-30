@@ -198,18 +198,39 @@ export const CreateTravelProduct = gql`
       _id
       name
       contents
+      price
     }
   }
 `;
 
 // 상품 조회
 export const FETCHTRAVELPRODUCT = gql`
-  query fetchTravelproduct ($travelproductId: ID!) {
-    fetchTravelproduct(fetchTravelproduct: $$travelproductId) {
+  query fetchTravelproduct($travelproductId: ID!) {
+    fetchTravelproduct(travelproductId: $travelproductId) {
       _id
       name
       remarks
       contents
+      price
+    }
+  }
+`;
+
+// 상품 수정
+export const UPDATETRAVELPRODUCT = gql`
+  mutation updateTravelproduct(
+    $updateTravelproductInput: UpdateTravelproductInput!
+    $travelproductId: ID!
+  ) {
+    updateTravelproduct(
+      updateTravelproductInput: $updateTravelproductInput
+      travelproductId: $travelproductId
+    ) {
+      _id
+      name
+      contents
+      remarks
+      price
     }
   }
 `;

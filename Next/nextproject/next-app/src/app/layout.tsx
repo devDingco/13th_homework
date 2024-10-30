@@ -3,11 +3,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import * as React from "react";
-import { useEffect } from "react";
 import LayoutComponent from "./component/_commons/layout";
 import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-header-setting";
-import { useRouter } from "next/navigation";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

@@ -7,14 +7,13 @@ import { UseLayout } from "./hook";
 import { Dropdown, MenuProps, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import { withLoginCheck } from "../../hocs/withLoginCheck";
 
-export default withLoginCheck(function NavigationPage() {
+export default function NavigationPage() {
   const router = useRouter();
   const onClickMain = () => {
     router.push("../../../../boards");
   };
-  const { data, onClickLogin, isLogin } = UseLayout();
+  const { data, onClickLogin } = UseLayout();
 
   // console.log(localStorage.getItem("accessToken"));
 
@@ -53,7 +52,7 @@ export default withLoginCheck(function NavigationPage() {
           </div>
 
           <div className={styles.css_user}>
-            {isLogin ? (
+            {localStorage.getItem("accessToken") ? (
               <>
                 <Image
                   src="/assets/Profile.png"
@@ -82,4 +81,4 @@ export default withLoginCheck(function NavigationPage() {
       </div>
     </>
   );
-});
+}
