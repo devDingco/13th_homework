@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import logo from "/public/img/logo_hoz.png";
+import logo from "/public/img/logo_raw.png";
 import Button from "@/components/Atoms/_Button";
 import { CSSProperties, MouseEvent, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { useQuery } from "@apollo/client";
 import { FETCH_USER } from "@/commons/queries/queries";
@@ -12,7 +12,6 @@ import { FETCH_USER } from "@/commons/queries/queries";
 export default function LayoutNav() {
     const [isSelect, setIsSelect] = useState("mainPage");
     const router = useRouter();
-    const params = useParams();
 
     const { data: login } = useQuery(FETCH_USER);
 
@@ -26,11 +25,11 @@ export default function LayoutNav() {
                 break;
             }
             case "subPage": {
-                router.push(`/boards/new`);
+                router.push(`/product`);
                 break;
             }
             case "myPage": {
-                router.push(`/boards/${params.boardId}`);
+                router.push(`/login`);
                 break;
             }
         }
@@ -40,8 +39,8 @@ export default function LayoutNav() {
         <>
             <nav style={NavWrap}>
                 <ul style={NavMenu}>
-                    <li onClick={() => router.push(`/boards`)}>
-                        <Image src={logo} alt="logo" width={200} height={0} />
+                    <li onClick={() => router.push(`/`)}>
+                        <Image src={logo} alt="logo" width={50} height={0} />
                     </li>
 
                     <li
@@ -51,7 +50,7 @@ export default function LayoutNav() {
                         id="mainPage"
                         onClick={onNavClick}
                     >
-                        성북구 도서관
+                        메인페이지(보드)
                     </li>
                     <li
                         style={
@@ -60,7 +59,7 @@ export default function LayoutNav() {
                         id="subPage"
                         onClick={onNavClick}
                     >
-                        도서 대출
+                        서브페이지(상품)
                     </li>
                     <li
                         style={
@@ -69,7 +68,7 @@ export default function LayoutNav() {
                         id="myPage"
                         onClick={onNavClick}
                     >
-                        마이 페이지
+                        마이페이지(유저)
                     </li>
                 </ul>
 
