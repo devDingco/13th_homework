@@ -1,10 +1,10 @@
 'use client';
 
 import { Fragment, useEffect, useRef, useState } from 'react';
-import getTourOpenapi from '../_api/openapis/getTourOpenapi';
+import getTourOpenapi from '../../_api/openapis/getTourOpenapi';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Image from 'next/image';
-import OpenapiItem from '../_component/openapiPage/OpenapiItem';
+import OpenapiItem from '../../_component/openapiPage/OpenapiItem';
 
 export default function OpenApiPage() {
   const [data, setData] = useState<any>();

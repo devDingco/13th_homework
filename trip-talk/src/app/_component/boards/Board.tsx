@@ -41,20 +41,21 @@ export default function Board({
         {number ?? '번호'}
       </p>
       <p className={`grow ${!createdAt ? 'text-[16px]' : 'text-[14px]'}`}>
-        {'제목' &&
-          title &&
-          title
-            ?.replaceAll(searchValue, `@#$${searchValue}@#$`)
-            .split('@#$')
-            .map((part, index) => (
-              <span
-                key={`${part}_${index}`}
-                style={{
-                  color: part === searchValue ? 'red' : 'black',
-                }}>
-                {part}
-              </span>
-            ))}
+        {title
+          ? searchValue !== undefined &&
+            title
+              ?.replaceAll(searchValue, `@#$${searchValue}@#$`)
+              .split('@#$')
+              .map((part, index) => (
+                <span
+                  key={`${part}_${index}`}
+                  style={{
+                    color: part === searchValue ? 'red' : 'black',
+                  }}>
+                  {part}
+                </span>
+              ))
+          : '제목'}
       </p>
       <p
         className={`${s.boardItems} ${
