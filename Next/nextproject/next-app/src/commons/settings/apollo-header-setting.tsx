@@ -16,7 +16,7 @@ interface IApolloSetting {
 }
 export default function ApolloHeaderSetting(props: IApolloSetting) {
   const { accessToken } = useAccessTokenStore();
-
+  console.log(accessToken);
   const uploadLink = createUploadLink({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },

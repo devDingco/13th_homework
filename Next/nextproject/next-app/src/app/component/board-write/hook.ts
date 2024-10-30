@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
-import { validation } from "../commons/libraries/validation-file";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { validation } from "../_commons/libraries/validation-file";
 import {
   FetchBoard,
   FetchBoards,
@@ -111,6 +111,7 @@ export const UseBoardWrite = (props: IBoardWriteProps) => {
   // 등록하기
   const onClickSignup = async () => {
     await checkValid();
+
     try {
       if (
         inputs.name_id !== "" &&

@@ -5,6 +5,7 @@ import UseListWrite from "./hook";
 import { IListProps } from "./types";
 import SearchPage from "../search";
 import UseSearchPage from "../search/hook";
+
 export default function ListPage(props: IListProps) {
   const { onMoveDetailPage, onClickDelete, onClickWriteBoard } =
     UseListWrite(props);

@@ -1,13 +1,13 @@
 import Image from "next/image";
-import Input from "../commons/Input";
+import Input from "../_commons/Input";
 import styles from "./style.module.css";
 import { IBoardWriteProps } from "./types";
 import { UseBoardWrite } from "./hook";
 import React from "react";
 import { Button, Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
-
-export default function BoardWrite(props: IBoardWriteProps) {
+import { withLoginCheck } from "../_commons/hocs/withLoginCheck";
+export default withLoginCheck(function BoardWrite(props: IBoardWriteProps) {
   const {
     onChangeInput,
     onClickUpdate,
@@ -267,4 +267,4 @@ export default function BoardWrite(props: IBoardWriteProps) {
       </div>
     </div>
   );
-}
+});
