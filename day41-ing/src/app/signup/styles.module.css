@@ -1,0 +1,194 @@
+/* 회원가입 페이지 */
+
+/* 최상위 wrapper */
+.signup-page {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+}
+
+/* ========================================================= */
+/* wrapper-left */
+.content-wrapper {
+  width: 400px;
+  height: 100%;
+  padding: 244px 20px 40px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  position: relative;
+
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+}
+/* wrapper-right */
+.art-wrapper {
+  width: 100%;
+  /* 1920px에서 400px를 제외한 부분의 100% = 1520px */
+  position: relative;
+}
+/* ========================================================= */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 320px;
+  height: 100%;
+  padding-top: 20px;
+  position: relative;
+}
+
+.base-layout {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  /* margin-bottom: 2rem; */
+}
+
+.text-signup-title {
+  margin-bottom: 2rem;
+  /* display: block; 이게 머임??? */
+
+  /* //styleName: sb_18_24; */
+  /* font-family: Pretendard Variable; */
+  color: #000000;
+  /* font-size: rem으로 변환하기 */
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.text-signup-description {
+  /* //styleName: me_14_20; */
+  /* font-family: Pretendard Variable; */
+  color: #333333;
+  /* font-size: rem으로 변환하기 */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+}
+
+.wrapper-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* margin-bottom: 2rem; */
+}
+
+/* ========================================================= */
+/* ============================================= */
+/* ============================================= */
+/* ============================================= */
+
+/* 인풋 창과 라벨 묶기*/
+.wrapper-input-label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.인풋라벨 {
+  color: #000000;
+  font-size: 0.8125rem;
+  font-weight: 600;
+
+  /* cursor: default; */
+}
+/* 여백을 em rem 으로 설정하는 습관? */
+/* padding: 0.25em 0.5em; */
+
+border-radius: 8px;
+border: 1px solid #d4d3d3;
+
+/* 인풋창 입력 시 글자 스타일 */
+/* abcdk@gamai.com  */
+/* styleName: me_14_20; */
+/* font-family: Pretendard Variable; */
+font-size: 14px;
+font-weight: 500;
+line-height: 20px;
+text-align: left;
+padding-left: 10px;
+
+/* JSX에서 required 제어 함수 사용 */
+.input-login:required:invalid {
+  border: 1px solid #f66a6a;
+}
+
+/* 인풋 창 placehoder 스타일 */
+/* .input-login::placeholder { */
+/* styleName: r_14_20; */
+/* font-family: Pretendard Variable; */
+/* color: #ababab; */
+/* font-size: 14px; */
+/* font-weight: 400; */
+/* line-height: 20px; */
+/* text-align: left */
+/* } */
+
+/* 로그인 경고 문구 - 아이디 또는 비밀번호를 확인해 주세요 */
+.text-login-warn {
+  /* styleName: r_12_20; */
+  /* font-family: Pretendard Variable; */
+  color: #f66a6a;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}
+/* ================================================= */
+
+/* ================================================= */
+/* 버튼 묶음 */
+.wrapper-btn {
+  width: 300px;
+  height: 92px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* 로그인 버튼 */
+.btn-login {
+  width: 300px;
+  height: 100%;
+  background-color: #2974e5;
+  border-radius: 8px;
+
+  /* styleName: sb_18_24; */
+  /* font-family: Pretendard Variable; */
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 46px;
+  text-align: center;
+}
+/* 회원가입 버튼 */
+.btn-signup {
+  width: 300px;
+  height: 100%;
+
+  /* styleName: r_14_20; */
+  /* font-family: Pretendard Variable; */
+  color: #333333;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 46px;
+  text-align: center;
+}
+/* ================================================= */
