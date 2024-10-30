@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
+  query fetchBoards($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
       _id
       writer
       title
@@ -146,6 +146,24 @@ export const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {
       url
+    }
+  }
+`;
+
+export const LOGIN_USER = gql`
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      accessToken
+    }
+  }
+`;
+
+export const CREATE_USER = gql`
+  mutation createUser($email: String!, $name: String!, $password: String!) {
+    createUser(
+      createUserInput: { email: $email, name: $name, password: $password }
+    ) {
+      _id
     }
   }
 `;
