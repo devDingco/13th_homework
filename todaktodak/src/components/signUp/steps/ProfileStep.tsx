@@ -37,9 +37,6 @@ export function ProfileStep({ profileImage, onUpload }: ProfileStepProps) {
             <Camera className="w-5 h-5" />
           </button>
         </div>
-        <p className="mt-4 text-sm text-gray-500">
-          프로필 이미지는 언제든지 변경할 수 있습니다
-        </p>
       </div>
     </div>
   );

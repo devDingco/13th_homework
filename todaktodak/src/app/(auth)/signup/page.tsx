@@ -1,4 +1,3 @@
-// app/auth/signup/page.tsx
 "use client";
 
 import { SignupCompleteModal } from "@/components/modals/SignupCompleteModal";

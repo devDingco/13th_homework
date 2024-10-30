@@ -18,8 +18,7 @@ export default function DiaryCard() {
 
         <p className="text-gray-600 text-sm line-clamp-3">
           오늘은 조용히 책을 읽으며 시간을 보냈다. 마음이 차분해지는 기분이
-          들었다. 이런 여유로운 시간을 가질 수 있어서 좋았다. 햇살이 창문으로
-          들어오는 오후 시간, 따뜻한 차 한잔과 함께하는 독서 시간이 참 좋다.
+          들었다. 이런 여유로운 시간을 가질 수 있어서 좋았다.
         </p>
 
         <div className="flex flex-wrap gap-2 mt-3">

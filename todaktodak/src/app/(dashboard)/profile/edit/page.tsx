@@ -1,10 +1,10 @@
-// app/profile/edit/page.tsx
 "use client";
 import { useState } from "react";
-import { Camera, SquarePen } from "lucide-react";
-import { AddressFields } from "@/components/signup/AddressFields";
+import { SquarePen } from "lucide-react";
+
 import { ImageCropModal } from "@/components/signUp/ImageCropModal";
 import Header from "@/components/shared/Header";
+import { AddressFields } from "@/components/signUp/AddressFields";
 
 export default function EditProfilePage() {
   const [profileImage, setProfileImage] = useState<File | null>(null);

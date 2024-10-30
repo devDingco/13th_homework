@@ -19,18 +19,6 @@ export default function WelcomePage() {
               </button>
             </div>
           </div>
-
-          {/* Features */}
-          <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center">
-                📝
-              </div>
-              <h3 className="mt-4 text-lg font-semibold">감정 일기</h3>
-              <p className="mt-2 text-gray-600">하루의 감정을 기록하세요</p>
-            </div>
-            {/* Add more features */}
-          </div>
         </div>
       </div>
     </div>

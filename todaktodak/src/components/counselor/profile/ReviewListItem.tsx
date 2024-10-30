@@ -1,3 +1,5 @@
+import { Receipt, Star } from "lucide-react";
+
 interface ReviewListItemProps {
   review: {
     id: string;
