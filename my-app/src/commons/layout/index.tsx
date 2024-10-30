@@ -24,7 +24,6 @@ export default function Layout({ children }: ILayout) {
       <main className={styles.important}>
         <LayoutNavigation />
         {!isHiddenHeader && <LayoutBanner />}
-
         <div>{children}</div>
       </main>
     </>

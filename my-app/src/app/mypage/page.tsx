@@ -1,23 +1,12 @@
+// 마이페이지
+
 "use client";
 import Information from "@/components/mypage/information";
-import styles from "./styles.module.css";
-import Link from "next/link";
 
 export default function mypage() {
   return (
     <>
-      <div className={styles.mypageSection}>
-        <div className={styles.title}>마이페이지</div>
-        <Information />
-
-        <br />
-        <br />
-        <Link href="/mypage/transactionHistory">거래내역</Link>
-        <br />
-        <Link href="/mypage/pointHistory">포인트 내역</Link>
-        <br />
-        <Link href="/mypage/changePassword">비번 변경</Link>
-      </div>
+      <Information />
     </>
   );
 }
