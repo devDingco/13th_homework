@@ -1,45 +1,10 @@
 "use client";
 
-import { gql, useMutation, useQuery } from "@apollo/client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { MouseEvent } from "react";
-
-const FETCH_BOARDS = gql`
-  query {
-    fetchBoards(page: 1) {
-      _id
-      writer
-      title
-      createdAt
-    }
-  }
-`;
-
-const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
+import useBoards from "./hook";
 
 export default function Boards() {
-  const router = useRouter();
-  const { data } = useQuery(FETCH_BOARDS);
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-
-  const onClickBoard = (boardId: string) => {
-    router.push(`/boards/${boardId}`);
-  };
-
-  const onClickDeleteBoard = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    deleteBoard({
-      variables: {
-        boardId: event.currentTarget.id,
-      },
-      refetchQueries: [{ query: FETCH_BOARDS }],
-    });
-  };
+  const { data, onClickBoard, onClickDeleteBoard } = useBoards();
 
   return (
     <div className="w-[1280px] mx-auto min-w-[680px] px-12 py-6 rounded-2xl shadow-[0px_0px_20px_0px_#00000014]">

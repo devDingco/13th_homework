@@ -1,36 +1,10 @@
 "use client";
-import { gql, useQuery } from "@apollo/client";
+
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import useBoardDetail from "./hook";
 
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
-
-export default function BoardsDetail() {
-  const router = useRouter();
-  const params = useParams();
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: params.boardId,
-    },
-  });
-
-  const onClickMoveEdit = () => {
-    router.push(`/boards/${params.boardId}/edit`);
-  };
-
-  const onClickMoveBoards = () => {
-    router.push(`/boards`);
-  };
+export default function BoardDetail() {
+  const { data, onClickMoveEdit, onClickMoveBoards } = useBoardDetail();
 
   return (
     <div className="flex flex-col w-[1280px] gap-4 mx-auto my-0 py-10">

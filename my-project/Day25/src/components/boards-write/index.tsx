@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import Input from "@/components/writeform/Input";
 import { ChangeEvent, useEffect, useState } from "react";
 import Textarea from "@/components/writeform/Textarea";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
@@ -26,6 +26,36 @@ const FETCH_BOARD = gql`
       title
       contents
       createdAt
+    }
+  }
+`;
+
+const FETCH_BOARDS = gql`
+  mutation fetchBoards($page: int) {
+    fetchBoards(page: $page) {
+      _id
+      writer
+      title
+      createdAt
+    }
+  }
+`;
+
+const UPDATE_BOARD = gql`
+  mutation updateBoard(
+    $boardId: ID!
+    $password: String
+    $updateBoardInput: UpdateBoardInput!
+  ) {
+    updateBoard(
+      boardId: $boardId
+      password: $password
+      updateBoardInput: $updateBoardInput
+    ) {
+      _id
+      writer
+      title
+      contents
     }
   }
 `;
@@ -60,6 +90,7 @@ export default function BoardsNew(props) {
 
   const [registerCheck, setRegisterCheck] = useState(true);
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onChangeInput = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -84,13 +115,61 @@ export default function BoardsNew(props) {
           createBoardInput: {
             ...input,
           },
+
+          refetchQueries: [{ query: FETCH_BOARDS }],
         },
       });
 
       router.push(`/boards/${result.data.createBoard._id}`);
     } catch (error) {
-      console.log("에러가 발생하였습니다. 다시 시도해 주세요.");
+      let errorMessage;
+
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          errorMessage = error.graphQLErrors[0].message;
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      console.log("에러메시지", errorMessage);
     }
+  };
+
+  const onClickEdit = async () => {
+    try {
+      await updateBoard({
+        variables: {
+          boardId: params.boardId,
+          password: input.password,
+          updateBoardInput: {
+            title: input.title,
+            contents: input.contents,
+          },
+          refetchQueries: [{ query: FETCH_BOARDS }],
+        },
+      });
+
+      router.push(`/boards`);
+    } catch (error) {
+      let errorMessage;
+
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          errorMessage = error.graphQLErrors[0].message;
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      console.log("에러메시지", errorMessage);
+    }
+  };
+
+  const onClickEditCancel = () => {
+    router.push(`/boards/${params.boardId}`);
   };
 
   useEffect(() => {
@@ -120,7 +199,8 @@ export default function BoardsNew(props) {
             id="writer"
             onChange={onChangeInput}
             errorMessage={errorMessage.writer}
-            value={props.isEdit ? data?.fetchBoard.writer : ""}
+            defaultValue={props.isEdit ? data?.fetchBoard.writer : ""}
+            disabled={props.isEdit ? true : false}
           />
           <Input
             type="password"
@@ -134,14 +214,14 @@ export default function BoardsNew(props) {
           id="title"
           onChange={onChangeInput}
           errorMessage={errorMessage.title}
-          value={props.isEdit ? data?.fetchBoard.title : ""}
+          defaultValue={props.isEdit ? data?.fetchBoard.title : ""}
         />
         <hr className={styles.hr} />
         <Textarea
           id="contents"
           onChange={onChangeInput}
           errorMessage={errorMessage.contents}
-          value={props.isEdit ? data?.fetchBoard.contents : ""}
+          defaultValue={props.isEdit ? data?.fetchBoard.contents : ""}
         />
         <div className={styles.address_box}>
           <label>주소</label>
@@ -168,9 +248,11 @@ export default function BoardsNew(props) {
         </div>
       </div>
       <div className={styles.footer}>
-        <button className={styles.board_new_button}>취소</button>
+        <button className={styles.board_new_button} onClick={onClickEditCancel}>
+          취소
+        </button>
         <button
-          onClick={onClickRegister}
+          onClick={props.isEdit ? onClickEdit : onClickRegister}
           className={
             registerCheck === true
               ? styles.board_new_button
