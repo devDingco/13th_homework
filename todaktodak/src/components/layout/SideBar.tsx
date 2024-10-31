@@ -1,5 +1,3 @@
-// components/layout/SideBar.tsx
-"use client";
 import { useRouter, usePathname } from "next/navigation";
 import { Calendar, BarChart2, User } from "lucide-react";
 
@@ -25,7 +23,7 @@ export default function SideBar() {
         {/* Logo */}
         <div className="px-6 py-8">
           <h1
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/home")}
             className="text-2xl font-bold text-indigo-600 cursor-pointer"
           >
             토닥토닥
@@ -39,7 +37,7 @@ export default function SideBar() {
               key={item.path}
               onClick={() => router.push(item.path)}
               className={`flex items-center w-full px-4 py-3 text-left rounded-lg hover:bg-indigo-50 group ${
-                pathname === item.path ? "bg-indigo-50" : ""
+                pathname === item.path ? "bg-indigo-100" : ""
               }`}
             >
               <item.icon
@@ -68,9 +66,10 @@ export default function SideBar() {
           className="p-4 border-t cursor-pointer hover:bg-gray-50"
         >
           <div className="flex items-center space-x-3">
+            {/* profile image */}
             <div className="w-10 h-10 rounded-full bg-gray-200" />
             <div>
-              <div className="font-medium">사용자 이름</div>
+              <div className="font-medium text-gray-800">사용자 이름</div>
               <div className="text-sm text-gray-500">내 프로필</div>
             </div>
           </div>

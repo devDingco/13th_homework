@@ -1,4 +1,3 @@
-"use client";
 import { MessageSquare } from "lucide-react";
 
 export default function ChatBot() {
