@@ -3,6 +3,7 @@ export const comment_wrap = {
     borderRadius: "0.8rem",
     display: "flex",
     gap: "1rem",
+    margin: "2rem 0rem",
 };
 
 export const comment_label = {

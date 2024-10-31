@@ -4,8 +4,11 @@ import { ChangeEvent, useState } from "react";
 import { checkImgFile } from "../utils/checkImgFile";
 import { useMutation } from "@apollo/client";
 import { UploadFileDocument } from "../graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useUploadImg() {
+    const { errorAlert } = withSweetAlert();
+
     const [imageUrl, setImageUrl] = useState(["", "", ""]);
     const [uploadFile] = useMutation(UploadFileDocument);
 
@@ -18,7 +21,7 @@ export default function useUploadImg() {
         if (!isValid) return;
 
         if (imageUrl.length > 3) {
-            alert("최대 3개의 이미지만 업로드 가능합니다.");
+            errorAlert("최대 3개의 이미지만 업로드 가능합니다.");
             return;
         }
 
@@ -30,7 +33,7 @@ export default function useUploadImg() {
                 return newImageUrl;
             });
         } catch (error) {
-            alert("이미지 등록에 실패하였습니다!!");
+            errorAlert("이미지 등록에 실패하였습니다!!");
             console.log(error);
         }
     };

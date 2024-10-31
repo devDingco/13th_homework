@@ -2,16 +2,21 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import withSweetAlert from "../library/withSweetAlert";
 
-export const withLoginCheck = (Comps: any) => (props: any) => {
-    const router = useRouter();
+export const withLoginCheck =
+    (Comps: () => JSX.Element) =>
+    <P extends object>(props: P) => {
+        const router = useRouter();
 
-    useEffect(() => {
-        if (sessionStorage.getItem("@_¡¡") === null) {
-            alert("로그인 후 이용 가능합니다");
-            router.push(`/login`);
-        }
-    }, []);
+        const { plainAlert } = withSweetAlert();
 
-    return <Comps {...props} />;
-};
+        useEffect(() => {
+            if (sessionStorage.getItem("@_¡¡") === null) {
+                plainAlert("로그인 후 이용 가능합니다", "info");
+                router.push(`/login`);
+            }
+        }, []);
+
+        return <Comps {...props} />;
+    };

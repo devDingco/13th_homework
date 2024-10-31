@@ -3,8 +3,11 @@ import { IBoardArgs, IBoardInput } from "../types/types";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
 import { FetchBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useUpdate({ addressData, imageUrl }: IBoardArgs) {
+    const { plainAlert, errorAlert } = withSweetAlert();
+
     const Params = useParams();
     const Router = useRouter();
 
@@ -56,11 +59,11 @@ export default function useUpdate({ addressData, imageUrl }: IBoardArgs) {
             });
             console.log(result);
 
-            alert("수정이 완료 되었습니다!");
+            plainAlert("수정이 완료 되었습니다!", "success");
             Router.push(`/boards/${Params.boardId}`);
         } catch (err) {
             console.log(err);
-            alert("비밀번호를 확인해주세요");
+            errorAlert("비밀번호를 확인해주세요");
         }
     }
 

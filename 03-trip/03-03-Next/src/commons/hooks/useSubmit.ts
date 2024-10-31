@@ -3,8 +3,11 @@ import { IBoardArgs, IBoardInput } from "../types/types";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
 import { CreateBoardDocument } from "../graphql/graphql";
+import withSweetAlert from "../library/withSweetAlert";
 
 export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
+    const { plainAlert, errorAlert } = withSweetAlert();
+
     const Router = useRouter();
 
     const [submitInput, setSubmitInput] = useState<IBoardInput>({
@@ -28,12 +31,13 @@ export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
         e.preventDefault();
 
         if (submitInput.author_ID === "")
-            return alert("작성자를 확인해 주세요.");
+            return errorAlert("작성자를 확인해 주세요.");
         if (submitInput.password_ID === "")
-            return alert("비밀번호를 확인해 주세요.");
-        if (submitInput.title_ID === "") return alert("제목을 작성해 주세요.");
+            return errorAlert("비밀번호를 확인해 주세요.");
+        if (submitInput.title_ID === "")
+            return errorAlert("제목을 작성해 주세요.");
         if (submitInput.content_ID === "")
-            return alert("내용을 작성해 주세요.");
+            return errorAlert("내용을 작성해 주세요.");
 
         try {
             const result = await createBoard({
@@ -54,9 +58,9 @@ export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
                 },
             });
             Router.push(`/boards/${result.data?.createBoard._id}`);
-            if (result) alert(`등록되었습니다!!`);
+            if (result) plainAlert(`등록되었습니다!!`, "success");
         } catch {
-            alert("등록에 실패하였습니다. 다시 시도해 주세요.");
+            errorAlert("등록에 실패하였습니다. 다시 시도해 주세요.");
         } finally {
             console.log("powered by graphql api");
         }

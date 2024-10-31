@@ -57,9 +57,9 @@ const BannerImg = {
 };
 
 const BannerBG = {
-    width: "100vw",
+    width: "100%",
     maxHeight: "56rem",
     marginTop: "4rem",
-    aspectRatio: "16/9",
+    aspectRatio: "16/8",
     backgroundColor: "#ffdfcc",
 };
