@@ -9,7 +9,7 @@ interface ILayout {
   children: React.ReactNode;
 }
 
-const SHOW_BANNER = ["/", "/boards"];
+const SHOW_BANNER = ["/", "/boards", "/user/signup", "/user/login"];
 const HIDDEN_NAVIGATION = ["/boards/new"];
 
 export default function Layout({ children }: ILayout) {

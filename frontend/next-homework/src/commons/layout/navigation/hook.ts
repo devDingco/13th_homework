@@ -12,7 +12,11 @@ const useNavigetionLayout = () => {
   const onClickTripBoards = () => {
     router.push("/boards");
   };
-  return { onClickLogo, onClickTripBoards };
+
+  const onClickLogin = () => {
+    router.push("/user/login");
+  };
+  return { onClickLogo, onClickTripBoards, onClickLogin };
 };
 
 export default useNavigetionLayout;
