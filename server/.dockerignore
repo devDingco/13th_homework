@@ -1,1 +1,27 @@
-node_modules
+# Node.js 관련 파일
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# 환경 파일
+.env
+.env.*
+
+# 빌드 출력
+dist/
+build/
+out/
+
+# Git 관련
+.git
+.gitignore
+
+# IDE 설정
+.vscode/
+.idea/
+*.sublime-*
+
+# OS 관련 파일
+.DS_Store
+Thumbs.db
