@@ -1,8 +1,11 @@
-import React from 'react';
-import PostsForm from '../../_component/boardForm/PostsForm';
-import s from './BoardsNew.module.css';
+'use client';
 
-const BoardsNew = () => {
+import React from 'react';
+import PostsForm from '@/app/_component/boardForm/PostsForm';
+import s from './BoardsNew.module.css';
+import WithLoginPage from '@/app/_HOC/WithLoginPage';
+
+export default WithLoginPage(function BoardsNew() {
   return (
     <>
       <div className={s.mainContainer}>
@@ -11,6 +14,4 @@ const BoardsNew = () => {
       </div>
     </>
   );
-};
-
-export default BoardsNew;
+});

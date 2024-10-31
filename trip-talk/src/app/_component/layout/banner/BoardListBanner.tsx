@@ -18,7 +18,12 @@ import { useParams, usePathname } from 'next/navigation';
 export default function BoardListBanner() {
   const pathname = usePathname();
   const { postId } = useParams();
-  const HIDDEN_BANNERS = [`/boards/${postId}/edit`, '/boards/new'];
+  const HIDDEN_BANNERS = [
+    `/boards/${postId}/edit`,
+    '/boards/new',
+    '/user/login',
+    '/user/signup',
+  ];
   const isHiddenHeader = HIDDEN_BANNERS.includes(pathname);
 
   return (

@@ -56,7 +56,7 @@ export default function BoardDetail({
             {data && (
               <Tooltip
                 placement="topRight"
-                title={data?.fetchBoard.boardAddress.address}
+                title={data?.fetchBoard.boardAddress?.address && ''}
                 color="#999">
                 <button>
                   <Image src={LocationIcon} alt="" width={0} height={0} />

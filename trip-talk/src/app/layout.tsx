@@ -4,9 +4,7 @@ import '@/app/global.css';
 import ApolloSetting from './_commons/settings/apollo-setting';
 import ModalTemplete from './_component/modal/ModalTemplete';
 import localFont from 'next/font/local';
-import DefaultLayout from './_component/layout';
-import BoardListBanner from './_component/layout/banner/BoardListBanner';
-import { usePathname } from 'next/navigation';
+import ApolloHeaderSetting from '@/app/_commons/settings/apollo-header-setting';
 
 export const metadata: Metadata = {
   title: 'My App',
@@ -26,15 +24,7 @@ export default function RootLayout({
     <html lang="en" className={myFont.className}>
       <body>
         <ModalTemplete />
-        <DefaultLayout />
-        <ApolloSetting>
-          <div className="contents w-screen">
-            <BoardListBanner />
-          </div>
-          <main className={'w-full max-w-[1280px] mx-auto'} id="root">
-            {children}
-          </main>
-        </ApolloSetting>
+        <ApolloHeaderSetting>{children}</ApolloHeaderSetting>
       </body>
     </html>
   );
