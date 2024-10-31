@@ -1776,6 +1776,13 @@
     "@types/extract-files" "*"
     graphql "14 - 16"
 
+"@types/classnames@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.3.4.tgz#1a1fdf5023ef216219f13e702543f9ce9b394560"
+  integrity sha512-dwmfrMMQb9ujX1uYGvB5ERDlOzBNywnZAZBtOe107/hORWP05ESgU4QyaanZMWYYfd2BzrG78y13/Bju8IQcMQ==
+  dependencies:
+    classnames "*"
+
 "@types/extract-files@*":
   version "13.0.1"
   resolved "https://registry.npmjs.org/@types/extract-files/-/extract-files-13.0.1.tgz"
@@ -2487,7 +2494,7 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-classnames@2.x, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1, classnames@^2.3.2, classnames@^2.5.1:
+classnames@*, classnames@2.x, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1, classnames@^2.3.2, classnames@^2.5.1:
   version "2.5.1"
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.5.1.tgz"
   integrity sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==

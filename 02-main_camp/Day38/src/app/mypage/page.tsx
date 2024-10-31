@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 import TransactionHistoryAndBookmarks from "../_components/mypage/TransactionHistoryAndBookmarks";
 import { WalletOutlined } from "@ant-design/icons";
 import PointsUsageHistory from "../_components/mypage/PointsUsageHistory";
+import ChangePassword from "../_components/mypage/ChangePassword";
 
 const MYPAGE_MENUS = ["거래내역 & 북마크", "포인트 사용 내역", "비밀번호 변경"];
 
@@ -70,19 +71,7 @@ export default function MyPage() {
       </div>
       {selectedMenu === 0 && <TransactionHistoryAndBookmarks />}
       {selectedMenu === 1 && <PointsUsageHistory />}
-      {/* <div className={styles.searchBarContainer}>
-        <div className={styles.searchContainer}>
-          <div className={styles.searchIconContainer}>
-            <SearchOutlined />
-          </div>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="필요한 내용을 검색해 주세요."
-          />
-        </div>
-        <button className={styles.searchButton}>검색</button>
-      </div> */}
+      {selectedMenu === 2 && <ChangePassword />}
     </div>
   );
 }
