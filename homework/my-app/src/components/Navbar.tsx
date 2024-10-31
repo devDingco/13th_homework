@@ -50,6 +50,9 @@ const Navbar = () => {
     router.push("/");
   };
 
+  const storeClick = () => {
+    router.push("/store");
+  };
   const userInfo = data?.fetchUserLoggedIn;
 
   return (
@@ -59,7 +62,9 @@ const Navbar = () => {
           Co chokchok
         </div>
         <div className={styles.list}>Trip Talk!</div>
-        <div className={styles.list}>숙박권 구매</div>
+        <div className={styles.list} onClick={storeClick}>
+          숙박권 구매
+        </div>
 
         {isLoggedIn ? (
           <div
