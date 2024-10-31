@@ -2,7 +2,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from 'src/user/entity/user.entity';
 
 @Injectable()
 export class postgreSQLConfig implements TypeOrmOptionsFactory {

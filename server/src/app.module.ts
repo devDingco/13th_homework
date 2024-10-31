@@ -18,7 +18,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: '.env',
+            envFilePath: `.env.${process.env.NODE_ENV || 'local'}`,
             isGlobal: true,
         }),
 
