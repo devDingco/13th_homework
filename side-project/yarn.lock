@@ -593,6 +593,14 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
+"@graphql-codegen/add@^3.2.1":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-3.2.3.tgz#f1ecee085987e7c21841edc4b1fd48877c663e1a"
+  integrity sha512-sQOnWpMko4JLeykwyjFTxnhqjd/3NOG2OyMuvK76Wnnwh8DRrNf2VEs2kmSvLl7MndMlOj7Kh5U154dVcvhmKQ==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^3.1.1"
+    tslib "~2.4.0"
+
 "@graphql-codegen/add@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-5.0.3.tgz#1ede6bac9a93661ed7fa5808b203d079e1b1d215"
@@ -682,6 +690,42 @@
     auto-bind "~4.0.0"
     tslib "~2.6.0"
 
+"@graphql-codegen/near-operation-file-preset@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/near-operation-file-preset/-/near-operation-file-preset-3.0.0.tgz#f294df4b4cf5a565aecfdbb5de281b5852594879"
+  integrity sha512-HRPaa7OsIAHQBFeGiTUVdjFcxzgvAs7uxSqcLEJgDpCr9cffpwnlgWP3gK79KnTiHsRkyb55U1K4YyrL00g1Cw==
+  dependencies:
+    "@graphql-codegen/add" "^3.2.1"
+    "@graphql-codegen/plugin-helpers" "^3.0.0"
+    "@graphql-codegen/visitor-plugin-common" "2.13.1"
+    "@graphql-tools/utils" "^10.0.0"
+    parse-filepath "^1.0.2"
+    tslib "~2.6.0"
+
+"@graphql-codegen/plugin-helpers@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.7.2.tgz#6544f739d725441c826a8af6a49519f588ff9bed"
+  integrity sha512-kln2AZ12uii6U59OQXdjLk5nOlh1pHis1R98cDZGFnfaiAbX9V3fxcZ1MMJkB7qFUymTALzyjZoXXdyVmPMfRg==
+  dependencies:
+    "@graphql-tools/utils" "^8.8.0"
+    change-case-all "1.0.14"
+    common-tags "1.8.2"
+    import-from "4.0.0"
+    lodash "~4.17.0"
+    tslib "~2.4.0"
+
+"@graphql-codegen/plugin-helpers@^3.0.0", "@graphql-codegen/plugin-helpers@^3.1.1":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-3.1.2.tgz#69a2e91178f478ea6849846ade0a59a844d34389"
+  integrity sha512-emOQiHyIliVOIjKVKdsI5MXj312zmRDwmHpyUTZMjfpvxq/UVAHUJIVdVf+lnjjrI+LXBTgMlTWTgHQfmICxjg==
+  dependencies:
+    "@graphql-tools/utils" "^9.0.0"
+    change-case-all "1.0.15"
+    common-tags "1.8.2"
+    import-from "4.0.0"
+    lodash "~4.17.0"
+    tslib "~2.4.0"
+
 "@graphql-codegen/plugin-helpers@^5.0.3", "@graphql-codegen/plugin-helpers@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-5.1.0.tgz#5c4ace748b9761d082ec1a0c19a82047bacce553"
@@ -725,6 +769,17 @@
     auto-bind "~4.0.0"
     tslib "~2.6.0"
 
+"@graphql-codegen/typescript-react-apollo@^4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-4.3.2.tgz#0e0fa9cb5b2bc2083ba10f8fbfc8558241151399"
+  integrity sha512-io2tWfeehBqOB2X6llqLE6B9wjjsXZT/GTZlguGVXdbR7WhSJO9GXyLflXYKxom/h2bPjkVL534Ev6wZLcs0wA==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^3.0.0"
+    "@graphql-codegen/visitor-plugin-common" "2.13.1"
+    auto-bind "~4.0.0"
+    change-case-all "1.0.15"
+    tslib "~2.6.0"
+
 "@graphql-codegen/typescript@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-4.1.1.tgz#f82c8f6bb23557ecce20ec120153b72e93c09aef"
@@ -735,6 +790,22 @@
     "@graphql-codegen/visitor-plugin-common" "5.5.0"
     auto-bind "~4.0.0"
     tslib "~2.6.0"
+
+"@graphql-codegen/visitor-plugin-common@2.13.1":
+  version "2.13.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-2.13.1.tgz#2228660f6692bcdb96b1f6d91a0661624266b76b"
+  integrity sha512-mD9ufZhDGhyrSaWQGrU1Q1c5f01TeWtSWy/cDwXYjJcHIj1Y/DG2x0tOflEfCvh5WcnmHNIw4lzDsg1W7iFJEg==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.7.2"
+    "@graphql-tools/optimize" "^1.3.0"
+    "@graphql-tools/relay-operation-optimizer" "^6.5.0"
+    "@graphql-tools/utils" "^8.8.0"
+    auto-bind "~4.0.0"
+    change-case-all "1.0.14"
+    dependency-graph "^0.11.0"
+    graphql-tag "^2.11.0"
+    parse-filepath "^1.0.2"
+    tslib "~2.4.0"
 
 "@graphql-codegen/visitor-plugin-common@5.5.0", "@graphql-codegen/visitor-plugin-common@^5.5.0":
   version "5.5.0"
@@ -937,6 +1008,13 @@
     "@graphql-tools/utils" "^10.5.5"
     tslib "^2.4.0"
 
+"@graphql-tools/optimize@^1.3.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/optimize/-/optimize-1.4.0.tgz#20d6a9efa185ef8fc4af4fd409963e0907c6e112"
+  integrity sha512-dJs/2XvZp+wgHH8T5J2TqptT9/6uVzIYvA6uFACha+ufvdMBedkfR4b4GbT8jAKLRARiqRTxy3dctnwkTM2tdw==
+  dependencies:
+    tslib "^2.4.0"
+
 "@graphql-tools/optimize@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/optimize/-/optimize-2.0.0.tgz#7a9779d180824511248a50c5a241eff6e7a2d906"
@@ -965,6 +1043,15 @@
     scuid "^1.1.0"
     tslib "^2.4.0"
     yaml-ast-parser "^0.0.43"
+
+"@graphql-tools/relay-operation-optimizer@^6.5.0":
+  version "6.5.18"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/relay-operation-optimizer/-/relay-operation-optimizer-6.5.18.tgz#a1b74a8e0a5d0c795b8a4d19629b654cf66aa5ab"
+  integrity sha512-mc5VPyTeV+LwiM+DNvoDQfPqwQYhPV/cl5jOBjTgSniyaq8/86aODfMkrE2OduhQ5E00hqrkuL2Fdrgk0w1QJg==
+  dependencies:
+    "@ardatan/relay-compiler" "12.0.0"
+    "@graphql-tools/utils" "^9.2.1"
+    tslib "^2.4.0"
 
 "@graphql-tools/relay-operation-optimizer@^7.0.0":
   version "7.0.2"
@@ -1014,6 +1101,21 @@
     dset "^3.1.2"
     tslib "^2.4.0"
 
+"@graphql-tools/utils@^8.8.0":
+  version "8.13.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.13.1.tgz#b247607e400365c2cd87ff54654d4ad25a7ac491"
+  integrity sha512-qIh9yYpdUFmctVqovwMdheVNJqFh+DQNWIhX87FJStfXYnmweBUDATok9fWPleKeFwxnW8IapKmY8m8toJEkAw==
+  dependencies:
+    tslib "^2.4.0"
+
+"@graphql-tools/utils@^9.0.0", "@graphql-tools/utils@^9.2.1":
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-9.2.1.tgz#1b3df0ef166cfa3eae706e3518b17d5922721c57"
+  integrity sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.1.1"
+    tslib "^2.4.0"
+
 "@graphql-tools/wrap@^10.0.11":
   version "10.0.11"
   resolved "https://registry.yarnpkg.com/@graphql-tools/wrap/-/wrap-10.0.11.tgz#9cb8f545778c515966c23c311c1265e8050cba0f"
@@ -1029,6 +1131,11 @@
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.2.0.tgz#5f3d96ec6b2354ad6d8a28bf216a1d97b5426861"
   integrity sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==
+
+"@hookform/resolvers@^3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-3.9.1.tgz#a23883c40bfd449cb6c6ab5a0fa0729184c950ff"
+  integrity sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==
 
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
@@ -1659,6 +1766,14 @@ argparse@^2.0.1:
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
+"argparse@~ 0.1.11":
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-0.1.16.tgz#cfd01e0fbba3d6caed049fbd758d40f65196f57c"
+  integrity sha512-LjmC2dNpdn2L4UzyoaIr11ELYoLn37ZFy9zObrQFHsSuOepeUEMKnM8w5KL4Tnrp2gy88rRuQt6Ky8Bjml+Baw==
+  dependencies:
+    underscore "~1.7.0"
+    underscore.string "~2.4.0"
+
 aria-query@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-5.3.2.tgz#93f81a43480e33a338f19163a3d10a50c01dcd59"
@@ -1972,6 +2087,22 @@ chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+change-case-all@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/change-case-all/-/change-case-all-1.0.14.tgz#bac04da08ad143278d0ac3dda7eccd39280bfba1"
+  integrity sha512-CWVm2uT7dmSHdO/z1CXT/n47mWonyypzBbuCy5tN7uMg22BsfkhwT6oHmFCAk+gL1LOOxhdbB9SZz3J1KTY3gA==
+  dependencies:
+    change-case "^4.1.2"
+    is-lower-case "^2.0.2"
+    is-upper-case "^2.0.2"
+    lower-case "^2.0.2"
+    lower-case-first "^2.0.2"
+    sponge-case "^1.0.1"
+    swap-case "^2.0.2"
+    title-case "^3.0.3"
+    upper-case "^2.0.2"
+    upper-case-first "^2.0.2"
+
 change-case-all@1.0.15:
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/change-case-all/-/change-case-all-1.0.15.tgz#de29393167fc101d646cd76b0ef23e27d09756ad"
@@ -2088,6 +2219,15 @@ clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
+
+codegen@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/codegen/-/codegen-0.1.0.tgz#d4bab58333b4a50c6b40c300acb8ca1915cb64e4"
+  integrity sha512-0Ipplq+IaVTA05knsyGIgYNVa+iH2r4WA77jFYGC1geXIFe0y9cLTZBoKTHiix6MBNlTaBbZ0Y7DKH2VR77bEA==
+  dependencies:
+    js-yaml "3.1.0"
+    sugar "1.4.1"
+    underscore "1.6.0"
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -2697,6 +2837,11 @@ espree@^9.6.0, espree@^9.6.1:
     acorn "^8.9.0"
     acorn-jsx "^5.3.2"
     eslint-visitor-keys "^3.4.1"
+
+"esprima@~ 1.0.2":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.0.4.tgz#9f557e08fc3b4d26ece9dd34f8fbf476b62585ad"
+  integrity sha512-rp5dMKN8zEs9dfi9g0X1ClLmV//WRyk/R15mppFNICIFRG5P92VP7Z04p8pk++gABo9W2tY+kHyu6P1mEHgmTA==
 
 esquery@^1.4.2:
   version "1.6.0"
@@ -3566,6 +3711,14 @@ jose@^5.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+js-yaml@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.1.0.tgz#36ba02e618c50748e772dd352428904cbbadcf44"
+  integrity sha512-AgPExLjC+sVh3GLVZdoTprN9oKoF911GFq0CMs8XVXPyfOfelpH9+NKGAn0NKqt9g38/5nPHqBOD8ObqhoSQ6Q==
+  dependencies:
+    argparse "~ 0.1.11"
+    esprima "~ 1.0.2"
 
 js-yaml@^4.0.0, js-yaml@^4.1.0:
   version "4.1.0"
@@ -4676,6 +4829,11 @@ react-dom@^18:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-hook-form@^7.53.1:
+  version "7.53.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.1.tgz#3f2cd1ed2b3af99416a4ac674da2d526625add67"
+  integrity sha512-6aiQeBda4zjcuaugWvim9WsGqisoUk+etmFEsSUMm451/Ic8L/UAb7sRtMj3V+Hdzm6mMjU1VhiSzYUZeBm0Vg==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5222,6 +5380,11 @@ sucrase@^3.32.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
+sugar@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/sugar/-/sugar-1.4.1.tgz#1310d4dedc699e5a173183718541b0d7844a7598"
+  integrity sha512-L7sMG1FTSoJT/1su2ZhvuUGmSP8hTma95qCx+Y593kEuZWobPlGsEE+H9Qpl/Na46CsFVXPUBUfW7kRfTE0a6Q==
+
 supports-color@^7.1.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-7.2.0.tgz#1b7dcdcb32b8138801b3e478ba6a51caa89648da"
@@ -5376,6 +5539,11 @@ tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.5.0, tslib@^2.6
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.0.tgz#d124c86c3c05a40a91e6fdea4021bd31d377971b"
   integrity sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==
 
+tslib@~2.4.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
 tslib@~2.6.0:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
@@ -5466,6 +5634,21 @@ unc-path-regex@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
   integrity sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==
+
+underscore.string@~2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.4.0.tgz#8cdd8fbac4e2d2ea1e7e2e8097c42f442280f85b"
+  integrity sha512-yxkabuCaIBnzfIvX3kBxQqCs0ar/bfJwDnFEHJUm/ZrRVhT3IItdRF5cZjARLzEnyQYtIUhsZ2LG2j3HidFOFQ==
+
+underscore@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
+  integrity sha512-z4o1fvKUojIWh9XuaVLUDdf86RQiq13AC1dmHbTpoyuu+bquHms76v16CjycCbec87J7z0k//SiQVk0sMdFmpQ==
+
+underscore@~1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
+  integrity sha512-cp0oQQyZhUM1kpJDLdGO1jPZHgS/MpzoWYfe9+CM2h/QGDZlqwT2T3YGukuBdaNJ/CAPoeyAZRRHz8JFo176vA==
 
 undici-types@~6.19.2, undici-types@~6.19.8:
   version "6.19.8"
@@ -5740,6 +5923,11 @@ zen-observable@0.8.15:
   version "0.8.15"
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
+
+zod@^3.23.8:
+  version "3.23.8"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
+  integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==
 
 zustand@^5.0.0:
   version "5.0.0"
