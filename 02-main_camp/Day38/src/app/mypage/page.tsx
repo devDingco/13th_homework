@@ -4,34 +4,11 @@ import React, { MouseEvent, useState } from "react";
 import Image from "next/image";
 import Divider from "../_components/commons/divider";
 import styles from "./styles.module.css";
-import { SearchOutlined, WalletOutlined } from "@ant-design/icons";
-import MyPageNavigation from "../_components/mypage/navigation";
-import List from "../_components/mypage/list";
+import TransactionHistoryAndBookmarks from "../_components/mypage/TransactionHistoryAndBookmarks";
+import { WalletOutlined } from "@ant-design/icons";
+import PointsUsageHistory from "../_components/mypage/PointsUsageHistory";
 
 const MYPAGE_MENUS = ["거래내역 & 북마크", "포인트 사용 내역", "비밀번호 변경"];
-
-const columns = [
-  { title: "번호", key: "id" },
-  { title: "상품명", key: "name" },
-  { title: "판매가격", key: "price" },
-  { title: "날짜", key: "date" },
-];
-
-const items = [
-  {
-    id: 243,
-    name: "파르나스 호텔 제주",
-    status: "판매 완료",
-    price: "326,000원",
-    date: "2024.12.16",
-  },
-  {
-    id: 244,
-    name: "파르나스 호텔 서울",
-    price: "500,000원",
-    date: "2024.11.10",
-  },
-];
 
 export default function MyPage() {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -91,8 +68,9 @@ export default function MyPage() {
           ))}
         </div>
       </div>
-      <MyPageNavigation items={["나의 상품", "북마크"]} />
-      <div className={styles.searchBarContainer}>
+      {selectedMenu === 0 && <TransactionHistoryAndBookmarks />}
+      {selectedMenu === 1 && <PointsUsageHistory />}
+      {/* <div className={styles.searchBarContainer}>
         <div className={styles.searchContainer}>
           <div className={styles.searchIconContainer}>
             <SearchOutlined />
@@ -104,8 +82,7 @@ export default function MyPage() {
           />
         </div>
         <button className={styles.searchButton}>검색</button>
-      </div>
-      <List columns={columns} items={items} />
+      </div> */}
     </div>
   );
 }
