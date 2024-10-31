@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import useBoardDetail from "./hook";
+import CommentWrite from "../comment-write";
 
 export default function BoardDetail() {
   const { data, onClickMoveEdit, onClickMoveBoards } = useBoardDetail();
@@ -86,6 +87,7 @@ export default function BoardDetail() {
           </div>
         </button>
       </div>
+      <CommentWrite />
     </div>
   );
 }
