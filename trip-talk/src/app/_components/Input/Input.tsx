@@ -8,22 +8,21 @@ export default function Input({
   defaultValue,
   disabled,
   value,
+  required,
+  isLabel,
 }: IInputProps) {
   return (
     <div className={styles.input_wrapper}>
-      {id !== "address" && id !== "detail_address" && (
+      {isLabel && (
         <div className={styles.label_wrapper}>
           <label className={styles.label}>{INPUT_CHILDREN[id]}</label>
-          {id !== "zip_code" && id !== "url" && (
-            <b className={`${styles.required_marker}`}>*</b>
-          )}
+          {required && <b className={`${styles.required_marker}`}>*</b>}
         </div>
       )}
-
       <input
         className={styles.input}
         id={id}
-        type={id === "password" ? "password" : "text"}
+        type={id.toLowerCase().includes("password") ? "password" : "text"}
         placeholder={PLACEHOLDERS[id]}
         onChange={onChange}
         defaultValue={defaultValue}

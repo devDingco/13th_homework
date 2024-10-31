@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   Dispatch,
+  FocusEventHandler,
   MouseEventHandler,
   ReactNode,
   SetStateAction,
@@ -28,6 +29,8 @@ export interface IInputProps {
   defaultValue?: string;
   disabled?: boolean;
   value?: string;
+  required: boolean;
+  isLabel: boolean;
 }
 
 export interface IButtonProps {
@@ -35,6 +38,7 @@ export interface IButtonProps {
   disabled?: boolean;
   color: "blue" | "gray" | "white";
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  width?: string;
 }
 
 export interface IError {
@@ -138,4 +142,12 @@ export interface ICommentData {
 export interface ICheckValidationFile {
   size: number;
   type: string;
+}
+
+export interface IBoardListMenu {
+  onFocusSearchBar: FocusEventHandler<HTMLDivElement> | undefined;
+  onBlurSearchBar: FocusEventHandler<HTMLDivElement> | undefined;
+  onChangeSearch: ChangeEventHandler<HTMLInputElement> | undefined;
+  isClick: boolean;
+  keyword: string;
 }

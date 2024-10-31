@@ -5,8 +5,8 @@ import styles from "./styles.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import TextArea from "../TextArea/TextArea";
-import useCommentWrite from "../../../commons/hooks/useCommentWrite";
 import StarRating from "../StarRating/StarRating";
+import useCommentWrite from "../../../commons/hooks/UseCommentWrite";
 
 export default function CommentWrite() {
   const {
@@ -30,13 +30,17 @@ export default function CommentWrite() {
         <div className={styles.input_wrapper}>
           <Input
             id="writer"
+            required={true}
             onChange={handleInputChange}
             value={comment.writer}
+            isLabel={true}
           />
           <Input
             id="password"
+            required={true}
             onChange={handleInputChange}
             value={comment.password}
+            isLabel={true}
           />
         </div>
         <div className={styles.textarea_wrapper}>

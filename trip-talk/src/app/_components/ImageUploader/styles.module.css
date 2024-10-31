@@ -1,5 +1,5 @@
 .image_uploader_wrapper {
-  @apply flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-lg;
+  @apply flex w-40 h-40 flex-col justify-center items-center gap-2 rounded-lg relative;
   background-color: #f2f2f2;
 }
 
@@ -14,4 +14,12 @@
 
 .upload_image {
   @apply w-40 h-40 rounded-lg;
+}
+
+.upload_image_wrapper:hover .deleteButton {
+  @apply block;
+}
+
+.deleteButton {
+  @apply hidden absolute top-1 right-1;
 }

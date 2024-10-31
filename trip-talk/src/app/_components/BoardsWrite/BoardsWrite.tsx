@@ -42,9 +42,11 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
         <div>
           <Input
             id="writer"
+            required={true}
             onChange={handleInputChange}
             defaultValue={props.data?.fetchBoard.writer as string}
             disabled={props.isEdit}
+            isLabel={true}
           />
           {!formData.writer && (
             <div className={styles.required_field}>
@@ -55,8 +57,10 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
         <div>
           <Input
             id="password"
+            required={true}
             onChange={handleInputChange}
             disabled={props.isEdit}
+            isLabel={true}
           />
           {!formData.password && (
             <div className={styles.required_field}>
@@ -68,8 +72,10 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       <div className={styles.title_wrapper}>
         <Input
           id="title"
+          required={true}
           onChange={handleInputChange}
           defaultValue={props.data?.fetchBoard.title}
+          isLabel={true}
         />
         {!formData.title && (
           <div className={styles.required_field}>
@@ -98,29 +104,37 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
           <div>
             <Input
               id="zip_code"
+              required={false}
               defaultValue={
                 props.data?.fetchBoard.boardAddress?.zipcode as string
               }
+              isLabel={true}
             />
           </div>
           <Button id="zip_code_search" color="white" />
         </div>
         <Input
+          required={false}
           id="address"
           defaultValue={props.data?.fetchBoard.boardAddress?.address as string}
+          isLabel={false}
         />
         <Input
+          required={false}
           id="detail_address"
           defaultValue={
             props.data?.fetchBoard.boardAddress?.addressDetail as string
           }
+          isLabel={false}
         />
       </div>
       <div className={styles.link_wrapper}>
         <Input
+          required={true}
           id="youtubeUrl"
           onChange={handleInputChange}
           defaultValue={props.data?.fetchBoard.youtubeUrl as string}
+          isLabel={true}
         />
       </div>
       <div className={styles.photo_wrapper}>

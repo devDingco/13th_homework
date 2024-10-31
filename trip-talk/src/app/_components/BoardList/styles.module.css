@@ -1,5 +1,5 @@
 .board_list {
-  @apply flex py-3 px-6 items-center gap-2 self-stretch rounded-lg text-center text-ellipsis text-sm font-light border border-solid border-offWhite relative;
+  @apply flex py-3 px-6 items-center gap-2 self-stretch rounded-lg text-center text-ellipsis text-sm font-light border border-solid border-offWhite relative cursor-pointer;
 }
 
 .board_list:hover .deleteButton {

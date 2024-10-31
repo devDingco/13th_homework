@@ -3,7 +3,7 @@ import Image from "next/image";
 import { IButtonProps } from "../../../types/components.type";
 import { BUTTON } from "../../../constants/constants";
 
-export default function Button({ id, disabled, color, onClick }: IButtonProps) {
+export default function Button({ id, disabled, color, onClick, width }: IButtonProps) {
   const colorVariants = {
     blue: "bg-blue text-white",
     gray: "bg-gray text-white",
@@ -17,6 +17,7 @@ export default function Button({ id, disabled, color, onClick }: IButtonProps) {
       disabled={disabled}
       className={`${styles.button} ${colorVariants[color]}`}
       onClick={onClick}
+      style={{width: width}}
     >
       {BUTTON[id]}
       {id === "menu" ||
