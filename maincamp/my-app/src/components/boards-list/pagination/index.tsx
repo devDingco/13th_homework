@@ -16,7 +16,7 @@ export default function ListPagination(props:IPagiNationProps){
 
     return(
         <div className={styles.paginationWrap}>
-            {/* <span onClick={onClickPrevPage} className={styles.listPrev}>이전</span>
+            <span onClick={onClickPrevPage} className={styles.listPrev}>이전</span>
             {new Array(10).fill("페이지").map(
                 (_, index) =>
                     index + startPage <= props.lastPage && (
@@ -30,8 +30,8 @@ export default function ListPagination(props:IPagiNationProps){
                         </span>
                     )
             )}
-            <span onClick={onClickNextPage} className={styles.listNext}>다음</span> */}
-            <Pagination
+            <span onClick={onClickNextPage} className={styles.listNext}>다음</span>
+            {/* <Pagination
                 defaultCurrent={1}
                 defaultPageSize={10}
                 align="center"
@@ -42,7 +42,7 @@ export default function ListPagination(props:IPagiNationProps){
                 className={styles.pagination}
                 // refetch={refetch}
                 // lastPage={lastPage}
-            />
+            /> */}
         </div>
     )
 }

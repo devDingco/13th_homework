@@ -178,7 +178,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
                                 address: writeAddress,
                                 addressDetail: detailAddress,
                             },
-                            images: [imageUrl],
+                            // images: [imageUrl],
                         }
                     },
                 })

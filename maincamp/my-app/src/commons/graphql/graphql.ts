@@ -153,6 +153,15 @@ export type DeleteBoardMutationVariables = Exact<{
 
 export type DeleteBoardMutation = { __typename?: 'Mutation', deleteBoard: string };
 
+export type FetchBoardsCountQueryVariables = Exact<{
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type FetchBoardsCountQuery = { __typename?: 'Query', fetchBoardsCount: number };
+
 export type CreateBoardMutationVariables = Exact<{
   createBoardInput: CreateBoardInput;
 }>;
