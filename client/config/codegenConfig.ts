@@ -1,5 +1,4 @@
 /** @format */
-
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import dotenv from 'dotenv';
 
@@ -29,6 +28,7 @@ const config: CodegenConfig = {
 				withHooks: true,
 				withComponent: false,
 				withHOC: false,
+				strictScalars: true,
 				scalars: {
 					DateTime: 'Date',
 				},
