@@ -7,7 +7,6 @@ export default function useCommentList() {
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { page: 1, boardId: params.boardId },
   });
-  console.log(data, "data확인");
 
   return {
     data,

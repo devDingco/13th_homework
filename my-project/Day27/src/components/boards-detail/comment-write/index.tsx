@@ -6,7 +6,6 @@ import useCommentList from "../comment-list/hook";
 export default function CommentWrite() {
   const { onChangeInput, onClickRegister } = useCommentWrite();
   const { data } = useCommentList();
-  console.log(data, "코멘트 리스트 데이터 확인");
   return (
     <div className="flex flex-col w-[1280px] gap-10">
       <div className="flex flex-col gap-6 w-full">

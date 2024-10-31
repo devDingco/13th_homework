@@ -3,7 +3,7 @@ import useCommentList from "./hook";
 
 export default function CommentList() {
   const { data } = useCommentList();
-  console.log(data, "유즈커멘트 리스트 데이터");
+
   return data?.fetchBoardComments.map((el, index) => (
     <div className="w-full flex flex-col gap-2" key={el._id}>
       <div className="w-full flex justify-between">
