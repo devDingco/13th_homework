@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./style.module.css";
 import { gql, useQuery } from "@apollo/client";
+import { useAccessTokenStore } from "@/commons/stores/access-token-store";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -20,10 +21,16 @@ const Navbar = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false); // 프로필 호버 상태
   const router = useRouter();
 
-  const { data } = useQuery(FETCH_USER_LOGGED_IN, {
-    skip: !localStorage.getItem("token"),
-  });
+  const { accessToken, setAccessToken } = useAccessTokenStore();
 
+  useEffect(() => {
+    // 클라이언트에서만 실행되므로 서버 렌더링 시 오류를 방지합니다.
+    setAccessToken(localStorage.getItem("accessToken"));
+  }, []);
+
+  const { data } = useQuery(FETCH_USER_LOGGED_IN, {
+    skip: !accessToken,
+  });
   useEffect(() => {
     if (data?.fetchUserLoggedIn) {
       setIsLoggedIn(true);

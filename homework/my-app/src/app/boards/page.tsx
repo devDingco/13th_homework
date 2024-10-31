@@ -27,7 +27,7 @@ const Page = () => {
     <>
       <BannerPage />
       <SearchBar refetch={refetch} />
-      <BoardList data={data} refetch={refetch} currentPage={currentPage} />
+      <BoardList data={data} />
       <Pagination
         refetch={refetch}
         lastPage={lastPage}

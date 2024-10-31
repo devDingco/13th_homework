@@ -1,26 +1,74 @@
 "use client";
+import { useParams } from "next/navigation";
 import styles from "./style.module.css";
 import { useState } from "react";
+import { useQuery, gql } from "@apollo/client";
+
+// GraphQL 쿼리 정의
+const FETCH_TRAVEL_PRODUCT = gql`
+  query FetchTravelProduct($travelproductId: ID!) {
+    fetchTravelproduct(travelproductId: $travelproductId) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      travelproductAddress {
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+        deletedAt
+      }
+      buyer {
+        picture
+        deletedAt
+      }
+      seller {
+        picture
+        deletedAt
+      }
+      soldAt
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
 const ProductDetail = () => {
-  const imageList = [
-    "/image/sampleimg2.jpg",
-    "/image/sampleimg2.jpg",
-    "/image/sampleimg2.jpg",
-  ];
+  const params = useParams();
 
-  // 첫 번째 이미지가 처음에 표시되도록 설정
-  const [selectedImage, setSelectedImage] = useState(imageList[0]);
+  // 이미지 및 댓글 상태 초기화
+  const [selectedImage, setSelectedImage] = useState("");
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
 
+  // GraphQL 쿼리로 데이터 가져오기
+  const { data, loading, error } = useQuery(FETCH_TRAVEL_PRODUCT, {
+    variables: { travelproductId: params.boardId },
+  });
+
+  // 첫 번째 이미지로 기본 선택
+  useState(() => {
+    if (data?.fetchTravelproduct.images.length > 0) {
+      setSelectedImage(
+        `https://storage.googleapis.com/${data.fetchTravelproduct.images[0]}`
+      );
+    }
+  }, [data]);
+
+  // 이미지 선택 핸들러
   const handleImageSelect = (image) => {
-    setSelectedImage(image);
+    setSelectedImage(`https://storage.googleapis.com/${image}`);
   };
 
-  const handleReplyToggle = () => {
-    setIsReplyOpen(!isReplyOpen);
-  };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className={styles.container}>
@@ -28,33 +76,40 @@ const ProductDetail = () => {
       <div className={styles.topSection}>
         <div className={styles.leftSection}>
           <img
-            src={selectedImage}
+            src={selectedImage || "/images/default-image.jpg"}
             alt="상품 이미지"
             className={styles.productImage}
           />
           <div className={styles.thumbnailList}>
-            {imageList.map((image, index) => (
+            {data?.fetchTravelproduct.images.map((image, index) => (
               <img
                 key={index}
-                src={image}
+                src={`https://storage.googleapis.com/${image}`} // 이미지 URL 앞에 경로 추가
                 alt="썸네일"
                 className={styles.imageThumbnail}
-                onClick={() => handleImageSelect(image)}
+                onClick={() => handleImageSelect(image)} // 클릭 시 메인 이미지로 설정
               />
             ))}
           </div>
         </div>
 
         <div className={styles.rightSection}>
-          <div className={styles.priceContainer}>₩32,500원</div>
+          <div className={styles.priceContainer}>
+            ₩{data?.fetchTravelproduct.price}원
+          </div>
           <button className={styles.buyButton}>구매하기</button>
           <div className={styles.seller}>
             <img
-              src="/images/seller-avatar.jpg"
-              alt="판매자 아바타"
+              src={
+                data?.fetchTravelproduct.seller.picture ||
+                "/images/default-avatar.jpg"
+              }
+              alt="판매자 프로필"
               className={styles.sellerAvatar}
             />
-            <span className={styles.sellerName}>김상준</span>
+            <span className={styles.sellerName}>
+              {data?.fetchTravelproduct.name}
+            </span>
           </div>
         </div>
       </div>
@@ -63,9 +118,7 @@ const ProductDetail = () => {
       <div className={styles.bottomSection}>
         <div className={styles.description}>
           <h2 className={styles.sectionTitle}>상세 설명</h2>
-          <p>
-            이 의자는 모던한 감성을 자랑하며 편안함과 스타일을 모두 제공합니다.
-          </p>
+          <p>{data?.fetchTravelproduct.contents}</p>
         </div>
 
         <div className={styles.location}>
@@ -82,16 +135,13 @@ const ProductDetail = () => {
             />
             <button className={styles.commentSubmit}>문의하기</button>
           </div>
-
           <div className={styles.comment}>
             <div className={styles.commentHeader}>
-              <span>김상준</span>
+              <span></span>
               <span>2024-10-30</span>
             </div>
             <p>이 상품은 정말 좋습니다!</p>
-
-            <button onClick={handleReplyToggle}>답변하기</button>
-
+            <button>답변하기</button>
             {isReplyOpen && (
               <div className={styles.replyInputWrapper}>
                 <input
