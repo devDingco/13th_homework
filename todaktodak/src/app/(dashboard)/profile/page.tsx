@@ -7,6 +7,8 @@ import {
   AlertCircle,
   ChevronRight,
   Lock,
+  SquarePen,
+  PencilLine,
 } from "lucide-react";
 import DeleteAccountModal from "@/components/modals/DeleteAccountModal";
 import NotificationSettings from "@/components/profile/NotificationSettings";
@@ -22,27 +24,31 @@ export default function ProfilePage() {
       <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
         <div className="flex items-center space-x-6">
           {/* profile image */}
-          <div className="w-32 h-32 rounded-full bg-indigo-100 overflow-hidden">
-            <img
-              src="/default-profile.jpg"
-              alt="프로필"
-              className="w-full h-full object-cover"
-            />
+          <div className="relative">
+            <div className="w-32 h-32 rounded-full bg-indigo-100 overflow-hidden">
+              <img
+                src="/default-profile.jpg"
+                alt="프로필"
+                className="w-full h-full object-cover"
+              />
+              <button className="absolute bottom-0 right-0 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white">
+                <SquarePen className="w-4 h-4" />
+              </button>
+            </div>
           </div>
-
           <div className="flex-1">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between">
               <div>
-                <h1 className="text-2xl font-bold">사용자닉네임</h1>
+                <div className="flex gap-1 items-center ">
+                  <h1 className="text-2xl font-bold">사용자닉네임</h1>
+                  {/* MARK: 누르면 닉네임 수정 모달 뜨게 수정 */}
+                  <PencilLine className="w-4 h-4 text-gray-400" />
+                </div>
+
                 <p className="text-gray-600 mt-1">example@email.com</p>
               </div>
-              <Link
-                href="/profile/edit"
-                className="px-4 py-2 h-10 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-              >
-                프로필 수정
-              </Link>
             </div>
+            {/* 등록한 일기들 */}
             <div className="mt-6 grid grid-cols-3 gap-6">
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="text-2xl font-bold text-indigo-600">152</div>
@@ -115,6 +121,7 @@ export default function ProfilePage() {
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">계정 설정</h2>
         <div className="space-y-4">
+          {/* 개인정보 수정 */}
           <button className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 rounded-lg">
             <div className="flex items-center">
               <User className="w-5 h-5 mr-3 text-gray-500" />
@@ -122,13 +129,7 @@ export default function ProfilePage() {
             </div>
             <ChevronRight className="w-5 h-5 text-gray-400" />
           </button>
-          <button className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 rounded-lg">
-            <div className="flex items-center">
-              <Lock className="w-5 h-5 mr-3 text-gray-500" />
-              <span>비밀번호 변경</span>
-            </div>
-            <ChevronRight className="w-5 h-5 text-gray-400" />
-          </button>
+          {/* 회원탈퇴 */}
           <button
             onClick={() => setShowDeleteModal(true)}
             className="w-full flex items-center justify-between p-4 text-left text-red-600 hover:bg-red-50 rounded-lg"
