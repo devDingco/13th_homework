@@ -2,15 +2,15 @@
 import { useMutation, gql } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 
-const 나의graphql쿼리 = gql`
-  # mutation createBoard($writer: String, $title: String, $contents: String) {
-  #   createBoard(writer: $writer, title: $title, contents: $contents) {
-  #     _id
-  #     number
-  #     message
-  #   }
-  # }
-`;
+// const 나의graphql쿼리 = gql`
+//   # mutation createBoard($writer: String, $title: String, $contents: String) {
+//   #   createBoard(writer: $writer, title: $title, contents: $contents) {
+//   #     _id
+//   #     number
+//   #     message
+//   #   }
+//   # }
+// `;
 
 export default function GraphQlMutationPage() {
   const [writer, setWriter] = useState("");

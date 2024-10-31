@@ -6,26 +6,26 @@ import { useState } from "react";
 import BoardListTest from "@/components/14-05-pagination-last-refactoring/list";
 import Pagination from "@/components/14-05-pagination-last-refactoring/pagination";
 
-const FETCH_BOARDS = gql`
-  query fetchBoards(
-    $endDate: DateTime
-    $startDate: DateTime
-    $search: String
-    $page: Int
-  ) {
-    fetchBoards(
-      endDate: $endDate
-      startDate: $startDate
-      search: $search
-      page: $page
-    ) {
-      _id
-      writer
-      title
-      createdAt
-    }
-  }
-`;
+// const FETCH_BOARDS = gql`
+//   query fetchBoards(
+//     $endDate: DateTime
+//     $startDate: DateTime
+//     $search: String
+//     $page: Int
+//   ) {
+//     fetchBoards(
+//       endDate: $endDate
+//       startDate: $startDate
+//       search: $search
+//       page: $page
+//     ) {
+//       _id
+//       writer
+//       title
+//       createdAt
+//     }
+//   }
+// `;
 
 const FETCH_BOARDS_COUNT = gql`
   query fetchBoardsCount {

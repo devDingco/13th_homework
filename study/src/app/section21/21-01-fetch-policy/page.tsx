@@ -6,16 +6,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "antd";
 
-const FETCH_BOARDS = gql`
-  query fetchBoards {
-    fetchBoards {
-      _id
-      writer
-      title
-      createdAt
-    }
-  }
-`;
+// const FETCH_BOARDS = gql`
+//   query fetchBoards {
+//     fetchBoards {
+//       _id
+//       writer
+//       title
+//       createdAt
+//     }
+//   }
+// `;
 
 export default function FetchPolicy() {
   const [isOpen, setIsOpen] = useState(false);
