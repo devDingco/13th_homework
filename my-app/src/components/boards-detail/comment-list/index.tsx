@@ -12,7 +12,7 @@ function CommentList() {
 
     fetchMore({
       variables: {
-        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+        page: Math.ceil((data?.fetchBoardComments.length ?? 7) / 7) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoardComments?.length) {

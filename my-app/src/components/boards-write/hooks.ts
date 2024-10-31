@@ -187,7 +187,6 @@ export const useBoardsWrite = (props: IBoardsWriteProps) => {
     event: ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    console.log("가져온 index", index);
     const file = event.target.files?.[0];
     const isValid = checkValidationFile(file);
     if (!isValid) return;

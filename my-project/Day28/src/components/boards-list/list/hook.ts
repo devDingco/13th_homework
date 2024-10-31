@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { DELETE_BOARD, FETCH_BOARDS } from "./queries";
 import { MouseEvent } from "react";
-//abc
+
 export default function useBoards() {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARDS);
