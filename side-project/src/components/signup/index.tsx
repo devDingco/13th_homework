@@ -1,15 +1,14 @@
-// SignUpComponent.js
 'use client';
 
 import { Button, Input } from 'antd';
 import { useState } from 'react';
 import useSignUp from './hooks';
+import { Controller } from 'react-hook-form';
 
 export default function SignUpComponent() {
   const [pwVisible, setPwVisible] = useState(false);
   const [pwCheckVisible, setCheckVisible] = useState(false);
-  const { onClickRegister, handleChangeInput, errorMsg, isActive } =
-    useSignUp();
+  const { onClickRegister, control, handleSubmit, formState } = useSignUp();
 
   return (
     <div className="container flex flex-col gap-3 w-full max-w-sm">
@@ -19,63 +18,99 @@ export default function SignUpComponent() {
       </p>
       <form
         className="flex flex-col gap-10"
-        onSubmit={(e) => e.preventDefault()}
+        action="#"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(onClickRegister);
+          console.log('실행');
+        }}
       >
         <div>
           <p className="mb-1 prose-small_font">이메일</p>
-          <Input
-            placeholder="이메일을 입력해주세요."
-            size="large"
-            type="email"
+          <Controller
             name="email"
-            onChange={handleChangeInput}
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="이메일을 입력해주세요."
+                size="large"
+                type="email"
+              />
+            )}
           />
+          <p className="mt-1 prose-error_font">
+            {formState.errors.email?.message as string}
+          </p>
         </div>
         <div>
           <p className="mb-1 prose-small_font">이름</p>
-          <Input
-            placeholder="이름을 입력해주세요."
-            size="large"
-            type="text"
+          <Controller
             name="name"
-            onChange={handleChangeInput}
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="이름을 입력해주세요."
+                size="large"
+              />
+            )}
           />
+          <p className="mt-1 prose-error_font">
+            {formState.errors.name?.message as string}
+          </p>
         </div>
         <div>
           <p className="mb-1 prose-small_font">비밀번호</p>
-          <Input.Password
-            className="mb-1"
-            placeholder="비밀번호를 입력해주세요."
-            visibilityToggle={{
-              visible: pwVisible,
-              onVisibleChange: setPwVisible,
-            }}
-            size="large"
-            type="password"
+          <Controller
             name="password"
-            onChange={handleChangeInput}
+            control={control}
+            render={({ field }) => (
+              <Input.Password
+                {...field}
+                className="mb-1"
+                placeholder="비밀번호를 입력해주세요."
+                visibilityToggle={{
+                  visible: pwVisible,
+                  onVisibleChange: setPwVisible,
+                }}
+                size="large"
+                type="password"
+              />
+            )}
           />
-          <Input.Password
-            placeholder="비밀번호를 다시 한번 입력해주세요."
-            visibilityToggle={{
-              visible: pwCheckVisible,
-              onVisibleChange: setCheckVisible,
-            }}
-            size="large"
-            type="password"
+          <p className="mt-1 prose-error_font">
+            {formState.errors.password?.message as string}
+          </p>
+          <Controller
             name="confirmPassword"
-            onChange={handleChangeInput}
+            control={control}
+            render={({ field }) => (
+              <Input.Password
+                {...field}
+                className="mb-1"
+                placeholder="비밀번호를 다시 한번 입력해주세요."
+                visibilityToggle={{
+                  visible: pwCheckVisible,
+                  onVisibleChange: setCheckVisible,
+                }}
+                size="large"
+                type="password"
+              />
+            )}
           />
-          <p className="mt-1 prose-error_font">{errorMsg ? errorMsg : ''}</p>
+          <p className="mt-1 prose-error_font">
+            {formState.errors.confirmPassword?.message as string}
+          </p>
         </div>
         <Button
-          disabled={!isActive}
+          disabled={!formState.isValid}
           size="large"
           type="primary"
           className="py-3"
-          onClick={onClickRegister}
+          htmlType="submit"
         >
-          회원가입
+          가입하기
         </Button>
       </form>
     </div>

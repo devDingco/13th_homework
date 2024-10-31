@@ -1,5 +1,6 @@
-import { LoginUserDocument } from '@/commons/gql/graphql';
+// import { LoginUserDocument } from '@/commons/gql/graphql';
 import { useAccessTokenStore } from '@/commons/stores/accessToken';
+import { useLoginUserMutation } from '@/graphql/mutations/loginUser/loginUser.generated';
 import { useMutation } from '@apollo/client';
 import { Modal } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -7,11 +8,7 @@ import { useState } from 'react';
 
 export default function useLogin() {
   const router = useRouter();
-  const [loginUser] = useMutation(LoginUserDocument);
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-  });
+  const [loginUser] = useLoginUserMutation();
 
   const { setAccessToken } = useAccessTokenStore();
 
