@@ -1,0 +1,50 @@
+.css_section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.css_wrapper {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.css_container {
+  width: 100%;
+  height: 136px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.css_writer {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.css_writerDiv {
+  height: 24px;
+  display: flex;
+  gap: 4px;
+}
+
+.css_editCloseBtn {
+  height: 24px;
+  display: flex;
+  gap: 8px;
+}
+
+.css_comment {
+  width: 100%;
+  height: 72px;
+}
+
+.css_date {
+  width: 100%;
+  height: 24px;
+}
