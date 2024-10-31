@@ -1,8 +1,21 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
+import { MouseEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LayoutNavigation() {
+  const router = useRouter();
   const navigationItem = ["트립토크", "숙박권 구매", "마이 페이지"];
+  const [selectedItem, setSelectedItem] = useState(0);
+
+  const onClickNavigationItem = (event: MouseEvent<HTMLInputElement>) => {
+    const id = Number(event.currentTarget?.id);
+    setSelectedItem(id);
+
+    if (id === 0) router.push("/boards");
+    // if (id === 1) router.push("/숙박권 구매!");
+    if (id === 2) router.push("/mypage");
+  };
 
   return (
     <div className={styles.navigationContainer}>
@@ -16,14 +29,16 @@ export default function LayoutNavigation() {
           style={{ width: "56px", height: "32px" }}
         ></Image>
         <div className={styles.navigationItemContainer}>
-          {navigationItem.map((el) => (
+          {navigationItem.map((el, index) => (
             <span
               key={el}
+              id={String(index)}
               className={
-                el === "트립토크"
+                selectedItem === index
                   ? styles.navigationSelectedItem
                   : styles.navigationItem
               }
+              onClick={onClickNavigationItem}
             >
               {el}
             </span>
