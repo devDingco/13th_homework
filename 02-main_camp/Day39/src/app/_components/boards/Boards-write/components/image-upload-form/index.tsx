@@ -1,4 +1,3 @@
-import CONSTANTS_TITLE from "@/commons/constants/title";
 import styles from "./styles.module.css";
 import { ChangeEvent, MouseEvent, MutableRefObject } from "react";
 import Image from "next/image";
@@ -21,8 +20,7 @@ const ImageUploadForm = ({
 }: IImageUploadFormProps) => {
   return (
     <div className={styles.BoardsNew_inputForm}>
-      {CONSTANTS_TITLE.UPLOAD_PHOTO}
-      <input type="text" />
+      {/* {CONSTANTS_TITLE.UPLOAD_PHOTO} */}
       <div className={styles.uploadButtonContainer}>
         {Array(3)
           .fill("")
