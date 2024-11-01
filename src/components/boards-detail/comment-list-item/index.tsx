@@ -5,24 +5,13 @@ import styles from './styles.module.css';
 import { Rate } from 'antd';
 import BoardsComponentComment from '../comments-write';
 import { useParams } from 'next/navigation';
+import useHookCommentListItem from './hook';
 
 export default function CommentItem(props) {
     const { commentData } = props;
 
-    const [isEdit, setIsEdit] = useState(false);
-    const [value, setValue] = useState(3);
-    const { boardId } = useParams();
-
-    const onClickEdit = () => {
-        setIsEdit(true);
-        console.log(commentData._id); // 선택한 댓글 id
-    };
-
-    // 댓글수정종료 함수
-    const finishEdit = () => {
-        setIsEdit(!isEdit);
-    };
-
+    const { isEdit, setIsEdit, value, setValue, onClickEdit, finishEdit } =
+        useHookCommentListItem();
     return (
         <div>
             {isEdit !== true ? (

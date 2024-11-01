@@ -2,57 +2,14 @@
 import styles from './styles.module.css';
 import { useState } from 'react';
 import { Rate } from 'antd';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-
-// 댓글작성 쿼리
-const FETCH_BOARD_CREATE_COMMENT = gql`
-    mutation createBoardComment(
-        $createBoardCommentInput: CreateBoardCommentInput!
-        $boardId: ID!
-    ) {
-        createBoardComment(
-            createBoardCommentInput: $createBoardCommentInput
-            boardId: $boardId
-        ) {
-            _id
-            writer
-            contents
-            rating
-        }
-    }
-`;
-
-// 댓글 조회 쿼리
-export const FETCH_BOARD_COMMENTS = gql`
-    query fetchBoardComments($page: Int, $boardId: ID!) {
-        fetchBoardComments(page: $page, boardId: $boardId) {
-            _id
-            writer
-            contents
-            rating
-            createdAt
-        }
-    }
-`;
-
-// 댓글 수정 쿼리
-export const UPDATE_BOARD_COMMENTS = gql`
-    mutation updateBoardComment(
-        $updateBoardCommentInput: UpdateBoardCommentInput!
-        $password: String
-        $boardCommentId: ID!
-    ) {
-        updateBoardComment(
-            updateBoardCommentInput: $updateBoardCommentInput
-            password: $password
-            boardCommentId: $boardCommentId
-        ) {
-            _id
-        }
-    }
-`;
+import {
+    FETCH_BOARD_COMMENTS,
+    FETCH_BOARD_CREATE_COMMENT,
+    UPDATE_BOARD_COMMENTS,
+} from './quries';
 
 export default function BoardsComponentComment(props) {
     const { isEdit, commentData, finishEdit } = props;
@@ -61,9 +18,6 @@ export default function BoardsComponentComment(props) {
 
     // console.log(props.el);
     const [writer, setWriter] = useState('');
-    const [editWriter, setEditWriter] = useState('');
-    const [title, setTitle] = useState('');
-    const [editTtile, setEditTitle] = useState('');
     const [password, setPassword] = useState('');
     const [contents, setContents] = useState('');
     const [writerError, setwriterError] = useState('');
