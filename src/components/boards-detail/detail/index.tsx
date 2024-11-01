@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player/youtube';
 export default function BoardsComponentDetail() {
     const { 날짜담는통, data, onClickMoveBoardList, onClickMoveEditPage } =
         useBoardDetail();
-    console.log(data?.fetchBoard);
+    // console.log(data?.fetchBoard);
     const text = (
         <span>
             {data?.fetchBoard.boardAddress?.address === null ? (
@@ -132,7 +132,6 @@ export default function BoardsComponentDetail() {
                         </button>
                     </div>
                 </div>
-                {/* <BoardsComponentComment /> */}
             </div>
         </>
     );

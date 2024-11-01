@@ -29,6 +29,11 @@ export const useBoardWrite = () => {
     const [zonecode, setZoncode] = useState('');
     const [detailAddress, setDetailAddress] = useState('');
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [게시글생성함수] = useMutation(CreateBoardDocument);
+    const [게시글수정함수] = useMutation(UpdateBoardDocument);
+
     const onChangeYouTubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
         setYoutube(event.target.value);
     };
@@ -93,7 +98,7 @@ export const useBoardWrite = () => {
         console.log(detailAddress);
     };
 
-    const onChangecontens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeContens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContents(event.target.value);
         if (event.target.value === '') {
             setcontentsError('필수입력 사항 입니다');
@@ -110,12 +115,9 @@ export const useBoardWrite = () => {
         }
     };
 
-    const [나의함수] = useMutation(CreateBoardDocument);
-    const [updateBoard] = useMutation(UpdateBoardDocument);
-
     const onClickSubmit = async () => {
         try {
-            const result = await 나의함수({
+            const result = await 게시글생성함수({
                 variables: {
                     createBoardInput: {
                         writer: writer,
@@ -164,10 +166,10 @@ export const useBoardWrite = () => {
         if (youtube) myvariables.updateBoardInput.youtubeUrl = youtube;
 
         try {
-            const result = await updateBoard({
+            const result = await 게시글수정함수({
                 variables: myvariables,
             });
-            console.log(result);
+            console.log('게시글수정함수 ::', result);
             if (result.errors) throw new Error('사용자 비밀번호 입력값 불일치');
             alert('수정이 완료 되었습니다');
             router.push('/boards');
@@ -180,8 +182,6 @@ export const useBoardWrite = () => {
     const onClickBack = () => {
         router.back();
     };
-
-    const [isOpen, setIsOpen] = useState(false);
 
     const showModal = () => {
         setIsOpen(true);
@@ -229,7 +229,7 @@ export const useBoardWrite = () => {
         onChangeWriter,
         onChangePassword,
         onChangeTitle,
-        onChangecontens,
+        onChangeContens,
         onClickSubmit,
         onClickUpdate,
         onClickBack,

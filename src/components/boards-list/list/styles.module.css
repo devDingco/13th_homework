@@ -87,6 +87,11 @@
     border: 1px solid #3a1a1a;
 }
 
+.boardListBox:hover {
+    background-color: orange;
+    border: none;
+}
+
 .boardListBoxNumber {
     padding: 0 0 0 24px;
     color: #919191;
