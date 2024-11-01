@@ -3,6 +3,7 @@
 import Image from "next/image";
 import useBoardDetail from "./hook";
 import CommentWrite from "../comment-write";
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 
 export default function BoardDetail() {
   const { data, onClickMoveEdit, onClickMoveBoards } = useBoardDetail();
@@ -46,7 +47,6 @@ export default function BoardDetail() {
               width={24}
               height={24}
             />
-            {/* 이미지 자체에 style을 주는건 권장이아니다. 부모에 스타일을주고 fill 과 objectfit속성을 사용해서 이미지 크기를 조절 */}
           </div>
         </div>
       </div>
@@ -59,11 +59,15 @@ export default function BoardDetail() {
       </div>
       <div className="flex justify-center gap-6">
         <div className="flex flex-col gap-1">
-          <Image src="/img/bad.svg" alt="badImg" width={24} height={24} />
+          <div className="w-6 h-6 relative">
+            <DislikeOutlined />
+          </div>
           <div>24</div>
         </div>
         <div className="flex flex-col gap-1">
-          <Image src="/img/good.svg" alt="goodImg" width={24} height={24} />
+          <div className="w-6 h-6 relative">
+            <LikeOutlined />
+          </div>
           <div>24</div>
         </div>
       </div>

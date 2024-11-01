@@ -2,9 +2,10 @@ import Image from "next/image";
 import useCommentWrite from "./hook";
 import CommentList from "../comment-list";
 import useCommentList from "../comment-list/hook";
+import { Rate } from "antd";
 
 export default function CommentWrite() {
-  const { onChangeInput, onClickRegister } = useCommentWrite();
+  const { onChangeInput, onClickRegister, onChangeRating } = useCommentWrite();
   const { data } = useCommentList();
   return (
     <div className="flex flex-col w-[1280px] gap-10">
@@ -16,7 +17,9 @@ export default function CommentWrite() {
           <div className="font-semibold text-4 leading-6">댓글</div>
         </div>
 
-        <div>별점</div>
+        <div>
+          <Rate onChange={onChangeRating} />
+        </div>
         <div className="flex flex-col w-full gap-4">
           <div className="flex w-full gap-4">
             <div className="flex flex-col gap-2">
