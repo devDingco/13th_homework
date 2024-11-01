@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import styles from './styles.module.css';
 import { Rate } from 'antd';
+
 import BoardsComponentComment from '../comments-write';
-import { useParams } from 'next/navigation';
 import useHookCommentListItem from './hook';
 
 export default function CommentItem(props) {

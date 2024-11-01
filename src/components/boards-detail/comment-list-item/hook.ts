@@ -6,7 +6,6 @@ import { useState } from 'react';
 export default function useHookCommentListItem() {
     const [isEdit, setIsEdit] = useState(false);
     const [value, setValue] = useState(3);
-    const { boardId } = useParams();
 
     const onClickEdit = () => {
         setIsEdit(true);
