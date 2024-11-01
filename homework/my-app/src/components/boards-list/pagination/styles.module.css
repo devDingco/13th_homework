@@ -1,0 +1,25 @@
+.css_paginationDiv {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  gap: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.css_paginationNum {
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.css_paginationNum:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
