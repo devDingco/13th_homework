@@ -5,7 +5,7 @@ import RecentDiaries from "@/components/home/RecentDiaries";
 
 export default function HomePage() {
   return (
-    <div className="pt-16 p-8">
+    <div className="pt-16 p-8 bg-gray-50 h-screen">
       <div className="grid grid-cols-12 gap-6">
         {/* 현재월 감정 기록 캘린더 */}
         <EmotionalCalendar />
