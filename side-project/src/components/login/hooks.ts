@@ -1,23 +1,29 @@
-// import { LoginUserDocument } from '@/commons/gql/graphql';
 import { useAccessTokenStore } from '@/commons/stores/accessToken';
 import { useLoginUserMutation } from '@/graphql/mutations/loginUser/loginUser.generated';
-import { useMutation } from '@apollo/client';
+import { ILoginType, loginSchema } from '@/schemas/loginSchema';
+import { ApolloError, useMutation } from '@apollo/client';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Modal } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function useLogin() {
   const router = useRouter();
   const [loginUser] = useLoginUserMutation();
-
+  const methods = useForm<ILoginType>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onChange',
+  });
   const { setAccessToken } = useAccessTokenStore();
 
-  const onClickLogin = async () => {
-    const { email, password } = formState;
-
+  const onClickLogin = async (data: ILoginType) => {
     try {
       const result = await loginUser({
-        variables: { email, password },
+        variables: {
+          email: data.email,
+          password: data.password,
+        },
       });
       console.log(result, '로그인 결과');
 
@@ -25,7 +31,7 @@ export default function useLogin() {
         const accessToken = result.data.loginUser.accessToken;
 
         setAccessToken(accessToken);
-        // console.log(accessToken, 'token 값');
+        console.log(accessToken, 'token 값');
 
         Modal.success({
           title: '로그인 성공',
@@ -44,13 +50,15 @@ export default function useLogin() {
         });
       }
     } catch (error) {
-      console.log('로그인 중 오류 발생', error);
+      let errorMessage = '로그인에 실패했습니다.';
+      if (error instanceof ApolloError && error.message) {
+        errorMessage = error.message;
+      }
+      Modal.error({
+        title: '오류',
+        content: errorMessage,
+      });
     }
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
-
-  return { handleChange, onClickLogin };
+  return { methods, onClickLogin };
 }

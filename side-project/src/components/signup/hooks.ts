@@ -1,5 +1,3 @@
-import { CreateUserDocument } from '@/commons/gql/graphql';
-import { useMutationHandler } from '@/commons/hooks/useMutationHandler';
 import { ApolloError } from '@apollo/client';
 import { Modal } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -7,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '@/schemas/registerSchema';
 import { IRegisterForm } from './types';
+import { useCreateUserMutation } from '@/graphql/mutations/createUser/createUser.generated';
 
 export default function useSignUp() {
   const router = useRouter();
@@ -15,18 +14,18 @@ export default function useSignUp() {
     mode: 'onChange',
   });
 
-  const createUser = useMutationHandler(CreateUserDocument);
-
-  console.log(formState.errors);
+  const [createUser] = useCreateUserMutation();
 
   // 회원가입 등록
-  const onClickRegister: SubmitHandler<IRegisterForm> = async (data) => {
+  const onClickRegister = async (data: IRegisterForm) => {
     try {
       const result = await createUser({
-        createUserInput: {
-          name: data.name,
-          email: data.email,
-          password: data.password,
+        variables: {
+          createUserInput: {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+          },
         },
       });
       console.log(result, '등록');
