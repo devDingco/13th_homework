@@ -19,11 +19,7 @@ export default function SignUpComponent() {
       <form
         className="flex flex-col gap-10"
         action="#"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit(onClickRegister);
-          console.log('실행');
-        }}
+        onSubmit={handleSubmit(onClickRegister)}
       >
         <div>
           <p className="mb-1 prose-small_font">이메일</p>
