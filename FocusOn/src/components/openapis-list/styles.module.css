@@ -1,0 +1,42 @@
+.movie_list_body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.movie_list_box {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie_item {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  text-align: center;
+  gap: 10px;
+}
+
+.movie_image {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.movie_title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.movie_release_date {
+  font-size: 14px;
+}

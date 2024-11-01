@@ -49,13 +49,27 @@
   gap: 8px;
 }
 
+.button_box {
+  display: flex;
+  gap: 24px;
+}
+
 .login_button {
   display: flex;
   height: 40px;
   padding: 8px 12px;
   align-items: center;
   gap: 8px;
-  border-radius: 100px;
-  background-color: #f88379;
+  border-radius: 6px;
+}
+
+.signup_button {
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  background-color: #e78b8d;
   color: white;
 }

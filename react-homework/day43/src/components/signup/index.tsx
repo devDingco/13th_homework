@@ -4,6 +4,7 @@ import FieldWrapper from "../commons/fieldWrapper";
 import useSignUp from "./hook";
 import ErrorMsg from "../commons/error";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 export default function SignUp() {
   const { onChangeSignupInputs, onClickSignUp, errors } = useSignUp();
@@ -15,7 +16,7 @@ export default function SignUp() {
             <div className={styles.signup_title}>회원가입</div>
             <div>새로운 계정을 만들어보세요</div>
           </div>
-          <div className={styles.input_form}>
+          <form className={styles.input_form}>
             <FieldWrapper label="이메일" isRequired={true}>
               <InputField
                 placeholder="이메일을 입력해 주세요."
@@ -50,14 +51,14 @@ export default function SignUp() {
                 <ErrorMsg errorMessage={errors.passwordConfirm} />
               )}
             </FieldWrapper>
-          </div>
+          </form>
           <button className={styles.signup_button} onClick={onClickSignUp}>
             회원가입
           </button>
           <div className={styles.login_button_box}>
             <div className={styles.question}>계정이 있으신가요?</div>
             <Link href="/login" className={styles.login_button}>
-              로그인
+              로그인하러 가기
             </Link>
           </div>
         </form>

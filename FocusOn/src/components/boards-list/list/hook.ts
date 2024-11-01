@@ -1,0 +1,55 @@
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/navigation";
+import { MouseEvent, useState } from "react";
+import {
+  DeleteBoardDocument,
+  FetchBoardsDocument,
+} from "@/commons/graphql/graphql";
+import { errorModal, successModal } from "@/utils/modal";
+
+export const useBoardsList = (id?: string) => {
+  const router = useRouter();
+  // 게시글 hover state
+  const [isHovered, setIsHovered] = useState(false);
+  // 게시글 삭제
+  const [deleteBoard] = useMutation(DeleteBoardDocument);
+
+  const onMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const onMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  // 게시글 클릭시 디테일페이지로 이동
+  const onClickBoard = () => {
+    router.push(`/boards/${id}`);
+  };
+
+  // 게시글 삭제
+  const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
+    // 디테일페이지로 이동되는 거 막기! (이벤트버블링)
+    event.stopPropagation();
+    const boardId = id as string;
+    try {
+      deleteBoard({
+        variables: {
+          boardId,
+        },
+        refetchQueries: [{ query: FetchBoardsDocument }],
+      });
+      successModal("게시글을 삭제하였습니다.");
+    } catch (error) {
+      console.error(error);
+      errorModal("게시글을 삭제할 수 없습니다 ");
+    }
+  };
+
+  return {
+    onMouseEnter,
+    onMouseLeave,
+    onClickBoard,
+    onClickDelete,
+    isHovered,
+  };
+};

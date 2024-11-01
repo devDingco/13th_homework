@@ -41,7 +41,7 @@
 
 .login_button {
   width: 100%;
-  background-color: #ff8c8a;
+  background-color: #e78b8d;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -56,9 +56,8 @@
 
 .signup_box {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .question {
