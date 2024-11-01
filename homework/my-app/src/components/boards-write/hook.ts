@@ -166,12 +166,11 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
       const updateBoardInput = {
         title: inputs.title || data?.fetchBoard.title,
         contents: content || data?.fetchBoard.contents,
-        youtubeUrl: youtubeUrl || data?.fetchBoard.youtubeUrl,
+        youtubeUrl: youtubeUrl !== "" ? youtubeUrl : null,
         boardAddress: {
-          zipcode: zoneCode || data?.fetchBoard.boardAddress?.zipcode,
-          address: address || data?.fetchBoard.boardAddress?.address,
-          addressDetail:
-            addressDetail || data?.fetchBoard.boardAddress?.addressDetail,
+          zipcode: zoneCode !== "" ? zoneCode : null,
+          address: address !== "" ? address : null,
+          addressDetail: addressDetail !== "" ? addressDetail : null,
         },
         images: isImageDeleted
           ? []

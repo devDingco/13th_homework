@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
-import DaumPostcode from "react-daum-postcode";
-import { useState } from "react";
+import DaumPostcode, { Address, DaumPostcodeEmbed } from "react-daum-postcode";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
@@ -11,6 +11,8 @@ import styles from "./style.module.css";
 // React-Quill을 SSR 지원을 위해 동적 로딩
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import { Modal } from "antd";
+import Image from "next/image";
 
 const CREATE_TRAVELPRODUCT = gql`
   mutation createTravelproduct($input: CreateTravelproductInput!) {
@@ -19,22 +21,50 @@ const CREATE_TRAVELPRODUCT = gql`
       name
       price
       contents
+      tags
+      images
+      travelproductAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      buyer {
+        _id
+        name
+      }
+      seller {
+        _id
+        name
+      }
     }
   }
 `;
-
+const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
 const productSchema = z.object({
   name: z.string().min(1, "상품명을 입력해주세요"),
   remarks: z.string().min(1, "한줄 요약을 입력해주세요"),
   price: z.number().positive("가격은 0원 이상이어야 합니다"),
   address: z.string().min(1, "주소를 입력해주세요"),
-  tags: z.string().optional(),
+  zipcode: z.string().min(5, "우편번호를 입력해주세요"),
   contents: z.string().min(1, "상품 설명을 입력해주세요"),
 });
 
 export default function ProductRegisterPage() {
   const [address, setAddress] = useState("");
-  const [files, setFiles] = useState([]);
+  const [zipcode, setZipcode] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [hashtags, setHashtags] = useState<string[]>([]);
+  const [currentTag, setCurrentTag] = useState("");
+  const [imageUrl, setImageUrl] = useState([]); // 이미지 URL을 저장할 배열
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const fileRef = useRef(null);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const [createProduct] = useMutation(CREATE_TRAVELPRODUCT);
 
@@ -47,20 +77,67 @@ export default function ProductRegisterPage() {
     resolver: zodResolver(productSchema),
   });
 
-  // ReactQuill 내용이 바뀔 때마다 contents에 반영
   const handleQuillChange = (value) => {
     setValue("contents", value); // contents 필드에 값 설정
   };
 
-  const handleComplete = (data) => {
-    const fullAddress = data.address;
-    setAddress(fullAddress);
-    setValue("address", fullAddress);
+  const handleComplete = (data: Address) => {
+    setZipcode(data.zonecode);
+    setAddress(
+      data.userSelectedType === "R" ? data.roadAddress : data.jibunAddress
+    );
+    setValue(
+      "address",
+      data.userSelectedType === "R" ? data.roadAddress : data.jibunAddress
+    );
+    setValue("zipcode", data.zonecode);
+    onToggleModal();
   };
 
-  const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    setFiles(selectedFiles);
+  const onClickImage = () => {
+    fileRef.current.click();
+  };
+
+  const onChangeFile = async (event) => {
+    const files = Array.from(event.target.files); // 여러 파일을 배열로 변환
+    const uploadedUrls = [];
+
+    try {
+      // 각 파일을 업로드하고 URL을 배열에 추가
+      for (const file of files) {
+        const result = await uploadFile({
+          variables: { file },
+        });
+
+        if (result.data?.uploadFile.url) {
+          uploadedUrls.push(result.data.uploadFile.url); // 업로드한 URL을 임시 배열에 추가
+        }
+      }
+
+      // 전체 업로드된 URL을 기존 이미지 URL 배열에 추가
+      setImageUrl((prev) => [...prev, ...uploadedUrls]);
+    } catch (error) {
+      console.error("파일 업로드 오류:", error);
+    }
+  };
+
+  const imgDeleted = (index) => {
+    setImageUrl((prev) => prev.filter((_, i) => i !== index)); // 해당 인덱스 이미지 제거
+  };
+
+  const addHashtag = () => {
+    if (currentTag && !hashtags.includes(currentTag)) {
+      setHashtags([...hashtags, currentTag]);
+      setCurrentTag("");
+    }
+  };
+
+  const removeHashtag = (tag) => {
+    setHashtags(hashtags.filter((t) => t !== tag));
+  };
+
+  const onToggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   const onSubmit = async (data) => {
@@ -73,15 +150,15 @@ export default function ProductRegisterPage() {
             remarks: data.remarks,
             contents: data.contents,
             price: data.price,
-            tags: [], // 기능 미완
+            tags: hashtags,
             travelproductAddress: {
-              zipcode: "12345", // 기능 미완
+              zipcode: data.zipcode,
               address: data.address,
-              addressDetail: "상세 주소", // 기능미완
-              lat: 37.5665, //기능미완
-              lng: 126.978, //기능 미완
+              addressDetail: data.addressDetail,
+              lat: 37.5665, // 임시 위도
+              lng: 126.978, // 임시 경도
             },
-            images: [],
+            images: imageUrl,
           },
         },
       });
@@ -127,37 +204,144 @@ export default function ProductRegisterPage() {
           placeholder="내용을 입력해 주세요."
           style={{ height: "300px", marginBottom: "20px" }}
         />
-        {errors.contents && (
-          <p className={styles.error}>{errors.contents.message}</p>
-        )}
+        {/* <p className={styles.error}>{errors.contents.message}</p> */}
       </div>
 
       <div className={styles.addressSection}>
-        <div className={styles.addressInput}>
-          <label className={styles.label}>주소</label>
-          <DaumPostcode onComplete={handleComplete} />
+        <label className={styles.label}>주소</label>
+        <div className={styles.zipcodeContainer}>
           <input
             type="text"
-            value={address}
-            {...register("address")}
+            value={zipcode}
+            {...register("zipcode")}
             readOnly
+            placeholder="우편번호"
+            className={styles.zipcodeInput}
           />
-          {errors.address && (
-            <p className={styles.error}>{errors.address.message}</p>
-          )}
+          <button
+            type="button"
+            onClick={onToggleModal}
+            className={styles.zipcodeButton}
+          >
+            우편번호 검색
+          </button>
         </div>
+
+        <input
+          type="text"
+          value={address}
+          {...register("address")}
+          readOnly
+          placeholder="주소를 입력해 주세요"
+          className={styles.addressInput}
+        />
+
+        <input
+          type="text"
+          {...register("addressDetail")}
+          onChange={(e) => setAddressDetail(e.target.value)}
+          placeholder="상세주소를 입력해 주세요"
+          className={styles.addressDetailInput}
+        />
+
         <div className={styles.mapPlaceholder}>
-          <p>주소와 연계된 지도를 표시할 공간입니다.</p>
+          <p>지도자리</p>
+        </div>
+
+        {/* 우편번호 검색 모달 */}
+        {isModalOpen && (
+          <Modal
+            title="주소 검색"
+            open={isModalOpen}
+            onOk={onToggleModal}
+            onCancel={onToggleModal}
+            footer={null}
+          >
+            <DaumPostcodeEmbed onComplete={handleComplete} />
+          </Modal>
+        )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>해시태그</label>
+        <input
+          type="text"
+          value={currentTag}
+          onChange={(e) => setCurrentTag(e.target.value)}
+          placeholder="해시태그를 입력하세요"
+          className={styles.input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              addHashtag();
+            }
+          }}
+        />
+        <button
+          type="button"
+          onClick={addHashtag}
+          className={styles.addTagButton}
+        >
+          추가
+        </button>
+        <div className={styles.hashtags}>
+          {hashtags.map((tag, index) => (
+            <button
+              key={index}
+              onClick={() => removeHashtag(tag)}
+              className={styles.tagButton}
+            >
+              #{tag} ✕
+            </button>
+          ))}
         </div>
       </div>
 
-      <div className={styles.fileUploadSection}>
-        <label className={styles.label}>사진 첨부</label>
-        <input type="file" multiple onChange={handleFileChange} />
-        <div className={styles.filePreview}>
-          {files.map((file, index) => (
-            <p key={index}>{file.name}</p>
-          ))}
+      <div className={styles.boxEnd}>
+        <div className={styles.labelContainer2}>
+          <label>사진 첨부</label>
+          <div className={styles.photoBoxContainer}>
+            <div className={styles.flexbox2}>
+              {imageUrl.map((url, index) => (
+                <div
+                  key={index}
+                  className={styles.photoBox}
+                  style={{
+                    backgroundImage: `url(${url})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    position: "relative",
+                  }}
+                >
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => imgDeleted(index)}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {/* 추가 이미지 업로드 버튼 */}
+              <div className={styles.photoBox} onClick={onClickImage}>
+                <div className={styles.addImageIcon}>
+                  <Image
+                    src="/image/add.png"
+                    alt="사진 추가"
+                    width={300}
+                    height={300}
+                  />
+                </div>
+                <div className={styles.photoBoxText}>클릭해서 사진 업로드</div>
+                <input
+                  type="file"
+                  ref={fileRef}
+                  style={{ display: "none" }}
+                  multiple // 여러 파일 선택 허용
+                  onChange={onChangeFile}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

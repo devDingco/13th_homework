@@ -3,7 +3,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 const FETCH_BOARDS = gql`
-  query fetchBoards($mypage: Int) {
+  query fetchBoards14_01($mypage: Int) {
     fetchBoards(page: $mypage) {
       _id
       writer
