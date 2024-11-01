@@ -1,0 +1,31 @@
+.input {
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem;
+
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.input__header__container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.input__header {
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.required__mark {
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

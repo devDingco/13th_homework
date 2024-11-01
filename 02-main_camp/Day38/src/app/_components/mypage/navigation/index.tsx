@@ -1,18 +1,19 @@
 "use client";
 
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent } from "react";
 import styles from "./styles.module.css";
 
 interface IMyPageNavigationProps {
   items: string[];
+  selectedItem: number;
+  onChangeItem: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function MyPageNavigation({ items }: IMyPageNavigationProps) {
-  const [selectedNaviItem, setSelectedNaviItem] = useState(0);
-  const onClickNavigationItem = (event: MouseEvent<HTMLButtonElement>) => {
-    const id = event.currentTarget?.id;
-    setSelectedNaviItem(Number(id));
-  };
+export default function MyPageNavigation({
+  items,
+  selectedItem,
+  onChangeItem,
+}: IMyPageNavigationProps) {
   return (
     <div className={styles.navigationContainer}>
       {items.map((el, index) => (
@@ -20,11 +21,11 @@ export default function MyPageNavigation({ items }: IMyPageNavigationProps) {
           key={el}
           id={String(index)}
           className={
-            selectedNaviItem === index
+            selectedItem === index
               ? `${styles.item} ${styles.selectedItem}`
               : styles.item
           }
-          onClick={onClickNavigationItem}
+          onClick={onChangeItem}
         >
           {el}
         </button>
