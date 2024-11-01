@@ -67,9 +67,14 @@ const Navigation = () => {
             </>
           ) : (
             // 로그인 안했으면 로그인 버튼
-            <Link href="/login" className={styles.login_button}>
-              로그인
-            </Link>
+            <div className={styles.button_box}>
+              <Link href="/login" className={styles.login_button}>
+                로그인
+              </Link>
+              <Link href="/signup" className={styles.signup_button}>
+                회원가입
+              </Link>
+            </div>
           )}
         </div>
       </div>

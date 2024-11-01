@@ -1,0 +1,143 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.top3_section,
+.focus_on_services {
+  margin-bottom: 40px;
+}
+
+.top3_section h2,
+.focus_on_services h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.top3_list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top3_item {
+  flex-basis: calc(33.333% - 20px);
+}
+
+.top3_image_container,
+.service_image_container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.top3_content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.filter_menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter_button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ecf0f1;
+  color: #34495e;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.filter_button:hover,
+.filter_button.active {
+  background-color: #ff8c8a;
+  color: white;
+}
+
+.service_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.tag {
+  color: #ff8c8a;
+  font-size: 0.8em;
+  margin: 0 2px;
+}
+
+.price {
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 5px 0;
+}
+
+.author_price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.author img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.author span {
+  font-size: 0.9em;
+  color: #7f8c8d;
+}
+
+.like_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #ff8c8a;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.like_button svg {
+  fill: transparent;
+}
+
+.like_button svg:hover {
+  fill: #ff8c8a;
+}

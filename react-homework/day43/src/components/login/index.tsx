@@ -35,7 +35,7 @@ export default function Login() {
           <div className={styles.signup_box}>
             <div className={styles.question}>아직 계정이 없으신가요?</div>
             <Link href="/signup" className={styles.signup_button}>
-              회원가입
+              회원가입하러 가기
             </Link>
           </div>
         </div>

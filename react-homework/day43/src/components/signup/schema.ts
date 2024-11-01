@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+// interface ISchema {
+//   email
+//   name
+//   password
+//   confirmPassword
+// }
+
 export const schema = z
   .object({
     email: z

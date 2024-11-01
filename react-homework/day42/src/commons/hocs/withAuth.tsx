@@ -1,7 +1,6 @@
 "use client";
 
 import { warningModal } from "@/utils/modal";
-import { Modal } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
