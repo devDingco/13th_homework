@@ -3,3 +3,130 @@
 .main {
   margin: 40px 20px;
 }
+
+/* 검색바 관련 css */
+
+.searchSection {
+  margin: 24px 0;
+}
+
+.leftSearch {
+  display: flex;
+  gap: 16px;
+}
+
+.searchIcon {
+  background: var(--gray-50, #f2f2f2);
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  margin-right: -30px;
+}
+
+.titleSearch {
+  width: 60%;
+  min-width: 180px;
+  max-width: 640px;
+  padding: 12px;
+
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+  border: none;
+  outline: none;
+}
+
+.searchBtn {
+  height: 48px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--gray-B, #000);
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+/* --- */
+
+/* board css */
+.boardSection {
+  min-width: 480px;
+  padding: 24px 48px;
+
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.boardTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.boardTopLeft {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.boardNumber {
+  width: 50px;
+  color: var(--gray-900, #1c1c1c);
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
+
+.boardProduct {
+  width: 500px;
+  color: var(--gray-900, #1c1c1c);
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
+
+.boardTopRight {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.boardPrice {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  color: var(--gray-900, #1c1c1c);
+
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
+
+.boardDate {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  color: var(--gray-900, #1c1c1c);
+
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
+
+.boardItemSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.boardItem {
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+}
+
+.soldout {
+  color: var(--gray-400, #ababab);
+}
+
+.soldoutText {
+  color: #f66a6a;
+}
