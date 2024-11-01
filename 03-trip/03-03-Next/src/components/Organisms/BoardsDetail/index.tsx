@@ -78,20 +78,21 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
             <section>
                 <div>
-                    {data?.fetchBoard.images?.map((el) =>
-                        el !== "" ? (
-                            <Image
-                                key={el}
-                                src={`https://storage.googleapis.com/${el}`}
-                                alt="thumbnail"
-                                width={400}
-                                height={400}
-                                objectFit="cover"
-                            />
-                        ) : (
-                            ""
-                        )
-                    )}
+                    {!isEdit &&
+                        data?.fetchBoard.images?.map((el) =>
+                            el !== "" ? (
+                                <Image
+                                    key={el}
+                                    src={`https://storage.googleapis.com/${el}`}
+                                    alt="thumbnail"
+                                    width={400}
+                                    height={400}
+                                    objectFit="cover"
+                                />
+                            ) : (
+                                ""
+                            )
+                        )}
                 </div>
 
                 <pre className={styles.main_content}>
@@ -135,7 +136,11 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                             </div>
                             <div>
                                 <ImgField
-                                    imageUrl={imageUrl}
+                                    imageUrl={
+                                        data?.fetchBoard.images
+                                            ? data?.fetchBoard.images
+                                            : imageUrl
+                                    }
                                     onChange={onChangeFile}
                                 />
                             </div>

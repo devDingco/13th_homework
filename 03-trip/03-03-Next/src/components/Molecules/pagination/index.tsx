@@ -26,6 +26,12 @@ export default function PaginationUI(props: IPagination) {
                     refetch({ page: current });
                     return;
                 }
+                if (current === lastPage) {
+                    setStartPage(lastPage - ((lastPage % 10) + 9));
+                    refetch({ page: lastPage - ((lastPage % 10) + 9) });
+                    setCurrent(lastPage - ((lastPage % 10) + 9));
+                    return;
+                }
                 setStartPage(startPage - 10);
                 refetch({ page: startPage - 10 });
                 setCurrent(startPage - 10);
