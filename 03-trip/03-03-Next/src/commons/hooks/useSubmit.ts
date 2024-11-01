@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import { IBoardArgs, IBoardInput } from "../types/types";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
-import { CreateBoardDocument } from "../graphql/graphql";
+import { CreateBoardDocument, FetchBoardsDocument } from "../graphql/graphql";
 import withSweetAlert from "../library/withSweetAlert";
 
 export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
@@ -51,11 +51,17 @@ export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
                         boardAddress: {
                             zipcode: addressData?.zonecode,
                             address: addressData?.address,
-                            addressDetail: submitInput.address01_ID,
+                            addressDetail: submitInput.addressDetail_ID,
                         },
                         images: imageUrl,
                     },
                 },
+                refetchQueries: [
+                    {
+                        query: FetchBoardsDocument,
+                        variables: { page: 1 },
+                    },
+                ],
             });
             Router.push(`/boards/${result.data?.createBoard._id}`);
             if (result) plainAlert(`등록되었습니다!!`, "success");

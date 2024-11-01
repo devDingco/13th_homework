@@ -24,42 +24,46 @@ export default function BoardsListUI(props: IBoardListProps) {
                     <div className={styles.date}>날짜</div>
                 </div>
 
-                {data?.fetchBoards.map((el, idx) => (
-                    <div
-                        className={styles.post_wrapper}
-                        key={el._id}
-                        onClick={() => Router.push(`/boards/${el._id}`)}
-                    >
-                        <div className={styles.idx}>{postNum - idx}</div>
-                        <div className={styles.title}>
-                            {el.title
-                                .replaceAll(keyword, `@_¡¡${keyword}@_¡¡`)
-                                .split("@_¡¡")
-                                .map((el, idx) => (
-                                    <span
-                                        key={`${el}_${idx}`}
-                                        style={{
-                                            color:
-                                                el === keyword
-                                                    ? "#f55"
-                                                    : "#222",
-                                        }}
-                                    >
-                                        {el}
-                                    </span>
-                                ))}
-                        </div>
-                        <div className={styles.author}>{el.writer}</div>
-                        <div className={styles.date}>
-                            {el.createdAt.split("T")[0]}
-                        </div>
+                {data?.fetchBoards.length === 0 ? (
+                    <div>검색 결과가 없습니다.</div>
+                ) : (
+                    data?.fetchBoards.map((el, idx) => (
                         <div
-                            className={styles.btn}
-                            onClick={onClickDelete}
-                            id={el._id}
-                        ></div>
-                    </div>
-                ))}
+                            className={styles.post_wrapper}
+                            key={el._id}
+                            onClick={() => Router.push(`/boards/${el._id}`)}
+                        >
+                            <div className={styles.idx}>{postNum - idx}</div>
+                            <div className={styles.title}>
+                                {el.title
+                                    .replaceAll(keyword, `@_¡¡${keyword}@_¡¡`)
+                                    .split("@_¡¡")
+                                    .map((el, idx) => (
+                                        <span
+                                            key={`${el}_${idx}`}
+                                            style={{
+                                                color:
+                                                    el === keyword
+                                                        ? "#f55"
+                                                        : "#222",
+                                            }}
+                                        >
+                                            {el}
+                                        </span>
+                                    ))}
+                            </div>
+                            <div className={styles.author}>{el.writer}</div>
+                            <div className={styles.date}>
+                                {el.createdAt.split("T")[0]}
+                            </div>
+                            <div
+                                className={styles.btn}
+                                onClick={onClickDelete}
+                                id={el._id}
+                            ></div>
+                        </div>
+                    ))
+                )}
             </section>
         </>
     );

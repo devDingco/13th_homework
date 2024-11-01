@@ -42,7 +42,7 @@ export default function useUpdate({ addressData, imageUrl }: IBoardArgs) {
                     addressData?.address ||
                     data?.fetchBoard.boardAddress?.address,
                 addressDetail:
-                    updateInput.address01_ID ||
+                    updateInput.addressDetail_ID ||
                     data?.fetchBoard.boardAddress?.addressDetail,
             },
             images: imageUrl,
