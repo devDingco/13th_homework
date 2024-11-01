@@ -5,7 +5,9 @@ import styles from "@/commons/layout/styles.module.css";
 import LayoutNavigation from "./navigation";
 import { usePathname } from "next/navigation";
 
-const HIDDEN_HEADERS = [
+const HIDDEN_NAVIGATION = ["/authentication/signup", "/authentication/login"];
+
+const HIDDEN_BANNER = [
   "/boards/new",
   // /boards/{_ID값}/edit
 ];
@@ -15,15 +17,16 @@ interface ILayout {
 }
 
 export default function Layout({ children }: ILayout) {
-  const pathname = usePathname();
-  const isHiddenHeader =
-    HIDDEN_HEADERS.includes(pathname) || pathname.includes("edit");
+  const pathname = usePathname(); // 현재 URL 경로를 가져옴. 사용자가 /board/new 경로에 있다면 pathname = /board/new 임.
+  const isHiddenNavigation = HIDDEN_NAVIGATION.includes(pathname);
+  const isHiddenBanner =
+    HIDDEN_BANNER.includes(pathname) || pathname.includes("edit");
 
   return (
     <>
       <main className={styles.important}>
-        <LayoutNavigation />
-        {!isHiddenHeader && <LayoutBanner />}
+        {!isHiddenNavigation && <LayoutNavigation />}
+        {!isHiddenBanner && <LayoutBanner />}
         <div>{children}</div>
       </main>
     </>

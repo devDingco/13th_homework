@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import { RightOutlined } from "@ant-design/icons";
 
 export default function LayoutNavigation() {
   const [selected, setSElected] = useState(""); // nav에서 선택한 항목을 선택함
@@ -66,7 +67,18 @@ export default function LayoutNavigation() {
           </div>
         </div>
         <div className={styles.navRight}>
-          <div>
+          {/* 로그인 안된다면?  이 화면*/}
+          <div className={styles.loginBtnSection}>
+            <Link href="/authentication/login">
+              <button className={styles.loginBtn}>
+                로그인
+                <RightOutlined />
+              </button>
+            </Link>
+          </div>
+
+          {/* 로그인 된다면 이 화면 
+           <div>
             <Image
               src="/images/profile1.png"
               alt="프로필 아이콘"
@@ -85,7 +97,7 @@ export default function LayoutNavigation() {
               height={0}
               sizes="100vw"
             />
-          </div>
+          </div> */}
         </div>
       </main>
     </>
