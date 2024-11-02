@@ -2,7 +2,8 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 20px;
-
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #fffcfb;
   color: #333;
 }
 
@@ -107,8 +108,8 @@
   padding: 12px 12px 12px 44px;
   align-items: center;
   flex: 1 0 0;
+  background-color: #f2f2f2;
   border-radius: 8px;
-  border: 1px solid var(--border);
 }
 
 .search_icon {
@@ -138,8 +139,7 @@
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background-color: var(--main-color);
-
+  background-color: #197457;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -150,7 +150,7 @@
 }
 
 .service_button:hover {
-  background-color: var(--main-color-hover); /* 호버 시 배경색 변경 */
+  background-color: #d5686c; /* 호버 시 배경색 변경 */
   transform: translateY(-2px); /* 호버 시 약간 위로 이동 */
 }
 
@@ -165,31 +165,30 @@
   gap: 8px;
   color: #777;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  background-color: #f2f2f2;
 }
 
 .category_container {
   display: flex;
-  justify-content: center;
   width: 100%;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 30px;
 }
 
 .category_button {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   gap: 5px;
 }
 
-.category_button.active {
-  border: 1px solid var(--main-color);
-  color: var(--main-color);
+.category_icon {
+  margin-right: 5px;
+  fill: #555;
 }
 
 .service_grid {
@@ -220,10 +219,10 @@
 }
 
 .tag {
-  color: var(--main-color);
+  color: #e78b8d;
   font-size: 0.8rem;
   font-weight: 500;
-  background-color: var(--main-color-back);
+  background-color: #fdf0f0;
   padding: 4px 8px;
   border-radius: 12px;
 }
@@ -261,7 +260,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--main-color);
+  color: #e78b8d;
   font-weight: 600;
 }
 
@@ -269,13 +268,13 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 20px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
   gap: 5px;
-  color: var(--main-color);
+  color: #e78b8d;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -286,7 +285,7 @@
 }
 
 .like_button svg:hover {
-  fill: var(--main-color);
+  fill: #e78b8d;
 }
 
 .container h3 {

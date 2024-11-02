@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 function TextareaBase(props) {
   const { register } = useFormContext();
   return (
-    <input
+    <textarea
       className={props.className}
       placeholder={props.placeholder}
       {...register(props.keyname)}

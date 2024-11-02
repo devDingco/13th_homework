@@ -11,12 +11,12 @@ export default function SignUp() {
   return (
     <div className={styles.signup_page_body}>
       <div className={styles.main_box}>
-        <form className={styles.main_form}>
+        <div className={styles.main_form}>
           <div className={styles.title_box}>
             <div className={styles.signup_title}>회원가입</div>
             <div>새로운 계정을 만들어보세요</div>
           </div>
-          <form className={styles.input_form}>
+          <div className={styles.input_form}>
             <FieldWrapper label="이메일" isRequired={true}>
               <InputField
                 placeholder="이메일을 입력해 주세요."
@@ -51,7 +51,7 @@ export default function SignUp() {
                 <ErrorMsg errorMessage={errors.passwordConfirm} />
               )}
             </FieldWrapper>
-          </form>
+          </div>
           <button className={styles.signup_button} onClick={onClickSignUp}>
             회원가입
           </button>
@@ -61,7 +61,7 @@ export default function SignUp() {
               로그인하러 가기
             </Link>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

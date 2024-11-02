@@ -48,7 +48,7 @@
 
 .signup_button {
   width: 100%;
-  background-color: #e78b8d;
+  background-color: var(--main-color);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -58,7 +58,7 @@
 }
 
 .signup_button:hover {
-  background-color: #ffa7a5;
+  background-color: var(--main-color-hover);
 }
 
 .login_button_box {
@@ -68,9 +68,11 @@
 }
 
 .question {
+  color: var(--gray);
   font-size: 14px;
 }
 
 .login_button {
+  color: var(--main-color);
   font-size: 14px;
 }

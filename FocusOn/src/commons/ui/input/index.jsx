@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 
 // 1. 뼈대 만들기
 function InputBase(props) {
+  console.log(props);
   const { register } = useFormContext();
   return (
     <input
