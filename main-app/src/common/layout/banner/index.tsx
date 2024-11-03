@@ -7,11 +7,12 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { css } from "@/common/styled-system/css";
 
 export default function LayoutBanner() {
     return (
-        <div style={BannerWrap}>
-            <div style={BannerImg}>
+        <div className={CSS_Banner_Wrap}>
+            <div className={CSS_Banner_Img}>
                 <Swiper
                     modules={[EffectFade, Pagination, Autoplay]}
                     effect="fade"
@@ -30,31 +31,32 @@ export default function LayoutBanner() {
                     ))}
                 </Swiper>
             </div>
-            <div style={{ ...BannerBG, position: "absolute" }}></div>
+            <div className={CSS_Banner_BG}></div>
         </div>
     );
 }
 
-const BannerWrap = {
+const CSS_Banner_Wrap = css({
     width: "100vw",
     height: "100%",
     display: "flex",
     justifyContent: "center",
     padding: "2rem",
-};
+});
 
-const BannerImg = {
+const CSS_Banner_Img = css({
     width: "112rem",
     height: "100%",
     borderRadius: "1rem",
     overflow: "hidden",
     boxShadow: "0rem 1rem 2rem 0rem #e0e0e0",
-};
+});
 
-const BannerBG = {
+const CSS_Banner_BG = css({
     width: "100%",
     maxHeight: "56rem",
     marginTop: "4rem",
     aspectRatio: "16/8",
     backgroundColor: "#ffdfcc",
-};
+    position: "absolute",
+});
