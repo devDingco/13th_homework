@@ -1,3 +1,4 @@
+import { AuthModule } from 'src/auth/auth.module';
 import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,7 +8,11 @@ import { UserRepository } from './repository/user.repository';
 import { UserService } from './user.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User], 'PostgreSQL'), BcryptModule],
+    imports: [
+        TypeOrmModule.forFeature([User], 'PostgreSQL'),
+        BcryptModule,
+        AuthModule,
+    ],
     controllers: [UserController],
     providers: [UserService, UserRepository],
 })

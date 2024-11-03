@@ -1,3 +1,4 @@
+import { AuthService } from 'src/auth/auth.service';
 import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { Injectable } from '@nestjs/common';
 import { User } from './entity/user.entity';
@@ -10,6 +11,7 @@ export class UserService {
     constructor(
         private readonly userRepository: UserRepository,
         private readonly bcryptService: BcryptService,
+        private readonly authService: AuthService,
     ) {}
 
     async createUser(signUpDTO: signUpDTO): Promise<User> {
@@ -28,7 +30,8 @@ export class UserService {
             loginDTO.password,
             user.password,
         );
+        const token = await this.authService.issueLoginToken(loginDTO.email);
 
-        return user;
+        return { user, ...token };
     }
 }

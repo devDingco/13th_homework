@@ -1,27 +1,24 @@
-// import { BcryptService } from 'src/bcrypt/bcrypt.service';
-// import { Injectable } from '@nestjs/common';
-// import { JwtService } from '@nestjs/jwt';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
-// @Injectable()
-// export class AuthService {
-//     constructor(
-//         private readonly jwtService: JwtService,
-//         private readonly bcryptService: BcryptService,
-//     ) {}
+@Injectable()
+export class AuthService {
+    constructor(private readonly jwtService: JwtService) {}
 
-//     //     async signIn(userDTO: userDTO): Promise<{ accessToken: string }> {
-//     //         const { email, password } = userDTO;
-//     //         const user: User = await this.userRepository.findUser(email);
+    async issueLoginToken(email: string) {
+        const payload = { email };
 
-//     //         if (!user) {
-//     //             throw new NotFoundException('is not exist email in database');
-//     //         }
+        // 여기에 role 넣기
+        // user 또는 counselor
+        const accessToken = await this.jwtService.signAsync(payload, {
+            expiresIn: '1h',
+        });
 
-//     //         await this.bcryptService.validatePassword(password, user.password);
-//     //         // create access token
-//     //         const payload = { id: user.id };
-//     //         const accessToken = this.jwtService.sign(payload);
+        // jti(jwt ID) -> redis
+        const refreshToken = await this.jwtService.signAsync(payload, {
+            expiresIn: '7d',
+        });
 
-//     //         return { accessToken };
-//     //     }
-// }
+        return { accessToken, refreshToken };
+    }
+}
