@@ -19,7 +19,7 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "codegen": "graphql-codegen --config ./configs/codegen.config.ts",
-        "docker": "docker-compose --env-file .env.development down -v && docker-compose --env-file .env.development up --build"
+        "docker": "docker-compose -f docker-compose.dev.yml --env-file .env.development down -v && docker-compose -f docker-compose.dev.yml --env-file .env.development up --build"
     },
     "dependencies": {
         "@apollo/server": "^4.11.0",
