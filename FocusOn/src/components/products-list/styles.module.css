@@ -58,7 +58,7 @@
 
 .top3_content,
 .service_content {
-  padding: 20px;
+  padding: 16px;
 }
 
 .filter_menu {
@@ -86,13 +86,18 @@
   color: white;
 }
 
+.search_register_area {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
 .search_area {
   display: flex;
   min-width: 640px;
   align-items: center;
   gap: 16px;
   flex: 1 0 0;
-  margin-bottom: 30px;
 }
 
 .search_bar_box {
@@ -101,8 +106,8 @@
 
 .search_bar {
   display: flex;
-  width: 640px;
-  min-width: 180px;
+  /* width: 640px; */
+  min-width: 380px;
   max-width: 640px;
   padding: 12px 12px 12px 44px;
   align-items: center;
@@ -170,7 +175,7 @@
 
 .category_container {
   display: flex;
-  justify-content: center;
+
   width: 100%;
   flex-wrap: wrap;
   gap: 8px;
@@ -216,7 +221,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 10px 0;
+  margin: 8px 0;
 }
 
 .tag {
@@ -231,7 +236,7 @@
 .price {
   font-weight: 700;
   color: #333;
-  margin: 10px 0;
+  margin: 8px 0;
   font-size: 1.1rem;
 }
 
@@ -239,7 +244,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 .author {
@@ -292,6 +297,6 @@
 .container h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #333;
 }

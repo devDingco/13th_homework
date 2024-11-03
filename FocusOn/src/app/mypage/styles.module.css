@@ -1,13 +1,58 @@
-.mypage_body {
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  padding: 20px;
   display: flex;
-  padding: 40px 20px;
-  justify-content: center;
+  gap: 2.5rem;
 }
 
-.mypage_page {
-  width: 1280px;
+.sidebar {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #e0e0e0;
 }
 
-.header {
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav_button {
+  background: none;
+  border: none;
+  padding: 15px 10px;
+  font-size: 16px;
+  text-align: left;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  transition: color 0.3s;
+}
+
+.nav_button:last-child {
+  border-bottom: none;
+}
+
+.nav_button:hover {
+  color: var(--main-color);
+}
+
+.nav_button.active {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.content {
   width: 100%;
 }

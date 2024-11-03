@@ -70,6 +70,6 @@
   align-items: center;
   gap: 8px;
   border-radius: 6px;
-  background-color: #e78b8d;
+  background-color: var(--main-color);
   color: white;
 }

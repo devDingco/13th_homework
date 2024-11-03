@@ -37,7 +37,6 @@ const { RangePicker } = DatePicker;
 
 export default function ProductsList() {
   const [filter, setFilter] = useState("all");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   const top3Services = [
     {
@@ -181,9 +180,8 @@ export default function ProductsList() {
 
   return (
     <div className={styles.container}>
-      {/* 인기서비스 섹션 */}
       <section className={styles.top3_section}>
-        <h2>포커스온 인기 서비스</h2>
+        <h2>포커스온 인기 TOP3 서비스</h2>
         <div className={styles.top3_list}>
           {top3Services.map((service) => (
             <div key={service.id} className={styles.top3_item}>
@@ -214,7 +212,7 @@ export default function ProductsList() {
           ))}
         </div>
       </section>
-      {/*서비스 필터 섹션*/}
+
       <section className={styles.focus_on_services}>
         <h2>포커스온만의 서비스</h2>
         <div className={styles.filter_menu}>
@@ -276,13 +274,7 @@ export default function ProductsList() {
 
         <div className={styles.category_container}>
           {categories.map((category) => (
-            <button
-              key={category.name}
-              className={`${styles.category_button} ${
-                selectedCategory === category.name ? styles.active : ""
-              }`}
-              onClick={() => setSelectedCategory(category.name)}
-            >
+            <button key={category.name} className={styles.category_button}>
               <span className={styles.icon}>{category.icon}</span>
               {category.name}
             </button>
