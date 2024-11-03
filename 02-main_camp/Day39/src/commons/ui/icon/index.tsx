@@ -1,6 +1,11 @@
 import Image from "next/image";
 import React from "react";
 
+interface IIconProps {
+  width?: number;
+  height?: number;
+}
+
 // Sample
 export function TravelProductSample1() {
   return (
@@ -125,7 +130,7 @@ export function Profile() {
   return (
     <Image
       src="/assets/profile.png"
-      alt="검색 아이콘"
+      alt="프로필 아이콘"
       width={0}
       height={0}
       sizes="100vw"
@@ -138,7 +143,7 @@ export function Profile40() {
   return (
     <Image
       src="/assets/profile.png"
-      alt="검색 아이콘"
+      alt="프로필 아이콘"
       width={0}
       height={0}
       sizes="100vw"
@@ -151,11 +156,37 @@ export function Chat() {
   return (
     <Image
       src="/assets/chat.png"
-      alt="검색 아이콘"
+      alt="대화창 아이콘"
       width={0}
       height={0}
       sizes="100vw"
       style={{ width: "1.5rem", height: "1.5rem" }}
+    />
+  );
+}
+
+export function Edit({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/edit.png"
+      alt="수정하기 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}`, height: `${height}` }}
+    />
+  );
+}
+
+export function Close({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/close.png"
+      alt="닫기 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}`, height: `${height}` }}
     />
   );
 }
