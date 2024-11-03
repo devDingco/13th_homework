@@ -1,0 +1,104 @@
+.container h2 {
+  color: #232a36;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.point_info {
+  background-color: var(--main-color-back);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.my_point {
+  font-size: 0.9rem;
+  color: var(--main-color);
+}
+
+.point_amount {
+  font-size: 2rem;
+  color: var(--main-color);
+}
+
+.expirationInfo {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.menu {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.menu_button {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.menu_button.active {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+}
+
+.history_item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  font-weight: bold;
+  color: #333;
+}
+
+.product_name {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.amount {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.balance {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.positive .amount {
+  color: #d9534f; /* 적립 포인트 색상 */
+}
+
+.expirationDate {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 5px;
+}

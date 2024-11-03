@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { ChevronRight } from "lucide-react"; // ChevronRight 아이콘 가져오기
 import styles from "./styles.module.css";
 import Wishlist from "@/components/my-page/wish-list";
+import MyProduct from "@/components/my-page/product";
+import PointHistory from "@/components/my-page/point-history";
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState("transactions");
@@ -11,11 +13,11 @@ export default function MyPage() {
   const renderContent = () => {
     switch (activeTab) {
       case "transactions":
-        return <h2 className={styles.content_title}>거래 내역</h2>;
+        return <MyProduct />;
       case "wishlist":
         return <Wishlist />;
       case "points":
-        return <h2 className={styles.content_title}>포인트</h2>;
+        return <PointHistory />;
       case "profile":
         return <h2 className={styles.content_title}>내 정보 관리</h2>;
       default:
@@ -35,7 +37,7 @@ export default function MyPage() {
               }`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab === "transactions" && "거래내역"}
+              {tab === "transactions" && "내 상품"}
               {tab === "wishlist" && "찜 목록"}
               {tab === "points" && "포인트"}
               {tab === "profile" && "내 정보 관리"}

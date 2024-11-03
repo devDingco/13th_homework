@@ -2,7 +2,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 20px;
-
   color: #333;
 }
 
@@ -86,18 +85,13 @@
   color: white;
 }
 
-.search_register_area {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
 .search_area {
   display: flex;
   min-width: 640px;
   align-items: center;
   gap: 16px;
   flex: 1 0 0;
+  margin-bottom: 30px;
 }
 
 .search_bar_box {
@@ -175,7 +169,6 @@
 
 .category_container {
   display: flex;
-
   width: 100%;
   flex-wrap: wrap;
   gap: 8px;

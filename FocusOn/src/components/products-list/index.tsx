@@ -37,6 +37,11 @@ const { RangePicker } = DatePicker;
 
 export default function ProductsList() {
   const [filter, setFilter] = useState("all");
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const onClickCategory = (category) => {
+    setActiveCategory(category.name);
+  };
 
   const top3Services = [
     {
@@ -274,7 +279,13 @@ export default function ProductsList() {
 
         <div className={styles.category_container}>
           {categories.map((category) => (
-            <button key={category.name} className={styles.category_button}>
+            <button
+              key={category.name}
+              className={`${styles.category_button} ${
+                activeCategory === category.name ? styles.active : ""
+              }`}
+              onClick={() => onClickCategory(category)}
+            >
               <span className={styles.icon}>{category.icon}</span>
               {category.name}
             </button>

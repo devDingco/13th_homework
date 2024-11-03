@@ -15,6 +15,7 @@ interface Service {
   available: boolean;
   image: string;
   author: Author;
+  sold: boolean;
 }
 
 const focusOnServices: Service[] = [
@@ -26,6 +27,7 @@ const focusOnServices: Service[] = [
     available: true,
     image: "/images/product.jpg",
     author: { name: "김개발", image: "/images/profile.png" },
+    sold: true,
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ const focusOnServices: Service[] = [
       name: "이디자인",
       image: "/images/profile.png",
     },
+    sold: false,
   },
   {
     id: 3,
@@ -47,13 +50,14 @@ const focusOnServices: Service[] = [
     available: true,
     image: "/images/product.jpg",
     author: { name: "박영상", image: "/images/profile.png" },
+    sold: true,
   },
 ];
 
-export default function WishList() {
+export default function MyProduct() {
   return (
     <div className={styles.container}>
-      <h2>찜 목록</h2>
+      <h2>내 상품</h2>
       <div className={styles.services_list}>
         {focusOnServices.map((service) => (
           <ListCard service={service} />
