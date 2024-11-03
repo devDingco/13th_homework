@@ -7,6 +7,11 @@
   padding: 30px 20px;
 }
 
+.logo {
+  width: 120px;
+  height: auto;
+}
+
 .main_box {
   display: flex;
   width: 450px;
