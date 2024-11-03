@@ -1,6 +1,6 @@
 "use client";
 import BoardsNewUI from "@/components/Organisms/BoardsNew";
-import { withLoginCheck } from "@/commons/hocs/withLoginCheck";
+import { withLoginCheck } from "@/common/hocs/withLoginCheck";
 
 function BoardsNewPage() {
     return <BoardsNewUI />;

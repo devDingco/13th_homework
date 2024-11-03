@@ -6,10 +6,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+import { FetchBoardCommentsDocument } from "@/common/graphql/graphql";
 
-import { comment_wrap } from "@/commons/styles/commentStyles";
-import { CSSTitle } from "../ProductList";
+import { css } from "@/common/styled-system/css";
 
 export default function CommentListUI() {
     const [hasMore, setHasMore] = useState(true);
@@ -24,8 +23,7 @@ export default function CommentListUI() {
 
         fetchMore({
             variables: {
-                page:
-                    Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+                page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult.fetchBoardComments.length) {
@@ -33,17 +31,14 @@ export default function CommentListUI() {
                     return;
                 }
                 return {
-                    fetchBoardComments: [
-                        ...prev.fetchBoardComments,
-                        ...fetchMoreResult.fetchBoardComments,
-                    ],
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
                 };
             },
         });
     };
 
     return (
-        <section style={comment_wrap}>
+        <section className={CSS_CommentBG}>
             <InfiniteScroll
                 next={onNext}
                 hasMore={hasMore}
@@ -51,13 +46,19 @@ export default function CommentListUI() {
                 dataLength={data?.fetchBoardComments.length ?? 0}
             >
                 {data && data.fetchBoardComments.length > 0 ? (
-                    data.fetchBoardComments.map((el, idx) => (
-                        <CommentUI el={el} key={idx} />
-                    ))
+                    data.fetchBoardComments.map((el, idx) => <CommentUI el={el} key={idx} />)
                 ) : (
-                    <div style={CSSTitle}>등록된 댓글이 없습니다.</div>
+                    <div>등록된 댓글이 없습니다.</div>
                 )}
             </InfiniteScroll>
         </section>
     );
 }
+
+const CSS_CommentBG = css({
+    backgroundColor: "#F2F3F7",
+    borderRadius: "0.8rem",
+    display: "flex",
+    gap: "1rem",
+    margin: "2rem 0rem",
+});

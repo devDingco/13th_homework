@@ -5,6 +5,7 @@ import useDelete from "@/common/hooks/useDelete";
 
 import styles from "./styles.module.css";
 import { IBoardListProps } from "@/common/types/types";
+import { css } from "@/common/styled-system/css";
 
 export default function BoardsListUI(props: IBoardListProps) {
     const { data, count, current, keyword } = props;
@@ -41,9 +42,9 @@ export default function BoardsListUI(props: IBoardListProps) {
                                     .map((el, idx) => (
                                         <span
                                             key={`${el}_${idx}`}
-                                            style={{
+                                            className={css({
                                                 color: el === keyword ? "#f55" : "#222",
-                                            }}
+                                            })}
                                         >
                                             {el}
                                         </span>

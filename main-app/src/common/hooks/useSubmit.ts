@@ -30,14 +30,10 @@ export default function useSubmitInput({ addressData, imageUrl }: IBoardArgs) {
     const onClickCreate = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if (submitInput.author_ID === "")
-            return errorAlert("작성자를 확인해 주세요.");
-        if (submitInput.password_ID === "")
-            return errorAlert("비밀번호를 확인해 주세요.");
-        if (submitInput.title_ID === "")
-            return errorAlert("제목을 작성해 주세요.");
-        if (submitInput.content_ID === "")
-            return errorAlert("내용을 작성해 주세요.");
+        if (submitInput.author_ID === "") return errorAlert("작성자를 확인해 주세요.");
+        if (submitInput.password_ID === "") return errorAlert("비밀번호를 확인해 주세요.");
+        if (submitInput.title_ID === "") return errorAlert("제목을 작성해 주세요.");
+        if (submitInput.content_ID === "") return errorAlert("내용을 작성해 주세요.");
 
         try {
             const result = await createBoard({

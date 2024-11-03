@@ -1,6 +1,6 @@
 "use client";
 
-import { InputStyle, TextStyle } from "@/common/styles/styles";
+import { css } from "@/common/styled-system/css";
 import { InputPlaceholder } from "@/common/types/types";
 
 export default function Input({ ...props }) {
@@ -10,7 +10,7 @@ export default function Input({ ...props }) {
         <>
             {!textarea ? (
                 <input
-                    style={InputStyle}
+                    className={css(CSS_Input)}
                     id={id}
                     type={id === "password_ID" ? "password" : "text"}
                     placeholder={InputPlaceholder[id]}
@@ -21,7 +21,7 @@ export default function Input({ ...props }) {
                 />
             ) : (
                 <textarea
-                    style={{ ...InputStyle, ...TextStyle, resize: "none" }}
+                    className={css(CSS_Input, CSS_Text)}
                     id={id}
                     placeholder={InputPlaceholder[id]}
                     onChange={onChange}
@@ -32,3 +32,22 @@ export default function Input({ ...props }) {
         </>
     );
 }
+
+const CSS_Input = css.raw({
+    w: "100%",
+    h: "40px",
+    p: "10px",
+    bg: "var(--mono-gray000)",
+    border: "2px solid var(--mono-gray200)",
+    rounded: "8px",
+    m: "8px 0px",
+    display: "block",
+});
+
+const CSS_Text = css.raw({
+    minHeight: "10rem",
+    overflow: "auto",
+    paddingTop: "1.2rem",
+    lineHeight: "2.4rem",
+    resize: "none",
+});

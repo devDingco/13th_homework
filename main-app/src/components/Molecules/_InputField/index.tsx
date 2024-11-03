@@ -1,6 +1,7 @@
 "use client";
 
-import { InputData } from "@/commons/types/types";
+import { css } from "@/common/styled-system/css";
+import { InputData } from "@/common/types/types";
 import Input from "@/components/Atoms/_Input";
 
 export default function InputField({ ...props }) {
@@ -8,20 +9,26 @@ export default function InputField({ ...props }) {
 
     return (
         <>
-            <label style={{ display: "flex", flexDirection: "column" }}>
+            <label className={CSS_InputField}>
                 {InputData[id]}
-                <strong style={{ color: "#F55", display: "contents" }}>
-                    {required && " * "}
-                </strong>
+                <strong className={CSS_Error}>{required && " * "}</strong>
 
                 <div>
                     <Input id={id} textarea={textarea} onChange={onChange} />
                 </div>
 
-                <strong style={{ color: "#F55" }}>
-                    {/* {value || !required ? "" : "필수 입력 사항입니다."} */}
-                </strong>
+                <strong className={CSS_Error}>{value || !required ? "" : "필수 입력 사항입니다."}</strong>
             </label>
         </>
     );
 }
+
+const CSS_InputField = css({
+    display: "flex",
+    flexDir: "column",
+});
+
+const CSS_Error = css({
+    color: "var(--chroma-error)",
+    display: "contents",
+});

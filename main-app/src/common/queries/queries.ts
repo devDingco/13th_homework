@@ -60,16 +60,8 @@ export const FETCH_COUNT = gql`
 `;
 
 export const UPDATE_BOARD = gql`
-    mutation updateBoard(
-        $boardId: ID!
-        $password: String
-        $updateBoardInput: UpdateBoardInput!
-    ) {
-        updateBoard(
-            boardId: $boardId
-            password: $password
-            updateBoardInput: $updateBoardInput
-        ) {
+    mutation updateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {
+        updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {
             _id
             writer
             title
@@ -93,14 +85,8 @@ export const DELETE_BOARD = gql`
 `;
 
 export const CREATE_COMMENT = gql`
-    mutation createBoardComment(
-        $boardId: ID!
-        $createBoardCommentInput: CreateBoardCommentInput!
-    ) {
-        createBoardComment(
-            boardId: $boardId
-            createBoardCommentInput: $createBoardCommentInput
-        ) {
+    mutation createBoardComment($boardId: ID!, $createBoardCommentInput: CreateBoardCommentInput!) {
+        createBoardComment(boardId: $boardId, createBoardCommentInput: $createBoardCommentInput) {
             _id
             writer
             contents

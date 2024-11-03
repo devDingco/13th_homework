@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import add from "/public/svg/add.svg";
-import { FigureStyle } from "@/commons/styles/styles";
 import { useRef } from "react";
+import { css } from "@/common/styled-system/css";
 
 export default function ImgUploader({ imageUrl, onChange, idx }) {
     const ref = useRef<HTMLInputElement>(null);
@@ -10,7 +10,7 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
     return (
         <>
             <figure
-                style={FigureStyle as React.CSSProperties}
+                className={CSS_Img}
                 onClick={() => {
                     ref.current?.click();
                 }}
@@ -23,22 +23,35 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
                         alt="#yourImage"
                         width={120}
                         height={120}
-                        style={{ objectFit: "cover", overflow: "clip" }}
+                        className={css({ objectFit: "cover", overflow: "clip" })}
                     />
                 )}
                 <input
                     type="file"
                     onChange={onChange}
                     multiple
-                    style={{ display: "none" }}
+                    className={css({ display: "none" })}
                     id={idx}
                     ref={ref}
                     accept="image/jpeg,image/png"
                 />
-                <figcaption>
-                    {imageUrl ? "" : "클릭하여 사진 업로드"}
-                </figcaption>
+                <figcaption>{imageUrl ? "" : "클릭하여 사진 업로드"}</figcaption>
             </figure>
         </>
     );
 }
+
+const CSS_Img = css({
+    width: "12rem",
+    height: "12rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    padding: "0.8rem",
+    gap: "0.8rem",
+    backgroundColor: "#eee",
+    borderRadius: "0.8rem",
+    cursor: "pointer",
+});

@@ -1,33 +1,19 @@
 "use client";
 
+import { css } from "@/common/styled-system/css";
 import Input from "@/components/Atoms/_Input";
 import { Button, Modal } from "antd";
 
 import DaumPostcodeEmbed from "react-daum-postcode";
 
-const SearchBarStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    width: "180px",
-};
-
 export default function AddressFieldUI({ ...props }) {
-    const {
-        onChange,
-        isModalOpen,
-        addressData,
-        onToggleModal,
-        handleComplete,
-        data,
-        isEdit,
-    } = props;
+    const { onChange, isModalOpen, addressData, onToggleModal, handleComplete, data, isEdit } = props;
 
     return (
         <>
             <label>
                 주소
-                <div style={SearchBarStyle}>
+                <div className={CSS_Zipcode}>
                     <Input
                         id="zipcode_ID"
                         onClick={onToggleModal}
@@ -53,19 +39,11 @@ export default function AddressFieldUI({ ...props }) {
                 <Input
                     id="addressDetail_ID"
                     onChange={onChange}
-                    value={
-                        isEdit && addressData === undefined
-                            ? data?.fetchBoard.boardAddress?.addressDetail
-                            : ""
-                    }
+                    value={isEdit && addressData === undefined ? data?.fetchBoard.boardAddress?.addressDetail : ""}
                 />
                 {/* modal */}
                 {isModalOpen && (
-                    <Modal
-                        open={true}
-                        onOk={onToggleModal}
-                        onCancel={onToggleModal}
-                    >
+                    <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
                         <div>우편번호 검색</div>
                         <DaumPostcodeEmbed onComplete={handleComplete} />
                     </Modal>
@@ -74,3 +52,10 @@ export default function AddressFieldUI({ ...props }) {
         </>
     );
 }
+
+const CSS_Zipcode = css({
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    width: "180px",
+});

@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    reactStrictMode: false,
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "storage.googleapis.com",
+                port: "",
+                pathname: "/codecamp-file-storage/**",
+            },
+        ],
+    },
 };
 
 export default nextConfig;

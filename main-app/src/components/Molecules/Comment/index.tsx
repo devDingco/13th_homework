@@ -9,15 +9,10 @@ import edit from "/public/svg/edit.svg";
 import close from "/public/svg/close.svg";
 import check from "/public/svg/check.svg";
 
-import {
-    comment_btn,
-    comment_input,
-    comment_label,
-} from "@/commons/styles/commentStyles";
-
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UpdateBoardCommentDocument } from "@/commons/graphql/graphql";
+import { UpdateBoardCommentDocument } from "@/common/graphql/graphql";
+import { css } from "@/common/styled-system/css";
 
 export default function CommentUI({ el }) {
     const [isEdit, setIsEdit] = useState(false);
@@ -64,8 +59,8 @@ export default function CommentUI({ el }) {
 
     return (
         <>
-            <div style={comment_input}>
-                <div style={comment_label}>
+            <div className={CSS_CommentHead}>
+                <div className={CSS_CommentWrap}>
                     <Image src={profile} alt="profile" />
                     <div>{el.writer}</div>
                     {isEdit ? (
@@ -74,8 +69,8 @@ export default function CommentUI({ el }) {
                         <Rate value={el.rating} allowHalf disabled />
                     )}
                 </div>
-                <div style={comment_label}>
-                    <div style={comment_btn}>
+                <div className={CSS_CommentWrap}>
+                    <div className={CSS_CommentButton}>
                         <Image
                             src={edit}
                             alt="edit"
@@ -84,13 +79,9 @@ export default function CommentUI({ el }) {
                             }}
                         />
                     </div>
-                    <div style={comment_btn}>
+                    <div className={CSS_CommentButton}>
                         {isEdit ? (
-                            <Image
-                                src={check}
-                                alt="check"
-                                onClick={handleUpdate}
-                            />
+                            <Image src={check} alt="check" onClick={handleUpdate} />
                         ) : (
                             <Image src={close} alt="close" />
                         )}
@@ -98,26 +89,33 @@ export default function CommentUI({ el }) {
                 </div>
             </div>
 
-            <pre>
-                {isEdit ? (
-                    <Input
-                        id="comment_ID"
-                        value={el.contents}
-                        onChange={handleChange}
-                    />
-                ) : (
-                    el.contents
-                )}
+            <pre className={css({ p: "1rem 0rem" })}>
+                {isEdit ? <Input id="comment_ID" value={el.contents} onChange={handleChange} /> : el.contents}
             </pre>
 
-            <div>
-                {isEdit ? (
-                    <Input id="password_ID" onChange={handleChange} />
-                ) : (
-                    el.createdAt.split("T")[0]
-                )}
+            <div className={css({ fontSize: "1.4rem" })}>
+                {isEdit ? <Input id="password_ID" onChange={handleChange} /> : el.createdAt.split("T")[0]}
             </div>
-            <br />
         </>
     );
 }
+
+const CSS_CommentHead = css({
+    display: "flex",
+    justifyContent: "space-between",
+});
+
+const CSS_CommentWrap = css({
+    display: "flex",
+    alignItems: "center",
+    gap: "0.8rem",
+    height: "4rem",
+});
+
+const CSS_CommentButton = css({
+    width: "4rem",
+    height: "4rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+});

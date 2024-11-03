@@ -70,9 +70,7 @@ export default function useLoginUser() {
 
             const token = result.data?.loginUser.accessToken;
             if (!token) {
-                return errorAlert(
-                    "로그인에 실패하였습니다! 다시 시도하여 주세요."
-                );
+                return errorAlert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
             }
             setToken(token ?? "");
             sessionStorage.setItem("@_¡¡", token);
@@ -80,9 +78,9 @@ export default function useLoginUser() {
             plainAlert(
                 `로그인 성공
                 ${token}`,
-                "success"
+                "success",
             );
-            router.push(`/`);
+            router.push(`/boards`);
         } catch (error) {
             errorAlert("로그인에 실패하였습니다");
             console.log(error);

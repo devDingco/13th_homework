@@ -1,32 +1,31 @@
 "use client";
 
+import { css } from "@/common/styled-system/css";
 import dummy from "/public/img/ping.png";
 
 import { TagOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
-import { CSSProperties } from "react";
+import Image from "next/image";
 
 export default function ProductCardUI() {
     return (
-        <div style={CSSWrapper}>
-            <div style={CSSCardWrapper}>
-                <div style={CSSCardLabel}>
+        <div className={css({ w: "22rem" })}>
+            <div className={CSS_CardWrapper}>
+                <div className={CSS_CardLabel}>
                     <TagOutlined />
                     132
                 </div>
-                <div style={CSSCardImg}></div>
+                <div className={CSS_dimmedBG}></div>
+                <Image className={CSS_CardImg} src={dummy} alt="just dummy img" />
             </div>
 
-            <div style={CSSItem}>
-                <div style={CSSText}>사랑의 하츄핑 얍얍얍</div>
-                <div>
-                    처음 본 순간, 한눈에 반해버렸어! 설레는 운명이 시작된 우리의
-                    첫 만남!
-                </div>
+            <div className={CSS_Item}>
+                <div className={css({ fontSize: "2rem" })}>사랑의 하츄핑 얍얍얍</div>
+                <div>처음 본 순간, 한눈에 반해버렸어! 설레는 운명이 시작된 우리의 첫 만남!</div>
                 <div>#하츄핑 #핑핑 #전체 관람가</div>
 
-                <div style={CSSProfile}>
-                    <div style={CSSAvatar}>
+                <div className={CSS_Profile}>
+                    <div className={CSS_Avatar}>
                         <Avatar />
                         빈얀트리
                     </div>
@@ -37,33 +36,25 @@ export default function ProductCardUI() {
     );
 }
 
-const CSSWrapper: CSSProperties = {
-    width: "22rem",
-};
-
-const CSSText: CSSProperties = {
-    fontSize: "2rem",
-};
-
-const CSSItem: CSSProperties = {
+const CSS_Item = css({
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
-};
+});
 
-const CSSProfile: CSSProperties = {
+const CSS_Profile = css({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-};
+});
 
-const CSSAvatar: CSSProperties = {
+const CSS_Avatar = css({
     display: "flex",
     alignItems: "center",
     gap: "4px",
-};
+});
 
-const CSSCardWrapper: CSSProperties = {
+const CSS_CardWrapper = css({
     width: "22rem",
     height: "20rem",
     backgroundColor: "#f2f3f7",
@@ -74,11 +65,8 @@ const CSSCardWrapper: CSSProperties = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-
-    background:
-        "linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.05) 100%)",
-};
-const CSSCardLabel: CSSProperties = {
+});
+const CSS_CardLabel = css({
     position: "absolute",
     top: "1rem",
     right: "1rem",
@@ -95,15 +83,24 @@ const CSSCardLabel: CSSProperties = {
     gap: "0.4rem",
     color: "#eee",
     fontSize: "1.2rem",
-};
+});
 
-const CSSCardImg: CSSProperties = {
+const CSS_dimmedBG = css({
+    w: "100%",
+    h: "100%",
+    bg: "linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.0) 70%)",
+    pos: "absolute",
+    z: "1",
+    rounded: "1.6rem",
+});
+
+const CSS_CardImg = css({
     width: "90%",
     height: "90%",
-    backgroundImage: `url("${dummy.src}")`,
-    backgroundSize: "cover",
 
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-};
+
+    objectFit: "cover",
+});

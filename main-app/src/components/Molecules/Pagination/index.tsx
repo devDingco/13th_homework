@@ -1,7 +1,8 @@
 "use client";
 
 import { MouseEvent, useState } from "react";
-import { IPagination } from "@/commons/types/types";
+import { IPagination } from "@/common/types/types";
+import { css } from "@/common/styled-system/css";
 
 export default function PaginationUI(props: IPagination) {
     const { refetch, lastPage, current, setCurrent } = props;
@@ -60,7 +61,7 @@ export default function PaginationUI(props: IPagination) {
 
     return (
         <>
-            <div style={BtnBoxStyle}>
+            <div className={CSS_ButtonBox}>
                 <span id="-xx" onClick={onClick}>{`<<`}</span>
                 <span id="-x" onClick={onClick}>{`<`}</span>
 
@@ -71,18 +72,15 @@ export default function PaginationUI(props: IPagination) {
                                 id={String(idx + startPage)}
                                 key={idx + startPage}
                                 onClick={onClick}
-                                style={
+                                className={
                                     current === idx + startPage
-                                        ? {
-                                              ...PageBtnStyle,
-                                              backgroundColor: "#ffdfcc",
-                                          }
-                                        : PageBtnStyle
+                                        ? css({ ...CSS_PageButton, backgroundColor: "#ffdfcc" })
+                                        : css(CSS_PageButton)
                                 }
                             >
                                 {idx + startPage}
                             </span>
-                        )
+                        ),
                 )}
 
                 <span id="+x" onClick={onClick}>{`>`}</span>
@@ -92,15 +90,16 @@ export default function PaginationUI(props: IPagination) {
     );
 }
 
-const BtnBoxStyle = {
+const CSS_ButtonBox = css({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     gap: "20px",
     margin: "20px",
-};
+    cursor: "pointer",
+});
 
-const PageBtnStyle = {
+const CSS_PageButton = css.raw({
     width: "40px",
     height: "40px",
     borderRadius: "8px",
@@ -109,4 +108,4 @@ const PageBtnStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-};
+});

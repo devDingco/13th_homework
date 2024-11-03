@@ -5,7 +5,7 @@ import LayoutBanner from "./banner";
 import LayoutFooter from "./footer";
 import { usePathname } from "next/navigation";
 
-const SHOW_BANNER = [`/`, `/boards`, `/product`];
+const SHOW_BANNER = [`/boards`, `/product`];
 const HIDE_BANNER = [`/login`];
 
 interface IChildren {
