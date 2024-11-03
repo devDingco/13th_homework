@@ -1,0 +1,15 @@
+query GetBoardComment($boardId: Int!, $page: Int) {
+    getBoardComment(boardId: $boardId, page: $page) {
+        author
+        content
+        rating
+        parentId
+        _id
+        createdAt
+        replies {
+            author
+            content
+            createdAt
+        }
+    }
+}

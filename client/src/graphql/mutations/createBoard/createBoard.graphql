@@ -1,0 +1,15 @@
+mutation CreateBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
+        createdAt
+    }
+}

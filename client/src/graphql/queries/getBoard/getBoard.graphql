@@ -1,0 +1,15 @@
+query GetBoard($boardId: Int!) {
+    getBoard(boardId: $boardId) {
+        author
+        title
+        content
+        imageUrl
+        youtubeUrl
+        boardAddressOutput {
+            zoneCode
+            address
+            detailAddress
+        }
+        createdAt
+    }
+}

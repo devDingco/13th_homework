@@ -1,0 +1,6 @@
+query GetBoardReaction($boardId: Int!) {
+    getBoardReaction(boardId: $boardId) {
+        like
+        hate
+    }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>dailyUpdates</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style/dailyUpdateStyle.css" />
+        <script>
+            window.onload = () => {
+                const queryString = location.search;
+                const queryId = new URLSearchParams(queryString).get("id");
+
+                const dailyArray = JSON.parse(
+                    localStorage.getItem("dailyArray")
+                ).filter((daily) => Number(daily.id) === Number(queryId));
+
+                const mainElement = document.getElementsByTagName("main")[0];
+                const articleElement = document.createElement("article");
+
+                articleElement.innerHTML = `<div class="daily-checkcontainer">
+    <div class="today-mood">오늘 기분은 어땟나요?</div>
+    <div class="daily-inputlist">
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="happy"
+                ${dailyArray[0].moodEng == "happy" ? "checked" : null}
+            />
+            <label for="">행복해요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="sad"
+                ${dailyArray[0].moodEng == "sad" ? "checked" : null}
+            />
+            <label for="">슬퍼요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="surprise"
+                ${dailyArray[0].moodEng == "surprise" ? "checked" : null}
+            />
+            <label for="">놀랐어요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="angry"
+                ${dailyArray[0].moodEng == "angry" ? "checked" : null}
+            />
+            <label for="">화나요</label>
+        </div>
+        <div class="daily-input">
+            <input
+                type="radio"
+                name="radio"
+                class="input-radio"
+                id="etc"
+                ${dailyArray[0].moodEng == "etc" ? "checked" : null}
+            />
+            <label for="">기타</label>
+        </div>
+    </div>
+</div>
+<div class="daily-form">
+    <div class="daily-form-input">
+        <div class="daily-title">
+            <div>제목</div>
+            <input
+                type="text"
+                id="titleId"
+                class="input-title"
+                value="${dailyArray[0].title}"
+            />
+        </div>
+        <div class="daily-title">
+            <div>내용</div>
+            <textarea
+                id="contentId"
+                class="input-title input-content"
+                
+            >${dailyArray[0].content}</textarea>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="delete-button" onclick="onBack()">취소</button>
+        <button class="update-button" onclick="onUpdatePost()">수정 하기</button>
+    </div>
+</div>`;
+
+                mainElement.appendChild(articleElement);
+            };
+        </script>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="header-text-container">
+                    <div class="header-text">민지의 다이어리</div>
+                </div>
+                <div class="header-mobile">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        onclick="onBack()"
+                    >
+                        <path
+                            d="M9.725 11.9996L17.075 19.3496C17.325 19.5996 17.4458 19.8913 17.4375 20.2246C17.4292 20.558 17.3 20.8496 17.05 21.0996C16.8 21.3496 16.5083 21.4746 16.175 21.4746C15.8417 21.4746 15.55 21.3496 15.3 21.0996L7.6 13.4246C7.4 13.2246 7.25 12.9996 7.15 12.7496C7.05 12.4996 7 12.2496 7 11.9996C7 11.7496 7.05 11.4996 7.15 11.2496C7.25 10.9996 7.4 10.7746 7.6 10.5746L15.3 2.87462C15.55 2.62462 15.8458 2.50379 16.1875 2.51212C16.5292 2.52046 16.825 2.64962 17.075 2.89962C17.325 3.14962 17.45 3.44129 17.45 3.77462C17.45 4.10796 17.325 4.39962 17.075 4.64962L9.725 11.9996Z"
+                            fill="#333333"
+                        />
+                    </svg>
+
+                    <div class="mobile-text">일기 상세</div>
+                </div>
+            </header>
+        </main>
+    </body>
+    <script src="./utils/onBack.js"></script>
+    <script src="./utils/onUpdatePost.js"></script>
+</html>

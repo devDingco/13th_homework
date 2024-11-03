@@ -1,0 +1,3 @@
+mutation ClearBoard {
+    clearBoard
+}
