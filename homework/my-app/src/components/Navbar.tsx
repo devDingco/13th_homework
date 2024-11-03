@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./style.module.css";
@@ -16,6 +16,7 @@ const FETCH_USER_LOGGED_IN = gql`
     }
   }
 `;
+
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const [isProfileHovered, setIsProfileHovered] = useState(false); // 프로필 호버 상태
@@ -31,6 +32,7 @@ const Navbar = () => {
   const { data } = useQuery(FETCH_USER_LOGGED_IN, {
     skip: !accessToken,
   });
+
   useEffect(() => {
     if (data?.fetchUserLoggedIn) {
       setIsLoggedIn(true);
@@ -60,6 +62,7 @@ const Navbar = () => {
   const storeClick = () => {
     router.push("/store");
   };
+
   const userInfo = data?.fetchUserLoggedIn;
 
   return (
@@ -79,10 +82,17 @@ const Navbar = () => {
             onMouseEnter={() => setIsProfileHovered(true)}
             onMouseLeave={() => setIsProfileHovered(false)}
           >
-            <img
-              src={userInfo?.picture || "/default-profile.png"} // 유저 프로필 사진
+            <Image
+              src={
+                userInfo?.picture
+                  ? `https://storage.googleapis.com/${userInfo.picture}`
+                  : "/image/noProfile.webp"
+              } // 유저 프로필 사진
               alt="Profile"
               className={styles.profileIcon}
+              width={50}
+              height={50}
+              priority
             />
             {isProfileHovered && (
               <div className={styles.profilePopup}>
