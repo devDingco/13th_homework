@@ -6,6 +6,8 @@ import Button from "@/components/Atoms/_Button";
 import ProductCardUI from "@/components/Molecules/ProductCard";
 import RecommendCardUI from "@/components/Molecules/RecommendCard";
 import SearchUI from "@/components/Molecules/Search";
+import Image from "next/image";
+import banner from "/public/img/logo_hoz.png";
 
 export default function ProductListUI() {
     return (
@@ -16,7 +18,10 @@ export default function ProductListUI() {
                 <RecommendCardUI />
             </div>
 
-            <div className={CSS_Banner}>대충 나중에 배너 이미지 들어올 것</div>
+            <div className={CSS_Banner}>
+                <Image src={banner} alt="banner" />
+                대충 배너 들어올 곳
+            </div>
 
             <div className={CSS_Title}>여기에서만 예약할 수 있는 숙소</div>
             <div className={CSS_Wrap}>
@@ -59,6 +64,10 @@ const CSS_Banner = css({
     backgroundColor: "#F2f3f7",
     borderRadius: "2rem",
     margin: "6rem 0rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDir: "column",
 });
 
 const CSS_Between = css({
