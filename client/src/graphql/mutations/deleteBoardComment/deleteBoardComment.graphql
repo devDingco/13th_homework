@@ -1,3 +1,0 @@
-mutation DeleteBoardComment($boardId: Int!, $commentId: String!) {
-    deleteBoardComment(boardId: $boardId, commentId: $commentId)
-}
