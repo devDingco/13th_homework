@@ -11,6 +11,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
     "\n  query fetchBoards(\n    $page: Int\n    $search: String\n    $startDate: DateTime\n    $endDate: DateTime\n  ) {\n    fetchBoards(\n      page: $page\n      search: $search\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      _id\n      writer\n      title\n      createdAt\n    }\n  }\n": types.FetchBoardsDocument,
@@ -23,6 +24,7 @@ const documents = {
     "\n  query fetchBoardComments($page: Int, $boardId: ID!) {\n    fetchBoardComments(page: $page, boardId: $boardId) {\n      _id\n      writer\n      contents\n      rating\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": types.FetchBoardCommentsDocument,
     "\n  mutation updateBoardComment(\n    $updateBoardCommentInput: UpdateBoardCommentInput!\n    $password: String\n    $boardCommentId: ID!\n  ) {\n    updateBoardComment(\n      updateBoardCommentInput: $updateBoardCommentInput\n      password: $password\n      boardCommentId: $boardCommentId\n    ) {\n      _id\n      writer\n      contents\n      rating\n      createdAt\n      updatedAt\n      deletedAt\n    }\n  }\n": types.UpdateBoardCommentDocument,
     "\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n": types.UploadFileDocument,
+    "\n  query fetchTravelproduct($travelproductId: ID!) {\n    fetchTravelproduct(travelproductId: $travelproductId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        address\n        addressDetail\n        lat\n        lng\n        deletedAt\n      }\n      buyer {\n        picture\n        deletedAt\n      }\n      seller {\n        picture\n        deletedAt\n      }\n      soldAt\n      createdAt\n      updatedAt\n    }\n  }\n": types.FetchTravelproductDocument,
 };
 
 /**
@@ -79,6 +81,10 @@ export function graphql(source: "\n  mutation updateBoardComment(\n    $updateBo
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n"): (typeof documents)["\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query fetchTravelproduct($travelproductId: ID!) {\n    fetchTravelproduct(travelproductId: $travelproductId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        address\n        addressDetail\n        lat\n        lng\n        deletedAt\n      }\n      buyer {\n        picture\n        deletedAt\n      }\n      seller {\n        picture\n        deletedAt\n      }\n      soldAt\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  query fetchTravelproduct($travelproductId: ID!) {\n    fetchTravelproduct(travelproductId: $travelproductId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        address\n        addressDetail\n        lat\n        lng\n        deletedAt\n      }\n      buyer {\n        picture\n        deletedAt\n      }\n      seller {\n        picture\n        deletedAt\n      }\n      soldAt\n      createdAt\n      updatedAt\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
