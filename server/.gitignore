@@ -56,3 +56,12 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+/client/
+/daily.html
+/dailyDetailInfor.html
+/dailyUpdate.html
+/font/
+/img/
+/style/
+/utils/
