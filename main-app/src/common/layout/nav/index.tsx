@@ -7,13 +7,13 @@ import { CSSProperties, MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useQuery } from "@apollo/client";
-import { FETCH_USER } from "@/common/queries/queries";
+import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 
 export default function LayoutNav() {
     const [isSelect, setIsSelect] = useState("mainPage");
     const router = useRouter();
 
-    const { data: login } = useQuery(FETCH_USER);
+    const { data: login } = useQuery(FetchUserLoggedInDocument);
 
     function onNavClick(e: MouseEvent) {
         const target = e.target as HTMLLIElement;
@@ -29,7 +29,7 @@ export default function LayoutNav() {
                 break;
             }
             case "myPage": {
-                router.push(`/login`);
+                router.push(`/mypage`);
                 break;
             }
         }

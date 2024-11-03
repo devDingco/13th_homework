@@ -12,7 +12,7 @@ import { CSSProperties } from "react";
 import { useRouter } from "next/navigation";
 import useLoginUser from "@/common/hooks/useLoginUser";
 
-export default function LoginUI() {
+export default function LoginPage() {
     const router = useRouter();
     const { isLogIn, setIsLogIn, loginError, onLoginChange, onLoginInClick, onSignUpChange, onSignUpClick } =
         useLoginUser();
