@@ -25,7 +25,6 @@ export default function ProductDetail(props) {
 	const { data } = useQuery(FetchTravelproductDocument, {
 		variables: { travelproductId: String(params.travelproductId) },
 	});
-	console.log('🚀 ~ ProductDetail ~ data:', data);
 	const [pickedCount, setPickedCount] = useState(
 		data?.fetchTravelproduct.pickedCount || 0,
 	);
@@ -148,7 +147,7 @@ export default function ProductDetail(props) {
 					</div>
 				</section>
 			</main>
-			<footer className="flex flex-col gap-10">
+			<footer className="mb-10 flex flex-col gap-10">
 				{/* 문의하기 영역 */}
 				<ProductQuestion />
 				{/* 문의 내역 디스플레이 영역 */}

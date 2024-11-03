@@ -7,9 +7,6 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import { FETCH_TRAVEL_PRODUCT_QUESTIONS } from '../product-question-list';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Divider } from 'antd';
-import PROFILE_IMG from '@/assets/profile.png';
 
 const CREATE_TRAVEL_PRODUCT_QUESTION = gql`
 	mutation createTravelproductQuestion(
@@ -64,6 +61,8 @@ export default function ProductQuestion(props) {
 			Modal.error({
 				content: '문의하기에 실패하였습니다. 고객센터에 문의해주세요.',
 			});
+		} finally {
+			setContents('');
 		}
 	};
 
@@ -77,7 +76,7 @@ export default function ProductQuestion(props) {
 				<textarea
 					className="h-36 w-full resize-none rounded-lg border px-4 py-3"
 					placeholder="문의사항을 입력해 주세요."
-					defaultValue={contents}
+					value={contents}
 					onChange={onChangeProductQuestion}
 				></textarea>
 				<button

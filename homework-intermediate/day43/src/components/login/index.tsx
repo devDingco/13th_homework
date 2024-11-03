@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import logo from '@/assets/logo.png';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useAccessTokenStore } from '@/commons/stores/access-token-store';
 import { useRouter } from 'next/navigation';
@@ -53,8 +53,17 @@ export default function Login() {
 		router.push('/signup');
 	};
 
+	const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+		if (event.key === 'Enter') {
+			onClickLogin();
+		}
+	};
+
 	return (
-		<div className="flex min-w-[400px] flex-col gap-6 px-5 pb-10 pt-[244px]">
+		<div
+			className="flex min-w-[400px] flex-col gap-6 px-5 pb-10 pt-[244px]"
+			onKeyDown={onKeyDown}
+		>
 			<div className="flex flex-col items-center gap-6">
 				<Image src={logo} alt="트립트립로고" width={120} height={80} />
 				<h1 className="text-center text-lg font-bold">
