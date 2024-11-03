@@ -2,7 +2,8 @@ import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { Injectable } from '@nestjs/common';
 import { User } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
-import { userDTO } from './dto/user.dto';
+import { loginDTO } from './dto/login.dto';
+import { signUpDTO } from './dto/signUp.dto';
 
 @Injectable()
 export class UserService {
@@ -11,13 +12,23 @@ export class UserService {
         private readonly bcryptService: BcryptService,
     ) {}
 
-    async createUser(userDTO: userDTO): Promise<User> {
+    async createUser(signUpDTO: signUpDTO): Promise<User> {
         const password: string = await this.bcryptService.transformPassword(
-            userDTO.password,
+            signUpDTO.password,
         );
         return await this.userRepository.createUser({
-            ...userDTO,
+            ...signUpDTO,
             password,
         });
+    }
+
+    async login(loginDTO: loginDTO) {
+        const user = await this.userRepository.findUser(loginDTO.email);
+        await this.bcryptService.validatePassword(
+            loginDTO.password,
+            user.password,
+        );
+
+        return user;
     }
 }
