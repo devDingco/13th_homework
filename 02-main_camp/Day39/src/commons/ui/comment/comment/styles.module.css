@@ -1,6 +1,12 @@
 .comment__container {
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+}
+
+.user__container {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
@@ -33,5 +39,17 @@
 .date__container {
   color: #818181;
   font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.reply__container {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.reply__label {
+  color: #333333;
+  font-weight: 300;
   font-size: 0.875rem;
 }
