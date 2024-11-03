@@ -147,7 +147,7 @@ export function Profile40() {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: "2.5rem", height: "2.5rem" }}
+      style={{ width: "1.5rem", height: "1.5rem" }}
     />
   );
 }
@@ -173,7 +173,7 @@ export function Edit({ width = 1.5, height = 1.5 }: IIconProps) {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: `${width}`, height: `${height}` }}
+      style={{ width: `${width}rem`, height: `${height}rem` }}
     />
   );
 }
@@ -186,7 +186,33 @@ export function Close({ width = 1.5, height = 1.5 }: IIconProps) {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: `${width}`, height: `${height}` }}
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function ReplyIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/reply.png"
+      alt="답변 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function Return({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/return.png"
+      alt="답변 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
     />
   );
 }
