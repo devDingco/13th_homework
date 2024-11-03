@@ -41,7 +41,7 @@ export default function ProductListUI() {
     );
 }
 
-const CSSTitle = {
+export const CSSTitle = {
     fontSize: "2.4rem",
     fontWeight: "700",
     padding: "2rem 0rem 4rem 0rem",

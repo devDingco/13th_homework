@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+
+import * as React from "react";
+import ApolloSetting from "@/common/settings/apollo-setting";
+import PageLayout from "@/common/layout";
+
+const Paperlogy = localFont({
+    src: "../../public/fonts/Paperlogy-3Light.woff2",
+    variable: "--font-paperlogy-light",
+    weight: "300",
+});
+const Pretendard = localFont({
+    src: "../../public/fonts/PretendardVariable.woff2",
+    variable: "--font-pretendard-var",
+    weight: "100 900",
+});
+
+export const metadata: Metadata = {
+    title: "[이하성] MainCamp Next Project",
+    description: "project for code.camp 13th front-end course",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    return (
+        <html lang="ko">
+            <body className={`${Paperlogy.variable} ${Pretendard.variable}`}>
+                <ApolloSetting>
+                    <PageLayout>{children}</PageLayout>
+                </ApolloSetting>
+            </body>
+        </html>
+    );
+}

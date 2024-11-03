@@ -1,0 +1,67 @@
+@layer reset, base, tokens, recipes, utilities;
+
+:root {
+    --mono-gray050: #fafafa;
+    --mono-gray100: #f5f5f5;
+    --mono-gray200: #eeeeee;
+    --mono-gray300: #e0e0e0;
+    --mono-gray400: #bdbdbd;
+    --mono-gray500: #9e9e9e;
+    --mono-gray600: #767676;
+    --mono-gray700: #606060;
+    --mono-gray800: #424242;
+    --mono-gray900: #222222;
+
+    --chroma-error: #ff4d4f;
+    --chroma-info: #1677ff;
+    --chroma-success: #52c41a;
+    --chroma-warn: #faad14;
+
+    --chroma-pantone: #ffbe98;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    font-family: var(--font-paperlogy-light);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--mono-gray050);
+}
+
+header {
+    width: 100rem;
+    font-size: 2.4rem;
+    padding: 4rem 0rem;
+}
+
+section {
+    width: 100rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+/* button:hover {
+    background-color: #981b1e;
+    color: #eee;
+}
+
+input:disabled {
+    background-color: #bdbdbd;
+}
+
+body.swal2-shown > [aria-hidden="true"] {
+    transition: 0.1s filter;
+    filter: blur(3px);
+} */
