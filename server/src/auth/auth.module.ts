@@ -10,7 +10,6 @@ import { jwtConfig } from 'configs/jwt.config';
     imports: [
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
-            global: true,
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: jwtConfig,

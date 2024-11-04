@@ -1,9 +1,13 @@
+import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly jwtService: JwtService) {}
+    constructor(
+        private readonly jwtService: JwtService,
+        private readonly configService: ConfigService,
+    ) {}
 
     async issueLoginToken(email: string) {
         // 여기에 role 넣기
@@ -14,7 +18,8 @@ export class AuthService {
                 sub: 'accessToken',
             },
             {
-                expiresIn: '1h',
+                secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
+                expiresIn: `${this.configService.get<string>('JWT_ACCESS_EXPIRE')}s`,
             },
         );
 
@@ -25,7 +30,8 @@ export class AuthService {
                 sub: 'refreshToken',
             },
             {
-                expiresIn: '7d',
+                secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+                expiresIn: `${this.configService.get<string>('JWT_REFRESH_EXPIRE')}s`,
             },
         );
 
