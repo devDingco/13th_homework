@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "global.d.ts",
     "src/app/component/board-write/valid.tsx",
-    "src/app/component/board-detail/comment-write/hook.ts"
+    "src/app/component/board-detail/comment-write/hook.ts",
+    "src/app/product/register/index.tsx"
   ],
   "exclude": ["node_modules"]
 }

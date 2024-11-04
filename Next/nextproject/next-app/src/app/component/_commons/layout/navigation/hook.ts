@@ -8,7 +8,6 @@ export function UseLayout() {
   const onClickMain = () => {
     router.push("../../../../boards");
   };
-
   const { data } = useQuery(FETCHUSER);
   const onClickLogin = () => {
     router.push("../../../../login");

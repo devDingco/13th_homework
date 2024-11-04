@@ -1,10 +1,15 @@
+"use client";
+
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { UseMyInfoPage } from "./hook";
-
+import { FETCHUSER } from "../../queires/queries";
+import { useQuery } from "@apollo/client";
+import ProductListPage from "../../productlist";
 export default function MyInfo() {
-  // const { data } = UseMyInfoPage();
+  const { data } = useQuery(FETCHUSER);
+  console.log(data?.fetchUserLoggedIn.name);
+
   return (
     <>
       <div className={styles.css_mypage}>마이 페이지</div>
@@ -17,7 +22,7 @@ export default function MyInfo() {
             width={40}
             height={40}
           />
-          <div className={styles.css_name}>안상현</div>
+          <div className={styles.css_name}>{data?.fetchUserLoggedIn.name}</div>
         </div>
         <div className={styles.css_line}></div>
         <div className={styles.css_pointbox}>
@@ -86,7 +91,7 @@ export default function MyInfo() {
               <div className={styles.css_date}>날짜</div>
             </div>
             <div className={styles.css_list}>
-              <div className={styles.css_mylist}>1</div>
+              <ProductListPage />
             </div>
           </div>
         </div>

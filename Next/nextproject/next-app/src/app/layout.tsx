@@ -1,8 +1,9 @@
-// import type { Metadata } from "next";
+"use client";
+
 import localFont from "next/font/local";
 import "./globals.css";
 import * as React from "react";
-import LayoutComponent from "./component/commons/layout";
+import LayoutComponent from "./component/_commons/layout";
 import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-header-setting";
 const geistSans = localFont({
@@ -23,6 +24,7 @@ const geistMono = localFont({
 interface Props {
   children: React.ReactNode;
 }
+
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">

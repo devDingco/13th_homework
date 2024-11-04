@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { UseLayout } from "./hook";
 import { Dropdown, MenuProps, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export default function NavigationPage() {
   const router = useRouter();
@@ -13,26 +14,21 @@ export default function NavigationPage() {
     router.push("../../../../boards");
   };
   const { data, onClickLogin } = UseLayout();
-  console.log(data);
+
+  // console.log(localStorage.getItem("accessToken"));
 
   const items: MenuProps["items"] = [
     {
-      label: <a href="../../../component/mypage">1st menu item</a>,
+      label: <Link href="/component/mypage">마이 페이지</Link>,
       key: "0",
     },
+
     {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
+      label: <Link href="/product">상품 등록</Link>,
       key: "1",
     },
-    {
-      type: "divider",
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
-    },
   ];
-  console.log(data?.fetchUserLoggedIn._id);
+  console.log(data?.fetchUserLoggedIn.name);
   return (
     <>
       <div className={styles.css_navbox}>
@@ -56,7 +52,7 @@ export default function NavigationPage() {
           </div>
 
           <div className={styles.css_user}>
-            {data?.fetchUserLoggedIn._id ? (
+            {localStorage.getItem("accessToken") ? (
               <>
                 <Image
                   src="/assets/Profile.png"

@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { useAccessTokenStore } from "../stores/access-token-store";
+import { useEffect } from "react";
 
 const GLOBAL_STATE = new InMemoryCache();
 
@@ -15,8 +16,11 @@ interface IApolloSetting {
   children: React.ReactNode;
 }
 export default function ApolloHeaderSetting(props: IApolloSetting) {
-  const { accessToken } = useAccessTokenStore();
-
+  const { accessToken, setAccessToken } = useAccessTokenStore();
+  console.log(accessToken);
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("accessToken") ?? "");
+  }, []);
   const uploadLink = createUploadLink({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },

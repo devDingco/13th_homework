@@ -188,3 +188,80 @@ export const FETCHUSER = gql`
     }
   }
 `;
+
+// 상품 등록
+export const CreateTravelProduct = gql`
+  mutation createTravelproduct(
+    $createTravelproductInput: CreateTravelproductInput!
+  ) {
+    createTravelproduct(createTravelproductInput: $createTravelproductInput) {
+      _id
+      name
+      contents
+      price
+      travelproductAddress {
+        zipcode
+        address
+        addressDetail
+      }
+    }
+  }
+`;
+
+// 상품 조회
+export const FETCHTRAVELPRODUCT = gql`
+  query fetchTravelproduct($travelproductId: ID!) {
+    fetchTravelproduct(travelproductId: $travelproductId) {
+      _id
+      name
+      remarks
+      contents
+      price
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
+    }
+  }
+`;
+
+// 상품 수정
+export const UPDATETRAVELPRODUCT = gql`
+  mutation updateTravelproduct(
+    $updateTravelproductInput: UpdateTravelproductInput!
+    $travelproductId: ID!
+  ) {
+    updateTravelproduct(
+      updateTravelproductInput: $updateTravelproductInput
+      travelproductId: $travelproductId
+    ) {
+      _id
+      name
+      contents
+      remarks
+      price
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
+    }
+  }
+`;
+
+export const FETCHTRAVELPRODUCTS = gql`
+  query fetchTravelproducts {
+    fetchTravelproducts {
+      _id
+      name
+      contents
+      remarks
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
+    }
+  }
+`;

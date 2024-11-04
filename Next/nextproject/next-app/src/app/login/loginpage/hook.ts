@@ -1,5 +1,5 @@
-import { LOGIN } from "@/app/component/queires/queries";
-import { useMutation } from "@apollo/client";
+import { FETCHUSER, LOGIN } from "@/app/component/queires/queries";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccessTokenStore } from "@/commons/stores/access-token-store";
@@ -48,6 +48,7 @@ export default function UseLoginPage() {
     }
 
     setAccessToken(accessToken);
+    localStorage.setItem("accessToken", accessToken);
     router.push("../../boards");
   };
 
