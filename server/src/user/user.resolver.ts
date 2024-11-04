@@ -1,10 +1,11 @@
-import { Args, Context, ID, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { UserSchema } from './schema/user.schema';
 import { UserService } from './user.service';
 import { signUpUser } from './schema/signUp.schema';
 import { loginUser } from './schema/login.schema';
 import { Response } from 'express';
+import { UserIdSchema } from './schema/user-id.schema';
 
 @Resolver(() => UserSchema)
 export class UserResolver {
@@ -15,7 +16,7 @@ export class UserResolver {
         return this.userService.createUser(signUpUser);
     }
 
-    @Mutation(() => ID)
+    @Mutation(() => UserIdSchema)
     async login(
         @Args('loginUser') loginUser: loginUser,
         @Context('res') res: Response,
@@ -31,6 +32,12 @@ export class UserResolver {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        return result.user.id;
+        return { id: result.user.id };
+    }
+
+    @Mutation(() => Boolean)
+    logout(@Context('res') res: Response) {
+        res.clearCookie('refreshToken');
+        res.send(true);
     }
 }

@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
-import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { User } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
@@ -18,14 +17,12 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('/signup')
-    @ResponseMessage('회원가입이 성공했습니다.')
     @HttpCode(HttpStatus.CREATED)
     signUp(@Body() signUpDTO: signUpDTO): Promise<User> {
         return this.userService.createUser(signUpDTO);
     }
 
     @Post('/login')
-    @ResponseMessage('로그인 성공했습니다.')
     @HttpCode(HttpStatus.OK)
     async login(
         @Body() loginDTO: loginDTO,
@@ -41,6 +38,14 @@ export class UserController {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        res.status(HttpStatus.OK).json(result.user.id);
+        res.status(HttpStatus.OK).json({ id: result.user.id });
+    }
+
+    @Post('/logout')
+    @HttpCode(HttpStatus.OK)
+    logout(@Res() res: Response): void {
+        res.clearCookie('refreshToken');
+
+        res.send(true);
     }
 }
