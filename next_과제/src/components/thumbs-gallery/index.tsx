@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -13,21 +13,24 @@ import "swiper/css/thumbs";
 import "./styles.scss";
 
 import { FreeMode, Thumbs } from "swiper/modules";
+import { useRef } from "react";
 
 export default function ThumbsGallery({ images }: { images: string[] }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<Swiper | null>(null);
+  const sliderRef = useRef<SwiperRef>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   if (images.length > 0) {
     return (
       <div id="thumbsGallery">
         <Swiper
-          loop={true}
+          loop={images.length > 1}
           spaceBetween={10}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Thumbs]}
           className="mySwiper2"
+          ref={sliderRef}
         >
-          {images.map((slideImg, idx) => (
+          {images?.map((slideImg, idx) => (
             <SwiperSlide key={slideImg + idx}>
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${slideImg}`}
@@ -39,8 +42,8 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
           ))}
         </Swiper>
         <Swiper
-          onSwiper={setThumbsSwiper}
-          loop={true}
+          onSwiper={() => setThumbsSwiper(thumbsSwiper)}
+          loop={images.length > 1}
           spaceBetween={10}
           slidesPerView="auto"
           freeMode={true}
@@ -50,7 +53,7 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
           modules={[FreeMode, Thumbs]}
           className="mySwiper"
         >
-          {images.map((slideImg, idx) => (
+          {images?.map((slideImg, idx) => (
             <SwiperSlide key={slideImg + idx}>
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${slideImg}`}
