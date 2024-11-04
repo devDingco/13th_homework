@@ -8,8 +8,12 @@ import { Modal } from 'antd';
 
 export default function BoardComponentWrite(props: any) {
     const {
+        detailAddress,
+        setDetailAddress,
         zonecode,
+        setZoncode,
         address,
+        setAddress,
         isOpen,
         writerError,
         passwordError,
@@ -20,7 +24,11 @@ export default function BoardComponentWrite(props: any) {
         handleOk,
         handleCancel,
         handleComplete,
-        onChangeInputs,
+        onChangeWriter,
+        onChangePassword,
+        onChangeTitle,
+        onChangeContents,
+        onChangeYouTubeUrl,
         onChangeDetailAddress,
         onClickSubmit,
         onClickUpdate,
@@ -46,7 +54,7 @@ export default function BoardComponentWrite(props: any) {
                         type="text"
                         placeholder="작성자 명을 입력해 주세요"
                         className={styles.writerpasswordinput}
-                        onChange={onChangeInputs}
+                        onChange={onChangeWriter}
                         defaultValue={props.data?.fetchBoard.writer}
                         disabled={props.isEdit}
                     ></input>
@@ -56,7 +64,7 @@ export default function BoardComponentWrite(props: any) {
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
                         className={styles.writerpasswordinput}
-                        onChange={onChangeInputs}
+                        onChange={onChangePassword}
                         disabled={props.isEdit}
                     ></input>
                 </div>
@@ -72,7 +80,7 @@ export default function BoardComponentWrite(props: any) {
                         type="text"
                         placeholder="제목을 입력해 주세요"
                         className={styles.titleinput}
-                        onChange={onChangeInputs}
+                        onChange={onChangeTitle}
                         defaultValue={props.data?.fetchBoard.title}
                     ></input>
                 </div>
@@ -89,7 +97,7 @@ export default function BoardComponentWrite(props: any) {
                         id="contents"
                         placeholder="내용을 입력해 주세요"
                         className={styles.contentstextarea}
-                        onChange={onChangeInputs}
+                        onChange={onChangeContents}
                         defaultValue={props.data?.fetchBoard.contents}
                     ></textarea>
                     <div className={styles.requiedmention}>
@@ -148,7 +156,7 @@ export default function BoardComponentWrite(props: any) {
                     id="youtube"
                     placeholder="링크를 입력해 주세요"
                     className={styles.youtubeBoxinput}
-                    onChange={onChangeInputs}
+                    onChange={onChangeYouTubeUrl}
                 ></input>
             </div>
 
