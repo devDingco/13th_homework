@@ -8,27 +8,31 @@ import { Modal } from 'antd';
 
 export default function BoardComponentWrite(props: any) {
     const {
-        showModal,
-        handleOk,
-        handleCancel,
-        handleComplete,
-        onChangeYouTubeUrl,
-        onChangeDetailAddress,
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContens,
-        onClickSubmit,
-        onClickUpdate,
-        onClickBack,
+        youtube,
+        setYoutube,
+        detailAddress,
+        setDetailAddress,
         zonecode,
+        setZoncode,
         address,
+        setAddress,
         isOpen,
         writerError,
         passwordError,
         titleError,
         contentsError,
         isActive,
+        showModal,
+        handleOk,
+        handleCancel,
+        handleComplete,
+        onChangeInputs,
+        onChangeYouTubeUrl,
+        onChangeDetailAddress,
+        onClickSubmit,
+        onClickUpdate,
+        onClickBack,
+        setIsOpen,
     } = useBoardWrite();
 
     return (
@@ -45,19 +49,21 @@ export default function BoardComponentWrite(props: any) {
                 </div>
                 <div className={styles.writerpasswordinputbox}>
                     <input
+                        id="writer"
                         type="text"
                         placeholder="작성자 명을 입력해 주세요"
                         className={styles.writerpasswordinput}
-                        onChange={onChangeWriter}
+                        onChange={onChangeInputs}
                         defaultValue={props.data?.fetchBoard.writer}
                         disabled={props.isEdit}
                     ></input>
 
                     <input
+                        id="password"
                         type="password"
                         placeholder="비밀번호를 입력해 주세요"
                         className={styles.writerpasswordinput}
-                        onChange={onChangePassword}
+                        onChange={onChangeInputs}
                         disabled={props.isEdit}
                     ></input>
                 </div>
@@ -69,10 +75,11 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.titlebox}>
                     <div>제목</div>
                     <input
+                        id="title"
                         type="text"
                         placeholder="제목을 입력해 주세요"
                         className={styles.titleinput}
-                        onChange={onChangeTitle}
+                        onChange={onChangeInputs}
                         defaultValue={props.data?.fetchBoard.title}
                     ></input>
                 </div>
@@ -86,9 +93,10 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.contentsbox}>
                     <div>내용</div>
                     <textarea
+                        id="contents"
                         placeholder="내용을 입력해 주세요"
                         className={styles.contentstextarea}
-                        onChange={onChangeContens}
+                        onChange={onChangeInputs}
                         defaultValue={props.data?.fetchBoard.contents}
                     ></textarea>
                     <div className={styles.requiedmention}>
@@ -135,7 +143,7 @@ export default function BoardComponentWrite(props: any) {
                         type="text"
                         placeholder="상세주소"
                         className={styles.addressdetailinput}
-                        onChange={onChangeDetailAddress}
+                        onChange={onChangeInputs}
                     ></input>
                 </div>
             </div>
@@ -144,9 +152,10 @@ export default function BoardComponentWrite(props: any) {
                 <div>유튜브 링크</div>
                 <input
                     // defaultValue={props.data?.fetchBoard.youtube}
+                    id="youtube"
                     placeholder="링크를 입력해 주세요"
                     className={styles.youtubeBoxinput}
-                    onChange={onChangeYouTubeUrl}
+                    onChange={onChangeInputs}
                 ></input>
             </div>
 

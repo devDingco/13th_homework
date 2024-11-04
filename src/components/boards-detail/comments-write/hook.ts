@@ -30,7 +30,9 @@ export default function usehookCommentsWrite(props) {
         router.refresh();
     };
 
+    // 댓글 수정
     const onClickUpdateComment = async () => {
+        console.log(commentData);
         const 입력받은비밀번호 = prompt('작성하셨던 비밀번호를 입력하세요');
         const myvariables = {
             password: 입력받은비밀번호,
@@ -131,6 +133,7 @@ export default function usehookCommentsWrite(props) {
         }
     };
     return {
+        commentData,
         writer,
         setWriter,
         password,

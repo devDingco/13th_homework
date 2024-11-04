@@ -13,10 +13,10 @@ export const useBoardWrite = () => {
     const router = useRouter();
     const params = useParams();
 
-    const [writer, setwriter] = useState('');
-    const [password, setPassword] = useState('');
-    const [title, setTitle] = useState('');
-    const [contents, setContents] = useState('');
+    // const [writer, setwriter] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [contents, setContents] = useState('');
     const [youtube, setYoutube] = useState('');
 
     const [writerError, setwriterError] = useState('');
@@ -34,63 +34,86 @@ export const useBoardWrite = () => {
     const [게시글생성함수] = useMutation(CreateBoardDocument);
     const [게시글수정함수] = useMutation(UpdateBoardDocument);
 
+    const [inputs, setInputs] = useState({
+        writer: '',
+        title: '',
+        password: '',
+        contents: '',
+        youtube: '',
+    });
+
+    const [inputError, setInputError] = useState({
+        writerError: '',
+        passwordError: '',
+        titleError: '',
+        contentsError: '',
+    });
+
+    const onChangeInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputs((prev) => ({
+            ...prev, //...inputs
+            [event.target.id]: event.target.value, // event.target.id자체로는 key값이 될 수 없음. 키에 []가들어가면 얘는 변수로 인식함.
+        }));
+        if (event.target.id === 'writer' && event.target.value.trim() === '') {
+            setInputError((prev) => ({
+                ...prev,
+                writerError: '필수 입력사항입니다',
+            }));
+        } else {
+            setInputError((prev) => ({
+                ...prev,
+                writerError: '',
+            }));
+            setIsActive(true);
+        }
+
+        if (event.target.id === 'title' && event.target.value.trim() === '') {
+            setInputError((prev) => ({
+                ...prev,
+                titleErrorError: '필수 입력사항입니다',
+            }));
+        } else {
+            setInputError((prev) => ({
+                ...prev,
+                titleErrorError: '',
+            }));
+            setIsActive(true);
+        }
+
+        if (
+            event.target.id === 'contents' &&
+            event.target.value.trim() === ''
+        ) {
+            setInputError((prev) => ({
+                ...prev,
+                contentsError: '필수 입력사항입니다',
+            }));
+        } else {
+            setInputError((prev) => ({
+                ...prev,
+                contentsError: '',
+            }));
+            setIsActive(true);
+        }
+        if (
+            event.target.id === 'password' &&
+            event.target.value.trim() === ''
+        ) {
+            setInputError((prev) => ({
+                ...prev,
+                passwordError: '필수 입력사항입니다',
+            }));
+        } else {
+            setInputError((prev) => ({
+                ...prev,
+                passwordError: '',
+            }));
+            setIsActive(true);
+        }
+    };
+
     const onChangeYouTubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
         setYoutube(event.target.value);
-    };
-
-    const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setwriter(event.target.value);
-        if (event.target.value === '') {
-            setwriterError('필수입력 사항 입니다');
-        } else {
-            setwriterError('');
-        }
-
-        if (
-            writer !== '' &&
-            password !== '' &&
-            title !== '' &&
-            contents !== ''
-        ) {
-            setIsActive(true);
-        }
-    };
-
-    const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-        if (event.target.value === '') {
-            setPassworError('필수입력 사항 입니다');
-        } else {
-            setPassworError('');
-        }
-
-        if (
-            writer !== '' &&
-            password !== '' &&
-            title !== '' &&
-            contents !== ''
-        ) {
-            setIsActive(true);
-        }
-    };
-
-    const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.target.value);
-
-        if (event.target.value === '') {
-            setTitleError('필수입력 사항 입니다');
-        } else {
-            setTitleError('');
-        }
-
-        if (
-            writer !== '' &&
-            password !== '' &&
-            title !== '' &&
-            contents !== ''
-        ) {
-            setIsActive(true);
-        }
     };
 
     const onChangeDetailAddress = (event: ChangeEvent<HTMLInputElement>) => {
@@ -98,32 +121,13 @@ export const useBoardWrite = () => {
         console.log(detailAddress);
     };
 
-    const onChangeContens = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setContents(event.target.value);
-        if (event.target.value === '') {
-            setcontentsError('필수입력 사항 입니다');
-        } else {
-            setcontentsError('');
-        }
-        if (
-            writer !== '' &&
-            password !== '' &&
-            title !== '' &&
-            contents !== ''
-        ) {
-            setIsActive(true);
-        }
-    };
-
     const onClickSubmit = async () => {
+        const { writer, title, password, contents, youtube } = inputs;
         try {
             const result = await 게시글생성함수({
                 variables: {
                     createBoardInput: {
-                        writer: writer,
-                        password: password,
-                        title: title,
-                        contents: contents,
+                        ...inputs,
                         youtubeUrl: youtube,
                         boardAddress: {
                             zipcode: zonecode,
@@ -136,12 +140,7 @@ export const useBoardWrite = () => {
             });
             console.log(result);
 
-            if (
-                writer !== '' &&
-                password !== '' &&
-                title !== '' &&
-                contents !== ''
-            ) {
+            if (writer && title && password && contents && youtube !== '') {
                 alert('회원가입을 축하드려요');
                 router.push(`/boards/${result.data.createBoard._id}`);
             } else {
@@ -224,12 +223,9 @@ export const useBoardWrite = () => {
         handleOk,
         handleCancel,
         handleComplete,
+        onChangeInputs,
         onChangeYouTubeUrl,
         onChangeDetailAddress,
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContens,
         onClickSubmit,
         onClickUpdate,
         onClickBack,
