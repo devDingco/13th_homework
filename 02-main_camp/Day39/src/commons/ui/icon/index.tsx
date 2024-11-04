@@ -204,7 +204,7 @@ export function ReplyIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   );
 }
 
-export function Return({ width = 1.5, height = 1.5 }: IIconProps) {
+export function ReturnIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   return (
     <Image
       src="/assets/return.png"
