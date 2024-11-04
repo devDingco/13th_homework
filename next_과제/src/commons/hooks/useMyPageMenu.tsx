@@ -13,7 +13,7 @@ const MY_PAGE_MENU = [
       },
       {
         name: "북마크",
-        url: "/mypage/bookmark",
+        url: "/mypage/pickeds",
       },
     ],
   },
@@ -27,15 +27,15 @@ const MY_PAGE_MENU = [
       },
       {
         name: "충전 내역",
-        url: "/mypage/point/charging-history",
+        url: "/mypage/point/loading-history",
       },
       {
         name: "구매 내역",
-        url: "/mypage/point/purchase-history",
+        url: "/mypage/point/buying-history",
       },
       {
         name: "판매 내역",
-        url: "/mypage/point/sales-history",
+        url: "/mypage/point/selling-history",
       },
     ],
   },
