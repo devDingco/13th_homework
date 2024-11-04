@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import {
   TravelProductSample1,
@@ -17,8 +17,8 @@ import { useQuery } from "@apollo/client";
 import { FetchTravelproductDocument } from "@/commons/gql/graphql";
 import Divider from "@/app/_components/commons/divider";
 import CommentWriting from "@/commons/ui/comment/writing";
-import Comment from "@/commons/ui/comment/comment";
 import NewTravelProductComment from "@/app/_components/travelProduct/comment";
+import Modal from "@/commons/ui/modal";
 
 export default function DetailTravelProduct() {
   const { data } = useQuery(FetchTravelproductDocument, {
@@ -26,8 +26,46 @@ export default function DetailTravelProduct() {
       travelproductId: "67021b115413b3002914ce34",
     },
   });
+
+  const [modalsOpened, setModalsOpened] = useState({
+    buyingModal: false,
+    pointChargeModal: false,
+  });
+
+  const openModal = (modalId: string) =>
+    setModalsOpened((prev) => ({ ...prev, [modalId]: true }));
+  const closeModal = (modalId: string) =>
+    setModalsOpened((prev) => ({ ...prev, [modalId]: false }));
+
+  const onClickPointChargeModalCancel = () => {
+    closeModal("buyingModal");
+    closeModal("pointChargeModal");
+  };
+
   return (
     <div className={styles.detail__travel__product}>
+      {modalsOpened.buyingModal && (
+        <Modal
+          title="해당 숙박권을 구매 하시겠어요?"
+          description="해당 숙박권은 포인트로만 구매 가능합니다."
+          buttonText="구매"
+          handleCancel={() => closeModal("buyingModal")}
+          handleConfirm={() => openModal("pointChargeModal")}
+        />
+      )}
+      {modalsOpened.pointChargeModal && (
+        <Modal
+          title="포인트 부족"
+          description={`
+            포인트가 부족합니다.
+            포인트 충전 후 구매하세요.
+            `}
+          buttonText="충전"
+          handleCancel={onClickPointChargeModalCancel}
+          // handleConfirm={() => openModal("pointChargeModal")}
+        />
+      )}
+
       <div className={styles.top__container}>
         <div className={styles.header__container}>
           <div className={styles.title__container}>
@@ -63,7 +101,13 @@ export default function DetailTravelProduct() {
                   <p>상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.</p>
                 </div>
               </div>
-              <button className={styles.buyingButton}>구매하기</button>
+
+              <button
+                className={styles.buyingButton}
+                onClick={() => openModal("buyingModal")}
+              >
+                구매하기
+              </button>
             </div>
             <div className={styles.seller__container}>
               판매자
@@ -84,6 +128,7 @@ export default function DetailTravelProduct() {
       </div>
 
       <Divider />
+
       <div className={styles.section__container}>
         <span className={styles.section__title}>상세 위치</span>
         <LocationSample />
@@ -93,7 +138,9 @@ export default function DetailTravelProduct() {
         placeholder="문의사항을 입력해 주세요."
         buttonText="문의 하기"
       />
+
       <Divider />
+
       <NewTravelProductComment />
     </div>
   );
