@@ -52,7 +52,6 @@ function BoardsDetail() {
               height={0}
             />
           </Tooltip>
-          ``
         </div>
       </div>
       <div>

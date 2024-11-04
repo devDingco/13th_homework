@@ -12,7 +12,7 @@ export default function useBoardDetail() {
       boardId: params.boardId,
     },
   });
-
+  console.log(data, "fetchboard데이타");
   const onClickMoveEdit = () => {
     router.push(`/boards/${params.boardId}/edit`);
   };
@@ -21,7 +21,13 @@ export default function useBoardDetail() {
     router.push(`/boards`);
   };
 
+  const youtubeOpts = {
+    width: "822",
+    height: "464",
+  };
+
   return {
+    youtubeOpts,
     router,
     params,
     data,

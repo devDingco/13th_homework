@@ -14,6 +14,7 @@ export default function BoardNew(props) {
     registerCheck,
     errorMessage,
     isModalOpen,
+    youtubeUrl,
     onChangeInput,
     onClickRegister,
     onClickEdit,
@@ -23,6 +24,7 @@ export default function BoardNew(props) {
     handleCancel,
     handleComplete,
     onChangeAddress,
+    onChangeYoutubeUrl,
   } = useBoardNew(props);
 
   return (
@@ -65,25 +67,46 @@ export default function BoardNew(props) {
               className={styles.addressNumber}
               type="text"
               placeholder="01234"
-              defaultValue={juso.zipcode}
+              defaultValue={
+                props.isEdit
+                  ? data?.fetchBoard.boardAddress.zipcode
+                  : juso.zipcode
+              }
             />
             <button onClick={showModal}>우편번호 검색</button>
           </div>
           <input
             type="text"
-            defaultValue={juso.address}
+            defaultValue={
+              props.isEdit
+                ? data?.fetchBoard.boardAddress.address
+                : juso.address
+            }
             placeholder="주소를 입력해주세요."
           />
           <input
             type="text"
             onChange={onChangeAddress}
             placeholder="상세주소"
+            defaultValue={
+              props.isEdit
+                ? data?.fetchBoard.boardAddress.addressDetail
+                : juso.addressDetail
+            }
           />
         </div>
         <hr className={styles.hr} />
         <div className={styles.youtube_box}>
           <label>유튜브 링크</label>
-          <input type="text" placeholder="링크를 입력해 주세요." />
+          <input
+            type="text"
+            placeholder="링크를 입력해 주세요."
+            name="youtubeUrl"
+            onChange={onChangeYoutubeUrl}
+            defaultValue={
+              props.isEdit ? data?.fetchBoard.youtubeUrl : youtubeUrl
+            }
+          />
         </div>
         <hr className={styles.hr} />
         <div className={styles.photo_box}>
