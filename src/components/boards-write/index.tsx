@@ -17,7 +17,7 @@ export default function BoardComponentWrite(props: any) {
         onChangeWriter,
         onChangePassword,
         onChangeTitle,
-        onChangecontens,
+        onChangeContens,
         onClickSubmit,
         onClickUpdate,
         onClickBack,
@@ -88,7 +88,7 @@ export default function BoardComponentWrite(props: any) {
                     <textarea
                         placeholder="내용을 입력해 주세요"
                         className={styles.contentstextarea}
-                        onChange={onChangecontens}
+                        onChange={onChangeContens}
                         defaultValue={props.data?.fetchBoard.contents}
                     ></textarea>
                     <div className={styles.requiedmention}>
