@@ -249,3 +249,19 @@ export const UPDATETRAVELPRODUCT = gql`
     }
   }
 `;
+
+export const FETCHTRAVELPRODUCTS = gql`
+  query fetchTravelproducts {
+    fetchTravelproducts {
+      _id
+      name
+      contents
+      remarks
+      travelproductAddress {
+        _id
+        zipcode
+        addressDetail
+      }
+    }
+  }
+`;

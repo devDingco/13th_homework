@@ -5,7 +5,7 @@ import styles from "./style.module.css";
 import Image from "next/image";
 import { FETCHUSER } from "../../queires/queries";
 import { useQuery } from "@apollo/client";
-
+import ProductListPage from "../../productlist";
 export default function MyInfo() {
   const { data } = useQuery(FETCHUSER);
   console.log(data?.fetchUserLoggedIn.name);
@@ -91,7 +91,7 @@ export default function MyInfo() {
               <div className={styles.css_date}>날짜</div>
             </div>
             <div className={styles.css_list}>
-              <div className={styles.css_mylist}>1</div>
+              <ProductListPage />
             </div>
           </div>
         </div>

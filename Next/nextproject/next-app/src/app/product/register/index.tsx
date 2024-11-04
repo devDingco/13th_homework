@@ -13,7 +13,7 @@ export default withLoginCheck(function ProductRegister(props: IPropsProduct) {
     onClickSubmit,
     onClickUpdate,
     data,
-    handleCpmplete,
+    handleComplete,
     isModalOpen,
     onToggleModal,
     zipcode,
@@ -119,7 +119,7 @@ export default withLoginCheck(function ProductRegister(props: IPropsProduct) {
                   onOk={onToggleModal}
                   onCancel={onToggleModal}
                 >
-                  <DaumPostcodeEmbed onComplete={handleCpmplete} />
+                  <DaumPostcodeEmbed onComplete={handleComplete} />
                 </Modal>
               )}
             </div>
@@ -136,6 +136,7 @@ export default withLoginCheck(function ProductRegister(props: IPropsProduct) {
               }
             />
           </div>
+
           <button className={styles.css_submitbtn}>
             {props.isEdit ? "수정하기" : "등록하기"}
           </button>

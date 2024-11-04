@@ -1,0 +1,64 @@
+.css_commentedit {
+  width: 14px;
+  height: 14px;
+}
+
+.css_commentclose {
+  width: 16px;
+  height: 16px;
+}
+
+.css_commentshow {
+  width: 1280px;
+  gap: 8px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.css_commentwriter {
+  width: 128px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+}
+
+.css_writer {
+  /* width: 100%; */
+  height: 20px;
+  gap: 4px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+}
+
+.css_image {
+  display: flex;
+  flex-direction: row;
+}
+
+.css_commentcontents {
+  width: 1280px;
+  word-break: break-all;
+}
+
+.css_hr {
+  margin-top: 10px;
+  border: 1px solid #e4e4e4;
+}
+.css_commentedit {
+  width: 14px;
+  height: 14px;
+}
+
+.css_commentclose {
+  width: 16px;
+  height: 16px;
+}
+.css_mylist {
+  width: 1184px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  gap: 8px;
+}

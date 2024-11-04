@@ -75,9 +75,10 @@ export default function UseProductRegister(props: IPropsProduct) {
   const onToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
-  const handleCpmplete = (data: Address) => {
+  const handleComplete = (data: Address) => {
     const { zonecode } = data;
     setZipcode(zonecode);
+
     onToggleModal();
   };
 
@@ -88,9 +89,10 @@ export default function UseProductRegister(props: IPropsProduct) {
     onClickUpdate,
     data,
     formState,
-    handleCpmplete,
+    handleComplete,
     isModalOpen,
     onToggleModal,
     zipcode,
+    location,
   };
 }
