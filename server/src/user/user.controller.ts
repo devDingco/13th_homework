@@ -1,17 +1,46 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    HttpCode,
+    HttpStatus,
+    Post,
+    Res,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { userDTO } from './dto/user.dto';
+import { signUpDTO } from './dto/signUp.dto';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { User } from './entity/user.entity';
+import { loginDTO } from './dto/login.dto';
+import { Response } from 'express';
 
 @Controller('/api/user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('/signup')
-    @ResponseMessage('user가 성공적으로 생성되었습니다.')
+    @ResponseMessage('회원가입이 성공했습니다.')
     @HttpCode(HttpStatus.CREATED)
-    signUp(@Body() userDTO: userDTO): Promise<User> {
-        return this.userService.createUser(userDTO);
+    signUp(@Body() signUpDTO: signUpDTO): Promise<User> {
+        return this.userService.createUser(signUpDTO);
+    }
+
+    @Post('/login')
+    @ResponseMessage('로그인 성공했습니다.')
+    @HttpCode(HttpStatus.OK)
+    async login(
+        @Body() loginDTO: loginDTO,
+        @Res() res: Response,
+    ): Promise<void> {
+        const result = await this.userService.login(loginDTO);
+        res.setHeader('Authorization', `Bearer ${result.accessToken}`);
+
+        res.cookie('refreshToken', result.refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        res.status(HttpStatus.OK).json(result.user.id);
     }
 }

@@ -52,6 +52,12 @@ type BoardPaginationResponse {
   totalCount: Int!
 }
 
+type UserSchema {
+  id: Int!
+  name: String!
+  email: String!
+}
+
 type Query {
   getBoards(page: Int, take: Int): BoardPaginationResponse!
   getBoard(boardId: Int!): BoardSchema!
@@ -68,6 +74,8 @@ type Mutation {
   createBoardComment(boardId: Int!, createBoardComment: CreateBoardCommentInput!): BoardCommentResponseDTO!
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
+  signUp(signUpUser: signUpUser!): UserSchema!
+  login(loginUser: loginUser!): UserSchema!
 }
 
 input CreateBoardInput {
@@ -107,4 +115,15 @@ input UpdateBoardCommentInput {
   rating: Int
   password: String!
   parentId: String
+}
+
+input signUpUser {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input loginUser {
+  email: String!
+  password: String!
 }

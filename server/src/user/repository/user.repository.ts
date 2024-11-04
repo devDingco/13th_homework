@@ -5,8 +5,9 @@ import {
     ConflictException,
     Injectable,
     InternalServerErrorException,
+    NotFoundException,
 } from '@nestjs/common';
-import { userDTO } from '../dto/user.dto';
+import { signUpDTO } from '../dto/signUp.dto';
 
 @Injectable()
 export class UserRepository {
@@ -15,8 +16,8 @@ export class UserRepository {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async createUser(userDTO: userDTO): Promise<User> {
-        const user = this.userRepository.create(userDTO);
+    async createUser(signUpDTO: signUpDTO): Promise<User> {
+        const user = this.userRepository.create(signUpDTO);
         try {
             return await this.userRepository.save(user);
         } catch (error) {
@@ -28,9 +29,13 @@ export class UserRepository {
         }
     }
 
-    async findUser(id: number): Promise<User> {
-        return await this.userRepository.findOneBy({
-            id,
+    async findUser(email: string): Promise<User> {
+        const user = await this.userRepository.findOneBy({
+            email,
         });
+        if (!user) {
+            throw new NotFoundException('is not exist email');
+        }
+        return user;
     }
 }

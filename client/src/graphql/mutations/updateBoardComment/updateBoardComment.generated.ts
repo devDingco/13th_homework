@@ -1,40 +1,65 @@
+/** @format */
+
+import * as Apollo from '@apollo/client';
 import * as Types from '../../types';
 
 import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+
 const defaultOptions = {} as const;
 export type UpdateBoardCommentMutationVariables = Types.Exact<{
-  boardId: Types.Scalars['Int']['input'];
-  updateBoardComment: Types.UpdateBoardCommentInput;
-  commentId: Types.Scalars['String']['input'];
+	boardId: Types.Scalars['Int']['input'];
+	updateBoardComment: Types.UpdateBoardCommentInput;
+	commentId: Types.Scalars['String']['input'];
 }>;
 
-
-export type UpdateBoardCommentMutation = { __typename?: 'Mutation', updateBoardComment: { __typename?: 'BoardCommentResponseDTO', author: string, content: string, rating?: number | null, parentId?: string | null, _id: string, createdAt: Date, replies?: Array<{ __typename?: 'BoardCommentResponseDTO', author: string, content: string, createdAt: Date }> | null } };
-
+export type UpdateBoardCommentMutation = {
+	__typename?: 'Mutation';
+	updateBoardComment: {
+		__typename?: 'BoardCommentResponseDTO';
+		author: string;
+		content: string;
+		rating?: number | null;
+		parentId?: string | null;
+		_id: string;
+		createdAt: Date;
+		replies?: Array<{
+			__typename?: 'BoardCommentResponseDTO';
+			author: string;
+			content: string;
+			createdAt: Date;
+		}> | null;
+	};
+};
 
 export const UpdateBoardCommentDocument = gql`
-    mutation UpdateBoardComment($boardId: Int!, $updateBoardComment: UpdateBoardCommentInput!, $commentId: String!) {
-  updateBoardComment(
-    boardId: $boardId
-    updateBoardComment: $updateBoardComment
-    commentId: $commentId
-  ) {
-    author
-    content
-    rating
-    parentId
-    _id
-    createdAt
-    replies {
-      author
-      content
-      createdAt
-    }
-  }
-}
-    `;
-export type UpdateBoardCommentMutationFn = Apollo.MutationFunction<UpdateBoardCommentMutation, UpdateBoardCommentMutationVariables>;
+	mutation UpdateBoardComment(
+		$boardId: Int!
+		$updateBoardComment: UpdateBoardCommentInput!
+		$commentId: String!
+	) {
+		updateBoardComment(
+			boardId: $boardId
+			updateBoardComment: $updateBoardComment
+			commentId: $commentId
+		) {
+			author
+			content
+			rating
+			parentId
+			_id
+			createdAt
+			replies {
+				author
+				content
+				createdAt
+			}
+		}
+	}
+`;
+export type UpdateBoardCommentMutationFn = Apollo.MutationFunction<
+	UpdateBoardCommentMutation,
+	UpdateBoardCommentMutationVariables
+>;
 
 /**
  * __useUpdateBoardCommentMutation__
@@ -55,10 +80,21 @@ export type UpdateBoardCommentMutationFn = Apollo.MutationFunction<UpdateBoardCo
  *   },
  * });
  */
-export function useUpdateBoardCommentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBoardCommentMutation, UpdateBoardCommentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateBoardCommentMutation, UpdateBoardCommentMutationVariables>(UpdateBoardCommentDocument, options);
-      }
+export function useUpdateBoardCommentMutation(
+	baseOptions?: Apollo.MutationHookOptions<
+		UpdateBoardCommentMutation,
+		UpdateBoardCommentMutationVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<UpdateBoardCommentMutation, UpdateBoardCommentMutationVariables>(
+		UpdateBoardCommentDocument,
+		options,
+	);
+}
 export type UpdateBoardCommentMutationHookResult = ReturnType<typeof useUpdateBoardCommentMutation>;
 export type UpdateBoardCommentMutationResult = Apollo.MutationResult<UpdateBoardCommentMutation>;
-export type UpdateBoardCommentMutationOptions = Apollo.BaseMutationOptions<UpdateBoardCommentMutation, UpdateBoardCommentMutationVariables>;
+export type UpdateBoardCommentMutationOptions = Apollo.BaseMutationOptions<
+	UpdateBoardCommentMutation,
+	UpdateBoardCommentMutationVariables
+>;

@@ -2,7 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { BcryptModule } from './bcrypt/bcrypt.module';
 import { BoardCommentModule } from './board/board-comment/board-comment.module';
 import { BoardModule } from './board/board.module';
@@ -34,12 +34,13 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: 'src/graphql/schema.gql',
+            context: ({ req, res }) => ({ req, res }),
         }),
 
         BoardModule,
         BoardPasswordModule,
         BoardCommentModule,
-        // AuthModule,
+        AuthModule,
         BcryptModule,
         UserModule,
     ],

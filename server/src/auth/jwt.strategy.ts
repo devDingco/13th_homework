@@ -15,12 +15,12 @@
 //             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken,
 //         });
 //     }
-//     // async validate(payload): Promise<User> {
-//     //     const { email } = payload;
-//     //     const user: User = await this.userRepository.findUser(email);
-//     //     if (!user) {
-//     //         throw new UnauthorizedException();
-//     //     }
-//     //     return user;
-//     // }
+//     async validate(payload): Promise<User> {
+//         const { email } = payload;
+//         const user: User = await this.userRepository.findUser(email);
+//         if (!user) {
+//             throw new UnauthorizedException();
+//         }
+//         return user;
+//     }
 // }
