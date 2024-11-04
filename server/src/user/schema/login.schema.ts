@@ -1,3 +1,4 @@
+import { Field, InputType } from '@nestjs/graphql';
 import {
     IsEmail,
     IsNotEmpty,
@@ -7,14 +8,12 @@ import {
     MinLength,
 } from 'class-validator';
 
-export class signUpDTO {
-    @IsString()
-    @IsNotEmpty()
-    name: string;
-
+@InputType()
+export class loginUser {
     @IsString()
     @IsNotEmpty()
     @IsEmail({}, { message: 'Invalid email format' })
+    @Field()
     email: string;
 
     @IsString()
@@ -28,5 +27,6 @@ export class signUpDTO {
                 'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character from !@#$%^&*()',
         },
     )
+    @Field()
     password: string;
 }

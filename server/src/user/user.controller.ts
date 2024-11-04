@@ -29,18 +29,18 @@ export class UserController {
     @HttpCode(HttpStatus.OK)
     async login(
         @Body() loginDTO: loginDTO,
-        @Res() response: Response,
+        @Res() res: Response,
     ): Promise<void> {
         const result = await this.userService.login(loginDTO);
-        response.setHeader('Authorization', `Bearer ${result.accessToken}`);
+        res.setHeader('Authorization', `Bearer ${result.accessToken}`);
 
-        response.cookie('refreshToken', result.refreshToken, {
+        res.cookie('refreshToken', result.refreshToken, {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        response.status(HttpStatus.OK).json(result.user.id);
+        res.status(HttpStatus.OK).json(result.user.id);
     }
 }

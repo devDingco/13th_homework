@@ -34,6 +34,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: 'src/graphql/schema.gql',
+            context: ({ req, res }) => ({ req, res }),
         }),
 
         BoardModule,
