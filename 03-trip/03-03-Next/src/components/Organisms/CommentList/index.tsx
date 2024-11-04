@@ -9,6 +9,7 @@ import { useQuery } from "@apollo/client";
 import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 
 import { comment_wrap } from "@/commons/styles/commentStyles";
+import { CSSTitle } from "../ProductList";
 
 export default function CommentListUI() {
     const [hasMore, setHasMore] = useState(true);
@@ -54,7 +55,7 @@ export default function CommentListUI() {
                         <CommentUI el={el} key={idx} />
                     ))
                 ) : (
-                    <div>등록된 댓글이 없습니다.</div>
+                    <div style={CSSTitle}>등록된 댓글이 없습니다.</div>
                 )}
             </InfiniteScroll>
         </section>
