@@ -19,3 +19,23 @@ export const CREATE_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_COMMENT = gql`
+  mutation CommentEditSuccess(
+    $boardCommentId: ID!
+    $updateBoardCommentInput: UpdateBoardCommentInput!
+    $password: String!
+  ) {
+    updateBoardComment(
+      boardCommentId: $boardCommentId
+      updateBoardCommentInput: $updateBoardCommentInput
+      password: $password
+    ) {
+      _id
+      contents
+      rating
+      updatedAt
+      createdAt
+    }
+  }
+`;

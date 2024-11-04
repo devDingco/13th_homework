@@ -4,7 +4,7 @@ import styles from "./styles.module.css"
 import { IListProps } from "./types";
 
 export default function BoardsList(props:IListProps){
-    const {data, onClickDetail, onClickDelete} = useBoardsList();
+    const {data, onClickDetail, onClickDelete} = useBoardsList(props);
     return (
         <>
             <div className={styles.listForm}>

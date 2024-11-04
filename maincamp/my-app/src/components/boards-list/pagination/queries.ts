@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS_COUNT = gql`
-  query FetchBoardsCount(
+  query FetchBoardsCountDate(
     $endDate: DateTime
     $startDate: DateTime
     $search: String

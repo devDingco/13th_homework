@@ -1,6 +1,6 @@
 "use client";
 
-import { FetchBoardCommentsDocument, FetchBoardsDocument, FetchBoardsScrollDocument } from "@/commons/graphql/graphql";
+import { FetchBoardCommentsDocument, FetchBoardsDocument, FetchBoardsQuery } from "@/commons/graphql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function useBoardCommentList(){
   const params = useParams ();
   const [star, setStar] = useState(0);
+  const [isEdit, setIsEdit] = useState(false);
   const id = params.boardId.toString();
   const { data, fetchMore } = useQuery(FetchBoardCommentsDocument, {
     variables: { page: 1, boardId: id },
