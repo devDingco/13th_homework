@@ -1,7 +1,15 @@
+"use client";
+import { usePathname } from "next/navigation";
+
 export default function ProductsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="mainContent">{children}</div>;
+  const pathname = usePathname();
+  return pathname !== "/products" ? (
+    <div className="mainContent">{children}</div>
+  ) : (
+    <>{children}</>
+  );
 }
