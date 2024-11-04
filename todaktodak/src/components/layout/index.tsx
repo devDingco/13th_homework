@@ -8,7 +8,7 @@ interface ILayout {
   children: React.ReactNode;
 }
 
-const HIDDEN_LAYOUT = ["/login", "/signup", "/"];
+const HIDDEN_LAYOUT = ["/login", "/signup", "/", "/diary/"];
 
 export default function Layout({ children }: ILayout) {
   const pathname = usePathname();

@@ -2,12 +2,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-md w-full mx-4">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">토닥토닥</h1>
-          <p className="mt-2 text-gray-600">로그인하여 시작하세요</p>
-        </div>
-
         <div className="bg-white p-8 rounded-lg shadow-sm">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">토닥토닥</h1>
+            <p className="mt-2 text-gray-600">로그인하여 시작하세요</p>
+          </div>
           {/* 일반 로그인 */}
           <form className="space-y-4">
             <div>
@@ -47,14 +46,21 @@ export default function LoginPage() {
 
           {/* 소셜로그인 (구글, 카카오, 네이버) */}
           <div className="flex justify-center space-x-4">
-            <button className="w-12 h-12 rounded-full bg-white border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
-              <img src="/google-icon.png" alt="Google" className="w-6 h-6" />
+            {/* google */}
+            <button className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
+              <img
+                src="/images/google.svg"
+                alt="Google"
+                className="w-12 h-12"
+              />
             </button>
-            <button className="w-12 h-12 rounded-full bg-[#FEE500] flex items-center justify-center hover:bg-[#FDD800] transition-colors">
-              <img src="/kakao-icon.png" alt="Kakao" className="w-6 h-6" />
+            {/* kakao */}
+            <button className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#FDD800] transition-colors">
+              <img src="/images/kakao.svg" alt="Kakao" className="w-12 h-12" />
             </button>
-            <button className="w-12 h-12 rounded-full bg-[#03C75A] flex items-center justify-center hover:bg-[#02B351] transition-colors">
-              <img src="/naver-icon.png" alt="Naver" className="w-6 h-6" />
+            {/* naver */}
+            <button className="w-12 h-12 rounded-full  items-center justify-center hover:bg-[#02B351] transition-colors overflow-auto">
+              <img src="/images/naver.svg" alt="Naver" className="w-12 h-12" />
             </button>
           </div>
 

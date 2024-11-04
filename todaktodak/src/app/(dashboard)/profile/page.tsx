@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   User,
@@ -6,17 +7,17 @@ import {
   ChartBar,
   AlertCircle,
   ChevronRight,
-  Lock,
   SquarePen,
   PencilLine,
 } from "lucide-react";
-import DeleteAccountModal from "@/components/modals/DeleteAccountModal";
 import NotificationSettings from "@/components/profile/NotificationSettings";
-import MyReviews from "@/components/profile/MyReviews";
-import Link from "next/link";
+import MyActivities from "@/components/profile/MyActivities";
+import DeleteAccountModal from "@/components/modals/DeleteAccountModal";
+import EditProfileModal from "@/components/modals/EditProfileModal";
 
 export default function ProfilePage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   return (
     <div className="p-8 max-w-7xl mx-auto">
@@ -115,14 +116,17 @@ export default function ProfilePage() {
       </div>
 
       <NotificationSettings />
-      <MyReviews />
+      <MyActivities />
 
       {/* 계정 설정 */}
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-lg font-semibold mb-4">계정 설정</h2>
         <div className="space-y-4">
           {/* 개인정보 수정 */}
-          <button className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 rounded-lg">
+          <button
+            onClick={() => setShowEditModal(true)}
+            className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 rounded-lg"
+          >
             <div className="flex items-center">
               <User className="w-5 h-5 mr-3 text-gray-500" />
               <span>개인정보 수정</span>
@@ -143,10 +147,14 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* 회원 탈퇴 모달 */}
+      {/* 모달들 */}
       {showDeleteModal && (
         <DeleteAccountModal onClose={() => setShowDeleteModal(false)} />
       )}
+      <EditProfileModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+      />
     </div>
   );
 }

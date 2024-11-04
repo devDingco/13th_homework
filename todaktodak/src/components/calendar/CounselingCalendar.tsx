@@ -124,7 +124,7 @@ const CounselingCalendar = () => {
                 <img
                   src="/api/placeholder/64/64"
                   alt="상담사 프로필"
-                  className="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full bg-green-200"
                 />
                 <div className="ml-4">
                   <div className="font-medium">
