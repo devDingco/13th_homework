@@ -4,6 +4,7 @@ import "./globals.css";
 import Layout from "@/commons/layout";
 import ApolloUploadSetting from "@/commons/settings/apollo-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-header-setting";
+import ApolloHeaderSettingLocalStorage from "@/commons/settings/apollo-header-setting-localstorage";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
