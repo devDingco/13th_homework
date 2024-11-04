@@ -47,7 +47,9 @@ export const useBoardsWrite = (props: any) => {
   const router = useRouter();
   const params = useParams();
 
-  const editId = props.isEdit ? params.boardId : null;
+  const editId = params.boardId;
+  console.log('editId',editId);
+  
 
   // 수정페이지에서사용
   const { data } = useQuery(FetchBoardDocument, {
