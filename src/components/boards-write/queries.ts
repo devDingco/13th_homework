@@ -7,6 +7,7 @@ export const 나의그래프큐엘셋팅 = gql`
             _id
             writer
             contents
+            title
             youtubeUrl
             likeCount
             dislikeCount

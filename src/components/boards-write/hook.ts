@@ -39,7 +39,7 @@ export const useBoardWrite = () => {
         title: '',
         password: '',
         contents: '',
-        youtube: '',
+        youtubeUrl: '',
     });
 
     const [inputError, setInputError] = useState({
@@ -48,6 +48,8 @@ export const useBoardWrite = () => {
         titleError: '',
         contentsError: '',
     });
+
+    const { writer, title, password, contents, youtubeUrl } = inputs;
 
     const onChangeInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputs((prev) => ({
@@ -122,13 +124,11 @@ export const useBoardWrite = () => {
     };
 
     const onClickSubmit = async () => {
-        const { writer, title, password, contents, youtube } = inputs;
         try {
             const result = await 게시글생성함수({
                 variables: {
                     createBoardInput: {
                         ...inputs,
-                        youtubeUrl: youtube,
                         boardAddress: {
                             zipcode: zonecode,
                             address: address,
@@ -140,9 +140,9 @@ export const useBoardWrite = () => {
             });
             console.log(result);
 
-            if (writer && title && password && contents && youtube !== '') {
+            if (writer && title && password && contents !== '') {
                 alert('회원가입을 축하드려요');
-                router.push(`/boards/${result.data.createBoard._id}`);
+                router.push(`/boards/${result?.data.createBoard._id}`);
             } else {
                 alert('필수항목을 입력해 주세요');
             }
@@ -162,7 +162,7 @@ export const useBoardWrite = () => {
         };
         if (title) myvariables.updateBoardInput.title = title;
         if (contents) myvariables.updateBoardInput.contents = contents;
-        if (youtube) myvariables.updateBoardInput.youtubeUrl = youtube;
+        if (youtubeUrl) myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
 
         try {
             const result = await 게시글수정함수({

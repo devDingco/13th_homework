@@ -8,14 +8,8 @@ import { Modal } from 'antd';
 
 export default function BoardComponentWrite(props: any) {
     const {
-        youtube,
-        setYoutube,
-        detailAddress,
-        setDetailAddress,
         zonecode,
-        setZoncode,
         address,
-        setAddress,
         isOpen,
         writerError,
         passwordError,
@@ -27,7 +21,6 @@ export default function BoardComponentWrite(props: any) {
         handleCancel,
         handleComplete,
         onChangeInputs,
-        onChangeYouTubeUrl,
         onChangeDetailAddress,
         onClickSubmit,
         onClickUpdate,
@@ -143,7 +136,7 @@ export default function BoardComponentWrite(props: any) {
                         type="text"
                         placeholder="상세주소"
                         className={styles.addressdetailinput}
-                        onChange={onChangeInputs}
+                        onChange={onChangeDetailAddress}
                     ></input>
                 </div>
             </div>
@@ -151,7 +144,7 @@ export default function BoardComponentWrite(props: any) {
             <div className={styles.youtubeBox}>
                 <div>유튜브 링크</div>
                 <input
-                    // defaultValue={props.data?.fetchBoard.youtube}
+                    defaultValue={props.data?.fetchBoard.youtubeUrl}
                     id="youtube"
                     placeholder="링크를 입력해 주세요"
                     className={styles.youtubeBoxinput}
