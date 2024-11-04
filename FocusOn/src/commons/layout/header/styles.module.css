@@ -21,6 +21,11 @@
   gap: 24px;
 }
 
+.logo {
+  width: 80px;
+  height: auto;
+}
+
 .active_menu {
   display: flex;
   padding: 8px;
@@ -70,6 +75,6 @@
   align-items: center;
   gap: 8px;
   border-radius: 6px;
-  background-color: #e78b8d;
+  background-color: var(--main-color);
   color: white;
 }

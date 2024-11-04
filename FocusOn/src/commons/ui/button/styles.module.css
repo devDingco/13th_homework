@@ -1,0 +1,14 @@
+.button_soft_m_full_main {
+  width: 100%;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button_soft_m_full_main:hover {
+  background-color: var(--main-color-hover);
+}

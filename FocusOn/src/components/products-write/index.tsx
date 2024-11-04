@@ -17,16 +17,16 @@ export default function ProductsWrite(props) {
     mode: "onChange",
   });
   const [createTravelproduct] = useMutation(CREATE_TRAVEL_PRODUCT);
-  const { name, remarks, contents, price } = methods.formState;
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (data) => {
+    console.log(data);
     try {
       const result = await createTravelproduct({
         variables: {
-          createTravelproduct: {
-            name,
-            remarks,
-            contents,
-            price: parseInt(price),
+          createTravelproductInput: {
+            name: data.name,
+            remarks: data.remarks,
+            contents: data.contents,
+            price: data.price,
           },
         },
       });
@@ -51,7 +51,7 @@ export default function ProductsWrite(props) {
                 keyname="name"
                 placeholder="상품명을 입력하세요."
               />
-              {methods.formState.errors.name?.message}
+              {/* {methods.formState.errors.name?.message} */}
             </FieldWrapper>
 
             <hr />
@@ -62,7 +62,7 @@ export default function ProductsWrite(props) {
                 keyname="remarks"
                 placeholder="상품을 한줄로 요약해 주세요."
               />
-              {methods.formState.errors.remarks?.message}
+              {/* {methods.formState.errors.remarks?.message} */}
             </FieldWrapper>
 
             <hr />
@@ -73,7 +73,7 @@ export default function ProductsWrite(props) {
                 keyname="contents"
                 placeholder="내용을 입력해주세요."
               />
-              {methods.formState.errors.contents?.message}
+              {/* {methods.formState.errors.contents?.message} */}
             </FieldWrapper>
 
             {/* 주소 입력 필드 */}
@@ -98,7 +98,6 @@ export default function ProductsWrite(props) {
 
             <hr />
 
-            {/* 유튜브 링크 입력 필드 */}
             <FieldWrapper label="판매 가격" isRequired={true}>
               <InputSoftMFull
                 type="number"

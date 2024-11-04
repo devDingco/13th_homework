@@ -4,7 +4,7 @@ import { z } from "zod";
 //   email
 //   name
 //   password
-//   confirmPassword
+//   passwordConfirm
 // }
 
 export const schema = z
@@ -18,9 +18,9 @@ export const schema = z
       .string()
       .min(1, { message: "비밀번호를 입력해 주세요" })
       .min(8, { message: "비밀번호는 최소 8자 이상이어야 합니다." }),
-    confirmPassword: z.string().min(1, { message: "비밀번호를 입력해 주세요" }),
+    passwordConfirm: z.string().min(1, { message: "비밀번호를 입력해 주세요" }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.passwordConfirm, {
     message: "비밀번호가 일치하지 않습니다.",
-    path: ["confirmPassword"],
+    path: ["passwordConfirm"],
   });

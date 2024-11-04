@@ -1,9 +1,7 @@
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 20px;
-  font-family: "Noto Sans KR", sans-serif;
-  background-color: #fffcfb;
   color: #333;
 }
 
@@ -23,8 +21,8 @@
 .top3_section h2,
 .focus_on_services h2 {
   color: #232a36;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
   font-weight: 600;
 }
 
@@ -59,7 +57,7 @@
 
 .top3_content,
 .service_content {
-  padding: 20px;
+  padding: 16px;
 }
 
 .filter_menu {
@@ -102,14 +100,14 @@
 
 .search_bar {
   display: flex;
-  width: 640px;
-  min-width: 180px;
+  /* width: 640px; */
+  min-width: 380px;
   max-width: 640px;
   padding: 12px 12px 12px 44px;
   align-items: center;
   flex: 1 0 0;
-  background-color: #f2f2f2;
   border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
 .search_icon {
@@ -139,7 +137,8 @@
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  background-color: #e78b8d;
+  background-color: var(--main-color);
+
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -150,7 +149,7 @@
 }
 
 .service_button:hover {
-  background-color: #d5686c; /* 호버 시 배경색 변경 */
+  background-color: var(--main-color-hover); /* 호버 시 배경색 변경 */
   transform: translateY(-2px); /* 호버 시 약간 위로 이동 */
 }
 
@@ -165,30 +164,30 @@
   gap: 8px;
   color: #777;
   border-radius: 8px;
-  background-color: #f2f2f2;
+  border: 1px solid var(--border);
 }
 
 .category_container {
   display: flex;
   width: 100%;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 30px;
 }
 
 .category_button {
   display: flex;
   align-items: center;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 20px;
   cursor: pointer;
   gap: 5px;
 }
 
-.category_icon {
-  margin-right: 5px;
-  fill: #555;
+.category_button.active {
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
 }
 
 .service_grid {
@@ -215,14 +214,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 10px 0;
+  margin: 8px 0;
 }
 
 .tag {
-  color: #e78b8d;
+  color: var(--main-color);
   font-size: 0.8rem;
   font-weight: 500;
-  background-color: #fdf0f0;
+  background-color: var(--main-color-back);
   padding: 4px 8px;
   border-radius: 12px;
 }
@@ -230,7 +229,7 @@
 .price {
   font-weight: 700;
   color: #333;
-  margin: 10px 0;
+  margin: 8px 0;
   font-size: 1.1rem;
 }
 
@@ -238,7 +237,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 .author {
@@ -260,7 +259,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #e78b8d;
+  color: var(--main-color);
   font-weight: 600;
 }
 
@@ -268,13 +267,13 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 20px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #e78b8d;
+  color: var(--main-color);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -285,12 +284,12 @@
 }
 
 .like_button svg:hover {
-  fill: #e78b8d;
+  fill: var(--main-color);
 }
 
 .container h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #333;
 }

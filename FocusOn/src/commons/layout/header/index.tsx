@@ -20,10 +20,12 @@ const Navigation = () => {
       <div className={styles.navigation}>
         <div className={styles.left_area}>
           <Image
-            src="/images/logo.png"
-            width={51.521}
-            height={32}
+            src="/images/focuson.png"
+            width={0}
+            height={0}
             alt="로고이미지"
+            sizes="100vw"
+            className={styles.logo}
           />
 
           <Link

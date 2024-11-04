@@ -46,21 +46,6 @@
   justify-content: center;
 }
 
-.signup_button {
-  width: 100%;
-  background-color: #e78b8d;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.signup_button:hover {
-  background-color: #ffa7a5;
-}
-
 .login_button_box {
   display: flex;
   justify-content: space-between;
@@ -68,9 +53,15 @@
 }
 
 .question {
+  color: var(--gray);
   font-size: 14px;
 }
 
 .login_button {
+  color: var(--main-color);
   font-size: 14px;
+}
+
+.error {
+  color: red;
 }
