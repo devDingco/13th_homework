@@ -18,6 +18,7 @@ import { FetchTravelproductDocument } from "@/commons/gql/graphql";
 import Divider from "@/app/_components/commons/divider";
 import CommentWriting from "@/commons/ui/comment/writing";
 import Comment from "@/commons/ui/comment/comment";
+import NewTravelProductComment from "@/app/_components/travelProduct/comment";
 
 export default function DetailTravelProduct() {
   const { data } = useQuery(FetchTravelproductDocument, {
@@ -93,11 +94,7 @@ export default function DetailTravelProduct() {
         buttonText="문의 하기"
       />
       <Divider />
-      <Comment
-        nickname="최홍식"
-        contents="댓글 샘플입니다."
-        date="2024.11.11"
-      />
+      <NewTravelProductComment />
     </div>
   );
 }
