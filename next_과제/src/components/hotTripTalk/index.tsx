@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function HotTripTalk() {
   const { data, error, loading } = useHotTripTalk();
-  console.log("핫한트립토크", data, error, loading);
+  // console.log("핫한트립토크", data, error, loading);
 
   return (
     <div className="max-md:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
@@ -41,11 +41,8 @@ export default function HotTripTalk() {
                     <div className="flex justify-between text-sm text-gray-400">
                       <div className="flex items-center gap-1 text-gray-700">
                         <span className="bg-gray-300 rounded-full w-6 h-6 overflow-hidden">
-                          {/* <Image
-                            src={
-                              user?.picture ||
-                              "/images/img-0.png"
-                            }
+                          <Image
+                            src={user?.picture || "/images/img-0.png"}
                             alt=""
                             width={24}
                             height={24}
@@ -54,7 +51,7 @@ export default function HotTripTalk() {
                               width: "100%",
                               height: "100%",
                             }}
-                          /> */}
+                          />
                         </span>
                         {writer || "작성자"}
                       </div>
