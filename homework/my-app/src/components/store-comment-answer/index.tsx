@@ -40,6 +40,30 @@ const CREATE_REPLY = gql`
   }
 `;
 
+const UPDATE_REPLY = gql`
+  mutation updateTravelproductQuestionAnswer(
+    $input: UpdateTravelproductQuestionAnswerInput!
+    $travelproductQuestionAnswerId: ID!
+  ) {
+    updateTravelproductQuestionAnswer(
+      updateTravelproductQuestionAnswerInput: $input
+      travelproductQuestionAnswerId: $travelproductQuestionAnswerId
+    ) {
+      _id
+    }
+  }
+`;
+
+const DELETE_REPLY = gql`
+  mutation deleteTravelproductQuestionAnswer(
+    $travelproductQuestionAnswerId: ID!
+  ) {
+    deleteTravelproductQuestionAnswer(
+      travelproductQuestionAnswerId: $travelproductQuestionAnswerId
+    )
+  }
+`;
+
 export default function CommentAnswer({ commentId }) {
   const [replyText, setReplyText] = useState("");
   const [openReplyBox, setOpenReplyBox] = useState(false);
@@ -50,6 +74,11 @@ export default function CommentAnswer({ commentId }) {
   });
 
   const [createReply] = useMutation(CREATE_REPLY);
+  const [updateReply] = useMutation(UPDATE_REPLY);
+  const [deleteReply] = useMutation(DELETE_REPLY);
+
+  const [editingReplyId, setEditingReplyId] = useState(null);
+  const [editingContent, setEditingContent] = useState("");
 
   const onReplySubmit = async () => {
     try {
@@ -64,6 +93,40 @@ export default function CommentAnswer({ commentId }) {
       refetch();
     } catch (error) {
       console.error("대댓글 등록 실패:", error);
+    }
+  };
+
+  const onEditClick = (replyId, contents) => {
+    setEditingReplyId(replyId);
+    setEditingContent(contents);
+  };
+
+  const onEditSubmit = async () => {
+    try {
+      await updateReply({
+        variables: {
+          input: { contents: editingContent },
+          travelproductQuestionAnswerId: editingReplyId,
+        },
+      });
+      setEditingReplyId(null);
+      setEditingContent("");
+      refetch();
+    } catch (error) {
+      console.error("대댓글 수정 실패:", error);
+    }
+  };
+
+  const onClickDelete = async (answerId) => {
+    try {
+      await deleteReply({
+        variables: {
+          travelproductQuestionAnswerId: answerId,
+        },
+      });
+      refetch();
+    } catch (error) {
+      console.log("대댓글 삭제 실패:", error);
     }
   };
 
@@ -92,9 +155,31 @@ export default function CommentAnswer({ commentId }) {
           <div key={answer._id} className={styles.reply}>
             <div className={styles.replyHeader}>
               <span>{answer.user?.name}</span>
-              <span>{new Date(answer.createdAt).toLocaleString()}</span>
+              <div>
+                <span>{new Date(answer.createdAt).toLocaleString()}</span>
+                <button
+                  onClick={() => onEditClick(answer._id, answer.contents)}
+                >
+                  수정
+                </button>
+                <button onClick={() => onClickDelete(answer._id)}>삭제</button>
+              </div>
             </div>
-            <p>{answer.contents}</p>
+            {editingReplyId === answer._id ? (
+              <div className={styles.replyEditWrapper}>
+                <input
+                  type="text"
+                  value={editingContent}
+                  onChange={(e) => setEditingContent(e.target.value)}
+                  className={styles.replyInput}
+                />
+                <button onClick={onEditSubmit} className={styles.commentSubmit}>
+                  수정 완료
+                </button>
+              </div>
+            ) : (
+              <p>{answer.contents}</p>
+            )}
           </div>
         ))}
       </div>
