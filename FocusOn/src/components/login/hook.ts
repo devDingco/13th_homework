@@ -2,31 +2,25 @@
 
 import { useRouter } from "next/navigation";
 import { LOGIN_USER } from "./queries";
-import { useMutation } from "@apollo/client";
-import { useAccessTokenStore } from "@/commons/stores";
-import { ChangeEvent, useState } from "react";
+import { ApolloError, useMutation } from "@apollo/client";
+import { useAccessTokenStore } from "@/commons/stores/accessToken";
+import { schema } from "./schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const useLogin = () => {
   const router = useRouter();
   const [loginUser] = useMutation(LOGIN_USER);
+
   const { setAccessToken } = useAccessTokenStore();
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const [loginInputs, setLoginInputs] = useState({
-    email: "",
-    password: "",
+  const methods = useForm({
+    resolver: zodResolver(schema),
   });
-  const { email, password } = loginInputs;
 
-  const onChangeLoginInputs = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setLoginInputs((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const loginMutation = async () => {
+  // 로그인 mutation 로직
+  const onClickLogin = async (data) => {
+    const { email, password } = data;
     try {
       // 1. 로그인 뮤테이션 날려서 accessToken 받아오기
       const result = await loginUser({
@@ -40,29 +34,22 @@ const useLogin = () => {
         return;
       }
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
 
       // 3. 로그인 성공 페이지로 이동하기
       router.push("/products");
     } catch (error) {
+      if (error instanceof ApolloError) {
+        methods.setError("password", {
+          message: "로그인 정보가 일치하지 않습니다.",
+        });
+      }
       console.error(error);
-      setErrorMessage("아이디 또는 비밀번호를 확인해 주세요.");
     }
   };
 
-  const onClickLogin = async () => {
-    // 이메일이나 비밀번호 중 하나라도 입력하지 않으면 에러 메세지
-    if (!email || !password) {
-      setErrorMessage("아이디 또는 비밀번호를 확인해 주세요.");
-      return;
-    }
-    // 로그인 로직
-    loginMutation();
-  };
   return {
-    onChangeLoginInputs,
     onClickLogin,
-    errorMessage,
+    methods,
   };
 };
 export default useLogin;

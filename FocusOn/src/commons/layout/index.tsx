@@ -4,14 +4,7 @@ import Banner from "./banner";
 import Navigation from "./header";
 
 // 정적 경로
-const HIDDEN_BANNER = [
-  "/boards/new",
-  "/openapis",
-  "/mypage",
-  "/products/new",
-  "/signup",
-  "/login",
-];
+const HIDDEN_BANNER = ["/boards/new", "/products/new", "/signup", "/login"];
 
 const HIDDEN_HEADER = ["/login", "/signup"];
 
