@@ -28,7 +28,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
   const { boardId } = useParams();
 
-  const [textCount, setTextCount] = useState(0); // 댓글 글자 수
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
   const [modalType, setModalType] = useState(""); // 모달 타입
 
@@ -133,8 +132,6 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   };
 
   return {
-    textCount,
-    setTextCount,
     commentNew,
     commentEdit,
     isDirty,

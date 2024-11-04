@@ -86,6 +86,12 @@ export default function ModalAlertBox(props: ImodalContent) {
         <CheckCircleFilled style={{ fontSize: "40px", color: "#ff4d4f" }} />
       ),
     },
+    productQuestionEdit: {
+      contents: "질문이 수정되었습니다.",
+      icon: (
+        <CheckCircleFilled style={{ fontSize: "40px", color: "#52c41a" }} />
+      ),
+    },
   };
   return (
     <Modal

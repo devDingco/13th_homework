@@ -3,16 +3,20 @@ import { usePointList } from "@/components/point-list/hook";
 import { Table } from "antd";
 import styles from "./styles.module.scss";
 
-export default function PointList({ listType }: { listType: string }) {
+export default function PointList({
+  listType,
+}: {
+  listType: "selling" | "buying" | "loading";
+}) {
   const {
     loading,
     listItemMouseHandler,
     dataSource,
     columns,
-    fetchPointTransactionsCountOfBuying,
+    fetchPointTransactionsCount,
     pageChangeHandler,
     page,
-  } = usePointList(listType);
+  } = usePointList({ listType });
 
   return (
     <>
@@ -35,7 +39,7 @@ export default function PointList({ listType }: { listType: string }) {
               current: page,
               defaultPageSize: 10,
               responsive: true,
-              total: fetchPointTransactionsCountOfBuying,
+              total: fetchPointTransactionsCount,
               showTotal: (total) => `총 게시글 수 : ${total}`,
               defaultCurrent: 1,
               showLessItems: false,

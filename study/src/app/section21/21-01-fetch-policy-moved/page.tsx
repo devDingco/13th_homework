@@ -3,15 +3,15 @@
 import { useQuery, gql } from "@apollo/client";
 import Link from "next/link";
 
-const FETCH_BOARDS = gql`
-  query fetchBoards {
-    fetchBoards {
-      _id
-      writer
-      title
-    }
-  }
-`;
+// const FETCH_BOARDS = gql`
+//   query fetchBoards {
+//     fetchBoards {
+//       _id
+//       writer
+//       title
+//     }
+//   }
+// `;
 
 export default function FetchPolicyMoved() {
   const { data } = useQuery(FETCH_BOARDS);

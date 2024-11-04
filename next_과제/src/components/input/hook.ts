@@ -9,37 +9,39 @@ export const useInput = () => {
     youtube: /^https?:\/\/(www\.)?(youtube\.com|youtu\.?be)\/.+$/,
   };
 
+  const required = "필수 입력 사항입니다.";
+
   const formResister: IformResister = {
     commentPassword: {
-      required: "필수 입력 사항입니다.",
+      required,
       minLength: {
         value: 4,
         message: "비밀번호는 4자 이상으로 입력해 주세요.",
       },
     },
     commentWriter: {
-      required: "필수 입력 사항입니다.",
+      required,
       minLength: {
         value: 2,
         message: "작성자명은 2자 이상입니다.",
       },
     },
     commentContents: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 100,
         message: "내용은 100자 이내로 입력해 주세요.",
       },
     },
     writeName: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 10,
         message: "작성자명은 10자 이내로 입력해 주세요.",
       },
     },
     writePassword: {
-      required: "필수 입력 사항입니다.",
+      required,
       // pattern: {
       //   value: regexPattern.password,
       //   message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
@@ -50,18 +52,11 @@ export const useInput = () => {
       },
     },
     writeTitle: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 20,
         message: "제목은 20자 이내로 입력해 주세요.",
       },
-    },
-    writeContents: {
-      required: "필수 입력 사항입니다.",
-      // maxLength: {
-      //   value: 300,
-      //   message: "내용은 300자 이내로 입력해 주세요.",
-      // },
     },
     writeAddress: {},
     youtubeUrl: {
@@ -90,55 +85,55 @@ export const useInput = () => {
       },
     },
     userId: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 20,
         message: "아이디는 20자 이내로 입력해 주세요.",
       },
     },
     joinEmail: {
-      required: "필수 입력 사항입니다.",
+      required,
       pattern: {
         value: regexPattern.email,
         message: "이메일 형식을 확인해 주세요.",
       },
     },
     joinName: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 10,
         message: "이름은 10자 이내로 입력해 주세요.",
       },
     },
     joinPassword: {
-      required: "필수 입력 사항입니다.",
+      required,
       pattern: {
         value: regexPattern.password,
         message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
       },
     },
     joinPasswordConfirm: {
-      required: "필수 입력 사항입니다.",
+      required,
     },
     newPassword: {
-      required: "필수 입력 사항입니다.",
+      required,
       pattern: {
         value: regexPattern.password,
         message: "비밀번호는 8자 이상, 숫자와 영문자를 포함해야 합니다.",
       },
     },
     newPasswordCheck: {
-      required: "필수 입력 사항입니다.",
+      required,
     },
     productName: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 20,
         message: "제목은 20자 이내로 입력해 주세요.",
       },
     },
     productPrice: {
-      required: "필수 입력 사항입니다.",
+      required,
       pattern: {
         value: /^[0-9]*$/,
         message: "숫자만 입력해주세요.",
@@ -149,17 +144,24 @@ export const useInput = () => {
       },
     },
     productRemarks: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 50,
         message: "제목은 50자 이내로 입력해 주세요.",
       },
     },
     productContents: {
-      required: "필수 입력 사항입니다.",
+      required,
       maxLength: {
         value: 300,
         message: "내용은 300자 이내로 입력해 주세요.",
+      },
+    },
+    questionContents: {
+      required,
+      maxLength: {
+        value: 100,
+        message: "내용은 100자 이내로 입력해 주세요.",
       },
     },
   };

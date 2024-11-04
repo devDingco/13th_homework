@@ -1,5 +1,11 @@
 "use client";
 
+import PointList from "@/components/point-list";
+
 export default function PointUsageHistoryPage() {
-  return <>포인트사용내역</>;
+  return (
+    <>
+      <PointList listType="all" />
+    </>
+  );
 }

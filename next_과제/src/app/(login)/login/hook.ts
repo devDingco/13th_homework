@@ -2,18 +2,18 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
-// import { LOGIN_USER, LOGOUT_USERS, RESTORE_ACCESS_TOKEN } from "./queries";
+
 import {
   LoginUserDocument,
   LogoutUserDocument,
-  RestoreAccessTokenDocument,
 } from "@/commons/graphql/graphql";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
 
 export const useLoginPage = () => {
+  // 로그인
   const [loginUser] = useMutation(LoginUserDocument);
+  // 로그아웃
   const [logoutUser] = useMutation(LogoutUserDocument);
-  const [restoreAccessToken] = useMutation(RestoreAccessTokenDocument);
 
   const { setAccessToken } = useAccessTokenStore();
 
@@ -24,9 +24,24 @@ export const useLoginPage = () => {
   });
 
   //! 로그아웃 함수
-  const logOut = async () => {
-    const result = await logoutUser();
-    console.log(result);
+  const userLogOut = async () => {
+    try {
+      const result = await logoutUser();
+      if (result.data?.logoutUser) {
+        // 쿠키에 저장되어있는 리프레시 토큰 삭제
+        document.cookie =
+          "refreshToken = ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+
+        alert("로그아웃 되었습니다.");
+        router.push("/");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`${error.message}`);
+      } else {
+        alert("An unknown error occurred");
+      }
+    }
   };
 
   //! 로그인 제출 함수
@@ -46,29 +61,12 @@ export const useLoginPage = () => {
       },
     });
 
-    // // 2. 로그인 성공 시
-    // setAccessToken(result.data?.loginUser.accessToken);
-    // localStorage.setItem("accessToken", result.data?.loginUser.accessToken);
-
-    console.log(result.errors);
-
-    // } catch (error) {
-    //   // // 3. 로그인 실패 시
-
-    //   if (error instanceof ApolloError) {
-    //     console.log("ApolloError 메시지:", error.message);
-    //   } else {
-    //     console.log("ApolloError가 아닌 에러:", error);
-    //   }
-
-    // alert("로그인에 실패했습니다.");
-
-    // 리프레시 토큰 만료인 경우 액세스 토큰을 확인하여 리프레시 토큰 재발급 요청
-    // const result = await restoreAccessToken();
-    // console.log(result);
-    // setAccessToken(result.data?.restoreAccessToken.accessToken);
-    // }
+    // 2. 로그인 성공 시
+    if (result.data?.loginUser.accessToken) {
+      setAccessToken(result.data?.loginUser.accessToken);
+      router.push("/");
+    }
   };
 
-  return { control, signInSubmit, router, logOut };
+  return { control, signInSubmit, router, userLogOut };
 };

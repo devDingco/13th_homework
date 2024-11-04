@@ -3,16 +3,16 @@
 import { useQuery, gql, useMutation } from "@apollo/client";
 import Link from "next/link";
 
-const FETCH_BOARDS = gql`
-  query fetchBoards {
-    fetchBoards {
-      _id
-      writer
-      title
-      createdAt
-    }
-  }
-`;
+// const FETCH_BOARDS = gql`
+//   query fetchBoards {
+//     fetchBoards {
+//       _id
+//       writer
+//       title
+//       createdAt
+//     }
+//   }
+// `;
 
 const UPDATE_BOARD = gql`
   mutation {

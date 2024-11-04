@@ -4,4 +4,43 @@
 #menu {
   border-bottom: none;
   min-width: 400px;
+  display: flex;
+  gap: 0.9375rem;
+  font-size: 0.875rem;
+  & > li {
+    margin-left: 0.3125rem;
+    padding: 0 0.9375rem;
+  }
+
+  .active {
+    span {
+      color: var(--primary-color);
+    }
+    .subMenuParent {
+      .subMenu {
+        display: block;
+      }
+    }
+  }
+
+  .subMenuParent {
+    position: relative;
+
+    .subMenu {
+      display: none;
+      position: absolute;
+      white-space: nowrap;
+      top: 200%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+
+      li {
+        padding: 15px 20px;
+      }
+    }
+  }
 }
