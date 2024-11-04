@@ -60,11 +60,12 @@ export default function Login() {
     const accessToken = result.data?.loginUser?.accessToken;
     console.log(accessToken);
 
-    // 2. 받아온 accessToken을 globalState(주스탠드)에 저장하기
+    // 2. 받아온 accessToken을 globalState(주스탠드)에 저장하기 & 로컬에도 함께
     if (!accessToken) {
       alert("로그인에 실패했습니다. 다시 시도하세요");
     }
     setAccessToken(accessToken);
+    localStorage.setItem("accessToken", accessToken);
 
     // 3. 로그인 성공 페이지로 이동하기
     router.push("/boards");

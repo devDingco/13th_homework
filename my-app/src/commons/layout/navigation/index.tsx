@@ -3,15 +3,38 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RightOutlined } from "@ant-design/icons";
+import { gql, useQuery } from "@apollo/client";
+import { useRouter } from "next/navigation";
+
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+    }
+  }
+`;
 
 export default function LayoutNavigation() {
+  const router = useRouter();
+
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+
   const [selected, setSElected] = useState(""); // nav에서 선택한 항목을 선택함
 
   const handleClick = (item) => {
     setSElected(item);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인 후 이용 가능합니다!");
+      router.push("/authentication/login");
+    }
+  }, []);
 
   return (
     <>
@@ -67,6 +90,8 @@ export default function LayoutNavigation() {
           </div>
         </div>
         <div className={styles.navRight}>
+          <div>{data?.fetchUserLoggedIn.name}님 오늘도 좋은 하루 되세요!</div>
+
           {/* 로그인 안된다면?  이 화면*/}
           <div className={styles.loginBtnSection}>
             <Link href="/authentication/login">
@@ -76,6 +101,13 @@ export default function LayoutNavigation() {
               </button>
             </Link>
           </div>
+
+          {/* 나중에 로그아웃도 구현해주기 */}
+          {/* <div className={styles.loginBtnSection}>
+            <Link href="/authentication/login">
+              <button className={styles.loginBtn}>로그아웃</button>
+            </Link>
+          </div> */}
 
           {/* 로그인 된다면 이 화면 
            <div>

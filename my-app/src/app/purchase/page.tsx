@@ -1,7 +1,10 @@
-export default function purchase() {
+import PurchaseMain from "@/components/purchase/purchase-main";
+
+export default function purchaseMainPage() {
   return (
     <>
-      <div>구매하기 페이지로 사용됩니다.</div>
+      <div>구매하기 메인 페이지 입니다.</div>
+      <PurchaseMain />
     </>
   );
 }

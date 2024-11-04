@@ -1,0 +1,154 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+}
+
+.title {
+  width: 1000px;
+  margin: 40px 0;
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputText {
+  color: var(--gray-800, #333);
+
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.inputStar {
+  margin-left: 4px;
+  color: var(--red, #f66a6a);
+
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.input {
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  line-height: 24px; /* 150% */
+}
+
+.underLine {
+  margin: 40px 0;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+}
+
+.editerSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  line-height: 24px; /* 150% */
+  height: 477px;
+}
+
+/* 여기부터 주소 css */
+.addressSection {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+.addressSectionLeft {
+  width: 364px;
+  height: 100%;
+}
+
+.adressZipcode {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.adressZipcodeInput {
+  width: 80px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+
+  text-align: center;
+  color: var(--Gray-Gray-400, #ababab);
+  line-height: 24px; /* 150% */
+}
+
+.adressZipcodeBtn {
+  height: 48px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+
+.addressDetailInput {
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+
+  color: var(--Gray-Gray-400, #ababab);
+  line-height: 24px; /* 150% */
+}
+
+.coordinateArea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.coordinateSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coordinateInput {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--gray-100, #e4e4e4);
+
+  line-height: 24px; /* 150% */
+}
+
+.addressMap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 600px;
+  height: 93%;
+  flex-shrink: 0;
+  background: var(--gray-100, #e4e4e4);
+  border-radius: 16px;
+  border: 1px solid var(--gray-100, #e4e4e4);
+}
+
+.addressMap span {
+  color: var(--gray-600, #777);
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+}
