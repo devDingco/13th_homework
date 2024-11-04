@@ -1,5 +1,5 @@
 import { useRouter, usePathname } from "next/navigation";
-import { Calendar, BarChart2, User } from "lucide-react";
+import { Calendar, BarChart2, User, BookOpen, BookHeart } from "lucide-react";
 
 interface NavItem {
   icon: React.ElementType;
@@ -8,8 +8,10 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { icon: BookHeart, label: "나의 일기", path: "/diary" },
   { icon: Calendar, label: "감정 캘린더", path: "/calendar" },
   { icon: BarChart2, label: "감정 통계", path: "/statistics" },
+  { icon: BookOpen, label: "공개 일기", path: "/community" },
   { icon: User, label: "상담사 찾기", path: "/counselors" },
 ];
 

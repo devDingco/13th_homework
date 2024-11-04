@@ -135,10 +135,10 @@ export default function NewDiaryPage() {
   );
 
   return (
-    <div className="flex-1  bg-gray-50 min-h-screen">
+    <div className="flex-1 bg-gray-50 min-h-screen">
       {/* Header*/}
       <div className="fixed top-0 right-0 left-64 bg-white border-b border-gray-200 z-10">
-        <div className="max-w-5xl mx-auto px-8 py-4">
+        <div className="max-w-5xl mx-auto px-8 py-5">
           <div className="flex items-center justify-between">
             <button className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
               <ChevronLeft className="w-5 h-5 mr-1" />
