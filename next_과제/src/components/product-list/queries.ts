@@ -13,7 +13,10 @@ export const FETCH_TRAVELS = gql`
       pickedCount
       # travelproductAddress
       # buyer
-      # seller
+      seller {
+        name
+        picture
+      }
       soldAt
       createdAt
       updatedAt
