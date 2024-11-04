@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Close, Edit, Profile, ReplyIcon } from "../../icon";
-import ReplyWriting from "../../reply/writing";
 
 interface ICommentProps {
   isManaged?: boolean;
@@ -16,16 +15,6 @@ export default function Comment({
   contents,
   date,
 }: ICommentProps) {
-  const [isReplyOpened, setIsReplyOpened] = useState(false);
-
-  const onClickReply = () => {
-    setIsReplyOpened((prev) => !prev);
-  };
-
-  const onClickCancel = () => {
-    setIsReplyOpened((prev) => !prev);
-  };
-
   return (
     <div className={styles.comment__container}>
       <div className={styles.user__container}>
@@ -44,14 +33,6 @@ export default function Comment({
         <div className={styles.contents__container}>{contents}</div>
         <div className={styles.date__container}>{date}</div>
       </div>
-
-      {isManaged && isReplyOpened === false && (
-        <div className={styles.reply__container} onClick={onClickReply}>
-          <ReplyIcon />
-          <span className={styles.reply__label}>답변 하기</span>
-        </div>
-      )}
-      {isReplyOpened && <ReplyWriting handleCancel={onClickCancel} />}
     </div>
   );
 }

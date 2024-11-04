@@ -41,15 +41,3 @@
   font-weight: 400;
   font-size: 0.875rem;
 }
-
-.reply__container {
-  display: flex;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.reply__label {
-  color: #333333;
-  font-weight: 300;
-  font-size: 0.875rem;
-}
