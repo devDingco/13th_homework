@@ -157,6 +157,13 @@ export const useInput = () => {
         message: "내용은 300자 이내로 입력해 주세요.",
       },
     },
+    questionContents: {
+      required,
+      maxLength: {
+        value: 100,
+        message: "내용은 100자 이내로 입력해 주세요.",
+      },
+    },
   };
 
   return { formResister };
