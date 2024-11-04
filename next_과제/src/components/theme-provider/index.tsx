@@ -3,7 +3,6 @@
 import { ConfigProvider, theme as antdTheme, ThemeConfig } from "antd";
 import { useEffect, useState, useRef } from "react";
 import DarkModeBtn from "@/components/dark-mode-btn";
-import { StyleProvider } from "@ant-design/cssinjs";
 import locale from "antd/locale/ko_KR";
 
 export default function ThemeProvider({
@@ -44,7 +43,7 @@ export default function ThemeProvider({
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <StyleProvider hashPriority="high">
+    <>
       <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
       <ConfigProvider
         locale={locale}
@@ -53,6 +52,6 @@ export default function ThemeProvider({
       >
         <div ref={modalContainerRef}>{children}</div>
       </ConfigProvider>
-    </StyleProvider>
+    </>
   );
 }
