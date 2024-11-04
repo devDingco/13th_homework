@@ -75,7 +75,7 @@ type Mutation {
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
   signUp(signUpUser: signUpUser!): UserSchema!
-  login(loginUser: loginUser!): UserSchema!
+  login(loginUser: loginUser!): ID!
 }
 
 input CreateBoardInput {

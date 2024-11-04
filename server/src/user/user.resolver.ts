@@ -1,4 +1,4 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, ID, Mutation, Resolver } from '@nestjs/graphql';
 
 import { UserSchema } from './schema/user.schema';
 import { UserService } from './user.service';
@@ -15,7 +15,7 @@ export class UserResolver {
         return this.userService.createUser(signUpUser);
     }
 
-    @Mutation(() => UserSchema)
+    @Mutation(() => ID)
     async login(
         @Args('loginUser') loginUser: loginUser,
         @Context('res') res: Response,
@@ -31,6 +31,6 @@ export class UserResolver {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        return result.user;
+        return result.user.id;
     }
 }
