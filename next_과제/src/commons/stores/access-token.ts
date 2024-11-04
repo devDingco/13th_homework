@@ -1,11 +1,12 @@
 import { create } from "zustand";
 
-interface AccessTokenStore {
-  accessToken: string | null;
-  setAccessToken: (accessToken: string | null) => void;
+interface IUseAccessTokenStore {
+  accessToken: string;
+  setAccessToken: (newAccessToken: string) => void;
 }
 
-export const useAccessTokenStore = create<AccessTokenStore>((set) => ({
-  accessToken: null,
-  setAccessToken: (accessToken) => set(() => ({ accessToken })),
+export const useAccessTokenStore = create<IUseAccessTokenStore>((set) => ({
+  accessToken: "",
+  setAccessToken: (newAccessToken: string) =>
+    set(() => ({ accessToken: newAccessToken })),
 }));
