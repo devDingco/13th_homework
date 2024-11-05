@@ -1,34 +1,60 @@
 "use client"
 
-import { CreateBoardCommentDocument, FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
-import { useMutation } from "@apollo/client";
+import { CommentEditSuccessDocument, CreateBoardCommentDocument, FetchBoardCommentsDocument, FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
+import { ApolloError, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 
 
-export default function useBoardCommentWrite(){
+export const useBoardCommentWrite = (
+    comment: FetchBoardCommentsQuery["fetchBoardComments"][0] | null,
+    setCommentEdit: Dispatch<SetStateAction<boolean>>
+) => {
 
     const [star, setStar] = useState(0);
 
     const [createComment] = useMutation(CreateBoardCommentDocument);
+    const [commentEditSuccess] = useMutation(CommentEditSuccessDocument);
     const [commentWriter, setCommentWriter] = useState("");
     const [commentPassword, setCommentPassword] = useState("");
     const [commentContent, setCommentContent] = useState("");
+    const [modalContent, setModalContent] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [isActive, setIsActive] = useState(false)
 
     const params = useParams();
     const id = params.boardId.toString();
 
     const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
         setCommentWriter(event.target.value);
+
+        if(event.target.value !== "" && commentPassword !== "" && commentContent != "") return setIsActive(true)
+        setIsActive(false)            
     };
 
     const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setCommentPassword(event.target.value);
+
+        if(commentWriter !== "" && event.target.value !== "" && commentContent != "") return setIsActive(true)
+        setIsActive(false)
     };
 
     const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setCommentContent(event.target.value);
+
+        if(commentWriter !== "" && commentPassword !== "" && event.target.value != "") return setIsActive(true)
+        setIsActive(false)
     };
+
+    const registerColor = {
+        backgroundColor:"#c3c3c3",
+        color:"#E4E4E4"
+    }
+    const registerActive = {
+        backgroundColor:"#2974E5",
+        color:"#fff"
+    }  
 
     const onChangeStar = (event: number) => {
         setStar(event);
@@ -42,7 +68,7 @@ export default function useBoardCommentWrite(){
                         writer: commentWriter,
                         password: commentPassword,
                         contents: commentContent,
-                        rating: 0,
+                        rating: star,
                     },
                     boardId: id,
                 },
@@ -55,6 +81,9 @@ export default function useBoardCommentWrite(){
             });
             console.log("댓글등록클릭",data);
             if(data?.createBoardComment){
+                setCommentWriter("");
+                setCommentContent("");
+                setCommentPassword("");
                 alert("댓글이 등록 되었습니다.");
                 setCommentWriter("");
                 console.log("작성자: ", commentWriter);
@@ -71,6 +100,51 @@ export default function useBoardCommentWrite(){
         }
     }
 
+    const handleOk = () => {
+        setIsModalOpen(false);
+        if (comment) setCommentEdit(false);
+    };
+        const handleCancel = () => {
+        setIsModalOpen(false);
+        if (comment) setCommentEdit(false);
+    };
+
+    // 댓글 수정
+    const changeComment = async () => {
+        try {
+            if (comment) {
+              const {data} = await commentEditSuccess({
+                variables: {
+                  boardCommentId: comment?._id,
+                  updateBoardCommentInput: {
+                    contents: commentContent,
+                    rating: star,
+                  },
+                  password: commentPassword,
+                },
+                refetchQueries: [
+                  {
+                    query: FetchBoardCommentsDocument,
+                    // variables: { page: 1, boardCommentId: comment?._id },
+                    variables: {page:1, boardId:id}
+                  },
+                ],
+              });
+      
+              if (data) {
+                setModalContent("댓글 수정이 완료 되었습니다");
+                setIsModalOpen(true);
+              }
+            }
+          } catch (err: any) {
+            const errMsg = (err as ApolloError).graphQLErrors[0] as any;
+            console.error(err);
+            // 비밀번호 오류
+            setModalContent(errMsg.message);
+            setIsModalOpen(true);
+          }
+    }
+
     return{
         commentContent,
         commentPassword,
@@ -83,5 +157,13 @@ export default function useBoardCommentWrite(){
         setCommentWriter,
         CreateBoardComment,
         onChangeStar,
+        isActive,
+        registerColor,
+        registerActive,
+        changeComment,
+        isModalOpen,
+        handleOk,
+        handleCancel,
+        modalContent,
     }
 }

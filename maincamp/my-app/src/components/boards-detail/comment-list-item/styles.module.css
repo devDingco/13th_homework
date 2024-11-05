@@ -1,0 +1,62 @@
+.d_flex{
+    display:flex;
+    align-items:center;
+}
+.comment_list_wrap{
+    width:1280px;
+    margin:0 auto;
+}
+.comment_list_container{
+    margin-bottom:40px;
+    border-bottom:1px solid #e4e4e4;
+    padding-bottom:40px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+.comment_list_container:last-child{
+    border-style:none;
+    padding:0;
+}
+
+.profile{
+    height:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.profile .profileIcon{
+    width:24px;
+    height:24px;
+    background:url(../../../../public/images/img.png) no-repeat;
+    margin-right:8px;
+}
+.profile .writer{
+    font-size:14px;
+    font-weight:300;
+    color:#5f5f5f;
+    line-height:20px;
+    margin-right:8px;
+}
+
+.profile .editIcon{
+    width:20px;
+    height:20px;
+    background:url(../../../../public/images/edit.png) no-repeat;
+    margin-right:8px;
+}
+.profile .closeIcon{
+    width:20px;
+    height:20px;
+    background:url(../../../../public/images/close.png) no-repeat;
+}
+
+.comment_text{
+    font-size:16px;
+    color:#333;
+}
+
+.comment_date{
+    font-size:14px;
+    color:#818181;
+}
