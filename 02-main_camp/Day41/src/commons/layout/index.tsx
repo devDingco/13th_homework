@@ -5,6 +5,7 @@ import LayoutNavigation from "./navigation";
 import LayoutBanner from "./banner";
 import styles from "./styles.module.css";
 import { ILayout } from "./types";
+import path from "path";
 
 const HIDDEN_BANNERS = [
   "/boards/new",
@@ -12,7 +13,10 @@ const HIDDEN_BANNERS = [
   "/openapis",
   "/myapis/new",
   "/mypage",
+  "/login",
 ];
+
+const HIDDEN_NAVIGATION = ["/login"];
 
 export default function Layout({ children }: ILayout) {
   const pathname = usePathname();
@@ -21,9 +25,11 @@ export default function Layout({ children }: ILayout) {
   const isHiddenBanner: boolean =
     HIDDEN_BANNERS.includes(pathname) || params[3] === "edit";
 
+  const isHiddenNavigation = HIDDEN_NAVIGATION.includes(pathname);
+
   return (
     <div className={styles.layoutContainer}>
-      <LayoutNavigation />
+      {!isHiddenNavigation && <LayoutNavigation />}
       {!isHiddenBanner && <LayoutBanner />}
       <div className={styles.childrenContainer}>{children}</div>
     </div>
