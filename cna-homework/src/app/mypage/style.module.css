@@ -1,0 +1,124 @@
+.mypageAllContainer {
+  /* background-color: aliceblue; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.mypageContainer {
+  /* background-color: antiquewhite; */
+  width: 1280px;
+  height: 1320px;
+}
+.mypageTitleArea {
+  /* background-color: aqua; */
+  width: 100%;
+  height: 36px;
+  margin: 40px 0;
+}
+.mypageTitle {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+}
+.mypageContentsArea {
+  /* background-color: aquamarine; */
+  width: 100%;
+  height: 1164px;
+}
+.myInfoArea {
+  /* background-color: beige; */
+  width: 100%;
+  height: 332px;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 24px;
+}
+.myInfoProfile {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 1232px;
+  height: 45px;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 12px 0;
+  /* background-color: antiquewhite; */
+  box-sizing: content-box;
+}
+.myInfoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  width: 1232px;
+  /* background-color: aliceblue; */
+  height: 24px;
+}
+.profileImg {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.profileImg p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #333333;
+}
+.myPoint {
+  display: flex;
+  align-items: center;
+  width: 1232px;
+  height: 24px;
+  gap: 8px;
+  /* background-color: aqua; */
+  padding: 12px 0;
+  box-sizing: content-box;
+  border-bottom: 1px solid #e4e4e4;
+}
+.myPoint p {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.myInfoMenu {
+  width: 1232px;
+  height: 136px;
+  /* background-color: blue; */
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.myInfo_oneMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1232px;
+  height: 40px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.myInfo_oneMenu p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.menuTab {
+  /* background-color: aquamarine; */
+  width: 100%;
+  height: 792px;
+  margin-top: 40px;
+}
+/* 탭메뉴 활성화시 스타일 */
+.myInfo_oneMenu:hover {
+  background-color: #f2f2f2; 
+  border-radius: 8px;
+}
+
+.active {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+.active p {
+  font-weight: 600;
+}

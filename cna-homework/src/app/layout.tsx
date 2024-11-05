@@ -24,13 +24,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-
-export default function RootLayout(props: Props) {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ApolloUploadSetting>
-          <Layout>{props.children}</Layout>
+          <Layout>{children}</Layout>
         </ApolloUploadSetting>
       </body>
     </html>
