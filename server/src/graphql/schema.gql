@@ -80,6 +80,7 @@ type Mutation {
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
   signUp(signUpUser: signUpUser!): UserSchema!
   login(loginUser: loginUser!): UserIdSchema!
+  logout: Boolean!
 }
 
 input CreateBoardInput {

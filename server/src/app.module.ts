@@ -10,6 +10,7 @@ import { BoardPasswordModule } from './board/board-password/board-password.modul
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
+import { RedisModule } from '@nestjs-modules/ioredis';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { mongoDBConfig } from 'configs/mongoDB.config';
@@ -30,6 +31,12 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
             name: 'PostgreSQL',
             useClass: postgreSQLConfig,
         }),
+        // RedisModule.forRootAsync({
+        //     // config: {
+        //     //     host: process.env.REDIS_HOST || 'localhost',
+        //     //     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+        //     // },
+        // }),
 
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
