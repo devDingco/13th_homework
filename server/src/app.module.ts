@@ -31,12 +31,12 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
             name: 'PostgreSQL',
             useClass: postgreSQLConfig,
         }),
-        // RedisModule.forRootAsync({
-        //     // config: {
-        //     //     host: process.env.REDIS_HOST || 'localhost',
-        //     //     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-        //     // },
-        // }),
+        RedisModule.forRootAsync({
+            useFactory: () => ({
+                type: 'single',
+                url: 'redis://localhost:6379',
+            }),
+        }),
 
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
