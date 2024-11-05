@@ -4,9 +4,12 @@ import Image from "next/image";
 import useBoardDetail from "./hook";
 import CommentWrite from "../comment-write";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
+import YouTube from "react-youtube";
 
 export default function BoardDetail() {
-  const { data, onClickMoveEdit, onClickMoveBoards } = useBoardDetail();
+  const { data, onClickMoveEdit, onClickMoveBoards, youtubeOpts } =
+    useBoardDetail();
 
   return (
     <div className="flex flex-col w-[1280px] gap-4 mx-auto my-0 py-10">
@@ -41,21 +44,32 @@ export default function BoardDetail() {
               alt="linkImg"
               className="w-6 h-6"
             />
-            <Image
-              src="/img/location.svg"
-              alt="locationImg"
-              width={24}
-              height={24}
-            />
+            <Tooltip
+              title={data?.fetchBoard.boardAddress?.address}
+              placement="bottomRight"
+            >
+              <Image
+                src="/img/location.svg"
+                alt="locationImg"
+                width={24}
+                height={24}
+              />
+            </Tooltip>
           </div>
         </div>
       </div>
-      <div className="w-16 h-16">이미지 넣을 자리</div>
+      <div className="size-16">이미지 넣을 자리</div>
       <div className="font-normal text-[16px] leading-6">
         {data?.fetchBoard.contents}
       </div>
       <div className="flex justify-center items-center bg-[#f2f2f2] py-6">
-        <div className="w-[822px] h-[464px]">유튜브넣을자리</div>
+        <div className="w-[822px] h-[464px]">
+          {" "}
+          <YouTube
+            videoId={data?.fetchBoard.youtubeUrl?.split("=")[1]}
+            opts={youtubeOpts}
+          />
+        </div>
       </div>
       <div className="flex justify-center gap-6">
         <div className="flex flex-col gap-1">

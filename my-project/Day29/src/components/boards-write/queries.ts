@@ -7,6 +7,12 @@ const CREATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -18,7 +24,13 @@ const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
       createdAt
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

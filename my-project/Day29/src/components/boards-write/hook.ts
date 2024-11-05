@@ -15,6 +15,7 @@ export default function useBoardNew(props) {
   const router = useRouter();
   const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [youtubeUrl, setYoutubUrl] = useState("");
   const [juso, setJuso] = useState({
     zipcode: "",
     address: "",
@@ -50,6 +51,10 @@ export default function useBoardNew(props) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubUrl(event.target.value);
+  };
+
   const onChangeInput = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -72,6 +77,7 @@ export default function useBoardNew(props) {
         variables: {
           createBoardInput: {
             ...input,
+            youtubeUrl,
             boardAddress: {
               ...juso,
             },
@@ -186,6 +192,7 @@ export default function useBoardNew(props) {
     errorMessage,
     isModalOpen,
     juso,
+    youtubeUrl,
     onChangeInput,
     onClickRegister,
     onClickEdit,
@@ -195,5 +202,6 @@ export default function useBoardNew(props) {
     handleCancel,
     handleComplete,
     onChangeAddress,
+    onChangeYoutubeUrl,
   };
 }
