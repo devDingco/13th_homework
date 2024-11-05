@@ -5,26 +5,34 @@ import React, { useEffect, useRef, useState } from "react";
 import NewFormText from "./NewFormText";
 import NewFormPhoto from "./NewFormPhoto";
 import NewFormButton from "./NewFormButton";
-import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "../../queries";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+} from "@/commons/graphql/graphql";
+import { Button } from "@/components/ui/button";
 
-export default function NewForm() {
+export default function NewForm({ isEdit }: INewFormProps) {
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+
   const router = useRouter();
   const params = useParams();
-  const isEdit = Boolean(params.boardId);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: params.boardId },
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: params.boardId as string },
     skip: !isEdit,
   });
+
   const [inputValue, setInputValue] = useState<IInputValue>(
     isEdit
       ? {
-          author: data?.fetchBoard?.writer,
+          author: data?.fetchBoard.writer,
           password: "",
-          title: data?.fetchBoard?.title,
-          content: data?.fetchBoard?.contents,
+          title: data?.fetchBoard.title,
+          content: data?.fetchBoard.contents,
         }
       : {
           author: "",
@@ -37,9 +45,6 @@ export default function NewForm() {
 
   const isPromptShown = useRef(false);
   // const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
-
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onChangeInputValue = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -61,7 +66,7 @@ export default function NewForm() {
       const result = await updateBoard({
         variables: {
           updateBoardInput: dummyInput,
-          boardId: params.boardId,
+          boardId: params.boardId as string,
           password: inputPassword,
         },
       });
@@ -76,6 +81,7 @@ export default function NewForm() {
 
   useEffect(() => {
     if (isEdit && isPromptShown.current) return; // 이미 실행되었다면 중단
+    if (!isEdit) return;
     isPromptShown.current = true; // 첫 실행 이후 상태 업데이트
     promptForPassword(); // 비동기 작업 호출
   }, []);
@@ -105,14 +111,14 @@ export default function NewForm() {
         variables: {
           createBoardInput: {
             writer: inputValue.author,
-            title: inputValue.title,
+            title: String(inputValue.title),
             password: inputValue.password,
-            contents: inputValue.content,
+            contents: String(inputValue.content),
           },
         },
       });
       console.log("등록성공:", result.data);
-      router.push(`/boards/${result.data.createBoard._id}`);
+      router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
       console.error("GraphQL 요청 오류:", error);
     }
@@ -122,14 +128,14 @@ export default function NewForm() {
     // [x] : updateInput
     const updateInput: any = {};
     if (
-      inputValue.title.trim() &&
+      inputValue.title?.trim() &&
       inputValue.title !== data?.fetchBoard?.title
     ) {
       updateInput.title = inputValue.title;
     }
 
     if (
-      inputValue.content.trim() &&
+      inputValue.content?.trim() &&
       inputValue.content !== data?.fetchBoard?.contents
     ) {
       updateInput.contents = inputValue.content;
@@ -142,7 +148,7 @@ export default function NewForm() {
           variables: {
             updateBoardInput: updateInput,
             password: inputValue.password,
-            boardId: params.boardId,
+            boardId: params.boardId as string,
           },
         });
 
@@ -163,12 +169,15 @@ export default function NewForm() {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-10 py-10">
+      <div className="prose-b_20_28">
+        {!isEdit ? "게시물 등록" : "게시물 수정"}
+      </div>
       <div className="input-area">
         <div className="id-pw-area">
           <NewFormText
             title={"author"}
-            value={inputValue.author}
+            value={`${inputValue.author}`}
             onChange={onChangeInputValue}
             disabled={isEdit && true}
           />
@@ -189,7 +198,16 @@ export default function NewForm() {
           value={inputValue.content}
           onChange={onChangeInputValue}
         />
+        <div>
+          <div className="flex justify-start items-end gap-2">
+            <NewFormText title={"addressNum"} />
+            <Button variant={"outlined"}>우편번호 검색</Button>
+          </div>
+          <NewFormText title={"addressInput"} />
+          <NewFormText title={"addressDetail"} />
+        </div>
         <NewFormText title={"youtube"} onChange={onChangeInputValue} />
+        <hr />
         <NewFormPhoto title={"photo"} />
       </div>
       <div className="button-area">
@@ -200,6 +218,6 @@ export default function NewForm() {
           onClick={isEdit ? onClickUpdate : onClickSubmit}
         />
       </div>
-    </>
+    </div>
   );
 }
