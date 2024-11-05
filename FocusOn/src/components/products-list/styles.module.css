@@ -132,29 +132,26 @@
 
 .service_button {
   display: flex;
+  white-space: nowrap;
   padding: 12px 16px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: 8px;
   background-color: var(--main-color);
-
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-weight: 500;
-  width: 150px;
-  border: none; /* 버튼 테두리 제거 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  border: none;
+  transition: all 0.3s ease;
 }
 
 .service_button:hover {
-  background-color: var(--main-color-hover); /* 호버 시 배경색 변경 */
-  transform: translateY(-2px); /* 호버 시 약간 위로 이동 */
+  background-color: var(--main-color-hover);
 }
 
 .service_button:active {
-  transform: translateY(0); /* 클릭 시 원래 위치로 복원 */
+  transform: translateY(0);
 }
 
 .date_picker {
@@ -202,12 +199,12 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 트랜지션 효과 추가 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service_card:hover {
-  transform: translateY(-5px); /* 호버 시 카드가 위로 이동 */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .tags {
@@ -237,7 +234,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 15px; */
 }
 
 .author {
