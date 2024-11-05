@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div>
+    <div className="w-full h-[516px]">
       <Carousel autoplay>
         <div className="w-screen h-[516px]">
           <Image src="/img/banner1" alt="banner1Img" fill objectFit="cover" />
