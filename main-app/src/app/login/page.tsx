@@ -8,14 +8,16 @@ import Input from "@/components/Atoms/_Input";
 import Button from "@/components/Atoms/_Button";
 import InputField from "@/components/Molecules/_InputField";
 
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { useRouter } from "next/navigation";
 import useLoginUser from "@/common/hooks/useLoginUser";
 
 export default function LoginPage() {
     const router = useRouter();
-    const { isLogIn, setIsLogIn, loginError, onLoginChange, onLoginInClick, onSignUpChange, onSignUpClick } =
+    const { loginError, onLoginChange, onLoginInClick, onSignUpChange, onSignUpClick } =
         useLoginUser();
+
+    const [isLogIn, setIsLogIn] = useState(true);
 
     return (
         <div style={CSSLoginWrap}>
@@ -42,11 +44,18 @@ export default function LoginPage() {
 
                             <Input id="email_ID" onChange={onLoginChange} />
                             <Input id="password_ID" onChange={onLoginChange} />
-                            {loginError && <div style={CSSValidText}>아이디 또는 비밀번호를 확인해 주세요.</div>}
+                            {loginError && (
+                                <div style={CSSValidText}>
+                                    아이디 또는 비밀번호를 확인해 주세요.
+                                </div>
+                            )}
 
                             <div style={CSSButtonWrap}>
                                 <Button label="로그인" onClick={onLoginInClick} />
-                                <Button label="회원가입" onClick={() => setIsLogIn((prev) => !prev)} />
+                                <Button
+                                    label="회원가입"
+                                    onClick={() => setIsLogIn((prev) => !prev)}
+                                />
                             </div>
                         </>
                     ) : (
@@ -59,7 +68,11 @@ export default function LoginPage() {
                             <InputField id="email_ID" onChange={onSignUpChange} required />
                             <InputField id="name_ID" onChange={onSignUpChange} required />
                             <InputField id="password_ID" onChange={onSignUpChange} required />
-                            <InputField id="passwordConfirm_ID" onChange={onSignUpChange} required />
+                            <InputField
+                                id="passwordConfirm_ID"
+                                onChange={onSignUpChange}
+                                required
+                            />
 
                             <div style={CSSButtonWrap}>
                                 <Button label="취소" onClick={() => setIsLogIn((prev) => !prev)} />

@@ -2,20 +2,20 @@
 
 import Image from "next/image";
 import logo from "/public/img/logo_raw.png";
-import { CSSProperties, MouseEvent, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useQuery } from "@apollo/client";
 import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 
 import type { MenuProps } from "antd";
-import { Button, Dropdown, message, Space } from "antd";
+import { Button, Dropdown, Space } from "antd";
 import { LogoutOutlined, ThunderboltFilled, UserOutlined, WalletOutlined } from "@ant-design/icons";
 import { css } from "@/common/styled-system/css";
 
 export default function LayoutNav() {
-    const [isSelect, setIsSelect] = useState("mainPage");
     const router = useRouter();
+    const [isSelect, setIsSelect] = useState("mainPage");
 
     const { data: login } = useQuery(FetchUserLoggedInDocument);
 

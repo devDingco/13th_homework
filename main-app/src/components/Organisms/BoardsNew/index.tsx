@@ -22,16 +22,43 @@ export default function BoardsNewUI() {
         imageUrl,
     });
 
-    const valid = submitInput.author_ID && submitInput.password_ID && submitInput.title_ID && submitInput.content_ID;
+    const valid =
+        submitInput.author_ID &&
+        submitInput.password_ID &&
+        submitInput.title_ID &&
+        submitInput.content_ID;
 
     return (
         <section>
             <header>게시글 작성</header>
 
-            <InputField id="author_ID" value={submitInput.author_ID} onChange={handleChange} required />
-            <InputField id="password_ID" value={submitInput.password_ID} onChange={handleChange} required />
-            <InputField id="title_ID" value={submitInput.title_ID} onChange={handleChange} required />
-            <InputField id="content_ID" value={submitInput.content_ID} onChange={handleChange} required textarea />
+            <div>
+                <InputField
+                    id="author_ID"
+                    value={submitInput.author_ID}
+                    onChange={handleChange}
+                    required
+                />
+                <InputField
+                    id="password_ID"
+                    value={submitInput.password_ID}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <InputField
+                id="title_ID"
+                value={submitInput.title_ID}
+                onChange={handleChange}
+                required
+            />
+            <InputField
+                id="content_ID"
+                value={submitInput.content_ID}
+                onChange={handleChange}
+                required
+                textarea
+            />
 
             <AddressField
                 onChange={handleChange}
