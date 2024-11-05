@@ -1,0 +1,1075 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">server documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  SubscriptionResolverObject</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/generated/graphql.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#resolve" 
+>
+                                            resolve
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#subscribe" 
+>
+                                            subscribe
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="resolve"></a>
+                                        <span class="name "><b>resolve</b>
+                                            <a href="#resolve">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>resolve:         <code><a href="../miscellaneous/typealiases.html#SubscriptionResolveFn" target="_self" >SubscriptionResolveFn&lt;TResult | any | TContext | TArgs&gt;</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#SubscriptionResolveFn" target="_self" >SubscriptionResolveFn&lt;TResult | any | TContext | TArgs&gt;</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="subscribe"></a>
+                                        <span class="name "><b>subscribe</b>
+                                            <a href="#subscribe">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>subscribe:         <code><a href="../miscellaneous/typealiases.html#SubscriptionSubscribeFn" target="_self" >SubscriptionSubscribeFn&lt;any | TParent | TContext | TArgs&gt;</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#SubscriptionSubscribeFn" target="_self" >SubscriptionSubscribeFn&lt;any | TParent | TContext | TArgs&gt;</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+    GraphQLResolveInfo,
+    GraphQLScalarType,
+    GraphQLScalarTypeConfig,
+} from &#x27;graphql&#x27;;
+export type Maybe&lt;T&gt; &#x3D; T | null;
+export type InputMaybe&lt;T&gt; &#x3D; Maybe&lt;T&gt;;
+export type Exact&lt;T extends { [key: string]: unknown }&gt; &#x3D; {
+    [K in keyof T]: T[K];
+};
+export type MakeOptional&lt;T, K extends keyof T&gt; &#x3D; Omit&lt;T, K&gt; &amp; {
+    [SubKey in K]?: Maybe&lt;T[SubKey]&gt;;
+};
+export type MakeMaybe&lt;T, K extends keyof T&gt; &#x3D; Omit&lt;T, K&gt; &amp; {
+    [SubKey in K]: Maybe&lt;T[SubKey]&gt;;
+};
+export type MakeEmpty&lt;
+    T extends { [key: string]: unknown },
+    K extends keyof T,
+&gt; &#x3D; { [_ in K]?: never };
+export type Incremental&lt;T&gt; &#x3D;
+    | T
+    | {
+          [P in keyof T]?: P extends &#x27; $fragmentName&#x27; | &#x27;__typename&#x27;
+              ? T[P]
+              : never;
+      };
+export type RequireFields&lt;T, K extends keyof T&gt; &#x3D; Omit&lt;T, K&gt; &amp; {
+    [P in K]-?: NonNullable&lt;T[P]&gt;;
+};
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars &#x3D; {
+    ID: { input: string; output: string };
+    String: { input: string; output: string };
+    Boolean: { input: boolean; output: boolean };
+    Int: { input: number; output: number };
+    Float: { input: number; output: number };
+    /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+    DateTime: { input: any; output: any };
+};
+
+export type BoardAddressInput &#x3D; {
+    address: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    detailAddress: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    zoneCode: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+};
+
+export type BoardAddressOutput &#x3D; {
+    __typename?: &#x27;BoardAddressOutput&#x27;;
+    address: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    detailAddress: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    zoneCode: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+};
+
+export type BoardCommentResponseDto &#x3D; {
+    __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+    _id: Scalars[&#x27;ID&#x27;][&#x27;output&#x27;];
+    author: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    content: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    createdAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+    parentId?: Maybe&lt;Scalars[&#x27;String&#x27;][&#x27;output&#x27;]&gt;;
+    rating?: Maybe&lt;Scalars[&#x27;Int&#x27;][&#x27;output&#x27;]&gt;;
+    replies?: Maybe&lt;Array&lt;BoardCommentResponseDto&gt;&gt;;
+    updatedAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+};
+
+export type BoardPaginationResponse &#x3D; {
+    __typename?: &#x27;BoardPaginationResponse&#x27;;
+    result: Array&lt;BoardSchema&gt;;
+    totalCount: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+};
+
+export type BoardReactionSchema &#x3D; {
+    __typename?: &#x27;BoardReactionSchema&#x27;;
+    _id: Scalars[&#x27;ID&#x27;][&#x27;output&#x27;];
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    createdAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+    hate: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    like: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    updatedAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+};
+
+export type BoardSchema &#x3D; {
+    __typename?: &#x27;BoardSchema&#x27;;
+    _id: Scalars[&#x27;ID&#x27;][&#x27;output&#x27;];
+    author: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    boardAddressOutput?: Maybe&lt;BoardAddressOutput&gt;;
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    content: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    createdAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+    imageUrl?: Maybe&lt;Array&lt;Scalars[&#x27;String&#x27;][&#x27;output&#x27;]&gt;&gt;;
+    title: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    updatedAt: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+    youtubeUrl?: Maybe&lt;Scalars[&#x27;String&#x27;][&#x27;output&#x27;]&gt;;
+};
+
+export type CreateBoardCommentInput &#x3D; {
+    author: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    content: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    parentId?: InputMaybe&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;;
+    password: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    rating?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type CreateBoardInput &#x3D; {
+    author: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    boardAddressInput?: InputMaybe&lt;Array&lt;BoardAddressInput&gt;&gt;;
+    content: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    imageUrl?: InputMaybe&lt;Array&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;&gt;;
+    password: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    title: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    youtubeUrl?: InputMaybe&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type Mutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    clearBoard: Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;];
+    createBoard: BoardSchema;
+    createBoardComment: BoardCommentResponseDto;
+    deleteBoard: Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;];
+    deleteBoardComment: Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;];
+    isPasswordCorrect: Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;];
+    updateBoard: BoardSchema;
+    updateBoardComment: BoardCommentResponseDto;
+};
+
+export type MutationCreateBoardArgs &#x3D; {
+    createBoardInput: CreateBoardInput;
+};
+
+export type MutationCreateBoardCommentArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    createBoardComment: CreateBoardCommentInput;
+};
+
+export type MutationDeleteBoardArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+};
+
+export type MutationDeleteBoardCommentArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    commentId: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+};
+
+export type MutationIsPasswordCorrectArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    password: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+};
+
+export type MutationUpdateBoardArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    updateBoardInput: UpdateBoardInput;
+};
+
+export type MutationUpdateBoardCommentArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    commentId: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    updateBoardComment: UpdateBoardCommentInput;
+};
+
+export type Query &#x3D; {
+    __typename?: &#x27;Query&#x27;;
+    getBoard: BoardSchema;
+    getBoardComment: Array&lt;BoardCommentResponseDto&gt;;
+    getBoardReaction: BoardReactionSchema;
+    getBoards: BoardPaginationResponse;
+};
+
+export type QueryGetBoardArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+};
+
+export type QueryGetBoardCommentArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    page?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type QueryGetBoardReactionArgs &#x3D; {
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+};
+
+export type QueryGetBoardsArgs &#x3D; {
+    page?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+    take?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type UpdateBoardCommentInput &#x3D; {
+    content: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    parentId?: InputMaybe&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;;
+    password: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    rating?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type UpdateBoardInput &#x3D; {
+    boardAddressInput?: InputMaybe&lt;Array&lt;BoardAddressInput&gt;&gt;;
+    content: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    imageUrl?: InputMaybe&lt;Array&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;&gt;;
+    title: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+    youtubeUrl?: InputMaybe&lt;Scalars[&#x27;String&#x27;][&#x27;input&#x27;]&gt;;
+};
+
+export type CreateBoardCommentMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    createBoardComment: CreateBoardCommentInput;
+}&gt;;
+
+export type CreateBoardCommentMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    createBoardComment: {
+        __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+        author: string;
+        content: string;
+        rating?: number | null;
+        parentId?: string | null;
+        _id: string;
+        createdAt: any;
+        replies?: Array&lt;{
+            __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+            author: string;
+            content: string;
+            createdAt: any;
+        }&gt; | null;
+    };
+};
+
+export type UpdateBoardCommentMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    updateBoardComment: UpdateBoardCommentInput;
+    commentId: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type UpdateBoardCommentMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    updateBoardComment: {
+        __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+        author: string;
+        content: string;
+        rating?: number | null;
+        parentId?: string | null;
+        _id: string;
+        createdAt: any;
+        replies?: Array&lt;{
+            __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+            author: string;
+            content: string;
+            createdAt: any;
+        }&gt; | null;
+    };
+};
+
+export type DeleteBoardCommentMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    commentId: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type DeleteBoardCommentMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    deleteBoardComment: boolean;
+};
+
+export type IsPasswordCorrectMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    password: Scalars[&#x27;String&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type IsPasswordCorrectMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    isPasswordCorrect: boolean;
+};
+
+export type CreateBoardMutationVariables &#x3D; Exact&lt;{
+    createBoardInput: CreateBoardInput;
+}&gt;;
+
+export type CreateBoardMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    createBoard: {
+        __typename?: &#x27;BoardSchema&#x27;;
+        author: string;
+        title: string;
+        content: string;
+        imageUrl?: Array&lt;string&gt; | null;
+        youtubeUrl?: string | null;
+        createdAt: any;
+        boardAddressOutput?: {
+            __typename?: &#x27;BoardAddressOutput&#x27;;
+            zoneCode: number;
+            address: string;
+            detailAddress: string;
+        } | null;
+    };
+};
+
+export type UpdateBoardMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    updateBoardInput: UpdateBoardInput;
+}&gt;;
+
+export type UpdateBoardMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    updateBoard: {
+        __typename?: &#x27;BoardSchema&#x27;;
+        author: string;
+        title: string;
+        content: string;
+        imageUrl?: Array&lt;string&gt; | null;
+        youtubeUrl?: string | null;
+        createdAt: any;
+        boardAddressOutput?: {
+            __typename?: &#x27;BoardAddressOutput&#x27;;
+            zoneCode: number;
+            address: string;
+            detailAddress: string;
+        } | null;
+    };
+};
+
+export type DeleteBoardMutationVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type DeleteBoardMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    deleteBoard: boolean;
+};
+
+export type ClearBoardMutationVariables &#x3D; Exact&lt;{ [key: string]: never }&gt;;
+
+export type ClearBoardMutation &#x3D; {
+    __typename?: &#x27;Mutation&#x27;;
+    clearBoard: boolean;
+};
+
+export type GetBoardCommentQueryVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+    page?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+}&gt;;
+
+export type GetBoardCommentQuery &#x3D; {
+    __typename?: &#x27;Query&#x27;;
+    getBoardComment: Array&lt;{
+        __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+        author: string;
+        content: string;
+        rating?: number | null;
+        parentId?: string | null;
+        _id: string;
+        createdAt: any;
+        replies?: Array&lt;{
+            __typename?: &#x27;BoardCommentResponseDTO&#x27;;
+            author: string;
+            content: string;
+            createdAt: any;
+        }&gt; | null;
+    }&gt;;
+};
+
+export type GetBoardReactionQueryVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type GetBoardReactionQuery &#x3D; {
+    __typename?: &#x27;Query&#x27;;
+    getBoardReaction: {
+        __typename?: &#x27;BoardReactionSchema&#x27;;
+        like: number;
+        hate: number;
+    };
+};
+
+export type GetBoardsQueryVariables &#x3D; Exact&lt;{
+    page?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+    take?: InputMaybe&lt;Scalars[&#x27;Int&#x27;][&#x27;input&#x27;]&gt;;
+}&gt;;
+
+export type GetBoardsQuery &#x3D; {
+    __typename?: &#x27;Query&#x27;;
+    getBoards: {
+        __typename?: &#x27;BoardPaginationResponse&#x27;;
+        totalCount: number;
+        result: Array&lt;{
+            __typename?: &#x27;BoardSchema&#x27;;
+            author: string;
+            title: string;
+            boardId: number;
+            createdAt: any;
+        }&gt;;
+    };
+};
+
+export type GetBoardQueryVariables &#x3D; Exact&lt;{
+    boardId: Scalars[&#x27;Int&#x27;][&#x27;input&#x27;];
+}&gt;;
+
+export type GetBoardQuery &#x3D; {
+    __typename?: &#x27;Query&#x27;;
+    getBoard: {
+        __typename?: &#x27;BoardSchema&#x27;;
+        author: string;
+        title: string;
+        content: string;
+        imageUrl?: Array&lt;string&gt; | null;
+        youtubeUrl?: string | null;
+        createdAt: any;
+        boardAddressOutput?: {
+            __typename?: &#x27;BoardAddressOutput&#x27;;
+            zoneCode: number;
+            address: string;
+            detailAddress: string;
+        } | null;
+    };
+};
+
+export type ResolverTypeWrapper&lt;T&gt; &#x3D; Promise&lt;T&gt; | T;
+
+export type ResolverWithResolve&lt;TResult, TParent, TContext, TArgs&gt; &#x3D; {
+    resolve: ResolverFn&lt;TResult, TParent, TContext, TArgs&gt;;
+};
+export type Resolver&lt;TResult, TParent &#x3D; {}, TContext &#x3D; {}, TArgs &#x3D; {}&gt; &#x3D;
+    | ResolverFn&lt;TResult, TParent, TContext, TArgs&gt;
+    | ResolverWithResolve&lt;TResult, TParent, TContext, TArgs&gt;;
+
+export type ResolverFn&lt;TResult, TParent, TContext, TArgs&gt; &#x3D; (
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; Promise&lt;TResult&gt; | TResult;
+
+export type SubscriptionSubscribeFn&lt;TResult, TParent, TContext, TArgs&gt; &#x3D; (
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; AsyncIterable&lt;TResult&gt; | Promise&lt;AsyncIterable&lt;TResult&gt;&gt;;
+
+export type SubscriptionResolveFn&lt;TResult, TParent, TContext, TArgs&gt; &#x3D; (
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; TResult | Promise&lt;TResult&gt;;
+
+export interface SubscriptionSubscriberObject&lt;
+    TResult,
+    TKey extends string,
+    TParent,
+    TContext,
+    TArgs,
+&gt; {
+    subscribe: SubscriptionSubscribeFn&lt;
+        { [key in TKey]: TResult },
+        TParent,
+        TContext,
+        TArgs
+    &gt;;
+    resolve?: SubscriptionResolveFn&lt;
+        TResult,
+        { [key in TKey]: TResult },
+        TContext,
+        TArgs
+    &gt;;
+}
+
+export interface SubscriptionResolverObject&lt;TResult, TParent, TContext, TArgs&gt; {
+    subscribe: SubscriptionSubscribeFn&lt;any, TParent, TContext, TArgs&gt;;
+    resolve: SubscriptionResolveFn&lt;TResult, any, TContext, TArgs&gt;;
+}
+
+export type SubscriptionObject&lt;
+    TResult,
+    TKey extends string,
+    TParent,
+    TContext,
+    TArgs,
+&gt; &#x3D;
+    | SubscriptionSubscriberObject&lt;TResult, TKey, TParent, TContext, TArgs&gt;
+    | SubscriptionResolverObject&lt;TResult, TParent, TContext, TArgs&gt;;
+
+export type SubscriptionResolver&lt;
+    TResult,
+    TKey extends string,
+    TParent &#x3D; {},
+    TContext &#x3D; {},
+    TArgs &#x3D; {},
+&gt; &#x3D;
+    | ((
+          ...args: any[]
+      ) &#x3D;&gt; SubscriptionObject&lt;TResult, TKey, TParent, TContext, TArgs&gt;)
+    | SubscriptionObject&lt;TResult, TKey, TParent, TContext, TArgs&gt;;
+
+export type TypeResolveFn&lt;TTypes, TParent &#x3D; {}, TContext &#x3D; {}&gt; &#x3D; (
+    parent: TParent,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; Maybe&lt;TTypes&gt; | Promise&lt;Maybe&lt;TTypes&gt;&gt;;
+
+export type IsTypeOfResolverFn&lt;T &#x3D; {}, TContext &#x3D; {}&gt; &#x3D; (
+    obj: T,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; boolean | Promise&lt;boolean&gt;;
+
+export type NextResolverFn&lt;T&gt; &#x3D; () &#x3D;&gt; Promise&lt;T&gt;;
+
+export type DirectiveResolverFn&lt;
+    TResult &#x3D; {},
+    TParent &#x3D; {},
+    TContext &#x3D; {},
+    TArgs &#x3D; {},
+&gt; &#x3D; (
+    next: NextResolverFn&lt;TResult&gt;,
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo,
+) &#x3D;&gt; TResult | Promise&lt;TResult&gt;;
+
+/** Mapping between all available schema types and the resolvers types */
+export type ResolversTypes &#x3D; {
+    BoardAddressInput: BoardAddressInput;
+    BoardAddressOutput: ResolverTypeWrapper&lt;BoardAddressOutput&gt;;
+    BoardCommentResponseDTO: ResolverTypeWrapper&lt;BoardCommentResponseDto&gt;;
+    BoardPaginationResponse: ResolverTypeWrapper&lt;BoardPaginationResponse&gt;;
+    BoardReactionSchema: ResolverTypeWrapper&lt;BoardReactionSchema&gt;;
+    BoardSchema: ResolverTypeWrapper&lt;BoardSchema&gt;;
+    Boolean: ResolverTypeWrapper&lt;Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;]&gt;;
+    CreateBoardCommentInput: CreateBoardCommentInput;
+    CreateBoardInput: CreateBoardInput;
+    DateTime: ResolverTypeWrapper&lt;Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;]&gt;;
+    ID: ResolverTypeWrapper&lt;Scalars[&#x27;ID&#x27;][&#x27;output&#x27;]&gt;;
+    Int: ResolverTypeWrapper&lt;Scalars[&#x27;Int&#x27;][&#x27;output&#x27;]&gt;;
+    Mutation: ResolverTypeWrapper&lt;{}&gt;;
+    Query: ResolverTypeWrapper&lt;{}&gt;;
+    String: ResolverTypeWrapper&lt;Scalars[&#x27;String&#x27;][&#x27;output&#x27;]&gt;;
+    UpdateBoardCommentInput: UpdateBoardCommentInput;
+    UpdateBoardInput: UpdateBoardInput;
+};
+
+/** Mapping between all available schema types and the resolvers parents */
+export type ResolversParentTypes &#x3D; {
+    BoardAddressInput: BoardAddressInput;
+    BoardAddressOutput: BoardAddressOutput;
+    BoardCommentResponseDTO: BoardCommentResponseDto;
+    BoardPaginationResponse: BoardPaginationResponse;
+    BoardReactionSchema: BoardReactionSchema;
+    BoardSchema: BoardSchema;
+    Boolean: Scalars[&#x27;Boolean&#x27;][&#x27;output&#x27;];
+    CreateBoardCommentInput: CreateBoardCommentInput;
+    CreateBoardInput: CreateBoardInput;
+    DateTime: Scalars[&#x27;DateTime&#x27;][&#x27;output&#x27;];
+    ID: Scalars[&#x27;ID&#x27;][&#x27;output&#x27;];
+    Int: Scalars[&#x27;Int&#x27;][&#x27;output&#x27;];
+    Mutation: {};
+    Query: {};
+    String: Scalars[&#x27;String&#x27;][&#x27;output&#x27;];
+    UpdateBoardCommentInput: UpdateBoardCommentInput;
+    UpdateBoardInput: UpdateBoardInput;
+};
+
+export type BoardAddressOutputResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;BoardAddressOutput&#x27;] &#x3D; ResolversParentTypes[&#x27;BoardAddressOutput&#x27;],
+&gt; &#x3D; {
+    address?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    detailAddress?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    zoneCode?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    __isTypeOf?: IsTypeOfResolverFn&lt;ParentType, ContextType&gt;;
+};
+
+export type BoardCommentResponseDtoResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;BoardCommentResponseDTO&#x27;] &#x3D; ResolversParentTypes[&#x27;BoardCommentResponseDTO&#x27;],
+&gt; &#x3D; {
+    _id?: Resolver&lt;ResolversTypes[&#x27;ID&#x27;], ParentType, ContextType&gt;;
+    author?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    boardId?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    content?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    createdAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    parentId?: Resolver&lt;
+        Maybe&lt;ResolversTypes[&#x27;String&#x27;]&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    rating?: Resolver&lt;Maybe&lt;ResolversTypes[&#x27;Int&#x27;]&gt;, ParentType, ContextType&gt;;
+    replies?: Resolver&lt;
+        Maybe&lt;Array&lt;ResolversTypes[&#x27;BoardCommentResponseDTO&#x27;]&gt;&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    updatedAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    __isTypeOf?: IsTypeOfResolverFn&lt;ParentType, ContextType&gt;;
+};
+
+export type BoardPaginationResponseResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;BoardPaginationResponse&#x27;] &#x3D; ResolversParentTypes[&#x27;BoardPaginationResponse&#x27;],
+&gt; &#x3D; {
+    result?: Resolver&lt;
+        Array&lt;ResolversTypes[&#x27;BoardSchema&#x27;]&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    totalCount?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    __isTypeOf?: IsTypeOfResolverFn&lt;ParentType, ContextType&gt;;
+};
+
+export type BoardReactionSchemaResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;BoardReactionSchema&#x27;] &#x3D; ResolversParentTypes[&#x27;BoardReactionSchema&#x27;],
+&gt; &#x3D; {
+    _id?: Resolver&lt;ResolversTypes[&#x27;ID&#x27;], ParentType, ContextType&gt;;
+    boardId?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    createdAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    hate?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    like?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    updatedAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    __isTypeOf?: IsTypeOfResolverFn&lt;ParentType, ContextType&gt;;
+};
+
+export type BoardSchemaResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;BoardSchema&#x27;] &#x3D; ResolversParentTypes[&#x27;BoardSchema&#x27;],
+&gt; &#x3D; {
+    _id?: Resolver&lt;ResolversTypes[&#x27;ID&#x27;], ParentType, ContextType&gt;;
+    author?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    boardAddressOutput?: Resolver&lt;
+        Maybe&lt;ResolversTypes[&#x27;BoardAddressOutput&#x27;]&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    boardId?: Resolver&lt;ResolversTypes[&#x27;Int&#x27;], ParentType, ContextType&gt;;
+    content?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    createdAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    imageUrl?: Resolver&lt;
+        Maybe&lt;Array&lt;ResolversTypes[&#x27;String&#x27;]&gt;&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    title?: Resolver&lt;ResolversTypes[&#x27;String&#x27;], ParentType, ContextType&gt;;
+    updatedAt?: Resolver&lt;ResolversTypes[&#x27;DateTime&#x27;], ParentType, ContextType&gt;;
+    youtubeUrl?: Resolver&lt;
+        Maybe&lt;ResolversTypes[&#x27;String&#x27;]&gt;,
+        ParentType,
+        ContextType
+    &gt;;
+    __isTypeOf?: IsTypeOfResolverFn&lt;ParentType, ContextType&gt;;
+};
+
+export interface DateTimeScalarConfig
+    extends GraphQLScalarTypeConfig&lt;ResolversTypes[&#x27;DateTime&#x27;], any&gt; {
+    name: &#x27;DateTime&#x27;;
+}
+
+export type MutationResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;Mutation&#x27;] &#x3D; ResolversParentTypes[&#x27;Mutation&#x27;],
+&gt; &#x3D; {
+    clearBoard?: Resolver&lt;ResolversTypes[&#x27;Boolean&#x27;], ParentType, ContextType&gt;;
+    createBoard?: Resolver&lt;
+        ResolversTypes[&#x27;BoardSchema&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;MutationCreateBoardArgs, &#x27;createBoardInput&#x27;&gt;
+    &gt;;
+    createBoardComment?: Resolver&lt;
+        ResolversTypes[&#x27;BoardCommentResponseDTO&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;
+            MutationCreateBoardCommentArgs,
+            &#x27;boardId&#x27; | &#x27;createBoardComment&#x27;
+        &gt;
+    &gt;;
+    deleteBoard?: Resolver&lt;
+        ResolversTypes[&#x27;Boolean&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;MutationDeleteBoardArgs, &#x27;boardId&#x27;&gt;
+    &gt;;
+    deleteBoardComment?: Resolver&lt;
+        ResolversTypes[&#x27;Boolean&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;MutationDeleteBoardCommentArgs, &#x27;boardId&#x27; | &#x27;commentId&#x27;&gt;
+    &gt;;
+    isPasswordCorrect?: Resolver&lt;
+        ResolversTypes[&#x27;Boolean&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;MutationIsPasswordCorrectArgs, &#x27;boardId&#x27; | &#x27;password&#x27;&gt;
+    &gt;;
+    updateBoard?: Resolver&lt;
+        ResolversTypes[&#x27;BoardSchema&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;MutationUpdateBoardArgs, &#x27;boardId&#x27; | &#x27;updateBoardInput&#x27;&gt;
+    &gt;;
+    updateBoardComment?: Resolver&lt;
+        ResolversTypes[&#x27;BoardCommentResponseDTO&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;
+            MutationUpdateBoardCommentArgs,
+            &#x27;boardId&#x27; | &#x27;commentId&#x27; | &#x27;updateBoardComment&#x27;
+        &gt;
+    &gt;;
+};
+
+export type QueryResolvers&lt;
+    ContextType &#x3D; any,
+    ParentType extends
+        ResolversParentTypes[&#x27;Query&#x27;] &#x3D; ResolversParentTypes[&#x27;Query&#x27;],
+&gt; &#x3D; {
+    getBoard?: Resolver&lt;
+        ResolversTypes[&#x27;BoardSchema&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;QueryGetBoardArgs, &#x27;boardId&#x27;&gt;
+    &gt;;
+    getBoardComment?: Resolver&lt;
+        Array&lt;ResolversTypes[&#x27;BoardCommentResponseDTO&#x27;]&gt;,
+        ParentType,
+        ContextType,
+        RequireFields&lt;QueryGetBoardCommentArgs, &#x27;boardId&#x27;&gt;
+    &gt;;
+    getBoardReaction?: Resolver&lt;
+        ResolversTypes[&#x27;BoardReactionSchema&#x27;],
+        ParentType,
+        ContextType,
+        RequireFields&lt;QueryGetBoardReactionArgs, &#x27;boardId&#x27;&gt;
+    &gt;;
+    getBoards?: Resolver&lt;
+        ResolversTypes[&#x27;BoardPaginationResponse&#x27;],
+        ParentType,
+        ContextType,
+        Partial&lt;QueryGetBoardsArgs&gt;
+    &gt;;
+};
+
+export type Resolvers&lt;ContextType &#x3D; any&gt; &#x3D; {
+    BoardAddressOutput?: BoardAddressOutputResolvers&lt;ContextType&gt;;
+    BoardCommentResponseDTO?: BoardCommentResponseDtoResolvers&lt;ContextType&gt;;
+    BoardPaginationResponse?: BoardPaginationResponseResolvers&lt;ContextType&gt;;
+    BoardReactionSchema?: BoardReactionSchemaResolvers&lt;ContextType&gt;;
+    BoardSchema?: BoardSchemaResolvers&lt;ContextType&gt;;
+    DateTime?: GraphQLScalarType;
+    Mutation?: MutationResolvers&lt;ContextType&gt;;
+    Query?: QueryResolvers&lt;ContextType&gt;;
+};
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'SubscriptionResolverObject.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
