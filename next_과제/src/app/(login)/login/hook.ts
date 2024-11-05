@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+// import { useApolloClient } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 
 import {
@@ -10,6 +11,7 @@ import {
 import { useAccessTokenStore } from "@/commons/stores/access-token";
 
 export const useLoginPage = () => {
+  // const client = useApolloClient();
   // 로그인
   const [loginUser] = useMutation(LoginUserDocument);
   // 로그아웃
@@ -27,20 +29,9 @@ export const useLoginPage = () => {
   const userLogOut = async () => {
     try {
       const result = await logoutUser();
-      if (result.data?.logoutUser) {
-        // 쿠키에 저장되어있는 리프레시 토큰 삭제
-        document.cookie =
-          "refreshToken = ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-
-        alert("로그아웃 되었습니다.");
-        router.push("/");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(`${error.message}`);
-      } else {
-        alert("An unknown error occurred");
-      }
+      console.log(result);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -52,7 +43,6 @@ export const useLoginPage = () => {
       return alert("이메일과 비밀번호를 입력해 주세요.");
     }
 
-    // try {
     // 1. 로그인 요청
     const result = await loginUser({
       variables: {
@@ -60,6 +50,8 @@ export const useLoginPage = () => {
         password,
       },
     });
+
+    console.log(result);
 
     // 2. 로그인 성공 시
     if (result.data?.loginUser.accessToken) {
