@@ -58,6 +58,10 @@ type UserSchema {
   email: String!
 }
 
+type UserIdSchema {
+  id: ID!
+}
+
 type Query {
   getBoards(page: Int, take: Int): BoardPaginationResponse!
   getBoard(boardId: Int!): BoardSchema!
@@ -75,7 +79,8 @@ type Mutation {
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
   signUp(signUpUser: signUpUser!): UserSchema!
-  login(loginUser: loginUser!): UserSchema!
+  login(loginUser: loginUser!): UserIdSchema!
+  logout: Boolean!
 }
 
 input CreateBoardInput {
