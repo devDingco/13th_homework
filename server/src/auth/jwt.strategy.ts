@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken,
         });
     }
-    async validate(payload): Promise<User> {
+    async validate(payload: any): Promise<User> {
         const { id } = payload;
         const user: User = await this.userRepository.findUserPK(id);
         if (!user) {
