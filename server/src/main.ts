@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule } from '@nestjs/swagger';
+import { sessionConfig } from 'configs/session.config';
 import { swagger } from 'configs/swagger.config';
 
 const PORT = process.env.PORT;
@@ -36,6 +37,8 @@ async function bootstrap() {
 
     const document = SwaggerModule.createDocument(app, swagger);
     SwaggerModule.setup('api', app, document);
+
+    sessionConfig(app);
 
     await app.listen(PORT, HOST);
 }
