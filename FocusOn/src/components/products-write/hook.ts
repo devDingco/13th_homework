@@ -18,7 +18,8 @@ const useProductsWirte = (props) => {
   const addTag = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      // !event.nativeEvent.isComposing => 입력이 완료 되었으면 (keydown의 한글 중복 문제 해결!!)
+      // !event.nativeEvent.isComposing => 입력이 완료 되었으면
+      // keydown의 한글 중복 문제 해결!!
       if (inputTag.trim() !== "" && !event.nativeEvent.isComposing) {
         setTags((prev) => [...prev, `#${inputTag}`]);
         setInputTag(""); // 인풋 초기화

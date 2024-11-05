@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import Wishlist from "@/components/my-page/wish-list";
 import MyProduct from "@/components/my-page/product";
 import PointHistory from "@/components/my-page/point-history";
+import Info from "@/components/my-page/info";
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState("transactions");
@@ -19,7 +20,7 @@ export default function MyPage() {
       case "points":
         return <PointHistory />;
       case "profile":
-        return <h2 className={styles.content_title}>내 정보 관리</h2>;
+        return <Info />;
       default:
         return null;
     }
