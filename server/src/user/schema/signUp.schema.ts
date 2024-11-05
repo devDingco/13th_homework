@@ -1,12 +1,15 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
     IsEmail,
+    IsEnum,
     IsNotEmpty,
     IsString,
     Matches,
     MaxLength,
     MinLength,
 } from 'class-validator';
+
+import { Role } from 'src/common/enums/role.enum';
 
 @InputType()
 export class signUpUser {
@@ -34,4 +37,12 @@ export class signUpUser {
     )
     @Field()
     password: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsEnum(Role, {
+        message: 'Role must be either USER or MANAGER',
+    })
+    @Field()
+    role: Role;
 }

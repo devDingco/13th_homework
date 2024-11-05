@@ -126,6 +126,7 @@ input signUpUser {
   name: String!
   email: String!
   password: String!
+  role: String!
 }
 
 input loginUser {

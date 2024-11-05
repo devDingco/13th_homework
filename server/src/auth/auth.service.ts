@@ -1,6 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from 'src/common/enums/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -9,12 +10,13 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
-    async issueLoginToken(id: number) {
+    async issueLoginToken(id: number, role: Role) {
         // 여기에 role 넣기
         // user 또는 counselor
         const accessToken = await this.jwtService.signAsync(
             {
                 id,
+                role,
                 sub: 'accessToken',
             },
             {
@@ -23,10 +25,10 @@ export class AuthService {
             },
         );
 
-        // jti(jwt ID) -> redis
         const refreshToken = await this.jwtService.signAsync(
             {
                 id,
+                role,
                 sub: 'refreshToken',
             },
             {

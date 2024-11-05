@@ -14,13 +14,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             // jwt token이 어디에 저장되어있는지
             // access token 같은 경우 headers -> Authorization -> bearer
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken,
+            ignoreExpiration: false,
         });
     }
     async validate(payload: any): Promise<User> {
         const { id } = payload;
         const user: User = await this.userRepository.findUserPK(id);
         if (!user) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException(`userId: ${id} is not exist`);
         }
         return user;
     }
