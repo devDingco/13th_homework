@@ -1,12 +1,20 @@
 import { useMutation } from "@apollo/client";
-import { ChangeEvent, useState } from "react";
 import { CREATE_USER } from "./queries";
 import { useRouter } from "next/navigation";
 import { successModal } from "@/utils/modal";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { schema } from "./schema";
 
 export default function useSignUp() {
   const router = useRouter();
   const [createUser] = useMutation(CREATE_USER);
+
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    // onChange할 때마다 실행
+    mode: "onChange",
+  });
 
   // 로그인페이지 이동
   const routerLogin = () => {
@@ -35,5 +43,6 @@ export default function useSignUp() {
 
   return {
     onClickSignUp,
+    methods,
   };
 }

@@ -4,14 +4,13 @@ import styles from "./styles.module.css";
 
 // 1. 뼈대 만들기
 function InputBase(props) {
-  console.log(props);
   const { register } = useFormContext();
   return (
     <input
       className={props.className}
       type={props.type}
       placeholder={props.placeholder}
-      {...register(props.keyname)}
+      {...register(props.name)}
     />
   );
 }

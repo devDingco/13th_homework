@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { useAccessTokenStore } from "@/commons/stores";
+import { useAccessTokenStore } from "@/commons/stores/accessToken";
 import { FETCH_USER_LOGGED_IN } from "./queries";
 
 const Navigation = () => {
@@ -13,7 +13,7 @@ const Navigation = () => {
   const { accessToken } = useAccessTokenStore();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
-  console.log(data?.fetchUserLoggedIn.picture);
+  console.log(data?.fetchUserLoggedIn);
 
   return (
     <div className={styles.navigation_box}>

@@ -2,19 +2,13 @@ import styles from "./styles.module.css";
 import FieldWrapper from "../commons/fieldWrapper";
 import useSignUp from "./hook";
 import Link from "next/link";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 import { InputSoftMFull } from "@/commons/ui/input";
 import { ButtonSoftMFullMain } from "@/commons/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { schema } from "./schema";
+import ErrorMessage from "@/commons/ui/error";
 
 export default function SignUp() {
-  const { onClickSignUp } = useSignUp();
-  const methods = useForm({
-    resolver: zodResolver(schema),
-    // onChange할 때마다 실행
-    mode: "onChange",
-  });
+  const { onClickSignUp, methods } = useSignUp();
 
   return (
     <div className={styles.signup_page_body}>
@@ -32,42 +26,34 @@ export default function SignUp() {
               <FieldWrapper label="이메일">
                 <InputSoftMFull
                   type="text"
-                  keyname="email"
+                  name="email"
                   placeholder="이메일을 입력해 주세요."
                 />
-                <div className={styles.error}>
-                  {methods.formState.errors.email?.message}
-                </div>
+                <ErrorMessage name="email" />
               </FieldWrapper>
               <FieldWrapper label="이름">
                 <InputSoftMFull
                   type="text"
-                  keyname="name"
+                  name="name"
                   placeholder="이름을 입력해 주세요."
                 />
-                <div className={styles.error}>
-                  {methods.formState.errors.name?.message}
-                </div>
+                <ErrorMessage name="name" />
               </FieldWrapper>
               <FieldWrapper label="비밀번호">
                 <InputSoftMFull
                   type="password"
-                  keyname="password"
+                  name="password"
                   placeholder="비밀번호를 입력해 주세요."
                 />
-                <div className={styles.error}>
-                  {methods.formState.errors.password?.message}
-                </div>
+                <ErrorMessage name="password" />
               </FieldWrapper>
               <FieldWrapper label="비밀번호 확인">
                 <InputSoftMFull
                   type="password"
-                  keyname="passwordConfirm"
+                  name="passwordConfirm"
                   placeholder="비밀번호를 한번 더 입력해 주세요."
                 />
-                <div className={styles.error}>
-                  {methods.formState.errors.passwordConfirm?.message}
-                </div>
+                <ErrorMessage name="passwordConfirm" />
               </FieldWrapper>
             </div>
             <ButtonSoftMFullMain>회원가입</ButtonSoftMFullMain>
