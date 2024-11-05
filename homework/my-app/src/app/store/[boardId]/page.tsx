@@ -3,9 +3,8 @@
 import { useParams } from "next/navigation";
 import styles from "./style.module.css";
 import { useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import Image from "next/image";
-import { stubArray } from "lodash";
 import Comment from "@/components/store-comment-write";
 
 const FETCH_TRAVEL_PRODUCT = gql`
@@ -46,6 +45,23 @@ const FETCH_TRAVEL_PRODUCT = gql`
   }
 `;
 
+const TOGGLE_PRODUCT_PICK = gql`
+  mutation toggleTravelproductPick($travelproductId: ID!) {
+    toggleTravelproductPick(travelproductId: $travelproductId)
+  }
+`;
+
+const BUYING_AND_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      remarks
+      contents
+    }
+  }
+`;
+
 const ProductDetail = () => {
   const params = useParams();
   const [selectedImage, setSelectedImage] = useState("");
@@ -53,6 +69,42 @@ const ProductDetail = () => {
   const { data, loading, error } = useQuery(FETCH_TRAVEL_PRODUCT, {
     variables: { travelproductId: params.boardId },
   });
+
+  const [togglePick] = useMutation(TOGGLE_PRODUCT_PICK, {
+    variables: { travelproductId: params.boardId },
+    refetchQueries: [
+      {
+        query: FETCH_TRAVEL_PRODUCT,
+        variables: { travelproductId: params.boardId },
+      },
+    ],
+  });
+
+  const [buyProduct] = useMutation(BUYING_AND_SELLING, {
+    variables: { useritemId: params.boardId },
+    onCompleted: (data) => {
+      console.log("구매 성공:", data);
+    },
+    onError: (error) => {
+      console.error("구매 오류:", error);
+      alert(error);
+    },
+  });
+
+  const handleTogglePick = async () => {
+    try {
+      await togglePick();
+    } catch (err) {
+      console.error("스크랩 기능 오류:", err);
+    }
+  };
+  const handlePurchase = async () => {
+    try {
+      await buyProduct();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (data?.fetchTravelproduct.images?.length > 0) {
@@ -72,7 +124,20 @@ const ProductDetail = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-        <div className={styles.title}>{data.fetchTravelproduct.name}</div>
+        <div className={styles.nameBookmarkContainer}>
+          <div className={styles.title}>{data.fetchTravelproduct.name}</div>
+
+          <button className={styles.overlay} onClick={handleTogglePick}>
+            <Image
+              src="/image/bookmark.png"
+              width={18}
+              height={18}
+              alt="북마크아이콘"
+              className={styles.bookmarkIcon}
+            />
+            {data.fetchTravelproduct.pickedCount}
+          </button>
+        </div>
         <div className={styles.remarks}>{data.fetchTravelproduct.remarks}</div>
         <div className={styles.tags}>
           {data.fetchTravelproduct.tags.map((tag, index) => (
@@ -113,7 +178,9 @@ const ProductDetail = () => {
           <div className={styles.priceContainer}>
             ₩{data?.fetchTravelproduct.price}원
           </div>
-          <button className={styles.buyButton}>구매하기</button>
+          <button className={styles.buyButton} onClick={handlePurchase}>
+            구매하기
+          </button>
           <div className={styles.seller}>
             <img
               src={
