@@ -15,6 +15,7 @@
     --text-color: #030303;
     --variant-color: #000;
     --primary-color: #1890ff;
+    --primary-color-hover: #40a9ff;
   }
   html.dark {
     --border-color: #303030;
