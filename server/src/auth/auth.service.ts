@@ -9,12 +9,12 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
-    async issueLoginToken(email: string) {
+    async issueLoginToken(id: number) {
         // 여기에 role 넣기
         // user 또는 counselor
         const accessToken = await this.jwtService.signAsync(
             {
-                email,
+                id,
                 sub: 'accessToken',
             },
             {
@@ -26,7 +26,7 @@ export class AuthService {
         // jti(jwt ID) -> redis
         const refreshToken = await this.jwtService.signAsync(
             {
-                email,
+                id,
                 sub: 'refreshToken',
             },
             {

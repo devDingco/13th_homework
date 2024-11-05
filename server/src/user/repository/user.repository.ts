@@ -29,10 +29,21 @@ export class UserRepository {
         }
     }
 
-    async findUser(email: string): Promise<User> {
+    async findUserPK(id: number): Promise<User> {
+        const user = await this.userRepository.findOneBy({
+            id,
+        });
+        if (!user) {
+            throw new NotFoundException('is not exist');
+        }
+        return user;
+    }
+
+    async findUserEmail(email: string): Promise<User> {
         const user = await this.userRepository.findOneBy({
             email,
         });
+
         if (!user) {
             throw new NotFoundException('is not exist email');
         }

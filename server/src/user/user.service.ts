@@ -25,12 +25,12 @@ export class UserService {
     }
 
     async login(loginDTO: loginDTO) {
-        const user = await this.userRepository.findUser(loginDTO.email);
+        const user = await this.userRepository.findUserEmail(loginDTO.email);
         await this.bcryptService.validatePassword(
             loginDTO.password,
             user.password,
         );
-        const token = await this.authService.issueLoginToken(loginDTO.email);
+        const token = await this.authService.issueLoginToken(user.id);
 
         return { user, ...token };
     }
