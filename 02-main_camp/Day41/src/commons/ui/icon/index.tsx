@@ -59,6 +59,19 @@ export function LocationSample() {
   );
 }
 
+export function LoginMainImage() {
+  return (
+    <Image
+      src="/assets/login_main_image.png"
+      alt="로그인 메인 이미지"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: "100vw", height: "100vh" }}
+    />
+  );
+}
+
 // Icon
 
 export function Delete() {
@@ -209,6 +222,19 @@ export function ReturnIcon({ width = 1.5, height = 1.5 }: IIconProps) {
     <Image
       src="/assets/return.png"
       alt="답변 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function LogoIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/login_logo.png"
+      alt="로고 아이콘"
       width={0}
       height={0}
       sizes="100vw"
