@@ -32,8 +32,19 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    logout(@Context('res') res: Response) {
-        res.clearCookie('refreshToken');
-        res.send(true);
+    logout(
+        @Context('req') req: { session: Record<string, any>; res: Response },
+    ): Promise<boolean> {
+        return new Promise((resolve) => {
+            req.res.clearCookie('connect.sid');
+
+            req.session.destroy((err: any) => {
+                if (err) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     }
 }

@@ -41,9 +41,20 @@ export class UserController {
 
     @Post('/logout')
     @HttpCode(HttpStatus.OK)
-    logout(@Res() res: Response): void {
-        res.clearCookie('refreshToken');
+    logout(
+        @Res() res: Response,
+        @Session() session: Record<string, any>,
+    ): void {
+        res.clearCookie('connect.sid');
 
-        res.send(true);
+        session.destroy((err: any) => {
+            if (err) {
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                    success: false,
+                });
+            } else {
+                res.status(HttpStatus.OK).json({ success: true });
+            }
+        });
     }
 }
