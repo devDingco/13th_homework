@@ -11,6 +11,7 @@ import {
     ParseIntPipe,
     Query,
     UseInterceptors,
+    UseGuards,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardDTO } from './dto/create-board.dto';
@@ -20,6 +21,7 @@ import { BoardEntity } from './entity/board.entity';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
 import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 @UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board')
 export class BoardController {
@@ -33,6 +35,7 @@ export class BoardController {
     }
 
     @Get()
+    @UseGuards(AuthGuard)
     @ResponseMessage('board 전체를 성공적으로 가져왔습니다.')
     @HttpCode(HttpStatus.OK)
     getBoards(@Query() query: PaginationDTO): Promise<PaginationResponseDTO> {

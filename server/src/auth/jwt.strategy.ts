@@ -1,4 +1,4 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { PassportStrategy } from '@nestjs/passport';
@@ -10,19 +10,27 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly userRepository: UserRepository) {
         super({
             // key - jwt VERIFY SIGNATURE를 처리하기 위한 key
-            secretOrKey: process.env.JWT_SECRET_KEY,
+            secretOrKey: process.env.JWT_ACCESS_SECRET,
             // jwt token이 어디에 저장되어있는지
             // access token 같은 경우 headers -> Authorization -> bearer
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken,
             ignoreExpiration: false,
         });
     }
-    async validate(payload: any): Promise<User> {
+    async validate(payload: any, done: VerifiedCallback): Promise<any> {
         const { id } = payload;
         const user: User = await this.userRepository.findUserPK(id);
         if (!user) {
-            throw new UnauthorizedException(`userId: ${id} is not exist`);
+            return done(
+                new UnauthorizedException({
+                    message: 'user does not exist',
+                }),
+                false,
+            );
         }
-        return user;
+        return done(
+            new UnauthorizedException({ message: 'user does not exist' }),
+            false,
+        );
     }
 }
