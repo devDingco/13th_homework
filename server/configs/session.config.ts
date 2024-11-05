@@ -28,7 +28,7 @@ export function sessionConfig(app: INestApplication): void {
             store: redisStore,
             cookie: {
                 httpOnly: true,
-                secure: true,
+                secure: process.env.NODE_ENV === 'production' ? true : false,
                 sameSite: 'none',
                 maxAge: 604800000, // 클라이언트 측 쿠키의 만료 시간(ms)
             },

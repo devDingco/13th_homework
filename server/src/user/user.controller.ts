@@ -5,6 +5,7 @@ import {
     HttpStatus,
     Post,
     Res,
+    Session,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
@@ -27,18 +28,15 @@ export class UserController {
     async login(
         @Body() loginDTO: loginDTO,
         @Res() res: Response,
+        @Session() session: Record<string, any>,
     ): Promise<void> {
-        const result = await this.userService.login(loginDTO);
-        res.setHeader('Authorization', `Bearer ${result.accessToken}`);
+        const { user, accessToken, refreshToken } =
+            await this.userService.login(loginDTO);
+        res.setHeader('Authorization', `Bearer ${accessToken}`);
 
-        res.cookie('refreshToken', result.refreshToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });
+        session.refreshToken = refreshToken;
 
-        res.status(HttpStatus.OK).json({ id: result.user.id });
+        res.status(HttpStatus.OK).json({ id: user.id });
     }
 
     @Post('/logout')
