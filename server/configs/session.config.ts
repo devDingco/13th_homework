@@ -2,14 +2,17 @@ import * as session from 'express-session';
 
 import { ConfigService } from '@nestjs/config';
 import { INestApplication } from '@nestjs/common';
+import Redis from 'ioredis';
 import RedisStore from 'connect-redis';
-import { createClient } from 'redis';
 
 export function sessionConfig(app: INestApplication): void {
     const configService = app.get<ConfigService>(ConfigService);
 
     // Redis 클라이언트 생성
-    const redisClient = createClient();
+    const redisClient = new Redis({
+        host: configService.get<string>('REDIS_HOST'),
+        port: configService.get<number>('REDIS_PORT'),
+    });
 
     const redisStore = new RedisStore({
         client: redisClient,
