@@ -1,0 +1,36 @@
+.searchContainer {
+  width: 40rem;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+}
+
+.searchBarContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.searchIconContainer {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  background-color: #f2f2f2;
+}
+
+.searchButton {
+  width: 4rem;
+  height: 3rem;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
