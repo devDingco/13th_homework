@@ -173,3 +173,17 @@ export const LOGOUT_USER = gql`
         logoutUser
     }
 `;
+
+export const CREATE_POINT = gql`
+    mutation createPointTransactionOfLoading($paymentId: ID!) {
+        createPointTransactionOfLoading(paymentId: $paymentId) {
+            _id
+            impUid
+            amount
+            balance
+            status
+            statusDetail
+            createdAt
+        }
+    }
+`;

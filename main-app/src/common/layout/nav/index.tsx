@@ -13,13 +13,15 @@ import { Menu } from "@ark-ui/react/menu";
 import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { css } from "@/common/styled-system/css";
 import Button from "@/components/Atoms/_Button";
-import Link from "next/link";
+import withPortOne from "@/common/library/withPortOne";
 
 export default function LayoutNav() {
     const router = useRouter();
     const [isSelect, setIsSelect] = useState("mainPage");
 
     const { data: login } = useQuery(FetchUserLoggedInDocument);
+
+    const { onClickPay } = withPortOne(login);
 
     const [Logout] = useMutation(LOGOUT_USER);
 
@@ -108,7 +110,7 @@ export default function LayoutNav() {
                                     <Menu.Item
                                         value="billing"
                                         className={css_menuItem}
-                                        onClick={() => router.push(`/mypage`)}
+                                        onClick={onClickPay}
                                     >
                                         <CreditCardIcon size={16} /> 포인트 충전
                                     </Menu.Item>
