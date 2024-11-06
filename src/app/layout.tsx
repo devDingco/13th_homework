@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
-import ApolloSetting from '../commons/settings/apollo-setting';
 import LayOutPage from '../commons/layout/index';
+import ApolloUploadSetting from '../commons/settings/apollo-setting';
 
 export const metadata: Metadata = {
     title: '축구하자',
@@ -13,9 +13,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     return (
         <html lang="ko">
             <body>
-                <ApolloSetting>
+                <ApolloUploadSetting>
                     <LayOutPage>{props.children}</LayOutPage>
-                </ApolloSetting>
+                </ApolloUploadSetting>
             </body>
         </html>
     );

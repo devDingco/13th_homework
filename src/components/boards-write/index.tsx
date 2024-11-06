@@ -1,10 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './styles.module.css';
 import Image from 'next/image';
 import { useBoardWrite } from './hook';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd';
+import { useMutation } from '@apollo/client';
+import { UPLOAD_FILE } from './queries';
+import { checkValidtionFile } from '@/commons/libraries/image-upload-validation';
 
 export default function BoardComponentWrite(props: any) {
     const {
@@ -35,6 +38,37 @@ export default function BoardComponentWrite(props: any) {
         onClickBack,
         setIsOpen,
     } = useBoardWrite();
+
+    const [imageUrl, setImageUrl] = useState('');
+    const fileRef = useRef();
+    const [업로드파일] = useMutation(UPLOAD_FILE);
+    const [isHovered, setIsHovered] = useState(false); // 호버 상태 관리
+
+    const onChangeFile = async (event) => {
+        // const files = event.target.files; // 선택된 파일 목록
+        // const fileArray = Array.from(files); // 파일목록을 배열로 변환
+
+        const file = event.target.files[0];
+        console.log(file);
+
+        const isValid = checkValidtionFile(file);
+        if (!isValid) return; // onChangeFile을 종료함
+
+        const result = await 업로드파일({
+            variables: {
+                file,
+            },
+        });
+        setImageUrl(result.data?.uploadFile.url ?? '');
+    };
+
+    const onClickImage = () => {
+        fileRef.current.click();
+    };
+
+    const onClickDeleteImage = () => {
+        setImageUrl(''); // 이미지 URL 초기화
+    };
 
     return (
         <div className={styles.layout}>
@@ -170,20 +204,64 @@ export default function BoardComponentWrite(props: any) {
                         alt="add_image"
                         width={200}
                         height={200}
+                        onClick={onClickImage}
                     ></Image>
+
+                    {imageUrl ? (
+                        <div
+                            style={{
+                                position: 'relative',
+                                display: 'inline-block',
+                            }}
+                            onMouseEnter={() => setIsHovered(true)} // 마우스 오버 시
+                            onMouseLeave={() => setIsHovered(false)} // 마우스 아웃 시
+                        >
+                            <img
+                                src={`https://storage.googleapis.com/${imageUrl}`}
+                                style={{ width: '200px', height: '200px' }}
+                            />
+                            {isHovered && ( // 호버 상태일 때만 버튼 표시
+                                <button
+                                    onClick={onClickDeleteImage}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '10px',
+                                        right: '10px',
+                                        backgroundColor: 'red',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    X
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <Image
+                            src="/images/add_image.jpg"
+                            alt="add_image"
+                            width={200}
+                            height={200}
+                            onClick={onClickImage}
+                        ></Image>
+                    )}
+
                     <Image
                         src="/images/add_image.jpg"
                         alt="add_image"
                         width={200}
                         height={200}
-                    ></Image>
-                    <Image
-                        src="/assets/add_image.jpg"
-                        alt="add_image"
-                        width={200}
-                        height={200}
+                        onClick={onClickImage}
                     ></Image>
                 </div>
+                <input
+                    type="file"
+                    onChange={onChangeFile}
+                    style={{ display: 'none' }}
+                    ref={fileRef}
+                />
             </div>
             <div className={styles.bottombuttonbox}>
                 <button
