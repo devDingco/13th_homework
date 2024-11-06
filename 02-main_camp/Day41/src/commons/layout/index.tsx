@@ -5,7 +5,6 @@ import LayoutNavigation from "./navigation";
 import LayoutBanner from "./banner";
 import styles from "./styles.module.css";
 import { ILayout } from "./types";
-import path from "path";
 
 const HIDDEN_BANNERS = [
   "/boards/new",
@@ -31,7 +30,16 @@ export default function Layout({ children }: ILayout) {
     <div className={styles.layoutContainer}>
       {!isHiddenNavigation && <LayoutNavigation />}
       {!isHiddenBanner && <LayoutBanner />}
-      <div className={styles.childrenContainer}>{children}</div>
+      <div
+        className={styles.childrenContainer}
+        style={
+          pathname === "/login"
+            ? {}
+            : { marginTop: "2.5rem", marginBottom: "2.5rem" }
+        }
+      >
+        {children}
+      </div>
     </div>
   );
 }
