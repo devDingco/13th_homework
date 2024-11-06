@@ -13,6 +13,7 @@ import { Menu } from "@ark-ui/react/menu";
 import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { css } from "@/common/styled-system/css";
 import Button from "@/components/Atoms/_Button";
+import Link from "next/link";
 
 export default function LayoutNav() {
     const router = useRouter();
@@ -194,7 +195,7 @@ const css_menuWrap = css({
 });
 
 const css_menuItem = css({
-    width: "16rem",
+    minWidth: "15rem",
     display: "flex",
     alignItems: "center",
     p: "1rem",
