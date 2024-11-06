@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { UpdateTravelproductInput } from '@/commons/graphql/graphql';
 import { useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { ReplyItem, ReplyItemList } from './reply-item';
+import { ReplyItem, ReplyItemList } from './reply-product-question-item';
 
 interface IProductQuestion extends UpdateTravelproductInput {}
 
@@ -149,7 +149,7 @@ export function Item({ item, user, refetch }) {
 				<>
 					<div>{item.contents}</div>
 					<div>{item.updatedAt}</div>
-					<ReplyItemList />
+					<ReplyItemList replyItem={item} />
 				</>
 			)}
 			{isReplying ? (

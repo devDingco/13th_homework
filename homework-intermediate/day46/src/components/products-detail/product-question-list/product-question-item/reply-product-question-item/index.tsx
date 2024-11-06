@@ -1,6 +1,6 @@
 'use client';
 
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import Image from 'next/image';
 import RETURN from '@/assets/return.png';
 
@@ -15,11 +15,33 @@ const CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER = gql`
 		) {
 			_id
 			contents
-			travelproductQuestion
 			user {
 				_id
 				name
 				email
+			}
+			createdAt
+			updatedAt
+			deletedAt
+		}
+	}
+`;
+
+const FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER = gql`
+	query fetchTravelproductQuestionAnswers(
+		$page: Int
+		$travelproductQuestionId: ID!
+	) {
+		fetchTravelproductQuestionAnswers(
+			page: $page
+			travelproductQuestionId: $travelproductQuestionId
+		) {
+			_id
+			contents
+			user {
+				_id
+				email
+				name
 			}
 			createdAt
 			updatedAt
@@ -39,7 +61,6 @@ const UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER = gql`
 		) {
 			_id
 			contents
-			travelproductQuestion
 			user {
 				_id
 				name
@@ -62,8 +83,13 @@ const DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER = gql`
 	}
 `;
 
-// TODO: travelProduct에 대한 id를 받아서, 해당 id의 Answer목록 보여주기
 export function ReplyItemList(props) {
+	const { replyItem } = props;
+
+	const { data, refetch } = useQuery(FETCH_TRAVEL_PRODUCT_QUESTIONS_ANSWER, {
+		variables: { page: 1, travelproductQuestionId: replyItem._id },
+	});
+
 	return (
 		<div className="flex">
 			<div className="pl-3">
@@ -77,18 +103,28 @@ export function ReplyItemList(props) {
 export function ReplyItem(props) {
 	const { toggleIsReplying } = props;
 
-	// Create
 	const [createTravelproductQuestionAnswer] = useMutation(
 		CREATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
 	);
-	// Update
 	const [updateTravelproductQuestionAnswer] = useMutation(
 		UPDATE_TRAVEL_PRODUCT_QUESTION_ANSWER,
 	);
-	// Delete
 	const [deleteTravelproductQuestionAnswer] = useMutation(
 		DELETE_TRAVEL_PRODUCT_QUESTION_ANSWER,
 	);
+
+	// Create
+	const onClickSubmit = () => {};
+	// Update
+	const onClickUpdate = () => {};
+	// Delete
+	const onClickDelet = async () => {
+		try {
+			await deleteTravelproductQuestionAnswer({
+				variables: { travelproductQuestionAnswerId },
+			});
+		} catch (error) {}
+	};
 
 	return (
 		<div className="flex flex-col items-end gap-4">

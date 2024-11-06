@@ -13,6 +13,10 @@ import {
 } from '@/commons/graphql/graphql';
 import { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import {
+	CREATE_TRAVEL_PRODUCT,
+	UPDATE_TRAVEL_PRODUCT,
+} from '@/app/products/queries';
 
 const createTravelproductSchema = z.object({
 	name: z.string().min(1, { message: '상품명을 입력해 주세요.' }),
@@ -230,6 +234,7 @@ export default function ProductWrite(props) {
 					<button
 						type="button"
 						className="rounded-lg border border-black px-4 py-3"
+						onClick={() => router.push('/products')}
 					>
 						취소
 					</button>

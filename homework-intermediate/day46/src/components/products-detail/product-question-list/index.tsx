@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import _ from 'lodash';
 import { useState } from 'react';
-import { Item } from './item';
+import { Item } from './product-question-item';
 import { TravelproductQuestion } from '@/commons/graphql/graphql';
 
 const FETCH_TRAVEL_PRODUCTS = gql`
@@ -84,7 +84,7 @@ export default function ProductQuestionList(props) {
 	return (
 		<div
 			id="scrollableTargetDiv"
-			className="h-96 overflow-y-scroll border border-red-600"
+			className="scrollbar-thin scrollbar-track-transparent h-[50vh] overflow-y-scroll border border-red-600"
 		>
 			<InfiniteScroll
 				hasMore={hasMore}
