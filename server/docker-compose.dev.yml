@@ -5,8 +5,9 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-            - '${PORT}:${PORT}'
-        env_file: .env.development
+            - '8080:8080'
+        env_file:
+            - .env.development
         depends_on:
             - postgres
             - mongo
@@ -21,7 +22,7 @@ services:
             POSTGRES_PASSWORD: ${POSTGRE_DB_PASSWORD}
             POSTGRES_DB: ${POSTGRE_DB_DATABASE}
         ports:
-            - '${POSTGRE_DB_PORT}:${POSTGRE_DB_PORT}'
+            - '5432:5432'
         volumes:
             - postgres-data:/var/lib/postgresql/data
         networks:
@@ -30,7 +31,7 @@ services:
     mongo:
         image: mongo:5.0
         ports:
-            - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
+            - '27017:27017'
         volumes:
             - mongo-data:/data/db
         networks:

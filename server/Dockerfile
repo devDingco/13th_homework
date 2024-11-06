@@ -16,3 +16,5 @@ RUN npm run build
 
 # 애플리케이션 실행
 CMD ["node", "dist/src/main.js"]
+
+
