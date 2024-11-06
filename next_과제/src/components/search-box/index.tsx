@@ -2,22 +2,21 @@
 
 import Icon from "@/components/icon-factory";
 import { DatePicker, Input, Button } from "antd";
-import { useState } from "react";
+import { useSearch } from "@/commons/stores/search-store";
+import { useSearchDate } from "@/commons/stores/search-date-store";
 import "dayjs/locale/ko";
-import { FetchBoardsCountQueryVariables } from "@/commons/graphql/graphql";
 import locale from "antd/lib/date-picker/locale/ko_KR";
 
 export default function SearchBox({
-  handleSearch,
   isDate = true,
+  handleSearch,
 }: {
-  handleSearch: (params: FetchBoardsCountQueryVariables) => void;
   isDate?: boolean;
+  handleSearch: () => void;
 }) {
   const { RangePicker } = DatePicker;
-  const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
-  const [endDate, setEndDate] = useState<string>(new Date().toISOString());
-  const [search, setSearch] = useState("");
+  const { search, setSearch } = useSearch();
+  const { setStartDate, setEndDate } = useSearchDate();
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">
@@ -31,9 +30,7 @@ export default function SearchBox({
           prefix={
             <Icon icon="search" className="w-6 h-6 fill-accent-content" />
           }
-          onKeyUp={(e) =>
-            e.key === "Enter" && handleSearch({ startDate, endDate, search })
-          }
+          onKeyUp={(e) => e.key === "Enter" && handleSearch()}
         />
       </label>
 
@@ -46,11 +43,6 @@ export default function SearchBox({
               start: "startDate",
               end: "endDate",
             }}
-            // defaultValue={[
-            //   dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
-            //   dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
-            // ]}
-            // placeholder={["시작일", "종료일"]}
             onChange={(date, dateString) => {
               setStartDate(new Date(dateString[0]).toISOString());
               setEndDate(new Date(dateString[1]).toISOString());
@@ -63,7 +55,7 @@ export default function SearchBox({
           color="default"
           variant="solid"
           className="btn btn-accent-content max-sm:w-full"
-          onClick={() => handleSearch({ startDate, endDate, search })}
+          onClick={() => handleSearch()}
         >
           검색
         </Button>
