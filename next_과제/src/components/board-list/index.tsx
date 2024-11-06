@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/icon-factory";
 import { useBoardList } from "@/components/board-list/hook";
 import SearchBox from "@/components/search-box";
