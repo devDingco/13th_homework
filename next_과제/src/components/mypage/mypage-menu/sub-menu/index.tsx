@@ -13,7 +13,7 @@ export default function MyPageSubMenu() {
           {SubMenu.map((menu) => (
             <li key={menu.url}>
               <Link
-                className={`p-2 rounded-lg flex justify-between items-center ${
+                className={`py-2 px-4 rounded-lg flex justify-between items-center ${
                   menu.isActive && "bg-black rounded-lg text-white"
                 }`}
                 href={menu.url}
