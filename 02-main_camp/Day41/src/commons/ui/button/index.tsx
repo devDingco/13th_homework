@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
 import styles from "./styles.module.css";
 import classNames from "classnames";
+import { RightArrowIcon } from "../icon";
+import Link from "next/link";
 
 interface IButtonBaseProps {
   className: string;
@@ -41,5 +45,14 @@ export function Button__48__full({
       onClick={onClick}
       disabled={disabled}
     ></ButtonBase>
+  );
+}
+
+export function LoginButton() {
+  return (
+    <Link href="/login" className={styles.button__login}>
+      <span>로그인</span>
+      <RightArrowIcon />
+    </Link>
   );
 }

@@ -10,6 +10,29 @@
   font-size: 1.125rem;
 }
 
+.button__40__fill {
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.button__login {
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 6.25rem;
+  background-color: black;
+}
+
+.button__login span {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
 .button__disabled {
   background-color: #2974e5;
   opacity: 50%;
