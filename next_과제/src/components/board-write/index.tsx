@@ -127,6 +127,7 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
                 errormessage={errors?.writeAddressPost?.message}
                 defaultValue={data?.fetchBoard.boardAddress?.zipcode || ""}
                 control={control}
+                readOnly
               />
             )}
             <PostSearchPopBtn
@@ -147,6 +148,7 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
                 type="text"
                 errormessage={errors?.writeAddress?.message}
                 defaultValue={data?.fetchBoard.boardAddress?.address || ""}
+                readOnly
                 control={control}
               />
 
