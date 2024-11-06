@@ -19,25 +19,32 @@ export class UserResolver {
     @Mutation(() => UserIdSchema)
     async login(
         @Args('loginUser') loginUser: loginUser,
-        @Context('res') res: Response,
+        @Context('req') req: { session: Record<string, any>; res: Response },
     ) {
-        const result = await this.userService.login(loginUser);
+        const { user, accessToken, refreshToken } =
+            await this.userService.login(loginUser);
 
-        res.setHeader('Authorization', `Bearer ${result.accessToken}`);
+        req.res.setHeader('Authorization', `Bearer ${accessToken}`);
 
-        res.cookie('refreshToken', result.refreshToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });
+        req.session.refreshToken = refreshToken;
 
-        return { id: result.user.id };
+        return { id: user.id };
     }
 
     @Mutation(() => Boolean)
-    logout(@Context('res') res: Response) {
-        res.clearCookie('refreshToken');
-        res.send(true);
+    logout(
+        @Context('req') req: { session: Record<string, any>; res: Response },
+    ): Promise<boolean> {
+        return new Promise((resolve) => {
+            req.res.clearCookie('connect.sid');
+
+            req.session.destroy((err: any) => {
+                if (err) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     }
 }

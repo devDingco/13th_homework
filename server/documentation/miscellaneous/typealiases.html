@@ -1,0 +1,1696 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">server documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-typealiases">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Type aliases</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#BoardAddressInput" title="src/generated/graphql.ts" ><b>BoardAddressInput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardAddressOutput" title="src/generated/graphql.ts" ><b>BoardAddressOutput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardAddressOutputResolvers" title="src/generated/graphql.ts" ><b>BoardAddressOutputResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardCommentResponseDto" title="src/generated/graphql.ts" ><b>BoardCommentResponseDto</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardCommentResponseDtoResolvers" title="src/generated/graphql.ts" ><b>BoardCommentResponseDtoResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardPaginationResponse" title="src/generated/graphql.ts" ><b>BoardPaginationResponse</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardPaginationResponseResolvers" title="src/generated/graphql.ts" ><b>BoardPaginationResponseResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardReactionSchema" title="src/generated/graphql.ts" ><b>BoardReactionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardReactionSchemaResolvers" title="src/generated/graphql.ts" ><b>BoardReactionSchemaResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardSchema" title="src/generated/graphql.ts" ><b>BoardSchema</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BoardSchemaResolvers" title="src/generated/graphql.ts" ><b>BoardSchemaResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ClearBoardMutation" title="src/generated/graphql.ts" ><b>ClearBoardMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ClearBoardMutationVariables" title="src/generated/graphql.ts" ><b>ClearBoardMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardCommentInput" title="src/generated/graphql.ts" ><b>CreateBoardCommentInput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardCommentMutation" title="src/generated/graphql.ts" ><b>CreateBoardCommentMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardCommentMutationVariables" title="src/generated/graphql.ts" ><b>CreateBoardCommentMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardInput" title="src/generated/graphql.ts" ><b>CreateBoardInput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardMutation" title="src/generated/graphql.ts" ><b>CreateBoardMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CreateBoardMutationVariables" title="src/generated/graphql.ts" ><b>CreateBoardMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteBoardCommentMutation" title="src/generated/graphql.ts" ><b>DeleteBoardCommentMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteBoardCommentMutationVariables" title="src/generated/graphql.ts" ><b>DeleteBoardCommentMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteBoardMutation" title="src/generated/graphql.ts" ><b>DeleteBoardMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteBoardMutationVariables" title="src/generated/graphql.ts" ><b>DeleteBoardMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DirectiveResolverFn" title="src/generated/graphql.ts" ><b>DirectiveResolverFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Exact" title="src/generated/graphql.ts" ><b>Exact</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardCommentQuery" title="src/generated/graphql.ts" ><b>GetBoardCommentQuery</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardCommentQueryVariables" title="src/generated/graphql.ts" ><b>GetBoardCommentQueryVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardQuery" title="src/generated/graphql.ts" ><b>GetBoardQuery</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardQueryVariables" title="src/generated/graphql.ts" ><b>GetBoardQueryVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardReactionQuery" title="src/generated/graphql.ts" ><b>GetBoardReactionQuery</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardReactionQueryVariables" title="src/generated/graphql.ts" ><b>GetBoardReactionQueryVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardsQuery" title="src/generated/graphql.ts" ><b>GetBoardsQuery</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GetBoardsQueryVariables" title="src/generated/graphql.ts" ><b>GetBoardsQueryVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Incremental" title="src/generated/graphql.ts" ><b>Incremental</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InputMaybe" title="src/generated/graphql.ts" ><b>InputMaybe</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IsPasswordCorrectMutation" title="src/generated/graphql.ts" ><b>IsPasswordCorrectMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IsPasswordCorrectMutationVariables" title="src/generated/graphql.ts" ><b>IsPasswordCorrectMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IsTypeOfResolverFn" title="src/generated/graphql.ts" ><b>IsTypeOfResolverFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MakeEmpty" title="src/generated/graphql.ts" ><b>MakeEmpty</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MakeMaybe" title="src/generated/graphql.ts" ><b>MakeMaybe</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MakeOptional" title="src/generated/graphql.ts" ><b>MakeOptional</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Maybe" title="src/generated/graphql.ts" ><b>Maybe</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Mutation" title="src/generated/graphql.ts" ><b>Mutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationCreateBoardArgs" title="src/generated/graphql.ts" ><b>MutationCreateBoardArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationCreateBoardCommentArgs" title="src/generated/graphql.ts" ><b>MutationCreateBoardCommentArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationDeleteBoardArgs" title="src/generated/graphql.ts" ><b>MutationDeleteBoardArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationDeleteBoardCommentArgs" title="src/generated/graphql.ts" ><b>MutationDeleteBoardCommentArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationIsPasswordCorrectArgs" title="src/generated/graphql.ts" ><b>MutationIsPasswordCorrectArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationResolvers" title="src/generated/graphql.ts" ><b>MutationResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationUpdateBoardArgs" title="src/generated/graphql.ts" ><b>MutationUpdateBoardArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MutationUpdateBoardCommentArgs" title="src/generated/graphql.ts" ><b>MutationUpdateBoardCommentArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NextResolverFn" title="src/generated/graphql.ts" ><b>NextResolverFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Query" title="src/generated/graphql.ts" ><b>Query</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#QueryGetBoardArgs" title="src/generated/graphql.ts" ><b>QueryGetBoardArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#QueryGetBoardCommentArgs" title="src/generated/graphql.ts" ><b>QueryGetBoardCommentArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#QueryGetBoardReactionArgs" title="src/generated/graphql.ts" ><b>QueryGetBoardReactionArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#QueryGetBoardsArgs" title="src/generated/graphql.ts" ><b>QueryGetBoardsArgs</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#QueryResolvers" title="src/generated/graphql.ts" ><b>QueryResolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RequireFields" title="src/generated/graphql.ts" ><b>RequireFields</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Resolver" title="src/generated/graphql.ts" ><b>Resolver</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResolverFn" title="src/generated/graphql.ts" ><b>ResolverFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Resolvers" title="src/generated/graphql.ts" ><b>Resolvers</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResolversParentTypes" title="src/generated/graphql.ts" ><b>ResolversParentTypes</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResolversTypes" title="src/generated/graphql.ts" ><b>ResolversTypes</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResolverTypeWrapper" title="src/generated/graphql.ts" ><b>ResolverTypeWrapper</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ResolverWithResolve" title="src/generated/graphql.ts" ><b>ResolverWithResolve</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Scalars" title="src/generated/graphql.ts" ><b>Scalars</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubscriptionObject" title="src/generated/graphql.ts" ><b>SubscriptionObject</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubscriptionResolveFn" title="src/generated/graphql.ts" ><b>SubscriptionResolveFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubscriptionResolver" title="src/generated/graphql.ts" ><b>SubscriptionResolver</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SubscriptionSubscribeFn" title="src/generated/graphql.ts" ><b>SubscriptionSubscribeFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TypeResolveFn" title="src/generated/graphql.ts" ><b>TypeResolveFn</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardCommentInput" title="src/generated/graphql.ts" ><b>UpdateBoardCommentInput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardCommentMutation" title="src/generated/graphql.ts" ><b>UpdateBoardCommentMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardCommentMutationVariables" title="src/generated/graphql.ts" ><b>UpdateBoardCommentMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardInput" title="src/generated/graphql.ts" ><b>UpdateBoardInput</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardMutation" title="src/generated/graphql.ts" ><b>UpdateBoardMutation</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateBoardMutationVariables" title="src/generated/graphql.ts" ><b>UpdateBoardMutationVariables</b>&nbsp;&nbsp;&nbsp;(src/.../graphql.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/generated/graphql.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardAddressInput"></a>
+                    <span class="name "><b>BoardAddressInput</b><a href="#BoardAddressInput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardAddressOutput"></a>
+                    <span class="name "><b>BoardAddressOutput</b><a href="#BoardAddressOutput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardAddressOutputResolvers"></a>
+                    <span class="name "><b>BoardAddressOutputResolvers</b><a href="#BoardAddressOutputResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardCommentResponseDto"></a>
+                    <span class="name "><b>BoardCommentResponseDto</b><a href="#BoardCommentResponseDto"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardCommentResponseDtoResolvers"></a>
+                    <span class="name "><b>BoardCommentResponseDtoResolvers</b><a href="#BoardCommentResponseDtoResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardPaginationResponse"></a>
+                    <span class="name "><b>BoardPaginationResponse</b><a href="#BoardPaginationResponse"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardPaginationResponseResolvers"></a>
+                    <span class="name "><b>BoardPaginationResponseResolvers</b><a href="#BoardPaginationResponseResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardReactionSchema"></a>
+                    <span class="name "><b>BoardReactionSchema</b><a href="#BoardReactionSchema"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardReactionSchemaResolvers"></a>
+                    <span class="name "><b>BoardReactionSchemaResolvers</b><a href="#BoardReactionSchemaResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardSchema"></a>
+                    <span class="name "><b>BoardSchema</b><a href="#BoardSchema"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BoardSchemaResolvers"></a>
+                    <span class="name "><b>BoardSchemaResolvers</b><a href="#BoardSchemaResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ClearBoardMutation"></a>
+                    <span class="name "><b>ClearBoardMutation</b><a href="#ClearBoardMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ClearBoardMutationVariables"></a>
+                    <span class="name "><b>ClearBoardMutationVariables</b><a href="#ClearBoardMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardCommentInput"></a>
+                    <span class="name "><b>CreateBoardCommentInput</b><a href="#CreateBoardCommentInput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardCommentMutation"></a>
+                    <span class="name "><b>CreateBoardCommentMutation</b><a href="#CreateBoardCommentMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardCommentMutationVariables"></a>
+                    <span class="name "><b>CreateBoardCommentMutationVariables</b><a href="#CreateBoardCommentMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardInput"></a>
+                    <span class="name "><b>CreateBoardInput</b><a href="#CreateBoardInput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardMutation"></a>
+                    <span class="name "><b>CreateBoardMutation</b><a href="#CreateBoardMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CreateBoardMutationVariables"></a>
+                    <span class="name "><b>CreateBoardMutationVariables</b><a href="#CreateBoardMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteBoardCommentMutation"></a>
+                    <span class="name "><b>DeleteBoardCommentMutation</b><a href="#DeleteBoardCommentMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteBoardCommentMutationVariables"></a>
+                    <span class="name "><b>DeleteBoardCommentMutationVariables</b><a href="#DeleteBoardCommentMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteBoardMutation"></a>
+                    <span class="name "><b>DeleteBoardMutation</b><a href="#DeleteBoardMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteBoardMutationVariables"></a>
+                    <span class="name "><b>DeleteBoardMutationVariables</b><a href="#DeleteBoardMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DirectiveResolverFn"></a>
+                    <span class="name "><b>DirectiveResolverFn</b><a href="#DirectiveResolverFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Exact"></a>
+                    <span class="name "><b>Exact</b><a href="#Exact"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardCommentQuery"></a>
+                    <span class="name "><b>GetBoardCommentQuery</b><a href="#GetBoardCommentQuery"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardCommentQueryVariables"></a>
+                    <span class="name "><b>GetBoardCommentQueryVariables</b><a href="#GetBoardCommentQueryVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardQuery"></a>
+                    <span class="name "><b>GetBoardQuery</b><a href="#GetBoardQuery"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardQueryVariables"></a>
+                    <span class="name "><b>GetBoardQueryVariables</b><a href="#GetBoardQueryVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardReactionQuery"></a>
+                    <span class="name "><b>GetBoardReactionQuery</b><a href="#GetBoardReactionQuery"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardReactionQueryVariables"></a>
+                    <span class="name "><b>GetBoardReactionQueryVariables</b><a href="#GetBoardReactionQueryVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardsQuery"></a>
+                    <span class="name "><b>GetBoardsQuery</b><a href="#GetBoardsQuery"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetBoardsQueryVariables"></a>
+                    <span class="name "><b>GetBoardsQueryVariables</b><a href="#GetBoardsQueryVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Incremental"></a>
+                    <span class="name "><b>Incremental</b><a href="#Incremental"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>T | </code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InputMaybe"></a>
+                    <span class="name "><b>InputMaybe</b><a href="#InputMaybe"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Maybe" target="_self" >Maybe&lt;T&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IsPasswordCorrectMutation"></a>
+                    <span class="name "><b>IsPasswordCorrectMutation</b><a href="#IsPasswordCorrectMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IsPasswordCorrectMutationVariables"></a>
+                    <span class="name "><b>IsPasswordCorrectMutationVariables</b><a href="#IsPasswordCorrectMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IsTypeOfResolverFn"></a>
+                    <span class="name "><b>IsTypeOfResolverFn</b><a href="#IsTypeOfResolverFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MakeEmpty"></a>
+                    <span class="name "><b>MakeEmpty</b><a href="#MakeEmpty"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MakeMaybe"></a>
+                    <span class="name "><b>MakeMaybe</b><a href="#MakeMaybe"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MakeOptional"></a>
+                    <span class="name "><b>MakeOptional</b><a href="#MakeOptional"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Maybe"></a>
+                    <span class="name "><b>Maybe</b><a href="#Maybe"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>T | null</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Mutation"></a>
+                    <span class="name "><b>Mutation</b><a href="#Mutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationCreateBoardArgs"></a>
+                    <span class="name "><b>MutationCreateBoardArgs</b><a href="#MutationCreateBoardArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationCreateBoardCommentArgs"></a>
+                    <span class="name "><b>MutationCreateBoardCommentArgs</b><a href="#MutationCreateBoardCommentArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationDeleteBoardArgs"></a>
+                    <span class="name "><b>MutationDeleteBoardArgs</b><a href="#MutationDeleteBoardArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationDeleteBoardCommentArgs"></a>
+                    <span class="name "><b>MutationDeleteBoardCommentArgs</b><a href="#MutationDeleteBoardCommentArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationIsPasswordCorrectArgs"></a>
+                    <span class="name "><b>MutationIsPasswordCorrectArgs</b><a href="#MutationIsPasswordCorrectArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationResolvers"></a>
+                    <span class="name "><b>MutationResolvers</b><a href="#MutationResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationUpdateBoardArgs"></a>
+                    <span class="name "><b>MutationUpdateBoardArgs</b><a href="#MutationUpdateBoardArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MutationUpdateBoardCommentArgs"></a>
+                    <span class="name "><b>MutationUpdateBoardCommentArgs</b><a href="#MutationUpdateBoardCommentArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NextResolverFn"></a>
+                    <span class="name "><b>NextResolverFn</b><a href="#NextResolverFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Query"></a>
+                    <span class="name "><b>Query</b><a href="#Query"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="QueryGetBoardArgs"></a>
+                    <span class="name "><b>QueryGetBoardArgs</b><a href="#QueryGetBoardArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="QueryGetBoardCommentArgs"></a>
+                    <span class="name "><b>QueryGetBoardCommentArgs</b><a href="#QueryGetBoardCommentArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="QueryGetBoardReactionArgs"></a>
+                    <span class="name "><b>QueryGetBoardReactionArgs</b><a href="#QueryGetBoardReactionArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="QueryGetBoardsArgs"></a>
+                    <span class="name "><b>QueryGetBoardsArgs</b><a href="#QueryGetBoardsArgs"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="QueryResolvers"></a>
+                    <span class="name "><b>QueryResolvers</b><a href="#QueryResolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RequireFields"></a>
+                    <span class="name "><b>RequireFields</b><a href="#RequireFields"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Resolver"></a>
+                    <span class="name "><b>Resolver</b><a href="#Resolver"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>ResolverFn&lt;TResult | TParent | TContext | TArgs&gt; | ResolverWithResolve&lt;TResult | TParent | TContext | TArgs&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResolverFn"></a>
+                    <span class="name "><b>ResolverFn</b><a href="#ResolverFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Resolvers"></a>
+                    <span class="name "><b>Resolvers</b><a href="#Resolvers"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResolversParentTypes"></a>
+                    <span class="name "><b>ResolversParentTypes</b><a href="#ResolversParentTypes"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mapping between all available schema types and the resolvers parents</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResolversTypes"></a>
+                    <span class="name "><b>ResolversTypes</b><a href="#ResolversTypes"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mapping between all available schema types and the resolvers types</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResolverTypeWrapper"></a>
+                    <span class="name "><b>ResolverTypeWrapper</b><a href="#ResolverTypeWrapper"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Promise&lt;T&gt; | T</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ResolverWithResolve"></a>
+                    <span class="name "><b>ResolverWithResolve</b><a href="#ResolverWithResolve"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Scalars"></a>
+                    <span class="name "><b>Scalars</b><a href="#Scalars"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>All built-in and custom scalars, mapped to their actual values</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubscriptionObject"></a>
+                    <span class="name "><b>SubscriptionObject</b><a href="#SubscriptionObject"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>SubscriptionSubscriberObject&lt;TResult | TKey | TParent | TContext | TArgs&gt; | SubscriptionResolverObject&lt;TResult | TParent | TContext | TArgs&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubscriptionResolveFn"></a>
+                    <span class="name "><b>SubscriptionResolveFn</b><a href="#SubscriptionResolveFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubscriptionResolver"></a>
+                    <span class="name "><b>SubscriptionResolver</b><a href="#SubscriptionResolver"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#SubscriptionObject" target="_self" > | SubscriptionObject&lt;TResult | TKey | TParent | TContext | TArgs&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SubscriptionSubscribeFn"></a>
+                    <span class="name "><b>SubscriptionSubscribeFn</b><a href="#SubscriptionSubscribeFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TypeResolveFn"></a>
+                    <span class="name "><b>TypeResolveFn</b><a href="#TypeResolveFn"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardCommentInput"></a>
+                    <span class="name "><b>UpdateBoardCommentInput</b><a href="#UpdateBoardCommentInput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardCommentMutation"></a>
+                    <span class="name "><b>UpdateBoardCommentMutation</b><a href="#UpdateBoardCommentMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardCommentMutationVariables"></a>
+                    <span class="name "><b>UpdateBoardCommentMutationVariables</b><a href="#UpdateBoardCommentMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardInput"></a>
+                    <span class="name "><b>UpdateBoardInput</b><a href="#UpdateBoardInput"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardMutation"></a>
+                    <span class="name "><b>UpdateBoardMutation</b><a href="#UpdateBoardMutation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateBoardMutationVariables"></a>
+                    <span class="name "><b>UpdateBoardMutationVariables</b><a href="#UpdateBoardMutationVariables"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#Exact" target="_self" >Exact&lt;literal type&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

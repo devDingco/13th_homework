@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
+import { Role } from 'src/common/enums/role.enum';
 
 @Entity()
 @Unique(['email'])
@@ -23,4 +24,11 @@ export class User extends BaseEntity {
     @Column()
     @Exclude()
     password: string;
+
+    @Column({
+        type: 'enum',
+        enum: Role,
+        default: Role.USER,
+    })
+    role: Role;
 }
