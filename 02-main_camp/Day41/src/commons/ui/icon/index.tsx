@@ -67,7 +67,7 @@ export function LoginMainImage() {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
     />
   );
 }
