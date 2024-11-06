@@ -3,6 +3,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 
 import { AppModule } from './app.module';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
+import { ContextTypeGuard } from './common/guards/context.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule } from '@nestjs/swagger';
@@ -21,7 +22,7 @@ async function bootstrap() {
         credentials: true,
     });
 
-    app.useGlobalGuards(new AuthenticationGuard());
+    app.useGlobalGuards(new ContextTypeGuard(), new AuthenticationGuard());
 
     app.useGlobalInterceptors(new LoggingInterceptor());
 

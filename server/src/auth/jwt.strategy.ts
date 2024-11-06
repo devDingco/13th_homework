@@ -8,7 +8,6 @@ import { UserRepository } from 'src/user/repository/user.repository';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly userRepository: UserRepository) {
-        console.log(process.env.JWT_ACCESS_SECRET);
         super({
             // key - jwt VERIFY SIGNATURE를 처리하기 위한 key
             secretOrKey: process.env.JWT_ACCESS_SECRET,

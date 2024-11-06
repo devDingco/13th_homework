@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 import { signUpUser } from './schema/signUp.schema';
 import { loginUser } from './schema/login.schema';
 import { Response } from 'express';
-import { UserIdSchema } from './schema/user-id.schema';
+import { TokenSchema } from './schema/token.schema';
 
 @Resolver(() => UserSchema)
 export class UserResolver {
@@ -16,19 +16,19 @@ export class UserResolver {
         return this.userService.createUser(signUpUser);
     }
 
-    @Mutation(() => UserIdSchema)
+    @Mutation(() => TokenSchema)
     async login(
         @Args('loginUser') loginUser: loginUser,
         @Context('req') req: { session: Record<string, any>; res: Response },
     ) {
-        const { user, accessToken, refreshToken } =
+        const { accessToken, refreshToken } =
             await this.userService.login(loginUser);
 
         req.res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         req.session.refreshToken = refreshToken;
 
-        return { id: user.id };
+        return { accessToken };
     }
 
     @Mutation(() => Boolean)

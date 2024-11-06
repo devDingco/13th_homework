@@ -30,13 +30,13 @@ export class UserController {
         @Res() res: Response,
         @Session() session: Record<string, any>,
     ): Promise<void> {
-        const { user, accessToken, refreshToken } =
+        const { accessToken, refreshToken } =
             await this.userService.login(loginDTO);
         res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         session.refreshToken = refreshToken;
 
-        res.status(HttpStatus.OK).json({ id: user.id });
+        res.status(HttpStatus.OK).json({ accessToken });
     }
 
     @Post('/logout')
