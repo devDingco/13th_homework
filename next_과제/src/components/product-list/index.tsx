@@ -11,8 +11,7 @@ import ProductPickedBtn from "@/components/product-list/product-picked-btn";
 
 export default function ProductList() {
   const router = useRouter();
-  const { data } = useProductList();
-  const handleSearch = (search: string) => {};
+  const { data, handleSearch, setIsSoldout, isSoldout } = useProductList();
 
   return (
     <div className="flex flex-col gap-6">
@@ -21,18 +20,25 @@ export default function ProductList() {
       <div>
         <ul className="flex gap-4 items-center">
           <li>
-            <Button size="large" color="default" variant="solid">
+            <Button
+              className={isSoldout ? "invert" : ""}
+              size="large"
+              color="default"
+              variant="solid"
+              onClick={() => setIsSoldout(false)}
+            >
               예약 가능 숙소
             </Button>
           </li>
           <li>
             <Button
-              className="invert"
+              className={isSoldout ? "" : "invert"}
               size="large"
               color="default"
               variant="solid"
+              onClick={() => setIsSoldout(true)}
             >
-              예약 가능 숙소
+              예약 마감 숙소
             </Button>
           </li>
         </ul>
