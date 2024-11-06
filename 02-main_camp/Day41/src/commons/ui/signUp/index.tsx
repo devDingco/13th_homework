@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CreateUserDocument } from "@/commons/gql/graphql";
+import { Button__48__full } from "../button";
 
 interface ISignUpProps {
   handleCancel?: () => void;
@@ -24,6 +25,10 @@ export default function SignUp({
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
   });
+
+  const errorMessages = methods.formState.errors;
+  const isValid = methods.formState.isValid;
+  // console.log(methods.formState.isValid); --> form 1자리 이상 입력되면 true
 
   const onClickSignUp = async (data: ISignUpSchema) => {
     console.log("회원가입 버튼을 눌렀습니다.");
@@ -53,46 +58,61 @@ export default function SignUp({
           <span>회원가입을 위해 아래 빈칸을 모두 채워 주세요.</span>
           <div className={styles.inputForm__container}>
             <InputForm
+              validationStatus={
+                errorMessages.email?.message === undefined ? "default" : "error"
+              }
               keyName="email"
               isRequired={true}
               isHiddenHeader={false}
               label="이메일"
               type="text"
               placeholder="이메일을 입력해 주세요."
+              errorMessage={errorMessages.email?.message}
             />
             <InputForm
+              validationStatus={
+                errorMessages.email?.message === undefined ? "default" : "error"
+              }
               keyName="name"
               isRequired={true}
               isHiddenHeader={false}
               label="이름"
               type="text"
               placeholder="이름을 입력해 주세요."
+              errorMessage={errorMessages.name?.message}
             />
             <InputForm
+              validationStatus={
+                errorMessages.email?.message === undefined ? "default" : "error"
+              }
               keyName="password"
               isRequired={true}
               isHiddenHeader={false}
               label="비밀번호"
               type="password"
               placeholder="비밀번호를 입력해 주세요."
+              errorMessage={errorMessages.password?.message}
             />
             <InputForm
+              validationStatus={
+                errorMessages.email?.message === undefined ? "default" : "error"
+              }
               keyName="checkPassword"
               isRequired={true}
               isHiddenHeader={false}
               label="비밀번호 확인"
               type="password"
               placeholder="비밀번호를 한번 더 입력해 주세요."
+              errorMessage={errorMessages.checkPassword?.message}
             />
           </div>
         </div>
         <div className={styles.buttons__container}>
-          <button
-            className={styles.button__signUp}
+          <Button__48__full
+            label="회원가입"
             onClick={methods.handleSubmit(onClickSignUp)}
-          >
-            회원가입
-          </button>
+            disabled={isValid ? false : true}
+          />
           <button className={styles.button__cancel} onClick={handleCancel}>
             취소
           </button>
