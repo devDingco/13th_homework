@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import useCustomSearchParams from "@/commons/hooks/useCustomSearchParams";
 import { dateViewSet } from "@/utils/dateViewSet";
@@ -9,70 +11,43 @@ import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
   FetchBoardsCountDocument,
-  FetchBoardsCountQueryVariables,
 } from "@/commons/graphql/graphql";
 import Icon from "@/components/icon-factory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
-import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
+import { useSearch } from "@/commons/stores/search-store";
+import { useSearchDate } from "@/commons/stores/search-date-store";
 
 export const useBoardList = () => {
   const router = useRouter();
   const { searchParams, setSearchParams } = useCustomSearchParams();
-  const [search, setSearch] = useState("");
+  const { startDate, endDate } = useSearchDate();
+  const { search } = useSearch();
   const [page, setPage] = useState(1);
-  const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
-  const [endDate, setEndDate] = useState<string>(new Date().toISOString());
 
-  const { data, refetch } = useQuery(FetchBoardsListDocument, {
-    variables: {
-      startDate: toKoreanTimeString(startDate),
-      endDate: toKoreanTimeString(endDate),
-      search: search,
-      page: 1,
-    },
-  });
+  const { data, refetch } = useQuery(FetchBoardsListDocument);
 
-  const { data: countData } = useQuery(FetchBoardsCountDocument, {
-    variables: {
-      startDate: toKoreanTimeString(startDate),
-      endDate: toKoreanTimeString(endDate, true),
-      search: search,
-    },
-  });
+  const { data: countData, refetch: countDataRefetch } = useQuery(
+    FetchBoardsCountDocument
+  );
 
   const fetchBoardsCount = countData?.fetchBoardsCount; // !게시글 총 갯수
 
-  // !검색 결과 리패치 - 검색컴포넌트에서 검색시 받아오는 값으로 리패치
-  const handleSearch = async ({
-    startDate,
-    endDate,
-    search,
-  }: FetchBoardsCountQueryVariables) => {
-    const result = await refetch({
-      startDate: toKoreanTimeString(startDate),
-      endDate: toKoreanTimeString(endDate, true),
-      search: search,
-      page: 1,
-    });
+  // ! 검색 처리
+  const handleSearch = async () => {
+    const result = await refetch({ startDate, endDate, search, page });
+    const countResult = await countDataRefetch({ startDate, endDate, search });
+    console.log(countResult);
     console.log(result);
-    setStartDate(startDate);
-    setEndDate(endDate);
-    setSearch(search || "");
   };
 
+  // ! 페이지 변경시 데이터 다시 불러오기
   const pageChangeHandler = async (page: number) => {
-    const result = await refetch({
-      startDate: toKoreanTimeString("2021-09-03"),
-      endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
-      search: search, // 기본값은 ""인데 검색결과 리패치 상태인 경우 search값이 있음
-      page: page,
-    });
+    const result = await refetch({ startDate, endDate, search, page });
     console.log(result);
     setPage(page);
   };
 
-  // console.log(params.pageNum, data?.fetchBoards);
-
+  // ! 게시글 삭제 처리
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const postDelete = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -103,6 +78,7 @@ export const useBoardList = () => {
     }
   };
 
+  // ! 마우스 오버시 삭제버튼 보이기
   const listItemMouseHandler = (
     e: React.MouseEvent<HTMLTableRowElement>,
     type: string
@@ -119,6 +95,7 @@ export const useBoardList = () => {
     }
   };
 
+  // ! 게시글 상세페이지 이동 처리
   const detailPageHandler = (
     e: React.MouseEvent<HTMLTableRowElement>,
     postId: string
@@ -203,12 +180,12 @@ export const useBoardList = () => {
     postDelete,
     listItemMouseHandler,
     detailPageHandler,
-    handleSearch,
     dataSource,
     columns,
     fetchBoardsCount,
     searchParams,
     setSearchParams,
     router,
+    handleSearch,
   };
 };
