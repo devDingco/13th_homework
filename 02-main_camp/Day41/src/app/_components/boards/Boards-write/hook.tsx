@@ -1,5 +1,5 @@
 import { ApolloError, useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import {
   CreateBoardDocument,
@@ -12,12 +12,15 @@ import {
 } from "@/commons/gql/graphql";
 import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
-import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
+import useModal from "@/commons/ui/modal/hook";
+import { NavigationPaths, useNavigate } from "@/commons/navigate";
 
 export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
-  const router = useRouter();
+  const navigate = useNavigate();
+  // const router = useRouter();
   const params = useParams();
+  const { showSuccessModal, showErrorModal } = useModal();
 
   const [isActive, setIsActive] = useState(isEdit ? true : false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
@@ -125,7 +128,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
       const boardId = result.data?.createBoard._id;
       console.log(result.data?.createBoard);
       showSuccessModal("게시글이 작성 되었습니다.", () => {
-        router.push(`/boards/${boardId}`);
+        navigate(NavigationPaths.boards, boardId);
       });
     } catch {
       showErrorModal(
@@ -163,7 +166,7 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
         ],
       });
       showSuccessModal(CONSTANTS_ALERT_MESSAGE.UPDATE_BOARD_SUCCEED, () => {
-        router.push(`/boards/${params.boardId}`);
+        navigate(NavigationPaths.boards, String(params.boardId));
       });
     } catch (error: unknown) {
       if (error instanceof ApolloError)
@@ -173,9 +176,9 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
 
   const onClickCancel = () => {
     if (isEdit) {
-      router.push(`/boards/${params.boardId}`);
+      navigate(NavigationPaths.boards, String(params.boardId));
     } else {
-      router.push(`/boards`);
+      navigate(NavigationPaths.boards);
     }
   };
 
@@ -235,29 +238,6 @@ export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {
         ...boardAddress,
         images: newImages,
       };
-    });
-  };
-
-  // Modal
-  const showSuccessModal = (
-    content: string,
-    completionHandler?: () => void
-  ) => {
-    Modal.success({
-      content: content,
-      onOk: completionHandler,
-    });
-  };
-
-  const showErrorModal = (
-    title: string,
-    content: string,
-    completionHandler?: () => void
-  ) => {
-    Modal.error({
-      title: title,
-      content: content,
-      onOk: completionHandler,
     });
   };
 
