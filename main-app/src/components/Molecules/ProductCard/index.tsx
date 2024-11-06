@@ -3,16 +3,16 @@
 import { css } from "@/common/styled-system/css";
 import dummy from "/public/img/ping.png";
 
-// import { TagOutlined } from "@ant-design/icons";
-// import { Avatar } from "antd";
 import Image from "next/image";
+import { TagIcon } from "lucide-react";
+import { Avatar } from "@ark-ui/react/avatar";
 
 export default function ProductCardUI() {
     return (
         <div className={css({ w: "22rem" })}>
             <div className={CSS_CardWrapper}>
                 <div className={CSS_CardLabel}>
-                    {/* <TagOutlined /> */}
+                    <TagIcon size={20} />
                     132
                 </div>
                 <div className={CSS_dimmedBG}></div>
@@ -26,7 +26,16 @@ export default function ProductCardUI() {
 
                 <div className={CSS_Profile}>
                     <div className={CSS_Avatar}>
-                        {/* <Avatar /> */}
+                        <Avatar.Root
+                            className={css({
+                                width: "4rem",
+                                height: "4rem",
+                                clipPath: "circle(50%)",
+                            })}
+                        >
+                            <Avatar.Fallback>(프사)</Avatar.Fallback>
+                            <Avatar.Image src="https://i.pravatar.cc/300" alt="avatar" />
+                        </Avatar.Root>
                         빈얀트리
                     </div>
                     <div>32,900원</div>

@@ -46,9 +46,11 @@ export const InputPlaceholder = {
 };
 
 export interface ISearchProps {
-    refetch?: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
-    keyword?: string;
-    setKeyword?: Dispatch<SetStateAction<string>>;
+    refetch: (
+        variables?: Partial<OperationVariables> | undefined,
+    ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+    keyword: string;
+    setKeyword: Dispatch<SetStateAction<string>>;
 }
 
 export interface IBoardListProps {
@@ -59,7 +61,9 @@ export interface IBoardListProps {
 }
 
 export interface IPagination {
-    refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+    refetch: (
+        variables?: Partial<OperationVariables> | undefined,
+    ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
     lastPage: number;
     current: number;
     setCurrent: Dispatch<SetStateAction<number>>;

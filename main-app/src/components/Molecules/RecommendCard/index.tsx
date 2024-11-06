@@ -3,15 +3,15 @@
 import { css } from "@/common/styled-system/css";
 import dummy from "/public/img/ping.png";
 
-// import { TagOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import { TagIcon } from "lucide-react";
 
 export default function RecommendCardUI() {
     return (
         <>
             <div className={CSS_CardWrapper}>
                 <div className={CSS_CardLabel}>
-                    {/* <TagOutlined /> */}
+                    <TagIcon size={20} />
                     132
                 </div>
                 <Image className={CSS_CardImg} src={dummy} alt="just dummy img" />
