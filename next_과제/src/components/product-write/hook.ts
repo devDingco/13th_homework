@@ -3,7 +3,7 @@ import { useRouter, useParams } from "next/navigation";
 import {
   CreateTravelproductDocument,
   UpdateTravelproductDocument,
-  FetchTravelproductDocument,
+  FetchTravelproductDetailDocument,
 } from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
@@ -18,11 +18,14 @@ export const useProductWrite = () => {
   const [tags, setTags] = useState<string[]>([]);
 
   //!수정할 게시글 데이터 가져오기
-  const { data: travelProductData } = useQuery(FetchTravelproductDocument, {
-    variables: {
-      travelproductId: productId,
-    },
-  });
+  const { data: travelProductData } = useQuery(
+    FetchTravelproductDetailDocument,
+    {
+      variables: {
+        travelproductId: productId,
+      },
+    }
+  );
 
   const data = travelProductData?.fetchTravelproduct;
 
