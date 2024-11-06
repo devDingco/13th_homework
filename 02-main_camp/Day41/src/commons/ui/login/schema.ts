@@ -14,7 +14,9 @@ export interface ISignUpSchema {
 
 export const loginSchema = z.object({
   email: z.string(),
-  password: z.string(),
+  password: z.string({
+    message: "아이디 또는 비밀번호를 확인해주세요.",
+  }),
 });
 
 export const signUpSchema = z.object({
