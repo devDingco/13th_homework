@@ -1,12 +1,12 @@
 "use client";
-import ProductList from "@/components/product-list";
+import MyProductList from "@/components/mypage/product-list";
 import MyPageSubMenu from "@/components/mypage/mypage-menu/sub-menu";
 
 export default function MyPage() {
   return (
     <>
       <MyPageSubMenu />
-      <ProductList />
+      <MyProductList />
     </>
   );
 }
