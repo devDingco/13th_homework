@@ -39,7 +39,7 @@ export default function PointList({
               current: page,
               defaultPageSize: 10,
               responsive: true,
-              total: fetchPointTransactionsCount,
+              total: fetchPointTransactionsCount(),
               showTotal: (total) => `총 게시글 수 : ${total}`,
               defaultCurrent: 1,
               showLessItems: false,
