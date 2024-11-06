@@ -8,8 +8,8 @@ export default function RootContainer({ children }: IProps) {
 	return (
 		<main className="flex flex-col items-center justify-center">
 			{/* active link */}
-			<RootHeader />
-			<RootBanner />
+			{/* <RootHeader />
+			<RootBanner /> */}
 			{children}
 		</main>
 	);

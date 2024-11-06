@@ -103,6 +103,9 @@ export type Mutation = {
 	deleteBoard: Scalars['Boolean']['output'];
 	deleteBoardComment: Scalars['Boolean']['output'];
 	isPasswordCorrect: Scalars['Boolean']['output'];
+	login: TokenSchema;
+	logout: Scalars['Boolean']['output'];
+	signup: UserSchema;
 	updateBoard: BoardSchema;
 	updateBoardComment: BoardCommentResponseDto;
 };
@@ -128,6 +131,14 @@ export type MutationDeleteBoardCommentArgs = {
 export type MutationIsPasswordCorrectArgs = {
 	boardId: Scalars['Int']['input'];
 	password: Scalars['String']['input'];
+};
+
+export type MutationLoginArgs = {
+	loginUser: LoginUser;
+};
+
+export type MutationSignupArgs = {
+	signUpUser: SignUpUser;
 };
 
 export type MutationUpdateBoardArgs = {
@@ -167,6 +178,11 @@ export type QueryGetBoardsArgs = {
 	take?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type TokenSchema = {
+	__typename?: 'TokenSchema';
+	accessToken: Scalars['String']['output'];
+};
+
 export type UpdateBoardCommentInput = {
 	content: Scalars['String']['input'];
 	parentId?: InputMaybe<Scalars['String']['input']>;
@@ -180,4 +196,23 @@ export type UpdateBoardInput = {
 	imageUrl?: InputMaybe<Array<Scalars['String']['input']>>;
 	title: Scalars['String']['input'];
 	youtubeUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserSchema = {
+	__typename?: 'UserSchema';
+	email: Scalars['String']['output'];
+	id: Scalars['Int']['output'];
+	name: Scalars['String']['output'];
+};
+
+export type LoginUser = {
+	email: Scalars['String']['input'];
+	password: Scalars['String']['input'];
+};
+
+export type SignUpUser = {
+	email: Scalars['String']['input'];
+	name: Scalars['String']['input'];
+	password: Scalars['String']['input'];
+	role: Scalars['String']['input'];
 };

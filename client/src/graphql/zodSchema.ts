@@ -4,6 +4,8 @@ import {
 	BoardAddressInput,
 	CreateBoardCommentInput,
 	CreateBoardInput,
+	LoginUser,
+	SignUpUser,
 	UpdateBoardCommentInput,
 	UpdateBoardInput,
 } from './types';
@@ -67,5 +69,21 @@ export function UpdateBoardInputSchema(): z.ZodObject<Properties<UpdateBoardInpu
 		imageUrl: z.array(z.string()).nullish(),
 		title: z.string(),
 		youtubeUrl: z.string().nullish(),
+	});
+}
+
+export function LoginUserSchema(): z.ZodObject<Properties<LoginUser>> {
+	return z.object({
+		email: z.string(),
+		password: z.string(),
+	});
+}
+
+export function SignUpUserSchema(): z.ZodObject<Properties<SignUpUser>> {
+	return z.object({
+		email: z.string(),
+		name: z.string(),
+		password: z.string(),
+		role: z.string(),
 	});
 }
