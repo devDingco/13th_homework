@@ -2,8 +2,8 @@
 
 import Button from "@/components/Atoms/_Button";
 import SearchUI from "@/components/Molecules/Search";
-import { RightOutlined, WalletOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+// import { RightOutlined, WalletOutlined } from "@ant-design/icons";
+// import { Avatar } from "antd";
 import BoardsListUI from "../BoardsList";
 import { css } from "@/common/styled-system/css";
 import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
@@ -21,28 +21,28 @@ export default function MyPageUI() {
                     <div>내 정보</div>
 
                     <div className={CSS_myPage_Flex}>
-                        <Avatar />
+                        {/* <Avatar /> */}
                         <div className={CSS_myPage_Title}>{login?.fetchUserLoggedIn.name}</div>
                     </div>
 
                     <div className={CSS_myPage_Flex}>
-                        <WalletOutlined />
-                        <div className={CSS_myPage_Title}>23,000 P</div>
+                        {/* <WalletOutlined /> */}
+                        <div className={CSS_myPage_Title}>1,000,000 P</div>
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>거래내역 & 북마크</div>
-                        <RightOutlined />
+                        {/* <RightOutlined /> */}
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>포인트 사용내역</div>
-                        <RightOutlined />
+                        {/* <RightOutlined /> */}
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>비밀번호 변경</div>
-                        <RightOutlined />
+                        {/* <RightOutlined /> */}
                     </div>
                 </div>
 
@@ -71,6 +71,7 @@ const CSS_myPage_Title = css({
 });
 
 const CSS_myPage_Flex = css({
+    maxWidth: "24rem",
     display: "flex",
     gap: "1rem",
     alignItems: "center",

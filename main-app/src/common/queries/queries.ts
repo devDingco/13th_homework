@@ -1,4 +1,3 @@
-"use client";
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
@@ -166,5 +165,11 @@ export const FETCH_USER = gql`
             email
             name
         }
+    }
+`;
+
+export const LOGOUT_USER = gql`
+    mutation logoutUser {
+        logoutUser
     }
 `;

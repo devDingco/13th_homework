@@ -26,7 +26,12 @@ export default function LayoutBanner() {
                 >
                     {[1, 2, 3, 4, 5].map((el) => (
                         <SwiperSlide key={`banner0${el}`}>
-                            <Image src={`/img/banner0${el}.jpg`} alt="banner img" width={1200} height={0} />
+                            <Image
+                                src={`/img/banner0${el}.jpg`}
+                                alt="banner img"
+                                width={1200}
+                                height={0}
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>

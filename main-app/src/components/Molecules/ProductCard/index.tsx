@@ -3,8 +3,8 @@
 import { css } from "@/common/styled-system/css";
 import dummy from "/public/img/ping.png";
 
-import { TagOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+// import { TagOutlined } from "@ant-design/icons";
+// import { Avatar } from "antd";
 import Image from "next/image";
 
 export default function ProductCardUI() {
@@ -12,7 +12,7 @@ export default function ProductCardUI() {
         <div className={css({ w: "22rem" })}>
             <div className={CSS_CardWrapper}>
                 <div className={CSS_CardLabel}>
-                    <TagOutlined />
+                    {/* <TagOutlined /> */}
                     132
                 </div>
                 <div className={CSS_dimmedBG}></div>
@@ -26,7 +26,7 @@ export default function ProductCardUI() {
 
                 <div className={CSS_Profile}>
                     <div className={CSS_Avatar}>
-                        <Avatar />
+                        {/* <Avatar /> */}
                         빈얀트리
                     </div>
                     <div>32,900원</div>
