@@ -8,6 +8,10 @@
   font-size: 1rem;
 }
 
+.error__input {
+  border: 0.125rem solid #f66a6a;
+}
+
 .input__header__container {
   display: flex;
   gap: 0.25rem;
@@ -31,7 +35,8 @@
   gap: 0.5rem;
 }
 
-.form__Input__container {
-  display: flex;
-  gap: 0.5rem;
+.error__message {
+  color: #f66a6a;
+  font-weight: 400;
+  font-size: 0.75rem;
 }
