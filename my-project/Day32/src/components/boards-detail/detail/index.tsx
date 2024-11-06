@@ -105,7 +105,6 @@ export default function BoardDetail() {
           </div>
         </button>
       </div>
-      <CommentWrite />
     </div>
   );
 }

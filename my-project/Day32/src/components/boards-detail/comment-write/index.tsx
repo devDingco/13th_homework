@@ -1,21 +1,41 @@
 import Image from "next/image";
 import useCommentWrite from "./hook";
-import CommentList from "../comment-list";
-import useCommentList from "../comment-list/hook";
 import { Rate } from "antd";
+import { StarOutlined } from "@ant-design/icons";
+import useCommentList from "../comment-list/hook";
 
-export default function CommentWrite() {
-  const { onChangeInput, onClickRegister, onChangeRating } = useCommentWrite();
-  const { data } = useCommentList();
+export default function CommentWrite({ isEdit, el, setIsEdit }) {
+  const {
+    onChangeInput,
+    onClickRegister,
+    onChangeRating,
+    onClickEdit,
+    comment,
+  } = useCommentWrite(setIsEdit);
+
   return (
-    <div className="flex flex-col w-[1280px] gap-10">
+    <div className="flex flex-col w-[1280px] gap-10 mx-auto">
       <div className="flex flex-col gap-6 w-full">
-        <div className="flex gap-2">
-          <div className="w-6 h-6 relative">
-            <Image src="/img/chat.svg" alt="chatImg" fill object-fit="cover" />
+        {!isEdit ? (
+          <div className="flex gap-2">
+            <div className="w-6 h-6 relative">
+              <Image
+                src="/img/chat.svg"
+                alt="chatImg"
+                fill
+                object-fit="cover"
+              />
+            </div>
+            <div className="font-semibold text-4 leading-6">댓글</div>
           </div>
-          <div className="font-semibold text-4 leading-6">댓글</div>
-        </div>
+        ) : (
+          <div className="flex gap-2">
+            <div className="w-6 h-6 relative">
+              <StarOutlined />
+            </div>
+            <div className="font-semibold text-4 leading-6">별점</div>
+          </div>
+        )}
 
         <div>
           <Rate onChange={onChangeRating} />
@@ -35,6 +55,8 @@ export default function CommentWrite() {
                 type="text"
                 className="py-3 px-4 border rounded-lg "
                 placeholder="작성자 명을 입력해 주세요."
+                defaultValue={isEdit && el.writer}
+                disabled={isEdit}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -47,7 +69,7 @@ export default function CommentWrite() {
               <input
                 name="password"
                 onChange={onChangeInput}
-                type="text"
+                type="password"
                 placeholder="비밀번호를 입력해 주세요."
                 className="py-3 px-4 border rounded-lg"
               />
@@ -59,24 +81,18 @@ export default function CommentWrite() {
             name="contents"
             id=""
             placeholder="댓글을 입력해 주세요."
+            defaultValue={isEdit ? el.contents : comment.contents}
           ></textarea>
           <div className="flex justify-end">
             <button
-              onClick={onClickRegister}
+              onClick={isEdit ? () => onClickEdit(el._id) : onClickRegister}
               className="h-48px py-3 px-4 rounded-lg bg-[#c7c7c7c7] text-[#e4e4e4]"
             >
-              댓글 등록
+              {!isEdit ? "댓글 등록" : "수정 하기"}
             </button>
           </div>
         </div>
       </div>
-      {data?.fetchBoardComments ? (
-        <CommentList />
-      ) : (
-        <div className="flex justify-center">
-          <div>등록된 댓글이 없습니다.</div>
-        </div>
-      )}
     </div>
   );
 }
