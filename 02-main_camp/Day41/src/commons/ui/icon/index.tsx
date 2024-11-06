@@ -113,7 +113,7 @@ export function Location() {
   );
 }
 
-export function Link() {
+export function LinkIcon() {
   return (
     <Image
       src="/assets/link.png"
@@ -234,6 +234,19 @@ export function LogoIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   return (
     <Image
       src="/assets/login_logo.png"
+      alt="로고 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function RightArrowIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/right_arrow.svg"
       alt="로고 아이콘"
       width={0}
       height={0}
