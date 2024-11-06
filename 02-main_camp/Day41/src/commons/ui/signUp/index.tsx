@@ -9,6 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CreateUserDocument } from "@/commons/gql/graphql";
 import { Button__48__full } from "../button";
+import useModal from "../modal/hook";
 
 interface ISignUpProps {
   handleCancel?: () => void;
@@ -20,6 +21,7 @@ export default function SignUp({
   completionHandler,
 }: ISignUpProps) {
   const [createUser] = useMutation(CreateUserDocument);
+  const { showSuccessModal, showErrorModal } = useModal();
 
   const methods = useForm<ISignUpSchema>({
     resolver: zodResolver(signUpSchema),
@@ -28,7 +30,6 @@ export default function SignUp({
 
   const errorMessages = methods.formState.errors;
   const isValid = methods.formState.isValid;
-  // console.log(methods.formState.isValid); --> form 1자리 이상 입력되면 true
 
   const onClickSignUp = async (data: ISignUpSchema) => {
     console.log("회원가입 버튼을 눌렀습니다.");
@@ -43,10 +44,10 @@ export default function SignUp({
         },
       });
       console.log(result.data?.createUser);
-      alert("회원가입이 완료되었습니다.");
-      completionHandler();
+      showSuccessModal("회원가입이 완료되었습니다.", completionHandler);
     } catch (error) {
       console.log(error);
+      showErrorModal("회원가입 실패", "회원가입을 실패했습니다.");
     }
   };
 
