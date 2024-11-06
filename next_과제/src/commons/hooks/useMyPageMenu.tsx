@@ -13,7 +13,7 @@ const MY_PAGE_MENU = [
       },
       {
         name: "북마크",
-        url: "/mypage/pickeds",
+        url: "/mypage/picked-list",
       },
     ],
   },
