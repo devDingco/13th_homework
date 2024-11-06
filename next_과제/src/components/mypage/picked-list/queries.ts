@@ -6,6 +6,9 @@ export const FETCH_TRAVEL_PRODUCTS_I_PICKED = gql`
       _id
       name
       price
+      seller {
+        name
+      }
       createdAt
       updatedAt
       deletedAt

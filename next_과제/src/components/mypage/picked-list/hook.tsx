@@ -1,127 +1,133 @@
-import { useRouter } from "next/navigation";
+"use client";
+
+// import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import {
   FetchTravelproductsIPickedDocument,
   FetchTravelproductsCountIPickedDocument,
 } from "@/commons/graphql/graphql";
-
-import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
-import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
+import { useRouter } from "next/navigation";
+import { dateViewSet } from "@/utils/dateViewSet";
+import { useSearch } from "@/commons/stores/search-store";
+import { TableProps } from "antd/lib/table";
+import { DataType } from "./types";
 
 export const usePickedList = () => {
   const router = useRouter();
+  const { search } = useSearch();
   const [page, setPage] = useState(1);
 
   const { data, refetch } = useQuery(FetchTravelproductsIPickedDocument, {
     variables: {
+      search: "",
       page,
     },
   });
 
-  console.log("pickeds Data", data);
-
   const { data: countData } = useQuery(FetchTravelproductsCountIPickedDocument);
 
-  // const fetchBoardsCount = countData?.fetchTravelproductsCountIPicked; // !게시글 총 갯수
+  const fetchProductsCount = countData?.fetchTravelproductsCountIPicked; // !게시글 총 갯수
 
-  // const pageChangeHandler = async (page: number) => {
-  //   const result = await refetch({
-  //     startDate: toKoreanTimeString("2021-09-03"),
-  //     endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
-  //     search: search, // 기본값은 ""인데 검색결과 리패치 상태인 경우 search값이 있음
-  //     page: page,
-  //   });
-  //   console.log(result);
-  //   setPage(page);
-  // };
+  const handleSearch = async () => {
+    const result = await refetch({ search });
+    console.log(result);
+  };
 
-  // // console.log(params.pageNum, data?.fetchBoards);
+  const pageChangeHandler = async (page: number) => {
+    const result = await refetch({
+      search,
+      page,
+    });
+    console.log(result);
+    setPage(page);
+  };
 
-  // const listItemMouseHandler = (
-  //   e: React.MouseEvent<HTMLTableRowElement>,
-  //   type: string
-  // ) => {
-  //   const target = e.currentTarget;
-  //   const childTarget = target.lastElementChild?.firstElementChild?.classList;
-  //   // console.log(childTarget);
-  //   if (type === "over") {
-  //     childTarget?.add("flex");
-  //     childTarget?.remove("hidden");
-  //   } else {
-  //     childTarget?.add("hidden");
-  //     childTarget?.remove("flex");
-  //   }
-  // };
+  // console.log(params.pageNum, data?.fetchBoards);
 
-  // const detailPageHandler = (
-  //   e: React.MouseEvent<HTMLTableRowElement>,
-  //   postId: string
-  // ) => {
-  //   // console.log("detail", postId);
-  //   router.push(`/boards/${postId}`);
-  // };
+  const listItemMouseHandler = (
+    e: React.MouseEvent<HTMLTableRowElement>,
+    type: string
+  ) => {
+    const target = e.currentTarget;
+    const childTarget = target.lastElementChild?.firstElementChild?.classList;
+    // console.log(childTarget);
+    if (type === "over") {
+      childTarget?.add("flex");
+      childTarget?.remove("hidden");
+    } else {
+      childTarget?.add("hidden");
+      childTarget?.remove("flex");
+    }
+  };
 
-  // const dataSource = Array.from({
-  //   length: data?.fetchTravelproductsIPicked.length || 0,
-  // }).map<DataType>((_, idx) => ({
-  //   key: String(idx + 1 + (page - 1) * 10),
-  //   name: data?.fetchTravelproductsIPicked[idx].name || "",
-  //   price: data?.fetchTravelproductsIPicked[idx].price || 0,
-  //   createdAt: dateViewSet(data?.fetchTravelproductsIPicked[idx].createdAt),
-  // }));
+  const detailPageHandler = (
+    e: React.MouseEvent<HTMLTableRowElement>,
+    postId: string
+  ) => {
+    // console.log("detail", postId);
+    router.push(`/products/${postId}`);
+  };
 
-  // const columns: TableProps<DataType>["columns"] = [
-  //   {
-  //     title: "번호",
-  //     dataIndex: "key",
-  //     key: "key",
-  //     width: "5%",
-  //     align: "center",
-  //   },
-  //   {
-  //     title: "상품명",
-  //     dataIndex: "name",
-  //     key: "name",
-  //     render: (value, record, index) => (
-  //       <div className="flex gap-2">
-  //         {value}
-  //         {/* {value}
-  //         {data?.fetchBoards[index].youtubeUrl && (
-  //           <VideoCameraTwoTone twoToneColor="#ff4848" />
-  //         )}
-  //         {(data?.fetchBoards[index].images?.length ?? 0) > 0 && (
-  //           <FileImageTwoTone twoToneColor="#2e53fc" />
-  //         )} */}
-  //       </div>
-  //     ),
-  //     width: "66%",
-  //   },
-  //   {
-  //     title: "판매가격",
-  //     dataIndex: "price",
-  //     key: "price",
-  //     width: "10%",
-  //     align: "center",
-  //   },
-  //   {
-  //     title: "날짜",
-  //     dataIndex: "createdAt",
-  //     key: "createdAt",
-  //     width: "10%",
-  //     align: "center",
-  //   },
-  // ];
+  const dataSource = Array.from({
+    length: data?.fetchTravelproductsIPicked.length || 0,
+  }).map<DataType>((_, idx) => ({
+    key: String(idx + 1 + (page - 1) * 10),
+    dataId: data?.fetchTravelproductsIPicked[idx]._id || "",
+    name: data?.fetchTravelproductsIPicked[idx].name || "",
+    price: data?.fetchTravelproductsIPicked[idx].price || 0,
+    seller: data?.fetchTravelproductsIPicked[idx].seller?.name || "",
+    createdAt: dateViewSet(data?.fetchTravelproductsIPicked[idx].createdAt),
+  }));
+
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: "번호",
+      dataIndex: "key",
+      key: "key",
+      width: "5%",
+      align: "center",
+    },
+    {
+      title: "상품명",
+      dataIndex: "name",
+      key: "name",
+      width: "66%",
+    },
+    {
+      title: "판매가격",
+      dataIndex: "price",
+      key: "price",
+      width: "10%",
+      render: (value) => value.toLocaleString("ko-KR") + "원",
+      align: "center",
+    },
+    {
+      title: "판매자",
+      dataIndex: "seller",
+      key: "seller",
+      width: "10%",
+      align: "center",
+    },
+    {
+      title: "날짜",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      width: "10%",
+      align: "center",
+    },
+  ];
 
   return {
     data,
-    // page,
-    // pageChangeHandler,
-    // listItemMouseHandler,
-    // detailPageHandler,
-    // dataSource,
-    // columns,
-    // fetchBoardsCount,
-    // router,
+    page,
+    pageChangeHandler,
+    listItemMouseHandler,
+    detailPageHandler,
+    dataSource,
+    columns,
+    fetchProductsCount,
+    router,
+    handleSearch,
   };
 };

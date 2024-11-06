@@ -1,3 +1,4 @@
+"use client";
 import { usePickedList } from "@/components/mypage/picked-list/hook";
 import SearchBox from "@/components/search-box";
 import { Table } from "antd";
@@ -6,19 +7,19 @@ import styles from "./styles.module.scss";
 export default function PickedList() {
   const {
     data,
-    // listItemMouseHandler,
-    // detailPageHandler,
-    // handleSearch,
-    // dataSource,
-    // columns,
-    // fetchBoardsCount,
-    // pageChangeHandler,
-    // page,
+    listItemMouseHandler,
+    detailPageHandler,
+    handleSearch,
+    dataSource,
+    columns,
+    fetchProductsCount,
+    pageChangeHandler,
+    page,
   } = usePickedList();
 
   return (
     <>
-      {/* <div className="self-end">
+      <div className="self-end">
         <SearchBox handleSearch={handleSearch} isDate={false} />
       </div>
 
@@ -32,7 +33,7 @@ export default function PickedList() {
             onRow={(record) => {
               return {
                 onClick: (event) =>
-                  detailPageHandler(event, record.deleteBoard || ""),
+                  detailPageHandler(event, record.dataId || ""),
                 onMouseOver: (event) => listItemMouseHandler(event, "over"),
                 onMouseLeave: (event) => listItemMouseHandler(event, "leave"),
               };
@@ -43,7 +44,7 @@ export default function PickedList() {
               current: page,
               defaultPageSize: 10,
               responsive: true,
-              total: fetchBoardsCount,
+              total: fetchProductsCount,
               showTotal: (total) => `총 게시글 수 : ${total}`,
               defaultCurrent: 1,
               showLessItems: false,
@@ -61,7 +62,7 @@ export default function PickedList() {
             loading={data === undefined}
           />
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
