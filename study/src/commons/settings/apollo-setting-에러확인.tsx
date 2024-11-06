@@ -12,7 +12,6 @@ import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { useAccessTokenStore } from "@/commons/stores/22-01-access-token-store";
 import { useEffect } from "react";
 import { getAccessToken } from "@/commons/lib/26-01-get-access-token"; // 액세스 토큰을 가져오는 함수
-import { useLoadStore } from "@/commons/stores/26-02-load-strore";
 
 const GLOBAL_STATE = new InMemoryCache();
 
@@ -21,18 +20,10 @@ interface IApolloUploadSetting {
 }
 export default function ApolloHeaderSetting(props: IApolloUploadSetting) {
   const { accessToken, setAccessToken } = useAccessTokenStore();
-  const { setIsLoaded } = useLoadStore(); // 로딩 상태를 변경하기 위한 함수
-  useEffect(() => {
-    // 임시 방식
-    // setAccessToken(localStorage.getItem("accessToken") ?? "");
 
-    // 실무 방식
-    getAccessToken()
-      .then((newAccessToken) => {
-        if (newAccessToken) setAccessToken(newAccessToken ?? "");
-      })
-      .finally(setIsLoaded);
-  }, []);
+  // useEffect(() => {
+  //   setAccessToken(localStorage.getItem("accessToken") ?? "");
+  // }, []);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // graphQLErrors : 서버에서 내려온 에러

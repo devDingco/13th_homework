@@ -1,6 +1,11 @@
 import { create } from "zustand";
 
-export const useAccessTokenStore = create((set) =>
+interface IuseAccessTokenStore {
+  accessToken: string;
+  setAccessToken: (newAccessToken: string) => void;
+}
+
+export const useAccessTokenStore = create<IuseAccessTokenStore>((set) =>
   // set : 변경함수
   ({
     accessToken: "",
