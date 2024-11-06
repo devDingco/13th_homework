@@ -9,17 +9,6 @@ export const FETCH_POINT_TRANSACTIONS_OF_ALL = gql`
       balance
       status
       statusDetail
-      # travelproduct {
-      #   _id
-      #   name
-      #   remarks
-      #   contents
-      #   price
-      #   tags
-      #}
-      user {
-        name
-      }
       createdAt
       updatedAt
       deletedAt
@@ -31,17 +20,6 @@ export const FETCH_POINT_TRANSACTIONS_OF_ALL = gql`
       balance
       status
       statusDetail
-      # travelproduct {
-      #   _id
-      #   name
-      #   remarks
-      #   contents
-      #   price
-      #   tags
-      #}
-      user {
-        name
-      }
       createdAt
       updatedAt
       deletedAt
@@ -53,17 +31,6 @@ export const FETCH_POINT_TRANSACTIONS_OF_ALL = gql`
       balance
       status
       statusDetail
-      # travelproduct {
-      #   _id
-      #   name
-      #   remarks
-      #   contents
-      #   price
-      #   tags
-      #}
-      user {
-        name
-      }
       createdAt
       updatedAt
       deletedAt
