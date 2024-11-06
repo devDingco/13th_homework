@@ -21,6 +21,7 @@ import Menu from "@public/svgs/outline/menu.svg";
 import Person from "@public/svgs/outline/person.svg";
 import Planterior from "@public/svgs/outline/planterior.svg";
 import Point from "@public/svgs/outline/point.svg";
+import Point2 from "@public/svgs/outline/point2.svg";
 import RadioEnabled from "@public/svgs/outline/radio-enabled.svg";
 import RadioSelected from "@public/svgs/outline/radio-selected.svg";
 import Reply from "@public/svgs/outline/reply.svg";
@@ -67,6 +68,7 @@ const icons = {
   person: Person,
   planterior: Planterior,
   point: Point,
+  point2: Point2,
   radioEnabled: RadioEnabled,
   radioSelected: RadioSelected,
   reply: Reply,
