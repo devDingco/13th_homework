@@ -15,9 +15,6 @@ export default function useLoginUser() {
     //** 글로벌 스테이트로 토큰 관리 */
     const { setToken } = useTokenStore();
 
-    //** 로그인, 회원가입 분기 */
-    const [isLogIn, setIsLogIn] = useState(true);
-
     //** 로그인 인풋 관리용 스테이트 */
     const [loginInput, setLoginInput] = useState({
         email_ID: "",
@@ -72,14 +69,10 @@ export default function useLoginUser() {
             if (!token) {
                 return errorAlert("로그인에 실패하였습니다! 다시 시도하여 주세요.");
             }
-            setToken(token ?? "");
-            sessionStorage.setItem("@_¡¡", token);
+            setToken(token);
+            // sessionStorage.setItem("@_¡¡", token);
 
-            plainAlert(
-                `로그인 성공
-                ${token}`,
-                "success",
-            );
+            plainAlert(`로그인 성공!!`, "success");
             router.push(`/boards`);
         } catch (error) {
             errorAlert("로그인에 실패하였습니다");
@@ -106,8 +99,6 @@ export default function useLoginUser() {
                 },
             });
             if (result) plainAlert(`등록되었습니다!!`, "success");
-
-            setIsLogIn(true);
             router.push(`/login`);
         } catch (error) {
             errorAlert("등록에 실패하였습니다. 다시 시도해 주세요.");
@@ -117,8 +108,6 @@ export default function useLoginUser() {
 
     //** 로그인 페이지 컴포넌트로 수출 */
     return {
-        isLogIn,
-        setIsLogIn,
         loginError,
         onLoginChange,
         onSignUpChange,
