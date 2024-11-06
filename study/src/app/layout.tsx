@@ -4,7 +4,7 @@ import { Noto_Sans_KR, Roboto } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 // import ApolloSetting from "../commons/settings/apollo-setting";
 // import ApolloUploadSetting from "../commons/settings/apollo-setting";
-import ApolloHeaderSetting from "../commons/settings/apollo-setting";
+import ApolloHeaderSetting from "@/commons/settings/apollo-setting";
 
 export const metadata: Metadata = {
   title: "Create Next App",
