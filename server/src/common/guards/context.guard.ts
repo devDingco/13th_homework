@@ -9,7 +9,8 @@ export class ContextTypeGuard implements CanActivate {
 
         if (contextType === 'graphql') {
             const ctx = GqlExecutionContext.create(context);
-            context.switchToHttp().getRequest = () => ctx.getContext().req;
+
+            return ctx.getContext().req;
         }
 
         return true;

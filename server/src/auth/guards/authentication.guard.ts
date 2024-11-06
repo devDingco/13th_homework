@@ -11,6 +11,7 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
     ): boolean | Promise<boolean> | Observable<boolean> {
         const contextType = context.getType();
         let path: string;
+        console.log(context);
 
         if (contextType === 'http') {
             path = context.switchToHttp().getRequest().path;
