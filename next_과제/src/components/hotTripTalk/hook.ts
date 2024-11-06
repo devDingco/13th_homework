@@ -1,3 +1,5 @@
+"use client";
+
 import { FetchBoardsOfTheBestDocument } from "@/commons/graphql/graphql";
 import { useQuery } from "@apollo/client";
 

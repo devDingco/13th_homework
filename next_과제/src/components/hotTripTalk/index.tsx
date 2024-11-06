@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Icon from "@/components/icon-factory";
 import { useHotTripTalk } from "@/components/hotTripTalk/hook";
