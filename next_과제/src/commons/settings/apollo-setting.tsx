@@ -61,22 +61,11 @@ export default function ApolloUploadSetting(props: IApolloUploadSetting) {
     }
   });
 
-  const setHeader: {
-    uri: string;
-    headers?: { Authorization: string };
-    credentials: string;
-  } = {
+  const uploadLink = createUploadLink({
     uri: `${process.env.NEXT_PUBLIC_SERVER_URI}/graphql`,
+    headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
-  };
-
-  if (accessToken) {
-    setHeader.headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-  }
-
-  const uploadLink = createUploadLink(setHeader);
+  });
 
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, uploadLink]),
