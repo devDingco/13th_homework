@@ -1,22 +1,44 @@
 "use client";
+
 import { HTMLInputTypeAttribute } from "react";
 import styles from "./styles.module.css";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 
-function BaseInput({ type, placeholder, className }: any) {
-  return <input type={type} placeholder={placeholder} className={className} />;
+interface IInputBaseProps<T extends FieldValues> {
+  type: HTMLInputTypeAttribute;
+  className?: string;
+  placeholder: string;
+  keyName: Path<T>;
 }
 
-export function Input(props: any) {
-  return <BaseInput className={styles.input} {...props} />;
+function InputBase<T extends FieldValues>({
+  type,
+  placeholder,
+  className,
+  keyName,
+}: IInputBaseProps<T>) {
+  const { register } = useFormContext<T>();
+  return (
+    <input
+      {...register(keyName)}
+      type={type}
+      placeholder={placeholder}
+      className={className}
+    />
+  );
 }
 
-type IBaseInputHeaderProps = Pick<
-  IInputFormProps,
-  "label" | "isHiddenHeader" | "isRequired"
-> & {
+export function Input<T extends FieldValues>(props: IInputBaseProps<T>) {
+  return <InputBase className={styles.input} {...props} />;
+}
+
+interface IBaseInputHeaderProps {
+  label?: string;
+  isHiddenHeader?: boolean;
+  isRequired?: boolean;
   children: React.ReactNode;
   className?: string;
-};
+}
 
 function BaseInputHeader({ children, className }: IBaseInputHeaderProps) {
   return <span className={className}>{children}</span>;
@@ -31,7 +53,8 @@ export function InputHeader(props: IBaseInputHeaderProps) {
   );
 }
 
-interface IInputFormProps {
+interface IInputFormProps<T extends FieldValues> {
+  keyName: Path<T>;
   label?: string;
   type: HTMLInputTypeAttribute;
   placeholder: string;
@@ -40,15 +63,16 @@ interface IInputFormProps {
   isHiddenHeader?: boolean;
 }
 
-export function InputForm({
+export function InputForm<T extends FieldValues>({
+  keyName,
   label,
   type,
   placeholder,
   children,
   isRequired = false,
   isHiddenHeader = false,
-}: IInputFormProps) {
-  const props = { label, type, placeholder, isRequired, children };
+}: IInputFormProps<T>) {
+  const props = { label, type, placeholder, isRequired, children, keyName };
   return (
     <div className={styles.form__container}>
       {!isHiddenHeader && (
