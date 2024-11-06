@@ -2,7 +2,18 @@
 const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["storage.googleapis.com", "placehold.co"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '**',
+      },
+    ],
   },
 }
 

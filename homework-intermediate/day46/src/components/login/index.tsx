@@ -44,7 +44,7 @@ export default function Login() {
 			return;
 		}
 		setAccessToken(accessToken);
-		localStorage.setItem('accessToken', accessToken);
+		// localStorage.setItem('accessToken', accessToken);
 
 		router.back();
 	};

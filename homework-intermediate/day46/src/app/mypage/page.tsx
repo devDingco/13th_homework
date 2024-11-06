@@ -4,8 +4,9 @@ import Image from 'next/image';
 import profile from '@/assets/profile.png';
 import point from '@/assets/point.png';
 import { RightOutlined, SearchOutlined } from '@ant-design/icons';
+import { withLoginCheck } from '@/commons/hocs/with-login-check';
 
-export default function BoardsMypagePage() {
+function BoardsMypagePage() {
 	const realPoints = 999999;
 
 	return (
@@ -85,3 +86,5 @@ export default function BoardsMypagePage() {
 		</div>
 	);
 }
+
+export default withLoginCheck(BoardsMypagePage);

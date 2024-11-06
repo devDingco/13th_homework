@@ -7,9 +7,8 @@ import { useQuery } from '@apollo/client';
 import { FetchBoardsDocument } from '@/commons/graphql/graphql';
 import BoardTitleSearch from '@/components/boards-list/search';
 import { useBoardStore } from '@/commons/stores/board-store';
-import { withLoginCheck } from '@/commons/hocs/with-login-check';
 
-function BoardsPage() {
+export default function BoardsPage() {
 	const { titleSearch, setTitleSearch, activePage, setActivePage } =
 		useBoardStore();
 	// const [activePage, setActivePage] = useState(1);
@@ -30,5 +29,3 @@ function BoardsPage() {
 		</div>
 	);
 }
-
-export default withLoginCheck(BoardsPage);

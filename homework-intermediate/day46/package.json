@@ -23,6 +23,7 @@
     "eslint-config-next": "14.2.8",
     "firebase": "^10.14.1",
     "graphql": "^16.9.0",
+    "graphql-request": "^7.1.2",
     "lodash": "^4.17.21",
     "next": "14.2.8",
     "postcss": "^8.4.47",

@@ -1,7 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Layout from '@/commons/layout';
-import ApolloHeaderSettingLocalStorage from '@/commons/settings/apollo-setting';
+import ApolloHeaderAndErrorSettingRefresh from '@/commons/settings/apollo-setting';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,9 +18,9 @@ export default function RootLayout({
 	return (
 		<html lang="ko">
 			<body>
-				<ApolloHeaderSettingLocalStorage>
+				<ApolloHeaderAndErrorSettingRefresh>
 					<Layout>{children}</Layout>
-				</ApolloHeaderSettingLocalStorage>
+				</ApolloHeaderAndErrorSettingRefresh>
 			</body>
 		</html>
 	);

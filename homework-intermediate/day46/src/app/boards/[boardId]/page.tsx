@@ -5,11 +5,11 @@ import CommentWrite from '@/components/boards-detail/comment-write';
 import BaordDeatil from '@/components/boards-detail/detail';
 
 export default function BoardsDetailPage() {
-  return (
-    <>
-      <BaordDeatil />
-      <CommentWrite />
-      <CommentList />
-    </>
-  );
+	return (
+		<>
+			<BaordDeatil />
+			<CommentWrite />
+			<CommentList />
+		</>
+	);
 }
