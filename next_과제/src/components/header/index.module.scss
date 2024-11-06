@@ -9,17 +9,27 @@
   font-size: 0.875rem;
   & > li {
     margin-left: 0.3125rem;
-    padding: 0 0.9375rem;
-  }
 
-  .active {
-    span {
-      color: var(--primary-color);
+    a {
+      padding: 0.5rem;
     }
-    .subMenuParent {
+
+    &.active {
       .subMenu {
         display: block;
       }
+      span {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .linkActive {
+    color: #000;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    span {
+      color: #000 !important;
     }
   }
 
@@ -30,16 +40,23 @@
       display: none;
       position: absolute;
       white-space: nowrap;
-      top: 200%;
+      top: calc(100% + 0.9375rem);
       left: 50%;
       transform: translateX(-50%);
       background-color: #fff;
       z-index: 10;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
+      overflow: hidden;
 
-      li {
-        padding: 15px 20px;
+      a {
+        display: block;
+        padding: 0.9375rem 1.25rem;
+
+        &:hover {
+          background-color: var(--primary-color-hover);
+          color: #fff;
+        }
       }
     }
   }
