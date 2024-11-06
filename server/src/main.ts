@@ -12,7 +12,7 @@ import { swagger } from 'configs/swagger.config';
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
-// middleware -> gurad -> interceptor(before) -> pipe -> controller -> service -> repository -> interceptor(after) -> filter -> client
+// middleware -> guard -> interceptor(before) -> pipe -> controller -> service -> repository -> interceptor(after) -> filter -> client
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);

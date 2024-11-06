@@ -10,19 +10,18 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
         context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
         const contextType = context.getType();
+        let path: string;
 
         if (contextType === 'http') {
-            const path = context.switchToHttp().getRequest().path;
-
-            if (path === '/api/user/signup' || path === '/api/user/login')
-                return true;
+            path = context.switchToHttp().getRequest().path;
         } else if (contextType === 'graphql') {
-            const fieldName =
-                GqlExecutionContext.create(context).getInfo().path.key;
-            if (fieldName === 'login' || fieldName === 'signUp') {
-                return true;
-            }
+            path = GqlExecutionContext.create(context).getInfo().path.key;
         }
+
+        if (path.includes('signup') || path.includes('login')) {
+            return true;
+        }
+
         return super.canActivate(context);
     }
 }

@@ -12,7 +12,7 @@ export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
     @Mutation(() => UserSchema)
-    signUp(@Args('signUpUser') signUpUser: signUpUser) {
+    signup(@Args('signUpUser') signUpUser: signUpUser) {
         return this.userService.createUser(signUpUser);
     }
 
