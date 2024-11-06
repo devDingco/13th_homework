@@ -1,14 +1,16 @@
 import type { TableProps } from "antd";
 
 export interface DataType {
-  title: string;
-  key: string;
-  dataIndex?: string;
-  width?: string;
-  align?: "center" | "left" | "right";
-  render?: (text: unknown, record: DataType) => JSX.Element;
-  deleteBoard?: string;
+  _id?: string;
+  status?: string;
+  statesDetail?: string;
+  amount?: number;
+  user?: { name: string };
   createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+  impUid?: string;
+  balance?: number;
 }
 
 export interface IcolumnSet {
