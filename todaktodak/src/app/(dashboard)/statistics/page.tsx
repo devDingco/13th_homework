@@ -3,10 +3,8 @@
 import Header from "@/components/shared/Header";
 import { useState } from "react";
 import {
-  BarChart,
   LineChart,
   Line,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -75,7 +73,7 @@ export default function StatisticsPage() {
   return (
     <>
       <Header h1="감정 통계" p="나의 감정 변화와 패턴을 분석해보세요" />
-      <div className="p-8 max-w-7xl mx-auto">
+      <div className="p-8 max-w-5xl mx-auto">
         {/* 기간 선택 및 필터 */}
         <div className="flex items-center justify-between mb-8 bg-white p-4 rounded-xl shadow-sm">
           <div className="flex items-center space-x-4">
