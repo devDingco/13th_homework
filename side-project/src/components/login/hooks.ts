@@ -1,11 +1,10 @@
 import { useAccessTokenStore } from '@/commons/stores/accessToken';
 import { useLoginUserMutation } from '@/graphql/mutations/loginUser/loginUser.generated';
 import { ILoginType, loginSchema } from '@/schemas/loginSchema';
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError } from '@apollo/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Modal } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function useLogin() {
@@ -31,18 +30,16 @@ export default function useLogin() {
         const accessToken = result.data.loginUser.accessToken;
 
         setAccessToken(accessToken);
-        console.log(accessToken, 'token 값');
 
         Modal.success({
           title: '로그인 성공',
-          content: '로그인 성공',
+          content: '환영합니다. 로그인이 되었습니다!',
           onOk() {
             // 추후 페이지 이동
             // router.push('/');
           },
         });
       } else {
-        // console.log('토큰없음. 로그인실패');
         Modal.error({
           title: '실패',
           content: '이메일 혹은 비밀번호가 다릅니다.',

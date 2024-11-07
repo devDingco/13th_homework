@@ -25,10 +25,12 @@ function ButtonBase({
   isDisabled = false,
   onClick,
 }: IButtonType) {
-  const { formState } = useFormContext();
+  // const { formState } = useFormContext();
+  const formContext = useFormContext();
+  const isFormValid = formContext ? formContext.formState.isValid : true;
   return (
     <Button
-      disabled={isDisabled ? !formState.isValid : false}
+      disabled={isDisabled ? !isFormValid : false}
       className={className}
       htmlType={htmlType}
       size={size}

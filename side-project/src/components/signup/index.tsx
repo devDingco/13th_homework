@@ -100,7 +100,7 @@ export default function SignUpComponent() {
           </p>
         </div>
         <Button
-          disabled={!formState.isValid}
+          disabled={!formState.disabled}
           size="large"
           type="primary"
           className="py-3"
