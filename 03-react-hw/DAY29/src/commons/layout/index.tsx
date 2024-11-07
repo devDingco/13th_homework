@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Navigation from "./navigation";
 
 // 숨기고 싶은 페이지
-const HIDDEN_HEADERS = ["/boards/new", "/boards/edit/"];
+const HIDDEN_HEADERS = ["/boards/new", "/boards/edit/", "/"];
 
 interface ILayout {
   children: React.ReactNode;
