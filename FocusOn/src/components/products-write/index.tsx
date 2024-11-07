@@ -1,59 +1,42 @@
 "use client";
 
-import FieldWrapper from "../commons/fieldWrapper";
-import styles from "./styles.module.css";
+import "react-quill/dist/quill.snow.css";
 import useProductsWirte from "./hook";
+import styles from "./styles.module.css";
+import KakaoMap from "./kakao-map";
+import dynamic from "next/dynamic";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import { FormProvider } from "react-hook-form";
+import { Modal } from "antd";
+import { X } from "lucide-react";
 import { InputSoftMFull, InputSoftMS } from "@/commons/ui/input";
-import { TextareaSoftMFull } from "@/commons/ui/textarea";
 import { ButtonSoftMFitBorder, ButtonSoftMFitMain } from "@/commons/ui/button";
 import { LinkCancel } from "@/commons/ui/link";
+import FieldWrapper from "../commons/fieldWrapper";
 import ErrorMessage from "@/commons/ui/error";
-import { X } from "lucide-react";
-import { useState } from "react";
-import { Modal } from "antd";
-import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
-import KakaoMap from "./kakao-map";
+
+// ReactQuill을 dynamic으로 import
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false, // SSR 비활성화
+});
 
 export default function ProductsWrite(props) {
   const {
+    isZipCodeModalOpen,
+    lat,
+    lng,
+    tags,
+    inputTag,
     methods,
-    onClickSubmit,
+    onToggleZipCodeModal,
+    handleCompleteZipcodeModal,
+    onChangeContents,
     onChangeTag,
     addTag,
     removeTag,
-    tags,
-    inputTag,
+    onClickSubmit,
   } = useProductsWirte(props);
   // modal 토글 - zipcode
-  const [isZipCodeModalOpen, setIsZipCodeModalOpen] = useState(false);
-  const [lat, setLat] = useState(33.5563); // 기본 위도
-  const [lng, setLng] = useState(126.79581); // 기본 경도
-
-  // zipcode modal 토글 함수
-  const onToggleZipCodeModal = () => {
-    setIsZipCodeModalOpen((prev) => !prev);
-  };
-
-  const handleCompleteZipcodeModal = (data: Address) => {
-    methods.setValue("zipcode", data.zonecode);
-    // 주소를 받아서 위도, 경도로 변환하기
-    const address = data.address;
-    const geocoder = new kakao.maps.services.Geocoder();
-    const callback = function (result, status) {
-      if (status === kakao.maps.services.Status.OK) {
-        // kakaomap에 보낼 위도, 경도 state
-        setLng(result[0].road_address.x);
-        setLat(result[0].road_address.y);
-        // form input에 넣어줄 위도, 경도
-        methods.setValue("lng", lng);
-        methods.setValue("lat", lat);
-        methods.trigger(["zipcode", "lat", "lng"]);
-      }
-    };
-    geocoder.addressSearch(address, callback);
-    onToggleZipCodeModal(); // 모달 닫기
-  };
 
   return (
     <div className={styles.post_page_body}>
@@ -90,10 +73,11 @@ export default function ProductsWrite(props) {
 
             {/* 상품 설명 입력 필드 */}
             <FieldWrapper label="상품 설명">
-              <TextareaSoftMFull
+              <ReactQuill onChange={onChangeContents} />
+              {/* <TextareaSoftMFull
                 name="contents"
                 placeholder="내용을 입력해주세요."
-              />
+              /> */}
               <ErrorMessage name="contents" />
             </FieldWrapper>
 
