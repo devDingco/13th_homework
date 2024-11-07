@@ -1,6 +1,5 @@
 import PROFILE_IMG from '@/assets/profile.png';
 import REPLY from '@/assets/reply.png';
-import RETURN from '@/assets/return.png';
 import Image from 'next/image';
 import { Divider, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -58,7 +57,9 @@ const FETCH_USER_LOGGED_IN = gql`
 	}
 `;
 
-export function ProductQuestionItem({ productQuestion, user, refetch }) {
+export function ProductQuestionItem(props) {
+	const { productQuestion, user, refetch } = props;
+
 	const [isReplying, setIsReplying] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const { register, handleSubmit, formState } = useForm<IProductQuestion>({
