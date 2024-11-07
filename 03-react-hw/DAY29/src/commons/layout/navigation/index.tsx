@@ -13,7 +13,7 @@ const FETCH_USER_LOGGEDIN = gql`
 `;
 
 export default function Navigation() {
-  // const pathname = usePathname();
+  const pathname = usePathname();
   const { data } = useQuery(FETCH_USER_LOGGEDIN);
   return (
     <div
@@ -25,11 +25,36 @@ export default function Navigation() {
         style={{ width: "1280px" }}
       >
         <Image src={`/images/logo.svg`} alt="logo" width={45} height={45} />
-        <Link href="/boards" className="p-2">
+        <Link
+          href="/boards"
+          style={{
+            padding: "8px",
+            borderBottom: pathname === "/boards" ? "2px solid" : "none",
+            color: pathname === "/boards" ? "black" : "gray",
+          }}
+        >
           트립토크
         </Link>
-        <Link href="/">숙박권 구매</Link>
-        <Link href="/mypage">마이페이지</Link>
+        <Link
+          href="/"
+          style={{
+            padding: "8px",
+            borderBottom: pathname === "/boards" ? "2px solid" : "none",
+            color: pathname === "/boards" ? "black" : "gray",
+          }}
+        >
+          숙박권 구매
+        </Link>
+        <Link
+          href="/myPage"
+          style={{
+            padding: "8px",
+            borderBottom: pathname === "/myPage" ? "2px solid" : "none",
+            color: pathname === "/myPage" ? "black" : "gray",
+          }}
+        >
+          마이페이지
+        </Link>
       </div>
       {!data?.fetchUserLoggedIn._id ? (
         <Link
