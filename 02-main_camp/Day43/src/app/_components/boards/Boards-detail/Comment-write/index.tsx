@@ -8,6 +8,7 @@ import { BoardsWriteInputForm } from "../../Boards-write/components/input-form/t
 import Divider from "@/app/_components/commons/divider";
 import { TextInputType } from "../../Boards-write/components/input-form/types";
 import { IBoardCommentWriteProps } from "./types";
+import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 
 const BoardCommentWrite = ({
   comments,
@@ -63,10 +64,14 @@ const BoardCommentWrite = ({
         onChange={onChangeCommentInput}
         value={commentInput?.contents}
       ></textarea>
+
       <div className={styles.buttonContainer}>
-        <button className={styles.submitButton} onClick={completionHandler}>
-          {isEdit ? "수정하기" : "댓글 등록"}
-        </button>
+        <Button
+          size={ButtonSize.large}
+          variant={ButtonVariant.secondary}
+          label={isEdit ? "수정하기" : "댓글 등록"}
+          onClick={completionHandler}
+        ></Button>
       </div>
     </div>
   );

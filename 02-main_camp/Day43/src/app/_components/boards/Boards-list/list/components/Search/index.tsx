@@ -7,6 +7,7 @@ import { ISearchParams, useSearchStore } from "@/app/_store/boards/store";
 import styles from "./styles.module.css";
 import { convertToISO } from "@/commons/fomatter/date";
 import _ from "lodash";
+import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 
 export interface ISearchBarProps {
   refetchBoards: (searchParams: ISearchParams, page?: number) => void;
@@ -99,16 +100,20 @@ export default function SearchBar({ refetchBoards }: ISearchBarProps) {
             ref={inputRef}
           />
         </div>
-        <button className={styles.searchButton} onClick={onClickSearch}>
-          검색
-        </button>
+        <Button
+          size={ButtonSize.large}
+          variant={ButtonVariant.secondary}
+          label="검색"
+          onClick={onClickSearch}
+        ></Button>
       </div>
-      <button className={styles.writeButton} onClick={onClickCreate}>
-        <div className={styles.writeIcon}>
-          <FormOutlined />
-        </div>
-        <p>트립토크 등록</p>
-      </button>
+      <Button
+        size={ButtonSize.large}
+        variant={ButtonVariant.primary}
+        label="트립토크 등록"
+        onClick={onClickCreate}
+        leadingIcon={<FormOutlined className={styles.writeIcon} />}
+      ></Button>
     </div>
   );
 }

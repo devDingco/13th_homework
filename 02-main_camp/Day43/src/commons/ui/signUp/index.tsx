@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CreateUserDocument } from "@/commons/gql/graphql";
-import { Button__48__full } from "../button";
+import { Button, ButtonSize, ButtonVariant } from "../button";
 import useModal from "../modal/hook";
 
 interface ISignUpProps {
@@ -113,7 +113,10 @@ export default function SignUp({
           </div>
         </div>
         <div className={styles.buttons__container}>
-          <Button__48__full
+          <Button
+            style={{ width: "100%" }}
+            size={ButtonSize.large}
+            variant={ButtonVariant.primary}
             label="회원가입"
             onClick={methods.handleSubmit(onClickSignUp)}
             disabled={isValid ? false : true}

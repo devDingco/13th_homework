@@ -9,9 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginSchema, loginSchema } from "./schema";
 import { useMutation } from "@apollo/client";
 import { LoginUserDocument } from "@/commons/gql/graphql";
-import { Button__48__full } from "../button";
 import { NavigationPaths, useNavigate } from "@/commons/navigate";
 import { useAccessTokenStore } from "@/app/_store/accessToken/store";
+import { Button, ButtonSize, ButtonVariant } from "../button";
 
 interface ILoginProps {
   handleSignUp: () => void;
@@ -95,9 +95,12 @@ export default function Login({ handleSignUp }: ILoginProps) {
           </div>
         </div>
         <div className={styles.buttons__container}>
-          <Button__48__full
+          <Button
             label="로그인"
             onClick={methods.handleSubmit(onClickLogin)}
+            size={ButtonSize.large}
+            variant={ButtonVariant.primary}
+            style={{ width: "100%" }}
           />
           <button className={styles.button__signUp} onClick={handleSignUp}>
             회원가입

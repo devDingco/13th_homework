@@ -13,6 +13,7 @@ import Divider from "@/app/_components/commons/divider";
 import Modal from "antd/es/modal/Modal";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import ImageUploadForm from "./components/image-upload-form";
+import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 
 const BoardsWrite = (props: IBoardWriteInput) => {
   const pageTitle = props.isEdit
@@ -38,32 +39,23 @@ const BoardsWrite = (props: IBoardWriteInput) => {
   } = useBoardWrite(props.isEdit, props.data);
 
   const RegisterForm = () => {
-    const disabledSubmitButtonStyle = {
-      backgroundColor: "#C7C7C7",
-      color: "#E4E4E4",
-      disabled: "true",
-    };
-
-    const submitButtonStyle = {
-      backgroundColor: "#2974E5",
-      color: "#FFFFFF",
-      disabled: "false",
-    };
-
     const buttonAction = props.isEdit ? onClickEdit : onClickSubmit;
 
     return (
       <>
-        <button className={styles.cancelButton} onClick={onClickCancel}>
-          취소
-        </button>
-        <button
-          className={styles.submitButton}
-          style={isActive ? submitButtonStyle : disabledSubmitButtonStyle}
+        <Button
+          size={ButtonSize.large}
+          variant={ButtonVariant.tertiary}
+          label="취소"
+          onClick={onClickCancel}
+        ></Button>
+        <Button
+          size={ButtonSize.large}
+          variant={ButtonVariant.primary}
+          label={`${pageTitle}하기`}
           onClick={buttonAction}
-        >
-          {pageTitle}하기
-        </button>
+          disabled={!isActive}
+        ></Button>
       </>
     );
   };
@@ -125,12 +117,12 @@ const BoardsWrite = (props: IBoardWriteInput) => {
               value={boardAddress.zipcode ?? ""}
               readOnly
             />
-            <button
-              className={styles.zipCodeSearchButton}
+            <Button
+              size={ButtonSize.large}
+              variant={ButtonVariant.tertiary}
+              label="우편번호 검색"
               onClick={showAddressSearchModal}
-            >
-              우편번호 검색
-            </button>
+            ></Button>
             {isAddressModalOpen && (
               <Modal
                 open={isAddressModalOpen}

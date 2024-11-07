@@ -8,6 +8,8 @@ import { DislikeOutlined, HeartOutlined } from "@ant-design/icons";
 import Divider from "@/app/_components/commons/divider";
 import { Image, Tooltip } from "antd";
 import YouTube from "react-youtube";
+import { EditIcon, ListIcon } from "@/commons/ui/icon";
+import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 
 const BoardsDetail = () => {
   const {
@@ -85,20 +87,20 @@ const BoardsDetail = () => {
         </div>
       </section>
       <footer className={styles.BoardsDetail_footer}>
-        <button
-          className={styles.BoardsDetail_footer_button}
+        <Button
+          size={ButtonSize.medium}
+          variant={ButtonVariant.tertiary}
+          label="목록으로"
           onClick={onClickShowBoards}
-        >
-          <img src="/assets/list.png" />
-          목록으로
-        </button>
-        <button
-          className={styles.BoardsDetail_footer_button}
+          leadingIcon={<ListIcon />}
+        ></Button>
+        <Button
+          size={ButtonSize.medium}
+          variant={ButtonVariant.tertiary}
+          label="수정하기"
           onClick={onClickEdit}
-        >
-          <img src="/assets/edit.png" />
-          수정하기
-        </button>
+          leadingIcon={<EditIcon />}
+        ></Button>
       </footer>
       <BoardCommentWrite
         isEdit={false}
