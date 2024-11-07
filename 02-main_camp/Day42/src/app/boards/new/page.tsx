@@ -1,9 +1,10 @@
 "use client";
 
 import BoardsWrite from "@/app/_components/boards/Boards-write";
+import { withLoginCheck } from "@/app/_feature/login";
 
 const NewPage = () => {
   return <BoardsWrite isEdit={false} />;
 };
 
-export default NewPage;
+export default withLoginCheck(NewPage);
