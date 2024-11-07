@@ -2,10 +2,10 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { AuthenticationGuard } from './auth/guards/authentication.guard';
-import { ContextTypeGuard } from './common/guards/context.guard';
+import { ContextGuard } from './common/guards/context.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { PublicRouteGuard } from './common/guards/public-route.guard';
 import { SwaggerModule } from '@nestjs/swagger';
 import { sessionConfig } from 'configs/session.config';
 import { swagger } from 'configs/swagger.config';
@@ -22,7 +22,7 @@ async function bootstrap() {
         credentials: true,
     });
 
-    app.useGlobalGuards(new ContextTypeGuard(), new AuthenticationGuard());
+    app.useGlobalGuards(new ContextGuard(), new PublicRouteGuard());
 
     app.useGlobalInterceptors(new LoggingInterceptor());
 
