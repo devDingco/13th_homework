@@ -1,1 +1,0 @@
-{"version":3,"file":"codegen.config.js","sourceRoot":"","sources":["../../configs/codegen.config.ts"],"names":[],"mappings":";;AAEA,MAAM,MAAM,GAAkB;IAC1B,MAAM,EAAE,0BAA0B;IAClC,SAAS,EAAE;QACP,mCAAmC;QACnC,iCAAiC;KACpC;IACD,SAAS,EAAE;QACP,4BAA4B,EAAE;YAC1B,OAAO,EAAE;gBACL,YAAY;gBACZ,uBAAuB;gBACvB,sBAAsB;aACzB;SACJ;KACJ;CACJ,CAAC;AAEF,kBAAe,MAAM,CAAC"}
