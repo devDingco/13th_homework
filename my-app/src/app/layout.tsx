@@ -32,9 +32,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloHeaderSetting>
+        <ApolloHeaderSettingLocalStorage>
           <Layout>{children}</Layout>
-        </ApolloHeaderSetting>
+        </ApolloHeaderSettingLocalStorage>
       </body>
     </html>
   );
