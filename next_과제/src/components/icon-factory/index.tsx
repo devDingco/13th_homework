@@ -102,6 +102,7 @@ export interface IconProps {
   height?: string;
   fill?: string;
   viewBox?: string;
+  onClick?: () => void;
 }
 // <Icon icon="location" className="fill-gray-500 w-fit" />
 function Icon({
@@ -111,10 +112,14 @@ function Icon({
   height,
   fill,
   viewBox,
+  onClick,
 }: IconProps): JSX.Element {
   const SVGIcon = icons[icon];
   return (
-    <span className={`iconSvg overflow-hidden inline-block ${className}`}>
+    <span
+      className={`iconSvg overflow-hidden inline-block ${className}`}
+      onClick={() => onClick && onClick()}
+    >
       <SVGIcon
         width={width}
         height={height}

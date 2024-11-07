@@ -23,6 +23,8 @@ export default function ThemeProvider({
       } else {
         documentClass.remove("dark");
       }
+    } else {
+      localStorage.setItem("theme", "light");
     }
   }, []);
 

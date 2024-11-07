@@ -26,3 +26,9 @@ export const FETCH_TRAVEL_PRODUCT_DETAIL = gql`
     }
   }
 `;
+
+export const DELETE_TRAVEL_PRODUCT = gql`
+  mutation deleteTravelproduct($travelproductId: ID!) {
+    deleteTravelproduct(travelproductId: $travelproductId)
+  }
+`;

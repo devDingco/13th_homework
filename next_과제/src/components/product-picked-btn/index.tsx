@@ -4,11 +4,11 @@ import Icon from "@/components/icon-factory";
 import { usePickedBtn } from "./hook";
 
 export default function ProductPickedBtn({
-  id,
+  productId,
   count,
   className,
 }: {
-  id: string;
+  productId: string;
   count: number;
   className?: string;
 }) {
@@ -19,7 +19,7 @@ export default function ProductPickedBtn({
       className={`${
         className ? className : "relative"
       } z-20 self-end flex bg-[rgba(0,0,0,0.4)] py-1 pl-1 pr-2 rounded-lg text-white`}
-      onClick={(e) => onClickProductPick(e, id)}
+      onClick={(e) => onClickProductPick(e, productId)}
     >
       <Icon icon="bookmark" className="w-6 h-6" />
       <div className="blind">북마크 횟수</div>

@@ -2,7 +2,7 @@
 import Icon from "@/components/icon-factory";
 import { useProductRecommended } from "./hook";
 import Link from "next/link";
-import ProductPickedBtn from "@/components/product-list/product-picked-btn";
+import ProductPickedBtn from "@/components/product-picked-btn";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -64,7 +64,7 @@ export default function ProductRecommended() {
                     }}
                   >
                     <ProductPickedBtn
-                      id={product._id}
+                      productId={product._id}
                       count={product.pickedCount}
                     />
                     <div className={`flex flex-col ${styles.textBox}`}>

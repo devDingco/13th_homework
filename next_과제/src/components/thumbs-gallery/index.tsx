@@ -3,7 +3,8 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -13,22 +14,19 @@ import "swiper/css/thumbs";
 import "./styles.scss";
 
 import { FreeMode, Thumbs } from "swiper/modules";
-import { useRef } from "react";
 
 export default function ThumbsGallery({ images }: { images: string[] }) {
-  const sliderRef = useRef<SwiperRef>(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
-  if (images.length > 0) {
+  if (images.length > 1) {
     return (
       <div id="thumbsGallery">
         <Swiper
-          loop={images.length > 1}
+          loop={true}
           spaceBetween={10}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Thumbs]}
           className="mySwiper2"
-          ref={sliderRef}
         >
           {images?.map((slideImg, idx) => (
             <SwiperSlide key={slideImg + idx}>
@@ -42,8 +40,8 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
           ))}
         </Swiper>
         <Swiper
-          onSwiper={() => setThumbsSwiper(thumbsSwiper)}
-          loop={images.length > 1}
+          onSwiper={(swiper: SwiperType) => setThumbsSwiper(swiper)}
+          loop={true}
           spaceBetween={10}
           slidesPerView="auto"
           freeMode={true}
@@ -64,6 +62,17 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+    );
+  } else if (images.length === 1) {
+    return (
+      <div className="overflow-hidden rounded-xl">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${images[0]}`}
+          alt=""
+          width={1000}
+          height={1000}
+        />
       </div>
     );
   } else {

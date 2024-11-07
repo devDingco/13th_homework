@@ -9,12 +9,16 @@ import style from "./index.module.scss";
 import {
   FetchUserLoggedInDocument,
   LogoutUserDocument,
+  CreatePointTransactionOfLoadingDocument,
 } from "@/commons/graphql/graphql";
+import { useUserInfo } from "@/commons/stores/user-info-store";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
+import { menuItems, chargeOptions } from "./constants";
 
 export const useHeader = () => {
+  const { setUserInfo } = useUserInfo();
   const { isHeaderHide } = useLayout();
   const router = useRouter();
   const pathname = usePathname();
@@ -26,18 +30,24 @@ export const useHeader = () => {
   const { data: fetchUserData } = useQuery(FetchUserLoggedInDocument);
   const data = fetchUserData?.fetchUserLoggedIn;
 
+  // 내 정보 조회 후 유저 정보 저장
+  useEffect(() => {
+    if (data) {
+      setUserInfo({ id: data._id, name: data.name });
+    }
+  }, [data]);
+
   // 충전 금액 선택
   const onChargePriceChange = (value: string) => {
     setChargePrice(Number(value));
   };
 
+  const [createPointTransactionOfLoading] = useMutation(
+    CreatePointTransactionOfLoadingDocument
+  );
+
   // 충전하기
   const onCharging = async () => {
-    console.log(
-      `${process.env.NEXT_PUBLIC_PORTONE_STORE_ID}`,
-      `${process.env.NEXT_PUBLIC_PORTONE_CHANNEL_ID}`,
-      uuidv4()
-    );
     try {
       const result = await PortOne.requestPayment({
         storeId: `${process.env.NEXT_PUBLIC_PORTONE_STORE_ID}`,
@@ -57,7 +67,14 @@ export const useHeader = () => {
         },
       });
 
-      console.log(result);
+      const paymentId = result?.paymentId as string;
+
+      const createPoint = await createPointTransactionOfLoading({
+        variables: { paymentId },
+        refetchQueries: [{ query: FetchUserLoggedInDocument }],
+      });
+
+      console.log(createPoint);
 
       setChargeModalVisible(false); // 충전 모달 닫기
     } catch (error) {
@@ -65,35 +82,7 @@ export const useHeader = () => {
     }
   };
 
-  // 충전 금액 옵션
-  const chargeOptions = [
-    {
-      value: "100",
-      label: "100P",
-    },
-    {
-      value: "500",
-      label: "500P",
-    },
-    {
-      value: "2000",
-      label: "2,000P",
-    },
-    {
-      value: "5000",
-      label: "5,000P",
-    },
-    {
-      value: "10000",
-      label: "10,000P",
-    },
-    {
-      value: "50000",
-      label: "50,000P",
-    },
-  ];
-
-  // 현재 페이지에 맞는 메뉴 활성화
+  // 현재 페이지에 맞는 메뉴 스타일 변경
   const updateActiveMenu = () => {
     const menuItemKeys = menuItems.map((item) => item.key);
     const activeMenu = menuItemRef.current?.querySelector(
@@ -114,8 +103,8 @@ export const useHeader = () => {
     updateActiveMenu();
   }, [pathname]);
 
-  const { setAccessToken } = useAccessTokenStore();
   // 로그아웃
+  const { setAccessToken } = useAccessTokenStore();
   const [logoutUser] = useMutation(LogoutUserDocument);
   const userLogOut = async () => {
     try {
@@ -145,45 +134,7 @@ export const useHeader = () => {
     });
   };
 
-  const menuItems = [
-    {
-      // label: <Link href="/">트립토크</Link>,
-      label: "트립토크",
-      key: "/",
-    },
-    {
-      // label: <Link href="/products">숙박권구매</Link>,
-      label: "숙박권구매",
-      key: "/products",
-      children: [
-        {
-          // label: <Link href="/products/new">숙박권등록</Link>,
-          label: "숙박권등록",
-          key: "/products/new",
-        },
-      ],
-    },
-    {
-      // label: <Link href="/mypage">마이페이지</Link>,
-      label: "마이페이지",
-      key: "/mypage",
-    },
-    {
-      label: "게시판 임시",
-      key: "",
-      children: [
-        {
-          label: "게시글리스트",
-          key: "/boards",
-        },
-        {
-          label: "게시글등록",
-          key: "/boards/new",
-        },
-      ],
-    },
-  ];
-
+  // 마이페이지 팝업 토글 처리 관련
   const myInfoPopRef = useRef<HTMLDivElement>(null);
   const myInfoPopToggle = () => {
     console.log(myInfoPopRef.current);

@@ -76,7 +76,7 @@ const Header = () => {
         )}
 
         <header
-          onMouseLeave={(e) => menuMouseLeave(e)}
+          onMouseLeave={() => menuMouseLeave()}
           className="max-w-7xl flex justify-between items-center m-auto p-4 navbar max-xl:pr-24"
         >
           <nav className="flex items-center gap-6">

@@ -1,7 +1,7 @@
 export interface DataType {
   key: React.Key;
   name: string;
-  dataId?: string;
+  _id?: string;
   createdAt?: string;
   seller?: string;
   price?: number;

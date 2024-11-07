@@ -1,6 +1,6 @@
 import type { IcolumnSet } from "@/components/point-list/types";
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+
 import {
   FetchPointTransactionsOfAllDocument,
   FetchPointTransactionsCountOfAllDocument,
@@ -14,6 +14,7 @@ import {
   allColumns,
 } from "./constants";
 import { DataType } from "./types";
+import { usePageChange } from "@/commons/stores/page-store";
 // import { dateViewSet } from "@/utils/dateViewSet";
 
 export const usePointList = ({
@@ -21,12 +22,12 @@ export const usePointList = ({
 }: {
   listType: "all" | "selling" | "buying" | "loading";
 }) => {
-  const [page, setPage] = useState(1);
+  const { page } = usePageChange();
 
   // 게시글 데이터 가져오기
   const { data, refetch } = useQuery(FetchPointTransactionsOfAllDocument, {
     variables: {
-      page: 1,
+      page,
     },
   });
 
@@ -63,6 +64,8 @@ export const usePointList = ({
     }
   };
 
+  const pointTransactionsData = fetchPointTransactions();
+
   // ! constants.tsx 에서 가져온 columnSet 객체 (테이블 항목명)
   const columnSet: IcolumnSet = {
     all: allColumns,
@@ -71,31 +74,55 @@ export const usePointList = ({
     selling: sellingColumns,
   };
 
+  interface IData {
+    __typename?: "PointTransaction";
+    _id: string;
+    impUid?: string | null;
+    amount: number;
+    balance: number;
+    status: string;
+    statusDetail: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt?: string | null;
+  }
+
   // ! dataSourceSetting 함수
   const dataSourceSetting = (idx: number) => {
-    const columns = columnSet[listType]?.map((column) => {
-      const data =
-        listType === "all"
-          ? (fetchPointTransactions()?.[idx] as DataType)
-          : (fetchPointTransactions() as DataType);
-      if (!data) return;
-      const key = column.key?.toString();
-      const value = key && key in data ? data[key as keyof DataType] : "";
-      return {
-        [column.key as string]: value,
-      };
+    const columns = columnSet[listType]; // ! 해당 리스트 타입에 맞는 columns 가져오기
+    // console.log(columns);
+    const keyArr = columns?.map((column) => column.key); // ! columns의 key값들을 배열로 만들기
+    // console.log(keyArr);
+
+    // ! columns의 key값들을 이용해서 데이터를 가져와서 배열로 만들기
+    const data = pointTransactionsData?.[idx] as IData;
+
+    if (!data) return;
+    const columnsReturn = keyArr?.map((key) => {
+      const value = data[key as keyof IData];
+      return { [key as keyof DataType]: value };
     });
-    return { ...columns };
+
+    // console.log(columnsReturn);
+
+    // const columns = columnSet[listType]?.map((column) => {
+    //   const data = pointTransactionsData as DataType;
+    //   if (!data) return;
+    //   console.log(data);
+    //   const key = column.key?.toString() ?? "";
+    //   const value = data[key as keyof DataType];
+    //   return { [key]: value };
+    // });
+    // console.log(columns);
+    return { ...columnsReturn };
   };
 
-  console.log(fetchPointTransactions());
-
   const dataSource = Array.from({
-    length: fetchPointTransactions?.length ?? 0,
+    length: fetchPointTransactions()?.length ?? 0,
   }).map((_, idx) => dataSourceSetting(idx));
 
   // 각 게시글 갯수 불러오기
-  const { data: countData, loading } = useQuery(
+  const { data: countData } = useQuery(
     FetchPointTransactionsCountOfAllDocument
   );
 
@@ -117,39 +144,13 @@ export const usePointList = ({
     }
   };
 
-  // 페이지 변경 핸들러
-  const pageChangeHandler = async (page: number) => {
-    const result = await refetch({
-      page,
-    });
-    console.log(result);
-    setPage(page);
-  };
-
-  // 리스트 아이템 마우스 오버 이벤트 핸들러
-  const listItemMouseHandler = (
-    e: React.MouseEvent<HTMLTableRowElement>,
-    type: string
-  ) => {
-    const target = e.currentTarget;
-    const childTarget = target.lastElementChild?.firstElementChild?.classList;
-    // console.log(childTarget);
-    if (type === "over") {
-      childTarget?.add("flex");
-      childTarget?.remove("hidden");
-    } else {
-      childTarget?.add("hidden");
-      childTarget?.remove("flex");
-    }
-  };
+  // console.log(pointTransactionsData);
 
   return {
-    loading,
-    listItemMouseHandler,
+    pointTransactionsData,
     dataSource,
     columns: columnSet[listType],
     fetchPointTransactionsCount,
-    pageChangeHandler,
-    page,
+    refetch,
   };
 };

@@ -6,6 +6,8 @@ import { useSearch } from "@/commons/stores/search-store";
 import { useSearchDate } from "@/commons/stores/search-date-store";
 import "dayjs/locale/ko";
 import locale from "antd/lib/date-picker/locale/ko_KR";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function SearchBox({
   isDate = true,
@@ -17,6 +19,16 @@ export default function SearchBox({
   const { RangePicker } = DatePicker;
   const { search, setSearch } = useSearch();
   const { setStartDate, setEndDate } = useSearchDate();
+  const pathname = usePathname();
+
+  // pathname 바뀌면 검색어 초기화
+  useEffect(() => {
+    if (search !== "") {
+      setSearch("");
+      setStartDate("");
+      setEndDate("");
+    }
+  }, [pathname, search]);
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">

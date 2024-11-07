@@ -5,6 +5,7 @@ import {
   DeleteTravelproductQuestionDocument,
   FetchTravelproductQuestionsDocument,
 } from "@/commons/graphql/graphql";
+import { useUserInfo } from "@/commons/stores/user-info-store";
 
 export const useQuestionItem = () => {
   const { productId }: { productId: string } = useParams();
@@ -12,6 +13,9 @@ export const useQuestionItem = () => {
   const [deletePrdQuestion] = useMutation(DeleteTravelproductQuestionDocument);
 
   const [isEdit, setIsEdit] = useState(false);
+
+  const { userInfo } = useUserInfo();
+  const userId = userInfo?.id;
 
   // ! 질문 수정 모드
   const editModeHandler = () => {
@@ -56,5 +60,6 @@ export const useQuestionItem = () => {
     editModeHandler,
     questionAnswerModeHandler,
     isAnswer,
+    userId,
   };
 };

@@ -13,6 +13,6 @@ const config: Config = {
       },
     },
   },
-  darkMode: "selector",
+  darkMode: ["class"],
 };
 export default config;

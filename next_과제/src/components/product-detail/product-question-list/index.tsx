@@ -2,9 +2,9 @@ import { useQuestionList } from "./hook";
 import InfiniteScroll from "react-infinite-scroll-component";
 import QuestionItem from "../product-question-item";
 
-export default function QuestionList({ sellerId }: { sellerId: string }) {
-  const { data, error, loading, fetchMoreData, hasMore, reply } =
-    useQuestionList({ sellerId });
+export default function QuestionList() {
+  const { data, error, loading, fetchMoreData, hasMore, myProductCheck } =
+    useQuestionList();
 
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>에러가 발생했습니다.</div>;
@@ -21,7 +21,7 @@ export default function QuestionList({ sellerId }: { sellerId: string }) {
           <QuestionItem
             key={questionData._id + idx}
             questionData={questionData}
-            reply={reply}
+            reply={myProductCheck}
           />
         ))}
       </InfiniteScroll>

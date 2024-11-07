@@ -23,7 +23,10 @@ export default function QuestionItem(props: IquestionItemProps) {
     deleteProductQuestion,
     questionAnswerModeHandler,
     isAnswer,
+    userId,
   } = useQuestionItem();
+
+  console.log("questionData");
 
   return (
     <div className="flex flex-col gap-2 py-10 border-t first:border-0">
@@ -57,17 +60,21 @@ export default function QuestionItem(props: IquestionItemProps) {
                   {questionData?.user?.name}
                 </span>
               </div>
-
-              <div className="flex gap-2">
-                <button onClick={() => editModeHandler()}>
-                  <div className="blind">질문수정</div>
-                  <Icon icon="edit" className="w-6 h-6" />
-                </button>
-                <button onClick={() => deleteProductQuestion(questionData._id)}>
-                  <div className="blind">질문삭제</div>
-                  <Icon icon="close" className="w-6 h-6" />
-                </button>
-              </div>
+              {/* 로그인한 사람의 _id와 질문을 등록한 user 의 _id 가 같아야 노출 */}
+              {userId === questionData?.user?._id && (
+                <div className="flex gap-2">
+                  <button onClick={() => editModeHandler()}>
+                    <div className="blind">질문수정</div>
+                    <Icon icon="edit" className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => deleteProductQuestion(questionData._id)}
+                  >
+                    <div className="blind">질문삭제</div>
+                    <Icon icon="close" className="w-6 h-6" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* 댓글 내용 */}
@@ -79,7 +86,7 @@ export default function QuestionItem(props: IquestionItemProps) {
             </div>
           </div>
         )}
-        {/* 답변하기 버튼 노출 여부 */}
+        {/* 답변하기 버튼 노출 여부 - 내 상품인 경우에만 노출 */}
         {reply && (
           <>
             <div className="flex gap-2 items-center">
