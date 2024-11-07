@@ -55,17 +55,14 @@ export const FETCH_POINT_TRANSACTIONS_OF_BUYING = gql`
       balance
       status
       statusDetail
-      # travelproduct {
-      #   _id
-      #   name
-      #   remarks
-      #   contents
-      #   price
-      #   tags
-      #}
-      user {
+      travelproduct {
+        _id
         name
       }
+      # user {
+      #   _id
+      #   name
+      # }
       createdAt
       updatedAt
       deletedAt
@@ -88,6 +85,10 @@ export const FETCH_POINT_TRANSACTIONS_OF_LOADING = gql`
       balance
       status
       statusDetail
+      travelproduct {
+        _id
+        name
+      }
       # travelproduct {
       #   _id
       #   name
@@ -96,9 +97,9 @@ export const FETCH_POINT_TRANSACTIONS_OF_LOADING = gql`
       #   price
       #   tags
       #}
-      user {
-        name
-      }
+      # user {
+      #   name
+      # }
       createdAt
       updatedAt
       deletedAt
@@ -121,6 +122,10 @@ export const FETCH_POINT_TRANSACTIONS_OF_SELLING = gql`
       balance
       status
       statusDetail
+      travelproduct {
+        _id
+        name
+      }
       # travelproduct {
       #   _id
       #   name
@@ -129,9 +134,9 @@ export const FETCH_POINT_TRANSACTIONS_OF_SELLING = gql`
       #   price
       #   tags
       #}
-      user {
-        name
-      }
+      # user {
+      #   name
+      # }
       createdAt
       updatedAt
       deletedAt
