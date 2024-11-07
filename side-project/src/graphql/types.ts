@@ -165,7 +165,7 @@ export type MutationCreatePointTransactionOfBuyingAndSellingArgs = {
 
 
 export type MutationCreatePointTransactionOfLoadingArgs = {
-  impUid: Scalars['ID']['input'];
+  paymentId: Scalars['ID']['input'];
 };
 
 

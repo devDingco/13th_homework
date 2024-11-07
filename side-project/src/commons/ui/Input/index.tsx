@@ -1,16 +1,21 @@
 'use client';
 import { Input } from 'antd';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
 
-interface IInputType {
-  keyname: string;
+interface IInputType<V> {
+  keyname: Path<V>;
   type: string;
   placeholder: string;
   size?: 'small' | 'middle' | 'large';
 }
 
-function InputBase({ keyname, type, placeholder, size }: IInputType) {
-  const { control } = useFormContext();
+function InputBase<T extends FieldValues>({
+  keyname,
+  type,
+  placeholder,
+  size,
+}: IInputType<T>) {
+  const { control } = useFormContext<T>();
   return (
     <Controller
       name={keyname}
@@ -22,13 +27,13 @@ function InputBase({ keyname, type, placeholder, size }: IInputType) {
   );
 }
 
-export function InputRoundedLarge(props: IInputType) {
-  return <InputBase {...props} size="large" />;
+export function InputRoundedLarge<U extends FieldValues>(props: IInputType<U>) {
+  return <InputBase<U> {...props} size="large" />;
 }
 
 // Password 전용 컴포넌트
-interface IInputPasswordType {
-  keyname: string;
+interface IInputPasswordType<V> {
+  keyname: Path<V>;
   placeholder: string;
   size?: 'small' | 'middle' | 'large';
   visibilityToggle?: {
@@ -37,12 +42,12 @@ interface IInputPasswordType {
   };
 }
 
-export function InputPassword({
+export function InputPassword<T extends FieldValues>({
   keyname,
   placeholder,
   size,
   visibilityToggle,
-}: IInputPasswordType) {
+}: IInputPasswordType<T>) {
   const { control } = useFormContext();
   return (
     <Controller
