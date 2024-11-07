@@ -1,12 +1,14 @@
 'use client';
-import profile from '@/assets/profile.png';
+
 import { useAccessTokenStore } from '@/commons/stores/access-token-store';
 import { CaretDownOutlined, RightOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { Menu } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
+import profile from '@/assets/profile.png';
 import logo from '@/assets/logo.png';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 const items = [
 	{
@@ -31,15 +33,20 @@ const items = [
 	},
 ];
 
+const DynamicMenu = dynamic(() => import('antd').then((mod) => mod.Menu), {
+	ssr: false,
+});
+
 export default function Navigation() {
 	const router = useRouter();
 	const { accessToken } = useAccessTokenStore();
+
 	const onClickLoginButton = () => router.push('/login');
 
 	return (
 		<div className="flex w-full max-w-7xl items-center justify-between bg-white p-4">
 			<Image src={logo} alt="트립트립로고" width={52} height={32} />
-			<Menu
+			<DynamicMenu
 				className="flex-1 border-none"
 				mode="horizontal"
 				defaultSelectedKeys={['1']}

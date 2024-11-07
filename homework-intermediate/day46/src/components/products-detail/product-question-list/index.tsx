@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import _ from 'lodash';
 import { useState } from 'react';
-import { Item } from './product-question-item';
+import { ProductQuestionItem } from './product-question-item';
 import { TravelproductQuestion } from '@/commons/graphql/graphql';
 
 const FETCH_TRAVEL_PRODUCTS = gql`
@@ -50,6 +50,7 @@ export default function ProductQuestionList(props) {
 			},
 		},
 	);
+	console.log('🚀 ~ ProductQuestionList ~ data:', data);
 
 	const [hasMore, setHasMore] = useState(true);
 
@@ -84,7 +85,7 @@ export default function ProductQuestionList(props) {
 	return (
 		<div
 			id="scrollableTargetDiv"
-			className="scrollbar-thin scrollbar-track-transparent h-[50vh] overflow-y-scroll border border-red-600"
+			className="h-full max-h-[70vh] overflow-y-scroll border border-red-600 scrollbar-thin"
 		>
 			<InfiniteScroll
 				hasMore={hasMore}
@@ -94,12 +95,12 @@ export default function ProductQuestionList(props) {
 				scrollableTarget="scrollableTargetDiv"
 			>
 				{data?.fetchTravelproductQuestions.map(
-					(item: TravelproductQuestion) => {
+					(productQuestion: TravelproductQuestion) => {
 						return (
-							<Item
-								item={item}
-								user={item.user}
-								key={item._id}
+							<ProductQuestionItem
+								productQuestion={productQuestion}
+								user={productQuestion.user}
+								key={productQuestion._id}
 								refetch={refetch}
 							/>
 						);

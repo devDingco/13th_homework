@@ -10,9 +10,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { UpdateTravelproductInput } from '@/commons/graphql/graphql';
 import { useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { ReplyItem, ReplyItemList } from './reply-product-question-item';
+import { ProductQuestionAnswerList } from './product-question-item-answer-list';
+import { ProductQuestionAnswer } from './product-question-item-answer';
 
 interface IProductQuestion extends UpdateTravelproductInput {}
+
+const productQuestionSchema: z.ZodType<IProductQuestion> = z.object({
+	contents: z.string().min(1, { message: '수정할 문의 내역을 작성해 주세요.' }),
+});
 
 export const UPDATE_TRAVEL_PRODUCT_QUESTION = gql`
 	mutation updateTravelproductQuestion(
@@ -53,11 +58,7 @@ const FETCH_USER_LOGGED_IN = gql`
 	}
 `;
 
-const productQuestionSchema: z.ZodType<IProductQuestion> = z.object({
-	contents: z.string().min(1, { message: '수정할 문의 내역을 작성해 주세요.' }),
-});
-
-export function Item({ item, user, refetch }) {
+export function ProductQuestionItem({ productQuestion, user, refetch }) {
 	const [isReplying, setIsReplying] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const { register, handleSubmit, formState } = useForm<IProductQuestion>({
@@ -90,7 +91,7 @@ export function Item({ item, user, refetch }) {
 		const result = await updateTravelproductQuestion({
 			variables: {
 				updateTravelproductQuestionInput: { ...data },
-				travelproductQuestionId: item._id,
+				travelproductQuestionId: productQuestion._id,
 			},
 		});
 		toggleIsEditing();
@@ -98,14 +99,14 @@ export function Item({ item, user, refetch }) {
 
 	const onClickDelete = () => {
 		deleteTravelproductQuestion({
-			variables: { travelproductQuestionId: item._id },
+			variables: { travelproductQuestionId: productQuestion._id },
 		});
 		refetch();
 		setIsEditing(false);
 	};
 
 	return (
-		<div className="flex flex-col gap-4" key={item._id}>
+		<div className="flex flex-col gap-4" key={productQuestion._id}>
 			<div className="flex justify-between gap-4">
 				<div className="flex gap-2">
 					<Image src={PROFILE_IMG} alt="사용자프로필이미지" />
@@ -124,7 +125,7 @@ export function Item({ item, user, refetch }) {
 						className="h-36 w-full resize-none rounded-lg border px-4 py-3"
 						placeholder="수정할 문의사항을 입력해 주세요."
 						{...register('contents')}
-						defaultValue={item.contents}
+						defaultValue={productQuestion.contents}
 					></textarea>
 					<div className="text-red-500">
 						{formState.errors.contents?.message}
@@ -147,13 +148,16 @@ export function Item({ item, user, refetch }) {
 				</form>
 			) : (
 				<>
-					<div>{item.contents}</div>
-					<div>{item.updatedAt}</div>
-					<ReplyItemList replyItem={item} />
+					<div>{productQuestion.contents}</div>
+					<div>{productQuestion.updatedAt}</div>
+					<ProductQuestionAnswerList productQuestion={productQuestion} />
 				</>
 			)}
 			{isReplying ? (
-				<ReplyItem toggleIsReplying={toggleIsReplying} />
+				<ProductQuestionAnswer
+					productQuestion={productQuestion}
+					toggleIsReplying={toggleIsReplying}
+				/>
 			) : (
 				<button className="flex items-center gap-2" onClick={toggleIsReplying}>
 					<Image src={REPLY} alt="문의내용답변하기" />
