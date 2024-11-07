@@ -13,6 +13,7 @@ import { Exclude } from 'class-transformer';
 @Entity('board')
 export class BoardEntity {
     @ObjectIdColumn()
+    @Exclude()
     _id: ObjectId;
 
     @Column()

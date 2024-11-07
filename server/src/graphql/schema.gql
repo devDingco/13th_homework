@@ -35,7 +35,6 @@ type BoardAddressOutput {
 }
 
 type BoardSchema {
-  _id: ID!
   author: String!
   title: String!
   content: String!
