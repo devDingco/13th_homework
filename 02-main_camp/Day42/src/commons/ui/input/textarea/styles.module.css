@@ -1,0 +1,21 @@
+.textArea__container {
+  width: 100%;
+  position: relative;
+}
+
+.textArea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+}
+
+.textCount {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 1rem;
+  color: #ababab;
+  font-weight: 500;
+  font-size: 1rem;
+}
