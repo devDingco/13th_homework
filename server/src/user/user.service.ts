@@ -38,6 +38,6 @@ export class UserService {
             user.role,
         );
 
-        return { user, ...token };
+        return { ...token };
     }
 }

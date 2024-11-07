@@ -3,6 +3,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 
 import { AppModule } from './app.module';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
+import { ContextTypeGuard } from './common/guards/context.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule } from '@nestjs/swagger';
@@ -12,7 +13,7 @@ import { swagger } from 'configs/swagger.config';
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
-// middleware -> gurad -> interceptor(before) -> pipe -> controller -> service -> repository -> interceptor(after) -> filter -> client
+// middleware -> guard -> interceptor(before) -> pipe -> controller -> service -> repository -> interceptor(after) -> filter -> client
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -21,7 +22,7 @@ async function bootstrap() {
         credentials: true,
     });
 
-    app.useGlobalGuards(new AuthenticationGuard());
+    app.useGlobalGuards(new ContextTypeGuard(), new AuthenticationGuard());
 
     app.useGlobalInterceptors(new LoggingInterceptor());
 
