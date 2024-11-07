@@ -1,8 +1,6 @@
-import { ChevronRight } from "lucide-react";
-
 export default function DiaryList() {
   return (
-    <div className="space-y-4">
+    <div className="p-8 max-w-5xl mx-auto grid gap-6">
       {[1, 2, 3, 4, 5].map((index) => (
         <div
           key={index}
@@ -46,10 +44,7 @@ export default function DiaryList() {
             </div>
 
             {/* 날짜 */}
-            <div className="flex-shrink-0 flex flex-col items-end justify-between h-full ml-4">
-              <span className="text-sm text-gray-500">2024.10.29</span>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </div>
+            <span className="text-sm text-gray-500">2024.10.29</span>
           </div>
 
           {/* 이미지 */}

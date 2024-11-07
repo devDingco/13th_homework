@@ -13,7 +13,7 @@ export default function CommunityPage() {
   return (
     <>
       <Header h1="공개 일기" p="다른 사람들의 이야기를 읽고 공감해보세요" />
-      <div className="p-8 max-w-7xl mx-auto">
+      <div className="p-8 max-w-5xl mx-auto">
         {/* 필터 및 검색 */}
         <div className="bg-white p-4 rounded-xl shadow-sm mb-6">
           <div className="flex items-center justify-between">

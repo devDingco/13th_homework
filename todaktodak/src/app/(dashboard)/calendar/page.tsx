@@ -4,9 +4,9 @@ import { useState } from "react";
 import EmotionCalendar from "@/components/calendar/EmotionCalendar";
 import CounselingCalendar from "@/components/calendar/CounselingCalendar";
 import Header from "@/components/shared/Header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function CalendarPage() {
-  // 현재 선택된 탭 상태 관리 ('emotion' | 'counseling')
   const [activeTab, setActiveTab] = useState<"emotion" | "counseling">(
     "emotion"
   );
@@ -29,45 +29,24 @@ export default function CalendarPage() {
   const headerContent = getHeaderContent(activeTab);
 
   return (
-    <div className="h-screen">
-      {/* 캘린더 헤더 - 탭에 따라 다른 설명 표시 */}
+    <div className="h-full">
       <Header h1={headerContent.title} p={headerContent.description} />
-      <div className="px-8 max-w-7xl mx-auto">
-        {/* 탭 메뉴 */}
-        <div className="my-6">
-          <div className="flex space-x-1 p-1 bg-gray-100 rounded-lg max-w-md">
-            <button
-              onClick={() => setActiveTab("emotion")}
-              className={`flex-1 py-2.5 px-5 rounded-md text-sm font-medium transition-all
-              ${
-                activeTab === "emotion"
-                  ? "bg-white text-gray-900 shadow"
-                  : "text-gray-500 hover:text-gray-700"
-              }`}
-            >
+      <div className="p-8 max-w-5xl mx-auto">
+        <Tabs defaultValue="emotion" className="w-full">
+          {/* 탭 */}
+          <TabsList className="w-full max-w-md py-6 bg-gray-100 ">
+            <TabsTrigger value="emotion" className="w-full py-2">
               감정 캘린더
-            </button>
-            <button
-              onClick={() => setActiveTab("counseling")}
-              className={`flex-1 py-2.5 px-5 rounded-md text-sm font-medium transition-all
-              ${
-                activeTab === "counseling"
-                  ? "bg-white text-gray-900 shadow"
-                  : "text-gray-500 hover:text-gray-700"
-              }`}
-            >
+            </TabsTrigger>
+            <TabsTrigger value="counseling" className="w-full py-2">
               상담 예약
-            </button>
-          </div>
-        </div>
+            </TabsTrigger>
+          </TabsList>
 
-        {/* 캘린더 표시 영역 */}
-        <div className="transition-all duration-300 ease-in-out">
-          {activeTab === "emotion" ? (
-            // 감정 캘린더 영역
+          {/* 감정 캘린더 */}
+          <TabsContent value="emotion" className="mt-6">
             <div>
               <EmotionCalendar />
-              {/* 감정 통계 요약 */}
               <div className="mt-6 grid grid-cols-3 gap-6">
                 <div className="bg-white rounded-xl shadow-sm p-6">
                   <h3 className="text-sm font-medium text-gray-500 mb-4">
@@ -105,11 +84,12 @@ export default function CalendarPage() {
                 </div>
               </div>
             </div>
-          ) : (
-            // 상담 예약 캘린더 영역
+          </TabsContent>
+
+          {/* 상담 캘린더 */}
+          <TabsContent value="counseling" className="mt-6">
             <div>
               <CounselingCalendar />
-              {/* 예약 현황 요약 */}
               <div className="mt-6 grid grid-cols-3 gap-6">
                 <div className="bg-white rounded-xl shadow-sm p-6">
                   <h3 className="text-sm font-medium text-gray-500 mb-4">
@@ -144,8 +124,8 @@ export default function CalendarPage() {
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ export default function DiaryGrid() {
                 #칼퇴
               </span>
               <span className="px-2 py-1 text-xs bg-gray-100 rounded-full">
-                #침대좋아
+                #침대좋아.
               </span>
             </div>
 
