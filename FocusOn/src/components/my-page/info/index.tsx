@@ -30,7 +30,7 @@ const Info = () => {
       orderName: "Point",
       totalAmount: 500,
       currency: "CURRENCY_KRW",
-      payMethod: "CARD",
+      payMethod: "EASY_PAY",
       customer: {
         fullName: "밍밍",
         phoneNumber: "010-1234-5678",

@@ -27,15 +27,21 @@ const useProductsWirte = (props) => {
     }
   };
 
+  // 태그 삭제
+  const removeTag = (removeId) => {
+    console.log(removeId);
+    setTags(tags.filter((_, index) => index !== removeId));
+  };
+
   const methods = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
   });
 
   const onClickSubmit = async (data) => {
-    console.log(data);
     try {
       const result = await createTravelproduct({
+        // TODO: 스프레드연산자써서 짧게 만들어주기
         variables: {
           createTravelproductInput: {
             name: data.name,
@@ -43,6 +49,12 @@ const useProductsWirte = (props) => {
             contents: data.contents,
             price: data.price,
             tags: tags,
+            travelproductAddress: {
+              zipcode: data.zipcode,
+              addressDetail: data.addressDetail,
+              lat: data.lat,
+              lng: data.lng,
+            },
           },
         },
       });
@@ -58,6 +70,7 @@ const useProductsWirte = (props) => {
     methods,
     onChangeTag,
     addTag,
+    removeTag,
     onClickSubmit,
   };
 };

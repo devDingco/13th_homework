@@ -10,6 +10,8 @@ function InputBase(props) {
       className={props.className}
       type={props.type}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
+      disabled={props.disabled}
       {...register(props.name)}
     />
   );
@@ -18,4 +20,8 @@ function InputBase(props) {
 // 2. 인풋 찍기
 export function InputSoftMFull(props) {
   return <InputBase className={styles.input__soft__m__full} {...props} />;
+}
+
+export function InputSoftMS(props) {
+  return <InputBase className={styles.input__soft__m__s} {...props} />;
 }

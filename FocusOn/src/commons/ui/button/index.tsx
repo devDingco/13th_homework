@@ -11,6 +11,7 @@ function ButtonBase(props) {
       className={props.className}
       type={props.type}
       onClick={props.onClick}
+      type={props.type}
     >
       {props.children}
     </button>
@@ -29,6 +30,8 @@ export function ButtonSoftMFitMain(props) {
   );
 }
 
-export function ButtonCancel(props) {
-  return <ButtonBase className={styles.button__cancel} {...props} />;
+export function ButtonSoftMFitBorder(props) {
+  return (
+    <ButtonBase className={styles.button__soft__m__fit__border} {...props} />
+  );
 }
