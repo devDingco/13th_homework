@@ -72,7 +72,7 @@ export default function SignUp({
             />
             <InputForm
               validationStatus={
-                errorMessages.email?.message === undefined ? "default" : "error"
+                errorMessages.name?.message === undefined ? "default" : "error"
               }
               keyName="name"
               isRequired={true}
@@ -84,7 +84,9 @@ export default function SignUp({
             />
             <InputForm
               validationStatus={
-                errorMessages.email?.message === undefined ? "default" : "error"
+                errorMessages.password?.message === undefined
+                  ? "default"
+                  : "error"
               }
               keyName="password"
               isRequired={true}
@@ -96,7 +98,9 @@ export default function SignUp({
             />
             <InputForm
               validationStatus={
-                errorMessages.email?.message === undefined ? "default" : "error"
+                errorMessages.checkPassword?.message === undefined
+                  ? "default"
+                  : "error"
               }
               keyName="checkPassword"
               isRequired={true}
