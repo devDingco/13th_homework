@@ -1,6 +1,8 @@
 import {
+    IsBoolean,
     IsEmail,
     IsNotEmpty,
+    IsOptional,
     IsString,
     Matches,
     MaxLength,
@@ -25,4 +27,8 @@ export class loginDTO {
         },
     )
     password: string;
+
+    @IsBoolean()
+    @IsOptional()
+    dev?: boolean;
 }

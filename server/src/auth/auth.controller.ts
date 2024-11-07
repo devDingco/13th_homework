@@ -6,9 +6,9 @@ import { AuthService } from './auth.service';
 export class AuhtController {
     constructor(private readonly authService: AuthService) {}
 
-    // @Post('/token')
-    // @HttpCode(HttpStatus.CREATED)
-    // token(@Req() req) {
-    //     return;
-    // }
+    @Post('/token')
+    @HttpCode(HttpStatus.CREATED)
+    token(@Req() req) {
+        return;
+    }
 }

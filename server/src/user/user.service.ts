@@ -36,6 +36,7 @@ export class UserService {
         const token = await this.authService.issueLoginToken(
             user.id,
             user.role,
+            loginDTO.dev,
         );
 
         return { ...token };
