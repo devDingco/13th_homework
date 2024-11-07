@@ -3,11 +3,13 @@ import styles from "./styles.module.css";
 import { MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginButton } from "@/commons/ui/button";
+import { useAccessTokenStore } from "@/app/_store/accessToken/store";
 
 export default function LayoutNavigation() {
   const router = useRouter();
   const navigationItem = ["트립토크", "숙박권 구매", "마이 페이지"];
-  const isLoggedIn = true;
+  const { accessToken } = useAccessTokenStore();
+  const isLoggedIn = accessToken !== "" ? true : false;
   const [selectedItem, setSelectedItem] = useState(0);
 
   const onClickNavigationItem = (event: MouseEvent<HTMLInputElement>) => {
@@ -15,7 +17,7 @@ export default function LayoutNavigation() {
     setSelectedItem(id);
 
     if (id === 0) router.push("/boards");
-    if (id === 1) router.push("/숙박권 구매!");
+    if (id === 1) router.push("/travelproduct");
     if (id === 2) router.push("/mypage");
   };
 
@@ -49,8 +51,6 @@ export default function LayoutNavigation() {
       </div>
 
       {isLoggedIn ? (
-        <LoginButton />
-      ) : (
         <div className={styles.profileContainer}>
           <button className={styles.profileButton}>
             <Image
@@ -73,6 +73,8 @@ export default function LayoutNavigation() {
             ></Image>
           </button>
         </div>
+      ) : (
+        <LoginButton />
       )}
     </div>
   );
