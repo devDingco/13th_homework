@@ -11,6 +11,7 @@ import { useMutation } from "@apollo/client";
 import { LoginUserDocument } from "@/commons/gql/graphql";
 import { Button__48__full } from "../button";
 import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { useAccessTokenStore } from "@/app/_store/accessToken/store";
 
 interface ILoginProps {
   handleSignUp: () => void;
@@ -19,6 +20,8 @@ interface ILoginProps {
 export default function Login({ handleSignUp }: ILoginProps) {
   const navigate = useNavigate();
   const [loginUser] = useMutation(LoginUserDocument);
+
+  const { setAccessToken } = useAccessTokenStore();
 
   const methods = useForm<ILoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -39,13 +42,24 @@ export default function Login({ handleSignUp }: ILoginProps) {
           password: data.password,
         },
       });
-      console.log(result.data?.loginUser);
+      const accessToken = result.data?.loginUser.accessToken;
+      console.log(accessToken);
+
+      if (accessToken === undefined) {
+        setIsLoginFailed(true);
+        alert("로그인을 실패했습니다.");
+        return;
+      }
+
+      setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
+
       setIsLoginFailed(false);
       navigate(NavigationPaths.boards);
+
       alert("로그인 성공!");
     } catch (error) {
-      console.log("로그인을 실패했습니다.", error);
-      setIsLoginFailed(true);
+      console.log(error);
     }
   };
 
