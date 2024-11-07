@@ -17,7 +17,7 @@ export default function Navigation() {
   const { data } = useQuery(FETCH_USER_LOGGEDIN);
   return (
     <div
-      className="w-full py-5 bg-gray-50 flex gap-2.5"
+      className="w-full py-5 bg-white flex gap-2.5"
       style={{
         padding: "20px 5px",
         display: "flex",
