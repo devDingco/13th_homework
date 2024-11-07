@@ -1,3 +1,4 @@
+import { PlusOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
 
 export default function PerchaseWrite() {
@@ -36,7 +37,7 @@ export default function PerchaseWrite() {
         </span>
         <textarea
           className={styles.textarea}
-          placeholder="내용을 입력해 주세요."
+          placeholder="  내용을 입력해 주세요."
         ></textarea>
         {/* 임시로 textarea쓰고 나중에 웹 에디터 배울때 그때 교체 예정 */}
         <div className={styles.underLine}></div>
@@ -105,7 +106,21 @@ export default function PerchaseWrite() {
       </div>
       <div className={styles.underLine}></div>
 
-      {/* 나머지는 내일 마저 하기 */}
+      <div className={styles.imageArea}>
+        <span className={styles.inputText}>사진 첨부</span>
+        <div className={styles.imageSection}>
+          <div className={styles.moreImgBox}>추가되면 생성될 이미지 자리</div>
+          <div className={styles.addImageBox}>
+            <PlusOutlined className={styles.plusIcon} />
+            <span className={styles.addText}>클릭해서 사진 업로드</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.buttonSection}>
+        <button className={styles.cancelBtn}>취소</button>
+        <button className={styles.submitBtn}>등록하기</button>
+      </div>
     </main>
   );
 }
