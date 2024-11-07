@@ -19,7 +19,11 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
             }
         } else {
             const url = req.url;
-            if (url.includes('login') || url.includes('signup')) {
+            if (
+                url.includes('login') ||
+                url.includes('signup') ||
+                url.includes('token')
+            ) {
                 return true;
             }
         }
