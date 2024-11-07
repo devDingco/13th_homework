@@ -5,8 +5,8 @@ import Image from 'next/image';
 import usehookCommentsWrite from './hook';
 
 export default function BoardsComponentComment(props) {
-
     const {
+        commentData,
         writer,
         password,
         contents,
@@ -81,6 +81,7 @@ export default function BoardsComponentComment(props) {
                         className={styles.comment}
                         onChange={onChangeContents}
                         value={contents}
+                        // defaultValue={commentData?.contents}
                     ></textarea>
                     <div className={styles.requiedMention}>{contentsError}</div>
                     <div className={styles.commentBoxButton}>

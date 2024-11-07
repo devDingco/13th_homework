@@ -7,6 +7,7 @@ export const 나의그래프큐엘셋팅 = gql`
             _id
             writer
             contents
+            title
             youtubeUrl
             likeCount
             dislikeCount
@@ -39,6 +40,14 @@ export const UPDATE_BOARD = gql`
             createdAt
             updatedAt
             deletedAt
+        }
+    }
+`;
+
+export const UPLOAD_FILE = gql`
+    mutation uploadFile($file: Upload!) {
+        uploadFile(file: $file) {
+            url
         }
     }
 `;
