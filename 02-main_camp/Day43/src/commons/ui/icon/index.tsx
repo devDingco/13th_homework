@@ -178,10 +178,10 @@ export function Chat() {
   );
 }
 
-export function Edit({ width = 1.5, height = 1.5 }: IIconProps) {
+export function EditIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   return (
     <Image
-      src="/assets/edit.png"
+      src="/assets/edit.svg"
       alt="수정하기 아이콘"
       width={0}
       height={0}
@@ -247,7 +247,20 @@ export function RightArrowIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   return (
     <Image
       src="/assets/right_arrow.svg"
-      alt="로고 아이콘"
+      alt="오른쪽 화살표 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function ListIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/list.svg"
+      alt="목록 아이콘"
       width={0}
       height={0}
       sizes="100vw"
