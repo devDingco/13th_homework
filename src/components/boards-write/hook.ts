@@ -3,11 +3,13 @@
 import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import {
     CreateBoardDocument,
     UpdateBoardDocument,
 } from '@/commons/graphql/graphql';
+import { checkValidtionFile } from '@/commons/libraries/image-upload-validation';
+import { UPLOAD_FILE } from './queries';
 
 export const useBoardWrite = () => {
     const router = useRouter();
@@ -25,8 +27,13 @@ export const useBoardWrite = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const [imageUrl, setImageUrl] = useState('');
+    const fileRef = useRef();
+    const [isHovered, setIsHovered] = useState(false); // 호버 상태 관리
+
     const [게시글생성함수] = useMutation(CreateBoardDocument);
     const [게시글수정함수] = useMutation(UpdateBoardDocument);
+    const [uploadFile] = useMutation(UPLOAD_FILE);
 
     const [inputs, setInputs] = useState({
         writer: '',
@@ -34,9 +41,36 @@ export const useBoardWrite = () => {
         password: '',
         contents: '',
         youtubeUrl: '',
+        images: [''],
     });
 
-    const { writer, title, password, contents, youtubeUrl } = inputs;
+    const { writer, title, password, contents, youtubeUrl, images } = inputs;
+
+    const onChangeFile = async (event) => {
+        const file = event.target.files[0];
+        console.log(file);
+
+        const isValid = checkValidtionFile(file);
+        if (!isValid) return; // onChangeFile을 종료함
+
+        const result = await uploadFile({
+            variables: {
+                // myfile: file,
+                file, //shorhandproperties
+            },
+        });
+
+        console.log(result.data?.uploadFile.url);
+        setImageUrl(result.data?.uploadFile.url ?? '');
+    };
+
+    const onClickImage = () => {
+        fileRef.current.click();
+    };
+
+    const onClickDeleteImage = () => {
+        setImageUrl(''); // 이미지 URL 초기화
+    };
 
     const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputs({
@@ -125,11 +159,10 @@ export const useBoardWrite = () => {
                             address: address,
                             addressDetail: detailAddress,
                         },
-                        images: [''],
+                        images: [imageUrl],
                     },
                 },
             });
-            console.log(result);
 
             if (writer && title && password && contents !== '') {
                 alert('회원가입을 축하드려요');
@@ -153,6 +186,7 @@ export const useBoardWrite = () => {
         };
         if (title) myvariables.updateBoardInput.title = title;
         if (contents) myvariables.updateBoardInput.contents = contents;
+        if (images) myvariables.updateBoardInput.images = [imageUrl];
         if (youtubeUrl) myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
 
         try {
@@ -196,6 +230,14 @@ export const useBoardWrite = () => {
     };
 
     return {
+        imageUrl,
+        setImageUrl,
+        fileRef,
+        onChangeFile,
+        onClickImage,
+        onClickDeleteImage,
+        isHovered,
+        setIsHovered,
         detailAddress,
         setDetailAddress,
         zonecode,
