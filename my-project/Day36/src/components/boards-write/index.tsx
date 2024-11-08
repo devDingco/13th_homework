@@ -139,8 +139,6 @@ export default function BoardNew(props) {
                   src={
                     imageUrl[index]
                       ? `https://storage.googleapis.com/${imageUrl[index]}`
-                      : props.isEdit && data?.fetchBoard.images?.[index]
-                      ? `https://storage.googleapis.com/${data?.fetchBoard.images[index]}`
                       : "/img/add.svg"
                   }
                   alt="img"
@@ -165,7 +163,7 @@ export default function BoardNew(props) {
           }
           disabled={registerCheck}
         >
-          등록하기
+          {props.isEdit ? "수정하기" : "등록하기"}
         </button>
       </div>
       {isModalOpen && (

@@ -58,16 +58,17 @@ export default function BoardDetail() {
           </div>
         </div>
       </div>
-      {data?.fetchBoard.images.map((el, index) => (
-        <div className="size-40 relative" key={index}>
-          <Image
-            src={`https://storage.googleapis.com/${el}`}
-            alt=""
-            fill
-            objectFit="cover"
-          />
-        </div>
-      ))}
+      {data?.fetchBoard.images.some((el) => el !== "") &&
+        data?.fetchBoard.images.map((el, index) => (
+          <div className="w-[500px] h-[500px] relative" key={index}>
+            <Image
+              src={`https://storage.googleapis.com/${el}`}
+              alt=""
+              fill
+              objectFit="cover"
+            />
+          </div>
+        ))}
       <div className="font-normal text-[16px] leading-6">
         {data?.fetchBoard.contents}
       </div>

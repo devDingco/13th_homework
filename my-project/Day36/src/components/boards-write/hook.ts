@@ -13,22 +13,27 @@ import {
 import { Address } from "react-daum-postcode";
 
 export default function useBoardNew(props) {
-  const [imageUrl, setImageUrl] = useState(["", "", ""]);
+  const params = useParams();
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: params.boardId,
+    },
+  });
+
+  const [imageUrl, setImageUrl] = useState([
+    data?.fetchBoard.images[0] || "",
+    data?.fetchBoard.images[1] || "",
+    data?.fetchBoard.images[2] || "",
+  ]);
+
   const fileRef = useRef([null, null, null]);
   const router = useRouter();
-  const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [youtubeUrl, setYoutubUrl] = useState("");
   const [juso, setJuso] = useState({
     zipcode: "",
     address: "",
     addressDetail: "",
-  });
-
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: params.boardId,
-    },
   });
 
   const [input, setInput] = useState({
@@ -111,6 +116,7 @@ export default function useBoardNew(props) {
 
   const onClickEdit = async () => {
     try {
+      console.log("수정하기작동");
       await updateBoard({
         variables: {
           boardId: params.boardId,
@@ -198,7 +204,6 @@ export default function useBoardNew(props) {
 
   const onChangeFile = async (event, index) => {
     const file = event.target.files?.[0];
-    console.log(file, "파일확인");
     const result = await uploadFile({ variables: { file } });
     const newImageUrl = result.data.uploadFile.url;
 
@@ -212,6 +217,7 @@ export default function useBoardNew(props) {
   };
 
   const onClickDeleteImage = (index) => {
+    console.log("딜리트이미지 작동");
     const deleteUrl = [...imageUrl];
     deleteUrl[index] = "";
     setImageUrl(deleteUrl);
