@@ -2,10 +2,10 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { AuthenticationGuard } from './auth/guards/authentication.guard';
-import { ContextTypeGuard } from './common/guards/context.guard';
+import { AuthenticationGuard } from './common/guards/authentication.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { RequestTypeMiddleware } from './common/middlewares/requestType.middleware';
 import { SwaggerModule } from '@nestjs/swagger';
 import { sessionConfig } from 'configs/session.config';
 import { swagger } from 'configs/swagger.config';
@@ -21,11 +21,16 @@ async function bootstrap() {
     app.enableCors({
         credentials: true,
     });
+    // middleware
+    app.use(new RequestTypeMiddleware().use);
 
-    app.useGlobalGuards(new ContextTypeGuard(), new AuthenticationGuard());
+    // guard
+    app.useGlobalGuards(new AuthenticationGuard());
 
+    // interceptor
     app.useGlobalInterceptors(new LoggingInterceptor());
 
+    // pipe
     app.useGlobalPipes(
         new ValidationPipe({
             whitelist: true,
@@ -33,10 +38,12 @@ async function bootstrap() {
         }),
     );
 
+    // interceptor
     app.useGlobalInterceptors(
         new ClassSerializerInterceptor(app.get(Reflector)),
     );
 
+    // filter
     app.useGlobalFilters(new HttpExceptionFilter());
 
     const document = SwaggerModule.createDocument(app, swagger);

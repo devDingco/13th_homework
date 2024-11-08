@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         const user: User = await this.userRepository.findUserPK(id);
 
         if (!user) {
-            return new UnauthorizedException();
+            return new UnauthorizedException('유효하지 않은 사용자입니다.');
         }
         return user;
     }

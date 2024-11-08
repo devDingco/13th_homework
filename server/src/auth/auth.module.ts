@@ -1,3 +1,5 @@
+import { AuhtController } from './auth.controller';
+import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtConfigService } from 'configs/jwt.config';
@@ -18,8 +20,8 @@ import { UserRepository } from 'src/user/repository/user.repository';
         }),
         TypeOrmModule.forFeature([User], 'PostgreSQL'),
     ],
-
-    providers: [AuthService, JwtStrategy, UserRepository],
+    controllers: [AuhtController],
+    providers: [AuthService, JwtStrategy, UserRepository, AuthResolver],
     exports: [PassportModule, AuthService, JwtStrategy],
 })
 export class AuthModule {}

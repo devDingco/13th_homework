@@ -19,9 +19,7 @@ import { ResponseMessage } from '../common/decorators/response-message.decorator
 import { BoardEntity } from './entity/board.entity';
 import { PaginationDTO } from './dto/pagination.dto';
 import { PaginationResponseDTO } from './dto/pagination-response.dto';
-import { TransformBoardInterceptor } from 'src/common/interceptors/transform-board.interceptor';
 
-@UseInterceptors(TransformBoardInterceptor)
 @Controller('/api/board')
 export class BoardController {
     constructor(private readonly boardService: BoardService) {}

@@ -3,15 +3,15 @@
 # ------------------------------------------------------
 
 type BoardCommentResponseDTO {
-    _id: ID!
-    author: String!
-    content: String!
-    rating: Int
-    parentId: String
-    boardId: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    replies: [BoardCommentResponseDTO!]
+  _id: ID!
+  author: String!
+  content: String!
+  rating: Int
+  parentId: String
+  boardId: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  replies: [BoardCommentResponseDTO!]
 }
 
 """
@@ -20,111 +20,115 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type BoardReactionSchema {
-    _id: ID!
-    boardId: Int!
-    like: Int!
-    hate: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+  _id: ID!
+  boardId: Int!
+  like: Int!
+  hate: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type BoardAddressOutput {
-    zoneCode: Int!
-    address: String!
-    detailAddress: String!
+  zoneCode: Int!
+  address: String!
+  detailAddress: String!
 }
 
 type BoardSchema {
-    _id: ID!
-    author: String!
-    title: String!
-    content: String!
-    imageUrl: [String!]
-    youtubeUrl: String
-    boardAddressOutput: BoardAddressOutput
-    boardId: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+  author: String!
+  title: String!
+  content: String!
+  imageUrl: [String!]
+  youtubeUrl: String
+  boardAddressOutput: BoardAddressOutput
+  boardId: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type BoardPaginationResponse {
-    result: [BoardSchema!]!
-    totalCount: Int!
+  result: [BoardSchema!]!
+  totalCount: Int!
 }
 
 type UserSchema {
-    id: Int!
-    name: String!
-    email: String!
+  id: Int!
+  name: String!
+  email: String!
 }
 
 type TokenSchema {
-    accessToken: String!
+  accessToken: String!
 }
 
 type Query {
-    getBoards(page: Int, take: Int): BoardPaginationResponse!
-    getBoard(boardId: Int!): BoardSchema!
-    getBoardReaction(boardId: Int!): BoardReactionSchema!
-    getBoardComment(boardId: Int!, page: Int): [BoardCommentResponseDTO!]!
+  getBoards(page: Int, take: Int): BoardPaginationResponse!
+  getBoard(boardId: Int!): BoardSchema!
+  getBoardReaction(boardId: Int!): BoardReactionSchema!
+  getBoardComment(boardId: Int!, page: Int): [BoardCommentResponseDTO!]!
 }
 
 type Mutation {
-    createBoard(createBoardInput: CreateBoardInput!): BoardSchema!
-    updateBoard(
-        boardId: Int!
-        updateBoardInput: UpdateBoardInput!
-    ): BoardSchema!
-    deleteBoard(boardId: Int!): Boolean!
-    clearBoard: Boolean!
-    isPasswordCorrect(boardId: Int!, password: String!): Boolean!
-    createBoardComment(
-        boardId: Int!
-        createBoardComment: CreateBoardCommentInput!
-    ): BoardCommentResponseDTO!
-    updateBoardComment(
-        boardId: Int!
-        updateBoardComment: UpdateBoardCommentInput!
-        commentId: String!
-    ): BoardCommentResponseDTO!
-    deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
+  createBoard(createBoardInput: CreateBoardInput!): BoardSchema!
+  updateBoard(boardId: Int!, updateBoardInput: UpdateBoardInput!): BoardSchema!
+  deleteBoard(boardId: Int!): Boolean!
+  clearBoard: Boolean!
+  isPasswordCorrect(boardId: Int!, password: String!): Boolean!
+  createBoardComment(boardId: Int!, createBoardComment: CreateBoardCommentInput!): BoardCommentResponseDTO!
+  updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
+  deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
+  signup(signUpUser: signUpUser!): UserSchema!
+  login(loginUser: loginUser!): TokenSchema!
+  logout: Boolean!
 }
 
 input CreateBoardInput {
-    author: String!
-    password: String!
-    title: String!
-    content: String!
-    imageUrl: [String!]
-    youtubeUrl: String
-    boardAddressInput: [BoardAddressInput!]
+  author: String!
+  password: String!
+  title: String!
+  content: String!
+  imageUrl: [String!]
+  youtubeUrl: String
+  boardAddressInput: [BoardAddressInput!]
 }
 
 input BoardAddressInput {
-    zoneCode: Int!
-    address: String!
-    detailAddress: String!
+  zoneCode: Int!
+  address: String!
+  detailAddress: String!
 }
 
 input UpdateBoardInput {
-    title: String!
-    content: String!
-    imageUrl: [String!]
-    youtubeUrl: String
-    boardAddressInput: [BoardAddressInput!]
+  title: String!
+  content: String!
+  imageUrl: [String!]
+  youtubeUrl: String
+  boardAddressInput: [BoardAddressInput!]
 }
 
 input CreateBoardCommentInput {
-    author: String!
-    content: String!
-    rating: Int
-    parentId: String
-    password: String!
+  author: String!
+  content: String!
+  rating: Int
+  parentId: String
+  password: String!
 }
 
 input UpdateBoardCommentInput {
-    content: String!
-    rating: Int
-    password: String!
-    parentId: String
+  content: String!
+  rating: Int
+  password: String!
+  parentId: String
+}
+
+input signUpUser {
+  name: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+input loginUser {
+  email: String!
+  password: String!
 }

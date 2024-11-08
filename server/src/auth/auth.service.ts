@@ -10,7 +10,7 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
-    async issueLoginToken(id: number, role: Role) {
+    async issueLoginToken(id: number, role: Role, dev: boolean) {
         // 여기에 role 넣기
         // user 또는 counselor
         const accessToken = await this.jwtService.signAsync(
@@ -21,7 +21,9 @@ export class AuthService {
             },
             {
                 secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-                expiresIn: `${this.configService.get<string>('JWT_ACCESS_EXPIRE')}s`,
+                expiresIn: dev
+                    ? `${this.configService.get<string>('JWT_REFRESH_EXPIRE')}s`
+                    : `${this.configService.get<string>('JWT_ACCESS_EXPIRE')}s`,
             },
         );
 

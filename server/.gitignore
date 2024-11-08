@@ -1,0 +1,56 @@
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
+
+# Dependency directories
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# TypeScript files
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# IDE specific files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Jest coverage and cache directories
+coverage/
+.cache/
+
+# Swagger generated files
+swagger/
+
+# MacOS generated files
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+
+documentation/

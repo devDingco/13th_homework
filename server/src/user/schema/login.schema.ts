@@ -1,7 +1,9 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
+    IsBoolean,
     IsEmail,
     IsNotEmpty,
+    IsOptional,
     IsString,
     Matches,
     MaxLength,
@@ -29,4 +31,8 @@ export class loginUser {
     )
     @Field()
     password: string;
+
+    @IsBoolean()
+    @IsOptional()
+    dev?: boolean;
 }
