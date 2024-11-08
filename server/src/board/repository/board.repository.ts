@@ -73,7 +73,6 @@ export class BoardRepository {
         if (!findBoard) {
             throw new NotFoundException(`boardID: ${boardId} is not found`);
         }
-        console.log(findBoard);
 
         return findBoard;
     }

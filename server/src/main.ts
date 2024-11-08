@@ -2,7 +2,7 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { AuthenticationGuard } from './common/guards/Authentication.guard';
+import { AuthenticationGuard } from './common/guards/authentication.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { RequestTypeMiddleware } from './common/middlewares/requestType.middleware';
