@@ -9,7 +9,7 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import AddressInputField from "./addressInput";
 import Image from "next/image";
-import ImageButton from "./imageButton";
+import ImageButton from "../commons/imageButton";
 
 export default function BoardsWrite(props: BoardsWriteProps) {
   const {

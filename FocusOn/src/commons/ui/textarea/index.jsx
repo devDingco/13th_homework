@@ -9,7 +9,7 @@ function TextareaBase(props) {
     <textarea
       className={props.className}
       placeholder={props.placeholder}
-      {...register(props.keyname)}
+      {...register(props.name)}
     />
   );
 }

@@ -111,6 +111,7 @@
   border: 2px solid transparent;
   border-radius: 0.25rem;
   transition: border-color 0.2s;
+  object-fit: cover;
 }
 
 .thumbnail:hover,

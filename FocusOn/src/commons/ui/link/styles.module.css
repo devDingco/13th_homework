@@ -1,0 +1,10 @@
+.link__cancel {
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--main-color);
+  background: white;
+  font-weight: 500;
+  color: var(--main-color);
+}

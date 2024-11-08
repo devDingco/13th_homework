@@ -41,9 +41,20 @@
   color: #f66a6a;
 }
 
-.search_group_zip_code {
+.zipcode_search {
   display: flex;
   gap: 8px;
+}
+
+.address {
+  display: flex;
+  gap: 40px;
+}
+.address_input {
+  display: flex;
+  width: 396px;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .input_box_zip_code {
@@ -102,3 +113,43 @@
 .btn_upload input {
   display: none;
 }
+
+/* 해시태그 */
+.tag_input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.tag {
+  color: var(--main-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--main-color-back);
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.remove_tag {
+  stroke-width: 2.5px;
+  cursor: pointer;
+  display: inline;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  margin-left: 4px;
+}
+
+.remove_tag:hover {
+  background-color: white;
+}
+
+/* 주소 */

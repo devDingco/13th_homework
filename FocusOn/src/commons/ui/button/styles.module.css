@@ -1,14 +1,46 @@
-.button_soft_m_full_main {
+.button__soft__m__full__main {
   width: 100%;
   background-color: var(--main-color);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.button__soft__m__fit__main {
+  display: flex;
+  white-space: nowrap;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.button__soft__m__fit__border {
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--main-color);
+  background: white;
+  font-weight: 500;
+  color: var(--main-color);
 }
 
 .button_soft_m_full_main:hover {
+  background-color: var(--main-color-hover);
+}
+
+.button__soft__m__fit__main:hover {
   background-color: var(--main-color-hover);
 }
