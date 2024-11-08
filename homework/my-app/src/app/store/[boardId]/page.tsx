@@ -123,47 +123,28 @@ const ProductDetail = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titleContainer}>
-        <div className={styles.nameBookmarkContainer}>
-          <div className={styles.title}>{data.fetchTravelproduct.name}</div>
-
-          <button className={styles.overlay} onClick={handleTogglePick}>
-            <Image
-              src="/image/bookmark.png"
-              width={18}
-              height={18}
-              alt="북마크아이콘"
-              className={styles.bookmarkIcon}
-            />
-            {data.fetchTravelproduct.pickedCount}
-          </button>
-        </div>
-        <div className={styles.remarks}>{data.fetchTravelproduct.remarks}</div>
-        <div className={styles.tags}>
-          {data.fetchTravelproduct.tags.map((tag, index) => (
-            <span key={index} className={styles.tag}>
-              #{tag}{" "}
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div className={styles.topSection}>
         <div>
           <div className={styles.leftSection}>
-            <Image
-              width={500}
-              height={500}
-              src={selectedImage}
-              alt="상품 이미지"
-              className={styles.productImage}
-            />
+            <div className={styles.productImageContainer}>
+              <Image
+                src={selectedImage}
+                alt="상품 이미지"
+                className={styles.productImage}
+                fill /* 부모 컨테이너 안에서 동작 */
+                sizes="(max-width: 768px) 100vw, 50vw" /* 반응형 크기 설정 */
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "center",
+                }} /* 전체 이미지 표시 및 가운데 정렬 */
+              />
+            </div>
             <div className={styles.thumbnailList}>
               {data?.fetchTravelproduct.images.map((image, index) => (
                 <Image
                   key={index}
-                  width={100}
-                  height={100}
+                  width={80}
+                  height={80}
                   src={`https://storage.googleapis.com/${image}`}
                   alt="썸네일"
                   className={styles.imageThumbnail}
@@ -175,14 +156,45 @@ const ProductDetail = () => {
         </div>
 
         <div className={styles.rightSection}>
+          <div className={styles.titleContainer}>
+            <div className={styles.nameBookmarkContainer}>
+              <div className={styles.title}>{data.fetchTravelproduct.name}</div>
+
+              <button className={styles.overlay} onClick={handleTogglePick}>
+                <Image
+                  src="/image/bookmark.png"
+                  width={18}
+                  height={18}
+                  alt="북마크아이콘"
+                  className={styles.bookmarkIcon}
+                />
+                {data.fetchTravelproduct.pickedCount}
+              </button>
+            </div>
+            <div className={styles.remarks}>
+              {data.fetchTravelproduct.remarks}
+            </div>
+            <div className={styles.tags}>
+              {data.fetchTravelproduct.tags.map((tag, index) => (
+                <span key={index} className={styles.tag}>
+                  #{tag}{" "}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className={styles.description}>
+            {/* <h2 className={styles.sectionTitle}>상세 설명</h2> */}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data?.fetchTravelproduct.contents,
+              }}
+            />
+          </div>
           <div className={styles.priceContainer}>
             ₩{data?.fetchTravelproduct.price}원
           </div>
-          <button className={styles.buyButton} onClick={handlePurchase}>
-            구매하기
-          </button>
           <div className={styles.seller}>
-            <img
+            <Image
               src={
                 data?.fetchTravelproduct.seller?.picture
                   ? `https://storage.googleapis.com/${data.fetchTravelproduct.seller.picture}`
@@ -190,19 +202,16 @@ const ProductDetail = () => {
               }
               alt="판매자 프로필"
               className={styles.sellerAvatar}
+              width={0}
+              height={0}
             />
             <span className={styles.sellerName}>
               {data?.fetchTravelproduct.seller.name}
             </span>
           </div>
-          <div className={styles.description}>
-            <h2 className={styles.sectionTitle}>상세 설명</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.fetchTravelproduct.contents,
-              }}
-            />
-          </div>
+          <button className={styles.buyButton} onClick={handlePurchase}>
+            구매하기
+          </button>
         </div>
       </div>
 

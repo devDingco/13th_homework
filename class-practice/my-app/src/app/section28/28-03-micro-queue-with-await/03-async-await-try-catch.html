@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>이벤트루프</title>
+    <script>
+      const onClickButton1 = () => {
+        try {
+          fetch("https://qqq.com"); //마이크로 큐에 들어가고
+          console.log("철수"); //철수가 바로 찍힘
+        } catch (error) {
+          //try 부분이 위처럼 문제없이 끝나기 때문에 catch가 에러를 잡지 못함
+          console.log("에러가 발생했습니다."); // 그래서 에러가 발생했다는 콘솔은 안찍힘
+        }
+      };
+      const onClickButton2 = async () => {
+        try {
+          await fetch("https://qqq.com"); //마이크로 큐에 들어가게 됨 await를 감싸는 async 함수도 들어가게됨 그래서 fech가 먼저 시작하고 에러가 있다면 감지 되기 때문에
+          console.log("철수"); // 철수를 실행이 되지 않게된다
+        } catch (error) {
+          //try가 문제가 있었기 떄문에 catch문이 돌아가게됨
+          console.log("에러가 발생했습니다.");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickButton1()">await 없이 요청</button>
+    <button onclick="onClickButton2()">await 함께 요청</button>
+  </body>
+</html>

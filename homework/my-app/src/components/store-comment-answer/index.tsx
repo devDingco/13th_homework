@@ -2,7 +2,19 @@
 import React, { useState } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import styles from "./style.module.css";
+import {} from "@/commons/graphql";
+import {
+  CreateTravelproductQuestionAnswerMutation,
+  CreateTravelproductQuestionAnswerMutationVariables,
+  DeleteTravelproductQuestionAnswerMutation,
+  DeleteTravelproductQuestionAnswerMutationVariables,
+  FetchTravelproductQuestionAnswersQuery,
+  FetchTravelproductQuestionAnswersQueryVariables,
+  UpdateTravelproductQuestionAnswerMutation,
+  UpdateTravelproductQuestionAnswerMutationVariables,
+} from "@/commons/graphql/graphql";
 
+// GraphQL Queries and Mutations
 const FETCH_REPLIES = gql`
   query fetchTravelproductQuestionAnswers(
     $page: Int!
@@ -64,20 +76,38 @@ const DELETE_REPLY = gql`
   }
 `;
 
-export default function CommentAnswer({ commentId }) {
+interface CommentAnswerProps {
+  commentId: string;
+}
+
+export default function CommentAnswer({ commentId }: CommentAnswerProps) {
   const [replyText, setReplyText] = useState("");
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
-  const { data: repliesData, refetch } = useQuery(FETCH_REPLIES, {
+  const { data: repliesData, refetch } = useQuery<
+    FetchTravelproductQuestionAnswersQuery,
+    FetchTravelproductQuestionAnswersQueryVariables
+  >(FETCH_REPLIES, {
     variables: { page: 1, travelproductQuestionId: commentId },
     skip: !commentId,
   });
 
-  const [createReply] = useMutation(CREATE_REPLY);
-  const [updateReply] = useMutation(UPDATE_REPLY);
-  const [deleteReply] = useMutation(DELETE_REPLY);
+  const [createReply] = useMutation<
+    CreateTravelproductQuestionAnswerMutation,
+    CreateTravelproductQuestionAnswerMutationVariables
+  >(CREATE_REPLY);
 
-  const [editingReplyId, setEditingReplyId] = useState(null);
+  const [updateReply] = useMutation<
+    UpdateTravelproductQuestionAnswerMutation,
+    UpdateTravelproductQuestionAnswerMutationVariables
+  >(UPDATE_REPLY);
+
+  const [deleteReply] = useMutation<
+    DeleteTravelproductQuestionAnswerMutation,
+    DeleteTravelproductQuestionAnswerMutationVariables
+  >(DELETE_REPLY);
+
+  const [editingReplyId, setEditingReplyId] = useState<string | null>(null);
   const [editingContent, setEditingContent] = useState("");
 
   const onReplySubmit = async () => {
@@ -96,12 +126,13 @@ export default function CommentAnswer({ commentId }) {
     }
   };
 
-  const onEditClick = (replyId, contents) => {
+  const onEditClick = (replyId: string, contents: string) => {
     setEditingReplyId(replyId);
     setEditingContent(contents);
   };
 
   const onEditSubmit = async () => {
+    if (!editingReplyId) return;
     try {
       await updateReply({
         variables: {
@@ -117,7 +148,7 @@ export default function CommentAnswer({ commentId }) {
     }
   };
 
-  const onClickDelete = async (answerId) => {
+  const onClickDelete = async (answerId: string) => {
     try {
       await deleteReply({
         variables: {
@@ -149,7 +180,6 @@ export default function CommentAnswer({ commentId }) {
         </div>
       )}
 
-      {/* 대댓글 목록 */}
       <div className={styles.replies}>
         {repliesData?.fetchTravelproductQuestionAnswers?.map((answer) => (
           <div key={answer._id} className={styles.reply}>

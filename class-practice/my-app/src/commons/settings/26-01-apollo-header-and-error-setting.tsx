@@ -12,6 +12,15 @@ import { useAccessTokenStore } from "../stores/22-01-access-token-store";
 import { useEffect } from "react";
 import { onError } from "@apollo/client/link/error";
 import { getAccessToken } from "../libraries/26-01-get-access-token";
+import { gql, GraphQLClient } from "graphql-request";
+
+const RESTORE_ACCESS_TOKEN = gql`
+  mutation restoreAccessToken {
+    restoreAccessToken {
+      accessToken
+    }
+  }
+`;
 
 const GLOBAL_STATE = new InMemoryCache();
 
@@ -47,7 +56,7 @@ export default function ApolloHeaderAndErrorSetting(props: IApolloSetting) {
   // forward- 재요청
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // 1. 에러를 캐치(UNAUTHENTICATED - 이게 토큰만료임 이게 있는지 찾음됨)
-    if (graphQLErrors) {
+    if (typeof graphQLErrors !== "undefined") {
       for (const err of graphQLErrors) {
         // 1-2. 해당 에러가 토큰만료 에러인지 체크
         if (err.extensions?.code === "UNAUTHENTICATED") {
@@ -57,13 +66,13 @@ export default function ApolloHeaderAndErrorSetting(props: IApolloSetting) {
               // 3. 재발급 받은 accessToken을 저장하고, 방금 실패한 쿼리의 정보 수정하고 재시도하기
               setAccessToken(newAccessToken);
               operation.setContext({
-                headers: {
-                  ...operation.getContext().headers,
-                  Authorization: `Bearer ${newAccessToken}`, // 3-2. 토큰만 새걸로 바꿔치기
+                header: {
+                  ...operation.getContext().headers, //Authorization: Beare만료된 토큰
+                  Authorization: `Bearer ${newAccessToken}`, //마지막 객체로 위에껀 덮어씌워짐 //3-2 토큰만 새걸로 바꿔치기
                 },
               });
             })
-          ).flatMap(() => forward(operation)); // 3-3. 바꿔치기된 API 재전송하기
+          ).flatMap(() => forward(operation)); //26-01-get-access-token) // 3-3 바꿔치기된 API 재전송하기
         }
       }
     }
