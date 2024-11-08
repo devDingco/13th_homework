@@ -57,4 +57,10 @@ export class UserController {
             }
         });
     }
+
+    @Post('/validate')
+    @HttpCode(HttpStatus.OK)
+    validateNickname(@Body() nickname: string) {
+        return this.userService.findNickname(nickname);
+    }
 }

@@ -49,6 +49,11 @@ export class UserResolver {
         });
     }
 
+    @Mutation(() => Boolean)
+    validateNickname(@Args('nickname') nickname: string) {
+        return this.userService.findNickname(nickname);
+    }
+
     // @Mutation(() => Boolean)
     // uploadFile(file:) {}
 }

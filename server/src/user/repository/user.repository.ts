@@ -51,4 +51,16 @@ export class UserRepository {
         }
         return user;
     }
+
+    async findUserNickname(nickname: string): Promise<Boolean> {
+        const user = await this.userRepository.findOneBy({
+            nickname,
+        });
+
+        if (user) {
+            throw new ConflictException(`${nickname}이 중복되어 있습니다.`);
+        }
+
+        return true;
+    }
 }

@@ -41,4 +41,8 @@ export class UserService {
 
         return { ...token };
     }
+
+    async findNickname(nickname: string) {
+        return await this.userRepository.findUserNickname(nickname);
+    }
 }

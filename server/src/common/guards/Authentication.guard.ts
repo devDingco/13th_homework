@@ -14,7 +14,11 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
         if (req.isGraphQL) {
             const fieldName =
                 GqlExecutionContext.create(context).getInfo().fieldName;
-            if (fieldName === 'login' || fieldName === 'signup') {
+            if (
+                fieldName === 'login' ||
+                fieldName === 'signup' ||
+                fieldName === 'validateNickname'
+            ) {
                 return true;
             }
         } else {
@@ -22,7 +26,8 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
             if (
                 url.includes('login') ||
                 url.includes('signup') ||
-                url.includes('token')
+                url.includes('token') ||
+                url.includes('validate')
             ) {
                 return true;
             }

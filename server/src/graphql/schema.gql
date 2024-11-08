@@ -74,6 +74,7 @@ type Mutation {
   signup(signUpUser: signUpUser!): Boolean!
   login(loginUser: loginUser!): TokenSchema!
   logout: Boolean!
+  validateNickname(nickname: String!): Boolean!
 }
 
 input CreateBoardInput {
