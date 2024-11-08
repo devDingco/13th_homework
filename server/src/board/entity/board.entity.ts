@@ -9,9 +9,10 @@ import {
 
 import { BoardAddressDTO } from '../dto/board-addresss.dto';
 import { Exclude } from 'class-transformer';
+import { SharedProp } from 'src/common/sharedProp.helper';
 
 @Entity('board')
-export class BoardEntity {
+export class BoardEntity extends SharedProp {
     @ObjectIdColumn()
     @Exclude()
     _id: ObjectId;
@@ -40,10 +41,4 @@ export class BoardEntity {
 
     @Column()
     boardId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
 }

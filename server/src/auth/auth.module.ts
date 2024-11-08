@@ -8,7 +8,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/entity/user.entity';
+import { UserEntity } from 'src/user/entity/user.entity';
 import { UserRepository } from 'src/user/repository/user.repository';
 
 @Module({
@@ -18,7 +18,7 @@ import { UserRepository } from 'src/user/repository/user.repository';
             imports: [ConfigModule],
             useClass: JwtConfigService,
         }),
-        TypeOrmModule.forFeature([User], 'PostgreSQL'),
+        TypeOrmModule.forFeature([UserEntity], 'PostgreSQL'),
     ],
     controllers: [AuhtController],
     providers: [AuthService, JwtStrategy, UserRepository, AuthResolver],

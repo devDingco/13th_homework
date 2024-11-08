@@ -1,7 +1,7 @@
 import { AuthService } from 'src/auth/auth.service';
 import { BcryptService } from 'src/bcrypt/bcrypt.service';
 import { Injectable } from '@nestjs/common';
-import { User } from './entity/user.entity';
+import { UserEntity } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
 import { loginDTO } from './dto/login.dto';
 import { signUpDTO } from './dto/signUp.dto';
@@ -14,7 +14,7 @@ export class UserService {
         private readonly authService: AuthService,
     ) {}
 
-    async createUser(signUpDTO: signUpDTO): Promise<User> {
+    async createUser(signUpDTO: signUpDTO): Promise<UserEntity> {
         const password: string = await this.bcryptService.transformPassword(
             signUpDTO.password,
         );
@@ -25,7 +25,7 @@ export class UserService {
     }
 
     async login(loginDTO: loginDTO) {
-        const user: User = await this.userRepository.findUserEmail(
+        const user: UserEntity = await this.userRepository.findUserEmail(
             loginDTO.email,
         );
         await this.bcryptService.validatePassword(
@@ -34,7 +34,7 @@ export class UserService {
         );
 
         const token = await this.authService.issueLoginToken(
-            user.id,
+            user.userId,
             user.role,
             loginDTO.dev,
         );

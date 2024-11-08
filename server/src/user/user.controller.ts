@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
-import { User } from './entity/user.entity';
+import { UserEntity } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
 
@@ -19,7 +19,7 @@ export class UserController {
 
     @Post('/signup')
     @HttpCode(HttpStatus.CREATED)
-    signUp(@Body() signUpDTO: signUpDTO): Promise<User> {
+    signUp(@Body() signUpDTO: signUpDTO): Promise<UserEntity> {
         return this.userService.createUser(signUpDTO);
     }
 

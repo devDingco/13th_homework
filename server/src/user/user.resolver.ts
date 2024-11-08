@@ -11,9 +11,10 @@ import { TokenSchema } from './schema/token.schema';
 export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
-    @Mutation(() => UserSchema)
-    signup(@Args('signUpUser') signUpUser: signUpUser) {
-        return this.userService.createUser(signUpUser);
+    @Mutation(() => Boolean)
+    async signup(@Args('signUpUser') signUpUser: signUpUser) {
+        const user = await this.userService.createUser(signUpUser);
+        if (user) return true;
     }
 
     @Mutation(() => TokenSchema)
@@ -47,4 +48,7 @@ export class UserResolver {
             });
         });
     }
+
+    // @Mutation(() => Boolean)
+    // uploadFile(file:) {}
 }

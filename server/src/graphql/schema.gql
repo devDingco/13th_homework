@@ -51,12 +51,6 @@ type BoardPaginationResponse {
   totalCount: Int!
 }
 
-type UserSchema {
-  id: Int!
-  name: String!
-  email: String!
-}
-
 type TokenSchema {
   accessToken: String!
 }
@@ -77,7 +71,7 @@ type Mutation {
   createBoardComment(boardId: Int!, createBoardComment: CreateBoardCommentInput!): BoardCommentResponseDTO!
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
-  signup(signUpUser: signUpUser!): UserSchema!
+  signup(signUpUser: signUpUser!): Boolean!
   login(loginUser: loginUser!): TokenSchema!
   logout: Boolean!
 }
@@ -123,12 +117,28 @@ input UpdateBoardCommentInput {
 
 input signUpUser {
   name: String!
+  nickname: String!
   email: String!
   password: String!
-  role: String!
+  image: String!
+  role: Role
+  addressInput: [AddressInput!]
+}
+
+"""사용자 역할 (USER 또는 MANAGER)"""
+enum Role {
+  USER
+  MANAGER
+}
+
+input AddressInput {
+  zoneCode: Int!
+  address: String!
+  detailAddress: String!
 }
 
 input loginUser {
   email: String!
   password: String!
+  dev: Boolean
 }

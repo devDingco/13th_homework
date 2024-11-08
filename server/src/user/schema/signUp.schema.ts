@@ -1,15 +1,19 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
+    IsArray,
     IsEmail,
     IsEnum,
     IsNotEmpty,
+    IsOptional,
     IsString,
     Matches,
-    MaxLength,
     MinLength,
+    ValidateNested,
 } from 'class-validator';
 
+import { AddressInput } from './address-input.schema';
 import { Role } from 'src/common/enums/role.enum';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class signUpUser {
@@ -20,19 +24,23 @@ export class signUpUser {
 
     @IsString()
     @IsNotEmpty()
-    @IsEmail({}, { message: 'Invalid email format' })
+    @Field()
+    nickname: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail({}, { message: '이메일은 형식을 맞춰야합니다.' })
     @Field()
     email: string;
 
     @IsString()
     @IsNotEmpty()
-    @MinLength(8, { message: 'password must be at least 8 characters long' })
-    @MaxLength(20, { message: 'password must not exceed 20 characters' })
+    @MinLength(8, { message: '비밀번호는 8자 이상이어야 합니다.' })
     @Matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
         {
             message:
-                'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character from !@#$%^&*()',
+                '비밀번호는 소문자, 대문자, 숫자, 특수문자 1개씩 있어야합니다',
         },
     )
     @Field()
@@ -40,9 +48,20 @@ export class signUpUser {
 
     @IsString()
     @IsNotEmpty()
-    @IsEnum(Role, {
-        message: 'Role must be either USER or MANAGER',
-    })
     @Field()
-    role: Role;
+    image: string;
+
+    @IsOptional()
+    @IsEnum(Role, {
+        message: 'Role은 USER or MANAGER이어야합니다',
+    })
+    @Field(() => Role, { nullable: true })
+    role?: Role;
+
+    @IsArray()
+    @IsOptional()
+    @ValidateNested({ each: true })
+    @Type(() => AddressInput)
+    @Field(() => [AddressInput], { nullable: true })
+    addressInput?: AddressInput;
 }

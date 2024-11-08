@@ -1,8 +1,8 @@
-import { Field, InputType, Int, ObjectType, OmitType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @InputType()
-export class BoardAddressInput {
+export class AddressInput {
     @Field(() => Int)
     @IsNumber()
     @IsNotEmpty()
@@ -18,10 +18,3 @@ export class BoardAddressInput {
     @IsNotEmpty()
     detailAddress: string;
 }
-
-@ObjectType()
-export class BoardAddressOutput extends OmitType(
-    BoardAddressInput,
-    [],
-    ObjectType,
-) {}

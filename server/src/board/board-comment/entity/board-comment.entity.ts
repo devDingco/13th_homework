@@ -8,9 +8,10 @@ import {
 
 import { Exclude } from 'class-transformer';
 import { ObjectId } from 'mongodb';
+import { SharedProp } from 'src/common/sharedProp.helper';
 
 @Entity('board_comment')
-export class BoardCommentEntity {
+export class BoardCommentEntity extends SharedProp {
     @ObjectIdColumn()
     _id: ObjectId;
 
@@ -32,10 +33,4 @@ export class BoardCommentEntity {
 
     @Column()
     boardId: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
 }

@@ -34,5 +34,6 @@ export class loginUser {
 
     @IsBoolean()
     @IsOptional()
+    @Field({ nullable: true })
     dev?: boolean;
 }

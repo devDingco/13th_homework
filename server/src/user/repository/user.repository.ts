@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entity/user.entity';
+import { UserEntity } from '../entity/user.entity';
 import {
     ConflictException,
     Injectable,
@@ -12,42 +12,42 @@ import { signUpDTO } from '../dto/signUp.dto';
 @Injectable()
 export class UserRepository {
     constructor(
-        @InjectRepository(User, 'PostgreSQL')
-        private readonly userRepository: Repository<User>,
+        @InjectRepository(UserEntity, 'PostgreSQL')
+        private readonly userRepository: Repository<UserEntity>,
     ) {}
 
-    async createUser(signUpDTO: signUpDTO): Promise<User> {
+    async createUser(signUpDTO: signUpDTO): Promise<UserEntity> {
         const user = this.userRepository.create(signUpDTO);
         try {
             return await this.userRepository.save(user);
         } catch (error) {
             if (error.code === '23505') {
-                throw new ConflictException('Existing email');
+                throw new ConflictException('이메일이 존재합니다.');
             } else {
                 throw new InternalServerErrorException();
             }
         }
     }
 
-    async findUserPK(id: number): Promise<User> {
+    async findUserPK(userId: number): Promise<UserEntity> {
         const user = await this.userRepository.findOneBy({
-            id,
+            userId,
         });
         if (!user) {
-            throw new NotFoundException('is not exist');
+            throw new NotFoundException(
+                `해당 유저 ${userId}를 찾지 못했습니다.`,
+            );
         }
         return user;
     }
 
-    async findUserEmail(email: string): Promise<User> {
-        console.log(email);
+    async findUserEmail(email: string): Promise<UserEntity> {
         const user = await this.userRepository.findOneBy({
             email,
         });
-        console.log(user);
 
         if (!user) {
-            throw new NotFoundException('is not exist email');
+            throw new NotFoundException(`${email}이 존재하지 않습니다.`);
         }
         return user;
     }
