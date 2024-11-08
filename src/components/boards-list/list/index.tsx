@@ -87,6 +87,7 @@ export default function BoardsComponentList() {
                 ) : (
                     <div>!게시글이 없당!</div>
                 )}
+
                 <div className={styles.paginationBox}>
                     <span onClick={onClickPrevPage}>{`<`} 이전페이지</span>
                     {new Array(10).fill('철수').map(

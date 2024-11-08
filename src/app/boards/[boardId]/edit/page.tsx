@@ -15,6 +15,7 @@ export const FETCH_BOARD = gql`
             youtubeUrl
             likeCount
             dislikeCount
+            images
         }
     }
 `;
@@ -22,7 +23,7 @@ export const FETCH_BOARD = gql`
 export default function BoardEditPage() {
     const params = useParams();
 
-    const { data } = useQuery(FetchBoardDocument, {
+    const { data } = useQuery(FETCH_BOARD, {
         variables: {
             boardId: String(params.boardId),
         },
