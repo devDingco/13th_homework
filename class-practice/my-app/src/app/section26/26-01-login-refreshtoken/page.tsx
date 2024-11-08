@@ -36,7 +36,7 @@ const LoginPage = () => {
     // localStorage.setItem("accessToken", accessToken); ===> 더 이상 사용하지 않음(refreshToken 사용)
 
     // 3. 로그인 성공페이지로 이동하기
-    router.push("/section26/26-01-login-resfreshtoken-success");
+    router.push("/section26/26-01-login-refreshtoken-success");
   };
 
   return (

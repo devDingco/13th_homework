@@ -17,19 +17,24 @@
   flex: 2;
 }
 
-.productImage {
-  width: 50vw;
-  max-width: 600px;
-  height: auto;
+.productImageContainer {
+  position: relative; /* 필수 */
+  width: 40vw;
+  height: 60vh;
   border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 10px;
-  background-color: #848484;
+  overflow: hidden; /* 이미지가 영역을 벗어나지 않도록 설정 */
+  background-color: #ffffff;
+}
+
+.productImage {
+  object-fit: contain; /* 이미지 전체가 보이도록 설정 */
+  object-position: center; /* 이미지를 가운데 정렬 */
 }
 
 .thumbnailList {
   display: flex;
   gap: 10px;
+  margin-top: 20px; /* 썸네일과 메인 이미지 사이 간격 추가 */
 }
 
 .imageThumbnail {
@@ -39,6 +44,7 @@
   object-fit: cover;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: border-color 0.3s ease-in-out;
 }
 
 .imageThumbnail:hover {
@@ -46,10 +52,12 @@
 }
 
 .rightSection {
-  flex: 1;
+  flex: 1; /* 좌우 비율에 맞게 설정 */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: space-between; /* 아이템 간 간격 자동 조절 */
+  height: 100%; /* 컨테이너 전체 높이를 채움 */
+  gap: 20px; /* 각 섹션 간 간격 */
 }
 
 .priceContainer {
@@ -58,8 +66,8 @@
 }
 
 .buyButton {
-  background-color: #4caf50;
-  color: white;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
   border: none;
   padding: 15px;
   border-radius: 8px;
@@ -68,7 +76,7 @@
 }
 
 .buyButton:hover {
-  background-color: #45a049;
+  background-color: #505050;
 }
 
 .seller {
@@ -171,9 +179,10 @@
 
 .titleContainer {
   margin-bottom: 20px;
+  text-align: left;
 }
 .title {
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 700;
   color: #000000;
 }
@@ -216,4 +225,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.description {
+  width: 40vw;
+  height: 30vh;
 }

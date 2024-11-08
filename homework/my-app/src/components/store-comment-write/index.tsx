@@ -5,6 +5,17 @@ import { useForm } from "react-hook-form";
 import styles from "./style.module.css";
 import { useParams } from "next/navigation";
 import CommentAnswer from "../store-comment-answer";
+import {
+  CreateTravelproductQuestionMutation,
+  CreateTravelproductQuestionMutationVariables,
+  FetchTravelproductQuestionsQuery,
+  FetchTravelproductQuestionsQueryVariables,
+  UpdateBoardInput,
+} from "@/commons/graphql/graphql";
+
+export interface ISchema {
+  comment: string;
+}
 
 const CREATE_COMMENT = gql`
   mutation createTravelproductQuestion(
@@ -65,22 +76,30 @@ const DELETE_COMMENT = gql`
 `;
 
 export default function Comment() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<ISchema>(); // ISchema 타입을 적용
   const params = useParams();
-  const travelproductId = params.boardId;
+  const travelproductId = Array.isArray(params.boardId)
+    ? params.boardId[0]
+    : params.boardId; // string 타입으로 변환
 
-  const { data, refetch } = useQuery(FETCH_COMMENTS, {
+  const { data, refetch } = useQuery<
+    FetchTravelproductQuestionsQuery,
+    FetchTravelproductQuestionsQueryVariables
+  >(FETCH_COMMENTS, {
     variables: { page: 1, travelproductId },
   });
 
-  const [createComment] = useMutation(CREATE_COMMENT);
+  const [createComment] = useMutation<
+    CreateTravelproductQuestionMutation,
+    CreateTravelproductQuestionMutationVariables
+  >(CREATE_COMMENT);
   const [updateComment] = useMutation(UPDATE_COMMENT);
   const [deleteComment] = useMutation(DELETE_COMMENT);
 
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [updatedContent, setUpdatedContent] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const [updatedContent, setUpdatedContent] = useState<string>("");
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (formData: ISchema) => {
     try {
       await createComment({
         variables: {
@@ -95,12 +114,13 @@ export default function Comment() {
     }
   };
 
-  const onClickEdit = (commentId, contents) => {
+  const onClickEdit = (commentId: string, contents: string) => {
     setEditingCommentId(commentId);
     setUpdatedContent(contents);
   };
 
   const onSubmitUpdate = async () => {
+    if (!editingCommentId) return;
     try {
       await updateComment({
         variables: {
@@ -116,7 +136,7 @@ export default function Comment() {
     }
   };
 
-  const onClickDelete = async (commentId) => {
+  const onClickDelete = async (commentId: string) => {
     try {
       await deleteComment({
         variables: {

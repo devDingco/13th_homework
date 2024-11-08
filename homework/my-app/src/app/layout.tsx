@@ -4,6 +4,7 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "@/components/Navbar";
 import ApolloUploadSetting from "@/commons/settings/apollo-setting";
+import ApolloHeaderAndErrorSettingRefresh from "@/commons/settings/apollo-setting";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,10 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        <ApolloUploadSetting>
+        <ApolloHeaderAndErrorSettingRefresh>
           <Navbar />
           {children}
-        </ApolloUploadSetting>
+        </ApolloHeaderAndErrorSettingRefresh>
       </body>
     </html>
   );
