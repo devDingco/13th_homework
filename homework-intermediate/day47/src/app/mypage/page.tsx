@@ -5,9 +5,10 @@ import profile from '@/assets/profile.png';
 import point from '@/assets/point.png';
 import { RightOutlined, SearchOutlined } from '@ant-design/icons';
 import { withLoginCheck } from '@/commons/hocs/with-login-check';
+import * as PortOne from '@portone/browser-sdk/v2';
 
 function BoardsMypagePage() {
-	const realPoints = 999999;
+	const realPoints = 99999;
 
 	return (
 		<div className="flex w-full max-w-7xl flex-col gap-10">
