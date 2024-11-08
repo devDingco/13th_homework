@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Navigation from "./navigation";
 
 // 숨기고 싶은 페이지
-const HIDDEN_HEADERS = ["/boards/new", "/boards/edit/"];
+const HIDDEN_HEADERS = ["/boards/new", "/boards/edit/", "/"];
 
 interface ILayout {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ export default function Layout({ children }: ILayout) {
   console.log("🍀 현재 페이지: ", pathname);
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(pathname); //숨김 페이지가 포함되어 있으면 true
+  const isMyPage = pathname === "/myPage"; // myPage 페이지인지 확인
 
   return (
     <>
@@ -22,7 +23,7 @@ export default function Layout({ children }: ILayout) {
       {!isHiddenHeader && (
         <>
           <Navigation />
-          <Banner />
+          {!isMyPage && <Banner />}
         </>
       )}
       {children}

@@ -1,10 +1,11 @@
 "use client";
 
+import { withLoginCheck } from "@/commons/hoc/withLoginCheck";
 import BoardsList from "@/components/boards-list/list";
 import useBoardsList from "@/components/boards-list/list/hook";
 import Search from "@/components/boards-list/list/search";
 
-export default function BoardsPage() {
+const BoardsPage = () => {
   const boardsState = useBoardsList(); //여기서 사용해야지 검색하면 search하면 BoardsList가 변경가능
 
   return (
@@ -27,4 +28,6 @@ export default function BoardsPage() {
       </div>
     </div>
   );
-}
+};
+
+export default withLoginCheck(BoardsPage);

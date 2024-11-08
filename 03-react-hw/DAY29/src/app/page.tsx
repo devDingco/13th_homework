@@ -3,7 +3,18 @@
 import { useAccessTokenStore } from "@/commons/stores/accessToken";
 import FormField from "@/components/FormField";
 import Input from "@/components/input";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { gql, useMutation } from "@apollo/client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
 
@@ -79,6 +90,7 @@ export default function Home() {
       //로그인
 
       try {
+        // 로그인 뮤테이션 날려서 accessToken 받아오기
         const result = await loginUser({
           variables: {
             email: formSignUp.email,
@@ -87,10 +99,14 @@ export default function Home() {
         });
         const accessToken = result.data.loginUser.accessToken;
 
+        // 받아온 accessToken을 globalState에 저장하기
         if (accessToken === undefined) {
           alert("로그인 실패했습니다. 다시 시도해주세요");
+          return;
         }
         setAccessToken(accessToken);
+        localStorage.setItem("accessToken", accessToken);
+
         console.log("로그인 성공", accessToken);
         router.push("/boards");
       } catch (error) {
@@ -101,9 +117,15 @@ export default function Home() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="w-[400px] flex flex-col justify-center items-center gap-6 bg-purple-300 h-screen px-10">
+      <div className="w-[400px] flex flex-col justify-center items-center gap-6  h-screen px-10">
         {!isSignUp ? (
           <>
+            <Image
+              src="/images/logo.svg"
+              alt="logo"
+              width={120}
+              height={74.53}
+            />
             <p>트립트립에 오신걸 환영합니다</p>
             <div className="flex flex-col gap-3 w-full text-center">
               <p>트립트립에 로그인 하세요.</p>
@@ -120,22 +142,23 @@ export default function Home() {
               />
               <button
                 type="submit"
-                className="mt-4 bg-purple-500 text-white py-2 rounded"
+                className="mt-4 bg-[#2974E5] text-white py-2 rounded"
               >
                 로그인
               </button>
               <button
                 type="button"
                 onClick={handleSignUpClick}
-                className="mt-2 bg-purple-400 text-white py-2 rounded"
+                className="mt-2 py-2 rounded"
               >
-                회원가입하기
+                회원가입
               </button>
             </div>
           </>
         ) : (
           <div className="flex flex-col gap-3 w-full text-center">
             <h2 className="text-xl font-bold mb-4">회원가입</h2>
+            <p>회원가입을 위해 아래 빈칸을 모두 채워 주세요.</p>
             <FormField label="이메일" required>
               <Input
                 name="email"
@@ -166,19 +189,37 @@ export default function Home() {
                 onChange={onChange}
               />
             </FormField>
-            <button
-              type="submit"
-              className="mt-4 bg-purple-500 text-white py-2 rounded"
-            >
-              가입하기
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsSignUp(false)}
-              className="mt-2 bg-purple-400 text-white py-2 rounded"
-            >
-              로그인으로 돌아가기
-            </button>
+            <AlertDialog>
+              <AlertDialogTrigger
+                type="submit"
+                className="mt-4 bg-[#2974E5] text-white py-2 rounded"
+              >
+                회원가입
+              </AlertDialogTrigger>
+              <AlertDialogContent className="flex flex-col justify-center items-center">
+                <AlertDialogHeader className="flex flex-col justify-center items-center pb-4">
+                  <AlertDialogTitle className="pb-4">
+                    회원가입을 축하드려요
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    <Image
+                      src="/images/logo.svg"
+                      width={100}
+                      height={100}
+                      alt="logo"
+                    />
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogAction
+                    className="bg-[#2974E5] border-none text-white"
+                    onClick={() => setIsSignUp(false)}
+                  >
+                    로그인 하기
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         )}
       </div>
