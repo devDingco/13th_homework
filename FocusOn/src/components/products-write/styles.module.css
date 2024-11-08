@@ -37,6 +37,11 @@
   gap: 40px;
 }
 
+.quill_editor {
+  height: 300px;
+  width: 100%;
+}
+
 .error_msg {
   color: #f66a6a;
 }
@@ -71,7 +76,19 @@
 }
 
 .upload_button_group {
+  display: flex;
+  gap: 16px;
+}
+
+.upload_image_box {
   position: relative;
+}
+
+.upload_image {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .delete_btn {
@@ -82,7 +99,7 @@
   cursor: pointer;
 }
 
-.upload_button_group:hover .delete_btn {
+.upload_image_box:hover .delete_btn {
   display: block;
 }
 
@@ -91,15 +108,6 @@
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
-}
-
-.password_modal_title {
-  margin-bottom: 10px;
-}
-
-.custom_input {
-  padding: 5px;
-  border-radius: 4px;
 }
 
 .btn_upload {

@@ -14,6 +14,7 @@ import { ButtonSoftMFitBorder, ButtonSoftMFitMain } from "@/commons/ui/button";
 import { LinkCancel } from "@/commons/ui/link";
 import FieldWrapper from "../commons/fieldWrapper";
 import ErrorMessage from "@/commons/ui/error";
+import Image from "next/image";
 
 // ReactQuill을 dynamic으로 import
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -27,6 +28,8 @@ export default function ProductsWrite(props) {
     lng,
     tags,
     inputTag,
+    fileRef,
+    images,
     methods,
     onToggleZipCodeModal,
     handleCompleteZipcodeModal,
@@ -34,6 +37,9 @@ export default function ProductsWrite(props) {
     onChangeTag,
     addTag,
     removeTag,
+    onChangeFile,
+    onClickImage,
+    onClickDelete,
     onClickSubmit,
   } = useProductsWirte(props);
   // modal 토글 - zipcode
@@ -73,11 +79,10 @@ export default function ProductsWrite(props) {
 
             {/* 상품 설명 입력 필드 */}
             <FieldWrapper label="상품 설명">
-              <ReactQuill onChange={onChangeContents} />
-              {/* <TextareaSoftMFull
-                name="contents"
-                placeholder="내용을 입력해주세요."
-              /> */}
+              <ReactQuill
+                onChange={onChangeContents}
+                className={styles.quill_editor}
+              />
               <ErrorMessage name="contents" />
             </FieldWrapper>
 
@@ -180,7 +185,53 @@ export default function ProductsWrite(props) {
               )}
             </div>
 
+            <hr />
+
             {/* TODO: 이미지 업로드 */}
+            <FieldWrapper label="사진 첨부">
+              <div className={styles.upload_button_group}>
+                {images &&
+                  images.map((image, index) => (
+                    <div className={styles.upload_image_box}>
+                      <Image
+                        className={styles.upload_image}
+                        key={`${image}_${index}`}
+                        src={`https://storage.googleapis.com/${image}`}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        alt={"image"}
+                      />
+                      <Image
+                        className={styles.delete_btn}
+                        src="/images/close_btn.png"
+                        width={16}
+                        height={16}
+                        alt="삭제버튼"
+                        id={String(index)}
+                        onClick={onClickDelete}
+                      />
+                    </div>
+                  ))}
+
+                {/* 이미지 업로드 버튼 */}
+                <Image
+                  src={"/images/add image.png"}
+                  alt="파일업로드버튼"
+                  width={160}
+                  height={160}
+                  className={styles.btn_upload}
+                  onClick={onClickImage}
+                />
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={onChangeFile}
+                  ref={fileRef}
+                  accept="image/jpeg,image/png"
+                />
+              </div>
+            </FieldWrapper>
 
             <div className={styles.btn_group}>
               <LinkCancel href="/products">취소</LinkCancel>
