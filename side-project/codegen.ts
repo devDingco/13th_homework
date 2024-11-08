@@ -16,8 +16,25 @@ const config: CodegenConfig = {
       },
     },
     './src/graphql': {
-      // 나중에 queries 경로추가하기
       documents: ['src/graphql/mutations/**/*.graphql'],
+      preset: 'near-operation-file',
+      presetConfig: {
+        extension: '.generated.ts',
+        baseTypesPath: 'types.ts',
+      },
+      plugins: ['typescript-operations', 'typescript-react-apollo'],
+      config: {
+        withHooks: true,
+        withComponent: false,
+        withHOC: false,
+        scalars: {
+          DateTime: 'Date',
+          Upload: 'File',
+        },
+      },
+    },
+    './src/graphql/queries': {
+      documents: ['src/graphql/queries/**/*.graphql'],
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.generated.ts',
