@@ -15,7 +15,7 @@ const LOGIN_USER = gql`
 	}
 `;
 
-export default function Login() {
+export default function Login(props) {
 	const router = useRouter();
 	const { setAccessToken } = useAccessTokenStore();
 	const [errorMessage, setErrorMessage] = useState('');

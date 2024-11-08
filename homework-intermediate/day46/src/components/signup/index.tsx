@@ -15,7 +15,7 @@ const CREATE_USER = gql`
 	}
 `;
 
-export default function SignUp() {
+export default function SignUp(props) {
 	const router = useRouter();
 	const [errorMessage, setErrorMessage] = useState({
 		emailError: '',
