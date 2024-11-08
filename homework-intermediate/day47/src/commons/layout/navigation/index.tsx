@@ -18,8 +18,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { FetchUserLoggedInDocument } from '@/commons/graphql/graphql';
 import { useState } from 'react';
 import * as PortOne from '@portone/browser-sdk/v2';
-import { v4 as uuidv4 } from 'uuid'; 
-
+import { v4 as uuidv4 } from 'uuid';
 
 const DynamicMenu = dynamic(() => import('antd').then((mod) => mod.Menu), {
 	ssr: false,
@@ -32,15 +31,14 @@ const LOGOUT_USER = gql`
 `;
 
 const CREATE_POINT_TRANSACTIONS_OF_LOADING = gql`
-	mutation createPointTransactionsOfLoading {
-		createPointTransactionsOfLoading(paymentId: $paymentId) {
+	mutation createPointTransactionOfLoading($paymentId: ID!) {
+		createPointTransactionOfLoading(paymentId: $paymentId) {
 			_id
 			impUid
 			amount
 			balance
 			status
 			statusDetail
-			travelproduct
 			user {
 				_id
 				email
@@ -55,30 +53,36 @@ const CREATE_POINT_TRANSACTIONS_OF_LOADING = gql`
 
 export default function Navigation() {
 	const router = useRouter();
-	const { data } = useQuery(FetchUserLoggedInDocument);
+	const { data: userLoggedIn } = useQuery(FetchUserLoggedInDocument);
 	const [createPointTransactionsOfLoading] = useMutation(
 		CREATE_POINT_TRANSACTIONS_OF_LOADING,
 	);
+
 	const { accessToken, setAccessToken } = useAccessTokenStore();
 	const [dropped, isDropped] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+	const [selectedAmount, setSelectedAmount] = useState(0);
 	const [logoutUser] = useMutation(LOGOUT_USER);
 
 	const onClickLoginButton = () => router.push('/login');
 	const showModal = () => setIsOpen(true);
 	const handleCancel = () => setIsOpen(false);
 
-
 	const handleOk = async () => {
 		if (!selectedAmount) {
 			alert('충전할 금액을 선택해주세요.');
 			return;
 		}
+
 		try {
-			// 포인트 충전 로직 추가
+			// paymentId 생성
+			const paymentId = uuidv4();
+
+			// 결제 요청
+			await onClickPayment(paymentId);
+
+			// 결제 요청 완료 후 모달 닫기
 			setIsOpen(false);
-			await createPointTransactionsOfLoading({ variables: {paymentId}});
 		} catch (error) {
 			if (error instanceof Error) console.error('결제 실패:', error);
 		}
@@ -94,31 +98,29 @@ export default function Navigation() {
 		}
 	};
 
-	const onClickPayment = async () => {
+	const onClickPayment = async (paymentId: string) => {
 		try {
 			const rsp = await PortOne.requestPayment({
 				storeId: 'store-abc39db7-8ee1-4898-919e-0af603a68317',
-				paymentId: ,
-				orderName: ,
-				totalAmount: 100,
-				currency: 'CURRENCY_KRW',
+				paymentId: paymentId, // uuid로 생성한 paymentId 사용
+				orderName: '충전 포인트', // 주문명
+				totalAmount: +selectedAmount, // 충전할 금액
+				currency: 'CURRENCY_KRW', // KRW(원화)로 설정
 				channelKey: 'channel-key-1dc10cea-ec89-471d-aedf-f4bd68993f33',
 				payMethod: 'EASY_PAY',
 				customer: {
-					fullName: '홍길동',
-					phoneNumber: '010-4242-4242',
-					email: 'gildong@gmail.com',
+					fullName: userLoggedIn?.fetchUserLoggedIn.name, // 고객 이름
+					email: userLoggedIn?.fetchUserLoggedIn.email, // 고객 이메일
 				},
-				redirectUrl: 'http://localhost:3000/section27/27-01-payment-detail',
+				redirectUrl: 'http://localhost:3000/mypage', // 결제 후 리디렉션 URL
 			});
-			// 결제 성공 시 로직,
-			console.log(rsp);
+
+			console.log(rsp); // 결제 성공 시 응답 출력
 
 			// 백엔드에 결제관련 데이터 넘겨주기 => 즉, 뮤테이션 실행하기
-			// createPointTransactionOfLoading
+			await createPointTransactionsOfLoading({ variables: { paymentId } });
 		} catch (error) {
-			// 결제 실패 시 로직,
-			console.error(error);
+			console.error('결제 요청 실패:', error); // 결제 실패 시 로직
 		}
 	};
 
@@ -132,7 +134,14 @@ export default function Navigation() {
 
 	const items: MenuProps['items'] = [
 		{ type: 'divider' },
-		{ label: <div>포인트</div>, key: '0' },
+		{
+			label: (
+				<div>
+					{userLoggedIn?.fetchUserLoggedIn.userPoint?.amount.toLocaleString()}원
+				</div>
+			),
+			key: '0',
+		},
 		{ type: 'divider' },
 		{
 			label: <div>포인트 충전</div>,
@@ -178,7 +187,7 @@ export default function Navigation() {
 									alt="프로필이미지"
 									className="h-8 w-8 rounded-full"
 								/>
-								<Space>{data?.fetchUserLoggedIn.name}</Space>
+								<Space>{userLoggedIn?.fetchUserLoggedIn.name}</Space>
 								{dropped ? <CaretUpOutlined /> : <CaretDownOutlined />}
 							</div>
 						</a>
@@ -188,6 +197,8 @@ export default function Navigation() {
 						title="포인트 충전"
 						open={isOpen}
 						onOk={handleOk}
+						okText="포인트 충전하기"
+						cancelText="취소"
 						onCancel={handleCancel}
 					>
 						<p>충전할 금액을 선택하세요:</p>
