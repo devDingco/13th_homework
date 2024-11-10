@@ -30,7 +30,13 @@ export default function TravelProductWrite({
     onClickSubmit,
     onClickCancel,
     onClickUpdate,
+    isAddressModalOpen,
+    openModal,
+    closeModal,
+    handleZipcodeSelect,
   } = useTravelProductWrite({ isEdit, id });
+
+  const images = methods.watch("images");
 
   return (
     <FormProvider {...methods}>
@@ -87,6 +93,12 @@ export default function TravelProductWrite({
         <div className={styles.location__container}>
           <div className={styles.address__container}>
             <AddressInputForm<ITravelProductSchema>
+              isOpen={isAddressModalOpen}
+              onClickSearchZipcode={openModal}
+              handleOk={closeModal}
+              handleCancel={closeModal}
+              handleZipcodeSelect={handleZipcodeSelect}
+              zipcodeKey="zipcode"
               addressKey="address"
               addressDetailKey="addressDetail"
             />
@@ -118,7 +130,7 @@ export default function TravelProductWrite({
         <div className={styles.image__upload__container}>
           <InputHeader>사진 첨부</InputHeader>
           <ImageUploadForm
-            imageUrl={[]}
+            imageUrl={images}
             fileRefs={fileRefs}
             onChangeFile={onChangeFile}
             onClickImage={onClickImage}

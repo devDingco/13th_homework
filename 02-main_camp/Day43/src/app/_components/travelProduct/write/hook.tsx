@@ -7,12 +7,15 @@ import {
   FetchTravelproductDocument,
   FetchTravelproductQuery,
   UpdateTravelproductDocument,
+  UploadFileDocument,
 } from "@/commons/gql/graphql";
 import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { checkValidationImage } from "@/utils/validation";
 import { useMutation, useQuery } from "@apollo/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
-import { ChangeEvent, MouseEvent, useEffect, useRef } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { Address } from "react-daum-postcode";
 import { useForm } from "react-hook-form";
 
 interface ITravelProductWriteProps {
@@ -27,6 +30,7 @@ export default function useTravelProductWrite({
   const navigate = useNavigate();
   const params = useParams();
   const fileRefs = useRef<HTMLInputElement[]>([]);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   const { data } = useQuery<FetchTravelproductQuery>(
     FetchTravelproductDocument,
@@ -38,12 +42,13 @@ export default function useTravelProductWrite({
   );
   const [createTravelProduct] = useMutation(CreateTravelProductDocument);
   const [updateTravelProduct] = useMutation(UpdateTravelproductDocument);
+  const [uploadFile] = useMutation(UploadFileDocument);
 
   const methods = useForm<ITravelProductSchema>({
     resolver: zodResolver(travelProductSchema),
     defaultValues: {
-      tags: [],
       images: [],
+      tags: [],
     },
   });
   const errorMessages = methods.formState.errors;
@@ -51,19 +56,38 @@ export default function useTravelProductWrite({
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file === undefined) return;
-    console.log(file);
+    if (!checkValidationImage(file)) return;
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    const id = Number(event.target.id);
+    methods.setValue(`images[${id}]`, result.data?.uploadFile.url ?? "", {
+      shouldDirty: true,
+    });
   };
 
   const onClickImage = (event: MouseEvent<HTMLDivElement>) => {
-    console.log(event);
+    const id = Number(event.currentTarget.id);
+    fileRefs.current[id].click();
   };
 
   const onClickDeleteImage = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
+    event.stopPropagation();
+    const id = Number(event.currentTarget.id);
+    methods.setValue(`images[${id}]`, "", { shouldDirty: true });
+    console.log(id);
+
+    // 렌더링을 유발하기 위해서는 form 상태의 변경이 필요함. images를 다시 셋팅해줘야 한다.
+    const currentValues = methods.getValues("images");
+    methods.setValue("images", currentValues);
   };
 
   const onClickCancel = () => {
     console.log("취소 버튼을 눌렀습니다.");
+    navigate(NavigationPaths.travelProduct, id);
   };
 
   const onClickSubmit = async (data: ITravelProductSchema) => {
@@ -116,6 +140,7 @@ export default function useTravelProductWrite({
 
       return acc;
     }, {} as Record<string, any>);
+    console.log(updatedData);
     return updatedData;
   };
 
@@ -134,6 +159,20 @@ export default function useTravelProductWrite({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const openModal = () => {
+    setIsAddressModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsAddressModalOpen(false);
+  };
+
+  const handleZipcodeSelect = async (data: Address) => {
+    methods.setValue("zipcode", data.zonecode, { shouldDirty: true });
+    methods.setValue("address", data.address, { shouldDirty: true });
+    closeModal();
   };
 
   useEffect(() => {
@@ -169,5 +208,9 @@ export default function useTravelProductWrite({
     onClickSubmit,
     onClickCancel,
     onClickUpdate,
+    isAddressModalOpen,
+    openModal,
+    closeModal,
+    handleZipcodeSelect,
   };
 }
