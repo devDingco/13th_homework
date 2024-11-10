@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import styles from "./style.module.css";
 import { gql, useQuery } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token-store";
+import PointModal from "./point-modal";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -13,25 +14,30 @@ const FETCH_USER_LOGGED_IN = gql`
       email
       name
       picture
+      userPoint {
+        _id
+        amount
+      }
     }
   }
 `;
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
-  const [isProfileHovered, setIsProfileHovered] = useState(false); // 프로필 호버 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isProfileHovered, setIsProfileHovered] = useState(false);
+  const [isPointModalOpen, setPointModalOpen] = useState(false); // 모달 상태 관리
   const router = useRouter();
 
   const { accessToken, setAccessToken } = useAccessTokenStore();
 
   useEffect(() => {
-    // 클라이언트에서만 실행되므로 서버 렌더링 시 오류를 방지합니다.
     setAccessToken(localStorage.getItem("accessToken"));
   }, []);
 
   const { data } = useQuery(FETCH_USER_LOGGED_IN, {
     skip: !accessToken,
   });
+  console.log("data", data);
 
   useEffect(() => {
     if (data?.fetchUserLoggedIn) {
@@ -46,7 +52,7 @@ const Navbar = () => {
   };
 
   const mypageClick = () => {
-    router.push("/boards/mypage");
+    router.push("/mypage");
   };
 
   const loginClick = () => {
@@ -87,7 +93,7 @@ const Navbar = () => {
                 userInfo?.picture
                   ? `https://storage.googleapis.com/${userInfo.picture}`
                   : "/image/noProfile.webp"
-              } // 유저 프로필 사진
+              }
               alt="Profile"
               className={styles.profileIcon}
               width={50}
@@ -96,10 +102,18 @@ const Navbar = () => {
             />
             {isProfileHovered && (
               <div className={styles.profilePopup}>
+                <p>{userInfo?._id}</p>
                 <p>{userInfo?.name}</p>
                 <p>{userInfo?.email}</p>
+                <p>{userInfo?.userPoint.amount}</p>
                 <div className={styles.mypage} onClick={mypageClick}>
                   마이페이지
+                </div>
+                <div
+                  className={styles.mypage}
+                  onClick={() => setPointModalOpen(true)} // 모달 열기
+                >
+                  포인트 충전
                 </div>
                 <div className={styles.logout} onClick={logoutClick}>
                   로그아웃
@@ -113,6 +127,12 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* PointModal 컴포넌트 */}
+      <PointModal
+        isOpen={isPointModalOpen}
+        onClose={() => setPointModalOpen(false)} // 모달 닫기
+      />
     </div>
   );
 };

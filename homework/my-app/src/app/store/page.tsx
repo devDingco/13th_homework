@@ -25,7 +25,7 @@ const FETCH_TRAVEL_PRODUCTS = gql`
 const ProductList = () => {
   const router = useRouter();
   const { data, loading, error } = useQuery(FETCH_TRAVEL_PRODUCTS, {
-    variables: { isSoldout: false, search: "", page: 1 },
+    variables: { isSoldout: false, search: "" },
   });
   console.log(data);
 
@@ -83,7 +83,7 @@ const ProductList = () => {
               }
               width={0}
               height={0}
-              sizes={100}
+              sizes="100"
               alt="Profile"
               className={styles.profileIcon}
             />
@@ -91,7 +91,6 @@ const ProductList = () => {
           </div>
         </div>
       ))}
-      <Pagination />
     </div>
   );
 };

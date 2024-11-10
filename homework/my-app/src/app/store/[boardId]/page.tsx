@@ -1,5 +1,4 @@
 "use client";
-
 import { useParams } from "next/navigation";
 import styles from "./style.module.css";
 import { useState, useEffect } from "react";
@@ -65,6 +64,8 @@ const BUYING_AND_SELLING = gql`
 const ProductDetail = () => {
   const params = useParams();
   const [selectedImage, setSelectedImage] = useState("");
+  const [selectedColor, setSelectedColor] = useState("brown");
+  const [selectedSize, setSelectedSize] = useState("M");
 
   const { data, loading, error } = useQuery(FETCH_TRAVEL_PRODUCT, {
     variables: { travelproductId: params.boardId },
@@ -98,6 +99,7 @@ const ProductDetail = () => {
       console.error("스크랩 기능 오류:", err);
     }
   };
+
   const handlePurchase = async () => {
     try {
       await buyProduct();
@@ -123,44 +125,44 @@ const ProductDetail = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topSection}>
-        <div>
-          <div className={styles.leftSection}>
-            <div className={styles.productImageContainer}>
-              <Image
-                src={selectedImage}
-                alt="상품 이미지"
-                className={styles.productImage}
-                fill /* 부모 컨테이너 안에서 동작 */
-                sizes="(max-width: 768px) 100vw, 50vw" /* 반응형 크기 설정 */
-                style={{
-                  objectFit: "contain",
-                  objectPosition: "center",
-                }} /* 전체 이미지 표시 및 가운데 정렬 */
-              />
-            </div>
-            <div className={styles.thumbnailList}>
-              {data?.fetchTravelproduct.images.map((image, index) => (
+      <div className={styles.productGrid}>
+        {/* Left Section - Images */}
+        <div className={styles.imageSection}>
+          <div className={styles.mainImageContainer}>
+            <Image
+              src={selectedImage || "/api/placeholder/600/600"}
+              alt="상품 이미지"
+              className={styles.mainImage}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          <div className={styles.thumbnailGrid}>
+            {data?.fetchTravelproduct.images.map((image, index) => (
+              <div key={index} className={styles.thumbnailContainer}>
                 <Image
-                  key={index}
-                  width={80}
-                  height={80}
                   src={`https://storage.googleapis.com/${image}`}
-                  alt="썸네일"
-                  className={styles.imageThumbnail}
+                  alt={`썸네일 ${index + 1}`}
+                  className={styles.thumbnail}
+                  width={150}
+                  height={150}
                   onClick={() => handleImageSelect(image)}
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className={styles.rightSection}>
-          <div className={styles.titleContainer}>
-            <div className={styles.nameBookmarkContainer}>
-              <div className={styles.title}>{data.fetchTravelproduct.name}</div>
-
-              <button className={styles.overlay} onClick={handleTogglePick}>
+        {/* Right Section - Product Info */}
+        <div className={styles.productInfo}>
+          <div className={styles.header}>
+            <div className={styles.titleSection}>
+              <h1 className={styles.title}>{data.fetchTravelproduct.name}</h1>
+              <button
+                className={styles.bookmarkButton}
+                onClick={handleTogglePick}
+              >
                 <Image
                   src="/image/bookmark.png"
                   width={18}
@@ -168,32 +170,27 @@ const ProductDetail = () => {
                   alt="북마크아이콘"
                   className={styles.bookmarkIcon}
                 />
-                {data.fetchTravelproduct.pickedCount}
+                <span>{data.fetchTravelproduct.pickedCount}</span>
               </button>
             </div>
-            <div className={styles.remarks}>
-              {data.fetchTravelproduct.remarks}
-            </div>
+            <p className={styles.remarks}>{data.fetchTravelproduct.remarks}</p>
             <div className={styles.tags}>
               {data.fetchTravelproduct.tags.map((tag, index) => (
                 <span key={index} className={styles.tag}>
-                  #{tag}{" "}
+                  #{tag}
                 </span>
               ))}
             </div>
           </div>
-          <div className={styles.description}>
-            {/* <h2 className={styles.sectionTitle}>상세 설명</h2> */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.fetchTravelproduct.contents,
-              }}
-            />
+
+          {/* Price and Seller Info */}
+          <div className={styles.priceSection}>
+            <p className={styles.price}>
+              ₩{data?.fetchTravelproduct.price.toLocaleString()}
+            </p>
           </div>
-          <div className={styles.priceContainer}>
-            ₩{data?.fetchTravelproduct.price}원
-          </div>
-          <div className={styles.seller}>
+
+          <div className={styles.sellerInfo}>
             <Image
               src={
                 data?.fetchTravelproduct.seller?.picture
@@ -202,27 +199,48 @@ const ProductDetail = () => {
               }
               alt="판매자 프로필"
               className={styles.sellerAvatar}
-              width={0}
-              height={0}
+              width={40}
+              height={40}
             />
             <span className={styles.sellerName}>
               {data?.fetchTravelproduct.seller.name}
             </span>
           </div>
-          <button className={styles.buyButton} onClick={handlePurchase}>
+
+          {/* Accordion Sections */}
+          {/* <div className={styles.accordionContainer}>
+            <details className={styles.accordion}>
+              <summary className={styles.accordionTitle}>상세 정보</summary>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data?.fetchTravelproduct.contents,
+                }}
+              />
+            </details> */}
+          {/* 
+            <details className={styles.accordion}>
+              <summary className={styles.accordionTitle}>배송 정보</summary>
+              <div className={styles.accordionContent}>
+                {data?.fetchTravelproduct.travelproductAddress.address}
+              </div>
+            </details> */}
+          {/* </div> */}
+
+          {/* Purchase Button */}
+          <button className={styles.purchaseButton} onClick={handlePurchase}>
             구매하기
           </button>
         </div>
       </div>
 
+      {/* Bottom Section - Map and Comments */}
       <div className={styles.bottomSection}>
         <div className={styles.location}>
           <h2 className={styles.sectionTitle}>상세 위치</h2>
           <div className={styles.mapContainer}>지도 표시 영역</div>
         </div>
+        <Comment />
       </div>
-
-      <Comment />
     </div>
   );
 };

@@ -22,8 +22,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
   const [aboutUpLoadBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const router = useRouter();
-  const params = useParams(); // useParams() 호출
-
+  const params = useParams();
   const { data, refetch } = useQuery<FetchBoardQuery>(FETCH_BOARD, {
     variables: {
       boardId: params.boardId,

@@ -1,99 +1,191 @@
 .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   display: grid;
+  /* 5열로 변경 */
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding-top: 5rem;
-  padding-left: 6vw;
-  padding-right: 6vw;
+  gap: 16px; /* 간격 축소 */
 }
 
 .card {
-  background-color: #eaeaea;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
+  background: white;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  width: 100%;
+  /* 카드 높이 조정 */
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+.bookmarkIcon {
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.bookmarkIcon:hover {
+  opacity: 1;
 }
 
 .image {
   width: 100%;
-  height: 300px;
+  height: 210px; /* 이미지 높이 조정 */
   object-fit: cover;
-  margin-bottom: 12px;
-  transition: transform 0.3s;
-}
-
-.card:hover .image {
-  transform: scale(1.05);
-}
-
-/* 북마크 아이콘 오버레이 */
-.overlay {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 1; /* 우선순위 설정 */
-}
-
-.card:hover .overlay {
-  opacity: 1;
-}
-
-.bookmarkIcon {
-  width: 18px;
-  height: 18px;
 }
 
 .productName {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
+  padding: 8px 12px; /* 패딩 축소 */
+  font-size: 1rem; /* 폰트 크기 축소 */
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .price {
-  font-size: 14px;
-  color: #555;
+  padding: 0 12px 8px; /* 패딩 축소 */
+  font-size: 1.1rem; /* 폰트 크기 축소 */
+  font-weight: bold;
+  color: #2563eb;
 }
 
 .tags {
-  position: absolute;
-  left: 10px;
-  bottom: 100px;
+  padding: 0 12px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  font-size: 14px;
+  gap: 4px; /* 태그 간격 축소 */
+  min-height: 28px;
 }
 
 .tag {
-  background-color: #000000;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 20px;
-}
-
-.namePriceContainer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.profileIcon {
-  width: 25px;
-  height: 25px;
+  background: #f3f4f6;
+  color: #4b5563;
+  padding: 2px 6px; /* 패딩 축소 */
+  border-radius: 12px;
+  font-size: 0.8rem; /* 폰트 크기 축소 */
 }
 
 .profileContainer {
-  gap: 10px;
+  padding: 8px 12px; /* 패딩 축소 */
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
+}
+
+.profileIcon {
+  width: 24px; /* 크기 축소 */
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 반응형 breakpoint 추가 */
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    height: auto;
+    min-height: 360px;
+  }
+}
+
+/* 나머지 스타일은 동일 */
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 32px 0;
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pageButton:hover {
+  background-color: #e5e7eb;
+}
+
+.activePageButton {
+  background-color: #2563eb;
+  color: white;
+}
+
+.activePageButton:hover {
+  background-color: #1d4ed8;
+}
+
+.loadingContainer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.errorContainer {
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  color: #dc2626;
 }

@@ -12,6 +12,7 @@ import {
   FetchTravelproductQuestionsQueryVariables,
   UpdateBoardInput,
 } from "@/commons/graphql/graphql";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export interface ISchema {
   comment: string;
@@ -32,7 +33,7 @@ const CREATE_COMMENT = gql`
 `;
 
 const FETCH_COMMENTS = gql`
-  query fetchTravelproductQuestions($page: Int!, $travelproductId: ID!) {
+  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {
     fetchTravelproductQuestions(
       page: $page
       travelproductId: $travelproductId
@@ -77,16 +78,17 @@ const DELETE_COMMENT = gql`
 
 export default function Comment() {
   const { register, handleSubmit, reset } = useForm<ISchema>(); // ISchema 타입을 적용
+  const [hasMore, setHasMore] = useState(true);
   const params = useParams();
   const travelproductId = Array.isArray(params.boardId)
     ? params.boardId[0]
     : params.boardId; // string 타입으로 변환
 
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     FetchTravelproductQuestionsQuery,
     FetchTravelproductQuestionsQueryVariables
   >(FETCH_COMMENTS, {
-    variables: { page: 1, travelproductId },
+    variables: { travelproductId },
   });
 
   const [createComment] = useMutation<
@@ -109,6 +111,7 @@ export default function Comment() {
       });
       reset();
       refetch();
+      setHasMore(true);
     } catch (error) {
       console.error("댓글 등록 실패:", error);
     }
@@ -131,6 +134,7 @@ export default function Comment() {
       setEditingCommentId(null);
       setUpdatedContent("");
       refetch();
+      setHasMore(true);
     } catch (error) {
       console.error("댓글 수정 실패:", error);
     }
@@ -144,9 +148,31 @@ export default function Comment() {
         },
       });
       refetch();
+      setHasMore(true);
     } catch (error) {
       console.log("댓글 삭제 실패:", error);
     }
+  };
+
+  const onNext = () => {
+    if (!data?.fetchTravelproductQuestions?.length) return;
+    fetchMore({
+      variables: {
+        page: Math.ceil(data.fetchTravelproductQuestions.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchTravelproductQuestions?.length) {
+          setHasMore(false);
+          return prev;
+        }
+        return {
+          fetchTravelproductQuestions: [
+            ...(prev?.fetchTravelproductQuestions || []),
+            ...(fetchMoreResult?.fetchTravelproductQuestions || []),
+          ],
+        };
+      },
+    });
   };
 
   return (
@@ -167,39 +193,48 @@ export default function Comment() {
           댓글
         </button>
       </form>
-
-      {data?.fetchTravelproductQuestions?.map((comment) => (
-        <div key={comment._id} className={styles.comment}>
-          <div className={styles.commentHeader}>
-            <span>{comment.user?.name}</span>
-            <div>
-              <span>{new Date(comment.createdAt).toLocaleString()}</span>
-              <button
-                onClick={() => onClickEdit(comment._id, comment.contents)}
-              >
-                수정
-              </button>
-              <button onClick={() => onClickDelete(comment._id)}>삭제</button>
+      <InfiniteScroll
+        next={onNext}
+        hasMore={hasMore}
+        loader={<div className={styles.loading}>댓글이 없습니다.</div>}
+        dataLength={data?.fetchTravelproductQuestions.length ?? 0}
+      >
+        {data?.fetchTravelproductQuestions?.map((comment) => (
+          <div key={comment._id} className={styles.comment}>
+            <div className={styles.commentHeader}>
+              <span>{comment.user?.name}</span>
+              <div>
+                <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                <button
+                  onClick={() => onClickEdit(comment._id, comment.contents)}
+                >
+                  수정
+                </button>
+                <button onClick={() => onClickDelete(comment._id)}>삭제</button>
+              </div>
             </div>
+            {editingCommentId === comment._id ? (
+              <>
+                <input
+                  type="text"
+                  value={updatedContent}
+                  onChange={(e) => setUpdatedContent(e.target.value)}
+                  className={styles.commentInput}
+                />
+                <button
+                  onClick={onSubmitUpdate}
+                  className={styles.commentSubmit}
+                >
+                  수정 완료
+                </button>
+              </>
+            ) : (
+              <p>{comment.contents}</p>
+            )}
+            <CommentAnswer commentId={comment._id} />
           </div>
-          {editingCommentId === comment._id ? (
-            <>
-              <input
-                type="text"
-                value={updatedContent}
-                onChange={(e) => setUpdatedContent(e.target.value)}
-                className={styles.commentInput}
-              />
-              <button onClick={onSubmitUpdate} className={styles.commentSubmit}>
-                수정 완료
-              </button>
-            </>
-          ) : (
-            <p>{comment.contents}</p>
-          )}
-          <CommentAnswer commentId={comment._id} />
-        </div>
-      ))}
+        ))}
+      </InfiniteScroll>
     </div>
   );
 }

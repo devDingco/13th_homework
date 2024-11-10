@@ -6,15 +6,19 @@ import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from "./queries";
 import { Flex, Rate } from "antd";
 
 interface ICommentWriteProps {
-  isEdit: boolean;
-  commentId: string;
+  isEdit?: boolean;
+  commentId?: string;
   setIsEdit: (value: boolean) => void;
+  hasMore?: boolean;
+  setHasMore?: (value: boolean) => void;
 }
 
 export default function CommentPage({
   isEdit,
   commentId,
   setIsEdit,
+  hasMore,
+  setHasMore,
 }: ICommentWriteProps) {
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [writer, setWriter] = useState("");
@@ -104,7 +108,9 @@ export default function CommentPage({
 
       console.log("댓글 수정 후 refetch 호출");
       await refetch();
-      setIsEdit(false);
+
+      setIsEdit?.(false); // 안전하게 호출
+      setHasMore?.(true); // 안전하게 호출
     } catch (error: any) {
       console.error("Error updating comment:", error);
       if (error.graphQLErrors && error.graphQLErrors.length > 0) {
@@ -158,4 +164,7 @@ export default function CommentPage({
       </div>
     </div>
   );
+}
+function setHasMore(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }
