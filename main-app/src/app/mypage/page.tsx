@@ -3,6 +3,7 @@
 import { withLoginCheck } from "@/common/hocs/withLoginCheck";
 import KakaoMapUI from "@/components/Molecules/KakaoMap";
 import SearchUI from "@/components/Molecules/Search";
+import ToastEditorUI from "@/components/Molecules/ToastEditor";
 import BoardsListUI from "@/components/Organisms/BoardsList";
 import MyPageUI from "@/components/Organisms/Mypage";
 
@@ -11,6 +12,7 @@ function MyPage() {
         <>
             <MyPageUI />
             <KakaoMapUI />
+            <ToastEditorUI />
             <SearchUI />
             <BoardsListUI />
         </>
