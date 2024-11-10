@@ -6,7 +6,7 @@ import {
   TravelProductSample1,
   TravelProductSample2,
   Delete,
-  Link,
+  LinkIcon,
   Location,
   Bookmark,
   Profile40,
@@ -19,11 +19,13 @@ import Divider from "@/app/_components/commons/divider";
 import CommentWriting from "@/commons/ui/comment/writing";
 import NewTravelProductComment from "@/app/_components/travelProduct/comment";
 import Modal from "@/commons/ui/modal";
+import { useParams } from "next/navigation";
 
 export default function DetailTravelProduct() {
+  const params = useParams();
   const { data } = useQuery(FetchTravelproductDocument, {
     variables: {
-      travelproductId: "67021b115413b3002914ce34",
+      travelproductId: String(params.travelProductId),
     },
   });
 
@@ -72,7 +74,7 @@ export default function DetailTravelProduct() {
             <h3 className={styles.header}>{data?.fetchTravelproduct.name}</h3>
             <div className={styles.icon__container}>
               <Delete />
-              <Link />
+              <LinkIcon />
               <Location />
               <Bookmark />
             </div>
