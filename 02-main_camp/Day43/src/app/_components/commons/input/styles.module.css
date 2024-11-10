@@ -35,6 +35,11 @@
   gap: 0.5rem;
 }
 
+.form__input__container {
+  display: flex;
+  gap: 1rem;
+}
+
 .error__message {
   color: #f66a6a;
   font-weight: 400;

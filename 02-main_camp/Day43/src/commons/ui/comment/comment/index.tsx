@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { Close, Edit, Profile, ReplyIcon } from "../../icon";
+import { Close, EditIcon, Profile, ReplyIcon } from "../../icon";
 
 interface ICommentProps {
   isManaged?: boolean;
@@ -25,7 +25,7 @@ export default function Comment({
           </div>
           {isManaged === false && (
             <div className={styles.sideMenu__container}>
-              <Edit width={1.25} height={1.25} />
+              <EditIcon width={1.25} height={1.25} />
               <Close width={1.25} height={1.25} />
             </div>
           )}

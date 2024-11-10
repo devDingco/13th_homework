@@ -34,7 +34,6 @@ function InputBase<T extends FieldValues>({
 
 export function Input<T extends FieldValues>(props: IInputBaseProps<T>) {
   const getClassNames = () => {
-    console.log(props.validationStatus);
     if (typeof props.validationStatus === "undefined") return;
 
     return classNames(`${styles.input}`, {
