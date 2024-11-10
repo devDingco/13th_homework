@@ -12,7 +12,10 @@
 }
 
 .title_section {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .title_icon_container {
@@ -21,9 +24,8 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 28px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 .icon_container {
@@ -37,15 +39,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  width: 53px;
-  height: 32px;
-  border-radius: 1rem;
-  background-color: var(--main-color-back);
-  color: var(--main-color);
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-  border: 1px solid var(--main-color);
+  display: flex;
+  gap: 8px;
+  padding: 4px 8px 4px 8px;
+  align-items: center;
+  border-radius: 8px;
 }
 
 .like_button:hover {
@@ -59,6 +57,11 @@
 
 .like_text {
   font-size: 0.8rem;
+}
+
+.remarks {
+  color: #777;
+  font-size: 16px;
 }
 
 .tags {
@@ -87,46 +90,10 @@
   gap: 1rem;
 }
 
-.main_image_container {
-  width: 100%;
-  height: auto;
-  position: relative;
-  aspect-ratio: 3 / 2;
-}
-
-.main_image {
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
-.thumbnail_container {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 2.5rem;
-}
-
-.thumbnail {
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 0.25rem;
-  transition: border-color 0.2s;
-  object-fit: cover;
-}
-
-.thumbnail:hover,
-.thumbnail:focus {
-  border-color: var(--main-color);
-}
-
-.thumbnail_image {
-  object-fit: cover;
-  border-radius: 0.25rem;
-}
-
 .description {
-  padding-top: 2.5rem;
+  padding: 30px 0;
   border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -155,6 +122,7 @@
   font-size: 0.875rem;
   margin-bottom: 1rem;
   padding-left: 1.25rem;
+  list-style-type: disc;
 }
 
 .payment_button,
@@ -233,8 +201,9 @@
 }
 
 .section_title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 20px;
+
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
@@ -294,4 +263,95 @@
 
 .contact_button:hover {
   background-color: var(--main-color-hover);
+}
+
+/* 이미지 */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mainImageContainer {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.mainImage {
+  object-fit: cover;
+}
+
+.thumbnailContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.thumbnailButton {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  border: none;
+  padding: 0;
+}
+
+.thumbnailButton:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.thumbnailImage {
+  object-fit: cover;
+}
+
+.selected {
+  outline: 3px solid #0070f3;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .thumbnailButton {
+    width: 100px;
+    height: 75px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumbnailButton {
+    width: 80px;
+    height: 60px;
+  }
+}
+
+.picked_button {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: colors 0.2s;
+}
+
+.picked_count {
+  font-size: 14px;
+}
+
+.icon_picked {
+  fill: #ef4444;
+  color: #ef4444;
 }

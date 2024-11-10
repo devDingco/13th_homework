@@ -289,3 +289,41 @@
   margin-bottom: 8px;
   color: #333;
 }
+
+/* WishlistButton.module.css */
+.button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+}
+
+.buttonOutline {
+  border: 1px solid;
+}
+
+.buttonOutlineRed {
+  background-color: #fef2f2; /* bg-red-100 */
+  border-color: #fca5a5; /* border-red-200 */
+}
+
+.buttonOutlineRedDark {
+  background-color: #be123c; /* bg-red-900 */
+  border-color: #991b2d; /* border-red-800 */
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: color 0.3s;
+}
+
+.iconFilled {
+  color: #f87171; /* text-red-500 */
+}
+
+.iconDefault {
+  color: #6b7280; /* text-gray-500 */
+}

@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "./schema";
@@ -16,17 +16,37 @@ const useProductsWirte = (props) => {
   const [createTravelproduct] = useMutation(CREATE_TRAVEL_PRODUCT);
   const [uploadFile] = useMutation(UploadFileDocument);
   const [isZipCodeModalOpen, setIsZipCodeModalOpen] = useState(false);
-  const [lat, setLat] = useState(33.5563); // 기본 위도
-  const [lng, setLng] = useState(126.79581); // 기본 경도
   const [inputTag, setInputTag] = useState("");
   const [tags, setTags] = useState([]);
-  const [images, setImages] = useState([]);
+
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+    // defaultValues를 설정해줘야 이미지 사진 첨부하지 않고 등록하기 버튼 누르면 에러메세지 제대로 작동
+    defaultValues: {
+      name: "",
+      remarks: "",
+      contents: "",
+      price: null,
+      tags: [],
+      zipcode: "",
+      addressDetail: "",
+      lat: null,
+      lng: null,
+      images: [],
+    },
+  });
 
   // 웹 에디터 입력 값 setValue해주기
   const onChangeContents = (value) => {
-    console.log(value);
-    methods.setValue("contents", value);
-    methods.trigger("contents");
+    // 빈 콘텐츠의 경우 빈 문자열로 설정
+    const sanitizedContent = ["<p><br></p>", "<div><br></div>"].includes(value)
+      ? ""
+      : value;
+
+    // 값 설정 후 검증
+    methods.setValue("contents", sanitizedContent);
+    methods.trigger("contents"); // 검증 트리거
   };
 
   // zipcode modal 토글 함수
@@ -43,11 +63,9 @@ const useProductsWirte = (props) => {
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         // kakaomap에 보낼 위도, 경도 state
-        setLng(result[0].road_address.x);
-        setLat(result[0].road_address.y);
         // form input에 넣어줄 위도, 경도
-        methods.setValue("lng", lng);
-        methods.setValue("lat", lat);
+        methods.setValue("lng", result[0].road_address.x);
+        methods.setValue("lat", result[0].road_address.y);
         methods.trigger(["zipcode", "lat", "lng"]);
       }
     };
@@ -78,12 +96,42 @@ const useProductsWirte = (props) => {
     setTags(tags.filter((_, index) => index !== removeId));
   };
 
-  const methods = useForm({
-    resolver: zodResolver(schema),
-    mode: "onChange",
-  });
+  // file버튼 클릭해주기
+  const onClickImage = () => {
+    fileRef.current?.click();
+  };
+
+  const images = methods.watch("images");
+  // 이미지업로드버튼 클릭 시
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+
+    // 검증 실패시 OnChangeFile함수 즉시 종료
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    const result = await uploadFile({ variables: { file } });
+
+    const fileUrl = result?.data?.uploadFile?.url;
+    if (!fileUrl) return;
+
+    const currentImages = methods.getValues("images") || [];
+
+    methods.setValue("images", [...currentImages, fileUrl]);
+  };
+
+  // delete버튼 클릭 시 이미지 미리보기 삭제
+  const onClickDelete = (event: MouseEvent<HTMLImageElement>) => {
+    const imageId = event.currentTarget.id;
+    console.log("삭제할 이미지 아이디: ", imageId);
+    // 이미지 삭제
+    const deletedImage = images.filter((_, index) => index !== Number(imageId));
+    methods.setValue("images", deletedImage);
+  };
 
   const onClickSubmit = async (data) => {
+    console.log(data);
     try {
       const result = await createTravelproduct({
         // TODO: 스프레드연산자써서 짧게 만들어주기
@@ -100,7 +148,7 @@ const useProductsWirte = (props) => {
               lat: data.lat,
               lng: data.lng,
             },
-            images,
+            images: data.images,
           },
         },
       });
@@ -114,41 +162,8 @@ const useProductsWirte = (props) => {
     }
   };
 
-  // file버튼 클릭해주기
-  const onClickImage = () => {
-    fileRef.current?.click();
-  };
-
-  // 이미지업로드버튼 클릭 시
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    console.log(file);
-
-    // 검증 실패시 OnChangeFile함수 즉시 종료
-    const isValid = checkValidationFile(file);
-    if (!isValid) return;
-
-    const result = await uploadFile({ variables: { file } });
-
-    const fileUrl = result?.data?.uploadFile?.url;
-    if (!fileUrl) return;
-
-    setImages((prev) => [...prev, fileUrl]);
-  };
-
-  // delete버튼 클릭 시 이미지 미리보기 삭제
-  const onClickDelete = (event: MouseEvent<HTMLImageElement>) => {
-    const imageId = event.currentTarget.id;
-    console.log("삭제할 이미지 아이디: ", imageId);
-    // 이미지 삭제
-    const deletedImage = images.filter((_, index) => index !== Number(imageId));
-    setImages(deletedImage);
-  };
-
   return {
     isZipCodeModalOpen,
-    lat,
-    lng,
     tags,
     inputTag,
     fileRef,

@@ -18,3 +18,7 @@ function TextareaBase(props) {
 export function TextareaSoftMFull(props) {
   return <TextareaBase className={styles.textarea__soft__m__full} {...props} />;
 }
+
+export function TextareaSoftSFull(props) {
+  return <TextareaBase className={styles.textarea__soft__s__full} {...props} />;
+}
