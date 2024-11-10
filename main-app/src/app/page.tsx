@@ -1,6 +1,5 @@
 import { css } from "@/common/styled-system/css";
 import Link from "next/link";
-import TEST_InputForm from "./temp/page";
 
 export default function Home() {
     return (
@@ -9,8 +8,6 @@ export default function Home() {
             <Link href="/boards" className={css({ fontSize: "4xl", _hover: { color: "rose.500" } })}>
                 Getting Started!
             </Link>
-
-            <TEST_InputForm />
         </>
     );
 }

@@ -86,16 +86,11 @@ export default function LayoutNav() {
                                 님! 안녕하세요.
                             </p>
                         </Menu.Trigger>
-                        <Menu.Positioner
-                            className={css_menuWrap}
-                            style={{ position: "absolute", zIndex: "2" }}
-                        >
+                        <Menu.Positioner className={css_menuWrap} style={{ position: "absolute", zIndex: "2" }}>
                             <Menu.Content>
                                 <Menu.ItemGroup>
                                     <Menu.ItemGroupLabel className={css_menuItem}>
-                                        <span
-                                            className={css({ color: "#981b1e", fontWeight: "700" })}
-                                        >
+                                        <span className={css({ color: "#981b1e", fontWeight: "700" })}>
                                             {login.fetchUserLoggedIn.name}
                                         </span>
                                     </Menu.ItemGroupLabel>
@@ -107,11 +102,7 @@ export default function LayoutNav() {
                                     >
                                         <UserIcon size={16} /> 내 정보
                                     </Menu.Item>
-                                    <Menu.Item
-                                        value="billing"
-                                        className={css_menuItem}
-                                        onClick={onClickPay}
-                                    >
+                                    <Menu.Item value="billing" className={css_menuItem} onClick={onClickPay}>
                                         <CreditCardIcon size={16} /> 포인트 충전
                                     </Menu.Item>
                                     <Menu.Item
@@ -139,7 +130,7 @@ export default function LayoutNav() {
                         </Menu.Positioner>
                     </Menu.Root>
                 ) : (
-                    <Button label="로그인" onClick={() => router.push(`/login`)}></Button>
+                    <Button label="로그인" onClick={() => router.push(`/auth`)}></Button>
                 )}
             </nav>
         </>

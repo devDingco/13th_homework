@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { useTokenStore } from "../stores/useTokenStore";
+import { useTokenStore } from "@/common/stores/useTokenStore";
 import { useMutation } from "@apollo/client";
-import { CreateUserDocument, LoginUserDocument } from "../graphql/graphql";
-import withSweetAlert from "../library/withSweetAlert";
+import { CreateUserDocument, LoginUserDocument } from "@/common/graphql/graphql";
+import withSweetAlert from "@/common/library/withSweetAlert";
 
 export default function useLoginUser() {
     const { plainAlert, errorAlert } = withSweetAlert();
