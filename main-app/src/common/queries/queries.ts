@@ -145,6 +145,9 @@ export const CREATE_USER = gql`
             _id
             email
             name
+            userPoint {
+                amount
+            }
             createdAt
         }
     }
@@ -164,6 +167,9 @@ export const FETCH_USER = gql`
             _id
             email
             name
+            userPoint {
+                amount
+            }
         }
     }
 `;

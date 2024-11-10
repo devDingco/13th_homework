@@ -31,7 +31,10 @@ export default function CommentListUI() {
                     return;
                 }
                 return {
-                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
+                    fetchBoardComments: [
+                        ...prev.fetchBoardComments,
+                        ...fetchMoreResult.fetchBoardComments,
+                    ],
                 };
             },
         });

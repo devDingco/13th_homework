@@ -13,8 +13,11 @@ import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UpdateBoardCommentDocument } from "@/common/graphql/graphql";
 import { css } from "@/common/styled-system/css";
+import withSweetAlert from "@/common/library/withSweetAlert";
 
 export default function CommentUI({ el }) {
+    const { errorAlert } = withSweetAlert();
+
     const [isEdit, setIsEdit] = useState(false);
     const [comment, setComment] = useState("");
     const [stars, setStars] = useState(0);
@@ -50,10 +53,10 @@ export default function CommentUI({ el }) {
                 },
             });
             console.log(result);
-            alert("댓글을 수정하였습니다!");
             setIsEdit(!isEdit);
         } catch (error) {
             console.log(error);
+            errorAlert("댓글 수정에 실패하였습니다!");
         }
     }
 

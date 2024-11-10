@@ -26,29 +26,6 @@ export default function withSweetAlert() {
         });
     };
 
-    // const deleteDialog = () => {
-    //     withReactContent(Swal)
-    //         .fire({
-    //             title: "정말 삭제하시겠습니까?",
-    //             text: "되돌릴 수 없어요!",
-    //             icon: "warning",
-    //             showCancelButton: true,
-    //             confirmButtonColor: "#3085d6",
-    //             cancelButtonColor: "#d33",
-    //             confirmButtonText: "삭제합니다!",
-    //             cancelButtonText: "취소",
-    //         })
-    //         .then((result) => {
-    //             if (result.isConfirmed) {
-    //                 Swal.fire({
-    //                     title: "삭제",
-    //                     text: "삭제되었습니다!",
-    //                     icon: "success",
-    //                 });
-    //             }
-    //         });
-    // };
-
     return {
         plainAlert,
         errorAlert,

@@ -1,10 +1,12 @@
 "use client";
-import { useMutation } from "@apollo/client";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidV4 } from "uuid";
+import { FetchUserLoggedInDocument } from "../graphql/graphql";
+import { useMutation } from "@apollo/client";
 import { CREATE_POINT } from "../queries/queries";
 
 export default function withPortOne(login) {
+    //
     const [createPoint] = useMutation(CREATE_POINT);
 
     const onClickPay = async () => {
@@ -40,6 +42,7 @@ export default function withPortOne(login) {
     async function PointTransaction(payment) {
         const point = await createPoint({
             variables: { paymentId: payment?.paymentId },
+            refetchQueries: [{ query: FetchUserLoggedInDocument }],
         });
         console.log(point);
     }

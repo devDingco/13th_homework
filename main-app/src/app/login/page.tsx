@@ -15,8 +15,7 @@ import { css } from "@/common/styled-system/css";
 
 export default function LoginPage() {
     const router = useRouter();
-    const { loginError, onLoginChange, onLoginInClick, onSignUpChange, onSignUpClick } =
-        useLoginUser();
+    const { loginError, onLoginChange, onLoginInClick, onSignUpChange, onSignUpClick } = useLoginUser();
 
     const [isLogIn, setIsLogIn] = useState(true);
 
@@ -39,9 +38,7 @@ export default function LoginPage() {
                                 onClick={() => router.push(`/`)}
                             />
 
-                            <p className={CSS_Text}>
-                                성북 통합 구립도서관 사이트에 오신 것을 환영합니다.
-                            </p>
+                            <p className={CSS_Text}>성북 통합 구립도서관 사이트에 오신 것을 환영합니다.</p>
 
                             <Input id="email_ID" onChange={onLoginChange} />
                             <Input id="password_ID" onChange={onLoginChange} />
@@ -53,27 +50,18 @@ export default function LoginPage() {
 
                             <div className={CSS_ButtonWrap}>
                                 <Button label="로그인" onClick={onLoginInClick} />
-                                <Button
-                                    label="회원가입"
-                                    onClick={() => setIsLogIn((prev) => !prev)}
-                                />
+                                <Button label="회원가입" onClick={() => setIsLogIn((prev) => !prev)} />
                             </div>
                         </>
                     ) : (
                         <>
                             <p className={CSS_Text}>회원 가입</p>
-                            <p className={CSS_Text}>
-                                회원 가입을 위해 아래 빈 칸을 모두 채워 주세요.
-                            </p>
+                            <p className={CSS_Text}>회원 가입을 위해 아래 빈 칸을 모두 채워 주세요.</p>
 
                             <InputField id="email_ID" onChange={onSignUpChange} required />
                             <InputField id="name_ID" onChange={onSignUpChange} required />
                             <InputField id="password_ID" onChange={onSignUpChange} required />
-                            <InputField
-                                id="passwordConfirm_ID"
-                                onChange={onSignUpChange}
-                                required
-                            />
+                            <InputField id="passwordConfirm_ID" onChange={onSignUpChange} required />
 
                             <div className={CSS_ButtonWrap}>
                                 <Button label="취소" onClick={() => setIsLogIn((prev) => !prev)} />

@@ -4,12 +4,12 @@ import Button from "@/components/Atoms/_Button";
 import SearchUI from "@/components/Molecules/Search";
 import BoardsListUI from "../BoardsList";
 
-import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 import { useQuery } from "@apollo/client";
 
 import { Avatar } from "@ark-ui/react/avatar";
 import { css } from "@/common/styled-system/css";
 import { ChevronRightIcon, Wallet2Icon } from "lucide-react";
+import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 
 export default function MyPageUI() {
     const { data: login } = useQuery(FetchUserLoggedInDocument);
@@ -38,7 +38,9 @@ export default function MyPageUI() {
 
                     <div className={CSS_myPage_Flex}>
                         <Wallet2Icon />
-                        <div className={CSS_myPage_Title}>1,000,000 P</div>
+                        <div className={CSS_myPage_Title}>
+                            {login?.fetchUserLoggedIn.userPoint?.amount} P
+                        </div>
                     </div>
 
                     <div className={CSS_myPage_Between}>
