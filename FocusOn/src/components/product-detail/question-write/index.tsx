@@ -6,9 +6,10 @@ import { useParams } from "next/navigation";
 import {
   CreateTravelproductQuestionDocument,
   FetchTravelproductQuestionsDocument,
+  UpdateTravelproductQuestionDocument,
 } from "@/commons/graphql/graphql";
 
-export default function ProductDetailQuestion() {
+export default function ProductDetailQuestion(props) {
   const params = useParams();
   const travelproductId = params.productId as string;
   const [createTravelproductQuestion] = useMutation(
@@ -22,17 +23,45 @@ export default function ProductDetailQuestion() {
       ],
     }
   );
-  const methods = useForm();
+
+  const [updateTravelproductQuestionDocument] = useMutation(
+    UpdateTravelproductQuestionDocument
+  );
+
+  const methods = useForm({
+    defaultValues: {
+      contents: props.question?.contents,
+    },
+  });
+
   const onClickQuestion = async (data) => {
     console.log(data);
+    // 등록하기 뮤테이션
+    if (!props.isEdit) {
+      try {
+        const result = await createTravelproductQuestion({
+          variables: {
+            createTravelproductQuestionInput: { contents: data.contents },
+            travelproductId,
+          },
+        });
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // 수정하기 뮤테이션
     try {
-      const result = await createTravelproductQuestion({
+      const result = await updateTravelproductQuestionDocument({
         variables: {
-          createTravelproductQuestionInput: { contents: data.contents },
-          travelproductId,
+          updateTravelproductQuestionInput: {
+            contents: data.contents,
+          },
+          travelproductQuestionId: props.question._id,
         },
       });
-      console.log(result);
+      props.closeEdit();
     } catch (error) {
       console.error(error);
     }
@@ -40,7 +69,7 @@ export default function ProductDetailQuestion() {
   return (
     <div className={styles.container}>
       {/* 헤더 */}
-      <div className={styles.header}>문의</div>
+      {!props.isEdit && <div className={styles.header}>문의</div>}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onClickQuestion)}>
           <TextareaSoftSFull
@@ -48,7 +77,17 @@ export default function ProductDetailQuestion() {
             placeholder="문의사항을 입력해 주세요."
           />
           <div className={styles.button_container}>
-            <button className={styles.button}>문의하기</button>
+            {props.isEdit && (
+              <button
+                className={styles.button_cancel}
+                onClick={props.closeEdit}
+              >
+                취소
+              </button>
+            )}
+            <button className={styles.button_submit}>
+              {props.isEdit ? "수정" : "문의"}하기
+            </button>
           </div>
         </form>
       </FormProvider>

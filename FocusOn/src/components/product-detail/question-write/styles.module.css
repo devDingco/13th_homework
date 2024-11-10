@@ -23,9 +23,24 @@
 .button_container {
   display: flex;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
-.button {
+.button_cancel {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.button_submit {
   display: flex;
   height: 48px;
   padding: 12px 16px;
@@ -34,4 +49,8 @@
   border-radius: 8px;
   background: var(--gray-B, #000);
   color: white;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
 }
