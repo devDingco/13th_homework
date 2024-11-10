@@ -1,8 +1,34 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { MessageCircleReply, Pencil, X } from "lucide-react";
+import { MessageCircleReply, Pencil, Variable, X } from "lucide-react";
+import { useMutation } from "@apollo/client";
+import {
+  DeleteTravelproductQuestionDocument,
+  FetchTravelproductQuestionsDocument,
+} from "@/commons/graphql/graphql";
 
-export default function QuestionListItem({ question }) {
+export default function QuestionListItem({ question, travelproductId }) {
+  const [deleteTravelproductQuestion] = useMutation(
+    DeleteTravelproductQuestionDocument,
+    {
+      refetchQueries: [
+        {
+          query: FetchTravelproductQuestionsDocument,
+          variables: { travelproductId },
+        },
+      ],
+    }
+  );
+  const onClickDelete = async (id) => {
+    try {
+      const result = await deleteTravelproductQuestion({
+        variables: { travelproductQuestionId: id },
+      });
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className={styles.question_box}>
       <div className={styles.question_item}>
@@ -18,7 +44,12 @@ export default function QuestionListItem({ question }) {
           </div>
           <div className={styles.action_button_container}>
             <Pencil width={20} height={20} />
-            <X width={20} height={20} />
+            <X
+              className={styles.delete_button}
+              width={20}
+              height={20}
+              onClick={() => onClickDelete(question._id)}
+            />
           </div>
         </div>
 

@@ -34,6 +34,10 @@
   gap: 8px;
 }
 
+.delete_button {
+  cursor: pointer;
+}
+
 .date {
   color: #818181;
   font-size: 14px;

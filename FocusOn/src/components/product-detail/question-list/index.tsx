@@ -22,7 +22,11 @@ export default function ProductDetailQuestionList() {
       {questionItems.length > 0 ? (
         <div>
           {questionItems.map((question) => (
-            <QuestionListItem key={question._id} question={question} />
+            <QuestionListItem
+              key={question._id}
+              question={question}
+              travelproductId={travelproductId}
+            />
           ))}
         </div>
       ) : (

@@ -30,6 +30,7 @@ const documents = {
     "\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n": types.FetchTravelproductDocument,
     "\n  mutation toggleTravelproductPick($travelproductId: ID!) {\n    toggleTravelproductPick(travelproductId: $travelproductId)\n  }\n": types.ToggleTravelproductPickDocument,
     "\n  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {\n    fetchTravelproductQuestions(\n      page: $page\n      travelproductId: $travelproductId\n    ) {\n      _id\n      contents\n      user {\n        name\n      }\n      createdAt\n    }\n  }\n": types.FetchTravelproductQuestionsDocument,
+    "\n  mutation deleteTravelproductQuestion($travelproductQuestionId: ID!) {\n    deleteTravelproductQuestion(\n      travelproductQuestionId: $travelproductQuestionId\n    )\n  }\n": types.DeleteTravelproductQuestionDocument,
     "\n  mutation createTravelproductQuestion(\n    $createTravelproductQuestionInput: CreateTravelproductQuestionInput!\n    $travelproductId: ID!\n  ) {\n    createTravelproductQuestion(\n      createTravelproductQuestionInput: $createTravelproductQuestionInput\n      travelproductId: $travelproductId\n    ) {\n      _id\n      contents\n      user {\n        name\n      }\n      createdAt\n    }\n  }\n": types.CreateTravelproductQuestionDocument,
     "\n  query fetchTravelproducts {\n    fetchTravelproducts {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n\n      buyer {\n        name\n      }\n    }\n  }\n": types.FetchTravelproductsDocument,
     "\n  mutation createTravelproduct(\n    $createTravelproductInput: CreateTravelproductInput!\n  ) {\n    createTravelproduct(createTravelproductInput: $createTravelproductInput) {\n      _id\n      seller {\n        _id\n        name\n      }\n    }\n  }\n": types.CreateTravelproductDocument,
@@ -114,6 +115,10 @@ export function graphql(source: "\n  mutation toggleTravelproductPick($travelpro
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {\n    fetchTravelproductQuestions(\n      page: $page\n      travelproductId: $travelproductId\n    ) {\n      _id\n      contents\n      user {\n        name\n      }\n      createdAt\n    }\n  }\n"): (typeof documents)["\n  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {\n    fetchTravelproductQuestions(\n      page: $page\n      travelproductId: $travelproductId\n    ) {\n      _id\n      contents\n      user {\n        name\n      }\n      createdAt\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation deleteTravelproductQuestion($travelproductQuestionId: ID!) {\n    deleteTravelproductQuestion(\n      travelproductQuestionId: $travelproductQuestionId\n    )\n  }\n"): (typeof documents)["\n  mutation deleteTravelproductQuestion($travelproductQuestionId: ID!) {\n    deleteTravelproductQuestion(\n      travelproductQuestionId: $travelproductQuestionId\n    )\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
