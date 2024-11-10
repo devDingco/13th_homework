@@ -49,7 +49,12 @@ export default function LayoutNav() {
         <>
             <nav className={CSS_Nav_Wrap}>
                 <ul className={CSS_Nav_Menu}>
-                    <li onClick={() => router.push(`/`)}>
+                    <li
+                        onClick={() => {
+                            router.push(`/`);
+                            setIsSelect("");
+                        }}
+                    >
                         <Image src={logo} alt="logo" width={50} height={0} />
                     </li>
 

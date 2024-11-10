@@ -1,9 +1,6 @@
 "use client";
 
 import Button from "@/components/Atoms/_Button";
-import SearchUI from "@/components/Molecules/Search";
-import BoardsListUI from "../BoardsList";
-
 import { useQuery } from "@apollo/client";
 
 import { Avatar } from "@ark-ui/react/avatar";
@@ -38,9 +35,7 @@ export default function MyPageUI() {
 
                     <div className={CSS_myPage_Flex}>
                         <Wallet2Icon />
-                        <div className={CSS_myPage_Title}>
-                            {login?.fetchUserLoggedIn.userPoint?.amount} P
-                        </div>
+                        <div className={CSS_myPage_Title}>{login?.fetchUserLoggedIn.userPoint?.amount} P</div>
                     </div>
 
                     <div className={CSS_myPage_Between}>
@@ -64,9 +59,6 @@ export default function MyPageUI() {
                     <Button label="북마크" />
                 </div>
             </section>
-
-            <SearchUI />
-            <BoardsListUI />
         </>
     );
 }
