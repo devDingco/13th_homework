@@ -120,7 +120,6 @@ export default function useTravelProductWrite({
   };
 
   const onClickUpdate = async (data: ITravelProductSchema) => {
-    const id = String(params.travelProductId);
     const updatedData = createUpdatedData(data);
 
     try {
