@@ -25,8 +25,8 @@ export function AddressField({ required = false }: AddressFieldProps) {
 
   // 주소 검색 완료 핸들러
   const handleComplete = (address: Address) => {
-    setValue("addressInput.zoneCode", address.zonecode);
-    setValue("addressInput.address", address.address);
+    setValue("address.zoneCode", address.zonecode);
+    setValue("address.address", address.address);
     setIsOpen(false);
   };
 
@@ -41,7 +41,7 @@ export function AddressField({ required = false }: AddressFieldProps) {
       {/* 우편번호 입력 */}
       <div className="flex gap-2">
         <Input
-          {...register("addressInput.zoneCode")}
+          {...register("address.zoneCode")}
           placeholder="우편번호"
           disabled
           className="w-32"
@@ -53,7 +53,7 @@ export function AddressField({ required = false }: AddressFieldProps) {
 
       {/* 기본 주소 입력 */}
       <Input
-        {...register("addressInput.address")}
+        {...register("address.address")}
         placeholder="기본 주소"
         disabled
         className="w-full"
@@ -61,7 +61,7 @@ export function AddressField({ required = false }: AddressFieldProps) {
 
       {/* 상세 주소 입력 */}
       <Input
-        {...register("addressInput.detailAddress")}
+        {...register("address.detailAddress")}
         placeholder="상세 주소를 입력해주세요"
         className="w-full"
       />

@@ -76,19 +76,22 @@ export default function SideBar() {
           <div className="flex items-center space-x-3">
             {/* profile image */}
             {session?.user.image ? (
-              <Image
-                src={session.user.image}
-                alt="Profile"
-                width={40}
-                height={40}
-                className="object-cover rounded-full"
-              />
+              <div className="w-10 h-10 rounded-full overflow-hidden">
+                <Image
+                  src={session.user.image}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="object-cover rounded-full w-full h-full"
+                />
+              </div>
             ) : (
+              // 이미지 없으면 기본 이미지 뜨게 해야하나
               <div className="w-10 h-10 rounded-full bg-gray-200" />
             )}
             <div>
               <div className="font-medium text-gray-800">
-                {session?.user?.name}
+                {session?.user?.nickname}
               </div>
               <div className="text-sm text-gray-500">내 프로필</div>
             </div>

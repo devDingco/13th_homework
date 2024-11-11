@@ -32,12 +32,26 @@ export const signupSchema = z
     email: emailSchema,
     password: passwordSchema,
     passwordConfirm: z.string(),
-    addressInput: z.object({
+    address: z.object({
       zoneCode: z.string().optional(),
       address: z.string().optional(),
       detailAddress: z.string().optional(),
     }),
-    image: z.string().nullable(),
+    image: z
+      .any()
+      .optional()
+      .refine((file) => {
+        if (!file) return true; // 파일이 없는 경우 통과
+        return file instanceof File;
+      }, "올바른 파일 형식이 아닙니다")
+      .refine((file) => {
+        if (!file) return true;
+        return file.type.startsWith("image/");
+      }, "이미지 파일만 업로드 가능합니다")
+      .refine((file) => {
+        if (!file) return true;
+        return file.size <= 5 * 1024 * 1024; // 5MB
+      }, "파일 크기는 5MB 이하여야 합니다"),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "비밀번호가 일치하지 않습니다",

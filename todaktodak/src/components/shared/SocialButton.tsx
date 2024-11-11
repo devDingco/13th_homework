@@ -24,7 +24,6 @@ export function SocialButton({ provider }: SocialButtonProps) {
       // NextAuth의 signIn 함수를 호출하여 소셜 로그인 시작
       const result = await signIn(provider, options);
 
-      // 결과 로깅 (디버깅용)
       console.log(`${provider} 로그인 결과:`, result);
     } catch (error) {
       console.error(`${provider} 로그인 실패:`, error);

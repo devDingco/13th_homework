@@ -28,9 +28,11 @@ export const authOptions: AuthOptions = {
               },
               body: JSON.stringify({
                 query: `
-                  mutation login($loginUser: loginUser!) {
+                  mutation login($loginUser: LoginUser!) {
                     login(loginUser: $loginUser) {
                       accessToken
+                      nickname
+                      image
                     }
                   }
                 `,
@@ -54,6 +56,8 @@ export const authOptions: AuthOptions = {
               id: credentials?.email!,
               email: credentials?.email,
               accessToken: data.data.login.accessToken, //graphql의 accessToken
+              nickname: data.data.login.nickname,
+              image: data.data.login.image,
             };
           }
 
@@ -129,6 +133,7 @@ export const authOptions: AuthOptions = {
         token.email = user.email;
         token.name = user.name;
         token.image = user.image;
+        token.nickname = user.nickname;
 
         // 로그인 타입에 따라 토큰 처리 분리
         if (account?.type === "credentials") {
@@ -154,6 +159,7 @@ export const authOptions: AuthOptions = {
         session.user.email = token.email as string;
         session.user.name = token.name as string;
         session.user.image = token.image as string;
+        session.user.nickname = token.nickname as string;
       }
       return session;
     },
