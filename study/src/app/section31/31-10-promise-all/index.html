@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Promise All 실습</title>
+    <script>
+      // Promise 연습 - 3개의 Promise를 순차적으로 실행되기 때문에 총 6초가 걸림
+      const startPromise = async () => {
+        console.time("시간측정"); // 시간 측정 시작 (문자열은 타이머 이름으로 아래 timeEnd에 똑같이 넣어주면 됨)
+
+        const result1 = await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("첫번째 Promise 완료");
+          }, 2000);
+        });
+        const result2 = await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("두번째 Promise 완료");
+          }, 3000);
+        });
+        const result3 = await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("세번째 Promise 완료");
+          }, 1000);
+        });
+
+        // 이미지 3개를 각각 업로드해서 아래에 저장했다고 가정
+        const result = [result1, result2, result3];
+        console.log(result);
+
+        console.timeEnd("시간측정"); // 시간 측정 종료
+      };
+
+      // Promise All 연습 - 3개의 Promise를 동시에 실행되기 때문에 총 3초가 걸림
+      const startPromiseAll = async () => {
+        /* 예시
+        await Promise.all([promise,promise,promise])
+        await Promise.all([fetch('url'),fetch('url'),fetch('url')])
+        */
+
+        console.time("시간측정-promiseAll"); // 시간 측정 시작 (문자열은 타이머 이름으로 아래 timeEnd에 똑같이 넣어주면 됨)
+
+        const result1 = new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("첫번째 Promise 완료");
+          }, 2000);
+        });
+        const result2 = new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("두번째 Promise 완료");
+          }, 3000);
+        });
+        const result3 = new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("세번째 Promise 완료");
+          }, 1000);
+        });
+
+        // 이미지 3개를 각각 업로드해서 아래에 저장했다고 가정
+        const result = await Promise.all([result1, result2, result3]);
+        console.log(result);
+
+        console.timeEnd("시간측정-promiseAll"); // 시간 측정 종료
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="startPromise()">Promise 연습하기</button>
+    <button onclick="startPromiseAll()">Promise All 연습하기</button>
+  </body>
+</html>
