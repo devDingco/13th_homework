@@ -21,7 +21,7 @@ export const useLoginPage = () => {
 
   const router = useRouter();
 
-  const { control, getValues } = useForm({
+  const methods = useForm({
     mode: "onChange",
   });
 
@@ -37,7 +37,7 @@ export const useLoginPage = () => {
 
   //! 로그인 제출 함수
   const signInSubmit = async () => {
-    const { email, password } = getValues();
+    const { email, password } = methods.getValues();
     // 0. 이메일과 비밀번호가 입력되었는지 확인
     if (!email || !password) {
       return alert("이메일과 비밀번호를 입력해 주세요.");
@@ -60,5 +60,5 @@ export const useLoginPage = () => {
     }
   };
 
-  return { control, signInSubmit, router, userLogOut };
+  return { signInSubmit, router, userLogOut, methods };
 };
