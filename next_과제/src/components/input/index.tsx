@@ -19,6 +19,7 @@ const Input = (props: InputProps) => {
     showCount,
     maxLength,
     addbutton,
+    onKeyUp,
   } = props;
 
   const { formRegister, formState, control } = useInput();
@@ -45,6 +46,7 @@ const Input = (props: InputProps) => {
                 size="large"
                 placeholder={placeholder}
                 disabled={readOnly}
+                onKeyUp={(e) => onKeyUp && onKeyUp(e)}
                 {...field}
               />
             )}
