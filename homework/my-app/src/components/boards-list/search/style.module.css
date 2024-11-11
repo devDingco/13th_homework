@@ -1,15 +1,19 @@
 .inputContainer {
   display: flex;
-  justify-content: flex-end;
-  margin: 2vw 0 2vw 0; /* 쉼표 대신 공백 사용 */
+  justify-content: center;
+  align-items: center; /* 수직 중앙 정렬 추가 */
+  margin: 2vw auto; /* 수평 정렬 추가 */
+  max-width: 80vw;
 }
+
 .searchBar {
   display: flex;
+  justify-content: center; /* 내부 아이콘이나 텍스트 중앙 정렬 */
+  align-items: center; /* 내부 요소 수직 중앙 정렬 */
   width: 30vw;
   height: 48px;
   padding: 1vw;
-  align-items: center;
-
   border-radius: 8px;
-  background: var(#fff);
+  background: #fff; /* `var()`는 변수명만 써야 하므로 수정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 (선택 사항) */
 }

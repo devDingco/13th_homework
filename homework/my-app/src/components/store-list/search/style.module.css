@@ -1,0 +1,15 @@
+.inputContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2vw 0 2vw 0; /* 쉼표 대신 공백 사용 */
+}
+.searchBar {
+  display: flex;
+  width: 30vw;
+  height: 48px;
+  padding: 1vw;
+  align-items: center;
+
+  border-radius: 8px;
+  background: var(#fff);
+}
