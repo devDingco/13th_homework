@@ -1,18 +1,15 @@
-import { forwardRef } from "react";
 import { Input as AntInput } from "antd";
-import type { InputRef } from "antd";
 import type { InputProps } from "./types";
-import { Controller } from "react-hook-form";
 import { useInput } from "./hook";
+import { Controller } from "react-hook-form";
+
 import styles from "./styles.module.scss";
 const { TextArea } = AntInput;
 
-const Input = forwardRef<InputRef, InputProps>((props, ref) => {
+const Input = (props: InputProps) => {
   const {
     id,
     title,
-    errormessage,
-    control,
     defaultValue,
     readOnly,
     type,
@@ -24,7 +21,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
     addbutton,
   } = props;
 
-  const { formResister } = useInput();
+  const { formRegister, formState, control } = useInput();
 
   return (
     <>
@@ -40,7 +37,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           <Controller
             name={id.includes("_") ? id.split("_")[0] : id} // useform 컨트롤 용 name으로 사용
             control={control}
-            rules={formResister[id]}
+            rules={formRegister[id]}
             defaultValue={defaultValue}
             render={({ field }) => (
               <AntInput.Password
@@ -49,7 +46,6 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
                 placeholder={placeholder}
                 disabled={readOnly}
                 {...field}
-                ref={ref}
               />
             )}
           />
@@ -57,7 +53,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           <Controller
             name={id.includes("_") ? id.split("_")[0] : id}
             control={control}
-            rules={formResister[id]}
+            rules={formRegister[id]}
             defaultValue={defaultValue}
             render={({ field }) => (
               <div id={styles.textAreaBox}>
@@ -69,7 +65,6 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
                   maxLength={maxLength}
                   placeholder={placeholder}
                   {...field}
-                  ref={ref}
                 />
               </div>
             )}
@@ -78,7 +73,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           <Controller
             name={id.includes("_") ? id.split("_")[0] : id}
             control={control}
-            rules={formResister[id]}
+            rules={formRegister[id]}
             defaultValue={defaultValue}
             render={({ field }) => (
               <div className={addbutton ? "flex gap-3" : ""}>
@@ -89,10 +84,9 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
                   placeholder={placeholder}
                   type={type}
                   {...field}
-                  ref={ref}
                   count={{
-                    show: formResister[id]?.maxLength ? true : false,
-                    max: formResister[id]?.maxLength?.value || 0,
+                    show: formRegister[id]?.maxLength ? true : false,
+                    max: formRegister[id]?.maxLength?.value || 0,
                   }}
                 />
                 {addbutton && addbutton} {/* 추가 버튼 (중복 확인) */}
@@ -101,11 +95,13 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
           />
         )}
 
-        {errormessage && <p className="toolTip">{errormessage}</p>}
+        {formState.errors[id]?.message && (
+          <p className="toolTip">{formState.errors[id]?.message.toString()}</p>
+        )}
       </label>
     </>
   );
-});
+};
 
 Input.displayName = "Input";
 

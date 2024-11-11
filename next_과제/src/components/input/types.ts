@@ -1,10 +1,9 @@
+import { InputRef } from "antd";
 import { ChangeEvent } from "react";
-import { Control } from "react-hook-form";
 
 export type InputProps = {
   id: string;
   title?: string;
-  errormessage?: string;
   type?: string;
   accept?: string;
   required?: boolean;
@@ -15,17 +14,17 @@ export type InputProps = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   addonAfter?: string;
   addonBefore?: string;
-  control?: Control;
   rows?: number;
   showCount?: boolean;
   maxLength?: number;
   textMaxCount?: number;
   addbutton?: React.ReactNode;
+  ref?: InputRef;
 };
 
-export interface IformResister {
+export interface IformRegister {
   [key: string]: {
-    required?: string;
+    required?: string | boolean;
     pattern?: {
       value: RegExp;
       message: string;
@@ -38,5 +37,9 @@ export interface IformResister {
       value: number;
       message: string;
     };
+    validate?: (
+      value: string,
+      watch: { [key: string]: string }
+    ) => string | boolean;
   };
 }
