@@ -10,6 +10,8 @@ import { useLoginStore } from "@/commons/stores/login-store";
 const Header = () => {
   const { isLogged } = useLoginStore();
 
+  // console.log("로그인 상태",isLogged);
+
   const {
     isHeaderHide,
     menuItems,
