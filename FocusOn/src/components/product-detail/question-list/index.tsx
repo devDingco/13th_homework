@@ -30,7 +30,7 @@ export default function ProductDetailQuestionList() {
           ))}
         </div>
       ) : (
-        <div className={styles.no_question}>등록된 댓글이 없습니다.</div>
+        <div className={styles.no_question}>등록된 문의사항이 없습니다.</div>
       )}
     </div>
   );

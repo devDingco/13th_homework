@@ -7,9 +7,13 @@
   /* --main-color-hover: #cb4747;
   --main-color-back: #fff5f5; */
 
-  --main-color: #00af98;
+  /* --main-color: #00af98;
   --main-color-hover: #00917e;
-  --main-color-back: #e6fffb;
+  --main-color-back: #e6fffb; */
+
+  --main-color: #1ca673;
+  --main-color-hover: #00917e;
+  --main-color-back: #f2f2f2;
   --gray: #757575;
   --border: #d4d3d3;
   /* --sub-color:  */

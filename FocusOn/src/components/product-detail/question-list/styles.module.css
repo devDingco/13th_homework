@@ -2,3 +2,11 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+.no_question {
+  color: #777;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 40px 1rem;
+}
