@@ -68,6 +68,16 @@ export default function Navigation() {
 	const showModal = () => setIsOpen(true);
 	const handleCancel = () => setIsOpen(false);
 
+	const onClickLogout = async () => {
+		try {
+			await logoutUser();
+			setAccessToken(null);
+			router.push('/login'); // 로그아웃 후 로그인 페이지로 이동
+		} catch (error) {
+			if (error instanceof Error) console.error('로그아웃 실패:', error);
+		}
+	};
+
 	const handleOk = async () => {
 		if (!selectedAmount) {
 			alert('충전할 금액을 선택해주세요.');
@@ -85,16 +95,6 @@ export default function Navigation() {
 			setIsOpen(false);
 		} catch (error) {
 			if (error instanceof Error) console.error('결제 실패:', error);
-		}
-	};
-
-	const onClickLogout = async () => {
-		try {
-			await logoutUser();
-			setAccessToken(null);
-			router.push('/login'); // 로그아웃 후 로그인 페이지로 이동
-		} catch (error) {
-			if (error instanceof Error) console.error('로그아웃 실패:', error);
 		}
 	};
 

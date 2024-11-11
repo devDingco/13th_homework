@@ -30,7 +30,7 @@ export default function BoardBanner() {
 				<Images
 					src={banner1}
 					alt="보드배너이미지1"
-					className="h-full w-full object-cover"
+					className="h-full w-full rounded-lg object-cover"
 					sizes="100vw"
 				/>
 			</SwiperSlide>
@@ -38,7 +38,7 @@ export default function BoardBanner() {
 				<Images
 					src={banner2}
 					alt="보드배너이미지2"
-					className="h-full w-full object-cover"
+					className="h-full w-full rounded-lg object-cover"
 					sizes="100vw"
 				/>
 			</SwiperSlide>
@@ -46,7 +46,7 @@ export default function BoardBanner() {
 				<Images
 					src={banner3}
 					alt="보드배너이미지3"
-					className="h-full w-full object-cover"
+					className="h-full w-full rounded-lg object-cover"
 					sizes="100vw"
 				/>
 			</SwiperSlide>

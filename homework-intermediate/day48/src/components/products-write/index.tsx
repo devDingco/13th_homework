@@ -16,8 +16,10 @@ import { useParams, useRouter } from 'next/navigation';
 import {
 	CREATE_TRAVEL_PRODUCT,
 	UPDATE_TRAVEL_PRODUCT,
-} from '@/app/products/queries';
+} from '@/components/products-write/queries';
 import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
+
+declare const window: Window & { kakao: any };
 
 const travelProductSchema: z.ZodType<CreateTravelproductInput> = z.object({
 	name: z.string().min(1, { message: '상품명을 입력해 주세요.' }),
@@ -41,18 +43,20 @@ export default function ProductWrite(props) {
 	const router = useRouter();
 	const params = useParams();
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { register, handleSubmit, formState, reset, setValue } =
+	const { register, handleSubmit, formState, reset, setValue, watch } =
 		useForm<CreateTravelproductInput>({
 			mode: 'onChange',
 			resolver: zodResolver(travelProductSchema),
 		});
+	const address = watch('travelproductAddress.address');
+	console.log('🚀 ~ ProductWrite ~ address:', address);
 
 	// Modal 토글
 	const onToggleZipcodeModal = () => setIsModalOpen((prev) => !prev);
 
 	// Modal 완료 버튼 로직
 	const onZipcodeModalComplete = (data: Address) => {
-		// console.log('🚀 ~ onZipcodeModalComplete ~ data:', data);
+		console.log('🚀 ~ onZipcodeModalComplete ~ data:', data);
 		setValue('travelproductAddress.zipcode', data.zonecode);
 		setValue('travelproductAddress.address', data.address);
 		onToggleZipcodeModal();
@@ -86,11 +90,62 @@ export default function ProductWrite(props) {
 		router.push(`/products/${params.travelproductId}`);
 	};
 
+	// 수정 시에 기존 데이터 불러오기
 	useEffect(() => {
 		if (props.data?.fetchTravelproduct) {
 			reset(props.data?.fetchTravelproduct);
 		}
 	}, [props.data, reset]);
+
+	// 카카오지도 API 사용하기
+	useEffect(() => {
+		//services 라이브러리 불러오기
+		const script = document.createElement('script');
+		script.src =
+			'//dapi.kakao.com/v2/maps/sdk.js?appkey=eabb3c1ebe27ec04b62de93c0991906a&libraries=services&autoload=false';
+		document.head.appendChild(script);
+		script.onload = () => {
+			window.kakao.maps.load(function () {
+				// 지도를 담을 영역의 DOM 레퍼런스
+				const container = document.getElementById('map');
+				// 지도 생성시 초기 옵션
+				const options = {
+					center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+					level: 3,
+				};
+				// 지도 생성
+				const map = new window.kakao.maps.Map(container, options);
+
+				if (address) {
+					// 주소-좌표 변환 객체 생성
+					const geocoder = new window.kakao.maps.services.Geocoder();
+
+					// address로 주소 검색
+					geocoder.addressSearch(address, (result, status) => {
+						if (status === window.kakao.maps.services.Status.OK) {
+							// 결과값으로 좌표값 얻기
+							const coords = new window.kakao.maps.LatLng(
+								result[0].y,
+								result[0].x,
+							);
+
+							// 좌표값으로 마커로 표시
+							const marker = new window.kakao.maps.Marker({
+								map: map,
+								position: coords,
+							});
+							// 지도 중심을 결과값으로 받은 위치로 이동
+							map.setCenter(coords);
+
+							// react-hook-form의 위도, 경도 필드의 값 설정
+							setValue('travelproductAddress.lat', Number(result[0].y));
+							setValue('travelproductAddress.lng', Number(result[0].x));
+						}
+					});
+				}
+			});
+		};
+	}, [address]); // address가 변경될 때마다 실행
 
 	return (
 		<div className="flex w-full max-w-7xl flex-col gap-10">
@@ -116,7 +171,7 @@ export default function ProductWrite(props) {
 					/>
 					<div className="text-red-500">{formState.errors.name?.message}</div>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 한줄 요약 */}
 				<div className="flex flex-col gap-2">
@@ -137,7 +192,7 @@ export default function ProductWrite(props) {
 						{formState.errors.remarks?.message}
 					</div>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 상품 설명 */}
 				<div className="flex flex-col gap-2">
@@ -150,14 +205,14 @@ export default function ProductWrite(props) {
 					<textarea
 						id="product_desc"
 						{...register('contents')}
-						className="h-[477px] rounded-lg border px-4 py-3"
+						className="h-[29.8125rem] rounded-lg border px-4 py-3"
 						placeholder="내용을 입력해 주세요."
 					/>
 					<div className="text-red-500">
 						{formState.errors.contents?.message}
 					</div>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 판매 가격 */}
 				<div className="flex flex-col gap-2">
@@ -177,7 +232,7 @@ export default function ProductWrite(props) {
 					/>
 					<div className="text-red-500">{formState.errors.price?.message}</div>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 태그 입력 */}
 				<div className="flex flex-col gap-2">
@@ -189,11 +244,11 @@ export default function ProductWrite(props) {
 						placeholder="태그를 입력해 주세요."
 					/>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 주소 입력 */}
 				<div className="flex gap-10">
-					<div className="flex w-[396px] flex-col gap-10">
+					<div className="flex w-[24.75rem] flex-col gap-10">
 						{/* 우편번호 검색 */}
 						<div className="flex flex-col gap-2">
 							<label className="after:ml-1 after:text-red-500 after:content-['*']">
@@ -208,6 +263,7 @@ export default function ProductWrite(props) {
 									readOnly
 								/>
 								<button
+									type="button"
 									className="rounded-lg border border-black px-4 py-3"
 									onClick={onToggleZipcodeModal}
 								>
@@ -248,6 +304,8 @@ export default function ProductWrite(props) {
 								id="product_LAT"
 								className="rounded-lg border px-4 py-3"
 								placeholder="주소를 먼저 입력해 주세요."
+								{...register('travelproductAddress.lat')}
+								readOnly
 							/>
 							<label htmlFor="product_LNG">경도(LNG)</label>
 							<input
@@ -256,6 +314,8 @@ export default function ProductWrite(props) {
 								id="product_LNG"
 								className="rounded-lg border px-4 py-3"
 								placeholder="주소를 먼저 입력해 주세요."
+								{...register('travelproductAddress.lng')}
+								readOnly
 							/>
 						</div>
 					</div>
@@ -263,15 +323,19 @@ export default function ProductWrite(props) {
 					{/* 상세 위치 지도 */}
 					<div className="flex flex-col gap-4">
 						<div>상세 위치</div>
-						<Image
-							src={'https://placehold.co/844x312'}
-							alt="지도"
-							width={844}
-							height={312}
-						/>
+						{address ? (
+							<div id="map" className="h-[312px] w-[844px]"></div>
+						) : (
+							<Image
+								src={'https://placehold.co/844x312'}
+								alt="지도"
+								width={844}
+								height={312}
+							/>
+						)}
 					</div>
 				</div>
-				<Divider className="h-[1px] bg-[#E4E4E4]" />
+				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />
 
 				{/* 사진 입력 */}
 				<div className="flex flex-col gap-2">

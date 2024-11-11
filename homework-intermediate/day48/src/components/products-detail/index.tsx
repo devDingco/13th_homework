@@ -14,6 +14,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import {
 	CreatePointTransactionOfBuyingAndSellingDocument,
 	FetchTravelproductDocument,
+	FetchUserLoggedInDocument,
 	ToggleTravelproductPickDocument,
 } from '@/commons/graphql/graphql';
 import { useState } from 'react';
@@ -22,6 +23,8 @@ import ProductQuestionList from './product-question-list';
 
 export default function ProductDetail(props) {
 	const params = useParams();
+	const { data: userLoggedIn } = useQuery(FetchUserLoggedInDocument);
+	console.log('🚀 ~ ProductDetail ~ userLoggedIn:', userLoggedIn);
 	const { data } = useQuery(FetchTravelproductDocument, {
 		variables: { travelproductId: String(params.travelproductId) },
 	});
@@ -39,7 +42,7 @@ export default function ProductDetail(props) {
 	);
 
 	const onClickBookmark = async () => {
-		if (!localStorage.getItem('accessToken')) {
+		if (!userLoggedIn) {
 			Modal.info({ content: '로그인 이후에 사용해 주세요.' });
 			return;
 		}

@@ -63,9 +63,6 @@ const categories = [
 ];
 
 export default function ProductListPage() {
-	// prevEl, nextEl을 위한 ref 생성
-	const prevButtonRef = useRef(null);
-	const nextButtonRef = useRef(null);
 	const [dateRange, setDateRange] = useState('');
 
 	return (
@@ -73,14 +70,10 @@ export default function ProductListPage() {
 			{/* Hero Banner */}
 			<div className="group relative mb-8">
 				<Swiper
-					modules={[Navigation, Autoplay]}
+					modules={[Navigation]}
 					spaceBetween={20}
 					slidesPerView={1.2}
 					loop={true}
-					autoplay={{
-						delay: 3000,
-						disableOnInteraction: false,
-					}}
 					navigation={{
 						prevEl: '.swiper-button-prev', // 클래스명으로 지정
 						nextEl: '.swiper-button-next', // 클래스명으로 지정
@@ -89,7 +82,7 @@ export default function ProductListPage() {
 				>
 					{bannerItems.map((item) => (
 						<SwiperSlide key={item.id}>
-							<div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+							<div className="relative aspect-[5/3] overflow-hidden rounded-2xl">
 								{/* Image with gradient overlay */}
 								<div className="absolute inset-0">
 									<Image
@@ -141,12 +134,12 @@ export default function ProductListPage() {
 			</div>
 
 			{/* Search Section */}
-			<div className="mb-8">
+			<div className="mb-8 flex flex-col gap-2">
 				<h2 className="mb-4 text-2xl font-bold">
 					여기에서만 예약할 수 있는 숙소
 				</h2>
 				<div className="mb-4 flex gap-2">
-					<div className="flex gap-2">
+					<div className="flex gap-3">
 						<button className="rounded-full bg-black px-4 py-2 text-sm font-medium text-white">
 							예약 가능 숙소
 						</button>
