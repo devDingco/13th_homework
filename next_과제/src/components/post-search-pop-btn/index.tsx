@@ -4,16 +4,10 @@ import { useState } from "react";
 
 type PostSearchPopProps = {
   disabled?: boolean;
-
-  setaddress: (_: string, value: string) => void;
-  setzonecode: (_: string, value: string) => void;
-  addressKeyName: string;
-  addressPostKeyName: string;
-
-  setLat?: (_: string, value: string) => void;
-  setLng?: (_: string, value: string) => void;
-  addressLatKeyName?: string;
-  addressLngKeyName?: string;
+  setaddress: (value: string) => void;
+  setzonecode: (value: string) => void;
+  setLat?: (value: string) => void;
+  setLng?: (value: string) => void;
 };
 
 interface dataType {
@@ -27,17 +21,7 @@ interface dataType {
 const PostSearchPopBtn = (props: PostSearchPopProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {
-    setaddress,
-    setzonecode,
-    setLat,
-    setLng,
-    disabled = false,
-    addressKeyName,
-    addressPostKeyName,
-    addressLatKeyName,
-    addressLngKeyName,
-  } = props;
+  const { setaddress, setzonecode, setLat, setLng, disabled = false } = props;
 
   const handleComplete = (data: dataType) => {
     let fullAddress = data.address;
@@ -56,13 +40,13 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
     }
 
     // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    setaddress(addressKeyName, fullAddress);
-    setzonecode(addressPostKeyName, zoneCode);
+    setaddress(fullAddress);
+    setzonecode(zoneCode);
 
     // 주소 -> 좌표 변환 요청
     fetchCoordinates(fullAddress);
 
-    setIsModalOpen(false);
+    setIsModalOpen(false); // 모달 닫기
   };
 
   const fetchCoordinates = async (address: string) => {
@@ -87,8 +71,8 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
       const data = await response.json();
       if (data.documents.length > 0) {
         const { y, x } = data.documents[0];
-        setLat && addressLatKeyName && setLat(addressLatKeyName, y);
-        setLng && addressLngKeyName && setLng(addressLngKeyName, x);
+        setLat(y);
+        setLng(x);
       } else {
         console.error("좌표를 찾을 수 없습니다.");
       }
