@@ -1,0 +1,29 @@
+.paginationLayout {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  margin: 20px 20px 40px 20px;
+}
+
+.prevButton,
+.nextButton {
+  display: flex;
+  color: #c7c7c7;
+  align-items: center;
+  gap: 8px;
+}
+
+.indexButton {
+  width: 32px;
+  height: 32px;
+  color: #777777;
+  text-align: center;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.indexButton:hover {
+  font-family: "Pretendard-Bold.otf";
+  color: #000000;
+  background-color: #f2f2f2;
+}
