@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CommentListItem from "../comment-list-item";
 
 export default function BoardCommentList() {
-    const { data, onChangeStar, onNext, hasMore, onClickEditButton } = useBoardCommentList();
+    const { data, onChangeStar, onNext, hasMore } = useBoardCommentList();
     return(
         <div className={styles.comment_list_wrap}>
             <InfiniteScroll

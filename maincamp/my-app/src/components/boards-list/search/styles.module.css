@@ -1,0 +1,33 @@
+.searchWrap{
+    width:1280px;
+    margin:0 auto;
+}
+.searchBar{
+    display:flex;
+    align-items:center;
+    width:1280px;
+    height:48px;
+    margin:0 auto;
+}
+.fontSize{
+    font-size:28px;
+}
+.searchBarInput > input{
+    width:640px;
+    height:48px;
+}
+
+.searchBtn{
+    width:64px;
+    height:48px;
+    color:#fff;
+    background-color:#000;
+    border-radius:8px;
+}
+.tripBtn{
+    width:162px;
+    height:48px;
+    border-radius:8px;
+    color:#fff;
+    background-color:#2974E5;
+}

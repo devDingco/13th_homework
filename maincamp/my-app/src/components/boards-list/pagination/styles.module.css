@@ -5,11 +5,26 @@
     justify-content:center;
     gap:40px;
 }
-.listPrev, .listNext, .paginationNumber{
+/* .listPrev, .listNext, .paginationNumber{
     font-size:16px;
     cursor:pointer;
-}
+} */
 
 .pagination button span{
     font-size:20px;
+}
+
+.paginationNumber {
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #f8f9fa; /* 기본 배경색 */
+    color: #000; /* 기본 글자색 */
+    border-radius: 4px;
+    font-size:16px;
+}
+
+.paginationNumber.selected {
+    background-color: #007bff; /* 선택된 페이지 배경색 */
+    color: #fff; /* 선택된 페이지 글자색 */
 }
