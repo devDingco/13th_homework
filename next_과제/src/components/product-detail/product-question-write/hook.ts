@@ -1,5 +1,3 @@
-"use client";
-
 import {
   CreateTravelproductQuestionDocument,
   UpdateTravelproductQuestionDocument,
@@ -9,38 +7,31 @@ import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { useLoginStore } from "@/commons/stores/login-store";
 
 import { IuseQuestionWriteProps, Iuseform } from "./types";
 
 export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
-  const { data, editModeHandler } = props;
+  const { editModeHandler } = props;
+  const { isLogged } = useLoginStore();
 
-  const {
-    getValues,
-    setValue,
-    control,
-    formState: { isDirty, isValid, errors },
-  } = useForm<Iuseform>({
+  const methods = useForm<Iuseform>({
     mode: "onChange",
   });
 
   const { productId }: { productId: string } = useParams();
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
-  const [modalType, setModalType] = useState(""); // 모달 타입
-
-  const modalControl = ({ type }: { type: string }) => {
-    setIsModalOpen((isOpen) => !isOpen);
-    setModalType(type);
-  };
 
   const [createPrdQuestion] = useMutation(CreateTravelproductQuestionDocument);
   const [updatePrdQuestion] = useMutation(UpdateTravelproductQuestionDocument);
 
   // ! 질문 등록하기
   const createQuestion = async () => {
-    const { questionContents } = getValues();
+    const { questionContents } = methods.getValues();
     console.log("질문 내용", questionContents);
+    // 로그인한 상태인지 확인
+    if (!isLogged) {
+      alert("로그인이 필요합니다.");
+    }
     try {
       await createPrdQuestion({
         variables: {
@@ -57,7 +48,7 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
         ],
       });
       alert("질문이 등록되었습니다.");
-      setValue("questionContents", ""); // 질문 입력창 초기화
+      methods.setValue("questionContents", ""); // 질문 입력창 초기화
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +56,7 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
 
   // ! 질문 수정하기
   const updateQuestion = async (questionId: string) => {
-    const { questionContents } = getValues();
+    const { questionContents } = methods.getValues();
     try {
       await updatePrdQuestion({
         variables: {
@@ -94,13 +85,6 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
   return {
     createQuestion,
     updateQuestion,
-    isDirty,
-    isValid,
-    errors,
-    control,
-    data,
-    isModalOpen,
-    setIsModalOpen,
-    modalType,
+    methods,
   };
 };

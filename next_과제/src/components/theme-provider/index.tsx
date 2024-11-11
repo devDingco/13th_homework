@@ -4,6 +4,8 @@ import { ConfigProvider, theme as antdTheme, ThemeConfig } from "antd";
 import { useEffect, useState, useRef } from "react";
 import DarkModeBtn from "@/components/dark-mode-btn";
 import locale from "antd/locale/ko_KR";
+import ModalAlertBox from "@/components/modal-alert-box";
+import { useModalStore } from "@/commons/stores/modal-store";
 
 export default function ThemeProvider({
   children,
@@ -44,8 +46,11 @@ export default function ThemeProvider({
 
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
+  const { isModal } = useModalStore();
+
   return (
     <>
+      {isModal.type !== "" && <ModalAlertBox />}
       <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
       <ConfigProvider
         locale={locale}

@@ -26,16 +26,10 @@ export const useProductWrite = () => {
       },
     }
   );
-
   const data = travelProductData?.fetchTravelproduct;
 
-  const {
-    control,
-    setValue,
-    formState: { errors, isValid, isDirty },
-    getValues,
-    watch,
-  } = useForm<IformList>({
+  // !react-hook-form 사용
+  const methods = useForm<IformList>({
     mode: "onChange",
   });
 
@@ -78,7 +72,7 @@ export const useProductWrite = () => {
       productAddressDetail,
       productAddressLAT,
       productAddressLNG,
-    } = getValues();
+    } = methods.getValues();
 
     const createProductVariables = {
       createTravelproductInput: {
@@ -120,7 +114,7 @@ export const useProductWrite = () => {
       productAddressDetail,
       productAddressLAT,
       productAddressLNG,
-    } = getValues();
+    } = methods.getValues();
 
     const updateVariables = {
       updateTravelproductInput: {
@@ -150,6 +144,7 @@ export const useProductWrite = () => {
     }
   };
 
+  // !이미지 업로드 핸들러
   const handleChangeImg: UploadProps["onChange"] = async ({ file }) => {
     if (!file) {
       return;
@@ -197,26 +192,34 @@ export const useProductWrite = () => {
     }
   };
 
+  // ! 상품 내용 변경
+  const onChangeProductContents = (html: string) => {
+    methods.setValue("productContents", html === "<p><br></p>" ? "" : html);
+    methods.trigger("productContents");
+  };
+
+  // ! 주소 변경
+  const setAddress = (field: keyof IformList, value: string) => {
+    methods.setValue(field, value);
+    methods.trigger(field);
+  };
+
   return {
     handleChangeImg,
     createProductClick,
     updateProductClick,
-    control,
     imgFileList,
     previewOpen,
     setPreviewImage,
     previewImage,
-    errors,
     router,
-    setValue,
-    isValid,
-    isDirty,
+    methods,
+    onChangeProductContents,
     setPreviewOpen,
-    getValues,
     data,
     productId,
     setTags,
     tags,
-    watch,
+    setAddress,
   };
 };

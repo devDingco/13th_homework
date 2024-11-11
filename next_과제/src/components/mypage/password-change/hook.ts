@@ -4,18 +4,13 @@ import { useMutation } from "@apollo/client";
 import { ResetUserPasswordDocument } from "@/commons/graphql/graphql";
 
 export const usePasswordChange = () => {
-  const {
-    control,
-    getValues,
-    setValue,
-    formState: { errors, isValid, isDirty },
-  } = useForm({
+  const methods = useForm({
     mode: "onChange",
   });
 
   const [resetUserPassword] = useMutation(ResetUserPasswordDocument);
   const passwordChange = async () => {
-    const password = getValues("newPassword");
+    const password = methods.getValues("newPassword");
     try {
       const result = await resetUserPassword({
         variables: {
@@ -26,8 +21,7 @@ export const usePasswordChange = () => {
       alert("비밀번호가 변경되었습니다.");
 
       // 비밀번호 변경 후 input 초기화
-      setValue("newPassword", "");
-      setValue("newPasswordCheck", "");
+      methods.reset();
     } catch (error) {
       if (error instanceof Error) {
         alert(`${error.message}`);
@@ -38,10 +32,7 @@ export const usePasswordChange = () => {
   };
 
   return {
-    control,
-    errors,
-    isValid,
-    isDirty,
+    methods,
     passwordChange,
   };
 };

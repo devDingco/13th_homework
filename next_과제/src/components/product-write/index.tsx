@@ -1,42 +1,38 @@
 "use client";
 import Input from "@/components/input";
 import ReactQuillBox from "@/components/react-quill-box";
-import { Controller } from "react-hook-form";
 import TagInput from "@/components/tag-input";
 import { Upload, Image, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useProductWrite } from "@/components/product-write/hook";
 import PostSearchPopBtn from "@/components/post-search-pop-btn";
 import KaKaoMap from "@/components/kakao-map";
+import { FormProvider } from "react-hook-form";
 
 export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
   const {
     handleChangeImg,
     createProductClick,
     updateProductClick,
-    control,
+    methods,
+    onChangeProductContents,
     imgFileList,
     previewOpen,
     setPreviewImage,
     previewImage,
-    errors,
     router,
-    setValue,
-    isValid,
-    isDirty,
     setPreviewOpen,
-    getValues,
     data,
     productId,
     setTags,
     tags,
-    watch,
+    setAddress,
   } = useProductWrite();
   console.log("수정", data);
 
   if (data || !isEdit)
     return (
-      <>
+      <FormProvider {...methods}>
         <h3 className="text-2xl font-bold">
           {isEdit ? "상품 수정" : "상품 등록"}
         </h3>
@@ -46,54 +42,38 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
             title="상품명"
             type="text"
             placeholder="상품명을 입력해 주세요."
-            errormessage={errors?.productName?.message}
             defaultValue={data?.name || ""}
             required
-            control={control}
           />
           <hr className="my-10" />
           <Input
             id="productRemarks"
-            control={control}
             title="한줄 요약"
             type="text"
             placeholder="상품을 한줄로 요약해 주세요"
-            errormessage={errors?.productRemarks?.message}
             defaultValue={data?.remarks || ""}
             required
           />
           <hr className="my-10" />
-          <Controller
-            name="productContents"
-            control={control}
+          <ReactQuillBox
+            id="productContents"
+            title={
+              <div className="flex gap-1 pb-3">
+                내용 <span className="text-red-500">*</span>
+              </div>
+            }
+            readonly={false}
+            placeholder="내용을 입력해 주세요."
             defaultValue={data?.contents || ""}
-            rules={{ required: "필수 입력 사항입니다." }}
-            render={({ field }) => (
-              <ReactQuillBox
-                id="productContents"
-                title={
-                  <div className="flex gap-1 pb-3">
-                    내용 <span className="text-red-500">*</span>
-                  </div>
-                }
-                readonly={false}
-                placeholder="내용을 입력해 주세요."
-                errormessage={errors?.productContents?.message}
-                defaultValue={data?.contents || ""}
-                onChange={(html) => {
-                  field.onChange(html === "<p><br></p>" ? "" : html);
-                }}
-              />
-            )}
+            onChange={(html: string) => onChangeProductContents(html)}
           />
+
           <hr className="my-10" />
           <Input
             id="productPrice"
-            control={control}
             title="판매 가격"
             type="number"
             placeholder="판매 가격을 입력해 주세요. (원 단위)"
-            errormessage={errors?.productPrice?.message}
             defaultValue={String(data?.price)}
             required
           />
@@ -113,22 +93,17 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
                       title="주소"
                       placeholder="01234"
                       type="text"
-                      errormessage={errors?.productAddressPost?.message}
                       defaultValue={data?.travelproductAddress?.zipcode || ""}
-                      control={control}
+                      readOnly
                     />
                   )}
                   <PostSearchPopBtn
-                    setaddress={(_, value) => setValue("productAddress", value)}
-                    setzonecode={(_, value) =>
-                      setValue("productAddressPost", value)
+                    setaddress={(value) => setAddress("productAddress", value)}
+                    setzonecode={(value) =>
+                      setAddress("productAddressPost", value)
                     }
-                    setLat={(_, value) => setValue("productAddressLAT", value)}
-                    setLng={(_, value) => setValue("productAddressLNG", value)}
-                    addressKeyName="productAddress"
-                    addressPostKeyName="productAddressPost"
-                    addressLatKeyName="productAddressLAT"
-                    addressLngKeyName="productAddressLNG"
+                    setLat={(value) => setAddress("productAddressLAT", value)}
+                    setLng={(value) => setAddress("productAddressLNG", value)}
                   />
                 </div>
 
@@ -136,18 +111,15 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
                   id="productAddress"
                   placeholder="주소"
                   type="text"
-                  errormessage={errors?.productAddress?.message}
                   defaultValue={data?.travelproductAddress?.address || ""}
-                  control={control}
+                  readOnly
                 />
 
                 <Input
                   id="writeAddressDetail"
                   placeholder="상세 주소를 입력해주세요"
                   type="text"
-                  errormessage={errors?.productAddressDetail?.message}
                   defaultValue={data?.travelproductAddress?.addressDetail || ""}
-                  control={control}
                 />
               </div>
 
@@ -158,7 +130,6 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
                   type="number"
                   readOnly={true}
                   placeholder="주소를 먼저 입력해 주세요"
-                  control={control}
                   defaultValue={String(
                     Number(data?.travelproductAddress?.lat) ?? 0
                   )}
@@ -169,7 +140,6 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
                   type="number"
                   readOnly={true}
                   placeholder="주소를 먼저 입력해 주세요"
-                  control={control}
                   defaultValue={String(
                     Number(data?.travelproductAddress?.lng) ?? 0
                   )}
@@ -179,7 +149,7 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
             <div className="flex flex-col gap-4">
               <h5>상세 위치</h5>
 
-              {(!isEdit && Number(watch("productAddressLAT")) > 0) ||
+              {(!isEdit && Number(methods.watch("productAddressLAT")) > 0) ||
               (isEdit &&
                 data?.travelproductAddress?.lat &&
                 data?.travelproductAddress?.lng) ? (
@@ -187,12 +157,12 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
                   lat={
                     isEdit
                       ? Number(data?.travelproductAddress?.lat)
-                      : Number(getValues("productAddressLAT"))
+                      : Number(methods.getValues("productAddressLAT"))
                   }
                   lng={
                     isEdit
                       ? Number(data?.travelproductAddress?.lng)
-                      : Number(getValues("productAddressLNG"))
+                      : Number(methods.getValues("productAddressLNG"))
                   }
                 />
               ) : (
@@ -264,13 +234,15 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
               onClick={() =>
                 isEdit ? updateProductClick() : createProductClick()
               }
-              disabled={!isValid || !isDirty}
+              disabled={
+                !methods.formState.isValid || !methods.formState.isDirty
+              }
               size="large"
             >
               {isEdit ? "수정하기" : "등록하기"}
             </Button>
           </div>
         </div>
-      </>
+      </FormProvider>
     );
 }
