@@ -20,6 +20,7 @@ export type InputProps = {
   textMaxCount?: number;
   addbutton?: React.ReactNode;
   ref?: InputRef;
+  onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export interface IformRegister {
