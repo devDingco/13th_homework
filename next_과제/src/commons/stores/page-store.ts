@@ -2,10 +2,10 @@ import { create } from "zustand";
 
 interface IPageStore {
   page: number;
-  setPage: (changePage: number) => void;
+  setPage: (page: number) => void;
 }
-
+// 페이지를 저장하는 스토어
 export const usePageChange = create<IPageStore>((set) => ({
   page: 1,
-  setPage: (changePage) => set(() => ({ page: changePage })),
+  setPage: (page) => set(() => ({ page })),
 }));

@@ -20,7 +20,7 @@ interface IApolloUploadSetting {
 }
 export default function ApolloUploadSetting(props: IApolloUploadSetting) {
   const { accessToken, setAccessToken } = useAccessTokenStore();
-  const { setIsLoaded } = useLoadStore();
+  const { setIsLoaded } = useLoadStore(); // 로딩 상태를 저장하는 스토어
 
   // 3. 프리렌더링 무시 - useEffect 방법
   useEffect(() => {
