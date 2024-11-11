@@ -43,14 +43,9 @@ export class UserRepository {
     }
 
     async findUserEmail(email: string): Promise<UserEntity> {
-        const user = await this.userRepository.findOneBy({
+        return await this.userRepository.findOneBy({
             email,
         });
-
-        if (!user) {
-            throw new NotFoundException(`${email}이 존재하지 않습니다.`);
-        }
-        return user;
     }
 
     async findUserNickname(nickname: string): Promise<Boolean> {

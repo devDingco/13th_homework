@@ -1,6 +1,8 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { AuthService } from 'src/auth/auth.service';
 import { BcryptService } from 'src/bcrypt/bcrypt.service';
-import { Injectable } from '@nestjs/common';
+import { SocialLoginDTO } from './dto/social-login.dto';
 import { UserEntity } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
 import { loginDTO } from './dto/login.dto';
@@ -25,9 +27,15 @@ export class UserService {
     }
 
     async login(loginDTO: loginDTO) {
-        const user: UserEntity = await this.userRepository.findUserEmail(
-            loginDTO.email,
-        );
+        const user: UserEntity | undefined =
+            await this.userRepository.findUserEmail(loginDTO.email);
+
+        if (!user) {
+            throw new NotFoundException(
+                `${loginDTO.email}이 존재하지 않습니다.`,
+            );
+        }
+
         await this.bcryptService.validatePassword(
             loginDTO.password,
             user.password,
@@ -40,6 +48,11 @@ export class UserService {
         );
 
         return { ...token, image: user.image, nickname: user.nickname };
+    }
+
+    async socialLogin(email: string) {
+        const user: UserEntity | undefined =
+            await this.userRepository.findUserEmail(email);
     }
 
     async findNickname(nickname: string) {

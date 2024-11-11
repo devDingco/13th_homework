@@ -19,18 +19,18 @@ export class UserEntity extends SharedProp {
     @Column({ nullable: false })
     name: string;
 
-    @Column({ nullable: false })
-    nickname: string;
+    @Column({ nullable: true })
+    nickname?: string;
 
     @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     @Exclude()
-    password: string;
+    password?: string;
 
     @Column({ nullable: true })
-    image: string;
+    image?: string;
 
     @Column({
         type: 'enum',

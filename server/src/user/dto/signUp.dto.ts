@@ -7,12 +7,11 @@ import {
     IsString,
     Matches,
     MinLength,
-    ValidateNested,
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
 
 import { AddressDTO } from './address.dto';
 import { Role } from 'src/common/enums/role.enum';
+import { Type } from 'class-transformer';
 
 export class signUpDTO {
     @IsString()

@@ -5,6 +5,7 @@ import {
     HttpStatus,
     InternalServerErrorException,
     Post,
+    Req,
     Res,
     Session,
     UploadedFile,
@@ -13,14 +14,19 @@ import {
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
 import { loginDTO } from './dto/login.dto';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'configs/multer.config';
 import { uploadFile } from 'src/common/types/upload-file.interface';
+import { SocialLoginDTO } from './dto/social-login.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('/api/user')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly authService: AuthService,
+    ) {}
 
     @Post('/signup')
     @HttpCode(HttpStatus.CREATED)
@@ -61,6 +67,21 @@ export class UserController {
         session.refreshToken = refreshToken;
 
         res.status(HttpStatus.OK).json({ accessToken, nickname, image });
+    }
+
+    @Post('/social/login')
+    @HttpCode(HttpStatus.OK)
+    async socialLogin(
+        @Body() socialLoginDto: SocialLoginDTO,
+        @Req() req: Request,
+    ) {
+        const res = await this.authService.validationSocialToken(
+            socialLoginDto.provider,
+            req.headers.authorization.split(' ')[1],
+        );
+
+        if (res)
+            return await this.userService.socialLogin(socialLoginDto.email);
     }
 
     @Post('/logout')
