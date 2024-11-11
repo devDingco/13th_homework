@@ -23,6 +23,7 @@ export default function ProductDetail() {
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold">{data?.name}</h2>
           <div className="flex items-center gap-4">
+            <span className="blind">삭제하기 버튼</span>
             {myProductCheck && (
               // 내상품인 경우에만 삭제 버튼 보이기
               <Icon
@@ -32,6 +33,8 @@ export default function ProductDetail() {
                 onClick={() => onProductDelete()}
               />
             )}
+
+            <span className="blind">링크 복사 버튼</span>
             <Icon
               icon="link"
               className="w-6 h-6 flex items-center cursor-pointer"
