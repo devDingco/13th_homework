@@ -1,13 +1,12 @@
 "use client";
 
 import Button from "@/components/Atoms/_Button";
-import SearchUI from "@/components/Molecules/Search";
-import { RightOutlined, WalletOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
-import BoardsListUI from "../BoardsList";
-import { css } from "@/common/styled-system/css";
-import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 import { useQuery } from "@apollo/client";
+
+import { Avatar } from "@ark-ui/react/avatar";
+import { css } from "@/common/styled-system/css";
+import { ChevronRightIcon, Wallet2Icon } from "lucide-react";
+import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
 
 export default function MyPageUI() {
     const { data: login } = useQuery(FetchUserLoggedInDocument);
@@ -21,28 +20,37 @@ export default function MyPageUI() {
                     <div>내 정보</div>
 
                     <div className={CSS_myPage_Flex}>
-                        <Avatar />
+                        <Avatar.Root
+                            className={css({
+                                width: "4rem",
+                                height: "4rem",
+                                clipPath: "circle(50%)",
+                            })}
+                        >
+                            <Avatar.Fallback>(프사)</Avatar.Fallback>
+                            <Avatar.Image src="https://i.pravatar.cc/300" alt="avatar" />
+                        </Avatar.Root>
                         <div className={CSS_myPage_Title}>{login?.fetchUserLoggedIn.name}</div>
                     </div>
 
                     <div className={CSS_myPage_Flex}>
-                        <WalletOutlined />
-                        <div className={CSS_myPage_Title}>23,000 P</div>
+                        <Wallet2Icon />
+                        <div className={CSS_myPage_Title}>{login?.fetchUserLoggedIn.userPoint?.amount} P</div>
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>거래내역 & 북마크</div>
-                        <RightOutlined />
+                        <ChevronRightIcon />
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>포인트 사용내역</div>
-                        <RightOutlined />
+                        <ChevronRightIcon />
                     </div>
 
                     <div className={CSS_myPage_Between}>
                         <div>비밀번호 변경</div>
-                        <RightOutlined />
+                        <ChevronRightIcon />
                     </div>
                 </div>
 
@@ -51,9 +59,6 @@ export default function MyPageUI() {
                     <Button label="북마크" />
                 </div>
             </section>
-
-            <SearchUI />
-            <BoardsListUI />
         </>
     );
 }
@@ -71,6 +76,7 @@ const CSS_myPage_Title = css({
 });
 
 const CSS_myPage_Flex = css({
+    maxWidth: "24rem",
     display: "flex",
     gap: "1rem",
     alignItems: "center",

@@ -46,9 +46,9 @@ export const InputPlaceholder = {
 };
 
 export interface ISearchProps {
-    refetch?: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
-    keyword?: string;
-    setKeyword?: Dispatch<SetStateAction<string>>;
+    refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+    keyword: string;
+    setKeyword: Dispatch<SetStateAction<string>>;
 }
 
 export interface IBoardListProps {

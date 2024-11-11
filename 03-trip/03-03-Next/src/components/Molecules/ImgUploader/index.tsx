@@ -3,6 +3,7 @@ import Image from "next/image";
 import add from "/public/svg/add.svg";
 import { FigureStyle } from "@/commons/styles/styles";
 import { useRef } from "react";
+import Button from "@/components/Atoms/_Button";
 
 export default function ImgUploader({ imageUrl, onChange, idx }) {
     const ref = useRef<HTMLInputElement>(null);
@@ -38,6 +39,8 @@ export default function ImgUploader({ imageUrl, onChange, idx }) {
                 <figcaption>
                     {imageUrl ? "" : "클릭하여 사진 업로드"}
                 </figcaption>
+
+                <Button label="안녕" />
             </figure>
         </>
     );

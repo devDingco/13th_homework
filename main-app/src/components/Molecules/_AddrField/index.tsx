@@ -2,12 +2,16 @@
 
 import { css } from "@/common/styled-system/css";
 import Input from "@/components/Atoms/_Input";
+/**
+ * @TODO 모달 하나 때문에 antd 써야 하는건지.. 더 생각해보자
+ */
 import { Button, Modal } from "antd";
 
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function AddressFieldUI({ ...props }) {
-    const { onChange, isModalOpen, addressData, onToggleModal, handleComplete, data, isEdit } = props;
+    const { onChange, isModalOpen, addressData, onToggleModal, handleComplete, data, isEdit } =
+        props;
 
     return (
         <>
@@ -39,7 +43,11 @@ export default function AddressFieldUI({ ...props }) {
                 <Input
                     id="addressDetail_ID"
                     onChange={onChange}
-                    value={isEdit && addressData === undefined ? data?.fetchBoard.boardAddress?.addressDetail : ""}
+                    value={
+                        isEdit && addressData === undefined
+                            ? data?.fetchBoard.boardAddress?.addressDetail
+                            : ""
+                    }
                 />
                 {/* modal */}
                 {isModalOpen && (

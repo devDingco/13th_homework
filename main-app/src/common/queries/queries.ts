@@ -1,4 +1,3 @@
-"use client";
 import { gql } from "@apollo/client";
 
 export const CREATE_BOARD = gql`
@@ -146,6 +145,9 @@ export const CREATE_USER = gql`
             _id
             email
             name
+            userPoint {
+                amount
+            }
             createdAt
         }
     }
@@ -165,6 +167,29 @@ export const FETCH_USER = gql`
             _id
             email
             name
+            userPoint {
+                amount
+            }
+        }
+    }
+`;
+
+export const LOGOUT_USER = gql`
+    mutation logoutUser {
+        logoutUser
+    }
+`;
+
+export const CREATE_POINT = gql`
+    mutation createPointTransactionOfLoading($paymentId: ID!) {
+        createPointTransactionOfLoading(paymentId: $paymentId) {
+            _id
+            impUid
+            amount
+            balance
+            status
+            statusDetail
+            createdAt
         }
     }
 `;

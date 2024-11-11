@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent } from "react";
 import { ISearchProps } from "@/common/types/types";
 
-import { DatePicker, Space } from "antd";
 import { css } from "@/common/styled-system/css";
-const { RangePicker } = DatePicker;
+
+// import { DatePicker, Space } from "antd";
+// const { RangePicker } = DatePicker;
 
 export default function SearchUI(props: ISearchProps) {
     const { refetch, keyword, setKeyword } = props;
@@ -32,11 +33,7 @@ export default function SearchUI(props: ISearchProps) {
     return (
         <div className={CSS_UtilBar}>
             <div className={CSS_SearchBar}>
-                <div className={css({ w: "46rem" })}>
-                    <Space direction="vertical">
-                        <RangePicker />
-                    </Space>
-                </div>
+                {/* <Date Picker> */}
                 <Input id="search_ID" onChange={onChangeSearch} />
                 <Button label="검색하기" onClick={onClickSearch} />
             </div>
@@ -55,7 +52,7 @@ const CSS_UtilBar = css({
 
 const CSS_SearchBar = css({
     display: "flex",
-    width: "86rem",
+    width: "60%",
     alignItems: "center",
     gap: "2rem",
 });

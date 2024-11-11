@@ -5,19 +5,25 @@ import logo from "/public/img/logo_raw.png";
 import { MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { FetchUserLoggedInDocument } from "@/common/graphql/graphql";
+import { LOGOUT_USER } from "@/common/queries/queries";
 
-import type { MenuProps } from "antd";
-import { Button, Dropdown, Space } from "antd";
-import { LogoutOutlined, ThunderboltFilled, UserOutlined, WalletOutlined } from "@ant-design/icons";
+import { Menu } from "@ark-ui/react/menu";
+import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { css } from "@/common/styled-system/css";
+import Button from "@/components/Atoms/_Button";
+import withPortOne from "@/common/library/withPortOne";
 
 export default function LayoutNav() {
     const router = useRouter();
     const [isSelect, setIsSelect] = useState("mainPage");
 
     const { data: login } = useQuery(FetchUserLoggedInDocument);
+
+    const { onClickPay } = withPortOne(login);
+
+    const [Logout] = useMutation(LOGOUT_USER);
 
     function onNavClick(e: MouseEvent) {
         const target = e.target as HTMLLIElement;
@@ -39,64 +45,16 @@ export default function LayoutNav() {
         }
     }
 
-    const handleMenuClick: MenuProps["onClick"] = (e) => {
-        switch (e.key) {
-            case "1": {
-                router.push(`/mypage`);
-                break;
-            }
-            case "2": {
-                router.push(`/mypage`);
-                break;
-            }
-            case "3": {
-                router.push(`/mypage`);
-                break;
-            }
-            case "4": {
-                sessionStorage.removeItem("@_¡¡");
-                setTimeout(() => {
-                    router.push(`/boards`);
-                    location.href = location.href;
-                }, 100);
-                break;
-            }
-        }
-    };
-
-    const items: MenuProps["items"] = [
-        {
-            label: `${login?.fetchUserLoggedIn.name}`,
-            key: "1",
-            icon: <UserOutlined />,
-        },
-        {
-            label: "23,000 P",
-            key: "2",
-            icon: <WalletOutlined />,
-        },
-        {
-            label: "포인트 충전",
-            key: "3",
-            icon: <ThunderboltFilled />,
-        },
-        {
-            label: "로그아웃",
-            key: "4",
-            icon: <LogoutOutlined />,
-        },
-    ];
-
-    const menuProps = {
-        items,
-        onClick: handleMenuClick,
-    };
-
     return (
         <>
             <nav className={CSS_Nav_Wrap}>
                 <ul className={CSS_Nav_Menu}>
-                    <li onClick={() => router.push(`/`)}>
+                    <li
+                        onClick={() => {
+                            router.push(`/`);
+                            setIsSelect("");
+                        }}
+                    >
                         <Image src={logo} alt="logo" width={50} height={0} />
                     </li>
 
@@ -124,20 +82,60 @@ export default function LayoutNav() {
                 </ul>
 
                 {login ? (
-                    <Space wrap>
-                        <Dropdown.Button
-                            onClick={() => router.push(`/mypage`)}
-                            menu={menuProps}
-                            placement="bottom"
-                            icon={<UserOutlined />}
-                        >
-                            {login.fetchUserLoggedIn.name}님! 안녕하세요
-                        </Dropdown.Button>
-                    </Space>
+                    <Menu.Root>
+                        <Menu.Trigger className={css_menuOpen}>
+                            <p className={css({ width: "100%", textWrap: "nowrap" })}>
+                                <span className={css({ color: "#981b1e", fontWeight: "700" })}>
+                                    {login.fetchUserLoggedIn.name}
+                                </span>{" "}
+                                님! 안녕하세요.
+                            </p>
+                        </Menu.Trigger>
+                        <Menu.Positioner className={css_menuWrap} style={{ position: "absolute", zIndex: "2" }}>
+                            <Menu.Content>
+                                <Menu.ItemGroup>
+                                    <Menu.ItemGroupLabel className={css_menuItem}>
+                                        <span className={css({ color: "#981b1e", fontWeight: "700" })}>
+                                            {login.fetchUserLoggedIn.name}
+                                        </span>
+                                    </Menu.ItemGroupLabel>
+                                    <Menu.Separator />
+                                    <Menu.Item
+                                        value="profile"
+                                        className={css_menuItem}
+                                        onClick={() => router.push(`/mypage`)}
+                                    >
+                                        <UserIcon size={16} /> 내 정보
+                                    </Menu.Item>
+                                    <Menu.Item value="billing" className={css_menuItem} onClick={onClickPay}>
+                                        <CreditCardIcon size={16} /> 포인트 충전
+                                    </Menu.Item>
+                                    <Menu.Item
+                                        value="settings"
+                                        className={css_menuItem}
+                                        onClick={() => router.push(`/mypage`)}
+                                    >
+                                        <SettingsIcon size={16} /> 설정
+                                    </Menu.Item>
+                                    <Menu.Separator />
+                                    <Menu.Item
+                                        value="logout"
+                                        className={css_menuItem}
+                                        onClick={() => {
+                                            Logout();
+                                            router.push("/boards");
+                                            location.href = location.href;
+                                        }}
+                                    >
+                                        <LogOutIcon size={16} />
+                                        로그아웃
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
+                            </Menu.Content>
+                        </Menu.Positioner>
+                    </Menu.Root>
                 ) : (
-                    <Button icon={<UserOutlined />} onClick={() => router.push(`/login`)}>
-                        로그인
-                    </Button>
+                    <Button label="로그인" onClick={() => router.push(`/auth`)}></Button>
                 )}
             </nav>
         </>
@@ -176,4 +174,28 @@ const CSS_selected_Button = css({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+});
+
+//////////////////////////
+
+const css_menuOpen = css({
+    backgroundColor: "#fff",
+    borderRadius: "1rem",
+    border: "1px solid #bbb",
+    height: "4rem",
+    p: "0rem 1.2rem",
+});
+
+const css_menuWrap = css({
+    bg: "#fff",
+    borderRadius: "1rem",
+    border: "1px solid #bbb",
+});
+
+const css_menuItem = css({
+    minWidth: "15rem",
+    display: "flex",
+    alignItems: "center",
+    p: "1rem",
+    gap: "1rem",
 });

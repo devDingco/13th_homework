@@ -32,6 +32,8 @@ export default function useUploadImg() {
                 newImageUrl[id] = result.data?.uploadFile.url ?? "";
                 return newImageUrl;
             });
+            console.log(result);
+            console.log(result.data?.uploadFile.url);
         } catch (error) {
             errorAlert("이미지 등록에 실패하였습니다!!");
             console.log(error);
