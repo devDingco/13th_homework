@@ -9,8 +9,11 @@ import {
   LogoutUserDocument,
 } from "@/commons/graphql/graphql";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
+import { useLoginStore } from "@/commons/stores/login-store";
 
 export const useLoginPage = () => {
+  const { setIsLogged } = useLoginStore();
+
   // const client = useApolloClient();
   // 로그인
   const [loginUser] = useMutation(LoginUserDocument);
@@ -51,11 +54,10 @@ export const useLoginPage = () => {
       },
     });
 
-    console.log(result);
-
     // 2. 로그인 성공 시
     if (result.data?.loginUser.accessToken) {
       setAccessToken(result.data?.loginUser.accessToken);
+      setIsLogged(true); //
       router.push("/");
     }
   };
