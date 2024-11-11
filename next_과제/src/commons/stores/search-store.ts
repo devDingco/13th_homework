@@ -7,5 +7,5 @@ interface ISearchStore {
 // 검색어를 저장하는 스토어
 export const useSearch = create<ISearchStore>((set) => ({
   search: "",
-  setSearch: (search) => set(() => ({ search })),
+  setSearch: (search) => set({ search }),
 }));
