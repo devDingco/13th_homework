@@ -1,23 +1,26 @@
+"use client";
+
 import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const useCommentList = () => {
-  const { boardId } = useParams();
+  const { boardId }: { boardId: string } = useParams();
 
   const { data, error, loading, fetchMore } = useQuery(
     FetchBoardCommentsDocument,
-    {
-      fetchPolicy: "cache-first",
-      variables: { boardId: String(boardId) },
-    }
+    { variables: { boardId: boardId } }
   );
 
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    setHasMore(true);
+    if (data && data.fetchBoardComments.length % 10 !== 0) {
+      setHasMore(false);
+    } else {
+      setHasMore(true);
+    }
   }, [data]);
 
   const fetchMoreData = async () => {
