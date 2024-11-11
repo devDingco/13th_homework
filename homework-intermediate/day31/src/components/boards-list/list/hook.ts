@@ -10,9 +10,6 @@ import { Modal } from 'antd';
 export default function useBoardList({ activePage }: { activePage: number }) {
   const [hoveredId, setHoveredId] = useState('');
   const [deleteBoard] = useMutation(DeleteBoardDocument);
-  const { data, refetch } = useQuery(FetchBoardsDocument, {
-    variables: { page: activePage },
-  });
 
   const router = useRouter();
 
@@ -21,11 +18,14 @@ export default function useBoardList({ activePage }: { activePage: number }) {
     try {
       const response = await deleteBoard({
         variables: { boardId: hoveredId },
+        refetchQueries: [
+          { query: FetchBoardsDocument, variables: { page: +activePage } },
+        ],
       });
       Modal.success({
         content: `게시글 ${response.data?.deleteBoard} 삭제가 완료되었습니다.`,
       });
-      refetch({ page: +activePage });
+      // refetch({ page: +activePage });
       console.log('🚀 ~ onClickDelete ~ { page: +activePage }:', {
         page: +activePage,
       });
@@ -45,5 +45,5 @@ export default function useBoardList({ activePage }: { activePage: number }) {
     router.push(`/boards/${id}`);
   };
 
-  return { data, hoveredId, setHoveredId, onClickDelete, onClickDetail };
+  return { hoveredId, setHoveredId, onClickDelete, onClickDetail };
 }

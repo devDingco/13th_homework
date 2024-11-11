@@ -8,7 +8,7 @@ import { useState, MouseEvent } from 'react';
 import { Modal } from 'antd';
 import { BoardListProps } from '.';
 
-export default function useBoardList({ activePage }: BoardListProps) {
+export default function useBoardList(props: BoardListProps) {
 	const [hoveredId, setHoveredId] = useState('');
 	const [deleteBoard] = useMutation(DeleteBoardDocument);
 
@@ -22,7 +22,7 @@ export default function useBoardList({ activePage }: BoardListProps) {
 				refetchQueries: [
 					{
 						query: FetchBoardsDocument,
-						variables: { page: +(activePage || 1) },
+						variables: { page: +(props.activePage || 1) },
 					},
 				],
 			});

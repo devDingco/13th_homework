@@ -43,12 +43,16 @@ export const DELETE_TRAVEL_PRODUCT_QUESTION = gql`
 	}
 `;
 
-const FETCH_USER_LOGGED_IN = gql`
+export const FETCH_USER_LOGGED_IN = gql`
 	query fetchUserLoggedIn {
 		fetchUserLoggedIn {
 			_id
 			email
 			name
+			userPoint {
+				_id
+				amount
+			}
 		}
 	}
 `;
