@@ -49,7 +49,7 @@ export default function ProductWrite(props) {
 	const router = useRouter();
 	const params = useParams();
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { register, handleSubmit, formState, reset, setValue, watch } =
+	const { register, handleSubmit, formState, reset, setValue, watch, trigger } =
 		useForm<CreateTravelproductInput>({
 			mode: 'onChange',
 			resolver: zodResolver(travelProductSchema),
@@ -66,6 +66,11 @@ export default function ProductWrite(props) {
 		setValue('travelproductAddress.zipcode', data.zonecode);
 		setValue('travelproductAddress.address', data.address);
 		onToggleZipcodeModal();
+	};
+
+	const onChangeContents = (value) => {
+		setValue('contents', value);
+		trigger('contents');
 	};
 
 	// Create
@@ -208,12 +213,13 @@ export default function ProductWrite(props) {
 					>
 						상품 설명
 					</label>
-					<textarea
+					<ReactQuill onChange={onChangeContents} />
+					{/* <textarea
 						id="product_desc"
 						{...register('contents')}
 						className="h-[29.8125rem] rounded-lg border px-4 py-3"
 						placeholder="내용을 입력해 주세요."
-					/>
+					/> */}
 					<div className="text-red-500">
 						{formState.errors.contents?.message}
 					</div>
