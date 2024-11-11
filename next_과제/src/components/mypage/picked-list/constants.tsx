@@ -1,5 +1,6 @@
 import { TableProps } from "antd/lib/table";
 import { DataType } from "./types";
+import { KeywordActiveString } from "@/commons/ui/keyword-active-string";
 
 export const columns: TableProps<DataType>["columns"] = [
   {
@@ -15,6 +16,7 @@ export const columns: TableProps<DataType>["columns"] = [
   {
     title: "상품명",
     dataIndex: "name",
+    render: (value) => <KeywordActiveString value={value} />,
     key: "name",
     width: "60%",
   },

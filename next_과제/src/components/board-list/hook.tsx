@@ -5,7 +5,8 @@ import { dateViewSet } from "@/utils/dateViewSet";
 import type { TableProps } from "antd";
 import type { DataType } from "@/components/board-list/types";
 import { useMutation, useQuery } from "@apollo/client";
-import { useState, Fragment } from "react";
+import { useState } from "react";
+import { KeywordActiveString } from "@/commons/ui/keyword-active-string";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
@@ -118,20 +119,7 @@ export const useBoardList = () => {
       render: (value, record, index) => (
         <div className="flex gap-2">
           <span>
-            {search !== ""
-              ? value
-                  .replaceAll(search, `$keyword$${search}$keyword$`)
-                  .split("$keyword$")
-                  .map((text: string, idx: number) => (
-                    <Fragment key={text + idx}>
-                      {text !== search ? (
-                        text
-                      ) : (
-                        <span className="text-red-500">{text}</span>
-                      )}
-                    </Fragment>
-                  ))
-              : value}
+            <KeywordActiveString value={value} />
           </span>
           {data?.fetchBoards[index].youtubeUrl && (
             <VideoCameraTwoTone twoToneColor="#ff4848" />
