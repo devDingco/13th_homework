@@ -8,8 +8,8 @@ interface ISearchDateStore {
 }
 // 검색 날짜를 저장하는 스토어
 export const useSearchDate = create<ISearchDateStore>((set) => ({
-  startDate: "2021-09-03T09:54:33Z",
-  endDate: new Date().toISOString(),
+  startDate: "",
+  endDate: "",
   setStartDate: (startDate) => set(() => ({ startDate })),
   setEndDate: (endDate) => set(() => ({ endDate })),
 }));
