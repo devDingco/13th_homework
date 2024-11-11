@@ -6,12 +6,14 @@ import {
     Post,
     Res,
     Session,
+    UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
-import { User } from './entity/user.entity';
+import { UserEntity } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('/api/user')
 export class UserController {
@@ -19,7 +21,8 @@ export class UserController {
 
     @Post('/signup')
     @HttpCode(HttpStatus.CREATED)
-    signUp(@Body() signUpDTO: signUpDTO): Promise<User> {
+    @UseInterceptors(FilesInterceptor('image'))
+    signUp(@Body() signUpDTO: signUpDTO): Promise<UserEntity> {
         return this.userService.createUser(signUpDTO);
     }
 
@@ -56,5 +59,11 @@ export class UserController {
                 res.status(HttpStatus.OK).json({ success: true });
             }
         });
+    }
+
+    @Post('/validate')
+    @HttpCode(HttpStatus.OK)
+    validateNickname(@Body() nickname: string) {
+        return this.userService.findNickname(nickname);
     }
 }

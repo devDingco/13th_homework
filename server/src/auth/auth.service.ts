@@ -10,12 +10,12 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
-    async issueLoginToken(id: number, role: Role, dev: boolean) {
+    async issueLoginToken(userId: number, role: Role, dev: boolean) {
         // 여기에 role 넣기
         // user 또는 counselor
         const accessToken = await this.jwtService.signAsync(
             {
-                id,
+                userId,
                 role,
                 sub: 'accessToken',
             },
@@ -29,7 +29,7 @@ export class AuthService {
 
         const refreshToken = await this.jwtService.signAsync(
             {
-                id,
+                userId,
                 role,
                 sub: 'refreshToken',
             },

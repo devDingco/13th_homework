@@ -1,9 +1,11 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
+import { SharedProp } from 'src/common/sharedProp.helper';
+
 @ObjectType()
-export class UserSchema {
+export class UserSchema extends SharedProp {
     @Field(() => Int)
-    id: number;
+    userId: number;
 
     @Field()
     name: string;

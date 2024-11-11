@@ -7,9 +7,10 @@ import {
 } from 'typeorm';
 
 import { ObjectId } from 'mongodb';
+import { SharedProp } from 'src/common/sharedProp.helper';
 
 @Entity('board_reaction')
-export class BoardReactionEntity {
+export class BoardReactionEntity extends SharedProp {
     @ObjectIdColumn()
     _id: ObjectId;
 
@@ -21,10 +22,4 @@ export class BoardReactionEntity {
 
     @Column({ default: 0 })
     hate: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
 }
