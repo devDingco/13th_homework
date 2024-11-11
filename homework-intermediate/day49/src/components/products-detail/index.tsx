@@ -22,6 +22,8 @@ import ProductQuestion from './product-question';
 import ProductQuestionList from './product-question-list';
 import DOMPurify from 'dompurify';
 
+declare const window: Window & { kakao: any };
+
 export default function ProductDetail(props) {
 	const params = useParams();
 	const { data: userLoggedIn } = useQuery(FetchUserLoggedInDocument);
@@ -62,45 +64,35 @@ export default function ProductDetail(props) {
 		});
 	};
 
-	// useEffect(() => {
-	// 	const script = document.createElement('script');
-	// 	script.src =
-	// 		'//dapi.kakao.com/v2/maps/sdk.js?appkey=eabb3c1ebe27ec04b62de93c0991906a&libraries=services&autoload=false';
-	// 	document.head.appendChild(script);
+	useEffect(() => {
+		const script = document.createElement('script');
+		script.src =
+			'//dapi.kakao.com/v2/maps/sdk.js?appkey=eabb3c1ebe27ec04b62de93c0991906a&libraries=services&autoload=false';
+		document.head.appendChild(script);
 
-	// 	script.onload = () => {
-	// 		window.kakao.maps.load(function () {
-	// 			if (address) {
-	// 				const container = document.getElementById('map');
-	// 				const options = {
-	// 					center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-	// 					level: 3,
-	// 				};
-	// 				const map = new window.kakao.maps.Map(container, options);
-	// 				// 주소-좌표 변환 객체 생성
-	// 				const geocoder = new window.kakao.maps.services.Geocoder();
+		script.onload = () => {
+			window.kakao.maps.load(function () {
+				const container = document.getElementById('map');
+				const Lat = data?.fetchTravelproduct.travelproductAddress?.lat;
+				const Lng = data?.fetchTravelproduct.travelproductAddress?.lng;
 
-	// 				geocoder.addressSearch(address, (result, status) => {
-	// 					if (status === window.kakao.maps.services.Status.OK) {
-	// 						const coords = new window.kakao.maps.LatLng(
-	// 							result[0].y,
-	// 							result[0].x,
-	// 						);
+				const options = {
+					center: new window.kakao.maps.LatLng(Lat, Lng),
+					level: 3,
+				};
+				const map = new window.kakao.maps.Map(container, options);
 
-	// 						// 결과값으로 받은 위치를 마커로 표시
-	// 						const marker = new window.kakao.maps.Marker({
-	// 							map: map,
-	// 							position: coords,
-	// 						});
+				// 마커 생성 및 지도에 추가
+				const markerPosition = new window.kakao.maps.LatLng(Lat, Lng);
+				const marker = new window.kakao.maps.Marker({
+					position: markerPosition,
+				});
 
-	// 						// 지도 중심을 결과값으로 받은 위치로 이동
-	// 						map.setCenter(coords);
-	// 					}
-	// 				});
-	// 			}
-	// 		});
-	// 	};
-	// }, [address]); // address가 변경될 때마다 실행
+				// 마커를 지도에 표시
+				marker.setMap(map);
+			});
+		};
+	}, [data]);
 
 	return (
 		<div className="flex max-w-7xl flex-col gap-10">
@@ -150,10 +142,11 @@ export default function ProductDetail(props) {
 					</div>
 					<Divider className="h-[1px] bg-[#D4D3D3]" />
 
+					{/* 상품 상세 설명 */}
 					<div className="flex flex-col gap-4">
 						<h2 className="text-xl font-bold text-black">상세 설명</h2>
 						<article>
-							{typeof window !== 'undefined' && (
+							{typeof window !== 'undefined' ? (
 								<div
 									dangerouslySetInnerHTML={{
 										__html: DOMPurify.sanitize(
@@ -161,19 +154,17 @@ export default function ProductDetail(props) {
 										),
 									}}
 								/>
+							) : (
+								<div></div>
 							)}
 						</article>
 					</div>
 					<Divider className="h-[1px] bg-[#D4D3D3]" />
 
+					{/* 상품 상세 위치 */}
 					<div className="flex flex-col gap-4">
 						<h2 className="text-xl font-bold text-black">상세 위치</h2>
-						<Image
-							src={'https://placehold.co/844x280'}
-							alt="지도"
-							width={844}
-							height={280}
-						/>
+						<div id="map" className="h-[280px] w-[844px]"></div>
 					</div>
 				</section>
 				{/* 판매자 관련 우측 섹션 */}
