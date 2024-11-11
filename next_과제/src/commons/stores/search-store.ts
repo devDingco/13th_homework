@@ -4,8 +4,8 @@ interface ISearchStore {
   search: string;
   setSearch: (changeSearch: string) => void;
 }
-
+// 검색어를 저장하는 스토어
 export const useSearch = create<ISearchStore>((set) => ({
   search: "",
-  setSearch: (changeSearch: string) => set(() => ({ search: changeSearch })),
+  setSearch: (search) => set(() => ({ search })),
 }));
