@@ -86,7 +86,6 @@ export default function SideBar() {
             ) : (
               <div className="w-10 h-10 rounded-full bg-gray-200" />
             )}
-
             <div>
               <div className="font-medium text-gray-800">
                 {session?.user?.name}
