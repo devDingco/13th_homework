@@ -1,4 +1,5 @@
 import { TableProps } from "antd";
+import { KeywordActiveString } from "@/commons/ui/keyword-active-string";
 
 export const columns: TableProps["columns"] = [
   {
@@ -19,7 +20,9 @@ export const columns: TableProps["columns"] = [
       <div className="flex gap-2">
         {record.soldAt ? (
           <>
-            <span className="text-gray-400 font-medium">{value}</span>
+            <span className="text-gray-400 font-medium">
+              <KeywordActiveString value={value} />
+            </span>
             <span className="text-blue-500 font-bold">판매완료</span>
           </>
         ) : (
