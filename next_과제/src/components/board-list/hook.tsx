@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import useCustomSearchParams from "@/commons/hooks/useCustomSearchParams";
 import { dateViewSet } from "@/utils/dateViewSet";
 import type { TableProps } from "antd";
 import type { DataType } from "@/components/board-list/types";
@@ -19,7 +18,6 @@ import { useSearchDate } from "@/commons/stores/search-date-store";
 
 export const useBoardList = () => {
   const router = useRouter();
-  const { searchParams, setSearchParams } = useCustomSearchParams();
   const { startDate, endDate } = useSearchDate();
   const { search } = useSearch();
   const [page, setPage] = useState(1);
@@ -183,8 +181,6 @@ export const useBoardList = () => {
     dataSource,
     columns,
     fetchBoardsCount,
-    searchParams,
-    setSearchParams,
     router,
     handleSearch,
   };
