@@ -19,13 +19,9 @@ export const menuItems = [
     key: "/mypage",
   },
   {
-    label: "게시판 임시",
-    key: "",
+    label: "게시글리스트",
+    key: "/boards",
     children: [
-      {
-        label: "게시글리스트",
-        key: "/boards",
-      },
       {
         label: "게시글등록",
         key: "/boards/new",
