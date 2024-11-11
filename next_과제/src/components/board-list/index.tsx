@@ -11,20 +11,21 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
     data,
     listItemMouseHandler,
     detailPageHandler,
-    handleSearch,
     dataSource,
     columns,
     fetchBoardsCount,
     pageChangeHandler,
     router,
     page,
+    refetch,
+    countDataRefetch,
   } = useBoardList();
 
   return (
     <>
       {searchBox && (
         <div className="flex gap-4 justify-between flex-wrap">
-          <SearchBox handleSearch={handleSearch} />
+          <SearchBox refetch={refetch} countDataRefetch={countDataRefetch} />
           <Button
             className="max-sm:fixedBtn"
             size="large"
