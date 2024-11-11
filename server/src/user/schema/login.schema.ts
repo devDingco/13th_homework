@@ -1,39 +1,12 @@
-import { Field, InputType } from '@nestjs/graphql';
-import {
-    IsBoolean,
-    IsEmail,
-    IsNotEmpty,
-    IsOptional,
-    IsString,
-    Matches,
-    MaxLength,
-    MinLength,
-} from 'class-validator';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-@InputType()
-export class LoginUser {
-    @IsString()
-    @IsNotEmpty()
-    @IsEmail({}, { message: 'Invalid email format' })
+import { TokenSchema } from './token.schema';
+
+@ObjectType()
+export class LoginSchema extends TokenSchema {
     @Field()
-    email: string;
+    nickname: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @MinLength(8, { message: 'password must be at least 8 characters long' })
-    @MaxLength(20, { message: 'password must not exceed 20 characters' })
-    @Matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
-        {
-            message:
-                'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character from !@#$%^&*()',
-        },
-    )
     @Field()
-    password: string;
-
-    @IsBoolean()
-    @IsOptional()
-    @Field({ nullable: true })
-    dev?: boolean;
+    image: string;
 }

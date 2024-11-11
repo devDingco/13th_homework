@@ -10,12 +10,12 @@ import {
     ValidateNested,
 } from 'class-validator';
 
-import { Address } from './address-input.schema';
+import { AddressInput } from './address-input.schema';
 import { Role } from 'src/common/enums/role.enum';
 import { Type } from 'class-transformer';
 
 @InputType()
-export class SignUpUser {
+export class SignUpUserInput {
     @IsString()
     @IsNotEmpty()
     @Field()
@@ -54,7 +54,7 @@ export class SignUpUser {
 
     @IsOptional()
     @ValidateNested({ each: true })
-    @Type(() => Address)
-    @Field(() => Address, { nullable: true })
-    address?: Address;
+    @Type(() => AddressInput)
+    @Field(() => AddressInput, { nullable: true })
+    address?: AddressInput;
 }
