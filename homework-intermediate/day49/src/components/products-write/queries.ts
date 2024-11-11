@@ -42,6 +42,17 @@ export const FETCH_TRAVEL_PRODUCT = gql`
 			tags
 			images
 			pickedCount
+			travelproductAddress {
+				_id
+				zipcode
+				address
+				addressDetail
+				lat
+				lng
+				createdAt
+				updatedAt
+				deletedAt
+			}
 			buyer {
 				_id
 				email

@@ -17,7 +17,7 @@ import {
 	FetchUserLoggedInDocument,
 	ToggleTravelproductPickDocument,
 } from '@/commons/graphql/graphql';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductQuestion from './product-question';
 import ProductQuestionList from './product-question-list';
 import DOMPurify from 'dompurify';
@@ -25,13 +25,13 @@ import DOMPurify from 'dompurify';
 export default function ProductDetail(props) {
 	const params = useParams();
 	const { data: userLoggedIn } = useQuery(FetchUserLoggedInDocument);
-	console.log('🚀 ~ ProductDetail ~ userLoggedIn:', userLoggedIn);
+	// console.log('🚀 ~ ProductDetail ~ userLoggedIn:', userLoggedIn);
+
 	const { data } = useQuery(FetchTravelproductDocument, {
 		variables: { travelproductId: String(params.travelproductId) },
 	});
-	const [pickedCount, setPickedCount] = useState(
-		data?.fetchTravelproduct.pickedCount || 0,
-	);
+	console.log('🚀 ~ ProductDetail ~ data:', data);
+
 	const [toggleTravelproductPick] = useMutation(
 		ToggleTravelproductPickDocument,
 		{
@@ -40,6 +40,9 @@ export default function ProductDetail(props) {
 	);
 	const [createPointTransactionOfBuyingAndSelling] = useMutation(
 		CreatePointTransactionOfBuyingAndSellingDocument,
+	);
+	const [pickedCount, setPickedCount] = useState(
+		data?.fetchTravelproduct.pickedCount || 0,
 	);
 
 	const onClickBookmark = async () => {
@@ -58,6 +61,46 @@ export default function ProductDetail(props) {
 			variables: { useritemId: String(params.travelproductId) },
 		});
 	};
+
+	// useEffect(() => {
+	// 	const script = document.createElement('script');
+	// 	script.src =
+	// 		'//dapi.kakao.com/v2/maps/sdk.js?appkey=eabb3c1ebe27ec04b62de93c0991906a&libraries=services&autoload=false';
+	// 	document.head.appendChild(script);
+
+	// 	script.onload = () => {
+	// 		window.kakao.maps.load(function () {
+	// 			if (address) {
+	// 				const container = document.getElementById('map');
+	// 				const options = {
+	// 					center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+	// 					level: 3,
+	// 				};
+	// 				const map = new window.kakao.maps.Map(container, options);
+	// 				// 주소-좌표 변환 객체 생성
+	// 				const geocoder = new window.kakao.maps.services.Geocoder();
+
+	// 				geocoder.addressSearch(address, (result, status) => {
+	// 					if (status === window.kakao.maps.services.Status.OK) {
+	// 						const coords = new window.kakao.maps.LatLng(
+	// 							result[0].y,
+	// 							result[0].x,
+	// 						);
+
+	// 						// 결과값으로 받은 위치를 마커로 표시
+	// 						const marker = new window.kakao.maps.Marker({
+	// 							map: map,
+	// 							position: coords,
+	// 						});
+
+	// 						// 지도 중심을 결과값으로 받은 위치로 이동
+	// 						map.setCenter(coords);
+	// 					}
+	// 				});
+	// 			}
+	// 		});
+	// 	};
+	// }, [address]); // address가 변경될 때마다 실행
 
 	return (
 		<div className="flex max-w-7xl flex-col gap-10">
