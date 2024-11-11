@@ -1,29 +1,28 @@
 'use client';
-
-import { useEffect } from 'react';
-import { useAccessTokenStore } from '../stores/accessToken';
-import { useLoadStore } from '../stores/loadStore';
-import { Modal } from 'antd';
+import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export const withLoginCheck =
-  (Component: () => JSX.Element) =>
+const withLoginCheck =
+  (WrappedComponent: () => JSX.Element) =>
   <P extends object>(props: P) => {
+    const { isAuthenticated, refreshAccessToken } = useAuth();
     const router = useRouter();
-    const { isLoaded } = useLoadStore();
-    const { accessToken } = useAccessTokenStore();
 
     useEffect(() => {
-      if (!isLoaded) return;
-      if (accessToken) return;
+      const checkLogin = async () => {
+        if (!isAuthenticated) {
+          const token = await refreshAccessToken();
+          if (!token) {
+            alert('로그인이 필요합니다.');
+            router.push('/login');
+          }
+        }
+      };
+      checkLogin();
+    }, [isAuthenticated, refreshAccessToken, router]);
 
-      Modal.warning({
-        title: '로그인이 필요합니다.',
-        content: '로그인 페이지로 이동합니다.',
-        onOk() {
-          router.push('/login');
-        },
-      });
-    }, [isLoaded, accessToken, router]);
-    return <Component {...props} />;
+    return isAuthenticated ? <WrappedComponent {...props} /> : null;
   };
+
+export default withLoginCheck;

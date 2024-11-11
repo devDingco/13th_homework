@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import LayoutComponent from '@/commons/layout';
 import ApolloSetting from '@/commons/setting/apollo-setting';
+import { AuthProvider } from '@/context/AuthContext';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -25,14 +26,16 @@ interface IProps {
 
 export default function RootLayout({ children }: IProps) {
   return (
-    <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ApolloSetting>
-          <LayoutComponent>{children}</LayoutComponent>
-        </ApolloSetting>
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="ko">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ApolloSetting>
+            <LayoutComponent>{children}</LayoutComponent>
+          </ApolloSetting>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

@@ -11,7 +11,7 @@ import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { useAccessTokenStore } from '../stores/accessToken';
 import { useLoadStore } from '../stores/loadStore';
 import { useEffect } from 'react';
-import { getAccessTokenRefresh } from '../libraries/accessTokenRefresh';
+import { getAccessToken } from '../libraries/accessTokenRefresh';
 import { onError } from '@apollo/client/link/error';
 
 interface IApolloSetting {
@@ -24,7 +24,7 @@ export default function ApolloSetting(props: IApolloSetting) {
   const { setIsLoad } = useLoadStore();
 
   useEffect(() => {
-    getAccessTokenRefresh()
+    getAccessToken()
       .then((newAccessToken) => {
         if (newAccessToken) setAccessToken(newAccessToken);
       })
@@ -37,7 +37,7 @@ export default function ApolloSetting(props: IApolloSetting) {
       for (const err of graphQLErrors) {
         if (err.extensions?.code === 'UNAUTHENTICATED') {
           return fromPromise(
-            getAccessTokenRefresh().then((newAccessToken) => {
+            getAccessToken().then((newAccessToken) => {
               setAccessToken(newAccessToken);
               operation.setContext({
                 headers: {

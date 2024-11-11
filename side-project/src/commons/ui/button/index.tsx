@@ -25,7 +25,6 @@ function ButtonBase({
   isDisabled = false,
   onClick,
 }: IButtonType) {
-  // const { formState } = useFormContext();
   const formContext = useFormContext();
   const isFormValid = formContext ? formContext.formState.isValid : true;
   return (
