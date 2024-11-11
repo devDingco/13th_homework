@@ -39,7 +39,7 @@ export class UserService {
             loginDTO.dev,
         );
 
-        return { ...token };
+        return { ...token, image: user.image, nickname: user.nickname };
     }
 
     async findNickname(nickname: string) {

@@ -12,13 +12,11 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
-import { UserEntity } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'configs/multer.config';
 import { uploadFile } from 'src/common/types/upload-file.interface';
-import { AddressDTO } from './dto/address.dto';
 
 @Controller('/api/user')
 export class UserController {
@@ -56,13 +54,13 @@ export class UserController {
         @Res() res: Response,
         @Session() session: Record<string, any>,
     ): Promise<void> {
-        const { accessToken, refreshToken } =
+        const { accessToken, refreshToken, nickname, image } =
             await this.userService.login(loginDTO);
         res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         session.refreshToken = refreshToken;
 
-        res.status(HttpStatus.OK).json({ accessToken });
+        res.status(HttpStatus.OK).json({ accessToken, nickname, image });
     }
 
     @Post('/logout')

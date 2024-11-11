@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 import { SignUpUser } from './schema/signUp.schema';
 import { LoginUser } from './schema/login.schema';
 import { Response } from 'express';
-import { TokenSchema } from './schema/token.schema';
+import { LoginSchema } from './schema/token.schema';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
 import { createWriteStream } from 'fs';
@@ -37,19 +37,19 @@ export class UserResolver {
         if (user) return true;
     }
 
-    @Mutation(() => TokenSchema)
+    @Mutation(() => LoginSchema)
     async login(
         @Args('loginUser') loginUser: LoginUser,
         @Context('req') req: { session: Record<string, any>; res: Response },
     ) {
-        const { accessToken, refreshToken } =
+        const { accessToken, refreshToken, image, nickname } =
             await this.userService.login(loginUser);
 
         req.res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         req.session.refreshToken = refreshToken;
 
-        return { accessToken };
+        return { accessToken, image, nickname };
     }
 
     @Mutation(() => Boolean)

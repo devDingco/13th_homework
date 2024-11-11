@@ -51,8 +51,10 @@ type BoardPaginationResponse {
   totalCount: Int!
 }
 
-type TokenSchema {
+type LoginSchema {
   accessToken: String!
+  nickname: String!
+  image: String!
 }
 
 type Query {
@@ -72,7 +74,7 @@ type Mutation {
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
   signup(signUpUser: SignUpUser!, file: Upload): Boolean!
-  login(loginUser: LoginUser!): TokenSchema!
+  login(loginUser: LoginUser!): LoginSchema!
   logout: Boolean!
   validateNickname(nickname: String!): Boolean!
 }
