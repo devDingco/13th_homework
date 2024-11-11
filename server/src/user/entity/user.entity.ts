@@ -29,7 +29,7 @@ export class UserEntity extends SharedProp {
     @Exclude()
     password: string;
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     image: string;
 
     @Column({

@@ -11,7 +11,7 @@ import {
     ValidateNested,
 } from 'class-validator';
 
-import { AddressInput } from './address-input.schema';
+import { Address } from './address-input.schema';
 import { Role } from 'src/common/enums/role.enum';
 import { Type } from 'class-transformer';
 
@@ -47,9 +47,9 @@ export class signUpUser {
     password: string;
 
     @IsString()
-    @IsNotEmpty()
-    @Field()
-    image: string;
+    @IsOptional()
+    @Field({ nullable: true })
+    image?: string;
 
     @IsOptional()
     @IsEnum(Role, {
@@ -58,10 +58,9 @@ export class signUpUser {
     @Field(() => Role, { nullable: true })
     role?: Role;
 
-    @IsArray()
     @IsOptional()
     @ValidateNested({ each: true })
-    @Type(() => AddressInput)
-    @Field(() => [AddressInput], { nullable: true })
-    addressInput?: AddressInput;
+    @Type(() => Address)
+    @Field(() => Address, { nullable: true })
+    address?: Address;
 }

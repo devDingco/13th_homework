@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { UserEntity } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
 import { loginDTO } from './dto/login.dto';
-import { signUpDTO } from './dto/signUp.dto';
+import { signUpImageDTO } from './dto/signUp-image.dto';
 
 @Injectable()
 export class UserService {
@@ -14,7 +14,7 @@ export class UserService {
         private readonly authService: AuthService,
     ) {}
 
-    async createUser(signUpDTO: signUpDTO): Promise<UserEntity> {
+    async createUser(signUpDTO: signUpImageDTO): Promise<UserEntity> {
         const password: string = await this.bcryptService.transformPassword(
             signUpDTO.password,
         );

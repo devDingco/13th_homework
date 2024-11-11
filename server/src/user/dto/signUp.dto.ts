@@ -9,10 +9,10 @@ import {
     MinLength,
     ValidateNested,
 } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 
 import { AddressDTO } from './address.dto';
 import { Role } from 'src/common/enums/role.enum';
-import { Type } from 'class-transformer';
 
 export class signUpDTO {
     @IsString()
@@ -40,10 +40,6 @@ export class signUpDTO {
     )
     password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    image: string;
-
     // 빼놓기
     @IsString()
     @IsOptional()
@@ -53,8 +49,6 @@ export class signUpDTO {
     role?: Role;
 
     @IsOptional()
-    @ValidateNested({ each: true })
     @Type(() => AddressDTO)
-    @IsObject()
     address?: AddressDTO;
 }

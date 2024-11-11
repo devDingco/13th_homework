@@ -121,9 +121,9 @@ input signUpUser {
   nickname: String!
   email: String!
   password: String!
-  image: String!
+  image: String
   role: Role
-  addressInput: [AddressInput!]
+  address: Address
 }
 
 """사용자 역할 (USER 또는 MANAGER)"""
@@ -132,7 +132,7 @@ enum Role {
   MANAGER
 }
 
-input AddressInput {
+input Address {
   zoneCode: Int!
   address: String!
   detailAddress: String!

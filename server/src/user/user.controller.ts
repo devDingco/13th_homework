@@ -3,9 +3,11 @@ import {
     Controller,
     HttpCode,
     HttpStatus,
+    InternalServerErrorException,
     Post,
     Res,
     Session,
+    UploadedFile,
     UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -13,7 +15,10 @@ import { signUpDTO } from './dto/signUp.dto';
 import { UserEntity } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerOptions } from 'configs/multer.config';
+import { uploadFile } from 'src/common/types/upload-file.interface';
+import { AddressDTO } from './dto/address.dto';
 
 @Controller('/api/user')
 export class UserController {
@@ -21,9 +26,27 @@ export class UserController {
 
     @Post('/signup')
     @HttpCode(HttpStatus.CREATED)
-    @UseInterceptors(FilesInterceptor('image'))
-    signUp(@Body() signUpDTO: signUpDTO): Promise<UserEntity> {
-        return this.userService.createUser(signUpDTO);
+    @UseInterceptors(FileInterceptor('image', multerOptions))
+    async signUp(
+        @Body() signUpDTO: signUpDTO,
+        @Body('address') address,
+        @UploadedFile() image: uploadFile,
+    ): Promise<boolean> {
+        if (!image) {
+            throw new InternalServerErrorException(
+                '이미지를 s3에 성공적으로 저장하지 못했습니다.',
+            );
+        }
+        if (address) {
+            signUpDTO.address = JSON.parse(address);
+        }
+
+        const user = await this.userService.createUser({
+            ...signUpDTO,
+            image: image.location,
+        });
+
+        if (user) return true;
     }
 
     @Post('/login')
