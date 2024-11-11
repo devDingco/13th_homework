@@ -36,6 +36,7 @@ export default function LoginPage() {
               id="password"
               type="password"
               placeholder="비밀번호를 입력해 주세요."
+              onKeyUp={(e) => e.key === "Enter" && signInSubmit()}
             />
           </form>
         </FormProvider>
