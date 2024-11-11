@@ -10,14 +10,18 @@ export default function MyProductList() {
     dataSource,
     columns,
     fetchProductsCount,
-    handleSearch,
     refetch,
+    countDataRefetch,
   } = useMyProductList();
 
   return (
     <>
       <div className="self-end">
-        <SearchBox handleSearch={handleSearch} isDate={false} />
+        <SearchBox
+          refetch={refetch}
+          countDataRefetch={() => countDataRefetch()}
+          isDate={false}
+        />
       </div>
 
       <TableList

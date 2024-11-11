@@ -3,29 +3,23 @@ import {
   FetchTravelproductsIBoughtDocument,
   FetchTravelproductsCountIBoughtDocument,
 } from "@/commons/graphql/graphql";
-import { useSearch } from "@/commons/stores/search-store";
 import { dateViewSet } from "@/utils/dateViewSet";
 import { columns } from "./constants";
 import { useRouter } from "next/navigation";
 import { usePageChange } from "@/commons/stores/page-store";
-import { DataType } from "./types";
 
 export const useMyProductList = () => {
   const router = useRouter();
-
-  const { search } = useSearch();
   const { page } = usePageChange();
 
   // ! 나의 상품 게시글 데이터
   const { data, refetch } = useQuery(FetchTravelproductsIBoughtDocument);
 
   // ! 나의 상품 게시글 총 갯수
-  const { data: countData } = useQuery(FetchTravelproductsCountIBoughtDocument);
+  const { data: countData, refetch: countDataRefetch } = useQuery(
+    FetchTravelproductsCountIBoughtDocument
+  );
   const fetchProductsCount = countData?.fetchTravelproductsCountIBought;
-  const handleSearch = async () => {
-    const result = await refetch({ search });
-    console.log(result);
-  };
 
   const tableItemOnClick = (productId: string) => {
     router.push(`/products/${productId}`);
@@ -48,7 +42,7 @@ export const useMyProductList = () => {
     dataSource,
     columns,
     fetchProductsCount,
-    handleSearch,
     refetch,
+    countDataRefetch,
   };
 };
