@@ -11,14 +11,13 @@ export default function PickedList() {
     dataSource,
     columns,
     pickedTotalCount,
-    handleSearch,
     refetch,
   } = usePickedList();
 
   return (
     <>
       <div className="self-end">
-        <SearchBox handleSearch={handleSearch} isDate={false} />
+        <SearchBox refetch={refetch} isDate={false} />
       </div>
 
       <TableList

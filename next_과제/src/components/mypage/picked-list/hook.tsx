@@ -30,12 +30,6 @@ export const usePickedList = () => {
   const { data: countData } = useQuery(FetchTravelproductsCountIPickedDocument);
   const pickedTotalCount = countData?.fetchTravelproductsCountIPicked; // !게시글 총 갯수
 
-  // ! 검색 핸들러
-  const handleSearch = async () => {
-    const result = await refetch({ search });
-    console.log(result);
-  };
-
   const tableItemOnClick = (productId: string) => {
     console.log(productId);
     router.push(`/products/${productId}`);
@@ -59,7 +53,6 @@ export const usePickedList = () => {
     dataSource,
     columns,
     pickedTotalCount,
-    handleSearch,
     refetch,
   };
 };
