@@ -51,19 +51,13 @@ export const useBoardWrite = (isEdit: boolean) => {
       );
     }
   }, [data]);
-  console.log("이미지 파일 리스트", imgFileList);
 
   // !게시글 등록 및 수정을 위한 useMutation
   const [upDateBoard] = useMutation(UpdateBoardDocument);
   const [newBoard] = useMutation(CreateBoardDocument);
   const [uploadFile] = useMutation(UploadFileDocument);
 
-  const {
-    control,
-    setValue, // 입력값 설정 메서드
-    formState: { errors }, // 폼의 상태를 나타내는 속성 isValid, isDirty, dirtyFields
-    getValues, // 폼의 입력값을 반환하는 메서드
-  } = useForm<IformList>({
+  const methods = useForm<IformList>({
     mode: "onChange",
   }); // 어떤 이벤트에 동작을 하도록 할지 설정
 
@@ -243,13 +237,22 @@ export const useBoardWrite = (isEdit: boolean) => {
     }
   };
 
+  // 게시글 내용 수정 함수
+  const onChangeWriteContents = (html: string) => {
+    methods.setValue("writeContents", html === "<p><br></p>" ? "" : html);
+    methods.trigger("writeContents");
+  };
+
+  // ! 주소 변경
+  const setAddress = (field: keyof IformList, value: string) => {
+    methods.setValue(field, value);
+    methods.trigger(field);
+  };
+
   return {
     data,
     onBoardEdit,
     onBoardNew,
-    errors,
-    control,
-    setValue,
     Controller,
     router,
     params,
@@ -263,7 +266,8 @@ export const useBoardWrite = (isEdit: boolean) => {
     isModalOpen,
     setIsModalOpen,
     modalType,
-    // handleRemoveImg,
-    // defaultFileList,
+    methods,
+    onChangeWriteContents,
+    setAddress,
   };
 };

@@ -5,19 +5,14 @@ import ReactQuillBox from "@/components/react-quill-box";
 import ModalAlertBox from "@/components/modal-alert-box";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Upload } from "antd";
-
 import { useBoardWrite } from "@/components/board-write/hook";
-
-import { Controller } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 
 export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
   const {
     data,
     onBoardEdit,
     onBoardNew,
-    errors,
-    control,
-    setValue,
     router,
     params,
     previewImage,
@@ -26,24 +21,19 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
     setPreviewOpen,
     handleChangeImg,
     isModalOpen,
-    setIsModalOpen,
-    modalType,
-    // handleRemoveImg,
     imgFileList,
+    onChangeWriteContents,
+    methods,
+    setAddress,
   } = useBoardWrite(isEdit);
-
-  //! 에러메시지가 있을 경우 alert 후 페이지 이동 처리 필요
-  console.log("수정할 데이터", data);
 
   return (
     <>
-      {isModalOpen && (
-        <ModalAlertBox type={modalType} setIsModalOpen={setIsModalOpen} />
-      )}
+      {isModalOpen && <ModalAlertBox />}
       <h3 className="text-2xl font-bold">
         {isEdit ? "게시글 수정" : "게시글 등록"}
       </h3>
-      <form>
+      <FormProvider {...methods}>
         <div className="flex justify-between gap-10 flex-nowrap">
           {(data || !isEdit) && (
             <>
@@ -53,9 +43,7 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
                 required
                 placeholder="작성자 명을 입력해 주세요."
                 type="text"
-                errormessage={errors?.writeName?.message}
                 defaultValue={data?.fetchBoard.writer || ""}
-                control={control}
                 {...(isEdit && { readOnly: true })}
               />
 
@@ -65,16 +53,14 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
                 required
                 placeholder="비밀번호를 입력해 주세요."
                 type="password"
-                errormessage={errors?.writePassword?.message}
                 defaultValue={isEdit ? "01234567" : ""}
-                control={control}
                 {...(isEdit && { readOnly: true })}
               />
             </>
           )}
         </div>
 
-        <hr className="my-10" />
+        <hr />
 
         {(data || !isEdit) && (
           <>
@@ -84,59 +70,40 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
               required
               placeholder="제목을 입력해 주세요."
               type="text"
-              errormessage={errors?.writeTitle?.message}
               defaultValue={data?.fetchBoard.title || ""}
-              control={control}
             />
-            <hr className="my-10" />
-            <Controller
-              name="writeContents"
-              control={control}
+            <hr />
+
+            <ReactQuillBox
+              id="writeContents"
+              title={
+                <div className="flex gap-1 pb-3">
+                  내용 <span className="text-red-500">*</span>
+                </div>
+              }
+              readonly={false}
+              placeholder="내용을 입력해 주세요."
               defaultValue={data?.fetchBoard.contents || ""}
-              rules={{ required: "필수 입력 사항입니다." }}
-              render={({ field }) => (
-                <ReactQuillBox
-                  id="writeContents"
-                  title={
-                    <div className="flex gap-1 pb-3">
-                      내용 <span className="text-red-500">*</span>
-                    </div>
-                  }
-                  readonly={false}
-                  placeholder="내용을 입력해 주세요."
-                  errormessage={errors?.writeContents?.message}
-                  defaultValue={data?.fetchBoard.contents || ""}
-                  onChange={(html) => {
-                    field.onChange(html === "<p><br></p>" ? "" : html);
-                  }}
-                />
-              )}
+              onChange={(html: string) => onChangeWriteContents(html)}
             />
           </>
         )}
 
-        <div className="py-10" />
         <div className="flex flex-col gap-3">
           <div className="flex gap-2 items-end max-w-56">
-            {(data || isEdit) && (
+            {(data || !isEdit) && (
               <Input
                 id="writeAddressPost"
                 title="주소"
                 placeholder="01234"
                 type="text"
-                errormessage={errors?.writeAddressPost?.message}
                 defaultValue={data?.fetchBoard.boardAddress?.zipcode || ""}
-                control={control}
                 readOnly
               />
             )}
             <PostSearchPopBtn
-              setaddress={(field, value) => setValue("writeAddress", value)}
-              setzonecode={(field, value) =>
-                setValue("writeAddressPost", value)
-              }
-              addressKeyName="writeAddress"
-              addressPostKeyName="writeAddressPost"
+              setaddress={(value) => setAddress("writeAddress", value)}
+              setzonecode={(value) => setAddress("writeAddressPost", value)}
             />
           </div>
 
@@ -146,26 +113,22 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
                 id="writeAddress"
                 placeholder="주소"
                 type="text"
-                errormessage={errors?.writeAddress?.message}
                 defaultValue={data?.fetchBoard.boardAddress?.address || ""}
                 readOnly
-                control={control}
               />
 
               <Input
                 id="writeAddressDetail"
                 placeholder="상세 주소를 입력해주세요"
                 type="text"
-                errormessage={errors?.writeAddressDetail?.message}
                 defaultValue={
                   data?.fetchBoard.boardAddress?.addressDetail || ""
                 }
-                control={control}
               />
             </>
           )}
         </div>
-        <hr className="my-10" />
+        <hr />
 
         {(data || !isEdit) && (
           <>
@@ -174,11 +137,9 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
               title="유투브 링크"
               placeholder="링크를 입력해 주세요."
               type="url"
-              errormessage={errors?.youtubeUrl?.message}
               defaultValue={data?.fetchBoard.youtubeUrl || ""}
-              control={control}
             />
-            <hr className="my-10" />
+            <hr />
             {imgFileList && (
               <Upload
                 listType="picture-card"
@@ -242,7 +203,7 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
             {isEdit ? "수정" : "등록"}하기
           </Button>
         </div>
-      </form>
+      </FormProvider>
     </>
   );
 }
