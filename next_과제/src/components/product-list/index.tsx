@@ -1,5 +1,6 @@
 "use client";
 import SearchBox from "@/components/search-box";
+
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
 import Icon from "@/components/icon-factory";
@@ -7,21 +8,15 @@ import Icon from "@/components/icon-factory";
 import ProductMenu from "./product-menu";
 import { useProductList } from "./hook";
 
-import ProductItem from "./product-item/page";
+import ProductItem from "./product-item";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 //! 리스트 스크롤링 추가하기
 
 export default function ProductList() {
   const router = useRouter();
-  const {
-    data,
-    handleSearch,
-    setIsSoldout,
-    isSoldout,
-    hasMore,
-    fetchMoreData,
-  } = useProductList();
+  const { data, refetch, setIsSoldout, isSoldout, hasMore, fetchMoreData } =
+    useProductList();
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,7 +49,7 @@ export default function ProductList() {
         </ul>
       </div>
       <div className="flex gap-4 justify-between flex-wrap">
-        <SearchBox handleSearch={handleSearch} />
+        <SearchBox refetch={refetch} />
         <Button
           className="max-sm:fixedBtn"
           size="large"

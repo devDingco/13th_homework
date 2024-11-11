@@ -5,7 +5,7 @@ import { useSearch } from "@/commons/stores/search-store";
 import { useEffect, useState } from "react";
 
 export const useProductList = () => {
-  const { search, setSearch } = useSearch();
+  const { search } = useSearch();
   const [isSoldout, setIsSoldout] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
@@ -46,14 +46,9 @@ export const useProductList = () => {
     });
   };
 
-  const handleSearch = async () => {
-    const result = await refetch({ search });
-    console.log(result);
-  };
-
   return {
     data,
-    handleSearch,
+    refetch,
     setIsSoldout,
     isSoldout,
     hasMore,
