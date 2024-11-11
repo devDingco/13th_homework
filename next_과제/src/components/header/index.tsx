@@ -5,12 +5,10 @@ import { Button, Select } from "antd";
 import Icon from "@/components/icon-factory";
 import { useHeader } from "./hook";
 import styles from "./index.module.scss";
-import { useLoadStore } from "@/commons/stores/load-store";
-import { useAccessTokenStore } from "@/commons/stores/access-token";
+import { useLoginStore } from "@/commons/stores/login-store";
 
 const Header = () => {
-  const { isLoaded } = useLoadStore();
-  const { accessToken } = useAccessTokenStore();
+  const { isLogged } = useLoginStore();
 
   const {
     isHeaderHide,
@@ -121,7 +119,7 @@ const Header = () => {
             </ul>
           </nav>
           <div className="flex gap-6">
-            {isLoaded && accessToken !== "" ? (
+            {isLogged ? (
               <div className="flex justify-end items-center relative">
                 <button
                   className="flex gap-1 items-center"

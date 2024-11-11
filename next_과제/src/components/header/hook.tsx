@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLayout } from "@/commons/hooks/useLayout";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidv4 } from "uuid";
@@ -15,7 +15,10 @@ import { useUserInfo } from "@/commons/stores/user-info-store";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
-import { menuItems, chargeOptions } from "./constants";
+import {
+  menuItems as menuItemsArr,
+  chargeOptions as changeOption,
+} from "./constants";
 
 export const useHeader = () => {
   const { setUserInfo } = useUserInfo();
@@ -25,6 +28,9 @@ export const useHeader = () => {
   const menuItemRef = useRef<HTMLUListElement>(null);
   const [chargeModalVisible, setChargeModalVisible] = useState(false);
   const [chargePrice, setChargePrice] = useState(0);
+
+  const menuItems = useMemo(() => menuItemsArr, []);
+  const chargeOptions = useMemo(() => changeOption, []);
 
   // 내 정보 조회
   const { data: fetchUserData } = useQuery(FetchUserLoggedInDocument);
@@ -69,12 +75,12 @@ export const useHeader = () => {
 
       const paymentId = result?.paymentId as string;
 
-      const createPoint = await createPointTransactionOfLoading({
+      await createPointTransactionOfLoading({
         variables: { paymentId },
         refetchQueries: [{ query: FetchUserLoggedInDocument }],
       });
 
-      console.log(createPoint);
+      // console.log(createPoint);
 
       setChargeModalVisible(false); // 충전 모달 닫기
     } catch (error) {
