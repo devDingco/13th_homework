@@ -11,7 +11,7 @@ import {
 } from 'class-validator';
 
 @InputType()
-export class loginUser {
+export class LoginUser {
     @IsString()
     @IsNotEmpty()
     @IsEmail({}, { message: 'Invalid email format' })

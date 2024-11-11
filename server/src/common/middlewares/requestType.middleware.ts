@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 export class RequestTypeMiddleware implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
         req.isGraphQL = req.originalUrl === '/graphql';
+
         next();
     }
 }

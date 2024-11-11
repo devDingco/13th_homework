@@ -11,10 +11,10 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UploadModule } from './upload/upload.module';
 import { UserModule } from './user/user.module';
 import { mongoDBConfig } from 'configs/mongoDB.config';
 import { postgreSQLConfig } from 'configs/postgreSQL.config';
-import { UploadModule } from './upload/upload.module';
 
 @Module({
     imports: [
@@ -35,6 +35,7 @@ import { UploadModule } from './upload/upload.module';
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: 'src/graphql/schema.gql',
+            csrfPrevention: false,
             context: ({ req, res }) => ({ req, res }),
         }),
 

@@ -16,7 +16,7 @@ import { Role } from 'src/common/enums/role.enum';
 import { Type } from 'class-transformer';
 
 @InputType()
-export class signUpUser {
+export class SignUpUser {
     @IsString()
     @IsNotEmpty()
     @Field()
@@ -45,11 +45,6 @@ export class signUpUser {
     )
     @Field()
     password: string;
-
-    @IsString()
-    @IsOptional()
-    @Field({ nullable: true })
-    image?: string;
 
     @IsOptional()
     @IsEnum(Role, {

@@ -71,8 +71,8 @@ type Mutation {
   createBoardComment(boardId: Int!, createBoardComment: CreateBoardCommentInput!): BoardCommentResponseDTO!
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
-  signup(signUpUser: signUpUser!): Boolean!
-  login(loginUser: loginUser!): TokenSchema!
+  signup(signUpUser: SignUpUser!, file: Upload): Boolean!
+  login(loginUser: LoginUser!): TokenSchema!
   logout: Boolean!
   validateNickname(nickname: String!): Boolean!
 }
@@ -116,12 +116,11 @@ input UpdateBoardCommentInput {
   parentId: String
 }
 
-input signUpUser {
+input SignUpUser {
   name: String!
   nickname: String!
   email: String!
   password: String!
-  image: String
   role: Role
   address: Address
 }
@@ -138,7 +137,10 @@ input Address {
   detailAddress: String!
 }
 
-input loginUser {
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input LoginUser {
   email: String!
   password: String!
   dev: Boolean
