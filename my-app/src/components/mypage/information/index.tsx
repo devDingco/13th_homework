@@ -26,7 +26,10 @@ export default function Information() {
                 <RightOutlined />
               </Link>
             </div>
-
+            <div>
+              포인트 충전하기
+              <RightOutlined />
+            </div>
             <Link href="/mypage/pointHistory" className={styles.pointHistory}>
               포인트내역
               <RightOutlined />
