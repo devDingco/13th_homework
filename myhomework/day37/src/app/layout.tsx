@@ -16,7 +16,7 @@ const PretendardR = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Day36",
+  title: "Day37",
   description: "메인캠프 과제",
 };
 

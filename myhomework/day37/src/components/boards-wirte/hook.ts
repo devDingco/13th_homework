@@ -35,7 +35,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
 
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isHover, setIsHover] = useState(Array(3).fill(false));
 
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
@@ -59,7 +58,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
       setBasicAddress(data.fetchBoard?.boardAddress?.address || "");
       setDetailAddress(data.fetchBoard?.boardAddress?.addressDetail || "");
       setYoutubeLink(data.fetchBoard?.youtubeUrl || "");
-      setImageUrl(data.fetchBoard?.images || ["", "", ""]);
     }
   }, [isEdit, data]);
 
@@ -106,18 +104,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     setYoutubeLink(youtubeLink);
   };
 
-  const onMouseHover = (index: number) => {
-    const newHoverState = [...isHover];
-    newHoverState[index] = true; // 해당 인덱스만 true로 설정
-    setIsHover(newHoverState);
-  };
-
-  const onMouseNoneHover = (index: number) => {
-    const newHoverState = [...isHover];
-    newHoverState[index] = false; // 해당 인덱스만 false로 설정
-    setIsHover(newHoverState);
-  };
-
   // string 또는 비어있는 array를 기본값으로 둔 useState
   const [imageUrl, setImageUrl] = useState<string[]>(["", "", ""]);
 
@@ -136,19 +122,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     const newImages = [...imageUrl];
     newImages[Number(id)] = result.data?.uploadFile.url ?? ""; // 기존 이미지들을 복사한 뒤, 추가로 올린 사진을 뒤에 덧붙여서 연결하기
     setImageUrl(newImages);
-  };
-
-  const onClickRemovePrevImg = (
-    event: React.MouseEvent<HTMLImageElement>,
-    index: number
-  ) => {
-    event.stopPropagation();
-
-    const updatedImageUrls = [...imageUrl];
-    updatedImageUrls[index] = ""; // 해당 인덱스의 이미지를 제거
-
-    // 상태 업데이트
-    setImageUrl(updatedImageUrls);
   };
 
   const fileRefArray = [
@@ -202,7 +175,6 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     }
   };
 
-  // 유효성 검증을 if문 여러개 걸어서 했더니 데이터가 정상적으로 들어가지는데도 어디서 문제가 생겨 수정 기능이 작동하지 않는지 확인이 어려워서 유효성 체크를 필수적인 것만 하도록 간단하게 변경
   const onClickUpdate = async () => {
     // 입력값 유효성 체크: 수정에 필요한 필드가 모두 채워졌는지 확인
     if (!inputs.title.trim() || !inputs.contents.trim()) {
@@ -219,7 +191,7 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
 
     const myvariables: UpdateBoardMutationVariables = {
       boardId: String(params.boardId), // boardId는 ID! 타입, String으로 변환 후 전달
-      password: promptPassword, // 비밀번호는 optional, 필수로 전달되면 문제 없음
+      password: promptPassword, // 비밀번호는 optional, 필수로 전달되면 문제없음
       updateBoardInput: {
         title: inputs.title.trim() || null,
         contents: inputs.contents.trim() || null,
@@ -233,6 +205,29 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
       },
     };
 
+    // const myvariables: UpdateBoardMutationVariables = {
+    //   boardId: String(params.boardId),
+    //   password: promptPassword,
+    //   updateBoardInput: {
+    //     boardAddress: {},
+    //   },
+    // };
+
+    // if (inputs.title) myvariables.updateBoardInput.title = inputs.title;
+    // if (inputs.contents)
+    //   myvariables.updateBoardInput.contents = inputs.contents;
+    // if (zipcode || basicAddress || detailAddress) {
+    //   // 주소가 하나라도 있을 때만 주소 정보를 포함
+    //   myvariables.updateBoardInput.boardAddress = {
+    //     zipcode: zipcode || null,
+    //     address: basicAddress || null,
+    //     addressDetail: detailAddress || null,
+    //   };
+    // }
+    // if (youtubeLink) myvariables.updateBoardInput.youtubeUrl = youtubeLink;
+    // if (imageUrl) myvariables.updateBoardInput.images = imageUrl;
+    // console.log("🚀 ~ onClickUpdate ~ myvariables:", myvariables);
+
     try {
       const result = await updateBoard({ variables: myvariables });
       console.log("🚀 ~ onClickUpdate ~ result:", result);
@@ -241,14 +236,22 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
       router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       console.log("🚀 ~ onClickUpdate ~ error:", error);
-      if (
-        (error as { graphQLErrors?: GraphQLError[] }).graphQLErrors?.some(
-          (e: GraphQLError) => e.message === "Invalid password"
-        )
-      ) {
-        Modal.error({ content: "비밀번호가 틀렸습니다." });
+      if (error instanceof Error) {
+        console.error("Update error:", error.message);
+        if (
+          (error as { graphQLErrors?: GraphQLError[] }).graphQLErrors?.some(
+            (e: GraphQLError) => e.message === "Invalid password"
+          )
+        ) {
+          Modal.error({ content: "비밀번호가 틀렸습니다." });
+        } else {
+          Modal.error({ content: "오류가 발생했습니다. 다시 시도해주세요." });
+        }
       } else {
-        Modal.error({ content: "오류가 발생했습니다. 다시 시도해주세요." });
+        console.error("Unknown error", error);
+        Modal.error({
+          content: "알 수 없는 오류가 발생했습니다. 다시 시도해주세요.",
+        });
       }
     }
   };
@@ -296,9 +299,5 @@ export const useBoardsWrite = ({ isEdit }: IBoardsWriteProps) => {
     onChangeFile,
     imageUrl,
     fileRefArray,
-    isHover,
-    onMouseHover,
-    onMouseNoneHover,
-    onClickRemovePrevImg,
   };
 };

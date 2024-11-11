@@ -1,16 +1,17 @@
 "use client";
 
 import { useQuery, useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { MouseEvent } from "react";
 import {
   DeleteBoardDocument,
+  FetchBoardQuery,
   FetchBoardsDocument,
 } from "@/commons/graphql/graphql";
 
-export const useBoardsList = (_id: string) => {
+export const useBoardsList = () => {
   const params = useParams();
-  const router = useRouter();
+  const { data } = useQuery<FetchBoardQuery>(FetchBoardsDocument);
   console.log("Params:", params);
 
   const result = useQuery(FetchBoardsDocument, {
@@ -21,9 +22,9 @@ export const useBoardsList = (_id: string) => {
 
   console.log(result.data);
 
-  const onClickMoveToDetail = (_id: string) => {
-    router.push(`/boards/${_id}`);
-  };
+  // const onClickMoveToDetail = (_id: string) => {
+  //   router.push(`/boards/${_id}`);
+  // };
 
   const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -37,7 +38,7 @@ export const useBoardsList = (_id: string) => {
   };
 
   return {
-    onClickMoveToDetail,
+    data,
     onClickDelete,
   };
 };

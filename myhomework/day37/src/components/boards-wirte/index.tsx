@@ -2,13 +2,13 @@
 
 import styles from "./styles.module.css";
 
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { useBoardsWrite } from "./hook";
 import { IBoardsWriteProps } from "./types";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { useRef } from "react";
 import Image from "next/image";
 import add from "/public/icon/add.png";
-import deleteIcon from "/public/icon/delete.svg";
 
 const BoardsWrite = (props: IBoardsWriteProps) => {
   // const fileRefs = [];
@@ -35,10 +35,6 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
     onChangeFile,
     imageUrl,
     fileRefArray,
-    isHover,
-    onMouseHover,
-    onMouseNoneHover,
-    onClickRemovePrevImg,
   } = useBoardsWrite(props);
 
   return (
@@ -174,13 +170,10 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
               .fill("")
               .map((value, index) => {
                 return (
-                  <>
+                  <div key={index}>
                     <div
                       className={styles.photobox}
                       onClick={() => onClickImage(index)}
-                      key={index}
-                      onMouseOver={() => onMouseHover(index)} // index 전달
-                      onMouseOut={() => onMouseNoneHover(index)} // index 전달
                     >
                       {imageUrl[index] === "" ? (
                         <>
@@ -188,29 +181,12 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
                           <p>클릭해서 사진 업로드</p>
                         </>
                       ) : (
-                        <>
-                          <Image
-                            src={deleteIcon}
-                            alt="delete icon"
-                            className={isHover[index] ? styles.deleteIcon : ""}
-                            style={
-                              isHover[index]
-                                ? { display: "block" }
-                                : { display: "none" }
-                            }
-                            onClick={(event) =>
-                              onClickRemovePrevImg(event, index)
-                            }
-                          />
-                          <Image
-                            src={`https://storage.googleapis.com/${imageUrl[index]}`}
-                            alt="preview"
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                            className={styles.prevImage}
-                          />
-                        </>
+                        <Image
+                          src={`https://storage.googleapis.com/${imageUrl[index]}`}
+                          alt="preview"
+                          width={100}
+                          height={100}
+                        />
                       )}
                     </div>
                     <input
@@ -223,7 +199,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
                       // 지정해준 확장자를 제외하고 다른 파일은 선택 자체가 안 되는 명령어
                       // 1. jpg/jpeg 모두 가능, 2. 띄어쓰기 없이 ','로 구분
                     />
-                  </>
+                  </div>
                 );
               })}
           </div>
