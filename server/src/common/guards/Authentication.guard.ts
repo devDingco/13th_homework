@@ -27,7 +27,8 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
                 url.includes('login') ||
                 url.includes('signup') ||
                 url.includes('token') ||
-                url.includes('validate')
+                url.includes('validate') ||
+                url.includes('upload')
             ) {
                 return true;
             }

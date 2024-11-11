@@ -6,12 +6,14 @@ import {
     Post,
     Res,
     Session,
+    UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { signUpDTO } from './dto/signUp.dto';
 import { UserEntity } from './entity/user.entity';
 import { loginDTO } from './dto/login.dto';
 import { Response } from 'express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('/api/user')
 export class UserController {
@@ -19,6 +21,7 @@ export class UserController {
 
     @Post('/signup')
     @HttpCode(HttpStatus.CREATED)
+    @UseInterceptors(FilesInterceptor('image'))
     signUp(@Body() signUpDTO: signUpDTO): Promise<UserEntity> {
         return this.userService.createUser(signUpDTO);
     }

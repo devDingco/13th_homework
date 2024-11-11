@@ -14,6 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { mongoDBConfig } from 'configs/mongoDB.config';
 import { postgreSQLConfig } from 'configs/postgreSQL.config';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
     imports: [
@@ -43,6 +44,7 @@ import { postgreSQLConfig } from 'configs/postgreSQL.config';
         AuthModule,
         BcryptModule,
         UserModule,
+        UploadModule,
     ],
     controllers: [AppController],
     providers: [AppService],
