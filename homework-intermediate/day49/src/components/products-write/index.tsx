@@ -1,9 +1,8 @@
 'use client';
 
 import { Divider, Modal } from 'antd';
-import Image from 'next/image';
-import add_img from '@/assets/add_image.png';
-import 'react-quill/dist/quill.snow.css';
+import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
+
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,13 +11,16 @@ import {
 	CreateTravelproductInput,
 	UpdateTravelproductInput,
 } from '@/commons/graphql/graphql';
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import {
 	CREATE_TRAVEL_PRODUCT,
 	UPDATE_TRAVEL_PRODUCT,
 } from '@/components/products-write/queries';
-import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
+
+import Image from 'next/image';
+import add_img from '@/assets/add_image.png';
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 
 const ReactQuill = dynamic(async () => await import('react-quill'), {
@@ -54,6 +56,7 @@ export default function ProductWrite(props) {
 			mode: 'onChange',
 			resolver: zodResolver(travelProductSchema),
 		});
+
 	const address = watch('travelproductAddress.address');
 	console.log('🚀 ~ ProductWrite ~ address:', address);
 
@@ -69,8 +72,10 @@ export default function ProductWrite(props) {
 	};
 
 	const onChangeContents = (value) => {
-		setValue('contents', value);
-		trigger('contents');
+		console.log('🚀 ~ onChangeContents ~ value:', value);
+		const sanitizedValue = value === '<p><br></p>' ? '' : value;
+		setValue('contents', sanitizedValue);
+		trigger('contents'); // 유효성 검사 실행
 	};
 
 	// Create
@@ -108,49 +113,44 @@ export default function ProductWrite(props) {
 		}
 	}, [props.data, reset]);
 
-	// 카카오지도 API 사용하기
+	// 카카오지도 API
 	useEffect(() => {
-		//services 라이브러리 불러오기
 		const script = document.createElement('script');
 		script.src =
 			'//dapi.kakao.com/v2/maps/sdk.js?appkey=eabb3c1ebe27ec04b62de93c0991906a&libraries=services&autoload=false';
 		document.head.appendChild(script);
+
 		script.onload = () => {
 			window.kakao.maps.load(function () {
-				// 지도를 담을 영역의 DOM 레퍼런스
-				const container = document.getElementById('map');
-				// 지도 생성시 초기 옵션
-				const options = {
-					center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-					level: 3,
-				};
-				// 지도 생성
-				const map = new window.kakao.maps.Map(container, options);
-
 				if (address) {
+					const container = document.getElementById('map');
+					const options = {
+						center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+						level: 3,
+					};
+					const map = new window.kakao.maps.Map(container, options);
 					// 주소-좌표 변환 객체 생성
 					const geocoder = new window.kakao.maps.services.Geocoder();
 
-					// address로 주소 검색
 					geocoder.addressSearch(address, (result, status) => {
 						if (status === window.kakao.maps.services.Status.OK) {
-							// 결과값으로 좌표값 얻기
 							const coords = new window.kakao.maps.LatLng(
 								result[0].y,
 								result[0].x,
 							);
 
-							// 좌표값으로 마커로 표시
+							// 결과값으로 받은 위치를 마커로 표시
 							const marker = new window.kakao.maps.Marker({
 								map: map,
 								position: coords,
 							});
-							// 지도 중심을 결과값으로 받은 위치로 이동
-							map.setCenter(coords);
 
-							// react-hook-form의 위도, 경도 필드의 값 설정
+							// 위도, 경도 값 설정
 							setValue('travelproductAddress.lat', Number(result[0].y));
 							setValue('travelproductAddress.lng', Number(result[0].x));
+
+							// 지도 중심을 결과값으로 받은 위치로 이동
+							map.setCenter(coords);
 						}
 					});
 				}
@@ -213,13 +213,7 @@ export default function ProductWrite(props) {
 					>
 						상품 설명
 					</label>
-					<ReactQuill onChange={onChangeContents} />
-					{/* <textarea
-						id="product_desc"
-						{...register('contents')}
-						className="h-[29.8125rem] rounded-lg border px-4 py-3"
-						placeholder="내용을 입력해 주세요."
-					/> */}
+					<ReactQuill onChange={onChangeContents} className="h-96 rounded-lg" />
 					<div className="text-red-500">
 						{formState.errors.contents?.message}
 					</div>
@@ -335,16 +329,14 @@ export default function ProductWrite(props) {
 					{/* 상세 위치 지도 */}
 					<div className="flex flex-col gap-4">
 						<div>상세 위치</div>
-						{address ? (
-							<div id="map" className="h-[312px] w-[844px]"></div>
-						) : (
+						<div id="map" className="h-[312px] w-[844px]">
 							<Image
 								src={'https://placehold.co/844x312'}
 								alt="지도"
 								width={844}
 								height={312}
 							/>
-						)}
+						</div>
 					</div>
 				</div>
 				<Divider className="h-[.0625rem] bg-[#E4E4E4]" />

@@ -20,6 +20,7 @@ import {
 import { useState } from 'react';
 import ProductQuestion from './product-question';
 import ProductQuestionList from './product-question-list';
+import DOMPurify from 'dompurify';
 
 export default function ProductDetail(props) {
 	const params = useParams();
@@ -105,11 +106,23 @@ export default function ProductDetail(props) {
 						/>
 					</div>
 					<Divider className="h-[1px] bg-[#D4D3D3]" />
+
 					<div className="flex flex-col gap-4">
 						<h2 className="text-xl font-bold text-black">상세 설명</h2>
-						<article>{data?.fetchTravelproduct.contents}</article>
+						<article>
+							{typeof window !== 'undefined' && (
+								<div
+									dangerouslySetInnerHTML={{
+										__html: DOMPurify.sanitize(
+											data?.fetchTravelproduct.contents ?? '',
+										),
+									}}
+								/>
+							)}
+						</article>
 					</div>
 					<Divider className="h-[1px] bg-[#D4D3D3]" />
+
 					<div className="flex flex-col gap-4">
 						<h2 className="text-xl font-bold text-black">상세 위치</h2>
 						<Image
