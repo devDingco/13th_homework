@@ -3,7 +3,7 @@
 import "react-quill/dist/quill.snow.css";
 import useProductsWirte from "./hook";
 import styles from "./styles.module.css";
-import KakaoMap from "./kakao-map";
+import KakaoMap from "../commons/kakao-map";
 import dynamic from "next/dynamic";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { FormProvider } from "react-hook-form";
@@ -14,6 +14,7 @@ import { ButtonSoftMFitBorder, ButtonSoftMFitMain } from "@/commons/ui/button";
 import { LinkCancel } from "@/commons/ui/link";
 import FieldWrapper from "../commons/fieldWrapper";
 import ErrorMessage from "@/commons/ui/error";
+import Image from "next/image";
 
 // ReactQuill을 dynamic으로 import
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -23,10 +24,10 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 export default function ProductsWrite(props) {
   const {
     isZipCodeModalOpen,
-    lat,
-    lng,
     tags,
     inputTag,
+    fileRef,
+    images,
     methods,
     onToggleZipCodeModal,
     handleCompleteZipcodeModal,
@@ -34,9 +35,14 @@ export default function ProductsWrite(props) {
     onChangeTag,
     addTag,
     removeTag,
+    onChangeFile,
+    onClickImage,
+    onClickDelete,
     onClickSubmit,
   } = useProductsWirte(props);
   // modal 토글 - zipcode
+  const lat = methods.watch("lat");
+  const lng = methods.watch("lng");
 
   return (
     <div className={styles.post_page_body}>
@@ -48,7 +54,7 @@ export default function ProductsWrite(props) {
             onSubmit={methods.handleSubmit(onClickSubmit)}
           >
             {/* 상품명 입력 필드 */}
-            <FieldWrapper label="상품명">
+            <FieldWrapper label="상품명" isRequired={true}>
               <InputSoftMFull
                 type="text"
                 name="name"
@@ -60,7 +66,7 @@ export default function ProductsWrite(props) {
             <hr />
 
             {/* 한줄 요약 입력 필드 */}
-            <FieldWrapper label="한줄 요약">
+            <FieldWrapper label="한줄 요약" isRequired={true}>
               <InputSoftMFull
                 type="text"
                 name="remarks"
@@ -72,19 +78,18 @@ export default function ProductsWrite(props) {
             <hr />
 
             {/* 상품 설명 입력 필드 */}
-            <FieldWrapper label="상품 설명">
-              <ReactQuill onChange={onChangeContents} />
-              {/* <TextareaSoftMFull
-                name="contents"
-                placeholder="내용을 입력해주세요."
-              /> */}
+            <FieldWrapper label="상품 설명" isRequired={true}>
+              <ReactQuill
+                onChange={onChangeContents}
+                className={styles.quill_editor}
+              />
               <ErrorMessage name="contents" />
             </FieldWrapper>
 
             <hr />
 
             {/* 판매 가격 입력필드 */}
-            <FieldWrapper label="판매 가격">
+            <FieldWrapper label="판매 가격" isRequired={true}>
               <InputSoftMFull
                 type="number"
                 name="price"
@@ -120,10 +125,10 @@ export default function ProductsWrite(props) {
 
             <hr />
 
+            {/* 주소 입력 필드 */}
             <div className={styles.address}>
-              {/* 주소 검색 필드 */}
               <div className={styles.address_input}>
-                <FieldWrapper label="주소">
+                <FieldWrapper label="주소" isRequired={true}>
                   <div className={styles.zipcode_search}>
                     <InputSoftMS
                       type="text"
@@ -146,7 +151,7 @@ export default function ProductsWrite(props) {
                 </FieldWrapper>
                 <FieldWrapper label="위도(LAT)">
                   <InputSoftMFull
-                    type="text"
+                    type="number"
                     name="lat"
                     placeholder="주소를 먼저 입력해 주세요."
                     readOnly={true}
@@ -155,12 +160,13 @@ export default function ProductsWrite(props) {
                 </FieldWrapper>
                 <FieldWrapper label="경도(LNG)">
                   <InputSoftMFull
-                    type="text"
+                    type="number"
                     name="lng"
                     placeholder="주소를 먼저 입력해 주세요."
                     readOnly={true}
                     disabled={true}
                   />
+                  <ErrorMessage name="zipcode" />
                 </FieldWrapper>
               </div>
               {/* 상세위치 지도 */}
@@ -180,7 +186,56 @@ export default function ProductsWrite(props) {
               )}
             </div>
 
+            <hr />
+
             {/* TODO: 이미지 업로드 */}
+            <FieldWrapper label="사진 첨부" isRequired={true}>
+              <div className={styles.upload_button_group}>
+                {images &&
+                  images.map((image, index) => (
+                    <div
+                      key={`${image}_${index}`}
+                      className={styles.upload_image_box}
+                    >
+                      <Image
+                        className={styles.upload_image}
+                        src={`https://storage.googleapis.com/${image}`}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        alt={"image"}
+                      />
+                      <Image
+                        className={styles.delete_btn}
+                        src="/images/close_btn.png"
+                        width={16}
+                        height={16}
+                        alt="삭제버튼"
+                        id={String(index)}
+                        onClick={onClickDelete}
+                      />
+                    </div>
+                  ))}
+
+                {/* 이미지 업로드 버튼 */}
+                <Image
+                  src={"/images/add image.png"}
+                  alt="파일업로드버튼"
+                  width={160}
+                  height={160}
+                  className={styles.btn_upload}
+                  onClick={onClickImage}
+                />
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={onChangeFile}
+                  ref={fileRef}
+                  accept="image/jpeg,image/png"
+                />
+              </div>
+              <ErrorMessage name="images" />
+            </FieldWrapper>
 
             <div className={styles.btn_group}>
               <LinkCancel href="/products">취소</LinkCancel>

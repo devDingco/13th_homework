@@ -38,6 +38,17 @@ const { RangePicker } = DatePicker;
 export default function ProductsList() {
   const [filter, setFilter] = useState("all");
   const [activeCategory, setActiveCategory] = useState(null);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const toggleWishlist = () => {
+    setIsWishlisted(!isWishlisted);
+    // Here you would typically call an API to update the wishlist status
+    console.log(
+      `Product ${productId} ${
+        isWishlisted ? "removed from" : "added to"
+      } wishlist`
+    );
+  };
 
   const onClickCategory = (category) => {
     setActiveCategory(category.name);
@@ -197,10 +208,23 @@ export default function ProductsList() {
                   layout="fill"
                   objectFit="cover"
                 />
-                <div className={styles.like_button}>
-                  <Heart size={20} className={styles.like_icon} />
-                  <span>{service.likes}</span>
-                </div>
+                <button
+                  onClick={toggleWishlist}
+                  className={`
+        ${styles.button} 
+        ${styles.buttonOutline} 
+        ${isWishlisted ? styles.buttonOutlineRed : ""}
+        ${isWishlisted ? styles.buttonOutlineRedDark : ""}
+      `}
+                >
+                  <Heart
+                    className={`
+          ${styles.icon} 
+          ${isWishlisted ? styles.iconFilled : styles.iconDefault}
+        `}
+                  />
+                  <span className="sr-only">찜하기</span>
+                </button>
               </div>
               <div className={styles.top3_content}>
                 <h3>{service.name}</h3>

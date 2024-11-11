@@ -22,7 +22,7 @@
 .focus_on_services h2 {
   color: #232a36;
   margin-bottom: 16px;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 
@@ -35,29 +35,29 @@
 .top3_item {
   flex-basis: calc(33.333% - 20px);
   background-color: #fff;
-  border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* 트랜지션 효과 추가 */
 }
 
 .top3_item:hover {
   transform: translateY(-5px); /* 호버 시 카드가 위로 이동 */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+  /* box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 호버 시 그림자 강화 */
 }
 
 .top3_image_container,
 .service_image_container {
   position: relative;
   width: 100%;
-  padding-bottom: 75%; /* 4:3 Aspect Ratio */
+  padding-bottom: 75%;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 .top3_content,
 .service_content {
-  padding: 16px;
+  padding-top: 16px;
 }
 
 .filter_menu {
@@ -198,13 +198,13 @@
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .service_card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); */
 }
 
 .tags {
@@ -288,4 +288,42 @@
   font-weight: 600;
   margin-bottom: 8px;
   color: #333;
+}
+
+/* WishlistButton.module.css */
+.button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+}
+
+.buttonOutline {
+  border: 1px solid;
+}
+
+.buttonOutlineRed {
+  background-color: #fef2f2; /* bg-red-100 */
+  border-color: #fca5a5; /* border-red-200 */
+}
+
+.buttonOutlineRedDark {
+  background-color: #be123c; /* bg-red-900 */
+  border-color: #991b2d; /* border-red-800 */
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: color 0.3s;
+}
+
+.iconFilled {
+  color: #f87171; /* text-red-500 */
+}
+
+.iconDefault {
+  color: #6b7280; /* text-gray-500 */
 }

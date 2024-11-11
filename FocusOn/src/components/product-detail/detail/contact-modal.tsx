@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function ContactModal({ isModalOpen, toggleModal }) {
   const onFinish = (values) => {
-    // 여기서 API 호출하기
+    // TODO: 여기서 API 호출하기
   };
 
   return (

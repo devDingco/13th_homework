@@ -1,0 +1,56 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.contents {
+  display: flex;
+  width: 100%;
+  height: 144px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  margin-bottom: 16px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button_cancel {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.button_submit {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-B, #000);
+  color: white;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
