@@ -5,7 +5,7 @@ import { dateViewSet } from "@/utils/dateViewSet";
 import type { TableProps } from "antd";
 import type { DataType } from "@/components/board-list/types";
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
@@ -30,18 +30,9 @@ export const useBoardList = () => {
 
   const fetchBoardsCount = countData?.fetchBoardsCount; // !게시글 총 갯수
 
-  // ! 검색 처리
-  const handleSearch = async () => {
-    const result = await refetch({ startDate, endDate, search, page });
-    const countResult = await countDataRefetch({ startDate, endDate, search });
-    console.log(countResult);
-    console.log(result);
-  };
-
   // ! 페이지 변경시 데이터 다시 불러오기
   const pageChangeHandler = async (page: number) => {
-    const result = await refetch({ startDate, endDate, search, page });
-    console.log(result);
+    await refetch({ startDate, endDate, search, page });
     setPage(page);
   };
 
@@ -126,7 +117,22 @@ export const useBoardList = () => {
       key: "title",
       render: (value, record, index) => (
         <div className="flex gap-2">
-          {value}
+          <span>
+            {search !== ""
+              ? value
+                  .replaceAll(search, `$keyword$${search}$keyword$`)
+                  .split("$keyword$")
+                  .map((text: string, idx: number) => (
+                    <Fragment key={text + idx}>
+                      {text !== search ? (
+                        text
+                      ) : (
+                        <span className="text-red-500">{text}</span>
+                      )}
+                    </Fragment>
+                  ))
+              : value}
+          </span>
           {data?.fetchBoards[index].youtubeUrl && (
             <VideoCameraTwoTone twoToneColor="#ff4848" />
           )}
@@ -182,6 +188,7 @@ export const useBoardList = () => {
     columns,
     fetchBoardsCount,
     router,
-    handleSearch,
+    refetch,
+    countDataRefetch,
   };
 };
