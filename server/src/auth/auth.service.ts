@@ -43,12 +43,12 @@ export class AuthService {
         return { accessToken, refreshToken };
     }
 
-    async validationSocialToken(provider: Provider, token: string) {
-        if (provider === Provider.GOOGLE) {
+    async validationSocialToken(provider: string, token: string) {
+        if (provider === Provider.google) {
             return await this.validationGoogleToken(token);
-        } else if (provider === Provider.KAKAO) {
+        } else if (provider === Provider.kakao) {
             return await this.validationKakaoToken(token);
-        } else if (provider === Provider.NAVER) {
+        } else if (provider === Provider.naver) {
             return await this.validationNaverToken(token);
         }
     }

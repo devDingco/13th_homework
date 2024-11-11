@@ -47,12 +47,24 @@ export class UserService {
             loginDTO.dev,
         );
 
-        return { ...token, image: user.image, nickname: user.nickname };
+        return { ...token, image: user.image, name: user.name };
     }
 
-    async socialLogin(email: string) {
-        const user: UserEntity | undefined =
-            await this.userRepository.findUserEmail(email);
+    async socialLogin(socialLoginDto: SocialLoginDTO) {
+        let user: UserEntity | undefined =
+            await this.userRepository.findUserEmail(socialLoginDto.email);
+
+        if (!user) {
+            user = await this.userRepository.createSocialUser(socialLoginDto);
+        }
+
+        const token = await this.authService.issueLoginToken(
+            user.userId,
+            user.role,
+            true,
+        );
+
+        return { ...token };
     }
 
     async findNickname(nickname: string) {

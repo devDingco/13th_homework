@@ -42,14 +42,14 @@ export class UserResolver {
         @Args('loginUser') loginUser: LoginUser,
         @Context('req') req: { session: Record<string, any>; res: Response },
     ) {
-        const { accessToken, refreshToken, image, nickname } =
+        const { accessToken, refreshToken, image, name } =
             await this.userService.login(loginUser);
 
         req.res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         req.session.refreshToken = refreshToken;
 
-        return { accessToken, image, nickname };
+        return { accessToken, image, name };
     }
 
     @Mutation(() => Boolean)

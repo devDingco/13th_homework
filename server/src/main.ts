@@ -22,6 +22,8 @@ async function bootstrap() {
     app.enableCors({
         origin: '*',
         credentials: true,
+        allowedHeaders: ['Authorization', 'Content-Type'],
+        exposedHeaders: ['Authorization'],
     });
     // middleware
     app.use(new RequestTypeMiddleware().use);

@@ -60,13 +60,13 @@ export class UserController {
         @Res() res: Response,
         @Session() session: Record<string, any>,
     ): Promise<void> {
-        const { accessToken, refreshToken, nickname, image } =
+        const { accessToken, refreshToken, name, image } =
             await this.userService.login(loginDTO);
         res.setHeader('Authorization', `Bearer ${accessToken}`);
 
         session.refreshToken = refreshToken;
 
-        res.status(HttpStatus.OK).json({ accessToken, nickname, image });
+        res.status(HttpStatus.OK).json({ accessToken, name, image });
     }
 
     @Post('/social/login')
@@ -74,14 +74,24 @@ export class UserController {
     async socialLogin(
         @Body() socialLoginDto: SocialLoginDTO,
         @Req() req: Request,
+        @Res() res: Response,
+        @Session() session: Record<string, any>,
     ) {
-        const res = await this.authService.validationSocialToken(
+        const result = await this.authService.validationSocialToken(
             socialLoginDto.provider,
             req.headers.authorization.split(' ')[1],
         );
 
-        if (res)
-            return await this.userService.socialLogin(socialLoginDto.email);
+        if (result) {
+            const { accessToken, refreshToken } =
+                await this.userService.socialLogin(socialLoginDto);
+
+            res.setHeader('Authorization', `Bearer ${accessToken}`);
+
+            session.refreshToken = refreshToken;
+
+            res.status(HttpStatus.OK).json({ accessToken });
+        }
     }
 
     @Post('/logout')

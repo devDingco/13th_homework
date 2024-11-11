@@ -1,9 +1,9 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum Provider {
-    KAKAO = 'kakao',
-    GOOGLE = 'google',
-    NAVER = 'naver',
+    kakao = 'kakao',
+    google = 'google',
+    naver = 'naver',
 }
 registerEnumType(Provider, {
     name: 'Provider',

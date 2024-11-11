@@ -8,6 +8,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { signUpDTO } from '../dto/signUp.dto';
+import { SocialLoginDTO } from '../dto/social-login.dto';
 
 @Injectable()
 export class UserRepository {
@@ -28,6 +29,12 @@ export class UserRepository {
                 throw new InternalServerErrorException();
             }
         }
+    }
+
+    async createSocialUser(socialLoginDto: SocialLoginDTO) {
+        const user = this.userRepository.create(socialLoginDto);
+
+        return await this.userRepository.save(user);
     }
 
     async findUserPK(userId: number): Promise<UserEntity> {
