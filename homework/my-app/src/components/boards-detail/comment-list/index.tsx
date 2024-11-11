@@ -8,7 +8,6 @@ import { useState } from "react";
 
 export default function CommentListPage(props: ICommentListPageprops) {
   const { data, fetchMore } = useCommentListPage(); // refetch 추가
-  const [hasMore, setHasMore] = useState(true);
 
   const onNext = () => {
     if (!data?.fetchBoardComments.length) return;
@@ -18,7 +17,7 @@ export default function CommentListPage(props: ICommentListPageprops) {
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoardComments?.length) {
-          setHasMore(false);
+          props.setHasMore(false);
           return prev;
         }
         return {
@@ -35,7 +34,7 @@ export default function CommentListPage(props: ICommentListPageprops) {
     <div className={styles.container}>
       <InfiniteScroll
         next={onNext}
-        hasMore={hasMore}
+        hasMore={props.hasMore}
         loader={<div>로딩중입니다.</div>}
         dataLength={data?.fetchBoardComments.length ?? 0}
       >

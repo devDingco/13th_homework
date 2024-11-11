@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.5.1",
     "@apollo/client": "^3.11.8",
     "@hookform/resolvers": "^3.9.1",
+    "@portone/browser-sdk": "^0.0.10",
     "antd": "^5.21.3",
     "apollo-upload-client": "^18.0.1",
     "bootstrap": "^5.3.3",
@@ -32,6 +33,7 @@
     "react-player": "^2.16.0",
     "react-quill": "^2.0.0",
     "swiper": "^11.1.14",
+    "uuid": "^11.0.2",
     "zod": "^3.23.8",
     "zustand": "^5.0.0"
   },
@@ -44,6 +46,7 @@
     "@types/react-datepicker": "7.0.0",
     "@types/react-dom": "^18",
     "@types/react-flatpickr": "^3.8.11",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
