@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function WelcomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white">
@@ -14,9 +16,12 @@ export default function WelcomePage() {
               일상의 감정을 기록하고, 전문 상담사와 함께 이야기를 나눠보세요
             </p>
             <div className="mt-8">
-              <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+              <Link
+                href={`/login`}
+                className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
                 시작하기
-              </button>
+              </Link>
             </div>
           </div>
         </div>

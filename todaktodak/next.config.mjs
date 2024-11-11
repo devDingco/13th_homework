@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: false,
 
   // Webpack 캐시 설정 (클라이언트에서 캐시 비활성화)
@@ -17,6 +16,18 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "storage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google 프로필 이미지
+      },
+      {
+        protocol: "https",
+        hostname: "k.kakaocdn.net", // Kakao 프로필 이미지
+      },
+      {
+        protocol: "https",
+        hostname: "ssl.pstatic.net", // Naver 프로필 이미지
       },
     ],
   },

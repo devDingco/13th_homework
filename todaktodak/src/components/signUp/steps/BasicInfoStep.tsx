@@ -1,95 +1,56 @@
-import { AddressFields } from "../AddressFields";
+"use client";
+
 import { InputField } from "../common/InputField";
+import { AddressField } from "../common/AddressField";
 
-interface BasicInfoStepProps {
-  formData: {
-    name: string;
-    nickname: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-    address: {
-      zipcode: string;
-      address1: string;
-      address2: string;
-    };
-  };
-  errors: Record<string, string>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export function BasicInfoStep({
-  formData,
-  errors,
-  onChange,
-}: BasicInfoStepProps) {
+export default function BasicInfoStep() {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-semibold mb-4">기본 정보</h2>
-        <p className="text-gray-600">회원가입에 필요한 정보를 입력해주세요</p>
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
+      {/* 이름, 닉네임 */}
+      <div className="grid grid-cols-2 gap-8">
         <InputField
-          label="이름"
           name="name"
-          value={formData.name}
-          onChange={onChange}
-          error={errors.name}
+          label="이름"
+          placeholder="이름을 입력해주세요"
           required
         />
-        <div>
-          <InputField
-            label="닉네임"
-            name="nickname"
-            value={formData.nickname}
-            onChange={onChange}
-            error={errors.nickname}
-            required
-          />
-          <button
-            type="button"
-            className="mt-2 text-sm text-indigo-600 hover:text-indigo-700"
-          >
-            중복확인
-          </button>
-        </div>
+        <InputField
+          name="nickname"
+          label="닉네임"
+          placeholder="닉네임을 입력해주세요"
+          required
+        />
       </div>
 
+      {/* 이메일 */}
       <InputField
-        label="이메일"
         name="email"
+        label="이메일"
         type="email"
-        value={formData.email}
-        onChange={onChange}
-        error={errors.email}
+        placeholder="이메일을 입력해주세요"
         required
       />
 
-      <AddressFields address={formData.address} onChange={onChange} />
-
+      {/* 비밀번호 */}
       <div className="space-y-4">
         <InputField
-          label="비밀번호"
           name="password"
+          label="비밀번호"
           type="password"
-          value={formData.password}
-          onChange={onChange}
-          error={errors.password}
-          required
           placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+          required
         />
         <InputField
-          label="비밀번호 확인"
           name="passwordConfirm"
+          label="비밀번호 확인"
           type="password"
-          value={formData.passwordConfirm}
-          onChange={onChange}
-          error={errors.passwordConfirm}
+          placeholder="비밀번호를 다시 입력해주세요"
           required
         />
       </div>
+
+      {/* 주소 입력 */}
+      <AddressField />
     </div>
   );
 }
