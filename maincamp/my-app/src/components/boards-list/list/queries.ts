@@ -5,13 +5,13 @@ export const FETCH_BOARDS = gql`
       $endDate: DateTime
       $startDate: DateTime
       $search: String
-      $page: Int
+      $mypage: Int
     ){
         fetchBoards (
           endDate: $endDate
           startDate: $startDate
           search: $search
-          page: $page
+          page: $mypage
         ){
             _id
             writer

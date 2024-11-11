@@ -130,8 +130,8 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
                                 accept="image/jpeg, image/png"
                                 ref={fileRef[index]}
                                 style={{display:"none"}}
-                                />
-                            {imageUrl && 
+                            />
+                                {imageUrl && 
                                 <img src={`https://storage.googleapis.com/${imageUrl}`} 
                                 alt={`미리보기 ${index + 1}`} />}
                         </div>

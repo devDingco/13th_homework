@@ -1,7 +1,7 @@
 "use client"
 
 import { CommentEditSuccessDocument, CreateBoardCommentDocument, FetchBoardCommentsDocument, FetchBoardCommentsQuery } from "@/commons/graphql/graphql";
-import { ApolloError, useMutation } from "@apollo/client";
+import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 
@@ -82,15 +82,12 @@ export const useBoardCommentWrite = (
             console.log("댓글등록클릭",data);
             if(data?.createBoardComment){
                 setCommentWriter("");
-                setCommentContent("");
-                setCommentPassword("");
-                alert("댓글이 등록 되었습니다.");
-                setCommentWriter("");
                 console.log("작성자: ", commentWriter);
                 setCommentPassword("");
                 console.log("비밀번호: ", commentPassword);
                 setCommentContent("");
                 console.log("내용: ", commentContent);
+                alert("댓글이 등록 되었습니다.");
             }
             else{
                 alert("댓글 등록을 실패했습니다.");

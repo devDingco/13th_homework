@@ -5,10 +5,14 @@ import { IListProps } from "./types";
 
 export default function BoardsList(props:IListProps){
     const {data, onClickDetail, onClickDelete} = useBoardsList(props);
+    console.log("data? ", data);
+    if(!data || !data.fetchBoards){
+        return<p>게시글이없음</p>
+    }
     return (
         <>
             <div className={styles.listForm}>
-                {data?.fetchBoards.map((el, index) => (
+                {props.data?.fetchBoards?.map((el, index) => (
                     <div key={el._id} className={styles.listBg}>
                         <ul className={styles.listTop}>
                             <li>번호</li>
