@@ -6,7 +6,6 @@ import {
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 import { useLoginStore } from "@/commons/stores/login-store";
 
 import { IuseQuestionWriteProps, Iuseform } from "./types";
@@ -30,7 +29,7 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
     console.log("질문 내용", questionContents);
     // 로그인한 상태인지 확인
     if (!isLogged) {
-      alert("로그인이 필요합니다.");
+      return alert("로그인이 필요합니다.");
     }
     try {
       await createPrdQuestion({
