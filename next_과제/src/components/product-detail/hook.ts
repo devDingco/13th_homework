@@ -1,15 +1,27 @@
+"use client";
+
 import { useParams } from "next/navigation";
 import {
   FetchTravelproductDetailDocument,
   DeleteTravelproductDocument,
 } from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMyProductCheck } from "@/commons/stores/my-product-check-store";
 import { useUserInfo } from "@/commons/stores/user-info-store";
+import { message } from "antd";
 
 export const useProductDetail = () => {
   const { productId }: { productId: string } = useParams();
+
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    if (showMessage) {
+      message.success("링크 복사가 완료되었습니다.");
+      setShowMessage(false);
+    }
+  }, [showMessage]);
 
   const { setMyProductCheck } = useMyProductCheck();
   const { data: travelproductData } = useQuery(
@@ -30,7 +42,7 @@ export const useProductDetail = () => {
 
   const [productDelete] = useMutation(DeleteTravelproductDocument);
 
-  // 내 상품인경우 삭제 처리
+  // ! 내 상품인경우 삭제 처리
   const onProductDelete = async () => {
     if (confirm("정말로 상품을 삭제하시겠습니까?")) {
       try {
@@ -44,11 +56,11 @@ export const useProductDetail = () => {
     }
   };
 
-  // 상품 링크 복사
+  // ! 상품 링크 복사
   const onProductLinkCopy = () => {
     const link = window.location.href;
     navigator.clipboard.writeText(link); // clipboard API - 브라우저 내장 API
-    alert("상품 링크가 복사되었습니다.");
+    setShowMessage(true); // 메시지 노출
   };
 
   return {
