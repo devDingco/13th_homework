@@ -1,34 +1,61 @@
 "use client";
 
 import Icon from "@/components/icon-factory";
-import { DatePicker, Input, Button } from "antd";
+import { DatePicker, Input, Button, InputRef } from "antd";
 import { useSearch } from "@/commons/stores/search-store";
 import { useSearchDate } from "@/commons/stores/search-date-store";
 import "dayjs/locale/ko";
 import locale from "antd/lib/date-picker/locale/ko_KR";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useRef } from "react";
+import _ from "lodash";
+
+interface IValidation {
+  startDate: string;
+  endDate: string;
+  search: string;
+  page: number;
+}
 
 export default function SearchBox({
   isDate = true,
-  handleSearch,
+  refetch,
+  countDataRefetch,
 }: {
   isDate?: boolean;
-  handleSearch: () => void;
+  refetch: ({ startDate, endDate, search, page }: IValidation) => void;
+  countDataRefetch?: ({
+    startDate,
+    endDate,
+    search,
+    page,
+  }: IValidation) => void;
 }) {
   const { RangePicker } = DatePicker;
-  const { search, setSearch } = useSearch();
-  const { setStartDate, setEndDate } = useSearchDate();
-  const pathname = usePathname();
+  const { setSearch } = useSearch();
+  const { startDate, endDate, setStartDate, setEndDate } = useSearchDate();
 
-  // pathname 바뀌면 검색어 초기화
-  useEffect(() => {
-    if (search !== "") {
-      setSearch("");
-      setStartDate("");
-      setEndDate("");
-    }
-  }, [pathname, search]);
+  const inputRef = useRef<InputRef>(null);
+
+  // ! 검색 디바운스 처리
+  const getSearchDebounce = _.debounce((validation) => {
+    if (validation.startDate === "") delete validation.startDate;
+    if (validation.endDate === "") delete validation.endDate;
+    console.log("검색조건 확인", validation);
+
+    refetch(validation);
+    if (countDataRefetch) countDataRefetch(validation);
+  }, 300);
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    getSearchDebounce({ startDate, endDate, search: e.target.value });
+    setSearch(e.target.value);
+  };
+
+  const handleSearch = () => {
+    const search = inputRef.current?.input?.value || "";
+    setSearch(search);
+    getSearchDebounce({ startDate, endDate, search });
+  };
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">
@@ -37,8 +64,8 @@ export default function SearchBox({
           size="large"
           type="text"
           placeholder="제목을 검색해 주세요"
-          defaultValue={search}
-          onChange={(e) => setSearch(e.target.value)}
+          ref={inputRef}
+          onChange={(e) => onChangeSearch(e)}
           prefix={
             <Icon icon="search" className="w-6 h-6 fill-accent-content" />
           }
