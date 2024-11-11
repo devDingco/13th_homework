@@ -9,13 +9,14 @@ import { IcommentItem } from "@/components/board-detail/comment-list/types";
 export default function CommentItem(props: IcommentItem) {
   const { commentData, starCountBox, reply } = props;
 
-  const { isEdit, editModeHandler, commentDelete } = useCommentItem();
+  const { isEdit, editModeHandler, commentDelete, isModal, setIsModal } =
+    useCommentItem();
 
   return (
     <div className="flex flex-col gap-2 py-10 border-t first:border-0">
       {isEdit ? (
         <CommentWrite
-          commentId={commentData._id}
+          commentId={commentData?._id}
           type="commentEdit"
           starCountBox={true}
           data={commentData}
@@ -37,12 +38,12 @@ export default function CommentItem(props: IcommentItem) {
                 {/* <span className="text-gray-700 text-sm">{user.name}</span> */}
                 {/* !! 나중에 유저명으로 바꾸기 */}
                 <span className="text-gray-700 text-sm">
-                  {commentData.writer}
+                  {commentData?.writer}
                 </span>
               </div>
               {/* 별점 노출 여부 */}
               {starCountBox && (
-                <Rate disabled value={commentData.rating} allowHalf />
+                <Rate disabled value={commentData?.rating} allowHalf />
               )}
             </div>
             <div className="flex gap-2">
@@ -50,18 +51,22 @@ export default function CommentItem(props: IcommentItem) {
                 <div className="blind">댓글수정</div>
                 <Icon icon="edit" className="w-6 h-6" />
               </button>
-              <button onClick={() => commentDelete(commentData._id)}>
+              <button
+                onClick={() => {
+                  commentDelete(commentData?._id ?? "");
+                }}
+              >
                 <div className="blind">댓글삭제</div>
                 <Icon icon="close" className="w-6 h-6" />
               </button>
             </div>
           </div>
           {/* 댓글 내용 */}
-          <p className="text-base">{commentData.contents}</p>
+          <p className="text-base">{commentData?.contents}</p>
 
           {/* 댓글 날짜 */}
           <div className="text-gray-400 text-sm">
-            {dateViewSet(commentData.createdAt)}
+            {dateViewSet(commentData?.createdAt)}
           </div>
 
           {/* 답변하기 버튼 노출 여부 */}

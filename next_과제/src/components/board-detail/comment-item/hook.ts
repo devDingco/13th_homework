@@ -1,47 +1,71 @@
+"use client";
+
 import {
   DeleteBoardCommentDocument,
   FetchBoardCommentsDocument,
 } from "@/commons/graphql/graphql";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { useModalStore } from "@/commons/stores/modal-store";
 
 const useCommentItem = () => {
-  const { boardId } = useParams();
+  const { boardId }: { boardId: string } = useParams();
+  const { isModal, setIsModal } = useModalStore();
 
   const [deleteComment] = useMutation(DeleteBoardCommentDocument);
-
   const [isEdit, setIsEdit] = useState(false);
 
   // 댓글 삭제
   const commentDelete = async (commentId: string) => {
-    console.log(commentId);
-    try {
-      const prompt = window.prompt("비밀번호를 입력해 주세요.");
-      if (prompt) {
-        const result = await deleteComment({
-          variables: {
-            password: prompt,
-            boardCommentId: String(commentId),
-          },
-          refetchQueries: [
-            {
-              query: FetchBoardCommentsDocument,
-              variables: { boardId: String(boardId) },
+    // 비밀번호 확인 모달
+    setIsModal({
+      type: "commentDeletePasswordCheck",
+      confirm: async (value) => {
+        try {
+          await deleteComment({
+            variables: {
+              password: value,
+              boardCommentId: commentId,
             },
-          ],
-        });
-        console.log(result);
-      } else {
-        // alert("취소되었습니다.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(`${error.message}`);
-      } else {
-        alert("An unknown error occurred");
-      }
-    }
+            refetchQueries: [
+              {
+                query: FetchBoardCommentsDocument,
+                variables: { boardId: boardId },
+              },
+            ],
+          });
+          setIsModal({ type: "deleteCommentSuccess" }); // 삭제 성공 모달
+        } catch (error) {
+          if (error instanceof Error) {
+            alert(`${error.message}`);
+          } else {
+            alert("An unknown error occurred");
+          }
+        }
+      },
+    });
+    // try {
+    //   await deleteComment({
+    //     variables: {
+    //       password: isModal.confirm?.password,
+    //       boardCommentId: commentId,
+    //     },
+    //     refetchQueries: [
+    //       {
+    //         query: FetchBoardCommentsDocument,
+    //         variables: { boardId: boardId },
+    //       },
+    //     ],
+    //   });
+    //   setIsModal({ type: "deleteCommentSuccess" }); // 삭제 성공 모달
+    // } catch (error) {
+    //   if (error instanceof Error) {
+    //     alert(`${error.message}`);
+    //   } else {
+    //     alert("An unknown error occurred");
+    //   }
+    // }
   };
 
   // 댓글 수정 모드
@@ -53,6 +77,8 @@ const useCommentItem = () => {
     isEdit,
     commentDelete,
     editModeHandler,
+    isModal,
+    setIsModal,
   };
 };
 
