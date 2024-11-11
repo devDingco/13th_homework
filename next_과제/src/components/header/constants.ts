@@ -1,24 +1,20 @@
 // 메인 메뉴 설정
 export const menuItems = [
   {
-    // label: <Link href="/">트립토크</Link>,
     label: "트립토크",
     key: "/",
   },
   {
-    // label: <Link href="/products">숙박권구매</Link>,
     label: "숙박권구매",
     key: "/products",
     children: [
       {
-        // label: <Link href="/products/new">숙박권등록</Link>,
         label: "숙박권등록",
         key: "/products/new",
       },
     ],
   },
   {
-    // label: <Link href="/mypage">마이페이지</Link>,
     label: "마이페이지",
     key: "/mypage",
   },
