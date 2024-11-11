@@ -1,12 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProductPickedBtn from "@/components/product-picked-btn";
+import { FetchTravelproductDetailQuery } from "@/commons/graphql/graphql";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({
+  product,
+}: {
+  product: FetchTravelproductDetailQuery["fetchTravelproduct"];
+}) {
   const imageURL =
-    product.images && product.images.length > 0
+    product.images && product.images.length > 0 && product.images[0] !== ""
       ? process.env.NEXT_PUBLIC_IMAGE_HOST_NAME + product.images[0]
       : "/images/beach.jpg";
+
+  // console.log("imageURL", imageURL);
 
   return (
     <Link
