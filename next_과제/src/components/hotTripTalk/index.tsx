@@ -6,11 +6,10 @@ import { dateViewSet } from "@/utils/dateViewSet";
 import Link from "next/link";
 
 export default function HotTripTalk() {
-  const { data, error, loading } = useHotTripTalk();
-  // console.log("핫한트립토크", data, error, loading);
+  const { data, loading } = useHotTripTalk();
 
   return (
-    <div className="max-md:mx-5 max-w-7xl m-auto py-10 max-sm:pl-6 max-sm:pt-6">
+    <div className="max-md:mx-5 max-w-7xl py-10 max-sm:pl-6 max-sm:pt-6">
       <div className="flex flex-col gap-6">
         <h3 className="font-bold text-xl">오늘 핫한 트립토크</h3>
         <div className="grid grid-cols-4 gap-8 max-sm:flex max-sm:gap-4 max-sm:overflow-x-auto overflow-hidden max-sm:mr-[-100px]">
