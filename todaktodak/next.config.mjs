@@ -17,6 +17,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "storage.googleapis.com",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google 프로필 이미지
+      },
+      {
+        protocol: "https",
+        hostname: "k.kakaocdn.net", // Kakao 프로필 이미지
+      },
+      {
+        protocol: "https",
+        hostname: "ssl.pstatic.net", // Naver 프로필 이미지
+      },
     ],
   },
 };

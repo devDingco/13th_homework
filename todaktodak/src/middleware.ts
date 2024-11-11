@@ -4,35 +4,39 @@ import { NextResponse } from "next/server";
 // 인증이 필요 없는 public 경로들
 const PUBLIC_PATHS = ["/", "/login", "/signup"];
 
+// withAuth 미들웨어 설정
 export default withAuth(
   function middleware(req) {
-    // public 경로는 인증 체크 없이 통과
-    if (PUBLIC_PATHS.includes(req.nextUrl.pathname)) {
-      return NextResponse.next();
+    const isPublicPath = PUBLIC_PATHS.includes(req.nextUrl.pathname);
+
+    // 로그인된 사용자가 로그인/회원가입 페이지 접근 시 홈으로 리다이렉트
+    if (req.nextauth.token && isPublicPath && req.nextUrl.pathname !== "/") {
+      return NextResponse.redirect(new URL("/home", req.url));
     }
+
     return NextResponse.next();
   },
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // public 경로는 항상 true 반환
+        // public 경로는 항상 접근 가능
         if (PUBLIC_PATHS.includes(req.nextUrl.pathname)) {
           return true;
         }
-        // 그 외 경로는 토큰 존재 여부로 판단
+        // 나머지 경로는 토큰이 있어야 접근 가능
         return !!token;
       },
     },
     pages: {
-      signIn: "/login",
+      signIn: "/login", // 인증이 필요할 때 리다이렉트할 로그인 페이지
     },
   }
 );
 
-// matcher 설정
+// matcher 설정 - 더 명확하게 정리
 export const config = {
   matcher: [
-    // dashboard 관련 모든 경로
+    // 보호할 경로들
     "/dashboard/:path*",
     "/home/:path*",
     "/calendar/:path*",
@@ -42,10 +46,9 @@ export const config = {
     "/profile/:path*",
     "/statistics/:path*",
 
-    // api 경로 중 auth 제외
-    "/api/:path*",
-
-    // 다음 경로들은 제외
-    "/((?!api/auth|login|signup|_next/static|_next/image|images|favicon.ico).*)",
+    // public 경로들도 미들웨어를 통과하도록 포함
+    "/",
+    "/login",
+    "/signup",
   ],
 };

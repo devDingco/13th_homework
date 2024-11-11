@@ -1,6 +1,7 @@
 import { useRouter, usePathname } from "next/navigation";
 import { Calendar, BarChart2, User, BookOpen, BookHeart } from "lucide-react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 interface NavItem {
   icon: React.ElementType;
@@ -19,6 +20,9 @@ const NAV_ITEMS: NavItem[] = [
 export default function SideBar() {
   const router = useRouter();
   const pathname = usePathname();
+
+  // 로그인한 사용자 정보
+  const { data: session } = useSession();
 
   return (
     <aside className="fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-200">
@@ -71,9 +75,22 @@ export default function SideBar() {
         >
           <div className="flex items-center space-x-3">
             {/* profile image */}
-            <div className="w-10 h-10 rounded-full bg-gray-200" />
+            {session?.user.image ? (
+              <Image
+                src={session.user.image}
+                alt="Profile"
+                width={40}
+                height={40}
+                className="object-cover rounded-full"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-gray-200" />
+            )}
+
             <div>
-              <div className="font-medium text-gray-800">사용자 이름</div>
+              <div className="font-medium text-gray-800">
+                {session?.user?.name}
+              </div>
               <div className="text-sm text-gray-500">내 프로필</div>
             </div>
           </div>

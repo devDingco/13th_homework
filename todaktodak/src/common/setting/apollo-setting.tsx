@@ -13,8 +13,8 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: session?.user?.accessToken
-        ? `Bearer ${session.user.accessToken}`
+      authorization: session?.accessToken
+        ? `Bearer ${session.accessToken}`
         : "",
     },
   };
@@ -23,4 +23,13 @@ const authLink = setContext(async (_, { headers }) => {
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
+  // 항상 최신 데이터를 가져오기
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "network-only",
+    },
+    query: {
+      fetchPolicy: "network-only",
+    },
+  },
 });

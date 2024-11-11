@@ -1,9 +1,11 @@
-import { AuthProvider } from "./providers";
+"use client";
+
+import Layout from "@/components/layout";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <Layout>{children}</Layout>;
 }
