@@ -2,8 +2,15 @@
 
 import Image from 'next/image';
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function LayoutNavigation() {
+    const router = useRouter();
+
+    const onClickLoginPage = () => {
+        router.push('/login');
+    };
+
     return (
         <>
             <div className={styles.layout}>
@@ -22,7 +29,12 @@ export default function LayoutNavigation() {
 
                     <div className={styles.homeLoginButtonBox}>
                         <button className={styles.homeLoginButton}>
-                            <div className="textLogin">Login</div>
+                            <div
+                                className="textLogin"
+                                onClick={onClickLoginPage}
+                            >
+                                Login
+                            </div>
                             <Image
                                 src="/images/arrow_right.png"
                                 alt="로고"

@@ -3,8 +3,7 @@
     height: 1080px;
     display: flex;
     flex-direction: row;
-
-    margin: 0 auto;
+    margin: auto auto;
 }
 
 .loginBox {
@@ -44,7 +43,7 @@
 
 .loginBtn {
     width: 320px;
-    height: 40px;
+    height: 80px;
     background-color: #2974e5;
     color: #fff;
     border-radius: 8px;

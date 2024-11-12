@@ -8,7 +8,7 @@ interface ILayout {
     children: React.ReactNode;
 }
 
-const HIDDEN_PAGE = ['/new', '/edit', '/login'];
+const HIDDEN_PAGE = ['/new', '/edit', '/login', '/signup'];
 
 export default function LayOutPage({ children }: ILayout) {
     const pathname = usePathname();
