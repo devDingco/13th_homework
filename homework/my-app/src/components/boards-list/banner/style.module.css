@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
 }
+
 .bannerContainer {
   width: 100%;
-  height: 487px;
-  flex-shrink: 0;
+  max-width: 80vw; /* 배너의 최대 너비 */
+  margin: 0 auto;
 }

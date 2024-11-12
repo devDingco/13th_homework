@@ -1,10 +1,12 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./style.module.css";
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import Image from "next/image";
 import Comment from "@/components/store-comment-write";
+import { Router } from "next/router";
+import KakaoMap from "@/components/kakao-map/page";
 
 const FETCH_TRAVEL_PRODUCT = gql`
   query FetchTravelProduct($travelproductId: ID!) {
@@ -62,6 +64,7 @@ const BUYING_AND_SELLING = gql`
 `;
 
 const ProductDetail = () => {
+  const router = useRouter();
   const params = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColor, setSelectedColor] = useState("brown");
@@ -85,6 +88,8 @@ const ProductDetail = () => {
     variables: { useritemId: params.boardId },
     onCompleted: (data) => {
       console.log("구매 성공:", data);
+      alert("구매 성공");
+      router.push("/mypage");
     },
     onError: (error) => {
       console.error("구매 오류:", error);
@@ -122,6 +127,9 @@ const ProductDetail = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  const address = data?.fetchTravelproduct?.travelproductAddress?.address;
+  const addressDetail =
+    data?.fetchTravelproduct?.travelproductAddress?.addressDetail;
 
   return (
     <div className={styles.container}>
@@ -182,7 +190,29 @@ const ProductDetail = () => {
               ))}
             </div>
           </div>
-
+          <div className={styles.accordionContainer}>
+            <details className={`${styles.accordion}`} open>
+              <summary className={styles.accordionTitle}>상세 정보</summary>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data?.fetchTravelproduct.contents,
+                }}
+              />
+            </details>
+            <details className={`${styles.accordion}`} open>
+              <summary className={styles.accordionTitle}>상세 위치</summary>
+              <div>
+                {address} {addressDetail}
+              </div>
+            </details>
+            {/* 
+            <details className={styles.accordion}>
+              <summary className={styles.accordionTitle}>배송 정보</summary>
+              <div className={styles.accordionContent}>
+                {data?.fetchTravelproduct.travelproductAddress.address}
+              </div>
+            </details> */}
+          </div>
           {/* Price and Seller Info */}
           <div className={styles.priceSection}>
             <p className={styles.price}>
@@ -202,29 +232,11 @@ const ProductDetail = () => {
               width={40}
               height={40}
             />
+
             <span className={styles.sellerName}>
               {data?.fetchTravelproduct.seller.name}
             </span>
           </div>
-
-          {/* Accordion Sections */}
-          {/* <div className={styles.accordionContainer}>
-            <details className={styles.accordion}>
-              <summary className={styles.accordionTitle}>상세 정보</summary>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data?.fetchTravelproduct.contents,
-                }}
-              />
-            </details> */}
-          {/* 
-            <details className={styles.accordion}>
-              <summary className={styles.accordionTitle}>배송 정보</summary>
-              <div className={styles.accordionContent}>
-                {data?.fetchTravelproduct.travelproductAddress.address}
-              </div>
-            </details> */}
-          {/* </div> */}
 
           {/* Purchase Button */}
           <button className={styles.purchaseButton} onClick={handlePurchase}>
@@ -237,7 +249,15 @@ const ProductDetail = () => {
       <div className={styles.bottomSection}>
         <div className={styles.location}>
           <h2 className={styles.sectionTitle}>상세 위치</h2>
-          <div className={styles.mapContainer}>지도 표시 영역</div>
+          <div>
+            {address} {addressDetail}
+          </div>
+          <div className={styles.mapContainer}>
+            <KakaoMap
+              address={address}
+              apiKey={process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY || ""}
+            />
+          </div>
         </div>
         <Comment />
       </div>

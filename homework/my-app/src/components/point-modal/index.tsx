@@ -4,6 +4,7 @@ import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 as uuidv4 } from "uuid";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import styles from "./style.module.css";
+import { useRouter } from "next/navigation";
 
 // GraphQL Queries & Mutations
 const FETCH_USER_LOGGED_IN = gql`
@@ -45,6 +46,7 @@ const CREATE_POINT_TRANSACTION = gql`
 `;
 
 const PointModal = ({ isOpen, onClose }) => {
+  const router = useRouter();
   const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
   const [createPointTransactionOfLoading] = useMutation(
     CREATE_POINT_TRANSACTION
@@ -79,6 +81,8 @@ const PointModal = ({ isOpen, onClose }) => {
         redirectUrl: "http://localhost:3000/mypage",
       });
       console.log(result);
+      alert("결제가 완료되었습니다");
+      router.push("/mypage");
 
       await createPointTransactionOfLoading({
         variables: { paymentId },
