@@ -3,17 +3,22 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { useAccessTokenStore } from "@/commons/stores/accessToken";
-import { FETCH_USER_LOGGED_IN } from "./queries";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import UserMenu from "./user-menu";
+import { FetchUserLoggedInDocument } from "@/commons/graphql/graphql";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isboards = pathname.startsWith("/boards");
   const isProducts = pathname.startsWith("/products");
-  const { accessToken } = useAccessTokenStore();
-  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const { data } = useQuery(FetchUserLoggedInDocument);
 
-  console.log(data?.fetchUserLoggedIn);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropDownOpen(!isDropDownOpen);
+  };
 
   return (
     <div className={styles.navigation_box}>
@@ -52,21 +57,17 @@ const Navigation = () => {
         </div>
         <div className={styles.right_area}>
           {/* TODO:로그인 했으면 프로필 보여주기 */}
-          {accessToken ? (
-            <>
+          {data ? (
+            <div className={styles.user_profile}>
               <Image
                 src="/images/profile.png"
                 width={30}
                 height={30}
                 alt="프로필이미지"
               />
-              <Image
-                src="/images/down_arrow.png"
-                width={24}
-                height={24}
-                alt="드롭다운"
-              />
-            </>
+              <ChevronDown color="#919191" size={16} onClick={toggleDropdown} />
+              {isDropDownOpen && <UserMenu data={data} />}
+            </div>
           ) : (
             // 로그인 안했으면 로그인 버튼
             <div className={styles.button_box}>

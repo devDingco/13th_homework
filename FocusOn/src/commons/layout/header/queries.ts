@@ -7,6 +7,15 @@ export const FETCH_USER_LOGGED_IN = gql`
       email
       name
       picture
+      userPoint {
+        amount
+      }
     }
+  }
+`;
+
+export const LOGOUT_USER = gql`
+  mutation logoutUser {
+    logoutUser
   }
 `;

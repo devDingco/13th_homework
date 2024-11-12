@@ -1,9 +1,13 @@
+// load-store.ts
+
 import { create } from "zustand";
 
-export const useLoadStore = create((set) => ({
+interface IUsedLoadStore {
+  isLoaded: boolean;
+  setIsLoaded: () => void;
+}
+
+export const useLoadStore = create<IUsedLoadStore>((set) => ({
   isLoaded: false,
-  setIsLoaded: () =>
-    set(() => ({
-      isLoaded: true,
-    })),
+  setIsLoaded: () => set(() => ({ isLoaded: true })),
 }));

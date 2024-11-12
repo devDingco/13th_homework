@@ -12,6 +12,8 @@ export const withAuth = (Component: any) => (props: any) => {
   const { accessToken } = useAccessTokenStore();
 
   useEffect(() => {
+    console.log("🚀 ~ withAuth ~ accessToken:", accessToken);
+
     if (!isLoaded) return;
     if (accessToken) return;
 
