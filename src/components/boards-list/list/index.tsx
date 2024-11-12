@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { FETCH_BOARDS_COUNT } from './queries';
+import _ from 'lodash';
 
 export default function BoardsComponentList() {
     const { data, refetch, onClickMoveToDetailPage, onClickDelete } =
@@ -14,12 +15,13 @@ export default function BoardsComponentList() {
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
+    const [keyWord, setkeyWord] = useState('');
 
     const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
     const onClickPage = (event) => {
         const selectedPage = Number(event?.currentTarget.id);
-        refetch({ mypage: selectedPage });
+        refetch({ mypage: Number(event?.currentTarget.id) });
         setCurrentPage(selectedPage);
         console.log(event.currentTarget.id);
     };
@@ -41,9 +43,45 @@ export default function BoardsComponentList() {
         }
     };
 
+    const getDebounce = _.debounce((매개변수) => {
+        refetch({ mysearch: 매개변수, mypage: 1 });
+        setkeyWord(매개변수);
+    }, 1000);
+
+    const onChangeSearch = (event) => {
+        getDebounce(event.target.value);
+        console.log(event.target.value);
+    };
+
     return (
         <>
-            <div className={styles.layout}>
+            <div className={styles.layout_list_searchBox}>
+                <h1 className={styles.trip_talk_title}>트립토크 게시판</h1>
+                <div className={styles.searchBox}>
+                    <input
+                        className={styles.dateInput}
+                        type="text"
+                        placeholder="YYYY.MM.DD - YYYY.MM.DD"
+                    />
+                    <input
+                        className={styles.titleSearch}
+                        type="text"
+                        placeholder="제목을 검색해 주세요"
+                        onChange={onChangeSearch}
+                    />
+                    <button className={styles.searchBoxSearch}>검색</button>
+                    <button className={styles.searchBoxTripTalk}>
+                        <Image
+                            src="/images/write.png"
+                            alt="write"
+                            width={24}
+                            height={24}
+                        ></Image>
+                        트립토크 등록
+                    </button>
+                </div>
+            </div>
+            <div className={styles.layout_list}>
                 <div className={styles.titleBox}>
                     <div className={styles.titleBoxNumber}>번호</div>
                     <div className={styles.titleBoxTitle}>제목</div>
@@ -63,7 +101,22 @@ export default function BoardsComponentList() {
                                 {index + 1}
                             </div>
                             <div className={styles.boardListBoxTitle}>
-                                {el.title}
+                                {el.title
+                                    .replaceAll(keyWord, `@#$${keyWord}@#$`)
+                                    .split('@#$')
+                                    .map((el, index) => (
+                                        <span
+                                            key={`${el}_${index}`}
+                                            style={{
+                                                color:
+                                                    el === keyWord
+                                                        ? 'red'
+                                                        : 'black',
+                                            }}
+                                        >
+                                            {el}
+                                        </span>
+                                    ))}
                             </div>
                             <div className={styles.boardListBoxWrite}>
                                 {el.writer}
