@@ -12,7 +12,7 @@ const emotions = [
     borderColor: "border-yellow-400",
     textColor: "text-yellow-800",
     description: "기쁘고 즐거운 감정",
-    image: "/images/happy.svg",
+    image: "/images/emotions/happy.svg",
   },
   {
     id: "sad",

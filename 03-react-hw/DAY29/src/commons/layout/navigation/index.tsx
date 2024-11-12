@@ -41,11 +41,12 @@ export default function Navigation() {
             트립토크
           </Link>
           <Link
-            href="/"
+            href="/travelproduct"
             style={{
               padding: "8px",
-              borderBottom: pathname === "/boards" ? "2px solid" : "none",
-              color: pathname === "/boards" ? "black" : "gray",
+              borderBottom:
+                pathname === "/travelproduct" ? "2px solid" : "none",
+              color: pathname === "/travelproduct" ? "black" : "gray",
             }}
           >
             숙박권 구매

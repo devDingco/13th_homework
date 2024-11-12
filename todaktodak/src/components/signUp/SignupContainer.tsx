@@ -11,6 +11,7 @@ import { StepIndicator } from "./common/StepIndicator";
 import { Button } from "@/components/ui/button";
 import { AlertDialog } from "./common/SignupAlertDialog";
 import { signupSchema, type SignupFormValues } from "@/schemas/auth.schema";
+import { undefined } from "zod";
 
 export const BUCKET_NAME = "todakProfileImage";
 export const DEFAULT_PROFILE_IMAGE = `/images/default-profile.png`;
@@ -29,23 +30,23 @@ const SIGNUP_STEPS = [
       "email",
       "password",
       "passwordConfirm",
-      "addressInput.zoneCode",
-      "addressInput.address",
-      "addressInput.detailAddress",
+      "address.zoneCode",
+      "address.address",
+      "address.detailAddress",
     ],
   },
   {
     id: 2,
     label: "프로필설정",
     Component: ProfileStep,
-    fields: ["image"],
+    fields: [],
   },
 ] as const;
 
 // GraphQL mutation 쿼리 정의
 const SIGNUP = gql`
-  mutation signup($signUpUser: signUpUser!) {
-    signup(signUpUser: $signUpUser)
+  mutation signup($signUpUser: SignUpUser!, $file: Upload) {
+    signup(signUpUser: $signUpUser, file: $file)
   }
 `;
 
@@ -81,7 +82,7 @@ export default function SignupContainer() {
       email: "",
       password: "",
       passwordConfirm: "",
-      addressInput: {
+      address: {
         zoneCode: "",
         address: "",
         detailAddress: "",
@@ -137,7 +138,19 @@ export default function SignupContainer() {
 
     try {
       // passwordConfirm 제외하고 나머지 데이터 사용(passwordConfirm는 안보내니까)
-      const { passwordConfirm, ...signupData } = data;
+      const { passwordConfirm, image, ...signupData } = data;
+
+      console.log("image: ", image);
+
+      /*  // file이 기본 이미지인 경우 null로 처리
+      const fileToUpload = typeof file === "string" ? null : file; */
+
+      // 파일 입력에서 직접 File 객체 가져오기
+      const fileInput = document.querySelector(
+        'input[type="file"]'
+      ) as HTMLInputElement;
+      const file = fileInput?.files?.[0];
+
       console.log("제외 전송하는 비번확인: ", passwordConfirm);
       console.log("전송할 데이터: ", signupData);
 
@@ -146,18 +159,20 @@ export default function SignupContainer() {
         variables: {
           signUpUser: {
             ...signupData,
-            // image는 이미 Base64 문자열이거나 기본 이미지 경로
             // 주소는 zoneCode가 int!!!!!!!!
-            addressInput: {
-              ...signupData.addressInput,
-              zoneCode: Number(signupData.addressInput.zoneCode), // 변환해주기
-              address: signupData.addressInput.address,
-              detailAddress: signupData.addressInput.detailAddress,
+            address: {
+              ...signupData.address,
+              zoneCode: Number(signupData.address.zoneCode), // 변환해주기
+              address: signupData.address.address,
+              detailAddress: signupData.address.detailAddress,
             },
           },
+          // file이 있을 때만 file 필드 추가
+          // ...(file ? { file } : {}),
+          file: image || undefined,
         },
       });
-
+      console.log("선택한 사진: ", file);
       console.log("회원가입 성공:", result.data);
 
       setAlertState({
