@@ -5,24 +5,30 @@ import { ChangeEvent, useState } from "react"
 import { useQuery } from "@apollo/client";
 import { FetchBoardSearchDocument } from "@/commons/graphql/graphql";
 import _ from "lodash";
+import useListSearch from "./hook";
 
 export default function BoardListSearchPage(){
+    const { data, 
+            keyword,
+            onChangeSearch,
+            onClickSearch,
+        } = useListSearch();
 
     // const [keyword, setKeyword] = useState("");
-    const [search, setSearch] = useState("");
-    const {data, refetch} = useQuery(FetchBoardSearchDocument);
+    // const [search, setSearch] = useState("");
+    // const {data, refetch} = useQuery(FetchBoardSearchDocument);
 
-    const onClickSearch = () => {
-        refetch({ mysearch: search, mypage: 1});
-    }
+    // const onClickSearch = () => {
+    //     refetch({ mysearch: search, mypage: 1});
+    // }
 
     // const getDebounce = _.debounce((value) => {
     //     refetch({mysearch: value, mypage: 1});
     //     setKeyword(value);
     // }, 500);
-    const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
-        setSearch(event.currentTarget.value);
-    }
+    // const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setSearch(event.currentTarget.value);
+    // }
 
     return(
         <div className={styles.searchWrap}>

@@ -73,7 +73,7 @@
 .videoBg{
     width:1280px;
     height:512px;
-    background-color:#f2f2f2;
+    /* background-color:#f2f2f2; */
     display:flex;
     justify-content:center;
     align-items:center;
