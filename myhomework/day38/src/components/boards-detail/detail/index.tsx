@@ -80,6 +80,7 @@ const BoardsDetail = (props: IBoardsDetailProps) => {
             <Image
               key={index}
               // src={`https://storage.googleapis.com/${value}`}
+              // 이미지 경로가 중복되는 오류가 있어 수정
               src={
                 value.startsWith("https://")
                   ? value
