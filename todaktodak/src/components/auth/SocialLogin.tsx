@@ -4,7 +4,7 @@ export default function SocialLogin() {
   return (
     <div className="space-y-6">
       {/* 구분선과 텍스트 */}
-      <div className="relative">
+      <div className="relative mt-6">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-300" />
         </div>

@@ -18,6 +18,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
 
+import logo from "../../public/images/logo.svg";
+
 const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
     createUser(createUserInput: $createUserInput) {
@@ -65,7 +67,7 @@ export default function Home() {
   };
 
   // 폼 제출 처리
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (isSignUp) {
@@ -120,12 +122,7 @@ export default function Home() {
       <div className="w-[400px] flex flex-col justify-center items-center gap-6  h-screen px-10">
         {!isSignUp ? (
           <>
-            <Image
-              src="/images/logo.svg"
-              alt="logo"
-              width={120}
-              height={74.53}
-            />
+            <Image src={logo} alt="logo" />
             <p>트립트립에 오신걸 환영합니다</p>
             <div className="flex flex-col gap-3 w-full text-center">
               <p>트립트립에 로그인 하세요.</p>

@@ -66,7 +66,7 @@ export default function ApolloSetting(props: IApolloSetting) {
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink, errorLink]),
+    link: ApolloLink.from([errorLink, uploadLink]), // 순서 틀리지 말기!!!!
     cache: GLOBAL_STATE,
   });
 

@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, type ReactElement } from "react";
+import { useEffect } from "react";
 
 export const withLoginCheck =
-  (Component: () => React.ReactNode) =>
-  <P extends Record<string, unknown>>(props: P): ReactElement<P> => {
+  (Component: () => JSX.Element) =>
+  <P extends object>(props: P) => {
     const router = useRouter();
 
     useEffect(() => {

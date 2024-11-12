@@ -32,11 +32,13 @@ export const signupSchema = z
     email: emailSchema,
     password: passwordSchema,
     passwordConfirm: z.string(),
-    address: z.object({
-      zoneCode: z.string().optional(),
-      address: z.string().optional(),
-      detailAddress: z.string().optional(),
-    }),
+    address: z
+      .object({
+        zoneCode: z.string().optional(),
+        address: z.string().optional(),
+        detailAddress: z.string().optional(),
+      })
+      .optional(),
     image: z
       .any()
       .optional()

@@ -5,23 +5,37 @@ import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+  //  deleteUser할때 cors발생해서 일단 주석..
+  // headers: {
+  //   "Apollo-Require-Preflight": "true",
+  // },
   headers: {
-    "Apollo-Require-Preflight": "true",
+    "Content-Type": "application/json",
   },
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  // NextAuth 세션에서 토큰 가져오기
-  const session = await getSession();
+  try {
+    // NextAuth 세션에서 토큰 가져오기
+    const session = await getSession();
 
-  return {
-    headers: {
-      ...headers,
-      authorization: session?.accessToken
-        ? `Bearer ${session.accessToken}`
-        : "",
-    },
-  };
+    console.log("현재 session:", session);
+
+    return {
+      headers: {
+        ...headers,
+        authorization: session?.accessToken
+          ? `Bearer ${session.accessToken}`
+          : "",
+        // CORS 관련 헤더 추가
+        // "Content-Type": "application/json",
+        // Accept: "application/json"
+      },
+    };
+  } catch (error) {
+    console.error("Auth link error:", error);
+    return { headers };
+  }
 });
 
 export const client = new ApolloClient({
@@ -34,6 +48,9 @@ export const client = new ApolloClient({
     },
     query: {
       fetchPolicy: "network-only",
+    },
+    mutate: {
+      errorPolicy: "all",
     },
   },
 });
