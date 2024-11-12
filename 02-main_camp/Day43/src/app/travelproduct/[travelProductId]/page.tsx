@@ -14,21 +14,30 @@ import {
   LocationSample,
 } from "@/commons/ui/icon";
 import { useQuery } from "@apollo/client";
-import { FetchTravelproductDocument } from "@/commons/gql/graphql";
+import {
+  FetchTravelproductDocument,
+  FetchTravelproductQuestionsDocument,
+} from "@/commons/gql/graphql";
 import Divider from "@/app/_components/commons/divider";
-import CommentWriting from "@/commons/ui/comment/writing";
-import NewTravelProductComment from "@/app/_components/travelProduct/comment";
 import Modal from "@/commons/ui/modal";
 import { useParams } from "next/navigation";
+import TravelProductQuestionList from "@/app/_components/travelProduct/question-list";
+import TravelProductQuestionWrite from "@/app/_components/travelProduct/question-write";
 
 export default function DetailTravelProduct() {
   const params = useParams();
+  const id = String(params.travelProductId);
   const { data } = useQuery(FetchTravelproductDocument, {
     variables: {
       travelproductId: String(params.travelProductId),
     },
   });
 
+  const { data: questions } = useQuery(FetchTravelproductQuestionsDocument, {
+    variables: {
+      travelproductId: id,
+    },
+  });
   const [modalsOpened, setModalsOpened] = useState({
     buyingModal: false,
     pointChargeModal: false,
@@ -135,15 +144,9 @@ export default function DetailTravelProduct() {
         <span className={styles.section__title}>상세 위치</span>
         <LocationSample />
       </div>
-      <CommentWriting
-        label="문의하기"
-        placeholder="문의사항을 입력해 주세요."
-        buttonText="문의 하기"
-      />
-
+      <TravelProductQuestionWrite travelproductId={id} />
       <Divider />
-
-      <NewTravelProductComment />
+      <TravelProductQuestionList travelproductId={id} data={questions} />
     </div>
   );
 }
