@@ -1,18 +1,22 @@
 "use client";
 
 import styles from "./styles.module.css";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation"; // 네비게이션 스타일
+import "swiper/css/pagination"; // 페이지네이션 스타일
 import * as PortOne from "@portone/browser-sdk/v2";
 
 import { v4 as uuidv4 } from "uuid";
-
+import Image from "next/image";
 import { DeleteOutlined, UserOutlined } from "@ant-design/icons";
 
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import LinkIcon from "@mui/icons-material/Link";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const FECTH_TRAVEL_PRODUCT = gql`
   query fetchTravelproduct($id: ID!) {
@@ -23,7 +27,14 @@ const FECTH_TRAVEL_PRODUCT = gql`
       contents
       price
       tags
+      images
     }
+  }
+`;
+
+const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
+  mutation ($paymentId: ID!) {
+    createPointTransactionOfLoading(paymentId: $paymentId)
   }
 `;
 
@@ -31,11 +42,13 @@ export default function PurchaseDetail() {
   const params = useParams();
   console.log("Params:", params);
   const { data } = useQuery(FECTH_TRAVEL_PRODUCT, {
-    variables: {
-      id: params.purchaseId,
-    },
+    variables: { id: params.purchaseId },
   });
   console.log("data:", data);
+
+  const [createPointTransactionOfLoading] = useMutation(
+    CREATE_POINT_TRANSACTION_OF_LOADING
+  );
 
   const onClickPayment = async () => {
     try {
@@ -69,6 +82,12 @@ export default function PurchaseDetail() {
       // createPointTransactionOfLoading(patmentId: ...)(주의: 스토어id, 채널키 변경 필요)({
       //   variables: { paymentId: result.paymentId, amount: result.totalAmount }
       // });
+
+      await createPointTransactionOfLoading({
+        variables: {
+          paymentId: result?.paymentId, // => 백엔드로 결제 정보 보내는 로직 이렇게 짜면 되는건가요?
+        },
+      });
     } catch (error) {
       console.error("결제 요청 중 오류 발생:", error);
     }
@@ -97,10 +116,39 @@ export default function PurchaseDetail() {
       </span>
 
       {/* 타이틀 아래부분 ======================== */}
-
+      {/* 왜 스와이퍼의 스타일 적용이 안되는 것인가,,,, */}
       <section className={styles.middleArea}>
-        <div className={styles.showImage}>이미지 들어가는 곳</div>
-        {/* 캐러샐 기능 넣어줘서 자동으로 1장씩 넘어가게 보완할 것 */}
+        <div className={styles.imageSection}>
+          <div className={styles.showImage}>
+            <Swiper
+              className="swiper-container" // 명시적으로 추가
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={50}
+              slidesPerView={1}
+              autoplay={{
+                delay: 3000, // 자동 슬라이드 전환 시간 (밀리초)
+                disableOnInteraction: false, // 사용자가 슬라이드를 조작해도 자동 전환 계속 유지
+              }}
+              navigation={true} // 네비게이션 버튼 활성화
+              pagination={{
+                clickable: true, // 페이지네이션 클릭 가능
+              }}
+            >
+              {data?.fetchTravelproduct.images?.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    className={styles.images}
+                    src={`https://storage.googleapis.com/${image}`}
+                    width={1000} // 고정된 너비
+                    height={500} // 고정된 높이
+                    alt="이미지"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+
         <div>
           <div className={styles.priceAndPurchaseSection}>
             <span className={styles.price}>

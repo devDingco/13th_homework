@@ -9,24 +9,16 @@ import { schema } from "./schema";
 import { useParams, useRouter } from "next/navigation";
 import {
   CREATE_TRAVEL_PRODUCT,
-  FETCH_TRAVEL_PRODUCT,
+  FECTH_TRAVEL_PRODUCT,
   UPDATE_TRAVEL_PRODUCT,
-} from "./\bqueries";
+  UPLOAD_FILE,
+} from "./queries";
 import { useState } from "react";
-
-const UPLOAD_FILE = gql`
-  mutation uploadFile($file: Upload!) {
-    uploadFile(file: $file) {
-      url
-    }
-  }
-`;
 
 export default function PerchaseWrite(props) {
   const router = useRouter();
   const params = useParams();
   console.log(params.purchaseId); // 올바른 값이 출력되는지 확인
-
   // =====================이미지
   const [imageUrls, setImageUrls] = useState([]); // 여러 이미지 URL을 배열로 관리
   const [uploadFile] = useMutation(UPLOAD_FILE);
@@ -47,11 +39,11 @@ export default function PerchaseWrite(props) {
   };
 
   // =====================
-  const { data } = useQuery(FETCH_TRAVEL_PRODUCT, {
-    variables: {
-      purchaseId: params.purchaseId,
-    },
+  const { data } = useQuery(FECTH_TRAVEL_PRODUCT, {
+    variables: { id: params.purchaseId },
   });
+  console.log(data);
+
   const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
@@ -70,6 +62,7 @@ export default function PerchaseWrite(props) {
           contents: data.contents,
           price: parseInt(data.price, 10),
           tags: (data.tags || "").split(",").map((tag) => tag.trim()), // undefined일 때 빈 문자열로 대체
+          images: [imageUrls],
         },
       });
       console.log("상품 생성 성공:", result.data);
@@ -87,6 +80,9 @@ export default function PerchaseWrite(props) {
       remarks: data.remarks,
       contents: data.contents,
       price: data.price,
+      tags: (data.tags || "").split(",").map((tag) => tag.trim()), // undefined일 때 빈 문자열로 대체
+      // tags: [data.tags],
+      images: imageUrls,
     };
     try {
       const result = await updateTravelproduct({
@@ -143,7 +139,9 @@ export default function PerchaseWrite(props) {
               type="text"
               placeholder="상품을 한줄로 요약해 주세요."
               {...register("remarks")}
-              defaultValue={props.isEdit ? data?.remarks : ""}
+              defaultValue={
+                props.isEdit ? data?.fetchTravelproduct.remarks : ""
+              }
             />
             <div style={{ color: "red" }}>
               {formState.errors.remarks?.message}

@@ -63,6 +63,12 @@
   gap: 24px;
 }
 
+.imageSection {
+  width: 630px;
+  height: 450px;
+  border-radius: 8px;
+}
+
 .showImage {
   /* 너비 사이즈 문제 생기거나 맘에 안들면 이거 늘리기 */
   width: 630px;
@@ -70,6 +76,44 @@
   border-radius: 8px;
   background-color: lightcyan;
 }
+
+.images {
+  width: 630px;
+  height: 450px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+/* 네비게이션 버튼 스타일링 ===================================== */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: transparent !important; /* 배경을 투명하게 설정 */
+  color: #00ff00 !important; /* 형광색 (Green) 글자 색 */
+  border-radius: 50% !important; /* 둥근 버튼 */
+  border: 2px solid #00ff00 !important; /* 형광색 테두리 */
+  padding: 10px !important; /* 버튼 크기 조정 */
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #00ff00 !important; /* 호버 시 배경 형광색 */
+  color: #000000 !important; /* 호버 시 텍스트 색 변경 */
+}
+
+/* 페이지네이션 버튼 스타일링 */
+.swiper-pagination-bullet {
+  background-color: #00ff00 !important; /* 형광색 배경 */
+  opacity: 0.7 !important; /* 불투명도 설정 */
+  width: 12px !important; /* 점 크기 설정 */
+  height: 12px !important; /* 점 크기 설정 */
+  margin: 0 5px !important; /* 점 간 간격 설정 */
+  transition: background-color 0.3s ease !important; /* 클릭 시 색상 변화 효과 */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff00ff !important; /* 활성화된 페이지네이션 점 색상 (형광핑크) */
+}
+
+/* ====================================== */
 
 .priceAndPurchaseSection {
   padding: 22px;
