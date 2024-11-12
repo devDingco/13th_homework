@@ -7,13 +7,17 @@ interface ICommentProps {
   nickname: string;
   contents: string;
   date: string;
+  handleClickEditIcon?: () => void;
+  handleClickDeleteIcon?: () => void;
 }
 
 export default function Comment({
-  isManaged = true,
+  isManaged = false,
   nickname,
   contents,
   date,
+  handleClickEditIcon,
+  handleClickDeleteIcon,
 }: ICommentProps) {
   return (
     <div className={styles.comment__container}>
@@ -25,8 +29,16 @@ export default function Comment({
           </div>
           {isManaged === false && (
             <div className={styles.sideMenu__container}>
-              <EditIcon width={1.25} height={1.25} />
-              <Close width={1.25} height={1.25} />
+              <EditIcon
+                width={1.25}
+                height={1.25}
+                onClickIcon={handleClickEditIcon}
+              />
+              <Close
+                width={1.25}
+                height={1.25}
+                onClickIcon={handleClickDeleteIcon}
+              />
             </div>
           )}
         </div>
