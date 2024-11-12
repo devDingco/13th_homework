@@ -13,7 +13,7 @@ export default function useBoardList() {
 
     const { data, refetch } = useQuery(FETCH_BOARDS);
 
-    const onClickMoveToDetailPage = async (event: any) => {
+    const onClickMoveToDetailPage = async (event) => {
         Modal.info({
             title: 'This is an information',
             content: '상세페이지로 이동합니다',

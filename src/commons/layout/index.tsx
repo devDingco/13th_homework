@@ -8,7 +8,7 @@ interface ILayout {
     children: React.ReactNode;
 }
 
-const HIDDEN_PAGE = ['/new', '/edit'];
+const HIDDEN_PAGE = ['/new', '/edit', '/login'];
 
 export default function LayOutPage({ children }: ILayout) {
     const pathname = usePathname();
@@ -27,7 +27,7 @@ export default function LayOutPage({ children }: ILayout) {
     const isHiddenBanner = HIDDEN_PAGE.some((qqq) => pathname.endsWith(qqq));
     return (
         <>
-            <LayoutNavigation />
+            {!isHiddenBanner && <LayoutNavigation />}
             {!isHiddenBanner && <LayOutBanner />}
             {children}
         </>

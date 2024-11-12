@@ -6,16 +6,17 @@ import styles from './styles.module.css';
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { FETCH_BOARDS_COUNT } from './queries';
+import useSearch from '../search/hooks';
 import _ from 'lodash';
 
 export default function BoardsComponentList() {
     const { data, refetch, onClickMoveToDetailPage, onClickDelete } =
         useBoardList();
 
+    const [keyWord, setkeyWord] = useState('');
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
-    const [keyWord, setkeyWord] = useState('');
 
     const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
@@ -46,7 +47,7 @@ export default function BoardsComponentList() {
     const getDebounce = _.debounce((매개변수) => {
         refetch({ mysearch: 매개변수, mypage: 1 });
         setkeyWord(매개변수);
-    }, 1000);
+    }, 500);
 
     const onChangeSearch = (event) => {
         getDebounce(event.target.value);
@@ -81,6 +82,7 @@ export default function BoardsComponentList() {
                     </button>
                 </div>
             </div>
+
             <div className={styles.layout_list}>
                 <div className={styles.titleBox}>
                     <div className={styles.titleBoxNumber}>번호</div>
@@ -110,7 +112,7 @@ export default function BoardsComponentList() {
                                             style={{
                                                 color:
                                                     el === keyWord
-                                                        ? 'red'
+                                                        ? 'orange'
                                                         : 'black',
                                             }}
                                         >
