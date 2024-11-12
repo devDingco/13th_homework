@@ -75,7 +75,7 @@ export default function NewForm() {
   };
 
   useEffect(() => {
-    if (isPromptShown.current) return; // 이미 실행되었다면 중단
+    if (isEdit && isPromptShown.current) return; // 이미 실행되었다면 중단
     isPromptShown.current = true; // 첫 실행 이후 상태 업데이트
     promptForPassword(); // 비동기 작업 호출
   }, []);
