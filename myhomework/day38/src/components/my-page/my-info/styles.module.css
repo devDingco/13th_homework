@@ -1,0 +1,128 @@
+.myPageLayout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myPageContainer {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  gap: 40px;
+  align-self: stretch;
+  padding: 40px 48px;
+}
+
+.myPageTitle {
+  color: #000;
+  font-family: var(--pretendard-medium);
+  font-size: 28px;
+  font-style: normal;
+  line-height: 36px;
+}
+
+.myInfoContainer {
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
+  background: #fff;
+}
+
+.myInfoTitle {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.myProfile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 12px;
+}
+
+.profileImg {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileName {
+  color: #333;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.myPoint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 12px;
+}
+
+.points {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.myInfoMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.bookmark,
+.usageDetails,
+.passwordChange {
+  display: flex;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  justify-content: space-between;
+}
+
+.clickedNav {
+  display: flex;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #f2f2f2;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-family: var(--pretendard-medium);
+  line-height: 24px;
+  justify-content: space-between;
+}
