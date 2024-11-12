@@ -13,8 +13,9 @@ import {
   TravelProductContentsSample,
   LocationSample,
 } from "@/commons/ui/icon";
-import { useQuery } from "@apollo/client";
+import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import {
+  CreatePointTransactionOfBuyingAndSellingDocument,
   FetchTravelproductDocument,
   FetchTravelproductQuestionsDocument,
 } from "@/commons/gql/graphql";
@@ -23,25 +24,32 @@ import Modal from "@/commons/ui/modal";
 import { useParams } from "next/navigation";
 import TravelProductQuestionList from "@/app/_components/travelProduct/question-list";
 import TravelProductQuestionWrite from "@/app/_components/travelProduct/question-write";
+import useModal from "@/commons/ui/modal/hook";
 
 export default function DetailTravelProduct() {
   const params = useParams();
-  const id = String(params.travelProductId);
+  const travelproductId = String(params.travelProductId);
+
+  const [modalsOpened, setModalsOpened] = useState({
+    buyingModal: false,
+    pointChargeModal: false,
+  });
+
   const { data } = useQuery(FetchTravelproductDocument, {
     variables: {
       travelproductId: String(params.travelProductId),
     },
   });
-
   const { data: questions } = useQuery(FetchTravelproductQuestionsDocument, {
     variables: {
-      travelproductId: id,
+      travelproductId,
     },
   });
-  const [modalsOpened, setModalsOpened] = useState({
-    buyingModal: false,
-    pointChargeModal: false,
-  });
+  const [createPointTransactionOfBuyingAndSelling] = useMutation(
+    CreatePointTransactionOfBuyingAndSellingDocument
+  );
+
+  const { showErrorModal, showSuccessModal } = useModal();
 
   const openModal = (modalId: string) =>
     setModalsOpened((prev) => ({ ...prev, [modalId]: true }));
@@ -53,6 +61,21 @@ export default function DetailTravelProduct() {
     closeModal("pointChargeModal");
   };
 
+  const handleConfirm = async () => {
+    try {
+      await createPointTransactionOfBuyingAndSelling({
+        variables: {
+          useritemId: travelproductId,
+        },
+      });
+      showSuccessModal("상품이 구매 되었습니다.");
+    } catch (error: unknown) {
+      if (error instanceof ApolloError)
+        showErrorModal("구매 실패", error.graphQLErrors[0].message);
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.detail__travel__product}>
       {modalsOpened.buyingModal && (
@@ -61,7 +84,7 @@ export default function DetailTravelProduct() {
           description="해당 숙박권은 포인트로만 구매 가능합니다."
           buttonText="구매"
           handleCancel={() => closeModal("buyingModal")}
-          handleConfirm={() => openModal("pointChargeModal")}
+          handleConfirm={handleConfirm}
         />
       )}
       {modalsOpened.pointChargeModal && (
@@ -144,9 +167,12 @@ export default function DetailTravelProduct() {
         <span className={styles.section__title}>상세 위치</span>
         <LocationSample />
       </div>
-      <TravelProductQuestionWrite travelproductId={id} />
+      <TravelProductQuestionWrite travelproductId={travelproductId} />
       <Divider />
-      <TravelProductQuestionList travelproductId={id} data={questions} />
+      <TravelProductQuestionList
+        travelproductId={travelproductId}
+        data={questions}
+      />
     </div>
   );
 }
