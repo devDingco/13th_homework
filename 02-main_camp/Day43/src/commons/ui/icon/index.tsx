@@ -88,10 +88,10 @@ export function Delete() {
   );
 }
 
-export function Bookmark() {
+export function BookmarkIcon() {
   return (
     <Image
-      src="/assets/bookmark.png"
+      src="/assets/bookmark.svg"
       alt="북마크 아이콘"
       width={0}
       height={0}
