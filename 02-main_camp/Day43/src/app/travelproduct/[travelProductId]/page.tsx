@@ -8,7 +8,7 @@ import {
   Delete,
   LinkIcon,
   Location,
-  Bookmark,
+  BookmarkIcon,
   Profile40,
   TravelProductContentsSample,
   LocationSample,
@@ -108,7 +108,10 @@ export default function DetailTravelProduct() {
               <Delete />
               <LinkIcon />
               <Location />
-              <Bookmark />
+              <div className={styles.bookmark__container}>
+                <BookmarkIcon />
+                {data?.fetchTravelproduct.pickedCount ?? 0}
+              </div>
             </div>
           </div>
           <span className={styles.description}>

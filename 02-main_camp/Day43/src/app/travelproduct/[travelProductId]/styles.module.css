@@ -33,7 +33,25 @@
 
 .icon__container {
   display: flex;
+  align-items: center;
   gap: 1rem;
+}
+
+.icon__container .bookmark__container {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+
+  background-color: #00000066;
+  box-shadow: 0px 0px 8px 0px #00000040;
+  border-radius: 0.5rem;
+
+  color: white;
+  stroke: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  cursor: pointer;
 }
 
 .description {
