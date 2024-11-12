@@ -1,5 +1,5 @@
-import { useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useRef, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "./schema";
@@ -7,18 +7,24 @@ import { useMutation } from "@apollo/client";
 import { CREATE_TRAVEL_PRODUCT } from "./queries";
 import { successModal } from "@/utils/modal";
 import { Address } from "react-daum-postcode";
-import { UploadFileDocument } from "@/commons/graphql/graphql";
+import {
+  UpdateTravelproductDocument,
+  UploadFileDocument,
+} from "@/commons/graphql/graphql";
 import { checkValidationFile } from "@/utils/validation-file";
 
 const useProductsWirte = (props) => {
+  const params = useParams();
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [createTravelproduct] = useMutation(CREATE_TRAVEL_PRODUCT);
+  const [updateTravelproduct] = useMutation(UpdateTravelproductDocument);
   const [uploadFile] = useMutation(UploadFileDocument);
   const [isZipCodeModalOpen, setIsZipCodeModalOpen] = useState(false);
   const [inputTag, setInputTag] = useState("");
   const [tags, setTags] = useState([]);
 
+  console.log("tags", props.data?.fetchTravelproduct.tags);
   const methods = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
@@ -36,6 +42,26 @@ const useProductsWirte = (props) => {
       images: [],
     },
   });
+
+  const defaultData = props.data?.fetchTravelproduct;
+  useEffect(() => {
+    // props.data가 로딩된 후 초기값으로 설정
+    if (props.data) {
+      methods.reset({
+        name: defaultData.name || "",
+        remarks: defaultData.remarks || "",
+        contents: defaultData.contents || "",
+        price: defaultData.price || null,
+        zipcode: defaultData.travelproductAddress?.zipcode || "",
+        addressDetail: defaultData.travelproductAddress?.addressDetail || "",
+        lat: defaultData.travelproductAddress?.lat || null,
+        lng: defaultData.travelproductAddress?.lng || null,
+        images: defaultData.images || [],
+      });
+      // 태그 초기값 넣어주기
+      setTags(defaultData.tags || []);
+    }
+  }, [props.data, methods]);
 
   // 웹 에디터 입력 값 setValue해주기
   const onChangeContents = (value) => {
@@ -62,8 +88,6 @@ const useProductsWirte = (props) => {
     const geocoder = new kakao.maps.services.Geocoder();
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        // kakaomap에 보낼 위도, 경도 state
-        // form input에 넣어줄 위도, 경도
         methods.setValue("lng", result[0].road_address.x);
         methods.setValue("lat", result[0].road_address.y);
         methods.trigger(["zipcode", "lat", "lng"]);
@@ -132,33 +156,61 @@ const useProductsWirte = (props) => {
 
   const onClickSubmit = async (data) => {
     console.log(data);
-    try {
-      const result = await createTravelproduct({
-        // TODO: 스프레드연산자써서 짧게 만들어주기
-        variables: {
-          createTravelproductInput: {
-            name: data.name,
-            remarks: data.remarks,
-            contents: data.contents,
-            price: data.price,
-            tags: tags,
-            travelproductAddress: {
-              zipcode: data.zipcode,
-              addressDetail: data.addressDetail,
-              lat: data.lat,
-              lng: data.lng,
+    if (!props.isEdit) {
+      try {
+        const result = await createTravelproduct({
+          // TODO: 스프레드연산자써서 짧게 만들어주기
+          variables: {
+            createTravelproductInput: {
+              name: data.name,
+              remarks: data.remarks,
+              contents: data.contents,
+              price: data.price,
+              tags: tags,
+              travelproductAddress: {
+                zipcode: data.zipcode,
+                addressDetail: data.addressDetail,
+                lat: data.lat,
+                lng: data.lng,
+              },
+              images: data.images,
             },
-            images: data.images,
           },
-        },
-      });
-      console.log(result);
-      const navigationToDetail = () => {
-        router.push(`/products/${result?.data?.createTravelproduct?._id}`);
-      };
-      successModal("서비스 등록 완료😊", navigationToDetail);
-    } catch (error) {
-      console.error(error);
+        });
+        console.log(result);
+        const navigationToDetail = () => {
+          router.push(`/products/${result?.data?.createTravelproduct?._id}`);
+        };
+        successModal("서비스 등록 완료😊", navigationToDetail);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const result = await updateTravelproduct({
+          variables: {
+            updateTravelproductInput: {
+              name: data.name,
+              remarks: data.remarks,
+              contents: data.contents,
+              price: data.price,
+              tags: tags,
+              travelproductAddress: {
+                zipcode: data.zipcode,
+                addressDetail: data.addressDetail,
+                lat: data.lat,
+                lng: data.lng,
+              },
+              images: data.images,
+            },
+            travelproductId: params.productId as string,
+          },
+        });
+        console.log(result);
+        router.push(`/products/${params.productId as string}`);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

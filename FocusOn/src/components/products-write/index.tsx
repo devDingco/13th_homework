@@ -15,6 +15,7 @@ import { LinkCancel } from "@/commons/ui/link";
 import FieldWrapper from "../commons/fieldWrapper";
 import ErrorMessage from "@/commons/ui/error";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 // ReactQuill을 dynamic으로 import
 const ReactQuill = dynamic(() => import("react-quill"), {

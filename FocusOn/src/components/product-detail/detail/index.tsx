@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ExternalLink,
@@ -21,15 +21,28 @@ import KakaoMap from "../../commons/kakao-map";
 export default function ProductDetail() {
   const params = useParams();
   const productId = params.productId as string;
+  const [mapPosition, setMapPosition] = useState(null);
+
   const { data } = useQuery(FETCH_TRAVEL_PRODUCT, {
     variables: { productId },
   });
   console.log(data);
 
+  // data가 로드된 후 카카오맵 초기화
+  useEffect(() => {
+    if (data?.fetchTravelproduct?.travelproductAddress) {
+      setMapPosition({
+        lat: data.fetchTravelproduct.travelproductAddress.lat,
+        lng: data.fetchTravelproduct.travelproductAddress.lng,
+      });
+    }
+  }, [data]);
+
   // 찜버튼
   const [toggleTravelproductPick] = useMutation(TOGGLE_TRAVEL_PRODUCT_PICK, {
     refetchQueries: [{ query: FETCH_TRAVEL_PRODUCT, variables: { productId } }],
   });
+
   const [isPicked, setIsPicked] = useState(false);
   const [selectedImage, setSelectedImage] = React.useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +61,7 @@ export default function ProductDetail() {
       console.error(error);
     }
     setIsPicked(!isPicked);
-    // Here you would typically call an API to update the wishlist status
+
     console.log(
       `Product ${productId} ${isPicked ? "removed from" : "added to"} wishlist`
     );
@@ -143,10 +156,9 @@ export default function ProductDetail() {
           {/* 지도 */}
           <div className={styles.map}>
             <h2 className={styles.section_title}>상세 위치</h2>
-            <KakaoMap
-              lat={data?.fetchTravelproduct?.travelproductAddress.lat}
-              lng={data?.fetchTravelproduct?.travelproductAddress.lng}
-            />
+            {mapPosition && (
+              <KakaoMap lat={mapPosition.lat} lng={mapPosition.lng} />
+            )}
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import { warningModal } from "@/utils/modal";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLoadStore } from "../stores/load";
 import { useAccessTokenStore } from "../stores/accessToken";
 
