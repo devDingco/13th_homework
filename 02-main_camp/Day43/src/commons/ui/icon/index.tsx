@@ -4,6 +4,7 @@ import React from "react";
 interface IIconProps {
   width?: number;
   height?: number;
+  onClickIcon?: () => void;
 }
 
 // Sample
@@ -82,7 +83,7 @@ export function Delete() {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: "1.5rem", height: "1.5rem" }}
+      style={{ width: "1.5rem", height: "1.5rem", cursor: "pointer" }}
     />
   );
 }
@@ -178,7 +179,11 @@ export function Chat() {
   );
 }
 
-export function EditIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+export function EditIcon({
+  width = 1.5,
+  height = 1.5,
+  onClickIcon,
+}: IIconProps) {
   return (
     <Image
       src="/assets/edit.svg"
@@ -186,12 +191,17 @@ export function EditIcon({ width = 1.5, height = 1.5 }: IIconProps) {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: `${width}rem`, height: `${height}rem` }}
+      style={{
+        width: `${width}rem`,
+        height: `${height}rem`,
+        cursor: "pointer",
+      }}
+      onClick={onClickIcon}
     />
   );
 }
 
-export function Close({ width = 1.5, height = 1.5 }: IIconProps) {
+export function Close({ width = 1.5, height = 1.5, onClickIcon }: IIconProps) {
   return (
     <Image
       src="/assets/close.png"
@@ -199,7 +209,12 @@ export function Close({ width = 1.5, height = 1.5 }: IIconProps) {
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: `${width}rem`, height: `${height}rem` }}
+      style={{
+        width: `${width}rem`,
+        height: `${height}rem`,
+        cursor: "pointer",
+      }}
+      onClick={onClickIcon}
     />
   );
 }
