@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import {
   TravelProductSample1,
@@ -18,6 +18,7 @@ import {
   CreatePointTransactionOfBuyingAndSellingDocument,
   FetchTravelproductDocument,
   FetchTravelproductQuestionsDocument,
+  ToggleTravelproductPickDocument,
 } from "@/commons/gql/graphql";
 import Divider from "@/app/_components/commons/divider";
 import Modal from "@/commons/ui/modal";
@@ -40,6 +41,10 @@ export default function DetailTravelProduct() {
       travelproductId: String(params.travelProductId),
     },
   });
+  const [pickedCount, setPickedCount] = useState(
+    data?.fetchTravelproduct.pickedCount ?? 0
+  );
+
   const { data: questions } = useQuery(FetchTravelproductQuestionsDocument, {
     variables: {
       travelproductId,
@@ -47,6 +52,9 @@ export default function DetailTravelProduct() {
   });
   const [createPointTransactionOfBuyingAndSelling] = useMutation(
     CreatePointTransactionOfBuyingAndSellingDocument
+  );
+  const [toggleTravelproductPick] = useMutation(
+    ToggleTravelproductPickDocument
   );
 
   const { showErrorModal, showSuccessModal } = useModal();
@@ -75,6 +83,24 @@ export default function DetailTravelProduct() {
       console.log(error);
     }
   };
+
+  const onClickBookmark = async () => {
+    try {
+      const result = await toggleTravelproductPick({
+        variables: {
+          travelproductId,
+        },
+      });
+      if (result.data) setPickedCount(result.data.toggleTravelproductPick + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (data && typeof data.fetchTravelproduct.pickedCount === "number")
+      setPickedCount(data.fetchTravelproduct.pickedCount);
+  }, [data]);
 
   return (
     <div className={styles.detail__travel__product}>
@@ -108,9 +134,12 @@ export default function DetailTravelProduct() {
               <Delete />
               <LinkIcon />
               <Location />
-              <div className={styles.bookmark__container}>
+              <div
+                className={styles.bookmark__container}
+                onClick={onClickBookmark}
+              >
                 <BookmarkIcon />
-                {data?.fetchTravelproduct.pickedCount ?? 0}
+                {pickedCount}
               </div>
             </div>
           </div>
