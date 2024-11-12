@@ -36,7 +36,7 @@ export default function useLogin() {
           content: '환영합니다. 로그인이 되었습니다!',
           onOk() {
             // 추후 페이지 이동
-            // router.push('/');
+            router.push('/main');
           },
         });
       } else {
