@@ -1,14 +1,22 @@
 import React from "react";
 import styles from "./styles.module.css";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 
-interface IBaseTextAreaProps {
+interface ITextAreaBaseProps<T extends FieldValues> {
   className: string;
   placeholder: string;
+  keyName: Path<T>;
 }
 
-function BaseTextArea({ className, placeholder }: IBaseTextAreaProps) {
+function TextAreaBase<T extends FieldValues>({
+  className,
+  placeholder,
+  keyName,
+}: ITextAreaBaseProps<T>) {
+  const { register } = useFormContext<T>();
   return (
     <textarea
+      {...register(keyName)}
       className={className}
       placeholder={placeholder}
       rows={5}
@@ -16,15 +24,22 @@ function BaseTextArea({ className, placeholder }: IBaseTextAreaProps) {
   );
 }
 
-type ITextAreaProps = Pick<IBaseTextAreaProps, "placeholder"> & {
+type ITextAreaProps<T extends FieldValues> = Pick<
+  ITextAreaBaseProps<T>,
+  "placeholder" | "keyName"
+> & {
   showCount?: boolean;
 };
 
-export function TextArea({ placeholder, showCount = false }: ITextAreaProps) {
-  const props = { placeholder };
+export function TextArea<T extends FieldValues>({
+  keyName,
+  placeholder,
+  showCount = false,
+}: ITextAreaProps<T>) {
+  const props = { keyName, placeholder };
   return (
     <div className={styles.textArea__container}>
-      <BaseTextArea className={styles.textArea} {...props} />
+      <TextAreaBase className={styles.textArea} {...props} />
       {showCount && <TextCount />}
     </div>
   );
