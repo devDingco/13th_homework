@@ -15,7 +15,7 @@ export default function BoardsPage() {
 	return (
 		<div className="flex w-full max-w-7xl flex-col gap-8">
 			<BoardTitleSearch {...{ titleSearch, setTitleSearch, refetch }} />
-			<BoardList data={data} />
+			<BoardList data={data} activePage={activePage} refetch={refetch} />
 			<BoardsPagination
 				data={data}
 				refetch={refetch}

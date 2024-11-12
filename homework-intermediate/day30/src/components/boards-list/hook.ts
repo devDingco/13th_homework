@@ -7,10 +7,10 @@ import { useRouter } from 'next/navigation';
 import { useState, MouseEvent } from 'react';
 import { Modal } from 'antd';
 
-export default function useBoardList() {
+export default function useBoardList(props) {
   const [hoveredId, setHoveredId] = useState('');
   const { data } = useQuery(FetchBoardsDocument, {
-    variables: { page: 1 },
+    variables: { page: activePage },
   });
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   // console.log('boards 페이지에서 data.fetchBoards::::', data?.fetchBoards);

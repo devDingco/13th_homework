@@ -11,6 +11,7 @@ export default function MyApis() {
     try {
       const response = await listAll(imageListRef);
       console.log('🚀 ~ fetchFiles ~ response:', response);
+
       // 모든 URL을 동시에 가져옵니다.
       const urls = await Promise.all(
         response.items.map((item) => getDownloadURL(item))

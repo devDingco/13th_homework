@@ -13,41 +13,39 @@ import 'swiper/css';
 
 export default function BoardBanner() {
   return (
-    <div>
-      <Swiper
-        className="w-screen h-96"
-        spaceBetween={50}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 4000,
-          pauseOnMouseEnter: false,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay]}
-      >
-        <SwiperSlide>
-          <Images
-            src={banner1}
-            alt="보드배너이미지1"
-            className="object-cover w-full h-full object-bottom"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Images
-            src={banner2}
-            alt="보드배너이미지2"
-            className="object-cover w-full h-full object-bottom"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Images
-            src={banner3}
-            alt="보드배너이미지3"
-            className="object-cover w-full h-full object-bottom"
-          />
-        </SwiperSlide>
-      </Swiper>
-    </div>
+    <Swiper
+      className="w-screen h-96"
+      spaceBetween={50}
+      slidesPerView={1}
+      loop={true}
+      autoplay={{
+        delay: 4000,
+        pauseOnMouseEnter: false,
+        disableOnInteraction: false,
+      }}
+      modules={[Autoplay]}
+    >
+      <SwiperSlide>
+        <Images
+          src={banner1}
+          alt="보드배너이미지1"
+          className="object-cover w-full h-full object-bottom"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Images
+          src={banner2}
+          alt="보드배너이미지2"
+          className="object-cover w-full h-full object-bottom"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Images
+          src={banner3}
+          alt="보드배너이미지3"
+          className="object-cover w-full h-full object-bottom"
+        />
+      </SwiperSlide>
+    </Swiper>
   );
 }

@@ -9,12 +9,10 @@
           목록컴포넌트 : src/components/myapis-list/index.tsx
           (2) 등록페이지 : src/app/myapis/new/page.tsx
           등록컴포넌트 : src/components/myapis-write/index.tsx
-
-              (3) 수정페이지  : src/app/myapis/[myapiId]/edit/page.tsx
-              수정컴포넌트 : src/components/myapis-write/index.tsx
-
-              (4) 상세페이지  : src/app/myapis/[myapiId]/page.tsx
-              상세컴포넌트 : src/components/myapis-detail/index.tsx
+          (3) 수정페이지 : src/app/myapis/[myapiId]/edit/page.tsx
+          수정컴포넌트 : src/components/myapis-write/index.tsx
+          (4) 상세페이지 : src/app/myapis/[myapiId]/page.tsx
+          상세컴포넌트 : src/components/myapis-detail/index.tsx
 
 3.  컴포넌트[리팩토링]
     - [x] 나만의컨텐츠[파이어베이스] 컴포넌트의 파일을 보완해 주세요.
