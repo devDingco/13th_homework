@@ -1,5 +1,13 @@
 import { gql } from "@apollo/client";
 
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
+
 export const CREATE_TRAVEL_PRODUCT = gql`
   mutation createTravelproductInput(
     $name: String!
@@ -7,6 +15,7 @@ export const CREATE_TRAVEL_PRODUCT = gql`
     $contents: String!
     $price: Int!
     $tags: [String!]
+    $images: [String!]
   ) {
     createTravelproduct(
       createTravelproductInput: {
@@ -15,6 +24,7 @@ export const CREATE_TRAVEL_PRODUCT = gql`
         contents: $contents
         price: $price
         tags: $tags
+        images: $images
       }
     ) {
       _id
@@ -23,6 +33,7 @@ export const CREATE_TRAVEL_PRODUCT = gql`
       contents
       price
       tags
+      images
       pickedCount
       createdAt
     }
@@ -36,6 +47,8 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
     $remarks: String!
     $contents: String!
     $price: Int
+    $tags: [String!]
+    $images: [String!]
   ) {
     updateTravelproduct(
       travelproductId: $travelproductId
@@ -44,25 +57,31 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
         remarks: $remarks
         contents: $contents
         price: $price
+        tags: $tags
+        images: $images
       }
     ) {
-      price
-      pickedCount
-      soldAt
-      deletedAt
-    }
-  }
-`;
-
-export const FETCH_TRAVEL_PRODUCT = gql`
-  query fetchTravelproduct($travelproductId: ID!) {
-    fetchTravelproduct(travelproductId: $travelproductId) {
       _id
       name
       remarks
       contents
-      tags
       price
+      tags
+      images
+    }
+  }
+`;
+
+export const FECTH_TRAVEL_PRODUCT = gql`
+  query fetchTravelproduct($id: ID!) {
+    fetchTravelproduct(travelproductId: $id) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
     }
   }
 `;
