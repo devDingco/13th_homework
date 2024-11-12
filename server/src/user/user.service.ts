@@ -67,7 +67,11 @@ export class UserService {
         return { ...token };
     }
 
-    async findNickname(nickname: string) {
+    async findNickname(nickname: string): Promise<boolean> {
         return await this.userRepository.findUserNickname(nickname);
+    }
+
+    async deleteUser(userId: number): Promise<void> {
+        await this.userRepository.deleteUser(userId);
     }
 }

@@ -55,7 +55,7 @@ export class UserRepository {
         });
     }
 
-    async findUserNickname(nickname: string): Promise<Boolean> {
+    async findUserNickname(nickname: string): Promise<boolean> {
         const user = await this.userRepository.findOneBy({
             nickname,
         });
@@ -65,5 +65,16 @@ export class UserRepository {
         }
 
         return true;
+    }
+
+    async deleteUser(userId: number): Promise<void> {
+        const user = await this.userRepository.findOne({ where: { userId } });
+
+        if (!user) {
+            throw new NotFoundException(
+                `유저 ${userId}가 현재 데이터베이스에 존재하지 않습니다`,
+            );
+        }
+        await this.userRepository.softRemove(user);
     }
 }

@@ -27,13 +27,8 @@ export class UserResolver {
         @Args({ name: 'file', type: () => GraphQLUpload, nullable: true })
         file: FileUpload,
     ) {
-        if (!file) {
-            throw new BadRequestException(
-                '이미지가 정상적으로 업로드 되지 않았습니다.',
-            );
-        }
-
-        const image = await uploadFileToS3(file);
+        let image;
+        if (file) image = await uploadFileToS3(file);
 
         const user = await this.userService.createUser({
             ...signUpUser,
@@ -98,5 +93,24 @@ export class UserResolver {
     @Mutation(() => Boolean)
     validateNickname(@Args('nickname') nickname: string) {
         return this.userService.findNickname(nickname);
+    }
+
+    @Mutation(() => Boolean)
+    async deleteUser(@Context() context: any) {
+        const userId = context.req.user.userId;
+
+        await this.userService.deleteUser(userId);
+
+        return new Promise((resolve) => {
+            context.req.res.clearCookie('connect.sid');
+
+            context.req.session.destroy((err: any) => {
+                if (err) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     }
 }

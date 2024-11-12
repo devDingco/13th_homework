@@ -82,6 +82,7 @@ type Mutation {
   socialLogin(socialLoginInput: SocialLoginInput!): TokenSchema!
   logout: Boolean!
   validateNickname(nickname: String!): Boolean!
+  deleteUser: Boolean!
 }
 
 input CreateBoardInput {

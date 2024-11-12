@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     HttpCode,
     HttpStatus,
     InternalServerErrorException,
@@ -36,18 +37,13 @@ export class UserController {
         @Body('address') address,
         @UploadedFile() image: uploadFile,
     ): Promise<boolean> {
-        if (!image) {
-            throw new InternalServerErrorException(
-                '이미지를 s3에 성공적으로 저장하지 못했습니다.',
-            );
-        }
         if (address) {
             signUpDTO.address = JSON.parse(address);
         }
 
         const user = await this.userService.createUser({
             ...signUpDTO,
-            image: image.location,
+            image: image?.location,
         });
 
         if (user) return true;
@@ -117,5 +113,26 @@ export class UserController {
     @HttpCode(HttpStatus.OK)
     validateNickname(@Body() nickname: string) {
         return this.userService.findNickname(nickname);
+    }
+
+    @Delete()
+    @HttpCode(HttpStatus.OK)
+    async deleteUser(@Req() req: Request, @Res() res: Response): Promise<void> {
+        const userId = req.user.userId;
+        await this.userService.deleteUser(Number(userId));
+
+        res.clearCookie('connect.sid');
+
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                    success: false,
+                    message: '세션 삭제 실패',
+                });
+            }
+            return res
+                .status(HttpStatus.OK)
+                .json({ success: true, message: '계정 삭제' });
+        });
     }
 }
