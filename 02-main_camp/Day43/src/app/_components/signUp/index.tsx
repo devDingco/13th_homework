@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CreateUserDocument } from "@/commons/gql/graphql";
-import { Button, ButtonSize, ButtonVariant } from "../button";
-import useModal from "../modal/hook";
+import { Button, ButtonSize, ButtonVariant } from "../../../commons/ui/button";
+import useModal from "../../../commons/ui/modal/hook";
 
 interface ISignUpProps {
   handleCancel?: () => void;

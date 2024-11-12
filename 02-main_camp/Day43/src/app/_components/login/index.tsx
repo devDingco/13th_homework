@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { InputForm } from "@/app/_components/commons/input";
-import { LogoIcon } from "../icon";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginSchema, loginSchema } from "./schema";
@@ -11,7 +10,8 @@ import { useMutation } from "@apollo/client";
 import { LoginUserDocument } from "@/commons/gql/graphql";
 import { NavigationPaths, useNavigate } from "@/commons/navigate";
 import { useAccessTokenStore } from "@/app/_store/accessToken/store";
-import { Button, ButtonSize, ButtonVariant } from "../button";
+import { LogoIcon } from "@/commons/ui/icon";
+import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 
 interface ILoginProps {
   handleSignUp: () => void;

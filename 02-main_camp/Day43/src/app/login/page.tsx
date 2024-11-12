@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import Login from "@/commons/ui/login";
 import { LoginMainImage } from "@/commons/ui/icon";
-import SignUp from "@/commons/ui/signUp";
+import SignUp from "@/app/_components/signUp";
+import Login from "@/app/_components/login";
 
 export default function LoginPage() {
   const [signUp, setSignUp] = useState(false);
