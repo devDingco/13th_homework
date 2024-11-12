@@ -1,14 +1,23 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
 import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import Image from "next/image";
 
 export default function ListBanner() {
   return (
     <Swiper
+      modules={[Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={1}
+      style={{
+        "--swiper-pagination-color": "#fff",
+      }}
+      pagination={{ clickable: true }}
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >

@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { FetchBoardDocument } from "@/commons/graphql/graphql";
 import Image from "next/image";
+import YouTube from "react-youtube";
 
 export default function DetailForm() {
   const params = useParams();
@@ -24,11 +25,23 @@ export default function DetailForm() {
   const getImageUrl = (path: string) =>
     `https://storage.googleapis.com/${path}`;
 
+  const videoId = data?.fetchBoard.youtubeUrl;
+  const opts = {
+    height: "320",
+    width: "480",
+    playerVars: {
+      autoplay: 0,
+    },
+  };
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex-col py-10 flex gap-6 border-b">
         <div className="prose-b_28_36">{data?.fetchBoard?.title}</div>
-        <DetailFormInfo value={data?.fetchBoard.writer} />
+        <DetailFormInfo
+          writer={data?.fetchBoard.writer}
+          address={data?.fetchBoard?.boardAddress?.address}
+        />
         <DetailFormContent value={data?.fetchBoard.contents} />
         <div className="flex gap-2 w-full overflow-auto ${images?'h-[125px]':'h-0'}">
           {data?.fetchBoard?.images?.map((el, idx) =>
@@ -44,6 +57,11 @@ export default function DetailForm() {
             ) : null
           )}
         </div>
+        {videoId && (
+          <div className="youtube-video">
+            <YouTube videoId={videoId} opts={opts} />
+          </div>
+        )}
         <DetailFormLike />
         <DetailFormButton value={data?.fetchBoard._id} />
       </div>

@@ -32,6 +32,11 @@ export const FETCH_BOARD = gql`
       youtubeUrl
       likeCount
       dislikeCount
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       images
       user {
         _id
@@ -85,6 +90,11 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       youtubeUrl
       likeCount
       dislikeCount

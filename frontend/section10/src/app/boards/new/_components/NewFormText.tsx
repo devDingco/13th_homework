@@ -19,6 +19,7 @@ export default function InputFormText({
   onChange,
   value,
   disabled,
+  readOnly,
 }: IInputFormTextProps) {
   // if (title === "author") console.log("🌻", value);
   const isTextarea = title === "content" || title === "comment";
@@ -36,6 +37,7 @@ export default function InputFormText({
             className="input-text"
             type={title === "password" ? "password" : "text"}
             disabled={disabled}
+            readOnly={readOnly}
             value={value}
             placeholder={placeholderObj[title]}
             onChange={(e) => onChange?.(e)}

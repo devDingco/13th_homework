@@ -21,7 +21,7 @@ export default function ListForm() {
   const { data } = useQuery(FetchBoardsDocument);
 
   return (
-    <div className="flex flex-col mx-auto items-center shadow-lg w-full max-w-[1280px] h-auto mt-5 px-12 py-6">
+    <div className="flex flex-col mx-auto items-center shadow-lg mt-5 px-12 py-6">
       <div className="w-full max-w-[1184px] h-auto flex-col gap-2">
         {/* NOTE : 여기 font 속성이 자식에게 상속되지 않음 */}
         <div className="flex items-center h-[52px] gap-2 prose-sb_16_20 px-6 py-4">

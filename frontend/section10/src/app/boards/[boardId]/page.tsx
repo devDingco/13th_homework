@@ -3,11 +3,8 @@ import DetailForm from "./_components/DetailForm";
 
 export default function BoardsDetail() {
   return (
-    // <div></div>
-    <div className="flex justify-center w-dvw px-10 ">
-      <div className="flex-col items-center w-full">
-        <DetailForm />
-      </div>
+    <div className="flex-col items-center w-full max-w-[1280px]">
+      <DetailForm />
     </div>
   );
 }

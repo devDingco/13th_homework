@@ -22,7 +22,7 @@ export const CREATE_COMMENT = gql`
 
 export const DELETE_COMMENT = gql`
   mutation DeleteComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(password: $password, boardCommentID: $boardCommentId)
+    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
   }
 `;
 

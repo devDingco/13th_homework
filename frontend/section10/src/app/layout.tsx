@@ -2,16 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "@/commons/settings/apollo-setting";
+import Layout from "@/commons/layout";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import { Toaster } from "@/components/ui/toaster";
+
+const global_font = localFont({
+  src: "./fonts/PretendardVariable.woff2",
+  variable: "--font-global-pretendard",
 });
 
 export const metadata: Metadata = {
@@ -26,10 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ApolloSetting>{children}</ApolloSetting>
+      <body className={`${global_font.variable}`}>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
+        <Toaster />
       </body>
     </html>
   );
