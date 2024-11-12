@@ -12,11 +12,11 @@ export function TravelProductSample1() {
   return (
     <Image
       src="/assets/product_detail_sample.png"
-      alt="휴지통 아이콘"
+      alt="여행 상품 샘플 메인 이미지"
       width={0}
       height={0}
       sizes="100vw"
-      style={{ width: "640px", height: "480px" }}
+      style={{ width: "680px", height: "480px" }}
     />
   );
 }
@@ -25,7 +25,7 @@ export function TravelProductSample2() {
   return (
     <Image
       src="/assets/product_detail_sample2.png"
-      alt="휴지통 아이콘"
+      alt="여행 상품 샘플 서브 이미지"
       width={0}
       height={0}
       sizes="100vw"
