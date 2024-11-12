@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 
-// "67021b115413b3002914ce34"
 export const FETCH_TRAVEL_PRODUCT = gql`
   query fetchTravelproduct($travelproductId: ID!) {
     fetchTravelproduct(travelproductId: $travelproductId) {
@@ -56,5 +55,117 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
     ) {
       _id
     }
+  }
+`;
+
+export const FETCH_TRAVELPRODUCT_QUESTIONS = gql`
+  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {
+    fetchTravelproductQuestions(
+      page: $page
+      travelproductId: $travelproductId
+    ) {
+      _id
+      contents
+      user {
+        name
+        picture
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const CREATE_TRAVELPRODUCT_QUESTION = gql`
+  mutation createTravelproductQuestion(
+    $createTravelproductQuestionInput: CreateTravelproductQuestionInput!
+    $travelproductId: ID!
+  ) {
+    createTravelproductQuestion(
+      createTravelproductQuestionInput: $createTravelproductQuestionInput
+      travelproductId: $travelproductId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const UPDATE_TRAVELPRODUCT_QUESTION = gql`
+  mutation updateTravelproductQuestion(
+    $updateTravelproductQuestionInput: UpdateTravelproductQuestionInput!
+    $travelproductQuestionId: ID!
+  ) {
+    updateTravelproductQuestion(
+      updateTravelproductQuestionInput: $updateTravelproductQuestionInput
+      travelproductQuestionId: $travelproductQuestionId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_TRAVELPRODUCT_QUESTION = gql`
+  mutation deleteTravelproductQuestion($travelproductQuestionId: ID!) {
+    deleteTravelproductQuestion(
+      travelproductQuestionId: $travelproductQuestionId
+    )
+  }
+`;
+
+export const fetchTravelproductQuestionAnswers = gql`
+  query fetchTravelproductQuestionAnswers(
+    $page: Int
+    $travelproductQuestionId: ID!
+  ) {
+    fetchTravelproductQuestionAnswers(
+      page: $page
+      travelproductQuestionId: $travelproductQuestionId
+    ) {
+      _id
+      contents
+      user {
+        name
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const CREATE_TRAVELPRODUCT_QUESTION_ANSWER = gql`
+  mutation createTravelproductQuestionAnswer(
+    $createTravelproductQuestionAnswerInput: CreateTravelproductQuestionAnswerInput!
+    $travelproductQuestionId: ID!
+  ) {
+    createTravelproductQuestionAnswer(
+      createTravelproductQuestionAnswerInput: $createTravelproductQuestionAnswerInput
+      travelproductQuestionId: $travelproductQuestionId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const UPDATE_TRAVELPRODUCT_QUESTION_ANSWER = gql`
+  mutation updateTravelproductQuestionAnswer(
+    $updateTravelproductQuestionAnswerInput: UpdateTravelproductQuestionAnswerInput!
+    $travelproductQuestionAnswerId: ID!
+  ) {
+    updateTravelproductQuestionAnswer(
+      updateTravelproductQuestionAnswerInput: $updateTravelproductQuestionAnswerInput
+      travelproductQuestionAnswerId: $travelproductQuestionAnswerId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_TRAVELPRODUCT_QUESTION_ANSWER = gql`
+  mutation deleteTravelproductQuestionAnswer(
+    $travelproductQuestionAnswerId: ID!
+  ) {
+    deleteTravelproductQuestionAnswer(
+      travelproductQuestionAnswerId: $travelproductQuestionAnswerId
+    )
   }
 `;
