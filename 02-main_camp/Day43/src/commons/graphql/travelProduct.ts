@@ -169,3 +169,17 @@ export const DELETE_TRAVELPRODUCT_QUESTION_ANSWER = gql`
     )
   }
 `;
+
+export const TOGGLE_TRAVELPRODUCT_PICK = gql`
+  mutation toggleTravelproductPick($travelproductId: ID!) {
+    toggleTravelproductPick(travelproductId: $travelproductId)
+  }
+`;
+
+export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+    }
+  }
+`;
