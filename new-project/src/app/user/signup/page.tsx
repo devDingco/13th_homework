@@ -1,6 +1,6 @@
 "use client";
 
-import SignupFormComponent from "../_components/signupForm";
+import SignupFormComponent from "../../../_containers/user/signupForm";
 
 const SignupPage = () => {
   return (

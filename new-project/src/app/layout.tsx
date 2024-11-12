@@ -5,7 +5,7 @@ import Layout from "@/_common/layout";
 import ApolloSetting from "@/_common/settings/apollo-setting";
 
 const dohyeon = localFont({
-  src: "./fonts/BMDOHYEON_ttf.ttf",
+  src: "../../public/fonts/BMDOHYEON_ttf.ttf",
   variable: "--font-dohyeon",
   weight: "100 900",
 });
