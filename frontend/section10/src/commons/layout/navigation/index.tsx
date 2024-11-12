@@ -31,7 +31,7 @@ export default function Navigation() {
   const router = useRouter();
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState(pathname);
-  console.log("dddd", pathname);
+  // console.log("dddd", pathname);
 
   return (
     <div className="h-[80px] w-full max-w-[1280px] flex justify-between">
