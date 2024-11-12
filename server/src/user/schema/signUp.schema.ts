@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
 import {
-    IsArray,
     IsEmail,
     IsEnum,
     IsNotEmpty,
@@ -16,7 +15,7 @@ import { Role } from 'src/common/enums/role.enum';
 import { Type } from 'class-transformer';
 
 @InputType()
-export class signUpUser {
+export class SignUpUserInput {
     @IsString()
     @IsNotEmpty()
     @Field()
@@ -46,11 +45,6 @@ export class signUpUser {
     @Field()
     password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @Field()
-    image: string;
-
     @IsOptional()
     @IsEnum(Role, {
         message: 'Role은 USER or MANAGER이어야합니다',
@@ -58,10 +52,9 @@ export class signUpUser {
     @Field(() => Role, { nullable: true })
     role?: Role;
 
-    @IsArray()
     @IsOptional()
     @ValidateNested({ each: true })
     @Type(() => AddressInput)
-    @Field(() => [AddressInput], { nullable: true })
-    addressInput?: AddressInput;
+    @Field(() => AddressInput, { nullable: true })
+    address?: AddressInput;
 }

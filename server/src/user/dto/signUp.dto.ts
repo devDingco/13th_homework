@@ -2,12 +2,10 @@ import {
     IsEmail,
     IsEnum,
     IsNotEmpty,
-    IsObject,
     IsOptional,
     IsString,
     Matches,
     MinLength,
-    ValidateNested,
 } from 'class-validator';
 
 import { AddressDTO } from './address.dto';
@@ -40,10 +38,6 @@ export class signUpDTO {
     )
     password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    image: string;
-
     // 빼놓기
     @IsString()
     @IsOptional()
@@ -53,8 +47,6 @@ export class signUpDTO {
     role?: Role;
 
     @IsOptional()
-    @ValidateNested({ each: true })
     @Type(() => AddressDTO)
-    @IsObject()
     address?: AddressDTO;
 }

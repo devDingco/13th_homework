@@ -8,6 +8,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { signUpDTO } from '../dto/signUp.dto';
+import { SocialLoginDTO } from '../dto/social-login.dto';
 
 @Injectable()
 export class UserRepository {
@@ -18,6 +19,7 @@ export class UserRepository {
 
     async createUser(signUpDTO: signUpDTO): Promise<UserEntity> {
         const user = this.userRepository.create(signUpDTO);
+
         try {
             return await this.userRepository.save(user);
         } catch (error) {
@@ -27,6 +29,12 @@ export class UserRepository {
                 throw new InternalServerErrorException();
             }
         }
+    }
+
+    async createSocialUser(socialLoginDto: SocialLoginDTO) {
+        const user = this.userRepository.create(socialLoginDto);
+
+        return await this.userRepository.save(user);
     }
 
     async findUserPK(userId: number): Promise<UserEntity> {
@@ -42,17 +50,12 @@ export class UserRepository {
     }
 
     async findUserEmail(email: string): Promise<UserEntity> {
-        const user = await this.userRepository.findOneBy({
+        return await this.userRepository.findOneBy({
             email,
         });
-
-        if (!user) {
-            throw new NotFoundException(`${email}이 존재하지 않습니다.`);
-        }
-        return user;
     }
 
-    async findUserNickname(nickname: string): Promise<Boolean> {
+    async findUserNickname(nickname: string): Promise<boolean> {
         const user = await this.userRepository.findOneBy({
             nickname,
         });
@@ -62,5 +65,16 @@ export class UserRepository {
         }
 
         return true;
+    }
+
+    async deleteUser(userId: number): Promise<void> {
+        const user = await this.userRepository.findOne({ where: { userId } });
+
+        if (!user) {
+            throw new NotFoundException(
+                `유저 ${userId}가 현재 데이터베이스에 존재하지 않습니다`,
+            );
+        }
+        await this.userRepository.softRemove(user);
     }
 }

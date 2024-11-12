@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
+import { Provider } from 'src/common/enums/provider.enum';
 import { Role } from 'src/common/enums/role.enum';
 import { SharedProp } from 'src/common/sharedProp.helper';
 import { UserAddressEntity } from './user-address.entity';
@@ -19,19 +20,20 @@ export class UserEntity extends SharedProp {
     @Column({ nullable: false })
     name: string;
 
-    @Column({ nullable: false })
-    nickname: string;
+    @Column({ nullable: true })
+    nickname?: string;
 
     @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     @Exclude()
-    password: string;
+    password?: string;
 
-    @Column({ nullable: false })
-    image: string;
+    @Column({ nullable: true })
+    image?: string;
 
+    // 나중에 에러 잡아야함
     @Column({
         type: 'enum',
         enum: Role,
@@ -39,7 +41,10 @@ export class UserEntity extends SharedProp {
     })
     role?: Role;
 
+    @Column({ nullable: true })
+    provider?: string;
+
     @OneToOne(() => UserAddressEntity, { cascade: true, eager: true })
     @JoinColumn({ name: 'address_id' })
-    address: UserAddressEntity;
+    address?: UserAddressEntity;
 }

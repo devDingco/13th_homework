@@ -4,8 +4,6 @@ import { S3Client } from '@aws-sdk/client-s3';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV || 'local'}` });
 
-console.log('AWS_REGION:', process.env.AWS_REGION);
-
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {

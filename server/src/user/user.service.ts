@@ -1,10 +1,12 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { AuthService } from 'src/auth/auth.service';
 import { BcryptService } from 'src/bcrypt/bcrypt.service';
-import { Injectable } from '@nestjs/common';
+import { SocialLoginDTO } from './dto/social-login.dto';
 import { UserEntity } from './entity/user.entity';
 import { UserRepository } from './repository/user.repository';
 import { loginDTO } from './dto/login.dto';
-import { signUpDTO } from './dto/signUp.dto';
+import { signUpImageDTO } from './dto/signUp-image.dto';
 
 @Injectable()
 export class UserService {
@@ -14,7 +16,7 @@ export class UserService {
         private readonly authService: AuthService,
     ) {}
 
-    async createUser(signUpDTO: signUpDTO): Promise<UserEntity> {
+    async createUser(signUpDTO: signUpImageDTO): Promise<UserEntity> {
         const password: string = await this.bcryptService.transformPassword(
             signUpDTO.password,
         );
@@ -25,9 +27,15 @@ export class UserService {
     }
 
     async login(loginDTO: loginDTO) {
-        const user: UserEntity = await this.userRepository.findUserEmail(
-            loginDTO.email,
-        );
+        const user: UserEntity | undefined =
+            await this.userRepository.findUserEmail(loginDTO.email);
+
+        if (!user) {
+            throw new NotFoundException(
+                `${loginDTO.email}이 존재하지 않습니다.`,
+            );
+        }
+
         await this.bcryptService.validatePassword(
             loginDTO.password,
             user.password,
@@ -39,10 +47,31 @@ export class UserService {
             loginDTO.dev,
         );
 
+        return { ...token, image: user.image, name: user.name };
+    }
+
+    async socialLogin(socialLoginDto: SocialLoginDTO) {
+        let user: UserEntity | undefined =
+            await this.userRepository.findUserEmail(socialLoginDto.email);
+
+        if (!user) {
+            user = await this.userRepository.createSocialUser(socialLoginDto);
+        }
+
+        const token = await this.authService.issueLoginToken(
+            user.userId,
+            user.role,
+            true,
+        );
+
         return { ...token };
     }
 
-    async findNickname(nickname: string) {
+    async findNickname(nickname: string): Promise<boolean> {
         return await this.userRepository.findUserNickname(nickname);
+    }
+
+    async deleteUser(userId: number): Promise<void> {
+        await this.userRepository.deleteUser(userId);
     }
 }

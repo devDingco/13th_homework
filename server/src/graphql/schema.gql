@@ -55,6 +55,12 @@ type TokenSchema {
   accessToken: String!
 }
 
+type LoginSchema {
+  accessToken: String!
+  nickname: String!
+  image: String!
+}
+
 type Query {
   getBoards(page: Int, take: Int): BoardPaginationResponse!
   getBoard(boardId: Int!): BoardSchema!
@@ -71,10 +77,12 @@ type Mutation {
   createBoardComment(boardId: Int!, createBoardComment: CreateBoardCommentInput!): BoardCommentResponseDTO!
   updateBoardComment(boardId: Int!, updateBoardComment: UpdateBoardCommentInput!, commentId: String!): BoardCommentResponseDTO!
   deleteBoardComment(boardId: Int!, commentId: String!): Boolean!
-  signup(signUpUser: signUpUser!): Boolean!
-  login(loginUser: loginUser!): TokenSchema!
+  signup(signUpUserInput: SignUpUserInput!, file: Upload): Boolean!
+  login(loginUserInput: LoginUserInput!): LoginSchema!
+  socialLogin(socialLoginInput: SocialLoginInput!): TokenSchema!
   logout: Boolean!
   validateNickname(nickname: String!): Boolean!
+  deleteUser: Boolean!
 }
 
 input CreateBoardInput {
@@ -116,14 +124,13 @@ input UpdateBoardCommentInput {
   parentId: String
 }
 
-input signUpUser {
+input SignUpUserInput {
   name: String!
   nickname: String!
   email: String!
   password: String!
-  image: String!
   role: Role
-  addressInput: [AddressInput!]
+  address: AddressInput
 }
 
 """사용자 역할 (USER 또는 MANAGER)"""
@@ -138,8 +145,17 @@ input AddressInput {
   detailAddress: String!
 }
 
-input loginUser {
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input LoginUserInput {
   email: String!
   password: String!
   dev: Boolean
+}
+
+input SocialLoginInput {
+  name: String!
+  email: String!
+  provider: String!
 }
