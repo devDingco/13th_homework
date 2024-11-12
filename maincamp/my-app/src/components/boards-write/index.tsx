@@ -28,6 +28,7 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
         zoneAddress,
         fileRef,
         imageUrl,
+        imageDelete,
         onChangeName,
         onChangePassword,
         onChangeSubject,
@@ -123,7 +124,17 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
                             <button 
                                 onClick={() => onClickImageFile(index)} 
                                 className={styles.onClickImageFile}>
+                                {imageUrl && 
+                                <img className={styles.imgPrev} src={`https://storage.googleapis.com/${imageUrl}`} 
+                                alt={`미리보기 ${index + 1}`} />}
                             </button>
+                            {imageUrl && ( //이미작 등록 되었을때만 보여지게
+                                <button 
+                                    className={styles.imgClose}
+                                    onClick={() => imageDelete(index)}
+                                >
+                                </button>
+                            )}
                             <input 
                                 type="file"
                                 onChange={(event) => onChangeImageUpload(index, event)}
@@ -131,16 +142,13 @@ export default function BoardDetailEdit(props: IBoardWriteProps){
                                 ref={fileRef[index]}
                                 style={{display:"none"}}
                             />
-                                {imageUrl && 
-                                <img src={`https://storage.googleapis.com/${imageUrl}`} 
-                                alt={`미리보기 ${index + 1}`} />}
                         </div>
                     ))}
                 </div>
             </div>
             <div className={styles.bt_button}>
                 <button className={styles.cancel_btn}>취소</button>
-                <button 
+                <button
                     onClick={register} 
                     style={isActive === true ? registerActive : registerColor}>
                     {props.isEdit === true ? "수정하기" : "등록하기"}

@@ -10,16 +10,16 @@ import { IPaginationProps } from "./types"
 import { FETCH_BOARDS } from "./queries"
 
 export default function ListPagination(props:IPaginationProps){
-    // const { data } = useQuery(FetchBoardsCountDocument)
+    const { data } = useQuery(FetchBoardsCountDocument)
     const { onClickNextPage, onClickPage, onClickPrevPage, startPage } = useListPagination(props);
 
-    // const pageOnChange: PaginationProps["onChange"] = (page) => {
-    //     props.setPage(page);
-    // };
-    // console.log("data?.fetchBoardsCount", data?.fetchBoardsCount);
+    const pageOnChange: PaginationProps["onChange"] = (page) => {
+        props.setPage(page);
+    };
+    console.log("data?.fetchBoardsCount", data?.fetchBoardsCount);
     return(
         <div className={styles.paginationWrap}>
-            <span onClick={onClickPrevPage} className={styles.listPrev}>이전</span>
+            {/* <span onClick={onClickPrevPage} className={styles.listPrev}>이전</span>
             {new Array(10).fill("페이지").map(
                 (_, index) =>
                     index + startPage <= props.lastPage && (
@@ -33,8 +33,8 @@ export default function ListPagination(props:IPaginationProps){
                         </span>
                     )
             )}
-            <span onClick={onClickNextPage} className={styles.listNext}>다음</span>
-            {/* {props?.data?.fetchBoards?.length && (
+            <span onClick={onClickNextPage} className={styles.listNext}>다음</span> */}
+            {props?.data?.fetchBoards?.length && (
                 <Pagination
                     defaultPageSize={10}
                     onChange={pageOnChange}
@@ -43,7 +43,7 @@ export default function ListPagination(props:IPaginationProps){
                     total={data?.fetchBoardsCount}
                     showSizeChanger={false}
                 />
-            )} */}
+            )}
         </div>
     )
 }

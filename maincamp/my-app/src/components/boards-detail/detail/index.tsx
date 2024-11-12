@@ -26,11 +26,22 @@ export default function BoardsDetail() {
                         <p className={styles.mapIcon}></p>
                     </Tooltip>
                 </div>
-                <p className={styles.subjectImg}></p>
+                {/* <p className={styles.subjectImg}></p> */}
+                <div>
+                    {Array.isArray(data?.fetchBoard?.images) ? (
+                        data?.fetchBoard.images.map((imageUrl, index) => (
+                            <img key={index} src={`https://storage.googleapis.com/${imageUrl}`} alt={`${index + 1}`} />
+                        ))
+                    ) : (
+                        data?.fetchBoard.images && (
+                            <img src={data?.fetchBoard.images} alt="단일 이미지" />
+                        )
+                    )}
+                </div>
                 <p>{data?.fetchBoard?.contents}</p>
             </div>
             <div className={styles.videoBg}>
-                <div className={styles.video}></div>
+                {/* <div className={styles.video}></div> */}
             </div>
             <div className={styles.emotion}>
                 <div className={styles.bad}>

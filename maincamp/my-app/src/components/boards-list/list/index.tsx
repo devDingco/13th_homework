@@ -13,6 +13,7 @@ export default function BoardsList(props:IListProps){
         <>
             <div className={styles.listForm}>
                 {props.data?.fetchBoards?.map((el, index) => (
+                    // props.data?.fetchBoards로 페이지네이션 클릭시 리스트 받아오기
                     <div key={el._id} className={styles.listBg}>
                         <ul className={styles.listTop}>
                             <li>번호</li>

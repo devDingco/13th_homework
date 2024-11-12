@@ -56,7 +56,7 @@
   width:620px;
   margin:0;
 }
-.name_pw_bg input, .title input{
+.name_pw_bg input{
   width:620px;
   height:48px;
   border-radius:8px;
@@ -68,6 +68,7 @@
 
 /* 제목 */
 .title{
+  width:1280px;
   height:80px;
   /* margin:8rem 0; */
   margin-top:30px;
@@ -141,14 +142,35 @@
   margin:8px 16px 8px 0;
   border:none;
 }
-/* .imageUpload{
-  display:flex;
-} */
+.imageUpload{
+  position:relative;
+}
+.imageUpload:hover .imgClose{
+  display:block;
+}
 .onClickImageFile{
   width:160px;
   height:160px;
   margin:8px 16px 8px 0;
   background:url(../../../public/images/add-image.png) no-repeat;
+}
+
+.imgPrev{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+}
+
+.imgClose{
+  position:absolute;
+  cursor:pointer;
+  z-index:10;
+  display:none;
+  top:12px;
+  right:20px;
+  width:24px;
+  height:24px;
+  background:url(../../../public/images/closeBtn.png) no-repeat;
 }
 
 /* 하단 버튼 */

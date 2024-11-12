@@ -32,6 +32,31 @@ export default function useBoardDetailEdit(isEdit: boolean){
 
     
     const [isActive, setIsActive] = useState(false)
+
+    // 수정or등록하기 버튼 색 변경
+    useEffect(() => {
+        // 에러 메시지 초기화
+        setNameError("");
+        setPasswordError("");
+        setTitleError("");
+        setSubjectError("");
+
+        // 제목과 내용이 모두 입력되었는지 확인하여 버튼 활성화 상태 업데이트
+        if (isEdit === false) {
+            if (name.trim() !== "" && password.trim() !== "" && title.trim() !== "" && subject.trim() !== "") {
+                setIsActive(true);
+            } else {
+                setIsActive(false);
+            }
+        } else if (isEdit === true) {
+            // 수정 모드에서도 제목과 내용만 체크
+            if (title.trim() !== "" && subject.trim() !== "") {
+                setIsActive(true);
+            } else {
+                setIsActive(false);
+            }
+        }
+    }, [name, password, title, subject, isEdit]); // 이 상태들이 변경될 때마다 실행
     
     const {data} = useQuery(FetchBoardDocument, {
         variables: {boardId: editId.toString()},
@@ -98,34 +123,6 @@ export default function useBoardDetailEdit(isEdit: boolean){
         setIsOpen(false);
     };
 
-    // 이미지업로드
-    const [imageUrl, setImageUrl] = useState(["", "", ""]);
-    const fileRef = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
-    const [imageUpload] = useMutation(UploadFileDocument);
-
-    const onChangeImageUpload = async (index: number, event:ChangeEvent<HTMLInputElement>) => {
-        const imageFile = event.target.files?.[0];
-
-        const isValid = checkValidationFile(imageFile);
-        if(!isValid) return;
-
-        const result = await imageUpload({ variables: {file: imageFile}});
-        console.log("업로드", result.data?.uploadFile.url);
-        // setImageUrl(result.data?.uploadFile.url ?? "");
-
-        setImageUrl(prev => {
-            const newUrl = [...prev];
-            newUrl[index] = result.data?.uploadFile.url ?? ""
-            return newUrl;
-        })
-    };
-
-    const onClickImageFile = (index: number) => {
-        fileRef[index].current?.click();
-        console.log("업로드클릭");
-    };
-
-
     // 
     let registerError = false;
 
@@ -189,7 +186,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
             }
         }
         // 수정페이지
-        else if(isEdit===true){
+        else if(isEdit === true){
             if(title.trim() === ""){
                 setTitleError("필수입력 사항입니다.")
                 registerError = true;
@@ -248,6 +245,44 @@ export default function useBoardDetailEdit(isEdit: boolean){
         }
         console.log("클릭",register)
     }
+
+    // 이미지업로드
+    const [imageUrl, setImageUrl] = useState(["", "", ""]);
+    const fileRef = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+    const [imageUpload] = useMutation(UploadFileDocument);
+
+    const onChangeImageUpload = async (index: number, event:ChangeEvent<HTMLInputElement>) => {
+        const imageFile = event.target.files?.[0];
+
+        const isValid = checkValidationFile(imageFile);
+        if(!isValid) return;
+
+        const result = await imageUpload({ variables: {file: imageFile}});
+        console.log("업로드", result.data?.uploadFile.url);
+        // setImageUrl(result.data?.uploadFile.url ?? "");
+
+        setImageUrl(prev => {
+            const newUrl = [...prev];
+            newUrl[index] = result.data?.uploadFile.url ?? ""
+            return newUrl;
+        })
+    };
+
+    const onClickImageFile = (index: number) => {
+        fileRef[index].current?.click();
+        console.log("업로드클릭");
+    };
+
+    // 이미지삭제
+    const imageDelete = (index: number) => {
+        setImageUrl((prev) => { 
+            const newUrl = [...prev];
+            newUrl[index] = ""; // 해당 인덱스의 URL을 초기화
+            return newUrl;
+        });
+    }
+
+    // 등록하기 버튼 색
     const registerColor = {
         backgroundColor:"#c3c3c3",
         color:"#E4E4E4"
@@ -255,7 +290,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
     const registerActive = {
         backgroundColor:"#2974E5",
         color:"#fff"
-    }  
+    }
 
     return{
         name,
@@ -275,6 +310,7 @@ export default function useBoardDetailEdit(isEdit: boolean){
         zoneAddress,
         fileRef,
         imageUrl,
+        imageDelete,
         onChangeName,
         onChangePassword,
         onChangeSubject,
