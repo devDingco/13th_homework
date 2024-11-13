@@ -95,7 +95,12 @@ const SignupFormComponent = () => {
         {formState.errors.passwordCheck?.message}
       </div>
       <div className="flex gap-10">
-        <ButtonComponent value={"로그인"} className="" onClick={onClickLogin} />
+        <ButtonComponent
+          type="button"
+          value={"로그인"}
+          className=""
+          onClick={onClickLogin}
+        />
         <ButtonComponent type="submit" value={"회원가입"} className="" />
       </div>
     </form>

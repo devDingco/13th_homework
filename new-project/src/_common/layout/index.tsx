@@ -13,7 +13,7 @@ export default function Layout({ children }) {
     <div className="w-full flex-col">
       <Header></Header>
       <Banner></Banner>
-      <div className="h-5/6">{children}</div>
+      <div className="">{children}</div>
       <Footer></Footer>
     </div>
   );

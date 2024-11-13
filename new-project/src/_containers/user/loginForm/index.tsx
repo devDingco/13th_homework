@@ -75,6 +75,7 @@ const LoginFromComponent = () => {
       </div>
       <div className="flex gap-10">
         <ButtonComponent
+          type="button"
           value={"회원가입"}
           className=""
           onClick={onClickSignup}
