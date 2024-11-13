@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>프리로드 실습</title>
+    <link rel="stylesheet" href="./index.css" />
+
+    <!-- 
+    기본적으로 한번에 다운로드를 6개씩 받아오는데, 
+    body 태그의 이미지는 가장 마지막에 다운로드된다.
+    그렇기 때문에 이미지가 늦게 다운로드되어 화면에 나타날때까지 시간이 걸린다.
+    이때 이미지를 미리 다운로드 받아놓으면 화면에 나타날때까지 시간이 단축된다.
+    그럴때 사용하는게 preload이다.
+
+    preload는 브라우저가 페이지를 렌더링하는 동안 사용할 리소스를 미리 다운로드 받아놓는다.
+
+    ⭐️ next.js에서는 이러한 기능을 자동으로 제공해준다.
+    -->
+    <link rel="preload" as="image" href="./mainSlide1.jpg" />
+
+    <!-- 라이브 서버 실행시 개발자 모드에서 Disavle-cache 체크!! 하고 테스트해야함 -->
+    <script src="./index1.js"></script>
+    <script src="./index2.js"></script>
+    <script src="./index3.js"></script>
+    <script src="./index4.js"></script>
+    <script src="./index5.js"></script>
+    <script src="./index6.js"></script>
+  </head>
+  <body>
+    <img src="./mainSlide1.jpg" alt="" />
+  </body>
+</html>
