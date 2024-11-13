@@ -44,6 +44,7 @@ const useProductsWirte = (props) => {
   });
 
   const defaultData = props.data?.fetchTravelproduct;
+  console.log(defaultData);
   useEffect(() => {
     // props.data가 로딩된 후 초기값으로 설정
     if (props.data) {
@@ -116,7 +117,6 @@ const useProductsWirte = (props) => {
 
   // 태그 삭제
   const removeTag = (removeId) => {
-    console.log(removeId);
     setTags(tags.filter((_, index) => index !== removeId));
   };
 
@@ -155,7 +155,6 @@ const useProductsWirte = (props) => {
   };
 
   const onClickSubmit = async (data) => {
-    console.log(data);
     if (!props.isEdit) {
       try {
         const result = await createTravelproduct({

@@ -81,6 +81,7 @@ export default function ProductsWrite(props) {
             {/* 상품 설명 입력 필드 */}
             <FieldWrapper label="상품 설명" isRequired={true}>
               <ReactQuill
+                value={methods.getValues("contents")}
                 onChange={onChangeContents}
                 className={styles.quill_editor}
               />

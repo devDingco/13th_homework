@@ -14,6 +14,7 @@ export const FETCH_TRAVEL_PRODUCT = gql`
       pickedCount
       travelproductAddress {
         zipcode
+        addressDetail
         lat
         lng
       }

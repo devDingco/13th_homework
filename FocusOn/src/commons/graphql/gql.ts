@@ -16,6 +16,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  query fetchUserLoggedIn {\n    fetchUserLoggedIn {\n      _id\n      email\n      name\n      picture\n      userPoint {\n        amount\n      }\n    }\n  }\n": types.FetchUserLoggedInDocument,
     "\n  mutation logoutUser {\n    logoutUser\n  }\n": types.LogoutUserDocument,
+    "\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n": types.CreatePointTransactionOfLoadingDocument,
     "\n  mutation resotreAccessToken {\n    restoreAccessToken {\n      accessToken\n    }\n  }\n": types.ResotreAccessTokenDocument,
     "\n  query fetchBoardComments($page: Int, $boardId: ID!) {\n    fetchBoardComments(page: $page, boardId: $boardId) {\n      _id\n      writer\n      contents\n      rating\n      createdAt\n    }\n  }\n": types.FetchBoardCommentsDocument,
     "\n  mutation createBoardComment(\n    $createBoardCommentInput: CreateBoardCommentInput!\n    $boardId: ID!\n  ) {\n    createBoardComment(\n      createBoardCommentInput: $createBoardCommentInput\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      contents\n      rating\n      createdAt\n    }\n  }\n": types.CreateBoardCommentDocument,
@@ -28,8 +29,7 @@ const documents = {
     "\n  mutation updateBoard(\n    $updateBoardInput: UpdateBoardInput!\n    $password: String\n    $boardId: ID!\n  ) {\n    updateBoard(\n      updateBoardInput: $updateBoardInput\n      password: $password\n      boardId: $boardId\n    ) {\n      _id\n      writer\n      title\n      contents\n      createdAt\n    }\n  }\n": types.UpdateBoardDocument,
     "\n  mutation uploadFile($file: Upload!) {\n    uploadFile(file: $file) {\n      url\n    }\n  }\n": types.UploadFileDocument,
     "\n  mutation loginUser($email: String!, $password: String!) {\n    loginUser(email: $email, password: $password) {\n      accessToken\n    }\n  }\n": types.LoginUserDocument,
-    "\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n": types.CreatePointTransactionOfLoadingDocument,
-    "\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n": types.FetchTravelproductDocument,
+    "\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        addressDetail\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n": types.FetchTravelproductDocument,
     "\n  mutation toggleTravelproductPick($travelproductId: ID!) {\n    toggleTravelproductPick(travelproductId: $travelproductId)\n  }\n": types.ToggleTravelproductPickDocument,
     "\n  mutation deleteTravelproductQuestion($travelproductQuestionId: ID!) {\n    deleteTravelproductQuestion(\n      travelproductQuestionId: $travelproductQuestionId\n    )\n  }\n": types.DeleteTravelproductQuestionDocument,
     "\n  query fetchTravelproductQuestions($page: Int, $travelproductId: ID!) {\n    fetchTravelproductQuestions(\n      page: $page\n      travelproductId: $travelproductId\n    ) {\n      _id\n      contents\n      user {\n        name\n      }\n      createdAt\n    }\n  }\n": types.FetchTravelproductQuestionsDocument,
@@ -63,6 +63,10 @@ export function graphql(source: "\n  query fetchUserLoggedIn {\n    fetchUserLog
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation logoutUser {\n    logoutUser\n  }\n"): (typeof documents)["\n  mutation logoutUser {\n    logoutUser\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n"): (typeof documents)["\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -114,11 +118,7 @@ export function graphql(source: "\n  mutation loginUser($email: String!, $passwo
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n"): (typeof documents)["\n  mutation createPointTransactionOfLoading($paymentId: ID!) {\n    createPointTransactionOfLoading(paymentId: $paymentId) {\n      _id\n      impUid\n      amount\n      balance\n      status\n      statusDetail\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n"): (typeof documents)["\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n"];
+export function graphql(source: "\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        addressDetail\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n"): (typeof documents)["\n  query fetchTravelproduct($productId: ID!) {\n    fetchTravelproduct(travelproductId: $productId) {\n      _id\n      name\n      remarks\n      contents\n      price\n      tags\n      images\n      pickedCount\n      travelproductAddress {\n        zipcode\n        addressDetail\n        lat\n        lng\n      }\n      buyer {\n        _id\n      }\n      seller {\n        _id\n        name\n        picture\n      }\n      soldAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
