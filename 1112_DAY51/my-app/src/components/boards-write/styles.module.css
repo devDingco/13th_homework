@@ -1,0 +1,68 @@
+.container {
+  padding: 20px;
+  background-color: aliceblue;
+  border-radius: 8px;
+}
+
+.cancel_button {
+  display: inline-flex;
+  padding: 5px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  background: var(--999999, #999);
+  width: 40px;
+  color: #fff;
+  text-align: center;
+  font-family: SUIT;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 166.667% */
+}
+.edit_button {
+  display: inline-flex;
+  padding: 5px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  background: var(--6400-ff, #6400ff);
+  width: 40px;
+  color: #fff;
+  text-align: center;
+  font-family: SUIT;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 166.667% */
+}
+
+/* 기본 스타일 */
+.input {
+  width: 242px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid var(--e-5-e-5-e-5-border, #e5e5e5);
+  background: #fff;
+  transition: border-color 0.3s; /* 애니메이션 추가 */
+}
+
+/* 포커스 상태 스타일 */
+.input:focus {
+  border: 1px solid var(--6400-ff, #6400ff);
+  outline: none; /* 기본 아웃라인 제거 */
+}
+
+/* 비활성화 상태 스타일 */
+.input:disabled {
+  border: 1px solid var(--e-5-e-5-e-5-border, #e5e5e5);
+  background: rgba(229, 229, 229, 0.5);
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
