@@ -8,7 +8,7 @@ export default function ControllerInput(props) {
       name={id}
       control={control}
       render={({ field }) => (
-        <div className="w-full gap-2 flex flex-col">
+        <div className="w-full flex flex-col">
           <Input id={id} {...field} isLabel={true} required={true} />
           <div className="text-lightCoral pl-2">
             {formState.errors[id]?.message}
