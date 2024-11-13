@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ApolloSetting from "@/commons/settings/apollo-settings";
 import Layout from "@/commons/layout";
+import ApolloHeaderAndErrorSettingRefresh from "@/commons/settings/apollo-header-error-refresh-setting";
 
-const BMDOHYEON = localFont({
-  src: "/fonts/BMDOHYEON_ttf.ttf",
-  variable: "--BM",
+const NSN = localFont({
+  src: "../../public/fonts/NanumSquareNeo-bRg.ttf",
+  variable: "--NSN",
   weight: "100 900",
 });
 
@@ -22,10 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${BMDOHYEON.variable} `}>
-        <ApolloSetting>
+      <body className={`${NSN.variable}`}>
+        <ApolloHeaderAndErrorSettingRefresh>
           <Layout>{children}</Layout>
-        </ApolloSetting>
+        </ApolloHeaderAndErrorSettingRefresh>
       </body>
     </html>
   );
