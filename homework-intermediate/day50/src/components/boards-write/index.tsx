@@ -4,9 +4,10 @@ import Image from 'next/image';
 import useBoardWrite from './hook';
 import { Modal } from 'antd';
 import DaumPostcodeEmbed from 'react-daum-postcode';
-import { FetchBoardQuery } from '@/commons/graphql/graphql';
+import { FetchBoardQuery, UploadFileDocument } from '@/commons/graphql/graphql';
 import UploadImage from './upload-image';
 import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 
 export interface IBoardWriteProps {
 	isEdit: boolean;
@@ -22,12 +23,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
 		address,
 		detailedAddress,
 		youtubeUrl,
+		imageUrls,
 		isModalOpen,
 		nameError,
 		passwordError,
 		titleError,
 		contentError,
-		imageUrls,
 		setImageUrls,
 		onChangeInputs,
 		onChangePassword,
@@ -38,6 +39,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 		onClickUpdate,
 		onToggleZipcodeModal,
 		onZipcodeModalComplete,
+		setImageFiles,
 	} = useBoardWrite(props);
 
 	return (
@@ -194,6 +196,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 								idx={idx}
 								imageUrl={url}
 								setImageUrls={setImageUrls}
+								setImageFiles={setImageFiles}
 							/>
 						))}
 					</div>

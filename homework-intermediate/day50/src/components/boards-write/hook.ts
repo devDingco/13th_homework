@@ -6,6 +6,7 @@ import {
 	FetchBoardsDocument,
 	UpdateBoardDocument,
 	UpdateBoardMutationVariables,
+	UploadFileDocument,
 } from '@/commons/graphql/graphql';
 import { Modal } from 'antd';
 import { Address } from 'react-daum-postcode';
@@ -53,6 +54,7 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 	const [imageUrls, setImageUrls] = useState(
 		props.data?.fetchBoard.images || ['', '', ''],
 	);
+	const [imageFiles, setImageFiles] = useState<File[]>([]);
 
 	// 필수 입력값 검증을 위한 state
 	const [nameError, setNameError] = useState('');
@@ -62,6 +64,7 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 
 	const [createBoard] = useMutation(CreateBoardDocument);
 	const [updateBoard] = useMutation(UpdateBoardDocument);
+	const [uploadFile] = useMutation(UploadFileDocument);
 	const router = useRouter();
 	const params = useParams();
 
@@ -135,6 +138,13 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 		const hasError =
 			!validName || !validPassword || !validTittle || !valiContent;
 
+		const result = await Promise.all(
+			imageFiles.map((file) => uploadFile({ variables: { file } })),
+		);
+		console.log('🚀 ~ onClickSubmit ~ result:', result);
+		const resultUrls = result.map((res) => res.data?.uploadFile.url);
+		console.log('🚀 ~ onClickSubmit ~ resultUrls:', resultUrls);
+
 		if (!hasError) {
 			const { data } = await createBoard({
 				variables: {
@@ -147,7 +157,10 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 							address: address,
 							addressDetail: detailedAddress,
 						},
-						images: [...imageUrls, ...new Array(3 - imageUrls.length).fill('')],
+						images: [
+							...resultUrls,
+							...new Array(3 - resultUrls.length).fill(''),
+						],
 					},
 				},
 				refetchQueries: [FetchBoardsDocument],
@@ -226,5 +239,6 @@ export default function useBoardWrite(props: IBoardWriteProps) {
 		onClickUpdate,
 		onToggleZipcodeModal,
 		onZipcodeModalComplete,
+		setImageFiles,
 	};
 }
