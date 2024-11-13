@@ -9,11 +9,8 @@ import {
   LogoutUserDocument,
 } from "@/commons/graphql/graphql";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
-import { useLoginStore } from "@/commons/stores/login-store";
 
 export const useLoginPage = () => {
-  const { setIsLogged } = useLoginStore();
-
   // const client = useApolloClient();
   // 로그인
   const [loginUser] = useMutation(LoginUserDocument);
@@ -56,8 +53,7 @@ export const useLoginPage = () => {
 
     // 2. 로그인 성공 시
     if (result.data?.loginUser.accessToken) {
-      setAccessToken(result.data?.loginUser.accessToken);
-      setIsLogged(true); //
+      setAccessToken(result.data?.loginUser.accessToken); // 스테이트에 액세스 토큰 저장
       router.push("/");
     }
   };
