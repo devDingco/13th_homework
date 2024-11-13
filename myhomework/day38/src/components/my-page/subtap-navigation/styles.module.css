@@ -1,0 +1,50 @@
+.tabLayout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabContainer {
+  display: flex;
+  width: 1280px;
+  height: 40px;
+  padding: 0px 48px;
+  gap: 16px;
+  align-self: stretch;
+  justify-content: start;
+  margin-bottom: 24px;
+}
+
+.clickedNav {
+  display: flex;
+  width: auto;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #000;
+
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.unclickedNav {
+  display: flex;
+  width: auto;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #fff;
+
+  color: #525252;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+}
