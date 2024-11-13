@@ -1,0 +1,12 @@
+.header {
+  color: black;
+  font-weight: 700;
+}
+
+.header__size__medium {
+  font-size: 1.25rem;
+}
+
+.header__size__large {
+  font-size: 1.75rem;
+}
