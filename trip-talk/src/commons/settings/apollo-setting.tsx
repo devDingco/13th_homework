@@ -4,11 +4,13 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
+  fromPromise,
   InMemoryCache,
 } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { useAccessTokenStore } from "../stores/useAccessTokenStore";
-import { useEffect } from "react";
+import { getAccessToken } from "../Libraries/getAccessToken";
+import { onError } from "@apollo/client/link/error";
 
 const GLOBAL_STATE = new InMemoryCache();
 
@@ -18,19 +20,36 @@ interface IApolloUploadSetting {
 export default function ApolloUploadSetting(props: IApolloUploadSetting) {
   const { accessToken, setAccessToken } = useAccessTokenStore();
 
-  useEffect(() => {
-    setAccessToken(localStorage.getItem("accessToken") ?? "")
-  }, [])
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        if (err.extensions?.code === "UNAUTHENTICATED") {
+          return fromPromise(
+            getAccessToken().then((newAccessToken) => {
+              setAccessToken(newAccessToken ?? "");
 
-  const uploadLink = createUploadLink({
-    uri: "http://main-practice.codebootcamp.co.kr/graphql",
-    headers: {
-      Authorization: `Bearer ${accessToken}`
+              operation.setContext({
+                headers: {
+                  ...operation.getContext().headers,
+                  Authorization: `Bearer ${newAccessToken ?? ""}`,
+                },
+              });
+            })
+          ).flatMap(() => forward(operation));
+        }
+      }
     }
   });
 
+  const uploadLink = createUploadLink({
+    uri: "https://main-practice.codebootcamp.co.kr/graphql",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]),
+    link: ApolloLink.from([uploadLink, errorLink]),
     cache: GLOBAL_STATE,
   });
 
