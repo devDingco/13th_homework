@@ -12,7 +12,7 @@ interface ILogin {
 export default function Login({ onClickSignUp }: ILogin) {
   const { handleInputChange, onClickLogin } = useLogin();
   return (
-    <div className="flex flex-col w-80 items-center gap-6 self-stretch px-5 pt-16">
+    <div className="flex flex-col w-96 items-center gap-6 self-stretch px-5 pt-16 relative z-50">
       <Image src="/pngs/logo.png" alt="logo" width={120} height={74.533} />
       <div className="self-stretch text-black text-center text-lg not-italic font-semibold leading-6">
         트립트립에 오신걸 환영합니다.

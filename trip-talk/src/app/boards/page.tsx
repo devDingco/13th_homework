@@ -7,7 +7,6 @@ import {
   FetchBoardsCountDocument,
   FetchBoardsDocument,
 } from "../../commons/graphql/graphql";
-import BannerSlider from "../_components/BannerSlider/BannerSlider";
 import Pagination from "../_components/Pagination/Pagination";
 
 export default function Boards() {
@@ -24,7 +23,6 @@ export default function Boards() {
 
   return (
     <>
-      <BannerSlider />
       <div className={styles.post_contain}>
         <div className={styles.boards_header}>
           <div className={styles.boards_header_number}>번호</div>

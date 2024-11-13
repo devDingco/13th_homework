@@ -3,14 +3,16 @@
 import useSignUp from "../../../commons/hooks/useSignUp";
 import Button from "../Button/Button";
 import ControllerInput from "../ControllerInput/ControllerInput";
+import ModalContainer from "../ModalContainer/ModalContainer";
 
 export default function SignUp() {
-  const { onClickSubmit, handleSubmit, control, formState } = useSignUp();
+  const { onClickSubmit, handleSubmit, control, formState, isModalOpen } =
+    useSignUp();
 
   return (
     <form
       onSubmit={handleSubmit(onClickSubmit)}
-      className="flex flex-col w-80 items-center gap-6 self-stretch px-5 pt-16"
+      className="flex flex-col w-96 items-center gap-6 self-stretch px-5 pt-16 relative z-50"
     >
       <div className="self-stretch text-black text-center text-lg not-italic font-semibold leading-6">
         회원가입
@@ -27,6 +29,14 @@ export default function SignUp() {
         formState={formState}
       />
       <Button id="singUp" color="white" width="100%" />
+      {isModalOpen && (
+        <ModalContainer
+          isSwitched={false}
+          children="ALERT!!"
+          isPrompt={false}
+          alertMessage="회원가입을 축하드려요."
+        />
+      )}
     </form>
   );
 }

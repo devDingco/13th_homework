@@ -1,0 +1,19 @@
+.calendar {
+  @apply flex h-14;
+  position: relative;
+}
+
+.date_icon {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  z-index: 100;
+}
+
+.date_picker {
+  @apply flex p-3 gap-2 w-64 items-center rounded-lg text-dimGray text-center font-normal bg-offWhite text-base cursor-pointer;
+}
+
+.date_picker::placeholder {
+  @apply flex py-3 pr-12 gap-2 w-64 rounded-lg text-dimGray font-normal;
+}

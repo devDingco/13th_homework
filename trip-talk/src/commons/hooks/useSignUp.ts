@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { CreateUserDocument } from "../graphql/graphql";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "../zod/schema";
+import { useState } from "react";
 
 export default function useSignUp() {
   const { register, handleSubmit, control, formState } = useForm({
@@ -10,18 +11,22 @@ export default function useSignUp() {
     mode: "onChange",
   });
   const [createUser] = useMutation(CreateUserDocument);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onClickSubmit = async (data) => {
-    console.log(data);
-
-    const result = await createUser({
-      variables: {
-        email: data.email,
-        name: data.name,
-        password: data.password,
-      },
-    });
-    console.log(result);
+    try {
+      const result = await createUser({
+        variables: {
+          email: data.email,
+          name: data.name,
+          password: data.password,
+        },
+      });
+      console.log(result);
+      setIsModalOpen(!isModalOpen);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return {
     onClickSubmit,
@@ -29,5 +34,6 @@ export default function useSignUp() {
     handleSubmit,
     control,
     formState,
+    isModalOpen,
   };
 }
