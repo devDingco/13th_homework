@@ -105,3 +105,9 @@ export const UPDATE_BOARD = gql`
     }
   }
 `;
+
+export const FETCH_BOARDS_COUNT = gql`
+  query fetchBoardsCount {
+    fetchBoardsCount
+  }
+`;
