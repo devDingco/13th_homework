@@ -19,11 +19,8 @@ export const FETCH_TRAVEL_PRODUCT = gql`
         lng
         deletedAt
       }
-      buyer {
-        picture
-        deletedAt
-      }
       seller {
+        name
         picture
         deletedAt
       }
