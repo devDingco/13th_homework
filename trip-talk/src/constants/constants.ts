@@ -46,3 +46,9 @@ export const BOARDS_WRITE: TRecord = {
 export const COMMENT_FORM: TRecord = {
   NO_COMMENTS: "등록된 댓글이 없습니다.",
 };
+
+export const HEADER: TRecord = {
+  TRIP_TALK: "트립토크",
+  PURCHASE_ACCOMMODATION_TICKETS: "숙박권 구매",
+  MY_PAGE: "마이 페이지",
+};
