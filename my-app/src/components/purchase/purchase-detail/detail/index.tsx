@@ -92,7 +92,7 @@ export default function PurchaseDetail() {
       console.error("결제 요청 중 오류 발생:", error);
     }
   };
-
+  // console.log(data?.fetchTravelproduct.tags);
   return (
     <main className={styles.main}>
       <section className={styles.titleSection}>
@@ -107,14 +107,14 @@ export default function PurchaseDetail() {
           </div>
         </div>
       </section>
-
+      <div>6731aff39712e0002973f12c</div>
+      {/* 코드수정할때 계속 생성하기 귀찮아서 박아둔 purchaseID 값 */}
       <span className={styles.summaryText}>
         {data?.fetchTravelproduct.remarks}
       </span>
       <span className={styles.hashTagText}>
         {data?.fetchTravelproduct.tags}
       </span>
-
       {/* 타이틀 아래부분 ======================== */}
       {/* 왜 스와이퍼의 스타일 적용이 안되는 것인가,,,, */}
       <section className={styles.middleArea}>
@@ -171,18 +171,14 @@ export default function PurchaseDetail() {
           </div>
         </div>
       </section>
-
       <div className={styles.underLine}></div>
-
       <section className={styles.contentsSection}>
         <span className={styles.contentsTitle}>상세설명</span>
         <p className={styles.contnetsText}>
           {data?.fetchTravelproduct.contents}
         </p>
       </section>
-
       <div className={styles.underLine}></div>
-
       <section className={styles.locationSection}>
         <span className={styles.locationTitle}>상세위치</span>
         <div className={styles.locationBox}>위치지도가 나올 부분</div>

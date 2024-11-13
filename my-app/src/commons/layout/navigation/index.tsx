@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { RightOutlined } from "@ant-design/icons";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import { withAuth } from "@/commons/hocs/withAuth";
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -18,7 +19,7 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `;
 
-export default function LayoutNavigation() {
+function LayoutNavigation() {
   const router = useRouter();
 
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
@@ -28,13 +29,6 @@ export default function LayoutNavigation() {
   const handleClick = (item) => {
     setSElected(item);
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("accessToken") === null) {
-      alert("로그인 후 이용 가능합니다!");
-      router.push("/authentication/login");
-    }
-  }, []);
 
   return (
     <>
@@ -135,3 +129,5 @@ export default function LayoutNavigation() {
     </>
   );
 }
+
+export default withAuth(LayoutNavigation);

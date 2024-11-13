@@ -13,7 +13,7 @@ import {
   UPDATE_TRAVEL_PRODUCT,
   UPLOAD_FILE,
 } from "./queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PerchaseWrite(props) {
   const router = useRouter();
@@ -44,10 +44,20 @@ export default function PerchaseWrite(props) {
   });
   console.log(data);
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, setValue } = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      name: props.isEdit ? data?.fetchTravelproduct.name : "",
+      // 필요한 다른 필드도 여기에 추가하기.  -> 다른애들도 이런식으로 디폴트벨류 적용해주기
+    },
   });
+
+  useEffect(() => {
+    if (props.isEdit && data?.fetchTravelproduct) {
+      setValue("name", data.fetchTravelproduct.name);
+    }
+  }, [data, props.isEdit, setValue]);
 
   const [createTravelproduct] = useMutation(CREATE_TRAVEL_PRODUCT);
   const [updateTravelproduct] = useMutation(UPDATE_TRAVEL_PRODUCT);
@@ -74,6 +84,10 @@ export default function PerchaseWrite(props) {
 
   // 상품 수정 처리 -----------------------------------
   const onClickUpdate = async (data) => {
+    const tags = (data?.tags || [])
+      .filter((tag) => tag.trim() !== "") // 빈 문자열 제거
+      .map((tag) => tag.trim()); // 각 태그의 앞뒤 공백 제거
+
     const myvariables = {
       travelproductId: params.purchaseId,
       name: data.name,
@@ -81,7 +95,6 @@ export default function PerchaseWrite(props) {
       contents: data.contents,
       price: data.price,
       tags: (data.tags || "").split(",").map((tag) => tag.trim()), // undefined일 때 빈 문자열로 대체
-      // tags: [data.tags],
       images: imageUrls,
     };
     try {
@@ -93,6 +106,10 @@ export default function PerchaseWrite(props) {
         alert("수정 성공");
         router.push(`/purchase/${result.data.updateTravelproduct._id}`); // 수정 후 상세 페이지로 이동
       }
+      console.log(data?.tags); // data?.tags가 배열인지 확인
+      console.log(tags); // tags 배열이 제대로 만들어졌는지 확인
+      console.log(result); // result 데이터가 제대로 전달되었는지 확인
+      console.log(params.purchaseId, imageUrls); // 값이 잘 전달되는지 확인
     } catch (error) {
       console.error("상품 수정 실패:", error);
     }
@@ -123,7 +140,6 @@ export default function PerchaseWrite(props) {
               type="text"
               placeholder="상품명을 입력해 주세요."
               {...register("name")}
-              defaultValue={props.isEdit ? data?.fetchTravelproduct.name : ""}
             />
             <div style={{ color: "red" }}>{formState.errors.name?.message}</div>
           </div>
