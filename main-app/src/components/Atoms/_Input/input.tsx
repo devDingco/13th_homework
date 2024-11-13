@@ -1,18 +1,19 @@
 "use client";
 
+import { I_schema } from "@/app/auth/schema";
 import { PLACEHOLDER } from "@/common/constants/constants";
 import { css, Styles } from "@/common/styled-system/css";
-import { FieldValues, Path, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
-interface I_props<schema> {
-    keyname: Path<schema>;
+interface I_props {
+    keyname: keyof I_schema;
     variant?: Styles;
     size?: Styles;
     textarea?: boolean;
 }
 
-function BaseInput<Generic extends FieldValues>({ keyname, variant, size, textarea }: I_props<Generic>) {
-    const { register } = useFormContext<Generic>();
+function BaseInput({ keyname, variant, size, textarea }: I_props) {
+    const { register } = useFormContext<I_schema>();
 
     return (
         <>
@@ -21,6 +22,7 @@ function BaseInput<Generic extends FieldValues>({ keyname, variant, size, textar
                     className={css(BASE, variant, size)}
                     placeholder={PLACEHOLDER[keyname]}
                     type={keyname === "password" || keyname === "pwConfirm" ? "password" : "text"}
+                    autoComplete={keyname === "password" || keyname === "pwConfirm" ? "off" : "on"}
                     {...register(keyname)}
                 />
             ) : (
@@ -55,11 +57,11 @@ const TEXTAREA = css.raw({
  * @param required 필수값일 경우 작성
  * @param textarea 프롭으로 이거 내려주면 알아서 textarea로 뜹니다.
  */
-export function Input_Radii_Full<Generic extends FieldValues>(props: I_props<Generic>) {
+export function Input_Radii_Full(props: I_props) {
     const Radii_Full = css.raw({
         rounded: "0.8rem",
         w: "100%",
     });
 
-    return <BaseInput<Generic> variant={Radii_Full} {...props} />;
+    return <BaseInput variant={Radii_Full} {...props} />;
 }

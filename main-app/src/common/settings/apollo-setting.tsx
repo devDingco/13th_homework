@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    ApolloClient,
-    ApolloLink,
-    ApolloProvider,
-    fromPromise,
-    InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloLink, ApolloProvider, fromPromise, InMemoryCache } from "@apollo/client";
 
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { useTokenStore } from "../stores/useTokenStore";
@@ -26,11 +20,15 @@ export default function ApolloSetting(props: IApolloSetting) {
     const { setIsLoaded } = useLoadStore();
 
     useEffect(() => {
-        getAccessToken()
-            .then((newToken) => {
-                if (newToken) setToken(newToken);
-            })
-            .finally(setIsLoaded);
+        if (token) {
+            getAccessToken()
+                .then((newToken) => {
+                    if (newToken) setToken(newToken);
+                })
+                .finally(setIsLoaded);
+        } else {
+            setIsLoaded();
+        }
     }, []);
 
     const errorLink = onError(({ graphQLErrors, operation, forward }) => {

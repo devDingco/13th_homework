@@ -22,7 +22,7 @@ export const withLoginCheck =
             if (token) return;
 
             plainAlert(`로그인 후 이용 가능합니다`, "info");
-            router.push(`/auth`);
+            router.push(`/auth`, { scroll: false });
         }, [isLoaded]);
 
         return <Comps {...props} />;
