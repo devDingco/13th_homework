@@ -10,6 +10,7 @@ import { FormProvider } from "react-hook-form";
 import { ITravelProductSchema } from "@/app/_schema/travelProductSchema";
 import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 import useTravelProductWrite from "./hook";
+import Header, { HeaderSize } from "@/commons/ui/header";
 
 interface ITravelProductProps {
   isEdit?: boolean;
@@ -41,7 +42,7 @@ export default function TravelProductWrite({
   return (
     <FormProvider {...methods}>
       <div className={styles.newTravelProduct__container}>
-        <h3 className={styles.header}>숙박권 판매하기</h3>
+        <Header title="숙박권 판매하기" size={HeaderSize.medium} />
         <InputForm<ITravelProductSchema>
           keyName="name"
           label="상품명"
