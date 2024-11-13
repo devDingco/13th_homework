@@ -1,8 +1,8 @@
 import { ProfileImagePreview } from "@/components/profile/ProfileImagePreview";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export const DEFAULT_PROFILE_IMAGE = `/images/default-profile.png`;
+export const DEFAULT_PROFILE_IMAGE = `/images/defaultProfile.png`;
 
 export function ProfileStep() {
   const { setValue } = useFormContext();
@@ -11,6 +11,29 @@ export function ProfileStep() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState(DEFAULT_PROFILE_IMAGE); // 이미지 미리보기 url
   const [isHovered, setIsHovered] = useState(false); // 삭제
+
+  // 컴포넌트 마운트 시 기본 이미지 설정
+  useEffect(() => {
+    const setDefaultImage = async () => {
+      try {
+        // 기본 이미지를 File 객체로 변환
+        const response = await fetch(DEFAULT_PROFILE_IMAGE);
+        const blob = await response.blob();
+        const defaultImageFile = new File([blob], "defaultProfile.png", {
+          type: "image/png",
+        });
+
+        // Form에 기본 이미지 설정
+        setValue("image", defaultImageFile, {
+          shouldValidate: true,
+        });
+      } catch (error) {
+        console.error("기본 이미지 설정 실패:", error);
+      }
+    };
+
+    setDefaultImage();
+  }, [setValue]);
 
   // 이미지 영역 클릭 시 파일 선택
   const handleImageClick = () => {
@@ -45,42 +68,44 @@ export function ProfileStep() {
       });
       setSelectedImage(file);
 
-      // FileReader를 사용하여 이미지를 data url로 변환
+      // FileReader를 사용하여 이미지를 data url로 변환 --> 이미지 미리보기
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      // 파일 읽기 완료되면
-      fileReader.onload = async (e) => {
-        if (typeof e.target?.result === "string") {
-          setSelectedImage(file); // 선택된 이미지 파일 저장
-          setPreviewUrl(e.target.result); //// 미리보기 URL 설정
-        }
+      fileReader.onloadend = () => {
+        setPreviewUrl(fileReader.result as string);
       };
-
-      // 파일 읽기 실패
       fileReader.onerror = () => {
-        alert("이미지 파일을 읽는 중 오류가 발생했습니다.");
+        throw new Error("이미지 파일을 읽는 중 오류가 발생했습니다.");
       };
+      fileReader.readAsDataURL(file);
     } catch (error) {
       console.error("이미지 처리 중 오류:", error);
-      alert("이미지 처리 중 오류가 발생했습니다.");
     }
   };
 
   // 이미지 삭제
-  const handleDeleteImage = (e: React.MouseEvent) => {
+  const handleDeleteImage = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    setSelectedImage(null);
-    setPreviewUrl(DEFAULT_PROFILE_IMAGE); //기본이미지로 변경
 
-    // Form의 image 값
-    setValue("image", null, {
-      shouldValidate: true,
-    });
+    try {
+      // 기본 이미지로 리셋
+      const response = await fetch(DEFAULT_PROFILE_IMAGE);
+      const blob = await response.blob();
+      const defaultImageFile = new File([blob], "defaultProfile.png", {
+        type: "image/png",
+      });
 
-    // 파일 입력 초기화
-    if (fileRef.current) {
-      fileRef.current.value = "";
+      setSelectedImage(null);
+      setPreviewUrl(DEFAULT_PROFILE_IMAGE);
+      setValue("image", defaultImageFile, {
+        shouldValidate: true,
+      });
+
+      // 파일 초기화
+      if (fileRef.current) {
+        fileRef.current.value = "";
+      }
+    } catch (error) {
+      console.error("기본 이미지 초기화 오류:", error);
     }
   };
 

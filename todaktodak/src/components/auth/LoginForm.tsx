@@ -62,7 +62,7 @@ export default function LoginForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         {/* 이메일 입력 필드 */}
         <InputField
           name="email"

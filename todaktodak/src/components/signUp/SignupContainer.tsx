@@ -13,11 +13,7 @@ import { AlertDialog } from "./common/SignupAlertDialog";
 import { signupSchema, type SignupFormValues } from "@/schemas/auth.schema";
 import { undefined } from "zod";
 
-export const BUCKET_NAME = "todakProfileImage";
-export const DEFAULT_PROFILE_IMAGE = `/images/default-profile.png`;
-export const STORAGE_URL = `https://storage.googleapis.com/${BUCKET_NAME}`;
-
-// 회원가입의 각 단계를 정의하는 배열
+// 회원가입의 각 단계
 // fields는 각 단계에서 검증해야 할 폼 필드들을 나타냄
 const SIGNUP_STEPS = [
   {
@@ -43,18 +39,16 @@ const SIGNUP_STEPS = [
   },
 ] as const;
 
-// GraphQL mutation 쿼리 정의
 const SIGNUP = gql`
-  mutation signup($signUpUser: SignUpUser!, $file: Upload) {
-    signup(signUpUser: $signUpUser, file: $file)
+  mutation signup($signUpUserInput: SignUpUserInput!, $file: Upload) {
+    signup(signUpUserInput: $signUpUserInput, file: $file)
   }
 `;
 
 export default function SignupContainer() {
-  // 현재 회원가입 단계를 관리하는 상태 (0: 기본정보, 1: 프로필설정)
+  // 현재 회원가입 단계(0: 기본정보, 1: 프로필설정)
   const [currentStep, setCurrentStep] = useState(0);
 
-  // 알림창(Alert) 상태 관리
   const [alertState, setAlertState] = useState<{
     open: boolean;
     title: string;
@@ -66,15 +60,13 @@ export default function SignupContainer() {
     description: "",
   });
 
-  // Next.js 라우터
   const router = useRouter();
 
-  // GraphQL mutation 훅
   const [signup] = useMutation(SIGNUP);
 
   // React Hook Form 설정
   const methods = useForm<SignupFormValues>({
-    resolver: zodResolver(signupSchema), // zod를 사용한 유효성 검사
+    resolver: zodResolver(signupSchema),
     mode: "onBlur", // 필드에서 포커스가 벗어날 때 유효성 검사
     defaultValues: {
       name: "",
@@ -91,18 +83,17 @@ export default function SignupContainer() {
     },
   });
 
-  // 현재 단계 관련 정보 계산
   const currentStepData = SIGNUP_STEPS[currentStep];
   const isLastStep = currentStep === SIGNUP_STEPS.length - 1;
-  const progress = (currentStep / (SIGNUP_STEPS.length - 1)) * 100;
+  // currentStep이 0일 때 50%, 1일 때 100%
+  const progress = ((currentStep + 1) / SIGNUP_STEPS.length) * 100;
 
-  // 다음 단계로 이동하는 함수
+  // 다음
   const handleNext = async () => {
-    // 현재 단계의 필드들에 대한 유효성 검사 실행
+    // 유효성 검사
     const isValid = await methods.trigger(currentStepData.fields);
 
     if (isValid) {
-      // 유효성 검사 통과 시 현재 데이터 로깅
       const currentFormData = methods.getValues();
       console.log("현재 스텝 데이터:", {
         step: currentStepData.label,
@@ -114,12 +105,11 @@ export default function SignupContainer() {
     }
   };
 
-  // 이전 단계로 이동하는 함수
+  // 이전
   const handlePrev = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  // 알림창 닫기 처리
   const handleAlertClose = () => {
     setAlertState((prev) => ({ ...prev, open: false }));
 
@@ -129,7 +119,6 @@ export default function SignupContainer() {
     }
   };
 
-  // 폼 제출 처리
   const onSubmit = async (data: SignupFormValues) => {
     if (!isLastStep) {
       handleNext();
@@ -142,54 +131,73 @@ export default function SignupContainer() {
 
       console.log("image: ", image);
 
-      /*  // file이 기본 이미지인 경우 null로 처리
-      const fileToUpload = typeof file === "string" ? null : file; */
-
-      // 파일 입력에서 직접 File 객체 가져오기
-      const fileInput = document.querySelector(
-        'input[type="file"]'
-      ) as HTMLInputElement;
-      const file = fileInput?.files?.[0];
+      // 이미지 파일 처리
+      let fileToUpload;
+      if (image instanceof File) {
+        // 사용자가 이미지를 선택한 경우
+        fileToUpload = image;
+      } else {
+        // 이미지를 선택하지 않은 경우 기본 이미지 파일로 변환
+        const response = await fetch("/images/defaultProfile.png");
+        const blob = await response.blob();
+        fileToUpload = new File([blob], "defaultProfile.png", {
+          type: "image/png",
+        });
+      }
 
       console.log("제외 전송하는 비번확인: ", passwordConfirm);
       console.log("전송할 데이터: ", signupData);
 
+      // 주소 데이터 처리
+      const addressData = signupData.address?.zoneCode
+        ? {
+            zoneCode: Number(signupData.address?.zoneCode),
+            address: signupData.address?.address || "",
+            detailAddress: signupData.address?.detailAddress || "",
+          }
+        : undefined; // 주소를 입력하지 않은 경우 undefined로 처리
+
+      // 회원가입 mutation 변수
+      const variables = {
+        signUpUserInput: {
+          ...signupData,
+          address: addressData,
+        },
+        file: fileToUpload, // 항상 File 객체 보냄
+      };
+
+      console.log("전송할 데이터:", variables);
+
       // 회원가입 mutation 실행
       const result = await signup({
-        variables: {
-          signUpUser: {
-            ...signupData,
-            // 주소는 zoneCode가 int!!!!!!!!
-            address: {
-              ...signupData.address,
-              zoneCode: Number(signupData.address.zoneCode), // 변환해주기
-              address: signupData.address.address,
-              detailAddress: signupData.address.detailAddress,
-            },
-          },
-          // file이 있을 때만 file 필드 추가
-          // ...(file ? { file } : {}),
-          file: image || undefined,
-        },
+        variables: variables,
       });
-      console.log("선택한 사진: ", file);
-      console.log("회원가입 성공:", result.data);
-
-      setAlertState({
-        open: true,
-        title: "회원가입 성공",
-        description: "회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.",
-        error: false,
-      });
+      // 성공 여부 확인
+      if (result.data?.signup) {
+        setAlertState({
+          open: true,
+          title: "회원가입 성공",
+          description: "회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.",
+          error: false,
+        });
+      } else {
+        throw new Error("회원가입 처리 중 오류가 발생했습니다.");
+      }
     } catch (error) {
+      console.error("회원가입 에러:", error);
+
+      // GraphQL 에러 메시지
       const errorMessage =
         error.graphQLErrors?.[0]?.extensions?.originalError?.message?.message ||
+        error.message ||
         "회원가입 처리 중 오류가 발생했습니다.";
 
       setAlertState({
         open: true,
         title: "오류 발생",
-        description: errorMessage,
+        description: Array.isArray(errorMessage)
+          ? errorMessage.join("\n")
+          : errorMessage,
         error: true,
       });
     }
@@ -245,7 +253,9 @@ export default function SignupContainer() {
 
                 <Button
                   type="submit"
-                  className={currentStep === 0 ? "ml-auto" : ""}
+                  className={
+                    currentStep === 0 ? "ml-auto hover:bg-indigo-600" : ""
+                  }
                 >
                   {isLastStep ? "가입완료" : "다음"}
                 </Button>

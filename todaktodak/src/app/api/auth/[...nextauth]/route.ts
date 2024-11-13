@@ -28,16 +28,16 @@ export const authOptions: AuthOptions = {
               },
               body: JSON.stringify({
                 query: `
-                  mutation login($loginUser: LoginUser!) {
-                    login(loginUser: $loginUser) {
+                  mutation login($loginUserInput: LoginUserInput!) {
+                    login(loginUserInput: $loginUserInput) {
                       accessToken
-                      nickname
+                      name
                       image
                     }
                   }
                 `,
                 variables: {
-                  loginUser: {
+                  loginUserInput: {
                     email: credentials?.email,
                     password: credentials?.password,
                     dev: true, //이렇게 하라햇음
@@ -56,7 +56,7 @@ export const authOptions: AuthOptions = {
               id: credentials?.email!,
               email: credentials?.email,
               accessToken: data.data.login.accessToken, //graphql의 accessToken
-              nickname: data.data.login.nickname,
+              name: data.data.login.name,
               image: data.data.login.image,
             };
           }
