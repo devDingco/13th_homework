@@ -15,7 +15,6 @@ export default function ProductDetailQuestionList() {
     variables: { travelproductId },
   });
   const questionItems = data?.fetchTravelproductQuestions || [];
-  console.log("문의", data);
   return (
     <div className={styles.container}>
       {/* 댓글 */}

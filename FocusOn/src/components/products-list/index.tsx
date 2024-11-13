@@ -203,10 +203,10 @@ export default function ProductsList() {
             <div key={service.id} className={styles.top3_item}>
               <div className={styles.top3_image_container}>
                 <Image
+                  className={styles.service_image}
                   src={service.image}
                   alt={service.name}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
                 />
                 <button
                   onClick={toggleWishlist}

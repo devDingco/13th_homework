@@ -30,13 +30,13 @@ export default function ProductDetail() {
 
   // data가 로드된 후 카카오맵 초기화
   useEffect(() => {
-    if (data?.fetchTravelproduct?.travelproductAddress) {
+    if (data?.fetchTravelproduct?.travelproductAddress && !mapPosition) {
       setMapPosition({
         lat: data.fetchTravelproduct.travelproductAddress.lat,
         lng: data.fetchTravelproduct.travelproductAddress.lng,
       });
     }
-  }, [data]);
+  }, [data, mapPosition]);
 
   // 찜버튼
   const [toggleTravelproductPick] = useMutation(TOGGLE_TRAVEL_PRODUCT_PICK, {
