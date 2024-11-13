@@ -16,6 +16,7 @@ import {
   LocationSample,
 } from "@/commons/ui/icon";
 import styles from "./styles.module.css";
+import Header, { HeaderSize } from "@/commons/ui/header";
 
 export default function TravelProductDetail() {
   const {
@@ -66,7 +67,7 @@ export default function TravelProductDetail() {
       <div className={styles.top__container}>
         <div className={styles.header__container}>
           <div className={styles.title__container}>
-            <h3 className={styles.header}>{product?.name}</h3>
+            <Header title={product?.name ?? ""} size={HeaderSize.large} />
             <div className={styles.icon__container}>
               <Delete />
               <LinkIcon />
@@ -123,7 +124,7 @@ export default function TravelProductDetail() {
 
       <div className={styles.section__container}>
         <span className={styles.section__title}>상세 설명</span>
-        <TravelProductContentsSample />
+        <p>{product?.contents}</p>
       </div>
 
       <Divider />
