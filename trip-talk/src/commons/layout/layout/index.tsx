@@ -9,7 +9,6 @@ const HIDDEN_HEADER = ["/", "/boards/new"];
 
 export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  console.log(pathname);
   const isHiddenHeader = HIDDEN_HEADER.includes(pathname);
 
   return (
