@@ -19,19 +19,19 @@ body {
 @font-face {
   font-family: "Pretendard";
   font-weight: 700;
-  src: url("./_fonts/Pretendard-ExtraBold.woff") format("woff");
+  src: url("./_fonts/Pretendard-Bold.woff") format("woff");
 }
 
 @font-face {
   font-family: "Pretendard";
   font-weight: 600;
-  src: url("./_fonts/Pretendard-ExtraLight.woff") format("woff");
+  src: url("./_fonts/Pretendard-Medium.woff") format("woff");
 }
 
 @font-face {
   font-family: "Pretendard";
   font-weight: 500;
-  src: url("./_fonts/Pretendard-Medium.woff") format("woff");
+  src: url("./_fonts/Pretendard-ExtraLight.woff") format("woff");
 }
 
 @font-face {
