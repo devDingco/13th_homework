@@ -7,10 +7,18 @@ import styles from "./styles.module.css";
 import useBoardsDetail from "../../../commons/hooks/useBoardsDetail";
 import LikeButton from "../LikeButton/LikeButton";
 import DisLikeButton from "../DisLikeButton/DisLikeButton";
+import Youtube from "../Youtube/Youtube";
 
 export default function BoardsDetail() {
-  const { boardId, boardWriter, boardTitle, boardContents, boardCreatedAt } =
-    useBoardsDetail();
+  const {
+    boardId,
+    boardWriter,
+    boardTitle,
+    boardContents,
+    boardYoutubeUrl,
+    boardCreatedAt,
+  } = useBoardsDetail();
+
   return (
     <div className={styles.layout}>
       <div className={styles.title}>{boardTitle}</div>
@@ -50,12 +58,7 @@ export default function BoardsDetail() {
       </div>
       <div className={styles.post_content}>{boardContents}</div>
       <div className={styles.video_thumbnail_wrapper}>
-        <Image
-          src="/pngs/video-thumbnail.png"
-          alt="video-thumbnail"
-          width={822}
-          height={464}
-        />
+        {boardYoutubeUrl && <Youtube youtubeUrl={boardYoutubeUrl} />}
       </div>
       <div className={styles.reaction}>
         <DisLikeButton />
