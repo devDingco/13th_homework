@@ -1,0 +1,15 @@
+.profileImg {
+  background-color: #e4e4e4;
+  border-radius: 100%;
+  border: none;
+}
+
+.profileName {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: #5f5f5f;
+}
