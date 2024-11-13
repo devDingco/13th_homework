@@ -1,16 +1,11 @@
 import { Table } from "antd";
 import styles from "./styles.module.scss";
-import { usePageChange } from "@/commons/stores/page-store";
-import { useSearch } from "@/commons/stores/search-store";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { ITableListProps } from "./types";
+import { useTableList } from "./hook";
 
-export default function TableList(props) {
-  const pathname = usePathname();
-  const { search } = useSearch();
-
+export default function TableList<T>(props: ITableListProps<T>) {
   const {
-    data,
+    isLoading,
     refetch,
     tableItemHandler = () => {},
     dataSource,
@@ -18,22 +13,7 @@ export default function TableList(props) {
     totalCount,
   } = props;
 
-  const { page, setPage } = usePageChange();
-
-  useEffect(() => {
-    // ! 페이지 변경시 테이블 페이지 초기화
-    setPage(1);
-  }, [pathname]);
-
-  // ! 페이지 변경시 리페치 처리 핸들러
-  const pageChangeHandler = async (page: number) => {
-    const result = await refetch({
-      search,
-      page,
-    });
-    console.log(result);
-    setPage(page);
-  };
+  const { page, pageChangeHandler } = useTableList({ refetch });
 
   return (
     <div className="shadow-[0_0_15px_0_rgba(0,0,0,0.1)] rounded-2xl px-12 py-5">
@@ -66,7 +46,7 @@ export default function TableList(props) {
             showQuickJumper: true,
           }}
           tableLayout="auto"
-          loading={data === undefined}
+          loading={isLoading}
         />
       </div>
     </div>
