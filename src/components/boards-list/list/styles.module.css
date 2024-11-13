@@ -1,4 +1,4 @@
-.layout {
+.layout_list {
     width: 100%;
     /* height: 656px; */
     border-radius: 8px;
@@ -10,14 +10,69 @@
     gap: 8px;
 }
 
-/* .slidImage {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(50%, 50%);
-} */
+.layout_list_searchBox {
+    width: 1184px;
+    margin: 0 auto;
+}
+
+.trip_talk_title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.searchBox {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    align-items: center;
+    /* width: 1322px; */
+    height: 75px;
+    margin: 0 auto;
+    gap: 16px;
+}
+
+.dateInput {
+    width: 289px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.titleSearch {
+    width: 640px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.searchBoxSearch {
+    width: 64px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+}
+
+.searchBoxTripTalk {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 162px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    background-color: #2974e5;
+    gap: 10px;
+}
+
 
 .titleBox {
     width: 1184px;

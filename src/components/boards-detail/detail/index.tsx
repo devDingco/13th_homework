@@ -19,6 +19,8 @@ export default function BoardsComponentDetail() {
         </span>
     );
 
+    console.log(data?.fetchBoard.images);
+
     return (
         <>
             <div className={styles.layout}>
@@ -57,14 +59,18 @@ export default function BoardsComponentDetail() {
                             </Tooltip>
                         </div>
                         <div className={styles.mainPhotoBox}>
-                            <Image
-                                className={styles.mainPhoto}
-                                alt="mainphoto"
-                                src="/images/beach.png"
-                                width={400}
-                                height={531}
-                                // layout="responsive"
-                            ></Image>
+                            {data?.fetchBoard.images ? (
+                                <img
+                                    className={styles.mainPhoto}
+                                    src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
+                                    width={400}
+                                    height={531}
+                                    // layout="responsive"
+                                ></img>
+                            ) : (
+                                <div>이미지를 등록해 주세요</div>
+                            )}
+
                             <div>{data?.fetchBoard?.contents}</div>
                         </div>
                     </div>
