@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginSchema, loginSchema } from "./schema";
 import { useMutation } from "@apollo/client";
 import { LoginUserDocument } from "@/commons/gql/graphql";
-import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { NavigationPaths, useNavigate } from "@/utils/navigate";
 import { useAccessTokenStore } from "@/app/_store/accessToken/store";
 import { LogoIcon } from "@/commons/ui/icon";
 import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";

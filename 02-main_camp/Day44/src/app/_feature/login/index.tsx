@@ -1,5 +1,5 @@
 import { useAccessTokenStore } from "@/app/_store/accessToken/store";
-import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { NavigationPaths, useNavigate } from "@/utils/navigate";
 import { useEffect, useState } from "react";
 
 export const withLoginCheck =

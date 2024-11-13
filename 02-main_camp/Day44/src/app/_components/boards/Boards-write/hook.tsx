@@ -14,7 +14,7 @@ import CONSTANTS_DESCRIPTION from "@/commons/constants/description";
 import CONSTANTS_ALERT_MESSAGE from "@/commons/constants/alert";
 import { Address } from "react-daum-postcode";
 import useModal from "@/commons/ui/modal/hook";
-import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { NavigationPaths, useNavigate } from "@/utils/navigate";
 import { checkValidationImage, checkWithSpace } from "@/utils/validation";
 
 export const useBoardWrite = (isEdit?: boolean, data?: FetchBoardQuery) => {

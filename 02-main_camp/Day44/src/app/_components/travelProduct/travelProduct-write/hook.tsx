@@ -9,7 +9,7 @@ import {
   UpdateTravelproductDocument,
   UploadFileDocument,
 } from "@/commons/gql/graphql";
-import { NavigationPaths, useNavigate } from "@/commons/navigate";
+import { NavigationPaths, useNavigate } from "@/utils/navigate";
 import { checkValidationImage } from "@/utils/validation";
 import { useMutation, useQuery } from "@apollo/client";
 import { zodResolver } from "@hookform/resolvers/zod";
