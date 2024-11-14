@@ -24,6 +24,7 @@ export default function useLayoutHeader() {
     setMainPage(false);
     setPurchasePage(true);
     setMyPage(false);
+    router.push("/boards/purchase");
   };
 
   const onClickMoveMyPage = () => {
