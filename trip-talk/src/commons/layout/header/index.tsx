@@ -57,7 +57,7 @@ export default function LayoutHeader() {
         </div>
       </div>
       <div className="flex flex-row gap-1">
-        <div className="flex justify-center w-10 h-10 bg-lightGray rounded-full">
+        <div className="flex justify-center items-center w-10 h-10 bg-lightGray rounded-full">
           <UserOutlined className="text-xl" />
         </div>
         <CaretDownOutlined className="text-xs" />
