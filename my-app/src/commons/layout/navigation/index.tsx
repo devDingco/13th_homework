@@ -1,11 +1,11 @@
 "use client";
-
+// TODO 리프레시토큰할때 여기보셈2
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { RightOutlined } from "@ant-design/icons";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useApolloClient, useLazyQuery, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { withAuth } from "@/commons/hocs/withAuth";
 
@@ -21,13 +21,11 @@ const FETCH_USER_LOGGED_IN = gql`
 
 function LayoutNavigation() {
   const router = useRouter();
-
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-
-  const [selected, setSElected] = useState(""); // nav에서 선택한 항목을 선택함
+  const [selected, setSelected] = useState(""); // nav에서 선택한 항목을 선택함
 
   const handleClick = (item) => {
-    setSElected(item);
+    setSelected(item); // 이 부분의 세미콜론 문제 확인
   };
 
   return (
@@ -37,14 +35,14 @@ function LayoutNavigation() {
           <Link href="/boards">
             <div
               className={styles.logoSection}
-              onClick={() => handleClick("트립토크")} // 로고 클릭 시 "트립토크" 선택
+              onClick={() => handleClick("트립토크")}
             >
               <Image
                 src="/images/logo.png"
                 alt="페이지 로고"
                 className={styles.logoIcon}
-                width={0}
-                height={0}
+                width={100} // 적절한 width와 height 값 지정
+                height={100}
                 sizes="100vw"
               />
             </div>
@@ -84,9 +82,8 @@ function LayoutNavigation() {
           </div>
         </div>
         <div className={styles.navRight}>
-          <div>{data?.fetchUserLoggedIn.name}님 오늘도 좋은 하루 되세요!</div>
+          <div>{data?.fetchUserLoggedIn?.name}님 오늘도 좋은 하루 되세요!</div>
 
-          {/* 로그인 안된다면?  이 화면*/}
           <div className={styles.loginBtnSection}>
             <Link href="/authentication/login">
               <button className={styles.loginBtn}>
@@ -95,35 +92,6 @@ function LayoutNavigation() {
               </button>
             </Link>
           </div>
-
-          {/* 나중에 로그아웃도 구현해주기 */}
-          {/* <div className={styles.loginBtnSection}>
-            <Link href="/authentication/login">
-              <button className={styles.loginBtn}>로그아웃</button>
-            </Link>
-          </div> */}
-
-          {/* 로그인 된다면 이 화면 
-           <div>
-            <Image
-              src="/images/profile1.png"
-              alt="프로필 아이콘"
-              className={styles.profileIcon}
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-          </div>
-          <div>
-            <Image
-              src="/images/down_arrow.png"
-              alt="아래화살표"
-              className={styles.downArrow}
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-          </div> */}
         </div>
       </main>
     </>

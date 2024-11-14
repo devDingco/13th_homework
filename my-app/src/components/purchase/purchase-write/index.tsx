@@ -14,6 +14,8 @@ import {
   UPLOAD_FILE,
 } from "./queries";
 import { useEffect, useState } from "react";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function PerchaseWrite(props) {
   const router = useRouter();
@@ -43,12 +45,18 @@ export default function PerchaseWrite(props) {
     variables: { id: params.purchaseId },
   });
   console.log(data);
-
+  // ----- 디폴트 벨류 하는 부분
   const { register, handleSubmit, formState, setValue } = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
     defaultValues: {
       name: props.isEdit ? data?.fetchTravelproduct.name : "",
+      remarks: props.isEdit ? data?.fetchTravelproduct.remarks : "",
+      contents: props.isEdit ? data?.fetchTravelproduct.contents : "",
+      price: props.isEdit ? data?.fetchTravelproduct.price : "",
+      tags: props.isEdit ? data?.fetchTravelproduct.tags?.join(", ") : "", // tags는 문자열로 병합
+      images: [], // images 필드를 추가하여 초기 배열 값 설정
+      //images는 여기에 직접 넣을 수 없어 useEffec에서 setValue 활용해야함.
       // 필요한 다른 필드도 여기에 추가하기.  -> 다른애들도 이런식으로 디폴트벨류 적용해주기
     },
   });
@@ -56,12 +64,40 @@ export default function PerchaseWrite(props) {
   useEffect(() => {
     if (props.isEdit && data?.fetchTravelproduct) {
       setValue("name", data.fetchTravelproduct.name);
+      setValue("remarks", data.fetchTravelproduct.remarks);
+      setValue("contents", data.fetchTravelproduct.contents);
+      setValue("price", data.fetchTravelproduct.price);
+      setValue("tags", data.fetchTravelproduct.tags?.join(", ")); // 태그 필드 처리
+
+      // 이미지 URL들 업데이트
+      setImageUrls(data.fetchTravelproduct.images || []);
     }
   }, [data, props.isEdit, setValue]);
 
   const [createTravelproduct] = useMutation(CREATE_TRAVEL_PRODUCT);
   const [updateTravelproduct] = useMutation(UPDATE_TRAVEL_PRODUCT);
 
+  // 주소--------------------------------------
+  // 인풋 패스워드 검사해서 수정할지말지?
+  const [isOpen, setIsOpen] = useState(false); // 주소모달 토글기능
+
+  // 우편번호 조회하는 곳
+  const onToggleModal = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (data) => {
+    // console.log(data);
+    console.log(data?.zonecode);
+    setZipcode(data?.zonecode); // zonecode 업데이트
+    console.log(data?.roadAddress);
+    setAddress(data?.roadAddress); // roadAddress 업데이트
+    onToggleModal(event);
+  };
+  // 주소--------------------------------------
   // 상품 등록 처리 -----------------------------------
   const onClickSubmit = async (data) => {
     try {
@@ -140,6 +176,7 @@ export default function PerchaseWrite(props) {
               type="text"
               placeholder="상품명을 입력해 주세요."
               {...register("name")}
+              // 디폴트벨류 47번줄 useForm 참조
             />
             <div style={{ color: "red" }}>{formState.errors.name?.message}</div>
           </div>
@@ -155,9 +192,7 @@ export default function PerchaseWrite(props) {
               type="text"
               placeholder="상품을 한줄로 요약해 주세요."
               {...register("remarks")}
-              defaultValue={
-                props.isEdit ? data?.fetchTravelproduct.remarks : ""
-              }
+              // 디폴트벨류 47번줄 useForm 참조
             />
             <div style={{ color: "red" }}>
               {formState.errors.remarks?.message}
@@ -175,7 +210,7 @@ export default function PerchaseWrite(props) {
             className={styles.textarea}
             placeholder="  내용을 입력해 주세요."
             {...register("contents")}
-            defaultValue={props.isEdit ? data?.contents : ""}
+            // 디폴트벨류 47번줄 useForm 참조
           ></textarea>
           <div style={{ color: "red" }}>
             {formState.errors.contents?.message}
@@ -192,7 +227,7 @@ export default function PerchaseWrite(props) {
             type="number"
             placeholder="판매 가격을 입력해 주세요.(원 단위)"
             {...register("price", { valueAsNumber: true })}
-            defaultValue={props.isEdit ? data?.price : ""}
+            // 디폴트벨류 47번줄 useForm 참조
           />
           <div style={{ color: "red" }}>{formState.errors.price?.message}</div>
         </div>
@@ -205,11 +240,15 @@ export default function PerchaseWrite(props) {
             type="text"
             placeholder="태그를 입력해 주세요."
             {...register("tags")}
-            defaultValue={props.isEdit ? data?.tags?.join(", ") : ""}
+            // 디폴트벨류 47번줄 useForm 참조
           />
         </div>
 
         <div className={styles.underLine}></div>
+
+        {/* <Modal open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal> */}
 
         {/* 주소부분 추후에 진도 나가면 수정할 부분 */}
         <div className={styles.addressSection}>
@@ -222,14 +261,21 @@ export default function PerchaseWrite(props) {
                 className={styles.adressZipcodeInput}
                 type="text"
                 placeholder="01234"
+                {...register("adressZipcode")}
               />
-              <button className={styles.adressZipcodeBtn}>우편번호 검색</button>
+              <button
+                className={styles.adressZipcodeBtn}
+                onClick={onToggleModal}
+              >
+                우편번호 검색
+              </button>
             </div>
 
             <input
               className={styles.addressDetailInput}
               type="text"
               placeholder="상세주소를 입력해 주세요."
+              {...register("addressDetail")}
             />
 
             <div className={styles.coordinateArea}>

@@ -2,17 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 라이트모드 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
-
-@media (prefers-color-scheme: dark) {
+/* 다크모드 */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 /* @font-face {
   font-family: "Pretendard";

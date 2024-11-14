@@ -4,6 +4,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useLoadStore } from "../stores/load-store";
+import { useAccessTokenStore } from "../stores/access.token-store";
 
 // export default 안하는 이유
 // 임폴트할때 중괄호가 필요 없고, 다이랙트로 컴포넌트 이름을 쓸 수 있음. 이름 내맘대로 바꿀수있음
@@ -13,13 +15,16 @@ export const withAuth =
   (컴포넌트: () => JSX.Element) =>
   <P extends object>(프롭스: P) => {
     const router = useRouter();
+    const { isLoaded } = useLoadStore();
+    const { accessToken } = useAccessTokenStore();
 
     useEffect(() => {
-      if (localStorage.getItem("accessToken") === null) {
-        alert("로그인 후 이용 가능합니다!");
-        router.push("/authentication/login");
-      }
-    }, []);
+      if (!isLoaded) return;
+      if (accessToken) return;
+
+      alert("로그인 후 이용 가능합니다!");
+      router.push("/authentication/login");
+    }, [isLoaded]);
 
     return <컴포넌트 {...프롭스} />;
   };
