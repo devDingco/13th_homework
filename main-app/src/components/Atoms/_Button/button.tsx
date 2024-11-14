@@ -30,14 +30,17 @@ function BaseButton({ label, variant, size, type, onClick }: I_props) {
 }
 
 const BASE = css.raw({
-    w: "12rem",
+    w: "10rem",
     h: "4rem",
     bg: "#fff",
-    border: "2px solid #eee",
+    border: "1px solid #eee",
     p: "0.8rem 1.2rem",
     m: "0.8rem 0rem",
     cursor: "pointer",
     flexShrink: 0,
+    _hover: {
+        bg: "#eee",
+    },
     _disabled: {
         bg: "#eee",
     },

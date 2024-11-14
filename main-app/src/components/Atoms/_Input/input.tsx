@@ -1,18 +1,17 @@
 "use client";
 
-import { I_schema } from "@/app/auth/schema";
 import { PLACEHOLDER } from "@/common/constants/constants";
 import { css, Styles } from "@/common/styled-system/css";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 
-interface I_props {
-    keyname: keyof I_schema;
+interface I_props<I_schema> {
+    keyname: Path<I_schema>;
     variant?: Styles;
     size?: Styles;
     textarea?: boolean;
 }
 
-function BaseInput({ keyname, variant, size, textarea }: I_props) {
+function BaseInput<I_schema extends FieldValues>({ keyname, variant, size, textarea }: I_props<I_schema>) {
     const { register } = useFormContext<I_schema>();
 
     return (
@@ -46,7 +45,7 @@ const BASE = css.raw({
 });
 
 const TEXTAREA = css.raw({
-    minH: "10rem",
+    minH: "20rem",
     overflow: "auto",
     resize: "none",
 });
@@ -57,11 +56,11 @@ const TEXTAREA = css.raw({
  * @param required 필수값일 경우 작성
  * @param textarea 프롭으로 이거 내려주면 알아서 textarea로 뜹니다.
  */
-export function Input_Radii_Full(props: I_props) {
+export function Input_Radii_Full<I_schema extends FieldValues>(props: I_props<I_schema>) {
     const Radii_Full = css.raw({
         rounded: "0.8rem",
         w: "100%",
     });
 
-    return <BaseInput variant={Radii_Full} {...props} />;
+    return <BaseInput<I_schema> variant={Radii_Full} {...props} />;
 }

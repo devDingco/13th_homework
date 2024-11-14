@@ -74,7 +74,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
             </header>
 
             <section>
-                <div className={css({w: "40rem", h: "100%", objectFit: "cover"})}>
+                <div className={css({ w: "40rem", h: "100%", objectFit: "cover" })}>
                     {!isEdit &&
                         data?.fetchBoard.images?.map((el) =>
                             el !== "" ? (

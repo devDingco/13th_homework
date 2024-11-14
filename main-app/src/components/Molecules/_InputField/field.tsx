@@ -1,13 +1,12 @@
 "use client";
 
-import { I_schema } from "@/app/auth/schema";
 import { LABEL } from "@/common/constants/constants";
 import { css, Styles } from "@/common/styled-system/css";
 import { Input_Radii_Full } from "@/components/Atoms/_Input/input";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 
-interface I_props {
-    keyname: keyof I_schema;
+interface I_props<I_schema> {
+    keyname: Path<I_schema>;
     size?: Styles;
     required?: boolean;
     textarea?: boolean;
@@ -19,7 +18,12 @@ interface I_props {
  * @param required 필수값일 경우 작성
  * @param textarea 프롭으로 이거 내려주면 알아서 textarea로 뜹니다.
  */
-export default function Field({ keyname, size, required, textarea }: I_props) {
+export default function InputField<I_schema extends FieldValues>({
+    keyname,
+    size,
+    required,
+    textarea,
+}: I_props<I_schema>) {
     const {
         formState: { errors },
     } = useFormContext<I_schema>();
@@ -27,8 +31,8 @@ export default function Field({ keyname, size, required, textarea }: I_props) {
     return (
         <label>
             {LABEL[keyname]} <b className={css(red)}>{required && "*"}</b>
-            <Input_Radii_Full keyname={keyname} size={size} textarea={textarea} />
-            <strong className={css(red, { display: "block" })}>{errors[keyname] && errors[keyname].message}</strong>
+            <Input_Radii_Full<I_schema> keyname={keyname} size={size} textarea={textarea} />
+            <strong className={css(red, { display: "block" })}>{errors[keyname]?.message ?? ""}</strong>
         </label>
     );
 }

@@ -77,12 +77,12 @@ export default function LoginPage() {
                                     <InputField keyname="pwConfirm" required />
 
                                     <div className={CSS_ButtonWrap}>
+                                        <Button_Radii_Primary label="회원가입" />
                                         <Button_Radii_White
                                             label="취소"
                                             type="button"
                                             onClick={() => setIsLogin(true)}
                                         />
-                                        <Button_Radii_Primary label="회원가입" />
                                     </div>
                                 </form>
                             </FormProvider>

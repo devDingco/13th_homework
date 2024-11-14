@@ -20,15 +20,11 @@ export default function ApolloSetting(props: IApolloSetting) {
     const { setIsLoaded } = useLoadStore();
 
     useEffect(() => {
-        if (token) {
-            getAccessToken()
-                .then((newToken) => {
-                    if (newToken) setToken(newToken);
-                })
-                .finally(setIsLoaded);
-        } else {
-            setIsLoaded();
-        }
+        getAccessToken()
+            .then((newToken) => {
+                if (newToken) setToken(newToken);
+            })
+            .finally(setIsLoaded);
     }, []);
 
     const errorLink = onError(({ graphQLErrors, operation, forward }) => {

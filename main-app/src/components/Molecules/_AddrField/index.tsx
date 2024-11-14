@@ -10,8 +10,7 @@ import { Button, Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function AddressFieldUI({ ...props }) {
-    const { onChange, isModalOpen, addressData, onToggleModal, handleComplete, data, isEdit } =
-        props;
+    const { onChange, isModalOpen, addressData, onToggleModal, handleComplete, data, isEdit } = props;
 
     return (
         <>
@@ -19,7 +18,7 @@ export default function AddressFieldUI({ ...props }) {
                 주소
                 <div className={CSS_Zipcode}>
                     <Input
-                        id="zipcode_ID"
+                        id="zipcode"
                         onClick={onToggleModal}
                         value={
                             isEdit && addressData === undefined
@@ -31,7 +30,7 @@ export default function AddressFieldUI({ ...props }) {
                     <Button onClick={onToggleModal}>주소 검색</Button>
                 </div>
                 <Input
-                    id="address_ID"
+                    id="address"
                     onClick={onToggleModal}
                     value={
                         isEdit && addressData === undefined
@@ -41,13 +40,9 @@ export default function AddressFieldUI({ ...props }) {
                     disabled={isModalOpen}
                 />
                 <Input
-                    id="addressDetail_ID"
+                    id="addressDetail"
                     onChange={onChange}
-                    value={
-                        isEdit && addressData === undefined
-                            ? data?.fetchBoard.boardAddress?.addressDetail
-                            : ""
-                    }
+                    value={isEdit && addressData === undefined ? data?.fetchBoard.boardAddress?.addressDetail : ""}
                 />
                 {/* modal */}
                 {isModalOpen && (
