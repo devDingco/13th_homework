@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import LayOutPage from '../commons/layout/index';
 import ApolloUploadSetting from '../commons/settings/apollo-setting';
+import ApolloHeaderAndErrorSettingRefresh from '../commons/settings/apollo-header-and-error-setting-refresh';
 
 export const metadata: Metadata = {
     title: '축구하자',
@@ -13,9 +14,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     return (
         <html lang="ko">
             <body>
-                <ApolloUploadSetting>
+                {/* <ApolloUploadSetting> */}
+                <ApolloHeaderAndErrorSettingRefresh>
                     <LayOutPage>{props.children}</LayOutPage>
-                </ApolloUploadSetting>
+                </ApolloHeaderAndErrorSettingRefresh>
+                {/* </ApolloUploadSetting> */}
             </body>
         </html>
     );
