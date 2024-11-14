@@ -1,0 +1,22 @@
+.spinner {
+  position: fixed; /* 화면 중앙에 고정 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.spinner-border {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #6400ff;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s ease-in-out infinite; /* 스피너 회전 애니메이션 */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); /* 360도 회전 */
+  }
+}

@@ -1,0 +1,53 @@
+.board_list {
+  display: flex;
+  min-width: 1024px;
+  padding: 30px 20px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
+}
+.list_box {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.board_box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
+
+  color: var(--333333, #333);
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.14px;
+}
+.delete_btn_box_hover {
+  position: absolute;
+
+  display: block;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.delete_btn_box {
+  position: absolute;
+  display: none;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.delete_btn {
+  display: block;
+}
