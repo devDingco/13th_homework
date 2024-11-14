@@ -7,11 +7,14 @@ import {
   IFormData,
 } from "../../types/components.type";
 import { CreateBoardDocument, UpdateBoardDocument } from "../graphql/graphql";
+import { useImageStore } from "../stores/useImageStore";
 
 export default function useBoardsWrite(
   props: IBoardsWriteHook,
   userPassword: string
 ) {
+  const { imageMap } = useImageStore();
+
   const params = useParams();
   const router = useRouter();
 
@@ -27,6 +30,7 @@ export default function useBoardsWrite(
     title: "",
     contents: "",
     youtubeUrl: "",
+    images: [],
   });
 
   const [createBoard] = useMutation(CreateBoardDocument);
@@ -56,6 +60,7 @@ export default function useBoardsWrite(
             title: formData.title,
             contents: formData.contents,
             youtubeUrl: formData.youtubeUrl,
+            images: Object.values(imageMap),
           },
         },
       });
@@ -77,13 +82,13 @@ export default function useBoardsWrite(
           contents: formData.contents,
           youtubeUrl: formData.youtubeUrl,
           // boardAddress: {
-          //   zipcode: string,
+          //   zipcode: ,
           //   address: string,
           //   addressDetail: string;
           // };
           // likeCount: number;
           // dislikeCount: number;
-          // images: string;
+          images: formData.images,
         },
         boardId: String(params.boardId),
         password: userPassword,

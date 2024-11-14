@@ -83,6 +83,7 @@ export interface IFormData {
   title: string;
   contents: string;
   youtubeUrl: string;
+  images: string[];
 }
 
 export interface ICommentFormData {

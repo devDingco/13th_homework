@@ -14,6 +14,7 @@ export default function useBoardsDetail() {
   const boardWriter = data?.fetchBoard.writer;
   const boardTitle = data?.fetchBoard.title;
   const boardContents = data?.fetchBoard.contents;
+  const boardYoutubeUrl = data?.fetchBoard.youtubeUrl;
   const boardCreatedAt = data?.fetchBoard.createdAt
     .slice(0, 10)
     .replaceAll("-", ".");
@@ -23,6 +24,7 @@ export default function useBoardsDetail() {
     boardWriter,
     boardTitle,
     boardContents,
+    boardYoutubeUrl,
     boardCreatedAt,
   };
 }
