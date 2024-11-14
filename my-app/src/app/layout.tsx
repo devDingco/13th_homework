@@ -5,6 +5,8 @@ import Layout from "@/commons/layout";
 import ApolloUploadSetting from "@/commons/settings/apollo-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-header-setting";
 import ApolloHeaderSettingLocalStorage from "@/commons/settings/apollo-header-setting-localstorage";
+import ApolloHeaderAndErrorSetting from "@/commons/settings/apollo-header-and-error-setting";
+import ApolloHeaderAndErrorSettingRefresh from "@/commons/settings/apollo-header-and-error-setting-refresh";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,9 +34,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloHeaderSettingLocalStorage>
+        {/* <ApolloHeaderSettingLocalStorage> */}
+        {/* <ApolloHeaderAndErrorSetting> */}
+        <ApolloHeaderAndErrorSettingRefresh>
           <Layout>{children}</Layout>
-        </ApolloHeaderSettingLocalStorage>
+        </ApolloHeaderAndErrorSettingRefresh>
+        {/* </ApolloHeaderAndErrorSetting> */}
+        {/* </ApolloHeaderSettingLocalStorage> */}
       </body>
     </html>
   );

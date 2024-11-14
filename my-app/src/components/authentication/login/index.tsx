@@ -1,5 +1,5 @@
 // 로그인 컴포넌트
-
+// TODO 리프레시토큰할때 여기보셈
 "use client";
 
 import Image from "next/image";
@@ -65,7 +65,7 @@ export default function Login() {
       alert("로그인에 실패했습니다. 다시 시도하세요");
     }
     setAccessToken(accessToken);
-    localStorage.setItem("accessToken", accessToken);
+    // localStorage.setItem("accessToken", accessToken); => 이제 안씀
 
     // 3. 로그인 성공 페이지로 이동하기
     router.push("/boards");
