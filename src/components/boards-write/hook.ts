@@ -28,8 +28,8 @@ export const useBoardWrite = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [imageUrl, setImageUrl] = useState('');
-    const fileRef = useRef();
     const [isHovered, setIsHovered] = useState(false); // 호버 상태 관리
+    const fileRef = useRef();
 
     const [게시글생성함수] = useMutation(CreateBoardDocument);
     const [게시글수정함수] = useMutation(UpdateBoardDocument);
@@ -46,6 +46,8 @@ export const useBoardWrite = () => {
 
     const { writer, title, password, contents, youtubeUrl, images } = inputs;
 
+    
+    // 이미지 핸들러
     const onChangeFile = async (event) => {
         const file = event.target.files[0];
         console.log(file);

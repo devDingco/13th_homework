@@ -1,9 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import styles from './styles.module.css';
 import Image from 'next/image';
 
 export default function Login() {
+    const router = useRouter();
+
+    const onClickSignUpPage = () => {
+        router.push('/signup');
+    };
+
     return (
         <>
             <div className={styles.layout}>
@@ -23,7 +30,12 @@ export default function Login() {
                     <input type="text" placeholder="이메일을 입력하세요" />
                     <input type="text" placeholder="비밀번호를 입력하세요" />
                     <button className={styles.loginBtn}>로그인</button>
-                    <button className={styles.signBtn}>회원가입</button>
+                    <button
+                        className={styles.signBtn}
+                        onClick={onClickSignUpPage}
+                    >
+                        회원가입
+                    </button>
                 </div>
                 <div className={styles.loginImage}>
                     <Image
