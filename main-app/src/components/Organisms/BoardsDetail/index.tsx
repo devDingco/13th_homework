@@ -41,16 +41,12 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
     return (
         <>
             <header className={styles.detail_header}>
-                <p className={styles.header_title}>
-                    {isEdit ? "게시글 수정" : data?.fetchBoard.title}
-                </p>
+                <p className={styles.header_title}>{isEdit ? "게시글 수정" : data?.fetchBoard.title}</p>
 
                 <div className={styles.header_info}>
                     <div className={styles.info_profile}>
                         <Image src={profile} alt="profile" />
-                        <p className={isEdit ? styles.profile_text : ""}>
-                            {data?.fetchBoard.writer}
-                        </p>
+                        <p className={isEdit ? styles.profile_text : ""}>{data?.fetchBoard.writer}</p>
                     </div>
                     <div>
                         <p className={isEdit ? styles.date_text : ""}>
@@ -70,9 +66,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                                 <Image src={location} alt="location" />
                             </Tooltip.Trigger>
                             <Tooltip.Positioner>
-                                <Tooltip.Content>
-                                    {data?.fetchBoard.boardAddress?.address}
-                                </Tooltip.Content>
+                                <Tooltip.Content>{data?.fetchBoard.boardAddress?.address}</Tooltip.Content>
                             </Tooltip.Positioner>
                         </Tooltip.Root>
                     </div>
@@ -80,7 +74,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
             </header>
 
             <section>
-                <div>
+                <div className={css({ w: "40rem", h: "100%", objectFit: "cover" })}>
                     {!isEdit &&
                         data?.fetchBoard.images?.map((el) =>
                             el !== "" ? (
@@ -89,8 +83,7 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                                     src={`https://storage.googleapis.com/${el}`}
                                     alt="thumbnail"
                                     width={400}
-                                    height={400}
-                                    objectFit="cover"
+                                    height={0}
                                 />
                             ) : (
                                 ""
@@ -102,17 +95,8 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
 
                 {isEdit && (
                     <>
-                        <Input
-                            id="title_ID"
-                            value={data?.fetchBoard.title}
-                            onChange={handleChange}
-                        />
-                        <Input
-                            id="content_ID"
-                            value={data?.fetchBoard.contents}
-                            onChange={handleChange}
-                            textarea
-                        />
+                        <Input id="title_ID" value={data?.fetchBoard.title} onChange={handleChange} />
+                        <Input id="content_ID" value={data?.fetchBoard.contents} onChange={handleChange} textarea />
                     </>
                 )}
 
@@ -129,17 +113,11 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                                     data={data}
                                     isEdit={true}
                                 />
-                                <Input
-                                    id="link_ID"
-                                    value={data?.fetchBoard.youtubeUrl}
-                                    onChange={handleChange}
-                                />
+                                <Input id="link_ID" value={data?.fetchBoard.youtubeUrl} onChange={handleChange} />
                             </div>
                             <div>
                                 <ImgField
-                                    imageUrl={
-                                        data?.fetchBoard.images ? data?.fetchBoard.images : imageUrl
-                                    }
+                                    imageUrl={data?.fetchBoard.images ? data?.fetchBoard.images : imageUrl}
                                     onChange={onChangeFile}
                                 />
                             </div>
@@ -163,32 +141,16 @@ export default function BoardsDetailUI({ isEdit }: { isEdit: boolean }) {
                 <div className={styles.main_btn}>
                     <div
                         className={styles.btn_list}
-                        onClick={
-                            isEdit
-                                ? () => Router.push(`/boards/${Params.boardId}`)
-                                : () => Router.push(`/boards`)
-                        }
+                        onClick={isEdit ? () => Router.push(`/boards/${Params.boardId}`) : () => Router.push(`/boards`)}
                     >
-                        {isEdit ? (
-                            <Image src={close} alt="close" />
-                        ) : (
-                            <Image src={menu} alt="menu" />
-                        )}
+                        {isEdit ? <Image src={close} alt="close" /> : <Image src={menu} alt="menu" />}
                         <p>{isEdit ? "취소하기" : "목록으로"}</p>
                     </div>
                     <div
                         className={styles.btn_edit}
-                        onClick={
-                            isEdit
-                                ? handleUpdate
-                                : () => Router.push(`/boards/${Params.boardId}/edit`)
-                        }
+                        onClick={isEdit ? handleUpdate : () => Router.push(`/boards/${Params.boardId}/edit`)}
                     >
-                        {isEdit ? (
-                            <Image src={submit} alt="submit" />
-                        ) : (
-                            <Image src={edit} alt="edit" />
-                        )}
+                        {isEdit ? <Image src={submit} alt="submit" /> : <Image src={edit} alt="edit" />}
                         <p>{isEdit ? "수정완료" : "수정하기"}</p>
                     </div>
                 </div>

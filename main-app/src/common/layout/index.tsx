@@ -6,7 +6,7 @@ import LayoutFooter from "./footer";
 import { usePathname } from "next/navigation";
 
 const SHOW_BANNER = [`/boards`];
-const HIDE_BANNER = [`/login`];
+const HIDE_BANNER = [`/auth`];
 
 interface IChildren {
     children: React.ReactNode;

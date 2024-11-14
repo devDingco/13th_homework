@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    ApolloClient,
-    ApolloLink,
-    ApolloProvider,
-    fromPromise,
-    InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloLink, ApolloProvider, fromPromise, InMemoryCache } from "@apollo/client";
 
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { useTokenStore } from "../stores/useTokenStore";

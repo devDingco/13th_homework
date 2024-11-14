@@ -135,7 +135,7 @@ export default function LayoutNav() {
                         </Menu.Positioner>
                     </Menu.Root>
                 ) : (
-                    <Button label="로그인" onClick={() => router.push(`/auth`)}></Button>
+                    <Button label="로그인" onClick={() => router.push(`/auth`, {scroll:false})}></Button>
                 )}
             </nav>
         </>
