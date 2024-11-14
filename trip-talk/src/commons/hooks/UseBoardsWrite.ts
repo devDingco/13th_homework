@@ -60,7 +60,7 @@ export default function useBoardsWrite(
             title: formData.title,
             contents: formData.contents,
             youtubeUrl: formData.youtubeUrl,
-            images: Object.values(imageMap),
+            images: [...Object.values(imageMap)],
           },
         },
       });

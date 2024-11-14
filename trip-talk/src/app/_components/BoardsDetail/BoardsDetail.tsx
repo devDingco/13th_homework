@@ -42,12 +42,14 @@ export default function BoardsDetail() {
         </div>
       </div>
       <div>
-        <Image
-          src="/pngs/post-image.png"
-          alt="post-image"
-          width={400}
-          height={531}
-        />
+        {boardData?.images?.map((image) => (
+          <Image
+            src={`https://storage.googleapis.com/${image}`}
+            alt="post-image"
+            width={400}
+            height={531}
+          />
+        ))}
       </div>
       <div className={styles.post_content}>{boardData?.contents}</div>
       <div className={styles.video_thumbnail_wrapper}>
