@@ -10,18 +10,11 @@ import DisLikeButton from "../DisLikeButton/DisLikeButton";
 import Youtube from "../Youtube/Youtube";
 
 export default function BoardsDetail() {
-  const {
-    boardId,
-    boardWriter,
-    boardTitle,
-    boardContents,
-    boardYoutubeUrl,
-    boardCreatedAt,
-  } = useBoardsDetail();
+  const { boardId, boardData } = useBoardsDetail();
 
   return (
     <div className={styles.layout}>
-      <div className={styles.title}>{boardTitle}</div>
+      <div className={styles.title}>{boardData?.title}</div>
       <div>
         <div className={styles.author_info}>
           <div className={styles.author_name}>
@@ -31,10 +24,10 @@ export default function BoardsDetail() {
               width={24}
               height={24}
             />
-            <p>{boardWriter}</p>
+            <p>{boardData?.writer}</p>
           </div>
           <div className={styles.date}>
-            <div>{boardCreatedAt}</div>
+            <div>{boardData?.createdAt.slice(0, 10).replaceAll("-", ".")}</div>
           </div>
         </div>
         <div className={styles.divider}></div>
@@ -56,9 +49,11 @@ export default function BoardsDetail() {
           height={531}
         />
       </div>
-      <div className={styles.post_content}>{boardContents}</div>
+      <div className={styles.post_content}>{boardData?.contents}</div>
       <div className={styles.video_thumbnail_wrapper}>
-        {boardYoutubeUrl && <Youtube youtubeUrl={boardYoutubeUrl} />}
+        {boardData?.youtubeUrl && (
+          <Youtube youtubeUrl={boardData?.youtubeUrl} />
+        )}
       </div>
       <div className={styles.reaction}>
         <DisLikeButton />
