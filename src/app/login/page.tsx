@@ -43,7 +43,7 @@ export default function Login() {
         });
 
         const accessToken = result.data.loginUser.accessToken;
-        console.log(accessToken);
+        // console.log(accessToken);
 
         // 2. 받아온 accessToken을 globalState(Zustand)에 저장하기;
         if (accessToken === undefined) {
@@ -73,8 +73,16 @@ export default function Login() {
                     <div className={styles.subTitle}>
                         트립트립에 로그인 하세요
                     </div>
-                    <input type="text" placeholder="이메일을 입력하세요" />
-                    <input type="text" placeholder="비밀번호를 입력하세요" />
+                    <input
+                        type="text"
+                        placeholder="이메일을 입력하세요"
+                        onChange={onChangeEmail}
+                    />
+                    <input
+                        type="text"
+                        placeholder="비밀번호를 입력하세요"
+                        onChange={onChangePassword}
+                    />
                     <button className={styles.loginBtn} onClick={onClickLogin}>
                         로그인
                     </button>

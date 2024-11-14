@@ -2,9 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useLoadStore } from '../stores/26-02-load-store';
-import { getAccessToken } from '../libraries/26-01-get-access-token';
-import { useAccessTokenStore } from '../stores/22-01-access-store';
+import { useLoadStore } from '../store/load-store';
+import { useAccessTokenStore } from '../store/access-store';
 
 // 항상 with로그인체크 이름을 사용하기위해서 export만 사용함
 export const with로그인체크 =
@@ -19,7 +18,7 @@ export const with로그인체크 =
 
             if (accessToken) return;
             alert('로그인 후 이용가능하다구요');
-            router.push('/section26/26-02-login-refreshtoken-refresh');
+            router.push('/');
         }, [isLoaded]);
 
         return <컴포넌트 {...프롭스} />; //{...프롭스} = name= {props.name}, age = {props.age}

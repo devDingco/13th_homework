@@ -1,6 +1,7 @@
 #### 과제 진행상황
 
-~ DAY40 완료함
+~ DAY42 완료함
+DAY43~ 수행중
 
 ## 공사중
 
@@ -14,7 +15,7 @@
 
 #### 사이트 대표색
 
-color: orange
+color: orange (겨울의 과일 귤색!)
 
 #### Code Convention
 

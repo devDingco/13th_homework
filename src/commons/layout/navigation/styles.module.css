@@ -14,7 +14,7 @@
     gap: 16px;
 }
 
-.homeLoginButtonBox {
+.homeLogoutButtonBox {
     width: 100px;
     height: 40px;
     border: 1px solid #000;
@@ -27,11 +27,16 @@
     color: #fff;
 }
 
-.homeLoginButton {
+.homeLogoutButton {
     display: flex;
     flex-direction: row;
     color: #fff;
     justify-content: space-between;
     align-items: center;
-    gap: 14px;
+}
+
+.homeLoginbox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
