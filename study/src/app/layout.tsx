@@ -5,6 +5,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 // import ApolloSetting from "../commons/settings/apollo-setting";
 // import ApolloUploadSetting from "../commons/settings/apollo-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-setting";
+// import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,11 +34,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
       <body className={`antialiased`}>
         <div>~~~~~레이아웃~~~~~~</div>
         <ApolloHeaderSetting>
           <AntdRegistry>{children}</AntdRegistry>
+          {/* <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer&autoload=false`}
+            strategy="beforeInteractive"
+          /> */}
         </ApolloHeaderSetting>
         <div>~~~~~레이아웃~~~~~~</div>
       </body>
