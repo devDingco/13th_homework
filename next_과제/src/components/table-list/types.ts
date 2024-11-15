@@ -1,16 +1,12 @@
-// import { DataType as BoardListDataType } from "@/components/board-list/types";
-// import { DataType as MyPageProductListDataType } from "@/components/mypage/product-list/types";
-// import { DataType as MyPagePickedListDataType } from "@/components/mypage/picked-list/types";
-// import { DataType as MyPagePointListDataType } from "@/components/mypage/point-list/types";
 import type { ColumnsType } from "antd/es/table";
 
-export interface IValidation {
+export interface IQuery {
   [key: string]: string | number;
 }
 
 export interface ITableListProps<T> {
   isLoading: boolean; // ! 데이터 로딩 상태
-  refetch: (validation: IValidation) => void;
+  refetch: (query: IQuery) => void;
   tableItemHandler?: (record: T) => {
     onClick: () => void;
     onMouseOver?: (e: React.MouseEvent<HTMLTableRowElement>) => void;
@@ -23,7 +19,7 @@ export interface ITableListProps<T> {
 
 // export interface ITableListProps {
 //   isLoading: boolean; // ! 데이터 로딩 상태
-//   refetch: (validation: IValidation) => void;
+//   refetch: (query: IQuery) => void;
 //   tableItemHandler?: (
 //     record:
 //       | BoardListDataType
