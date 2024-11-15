@@ -3,12 +3,12 @@ import { useSearch } from "@/commons/stores/search-store";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useSearchDate } from "@/commons/stores/search-date-store";
-import { IValidation } from "./types";
+import { IQuery } from "./types";
 
 export const useTableList = ({
   refetch,
 }: {
-  refetch: (validation: IValidation) => void;
+  refetch: (query: IQuery) => void;
 }) => {
   const pathname = usePathname();
   const { search } = useSearch();
@@ -22,11 +22,11 @@ export const useTableList = ({
 
   // ! 페이지 변경시 리페치 처리 핸들러
   const pageChangeHandler = async (page: number) => {
-    const validation: IValidation = { search, page };
-    if (startDate) validation.startDate = startDate;
-    if (endDate) validation.endDate = endDate;
+    const query: IQuery = { search, page };
+    if (startDate) query.startDate = startDate;
+    if (endDate) query.endDate = endDate;
 
-    const result = await refetch(validation);
+    const result = await refetch(query);
     console.log(result);
     setPage(page);
   };
