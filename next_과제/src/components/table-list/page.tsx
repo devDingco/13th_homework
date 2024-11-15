@@ -16,7 +16,7 @@ export default function TableList<T>(props: ITableListProps<T>) {
   const { page, pageChangeHandler } = useTableList({ refetch });
 
   return (
-    <div className="shadow-[0_0_15px_0_rgba(0,0,0,0.1)] rounded-2xl px-12 py-5">
+    <div className="shadow-[0_0_15px_0_rgba(0,0,0,0.1)] rounded-2xl px-12 py-5 max-sm:px-2">
       <div className="overflow-x-auto">
         <Table
           id={styles.tableList}
