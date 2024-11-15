@@ -11,18 +11,7 @@ export default function useBoardsDetail() {
     variables: { boardId: String(boardId) },
   });
 
-  const boardWriter = data?.fetchBoard.writer;
-  const boardTitle = data?.fetchBoard.title;
-  const boardContents = data?.fetchBoard.contents;
-  const boardCreatedAt = data?.fetchBoard.createdAt
-    .slice(0, 10)
-    .replaceAll("-", ".");
+  const boardData = data?.fetchBoard;
 
-  return {
-    boardId,
-    boardWriter,
-    boardTitle,
-    boardContents,
-    boardCreatedAt,
-  };
+  return { boardId, boardData };
 }

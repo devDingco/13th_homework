@@ -1,17 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import CustomImage from "../CustomImage/CustomImage";
+// import CustomImage from "../CustomImage/CustomImage";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { IBannerSlider } from "../../../types/components.type";
+import CustomImage from "../CustomImage/CustomImage";
 
-export default function BannerSlider() {
+export default function BannerSlider({
+  delay,
+  length,
+  image,
+  width,
+  height,
+  objectFit,
+}: IBannerSlider) {
   return (
     <Swiper
-      spaceBetween={30}
-      centeredSlides={true}
+      spaceBetween={20}
+      slidesPerView={length === 4 ? 2 : 1}
+      centeredSlides={length === 4 ? false : true}
       autoplay={{
-        delay: 3000,
+        delay,
         disableOnInteraction: false,
       }}
       pagination={{
@@ -21,9 +31,14 @@ export default function BannerSlider() {
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper"
     >
-      {Array.from({ length: 6 }).map((_, i) => (
+      {Array.from({ length }).map((_, i) => (
         <SwiperSlide key={i + 1}>
-          <CustomImage image={`banner${i + 1}`} />
+          <CustomImage
+            image={`${image}${i + 1}`}
+            width={width}
+            height={height}
+            objectFit={objectFit}
+          />
         </SwiperSlide>
       ))}
     </Swiper>

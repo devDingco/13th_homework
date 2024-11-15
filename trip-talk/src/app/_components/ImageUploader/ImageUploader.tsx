@@ -2,9 +2,9 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import useImageUploader from "../../../commons/hooks/useImageUploader";
 
-export default function ImageUploader() {
+export default function ImageUploader({ id }: { id: string }) {
   const { onClickImage, onCLickDelete, handleImageUpload, imageUrl, fileRef } =
-    useImageUploader();
+    useImageUploader(id);
   return (
     <>
       <div className={styles.image_uploader_wrapper} onClick={onClickImage}>

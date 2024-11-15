@@ -3,19 +3,15 @@
 import { ReactNode } from "react";
 import LayoutHeader from "../header";
 import LayoutBanner from "../banner";
-import { usePathname } from "next/navigation";
-
-const HIDDEN_HEADER = ["/", "/boards/new"];
+import useLayout from "../../hooks/useLayout";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  console.log(pathname);
-  const isHiddenHeader = HIDDEN_HEADER.includes(pathname);
+  const isHiddenHeader = useLayout();
 
   return (
     <div>
       <LayoutHeader />
-      {!isHiddenHeader && <LayoutBanner />}
+      {!isHiddenHeader() && <LayoutBanner />}
       {children}
     </div>
   );

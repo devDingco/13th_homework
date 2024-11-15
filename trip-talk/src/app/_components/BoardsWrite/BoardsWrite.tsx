@@ -140,9 +140,9 @@ export default function BoardsWrite(props: IBoardsWriteHook) {
       <div className={styles.photo_wrapper}>
         <p>사진 첨부</p>
         <div>
-          <ImageUploader />
-          <ImageUploader />
-          <ImageUploader />
+          <ImageUploader id={"1"} />
+          <ImageUploader id={"2"} />
+          <ImageUploader id={"3"} />
         </div>
       </div>
       <div className={styles.button_wrapper}>

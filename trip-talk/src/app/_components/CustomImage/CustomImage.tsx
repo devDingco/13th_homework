@@ -2,7 +2,12 @@ import Image from "next/image";
 import { ICustomImage } from "../../../types/components.type";
 import styles from "./styles.module.css";
 
-export default function CustomImage({ image }: ICustomImage) {
+export default function CustomImage({
+  image,
+  width,
+  height,
+  objectFit,
+}: ICustomImage) {
   return (
     <div className={styles.image}>
       <Image
@@ -11,7 +16,11 @@ export default function CustomImage({ image }: ICustomImage) {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "100%", height: "512px", objectFit: "cover" }}
+        style={{
+          width,
+          height,
+          objectFit,
+        }}
       />
     </div>
   );

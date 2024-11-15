@@ -83,6 +83,7 @@ export interface IFormData {
   title: string;
   contents: string;
   youtubeUrl: string;
+  images: string[];
 }
 
 export interface ICommentFormData {
@@ -111,6 +112,9 @@ export type TRecord = Record<string, string>;
 
 export interface ICustomImage {
   image: string;
+  width: string;
+  height: string;
+  objectFit?: string;
 }
 
 export interface IStarRating {
@@ -150,4 +154,13 @@ export interface IBoardListMenu {
   onChangeSearch: ChangeEventHandler<HTMLInputElement> | undefined;
   isClick: boolean;
   keyword: string;
+}
+
+export interface IBannerSlider {
+  delay: number;
+  length: number;
+  image: string;
+  width: string;
+  height: string;
+  objectFit?: string;
 }
