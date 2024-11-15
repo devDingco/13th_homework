@@ -10,7 +10,7 @@ import { useEffect, useRef } from "react";
 import _ from "lodash";
 import { usePathname } from "next/navigation";
 
-interface IValidation {
+interface IQuery {
   [key: string]: string | number;
 }
 
@@ -20,8 +20,8 @@ export default function SearchBox({
   countDataRefetch,
 }: {
   isDate?: boolean;
-  refetch: (validation: IValidation) => void;
-  countDataRefetch?: (validation: IValidation) => void;
+  refetch: (query: IQuery) => void;
+  countDataRefetch?: (query: IQuery) => void;
 }) {
   const { RangePicker } = DatePicker;
   const { search, setSearch } = useSearch();
@@ -39,14 +39,14 @@ export default function SearchBox({
   const inputRef = useRef<InputRef>(null);
 
   // ! 검색 디바운스 처리
-  const getSearchDebounce = _.debounce((validation) => {
-    if (validation.startDate === "") delete validation.startDate;
-    if (validation.endDate === "") delete validation.endDate;
-    console.log("검색조건 확인", validation);
+  const getSearchDebounce = _.debounce((query) => {
+    if (query.startDate === "") delete query.startDate;
+    if (query.endDate === "") delete query.endDate;
+    console.log("검색조건 확인", query);
 
-    refetch(validation);
-    if (countDataRefetch) countDataRefetch(validation);
-  }, 300);
+    refetch(query);
+    if (countDataRefetch) countDataRefetch(query);
+  }, 500);
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     getSearchDebounce({ startDate, endDate, search: e.target.value });
@@ -78,6 +78,7 @@ export default function SearchBox({
       <div className="flex gap-4 flex-wrap max-sm:w-full">
         {isDate && (
           <RangePicker
+            className="max-sm:w-full"
             locale={locale}
             size="large"
             id={{
