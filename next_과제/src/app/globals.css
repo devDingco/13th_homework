@@ -32,11 +32,8 @@
 }
 
 @layer components {
-  .fixedBtn {
-    @apply fixed bottom-12 right-5 z-10;
-  }
   .mainContent {
-    @apply max-w-7xl m-auto py-10 max-xl:max-w-full max-xl:mx-5 flex flex-col gap-10;
+    @apply max-w-7xl m-auto py-10 max-xl:max-w-full max-xl:mx-5 flex flex-col gap-10 overflow-x-hidden max-sm:m-0 max-sm:px-5;
   }
 
   .imgUploadBox {
@@ -56,6 +53,20 @@
 
   #writeContents {
     @apply flex flex-col min-h-[31.25rem];
+  }
+
+  /* 모바일 적응용 스타일 */
+
+  .ant-btn.fixedBtn {
+    @apply fixed bottom-12 right-5 z-10;
+  }
+
+  .md-nav {
+    @apply w-full flex justify-between border-t items-center fixed left-0 bottom-0 z-50 bg-white p-3;
+  }
+
+  .recentPrdBox {
+    @apply bottom-[6.25rem] right-[10px] w-fit h-fit hidden;
   }
 }
 
