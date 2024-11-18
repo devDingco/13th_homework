@@ -3,20 +3,19 @@
 import Icon from "@/components/icon-factory";
 import { useBoardList } from "@/components/board-list/hook";
 import SearchBox from "@/components/search-box";
-import { Button, Table } from "antd";
-import styles from "./styles.module.scss";
+import { Button } from "antd";
+import TableList from "@/components/table-list/page";
+import { DataType } from "./types";
 
 export default function BoardList({ searchBox }: { searchBox?: boolean }) {
   const {
     data,
     listItemMouseHandler,
-    detailPageHandler,
+    tableItemOnClick,
     dataSource,
     columns,
     fetchBoardsCount,
-    pageChangeHandler,
     router,
-    page,
     refetch,
     countDataRefetch,
   } = useBoardList();
@@ -38,46 +37,21 @@ export default function BoardList({ searchBox }: { searchBox?: boolean }) {
           </Button>
         </div>
       )}
-      <div className="shadow-[0_0_15px_0_rgba(0,0,0,0.1)] rounded-2xl px-12 py-5">
-        <div className="overflow-x-auto">
-          <Table
-            id={styles.boardList}
-            dataSource={dataSource.length === 0 ? [] : dataSource}
-            columns={columns}
-            size="small"
-            onRow={(record) => {
-              return {
-                onClick: (event) =>
-                  detailPageHandler(event, record.deleteBoard || ""),
-                onMouseOver: (event) => listItemMouseHandler(event, "over"),
-                onMouseLeave: (event) => listItemMouseHandler(event, "leave"),
-              };
-            }}
-            pagination={{
-              position: ["none", "bottomCenter"],
-              // pageSize: Number(data?.fetchBoards.length) || 10,
-              current: page,
-              defaultPageSize: 10,
-              responsive: true,
-              total: fetchBoardsCount,
-              showTotal: (total) => `총 게시글 수 : ${total}`,
-              defaultCurrent: 1,
-              showLessItems: false,
-              onShowSizeChange: (current, size) => {
-                console.log(current, size);
-              },
-              onChange: (page) => {
-                //pageSize
-                pageChangeHandler(page);
-              },
-              showSizeChanger: false,
-              showQuickJumper: true,
-            }}
-            tableLayout="auto"
-            loading={data === undefined}
-          />
-        </div>
-      </div>
+
+      <TableList
+        isLoading={data === undefined}
+        refetch={refetch}
+        tableItemHandler={(record: DataType) => ({
+          onClick: () => tableItemOnClick(record._id || ""),
+          onMouseOver: (e: React.MouseEvent<HTMLTableRowElement>) =>
+            listItemMouseHandler(e, "over", record._id || ""),
+          onMouseLeave: (e: React.MouseEvent<HTMLTableRowElement>) =>
+            listItemMouseHandler(e, "leave", record._id || ""),
+        })}
+        dataSource={dataSource}
+        columns={columns}
+        totalCount={fetchBoardsCount || 0}
+      />
     </>
   );
 }
