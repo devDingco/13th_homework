@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, InputRef, Modal } from "antd";
+import { Button, Modal } from "antd";
 import Input from "@/components/input";
 import { useModalAlertBox } from "@/components/modal-alert-box/hook";
 import {
@@ -9,16 +9,18 @@ import {
   ExclamationCircleFilled,
   WarningFilled,
 } from "@ant-design/icons";
-import { IModalTypeAndContents } from "./types";
-import { useEffect, useMemo } from "react";
+import type { IModalTypeAndContents, IModalTypeName } from "./types";
+import { useMemo } from "react";
 import { FormProvider } from "react-hook-form";
-import { set } from "lodash";
+import { useRouter } from "next/navigation";
 
 export default function ModalAlertBox() {
-  const { modalClose, isModal, methods, setIsModal } = useModalAlertBox();
+  const router = useRouter();
+  const { removeModal, isModal, setIsModal, methods, isModalKeys } =
+    useModalAlertBox();
 
   const successIcon = (
-    <CheckCircleFilled style={{ fontSize: "40px", color: "#52c41a" }} />
+    <CheckCircleFilled style={{ fontSize: "40px", color: "#1890ff" }} />
   );
   const errorIcon = (
     <ExclamationCircleFilled style={{ fontSize: "40px", color: "#faad14" }} />
@@ -30,24 +32,87 @@ export default function ModalAlertBox() {
     <WarningFilled style={{ fontSize: "40px", color: "#ff4d4f" }} />
   );
 
-  useEffect(() => {
-    if (isModal.type === "commentDeletePasswordCheck") {
-      methods.setFocus("commentDeletePassword");
-    }
-  }, [isModal.isModalOpen]);
-
-  const modalTypeAndContents: IModalTypeAndContents = useMemo(
+  const modalTypeAndContents: IModalTypeAndContents<IModalTypeName> = useMemo(
     () => ({
-      commentDeletePasswordCheck: {
+      login_confirm: {
+        contents: (
+          <>
+            <h3>
+              로그인이 필요합니다.
+              <br /> 로그인 페이지로 이동하시겠습니까?
+            </h3>
+            <Button
+              size="large"
+              variant="solid"
+              color="primary"
+              className="w-full"
+              onClick={() => {
+                removeModal("login_confirm");
+                router.push("/login");
+              }}
+            >
+              로그인하기
+            </Button>
+            <Button
+              size="large"
+              // varian
+              color="default"
+              className="w-full"
+              onClick={() => {
+                removeModal("login_confirm");
+                router.back();
+              }}
+            >
+              이전 페이지로 가기
+            </Button>
+          </>
+        ),
+        icon: infoIcon,
+        customFooter: true,
+      },
+      login_check_stay: {
+        contents: (
+          <>
+            <h3>
+              로그인이 필요합니다.
+              <br /> 로그인 페이지로 이동하시겠습니까?
+            </h3>
+            <Button
+              size="large"
+              variant="solid"
+              color="primary"
+              className="w-full"
+              onClick={() => {
+                removeModal("login_check_stay");
+                router.push("/login");
+              }}
+            >
+              로그인하기
+            </Button>
+            <Button
+              size="large"
+              // varian
+              color="default"
+              className="w-full"
+              onClick={() => removeModal("login_check_stay")}
+            >
+              취소
+            </Button>
+          </>
+        ),
+        icon: infoIcon,
+        customFooter: true,
+      },
+      delete_password_check: {
         contents: (
           <>
             <p>
-              댓글을 삭제하시려면
+              삭제하시려면
               <br /> 비밀번호를 입력해 주세요.
             </p>
             <FormProvider {...methods}>
               <Input
-                id="commentDeletePassword"
+                id="deletePassword"
                 type="password"
                 defaultValue=""
                 placeholder="비밀번호를 입력해 주세요."
@@ -58,8 +123,8 @@ export default function ModalAlertBox() {
                   variant="solid"
                   className="w-full"
                   onClick={() => {
-                    modalClose();
                     methods.reset(); // 비밀번호 입력값 초기화
+                    removeModal("delete_password_check"); // 비밀번호 확인 모달 닫기
                   }}
                 >
                   취소
@@ -69,19 +134,21 @@ export default function ModalAlertBox() {
                   variant="solid"
                   color="primary"
                   className="w-full"
-                  onClick={() =>
-                    methods.handleSubmit(() => {
-                      const value = methods.getValues("commentDeletePassword");
-                      if (value !== "") {
-                        isModal.confirm?.(value);
-                        methods.reset(); // 비밀번호 입력값 초기화
-                      } else {
-                        console.log("비밀번호를 입력해 주세요.");
-                        setIsModal({ type: "commentEditPasswordRequired" });
-                      }
-                      // modalClose();
-                    })()
-                  }
+                  onClick={methods.handleSubmit(() => {
+                    const value = methods.getValues("deletePassword");
+                    console.log(value);
+                    if (value !== "") {
+                      const confirm = isModal.delete_password_check.confirm;
+                      if (confirm) confirm(value); // 비밀번호 확인 함수 실행
+                      methods.reset(); // 비밀번호 입력값 초기화
+                    } else {
+                      console.log("비밀번호를 입력해 주세요.");
+                      setIsModal({
+                        name: "required",
+                        contents: "비밀번호를 입력해 주세요.",
+                      });
+                    }
+                  })}
                 >
                   확인
                 </Button>
@@ -92,84 +159,93 @@ export default function ModalAlertBox() {
         icon: infoIcon,
         customFooter: true,
       },
-      commentNewSubmit: {
-        contents: "댓글 등록이 완료되었습니다.",
+      success: {
+        contents: isModal.success?.contents,
         icon: successIcon,
       },
-      commentEditSubmit: {
-        contents: "댓글 수정이 완료되었습니다.",
-        icon: successIcon,
+      required: {
+        contents: isModal.required?.contents ?? "필수 입력값을 입력해 주세요.",
+        icon: infoIcon,
       },
-      deleteCommentSuccess: {
-        contents: "댓글 삭제가 완료되었습니다.",
-        icon: successIcon,
-      },
-      commentEditPasswordRequired: {
-        contents: "비밀번호를 입력해 주세요.",
+      error: {
+        contents:
+          isModal.error?.contents ?? "예상치 못한 오류가 발생하였습니다.",
         icon: errorIcon,
       },
-      commentEditPasswordError: {
-        contents: "비밀번호가 일치하지 않습니다.",
-        icon: errorIcon,
-      },
-      boardEditSubmit: {
-        contents: "게시글 수정이 완료되었습니다.",
-        icon: successIcon,
-      },
-      boardEditPasswordError: {
-        contents: "비밀번호가 일치하지 않습니다.",
-        icon: errorIcon,
-      },
-      ErrorUnknown: {
-        contents: "예상치 못한 오류가 발생하였습니다.",
-        icon: warningIcon,
-      },
-      boardNewRequired: {
-        contents: "필수 입력값을 입력해 주세요.",
-        icon: errorIcon,
-      },
-      boardNewSubmit: {
-        contents: "게시글 등록이 완료되었습니다.",
-        icon: successIcon,
-      },
-      productQuestionEdit: {
-        contents: "질문이 수정되었습니다.",
-        icon: successIcon,
+      delete_check: {
+        contents: (
+          <>
+            <h3>정말 삭제하시겠습니까?</h3>
+            <div className="flex gap-3">
+              <Button
+                size="large"
+                variant="solid"
+                color="primary"
+                className="w-full"
+                onClick={() => {
+                  const confirm = isModal.delete_confirm.confirm;
+                  if (confirm) confirm(); // 삭제 처리 함수 실행
+                }}
+              >
+                삭제하기
+              </Button>
+              <Button
+                size="large"
+                // varian
+                color="default"
+                className="w-full"
+                onClick={() => removeModal("delete_check")}
+              >
+                취소
+              </Button>
+            </div>
+          </>
+        ),
+        icon: infoIcon,
+        customFooter: true,
       },
     }),
     []
   );
 
-  if (isModal.type === "" || !isModal.isModalOpen) return null;
-
-  return (
-    <Modal
-      centered={true}
-      open={true}
-      onOk={() => modalClose()}
-      onCancel={() => modalClose()}
-      footer={null}
-      width={300}
-    >
-      <div className="flex flex-col gap-3 items-center">
-        {modalTypeAndContents[isModal.type].icon}
-        <div className="font-bold text-lg text-center flex flex-col gap-3 w-full">
-          {modalTypeAndContents[isModal.type].contents}
-        </div>
-        {!modalTypeAndContents[isModal.type].customFooter ? (
-          <Button
-            size="large"
-            variant="solid"
-            color="primary"
-            className="w-full"
-            onClick={() => modalClose()}
-          >
-            확인
-          </Button>
-        ) : (
-          modalTypeAndContents[isModal.type].customFooter
-        )}
-      </div>
-    </Modal>
-  );
+  return isModalKeys.map((modalName, index) => {
+    const key = modalName as keyof IModalTypeAndContents<IModalTypeName>;
+    if (Object.keys(isModal).length > 0)
+      return (
+        <Modal
+          key={modalName + index}
+          centered={true}
+          open={true}
+          onOk={() => !modalName.includes("_confirm") && removeModal(key)}
+          onCancel={() => {
+            removeModal(key);
+            if (modalName.includes("_confirm")) {
+              router.back();
+            }
+          }}
+          footer={null}
+          width={300}
+        >
+          <div className="flex flex-col gap-3 items-center">
+            {modalTypeAndContents[key].icon}
+            <div className="font-bold text-lg text-center flex flex-col gap-3 w-full">
+              {modalTypeAndContents[key].contents}
+            </div>
+            {!modalTypeAndContents[key].customFooter ? (
+              <Button
+                size="large"
+                variant="solid"
+                color="primary"
+                className="w-full"
+                onClick={() => removeModal(key)}
+              >
+                확인
+              </Button>
+            ) : (
+              modalTypeAndContents[key].customFooter
+            )}
+          </div>
+        </Modal>
+      );
+  });
 }
