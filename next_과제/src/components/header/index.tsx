@@ -2,16 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button, Select } from "antd";
-import Icon from "@/components/icon-factory";
+import Icon, { IconType } from "@/components/icon-factory";
 import { useHeader } from "./hook";
 import styles from "./index.module.scss";
-import { useLoginStore } from "@/commons/stores/login-store";
+import RecentViewProducts from "@/components/product-recent";
 
-const Header = () => {
-  const { isLogged } = useLoginStore();
-
-  // console.log("로그인 상태",isLogged);
-
+export default function Header() {
   const {
     isHeaderHide,
     menuItems,
@@ -28,6 +24,9 @@ const Header = () => {
     chargeOptions,
     myInfoPopToggle,
     myInfoPopRef,
+    recentViewProductRef,
+    recentViewProductToggle,
+    isLogin,
   } = useHeader();
 
   if (!isHeaderHide)
@@ -75,9 +74,14 @@ const Header = () => {
           </div>
         )}
 
+        {/* 최근본상품 */}
+        <div ref={recentViewProductRef}>
+          <RecentViewProducts />
+        </div>
+
         <header
           onMouseLeave={() => menuMouseLeave()}
-          className="max-w-7xl flex justify-between items-center m-auto p-4 navbar max-xl:pr-24"
+          className="max-w-7xl flex justify-between items-center m-auto p-4 navbar max-sm:px-5 max-xl:pr-24"
         >
           <nav className="flex items-center gap-6">
             <h1>
@@ -92,14 +96,33 @@ const Header = () => {
                 />
               </Link>
             </h1>
-            <ul id={styles.menu} ref={menuItemRef} data-header-leave="false">
+            <ul
+              id={styles.menu}
+              ref={menuItemRef}
+              data-header-leave="false"
+              className="max-sm:md-nav"
+            >
               {menuItems.map((item, idx) => (
                 <li
                   key={idx}
                   onMouseOver={(e) => menuMouseOver(e)}
                   className={item.children ? styles.subMenuParent : ""}
                 >
-                  <Link href={item.key || "#"}>
+                  <Link
+                    href={item.key || "#"}
+                    onClick={() => {
+                      if (item.label === "최근본상품") {
+                        recentViewProductToggle();
+                      }
+                    }}
+                    className="flex flex-col gap-1 items-center"
+                  >
+                    {item.icon && (
+                      <Icon
+                        icon={item.icon as IconType}
+                        className="w-6 h-6 hidden max-sm:block"
+                      />
+                    )}
                     <span>{item.label}</span>
                   </Link>
                   {item.children && (
@@ -121,7 +144,7 @@ const Header = () => {
             </ul>
           </nav>
           <div className="flex gap-6">
-            {isLogged ? (
+            {isLogin ? (
               <div className="flex justify-end items-center relative">
                 <button
                   className="flex gap-1 items-center"
@@ -219,5 +242,4 @@ const Header = () => {
         </header>
       </>
     );
-};
-export default Header;
+}
