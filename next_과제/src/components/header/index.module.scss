@@ -12,9 +12,15 @@
 
     a {
       padding: 0.5rem;
+      @media screen and (max-width: 768px) {
+        opacity: 0.4;
+      }
     }
 
     &.active {
+      a {
+        opacity: 1;
+      }
       .subMenu {
         display: block;
       }
@@ -28,6 +34,10 @@
     color: var(--text-color);
     font-weight: bold;
     border-bottom: 2px solid var(--text-color);
+    @media screen and (max-width: 768px) {
+      border-bottom: none;
+      opacity: 1;
+    }
     span {
       color: var(--text-color) !important;
     }
