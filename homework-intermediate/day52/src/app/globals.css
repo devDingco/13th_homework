@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src: url('/fonts/Pretendard-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'HakgyoansimDunggeunmisoTTF-B';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+body {
+	font-family: 'Pretendard-Regular' !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+	display: none;
+}
+.swiper-button-prev,
+.swiper-button-next {
+	--swiper-navigation-size: 44px;
+	--swiper-navigation-top-offset: 50%;
+	--swiper-navigation-sides-offset: 10px;
+	--swiper-navigation-color: rgba(
+		255,
+		255,
+		255,
+		0.9
+	); /* 원하는 색상으로 설정 */
+}
+
+/* :root {
+  --foreground-rgb: 0 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
