@@ -1,5 +1,5 @@
 import { Rate } from "antd";
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import Icon from "@/components/icon-factory";
 import CommentWrite from "@/components/board-detail/comment-write";
 import useCommentItem from "@/components/board-detail/comment-item/hook";
@@ -9,8 +9,7 @@ import { IcommentItem } from "@/components/board-detail/comment-list/types";
 export default function CommentItem(props: IcommentItem) {
   const { commentData, starCountBox, reply } = props;
 
-  const { isEdit, editModeHandler, commentDelete, isModal, setIsModal } =
-    useCommentItem();
+  const { isEdit, editModeHandler, commentDelete } = useCommentItem();
 
   return (
     <div className="flex flex-col gap-2 py-10 border-t first:border-0">
