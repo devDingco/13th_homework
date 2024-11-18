@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLayout } from "@/commons/hooks/useLayout";
 import * as PortOne from "@portone/browser-sdk/v2";
@@ -12,15 +13,16 @@ import {
   CreatePointTransactionOfLoadingDocument,
 } from "@/commons/graphql/graphql";
 import { useUserInfo } from "@/commons/stores/user-info-store";
-
-import { useQuery, useMutation } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
+import { useQuery, useMutation } from "@apollo/client";
 import {
   menuItems as menuItemsArr,
   chargeOptions as changeOption,
 } from "./constants";
+import { useLoginCheck } from "@/commons/hooks/useLoginCheck";
 
 export const useHeader = () => {
+  const { isLogin, setIsLogin } = useLoginCheck();
   const { setUserInfo } = useUserInfo();
   const { isHeaderHide } = useLayout();
   const router = useRouter();
@@ -28,6 +30,8 @@ export const useHeader = () => {
   const menuItemRef = useRef<HTMLUListElement>(null);
   const [chargeModalVisible, setChargeModalVisible] = useState(false);
   const [chargePrice, setChargePrice] = useState(0);
+
+  const recentViewProductRef = useRef<HTMLDivElement>(null);
 
   const menuItems = useMemo(() => menuItemsArr, []);
   const chargeOptions = useMemo(() => changeOption, []);
@@ -113,9 +117,11 @@ export const useHeader = () => {
   const { setAccessToken } = useAccessTokenStore();
   const [logoutUser] = useMutation(LogoutUserDocument);
   const userLogOut = async () => {
+    console.log("로그아웃");
     try {
       await logoutUser();
-      setAccessToken("");
+      setAccessToken(""); // 토큰 삭제
+      setIsLogin(false); // 로그인 상태 변경
     } catch (error) {
       console.error(error);
     }
@@ -147,6 +153,17 @@ export const useHeader = () => {
     myInfoPopRef.current?.classList.toggle("hidden");
   };
 
+  // 모바일에서 최근본상품 노출 처리용 함수
+  //!! 정상작동안함 확인필요
+  const recentViewProductToggle = () => {
+    (recentViewProductRef.current?.firstChild as HTMLElement)?.classList.remove(
+      "hidden"
+    );
+    console.log(
+      (recentViewProductRef.current?.firstChild as HTMLElement)?.classList
+    );
+  };
+
   return {
     isHeaderHide,
     menuItems,
@@ -163,5 +180,8 @@ export const useHeader = () => {
     chargeOptions,
     myInfoPopToggle,
     myInfoPopRef,
+    recentViewProductRef,
+    recentViewProductToggle,
+    isLogin,
   };
 };
