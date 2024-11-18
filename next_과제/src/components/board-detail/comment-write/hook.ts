@@ -63,7 +63,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         ],
       });
 
-      setIsModal({ name: "commentNewSubmit", isModalOpen: true }); // 댓글 등록 완료 모달
+      setIsModal({ name: "success", contents: "댓글 등록이 완료되었습니다." }); // 댓글 등록 완료 모달
 
       // 입력창 초기화
       methods.setValue("commentWriter", "");
@@ -72,7 +72,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       methods.setValue("commentRating", 0);
     } catch (error) {
       if (error instanceof Error) {
-        setIsModal({ name: "ErrorUnknown", isModalOpen: true }); // 예상치 못한 오류 모달
+        setIsModal({ name: "error" }); // 예상치 못한 오류 모달
       }
     }
   };
@@ -95,8 +95,8 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         editCommentData.updateBoardCommentInput.rating = commentRating;
       if (commentPassword === "")
         return setIsModal({
-          name: "commentEditPasswordRequired",
-          isModalOpen: true,
+          name: "required",
+          contents: "비밀번호를 입력해 주세요.",
         }); // 비밀번호 미입력시 안내 모달
 
       await updateBoardComment({
@@ -109,16 +109,19 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
         ],
       });
 
-      setIsModal({ name: "commentEditSubmit" }); // 댓글 수정 완료 모달
+      setIsModal({ name: "success", contents: "댓글 수정이 완료되었습니다." }); // 댓글 수정 완료 모달
 
       if (editModeHandler) {
         editModeHandler(); // 수정 모드 종료
       }
     } catch (error) {
       if (error instanceof Error) {
-        setIsModal({ name: "commentEditPasswordError" }); // 비밀번호 불일치 안내 모달
+        setIsModal({
+          name: "error",
+          contents: "비밀번호가 일치하지 않습니다.",
+        }); // 비밀번호 불일치 안내 모달
       } else {
-        setIsModal({ name: "ErrorUnknown" }); // 예상치 못한 오류 모달
+        setIsModal({ name: "error" }); // 예상치 못한 오류 모달
       }
     }
   };

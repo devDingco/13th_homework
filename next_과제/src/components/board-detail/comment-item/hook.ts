@@ -20,7 +20,7 @@ const useCommentItem = () => {
   const commentDelete = async (commentId: string) => {
     // 비밀번호 확인 모달
     setIsModal({
-      name: "commentDeletePasswordCheck",
+      name: "delete_password_check",
       confirm: async (value) => {
         try {
           await deleteComment({
@@ -35,37 +35,14 @@ const useCommentItem = () => {
               },
             ],
           });
-          setIsModal({ name: "deleteCommentSuccess" }); // 삭제 성공 모달
+          setIsModal({ name: "success", contents: "댓글이 삭제되었습니다." }); // 삭제 성공 모달
         } catch (error) {
           if (error instanceof Error) {
-            alert(`${error.message}`);
-          } else {
-            alert("An unknown error occurred");
+            setIsModal({ name: "error", contents: `${error.message}` });
           }
         }
       },
     });
-    // try {
-    //   await deleteComment({
-    //     variables: {
-    //       password: isModal.confirm?.password,
-    //       boardCommentId: commentId,
-    //     },
-    //     refetchQueries: [
-    //       {
-    //         query: FetchBoardCommentsDocument,
-    //         variables: { boardId: boardId },
-    //       },
-    //     ],
-    //   });
-    //   setIsModal({ type: "deleteCommentSuccess" }); // 삭제 성공 모달
-    // } catch (error) {
-    //   if (error instanceof Error) {
-    //     alert(`${error.message}`);
-    //   } else {
-    //     alert("An unknown error occurred");
-    //   }
-    // }
   };
 
   // 댓글 수정 모드

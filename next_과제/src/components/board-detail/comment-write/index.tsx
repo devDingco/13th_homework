@@ -6,7 +6,6 @@ import { IcommentWriteProps } from "@/components/board-detail/comment-write/type
 import { useCommentWrite } from "@/components/board-detail/comment-write/hook";
 import { Rate, Button } from "antd";
 import { Controller, FormProvider } from "react-hook-form";
-import ModalAlertBox from "@/components/modal-alert-box";
 
 export default function CommentWrite(props: IcommentWriteProps) {
   const { type, starCountBox, data, editModeHandler, commentId } = props;
