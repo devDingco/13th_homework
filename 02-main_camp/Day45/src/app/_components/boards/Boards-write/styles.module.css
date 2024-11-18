@@ -1,0 +1,109 @@
+.rootContainer {
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.headerContainer {
+  width: 100%;
+  color: black;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.mainContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.inputFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputFormTitle {
+  display: flex;
+  gap: 0.5rem;
+
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.inputFormText {
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.inputTextArea {
+  height: 21rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.AddressFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin-top: 2.5rem;
+}
+
+.zipCodeContainer {
+  display: flex;
+  gap: 0.5rem;
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.zipCodeSearchButton {
+  width: 8.125rem;
+  height: 3rem;
+  background-color: #ffffff;
+  color: black;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid black;
+}
+
+.userInputForm {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cancelButton {
+  width: 4rem;
+  height: 3rem;
+  background-color: #f2f2f2;
+  color: black;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid black;
+}
+
+.submitButton {
+  width: 5.9375rem;
+  height: 3rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  border: none;
+}

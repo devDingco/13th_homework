@@ -1,0 +1,72 @@
+.button__wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-wrap: nowrap;
+}
+
+.button__medium {
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+
+  font-size: 0.875rem;
+}
+
+.button__large {
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  font-size: 1.125rem;
+}
+
+.button__variant__primary {
+  background-color: #2974e5;
+  color: white;
+  font-weight: 600;
+}
+
+.button__variant__secondary {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+
+.button__variant__tertiary {
+  background-color: white;
+
+  border: 0.0625rem solid black;
+
+  color: black;
+  font-weight: 600;
+}
+
+.button__login {
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 6.25rem;
+  background-color: black;
+}
+
+.button__login span {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.button__disabled {
+  background-color: #2974e5;
+  opacity: 50%;
+}

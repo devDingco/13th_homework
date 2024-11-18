@@ -1,0 +1,95 @@
+.myPageContainer {
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.header {
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.75rem;
+  color: black;
+}
+
+.myInfoContainer {
+  width: 100%;
+  border-radius: 1.125rem;
+  border: 0.0625rem solid #e4e4e4;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 1.5rem;
+}
+
+.myInfoContainer p {
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.profileContainer {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+}
+
+.profileContainer span {
+  font-weight: 400;
+  color: #333333;
+  font-size: 1rem;
+}
+
+.myPointContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.pointContainer {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.walletIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.myPointContainer span {
+  color: black;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.myPageMenus {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 0.5rem;
+
+  color: black;
+  font-weight: 400;
+  font-size: 1rem;
+
+  padding: 0.5rem 0.75rem;
+
+  cursor: pointer;
+}
+
+.selectedMenu {
+  background-color: #f2f2f2;
+}
+
+.rightArrowIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
