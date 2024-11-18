@@ -11,6 +11,5 @@ export const useBoardDetail = () => {
     variables: { boardId },
   });
   const detailData = data?.fetchBoard;
-
   return { detailData, boardId, error, loading };
 };
