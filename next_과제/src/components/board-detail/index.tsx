@@ -4,7 +4,7 @@ import { Button, Tooltip, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import Image from "next/image";
 
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import { useBoardDetail } from "@/components/board-detail/hook";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
