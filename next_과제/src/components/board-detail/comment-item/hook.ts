@@ -4,7 +4,7 @@ import {
   DeleteBoardCommentDocument,
   FetchBoardCommentsDocument,
 } from "@/commons/graphql/graphql";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useModalStore } from "@/commons/stores/modal-store";
@@ -20,7 +20,7 @@ const useCommentItem = () => {
   const commentDelete = async (commentId: string) => {
     // 비밀번호 확인 모달
     setIsModal({
-      type: "commentDeletePasswordCheck",
+      name: "commentDeletePasswordCheck",
       confirm: async (value) => {
         try {
           await deleteComment({
@@ -35,7 +35,7 @@ const useCommentItem = () => {
               },
             ],
           });
-          setIsModal({ type: "deleteCommentSuccess" }); // 삭제 성공 모달
+          setIsModal({ name: "deleteCommentSuccess" }); // 삭제 성공 모달
         } catch (error) {
           if (error instanceof Error) {
             alert(`${error.message}`);
