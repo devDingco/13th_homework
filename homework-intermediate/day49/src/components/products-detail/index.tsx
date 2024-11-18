@@ -151,7 +151,7 @@ export default function ProductDetail(props) {
 									dangerouslySetInnerHTML={{
 										__html: DOMPurify.sanitize(
 											data?.fetchTravelproduct.contents ?? '',
-										),
+										),``
 									}}
 								/>
 							) : (
