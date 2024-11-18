@@ -2,29 +2,48 @@
 
 import { create } from "zustand";
 import type { IUseModalType } from "@/components/modal-alert-box/types";
+
 export interface IUseModalStore {
   isModal: {
-    type: IUseModalType["type"] | "";
-    isModalOpen?: boolean;
-    confirm?: (value: string) => Promise<void>;
+    [name in IUseModalType]: {
+      isModalOpen?: boolean;
+      confirm?: (value: string) => Promise<void>;
+    };
   };
   setIsModal: ({
-    type,
+    name,
     isModalOpen,
     confirm,
   }: {
-    type: IUseModalType["type"];
+    name: IUseModalType;
     isModalOpen?: boolean;
     confirm?: (value: string) => Promise<void>;
   }) => void;
 }
 
 export const useModalStore = create<IUseModalStore>((set) => ({
-  isModal: {
-    type: "",
-    isModalOpen: true,
-    confirm: async () => {},
-  },
-  setIsModal: ({ type, isModalOpen = true, confirm = async () => {} }) =>
-    set(() => ({ isModal: { type, isModalOpen, confirm } })),
+  isModal: {} as IUseModalStore["isModal"],
+  setIsModal: ({
+    name,
+    isModalOpen = true,
+    confirm = async () => {},
+  }: {
+    name: IUseModalType;
+    isModalOpen?: boolean;
+    confirm?: (value: string) => Promise<void>;
+  }) =>
+    set((state) => ({
+      isModal: {
+        ...state.isModal,
+        [name]: { isModalOpen, confirm },
+      },
+    })),
 }));
+
+// setIsModal({
+//   key: "login_confirm",
+//   isModalOpen: true,
+//   confirm: async (value) => {
+//     console.log(value);
+//   },
+// })
