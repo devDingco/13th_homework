@@ -2,7 +2,6 @@
 import Input from "@/components/input";
 import PostSearchPopBtn from "@/components/post-search-pop-btn";
 import ReactQuillBox from "@/components/react-quill-box";
-import ModalAlertBox from "@/components/modal-alert-box";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Image, Upload } from "antd";
 import { useBoardWrite } from "@/components/board-write/hook";
@@ -17,10 +16,10 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
     params,
     previewImage,
     previewOpen,
+    handlePreview,
     setPreviewImage,
     setPreviewOpen,
     handleChangeImg,
-    isModalOpen,
     imgFileList,
     onChangeWriteContents,
     methods,
@@ -29,7 +28,6 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
 
   return (
     <>
-      {isModalOpen && <ModalAlertBox />}
       <h3 className="text-2xl font-bold">
         {isEdit ? "게시글 수정" : "게시글 등록"}
       </h3>
@@ -144,11 +142,11 @@ export default function BoardWrite({ isEdit }: { isEdit: boolean }) {
               <Upload
                 listType="picture-card"
                 accept="image/jpeg, image/png"
-                fileList={imgFileList.map((file) => ({
-                  ...file,
-                  url: `${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${file.url}`,
-                }))}
+                fileList={imgFileList.map((file) => {
+                  return file;
+                })}
                 onChange={handleChangeImg}
+                onPreview={handlePreview}
               >
                 {imgFileList.length >= 3 ? null : (
                   <button
