@@ -22,16 +22,14 @@ export default function ApolloUploadSetting(props: IApolloUploadSetting) {
   const { accessToken, setAccessToken } = useAccessTokenStore();
   const { setIsLoaded } = useLoadStore(); // 로딩 상태를 저장하는 스토어
 
-  // 3. 프리렌더링 무시 - useEffect 방법
   useEffect(() => {
-    // 3-1) 기존방식(refreshToken 이전)
-    // const result = localStorage.getItem("accessToken") ?? "";
-    // setAccessToken(result);
-
-    // 3-2) 새로운방식(refreshToken 이후)
+    // 1. 앱이 처음 로드될 때 accessToken을 가져오기
+    // 2. accessToken이 있으면 setAccessToken으로 저장하기 (없으면 빈 문자열로 저장)
     getAccessToken()
       .then((newAccessToken) => {
-        if (newAccessToken) setAccessToken(newAccessToken);
+        if (newAccessToken) {
+          setAccessToken(newAccessToken);
+        }
       })
       .finally(setIsLoaded);
   }, []);
