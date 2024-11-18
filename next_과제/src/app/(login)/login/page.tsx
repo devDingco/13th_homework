@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Input from "@/components/input";
@@ -7,12 +8,12 @@ import { Button } from "antd";
 import { FormProvider } from "react-hook-form";
 
 export default function LoginPage() {
-  const { signInSubmit, router, userLogOut, methods } = useLoginPage();
+  const { signInSubmit, router, methods } = useLoginPage();
 
   return (
     <>
       <h1>
-        <Link href={"/"}>
+        <Link href="/">
           <Image
             src="/images/logo.png"
             alt="트립트립"
@@ -58,10 +59,6 @@ export default function LoginPage() {
         >
           회원가입
         </Button>
-
-        {/* <Button color="default" variant="outlined" onClick={() => userLogOut()}>
-          로그아웃
-        </Button> */}
       </div>
     </>
   );
