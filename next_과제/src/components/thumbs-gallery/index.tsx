@@ -24,6 +24,8 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
         <Swiper
           loop={true}
           spaceBetween={10}
+          slidesPerView={1}
+          slidesPerGroup={1}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Thumbs]}
           className="mySwiper2"
@@ -41,9 +43,10 @@ export default function ThumbsGallery({ images }: { images: string[] }) {
         </Swiper>
         <Swiper
           onSwiper={(swiper: SwiperType) => setThumbsSwiper(swiper)}
-          loop={true}
+          loop={images?.length > 4}
           spaceBetween={10}
-          slidesPerView="auto"
+          slidesPerView={3.5}
+          slidesPerGroup={1}
           freeMode={true}
           // centeredSlides={true}
           watchSlidesProgress={true}
