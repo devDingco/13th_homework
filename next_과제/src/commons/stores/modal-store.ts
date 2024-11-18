@@ -1,49 +1,38 @@
 "use client";
 
 import { create } from "zustand";
-import type { IUseModalType } from "@/components/modal-alert-box/types";
 
-export interface IUseModalStore {
+interface IUseModalStore {
   isModal: {
-    [name in IUseModalType]: {
-      isModalOpen?: boolean;
-      confirm?: (value: string) => Promise<void>;
+    [name in string]: {
+      contents: string | JSX.Element;
+      confirm?: (value?: string) => Promise<void>;
     };
   };
   setIsModal: ({
     name,
-    isModalOpen,
+    contents,
     confirm,
   }: {
-    name: IUseModalType;
-    isModalOpen?: boolean;
-    confirm?: (value: string) => Promise<void>;
+    name?: string;
+    contents?: string | JSX.Element;
+    confirm?: (value?: string) => Promise<void>;
   }) => void;
+  removeModal: (name: string) => void;
 }
 
 export const useModalStore = create<IUseModalStore>((set) => ({
   isModal: {} as IUseModalStore["isModal"],
-  setIsModal: ({
-    name,
-    isModalOpen = true,
-    confirm = async () => {},
-  }: {
-    name: IUseModalType;
-    isModalOpen?: boolean;
-    confirm?: (value: string) => Promise<void>;
-  }) =>
+  setIsModal: ({ name, contents, confirm }) =>
     set((state) => ({
       isModal: {
         ...state.isModal,
-        [name]: { isModalOpen, confirm },
+        ...(name ? { [name]: { contents: contents || "", confirm } } : {}),
       },
     })),
+  removeModal: (name: string) =>
+    set((state) => {
+      const { [name]: _, ...rest } = state.isModal; // eslint-disable-line @typescript-eslint/no-unused-vars
+      return { isModal: rest };
+    }),
 }));
-
-// setIsModal({
-//   key: "login_confirm",
-//   isModalOpen: true,
-//   confirm: async (value) => {
-//     console.log(value);
-//   },
-// })
