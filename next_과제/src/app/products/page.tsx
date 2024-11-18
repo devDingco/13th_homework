@@ -2,7 +2,6 @@ import MainSlide from "@/components/main-slide";
 import ProductList from "@/components/product-list";
 import ProductRecommended from "@/components/product-recommended";
 import ProductLineBanner from "@/components/product-line-banner";
-import RecentViewProducts from "@/components/product-recent";
 
 export default function ProductsPage() {
   return (
@@ -14,7 +13,6 @@ export default function ProductsPage() {
           <ProductLineBanner />
           <ProductList />
         </div>
-        <RecentViewProducts />
       </div>
     </>
   );
