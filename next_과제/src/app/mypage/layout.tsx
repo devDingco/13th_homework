@@ -12,4 +12,4 @@ function MyPageLayout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-export default withAuth(MyPageLayout);
+export default withAuth(MyPageLayout)(true);
