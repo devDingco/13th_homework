@@ -2,10 +2,12 @@
 export const menuItems = [
   {
     label: "트립토크",
+    icon: "triptalk",
     key: "/",
   },
   {
     label: "숙박권구매",
+    icon: "store",
     key: "/products",
     children: [
       {
@@ -16,17 +18,12 @@ export const menuItems = [
   },
   {
     label: "마이페이지",
+    icon: "mypage",
     key: "/mypage",
   },
   {
-    label: "게시글리스트",
-    key: "/boards",
-    children: [
-      {
-        label: "게시글등록",
-        key: "/boards/new",
-      },
-    ],
+    label: "최근본상품",
+    icon: "visibility",
   },
 ];
 
