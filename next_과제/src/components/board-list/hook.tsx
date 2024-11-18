@@ -1,21 +1,23 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import type { TableProps } from "antd";
 import type { DataType } from "@/components/board-list/types";
-import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useMutation, useQuery, useApolloClient } from "@apollo/client";
+import { useCallback, useState } from "react";
 import { KeywordActiveString } from "@/commons/ui/keyword-active-string";
 import {
   DeleteBoardDocument,
   FetchBoardsListDocument,
   FetchBoardsCountDocument,
+  FetchBoardDetailDocument,
 } from "@/commons/graphql/graphql";
 import Icon from "@/components/icon-factory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
 import { useSearch } from "@/commons/stores/search-store";
 import { useSearchDate } from "@/commons/stores/search-date-store";
+import _ from "lodash";
 
 export const useBoardList = () => {
   const router = useRouter();
@@ -41,15 +43,12 @@ export const useBoardList = () => {
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const postDelete = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    postId: string
+    boardId: string
   ) => {
-    console.log(postId);
     e.stopPropagation();
     try {
       await deleteBoard({
-        variables: {
-          boardId: postId,
-        },
+        variables: { boardId },
         refetchQueries: [
           {
             query: FetchBoardsListDocument,
@@ -68,29 +67,39 @@ export const useBoardList = () => {
     }
   };
 
+  // ! 마우스 1초 동안 오버시 게시글 아이템의 상세 내용 미리 리패치 처리
+  const client = useApolloClient();
+  const prefetchBoardDebounce = _.debounce((boardId: string) => {
+    client.query({
+      query: FetchBoardDetailDocument,
+      variables: { boardId },
+    });
+  }, 1000);
+
   // ! 마우스 오버시 삭제버튼 보이기
-  const listItemMouseHandler = (
-    e: React.MouseEvent<HTMLTableRowElement>,
-    type: string
-  ) => {
-    const target = e.currentTarget;
-    const childTarget = target.lastElementChild?.firstElementChild?.classList;
-    // console.log(childTarget);
-    if (type === "over") {
-      childTarget?.add("flex");
-      childTarget?.remove("hidden");
-    } else {
-      childTarget?.add("hidden");
-      childTarget?.remove("flex");
-    }
-  };
+  const listItemMouseHandler = useCallback(
+    (
+      e: React.MouseEvent<HTMLTableRowElement>,
+      type: string,
+      boardId: string
+    ) => {
+      const target = e.currentTarget;
+      const childTarget = target.lastElementChild?.firstElementChild?.classList;
+
+      if (type === "over") {
+        childTarget?.add("flex");
+        childTarget?.remove("hidden");
+        prefetchBoardDebounce(boardId);
+      } else {
+        childTarget?.add("hidden");
+        childTarget?.remove("flex");
+      }
+    },
+    []
+  );
 
   // ! 게시글 상세페이지 이동 처리
-  const detailPageHandler = (
-    e: React.MouseEvent<HTMLTableRowElement>,
-    postId: string
-  ) => {
-    // console.log("detail", postId);
+  const tableItemOnClick = (postId: string) => {
     router.push(`/boards/${postId}`);
   };
 
@@ -98,10 +107,12 @@ export const useBoardList = () => {
     length: data?.fetchBoards.length || 0,
   }).map<DataType>((_, idx) => ({
     key: String(idx + 1 + (page - 1) * 10),
+    _id: data?.fetchBoards[idx]._id || "",
     title: data?.fetchBoards[idx].title || "",
     writer: data?.fetchBoards[idx].writer || "",
     createdAt: dateViewSet(data?.fetchBoards[idx].createdAt),
-    deleteBoard: data?.fetchBoards[idx]._id || "",
+    youtubeUrl: data?.fetchBoards[idx].youtubeUrl || "",
+    images: data?.fetchBoards[idx].images || [],
   }));
 
   const columns: TableProps<DataType>["columns"] = [
@@ -116,15 +127,13 @@ export const useBoardList = () => {
       title: "제목",
       dataIndex: "title",
       key: "title",
-      render: (value, record, index) => (
+      render: (value, record) => (
         <div className="flex gap-2">
           <span>
             <KeywordActiveString value={value} />
           </span>
-          {data?.fetchBoards[index].youtubeUrl && (
-            <VideoCameraTwoTone twoToneColor="#ff4848" />
-          )}
-          {(data?.fetchBoards[index].images?.length ?? 0) > 0 && (
+          {record.youtubeUrl && <VideoCameraTwoTone twoToneColor="#ff4848" />}
+          {(record.images?.length ?? 0) > 0 && (
             <FileImageTwoTone twoToneColor="#2e53fc" />
           )}
         </div>
@@ -148,10 +157,10 @@ export const useBoardList = () => {
     {
       title: "",
       key: "deleteBoard",
-      render: (_: unknown, record: DataType) => (
+      render: (_, record) => (
         <button
           className="items-center justify-center w-full hidden"
-          onClick={(e) => postDelete(e, record.deleteBoard || "")}
+          onClick={(e) => postDelete(e, record._id || "")}
         >
           <Icon
             icon="delete"
@@ -171,7 +180,7 @@ export const useBoardList = () => {
     pageChangeHandler,
     postDelete,
     listItemMouseHandler,
-    detailPageHandler,
+    tableItemOnClick,
     dataSource,
     columns,
     fetchBoardsCount,
