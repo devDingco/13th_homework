@@ -1,7 +1,6 @@
 import { useQuestionWrite } from "./hook";
 import { Button } from "antd";
 import Input from "@/components/input";
-import ModalAlertBox from "@/components/modal-alert-box";
 import Icon from "@/components/icon-factory";
 import { FormProvider } from "react-hook-form";
 
