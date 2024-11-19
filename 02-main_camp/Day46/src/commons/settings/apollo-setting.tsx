@@ -34,6 +34,7 @@ export default function ApolloUploadSetting(props: IApolloUploadSetting) {
   const uploadLink = createUploadLink({
     uri: "https://main-practice.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: "include",
   });
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
