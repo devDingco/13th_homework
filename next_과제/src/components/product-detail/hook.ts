@@ -9,16 +9,19 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useMyProductCheck } from "@/commons/stores/my-product-check-store";
 import { useUserInfo } from "@/commons/stores/user-info-store";
-import { message } from "antd";
+import { useRouter } from "next/navigation";
+import { useModalStore } from "@/commons/stores/modal-store";
 
 export const useProductDetail = () => {
+  const router = useRouter();
+  const { setIsModal } = useModalStore();
   const { productId }: { productId: string } = useParams();
 
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (showMessage) {
-      message.success("링크 복사가 완료되었습니다.");
+      setIsModal({ name: "success", contents: "링크 복사가 완료되었습니다." });
       setShowMessage(false);
     }
   }, [showMessage]);
@@ -44,16 +47,19 @@ export const useProductDetail = () => {
 
   // ! 내 상품인경우 삭제 처리
   const onProductDelete = async () => {
-    if (confirm("정말로 상품을 삭제하시겠습니까?")) {
-      try {
-        const result = await productDelete({
-          variables: { travelproductId: productId },
-        });
-        console.log(result);
-      } catch (e) {
-        console.error(e);
-      }
-    }
+    setIsModal({
+      name: "delete_check",
+      contents: "정말로 상품을 삭제하시겠습니까?",
+      confirm: async () => {
+        try {
+          await productDelete({
+            variables: { travelproductId: productId },
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    });
   };
 
   // ! 상품 링크 복사
@@ -68,5 +74,6 @@ export const useProductDetail = () => {
     data,
     onProductDelete,
     onProductLinkCopy,
+    router,
   };
 };
