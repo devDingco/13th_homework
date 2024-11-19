@@ -1,5 +1,5 @@
-'use client';
 
+'use client';
 import { useParams, useRouter } from 'next/navigation';
 import { useMutation, useQuery } from '@apollo/client';
 import { DeleteBoardDocument } from '@/commons/graphql/graphql';
@@ -13,7 +13,7 @@ export default function useBoardList() {
 
     const { data, refetch } = useQuery(FETCH_BOARDS);
 
-    const onClickMoveToDetailPage = async (event) => {
+    const onClickMoveToDetailPage =  (event) => {
         Modal.info({
             title: 'This is an information',
             content: '상세페이지로 이동합니다',

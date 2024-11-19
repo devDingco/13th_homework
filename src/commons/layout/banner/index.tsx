@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import styles from './styles.module.css';
-import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import styles from './styles.module.css';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,12 +11,12 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 export default function LayOutBanner() {
     return (
-        <>
+        <div className={styles.container}>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 3000,
+                    delay: 2500,
                     disableOnInteraction: false,
                 }}
                 pagination={{
@@ -67,6 +66,6 @@ export default function LayOutBanner() {
                     />
                 </SwiperSlide>
             </Swiper>
-        </>
+        </div>
     );
 }

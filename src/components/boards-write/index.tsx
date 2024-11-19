@@ -1,15 +1,17 @@
 'use client';
-import React, { useRef, useState } from 'react';
 import styles from './styles.module.css';
 import Image from 'next/image';
 import { useBoardWrite } from './hook';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd';
-import { useQuery } from '@apollo/client';
-import { FETCH_BOARD } from './queries';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
+import { Content } from 'antd/es/layout/layout';
+import { useRef, useState } from 'react';
 
 export default function BoardComponentWrite(props: any) {
     const {
+        quillRef,
         imageUrl,
         setImageUrl,
         fileRef,
@@ -103,13 +105,19 @@ export default function BoardComponentWrite(props: any) {
 
                 <div className={styles.contentsbox}>
                     <div>내용</div>
-                    <textarea
+                    <ReactQuill
+                        theme="snow"
+                        onChange={onChangeContents}
+                        ref={quillRef}
+                        className={styles.reactQuill}
+                    />
+                    {/* <textarea
                         id="contents"
                         placeholder="내용을 입력해 주세요"
                         className={styles.contentstextarea}
                         onChange={onChangeContents}
                         defaultValue={props.data?.fetchBoard.contents}
-                    ></textarea>
+                    ></textarea> */}
                     <div className={styles.requiedmention}>
                         <div>{contentsError}</div>
                     </div>
@@ -120,9 +128,10 @@ export default function BoardComponentWrite(props: any) {
                 <div className={styles.addressnumberbox}>
                     <input
                         type="text"
-                        placeholder=" "
+                        placeholder="우편번호"
                         value={zonecode}
                         className="address-number"
+                        style={{ textAlign: 'center' }}
                     ></input>
                     <button
                         className={styles.addressnumberbutton}

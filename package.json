@@ -21,7 +21,9 @@
         "react-dom": "^18",
         "react-infinite-scroll-component": "^6.1.0",
         "react-player": "^2.16.0",
-        "swiper": "^11.1.14"
+        "react-quill-new": "^3.3.3",
+        "swiper": "^11.1.14",
+        "zustand": "^5.0.1"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "5.0.3",

@@ -99,10 +99,10 @@ export default function BoardsComponentList() {
                             id={el._id}
                             onClick={onClickMoveToDetailPage}
                         >
-                            <div className={styles.boardListBoxNumber}>
+                            <div className={styles.titleBoxNumber}>
                                 {index + 1}
                             </div>
-                            <div className={styles.boardListBoxTitle}>
+                            <div className={styles.titleBoxTitle}>
                                 {el.title
                                     .replaceAll(keyWord, `@#$${keyWord}@#$`)
                                     .split('@#$')
@@ -120,12 +120,12 @@ export default function BoardsComponentList() {
                                         </span>
                                     ))}
                             </div>
-                            <div className={styles.boardListBoxWrite}>
+                            <div className={styles.titleBoxWrite}>
                                 {el.writer}
                             </div>
 
                             <button
-                                className={styles.BoardListBoxDelete}
+                                className={styles.titleBoxDate}
                                 onClick={onClickDelete}
                             >
                                 <Image

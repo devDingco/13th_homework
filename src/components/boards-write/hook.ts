@@ -28,8 +28,8 @@ export const useBoardWrite = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [imageUrl, setImageUrl] = useState('');
-    const fileRef = useRef();
     const [isHovered, setIsHovered] = useState(false); // 호버 상태 관리
+    const fileRef = useRef();
 
     const [게시글생성함수] = useMutation(CreateBoardDocument);
     const [게시글수정함수] = useMutation(UpdateBoardDocument);
@@ -46,6 +46,7 @@ export const useBoardWrite = () => {
 
     const { writer, title, password, contents, youtubeUrl, images } = inputs;
 
+    // 이미지 핸들러
     const onChangeFile = async (event) => {
         const file = event.target.files[0];
         console.log(file);
@@ -120,10 +121,14 @@ export const useBoardWrite = () => {
         }
     };
 
+    // contents 순수 text만 가져오기
+    const quillRef = useRef(null);
     const onChangeContents = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const quill = quillRef?.current?.getEditor(); //getEditor Quill 제공하는 메서드 -> 인스턴스를 가져옴
+        const text = quill.getText();
         setInputs({
             ...inputs,
-            [event.target.id]: event.target.value,
+            contents: text,
         });
         if (event.target.value === '') {
             setcontentsError('필수입력 사항 입니다');
@@ -230,6 +235,7 @@ export const useBoardWrite = () => {
     };
 
     return {
+        quillRef,
         imageUrl,
         setImageUrl,
         fileRef,
