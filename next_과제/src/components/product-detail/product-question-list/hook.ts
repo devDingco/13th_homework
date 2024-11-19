@@ -4,6 +4,7 @@ import { useMyProductCheck } from "@/commons/stores/my-product-check-store";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useFetchMore } from "@/commons/hooks/useFetchMore";
 
 export const useQuestionList = () => {
   const { productId }: { productId: string } = useParams();
@@ -19,29 +20,15 @@ export const useQuestionList = () => {
 
   useEffect(() => {
     setHasMore(true);
-  }, []);
+  }, [data]);
 
-  const fetchMoreData = async () => {
-    if (!data) return;
-    await fetchMore({
-      variables: {
-        page:
-          Math.ceil((data.fetchTravelproductQuestions.length ?? 10) / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchTravelproductQuestions?.length) {
-          setHasMore(false);
-          return prev;
-        }
-        return {
-          fetchTravelproductQuestions: [
-            ...prev.fetchTravelproductQuestions,
-            ...fetchMoreResult.fetchTravelproductQuestions,
-          ],
-        };
-      },
-    });
-  };
+  // 더보기 처리 함수
+  const { fetchMoreData } = useFetchMore({
+    data,
+    dataKey: "fetchTravelproductQuestions",
+    fetchMore,
+    setHasMore,
+  });
 
   return {
     data,
