@@ -45,14 +45,13 @@ export default function Login({ handleSignUp }: ILoginProps) {
       const accessToken = result.data?.loginUser.accessToken;
       console.log(accessToken);
 
-      if (accessToken === undefined) {
+      if (!accessToken) {
         setIsLoginFailed(true);
         alert("로그인을 실패했습니다.");
         return;
       }
 
       setAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
 
       setIsLoginFailed(false);
       navigate(NavigationPaths.boards);
