@@ -3,7 +3,7 @@
 import Icon from "@/components/icon-factory";
 import QuestionAnswerWrite from "../product-question-answer-write";
 import { useQuestionItem } from "@/components/product-detail/product-question-item/hook";
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import { FetchTravelproductQuestionsQuery } from "@/commons/graphql/graphql";
 import Image from "next/image";
 import QuestionAnswerList from "../product-question-answer-list";
@@ -25,8 +25,6 @@ export default function QuestionItem(props: IquestionItemProps) {
     isAnswer,
     userId,
   } = useQuestionItem();
-
-  console.log("questionData");
 
   return (
     <div className="flex flex-col gap-2 py-10 border-t first:border-0">
