@@ -56,7 +56,7 @@ export default function ProductList() {
           color="primary"
           variant="solid"
           icon={<Icon icon="rwite" className="w-6 h-6" />}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/products/new")}
         >
           숙박권 판매하기
         </Button>
