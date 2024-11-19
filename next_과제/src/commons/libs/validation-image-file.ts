@@ -6,7 +6,7 @@ export const validationImageFile = (file?: File) => {
       type: "error",
       content: "파일이 없습니다.",
     });
-    return;
+    return false;
   }
 
   if (file.size > 1024 * 1024 * 5) {
@@ -14,7 +14,7 @@ export const validationImageFile = (file?: File) => {
       type: "error",
       content: "이미지 파일은 5MB 이하만 업로드 가능합니다.",
     });
-    return;
+    return false;
   }
 
   if (
@@ -26,7 +26,7 @@ export const validationImageFile = (file?: File) => {
       type: "error",
       content: "이미지 파일은 png, jpeg, jpg 형식만 업로드 가능합니다.",
     });
-    return;
+    return false;
   }
 
   return true;
