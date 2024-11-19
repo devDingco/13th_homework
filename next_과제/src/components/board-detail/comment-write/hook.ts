@@ -4,11 +4,9 @@ import {
   MutationCreateBoardCommentArgs,
   MutationUpdateBoardCommentArgs,
 } from "@/commons/graphql/graphql";
-import { useState } from "react";
 import {
   CreateBoardCommentDocument,
   UpdateBoardCommentDocument,
-  FetchBoardCommentsDocument,
 } from "@/commons/graphql/graphql";
 
 import { useMutation } from "@apollo/client";
@@ -31,7 +29,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
 
-  // !댓글 등록
+  // ! 댓글 등록
   const commentNew = async () => {
     try {
       const { commentWriter, commentPassword, commentContents, commentRating } =
@@ -55,12 +53,16 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
       await createBoardComment({
         variables: newCommentData,
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: boardId },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoardComments: (prev) => {
+                // 기존 댓글 리스트에 신규 댓글 데이터 추가
+                return [data?.createBoardComment, ...prev];
+              },
+            },
+          });
+        },
       });
 
       setIsModal({ name: "success", contents: "댓글 등록이 완료되었습니다." }); // 댓글 등록 완료 모달
@@ -101,12 +103,12 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
       await updateBoardComment({
         variables: editCommentData,
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: boardId },
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FetchBoardCommentsDocument,
+        //     variables: { boardId: boardId },
+        //   },
+        // ],
       });
 
       setIsModal({ name: "success", contents: "댓글 수정이 완료되었습니다." }); // 댓글 수정 완료 모달
