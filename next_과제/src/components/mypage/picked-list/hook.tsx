@@ -6,15 +6,13 @@ import {
   FetchTravelproductsCountIPickedDocument,
 } from "@/commons/graphql/graphql";
 import { useRouter } from "next/navigation";
-import { dateViewSet } from "@/utils/dateViewSet";
-import { useSearch } from "@/commons/stores/search-store";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import { columns } from "./constants";
 import { DataType } from "./types";
 import { usePageChange } from "@/commons/stores/page-store";
 
 export const usePickedList = () => {
   const router = useRouter();
-  const { search } = useSearch();
   const { page } = usePageChange();
 
   //! 나의 북마크 상품 데이터
