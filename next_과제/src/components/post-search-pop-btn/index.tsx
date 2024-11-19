@@ -10,7 +10,7 @@ type PostSearchPopProps = {
   setLng?: (value: string) => void;
 };
 
-interface dataType {
+interface IAddressDataType {
   address: string;
   addressType: string;
   bname: string;
@@ -23,7 +23,7 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
 
   const { setaddress, setzonecode, setLat, setLng, disabled = false } = props;
 
-  const handleComplete = (data: dataType) => {
+  const handleComplete = (data: IAddressDataType) => {
     let fullAddress = data.address;
     let extraAddress = "";
     const zoneCode = data.zonecode;
@@ -71,8 +71,8 @@ const PostSearchPopBtn = (props: PostSearchPopProps) => {
       const data = await response.json();
       if (data.documents.length > 0) {
         const { y, x } = data.documents[0];
-        setLat(y);
-        setLng(x);
+        if (setLat) setLat(y);
+        if (setLng) setLng(x);
       } else {
         console.error("좌표를 찾을 수 없습니다.");
       }
