@@ -16,7 +16,7 @@ export const columns: TableProps["columns"] = [
     title: "상품명",
     dataIndex: "name",
     key: "name",
-    render: (value, record, index) => (
+    render: (value, record) => (
       <div className="flex gap-2">
         {record.soldAt ? (
           <>
