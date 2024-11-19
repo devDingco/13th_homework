@@ -3,7 +3,7 @@ import {
   FetchTravelproductsIBoughtDocument,
   FetchTravelproductsCountIBoughtDocument,
 } from "@/commons/graphql/graphql";
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import { columns } from "./constants";
 import { useRouter } from "next/navigation";
 import { usePageChange } from "@/commons/stores/page-store";
