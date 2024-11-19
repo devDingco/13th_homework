@@ -5,6 +5,7 @@ import { Noto_Sans_KR, Roboto } from "next/font/google";
 import ThemeProvider from "@/components/theme-provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Header from "@/components/header";
+import Script from "next/script";
 
 const notoSansKr = Noto_Sans_KR({
   preload: false,
@@ -44,6 +45,10 @@ export default function RootLayout({
             </ThemeProvider>
           </AntdRegistry>
         </ApolloSetting>
+
+        <Script
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer&autoload=false`}
+        />
       </body>
     </html>
   );
