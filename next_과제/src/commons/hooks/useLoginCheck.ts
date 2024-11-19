@@ -10,7 +10,7 @@ export const useLoginCheck = () => {
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (accessToken) {
+    if (accessToken && accessToken !== "") {
       return setIsLogin(true);
     } else {
       return setIsLogin(false);
