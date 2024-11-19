@@ -1,13 +1,9 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-// import { useApolloClient } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 
-import {
-  LoginUserDocument,
-  LogoutUserDocument,
-} from "@/commons/graphql/graphql";
+import { LoginUserDocument } from "@/commons/graphql/graphql";
 import { useAccessTokenStore } from "@/commons/stores/access-token";
 import { useLoginCheck } from "@/commons/hooks/useLoginCheck";
 
@@ -16,8 +12,6 @@ export const useLoginPage = () => {
   // const client = useApolloClient();
   // 로그인
   const [loginUser] = useMutation(LoginUserDocument);
-  // 로그아웃
-  const [logoutUser] = useMutation(LogoutUserDocument);
 
   const { setAccessToken } = useAccessTokenStore();
 
@@ -26,16 +20,6 @@ export const useLoginPage = () => {
   const methods = useForm({
     mode: "onChange",
   });
-
-  //! 로그아웃 함수
-  const userLogOut = async () => {
-    try {
-      const result = await logoutUser();
-      console.log(result);
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   //! 로그인 제출 함수
   const signInSubmit = async () => {
@@ -61,5 +45,5 @@ export const useLoginPage = () => {
     }
   };
 
-  return { signInSubmit, router, userLogOut, methods };
+  return { signInSubmit, router, methods };
 };
