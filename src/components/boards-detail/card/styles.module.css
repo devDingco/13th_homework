@@ -1,0 +1,39 @@
+.container {
+    width: 1280px;
+    height: 212px;
+    margin: 0 auto 40px auto;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.layout {
+    width: 296px;
+    height: 152px;
+    display: flex;
+}
+
+.layoutRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 8px;
+}
+
+.layoutRightTitleImage {
+    display: flex;
+    gap: 8px;
+}
+
+.layoutRightTitleDetail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.layoutRightTitleDetailheart {
+    display: flex;
+    gap: 8px;
+}
