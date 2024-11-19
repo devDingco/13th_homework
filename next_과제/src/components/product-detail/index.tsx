@@ -12,10 +12,9 @@ import ProductPickedBtn from "@/components/product-picked-btn";
 import { useMyProductCheck } from "@/commons/stores/my-product-check-store";
 
 export default function ProductDetail() {
-  const { data, productId, onProductDelete, onProductLinkCopy } =
+  const { data, productId, onProductDelete, onProductLinkCopy, router } =
     useProductDetail();
   const { myProductCheck } = useMyProductCheck();
-  // console.log(data, productId);
 
   return (
     <>
@@ -23,15 +22,26 @@ export default function ProductDetail() {
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold">{data?.name}</h2>
           <div className="flex items-center gap-4">
-            <span className="blind">삭제하기 버튼</span>
             {myProductCheck && (
-              // 내상품인 경우에만 삭제 버튼 보이기
-              <Icon
-                icon="delete"
-                className="w-6 h-6 flex items-center  cursor-pointer"
-                viewBox="-4 -3 24 24"
-                onClick={() => onProductDelete()}
-              />
+              <>
+                {/* 내상품인 경우에만 삭제 버튼 보이기 */}
+                <span className="blind">수정하기 버튼</span>
+                <Icon
+                  icon="edit"
+                  className="w-6 h-6 flex items-center cursor-pointer"
+                  onClick={() => {
+                    router.push(`/products/${productId}/edit`);
+                  }}
+                />
+
+                <span className="blind">삭제하기 버튼</span>
+                <Icon
+                  icon="delete"
+                  className="w-6 h-6 flex items-center  cursor-pointer"
+                  viewBox="-4 -3 24 24"
+                  onClick={() => onProductDelete()}
+                />
+              </>
             )}
 
             <span className="blind">링크 복사 버튼</span>
@@ -49,11 +59,16 @@ export default function ProductDetail() {
               color="#fff"
               trigger={["hover"]}
               overlayInnerStyle={{ color: "#000" }}
-              title={
-                (data?.travelproductAddress?.address || "") +
-                " " +
-                (data?.travelproductAddress?.addressDetail || "")
-              }
+              title={() => {
+                const address = data?.travelproductAddress?.address ?? "";
+                const addressDetail =
+                  data?.travelproductAddress?.addressDetail ?? "";
+                if (address === "" && addressDetail === "") {
+                  return "주소가 없습니다.";
+                } else {
+                  return `${address} ${addressDetail}`;
+                }
+              }}
             >
               <button className="w-6 h-6">
                 <Icon
@@ -100,10 +115,12 @@ export default function ProductDetail() {
               <span>{data?.travelproductAddress?.address}</span>
               <span>{data?.travelproductAddress?.addressDetail}</span>
             </p>
-            <KaKaoMap
-              lat={Number(data?.travelproductAddress?.lat)}
-              lng={Number(data?.travelproductAddress?.lng)}
-            />
+            {data && (
+              <KaKaoMap
+                lat={Number(data.travelproductAddress?.lat)}
+                lng={Number(data.travelproductAddress?.lng)}
+              />
+            )}
           </div>
         </div>
 
