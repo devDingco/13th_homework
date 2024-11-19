@@ -8,7 +8,7 @@ import TransactionHistoryAndBookmarks from "../_components/mypage/TransactionHis
 import { WalletOutlined } from "@ant-design/icons";
 import PointsUsageHistory from "../_components/mypage/PointsUsageHistory";
 import ChangePassword from "../_components/mypage/ChangePassword";
-import { withLoginCheck } from "../_feature/login";
+import { withLoginCheck } from "../../commons/hoc/withLoginCheck";
 
 const MYPAGE_MENUS = ["거래내역 & 북마크", "포인트 사용 내역", "비밀번호 변경"];
 
