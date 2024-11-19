@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useAccessTokenStore } from '@/commons/store/access-store';
+import { useState } from 'react';
 
 const FETCH_USER_LOGGED_IN = gql`
     query fetchUserLoggedIn {
@@ -24,7 +25,7 @@ const FETCH_USER_LOGOUT = gql`
 export default function LayoutNavigation() {
     const { data } = useQuery(FETCH_USER_LOGGED_IN);
     const [로그아웃] = useMutation(FETCH_USER_LOGOUT);
-    console.log('FETCH_USER_LOGGED_IN :::', data);
+    // console.log('FETCH_USER_LOGGED_IN :::', data);
 
     const router = useRouter();
 
@@ -49,6 +50,31 @@ export default function LayoutNavigation() {
             });
     };
 
+    const [isTripTalkActive, setIsTripTalkActive] = useState(false);
+    const [isVoucherActive, setIsVoucherActive] = useState(false);
+    const [isMyActive, setIsMyActive] = useState(false);
+
+    const onClickNavi = (event) => {
+        const id = event.target.id;
+
+        if (id === '1') {
+            setIsTripTalkActive((prev) => !prev);
+            setIsVoucherActive(false);
+            setIsMyActive(false);
+            router.push('/triptalk');
+        } else if (id === '2') {
+            setIsVoucherActive((prev) => !prev);
+            setIsTripTalkActive(false);
+            setIsMyActive(false);
+            router.push('/voucher');
+        } else if (id === '3') {
+            setIsMyActive((prev) => !prev);
+            setIsTripTalkActive(false);
+            setIsVoucherActive(false);
+            router.push('/mypage');
+        }
+    };
+
     return (
         <>
             <div className={styles.layout}>
@@ -60,13 +86,31 @@ export default function LayoutNavigation() {
                             width={56}
                             height={32}
                         ></Image>
-                        <div className={styles.homeHeaderLeftTitle}>
+                        <div
+                            id="1"
+                            className={`${styles.homeHeaderLeftTitle} ${
+                                isTripTalkActive ? styles.active : ''
+                            }`}
+                            onClick={onClickNavi}
+                        >
                             트립토크
                         </div>
-                        <div className={styles.homeHeaderLeftTitle}>
+                        <div
+                            id="2"
+                            className={`${styles.homeHeaderLeftTitle} ${
+                                isVoucherActive ? styles.active : ''
+                            }`}
+                            onClick={onClickNavi}
+                        >
                             숙박권 구매
                         </div>
-                        <div className={styles.homeHeaderLeftTitle}>
+                        <div
+                            id="3"
+                            className={`${styles.homeHeaderLeftTitle} ${
+                                isMyActive ? styles.active : ''
+                            }`}
+                            onClick={onClickNavi}
+                        >
                             마이 페이지
                         </div>
                     </div>

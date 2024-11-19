@@ -6,8 +6,8 @@ import ApolloUploadSetting from '../commons/settings/apollo-setting';
 import ApolloHeaderAndErrorSettingRefresh from '../commons/settings/apollo-header-and-error-setting-refresh';
 
 export const metadata: Metadata = {
-    title: '축구하자',
-    description: '서울 경기 축구 예약 플랫폼',
+    title: '여행 플랫폼',
+    description: '일단 여행 플랫폼 구현해보자',
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
