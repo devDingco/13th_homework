@@ -25,14 +25,14 @@ export default function MyProductList() {
       </div>
 
       <TableList
-        data={data}
+        isLoading={data === undefined}
         refetch={refetch}
         tableItemHandler={(record: DataType) => ({
           onClick: () => tableItemOnClick(record._id || ""),
         })}
         dataSource={dataSource}
-        columns={columns}
-        totalCount={fetchProductsCount}
+        columns={columns || []}
+        totalCount={fetchProductsCount || 0}
       />
     </>
   );
