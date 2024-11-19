@@ -2,7 +2,7 @@ import { IformList, UploadFileList } from "@/components/board-write/types";
 import { useForm } from "react-hook-form";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
-import { validationImageFile } from "@/commons/libs/validation-image-file";
+// import { validationImageFile } from "@/commons/libs/validation-image-file";
 import { useEffect, useState } from "react";
 import type { UploadProps, UploadFile } from "antd";
 import { useModalStore } from "@/commons/stores/modal-store";
@@ -18,14 +18,7 @@ import {
 } from "@/commons/graphql/graphql";
 import { message } from "antd";
 import { FileType } from "@/components/board-write/types";
-
-const getBase64 = (file: FileType): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+import { getBase64 } from "@/commons/utils/getBase64";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
