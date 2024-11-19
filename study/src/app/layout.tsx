@@ -5,6 +5,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 // import ApolloSetting from "../commons/settings/apollo-setting";
 // import ApolloUploadSetting from "../commons/settings/apollo-setting";
 import ApolloHeaderSetting from "@/commons/settings/apollo-setting";
+
 // import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -28,13 +29,16 @@ const roboto = Roboto({
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`antialiased`}>
+        <div>{modal}</div>
         <div>~~~~~레이아웃~~~~~~</div>
         <ApolloHeaderSetting>
           <AntdRegistry>{children}</AntdRegistry>
