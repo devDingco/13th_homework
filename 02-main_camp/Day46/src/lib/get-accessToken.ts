@@ -10,7 +10,7 @@ type RestoreAccessTokenResponse = {
 export const getAccessToken = async () => {
   try {
     const graphqlClient = new GraphQLClient(
-      "https://backend-practice.codebootcamp.co.kr/graphql",
+      "https://main-practice.codebootcamp.co.kr/graphql",
       { credentials: "include" }
     );
     const result = await graphqlClient.request<RestoreAccessTokenResponse>(
