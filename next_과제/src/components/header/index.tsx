@@ -144,7 +144,7 @@ export default function Header() {
             </ul>
           </nav>
           <div className="flex gap-6">
-            {isLogin ? (
+            {isLogin === "loading" ? null : isLogin ? (
               <div className="flex justify-end items-center relative">
                 <button
                   className="flex gap-1 items-center"
