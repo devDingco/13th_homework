@@ -27,8 +27,9 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
     setTags,
     tags,
     setAddress,
+    handlePreview,
   } = useProductWrite();
-  console.log("수정", data);
+  // console.log("수정", data);
 
   if (data || !isEdit)
     return (
@@ -148,22 +149,14 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
             </div>
             <div className="flex flex-col gap-4">
               <h5>상세 위치</h5>
-
+              {/* {Number(methods.getValues("productAddressLAT"))} */}
               {(!isEdit && Number(methods.watch("productAddressLAT")) > 0) ||
               (isEdit &&
                 data?.travelproductAddress?.lat &&
                 data?.travelproductAddress?.lng) ? (
                 <KaKaoMap
-                  lat={
-                    isEdit
-                      ? Number(data?.travelproductAddress?.lat)
-                      : Number(methods.getValues("productAddressLAT"))
-                  }
-                  lng={
-                    isEdit
-                      ? Number(data?.travelproductAddress?.lng)
-                      : Number(methods.getValues("productAddressLNG"))
-                  }
+                  lat={Number(methods.getValues("productAddressLAT"))}
+                  lng={Number(methods.getValues("productAddressLNG"))}
                 />
               ) : (
                 <div className="bg-gray-100 rounded-lg w-full h-[312px] flex items-center justify-center">
@@ -181,11 +174,19 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
               <Upload
                 listType="picture-card"
                 accept="image/jpeg, image/png"
-                fileList={imgFileList.map((file) => ({
-                  ...file,
-                  url: `${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${file.url}`,
-                }))}
+                fileList={imgFileList.map((file) => {
+                  // if (file.url) {
+                  //   return {
+                  //     ...file,
+                  //     url: `${process.env.NEXT_PUBLIC_IMAGE_HOST_NAME}${file.url}`,
+                  //   };
+                  // } else {
+                  //   return file;
+                  // }
+                  return file;
+                })}
                 onChange={handleChangeImg}
+                onPreview={handlePreview}
               >
                 {imgFileList.length >= 3 ? null : (
                   <button
@@ -234,9 +235,9 @@ export default function ProductWrite({ isEdit }: { isEdit: boolean }) {
               onClick={() =>
                 isEdit ? updateProductClick() : createProductClick()
               }
-              disabled={
-                !methods.formState.isValid || !methods.formState.isDirty
-              }
+              // disabled={
+              //   !methods.formState.isValid || !methods.formState.isDirty
+              // }
               size="large"
             >
               {isEdit ? "수정하기" : "등록하기"}
