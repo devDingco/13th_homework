@@ -3,7 +3,7 @@
 import Icon from "@/components/icon-factory";
 import QuestionAnswerWrite from "../product-question-answer-write";
 import { useQuestionAnswerItem } from "@/components/product-detail/product-question-answer-item/hook";
-import { dateViewSet } from "@/utils/dateViewSet";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
 import { FetchTravelproductQuestionAnswersQuery } from "@/commons/graphql/graphql";
 import Image from "next/image";
 
