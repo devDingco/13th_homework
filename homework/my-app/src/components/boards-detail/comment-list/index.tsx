@@ -35,7 +35,7 @@ export default function CommentListPage(props: ICommentListPageprops) {
       <InfiniteScroll
         next={onNext}
         hasMore={props.hasMore}
-        loader={<div>로딩중입니다.</div>}
+        loader={<div></div>}
         dataLength={data?.fetchBoardComments.length ?? 0}
       >
         <div className={styles.commentContainer}>

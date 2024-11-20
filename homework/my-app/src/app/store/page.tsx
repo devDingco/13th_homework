@@ -143,8 +143,8 @@ const ProductList = () => {
               <div className={styles.profileContainer}>
                 <Image
                   src={
-                    product.seller.picture
-                      ? `https://storage.googleapis.com/${product.seller.picture}`
+                    product?.seller?.picture
+                      ? `https://storage.googleapis.com/${product?.seller?.picture}`
                       : "/image/noProfile.webp"
                   }
                   width={32}
@@ -152,7 +152,9 @@ const ProductList = () => {
                   alt="Profile"
                   className={styles.profileIcon}
                 />
-                <span className={styles.sellerName}>{product.seller.name}</span>
+                <span className={styles.sellerName}>
+                  {product?.seller?.name}
+                </span>
               </div>
             </div>
           </div>

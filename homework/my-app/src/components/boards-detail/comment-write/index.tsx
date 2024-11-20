@@ -8,7 +8,7 @@ import { Flex, Rate } from "antd";
 interface ICommentWriteProps {
   isEdit?: boolean;
   commentId?: string;
-  setIsEdit: (value: boolean) => void;
+  setIsEdit?: (value: boolean) => void;
   hasMore?: boolean;
   setHasMore?: (value: boolean) => void;
 }

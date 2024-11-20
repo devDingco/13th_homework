@@ -76,7 +76,17 @@ const DELETE_COMMENT = gql`
   }
 `;
 
+// 로그인한 사용자 정보 가져오기 쿼리
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+    }
+  }
+`;
+
 export default function Comment() {
+  const { data: loggedInUser } = useQuery(FETCH_USER_LOGGED_IN);
   const { register, handleSubmit, reset } = useForm<ISchema>(); // ISchema 타입을 적용
   const [hasMore, setHasMore] = useState(true);
   const params = useParams();
@@ -205,12 +215,18 @@ export default function Comment() {
               <span>{comment.user?.name}</span>
               <div>
                 <span>{new Date(comment.createdAt).toLocaleString()}</span>
-                <button
-                  onClick={() => onClickEdit(comment._id, comment.contents)}
-                >
-                  수정
-                </button>
-                <button onClick={() => onClickDelete(comment._id)}>삭제</button>
+                {loggedInUser?.fetchUserLoggedIn?._id === comment.user?._id && (
+                  <>
+                    <button
+                      onClick={() => onClickEdit(comment._id, comment.contents)}
+                    >
+                      수정
+                    </button>
+                    <button onClick={() => onClickDelete(comment._id)}>
+                      삭제
+                    </button>
+                  </>
+                )}
               </div>
             </div>
             {editingCommentId === comment._id ? (

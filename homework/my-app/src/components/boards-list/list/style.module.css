@@ -13,32 +13,56 @@
 
 /* 카드 스타일 */
 .card {
-  width: 50%;
+  width: 40%; /* 가로 길이는 고정 */
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
   transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
 }
 
 .card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+.card .content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
 
-/* 카드 헤더 */
+.imageBox {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageBox img {
+  width: 100%; /* 부모 컨테이너의 너비에 맞춤 */
+  height: auto; /* 이미지 비율에 따라 높이 조정 */
+  object-fit: contain; /* 이미지 비율 유지 */
+}
+
+/* 나머지 스타일은 동일 */
 .header {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-/* 아바타 이미지 */
 .avatar {
   border-radius: 50%;
   margin-right: 10px;
 }
 
-/* 유저 정보 */
 .userInfo {
   display: flex;
   flex-direction: column;
@@ -54,19 +78,12 @@
   color: #555;
 }
 
-/* 카드 본문 */
-.content {
-  margin: 10px 0;
-  cursor: pointer;
-}
-
 .content p {
   margin: 0;
   font-size: 15px;
   line-height: 1.4;
 }
 
-/* 카드 하단 */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -74,7 +91,6 @@
   margin-top: 10px;
 }
 
-/* 아이콘 그룹 */
 .iconGroup {
   display: flex;
   gap: 10px;
@@ -87,7 +103,7 @@
   color: #999;
 }
 
-/* 미디어 쿼리 */
+/* 반응형 미디어 쿼리 */
 @media screen and (max-width: 1200px) {
   .card {
     width: 45%;

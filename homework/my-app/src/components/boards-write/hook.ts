@@ -1,6 +1,13 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   CREATE_BOARD,
   FETCH_BOARD,
@@ -12,7 +19,6 @@ import { Address } from "react-daum-postcode";
 import { FetchBoardQuery } from "@/commons/graphql/graphql";
 
 export const useBoardsWrite = (props: IBoardWriteprops) => {
-  const [isAllFilled, setIsAllFilled] = useState(false);
   const [inputs, setInputs] = useState({
     writer: "",
     password: "",
@@ -43,7 +49,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     }
   }, [props.isEdit, data]);
 
-  const [imageUrl, setImageUrl] = useState(data?.fetchBoard.images?.[0] || "");
+  const [imageUrl, setImageUrl] = useState<string[]>([]);
   const [isImageDeleted, setIsImageDeleted] = useState(false);
 
   const [uploadFile] = useMutation(UPLOAD_FILE);
@@ -71,7 +77,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
                 address: address || "",
                 addressDetail: addressDetail || "",
               },
-              images: [imageUrl],
+              images: imageUrl,
             },
             password: enteredPassword,
             boardId: params.boardId,
@@ -99,15 +105,11 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
     updateBoardFunc();
   }, [props.isEdit]);
 
-  useEffect(() => {
-    // 수정 모드가 아닌 경우에만 필수 입력사항을 체크하여 버튼 활성화
+  const isAllFilled = useMemo(() => {
     if (!props.isEdit) {
-      setIsAllFilled(
-        !!(inputs.writer && inputs.password && inputs.title && content)
-      );
-    } else {
-      setIsAllFilled(true); // 수정 모드에서는 항상 true로 설정하여 버튼 활성화
+      return !!(inputs.writer && inputs.password && inputs.title && content);
     }
+    return true; // 수정 모드에서는 항상 true
   }, [inputs.writer, inputs.password, inputs.title, content, props.isEdit]);
 
   const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +150,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
               address: address,
               addressDetail: addressDetail,
             },
-            images: [imageUrl],
+            images: imageUrl,
           },
         },
       });
@@ -171,11 +173,7 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
           address: address !== "" ? address : null,
           addressDetail: addressDetail !== "" ? addressDetail : null,
         },
-        images: isImageDeleted
-          ? []
-          : imageUrl
-          ? [imageUrl]
-          : data?.fetchBoard.images || [],
+        images: imageUrl.length ? imageUrl : [],
       };
 
       const result = await updateBoard({
@@ -230,30 +228,35 @@ export const useBoardsWrite = (props: IBoardWriteprops) => {
   };
 
   //이미지 업로드
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    try {
-      const result = await uploadFile({
-        variables: { file },
-      });
-
-      if (result.data?.uploadFile.url) {
-        setImageUrl(result.data.uploadFile.url); // 새 이미지 URL 설정
-      }
-    } catch (error) {
-      console.error("파일 업로드 오류:", error);
-    }
-  };
-
   const fileRef = useRef<HTMLInputElement>(null);
   const onClickImage = () => {
-    fileRef.current?.click(); //현재 참조하고 있는 파일 인풋태그를 클릭하게 된다.
+    fileRef.current?.click(); // 파일 선택창을 엽니다.
   };
-  const imgDeleted = (event) => {
-    event.stopPropagation();
-    setImageUrl("");
-    setIsImageDeleted(true);
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []); // 여러 파일 선택 가능
+    const uploadedUrls: string[] = [];
+
+    for (const file of files) {
+      try {
+        const result = await uploadFile({
+          variables: { file },
+        });
+        if (result.data?.uploadFile.url) {
+          uploadedUrls.push(result.data.uploadFile.url);
+        }
+      } catch (error) {
+        console.error("파일 업로드 오류:", error);
+      }
+    }
+    setImageUrl((prev) => [...prev, ...uploadedUrls]); // 기존 이미지와 새로 업로드한 이미지를 병합
   };
+
+  const imgDeleted = (index: number) => {
+    setImageUrl((prev) => prev.filter((_, i) => i !== index)); // 선택한 이미지를 삭제
+    setIsImageDeleted(true); // 상태 업데이트
+  };
+
   return {
     contentOnChange,
     signupButtonHandler,

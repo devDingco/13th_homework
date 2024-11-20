@@ -76,11 +76,21 @@ const DELETE_REPLY = gql`
   }
 `;
 
+// 로그인한 사용자 정보 가져오기 쿼리
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+    }
+  }
+`;
+
 interface CommentAnswerProps {
   commentId: string;
 }
 
 export default function CommentAnswer({ commentId }: CommentAnswerProps) {
+  const { data: loggedInUser } = useQuery(FETCH_USER_LOGGED_IN);
   const [replyText, setReplyText] = useState("");
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
@@ -187,12 +197,18 @@ export default function CommentAnswer({ commentId }: CommentAnswerProps) {
               <span>{answer.user?.name}</span>
               <div>
                 <span>{new Date(answer.createdAt).toLocaleString()}</span>
-                <button
-                  onClick={() => onEditClick(answer._id, answer.contents)}
-                >
-                  수정
-                </button>
-                <button onClick={() => onClickDelete(answer._id)}>삭제</button>
+                {loggedInUser?.fetchUserLoggedIn?._id === answer.user?._id && (
+                  <>
+                    <button
+                      onClick={() => onEditClick(answer._id, answer.contents)}
+                    >
+                      수정
+                    </button>
+                    <button onClick={() => onClickDelete(answer._id)}>
+                      삭제
+                    </button>
+                  </>
+                )}
               </div>
             </div>
             {editingReplyId === answer._id ? (
