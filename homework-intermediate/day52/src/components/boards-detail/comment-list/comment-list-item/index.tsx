@@ -1,10 +1,13 @@
 'use client';
-import { EditOutlined } from '@ant-design/icons';
+
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Flex, Rate } from 'antd';
 import Image from 'next/image';
 import useCommentListItem from './hook';
 import { BoardComment } from '@/commons/graphql/graphql';
 import CommentWrite from '../../comment-write';
+import { useMutation } from '@apollo/client';
+import { DELETE_BOARD_COMMENT } from '@/commons/apis/mutations/mutation-delete-board-comment';
 
 const IMAGE_SRC = {
 	chatImage: {
@@ -27,6 +30,35 @@ type Props = {
 
 export default function CommentItem({ commentItem }: Props) {
 	const { isEdit, onToggleEdit } = useCommentListItem();
+	const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+
+	const onClickDeleteComment = (boardCommentId: string) => async () => {
+		// 비밀번호 입력 받기
+		const password = prompt('작성했을 때의 비밀번호를 입력해 주세요.');
+
+		// 댓글 삭제 mutation
+		await deleteBoardComment({
+			variables: {
+				password,
+				boardCommentId,
+			},
+			update(cahce, { data }) {
+				cahce.modify({
+					fields: {
+						fetchBoardComments: (prev, { readField }) => {
+							const deleteBoardCommentId = data.deleteBoardComment;
+							const currnetBoardComments = prev.filter(
+								(boardComment) =>
+									readField('_id', boardComment) !== deleteBoardCommentId,
+							);
+
+							return [...currnetBoardComments];
+						},
+					},
+				});
+			},
+		});
+	};
 
 	return (
 		<>
@@ -57,9 +89,14 @@ export default function CommentItem({ commentItem }: Props) {
 								timeZone: 'Asia/Seoul',
 							})}
 						</div>
-						<button onClick={onToggleEdit}>
-							<EditOutlined />
-						</button>
+						<div className="flex gap-4">
+							<button onClick={onToggleEdit}>
+								<EditOutlined />
+							</button>
+							<button onClick={onClickDeleteComment(commentItem._id)}>
+								<DeleteOutlined />
+							</button>
+						</div>
 					</div>
 					<hr className="my-10" />
 				</div>

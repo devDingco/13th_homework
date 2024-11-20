@@ -54,6 +54,16 @@ export default function ProductDetail(props) {
 		}
 		const result = await toggleTravelproductPick({
 			variables: { travelproductId: String(params.travelproductId) },
+			update(cache, { data }) {
+				cache.modify({
+					fields: {
+						fetchTravelproduct: (prev) => {
+							const pickedCount = data?.toggleTravelproductPick;
+							return { ...prev, pickedCount };
+						},
+					},
+				});
+			},
 		});
 		setPickedCount(result.data?.toggleTravelproductPick!);
 	};
