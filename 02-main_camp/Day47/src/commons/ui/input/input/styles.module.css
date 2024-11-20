@@ -1,0 +1,11 @@
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.error__message {
+  color: #f66a6a;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
