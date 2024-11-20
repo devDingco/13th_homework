@@ -6,12 +6,16 @@ import { InputForm } from "@/app/_components/commons/input";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginSchema, loginSchema } from "./schema";
-import { useMutation } from "@apollo/client";
-import { LoginUserDocument } from "@/commons/gql/graphql";
+import { useMutation, useQuery } from "@apollo/client";
+import {
+  FetchUserLoggedInDocument,
+  LoginUserDocument,
+} from "@/commons/gql/graphql";
 import { NavigationPaths, useNavigate } from "@/utils/navigate";
 import { useAccessTokenStore } from "@/app/_store/accessToken/store";
 import { LogoIcon } from "@/commons/ui/icon";
 import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
+import { useUserInfo } from "@/app/_store/userInfo-store";
 
 interface ILoginProps {
   handleSignUp: () => void;
@@ -19,9 +23,12 @@ interface ILoginProps {
 
 export default function Login({ handleSignUp }: ILoginProps) {
   const navigate = useNavigate();
+
+  const { data: userInfo } = useQuery(FetchUserLoggedInDocument);
   const [loginUser] = useMutation(LoginUserDocument);
 
   const { setAccessToken } = useAccessTokenStore();
+  const { setUserInfo } = useUserInfo();
 
   const methods = useForm<ILoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -54,6 +61,9 @@ export default function Login({ handleSignUp }: ILoginProps) {
       setAccessToken(accessToken);
 
       setIsLoginFailed(false);
+
+      console.log("로그인 시 회원 정보입니다.", userInfo?.fetchUserLoggedIn);
+      if (userInfo?.fetchUserLoggedIn) setUserInfo(userInfo.fetchUserLoggedIn);
       navigate(NavigationPaths.boards);
 
       alert("로그인 성공!");
