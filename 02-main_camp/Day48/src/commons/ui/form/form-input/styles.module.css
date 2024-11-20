@@ -1,0 +1,20 @@
+.input__form__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input__form__title {
+  display: flex;
+  gap: 0.25rem;
+
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.input__form__title p {
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 1rem;
+}

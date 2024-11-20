@@ -1,0 +1,130 @@
+.BoardsDetail_root {
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.BoardsDetail_header {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: black;
+}
+
+.BoardsDetail_userForm_and_sideButton {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.BoardsDetail_userForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postDate {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #818181;
+}
+
+.BoardsDetail_userForm_sideButton_section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.BoardsDetail_userForm_sideButton {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+}
+
+.BoardsDetail_userForm_sideButton img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.BoardsDetail_article {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uploadImagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 이미지 스타일이 안먹음;; */
+.uploadImage {
+  /* width: 12.5rem; */
+  height: auto;
+  object-fit: contain;
+}
+
+.BoardsDetail_p {
+  color: black;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 24px;
+}
+
+.BoardsDetail_video_section {
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.BoardsDetail_heartButton_list_section {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.BoardsDetail_heartBreak_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #5f5f5f;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.BoardsDetail_heart_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #f66a6a;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.BoardsDetail_footer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.BoardsDetail_footer_button {
+  width: 6.5625rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid black;
+
+  color: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
