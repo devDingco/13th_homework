@@ -283,3 +283,14 @@ export function ListIcon({ width = 1.5, height = 1.5 }: IIconProps) {
     />
   );
 }
+
+export function ChargePointIcon() {
+  return (
+    <Image
+      src="/assets/modal_chargePoint.svg"
+      alt="목록 아이콘"
+      width={80}
+      height={56}
+    />
+  );
+}
