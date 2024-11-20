@@ -12,11 +12,11 @@ import {
   Location,
   BookmarkIcon,
   Profile40,
-  TravelProductContentsSample,
   LocationSample,
 } from "@/commons/ui/icon";
 import styles from "./styles.module.css";
 import Header, { HeaderSize } from "@/commons/ui/header";
+import ModalChargePoint from "@/commons/ui/modal/modal-chargePoint";
 
 export default function TravelProductDetail() {
   const {
@@ -26,14 +26,22 @@ export default function TravelProductDetail() {
     pickedCount,
     modalsOpened,
     setPickedCount,
+    onClickMissingPointModalCancel,
     onClickPointChargeModalCancel,
     onClickBookmark,
     handleConfirm,
+    handlePayment,
     openModal,
     closeModal,
   } = useTravelProductDetail();
 
   const product = rowProduct?.fetchTravelproduct;
+
+  const handleMissingPointModal = () => {
+    closeModal("buyingModal");
+    closeModal("missingPointModal");
+    openModal("pointChargeModal");
+  };
 
   useEffect(() => {
     if (product && typeof product.pickedCount === "number")
@@ -48,10 +56,10 @@ export default function TravelProductDetail() {
           description="해당 숙박권은 포인트로만 구매 가능합니다."
           buttonText="구매"
           handleCancel={() => closeModal("buyingModal")}
-          handleConfirm={handleConfirm}
+          handleConfirm={() => openModal("missingPointModal")}
         />
       )}
-      {modalsOpened.pointChargeModal && (
+      {modalsOpened.missingPointModal && (
         <Modal
           title="포인트 부족"
           description={`
@@ -59,11 +67,16 @@ export default function TravelProductDetail() {
             포인트 충전 후 구매하세요.
             `}
           buttonText="충전"
-          handleCancel={onClickPointChargeModalCancel}
-          // handleConfirm={() => openModal("pointChargeModal")}
+          handleCancel={onClickMissingPointModalCancel}
+          handleConfirm={handleMissingPointModal}
         />
       )}
-
+      {modalsOpened.pointChargeModal && (
+        <ModalChargePoint
+          handleCancel={onClickPointChargeModalCancel}
+          handleConfirm={handleConfirm}
+        />
+      )}
       <div className={styles.top__container}>
         <div className={styles.header__container}>
           <div className={styles.title__container}>
