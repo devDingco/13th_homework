@@ -1,0 +1,75 @@
+.boardHeader_header {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #1c1c1c;
+}
+
+.boardHeader_number {
+  width: 4rem;
+}
+
+.boardHeader_title {
+  width: 53rem;
+}
+
+.boardHeader_writer {
+  width: 6.25rem;
+}
+
+.boardHeader_date {
+  width: 6.25rem;
+}
+
+.board {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #f2f2f2;
+
+  padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+}
+
+.board:hover .board_deleteButton {
+  display: block;
+}
+
+.board_number {
+  width: 4rem;
+  height: 1.25rem;
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: #919191;
+}
+
+.board_title {
+  width: 53rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #1c1c1c;
+}
+
+.board_writer {
+  width: 6.25rem;
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: #333333;
+}
+
+.board_date {
+  width: 6.25rem;
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: #919191;
+}
+
+.board_deleteButton {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 8px;
+}

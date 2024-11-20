@@ -1,0 +1,32 @@
+.input {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+
+  font-weight: 400;
+  font-size: 1rem;
+
+  outline: none;
+}
+
+.input:hover {
+  border-color: rgba(41, 116, 229, 0.5);
+  box-shadow: 5px 5px 10px -5px rgba(41, 116, 229, 0.3);
+}
+
+.input:focus {
+  border-color: rgba(41, 116, 229, 0.9);
+  box-shadow: 5px 5px 10px -5px rgba(41, 116, 229, 0.3);
+}
+
+.input__status__valid {
+}
+
+.input__status__invalid {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 0.0625rem solid #f66a6a;
+  border-radius: 0.5rem;
+}

@@ -1,0 +1,15 @@
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-wrap: nowrap;
+}
+
+.button__variant__secondary {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}

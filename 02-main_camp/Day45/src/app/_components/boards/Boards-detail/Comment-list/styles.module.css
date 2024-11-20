@@ -1,0 +1,11 @@
+.boardCommentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}

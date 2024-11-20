@@ -1,0 +1,47 @@
+.input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #d4d3d3;
+  padding: 0.75rem 1rem;
+
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.error__input {
+  border: 0.125rem solid #f66a6a;
+}
+
+.input__header__container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.input__header {
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.required__mark {
+  color: #f66a6a;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__input__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.error__message {
+  color: #f66a6a;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
