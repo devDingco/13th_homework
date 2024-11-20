@@ -163,54 +163,44 @@ const BoardsWrite = (props: IBoardWriteprops) => {
 
           <div className={styles.boxEnd}>
             <div className={styles.labelContainer2}>
-              <label>사진 첨부</label>
+              <label className={styles.label}>사진 첨부</label>
               <div className={styles.photoBoxContainer}>
                 <div className={styles.flexbox2}>
-                  <div
-                    className={styles.photoBox}
-                    style={{
-                      backgroundImage: imageUrl
-                        ? `url(https://storage.googleapis.com/${imageUrl})`
-                        : "none",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      position: "relative",
-                    }}
-                    onClick={onClickImage}
-                  >
-                    {/* 이미지가 있을 때만 X 버튼 표시 */}
-                    {imageUrl && (
+                  {imageUrl.map((url, index) => (
+                    <div
+                      key={index}
+                      className={styles.photoBox}
+                      style={{
+                        backgroundImage: `url(https://storage.googleapis.com/${url})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        position: "relative",
+                      }}
+                    >
                       <button
                         className={styles.deleteButton}
-                        onClick={imgDeleted}
+                        onClick={() => imgDeleted(index)}
                       >
                         ✕
                       </button>
-                    )}
+                    </div>
+                  ))}
 
-                    {/* 이미지가 없을 때 파일 업로드 안내 표시 */}
-                    {!imageUrl && (
-                      <>
-                        <div className={styles.addImageIcon}>
-                          <Image
-                            src="/image/add.png"
-                            alt="사진 추가"
-                            width={300}
-                            height={300}
-                            className={styles.addImageIcon}
-                            onClick={onClickImage}
-                          />
-                        </div>
-                        <div className={styles.photoBoxText}>
-                          클릭해서 사진 업로드
-                        </div>
-                      </>
-                    )}
-
+                  {/* 추가 이미지 업로드 버튼 */}
+                  <div className={styles.photoBox} onClick={onClickImage}>
+                    <div className={styles.addImageIcon}>
+                      <Image
+                        src="/image/add.png"
+                        alt="사진 추가"
+                        width={30}
+                        height={30}
+                      />
+                    </div>
                     <input
                       type="file"
                       ref={fileRef}
                       style={{ display: "none" }}
+                      multiple // 여러 파일 선택 허용
                       onChange={onChangeFile}
                     />
                   </div>

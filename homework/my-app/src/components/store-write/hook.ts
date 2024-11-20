@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -85,20 +86,32 @@ const useStoreWrite = (props: StoreWritePageProps) => {
 
   const onClickImage = () => fileRef.current?.click();
 
-  const onChangeFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || []);
-    const uploadedUrls: string[] = [];
+  const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []); // 파일 리스트를 배열로 변환
+    const localPreviews: string[] = files.map((file) =>
+      URL.createObjectURL(file)
+    ); // 각 파일에 대해 URL 생성
 
-    for (const file of files) {
+    // 기존 이미지 URL과 새로 생성한 URL을 병합하여 상태 업데이트
+    setImageUrl((prev) => [...prev, ...localPreviews]);
+
+    // 업로드 작업 실행
+    files.forEach(async (file, index) => {
       try {
         const result = await uploadFile({ variables: { file } });
-        if (result.data?.uploadFile.url)
-          uploadedUrls.push(result.data.uploadFile.url);
+        if (result.data?.uploadFile.url) {
+          setImageUrl((prev) =>
+            prev.map((url, idx) =>
+              idx === prev.length - localPreviews.length + index
+                ? result.data.uploadFile.url
+                : url
+            )
+          );
+        }
       } catch (error) {
-        console.error("파일 업로드 오류:", error);
+        console.error("File upload error:", error);
       }
-    }
-    setImageUrl((prev) => [...prev, ...uploadedUrls]);
+    });
   };
 
   const imgDeleted = (index: number) =>
@@ -122,8 +135,8 @@ const useStoreWrite = (props: StoreWritePageProps) => {
         zipcode: data.zipcode,
         address: data.address,
         addressDetail: data.addressDetail,
-        lat: 37.5665, // 임시 위도
-        lng: 126.978, // 임시 경도
+        lat: 37.5665, // Placeholder latitude
+        lng: 126.978, // Placeholder longitude
       };
 
       if (props.isEdit) {
@@ -135,13 +148,13 @@ const useStoreWrite = (props: StoreWritePageProps) => {
               price: data.price,
               contents: data.contents,
               tags: hashtags,
-              travelproductAddress, // 주소 데이터를 travelproductAddress로 묶어서 전송
+              travelproductAddress,
               images: imageUrl,
             },
             travelproductId: params.boardId,
           },
         });
-        console.log("수정 성공:", result.data);
+        console.log("Update success:", result.data);
       } else {
         const result = await createProduct({
           variables: {
@@ -151,15 +164,15 @@ const useStoreWrite = (props: StoreWritePageProps) => {
               price: data.price,
               contents: data.contents,
               tags: hashtags,
-              travelproductAddress, // 주소 데이터를 travelproductAddress로 묶어서 전송
+              travelproductAddress,
               images: imageUrl,
             },
           },
         });
-        console.log("등록 성공:", result.data);
+        console.log("Create success:", result.data);
       }
     } catch (error) {
-      console.error("오류 발생:", error);
+      console.error("Error:", error);
     }
   };
 

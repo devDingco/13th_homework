@@ -49,43 +49,33 @@ export default function BoardsDetail(props: IBoardsDetailprops) {
         <div className={styles.grid1}>
           <div className={styles.imgContainer}>
             <Carousel>
-              <Carousel.Item>
-                <Image
-                  src={
-                    data?.fetchBoard.images?.[0]
-                      ? `https://storage.googleapis.com/${data.fetchBoard.images[0]}`
-                      : defaultImage
-                  }
-                  alt="풍경"
-                  width={500} // 적절한 고정 크기
-                  height={300}
-                  sizes="100vw"
-                  className={styles.carouselImage}
-                  style={{ borderRadius: "20px" }}
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <Image
-                  src="/image/sampleimg2.jpg"
-                  alt="풍경"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className={styles.carouselImage}
-                  style={{ borderRadius: "20px" }}
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <Image
-                  src="/image/sampleimg2.jpg"
-                  alt="풍경"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className={styles.carouselImage}
-                  style={{ borderRadius: "20px" }}
-                />
-              </Carousel.Item>
+              {data?.fetchBoard.images && data.fetchBoard.images.length > 0 ? (
+                data.fetchBoard.images.map((image, index) => (
+                  <Carousel.Item key={index}>
+                    <Image
+                      src={`https://storage.googleapis.com/${image}`}
+                      alt={`이미지 ${index + 1}`}
+                      width={500} // 적절한 고정 크기
+                      height={0}
+                      sizes="100vw"
+                      className={styles.carouselImage}
+                      style={{ borderRadius: "20px" }}
+                    />
+                  </Carousel.Item>
+                ))
+              ) : (
+                <Carousel.Item>
+                  <Image
+                    src={defaultImage} // 이미지가 없을 때 기본 이미지 표시
+                    alt="기본 이미지"
+                    width={500}
+                    height={0}
+                    sizes="100vw"
+                    className={styles.carouselImage}
+                    style={{ borderRadius: "20px" }}
+                  />
+                </Carousel.Item>
+              )}
             </Carousel>
           </div>
           <div className={styles.iconContainer}>

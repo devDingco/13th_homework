@@ -47,14 +47,16 @@ export default function BoardList({ data }: IBoardListprops) {
           >
             <p>{el.title}</p>
             {el.images?.[0] && (
-              <Image
-                src={`https://storage.googleapis.com/${el.images[0]}`}
-                layout="responsive"
-                width={300}
-                height={150}
-                objectFit="cover"
-                alt="Post Thumbnail"
-              />
+              <div className={styles.imageBox}>
+                <Image
+                  layout="intrinsic" /* 이미지 비율에 따라 크기 자동 조정 */
+                  src={`https://storage.googleapis.com/${el.images[0]}`}
+                  objectFit="contain" /* 이미지를 박스에 꽉 차게 */
+                  alt="Post Thumbnail"
+                  width={400}
+                  height={0}
+                />
+              </div>
             )}
           </div>
           <div className={styles.footer}>
