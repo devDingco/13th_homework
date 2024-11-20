@@ -9,11 +9,13 @@ import { WalletOutlined } from "@ant-design/icons";
 import PointsUsageHistory from "../_components/mypage/PointsUsageHistory";
 import ChangePassword from "../_components/mypage/ChangePassword";
 import { withLoginCheck } from "../../commons/hoc/withLoginCheck";
+import { useUserInfo } from "../_store/userInfo-store";
 
 const MYPAGE_MENUS = ["거래내역 & 북마크", "포인트 사용 내역", "비밀번호 변경"];
 
 function MyPage() {
   const [selectedMenu, setSelectedMenu] = useState(0);
+  const { userInfo } = useUserInfo();
 
   const onClickNavigationItem = (event: MouseEvent<HTMLDivElement>) => {
     const id = event.currentTarget?.id;
@@ -30,18 +32,16 @@ function MyPage() {
           <Image
             src="/assets/profile.png"
             alt="프로필 이미지"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "40px", height: "40px" }}
+            width={40}
+            height={40}
           ></Image>
-          <span>최홍식</span>
+          <span>{userInfo.name}</span>
         </div>
         <Divider />
         <div className={styles.myPointContainer}>
           <WalletOutlined className={styles.walletIcon} />
           <div className={styles.pointContainer}>
-            <span>23,000</span>
+            <span>{userInfo.userPoint?.amount}</span>
             <p>P</p>
           </div>
         </div>
