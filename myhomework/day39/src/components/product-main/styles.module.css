@@ -1,0 +1,310 @@
+/* 전체 레이아웃 스타일 */
+.mainLayout {
+  padding: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.mainContainer {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  gap: 24px;
+  align-self: stretch;
+  padding: 0px 48px 40px;
+}
+
+/* 제목 스타일 */
+.title {
+  font-size: 24px;
+  margin: 20px 0px;
+  font-family: var(--pretendard-bold);
+}
+
+/* 캐러셀 스타일 */
+.carousel {
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.carouselContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.carouselItem {
+  flex: 0 0 auto;
+  /* width: 50%; 화면에 2개씩 표시 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+.carouselImage {
+  object-fit: "cover";
+  border-radius: "10px";
+}
+
+.itemTitle {
+  display: flex;
+  font-size: 20px;
+  color: #fff;
+  font-family: var(--pretendard-medium);
+  justify-content: flex-start;
+}
+
+.carouselText {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 100%;
+  color: white;
+  padding: 10px 28px 10px 10px;
+  border-radius: 5px;
+}
+
+.price {
+  display: flex;
+  font-size: 20px;
+  color: #fff;
+  font-family: var(--pretendard-medium);
+  justify-content: flex-end;
+}
+
+/* 숙소 목록 제목 */
+.subtitle {
+  font-size: 24px;
+  font-family: var(--pretendard-bold);
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+/* 그리드 레이아웃 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.gridItem {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gridImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.gridTitle {
+  font-size: 16px;
+  font-family: var(--pretendard-bold);
+  margin: 10px;
+}
+
+.gridLocation {
+  font-size: 14px;
+  color: #777;
+  margin: 0 10px 10px;
+}
+
+/* 상단 필터 버튼 섹션 스타일 */
+.filterContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.menuContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 68px;
+}
+
+.searchContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.searchBar {
+  display: flex;
+  min-width: 180px;
+  max-width: 640px;
+  padding: 12px;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+}
+
+.datePicker {
+  align-items: center;
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  gap: 8px;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2) !important;
+  height: 48px;
+}
+
+.dataPickerInput {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2) !important;
+}
+.datePickerContainer {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.searchButton {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #000;
+  color: #ffffff;
+}
+
+.newWriteButton {
+  border-radius: 8px;
+  background: #2974e5;
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+/* 그리드 레이아웃 스타일 */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* 반응형 컬럼 */
+  gap: 20px;
+}
+
+/* 카드 스타일 */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* 호버 시 살짝 올라가는 효과 */
+}
+
+.cardImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 15px;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+.cardDescription {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.hashtag {
+  font-size: 0.9rem;
+  color: #2974e5;
+}
+
+.cardPrice {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+  font-family: var(--pretendard-medium);
+  color: #000;
+  margin-top: 10px;
+}
+
+/* 검색 및 필터 버튼 스타일 */
+.searchButton,
+.filterButton {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: var(--pretendard-medium);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.searchButton {
+  background-color: #000;
+  color: #fff;
+}
+
+.filterButton {
+  /* background-color: #f0f0f0; */
+  color: #333;
+}
+
+.searchButton:hover {
+  background-color: #333;
+}
+
+.filterButton:hover {
+  background-color: #ddd;
+}
+
+/* 카테고리 버튼 탭 스타일 */
+.categoryTabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.categoryButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #555;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.categoryButton:hover {
+  color: #000;
+  transform: scale(1.05); /* 호버 시 약간 확대 효과 */
+}
+
+.categoryIcon {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,142 @@
+.allLayout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.allContainer {
+  display: flex;
+  width: 1280px;
+  flex-direction: column;
+  gap: 24px;
+  align-self: stretch;
+  padding: 0px 48px 40px;
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  padding: 24px 48px;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+  min-width: 480px;
+}
+
+.listNav {
+  display: flex;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.navDate,
+.navContent,
+.navBalance {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: #1c1c1c;
+  font-family: var(--pretendard-medium);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.navText {
+  display: flex;
+  flex: 1 0 0;
+  justify-content: center;
+  color: #1c1c1c;
+  font-family: var(--pretendard-medium);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.eachList {
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #f2f2f2;
+}
+
+.listDate {
+  width: 100px;
+  color: #919191;
+  text-align: center;
+  font-family: var(--pretendard-light);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+  text-align: center;
+}
+
+.listPlus {
+  width: 100px;
+  color: #2974e5;
+  font-family: var(--pretendard-medium);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.listDetailsPlus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+
+  color: #2974e5;
+  font-family: var(--pretendard-light);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.listMinus {
+  width: 100px;
+  color: #f66a6a;
+  font-family: var(--pretendard-medium);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.listDetailsMinus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+
+  color: #f66a6a;
+  font-family: var(--pretendard-light);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.listBalance {
+  width: 100px;
+  color: #000;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
