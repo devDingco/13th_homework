@@ -118,9 +118,20 @@ export default function Comment() {
           input: { contents: formData.comment },
           travelproductId,
         },
+        update(cache, { data }) {
+          //등록후 받은 결과물이 data로 들어오고 cache는 원래있던거
+          cache.modify({
+            //modify - 캐시 수정할때
+            fields: {
+              fetchTravelproductQuestions: (prev) => {
+                //prev-현재까지 있던 데이터들
+                return [data?.createTravelproductQuestion, ...prev]; //새로등록한 데이터 + 원래있던데이터 10개
+              },
+            },
+          });
+        },
       });
       reset();
-      refetch();
       setHasMore(true);
     } catch (error) {
       console.error("댓글 등록 실패:", error);
@@ -140,10 +151,18 @@ export default function Comment() {
           input: { contents: updatedContent },
           commentId: editingCommentId,
         },
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchTravelproductQuestions: (prev) => {
+                return [data?.createTravelproductQuestion, ...prev];
+              },
+            },
+          });
+        },
       });
       setEditingCommentId(null);
       setUpdatedContent("");
-      refetch();
       setHasMore(true);
     } catch (error) {
       console.error("댓글 수정 실패:", error);
@@ -156,8 +175,24 @@ export default function Comment() {
         variables: {
           travelproductQuestionId: commentId,
         },
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchTravelproductQuestions(prev, { readField }) {
+                // 삭제된 댓글의 ID를 가져옴
+                const deletedId = data?.deleteTravelproductQuestion;
+
+                // 기존 댓글 목록에서 삭제된 댓글 ID를 제외
+                const filteredComments = prev.filter(
+                  (el) => readField("_id", el) !== deletedId
+                );
+
+                return [...filteredComments]; // 삭제된 댓글을 제외한 나머지를 반환
+              },
+            },
+          });
+        },
       });
-      refetch();
       setHasMore(true);
     } catch (error) {
       console.log("댓글 삭제 실패:", error);

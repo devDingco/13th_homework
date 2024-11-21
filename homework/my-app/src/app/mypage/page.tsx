@@ -4,11 +4,28 @@ import Image from "next/image";
 import styles from "./style.module.css";
 import BoardList from "@/components/boards-list/list";
 import { loginCheck } from "@/commons/hocs/login-check";
-
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { useParams } from "next/navigation";
+const FETCH_USER_LOGGED_IN = gql`
+  query {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+      picture
+      userPoint {
+        _id
+        amount
+      }
+    }
+  }
+`;
 const ProfilePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("history"); // 초기 메뉴
   const [subMenu, setSubMenu] = useState("myProducts"); // 초기 서브 메뉴
   const [pointsMenu, setPointsMenu] = useState("all"); // 포인트 메뉴 상태
+
+  const param = useParams();
 
   const renderContent = () => {
     switch (selectedMenu) {
@@ -152,7 +169,7 @@ const ProfilePage = () => {
               width={20}
               height={0}
             />
-            <div>23,000</div>
+            <div>1000</div>
           </div>
           <div className={styles.menuContainer}>
             <div className={styles.menu}>

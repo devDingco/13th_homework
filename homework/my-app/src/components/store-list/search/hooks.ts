@@ -1,10 +1,9 @@
 import { useState, useCallback, ChangeEvent } from "react";
 import { gql, useQuery } from "@apollo/client";
 import _ from "lodash";
-import { FetchBoardsWithSearchDocument } from "@/commons/graphql/graphql";
 
 const FETCH_TRAVEL_PRODUCTS = gql`
-  query FetchTravelProducts($isSoldout: Boolean, $search: String, $page: Int) {
+  query FetchTravelProducts2($isSoldout: Boolean, $search: String, $page: Int) {
     fetchTravelproducts(isSoldout: $isSoldout, search: $search, page: $page) {
       _id
       name

@@ -19,6 +19,7 @@ export const FETCH_BOARDS = gql`
       images
       contents
       createdAt
+      likeCount
     }
   }
 `;
@@ -32,5 +33,11 @@ export const DELETE_BOARD = gql`
 export const FETCH_BOARDS_COUNT = gql`
   query fetchBoardsCount {
     fetchBoardsCount
+  }
+`;
+
+export const LIKE_BOARD = gql`
+  mutation likeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
   }
 `;

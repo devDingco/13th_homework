@@ -5,10 +5,11 @@ import Image from "next/image";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import { IBoardListprops } from "./types";
+import { gql, useMutation } from "@apollo/client";
 
 export default function BoardList({ data }: IBoardListprops) {
   const router = useRouter();
-  const { onClickDelete } = useBoardList();
+  const { onClickDelete, onClickLike } = useBoardList();
   const defaultImage = "/image/sampleimg2.jpg";
 
   const formatDate = (isoString: string | number | Date) => {
@@ -61,7 +62,13 @@ export default function BoardList({ data }: IBoardListprops) {
           </div>
           <div className={styles.footer}>
             <div className={styles.iconGroup}>
-              <span>👍 89</span>
+              <button
+                onClick={() => {
+                  onClickLike(el._id);
+                }}
+              >
+                👍 {el.likeCount ?? "0"}
+              </button>
               <span>💬 20</span>
               <span>🔁 12</span>
             </div>
