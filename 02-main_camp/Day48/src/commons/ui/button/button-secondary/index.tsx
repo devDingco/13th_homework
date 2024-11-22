@@ -14,5 +14,5 @@ type IButtonSecondaryProps = Pick<
 >;
 
 export function ButtonSecondary(props: IButtonSecondaryProps) {
-  return <ButtonBase variant={ButtonVariant.primary} {...props} />;
+  return <ButtonBase variant={ButtonVariant.secondary} {...props} />;
 }
