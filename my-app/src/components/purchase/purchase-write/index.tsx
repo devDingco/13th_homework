@@ -41,10 +41,26 @@ export default function PerchaseWrite(props) {
   };
 
   // =====================
+  interface FormValues {
+    name: string;
+    remarks: string;
+    contents: string;
+    price: number;
+    tags: string[];
+    images: string[];
+    travelproductAddress: {
+      zipcode?: string; // 추가
+      addressDetail?: string; // 추가
+      lat?: number; // 추가
+      lng?: number; // 추가
+    };
+  }
+  // 수정하기 일때만 id값을 가져오도록 해야 하는데 if로 묶으면 잘 안됨 나중에 수정
+
   const { data } = useQuery(FECTH_TRAVEL_PRODUCT, {
     variables: { id: params.purchaseId },
   });
-  console.log(data);
+
   // ----- 디폴트 벨류 하는 부분
   const { register, handleSubmit, formState, setValue } = useForm({
     resolver: zodResolver(schema),
@@ -57,6 +73,15 @@ export default function PerchaseWrite(props) {
       tags: props.isEdit ? data?.fetchTravelproduct.tags?.join(", ") : "", // tags는 문자열로 병합
       images: [], // images 필드를 추가하여 초기 배열 값 설정
       //images는 여기에 직접 넣을 수 없어 useEffec에서 setValue 활용해야함.
+      travelproductAddress: {
+        zipcode: props.isEdit ? data?.fetchTravelproduct.zipcode : "",
+        addressDetail: props.isEdit
+          ? data?.fetchTravelproduct.addressDetail
+          : "",
+        lat: props.isEdit ? data?.fetchTravelproduct.lat : "", // 위도 추가
+        lng: props.isEdit ? data?.fetchTravelproduct.lng : "", // 경도 추가
+      },
+
       // 필요한 다른 필드도 여기에 추가하기.  -> 다른애들도 이런식으로 디폴트벨류 적용해주기
     },
   });
@@ -71,6 +96,14 @@ export default function PerchaseWrite(props) {
 
       // 이미지 URL들 업데이트
       setImageUrls(data.fetchTravelproduct.images || []);
+      // 주소와 관련된 필드 설정
+      setValue("travelproductAddress.zipcode", data.fetchTravelproduct.zipcode);
+      setValue(
+        "travelproductAddress.addressDetail",
+        data.fetchTravelproduct.addressDetail
+      );
+      setValue("travelproductAddress.lat", data.fetchTravelproduct.lat);
+      setValue("travelproductAddress.lng", data.fetchTravelproduct.lng);
     }
   }, [data, props.isEdit, setValue]);
 
@@ -89,17 +122,18 @@ export default function PerchaseWrite(props) {
     setIsOpen((prev) => !prev);
   };
 
-  const handleComplete = (data) => {
-    // console.log(data);
-    console.log(data?.zonecode);
-    setZipcode(data?.zonecode); // zonecode 업데이트
-    console.log(data?.roadAddress);
-    setAddress(data?.roadAddress); // roadAddress 업데이트
-    onToggleModal(event);
-  };
+  // const handleComplete = (data) => {
+  //   // console.log(data);
+  //   console.log(data?.zonecode);
+  //   setZipcode(data?.zonecode); // zonecode 업데이트
+  //   console.log(data?.roadAddress);
+  //   setAddress(data?.roadAddress); // roadAddress 업데이트
+  //   onToggleModal(event);
+  // };
   // 주소--------------------------------------
   // 상품 등록 처리 -----------------------------------
-  const onClickSubmit = async (data) => {
+  const onClickSubmit = async (data: FormValues) => {
+    console.log(data);
     try {
       const result = await createTravelproduct({
         variables: {
@@ -108,9 +142,15 @@ export default function PerchaseWrite(props) {
           contents: data.contents,
           price: parseInt(data.price, 10),
           tags: (data.tags || "").split(",").map((tag) => tag.trim()), // undefined일 때 빈 문자열로 대체
-          images: [imageUrls],
+          images: imageUrls,
+          // 너를 잊지않겠다
+          zipcode: data.travelproductAddress.zipcode,
+          addressDetail: data.travelproductAddress.addressDetail,
+          lat: data.travelproductAddress.lat,
+          lng: data.travelproductAddress.lng,
         },
       });
+
       console.log("상품 생성 성공:", result.data);
       router.push(`/purchase/${result.data.createTravelproduct._id}`);
     } catch (error) {
@@ -120,10 +160,6 @@ export default function PerchaseWrite(props) {
 
   // 상품 수정 처리 -----------------------------------
   const onClickUpdate = async (data) => {
-    const tags = (data?.tags || [])
-      .filter((tag) => tag.trim() !== "") // 빈 문자열 제거
-      .map((tag) => tag.trim()); // 각 태그의 앞뒤 공백 제거
-
     const myvariables = {
       travelproductId: params.purchaseId,
       name: data.name,
@@ -132,6 +168,10 @@ export default function PerchaseWrite(props) {
       price: data.price,
       tags: (data.tags || "").split(",").map((tag) => tag.trim()), // undefined일 때 빈 문자열로 대체
       images: imageUrls,
+      zipcode: data.travelproductAddress.zipcode,
+      addressDetail: data.travelproductAddress.addressDetail,
+      lat: data.travelproductAddress.lat,
+      lng: data.travelproductAddress.lng,
     };
     try {
       const result = await updateTravelproduct({
@@ -142,10 +182,6 @@ export default function PerchaseWrite(props) {
         alert("수정 성공");
         router.push(`/purchase/${result.data.updateTravelproduct._id}`); // 수정 후 상세 페이지로 이동
       }
-      console.log(data?.tags); // data?.tags가 배열인지 확인
-      console.log(tags); // tags 배열이 제대로 만들어졌는지 확인
-      console.log(result); // result 데이터가 제대로 전달되었는지 확인
-      console.log(params.purchaseId, imageUrls); // 값이 잘 전달되는지 확인
     } catch (error) {
       console.error("상품 수정 실패:", error);
     }
@@ -261,7 +297,7 @@ export default function PerchaseWrite(props) {
                 className={styles.adressZipcodeInput}
                 type="text"
                 placeholder="01234"
-                {...register("adressZipcode")}
+                {...register("travelproductAddress.zipcode")}
               />
               <button
                 className={styles.adressZipcodeBtn}
@@ -275,7 +311,7 @@ export default function PerchaseWrite(props) {
               className={styles.addressDetailInput}
               type="text"
               placeholder="상세주소를 입력해 주세요."
-              {...register("addressDetail")}
+              {...register("travelproductAddress.addressDetail")}
             />
 
             <div className={styles.coordinateArea}>
@@ -285,6 +321,7 @@ export default function PerchaseWrite(props) {
                   className={styles.coordinateInput}
                   type="text"
                   placeholder="주소를 먼저 입력해 주세요."
+                  {...register("travelproductAddress.lat")}
                 />
               </div>
 
@@ -294,6 +331,7 @@ export default function PerchaseWrite(props) {
                   className={styles.coordinateInput}
                   type="text"
                   placeholder="주소를 먼저 입력해 주세요."
+                  {...register("travelproductAddress.lng")}
                 />
               </div>
             </div>

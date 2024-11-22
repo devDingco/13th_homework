@@ -5,7 +5,25 @@
 import { RightOutlined, UserOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { gql, useQuery } from "@apollo/client";
+
+const FETCH_USER_LOGGED_IN = gql`
+  query {
+    fetchUserLoggedIn {
+      _id
+      name
+      userPoint {
+        amount
+      }
+    }
+  }
+`;
+
 export default function Information() {
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+
+  console.log(data);
+
   return (
     <div>
       <div className={styles.mypageSection}>
@@ -14,10 +32,12 @@ export default function Information() {
           <span className={styles.sectionTitle}>내정보</span>
           <div className={styles.nameSection}>
             <UserOutlined />
-            <span className={styles.name}>이찬우</span>
+            <span className={styles.name}>{data?.fetchUserLoggedIn?.name}</span>
           </div>
           <div className={styles.underLine}></div>
-          <div className={styles.leaveMoney}>남은금액: 23,000원</div>
+          <div className={styles.leaveMoney}>
+            남은금액: {data?.fetchUserLoggedIn.userPoint?.amount}원
+          </div>
           <div className={styles.underLine}></div>
           <div className={styles.detailSection}>
             <div className="transactionHistorySection">
@@ -27,8 +47,10 @@ export default function Information() {
               </Link>
             </div>
             <div>
-              포인트 충전하기
-              <RightOutlined />
+              <Link href="/mypage/pointRecharge">
+                포인트 충전하기
+                <RightOutlined />
+              </Link>
             </div>
             <Link href="/mypage/pointHistory" className={styles.pointHistory}>
               포인트내역

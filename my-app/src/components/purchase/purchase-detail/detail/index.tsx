@@ -28,6 +28,13 @@ const FECTH_TRAVEL_PRODUCT = gql`
       price
       tags
       images
+      soldAt
+      travelproductAddress {
+        zipcode
+        addressDetail
+        lat
+        lng
+      }
     }
   }
 `;
@@ -45,6 +52,12 @@ export default function PurchaseDetail() {
     variables: { id: params.purchaseId },
   });
   console.log("data:", data);
+
+  const isoDate = data?.fetchTravelproduct.soldAt;
+  const date = new Date(isoDate);
+
+  const formattedDate = date.toLocaleString(); // 기본 형식 (로컬 환경에 맞게)
+  console.log("구매날짜:", formattedDate); // 예: "2024. 11. 21. 오후 11:15:28" (한국어 환경 기준)
 
   const [createPointTransactionOfLoading] = useMutation(
     CREATE_POINT_TRANSACTION_OF_LOADING
@@ -85,7 +98,7 @@ export default function PurchaseDetail() {
 
       await createPointTransactionOfLoading({
         variables: {
-          paymentId: result?.paymentId, // => 백엔드로 결제 정보 보내는 로직 이렇게 짜면 되는건가요?
+          paymentId: result?.paymentId,
         },
       });
     } catch (error) {
@@ -109,6 +122,26 @@ export default function PurchaseDetail() {
       </section>
       <div>6731aff39712e0002973f12c</div>
       {/* 코드수정할때 계속 생성하기 귀찮아서 박아둔 purchaseID 값 */}
+      {/* ---- 임시 아이들 */}
+      <div>
+        우편번호:
+        {data?.fetchTravelproduct?.travelproductAddress?.zipcode || "정보 없음"}
+      </div>
+      <div>
+        상세주소:
+        {data?.fetchTravelproduct?.travelproductAddress?.addressDetail ||
+          "정보 없음"}
+      </div>
+
+      <div>
+        위도:
+        {data?.fetchTravelproduct?.travelproductAddress?.lat || "정보 없음"}
+      </div>
+      <div>
+        경도:
+        {data?.fetchTravelproduct?.travelproductAddress?.lng || "정보 없음"}
+      </div>
+      {/* ------ */}
       <span className={styles.summaryText}>
         {data?.fetchTravelproduct.remarks}
       </span>

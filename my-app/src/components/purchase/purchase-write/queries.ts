@@ -16,6 +16,10 @@ export const CREATE_TRAVEL_PRODUCT = gql`
     $price: Int!
     $tags: [String!]
     $images: [String!]
+    $zipcode: String
+    $addressDetail: String
+    $lat: Float
+    $lng: Float
   ) {
     createTravelproduct(
       createTravelproductInput: {
@@ -25,6 +29,12 @@ export const CREATE_TRAVEL_PRODUCT = gql`
         price: $price
         tags: $tags
         images: $images
+        travelproductAddress: {
+          zipcode: $zipcode
+          addressDetail: $addressDetail
+          lat: $lat
+          lng: $lng
+        }
       }
     ) {
       _id
@@ -36,6 +46,12 @@ export const CREATE_TRAVEL_PRODUCT = gql`
       images
       pickedCount
       createdAt
+      travelproductAddress {
+        zipcode
+        addressDetail
+        lat
+        lng
+      }
     }
   }
 `;
@@ -49,6 +65,10 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
     $price: Int
     $tags: [String!]
     $images: [String!]
+    $zipcode: String
+    $addressDetail: String
+    $lat: Float
+    $lng: Float
   ) {
     updateTravelproduct(
       travelproductId: $travelproductId
@@ -59,6 +79,12 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
         price: $price
         tags: $tags
         images: $images
+        travelproductAddress: {
+          zipcode: $zipcode
+          addressDetail: $addressDetail
+          lat: $lat
+          lng: $lng
+        }
       }
     ) {
       _id
@@ -68,6 +94,12 @@ export const UPDATE_TRAVEL_PRODUCT = gql`
       price
       tags
       images
+      travelproductAddress {
+        zipcode
+        addressDetail
+        lat
+        lng
+      }
     }
   }
 `;
@@ -82,6 +114,12 @@ export const FECTH_TRAVEL_PRODUCT = gql`
       price
       tags
       images
+      travelproductAddress {
+        zipcode
+        addressDetail
+        lat
+        lng
+      }
     }
   }
 `;
