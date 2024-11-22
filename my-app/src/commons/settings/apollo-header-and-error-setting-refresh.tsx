@@ -36,7 +36,10 @@ export default function ApolloHeaderAndErrorSettingRefresh(
       .then((newAccessToken) => {
         if (newAccessToken) setAccessToken(newAccessToken);
       })
-      .finally(setIsLoaded);
+      .finally(() => {
+        console.log("AccessToken after fetch:", accessToken);
+        setIsLoaded();
+      });
   }, []);
 
   // const localStorageAccessToken = localStorage.getItem("accessToken");
