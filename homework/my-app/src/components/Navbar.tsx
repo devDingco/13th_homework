@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./style.module.css";
 import { gql, useQuery } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token-store";
 import PointModal from "./point-modal";
+import { useUserStore } from "@/commons/stores/useUserStore";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -27,6 +28,7 @@ const Navbar = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [isPointModalOpen, setPointModalOpen] = useState(false); // 모달 상태 관리
   const router = useRouter();
+  const { useData } = useQuery(FETCH_USER_LOGGED_IN);
 
   const { accessToken, setAccessToken } = useAccessTokenStore();
 
@@ -52,7 +54,7 @@ const Navbar = () => {
   };
 
   const mypageClick = () => {
-    router.push("/mypage");
+    router.push(`/mypage`);
   };
 
   const loginClick = () => {
@@ -105,7 +107,7 @@ const Navbar = () => {
                 <p>{userInfo?._id}</p>
                 <p>{userInfo?.name}</p>
                 <p>{userInfo?.email}</p>
-                <p>{userInfo?.userPoint.amount}</p>
+                <p>{userInfo?.userPoint.amount ?? 0}</p>
                 <div className={styles.mypage} onClick={mypageClick}>
                   마이페이지
                 </div>

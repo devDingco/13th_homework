@@ -10,7 +10,7 @@ import styles from "./style.module.css";
 
 // GraphQL Queries & Mutations
 const FETCH_TRAVEL_PRODUCTS = gql`
-  query FetchTravelProducts($isSoldout: Boolean, $search: String, $page: Int) {
+  query FetchTravelProducts1($isSoldout: Boolean, $search: String, $page: Int) {
     fetchTravelproducts(isSoldout: $isSoldout, search: $search, page: $page) {
       _id
       name
