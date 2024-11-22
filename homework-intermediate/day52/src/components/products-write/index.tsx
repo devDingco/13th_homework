@@ -111,7 +111,7 @@ export default function ProductWrite(props) {
 		if (props.data?.fetchTravelproduct) {
 			reset(props.data?.fetchTravelproduct);
 		}
-	}, [props.data, reset]);
+	}, [props.data]);
 
 	// 카카오지도 API
 	useEffect(() => {

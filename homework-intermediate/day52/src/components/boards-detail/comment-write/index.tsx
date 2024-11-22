@@ -7,7 +7,6 @@ import { useMutation } from '@apollo/client';
 import {
 	BoardComment,
 	CreateBoardCommentDocument,
-	FetchBoardCommentsDocument,
 } from '@/commons/graphql/graphql';
 import { useParams } from 'next/navigation';
 import { UpdateBoardCommentDocument } from '@/commons/graphql/graphql';
@@ -50,13 +49,14 @@ export default function CommentWrite(props: CommentWriteProps) {
 		onChangeContent,
 	} = useCommentWrite(props);
 
+	// 댓글 등록
 	const [createComment] = useMutation(CreateBoardCommentDocument);
 	const onClickSubmit = async () => {
 		if (!writer || !password) {
 			alert('작성자와 비밀번호를 올바르게 입력해 주십쇼');
 			return;
 		}
-		const { data } = await createComment({
+		await createComment({
 			variables: {
 				createBoardCommentInput: {
 					writer: writer,
@@ -66,14 +66,23 @@ export default function CommentWrite(props: CommentWriteProps) {
 				},
 				boardId: String(params.boardId),
 			},
-			refetchQueries: [
-				{
-					query: FetchBoardCommentsDocument,
-					variables: {
-						boardId: String(params.boardId),
+			// refetchQueries: [
+			// 	{
+			// 		query: FetchBoardCommentsDocument,
+			// 		variables: {
+			// 			boardId: String(params.boardId),
+			// 		},
+			// 	},
+			// ],
+			update(cache, { data }) {
+				cache.modify({
+					fields: {
+						fetchBoardComments: (prev) => {
+							return [data?.createBoardComment, ...prev];
+						},
 					},
-				},
-			],
+				});
+			},
 		});
 		alert('댓글이 등록되었습니다!');
 		setWriter('');
@@ -81,6 +90,7 @@ export default function CommentWrite(props: CommentWriteProps) {
 		setContent('');
 	};
 
+	// 댓글 수정
 	const [updateComment] = useMutation(UpdateBoardCommentDocument);
 	const onClickUpdate = async () => {
 		if (!props.commentItem || !props.onToggleEdit) {
