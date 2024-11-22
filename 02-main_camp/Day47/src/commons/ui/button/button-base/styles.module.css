@@ -1,0 +1,60 @@
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-wrap: nowrap;
+}
+
+.button__filled {
+  width: 100%;
+}
+
+.button__small {
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+
+  font-size: 0.875rem;
+}
+
+.button__medium {
+  height: 3rem;
+  padding: 0.75rem 1rem;
+
+  font-size: 1.125rem;
+}
+
+.button__large {
+  height: 3.25rem;
+  padding: 0.875rem 1rem;
+
+  font-size: 1.125rem;
+}
+
+.button__variant__primary {
+  background-color: #2974e5;
+  color: white;
+  font-weight: 600;
+}
+
+.button__variant__secondary {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+
+.button__variant__tertiary {
+  background-color: white;
+
+  border: 0.0625rem solid black;
+
+  color: black;
+  font-weight: 600;
+}
+
+.button__enabled {
+  background-color: #2974e5;
+  opacity: 50%;
+}
