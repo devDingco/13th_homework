@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: Pretendard;
   src: url("./Pretendard-Medium.otf");
@@ -10,7 +9,6 @@
   padding: 0;
   font-family: Pretendard;
 }
-
 
 body {
   display: flex;
@@ -75,7 +73,6 @@ body {
   align-items: center;
 }
 
-
 .filter {
   display: fixed;
   flex-direction: column;
@@ -86,7 +83,7 @@ body {
   appearance: none;
   width: 120px;
   height: 48px;
-  border: 1px solid #C7C7C7;
+  border: 1px solid #c7c7c7;
   border-radius: 8px;
   padding: 14px 10px;
 
@@ -98,9 +95,8 @@ body {
   align-items: center;
   background-color: var(--backgroundColor);
 
-  --CSSment: "전체"
+  --CSSment: "전체";
 }
- 
 
 .dropdown_title::after {
   content: var(--CSSment);
@@ -114,7 +110,7 @@ body {
   display: none;
   position: absolute;
   width: 120px;
-  border: 1px solid #C7C7C7;
+  border: 1px solid #c7c7c7;
   border-radius: 10px;
   overflow: hidden; /* 모서리 영역 넘치는 거 없애기 */
   margin-top: 8px;
@@ -159,14 +155,13 @@ body {
   justify-content: space-between;
 }
 
-
 .storage {
   border-bottom: 0.125rem solid var(--textColor);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 0.5rem;
-  color: var(--textColor)
+  color: var(--textColor);
 }
 
 .photos {
@@ -185,7 +180,6 @@ body {
 .unclick_storage {
   color: #ababab;
 }
-
 
 /* 여기서부터 모달 css */
 .modal_group {
@@ -210,8 +204,8 @@ body {
 
 .modal_register {
   position: absolute;
-  top: calc(50vh - 640px/2);
-  left: calc(50vw - 560px/2);
+  top: calc(50vh - 640px / 2);
+  left: calc(50vw - 560px / 2);
 
   width: 640px;
   height: 560px;
@@ -281,7 +275,8 @@ body {
   margin-bottom: 1rem;
 }
 
-#html_title, #html_content {
+#html_title,
+#html_content {
   appearance: none;
   width: 100%;
   border-radius: 0.5rem;
@@ -299,10 +294,10 @@ body {
   height: 128px;
 }
 
-#html_title::placeholder, #html_content::placeholder {
+#html_title::placeholder,
+#html_content::placeholder {
   color: var(--inputPlaceholder);
 }
-
 
 .register_button {
   width: 100%;
@@ -347,7 +342,6 @@ body {
   color: var(--closeButtonText);
 }
 
-
 .reg_fin {
   display: none;
   position: absolute;
@@ -363,8 +357,8 @@ body {
 .reg_group {
   display: none;
   position: absolute;
-  top: calc(50vh - 320px/2);
-  left: calc(50vw - 400px/2);
+  top: calc(50vh - 320px / 2);
+  left: calc(50vw - 400px / 2);
 
   width: 480px;
   height: 200px;
@@ -446,7 +440,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  
+
   /* transition: width 0.5s, height 0.5s; */
 }
 
@@ -522,7 +516,6 @@ body {
   line-height: 1.5rem;
 }
 
-
 .write_diary {
   width: 110px;
   height: 48px;
@@ -534,7 +527,6 @@ body {
   align-items: center;
   text-align: center;
 }
-
 
 .footer_layout {
   width: 100%;
@@ -600,11 +592,9 @@ body {
   z-index: 600;
 }
 
-
 .change_color {
   filter: invert(1);
 }
-
 
 .puppy_image {
   max-width: 100%;
@@ -630,7 +620,7 @@ body {
   width: 320px;
   height: 48px;
 
-  border: 1px solid #C7C7C7;
+  border: 1px solid #c7c7c7;
   border-radius: 100px;
 
   padding: 12px 16px;
@@ -648,7 +638,7 @@ body {
 
   font-size: 16px;
   font-weight: 500;
-  color: #ABABAB;
+  color: #ababab;
   background-color: var(--backgroundColor);
 }
 
@@ -691,7 +681,7 @@ body {
 }
 
 /* 페이지네이션 */
-.pagination_layout  {
+.pagination_layout {
   width: 100%;
   display: flex;
   justify-content: center;

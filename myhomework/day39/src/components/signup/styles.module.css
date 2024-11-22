@@ -1,0 +1,223 @@
+.singupLayout {
+  display: flex;
+  max-width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.componentsContainer {
+  display: grid;
+  grid-template-rows: 100% 100%;
+  grid-template-columns: 0.3fr 2fr;
+  width: 100vw;
+  height: 100vh;
+}
+
+.signupContainer {
+  display: flex;
+  padding: 244px 20px 40px 20px;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: 24px;
+
+  color: #000;
+  text-align: center;
+  font-family: var(--pretendard-medium);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.signupNotice {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+
+  color: #333;
+  text-align: center;
+  font-family: var(--pretendard-medium);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.signupInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputsTitle {
+  display: flex;
+  gap: 4px;
+}
+
+.asterisk {
+  color: tomato;
+}
+
+.inputValid,
+.inputValid:hover,
+.inputValid:focus-within,
+.inputValid:not(.ant-input-disabled) {
+  display: flex;
+  max-width: 320px;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1 0 0;
+  border: 1px solid #f66a6a;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.inputEmail,
+.inputName,
+.inputPassword,
+.inputPwCheck,
+.inputEmail:hover,
+.inputEmail:focus-within,
+.inputName:hover,
+.inputName:focus-within,
+.inputPassword:hover,
+.inputPassword:focus-within,
+.inputPwCheck:hover,
+.inputPwCheck:focus-within,
+.inputEmail:not(.ant-input-disabled),
+.inputName:not(.ant-input-disabled),
+.inputPassword:not(.ant-input-disabled),
+.inputPwCheck:not(.ant-input-disabled) {
+  display: flex;
+  max-width: 320px;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1 0 0;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+}
+
+.inputEmail::placeholder,
+.inputName::placeholder,
+.inputPassword::placeholder,
+.inputPwCheck::placeholder {
+  color: #ababab;
+  font-family: var(--pretendard-light);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.checkInputs {
+  color: #f66a6a;
+  font-family: var(--pretendard-light);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: start;
+}
+
+.signupButton {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #2974e5;
+
+  color: #fff;
+  text-align: center;
+  font-family: var(--pretendard-medium);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mainImage {
+  width: 100vw;
+  height: 100vh;
+  flex: 1 0 0;
+}
+
+.modalBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 50%;
+  z-index: 200;
+}
+
+.modalContainer {
+  position: absolute;
+  top: calc(60vh - 480px / 2);
+  left: calc(45vw - 200px / 2);
+  width: 480px;
+  height: 200px;
+
+  background-color: #fff;
+  border-radius: 24px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.membershipTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-family: var(--pretendard-medium);
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.mainLogo {
+  width: 78px;
+  flex-shrink: 0;
+}
+
+.moveToLoginButton {
+  display: flex;
+  height: 40px;
+  min-width: 96px;
+  max-width: 120px;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+  border-radius: 8px;
+  background-color: #2974e5;
+
+  color: #fff;
+  text-align: center;
+  font-family: var(--pretendard-regular);
+  font-size: 14px;
+  font-weight: 600;
+}
