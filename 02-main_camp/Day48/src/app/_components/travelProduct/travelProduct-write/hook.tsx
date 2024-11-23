@@ -6,6 +6,7 @@ import {
   CreateTravelProductDocument,
   FetchTravelproductDocument,
   FetchTravelproductQuery,
+  FetchTravelproductsDocument,
   UpdateTravelproductDocument,
   UploadFileDocument,
 } from "@/commons/gql/graphql";
@@ -111,6 +112,11 @@ export default function useTravelProductWrite({
             images: data.images,
           },
         },
+        refetchQueries: [
+          {
+            query: FetchTravelproductsDocument,
+          },
+        ],
       });
       const id = result.data?.createTravelproduct._id;
       alert("여행 상품 등록 성공");
