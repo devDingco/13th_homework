@@ -47,6 +47,45 @@ export function TravelProductContentsSample() {
   );
 }
 
+export function TravelProductMainSample1() {
+  return (
+    <Image
+      src="/assets/product1.svg"
+      alt="여행 상품 샘플 메인 이미지"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
+    />
+  );
+}
+
+export function TravelProductMainSample2() {
+  return (
+    <Image
+      src="/assets/product2.svg"
+      alt="여행 상품 샘플 메인 이미지"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
+    />
+  );
+}
+
+export function TravelProductMainSample3() {
+  return (
+    <Image
+      src="/assets/product3.svg"
+      alt="여행 상품 샘플 메인 이미지"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
+    />
+  );
+}
+
 export function LocationSample() {
   return (
     <Image
