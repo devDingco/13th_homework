@@ -32,64 +32,66 @@ export default function LayoutNavigation() {
   }, [data]);
 
   return (
-    <div className={styles.navigationContainer}>
-      <div className={styles.navigationLeftItemContainer}>
-        <Image
-          src="/assets/logo_area.png"
-          alt="로고 이미지"
-          width={56}
-          height={32}
-        ></Image>
-        <div className={styles.navigationItemContainer}>
-          {navigationItem.map((el, index) => (
-            <span
-              key={el}
-              id={String(index)}
-              className={
-                selectedItem === index
-                  ? styles.navigationSelectedItem
-                  : styles.navigationItem
-              }
-              onClick={onClickNavigationItem}
-            >
-              {el}
-            </span>
-          ))}
+    <div className={styles.navigationContainer__wrapper}>
+      <div className={styles.navigationContainer}>
+        <div className={styles.navigationLeftItemContainer}>
+          <Image
+            src="/assets/logo_area.png"
+            alt="로고 이미지"
+            width={56}
+            height={32}
+          ></Image>
+          <div className={styles.navigationItemContainer}>
+            {navigationItem.map((el, index) => (
+              <span
+                key={el}
+                id={String(index)}
+                className={
+                  selectedItem === index
+                    ? styles.navigationSelectedItem
+                    : styles.navigationItem
+                }
+                onClick={onClickNavigationItem}
+              >
+                {el}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {isLoggedIn ? (
-        <div className={styles.profileContainer}>
-          <button className={styles.profileButton}>
-            {data?.fetchUserLoggedIn.picture ? (
+        {isLoggedIn ? (
+          <div className={styles.profileContainer}>
+            <button className={styles.profileButton}>
+              {data?.fetchUserLoggedIn.picture ? (
+                <Image
+                  src={`https://storage.googleapis.com/${data.fetchUserLoggedIn.picture}`}
+                  alt="프로필 이미지"
+                  width={25}
+                  height={25}
+                ></Image>
+              ) : (
+                <Image
+                  src="/assets/profile_icon.png"
+                  alt="프로필 이미지"
+                  width={25}
+                  height={25}
+                ></Image>
+              )}
+            </button>
+            <button className={styles.arrowDownButton}>
               <Image
-                src={`https://storage.googleapis.com/${data.fetchUserLoggedIn.picture}`}
-                alt="프로필 이미지"
-                width={25}
-                height={25}
+                src="/assets/arrow_down.png"
+                alt="프로필 이미지 더보기"
+                width={7.5}
+                height={7.5}
+                sizes="100vw"
               ></Image>
-            ) : (
-              <Image
-                src="/assets/profile_icon.png"
-                alt="프로필 이미지"
-                width={25}
-                height={25}
-              ></Image>
-            )}
-          </button>
-          <button className={styles.arrowDownButton}>
-            <Image
-              src="/assets/arrow_down.png"
-              alt="프로필 이미지 더보기"
-              width={7.5}
-              height={7.5}
-              sizes="100vw"
-            ></Image>
-          </button>
-        </div>
-      ) : (
-        <LoginButton />
-      )}
+            </button>
+          </div>
+        ) : (
+          <LoginButton />
+        )}
+      </div>
     </div>
   );
 }
