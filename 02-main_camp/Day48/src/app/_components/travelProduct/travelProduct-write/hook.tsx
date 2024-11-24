@@ -19,6 +19,10 @@ import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { Address } from "react-daum-postcode";
 import { useForm } from "react-hook-form";
 
+declare const window: Window & {
+  kakao: any;
+};
+
 interface ITravelProductWriteProps {
   isEdit: boolean;
   id: string;
@@ -53,6 +57,7 @@ export default function useTravelProductWrite({
     },
   });
   const errorMessages = methods.formState.errors;
+  const address = methods.watch("address");
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -79,7 +84,6 @@ export default function useTravelProductWrite({
     event.stopPropagation();
     const id = Number(event.currentTarget.id);
     methods.setValue(`images[${id}]`, "", { shouldDirty: true });
-    console.log(id);
 
     // 렌더링을 유발하기 위해서는 form 상태의 변경이 필요함. images를 다시 셋팅해줘야 한다.
     const currentValues = methods.getValues("images");
@@ -92,7 +96,6 @@ export default function useTravelProductWrite({
   };
 
   const onClickSubmit = async (data: ITravelProductSchema) => {
-    console.log("등록 버튼을 눌렀습니다.");
     try {
       const result = await createTravelProduct({
         variables: {
@@ -203,6 +206,27 @@ export default function useTravelProductWrite({
       methods.reset(defaultValues);
     }
   }, [data]);
+
+  useEffect(() => {
+    const key = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY;
+    const script = document.createElement("script");
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=services`;
+    document.head.appendChild(script);
+    script.onload = () => {
+      window.kakao.maps.load(function () {
+        const geocoder = new window.kakao.maps.services.Geocoder();
+        const address = methods.getValues("address");
+
+        geocoder.addressSearch(address, (result, status) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            // 상태 업데이트
+            methods.setValue("lat", String(result[0].y), { shouldDirty: true });
+            methods.setValue("lng", String(result[0].x), { shouldDirty: true });
+          }
+        });
+      });
+    };
+  }, [address]);
 
   return {
     methods,
