@@ -168,3 +168,11 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const RESTORE_ACCESS_TOKEN = gql`
+  mutation restoreAccessToken {
+    restoreAccessToken {
+      accessToken
+    }
+  }
+`;
