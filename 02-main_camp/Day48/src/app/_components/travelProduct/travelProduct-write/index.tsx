@@ -11,6 +11,7 @@ import { ITravelProductSchema } from "@/app/_schema/travelProductSchema";
 import { Button, ButtonSize, ButtonVariant } from "@/commons/ui/button";
 import useTravelProductWrite from "./hook";
 import Header, { HeaderSize } from "@/commons/ui/header";
+import KakaoMap from "@/commons/ui/kakao-map";
 
 interface ITravelProductProps {
   isEdit?: boolean;
@@ -38,6 +39,11 @@ export default function TravelProductWrite({
   } = useTravelProductWrite({ isEdit, id });
 
   const images = methods.watch("images");
+  const lat = methods.watch("lat");
+  const lng = methods.watch("lng");
+  const address = methods.watch("address");
+
+  console.log("작성 페이지에서 감시하는 주소::", address);
 
   return (
     <FormProvider {...methods}>
@@ -122,7 +128,16 @@ export default function TravelProductWrite({
           <div className={styles.detail__location__container}>
             <span className={styles.detail__location__title}>상세 위치</span>
             <div className={styles.detail__location}>
-              주소를 먼저 입력해 주세요.
+              {address ? (
+                <KakaoMap
+                  width="100%"
+                  height="100%"
+                  lat={Number(lat)}
+                  lng={Number(lng)}
+                />
+              ) : (
+                <p>주소를 먼저 입력해 주세요.</p>
+              )}
             </div>
           </div>
         </div>
