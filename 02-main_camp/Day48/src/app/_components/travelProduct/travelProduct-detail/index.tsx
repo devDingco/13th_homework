@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 import useTravelProductDetail from "./hook";
 import Modal from "@/commons/ui/modal";
@@ -12,11 +14,11 @@ import {
   Location,
   BookmarkIcon,
   Profile40,
-  LocationSample,
 } from "@/commons/ui/icon";
 import styles from "./styles.module.css";
 import Header, { HeaderSize } from "@/commons/ui/header";
 import ModalChargePoint from "@/commons/ui/modal/modal-chargePoint";
+import KakaoMap from "@/commons/ui/kakao-map";
 
 export default function TravelProductDetail() {
   const {
@@ -30,7 +32,6 @@ export default function TravelProductDetail() {
     onClickPointChargeModalCancel,
     onClickBookmark,
     handleConfirm,
-    handlePayment,
     openModal,
     closeModal,
   } = useTravelProductDetail();
@@ -144,7 +145,12 @@ export default function TravelProductDetail() {
 
       <div className={styles.section__container}>
         <span className={styles.section__title}>상세 위치</span>
-        <LocationSample />
+        <KakaoMap
+          width="100%"
+          height="17.5rem"
+          lat={product?.travelproductAddress?.lat ?? 0}
+          lng={product?.travelproductAddress?.lng ?? 0}
+        />
       </div>
       <TravelProductQuestionWrite travelproductId={travelproductId} />
       <Divider />
