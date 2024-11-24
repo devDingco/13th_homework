@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Profile, TravelProductMainSample1 } from "../icon";
+import Image from "next/image";
 
 interface ICardProps {
   id: string;
@@ -9,6 +10,7 @@ interface ICardProps {
   tags: string[];
   userName: string;
   price: number;
+  imageUrl?: string;
   onClick: (id: string) => void;
 }
 
@@ -19,12 +21,24 @@ export default function Card({
   tags,
   userName,
   price,
+  imageUrl,
   onClick,
 }: ICardProps) {
   return (
     <div className={styles.card__container} onClick={() => onClick(id)}>
       <div>
-        <TravelProductMainSample1 />
+        {imageUrl ? (
+          <Image
+            src={`https://storage.googleapis.com/${imageUrl}`}
+            alt="여행 상품 샘플 메인 이미지"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
+          />
+        ) : (
+          <TravelProductMainSample1 />
+        )}
       </div>
 
       <div className={styles.middle__container}>

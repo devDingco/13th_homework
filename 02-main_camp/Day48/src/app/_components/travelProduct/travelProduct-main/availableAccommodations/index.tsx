@@ -54,6 +54,7 @@ export default function AvailableAccommodations() {
               remarks={el.remarks}
               tags={el.tags ?? []}
               price={el.price ?? 0}
+              imageUrl={el.images?.[0]}
               userName={el.seller?.name ?? ""}
               onClick={onClickCard}
             />

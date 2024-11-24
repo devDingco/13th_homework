@@ -8,6 +8,7 @@ export const FETCH_TRAVEL_PRODUCTS = gql`
       remarks
       tags
       price
+      images
       seller {
         name
         picture
