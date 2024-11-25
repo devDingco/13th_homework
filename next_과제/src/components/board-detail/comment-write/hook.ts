@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  FetchBoardCommentsQuery,
   MutationCreateBoardCommentArgs,
   MutationUpdateBoardCommentArgs,
 } from "@/commons/graphql/graphql";
@@ -103,12 +104,21 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
 
       await updateBoardComment({
         variables: editCommentData,
-        // refetchQueries: [
-        //   {
-        //     query: FetchBoardCommentsDocument,
-        //     variables: { boardId: boardId },
-        //   },
-        // ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoardComments: (prev) => {
+                // 기존 댓글 리스트에 수정된 댓글 데이터로 변경
+                const newComment = data?.updateBoardComment;
+                console.log(newComment);
+                return prev.map(
+                  (comment: FetchBoardCommentsQuery["fetchBoardComments"][0]) =>
+                    comment._id === newComment?._id ? newComment : comment
+                );
+              },
+            },
+          });
+        },
       });
 
       setIsModal({ name: "success", contents: "댓글 수정이 완료되었습니다." }); // 댓글 수정 완료 모달

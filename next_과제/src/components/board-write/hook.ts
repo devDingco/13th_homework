@@ -226,51 +226,6 @@ export const useBoardWrite = (isEdit: boolean) => {
   const handleChangeImg: UploadProps["onChange"] = ({ fileList }) => {
     setImgFileList(fileList as UploadFileList[]);
     console.log(fileList);
-
-    // if (!file) {
-    //   return;
-    // }
-    // const temp = [...imgFileList];
-    // if (file.status !== "removed") {
-    //   // 이미지 삭제가 아닌 경우에만 검증 진행
-    //   const isValid = validationImageFile(file.originFileObj as File);
-    //   if (!isValid) {
-    //     return;
-    //   }
-    // } else {
-    //   // 이미지 삭제시에는 업로드 하지 않음
-    //   temp.pop();
-    //   setImgFileList(temp);
-    //   return;
-    // }
-    // const newFileItem: UploadFileList = {
-    //   uid: file.uid,
-    //   name: file.name,
-    //   status: "uploading",
-    //   url: "",
-    // };
-    // try {
-    //   console.log(file);
-    //   const fileReader = new FileReader();
-    //   fileReader.readAsDataURL(file.originFileObj as Blob);
-    //   fileReader.onload = (info) => {
-    //     setPreviewImage(info.target?.result as string);
-    //   };
-    //   // const res = await uploadFile({
-    //   //   variables: {
-    //   //     file: file.originFileObj as File,
-    //   //   },
-    //   // });
-    //   //랜덤한 숫자를 리턴하는 함수
-    //   const randomNum = String(Math.floor(Math.random() * 100));
-    //   newFileItem.status = "done";
-    //   newFileItem.uid = randomNum || "";
-    //   newFileItem.url = previewImage || "";
-    //   // setImgFileList([...imgFileList, newFileItem]);
-    // } catch (err) {
-    //   console.error(err);
-    //   newFileItem.status = "error";
-    // }
   };
 
   // ! 게시글 내용 수정 함수

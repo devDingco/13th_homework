@@ -12,6 +12,7 @@ import {
   FetchBoardsListDocument,
   FetchBoardsCountDocument,
   FetchBoardDetailDocument,
+  FetchBoardsListQuery,
 } from "@/commons/graphql/graphql";
 import Icon from "@/components/icon-factory";
 import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
@@ -49,14 +50,26 @@ export const useBoardList = () => {
     try {
       await deleteBoard({
         variables: { boardId },
-        refetchQueries: [
-          {
-            query: FetchBoardsListDocument,
-            variables: {
-              page: page,
+        // refetchQueries: [
+        //   {
+        //     query: FetchBoardsListDocument,
+        //     variables: {
+        //       page: page,
+        //     },
+        //   },
+        // ],
+        update(cache) {
+          cache.modify({
+            fields: {
+              fetchBoards: (prev, { readField }) =>
+                // 기존 게시글 리스트는 readField를 이용하여 _id를 비교하여 삭제
+                prev.filter(
+                  (board: FetchBoardsListQuery) =>
+                    readField("_id", board) !== boardId
+                ),
             },
-          },
-        ],
+          });
+        },
       });
       alert("게시글이 삭제되었습니다.");
       refetch();

@@ -207,14 +207,14 @@ export default function ModalAlertBox() {
         customFooter: true,
       },
     }),
-    []
+    [isModal]
   );
 
   console.log("모달 확인", isModal);
 
   return isModalKeys.map((modalName, index) => {
     const key = modalName as keyof IModalTypeAndContents<IModalTypeName>;
-    if (Object.keys(isModal).length > 0)
+    if (Object.keys(isModal).length > 0 && isModal[key])
       return (
         <Modal
           key={modalName + index}
@@ -233,7 +233,7 @@ export default function ModalAlertBox() {
           <div className="flex flex-col gap-3 items-center">
             {modalTypeAndContents[key].icon}
             <div className="font-bold text-lg text-center flex flex-col gap-3 w-full">
-              {modalTypeAndContents[key]?.contents ?? ""}
+              {modalTypeAndContents[key].contents}
             </div>
             {!modalTypeAndContents[key].customFooter ? (
               <Button
