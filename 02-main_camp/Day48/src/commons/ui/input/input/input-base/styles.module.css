@@ -1,0 +1,33 @@
+.input__base {
+  border-radius: 0.5rem;
+  border: 0.125rem solid #d4d3d3;
+  outline: none;
+}
+
+.input__base:hover {
+  border-color: rgba(41, 116, 229, 0.5);
+  box-shadow: 5px 5px 10px -5px rgba(41, 116, 229, 0.3);
+}
+
+.input__base:focus {
+  border-color: rgba(41, 116, 229, 0.9);
+  box-shadow: 5px 5px 10px -5px rgba(41, 116, 229, 0.3);
+}
+
+.input__status__invalid {
+  border-color: #f66a6a;
+}
+
+.input__size__medium {
+  padding: 0.75rem 1rem;
+  height: 3rem;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.input__size__small {
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+}

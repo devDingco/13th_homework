@@ -1,0 +1,76 @@
+.navigationContainer__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
+  background-color: white;
+}
+.navigationContainer {
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.navigationLeftItemContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navigationItemContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.navigationSelectedItem {
+  height: 40px;
+  padding: 8px;
+
+  font-weight: 700;
+  font-size: 1rem;
+  color: black;
+
+  border-bottom: 2px solid black;
+}
+
+.navigationItem {
+  height: 40px;
+  padding: 8px;
+
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333333;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.profileButton {
+  width: 40px;
+  height: 40px;
+  background-color: #e4e4e4;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrowDownButton {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

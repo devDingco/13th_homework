@@ -1,0 +1,24 @@
+.navigation__container {
+  width: 100%;
+
+  padding: 1rem 0;
+
+  display: flex;
+  gap: 2.9688rem;
+}
+
+.item__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  cursor: pointer;
+}
+
+.item__container p {
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
