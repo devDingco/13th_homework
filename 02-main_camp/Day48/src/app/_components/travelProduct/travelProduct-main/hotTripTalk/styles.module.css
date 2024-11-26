@@ -12,4 +12,35 @@
   max-width: 80rem;
   height: 42.5rem;
   max-height: 42.5rem;
+
+  position: relative;
+}
+
+.customPrev,
+.customNext {
+  position: absolute;
+  top: 50%;
+  z-index: 100;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0px 0px 25px 0px #00000040;
+
+  border-radius: 100%;
+  transform: translateY(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customPrev {
+  left: -1.25rem; /* 원하는 위치 */
+}
+
+.customNext {
+  right: -1.25rem; /* 원하는 위치 */
 }
