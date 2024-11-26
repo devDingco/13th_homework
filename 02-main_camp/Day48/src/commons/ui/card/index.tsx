@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { Profile, TravelProductMainSample1 } from "../icon";
+import { BookmarkIcon, Profile, TravelProductMainSample1 } from "../icon";
 import Image from "next/image";
 
 interface ICardProps {
   id: string;
   title: string;
+  pickedCount: string;
   remarks: string;
   tags: string[];
   userName: string;
@@ -17,6 +18,7 @@ interface ICardProps {
 export default function Card({
   id,
   title,
+  pickedCount,
   remarks,
   tags,
   userName,
@@ -26,6 +28,10 @@ export default function Card({
 }: ICardProps) {
   return (
     <div className={styles.card__container} onClick={() => onClick(id)}>
+      <div className={styles.bookmark__container}>
+        <BookmarkIcon />
+        {pickedCount}
+      </div>
       <div>
         {imageUrl ? (
           <Image
