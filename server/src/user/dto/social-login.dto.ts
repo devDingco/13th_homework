@@ -1,4 +1,6 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+
+import { Provider } from 'src/common/enums/provider.enum';
 
 export class SocialLoginDTO {
     @IsString()
@@ -12,5 +14,6 @@ export class SocialLoginDTO {
 
     @IsString()
     @IsNotEmpty()
-    provider: string;
+    @IsEnum(Provider, { message: 'provider는 kakao, naver, google' })
+    provider: Provider;
 }

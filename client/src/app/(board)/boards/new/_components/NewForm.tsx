@@ -31,6 +31,11 @@ export default function NewForm() {
 	const onClickPush = useOnClickPush();
 	const path: string = usePathname();
 
+	// 빨간글씨 또는 비밀번호 + 비밀번호 확인 로직  -> ui
+	// 끝나고 추가 validation check server -> fetcing -> routering
+	// fetching cache 용량 쿠키급임. 4kb 많ㅇ ㅣ
+	// fetching redis ->
+
 	const [state, formAction] = useFormState(createBoardAction, initialState);
 
 	if (state.data) {

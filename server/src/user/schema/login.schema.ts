@@ -5,7 +5,7 @@ import { TokenSchema } from './token.schema';
 @ObjectType()
 export class LoginSchema extends TokenSchema {
     @Field()
-    nickname: string;
+    name: string;
 
     @Field()
     image: string;

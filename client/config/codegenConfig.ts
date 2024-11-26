@@ -34,13 +34,6 @@ const config: CodegenConfig = {
 				},
 			},
 		},
-		'./src/graphql/zodSchema.ts': {
-			plugins: ['typescript-validation-schema'],
-			config: {
-				schema: 'zod',
-				importFrom: './types',
-			},
-		},
 	},
 };
 

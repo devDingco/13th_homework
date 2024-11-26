@@ -8,7 +8,6 @@ import { Response } from 'express';
 import { TokenSchema } from './schema/token.schema';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
-import { BadRequestException } from '@nestjs/common';
 import { uploadFileToS3 } from 'src/upload/upload.service';
 import { SocialLoginInput } from './schema/socal-login.schema';
 import { AuthService } from 'src/auth/auth.service';

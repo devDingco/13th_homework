@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
-import { Provider } from 'src/common/enums/provider.enum';
 import { Role } from 'src/common/enums/role.enum';
 import { SharedProp } from 'src/common/sharedProp.helper';
 import { UserAddressEntity } from './user-address.entity';

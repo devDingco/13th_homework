@@ -57,7 +57,7 @@ type TokenSchema {
 
 type LoginSchema {
   accessToken: String!
-  nickname: String!
+  name: String!
   image: String!
 }
 

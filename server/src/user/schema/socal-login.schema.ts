@@ -1,5 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+
+import { Provider } from 'src/common/enums/provider.enum';
 
 @InputType()
 export class SocialLoginInput {
@@ -16,6 +18,7 @@ export class SocialLoginInput {
 
     @IsString()
     @IsNotEmpty()
+    @IsEnum(Provider, { message: 'provider는 kakao, naver, google' })
     @Field()
-    provider: string;
+    provider: Provider;
 }
