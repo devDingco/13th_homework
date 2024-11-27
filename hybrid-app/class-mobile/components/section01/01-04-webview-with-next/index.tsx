@@ -19,7 +19,7 @@ export default function WebViewWithNextPage() {
 
             // 3. [iOS 에뮬레이터]
             // 127.0.0.1 => IOS 기계에서 자기 자신을 의미
-            // uri: "http://10.0.2.2:3000/section01/01-04-webview-with-next",
+            // uri: "http://127.0.0.1:3000/section01/01-04-webview-with-next",
           }}
         />
       </SafeAreaView>
