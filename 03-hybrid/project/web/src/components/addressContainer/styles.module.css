@@ -1,0 +1,23 @@
+.AddressContainer__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.AddressContainer {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 0.5rem;
+  border: 0.0625rem solid black;
+}
+
+.AddressContainer button {
+  color: black;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
