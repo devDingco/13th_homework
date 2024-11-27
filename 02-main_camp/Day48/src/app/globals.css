@@ -16,6 +16,11 @@ body {
   align-items: center;
 }
 
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
 @font-face {
   font-family: "Pretendard";
   font-weight: 700;

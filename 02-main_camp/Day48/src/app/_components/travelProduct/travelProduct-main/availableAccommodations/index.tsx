@@ -50,6 +50,7 @@ export default function AvailableAccommodations() {
             <Card
               key={el._id}
               id={el._id}
+              pickedCount={String(el.pickedCount)}
               title={el.name}
               remarks={el.remarks}
               tags={el.tags ?? []}

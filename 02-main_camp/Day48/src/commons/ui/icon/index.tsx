@@ -310,6 +310,32 @@ export function RightArrowIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   );
 }
 
+export function RightArrowBlackIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/right_arrow_black.svg"
+      alt="오른쪽 화살표 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
+export function LeftArrowBlackIcon({ width = 1.5, height = 1.5 }: IIconProps) {
+  return (
+    <Image
+      src="/assets/left_arrow_black.svg"
+      alt="왼쪽 화살표 아이콘"
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: `${width}rem`, height: `${height}rem` }}
+    />
+  );
+}
+
 export function ListIcon({ width = 1.5, height = 1.5 }: IIconProps) {
   return (
     <Image

@@ -1,18 +1,40 @@
 .card__container {
   width: 100%;
   max-width: 18.5rem;
+  padding-bottom: 0.5rem;
+
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  cursor: pointer;
 
   border-radius: 0.5rem;
 
-  padding-bottom: 0.5rem;
+  cursor: pointer;
+
+  position: relative;
 }
 
 .card__container:hover {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bookmark__container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 0.5rem;
+  background-color: #00000066;
+  box-shadow: 0px 0px 8px 0px #00000040;
+
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
 }
 
 .middle__container {

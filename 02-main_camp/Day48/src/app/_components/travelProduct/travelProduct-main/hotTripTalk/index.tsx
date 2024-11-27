@@ -8,10 +8,13 @@ import "swiper/css/navigation";
 import Header, { HeaderSize } from "@/commons/ui/header";
 import styles from "./styles.module.css";
 import {
+  LeftArrowBlackIcon,
+  RightArrowBlackIcon,
   TravelProductMainSample1,
   TravelProductMainSample2,
   TravelProductMainSample3,
 } from "@/commons/ui/icon";
+import BestTravelProduct from "../bestTravelProduct";
 
 export default function HotTripTalk() {
   return (
@@ -21,14 +24,25 @@ export default function HotTripTalk() {
         size={HeaderSize.large}
       />
       <div className={styles.slide}>
+        <div className={styles.customPrev}>
+          <LeftArrowBlackIcon />
+        </div>
+        <div className={styles.customNext}>
+          <RightArrowBlackIcon />
+        </div>
+
         <Swiper
-          navigation={true}
           modules={[Navigation]}
+          navigation={{
+            enabled: true,
+            nextEl: `.${styles.customNext}`,
+            prevEl: `.${styles.customPrev}`,
+          }}
           slidesPerView={2}
           spaceBetween={24}
         >
           <SwiperSlide>
-            <TravelProductMainSample1 />
+            <BestTravelProduct />
           </SwiperSlide>
 
           <SwiperSlide>
