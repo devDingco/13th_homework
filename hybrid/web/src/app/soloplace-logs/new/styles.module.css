@@ -23,7 +23,19 @@
 }
 
 .imageBox {
+    width: 100%;
     display: flex;
+    overflow-x: auto;
+}
+
+.imageBox::-webkit-scrollbar {
+    height: 0.4375rem; /* 세로 스크롤바의 높이 */
+}
+
+.imageBox::-webkit-scrollbar-track {
+    display: none;
+    background: orange;
+    border-radius: 0.5rem;
 }
 
 .showImage {

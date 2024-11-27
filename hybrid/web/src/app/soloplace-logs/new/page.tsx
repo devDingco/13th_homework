@@ -33,7 +33,7 @@ export default function NewPage() {
                         alt="add"
                         width={100}
                         height={100}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', marginRight: '.75rem' }}
                         onClick={onClickImage}
                     />
                     <input
@@ -49,6 +49,11 @@ export default function NewPage() {
                                 key={index}
                                 src={image}
                                 alt={`Uploaded ${index}`}
+                                style={{
+                                    width: '100px',
+                                    height: '100px',
+                                    borderRadius: '8px',
+                                }}
                             />
                         ))}
                     </div>
