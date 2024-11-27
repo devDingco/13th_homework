@@ -1,0 +1,43 @@
+.button__base {
+  border-radius: 0.5rem;
+}
+.button__filled {
+  width: 100%;
+}
+
+.button__size__large {
+}
+
+.button__size__medium {
+  height: 3rem;
+
+  padding: 0.75rem 1rem;
+
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.button__size__small {
+  height: 2.75rem;
+
+  padding: 0.5rem 0.75rem;
+
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.button__variant__primary {
+  background-color: #2974e5;
+  color: white;
+}
+
+.button__variant__tertiary {
+  background-color: #ffffff;
+  color: white;
+
+  border: 0.0625rem solid black;
+}
+
+.button__disabled {
+  background-color: #c7c7c7;
+}
