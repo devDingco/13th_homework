@@ -1,0 +1,22 @@
+.previewImage {
+  position: relative;
+  width: 6.25rem;
+  height: 6.25rem;
+}
+
+.previewImage button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100%;
+
+  background-color: #00000066;
+}
