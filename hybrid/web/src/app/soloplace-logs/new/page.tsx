@@ -65,9 +65,9 @@ export default function NewPage() {
                                     src={image}
                                     alt={`Uploaded ${index}`}
                                     style={{
-                                        width: '100px',
-                                        height: '100px',
-                                        borderRadius: '8px',
+                                        width: '6.25rem',
+                                        height: '6.25rem',
+                                        borderRadius: '.5rem',
                                     }}
                                 />
                                 <button
