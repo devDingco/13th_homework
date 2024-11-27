@@ -38,7 +38,6 @@ export class signUpDTO {
     )
     password: string;
 
-    // 빼놓기
     @IsString()
     @IsOptional()
     @IsEnum(Role, {

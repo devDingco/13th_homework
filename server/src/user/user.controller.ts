@@ -73,6 +73,7 @@ export class UserController {
         @Res() res: Response,
         @Session() session: Record<string, any>,
     ) {
+        console.log(socialLoginDto);
         const result = await this.authService.validationSocialToken(
             socialLoginDto.provider,
             req.headers.authorization.split(' ')[1],
