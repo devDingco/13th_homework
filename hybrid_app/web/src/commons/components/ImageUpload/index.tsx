@@ -15,7 +15,7 @@ export default function ImageUpload() {
           <p className="text-gray-600 text-xs font-normal">사진 등록</p>
         </div>
         {images.map((el) => (
-          <img src={el} className="w-[100px] h-[100px] rounded-lg" />
+          <img src={el} className="w-[100px] h-[100px] rounded-lg flex-shrink-0" />
         ))}
       </div>
       <input

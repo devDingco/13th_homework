@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent, useRef, useState } from "react";
+import checkValidationFile from "../libraries/checkValidationFile";
 
 export default function useImageUpload() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -12,6 +13,10 @@ export default function useImageUpload() {
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
+    const isValid = checkValidationFile(file);
+    if(!isValid) return true;
+
     const fileReader = new FileReader();
 
     fileReader.readAsDataURL(file);
