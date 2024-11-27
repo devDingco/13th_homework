@@ -13,11 +13,26 @@
     --foreground: #ededed;
   }
 }
-
+html {
+  font-size: calc((40 / 9) * 1vw);
+  overflow-x: hidden;
+}
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--suit), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 @layer utilities {
