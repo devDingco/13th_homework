@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
+import Layout from "@/commons/layout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,18 +13,18 @@ const localFontSet = localFont({
   src: "./fonts/SUIT-Variable.woff2",
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface IChildrenType {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: IChildrenType) {
   return (
     <html lang="ko">
-      <AntdRegistry>
-        <body className={`${localFontSet.variable} antialiased`}>
-          {children}
-        </body>
-      </AntdRegistry>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <body className={`${localFontSet.variable} antialiased`}>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }
