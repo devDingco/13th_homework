@@ -11,8 +11,6 @@
 .layout {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
 }
 
 .titleBox {
@@ -23,26 +21,49 @@
 }
 
 .imageBox {
-    width: 100%;
+    width: 100vw;
     display: flex;
-    overflow-x: auto;
+    gap: 0.75rem;
+    overflow-x: auto; /* 가로 스크롤 추가 */
 }
 
-.imageBox::-webkit-scrollbar {
-    height: 0.4375rem; /* 세로 스크롤바의 높이 */
-}
-
-.imageBox::-webkit-scrollbar-track {
-    display: none;
-    background: orange;
-    border-radius: 0.5rem;
+.imageBoxLeft {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
 }
 
 .showImage {
+    gap: 0.75rem;
     display: flex;
+    flex-wrap: nowrap; /* 이미지가 한 줄로 나열되도록 설정 */
+
+    border: 1px solid #ccc;
+    border-radius: 8px; /* 모서리 둥글게 (선택 사항) */
+}
+
+.mapImageBox {
+    position: relative;
     width: 6.25rem;
     height: 6.25rem;
-    gap: 12px;
+}
+
+.cancleBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: 10px;
+    right: 12px;
+    color: white;
+    border: none;
+    border-radius: 6.25rem;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    padding: 0.25rem, 0;
 }
 
 .placeNameBox {
