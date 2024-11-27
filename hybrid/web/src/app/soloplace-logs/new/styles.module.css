@@ -22,6 +22,17 @@
     padding: 12px 0;
 }
 
+.imageBox {
+    display: flex;
+}
+
+.showImage {
+    display: flex;
+    width: 6.25rem;
+    height: 6.25rem;
+    gap: 12px;
+}
+
 .placeNameBox {
     padding: 20px 0;
 }

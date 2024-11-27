@@ -2,8 +2,27 @@
 
 import Image from 'next/image';
 import styles from './styles.module.css';
+import { useRef, useState } from 'react';
+import { checkValidtionFile } from '@/commons/libraries/validation';
 
 export default function NewPage() {
+    const [images, setImages] = useState([]);
+    const fileRef = useRef(); // fileRef는 레퍼런스. 어떤 태그에 등록해 놓으면 변수로 컨트롤 할 수 있음
+
+    const onChangeFile = (event) => {
+        const files = Array.from(event.target.files);
+        console.log(files);
+        const imageUrls = files.map((file) => URL.createObjectURL(file));
+        setImages(imageUrls);
+
+        const isValid = checkValidtionFile(files);
+        if (!isValid) return;
+    };
+
+    const onClickImage = () => {
+        fileRef.current.click();
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.layout}>
@@ -14,7 +33,25 @@ export default function NewPage() {
                         alt="add"
                         width={100}
                         height={100}
+                        style={{ cursor: 'pointer' }}
+                        onClick={onClickImage}
                     />
+                    <input
+                        type="file"
+                        onChange={onChangeFile}
+                        style={{ display: 'none' }}
+                        ref={fileRef}
+                        multiple
+                    />
+                    <div className={styles.showImage}>
+                        {images.map((image, index) => (
+                            <img
+                                key={index}
+                                src={image}
+                                alt={`Uploaded ${index}`}
+                            />
+                        ))}
+                    </div>
                 </div>
                 <div className={styles.placeNameBox}>
                     <div className={styles.placeNameBoxTitle}>
