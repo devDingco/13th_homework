@@ -15,7 +15,6 @@ import { LinkCancel } from "@/commons/ui/link";
 import FieldWrapper from "../commons/fieldWrapper";
 import ErrorMessage from "@/commons/ui/error";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 // ReactQuill을 dynamic으로 import
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -25,7 +24,6 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 export default function ProductsWrite(props) {
   const {
     isZipCodeModalOpen,
-    tags,
     inputTag,
     fileRef,
     images,
@@ -80,11 +78,13 @@ export default function ProductsWrite(props) {
 
             {/* 상품 설명 입력 필드 */}
             <FieldWrapper label="상품 설명" isRequired={true}>
-              <ReactQuill
-                value={methods.getValues("contents")}
-                onChange={onChangeContents}
-                className={styles.quill_editor}
-              />
+              <div style={{ paddingBottom: "43.86px", minHeight: "300px" }}>
+                <ReactQuill
+                  value={methods.getValues("contents")}
+                  onChange={onChangeContents}
+                  className={styles.quill_editor}
+                />
+              </div>
               <ErrorMessage name="contents" />
             </FieldWrapper>
 
@@ -113,7 +113,7 @@ export default function ProductsWrite(props) {
                 placeholder="해시태그를 입력해주세요. (Enter를 눌러 추가해 주세요.)"
               />
               <div className={styles.tags}>
-                {tags.map((tag, index) => (
+                {methods.getValues("tags").map((tag, index) => (
                   <span key={index} className={styles.tag}>
                     {tag}
                     <X

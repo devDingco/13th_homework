@@ -1,0 +1,20 @@
+.textarea__soft__m__full {
+  display: flex;
+  height: 9.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+
+  color: var(--Gray-800, #333);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.textarea__soft__m__full::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

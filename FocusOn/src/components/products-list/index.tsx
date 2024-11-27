@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { DatePicker } from "antd";
@@ -19,6 +19,8 @@ import {
   Edit,
 } from "lucide-react";
 import Link from "next/link";
+import { useQuery } from "@apollo/client";
+import { FETCH_PRODUCTS } from "./queries";
 
 const categories = [
   { name: "개발", icon: <Code /> },
@@ -39,6 +41,8 @@ export default function ProductsList() {
   const [filter, setFilter] = useState("all");
   const [activeCategory, setActiveCategory] = useState(null);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const { data } = useQuery(FETCH_PRODUCTS);
+  console.log("products: ", data);
 
   const toggleWishlist = () => {
     setIsWishlisted(!isWishlisted);

@@ -22,13 +22,10 @@ const useProductsWirte = (props) => {
   const [uploadFile] = useMutation(UploadFileDocument);
   const [isZipCodeModalOpen, setIsZipCodeModalOpen] = useState(false);
   const [inputTag, setInputTag] = useState("");
-  const [tags, setTags] = useState([]);
 
-  console.log("tags", props.data?.fetchTravelproduct.tags);
   const methods = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
-    // defaultValues를 설정해줘야 이미지 사진 첨부하지 않고 등록하기 버튼 누르면 에러메세지 제대로 작동
     defaultValues: {
       name: "",
       remarks: "",
@@ -44,24 +41,22 @@ const useProductsWirte = (props) => {
   });
 
   const defaultData = props.data?.fetchTravelproduct;
-  console.log(defaultData);
   useEffect(() => {
     // props.data가 로딩된 후 초기값으로 설정
-    if (props.data) {
-      methods.reset({
-        name: defaultData.name || "",
-        remarks: defaultData.remarks || "",
-        contents: defaultData.contents || "",
-        price: defaultData.price || null,
-        zipcode: defaultData.travelproductAddress?.zipcode || "",
-        addressDetail: defaultData.travelproductAddress?.addressDetail || "",
-        lat: defaultData.travelproductAddress?.lat || null,
-        lng: defaultData.travelproductAddress?.lng || null,
-        images: defaultData.images || [],
-      });
-      // 태그 초기값 넣어주기
-      setTags(defaultData.tags || []);
-    }
+    if (!props.data) return;
+    methods.reset({
+      name: defaultData.name || "",
+      remarks: defaultData.remarks || "",
+      contents: defaultData.contents || "",
+      price: defaultData.price || null,
+      zipcode: defaultData.travelproductAddress?.zipcode || "",
+      addressDetail: defaultData.travelproductAddress?.addressDetail || "",
+      lat: defaultData.travelproductAddress?.lat || null,
+      lng: defaultData.travelproductAddress?.lng || null,
+      images: defaultData.images || [],
+    });
+    // 태그 초기값 넣어주기
+    setTags(defaultData.tags || []);
   }, [props.data, methods]);
 
   // 웹 에디터 입력 값 setValue해주기
@@ -108,8 +103,9 @@ const useProductsWirte = (props) => {
       event.preventDefault();
       // !event.nativeEvent.isComposing => 입력이 완료 되었으면
       // keydown의 한글 중복 문제 해결!!
+      const currentTags = methods.getValues("tags");
       if (inputTag.trim() !== "" && !event.nativeEvent.isComposing) {
-        setTags((prev) => [...prev, `#${inputTag}`]);
+        methods.setValue("tags", [...currentTags, inputTag]);
         setInputTag(""); // 인풋 초기화
       }
     }
@@ -117,8 +113,14 @@ const useProductsWirte = (props) => {
 
   // 태그 삭제
   const removeTag = (removeId) => {
-    setTags(tags.filter((_, index) => index !== removeId));
+    console.log("removeId", removeId);
+    const currentTags = methods.getValues("tags");
+    methods.setValue(
+      "tags",
+      currentTags.filter((_, index) => index !== removeId)
+    );
   };
+  console.log("tag", methods.getValues("tags"));
 
   // file버튼 클릭해주기
   const onClickImage = () => {
@@ -165,7 +167,7 @@ const useProductsWirte = (props) => {
               remarks: data.remarks,
               contents: data.contents,
               price: data.price,
-              tags: tags,
+              tags: data.tags,
               travelproductAddress: {
                 zipcode: data.zipcode,
                 addressDetail: data.addressDetail,
@@ -193,7 +195,7 @@ const useProductsWirte = (props) => {
               remarks: data.remarks,
               contents: data.contents,
               price: data.price,
-              tags: tags,
+              tags: data.tags,
               travelproductAddress: {
                 zipcode: data.zipcode,
                 addressDetail: data.addressDetail,
@@ -215,7 +217,6 @@ const useProductsWirte = (props) => {
 
   return {
     isZipCodeModalOpen,
-    tags,
     inputTag,
     fileRef,
     images,

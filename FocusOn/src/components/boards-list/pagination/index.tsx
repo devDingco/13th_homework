@@ -18,6 +18,7 @@ export default function Pagination(props: IPaginationProps) {
   } = usePagination(props);
   return (
     <div className={styles.pagination_box}>
+      {/* 이전페이지 버튼 */}
       <IconButton onClick={onClickPrevPage}>
         <NavigateBeforeRoundedIcon
           sx={{ color: isPrevDisabled ? "#C7C7C7" : "#333333" }}
@@ -42,6 +43,7 @@ export default function Pagination(props: IPaginationProps) {
             )
         )}
       </div>
+      {/* 다음페이지 버튼 */}
       <IconButton onClick={onClickNextPage}>
         <NavigateNextRoundedIcon
           sx={{ color: isNextDisabled ? "#C7C7C7" : "#333333" }}

@@ -38,7 +38,7 @@
 }
 
 .quill_editor {
-  min-height: 300px;
+  height: 100%;
   width: 100%;
 }
 

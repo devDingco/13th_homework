@@ -11,7 +11,6 @@ function ButtonBase(props) {
       className={props.className}
       type={props.type}
       onClick={props.onClick}
-      type={props.type}
     >
       {props.children}
     </button>

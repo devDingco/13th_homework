@@ -9,10 +9,11 @@ export const FETCH_PRODUCTS = gql`
       contents
       price
       tags
-
       buyer {
         name
+        picture
       }
+      images
     }
   }
 `;

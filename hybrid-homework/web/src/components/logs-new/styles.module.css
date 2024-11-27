@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  width: 100%;
+  padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.images {
+  width: 100%;
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+}
+
+.buttonUpload {
+  display: flex;
+
+  width: 6.25rem;
+  height: 6.25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+  flex-shrink: 0;
+}
+
+.buttonUploadTitle {
+  color: var(--gray-600, #777);
+  font-size: 0.75rem;
+}
+
+.imageContainer {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.image {
+  display: flex;
+  width: 6.25rem;
+  height: 6.25rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+}
+
+.close {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.25rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  border-radius: 6.25rem;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  color: var(--gray-800, #333);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.required {
+  color: var(--red, #f66a6a);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.rightArrow {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.inputAddress {
+  width: 100%;
+  display: flex;
+  height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+}
+
+.inputAddress::placeholder {
+  color: var(--gray-B, #000);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.button {
+  width: 100%;
+}

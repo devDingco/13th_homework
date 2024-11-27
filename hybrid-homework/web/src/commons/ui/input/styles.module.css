@@ -1,0 +1,18 @@
+.input__soft__m__full {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+
+  color: var(--gray-B, #000);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.input__soft__m__full::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
