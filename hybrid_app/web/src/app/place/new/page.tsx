@@ -12,7 +12,9 @@ export default function PlaceNew() {
 
   return (
     <div className="flex flex-col gap-5 pt-5">
-      <ImageUpload id="1" />
+      <div>
+        <ImageUpload />
+      </div>
       <Input id="이름" onChange={handleChange} />
       <Address />
       <TextArea id="내용" onChange={handleChange} />
