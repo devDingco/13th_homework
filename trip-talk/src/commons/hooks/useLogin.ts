@@ -4,9 +4,11 @@ import { useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import { useAccessTokenStore } from "../stores/useAccessTokenStore";
 import { LoginUserDocument } from "../graphql/graphql";
+import { useRouter } from "next/navigation";
 
 export default function useLogin() {
-  const [loginUser] = useMutation(LoginUserDocument); 
+  const router = useRouter();
+  const [loginUser] = useMutation(LoginUserDocument);
   const { setAccessToken } = useAccessTokenStore();
   const [login, setLogin] = useState({
     email: "",
@@ -30,15 +32,15 @@ export default function useLogin() {
       },
     });
     const accessToken = result.data?.loginUser.accessToken;
-    console.log(accessToken);
 
     if (accessToken === undefined) {
       alert("fail");
     }
 
     setAccessToken(accessToken);
-    localStorage.setItem("accessToken", accessToken);
+
     alert("success");
+    router.push("/boards");
   };
 
   return {
