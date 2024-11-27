@@ -1,0 +1,16 @@
+.textInputTitle__container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.title {
+  color: black;
+  font-weight: 600;
+  font-size: #333333;
+}
+
+.asterisk {
+  color: #f66a6a;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
