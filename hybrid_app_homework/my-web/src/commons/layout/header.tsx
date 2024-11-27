@@ -13,7 +13,6 @@ export default function HeaderGlobal() {
   return (
     <header
       className={styles.header + (!option ? " " + styles.fixedHeader : "")}
-      style={{ padding: "0 1.25rem" }}
     >
       {(option?.hasBack || !option) && (
         <button onClick={() => router.back()}>
