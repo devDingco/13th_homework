@@ -71,7 +71,7 @@ export default function ImageUpload() {
   };
 
   return (
-    <div className="overflow-x-scroll w-360">
+    <div className="overflow-x-scroll w-full">
       <div className="flex gap-12 w-screen">
         <div
           className="flex-shrink-0 w-[100px] h-[100px] bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
