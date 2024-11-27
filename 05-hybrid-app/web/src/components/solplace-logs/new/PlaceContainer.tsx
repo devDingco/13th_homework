@@ -4,6 +4,8 @@ import InputField from "@/components/inputField";
 import ImageUpload from "./ImageUpload";
 import Input from "@/components/input";
 import { useState } from "react";
+import Image from "next/image";
+import right_arrow from "../../../../public/images/icons/right_arrow.svg";
 
 export default function PlaceContainer() {
   const [contentsLength, setContentsLength] = useState(0);
@@ -13,7 +15,7 @@ export default function PlaceContainer() {
     setContentsLength(currentLength.length);
   };
   return (
-    <div className="px-20 pt-24 flex w-screen">
+    <div className="px-20 pt-24 flex w-full">
       <form className="flex flex-col gap-20 w-full">
         {/* 사진 등록 */}
         <ImageUpload />
@@ -23,6 +25,12 @@ export default function PlaceContainer() {
         </InputField>
 
         {/* 플레이스 주소 */}
+        <InputField name="플레이스 주소">
+          <button className="w-full h-44 py-8 px-12 rounded-lg border border-black flex justify-between">
+            <span>플레이스 주소 입력</span>
+            <Image src={right_arrow} alt="오른쪽버튼" />
+          </button>
+        </InputField>
 
         {/* 플레이스 내용 */}
         <InputField name="플레이스 내용" required className="relative">

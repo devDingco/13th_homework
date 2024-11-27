@@ -71,47 +71,49 @@ export default function ImageUpload() {
   };
 
   return (
-    <div className="flex gap-12 overflow-x-scroll">
-      <div
-        className="flex-shrink-0 w-[100px] h-[100px] bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
-        onClick={() => inputRef.current?.click()}
-      >
-        <input
-          type="file"
-          multiple
-          accept="image/*"
-          className="hidden"
-          ref={inputRef}
-          onChange={onChangeFile}
-        />
-        <Image src={add} alt="add" />
-        <span className="text-[#777777] text-xs font-normal leading-tight">
-          사진 등록
-        </span>
-      </div>
-
-      {/* 이미지 미리보기 */}
-      {imageUrls.map((url, index) => (
+    <div className="overflow-x-scroll w-360">
+      <div className="flex gap-12 w-screen">
         <div
-          className="relative flex-shrink-0 w-[100px] h-[100px] rounded-lg"
-          key={`image-${url}-${index}`}
+          className="flex-shrink-0 w-[100px] h-[100px] bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
+          onClick={() => inputRef.current?.click()}
         >
-          <Image
-            src={url}
-            alt="미리보기"
-            className="w-[100px] h-[100px] rounded-lg object-cover"
-            width={100}
-            height={100}
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            className="hidden"
+            ref={inputRef}
+            onChange={onChangeFile}
           />
-          {/* 삭제하기 */}
-          <button
-            className="absolute top-8 right-8 w-20 h-20 py-4 bg-black/40 rounded-[100px] justify-center items-center gap-2.5 flex"
-            onClick={() => handleRemoveImage(index)}
-          >
-            <Image src={close} alt="delete" />
-          </button>
+          <Image src={add} alt="add" />
+          <span className="text-[#777777] text-xs font-normal leading-tight">
+            사진 등록
+          </span>
         </div>
-      ))}
+
+        {/* 이미지 미리보기 */}
+        {imageUrls.map((url, index) => (
+          <div
+            className="relative flex-shrink-0 w-[100px] h-[100px] rounded-lg"
+            key={`image-${url}-${index}`}
+          >
+            <Image
+              src={url}
+              alt="미리보기"
+              className="w-[100px] h-[100px] rounded-lg object-cover"
+              width={100}
+              height={100}
+            />
+            {/* 삭제하기 */}
+            <button
+              className="absolute top-8 right-8 w-20 h-20 py-4 bg-black/40 rounded-[100px] justify-center items-center gap-2.5 flex"
+              onClick={() => handleRemoveImage(index)}
+            >
+              <Image src={close} alt="delete" />
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
