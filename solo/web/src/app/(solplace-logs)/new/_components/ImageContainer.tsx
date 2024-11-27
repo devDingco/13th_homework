@@ -4,7 +4,7 @@
 
 import { useRef, useState } from 'react';
 
-import Image from 'next/image';
+import Icon from '@/components/Icon';
 
 export default function ImageContainer() {
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -22,13 +22,7 @@ export default function ImageContainer() {
 					className="shrink-0 size-[100px] bg-gray-100 rounded-lg flex justify-center items-center flex-col gap-2 cursor-pointer"
 					onClick={() => inputRef.current?.click()}
 				>
-					<Image
-						src={'/Images/add.png'}
-						alt="plus"
-						width={24}
-						height={24}
-						className="size-6"
-					/>
+					<Icon name="add" />
 					<p className="prose-r_12_20 text-[#777777]">사진 등록</p>
 					<input
 						type="file"
