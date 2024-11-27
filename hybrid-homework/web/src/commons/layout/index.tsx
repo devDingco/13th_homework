@@ -1,4 +1,4 @@
-import Header from "./header";
+import Header from "./global-header";
 
 interface ILayout {
   children: React.ReactNode;
