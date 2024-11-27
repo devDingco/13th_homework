@@ -6,5 +6,9 @@ export const HEADER_OPTIONS = {
       hasLog: true, //로고 있음
       hasBack: true, //뒤로가기 있음
     },
+    "/solplace-logs/asdfasdfasdfasdfasdf": {
+      hasLog: false, //로고 있음
+      hasBack: true, //뒤로가기 있음
+    },
   },
 };
