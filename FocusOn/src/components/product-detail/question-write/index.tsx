@@ -46,7 +46,7 @@ export default function ProductDetailQuestion(props) {
           },
         });
         console.log(result);
-        methods.setValue("contents");
+        methods.setValue("contents", "");
       } catch (error) {
         console.error(error);
       }

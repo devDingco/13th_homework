@@ -31,27 +31,32 @@ export default function ApolloHeaderAndErrorSettingRefresh(
       .then((newAccessToken) => {
         if (newAccessToken) setAccessToken(newAccessToken);
       })
+      // 성공하든 실패하든 로딩은 끝
       .finally(setIsLoaded);
   }, []);
 
   // error 링크
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
-    // 에러 존재 시, 토큰 만료 에러('UNAUTHENTICATED')인지 확인
-    if (graphQLErrors) {
+    // 1. 에러 존재 시, 토큰 만료 에러('UNAUTHENTICATED')인지 확인
+    if (typeof graphQLErrors !== "undefined") {
       for (const err of graphQLErrors) {
-        // 토큰 만료 에러 시, 신규 토큰 발급
+        // 1-2. 토큰 만료 에러 시, 신규 토큰 발급
         if (err.extensions?.code === "UNAUTHENTICATED") {
+          // 2. refreshToken으로 accessToken 재발급 받기
           return fromPromise(
             getAccessToken().then((newAccessToken) => {
+              // 3. 재발급 받은 accessToekn을 저정하고, 방금 실패한 쿼리의 정보 수정하고 재시도하기
               setAccessToken(newAccessToken ?? "");
+              // operation: 방금 실패한 쿼리
+              // 기존 헤더에서 accessToken만 바꿔치기
               operation.setContext({
                 headers: {
-                  ...operation.getContext().headers,
-                  Authorization: `Bearer ${newAccessToken ?? ""}`,
+                  ...operation.getContext().headers, // Authorization Bearer 만료된 토큰
+                  Authorization: `Bearer ${newAccessToken ?? ""}`, // 3-2 토큰만 새걸로 바꿔치기
                 },
               });
             })
-          ).flatMap(() => forward(operation));
+          ).flatMap(() => forward(operation)); // 바꿔치기된 API 재전송하기
         }
       }
     }
