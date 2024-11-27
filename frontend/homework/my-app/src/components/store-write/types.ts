@@ -1,4 +1,4 @@
-import { FetchTravelProductsQuery } from "./../../commons/graphql/graphql";
+import { FetchTravelProductsQuery } from "../../commons/graphql/graphql";
 import { z } from "zod";
 import { productSchema } from "./schema";
 
