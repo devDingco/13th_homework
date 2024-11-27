@@ -1,0 +1,35 @@
+.navigation__container {
+  height: 3rem;
+  padding: 0 1.25rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navigation__container p {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.main__container__wrapper {
+  width: 100%;
+  padding: 1.5rem 1.25rem 2.5rem 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.main__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.image__box {
+  /* width: 100%; */
+  display: flex;
+  gap: 0.75rem;
+}
