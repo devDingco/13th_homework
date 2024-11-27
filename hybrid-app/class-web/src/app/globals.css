@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  /* 피그마 기본가로(360) : HTML기본폰트(16) = 내 기계사이즈 : 조정폰트(x) */
+   font-size: calc((40 / 9) * 1vw)
+}
