@@ -8,7 +8,7 @@ export default function App() {
     // flex: 1 = 기기 크기 전체를 사용한다.
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar translucent={false} />
-      <WebView source={{ uri: "http://localhost:3000/solplace-logs/new" }} />
+      <WebView source={{ uri: "http://10.0.2.2:3000/solplace-logs/new" }} />
     </SafeAreaView>
   );
 }
