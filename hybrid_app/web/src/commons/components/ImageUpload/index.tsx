@@ -16,7 +16,8 @@ export default function ImageUpload({ id }: { id: string }) {
             </div>
           )}
           {imageUrl && (
-            <img src={`https://storage.googleapis.com/${imageUrl}`} />
+            // <img src={`https://storage.googleapis.com/${imageUrl}`} />
+            <img src={imageUrl} className="w-full h-full rounded-lg" />
           )}
         </div>
       </div>

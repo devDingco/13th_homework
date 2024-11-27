@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useImageStore } from "../stores/useImageStore";
 
 export default function useImageUpload(id: string) {
@@ -11,10 +11,15 @@ export default function useImageUpload(id: string) {
     fileRef.current?.click();
   };
 
-  const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
-    // setImage(id, )
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (event) => {
+      if (typeof event.target?.result === "string")
+        setImage(id, event.target?.result);
+    };
   };
 
   return {
