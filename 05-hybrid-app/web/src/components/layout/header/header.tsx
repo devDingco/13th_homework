@@ -2,23 +2,59 @@
 
 import Image from "next/image";
 import left_arrow from "../../../../public/images/icons/left_arrow.svg";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { HEADER_OPTIONS } from "./constants";
 
-export default function Header() {
-  const pathname = usePathname();
-
-  const options = HEADER_OPTIONS.GLOBAL[pathname];
+// 베이스 헤더
+const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
   return (
-    <div className="flex px-20 w-screen h-48">
-      <div className="py-12">
-        <div className="flex gap-8 justify-start">
-          {options.hasBack && <Image src={left_arrow} alt="뒤로가기" />}
-          <span className="text-black text-lg font-bold leading-normal">
-            {options.title}
-          </span>
+    <>
+      <header
+        className={`flex px-20 w-screen h-48 fixed z-50 ${
+          isTransparent ? "bg-transparent" : "bg-white"
+        }`}
+      >
+        <div className="py-12">
+          <div className="flex gap-8 justify-start">
+            {hasBack && <Image src={left_arrow} alt="뒤로가기" />}
+            {title ? (
+              <span className="text-black text-lg font-bold leading-normal">
+                {title}
+              </span>
+            ) : (
+              <></>
+            )}
+            {children ? <>{children}</> : <></>}
+          </div>
         </div>
-      </div>
+      </header>
+      {isTransparent ? <></> : <div className="h-48"></div>}
+    </>
+  );
+};
+
+// 글로벌 헤드
+export function HeaderGlobal() {
+  const pathname = usePathname();
+  const params = useParams();
+  const options = HEADER_OPTIONS(params).GLOBAL[pathname];
+  return (
+    <div className={options ? "block" : "hidden"}>
+      <HeaderBase {...options} />
+    </div>
+  );
+}
+
+// 로컬 헤드
+export function HeaderLocal({ children, ...rest }) {
+  const pathname = usePathname();
+  const params = useParams();
+  const options = HEADER_OPTIONS(params).GLOBAL[pathname];
+  return (
+    <div className={options ? "block" : "hidden"}>
+      <HeaderBase {...options} {...rest}>
+        {children}
+      </HeaderBase>
     </div>
   );
 }

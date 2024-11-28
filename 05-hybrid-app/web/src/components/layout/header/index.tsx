@@ -1,10 +1,10 @@
-import Header from "./header";
+import { HeaderGlobal } from "./header";
 
 export default function Layout({ children }) {
   return (
-    <>
-      <Header />
-      {children}
-    </>
+    <div className="w-screen min-h-screen flex flex-col">
+      <HeaderGlobal />
+      <>{children}</>
+    </div>
   );
 }
