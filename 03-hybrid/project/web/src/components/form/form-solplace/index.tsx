@@ -19,7 +19,7 @@ import { FreeMode, Pagination } from "swiper/modules";
 export default function FormSolplace() {
   const {
     methods,
-    uploadedImages,
+    reverseUploadImages,
     control,
     formState,
     handleSubmit,
@@ -33,11 +33,12 @@ export default function FormSolplace() {
           <div className={styles.image__box}>
             <>
               <Swiper
-                slidesPerView={3}
+                slidesPerView={3.18}
                 spaceBetween={12}
                 freeMode={true}
                 pagination={{
                   clickable: true,
+                  type: "custom",
                 }}
                 modules={[FreeMode, Pagination]}
                 className={styles.swiper}
@@ -49,7 +50,7 @@ export default function FormSolplace() {
                     render={() => <UploadImage onChangeFile={onChangeFile} />}
                   />
                 </SwiperSlide>
-                {uploadedImages.map((el, index) => (
+                {reverseUploadImages.map((el, index) => (
                   <SwiperSlide key={index}>
                     <PreviewImage src={el} />
                   </SwiperSlide>

@@ -16,6 +16,10 @@ export default function useFormSolplace() {
   const [uploadFile] = useMutation(UploadFileDocument);
 
   const uploadedImages = watch("images") || [];
+  const reverseUploadImages = [...uploadedImages].reverse();
+
+  console.log(uploadedImages);
+  console.log(reverseUploadImages);
 
   const onClickButton = () => {
     console.log("버튼을 눌렀습니다.");
@@ -44,7 +48,7 @@ export default function useFormSolplace() {
 
   return {
     methods,
-    uploadedImages,
+    reverseUploadImages,
     control,
     formState,
     handleSubmit,
