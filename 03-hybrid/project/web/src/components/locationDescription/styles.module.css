@@ -1,0 +1,27 @@
+.location__area {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+}
+
+.location p {
+  color: #777777;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+.map {
+  display: flex;
+  align-items: center;
+}
+
+.map p {
+  color: #333333;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
