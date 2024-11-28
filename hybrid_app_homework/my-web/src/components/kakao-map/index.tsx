@@ -7,6 +7,7 @@ import {
   MapMarker,
 } from "react-kakao-maps-sdk";
 import useKakaoLoader from "./hooks";
+import { useEffect, useState } from "react";
 
 interface IKakaoMap {
   lat: number;
@@ -15,6 +16,7 @@ interface IKakaoMap {
 
 export default function KaKaoMap({ lat, lng }: IKakaoMap) {
   useKakaoLoader();
+
   return (
     <>
       <Map
