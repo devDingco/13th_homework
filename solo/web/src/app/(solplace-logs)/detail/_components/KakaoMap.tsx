@@ -41,5 +41,5 @@ export default function KakaoMap({ lat, lng }: IKakaoMapProps) {
 		};
 	}, [lat, lng]);
 
-	return <div id="map" style={{ width: '384px', height: '252px' }}></div>;
+	return <div id="map" className="w-full h-40 rounded-xl"></div>;
 }
