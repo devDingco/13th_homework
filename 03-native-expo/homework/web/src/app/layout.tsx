@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { css } from "@/styled-system/css";
 
-// import localFont from "next/font/local";
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
-// className={`${geistSans.variable} ${geistMono.variable}`}
+import localFont from "next/font/local";
+
+const pretendard = localFont({
+    src: "../styled-system/font/PretendardVariable.woff2",
+    variable: "--font-pre-var",
+    weight: "100 900",
+});
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -22,7 +18,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body className={`${pretendard.variable}`}>
+                <main className={app}>{children}</main>
+            </body>
         </html>
     );
 }
+
+const app = css({
+    minW: "32rem",
+    w: "36rem",
+    h: "100vh",
+    bg: "#fefefe",
+
+    display: "flex",
+    flexDir: "column",
+    alignItems: "center",
+
+    p: "2rem",
+    boxShadow: "0px 4px 10px #bbbbbb",
+});

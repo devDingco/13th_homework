@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import cover from "/public/img/cover.jpg";
+
 import logoVer from "/public/img/logo_ver.png";
+console.log(logoVer);
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -140,7 +142,7 @@ const CSS_LoginForm = css({
 });
 
 const CSS_LogoAdjust = css({
-    width: "20rem",
+    width: "15rem",
     cursor: "pointer",
     // filter: "brightness(0) invert(100%)",
 });
