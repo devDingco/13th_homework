@@ -1,17 +1,24 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import IconClose from "../icon/icon-close";
+import Icon from "../icon";
 
 interface IPreviewImageProps {
   src: string;
+  onClickDelete: (
+    event: MouseEvent<HTMLButtonElement>,
+    deleteUrl: string
+  ) => void;
 }
 
-export default function PreviewImage({ src }: IPreviewImageProps) {
+export default function PreviewImage({
+  src,
+  onClickDelete,
+}: IPreviewImageProps) {
   return (
     <div className={styles.previewImage}>
-      <button>
-        <IconClose />
+      <button onClick={(event) => onClickDelete(event, src)}>
+        <Icon src="close.svg" width={0.875} height={0.875} />
       </button>
       <Image
         src={`https://storage.googleapis.com/${src}`}
