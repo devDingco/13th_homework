@@ -12,7 +12,7 @@ import "./pagination.css";
 
 import Image from "next/image";
 
-export default function ImageSlider() {
+export default function SolplaceLogsDetailImageSlider() {
   const images = [
     "/asset/default1.jpeg",
     "/asset/default2.jpeg",

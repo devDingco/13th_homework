@@ -1,4 +1,4 @@
-import Header from "./global-header";
+import { HeaderGlobal } from "./header";
 
 interface ILayout {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface ILayout {
 export default function LayoutComponent({ children }: ILayout) {
   return (
     <>
-      <Header />
+      <HeaderGlobal />
       <div>{children}</div>
     </>
   );

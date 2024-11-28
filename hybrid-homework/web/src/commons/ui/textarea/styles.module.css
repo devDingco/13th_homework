@@ -1,4 +1,22 @@
-.textarea__soft__m__full {
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  color: var(--gray-800, #333);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.required {
+  color: var(--red, #f66a6a);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.textareaNormal {
   display: flex;
   height: 9.25rem;
   padding: 0.75rem 1rem;
@@ -13,7 +31,7 @@
   font-weight: 500;
 }
 
-.textarea__soft__m__full::placeholder {
+.textareaNormal::placeholder {
   color: var(--Gray-Gray-400, #ababab);
   font-size: 0.875rem;
   font-weight: 500;

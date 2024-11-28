@@ -1,10 +1,10 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import KakaoMap from "@/commons/kakao-map";
-import { useState } from "react";
+import SolplaceMap from "@/components/commons/solplace-map";
 
-export default function LogsDetail() {
+export default function SolplaceLogsDetail() {
   // 지도 보기 상태
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   // 지도 토글
@@ -60,7 +60,7 @@ export default function LogsDetail() {
                 />
               </div>
             </div>
-            {isLocationOpen && <KakaoMap lat={37.5665} lng={126.978} />}
+            {isLocationOpen && <SolplaceMap lat={37.5665} lng={126.978} />}
           </div>
         </div>
         <div className={styles.divider}></div> {/* 구분선 */}
