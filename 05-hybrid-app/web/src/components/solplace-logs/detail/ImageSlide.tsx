@@ -21,10 +21,11 @@ export default function ImageSlide({ images = SAMPLE_IMAGES }) {
     const container = containerRef.current;
     if (!container) return;
 
+    // 스크롤 이벤트
     const handleScroll = () => {
-      const scrollPosition = container.scrollLeft;
-      const imageWidth = container.clientWidth;
-      const newIndex = Math.round(scrollPosition / imageWidth) + 1;
+      const scrollPosition = container.scrollLeft; //현재 가로 스크롤 위치
+      const imageWidth = container.clientWidth; // 이미지 너비
+      const newIndex = Math.round(scrollPosition / imageWidth) + 1; // 현재 스크롤 위치/이미지 너비 => 현재 이미지 계산
       setCurrentImgIndex(newIndex);
     };
 
@@ -66,3 +67,8 @@ export default function ImageSlide({ images = SAMPLE_IMAGES }) {
     </div>
   );
 }
+
+/* tailwindcss
+- scroll-smooth: 스크롤이 부드럽게 동작
+- snap-x, snap-mandatory: 스크롤 스냅 설정으로 컨텐츠가 정확히 위치
+*/
