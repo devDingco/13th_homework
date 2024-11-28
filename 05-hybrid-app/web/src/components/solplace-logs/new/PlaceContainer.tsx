@@ -6,6 +6,7 @@ import Input from "@/components/input";
 import { useState } from "react";
 import Image from "next/image";
 import right_arrow from "../../../../public/images/icons/right_arrow.svg";
+import Footer from "@/components/layout/footer/Footer";
 
 export default function PlaceContainer() {
   const [contentsLength, setContentsLength] = useState(0);
@@ -15,8 +16,8 @@ export default function PlaceContainer() {
     setContentsLength(currentLength.length);
   };
   return (
-    <div className="px-20 pt-24 flex w-full">
-      <form className="flex flex-col gap-20 w-full">
+    <>
+      <form className=" px-20 py-24 flex flex-col gap-20 w-full">
         {/* 사진 등록 */}
         <ImageUpload />
 
@@ -44,12 +45,13 @@ export default function PlaceContainer() {
             {contentsLength}/100
           </span>
         </InputField>
-
-        {/* 로그 등록 버튼 */}
+      </form>
+      {/* 로그 등록 버튼 */}
+      <Footer>
         <button className="w-full h-48 px-16 py-12 bg-[#2873e4] rounded-lg text-center text-white text-lg font-bold leading-normal">
           로그 등록
         </button>
-      </form>
-    </div>
+      </Footer>
+    </>
   );
 }
