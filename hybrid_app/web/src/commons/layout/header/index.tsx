@@ -1,4 +1,4 @@
-import { HEADER } from "@/commons/constants/layout";
+import { HEADER } from "@/commons/constants/constants";
 import Image from "next/image";
 
 export default function LayoutHeader() {
