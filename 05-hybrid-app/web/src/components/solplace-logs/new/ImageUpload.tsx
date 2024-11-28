@@ -74,7 +74,7 @@ export default function ImageUpload() {
     <div className="overflow-x-scroll w-full">
       <div className="flex gap-12 w-screen">
         <div
-          className="flex-shrink-0 w-[100px] h-[100px] bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
+          className="min-w-100 h-100 bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
           onClick={() => inputRef.current?.click()}
         >
           <input
@@ -94,13 +94,13 @@ export default function ImageUpload() {
         {/* 이미지 미리보기 */}
         {imageUrls.map((url, index) => (
           <div
-            className="relative flex-shrink-0 w-[100px] h-[100px] rounded-lg"
+            className="relative min-w-100 h-100 rounded-lg"
             key={`image-${url}-${index}`}
           >
             <Image
               src={url}
               alt="미리보기"
-              className="w-[100px] h-[100px] rounded-lg object-cover"
+              className="min-w-100 h-100 rounded-lg object-cover"
               width={100}
               height={100}
             />
