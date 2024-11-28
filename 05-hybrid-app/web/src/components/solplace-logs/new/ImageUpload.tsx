@@ -71,8 +71,8 @@ export default function ImageUpload() {
   };
 
   return (
-    <div className="overflow-x-scroll w-full">
-      <div className="flex gap-12 w-screen">
+    <div className="overflow-x-auto w-full">
+      <div className="flex gap-12 min-w-full">
         <div
           className="min-w-100 h-100 bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
           onClick={() => inputRef.current?.click()}
