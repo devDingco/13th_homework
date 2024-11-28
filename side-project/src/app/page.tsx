@@ -1,10 +1,12 @@
 'use client';
 
+import SearchComponent from '@/components/main/Search';
+
 export default function Home() {
   return (
     <div>
       <p>메인</p>
-      <p>apdls</p>
+      <SearchComponent />
     </div>
   );
 }
