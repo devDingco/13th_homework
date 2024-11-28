@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -26,8 +14,7 @@ body {
   font-family: var(--font-suit);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html {
+  /* 피그마기본가로(360) : HTML기본폰트(16) = 내기계사이즈(100vw) : 조정폰트(x) */
+  font-size: calc((40 / 9) * 1vw);
 }
