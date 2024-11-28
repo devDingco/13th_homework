@@ -8,13 +8,13 @@ const 내컴퓨터접속주소 = "http://127.0.0.1:3000"; // IOS 시뮬레이터
 
 export default function home() {
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
-    //   <StatusBar translucent={true} />
-    <WebView
-      source={{
-        uri: `${내컴퓨터접속주소}/solplace-logs/new`,
-      }}
-    />
-    // </SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar translucent={true} />
+      <WebView
+        source={{
+          uri: `${내컴퓨터접속주소}/solplace-logs/`,
+        }}
+      />
+    </SafeAreaView>
   );
 }
