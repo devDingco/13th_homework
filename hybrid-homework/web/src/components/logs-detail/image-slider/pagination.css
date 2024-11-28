@@ -1,0 +1,17 @@
+/* 페이지네이션 배경 추가 */
+.swiper-pagination-fraction {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 6.25rem;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  color: var(--gray-50, #f2f2f2);
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 500;
+}

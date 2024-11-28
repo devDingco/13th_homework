@@ -10,7 +10,7 @@ export default function Header() {
   const options = HEADER_OPTIONS.GLOBAL[pathname];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.header}>
       <header className={styles.header}>
         {options.hasBack && (
           <Image

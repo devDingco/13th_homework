@@ -29,11 +29,11 @@
 .location {
   display: flex;
   gap: 0.5rem;
-  align-items: center;
 }
 
 .address {
   display: flex;
+  align-items: center;
 }
 
 .addressTitle {
@@ -74,4 +74,14 @@
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
+}
+
+.icon16 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon24 {
+  width: 1.5rem;
+  height: 1.5rem;
 }

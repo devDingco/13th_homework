@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import KakaoMap from "@/components/commons/kakaomap";
+import KakaoMap from "@/commons/kakao-map";
 import { useState } from "react";
 
 export default function LogsDetail() {
+  // 지도 보기 상태
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  // 지도 토글
   const toggleLocation = () => {
     setIsLocationOpen((prev) => !prev);
   };
@@ -16,16 +18,25 @@ export default function LogsDetail() {
         <div className={styles.detailInfo}>
           <div className={styles.header}>
             <div className={styles.headerTitle}>Bramble & Brioche 한남점</div>
-            <Image src="/asset/edit.svg" width={24} height={24} alt="add" />
+            <Image
+              className={styles.icon24}
+              src="/asset/edit.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              alt="add"
+            />
           </div>
 
           <div className={styles.locationArea}>
             <div className={styles.location}>
               <div className={styles.address}>
                 <Image
+                  className={styles.icon16}
                   src="/asset/location_icon.svg"
-                  width={16}
-                  height={16}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                   alt="location"
                 />
                 <div className={styles.addressTitle}>
@@ -36,13 +47,15 @@ export default function LogsDetail() {
               <div className={styles.dropdown} onClick={toggleLocation}>
                 <div>지도 {isLocationOpen ? "접기" : "보기"}</div>
                 <Image
+                  className={styles.icon24}
                   src={
                     isLocationOpen
                       ? "/asset/up_arrow.svg"
                       : "/asset/down_arrow.svg"
                   }
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                   alt="downArrow"
                 />
               </div>
@@ -57,7 +70,6 @@ export default function LogsDetail() {
             브런치 카페예요. 바쁜 일상에서 잠깐 벗어나, 따뜻한 공간에서 여유를
             느끼고 싶다면 이곳이 제격이에요.
           </div>
-
           <div>
             이곳에서는 누구든 부담 없이 와서 편하게 시간을 보낼 수 있어요. 혼자
             책을 읽거나 친구와 담소를 나누기에도 딱 좋죠. 브리오쉬는 매일
