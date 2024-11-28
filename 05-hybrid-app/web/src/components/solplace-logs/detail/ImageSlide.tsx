@@ -11,6 +11,7 @@ const SAMPLE_IMAGES = [
   "/images/exampleDetailImages/5.jpeg",
   "/images/exampleDetailImages/6.jpeg",
   "/images/exampleDetailImages/7.jpeg",
+  "/images/exampleDetailImages/8.jpeg",
 ];
 
 export default function ImageSlide({ images = SAMPLE_IMAGES }) {

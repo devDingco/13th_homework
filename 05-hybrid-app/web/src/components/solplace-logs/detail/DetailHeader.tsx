@@ -6,7 +6,7 @@ import location from "../../../../public/images/icons/location.svg";
 import down_arrow from "../../../../public/images/icons/down_arrow.svg";
 import up_arrow from "../../../../public/images/icons/up_arrow.svg";
 import { useState } from "react";
-import Map from "./Map";
+import Map from "./MapView";
 
 export default function DetailHeader() {
   const [ismapView, setIsmapView] = useState(false);
