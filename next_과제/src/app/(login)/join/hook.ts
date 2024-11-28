@@ -9,32 +9,16 @@ export const useJoinPage = () => {
   const [createUser] = useMutation(CreateUserDocument);
 
   const router = useRouter();
-  const {
-    control,
-    getValues,
-    formState: { errors, isValid, isDirty },
-    watch,
-  } = useForm({
+  const methods = useForm({
     mode: "onChange",
-  });
-
-  // 비밀번호 확인 일치 여부 체크
-  control.register("joinPasswordConfirm", {
-    validate: (value) => {
-      if (value === watch("joinPassword")) {
-        return true;
-      } else {
-        return "비밀번호가 일치하지 않습니다.";
-      }
-    },
   });
 
   // 회원가입 제출 함수
   const joinSubmit = async () => {
-    const { joinEmail, joinName, joinPassword } = getValues();
+    const { joinEmail, joinName, joinPassword } = methods.getValues();
 
     // 1. 이메일 중복 확인과 비밀번호 확인을 통과했는지 확인
-    if (!isValid || !isDirty) return;
+    if (!methods.formState.isValid || !methods.formState.isDirty) return;
 
     // 2. 회원가입 요청
     const result = await createUser({
@@ -54,10 +38,7 @@ export const useJoinPage = () => {
   };
 
   return {
-    control,
     joinSubmit,
-    errors,
-    isValid,
-    isDirty,
+    methods,
   };
 };

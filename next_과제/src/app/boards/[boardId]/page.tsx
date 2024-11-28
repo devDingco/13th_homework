@@ -1,6 +1,6 @@
 "use client";
 
-import BoardDetail from "@/components/board-detail/detail";
+import BoardDetail from "@/components/board-detail";
 import CommentWrite from "@/components/board-detail/comment-write";
 import CommentList from "@/components/board-detail/comment-list";
 

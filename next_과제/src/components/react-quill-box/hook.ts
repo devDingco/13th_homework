@@ -2,10 +2,13 @@ import ReactQuill from "react-quill-new";
 import { useMutation } from "@apollo/client";
 import { UploadFileDocument } from "@/commons/graphql/graphql";
 import { validationImageFile } from "@/commons/libs/validation-image-file";
+import { useFormContext } from "react-hook-form";
 
 export const useReactQuillBox = () => {
+  const { register, formState } = useFormContext();
   const [uploadFile] = useMutation(UploadFileDocument);
 
+  // ! 이미지 핸들러
   const imageHandler = (ReactQuill: ReactQuill) => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
@@ -38,5 +41,7 @@ export const useReactQuillBox = () => {
 
   return {
     imageHandler,
+    register,
+    formState,
   };
 };

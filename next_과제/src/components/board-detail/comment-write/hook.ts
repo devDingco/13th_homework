@@ -1,12 +1,13 @@
+"use client";
+
 import {
+  FetchBoardCommentsQuery,
   MutationCreateBoardCommentArgs,
   MutationUpdateBoardCommentArgs,
 } from "@/commons/graphql/graphql";
-import { useState } from "react";
 import {
   CreateBoardCommentDocument,
   UpdateBoardCommentDocument,
-  FetchBoardCommentsDocument,
 } from "@/commons/graphql/graphql";
 
 import { useMutation } from "@apollo/client";
@@ -14,43 +15,33 @@ import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { IuseCommentWriteProps } from "@/components/board-detail/comment-write/types";
 import { IformList } from "@/components/board-write/types";
+import { useModalStore } from "@/commons/stores/modal-store";
 
 export const useCommentWrite = (props: IuseCommentWriteProps) => {
+  const { setIsModal } = useModalStore();
+
   const { data, editModeHandler } = props;
-  const {
-    getValues,
-    setValue,
-    control,
-    formState: { isDirty, isValid, errors },
-  } = useForm<IformList>({
+  const methods = useForm<IformList>({
     mode: "onChange",
   });
 
-  const { boardId } = useParams();
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
-  const [modalType, setModalType] = useState(""); // 모달 타입
-
-  const modalControl = ({ type }: { type: string }) => {
-    setIsModalOpen((isOpen) => !isOpen);
-    setModalType(type);
-  };
+  const { boardId }: { boardId: string } = useParams();
 
   const [updateBoardComment] = useMutation(UpdateBoardCommentDocument);
   const [createBoardComment] = useMutation(CreateBoardCommentDocument);
 
-  // !댓글 등록
+  // ! 댓글 등록
   const commentNew = async () => {
     try {
       const { commentWriter, commentPassword, commentContents, commentRating } =
-        getValues();
+        methods.getValues();
 
       const newCommentData: MutationCreateBoardCommentArgs = {
         createBoardCommentInput: {
           contents: "",
           rating: 0,
         },
-        boardId: String(boardId),
+        boardId: boardId,
       };
       if (commentWriter)
         newCommentData.createBoardCommentInput.writer = commentWriter;
@@ -61,37 +52,39 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       if (commentRating)
         newCommentData.createBoardCommentInput.rating = commentRating;
 
-      const result = await createBoardComment({
+      await createBoardComment({
         variables: newCommentData,
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: String(boardId) },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoardComments: (prev) => {
+                // 기존 댓글 리스트에 신규 댓글 데이터 추가
+                return [data?.createBoardComment, ...prev];
+              },
+            },
+          });
+        },
       });
-      // console.log(result);
 
-      // 댓글 등록 완료 모달
-      modalControl({ type: "commentNewSubmit" });
+      setIsModal({ name: "success", contents: "댓글 등록이 완료되었습니다." }); // 댓글 등록 완료 모달
 
       // 입력창 초기화
-      setValue("commentWriter", "");
-      setValue("commentPassword", "");
-      setValue("commentContents", "");
-      setValue("commentRating", 0);
+      methods.setValue("commentWriter", "");
+      methods.setValue("commentPassword", "");
+      methods.setValue("commentContents", "");
+      methods.setValue("commentRating", 0);
     } catch (error) {
       if (error instanceof Error) {
-        modalControl({ type: "commentNewErrorUnknown" }); // 예상치 못한 오류 모달
+        setIsModal({ name: "error" }); // 예상치 못한 오류 모달
       }
     }
   };
 
-  // !댓글 수정 최종 저장
+  // !댓글 수정
   const commentEdit = async () => {
     try {
-      const { commentPassword, commentContents, commentRating } = getValues();
-      // console.log(commentPassword, commentContents, commentRating);
+      const { commentPassword, commentContents, commentRating } =
+        methods.getValues();
 
       const editCommentData: MutationUpdateBoardCommentArgs = {
         updateBoardCommentInput: {},
@@ -104,29 +97,43 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
       if (commentRating)
         editCommentData.updateBoardCommentInput.rating = commentRating;
       if (commentPassword === "")
-        return modalControl({
-          type: "commentEditPasswordRequired",
-        }); // 비밀번호 입력 안내 모달
+        return setIsModal({
+          name: "required",
+          contents: "비밀번호를 입력해 주세요.",
+        }); // 비밀번호 미입력시 안내 모달
 
       await updateBoardComment({
         variables: editCommentData,
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: String(boardId) },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchBoardComments: (prev) => {
+                // 기존 댓글 리스트에 수정된 댓글 데이터로 변경
+                const newComment = data?.updateBoardComment;
+                console.log(newComment);
+                return prev.map(
+                  (comment: FetchBoardCommentsQuery["fetchBoardComments"][0]) =>
+                    comment._id === newComment?._id ? newComment : comment
+                );
+              },
+            },
+          });
+        },
       });
 
-      modalControl({ type: "commentEditSubmit" }); // 수정 완료 모달
+      setIsModal({ name: "success", contents: "댓글 수정이 완료되었습니다." }); // 댓글 수정 완료 모달
+
       if (editModeHandler) {
         editModeHandler(); // 수정 모드 종료
       }
     } catch (error) {
       if (error instanceof Error) {
-        modalControl({ type: "commentEditPasswordError" }); // 비밀번호 오류 모달
+        setIsModal({
+          name: "error",
+          contents: "비밀번호가 일치하지 않습니다.",
+        }); // 비밀번호 불일치 안내 모달
       } else {
-        modalControl({ type: "commentEditErrorUnknown" }); // 예상치 못한 오류 모달
+        setIsModal({ name: "error" }); // 예상치 못한 오류 모달
       }
     }
   };
@@ -134,14 +141,7 @@ export const useCommentWrite = (props: IuseCommentWriteProps) => {
   return {
     commentNew,
     commentEdit,
-    isDirty,
-    isValid,
-    errors,
-    control,
-    setValue,
-    isModalOpen,
-    setIsModalOpen,
-    modalType,
+    methods,
     data,
   };
 };

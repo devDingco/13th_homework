@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>이벤트루프</title>
+    <script>
+      function onClickLoop() {
+        console.log("=======시작!!!!======="); // 1
+
+        function aaa() {
+          console.log("aaa-시작"); // 2
+          bbb(); // 3번째로 실행되면서 bbb 함수로 이동
+          console.log("aaa-끝"); // 5
+        }
+
+        // async 함수는 Promise 객체를 반환한다. - 마이크로큐에 들어감
+        async function bbb() {
+          console.log("bbb-시작"); // 3
+          await ccc(); // 4번째로 실행되면서 ccc 함수로 이동, await가 있어서 기다림, ccc 함수가 끝나야 밑에 있는 bbb-끝 콘솔 실행
+          console.log("bbb-끝"); // 8
+        }
+
+        // async 함수는 Promise 객체를 반환한다. - 마이크로큐에 들어감
+        async function ccc() {
+          console.log("ccc-시작"); // 4
+          const friend = await "철수"; // 5번째이지만 await가 있어서 마이크로큐에 들어가서 기다림
+          console.log(friend); // 7
+        }
+
+        aaa();
+
+        console.log("=======끝!!!!======="); // 6
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickLoop()">시작하기</button>
+  </body>
+</html>

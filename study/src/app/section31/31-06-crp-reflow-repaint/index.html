@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>브라우저 렌더링 원리 - Reflow, Repaint 실습</title>
+    <style>
+      .myReflow {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          /* background-color: yellow; */
+          width: 110px;
+          height: 110px;
+        }
+      }
+      .myRepaint {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="myReflow">리플로우 연습</div>
+    <div class="myRepaint">리페인트 연습</div>
+  </body>
+</html>

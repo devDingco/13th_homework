@@ -1,5 +1,3 @@
-"use client";
-
 import {
   CreateTravelproductQuestionDocument,
   UpdateTravelproductQuestionDocument,
@@ -8,39 +6,32 @@ import {
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useLoginCheck } from "@/commons/hooks/useLoginCheck";
+import { useModalStore } from "@/commons/stores/modal-store";
 
 import { IuseQuestionWriteProps, Iuseform } from "./types";
 
 export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
-  const { data, editModeHandler } = props;
+  const { editModeHandler } = props;
+  const { setIsModal } = useModalStore();
+  const { isLogin } = useLoginCheck();
 
-  const {
-    getValues,
-    setValue,
-    control,
-    formState: { isDirty, isValid, errors },
-  } = useForm<Iuseform>({
+  const methods = useForm<Iuseform>({
     mode: "onChange",
   });
 
   const { productId }: { productId: string } = useParams();
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 오픈 여부
-  const [modalType, setModalType] = useState(""); // 모달 타입
-
-  const modalControl = ({ type }: { type: string }) => {
-    setIsModalOpen((isOpen) => !isOpen);
-    setModalType(type);
-  };
 
   const [createPrdQuestion] = useMutation(CreateTravelproductQuestionDocument);
   const [updatePrdQuestion] = useMutation(UpdateTravelproductQuestionDocument);
 
   // ! 질문 등록하기
   const createQuestion = async () => {
-    const { questionContents } = getValues();
-    console.log("질문 내용", questionContents);
+    const { questionContents } = methods.getValues();
+
+    if (!isLogin) {
+      return setIsModal({ name: "login_check_stay" }); // 로그인 확인 모달 띄우기
+    }
     try {
       await createPrdQuestion({
         variables: {
@@ -56,8 +47,9 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
           },
         ],
       });
-      alert("질문이 등록되었습니다.");
-      setValue("questionContents", ""); // 질문 입력창 초기화
+
+      setIsModal({ name: "success", contents: "질문이 등록되었습니다." }); // 질문 등록 완료 모달
+      methods.reset(); // 질문 입력창 초기화
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +57,7 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
 
   // ! 질문 수정하기
   const updateQuestion = async (questionId: string) => {
-    const { questionContents } = getValues();
+    const { questionContents } = methods.getValues();
     try {
       await updatePrdQuestion({
         variables: {
@@ -81,8 +73,9 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
           },
         ],
       });
-      alert("질문이 수정되었습니다.");
-      modalControl({ type: "productQuestionEdit" }); // 질문 수정 완료 모달
+
+      setIsModal({ name: "success", contents: "질문이 수정되었습니다." }); // 질문 수정 완료 모달
+
       if (editModeHandler) {
         editModeHandler(); // 수정 모드 종료
       }
@@ -94,13 +87,6 @@ export const useQuestionWrite = (props: IuseQuestionWriteProps) => {
   return {
     createQuestion,
     updateQuestion,
-    isDirty,
-    isValid,
-    errors,
-    control,
-    data,
-    isModalOpen,
-    setIsModalOpen,
-    modalType,
+    methods,
   };
 };

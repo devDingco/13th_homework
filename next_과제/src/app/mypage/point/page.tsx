@@ -1,6 +1,6 @@
 "use client";
 
-import PointList from "@/components/point-list";
+import PointList from "@/components/mypage/point-list";
 
 export default function PointUsageHistoryPage() {
   return (

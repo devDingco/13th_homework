@@ -10,16 +10,17 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.21.1",
     "@ant-design/icons": "^5.5.1",
     "@ant-design/nextjs-registry": "^1.0.1",
     "@apollo/client": "^3.6.2",
+    "@portone/browser-sdk": "^0.0.10",
     "antd": "^5.21.2",
-    "antd-style": "^3.7.0",
     "apollo-upload-client": "^18.0.1",
-    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "dompurify": "^3.1.7",
     "firebase": "^11.0.0",
-    "graphql": "^15.8.0",
+    "graphql": "^16.9.0",
+    "graphql-request": "^7.1.2",
     "lodash": "^4.17.21",
     "next": "14.2.13",
     "next-auth": "^4.24.8",
@@ -31,9 +32,11 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-kakao-maps-sdk": "^1.1.27",
     "react-player": "^2.16.0",
     "react-quill-new": "^3.3.3",
     "swiper": "^11.1.14",
+    "uuid": "^11.0.2",
     "zen-observable": "^0.10.0",
     "zustand": "^5.0.0"
   },
@@ -41,6 +44,7 @@
     "@graphql-codegen/cli": "^5.0.2",
     "@svgr/webpack": "^8.1.0",
     "@types/apollo-upload-client": "^18.0.0",
+    "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18.3.9",
@@ -52,8 +56,5 @@
     "sass": "^1.79.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.6.2"
-  },
-  "resolutions": {
-    "quill": "^2.0.2"
   }
 }

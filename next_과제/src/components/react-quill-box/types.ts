@@ -1,10 +1,14 @@
+export interface IformList {
+  writerContents?: string;
+  productContents?: string;
+}
+
 export interface ReactQuillBoxProps {
-  id?: string;
+  id: string;
   title?: React.ReactNode;
   name?: string;
-  onChange?: (value: string) => void;
+  onChange: (value: string) => void;
   readonly?: boolean;
   placeholder?: string;
-  errormessage?: string;
   defaultValue?: string;
 }

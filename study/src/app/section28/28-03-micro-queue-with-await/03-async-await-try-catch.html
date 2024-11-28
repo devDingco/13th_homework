@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>이벤트 루프</title>
+    <script>
+      const onClickButton1 = () => {
+        try {
+          fetch("https://qqq.com");
+          console.log("요청완료");
+        } catch (error) {
+          console.error("에러발생", error);
+        }
+      };
+      const onClickButton2 = async () => {
+        try {
+          await fetch("https://qqq.com");
+          console.log("요청완료");
+        } catch (error) {
+          console.error("에러발생");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickButton1()">await 없이 요청하기</button>
+    <button onclick="onClickButton2()">await 함께 요청하기</button>
+  </body>
+</html>

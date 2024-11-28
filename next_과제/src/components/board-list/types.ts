@@ -1,12 +1,10 @@
 export interface DataType {
-  title: string;
-  key: string;
+  _id?: string;
+  title?: string;
   dataIndex?: string;
-  width?: string;
-  align?: "center" | "left" | "right";
-  render?: (text: unknown, record: DataType) => JSX.Element;
-  deleteBoard?: string;
   createdAt?: string;
+  youtubeUrl?: string;
+  images?: string[];
 }
 
 export interface IhandleSearch {

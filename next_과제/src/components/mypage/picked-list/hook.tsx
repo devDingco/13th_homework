@@ -1,127 +1,56 @@
-import { useRouter } from "next/navigation";
+"use client";
+
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
 import {
   FetchTravelproductsIPickedDocument,
   FetchTravelproductsCountIPickedDocument,
 } from "@/commons/graphql/graphql";
-
-import { VideoCameraTwoTone, FileImageTwoTone } from "@ant-design/icons";
-import { toKoreanTimeString } from "@/utils/toKoreanTimeString";
+import { useRouter } from "next/navigation";
+import { dateViewSet } from "@/commons/utils/dateViewSet";
+import { columns } from "./constants";
+import { DataType } from "./types";
+import { usePageChange } from "@/commons/stores/page-store";
 
 export const usePickedList = () => {
   const router = useRouter();
-  const [page, setPage] = useState(1);
+  const { page } = usePageChange();
 
+  //! 나의 북마크 상품 데이터
   const { data, refetch } = useQuery(FetchTravelproductsIPickedDocument, {
     variables: {
+      search: "",
       page,
     },
   });
+  const pickedData = data?.fetchTravelproductsIPicked;
 
-  console.log("pickeds Data", data);
-
+  // !나의 북마크 상품 총 갯수
   const { data: countData } = useQuery(FetchTravelproductsCountIPickedDocument);
+  const pickedTotalCount = countData?.fetchTravelproductsCountIPicked; // !게시글 총 갯수
 
-  // const fetchBoardsCount = countData?.fetchTravelproductsCountIPicked; // !게시글 총 갯수
+  const tableItemOnClick = (productId: string) => {
+    console.log(productId);
+    router.push(`/products/${productId}`);
+  };
 
-  // const pageChangeHandler = async (page: number) => {
-  //   const result = await refetch({
-  //     startDate: toKoreanTimeString("2021-09-03"),
-  //     endDate: toKoreanTimeString(new Date().toISOString().split("T")[0], true),
-  //     search: search, // 기본값은 ""인데 검색결과 리패치 상태인 경우 search값이 있음
-  //     page: page,
-  //   });
-  //   console.log(result);
-  //   setPage(page);
-  // };
-
-  // // console.log(params.pageNum, data?.fetchBoards);
-
-  // const listItemMouseHandler = (
-  //   e: React.MouseEvent<HTMLTableRowElement>,
-  //   type: string
-  // ) => {
-  //   const target = e.currentTarget;
-  //   const childTarget = target.lastElementChild?.firstElementChild?.classList;
-  //   // console.log(childTarget);
-  //   if (type === "over") {
-  //     childTarget?.add("flex");
-  //     childTarget?.remove("hidden");
-  //   } else {
-  //     childTarget?.add("hidden");
-  //     childTarget?.remove("flex");
-  //   }
-  // };
-
-  // const detailPageHandler = (
-  //   e: React.MouseEvent<HTMLTableRowElement>,
-  //   postId: string
-  // ) => {
-  //   // console.log("detail", postId);
-  //   router.push(`/boards/${postId}`);
-  // };
-
-  // const dataSource = Array.from({
-  //   length: data?.fetchTravelproductsIPicked.length || 0,
-  // }).map<DataType>((_, idx) => ({
-  //   key: String(idx + 1 + (page - 1) * 10),
-  //   name: data?.fetchTravelproductsIPicked[idx].name || "",
-  //   price: data?.fetchTravelproductsIPicked[idx].price || 0,
-  //   createdAt: dateViewSet(data?.fetchTravelproductsIPicked[idx].createdAt),
-  // }));
-
-  // const columns: TableProps<DataType>["columns"] = [
-  //   {
-  //     title: "번호",
-  //     dataIndex: "key",
-  //     key: "key",
-  //     width: "5%",
-  //     align: "center",
-  //   },
-  //   {
-  //     title: "상품명",
-  //     dataIndex: "name",
-  //     key: "name",
-  //     render: (value, record, index) => (
-  //       <div className="flex gap-2">
-  //         {value}
-  //         {/* {value}
-  //         {data?.fetchBoards[index].youtubeUrl && (
-  //           <VideoCameraTwoTone twoToneColor="#ff4848" />
-  //         )}
-  //         {(data?.fetchBoards[index].images?.length ?? 0) > 0 && (
-  //           <FileImageTwoTone twoToneColor="#2e53fc" />
-  //         )} */}
-  //       </div>
-  //     ),
-  //     width: "66%",
-  //   },
-  //   {
-  //     title: "판매가격",
-  //     dataIndex: "price",
-  //     key: "price",
-  //     width: "10%",
-  //     align: "center",
-  //   },
-  //   {
-  //     title: "날짜",
-  //     dataIndex: "createdAt",
-  //     key: "createdAt",
-  //     width: "10%",
-  //     align: "center",
-  //   },
-  // ];
+  // ! 리스트 테이블 노출용 데이터 소스 처리
+  const dataSource = Array.from({
+    length: data?.fetchTravelproductsIPicked.length || 0,
+  }).map<DataType>((_, idx) => ({
+    key: String(idx + 1 + (page - 1) * 10),
+    _id: pickedData?.[idx]._id || "",
+    name: pickedData?.[idx].name || "",
+    price: pickedData?.[idx].price || 0,
+    seller: pickedData?.[idx].seller?.name || "",
+    createdAt: dateViewSet(pickedData?.[idx].createdAt),
+  }));
 
   return {
     data,
-    // page,
-    // pageChangeHandler,
-    // listItemMouseHandler,
-    // detailPageHandler,
-    // dataSource,
-    // columns,
-    // fetchBoardsCount,
-    // router,
+    tableItemOnClick,
+    dataSource,
+    columns,
+    pickedTotalCount,
+    refetch,
   };
 };

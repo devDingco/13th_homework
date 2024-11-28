@@ -1,23 +1,63 @@
 "use client";
 
 import Icon from "@/components/icon-factory";
-import { DatePicker, Input, Button } from "antd";
-import { useState } from "react";
+import { DatePicker, Input, Button, InputRef } from "antd";
+import { useSearch } from "@/commons/stores/search-store";
+import { useSearchDate } from "@/commons/stores/search-date-store";
 import "dayjs/locale/ko";
-import { FetchBoardsCountQueryVariables } from "@/commons/graphql/graphql";
 import locale from "antd/lib/date-picker/locale/ko_KR";
+import { useEffect, useRef } from "react";
+import _ from "lodash";
+import { usePathname } from "next/navigation";
+
+interface IQuery {
+  [key: string]: string | number;
+}
 
 export default function SearchBox({
-  handleSearch,
   isDate = true,
+  refetch,
+  countDataRefetch,
 }: {
-  handleSearch: (params: FetchBoardsCountQueryVariables) => void;
   isDate?: boolean;
+  refetch: (query: IQuery) => void;
+  countDataRefetch?: (query: IQuery) => void;
 }) {
   const { RangePicker } = DatePicker;
-  const [startDate, setStartDate] = useState<string>("2021-09-03T09:54:33Z");
-  const [endDate, setEndDate] = useState<string>(new Date().toISOString());
-  const [search, setSearch] = useState("");
+  const { search, setSearch } = useSearch();
+  const { startDate, endDate, setStartDate, setEndDate } = useSearchDate();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (search !== "") {
+      setSearch("");
+      setStartDate("");
+      setEndDate("");
+    }
+  }, [pathname]);
+
+  const inputRef = useRef<InputRef>(null);
+
+  // ! 검색 디바운스 처리
+  const getSearchDebounce = _.debounce((query) => {
+    if (query.startDate === "") delete query.startDate;
+    if (query.endDate === "") delete query.endDate;
+    console.log("검색조건 확인", query);
+
+    refetch(query);
+    if (countDataRefetch) countDataRefetch(query);
+  }, 500);
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    getSearchDebounce({ startDate, endDate, search: e.target.value });
+    setSearch(e.target.value);
+  };
+
+  const handleSearch = () => {
+    const search = inputRef.current?.input?.value || "";
+    setSearch(search);
+    getSearchDebounce({ startDate, endDate, search });
+  };
 
   return (
     <div className="flex gap-4 flex-wrap max-sm:w-full">
@@ -26,31 +66,25 @@ export default function SearchBox({
           size="large"
           type="text"
           placeholder="제목을 검색해 주세요"
-          defaultValue={search}
-          onChange={(e) => setSearch(e.target.value)}
+          ref={inputRef}
+          onChange={(e) => onChangeSearch(e)}
           prefix={
             <Icon icon="search" className="w-6 h-6 fill-accent-content" />
           }
-          onKeyUp={(e) =>
-            e.key === "Enter" && handleSearch({ startDate, endDate, search })
-          }
+          onKeyUp={(e) => e.key === "Enter" && handleSearch()}
         />
       </label>
 
       <div className="flex gap-4 flex-wrap max-sm:w-full">
         {isDate && (
           <RangePicker
+            className="max-sm:w-full"
             locale={locale}
             size="large"
             id={{
               start: "startDate",
               end: "endDate",
             }}
-            // defaultValue={[
-            //   dayjs(startDate.split("T")[0], "YYYY-MM-DD"),
-            //   dayjs(endDate.split("T")[0], "YYYY-MM-DD"),
-            // ]}
-            // placeholder={["시작일", "종료일"]}
             onChange={(date, dateString) => {
               setStartDate(new Date(dateString[0]).toISOString());
               setEndDate(new Date(dateString[1]).toISOString());
@@ -63,7 +97,7 @@ export default function SearchBox({
           color="default"
           variant="solid"
           className="btn btn-accent-content max-sm:w-full"
-          onClick={() => handleSearch({ startDate, endDate, search })}
+          onClick={() => handleSearch()}
         >
           검색
         </Button>

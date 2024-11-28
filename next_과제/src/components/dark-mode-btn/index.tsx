@@ -1,26 +1,38 @@
 "use client";
-// import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./index.module.scss";
+import { useThemeStore } from "@/commons/stores/theme";
 
-interface IdarkModeBtn {
-  theme: string;
-  setTheme: (theme: string) => void;
-}
+export default function DarkModeBtn() {
+  const { themeControl, setThemeControl } = useThemeStore();
 
-export default function DarkModeBtn(props: IdarkModeBtn) {
-  const { theme, setTheme } = props;
+  useEffect(() => {
+    const themeCheck = localStorage.getItem("theme");
+    if (themeCheck) {
+      console.log("모드 확인", themeCheck);
+      setThemeControl(themeCheck === "dark" ? "dark" : "light");
+      const documentClass = document.documentElement.classList;
+      if (themeCheck === "dark") {
+        documentClass.add("dark");
+      } else {
+        documentClass.remove("dark");
+      }
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
 
   const handleThemeChange = () => {
-    const themeStr = theme === "light" ? "dark" : "light";
+    const themeStr = themeControl === "light" ? "dark" : "light";
     localStorage.setItem("theme", themeStr);
     document.documentElement.classList.toggle("dark");
-    setTheme(themeStr);
+    setThemeControl(themeStr);
   };
 
   return (
     <div
-      className={`fixed overflow-hidden h-12 w-12 top-4 right-4 rounded-lg z-50 shadow-lg box-content ${
-        theme === "dark" ? styles.dark : styles.light
+      className={`max-sm:bottom-40 max-sm:top-auto fixed overflow-hidden h-12 w-12 top-4 right-4 rounded-lg z-50 shadow-lg box-content ${
+        themeControl === "dark" ? styles.dark : styles.light
       }`}
     >
       <label className="flex flex-col items-start absolute">
@@ -28,7 +40,7 @@ export default function DarkModeBtn(props: IdarkModeBtn) {
           type="checkbox"
           className="theme-controller hidden"
           onChange={() => handleThemeChange()}
-          checked={theme === "dark"}
+          checked={themeControl === "dark"}
         />
 
         {/* moon icon */}

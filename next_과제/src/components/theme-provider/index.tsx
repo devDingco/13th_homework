@@ -1,31 +1,17 @@
 "use client";
 
-import { ConfigProvider, theme as antdTheme, ThemeConfig } from "antd";
-import { useEffect, useState, useRef } from "react";
+import { ConfigProvider, ThemeConfig, theme as antdTheme } from "antd";
 import DarkModeBtn from "@/components/dark-mode-btn";
 import locale from "antd/locale/ko_KR";
+import ModalAlertBox from "@/components/modal-alert-box";
+import { useThemeStore } from "@/commons/stores/theme";
 
 export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [ThemeControl, setThemeControl] = useState<string>("");
-
-  useEffect(() => {
-    const themeCheck = localStorage.getItem("theme");
-    if (themeCheck) {
-      console.log("모드 확인", themeCheck);
-      setThemeControl(themeCheck === "dark" ? "dark" : "light");
-      const documentClass = document.documentElement.classList;
-      if (themeCheck === "dark") {
-        documentClass.add("dark");
-      } else {
-        documentClass.remove("dark");
-      }
-    }
-  }, []);
-
+  const { themeControl } = useThemeStore();
   const theme = (ThemeControl: string) => {
     const theme = {
       token: {
@@ -40,17 +26,12 @@ export default function ThemeProvider({
     return theme;
   };
 
-  const modalContainerRef = useRef<HTMLDivElement>(null);
-
   return (
     <>
-      <DarkModeBtn theme={ThemeControl} setTheme={setThemeControl} />
-      <ConfigProvider
-        locale={locale}
-        theme={theme(ThemeControl)}
-        getPopupContainer={() => modalContainerRef.current as HTMLElement}
-      >
-        <div ref={modalContainerRef}>{children}</div>
+      <ModalAlertBox />
+      <DarkModeBtn />
+      <ConfigProvider locale={locale} theme={theme(themeControl)}>
+        {children}
       </ConfigProvider>
     </>
   );

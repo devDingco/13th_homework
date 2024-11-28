@@ -20,7 +20,7 @@ export default function RecentViewProducts() {
   ];
   if (recentProducts) {
     return (
-      <div className="fixed right-4 bottom-4 border rounded-lg p-2 flex flex-col justify-center gap-2 bg-white shadow-lg z-10">
+      <div className="fixed right-4 bottom-4 border rounded-lg p-2 flex flex-col justify-center gap-2 bg-white shadow-lg z-10 max-sm:recentPrdBox">
         <h5 className="font-medium text-sm">최근 본 상품</h5>
         <ul className="flex flex-col gap-4">
           {recentProducts.map((product) => (
