@@ -8,7 +8,13 @@ import AddressContainer from "@/components/addressContainer";
 import TextArea from "@/components/textArea";
 import ButtonPrimary from "@/components/button/button-primary";
 import useFormSolplace from "./hook";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import styles from "./styles.module.css";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import { FreeMode, Pagination } from "swiper/modules";
 
 export default function FormSolplace() {
   const {
@@ -25,14 +31,31 @@ export default function FormSolplace() {
       <div className={styles.main__container__wrapper}>
         <div className={styles.main__container}>
           <div className={styles.image__box}>
-            {uploadedImages.map((el, index) => (
-              <PreviewImage key={index} src={el} />
-            ))}
-            <Controller
-              name="images"
-              control={control}
-              render={() => <UploadImage onChangeFile={onChangeFile} />}
-            />
+            <>
+              <Swiper
+                slidesPerView={3}
+                spaceBetween={12}
+                freeMode={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[FreeMode, Pagination]}
+                className={styles.swiper}
+              >
+                <SwiperSlide>
+                  <Controller
+                    name="images"
+                    control={control}
+                    render={() => <UploadImage onChangeFile={onChangeFile} />}
+                  />
+                </SwiperSlide>
+                {uploadedImages.map((el, index) => (
+                  <SwiperSlide key={index}>
+                    <PreviewImage src={el} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </>
           </div>
 
           <TextInput<SolPlaceLogsType>

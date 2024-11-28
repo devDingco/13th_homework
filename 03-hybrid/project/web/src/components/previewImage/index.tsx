@@ -19,7 +19,7 @@ export default function PreviewImage({ src }: IPreviewImageProps) {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", borderRadius: "0.5rem" }}
       />
     </div>
   );
