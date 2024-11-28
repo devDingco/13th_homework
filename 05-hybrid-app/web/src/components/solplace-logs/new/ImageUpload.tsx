@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import add from "../../../../public/images/icons/add.svg";
 import close from "../../../../public/images/icons/close.svg";
