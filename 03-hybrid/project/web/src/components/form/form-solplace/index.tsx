@@ -1,39 +1,34 @@
 "use client";
-import { Controller, FormProvider } from "react-hook-form";
-import PreviewImage from "@/components/previewImage";
-import UploadImage from "@/components/upload-image";
-import TextInput from "@/components/textInput";
+import { FormProvider } from "react-hook-form";
 import { SolPlaceLogsType } from "@/schema/schema-solplace-logs";
+import useFormSolplace from "./hook";
+import FormImageUpload from "../form-upload-image";
+import TextInput from "@/components/textInput";
 import AddressContainer from "@/components/addressContainer";
 import TextArea from "@/components/textArea";
 import ButtonPrimary from "@/components/button/button-primary";
-import useFormSolplace from "./hook";
+
 import styles from "./styles.module.css";
 
 export default function FormSolplace() {
   const {
     methods,
-    uploadedImages,
-    control,
+    reverseUploadImages,
     formState,
     handleSubmit,
     onChangeFile,
     onClickButton,
+    onClickDeleteImage,
   } = useFormSolplace();
   return (
     <FormProvider {...methods}>
       <div className={styles.main__container__wrapper}>
         <div className={styles.main__container}>
-          <div className={styles.image__box}>
-            {uploadedImages.map((el, index) => (
-              <PreviewImage key={index} src={el} />
-            ))}
-            <Controller
-              name="images"
-              control={control}
-              render={() => <UploadImage onChangeFile={onChangeFile} />}
-            />
-          </div>
+          <FormImageUpload
+            images={reverseUploadImages}
+            onChangeFile={onChangeFile}
+            onClickDelete={onClickDeleteImage}
+          />
 
           <TextInput<SolPlaceLogsType>
             keyName="name"

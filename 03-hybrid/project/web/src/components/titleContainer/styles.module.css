@@ -1,0 +1,11 @@
+.title {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.title p {
+  width: 100%;
+  color: #1c1c1c;
+  font-weight: 700;
+  font-size: 1.125rem;
+}

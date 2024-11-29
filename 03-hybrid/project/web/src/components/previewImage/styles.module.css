@@ -1,7 +1,10 @@
 .previewImage {
   position: relative;
   width: 6.25rem;
+  min-width: 6.25rem;
   height: 6.25rem;
+
+  border-radius: 0.5rem;
 }
 
 .previewImage button {

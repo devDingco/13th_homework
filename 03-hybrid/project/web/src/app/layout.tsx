@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import ApolloSetting from "@/settings/setting-apollo";
 import "./globals.css";
+import Layout from "../commons/layout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloSetting>{children}</ApolloSetting>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
       </body>
     </html>
   );

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: calc((40 / 9) * 1vw);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

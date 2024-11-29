@@ -5,7 +5,7 @@ import {
 } from "@/schema/schema-solplace-logs";
 import { ApolloError, useMutation } from "@apollo/client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 
 export default function useFormSolplace() {
@@ -16,6 +16,7 @@ export default function useFormSolplace() {
   const [uploadFile] = useMutation(UploadFileDocument);
 
   const uploadedImages = watch("images") || [];
+  const reverseUploadImages = [...uploadedImages].reverse();
 
   const onClickButton = () => {
     console.log("버튼을 눌렀습니다.");
@@ -42,13 +43,27 @@ export default function useFormSolplace() {
     }
   };
 
+  const onClickDeleteImage = (
+    event: MouseEvent<HTMLButtonElement>,
+    deleteUrl: string
+  ) => {
+    event.stopPropagation();
+    const index = uploadedImages.findIndex((url) => url === deleteUrl);
+    if (index !== -1) {
+      const updatedImages = [...uploadedImages];
+      updatedImages.splice(index, 1);
+      setValue("images", updatedImages, { shouldDirty: true }); // 업데이트된 배열 설정
+    }
+  };
+
   return {
     methods,
-    uploadedImages,
+    reverseUploadImages,
     control,
     formState,
     handleSubmit,
     onClickButton,
     onChangeFile,
+    onClickDeleteImage,
   };
 }
