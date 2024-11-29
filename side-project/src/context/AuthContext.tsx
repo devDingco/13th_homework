@@ -15,7 +15,7 @@ import {
 
 interface AuthContextProps {
   accessToken: string | null;
-  isAuthenticated: boolean;
+  // isAuthenticated: boolean;
   refreshAccessToken: () => Promise<string | null>;
   logout: () => Promise<void>;
 }
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         accessToken,
-        isAuthenticated: !!accessToken,
+        // isAuthenticated: !!accessToken,
         refreshAccessToken,
         logout,
       }}

@@ -49,7 +49,7 @@ export function useBoardWrite(props: IBoardWrite) {
   // const openUploadImg = (
   //   id: 'fileInput1' | 'fileInput2' | 'fileInput3'
   // ): void => {
-  //   const element = document.getElementById(id);ㅂ
+  //   const element = document.getElementById(id);
   //   if (element) {
   //     element.click();
   //   }

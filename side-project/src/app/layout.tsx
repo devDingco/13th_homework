@@ -26,16 +26,16 @@ interface IProps {
 
 export default function RootLayout({ children }: IProps) {
   return (
-    <AuthProvider>
-      <html lang="ko">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ApolloSetting>
+    <html lang="ko">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ApolloSetting>
+          <AuthProvider>
             <LayoutComponent>{children}</LayoutComponent>
-          </ApolloSetting>
-        </body>
-      </html>
-    </AuthProvider>
+          </AuthProvider>
+        </ApolloSetting>
+      </body>
+    </html>
   );
 }
