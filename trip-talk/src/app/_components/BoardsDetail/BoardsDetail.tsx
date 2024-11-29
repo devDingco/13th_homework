@@ -51,7 +51,10 @@ export default function BoardsDetail() {
           />
         ))}
       </div>
-      <div className={styles.post_content}>{boardData?.contents}</div>
+      <div
+        className="text-start text-black text-base font-normal"
+        dangerouslySetInnerHTML={{ __html: boardData?.contents }}
+      ></div>
       <div className={styles.video_thumbnail_wrapper}>
         {boardData?.youtubeUrl && (
           <Youtube youtubeUrl={boardData?.youtubeUrl} />
