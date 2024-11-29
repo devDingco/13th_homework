@@ -12,6 +12,7 @@ interface IHeaderOption {
 export const HEADER_OPTION = (params: { Id?: string }) => ({
   GLOBAL: {
     "/solplace-logs/new": { hasBack: true, title: "플레이스 등록", isTransparent: false },
+    "/solplace-logs": { hasBack: false, title: "플레이스", isTransparent: false },
   },
   LOCAL:{
     [`/solplace-logs/${params.Id}`]: { hasBack: true, title: "", isTransparent: true },
