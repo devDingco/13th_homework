@@ -6,6 +6,7 @@ import ImageUpload from "@/commons/components/ImageUpload";
 import Input from "@/commons/components/Input";
 import TextArea from "@/commons/components/TextArea";
 import usePlaceNew from "@/commons/hooks/usePlaceNew";
+import Link from "next/link";
 
 export default function PlaceNew() {
   const { handleChange, disabled } = usePlaceNew();
@@ -18,7 +19,9 @@ export default function PlaceNew() {
       <Input id="이름" onChange={handleChange} />
       <Address />
       <TextArea id="내용" onChange={handleChange} />
-      <Button id="LOG" disabled={disabled} />
+      <Link href="/place/detail">
+        <Button id="LOG" disabled={disabled} />
+      </Link>
     </div>
   );
 }
