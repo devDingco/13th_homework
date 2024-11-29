@@ -14,8 +14,8 @@ export default function InputField({
   children,
 }: IINputFieldProps) {
   return (
-    <div className={`flex flex-col gap-8 ${className}`}>
-      <div className="flex gap-4">
+    <div className={`flex flex-col ${className}`}>
+      <div className="flex gap-4 pb-8">
         <label className="text-[#333333] text-xs font-semibold leading-tight">
           {name}
         </label>
