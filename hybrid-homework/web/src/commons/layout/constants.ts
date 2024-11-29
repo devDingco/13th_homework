@@ -1,7 +1,10 @@
 // prettier-ignore
-export const HEADER_OPTIONS = {
+export const HEADER_OPTIONS = (params) => ({
   GLOBAL: {
-    "/solplace-logs/new": { title: "플레이스 등록", hasLogo: false, hasBack: true },
-    "/solplace-logs/123": {hasLog: false, hasBack: true}
+    "/solplace-logs": {title: "플레이스", hasLogo: false, hasBack: false, isTransparent: false},
+    "/solplace-logs/new": { title: "플레이스 등록", hasLogo: false, hasBack: true, isTransparent: false},
+    [`/solplace-logs/${params.solplaceLogId}`]: { hasLog: false, hasBack: true, isTransparent: true },
+    [`/solplace-logs/${params.solplaceLogId}/edit`]: { title: "플레이스 수정", hasLogo: false, hasBack: true, isTransparent: false},
   },
-};
+  LOCAL: {}
+})

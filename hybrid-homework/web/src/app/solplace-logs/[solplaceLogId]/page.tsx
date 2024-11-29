@@ -1,11 +1,11 @@
-import LogsDetail from "@/components/logs-detail/detail";
-import ImageSlider from "@/components/logs-detail/image-slider";
+import SolplaceLogsDetail from "@/components/solplace-logs-detail/detail";
+import SolplaceLogsDetailImageSlider from "@/components/solplace-logs-detail/image-slider";
 
 export default function LogsDetailPage() {
   return (
-    <>
-      <ImageSlider />
-      <LogsDetail />
-    </>
+    <main>
+      <SolplaceLogsDetailImageSlider />
+      <SolplaceLogsDetail />
+    </main>
   );
 }

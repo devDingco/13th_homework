@@ -68,9 +68,6 @@
 
 .contents {
   color: var(--Gray-800, #333);
-
-  /* r_14_20 */
-  font-family: "SUIT Variable";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
