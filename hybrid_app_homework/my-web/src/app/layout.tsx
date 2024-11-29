@@ -21,7 +21,6 @@ export default function RootLayout({ children }: IChildrenType) {
   return (
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
       <body className={`${localFontSet.variable} antialiased`}>
         <Layout>{children}</Layout>
       </body>

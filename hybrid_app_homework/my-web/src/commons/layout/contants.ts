@@ -1,19 +1,20 @@
+import { IHeaderBaseProps } from "@/commons/layout/header";
 interface IHeaderOption {
   GLOBAL: {
-    [key: string]: {
-      hasBack: boolean;
-      title: string;
-      hasTransparent: boolean;
-    };
+    [key: string]: IHeaderBaseProps;
+  };
+  LOCAL: {
+    [key: string]: IHeaderBaseProps;
   };
 }
 
-export const HEADER_OPTION: IHeaderOption = {
+// prettier-ignore
+export const HEADER_OPTION = (params: { Id?: string }) => ({
   GLOBAL: {
-    "/solplace-logs/new": {
-      hasBack: true,
-      title: "플레이스 등록",
-      hasTransparent: false,
-    },
+    "/solplace-logs/new": { hasBack: true, title: "플레이스 등록", isTransparent: false },
   },
-};
+  LOCAL:{
+    [`/solplace-logs/${params.Id}`]: { hasBack: true, title: "", isTransparent: true },
+    [`/solplace-logs/${params.Id}/edit`]: { hasBack: true, title: "플레이스 수정", isTransparent: false },
+  }
+} as IHeaderOption);
