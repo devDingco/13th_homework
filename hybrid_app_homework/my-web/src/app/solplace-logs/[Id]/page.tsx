@@ -7,6 +7,7 @@ import KaKaoMap from "@/components/kakao-map";
 import SolPlaceDetailSlide from "@/components/solplace-detail-slide";
 import { useState } from "react";
 import Link from "next/link";
+import { Header } from "@/commons/layout/header";
 
 export default function SolPlaceDetailPage() {
   const [isMapVisible, setIsMapVisible] = useState(false);
@@ -16,6 +17,7 @@ export default function SolPlaceDetailPage() {
 
   return (
     <div>
+      <Header />
       <SolPlaceDetailSlide />
 
       <div className="flex flex-col gap-4 p-[1.25rem_1.5rem]">

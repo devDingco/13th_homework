@@ -9,8 +9,9 @@ import PostSearchPopBtn from "@/components/post-pop";
 import Input from "@/commons/ui/input";
 import { getBase64 } from "@/commons/utils/getBase64";
 import TextArea from "@/commons/ui/textarea";
+import { Header } from "@/commons/layout/header";
 
-export default function SolPlaceNewPage() {
+export default function SolPlaceEditPage() {
   const method = useForm({
     mode: "onChange",
   });
@@ -42,6 +43,7 @@ export default function SolPlaceNewPage() {
 
   return (
     <>
+      <Header />
       <div className="grid grid-cols-[1fr_3fr] p-[1.25rem_1.25rem_0]">
         <button
           type="button"

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Layout from "@/commons/layout/02-02-layout-header-global";
+// import Layout from "@/commons/layout/02-02-layout-header-global";
+// import LayoutGlobalAndLocal from "@/commons/layout/02-03-layout-header-local";
+// import LayoutHeaderTransparent from "@/commons/layout/02-04-layout-header-transparent";
+import LayoutFooterContentsShortAndLong from "@/commons/layout/02-05-layout-footer-contents-short-and-long";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,8 +32,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* 1). 02-02-layout-header-global 이후 */}
-        <Layout>{children}</Layout>
+        {/* 1). 02-02-layout-header-global 이후 레이아웃 */}
+        {/* <Layout>{children}</Layout> */}
+
+        {/* 2). 02-03-layout-header-local 이후 레이아웃 */}
+        {/* <LayoutGlobalAndLocal>{children}</LayoutGlobalAndLocal> */}
+
+        {/* 3). 02-04-layout-header-transparent 이후 레이아웃 */}
+        {/* <LayoutHeaderTransparent>{children}</LayoutHeaderTransparent> */}
+
+        {/* 4). 02-05-layout-footer-contents-short-and-long 이후 레이아웃 */}
+        <LayoutFooterContentsShortAndLong>
+          {children}
+        </LayoutFooterContentsShortAndLong>
       </body>
     </html>
   );
