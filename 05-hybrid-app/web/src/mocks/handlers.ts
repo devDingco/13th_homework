@@ -1222,11 +1222,22 @@ export const handlers = [
   }),
   // 상세보기
   graphql.query("fetchSolplaceLog", ({ variables }) => {
-    const id = variables.id;
+    const id = String(variables.id);
 
-    const fetchSolplaceLog = solplaceLog.find(
+    console.log("불러온 id:", id);
+    console.log("현재 solplaceLogs:", solplaceLogs);
+
+    const fetchSolplaceLog = solplaceLogs.find(
       (solplaceLog) => solplaceLog.id === id
     );
+
+    if (!fetchSolplaceLog) {
+      console.log("id를 못 찾았다:", id);
+      return HttpResponse.json(
+        { errors: [{ message: "Log not found" }] },
+        { status: 404 }
+      );
+    }
 
     return HttpResponse.json({
       data: {
