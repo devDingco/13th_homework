@@ -12,7 +12,7 @@ export default function home() {
       <StatusBar translucent={true} />
       <WebView
         source={{
-          uri: `${내컴퓨터접속주소}/solplace-logs/`,
+          uri: `${내컴퓨터접속주소}/solplace-logs`,
         }}
       />
     </SafeAreaView>

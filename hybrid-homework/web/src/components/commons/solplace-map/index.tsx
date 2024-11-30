@@ -10,7 +10,7 @@ export default function SolplaceMap({ lat, lng }) {
   return (
     <Map
       center={{ lat, lng }} // 전달받은 위도와 경도 사용
-      style={{ borderRadius: "0.75rem", width: "100%", height: "160px" }}
+      style={{ borderRadius: "0.75rem", width: "100%", height: "10rem" }}
     >
       <MapMarker position={{ lat, lng }} />
     </Map>
