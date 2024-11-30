@@ -1,17 +1,9 @@
 import { css } from "@/styled-system/css";
-import { css_icon } from "@/styled-system/commons";
-import { ChevronLeft, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export default function PlaceNewPage() {
     return (
         <>
-            <header className={css_header}>
-                <div className={css_icon}>
-                    <ChevronLeft />
-                </div>
-                <div className={css_title}>플레이스 등록</div>
-            </header>
-
             <section className={css_section}>
                 <div className={css_imgBox}>
                     <Plus size={20} />
@@ -44,19 +36,6 @@ export default function PlaceNewPage() {
         </>
     );
 }
-
-const css_header = css({
-    w: "100%",
-    h: "4.8rem",
-
-    display: "flex",
-    alignItems: "center",
-});
-
-const css_title = css({
-    fontSize: "2rem",
-    fontWeight: "600",
-});
 
 const css_section = css({
     w: "100%",

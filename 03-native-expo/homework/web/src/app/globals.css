@@ -23,8 +23,8 @@
 @layer reset {
     html {
         font-size: 62.5%;
-        font-family: var(--font-pre-var);
         font-weight: 400;
+        font-family: var(--font-pre-var);
     }
 
     * {
@@ -34,8 +34,7 @@
         font-size: 1.6rem;
     }
 
-    body,
-    main {
+    body {
         display: flex;
         flex-direction: column;
         align-items: center;

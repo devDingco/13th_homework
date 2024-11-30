@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { css } from "@/styled-system/css";
+
+import PageLayout from "@/common/layout";
 
 const pretendard = localFont({
     src: "../styled-system/fonts/PretendardVariable.woff2",
@@ -18,19 +19,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={`${pretendard.variable}`}>
-                <main className={app}>{children}</main>
+                <PageLayout>{children}</PageLayout>
             </body>
         </html>
     );
 }
-
-const app = css({
-    minW: "32rem",
-    minH: "100vh",
-
-    w: "100vw",
-    bg: "#fefefe",
-
-    p: "2rem",
-    boxShadow: "0px 4px 8px #bbb",
-});
