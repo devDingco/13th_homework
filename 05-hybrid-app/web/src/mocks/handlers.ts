@@ -1245,6 +1245,7 @@ export const handlers = [
       userId: "유저A", // 예시로 유저A로 설정
       title: createSolplaceLogInput.title, // title 추가
       contents: createSolplaceLogInput.contents, // contents 추가
+      images: createSolplaceLogInput.images,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       deletedAt: null,

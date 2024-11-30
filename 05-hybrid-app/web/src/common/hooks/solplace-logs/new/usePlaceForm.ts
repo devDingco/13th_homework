@@ -16,11 +16,12 @@ export function usePlaceForm() {
 
   const methods = useForm<PlaceNewValues>({
     resolver: zodResolver(placeNewSchema),
-    mode: "all", // 모든 입력이 유효성 검사 통과
-    defaultValues: {
+    mode: "all", // 유효성 검사
+    /* defaultValues: {
       title: "",
       contents: "",
-    },
+      images: [],
+    }, */
   });
 
   // 글자수
@@ -28,14 +29,16 @@ export function usePlaceForm() {
     setContentsLength(value.length);
   };
 
+  // form 밖에 있는 button과 연결
   const handleSubmitClick = () => {
     if (formRef.current) {
       formRef.current.requestSubmit();
     }
   };
 
+  // 게시글 등록하기
   const onSubmit = async (data) => {
-    console.log("사용자가 입력한 플레이스 등록 결과:", data);
+    console.log("register(react-hook-form)결과:", data);
 
     try {
       const result = await createSolplaceLog({
@@ -43,6 +46,7 @@ export function usePlaceForm() {
           createSolplaceLogInput: {
             title: data.title,
             contents: data.contents,
+            images: data.images,
           },
         },
       });

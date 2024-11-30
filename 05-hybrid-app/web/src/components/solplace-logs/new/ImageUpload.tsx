@@ -1,64 +1,61 @@
 import Image from "next/image";
 import add from "../../../../public/images/icons/add.svg";
 import close from "../../../../public/images/icons/close.svg";
-import { useRef, useState } from "react";
+import UseUploadFile from "@/common/hooks/solplace-logs/new/useUploadfile";
+import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 
 export default function ImageUpload() {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [files, setFiles] = useState<File[]>([]);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { register, setValue, trigger } = useFormContext();
+  const {
+    inputRef,
+    imageUrls,
+    handleUploadClick,
+    setImageUrls,
+    setFiles,
+    files,
+  } = UseUploadFile();
 
-  // 이미지
-  /*
-  const onChangeFile = (index) => async (event) => {
-    const file = event.target.files?.[0];
-    if (file === undefined) return;
-    console.log("파일", file);
-
-    // 임시 URL 생성
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-
-    fileReader.onload = (event) => {
-      console.log(event.target?.result);
-
-      if (typeof event.target?.result === "string") {
-        // 미리보기 URL 업데이트
-        const newImageUrls = [...imageUrls];
-        newImageUrls[index] = event.target?.result;
-        setImageUrls(newImageUrls);
-
-        // 파일 데이터 업데이트
-        const newFiles = [...files];
-        newFiles[index] = file;
-        setFiles(newFiles);
-      }
-    };
-  };
-  */
+  // imageUrls가 업데이트될 때 출력
+  useEffect(() => {
+    if (imageUrls.length === 0) return;
+    console.log("미리보기 이미지:", imageUrls);
+    setValue("images", imageUrls); // react-hook-form 데이터에 이미지 URL 추가
+  }, [imageUrls]);
 
   const onChangeFile = (event) => {
     const files = Array.from(event.target.files || []) as File[];
     if (files.length === 0) return; // 파일이 없으면 종료
-    const formData = new FormData();
 
-    files.forEach((file) => {
-      formData.append("images", file);
+    // 사진 크기 5MB
+    for (const file of files) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("파일 크기는 5MB를 초과할 수 없습니다.");
+        return;
+      }
+    }
+
+    const newImageUrls: string[] = [];
+
+    const fileReaders = files.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (typeof reader.result === "string") {
+            newImageUrls.push(reader.result);
+            resolve(reader.result);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     });
 
-    // 미리보기 생성
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (typeof reader.result === "string") {
-          setImageUrls((prev) => [...prev, reader.result as string]);
-        }
-      };
-      reader.readAsDataURL(file);
+    Promise.all(fileReaders).then(() => {
+      setImageUrls((prev) => [...prev, ...newImageUrls]);
+      setFiles((prev) => [...prev, ...files]);
+      setValue("images", newImageUrls);
+      trigger("images");
     });
-
-    setFiles((prev) => [...prev, ...files]);
-    console.log("미리보기 이미지:", imageUrls);
   };
 
   // 이미지 삭제 핸들러
@@ -66,6 +63,10 @@ export default function ImageUpload() {
     console.log("현재선택한 index: ", index);
     setImageUrls((prev) => prev.filter((_, i) => i !== index));
     setFiles((prev) => prev.filter((_, i) => i !== index));
+    setValue(
+      "images",
+      files.filter((_, i) => i !== index)
+    ); // 삭제된 이미지
   };
 
   return (
@@ -73,13 +74,14 @@ export default function ImageUpload() {
       <div className="flex gap-12 min-w-full">
         <div
           className="min-w-100 h-100 bg-[#f2f2f2] rounded-lg flex flex-col justify-center items-center hover:cursor-pointer"
-          onClick={() => inputRef.current?.click()}
+          onClick={handleUploadClick}
         >
           <input
             type="file"
             multiple
             accept="image/*"
             className="hidden"
+            {...register("images")}
             ref={inputRef}
             onChange={onChangeFile}
           />
