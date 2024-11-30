@@ -10,22 +10,20 @@ const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
   return (
     <>
       <header
-        className={`flex px-20 w-screen h-48 fixed z-50 ${
+        className={`flex px-20 py-12 w-screen h-48 fixed z-50 ${
           isTransparent ? "bg-transparent" : "bg-white"
         }`}
       >
-        <div className="py-12">
-          <div className="flex gap-8 justify-start">
-            {hasBack && <Image src={left_arrow} alt="뒤로가기" />}
-            {title ? (
-              <span className="text-black text-lg font-bold leading-normal">
-                {title}
-              </span>
-            ) : (
-              <></>
-            )}
-            {children ? <>{children}</> : <></>}
-          </div>
+        <div className="flex gap-8 justify-start">
+          {hasBack && <Image src={left_arrow} alt="뒤로가기" />}
+          {title ? (
+            <span className="text-black text-lg font-bold leading-normal">
+              {title}
+            </span>
+          ) : (
+            <></>
+          )}
+          {children ? <>{children}</> : <></>}
         </div>
       </header>
       {isTransparent ? <></> : <div className="h-48"></div>}

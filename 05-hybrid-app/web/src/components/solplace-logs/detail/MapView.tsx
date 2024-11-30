@@ -17,3 +17,5 @@ export default function MapView() {
     </Map>
   );
 }
+
+// 카카오 개발자에서 사이트 도메일 (ios 애뮬레이터,, 등 설정해놓기)

@@ -6,7 +6,7 @@ export default function PlaceName() {
     <InputField name="플레이스 이름" required>
       <Input
         placeholder="플레이스 이름을 입력해 주세요. (1자 이상)"
-        name="name"
+        name="title"
       />
     </InputField>
   );

@@ -1,5 +1,5 @@
+import { usePlaceForm } from "@/common/hooks/solplace-logs/new/usePlaceForm";
 import InputField from "@/components/inputField";
-import { usePlaceForm } from "@/hooks/solplace-logs/new/usePlaceForm";
 import { useFormContext } from "react-hook-form";
 
 export default function PlaceContents() {

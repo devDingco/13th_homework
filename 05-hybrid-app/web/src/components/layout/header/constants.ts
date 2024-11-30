@@ -5,6 +5,11 @@ export const HEADER_OPTIONS = (params) => ({
       hasBack: true, //뒤로가기 있음
       isTransparent: false,
     },
+    [`/solplace-logs/${params.solplaceLogId}/edit`]: {
+      title: "플레이스 수정",
+      hasBack: true, //뒤로가기 있음
+      isTransparent: false,
+    },
     [`/solplace-logs/${params.solplaceLogId}`]: {
       hasBack: true, //뒤로가기 있음
       isTransparent: true,

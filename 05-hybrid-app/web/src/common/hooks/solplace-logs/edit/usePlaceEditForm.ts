@@ -1,12 +1,19 @@
+import { FETCH_SOLPLACE_LOG } from "./../../../apis/graphql/queries/fetch-solplace-log.query";
+import { useQuery } from "@apollo/client";
+import { placeNewSchema, type PlaceNewValues } from "@/schema/placeNew.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  placeNewSchema,
-  type PlaceNewValues,
-} from "./../../../schema/placeNew.schema";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useParams } from "next/navigation";
 
-export function usePlaceForm() {
+export default function usePlaceEditForm() {
+  const params = useParams();
+  const id = params.solplaceLogId.toString();
+  // 수정페이지에서 데이터 불러오기
+  const { data } = useQuery(FETCH_SOLPLACE_LOG, {
+    variables: { id },
+  });
+
   // 플레이스 내용 글자수
   const [contentsLength, setContentsLength] = useState(0);
   const formRef = useRef<HTMLFormElement | null>(null); // form 참조하기(button이 form 밖에 있음)
@@ -14,11 +21,14 @@ export function usePlaceForm() {
   const methods = useForm<PlaceNewValues>({
     resolver: zodResolver(placeNewSchema),
     mode: "all", // 모든 입력이 유효성 검사 통과
-    defaultValues: {
-      name: "",
-      contents: "",
-    },
   });
+
+  useEffect(() => {
+    if (data?.fetchSolplaceLog) {
+      methods.setValue("title", data.fetchSolplaceLog.title);
+      methods.setValue("contents", data.fetchSolplaceLog.contents);
+    }
+  }, [data]);
 
   // 글자수
   const onChangeContents = (value: string) => {
@@ -43,5 +53,6 @@ export function usePlaceForm() {
     onChangeContents,
     handleSubmitClick,
     formRef,
+    data,
   };
 }

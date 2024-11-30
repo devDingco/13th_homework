@@ -1,15 +1,15 @@
 "use client";
 
-import ImageUpload from "./ImageUpload";
 import Footer from "@/components/layout/footer/Footer";
-import PlaceContents from "./PlaceContents";
-import PlaceAddress from "./PlaceAddress";
-import PlaceName from "./PlaceName";
+import ImageUpload from "../new/ImageUpload";
+import PlaceAddress from "../new/PlaceAddress";
+import PlaceContents from "../new/PlaceContents";
+import PlaceName from "../new/PlaceName";
 import { FormProvider } from "react-hook-form";
-import { usePlaceForm } from "@/common/hooks/solplace-logs/new/usePlaceForm";
+import usePlaceEditForm from "@/common/hooks/solplace-logs/edit/usePlaceEditForm";
 
-export default function PlaceContainer() {
-  const { methods, onSubmit, handleSubmitClick, formRef } = usePlaceForm();
+export default function PlaceEditContainer() {
+  const { methods, onSubmit, handleSubmitClick, formRef } = usePlaceEditForm();
   const {
     formState: { isValid },
   } = methods; // 폼 상태 가져오기
@@ -43,7 +43,7 @@ export default function PlaceContainer() {
             !isValid && "bg-gray-400"
           }`}
         >
-          로그 등록
+          수정
         </button>
       </Footer>
     </>
