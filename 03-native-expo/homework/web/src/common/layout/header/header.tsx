@@ -12,7 +12,7 @@ interface type_header {
 
 const HeaderBase = ({ title, hasBack }: type_header) => {
     return (
-        <header className={css_header}>
+        <div className={css_header}>
             {hasBack && (
                 <div className={css_icon}>
                     <ChevronLeft />
@@ -20,7 +20,7 @@ const HeaderBase = ({ title, hasBack }: type_header) => {
             )}
 
             {title ? <div className={css_title}>{title}</div> : <></>}
-        </header>
+        </div>
     );
 };
 
@@ -30,7 +30,7 @@ export function HeaderGlobal() {
     const options = HEADER_OPTIONS().GLOBAL[pathname];
 
     return (
-        <div style={{ display: options ? "block" : "none", width: "100%" }}>
+        <div style={{ display: options ? "block" : "none" }}>
             <HeaderBase {...options} />
         </div>
     );
@@ -42,7 +42,7 @@ export function HeaderGlobal() {
 //     const options = HEADER_OPTIONS(params).GLOBAL[pathname];
 
 //     return (
-//         <div style={{ display: options ? "block" : "none", width: "100%" }}>
+//         <div style={{ display: options ? "block" : "none" }}>
 //             <HeaderBase {...options} {...rest}>
 //                 {children}
 //             </HeaderBase>
