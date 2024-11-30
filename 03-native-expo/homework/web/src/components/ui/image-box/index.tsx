@@ -1,8 +1,9 @@
 "use client";
-import SweetAlert from "@/common/library/sweet-alert";
 import { css } from "@/styled-system/css";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import Image from "next/image";
+
+import SweetAlert from "@/common/library/sweet-alert";
 import { ChangeEvent, useRef, useState } from "react";
 
 export default function ImageBox() {
@@ -11,7 +12,7 @@ export default function ImageBox() {
     const [images, setImages] = useState<string[]>([]);
     const fileRef = useRef<HTMLInputElement>(null);
 
-    function onChangeFile(e: ChangeEvent<HTMLInputElement>) {
+    function UploadFile(e: ChangeEvent<HTMLInputElement>) {
         const files = e.target.files;
         if (!files) return;
 
@@ -37,6 +38,10 @@ export default function ImageBox() {
         setImages((prev) => [...prev, ...newImages]);
     }
 
+    function deleteImage(idx: number) {
+        setImages((prev) => prev.filter((_, i) => i !== idx));
+    }
+
     return (
         <div className={css_imageWrap}>
             <div className={css_imageBox} onClick={() => fileRef.current?.click()}>
@@ -46,15 +51,22 @@ export default function ImageBox() {
             <input
                 type="file"
                 multiple
-                onChange={onChangeFile}
+                onChange={UploadFile}
                 style={{ display: "none" }}
                 ref={fileRef}
                 accept="image/jpeg,image/png"
             />
 
-            {images.map((el) => (
-                <div className={css_imageBox} key={el}>
-                    <Image src={el} alt="image" width={0} height={0} className={css_imageModify} />
+            {images.map((url, idx) => (
+                <div className={css_imageBox} key={url}>
+                    <Image src={url} alt="image" width={0} height={0} className={css_imageModify} />
+                    <button
+                        className={css_deleteButton}
+                        type="button"
+                        onClick={() => deleteImage(idx)}
+                    >
+                        <X size={16} />
+                    </button>
                 </div>
             ))}
         </div>
@@ -85,10 +97,27 @@ const css_imageBox = css({
     justifyContent: "center",
     alignItems: "center",
     gap: "0.4rem",
+    position: "relative",
 });
 
 const css_imageModify = css({
     w: "100%",
     h: "100%",
     objectFit: "contain",
+});
+
+const css_deleteButton = css({
+    position: "absolute",
+    top: "0.4rem",
+    right: "0.4rem",
+    opacity: "0.8",
+
+    bg: "#fff",
+    w: "2rem",
+    h: "2rem",
+    rounded: "0.4rem",
+
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 });

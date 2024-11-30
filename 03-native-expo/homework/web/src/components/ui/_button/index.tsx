@@ -1,11 +1,7 @@
 import { css } from "@/styled-system/css";
 import { useFormContext } from "react-hook-form";
 
-interface type_button {
-    label: string;
-}
-
-export default function Button({ label }: type_button) {
+export default function Button({ label }: { label: string }) {
     const {
         formState: { isValid },
     } = useFormContext();

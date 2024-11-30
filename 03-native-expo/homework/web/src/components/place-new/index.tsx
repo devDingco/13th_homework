@@ -8,20 +8,24 @@ import Button from "@/components/ui/_button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { placeNewSchema, type_schema } from "./schema";
+import SweetAlert from "@/common/library/sweet-alert";
 
 export default function PlaceNewUI() {
+    const { successAlert } = SweetAlert();
+
     const methods = useForm<type_schema>({
         resolver: zodResolver(placeNewSchema),
         mode: "onChange",
     });
 
-    function onClickNew(form: type_schema) {
-        console.log("test", form);
+    function ClickSubmit(form: type_schema) {
+        console.log("test:", form);
+        successAlert("테스트: 등록 성공");
     }
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onClickNew)} className={css_form}>
+            <form onSubmit={methods.handleSubmit(ClickSubmit)} className={css_form}>
                 <ImageBox />
 
                 <InputBox keyname="이름" required />

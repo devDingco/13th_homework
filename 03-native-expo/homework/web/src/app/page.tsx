@@ -16,6 +16,13 @@ export default function Home() {
             >
                 솔플NEW: 등록페이지로 이동하기
             </div>
+
+            <div
+                onClick={() => router.push(`place/id`)}
+                className={css({ _hover: { color: "#ffbe98" } })}
+            >
+                솔플ID: 상세페이지로 이동하기
+            </div>
         </>
     );
 }
