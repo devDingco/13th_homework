@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import { css } from "@/styled-system/css";
 
-import localFont from "next/font/local";
-
 const pretendard = localFont({
-    src: "../styled-system/font/PretendardVariable.woff2",
+    src: "../styled-system/fonts/PretendardVariable.woff2",
     variable: "--font-pre-var",
     weight: "100 900",
 });
@@ -27,14 +26,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 const app = css({
     minW: "32rem",
-    w: "36rem",
-    h: "100vh",
+    minH: "100vh",
+
+    w: "100vw",
     bg: "#fefefe",
 
-    display: "flex",
-    flexDir: "column",
-    alignItems: "center",
-
     p: "2rem",
-    boxShadow: "0px 4px 10px #bbbbbb",
+    boxShadow: "0px 4px 8px #bbb",
 });
