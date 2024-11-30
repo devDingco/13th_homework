@@ -6,7 +6,6 @@ export default function DetailPage() {
     <>
       {/* 이미지 */}
       <ImageSlide />
-
       {/* 상세 글들 */}
       <DetailContainer />
     </>

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import edit from "../../../../public/images/icons/edit.svg";
 import location from "../../../../public/images/icons/location.svg";
@@ -8,7 +6,7 @@ import up_arrow from "../../../../public/images/icons/up_arrow.svg";
 import { useState } from "react";
 import MapView from "./MapView";
 
-export default function DetailHeader() {
+export default function DetailHeader({ data }) {
   const [ismapView, setIsmapView] = useState(false);
 
   const onClickMap = () => {
@@ -20,7 +18,7 @@ export default function DetailHeader() {
       {/* 제목 */}
       <div className="flex w-full justify-between">
         <span className="text-[#1c1c1c] text-lg font-bold leading-norma">
-          Bramble & Brioche 한남점
+          {data?.fetchSolplaceLog?.title}
         </span>
         <Image src={edit} alt="edit" />
       </div>
@@ -30,7 +28,7 @@ export default function DetailHeader() {
         <div className="flex items-center">
           <Image src={location} alt="location" />
           <span className="text-[#777777] text-[13px] font-semibold leading-tight">
-            서울특별시 용산구 이태원로49길 24-14
+            {data?.fetchSolplaceLog?.address}
           </span>
         </div>
         {/* 지도보기 버튼 */}
