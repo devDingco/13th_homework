@@ -5,7 +5,7 @@ export default function ImageBox() {
     return (
         <div className={css_imageWrap}>
             {new Array(4).fill("images").map((el, idx) => (
-                <div className={css_imgBox} key={`${el + idx + 1}`}>
+                <div className={css_imageBox} key={`${el + idx + 1}`}>
                     <Plus size={20} />
                     사진 등록
                 </div>
@@ -17,11 +17,11 @@ export default function ImageBox() {
 const css_imageWrap = css({
     display: "flex",
     mt: "2.4rem",
-    gap: "1rem",
+    gap: "2rem",
     overflow: "scroll",
 });
 
-const css_imgBox = css({
+const css_imageBox = css({
     w: "10rem",
     h: "10rem",
     bg: "#f5f5f5",

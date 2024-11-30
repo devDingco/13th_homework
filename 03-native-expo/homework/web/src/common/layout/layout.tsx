@@ -36,8 +36,4 @@ const css_header = css({
 const css_section = css({
     w: "100%",
     h: "100%",
-
-    display: "flex",
-    flexDir: "column",
-    gap: "2rem",
 });
