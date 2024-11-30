@@ -3,7 +3,7 @@ import add from "../../../../public/images/icons/add.svg";
 import close from "../../../../public/images/icons/close.svg";
 import UseUploadFile from "@/common/hooks/solplace-logs/new/useUploadfile";
 import { useFormContext } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, type ChangeEvent } from "react";
 
 interface IImageUploadProps {
   images: string[];
@@ -28,7 +28,7 @@ export default function ImageUpload({ images }: IImageUploadProps) {
     }
   }, [files.length, images]);
 
-  const onChangeFile = (event) => {
+  const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []) as File[];
     if (files.length === 0) return; // 파일이 없으면 종료
 
