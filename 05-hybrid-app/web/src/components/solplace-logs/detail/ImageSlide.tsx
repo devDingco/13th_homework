@@ -1,20 +1,23 @@
 "use client";
 
+import { FETCH_SOLPLACE_LOG } from "@/common/apis/graphql/queries/fetch-solplace-log.query";
+import { useQuery } from "@apollo/client";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-const SAMPLE_IMAGES = [
-  "/images/exampleDetailImages/1.jpeg",
-  "/images/exampleDetailImages/2.jpeg",
-  "/images/exampleDetailImages/3.jpeg",
-  "/images/exampleDetailImages/4.jpeg",
-  "/images/exampleDetailImages/5.jpeg",
-  "/images/exampleDetailImages/6.jpeg",
-  "/images/exampleDetailImages/7.jpeg",
-  "/images/exampleDetailImages/8.jpeg",
-];
+export default function ImageSlide() {
+  const params = useParams();
+  const id = params.solplaceLogId;
+  const { data } = useQuery(FETCH_SOLPLACE_LOG, {
+    variables: { id },
+  });
+  console.log("불러온 게시글 상세내용:", data);
+  console.log("현재 id: ", id);
 
-export default function ImageSlide({ images = SAMPLE_IMAGES }) {
+  const { images = [] } = data?.fetchSolplaceLog || {};
+  console.log("불러온 이미지 사진들", images);
+
   const [currentImgIndex, setCurrentImgIndex] = useState(1); //현재 이미지 번호
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,10 +43,9 @@ export default function ImageSlide({ images = SAMPLE_IMAGES }) {
       <div
         ref={containerRef}
         className="w-full h-[480px] relative overflow-x-auto whitespace-nowrap scroll-smooth snap-x snap-mandatory"
-        // style={{ scrollSnapType: "x mandatory" }}
       >
         <div className="absolute inset-0 z-0">
-          {images.map((el, index) => (
+          {images.map((el: string, index: number) => (
             <div
               key={`${el}_${index}`}
               className="inline-block w-screen snap-start"
