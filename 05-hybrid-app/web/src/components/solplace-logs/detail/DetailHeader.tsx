@@ -5,8 +5,11 @@ import down_arrow from "../../../../public/images/icons/down_arrow.svg";
 import up_arrow from "../../../../public/images/icons/up_arrow.svg";
 import { useState } from "react";
 import MapView from "./MapView";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function DetailHeader({ data }) {
+  const params = useParams();
   const [ismapView, setIsmapView] = useState(false);
 
   const onClickMap = () => {
@@ -20,7 +23,9 @@ export default function DetailHeader({ data }) {
         <span className="text-[#1c1c1c] text-lg font-bold leading-norma">
           {data?.fetchSolplaceLog?.title}
         </span>
-        <Image src={edit} alt="edit" />
+        <Link href={`/solplace-logs/${params.solplaceLogId}/edit`}>
+          <Image src={edit} alt="edit" />
+        </Link>
       </div>
       {/* 지도 */}
       <div className="flex gap-8 ">

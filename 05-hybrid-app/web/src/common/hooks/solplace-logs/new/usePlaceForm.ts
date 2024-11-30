@@ -17,11 +17,6 @@ export function usePlaceForm() {
   const methods = useForm<PlaceNewValues>({
     resolver: zodResolver(placeNewSchema),
     mode: "all", // 유효성 검사
-    /* defaultValues: {
-      title: "",
-      contents: "",
-      images: [],
-    }, */
   });
 
   // 글자수

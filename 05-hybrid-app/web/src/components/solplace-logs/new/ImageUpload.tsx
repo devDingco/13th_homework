@@ -5,7 +5,11 @@ import UseUploadFile from "@/common/hooks/solplace-logs/new/useUploadfile";
 import { useFormContext } from "react-hook-form";
 import { useEffect } from "react";
 
-export default function ImageUpload() {
+interface IImageUploadProps {
+  images: string[];
+}
+
+export default function ImageUpload({ images }: IImageUploadProps) {
   const { register, setValue, trigger } = useFormContext();
   const {
     inputRef,
@@ -16,12 +20,13 @@ export default function ImageUpload() {
     files,
   } = UseUploadFile();
 
-  // imageUrls가 업데이트될 때 출력
+  // 첫 페이지 불러오기
   useEffect(() => {
-    if (imageUrls.length === 0) return;
-    console.log("미리보기 이미지:", imageUrls);
-    setValue("images", imageUrls); // react-hook-form 데이터에 이미지 URL 추가
-  }, [imageUrls]);
+    if (!files.length && images?.length && !imageUrls.length) {
+      setImageUrls(images); // 기존 이미지 불러오기
+      setValue("images", images);
+    }
+  }, [files.length, images]);
 
   const onChangeFile = (event) => {
     const files = Array.from(event.target.files || []) as File[];
@@ -51,22 +56,24 @@ export default function ImageUpload() {
     });
 
     Promise.all(fileReaders).then(() => {
-      setImageUrls((prev) => [...prev, ...newImageUrls]);
+      // setImageUrls((prev) => [...prev, ...newImageUrls]);
+      const mergedImageUrls = [...imageUrls, ...newImageUrls];
+      setImageUrls(mergedImageUrls); // 상태 업데이트
       setFiles((prev) => [...prev, ...files]);
-      setValue("images", newImageUrls);
+      setValue("images", mergedImageUrls);
       trigger("images");
     });
   };
 
   // 이미지 삭제 핸들러
   const handleRemoveImage = (index: number) => {
-    console.log("현재선택한 index: ", index);
-    setImageUrls((prev) => prev.filter((_, i) => i !== index));
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-    setValue(
-      "images",
-      files.filter((_, i) => i !== index)
-    ); // 삭제된 이미지
+    const updatedImageUrls = imageUrls.filter((_, i) => i !== index);
+    const updatedFiles = files.filter((_, i) => i !== index);
+
+    setImageUrls(updatedImageUrls);
+    setFiles(updatedFiles);
+    setValue("images", updatedImageUrls); // 폼 상태와 동기화
+    trigger("images");
   };
 
   return (
