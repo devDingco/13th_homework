@@ -2,16 +2,24 @@
 import { PLACEHOLDER } from "@/components/place-new/constants";
 import { css } from "@/styled-system/css";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 export default function Textarea({ keyname }: { keyname: string }) {
     const [length, setLength] = useState(0);
+    const { register } = useFormContext();
 
     return (
         <div className={css_wrap}>
             <textarea
                 className={css_text}
                 placeholder={PLACEHOLDER[keyname]}
-                onChange={(e) => setLength(e.target.value.length)}
+                // onChange={(e) => setLength(e.target.value.length)}
+                {...register(keyname, {
+                    onChange: (e) => {
+                        setLength(e.target.value.length);
+                        e.target.value = e.target.value;
+                    },
+                })}
             ></textarea>
             <span className={css_length}> {length} / 100 </span>
         </div>

@@ -1,8 +1,18 @@
 import { PLACEHOLDER } from "@/components/place-new/constants";
 import { css } from "@/styled-system/css";
+import { useFormContext } from "react-hook-form";
 
 export default function Input({ keyname }: { keyname: string }) {
-    return <input className={css_input} placeholder={PLACEHOLDER[keyname]} type="text" />;
+    const { register } = useFormContext();
+
+    return (
+        <input
+            className={css_input}
+            placeholder={PLACEHOLDER[keyname]}
+            type="text"
+            {...register(keyname)}
+        />
+    );
 }
 
 const css_input = css({

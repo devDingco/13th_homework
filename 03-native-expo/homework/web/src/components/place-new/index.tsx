@@ -2,12 +2,12 @@
 import { css } from "@/styled-system/css";
 import ImageBox from "@/components/ui/image-box";
 import AddressBox from "@/components/ui/address-box";
+import InputBox from "@/components/ui/input-box";
+import Button from "@/components/ui/_button";
 
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { placeNewSchema, type_schema } from "./schema";
-import InputBox from "../ui/input-box";
-import Button from "../ui/_button";
 
 export default function PlaceNewUI() {
     const methods = useForm<type_schema>({
@@ -24,11 +24,11 @@ export default function PlaceNewUI() {
             <form onSubmit={methods.handleSubmit(onClickNew)} className={css_form}>
                 <ImageBox />
 
-                <InputBox keyname="name" required />
+                <InputBox keyname="이름" required />
 
                 <AddressBox />
 
-                <InputBox keyname="contents" required textarea />
+                <InputBox keyname="내용" required textarea />
 
                 <Button label="로그 등록" />
             </form>
