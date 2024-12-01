@@ -7,8 +7,9 @@ export default function PlaceAddress() {
     <InputField name="플레이스 주소">
       <button className="w-full h-44 py-8 px-12 rounded-lg border border-black flex justify-between">
         <input
-          defaultValue="플레이스 주소 입력"
+          value="플레이스 주소 입력"
           className="text-black text-sm font-bold leading-tight h-full"
+          readOnly
         />
         <Image src={right_arrow} alt="오른쪽버튼" />
       </button>
