@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import LayoutComponent from "@/commons/layout";
+import DeviceSetting from "@/commons/settings/device-setting";
 
 const suit = localFont({
   src: "../../public/fonts/SUIT-Variable.woff2",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={suit.variable}>
-        <LayoutComponent>{children}</LayoutComponent>
+        <LayoutComponent>
+          <DeviceSetting>{children}</DeviceSetting>
+        </LayoutComponent>
       </body>
     </html>
   );

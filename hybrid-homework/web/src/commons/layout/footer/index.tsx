@@ -10,7 +10,7 @@ export function Footer() {
           <button className={styles.itemActive}>
             <Image
               className={styles.icon}
-              src="/asset/location_active.svg"
+              src="/assets/location_active.svg"
               width={0}
               height={0}
               alt="item_loaction"
@@ -21,7 +21,7 @@ export function Footer() {
           <button className={styles.item}>
             <Image
               className={styles.icon}
-              src="/asset/mypage.svg"
+              src="/assets/mypage.svg"
               width={0}
               height={0}
               alt="item_mypage"

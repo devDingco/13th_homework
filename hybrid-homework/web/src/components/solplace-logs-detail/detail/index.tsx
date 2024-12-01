@@ -3,8 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import SolplaceMap from "@/components/commons/solplace-map";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function SolplaceLogsDetail() {
+  const center = { lat: 37.5665, lng: 126.978 };
+  const { solplaceLogId } = useParams();
   // 지도 보기 상태
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   // 지도 토글
@@ -18,14 +22,16 @@ export default function SolplaceLogsDetail() {
         <div className={styles.detailInfo}>
           <div className={styles.header}>
             <div className={styles.headerTitle}>Bramble & Brioche 한남점</div>
-            <Image
-              className={styles.icon24}
-              src="/asset/edit.svg"
-              width={0}
-              height={0}
-              sizes="100vw"
-              alt="add"
-            />
+            <Link href={`/solplace-logs/${solplaceLogId}/edit`}>
+              <Image
+                className={styles.icon24}
+                src="/assets/edit.svg"
+                width={0}
+                height={0}
+                sizes="100vw"
+                alt="add"
+              />
+            </Link>
           </div>
 
           <div className={styles.locationArea}>
@@ -33,7 +39,7 @@ export default function SolplaceLogsDetail() {
               <div className={styles.address}>
                 <Image
                   className={styles.icon16}
-                  src="/asset/location_icon.svg"
+                  src="/assets/location_icon.svg"
                   width={0}
                   height={0}
                   sizes="100vw"
@@ -50,8 +56,8 @@ export default function SolplaceLogsDetail() {
                   className={styles.icon24}
                   src={
                     isLocationOpen
-                      ? "/asset/up_arrow.svg"
-                      : "/asset/down_arrow.svg"
+                      ? "/assets/up_arrow.svg"
+                      : "/assets/down_arrow.svg"
                   }
                   width={0}
                   height={0}
@@ -60,7 +66,7 @@ export default function SolplaceLogsDetail() {
                 />
               </div>
             </div>
-            {isLocationOpen && <SolplaceMap lat={37.5665} lng={126.978} />}
+            {isLocationOpen && <SolplaceMap center={center} />}
           </div>
         </div>
         <div className={styles.divider}></div> {/* 구분선 */}

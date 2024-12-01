@@ -7,6 +7,9 @@ import { HEADER_OPTIONS } from "../constants";
 
 // 베이스 헤더
 const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
+  const onClicklBack = () => {
+    history.back();
+  };
   return (
     <>
       <header
@@ -15,7 +18,8 @@ const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
       >
         {hasBack && (
           <Image
-            src="/asset/left_arrow.svg"
+            onClick={onClicklBack}
+            src="/assets/left_arrow.svg"
             width={24}
             height={24}
             alt="leftArrow"

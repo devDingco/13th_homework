@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { PLACE_DATA } from "./constans";
 import PlaceCard from "./place-card";
 import { Footer } from "@/commons/layout/footer";
+import Link from "next/link";
 
 export default function SolplaceLogsList() {
   return (
@@ -24,16 +25,16 @@ export default function SolplaceLogsList() {
           </div>
         )}
 
-        <button className={styles.floatingButton}>
+        <Link href="/solplace-logs/new" className={styles.floatingButton}>
           <Image
-            src="/asset/add_white.svg"
+            src="/assets/add_white.svg"
             width={0}
             height={0}
             sizes="100vw"
             alt="add"
             className={styles.add}
           />
-        </button>
+        </Link>
       </main>
       <Footer />
     </>

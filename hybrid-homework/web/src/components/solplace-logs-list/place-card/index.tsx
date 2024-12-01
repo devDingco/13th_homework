@@ -20,7 +20,7 @@ export default function PlaceCard({ data }) {
         <div className={styles.address}>
           <Image
             className={styles.icon16}
-            src="/asset/location_icon.svg"
+            src="/assets/location_icon.svg"
             width={0}
             height={0}
             sizes="100vw"
