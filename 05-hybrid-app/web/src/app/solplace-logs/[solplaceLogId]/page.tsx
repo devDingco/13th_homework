@@ -1,5 +1,5 @@
-import DetailContainer from "@/components/solplace-logs/detail/DetailContainer";
-import ImageSlide from "@/components/solplace-logs/detail/ImageSlide";
+import DetailContainer from "@/components/solplace-logs-detail/DetailContainer";
+import ImageSlide from "@/components/solplace-logs-detail/ImageSlide";
 
 export default function DetailPage() {
   return (

@@ -5,8 +5,20 @@ import left_arrow from "../../../../public/images/icons/left_arrow.svg";
 import { useParams, usePathname } from "next/navigation";
 import { HEADER_OPTIONS } from "./constants";
 
+interface IHeaderBaseProps {
+  children?: React.ReactNode;
+  hasBack: boolean;
+  title: string;
+  isTransparent: boolean;
+}
+
 // 베이스 헤더
-const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
+const HeaderBase = ({
+  children,
+  hasBack,
+  title,
+  isTransparent,
+}: IHeaderBaseProps) => {
   return (
     <>
       <header

@@ -18,7 +18,7 @@ export default function Home() {
 
           // 3. [IOS 시뮬레이터]
           // IOS기계에서 자기자신 => 127.0.0.1
-          uri: "http://127.0.0.1:3000/solplace-logs/new",
+          uri: "http://127.0.0.1:3000/solplace-logs/1/edit",
         }}
       />
     </SafeAreaView>

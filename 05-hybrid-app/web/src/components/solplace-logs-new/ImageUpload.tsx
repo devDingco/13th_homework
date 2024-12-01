@@ -1,12 +1,12 @@
 import Image from "next/image";
-import add from "../../../../public/images/icons/add.svg";
-import close from "../../../../public/images/icons/close.svg";
+import add from "../../../public/images/icons/add.svg";
+import close from "../../../public/images/icons/close.svg";
 import UseUploadFile from "@/common/hooks/solplace-logs/new/useUploadfile";
 import { useFormContext } from "react-hook-form";
 import { useEffect, type ChangeEvent } from "react";
 
 interface IImageUploadProps {
-  images: string[];
+  images?: string[];
 }
 
 export default function ImageUpload({ images }: IImageUploadProps) {

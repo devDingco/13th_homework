@@ -1,19 +1,19 @@
 "use client";
 
+import ImageUpload from "./ImageUpload";
 import Footer from "@/components/layout/footer/Footer";
-import ImageUpload from "../new/ImageUpload";
-import PlaceAddress from "../new/PlaceAddress";
-import PlaceContents from "../new/PlaceContents";
-import PlaceName from "../new/PlaceName";
+import PlaceContents from "./PlaceContents";
+import PlaceAddress from "./PlaceAddress";
+import PlaceName from "./PlaceName";
 import { FormProvider } from "react-hook-form";
-import usePlaceEditForm from "@/common/hooks/solplace-logs/edit/usePlaceEditForm";
+import { usePlaceForm } from "@/common/hooks/solplace-logs/new/usePlaceForm";
 
-export default function PlaceEditContainer() {
-  const { methods, onSubmit, handleSubmitClick, formRef, data } =
-    usePlaceEditForm();
+export default function PlaceContainer() {
+  const { methods, onSubmit, handleSubmitClick, formRef } = usePlaceForm();
   const {
     formState: { isValid },
   } = methods; // 폼 상태 가져오기
+
   return (
     <>
       <FormProvider {...methods}>
@@ -23,7 +23,7 @@ export default function PlaceEditContainer() {
           className=" px-20 py-24 flex flex-col gap-20 w-full"
         >
           {/* 사진 등록 */}
-          <ImageUpload images={data?.fetchSolplaceLog.images} />
+          <ImageUpload />
 
           {/* 플레이스 이름 */}
           <PlaceName />
@@ -36,7 +36,7 @@ export default function PlaceEditContainer() {
         </form>
       </FormProvider>
       {/* 로그 등록 버튼 */}
-      <Footer>
+      <Footer className="h-60 px-20 pb-70">
         <button
           onClick={handleSubmitClick}
           disabled={!isValid} // 사용자가 입력을 다 안하면 비활성화
@@ -44,7 +44,7 @@ export default function PlaceEditContainer() {
             !isValid && "bg-gray-400"
           }`}
         >
-          수정
+          로그 등록
         </button>
       </Footer>
     </>

@@ -1,6 +1,6 @@
 import InputField from "@/components/inputField";
 import Image from "next/image";
-import right_arrow from "../../../../public/images/icons/right_arrow.svg";
+import right_arrow from "../../../public/images/icons/right_arrow.svg";
 
 export default function PlaceAddress() {
   return (
