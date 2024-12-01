@@ -42,6 +42,9 @@ export function usePlaceForm() {
             title: data.title,
             contents: data.contents,
             images: data.images,
+            address: data.address,
+            lat: data.lat,
+            lng: data.lng,
           },
         },
       });

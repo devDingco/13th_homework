@@ -6,7 +6,7 @@ import PlaceContents from "./PlaceContents";
 import PlaceAddress from "./PlaceAddress";
 import PlaceName from "./PlaceName";
 import { FormProvider } from "react-hook-form";
-import { usePlaceForm } from "@/common/hooks/solplace-logs/new/usePlaceForm";
+import { usePlaceForm } from "@/common/hooks/solplace-logs-new/usePlaceForm";
 
 export default function PlaceContainer() {
   const { methods, onSubmit, handleSubmitClick, formRef } = usePlaceForm();

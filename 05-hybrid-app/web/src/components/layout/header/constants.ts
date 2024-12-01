@@ -19,6 +19,10 @@ export const HEADER_OPTIONS = (params) => ({
       hasBack: false,
       isTransparent: false,
     },
+    "/solplace-logs/new/map": {
+      hasBack: true,
+      isTransparent: true,
+    },
   },
   /*   LOCAL: {
     [`/solplace-logs/${params.solplaceLogId}`]: {

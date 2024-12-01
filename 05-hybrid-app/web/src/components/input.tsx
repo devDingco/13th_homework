@@ -2,7 +2,7 @@ import type { PlaceNewValues } from "@/schema/placeNew.schema";
 import { useFormContext } from "react-hook-form";
 
 interface IInputProps {
-  placeholder: string;
+  placeholder?: string;
   name: keyof PlaceNewValues;
   className?: string;
 }
