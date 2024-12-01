@@ -1,8 +1,8 @@
 import Image from "next/image";
-import edit from "../../../../public/images/icons/edit.svg";
-import location from "../../../../public/images/icons/location.svg";
-import down_arrow from "../../../../public/images/icons/down_arrow.svg";
-import up_arrow from "../../../../public/images/icons/up_arrow.svg";
+import edit from "../../../public/images/icons/edit.svg";
+import location from "../../../public/images/icons/location.svg";
+import down_arrow from "../../../public/images/icons/down_arrow.svg";
+import up_arrow from "../../../public/images/icons/up_arrow.svg";
 import { useState } from "react";
 import MapView from "./MapView";
 import Link from "next/link";

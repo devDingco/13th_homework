@@ -10,7 +10,7 @@ export default function FooterPlaceMypageButton() {
   console.log("현재 페이지:", pathname);
 
   return (
-    <div className="w-screen flex py-20">
+    <div className="w-screen flex py-20 fixed bottom-0 bg-white border-t-2">
       {/* 플레이스 페이지 */}
       <Link
         href={`/solplace-logs`}
