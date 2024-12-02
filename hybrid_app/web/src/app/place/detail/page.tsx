@@ -21,7 +21,7 @@ export default function PlaceDetail() {
           </div>
           <div className="flex justify-between items-center text-[13px] font-semibold">
             <div className="flex items-center">
-              <Icon src="/svgs/location_icon.svg" alt="locationIcon" />
+              <Icon src="/svgs/place.svg" alt="place" />
               <p className="text-gray-500">
                 서울특별시 용산구 이태원로49길 24-14
               </p>
