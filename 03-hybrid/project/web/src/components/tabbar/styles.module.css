@@ -1,0 +1,17 @@
+.tabbar {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0.5rem 1.25rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.tabbar__item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
