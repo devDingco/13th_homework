@@ -1,6 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import detail from '/public/images/detail.png';
+import edit from '/public/images/edit.png';
+import toggle from '/public/images/Toggle-Map-Icon.png';
+import toggleDown from '/public/images/Down-Arrow.png';
+
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
@@ -27,17 +32,7 @@ export default function SolplaceLogIdPage() {
 
             <div className={styles.container}>
                 <div className={styles.layout}>
-                    {/* <Image
-                                src={'/images/detail.png'}
-                                alt="detail img"
-                                width={360}
-                                height={480}
-                                // objectFit="cover"
-                                style={{
-                                    width: '22.5rem',
-                                    height: '30rem',
-                                }}
-                            /> */}
+                    <Image src={detail} alt="detail_img" />
 
                     <div className={styles.detailBox}>
                         <div className={styles.titleBox}>
@@ -45,14 +40,8 @@ export default function SolplaceLogIdPage() {
 
                             <Image
                                 onClick={onClickNewPage}
-                                src={'/images/edit.png'}
+                                src={edit}
                                 alt="edit"
-                                width={24}
-                                height={24}
-                                style={{
-                                    width: '1.5rem',
-                                    height: '1.5rem',
-                                }}
                             />
                         </div>
                         <div className={styles.addressBox}>
@@ -79,9 +68,7 @@ export default function SolplaceLogIdPage() {
                                         {isUp ? (
                                             <div>
                                                 <Image
-                                                    src={
-                                                        '/images/Toggle-Map-Icon.png'
-                                                    }
+                                                    src={toggle}
                                                     alt="down-arrow"
                                                     width={24}
                                                     height={24}
@@ -90,9 +77,7 @@ export default function SolplaceLogIdPage() {
                                         ) : (
                                             <div style={{}}>
                                                 <Image
-                                                    src={
-                                                        '/images/Down-Arrow.png'
-                                                    }
+                                                    src={toggleDown}
                                                     alt="down-arrow"
                                                     width={24}
                                                     height={24}
