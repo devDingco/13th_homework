@@ -1,9 +1,9 @@
-import SolplaceLogs from "@/components/solplace-logs";
+import SolplaceLogsList from "@/components/solplace-logs-list";
 
 export default function SolplaceLogsPage() {
   return (
     <>
-      <SolplaceLogs />
+      <SolplaceLogsList />
     </>
   );
 }

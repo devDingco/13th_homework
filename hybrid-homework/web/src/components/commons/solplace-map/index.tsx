@@ -1,18 +1,28 @@
-import { Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
+import useKakaoMapLoader from "@/commons/hooks/use-kakao-loader";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-export default function SolplaceMap({ lat, lng }) {
-  const [_, error] = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_KEY!, // 발급 받은 APPKEY
-  });
+interface ISolplaceMapProps {
+  center: { lat: number; lng: number };
+}
 
+export default function SolplaceMap({ center }: ISolplaceMapProps) {
+  const [loading, error] = useKakaoMapLoader();
+
+  if (loading) return <div>loading...</div>;
   if (error) return <div>Error</div>;
 
   return (
     <Map
-      center={{ lat, lng }} // 전달받은 위도와 경도 사용
-      style={{ borderRadius: "0.75rem", width: "100%", height: "160px" }}
+      center={center} // 전달받은 위도와 경도 사용
+      style={{ borderRadius: "0.75rem", width: "100%", height: "10rem" }}
     >
-      <MapMarker position={{ lat, lng }} />
+      <MapMarker
+        position={center}
+        image={{
+          src: "/assets/marker.svg",
+          size: { width: 28, height: 28 },
+        }}
+      />
     </Map>
   );
 }

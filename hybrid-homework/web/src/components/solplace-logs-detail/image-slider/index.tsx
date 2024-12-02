@@ -14,10 +14,10 @@ import Image from "next/image";
 
 export default function SolplaceLogsDetailImageSlider() {
   const images = [
-    "/asset/default1.jpeg",
-    "/asset/default2.jpeg",
-    "/asset/default3.jpeg",
-    "/asset/default4.jpeg",
+    "/images/default1.jpeg",
+    "/images/default2.jpeg",
+    "/images/default3.jpeg",
+    "/images/default4.jpeg",
   ];
 
   return (

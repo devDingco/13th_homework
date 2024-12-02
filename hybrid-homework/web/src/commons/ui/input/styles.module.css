@@ -58,6 +58,10 @@
   border-radius: 0.5rem;
   border: 0.0625rem solid var(--gray-B, #000);
   background: var(--gray-w, #fff);
+
+  color: var(--gray-B, #000);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .inputAddress::placeholder {

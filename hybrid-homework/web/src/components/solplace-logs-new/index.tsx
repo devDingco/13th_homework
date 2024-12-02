@@ -7,12 +7,36 @@ import { ButtonSoftMFull } from "@/commons/ui/button";
 import { InputAddress, InputNormal } from "@/commons/ui/input";
 import { TextareaNormal } from "@/commons/ui/textarea";
 import AddImage from "../commons/add-image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SolplaceLogsNew() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const methods = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
   });
+
+  const name = searchParams.get("name");
+  const contents = searchParams.get("contents");
+  const address = searchParams.get("address");
+
+  useEffect(() => {
+    if (name) methods.setValue("name", name);
+    if (contents) methods.setValue("contents", contents);
+    if (address) methods.setValue("address", address);
+  }, [name, contents, address, methods]);
+
+  const onClickAddressInput = () => {
+    router.push(
+      `/solplace-logs/new/map?name=${methods.getValues(
+        "name"
+      )}&contents=${methods.getValues(
+        "contents"
+      )}&redirectUrl=/solplace-logs/new`
+    );
+  };
 
   const onClickSubmit = () => {};
 
@@ -37,13 +61,15 @@ export default function SolplaceLogsNew() {
             />
 
             {/* 플레이스 주소 */}
-            <InputAddress
-              label="플레이스 주소"
-              name="address"
-              type="text"
-              placeholder="플레이스 주소 입력"
-              readOnly={true}
-            />
+            <div onClick={onClickAddressInput}>
+              <InputAddress
+                label="플레이스 주소"
+                name="address"
+                type="text"
+                placeholder="플레이스 주소 입력"
+                readOnly={true}
+              />
+            </div>
 
             {/* 플레이스 내용 */}
             <TextareaNormal

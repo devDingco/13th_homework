@@ -23,7 +23,7 @@ function InputBase(props) {
         />
         {props.inputType === "address" && (
           <Image
-            src="/asset/right_arrow.svg"
+            src="/assets/right_arrow.svg"
             className={styles.rightArrow}
             width={24}
             height={24}

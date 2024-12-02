@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { ChangeEvent, useRef, useState } from "react";
-import { checkValidationFile } from "@/app/utils/validation-file";
+import { checkValidationFile } from "@/commons/utils/validation-file";
 
 export default function AddImage() {
   // 미리보기 이미지
@@ -45,7 +45,7 @@ export default function AddImage() {
       <div className={styles.buttonUpload}>
         {/* 이미지 등록 버튼 */}
         <Image
-          src="/asset/add.svg"
+          src="/assets/add.svg"
           width={24}
           height={24}
           alt="addIcon"
@@ -73,7 +73,7 @@ export default function AddImage() {
             onClick={onClickImage}
           />
           <div className={styles.close} onClick={() => onClickClose(index)}>
-            <Image src="/asset/close.svg" width={16} height={16} alt="close" />
+            <Image src="/assets/close.svg" width={16} height={16} alt="close" />
           </div>
         </div>
       ))}
