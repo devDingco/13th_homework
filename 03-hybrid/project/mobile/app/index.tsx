@@ -29,7 +29,7 @@ export default function App() {
       >
         <StatusBar translucent={isTransparentPage} />
         <WebView
-          source={{ uri: "http://10.0.2.2:3000/solplace-logs/1234" }}
+          source={{ uri: "http://10.0.2.2:3000/solplace-logs" }}
           onNavigationStateChange={handleNavigationStateChange}
         />
       </Wrapper>
