@@ -13,19 +13,21 @@ import { useEffect } from "react";
 export default function SolplaceLogsNew() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  // 쿼리스트링에서 뽑기
+  const name = searchParams.get("name");
+  const contents = searchParams.get("contents");
+  const address = searchParams.get("address");
+
   const methods = useForm({
     resolver: zodResolver(schema),
     mode: "onChange",
   });
 
-  const name = searchParams.get("name");
-  const contents = searchParams.get("contents");
-  const address = searchParams.get("address");
-
   useEffect(() => {
     if (name) methods.setValue("name", name);
     if (contents) methods.setValue("contents", contents);
     if (address) methods.setValue("address", address);
+    methods.trigger();
   }, [name, contents, address, methods]);
 
   const onClickAddressInput = () => {
