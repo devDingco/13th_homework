@@ -1,0 +1,35 @@
+mutation {
+  createTravelproduct(createTravelproductInput: {
+    name: "락스"
+    remarks: "클로락스"
+    contents: "이세계 환생 물약"
+    price: 10
+  }) {
+    _id
+    name
+    remarks
+    contents
+    price
+    tags
+    images
+    pickedCount
+    travelproductAddress {
+      zipcode
+    }
+    buyer {
+      _id
+    }
+    seller {
+      _id
+    }
+    soldAt
+    createdAt
+  }
+}
+
+{
+  "Authorization": "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzIwMmMzMzU0MTNiMzAwMjkxNGUyNjUiLCJwZXJtaXNzaW9uIjowLCJpYXQiOjE3MzE1NzMzMzQsImV4cCI6MTczMTU3NjkzNCwic3ViIjoiYWNjZXNzVG9rZW4ifQ.39xW5fXMr_M-4OHls7t8-eK_1P67kubjN5JS-qLwzmHZjlztnhrSmkvDRubZ2fP2rWXPrjEJsD77eqL0yzpa-w"
+}
+
+67202c335413b3002914e265 핫썽
+6735b6ad9712e0002973f606 락스

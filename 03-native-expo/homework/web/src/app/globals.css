@@ -1,0 +1,53 @@
+@layer reset, base, tokens, recipes, utilities;
+
+@layer tokens {
+    :root {
+        --error-major: #ff4d4f;
+        --error-light: #fff2f0;
+        --error-minor: #ffccc7;
+
+        --info-major: #1677ff;
+        --info-light: #e6f4ff;
+        --info-minor: #91caff;
+
+        --success-major: #52c41a;
+        --success-light: #f6ffed;
+        --success-minor: #b7eb8f;
+
+        --warn-major: #faad14;
+        --warn-light: #fffbe6;
+        --warn-minor: #ffe58f;
+    }
+}
+
+@layer reset {
+    html {
+        font-size: 62.5%;
+        font-weight: 400;
+        font-family: var(--font-pre-var);
+    }
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-size: 1.6rem;
+        color: #222;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    b {
+        color: #f55;
+        display: contents;
+    }
+}
