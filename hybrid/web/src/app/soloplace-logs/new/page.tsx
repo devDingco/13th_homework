@@ -4,7 +4,6 @@ import Image from 'next/image';
 import styles from './styles.module.css';
 import { useRef, useState } from 'react';
 import { checkValidtionFile } from '@/commons/libraries/validation';
-import { Layout } from '@/commons/layout/02-02-layout-header-global';
 
 export default function NewPage() {
     const [images, setImages] = useState([]);

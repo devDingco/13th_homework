@@ -1,0 +1,85 @@
+/* swiper */
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-pagination {
+    color: red;
+}
+.my-swiper .swiper-pagination {
+    color: red; /* 글자 색상 */
+    font-size: 20px; /* 글자 크기 */
+    position: absolute; /* 위치 조정 */
+    top: 10px; /* 상단으로부터의 거리 */
+    right: 10px; /* 오른쪽으로부터의 거리 */
+    z-index: 10; /* 다른 요소 위에 나타나도록 */
+}
+
+.container {
+    width: 100vw;
+    margin: 0 auto;
+}
+
+.detailBox {
+    padding: 1.5rem 1.25rem 2.5rem 1.25rem;
+}
+
+.titleBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleBox p {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+}
+
+.addressBox {
+    display: flex;
+    align-content: center;
+    padding: 0.75rem 0 1rem 0;
+    border-bottom: 1px solid #e4e4e4;
+    gap: 8px;
+}
+
+.addressBoxName {
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+    color: #777;
+}
+
+.addressBoxMap {
+    display: flex;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ContentsBox {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #333;
+    padding-top: 1rem;
+}
