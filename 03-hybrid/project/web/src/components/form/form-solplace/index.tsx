@@ -1,8 +1,9 @@
 "use client";
 import { FormProvider } from "react-hook-form";
 import { SolPlaceLogsType } from "@/schema/schema-solplace-logs";
-import useFormSolplace from "./hook";
-import FormImageUpload from "../form-upload-image";
+import useSolplaceLogsNew from "@/app/solplace-logs/new/hook";
+
+import FormImageUpload from "../form-image-upload";
 import TextInput from "@/components/textInput";
 import AddressContainer from "@/components/addressContainer";
 import TextArea from "@/components/textArea";
@@ -19,7 +20,7 @@ export default function FormSolplace() {
     onChangeFile,
     onClickButton,
     onClickDeleteImage,
-  } = useFormSolplace();
+  } = useSolplaceLogsNew();
   return (
     <FormProvider {...methods}>
       <div className={styles.main__container__wrapper}>
