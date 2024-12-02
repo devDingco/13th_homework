@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
-export default function useSolplaceLogs() {
+export default function useSolplaceLogsNew() {
   const methods = useForm<SolPlaceLogsType>({
     resolver: zodResolver(SolPlaceLogsSchema),
   });
