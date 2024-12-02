@@ -5,8 +5,22 @@ export const HEADER_OPTIONS = (params) => ({
       hasBack: true, //뒤로가기 있음
       isTransparent: false,
     },
+    [`/solplace-logs/${params.solplaceLogId}/edit`]: {
+      title: "플레이스 수정",
+      hasBack: true,
+      isTransparent: false,
+    },
     [`/solplace-logs/${params.solplaceLogId}`]: {
-      hasBack: true, //뒤로가기 있음
+      hasBack: true,
+      isTransparent: true,
+    },
+    "/solplace-logs": {
+      title: "플레이스",
+      hasBack: false,
+      isTransparent: false,
+    },
+    "/solplace-logs/new/map": {
+      hasBack: true,
       isTransparent: true,
     },
   },
