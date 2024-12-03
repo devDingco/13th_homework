@@ -1,0 +1,18 @@
+.main {
+  padding: 0rem 1.25rem;
+}
+
+.header {
+  display: flex;
+  height: 3rem;
+  max-width: 80rem;
+  padding: 0.75rem 0rem;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+
+  font-family: "SUIT Variable";
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5rem; /* 133.333% */
+}
