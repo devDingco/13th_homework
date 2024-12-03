@@ -63,15 +63,14 @@ export default function SolplaceLogsNew() {
             />
 
             {/* 플레이스 주소 */}
-            <div onClick={onClickAddressInput}>
-              <InputAddress
-                label="플레이스 주소"
-                name="address"
-                type="text"
-                placeholder="플레이스 주소 입력"
-                readOnly={true}
-              />
-            </div>
+            <InputAddress
+              label="플레이스 주소"
+              name="address"
+              type="text"
+              placeholder="플레이스 주소 입력"
+              readOnly={true}
+              onClick={onClickAddressInput}
+            />
 
             {/* 플레이스 내용 */}
             <TextareaNormal

@@ -1,4 +1,4 @@
-.button__soft__m__full {
+.button__primary__m__full {
   width: 100%;
   display: flex;
   height: 3rem;
@@ -13,7 +13,7 @@
   font-weight: 700;
 }
 
-.button__soft__m__full:disabled {
+.button__primary__m__full:disabled {
   background: #c7c7c7;
   color: #e4e4e4;
 }

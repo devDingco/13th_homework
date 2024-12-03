@@ -18,10 +18,11 @@ const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
       >
         {hasBack && (
           <Image
+            className={styles.back}
             onClick={onClicklBack}
             src="/assets/left_arrow.svg"
-            width={24}
-            height={24}
+            width={0}
+            height={0}
             alt="leftArrow"
           />
         )}

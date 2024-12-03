@@ -40,14 +40,16 @@ export default function AddImage() {
       }
     };
   };
+
   return (
     <div className={styles.images}>
       <div className={styles.buttonUpload}>
         {/* 이미지 등록 버튼 */}
         <Image
+          className={styles.icon24}
           src="/assets/add.svg"
-          width={24}
-          height={24}
+          width={0}
+          height={0}
           alt="addIcon"
           onClick={onClickImage}
         />

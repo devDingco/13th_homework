@@ -1,9 +1,10 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
+import Link from "next/link";
 
 export default function PlaceCard({ data }) {
   return (
-    <div className={styles.card} key={data.id}>
+    <Link className={styles.card} href={`/solplace-logs/${data.id}`}>
       <Image
         src={data.image}
         width={0}
@@ -29,6 +30,6 @@ export default function PlaceCard({ data }) {
           <div className={styles.addressTitle}>{data.address}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

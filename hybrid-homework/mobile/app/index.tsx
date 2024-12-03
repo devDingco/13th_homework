@@ -18,7 +18,7 @@ export default function home() {
       <WebView
         ref={webviewRef}
         source={{
-          uri: `${내컴퓨터접속주소}/solplace-logs/new`,
+          uri: `${내컴퓨터접속주소}/solplace-logs`,
         }}
         onMessage={(event) => {
           if (!event.nativeEvent.data) return;

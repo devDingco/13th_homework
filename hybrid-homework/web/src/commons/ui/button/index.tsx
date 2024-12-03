@@ -5,19 +5,20 @@ import styles from "./styles.module.css";
 
 // 1. 버튼 뼈대 만들기
 function ButtonBase(props) {
-  const { formState } = useFormContext();
+  const formContext = useFormContext();
+  const isFormValid = formContext ? formContext.formState.isValid : true;
   return (
     <button
       className={props.className}
       type={props.type}
       onClick={props.onClick}
-      disabled={!formState.isValid}
+      disabled={!isFormValid}
     >
       {props.children}
     </button>
   );
 }
 
-export function ButtonSoftMFull(props) {
-  return <ButtonBase className={styles.button__soft__m__full} {...props} />;
+export function ButtonPrimaryMFull(props) {
+  return <ButtonBase className={styles.button__primary__m__full} {...props} />;
 }
