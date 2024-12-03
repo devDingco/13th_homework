@@ -1,3 +1,5 @@
+'use client';
+
 export const HEADER_OPTIONS = (params) => ({
     GLOBAL: {
         '/soloplace-logs/new': {
@@ -11,13 +13,10 @@ export const HEADER_OPTIONS = (params) => ({
         [`/soloplace-logs/${params.solplaceLogId}`]: {
             hasLogo: false,
             hasBack: true,
-            title: '',
+            title: '테스트',
             isTransparent: true,
             isZIndex: true,
         },
-
-        // 아래에 추가히가
-        // ...
     },
 
     LOCAL: {},
