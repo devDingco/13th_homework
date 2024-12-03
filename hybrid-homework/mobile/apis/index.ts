@@ -1,30 +1,21 @@
+import { useDeviceLocation } from "./use-device-location";
+import { useDeviceSystem } from "./use-device-system";
+
 export const useApis = (webviewRef) => {
+  const APIS = {
+    ...useDeviceSystem(),
+    ...useDeviceLocation(),
+  };
+
+  // 응답하는 함수
   const onResponse = (result) => {
     webviewRef.current?.postMessage(JSON.stringify(result));
   };
 
-  const onRequest = (query) => {
-    switch (query) {
-      case "fetchDeviceSystemForAppSet": {
-        onResponse({ fetchDeviceSystemForAppSet: { appVersion: "v1.0" } });
-        break;
-      }
-      case "fetchDeviceSystemForPlatformSet": {
-        onResponse({
-          fetchDeviceSystemForPlatformSet: { modelName: "iPhone 16 Pro" },
-        });
-        break;
-      }
-      case "fetchDeviceLocationForLatLngSet": {
-        onResponse({
-          fetchDeviceLocationForLatLngSet: {
-            lat: 37,
-            lng: 128,
-          },
-        });
-        break;
-      }
-    }
+  // 요청하는 함수
+  const onRequest = async (query) => {
+    const result = await APIS[query]();
+    onResponse(result);
   };
   return {
     onResponse,

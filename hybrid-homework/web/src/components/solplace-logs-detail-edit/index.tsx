@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import { schema } from "./schema";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSoftMFull } from "@/commons/ui/button";
+import { ButtonPrimaryMFull } from "@/commons/ui/button";
 import { InputAddress, InputNormal } from "@/commons/ui/input";
 import { TextareaNormal } from "@/commons/ui/textarea";
 import AddImage from "../commons/add-image";
@@ -85,7 +85,7 @@ export default function SolplaceLogsDetailEdit() {
 
           {/* 등록 버튼 */}
           <div className={styles.button}>
-            <ButtonSoftMFull>수정</ButtonSoftMFull>
+            <ButtonPrimaryMFull>수정</ButtonPrimaryMFull>
           </div>
         </form>
       </FormProvider>

@@ -14,6 +14,7 @@ function InputBase(props) {
       </label>
       <div className={styles.inputContainer}>
         <input
+          onClick={props.onClick}
           className={props.className}
           type={props.type}
           placeholder={props.placeholder}

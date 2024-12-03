@@ -18,3 +18,8 @@
   font-weight: 700;
   line-height: 1.5rem; /* 133.333% */
 }
+
+.back {
+  width: 1.5rem;
+  height: 1.5rem;
+}

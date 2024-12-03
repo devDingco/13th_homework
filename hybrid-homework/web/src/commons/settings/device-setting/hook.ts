@@ -10,7 +10,7 @@ export const useDeviceSetting = () => {
   const fetchApp = async ({ query }) => {
     const result = await new Promise((resolve) => {
       APIS[query] = resolve;
-      window.ReactNativeWebView.postMessage(JSON.stringify({ MediaQueryList }));
+      window.ReactNativeWebView.postMessage(JSON.stringify({ query }));
     });
     return result;
   };

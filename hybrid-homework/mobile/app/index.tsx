@@ -16,8 +16,9 @@ export default function home() {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar translucent={true} />
       <WebView
+        ref={webviewRef}
         source={{
-          uri: `${내컴퓨터접속주소}/solplace-logs/123`,
+          uri: `${내컴퓨터접속주소}/solplace-logs`,
         }}
         onMessage={(event) => {
           if (!event.nativeEvent.data) return;
