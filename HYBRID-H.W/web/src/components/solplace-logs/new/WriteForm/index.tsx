@@ -24,6 +24,7 @@ export default function WriteForm() {
             <h5>플레이스 주소</h5>
             <div className="cursor-pointer flex justify-between py-2 px-3 w-full border rounded-md border-black">
               <p>플레이스 주소 입력</p>
+              {/* 추후 input으로 수정 */}
               <Image
                 src="/icons/right_icon.png"
                 alt="right"
