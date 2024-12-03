@@ -28,10 +28,10 @@
 }
 .my-swiper .swiper-pagination {
     color: red; /* 글자 색상 */
-    font-size: 20px; /* 글자 크기 */
+    font-size: 1.25rem; /* 글자 크기 */
     position: absolute; /* 위치 조정 */
-    top: 10px; /* 상단으로부터의 거리 */
-    right: 10px; /* 오른쪽으로부터의 거리 */
+    top: 0.625rem; /* 상단으로부터의 거리 */
+    right: 0.625rem; /* 오른쪽으로부터의 거리 */
     z-index: 10; /* 다른 요소 위에 나타나도록 */
 }
 
@@ -59,21 +59,23 @@
     display: flex;
     align-content: center;
     padding: 0.75rem 0 1rem 0;
-    border-bottom: 1px solid #e4e4e4;
-    gap: 8px;
+    border-bottom: 0.0625rem solid #e4e4e4;
+    gap: 0.5rem;
 }
 
 .addressBoxName {
     display: flex;
-    font-size: 13px;
+
+    font-size: 0.8125rem;
     font-weight: 600;
     color: #777;
 }
 
 .addressBoxMap {
+    color: #000;
     display: flex;
-
-    font-size: 13px;
+    margin-left: 20px;
+    font-size: 0.8125rem;
     font-weight: 600;
 }
 

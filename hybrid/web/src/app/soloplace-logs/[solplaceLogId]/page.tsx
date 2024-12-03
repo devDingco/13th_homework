@@ -8,8 +8,10 @@ import toggleDown from '/public/images/Down-Arrow.png';
 
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useState } from 'react';
+
+// kakao-sdk
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 export default function SolplaceLogIdPage() {
     const router = useRouter();
@@ -32,7 +34,11 @@ export default function SolplaceLogIdPage() {
 
             <div className={styles.container}>
                 <div className={styles.layout}>
-                    <Image src={detail} alt="detail_img" />
+                    <Image
+                        src={detail}
+                        alt="detail_img"
+                        style={{ width: '100%' }}
+                    />
 
                     <div className={styles.detailBox}>
                         <div className={styles.titleBox}>
@@ -45,20 +51,18 @@ export default function SolplaceLogIdPage() {
                             />
                         </div>
                         <div className={styles.addressBox}>
-                            <div>
-                                <div className={styles.addressBoxName}>
-                                    <Image
-                                        src={'/images/location.png'}
-                                        alt="location"
-                                        width={16}
-                                        height={16}
-                                        style={{
-                                            width: '1rem',
-                                            height: '1rem',
-                                        }}
-                                    />
-                                    서울특별시 동작구 양녕로22바길 63
-                                </div>
+                            <div className={styles.addressBoxName}>
+                                <Image
+                                    src={'/images/location.png'}
+                                    alt="location"
+                                    width={16}
+                                    height={16}
+                                    style={{
+                                        width: '1rem',
+                                        height: '1rem',
+                                    }}
+                                />
+                                서울특별시 동작구 양녕로22바길 63
                                 <div className={styles.addressBoxMap}>
                                     지도보기
                                     <div

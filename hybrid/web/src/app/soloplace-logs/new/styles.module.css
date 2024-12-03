@@ -4,13 +4,13 @@
 
 .container {
     width: 100vw;
-    margin: 0 auto;
-    padding: 0 1.25rem;
+    padding: 1.5rem 1.25rem;
 }
 
 .layout {
     display: flex;
     flex-direction: column;
+    margin: 3.125rem auto auto auto;
 }
 
 .titleBox {

@@ -32,8 +32,6 @@ export default function NewPage() {
     return (
         <div className={styles.container}>
             <div className={styles.layout}>
-                <div className={styles.titleBox}>{`< 플레이스 등록`}</div>
-
                 <div className={styles.imageBox}>
                     <div className={styles.imageBoxLeft}>
                         <Image
