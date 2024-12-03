@@ -11,12 +11,6 @@
   gap: 2.5rem;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
 .label {
   color: var(--gray-800, #333);
   font-size: 0.75rem;
@@ -27,8 +21,4 @@
   color: var(--red, #f66a6a);
   font-size: 0.75rem;
   font-weight: 600;
-}
-
-.button {
-  width: 100%;
 }

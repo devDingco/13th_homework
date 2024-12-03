@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export const APIS = {
@@ -13,10 +14,15 @@ export const APIS = {
 };
 
 export default function DeviceSetting({ children }) {
+  const router = useRouter();
+
   useEffect(() => {
     // 1. 안드로이드에서 수신 대기
     document.addEventListener("message", (message: any) => {
+      if (!message.data) return;
       const response = JSON.parse(message.data);
+      if (response.redirect) return router.push(response.redirect);
+
       const query = Object.keys(response)[0];
       const resolve = APIS[query];
       resolve({ data: response });
@@ -25,7 +31,10 @@ export default function DeviceSetting({ children }) {
 
     // 2. IOS에서 수신 대기
     window.addEventListener("message", (message: any) => {
+      if (!message.data) return;
       const response = JSON.parse(message.data);
+      if (response.redirect) return router.push(response.redirect);
+
       const query = Object.keys(response)[0]; // fetchDeviceLocationForLatLngSet
       const resolve = APIS[query]; // resolve333
       resolve({ data: response });
