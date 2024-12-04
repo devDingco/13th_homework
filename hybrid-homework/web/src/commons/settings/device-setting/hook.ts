@@ -7,10 +7,12 @@ declare const window: Window & {
 };
 
 export const useDeviceSetting = () => {
-  const fetchApp = async ({ query }) => {
+  const fetchApp = async ({ query, variables = {} }) => {
     const result = await new Promise((resolve) => {
       APIS[query] = resolve;
-      window.ReactNativeWebView.postMessage(JSON.stringify({ query }));
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ query, variables })
+      );
     });
     return result;
   };
