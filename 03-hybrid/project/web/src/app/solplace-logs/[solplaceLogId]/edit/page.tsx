@@ -1,34 +1,27 @@
 "use client";
-import { FormProvider } from "react-hook-form";
-import { SolPlaceLogsType } from "@/schema/schema-solplace-logs";
-import useFormSolplace from "./hook";
 
-import FormImageUpload from "../form-image-upload";
+import React from "react";
+import { FormProvider } from "react-hook-form";
+import FormImageUpload from "@/components/form/form-image-upload";
+import styles from "./styles.module.css";
 import TextInput from "@/components/textInput";
+import { SolPlaceLogsType } from "@/schema/schema-solplace-logs";
 import AddressContainer from "@/components/addressContainer";
 import TextArea from "@/components/textArea";
 import ButtonPrimary from "@/components/button/button-primary";
+import useHook from "./hook";
+import useFormSolplace from "@/components/form/form-solplace/hook";
 
-import styles from "./styles.module.css";
-import Footer from "@/commons/layout/footer";
-
-export default function FormSolplace() {
-  const {
-    methods,
-    reverseUploadImages,
-    formState,
-    handleSubmit,
-    handleCreate,
-    onChangeFile,
-    onClickDeleteImage,
-  } = useFormSolplace();
+export default function SolplaceLogsEdit() {
+  const { methods, data, handleUpdate } = useHook();
+  const { onChangeFile, onClickDeleteImage } = useFormSolplace();
 
   return (
     <FormProvider {...methods}>
       <div className={styles.main__container__wrapper}>
         <div className={styles.main__container}>
           <FormImageUpload
-            images={reverseUploadImages}
+            images={data.images ?? []}
             onChangeFile={onChangeFile}
             onClickDelete={onClickDeleteImage}
           />
@@ -50,13 +43,11 @@ export default function FormSolplace() {
             required={true}
           />
         </div>
-        <Footer>
-          <ButtonPrimary
-            label="로그 등록"
-            onClick={handleSubmit(handleCreate)}
-            disabled={!formState.isValid}
-          />
-        </Footer>
+        <ButtonPrimary
+          label="수정"
+          onClick={methods.handleSubmit((data) => handleUpdate(data))}
+          disabled={!methods.formState.isValid}
+        />
       </div>
     </FormProvider>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { HEADER_OPTIONS } from "../constants";
 import styles from "./styles.module.css";
 import Icon from "@/components/icon";
@@ -18,13 +18,23 @@ export const HeaderBase = ({
   children,
   isTransparent,
 }: IHeaderBaseProps) => {
+  const router = useRouter();
+
+  const onClickBack = () => {
+    router.back();
+  };
+
   return (
     <>
       <header
         className={styles.header}
         style={{ backgroundColor: isTransparent ? "transparent" : "white" }}
       >
-        {hasBack && <Icon src="left_arrow.svg" />}
+        {hasBack && (
+          <button onClick={onClickBack}>
+            <Icon src="left_arrow.svg" />
+          </button>
+        )}
         {title ? <p>{title}</p> : <></>}
         {children ? <>{children}</> : <></>}
       </header>

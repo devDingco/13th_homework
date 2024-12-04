@@ -1,4 +1,5 @@
 import { HeaderGlobal } from "./header";
+import styles from "./styles.module.css";
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -6,9 +7,9 @@ interface ILayoutProps {
 
 export default function Layout({ children }: ILayoutProps) {
   return (
-    <div>
+    <div className={styles.layout}>
       <HeaderGlobal />
-      <div>{children}</div>
+      <>{children}</>
     </div>
   );
 }
