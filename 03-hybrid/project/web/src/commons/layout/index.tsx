@@ -1,6 +1,5 @@
-import Footer from "./footer";
 import { HeaderGlobal } from "./header";
-import Tabbar from "./tabbar";
+import styles from "./styles.module.css";
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -8,12 +7,9 @@ interface ILayoutProps {
 
 export default function Layout({ children }: ILayoutProps) {
   return (
-    <div>
+    <div className={styles.layout}>
       <HeaderGlobal />
       <>{children}</>
-      <Footer isFixed={true}>
-        <Tabbar />
-      </Footer>
     </div>
   );
 }
