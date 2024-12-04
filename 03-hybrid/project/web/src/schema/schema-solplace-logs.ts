@@ -1,6 +1,8 @@
 import z from "zod";
 
-export type SolPlaceLogsType = z.infer<typeof SolPlaceLogsSchema>;
+export type SolPlaceLogsType = z.infer<typeof SolPlaceLogsSchema> & {
+  id: number;
+};
 
 export const SolPlaceLogsSchema = z.object({
   images: z.array(z.string()).optional(),
