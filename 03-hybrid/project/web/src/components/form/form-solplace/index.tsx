@@ -1,7 +1,7 @@
 "use client";
 import { FormProvider } from "react-hook-form";
 import { SolPlaceLogsType } from "@/schema/schema-solplace-logs";
-import useSolplaceLogsNew from "@/app/solplace-logs/new/hook";
+import useFormSolplace from "./hook";
 
 import FormImageUpload from "../form-image-upload";
 import TextInput from "@/components/textInput";
@@ -10,6 +10,7 @@ import TextArea from "@/components/textArea";
 import ButtonPrimary from "@/components/button/button-primary";
 
 import styles from "./styles.module.css";
+import Footer from "@/commons/layout/footer";
 
 export default function FormSolplace() {
   const {
@@ -17,10 +18,11 @@ export default function FormSolplace() {
     reverseUploadImages,
     formState,
     handleSubmit,
+    handleCreate,
     onChangeFile,
-    onClickButton,
     onClickDeleteImage,
-  } = useSolplaceLogsNew();
+  } = useFormSolplace();
+
   return (
     <FormProvider {...methods}>
       <div className={styles.main__container__wrapper}>
@@ -48,11 +50,13 @@ export default function FormSolplace() {
             required={true}
           />
         </div>
-        <ButtonPrimary
-          label="로그 등록"
-          onClick={handleSubmit(onClickButton)}
-          disabled={!formState.isValid}
-        />
+        <Footer>
+          <ButtonPrimary
+            label="로그 등록"
+            onClick={handleSubmit(handleCreate)}
+            disabled={!formState.isValid}
+          />
+        </Footer>
       </div>
     </FormProvider>
   );
