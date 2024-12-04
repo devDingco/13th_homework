@@ -5,54 +5,21 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import Icon from "@/components/icon";
 import ButtonFloatingAction from "@/components/button/button-floating-action";
-import { useRouter } from "next/navigation";
 import useSolplaceLogs from "./hook";
+import Footer from "@/commons/layout/footer";
+import Tabbar from "@/components/tabbar";
 
-const SAMPLE_DATA = [
-  {
-    name: "오브레크 경주",
-    remark: "티라미수에 밤보다 더 어울리는",
-    image: "/assets/solplace_sample2.svg",
-  },
-  {
-    name: "Bramble & Brioche 한남점",
-    remark: "한국에서 느낄 수 없었던 영국 감성의",
-    image: "/assets/solplace_sample1.svg",
-  },
-  {
-    name: "미드나잇 딤섬",
-    remark: "너무 편안한 분위기의 딤섬 맛집입니다",
-    image: "/assets/solplace_sample3.svg",
-  },
-  {
-    name: "모찌 비주",
-    remark: "세상에 없던 찹쌀떡 맛집",
-    image: "/assets/solplace_sample4.svg",
-  },
-  {
-    name: "오브레크 경주",
-    remark: "티라미수에 밤보다 더 어울리는",
-    image: "/assets/solplace_sample2.svg",
-  },
-  {
-    name: "Bramble & Brioche 한남점",
-    remark: "한국에서 느낄 수 없었던 영국 감성의",
-    image: "/assets/solplace_sample1.svg",
-  },
-  {
-    name: "미드나잇 딤섬",
-    remark: "너무 편안한 분위기의 딤섬 맛집입니다",
-    image: "/assets/solplace_sample3.svg",
-  },
-  {
-    name: "모찌 비주",
-    remark: "세상에 없던 찹쌀떡 맛집",
-    image: "/assets/solplace_sample4.svg",
-  },
-];
+export interface ISampleData {
+  id: number;
+  name: string;
+  contents: string;
+  images: string[];
+}
+
+export const SAMPLE_DATA: ISampleData[] = [];
 
 export default function SolPlaceLogsPage() {
-  const { onClickCard } = useSolplaceLogs();
+  const { onClickCard, onClickFloatingActionButton } = useSolplaceLogs();
 
   return (
     <div className={styles.solplaceLogs__container}>
@@ -66,10 +33,11 @@ export default function SolPlaceLogsPage() {
           <div
             key={`${el.name}__${index}`}
             className={styles.card}
-            onClick={onClickCard}
+            onClick={() => onClickCard(el)}
           >
             <Image
-              src={el.image}
+              // src={`https://storage.googleapis.com/${el.images[0]}`}
+              src={el.images[0]}
               alt="이미지"
               width={0}
               height={0}
@@ -79,7 +47,7 @@ export default function SolPlaceLogsPage() {
 
             <div className={styles.title}>
               <p className={styles.title__name}>{el.name}</p>
-              <p className={styles.title__remark}>{el.remark}</p>
+              <p className={styles.title__remark}>{el.contents}</p>
             </div>
 
             <div className={styles.location}>
@@ -89,7 +57,10 @@ export default function SolPlaceLogsPage() {
           </div>
         ))}
       </div>
-      <ButtonFloatingAction />
+      <ButtonFloatingAction onClick={onClickFloatingActionButton} />
+      <Footer isFixed={true}>
+        <Tabbar />
+      </Footer>
     </div>
   );
 }
