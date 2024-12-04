@@ -16,7 +16,11 @@ export const useApis = (webviewRef) => {
   };
 
   // 한번에 주입하기
-  [useDeviceSystem, useDeviceLocation, useDeviceNotifications].forEach((el) => {
+  [
+    useDeviceSystem, //
+    useDeviceLocation,
+    useDeviceNotifications,
+  ].forEach((el) => {
     APIS = { ...APIS, ...el(onResponse) };
   });
 

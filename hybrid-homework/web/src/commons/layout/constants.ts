@@ -6,7 +6,8 @@ export const HEADER_OPTIONS = (params) => ({
     "/solplace-logs/new/map": {hasLogo: false, hasBack: true, isTransparent: true},
     [`/solplace-logs/${params.solplaceLogId}`]: {hasLog: false, hasBack: true, isTransparent: true },
     [`/solplace-logs/${params.solplaceLogId}/edit`]: { title: "플레이스 수정", hasLogo: false, hasBack: true, isTransparent: false },
-    [`/solplace-logs/${params.solplaceLogId}/edit/map`]: { hasLogo: false, hasBack: true, isTransparent: true},
+    [`/solplace-logs/${params.solplaceLogId}/edit/map`]: { hasLogo: false, hasBack: true, isTransparent: true },
+    "/mypages": {title: "내 설정", hasLogo: false, hasBack: false}
   },
   LOCAL: {}
 })
