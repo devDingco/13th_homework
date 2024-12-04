@@ -17,3 +17,7 @@ body {
     --radius: 0.5rem;
   }
 }
+
+html {
+  font-size: calc((40 / 9) * 1vw);
+}
