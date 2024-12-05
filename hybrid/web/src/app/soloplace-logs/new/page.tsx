@@ -9,6 +9,9 @@ import Footer from '../../../commons/layout/header/footer';
 export default function NewPage() {
     const [images, setImages] = useState([]);
     const fileRef = useRef(); // fileRef는 레퍼런스. 어떤 태그에 등록해 놓으면 변수로 컨트롤 할 수 있음
+    const [placeName, setPlaceName] = useState(''); // 플레이스 이름 상태
+    const [placeContents, setPlaceContents] = useState(''); // 플레이스 내용 상태
+    const isButtonEnabled = placeName.length > 0 && placeContents.length > 0; // 버튼 활성화 조건
 
     const onChangeFile = (event) => {
         const files = Array.from(event.target.files);
@@ -86,6 +89,7 @@ export default function NewPage() {
                     <input
                         type="text"
                         placeholder="플레이스 이름을 입력해주세요. (1자 이상)"
+                        onChange={(e) => setPlaceName(e.target.value)} // 입력값을 상태에 저장
                     />
                 </div>
                 <div className={styles.placeAddressBox}>
@@ -103,11 +107,25 @@ export default function NewPage() {
                         name="플레이스내용"
                         placeholder="플레이스 내용을 입력해 주세요. (1자 이상)"
                         className={styles.textarea}
+                        onChange={(e) => setPlaceContents(e.target.value)} // 입력값을 상태에 저장
                     ></textarea>
                 </div>
                 <Footer>
-                    <div className={styles.logBtnBox}>
-                        <button>로그 등록</button>
+                    <div
+                        className={styles.logBtnBox}
+                        style={{
+                            backgroundColor: isButtonEnabled
+                                ? '#2974E5'
+                                : '#d4d3d3', // 버튼 색상 변경
+                            color: isButtonEnabled ? '#fff' : '#e4e4e4',
+                            cursor: isButtonEnabled ? 'pointer' : 'not-allowed',
+                        }}
+                    >
+                        <button
+                            disabled={!isButtonEnabled} // 버튼 비활성화
+                        >
+                            로그 등록
+                        </button>
                     </div>
                 </Footer>
             </div>
