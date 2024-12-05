@@ -17,6 +17,13 @@ export const HEADER_OPTIONS = (params) => ({
             isTransparent: true,
             isZIndex: true,
         },
+        [`/soloplace-logs/${params.solplaceLogId}/edit`]: {
+            hasLogo: false,
+            hasBack: true,
+            title: '플레이스 수정',
+            isTransparent: false,
+            isZIndex: true,
+        },
     },
 
     LOCAL: {},
