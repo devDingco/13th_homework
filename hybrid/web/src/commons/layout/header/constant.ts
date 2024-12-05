@@ -2,6 +2,13 @@
 
 export const HEADER_OPTIONS = (params) => ({
     GLOBAL: {
+        '/soloplace-logs': {
+            hasLogo: false,
+            hasBack: true,
+            title: '플레이스',
+            isTransparent: false,
+            isZIndex: false,
+        },
         '/soloplace-logs/new': {
             hasLogo: false,
             hasBack: true,

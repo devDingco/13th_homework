@@ -1,0 +1,53 @@
+.container {
+    width: 100vw;
+    margin: 0 auto;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-top: 3.125rem;
+}
+
+.floatingBtn {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 6.5rem;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    border-radius: 50%;
+    background-color: #2974e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.emptyBox {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerBox button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+.footerBox button:first-child {
+    gap: 0.25rem;
+}

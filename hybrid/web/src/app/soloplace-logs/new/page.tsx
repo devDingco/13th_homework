@@ -123,6 +123,7 @@ export default function NewPage() {
                     >
                         <button
                             disabled={!isButtonEnabled} // 버튼 비활성화
+                            className={styles.logBtnBoxLogBtn}
                         >
                             로그 등록
                         </button>

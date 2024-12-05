@@ -1,3 +1,5 @@
-export default function Home() {
-    return <div>첫 화면!!</div>;
+'use client';
+
+export default function NewPage() {
+    return <div>첫화면</div>;
 }
