@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './styles.module.css';
 import { useRef, useState } from 'react';
 import { checkValidtionFile } from '@/commons/libraries/validation';
+import Footer from '../../../commons/layout/header/footer';
 
 export default function NewPage() {
     const [images, setImages] = useState([]);
@@ -104,9 +105,11 @@ export default function NewPage() {
                         className={styles.textarea}
                     ></textarea>
                 </div>
-                <div className={styles.logBtnBox}>
-                    <button>로그 등록</button>
-                </div>
+                <Footer>
+                    <div className={styles.logBtnBox}>
+                        <button>로그 등록</button>
+                    </div>
+                </Footer>
             </div>
         </div>
     );
