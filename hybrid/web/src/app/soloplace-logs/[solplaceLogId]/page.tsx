@@ -13,7 +13,9 @@ import { useEffect, useState } from 'react';
 // kakao-sdk
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
+
 export default function SolplaceLogIdPage() {
+    
     const router = useRouter();
     const [isUp, setIsUp] = useState(true);
 
@@ -25,20 +27,25 @@ export default function SolplaceLogIdPage() {
         setIsUp(!isUp);
     };
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.src =
-    //         '//dapi.kakao.com/v2/maps/sdk.js?appkey=03d4190545aa1d235bf2053fe6a3b853';
-    //     script.async = true;
-    //     document.body.appendChild(script);
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src =
+            '//dapi.kakao.com/v2/maps/sdk.js?appkey=03d4190545aa1d235bf2053fe6a3b853';
+        script.async = true;
+        document.body.appendChild(script);
 
-    //     return () => {
-    //         document.body.removeChild(script);
-    //     };
-    // }, []);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     return (
         <>
+            {/* <script
+                type="text/javascript"
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=03d4190545aa1d235bf2053fe6a3b853"
+            ></script> */}
+
             <div className={styles.container}>
                 <div className={styles.layout}>
                     <Image
@@ -145,10 +152,6 @@ export default function SolplaceLogIdPage() {
                     </div>
                 </div>
             </div>
-            <script
-                type="text/javascript"
-                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=03d4190545aa1d235bf2053fe6a3b853"
-            ></script>
         </>
     );
 }
