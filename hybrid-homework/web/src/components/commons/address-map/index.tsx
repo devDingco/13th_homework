@@ -13,9 +13,9 @@ interface ISolplaceMapProps {
 export default function AddressMap({ initialCenter }: ISolplaceMapProps) {
   // 쿼리스트링 값 추출
   const searchParams = useSearchParams();
-  const name = searchParams.get("name");
+  const title = searchParams.get("title");
   const contents = searchParams.get("contents");
-  const redirectUrl = searchParams.get("redirectUrl");
+  const redirect = searchParams.get("redirect");
 
   const [loading, error] = useKakaoMapLoader();
   if (loading) return <div>Loading...</div>;
@@ -40,7 +40,7 @@ export default function AddressMap({ initialCenter }: ISolplaceMapProps) {
           window.history.pushState(
             null,
             "",
-            `?name=${name}&contents=${contents}&address=${address}&redirectUrl=${redirectUrl}`
+            `?title=${title}&contents=${contents}&address=${address}&redirect=${redirect}`
           );
         }
       }

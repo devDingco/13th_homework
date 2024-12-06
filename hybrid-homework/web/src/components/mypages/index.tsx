@@ -38,7 +38,7 @@ export default function Mypages() {
   };
 
   useEffect(() => {
-    // 최초 1회 권한 확인
+    // 설정화면 진입 시 권한 검사
     checkedPermissions();
   }, []);
 

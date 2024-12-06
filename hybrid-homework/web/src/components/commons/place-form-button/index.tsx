@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { ButtonPrimaryMFull } from "@/commons/ui/button";
+import { ButtonPrimaryMFull } from "@/components/commons/button";
 
 export default function PlaceFormButton({ isEdit }) {
   return (

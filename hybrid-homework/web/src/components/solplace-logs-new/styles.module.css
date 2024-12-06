@@ -3,22 +3,3 @@
   width: 100%;
   padding: 1.25rem 1.25rem 2.5rem 1.25rem;
 }
-
-.register {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 2.5rem;
-}
-
-.label {
-  color: var(--gray-800, #333);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.required {
-  color: var(--red, #f66a6a);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
