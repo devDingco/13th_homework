@@ -1,47 +1,33 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./styles.module.css";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Navigation } from "@/components/commons/navigation";
+import { FOOTER_OPTIONS } from "./constants";
 
-export function Footer() {
+import { useParams, usePathname } from "next/navigation";
+import { ButtonPrimaryMFull } from "@/components/commons/button";
+
+interface IFooter {
+  buttonText?: string;
+}
+
+export default function Footer({ buttonText }: IFooter) {
   const pathname = usePathname();
-  const isPlace = pathname === "/solplace-logs";
+  const params = useParams();
+  const options = FOOTER_OPTIONS(params)[pathname];
 
   return (
     <>
       <div style={{ flex: 1 }}></div>
-      <footer className={styles.footer}>
-        <div className={styles.navigation}>
-          <Link
-            href="/solplace-logs"
-            className={isPlace ? styles.itemActive : styles.item}
-          >
-            <Image
-              className={styles.icon}
-              src={`/assets/location${isPlace ? "_active" : ""}.svg`}
-              width={0}
-              height={0}
-              alt="item_loaction"
-            />
-            <p>플레이스</p>
-          </Link>
-
-          <Link
-            href="/mypages"
-            className={isPlace ? styles.item : styles.itemActive}
-          >
-            <Image
-              className={styles.icon}
-              src={`/assets/mypage${isPlace ? "" : "_active"}.svg`}
-              width={0}
-              height={0}
-              alt="item_mypage"
-            />
-            <p>내 설정</p>
-          </Link>
-        </div>
+      <footer
+        className={`${styles.footer} ${options.isFixed ? styles.fixed : ""}`}
+      >
+        {options.isButton && (
+          <div className={styles.button}>
+            <ButtonPrimaryMFull>{buttonText}</ButtonPrimaryMFull>
+          </div>
+        )}
+        {options.isNav && <Navigation />}
       </footer>
     </>
   );

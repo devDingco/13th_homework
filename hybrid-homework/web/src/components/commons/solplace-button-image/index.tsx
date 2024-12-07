@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { ChangeEvent, useRef, useState } from "react";
 import { checkValidationFile } from "@/commons/utils/validation-file";
 
-export default function AddImage() {
+export default function SolplaceButtonImage() {
   // 미리보기 이미지
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   // 전송할 이미지 파일

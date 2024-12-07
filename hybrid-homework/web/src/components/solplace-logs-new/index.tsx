@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import { schema } from "./form.schema";
-import PlaceFormButton from "../commons/place-form-button";
 import InputSection from "../commons/input-section";
 import { useInitialize } from "./form.initialize";
 import Form from "../commons/form";
+import Footer from "@/commons/layout/footer";
 
 export default function SolplaceLogsNew() {
   return (
@@ -11,7 +11,7 @@ export default function SolplaceLogsNew() {
       <Form schema={schema} useInitialize={useInitialize}>
         <InputSection />
         {/* TODO: 푸터로 바꿔주기 */}
-        <PlaceFormButton isEdit={false} />
+        <Footer buttonText="로그등록" />
       </Form>
     </main>
   );

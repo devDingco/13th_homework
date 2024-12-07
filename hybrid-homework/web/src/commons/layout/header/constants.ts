@@ -1,5 +1,7 @@
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+
 // prettier-ignore
-export const HEADER_OPTIONS = (params) => ({
+export const HEADER_OPTIONS = (params: Params) => ({
   GLOBAL: {
     "/solplace-logs": {title: "플레이스", hasLogo: false, hasBack: false, isTransparent: false},
     "/solplace-logs/new": { title: "플레이스 등록", hasLogo: false, hasBack: true, isTransparent: false },

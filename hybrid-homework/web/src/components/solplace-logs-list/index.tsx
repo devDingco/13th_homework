@@ -2,8 +2,8 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { PLACE_DATA } from "./constans";
 import PlaceCard from "./place-card";
-import { Footer } from "@/commons/layout/footer";
 import Link from "next/link";
+import Footer from "@/commons/layout/footer";
 
 export default function SolplaceLogsList() {
   return (

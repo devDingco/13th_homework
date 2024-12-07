@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { Footer } from "@/commons/layout/footer";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
 import { webviewlog } from "@/commons/libraries/webview-log";
 import ToggleItem from "./toggle-item";
+import Footer from "@/commons/layout/footer";
 
 export default function Mypages() {
   const { fetchApp } = useDeviceSetting();
