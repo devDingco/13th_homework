@@ -18,6 +18,7 @@ export const useInitialize = (methods: UseFormReturn<ISchema>) => {
     if (title) methods.setValue("title", title);
     if (contents) methods.setValue("contents", contents);
     if (address) methods.setValue("address", address);
+    methods.trigger();
   }, [title, contents, address, methods]);
 
   const { fetchApp } = useDeviceSetting();

@@ -8,7 +8,6 @@ interface IInputbase<T> extends InputHTMLAttributes<HTMLInputElement> {
   inputType: "normal" | "address";
   label: string;
   name: Path<T>; // 폼 데이터 타입 T의 속성 경로만 허용
-  className: string;
   isRequired?: boolean;
 }
 
@@ -17,7 +16,6 @@ function InputBase<T extends FieldValues>({
   inputType,
   label,
   name,
-  className,
   isRequired,
   ...props
 }: IInputbase<T>) {
@@ -29,7 +27,7 @@ function InputBase<T extends FieldValues>({
         {isRequired && <span className={styles.required}> *</span>}
       </label>
       <div className={styles.inputContainer}>
-        <input className={className} {...register(name)} {...props} />
+        <input {...register(name)} {...props} />
         {inputType === "address" && (
           <Image
             src="/assets/right_arrow.svg"

@@ -12,7 +12,7 @@ export interface ISchema {
 
 export const schema: z.ZodType<ISchema> = z.object({
   title: z.string().min(1),
-  contents: z.string().min(1),
+  contents: z.string().min(1).max(100),
   address: z.string().min(1),
-  // images: z.array(z.string()).min(1).max(100),
+  // images: z.array(z.string()).min(1),
 });
