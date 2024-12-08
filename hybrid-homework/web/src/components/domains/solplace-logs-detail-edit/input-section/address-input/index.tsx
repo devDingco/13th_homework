@@ -1,8 +1,9 @@
 "use client";
 
+import { InputAddress } from "@/components/commons/input";
 import { usePathname, useRouter } from "next/navigation";
 import { useFormContext } from "react-hook-form";
-import { InputAddress } from "../../input";
+import { ISchema } from "../../form.schema";
 
 export default function SolplaceInputAddress() {
   const router = useRouter();
@@ -17,10 +18,9 @@ export default function SolplaceInputAddress() {
   };
 
   return (
-    <InputAddress
+    <InputAddress<ISchema>
       label="플레이스 주소"
       name="address"
-      type="text"
       placeholder="플레이스 주소 입력"
       readOnly={true}
       onClick={onClickAddressInput}

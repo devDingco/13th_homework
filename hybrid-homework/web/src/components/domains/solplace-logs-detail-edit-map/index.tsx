@@ -1,7 +1,5 @@
-"use client";
-
-import AddressBottom from "../commons/address-bottom";
-import AddressMap from "../commons/address-map";
+import AddressBottom from "../../commons/address-bottom";
+import AddressMap from "../../commons/address-map";
 
 export default function SolplaceLogsDetailEditMap() {
   const center = { lat: 37.5665, lng: 126.978 };

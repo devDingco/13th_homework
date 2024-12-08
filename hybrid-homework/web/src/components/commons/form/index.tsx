@@ -1,11 +1,30 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { FormProvider, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  FormProvider,
+  useForm,
+  UseFormReturn,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ReactNode } from "react";
+import { ZodSchema } from "zod";
 
-export default function Form({ children, schema, useInitialize }) {
-  const methods = useForm({
+interface IForm<T extends FieldValues> {
+  children: ReactNode;
+  schema: ZodSchema<T>;
+  useInitialize: (methods: UseFormReturn<T>) => {
+    onSubmit: () => void;
+  };
+}
+
+export default function Form<T extends FieldValues>({
+  children,
+  schema,
+  useInitialize,
+}: IForm<T>) {
+  const methods = useForm<T>({
     resolver: zodResolver(schema),
     mode: "onChange",
   });

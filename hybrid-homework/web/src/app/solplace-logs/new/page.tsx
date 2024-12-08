@@ -1,4 +1,4 @@
-import SolplaceLogsNew from "@/components/solplace-logs-new";
+import SolplaceLogsNew from "@/components/domains/solplace-logs-new";
 
 export default function SolplaceLogsNewPage() {
   return (

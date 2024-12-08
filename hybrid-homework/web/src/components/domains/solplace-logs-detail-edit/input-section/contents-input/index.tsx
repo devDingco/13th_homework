@@ -1,4 +1,4 @@
-import { TextareaNormal } from "../../textarea";
+import { TextareaNormal } from "@/components/commons/textarea";
 
 export default function SolplaceInputContents() {
   return (

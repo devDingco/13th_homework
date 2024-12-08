@@ -1,8 +1,13 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { IPlaceData } from "../constans";
 
-export default function PlaceCard({ data }) {
+interface IPlaceCard {
+  data: IPlaceData;
+}
+
+export default function PlaceCard({ data }: IPlaceCard) {
   return (
     <Link className={styles.card} href={`/solplace-logs/${data.id}`}>
       <Image
@@ -16,7 +21,7 @@ export default function PlaceCard({ data }) {
       <div className={styles.contents}>
         <div className={styles.info}>
           <div className={styles.title}>{data.title}</div>
-          <div className={styles.description}>{data.description}</div>
+          <div className={styles.description}>{data.contents}</div>
         </div>
         <div className={styles.address}>
           <Image

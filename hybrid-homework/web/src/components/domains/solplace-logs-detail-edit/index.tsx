@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
-import InputSection from "../commons/input-section";
-import Form from "../commons/form";
+import Form from "../../commons/form";
 import { schema } from "./form.schema";
 import { useInitialize } from "./form.initialize";
 import Footer from "@/commons/layout/footer";
+import InputSection from "./input-section";
 
 export default function SolplaceLogsDetailEdit() {
   return (

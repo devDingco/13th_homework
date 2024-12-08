@@ -41,12 +41,15 @@
   color: var(--gray-B, #000);
   font-size: 0.875rem;
   font-weight: 500;
-}
 
-.inputNormal::placeholder {
-  color: var(--Gray-Gray-400, #ababab);
-  font-size: 0.875rem;
-  font-weight: 500;
+  &::placeholder {
+    color: var(--Gray-Gray-400, #ababab);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  &:focus {
+    border: 1px solid var(--gray-600, #777);
+  }
 }
 
 .inputAddress {

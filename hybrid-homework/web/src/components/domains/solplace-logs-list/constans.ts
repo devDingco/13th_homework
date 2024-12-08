@@ -1,4 +1,12 @@
-export const PLACE_DATA = [
+export interface IPlaceData {
+  id: number;
+  image: string;
+  title: string;
+  contents: string;
+  address: string;
+}
+
+export const PLACE_DATA: IPlaceData[] = [
   {
     id: 1,
     title: "Bramble & Brioche 한남점",

@@ -1,5 +1,5 @@
-import SolplaceLogsDetail from "@/components/solplace-logs-detail/detail";
-import SolplaceLogsDetailImageSlider from "@/components/solplace-logs-detail/image-slider";
+import SolplaceLogsDetail from "@/components/domains/solplace-logs-detail/detail";
+import SolplaceLogsDetailImageSlider from "@/components/domains/solplace-logs-detail/image-slider";
 
 export default function LogsDetailPage() {
   return (
