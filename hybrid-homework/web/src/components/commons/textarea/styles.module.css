@@ -16,8 +16,13 @@
   font-weight: 600;
 }
 
+.textareaBox {
+  position: relative;
+}
+
 .textareaNormal {
   display: flex;
+  width: 100%;
   height: 9.25rem;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
@@ -25,14 +30,23 @@
   background: var(--Gray-W, #fff);
 
   color: var(--Gray-800, #333);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
   font-size: 0.875rem;
   font-weight: 500;
+
+  &::placeholder {
+    color: var(--Gray-Gray-400, #ababab);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
 }
 
-.textareaNormal::placeholder {
+.contentsLength {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
   color: var(--Gray-Gray-400, #ababab);
+  text-align: right;
   font-size: 0.875rem;
   font-weight: 500;
 }
