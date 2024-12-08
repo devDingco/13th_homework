@@ -2,26 +2,30 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 import { checkValidationFile } from "@/commons/utils/validation-file";
+import { useFormContext } from "react-hook-form";
+import { useImageStore } from "@/commons/stores/image-store";
 
-export default function SolplaceButtonImage() {
+export default function SolplaceButtonImage({ name }) {
   // 미리보기 이미지
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const images = useImageStore((state) => state.images);
+  const setImages = useImageStore((state) => state.setImages);
   // 전송할 이미지 파일
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const fileRef = useRef<HTMLInputElement>(null);
   // 파일 업로드 버튼 눌러주기
   const onClickImage = () => {
     fileRef.current?.click();
   };
+  const { setValue, trigger, register } = useFormContext();
 
   // 이미지 미리보기 삭제
   const onClickClose = (index: number) => {
-    const updatedPreviews = imagePreviews.filter((_, idx) => idx !== index);
-    setImagePreviews(updatedPreviews);
-    const updatedImages = images.filter((_, idx) => idx !== index);
-    setImages(updatedImages);
+    const updatedPreviews = images.filter((_, idx) => idx !== index);
+    setImages(updatedPreviews);
+    // const updatedImages = images.filter((_, idx) => idx !== index);
+    // setImages(updatedImages);
   };
 
   // 이미지 미리보기 추가 및 수정
@@ -38,7 +42,9 @@ export default function SolplaceButtonImage() {
       console.log("image", event.target?.result);
       if (typeof event.target?.result === "string") {
         // 임시저장소에 원본 이미지배열 저장
-        setImagePreviews([...imagePreviews, event.target.result]);
+        setImages([...images, event.target.result]);
+        setValue(name, [...images, event.target.result]);
+        trigger(name);
       }
     };
   };
@@ -59,13 +65,14 @@ export default function SolplaceButtonImage() {
         <input
           type="file"
           style={{ display: "none" }}
+          {...register(name)}
           onChange={onChangeFile}
           ref={fileRef}
-          accept="image/jpeg,image/png"
+          accept="image/*"
         />
       </div>
       {/* 이미지 미리보기 */}
-      {imagePreviews?.map((preview, index) => (
+      {images?.map((preview, index) => (
         <div key={`${preview}_${index}`} className={styles.imageContainer}>
           <Image
             className={styles.image}

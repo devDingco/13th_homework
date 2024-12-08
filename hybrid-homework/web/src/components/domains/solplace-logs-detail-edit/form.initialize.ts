@@ -2,11 +2,13 @@
 
 import { useEffect } from "react";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
-import { useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { UseFormReturn } from "react-hook-form";
 import { ISchema } from "./form.schema";
 
 export const useInitialize = (methods: UseFormReturn<ISchema>) => {
+  const router = useRouter();
+  const { solplaceLogId } = useParams();
   // 쿼리스트링에서 뽑기
   const searchParams = useSearchParams();
   const title = searchParams.get("title");
@@ -24,10 +26,11 @@ export const useInitialize = (methods: UseFormReturn<ISchema>) => {
   const { fetchApp } = useDeviceSetting();
 
   const onSubmit = () => {
+    router.push(`/solplace-logs/${solplaceLogId}`);
     fetchApp({ query: "requestDeviceNotificationsForPermissionSet" });
     fetchApp({
       query: "createDeviceNotificationsForSubmitSet",
-      variables: { page: "/solplace-logs/1" },
+      variables: { page: `/solplace-logs/${solplaceLogId}` },
     });
   };
 

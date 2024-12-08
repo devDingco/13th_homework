@@ -9,7 +9,7 @@ export default function InputSection() {
   return (
     <div className={styles.main}>
       {/* 이미지 등록 */}
-      <SolplaceButtonImage />
+      <SolplaceButtonImage name="images" />
       {/* 플레이스 이름 */}
       <SolplaceInputTitle />
       {/* 플레이스 주소 */}
