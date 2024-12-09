@@ -1,7 +1,7 @@
 import * as Notifications from "expo-notifications";
 import { useEffect } from "react";
 
-// 1. 알림 수신 대기(IOS에서 필수)
+// 알림 수신 대기(IOS에서 필수)
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -11,7 +11,7 @@ Notifications.setNotificationHandler({
 });
 
 export const useDeviceNotifications = (onResponse) => {
-  // 2. 알림 스케줄 생성
+  // 알림 스케줄 생성
   const createDeviceNotificationsForSubmitSet = (variables) => {
     Notifications.scheduleNotificationAsync({
       content: {
@@ -31,7 +31,17 @@ export const useDeviceNotifications = (onResponse) => {
     });
   };
 
-  // 3. 알림 권한 요청
+  // 알림 권한 상태 확인하기
+  const fetchDeviceNotificationsForPermissionSet = async () => {
+    const result = await Notifications.getPermissionsAsync();
+    onResponse({
+      fetchDeviceNotificationsForPermissionSet: {
+        status: result.status,
+      },
+    });
+  };
+
+  // 알림 권한 요청
   const requestDeviceNotificationsForPermissionSet = async () => {
     await Notifications.requestPermissionsAsync();
 
@@ -54,6 +64,7 @@ export const useDeviceNotifications = (onResponse) => {
 
   return {
     createDeviceNotificationsForSubmitSet,
+    fetchDeviceNotificationsForPermissionSet,
     requestDeviceNotificationsForPermissionSet,
   };
 };

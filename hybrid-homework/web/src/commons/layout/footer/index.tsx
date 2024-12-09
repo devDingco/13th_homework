@@ -1,34 +1,33 @@
-import Image from "next/image";
-import styles from "./styles.module.css";
+"use client";
 
-export function Footer() {
+import styles from "./styles.module.css";
+import { Navigation } from "@/components/commons/navigation";
+import { FOOTER_OPTIONS } from "./constants";
+
+import { useParams, usePathname } from "next/navigation";
+import { ButtonPrimaryMFull } from "@/components/commons/button";
+
+interface IFooter {
+  buttonText?: string;
+}
+
+export default function Footer({ buttonText }: IFooter) {
+  const pathname = usePathname();
+  const params = useParams();
+  const options = FOOTER_OPTIONS(params)[pathname];
+
   return (
     <>
       <div style={{ flex: 1 }}></div>
-      <footer className={styles.footer}>
-        <div className={styles.navigation}>
-          <button className={styles.itemActive}>
-            <Image
-              className={styles.icon}
-              src="/assets/location_active.svg"
-              width={0}
-              height={0}
-              alt="item_loaction"
-            />
-            <p>플레이스</p>
-          </button>
-
-          <button className={styles.item}>
-            <Image
-              className={styles.icon}
-              src="/assets/mypage.svg"
-              width={0}
-              height={0}
-              alt="item_mypage"
-            />
-            <p>내 설정</p>
-          </button>
-        </div>
+      <footer
+        className={`${styles.footer} ${options.isFixed ? styles.fixed : ""}`}
+      >
+        {options.isButton && (
+          <div className={styles.button}>
+            <ButtonPrimaryMFull>{buttonText}</ButtonPrimaryMFull>
+          </div>
+        )}
+        {options.isNav && <Navigation />}
       </footer>
     </>
   );

@@ -1,6 +1,16 @@
 import * as Location from "expo-location";
 
 export const useDeviceLocation = (onResponse) => {
+  // 위치권한 상태 확인하기
+  const fetchDeviceLocationForPermissionSet = async () => {
+    const result = await Location.getForegroundPermissionsAsync();
+    onResponse({
+      fetchDeviceLocationForPermissionSet: {
+        status: result.status,
+      },
+    });
+  };
+
   const fetchDeviceLocationForLatLngSet = async () => {
     const result = await Location.requestForegroundPermissionsAsync();
     // 권한 허락했을 때
@@ -21,5 +31,6 @@ export const useDeviceLocation = (onResponse) => {
   };
   return {
     fetchDeviceLocationForLatLngSet,
+    fetchDeviceLocationForPermissionSet,
   };
 };

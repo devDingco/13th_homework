@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { AppState, Linking, Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 
@@ -16,6 +16,15 @@ export const useDeviceSystem = (onResponse) => {
     });
   };
 
+  const fetchDeviceSystemForAppStateSet = () => {
+    const isForeground = AppState.currentState === "active";
+    onResponse({
+      fetchDeviceSystemForAppStateSet: {
+        isForeground,
+      },
+    });
+  };
+
   const fetchDeviceSystemForPlatformSet = () => {
     onResponse({
       fetchDeviceSystemForPlatformSet: {
@@ -26,8 +35,19 @@ export const useDeviceSystem = (onResponse) => {
     });
   };
 
+  const openDeviceSystemForSettingSet = async () => {
+    await Linking.openSettings();
+    onResponse({
+      openDeviceSystemForSettingSet: {
+        message: "이동완료",
+      },
+    });
+  };
+
   return {
     fetchDeviceSystemForAppSet,
+    fetchDeviceSystemForAppStateSet,
     fetchDeviceSystemForPlatformSet,
+    openDeviceSystemForSettingSet,
   };
 };

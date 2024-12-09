@@ -1,9 +1,5 @@
-import SolplaceLogsDetailEdit from "@/components/solplace-logs-detail-edit";
+import SolplaceLogsDetailEdit from "@/components/domains/solplace-logs-detail-edit";
 
 export default function SolplaceLogsDetailEditPage() {
-  return (
-    <>
-      <SolplaceLogsDetailEdit />
-    </>
-  );
+  return <SolplaceLogsDetailEdit />;
 }

@@ -1,53 +1,15 @@
 .footer {
+  display: flex;
+  width: 100%;
+}
+
+.fixed {
   position: fixed;
   left: 0;
   bottom: 0;
-  display: flex;
-  width: 100%;
-  height: 4rem;
+}
+
+.button {
   padding-bottom: 1.25rem;
-  flex-direction: column;
-  gap: 0.625rem;
-  border-top: 0.0625rem solid var(--gray-50, #f2f2f2);
-  background-color: white;
-}
-
-.navigation {
-  display: flex;
-  padding: 0.5rem 1.25rem;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
   width: 100%;
-  flex: 1;
-}
-
-.itemActive {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  width: 100%;
-  flex: 1;
-}
-
-.item > p {
-  color: var(--gray-600, #777);
-  font-size: 0.6875rem;
-  font-weight: 500;
-}
-
-.itemActive > p {
-  color: var(--gray-B, #000);
-  font-size: 0.6875rem;
-  font-weight: 600;
-}
-
-.icon {
-  width: 1.5rem;
-  height: 1.5rem;
 }

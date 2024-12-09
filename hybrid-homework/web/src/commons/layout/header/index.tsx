@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useParams, usePathname } from "next/navigation";
-import { HEADER_OPTIONS } from "../constants";
+import { HEADER_OPTIONS } from "./constants";
 
 // 베이스 헤더
 const HeaderBase = ({ children, hasBack, title, isTransparent }) => {
