@@ -38,6 +38,9 @@ export function GlobalHeader() {
   const params = useParams();
   const pathname = usePathname();
 
+  console.log('globak에서 params', params);
+  console.log('global pathname', pathname);
+
   const options = HEADER_OPTIONS(params).GLOBAL[pathname];
   return (
     <header style={{ display: options ? 'block' : 'none' }}>
@@ -46,15 +49,27 @@ export function GlobalHeader() {
   );
 }
 
-export function LocalHeader({ children, ...rest }) {
+export function LocalHeader({
+  children,
+  ...rest
+}: {
+  [x: string]: any;
+  children?: React.ReactNode;
+}) {
   const params = useParams();
   const pathname = usePathname();
+
+  console.log('HEADER_OPTIONS LOCAL:', HEADER_OPTIONS(params).LOCAL);
+  console.log(
+    'HEADER_OPTIONS LOCAL[pathname]:',
+    HEADER_OPTIONS(params).LOCAL[pathname]
+  );
 
   const options = HEADER_OPTIONS(params).LOCAL[pathname];
   return (
     <header style={{ display: options ? 'block' : 'none' }}>
       <HeaderBase {...rest} {...options}>
-        {children}
+        {children || null}
       </HeaderBase>
     </header>
   );
