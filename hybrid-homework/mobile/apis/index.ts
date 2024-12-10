@@ -1,6 +1,7 @@
 import { useDeviceSystem } from "./use-device-system";
 import { useDeviceLocation } from "./use-device-location";
 import { useDeviceNotifications } from "./use-device-notification";
+import { useDeviceLayout } from "./use-device-layout";
 
 export const useApis = (webviewRef) => {
   let APIS = {};
@@ -20,6 +21,7 @@ export const useApis = (webviewRef) => {
     useDeviceSystem, //
     useDeviceLocation,
     useDeviceNotifications,
+    useDeviceLayout,
   ].forEach((el) => {
     APIS = { ...APIS, ...el(onResponse) };
   });
@@ -27,5 +29,6 @@ export const useApis = (webviewRef) => {
   return {
     onResponse,
     onRequest,
+    layout: APIS.layout,
   };
 };

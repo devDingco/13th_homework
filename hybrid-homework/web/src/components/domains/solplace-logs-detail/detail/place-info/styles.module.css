@@ -1,0 +1,60 @@
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerTitle {
+  color: var(--gray-900, #1c1c1c);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.location {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+}
+
+.addressTitle {
+  color: var(--Gray-600, #777);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown > div {
+  color: var(--Gray-800, #333);
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.locationArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.icon16 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon24 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
