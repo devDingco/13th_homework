@@ -1,5 +1,6 @@
 'use client';
 
+// IMAGE
 import Image from 'next/image';
 import detail from '/public/images/detail.png';
 import edit from '/public/images/edit.png';
@@ -13,9 +14,7 @@ import { useEffect, useState } from 'react';
 // kakao-sdk
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-
 export default function SolplaceLogIdPage() {
-    
     const router = useRouter();
     const [isUp, setIsUp] = useState(true);
 

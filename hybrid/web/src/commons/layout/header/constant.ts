@@ -2,6 +2,13 @@
 
 export const HEADER_OPTIONS = (params) => ({
     GLOBAL: {
+        '/soloplace-logs': {
+            hasLogo: false,
+            hasBack: true,
+            title: '플레이스',
+            isTransparent: false,
+            isZIndex: false,
+        },
         '/soloplace-logs/new': {
             hasLogo: false,
             hasBack: true,
@@ -15,6 +22,13 @@ export const HEADER_OPTIONS = (params) => ({
             hasBack: true,
             title: '테스트',
             isTransparent: true,
+            isZIndex: true,
+        },
+        [`/soloplace-logs/${params.solplaceLogId}/edit`]: {
+            hasLogo: false,
+            hasBack: true,
+            title: '플레이스 수정',
+            isTransparent: false,
             isZIndex: true,
         },
     },

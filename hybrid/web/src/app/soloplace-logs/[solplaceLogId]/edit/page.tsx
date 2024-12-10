@@ -4,9 +4,9 @@ import Image from 'next/image';
 import styles from './styles.module.css';
 import { useRef, useState } from 'react';
 import { checkValidtionFile } from '@/commons/libraries/validation';
-import Footer from '../../../commons/layout/header/footer';
+import Footer from '@/commons/layout/header/footer';
 
-export default function NewPage() {
+export default function SolplaceLogIdEditPage() {
     const [images, setImages] = useState([]);
     const fileRef = useRef(); // fileRef는 레퍼런스. 어떤 태그에 등록해 놓으면 변수로 컨트롤 할 수 있음
     const [placeName, setPlaceName] = useState(''); // 플레이스 이름 상태
@@ -90,6 +90,7 @@ export default function NewPage() {
                         type="text"
                         placeholder="플레이스 이름을 입력해주세요. (1자 이상)"
                         onChange={(e) => setPlaceName(e.target.value)} // 입력값을 상태에 저장
+                        defaultValue={'이거슨 테스트내용'}
                     />
                 </div>
                 <div className={styles.placeAddressBox}>
@@ -108,24 +109,22 @@ export default function NewPage() {
                         placeholder="플레이스 내용을 입력해 주세요. (1자 이상)"
                         className={styles.textarea}
                         onChange={(e) => setPlaceContents(e.target.value)} // 입력값을 상태에 저장
+                        defaultValue={'이거슨 테스트내용'}
                     ></textarea>
                 </div>
                 <Footer>
                     <div
                         className={styles.logBtnBox}
                         style={{
-                            backgroundColor: isButtonEnabled
-                                ? '#2974E5'
-                                : '#d4d3d3', // 버튼 색상 변경
-                            color: isButtonEnabled ? '#fff' : '#e4e4e4',
-                            cursor: isButtonEnabled ? 'pointer' : 'not-allowed',
+                            backgroundColor: '#2974E5',
+                            color: '#fff',
+                            cursor: 'pointer',
                         }}
                     >
                         <button
                             disabled={!isButtonEnabled} // 버튼 비활성화
-                            className={styles.logBtnBoxLogBtn}
                         >
-                            로그 등록
+                            수정
                         </button>
                     </div>
                 </Footer>
