@@ -1,6 +1,6 @@
 import { useApis } from "@/apis";
 import { useRef } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 
@@ -10,11 +10,14 @@ const 내컴퓨터접속주소 = "http://127.0.0.1:3000"; // IOS 시뮬레이터
 
 export default function Home() {
   const webviewRef = useRef<WebView>(null);
-  const { onRequest } = useApis(webviewRef);
+  const { onRequest, layout } = useApis(webviewRef);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar translucent={false} />
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: layout.notchBackgroundColor }}
+      edges={layout.isNotchTranslucent ? [] : undefined}
+    >
+      <StatusBar style={layout.notchContent} />
       <WebView
         ref={webviewRef}
         source={{

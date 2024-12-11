@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -24,7 +25,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={suit.variable}>
         <LayoutComponent>
-          <DeviceSetting>{children}</DeviceSetting>
+          <DeviceSetting>
+            {children}
+            {modal}
+          </DeviceSetting>
         </LayoutComponent>
       </body>
     </html>

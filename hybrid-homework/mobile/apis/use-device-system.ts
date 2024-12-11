@@ -1,8 +1,11 @@
 import { AppState, Linking, Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const useDeviceSystem = (onResponse) => {
+  const insets = useSafeAreaInsets();
+
   const isAndroid = Platform.OS === "android";
   const isIos = Platform.OS === "ios";
 
@@ -24,6 +27,16 @@ export const useDeviceSystem = (onResponse) => {
       },
     });
   };
+
+  const fetchDeviceSystemForNotchHeightSet = () => {
+    const notchTopSize = insets.top;
+    onResponse({
+      fetchDeviceSystemForNotchHeightSet: {
+        notchTopSize,
+      },
+    });
+  };
+  console.log("노치크기", insets.top);
 
   const fetchDeviceSystemForPlatformSet = () => {
     onResponse({
@@ -47,6 +60,7 @@ export const useDeviceSystem = (onResponse) => {
   return {
     fetchDeviceSystemForAppSet,
     fetchDeviceSystemForAppStateSet,
+    fetchDeviceSystemForNotchHeightSet,
     fetchDeviceSystemForPlatformSet,
     openDeviceSystemForSettingSet,
   };
