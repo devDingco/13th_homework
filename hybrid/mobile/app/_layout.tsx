@@ -1,59 +1,24 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/components/useColorScheme';
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { useEffect, useState } from 'react';
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
+    const [isLoaded, setIsLoded] = useState(false);
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    useEffect(() => {
+        setIsLoded(true);
+    }, []);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    if (!isLoaded) return <></>;
 
-  if (!loaded) {
-    return null;
-  }
+    return (
+        <Stack>
+            {/* 모바일 메인 페이지에서 웹뷰만들고, 나머지페이지들은 웹에서 처리하기 */}
+            <Stack.Screen name="index" options={{ headerShown: false }} />
 
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-  );
+            {/* 모바일에서 다른 페이지를 만들어야 한다면? 아래에 추가하기 */}
+            {/* <Stack.Screen name="프로필페이지" />
+            <Stack.Screen name="결제페이지" />
+            <Stack.Screen name="게시글 등록 페-이지" /> */}
+        </Stack>
+    );
 }
