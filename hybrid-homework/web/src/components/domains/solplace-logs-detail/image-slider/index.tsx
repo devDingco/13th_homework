@@ -2,15 +2,16 @@
 
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./pagination.css";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
-import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useLoading } from "@/commons/stores/loading-store";
+import { webviewlog } from "@/commons/libraries/webview-log";
 
 const images = [
   "/images/default1.jpeg",
@@ -21,7 +22,9 @@ const images = [
 
 export default function SolplaceLogsDetailImageSlider() {
   const { solplaceLogId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useLoading((state) => state.isLoading);
+  const setIsLoading = useLoading((state) => state.setIsLoading);
+
   const { fetchApp } = useDeviceSetting();
 
   const onClickFullScreen = () => {
@@ -40,6 +43,7 @@ export default function SolplaceLogsDetailImageSlider() {
       }, 100);
     }, 100);
   };
+  webviewlog(isLoading);
 
   if (isLoading) return <></>;
 

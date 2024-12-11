@@ -12,7 +12,6 @@ export const useDeviceLayout = (onResponse) => {
       ...prev,
       isNotchTranslucent: !prev.isNotchTranslucent,
     }));
-
     onResponse({
       toggleDeviceLayoutForNotchTranslucentSet: {
         message: "변경완료",

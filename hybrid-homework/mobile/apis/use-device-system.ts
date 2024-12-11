@@ -29,10 +29,10 @@ export const useDeviceSystem = (onResponse) => {
   };
 
   const fetchDeviceSystemForNotchHeightSet = () => {
-    const notchTop = insets.top;
+    const notchTopSize = insets.top;
     onResponse({
       fetchDeviceSystemForNotchHeightSet: {
-        notchTop,
+        notchTopSize,
       },
     });
   };

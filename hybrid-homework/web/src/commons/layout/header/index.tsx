@@ -7,35 +7,43 @@ import { HEADER_OPTIONS } from "./constants";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
 import { webviewlog } from "@/commons/libraries/webview-log";
 import { useState } from "react";
+import { useLoading } from "@/commons/stores/loading-store";
 
 // 베이스 헤더
 const HeaderBase = ({ children, hasExit, hasBack, title, isTransparent }) => {
-  const [notch, setNotch] = useState();
+  // const [notchTopSize, setNotchTopSize] = useState();
   const { fetchApp } = useDeviceSetting();
-  const aaa = async () => {
-    const result = await fetchApp({
-      query: "fetchDeviceSystemForNotchHeightSet",
-    });
-    const notchTop = result.data.fetchDeviceSystemForNotchHeightSet.notchTop;
-    webviewlog(notchTop);
-    setNotch(notchTop);
-  };
-  aaa();
+
+  // 노치 크기 받아오는 api -> 웹 실행 시 최초 1번만 실행하게 해야함...
+  // const aaa = async () => {
+  //   const result = await fetchApp({
+  //     query: "fetchDeviceSystemForNotchHeightSet",
+  //   });
+  //   const notchTopSize =
+  //     result.data.fetchDeviceSystemForNotchHeightSet.notchTopSize;
+  //   webviewlog(notchTopSize);
+  //   setNotchTopSize(notchTopSize);
+  // };
+  // aaa();
 
   const router = useRouter();
+
   const onClicklBack = () => {
     router.back();
   };
-  const onClickExit = () => {
+  const onClickExit = async () => {
     router.back();
+    await fetchApp({ query: "toggleDeviceLayoutForNotchTranslucentSet" });
   };
+  const isLoading = useLoading((state) => state.isLoading);
+  if (isLoading) return <></>;
   return (
     <>
       <header
         className={styles.header}
         style={{
           backgroundColor: isTransparent ? "transparent" : "white",
-          marginTop: notch,
+          // marginTop: notchTopSize,
         }}
       >
         {hasExit && (
