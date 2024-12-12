@@ -2,11 +2,11 @@
 import { UseFormReturn } from "react-hook-form";
 import { ISchema } from "./form.schema";
 import { gql, useMutation } from "@apollo/client";
-import { webviewlog } from "@/commons/libraries/webview-log";
 import { useEffect } from "react";
 import { useAccessTokenStore } from "@/commons/stores/accesstoken-store";
 import { useRefreshTokenStore } from "@/commons/stores/refreshtoken-store";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
+import { useRouter } from "next/navigation";
 
 const LOGIN = gql`
   mutation login($loginInput: LoginInput!) {
@@ -18,6 +18,7 @@ const LOGIN = gql`
 `;
 
 export const useInitialize = (methods: UseFormReturn<ISchema>) => {
+  const router = useRouter();
   const { fetchApp } = useDeviceSetting();
   const { setAccessToken } = useAccessTokenStore();
   const { setRefreshToken } = useRefreshTokenStore();
@@ -42,6 +43,7 @@ export const useInitialize = (methods: UseFormReturn<ISchema>) => {
       }
 
       const { accessToken, refreshToken } = result.data.login;
+
       if (!accessToken || !refreshToken) {
         methods.setError("password", {
           message: "로그인에 실패하였습니다. 다시 시도해주세요",
@@ -64,6 +66,7 @@ export const useInitialize = (methods: UseFormReturn<ISchema>) => {
       });
 
       alert("로그인에 성공했습니다!");
+      router.push("/solplace-logs");
     } catch (error) {
       methods.setError("password", {
         message: error.message,
