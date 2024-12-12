@@ -7,7 +7,7 @@ import InputError from "./input-error";
 
 interface IInputbase<T> extends InputHTMLAttributes<HTMLInputElement> {
   inputType: "normal" | "address";
-  label: string;
+  label?: string;
   name: Path<T>; // 폼 데이터 타입 T의 속성 경로만 허용
   isRequired?: boolean;
 }
@@ -39,9 +39,11 @@ function InputBase<T extends FieldValues>({
           />
         )}
       </div>
-      <InputError
-        errorMessage={formState.errors[name]?.message?.toString() ?? ""}
-      />
+      {formState.errors[name] && (
+        <InputError
+          errorMessage={formState.errors[name].message?.toString() || ""}
+        />
+      )}
     </div>
   );
 }
@@ -66,4 +68,9 @@ export function InputAddress<T extends FieldValues>({ label, name, isRequired, .
 // prettier-ignore
 export function InputSignup<T extends FieldValues>({ label, name, ...props }: IInput<T>) {
   return <InputBase inputType="normal" label={label} isRequired={true} name={name} className={styles.inputNormal} {...props} />;
+}
+
+// prettier-ignore
+export function InputNormalWithoutLabel<T extends FieldValues>({ label, name, ...props }: IInput<T>) {
+  return <InputBase inputType="normal" isRequired={false} name={name} className={styles.inputNormal} {...props} />;
 }

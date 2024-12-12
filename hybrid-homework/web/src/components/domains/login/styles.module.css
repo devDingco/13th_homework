@@ -36,4 +36,21 @@
 
 .loginButtonContainer {
   padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.linkToSignup {
+  display: flex;
+  width: 5.25rem;
+  height: 1.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-800, #333);
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
 }

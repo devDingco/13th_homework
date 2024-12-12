@@ -3,6 +3,8 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 // prettier-ignore
 export const HEADER_OPTIONS = (params: Params) => ({
   GLOBAL: {
+    "/signup": { title: "회원가입", hasLogo: false, hasBack: true },
+    "/login": {title: "", hasLogo: true, hasBack: false},
     "/solplace-logs": {title: "플레이스", hasLogo: false, hasBack: false, isTransparent: false},
     "/solplace-logs/new": { title: "플레이스 등록", hasLogo: false, hasBack: true, isTransparent: false },
     "/solplace-logs/new/map": {hasLogo: false, hasBack: true, isTransparent: true},
@@ -11,7 +13,7 @@ export const HEADER_OPTIONS = (params: Params) => ({
     [`/solplace-logs/${params.solplaceLogId}/edit`]: { title: "플레이스 수정", hasLogo: false, hasBack: true, isTransparent: false },
     [`/solplace-logs/${params.solplaceLogId}/edit/map`]: { hasLogo: false, hasBack: true, isTransparent: true },
     "/mypages": { title: "내 설정", hasLogo: false, hasBack: false },
-    "/signup": {title: "회원가입", hasLogo: false, hasBack: true}
+    
   },
   LOCAL: {}
 })

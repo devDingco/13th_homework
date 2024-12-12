@@ -9,6 +9,14 @@
   z-index: 1100;
 }
 
+.logo {
+  display: flex;
+  width: 3.25rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
 .title {
   overflow: hidden;
   text-overflow: ellipsis;

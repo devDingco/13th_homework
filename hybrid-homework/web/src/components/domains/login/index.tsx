@@ -5,7 +5,8 @@ import { ISchema, schema } from "./form.schema";
 import { useInitialize } from "./form.initialize";
 import Form from "@/components/commons/form";
 import { ButtonPrimaryMFull } from "@/components/commons/button";
-import { InputSignup } from "@/components/commons/input";
+import { InputNormalWithoutLabel } from "@/components/commons/input";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -15,12 +16,12 @@ export default function Login() {
       </div>
       <Form<ISchema> schema={schema} useInitialize={useInitialize}>
         <div className={styles.form}>
-          <InputSignup<ISchema>
+          <InputNormalWithoutLabel<ISchema>
             label="이메일"
             name="email"
             placeholder="이메일을 입력해 주세요."
           />
-          <InputSignup<ISchema>
+          <InputNormalWithoutLabel<ISchema>
             label="비밀번호"
             type="password"
             name="password"
@@ -29,6 +30,9 @@ export default function Login() {
         </div>
         <div className={styles.loginButtonContainer}>
           <ButtonPrimaryMFull>로그인</ButtonPrimaryMFull>
+          <Link href="/signup" className={styles.linkToSignup}>
+            회원가입
+          </Link>
         </div>
       </Form>
     </main>
