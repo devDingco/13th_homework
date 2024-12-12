@@ -65,10 +65,10 @@
   color: var(--gray-B, #000);
   font-size: 0.875rem;
   font-weight: 700;
-}
 
-.inputAddress::placeholder {
-  color: var(--gray-B, #000);
-  font-size: 0.875rem;
-  font-weight: 700;
+  &::placeholder {
+    color: var(--gray-B, #000);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
 }

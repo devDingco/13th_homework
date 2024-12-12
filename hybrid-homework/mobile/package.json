@@ -34,7 +34,9 @@
     "expo-constants": "~16.0.2",
     "expo-device": "~6.0.2",
     "expo-location": "~17.0.1",
-    "expo-notifications": "~0.28.19"
+    "expo-notifications": "~0.28.19",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "expo-secure-store": "~13.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

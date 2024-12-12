@@ -1,17 +1,12 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
-import { IPlaceData } from "../constans";
 
-interface IPlaceCard {
-  data: IPlaceData;
-}
-
-export default function PlaceCard({ data }: IPlaceCard) {
+export default function PlaceCard({ data }) {
   return (
     <Link className={styles.card} href={`/solplace-logs/${data.id}`}>
       <Image
-        src={data.image}
+        src={`https://storage.googleapis.com/${data.images[0]}`}
         width={0}
         height={0}
         sizes="100vw"

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import LayoutComponent from "@/commons/layout";
 import DeviceSetting from "@/commons/settings/device-setting";
+import ApolloSetting from "@/commons/settings/apollo-setting";
 
 const suit = localFont({
   src: "../../public/fonts/SUIT-Variable.woff2",
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body className={suit.variable}>
         <LayoutComponent>
           <DeviceSetting>
-            {children}
-            {modal}
+            <ApolloSetting>
+              {children}
+              {modal}
+            </ApolloSetting>
           </DeviceSetting>
         </LayoutComponent>
       </body>
