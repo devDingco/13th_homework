@@ -21,7 +21,7 @@ export default function Home() {
       <WebView
         ref={webviewRef}
         source={{
-          uri: `${내컴퓨터접속주소}/login`,
+          uri: `${내컴퓨터접속주소}/splash`,
         }}
         onMessage={(event) => {
           if (!event.nativeEvent.data) return;
