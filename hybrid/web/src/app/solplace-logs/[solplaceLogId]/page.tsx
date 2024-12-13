@@ -40,11 +40,6 @@ export default function SolplaceLogIdPage() {
 
     return (
         <>
-            {/* <script
-                type="text/javascript"
-                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=03d4190545aa1d235bf2053fe6a3b853"
-            ></script> */}
-
             <div className={styles.container}>
                 <div className={styles.layout}>
                     <Image
