@@ -1,12 +1,40 @@
 'use client';
 
 import Image from 'next/image';
+import rightArrow from '/public/svg/right_arrow.svg';
+
 import styles from './styles.module.css';
 import { useRef, useState } from 'react';
 import { checkValidtionFile } from '@/commons/libraries/validation';
 import Footer from '../../../commons/layout/header/footer';
+import { Modal } from 'antd';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+import Link from 'next/link';
 
 export default function NewPage() {
+    // 주소 모달
+    const [isOpen, setIsOpen] = useState(false);
+    const [address, setAddress] = useState('');
+
+    const showModal = () => {
+        setIsOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsOpen(false);
+        window.history.pushState(null, '', `/?address=${address}`); // !!!얘가 샬로우라우팅 핵심!!!
+    };
+    const handleCancel = () => {
+        setIsOpen(false);
+    };
+    const handleComplete = (data: any) => {
+        setAddress(data.address);
+        console.log(address);
+
+        // setZoncode(data.zonecode);
+        // setIsOpen(false); // 모달종료
+    };
+
     const [images, setImages] = useState([]);
     const fileRef = useRef(); // fileRef는 레퍼런스. 어떤 태그에 등록해 놓으면 변수로 컨트롤 할 수 있음
     const [placeName, setPlaceName] = useState(''); // 플레이스 이름 상태
@@ -16,6 +44,7 @@ export default function NewPage() {
     const onChangeFile = (event) => {
         const files = Array.from(event.target.files);
         console.log(files);
+
         const newImageUrls = files.map((file) => URL.createObjectURL(file));
         const updatedImages = [...images, ...newImageUrls];
         setImages(updatedImages);
@@ -93,11 +122,29 @@ export default function NewPage() {
                     />
                 </div>
                 <div className={styles.placeAddressBox}>
-                    <div>플레이스 주소</div>
-                    <button>
-                        <div>플레이스 주소 입력</div>
-                        <div>{`>`}</div>
-                    </button>
+                    <div
+                        className={styles.placeAddressBoxInput}
+                        onClick={showModal}
+                    >
+                        <Link href={'/solplace-logs/new/map'}>
+                            플레이스 주소 입력
+                        </Link>
+                        <Image src={rightArrow} alt="rightarrow" />
+                    </div>
+                    {isOpen && (
+                        <Modal
+                            title="지도페이지로 이동합니당"
+                            open={true}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                        >
+                            <DaumPostcodeEmbed
+                                onComplete={handleComplete}
+                                autoClose={true}
+                                // onresize //open()함수를 이용한 팝업모드에서는 지원하지 않음
+                            />
+                        </Modal>
+                    )}
                 </div>
                 <div className={styles.placeContentsBox}>
                     <div className={styles.placeNameBoxTitle}>
@@ -110,20 +157,20 @@ export default function NewPage() {
                         onChange={(e) => setPlaceContents(e.target.value)} // 입력값을 상태에 저장
                     ></textarea>
                 </div>
-                <Footer>
-                    <div
-                        className={styles.logBtnBox}
-                        style={{
-                            backgroundColor: isButtonEnabled
-                                ? '#2974E5'
-                                : '#d4d3d3', // 버튼 색상 변경
-                            color: isButtonEnabled ? '#fff' : '#e4e4e4',
-                            cursor: isButtonEnabled ? 'pointer' : 'not-allowed',
-                        }}
-                    >
+                <Footer isFixed={false}>
+                    <div className={styles.logBtnBox}>
                         <button
                             disabled={!isButtonEnabled} // 버튼 비활성화
                             className={styles.logBtnBoxLogBtn}
+                            style={{
+                                backgroundColor: isButtonEnabled
+                                    ? '#2974E5'
+                                    : '#d4d3d3', // 버튼 색상 변경
+                                color: isButtonEnabled ? '#fff' : '#e4e4e4',
+                                cursor: isButtonEnabled
+                                    ? 'pointer'
+                                    : 'not-allowed',
+                            }}
                         >
                             로그 등록
                         </button>

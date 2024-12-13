@@ -1,0 +1,41 @@
+.footerBox {
+    padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+    height: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+
+.footerBoxAddress {
+    width: 20rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    gap: 10px;
+    align-self: stretch;
+    color: var(--Gray-800, #333);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 100px;
+    background: var(--Gray-W, #fff);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.16);
+    margin-bottom: 1.25rem;
+}
+
+.footerBoxRegisterBtn {
+    width: 20rem;
+    height: 3rem;
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+    border-radius: 0.5rem;
+    background: #2974e5;
+    color: #fff;
+}
