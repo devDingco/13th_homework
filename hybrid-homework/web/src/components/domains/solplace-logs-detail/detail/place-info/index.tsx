@@ -4,9 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { usePlaceDetail } from "@/commons/hooks/use-place-detail";
+import { webviewlog } from "@/commons/libraries/webview-log";
 
 export default function PlaceInfo() {
-  const center = { lat: 37.5665, lng: 126.978 };
+  const { data } = usePlaceDetail();
+  const lat = data?.fetchSolplaceLog?.lat;
+  const lng = data?.fetchSolplaceLog?.lng;
+  const center = { lat, lng };
+  webviewlog(data);
   const { solplaceLogId } = useParams();
   // 지도 보기 상태
   const [isLocationOpen, setIsLocationOpen] = useState(false);

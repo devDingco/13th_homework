@@ -15,7 +15,7 @@ interface IForm<T extends FieldValues> {
   children: ReactNode;
   schema: ZodSchema<T>;
   useInitialize: (methods: UseFormReturn<T>) => {
-    onSubmit: () => void;
+    onSubmit: (data: T) => Promise<void>;
   };
 }
 

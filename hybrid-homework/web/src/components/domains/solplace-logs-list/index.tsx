@@ -1,18 +1,22 @@
+"use client";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { PLACE_DATA } from "./constans";
 import PlaceCard from "./place-card";
 import Link from "next/link";
 import Footer from "@/commons/layout/footer";
+import { useQuery } from "@apollo/client";
+import { FETCH_SOLPLACE_LOGS } from "./queries";
 
 export default function SolplaceLogsList() {
+  const { data } = useQuery(FETCH_SOLPLACE_LOGS);
+  const placeData = data?.fetchSolplaceLogs || [];
   return (
     <>
       <main className={styles.container}>
-        {PLACE_DATA.length > 0 ? (
+        {placeData.length > 0 ? (
           <div className={styles.grid}>
-            {PLACE_DATA.map((data) => (
-              <PlaceCard data={data} key={data.id} />
+            {placeData.map((place) => (
+              <PlaceCard data={place} key={place.id} />
             ))}
           </div>
         ) : (

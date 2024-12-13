@@ -10,7 +10,14 @@ import { useState } from "react";
 import { useLoading } from "@/commons/stores/loading-store";
 
 // 베이스 헤더
-const HeaderBase = ({ children, hasExit, hasBack, title, isTransparent }) => {
+const HeaderBase = ({
+  children,
+  hasLogo,
+  hasExit,
+  hasBack,
+  title,
+  isTransparent,
+}) => {
   // const [notchTopSize, setNotchTopSize] = useState();
   const { fetchApp } = useDeviceSetting();
 
@@ -46,6 +53,15 @@ const HeaderBase = ({ children, hasExit, hasBack, title, isTransparent }) => {
           // marginTop: notchTopSize,
         }}
       >
+        {hasLogo && (
+          <Image
+            className={styles.logo}
+            src="/images/logo.svg"
+            width={0}
+            height={0}
+            alt="logo"
+          />
+        )}
         {hasExit && (
           <Image
             className={styles.exit}

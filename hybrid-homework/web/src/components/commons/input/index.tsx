@@ -3,10 +3,11 @@ import { FieldValues, Path, useFormContext } from "react-hook-form";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { InputHTMLAttributes } from "react";
+import InputError from "./input-error";
 
 interface IInputbase<T> extends InputHTMLAttributes<HTMLInputElement> {
   inputType: "normal" | "address";
-  label: string;
+  label?: string;
   name: Path<T>; // 폼 데이터 타입 T의 속성 경로만 허용
   isRequired?: boolean;
 }
@@ -19,7 +20,7 @@ function InputBase<T extends FieldValues>({
   isRequired,
   ...props
 }: IInputbase<T>) {
-  const { register } = useFormContext();
+  const { register, formState } = useFormContext();
   return (
     <div className={styles.inputField}>
       <label className={styles.label}>
@@ -38,6 +39,11 @@ function InputBase<T extends FieldValues>({
           />
         )}
       </div>
+      {formState.errors[name] && (
+        <InputError
+          errorMessage={formState.errors[name].message?.toString() || ""}
+        />
+      )}
     </div>
   );
 }
@@ -53,7 +59,18 @@ interface IInput<T> extends InputHTMLAttributes<HTMLInputElement> {
 export function InputNormal<T extends FieldValues>({ label, name, isRequired, ...props }: IInput<T>) {
   return <InputBase<T> inputType="normal" label={label} isRequired={isRequired} name={name} className={styles.inputNormal} {...props} />;
 }
+
 // prettier-ignore
 export function InputAddress<T extends FieldValues>({ label, name, isRequired, ...props }: IInput<T>) {
   return <InputBase inputType="address" label={label} isRequired={isRequired} name={name} className={styles.inputAddress} {...props} />;
+}
+
+// prettier-ignore
+export function InputSignup<T extends FieldValues>({ label, name, ...props }: IInput<T>) {
+  return <InputBase inputType="normal" label={label} isRequired={true} name={name} className={styles.inputNormal} {...props} />;
+}
+
+// prettier-ignore
+export function InputNormalWithoutLabel<T extends FieldValues>({ label, name, ...props }: IInput<T>) {
+  return <InputBase inputType="normal" isRequired={false} name={name} className={styles.inputNormal} {...props} />;
 }

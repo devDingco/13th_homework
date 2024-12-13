@@ -13,7 +13,7 @@ function ButtonBase({ children, ...props }: IButtonBase) {
   const formContext = useFormContext();
   const isFormValid = formContext ? formContext.formState.isValid : true;
   return (
-    <button {...props} disabled={!isFormValid}>
+    <button {...props} disabled={props.type !== "button" && !isFormValid}>
       {children}
     </button>
   );
